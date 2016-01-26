@@ -114,6 +114,13 @@ Blockly.Flyout.prototype.width_ = 0;
 Blockly.Flyout.prototype.height_ = 0;
 
 /**
+ * Vertical offset of flyout.
+ * @type {number}
+ * @private
+ */
+Blockly.Flyout.prototype.verticalOffset_ = 0;
+
+/**
  * Creates the flyout's DOM.  Only needs to be called once.
  * @return {!Element} The flyout's SVG group.
  */
@@ -213,7 +220,7 @@ Blockly.Flyout.prototype.getMetrics_ = function() {
     contentHeight: (optionBox.height + optionBox.y) * this.workspace_.scale,
     viewTop: -this.workspace_.scrollY,
     contentTop: 0,
-    absoluteTop: this.SCROLLBAR_PADDING,
+    absoluteTop: this.verticalOffset_ + this.SCROLLBAR_PADDING,
     absoluteLeft: 0
   };
 };
@@ -236,6 +243,10 @@ Blockly.Flyout.prototype.setMetrics_ = function(yRatio) {
   }
   this.workspace_.translate(0, this.workspace_.scrollY + metrics.absoluteTop);
 };
+
+Blockly.Flyout.prototype.setVerticalOffset = function(verticalOffset) {
+  this.verticalOffset_ = verticalOffset;
+}
 
 /**
  * Move the toolbox to the edge of the workspace.

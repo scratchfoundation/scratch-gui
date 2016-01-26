@@ -802,54 +802,22 @@ Blockly.BlockSvg.NOTCH_WIDTH = 30;
  * Rounded corner radius.
  * @const
  */
-Blockly.BlockSvg.CORNER_RADIUS = 8;
+Blockly.BlockSvg.CORNER_RADIUS = 4;
 /**
  * Do blocks with no previous or output connections have a 'hat' on top?
  * @const
  */
-Blockly.BlockSvg.START_HAT = false;
+Blockly.BlockSvg.START_HAT = true;
 /**
  * Path of the top hat's curve.
  * @const
  */
 Blockly.BlockSvg.START_HAT_PATH = 'c 30,-15 70,-15 100,0';
 /**
- * Path of the top hat's curve's highlight in LTR.
- * @const
- */
-Blockly.BlockSvg.START_HAT_HIGHLIGHT_LTR =
-    'c 17.8,-9.2 45.3,-14.9 75,-8.7 M 100.5,0.5';
-/**
- * Path of the top hat's curve's highlight in RTL.
- * @const
- */
-Blockly.BlockSvg.START_HAT_HIGHLIGHT_RTL =
-    'm 25,-8.7 c 29.7,-6.2 57.2,-0.5 75,8.7';
-/**
- * Distance from shape edge to intersect with a curved corner at 45 degrees.
- * Applies to highlighting on around the inside of a curve.
- * @const
- */
-Blockly.BlockSvg.DISTANCE_45_INSIDE = (1 - Math.SQRT1_2) *
-      (Blockly.BlockSvg.CORNER_RADIUS - 0.5) + 0.5;
-/**
- * Distance from shape edge to intersect with a curved corner at 45 degrees.
- * Applies to highlighting on around the outside of a curve.
- * @const
- */
-Blockly.BlockSvg.DISTANCE_45_OUTSIDE = (1 - Math.SQRT1_2) *
-      (Blockly.BlockSvg.CORNER_RADIUS + 0.5) - 0.5;
-/**
  * SVG path for drawing next/previous notch from left to right.
  * @const
  */
 Blockly.BlockSvg.NOTCH_PATH_LEFT = 'l 6,4 3,0 6,-4';
-/**
- * SVG path for drawing next/previous notch from left to right with
- * highlighting.
- * @const
- */
-Blockly.BlockSvg.NOTCH_PATH_LEFT_HIGHLIGHT = 'l 6,4 3,0 6,-4';
 /**
  * SVG path for drawing next/previous notch from right to left.
  * @const
@@ -863,35 +831,11 @@ Blockly.BlockSvg.TAB_PATH_DOWN = 'v 5 c 0,10 -' + Blockly.BlockSvg.TAB_WIDTH +
     ',-8 -' + Blockly.BlockSvg.TAB_WIDTH + ',7.5 s ' +
     Blockly.BlockSvg.TAB_WIDTH + ',-2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',7.5';
 /**
- * SVG path for drawing a horizontal puzzle tab from top to bottom with
- * highlighting from the upper-right.
- * @const
- */
-Blockly.BlockSvg.TAB_PATH_DOWN_HIGHLIGHT_RTL = 'v 6.5 m -' +
-    (Blockly.BlockSvg.TAB_WIDTH * 0.97) + ',3 q -' +
-    (Blockly.BlockSvg.TAB_WIDTH * 0.05) + ',10 ' +
-    (Blockly.BlockSvg.TAB_WIDTH * 0.3) + ',9.5 m ' +
-    (Blockly.BlockSvg.TAB_WIDTH * 0.67) + ',-1.9 v 1.4';
-
-/**
  * SVG start point for drawing the top-left corner.
  * @const
  */
 Blockly.BlockSvg.TOP_LEFT_CORNER_START =
     'm 0,' + Blockly.BlockSvg.CORNER_RADIUS;
-/**
- * SVG start point for drawing the top-left corner's highlight in RTL.
- * @const
- */
-Blockly.BlockSvg.TOP_LEFT_CORNER_START_HIGHLIGHT_RTL =
-    'm ' + Blockly.BlockSvg.DISTANCE_45_INSIDE + ',' +
-    Blockly.BlockSvg.DISTANCE_45_INSIDE;
-/**
- * SVG start point for drawing the top-left corner's highlight in LTR.
- * @const
- */
-Blockly.BlockSvg.TOP_LEFT_CORNER_START_HIGHLIGHT_LTR =
-    'm 0.5,' + (Blockly.BlockSvg.CORNER_RADIUS - 0.5);
 /**
  * SVG path for drawing the rounded top-left corner.
  * @const
@@ -900,14 +844,6 @@ Blockly.BlockSvg.TOP_LEFT_CORNER =
     'A ' + Blockly.BlockSvg.CORNER_RADIUS + ',' +
     Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,1 ' +
     Blockly.BlockSvg.CORNER_RADIUS + ',0';
-/**
- * SVG path for drawing the highlight on the rounded top-left corner.
- * @const
- */
-Blockly.BlockSvg.TOP_LEFT_CORNER_HIGHLIGHT =
-    'A ' + (Blockly.BlockSvg.CORNER_RADIUS - 0.5) + ',' +
-    (Blockly.BlockSvg.CORNER_RADIUS - 0.5) + ' 0 0,1 ' +
-    Blockly.BlockSvg.CORNER_RADIUS + ',0.5';
 /**
  * SVG path for drawing the top-left corner of a statement input.
  * Includes the top notch, a horizontal space, and the rounded inside corner.
@@ -930,38 +866,6 @@ Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER =
     Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
     Blockly.BlockSvg.CORNER_RADIUS + ',' +
     Blockly.BlockSvg.CORNER_RADIUS;
-/**
- * SVG path for drawing highlight on the top-left corner of a statement
- * input in RTL.
- * @const
- */
-Blockly.BlockSvg.INNER_TOP_LEFT_CORNER_HIGHLIGHT_RTL =
-    'a ' + Blockly.BlockSvg.CORNER_RADIUS + ',' +
-    Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
-    (-Blockly.BlockSvg.DISTANCE_45_OUTSIDE - 0.5) + ',' +
-    (Blockly.BlockSvg.CORNER_RADIUS -
-    Blockly.BlockSvg.DISTANCE_45_OUTSIDE);
-/**
- * SVG path for drawing highlight on the bottom-left corner of a statement
- * input in RTL.
- * @const
- */
-Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER_HIGHLIGHT_RTL =
-    'a ' + (Blockly.BlockSvg.CORNER_RADIUS + 0.5) + ',' +
-    (Blockly.BlockSvg.CORNER_RADIUS + 0.5) + ' 0 0,0 ' +
-    (Blockly.BlockSvg.CORNER_RADIUS + 0.5) + ',' +
-    (Blockly.BlockSvg.CORNER_RADIUS + 0.5);
-/**
- * SVG path for drawing highlight on the bottom-left corner of a statement
- * input in LTR.
- * @const
- */
-Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER_HIGHLIGHT_LTR =
-    'a ' + (Blockly.BlockSvg.CORNER_RADIUS + 0.5) + ',' +
-    (Blockly.BlockSvg.CORNER_RADIUS + 0.5) + ' 0 0,0 ' +
-    (Blockly.BlockSvg.CORNER_RADIUS -
-    Blockly.BlockSvg.DISTANCE_45_OUTSIDE) + ',' +
-    (Blockly.BlockSvg.DISTANCE_45_OUTSIDE + 0.5);
 
 /**
  * Dispose of this block.
@@ -1883,11 +1787,13 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
     // Create output connection.
     this.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);
     // This connection will be tightened when the parent renders.
-    steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
-    steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
-        Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
-        ',2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',-7.5');
-    this.width += Blockly.BlockSvg.TAB_WIDTH;
+    if (this.outputConnection.getOutputShape() === Blockly.Connection.NUMBER) {
+        steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
+        steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
+            Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
+            ',2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',-7.5');
+        this.width += Blockly.BlockSvg.TAB_WIDTH;
+    }
   }
   steps.push('z');
 };

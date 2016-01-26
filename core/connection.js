@@ -51,6 +51,24 @@ Blockly.Connection = function(source, type) {
 };
 
 /**
+ * Constant for identifying connections that accept a boolean.
+ * @const
+ */
+Blockly.Connection.BOOLEAN = 1;
+
+/**
+ * Constant for identifying connections that accept a string.
+ * @const
+ */
+Blockly.Connection.STRING = 2;
+
+/**
+ * Constant for identifying connections that accept a number OR null.
+ * @const
+ */
+Blockly.Connection.NUMBER = 3;
+
+/**
  * Connection this connection connects to.  Null if not connected.
  * @type {Blockly.Connection}
  */
@@ -652,6 +670,22 @@ Blockly.Connection.prototype.setCheck = function(check) {
     this.check_ = null;
   }
   return this;
+};
+
+/**
+ * Returns a shape enum for this connection.
+ * @return {number} Enum representing shape.
+ */
+Blockly.Connection.prototype.getOutputShape = function() {
+    if (!this.check_) return Blockly.Connection.NUMBER;
+    if (this.check_.indexOf('Boolean') !== -1) {
+        return Blockly.Connection.BOOLEAN;
+    }
+    if (this.check_.indexOf('String') !== -1) {
+        return Blockly.Connection.STRING;
+    }
+
+    return Blockly.Connection.NUMBER;
 };
 
 /**

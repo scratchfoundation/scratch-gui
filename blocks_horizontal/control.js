@@ -69,3 +69,38 @@ Blockly.Blocks['control_repeat'] = {
     });
   }
 };
+
+Blockly.Blocks['control_forever'] = {
+  /**
+   * Block for repeat n times (external number).
+   * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5eke39
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_forever",
+      "message0": "%1 %2",
+      "args0": [
+        {
+          "type": "input_statement",
+          "name": "NAME"
+        },
+        {
+          "type": "field_image",
+          "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
+          "width": 15,
+          "height": 15,
+          "alt": "*"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "colour": 65,
+      "tooltip": ""
+    });
+
+    this.setHelpUrl(function () {
+        return 'halp me plz. k thx bye.';
+    });
+  }
+};

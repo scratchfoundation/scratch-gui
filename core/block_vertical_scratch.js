@@ -24,7 +24,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.BlockSvg');
+// goog.provide('Blockly.BlockSvg');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.ContextMenu');
@@ -805,6 +805,16 @@ Blockly.BlockSvg.NOTCH_WIDTH = 30;
  */
 Blockly.BlockSvg.CORNER_RADIUS = 4;
 /**
+ * Do blocks with no previous or output connections have a 'hat' on top?
+ * @const
+ */
+Blockly.BlockSvg.START_HAT = true;
+/**
+ * Path of the top hat's curve.
+ * @const
+ */
+Blockly.BlockSvg.START_HAT_PATH = 'c 30,-15 70,-15 100,0';
+/**
  * SVG path for drawing next/previous notch from left to right.
  * @const
  */
@@ -1508,6 +1518,32 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
  * @private
  */
 Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
+  this.startHat_ = false;
+  // Should the top and bottom left corners be rounded or square?
+  if (this.outputConnection) {
+    this.squareTopLeftCorner_ = true;
+    this.squareBottomLeftCorner_ = true;
+  } else {
+    this.squareTopLeftCorner_ = false;
+    this.squareBottomLeftCorner_ = false;
+    // If this block is in the middle of a stack, square the corners.
+    if (this.previousConnection) {
+      var prevBlock = this.previousConnection.targetBlock();
+      if (prevBlock && prevBlock.getNextBlock() == this) {
+        this.squareTopLeftCorner_ = true;
+       }
+    } else if (Blockly.BlockSvg.START_HAT) {
+      // No output or previous connection.
+      this.squareTopLeftCorner_ = true;
+      this.startHat_ = true;
+      inputRows.rightEdge = Math.max(inputRows.rightEdge, 100);
+    }
+    var nextBlock = this.getNextBlock();
+    if (nextBlock) {
+      this.squareBottomLeftCorner_ = true;
+    }
+  }
+
   // Fetch the block's coordinates on the surface for use in anchoring
   // the connections.
   var connectionsXY = this.getRelativeToSurfaceXY();
@@ -1515,11 +1551,12 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
   // Assemble the block's path.
   var steps = [];
 
-  this.renderDrawLeft_(steps, connectionsXY, inputRows.rightEdge);
-  var cursorX = this.renderDrawBottom_(steps,
+  this.renderDrawTop_(steps, connectionsXY,
+      inputRows.rightEdge);
+  var cursorY = this.renderDrawRight_(steps,
       connectionsXY, inputRows, iconWidth);
-  this.renderDrawRight_(steps, connectionsXY, cursorX);
-  this.renderDrawTop_(steps, connectionsXY, cursorX);
+  this.renderDrawBottom_(steps, connectionsXY, cursorY);
+  this.renderDrawLeft_(steps, connectionsXY, cursorY);
 
   var pathString = steps.join(' ');
   this.svgPath_.setAttribute('d', pathString);
@@ -1532,18 +1569,25 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
 };
 
 /**
- * Render the left edge of the block.
+ * Render the top edge of the block.
  * @param {!Array.<string>} steps Path of block outline.
  * @param {!Object} connectionsXY Location of block.
  * @param {number} rightEdge Minimum width of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawLeft_ =
+Blockly.BlockSvg.prototype.renderDrawTop_ =
     function(steps, connectionsXY, rightEdge) {
   // Position the cursor at the top-left starting point.
-  steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
-  // Top-left rounded corner.
-  steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
+  if (this.squareTopLeftCorner_) {
+    steps.push('m 0,0');
+    if (this.startHat_) {
+      steps.push(Blockly.BlockSvg.START_HAT_PATH);
+    }
+  } else {
+    steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
+    // Top-left rounded corner.
+    steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
+  }
 
   // Top edge.
   if (this.previousConnection) {
@@ -1570,7 +1614,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
  * @return {number} Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
+Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
     connectionsXY, inputRows, iconWidth) {
   var cursorX;
   var cursorY = 0;
@@ -1698,7 +1742,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawRight_ =
+Blockly.BlockSvg.prototype.renderDrawBottom_ =
     function(steps, connectionsXY, cursorY) {
   this.height = cursorY + 1;  // Add one for the shadow.
   if (this.nextConnection) {
@@ -1738,7 +1782,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawTop_ =
+Blockly.BlockSvg.prototype.renderDrawLeft_ =
     function(steps, connectionsXY, cursorY) {
   if (this.outputConnection) {
     // Create output connection.

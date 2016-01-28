@@ -41,9 +41,9 @@ Blockly.Blocks['motion_moveright'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-          "width": 15,
-          "height": 15,
+          "src": "../media/icons/motion_moveright.svg",
+          "width": 140,
+          "height": 140,
           "alt": "*"
         }
       ],

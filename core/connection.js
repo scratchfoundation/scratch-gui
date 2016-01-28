@@ -449,9 +449,9 @@ Blockly.Connection.prototype.moveBy = function(dx, dy) {
 Blockly.Connection.prototype.highlight = function() {
   var steps;
   if (this.sourceBlock_.RTL) {
-    steps = 'm 20,0 v -5 ' + Blockly.BlockSvg.NOTCH_PATH_UP + ' v -5';
+    steps = 'm 0,0 v 4 ' + Blockly.BlockSvg.NOTCH_PATH_DOWN + ' v 4';
   } else {
-    steps = 'm -20,0 v 5 ' + Blockly.BlockSvg.NOTCH_PATH_DOWN + ' v 5';
+    steps = 'm 0,0 v -4 ' + Blockly.BlockSvg.NOTCH_PATH_UP + ' v -4';
   }
   var xy = this.sourceBlock_.getRelativeToSurfaceXY();
   var x = this.x_ - xy.x;

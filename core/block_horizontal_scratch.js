@@ -1555,14 +1555,12 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
     steps.push(Blockly.BlockSvg.NOTCH_PATH_DOWN);
     // Create previous block connection.
     var connectionX = connectionsXY.x;
-    var connectionY = connectionsXY.y + cursorY;
+    var connectionY = connectionsXY.y;
     this.previousConnection.moveTo(connectionX, connectionY);
     // This connection will be tightened when the parent renders.
   }
   steps.push('V', bottom - Blockly.BlockSvg.CORNER_RADIUS);
   this.height = bottom;
-
-  console.log(bottom);
 };
 
 /**

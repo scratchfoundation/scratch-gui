@@ -41,7 +41,7 @@ Blockly.Blocks['control_repeat'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "NAME"
+          "name": "DO"
         },
         {
           "type": "field_image",
@@ -52,7 +52,7 @@ Blockly.Blocks['control_repeat'] = {
         },
         {
           "type": "input_value",
-          "name": "REPEAT",
+          "name": "TIMES",
           "check": "Number"
         }
       ],

@@ -19,28 +19,16 @@
  */
 
 /**
- * @fileoverview Generating Python for variable blocks.
+ * @fileoverview Generating JavaScript for math blocks.
  * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
-goog.provide('Blockly.Python.variables');
+goog.provide('Blockly.JavaScript.motion');
 
-goog.require('Blockly.Python');
+goog.require('Blockly.JavaScript');
 
-
-Blockly.Python['variables_get'] = function(block) {
-  // Variable getter.
-  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return [code, Blockly.Python.ORDER_ATOMIC];
-};
-
-Blockly.Python['variables_set'] = function(block) {
-  // Variable setter.
-  var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
-      Blockly.Python.ORDER_NONE) || '0';
-  var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = ' + argument0 + '\n';
+Blockly.JavaScript['motion_moveright'] = function(block) {
+  var code = 'moveRight();\n';
+  return code;
 };

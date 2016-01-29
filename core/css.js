@@ -180,12 +180,12 @@ Blockly.Css.CONTENT = [
 
   '.blocklyPath {',
     // 'stroke: #f00;',
-    'stroke-width: 1px;',
+    'stroke-width: 1.5px;',
   '}',
 
   '.blocklySelected>.blocklyPath {',
-    'stroke: #fc3;',
-    'stroke-width: 3px;',
+    // 'stroke: #fc3;',
+    // 'stroke-width: 3px;',
   '}',
 
   '.blocklyDragging>.blocklyPath {',

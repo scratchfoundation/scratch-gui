@@ -967,7 +967,7 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
 
   var ripple = Blockly.createSvgElement('circle',
       {'cx': xy.x, 'cy': xy.y, 'r': 0, 'fill': 'none',
-       'stroke': '#888', 'stroke-width': 10},
+       'stroke': '#EEE', 'stroke-width': 8},
       this.workspace.getParentSvg());
 
   // Start the animation.
@@ -988,7 +988,7 @@ Blockly.BlockSvg.connectionUiStep_ = function(ripple, start, workspaceScale) {
     goog.dom.removeNode(ripple);
   } else {
     ripple.setAttribute('r', percent * 25 * workspaceScale);
-    ripple.style.opacity = 1 - percent;
+    ripple.style.opacity = 0.8 - percent;
     var closure = function() {
       Blockly.BlockSvg.connectionUiStep_(ripple, start, workspaceScale);
     };
@@ -1366,8 +1366,6 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
     Blockly.BlockSvg.NOTCH_HEIGHT + 16 + Blockly.BlockSvg.CORNER_RADIUS * 2
   );
 
-  console.log(metrics.height);
-
   return metrics;
 
   // var inputList = this.inputList;
@@ -1542,7 +1540,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   if (metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
     icon.setAttribute('transform',
-      'translate(' + (metrics.width - metrics.icon.getSize().width - Blockly.BlockSvg.SEP_SPACE_X) + ',' + Blockly.BlockSvg.SEP_SPACE_Y + ')');
+      'translate(' + (metrics.width - metrics.icon.getSize().width - Blockly.BlockSvg.SEP_SPACE_X / 2) + ',' + Blockly.BlockSvg.SEP_SPACE_Y + ')');
     // @todo RTL
   }
 };
@@ -1556,9 +1554,6 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
  */
 Blockly.BlockSvg.prototype.renderDrawLeft_ =
     function(steps, connectionsXY, metrics) {
-
-  console.dir(metrics);
-
   // Position the cursor at the top-left starting point.
   steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
   // Top-left rounded corner.

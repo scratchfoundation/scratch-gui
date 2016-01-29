@@ -45,9 +45,9 @@ Blockly.Blocks['control_repeat'] = {
         },
         {
           "type": "field_image",
-          "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-          "width": 15,
-          "height": 15,
+          "src": "../media/icons/control_forever.svg",
+          "width": 40,
+          "height": 40,
           "alt": "*"
         },
         {
@@ -59,7 +59,7 @@ Blockly.Blocks['control_repeat'] = {
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": 65,
+      "colour": '#F2B827',
       "tooltip": "",
       "helpUrl": "http://www.example.com/"
     });
@@ -87,15 +87,15 @@ Blockly.Blocks['control_forever'] = {
         },
         {
           "type": "field_image",
-          "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-          "width": 15,
-          "height": 15,
+          "src": "../media/icons/control_forever.svg",
+          "width": 40,
+          "height": 40,
           "alt": "*"
         }
       ],
       "inputsInline": true,
       "previousStatement": null,
-      "colour": 65,
+      "colour": '#F2B827',
       "tooltip": ""
     });
 

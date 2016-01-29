@@ -30,7 +30,7 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks['motion_moveright'] = {
   /**
-   * Block for repeat n times (external number).
+   * Block for move right (external number)
    * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ed5ch5
    * @this Blockly.Block
    */
@@ -42,14 +42,14 @@ Blockly.Blocks['motion_moveright'] = {
         {
           "type": "field_image",
           "src": "../media/icons/motion_moveright.svg",
-          "width": 140,
-          "height": 140,
+          "width": 40,
+          "height": 40,
           "alt": "*"
         }
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": 65,
+      "colour": '#25AFF4',
       "tooltip": ""
     });
 

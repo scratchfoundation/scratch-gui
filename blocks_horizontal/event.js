@@ -40,15 +40,15 @@ Blockly.Blocks['event_whenflagclicked'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-          "width": 15,
-          "height": 15,
+          "src": "../media/icons/event_whenflagclicked.svg",
+          "width": 40,
+          "height": 40,
           "alt": "flag"
         }
       ],
       "inputsInline": true,
       "nextStatement": null,
-      "colour": 20,
+      "colour": '#F2EC27',
       "tooltip": "Do stuff!"
     });
 

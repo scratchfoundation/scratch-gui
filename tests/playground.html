@@ -22,31 +22,26 @@ var workspace = null;
 
 function start() {
   var toolbox = document.getElementById('toolbox');
-  workspace = Blockly.inject('blocklyDiv',
-          {comments: true,
-           disable: true,
-           collapse: true,
-           grid:
-             {spacing: 25,
-              length: 3,
-              colour: '#ccc',
-              snap: true},
-           maxBlocks: Infinity,
-           media: '../media/',
-           readOnly: false,
-           rtl: rtl,
-           scrollbars: true,
-           toolbox: toolbox,
-           trashcan: true,
-           zoom:
-             {controls: true,
-              wheel: false,
-              startScale: 1.0,
-              maxScale: 4,
-              minScale: .25,
-              scaleSpeed: 1.1
-             },
-          });
+  workspace = Blockly.inject('blocklyDiv', {
+    comments: false,
+    disable: false,
+    collapse: false,
+    maxBlocks: Infinity,
+    media: '../media/',
+    readOnly: false,
+    rtl: rtl,
+    scrollbars: true,
+    toolbox: toolbox,
+    trashcan: true,
+    zoom: {
+      controls: true,
+      wheel: false,
+      startScale: 1.0,
+      maxScale: 4,
+      minScale: 0.25,
+      scaleSpeed: 1.1
+    },
+  });
 }
 
 function toXml() {

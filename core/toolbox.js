@@ -57,7 +57,7 @@ Blockly.Toolbox = function(workspace) {
    * @type {boolean}
    * @private
    */
-  this.horizontalLayout_ = false;
+  this.horizontalLayout_ = true;
   if (this.horizontalLayout_) {
     this.CONFIG_['cssTreeRow'] =
       this.CONFIG_['cssTreeRow']

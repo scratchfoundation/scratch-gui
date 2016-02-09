@@ -12,7 +12,7 @@ window.BLOCKLY_DIR = (function() {
   if (!isNodeJS) {
     // Find name of current directory.
     var scripts = document.getElementsByTagName('script');
-    var re = new RegExp('(.+)[\/]blockly_uncompressed\.js$');
+    var re = new RegExp('(.+)[\/]blockly_uncompressed(_vertical|_horizontal|)\.js$');
     for (var i = 0, script; script = scripts[i]; i++) {
       var match = re.exec(script.src);
       if (match) {
@@ -56,7 +56,6 @@ goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.Context
 goog.addDependency("../../../" + dir + "/core/toolbox.js", ['Blockly.Toolbox'], ['Blockly.Flyout', 'goog.dom', 'goog.events', 'goog.events.BrowserFeature', 'goog.html.SafeHtml', 'goog.html.SafeStyle', 'goog.math.Rect', 'goog.style', 'goog.ui.tree.TreeControl', 'goog.ui.tree.TreeNode']);
 goog.addDependency("../../../" + dir + "/core/block.js", ['Blockly.Block'], ['Blockly.Blocks', 'Blockly.Comment', 'Blockly.Connection', 'Blockly.Input', 'Blockly.Mutator', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'goog.array', 'goog.asserts', 'goog.math.Coordinate', 'goog.string']);
 goog.addDependency("../../../" + dir + "/core/blocks.js", ['Blockly.Blocks'], []);
-goog.addDependency("../../../" + dir + "/core/block_vertical_scratch.js", ['Blockly.BlockSvg'], ['Blockly.Block', 'Blockly.ContextMenu', 'goog.Timer', 'goog.asserts', 'goog.dom', 'goog.math.Coordinate', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/names.js", ['Blockly.Names'], []);
 goog.addDependency("../../../" + dir + "/core/field_colour.js", ['Blockly.FieldColour'], ['Blockly.Field', 'goog.dom', 'goog.events', 'goog.style', 'goog.ui.ColorPicker']);
 goog.addDependency("../../../" + dir + "/core/flyout.js", ['Blockly.Flyout'], ['Blockly.Block', 'Blockly.Comment', 'Blockly.WorkspaceSvg', 'goog.dom', 'goog.events', 'goog.math.Rect', 'goog.userAgent']);
@@ -1580,7 +1579,6 @@ goog.addDependency("spell/spellcheck.js", ['goog.spell.SpellCheck', 'goog.spell.
 // Load Blockly.
 goog.require('Blockly');
 goog.require('Blockly.Block');
-goog.require('Blockly.BlockSvg');
 goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Bubble');

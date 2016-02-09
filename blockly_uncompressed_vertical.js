@@ -12,7 +12,7 @@ window.BLOCKLY_DIR = (function() {
   if (!isNodeJS) {
     // Find name of current directory.
     var scripts = document.getElementsByTagName('script');
-    var re = new RegExp('(.+)[\/]blockly_uncompressed\.js$');
+    var re = new RegExp('(.+)[\/]blockly_uncompressed(_vertical|_horizontal|)\.js$');
     for (var i = 0, script; script = scripts[i]; i++) {
       var match = re.exec(script.src);
       if (match) {
@@ -44,7 +44,6 @@ goog.addDependency("../../../" + dir + "/core/utils.js", ['Blockly.utils'], ['go
 goog.addDependency("../../../" + dir + "/core/workspace.js", ['Blockly.Workspace'], ['goog.math']);
 goog.addDependency("../../../" + dir + "/core/field_image.js", ['Blockly.FieldImage'], ['Blockly.Field', 'goog.dom', 'goog.math.Size', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/field_textinput.js", ['Blockly.FieldTextInput'], ['Blockly.Field', 'Blockly.Msg', 'goog.asserts', 'goog.dom', 'goog.userAgent']);
-goog.addDependency("../../../" + dir + "/core/block_horizontal_scratch.js", ['Blockly.BlockSvg'], ['Blockly.Block', 'Blockly.ContextMenu', 'goog.Timer', 'goog.asserts', 'goog.dom', 'goog.math.Coordinate', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/inject.js", ['Blockly.inject'], ['Blockly.Css', 'Blockly.WorkspaceSvg', 'goog.dom', 'goog.ui.Component', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/field_dropdown.js", ['Blockly.FieldDropdown'], ['Blockly.Field', 'goog.dom', 'goog.events', 'goog.style', 'goog.ui.Menu', 'goog.ui.MenuItem', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/css.js", ['Blockly.Css'], []);
@@ -1580,7 +1579,6 @@ goog.addDependency("spell/spellcheck.js", ['goog.spell.SpellCheck', 'goog.spell.
 // Load Blockly.
 goog.require('Blockly');
 goog.require('Blockly.Block');
-goog.require('Blockly.BlockSvg');
 goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Bubble');

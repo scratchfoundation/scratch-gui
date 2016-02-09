@@ -53,6 +53,13 @@ Blockly.Toolbox = function(workspace) {
   this.workspace_ = workspace;
 
   /**
+   * Whether toolbox categories should be represented by icons instead of text.
+   * @type {boolean}
+   * @private
+   */
+  this.iconic_ = false;
+
+  /**
    * Whether the toolbox should be laid out horizontally.
    * @type {boolean}
    * @private
@@ -225,7 +232,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
   rootOut.removeChildren();  // Delete any existing content.
   rootOut.blocks = [];
   var hasColours = false;
-  function syncTrees(treeIn, treeOut) {
+  function syncTrees(treeIn, treeOut, iconic, pathToMedia) {
     for (var i = 0, childIn; childIn = treeIn.childNodes[i]; i++) {
       if (!childIn.tagName) {
         // Skip over text.
@@ -233,7 +240,12 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
       }
       switch (childIn.tagName.toUpperCase()) {
         case 'CATEGORY':
-          var childOut = rootOut.createNode(childIn.getAttribute('name'));
+          if (iconic && childIn.getAttribute('icon')) {
+             var childOut = rootOut.createNode(childIn.getAttribute('name'),
+               pathToMedia + childIn.getAttribute('icon'));
+           } else {
+             var childOut = rootOut.createNode(childIn.getAttribute('name'), null);
+           }
           childOut.blocks = [];
           if (that.horizontalLayout_) {
             treeOut.add(childOut);
@@ -245,7 +257,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
             // Variables and procedures are special dynamic categories.
             childOut.blocks = custom;
           } else {
-            syncTrees(childIn, childOut);
+            syncTrees(childIn, childOut, iconic, pathToMedia);
           }
           var colour = childIn.getAttribute('colour');
           if (goog.isString(colour)) {
@@ -281,7 +293,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
       }
     }
   }
-  syncTrees(newTree, this.tree_);
+  syncTrees(newTree, this.tree_, this.iconic_, this.workspace_.options.pathToMedia);
   this.hasColours_ = hasColours;
 
   if (rootOut.blocks.length) {
@@ -400,12 +412,16 @@ Blockly.Toolbox.TreeControl.prototype.handleTouchEvent_ = function(e) {
 /**
  * Creates a new tree node using a custom tree node.
  * @param {string=} opt_html The HTML content of the node label.
+ * @param {string} icon The path to the icon for this category.
  * @return {!goog.ui.tree.TreeNode} The new item.
  * @override
  */
-Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html) {
-  return new Blockly.Toolbox.TreeNode(this.toolbox_, opt_html ?
-      goog.html.SafeHtml.htmlEscape(opt_html) : goog.html.SafeHtml.EMPTY,
+Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html, icon) {
+   var icon_html = '<img src=\"' + icon + '\" alt=\"' + opt_html + '\" align=top>';
+   var safe_opt_html = opt_html ?
+       goog.html.SafeHtml.htmlEscape(opt_html) : goog.html.SafeHtml.EMPTY;
+   var label_html = icon ? icon_html + ' ' + opt_html : safe_opt_html;
+   return new Blockly.Toolbox.TreeNode(this.toolbox_, label_html,
       this.getConfig(), this.getDomHelper());
 };
 

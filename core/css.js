@@ -178,39 +178,24 @@ Blockly.Css.CONTENT = [
     'stroke-width: 4px;',
   '}',
 
-  '.blocklyPathLight {',
-    'fill: none;',
-    'stroke-linecap: round;',
-    'stroke-width: 1;',
+  '.blocklyPath {',
+    // 'stroke: #f00;',
+    'stroke-width: 1.5px;',
   '}',
 
   '.blocklySelected>.blocklyPath {',
-    'stroke: #fc3;',
-    'stroke-width: 3px;',
+    // 'stroke: #fc3;',
+    // 'stroke-width: 3px;',
   '}',
 
-  '.blocklySelected>.blocklyPathLight {',
-    'display: none;',
-  '}',
-
-  '.blocklyDragging>.blocklyPath,',
-  '.blocklyDragging>.blocklyPathLight {',
+  '.blocklyDragging>.blocklyPath {',
     'fill-opacity: .8;',
     'stroke-opacity: .8;',
-  '}',
-
-  '.blocklyDragging>.blocklyPathDark {',
-    'display: none;',
   '}',
 
   '.blocklyDisabled>.blocklyPath {',
     'fill-opacity: .5;',
     'stroke-opacity: .5;',
-  '}',
-
-  '.blocklyDisabled>.blocklyPathLight,',
-  '.blocklyDisabled>.blocklyPathDark {',
-    'display: none;',
   '}',
 
   '.blocklyText {',

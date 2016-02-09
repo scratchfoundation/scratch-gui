@@ -43,26 +43,9 @@ Blockly.Blocks['text'] = {
     this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
-        .appendField(this.newQuote_(true))
-        .appendField(new Blockly.FieldTextInput(''), 'TEXT')
-        .appendField(this.newQuote_(false));
+        .appendField(new Blockly.FieldTextInput(''), 'TEXT');
     this.setOutput(true, 'String');
     this.setTooltip(Blockly.Msg.TEXT_TEXT_TOOLTIP);
-  },
-  /**
-   * Create an image of an open or closed quote.
-   * @param {boolean} open True if open quote, false if closed.
-   * @return {!Blockly.FieldImage} The field image of the quote.
-   * @this Blockly.Block
-   * @private
-   */
-  newQuote_: function(open) {
-    if (open == this.RTL) {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAqUlEQVQI1z3KvUpCcRiA8ef9E4JNHhI0aFEacm1o0BsI0Slx8wa8gLauoDnoBhq7DcfWhggONDmJJgqCPA7neJ7p934EOOKOnM8Q7PDElo/4x4lFb2DmuUjcUzS3URnGib9qaPNbuXvBO3sGPHJDRG6fGVdMSeWDP2q99FQdFrz26Gu5Tq7dFMzUvbXy8KXeAj57cOklgA+u1B5AoslLtGIHQMaCVnwDnADZIFIrXsoXrgAAAABJRU5ErkJggg==';
-    } else {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC';
-    }
-    return new Blockly.FieldImage(file, 12, 12, '"');
   }
 };
 
@@ -174,9 +157,7 @@ Blockly.Blocks['text_join'] = {
     }
     // Rebuild block.
     if (this.itemCount_ == 0) {
-      this.appendDummyInput('EMPTY')
-          .appendField(this.newQuote_(true))
-          .appendField(this.newQuote_(false));
+      this.appendDummyInput('EMPTY');
     } else {
       for (var i = 0; i < this.itemCount_; i++) {
         var input = this.appendValueInput('ADD' + i);
@@ -185,8 +166,7 @@ Blockly.Blocks['text_join'] = {
         }
       }
     }
-  },
-  newQuote_: Blockly.Blocks['text'].newQuote_
+  }
 };
 
 Blockly.Blocks['text_create_join_container'] = {
@@ -667,9 +647,7 @@ Blockly.Blocks['text_prompt'] = {
     });
     this.appendDummyInput()
         .appendField(dropdown, 'TYPE')
-        .appendField(this.newQuote_(true))
-        .appendField(new Blockly.FieldTextInput(''), 'TEXT')
-        .appendField(this.newQuote_(false));
+        .appendField(new Blockly.FieldTextInput(''), 'TEXT');
     this.setOutput(true, 'String');
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
@@ -679,7 +657,6 @@ Blockly.Blocks['text_prompt'] = {
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
   },
-  newQuote_: Blockly.Blocks['text'].newQuote_,
   updateType_: Blockly.Blocks['text_prompt_ext'].updateType_,
   mutationToDom: Blockly.Blocks['text_prompt_ext'].mutationToDom,
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation

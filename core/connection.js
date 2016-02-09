@@ -51,6 +51,24 @@ Blockly.Connection = function(source, type) {
 };
 
 /**
+ * Constant for identifying connections that accept a boolean.
+ * @const
+ */
+Blockly.Connection.BOOLEAN = 1;
+
+/**
+ * Constant for identifying connections that accept a string.
+ * @const
+ */
+Blockly.Connection.STRING = 2;
+
+/**
+ * Constant for identifying connections that accept a number OR null.
+ * @const
+ */
+Blockly.Connection.NUMBER = 3;
+
+/**
  * Connection this connection connects to.  Null if not connected.
  * @type {Blockly.Connection}
  */
@@ -430,17 +448,10 @@ Blockly.Connection.prototype.moveBy = function(dx, dy) {
  */
 Blockly.Connection.prototype.highlight = function() {
   var steps;
-  if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.OUTPUT_VALUE) {
-    var tabWidth = this.sourceBlock_.RTL ? -Blockly.BlockSvg.TAB_WIDTH :
-        Blockly.BlockSvg.TAB_WIDTH;
-    steps = 'm 0,0 v 5 c 0,10 ' + -tabWidth + ',-8 ' + -tabWidth + ',7.5 s ' +
-            tabWidth + ',-2.5 ' + tabWidth + ',7.5 v 5';
+  if (this.sourceBlock_.RTL) {
+    steps = 'm 0,0 v 4 ' + Blockly.BlockSvg.NOTCH_PATH_DOWN + ' v 4';
   } else {
-    if (this.sourceBlock_.RTL) {
-      steps = 'm 20,0 h -5 ' + Blockly.BlockSvg.NOTCH_PATH_RIGHT + ' h -5';
-    } else {
-      steps = 'm -20,0 h 5 ' + Blockly.BlockSvg.NOTCH_PATH_LEFT + ' h 5';
-    }
+    steps = 'm 0,0 v -4 ' + Blockly.BlockSvg.NOTCH_PATH_UP + ' v -4';
   }
   var xy = this.sourceBlock_.getRelativeToSurfaceXY();
   var x = this.x_ - xy.x;
@@ -652,6 +663,22 @@ Blockly.Connection.prototype.setCheck = function(check) {
     this.check_ = null;
   }
   return this;
+};
+
+/**
+ * Returns a shape enum for this connection.
+ * @return {number} Enum representing shape.
+ */
+Blockly.Connection.prototype.getOutputShape = function() {
+    if (!this.check_) return Blockly.Connection.NUMBER;
+    if (this.check_.indexOf('Boolean') !== -1) {
+        return Blockly.Connection.BOOLEAN;
+    }
+    if (this.check_.indexOf('String') !== -1) {
+        return Blockly.Connection.STRING;
+    }
+
+    return Blockly.Connection.NUMBER;
 };
 
 /**

@@ -65,7 +65,7 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   /** @type {!Array.<!Blockly.Input>} */
   this.inputList = [];
   /** @type {boolean|undefined} */
-  this.inputsInline = undefined;
+  this.inputsInline = true;
   /** @type {boolean} */
   this.rendered = false;
   /** @type {boolean} */

@@ -800,6 +800,11 @@ Blockly.BlockSvg.NOTCH_HEIGHT = 32;
  */
 Blockly.BlockSvg.CORNER_RADIUS = 4;
 /**
+ * Rounded corner radius.
+ * @const
+ */
+Blockly.BlockSvg.HAT_CORNER_RADIUS = 16;
+/**
  * SVG path for drawing next/previous notch from left to right.
  * @const
  */
@@ -830,6 +835,20 @@ Blockly.BlockSvg.TOP_LEFT_CORNER =
     'A ' + Blockly.BlockSvg.CORNER_RADIUS + ',' +
     Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
     '0,' + Blockly.BlockSvg.CORNER_RADIUS;
+/**
+ * SVG start point for drawing the top-left corner.
+ * @const
+ */
+Blockly.BlockSvg.HAT_TOP_LEFT_CORNER_START =
+    'm ' + Blockly.BlockSvg.HAT_CORNER_RADIUS + ',0';
+/**
+ * SVG path for drawing the rounded top-left corner.
+ * @const
+ */
+Blockly.BlockSvg.HAT_TOP_LEFT_CORNER =
+    'A ' + Blockly.BlockSvg.HAT_CORNER_RADIUS + ',' +
+    Blockly.BlockSvg.HAT_CORNER_RADIUS + ' 0 0,0 ' +
+    '0,' + Blockly.BlockSvg.HAT_CORNER_RADIUS;
 /**
  * SVG path for drawing the top-left corner of a statement input.
  * Includes the top notch, a horizontal space, and the rounded inside corner.
@@ -1554,13 +1573,13 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
  */
 Blockly.BlockSvg.prototype.renderDrawLeft_ =
     function(steps, connectionsXY, metrics) {
-  // Position the cursor at the top-left starting point.
-  steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
-  // Top-left rounded corner.
-  steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
 
   // Top edge.
   if (this.previousConnection) {
+    // Position the cursor at the top-left starting point.
+    steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
+    // Top-left rounded corner.
+    steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
     var cursorY = metrics.height - Blockly.BlockSvg.CORNER_RADIUS - 8 - Blockly.BlockSvg.NOTCH_HEIGHT;
     steps.push('V', cursorY);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_DOWN);
@@ -1569,8 +1588,14 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
     var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
     this.previousConnection.moveTo(connectionX, connectionY);
     // This connection will be tightened when the parent renders.
+    steps.push('V', metrics.height - Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    // Position the cursor at the top-left starting point.
+    steps.push(Blockly.BlockSvg.HAT_TOP_LEFT_CORNER_START);
+    // Top-left rounded corner.
+    steps.push(Blockly.BlockSvg.HAT_TOP_LEFT_CORNER);
+    steps.push('V', metrics.height - Blockly.BlockSvg.HAT_CORNER_RADIUS);    
   }
-  steps.push('V', metrics.height - Blockly.BlockSvg.CORNER_RADIUS);
   this.height = metrics.height;
 };
 
@@ -1587,12 +1612,20 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
 Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
     connectionsXY, metrics) {
 
-  // Has statement
-  if (metrics.hasStatement) {
+  if (this.previousConnection) {
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
                Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    steps.push('a', Blockly.BlockSvg.HAT_CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ' 0 0,0 ' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS);
+  }
+
+  // Has statement
+  if (metrics.hasStatement) {
     steps.push('h', 8);
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
@@ -1613,6 +1646,10 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
     steps.push('v', 50 - (Blockly.BlockSvg.CORNER_RADIUS * 2) - Blockly.BlockSvg.NOTCH_HEIGHT - 8);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_DOWN);
     steps.push('v', 8);
+    steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
+               Blockly.BlockSvg.CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.CORNER_RADIUS);
 
     // // Nested statement.
     // var input = row[0];
@@ -1658,12 +1695,11 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
     // }
   }
 
-  // Render corner
-  steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
-             Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
-             Blockly.BlockSvg.CORNER_RADIUS + ',' +
-             Blockly.BlockSvg.CORNER_RADIUS);
-  steps.push('H', metrics.width - Blockly.BlockSvg.CORNER_RADIUS);
+  if (this.nextConnection) {
+    steps.push('H', metrics.width - Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    steps.push('H', metrics.width - Blockly.BlockSvg.HAT_CORNER_RADIUS);
+  }
 };
 
 /**
@@ -1675,10 +1711,17 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
  */
 Blockly.BlockSvg.prototype.renderDrawRight_ =
     function(steps, connectionsXY, metrics) {
-  steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
-             Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
-             Blockly.BlockSvg.CORNER_RADIUS + ',-' +
-             Blockly.BlockSvg.CORNER_RADIUS);
+  if (this.nextConnection) {
+    steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
+               Blockly.BlockSvg.CORNER_RADIUS + ',-' +
+               Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    steps.push('a', Blockly.BlockSvg.HAT_CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ' 0 0,0 ' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ',-' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS);    
+  }
   steps.push('v', -8);
 
   if (this.nextConnection) {
@@ -1697,8 +1740,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
       this.nextConnection.tighten_();
     }
     this.height += 4;  // Height of tab.
+    steps.push('V', Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    steps.push('V', Blockly.BlockSvg.HAT_CORNER_RADIUS);
   }
-  steps.push('V', Blockly.BlockSvg.CORNER_RADIUS);
 };
 
 /**
@@ -1710,9 +1755,16 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
  */
 Blockly.BlockSvg.prototype.renderDrawTop_ =
     function(steps, connectionsXY, metrics) {
-  steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
-             Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 -' +
-             Blockly.BlockSvg.CORNER_RADIUS + ',-' +
-             Blockly.BlockSvg.CORNER_RADIUS);
+  if (this.nextConnection) {
+    steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 -' +
+               Blockly.BlockSvg.CORNER_RADIUS + ',-' +
+               Blockly.BlockSvg.CORNER_RADIUS);
+  } else {
+    steps.push('a', Blockly.BlockSvg.HAT_CORNER_RADIUS + ',' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ' 0 0,0 -' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS + ',-' +
+               Blockly.BlockSvg.HAT_CORNER_RADIUS);
+  }
   steps.push('z');
 };

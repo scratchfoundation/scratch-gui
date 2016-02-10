@@ -819,44 +819,37 @@ Blockly.BlockSvg.NOTCH_HEIGHT = Blockly.BlockSvg.NOTCH_BASE_HEIGHT + Blockly.Blo
  * @const
  */
 Blockly.BlockSvg.NOTCH_PATH_DOWN = 
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + 2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '-45 0 0 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+  'a ' + -Blockly.BlockSvg.NOTCH_RADIUS + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 0 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
   'l ' + (Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
          (Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + 2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '-45 0 1 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+  'a ' + -Blockly.BlockSvg.NOTCH_RADIUS + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 1 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
   'v ' + (Blockly.BlockSvg.NOTCH_BASE_HEIGHT/2 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + 2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '45 0 1 ' + -1*Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-  'l ' + (-1*Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
-         (1*Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + 2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-        '45 0 0 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS;
+  'a ' + -Blockly.BlockSvg.NOTCH_RADIUS + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 1 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+  'l ' + (-Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
+         (Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
+  'a ' + -Blockly.BlockSvg.NOTCH_RADIUS + ',' + Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+        '0 0 0 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + Blockly.BlockSvg.NOTCH_RADIUS;
 /**
  * SVG path for drawing next/previous notch from bottom to top.
  * @const
  */
 Blockly.BlockSvg.NOTCH_PATH_UP = 
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '45 0 1 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 1 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
   'l ' + (Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
          -1*(Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '45 0 0 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 0 ' + Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
   'v ' + -1*(Blockly.BlockSvg.NOTCH_BASE_HEIGHT/2 - Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + -1*Blockly.BlockSvg.NOTCH_RADIUS + ',' + -2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-          '-45 0 0 ' + -1*Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS +
-  'l ' + (-1*Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
-         (-1*Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
-  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -2*Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
-        '-45 0 1 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS;
-/**
- * SVG path for drawing a horizontal puzzle tab from top to bottom.
- * @const
- */
-Blockly.BlockSvg.TAB_PATH_DOWN = 'v 5 c 0,10 -' + Blockly.BlockSvg.TAB_WIDTH +
-    ',-8 -' + Blockly.BlockSvg.TAB_WIDTH + ',7.5 s ' +
-    Blockly.BlockSvg.TAB_WIDTH + ',-2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',7.5';
+  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+          '0 0 0 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS +
+  'l ' + (-Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ',' + 
+         (-Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4 + Blockly.BlockSvg.NOTCH_RADIUS) + ' ' +
+  'a ' + Blockly.BlockSvg.NOTCH_RADIUS + ',' + -Blockly.BlockSvg.NOTCH_RADIUS + ' ' +
+        '0 0 1 ' + -Blockly.BlockSvg.NOTCH_RADIUS/2 + ',' + -Blockly.BlockSvg.NOTCH_RADIUS;
 /**
  * SVG start point for drawing the top-left corner.
  * @const

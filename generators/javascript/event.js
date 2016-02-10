@@ -19,16 +19,16 @@
  */
 
 /**
- * @fileoverview Generating JavaScript for motion blocks.
- * @author rschamp@media.mit.edu (Ray Schamp)
+ * @fileoverview Generating JavaScript for event blocks.
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.motion');
+goog.provide('Blockly.JavaScript.event');
 
 goog.require('Blockly.JavaScript');
 
-Blockly.JavaScript['motion_moveright'] = function(block) {
-  var code = 'moveRight();\n';
+Blockly.JavaScript['event_whenflagclicked'] = function(block) {
+  var code = 'flagClicked();\n';
   return code;
 };

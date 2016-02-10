@@ -20,7 +20,7 @@
 
 /**
  * @fileoverview Generating JavaScript for motion blocks.
- * @author q.neutron@gmail.com (Quynh Neutron)
+ * @author rschamp@media.mit.edu (Ray Schamp)
  */
 'use strict';
 

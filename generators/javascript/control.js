@@ -20,7 +20,7 @@
 
 /**
  * @fileoverview Generating JavaScript for math blocks.
- * @author q.neutron@gmail.com (Quynh Neutron)
+ * @author ascii@media.mit.edu (Andrew Sliwinski)
  */
 'use strict';
 

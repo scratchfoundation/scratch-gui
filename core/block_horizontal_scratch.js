@@ -803,7 +803,7 @@ Blockly.BlockSvg.HAT_CORNER_RADIUS = 16;
  * Rounded notch radius.
  * @const
  */
-Blockly.BlockSvg.NOTCH_RADIUS = 4;
+Blockly.BlockSvg.NOTCH_RADIUS = 2.5;
 /**
  * Height of connector notch, not including rounded corner at top and bottom.
  * @const

@@ -70,12 +70,16 @@ class Gen_uncompressed(threading.Thread):
   """Generate a JavaScript file that loads Blockly's raw files.
   Runs in a separate thread.
   """
-  def __init__(self, search_paths):
+  def __init__(self, search_paths, vertical):
     threading.Thread.__init__(self)
     self.search_paths = search_paths
+    self.vertical = vertical
 
   def run(self):
-    target_filename = 'blockly_uncompressed.js'
+    if self.vertical:
+      target_filename = 'blockly_uncompressed_vertical.js'
+    else:
+      target_filename = 'blockly_uncompressed_horizontal.js'
     f = open(target_filename, 'w')
     f.write(HEADER)
     f.write("""
@@ -90,7 +94,7 @@ window.BLOCKLY_DIR = (function() {
   if (!isNodeJS) {
     // Find name of current directory.
     var scripts = document.getElementsByTagName('script');
-    var re = new RegExp('(.+)[\/]blockly_uncompressed\.js$');
+    var re = new RegExp('(.+)[\/]blockly_uncompressed(_vertical|_horizontal|)\.js$');
     for (var i = 0, script; script = scripts[i]; i++) {
       var match = re.exec(script.src);
       if (match) {
@@ -166,20 +170,24 @@ class Gen_compressed(threading.Thread):
   Uses the Closure Compiler's online API.
   Runs in a separate thread.
   """
-  def __init__(self, search_paths):
+  def __init__(self, search_paths_vertical, search_paths_horizontal):
     threading.Thread.__init__(self)
-    self.search_paths = search_paths
+    self.search_paths_vertical = search_paths_vertical
+    self.search_paths_horizontal = search_paths_horizontal
 
   def run(self):
-    self.gen_core()
+    self.gen_core(True)
+    self.gen_core(False)
     self.gen_blocks()
     self.gen_generator("javascript")
-    # self.gen_generator("python")
-    # self.gen_generator("php")
-    # self.gen_generator("dart")
 
-  def gen_core(self):
-    target_filename = "blockly_compressed.js"
+  def gen_core(self, vertical):
+    if vertical:
+      target_filename = 'blockly_compressed_vertical.js'
+      search_paths = self.search_paths_vertical
+    else:
+      target_filename = 'blockly_compressed_horizontal.js'
+      search_paths = self.search_paths_horizontal
     # Define the parameters for the POST request.
     params = [
         ("compilation_level", "SIMPLE_OPTIMIZATIONS"),
@@ -192,7 +200,7 @@ class Gen_compressed(threading.Thread):
       ]
 
     # Read in all the source files.
-    filenames = calcdeps.CalculateDependencies(self.search_paths,
+    filenames = calcdeps.CalculateDependencies(search_paths,
         [os.path.join("core", "blockly.js")])
     for filename in filenames:
       # Filter out the Closure files (the compiler will add them).
@@ -429,6 +437,11 @@ class Gen_langfiles(threading.Thread):
       else:
         print("FAILED to create " + f)
 
+def exclude_vertical(item):
+  return not item.endswith("block_vertical_scratch.js")
+
+def exclude_horizontal(item):
+  return not item.endswith("block_horizontal_scratch.js")
 
 if __name__ == "__main__":
   try:
@@ -455,11 +468,19 @@ https://developers.google.com/blockly/hacking/closure""")
   search_paths = calcdeps.ExpandDirectories(
       ["core", os.path.join(os.path.pardir, "closure-library")])
 
-  # Run both tasks in parallel threads.
+  search_paths_horizontal = filter(exclude_vertical, search_paths)
+  search_paths_vertical = filter(exclude_horizontal, search_paths)
+
+  # Run all tasks in parallel threads.
   # Uncompressed is limited by processor speed.
   # Compressed is limited by network and server speed.
-  Gen_uncompressed(search_paths).start()
-  Gen_compressed(search_paths).start()
+  # Vertical:
+  Gen_uncompressed(search_paths_vertical, True).start()
+  # Horizontal:
+  Gen_uncompressed(search_paths_horizontal, False).start()
+
+  # Compressed forms of vertical and horizontal.
+  Gen_compressed(search_paths_vertical, search_paths_horizontal).start()
 
   # This is run locally in a separate thread.
   Gen_langfiles().start()

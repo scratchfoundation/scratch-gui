@@ -125,6 +125,10 @@ Blockly.parseOptions_ = function(options) {
     if (hasSounds === undefined) {
       hasSounds = true;
     }
+    var horizontalLayout = options['horizontalLayout'];
+    if (horizontalLayout === undefined) {
+      horizontalLayout = false;
+    }
   }
   var hasScrollbars = options['scrollbars'];
   if (hasScrollbars === undefined) {
@@ -201,6 +205,7 @@ Blockly.parseOptions_ = function(options) {
     hasTrashcan: hasTrashcan,
     hasSounds: hasSounds,
     hasCss: hasCss,
+    horizontalLayout: horizontalLayout,
     languageTree: languageTree,
     gridOptions: gridOptions,
     zoomOptions: zoomOptions,

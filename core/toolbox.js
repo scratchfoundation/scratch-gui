@@ -64,7 +64,7 @@ Blockly.Toolbox = function(workspace) {
    * @type {boolean}
    * @private
    */
-  this.horizontalLayout_ = false;
+  this.horizontalLayout_ = workspace.options.horizontalLayout;
 
   if (this.horizontalLayout_) {
     this.CONFIG_['cssTreeRow'] =
@@ -148,7 +148,8 @@ Blockly.Toolbox.prototype.init = function() {
   var workspaceOptions = {
     disabledPatternId: workspace.options.disabledPatternId,
     parentWorkspace: workspace,
-    RTL: workspace.RTL
+    RTL: workspace.RTL,
+    horizontalLayout: workspace.horizontalLayout
   };
 
   /**

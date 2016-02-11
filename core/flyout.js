@@ -514,8 +514,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
   if (this.horizontalLayout_) {
     this.height_ = 0;
-  }
-  else {
+  } else {
     this.width_ = 0;
   }
   this.reflow();

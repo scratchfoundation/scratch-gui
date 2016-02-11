@@ -497,7 +497,7 @@ Blockly.Scrollbar.prototype.onScroll_ = function() {
  * @param {number} value The distance from the top/left end of the bar.
  */
 Blockly.Scrollbar.prototype.set = function(value) {
-  var ratio = this.ratio_ == undefined ? 0 : this.ratio_;
+  var ratio = this.ratio_ == this.ratio_ || 0;
   // Move the scrollbar slider.
   this.svgKnob_.setAttribute(this.horizontal_ ? 'x' : 'y', value * ratio);
   this.onScroll_();

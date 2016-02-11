@@ -60,7 +60,7 @@ Blockly.Flyout = function(workspaceOptions) {
    * Flyout should be laid out horizontally vs vertically.
    * @type {boolean}
    */
-  this.horizontalLayout_ = false;
+  this.horizontalLayout_ = workspaceOptions.horizontalLayout;
 
   /**
    * Opaque data that can be passed to Blockly.unbindEvent_.

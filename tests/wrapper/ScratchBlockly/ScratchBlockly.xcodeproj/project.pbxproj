@@ -12,17 +12,17 @@
 		D917FD191C6D115D00FC8841 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D917FD171C6D115D00FC8841 /* Main.storyboard */; };
 		D917FD1B1C6D115D00FC8841 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D917FD1A1C6D115D00FC8841 /* Assets.xcassets */; };
 		D917FD1E1C6D115D00FC8841 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D917FD1C1C6D115D00FC8841 /* LaunchScreen.storyboard */; };
-		D917FD671C6D175700FC8841 /* blockly_compressed_horizontal.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD5A1C6D175700FC8841 /* blockly_compressed_horizontal.js */; };
-		D917FD681C6D175700FC8841 /* blockly_compressed_vertical.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD5B1C6D175700FC8841 /* blockly_compressed_vertical.js */; };
-		D917FD691C6D175700FC8841 /* blockly_uncompressed_horizontal.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD5C1C6D175700FC8841 /* blockly_uncompressed_horizontal.js */; };
-		D917FD6A1C6D175700FC8841 /* blockly_uncompressed_vertical.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD5D1C6D175700FC8841 /* blockly_uncompressed_vertical.js */; };
-		D917FD6C1C6D175700FC8841 /* blocks_compressed.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD5F1C6D175700FC8841 /* blocks_compressed.js */; };
-		D917FD6D1C6D175700FC8841 /* blocks_horizontal in Resources */ = {isa = PBXBuildFile; fileRef = D917FD601C6D175700FC8841 /* blocks_horizontal */; };
-		D917FD701C6D175700FC8841 /* javascript_compressed.js in Resources */ = {isa = PBXBuildFile; fileRef = D917FD631C6D175700FC8841 /* javascript_compressed.js */; };
-		D917FD711C6D175700FC8841 /* media in Resources */ = {isa = PBXBuildFile; fileRef = D917FD641C6D175700FC8841 /* media */; };
-		D917FD721C6D175700FC8841 /* msg in Resources */ = {isa = PBXBuildFile; fileRef = D917FD651C6D175700FC8841 /* msg */; };
 		D917FD751C6D185000FC8841 /* playgrounds in Resources */ = {isa = PBXBuildFile; fileRef = D917FD741C6D185000FC8841 /* playgrounds */; };
 		D917FD771C6D18E400FC8841 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D917FD761C6D18E400FC8841 /* Settings.bundle */; };
+		D98653441C6E58AC00D6DF77 /* blockly_compressed_horizontal.js in Resources */ = {isa = PBXBuildFile; fileRef = D986533B1C6E58AC00D6DF77 /* blockly_compressed_horizontal.js */; };
+		D98653451C6E58AC00D6DF77 /* blockly_compressed_vertical.js in Resources */ = {isa = PBXBuildFile; fileRef = D986533C1C6E58AC00D6DF77 /* blockly_compressed_vertical.js */; };
+		D98653461C6E58AC00D6DF77 /* blockly_uncompressed_horizontal.js in Resources */ = {isa = PBXBuildFile; fileRef = D986533D1C6E58AC00D6DF77 /* blockly_uncompressed_horizontal.js */; };
+		D98653471C6E58AC00D6DF77 /* blockly_uncompressed_vertical.js in Resources */ = {isa = PBXBuildFile; fileRef = D986533E1C6E58AC00D6DF77 /* blockly_uncompressed_vertical.js */; };
+		D98653481C6E58AC00D6DF77 /* blocks_compressed.js in Resources */ = {isa = PBXBuildFile; fileRef = D986533F1C6E58AC00D6DF77 /* blocks_compressed.js */; };
+		D98653491C6E58AC00D6DF77 /* blocks_horizontal in Resources */ = {isa = PBXBuildFile; fileRef = D98653401C6E58AC00D6DF77 /* blocks_horizontal */; };
+		D986534A1C6E58AC00D6DF77 /* javascript_compressed.js in Resources */ = {isa = PBXBuildFile; fileRef = D98653411C6E58AC00D6DF77 /* javascript_compressed.js */; };
+		D986534B1C6E58AC00D6DF77 /* media in Resources */ = {isa = PBXBuildFile; fileRef = D98653421C6E58AC00D6DF77 /* media */; };
+		D986534C1C6E58AC00D6DF77 /* msg in Resources */ = {isa = PBXBuildFile; fileRef = D98653431C6E58AC00D6DF77 /* msg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,17 +33,17 @@
 		D917FD1A1C6D115D00FC8841 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D917FD1D1C6D115D00FC8841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D917FD1F1C6D115D00FC8841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D917FD5A1C6D175700FC8841 /* blockly_compressed_horizontal.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_compressed_horizontal.js; path = ../../blockly_compressed_horizontal.js; sourceTree = "<group>"; };
-		D917FD5B1C6D175700FC8841 /* blockly_compressed_vertical.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_compressed_vertical.js; path = ../../blockly_compressed_vertical.js; sourceTree = "<group>"; };
-		D917FD5C1C6D175700FC8841 /* blockly_uncompressed_horizontal.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_uncompressed_horizontal.js; path = ../../blockly_uncompressed_horizontal.js; sourceTree = "<group>"; };
-		D917FD5D1C6D175700FC8841 /* blockly_uncompressed_vertical.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_uncompressed_vertical.js; path = ../../blockly_uncompressed_vertical.js; sourceTree = "<group>"; };
-		D917FD5F1C6D175700FC8841 /* blocks_compressed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blocks_compressed.js; path = ../../blocks_compressed.js; sourceTree = "<group>"; };
-		D917FD601C6D175700FC8841 /* blocks_horizontal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = blocks_horizontal; path = ../../blocks_horizontal; sourceTree = "<group>"; };
-		D917FD631C6D175700FC8841 /* javascript_compressed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = javascript_compressed.js; path = ../../javascript_compressed.js; sourceTree = "<group>"; };
-		D917FD641C6D175700FC8841 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../../media; sourceTree = "<group>"; };
-		D917FD651C6D175700FC8841 /* msg */ = {isa = PBXFileReference; lastKnownFileType = folder; name = msg; path = ../../msg; sourceTree = "<group>"; };
 		D917FD741C6D185000FC8841 /* playgrounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = playgrounds; path = ../playgrounds; sourceTree = "<group>"; };
 		D917FD761C6D18E400FC8841 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D986533B1C6E58AC00D6DF77 /* blockly_compressed_horizontal.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_compressed_horizontal.js; path = ../../../blockly_compressed_horizontal.js; sourceTree = "<group>"; };
+		D986533C1C6E58AC00D6DF77 /* blockly_compressed_vertical.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_compressed_vertical.js; path = ../../../blockly_compressed_vertical.js; sourceTree = "<group>"; };
+		D986533D1C6E58AC00D6DF77 /* blockly_uncompressed_horizontal.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_uncompressed_horizontal.js; path = ../../../blockly_uncompressed_horizontal.js; sourceTree = "<group>"; };
+		D986533E1C6E58AC00D6DF77 /* blockly_uncompressed_vertical.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blockly_uncompressed_vertical.js; path = ../../../blockly_uncompressed_vertical.js; sourceTree = "<group>"; };
+		D986533F1C6E58AC00D6DF77 /* blocks_compressed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = blocks_compressed.js; path = ../../../blocks_compressed.js; sourceTree = "<group>"; };
+		D98653401C6E58AC00D6DF77 /* blocks_horizontal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = blocks_horizontal; path = ../../../blocks_horizontal; sourceTree = "<group>"; };
+		D98653411C6E58AC00D6DF77 /* javascript_compressed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = javascript_compressed.js; path = ../../../javascript_compressed.js; sourceTree = "<group>"; };
+		D98653421C6E58AC00D6DF77 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../../../media; sourceTree = "<group>"; };
+		D98653431C6E58AC00D6DF77 /* msg */ = {isa = PBXFileReference; lastKnownFileType = folder; name = msg; path = ../../../msg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,16 +60,16 @@
 		D917FD071C6D115D00FC8841 = {
 			isa = PBXGroup;
 			children = (
+				D986533B1C6E58AC00D6DF77 /* blockly_compressed_horizontal.js */,
+				D986533C1C6E58AC00D6DF77 /* blockly_compressed_vertical.js */,
+				D986533D1C6E58AC00D6DF77 /* blockly_uncompressed_horizontal.js */,
+				D986533E1C6E58AC00D6DF77 /* blockly_uncompressed_vertical.js */,
+				D986533F1C6E58AC00D6DF77 /* blocks_compressed.js */,
+				D98653401C6E58AC00D6DF77 /* blocks_horizontal */,
+				D98653411C6E58AC00D6DF77 /* javascript_compressed.js */,
+				D98653421C6E58AC00D6DF77 /* media */,
+				D98653431C6E58AC00D6DF77 /* msg */,
 				D917FD741C6D185000FC8841 /* playgrounds */,
-				D917FD5A1C6D175700FC8841 /* blockly_compressed_horizontal.js */,
-				D917FD5B1C6D175700FC8841 /* blockly_compressed_vertical.js */,
-				D917FD5C1C6D175700FC8841 /* blockly_uncompressed_horizontal.js */,
-				D917FD5D1C6D175700FC8841 /* blockly_uncompressed_vertical.js */,
-				D917FD5F1C6D175700FC8841 /* blocks_compressed.js */,
-				D917FD601C6D175700FC8841 /* blocks_horizontal */,
-				D917FD631C6D175700FC8841 /* javascript_compressed.js */,
-				D917FD641C6D175700FC8841 /* media */,
-				D917FD651C6D175700FC8841 /* msg */,
 				D917FD121C6D115D00FC8841 /* ScratchBlockly */,
 				D917FD111C6D115D00FC8841 /* Products */,
 			);
@@ -155,17 +155,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D98653441C6E58AC00D6DF77 /* blockly_compressed_horizontal.js in Resources */,
+				D98653451C6E58AC00D6DF77 /* blockly_compressed_vertical.js in Resources */,
+				D98653461C6E58AC00D6DF77 /* blockly_uncompressed_horizontal.js in Resources */,
+				D98653471C6E58AC00D6DF77 /* blockly_uncompressed_vertical.js in Resources */,
+				D98653481C6E58AC00D6DF77 /* blocks_compressed.js in Resources */,
+				D98653491C6E58AC00D6DF77 /* blocks_horizontal in Resources */,
+				D986534A1C6E58AC00D6DF77 /* javascript_compressed.js in Resources */,
+				D986534B1C6E58AC00D6DF77 /* media in Resources */,
+				D986534C1C6E58AC00D6DF77 /* msg in Resources */,
 				D917FD751C6D185000FC8841 /* playgrounds in Resources */,
-				D917FD671C6D175700FC8841 /* blockly_compressed_horizontal.js in Resources */,
-				D917FD681C6D175700FC8841 /* blockly_compressed_vertical.js in Resources */,
-				D917FD691C6D175700FC8841 /* blockly_uncompressed_horizontal.js in Resources */,
-				D917FD6A1C6D175700FC8841 /* blockly_uncompressed_vertical.js in Resources */,
-				D917FD6C1C6D175700FC8841 /* blocks_compressed.js in Resources */,
 				D917FD771C6D18E400FC8841 /* Settings.bundle in Resources */,
-				D917FD6D1C6D175700FC8841 /* blocks_horizontal in Resources */,
-				D917FD701C6D175700FC8841 /* javascript_compressed.js in Resources */,
-				D917FD711C6D175700FC8841 /* media in Resources */,
-				D917FD721C6D175700FC8841 /* msg in Resources */,
 				D917FD1E1C6D115D00FC8841 /* LaunchScreen.storyboard in Resources */,
 				D917FD1B1C6D115D00FC8841 /* Assets.xcassets in Resources */,
 				D917FD191C6D115D00FC8841 /* Main.storyboard in Resources */,
@@ -330,6 +330,7 @@
 				D917FD241C6D115D00FC8841 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

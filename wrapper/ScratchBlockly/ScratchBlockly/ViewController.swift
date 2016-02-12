@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         // Otherwise, put it at the app bundle's www index
         let defaults = NSUserDefaults.standardUserDefaults()
         let wwwSource = defaults.stringForKey("source_preference")
-        let bundleSource = NSBundle.mainBundle().pathForResource("horizontal_playground", ofType: "html", inDirectory: "playgrounds")
+        let bundleSource = NSBundle.mainBundle().pathForResource("horizontal_playground_compressed", ofType: "html", inDirectory: "playgrounds")
 
         let url = (wwwSource != nil && wwwSource!.characters.count > 0) ? NSURL(string:wwwSource!) : NSURL.fileURLWithPath(bundleSource!)
         let req = NSURLRequest(URL:url!)

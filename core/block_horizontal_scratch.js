@@ -330,8 +330,8 @@ Blockly.BlockSvg.prototype.getHeightWidth = function() {
   var nextBlock = this.getNextBlock();
   if (nextBlock) {
     var nextHeightWidth = nextBlock.getHeightWidth();
-    height += nextHeightWidth.height - 4;  // Height of tab.
-    width = Math.max(width, nextHeightWidth.width);
+    width += nextHeightWidth.width;
+    height = Math.max(height, nextHeightWidth.height);
   } else if (!this.nextConnection && !this.outputConnection) {
     // Add a bit of margin under blocks with no bottom tab.
     height += 2;
@@ -814,6 +814,11 @@ Blockly.BlockSvg.NOTCH_BASE_HEIGHT = 32;
  * @const
  */
 Blockly.BlockSvg.NOTCH_HEIGHT = Blockly.BlockSvg.NOTCH_BASE_HEIGHT + Blockly.BlockSvg.NOTCH_RADIUS;
+/**
+ * Width of connector notch
+ * @const
+ */
+Blockly.BlockSvg.NOTCH_WIDTH = Blockly.BlockSvg.NOTCH_BASE_HEIGHT/4;
 /**
  * SVG path for drawing next/previous notch from top to bottom.
  * @const
@@ -1320,6 +1325,8 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
   this.rendered = true;
 
   var metrics = this.renderCompute_();
+  this.height = metrics.height;
+  this.width = metrics.width;
   this.renderDraw_(metrics);
 
   if (opt_bubble !== false) {
@@ -1387,16 +1394,31 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
  */
 Blockly.BlockSvg.prototype.renderCompute_ = function() {
   var metrics = {
-    hasStatement: false,
+    statement: null,
     icon: null,
     width: 0,
-    height: 0
+    height: 0,
+    bayHeight: 0,
+    bayWidth: 0
   };
 
   // Does block have a statement?
   for (var i = 0, input; input = this.inputList[i]; i++) {
     if (input.type == Blockly.NEXT_STATEMENT) {
-      metrics.hasStatement = true;
+      metrics.statement = input;
+      // Compute minimum input size.
+      // @todo Why 3?
+      metrics.bayHeight = Blockly.BlockSvg.NOTCH_HEIGHT + 16 +
+        Blockly.BlockSvg.CORNER_RADIUS * 3;
+      metrics.bayWidth = Blockly.BlockSvg.NOTCH_WIDTH * 2 +
+      Blockly.BlockSvg.SEP_SPACE_X;
+      // Expand input size if there is a connection.
+      if (input.connection && input.connection.targetConnection) {
+        var linkedBlock = input.connection.targetBlock();
+        var bBox = linkedBlock.getHeightWidth();
+        metrics.bayHeight = Math.max(metrics.bayHeight, bBox.height);
+        metrics.bayWidth = Math.max(metrics.bayWidth, bBox.width);
+      }
     }
 
     // Find icon
@@ -1408,12 +1430,16 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
   }
 
   var iconSize = (metrics.icon) ? metrics.icon.getSize() : new goog.math.Size(0,0);
-  metrics.width = Blockly.BlockSvg.SEP_SPACE_X * 2 + iconSize.width;
+  metrics.width = 
+    Blockly.BlockSvg.SEP_SPACE_X * 2 + iconSize.width + metrics.bayWidth;
+  if (metrics.statement) {
+    metrics.width += 2 * Blockly.BlockSvg.CORNER_RADIUS + 8;
+  }
   metrics.height = Math.max(
     Blockly.BlockSvg.SEP_SPACE_Y * 2 + iconSize.height,
-    Blockly.BlockSvg.NOTCH_HEIGHT + 16 + Blockly.BlockSvg.CORNER_RADIUS * 2
+    Blockly.BlockSvg.NOTCH_HEIGHT + 16 + Blockly.BlockSvg.CORNER_RADIUS * 2,
+    metrics.bayHeight + Blockly.BlockSvg.SEP_SPACE_Y
   );
-
   return metrics;
 
   // var inputList = this.inputList;
@@ -1587,8 +1613,10 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   // Position icon
   if (metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
+    var iconSize = metrics.icon.getSize();
     icon.setAttribute('transform',
-      'translate(' + (metrics.width - metrics.icon.getSize().width - Blockly.BlockSvg.SEP_SPACE_X / 2) + ',' + Blockly.BlockSvg.SEP_SPACE_Y + ')');
+      'translate(' + (metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 2) + ',' + 
+      (metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y) + ')');
     // @todo RTL
   }
 };
@@ -1625,7 +1653,6 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
     steps.push(Blockly.BlockSvg.HAT_TOP_LEFT_CORNER);
     steps.push('V', metrics.height - Blockly.BlockSvg.HAT_CORNER_RADIUS);    
   }
-  this.height = metrics.height;
 };
 
 /**
@@ -1654,7 +1681,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
   }
 
   // Has statement
-  if (metrics.hasStatement) {
+  if (metrics.statement) {
     steps.push('h', 8);
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
@@ -1662,23 +1689,34 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
                Blockly.BlockSvg.CORNER_RADIUS);
     steps.push('v', -8);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_UP);
-    steps.push('v', -50 + (Blockly.BlockSvg.CORNER_RADIUS * 2) + Blockly.BlockSvg.NOTCH_HEIGHT + 8);
+    // @todo Why 3?
+    steps.push('v', -metrics.bayHeight + (Blockly.BlockSvg.CORNER_RADIUS * 3) + Blockly.BlockSvg.NOTCH_HEIGHT + 8);
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,1 ' +
                Blockly.BlockSvg.CORNER_RADIUS + ',-' +
                Blockly.BlockSvg.CORNER_RADIUS);
-    steps.push('h', 20 - (Blockly.BlockSvg.CORNER_RADIUS * 2));
+    steps.push('h', metrics.bayWidth - (Blockly.BlockSvg.CORNER_RADIUS * 2));
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,1 ' +
                Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS);
-    steps.push('v', 50 - (Blockly.BlockSvg.CORNER_RADIUS * 2) - Blockly.BlockSvg.NOTCH_HEIGHT - 8);
+    steps.push('v', metrics.bayHeight - (Blockly.BlockSvg.CORNER_RADIUS * 3) - Blockly.BlockSvg.NOTCH_HEIGHT - 8);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_DOWN);
     steps.push('v', 8);
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
                Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS);
+
+    // Create statement connection.
+    // @todo RTL
+    // var connectionX = connectionsXY.x + (this.RTL ? -cursorX : cursorX + 1);
+    var connectionX = connectionsXY.x + Blockly.BlockSvg.CORNER_RADIUS * 2 + 8;
+    var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
+    metrics.statement.connection.moveTo(connectionX, connectionY);
+    if (metrics.statement.connection.targetConnection) {
+      metrics.statement.connection.tighten_();
+    }
 
     // // Nested statement.
     // var input = row[0];

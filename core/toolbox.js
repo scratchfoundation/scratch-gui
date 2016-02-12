@@ -64,7 +64,8 @@ Blockly.Toolbox = function(workspace) {
    * @type {boolean}
    * @private
    */
-  this.horizontalLayout_ = false;
+  this.horizontalLayout_ = workspace.options.horizontalLayout;
+
   if (this.horizontalLayout_) {
     this.CONFIG_['cssTreeRow'] =
       this.CONFIG_['cssTreeRow']
@@ -147,7 +148,8 @@ Blockly.Toolbox.prototype.init = function() {
   var workspaceOptions = {
     disabledPatternId: workspace.options.disabledPatternId,
     parentWorkspace: workspace,
-    RTL: workspace.RTL
+    RTL: workspace.RTL,
+    horizontalLayout: workspace.horizontalLayout
   };
 
   /**
@@ -449,9 +451,9 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
   goog.ui.tree.TreeControl.prototype.setSelectedItem.call(this, node);
   if (node && node.blocks && node.blocks.length) {
     toolbox.flyout_.show(node.blocks);
-    // Scroll the flyout to the top if the category has changed.
+    // Scroll the flyout to the start if the category has changed.
     if (toolbox.lastCategory_ != node) {
-      toolbox.flyout_.scrollToTop();
+      toolbox.flyout_.scrollToStart();
     }
   } else {
     // Hide the flyout.

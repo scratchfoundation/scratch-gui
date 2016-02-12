@@ -780,10 +780,10 @@ Blockly.BlockSvg.SEP_SPACE_Y = 8;
  */
 Blockly.BlockSvg.INLINE_PADDING_Y = 5;
 /**
- * Minimum height of a block.
+ * Minimum width of a block.
  * @const
  */
-Blockly.BlockSvg.MIN_BLOCK_Y = 25;
+Blockly.BlockSvg.MIN_BLOCK_X = 40;
 /**
  * Width of horizontal puzzle tab.
  * @const
@@ -1361,7 +1361,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
       metrics.bayHeight = Blockly.BlockSvg.NOTCH_HEIGHT + 16 +
         Blockly.BlockSvg.CORNER_RADIUS * 3;
       metrics.bayWidth = Blockly.BlockSvg.NOTCH_WIDTH * 2 +
-      Blockly.BlockSvg.SEP_SPACE_X;
+      Blockly.BlockSvg.MIN_BLOCK_X;
       // Expand input size if there is a connection.
       if (input.connection && input.connection.targetConnection) {
         var linkedBlock = input.connection.targetBlock();

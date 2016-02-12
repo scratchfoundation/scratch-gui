@@ -125,10 +125,16 @@ Blockly.parseOptions_ = function(options) {
     if (hasSounds === undefined) {
       hasSounds = true;
     }
-    var horizontalLayout = options['horizontalLayout'];
-    if (horizontalLayout === undefined) {
-      horizontalLayout = false;
-    }
+  }
+  var horizontalLayout = options['horizontalLayout'];
+  if (horizontalLayout === undefined) {
+    horizontalLayout = false;
+  }
+  var toolboxPosition = options['toolboxPosition'];
+  if (toolboxPosition === 'end') {
+    var toolboxAtStart = false;
+  } else {
+    var toolboxAtStart = true;
   }
   var hasScrollbars = options['scrollbars'];
   if (hasScrollbars === undefined) {
@@ -210,7 +216,8 @@ Blockly.parseOptions_ = function(options) {
     gridOptions: gridOptions,
     zoomOptions: zoomOptions,
     enableRealtime: enableRealtime,
-    realtimeOptions: realtimeOptions
+    realtimeOptions: realtimeOptions,
+    toolboxAtStart: toolboxAtStart
   };
 };
 

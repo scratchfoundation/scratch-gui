@@ -66,16 +66,22 @@ Blockly.Toolbox = function(workspace) {
    */
   this.horizontalLayout_ = workspace.options.horizontalLayout;
 
+  this.atRight_ = !this.horizontalLayout_ &&
+                  ((workspace.RTL && workspace.atStart_) || (!workspace.RTL && !workspace.atStart_));
+
   if (this.horizontalLayout_) {
     this.CONFIG_['cssTreeRow'] =
       this.CONFIG_['cssTreeRow']
-      + (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
+      + (this.atRight_ ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
 
     Blockly.Toolbox.TreeSeparator.CONFIG_['cssTreeRow'] =
       'blocklyTreeSeparatorHorizontal'
-      + (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
+      + (this.atRight_ ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
     this.CONFIG_['cssTreeIcon'] = '';
   }
+
+  this.atStart_ = workspace.options.toolboxAtStart;
+
 };
 
 /**
@@ -149,7 +155,8 @@ Blockly.Toolbox.prototype.init = function() {
     disabledPatternId: workspace.options.disabledPatternId,
     parentWorkspace: workspace,
     RTL: workspace.RTL,
-    horizontalLayout: workspace.horizontalLayout
+    horizontalLayout: workspace.horizontalLayout,
+    toolboxAtStart: this.atStart_
   };
 
   /**
@@ -162,7 +169,7 @@ Blockly.Toolbox.prototype.init = function() {
 
   this.CONFIG_['cleardotPath'] = workspace.options.pathToMedia + '1x1.gif';
   this.CONFIG_['cssCollapsedFolderIcon'] =
-      'blocklyTreeIconClosed' + (workspace.RTL ? 'Rtl' : 'Ltr');
+      'blocklyTreeIconClosed' + (this.atRight_ ? 'Rtl' : 'Ltr');
   var tree = new Blockly.Toolbox.TreeControl(this, this.CONFIG_);
   this.tree_ = tree;
   tree.setShowRootNode(false);
@@ -199,7 +206,7 @@ Blockly.Toolbox.prototype.position = function() {
   var svgPosition = goog.style.getPageOffset(svg);
   var svgSize = Blockly.svgSize(svg);
   if (!this.horizontalLayout_) {
-    if (this.workspace_.RTL) {  // Right
+    if (this.atRight_) {  // Right
       treeDiv.style.left =
           (svgPosition.x + svgSize.width - treeDiv.offsetWidth) + 'px';
     } else { // Left
@@ -208,7 +215,7 @@ Blockly.Toolbox.prototype.position = function() {
     treeDiv.style.height = svgSize.height + 'px';
     treeDiv.style.top = svgPosition.y + 'px';
     this.width = treeDiv.offsetWidth;
-    if (!this.workspace_.RTL) {
+    if (!this.atRight_) {
       // For some reason the LTR toolbox now reports as 1px too wide.
       this.width -= 1;
     }
@@ -323,7 +330,7 @@ Blockly.Toolbox.prototype.addColour_ = function(opt_tree) {
       } else {
         var border = 'none';
       }
-      if (this.workspace_.RTL) {
+      if (this.atRight_) {
         element.style.borderRight = border;
       } else {
         element.style.borderLeft = border;
@@ -354,7 +361,7 @@ Blockly.Toolbox.prototype.getRect = function() {
   if (!this.horizontalLayout_) {
     // Assumes that the toolbox is on the SVG edge.  If this changes
     // (e.g. toolboxes in mutators) then this code will need to be more complex.
-    if (!this.workspace_.RTL) {
+    if (!this.atRight_) {
       x = -BIG_NUM;
     }
     return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width, 2 * BIG_NUM);

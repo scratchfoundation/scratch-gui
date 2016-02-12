@@ -32,6 +32,7 @@ function start() {
     rtl: rtl,
     scrollbars: true,
     toolbox: toolbox,
+    toolboxPosition: 'start',
     trashcan: true,
     zoom: {
       controls: true,
@@ -106,18 +107,25 @@ h1 {
   <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
-    <block type="event_whenflagclicked"></block>
-    <block type="motion_moveright"></block>
-    <!-- <block type="control_repeat"></block> -->
-    <block type="control_forever"></block>
-    <block type="control_repeat">
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
+    <category name="Events">
+      <block type="event_whenflagclicked"></block>
+    </category>
+    <category name="Motion">
+      <block type="motion_moveright"></block>
+    </category>
+      <!-- <block type="control_repeat"></block> -->
+    <category name="Pants">
+      <block type="control_forever"></block>
+      <block type="control_repeat">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
   </xml>
+
 
   <h1>Vertical block rendering!</h1>
 

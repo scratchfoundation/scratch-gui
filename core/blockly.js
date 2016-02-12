@@ -549,7 +549,7 @@ Blockly.getMainWorkspaceMetrics_ = function() {
     var bottomEdge = topEdge + blockBox.height;
   }
   var absoluteLeft = 0;
-  if (!this.RTL && this.toolbox_) {
+  if (this.toolbox_ && !this.toolbox_.atRight) {
     absoluteLeft = this.toolbox_.width;
   }
   var metrics = {

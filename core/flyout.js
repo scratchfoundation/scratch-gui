@@ -43,12 +43,6 @@ goog.require('goog.userAgent');
 Blockly.Flyout = function(workspaceOptions) {
   workspaceOptions.getMetrics = this.getMetrics_.bind(this);
   workspaceOptions.setMetrics = this.setMetrics_.bind(this);
-  /**
-   * @type {!Blockly.Workspace}
-   * @private
-   */
-  this.workspace_ = new Blockly.WorkspaceSvg(workspaceOptions);
-  this.workspace_.isFlyout = true;
 
   /**
    * Is RTL vs LTR.
@@ -62,10 +56,19 @@ Blockly.Flyout = function(workspaceOptions) {
    */
   this.horizontalLayout_ = workspaceOptions.horizontalLayout;
 
-  this.atStart_ = workspaceOptions.toolboxAtStart;
+  /**
+   * Flyout should be laid out horizontally vs vertically.
+   * @type {boolean}
+   */
+  this.atRight = !this.horizontalLayout_ && (this.RTL == workspaceOptions.toolboxAtStart);
+  this.atTop_ = this.horizontalLayout_ && workspaceOptions.toolboxAtStart;
 
-  this.atRight_ = !this.horizontalLayout_ &&
-                  ((this.RTL && this.atStart_) || (!this.RTL && !this.atStart_));
+  /**
+   * @type {!Blockly.Workspace}
+   * @private
+   */
+  this.workspace_ = new Blockly.WorkspaceSvg(workspaceOptions);
+  this.workspace_.isFlyout = true;
 
   /**
    * Opaque data that can be passed to Blockly.unbindEvent_.
@@ -245,6 +248,7 @@ Blockly.Flyout.prototype.getMetrics_ = function() {
     viewLeft: -this.workspace_.scrollX,
     contentTop: optionBox.y,
     contentLeft: 0,
+    // TODO: Fenichel: this is where atTop and atBottom matter
     absoluteTop: this.verticalOffset_ + this.SCROLLBAR_PADDING,
     absoluteLeft: this.SCROLLBAR_PADDING
   };
@@ -268,7 +272,7 @@ Blockly.Flyout.prototype.setMetrics_ = function(xyRatio) {
     this.workspace_.scrollY =
         -metrics.contentHeight * xyRatio.y - metrics.contentTop;
   } else if (this.horizontalLayout_ && goog.isNumber(xyRatio.x)) {
-    if (this.atRight_) {
+    if (this.atRight) {
       this.workspace_.scrollX =
           -metrics.contentWidth * xyRatio.x + metrics.contentLeft;
     } else {
@@ -298,7 +302,7 @@ Blockly.Flyout.prototype.position = function() {
   }
   var edgeWidth = this.horizontalLayout_ ? metrics.viewWidth : this.width_;
   edgeWidth -= this.CORNER_RADIUS;
-  if (this.atRight_) {
+  if (this.atRight) {
     edgeWidth *= -1;
   }
 
@@ -306,7 +310,7 @@ Blockly.Flyout.prototype.position = function() {
     this.horizontalLayout_ ? this.height_ + this.verticalOffset_ : metrics.viewHeight);
 
   var x = metrics.absoluteLeft;
-  if (this.atRight_) {
+  if (this.atRight) {
     x += metrics.viewWidth;
     x -= this.width_;
   }
@@ -337,20 +341,20 @@ Blockly.Flyout.prototype.position = function() {
  */
 Blockly.Flyout.prototype.setBackgroundPath_ = function(width, height) {
   // Decide whether to start on the left or right.
-  var path = ['M ' + (this.atRight_ ? this.width_ : 0) + ',0'];
+  var path = ['M ' + (this.atRight ? this.width_ : 0) + ',0'];
   // Top.
   path.push('h', width);
   // Rounded corner.
   path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0,
-      this.atRight_ ? 0 : 1,
-      this.atRight_ ? -this.CORNER_RADIUS : this.CORNER_RADIUS,
+      this.atRight ? 0 : 1,
+      this.atRight ? -this.CORNER_RADIUS : this.CORNER_RADIUS,
       this.CORNER_RADIUS);
   // Side closest to workspace.
   path.push('v', Math.max(0, height - this.CORNER_RADIUS * 2));
   // Rounded corner.
   path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0,
-      this.atRight_ ? 0 : 1,
-      this.atRight_ ? this.CORNER_RADIUS : -this.CORNER_RADIUS,
+      this.atRight ? 0 : 1,
+      this.atRight ? this.CORNER_RADIUS : -this.CORNER_RADIUS,
       this.CORNER_RADIUS);
   // Bottom.
   path.push('h', -width);
@@ -469,7 +473,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
   // Lay out the blocks.
   var cursorX = margin / this.workspace_.scale + Blockly.BlockSvg.TAB_WIDTH;
-  if (this.atRight_) {
+  if (this.RTL) {
     cursorX = this.width_ - cursorX;
   }
   var cursorY = margin;
@@ -486,7 +490,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     var blockHW = block.getHeightWidth();
     block.moveBy(cursorX, cursorY);
     if (this.horizontalLayout_) {
-      if (this.atRight_) {
+      if (this.atRight) {
         cursorX -= (blockHW.width + gaps[i]);
       } else {
         cursorX += blockHW.width + gaps[i];
@@ -695,7 +699,7 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
     }
     var xyOld = Blockly.getSvgXY_(svgRootOld, workspace);
     // Scale the scroll (getSvgXY_ did not do this).
-    if (this.atRight_) {
+    if (this.atRight) {
       var width = workspace.getMetrics().viewWidth - flyout.width_;
       xyOld.x += width / workspace.scale - width;
     } else {
@@ -761,7 +765,7 @@ Blockly.Flyout.prototype.getRect = function() {
     return new goog.math.Rect(-BIG_NUM, y, BIG_NUM * 2,
       BIG_NUM + this.height_ * scale);
   } else {
-    if (!this.atRight_) {
+    if (!this.atRight) {
       x -= BIG_NUM;
     }
     return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width_ * scale,
@@ -822,7 +826,7 @@ Blockly.Flyout.prototype.reflowHorizontal = function() {
         var blockXY = block.getRelativeToSurfaceXY();
         block.flyoutRect_.setAttribute('y', blockXY.y);
         block.flyoutRect_.setAttribute('x',
-            this.atRight_? blockXY.x - blockHW.width + tab : blockXY.x - tab);
+            this.atRight? blockXY.x - blockHW.width + tab : blockXY.x - tab);
       }
     }
     // Record the width for .getMetrics_ and .position.
@@ -852,7 +856,7 @@ Blockly.Flyout.prototype.reflowVertical = function() {
   if (this.width_ != flyoutWidth) {
     for (var x = 0, block; block = blocks[x]; x++) {
       var blockHW = block.getHeightWidth();
-      if (this.atRight_) {
+      if (this.RTL) {
         // With the flyoutWidth known, right-align the blocks.
         var oldX = block.getRelativeToSurfaceXY().x;
         var dx = flyoutWidth - margin;
@@ -867,7 +871,7 @@ Blockly.Flyout.prototype.reflowVertical = function() {
         var tab = block.outputConnection ? Blockly.BlockSvg.TAB_WIDTH : 0;
         var blockXY = block.getRelativeToSurfaceXY();
         block.flyoutRect_.setAttribute('x',
-            this.atRight_ ? blockXY.x - blockHW.width + tab : blockXY.x - tab);
+            this.RTL ? blockXY.x - blockHW.width + tab : blockXY.x - tab);
         block.flyoutRect_.setAttribute('y', blockXY.y);
       }
     }

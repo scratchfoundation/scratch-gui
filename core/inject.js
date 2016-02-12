@@ -460,7 +460,7 @@ Blockly.init_ = function(mainWorkspace) {
       mainWorkspace.flyout_.show(options.languageTree.childNodes);
       // Translate the workspace sideways to avoid the fixed flyout.
       mainWorkspace.scrollX = mainWorkspace.flyout_.width_;
-      if (options.RTL) {
+      if (mainWorkspace.flyout_.atRight) {
         mainWorkspace.scrollX *= -1;
       }
       var translation = 'translate(' + mainWorkspace.scrollX + ',0)';

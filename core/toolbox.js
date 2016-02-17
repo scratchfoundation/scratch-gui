@@ -71,12 +71,12 @@ Blockly.Toolbox = function(workspace) {
 
   if (this.horizontalLayout_) {
     this.CONFIG_['cssTreeRow'] =
-      this.CONFIG_['cssTreeRow']
-      + (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
+        this.CONFIG_['cssTreeRow'] +
+        (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
 
     Blockly.Toolbox.TreeSeparator.CONFIG_['cssTreeRow'] =
-      'blocklyTreeSeparatorHorizontal'
-      + (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
+        'blocklyTreeSeparatorHorizontal' +
+        (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
     this.CONFIG_['cssTreeIcon'] = '';
   }
 
@@ -205,7 +205,20 @@ Blockly.Toolbox.prototype.position = function() {
   var svg = this.workspace_.getParentSvg();
   var svgPosition = goog.style.getPageOffset(svg);
   var svgSize = Blockly.svgSize(svg);
-  if (!this.horizontalLayout_) {
+  if (this.horizontalLayout_) {
+    treeDiv.style.left = svgPosition.x + 'px';
+    treeDiv.style.height = 'auto';
+    treeDiv.style.width = svgSize.width + 'px';
+    this.height = treeDiv.offsetHeight;
+    if (this.atTop_) {  // Top
+      treeDiv.style.top = svgPosition.y + 'px';
+      this.flyout_.setVerticalOffset(treeDiv.offsetHeight);
+    } else {  // Bottom
+      var topOfToolbox = svgPosition.y + svgSize.height;
+      treeDiv.style.top = topOfToolbox + 'px';
+      this.flyout_.setVerticalOffset(topOfToolbox);
+    }
+  } else {
     if (this.atRight) {  // Right
       treeDiv.style.left =
           (svgPosition.x + svgSize.width - treeDiv.offsetWidth) + 'px';
@@ -219,13 +232,6 @@ Blockly.Toolbox.prototype.position = function() {
       // For some reason the LTR toolbox now reports as 1px too wide.
       this.width -= 1;
     }
-  } else {  // Top
-    treeDiv.style.left = svgPosition.x + 'px';
-    treeDiv.style.top = svgPosition.y + 'px';
-    treeDiv.style.height = 'auto';
-    treeDiv.style.width = svgSize.width + 'px';
-    this.flyout_.setVerticalOffset(treeDiv.offsetHeight);
-    this.height = treeDiv.offsetHeight;
   }
   this.flyout_.position();
 };
@@ -367,7 +373,11 @@ Blockly.Toolbox.prototype.getRect = function() {
     return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width, 2 * BIG_NUM);
   } else {
     // Don't care about RTL
-    return new goog.math.Rect(-BIG_NUM, -BIG_NUM, 2 * BIG_NUM, BIG_NUM + this.height);
+    if (this.atTop_) {
+      return new goog.math.Rect(-BIG_NUM, -BIG_NUM, 2 * BIG_NUM, BIG_NUM + this.height);
+    } else {
+      return new goog.math.Rect(0, svgSize.height,  2 * BIG_NUM, BIG_NUM + this.height);
+    }
   }
 };
 

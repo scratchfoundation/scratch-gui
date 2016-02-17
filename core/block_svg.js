@@ -1390,7 +1390,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
   }
 
   for (var i = 0, child; child = this.childBlocks_[i]; i++) {
-    if (child.isEditable()) {
+    if (child.isShadow()) {
       metrics.valueInput = child;
     }
   }
@@ -1459,7 +1459,6 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
     var input = metrics.valueInput.getSvgRoot();
     var xOffset = (metrics.bayWidth ? metrics.width - metrics.bayWidth - Blockly.BlockSvg.NOTCH_WIDTH*3 : metrics.width) / 2;
     var transformation = 'translate(' +
-      // (metrics.bayWidth + (metrics.width - metrics.bayWidth)/2 - metrics.valueInput.width/4) + ',' +
       (metrics.width - xOffset - metrics.valueInput.width/2) + ',' +
       (metrics.height - metrics.valueInput.height/4) + ')';
     input.setAttribute('transform', transformation);

@@ -177,19 +177,16 @@ Blockly.fireUiEventNow = function(node, eventName) {
       list.splice(i, 1);
     }
   }
-  // Fire the event in a browser-compatible way.
-  if (document.createEvent) {
+  // Create a UI event in a browser-compatible way.
+  if (typeof UIEvent == 'function') {
     // W3
-    var evt = document.createEvent('UIEvents');
-    evt.initEvent(eventName, true, true);  // event type, bubbling, cancelable
-    node.dispatchEvent(evt);
-  } else if (document.createEventObject) {
-    // MSIE
-    var evt = document.createEventObject();
-    node.fireEvent('on' + eventName, evt);
+    var evt = new UIEvent(eventName, {});
   } else {
-    throw 'FireEvent: No event creation mechanism.';
+    // MSIE
+    var evt = document.createEvent('UIEvent');
+    evt.initUIEvent(eventName, false, false, window, 0);
   }
+  node.dispatchEvent(evt);
 };
 
 /**
@@ -554,7 +551,7 @@ Blockly.tokenizeInterpolation = function(message) {
 
 /**
  * Generate a unique ID.  This should be globally unique.
- * 88 characters ^ 20 length ≈ 129 bits (one bit better than a UUID).
+ * 87 characters ^ 20 length > 128 bits (better than a UUID).
  * @return {string}
  */
 Blockly.genUid = function() {
@@ -579,6 +576,7 @@ Blockly.genUid = function() {
 
 /**
  * Determine if window.crypto or global.crypto exists.
+ * @this {Object}
  * @type {=RandomSource}
  * @private
  */
@@ -587,7 +585,8 @@ Blockly.genUid.crypto_ = this.crypto;
 /**
  * Legal characters for the unique ID.
  * Should be all on a US keyboard.  No XML special characters or control codes.
+ * Removed $ due to issue 251.
  * @private
  */
-Blockly.genUid.soup_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
+Blockly.genUid.soup_ = '!#%()*+,-./:;=?@[]^_`{|}~' +
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

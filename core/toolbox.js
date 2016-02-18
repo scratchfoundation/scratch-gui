@@ -255,6 +255,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
   rootOut.blocks = [];
   var hasColours = false;
   function syncTrees(treeIn, treeOut, iconic, pathToMedia) {
+    var lastElement = null;
     for (var i = 0, childIn; childIn = treeIn.childNodes[i]; i++) {
       if (!childIn.tagName) {
         // Skip over text.
@@ -300,17 +301,37 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
           } else {
             childOut.setExpanded(false);
           }
+          lastElement = childIn;
           break;
         case 'SEP':
-          if (that.horizontalLayout_) {
-            treeOut.add(new Blockly.Toolbox.TreeSeparator());
-          } else {
-            treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(), 0);
+          if (lastElement) {
+            if (lastElement.tagName.toUpperCase() == 'CATEGORY') {
+              // Separator between two categories.
+              // <sep></sep>
+              if (that.horizontalLayout_) {
+                treeOut.add(new Blockly.Toolbox.TreeSeparator());
+              } else {
+                treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(), 0);
+              }
+            } else {
+              // Change the gap between two blocks.
+              // <sep gap="36"></sep>
+              // The default gap is 24, can be set larger or smaller.
+              // Note that a deprecated method is to add a gap to a block.
+              // <block type="math_arithmetic" gap="8"></block>
+              var newGap = parseFloat(childIn.getAttribute('gap'));
+              if (!isNaN(newGap)) {
+                var oldGap = parseFloat(lastElement.getAttribute('gap'));
+                var gap = isNaN(oldGap) ? newGap : oldGap + newGap;
+                lastElement.setAttribute('gap', gap);
+              }
+            }
           }
           break;
         case 'BLOCK':
         case 'SHADOW':
           treeOut.blocks.push(childIn);
+          lastElement = childIn;
           break;
       }
     }
@@ -364,7 +385,7 @@ Blockly.Toolbox.prototype.clearSelection = function() {
  * Return the deletion rectangle for this toolbar.
  * @return {goog.math.Rect} Rectangle in which to delete.
  */
-Blockly.Toolbox.prototype.getRect = function() {
+Blockly.Toolbox.prototype.getClientRect = function() {
   // BIG_NUM is offscreen padding so that blocks dragged beyond the toolbox
   // area are still deleted.  Must be smaller than Infinity, but larger than
   // the largest screen size.

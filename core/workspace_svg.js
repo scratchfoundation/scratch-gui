@@ -59,13 +59,6 @@ Blockly.WorkspaceSvg = function(options) {
    * @const
    */
   this.SOUNDS_ = Object.create(null);
-
-  /**
-   * Opaque data that can be passed to Blockly.unbindEvent_.
-   * @type {!Array.<!Array>}
-   * @private
-   */
-  this.eventWrappers_ = [];
 };
 goog.inherits(Blockly.WorkspaceSvg, Blockly.Workspace);
 
@@ -212,7 +205,6 @@ Blockly.WorkspaceSvg.prototype.createDom = function(opt_backgroundClass) {
 Blockly.WorkspaceSvg.prototype.dispose = function() {
   // Stop rerendering.
   this.rendered = false;
-  Blockly.unbindEvent_(this.eventWrappers_);
   Blockly.WorkspaceSvg.superClass_.dispose.call(this);
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
@@ -466,19 +458,6 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
 };
 
 /**
- * Fire a change event for this workspace.  Changes include new block, dropdown
- * edits, mutations, connections, etc.  Groups of simultaneous changes (e.g.
- * a tree of blocks being deleted) are merged into one event.
- * Applications may hook workspace changes by listening for
- * 'blocklyWorkspaceChange' on workspace.getCanvas().
- */
-Blockly.WorkspaceSvg.prototype.fireChangeEvent = function() {
-  if (this.rendered && this.svgBlockCanvas_) {
-    Blockly.fireUiEvent(this.svgBlockCanvas_, 'blocklyWorkspaceChange');
-  }
-};
-
-/**
  * Paste the provided block onto the workspace.
  * @param {!Element} xmlBlock XML block element.
  */
@@ -488,6 +467,7 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
     return;
   }
   Blockly.terminateDrag_();  // Dragging while pasting?  No.
+  Blockly.Events.disable();
   var block = Blockly.Xml.domToBlock(this, xmlBlock);
   // Move the duplicate to original position.
   var blockX = parseInt(xmlBlock.getAttribute('x'), 10);
@@ -532,6 +512,10 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
     } while (collide);
     block.moveBy(blockX, blockY);
   }
+  Blockly.Events.enable();
+  if (Blockly.Events.isEnabled() && !block.isShadow()) {
+    Blockly.Events.fire(new Blockly.Events.Create(block));
+  }
   block.select();
 };
 
@@ -540,14 +524,14 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
  */
 Blockly.WorkspaceSvg.prototype.recordDeleteAreas = function() {
   if (this.trashcan) {
-    this.deleteAreaTrash_ = this.trashcan.getRect();
+    this.deleteAreaTrash_ = this.trashcan.getClientRect();
   } else {
     this.deleteAreaTrash_ = null;
   }
   if (this.flyout_) {
-    this.deleteAreaToolbox_ = this.flyout_.getRect();
+    this.deleteAreaToolbox_ = this.flyout_.getClientRect();
   } else if (this.toolbox_) {
-    this.deleteAreaToolbox_ = this.toolbox_.getRect();
+    this.deleteAreaToolbox_ = this.toolbox_.getClientRect();
   } else {
     this.deleteAreaToolbox_ = null;
   }
@@ -561,8 +545,7 @@ Blockly.WorkspaceSvg.prototype.recordDeleteAreas = function() {
  */
 Blockly.WorkspaceSvg.prototype.isDeleteArea = function(e) {
   var isDelete = false;
-  var mouseXY = Blockly.mouseToSvg(e, Blockly.mainWorkspace.getParentSvg());
-  var xy = new goog.math.Coordinate(mouseXY.x, mouseXY.y);
+  var xy = new goog.math.Coordinate(e.clientX, e.clientY);
   if (this.deleteAreaTrash_) {
     if (this.deleteAreaTrash_.contains(xy)) {
       this.trashcan.setOpen_(true);
@@ -621,11 +604,13 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
     // See comment in inject.js Blockly.init_ as to why mouseup events are
     // bound to the document instead of the SVG's surface.
     if ('mouseup' in Blockly.bindEvent_.TOUCH_MAP) {
-      Blockly.onTouchUpWrapper_ =
-          Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
+      Blockly.onTouchUpWrapper_ = Blockly.onTouchUpWrapper_ || [];
+      Blockly.onTouchUpWrapper_ = Blockly.onTouchUpWrapper_.concat(
+          Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_));
     }
-    Blockly.onMouseMoveWrapper_ =
-        Blockly.bindEvent_(document, 'mousemove', null, Blockly.onMouseMove_);
+    Blockly.onMouseMoveWrapper_ = Blockly.onMouseMoveWrapper_ || [];
+    Blockly.onMouseMoveWrapper_ = Blockly.onMouseMoveWrapper_.concat(
+        Blockly.bindEvent_(document, 'mousemove', null, Blockly.onMouseMove_));
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
@@ -692,7 +677,6 @@ Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
   }
   // Fire an event to allow scrollbars to resize.
   Blockly.fireUiEvent(window, 'resize');
-  this.fireChangeEvent();
 };
 
 /**
@@ -898,13 +882,12 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
     if (this.options.languageTree) {
       throw 'Can\'t nullify an existing toolbox.';
     }
-    // No change (null to null).
-    return;
+    return;  // No change (null to null).
   }
   if (!this.options.languageTree) {
     throw 'Existing toolbox is null.  Can\'t create new toolbox.';
   }
-  if (this.options.hasCategories) {
+  if (tree.getElementsByTagName('category').length) {
     if (!this.toolbox_) {
       throw 'Existing toolbox has no categories.  Can\'t change mode.';
     }
@@ -917,31 +900,6 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
     }
     this.options.languageTree = tree;
     this.flyout_.show(tree.childNodes);
-  }
-};
-
-/**
- * When something in this workspace changes, call a function.
- * @param {!Function} func Function to call.
- * @return {!Array.<!Array>} Opaque data that can be passed to
- *     removeChangeListener.
- */
-Blockly.WorkspaceSvg.prototype.addChangeListener = function(func) {
-  var wrapper = Blockly.bindEvent_(this.getCanvas(),
-      'blocklyWorkspaceChange', null, func);
-  Array.prototype.push.apply(this.eventWrappers_, wrapper);
-  return wrapper;
-};
-
-/**
- * Stop listening for this workspace's changes.
- * @param {!Array.<!Array>} bindData Opaque data from addChangeListener.
- */
-Blockly.WorkspaceSvg.prototype.removeChangeListener = function(bindData) {
-  Blockly.unbindEvent_(bindData);
-  var i = this.eventWrappers_.indexOf(bindData);
-  if (i != -1) {
-    this.eventWrappers_.splice(i, 1);
   }
 };
 
@@ -1016,6 +974,46 @@ Blockly.WorkspaceSvg.prototype.zoomCenter = function(type) {
 };
 
 /**
+ * Zoom the blocks to fit in the workspace if possible.
+ */
+Blockly.WorkspaceSvg.prototype.zoomToFit = function() {
+  var workspaceBBox = this.svgBackground_.getBBox();
+  var blocksBBox = this.svgBlockCanvas_.getBBox();
+  var workspaceWidth = workspaceBBox.width - this.toolbox_.width -
+      Blockly.Scrollbar.scrollbarThickness;
+  var workspaceHeight = workspaceBBox.height -
+      Blockly.Scrollbar.scrollbarThickness;
+  var blocksWidth = blocksBBox.width;
+  var blocksHeight = blocksBBox.height;
+  if (blocksWidth == 0) {
+    return;  // Prevents zooming to infinity.
+  }
+  var ratioX = workspaceWidth / blocksWidth;
+  var ratioY = workspaceHeight / blocksHeight;
+  var ratio = Math.min(ratioX, ratioY);
+  var speed = this.options.zoomOptions.scaleSpeed;
+  var numZooms = Math.floor(Math.log(ratio) / Math.log(speed));
+  var newScale = Math.pow(speed, numZooms);
+  if (newScale > this.options.zoomOptions.maxScale) {
+    newScale = this.options.zoomOptions.maxScale;
+  } else if (newScale < this.options.zoomOptions.minScale) {
+    newScale = this.options.zoomOptions.minScale;
+  }
+  this.scale = newScale;
+  this.updateGridPattern_();
+  this.scrollbar.resize();
+  Blockly.hideChaff(false);
+  if (this.flyout_) {
+    // No toolbox, resize flyout.
+    this.flyout_.reflow();
+  }
+  // Center the workspace.
+  var metrics = this.getMetrics();
+  this.scrollbar.set((metrics.contentWidth - metrics.viewWidth) / 2,
+      (metrics.contentHeight - metrics.viewHeight) / 2);
+};
+
+/**
  * Reset zooming and dragging.
  * @param {!Event} e Mouse down event.
  */
@@ -1082,7 +1080,3 @@ Blockly.WorkspaceSvg.prototype.updateGridPattern_ = function() {
 // Export symbols that would otherwise be renamed by Closure compiler.
 Blockly.WorkspaceSvg.prototype['setVisible'] =
     Blockly.WorkspaceSvg.prototype.setVisible;
-Blockly.WorkspaceSvg.prototype['addChangeListener'] =
-    Blockly.WorkspaceSvg.prototype.addChangeListener;
-Blockly.WorkspaceSvg.prototype['removeChangeListener'] =
-    Blockly.WorkspaceSvg.prototype.removeChangeListener;

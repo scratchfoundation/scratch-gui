@@ -83,7 +83,8 @@ class Gen_uncompressed(threading.Thread):
     f = open(target_filename, 'w')
     f.write(HEADER)
     f.write("""
-var isNodeJS = !!(typeof module !== 'undefined' && module.exports);
+var isNodeJS = !!(typeof module !== 'undefined' && module.exports &&
+                  typeof window === 'undefined');
 
 if (isNodeJS) {
   var window = {};
@@ -441,7 +442,7 @@ def exclude_vertical(item):
   return not item.endswith("block_vertical_scratch.js")
 
 def exclude_horizontal(item):
-  return not item.endswith("block_horizontal_scratch.js")
+  return not item.endswith("block_svg.js")
 
 if __name__ == "__main__":
   try:

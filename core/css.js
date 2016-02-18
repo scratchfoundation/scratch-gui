@@ -415,7 +415,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyHorizontalTreeRtl {',
     'float: right;',
-    'margin: 1px 5px 0px 8px;',
+    'margin: 1px 0px 8px 5px;',
   '}',
 
   '.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {',

@@ -24,7 +24,7 @@
  */
 'use strict';
 
-// goog.provide('Blockly.BlockSvg');
+goog.provide('Blockly.BlockSvg');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.ContextMenu');

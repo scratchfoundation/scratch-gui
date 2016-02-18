@@ -442,7 +442,7 @@ def exclude_vertical(item):
   return not item.endswith("block_vertical_scratch.js")
 
 def exclude_horizontal(item):
-  return not item.endswith("block_horizontal_scratch.js")
+  return not item.endswith("block_svg.js")
 
 if __name__ == "__main__":
   try:

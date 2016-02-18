@@ -90,6 +90,13 @@ Blockly.Flyout = function(workspaceOptions) {
    * @private
    */
   this.listeners_ = [];
+
+  /**
+   * List of blocks that should always be disabled.
+   * @type {!Array.<!Blockly.Block>}
+   * @private
+   */
+  this.permanentlyDisabled_ = [];
 };
 
 /**
@@ -168,9 +175,8 @@ Blockly.Flyout.prototype.init = function(targetWorkspace) {
   Array.prototype.push.apply(this.eventWrappers_,
       Blockly.bindEvent_(this.svgGroup_, 'wheel', this, this.wheel_));
   if (!this.autoClose) {
-    Array.prototype.push.apply(this.eventWrappers_,
-        Blockly.bindEvent_(this.targetWorkspace_.getCanvas(),
-        'blocklyWorkspaceChange', this, this.filterForCapacity_));
+    this.filterWrapper_ = this.filterForCapacity_.bind(this);
+    this.targetWorkspace_.addChangeListener(this.filterWrapper_);
   }
   // Dragging the flyout up and down (or left and right).
   Array.prototype.push.apply(this.eventWrappers_,
@@ -184,6 +190,10 @@ Blockly.Flyout.prototype.init = function(targetWorkspace) {
 Blockly.Flyout.prototype.dispose = function() {
   this.hide();
   Blockly.unbindEvent_(this.eventWrappers_);
+  if (this.filterWrapper_) {
+    this.targetWorkspace_.removeChangeListener(this.filterWrapper_);
+    this.filterWrapper_ = null;
+  }
   if (this.scrollbar_) {
     this.scrollbar_.dispose();
     this.scrollbar_ = null;
@@ -436,7 +446,7 @@ Blockly.Flyout.prototype.hide = function() {
   }
   this.listeners_.length = 0;
   if (this.reflowWrapper_) {
-    Blockly.unbindEvent_(this.reflowWrapper_);
+    this.workspace_.removeChangeListener(this.reflowWrapper_);
     this.reflowWrapper_ = null;
   }
   // Do NOT delete the blocks here.  Wait until Flyout.show.
@@ -477,13 +487,19 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
+  this.permanentlyDisabled_.length = 0;
   for (var i = 0, xml; xml = xmlList[i]; i++) {
     if (xml.tagName && xml.tagName.toUpperCase() == 'BLOCK') {
       var block = Blockly.Xml.domToBlock(
           /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
+      if (block.disabled) {
+        // Record blocks that were initially disabled.
+        // Do not enable these blocks as a result of capacity filtering.
+        this.permanentlyDisabled_.push(block);
+      }
       blocks.push(block);
       var gap = parseInt(xml.getAttribute('gap'), 10);
-      gaps.push(gap || margin * 3);
+      gaps.push(isNaN(gap) ? margin * 3 : gap);
     }
   }
   // The blocks need to be visible in order to be laid out and measured correctly, but we don't
@@ -544,9 +560,10 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
   this.filterForCapacity_();
 
-  this.reflowWrapper_ = Blockly.bindEvent_(this.workspace_.getCanvas(),
-      'blocklyWorkspaceChange', this, this.reflow);
-  this.workspace_.fireChangeEvent();
+  // Fire a resize event to update the flyout's scrollbar.
+  Blockly.fireUiEventNow(window, 'resize');
+  this.reflowWrapper_ = this.reflow.bind(this);
+  this.workspace_.addChangeListener(this.reflowWrapper_);
 };
 
 /**
@@ -703,8 +720,9 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
       // Beyond capacity.
       return;
     }
+    Blockly.Events.disable();
     // Create the new block by cloning the block in the flyout (via XML).
-    var xml = Blockly.Xml.blockToDom_(originBlock);
+    var xml = Blockly.Xml.blockToDom(originBlock);
     var block = Blockly.Xml.domToBlock(workspace, xml);
     // Place it in the same spot as the flyout copy.
     var svgRootOld = originBlock.getSvgRoot();
@@ -734,6 +752,10 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
       xyNew.x += workspace.toolbox_.width / workspace.scale;
     }
     block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
+    Blockly.Events.enable();
+    if (Blockly.Events.isEnabled() && !block.isShadow()) {
+      Blockly.Events.fire(new Blockly.Events.Create(block));
+    }
     if (flyout.autoClose) {
       flyout.hide();
     } else {
@@ -753,9 +775,9 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
   var remainingCapacity = this.targetWorkspace_.remainingCapacity();
   var blocks = this.workspace_.getTopBlocks(false);
   for (var i = 0, block; block = blocks[i]; i++) {
-    var allBlocks = block.getDescendants();
-    if (allBlocks.length > remainingCapacity) {
-      block.setDisabled(true);
+    if (this.permanentlyDisabled_.indexOf(block) == -1) {
+      var allBlocks = block.getDescendants();
+      block.setDisabled(allBlocks.length > remainingCapacity);
     }
   }
 };
@@ -764,7 +786,8 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
  * Return the deletion rectangle for this flyout.
  * @return {goog.math.Rect} Rectangle in which to delete.
  */
-Blockly.Flyout.prototype.getRect = function() {
+Blockly.Flyout.prototype.getClientRect = function() {
+  var flyoutRect = this.svgGroup_.getBoundingClientRect();
   // BIG_NUM is offscreen padding so that blocks dragged beyond the shown flyout
   // area are still deleted.  Must be larger than the largest screen size,
   // but be smaller than half Number.MAX_SAFE_INTEGER (not available on IE).

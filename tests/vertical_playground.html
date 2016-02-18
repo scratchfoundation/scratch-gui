@@ -43,6 +43,15 @@ function start() {
       scaleSpeed: 1.1
     },
   });
+  // Restore previously displayed text.
+  var text = sessionStorage.getItem('textarea');
+  if (text) {
+    document.getElementById('importExport').value = text;
+  }
+  taChange();
+  // Restore event logging state.
+  var state = sessionStorage.getItem('logEvents');
+  logEvents(Boolean(state));
 }
 
 function toXml() {
@@ -51,18 +60,51 @@ function toXml() {
   output.value = Blockly.Xml.domToPrettyText(xml);
   output.focus();
   output.select();
+  taChange();
 }
 
 function fromXml() {
   var input = document.getElementById('importExport');
   var xml = Blockly.Xml.textToDom(input.value);
   Blockly.Xml.domToWorkspace(workspace, xml);
+  taChange();
 }
 
 function toCode(lang) {
   var output = document.getElementById('importExport');
   output.value = Blockly[lang].workspaceToCode(workspace);
+  taChange();
 }
+
+// Disable the "Import from XML" button if the XML is invalid.
+// Preserve text between page reloads.
+function taChange() {
+  var textarea = document.getElementById('importExport');
+  sessionStorage.setItem('textarea', textarea.value)
+  var valid = true;
+  try {
+    Blockly.Xml.textToDom(textarea.value);
+  } catch (e) {
+    valid = false;
+  }
+  document.getElementById('import').disabled = !valid;
+}
+
+function logEvents(state) {
+  var checkbox = document.getElementById('logCheck');
+  checkbox.checked = state;
+  sessionStorage.setItem('logEvents', Number(state));
+  if (state) {
+    workspace.addChangeListener(logger);
+  } else {
+    workspace.removeChangeListener(logger);
+  }
+}
+
+function logger(e) {
+  console.log(e);
+}
+
 </script>
 
 <style>
@@ -143,12 +185,19 @@ h1 {
   <p>
     <input type="button" value="Export to XML" onclick="toXml()">
     &nbsp;
-    <input type="button" value="Import from XML" onclick="fromXml()">
+    <input type="button" value="Import from XML" onclick="fromXml()" id="import">
     <br>
     <input type="button" value="To JavaScript" onclick="toCode('JavaScript')">
     <br>
-    <textarea id="importExport" style="width: 26%; height: 12em"></textarea>
+    <textarea id="importExport" style="width: 26%; height: 12em"
+      onchange="taChange();" onkeyup="taChange()"></textarea>
   </p>
   <hr>
+
+  <p>
+    Log events: &nbsp;
+    <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
+  </p>
+
 </body>
 </html>

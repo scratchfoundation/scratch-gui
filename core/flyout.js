@@ -57,11 +57,10 @@ Blockly.Flyout = function(workspaceOptions) {
   this.horizontalLayout_ = workspaceOptions.horizontalLayout;
 
   /**
-   * Flyout should be laid out horizontally vs vertically.
-   * @type {boolean}
+   * Position of the toolbox and flyout relative to the workspace.
+   * @type {number}
    */
-  this.atRight = !this.horizontalLayout_ && (this.RTL == workspaceOptions.toolboxAtStart);
-  this.atTop_ = this.horizontalLayout_ && workspaceOptions.toolboxAtStart;
+  this.toolboxPosition_ = workspaceOptions.toolboxPosition;
 
   /**
    * @type {!Blockly.Workspace}
@@ -233,7 +232,7 @@ Blockly.Flyout.prototype.getMetrics_ = function() {
 
   var absoluteTop = this.verticalOffset_ + this.SCROLLBAR_PADDING
   if (this.horizontalLayout_) {
-    if (!this.atTop_) {
+    if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_BOTTOM) {
       absoluteTop = 0;
     }
     var viewHeight = this.height_;
@@ -252,7 +251,6 @@ Blockly.Flyout.prototype.getMetrics_ = function() {
     viewLeft: -this.workspace_.scrollX,
     contentTop: optionBox.y,
     contentLeft: 0,
-    // TODO: Fenichel: this is where atTop and atBottom matter
     absoluteTop: absoluteTop,
     absoluteLeft: this.SCROLLBAR_PADDING
   };
@@ -276,7 +274,7 @@ Blockly.Flyout.prototype.setMetrics_ = function(xyRatio) {
     this.workspace_.scrollY =
         -metrics.contentHeight * xyRatio.y - metrics.contentTop;
   } else if (this.horizontalLayout_ && goog.isNumber(xyRatio.x)) {
-    if (this.atRight) {
+    if (this.RTL) {
       this.workspace_.scrollX =
           -metrics.contentWidth * xyRatio.x + metrics.contentLeft;
     } else {
@@ -284,7 +282,10 @@ Blockly.Flyout.prototype.setMetrics_ = function(xyRatio) {
           -metrics.contentWidth * xyRatio.x - metrics.contentLeft;
     }
   }
-  this.workspace_.translate(this.workspace_.scrollX + metrics.absoluteLeft,
+  var translateX = this.horizontalLayout_ && this.RTL ?
+      metrics.absoluteLeft + metrics.viewWidth - this.workspace_.scrollX :
+      this.workspace_.scrollX + metrics.absoluteLeft;
+  this.workspace_.translate(translateX,
       this.workspace_.scrollY + metrics.absoluteTop);
 };
 
@@ -306,7 +307,7 @@ Blockly.Flyout.prototype.position = function() {
   }
   var edgeWidth = this.horizontalLayout_ ? metrics.viewWidth : this.width_;
   edgeWidth -= this.CORNER_RADIUS;
-  if (this.atRight) {
+  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT) {
     edgeWidth *= -1;
   }
 
@@ -314,13 +315,13 @@ Blockly.Flyout.prototype.position = function() {
     this.horizontalLayout_ ? this.height_ + this.verticalOffset_ : metrics.viewHeight);
 
   var x = metrics.absoluteLeft;
-  if (this.atRight) {
+  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT) {
     x += metrics.viewWidth;
     x -= this.width_;
   }
 
   var y = metrics.absoluteTop;
-  if (this.horizontalLayout_ && !this.atTop_) {
+  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_BOTTOM) {
     y += metrics.viewHeight;
     y -= this.height_;
   }
@@ -355,21 +356,22 @@ Blockly.Flyout.prototype.position = function() {
  * @private
  */
 Blockly.Flyout.prototype.setBackgroundPath_ = function(width, height) {
+  var atRight = this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT;
   // Decide whether to start on the left or right.
-  var path = ['M ' + (this.atRight ? this.width_ : 0) + ',0'];
+  var path = ['M ' + (atRight ? this.width_ : 0) + ',0'];
   // Top.
   path.push('h', width);
   // Rounded corner.
   path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0,
-      this.atRight ? 0 : 1,
-      this.atRight ? -this.CORNER_RADIUS : this.CORNER_RADIUS,
+      atRight ? 0 : 1,
+      atRight ? -this.CORNER_RADIUS : this.CORNER_RADIUS,
       this.CORNER_RADIUS);
   // Side closest to workspace.
   path.push('v', Math.max(0, height - this.CORNER_RADIUS * 2));
   // Rounded corner.
   path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0,
-      this.atRight ? 0 : 1,
-      this.atRight ? this.CORNER_RADIUS : -this.CORNER_RADIUS,
+      atRight ? 0 : 1,
+      atRight ? this.CORNER_RADIUS : -this.CORNER_RADIUS,
       this.CORNER_RADIUS);
   // Bottom.
   path.push('h', -width);
@@ -504,7 +506,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     block.render();
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();
-    block.moveBy(cursorX, cursorY);
+    block.moveBy((this.horizontalLayout_ && this.RTL) ? this.width_ - cursorX : cursorX, cursorY);
     if (this.horizontalLayout_) {
       cursorX += blockHW.width + gaps[i];
     } else {
@@ -711,7 +713,7 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
     }
     var xyOld = Blockly.getSvgXY_(svgRootOld, workspace);
     // Scale the scroll (getSvgXY_ did not do this).
-    if (flyout.atRight) {
+    if (flyout.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT) {
       var width = workspace.getMetrics().viewWidth - flyout.width_;
       xyOld.x += width / workspace.scale - width;
     } else {
@@ -772,19 +774,17 @@ Blockly.Flyout.prototype.getRect = function() {
   // Fix scale if nested in zoomed workspace.
   var scale = this.targetWorkspace_ == mainWorkspace ? 1 : mainWorkspace.scale;
   var x = Blockly.getSvgXY_(this.svgGroup_, mainWorkspace).x;
-  if (this.horizontalLayout_) {
-    var y = Blockly.getSvgXY_(this.svgGroup_, mainWorkspace).y;
-    if (this.atTop_) {
-      return new goog.math.Rect(-BIG_NUM, y - BIG_NUM, BIG_NUM * 2,
-        BIG_NUM + this.height_ * scale);
-    } else {  // Bottom
-      return new goog.math.Rect(-BIG_NUM, y + this.verticalOffset_, BIG_NUM * 2,
-        BIG_NUM + this.height_ * scale);
-    }
-  } else {
-    if (!this.atRight) {
-      x -= BIG_NUM;
-    }
+  var y = Blockly.getSvgXY_(this.svgGroup_, mainWorkspace).y;
+  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_TOP) {
+    return new goog.math.Rect(-BIG_NUM, y - BIG_NUM, BIG_NUM * 2,
+      BIG_NUM + this.height_ * scale);
+  } else if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_BOTTOM) {
+    return new goog.math.Rect(-BIG_NUM, y + this.verticalOffset_, BIG_NUM * 2,
+      BIG_NUM + this.height_ * scale);
+  } else if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_LEFT) {
+    return new goog.math.Rect(x - BIG_NUM, -BIG_NUM, BIG_NUM + this.width_ * scale,
+      BIG_NUM * 2);
+  } else {  // Right
     return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width_ * scale,
       BIG_NUM * 2);
   }

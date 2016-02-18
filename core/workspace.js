@@ -45,8 +45,6 @@ Blockly.Workspace = function(opt_options) {
   this.RTL = !!this.options.RTL;
   /** @type {boolean} */
   this.horizontalLayout = !!this.options.horizontalLayout;
-  /** @type {boolean} */
-  this.toolboxAtStart = !!this.options.toolboxAtStart;
   /** @type {!Array.<!Blockly.Block>} */
   this.topBlocks_ = [];
 };

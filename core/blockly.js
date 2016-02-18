@@ -137,6 +137,30 @@ Blockly.ALIGN_CENTRE = 0;
 Blockly.ALIGN_RIGHT = 1;
 
 /**
+ * ENUM for toolbox and flyout at top of screen.
+ * @const
+ */
+Blockly.TOOLBOX_AT_TOP = 0;
+
+/**
+ * ENUM for toolbox and flyout at bottom of screen.
+ * @const
+ */
+Blockly.TOOLBOX_AT_BOTTOM = 1;
+
+/**
+ * ENUM for toolbox and flyout at left of screen.
+ * @const
+ */
+Blockly.TOOLBOX_AT_LEFT = 2;
+
+/**
+ * ENUM for toolbox and flyout at right of screen.
+ * @const
+ */
+Blockly.TOOLBOX_AT_RIGHT = 3;
+
+/**
  * Lookup table for determining the opposite type of a connection.
  * @const
  */
@@ -549,7 +573,7 @@ Blockly.getMainWorkspaceMetrics_ = function() {
     var bottomEdge = topEdge + blockBox.height;
   }
   var absoluteLeft = 0;
-  if (this.toolbox_ && !this.toolbox_.atRight) {
+  if (this.toolbox_ && this.toolbox_.toolboxPosition == Blockly.TOOLBOX_AT_LEFT) {
     absoluteLeft = this.toolbox_.width;
   }
   var metrics = {

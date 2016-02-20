@@ -11,26 +11,25 @@
 <script src="../blocks_horizontal/motion.js"></script>
 <script>
 'use strict';
-var workspace = null;
 
 function start() {
-  startBlocklyInstance('blocklyDivVertStartLTR', false, false, 'start');
-  startBlocklyInstance('blocklyDivVertStartRTL', true, false, 'start');
+  startBlocklyInstance('VertStartLTR', false, false, 'start');
+  startBlocklyInstance('VertStartRTL', true, false, 'start');
 
-  startBlocklyInstance('blocklyDivVertEndLTR', false, false, 'end');
-  startBlocklyInstance('blocklyDivVertEndRTL', true, false, 'end');
+  startBlocklyInstance('VertEndLTR', false, false, 'end');
+  startBlocklyInstance('VertEndRTL', true, false, 'end');
 
 
-  startBlocklyInstance('blocklyDivHorizontalStartLTR', false, true, 'start');
-  startBlocklyInstance('blocklyDivHorizontalStartRTL', true, true, 'start');
+  startBlocklyInstance('HorizontalStartLTR', false, true, 'start');
+  startBlocklyInstance('HorizontalStartRTL', true, true, 'start');
 
-  startBlocklyInstance('blocklyDivHorizontalEndLTR', false, true, 'end');
-  startBlocklyInstance('blocklyDivHorizontalEndRTL', true, true, 'end');
+  startBlocklyInstance('HorizontalEndLTR', false, true, 'end');
+  startBlocklyInstance('HorizontalEndRTL', true, true, 'end');
 }
 
-function startBlocklyInstance(divName, rtl, horizontalLayout, position) {
+function startBlocklyInstance(suffix, rtl, horizontalLayout, position) {
   var toolbox = document.getElementById('toolbox_categories');
-  workspace = Blockly.inject(divName, {
+  var options = {
     comments: false,
     disable: false,
     collapse: false,
@@ -51,7 +50,8 @@ function startBlocklyInstance(divName, rtl, horizontalLayout, position) {
       minScale: 0.25,
       scaleSpeed: 1.1
     },
-  });
+  };
+  Blockly.inject('blocklyDiv' + suffix, options);
 }
 
 </script>

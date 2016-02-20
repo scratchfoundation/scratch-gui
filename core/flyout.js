@@ -783,7 +783,7 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
 };
 
 /**
- * Return the deletion rectangle for this flyout.
+ * Return the deletion rectangle for this flyout in viewport coordinates.
  * @return {goog.math.Rect} Rectangle in which to delete.
  */
 Blockly.Flyout.prototype.getClientRect = function() {
@@ -792,23 +792,22 @@ Blockly.Flyout.prototype.getClientRect = function() {
   // area are still deleted.  Must be larger than the largest screen size,
   // but be smaller than half Number.MAX_SAFE_INTEGER (not available on IE).
   var BIG_NUM = 1000000000;
-  var mainWorkspace = Blockly.mainWorkspace;
+  var x = flyoutRect.left;
+  var y = flyoutRect.top;
+  var width = flyoutRect.width;
+  var height = flyoutRect.height;
 
-  // Fix scale if nested in zoomed workspace.
-  var scale = this.targetWorkspace_ == mainWorkspace ? 1 : mainWorkspace.scale;
-  var x = Blockly.getSvgXY_(this.svgGroup_, mainWorkspace).x;
-  var y = Blockly.getSvgXY_(this.svgGroup_, mainWorkspace).y;
   if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_TOP) {
     return new goog.math.Rect(-BIG_NUM, y - BIG_NUM, BIG_NUM * 2,
-      BIG_NUM + this.height_ * scale);
+      BIG_NUM + height);
   } else if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_BOTTOM) {
     return new goog.math.Rect(-BIG_NUM, y + this.verticalOffset_, BIG_NUM * 2,
-      BIG_NUM + this.height_ * scale);
+      BIG_NUM + height);
   } else if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_LEFT) {
-    return new goog.math.Rect(x - BIG_NUM, -BIG_NUM, BIG_NUM + this.width_ * scale,
+    return new goog.math.Rect(x - BIG_NUM, -BIG_NUM, BIG_NUM + width,
       BIG_NUM * 2);
   } else {  // Right
-    return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width_ * scale,
+    return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + width,
       BIG_NUM * 2);
   }
 };

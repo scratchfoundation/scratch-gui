@@ -78,15 +78,43 @@ Blockly.Toolbox = function(workspace) {
    */
   this.toolboxPosition = workspace.options.toolboxPosition;
 
+  /**
+   * Configuration constants for Closure's tree UI.
+   * @type {Object.<string,*>}
+   * @private
+   */
+  this.config_ = {
+    indentWidth: 19,
+    cssRoot: 'blocklyTreeRoot',
+    cssHideRoot: 'blocklyHidden',
+    cssItem: '',
+    cssTreeRow: 'blocklyTreeRow',
+    cssItemLabel: 'blocklyTreeLabel',
+    cssTreeIcon: 'blocklyTreeIcon',
+    cssExpandedFolderIcon: 'blocklyTreeIconOpen',
+    cssFileIcon: 'blocklyTreeIconNone',
+    cssSelectedRow: 'blocklyTreeSelected'
+  };
+
+
+  /**
+   * Configuration constants for tree separator.
+   * @type {Object.<string,*>}
+   * @private
+   */
+  this.treeSeparatorConfig_ = {
+    cssTreeRow: 'blocklyTreeSeparator'
+  };
+
   if (this.horizontalLayout_) {
-    this.CONFIG_['cssTreeRow'] =
-        this.CONFIG_['cssTreeRow'] +
+    this.config_['cssTreeRow'] =
+        this.config_['cssTreeRow'] +
         (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
 
-    Blockly.Toolbox.TreeSeparator.CONFIG_['cssTreeRow'] =
+    this.treeSeparatorConfig_['cssTreeRow'] =
         'blocklyTreeSeparatorHorizontal' +
         (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
-    this.CONFIG_['cssTreeIcon'] = '';
+    this.config_['cssTreeIcon'] = '';
   }
 };
 
@@ -115,25 +143,6 @@ Blockly.Toolbox.prototype.selectedOption_ = null;
  * @private
  */
 Blockly.Toolbox.prototype.lastCategory_ = null;
-
-/**
- * Configuration constants for Closure's tree UI.
- * @type {Object.<string,*>}
- * @const
- * @private
- */
-Blockly.Toolbox.prototype.CONFIG_ = {
-  indentWidth: 19,
-  cssRoot: 'blocklyTreeRoot',
-  cssHideRoot: 'blocklyHidden',
-  cssItem: '',
-  cssTreeRow: 'blocklyTreeRow',
-  cssItemLabel: 'blocklyTreeLabel',
-  cssTreeIcon: 'blocklyTreeIcon',
-  cssExpandedFolderIcon: 'blocklyTreeIconOpen',
-  cssFileIcon: 'blocklyTreeIconNone',
-  cssSelectedRow: 'blocklyTreeSelected'
-};
 
 /**
  * Initializes the toolbox.
@@ -174,10 +183,10 @@ Blockly.Toolbox.prototype.init = function() {
   this.flyout_.init(workspace);
   this.flyout_.hide();
 
-  this.CONFIG_['cleardotPath'] = workspace.options.pathToMedia + '1x1.gif';
-  this.CONFIG_['cssCollapsedFolderIcon'] =
+  this.config_['cleardotPath'] = workspace.options.pathToMedia + '1x1.gif';
+  this.config_['cssCollapsedFolderIcon'] =
       'blocklyTreeIconClosed' + (this.RTL ? 'Rtl' : 'Ltr');
-  var tree = new Blockly.Toolbox.TreeControl(this, this.CONFIG_);
+  var tree = new Blockly.Toolbox.TreeControl(this, this.config_);
   this.tree_ = tree;
   tree.setShowRootNode(false);
   tree.setShowLines(false);
@@ -309,9 +318,10 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
               // Separator between two categories.
               // <sep></sep>
               if (that.horizontalLayout_) {
-                treeOut.add(new Blockly.Toolbox.TreeSeparator());
+                treeOut.add(new Blockly.Toolbox.TreeSeparator(that.treeSeparatorConfig_));
               } else {
-                treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(), 0);
+                treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(that.treeSeparatorConfig_),
+                  0);
               }
             } else {
               // Change the gap between two blocks.
@@ -382,7 +392,7 @@ Blockly.Toolbox.prototype.clearSelection = function() {
 };
 
 /**
- * Return the deletion rectangle for this toolbar.
+ * Return the deletion rectangle for this toolbar in viewport coordinates.
  * @return {goog.math.Rect} Rectangle in which to delete.
  */
 Blockly.Toolbox.prototype.getClientRect = function() {
@@ -390,19 +400,23 @@ Blockly.Toolbox.prototype.getClientRect = function() {
   // area are still deleted.  Must be smaller than Infinity, but larger than
   // the largest screen size.
   var BIG_NUM = 10000000;
-  var svgSize = Blockly.svgSize(this.workspace_.getParentSvg());
-  var x = svgSize.width - this.width;
+  var toolboxRect = this.HtmlDiv.getBoundingClientRect();
+
+  var x = toolboxRect.left;
+  var y = toolboxRect.top;
+  var width = toolboxRect.width;
+  var height = toolboxRect.height;
 
   // Assumes that the toolbox is on the SVG edge.  If this changes
   // (e.g. toolboxes in mutators) then this code will need to be more complex.
   if (this.toolboxPosition == Blockly.TOOLBOX_AT_LEFT) {
-    return new goog.math.Rect(-BIG_NUM, -BIG_NUM, BIG_NUM + this.width, 2 * BIG_NUM);
+    return new goog.math.Rect(-BIG_NUM, -BIG_NUM, BIG_NUM + width, 2 * BIG_NUM);
   } else if (this.toolboxPosition == Blockly.TOOLBOX_AT_RIGHT) {
-    return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + this.width, 2 * BIG_NUM);
+    return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + width, 2 * BIG_NUM);
   } else if (this.toolboxPosition == Blockly.TOOLBOX_AT_TOP) {
-      return new goog.math.Rect(-BIG_NUM, -BIG_NUM, 2 * BIG_NUM, BIG_NUM + this.height);
+      return new goog.math.Rect(-BIG_NUM, -BIG_NUM, 2 * BIG_NUM, BIG_NUM + height);
   } else { // Bottom
-      return new goog.math.Rect(0, svgSize.height,  2 * BIG_NUM, BIG_NUM + this.height);
+      return new goog.math.Rect(0, y,  2 * BIG_NUM, BIG_NUM + width);
   }
 };
 
@@ -576,18 +590,7 @@ Blockly.Toolbox.TreeNode.prototype.onDoubleClick_ = function(e) {
  * @constructor
  * @extends {Blockly.Toolbox.TreeNode}
  */
-Blockly.Toolbox.TreeSeparator = function() {
-  Blockly.Toolbox.TreeNode.call(this, null, '',
-      Blockly.Toolbox.TreeSeparator.CONFIG_);
+Blockly.Toolbox.TreeSeparator = function(config) {
+  Blockly.Toolbox.TreeNode.call(this, null, '', config);
 };
 goog.inherits(Blockly.Toolbox.TreeSeparator, Blockly.Toolbox.TreeNode);
-
-/**
- * Configuration constants for tree separator.
- * @type {Object.<string,*>}
- * @const
- * @private
- */
-Blockly.Toolbox.TreeSeparator.CONFIG_ = {
-  cssTreeRow: 'blocklyTreeSeparator'
-};

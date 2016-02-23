@@ -102,6 +102,11 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   /** @type {boolean} */
   this.RTL = workspace.RTL;
 
+  /** @type {Blockly.Block} */
+  this.ghostBlock_ = null;
+  /** @type {boolean} */
+  this.isGhost_ = false;
+
   // Copy the type-specific functions and data from the prototype.
   if (prototypeName) {
     /** @type {string} */
@@ -189,6 +194,10 @@ Blockly.Block.prototype.dispose = function(healStack) {
 
   if (Blockly.selected == this) {
     Blockly.selected = null;
+  }
+
+  if (this.ghostBlock_) {
+    this.ghostBlock_.dispose();
   }
 
   // First, dispose of all my children.
@@ -521,6 +530,29 @@ Blockly.Block.prototype.setShadow = function(shadow) {
     moveEvent.recordNew();
     Blockly.Events.fire(moveEvent);
     Blockly.Events.group = '';
+  }
+};
+
+/**
+ * Get whether this block is a ghost block or not.
+ * @return {boolean} True if a ghost.
+ */
+Blockly.Block.prototype.isGhost = function() {
+  return this.isGhost_;
+};
+
+/**
+ * Set whether this block is a ghost block or not.
+ * @param {boolean} ghost True if a ghost.
+ */
+Blockly.Block.prototype.setGhost = function(ghost) {
+  if (this.isGhost_ == ghost) {
+    return;  // No change.
+  }
+  this.isGhost_ = ghost;
+  if (this.isGhost_) {
+    //this.setConnectionsHidden(true);
+    this.setColour("#949494");
   }
 };
 

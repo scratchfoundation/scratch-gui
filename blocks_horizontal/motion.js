@@ -41,7 +41,7 @@ Blockly.Blocks['motion_moveright'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "../media/icons/motion_moveright.svg",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/motion_moveright.svg",
           "width": 40,
           "height": 40,
           "alt": "*"

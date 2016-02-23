@@ -81,10 +81,9 @@ Blockly.Toolbox = function(workspace) {
   /**
    * Configuration constants for Closure's tree UI.
    * @type {Object.<string,*>}
-   * @const
    * @private
    */
-  this.CONFIG_ = {
+  this.config_ = {
     indentWidth: 19,
     cssRoot: 'blocklyTreeRoot',
     cssHideRoot: 'blocklyHidden',
@@ -101,22 +100,21 @@ Blockly.Toolbox = function(workspace) {
   /**
    * Configuration constants for tree separator.
    * @type {Object.<string,*>}
-   * @const
    * @private
    */
-  this.TREE_SEPARATOR_CONFIG_ = {
+  this.treeSeparatorConfig_ = {
     cssTreeRow: 'blocklyTreeSeparator'
   };
 
   if (this.horizontalLayout_) {
-    this.CONFIG_['cssTreeRow'] =
-        this.CONFIG_['cssTreeRow'] +
+    this.config_['cssTreeRow'] =
+        this.config_['cssTreeRow'] +
         (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
 
-    this.TREE_SEPARATOR_CONFIG_['cssTreeRow'] =
+    this.treeSeparatorConfig_['cssTreeRow'] =
         'blocklyTreeSeparatorHorizontal' +
         (workspace.RTL ? ' blocklyHorizontalTreeRtl' : ' blocklyHorizontalTree');
-    this.CONFIG_['cssTreeIcon'] = '';
+    this.config_['cssTreeIcon'] = '';
   }
 };
 
@@ -185,10 +183,10 @@ Blockly.Toolbox.prototype.init = function() {
   this.flyout_.init(workspace);
   this.flyout_.hide();
 
-  this.CONFIG_['cleardotPath'] = workspace.options.pathToMedia + '1x1.gif';
-  this.CONFIG_['cssCollapsedFolderIcon'] =
+  this.config_['cleardotPath'] = workspace.options.pathToMedia + '1x1.gif';
+  this.config_['cssCollapsedFolderIcon'] =
       'blocklyTreeIconClosed' + (this.RTL ? 'Rtl' : 'Ltr');
-  var tree = new Blockly.Toolbox.TreeControl(this, this.CONFIG_);
+  var tree = new Blockly.Toolbox.TreeControl(this, this.config_);
   this.tree_ = tree;
   tree.setShowRootNode(false);
   tree.setShowLines(false);
@@ -320,9 +318,9 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
               // Separator between two categories.
               // <sep></sep>
               if (that.horizontalLayout_) {
-                treeOut.add(new Blockly.Toolbox.TreeSeparator(that.TREE_SEPARATOR_CONFIG_));
+                treeOut.add(new Blockly.Toolbox.TreeSeparator(that.treeSeparatorConfig_));
               } else {
-                treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(that.TREE_SEPARATOR_CONFIG_),
+                treeOut.addChildAt(new Blockly.Toolbox.TreeSeparator(that.treeSeparatorConfig_),
                   0);
               }
             } else {

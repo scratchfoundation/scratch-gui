@@ -26,6 +26,7 @@
 
 goog.provide('Blockly.FieldTextInput');
 
+goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Field');
 goog.require('Blockly.Msg');
 goog.require('goog.asserts');
@@ -225,9 +226,16 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   var div = Blockly.WidgetDiv.DIV;
   var bBox = this.fieldGroup_.getBBox();
-  div.style.width = bBox.width * this.sourceBlock_.workspace.scale + 'px';
-  div.style.height = bBox.height * this.sourceBlock_.workspace.scale + 'px';
+  var height = bBox.height * this.sourceBlock_.workspace.scale;
+  var width = Math.max(
+    bBox.width, Blockly.BlockSvg.FIELD_WIDTH-Blockly.BlockSvg.SEP_SPACE_X) * 
+    this.sourceBlock_.workspace.scale
+  div.style.width = width  + 'px';
+  div.style.height = height + 'px';
   var xy = this.getAbsoluteXY_();
+  xy.x += Blockly.BlockSvg.SEP_SPACE_X * this.sourceBlock_.workspace.scale;
+  // @todo Why 3?
+  xy.y += (Blockly.BlockSvg.FIELD_HEIGHT * this.sourceBlock_.workspace.scale)/2 - height/2 + 3;
   // In RTL mode block fields and LTR input fields the left edge moves,
   // whereas the right edge is fixed.  Reposition the editor.
   if (this.sourceBlock_.RTL) {

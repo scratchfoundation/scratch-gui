@@ -40,7 +40,7 @@ Blockly.Blocks['looks_say'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "../media/icons/looks_say.svg",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/looks_say.svg",
           "width": 40,
           "height": 40,
           "alt": "say"

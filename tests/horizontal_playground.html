@@ -6,13 +6,16 @@
 <script src="../blockly_uncompressed_horizontal.js"></script>
 <script src="../generators/javascript.js"></script>
 <script src="../generators/javascript/control.js"></script>
+<script src="../generators/javascript/looks.js"></script>
 <script src="../generators/javascript/math.js"></script>
 <script src="../generators/javascript/motion.js"></script>
 <script src="../generators/javascript/event.js"></script>
 <script src="../msg/messages.js"></script>
 <script src="../blocks/math.js"></script>
-<script src="../blocks_horizontal/event.js"></script>
+<script src="../blocks/text.js"></script>
 <script src="../blocks_horizontal/control.js"></script>
+<script src="../blocks_horizontal/event.js"></script>
+<script src="../blocks_horizontal/looks.js"></script>
 <script src="../blocks_horizontal/motion.js"></script>
 <script>
 'use strict';
@@ -149,6 +152,15 @@ h1 {
   <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
+    <category name="Looks">
+      <block type="looks_say">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hey!</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
     <category name="Events">
       <block type="event_whenflagclicked"></block>
     </category>

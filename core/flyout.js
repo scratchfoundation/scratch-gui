@@ -366,7 +366,23 @@ Blockly.Flyout.prototype.position = function() {
  * @private
  */
 Blockly.Flyout.prototype.setBackgroundPath_ = function(width, height) {
-  var atRight = this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT;
+  if (this.horizontalLayout_) {
+    this.setBackgroundPathHorizontal_(width, height);
+  } else {
+    this.setBackgroundPathVertical_(width, height);
+  }
+};
+
+/**
+ * Create and set the path for the visible boundaries of the toolbox in vertical mode.
+ * @param {number} width The width of the toolbox, not including the
+ *     rounded corners.
+ * @param {number} height The height of the toolbox, not including
+ *     rounded corners.
+ * @private
+ */
+Blockly.Flyout.prototype.setBackgroundPathVertical_ = function(width, height) {
+    var atRight = this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT;
   // Decide whether to start on the left or right.
   var path = ['M ' + (atRight ? this.width_ : 0) + ',0'];
   // Top.
@@ -388,6 +404,50 @@ Blockly.Flyout.prototype.setBackgroundPath_ = function(width, height) {
   path.push('z');
   this.svgBackground_.setAttribute('d', path.join(' '));
 };
+
+/**
+ * Create and set the path for the visible boundaries of the toolbox in horizontal mode.
+ * @param {number} width The width of the toolbox, not including the
+ *     rounded corners.
+ * @param {number} height The height of the toolbox, not including
+ *     rounded corners.
+ * @private
+ */
+Blockly.Flyout.prototype.setBackgroundPathHorizontal_ = function(width, height) {
+    var atTop = this.toolboxPosition_ == Blockly.TOOLBOX_AT_TOP;
+  // start at top left.
+  var path = ['M 0,' + (atTop ? 0 : this.CORNER_RADIUS)];
+
+  if (atTop) {
+    // top
+    path.push('h', width + this.CORNER_RADIUS);
+    // right
+    path.push('v', height);
+    // bottom
+    path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1,
+        -this.CORNER_RADIUS, this.CORNER_RADIUS);
+    path.push('h', -1 * (width - this.CORNER_RADIUS));
+    // left
+    path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1,
+        -this.CORNER_RADIUS, -this.CORNER_RADIUS);
+    path.push('z');
+  } else {
+    // top
+    path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1,
+        this.CORNER_RADIUS, -this.CORNER_RADIUS);
+    path.push('h', width - this.CORNER_RADIUS);
+     // right
+    path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1,
+        this.CORNER_RADIUS, this.CORNER_RADIUS);
+    path.push('v', height - this.CORNER_RADIUS);
+    // bottom
+    path.push('h', -width - this.CORNER_RADIUS);
+    // left
+    path.push('z');
+  }
+  this.svgBackground_.setAttribute('d', path.join(' '));
+};
+
 
 /**
  * Scroll the flyout to the top.

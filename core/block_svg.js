@@ -446,6 +446,11 @@ Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
+  if (Blockly.dragMode_ == 1 && Blockly.selected) {
+    // 1 - Still inside the sticky DRAG_RADIUS.
+    // Trigger a tap
+    this.workspace.fireTapListener(Blockly.selected.id, Blockly.selected.getRootBlock().id);
+  }
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
     // Connect two blocks together.

@@ -26,7 +26,7 @@
 
 goog.provide('Blockly.FieldTextInput');
 
-goog.require('Blockly.BlockSvg');
+goog.require('Blockly.BlockSvg.render');
 goog.require('Blockly.Field');
 goog.require('Blockly.Msg');
 goog.require('goog.asserts');
@@ -228,7 +228,7 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   var bBox = this.fieldGroup_.getBBox();
   var height = bBox.height * this.sourceBlock_.workspace.scale;
   var width = Math.max(
-    bBox.width, Blockly.BlockSvg.FIELD_WIDTH-Blockly.BlockSvg.SEP_SPACE_X) * 
+    bBox.width, Blockly.BlockSvg.FIELD_WIDTH-Blockly.BlockSvg.SEP_SPACE_X) *
     this.sourceBlock_.workspace.scale
   div.style.width = width  + 'px';
   div.style.height = height + 'px';

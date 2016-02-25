@@ -242,8 +242,6 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     } else if (this.type == Blockly.INPUT_VALUE ||
                this.type == Blockly.OUTPUT_VALUE) {
       // Value connections.
-      // How is this an if?  It does it unconditionally, even though it could
-      // be male or female.
       // If female block is already connected, disconnect and bump the male.
       orphanBlock.setParent(null);
       if (!orphanBlock.outputConnection) {

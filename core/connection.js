@@ -174,8 +174,8 @@ Blockly.Connection.prototype.isSuperior = function() {
 /**
  * Checks whether the current connection can connect with the target
  * connection.
- * @param (Blockly.Connection) target Connection to check compatibility with.
- * @return {int} Blockly.Connection.CAN_CONNECT if the connection is legal,
+ * @param {Blockly.Connection} target Connection to check compatibility with.
+ * @return {number} Blockly.Connection.CAN_CONNECT if the connection is legal,
  *    an error code otherwise.
  * @private
  */
@@ -195,7 +195,7 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_CHECKS_FAILED;
   }
   return Blockly.Connection.CAN_CONNECT;
-}
+};
 
 /**
  * Checks whether the current connection and target connection are compatible
@@ -218,10 +218,12 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       throw 'Source connection already connected.';
     case Blockly.Connection.REASON_TARGET_NULL:
       throw 'Target connection is null.';
+    case Blockly.Connection.REASON_CHECKS_FAILED:
+      throw 'Connection checks failed.';
     default:
       throw 'Unknown connection failure: this should never happen!';
   }
-}
+};
 
 /**
  * Connect this connection to another connection.
@@ -311,8 +313,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   }
 
   // Establish the connections.
-  this.targetConnection = otherConnection;
-  otherConnection.targetConnection = this;
+  Blockly.Connection.connectReciprocally(this, otherConnection);
 
   // Demote the inferior block so that one is a child of the superior one.
   childBlock.setParent(parentBlock);
@@ -335,6 +336,19 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       parentBlock.render();
     }
   }
+};
+
+/**
+ * Update two connections to target each other.
+ * @param {Blockly.Connection} first The first connection to update.
+ * @param {Blockly.Connection} second The second conneciton to update.
+ */
+Blockly.Connection.connectReciprocally = function(first, second) {
+  if (!first || !second) {
+    throw 'Cannot connect null connections.';
+  }
+  first.targetConnection = second;
+  second.targetConnection = first;
 };
 
 /**
@@ -366,7 +380,6 @@ Blockly.Connection.singleConnection_ = function(block, orphanBlock) {
  * connections that will accept the orphaned block.  If at any point there
  * are zero or multiple eligible connections, returns null.  Otherwise
  * returns the only input on the last block in the chain.
- * <p/>
  * Terminates early for shadow blocks.
  * @param {!Blockly.Block} startBlack The block on which to start the search.
  * @param {!Blockly.Block} orphanBlock The block that is looking for a home.

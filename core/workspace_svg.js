@@ -51,14 +51,10 @@ Blockly.WorkspaceSvg = function(options) {
   this.getMetrics = options.getMetrics;
   this.setMetrics = options.setMetrics;
 
-  Blockly.ConnectionDB.init(this);
+  /** @type {!Function} */
+  this.audioCallback_ = null;
 
-  /**
-   * Database of pre-loaded sounds.
-   * @private
-   * @const
-   */
-  this.SOUNDS_ = Object.create(null);
+  Blockly.ConnectionDB.init(this);
 };
 goog.inherits(Blockly.WorkspaceSvg, Blockly.Workspace);
 
@@ -793,82 +789,21 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
 };
 
 /**
- * Load an audio file.  Cache it, ready for instantaneous playing.
- * @param {!Array.<string>} filenames List of file types in decreasing order of
- *   preference (i.e. increasing size).  E.g. ['media/go.mp3', 'media/go.wav']
- *   Filenames include path from Blockly's root.  File extensions matter.
- * @param {string} name Name of sound.
- * @private
+ * Set the callback for playing audio. The application should provide
+ * a function that plays the called audio sound.
+ * @param {!Function} func Function to call.
  */
-Blockly.WorkspaceSvg.prototype.loadAudio_ = function(filenames, name) {
-  if (!filenames.length) {
-    return;
-  }
-  try {
-    var audioTest = new window['Audio']();
-  } catch(e) {
-    // No browser support for Audio.
-    // IE can throw an error even if the Audio object exists.
-    return;
-  }
-  var sound;
-  for (var i = 0; i < filenames.length; i++) {
-    var filename = filenames[i];
-    var ext = filename.match(/\.(\w+)$/);
-    if (ext && audioTest.canPlayType('audio/' + ext[1])) {
-      // Found an audio format we can play.
-      sound = new window['Audio'](filename);
-      break;
-    }
-  }
-  if (sound && sound.play) {
-    this.SOUNDS_[name] = sound;
-  }
+Blockly.Workspace.prototype.setAudioCallback = function(func) {
+  this.audioCallback_ = func;
 };
 
 /**
- * Preload all the audio files so that they play quickly when asked for.
- * @private
- */
-Blockly.WorkspaceSvg.prototype.preloadAudio_ = function() {
-  for (var name in this.SOUNDS_) {
-    var sound = this.SOUNDS_[name];
-    sound.volume = .01;
-    sound.play();
-    sound.pause();
-    // iOS can only process one sound at a time.  Trying to load more than one
-    // corrupts the earlier ones.  Just load one and leave the others uncached.
-    if (goog.userAgent.IPAD || goog.userAgent.IPHONE) {
-      break;
-    }
-  }
-};
-
-/**
- * Play an audio file at specified value.  If volume is not specified,
- * use full volume (1).
+ * Play an audio file at specified value.
  * @param {string} name Name of sound.
- * @param {number=} opt_volume Volume of sound (0-1).
  */
-Blockly.WorkspaceSvg.prototype.playAudio = function(name, opt_volume) {
-  var sound = this.SOUNDS_[name];
-  if (sound) {
-    var mySound;
-    var ie9 = goog.userAgent.DOCUMENT_MODE &&
-              goog.userAgent.DOCUMENT_MODE === 9;
-    if (ie9 || goog.userAgent.IPAD || goog.userAgent.ANDROID) {
-      // Creating a new audio node causes lag in IE9, Android and iPad. Android
-      // and IE9 refetch the file from the server, iPad uses a singleton audio
-      // node which must be deleted and recreated for each new audio tag.
-      mySound = sound;
-    } else {
-      mySound = sound.cloneNode();
-    }
-    mySound.volume = (opt_volume === undefined ? 1 : opt_volume);
-    mySound.play();
-  } else if (this.options.parentWorkspace) {
-    // Maybe a workspace on a lower level knows about this sound.
-    this.options.parentWorkspace.playAudio(name, opt_volume);
+Blockly.WorkspaceSvg.prototype.playAudio = function(name) {
+  if (this.audioCallback_) {
+      this.audioCallback_(name);
   }
 };
 

@@ -442,36 +442,6 @@ Blockly.init_ = function(mainWorkspace) {
     mainWorkspace.scrollbar = new Blockly.ScrollbarPair(mainWorkspace);
     mainWorkspace.scrollbar.resize();
   }
-
-  // Load the sounds.
-  if (options.hasSounds) {
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'click.mp3',
-         options.pathToMedia + 'click.wav',
-         options.pathToMedia + 'click.ogg'], 'click');
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'disconnect.wav',
-         options.pathToMedia + 'disconnect.mp3',
-         options.pathToMedia + 'disconnect.ogg'], 'disconnect');
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'delete.mp3',
-         options.pathToMedia + 'delete.ogg',
-         options.pathToMedia + 'delete.wav'], 'delete');
-
-    // Bind temporary hooks that preload the sounds.
-    var soundBinds = [];
-    var unbindSounds = function() {
-      while (soundBinds.length) {
-        Blockly.unbindEvent_(soundBinds.pop());
-      }
-      mainWorkspace.preloadAudio_();
-    };
-    // Android ignores any sound not loaded as a result of a user action.
-    soundBinds.push(
-        Blockly.bindEvent_(document, 'mousemove', null, unbindSounds));
-    soundBinds.push(
-        Blockly.bindEvent_(document, 'touchstart', null, unbindSounds));
-  }
 };
 
 /**

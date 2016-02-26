@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.blocklySvg {
+  background-image: url(./spec.png) !important;
+}
+.blocklyWorkspace {
+  opacity: .8;
+}
+</style>
+<title>Spec tool</title>
+<script src="../blockly_uncompressed_horizontal.js"></script>
+<script src="../generators/javascript.js"></script>
+<script src="../generators/javascript/control.js"></script>
+<script src="../generators/javascript/looks.js"></script>
+<script src="../generators/javascript/math.js"></script>
+<script src="../generators/javascript/motion.js"></script>
+<script src="../generators/javascript/event.js"></script>
+<script src="../msg/messages.js"></script>
+<script src="../blocks/math.js"></script>
+<script src="../blocks/text.js"></script>
+<script src="../blocks_horizontal/control.js"></script>
+<script src="../blocks_horizontal/event.js"></script>
+<script src="../blocks_horizontal/looks.js"></script>
+<script src="../blocks_horizontal/motion.js"></script>
+<script>
+'use strict';
+// Depending on the URL argument, render as LTR or RTL.
+var rtl = (document.location.search == '?rtl');
+var workspace = null;
+
+function start() {
+  var toolbox = document.getElementById('toolbox');
+  workspace = Blockly.inject('blocklyDiv', {
+    comments: false,
+    disable: false,
+    collapse: false,
+    maxBlocks: Infinity,
+    media: '../media/',
+    readOnly: false,
+    rtl: rtl,
+    scrollbars: true,
+    toolbox: toolbox,
+    trashcan: true,
+    horizontalLayout: true,
+    toolboxPosition: 'start',
+    zoom: {
+      controls: true,
+      wheel: false,
+      startScale: 8.0,
+      maxScale: 10,
+      minScale: 0.25,
+      scaleSpeed: 1.1
+    },
+    grid:
+      {spacing: 4,
+      length: 50,
+      colour: '#ccc',
+      snap: false},
+  });
+  // Restore previously displayed text.
+  var text = sessionStorage.getItem('textarea');
+  if (text) {
+    document.getElementById('importExport').value = text;
+  }
+  taChange();
+  // Restore event logging state.
+  var state = sessionStorage.getItem('logEvents');
+  logEvents(Boolean(state));
+}
+
+function toXml() {
+  var output = document.getElementById('importExport');
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  output.value = Blockly.Xml.domToPrettyText(xml);
+  output.focus();
+  output.select();
+  taChange();
+}
+
+function fromXml() {
+  var input = document.getElementById('importExport');
+  var xml = Blockly.Xml.textToDom(input.value);
+  Blockly.Xml.domToWorkspace(workspace, xml);
+  taChange();
+}
+
+function toCode(lang) {
+  var output = document.getElementById('importExport');
+  output.value = Blockly[lang].workspaceToCode(workspace);
+  taChange();
+}
+
+// Disable the "Import from XML" button if the XML is invalid.
+// Preserve text between page reloads.
+function taChange() {
+  var textarea = document.getElementById('importExport');
+  sessionStorage.setItem('textarea', textarea.value)
+  var valid = true;
+  try {
+    Blockly.Xml.textToDom(textarea.value);
+  } catch (e) {
+    valid = false;
+  }
+  document.getElementById('import').disabled = !valid;
+}
+
+function logEvents(state) {
+  var checkbox = document.getElementById('logCheck');
+  checkbox.checked = state;
+  sessionStorage.setItem('logEvents', Number(state));
+  if (state) {
+    workspace.addChangeListener(logger);
+  } else {
+    workspace.removeChangeListener(logger);
+  }
+}
+
+function logger(e) {
+  console.log(e);
+}
+</script>
+
+<style>
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+#blocklyDiv {
+  float: right;
+  height: 95%;
+  width: 70%;
+}
+#collaborators {
+  float: right;
+  width: 30px;
+  margin-left: 10px;
+}
+#collaborators > img {
+  margin-right: 5px;
+  height: 30px;
+  padding-bottom: 5px;
+  width: 30px;
+  border-radius: 3px;
+}
+#importExport {
+  font-family: monospace;
+}
+</style>
+</head>
+<body onload="start()">
+
+  <div id="collaborators"></div>
+
+  <div id="blocklyDiv"></div>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Looks">
+      <block type="looks_say">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hey!</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category name="Events">
+      <block type="event_whenflagclicked"></block>
+    </category>
+    <category name="Motion">
+      <block type="motion_moveright"></block>
+    </category>
+      <!-- <block type="control_repeat"></block> -->
+    <category name="Pants">
+      <block type="control_forever"></block>
+      <block type="control_repeat">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+  </xml>
+
+  <h1>Horizontal block rendering!</h1>
+
+  <p><a href="javascript:void(workspace.setVisible(true))">Show</a>
+   - <a href="javascript:void(workspace.setVisible(false))">Hide</a></p>
+
+  <script>
+    if (rtl) {
+      document.write('[ &larr; RTL. Switch to <A HREF="?ltr">LTR</A>. ]');
+    } else {
+      document.write('[ &rarr; LTR. Switch to <A HREF="?rtl">RTL</A>. ]');
+    }
+  </script>
+
+  <p>
+    <input type="button" value="Export to XML" onclick="toXml()">
+    &nbsp;
+    <input type="button" value="Import from XML" onclick="fromXml()" id="import">
+    <br>
+    <input type="button" value="To JavaScript" onclick="toCode('JavaScript')">
+    <br>
+    <textarea id="importExport" style="width: 26%; height: 12em"
+      onchange="taChange();" onkeyup="taChange()"></textarea>  </p>
+  <p>
+    Log events: &nbsp;
+    <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
+  </p>
+</body>
+</html>

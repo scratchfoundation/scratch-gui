@@ -189,8 +189,8 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyDragging>.blocklyPath {',
-    'fill-opacity: .8;',
-    'stroke-opacity: .8;',
+    // 'fill-opacity: .8;',
+    // 'stroke-opacity: .8;',
   '}',
 
   '.blocklyDisabled>.blocklyPath {',

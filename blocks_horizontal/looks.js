@@ -48,7 +48,7 @@ Blockly.Blocks['looks_say'] = {
         {
           "type": "input_value",
           "name": "MESSAGE",
-          "check": "Number"
+          "check": "String"
         }
       ],
       "inputsInline": true,

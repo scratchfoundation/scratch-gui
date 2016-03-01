@@ -26,6 +26,8 @@
 
 goog.provide('Blockly.Css');
 
+goog.require('Blockly.Colours');
+
 
 /**
  * List of cursors.
@@ -132,7 +134,7 @@ Blockly.Css.setCursor = function(cursor) {
  */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
-    'background-color: #fff;',
+    'background-color: ' + Blockly.Colours.workspace + ';',
     'outline: none;',
     'overflow: hidden;',  /* IE overflows by default. */
   '}',
@@ -214,7 +216,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyNonEditableText>text,',
   '.blocklyEditableText>text {',
-    'fill: #000;',
+    'fill: ' +  Blockly.Colours.text + ';',
   '}',
 
   '.blocklyEditableText:hover>rect {',
@@ -223,7 +225,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyBubbleText {',
-    'fill: #000;',
+    'fill:' + Blockly.Colours.text +';',
   '}',
 
   /*

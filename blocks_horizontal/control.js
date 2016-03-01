@@ -28,6 +28,8 @@ goog.provide('Blockly.Blocks.control');
 
 goog.require('Blockly.Blocks');
 
+goog.require('Blockly.Colours');
+
 Blockly.Blocks['control_repeat'] = {
   /**
    * Block for repeat n times (external number).
@@ -59,7 +61,9 @@ Blockly.Blocks['control_repeat'] = {
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": '#F2B827',
+      "colour": Blockly.Colours.control.primary,
+      "colourSecondary": Blockly.Colours.control.secondary,
+      "colourTertiary": Blockly.Colours.control.tertiary,
       "tooltip": "",
       "helpUrl": "http://www.example.com/"
     });
@@ -95,7 +99,9 @@ Blockly.Blocks['control_forever'] = {
       ],
       "inputsInline": true,
       "previousStatement": null,
-      "colour": '#F2B827',
+      "colour": Blockly.Colours.control.primary,
+      "colourSecondary": Blockly.Colours.control.secondary,
+      "colourTertiary": Blockly.Colours.control.tertiary,
       "tooltip": ""
     });
 

@@ -28,6 +28,8 @@ goog.provide('Blockly.Blocks.event');
 
 goog.require('Blockly.Blocks');
 
+goog.require('Blockly.Colours');
+
 Blockly.Blocks['event_whenflagclicked'] = {
   /**
    * Block for repeat n times (external number).
@@ -48,7 +50,9 @@ Blockly.Blocks['event_whenflagclicked'] = {
       ],
       "inputsInline": true,
       "nextStatement": null,
-      "colour": '#F2EC27',
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary,
       "tooltip": "Do stuff!"
     });
 

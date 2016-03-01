@@ -28,6 +28,8 @@ goog.provide('Blockly.Blocks.looks');
 
 goog.require('Blockly.Blocks');
 
+goog.require('Blockly.Colours');
+
 Blockly.Blocks['looks_say'] = {
   /**
    * Block to say something.
@@ -54,7 +56,7 @@ Blockly.Blocks['looks_say'] = {
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": '#6971E7',
+      "colour": Blockly.Colours.looks.primary,
       "tooltip": ""
     });
 

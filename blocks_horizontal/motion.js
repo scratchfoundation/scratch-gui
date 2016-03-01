@@ -28,6 +28,8 @@ goog.provide('Blockly.Blocks.motion');
 
 goog.require('Blockly.Blocks');
 
+goog.require('Blockly.Colours');
+
 Blockly.Blocks['motion_moveright'] = {
   /**
    * Block for move right (external number)
@@ -49,7 +51,7 @@ Blockly.Blocks['motion_moveright'] = {
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": '#25AFF4',
+      "colour": Blockly.Colours.motion.primary,
       "tooltip": ""
     });
 

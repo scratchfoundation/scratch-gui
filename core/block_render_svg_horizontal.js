@@ -192,17 +192,10 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
  */
 Blockly.BlockSvg.prototype.updateColour = function() {
   // Render block fill
-  var hexColour = this.parentBlock_ ? this.parentBlock_.getColour() : this.getColour();
-  var rgb = goog.color.hexToRgb(hexColour);
-  if (this.isShadow()) {
-    this.svgPath_.setAttribute('fill', '#ffffff');
-  } else {
-    this.svgPath_.setAttribute('fill', hexColour);
-  }
+  this.svgPath_.setAttribute('fill', this.getColour());
 
   // Render block stroke
-  var strokeColor = this.getColourTertiary();
-  this.svgPath_.setAttribute('stroke', strokeColor);
+  this.svgPath_.setAttribute('stroke', this.getColourTertiary());
 
   // Bump every dropdown to change its colour.
   for (var x = 0, input; input = this.inputList[x]; x++) {

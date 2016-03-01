@@ -194,49 +194,10 @@ Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER =
 
 
 /**
- * Play some UI effects (sound, ripple) after a connection has been established.
+ * Play some UI effects (sound) after a connection has been established.
  */
 Blockly.BlockSvg.prototype.connectionUiEffect = function() {
   this.workspace.playAudio('click');
-  if (this.workspace.scale < 1) {
-    return;  // Too small to care about visual effects.
-  }
-  // Determine the absolute coordinates of the inferior block.
-  var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.svgGroup_),
-                             this.workspace);
-  // Offset the coordinates based on the two connection types, fix scale.
-  xy.x += 8 * this.workspace.scale;
-  xy.y += this.height - (Blockly.BlockSvg.CORNER_RADIUS * 2 + Blockly.BlockSvg.NOTCH_HEIGHT / 2) - 8 * this.workspace.scale;
-
-  var ripple = Blockly.createSvgElement('circle',
-      {'cx': xy.x, 'cy': xy.y, 'r': 0, 'fill': 'none',
-       'stroke': '#EEE', 'stroke-width': 8},
-      this.workspace.getParentSvg());
-
-  // Start the animation.
-  Blockly.BlockSvg.connectionUiStep_(ripple, new Date(), this.workspace.scale);
-};
-
-/**
- * Expand a ripple around a connection.
- * @param {!Element} ripple Element to animate.
- * @param {!Date} start Date of animation's start.
- * @param {number} workspaceScale Scale of workspace.
- * @private
- */
-Blockly.BlockSvg.connectionUiStep_ = function(ripple, start, workspaceScale) {
-  var ms = (new Date()) - start;
-  var percent = ms / 150;
-  if (percent > 1) {
-    goog.dom.removeNode(ripple);
-  } else {
-    ripple.setAttribute('r', percent * 25 * workspaceScale);
-    ripple.style.opacity = 0.8 - percent;
-    var closure = function() {
-      Blockly.BlockSvg.connectionUiStep_(ripple, start, workspaceScale);
-    };
-    Blockly.BlockSvg.disconnectUiStop_.pid_ = setTimeout(closure, 10);
-  }
 };
 
 /**

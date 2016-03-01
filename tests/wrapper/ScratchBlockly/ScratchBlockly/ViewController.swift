@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKUIDelegate {
     var webview : WKWebView?
 
     override func viewDidLoad() {
@@ -19,6 +19,23 @@ class ViewController: UIViewController {
         let url = (wwwSource != nil && wwwSource!.characters.count > 0) ? NSURL(string:wwwSource!) : NSURL.fileURLWithPath(bundleSource!)
         let req = NSURLRequest(URL:url!)
         webview!.loadRequest(req)
+        webview!.UIDelegate = self
+    }
+    
+    func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void) {
+        let alertController = UIAlertController(title: "", message: prompt, preferredStyle: .Alert)
+        weak var alertTextField: UITextField!
+        alertController.addTextFieldWithConfigurationHandler { textField in
+            textField.text = defaultText
+            alertTextField = textField
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            completionHandler(nil)
+        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+            completionHandler(alertTextField.text)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

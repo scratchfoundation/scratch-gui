@@ -201,8 +201,7 @@ Blockly.BlockSvg.prototype.updateColour = function() {
   }
 
   // Render block stroke
-  var colorShift = goog.color.darken(rgb, 0.1);
-  var strokeColor = goog.color.rgbArrayToHex(colorShift);
+  var strokeColor = this.getColourTertiary();
   this.svgPath_.setAttribute('stroke', strokeColor);
 
   // Bump every dropdown to change its colour.

@@ -51,6 +51,8 @@ Blockly.Blocks['event_whenflagclicked'] = {
       "inputsInline": true,
       "nextStatement": null,
       "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary,
       "tooltip": "Do stuff!"
     });
 

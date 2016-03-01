@@ -57,6 +57,8 @@ Blockly.Blocks['looks_say'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": Blockly.Colours.looks.primary,
+      "colourSecondary": Blockly.Colours.looks.secondary,
+      "colourTertiary": Blockly.Colours.looks.tertiary,
       "tooltip": ""
     });
 

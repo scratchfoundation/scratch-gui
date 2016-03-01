@@ -52,6 +52,8 @@ Blockly.Blocks['motion_moveright'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": Blockly.Colours.motion.primary,
+      "colourSecondary": Blockly.Colours.motion.secondary,
+      "colourTertiary": Blockly.Colours.motion.tertiary,
       "tooltip": ""
     });
 

@@ -62,6 +62,8 @@ Blockly.Blocks['control_repeat'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": Blockly.Colours.control.primary,
+      "colourSecondary": Blockly.Colours.control.secondary,
+      "colourTertiary": Blockly.Colours.control.tertiary,
       "tooltip": "",
       "helpUrl": "http://www.example.com/"
     });
@@ -98,6 +100,8 @@ Blockly.Blocks['control_forever'] = {
       "inputsInline": true,
       "previousStatement": null,
       "colour": Blockly.Colours.control.primary,
+      "colourSecondary": Blockly.Colours.control.secondary,
+      "colourTertiary": Blockly.Colours.control.tertiary,
       "tooltip": ""
     });
 

@@ -191,11 +191,17 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {
-  // Render block fill
-  this.svgPath_.setAttribute('fill', this.getColour());
+  var strokeColour = this.getColourTertiary();
+  if (this.isShadow() && this.parentBlock_) {
+    // Pull shadow block stroke colour from parent block's tertiary if possible.
+    strokeColour = this.parentBlock_.getColourTertiary();
+  }
 
   // Render block stroke
-  this.svgPath_.setAttribute('stroke', this.getColourTertiary());
+  this.svgPath_.setAttribute('stroke', strokeColour);
+
+  // Render block fill
+  this.svgPath_.setAttribute('fill', this.getColour());
 
   // Bump every dropdown to change its colour.
   for (var x = 0, input; input = this.inputList[x]; x++) {

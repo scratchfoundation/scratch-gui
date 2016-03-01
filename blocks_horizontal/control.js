@@ -41,7 +41,7 @@ Blockly.Blocks['control_repeat'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "DO"
+          "name": "SUBSTACK"
         },
         {
           "type": "field_image",
@@ -83,7 +83,7 @@ Blockly.Blocks['control_forever'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "NAME"
+          "name": "SUBSTACK"
         },
         {
           "type": "field_image",

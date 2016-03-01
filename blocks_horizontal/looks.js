@@ -19,41 +19,47 @@
  */
 
 /**
- * @fileoverview Control blocks for Scratch (Horizontal)
- * @author ascii@media.mit.edu <Andrew Sliwinski>
+ * @fileoverview Looks blocks for Scratch (Horizontal)
+ * @author rschamp@media.mit.edu <Ray Schamp>
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.event');
+goog.provide('Blockly.Blocks.looks');
 
 goog.require('Blockly.Blocks');
 
 goog.require('Blockly.Colours');
 
-Blockly.Blocks['event_whenflagclicked'] = {
+Blockly.Blocks['looks_say'] = {
   /**
-   * Block for repeat n times (external number).
+   * Block to say something.
    * @this Blockly.Block
    */
   init: function() {
     this.jsonInit({
-      "id": "event_whenflagclicked",
-      "message0": "%1",
+      "id": "looks_say",
+      "message0": "%1 %2",
       "args0": [
         {
           "type": "field_image",
-          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_whenflagclicked.svg",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/looks_say.svg",
           "width": 40,
           "height": 40,
-          "alt": "flag"
+          "alt": "say"
+        },
+        {
+          "type": "input_value",
+          "name": "MESSAGE",
+          "check": "String"
         }
       ],
       "inputsInline": true,
+      "previousStatement": null,
       "nextStatement": null,
-      "colour": Blockly.Colours.event.primary,
-      "colourSecondary": Blockly.Colours.event.secondary,
-      "colourTertiary": Blockly.Colours.event.tertiary,
-      "tooltip": "Do stuff!"
+      "colour": Blockly.Colours.looks.primary,
+      "colourSecondary": Blockly.Colours.looks.secondary,
+      "colourTertiary": Blockly.Colours.looks.tertiary,
+      "tooltip": ""
     });
 
     this.setHelpUrl(function () {

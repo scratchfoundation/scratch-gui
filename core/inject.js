@@ -249,16 +249,6 @@ Blockly.createDom_ = function(container, options) {
   Blockly.Css.inject(options.hasCss, options.pathToMedia);
 
   // Build the SVG DOM.
-  /*
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    version="1.1"
-    class="blocklySvg">
-    ...
-  </svg>
-  */
   var svg = Blockly.createSvgElement('svg', {
     'xmlns': 'http://www.w3.org/2000/svg',
     'xmlns:html': 'http://www.w3.org/1999/xhtml',
@@ -266,27 +256,9 @@ Blockly.createDom_ = function(container, options) {
     'version': '1.1',
     'class': 'blocklySvg'
   }, container);
-  /*
-  <defs>
-    ... filters go here ...
-  </defs>
-  */
   var defs = Blockly.createSvgElement('defs', {}, svg);
   var rnd = String(Math.random()).substring(2);
-  /*
-    <filter id="blocklyEmbossFilter837493">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-      <feSpecularLighting in="blur" surfaceScale="1" specularConstant="0.5"
-                          specularExponent="10" lighting-color="white"
-                          result="specOut">
-        <fePointLight x="-5000" y="-10000" z="20000"/>
-      </feSpecularLighting>
-      <feComposite in="specOut" in2="SourceAlpha" operator="in"
-                   result="specOut"/>
-      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"
-                   k1="0" k2="1" k3="1" k4="0"/>
-    </filter>
-  */
+
   var embossFilter = Blockly.createSvgElement('filter',
       {'id': 'blocklyEmbossFilter' + rnd}, defs);
   Blockly.createSvgElement('feGaussianBlur',
@@ -304,13 +276,7 @@ Blockly.createDom_ = function(container, options) {
       {'in': 'SourceGraphic', 'in2': 'specOut', 'operator': 'arithmetic',
        'k1': 0, 'k2': 1, 'k3': 1, 'k4': 0}, embossFilter);
   options.embossFilterId = embossFilter.id;
-  /*
-    <pattern id="blocklyDisabledPattern837493" patternUnits="userSpaceOnUse"
-             width="10" height="10">
-      <rect width="10" height="10" fill="#aaa" />
-      <path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0" />
-    </pattern>
-  */
+
   var disabledPattern = Blockly.createSvgElement('pattern',
       {'id': 'blocklyDisabledPattern' + rnd,
        'patternUnits': 'userSpaceOnUse',
@@ -320,12 +286,7 @@ Blockly.createDom_ = function(container, options) {
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, disabledPattern);
   options.disabledPatternId = disabledPattern.id;
-  /*
-    <pattern id="blocklyGridPattern837493" patternUnits="userSpaceOnUse">
-      <rect stroke="#888" />
-      <rect stroke="#888" />
-    </pattern>
-  */
+
   var gridPattern = Blockly.createSvgElement('pattern',
       {'id': 'blocklyGridPattern' + rnd,
        'patternUnits': 'userSpaceOnUse'}, defs);
@@ -480,36 +441,6 @@ Blockly.init_ = function(mainWorkspace) {
   if (options.hasScrollbars) {
     mainWorkspace.scrollbar = new Blockly.ScrollbarPair(mainWorkspace);
     mainWorkspace.scrollbar.resize();
-  }
-
-  // Load the sounds.
-  if (options.hasSounds) {
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'click.mp3',
-         options.pathToMedia + 'click.wav',
-         options.pathToMedia + 'click.ogg'], 'click');
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'disconnect.wav',
-         options.pathToMedia + 'disconnect.mp3',
-         options.pathToMedia + 'disconnect.ogg'], 'disconnect');
-    mainWorkspace.loadAudio_(
-        [options.pathToMedia + 'delete.mp3',
-         options.pathToMedia + 'delete.ogg',
-         options.pathToMedia + 'delete.wav'], 'delete');
-
-    // Bind temporary hooks that preload the sounds.
-    var soundBinds = [];
-    var unbindSounds = function() {
-      while (soundBinds.length) {
-        Blockly.unbindEvent_(soundBinds.pop());
-      }
-      mainWorkspace.preloadAudio_();
-    };
-    // Android ignores any sound not loaded as a result of a user action.
-    soundBinds.push(
-        Blockly.bindEvent_(document, 'mousemove', null, unbindSounds));
-    soundBinds.push(
-        Blockly.bindEvent_(document, 'touchstart', null, unbindSounds));
   }
 };
 

@@ -45,7 +45,9 @@ goog.require('goog.userAgent');
  * @constructor
  */
 Blockly.Field = function(text, opt_validator) {
-  this.size_ = new goog.math.Size(0, 25);
+  this.size_ = new goog.math.Size(
+    Blockly.BlockSvg.FIELD_WIDTH,
+    Blockly.BlockSvg.FIELD_HEIGHT);
   this.setValue(text);
   this.setValidator(opt_validator);
 };
@@ -76,7 +78,7 @@ Blockly.Field.prototype.name = undefined;
  * Maximum characters of text to display before adding an ellipsis.
  * @type {number}
  */
-Blockly.Field.prototype.maxDisplayLength = 50;
+Blockly.Field.prototype.maxDisplayLength = 5;
 
 /**
  * Visible text to display.
@@ -137,10 +139,14 @@ Blockly.Field.prototype.init = function(block) {
        'ry': 4,
        'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
        'y': 0,
-       'height': 16}, this.fieldGroup_, this.sourceBlock_.workspace);
+       'height': Blockly.BlockSvg.FIELD_HEIGHT}, this.fieldGroup_, this.sourceBlock_.workspace);
   /** @type {!Element} */
   this.textElement_ = Blockly.createSvgElement('text',
-      {'class': 'blocklyText', 'y': this.size_.height - 12.5},
+      {'class': 'blocklyText',
+       'y': this.size_.height/2 + 6.25,
+       'x': Blockly.BlockSvg.FIELD_WIDTH / 2,
+       'width': Blockly.BlockSvg.FIELD_WIDTH - Blockly.BlockSvg.SEP_SPACE_X,
+       'text-anchor': 'middle'},
       this.fieldGroup_);
 
   this.updateEditable();

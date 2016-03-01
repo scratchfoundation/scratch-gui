@@ -26,6 +26,8 @@
 
 goog.provide('Blockly.Css');
 
+goog.require('Blockly.Colours');
+
 
 /**
  * List of cursors.
@@ -132,7 +134,7 @@ Blockly.Css.setCursor = function(cursor) {
  */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
-    'background-color: #fff;',
+    'background-color: ' + Blockly.Colours.workspace + ';',
     'outline: none;',
     'overflow: hidden;',  /* IE overflows by default. */
   '}',
@@ -179,8 +181,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyPath {',
-    // 'stroke: #f00;',
-    'stroke-width: 1.5px;',
+    'stroke-width: 1px;',
   '}',
 
   '.blocklySelected>.blocklyPath {',
@@ -189,8 +190,6 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyDragging>.blocklyPath {',
-    'fill-opacity: .8;',
-    'stroke-opacity: .8;',
   '}',
 
   '.blocklyDisabled>.blocklyPath {',
@@ -217,7 +216,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyNonEditableText>text,',
   '.blocklyEditableText>text {',
-    'fill: #000;',
+    'fill: ' +  Blockly.Colours.text + ';',
   '}',
 
   '.blocklyEditableText:hover>rect {',
@@ -226,7 +225,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyBubbleText {',
-    'fill: #000;',
+    'fill:' + Blockly.Colours.text +';',
   '}',
 
   /*
@@ -288,7 +287,8 @@ Blockly.Css.CONTENT = [
     'margin: 0;',
     'outline: none;',
     'padding: 0 1px;',
-    'width: 100%',
+    'width: 100%;',
+    'text-align: center',
   '}',
 
   '.blocklyMainBackground {',

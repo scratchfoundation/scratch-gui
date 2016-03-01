@@ -165,6 +165,20 @@ Blockly.Block.prototype.data = null;
 Blockly.Block.prototype.colour_ = '#000000';
 
 /**
+ * Secondary colour of the block in '#RRGGBB' format.
+ * @type {string}
+ * @private
+ */
+Blockly.Block.prototype.colourSecondary_ = '#000000';
+
+/**
+ * Tertiary colour of the block in '#RRGGBB' format.
+ * @type {string}
+ * @private
+ */
+Blockly.Block.prototype.colourTertiary_ = '#000000';
+
+/**
  * Dispose of this block.
  * @param {boolean} healStack If true, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, dispose of
@@ -638,17 +652,56 @@ Blockly.Block.prototype.getColour = function() {
 };
 
 /**
- * Change the colour of a block.
- * @param {number|string} colour HSV hue value, or #RRGGBB string.
+ * Get the secondary colour of a block.
+ * @return {string} #RRGGBB string.
  */
-Blockly.Block.prototype.setColour = function(colour) {
+Blockly.Block.prototype.getColourSecondary = function() {
+  return this.colourSecondary_;
+};
+
+/**
+ * Get the tertiary colour of a block.
+ * @return {string} #RRGGBB string.
+ */
+Blockly.Block.prototype.getColourTertiary = function() {
+  return this.colourTertiary_;
+};
+
+
+/**
+* Create an #RRGGBB string colour from a colour HSV hue value or #RRGGBB string.
+* @param {number|string} colour HSV hue value, or #RRGGBB string.
+* @return {string} #RRGGBB string.
+* @private
+*/
+Blockly.Block.prototype.makeColour_ = function(colour) {
   var hue = parseFloat(colour);
   if (!isNaN(hue)) {
-    this.colour_ = Blockly.hueToRgb(hue);
+    return Blockly.hueToRgb(hue);
   } else if (goog.isString(colour) && colour.match(/^#[0-9a-fA-F]{6}$/)) {
-    this.colour_ = colour;
+    return colour;
   } else {
     throw 'Invalid colour: ' + colour;
+  }
+}
+
+/**
+ * Change the colour of a block, and optional secondary/teriarty colours.
+ * @param {number|string} colour HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourSecondary HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourTertiary HSV hue value, or #RRGGBB string.
+ */
+Blockly.Block.prototype.setColour = function(colour, colourSecondary, colourTertiary) {
+  this.colour_ = this.makeColour_(colour);
+  if (colourSecondary !== undefined) {
+    this.colourSecondary_ = this.makeColour_(colourSecondary);
+  } else {
+    this.colourSecondary_ = goog.color.darken(colour, 0.1);
+  }
+  if (colourTertiary !== undefined) {
+    this.colourTertiary_ = this.makeColour_(colourTertiary);
+  } else {
+    this.colourTertiary_ = goog.color.darken(colour, 0.2);
   }
   if (this.rendered) {
     this.updateColour();
@@ -973,7 +1026,7 @@ Blockly.Block.prototype.jsonInit = function(json) {
 
   // Set basic properties of block.
   if (json['colour'] !== undefined) {
-    this.setColour(json['colour']);
+    this.setColour(json['colour'], json['colourSecondary'], json['colourTertiary']);
   }
 
   // Interpolate the message blocks.

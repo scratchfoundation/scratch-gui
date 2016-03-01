@@ -28,6 +28,8 @@ goog.provide('Blockly.Blocks.motion');
 
 goog.require('Blockly.Blocks');
 
+goog.require('Blockly.Colours');
+
 Blockly.Blocks['motion_moveright'] = {
   /**
    * Block for move right (external number)
@@ -41,7 +43,7 @@ Blockly.Blocks['motion_moveright'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "../media/icons/motion_moveright.svg",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/motion_moveright.svg",
           "width": 40,
           "height": 40,
           "alt": "*"
@@ -49,7 +51,9 @@ Blockly.Blocks['motion_moveright'] = {
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": '#25AFF4',
+      "colour": Blockly.Colours.motion.primary,
+      "colourSecondary": Blockly.Colours.motion.secondary,
+      "colourTertiary": Blockly.Colours.motion.tertiary,
       "tooltip": ""
     });
 

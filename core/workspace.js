@@ -49,6 +49,8 @@ Blockly.Workspace = function(opt_options) {
   this.topBlocks_ = [];
   /** @type {!Array.<!Function>} */
   this.listeners_ = [];
+  /** @type {!Array.<!Function>} */
+  this.tapListeners_ = [];
 };
 
 /**
@@ -225,6 +227,40 @@ Blockly.Workspace.prototype.removeChangeListener = function(func) {
 Blockly.Workspace.prototype.fireChangeListener = function(event) {
   for (var i = 0, func; func = this.listeners_[i]; i++) {
     func(event);
+  }
+};
+
+/**
+ * When a block in the workspace is tapped, call a function with the
+ *  blockId and root blockId.
+ * @param {!Function} func Function to call.
+ * @return {!Function} Function that can be passed to
+ *     removeTapListener.
+ */
+Blockly.Workspace.prototype.addTapListener = function(func) {
+  this.tapListeners_.push(func);
+  return func;
+};
+
+/**
+ * Stop listening for this workspace's taps.
+ * @param {Function} func Function to stop calling.
+ */
+Blockly.Workspace.prototype.removeTapListener = function(func) {
+  var i = this.tapListeners_.indexOf(func);
+  if (i != -1) {
+    this.tapListeners_.splice(i, 1);
+  }
+};
+
+/**
+ * Fire a tap event.
+ * @param {string} ID of block that was tapped
+ * @param {string} ID of root block in tree that was tapped
+ */
+Blockly.Workspace.prototype.fireTapListener = function(blockId, rootBlockId) {
+  for (var i = 0, func; func = this.tapListeners_[i]; i++) {
+    func(blockId, rootBlockId);
   }
 };
 

@@ -439,10 +439,10 @@ class Gen_langfiles(threading.Thread):
         print("FAILED to create " + f)
 
 def exclude_vertical(item):
-  return not item.endswith("block_vertical_scratch.js")
+  return not item.endswith("block_render_svg_vertical.js")
 
 def exclude_horizontal(item):
-  return not item.endswith("block_svg.js")
+  return not item.endswith("block_render_svg_horizontal.js")
 
 if __name__ == "__main__":
   try:

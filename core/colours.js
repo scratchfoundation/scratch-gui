@@ -29,5 +29,6 @@ Blockly.Colours = {
     "tertiary": "#CCAA00"
   },
   "text": "#575E75",
-  "workspace": "#F5F8FF"
+  "workspace": "#F5F8FF",
+  "text_field": "#FFFFFF"
 };

@@ -216,7 +216,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyNonEditableText>text,',
   '.blocklyEditableText>text {',
-    'fill: #000;',
+    'fill: ' +  Blockly.Colours.text + ';',
   '}',
 
   '.blocklyEditableText:hover>rect {',
@@ -225,7 +225,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyBubbleText {',
-    'fill: #000;',
+    'fill:' + Blockly.Colours.text +';',
   '}',
 
   /*

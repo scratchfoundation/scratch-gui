@@ -672,7 +672,6 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
         closestConnection = neighbour.connection;
         localConnection = myConnection;
         radiusConnection = neighbour.radius;
-        connectionIndex = i;
       }
     }
 
@@ -695,7 +694,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       Blockly.highlightedConnection_ = closestConnection;
       Blockly.localConnection_ = localConnection;
       if (!this.ghostBlock_){
-        this.ghostBlock_ = workspace.newBlock(this.type);
+        this.ghostBlock_ = this.workspace.newBlock(this.type);
         this.ghostBlock_.setGhost(true);
         this.ghostBlock_.moveConnections_(radiusConnection);
       }

@@ -201,6 +201,11 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == 2) {
     // Terminate a drag operation.
     if (selected) {
+      if (selected.ghostBlock_) {
+        selected.ghostBlock_.unplug(true /* healStack */);
+        selected.ghostBlock_.dispose();
+        selected.ghostBlock_ = null;
+      }
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
       var dxy = goog.math.Coordinate.difference(xy, selected.dragStartXY_);
@@ -673,6 +678,11 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     // Remove connection highlighting if needed.
     if (Blockly.highlightedConnection_ &&
         Blockly.highlightedConnection_ != closestConnection) {
+      if (this.ghostBlock_) {
+        this.ghostBlock_.unplug(true /* healStack */);
+        this.ghostBlock_.dispose();
+        this.ghostBlock_ = null;
+      }
       Blockly.highlightedConnection_.unhighlight();
       Blockly.highlightedConnection_ = null;
       Blockly.localConnection_ = null;
@@ -683,6 +693,18 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       closestConnection.highlight();
       Blockly.highlightedConnection_ = closestConnection;
       Blockly.localConnection_ = localConnection;
+      if (!this.ghostBlock_){
+        this.ghostBlock_ = this.workspace.newBlock(this.type);
+        this.ghostBlock_.setGhost(true);
+        this.ghostBlock_.moveConnections_(radiusConnection);
+      }
+      if (Blockly.localConnection_ == this.previousConnection) {
+        // Setting the block to rendered will actually change the connection
+        // behaviour :/
+        this.ghostBlock_.rendered = true;
+        this.ghostBlock_.previousConnection.connect(closestConnection);
+      }
+      this.ghostBlock_.render(true);
     }
     // Provide visual indication of whether the block will be deleted if
     // dropped here.
@@ -735,6 +757,15 @@ Blockly.BlockSvg.prototype.setEditable = function(editable) {
  */
 Blockly.BlockSvg.prototype.setShadow = function(shadow) {
   Blockly.BlockSvg.superClass_.setShadow.call(this, shadow);
+  this.updateColour();
+};
+
+/**
+ * Set whether this block is a ghost block or not.
+ * @param {boolean} ghost True if a ghost.
+ */
+Blockly.BlockSvg.prototype.setGhost = function(ghost) {
+  Blockly.BlockSvg.superClass_.setGhost.call(this, ghost);
   this.updateColour();
 };
 

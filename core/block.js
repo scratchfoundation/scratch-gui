@@ -565,7 +565,6 @@ Blockly.Block.prototype.setGhost = function(ghost) {
   }
   this.isGhost_ = ghost;
   if (this.isGhost_) {
-    //this.setConnectionsHidden(true);
     this.setColour("#949494");
   }
 };

@@ -380,7 +380,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   }
 
   // Position icon
-  if (metrics.icon) {
+  if (!this.isGhost() && metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
     var iconSize = metrics.icon.getSize();
     var iconX = metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;

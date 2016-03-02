@@ -665,7 +665,6 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     var closestConnection = null;
     var localConnection = null;
     var radiusConnection = Blockly.SNAP_RADIUS;
-    var connectionIndex = -1;
     for (var i = 0; i < myConnections.length; i++) {
       var myConnection = myConnections[i];
       var neighbour = myConnection.closest(radiusConnection, dx, dy);
@@ -700,18 +699,12 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
         this.ghostBlock_.setGhost(true);
         this.ghostBlock_.moveConnections_(radiusConnection);
       }
-      // if (connectionIndex != -1) {
-      //   console.log(connectionIndex);
-      //   this.ghostBlock_.getConnections_(false)[connectionIndex].connect(closestConnection);
-      // }
       if (Blockly.localConnection_ == this.previousConnection) {
-        var spliceConnection = closestConnection.targetConnection;
+        // Setting the block to rendered will actually change the connection
+        // behaviour :/
+        this.ghostBlock_.rendered = true;
         this.ghostBlock_.previousConnection.connect(closestConnection);
-        this.ghostBlock_.nextConnection.connect(spliceConnection);
       }
-      //else if (Blockly.localConnection_ == this.nextConnection) {
-      //   this.ghostBlock_.nextConnection.connect(closestConnection);
-      // } else if (Blockly.localConnection_. == this.)
       this.ghostBlock_.render(true);
     }
     // Provide visual indication of whether the block will be deleted if

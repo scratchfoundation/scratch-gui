@@ -379,6 +379,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   if (!this.isGhost() && metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
     var iconSize = metrics.icon.getSize();
+    // Icon's position is calculated relative to the "end" edge of the block.
     var iconX = metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
     var iconY = metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
     var iconScale = "scale(1 1)";

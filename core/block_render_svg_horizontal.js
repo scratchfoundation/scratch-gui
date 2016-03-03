@@ -518,9 +518,10 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
                Blockly.BlockSvg.CORNER_RADIUS);
 
     // Create statement connection.
-    // @todo RTL
-    // var connectionX = connectionsXY.x + (this.RTL ? -cursorX : cursorX + 1);
     var connectionX = connectionsXY.x + Blockly.BlockSvg.CORNER_RADIUS * 2 + 4 * Blockly.BlockSvg.GRID_UNIT;
+    if (this.RTL) {
+      connectionX = connectionsXY.x - Blockly.BlockSvg.CORNER_RADIUS * 2 - 4 * Blockly.BlockSvg.GRID_UNIT;
+    }
     var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
     metrics.statement.connection.moveTo(connectionX, connectionY);
     if (metrics.statement.connection.targetConnection) {
@@ -565,7 +566,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
     // Create next block connection.
     var connectionX;
     if (this.RTL) {
-      connectionX = connectionsXY.x + metrics.width;
+      connectionX = connectionsXY.x - metrics.width;
     } else {
       connectionX = connectionsXY.x + metrics.width;
     }

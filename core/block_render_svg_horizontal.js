@@ -400,11 +400,14 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   if (metrics.valueInput) {
     var input = metrics.valueInput.getSvgRoot();
     var inputBBox = input.getBBox();
-    var transformation = 'translate(' +
-      (Blockly.BlockSvg.NOTCH_WIDTH +
-        (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
-          Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth) + ',' +
-      (metrics.height - 2 * Blockly.BlockSvg.GRID_UNIT) + ')';
+    var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
+      (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
+        Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);
+    if (this.RTL) {
+      valueX = -valueX;
+    }
+    var valueY = (metrics.height - 2 * Blockly.BlockSvg.GRID_UNIT);
+    var transformation = 'translate(' + valueX + ',' + valueY + ')';
     input.setAttribute('transform', transformation);
   }
 };

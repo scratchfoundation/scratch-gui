@@ -126,7 +126,7 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   // Record initial inline state.
   /** @type {boolean|undefined} */
   this.inputsInlineDefault = this.inputsInline;
-  if (Blockly.Events.isEnabled() && !this.isShadow()) {
+  if (Blockly.Events.isEnabled()) {
     Blockly.Events.fire(new Blockly.Events.Create(this));
   }
   // Bind an onchange function, if it exists.
@@ -190,7 +190,7 @@ Blockly.Block.prototype.dispose = function(healStack) {
     this.workspace.removeChangeListener(this.onchangeWrapper_)
   }
   this.unplug(healStack);
-  if (Blockly.Events.isEnabled() && !this.isShadow()) {
+  if (Blockly.Events.isEnabled()) {
     Blockly.Events.fire(new Blockly.Events.Delete(this));
   }
   Blockly.Events.disable();
@@ -425,7 +425,7 @@ Blockly.Block.prototype.getChildren = function() {
  */
 Blockly.Block.prototype.setParent = function(newParent) {
   var event;
-  if (Blockly.Events.isEnabled() && !this.isShadow()) {
+  if (Blockly.Events.isEnabled()) {
     event = new Blockly.Events.Move(this);
   }
   if (this.parentBlock_) {
@@ -528,23 +528,7 @@ Blockly.Block.prototype.isShadow = function() {
  * @param {boolean} shadow True if a shadow.
  */
 Blockly.Block.prototype.setShadow = function(shadow) {
-  if (this.isShadow_ == shadow) {
-    return;  // No change.
-  }
   this.isShadow_ = shadow;
-  if (Blockly.Events.isEnabled() && !shadow) {
-    Blockly.Events.group = Blockly.genUid();
-    // Fire a creation event.
-    Blockly.Events.fire(new Blockly.Events.Create(this));
-    var moveEvent = new Blockly.Events.Move(this);
-    // Claim that the block was at 0,0 and is being connected.
-    moveEvent.oldParentId = undefined;
-    moveEvent.oldInputName = undefined;
-    moveEvent.oldCoordinate = new goog.math.Coordinate(0, 0);
-    moveEvent.recordNew();
-    Blockly.Events.fire(moveEvent);
-    Blockly.Events.group = '';
-  }
 };
 
 /**
@@ -721,6 +705,39 @@ Blockly.Block.prototype.getField = function(name) {
     }
   }
   return null;
+};
+
+/**
+ * Return all variables referenced by this block.
+ * @return {!Array.<string>} List of variable names.
+ */
+Blockly.Block.prototype.getVars = function() {
+  var vars = [];
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      if (field instanceof Blockly.FieldVariable) {
+        vars.push(field.getValue());
+      }
+    }
+  }
+  return vars;
+};
+
+/**
+ * Notification that a variable is renaming.
+ * If the name matches one of this block's variables, rename it.
+ * @param {string} oldName Previous name of variable.
+ * @param {string} newName Renamed variable.
+ */
+Blockly.Block.prototype.renameVar = function(oldName, newName) {
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      if (field instanceof Blockly.FieldVariable &&
+          Blockly.Names.equals(oldName, field.getValue())) {
+        field.setValue(newName);
+      }
+    }
+  }
 };
 
 /**
@@ -1379,6 +1396,7 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
  * @param {number} dy Vertical offset.
  */
 Blockly.Block.prototype.moveBy = function(dx, dy) {
+  goog.asserts.assert(!this.parentBlock_, 'Block has parent.');
   var event = new Blockly.Events.Move(this);
   this.xy_.translate(dx, dy);
   event.recordNew();

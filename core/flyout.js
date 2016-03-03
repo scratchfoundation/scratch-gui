@@ -581,7 +581,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     block.render();
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();
-    block.moveBy((this.horizontalLayout_ && this.RTL) ? this.width_ - cursorX : cursorX, cursorY);
+    block.moveBy((this.horizontalLayout_ && this.RTL) ? -cursorX : cursorX, cursorY);
     if (this.horizontalLayout_) {
       cursorX += blockHW.width + gaps[i];
     } else {

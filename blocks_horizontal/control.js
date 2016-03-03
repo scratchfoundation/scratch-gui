@@ -50,7 +50,8 @@ Blockly.Blocks['control_repeat'] = {
           "src": Blockly.mainWorkspace.options.pathToMedia + "icons/control_forever.svg",
           "width": 40,
           "height": 40,
-          "alt": "*"
+          "alt": "*",
+          "flip_rtl": true
         },
         {
           "type": "input_value",
@@ -94,7 +95,8 @@ Blockly.Blocks['control_forever'] = {
           "src": Blockly.mainWorkspace.options.pathToMedia + "icons/control_forever.svg",
           "width": 40,
           "height": 40,
-          "alt": "*"
+          "alt": "*",
+          "flip_rtl": true
         }
       ],
       "inputsInline": true,

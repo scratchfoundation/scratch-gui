@@ -379,22 +379,36 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   if (!this.isGhost() && metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
     var iconSize = metrics.icon.getSize();
+    // Icon's position is calculated relative to the "end" edge of the block.
     var iconX = metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+    var iconY = metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
+    var iconScale = "scale(1 1)";
+    if (this.RTL) {
+      // Do we want to mirror the icon left-to-right?
+      if (metrics.icon.getFlipRTL()) {
+        iconScale = "scale(-1 1)";
+        iconX = -metrics.width + iconSize.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+      } else {
+        // If not, don't offset by iconSize.width
+        iconX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+      }
+    }
     icon.setAttribute('transform',
-      'translate(' + (iconX) + ',' +
-      (metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y) + ')');
-    // @todo RTL
+      'translate(' + iconX + ',' + iconY + ') ' + iconScale);
   }
 
   // Position value input
   if (metrics.valueInput) {
     var input = metrics.valueInput.getSvgRoot();
     var inputBBox = input.getBBox();
-    var transformation = 'translate(' +
-      (Blockly.BlockSvg.NOTCH_WIDTH +
-        (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
-          Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth) + ',' +
-      (metrics.height - 2 * Blockly.BlockSvg.GRID_UNIT) + ')';
+    var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
+      (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
+        Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);
+    if (this.RTL) {
+      valueX = -valueX;
+    }
+    var valueY = (metrics.height - 2 * Blockly.BlockSvg.GRID_UNIT);
+    var transformation = 'translate(' + valueX + ',' + valueY + ')';
     input.setAttribute('transform', transformation);
   }
 };
@@ -505,9 +519,10 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
                Blockly.BlockSvg.CORNER_RADIUS);
 
     // Create statement connection.
-    // @todo RTL
-    // var connectionX = connectionsXY.x + (this.RTL ? -cursorX : cursorX + 1);
     var connectionX = connectionsXY.x + Blockly.BlockSvg.CORNER_RADIUS * 2 + 4 * Blockly.BlockSvg.GRID_UNIT;
+    if (this.RTL) {
+      connectionX = connectionsXY.x - Blockly.BlockSvg.CORNER_RADIUS * 2 - 4 * Blockly.BlockSvg.GRID_UNIT;
+    }
     var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
     metrics.statement.connection.moveTo(connectionX, connectionY);
     if (metrics.statement.connection.targetConnection) {
@@ -552,7 +567,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
     // Create next block connection.
     var connectionX;
     if (this.RTL) {
-      connectionX = connectionsXY.x + metrics.width;
+      connectionX = connectionsXY.x - metrics.width;
     } else {
       connectionX = connectionsXY.x + metrics.width;
     }

@@ -380,10 +380,20 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
     var icon = metrics.icon.getSvgRoot();
     var iconSize = metrics.icon.getSize();
     var iconX = metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+    var iconY = metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
+    var iconScale = "scale(1 1)";
+    if (this.RTL) {
+      // Do we want to mirror the icon left-to-right?
+      if (metrics.icon.getFlipRTL()) {
+        iconScale = "scale(-1 1)";
+        iconX = -metrics.width + iconSize.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+      } else {
+        // If not, don't offset by iconSize.width
+        iconX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+      }
+    }
     icon.setAttribute('transform',
-      'translate(' + (iconX) + ',' +
-      (metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y) + ')');
-    // @todo RTL
+      'translate(' + iconX + ',' + iconY + ') ' + iconScale);
   }
 
   // Position value input

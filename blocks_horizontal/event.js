@@ -45,7 +45,8 @@ Blockly.Blocks['event_whenflagclicked'] = {
           "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_whenflagclicked.svg",
           "width": 40,
           "height": 40,
-          "alt": "flag"
+          "alt": "flag",
+          "flip_rtl": true
         }
       ],
       "inputsInline": true,

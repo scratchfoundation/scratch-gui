@@ -437,6 +437,12 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   }
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
+    if (Blockly.localConnection_ == Blockly.selected.nextConnection) {
+      // Snap to match the position of the pre-existing stack.
+      Blockly.selected.moveBy(
+          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
+          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
+    }
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
     if (this.rendered) {

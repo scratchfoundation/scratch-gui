@@ -455,6 +455,24 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
 };
 
 /**
+ * Glow/unglow a block in the workspace.
+ * @param {?string} id ID of block to find.
+ * @param {boolean} isGlowing Whether to glow the block.
+ */
+Blockly.WorkspaceSvg.prototype.glowBlock = function(id, isGlowing) {
+  var block = null;
+  if (id) {
+    block = Blockly.Block.getById(id);
+    if (!block) {
+      return;
+    }
+  }
+  if (block) {
+    block.setGlow(isGlowing);
+  }
+};
+
+/**
  * Paste the provided block onto the workspace.
  * @param {!Element} xmlBlock XML block element.
  */

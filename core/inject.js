@@ -279,6 +279,19 @@ Blockly.createDom_ = function(container, options) {
        'k1': 0, 'k2': 1, 'k3': 1, 'k4': 0}, embossFilter);
   options.embossFilterId = embossFilter.id;
 
+  var stackGlowFilter = Blockly.createSvgElement('filter',
+      {'id': 'blocklyStackGlowFilter' + rnd}, defs);
+  Blockly.createSvgElement('feMorphology',
+      {'in': 'SourceAlpha', 'operator': 'dilate', 'radius': 4, 'result': 'outBlur'}, stackGlowFilter);
+  Blockly.createSvgElement('feFlood',
+      {'flood-color': '#05f', 'flood-opacity': '0.9', 'result': 'outColor'}, stackGlowFilter);
+  Blockly.createSvgElement('feComposite',
+      {'in': 'outColor', 'in2': 'outBlur',
+       'operator': 'in', 'result': 'outGlow'}, stackGlowFilter);
+  Blockly.createSvgElement('feComposite',
+      {'in': 'SourceGraphic', 'in2': 'outGlow', 'operator': 'over'}, stackGlowFilter);
+  options.stackGlowFilterId = stackGlowFilter.id;
+
   var disabledPattern = Blockly.createSvgElement('pattern',
       {'id': 'blocklyDisabledPattern' + rnd,
        'patternUnits': 'userSpaceOnUse',

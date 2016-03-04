@@ -77,6 +77,13 @@ Blockly.BlockSvg.prototype.width = 0;
 Blockly.BlockSvg.prototype.dragStartXY_ = null;
 
 /**
+ * Whether the block glows as if running.
+ * @type {boolean}
+ * @private
+ */
+Blockly.BlockSvg.prototype.isGlowing_ = false;
+
+/**
  * Constant for identifying rows that are to be rendered inline.
  * Don't collide with Blockly.INPUT_VALUE and friends.
  * @const
@@ -132,6 +139,15 @@ Blockly.BlockSvg.prototype.unselect = function() {
   Blockly.selected = null;
   this.removeSelect();
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
+};
+
+/**
+ * Glow this block.  Highlight it visually as if it's running.
+ * @param {boolean} isGlowing Whether the block should glow.
+ */
+Blockly.BlockSvg.prototype.setGlow = function(isGlowing) {
+  this.isGlowing_ = isGlowing;
+  this.updateColour();
 };
 
 /**

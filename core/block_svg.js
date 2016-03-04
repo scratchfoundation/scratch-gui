@@ -812,45 +812,76 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       }
     }
 
-    // Remove connection highlighting if needed.
-    if (Blockly.highlightedConnection_ &&
-        Blockly.highlightedConnection_ != closestConnection) {
-      if (this.ghostBlock_) {
-        this.ghostBlock_.unplug(true /* healStack */);
-        this.ghostBlock_.dispose();
-        this.ghostBlock_ = null;
-      }
-      Blockly.highlightedConnection_.unhighlight();
-      Blockly.highlightedConnection_ = null;
-      Blockly.localConnection_ = null;
-    }
-    // Add connection highlighting if needed.
-    if (closestConnection &&
-        closestConnection != Blockly.highlightedConnection_) {
-      closestConnection.highlight();
-      Blockly.highlightedConnection_ = closestConnection;
-      Blockly.localConnection_ = localConnection;
-      if (!this.ghostBlock_){
-        this.ghostBlock_ = this.workspace.newBlock(this.type);
-        this.ghostBlock_.setGhost(true);
-        this.ghostBlock_.moveConnections_(radiusConnection);
-      }
-      if (Blockly.localConnection_ == this.previousConnection) {
-        // Setting the block to rendered will actually change the connection
-        // behaviour :/
-        this.ghostBlock_.rendered = true;
-        this.ghostBlock_.previousConnection.connect(closestConnection);
-      }
-      this.ghostBlock_.render(true);
-    }
-    // Provide visual indication of whether the block will be deleted if
-    // dropped here.
-    if (this.isDeletable()) {
-      this.workspace.isDeleteArea(e);
-    }
+    this.updatePreviews(closestConnection, localConnection, radiusConnection,
+        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y, oldXY);
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
+};
+
+/**
+ * Preview the results of the drag if the mouse is released immediately.
+ * @param {Blockly.Connection} closestConnection The closest connection found
+ *    during the search
+ * @param {Blockly.Connection} localConnection The connection on the moving
+ *    block.
+ * @param {number} radiusConnection The distance between closestConnection and
+ *    localConnection.
+ * @param {!Event} e Mouse move event.
+ */
+Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
+    localConnection, radiusConnection, e, dx, dy, oldXY) {
+  // Remove connection highlighting if needed.
+  if (Blockly.highlightedConnection_ &&
+      Blockly.highlightedConnection_ != closestConnection) {
+    Blockly.highlightedConnection_.unhighlight();
+
+    if (this.ghostBlock_) {
+      this.ghostBlock_.unplug(true /* healStack */);
+      this.ghostBlock_.dispose();
+      this.ghostBlock_ = null;
+    }
+    Blockly.highlightedConnection_ = null;
+    Blockly.localConnection_ = null;
+
+  }
+  // Add connection highlighting if needed.
+  if (closestConnection &&
+      closestConnection != Blockly.highlightedConnection_
+      && !closestConnection.sourceBlock_.isGhost()) {
+    closestConnection.highlight();
+    Blockly.highlightedConnection_ = closestConnection;
+    Blockly.localConnection_ = localConnection;
+    if (!this.ghostBlock_){
+      this.ghostBlock_ = this.workspace.newBlock(this.type);
+      this.ghostBlock_.setGhost(true);
+      this.ghostBlock_.initSvg();
+      var ghostBlock = this.ghostBlock_;
+    }
+
+    var localGhostConnection = ghostBlock.getMatchingConnection(this,
+        localConnection);
+
+    if (localGhostConnection) {
+      ghostBlock.rendered = true;
+      if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT) {
+      } else if (localGhostConnection.type == Blockly.NEXT_STATEMENT) {
+        var relativeXy = this.getRelativeToSurfaceXY();
+        var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
+        var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
+        var newX = closestConnection.x_ - connectionOffsetX;
+        var newY = closestConnection.y_ - connectionOffsetY;
+        ghostBlock.moveBy(newX, newY, true);
+      }
+      localGhostConnection.connect(closestConnection);
+    }
+  }
+
+  // Provide visual indication of whether the block will be deleted if
+  // dropped here.
+  if (this.isDeletable()) {
+    this.workspace.isDeleteArea(e);
+  }
 };
 
 /**

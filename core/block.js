@@ -624,6 +624,28 @@ Blockly.Block.prototype.setConnectionsHidden = function(hidden) {
 };
 
 /**
+ * Find the connection on this block that corresponds to the given connection
+ * on the other block.
+ * Used to match connections between a block and its ghost.
+ * @param {!Blockly.Block} otherBlock The other block to match against.
+ * @param {!Blockly.Connection} conn The other connection to match.
+ * @return {Blockly.Connection} the matching connection on this block, or null.
+ */
+Blockly.Block.prototype.getMatchingConnection = function(otherBlock, conn) {
+  var connections = this.getConnections_(true);
+  var otherConnections = otherBlock.getConnections_(true);
+  if (connections.length != otherConnections.length) {
+    throw "Connection lists did not match in length.";
+  }
+  for (var i = 0; i < otherConnections.length; i++) {
+    if (otherConnections[i] == conn) {
+      return connections[i];
+    }
+  }
+  return null;
+};
+
+/**
  * Set the URL of this block's help page.
  * @param {string|Function} url URL string for block help, or function that
  *     returns a URL.  Null for no help.
@@ -694,12 +716,14 @@ Blockly.Block.prototype.setColour = function(colour, colourSecondary, colourTert
   if (colourSecondary !== undefined) {
     this.colourSecondary_ = this.makeColour_(colourSecondary);
   } else {
-    this.colourSecondary_ = goog.color.darken(colour, 0.1);
+    this.colourSecondary_ = goog.color.darken(goog.color.hexToRgb(this.colour_),
+        0.1);
   }
   if (colourTertiary !== undefined) {
     this.colourTertiary_ = this.makeColour_(colourTertiary);
   } else {
-    this.colourTertiary_ = goog.color.darken(colour, 0.2);
+    this.colourTertiary_ = goog.color.darken(goog.color.hexToRgb(this.colour_),
+        0.2);
   }
   if (this.rendered) {
     this.updateColour();
@@ -1417,6 +1441,22 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
   this.xy_.translate(dx, dy);
   event.recordNew();
   Blockly.Events.fire(event);
+};
+
+/**
+ * Move a block to an absolute location.
+ * @param {number} x Horizontal location.
+ * @param {number} y Vertical loaction.
+ * @param {boolean} suppress_event Whether to suppress the move event.
+ */
+Blockly.Block.prototype.moveTo = function(x, y, suppress_event) {
+  var event = new Blockly.Events.Move(this);
+  this.xy_.x = x;
+  this.xy_.y = y;
+  if (!suppress_event) {
+    event.recordNew();
+    Blockly.Events.fire(event);
+  }
 };
 
 /**

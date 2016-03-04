@@ -283,6 +283,17 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
     metrics.startHat = true;
   }
 
+  var ghostBlock = this.ghostBlock_;
+  // Is there an insertion ghost?
+  if (ghostBlock) {
+    var ghostInfo = ghostBlock.ghostInfo_;
+    // Is it right in front of my nose?
+    if (ghostInfo.activeConnection == ghostBlock.nextConnection) {
+      ghostBlock.getSvgRoot().setAttribute('transform',
+        'translate(' +  + ","))
+    }
+  }
+
   // Does block have a statement?
   for (var i = 0, input; input = this.inputList[i]; i++) {
     if (input.type == Blockly.NEXT_STATEMENT) {
@@ -358,6 +369,10 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   // Fetch the block's coordinates on the surface for use in anchoring
   // the connections.
   var connectionsXY = this.getRelativeToSurfaceXY();
+  // if (this.isGhost_) {
+  //   console.log(connectionsXY);
+  //   console.log(metrics);
+  // }
 
   // Assemble the block's path.
   var steps = [];

@@ -217,10 +217,8 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == 2) {
     // Terminate a drag operation.
     if (selected) {
-      if (selected.ghostBlock_) {
-        selected.ghostBlock_.unplug(true /* healStack */);
-        selected.ghostBlock_.dispose();
-        selected.ghostBlock_ = null;
+      if (selected.ghostBlock_ && Blockly.localGhostConnection_) {
+        selected.disconnectGhost();
       }
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
@@ -836,10 +834,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       Blockly.highlightedConnection_ != closestConnection) {
     Blockly.highlightedConnection_.unhighlight();
 
-    if (this.ghostBlock_) {
-      this.ghostBlock_.unplug(true /* healStack */);
-      this.ghostBlock_.dispose();
-      this.ghostBlock_ = null;
+    if (this.ghostBlock_ && Blockly.localGhostConnection_) {
+      this.disconnectGhost();
     }
     Blockly.highlightedConnection_ = null;
     Blockly.localConnection_ = null;
@@ -856,16 +852,15 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       this.ghostBlock_ = this.workspace.newBlock(this.type);
       this.ghostBlock_.setGhost(true);
       this.ghostBlock_.initSvg();
-      var ghostBlock = this.ghostBlock_;
     }
 
+    var ghostBlock = this.ghostBlock_;
     var localGhostConnection = ghostBlock.getMatchingConnection(this,
         localConnection);
-
-    if (localGhostConnection) {
+    if (localGhostConnection != Blockly.localGhostConnection_) {
       ghostBlock.rendered = true;
-      if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT) {
-      } else if (localGhostConnection.type == Blockly.NEXT_STATEMENT) {
+      // Move the preview to the correct location before the existing block.
+      if (localGhostConnection.type == Blockly.NEXT_STATEMENT) {
         var relativeXy = this.getRelativeToSurfaceXY();
         var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
         var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
@@ -873,7 +868,11 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var newY = closestConnection.y_ - connectionOffsetY;
         ghostBlock.moveBy(newX, newY, true);
       }
+      // Renders ghost.
       localGhostConnection.connect(closestConnection);
+      // Render dragging block so it appears on top.
+      this.workspace.getCanvas().appendChild(this.getSvgRoot());
+      Blockly.localGhostConnection_ = localGhostConnection;
     }
   }
 
@@ -882,6 +881,28 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (this.isDeletable()) {
     this.workspace.isDeleteArea(e);
   }
+};
+
+Blockly.BlockSvg.prototype.disconnectGhost = function() {
+  if ((Blockly.localGhostConnection_ == this.ghostBlock_.previousConnection &&
+      this.ghostBlock_.nextConnection) ||
+      Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection) {
+    this.ghostBlock_.unplug(true /* healStack */);
+  }
+  if (Blockly.localGhostConnection_.type == Blockly.NEXT_STATEMENT &&
+      Blockly.localGhostConnection_ != this.ghostBlock_.nextConnection) {
+    var innerConnection = Blockly.localGhostConnection_.targetConnection;
+    Blockly.localGhostConnection_.targetBlock().unplug(false);
+    var previousBlockNextConnection =
+      this.ghostBlock_.previousConnection.targetConnection;
+    this.ghostBlock_.unplug(true);
+    if (previousBlockNextConnection) {
+      previousBlockNextConnection.connect(innerConnection);
+    }
+  }
+  Blockly.localGhostConnection_ = null;
+  this.ghostBlock_.dispose();
+  this.ghostBlock_ = null;
 };
 
 /**

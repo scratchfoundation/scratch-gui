@@ -172,7 +172,7 @@ Blockly.Msg.LOGIC_OPERATION_OR = "nebo";
 Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND = "Vrátí hodnotu pravda, pokud oba dva vstupy jsou pravdivé.";
 Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR = "Vrátí hodnotu pravda, pokud alespoň jeden ze vstupů má hodnotu pravda.";
 Blockly.Msg.LOGIC_TERNARY_CONDITION = "test";
-Blockly.Msg.LOGIC_TERNARY_HELPURL = "https://en.wikipedia.org/wiki/%3F:";  // untranslated
+Blockly.Msg.LOGIC_TERNARY_HELPURL = "https://cs.wikipedia.org/wiki/Ternární operátor (programování)";
 Blockly.Msg.LOGIC_TERNARY_IF_FALSE = "pokud nepravda";
 Blockly.Msg.LOGIC_TERNARY_IF_TRUE = "pokud pravda";
 Blockly.Msg.LOGIC_TERNARY_TOOLTIP = "Zkontroluje podmínku v \"testu\". Když je podmínka pravda, vrátí hodnotu \"pokud pravda\"; v opačném případě vrátí hodnotu \"pokud nepravda\".";
@@ -273,11 +273,11 @@ Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "s:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Vytvořit '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT = "Popište tuto funkci...";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
-Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated
+Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://cs.wikipedia.org/w/index.php?title=Funkce_(programování)";
 Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE = "proveď něco";
 Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE = "k provedení";
 Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP = "Vytvořit funkci bez výstupu.";
-Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated
+Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL = "https://cs.wikipedia.org/w/index.php?title=Funkce_(programování)";
 Blockly.Msg.PROCEDURES_DEFRETURN_RETURN = "navrátit";
 Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP = "Vytvořit funkci s výstupem.";
 Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING = "Upozornění: Tato funkce má duplicitní parametry.";

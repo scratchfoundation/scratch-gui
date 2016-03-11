@@ -887,35 +887,3 @@ Blockly.Connection.prototype.unhideAll = function() {
   }
   return renderList;
 };
-
-/**
- * Add highlighting around this connection.
- */
-Blockly.Connection.prototype.highlight = function() {
-  var steps;
-  if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.OUTPUT_VALUE) {
-    var tabWidth = this.sourceBlock_.RTL ? -Blockly.BlockSvg.TAB_WIDTH :
-        Blockly.BlockSvg.TAB_WIDTH;
-    steps = 'm 0,0 ' + Blockly.BlockSvg.TAB_PATH_DOWN + ' v 5';
-
-  } else {
-    steps = 'm -20,0 h 5 ' + Blockly.BlockSvg.NOTCH_PATH_LEFT + ' h 5';
-  }
-  var xy = this.sourceBlock_.getRelativeToSurfaceXY();
-  var x = this.x_ - xy.x;
-  var y = this.y_ - xy.y;
-  Blockly.Connection.highlightedPath_ = Blockly.createSvgElement('path',
-      {'class': 'blocklyHighlightedConnectionPath',
-       'd': steps,
-       transform: 'translate(' + x + ',' + y + ')' +
-           (this.sourceBlock_.RTL ? ' scale(-1 1)' : '')},
-      this.sourceBlock_.getSvgRoot());
-};
-
-/**
- * Remove the highlighting around this connection.
- */
-Blockly.Connection.prototype.unhighlight = function() {
-  goog.dom.removeNode(Blockly.Connection.highlightedPath_);
-  delete Blockly.Connection.highlightedPath_;
-};

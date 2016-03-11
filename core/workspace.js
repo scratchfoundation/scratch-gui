@@ -51,6 +51,10 @@ Blockly.Workspace = function(opt_options) {
   this.listeners_ = [];
   /** @type {!Array.<!Function>} */
   this.tapListeners_ = [];
+  /** @type {!Array.<!Blockly.Events.Abstract>} */
+  this.undoStack_ = [];
+  /** @type {!Array.<!Blockly.Events.Abstract>} */
+  this.redoStack_ = [];
 };
 
 /**
@@ -58,6 +62,12 @@ Blockly.Workspace = function(opt_options) {
  * @type {boolean} True if visible.  False if headless.
  */
 Blockly.Workspace.prototype.rendered = false;
+
+/**
+ * Maximum number of undo events in stack.
+ * @type {number} 0 to turn off undo, Infinity for unlimited.
+ */
+Blockly.Workspace.prototype.MAX_UNDO = 1024;
 
 /**
  * Dispose of this workspace.
@@ -199,6 +209,31 @@ Blockly.Workspace.prototype.remainingCapacity = function() {
 };
 
 /**
+ * Undo or redo the previous action.
+ * @param {boolean} redo False if undo, true if redo.
+ */
+Blockly.Workspace.prototype.undo = function(redo) {
+  var sourceStack = redo ? this.redoStack_ : this.undoStack_;
+  var event = sourceStack.pop();
+  if (!event) {
+    return;
+  }
+  var events = [event];
+  // Do another undo/redo if the next one is of the same group.
+  while (sourceStack.length && event.group &&
+      event.group == sourceStack[sourceStack.length - 1].group) {
+    events.push(sourceStack.pop());
+  }
+  events = Blockly.Events.filter(events);
+  Blockly.Events.recordUndo = false;
+  for (var i = 0, event; event = events[i]; i++) {
+    event.run(redo);
+    (redo ? this.undoStack_ : this.redoStack_).push(event);
+  }
+  Blockly.Events.recordUndo = true;
+};
+
+/**
  * When something in this workspace changes, call a function.
  * @param {!Function} func Function to call.
  * @return {!Function} Function that can be passed to
@@ -225,6 +260,13 @@ Blockly.Workspace.prototype.removeChangeListener = function(func) {
  * @param {!Blockly.Events.Abstract} event Event to fire.
  */
 Blockly.Workspace.prototype.fireChangeListener = function(event) {
+  if (event.recordUndo) {
+    this.undoStack_.push(event);
+    this.redoStack_.length = 0;
+    if (this.undoStack_.length > this.MAX_UNDO) {
+      this.undoStack_.unshift();
+    }
+  }
   for (var i = 0, func; func = this.listeners_[i]; i++) {
     func(event);
   }

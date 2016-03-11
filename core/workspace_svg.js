@@ -464,12 +464,10 @@ Blockly.WorkspaceSvg.prototype.glowBlock = function(id, isGlowing) {
   if (id) {
     block = Blockly.Block.getById(id);
     if (!block) {
-      return;
+      throw 'Tried to glow block that does not exist.';
     }
   }
-  if (block) {
-    block.setGlow(isGlowing);
-  }
+  block.setGlow(isGlowing);
 };
 
 /**

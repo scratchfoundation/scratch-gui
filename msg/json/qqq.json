@@ -85,7 +85,7 @@
 	"LOGIC_OPERATION_TOOLTIP_AND": "tooltip - See [https://en.wikipedia.org/wiki/Logical_conjunction https://en.wikipedia.org/wiki/Logical_conjunction].",
 	"LOGIC_OPERATION_AND": "block text - See [https://en.wikipedia.org/wiki/Logical_conjunction https://en.wikipedia.org/wiki/Logical_conjunction].\n{{Identical|And}}",
 	"LOGIC_OPERATION_TOOLTIP_OR": "block text - See [https://en.wikipedia.org/wiki/Disjunction https://en.wikipedia.org/wiki/Disjunction].",
-	"LOGIC_OPERATION_OR": "block text - See [https://en.wikipedia.org/wiki/Disjunction https://en.wikipedia.org/wiki/Disjunction].",
+	"LOGIC_OPERATION_OR": "block text - See [https://en.wikipedia.org/wiki/Disjunction https://en.wikipedia.org/wiki/Disjunction].\n{{Identical|Or}}",
 	"LOGIC_NEGATE_HELPURL": "url - Information about logical negation.  The translation of [https://en.wikipedia.org/wiki/Logical_negation https://en.wikipedia.org/wiki/Logical_negation] is recommended if it exists in the target language.",
 	"LOGIC_NEGATE_TITLE": "block text - This is a unary operator that returns ''false'' when the input is ''true'', and ''true'' when the input is ''false''. \n\nParameters:\n* %1 - the input (which should be either the value 'true' or 'false')",
 	"LOGIC_NEGATE_TOOLTIP": "tooltip - See [https://en.wikipedia.org/wiki/Logical_negation https://en.wikipedia.org/wiki/Logical_negation].",

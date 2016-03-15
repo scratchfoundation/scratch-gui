@@ -270,7 +270,8 @@ function helper_makeSourceBlock(sharedWorkspace) {
     getParent: function() { return null; },
     movable_: true,
     isMovable: function() { return true; },
-    isShadow: function() { return false; }
+    isShadow: function() { return false; },
+    isGhost: function() { return false; }
   };
 }
 

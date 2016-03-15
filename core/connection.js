@@ -86,8 +86,18 @@ Blockly.Connection.REASON_DIFFERENT_WORKSPACES = 5;
 Blockly.Connection.connect_ = function(parentConnection, childConnection) {
   var parentBlock = parentConnection.sourceBlock_;
   var childBlock = childConnection.sourceBlock_;
+  var isSurroundingC = false;
+  if (parentConnection == parentBlock.getFirstStatementConnection()) {
+    isSurroundingC = true;
+  }
   // Disconnect any existing parent on the child connection.
   if (childConnection.targetConnection) {
+    // Scratch-specific behaviour:
+    // If we're using a c-shaped block to surround a stack, remember where the
+    // stack used to be connected.
+    if (isSurroundingC) {
+      var previousParentConnection = childConnection.targetConnection;
+    }
     childConnection.disconnect();
   }
   if (parentConnection.targetConnection) {
@@ -163,6 +173,10 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
     }
     // Restore the shadow DOM.
     parentConnection.setShadowDom(shadowDom);
+  }
+
+  if (isSurroundingC && previousParentConnection) {
+      previousParentConnection.connect(parentBlock.previousConnection);
   }
 
   var event;
@@ -384,13 +398,53 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   }
 
   // Don't offer to connect an already connected left (male) value plug to
-  // an available right (female) value plug.  Don't offer to connect the
-  // bottom of a statement block to one that's already connected.
-  if (candidate.type == Blockly.OUTPUT_VALUE ||
-      candidate.type == Blockly.PREVIOUS_STATEMENT) {
+  // an available right (female) value plug.
+  if (candidate.type == Blockly.OUTPUT_VALUE) {
     if (candidate.targetConnection || this.targetConnection) {
       return false;
     }
+  }
+
+  var firstStatementConnection =
+      this.sourceBlock_.getFirstStatementConnection();
+
+  if (candidate.type == Blockly.PREVIOUS_STATEMENT) {
+    // Scratch-specific behaviour:
+    // If this is a c-shaped block, statement blocks cannot be connected
+    // anywhere other than inside the first statement input.
+    if (firstStatementConnection) {
+      // Can't connect if there is alread a block inside the first statement
+      // input.
+      if (this == firstStatementConnection) {
+        if (this.targetConnection) {
+          return false;
+        }
+      }
+      // The only other eligible connection of this type is the next connection
+      // when the candidate is not already connection (connecting at the start
+      // of the stack).
+      else if (this == this.sourceBlock_.nextConnection &&
+          candidate.targetConnection) {
+        return false;
+      }
+    } else {
+      // Otherwise, don't offer to connect the bottom of a statement block to
+      // the top of a block that's already connected.  And don't connect the
+      // bottom of a statement block that's already connected.
+      if (this.targetConnection || candidate.targetConnection) {
+        return false;
+      }
+    }
+  }
+
+  // Don't offer to connect the bottom of a statement block to one that's
+  // already connected.
+  // But the first statement input on c-block can connect to the start of a
+  // block in a stack.
+  if (candidate.type == Blockly.PREVIOUS_STATEMENT &&
+      this != this.sourceBlock_.getFirstStatementConnection() &&
+      (this.targetConnection || candidate.targetConnection)) {
+        return false;
   }
 
   // Offering to connect the left (male) of a value block to an already

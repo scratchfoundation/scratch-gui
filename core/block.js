@@ -415,6 +415,20 @@ Blockly.Block.prototype.getNextBlock = function() {
 };
 
 /**
+ * Return the connection on the first statement input on this block, or null if
+ * there are none.
+ * @return {Blockly.Connection} The first statement connection or null.
+ */
+Blockly.Block.prototype.getFirstStatementConnection = function() {
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    if (input.connection && input.connection.type == Blockly.NEXT_STATEMENT) {
+      return input.connection;
+    }
+  }
+  return null;
+};
+
+/**
  * Return the top-most block in this block's tree.
  * This will return itself if this block is at the top level.
  * @return {!Blockly.Block} The root block.

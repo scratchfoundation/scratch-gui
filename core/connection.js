@@ -391,6 +391,14 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
     return false;
   }
 
+  // Don't let a block with no next connection bump other blocks out of the
+  // stack.
+  if (this.type == Blockly.PREVIOUS_STATEMENT &&
+      candidate.targetConnection &&
+      !this.sourceBlock_.nextConnection) {
+    return false;
+  }
+
   // Don't let blocks try to connect to themselves or ones they nest.
   var targetSourceBlock = candidate.sourceBlock_;
   var sourceBlock = this.sourceBlock_;
@@ -695,13 +703,7 @@ Blockly.Connection.prototype.tighten_ = function() {
  *     and 'radius' which is the distance.
  */
 Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
-  var closestConnection = this.dbOpposite_.searchForClosest(this, maxLimit, dx,
-      dy);
-  if (closestConnection) {
-    return {connection: closestConnection,
-            radius: this.distanceFrom(closestConnection)};
-  }
-  return {connection: null, radius: maxLimit};
+  return this.dbOpposite_.searchForClosest(this, maxLimit, dx, dy);
 };
 
 /**
@@ -880,7 +882,7 @@ Blockly.Connection.prototype.unhideAll = function() {
     for (var c = 0; c < connections.length; c++) {
       renderList.push.apply(renderList, connections[c].unhideAll());
     }
-    if (renderList.length == 0) {
+    if (!renderList.length) {
       // Leaf block.
       renderList[0] = block;
     }

@@ -353,6 +353,100 @@ Blockly.BlockSvg.prototype.snapToGrid = function() {
 };
 
 /**
+ * Returns a bounding box describing the dimensions of this block
+ * and any blocks stacked below it.
+ * @return {!{height: number, width: number}} Object with height and width properties.
+ */
+Blockly.BlockSvg.prototype.getHeightWidth = function() {
+  var height = this.height;
+  var width = this.width;
+  // Recursively add size of subsequent blocks.
+  var nextBlock = this.getNextBlock();
+  if (nextBlock) {
+    var nextHeightWidth = nextBlock.getHeightWidth();
+    height += nextHeightWidth.height - 4;  // Height of tab.
+    width = Math.max(width, nextHeightWidth.width);
+  } else if (!this.nextConnection && !this.outputConnection) {
+    // Add a bit of margin under blocks with no bottom tab.
+    height += 2;
+  }
+  return {height: height, width: width};
+};
+
+/**
+ * Returns the coordinates of a bounding box describing the dimensions of this block
+ * and any blocks stacked below it.
+ * @return {!{topLeft: goog.math.Coordinate, bottomRight: goog.math.Coordinate}}
+ *         Object with top left and bottom right coordinates of the bounding box.
+ */
+Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
+  var blockXY = this.getRelativeToSurfaceXY(this);
+  var tab = this.outputConnection ? Blockly.BlockSvg.TAB_WIDTH : 0;
+  var blockBounds = this.getHeightWidth();
+  var topLeft;
+  var bottomRight;
+  if (this.RTL) {
+    // Width has the tab built into it already so subtract it here.
+    topLeft = new goog.math.Coordinate(blockXY.x - (blockBounds.width - tab), blockXY.y);
+    // Add the width of the tab/puzzle piece knob to the x coordinate
+    // since X is the corner of the rectangle, not the whole puzzle piece.
+    bottomRight = new goog.math.Coordinate(blockXY.x + tab, blockXY.y + blockBounds.height);
+  } else {
+    // Subtract the width of the tab/puzzle piece knob to the x coordinate
+    // since X is the corner of the rectangle, not the whole puzzle piece.
+    topLeft = new goog.math.Coordinate(blockXY.x - tab, blockXY.y);
+    // Width has the tab built into it already so subtract it here.
+    bottomRight = new goog.math.Coordinate(blockXY.x + blockBounds.width - tab,
+ 					   blockXY.y + blockBounds.height);
+  }
+  return { topLeft : topLeft, bottomRight : bottomRight };
+};
+
+/**
+ * Set whether the block is collapsed or not.
+ * @param {boolean} collapsed True if collapsed.
+ */
+Blockly.BlockSvg.prototype.setCollapsed = function(collapsed) {
+  if (this.collapsed_ == collapsed) {
+    return;
+  }
+  var renderList = [];
+  // Show/hide the inputs.
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    renderList.push.apply(renderList, input.setVisible(!collapsed));
+  }
+
+  var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
+  if (collapsed) {
+    var icons = this.getIcons();
+    for (var i = 0; i < icons.length; i++) {
+      icons[i].setVisible(false);
+    }
+    var text = this.toString(Blockly.COLLAPSE_CHARS);
+    this.appendDummyInput(COLLAPSED_INPUT_NAME).appendField(text).init();
+  } else {
+    this.removeInput(COLLAPSED_INPUT_NAME);
+    // Clear any warnings inherited from enclosed blocks.
+    this.setWarningText(null);
+  }
+  Blockly.BlockSvg.superClass_.setCollapsed.call(this, collapsed);
+
+  if (!renderList.length) {
+    // No child blocks, just render this block.
+    renderList[0] = this;
+  }
+  if (this.rendered) {
+    for (var i = 0, block; block = renderList[i]; i++) {
+      block.render();
+    }
+    // Don't bump neighbours.
+    // Although bumping neighbours would make sense, users often collapse
+    // all their functions and store them next to each other.  Expanding and
+    // bumping causes all their definitions to go out of alignment.
+  }
+};
+
+/**
  * Open the next (or previous) FieldTextInput.
  * @param {Blockly.Field|Blockly.Block} start Current location.
  * @param {boolean} forward If true go forward, otherwise backward.
@@ -700,6 +794,11 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     // Check to see if any of this block's connections are within range of
     // another block's connection.
     var myConnections = this.getConnections_(false);
+    // Also check the last connection on this stack
+    var lastOnStack = this.lastConnectionInStack_();
+    if (lastOnStack && lastOnStack != this.nextConnection) {
+      myConnections.push(lastOnStack);
+    }
     var closestConnection = null;
     var localConnection = null;
     var radiusConnection = Blockly.SNAP_RADIUS;
@@ -840,13 +939,13 @@ Blockly.BlockSvg.prototype.dispose = function(healStack, animate) {
   // Stop rerendering.
   this.rendered = false;
 
-  Blockly.BlockSvg.superClass_.dispose.call(this, healStack);
   Blockly.Events.disable();
   var icons = this.getIcons();
   for (var i = 0; i < icons.length; i++) {
     icons[i].dispose();
   }
   Blockly.Events.enable();
+  Blockly.BlockSvg.superClass_.dispose.call(this, healStack);
 
   goog.dom.removeNode(this.svgGroup_);
   // Sever JavaScript to DOM connections.

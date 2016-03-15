@@ -1444,22 +1444,6 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
 };
 
 /**
- * Move a block to an absolute location.
- * @param {number} x Horizontal location.
- * @param {number} y Vertical loaction.
- * @param {boolean} suppress_event Whether to suppress the move event.
- */
-Blockly.Block.prototype.moveTo = function(x, y, suppress_event) {
-  var event = new Blockly.Events.Move(this);
-  this.xy_.x = x;
-  this.xy_.y = y;
-  if (!suppress_event) {
-    event.recordNew();
-    Blockly.Events.fire(event);
-  }
-};
-
-/**
  * Database of all blocks.
  * @private
  */

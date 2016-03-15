@@ -868,6 +868,10 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var newY = closestConnection.y_ - connectionOffsetY;
         ghostBlock.moveBy(newX, newY, true);
       }
+      if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&
+          !ghostBlock.nextConnection) {
+        Blockly.bumpedConnection_ = closestConnection.targetConnection;
+      }
       // Renders ghost.
       localGhostConnection.connect(closestConnection);
       // Render dragging block so it appears on top.
@@ -888,6 +892,16 @@ Blockly.BlockSvg.prototype.disconnectGhost = function() {
       this.ghostBlock_.nextConnection) ||
       Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection) {
     this.ghostBlock_.unplug(true /* healStack */);
+  }
+  if ((Blockly.localGhostConnection_ == this.ghostBlock_.previousConnection &&
+      !this.ghostBlock_.nextConnection)) {
+    var previousBlockNextConnection =
+      this.ghostBlock_.previousConnection.targetConnection;
+    this.ghostBlock_.unplug(true /* healStack */);
+    if (previousBlockNextConnection) {
+      previousBlockNextConnection.connect(Blockly.bumpedConnection_);
+    }
+
   }
   if (Blockly.localGhostConnection_.type == Blockly.NEXT_STATEMENT &&
       Blockly.localGhostConnection_ != this.ghostBlock_.nextConnection) {

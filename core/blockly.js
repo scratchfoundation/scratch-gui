@@ -200,6 +200,14 @@ Blockly.localConnection_ = null;
 Blockly.localGhostConnection_ = null;
 
 /**
+ * Connection that was bumped out of the way by a ghost block, and may need
+ * to be put back as the drag continues.
+ * @type {Blockly.Connection}
+ * @private
+ */
+Blockly.bumpedConnection_ = null;
+
+/**
  * Number of pixels the mouse must move before a drag starts.
  */
 Blockly.DRAG_RADIUS = 5;

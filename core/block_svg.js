@@ -590,7 +590,6 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
     Blockly.fireUiEvent(window, 'resize');
   }
   if (Blockly.highlightedConnection_) {
-    Blockly.highlightedConnection_.unhighlight();
     Blockly.highlightedConnection_ = null;
   }
   Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
@@ -811,7 +810,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     }
 
     this.updatePreviews(closestConnection, localConnection, radiusConnection,
-        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y, oldXY);
+        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y);
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
@@ -826,14 +825,18 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  * @param {number} radiusConnection The distance between closestConnection and
  *    localConnection.
  * @param {!Event} e Mouse move event.
+ * @param {number} dx The x distance the block has moved onscreen up to this
+ *    point in the drag.
+ * @param {number} dy The y distance the block has moved onscreen up to this
+ *    point in the drag.
  */
 Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
-    localConnection, radiusConnection, e, dx, dy, oldXY) {
-  // Remove connection highlighting if needed.
+    localConnection, radiusConnection, e, dx, dy) {
+  // Remove ghosts if needed.  For Scratch-Blockly we are using ghosts instead
+  // of highlighting the connection; for compatibility with Web Blockly the
+  // name "highlightedConnection" will still be used.
   if (Blockly.highlightedConnection_ &&
       Blockly.highlightedConnection_ != closestConnection) {
-    Blockly.highlightedConnection_.unhighlight();
-
     if (this.ghostBlock_ && Blockly.localGhostConnection_) {
       this.disconnectGhost();
     }
@@ -845,7 +848,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_
       && !closestConnection.sourceBlock_.isGhost()) {
-    closestConnection.highlight();
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
     if (!this.ghostBlock_){
@@ -887,11 +889,20 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   }
 };
 
+/**
+ * Disconnect the current ghost block from the stack, and heal the stack to its
+ * previous state.
+ */
 Blockly.BlockSvg.prototype.disconnectGhost = function() {
   if ((Blockly.localGhostConnection_ == this.ghostBlock_.previousConnection &&
       this.ghostBlock_.nextConnection) ||
-      Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection) {
+      (Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection &&
+      this.ghostBlock_.previousConnection)) {
     this.ghostBlock_.unplug(true /* healStack */);
+  } else if (Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection) {
+    // The ghost block is thre first block in a stack.  Unplug won't do anything
+    // in that case.  Instead, unplug the following block.
+    Blockly.localGhostConnection_.targetBlock().unplug(false);
   }
   if ((Blockly.localGhostConnection_ == this.ghostBlock_.previousConnection &&
       !this.ghostBlock_.nextConnection)) {

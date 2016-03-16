@@ -832,7 +832,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  */
 Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     localConnection, radiusConnection, e, dx, dy) {
-  // Remove ghosts if needed.  For Scratch-Blockly we are using ghosts instead
+  // Remove a ghost if needed.  For Scratch-Blockly we are using ghosts instead
   // of highlighting the connection; for compatibility with Web Blockly the
   // name "highlightedConnection" will still be used.
   if (Blockly.highlightedConnection_ &&
@@ -842,9 +842,9 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     }
     Blockly.highlightedConnection_ = null;
     Blockly.localConnection_ = null;
-
   }
-  // Add connection highlighting if needed.
+
+  // Add a ghost if needed.
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_
       && !closestConnection.sourceBlock_.isGhost()) {

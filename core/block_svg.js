@@ -219,6 +219,8 @@ Blockly.BlockSvg.terminateDrag_ = function() {
     if (selected) {
       if (selected.ghostBlock_ && Blockly.localGhostConnection_) {
         selected.disconnectGhost();
+        selected.ghostBlock_.dispose();
+        selected.ghostBlock_ = null;
       }
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
@@ -860,6 +862,7 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     var localGhostConnection = ghostBlock.getMatchingConnection(this,
         localConnection);
     if (localGhostConnection != Blockly.localGhostConnection_) {
+      ghostBlock.getSvgRoot().setAttribute('visibility', 'visible');
       ghostBlock.rendered = true;
       // Move the preview to the correct location before the existing block.
       if (localGhostConnection.type == Blockly.NEXT_STATEMENT) {
@@ -868,7 +871,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
         var newX = closestConnection.x_ - connectionOffsetX;
         var newY = closestConnection.y_ - connectionOffsetY;
-        ghostBlock.moveBy(newX, newY, true);
+        var ghostPosition = ghostBlock.getRelativeToSurfaceXY();
+        ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y, true);
       }
       if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&
           !ghostBlock.nextConnection) {
@@ -926,8 +930,7 @@ Blockly.BlockSvg.prototype.disconnectGhost = function() {
     }
   }
   Blockly.localGhostConnection_ = null;
-  this.ghostBlock_.dispose();
-  this.ghostBlock_ = null;
+  this.ghostBlock_.getSvgRoot().setAttribute('visibility', 'hidden');
 };
 
 /**

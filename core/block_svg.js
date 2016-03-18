@@ -218,9 +218,11 @@ Blockly.BlockSvg.terminateDrag_ = function() {
     // Terminate a drag operation.
     if (selected) {
       if (selected.ghostBlock_) {
+        Blockly.Events.disable();
         selected.ghostBlock_.unplug(true /* healStack */);
         selected.ghostBlock_.dispose();
         selected.ghostBlock_ = null;
+        Blockly.Events.enable();
       }
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
@@ -816,9 +818,12 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     if (Blockly.highlightedConnection_ &&
         Blockly.highlightedConnection_ != closestConnection) {
       if (this.ghostBlock_) {
+        // Don't fire events for ghost block creation or movement.
+        Blockly.Events.disable();
         this.ghostBlock_.unplug(true /* healStack */);
         this.ghostBlock_.dispose();
         this.ghostBlock_ = null;
+        Blockly.Events.enable();
       }
       Blockly.highlightedConnection_.unhighlight();
       Blockly.highlightedConnection_ = null;
@@ -830,6 +835,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       closestConnection.highlight();
       Blockly.highlightedConnection_ = closestConnection;
       Blockly.localConnection_ = localConnection;
+      Blockly.Events.disable();
       if (!this.ghostBlock_){
         this.ghostBlock_ = this.workspace.newBlock(this.type);
         this.ghostBlock_.setGhost(true);
@@ -842,6 +848,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
         this.ghostBlock_.previousConnection.connect(closestConnection);
       }
       this.ghostBlock_.render(true);
+      Blockly.Events.enable();
     }
     // Provide visual indication of whether the block will be deleted if
     // dropped here.

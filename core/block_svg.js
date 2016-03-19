@@ -218,9 +218,11 @@ Blockly.BlockSvg.terminateDrag_ = function() {
     // Terminate a drag operation.
     if (selected) {
       if (selected.ghostBlock_ && Blockly.localGhostConnection_) {
+        Blockly.Events.disable();
         selected.disconnectGhost();
         selected.ghostBlock_.dispose();
         selected.ghostBlock_ = null;
+        Blockly.Events.enable();
       }
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
@@ -834,6 +836,8 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  */
 Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     localConnection, radiusConnection, e, dx, dy) {
+  // Don't fire events for ghost block creation or movement.
+  Blockly.Events.disable();
   // Remove a ghost if needed.  For Scratch-Blockly we are using ghosts instead
   // of highlighting the connection; for compatibility with Web Blockly the
   // name "highlightedConnection" will still be used.
@@ -873,6 +877,7 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var newY = closestConnection.y_ - connectionOffsetY;
         var ghostPosition = ghostBlock.getRelativeToSurfaceXY();
         ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y, true);
+
       }
       if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&
           !ghostBlock.nextConnection) {
@@ -885,6 +890,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       Blockly.localGhostConnection_ = localGhostConnection;
     }
   }
+  // Reenable events.
+  Blockly.Events.enable();
 
   // Provide visual indication of whether the block will be deleted if
   // dropped here.

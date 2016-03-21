@@ -380,7 +380,8 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   // bottom of a statement block to one that's already connected.
   if (candidate.type == Blockly.OUTPUT_VALUE ||
       candidate.type == Blockly.PREVIOUS_STATEMENT) {
-    if (candidate.targetConnection || this.targetConnection) {
+    if ((candidate.targetConnection && !candidate.targetConnection.sourceBlock_.isGhost()) ||
+      this.targetConnection) {
       return false;
     }
   }
@@ -398,7 +399,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   // Don't let a block with no next connection bump other blocks out of the
   // stack.
   if (this.type == Blockly.PREVIOUS_STATEMENT &&
-      candidate.targetConnection &&
+      (candidate.targetConnection && !candidate.targetConnection.sourceBlock_.isGhost()) &&
       !this.sourceBlock_.nextConnection) {
     return false;
   }

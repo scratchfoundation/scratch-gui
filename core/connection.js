@@ -364,6 +364,10 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
     return false;
   }
 
+  // Don't consider ghost blocks.
+  if (candidate.sourceBlock_.isGhost()) {
+    return false;
+  }
   // Type checking.
   var canConnect = this.canConnectWithReason_(candidate);
   if (canConnect != Blockly.Connection.CAN_CONNECT &&

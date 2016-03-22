@@ -282,6 +282,14 @@ Blockly.Connection.prototype.dispose = function() {
 };
 
 /**
+ * @return true if the connection is not connected or is connected to a ghost
+ *    block, false otherwise.
+ */
+Blockly.Connection.prototype.isConnectedToNonGhost = function() {
+  return this.targetConnection && !this.targetConnection.sourceBlock_.isGhost();
+};
+
+/**
  * Does the connection belong to a superior block (higher in the source stack)?
  * @return {boolean} True if connection faces down or right.
  */
@@ -380,8 +388,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   // bottom of a statement block to one that's already connected.
   if (candidate.type == Blockly.OUTPUT_VALUE ||
       candidate.type == Blockly.PREVIOUS_STATEMENT) {
-    if ((candidate.targetConnection && !candidate.targetConnection.sourceBlock_.isGhost()) ||
-      this.targetConnection) {
+    if (candidate.targetConnection || this.targetConnection) {
       return false;
     }
   }
@@ -399,8 +406,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   // Don't let a block with no next connection bump other blocks out of the
   // stack.
   if (this.type == Blockly.PREVIOUS_STATEMENT &&
-      (candidate.targetConnection && !candidate.targetConnection.sourceBlock_.isGhost()) &&
-      !this.sourceBlock_.nextConnection) {
+      candidate.targetConnection && !this.sourceBlock_.nextConnection) {
     return false;
   }
 

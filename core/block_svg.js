@@ -854,8 +854,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
 
   // Add a ghost if needed.
   if (closestConnection &&
-      closestConnection != Blockly.highlightedConnection_
-      && !closestConnection.sourceBlock_.isGhost()) {
+      closestConnection != Blockly.highlightedConnection_ &&
+      !closestConnection.sourceBlock_.isGhost()) {
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
     if (!this.ghostBlock_){

@@ -300,7 +300,7 @@ Blockly.Connection.prototype.dispose = function() {
  *    block, false otherwise.
  */
 Blockly.Connection.prototype.isConnectedToNonGhost = function() {
-  return this.targetConnection && !this.targetConnection.sourceBlock_.isGhost();
+  return this.targetConnection && !this.targetBlock().isGhost();
 };
 
 /**
@@ -409,6 +409,21 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
       this.sourceBlock_.getFirstStatementConnection();
 
   if (candidate.type == Blockly.PREVIOUS_STATEMENT) {
+    if (!firstStatementConnection || this != firstStatementConnection) {
+      if (this.targetConnection) {
+        return false;
+      }
+      if (candidate.targetConnection) {
+        // If the other side of this connection is the active ghost connection,
+        // we've obviously already decided that this is a good connection.
+        if (candidate.targetConnection == Blockly.localGhostConnection_) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
     // Scratch-specific behaviour:
     // If this is a c-shaped block, statement blocks cannot be connected
     // anywhere other than inside the first statement input.
@@ -421,30 +436,13 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
         }
       }
       // The only other eligible connection of this type is the next connection
-      // when the candidate is not already connection (connecting at the start
+      // when the candidate is not already connected (connecting at the start
       // of the stack).
       else if (this == this.sourceBlock_.nextConnection &&
-          candidate.targetConnection) {
-        return false;
-      }
-    } else {
-      // Otherwise, don't offer to connect the bottom of a statement block to
-      // the top of a block that's already connected.  And don't connect the
-      // bottom of a statement block that's already connected.
-      if (this.targetConnection || candidate.targetConnection) {
+          candidate.isConnectedToNonGhost()) {
         return false;
       }
     }
-  }
-
-  // Don't offer to connect the bottom of a statement block to one that's
-  // already connected.
-  // But the first statement input on c-block can connect to the start of a
-  // block in a stack.
-  if (candidate.type == Blockly.PREVIOUS_STATEMENT &&
-      this != this.sourceBlock_.getFirstStatementConnection() &&
-      (this.targetConnection || candidate.targetConnection)) {
-        return false;
   }
 
   // Offering to connect the left (male) of a value block to an already
@@ -460,7 +458,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   // Don't let a block with no next connection bump other blocks out of the
   // stack.
   if (this.type == Blockly.PREVIOUS_STATEMENT &&
-      candidate.targetConnection && !this.sourceBlock_.nextConnection) {
+      candidate.isConnectedToNonGhost() && !this.sourceBlock_.nextConnection) {
     return false;
   }
 

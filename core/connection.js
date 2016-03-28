@@ -376,6 +376,8 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
 
 /**
  * Check if the two connections can be dragged to connect to each other.
+ * This is used by the connection database when searching for the closest
+ * connection.
  * @param {!Blockly.Connection} candidate A nearby connection to check.
  * @param {number} maxRadius The maximum radius allowed for connections.
  * @return {boolean} True if the connection is allowed, false otherwise.
@@ -390,6 +392,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   if (candidate.sourceBlock_.isGhost()) {
     return false;
   }
+
   // Type checking.
   var canConnect = this.canConnectWithReason_(candidate);
   if (canConnect != Blockly.Connection.CAN_CONNECT &&

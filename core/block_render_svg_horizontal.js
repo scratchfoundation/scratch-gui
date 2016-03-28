@@ -358,7 +358,6 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   // Fetch the block's coordinates on the surface for use in anchoring
   // the connections.
   var connectionsXY = this.getRelativeToSurfaceXY();
-
   // Assemble the block's path.
   var steps = [];
 
@@ -377,7 +376,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   }
 
   // Position icon
-  if (!this.isGhost() && metrics.icon) {
+  if (metrics.icon) {
     var icon = metrics.icon.getSvgRoot();
     var iconSize = metrics.icon.getSize();
     // Icon's position is calculated relative to the "end" edge of the block.
@@ -393,6 +392,9 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
         // If not, don't offset by iconSize.width
         iconX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
       }
+    }
+    if (this.isGhost()) {
+      icon.setAttribute('display', 'none');
     }
     icon.setAttribute('transform',
       'translate(' + iconX + ',' + iconY + ') ' + iconScale);

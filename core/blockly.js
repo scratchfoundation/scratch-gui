@@ -192,6 +192,22 @@ Blockly.highlightedConnection_ = null;
 Blockly.localConnection_ = null;
 
 /**
+ * Connection on ghost block that matches Blockly.localConnecxtion_ on the
+ * dragged block.
+ * @type {Blockly.Connection}
+ * @private
+ */
+Blockly.localGhostConnection_ = null;
+
+/**
+ * Connection that was bumped out of the way by a ghost block, and may need
+ * to be put back as the drag continues.
+ * @type {Blockly.Connection}
+ * @private
+ */
+Blockly.bumpedConnection_ = null;
+
+/**
  * Number of pixels the mouse must move before a drag starts.
  */
 Blockly.DRAG_RADIUS = 5;
@@ -199,7 +215,7 @@ Blockly.DRAG_RADIUS = 5;
 /**
  * Maximum misalignment between connections for them to snap together.
  */
-Blockly.SNAP_RADIUS = 20;
+Blockly.SNAP_RADIUS = 50;
 
 /**
  * Delay in ms between trigger and bumping unconnected block out of alignment.

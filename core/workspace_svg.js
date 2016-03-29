@@ -676,18 +676,9 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
     this.zoom(position.x, position.y, delta);
   } else {
     // This is a regular mouse wheel event - scroll the workspace
-    var metrics = this.getMetrics();
     var x = this.scrollX - e.deltaX;
     var y = this.scrollY - e.deltaY;
-    x = Math.min(x, -metrics.contentLeft);
-    y = Math.min(y, -metrics.contentTop);
-    x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
-                 metrics.contentWidth);
-    y = Math.max(y, metrics.viewHeight - metrics.contentTop -
-                 metrics.contentHeight);
-    // Move the scrollbars and the page will scroll automatically.
-    this.scrollbar.set(-x - metrics.contentLeft,
-                       -y - metrics.contentTop);
+    Blockly.scrollWorkspace(this, this.getMetrics(), x, y);
   }
   e.preventDefault();
 };

@@ -384,6 +384,105 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
  */
 Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
     maxRadius) {
+  if (!this.checkBasicCompatibility_(candidate, maxRadius)) {
+    return false;
+  }
+
+  var firstStatementConnection =
+      this.sourceBlock_.getFirstStatementConnection();
+
+  switch (candidate.type) {
+    case Blockly.PREVIOUS_STATEMENT: {
+      if (!firstStatementConnection || this != firstStatementConnection) {
+        if (this.targetConnection) {
+          return false;
+        }
+        if (candidate.targetConnection) {
+          // If the other side of this connection is the active ghost
+          // connection, we've obviously already decided that this is a good
+          // connection.
+          if (candidate.targetConnection == Blockly.localGhostConnection_) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+
+      // Scratch-specific behaviour:
+      // If this is a c-shaped block, statement blocks cannot be connected
+      // anywhere other than inside the first statement input.
+      if (firstStatementConnection) {
+        // Can't connect if there is alread a block inside the first statement
+        // input.
+        if (this == firstStatementConnection) {
+          if (this.targetConnection) {
+            return false;
+          }
+        }
+        // Can't connect this block's next connection unless we're connecting
+        // in front of the first block on a stack.
+        else if (this == this.sourceBlock_.nextConnection &&
+            candidate.isConnectedToNonGhost()) {
+          return false;
+        }
+      }
+      break;
+    }
+    case Blockly.OUTPUT_VALUE: {
+      // Don't offer to connect an already connected left (male) value plug to
+      // an available right (female) value plug.
+      if (candidate.targetConnection || this.targetConnection) {
+        return false;
+      }
+      break;
+    }
+    case Blockly.INPUT_VALUE: {
+      // Offering to connect the left (male) of a value block to an already
+      // connected value pair is ok, we'll splice it in.
+      // However, don't offer to splice into an unmovable block.
+      if (candidate.targetConnection &&
+          !candidate.targetBlock().isMovable() &&
+          !candidate.targetBlock().isShadow()) {
+        return false;
+      }
+      break;
+    }
+    case Blockly.NEXT_STATEMENT: {
+        // Scratch-specific behaviour:
+        // If this is a c-block, we can't connect this block's
+        // previous connection unless we're connecting to the end of the last
+        // block on a stack or there's already a block connected inside the c.
+      if (firstStatementConnection &&
+          this == this.sourceBlock_.previousConnection &&
+          candidate.isConnectedToNonGhost() &&
+          !firstStatementConnection.targetConnection) {
+        return false;
+      }
+      // Don't let a block with no next connection bump other blocks out of the
+      // stack.
+      if (candidate.isConnectedToNonGhost() &&
+          !this.sourceBlock_.nextConnection) {
+        return false;
+      }
+      break;
+    }
+    default:
+      throw 'Unknown connection type in isConnectionAllowed';
+  }
+
+  // Don't let blocks try to connect to themselves or ones they nest.
+  return !this.isAncestor_(candidate);
+};
+
+/**
+ * Do basic checks for whether this connection can be dragged to connect to the
+ * candidate.  These checks don't care about the type of the connections.
+ * @param {Blockly.Connection} candidate The candidate connection.
+ * @return True if the connections are compatible, false otherwise.
+ */
+Blockly.Connection.prototype.checkBasicCompatibility_ = function(candidate,
+    maxRadius) {
   if (this.distanceFrom(candidate) > maxRadius) {
     return false;
   }
@@ -400,91 +499,28 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
     return false;
   }
 
+  return true;
+};
 
-  var firstStatementConnection =
-      this.sourceBlock_.getFirstStatementConnection();
-
-  if (candidate.type == Blockly.PREVIOUS_STATEMENT) {
-    if (!firstStatementConnection || this != firstStatementConnection) {
-      if (this.targetConnection) {
-        return false;
-      }
-      if (candidate.targetConnection) {
-        // If the other side of this connection is the active ghost connection,
-        // we've obviously already decided that this is a good connection.
-        if (candidate.targetConnection == Blockly.localGhostConnection_) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    }
-
-    // Scratch-specific behaviour:
-    // If this is a c-shaped block, statement blocks cannot be connected
-    // anywhere other than inside the first statement input.
-    if (firstStatementConnection) {
-      // Can't connect if there is alread a block inside the first statement
-      // input.
-      if (this == firstStatementConnection) {
-        if (this.targetConnection) {
-          return false;
-        }
-      }
-      // Can't connect this block's next connection unless we're connecting
-      // in front of the first block on a stack.
-      else if (this == this.sourceBlock_.nextConnection &&
-          candidate.isConnectedToNonGhost()) {
-        return false;
-      }
-    }
-  } else if (candidate.type == Blockly.OUTPUT_VALUE) {
-    // Don't offer to connect an already connected left (male) value plug to
-    // an available right (female) value plug.
-    if (candidate.targetConnection || this.targetConnection) {
-      return false;
-    }
-  } else if (candidate.type == Blockly.INPUT_VALUE) {
-    // Offering to connect the left (male) of a value block to an already
-    // connected value pair is ok, we'll splice it in.
-    // However, don't offer to splice into an unmovable block.
-    if (candidate.targetConnection &&
-        !candidate.targetBlock().isMovable() &&
-        !candidate.targetBlock().isShadow()) {
-      return false;
-    }
-  } else if (candidate.type == Blockly.NEXT_STATEMENT) {
-      // If this is a c-block, we can't connect this block's
-      // previous connection unless we're connecting to the end of the last
-      // block on a stack or there's already a block connected inside the c.
-    if (firstStatementConnection &&
-        this == this.sourceBlock_.previousConnection &&
-        candidate.isConnectedToNonGhost() &&
-        !firstStatementConnection.targetConnection) {
-      return false;
-    }
-    // Don't let a block with no next connection bump other blocks out of the
-    // stack.
-    if (candidate.isConnectedToNonGhost() && !this.sourceBlock_.nextConnection) {
-      return false;
-    }
-  }
-
-
-
-  // Don't let blocks try to connect to themselves or ones they nest.
+/**
+ * Checks if a candidate connection is on this connection's source block or a
+ * nested block.
+ * @param {Blockly.Connection} candidate The candidate connection to check.
+ * @return Whether the candidate connection is on this connection's source block
+ * or descendant blocks.
+ */
+Blockly.Connection.prototype.isAncestor_ = function(candidate) {
   var targetSourceBlock = candidate.sourceBlock_;
   var sourceBlock = this.sourceBlock_;
   if (targetSourceBlock && sourceBlock) {
     do {
       if (sourceBlock == targetSourceBlock) {
-        return false;
+        return true;
       }
       targetSourceBlock = targetSourceBlock.getParent();
     } while (targetSourceBlock);
   }
-
-  return true;
+  return false;
 };
 
 /**

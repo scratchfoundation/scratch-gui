@@ -400,13 +400,6 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
     return false;
   }
 
-  // Don't offer to connect an already connected left (male) value plug to
-  // an available right (female) value plug.
-  if (candidate.type == Blockly.OUTPUT_VALUE) {
-    if (candidate.targetConnection || this.targetConnection) {
-      return false;
-    }
-  }
 
   var firstStatementConnection =
       this.sourceBlock_.getFirstStatementConnection();
@@ -438,32 +431,46 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
           return false;
         }
       }
-      // The only other eligible connection of this type is the next connection
-      // when the candidate is not already connected (connecting at the start
-      // of the stack).
+      // Can't connect this block's next connection unless we're connecting
+      // in front of the first block on a stack.
       else if (this == this.sourceBlock_.nextConnection &&
           candidate.isConnectedToNonGhost()) {
         return false;
       }
     }
+  } else if (candidate.type == Blockly.OUTPUT_VALUE) {
+    // Don't offer to connect an already connected left (male) value plug to
+    // an available right (female) value plug.
+    if (candidate.targetConnection || this.targetConnection) {
+      return false;
+    }
+  } else if (candidate.type == Blockly.INPUT_VALUE) {
+    // Offering to connect the left (male) of a value block to an already
+    // connected value pair is ok, we'll splice it in.
+    // However, don't offer to splice into an unmovable block.
+    if (candidate.targetConnection &&
+        !candidate.targetBlock().isMovable() &&
+        !candidate.targetBlock().isShadow()) {
+      return false;
+    }
+  } else if (candidate.type == Blockly.NEXT_STATEMENT) {
+      // If this is a c-block, we can't connect this block's
+      // previous connection unless we're connecting to the end of the last
+      // block on a stack or there's already a block connected inside the c.
+    if (firstStatementConnection &&
+        this == this.sourceBlock_.previousConnection &&
+        candidate.isConnectedToNonGhost() &&
+        !firstStatementConnection.targetConnection) {
+      return false;
+    }
+    // Don't let a block with no next connection bump other blocks out of the
+    // stack.
+    if (candidate.isConnectedToNonGhost() && !this.sourceBlock_.nextConnection) {
+      return false;
+    }
   }
 
-  // Offering to connect the left (male) of a value block to an already
-  // connected value pair is ok, we'll splice it in.
-  // However, don't offer to splice into an unmovable block.
-  if (candidate.type == Blockly.INPUT_VALUE &&
-      candidate.targetConnection &&
-      !candidate.targetBlock().isMovable() &&
-      !candidate.targetBlock().isShadow()) {
-    return false;
-  }
 
-  // Don't let a block with no next connection bump other blocks out of the
-  // stack.
-  if (this.type == Blockly.PREVIOUS_STATEMENT &&
-      candidate.isConnectedToNonGhost() && !this.sourceBlock_.nextConnection) {
-    return false;
-  }
 
   // Don't let blocks try to connect to themselves or ones they nest.
   var targetSourceBlock = candidate.sourceBlock_;

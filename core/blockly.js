@@ -345,7 +345,7 @@ Blockly.onMouseMove_ = function(e) {
     var dy = e.clientY - workspace.startDragMouseY;
     var x = workspace.startScrollX + dx;
     var y = workspace.startScrollY + dy;
-    Blockly.scrollWorkspace(workspace, workspace.startDragMetrics, x, y);
+    workspace.scroll(x, y);
     // Cancel the long-press if the drag has moved too far.
     if (Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
       Blockly.longStop_();
@@ -353,26 +353,6 @@ Blockly.onMouseMove_ = function(e) {
     e.stopPropagation();
   }
 };
-
-/**
- * Scroll a workspace by a specified amount, keeping in the workspace bounds
- * @param {!Blockly.WorkspaceSvg} workspace Which workspace to scroll
- * @param {!Object} metrics Workspace metrics from the start of scroll
- * @param {number} x Target X to scroll to
- * @param {number} y Target Y to scroll to
- */
-Blockly.scrollWorkspace = function(workspace, metrics, x, y) {
-  x = Math.min(x, -metrics.contentLeft);
-  y = Math.min(y, -metrics.contentTop);
-  x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
-               metrics.contentWidth);
-  y = Math.max(y, metrics.viewHeight - metrics.contentTop -
-               metrics.contentHeight);
-
-  // Move the scrollbars and the page will scroll automatically.
-  workspace.scrollbar.set(-x - metrics.contentLeft,
-                          -y - metrics.contentTop);
-}
 
 /**
  * Handle a key-down on SVG drawing surface.

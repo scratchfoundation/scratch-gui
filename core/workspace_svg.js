@@ -678,7 +678,8 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
     // This is a regular mouse wheel event - scroll the workspace
     var x = this.scrollX - e.deltaX;
     var y = this.scrollY - e.deltaY;
-    Blockly.scrollWorkspace(this, this.getMetrics(), x, y);
+    this.startDragMetrics = this.getMetrics();
+    this.scroll(x, y);
   }
   e.preventDefault();
 };
@@ -1043,6 +1044,26 @@ Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
   // This event has been handled.  Don't start a workspace drag.
   e.stopPropagation();
 };
+
+/**
+ * Scroll the workspace by a specified amount, keeping in the bounds
+ * @param {number} x Target X to scroll to
+ * @param {number} y Target Y to scroll to
+ */
+Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
+  var metrics = this.startDragMetrics;
+  x = Math.min(x, -metrics.contentLeft);
+  y = Math.min(y, -metrics.contentTop);
+  x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
+               metrics.contentWidth);
+  y = Math.max(y, metrics.viewHeight - metrics.contentTop -
+               metrics.contentHeight);
+
+  // Move the scrollbars and the page will scroll automatically.
+  this.scrollbar.set(-x - metrics.contentLeft,
+                     -y - metrics.contentTop);
+}
+
 
 /**
  * Updates the grid pattern.

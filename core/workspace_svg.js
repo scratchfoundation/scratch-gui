@@ -1046,12 +1046,13 @@ Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
 };
 
 /**
- * Scroll the workspace by a specified amount, keeping in the bounds
+ * Scroll the workspace by a specified amount, keeping in the bounds.
+ * Be sure to set this.startDragMetrics with cached metrics before calling.
  * @param {number} x Target X to scroll to
  * @param {number} y Target Y to scroll to
  */
 Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
-  var metrics = this.startDragMetrics;
+  var metrics = this.startDragMetrics; // Cached values
   x = Math.min(x, -metrics.contentLeft);
   y = Math.min(y, -metrics.contentTop);
   x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
@@ -1062,8 +1063,7 @@ Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
   // Move the scrollbars and the page will scroll automatically.
   this.scrollbar.set(-x - metrics.contentLeft,
                      -y - metrics.contentTop);
-}
-
+};
 
 /**
  * Updates the grid pattern.

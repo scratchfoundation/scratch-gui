@@ -668,10 +668,19 @@ Blockly.WorkspaceSvg.prototype.moveDrag = function(e) {
  */
 Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
   // TODO: Remove terminateDrag and compensate for coordinate skew during zoom.
-  Blockly.terminateDrag_();
-  var delta = e.deltaY > 0 ? -1 : 1;
-  var position = Blockly.mouseToSvg(e, this.getParentSvg());
-  this.zoom(position.x, position.y, delta);
+  if (e.ctrlKey) {
+    // Pinch-to-zoom in Chrome only
+    Blockly.terminateDrag_();
+    var delta = e.deltaY > 0 ? -1 : 1;
+    var position = Blockly.mouseToSvg(e, this.getParentSvg());
+    this.zoom(position.x, position.y, delta);
+  } else {
+    // This is a regular mouse wheel event - scroll the workspace
+    var x = this.scrollX - e.deltaX;
+    var y = this.scrollY - e.deltaY;
+    this.startDragMetrics = this.getMetrics();
+    this.scroll(x, y);
+  }
   e.preventDefault();
 };
 
@@ -1034,6 +1043,26 @@ Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
   }
   // This event has been handled.  Don't start a workspace drag.
   e.stopPropagation();
+};
+
+/**
+ * Scroll the workspace by a specified amount, keeping in the bounds.
+ * Be sure to set this.startDragMetrics with cached metrics before calling.
+ * @param {number} x Target X to scroll to
+ * @param {number} y Target Y to scroll to
+ */
+Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
+  var metrics = this.startDragMetrics; // Cached values
+  x = Math.min(x, -metrics.contentLeft);
+  y = Math.min(y, -metrics.contentTop);
+  x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
+               metrics.contentWidth);
+  y = Math.max(y, metrics.viewHeight - metrics.contentTop -
+               metrics.contentHeight);
+
+  // Move the scrollbars and the page will scroll automatically.
+  this.scrollbar.set(-x - metrics.contentLeft,
+                     -y - metrics.contentTop);
 };
 
 /**

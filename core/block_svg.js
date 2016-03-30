@@ -878,6 +878,14 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var newX = closestConnection.x_ - connectionOffsetX;
         var newY = closestConnection.y_ - connectionOffsetY;
         var ghostPosition = ghostBlock.getRelativeToSurfaceXY();
+
+        // If it's the first statement connection of a c-block, this block is
+        // going to get taller as soon as render() is called below.
+        if (localGhostConnection != ghostBlock.nextConnection) {
+          newY -= closestConnection.sourceBlock_.getHeightWidth().height -
+              Blockly.BlockSvg.MIN_BLOCK_Y;
+        }
+
         ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y, true);
 
       }

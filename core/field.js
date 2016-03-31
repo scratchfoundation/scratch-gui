@@ -152,7 +152,8 @@ Blockly.Field.prototype.init = function(block) {
   this.updateEditable();
   block.getSvgRoot().appendChild(this.fieldGroup_);
   this.mouseUpWrapper_ =
-      Blockly.bindEvent_(this.fieldGroup_, 'mouseup', this, this.onMouseUp_);
+      Blockly.bindEvent_(this.getClickTarget_(), 'mouseup', this,
+          this.onMouseUp_);
   // Force a render.
   this.updateTextNode_();
   if (Blockly.Events.isEnabled()) {
@@ -443,6 +444,31 @@ Blockly.Field.prototype.onMouseUp_ = function(e) {
  */
 Blockly.Field.prototype.setTooltip = function(newTip) {
   // Non-abstract sub-classes may wish to implement this.  See FieldLabel.
+};
+
+/**
+ * Select the element to bind the click handler to. When this element is
+ * clicked on an editable field, the editor will open.
+ *
+ * <p>If the block has multiple fields, this is just the group containing the
+ * field. If the block has only one field, we handle clicks over the whole
+ * block.
+ *
+ * @return {!Element} Element to bind click handler to.
+ * @private
+ */
+Blockly.Field.prototype.getClickTarget_ = function() {
+  var nFields = 0;
+
+  for (var i = 0, input; input = this.sourceBlock_.inputList[i]; i++) {
+    nFields += input.fieldRow.length;
+  }
+
+  if (nFields <= 1) {
+    return this.sourceBlock_.getSvgRoot();
+  } else {
+    return this.getSvgRoot();
+  }
 };
 
 /**

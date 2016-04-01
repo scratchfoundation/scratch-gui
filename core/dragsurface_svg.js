@@ -84,17 +84,6 @@ Blockly.DragSurfaceSvg.prototype.setBlocksAndShow = function (blocks) {
   this.SVG_.style.display = 'block';
 };
 
- /**
-  * Translate blocks on the drag surface's group.
-  * @param {Number} x X translation
-  * @param {Number} y Y translation
-  */
-Blockly.DragSurfaceSvg.prototype.translateBlocks = function (x, y) {
-  var blocks = this.dragGroup_.childNodes[0];
-  // TODO: fall back to 2D translate when translate3d not supported.
-  blocks.setAttribute('style', 'transform: translate3d(' + x + 'px,' + y + 'px, 0px)');
-};
-
 /**
  * Translate and scale the entire drag surface group to keep in sync with the workspace.
  * @param {Number} x X translation
@@ -102,11 +91,17 @@ Blockly.DragSurfaceSvg.prototype.translateBlocks = function (x, y) {
  * @param {Number} scale Scale of the group
  */
 Blockly.DragSurfaceSvg.prototype.translateAndScaleGroup = function (x, y, scale) {
-  // TODO: fall back to 2D translate when translate3d not supported.
-  var transform = 'transform: translate3d(' + x + 'px, ' + y + 'px, 0px) ' +
-      'scale3d(' + scale + ',' + scale + ',' + scale + ');';
-  this.dragGroup_.setAttribute('style', transform);
+  var transform = 'translate(' + x + ', ' + y + ') scale(' + scale + ')';
+  this.dragGroup_.setAttribute('transform', transform);
 };
+
+/**
+* Provide a reference to the drag group (primarily for BlockSvg.getRelativeToSurfaceXY).
+* @return {Element} Drag surface group element
+*/
+Blockly.DragSurfaceSvg.prototype.getGroup = function () {
+  return this.dragGroup_;
+}
 
  /**
   * Clear the group and hide the surface; move the blocks off onto the provided element.

@@ -198,6 +198,8 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     // No change.
     return;
   }
+  Blockly.Events.fire(
+      new Blockly.Events.Ui(this.block_, 'mutatorOpen', !visible, visible));
   if (visible) {
     // Create the bubble.
     this.bubble_ = new Blockly.Bubble(this.block_.workspace,
@@ -233,7 +235,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
       var thisMutator = this;
       this.block_.saveConnections(this.rootBlock_);
       this.sourceListener_ = function() {
-        thisMutator.block_.saveConnections(thisMutator.rootBlock_)
+        thisMutator.block_.saveConnections(thisMutator.rootBlock_);
       };
       this.block_.workspace.addChangeListener(this.sourceListener_);
     }
@@ -265,7 +267,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
  * @private
  */
 Blockly.Mutator.prototype.workspaceChanged_ = function() {
-  if (Blockly.dragMode_ == 0) {
+  if (Blockly.dragMode_ == Blockly.DRAG_NONE) {
     var blocks = this.workspace_.getTopBlocks(false);
     var MARGIN = 20;
     for (var b = 0, block; block = blocks[b]; b++) {
@@ -303,6 +305,7 @@ Blockly.Mutator.prototype.workspaceChanged_ = function() {
       setTimeout(function() {
           Blockly.Events.setGroup(group);
           block.bumpNeighbours_();
+          Blockly.Events.setGroup(false);
       }, Blockly.BUMP_DELAY);
     }
     if (block.rendered) {
@@ -346,21 +349,24 @@ Blockly.Mutator.prototype.dispose = function() {
  * @param {Blockly.Connection} connectionChild Connection on child block.
  * @param {!Blockly.Block} block Parent block.
  * @param {string} inputName Name of input on parent block.
+ * @return {boolean} True iff a reconnection was made, false otherwise.
  */
 Blockly.Mutator.reconnect = function(connectionChild, block, inputName) {
-  if (!connectionChild) {
-    return;
+  if (!connectionChild || !connectionChild.getSourceBlock().workspace) {
+    return false;  // No connection or block has been deleted.
   }
   var connectionParent = block.getInput(inputName).connection;
   var currentParent = connectionChild.targetBlock();
   if ((!currentParent || currentParent == block) &&
       connectionParent.targetConnection != connectionChild) {
-    if (connectionParent.targetConnection) {
+    if (connectionParent.isConnected()) {
       // There's already something connected here.  Get rid of it.
       connectionParent.disconnect();
     }
     connectionParent.connect(connectionChild);
+    return true;
   }
+  return false;
 };
 
 // Export symbols that would otherwise be renamed by Closure compiler.
@@ -371,4 +377,3 @@ if (!goog.global['Blockly']['Mutator']) {
   goog.global['Blockly']['Mutator'] = {};
 }
 goog.global['Blockly']['Mutator']['reconnect'] = Blockly.Mutator.reconnect;
-

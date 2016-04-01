@@ -72,6 +72,12 @@ Blockly.Events.CHANGE = 'change';
 Blockly.Events.MOVE = 'move';
 
 /**
+ * Name of event that records a UI change.
+ * @const
+ */
+Blockly.Events.UI = 'ui';
+
+/**
  * List of events queued for firing.
  * @private
  */
@@ -165,6 +171,16 @@ Blockly.Events.filter = function(queueIn, forward) {
 };
 
 /**
+ * Modify pending undo events so that when they are fired they don't land
+ * in the undo stack.  Called by Blockly.Workspace.clearUndo.
+ */
+Blockly.Events.clearPendingUndo = function() {
+  for (var i = 0, event; event = Blockly.Events.FIRE_QUEUE_[i]; i++) {
+    event.recordUndo = false;
+  }
+};
+
+/**
  * Stop sending events.  Every call to this function MUST also call enable.
  */
 Blockly.Events.disable = function() {
@@ -209,23 +225,64 @@ Blockly.Events.setGroup = function(state) {
 };
 
 /**
+ * Compute a list of the IDs of the specified block and all its descendants.
+ * @param {!Blockly.Block} block The root block.
+ * @return {!Array.<string>} List of block IDs.
+ * @private
+ */
+Blockly.Events.getDescendantIds_ = function(block) {
+  var ids = [];
+  var descendants = block.getDescendants();
+  for (var i = 0, descendant; descendant = descendants[i]; i++) {
+    ids[i] = descendant.id;
+  }
+  return ids;
+};
+
+/**
  * Abstract class for an event.
- * @param {!Blockly.Block} block The block.
+ * @param {Blockly.Block} block The block.
  * @constructor
  */
 Blockly.Events.Abstract = function(block) {
-  this.blockId = block.id;
-  this.workspaceId = block.workspace.id;
+  if (block) {
+    this.blockId = block.id;
+    this.workspaceId = block.workspace.id;
+  }
   this.group = Blockly.Events.group_;
   this.recordUndo = Blockly.Events.recordUndo;
 };
 
 /**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Abstract.prototype.toJson = function() {
+  var json = {
+    'type': this.type,
+    'blockId': this.blockId,
+    'workspaceId': this.workspaceId
+  };
+  if (this.group) {
+    json['group'] = this.group;
+  }
+  return json;
+};
+
+/**
  * Does this event record any change of state?
- * @return {boolean} True if something changed.
+ * @return {boolean} True if null, false if something changed.
  */
 Blockly.Events.Abstract.prototype.isNull = function() {
   return false;
+};
+
+/**
+ * Run an event.
+ * @param {boolean} forward True if run forward, false if run backward (undo).
+ */
+Blockly.Events.Abstract.prototype.run = function(forward) {
+  // Defined by subclasses.
 };
 
 /**
@@ -237,6 +294,7 @@ Blockly.Events.Abstract.prototype.isNull = function() {
 Blockly.Events.Create = function(block) {
   Blockly.Events.Create.superClass_.constructor.call(this, block);
   this.xml = Blockly.Xml.blockToDomWithXY(block);
+  this.ids = Blockly.Events.getDescendantIds_(block);
 };
 goog.inherits(Blockly.Events.Create, Blockly.Events.Abstract);
 
@@ -245,6 +303,17 @@ goog.inherits(Blockly.Events.Create, Blockly.Events.Abstract);
  * @type {string}
  */
 Blockly.Events.Create.prototype.type = Blockly.Events.CREATE;
+
+/**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Create.prototype.toJson = function() {
+  var json = Blockly.Events.Create.superClass_.toJson.call(this);
+  json['xml'] = Blockly.Xml.domToText(this.xml);
+  json['ids'] = this.ids;
+  return json;
+};
 
 /**
  * Run a creation event.
@@ -257,11 +326,14 @@ Blockly.Events.Create.prototype.run = function(forward) {
     xml.appendChild(this.xml);
     Blockly.Xml.domToWorkspace(workspace, xml);
   } else {
-    var block = Blockly.Block.getById(this.blockId);
-    if (block) {
-      block.dispose(false, true);
-    } else {
-      console.warn("Can't delete non-existant block: " + this.blockId);
+    for (var i = 0, id; id = this.ids[i]; i++) {
+      var block = Blockly.Block.getById(id);
+      if (block) {
+        block.dispose(false, true);
+      } else if (id == this.blockId) {
+        // Only complain about root-level block.
+        console.warn("Can't uncreate non-existant block: " + id);
+      }
     }
   }
 };
@@ -278,6 +350,7 @@ Blockly.Events.Delete = function(block) {
   }
   Blockly.Events.Delete.superClass_.constructor.call(this, block);
   this.oldXml = Blockly.Xml.blockToDomWithXY(block);
+  this.ids = Blockly.Events.getDescendantIds_(block);
 };
 goog.inherits(Blockly.Events.Delete, Blockly.Events.Abstract);
 
@@ -288,16 +361,29 @@ goog.inherits(Blockly.Events.Delete, Blockly.Events.Abstract);
 Blockly.Events.Delete.prototype.type = Blockly.Events.DELETE;
 
 /**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Delete.prototype.toJson = function() {
+  var json = Blockly.Events.Delete.superClass_.toJson.call(this);
+  json['ids'] = this.ids;
+  return json;
+};
+
+/**
  * Run a deletion event.
  * @param {boolean} forward True if run forward, false if run backward (undo).
  */
 Blockly.Events.Delete.prototype.run = function(forward) {
   if (forward) {
-    var block = Blockly.Block.getById(this.blockId);
-    if (block) {
-      block.dispose(false, true);
-    } else {
-      console.warn("Can't delete non-existant block: " + this.blockId);
+    for (var i = 0, id; id = this.ids[i]; i++) {
+      var block = Blockly.Block.getById(id);
+      if (block) {
+        block.dispose(false, true);
+      } else if (id == this.blockId) {
+        // Only complain about root-level block.
+        console.warn("Can't delete non-existant block: " + id);
+      }
     }
   } else {
     var workspace = Blockly.Workspace.getById(this.workspaceId);
@@ -333,6 +419,20 @@ goog.inherits(Blockly.Events.Change, Blockly.Events.Abstract);
 Blockly.Events.Change.prototype.type = Blockly.Events.CHANGE;
 
 /**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Change.prototype.toJson = function() {
+  var json = Blockly.Events.Change.superClass_.toJson.call(this);
+  json['element'] = this.element;
+  if (this.name) {
+    json['name'] = this.name;
+  }
+  json['newValue'] = this.newValue;
+  return json;
+};
+
+/**
  * Does this event record any change of state?
  * @return {boolean} True if something changed.
  */
@@ -349,6 +449,10 @@ Blockly.Events.Change.prototype.run = function(forward) {
   if (!block) {
     console.warn("Can't change non-existant block: " + this.blockId);
     return;
+  }
+  if (block.mutator) {
+    // Close the mutator (if open) since we don't want to update it.
+    block.mutator.setVisible(false);
   }
   var value = forward ? this.newValue : this.oldValue;
   switch (this.element) {
@@ -373,16 +477,13 @@ Blockly.Events.Change.prototype.run = function(forward) {
       block.setInputsInline(value);
       break;
     case 'mutation':
-      if (block.mutator) {
-        // Close the mutator (if open) since we don't want to update it.
-        block.mutator.setVisible(false);
-      }
       var oldMutation = '';
       if (block.mutationToDom) {
         var oldMutationDom = block.mutationToDom();
         oldMutation = oldMutationDom && Blockly.Xml.domToText(oldMutationDom);
       }
       if (block.domToMutation) {
+        value = value || '<mutation></mutation>';
         var dom = Blockly.Xml.textToDom('<xml>' + value + '</xml>');
         block.domToMutation(dom.firstChild);
       }
@@ -390,7 +491,7 @@ Blockly.Events.Change.prototype.run = function(forward) {
           block, 'mutation', null, oldMutation, value));
       break;
     default:
-      console.warn("Unknown change type: " + this.element);
+      console.warn('Unknown change type: ' + this.element);
   }
 };
 
@@ -416,6 +517,25 @@ goog.inherits(Blockly.Events.Move, Blockly.Events.Abstract);
 Blockly.Events.Move.prototype.type = Blockly.Events.MOVE;
 
 /**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Move.prototype.toJson = function() {
+  var json = Blockly.Events.Move.superClass_.toJson.call(this);
+  if (this.newParentId) {
+    json['newParentId'] = this.newParentId;
+  }
+  if (this.newInputName) {
+    json['newInputName'] = this.newInputName;
+  }
+  if (this.newCoordinate) {
+    json['newCoordinate'] = Math.round(this.newCoordinate.x) + ',' +
+        Math.round(this.newCoordinate.y);
+  }
+  return json;
+};
+
+/**
  * Record the block's new location.  Called after the move.
  */
 Blockly.Events.Move.prototype.recordNew = function() {
@@ -439,7 +559,7 @@ Blockly.Events.Move.prototype.currentLocation_ = function() {
     location.parentId = parent.id;
     var input = parent.getInputWithBlock(block);
     if (input) {
-      location.inputName = input.name
+      location.inputName = input.name;
     }
   } else {
     location.coordinate = block.getRelativeToSurfaceXY();
@@ -501,4 +621,41 @@ Blockly.Events.Move.prototype.run = function(forward) {
       console.warn("Can't connect to non-existant input: " + inputName);
     }
   }
+};
+
+/**
+ * Class for a UI event.
+ * @param {Blockly.Block} block The affected block.
+ * @param {string} element One of 'selected', 'comment', 'mutator', etc.
+ * @param {string} oldValue Previous value of element.
+ * @param {string} newValue New value of element.
+ * @extends {Blockly.Events.Abstract}
+ * @constructor
+ */
+Blockly.Events.Ui = function(block, element, oldValue, newValue) {
+  Blockly.Events.Ui.superClass_.constructor.call(this, block);
+  this.element = element;
+  this.oldValue = oldValue;
+  this.newValue = newValue;
+  this.recordUndo = false;
+};
+goog.inherits(Blockly.Events.Ui, Blockly.Events.Abstract);
+
+/**
+ * Type of this event.
+ * @type {string}
+ */
+Blockly.Events.Ui.prototype.type = Blockly.Events.UI;
+
+/**
+ * Encode the event as JSON.
+ * @return {!Object} JSON representation.
+ */
+Blockly.Events.Ui.prototype.toJson = function() {
+  var json = Blockly.Events.Ui.superClass_.toJson.call(this);
+  json['element'] = this.element;
+  if (this.newValue !== undefined) {
+    json['newValue'] = this.newValue;
+  }
+  return json;
 };

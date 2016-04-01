@@ -151,7 +151,9 @@ function formatJson_(blockType, rootBlock) {
     }
   }
   JS.message0 = message.join(' ');
-  JS.args0 = args;
+  if (args.length) {
+    JS.args0 = args;
+  }
   // Generate inline/external switch.
   if (rootBlock.getFieldValue('INLINE') == 'EXT') {
     JS.inputsInline = false;
@@ -685,6 +687,7 @@ function updatePreview() {
     previewBlock.setMovable(false);
     previewBlock.setDeletable(false);
     previewBlock.moveBy(15, 10);
+    previewWorkspace.clearUndo();
 
     updateGenerator(previewBlock);
   } finally {
@@ -699,7 +702,6 @@ function updatePreview() {
  * @param {string} id ID of <pre> element to inject into.
  */
 function injectCode(code, id) {
-  Blockly.removeAllRanges();
   var pre = document.getElementById(id);
   pre.textContent = code;
   code = pre.innerHTML;
@@ -774,7 +776,9 @@ function init() {
 
   var toolbox = document.getElementById('toolbox');
   mainWorkspace = Blockly.inject('blockly',
-      {toolbox: toolbox, media: '../../media/'});
+      {collapse: false,
+       toolbox: toolbox,
+       media: '../../media/'});
 
   // Create the root block.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
@@ -784,6 +788,7 @@ function init() {
     var xml = '<xml><block type="factory_base" deletable="false" movable="false"></block></xml>';
     Blockly.Xml.domToWorkspace(mainWorkspace, Blockly.Xml.textToDom(xml));
   }
+  mainWorkspace.clearUndo();
 
   mainWorkspace.addChangeListener(updateLanguage);
   document.getElementById('direction')

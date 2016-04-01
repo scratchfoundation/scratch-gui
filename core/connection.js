@@ -84,14 +84,14 @@ Blockly.Connection.REASON_DIFFERENT_WORKSPACES = 5;
  * @param {!Blockly.Connection} childConnection Connection on inferior block.
  */
 Blockly.Connection.connect_ = function(parentConnection, childConnection) {
-  var parentBlock = parentConnection.sourceBlock_;
-  var childBlock = childConnection.sourceBlock_;
+  var parentBlock = parentConnection.getSourceBlock();
+  var childBlock = childConnection.getSourceBlock();
   var isSurroundingC = false;
   if (parentConnection == parentBlock.getFirstStatementConnection()) {
     isSurroundingC = true;
   }
   // Disconnect any existing parent on the child connection.
-  if (childConnection.targetConnection) {
+  if (childConnection.isConnected()) {
     // Scratch-specific behaviour:
     // If we're using a c-shaped block to surround a stack, remember where the
     // stack used to be connected.
@@ -100,7 +100,7 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
     }
     childConnection.disconnect();
   }
-  if (parentConnection.targetConnection) {
+  if (parentConnection.isConnected()) {
     // Other connection is already connected to something.
     // Disconnect it and reattach it or bump it as needed.
     var orphanBlock = parentConnection.targetBlock();
@@ -139,7 +139,7 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
       // block.  Since this block may be a stack, walk down to the end.
       var newBlock = childBlock;
       while (newBlock.nextConnection) {
-        if (newBlock.nextConnection.targetConnection) {
+        if (newBlock.nextConnection.isConnected()) {
           newBlock = newBlock.getNextBlock();
         } else {
           if (orphanBlock.previousConnection.checkType_(
@@ -279,7 +279,7 @@ Blockly.Connection.prototype.hidden_ = null;
  * Sever all links to this connection (not including from the source object).
  */
 Blockly.Connection.prototype.dispose = function() {
-  if (this.targetConnection) {
+  if (this.isConnected()) {
     throw 'Disconnect connection before disposing of it.';
   }
   if (this.inDB_) {
@@ -304,12 +304,28 @@ Blockly.Connection.prototype.isConnectedToNonGhost = function() {
 };
 
 /**
+ * Get the source block for this connection.
+ * @return {Blockly.Block} The source block, or null if there is none.
+ */
+Blockly.Connection.prototype.getSourceBlock = function() {
+  return this.sourceBlock_;
+};
+
+/**
  * Does the connection belong to a superior block (higher in the source stack)?
  * @return {boolean} True if connection faces down or right.
  */
 Blockly.Connection.prototype.isSuperior = function() {
   return this.type == Blockly.INPUT_VALUE ||
       this.type == Blockly.NEXT_STATEMENT;
+};
+
+/**
+ * Is the connection connected?
+ * @return {boolean} True if connection is connected to another connection.
+ */
+Blockly.Connection.prototype.isConnected = function() {
+  return !!this.targetConnection;
 };
 
 /**
@@ -335,12 +351,13 @@ Blockly.Connection.prototype.distanceFrom = function(otherConnection) {
 Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   if (!target) {
     return Blockly.Connection.REASON_TARGET_NULL;
-  } else if (this.sourceBlock_ && target.sourceBlock_ == this.sourceBlock_) {
+  } else if (this.sourceBlock_ &&
+      target.getSourceBlock() == this.sourceBlock_) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {
     return Blockly.Connection.REASON_WRONG_TYPE;
-  } else if (this.sourceBlock_ && target.sourceBlock_ &&
-      this.sourceBlock_.workspace !== target.sourceBlock_.workspace) {
+  } else if (this.sourceBlock_ && target.getSourceBlock() &&
+      this.sourceBlock_.workspace !== target.getSourceBlock().workspace) {
     return Blockly.Connection.REASON_DIFFERENT_WORKSPACES;
   } else if (!this.checkType_(target)) {
     return Blockly.Connection.REASON_CHECKS_FAILED;
@@ -362,7 +379,8 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
     case Blockly.Connection.REASON_SELF_CONNECTION:
       throw 'Attempted to connect a block to itself.';
     case Blockly.Connection.REASON_DIFFERENT_WORKSPACES:
-      throw 'Blocks are on different workspaces.';
+      // Usually this means one block has been deleted.
+      throw 'Blocks not on same workspace.';
     case Blockly.Connection.REASON_WRONG_TYPE:
       throw 'Attempt to connect incompatible types.';
     case Blockly.Connection.REASON_TARGET_NULL:
@@ -586,7 +604,7 @@ Blockly.Connection.singleConnection_ = function(block, orphanBlock) {
  * are zero or multiple eligible connections, returns null.  Otherwise
  * returns the only input on the last block in the chain.
  * Terminates early for shadow blocks.
- * @param {!Blockly.Block} startBlack The block on which to start the search.
+ * @param {!Blockly.Block} startBlock The block on which to start the search.
  * @param {!Blockly.Block} orphanBlock The block that is looking for a home.
  * @return {Blockly.Connection} The suitable connection point on the chain
  *    of blocks, or null.
@@ -619,11 +637,11 @@ Blockly.Connection.prototype.disconnect = function() {
   if (this.isSuperior()) {
     // Superior block.
     parentBlock = this.sourceBlock_;
-    childBlock = otherConnection.sourceBlock_;
+    childBlock = otherConnection.getSourceBlock();
     parentConnection = this;
   } else {
     // Inferior block.
-    parentBlock = otherConnection.sourceBlock_;
+    parentBlock = otherConnection.getSourceBlock();
     childBlock = this.sourceBlock_;
     parentConnection = otherConnection;
   }
@@ -671,8 +689,8 @@ Blockly.Connection.prototype.disconnect = function() {
  * @return {Blockly.Block} The connected block or null if none is connected.
  */
 Blockly.Connection.prototype.targetBlock = function() {
-  if (this.targetConnection) {
-    return this.targetConnection.sourceBlock_;
+  if (this.isConnected()) {
+    return this.targetConnection.getSourceBlock();
   }
   return null;
 };
@@ -685,7 +703,7 @@ Blockly.Connection.prototype.targetBlock = function() {
  * @private
  */
 Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
-  if (Blockly.dragMode_ != 0) {
+  if (Blockly.dragMode_ != Blockly.DRAG_NONE) {
     // Don't move blocks around while the user is doing the same.
     return;
   }
@@ -699,7 +717,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   if (!rootBlock.isMovable()) {
     // Can't bump an uneditable block away.
     // Check to see if the other block is movable.
-    rootBlock = staticConnection.sourceBlock_.getRootBlock();
+    rootBlock = staticConnection.getSourceBlock().getRootBlock();
     if (!rootBlock.isMovable()) {
       return;
     }
@@ -823,17 +841,6 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
  * @private
  */
 Blockly.Connection.prototype.checkType_ = function(otherConnection) {
-  // Don't split a connection where both sides are immovable.
-  var thisTargetBlock = this.targetBlock();
-  if (thisTargetBlock && !thisTargetBlock.isMovable() &&
-      !this.sourceBlock_.isMovable()) {
-    return false;
-  }
-  var otherTargetBlock = otherConnection.targetBlock();
-  if (otherTargetBlock && !otherTargetBlock.isMovable() &&
-      !otherConnection.sourceBlock_.isMovable()) {
-    return false;
-  }
   if (!this.check_ || !otherConnection.check_) {
     // One or both sides are promiscuous enough that anything will fit.
     return true;
@@ -863,7 +870,7 @@ Blockly.Connection.prototype.setCheck = function(check) {
     }
     this.check_ = check;
     // The new value type may not be compatible with the existing connection.
-    if (this.targetConnection && !this.checkType_(this.targetConnection)) {
+    if (this.isConnected() && !this.checkType_(this.targetConnection)) {
       var child = this.isSuperior() ? this.targetBlock() : this.sourceBlock_;
       child.unplug();
       // Bump away.
@@ -940,7 +947,7 @@ Blockly.Connection.prototype.setHidden = function(hidden) {
  */
 Blockly.Connection.prototype.hideAll = function() {
   this.setHidden(true);
-  if (this.targetConnection) {
+  if (this.isConnected()) {
     var blocks = this.targetBlock().getDescendants();
     for (var b = 0; b < blocks.length; b++) {
       var block = blocks[b];

@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2016-03-15 10:36:12.416062",
+		"lastupdated": "2016-04-01 14:40:33.958449",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -23,6 +23,8 @@
 	"DISABLE_BLOCK": "Disable Block",
 	"ENABLE_BLOCK": "Enable Block",
 	"HELP": "Help",
+	"UNDO": "Undo",
+	"REDO": "Redo",
 	"CHAT": "Chat with your collaborator by typing in this box!",
 	"AUTH": "Please authorize this app to enable your work to be saved and to allow it to be shared by you.",
 	"ME": "Me",

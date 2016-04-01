@@ -32,14 +32,14 @@ goog.require('goog.math');
 /**
  * Class for a workspace.  This is a data structure that contains blocks.
  * There is no UI, and can be created headlessly.
- * @param {Object=} opt_options Dictionary of options.
+ * @param {Blockly.Options} opt_options Dictionary of options.
  * @constructor
  */
 Blockly.Workspace = function(opt_options) {
   /** @type {string} */
   this.id = Blockly.genUid();
   Blockly.Workspace.WorkspaceDB_[this.id] = this;
-  /** @type {!Object} */
+  /** @type {!Blockly.Options} */
   this.options = opt_options || {};
   /** @type {boolean} */
   this.RTL = !!this.options.RTL;
@@ -153,8 +153,15 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
  * Dispose of all blocks in workspace.
  */
 Blockly.Workspace.prototype.clear = function() {
+  var existingGroup = Blockly.Events.getGroup();
+  if (!existingGroup) {
+    Blockly.Events.setGroup(true);
+  }
   while (this.topBlocks_.length) {
     this.topBlocks_[0].dispose();
+  }
+  if (!existingGroup) {
+    Blockly.Events.setGroup(false);
   }
 };
 
@@ -232,10 +239,19 @@ Blockly.Workspace.prototype.undo = function(redo) {
   events = Blockly.Events.filter(events, redo);
   Blockly.Events.recordUndo = false;
   for (var i = 0, event; event = events[i]; i++) {
-    console.log(event);
     event.run(redo);
   }
   Blockly.Events.recordUndo = true;
+};
+
+/**
+ * Clear the undo/redo stacks.
+ */
+Blockly.Workspace.prototype.clearUndo = function() {
+  this.undoStack_.length = 0;
+  this.redoStack_.length = 0;
+  // Stop any events already in the firing queue from being undoable.
+  Blockly.Events.clearPendingUndo();
 };
 
 /**
@@ -328,6 +344,8 @@ Blockly.Workspace.getById = function(id) {
 
 // Export symbols that would otherwise be renamed by Closure compiler.
 Blockly.Workspace.prototype['clear'] = Blockly.Workspace.prototype.clear;
+Blockly.Workspace.prototype['clearUndo'] =
+    Blockly.Workspace.prototype.clearUndo;
 Blockly.Workspace.prototype['addChangeListener'] =
     Blockly.Workspace.prototype.addChangeListener;
 Blockly.Workspace.prototype['removeChangeListener'] =

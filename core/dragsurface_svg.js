@@ -65,12 +65,10 @@ Blockly.DragSurfaceSvg.prototype.createDom = function () {
  * Set the dimensions (width, height, top offset) of the surface.
  * @param {Number} width Width of the surface in pixels
  * @param {Number} height Height of the surface in pixels
- * @param {Number} top Top offset of the surface in pixels
  */
-Blockly.DragSurfaceSvg.prototype.setSurfaceDimensions = function (width, height, top) {
+Blockly.DragSurfaceSvg.prototype.setSurfaceDimensions = function (width, height) {
   this.SVG_.setAttribute('width', width + 'px');
   this.SVG_.setAttribute('height', height + 'px');
-  this.SVG_.style.top = top + 'px';
 };
 
  /**

@@ -304,12 +304,13 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
     var xy = this.getRelativeToSurfaceXY();
     if (Blockly.selected == this) {
       // E.g., dragging blocks out of an input
+      this.translate(xy.x, xy.y);
       // Move to the drag surface
       this.workspace.dragSurface.setBlocksAndShow(svgRoot);
       this.isOnDragSurface_ = true;
     } else {
       this.workspace.getCanvas().appendChild(svgRoot);
-      svgRoot.setAttribute('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+      this.translate(xy.x, xy.y);
     }
   }
 
@@ -359,12 +360,20 @@ Blockly.BlockSvg.prototype.moveBy = function(dx, dy) {
   goog.asserts.assert(!this.parentBlock_, 'Block has parent.');
   var event = new Blockly.Events.Move(this);
   var xy = this.getRelativeToSurfaceXY();
-  this.getSvgRoot().setAttribute('transform',
-      'translate(' + (xy.x + dx) + ',' + (xy.y + dy) + ')');
+  this.translate(xy.x + dx, xy.y + dy);
   this.moveConnections_(dx, dy);
   event.recordNew();
   Blockly.Events.fire(event);
 };
+
+/**
+* Set this block to an absolute translation.
+* @param {number} x Horizontal translation.
+* @param {number} y Vertical translation.
+*/
+Blockly.BlockSvg.prototype.translate = function(x, y) {
+  this.getSvgRoot().setAttribute('transform', 'translate(' + x + ',' + y + ')');
+}
 
 /**
  * Snap this block to the nearest grid point.
@@ -829,6 +838,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     // Unrestricted dragging.
     if (!this.isOnDragSurface_) {
       // Move to the drag surface
+      this.translate(this.dragStartXY_.x, this.dragStartXY_.y);
       this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
       this.isOnDragSurface_ = true;
     }

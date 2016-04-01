@@ -91,7 +91,7 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
     isSurroundingC = true;
   }
   // Disconnect any existing parent on the child connection.
-  if (childConnection.targetConnection) {
+  if (childConnection.isConnected()) {
     // Scratch-specific behaviour:
     // If we're using a c-shaped block to surround a stack, remember where the
     // stack used to be connected.
@@ -100,7 +100,7 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
     }
     childConnection.disconnect();
   }
-  if (parentConnection.targetConnection) {
+  if (parentConnection.isConnected()) {
     // Other connection is already connected to something.
     // Disconnect it and reattach it or bump it as needed.
     var orphanBlock = parentConnection.targetBlock();
@@ -139,7 +139,7 @@ Blockly.Connection.connect_ = function(parentConnection, childConnection) {
       // block.  Since this block may be a stack, walk down to the end.
       var newBlock = childBlock;
       while (newBlock.nextConnection) {
-        if (newBlock.nextConnection.targetConnection) {
+        if (newBlock.nextConnection.isConnected()) {
           newBlock = newBlock.getNextBlock();
         } else {
           if (orphanBlock.previousConnection.checkType_(
@@ -279,7 +279,7 @@ Blockly.Connection.prototype.hidden_ = null;
  * Sever all links to this connection (not including from the source object).
  */
 Blockly.Connection.prototype.dispose = function() {
-  if (this.targetConnection) {
+  if (this.isConnected()) {
     throw 'Disconnect connection before disposing of it.';
   }
   if (this.inDB_) {
@@ -318,6 +318,14 @@ Blockly.Connection.prototype.getSourceBlock = function() {
 Blockly.Connection.prototype.isSuperior = function() {
   return this.type == Blockly.INPUT_VALUE ||
       this.type == Blockly.NEXT_STATEMENT;
+};
+
+/**
+ * Is the connection connected?
+ * @return {boolean} True if connection is connected to another connection.
+ */
+Blockly.Connection.prototype.isConnected = function() {
+  return !!this.targetConnection;
 };
 
 /**
@@ -681,7 +689,7 @@ Blockly.Connection.prototype.disconnect = function() {
  * @return {Blockly.Block} The connected block or null if none is connected.
  */
 Blockly.Connection.prototype.targetBlock = function() {
-  if (this.targetConnection) {
+  if (this.isConnected()) {
     return this.targetConnection.getSourceBlock();
   }
   return null;
@@ -862,7 +870,7 @@ Blockly.Connection.prototype.setCheck = function(check) {
     }
     this.check_ = check;
     // The new value type may not be compatible with the existing connection.
-    if (this.targetConnection && !this.checkType_(this.targetConnection)) {
+    if (this.isConnected() && !this.checkType_(this.targetConnection)) {
       var child = this.isSuperior() ? this.targetBlock() : this.sourceBlock_;
       child.unplug();
       // Bump away.
@@ -939,7 +947,7 @@ Blockly.Connection.prototype.setHidden = function(hidden) {
  */
 Blockly.Connection.prototype.hideAll = function() {
   this.setHidden(true);
-  if (this.targetConnection) {
+  if (this.isConnected()) {
     var blocks = this.targetBlock().getDescendants();
     for (var b = 0; b < blocks.length; b++) {
       var block = blocks[b];

@@ -166,6 +166,17 @@ Blockly.Css.CONTENT = [
     'z-index: 1000;',
   '}',
 
+  '.blocklyDragSurface {',
+    'display: none;',
+    'position: relative;',
+    'overflow: visible;',
+    'z-index: 5000;', /* Always display on top */
+    '-webkit-backface-visibility: hidden;',
+    'backface-visibility: hidden;',
+    '-webkit-perspective: 1000;',
+    'perspective: 1000;',
+  '}',
+
   '.blocklyResizeSE {',
     'cursor: se-resize;',
     'fill: #aaa;',

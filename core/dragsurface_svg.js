@@ -95,6 +95,19 @@ Blockly.DragSurfaceSvg.prototype.translateBlocks = function (x, y) {
   blocks.setAttribute('style', 'transform: translate3d(' + x + 'px,' + y + 'px, 0px)');
 };
 
+/**
+ * Translate and scale the entire drag surface group to keep in sync with the workspace.
+ * @param {Number} x X translation
+ * @param {Number} y Y translation
+ * @param {Number} scale Scale of the group
+ */
+Blockly.DragSurfaceSvg.prototype.translateAndScaleGroup = function (x, y, scale) {
+  // TODO: fall back to 2D translate when translate3d not supported.
+  var transform = 'transform: translate3d(' + x + 'px, ' + y + 'px, 0px) ' +
+      'scale3d(' + scale + ',' + scale + ',' + scale + ');';
+  this.dragGroup_.setAttribute('style', transform);
+};
+
  /**
   * Clear the group and hide the surface; move the blocks off onto the provided element.
   * @param {!Element} newSurface Surface the dragging blocks should be moved to

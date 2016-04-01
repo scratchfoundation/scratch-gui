@@ -327,6 +327,17 @@ Blockly.WorkspaceSvg.prototype.resize = function() {
   if (this.scrollbar) {
     this.scrollbar.resize();
   }
+  if (this.dragSurface_) {
+    this.resizeDragSurface_();
+  }
+};
+
+/**
+* Resize the drag surface according to new workspace metrics.
+*/
+Blockly.WorkspaceSvg.prototype.resizeDragSurface_ = function () {
+  var bbox = this.svgGroup_.getBBox();
+  this.dragSurface_.setSurfaceDimensions(bbox.width, bbox.height, -bbox.height)
 };
 
 /**
@@ -374,6 +385,9 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
       'scale(' + this.scale + ')';
   this.svgBlockCanvas_.setAttribute('transform', translation);
   this.svgBubbleCanvas_.setAttribute('transform', translation);
+  if (this.dragSurface_) {
+    this.dragSurface_.translateAndScaleGroup(x, y, this.scale);
+  }
 };
 
 /**

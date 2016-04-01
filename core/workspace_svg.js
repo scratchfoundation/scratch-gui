@@ -57,7 +57,7 @@ Blockly.WorkspaceSvg = function(options, opt_dragSurface) {
   this.audioCallback_ = null;
 
   if (opt_dragSurface) {
-    this.dragSurface_ = opt_dragSurface;
+    this.dragSurface = opt_dragSurface;
   }
 
   Blockly.ConnectionDB.init(this);
@@ -142,7 +142,7 @@ Blockly.WorkspaceSvg.prototype.scrollbar = null;
  * This workspace's drag surface, if it exists.
  * @type {Blockly.DragSurfaceSvg}
  */
-Blockly.WorkspaceSvg.prototype.dragSurface_ = null;
+Blockly.WorkspaceSvg.prototype.dragSurface = null;
 
 /**
  * Create the workspace DOM elements.
@@ -203,8 +203,8 @@ Blockly.WorkspaceSvg.prototype.createDom = function(opt_backgroundClass) {
     this.addFlyout_();
   }
   this.updateGridPattern_();
-  if (this.dragSurface_) {
-    this.dragSurface_.createDom();
+  if (this.dragSurface) {
+    this.dragSurface.createDom();
   }
   return this.svgGroup_;
 };
@@ -327,7 +327,7 @@ Blockly.WorkspaceSvg.prototype.resize = function() {
   if (this.scrollbar) {
     this.scrollbar.resize();
   }
-  if (this.dragSurface_) {
+  if (this.dragSurface) {
     this.resizeDragSurface_();
   }
 };
@@ -337,7 +337,7 @@ Blockly.WorkspaceSvg.prototype.resize = function() {
 */
 Blockly.WorkspaceSvg.prototype.resizeDragSurface_ = function () {
   var bbox = this.svgGroup_.getBBox();
-  this.dragSurface_.setSurfaceDimensions(bbox.width, bbox.height, -bbox.height)
+  this.dragSurface.setSurfaceDimensions(bbox.width, bbox.height, -bbox.height)
 };
 
 /**
@@ -385,8 +385,8 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
       'scale(' + this.scale + ')';
   this.svgBlockCanvas_.setAttribute('transform', translation);
   this.svgBubbleCanvas_.setAttribute('transform', translation);
-  if (this.dragSurface_) {
-    this.dragSurface_.translateAndScaleGroup(x, y, this.scale);
+  if (this.dragSurface) {
+    this.dragSurface.translateAndScaleGroup(x, y, this.scale);
   }
 };
 

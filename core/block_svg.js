@@ -81,6 +81,13 @@ Blockly.BlockSvg.prototype.width = 0;
 Blockly.BlockSvg.prototype.dragStartXY_ = null;
 
 /**
+ * Whether the block is on the drag surface.
+ * @type {boolean}
+ * @private
+ */
+Blockly.BlockSvg.prototype.isOnDragSurface_ = false;
+
+/**
  * Whether the block glows as if running.
  * @type {boolean}
  * @private
@@ -237,6 +244,11 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Terminate a drag operation.
     if (selected) {
+      if (selected.isOnDragSurface_) {
+        // Move off the drag surface
+        selected.workspace.dragSurface.clearAndHide(selected.workspace.getCanvas());
+        selected.isOnDragSurface_ = false;
+      }
       if (selected.ghostBlock_) {
         Blockly.Events.disable();
         if (Blockly.localGhostConnection_) {
@@ -290,8 +302,15 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
   if (this.parentBlock_ && svgRoot) {
     // Move this block up the DOM.  Keep track of x/y translations.
     var xy = this.getRelativeToSurfaceXY();
-    this.workspace.getCanvas().appendChild(svgRoot);
-    svgRoot.setAttribute('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+    if (Blockly.selected == this) {
+      // E.g., dragging blocks out of an input
+      // Move to the drag surface
+      this.workspace.dragSurface.setBlocksAndShow(svgRoot);
+      this.isOnDragSurface_ = true;
+    } else {
+      this.workspace.getCanvas().appendChild(svgRoot);
+      svgRoot.setAttribute('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+    }
   }
 
   Blockly.Field.startCache();
@@ -315,6 +334,8 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
 Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
   var x = 0;
   var y = 0;
+  var dragSurfaceGroup = (this.workspace.dragSurface) ?
+    this.workspace.dragSurface.getGroup() : null;
   var element = this.getSvgRoot();
   if (element) {
     do {
@@ -323,7 +344,8 @@ Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
       x += xy.x;
       y += xy.y;
       element = element.parentNode;
-    } while (element && element != this.workspace.getCanvas());
+    } while (element && element != this.workspace.getCanvas() &&
+             element != dragSurfaceGroup);
   }
   return new goog.math.Coordinate(x, y);
 };
@@ -805,6 +827,11 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
   }
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Unrestricted dragging.
+    if (!this.isOnDragSurface_) {
+      // Move to the drag surface
+      this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
+      this.isOnDragSurface_ = true;
+    }
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
     var group = this.getSvgRoot();
@@ -910,8 +937,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       }
       // Renders ghost.
       localGhostConnection.connect(closestConnection);
-      // Render dragging block so it appears on top.
-      this.workspace.getCanvas().appendChild(this.getSvgRoot());
       Blockly.localGhostConnection_ = localGhostConnection;
     }
   }

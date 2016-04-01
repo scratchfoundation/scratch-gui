@@ -1291,9 +1291,11 @@ Blockly.BlockSvg.prototype.removeDragging = function() {
 /**
  * Change the colour of a block.
  * @param {number|string} colour HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourSecondary Secondary HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourTertiary Tertiary HSV hue value, or #RRGGBB string.
  */
-Blockly.BlockSvg.prototype.setColour = function(colour) {
-  Blockly.BlockSvg.superClass_.setColour.call(this, colour);
+Blockly.BlockSvg.prototype.setColour = function(colour, colourSecondary, colourTertiary) {
+  Blockly.BlockSvg.superClass_.setColour.call(this, colour, colourSecondary, colourTertiary);
 
   if (this.rendered) {
     this.updateColour();

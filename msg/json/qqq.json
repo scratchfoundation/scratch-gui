@@ -17,6 +17,8 @@
 	"DISABLE_BLOCK": "context menu - Make the selected block have no effect (unless reenabled).",
 	"ENABLE_BLOCK": "context menu - Make the selected block have effect (after having been disabled earlier).",
 	"HELP": "context menu - Provide helpful information about the selected block.\n{{Identical|Help}}",
+	"UNDO": "context menu - Undo the previous action.\n{{Identical|Undo}}",
+	"REDO": "context menu - Undo the previous undo action.\n{{Identical|Redo}}",
 	"CHAT": "collaboration instruction - Tell the user that they can talk with other users.",
 	"AUTH": "authorization instruction - Ask the user to authorize this app so it can be saved and shared by them.",
 	"ME": "First person singular - objective case",

@@ -489,7 +489,6 @@ Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html, icon) {
  * @override
  */
 Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
-  Blockly.removeAllRanges();
   var toolbox = this.toolbox_;
   if (node == this.selectedItem_ || node == toolbox.tree_) {
     return;

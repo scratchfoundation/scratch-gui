@@ -669,7 +669,6 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
       block.showContextMenu_(e);
     } else {
       // Left-click (or middle click)
-      Blockly.removeAllRanges();
       Blockly.Css.setCursor(Blockly.Css.Cursor.CLOSED);
       // Record the current mouse position.
       Blockly.Flyout.startDownEvent_ = e;
@@ -750,7 +749,6 @@ Blockly.Flyout.prototype.onMouseMoveBlock_ = function(e) {
     e.stopPropagation();
     return;
   }
-  Blockly.removeAllRanges();
   var dx = e.clientX - Blockly.Flyout.startDownEvent_.clientX;
   var dy = e.clientY - Blockly.Flyout.startDownEvent_.clientY;
   // Still dragging within the sticky DRAG_RADIUS.
@@ -823,6 +821,8 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
     }
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);
+    Blockly.dragMode_ = Blockly.DRAG_FREE;
+    block.setDragging_(true);
   };
 };
 

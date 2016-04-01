@@ -187,7 +187,7 @@ Blockly.Block.prototype.colourTertiary_ = '#000000';
 Blockly.Block.prototype.dispose = function(healStack) {
   // Terminate onchange event calls.
   if (this.onchangeWrapper_) {
-    this.workspace.removeChangeListener(this.onchangeWrapper_)
+    this.workspace.removeChangeListener(this.onchangeWrapper_);
   }
   this.unplug(healStack);
   if (Blockly.Events.isEnabled()) {
@@ -329,7 +329,7 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
   if (!this.workspace) {
     return;  // Deleted block.
   }
-  if (Blockly.dragMode_ != 0) {
+  if (Blockly.dragMode_ != Blockly.DRAG_NONE) {
     return;  // Don't bump blocks during a drag.
   }
   var rootBlock = this.getRootBlock();
@@ -350,7 +350,7 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
       // either one of them is unconnected, then there could be confusion.
       if (!connection.targetConnection || !otherConnection.targetConnection) {
         // Only bump blocks if they are from different tree structures.
-        if (otherConnection.sourceBlock_.getRootBlock() != rootBlock) {
+        if (otherConnection.getSourceBlock().getRootBlock() != rootBlock) {
           // Always bump the inferior block.
           if (connection.isSuperior()) {
             otherConnection.bumpAwayFrom_(connection);
@@ -380,7 +380,7 @@ Blockly.Block.prototype.getParent = function() {
 Blockly.Block.prototype.getInputWithBlock = function(block) {
   for (var i = 0, input; input = this.inputList[i]; i++) {
     if (input.connection && input.connection.targetBlock() == block) {
-      return input
+      return input;
     }
   }
   return null;
@@ -1355,8 +1355,15 @@ Blockly.Block.prototype.removeInput = function(name, opt_quiet) {
   for (var i = 0, input; input = this.inputList[i]; i++) {
     if (input.name == name) {
       if (input.connection && input.connection.targetConnection) {
-        // Disconnect any attached block.
-        input.connection.targetBlock().unplug();
+        input.connection.setShadowDom(null);
+        var block = input.connection.targetBlock();
+        if (block.isShadow()) {
+          // Destroy any attached shadow block.
+          block.dispose();
+        } else {
+          // Disconnect any attached normal block.
+          block.unplug();
+        }
       }
       input.dispose();
       this.inputList.splice(i, 1);
@@ -1376,7 +1383,7 @@ Blockly.Block.prototype.removeInput = function(name, opt_quiet) {
 /**
  * Fetches the named input object.
  * @param {string} name The name of the input.
- * @return {Blockly.Input} The input object, or null of the input does not exist.
+ * @return {Blockly.Input} The input object, or null if input does not exist.
  */
 Blockly.Block.prototype.getInput = function(name) {
   for (var i = 0, input; input = this.inputList[i]; i++) {

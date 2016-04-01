@@ -123,10 +123,20 @@ Blockly.BlockSvg.prototype.initSvg = function() {
  * Select this block.  Highlight it visually.
  */
 Blockly.BlockSvg.prototype.select = function() {
-  if (Blockly.selected) {
-    // Unselect any previously selected block.
-    Blockly.selected.unselect();
+  if (Blockly.selected == this) {
+    return;
   }
+  var oldId = null;
+  if (Blockly.selected) {
+    oldId = Blockly.selected.id;
+    // Unselect any previously selected block.
+    Blockly.Events.disable();
+    Blockly.selected.unselect();
+    Blockly.Events.enable();
+  }
+  var event = new Blockly.Events.Ui(null, 'selected', oldId, this.id);
+  event.workspaceId = this.workspace.id;
+  Blockly.Events.fire(event);
   Blockly.selected = this;
   this.addSelect();
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
@@ -136,6 +146,12 @@ Blockly.BlockSvg.prototype.select = function() {
  * Unselect this block.  Remove its highlighting.
  */
 Blockly.BlockSvg.prototype.unselect = function() {
+  if (Blockly.selected != this) {
+    return;
+  }
+  var event = new Blockly.Events.Ui(null, 'selected', this.id, null);
+  event.workspaceId = this.workspace.id;
+  Blockly.Events.fire(event);
   Blockly.selected = null;
   this.removeSelect();
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
@@ -214,7 +230,7 @@ Blockly.BlockSvg.terminateDrag_ = function() {
     Blockly.BlockSvg.onMouseMoveWrapper_ = null;
   }
   var selected = Blockly.selected;
-  if (Blockly.dragMode_ == 2) {
+  if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Terminate a drag operation.
     if (selected) {
       if (selected.ghostBlock_) {
@@ -254,7 +270,7 @@ Blockly.BlockSvg.terminateDrag_ = function() {
       Blockly.fireUiEvent(window, 'resize');
     }
   }
-  Blockly.dragMode_ = 0;
+  Blockly.dragMode_ = Blockly.DRAG_NONE;
   Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
 };
 
@@ -331,7 +347,7 @@ Blockly.BlockSvg.prototype.snapToGrid = function() {
   if (!this.workspace) {
     return;  // Deleted block.
   }
-  if (Blockly.dragMode_ != 0) {
+  if (Blockly.dragMode_ != Blockly.DRAG_NONE) {
     return;  // Don't bump blocks during a drag.
   }
   if (this.getParent()) {
@@ -401,9 +417,9 @@ Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
     topLeft = new goog.math.Coordinate(blockXY.x - tab, blockXY.y);
     // Width has the tab built into it already so subtract it here.
     bottomRight = new goog.math.Coordinate(blockXY.x + blockBounds.width - tab,
- 					   blockXY.y + blockBounds.height);
+        blockXY.y + blockBounds.height);
   }
-  return { topLeft : topLeft, bottomRight : bottomRight };
+  return {topLeft: topLeft, bottomRight: bottomRight};
 };
 
 /**
@@ -498,10 +514,14 @@ Blockly.BlockSvg.prototype.tab = function(start, forward) {
  * @private
  */
 Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
+  if (this.workspace.options.readOnly) {
+    return;
+  }
   if (this.isInFlyout) {
     e.stopPropagation();
     return;
   }
+  Blockly.setPageSelectable(false);
   this.workspace.markFocused();
   // Update Blockly's knowledge of its own location.
   Blockly.svgResize(this.workspace);
@@ -513,7 +533,7 @@ Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
     // Right-click.
     this.showContextMenu_(e);
   } else if (!this.isMovable()) {
-    // Allow unmovable blocks to be selected and context menued, but not
+    // Allow immovable blocks to be selected and context menued, but not
     // dragged.  Let this event bubble up to document, so the workspace may be
     // dragged instead.
     return;
@@ -522,13 +542,12 @@ Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
       Blockly.Events.setGroup(true);
     }
     // Left-click (or middle click)
-    Blockly.removeAllRanges();
     Blockly.Css.setCursor(Blockly.Css.Cursor.CLOSED);
 
     this.dragStartXY_ = this.getRelativeToSurfaceXY();
     this.workspace.startDrag(e, this.dragStartXY_.x, this.dragStartXY_.y);
 
-    Blockly.dragMode_ = 1;
+    Blockly.dragMode_ = Blockly.DRAG_STICKY;
     Blockly.BlockSvg.onMouseUpWrapper_ = Blockly.bindEvent_(document,
         'mouseup', this, this.onMouseUp_);
     Blockly.BlockSvg.onMouseMoveWrapper_ = Blockly.bindEvent_(document,
@@ -557,11 +576,11 @@ Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
-  if (Blockly.dragMode_ == 1 && Blockly.selected) {
-    // 1 - Still inside the sticky DRAG_RADIUS.
-    // Trigger a tap
-    this.workspace.fireTapListener(Blockly.selected.id, Blockly.selected.getRootBlock().id);
+  if (Blockly.dragMode_ != Blockly.DRAG_FREE) {
+    Blockly.Events.fire(
+        new Blockly.Events.Ui(this, 'click', undefined, undefined));
   }
+  Blockly.setPageSelectable(true);
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
     if (Blockly.localConnection_ == Blockly.selected.nextConnection) {
@@ -577,7 +596,7 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
       // Determine which connection is inferior (lower in the source stack).
       var inferiorConnection = Blockly.localConnection_.isSuperior() ?
           Blockly.highlightedConnection_ : Blockly.localConnection_;
-      inferiorConnection.sourceBlock_.connectionUiEffect();
+      inferiorConnection.getSourceBlock().connectionUiEffect();
     }
     if (this.workspace.trashcan) {
       // Don't throw an object in the trash can if it just got connected.
@@ -732,6 +751,9 @@ Blockly.BlockSvg.prototype.moveConnections_ = function(dx, dy) {
  */
 Blockly.BlockSvg.prototype.setDragging_ = function(adding) {
   if (adding) {
+    var group = this.getSvgRoot();
+    group.translate_ = '';
+    group.skew_ = '';
     this.addDragging();
   } else {
     this.removeDragging();
@@ -758,21 +780,17 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     e.stopPropagation();
     return;
   }
-  Blockly.removeAllRanges();
 
   var oldXY = this.getRelativeToSurfaceXY();
   var newXY = this.workspace.moveDrag(e);
 
-  var group = this.getSvgRoot();
-  if (Blockly.dragMode_ == 1) {
+  if (Blockly.dragMode_ == Blockly.DRAG_STICKY) {
     // Still dragging within the sticky DRAG_RADIUS.
     var dr = goog.math.Coordinate.distance(oldXY, newXY) * this.workspace.scale;
     if (dr > Blockly.DRAG_RADIUS) {
       // Switch to unrestricted dragging.
-      Blockly.dragMode_ = 2;
+      Blockly.dragMode_ = Blockly.DRAG_FREE;
       Blockly.longStop_();
-      group.translate_ = '';
-      group.skew_ = '';
       if (this.parentBlock_) {
         // Push this block to the very top of the stack.
         this.unplug();
@@ -781,10 +799,11 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       this.setDragging_(true);
     }
   }
-  if (Blockly.dragMode_ == 2) {
+  if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Unrestricted dragging.
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
+    var group = this.getSvgRoot();
     group.translate_ = 'translate(' + newXY.x + ',' + newXY.y + ')';
     group.setAttribute('transform', group.translate_ + group.skew_);
     // Drag all the nested bubbles.
@@ -1011,6 +1030,7 @@ Blockly.BlockSvg.prototype.dispose = function(healStack, animate) {
   Blockly.Field.startCache();
   // If this block is being dragged, unlink the mouse events.
   if (Blockly.selected == this) {
+    this.unselect();
     Blockly.terminateDrag_();
   }
   // If this block has a context menu open, close it.
@@ -1166,7 +1186,7 @@ Blockly.BlockSvg.prototype.setWarningText = function(text, opt_id) {
     clearTimeout(this.setWarningText.pid_[id]);
     delete this.setWarningText.pid_[id];
   }
-  if (Blockly.dragMode_ == 2) {
+  if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Don't change the warning text during a drag.
     // Wait until the drag finishes.
     var thisBlock = this;

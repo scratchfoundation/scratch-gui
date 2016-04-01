@@ -109,7 +109,7 @@ Blockly.FieldTextInput.prototype.setSpellcheck = function(check) {
  * @private
  */
 Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
-  var workspace = this.sourceBlock_.workspace;
+  this.workspace_ = this.sourceBlock_.workspace;
   var quietInput = opt_quietInput || false;
   if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
                       goog.userAgent.IPAD)) {
@@ -130,7 +130,8 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   // Create the input.
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   htmlInput.setAttribute('spellcheck', this.spellcheck_);
-  var fontSize = (Blockly.FieldTextInput.FONTSIZE * workspace.scale) + 'pt';
+  var fontSize =
+      (Blockly.FieldTextInput.FONTSIZE * this.workspace_.scale) + 'pt';
   div.style.fontSize = fontSize;
   htmlInput.style.fontSize = fontSize;
   /** @type {!HTMLInputElement} */
@@ -156,7 +157,7 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   htmlInput.onKeyPressWrapper_ =
       Blockly.bindEvent_(htmlInput, 'keypress', this, this.onHtmlInputChange_);
   htmlInput.onWorkspaceChangeWrapper_ = this.resizeEditor_.bind(this);
-  workspace.addChangeListener(htmlInput.onWorkspaceChangeWrapper_);
+  this.workspace_.addChangeListener(htmlInput.onWorkspaceChangeWrapper_);
 };
 
 /**
@@ -285,7 +286,7 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     Blockly.unbindEvent_(htmlInput.onKeyDownWrapper_);
     Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
     Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
-    thisField.sourceBlock_.workspace.removeChangeListener(
+    thisField.workspace_.removeChangeListener(
         htmlInput.onWorkspaceChangeWrapper_);
     Blockly.FieldTextInput.htmlInput_ = null;
     // Delete style properties.

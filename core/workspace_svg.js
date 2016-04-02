@@ -327,19 +327,6 @@ Blockly.WorkspaceSvg.prototype.resize = function() {
   if (this.scrollbar) {
     this.scrollbar.resize();
   }
-  if (this.dragSurface) {
-    this.resizeDragSurface_();
-  }
-};
-
-/**
-* Resize the drag surface according to new workspace metrics.
-*/
-Blockly.WorkspaceSvg.prototype.resizeDragSurface_ = function () {
-  var workspaceBBox = this.svgBackground_.getBBox();
-  var workspaceWidth = workspaceBBox.width;
-  var workspaceHeight = workspaceBBox.height;
-  this.dragSurface.setSurfaceDimensions(workspaceWidth, workspaceHeight, -workspaceHeight)
 };
 
 /**

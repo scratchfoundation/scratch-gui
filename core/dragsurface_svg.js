@@ -61,16 +61,6 @@ Blockly.DragSurfaceSvg.prototype.createDom = function () {
   this.dragGroup_ = Blockly.createSvgElement('g', {}, this.SVG_);
 };
 
-/**
- * Set the dimensions (width, height, top offset) of the surface.
- * @param {Number} width Width of the surface in pixels
- * @param {Number} height Height of the surface in pixels
- */
-Blockly.DragSurfaceSvg.prototype.setSurfaceDimensions = function (width, height) {
-  this.SVG_.setAttribute('width', width + 'px');
-  this.SVG_.setAttribute('height', height + 'px');
-};
-
  /**
   * Set the SVG blocks on the drag surface's group and show the surface.
   * Only one block should be on the drag surface at a time.

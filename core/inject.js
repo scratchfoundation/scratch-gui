@@ -159,7 +159,8 @@ Blockly.createDom_ = function(container, options) {
  * Create a main workspace and add it to the SVG.
  * @param {!Element} svg SVG element with pattern defined.
  * @param {!Blockly.Options} options Dictionary of options.
- * @return {!Blockly.DragSurfaceSvg} dragSurface Drag surface SVG for the workspace.
+ * @param {!Blockly.DragSurfaceSvg} dragSurface Drag surface SVG for the workspace.
+ * @return {!Blockly.Workspace} Newly created main workspace.
  * @private
  */
 Blockly.createMainWorkspace_ = function(svg, options, dragSurface) {

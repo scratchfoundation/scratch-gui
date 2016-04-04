@@ -32,30 +32,64 @@ function svgTest_tearDown() {
 }
 
 /**
+ * Create a block with one field. Must be called after svgTest_setUp().
+ * @return {!Blockly.Block} The new block with one field.
+ */
+function svgTest_newOneFieldBlock() {
+  Blockly.Blocks['one_field_block'] = {
+    init: function() {
+      this.jsonInit({
+        'message0': '%1',
+        'args0': [
+          {
+            'type': 'field_input',
+            'name': 'FIELD'
+          }
+        ]
+      });
+    }
+  };
+
+  var block = svgTest_workspace.newBlock('one_field_block');
+  block.initSvg();
+  block.render(false);
+  return block;
+}
+
+/**
+ * Create a block with two fields. Must be called after svgTest_setUp().
+ * @return {!Blockly.Block} The new block with two fields.
+ */
+function svgTest_newTwoFieldBlock() {
+  Blockly.Blocks['two_field_block'] = {
+    init: function() {
+      this.jsonInit({
+        'message0': 'text_field %1',
+        'args0': [
+          {
+            'type': 'field_input',
+            'name': 'FIELD'
+          }
+        ]
+      });
+    }
+  };
+
+  var block = svgTest_workspace.newBlock('two_field_block');
+  block.initSvg();
+  block.render(false);
+  return block;
+}
+
+/**
  * Check that the clicking the block shows the editor when the block has one
  * field.
  */
-function test_clickElementWithOneField() {
+function test_oneFieldBlock_blockClickShowsEditor() {
   svgTest_setUp();
 
   try {
-    Blockly.Blocks['one_field_block'] = {
-      init: function() {
-        this.jsonInit({
-          'message0': '%1',
-          'args0': [
-            {
-              'type': 'field_input',
-              'name': 'FIELD'
-            }
-          ]
-        });
-      }
-    };
-
-    var block = svgTest_workspace.newBlock('one_field_block');
-    block.initSvg();
-    block.render(false);
+    var block = svgTest_newOneFieldBlock();
 
     var showEditorCalled = false;
     block.getField('FIELD').showEditor_ = function() {
@@ -73,27 +107,11 @@ function test_clickElementWithOneField() {
  * Check that the clicking the field shows the editor when the block has more
  * than one field.
  */
-function test_clickElementWithTwoFields() {
+function test_twoFieldBlock_fieldClickShowsEditor() {
   svgTest_setUp();
 
   try {
-    Blockly.Blocks['two_field_block'] = {
-      init: function() {
-        this.jsonInit({
-          'message0': 'text_field %1',
-          'args0': [
-            {
-              'type': 'field_input',
-              'name': 'FIELD'
-            }
-          ]
-        });
-      }
-    };
-
-    var block = svgTest_workspace.newBlock('two_field_block');
-    block.initSvg();
-    block.render(false);
+    var block = svgTest_newTwoFieldBlock();
 
     var showEditorCalled = false;
     block.getField('FIELD').showEditor_ = function() {
@@ -106,3 +124,36 @@ function test_clickElementWithTwoFields() {
     svgTest_tearDown();
   }
 }
+
+/**
+ * Check that blocks with one field have the text cursor style.
+ */
+function test_oneFieldBlock_blockCursorStyleIsText() {
+  svgTest_setUp();
+
+  try {
+    var block = svgTest_newOneFieldBlock();
+
+    assertEquals('text', block.getSvgRoot().style.cursor);
+  } finally {
+    svgTest_tearDown();
+  }
+}
+
+
+/**
+ * Check that blocks with two fields have the text cursor style on the field
+ * group.
+ */
+function test_twoFieldBlock_fieldCursorStyleIsText() {
+  svgTest_setUp();
+
+  try {
+    var block = svgTest_newTwoFieldBlock();
+
+    assertEquals('text', block.getField('FIELD').getSvgRoot().style.cursor);
+  } finally {
+    svgTest_tearDown();
+  }
+}
+

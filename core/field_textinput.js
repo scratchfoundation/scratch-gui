@@ -262,8 +262,10 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
     xy.y += 1 * scale;
   }
   if (goog.userAgent.WEBKIT) {
+    xy.x += 0.5;
     xy.y -= 1 * scale;
   }
+  // Finally, set the actual style
   div.style.left = xy.x + 'px';
   div.style.top = xy.y + 'px';
 };

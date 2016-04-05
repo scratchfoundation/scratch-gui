@@ -63,6 +63,13 @@ Blockly.BlockSvg.FIELD_HEIGHT = 8 * Blockly.BlockSvg.GRID_UNIT;
  * @const
  */
 Blockly.BlockSvg.FIELD_WIDTH = 12 * Blockly.BlockSvg.GRID_UNIT;
+
+/**
+ * Top padding of user inputs
+ * @const
+ */
+Blockly.BlockSvg.FIELD_TOP_PADDING = 1.5 * Blockly.BlockSvg.GRID_UNIT;
+
 /**
  * Corner radius of number inputs
  * @const

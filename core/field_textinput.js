@@ -225,36 +225,28 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
  * @private
  */
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
-  // Pull stroke colour from the existing SVG shadow block
-  // XXX: how to do this better...
-  var strokeColour = this.sourceBlock_.getSvgRoot().childNodes[0].getAttribute('stroke');
-
   var scale = this.sourceBlock_.workspace.scale;
   var div = Blockly.WidgetDiv.DIV;
   var bBox = this.getScaledBBox_();
-  // Add 1px to width and height to account for border (pre-scale)
+  // The width of this box must be at least FIELD_WIDTH * scale.
+  // It may be smaller as bBox is based on the content size.
   var width = Math.max(bBox.width, Blockly.BlockSvg.FIELD_WIDTH * scale);
+  // Add 1px to width and height to account for border (pre-scale)
   div.style.width = (width / scale + 1) + 'px';
   div.style.height = (bBox.height / scale + 1) + 'px';
   div.style.transform = 'scale(' + scale + ')';
 
-  // This is the same check as in block_render.
-  // Possibly we should switch to a different check in the future.
-  // XXX: move this out
-  var borderRadius = Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;
-  if (this.sourceBlock_.type === 'math_number') {
-    borderRadius = Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
-  }
-  borderRadius += 0.5; // Add 0.5px to account for slight difference between SVG and CSS border
-  div.style.borderColor = strokeColour;
+  // Add 0.5px to account for slight difference between SVG and CSS border
+  var borderRadius = this.getBorderRadius() + 0.5;
   div.style.borderRadius = borderRadius + 'px';
+  // Pull stroke colour from the existing shadow block
+  var strokeColour = this.sourceBlock_.getColourTertiary();
+  div.style.borderColor = strokeColour;
 
   var xy = this.getAbsoluteXY_();
-
-  // Account for border post-scale
+  // Account for border width, post-scale
   xy.x -= scale / 2;
   xy.y -= scale / 2;
-
   // In RTL mode block fields and LTR input fields the left edge moves,
   // whereas the right edge is fixed.  Reposition the editor.
   if (this.sourceBlock_.RTL) {
@@ -274,6 +266,18 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   }
   div.style.left = xy.x + 'px';
   div.style.top = xy.y + 'px';
+};
+
+/**
+ * Determine border radius based on the type of the owning shadow block.
+ * @return {Number} Border radius in px.
+*/
+Blockly.Field.prototype.getBorderRadius = function() {
+  if (this.sourceBlock_.type === 'math_number') {
+    return Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
+  } else {
+    return Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;
+  }
 };
 
 /**

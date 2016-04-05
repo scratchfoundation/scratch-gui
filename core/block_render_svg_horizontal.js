@@ -315,11 +315,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
         var fieldBBox = field.textElement_.getBBox();
         metrics.fieldWidth = fieldBBox.width + Blockly.BlockSvg.SEP_SPACE_X;
         metrics.fieldHeight = fieldBBox.height;
-        if (field.sourceBlock_.type === 'math_number') {
-          metrics.fieldRadius = Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
-        } else {
-          metrics.fieldRadius = Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;
-        }
+        metrics.fieldRadius = field.getBorderRadius();
       }
     }
   }

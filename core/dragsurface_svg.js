@@ -84,12 +84,12 @@ Blockly.DragSurfaceSvg.prototype.translateAndScaleGroup = function (x, y, scale)
 };
 
 /**
-* Provide a reference to the drag group (primarily for BlockSvg.getRelativeToSurfaceXY).
-* @return {Element} Drag surface group element
-*/
+ * Provide a reference to the drag group (primarily for BlockSvg.getRelativeToSurfaceXY).
+ * @return {Element} Drag surface group element
+ */
 Blockly.DragSurfaceSvg.prototype.getGroup = function () {
   return this.dragGroup_;
-}
+};
 
  /**
   * Clear the group and hide the surface; move the blocks off onto the provided element.

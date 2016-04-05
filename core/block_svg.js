@@ -333,6 +333,8 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
  * @return {!goog.math.Coordinate} Object with .x and .y properties.
  */
 Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
+  // The drawing surface is relative to either the workspace canvas
+  // or to the drag surface group.
   var x = 0;
   var y = 0;
   var dragSurfaceGroup = (this.workspace.dragSurface) ?
@@ -367,13 +369,13 @@ Blockly.BlockSvg.prototype.moveBy = function(dx, dy) {
 };
 
 /**
-* Set this block to an absolute translation.
-* @param {number} x Horizontal translation.
-* @param {number} y Vertical translation.
+ * Set this block to an absolute translation.
+ * @param {number} x Horizontal translation.
+ * @param {number} y Vertical translation.
 */
 Blockly.BlockSvg.prototype.translate = function(x, y) {
   this.getSvgRoot().setAttribute('transform', 'translate(' + x + ',' + y + ')');
-}
+};
 
 /**
  * Snap this block to the nearest grid point.

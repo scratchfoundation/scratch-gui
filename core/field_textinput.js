@@ -250,7 +250,7 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   // In RTL mode block fields and LTR input fields the left edge moves,
   // whereas the right edge is fixed.  Reposition the editor.
   if (this.sourceBlock_.RTL) {
-    xy.x += bBox.width;
+    xy.x += width;
     xy.x -= div.offsetWidth;
   }
   // Shift by a few pixels to line up exactly.

@@ -54,6 +54,12 @@ Blockly.BlockSvg.SEP_SPACE_Y = 3 * Blockly.BlockSvg.GRID_UNIT;
 Blockly.BlockSvg.STATEMENT_BLOCK_SPACE = 4 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
+ * Horizontal space at the start of a repeat block.
+ * @const
+ */
+Blockly.BlockSvg.STATEMENT_BLOCK_SPACE_HORIZONTAL = 6 * Blockly.BlockSvg.GRID_UNIT;
+
+/**
  * Height of user inputs
  * @const
  */

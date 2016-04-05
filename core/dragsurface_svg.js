@@ -68,6 +68,7 @@ Blockly.DragSurfaceSvg.prototype.createDom = function () {
   */
 Blockly.DragSurfaceSvg.prototype.setBlocksAndShow = function (blocks) {
   goog.asserts.assert(this.dragGroup_.childNodes.length == 0, 'Already dragging a block.');
+  // appendChild removes the blocks from the previous parent
   this.dragGroup_.appendChild(blocks);
   this.SVG_.style.display = 'block';
 };
@@ -96,6 +97,7 @@ Blockly.DragSurfaceSvg.prototype.getGroup = function () {
   * @param {!Element} newSurface Surface the dragging blocks should be moved to
   */
 Blockly.DragSurfaceSvg.prototype.clearAndHide = function (newSurface) {
+  // appendChild removes the node from this.dragGroup_
   newSurface.appendChild(this.dragGroup_.childNodes[0]);
   this.SVG_.style.display = 'none';
   goog.asserts.assert(this.dragGroup_.childNodes.length == 0, 'Drag group was not cleared.');

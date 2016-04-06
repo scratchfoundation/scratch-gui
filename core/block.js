@@ -101,9 +101,9 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   this.RTL = workspace.RTL;
 
   /** @type {Blockly.Block} */
-  this.ghostBlock_ = null;
+  this.insertionMarker_ = null;
   /** @type {boolean} */
-  this.isGhost_ = false;
+  this.isInsertionMarker_ = false;
 
   // Copy the type-specific functions and data from the prototype.
   if (prototypeName) {
@@ -208,8 +208,8 @@ Blockly.Block.prototype.dispose = function(healStack) {
     Blockly.selected = null;
   }
 
-  if (this.ghostBlock_) {
-    this.ghostBlock_.dispose();
+  if (this.insertionMarker_) {
+    this.insertionMarker_.dispose();
   }
 
   // First, dispose of all my children.
@@ -553,23 +553,23 @@ Blockly.Block.prototype.setShadow = function(shadow) {
 };
 
 /**
- * Get whether this block is a ghost block or not.
- * @return {boolean} True if a ghost.
+ * Get whether this block is an insertion marker block or not.
+ * @return {boolean} True if an insertion marker.
  */
-Blockly.Block.prototype.isGhost = function() {
-  return this.isGhost_;
+Blockly.Block.prototype.isInsertionMarker = function() {
+  return this.isInsertionMarker_;
 };
 
 /**
- * Set whether this block is a ghost block or not.
- * @param {boolean} ghost True if a ghost.
+ * Set whether this block is an insertion marker block or not.
+ * @param {boolean} insertionMarker True if an insertion marker.
  */
-Blockly.Block.prototype.setGhost = function(ghost) {
-  if (this.isGhost_ == ghost) {
+Blockly.Block.prototype.setInsertionMarker = function(insertionMarker) {
+  if (this.isInsertionMarker_ == insertionMarker) {
     return;  // No change.
   }
-  this.isGhost_ = ghost;
-  if (this.isGhost_) {
+  this.isInsertionMarker_ = insertionMarker;
+  if (this.isInsertionMarker_) {
     this.setColour("#949494");
   }
 };
@@ -632,7 +632,7 @@ Blockly.Block.prototype.setConnectionsHidden = function(hidden) {
 /**
  * Find the connection on this block that corresponds to the given connection
  * on the other block.
- * Used to match connections between a block and its ghost.
+ * Used to match connections between a block and its insertion marker.
  * @param {!Blockly.Block} otherBlock The other block to match against.
  * @param {!Blockly.Connection} conn The other connection to match.
  * @return {Blockly.Connection} the matching connection on this block, or null.

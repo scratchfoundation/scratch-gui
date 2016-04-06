@@ -237,13 +237,13 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Terminate a drag operation.
     if (selected) {
-      if (selected.insertionMarker_) {
+      if (Blockly.insertionMarker_) {
         Blockly.Events.disable();
         if (Blockly.insertionMarkerConnection_) {
-          selected.disconnectInsertionMarker();
+          Blockly.BlockSvg.disconnectInsertionMarker();
         }
-        selected.insertionMarker_.dispose();
-        selected.insertionMarker_ = null;
+        Blockly.insertionMarker_.dispose();
+        Blockly.insertionMarker_ = null;
         Blockly.Events.enable();
       }
       // Update the connection locations.
@@ -883,8 +883,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   // with Web Blockly the name "highlightedConnection" will still be used.
   if (Blockly.highlightedConnection_ &&
       Blockly.highlightedConnection_ != closestConnection) {
-    if (this.insertionMarker_ && Blockly.insertionMarkerConnection_) {
-      this.disconnectInsertionMarker();
+    if (Blockly.insertionMarker_ && Blockly.insertionMarkerConnection_) {
+      Blockly.BlockSvg.disconnectInsertionMarker();
     }
     Blockly.highlightedConnection_ = null;
     Blockly.localConnection_ = null;
@@ -896,13 +896,13 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       !closestConnection.sourceBlock_.isInsertionMarker()) {
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
-    if (!this.insertionMarker_){
-      this.insertionMarker_ = this.workspace.newBlock(this.type);
-      this.insertionMarker_.setInsertionMarker(true);
-      this.insertionMarker_.initSvg();
+    if (!Blockly.insertionMarker_){
+      Blockly.insertionMarker_ = this.workspace.newBlock(this.type);
+      Blockly.insertionMarker_.setInsertionMarker(true);
+      Blockly.insertionMarker_.initSvg();
     }
 
-    var insertionMarker = this.insertionMarker_;
+    var insertionMarker = Blockly.insertionMarker_;
     var insertionMarkerConnection = insertionMarker.getMatchingConnection(this,
         localConnection);
     if (insertionMarkerConnection != Blockly.insertionMarkerConnection_) {
@@ -953,37 +953,39 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
  * Disconnect the current insertion marker from the stack, and heal the stack to
  * its previous state.
  */
-Blockly.BlockSvg.prototype.disconnectInsertionMarker = function() {
-  // The insertion marker is the first block in a stack, either because it doesn't
-  // have a previous connection or because the previous connection is not
-  // connection.  Unplug won't do anything in that case.  Instead, unplug the
+Blockly.BlockSvg.disconnectInsertionMarker = function() {
+  // The insertion marker is the first block in a stack, either because it
+  // doesn't have a previous connection or because the previous connection is
+  // not connected.  Unplug won't do anything in that case.  Instead, unplug the
   // following block.
-  if (Blockly.insertionMarkerConnection_ == this.insertionMarker_.nextConnection &&
-      (!this.insertionMarker_.previousConnection ||
-      !this.insertionMarker_.previousConnection.targetConnection)) {
+  if (Blockly.insertionMarkerConnection_ ==
+      Blockly.insertionMarker_.nextConnection &&
+      (!Blockly.insertionMarker_.previousConnection ||
+      !Blockly.insertionMarker_.previousConnection.targetConnection)) {
     Blockly.insertionMarkerConnection_.targetBlock().unplug(false);
   }
   // Inside of a C-block, first statement connection.
   else if (Blockly.insertionMarkerConnection_.type == Blockly.NEXT_STATEMENT &&
-      Blockly.insertionMarkerConnection_ != this.insertionMarker_.nextConnection) {
+      Blockly.insertionMarkerConnection_ !=
+      Blockly.insertionMarker_.nextConnection) {
     var innerConnection = Blockly.insertionMarkerConnection_.targetConnection;
     innerConnection.sourceBlock_.unplug(false);
     var previousBlockNextConnection =
-      this.insertionMarker_.previousConnection.targetConnection;
-    this.insertionMarker_.unplug(true);
+        Blockly.insertionMarker_.previousConnection.targetConnection;
+    Blockly.insertionMarker_.unplug(true);
     if (previousBlockNextConnection) {
       previousBlockNextConnection.connect(innerConnection);
     }
   }
   else {
-    this.insertionMarker_.unplug(true /* healStack */);
+    Blockly.insertionMarker_.unplug(true /* healStack */);
   }
 
   if (Blockly.insertionMarkerConnection_.targetConnection) {
     throw 'insertionMarkerConnection still connected at the end of disconnectInsertionMarker';
   }
   Blockly.insertionMarkerConnection_ = null;
-  this.insertionMarker_.getSvgRoot().setAttribute('visibility', 'hidden');
+  Blockly.insertionMarker_.getSvgRoot().setAttribute('visibility', 'hidden');
 };
 
 /**

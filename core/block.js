@@ -100,8 +100,6 @@ Blockly.Block = function(workspace, prototypeName, opt_id) {
   /** @type {boolean} */
   this.RTL = workspace.RTL;
 
-  /** @type {Blockly.Block} */
-  this.insertionMarker_ = null;
   /** @type {boolean} */
   this.isInsertionMarker_ = false;
 
@@ -206,10 +204,6 @@ Blockly.Block.prototype.dispose = function(healStack) {
 
   if (Blockly.selected == this) {
     Blockly.selected = null;
-  }
-
-  if (this.insertionMarker_) {
-    this.insertionMarker_.dispose();
   }
 
   // First, dispose of all my children.

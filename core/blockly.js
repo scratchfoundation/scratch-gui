@@ -84,11 +84,19 @@ Blockly.localConnection_ = null;
 
 /**
  * Connection on the insertion marker block that matches
- * Blockly.localConnecxtion_ on the dragged block.
+ * Blockly.localConnection_ on the dragged block.
  * @type {Blockly.Connection}
  * @private
  */
 Blockly.insertionMarkerConnection_ = null;
+
+/**
+ * Grayed-out block that indicates to the user what will happen if they release
+ * a drag immediately.
+ * @type {Blockly.Block}
+ * @private
+ */
+Blockly.insertionMarker_ = null;
 
 /**
  * Connection that was bumped out of the way by an insertion marker, and may

@@ -431,7 +431,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
       // If this is a c-shaped block, statement blocks cannot be connected
       // anywhere other than inside the first statement input.
       if (firstStatementConnection) {
-        // Can't connect if there is alread a block inside the first statement
+        // Can't connect if there is already a block inside the first statement
         // input.
         if (this == firstStatementConnection) {
           if (this.targetConnection) {

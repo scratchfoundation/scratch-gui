@@ -592,6 +592,16 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
       Blockly.selected.moveBy(
           Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
           Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
+    } else if (Blockly.localConnection_ ==
+        Blockly.selected.getFirstStatementConnection()) {
+      // Snap to match the position of the pre-existing stack.  Since this is a
+      // C-block, shift to take into account how the block will stretch as it
+      // surrounds the internal blocks.
+      Blockly.selected.moveBy(
+          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
+          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_ -
+          (Blockly.highlightedConnection_.sourceBlock_.getHeightWidth().height -
+          Blockly.BlockSvg.MIN_BLOCK_Y));
     }
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
@@ -901,7 +911,15 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
         var newX = closestConnection.x_ - connectionOffsetX;
         var newY = closestConnection.y_ - connectionOffsetY;
         var ghostPosition = ghostBlock.getRelativeToSurfaceXY();
-        ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y, true);
+
+        // If it's the first statement connection of a c-block, this block is
+        // going to get taller as soon as render() is called below.
+        if (localGhostConnection != ghostBlock.nextConnection) {
+          newY -= closestConnection.sourceBlock_.getHeightWidth().height -
+              Blockly.BlockSvg.MIN_BLOCK_Y;
+        }
+
+        ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y);
 
       }
       if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&

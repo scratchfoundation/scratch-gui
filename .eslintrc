@@ -2,7 +2,7 @@
     "rules": {
         "curly": [2, "multi-line"],
         "eol-last": [2],
-        "indent": [2, 2], # Blockly/Google use 2-space indents
+        "indent": [2, 2, {"SwitchCase": 1}], # Blockly/Google use 2-space indents
         "linebreak-style": [2, "unix"],
         "max-len": [2, 120, 4],
         "no-trailing-spaces": [2, { "skipBlankLines": true }],

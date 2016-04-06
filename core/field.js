@@ -305,6 +305,7 @@ Blockly.Field.prototype.getSize = function() {
  */
 Blockly.Field.prototype.getScaledBBox_ = function() {
   var size = this.getSize();
+  // Create new object, so as to not return an uneditable SVGRect in IE.
   return new goog.math.Size(size.width * this.sourceBlock_.workspace.scale,
                             size.height * this.sourceBlock_.workspace.scale);
 };

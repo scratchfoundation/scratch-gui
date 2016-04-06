@@ -70,7 +70,7 @@ Blockly.FieldColour.prototype.columns_ = 0;
  */
 Blockly.FieldColour.prototype.init = function(block) {
   Blockly.FieldColour.superClass_.init.call(this, block);
-  // XXX: borderRect_ has been removed from the field.
+  // TODO(#163): borderRect_ has been removed from the field.
   // When fixing field_colour, we should re-color the shadow block instead,
   // or re-implement a rectangle in the field.
   if (this.borderRect_) {

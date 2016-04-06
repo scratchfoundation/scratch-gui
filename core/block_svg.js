@@ -569,8 +569,11 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
       Blockly.selected.moveBy(
           Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
           Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
-    } else if (Blockly.localConnection_ == Blockly.selected.getFirstStatementConnection()) {
-      // Snap to match the position of the pre-existing stack
+    } else if (Blockly.localConnection_ ==
+        Blockly.selected.getFirstStatementConnection()) {
+      // Snap to match the position of the pre-existing stack.  Since this is a
+      // C-block, shift to take into account how the block will stretch as it
+      // surrounds the internal blocks.
       Blockly.selected.moveBy(
           Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
           Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_ -
@@ -853,15 +856,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (Blockly.highlightedConnection_ &&
       Blockly.highlightedConnection_ != closestConnection) {
     if (this.ghostBlock_ && Blockly.localGhostConnection_) {
-      // If we're connecting inside a pants block and that pants block is at the
-      // beginning of the stack, it may have grown.  We made it look like it
-      // grew up instead of down, but now we have to undo that.
-      var closestSource = Blockly.localGhostConnection_.targetBlock();
-      if (closestSource && Blockly.highlightedConnection_ ==
-          closestSource.getFirstStatementConnection() &&
-          !closestSource.previousConnection.targetConnection) {
-        closestSource.moveBy(0, Blockly.BlockSvg.STATEMENT_BLOCK_SPACE);
-      }
       this.disconnectGhost();
     }
     Blockly.highlightedConnection_ = null;
@@ -904,18 +898,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
 
         ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y);
 
-      } else {
-        var closestSource = closestConnection.sourceBlock_;
-        if (closestSource && closestConnection ==
-            closestSource.getFirstStatementConnection() &&
-            !closestSource.previousConnection.targetConnection) {
-          // If we're connecting inside a pants block and that pants block is at
-          // the beginning of the stack, it may have grown.  We need to make it
-          //  look like it grew up instead of down.
-          var yOffset = ghostBlock.getHeightWidth().height -
-              Blockly.BlockSvg.MIN_BLOCK_Y;
-          closestSource.moveBy(0, - Blockly.BlockSvg.STATEMENT_BLOCK_SPACE);
-        }
       }
       if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&
           !ghostBlock.nextConnection) {

@@ -63,6 +63,13 @@ Blockly.BlockSvg.FIELD_HEIGHT = 8 * Blockly.BlockSvg.GRID_UNIT;
  * @const
  */
 Blockly.BlockSvg.FIELD_WIDTH = 12 * Blockly.BlockSvg.GRID_UNIT;
+
+/**
+ * Top padding of user inputs
+ * @const
+ */
+Blockly.BlockSvg.FIELD_TOP_PADDING = 1.5 * Blockly.BlockSvg.GRID_UNIT;
+
 /**
  * Corner radius of number inputs
  * @const
@@ -308,11 +315,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
         var fieldBBox = field.textElement_.getBBox();
         metrics.fieldWidth = fieldBBox.width + Blockly.BlockSvg.SEP_SPACE_X;
         metrics.fieldHeight = fieldBBox.height;
-        if (field.sourceBlock_.type === 'math_number') {
-          metrics.fieldRadius = Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
-        } else {
-          metrics.fieldRadius = Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;
-        }
+        metrics.fieldRadius = field.getBorderRadius();
       }
     }
   }

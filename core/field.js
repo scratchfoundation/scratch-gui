@@ -134,18 +134,13 @@ Blockly.Field.prototype.init = function(block) {
   if (!this.visible_) {
     this.fieldGroup_.style.display = 'none';
   }
-  this.borderRect_ = Blockly.createSvgElement('rect',
-      {'rx': 4,
-       'ry': 4,
-       'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
-       'y': 0,
-       'height': Blockly.BlockSvg.FIELD_HEIGHT}, this.fieldGroup_, this.sourceBlock_.workspace);
+  // Adjust X to be flipped for RTL. Position is relative to horizontal start of source block.
+  var fieldX = (this.sourceBlock_.RTL) ? -this.size_.width / 2 : this.size_.width / 2;
   /** @type {!Element} */
   this.textElement_ = Blockly.createSvgElement('text',
       {'class': 'blocklyText',
-       'y': this.size_.height/2 + 6.25,
-       'x': Blockly.BlockSvg.FIELD_WIDTH / 2,
-       'width': Blockly.BlockSvg.FIELD_WIDTH - Blockly.BlockSvg.SEP_SPACE_X,
+       'x': fieldX,
+       'y': this.size_.height / 2 + Blockly.BlockSvg.FIELD_TOP_PADDING,
        'text-anchor': 'middle'},
       this.fieldGroup_);
 
@@ -174,7 +169,6 @@ Blockly.Field.prototype.dispose = function() {
   goog.dom.removeNode(this.fieldGroup_);
   this.fieldGroup_ = null;
   this.textElement_ = null;
-  this.borderRect_ = null;
   this.validator_ = null;
 };
 
@@ -264,10 +258,6 @@ Blockly.Field.prototype.render_ = function() {
         Blockly.Field.cacheWidths_[key] = width;
       }
     }
-    if (this.borderRect_) {
-      this.borderRect_.setAttribute('width',
-          width + Blockly.BlockSvg.SEP_SPACE_X);
-    }
   } else {
     var width = 0;
   }
@@ -314,10 +304,10 @@ Blockly.Field.prototype.getSize = function() {
  * @private
  */
 Blockly.Field.prototype.getScaledBBox_ = function() {
-  var bBox = this.borderRect_.getBBox();
-  // Create new object, as getBBox can return an uneditable SVGRect in IE.
-  return new goog.math.Size(bBox.width * this.sourceBlock_.workspace.scale,
-                            bBox.height * this.sourceBlock_.workspace.scale);
+  var size = this.getSize();
+  // Create new object, so as to not return an uneditable SVGRect in IE.
+  return new goog.math.Size(size.width * this.sourceBlock_.workspace.scale,
+                            size.height * this.sourceBlock_.workspace.scale);
 };
 
 /**
@@ -479,5 +469,5 @@ Blockly.Field.prototype.getClickTarget_ = function() {
  * @private
  */
 Blockly.Field.prototype.getAbsoluteXY_ = function() {
-  return goog.style.getPageOffset(this.borderRect_);
+  return goog.style.getPageOffset(this.getClickTarget_());
 };

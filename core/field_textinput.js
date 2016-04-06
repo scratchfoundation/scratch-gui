@@ -131,7 +131,7 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   htmlInput.setAttribute('spellcheck', this.spellcheck_);
   var fontSize =
-      (Blockly.FieldTextInput.FONTSIZE * this.workspace_.scale) + 'pt';
+      (Blockly.FieldTextInput.FONTSIZE) + 'pt';
   div.style.fontSize = fontSize;
   htmlInput.style.fontSize = fontSize;
   /** @type {!HTMLInputElement} */
@@ -225,38 +225,61 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
  * @private
  */
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
+  var scale = this.sourceBlock_.workspace.scale;
   var div = Blockly.WidgetDiv.DIV;
-  var bBox = this.fieldGroup_.getBBox();
-  var height = bBox.height * this.sourceBlock_.workspace.scale;
-  var width = Math.max(
-    bBox.width, Blockly.BlockSvg.FIELD_WIDTH-Blockly.BlockSvg.SEP_SPACE_X) *
-    this.sourceBlock_.workspace.scale
-  div.style.width = width  + 'px';
-  div.style.height = height + 'px';
+  var bBox = this.getScaledBBox_();
+  // The width of this box must be at least FIELD_WIDTH * scale.
+  // It may be smaller as bBox is based on the content size.
+  var width = Math.max(bBox.width, Blockly.BlockSvg.FIELD_WIDTH * scale);
+  // Add 1px to width and height to account for border (pre-scale)
+  div.style.width = (width / scale + 1) + 'px';
+  div.style.height = (bBox.height / scale + 1) + 'px';
+  div.style.transform = 'scale(' + scale + ')';
+
+  // Add 0.5px to account for slight difference between SVG and CSS border
+  var borderRadius = this.getBorderRadius() + 0.5;
+  div.style.borderRadius = borderRadius + 'px';
+  // Pull stroke colour from the existing shadow block
+  var strokeColour = this.sourceBlock_.getColourTertiary();
+  div.style.borderColor = strokeColour;
+
   var xy = this.getAbsoluteXY_();
-  xy.x += Blockly.BlockSvg.SEP_SPACE_X * this.sourceBlock_.workspace.scale;
-  // @todo Why 3?
-  xy.y += (Blockly.BlockSvg.FIELD_HEIGHT * this.sourceBlock_.workspace.scale)/2 - height/2 + 3;
+  // Account for border width, post-scale
+  xy.x -= scale / 2;
+  xy.y -= scale / 2;
   // In RTL mode block fields and LTR input fields the left edge moves,
   // whereas the right edge is fixed.  Reposition the editor.
   if (this.sourceBlock_.RTL) {
-    var borderBBox = this.getScaledBBox_();
-    xy.x += borderBBox.width;
+    xy.x += width;
     xy.x -= div.offsetWidth;
   }
   // Shift by a few pixels to line up exactly.
-  xy.y += 1;
+  xy.y += 1 * scale;
   if (goog.userAgent.GECKO && Blockly.WidgetDiv.DIV.style.top) {
     // Firefox mis-reports the location of the border by a pixel
     // once the WidgetDiv is moved into position.
-    xy.x -= 1;
-    xy.y -= 1;
+    xy.x += 2 * scale;
+    xy.y += 1 * scale;
   }
   if (goog.userAgent.WEBKIT) {
-    xy.y -= 3;
+    xy.x += 0.5;
+    xy.y -= 1 * scale;
   }
+  // Finally, set the actual style
   div.style.left = xy.x + 'px';
   div.style.top = xy.y + 'px';
+};
+
+/**
+ * Determine border radius based on the type of the owning shadow block.
+ * @return {Number} Border radius in px.
+*/
+Blockly.Field.prototype.getBorderRadius = function() {
+  if (this.sourceBlock_.type === 'math_number') {
+    return Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
+  } else {
+    return Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;
+  }
 };
 
 /**

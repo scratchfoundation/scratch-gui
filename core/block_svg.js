@@ -304,6 +304,11 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
     var newXY = this.getRelativeToSurfaceXY();
     // Move the connections to match the child's new position.
     this.moveConnections_(newXY.x - oldXY.x, newXY.y - oldXY.y);
+    // If we are a shadow block, inherit tertiary colour.
+    if (this.isShadow()) {
+      this.setColour(this.getColour(), this.getColourSecondary(),
+        newParent.getColourTertiary());
+    }
   }
 };
 

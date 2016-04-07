@@ -127,6 +127,8 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
 
   Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL, this.widgetDispose_());
   var div = Blockly.WidgetDiv.DIV;
+  // Apply text-input-specific fixed CSS
+  div.className += ' fieldTextInput';
   // Create the input.
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   htmlInput.setAttribute('spellcheck', this.spellcheck_);
@@ -317,6 +319,8 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     style.width = 'auto';
     style.height = 'auto';
     style.fontSize = '';
+    // Reset class
+    Blockly.WidgetDiv.DIV.className = 'blocklyWidgetDiv';
   };
 };
 

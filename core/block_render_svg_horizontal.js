@@ -396,7 +396,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
         iconX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
       }
     }
-    if (this.isGhost()) {
+    if (this.isInsertionMarker()) {
       icon.setAttribute('display', 'none');
     }
     icon.setAttribute('transform',

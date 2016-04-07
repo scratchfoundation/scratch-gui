@@ -51,7 +51,7 @@ Blockly.BlockSvg.SEP_SPACE_Y = 3 * Blockly.BlockSvg.GRID_UNIT;
  * Vertical space above blocks with statements.
  * @const
  */
-Blockly.BlockSvg.STATEMENT_BLOCK_SPACE = 4 * Blockly.BlockSvg.GRID_UNIT;
+Blockly.BlockSvg.STATEMENT_BLOCK_SPACE = 3 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
  * Height of user inputs

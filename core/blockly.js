@@ -83,6 +83,12 @@ Blockly.highlightedConnection_ = null;
 Blockly.localConnection_ = null;
 
 /**
+ * List of all of the connections on all of the blocks that are being dragged.
+ * @private
+ */
+Blockly.draggingConnections_ = [];
+
+/**
  * Connection on the insertion marker block that matches
  * Blockly.localConnection_ on the dragged block.
  * @type {Blockly.Connection}

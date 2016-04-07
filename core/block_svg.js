@@ -384,7 +384,8 @@ Blockly.BlockSvg.prototype.snapToGrid = function() {
 /**
  * Returns a bounding box describing the dimensions of this block
  * and any blocks stacked below it.
- * @return {!{height: number, width: number}} Object with height and width properties.
+ * @return {!{height: number, width: number}} Object with height and width
+ *    properties.
  */
 Blockly.BlockSvg.prototype.getHeightWidth = function() {
   var height = this.height;
@@ -403,10 +404,10 @@ Blockly.BlockSvg.prototype.getHeightWidth = function() {
 };
 
 /**
- * Returns the coordinates of a bounding box describing the dimensions of this block
- * and any blocks stacked below it.
+ * Returns the coordinates of a bounding box describing the dimensions of this
+ * block and any blocks stacked below it.
  * @return {!{topLeft: goog.math.Coordinate, bottomRight: goog.math.Coordinate}}
- *         Object with top left and bottom right coordinates of the bounding box.
+ *    Object with top left and bottom right coordinates of the bounding box.
  */
 Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
   var blockXY = this.getRelativeToSurfaceXY(this);
@@ -416,10 +417,12 @@ Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
   var bottomRight;
   if (this.RTL) {
     // Width has the tab built into it already so subtract it here.
-    topLeft = new goog.math.Coordinate(blockXY.x - (blockBounds.width - tab), blockXY.y);
+    topLeft = new goog.math.Coordinate(blockXY.x - (blockBounds.width - tab),
+        blockXY.y);
     // Add the width of the tab/puzzle piece knob to the x coordinate
     // since X is the corner of the rectangle, not the whole puzzle piece.
-    bottomRight = new goog.math.Coordinate(blockXY.x + tab, blockXY.y + blockBounds.height);
+    bottomRight = new goog.math.Coordinate(blockXY.x + tab,
+        blockXY.y + blockBounds.height);
   } else {
     // Subtract the width of the tab/puzzle piece knob to the x coordinate
     // since X is the corner of the rectangle, not the whole puzzle piece.
@@ -592,12 +595,7 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   Blockly.setPageSelectable(true);
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
-    if (Blockly.localConnection_ == Blockly.selected.nextConnection) {
-      // Snap to match the position of the pre-existing stack.
-      Blockly.selected.moveBy(
-          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
-          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
-    } else if (Blockly.localConnection_ ==
+    if (Blockly.localConnection_ ==
         Blockly.selected.getFirstStatementConnection()) {
       // Snap to match the position of the pre-existing stack.  Since this is a
       // C-block, shift to take into account how the block will stretch as it
@@ -607,6 +605,11 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
           Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_ -
           (Blockly.highlightedConnection_.sourceBlock_.getHeightWidth().height -
           Blockly.BlockSvg.MIN_BLOCK_Y));
+    } else if (Blockly.localConnection_.type == Blockly.NEXT_STATEMENT) {
+      // Snap to match the position of the pre-existing stack.
+      Blockly.selected.moveBy(
+          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
+          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
     }
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
@@ -853,8 +856,10 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       }
     }
 
+    var candidateIsLast = (localConnection == lastOnStack);
     this.updatePreviews(closestConnection, localConnection, radiusConnection,
-        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y);
+        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
+        candidateIsLast);
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
@@ -873,9 +878,11 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  *    point in the drag.
  * @param {number} dy The y distance the block has moved onscreen up to this
  *    point in the drag.
+ * @param {boolean} candidateIsLast True if the dragging stack is more than one
+ *    block long and localConnection is the last connection on the stack.
  */
 Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
-    localConnection, radiusConnection, e, dx, dy) {
+    localConnection, radiusConnection, e, dx, dy, candidateIsLast) {
   // Don't fire events for insertion marker creation or movement.
   Blockly.Events.disable();
   // Remove an insertion marker if needed.  For Scratch-Blockly we are using
@@ -886,6 +893,14 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     if (Blockly.insertionMarker_ && Blockly.insertionMarkerConnection_) {
       Blockly.BlockSvg.disconnectInsertionMarker();
     }
+    // If there's already an insertion marker but it's representing the wrong
+    // block, delete it so we can create the correct one.
+    if (Blockly.insertionMarker_ &&
+        (candidateIsLast && Blockly.localConnection_.sourceBlock_ == this) ||
+        (!candidateIsLast && Blockly.localConnection_.sourceBlock_ != this)) {
+      Blockly.insertionMarker_.dispose();
+      Blockly.insertionMarker_ = null;
+    }
     Blockly.highlightedConnection_ = null;
     Blockly.localConnection_ = null;
   }
@@ -894,23 +909,25 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_ &&
       !closestConnection.sourceBlock_.isInsertionMarker()) {
+
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
-    if (!Blockly.insertionMarker_){
-      Blockly.insertionMarker_ = this.workspace.newBlock(this.type);
+    if (!Blockly.insertionMarker_) {
+      Blockly.insertionMarker_ =
+          this.workspace.newBlock(Blockly.localConnection_.sourceBlock_.type);
       Blockly.insertionMarker_.setInsertionMarker(true);
       Blockly.insertionMarker_.initSvg();
     }
 
     var insertionMarker = Blockly.insertionMarker_;
-    var insertionMarkerConnection = insertionMarker.getMatchingConnection(this,
-        localConnection);
+    var insertionMarkerConnection = insertionMarker.getMatchingConnection(
+        localConnection.sourceBlock_, localConnection);
     if (insertionMarkerConnection != Blockly.insertionMarkerConnection_) {
       insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
       insertionMarker.rendered = true;
       // Move the preview to the correct location before the existing block.
       if (insertionMarkerConnection.type == Blockly.NEXT_STATEMENT) {
-        var relativeXy = this.getRelativeToSurfaceXY();
+        var relativeXy = localConnection.sourceBlock_.getRelativeToSurfaceXY();
         var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
         var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
         var newX = closestConnection.x_ - connectionOffsetX;
@@ -1317,11 +1334,15 @@ Blockly.BlockSvg.prototype.removeDragging = function() {
 /**
  * Change the colour of a block.
  * @param {number|string} colour HSV hue value, or #RRGGBB string.
- * @param {number|string} colourSecondary Secondary HSV hue value, or #RRGGBB string.
- * @param {number|string} colourTertiary Tertiary HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourSecondary Secondary HSV hue value, or #RRGGBB
+ *    string.
+ * @param {number|string} colourTertiary Tertiary HSV hue value, or #RRGGBB
+ *    string.
  */
-Blockly.BlockSvg.prototype.setColour = function(colour, colourSecondary, colourTertiary) {
-  Blockly.BlockSvg.superClass_.setColour.call(this, colour, colourSecondary, colourTertiary);
+Blockly.BlockSvg.prototype.setColour = function(colour, colourSecondary,
+    colourTertiary) {
+  Blockly.BlockSvg.superClass_.setColour.call(this, colour, colourSecondary,
+      colourTertiary);
 
   if (this.rendered) {
     this.updateColour();

@@ -29,6 +29,7 @@ goog.provide('Blockly.inject');
 goog.require('Blockly.Css');
 goog.require('Blockly.Options');
 goog.require('Blockly.WorkspaceSvg');
+goog.require('Blockly.DragSurfaceSvg');
 goog.require('goog.dom');
 goog.require('goog.ui.Component');
 goog.require('goog.userAgent');

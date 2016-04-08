@@ -51,8 +51,17 @@ Blockly.inject = function(container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   var options = new Blockly.Options(opt_options || {});
-  var svg = Blockly.createDom_(container, options);
-  var workspace = Blockly.createMainWorkspace_(svg, options);
+
+  // Add the relative wrapper. This is for positioning the drag surface exactly
+  // on top of the blockly SVG. Without this, top positioning of the drag surface
+  // is always off by a few pixels.
+  var relativeWrapper = goog.dom.createDom('div', 'blocklyRelativeWrapper');
+  container.appendChild(relativeWrapper);
+
+  var svg = Blockly.createDom_(relativeWrapper, options);
+  var dragSurface = new Blockly.DragSurfaceSvg(relativeWrapper);
+  dragSurface.createDom();
+  var workspace = Blockly.createMainWorkspace_(svg, options, dragSurface);
   Blockly.init_(workspace);
   workspace.markFocused();
   Blockly.bindEvent_(svg, 'focus', workspace, workspace.markFocused);
@@ -151,14 +160,15 @@ Blockly.createDom_ = function(container, options) {
  * Create a main workspace and add it to the SVG.
  * @param {!Element} svg SVG element with pattern defined.
  * @param {!Blockly.Options} options Dictionary of options.
+ * @param {!Blockly.DragSurfaceSvg} dragSurface Drag surface SVG for the workspace.
  * @return {!Blockly.Workspace} Newly created main workspace.
  * @private
  */
-Blockly.createMainWorkspace_ = function(svg, options) {
+Blockly.createMainWorkspace_ = function(svg, options, dragSurface) {
   options.parentWorkspace = null;
   options.getMetrics = Blockly.getMainWorkspaceMetrics_;
   options.setMetrics = Blockly.setMainWorkspaceMetrics_;
-  var mainWorkspace = new Blockly.WorkspaceSvg(options);
+  var mainWorkspace = new Blockly.WorkspaceSvg(options, dragSurface);
   mainWorkspace.scale = options.zoomOptions.startScale;
   svg.appendChild(mainWorkspace.createDom('blocklyMainBackground'));
   // A null translation will also apply the correct initial scale.

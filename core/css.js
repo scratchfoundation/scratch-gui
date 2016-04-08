@@ -139,6 +139,13 @@ Blockly.Css.CONTENT = [
     'overflow: hidden;',  /* IE overflows by default. */
   '}',
 
+  /* Necessary to position the drag surface */
+  '.blocklyRelativeWrapper {',
+    'position: relative;',
+    'width: 100%;',
+    'height: 100%;',
+  '}',
+
   '.blocklyWidgetDiv {',
     'display: none;',
     'position: absolute;',
@@ -174,6 +181,21 @@ Blockly.Css.CONTENT = [
     'padding: 2px;',
     'position: absolute;',
     'z-index: 1000;',
+  '}',
+
+  '.blocklyDragSurface {',
+    'display: none;',
+    'position: absolute;',
+    'top: 0;',
+    'left: 0;',
+    'right: 0;',
+    'bottom: 0;',
+    'overflow: visible;',
+    'z-index: 5000;', /* Always display on top */
+    '-webkit-backface-visibility: hidden;',
+    'backface-visibility: hidden;',
+    '-webkit-perspective: 1000;',
+    'perspective: 1000;',
   '}',
 
   '.blocklyResizeSE {',

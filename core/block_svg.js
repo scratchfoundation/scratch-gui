@@ -257,6 +257,7 @@ Blockly.BlockSvg.terminateDrag_ = function() {
       selected.moveConnections_(dxy.x, dxy.y);
       delete selected.draggedBubbles_;
       selected.setDragging_(false);
+      selected.moveOffDragSurface_();
       selected.render();
       // Ensure that any stap and bump are part of this move's event group.
       var group = Blockly.Events.getGroup();
@@ -290,8 +291,12 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
   if (this.parentBlock_ && svgRoot) {
     // Move this block up the DOM.  Keep track of x/y translations.
     var xy = this.getRelativeToSurfaceXY();
-    this.workspace.getCanvas().appendChild(svgRoot);
-    svgRoot.setAttribute('transform', 'translate(' + xy.x + ',' + xy.y + ')');
+    // Avoid moving a block up the DOM if it's currently selected/dragging,
+    // so as to avoid taking things off the drag surface.
+    if (Blockly.selected != this) {
+      this.workspace.getCanvas().appendChild(svgRoot);
+      this.translate(xy.x, xy.y);
+    }
   }
 
   Blockly.Field.startCache();
@@ -318,8 +323,12 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
  * @return {!goog.math.Coordinate} Object with .x and .y properties.
  */
 Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
+  // The drawing surface is relative to either the workspace canvas
+  // or to the drag surface group.
   var x = 0;
   var y = 0;
+  var dragSurfaceGroup = (this.workspace.dragSurface) ?
+    this.workspace.dragSurface.getGroup() : null;
   var element = this.getSvgRoot();
   if (element) {
     do {
@@ -328,7 +337,8 @@ Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
       x += xy.x;
       y += xy.y;
       element = element.parentNode;
-    } while (element && element != this.workspace.getCanvas());
+    } while (element && element != this.workspace.getCanvas() &&
+             element != dragSurfaceGroup);
   }
   return new goog.math.Coordinate(x, y);
 };
@@ -342,11 +352,19 @@ Blockly.BlockSvg.prototype.moveBy = function(dx, dy) {
   goog.asserts.assert(!this.parentBlock_, 'Block has parent.');
   var event = new Blockly.Events.Move(this);
   var xy = this.getRelativeToSurfaceXY();
-  this.getSvgRoot().setAttribute('transform',
-      'translate(' + (xy.x + dx) + ',' + (xy.y + dy) + ')');
+  this.translate(xy.x + dx, xy.y + dy);
   this.moveConnections_(dx, dy);
   event.recordNew();
   Blockly.Events.fire(event);
+};
+
+/**
+ * Set this block to an absolute translation.
+ * @param {number} x Horizontal translation.
+ * @param {number} y Vertical translation.
+*/
+Blockly.BlockSvg.prototype.translate = function(x, y) {
+  this.getSvgRoot().setAttribute('transform', 'translate(' + x + ',' + y + ')');
 };
 
 /**
@@ -790,6 +808,31 @@ Blockly.BlockSvg.prototype.setDragging_ = function(adding) {
 };
 
 /**
+ * Move this block to its workspace's drag surface, accounting for positioning.
+ * Generally should be called at the same time as setDragging_(true).
+ * @private
+ */
+Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
+  // The translation for drag surface blocks,
+  // is equal to the current relative-to-surface position,
+  // to keep the position in sync as it move on/off the surface.
+  var xy = this.getRelativeToSurfaceXY();
+  this.translate(xy.x, xy.y);
+  // Execute the move on the top-level SVG component
+  this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
+};
+
+/**
+ * Move this block back to the workspace block canvas.
+ * Generally should be called at the same time as setDragging_(false).
+ * @private
+ */
+ Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
+  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
+};
+
+
+/**
  * Drag this block to follow the mouse.
  * @param {!Event} e Mouse move event.
  * @private
@@ -822,10 +865,10 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
         this.disconnectUiEffect();
       }
       this.setDragging_(true);
+      this.moveToDragSurface_();
     }
   }
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
-    // Unrestricted dragging.
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
     var group = this.getSvgRoot();
@@ -955,7 +998,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       // Renders insertin marker.
       insertionMarkerConnection.connect(closestConnection);
       // Render dragging block so it appears on top.
-      this.workspace.getCanvas().appendChild(this.getSvgRoot());
       Blockly.insertionMarkerConnection_ = insertionMarkerConnection;
     }
   }

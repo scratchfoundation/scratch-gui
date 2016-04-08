@@ -823,6 +823,7 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
     block.onMouseDown_(e);
     Blockly.dragMode_ = Blockly.DRAG_FREE;
     block.setDragging_(true);
+    block.moveToDragSurface_();
   };
 };
 

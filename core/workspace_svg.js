@@ -44,16 +44,21 @@ goog.require('goog.userAgent');
  * Class for a workspace.  This is an onscreen area with optional trashcan,
  * scrollbars, bubbles, and dragging.
  * @param {!Blockly.Options} options Dictionary of options.
+ * @param {Blockly.DragSurfaceSvg=} opt_dragSurface Drag surface for the workspace.
  * @extends {Blockly.Workspace}
  * @constructor
  */
-Blockly.WorkspaceSvg = function(options) {
+Blockly.WorkspaceSvg = function(options, opt_dragSurface) {
   Blockly.WorkspaceSvg.superClass_.constructor.call(this, options);
   this.getMetrics = options.getMetrics;
   this.setMetrics = options.setMetrics;
 
   /** @type {!Function} */
   this.audioCallback_ = null;
+
+  if (opt_dragSurface) {
+    this.dragSurface = opt_dragSurface;
+  }
 
   Blockly.ConnectionDB.init(this);
 };
@@ -132,6 +137,12 @@ Blockly.WorkspaceSvg.prototype.trashcan = null;
  * @type {Blockly.ScrollbarPair}
  */
 Blockly.WorkspaceSvg.prototype.scrollbar = null;
+
+/**
+ * This workspace's drag surface, if it exists.
+ * @type {Blockly.DragSurfaceSvg}
+ */
+Blockly.WorkspaceSvg.prototype.dragSurface = null;
 
 /**
  * Create the workspace DOM elements.
@@ -360,6 +371,9 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
       'scale(' + this.scale + ')';
   this.svgBlockCanvas_.setAttribute('transform', translation);
   this.svgBubbleCanvas_.setAttribute('transform', translation);
+  if (this.dragSurface) {
+    this.dragSurface.translateAndScaleGroup(x, y, this.scale);
+  }
 };
 
 /**

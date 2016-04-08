@@ -81,13 +81,6 @@ Blockly.BlockSvg.prototype.width = 0;
 Blockly.BlockSvg.prototype.dragStartXY_ = null;
 
 /**
- * Whether the block is on the drag surface.
- * @type {boolean}
- * @private
- */
-Blockly.BlockSvg.prototype.isOnDragSurface_ = false;
-
-/**
  * Whether the block glows as if running.
  * @type {boolean}
  * @private
@@ -244,11 +237,6 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Terminate a drag operation.
     if (selected) {
-      if (selected.isOnDragSurface_) {
-        // Move off the drag surface
-        selected.workspace.dragSurface.clearAndHide(selected.workspace.getCanvas());
-        selected.isOnDragSurface_ = false;
-      }
       if (selected.ghostBlock_) {
         Blockly.Events.disable();
         if (Blockly.localGhostConnection_) {
@@ -269,6 +257,7 @@ Blockly.BlockSvg.terminateDrag_ = function() {
       selected.moveConnections_(dxy.x, dxy.y);
       delete selected.draggedBubbles_;
       selected.setDragging_(false);
+      selected.moveOffDragSurface_();
       selected.render();
       // Ensure that any stap and bump are part of this move's event group.
       var group = Blockly.Events.getGroup();
@@ -302,13 +291,9 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
   if (this.parentBlock_ && svgRoot) {
     // Move this block up the DOM.  Keep track of x/y translations.
     var xy = this.getRelativeToSurfaceXY();
-    if (Blockly.selected == this) {
-      // E.g., dragging blocks out of an input
-      this.translate(xy.x, xy.y);
-      // Move to the drag surface
-      this.workspace.dragSurface.setBlocksAndShow(svgRoot);
-      this.isOnDragSurface_ = true;
-    } else {
+    // Avoid moving a block up the DOM if it's currently selected/dragging,
+    // so as to avoid taking things off the drag surface.
+    if (Blockly.selected != this) {
       this.workspace.getCanvas().appendChild(svgRoot);
       this.translate(xy.x, xy.y);
     }
@@ -802,6 +787,31 @@ Blockly.BlockSvg.prototype.setDragging_ = function(adding) {
 };
 
 /**
+ * Move this block to its workspace's drag surface, accounting for positioning.
+ * Generally should be called at the same time as setDragging_(true).
+ * @private
+ */
+Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
+  // The translation for drag surface blocks,
+  // is equal to the current relative-to-surface position,
+  // to keep the position in sync as it move on/off the surface.
+  var xy = this.getRelativeToSurfaceXY();
+  this.translate(xy.x, xy.y);
+  // Execute the move on the top-level SVG component
+  this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
+};
+
+/**
+ * Move this block back to the workspace block canvas.
+ * Generally should be called at the same time as setDragging_(false).
+ * @private
+ */
+ Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
+  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
+};
+
+
+/**
  * Drag this block to follow the mouse.
  * @param {!Event} e Mouse move event.
  * @private
@@ -834,16 +844,10 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
         this.disconnectUiEffect();
       }
       this.setDragging_(true);
+      this.moveToDragSurface_();
     }
   }
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
-    // Unrestricted dragging.
-    if (!this.isOnDragSurface_) {
-      // Move to the drag surface
-      this.translate(this.dragStartXY_.x, this.dragStartXY_.y);
-      this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
-      this.isOnDragSurface_ = true;
-    }
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
     var group = this.getSvgRoot();

@@ -190,7 +190,7 @@ Blockly.Css.CONTENT = [
     'left: 0;',
     'right: 0;',
     'bottom: 0;',
-    'overflow: visible;',
+    'overflow: visible !important;',
     'z-index: 5000;', /* Always display on top */
     '-webkit-backface-visibility: hidden;',
     'backface-visibility: hidden;',

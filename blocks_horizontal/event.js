@@ -1,24 +1,4 @@
 /**
- * @license
- * Visual Blocks Editor
- *
- * Copyright 2016 MIT
- * https://github.com/lkjashdflkjahsdf
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
  * @fileoverview Control blocks for Scratch (Horizontal)
  * @author ascii@media.mit.edu <Andrew Sliwinski>
  */
@@ -32,7 +12,7 @@ goog.require('Blockly.Colours');
 
 Blockly.Blocks['event_whenflagclicked'] = {
   /**
-   * Block for repeat n times (external number).
+   * Block for when flag clicked.
    * @this Blockly.Block
    */
   init: function() {
@@ -53,12 +33,63 @@ Blockly.Blocks['event_whenflagclicked'] = {
       "nextStatement": null,
       "colour": Blockly.Colours.event.primary,
       "colourSecondary": Blockly.Colours.event.secondary,
-      "colourTertiary": Blockly.Colours.event.tertiary,
-      "tooltip": "Do stuff!"
+      "colourTertiary": Blockly.Colours.event.tertiary
     });
+  }
+};
 
-    this.setHelpUrl(function () {
-        return 'halp me plz. k thx bye.';
+Blockly.Blocks['event_whenbroadcastreceived'] = {
+  /**
+   * Block for when broadcast received.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "event_whenbroadcastreceived",
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_whenbroadcastreceived.svg",
+          "width": 40,
+          "height": 40,
+          "alt": "flag",
+          "flip_rtl": true
+        }
+      ],
+      "inputsInline": true,
+      "nextStatement": null,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['event_broadcast'] = {
+  /**
+   * Block to send a broadcast.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "event_broadcast",
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_broadcast.svg",
+          "width": 40,
+          "height": 40,
+          "alt": "Broadcast"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
     });
   }
 };

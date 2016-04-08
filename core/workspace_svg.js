@@ -203,9 +203,6 @@ Blockly.WorkspaceSvg.prototype.createDom = function(opt_backgroundClass) {
     this.addFlyout_();
   }
   this.updateGridPattern_();
-  if (this.dragSurface) {
-    this.dragSurface.createDom();
-  }
   return this.svgGroup_;
 };
 

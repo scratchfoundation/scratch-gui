@@ -60,6 +60,7 @@ Blockly.inject = function(container, opt_options) {
 
   var svg = Blockly.createDom_(relativeWrapper, options);
   var dragSurface = new Blockly.DragSurfaceSvg(relativeWrapper);
+  dragSurface.createDom();
   var workspace = Blockly.createMainWorkspace_(svg, options, dragSurface);
   Blockly.init_(workspace);
   workspace.markFocused();

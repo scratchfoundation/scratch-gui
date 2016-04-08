@@ -491,7 +491,11 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   }
 
   // Don't let blocks try to connect to themselves or ones they nest.
-  return !this.isAncestor_(candidate);
+  if (Blockly.draggingConnections_.indexOf(candidate) != -1) {
+    return false;
+  }
+
+  return true;
 };
 
 /**
@@ -519,27 +523,6 @@ Blockly.Connection.prototype.checkBasicCompatibility_ = function(candidate,
   }
 
   return true;
-};
-
-/**
- * Checks if a candidate connection is on this connection's source block or a
- * nested block.
- * @param {Blockly.Connection} candidate The candidate connection to check.
- * @return Whether the candidate connection is on this connection's source block
- * or descendant blocks.
- */
-Blockly.Connection.prototype.isAncestor_ = function(candidate) {
-  var targetSourceBlock = candidate.sourceBlock_;
-  var sourceBlock = this.sourceBlock_;
-  if (targetSourceBlock && sourceBlock) {
-    do {
-      if (sourceBlock == targetSourceBlock) {
-        return true;
-      }
-      targetSourceBlock = targetSourceBlock.getParent();
-    } while (targetSourceBlock);
-  }
-  return false;
 };
 
 /**

@@ -51,6 +51,7 @@ goog.addDependency("../../../" + dir + "/core/connection_db.js", ['Blockly.Conne
 goog.addDependency("../../../" + dir + "/core/constants.js", ['Blockly.constants'], []);
 goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.ContextMenu'], ['goog.dom', 'goog.events', 'goog.style', 'goog.ui.Menu', 'goog.ui.MenuItem']);
 goog.addDependency("../../../" + dir + "/core/css.js", ['Blockly.Css'], ['Blockly.Colours']);
+goog.addDependency("../../../" + dir + "/core/dragsurface_svg.js", ['Blockly.DragSurfaceSvg'], ['Blockly.utils', 'Blockly.constants', 'goog.asserts']);
 goog.addDependency("../../../" + dir + "/core/events.js", ['Blockly.Events'], []);
 goog.addDependency("../../../" + dir + "/core/field.js", ['Blockly.Field'], ['goog.asserts', 'goog.dom', 'goog.math.Size', 'goog.style', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/field_angle.js", ['Blockly.FieldAngle'], ['Blockly.FieldTextInput', 'goog.math', 'goog.userAgent']);
@@ -1596,6 +1597,7 @@ goog.require('Blockly.Connection');
 goog.require('Blockly.ConnectionDB');
 goog.require('Blockly.ContextMenu');
 goog.require('Blockly.Css');
+goog.require('Blockly.DragSurfaceSvg');
 goog.require('Blockly.Events');
 goog.require('Blockly.Field');
 goog.require('Blockly.FieldAngle');

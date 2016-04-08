@@ -134,25 +134,21 @@ Blockly.Field.prototype.init = function(block) {
   if (!this.visible_) {
     this.fieldGroup_.style.display = 'none';
   }
-  this.borderRect_ = Blockly.createSvgElement('rect',
-      {'rx': 4,
-       'ry': 4,
-       'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
-       'y': 0,
-       'height': Blockly.BlockSvg.FIELD_HEIGHT}, this.fieldGroup_, this.sourceBlock_.workspace);
+  // Adjust X to be flipped for RTL. Position is relative to horizontal start of source block.
+  var fieldX = (this.sourceBlock_.RTL) ? -this.size_.width / 2 : this.size_.width / 2;
   /** @type {!Element} */
   this.textElement_ = Blockly.createSvgElement('text',
       {'class': 'blocklyText',
-       'y': this.size_.height/2 + 6.25,
-       'x': Blockly.BlockSvg.FIELD_WIDTH / 2,
-       'width': Blockly.BlockSvg.FIELD_WIDTH - Blockly.BlockSvg.SEP_SPACE_X,
+       'x': fieldX,
+       'y': this.size_.height / 2 + Blockly.BlockSvg.FIELD_TOP_PADDING,
        'text-anchor': 'middle'},
       this.fieldGroup_);
 
   this.updateEditable();
   block.getSvgRoot().appendChild(this.fieldGroup_);
   this.mouseUpWrapper_ =
-      Blockly.bindEvent_(this.fieldGroup_, 'mouseup', this, this.onMouseUp_);
+      Blockly.bindEvent_(this.getClickTarget_(), 'mouseup', this,
+          this.onMouseUp_);
   // Force a render.
   this.updateTextNode_();
   if (Blockly.Events.isEnabled()) {
@@ -173,7 +169,6 @@ Blockly.Field.prototype.dispose = function() {
   goog.dom.removeNode(this.fieldGroup_);
   this.fieldGroup_ = null;
   this.textElement_ = null;
-  this.borderRect_ = null;
   this.validator_ = null;
 };
 
@@ -189,13 +184,13 @@ Blockly.Field.prototype.updateEditable = function() {
                       'blocklyEditableText');
     Blockly.removeClass_(/** @type {!Element} */ (this.fieldGroup_),
                          'blocklyNoNEditableText');
-    this.fieldGroup_.style.cursor = this.CURSOR;
+    this.getClickTarget_().style.cursor = this.CURSOR;
   } else {
     Blockly.addClass_(/** @type {!Element} */ (this.fieldGroup_),
                       'blocklyNonEditableText');
     Blockly.removeClass_(/** @type {!Element} */ (this.fieldGroup_),
                          'blocklyEditableText');
-    this.fieldGroup_.style.cursor = '';
+    this.getClickTarget_().style.cursor = '';
   }
 };
 
@@ -263,10 +258,6 @@ Blockly.Field.prototype.render_ = function() {
         Blockly.Field.cacheWidths_[key] = width;
       }
     }
-    if (this.borderRect_) {
-      this.borderRect_.setAttribute('width',
-          width + Blockly.BlockSvg.SEP_SPACE_X);
-    }
   } else {
     var width = 0;
   }
@@ -313,10 +304,10 @@ Blockly.Field.prototype.getSize = function() {
  * @private
  */
 Blockly.Field.prototype.getScaledBBox_ = function() {
-  var bBox = this.borderRect_.getBBox();
-  // Create new object, as getBBox can return an uneditable SVGRect in IE.
-  return new goog.math.Size(bBox.width * this.sourceBlock_.workspace.scale,
-                            bBox.height * this.sourceBlock_.workspace.scale);
+  var size = this.getSize();
+  // Create new object, so as to not return an uneditable SVGRect in IE.
+  return new goog.math.Size(size.width * this.sourceBlock_.workspace.scale,
+                            size.height * this.sourceBlock_.workspace.scale);
 };
 
 /**
@@ -447,11 +438,36 @@ Blockly.Field.prototype.setTooltip = function(newTip) {
 };
 
 /**
+ * Select the element to bind the click handler to. When this element is
+ * clicked on an editable field, the editor will open.
+ *
+ * <p>If the block has multiple fields, this is just the group containing the
+ * field. If the block has only one field, we handle clicks over the whole
+ * block.
+ *
+ * @return {!Element} Element to bind click handler to.
+ * @private
+ */
+Blockly.Field.prototype.getClickTarget_ = function() {
+  var nFields = 0;
+
+  for (var i = 0, input; input = this.sourceBlock_.inputList[i]; i++) {
+    nFields += input.fieldRow.length;
+  }
+
+  if (nFields <= 1) {
+    return this.sourceBlock_.getSvgRoot();
+  } else {
+    return this.getSvgRoot();
+  }
+};
+
+/**
  * Return the absolute coordinates of the top-left corner of this field.
  * The origin (0,0) is the top-left corner of the page body.
  * @return {{!goog.math.Coordinate}} Object with .x and .y properties.
  * @private
  */
 Blockly.Field.prototype.getAbsoluteXY_ = function() {
-  return goog.style.getPageOffset(this.borderRect_);
+  return goog.style.getPageOffset(this.getClickTarget_());
 };

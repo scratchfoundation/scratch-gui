@@ -1,0 +1,25 @@
+{
+    "rules": {
+        "curly": [2, "multi-line"],
+        "eol-last": [2],
+        "indent": [2, 2, {"SwitchCase": 1}], # Blockly/Google use 2-space indents
+        "linebreak-style": [2, "unix"],
+        "max-len": [2, 120, 4],
+        "no-trailing-spaces": [2, { "skipBlankLines": true }],
+        "no-unused-vars": [2, {"args": "after-used", "varsIgnorePattern": "^_"}],
+        "quotes": [0], # Blockly mixes single and double quotes
+        "semi": [2, "always"],
+        "space-before-function-paren": [2, "never"], # Blockly doesn't have space before function paren
+        "strict": [0], # Blockly uses 'use strict' in files
+        "no-cond-assign": [0], # Blockly often uses cond-assignment in loops
+        "valid-jsdoc": [2, {"requireReturn": false}]
+    },
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "Blockly": true, # Blockly global
+        "goog": true # goog closure libraries/includes
+    },
+    "extends": "eslint:recommended"
+}

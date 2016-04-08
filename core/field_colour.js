@@ -70,7 +70,12 @@ Blockly.FieldColour.prototype.columns_ = 0;
  */
 Blockly.FieldColour.prototype.init = function(block) {
   Blockly.FieldColour.superClass_.init.call(this, block);
-  this.borderRect_.style['fillOpacity'] = 1;
+  // TODO(#163): borderRect_ has been removed from the field.
+  // When fixing field_colour, we should re-color the shadow block instead,
+  // or re-implement a rectangle in the field.
+  if (this.borderRect_) {
+    this.borderRect_.style['fillOpacity'] = 1;
+  }
   this.setValue(this.getValue());
 };
 

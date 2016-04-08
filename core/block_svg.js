@@ -237,13 +237,13 @@ Blockly.BlockSvg.terminateDrag_ = function() {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     // Terminate a drag operation.
     if (selected) {
-      if (selected.ghostBlock_) {
+      if (Blockly.insertionMarker_) {
         Blockly.Events.disable();
-        if (Blockly.localGhostConnection_) {
-          selected.disconnectGhost();
+        if (Blockly.insertionMarkerConnection_) {
+          Blockly.BlockSvg.disconnectInsertionMarker();
         }
-        selected.ghostBlock_.dispose();
-        selected.ghostBlock_ = null;
+        Blockly.insertionMarker_.dispose();
+        Blockly.insertionMarker_ = null;
         Blockly.Events.enable();
       }
       // Update the connection locations.
@@ -309,6 +309,11 @@ Blockly.BlockSvg.prototype.setParent = function(newParent) {
     var newXY = this.getRelativeToSurfaceXY();
     // Move the connections to match the child's new position.
     this.moveConnections_(newXY.x - oldXY.x, newXY.y - oldXY.y);
+    // If we are a shadow block, inherit tertiary colour.
+    if (this.isShadow()) {
+      this.setColour(this.getColour(), this.getColourSecondary(),
+        newParent.getColourTertiary());
+    }
   }
 };
 
@@ -397,7 +402,8 @@ Blockly.BlockSvg.prototype.snapToGrid = function() {
 /**
  * Returns a bounding box describing the dimensions of this block
  * and any blocks stacked below it.
- * @return {!{height: number, width: number}} Object with height and width properties.
+ * @return {!{height: number, width: number}} Object with height and width
+ *    properties.
  */
 Blockly.BlockSvg.prototype.getHeightWidth = function() {
   var height = this.height;
@@ -416,10 +422,10 @@ Blockly.BlockSvg.prototype.getHeightWidth = function() {
 };
 
 /**
- * Returns the coordinates of a bounding box describing the dimensions of this block
- * and any blocks stacked below it.
+ * Returns the coordinates of a bounding box describing the dimensions of this
+ * block and any blocks stacked below it.
  * @return {!{topLeft: goog.math.Coordinate, bottomRight: goog.math.Coordinate}}
- *         Object with top left and bottom right coordinates of the bounding box.
+ *    Object with top left and bottom right coordinates of the bounding box.
  */
 Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
   var blockXY = this.getRelativeToSurfaceXY(this);
@@ -429,10 +435,12 @@ Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
   var bottomRight;
   if (this.RTL) {
     // Width has the tab built into it already so subtract it here.
-    topLeft = new goog.math.Coordinate(blockXY.x - (blockBounds.width - tab), blockXY.y);
+    topLeft = new goog.math.Coordinate(blockXY.x - (blockBounds.width - tab),
+        blockXY.y);
     // Add the width of the tab/puzzle piece knob to the x coordinate
     // since X is the corner of the rectangle, not the whole puzzle piece.
-    bottomRight = new goog.math.Coordinate(blockXY.x + tab, blockXY.y + blockBounds.height);
+    bottomRight = new goog.math.Coordinate(blockXY.x + tab,
+        blockXY.y + blockBounds.height);
   } else {
     // Subtract the width of the tab/puzzle piece knob to the x coordinate
     // since X is the corner of the rectangle, not the whole puzzle piece.
@@ -605,7 +613,17 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   Blockly.setPageSelectable(true);
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
-    if (Blockly.localConnection_ == Blockly.selected.nextConnection) {
+    if (Blockly.localConnection_ ==
+        Blockly.selected.getFirstStatementConnection()) {
+      // Snap to match the position of the pre-existing stack.  Since this is a
+      // C-block, shift to take into account how the block will stretch as it
+      // surrounds the internal blocks.
+      Blockly.selected.moveBy(
+          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
+          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_ -
+          (Blockly.highlightedConnection_.sourceBlock_.getHeightWidth().height -
+          Blockly.BlockSvg.MIN_BLOCK_Y));
+    } else if (Blockly.localConnection_.type == Blockly.NEXT_STATEMENT) {
       // Snap to match the position of the pre-existing stack.
       Blockly.selected.moveBy(
           Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
@@ -777,8 +795,11 @@ Blockly.BlockSvg.prototype.setDragging_ = function(adding) {
     group.translate_ = '';
     group.skew_ = '';
     this.addDragging();
+    Blockly.draggingConnections_ =
+        Blockly.draggingConnections_.concat(this.getConnections_(true));
   } else {
     this.removeDragging();
+    Blockly.draggingConnections_ = [];
   }
   // Recurse through all blocks attached under this one.
   for (var i = 0; i < this.childBlocks_.length; i++) {
@@ -881,8 +902,10 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       }
     }
 
+    var candidateIsLast = (localConnection == lastOnStack);
     this.updatePreviews(closestConnection, localConnection, radiusConnection,
-        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y);
+        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
+        candidateIsLast);
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
@@ -901,59 +924,81 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  *    point in the drag.
  * @param {number} dy The y distance the block has moved onscreen up to this
  *    point in the drag.
+ * @param {boolean} candidateIsLast True if the dragging stack is more than one
+ *    block long and localConnection is the last connection on the stack.
  */
 Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
-    localConnection, radiusConnection, e, dx, dy) {
-  // Don't fire events for ghost block creation or movement.
+    localConnection, radiusConnection, e, dx, dy, candidateIsLast) {
+  // Don't fire events for insertion marker creation or movement.
   Blockly.Events.disable();
-  // Remove a ghost if needed.  For Scratch-Blockly we are using ghosts instead
-  // of highlighting the connection; for compatibility with Web Blockly the
-  // name "highlightedConnection" will still be used.
+  // Remove an insertion marker if needed.  For Scratch-Blockly we are using
+  // grayed-out blocks instead of highlighting the connection; for compatibility
+  // with Web Blockly the name "highlightedConnection" will still be used.
   if (Blockly.highlightedConnection_ &&
       Blockly.highlightedConnection_ != closestConnection) {
-    if (this.ghostBlock_ && Blockly.localGhostConnection_) {
-      this.disconnectGhost();
+    if (Blockly.insertionMarker_ && Blockly.insertionMarkerConnection_) {
+      Blockly.BlockSvg.disconnectInsertionMarker();
+    }
+    // If there's already an insertion marker but it's representing the wrong
+    // block, delete it so we can create the correct one.
+    if (Blockly.insertionMarker_ &&
+        (candidateIsLast && Blockly.localConnection_.sourceBlock_ == this) ||
+        (!candidateIsLast && Blockly.localConnection_.sourceBlock_ != this)) {
+      Blockly.insertionMarker_.dispose();
+      Blockly.insertionMarker_ = null;
     }
     Blockly.highlightedConnection_ = null;
     Blockly.localConnection_ = null;
   }
 
-  // Add a ghost if needed.
+  // Add an insertion marker if needed.
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_ &&
-      !closestConnection.sourceBlock_.isGhost()) {
+      !closestConnection.sourceBlock_.isInsertionMarker()) {
+
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
-    if (!this.ghostBlock_){
-      this.ghostBlock_ = this.workspace.newBlock(this.type);
-      this.ghostBlock_.setGhost(true);
-      this.ghostBlock_.initSvg();
+    if (!Blockly.insertionMarker_) {
+      Blockly.insertionMarker_ =
+          this.workspace.newBlock(Blockly.localConnection_.sourceBlock_.type);
+      Blockly.insertionMarker_.setInsertionMarker(true);
+      Blockly.insertionMarker_.initSvg();
     }
 
-    var ghostBlock = this.ghostBlock_;
-    var localGhostConnection = ghostBlock.getMatchingConnection(this,
-        localConnection);
-    if (localGhostConnection != Blockly.localGhostConnection_) {
-      ghostBlock.getSvgRoot().setAttribute('visibility', 'visible');
-      ghostBlock.rendered = true;
+    var insertionMarker = Blockly.insertionMarker_;
+    var insertionMarkerConnection = insertionMarker.getMatchingConnection(
+        localConnection.sourceBlock_, localConnection);
+    if (insertionMarkerConnection != Blockly.insertionMarkerConnection_) {
+      insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
+      insertionMarker.rendered = true;
       // Move the preview to the correct location before the existing block.
-      if (localGhostConnection.type == Blockly.NEXT_STATEMENT) {
-        var relativeXy = this.getRelativeToSurfaceXY();
+      if (insertionMarkerConnection.type == Blockly.NEXT_STATEMENT) {
+        var relativeXy = localConnection.sourceBlock_.getRelativeToSurfaceXY();
         var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
         var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
         var newX = closestConnection.x_ - connectionOffsetX;
         var newY = closestConnection.y_ - connectionOffsetY;
-        var ghostPosition = ghostBlock.getRelativeToSurfaceXY();
-        ghostBlock.moveBy(newX - ghostPosition.x, newY - ghostPosition.y, true);
+        var insertionPosition = insertionMarker.getRelativeToSurfaceXY();
+
+        // If it's the first statement connection of a c-block, this block is
+        // going to get taller as soon as render() is called below.
+        if (insertionMarkerConnection != insertionMarker.nextConnection) {
+          newY -= closestConnection.sourceBlock_.getHeightWidth().height -
+              Blockly.BlockSvg.MIN_BLOCK_Y;
+        }
+
+        insertionMarker.moveBy(newX - insertionPosition.x,
+            newY - insertionPosition.y);
 
       }
-      if (localGhostConnection.type == Blockly.PREVIOUS_STATEMENT &&
-          !ghostBlock.nextConnection) {
+      if (insertionMarkerConnection.type == Blockly.PREVIOUS_STATEMENT &&
+          !insertionMarker.nextConnection) {
         Blockly.bumpedConnection_ = closestConnection.targetConnection;
       }
-      // Renders ghost.
-      localGhostConnection.connect(closestConnection);
-      Blockly.localGhostConnection_ = localGhostConnection;
+      // Renders insertin marker.
+      insertionMarkerConnection.connect(closestConnection);
+      // Render dragging block so it appears on top.
+      Blockly.insertionMarkerConnection_ = insertionMarkerConnection;
     }
   }
   // Reenable events.
@@ -967,40 +1012,42 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
 };
 
 /**
- * Disconnect the current ghost block from the stack, and heal the stack to its
- * previous state.
+ * Disconnect the current insertion marker from the stack, and heal the stack to
+ * its previous state.
  */
-Blockly.BlockSvg.prototype.disconnectGhost = function() {
-  // The ghost block is the first block in a stack, either because it doesn't
-  // have a previous connection or because the previous connection is not
-  // connection.  Unplug won't do anything in that case.  Instead, unplug the
+Blockly.BlockSvg.disconnectInsertionMarker = function() {
+  // The insertion marker is the first block in a stack, either because it
+  // doesn't have a previous connection or because the previous connection is
+  // not connected.  Unplug won't do anything in that case.  Instead, unplug the
   // following block.
-  if (Blockly.localGhostConnection_ == this.ghostBlock_.nextConnection &&
-      (!this.ghostBlock_.previousConnection ||
-      !this.ghostBlock_.previousConnection.targetConnection)) {
-    Blockly.localGhostConnection_.targetBlock().unplug(false);
+  if (Blockly.insertionMarkerConnection_ ==
+      Blockly.insertionMarker_.nextConnection &&
+      (!Blockly.insertionMarker_.previousConnection ||
+      !Blockly.insertionMarker_.previousConnection.targetConnection)) {
+    Blockly.insertionMarkerConnection_.targetBlock().unplug(false);
   }
   // Inside of a C-block, first statement connection.
-  else if (Blockly.localGhostConnection_.type == Blockly.NEXT_STATEMENT &&
-      Blockly.localGhostConnection_ != this.ghostBlock_.nextConnection) {
-    var innerConnection = Blockly.localGhostConnection_.targetConnection;
+  else if (Blockly.insertionMarkerConnection_.type == Blockly.NEXT_STATEMENT &&
+      Blockly.insertionMarkerConnection_ !=
+      Blockly.insertionMarker_.nextConnection) {
+    var innerConnection = Blockly.insertionMarkerConnection_.targetConnection;
     innerConnection.sourceBlock_.unplug(false);
     var previousBlockNextConnection =
-      this.ghostBlock_.previousConnection.targetConnection;
-    this.ghostBlock_.unplug(true);
+        Blockly.insertionMarker_.previousConnection.targetConnection;
+    Blockly.insertionMarker_.unplug(true);
     if (previousBlockNextConnection) {
       previousBlockNextConnection.connect(innerConnection);
     }
   }
   else {
-    this.ghostBlock_.unplug(true /* healStack */);
+    Blockly.insertionMarker_.unplug(true /* healStack */);
   }
 
-  if (Blockly.localGhostConnection_.targetConnection) {
-    throw 'LocalGhostConnection still connected at the end of disconnectGhost';
+  if (Blockly.insertionMarkerConnection_.targetConnection) {
+    throw 'insertionMarkerConnection still connected at the end of disconnectInsertionMarker';
   }
-  Blockly.localGhostConnection_ = null;
-  this.ghostBlock_.getSvgRoot().setAttribute('visibility', 'hidden');
+  Blockly.insertionMarkerConnection_ = null;
+  Blockly.insertionMarker_.getSvgRoot().setAttribute('visibility', 'hidden');
 };
 
 /**
@@ -1048,11 +1095,11 @@ Blockly.BlockSvg.prototype.setShadow = function(shadow) {
 };
 
 /**
- * Set whether this block is a ghost block or not.
- * @param {boolean} ghost True if a ghost.
+ * Set whether this block is an insertion marker block or not.
+ * @param {boolean} insertionMarker True if an insertion marker.
  */
-Blockly.BlockSvg.prototype.setGhost = function(ghost) {
-  Blockly.BlockSvg.superClass_.setGhost.call(this, ghost);
+Blockly.BlockSvg.prototype.setInsertionMarker = function(insertionMarker) {
+  Blockly.BlockSvg.superClass_.setInsertionMarker.call(this, insertionMarker);
   this.updateColour();
 };
 
@@ -1332,11 +1379,15 @@ Blockly.BlockSvg.prototype.removeDragging = function() {
 /**
  * Change the colour of a block.
  * @param {number|string} colour HSV hue value, or #RRGGBB string.
- * @param {number|string} colourSecondary Secondary HSV hue value, or #RRGGBB string.
- * @param {number|string} colourTertiary Tertiary HSV hue value, or #RRGGBB string.
+ * @param {number|string} colourSecondary Secondary HSV hue value, or #RRGGBB
+ *    string.
+ * @param {number|string} colourTertiary Tertiary HSV hue value, or #RRGGBB
+ *    string.
  */
-Blockly.BlockSvg.prototype.setColour = function(colour, colourSecondary, colourTertiary) {
-  Blockly.BlockSvg.superClass_.setColour.call(this, colour, colourSecondary, colourTertiary);
+Blockly.BlockSvg.prototype.setColour = function(colour, colourSecondary,
+    colourTertiary) {
+  Blockly.BlockSvg.superClass_.setColour.call(this, colour, colourSecondary,
+      colourTertiary);
 
   if (this.rendered) {
     this.updateColour();

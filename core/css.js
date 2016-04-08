@@ -152,6 +152,16 @@ Blockly.Css.CONTENT = [
     'z-index: 999;',
   '}',
 
+  '.blocklyWidgetDiv.fieldTextInput {',
+    'overflow: hidden;',
+    'border: 1px solid;',
+    'box-sizing: border-box;',
+    'transform-origin: 0 0;',
+    '-ms-transform-origin: 0 0;',
+    '-moz-transform-origin: 0 0;',
+    '-webkit-transform-origin: 0 0;',
+  '}',
+
   '.blocklyNonSelectable {',
     'user-select: none;',
     '-moz-user-select: none;',
@@ -310,14 +320,13 @@ Blockly.Css.CONTENT = [
 
   '.blocklyHtmlInput {',
     'border: none;',
-    'border-radius: 4px;',
     'font-family: sans-serif;',
     'height: 100%;',
     'margin: 0;',
     'outline: none;',
-    'padding: 0 1px;',
+    'padding: 2px 0;',
     'width: 100%;',
-    'text-align: center',
+    'text-align: center;',
   '}',
 
   '.blocklyMainBackground {',

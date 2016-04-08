@@ -83,16 +83,30 @@ Blockly.highlightedConnection_ = null;
 Blockly.localConnection_ = null;
 
 /**
- * Connection on ghost block that matches Blockly.localConnecxtion_ on the
- * dragged block.
+ * List of all of the connections on all of the blocks that are being dragged.
+ * @private
+ */
+Blockly.draggingConnections_ = [];
+
+/**
+ * Connection on the insertion marker block that matches
+ * Blockly.localConnection_ on the dragged block.
  * @type {Blockly.Connection}
  * @private
  */
-Blockly.localGhostConnection_ = null;
+Blockly.insertionMarkerConnection_ = null;
 
 /**
- * Connection that was bumped out of the way by a ghost block, and may need
- * to be put back as the drag continues.
+ * Grayed-out block that indicates to the user what will happen if they release
+ * a drag immediately.
+ * @type {Blockly.Block}
+ * @private
+ */
+Blockly.insertionMarker_ = null;
+
+/**
+ * Connection that was bumped out of the way by an insertion marker, and may
+ * need to be put back as the drag continues.
  * @type {Blockly.Connection}
  * @private
  */

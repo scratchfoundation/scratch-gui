@@ -298,18 +298,18 @@ function test_isConnectionAllowed_NoNext() {
   assertFalse(two.isConnectionAllowed(one, 1000.0));
 }
 
-function test_isConnectionAllowed_Ghost() {
+function test_isConnectionAllowed_InsertionMarker() {
   var sharedWorkspace = {};
   // Two connections of opposite types near each other.
   var one = helper_createConnection(5 /* x */, 10 /* y */,
       Blockly.INPUT_VALUE);
   one.sourceBlock_ = helper_makeSourceBlock(sharedWorkspace);
 
-  // The second one is a ghost.
+  // The second one is an insertion marker.
   var two = helper_createConnection(10 /* x */, 15 /* y */,
       Blockly.OUTPUT_VALUE);
   two.sourceBlock_ = helper_makeSourceBlock(sharedWorkspace);
-  two.sourceBlock_.isGhost = function() {
+  two.sourceBlock_.isInsertionMarker = function() {
       return true;
     };
 

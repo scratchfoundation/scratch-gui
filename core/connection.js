@@ -296,11 +296,11 @@ Blockly.Connection.prototype.dispose = function() {
 };
 
 /**
- * @return true if the connection is not connected or is connected to a ghost
- *    block, false otherwise.
+ * @return {boolean} true if the connection is not connected or is connected to
+ *    an insertion marker, false otherwise.
  */
-Blockly.Connection.prototype.isConnectedToNonGhost = function() {
-  return this.targetConnection && !this.targetBlock().isGhost();
+Blockly.Connection.prototype.isConnectedToNonInsertionMarker = function() {
+  return this.targetConnection && !this.targetBlock().isInsertionMarker();
 };
 
 /**
@@ -416,10 +416,11 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
           return false;
         }
         if (candidate.targetConnection) {
-          // If the other side of this connection is the active ghost
+          // If the other side of this connection is the active insertion marker
           // connection, we've obviously already decided that this is a good
           // connection.
-          if (candidate.targetConnection == Blockly.localGhostConnection_) {
+          if (candidate.targetConnection ==
+              Blockly.insertionMarkerConnection_) {
             return true;
           } else {
             return false;
@@ -431,7 +432,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
       // If this is a c-shaped block, statement blocks cannot be connected
       // anywhere other than inside the first statement input.
       if (firstStatementConnection) {
-        // Can't connect if there is alread a block inside the first statement
+        // Can't connect if there is already a block inside the first statement
         // input.
         if (this == firstStatementConnection) {
           if (this.targetConnection) {
@@ -441,7 +442,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
         // Can't connect this block's next connection unless we're connecting
         // in front of the first block on a stack.
         else if (this == this.sourceBlock_.nextConnection &&
-            candidate.isConnectedToNonGhost()) {
+            candidate.isConnectedToNonInsertionMarker()) {
           return false;
         }
       }
@@ -473,13 +474,13 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
         // block on a stack or there's already a block connected inside the c.
       if (firstStatementConnection &&
           this == this.sourceBlock_.previousConnection &&
-          candidate.isConnectedToNonGhost() &&
+          candidate.isConnectedToNonInsertionMarker() &&
           !firstStatementConnection.targetConnection) {
         return false;
       }
       // Don't let a block with no next connection bump other blocks out of the
       // stack.
-      if (candidate.isConnectedToNonGhost() &&
+      if (candidate.isConnectedToNonInsertionMarker() &&
           !this.sourceBlock_.nextConnection) {
         return false;
       }
@@ -490,7 +491,11 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate,
   }
 
   // Don't let blocks try to connect to themselves or ones they nest.
-  return !this.isAncestor_(candidate);
+  if (Blockly.draggingConnections_.indexOf(candidate) != -1) {
+    return false;
+  }
+
+  return true;
 };
 
 /**
@@ -505,8 +510,8 @@ Blockly.Connection.prototype.checkBasicCompatibility_ = function(candidate,
     return false;
   }
 
-  // Don't consider ghost blocks.
-  if (candidate.sourceBlock_.isGhost()) {
+  // Don't consider insertion markers.
+  if (candidate.sourceBlock_.isInsertionMarker()) {
     return false;
   }
 
@@ -518,27 +523,6 @@ Blockly.Connection.prototype.checkBasicCompatibility_ = function(candidate,
   }
 
   return true;
-};
-
-/**
- * Checks if a candidate connection is on this connection's source block or a
- * nested block.
- * @param {Blockly.Connection} candidate The candidate connection to check.
- * @return Whether the candidate connection is on this connection's source block
- * or descendant blocks.
- */
-Blockly.Connection.prototype.isAncestor_ = function(candidate) {
-  var targetSourceBlock = candidate.sourceBlock_;
-  var sourceBlock = this.sourceBlock_;
-  if (targetSourceBlock && sourceBlock) {
-    do {
-      if (sourceBlock == targetSourceBlock) {
-        return true;
-      }
-      targetSourceBlock = targetSourceBlock.getParent();
-    } while (targetSourceBlock);
-  }
-  return false;
 };
 
 /**

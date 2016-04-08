@@ -84,7 +84,7 @@ Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS = 1 * Blockly.BlockSvg.GRID_UNIT;
  * Minimum width of a block.
  * @const
  */
-Blockly.BlockSvg.MIN_BLOCK_X = 16 * Blockly.BlockSvg.GRID_UNIT;
+Blockly.BlockSvg.MIN_BLOCK_X = 1/2 * 16 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
  * Minimum height of a block.

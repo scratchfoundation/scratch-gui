@@ -859,13 +859,18 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       // Switch to unrestricted dragging.
       Blockly.dragMode_ = Blockly.DRAG_FREE;
       Blockly.longStop_();
+      // Must move to drag surface before unplug(),
+      // or else connections will calculate the wrong relative to surface XY
+      // in tighten_(). Then blocks connected to this block move around on the
+      // drag surface. By moving to the drag surface before unplug, connection
+      // positions will be calculated correctly.
+      this.moveToDragSurface_();
       if (this.parentBlock_) {
         // Push this block to the very top of the stack.
         this.unplug();
         this.disconnectUiEffect();
       }
       this.setDragging_(true);
-      this.moveToDragSurface_();
     }
   }
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {

@@ -35,6 +35,13 @@ goog.require('goog.userAgent');
 
 
 /**
+ * Cached value for whether 3D is supported
+ * @type {boolean}
+ * @private
+ */
+Blockly.cache3dSupported_ = null;
+
+/**
  * Add a CSS class to a element.
  * Similar to Closure's goog.dom.classes.add, except it handles SVG elements.
  * @param {!Element} element DOM element to add class to.
@@ -264,13 +271,28 @@ Blockly.getRelativeXY_ = function(element) {
   }
   // Second, check for transform="translate(...)" attribute.
   var transform = element.getAttribute('transform');
-  var r = transform && transform.match(Blockly.getRelativeXY_.XY_REGEXP_);
-  if (r) {
-    xy.x += parseFloat(r[1]);
-    if (r[3]) {
-      xy.y += parseFloat(r[3]);
+  if (transform) {
+    var transformComponents = transform.match(Blockly.getRelativeXY_.XY_REGEXP_);
+    if (transformComponents) {
+      xy.x += parseFloat(transformComponents[1]);
+      if (transformComponents[3]) {
+        xy.y += parseFloat(transformComponents[3]);
+      }
     }
   }
+
+  // Third, check for style="transform: translate3d(...)".
+  var style = element.getAttribute('style');
+  if (style && style.indexOf('translate3d') > -1) {
+    var styleComponents = style.match(Blockly.getRelativeXY_.XY_3D_REGEXP_);
+    if (styleComponents) {
+      xy.x += parseFloat(styleComponents[1]);
+      if (styleComponents[3]) {
+        xy.y += parseFloat(styleComponents[3]);
+      }
+    }
+  }
+
   return xy;
 };
 
@@ -285,6 +307,15 @@ Blockly.getRelativeXY_ = function(element) {
  */
 Blockly.getRelativeXY_.XY_REGEXP_ =
     /translate\(\s*([-+\d.e]+)([ ,]\s*([-+\d.e]+)\s*\))?/;
+
+/**
+ * Static regex to pull the x,y,z values out of a translate3d() style property.
+ * Accounts for same exceptions as XY_REGEXP_.
+ * @type {!RegExp}
+ * @private
+ */
+Blockly.getRelativeXY_.XY_3D_REGEXP_ =
+  /transform:\s*translate3d\(\s*([-+\d.e]+)px([ ,]\s*([-+\d.e]+)\s*)px([ ,]\s*([-+\d.e]+)\s*)px\)?/;
 
 /**
  * Return the absolute coordinates of the top-left corner of this element,
@@ -317,6 +348,46 @@ Blockly.getSvgXY_ = function(element, workspace) {
     element = element.parentNode;
   } while (element && element != workspace.getParentSvg());
   return new goog.math.Coordinate(x, y);
+};
+
+/**
+ * Check if 3D transforms are supported by adding an element
+ * and attempting to set the property.
+ * @return {boolean} true if 3D transforms are supported
+ */
+Blockly.is3dSupported = function() {
+  if (Blockly.cache3dSupported_ !== null) {
+    return Blockly.cache3dSupported_;
+  }
+  // CC-BY-SA Lorenzo Polidori
+  // https://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
+  if (!window.getComputedStyle) {
+    return false;
+  }
+
+  var el = document.createElement('p'),
+    has3d,
+    transforms = {
+    'webkitTransform':'-webkit-transform',
+    'OTransform':'-o-transform',
+    'msTransform':'-ms-transform',
+    'MozTransform':'-moz-transform',
+    'transform':'transform'
+  };
+
+  // Add it to the body to get the computed style.
+  document.body.insertBefore(el, null);
+
+  for (var t in transforms) {
+    if (el.style[t] !== undefined) {
+      el.style[t] = "translate3d(1px,1px,1px)";
+      has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+    }
+  }
+
+  document.body.removeChild(el);
+  Blockly.cache3dSupported_ = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+  return Blockly.cache3dSupported_;
 };
 
 /**

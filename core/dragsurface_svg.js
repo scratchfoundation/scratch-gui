@@ -80,8 +80,14 @@ Blockly.DragSurfaceSvg.prototype.setBlocksAndShow = function (blocks) {
  * @param {Number} scale Scale of the group
  */
 Blockly.DragSurfaceSvg.prototype.translateAndScaleGroup = function (x, y, scale) {
-  var transform = 'translate(' + x + ', ' + y + ') scale(' + scale + ')';
-  this.dragGroup_.setAttribute('transform', transform);
+  if (Blockly.is3dSupported()) {
+    var transform = 'transform: translate3d(' + x + 'px, ' + y + 'px, 0px)' +
+      'scale3d(' + scale + ',' + scale + ',' + scale + ')';
+    this.dragGroup_.setAttribute('style', transform);
+  } else {
+    var transform = 'translate(' + x + ', ' + y + ') scale(' + scale + ')';
+    this.dragGroup_.setAttribute('transform', transform);
+  }
 };
 
 /**

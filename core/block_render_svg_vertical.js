@@ -31,6 +31,11 @@ goog.require('Blockly.BlockSvg');
 
 // UI constants for rendering blocks.
 /**
+* Grid unit to pixels conversion
+* @const
+*/
+Blockly.BlockSvg.GRID_UNIT = 4;
+/**
  * Horizontal space between elements.
  * @const
  */
@@ -135,52 +140,21 @@ Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER =
     Blockly.BlockSvg.CORNER_RADIUS;
 
 /**
+ * Height of user inputs
+ * @const
+ */
+Blockly.BlockSvg.FIELD_HEIGHT = 8 * Blockly.BlockSvg.GRID_UNIT;
+/**
+ * Width of user inputs
+ * @const
+ */
+Blockly.BlockSvg.FIELD_WIDTH = 12 * Blockly.BlockSvg.GRID_UNIT;
+
+/**
  * Play some UI effects (sound, ripple) after a connection has been established.
  */
 Blockly.BlockSvg.prototype.connectionUiEffect = function() {
   this.workspace.playAudio('click');
-  if (this.workspace.scale < 1) {
-    return;  // Too small to care about visual effects.
-  }
-  // Determine the absolute coordinates of the inferior block.
-  var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.svgGroup_),
-                             this.workspace);
-  // Offset the coordinates based on the two connection types, fix scale.
-  if (this.outputConnection) {
-    xy.x += (this.RTL ? 3 : -3) * this.workspace.scale;
-    xy.y += 13 * this.workspace.scale;
-  } else if (this.previousConnection) {
-    xy.x += (this.RTL ? -23 : 23) * this.workspace.scale;
-    xy.y += 3 * this.workspace.scale;
-  }
-  var ripple = Blockly.createSvgElement('circle',
-      {'cx': xy.x, 'cy': xy.y, 'r': 0, 'fill': 'none',
-       'stroke': '#888', 'stroke-width': 10},
-      this.workspace.getParentSvg());
-  // Start the animation.
-  Blockly.BlockSvg.connectionUiStep_(ripple, new Date(), this.workspace.scale);
-};
-
-/**
- * Expand a ripple around a connection.
- * @param {!Element} ripple Element to animate.
- * @param {!Date} start Date of animation's start.
- * @param {number} workspaceScale Scale of workspace.
- * @private
- */
-Blockly.BlockSvg.connectionUiStep_ = function(ripple, start, workspaceScale) {
-  var ms = (new Date()) - start;
-  var percent = ms / 150;
-  if (percent > 1) {
-    goog.dom.removeNode(ripple);
-  } else {
-    ripple.setAttribute('r', percent * 25 * workspaceScale);
-    ripple.style.opacity = 1 - percent;
-    var closure = function() {
-      Blockly.BlockSvg.connectionUiStep_(ripple, start, workspaceScale);
-    };
-    Blockly.BlockSvg.disconnectUiStop_.pid_ = setTimeout(closure, 10);
-  }
 };
 
 /**

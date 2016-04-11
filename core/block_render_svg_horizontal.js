@@ -280,8 +280,6 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
     height: 0,
     bayHeight: 0,
     bayWidth: 0,
-    fieldWidth: 0,
-    fieldHeight: 0,
     fieldRadius: 0,
     startHat: false
   };
@@ -312,9 +310,6 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
         metrics.icon = field;
       }
       if (field instanceof Blockly.FieldTextInput) {
-        var fieldBBox = field.textElement_.getBBox();
-        metrics.fieldWidth = fieldBBox.width + Blockly.BlockSvg.SEP_SPACE_X;
-        metrics.fieldHeight = fieldBBox.height;
         metrics.fieldRadius = field.getBorderRadius();
       }
     }
@@ -406,7 +401,6 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   // Position value input
   if (metrics.valueInput) {
     var input = metrics.valueInput.getSvgRoot();
-    var inputBBox = input.getBBox();
     var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
       (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
         Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);

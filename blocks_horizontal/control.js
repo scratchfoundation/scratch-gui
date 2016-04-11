@@ -141,7 +141,6 @@ Blockly.Blocks['control_stop'] = {
       ],
       "inputsInline": true,
       "previousStatement": null,
-      "nextStatement": null,
       "colour": Blockly.Colours.control.primary,
       "colourSecondary": Blockly.Colours.control.secondary,
       "colourTertiary": Blockly.Colours.control.tertiary

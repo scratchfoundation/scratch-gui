@@ -772,7 +772,7 @@ Blockly.Flyout.prototype.onMouseMoveBlock_ = function(e) {
   // Only create a block if the user is dragging toward the workspace,
   // Otherwise the drag might be the start of a scroll in the flyout.
   // Don't create a block within the sticky drag radius.
-  if (this.isDragTowardWorkspace_(dx, dy) &&
+  if (Blockly.Flyout.startFlyout_.isDragTowardWorkspace_(dx, dy) &&
       Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
     // Create the block.
     Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)(

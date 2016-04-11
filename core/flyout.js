@@ -141,6 +141,21 @@ Blockly.Flyout.prototype.height_ = 0;
 Blockly.Flyout.prototype.verticalOffset_ = 0;
 
 /**
+ * Range of a drag angle from a fixed flyout considered "dragging toward workspace."
+ * Drags that are within the bounds of this many degrees from the orthogonal
+ * line to the flyout edge are considered to be "drags toward the workspace."
+ * Example:
+ * Flyout                                                  Edge   Workspace
+ * [block] /  <-within this angle, drags "toward workspace" |
+ * [block] ---- orthogonal to flyout boundary ----          |
+ * [block] \                                                |
+ * The angle is given in degrees from the orthogonal.
+ * @type {number}
+ * @private
+*/
+Blockly.Flyout.prototype.dragAngleRange_ = 70;
+
+/**
  * Creates the flyout's DOM.  Only needs to be called once.
  * @return {!Element} The flyout's SVG group.
  */
@@ -301,7 +316,7 @@ Blockly.Flyout.prototype.setMetrics_ = function(xyRatio) {
 
 Blockly.Flyout.prototype.setVerticalOffset = function(verticalOffset) {
   this.verticalOffset_ = verticalOffset;
-}
+};
 
 /**
  * Move the toolbox to the edge of the workspace.
@@ -671,6 +686,8 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
       // Left-click (or middle click)
       Blockly.Css.setCursor(Blockly.Css.Cursor.CLOSED);
       // Record the current mouse position.
+      flyout.startDragMouseY_ = e.clientY;
+      flyout.startDragMouseX_ = e.clientX;
       Blockly.Flyout.startDownEvent_ = e;
       Blockly.Flyout.startBlock_ = block;
       Blockly.Flyout.startFlyout_ = flyout;
@@ -751,12 +768,63 @@ Blockly.Flyout.prototype.onMouseMoveBlock_ = function(e) {
   }
   var dx = e.clientX - Blockly.Flyout.startDownEvent_.clientX;
   var dy = e.clientY - Blockly.Flyout.startDownEvent_.clientY;
-  // Still dragging within the sticky DRAG_RADIUS.
-  if (Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
+
+  // Only create a block if the user is dragging toward the workspace,
+  // Otherwise the drag might be the start of a scroll in the flyout.
+  // Don't create a block within the sticky drag radius.
+  if (this.isDragTowardWorkspace_(dx, dy) &&
+      Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
     // Create the block.
     Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)(
         Blockly.Flyout.startDownEvent_);
+  } else {
+    // Do a scroll
+    Blockly.Flyout.startFlyout_.onMouseMove_(e);
   }
+  e.stopPropagation();
+};
+
+/**
+ * Determine if a drag delta is toward the workspace, based on the position
+ * and orientation of the flyout. This is used in onMouseMoveBlock_ to determine
+ * if a new block should be created or if the flyout should scroll.
+ * @param {number} dx X delta of the drag
+ * @param {number} dy Y delta of the drag
+ * @return {boolean} true if the drag is toward the workspace.
+ * @private
+ */
+Blockly.Flyout.prototype.isDragTowardWorkspace_ = function(dx, dy) {
+  // Direction goes from -180 to 180, with 0 toward the right and 90 on top.
+  var dragDirection = Math.atan2(dy, dx) / Math.PI * 180;
+
+  var draggingTowardWorkspace = false;
+  var range = Blockly.Flyout.startFlyout_.dragAngleRange_;
+  if (Blockly.Flyout.startFlyout_.horizontalLayout_) {
+    if (Blockly.Flyout.startFlyout_.toolboxPosition_ == Blockly.TOOLBOX_AT_TOP) {
+      // Horizontal at top
+      if (dragDirection < 90 + range && dragDirection > 90 - range ) {
+        draggingTowardWorkspace = true;
+      }
+    } else {
+      // Horizontal at bottom
+      if (dragDirection > -90 - range && dragDirection < -90 + range) {
+        draggingTowardWorkspace = true;
+      }
+    }
+  } else {
+    if (Blockly.Flyout.startFlyout_.toolboxPosition_ == Blockly.TOOLBOX_AT_LEFT) {
+      // Vertical at left
+      if (dragDirection < range && dragDirection > -range) {
+        draggingTowardWorkspace = true;
+      }
+    } else {
+      // Vertical at right
+      if (dragDirection < -180 + range || dragDirection > 180 - range) {
+        draggingTowardWorkspace = true;
+      }
+    }
+  }
+  return draggingTowardWorkspace;
 };
 
 /**

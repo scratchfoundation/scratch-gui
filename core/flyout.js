@@ -134,6 +134,20 @@ Blockly.Flyout.prototype.width_ = 0;
 Blockly.Flyout.prototype.height_ = 0;
 
 /**
+ * Width of flyout contents.
+ * @type {number}
+ * @private
+ */
+Blockly.Flyout.prototype.contentWidth_ = 0;
+
+/**
+ * Height of flyout contents.
+ * @type {number}
+ * @private
+ */
+Blockly.Flyout.prototype.contentHeight_ = 0;
+
+/**
  * Vertical offset of flyout.
  * @type {number}
  * @private
@@ -270,8 +284,8 @@ Blockly.Flyout.prototype.getMetrics_ = function() {
   var metrics = {
     viewHeight: viewHeight,
     viewWidth: viewWidth,
-    contentHeight: (optionBox.height) * this.workspace_.scale,
-    contentWidth: (optionBox.width) * this.workspace_.scale,
+    contentHeight: this.contentHeight_ * this.workspace_.scale,
+    contentWidth: this.contentWidth_ * this.workspace_.scale,
     viewTop: -this.workspace_.scrollY,
     viewLeft: -this.workspace_.scrollX,
     contentTop: optionBox.y,
@@ -583,8 +597,12 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   this.svgGroup_.style.display = 'block';
 
   // Lay out the blocks.
-  var cursorX = margin / this.workspace_.scale + Blockly.BlockSvg.TAB_WIDTH;
-  var cursorY = margin;
+  var marginLR = margin / this.workspace_.scale + Blockly.BlockSvg.TAB_WIDTH;
+  var marginTB = margin;
+  var contentWidth = 0;
+  var contentHeight = 0;
+  var cursorX = marginLR
+  var cursorY = marginTB;
   for (var i = 0, block; block = blocks[i]; i++) {
     var allBlocks = block.getDescendants();
     for (var j = 0, child; child = allBlocks[j]; j++) {
@@ -597,6 +615,12 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();
     block.moveBy((this.horizontalLayout_ && this.RTL) ? -cursorX : cursorX, cursorY);
+
+    // Assuming this is the last block, work out the size of the content
+    // (including margins)
+    contentWidth = cursorX + blockHW.width + marginLR;
+    contentHeight = cursorY + blockHW.height + marginTB;
+
     if (this.horizontalLayout_) {
       cursorX += blockHW.width + gaps[i];
     } else {
@@ -613,6 +637,10 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
     this.addBlockListeners_(root, block, rect);
   }
+
+  // Record calculated content size for getMetrics_
+  this.contentWidth_ = contentWidth;
+  this.contentHeight_ = contentHeight;
 
   // IE 11 is an incompetant browser that fails to fire mouseout events.
   // When the mouse is over the background, deselect all blocks.

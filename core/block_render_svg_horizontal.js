@@ -228,13 +228,15 @@ Blockly.BlockSvg.prototype.updateColour = function() {
 /**
  * Returns a bounding box describing the dimensions of this block
  * and any blocks stacked below it.
+ * @param {boolean=} opt_ignoreFields True if we should ignore fields in the
+ * size calculation, and just give the size of the base block(s).
  * @return {!{height: number, width: number}} Object with height and width properties.
  */
-Blockly.BlockSvg.prototype.getHeightWidth = function() {
+Blockly.BlockSvg.prototype.getHeightWidth = function(opt_ignoreFields) {
   var height = this.height;
   var width = this.width;
   // Add the size of the field shadow block.
-  if (this.getValueInput_()) {
+  if (!opt_ignoreFields && this.getValueInput_()) {
     height += Blockly.BlockSvg.FIELD_Y_OFFSET;
     height += Blockly.BlockSvg.FIELD_HEIGHT;
   }
@@ -308,7 +310,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
       // Expand input size if there is a connection.
       if (input.connection && input.connection.targetConnection) {
         var linkedBlock = input.connection.targetBlock();
-        var bBox = linkedBlock.getHeightWidth();
+        var bBox = linkedBlock.getHeightWidth(true);
         metrics.bayHeight = Math.max(metrics.bayHeight, bBox.height);
         metrics.bayWidth = Math.max(metrics.bayWidth, bBox.width);
       }

@@ -875,13 +875,13 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
  */
 Blockly.Flyout.placeNewBlock_ = function(originBlock, workspace,
     flyout) {
-  var svgRootOld = originBlock.getSvgRoot();
-  if (!svgRootOld) {
+  var blockSvgOld = originBlock.getSvgRoot();
+  if (!blockSvgOld) {
     throw 'originBlock is not rendered.';
   }
   // Figure out where the original block is on the screen, relative to the upper
   // left corner of the main workspace.
-  var xyOld = Blockly.getSvgXY_(svgRootOld, workspace);
+  var xyOld = Blockly.getSvgXY_(blockSvgOld, workspace);
   // Take into account that the flyout might have been scrolled horizontally
   // (separately from the main workspace).
   // Generally a no-op in vertical mode but likely to happen in horizontal
@@ -917,15 +917,15 @@ Blockly.Flyout.placeNewBlock_ = function(originBlock, workspace,
   // Create the new block by cloning the block in the flyout (via XML).
   var xml = Blockly.Xml.blockToDom(originBlock);
   var block = Blockly.Xml.domToBlock(workspace, xml);
-  var svgRootNew = block.getSvgRoot();
-  if (!svgRootNew) {
+  var blockSvgNew = block.getSvgRoot();
+  if (!blockSvgNew) {
     throw 'block is not rendered.';
   }
   // Figure out where the new block got placed on the screen, relative to the
   // upper left corner of the workspace.  This may not be the same as the
   // original block because the flyout's origin may not be the same as the
   // main workspace's origin.
-  var xyNew = Blockly.getSvgXY_(svgRootNew, workspace);
+  var xyNew = Blockly.getSvgXY_(blockSvgNew, workspace);
   // Scale the scroll (getSvgXY_ did not do this).
   xyNew.x += workspace.scrollX / workspace.scale - workspace.scrollX;
   xyNew.y += workspace.scrollY / workspace.scale - workspace.scrollY;

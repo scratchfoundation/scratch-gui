@@ -104,7 +104,7 @@ Blockly.BlockSvg.prototype.initSvg = function() {
     input.init();
   }
   var icons = this.getIcons();
-  for (var i = 0; i < icons.length; i++) {
+  for (i = 0; i < icons.length; i++) {
     icons[i].createIcon();
   }
   this.updateColour();
@@ -474,7 +474,7 @@ Blockly.BlockSvg.prototype.setCollapsed = function(collapsed) {
   var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
   if (collapsed) {
     var icons = this.getIcons();
-    for (var i = 0; i < icons.length; i++) {
+    for (i = 0; i < icons.length; i++) {
       icons[i].setVisible(false);
     }
     var text = this.toString(Blockly.COLLAPSE_CHARS);
@@ -524,7 +524,7 @@ Blockly.BlockSvg.prototype.tab = function(start, forward) {
       }
     }
   }
-  var i = list.indexOf(start);
+  i = list.indexOf(start);
   if (i == -1) {
     // No start location, start at the beginning or end.
     i = forward ? -1 : list.length;
@@ -779,12 +779,12 @@ Blockly.BlockSvg.prototype.moveConnections_ = function(dx, dy) {
     myConnections[i].moveBy(dx, dy);
   }
   var icons = this.getIcons();
-  for (var i = 0; i < icons.length; i++) {
+  for (i = 0; i < icons.length; i++) {
     icons[i].computeIconLocation();
   }
 
   // Recurse through all blocks attached under this one.
-  for (var i = 0; i < this.childBlocks_.length; i++) {
+  for (i = 0; i < this.childBlocks_.length; i++) {
     this.childBlocks_[i].moveConnections_(dx, dy);
   }
 };
@@ -830,7 +830,7 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
  * Generally should be called at the same time as setDragging_(false).
  * @private
  */
- Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
+Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
   this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
   // Translate to current position, turning off 3d.
   var xy = this.getRelativeToSurfaceXY();
@@ -915,7 +915,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     var closestConnection = null;
     var localConnection = null;
     var radiusConnection = Blockly.SNAP_RADIUS;
-    for (var i = 0; i < myConnections.length; i++) {
+    for (i = 0; i < myConnections.length; i++) {
       var myConnection = myConnections[i];
       var neighbour = myConnection.closest(radiusConnection, dx, dy);
       if (neighbour.connection) {
@@ -992,17 +992,15 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     var insertionMarkerConnection = insertionMarker.getMatchingConnection(
         localConnection.sourceBlock_, localConnection);
     if (insertionMarkerConnection != Blockly.insertionMarkerConnection_) {
-      insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
       insertionMarker.rendered = true;
+      // Render disconnected from everything else so that we have a valid
+      // connection location.
+      insertionMarker.render();
+      insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
       // Move the preview to the correct location before the existing block.
       if (insertionMarkerConnection.type == Blockly.NEXT_STATEMENT) {
-        var relativeXy = localConnection.sourceBlock_.getRelativeToSurfaceXY();
-        var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
-        var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
-        var newX = closestConnection.x_ - connectionOffsetX;
-        var newY = closestConnection.y_ - connectionOffsetY;
-        var insertionPosition = insertionMarker.getRelativeToSurfaceXY();
-
+        var newX = closestConnection.x_ - insertionMarkerConnection.x_;
+        var newY = closestConnection.y_ - insertionMarkerConnection.y_;
         // If it's the first statement connection of a c-block, this block is
         // going to get taller as soon as render() is called below.
         if (insertionMarkerConnection != insertionMarker.nextConnection) {
@@ -1010,8 +1008,7 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
               Blockly.BlockSvg.MIN_BLOCK_Y;
         }
 
-        insertionMarker.moveBy(newX - insertionPosition.x,
-            newY - insertionPosition.y);
+        insertionMarker.moveBy(newX, newY);
 
       }
       if (insertionMarkerConnection.type == Blockly.PREVIOUS_STATEMENT &&

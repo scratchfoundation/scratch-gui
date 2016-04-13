@@ -93,3 +93,35 @@ Blockly.Blocks['event_broadcast'] = {
     });
   }
 };
+
+Blockly.Blocks['event_broadcast_text'] = {
+  /**
+   * Block to send a broadcast, with a text-box for testing fields.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "event_broadcast",
+      "message0": "%1 %2",
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_broadcast.svg",
+          "width": 40,
+          "height": 40,
+          "alt": "Broadcast"
+        },
+        {
+          "type": "input_value",
+          "name": "STRING"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};

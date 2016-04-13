@@ -253,7 +253,6 @@ Blockly.BlockSvg.terminateDrag_ = function() {
       event.oldCoordinate = selected.dragStartXY_;
       event.recordNew();
       Blockly.Events.fire(event);
-
       selected.moveConnections_(dxy.x, dxy.y);
       delete selected.draggedBubbles_;
       selected.setDragging_(false);
@@ -336,6 +335,14 @@ Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
       var xy = Blockly.getRelativeXY_(element);
       x += xy.x;
       y += xy.y;
+      // If this element is the current element on the drag surface, include
+      // the translation of the drag surface itself.
+      if (this.workspace.dragSurface &&
+          this.workspace.dragSurface.getCurrentBlock() == element) {
+        var surfaceTranslation = this.workspace.dragSurface.getSurfaceTranslation();
+        x += surfaceTranslation.x;
+        y += surfaceTranslation.y;
+      }
       element = element.parentNode;
     } while (element && element != this.workspace.getCanvas() &&
              element != dragSurfaceGroup);
@@ -820,7 +827,7 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
   // to keep the position in sync as it move on/off the surface.
   var xy = this.getRelativeToSurfaceXY();
   this.clearTransformAttributes_();
-  this.translate(xy.x, xy.y, Blockly.is3dSupported());
+  this.workspace.dragSurface.translateSurface(xy.x, xy.y);
   // Execute the move on the top-level SVG component
   this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
 };
@@ -830,12 +837,12 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
  * Generally should be called at the same time as setDragging_(false).
  * @private
  */
-Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
-  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
+ Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
   // Translate to current position, turning off 3d.
   var xy = this.getRelativeToSurfaceXY();
   this.clearTransformAttributes_();
   this.translate(xy.x, xy.y, false);
+  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
 };
 
 /**
@@ -896,7 +903,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
-    this.translate(newXY.x, newXY.y, Blockly.is3dSupported());
+    this.workspace.dragSurface.translateSurface(newXY.x, newXY.y);
     // Drag all the nested bubbles.
     for (var i = 0; i < this.draggedBubbles_.length; i++) {
       var commentData = this.draggedBubbles_[i];
@@ -978,7 +985,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_ &&
       !closestConnection.sourceBlock_.isInsertionMarker()) {
-
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
     if (!Blockly.insertionMarker_) {

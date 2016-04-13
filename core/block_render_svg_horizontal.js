@@ -236,7 +236,7 @@ Blockly.BlockSvg.prototype.getHeightWidth = function(opt_ignoreFields) {
   var height = this.height;
   var width = this.width;
   // Add the size of the field shadow block.
-  if (!opt_ignoreFields && this.getValueInput_()) {
+  if (!opt_ignoreFields && this.getFieldShadowBlock_()) {
     height += Blockly.BlockSvg.FIELD_Y_OFFSET;
     height += Blockly.BlockSvg.FIELD_HEIGHT;
   }
@@ -405,8 +405,8 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   }
 
   // Position value input
-  if (this.getValueInput_()) {
-    var input = this.getValueInput_().getSvgRoot();
+  if (this.getFieldShadowBlock_()) {
+    var input = this.getFieldShadowBlock_().getSvgRoot();
     var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
       (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
         Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);
@@ -612,10 +612,12 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
 
 /**
  * Get the field shadow block, if this block has one.
+ * <p>This is horizontal Scratch-specific, as "fields" are implemented as inputs
+ * with shadow blocks, and there is only one per block.
  * @return {Blockly.BlockSvg} The field shadow block, or null if not found.
  * @private
  */
-Blockly.BlockSvg.prototype.getValueInput_ = function() {
+Blockly.BlockSvg.prototype.getFieldShadowBlock_ = function() {
   for (var i = 0, child; child = this.childBlocks_[i]; i++) {
     if (child.isShadow()) {
       return child;
@@ -623,4 +625,4 @@ Blockly.BlockSvg.prototype.getValueInput_ = function() {
   }
 
   return null;
-}
+};

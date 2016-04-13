@@ -107,6 +107,48 @@ function logEvents(state) {
 function logger(e) {
   console.log(e);
 }
+
+function sprinkles(n) {
+  var prototypes = [];
+  var toolbox = document.getElementById('toolbox');
+  var blocks = toolbox.getElementsByTagName('block');
+  for (var i = 0, block; block = blocks[i]; i++) {
+    prototypes.push(block.getAttribute('type'));
+  }
+  for (var i = 0; i < n; i++) {
+    var prototype = prototypes[Math.floor(Math.random() * prototypes.length)];
+    var block = workspace.newBlock(prototype);
+    block.initSvg();
+    block.getSvgRoot().setAttribute('transform', 'translate(' +
+        Math.round(Math.random() * 450 + 40) + ', ' +
+        Math.round(Math.random() * 600 + 40) + ')');
+    block.render();
+  }
+}
+function spaghetti(n) {
+  var xml = spaghettiXml;
+  for(var i = 0; i < n; i++) {
+    xml = xml.replace(/(<(statement|next)( name="SUBSTACK")?>)<\//g,
+        '$1' + spaghettiXml + '</');
+  }
+  xml = '<xml xmlns="http://www.w3.org/1999/xhtml">' + xml + '</xml>';
+  debugger;
+  var dom = Blockly.Xml.textToDom(xml);
+  console.time('Spaghetti domToWorkspace');
+  Blockly.Xml.domToWorkspace(workspace, dom);
+  console.timeEnd('Spaghetti domToWorkspace');
+  //     document.getElementById('importExport').value = xml;
+}
+var spaghettiXml = [
+  '  <block type="control_repeat">',
+  '    <value name="TIMES">',
+  '      <shadow type="math_number">',
+  '        <field name="NUM">10</field>',
+  '      </shadow>',
+  '    </value>',
+  '    <statement name="SUBSTACK"></statement>',
+  '    <next></next>',
+  '  </block>'].join('\n');
 </script>
 
 <style>
@@ -230,6 +272,11 @@ h1 {
   <p>
     Log events: &nbsp;
     <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
+  </p>
+  <p>
+    Stress test: &nbsp;
+    <input type="button" value="Sprinkles!" onclick="sprinkles(100)">
+    <input type="button" value="Spaghetti!" onclick="spaghetti(10)">
   </p>
 </body>
 </html>

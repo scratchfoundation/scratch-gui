@@ -110,7 +110,14 @@ Blockly.Flyout.prototype.autoClose = true;
  * @type {number}
  * @const
  */
-Blockly.Flyout.prototype.CORNER_RADIUS = 8;
+Blockly.Flyout.prototype.CORNER_RADIUS = 0;
+
+/**
+ * Margin of blocks in the flyout.
+ * @type {number}
+ * @const
+ */
+Blockly.Flyout.prototype.BLOCK_MARGIN = 8;
 
 /**
  * Top/bottom padding between scrollbar and edge of flyout background.
@@ -572,7 +579,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         Blockly.Procedures.flyoutCategory(this.workspace_.targetWorkspace);
   }
 
-  var margin = this.CORNER_RADIUS;
+  var margin = this.BLOCK_MARGIN;
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
@@ -1047,7 +1054,7 @@ Blockly.Flyout.terminateDrag_ = function() {
 Blockly.Flyout.prototype.reflowHorizontal = function() {
   this.workspace_.scale = this.targetWorkspace_.scale;
   var flyoutHeight = 0;
-  var margin = this.CORNER_RADIUS;
+  var margin = this.BLOCK_MARGIN;
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     var height = block.getHeightWidth().height;
@@ -1081,7 +1088,7 @@ Blockly.Flyout.prototype.reflowHorizontal = function() {
 Blockly.Flyout.prototype.reflowVertical = function() {
   this.workspace_.scale = this.targetWorkspace_.scale;
   var flyoutWidth = 0;
-  var margin = this.CORNER_RADIUS;
+  var margin = this.BLOCK_MARGIN;
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     var width = block.getHeightWidth().width;

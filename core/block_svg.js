@@ -100,12 +100,14 @@ Blockly.BlockSvg.INLINE = -1;
  */
 Blockly.BlockSvg.prototype.initSvg = function() {
   goog.asserts.assert(this.workspace.rendered, 'Workspace is headless.');
-  for (var i = 0, input; input = this.inputList[i]; i++) {
-    input.init();
-  }
-  var icons = this.getIcons();
-  for (var i = 0; i < icons.length; i++) {
-    icons[i].createIcon();
+  if (!this.isInsertionMarker()) { // Insertion markers not allowed to have inputs or icons
+    for (var i = 0, input; input = this.inputList[i]; i++) {
+      input.init();
+    }
+    var icons = this.getIcons();
+    for (i = 0; i < icons.length; i++) {
+      icons[i].createIcon();
+    }
   }
   this.updateColour();
   this.updateMovable();
@@ -253,7 +255,6 @@ Blockly.BlockSvg.terminateDrag_ = function() {
       event.oldCoordinate = selected.dragStartXY_;
       event.recordNew();
       Blockly.Events.fire(event);
-
       selected.moveConnections_(dxy.x, dxy.y);
       delete selected.draggedBubbles_;
       selected.setDragging_(false);
@@ -336,6 +337,14 @@ Blockly.BlockSvg.prototype.getRelativeToSurfaceXY = function() {
       var xy = Blockly.getRelativeXY_(element);
       x += xy.x;
       y += xy.y;
+      // If this element is the current element on the drag surface, include
+      // the translation of the drag surface itself.
+      if (this.workspace.dragSurface &&
+          this.workspace.dragSurface.getCurrentBlock() == element) {
+        var surfaceTranslation = this.workspace.dragSurface.getSurfaceTranslation();
+        x += surfaceTranslation.x;
+        y += surfaceTranslation.y;
+      }
       element = element.parentNode;
     } while (element && element != this.workspace.getCanvas() &&
              element != dragSurfaceGroup);
@@ -474,7 +483,7 @@ Blockly.BlockSvg.prototype.setCollapsed = function(collapsed) {
   var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
   if (collapsed) {
     var icons = this.getIcons();
-    for (var i = 0; i < icons.length; i++) {
+    for (i = 0; i < icons.length; i++) {
       icons[i].setVisible(false);
     }
     var text = this.toString(Blockly.COLLAPSE_CHARS);
@@ -524,7 +533,7 @@ Blockly.BlockSvg.prototype.tab = function(start, forward) {
       }
     }
   }
-  var i = list.indexOf(start);
+  i = list.indexOf(start);
   if (i == -1) {
     // No start location, start at the beginning or end.
     i = forward ? -1 : list.length;
@@ -779,12 +788,12 @@ Blockly.BlockSvg.prototype.moveConnections_ = function(dx, dy) {
     myConnections[i].moveBy(dx, dy);
   }
   var icons = this.getIcons();
-  for (var i = 0; i < icons.length; i++) {
+  for (i = 0; i < icons.length; i++) {
     icons[i].computeIconLocation();
   }
 
   // Recurse through all blocks attached under this one.
-  for (var i = 0; i < this.childBlocks_.length; i++) {
+  for (i = 0; i < this.childBlocks_.length; i++) {
     this.childBlocks_[i].moveConnections_(dx, dy);
   }
 };
@@ -820,7 +829,7 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
   // to keep the position in sync as it move on/off the surface.
   var xy = this.getRelativeToSurfaceXY();
   this.clearTransformAttributes_();
-  this.translate(xy.x, xy.y, Blockly.is3dSupported());
+  this.workspace.dragSurface.translateSurface(xy.x, xy.y);
   // Execute the move on the top-level SVG component
   this.workspace.dragSurface.setBlocksAndShow(this.getSvgRoot());
 };
@@ -831,11 +840,11 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
  * @private
  */
  Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
-  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
   // Translate to current position, turning off 3d.
   var xy = this.getRelativeToSurfaceXY();
   this.clearTransformAttributes_();
   this.translate(xy.x, xy.y, false);
+  this.workspace.dragSurface.clearAndHide(this.workspace.getCanvas());
 };
 
 /**
@@ -896,7 +905,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
     var dx = oldXY.x - this.dragStartXY_.x;
     var dy = oldXY.y - this.dragStartXY_.y;
-    this.translate(newXY.x, newXY.y, Blockly.is3dSupported());
+    this.workspace.dragSurface.translateSurface(newXY.x, newXY.y);
     // Drag all the nested bubbles.
     for (var i = 0; i < this.draggedBubbles_.length; i++) {
       var commentData = this.draggedBubbles_[i];
@@ -915,7 +924,7 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     var closestConnection = null;
     var localConnection = null;
     var radiusConnection = Blockly.SNAP_RADIUS;
-    for (var i = 0; i < myConnections.length; i++) {
+    for (i = 0; i < myConnections.length; i++) {
       var myConnection = myConnections[i];
       var neighbour = myConnection.closest(radiusConnection, dx, dy);
       if (neighbour.connection) {
@@ -978,7 +987,6 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   if (closestConnection &&
       closestConnection != Blockly.highlightedConnection_ &&
       !closestConnection.sourceBlock_.isInsertionMarker()) {
-
     Blockly.highlightedConnection_ = closestConnection;
     Blockly.localConnection_ = localConnection;
     if (!Blockly.insertionMarker_) {
@@ -992,17 +1000,15 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     var insertionMarkerConnection = insertionMarker.getMatchingConnection(
         localConnection.sourceBlock_, localConnection);
     if (insertionMarkerConnection != Blockly.insertionMarkerConnection_) {
-      insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
       insertionMarker.rendered = true;
+      // Render disconnected from everything else so that we have a valid
+      // connection location.
+      insertionMarker.render();
+      insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
       // Move the preview to the correct location before the existing block.
       if (insertionMarkerConnection.type == Blockly.NEXT_STATEMENT) {
-        var relativeXy = localConnection.sourceBlock_.getRelativeToSurfaceXY();
-        var connectionOffsetX = (localConnection.x_ - (relativeXy.x - dx));
-        var connectionOffsetY = (localConnection.y_ - (relativeXy.y - dy));
-        var newX = closestConnection.x_ - connectionOffsetX;
-        var newY = closestConnection.y_ - connectionOffsetY;
-        var insertionPosition = insertionMarker.getRelativeToSurfaceXY();
-
+        var newX = closestConnection.x_ - insertionMarkerConnection.x_;
+        var newY = closestConnection.y_ - insertionMarkerConnection.y_;
         // If it's the first statement connection of a c-block, this block is
         // going to get taller as soon as render() is called below.
         if (insertionMarkerConnection != insertionMarker.nextConnection) {
@@ -1010,8 +1016,7 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
               Blockly.BlockSvg.MIN_BLOCK_Y;
         }
 
-        insertionMarker.moveBy(newX - insertionPosition.x,
-            newY - insertionPosition.y);
+        insertionMarker.moveBy(newX, newY);
 
       }
       if (insertionMarkerConnection.type == Blockly.PREVIOUS_STATEMENT &&

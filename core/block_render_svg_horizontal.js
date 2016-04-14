@@ -146,16 +146,16 @@ Blockly.BlockSvg.NOTCH_PATH_UP =
   'c -1,-1 -2,-2 -2,-4';
 
 /**
-* Width of rendered icons in px
+* Width of rendered image field in px
 * @const
 */
-Blockly.BlockSvg.ICON_WIDTH = 10 * Blockly.BlockSvg.GRID_UNIT;
+Blockly.BlockSvg.IMAGE_FIELD_WIDTH = 10 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
-* Height of rendered icons in px
+* Height of rendered image field in px
 * @const
 */
-Blockly.BlockSvg.ICON_HEIGHT = 10 * Blockly.BlockSvg.GRID_UNIT;
+Blockly.BlockSvg.IMAGE_FIELD_HEIGHT = 10 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
 * y-offset of the top of the field shadow block from the bottom of the block.
@@ -287,7 +287,7 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
 Blockly.BlockSvg.prototype.renderCompute_ = function() {
   var metrics = {
     statement: null,
-    icon: null,
+    imageField: null,
     width: 0,
     height: 0,
     bayHeight: 0,
@@ -316,10 +316,10 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
       }
     }
 
-    // Find icon, input fields
+    // Find image field, input fields
     for (var j = 0, field; field = input.fieldRow[j]; j++) {
       if (field instanceof Blockly.FieldImage) {
-        metrics.icon = field;
+        metrics.imageField = field;
       }
       if (field instanceof Blockly.FieldTextInput) {
         metrics.fieldRadius = field.getBorderRadius();
@@ -327,10 +327,10 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
     }
   }
 
-  // Always render icon at 40x40 px
+  // Always render image field at 40x40 px
   // Normal block sizing
-  metrics.width = Blockly.BlockSvg.SEP_SPACE_X * 2 + Blockly.BlockSvg.ICON_WIDTH;
-  metrics.height = Blockly.BlockSvg.SEP_SPACE_Y * 2 + Blockly.BlockSvg.ICON_HEIGHT;
+  metrics.width = Blockly.BlockSvg.SEP_SPACE_X * 2 + Blockly.BlockSvg.IMAGE_FIELD_WIDTH;
+  metrics.height = Blockly.BlockSvg.SEP_SPACE_Y * 2 + Blockly.BlockSvg.IMAGE_FIELD_HEIGHT;
 
   if (this.outputConnection) {
     // Field shadow block
@@ -379,29 +379,28 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
     this.svgPath_.setAttribute('transform', 'scale(-1 1)');
   }
 
-  // Position icon
-  if (metrics.icon) {
-    var icon = metrics.icon.getSvgRoot();
-    var iconSize = metrics.icon.getSize();
-    // Icon's position is calculated relative to the "end" edge of the block.
-    var iconX = metrics.width - iconSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
-    var iconY = metrics.height - iconSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
-    var iconScale = "scale(1 1)";
+  // Horizontal blocks have a single Image Field that is specially positioned
+  if (metrics.imageField) {
+    var imageField = metrics.imageField.getSvgRoot();
+    var imageFieldSize = metrics.imageField.getSize();
+    // Image field's position is calculated relative to the "end" edge of the block.
+    var imageFieldX = metrics.width - imageFieldSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+    var imageFieldY = metrics.height - imageFieldSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
+    var imageFieldScale = "scale(1 1)";
     if (this.RTL) {
-      // Do we want to mirror the icon left-to-right?
-      if (metrics.icon.getFlipRTL()) {
-        iconScale = "scale(-1 1)";
-        iconX = -metrics.width + iconSize.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+      // Do we want to mirror the Image Field left-to-right?
+      if (metrics.imageField.getFlipRTL()) {
+        imageFieldScale = "scale(-1 1)";
+        imageFieldX = -metrics.width + imageFieldSize.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
       } else {
-        // If not, don't offset by iconSize.width
-        iconX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+        // If not, don't offset by imageFieldSize.width
+        imageFieldX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
       }
     }
-    if (this.isInsertionMarker()) {
-      icon.setAttribute('display', 'none');
+    if (imageField) {
+      imageField.setAttribute('transform',
+        'translate(' + imageFieldX + ',' + imageFieldY + ') ' + imageFieldScale);
     }
-    icon.setAttribute('transform',
-      'translate(' + iconX + ',' + iconY + ') ' + iconScale);
   }
 
   // Position value input

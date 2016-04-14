@@ -66,12 +66,22 @@ goog.inherits(Blockly.BlockSvg, Blockly.Block);
 
 /**
  * Height of this block, not including any statement blocks above or below.
+ * @type {number}
  */
 Blockly.BlockSvg.prototype.height = 0;
+
 /**
  * Width of this block, including any connected value blocks.
+ * @type {number}
  */
 Blockly.BlockSvg.prototype.width = 0;
+
+/**
+ * Opacity of this block between 0 and 1.
+ * @type {number}
+ * @private
+ */
+Blockly.BlockSvg.prototype.opacity_ = 1;
 
 /**
  * Original location of block being dragged.
@@ -464,6 +474,25 @@ Blockly.BlockSvg.prototype.getBoundingRectangle = function() {
         blockXY.y + blockBounds.height);
   }
   return {topLeft: topLeft, bottomRight: bottomRight};
+};
+
+/**
+ * Set block opacity for SVG rendering.
+ * @param {number} opacity Intended opacity, betweeen 0 and 1
+ */
+Blockly.BlockSvg.prototype.setOpacity = function(opacity) {
+  this.opacity_ = opacity;
+  if (this.rendered) {
+    this.updateColour();
+  }
+};
+
+/**
+ * Get block opacity for SVG rendering.
+ * @return {number} Intended opacity, betweeen 0 and 1
+ */
+Blockly.BlockSvg.prototype.getOpacity = function() {
+  return this.opacity_;
 };
 
 /**

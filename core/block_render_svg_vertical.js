@@ -170,6 +170,9 @@ Blockly.BlockSvg.prototype.updateColour = function() {
   }
   this.svgPath_.setAttribute('fill', hexColour);
 
+  // Render opacity
+  this.svgPath_.setAttribute('fill-opacity', this.getOpacity());
+
   // Render block stroke
   var colorShift = goog.color.darken(rgb, 0.1);
   var strokeColor = goog.color.rgbArrayToHex(colorShift);

@@ -217,6 +217,9 @@ Blockly.BlockSvg.prototype.updateColour = function() {
   var fillColour = (this.isGlowing_) ? this.getColourSecondary() : this.getColour();
   this.svgPath_.setAttribute('fill', fillColour);
 
+  // Render opacity
+  this.svgPath_.setAttribute('fill-opacity', this.getOpacity());
+
   // Bump every dropdown to change its colour.
   for (var x = 0, input; input = this.inputList[x]; x++) {
     for (var y = 0, field; field = input.fieldRow[y]; y++) {

@@ -27,6 +27,7 @@
 goog.provide('Blockly.Block');
 
 goog.require('Blockly.Blocks');
+goog.require('Blockly.Colours');
 goog.require('Blockly.Comment');
 goog.require('Blockly.Connection');
 goog.require('Blockly.Input');
@@ -564,7 +565,8 @@ Blockly.Block.prototype.setInsertionMarker = function(insertionMarker) {
   }
   this.isInsertionMarker_ = insertionMarker;
   if (this.isInsertionMarker_) {
-    this.setColour("#949494");
+    this.setColour(Blockly.Colours.insertionMarker);
+    this.setOpacity(Blockly.Colours.insertionMarkerOpacity);
   }
 };
 

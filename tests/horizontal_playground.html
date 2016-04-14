@@ -37,6 +37,11 @@ function start() {
     trashcan: true,
     horizontalLayout: true,
     toolboxPosition: 'start',
+    grid: {spacing: 16,
+      length: 1,
+      colour: '#2C344A',
+      snap: false
+    },
     zoom: {
       controls: true,
       wheel: true,
@@ -45,6 +50,14 @@ function start() {
       minScale: 0.25,
       scaleSpeed: 1.1
     },
+    colours: {
+      workspace: '#334771',
+      flyout: '#283856',
+      scrollbar: '#24324D',
+      scrollbarHover: '#0C111A',
+      insertionMarker: '#FFFFFF',
+      insertionMarkerOpacity: 0.3,
+    }
   });
   // Restore previously displayed text.
   var text = sessionStorage.getItem('textarea');

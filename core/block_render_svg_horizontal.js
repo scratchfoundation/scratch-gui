@@ -158,6 +158,12 @@ Blockly.BlockSvg.IMAGE_FIELD_WIDTH = 10 * Blockly.BlockSvg.GRID_UNIT;
 Blockly.BlockSvg.IMAGE_FIELD_HEIGHT = 10 * Blockly.BlockSvg.GRID_UNIT;
 
 /**
+* y-offset of the top of the field shadow block from the bottom of the block.
+* @const
+*/
+Blockly.BlockSvg.FIELD_Y_OFFSET = -2 * Blockly.BlockSvg.GRID_UNIT;
+
+/**
  * SVG start point for drawing the top-left corner.
  * @const
  */
@@ -222,11 +228,18 @@ Blockly.BlockSvg.prototype.updateColour = function() {
 /**
  * Returns a bounding box describing the dimensions of this block
  * and any blocks stacked below it.
+ * @param {boolean=} opt_ignoreFields True if we should ignore fields in the
+ * size calculation, and just give the size of the base block(s).
  * @return {!{height: number, width: number}} Object with height and width properties.
  */
-Blockly.BlockSvg.prototype.getHeightWidth = function() {
+Blockly.BlockSvg.prototype.getHeightWidth = function(opt_ignoreFields) {
   var height = this.height;
   var width = this.width;
+  // Add the size of the field shadow block.
+  if (!opt_ignoreFields && this.getFieldShadowBlock_()) {
+    height += Blockly.BlockSvg.FIELD_Y_OFFSET;
+    height += Blockly.BlockSvg.FIELD_HEIGHT;
+  }
   // Recursively add size of subsequent blocks.
   var nextBlock = this.getNextBlock();
   if (nextBlock) {
@@ -274,7 +287,6 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
 Blockly.BlockSvg.prototype.renderCompute_ = function() {
   var metrics = {
     statement: null,
-    valueInput: null,
     imageField: null,
     width: 0,
     height: 0,
@@ -298,7 +310,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
       // Expand input size if there is a connection.
       if (input.connection && input.connection.targetConnection) {
         var linkedBlock = input.connection.targetBlock();
-        var bBox = linkedBlock.getHeightWidth();
+        var bBox = linkedBlock.getHeightWidth(true);
         metrics.bayHeight = Math.max(metrics.bayHeight, bBox.height);
         metrics.bayWidth = Math.max(metrics.bayWidth, bBox.width);
       }
@@ -312,12 +324,6 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
       if (field instanceof Blockly.FieldTextInput) {
         metrics.fieldRadius = field.getBorderRadius();
       }
-    }
-  }
-
-  for (var i = 0, child; child = this.childBlocks_[i]; i++) {
-    if (child.isShadow()) {
-      metrics.valueInput = child;
     }
   }
 
@@ -398,15 +404,15 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   }
 
   // Position value input
-  if (metrics.valueInput) {
-    var input = metrics.valueInput.getSvgRoot();
+  if (this.getFieldShadowBlock_()) {
+    var input = this.getFieldShadowBlock_().getSvgRoot();
     var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
       (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
         Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);
     if (this.RTL) {
       valueX = -valueX;
     }
-    var valueY = (metrics.height - 2 * Blockly.BlockSvg.GRID_UNIT);
+    var valueY = (metrics.height + Blockly.BlockSvg.FIELD_Y_OFFSET);
     var transformation = 'translate(' + valueX + ',' + valueY + ')';
     input.setAttribute('transform', transformation);
   }
@@ -601,4 +607,21 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
       '0', '0,0', '-' + metrics.fieldRadius + ',-' + metrics.fieldRadius);
   }
   steps.push('z');
+};
+
+/**
+ * Get the field shadow block, if this block has one.
+ * <p>This is horizontal Scratch-specific, as "fields" are implemented as inputs
+ * with shadow blocks, and there is only one per block.
+ * @return {Blockly.BlockSvg} The field shadow block, or null if not found.
+ * @private
+ */
+Blockly.BlockSvg.prototype.getFieldShadowBlock_ = function() {
+  for (var i = 0, child; child = this.childBlocks_[i]; i++) {
+    if (child.isShadow()) {
+      return child;
+    }
+  }
+
+  return null;
 };

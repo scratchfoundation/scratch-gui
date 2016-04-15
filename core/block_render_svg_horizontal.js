@@ -246,7 +246,7 @@ Blockly.BlockSvg.prototype.getHeightWidth = function(opt_ignoreFields) {
   // Recursively add size of subsequent blocks.
   var nextBlock = this.getNextBlock();
   if (nextBlock) {
-    var nextHeightWidth = nextBlock.getHeightWidth();
+    var nextHeightWidth = nextBlock.getHeightWidth(opt_ignoreFields);
     width += nextHeightWidth.width;
     height = Math.max(height, nextHeightWidth.height);
   }

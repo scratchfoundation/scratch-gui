@@ -109,7 +109,7 @@ function taChange() {
 function logEvents(state) {
   var checkbox = document.getElementById('logCheck');
   checkbox.checked = state;
-  sessionStorage.setItem('logEvents', Number(state));
+  sessionStorage.setItem('logEvents', state ? 'checked' : '');
   if (state) {
     workspace.addChangeListener(logger);
   } else {

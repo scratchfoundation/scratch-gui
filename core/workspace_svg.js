@@ -690,6 +690,9 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
     this.zoom(position.x, position.y, delta);
   } else {
     // This is a regular mouse wheel event - scroll the workspace
+    // First hide the WidgetDiv without animation
+    // (mouse scroll makes field out of place with div)
+    Blockly.WidgetDiv.hide(true);
     var x = this.scrollX - e.deltaX;
     var y = this.scrollY - e.deltaY;
     this.startDragMetrics = this.getMetrics();
@@ -991,6 +994,8 @@ Blockly.WorkspaceSvg.prototype.zoom = function(x, y, type) {
   } else {
     this.translate(0, 0);
   }
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1038,6 +1043,8 @@ Blockly.WorkspaceSvg.prototype.zoomToFit = function() {
   this.scale = newScale;
   this.updateGridPattern_();
   this.scrollbar.resize();
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1056,6 +1063,8 @@ Blockly.WorkspaceSvg.prototype.zoomToFit = function() {
 Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
   this.scale = 1;
   this.updateGridPattern_();
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1091,7 +1100,9 @@ Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
                metrics.contentWidth);
   y = Math.max(y, metrics.viewHeight - metrics.contentTop -
                metrics.contentHeight);
-
+   // When the workspace starts scrolling, hide the WidgetDiv without animation.
+   // This is to prevent a dispoal animation from happening in the wrong location.
+   Blockly.WidgetDiv.hide(true);
   // Move the scrollbars and the page will scroll automatically.
   this.scrollbar.set(-x - metrics.contentLeft,
                      -y - metrics.contentTop);

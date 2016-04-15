@@ -119,8 +119,9 @@ Blockly.WidgetDiv.show = function(newOwner, rtl, opt_dispose,
 
 /**
  * Destroy the widget and hide the div.
+ * @param {boolean=} opt_noAnimate If set, animation will not be run for the hide.
  */
-Blockly.WidgetDiv.hide = function() {
+Blockly.WidgetDiv.hide = function(opt_noAnimate) {
   if (Blockly.WidgetDiv.disposeAnimationTimer_) {
     // An animation timer is set already.
     // This happens when a previous widget was animating out,
@@ -138,13 +139,15 @@ Blockly.WidgetDiv.hide = function() {
     Blockly.WidgetDiv.dispose_ && Blockly.WidgetDiv.dispose_();
     Blockly.WidgetDiv.dispose_ = null;
     // If we want to animate out, set the appropriate timer for final dispose.
-    if (Blockly.WidgetDiv.disposeAnimationFinished_) {
+    if (Blockly.WidgetDiv.disposeAnimationFinished_ && !opt_noAnimate) {
       Blockly.WidgetDiv.disposeAnimationTimer_ = window.setTimeout(
         Blockly.WidgetDiv.hide, // Come back to hide and take the first branch.
         Blockly.WidgetDiv.disposeAnimationTimerLength_ * 1000
       );
     } else {
-      // No timer provided - auto-hide the DOM now.
+      // No timer provided (or no animation desired) - auto-hide the DOM now.
+      Blockly.WidgetDiv.disposeAnimationFinished_ && Blockly.WidgetDiv.disposeAnimationFinished_();
+      Blockly.WidgetDiv.disposeAnimationFinished_ = null;
       Blockly.WidgetDiv.owner_ = null;
       Blockly.WidgetDiv.hideAndClearDom_();
     }

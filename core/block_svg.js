@@ -375,6 +375,7 @@ Blockly.BlockSvg.prototype.moveBy = function(dx, dy) {
   this.moveConnections_(dx, dy);
   event.recordNew();
   Blockly.Events.fire(event);
+  Blockly.WidgetDiv.hide(true);
 };
 
 /**
@@ -923,6 +924,8 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       // drag surface. By moving to the drag surface before unplug, connection
       // positions will be calculated correctly.
       this.moveToDragSurface_();
+      // Clear all WidgetDivs without animating, in case blocks are moved around
+      Blockly.WidgetDiv.hide(true);
       if (this.parentBlock_) {
         // Push this block to the very top of the stack.
         this.unplug();
@@ -1415,7 +1418,6 @@ Blockly.BlockSvg.prototype.removeSelect = function() {
 
 /**
  * Adds the dragging class to this block.
- * Also disables the highlights/shadows to improve performance.
  */
 Blockly.BlockSvg.prototype.addDragging = function() {
   Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),

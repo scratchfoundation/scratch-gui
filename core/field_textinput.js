@@ -27,8 +27,10 @@
 goog.provide('Blockly.FieldTextInput');
 
 goog.require('Blockly.BlockSvg.render');
+goog.require('Blockly.Colours');
 goog.require('Blockly.Field');
 goog.require('Blockly.Msg');
+goog.require('Blockly.utils');
 goog.require('goog.asserts');
 goog.require('goog.dom');
 goog.require('goog.userAgent');
@@ -51,9 +53,24 @@ Blockly.FieldTextInput = function(text, opt_validator) {
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
 /**
- * Point size of text.  Should match blocklyText's font-size in CSS.
+ * Point size of text before animation. Must match size in CSS.
  */
-Blockly.FieldTextInput.FONTSIZE = 11;
+Blockly.FieldTextInput.FONTSIZE_INITIAL = 12;
+
+/**
+ * Point size of text after animation.
+ */
+Blockly.FieldTextInput.FONTSIZE_FINAL = 14;
+
+/**
+ * Length of animations in seconds.
+ */
+Blockly.FieldTextInput.ANIMATION_TIME = 0.25;
+
+/**
+ * Padding to use for text measurement for the field during editing, in px.
+ */
+Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC = 35;
 
 /**
  * Mouse cursor style when over the hotspot that initiates the editor.
@@ -125,17 +142,15 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
     return;
   }
 
-  Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL, this.widgetDispose_());
+  Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL,
+      this.widgetDispose_(), this.widgetDisposeAnimationFinished_(),
+      Blockly.FieldTextInput.ANIMATION_TIME);
   var div = Blockly.WidgetDiv.DIV;
   // Apply text-input-specific fixed CSS
   div.className += ' fieldTextInput';
   // Create the input.
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   htmlInput.setAttribute('spellcheck', this.spellcheck_);
-  var fontSize =
-      (Blockly.FieldTextInput.FONTSIZE) + 'pt';
-  div.style.fontSize = fontSize;
-  htmlInput.style.fontSize = fontSize;
   /** @type {!HTMLInputElement} */
   Blockly.FieldTextInput.htmlInput_ = htmlInput;
   div.appendChild(htmlInput);
@@ -160,6 +175,17 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
       Blockly.bindEvent_(htmlInput, 'keypress', this, this.onHtmlInputChange_);
   htmlInput.onWorkspaceChangeWrapper_ = this.resizeEditor_.bind(this);
   this.workspace_.addChangeListener(htmlInput.onWorkspaceChangeWrapper_);
+
+  // Add animation transition properties
+  div.style.transition = 'padding ' + Blockly.FieldTextInput.ANIMATION_TIME + 's,' +
+    'width ' + Blockly.FieldTextInput.ANIMATION_TIME + 's,' +
+    'height ' + Blockly.FieldTextInput.ANIMATION_TIME + 's,' +
+    'margin-left ' + Blockly.FieldTextInput.ANIMATION_TIME + 's,' +
+    'box-shadow ' + Blockly.FieldTextInput.ANIMATION_TIME + 's';
+  htmlInput.style.transition = 'font-size ' + Blockly.FieldTextInput.ANIMATION_TIME + 's';
+  // The animated properties themselves
+  htmlInput.style.fontSize = Blockly.FieldTextInput.FONTSIZE_FINAL + 'pt';
+  div.style.boxShadow = '0px 0px 0px 4px ' + Blockly.Colours.fieldShadow;
 };
 
 /**
@@ -229,14 +255,29 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   var scale = this.sourceBlock_.workspace.scale;
   var div = Blockly.WidgetDiv.DIV;
-  var bBox = this.getScaledBBox_();
-  // The width of this box must be at least FIELD_WIDTH * scale.
-  // It may be smaller as bBox is based on the content size.
-  var width = Math.max(bBox.width, Blockly.BlockSvg.FIELD_WIDTH * scale);
+  // Resize the box based on the measured width of the text, pre-truncation
+  var textWidth = Blockly.measureText(
+    Blockly.FieldTextInput.htmlInput_.style.fontSize,
+    Blockly.FieldTextInput.htmlInput_.style.fontFamily,
+    Blockly.FieldTextInput.htmlInput_.value
+  );
+  // Size drawn in the canvas needs padding and scaling
+  textWidth += Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC;
+  textWidth *= scale;
+  // The width must be at least FIELD_WIDTH and at most FIELD_WIDTH_MAX_EDIT
+  var width = Math.max(textWidth, Blockly.BlockSvg.FIELD_WIDTH_MIN_EDIT * scale);
+  width = Math.min(width, Blockly.BlockSvg.FIELD_WIDTH_MAX_EDIT * scale);
   // Add 1px to width and height to account for border (pre-scale)
   div.style.width = (width / scale + 1) + 'px';
-  div.style.height = (bBox.height / scale + 1) + 'px';
+  div.style.height = (Blockly.BlockSvg.FIELD_HEIGHT_MAX_EDIT + 1) + 'px';
   div.style.transform = 'scale(' + scale + ')';
+
+  // Use margin-left to animate repositioning of the box (value is unscaled).
+  // This is the difference between the default position and the positioning
+  // after growing the box.
+  var initialWidth = Blockly.BlockSvg.FIELD_WIDTH * scale;
+  var finalWidth = width;
+  div.style.marginLeft = -0.5 * (finalWidth - initialWidth) + 'px';
 
   // Add 0.5px to account for slight difference between SVG and CSS border
   var borderRadius = this.getBorderRadius() + 0.5;
@@ -285,14 +326,14 @@ Blockly.Field.prototype.getBorderRadius = function() {
 };
 
 /**
- * Close the editor, save the results, and dispose of the editable
- * text field's elements.
+ * Close the editor, save the results, and start animating the disposal of elements.
  * @return {!Function} Closure to call on destruction of the WidgetDiv.
  * @private
  */
 Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
   var thisField = this;
   return function() {
+    var div = Blockly.WidgetDiv.DIV;
     var htmlInput = Blockly.FieldTextInput.htmlInput_;
     // Save the edit (if it validates).
     var text = htmlInput.value;
@@ -313,7 +354,23 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
     thisField.workspace_.removeChangeListener(
         htmlInput.onWorkspaceChangeWrapper_);
-    Blockly.FieldTextInput.htmlInput_ = null;
+
+    // Animation of disposal
+    htmlInput.style.fontSize = Blockly.FieldTextInput.FONTSIZE_INITIAL + 'pt';
+    div.style.boxShadow = '';
+    div.style.width = Blockly.BlockSvg.FIELD_WIDTH + 'px';
+    div.style.height = Blockly.BlockSvg.FIELD_HEIGHT + 'px';
+    div.style.marginLeft = 0;
+  };
+};
+
+/**
+ * Final disposal of the text field's elements and properties.
+ * @return {!Function} Closure to call on finish animation of the WidgetDiv.
+ * @private
+ */
+Blockly.FieldTextInput.prototype.widgetDisposeAnimationFinished_ = function() {
+  return function() {
     // Delete style properties.
     var style = Blockly.WidgetDiv.DIV.style;
     style.width = 'auto';
@@ -321,6 +378,10 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     style.fontSize = '';
     // Reset class
     Blockly.WidgetDiv.DIV.className = 'blocklyWidgetDiv';
+    // Reset transitions
+    Blockly.WidgetDiv.DIV.style.transition = '';
+    Blockly.FieldTextInput.htmlInput_.style.transition = '';
+    Blockly.FieldTextInput.htmlInput_ = null;
   };
 };
 

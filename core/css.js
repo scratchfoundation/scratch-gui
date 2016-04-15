@@ -91,7 +91,11 @@ Blockly.Css.inject = function(hasCss, pathToMedia) {
   // been set at run-time injection.
   for (var colourProperty in Blockly.Colours) {
     if (Blockly.Colours.hasOwnProperty(colourProperty)) {
-      text = text.replace('$colour_' + colourProperty, Blockly.Colours[colourProperty]);
+      // Replace all
+      text = text.replace(
+        new RegExp('\\$colour\\_' + colourProperty, 'g'),
+        Blockly.Colours[colourProperty]
+      );
     }
   }
   // Inject CSS tag.
@@ -253,6 +257,11 @@ Blockly.Css.CONTENT = [
     'cursor: default;',
     'fill: #fff;',
     'font-family: sans-serif;',
+    'font-size: 12pt;',
+    'font-weight: 600;',
+  '}',
+
+  '.blocklyTextTruncated {',
     'font-size: 11pt;',
   '}',
 
@@ -334,13 +343,16 @@ Blockly.Css.CONTENT = [
   '.blocklyHtmlInput {',
     'border: none;',
     'font-family: sans-serif;',
+    'font-size: 12pt;',
     'height: 100%;',
     'margin: 0;',
     'outline: none;',
-    'padding: 2px 0;',
+    'box-sizing: border-box;',
+    'padding: 2px 8px 0 8px;',
     'width: 100%;',
     'text-align: center;',
     'color: $colour_text;',
+    'font-weight: 600;',
   '}',
 
   '.blocklyMainBackground {',

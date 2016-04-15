@@ -39,5 +39,7 @@ Blockly.Colours = {
   "scrollbarHover": '#BBBBBB',
   "textField": "#FFFFFF",
   "insertionMarker": "#949494",
-  "insertionMarkerOpacity": 0.6
+  "insertionMarkerOpacity": 0.6,
+  // CSS colours: support RGBA
+  "fieldShadow": "rgba(0,0,0,0.1)"
 };

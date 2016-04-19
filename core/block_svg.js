@@ -657,22 +657,8 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   Blockly.setPageSelectable(true);
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
-    if (Blockly.localConnection_ ==
-        Blockly.selected.getFirstStatementConnection()) {
-      // Snap to match the position of the pre-existing stack.  Since this is a
-      // C-block, shift to take into account how the block will stretch as it
-      // surrounds the internal blocks.
-      Blockly.selected.moveBy(
-          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
-          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_ -
-          (Blockly.highlightedConnection_.sourceBlock_.getHeightWidth().height -
-          Blockly.BlockSvg.MIN_BLOCK_Y));
-    } else if (Blockly.localConnection_.type == Blockly.NEXT_STATEMENT) {
-      // Snap to match the position of the pre-existing stack.
-      Blockly.selected.moveBy(
-          Blockly.highlightedConnection_.x_ - Blockly.localConnection_.x_,
-          Blockly.highlightedConnection_.y_ - Blockly.localConnection_.y_);
-    }
+    this.positionNewBlock(
+        Blockly.localConnection_, Blockly.highlightedConnection_);
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
     if (this.rendered) {
@@ -1037,20 +1023,9 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       // connection location.
       insertionMarker.render();
       insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
-      // Move the preview to the correct location before the existing block.
-      if (insertionMarkerConnection.type == Blockly.NEXT_STATEMENT) {
-        var newX = closestConnection.x_ - insertionMarkerConnection.x_;
-        var newY = closestConnection.y_ - insertionMarkerConnection.y_;
-        // If it's the first statement connection of a c-block, this block is
-        // going to get taller as soon as render() is called below.
-        if (insertionMarkerConnection != insertionMarker.nextConnection) {
-          newY -= closestConnection.sourceBlock_.getHeightWidth().height -
-              Blockly.BlockSvg.MIN_BLOCK_Y;
-        }
 
-        insertionMarker.moveBy(newX, newY);
+      this.positionNewBlock(insertionMarkerConnection, closestConnection);
 
-      }
       if (insertionMarkerConnection.type == Blockly.PREVIOUS_STATEMENT &&
           !insertionMarker.nextConnection) {
         Blockly.bumpedConnection_ = closestConnection.targetConnection;

@@ -998,7 +998,7 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   // Remove an insertion marker if needed.  For Scratch-Blockly we are using
   // grayed-out blocks instead of highlighting the connection; for compatibility
   // with Web Blockly the name "highlightedConnection" will still be used.
-  if (Blockly.highlightedConnection_ &&
+  if (Blockly.highlightedConnection_ && blockly.localConnection_ &&
       (Blockly.highlightedConnection_ != closestConnection ||
        Blockly.localConnection_ != localConnection)) {
     if (Blockly.insertionMarker_ && Blockly.insertionMarkerConnection_) {

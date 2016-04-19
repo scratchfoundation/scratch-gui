@@ -999,7 +999,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
   // grayed-out blocks instead of highlighting the connection; for compatibility
   // with Web Blockly the name "highlightedConnection" will still be used.
   if (Blockly.highlightedConnection_ &&
-      Blockly.highlightedConnection_ != closestConnection) {
+      (Blockly.highlightedConnection_ != closestConnection ||
+       Blockly.localConnection_ != localConnection)) {
     if (Blockly.insertionMarker_ && Blockly.insertionMarkerConnection_) {
       Blockly.BlockSvg.disconnectInsertionMarker();
     }

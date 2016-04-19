@@ -1055,9 +1055,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
           !insertionMarker.nextConnection) {
         Blockly.bumpedConnection_ = closestConnection.targetConnection;
       }
-      // Renders insertin marker.
+      // Renders insertion marker.
       insertionMarkerConnection.connect(closestConnection);
-      // Render dragging block so it appears on top.
       Blockly.insertionMarkerConnection_ = insertionMarkerConnection;
     }
   }

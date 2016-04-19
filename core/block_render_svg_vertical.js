@@ -749,18 +749,20 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
 /**
  * Position an new block correctly, so that it doesn't move the existing block
  * when connected to it.
- * @param {Blockly.Connection} newConnection The connection on the new block.
+ * @param {Blockly.Block} newBlock The connection on the new block.
+ * @param {Blockly.Connection} newConnection The connection on the new block's
+ *     stack.
  * @param {Blockly.Connection} existingConnection The connection on the existing
  *     block.
  */
 Blockly.BlockSvg.prototype.positionNewBlock =
-    function(newConnection, existingConnection) {
+    function(newBlock, newConnection, existingConnection) {
   // We only need to position the new block if it's before the existing one,
   // otherwise its position is set by the previous block.
   if (newConnection.type == Blockly.NEXT_STATEMENT) {
     var dx = existingConnection.x_ - newConnection.x_;
     var dy = existingConnection.y_ - newConnection.y_;
 
-    newConnection.sourceBlock_.moveBy(dx, dy);
+    newBlock.moveBy(dx, dy);
   }
 }

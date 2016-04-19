@@ -651,14 +651,14 @@ Blockly.BlockSvg.prototype.getFieldShadowBlock_ = function() {
 /**
  * Position an new block correctly, so that it doesn't move the existing block
  * when connected to it.
- * @param {Blockly.Connection} newConnection The connection on the new block.
+ * @param {Blockly.Block} newBlock The connection on the new block.
+ * @param {Blockly.Connection} newConnection The connection on the new block's
+ *     stack.
  * @param {Blockly.Connection} existingConnection The connection on the existing
  *     block.
  */
 Blockly.BlockSvg.prototype.positionNewBlock =
-    function(newConnection, existingConnection) {
-  var newBlock = newConnection.sourceBlock_;
-
+    function(newBlock, newConnection, existingConnection) {
   // We only need to position the new block if it's before the existing one,
   // otherwise its position is set by the previous block.
   if (newConnection.type == Blockly.NEXT_STATEMENT) {
@@ -668,7 +668,7 @@ Blockly.BlockSvg.prototype.positionNewBlock =
     // When putting a c-block around another c-block, the outer block must
     // positioned above the inner block, as its connection point will stretch
     // downwards when connected.
-    if (newConnection != newBlock.nextConnection) {
+    if (newConnection == newBlock.getFirstStatementConnection()) {
       dy -= existingConnection.sourceBlock_.getHeightWidth(true).height -
           Blockly.BlockSvg.MIN_BLOCK_Y;
     }

@@ -657,7 +657,7 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   Blockly.setPageSelectable(true);
   Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
-    this.positionNewBlock(
+    this.positionNewBlock(Blockly.selected,
         Blockly.localConnection_, Blockly.highlightedConnection_);
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
@@ -992,8 +992,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
     // If there's already an insertion marker but it's representing the wrong
     // block, delete it so we can create the correct one.
     if (Blockly.insertionMarker_ &&
-        (candidateIsLast && Blockly.localConnection_.sourceBlock_ == this) ||
-        (!candidateIsLast && Blockly.localConnection_.sourceBlock_ != this)) {
+        ((candidateIsLast && Blockly.localConnection_.sourceBlock_ == this) ||
+         (!candidateIsLast && Blockly.localConnection_.sourceBlock_ != this))) {
       Blockly.insertionMarker_.dispose();
       Blockly.insertionMarker_ = null;
     }
@@ -1024,7 +1024,8 @@ Blockly.BlockSvg.prototype.updatePreviews = function(closestConnection,
       insertionMarker.render();
       insertionMarker.getSvgRoot().setAttribute('visibility', 'visible');
 
-      this.positionNewBlock(insertionMarkerConnection, closestConnection);
+      this.positionNewBlock(insertionMarker,
+          insertionMarkerConnection, closestConnection);
 
       if (insertionMarkerConnection.type == Blockly.PREVIOUS_STATEMENT &&
           !insertionMarker.nextConnection) {

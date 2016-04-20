@@ -654,8 +654,9 @@ Blockly.BlockSvg.prototype.getFieldShadowBlock_ = function() {
  * @param {!Blockly.Block} newBlock The block to position - either the first
  *     block in a dragged stack or an insertion marker.
  * @param {!Blockly.Connection} newConnection The connection on the new block's
- *     stack - either a connection on newBlock, or the NEXT_STATEMENT connection
- *     on the stack if the stack's being dropped before another block.
+ *     stack - either a connection on newBlock, or the last NEXT_STATEMENT
+ *     connection on the stack if the stack's being dropped before another
+ *     block.
  * @param {!Blockly.Connection} existingConnection The connection on the
  *     existing block, which newBlock should line up with.
  */

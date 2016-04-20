@@ -40,6 +40,7 @@ Blockly.Colours = {
   "textField": "#FFFFFF",
   "insertionMarker": "#949494",
   "insertionMarkerOpacity": 0.6,
+  "dragShadowOpacity": 0.3,
   // CSS colours: support RGBA
   "fieldShadow": "rgba(0,0,0,0.1)"
 };

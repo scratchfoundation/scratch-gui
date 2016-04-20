@@ -751,11 +751,11 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
 
     // Option to delete this block.
     // Count the number of blocks that are nested in this block.
-    var descendantCount = this.getDescendants().length;
+    var descendantCount = this.getDescendants(true).length;
     var nextBlock = this.getNextBlock();
     if (nextBlock) {
       // Blocks in the current stack would survive this block's deletion.
-      descendantCount -= nextBlock.getDescendants().length;
+      descendantCount -= nextBlock.getDescendants(true).length;
     }
     var deleteOption = {
       text: descendantCount == 1 ? Blockly.Msg.DELETE_BLOCK :

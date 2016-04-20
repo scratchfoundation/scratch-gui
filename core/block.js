@@ -487,12 +487,15 @@ Blockly.Block.prototype.setParent = function(newParent) {
  * Includes this block in the list.
  * Includes value and block inputs, as well as any following statements.
  * Excludes any connection on an output tab or any preceding statements.
+ * @param {boolean=} opt_ignoreShadows If set, don't include shadow blocks.
  * @return {!Array.<!Blockly.Block>} Flattened array of blocks.
  */
-Blockly.Block.prototype.getDescendants = function() {
+Blockly.Block.prototype.getDescendants = function(opt_ignoreShadows) {
   var blocks = [this];
   for (var child, x = 0; child = this.childBlocks_[x]; x++) {
-    blocks.push.apply(blocks, child.getDescendants());
+    if (!opt_ignoreShadows || !child.isShadow_) {
+      blocks.push.apply(blocks, child.getDescendants(opt_ignoreShadows));
+    }
   }
   return blocks;
 };

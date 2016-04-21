@@ -70,6 +70,9 @@ function start() {
   // Restore event logging state.
   var state = sessionStorage.getItem('logEvents');
   logEvents(Boolean(state));
+  // Restore flyout event logging state.
+  state = sessionStorage.getItem('logFlyoutEvents');
+  logFlyoutEvents(Boolean(state));
 }
 
 function toXml() {
@@ -116,6 +119,17 @@ function logEvents(state) {
     workspace.addChangeListener(logger);
   } else {
     workspace.removeChangeListener(logger);
+  }
+}
+
+function logFlyoutEvents(state) {
+  var checkbox = document.getElementById('logFlyoutCheck');
+  checkbox.checked = state;
+  sessionStorage.setItem('logFlyoutEvents', state ? 'checked' : '');
+  if (state) {
+    workspace.toolbox_.flyout_.workspace_.addChangeListener(logger);
+  } else {
+    workspace.toolbox_.flyout_.workspace_.removeChangeListener(logger);
   }
 }
 
@@ -299,9 +313,17 @@ h1 {
     <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
   </p>
   <p>
+    Log flyout events: &nbsp;
+    <input type="checkbox" onclick="logFlyoutEvents(this.checked)" id="logFlyoutCheck">
+  </p>
+  <p>
     Stress test: &nbsp;
     <input type="button" value="Sprinkles!" onclick="sprinkles(100)">
     <input type="button" value="Spaghetti!" onclick="spaghetti(10)">
+  </p>
+  <p>
+    <input type="button" value="Undo" onclick="workspace.undo()" />
+    <input type="button" value="Redo" onclick="workspace.undo(true)" />
   </p>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Vertical Blockly Playground</title>
 <script src="../blockly_uncompressed_vertical.js"></script>
 <script src="../generators/javascript.js"></script>
@@ -13,7 +14,6 @@
 <script src="../blocks/math.js"></script>
 <script src="../blocks/text.js"></script>
 <script src="../blocks_horizontal/control.js"></script>
-<script src="../blocks_horizontal/dropdown.js"></script>
 <script src="../blocks_horizontal/event.js"></script>
 <script src="../blocks_horizontal/wedo.js"></script>
 <script>
@@ -23,6 +23,14 @@ var rtl = (document.location.search == '?rtl');
 var workspace = null;
 
 function start() {
+  // Restore sounds state.
+  var soundsEnabled = sessionStorage.getItem('soundsEnabled');
+  if (soundsEnabled === null) {
+    soundsEnabled = true;
+  } else {
+    soundsEnabled = (soundsEnabled === 'true');
+  }
+  setSoundsEnabled(soundsEnabled);
   var toolbox = document.getElementById('toolbox');
   workspace = Blockly.inject('blocklyDiv', {
     comments: false,
@@ -36,6 +44,7 @@ function start() {
     toolbox: toolbox,
     toolboxPosition: 'start',
     trashcan: true,
+    sounds: soundsEnabled,
     zoom: {
       controls: true,
       wheel: true,
@@ -119,6 +128,12 @@ function logFlyoutEvents(state) {
 
 function logger(e) {
   console.log(e);
+}
+
+function setSoundsEnabled(state) {
+  var checkbox = document.getElementById('soundsEnabled');
+  checkbox.checked = (state) ? 'checked' : '';
+  sessionStorage.setItem('soundsEnabled', state);
 }
 
 </script>
@@ -262,6 +277,10 @@ h1 {
   <p>
     Log flyout events: &nbsp;
     <input type="checkbox" onclick="logFlyoutEvents(this.checked)" id="logFlyoutCheck">
+  </p>
+  <p>
+    Enable sounds (after refresh): &nbsp;
+    <input type="checkbox" onclick="setSoundsEnabled(this.checked)" id="soundsEnabled">
   </p>
   <p>
     <input type="button" value="Undo" onclick="workspace.undo()" />

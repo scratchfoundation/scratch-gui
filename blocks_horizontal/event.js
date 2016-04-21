@@ -38,6 +38,38 @@ Blockly.Blocks['event_whenflagclicked'] = {
   }
 };
 
+Blockly.Blocks['dropdown_whenbroadcast'] = {
+  /**
+   * Block for broadcast dropdown (used for shadow).
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldIconMenu([
+            {type: 'placeholder', width: 50, height: 50},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Blue.svg',
+              value: 'blue', width: 50, height: 50, alt: 'Blue'},
+            {type: 'placeholder', width: 50, height: 50},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Green.svg',
+              value: 'green', width: 50, height: 50, alt: 'Green'},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Orange.svg',
+              value: 'orange', width: 50, height: 50, alt: 'Orange'},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Purple.svg',
+              value: 'purple', width: 50, height: 50, alt: 'Purple'},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Red.svg',
+              value: 'red', width: 50, height: 50, alt: 'Red'},
+            {type: 'placeholder', width: 50, height: 50},
+            {src: Blockly.mainWorkspace.options.pathToMedia + 'icons/LetterGet_Yellow.svg',
+              value: 'yellow', width: 50, height: 50, alt: 'Yellow'}
+        ]), 'CHOICE');
+    this.setOutput(true);
+    this.setColour(Blockly.Colours.event.primary,
+      Blockly.Colours.event.secondary,
+      Blockly.Colours.event.tertiary
+    );
+  }
+};
+
 Blockly.Blocks['event_whenbroadcastreceived'] = {
   /**
    * Block for when broadcast received.
@@ -46,7 +78,7 @@ Blockly.Blocks['event_whenbroadcastreceived'] = {
   init: function() {
     this.jsonInit({
       "id": "event_whenbroadcastreceived",
-      "message0": "%1",
+      "message0": "%1 %2",
       "args0": [
         {
           "type": "field_image",
@@ -55,6 +87,10 @@ Blockly.Blocks['event_whenbroadcastreceived'] = {
           "height": 40,
           "alt": "flag",
           "flip_rtl": true
+        },
+        {
+          "type": "input_value",
+          "name": "CHOICE"
         }
       ],
       "inputsInline": true,

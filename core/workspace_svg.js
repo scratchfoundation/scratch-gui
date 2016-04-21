@@ -404,6 +404,7 @@ Blockly.WorkspaceSvg.prototype.setVisible = function(isVisible) {
     }
   } else {
     Blockly.hideChaff(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
   }
 };
 
@@ -606,6 +607,7 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
   Blockly.svgResize(this);
   Blockly.terminateDrag_();  // In case mouse-up event was lost.
   Blockly.hideChaff();
+  Blockly.DropDownDiv.hide();
   var isTargetWorkspace = e.target && e.target.nodeName &&
       (e.target.nodeName.toLowerCase() == 'svg' ||
        e.target == this.svgBackground_);
@@ -693,6 +695,7 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
     // First hide the WidgetDiv without animation
     // (mouse scroll makes field out of place with div)
     Blockly.WidgetDiv.hide(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
     var x = this.scrollX - e.deltaX;
     var y = this.scrollY - e.deltaY;
     this.startDragMetrics = this.getMetrics();
@@ -996,6 +999,7 @@ Blockly.WorkspaceSvg.prototype.zoom = function(x, y, type) {
   }
   // Hide the WidgetDiv without animation (zoom makes field out of place with div)
   Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1045,6 +1049,7 @@ Blockly.WorkspaceSvg.prototype.zoomToFit = function() {
   this.scrollbar.resize();
   // Hide the WidgetDiv without animation (zoom makes field out of place with div)
   Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1065,6 +1070,7 @@ Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
   this.updateGridPattern_();
   // Hide the WidgetDiv without animation (zoom makes field out of place with div)
   Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
@@ -1103,6 +1109,7 @@ Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
    // When the workspace starts scrolling, hide the WidgetDiv without animation.
    // This is to prevent a dispoal animation from happening in the wrong location.
    Blockly.WidgetDiv.hide(true);
+   Blockly.DropDownDiv.hideWithoutAnimation();
   // Move the scrollbars and the page will scroll automatically.
   this.scrollbar.set(-x - metrics.contentLeft,
                      -y - metrics.contentTop);

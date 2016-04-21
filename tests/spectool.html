@@ -15,8 +15,7 @@
 <script src="../blocks/text.js"></script>
 <script src="../blocks_horizontal/control.js"></script>
 <script src="../blocks_horizontal/event.js"></script>
-<script src="../blocks_horizontal/looks.js"></script>
-<script src="../blocks_horizontal/motion.js"></script>
+<script src="../blocks_horizontal/wedo.js"></script>
 <script>
 'use strict';
 // Depending on the URL argument, render as LTR or RTL.
@@ -87,23 +86,27 @@ h1 {
   <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
-    <category name="Looks">
-      <block type="looks_say">
-        <value name="MESSAGE">
-          <shadow type="text">
-            <field name="TEXT">Hey!</field>
+    <category name="Events">
+      <block type="event_whenflagclicked"></block>
+      <block type="event_whenbroadcastreceived">
+        <value name="CHOICE">
+          <shadow type="dropdown_whenbroadcast">
+            <field name="CHOICE">blue</field>
           </shadow>
         </value>
       </block>
+      <block type="event_broadcast">
+      </block>
+      <block type="event_broadcast_text">
+          <value name="STRING">
+            <shadow type="text">
+              <field name="TEXT">Hi</field>
+            </shadow>
+          </value>
+      </block>
     </category>
-    <category name="Events">
-      <block type="event_whenflagclicked"></block>
-    </category>
-    <category name="Motion">
-      <block type="motion_moveright"></block>
-    </category>
-      <!-- <block type="control_repeat"></block> -->
-    <category name="Pants">
+
+    <category name="Control">
       <block type="control_forever"></block>
       <block type="control_repeat">
         <value name="TIMES">
@@ -112,6 +115,38 @@ h1 {
           </shadow>
         </value>
       </block>
+      <block type="control_stop"></block>
+      <block type="control_wait">
+        <value name="DURATION">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Wedo">
+        <block type="wedo_setcolor">
+        </block>
+        <block type="wedo_motorclockwise">
+            <value name="DURATION">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+        </block>
+        <block type="wedo_motorcounterclockwise">
+            <value name="DURATION">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+        </block>
+        <block type="wedo_motorspeed">
+        </block>
+        <block type="wedo_whentilt">
+        </block>
+        <block type="wedo_whendistanceclose"></block>
     </category>
   </xml>
 

@@ -424,9 +424,10 @@ Blockly.Scrollbar.prototype.onMouseDownBar_ = function(e) {
   }
   this.svgKnob_.setAttribute(this.horizontal_ ? 'x' : 'y',
                              this.constrainKnob_(knobValue));
-  // When the scrollbars are clicked, hide the WidgetDiv without animation
+  // When the scrollbars are clicked, hide the WidgetDiv/DropDownDiv without animation
   // in anticipation of a workspace move.
   Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   this.onScroll_();
   e.stopPropagation();
 };
@@ -455,9 +456,10 @@ Blockly.Scrollbar.prototype.onMouseDownKnob_ = function(e) {
       'mouseup', this, this.onMouseUpKnob_);
   Blockly.Scrollbar.onMouseMoveWrapper_ = Blockly.bindEvent_(document,
       'mousemove', this, this.onMouseMoveKnob_);
-  // When the scrollbars are clicked, hide the WidgetDiv without animation
+  // When the scrollbars are clicked, hide the WidgetDiv/DropDownDiv without animation
   // in anticipation of a workspace move.
   Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   e.stopPropagation();
 };
 

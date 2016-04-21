@@ -185,8 +185,15 @@ h1 {
   <xml id="toolbox_categories" style="display: none">
     <category name="Events">
       <block type="event_whenflagclicked"></block>
-      <block type="event_whenbroadcastreceived"></block>
-      <block type="event_broadcast"></block>
+      <block type="event_whenbroadcastreceived">
+        <value name="CHOICE">
+          <shadow type="dropdown_whenbroadcast">
+            <field name="CHOICE">blue</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="event_broadcast">
+      </block>
       <block type="event_broadcast_text">
           <value name="STRING">
             <shadow type="text">
@@ -216,7 +223,8 @@ h1 {
     </category>
 
     <category name="Wedo">
-        <block type="wedo_setcolor"></block>
+        <block type="wedo_setcolor">
+        </block>
         <block type="wedo_motorclockwise">
             <value name="DURATION">
               <shadow type="math_number">
@@ -231,8 +239,10 @@ h1 {
               </shadow>
             </value>
         </block>
-        <block type="wedo_motorspeed"></block>
-        <block type="wedo_whentilt"></block>
+        <block type="wedo_motorspeed">
+        </block>
+        <block type="wedo_whentilt">
+        </block>
         <block type="wedo_whendistanceclose"></block>
     </category>
   </xml>

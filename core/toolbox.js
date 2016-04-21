@@ -158,6 +158,7 @@ Blockly.Toolbox.prototype.init = function() {
   // Clicking on toolbar closes popups.
   Blockly.bindEvent_(this.HtmlDiv, 'mousedown', this,
       function(e) {
+        Blockly.DropDownDiv.hide();
         if (Blockly.isRightButton(e) || e.target == this.HtmlDiv) {
           // Close flyout.
           Blockly.hideChaff(false);

@@ -28,6 +28,7 @@
 goog.provide('Blockly');
 
 goog.require('Blockly.BlockSvg.render');
+goog.require('Blockly.DropDownDiv');
 goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
@@ -36,6 +37,7 @@ goog.require('Blockly.FieldColour');
 // Add it only if you need it.
 //goog.require('Blockly.FieldDate');
 goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.FieldIconMenu');
 goog.require('Blockly.FieldImage');
 goog.require('Blockly.FieldTextInput');
 goog.require('Blockly.FieldVariable');
@@ -248,8 +250,9 @@ Blockly.onKeyDown_ = function(e) {
   }
   var deleteBlock = false;
   if (e.keyCode == 27) {
-    // Pressing esc closes the context menu.
+    // Pressing esc closes the context menu and any drop-down
     Blockly.hideChaff();
+    Blockly.DropDownDiv.hide();
   } else if (e.keyCode == 8 || e.keyCode == 46) {
     // Delete or backspace.
     try {

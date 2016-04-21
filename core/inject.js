@@ -30,6 +30,7 @@ goog.require('Blockly.Css');
 goog.require('Blockly.Options');
 goog.require('Blockly.WorkspaceSvg');
 goog.require('Blockly.DragSurfaceSvg');
+goog.require('Blockly.DropDownDiv');
 goog.require('goog.dom');
 goog.require('goog.ui.Component');
 goog.require('goog.userAgent');
@@ -226,6 +227,7 @@ Blockly.createMainWorkspace_ = function(svg, options, dragSurface) {
   // The SVG is now fully assembled.
   Blockly.svgResize(mainWorkspace);
   Blockly.WidgetDiv.createDom();
+  Blockly.DropDownDiv.createDom();
   Blockly.Tooltip.createDom();
   return mainWorkspace;
 };

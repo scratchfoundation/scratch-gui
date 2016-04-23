@@ -177,6 +177,16 @@ Blockly.Flyout.prototype.verticalOffset_ = 0;
 Blockly.Flyout.prototype.dragAngleRange_ = 70;
 
 /**
+ * Is the flyout dragging (scrolling)?
+ * 0 - DRAG_NONE - no drag is ongoing or state is undetermined
+ * 1 - DRAG_STICKY - still within the sticky drag radius
+ * 2 - DRAG_FREE - in scroll mode (never create a new block)
+ * @private
+ */
+Blockly.Flyout.prototype.dragMode_ = Blockly.DRAG_NONE;
+
+
+/**
  * Creates the flyout's DOM.  Only needs to be called once.
  * @return {!Element} The flyout's SVG group.
  */
@@ -696,7 +706,7 @@ Blockly.Flyout.prototype.addBlockListeners_ = function(root, block, rect) {
     this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block,
         block.removeSelect));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
-        this.createBlockFunc_(block)));
+        this.blockMouseDown_(block)));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block,
         block.addSelect));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseout', block,
@@ -712,6 +722,7 @@ Blockly.Flyout.prototype.addBlockListeners_ = function(root, block, rect) {
 Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
   var flyout = this;
   return function(e) {
+    flyout.dragMode_ = Blockly.DRAG_NONE;
     Blockly.terminateDrag_();
     Blockly.hideChaff();
     if (Blockly.isRightButton(e)) {
@@ -742,6 +753,7 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
  * @private
  */
 Blockly.Flyout.prototype.onMouseDown_ = function(e) {
+  this.dragMode_ = Blockly.DRAG_FREE;
   if (Blockly.isRightButton(e)) {
     return;
   }
@@ -804,19 +816,45 @@ Blockly.Flyout.prototype.onMouseMoveBlock_ = function(e) {
   var dx = e.clientX - Blockly.Flyout.startDownEvent_.clientX;
   var dy = e.clientY - Blockly.Flyout.startDownEvent_.clientY;
 
-  // Only create a block if the user is dragging toward the workspace,
-  // Otherwise the drag might be the start of a scroll in the flyout.
-  // Don't create a block within the sticky drag radius.
-  if (Blockly.Flyout.startFlyout_.isDragTowardWorkspace_(dx, dy) &&
-      Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
-    // Create the block.
+  var createBlock = Blockly.Flyout.startFlyout_.determineDragIntention_(dx, dy);
+  if (createBlock) {
     Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)(
         Blockly.Flyout.startDownEvent_);
-  } else {
+  } else if (Blockly.Flyout.startFlyout_.dragMode_ == Blockly.DRAG_FREE) {
     // Do a scroll
     Blockly.Flyout.startFlyout_.onMouseMove_(e);
   }
   e.stopPropagation();
+};
+
+/**
+ * Determine the intention of a drag.
+ * Updates dragMode_ based on a drag delta and the current mode,
+ * and returns true if we should create a new block.
+ * @param {number} dx X delta of the drag
+ * @param {number} dy Y delta of the drag
+ * @return {boolean} True if a new block should be created.
+ */
+Blockly.Flyout.prototype.determineDragIntention_ = function(dx, dy) {
+  if (this.dragMode_ == Blockly.DRAG_FREE) {
+    // Once in free mode, always stay in free mode and never create a block.
+    return false;
+  }
+  var dragDistance = Math.sqrt(dx * dx + dy * dy);
+  if (dragDistance < Blockly.DRAG_RADIUS) {
+    // Still within the sticky drag radius
+    this.dragMode_ = Blockly.DRAG_STICKY;
+    return false;
+  } else {
+    if (this.isDragTowardWorkspace_(dx, dy)) {
+      // Immediately create a block
+      return true;
+    } else {
+      // Immediately move to free mode - the drag is away from the workspace.
+      this.dragMode_ = Blockly.DRAG_FREE;
+      return false;
+    }
+  }
 };
 
 /**

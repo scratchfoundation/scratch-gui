@@ -910,6 +910,9 @@ Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
   var flyout = this;
   var workspace = this.targetWorkspace_;
   return function(e) {
+    // Hide drop-downs and animating WidgetDiv immediately
+    Blockly.WidgetDiv.hide(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
     if (Blockly.isRightButton(e)) {
       // Right-click.  Don't create a block, let the context menu show.
       return;

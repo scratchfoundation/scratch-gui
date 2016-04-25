@@ -276,8 +276,13 @@ Blockly.FieldIconMenu.prototype.buttonClick_ = function(e) {
 
 Blockly.FieldIconMenu.prototype.onHide_ = function() {
   // Reset the button colour and clear accessibility properties
-  this.sourceBlock_.setColour(this.savedPrimary_,
-    this.sourceBlock_.getColourSecondary(), this.sourceBlock_.getColourTertiary());
+  // Only attempt to do this reset if sourceBlock_ is not disposed.
+  // It could become disposed before an onHide_, for example,
+  // when a block is dragged from the flyout.
+  if (this.sourceBlock_) {
+    this.sourceBlock_.setColour(this.savedPrimary_,
+      this.sourceBlock_.getColourSecondary(), this.sourceBlock_.getColourTertiary());
+  }
   Blockly.DropDownDiv.content_.removeAttribute('role');
   Blockly.DropDownDiv.content_.removeAttribute('aria-haspopup');
   Blockly.DropDownDiv.content_.removeAttribute('aria-activedescendant');

@@ -219,6 +219,38 @@ Blockly.BlockSvg.HAT_TOP_LEFT_CORNER =
     Blockly.BlockSvg.HAT_CORNER_RADIUS + ' 0 0,0 ' +
     '0,' + Blockly.BlockSvg.HAT_CORNER_RADIUS;
 
+/**
+ * @type {Object} An object containing computed measurements of this block.
+ * @private
+ */
+Blockly.BlockSvg.renderingMetrics_ = null;
+
+/**
+ * @param {!Object} first An object containing computed measurements of a
+ *    block.
+ * @param {!Object} second Another object containing computed measurements of a
+ *    block.
+ * @return {boolean} Whether the two sets of metrics are equivalent.
+ * @private
+ */
+Blockly.BlockSvg.metricsAreEquivalent_ = function(first, second) {
+  if (first.statement != second.statement) {
+    return false;
+  }
+  if (first.imageField != second.imageField) {
+    return false;
+  }
+
+  if ((first.height != second.height) ||
+      (first.width != second.width) ||
+      (first.bayHeight != second.bayHeight) ||
+      (first.bayWidth != second.bayWidth) ||
+      (first.fieldRadius != second.fieldRadius) ||
+      (first.startHat != second.startHat)) {
+    return false;
+  }
+  return true;
+};
 
 /**
  * Play some UI effects (sound) after a connection has been established.
@@ -286,10 +318,27 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
   Blockly.Field.startCache();
   this.rendered = true;
 
+  var oldMetrics = this.renderingMetrics_;
   var metrics = this.renderCompute_();
-  this.height = metrics.height;
-  this.width = metrics.width;
-  this.renderDraw_(metrics);
+
+  // Don't redraw if we don't need to.
+  if (oldMetrics &&
+      Blockly.BlockSvg.metricsAreEquivalent_(oldMetrics, metrics)) {
+    // Skipping the redraw is fine, but we may still have to tighten up our
+    // connections with child blocks.
+    if (metrics.statement && metrics.statement.connection &&
+        metrics.statement.targetConnection) {
+      metrics.statement.connection.tighten_();
+    }
+    if (this.nextConnection && this.nextConnection.targetConnection) {
+      this.nextConnection.tighten_();
+    }
+  } else {
+    this.height = metrics.height;
+    this.width = metrics.width;
+    this.renderDraw_(metrics);
+    this.renderingMetrics_ = metrics;
+  }
 
   if (opt_bubble !== false) {
     // Render all blocks above this one (propagate a reflow).
@@ -393,9 +442,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function() {
 /**
  * Draw the path of the block.
  * Move the fields to the correct locations.
- * @param {number} iconWidth Offset of first row due to icons.
- * @param {!Array.<!Array.<!Object>>} inputRows 2D array of objects, each
- *     containing position information.
+ * @param {!Object} metrics An object containing computed measurements of the
+ *    block.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
@@ -423,15 +471,19 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
   if (metrics.imageField) {
     var imageField = metrics.imageField.getSvgRoot();
     var imageFieldSize = metrics.imageField.getSize();
-    // Image field's position is calculated relative to the "end" edge of the block.
-    var imageFieldX = metrics.width - imageFieldSize.width - Blockly.BlockSvg.SEP_SPACE_X / 1.5;
-    var imageFieldY = metrics.height - imageFieldSize.height - Blockly.BlockSvg.SEP_SPACE_Y;
+    // Image field's position is calculated relative to the "end" edge of the
+    // block.
+    var imageFieldX = metrics.width - imageFieldSize.width -
+        Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+    var imageFieldY = metrics.height - imageFieldSize.height -
+        Blockly.BlockSvg.SEP_SPACE_Y;
     var imageFieldScale = "scale(1 1)";
     if (this.RTL) {
       // Do we want to mirror the Image Field left-to-right?
       if (metrics.imageField.getFlipRTL()) {
         imageFieldScale = "scale(-1 1)";
-        imageFieldX = -metrics.width + imageFieldSize.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
+        imageFieldX = -metrics.width + imageFieldSize.width +
+            Blockly.BlockSvg.SEP_SPACE_X / 1.5;
       } else {
         // If not, don't offset by imageFieldSize.width
         imageFieldX = -metrics.width + Blockly.BlockSvg.SEP_SPACE_X / 1.5;
@@ -439,7 +491,8 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
     }
     if (imageField) {
       imageField.setAttribute('transform',
-        'translate(' + imageFieldX + ',' + imageFieldY + ') ' + imageFieldScale);
+          'translate(' + imageFieldX + ',' + imageFieldY + ') ' +
+          imageFieldScale);
     }
   }
 
@@ -448,7 +501,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
     var input = this.getFieldShadowBlock_().getSvgRoot();
     var valueX = (Blockly.BlockSvg.NOTCH_WIDTH +
       (metrics.bayWidth ? 2 * Blockly.BlockSvg.GRID_UNIT +
-        Blockly.BlockSvg.NOTCH_WIDTH*2 : 0) + metrics.bayWidth);
+        Blockly.BlockSvg.NOTCH_WIDTH * 2 : 0) + metrics.bayWidth);
     if (metrics.startHat) {
       // Start hats add some left margin to field for visual balance
       valueX += Blockly.BlockSvg.GRID_UNIT * 2;
@@ -466,7 +519,8 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
  * Render the left edge of the block.
  * @param {!Array.<string>} steps Path of block outline.
  * @param {!Object} connectionsXY Location of block.
- * @param {number} rightEdge Minimum width of block.
+ * @param {!Object} metrics An object containing computed measurements of the
+ *    block.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDrawLeft_ =
@@ -485,12 +539,14 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_START);
     // Top-left rounded corner.
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
-    var cursorY = metrics.height - Blockly.BlockSvg.CORNER_RADIUS - Blockly.BlockSvg.SEP_SPACE_Y - Blockly.BlockSvg.NOTCH_HEIGHT;
+    var cursorY = metrics.height - Blockly.BlockSvg.CORNER_RADIUS -
+        Blockly.BlockSvg.SEP_SPACE_Y - Blockly.BlockSvg.NOTCH_HEIGHT;
     steps.push('V', cursorY);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_DOWN);
     // Create previous block connection.
     var connectionX = connectionsXY.x;
-    var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
+    var connectionY = connectionsXY.y + metrics.height -
+        Blockly.BlockSvg.CORNER_RADIUS * 2;
     this.previousConnection.moveTo(connectionX, connectionY);
     // This connection will be tightened when the parent renders.
     steps.push('V', metrics.height - Blockly.BlockSvg.CORNER_RADIUS);
@@ -511,10 +567,8 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ =
  * Render the bottom edge of the block.
  * @param {!Array.<string>} steps Path of block outline.
  * @param {!Object} connectionsXY Location of block.
- * @param {!Array.<!Array.<!Object>>} inputRows 2D array of objects, each
- *     containing position information.
- * @param {number} iconWidth Offset of first row due to icons.
- * @return {number} Height of block.
+ * @param {!Object} metrics An object containing computed measurements of the
+ *    block.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
@@ -568,11 +622,14 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
                Blockly.BlockSvg.CORNER_RADIUS);
 
     // Create statement connection.
-    var connectionX = connectionsXY.x + Blockly.BlockSvg.CORNER_RADIUS * 2 + 4 * Blockly.BlockSvg.GRID_UNIT;
+    var connectionX = connectionsXY.x + Blockly.BlockSvg.CORNER_RADIUS * 2 +
+        4 * Blockly.BlockSvg.GRID_UNIT;
     if (this.RTL) {
-      connectionX = connectionsXY.x - Blockly.BlockSvg.CORNER_RADIUS * 2 - 4 * Blockly.BlockSvg.GRID_UNIT;
+      connectionX = connectionsXY.x - Blockly.BlockSvg.CORNER_RADIUS * 2 -
+          4 * Blockly.BlockSvg.GRID_UNIT;
     }
-    var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
+    var connectionY = connectionsXY.y + metrics.height -
+        Blockly.BlockSvg.CORNER_RADIUS * 2;
     metrics.statement.connection.moveTo(connectionX, connectionY);
     if (metrics.statement.connection.targetConnection) {
       metrics.statement.connection.tighten_();
@@ -591,7 +648,8 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
  * Render the right edge of the block.
  * @param {!Array.<string>} steps Path of block outline.
  * @param {!Object} connectionsXY Location of block.
- * @param {number} cursorY Height of block.
+ * @param {!Object} metrics An object containing computed measurements of the
+ *    block.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDrawRight_ =
@@ -606,8 +664,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
     // Input
     steps.push(
       'a', metrics.fieldRadius + ',' + metrics.fieldRadius,
-      '0', '0,0', metrics.fieldRadius + ',' + -1*metrics.fieldRadius);
-    steps.push('v', -1*(metrics.height - metrics.fieldRadius*2));
+      '0', '0,0', metrics.fieldRadius + ',' + -1 * metrics.fieldRadius);
+    steps.push('v', -1 * (metrics.height - metrics.fieldRadius * 2));
   }
 
   if (this.nextConnection) {
@@ -620,7 +678,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
     } else {
       connectionX = connectionsXY.x + metrics.width;
     }
-    var connectionY = connectionsXY.y + metrics.height - Blockly.BlockSvg.CORNER_RADIUS * 2;
+    var connectionY = connectionsXY.y + metrics.height -
+        Blockly.BlockSvg.CORNER_RADIUS * 2;
     this.nextConnection.moveTo(connectionX, connectionY);
     if (this.nextConnection.targetConnection) {
       this.nextConnection.tighten_();
@@ -635,7 +694,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
  * Render the top edge of the block.
  * @param {!Array.<string>} steps Path of block outline.
  * @param {!Object} connectionsXY Location of block.
- * @param {number} cursorY Height of block.
+ * @param {!Object} metrics An object containing computed measurements of the
+ *    block.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDrawTop_ =
@@ -700,4 +760,4 @@ Blockly.BlockSvg.prototype.positionNewBlock =
 
     newBlock.moveBy(dx, dy);
   }
-}
+};

@@ -170,13 +170,6 @@ Blockly.BlockSvg.FIELD_WIDTH_MAX_EDIT = Infinity;
 Blockly.BlockSvg.FIELD_HEIGHT_MAX_EDIT = Blockly.BlockSvg.FIELD_WIDTH;
 
 /**
- * Play some UI effects (sound, ripple) after a connection has been established.
- */
-Blockly.BlockSvg.prototype.connectionUiEffect = function() {
-  this.workspace.playAudio('click');
-};
-
-/**
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {

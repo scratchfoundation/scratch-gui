@@ -937,7 +937,6 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       if (this.parentBlock_) {
         // Push this block to the very top of the stack.
         this.unplug();
-        this.disconnectUiEffect();
       }
       this.setDragging_(true);
     }
@@ -1231,6 +1230,13 @@ Blockly.BlockSvg.prototype.disposeUiEffect = function() {
 };
 
 /**
+ * Play some UI effects (sound) after a connection has been established.
+ */
+Blockly.BlockSvg.prototype.connectionUiEffect = function() {
+  this.workspace.playAudio('click');
+};
+
+/**
  * Animate a cloned block and eventually dispose of it.
  * This is a class method, not an instace method since the original block has
  * been destroyed and is no longer accessible.
@@ -1257,13 +1263,6 @@ Blockly.BlockSvg.disposeUiStep_ = function(clone, rtl, start, workspaceScale) {
     };
     setTimeout(closure, 10);
   }
-};
-
-/**
- * Play some UI effects (sound) when disconnecting a block.
- */
-Blockly.BlockSvg.prototype.disconnectUiEffect = function() {
-  this.workspace.playAudio('disconnect');
 };
 
 /**

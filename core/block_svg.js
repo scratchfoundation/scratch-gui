@@ -854,7 +854,7 @@ Blockly.BlockSvg.prototype.moveToDragSurface_ = function() {
  * Generally should be called at the same time as setDragging_(false).
  * @private
  */
- Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
+Blockly.BlockSvg.prototype.moveOffDragSurface_ = function() {
   // Translate to current position, turning off 3d.
   var xy = this.getRelativeToSurfaceXY();
   this.clearTransformAttributes_();
@@ -909,7 +909,8 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       // drag surface. By moving to the drag surface before unplug, connection
       // positions will be calculated correctly.
       this.moveToDragSurface_();
-      // Clear WidgetDiv/DropDownDiv without animating, in case blocks are moved around
+      // Clear WidgetDiv/DropDownDiv without animating, in case blocks are moved
+      // around
       Blockly.WidgetDiv.hide(true);
       Blockly.DropDownDiv.hideWithoutAnimation();
       if (this.parentBlock_) {
@@ -921,60 +922,75 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
     }
   }
   if (Blockly.dragMode_ == Blockly.DRAG_FREE) {
-    var dx = oldXY.x - this.dragStartXY_.x;
-    var dy = oldXY.y - this.dragStartXY_.y;
-    this.workspace.dragSurface.translateSurface(newXY.x, newXY.y);
-    // Drag all the nested bubbles.
-    for (var i = 0; i < this.draggedBubbles_.length; i++) {
-      var commentData = this.draggedBubbles_[i];
-      commentData.bubble.setIconLocation(commentData.x + dx,
-          commentData.y + dy);
-    }
-
-    // Check to see if any of this block's connections are within range of
-    // another block's connection.
-    var myConnections = this.getConnections_(false);
-    // Also check the last connection on this stack
-    var lastOnStack = this.lastConnectionInStack_();
-    if (lastOnStack && lastOnStack != this.nextConnection) {
-      myConnections.push(lastOnStack);
-    }
-    var closestConnection = null;
-    var localConnection = null;
-    var radiusConnection = Blockly.SNAP_RADIUS;
-    for (i = 0; i < myConnections.length; i++) {
-      var myConnection = myConnections[i];
-      var neighbour = myConnection.closest(radiusConnection, dx, dy);
-      if (neighbour.connection) {
-        closestConnection = neighbour.connection;
-        localConnection = myConnection;
-        radiusConnection = neighbour.radius;
-      }
-    }
-
-    var updatePreviews = true;
-    if (Blockly.localConnection_ && Blockly.highlightedConnection_) {
-      var xDiff = Blockly.localConnection_.x_ + dx -
-          Blockly.highlightedConnection_.x_;
-      var yDiff = Blockly.localConnection_.y_ + dy -
-          Blockly.highlightedConnection_.y_;
-      var curDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
-
-      // Slightly prefer the existing preview over a new preview.
-      if (closestConnection && radiusConnection > curDistance - 20) {
-        updatePreviews = false;
-      }
-    }
-
-    if (updatePreviews) {
-      var candidateIsLast = (localConnection == lastOnStack);
-      this.updatePreviews(closestConnection, localConnection, radiusConnection,
-          e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
-          candidateIsLast);
-    }
+    this.handleDragFree_(oldXY, newXY, e);
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
+};
+
+
+/**
+ * Handle a mouse movement when a block is already freely dragging.
+ * @param {!goog.math.Coordinate} oldXY The position of the block on screen
+ *    before the most recent mouse movement.
+ * @param {!goog.math.Coordinate} newXY The new location after applying the
+ *    mouse movement.
+ * @param {!Event} e Mouse move event.
+ * @private
+ */
+Blockly.BlockSvg.prototype.handleDragFree_ = function(oldXY, newXY, e) {
+  var dx = oldXY.x - this.dragStartXY_.x;
+  var dy = oldXY.y - this.dragStartXY_.y;
+  this.workspace.dragSurface.translateSurface(newXY.x, newXY.y);
+  // Drag all the nested bubbles.
+  for (var i = 0; i < this.draggedBubbles_.length; i++) {
+    var commentData = this.draggedBubbles_[i];
+    commentData.bubble.setIconLocation(commentData.x + dx,
+        commentData.y + dy);
+  }
+
+  // Check to see if any of this block's connections are within range of
+  // another block's connection.
+  var myConnections = this.getConnections_(false);
+  // Also check the last connection on this stack
+  var lastOnStack = this.lastConnectionInStack_();
+  if (lastOnStack && lastOnStack != this.nextConnection) {
+    myConnections.push(lastOnStack);
+  }
+  var closestConnection = null;
+  var localConnection = null;
+  var radiusConnection = Blockly.SNAP_RADIUS;
+  for (i = 0; i < myConnections.length; i++) {
+    var myConnection = myConnections[i];
+    var neighbour = myConnection.closest(radiusConnection, dx, dy);
+    if (neighbour.connection) {
+      closestConnection = neighbour.connection;
+      localConnection = myConnection;
+      radiusConnection = neighbour.radius;
+    }
+  }
+
+  var updatePreviews = true;
+  if (Blockly.localConnection_ && Blockly.highlightedConnection_) {
+    var xDiff = Blockly.localConnection_.x_ + dx -
+        Blockly.highlightedConnection_.x_;
+    var yDiff = Blockly.localConnection_.y_ + dy -
+        Blockly.highlightedConnection_.y_;
+    var curDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+    // Slightly prefer the existing preview over a new preview.
+    if (closestConnection && radiusConnection > curDistance -
+        Blockly.CURRENT_CONNECTION_PREFERENCE) {
+      updatePreviews = false;
+    }
+  }
+
+  if (updatePreviews) {
+    var candidateIsLast = (localConnection == lastOnStack);
+    this.updatePreviews(closestConnection, localConnection, radiusConnection,
+        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
+        candidateIsLast);
+  }
 };
 
 /**

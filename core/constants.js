@@ -38,6 +38,13 @@ Blockly.DRAG_RADIUS = 5;
 Blockly.SNAP_RADIUS = 72;
 
 /**
+ * How much to prefer staying connected to the current connection over moving to
+ * a new connection.  The current previewed connection is considered to be this
+ * much closer to the matching connection on the block than it actually is.
+ */
+Blockly.CURRENT_CONNECTION_PREFERENCE = 20;
+
+/**
  * Delay in ms between trigger and bumping unconnected block out of alignment.
  */
 Blockly.BUMP_DELAY = 250;

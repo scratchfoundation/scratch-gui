@@ -105,6 +105,7 @@ Blockly.DragSurfaceSvg.prototype.createDom = function () {
   var defs = Blockly.createSvgElement('defs', {}, this.SVG_);
   this.dragShadowFilterId_ = this.createDropShadowDom_(defs);
   this.dragGroup_ = Blockly.createSvgElement('g', {}, this.SVG_);
+  this.dragGroup_.setAttribute('filter', 'url(#' + this.dragShadowFilterId_ + ')');
 };
 
 /**
@@ -137,7 +138,6 @@ Blockly.DragSurfaceSvg.prototype.setBlocksAndShow = function (blocks) {
   goog.asserts.assert(this.dragGroup_.childNodes.length == 0, 'Already dragging a block.');
   // appendChild removes the blocks from the previous parent
   this.dragGroup_.appendChild(blocks);
-  blocks.setAttribute('filter', 'url(#' + this.dragShadowFilterId_ + ')');
   this.SVG_.style.display = 'block';
 };
 
@@ -213,7 +213,6 @@ Blockly.DragSurfaceSvg.prototype.getCurrentBlock = function () {
   */
 Blockly.DragSurfaceSvg.prototype.clearAndHide = function (newSurface) {
   // appendChild removes the node from this.dragGroup_
-  this.getCurrentBlock().removeAttribute('filter');
   newSurface.appendChild(this.getCurrentBlock());
   this.SVG_.style.display = 'none';
   goog.asserts.assert(this.dragGroup_.childNodes.length == 0, 'Drag group was not cleared.');

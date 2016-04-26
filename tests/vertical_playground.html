@@ -130,10 +130,28 @@ function logger(e) {
   console.log(e);
 }
 
-function setSoundsEnabled(state) {
-  var checkbox = document.getElementById('soundsEnabled');
-  checkbox.checked = (state) ? 'checked' : '';
-  sessionStorage.setItem('soundsEnabled', state);
+function glowBlock() {
+  if (Blockly.selected) {
+    workspace.glowBlock(Blockly.selected.id, true);
+  }
+}
+
+function unglowBlock() {
+  if (Blockly.selected) {
+    workspace.glowBlock(Blockly.selected.id, false);
+  }
+}
+
+function glowStack() {
+  if (Blockly.selected) {
+    workspace.glowStack(Blockly.selected.id, true);
+  }
+}
+
+function unglowStack() {
+  if (Blockly.selected) {
+    workspace.glowStack(Blockly.selected.id, false);
+  }
 }
 
 </script>
@@ -286,6 +304,13 @@ h1 {
   <p>
     Log events: &nbsp;
     <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
+  </p>
+  <p>
+    Glows: &nbsp;
+    <input type="button" value="Glow last clicked block" onclick="glowBlock()" />
+    <input type="button" value="Unglow last clicked block" onclick="unglowBlock()" />
+    <input type="button" value="Stack glow last clicked block" onclick="glowStack()" />
+    <input type="button" value="Stack unglow last clicked block" onclick="unglowStack()" />
   </p>
   <p>
     Log flyout events: &nbsp;

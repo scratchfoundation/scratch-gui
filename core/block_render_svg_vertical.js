@@ -180,22 +180,21 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {
-  // Render block fill
-  var hexColour = this.getColour();
-  var rgb = goog.color.hexToRgb(hexColour);
-  if (this.isShadow()) {
-    rgb = goog.color.lighten(rgb, 0.6);
-    hexColour = goog.color.rgbArrayToHex(rgb);
+  var strokeColour = this.getColourTertiary();
+  if (this.isShadow() && this.parentBlock_) {
+    // Pull shadow block stroke colour from parent block's tertiary if possible.
+    strokeColour = this.parentBlock_.getColourTertiary();
   }
-  this.svgPath_.setAttribute('fill', hexColour);
+
+  // Render block stroke
+  this.svgPath_.setAttribute('stroke', strokeColour);
+
+  // Render block fill
+  var fillColour = (this.isGlowingBlock_) ? this.getColourSecondary() : this.getColour();
+  this.svgPath_.setAttribute('fill', fillColour);
 
   // Render opacity
   this.svgPath_.setAttribute('fill-opacity', this.getOpacity());
-
-  // Render block stroke
-  var colorShift = goog.color.darken(rgb, 0.1);
-  var strokeColor = goog.color.rgbArrayToHex(colorShift);
-  this.svgPath_.setAttribute('stroke', strokeColor);
 
   // Render icon(s) if applicable
   var icons = this.getIcons();

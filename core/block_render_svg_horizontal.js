@@ -270,6 +270,7 @@ Blockly.BlockSvg.prototype.updateColour = function() {
   this.svgPath_.setAttribute('stroke', strokeColour);
 
   // Render block fill
+  var fillColour = (this.isGlowingBlock_) ? this.getColourSecondary() : this.getColour();
   this.svgPath_.setAttribute('fill', fillColour);
 
   // Render opacity

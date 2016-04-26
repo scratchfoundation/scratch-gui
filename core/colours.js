@@ -61,6 +61,8 @@ Blockly.Colours = {
   "insertionMarker": "#949494",
   "insertionMarkerOpacity": 0.6,
   "dragShadowOpacity": 0.3,
+  "stackGlow": "#FFF200",
+  "stackGlowOpacity": 1,
   // CSS colours: support RGBA
   "fieldShadow": "rgba(0,0,0,0.1)",
   "dropDownShadow": "rgba(0, 0, 0, .3)"

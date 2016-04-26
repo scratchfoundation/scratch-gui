@@ -193,13 +193,11 @@ h1 {
         </value>
       </block>
       <block type="event_broadcast">
-      </block>
-      <block type="event_broadcast_text">
-          <value name="STRING">
-            <shadow type="text">
-              <field name="TEXT">Hi</field>
-            </shadow>
-          </value>
+        <value name="CHOICE">
+          <shadow type="dropdown_broadcast">
+            <field name="CHOICE">blue</field>
+          </shadow>
+        </value>
       </block>
     </category>
 
@@ -208,7 +206,7 @@ h1 {
       <block type="control_repeat">
         <value name="TIMES">
           <shadow type="math_number">
-            <field name="NUM">10</field>
+            <field name="NUM">4</field>
           </shadow>
         </value>
       </block>
@@ -216,7 +214,7 @@ h1 {
       <block type="control_wait">
         <value name="DURATION">
           <shadow type="math_number">
-            <field name="NUM">10</field>
+            <field name="NUM">1</field>
           </shadow>
         </value>
       </block>
@@ -224,24 +222,39 @@ h1 {
 
     <category name="Wedo">
         <block type="wedo_setcolor">
+          <value name="CHOICE">
+            <shadow type="dropdown_wedo_setcolor">
+              <field name="CHOICE">mystery</field>
+            </shadow>
+          </value>
         </block>
         <block type="wedo_motorclockwise">
             <value name="DURATION">
               <shadow type="math_number">
-                <field name="NUM">10</field>
+                <field name="NUM">1</field>
               </shadow>
             </value>
         </block>
         <block type="wedo_motorcounterclockwise">
             <value name="DURATION">
               <shadow type="math_number">
-                <field name="NUM">10</field>
+                <field name="NUM">1</field>
               </shadow>
             </value>
         </block>
         <block type="wedo_motorspeed">
+          <value name="CHOICE">
+            <shadow type="dropdown_wedo_motorspeed">
+              <field name="CHOICE">fast</field>
+            </shadow>
+          </value>
         </block>
         <block type="wedo_whentilt">
+          <value name="CHOICE">
+            <shadow type="dropdown_wedo_whentilt">
+              <field name="CHOICE">forward</field>
+            </shadow>
+          </value>
         </block>
         <block type="wedo_whendistanceclose"></block>
     </category>

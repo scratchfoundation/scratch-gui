@@ -54,7 +54,7 @@ goog.inherits(Blockly.FieldIconMenu, Blockly.Field);
  * @type {number}
  * @const
  */
-Blockly.FieldIconMenu.DROPDOWN_WIDTH = 180;
+Blockly.FieldIconMenu.DROPDOWN_WIDTH = 168;
 
 /**
  * Save the primary colour of the source block while the menu is open, for reset.

@@ -952,10 +952,26 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
       }
     }
 
-    var candidateIsLast = (localConnection == lastOnStack);
-    this.updatePreviews(closestConnection, localConnection, radiusConnection,
-        e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
-        candidateIsLast);
+    var updatePreviews = true;
+    if (Blockly.localConnection_ && Blockly.highlightedConnection_) {
+      var xDiff = Blockly.localConnection_.x_ + dx -
+          Blockly.highlightedConnection_.x_;
+      var yDiff = Blockly.localConnection_.y_ + dy -
+          Blockly.highlightedConnection_.y_;
+      var curDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+      // Slightly prefer the existing preview over a new preview.
+      if (closestConnection && radiusConnection > curDistance - 20) {
+        updatePreviews = false;
+      }
+    }
+
+    if (updatePreviews) {
+      var candidateIsLast = (localConnection == lastOnStack);
+      this.updatePreviews(closestConnection, localConnection, radiusConnection,
+          e, newXY.x - this.dragStartXY_.x, newXY.y - this.dragStartXY_.y,
+          candidateIsLast);
+    }
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();

@@ -248,23 +248,14 @@ Blockly.onKeyDown_ = function(e) {
     // When focused on an HTML text input widget, don't trap any keys.
     return;
   }
-  var deleteBlock = false;
   if (e.keyCode == 27) {
     // Pressing esc closes the context menu and any drop-down
     Blockly.hideChaff();
     Blockly.DropDownDiv.hide();
   } else if (e.keyCode == 8 || e.keyCode == 46) {
     // Delete or backspace.
-    try {
-      if (Blockly.selected && Blockly.selected.isDeletable()) {
-        deleteBlock = true;
-      }
-    } finally {
-      // Stop the browser from going back to the previous page.
-      // Use a finally so that any error in delete code above doesn't disappear
-      // from the console when the page rolls back.
-      e.preventDefault();
-    }
+    // Stop the browser from going back to the previous page.
+    e.preventDefault();
   } else if (e.altKey || e.ctrlKey || e.metaKey) {
     if (Blockly.selected &&
         Blockly.selected.isDeletable() && Blockly.selected.isMovable()) {
@@ -275,7 +266,13 @@ Blockly.onKeyDown_ = function(e) {
       } else if (e.keyCode == 88) {
         // 'x' for cut.
         Blockly.copy_(Blockly.selected);
-        deleteBlock = true;
+        Blockly.hideChaff();
+        var heal = Blockly.dragMode_ != Blockly.DRAG_FREE;
+        Blockly.selected.dispose(heal, true);
+        if (Blockly.highlightedConnection_) {
+          Blockly.highlightedConnection_.unhighlight();
+          Blockly.highlightedConnection_ = null;
+        }
       }
     }
     if (e.keyCode == 86) {
@@ -287,16 +284,6 @@ Blockly.onKeyDown_ = function(e) {
       // 'z' for undo 'Z' is for redo.
       Blockly.hideChaff();
       Blockly.mainWorkspace.undo(e.shiftKey);
-    }
-  }
-  if (deleteBlock) {
-    // Common code for delete and cut.
-    Blockly.hideChaff();
-    var heal = Blockly.dragMode_ != Blockly.DRAG_FREE;
-    Blockly.selected.dispose(heal, true);
-    if (Blockly.highlightedConnection_) {
-      Blockly.highlightedConnection_.unhighlight();
-      Blockly.highlightedConnection_ = null;
     }
   }
 };

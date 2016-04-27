@@ -355,8 +355,6 @@ Blockly.Css.CONTENT = [
     'font-family: sans-serif;',
     'font-size: 12pt;',
     'font-weight: 600;',
-    '-webkit-touch-callout: default;',
-    '-webkit-user-select: text;',
   '}',
 
   '.blocklyTextTruncated {',

@@ -260,6 +260,7 @@ Blockly.Css.CONTENT = [
   '.blocklyDropDownButton > img {',
     'width: 80%;',
     'height: 80%;',
+    'margin-top: 5%',
   '}',
 
   '.blocklyDropDownPlaceholder {',

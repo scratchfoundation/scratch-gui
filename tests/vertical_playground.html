@@ -154,6 +154,12 @@ function unglowStack() {
   }
 }
 
+function setSoundsEnabled(state) {
+  var checkbox = document.getElementById('soundsEnabled');
+  checkbox.checked = (state) ? 'checked' : '';
+  sessionStorage.setItem('soundsEnabled', state);
+}
+
 </script>
 
 <style>

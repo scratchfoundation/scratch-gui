@@ -274,6 +274,9 @@ Blockly.FieldIconMenu.prototype.buttonClick_ = function(e) {
   Blockly.DropDownDiv.hide();
 };
 
+/**
+ * Callback for when the drop-down is hidden.
+ */
 Blockly.FieldIconMenu.prototype.onHide_ = function() {
   // Reset the button colour and clear accessibility properties
   // Only attempt to do this reset if sourceBlock_ is not disposed.

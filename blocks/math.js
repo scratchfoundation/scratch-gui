@@ -45,8 +45,8 @@ Blockly.Blocks['math_number'] = {
     this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
     this.setColour(Blockly.Blocks.math.HUE);
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput('0',
-        Blockly.FieldTextInput.numberValidator), 'NUM');
+        .appendField(new Blockly.FieldNumber('0',
+        Blockly.FieldTextInput.numberValidator, 20, -Infinity, Infinity), 'NUM');
     this.setOutput(true, 'Number');
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
@@ -55,6 +55,36 @@ Blockly.Blocks['math_number'] = {
       var parent = thisBlock.getParent();
       return (parent && parent.tooltip) || Blockly.Msg.MATH_NUMBER_TOOLTIP;
     });
+  }
+};
+
+Blockly.Blocks['math_whole_number'] = {
+  /**
+   * Block for whole number value, with min of 0 and max Infinity, precision 0.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
+    this.setColour(Blockly.Blocks.math.HUE);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldNumber('0',
+        Blockly.FieldNumber.numberValidator, 0, 0, Infinity), 'NUM');
+    this.setOutput(true, 'Number');
+  }
+};
+
+Blockly.Blocks['math_positive_number'] = {
+  /**
+   * Block for positive number value, with min of 0 and max Infinity, precision 20.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
+    this.setColour(Blockly.Blocks.math.HUE);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldNumber('0',
+        Blockly.FieldNumber.numberValidator, 20, 0, Infinity), 'NUM');
+    this.setOutput(true, 'Number');
   }
 };
 

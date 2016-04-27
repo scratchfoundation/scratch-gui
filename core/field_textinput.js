@@ -70,7 +70,13 @@ Blockly.FieldTextInput.ANIMATION_TIME = 0.25;
 /**
  * Padding to use for text measurement for the field during editing, in px.
  */
-Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC = 35;
+Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC = 45;
+
+/**
+ * Numeric field types.
+ * Scratch-specific property to ensure the border radius is set correctly for these types.
+ */
+Blockly.FieldTextInput.NUMERIC_FIELD_TYPES = ['math_number', 'math_positive_number', 'math_whole_number'];
 
 /**
  * Mouse cursor style when over the hotspot that initiates the editor.
@@ -123,25 +129,14 @@ Blockly.FieldTextInput.prototype.setSpellcheck = function(check) {
  * Show the inline free-text editor on top of the text.
  * @param {boolean=} opt_quietInput True if editor should be created without
  *     focus.  Defaults to false.
+ * @param {boolean=} opt_readOnly True if editor should be created with HTML
+ *     input set to read-only, to prevent virtual keyboards.
  * @private
  */
-Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
+Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput, opt_readOnly) {
   this.workspace_ = this.sourceBlock_.workspace;
   var quietInput = opt_quietInput || false;
-  if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
-                      goog.userAgent.IPAD)) {
-    // Mobile browsers have issues with in-line textareas (focus & keyboards).
-    var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
-    if (this.sourceBlock_ && this.validator_) {
-      var override = this.validator_(newValue);
-      if (override !== undefined) {
-        newValue = override;
-      }
-    }
-    this.setValue(newValue);
-    return;
-  }
-
+  var readOnly = opt_readOnly || false;
   Blockly.WidgetDiv.show(this, this.sourceBlock_.RTL,
       this.widgetDispose_(), this.widgetDisposeAnimationFinished_(),
       Blockly.FieldTextInput.ANIMATION_TIME);
@@ -151,6 +146,9 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   // Create the input.
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   htmlInput.setAttribute('spellcheck', this.spellcheck_);
+  if (readOnly) {
+    htmlInput.setAttribute('readonly', 'true');
+  }
   /** @type {!HTMLInputElement} */
   Blockly.FieldTextInput.htmlInput_ = htmlInput;
   div.appendChild(htmlInput);
@@ -162,6 +160,8 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   if (!quietInput) {
     htmlInput.focus();
     htmlInput.select();
+    // For iOS only
+    htmlInput.setSelectionRange(0, 99999);
   }
 
   // Bind to keydown -- trap Enter without IME and Esc to hide.
@@ -259,6 +259,7 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   var textWidth = Blockly.measureText(
     Blockly.FieldTextInput.htmlInput_.style.fontSize,
     Blockly.FieldTextInput.htmlInput_.style.fontFamily,
+    Blockly.FieldTextInput.htmlInput_.style.fontWeight,
     Blockly.FieldTextInput.htmlInput_.value
   );
   // Size drawn in the canvas needs padding and scaling
@@ -318,7 +319,7 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
  * @return {Number} Border radius in px.
 */
 Blockly.Field.prototype.getBorderRadius = function() {
-  if (this.sourceBlock_.type === 'math_number') {
+  if (Blockly.FieldTextInput.NUMERIC_FIELD_TYPES.indexOf(this.sourceBlock_.type) > -1) {
     return Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS;
   } else {
     return Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS;

@@ -641,12 +641,13 @@ Blockly.genUid.soup_ = '!#%()*+,-./:;=?@[]^_`{|}~' +
  * Measure some text using a canvas in-memory.
  * @param {string} fontSize E.g., '10pt'
  * @param {string} fontFamily E.g., 'Arial'
+ * @param {string} fontWeight E.g., '600'
  * @param {string} text The actual text to measure
  * @return {number} Width of the text in px.
  */
-Blockly.measureText = function(fontSize, fontFamily, text) {
+Blockly.measureText = function(fontSize, fontFamily, fontWeight, text) {
   var canvas = document.createElement('canvas');
   var context = canvas.getContext('2d');
-  context.font = fontSize + fontFamily;
+  context.font = fontWeight + ' ' + fontSize + ' ' + fontFamily;
   return context.measureText(text).width;
 };

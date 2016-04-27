@@ -565,7 +565,6 @@ Blockly.Flyout.prototype.hide = function() {
  *     Variables and procedures have a custom set of blocks.
  */
 Blockly.Flyout.prototype.show = function(xmlList) {
-  Blockly.Events.disable();
   this.hide();
   // Delete any blocks from a previous showing.
   var blocks = this.workspace_.getTopBlocks(false);
@@ -631,7 +630,9 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     }
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();
+    Blockly.Events.disable();
     block.moveBy((this.horizontalLayout_ && this.RTL) ? -cursorX : cursorX, cursorY);
+    Blockly.Events.enable();
 
     // Assuming this is the last block, work out the size of the content
     // (including margins)
@@ -678,7 +679,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   this.reflow();
 
   this.filterForCapacity_();
-  Blockly.Events.enable();
 
   this.reflowWrapper_ = this.reflow.bind(this);
   this.workspace_.addChangeListener(this.reflowWrapper_);
@@ -1178,9 +1178,11 @@ Blockly.Flyout.prototype.reflowVertical = function() {
 };
 
 Blockly.Flyout.prototype.reflow = function() {
+  Blockly.Events.disable();
   if (this.horizontalLayout_) {
     this.reflowHorizontal();
   } else {
     this.reflowVertical();
   }
-}
+  Blockly.Events.enable();
+};

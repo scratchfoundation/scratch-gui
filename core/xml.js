@@ -327,15 +327,19 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock) {
       blocks[i].render(false);
     }
     // Populating the connection database may be defered until after the blocks
-    // have renderend.
-    setTimeout(function() {
-      if (topBlock.workspace) {  // Check that the block hasn't been deleted.
-        topBlock.setConnectionsHidden(false);
-      }
-    }, 1);
+    // have rendered.
+    if (!workspace.isFlyout) {
+      setTimeout(function() {
+        if (topBlock.workspace) {  // Check that the block hasn't been deleted.
+          topBlock.setConnectionsHidden(false);
+        }
+      }, 1);
+    }
     topBlock.updateDisabled();
     // Fire an event to allow scrollbars to resize.
-    Blockly.fireUiEvent(window, 'resize');
+    if (!workspace.isFlyout) {
+      Blockly.fireUiEvent(window, 'resize');
+    }
   }
   Blockly.Events.enable();
   if (Blockly.Events.isEnabled()) {

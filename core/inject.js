@@ -259,12 +259,19 @@ Blockly.init_ = function(mainWorkspace) {
       // Build a fixed flyout with the root blocks.
       mainWorkspace.flyout_.init(mainWorkspace);
       mainWorkspace.flyout_.show(options.languageTree.childNodes);
-      // Translate the workspace sideways to avoid the fixed flyout.
-      mainWorkspace.scrollX = mainWorkspace.flyout_.width_;
-      if (options.toolboxPosition == Blockly.TOOLBOX_AT_RIGHT) {
-        mainWorkspace.scrollX *= -1;
+      // Translate the workspace to avoid the fixed flyout.
+      if (options.horizontalLayout) {
+        mainWorkspace.scrollY = mainWorkspace.flyout_.height_;
+        if (options.toolboxPosition == Blockly.TOOLBOX_AT_BOTTOM) {
+          mainWorkspace.scrollY *= -1;
+        }
+      } else {
+        mainWorkspace.scrollX = mainWorkspace.flyout_.width_;
+        if (options.toolboxPosition == Blockly.TOOLBOX_AT_RIGHT) {
+          mainWorkspace.scrollX *= -1;
+        }
       }
-      mainWorkspace.translate(mainWorkspace.scrollX, 0);
+      mainWorkspace.translate(mainWorkspace.scrollX, mainWorkspace.scrollY);
     }
   }
 

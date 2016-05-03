@@ -503,20 +503,6 @@ Blockly.setMainWorkspaceMetrics_ = function(xyRatio) {
 };
 
 /**
- * When something in Blockly's workspace changes, call a function.
- * @param {!Function} func Function to call.
- * @return {!Array.<!Array>} Opaque data that can be passed to
- *     removeChangeListener.
- * @deprecated April 2015
- */
-Blockly.addChangeListener = function(func) {
-  // Backwards compatability from before there could be multiple workspaces.
-  console.warn('Deprecated call to Blockly.addChangeListener, ' +
-               'use workspace.addChangeListener instead.');
-  return Blockly.getMainWorkspace().addChangeListener(func);
-};
-
-/**
  * Returns the main workspace.  Returns the last used main workspace (based on
  * focus).
  * @return {!Blockly.Workspace} The main workspace.

@@ -108,7 +108,7 @@ Blockly.createDom_ = function(container, options) {
   // Using a dilate distorts the block shape.
   // Instead use a gaussian blur, and then set all alpha to 1 with a transfer.
   var stackGlowFilter = Blockly.createSvgElement('filter',
-      {'id': 'blocklyStackGlowFilter' + rnd,
+      {'id': 'blocklyStackGlowFilter',
         'height': '160%', 'width': '180%', y: '-30%', x: '-40%'}, defs);
   Blockly.createSvgElement('feGaussianBlur',
       {'in': 'SourceGraphic',
@@ -126,7 +126,6 @@ Blockly.createDom_ = function(container, options) {
        'operator': 'in', 'result': 'outGlow'}, stackGlowFilter);
   Blockly.createSvgElement('feComposite',
       {'in': 'SourceGraphic', 'in2': 'outGlow', 'operator': 'over'}, stackGlowFilter);
-  options.stackGlowFilterId = stackGlowFilter.id;
 
   var disabledPattern = Blockly.createSvgElement('pattern',
       {'id': 'blocklyDisabledPattern' + rnd,

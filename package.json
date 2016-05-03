@@ -1,7 +1,7 @@
 {
   "name": "scratch-blocks",
   "version": "1.0.0",
-  "description": "Blockly is a library for building visual programming editors.",
+  "description": "Scratch Blocks is a library for building creative computing interfaces.",
   "author": "Massachusetts Institute of Technology",
   "license": "Apache-2.0",
   "homepage": "https://github.com/LLK/scratch-blocks#readme",

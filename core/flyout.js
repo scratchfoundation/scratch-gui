@@ -653,7 +653,25 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     block.flyoutRect_ = rect;
     this.buttons_[i] = rect;
 
-    this.addBlockListeners_(root, block, rect);
+    if (this.autoClose) {
+      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+          this.createBlockFunc_(block)));
+      this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
+          this.createBlockFunc_(block)));
+    } else {
+      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+          this.blockMouseDown_(block)));
+      this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
+          this.blockMouseDown_(block)));
+    }
+    this.listeners_.push(Blockly.bindEvent_(root, 'mouseover', block,
+        block.addSelect));
+    this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block,
+        block.removeSelect));
+    this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block,
+        block.addSelect));
+    this.listeners_.push(Blockly.bindEvent_(rect, 'mouseout', block,
+        block.removeSelect));
   }
 
   // Record calculated content size for getMetrics_
@@ -737,7 +755,7 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
       Blockly.Flyout.startBlock_ = block;
       Blockly.Flyout.startFlyout_ = flyout;
       Blockly.Flyout.onMouseUpWrapper_ = Blockly.bindEvent_(document,
-          'mouseup', this, Blockly.terminateDrag_);
+          'mouseup', this, flyout.onMouseUp_);
       Blockly.Flyout.onMouseMoveBlockWrapper_ = Blockly.bindEvent_(document,
           'mousemove', this, flyout.onMouseMoveBlock_);
     }
@@ -770,7 +788,24 @@ Blockly.Flyout.prototype.onMouseDown_ = function(e) {
 };
 
 /**
- * Handle a mouse-move to drag the flyout.
+ * Handle a mouse-up anywhere in the SVG pane.  Is only registered when a
+ * block is clicked.  We can't use mouseUp on the block since a fast-moving
+ * cursor can briefly escape the block before it catches up.
+ * @param {!Event} e Mouse up event.
+ * @private
+ */
+Blockly.Flyout.prototype.onMouseUp_ = function(e) {
+  if (Blockly.dragMode_ != Blockly.DRAG_FREE &&
+      !Blockly.WidgetDiv.isVisible()) {
+    Blockly.Events.fire(
+        new Blockly.Events.Ui(Blockly.Flyout.startBlock_, 'click',
+                              undefined, undefined));
+  }
+  Blockly.terminateDrag_();
+};
+
+/**
+ * Handle a mouse-move to vertically drag the flyout.
  * @param {!Event} e Mouse move event.
  * @private
  */

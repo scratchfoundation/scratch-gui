@@ -203,19 +203,13 @@ Blockly.DropDownDiv.show = function(owner, primaryX, primaryY, secondaryX, secon
   Blockly.DropDownDiv.arrow_.setAttribute('class',
     metrics.arrowAtTop ? 'blocklyDropDownArrow arrowTop' : 'blocklyDropDownArrow arrowBottom');
   // First apply initial translation
-  div.style.transform = 'translate(' + metrics.initialX + 'px,' + metrics.initialY + 'px)';
+  div.style.transform = 'translate(' + metrics.finalX + 'px,' + metrics.finalY + 'px)';
   // Save for animate out
   Blockly.DropDownDiv.hideAnimationX_ = metrics.initialX;
   Blockly.DropDownDiv.hideAnimationY_ = metrics.initialY;
   // Show the div
   div.style.display = 'block';
   div.style.opacity = 1;
-  // Add transition and apply final translate after a cycle.
-  setTimeout(function() {
-    div.style.transition = 'transform ' + Blockly.DropDownDiv.ANIMATION_TIME + 's, ' +
-      'opacity ' + Blockly.DropDownDiv.ANIMATION_TIME + 's';
-    div.style.transform = 'translate(' + metrics.finalX + 'px,' + metrics.finalY + 'px)';
-  }, 1);
   return metrics.arrowAtTop;
 };
 
@@ -326,6 +320,8 @@ Blockly.DropDownDiv.hideIfOwner = function(owner) {
 Blockly.DropDownDiv.hide = function() {
   // Start the animation by setting the translation and fading out.
   var div = Blockly.DropDownDiv.DIV_;
+  div.style.transition = 'transform ' + Blockly.DropDownDiv.ANIMATION_TIME + 's, ' +
+    'opacity ' + Blockly.DropDownDiv.ANIMATION_TIME + 's';
   div.style.transform = 'translate(' + Blockly.DropDownDiv.hideAnimationX_ +
     'px,' + Blockly.DropDownDiv.hideAnimationY_ + 'px)';
   div.style.opacity = 0;

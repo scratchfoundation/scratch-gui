@@ -30,10 +30,6 @@
 #
 # This script also generates:
 #   blocks_compressed.js: The compressed Blockly language blocks.
-#   javascript_compressed.js: The compressed Javascript generator.
-#   python_compressed.js: The compressed Python generator.
-#   dart_compressed.js: The compressed Dart generator.
-#   lua_compressed.js: The compressed Lua generator.
 #   msg/js/<LANG>.js for every language <LANG> defined in msg/js/<LANG>.json.
 
 import sys

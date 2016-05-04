@@ -1,7 +1,9 @@
-node_modules
-npm-debug.log
+# OSX
 .DS_Store
-.settings
-.project
-*.pyc
-*.komodoproject
+
+# NPM
+/node_modules
+npm-*
+
+# Localization / I18N
+common.pyc

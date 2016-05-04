@@ -681,7 +681,8 @@ Blockly.BlockSvg.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
-  if (Blockly.dragMode_ != Blockly.DRAG_FREE && !Blockly.WidgetDiv.isVisible()) {
+  var isNotShadowBlock = this.ioClickHackIsNotShadow_(e);
+  if (Blockly.dragMode_ != Blockly.DRAG_FREE && !Blockly.WidgetDiv.isVisible() && isNotShadowBlock) {
     Blockly.Events.fire(
         new Blockly.Events.Ui(this, 'click', undefined, undefined));
   }
@@ -722,6 +723,29 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   if (!Blockly.WidgetDiv.isVisible()) {
     Blockly.Events.setGroup(false);
   }
+};
+
+/**
+ * XXX: Hack to fix drop-down clicking issue for Google I/O.
+ * We cannot just check isShadow, since `this` is the parent block.
+ * See: https://github.com/google/blockly/issues/336
+ * @param {!Event} e Mouse up event.
+ * @return {boolean} True if the block is not the drop-down shadow.
+ */
+Blockly.BlockSvg.prototype.ioClickHackIsNotShadow_ = function(e) {
+  // True if click target is a non-shadow block path.
+  if (e.target === this.svgPath_ &&
+      e.target.parentNode === this.getSvgRoot()) {
+    return true;
+  }
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      if (field.imageElement_ && field.imageElement_ === e.target) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 /**

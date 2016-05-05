@@ -50,6 +50,13 @@ Blockly.Field = function(text, opt_validator) {
     Blockly.BlockSvg.FIELD_HEIGHT);
   this.setValue(text);
   this.setValidator(opt_validator);
+
+  /**
+   * Maximum characters of text to display before adding an ellipsis.
+   * Same for strings and numbers.
+   * @type {number}
+   */
+  this.maxDisplayLength = Blockly.BlockSvg.MAX_DISPLAY_LENGTH;
 };
 
 /**
@@ -73,13 +80,6 @@ Blockly.Field.cacheReference_ = 0;
  * @type {string=}
  */
 Blockly.Field.prototype.name = undefined;
-
-/**
- * Maximum characters of text to display before adding an ellipsis.
- * Same for strings and numbers.
- * @type {number}
- */
-Blockly.Field.prototype.maxDisplayLength = 4;
 
 /**
  * Visible text to display.

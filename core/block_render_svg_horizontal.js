@@ -226,6 +226,12 @@ Blockly.BlockSvg.HAT_TOP_LEFT_CORNER =
 Blockly.BlockSvg.renderingMetrics_ = null;
 
 /**
+ * Max text display length for a field (per-horizontal/vertical)
+ * @const
+ */
+Blockly.BlockSvg.MAX_DISPLAY_LENGTH = 4;
+
+/**
  * @param {!Object} first An object containing computed measurements of a
  *    block.
  * @param {!Object} second Another object containing computed measurements of a

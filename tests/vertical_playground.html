@@ -8,9 +8,9 @@
 <script src="../msg/messages.js"></script>
 <script src="../blocks/math.js"></script>
 <script src="../blocks/text.js"></script>
-<script src="../blocks_horizontal/control.js"></script>
-<script src="../blocks_horizontal/event.js"></script>
-<script src="../blocks_horizontal/wedo.js"></script>
+<script src="../blocks_vertical/control.js"></script>
+<script src="../blocks_vertical/event.js"></script>
+<script src="../blocks_vertical/wedo.js"></script>
 <script>
 'use strict';
 // Depending on the URL argument, render as LTR or RTL.
@@ -48,6 +48,16 @@ function start() {
       minScale: 0.25,
       scaleSpeed: 1.1
     },
+    colours: {
+      workspace: '#334771',
+      flyout: '#283856',
+      scrollbar: '#24324D',
+      scrollbarHover: '#0C111A',
+      insertionMarker: '#FFFFFF',
+      insertionMarkerOpacity: 0.3,
+      fieldShadow: 'rgba(255, 255, 255, 0.3)',
+      dragShadowOpacity: 0.6
+    }
   });
   // Restore previously displayed text.
   var text = sessionStorage.getItem('textarea');
@@ -76,12 +86,6 @@ function fromXml() {
   var input = document.getElementById('importExport');
   var xml = Blockly.Xml.textToDom(input.value);
   Blockly.Xml.domToWorkspace(workspace, xml);
-  taChange();
-}
-
-function toCode(lang) {
-  var output = document.getElementById('importExport');
-  output.value = Blockly[lang].workspaceToCode(workspace);
   taChange();
 }
 
@@ -202,18 +206,8 @@ h1 {
     <category name="Events">
       <block type="event_whenflagclicked"></block>
       <block type="event_whenbroadcastreceived">
-        <value name="CHOICE">
-          <shadow type="dropdown_whenbroadcast">
-            <field name="CHOICE">blue</field>
-          </shadow>
-        </value>
       </block>
       <block type="event_broadcast">
-        <value name="CHOICE">
-          <shadow type="dropdown_broadcast">
-            <field name="CHOICE">blue</field>
-          </shadow>
-        </value>
       </block>
     </category>
 
@@ -238,11 +232,6 @@ h1 {
 
     <category name="Wedo">
         <block type="wedo_setcolor">
-          <value name="CHOICE">
-            <shadow type="dropdown_wedo_setcolor">
-              <field name="CHOICE">mystery</field>
-            </shadow>
-          </value>
         </block>
         <block type="wedo_motorclockwise">
             <value name="DURATION">
@@ -259,18 +248,8 @@ h1 {
             </value>
         </block>
         <block type="wedo_motorspeed">
-          <value name="CHOICE">
-            <shadow type="dropdown_wedo_motorspeed">
-              <field name="CHOICE">fast</field>
-            </shadow>
-          </value>
         </block>
         <block type="wedo_whentilt">
-          <value name="CHOICE">
-            <shadow type="dropdown_wedo_whentilt">
-              <field name="CHOICE">forward</field>
-            </shadow>
-          </value>
         </block>
         <block type="wedo_whendistanceclose"></block>
     </category>
@@ -278,6 +257,10 @@ h1 {
 
 
   <h1>Vertical block rendering!</h1>
+
+  <strong style='color:red'>Note: vertical-mode Scratch Blocks rendering is
+    just getting started and we will have many updates for both functionality
+    and visual design in summer 2016.</strong>
 
   <p><a href="javascript:void(workspace.setVisible(true))">Show</a>
    - <a href="javascript:void(workspace.setVisible(false))">Hide</a></p>
@@ -294,8 +277,6 @@ h1 {
     <input type="button" value="Export to XML" onclick="toXml()">
     &nbsp;
     <input type="button" value="Import from XML" onclick="fromXml()" id="import">
-    <br>
-    <input type="button" value="To JavaScript" onclick="toCode('JavaScript')">
     <br>
     <textarea id="importExport" style="width: 26%; height: 12em"
       onchange="taChange();" onkeyup="taChange()"></textarea>

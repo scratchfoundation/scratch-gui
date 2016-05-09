@@ -224,7 +224,7 @@ Blockly.DropDownDiv.show = function(owner, primaryX, primaryY, secondaryX, secon
  */
 Blockly.DropDownDiv.getPositionMetrics = function(primaryX, primaryY, secondaryX, secondaryY) {
   var div = Blockly.DropDownDiv.DIV_;
-  var boundPosition = goog.style.getClientPosition(Blockly.DropDownDiv.boundsElement_);
+  var boundPosition = goog.style.getPageOffset(Blockly.DropDownDiv.boundsElement_);
   var boundSize = goog.style.getSize(Blockly.DropDownDiv.boundsElement_);
   var divSize = goog.style.getSize(div);
 

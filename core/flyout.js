@@ -741,6 +741,8 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
   return function(e) {
     flyout.dragMode_ = Blockly.DRAG_NONE;
     Blockly.terminateDrag_();
+    Blockly.WidgetDiv.hide(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
     Blockly.hideChaff();
     if (Blockly.isRightButton(e)) {
       // Right-click.
@@ -774,6 +776,8 @@ Blockly.Flyout.prototype.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     return;
   }
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.hideChaff(true);
   Blockly.Flyout.terminateDrag_();
   this.startDragMouseY_ = e.clientY;

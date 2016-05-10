@@ -30,6 +30,8 @@
 #
 # This script also generates:
 #   blocks_compressed.js: The compressed Blockly language blocks.
+#   blocks_horizontal_compressed.js: The compressed Scratch horizontal blocks.
+#   blocks_vertical_compressed.js: The compressed Scratch vertical blocks.
 #   msg/js/<LANG>.js for every language <LANG> defined in msg/js/<LANG>.json.
 
 import sys
@@ -176,7 +178,9 @@ class Gen_compressed(threading.Thread):
   def run(self):
     self.gen_core(True)
     self.gen_core(False)
-    self.gen_blocks()
+    self.gen_blocks("horizontal")
+    self.gen_blocks("vertical")
+    self.gen_blocks("common")
 
   def gen_core(self, vertical):
     if vertical:
@@ -209,8 +213,16 @@ class Gen_compressed(threading.Thread):
 
     self.do_compile(params, target_filename, filenames, "")
 
-  def gen_blocks(self):
-    target_filename = "blocks_compressed.js"
+  def gen_blocks(self, block_type):
+    if block_type == "horizontal":
+      target_filename = "blocks_compressed_horizontal.js"
+      filenames = glob.glob(os.path.join("blocks_horizontal", "*.js"))
+    elif block_type == "vertical":
+      target_filename = "blocks_compressed_vertical.js"
+      filenames = glob.glob(os.path.join("blocks_vertical", "*.js"))
+    elif block_type == "common":
+      target_filename = "blocks_compressed.js"
+      filenames = glob.glob(os.path.join("blocks", "*.js"))
     # Define the parameters for the POST request.
     params = [
         ("compilation_level", "SIMPLE_OPTIMIZATIONS"),
@@ -224,7 +236,6 @@ class Gen_compressed(threading.Thread):
     # Read in all the source files.
     # Add Blockly.Blocks to be compatible with the compiler.
     params.append(("js_code", "goog.provide('Blockly.Blocks');"))
-    filenames = glob.glob(os.path.join("blocks", "*.js"))
     # Add Blockly.Colours for use of centralized colour bank
     filenames.append(os.path.join("core", "colours.js"))
     for filename in filenames:

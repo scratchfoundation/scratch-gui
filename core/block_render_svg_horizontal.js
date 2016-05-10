@@ -530,9 +530,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(metrics) {
  *    block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawLeft_ =
-    function(steps, connectionsXY, metrics) {
-
+Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, connectionsXY, metrics) {
   // Top edge.
   if (metrics.startHat) {
     // Hat block
@@ -659,8 +657,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps,
  *    block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawRight_ =
-    function(steps, connectionsXY, metrics) {
+Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, connectionsXY, metrics) {
   if (!this.isShadow()) {
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 ' +
@@ -705,8 +702,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ =
  *    block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawTop_ =
-    function(steps, connectionsXY, metrics) {
+Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, connectionsXY, metrics) {
   if (!this.isShadow()) {
     steps.push('a', Blockly.BlockSvg.CORNER_RADIUS + ',' +
                Blockly.BlockSvg.CORNER_RADIUS + ' 0 0,0 -' +
@@ -749,8 +745,7 @@ Blockly.BlockSvg.prototype.getFieldShadowBlock_ = function() {
  * @param {!Blockly.Connection} existingConnection The connection on the
  *     existing block, which newBlock should line up with.
  */
-Blockly.BlockSvg.prototype.positionNewBlock =
-    function(newBlock, newConnection, existingConnection) {
+Blockly.BlockSvg.prototype.positionNewBlock = function(newBlock, newConnection, existingConnection) {
   // We only need to position the new block if it's before the existing one,
   // otherwise its position is set by the previous block.
   if (newConnection.type == Blockly.NEXT_STATEMENT) {

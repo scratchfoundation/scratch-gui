@@ -12,7 +12,8 @@
         "space-before-function-paren": [2, "never"], # Blockly doesn't have space before function paren
         "strict": [0], # Blockly uses 'use strict' in files
         "no-cond-assign": [0], # Blockly often uses cond-assignment in loops
-        "valid-jsdoc": [2, {"requireReturn": false}]
+        "valid-jsdoc": [2, {"requireReturn": false}],
+        "no-redeclare": [0] # Preference from Blockly/Google
     },
     "env": {
         "browser": true

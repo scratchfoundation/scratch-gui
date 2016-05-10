@@ -256,7 +256,7 @@ Blockly.WorkspaceSvg.prototype.dispose = function() {
  * Obtain a newly created block.
  * @param {?string} prototypeName Name of the language object containing
  *     type-specific functions for this block.
- * @param {=string} opt_id Optional ID.  Use this ID if provided, otherwise
+ * @param {string=} opt_id Optional ID.  Use this ID if provided, otherwise
  *     create a new id.
  * @return {!Blockly.BlockSvg} The created block.
  */
@@ -302,7 +302,7 @@ Blockly.WorkspaceSvg.prototype.addFlyout_ = function() {
     parentWorkspace: this,
     RTL: this.RTL,
     horizontalLayout: this.horizontalLayout,
-    toolboxPosition: this.options.toolboxPosition,
+    toolboxPosition: this.options.toolboxPosition
   };
   /** @type {Blockly.Flyout} */
   this.flyout_ = new Blockly.Flyout(workspaceOptions);
@@ -438,7 +438,7 @@ Blockly.WorkspaceSvg.prototype.traceOn = function(armed) {
   }
   if (armed) {
     this.traceWrapper_ = Blockly.bindEvent_(this.svgBlockCanvas_,
-        'blocklySelectChange', this, function() {this.traceOn_ = false});
+        'blocklySelectChange', this, function() {this.traceOn_ = false; });
   }
 };
 
@@ -595,7 +595,6 @@ Blockly.WorkspaceSvg.prototype.recordDeleteAreas = function() {
  * @return {boolean} True if event is in a delete area.
  */
 Blockly.WorkspaceSvg.prototype.isDeleteArea = function(e) {
-  var isDelete = false;
   var xy = new goog.math.Coordinate(e.clientX, e.clientY);
   if (this.deleteAreaTrash_) {
     if (this.deleteAreaTrash_.contains(xy)) {
@@ -1195,8 +1194,8 @@ Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
                metrics.contentHeight);
    // When the workspace starts scrolling, hide the WidgetDiv without animation.
    // This is to prevent a dispoal animation from happening in the wrong location.
-   Blockly.WidgetDiv.hide(true);
-   Blockly.DropDownDiv.hideWithoutAnimation();
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
   // Move the scrollbars and the page will scroll automatically.
   this.scrollbar.set(-x - metrics.contentLeft,
                      -y - metrics.contentTop);

@@ -121,7 +121,10 @@ Blockly.FieldIconMenu.prototype.setValue = function(newValue) {
  * @private
  */
 Blockly.FieldIconMenu.prototype.setParentFieldImage = function(src) {
-  if (this.sourceBlock_) {
+  // Only attempt if we have a set sourceBlock_ and parentBlock_
+  // It's possible that this function could be called before
+  // a parent block is set; in that case, fail silently.
+  if (this.sourceBlock_ && this.sourceBlock_.parentBlock_) {
     var parentBlock = this.sourceBlock_.parentBlock_;
     // Loop through all inputs' fields to find the first FieldImage
     for (var i = 0, input; input = parentBlock.inputList[i]; i++) {

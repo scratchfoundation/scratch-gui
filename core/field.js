@@ -121,15 +121,22 @@ Blockly.Field.NBSP = '\u00A0';
 Blockly.Field.prototype.EDITABLE = true;
 
 /**
- * Install this field on a block.
+ * Attach this field to a block.
  * @param {!Blockly.Block} block The block containing this field.
  */
-Blockly.Field.prototype.init = function(block) {
-  if (this.sourceBlock_) {
+Blockly.Field.prototype.setSourceBlock = function(block) {
+  goog.asserts.assert(!this.sourceBlock_, 'Field already bound to a block.');
+  this.sourceBlock_ = block;
+};
+
+/**
+ * Install this field on a block.
+ */
+Blockly.Field.prototype.init = function() {
+  if (this.fieldGroup_) {
     // Field has already been initialized once.
     return;
   }
-  this.sourceBlock_ = block;
   // Build the DOM.
   this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
   if (!this.visible_) {
@@ -146,7 +153,7 @@ Blockly.Field.prototype.init = function(block) {
       this.fieldGroup_);
 
   this.updateEditable();
-  block.getSvgRoot().appendChild(this.fieldGroup_);
+  this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
   this.mouseUpWrapper_ =
       Blockly.bindEvent_(this.getClickTarget_(), 'mouseup', this,
           this.onMouseUp_);
@@ -470,7 +477,7 @@ Blockly.Field.prototype.getClickTarget_ = function() {
 /**
  * Return the absolute coordinates of the top-left corner of this field.
  * The origin (0,0) is the top-left corner of the page body.
- * @return {{!goog.math.Coordinate}} Object with .x and .y properties.
+ * @return {!goog.math.Coordinate} Object with .x and .y properties.
  * @private
  */
 Blockly.Field.prototype.getAbsoluteXY_ = function() {

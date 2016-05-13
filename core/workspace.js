@@ -45,16 +45,38 @@ Blockly.Workspace = function(opt_options) {
   this.RTL = !!this.options.RTL;
   /** @type {boolean} */
   this.horizontalLayout = !!this.options.horizontalLayout;
-  /** @type {!Array.<!Blockly.Block>} */
+
+  /**
+   * @type {!Array.<!Blockly.Block>}
+   * @private
+   */
   this.topBlocks_ = [];
-  /** @type {!Array.<!Function>} */
+  /**
+   * @type {!Array.<!Function>}
+   * @private
+   */
   this.listeners_ = [];
+
   /** @type {!Array.<!Function>} */
   this.tapListeners_ = [];
-  /** @type {!Array.<!Blockly.Events.Abstract>} */
+
+  /**
+   * @type {!Array.<!Blockly.Events.Abstract>}
+   * @private
+   */
   this.undoStack_ = [];
-  /** @type {!Array.<!Blockly.Events.Abstract>} */
+
+  /**
+   * @type {!Array.<!Blockly.Events.Abstract>}
+   * @private
+   */
   this.redoStack_ = [];
+
+  /**
+   * @type {!Object}
+   * @private
+   */
+  this.blockDB_ = Object.create(null);
 };
 
 /**
@@ -188,22 +210,6 @@ Blockly.Workspace.prototype.newBlock = function(prototypeName, opt_id) {
 };
 
 /**
- * Finds the block with the specified ID in this workspace.
- * @param {string} id ID of block to find.
- * @return {Blockly.Block} The matching block, or null if not found.
- */
-Blockly.Workspace.prototype.getBlockById = function(id) {
-  // If this O(n) function fails to scale well, maintain a hash table of IDs.
-  var blocks = this.getAllBlocks();
-  for (var i = 0, block; block = blocks[i]; i++) {
-    if (block.id == id) {
-      return block;
-    }
-  }
-  return null;
-};
-
-/**
  * The number of blocks that may be added to the workspace before reaching
  *     the maxBlocks.
  * @return {number} Number of blocks left.
@@ -222,14 +228,14 @@ Blockly.Workspace.prototype.remainingCapacity = function() {
 Blockly.Workspace.prototype.undo = function(redo) {
   var inputStack = redo ? this.redoStack_ : this.undoStack_;
   var outputStack = redo ? this.undoStack_ : this.redoStack_;
-  var event = inputStack.pop();
-  if (!event) {
+  var inputEvent = inputStack.pop();
+  if (!inputEvent) {
     return;
   }
-  var events = [event];
+  var events = [inputEvent];
   // Do another undo/redo if the next one is of the same group.
-  while (inputStack.length && event.group &&
-      event.group == inputStack[inputStack.length - 1].group) {
+  while (inputStack.length && inputEvent.group &&
+      inputEvent.group == inputStack[inputStack.length - 1].group) {
     events.push(inputStack.pop());
   }
   // Push these popped events on the opposite stack.
@@ -318,13 +324,22 @@ Blockly.Workspace.prototype.removeTapListener = function(func) {
 
 /**
  * Fire a tap event.
- * @param {string} ID of block that was tapped
- * @param {string} ID of root block in tree that was tapped
+ * @param {string} blockId ID of block that was tapped
+ * @param {string} rootBlockId ID of root block in tree that was tapped
  */
 Blockly.Workspace.prototype.fireTapListener = function(blockId, rootBlockId) {
   for (var i = 0, func; func = this.tapListeners_[i]; i++) {
     func(blockId, rootBlockId);
   }
+};
+
+/**
+ * Find the block on this workspace with the specified ID.
+ * @param {string} id ID of block to find.
+ * @return {Blockly.Block} The sought after block or null if not found.
+ */
+Blockly.Workspace.prototype.getBlockById = function(id) {
+  return this.blockDB_[id] || null;
 };
 
 /**

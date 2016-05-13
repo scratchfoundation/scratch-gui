@@ -81,10 +81,17 @@ Blockly.BlockSvg.CORNER_RADIUS = 4;
  */
 Blockly.BlockSvg.START_HAT = true;
 /**
+ * Height of the top hat.
+ * @const
+ */
+Blockly.BlockSvg.START_HAT_HEIGHT = 15;
+/**
  * Path of the top hat's curve.
  * @const
  */
-Blockly.BlockSvg.START_HAT_PATH = 'c 30,-15 70,-15 100,0';
+Blockly.BlockSvg.START_HAT_PATH = 'c 30,-' +
+    Blockly.BlockSvg.START_HAT_HEIGHT + ' 70,-' +
+    Blockly.BlockSvg.START_HAT_HEIGHT + ' 100,0';
 /**
  * SVG path for drawing next/previous notch from left to right.
  * @const
@@ -300,7 +307,7 @@ Blockly.BlockSvg.prototype.render = function(opt_bubble) {
       parentBlock.render(true);
     } else {
       // Top-most block.  Fire an event to allow scrollbars to resize.
-      Blockly.fireUiEvent(window, 'resize');
+      Blockly.asyncSvgResize(this.workspace);
     }
   }
   Blockly.Field.stopCache();
@@ -698,7 +705,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, connectionsXY, cursorY) {
+Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, connectionsXY,
+    cursorY) {
   this.height = cursorY;
   steps.push(Blockly.BlockSvg.BOTTOM_RIGHT_CORNER);
   if (this.nextConnection) {
@@ -763,4 +771,4 @@ Blockly.BlockSvg.prototype.positionNewBlock =
 
     newBlock.moveBy(dx, dy);
   }
-}
+};

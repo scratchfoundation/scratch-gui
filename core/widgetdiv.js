@@ -114,7 +114,6 @@ Blockly.WidgetDiv.show = function(newOwner, rtl, opt_dispose,
   Blockly.WidgetDiv.DIV.style.top = xy.y + 'px';
   Blockly.WidgetDiv.DIV.style.direction = rtl ? 'rtl' : 'ltr';
   Blockly.WidgetDiv.DIV.style.display = 'block';
-  Blockly.Events.setGroup(true);
 };
 
 /**

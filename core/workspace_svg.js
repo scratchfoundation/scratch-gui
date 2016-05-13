@@ -478,7 +478,7 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
 Blockly.WorkspaceSvg.prototype.glowBlock = function(id, isGlowingBlock) {
   var block = null;
   if (id) {
-    block = Blockly.Block.getById(id);
+    block = this.getBlockById(id);
     if (!block) {
       throw 'Tried to glow block that does not exist.';
     }
@@ -494,7 +494,7 @@ Blockly.WorkspaceSvg.prototype.glowBlock = function(id, isGlowingBlock) {
 Blockly.WorkspaceSvg.prototype.glowStack = function(id, isGlowingStack) {
   var block = null;
   if (id) {
-    block = Blockly.Block.getById(id);
+    block = this.getBlockById(id);
     if (!block) {
       throw 'Tried to glow stack on block that does not exist.';
     }

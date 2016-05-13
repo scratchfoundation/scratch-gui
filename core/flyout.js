@@ -1077,8 +1077,8 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
     }
   }
   if (filtered) {
-    // Fire a resize event to update the flyout's scrollbar.
-    Blockly.fireUiEvent(window, 'resize');
+    // Top-most block.  Fire an event to allow scrollbars to resize.
+    Blockly.asyncSvgResize(this.workspace);
   }
 };
 
@@ -1169,8 +1169,8 @@ Blockly.Flyout.prototype.reflowHorizontal = function() {
     }
     // Record the width for .getMetrics_ and .position.
     this.height_ = flyoutHeight;
-    // Fire a resize event to update the flyout's scrollbar.
-    Blockly.fireUiEvent(window, 'resize');
+    // Top-most block.  Fire an event to allow scrollbars to resize.
+    Blockly.asyncSvgResize(this.workspace);
   }
 };
 
@@ -1217,8 +1217,8 @@ Blockly.Flyout.prototype.reflowVertical = function() {
     }
     // Record the width for .getMetrics_ and .position.
     this.width_ = flyoutWidth;
-    // Fire a resize event to update the flyout's scrollbar.
-    Blockly.fireUiEvent(window, 'resize');
+    // Top-most block.  Fire an event to allow scrollbars to resize.
+    Blockly.asyncSvgResize(this.workspace);
   }
 };
 

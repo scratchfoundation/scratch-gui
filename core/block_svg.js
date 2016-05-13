@@ -997,14 +997,13 @@ Blockly.BlockSvg.prototype.onMouseMove_ = function(e) {
  * @private
  */
 Blockly.BlockSvg.prototype.handleDragFree_ = function(oldXY, newXY, e) {
-  var dx = oldXY.x - this.dragStartXY_.x;
-  var dy = oldXY.y - this.dragStartXY_.y;
+  var dxy = goog.math.Coordinate.difference(oldXY, this.dragStartXY_);
   this.workspace.dragSurface.translateSurface(newXY.x, newXY.y);
   // Drag all the nested bubbles.
   for (var i = 0; i < this.draggedBubbles_.length; i++) {
     var commentData = this.draggedBubbles_[i];
-    commentData.bubble.setIconLocation(commentData.x + dx,
-        commentData.y + dy);
+    commentData.bubble.setIconLocation(
+        goog.math.Coordinate.sum(commentData, dxy));
   }
 
   // Check to see if any of this block's connections are within range of
@@ -1020,7 +1019,7 @@ Blockly.BlockSvg.prototype.handleDragFree_ = function(oldXY, newXY, e) {
   var radiusConnection = Blockly.SNAP_RADIUS;
   for (i = 0; i < myConnections.length; i++) {
     var myConnection = myConnections[i];
-    var neighbour = myConnection.closest(radiusConnection, dx, dy);
+    var neighbour = myConnection.closest(radiusConnection, dxy);
     if (neighbour.connection) {
       closestConnection = neighbour.connection;
       localConnection = myConnection;
@@ -1030,9 +1029,9 @@ Blockly.BlockSvg.prototype.handleDragFree_ = function(oldXY, newXY, e) {
 
   var updatePreviews = true;
   if (Blockly.localConnection_ && Blockly.highlightedConnection_) {
-    var xDiff = Blockly.localConnection_.x_ + dx -
+    var xDiff = Blockly.localConnection_.x_ + dxy.x -
         Blockly.highlightedConnection_.x_;
-    var yDiff = Blockly.localConnection_.y_ + dy -
+    var yDiff = Blockly.localConnection_.y_ + dxy.y -
         Blockly.highlightedConnection_.y_;
     var curDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 

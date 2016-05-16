@@ -1120,9 +1120,6 @@ Blockly.WorkspaceSvg.prototype.scrollCenter = function() {
     // Can't center a non-scrolling workspace.
     return;
   }
-  this.scale = newScale;
-  this.updateGridPattern_();
-  this.scrollbar.resize();
   // Hide the WidgetDiv without animation (zoom makes field out of place with div)
   Blockly.WidgetDiv.hide(true);
   Blockly.DropDownDiv.hideWithoutAnimation();

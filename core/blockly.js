@@ -27,16 +27,21 @@
 // Top level object for Blockly.
 goog.provide('Blockly');
 
-goog.require('Blockly.BlockSvg');
+goog.require('Blockly.BlockSvg.render');
+goog.require('Blockly.DropDownDiv');
+goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
+goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
 // Date picker commented out since it increases footprint by 60%.
 // Add it only if you need it.
 //goog.require('Blockly.FieldDate');
 goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.FieldIconMenu');
 goog.require('Blockly.FieldImage');
 goog.require('Blockly.FieldTextInput');
+goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldVariable');
 goog.require('Blockly.Generator');
 goog.require('Blockly.Msg');
@@ -44,6 +49,7 @@ goog.require('Blockly.Procedures');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.WidgetDiv');
 goog.require('Blockly.WorkspaceSvg');
+goog.require('Blockly.constants');
 goog.require('Blockly.inject');
 goog.require('Blockly.utils');
 goog.require('goog.color');
@@ -54,97 +60,11 @@ goog.require('goog.userAgent');
 var CLOSURE_DEFINES = {'goog.DEBUG': false};
 
 /**
- * Required name space for SVG elements.
- * @const
+ * The main workspace most recently used.
+ * Set by Blockly.WorkspaceSvg.prototype.markFocused
+ * @type {Blockly.Workspace}
  */
-Blockly.SVG_NS = 'http://www.w3.org/2000/svg';
-/**
- * Required name space for HTML elements.
- * @const
- */
-Blockly.HTML_NS = 'http://www.w3.org/1999/xhtml';
-
-/**
- * The richness of block colours, regardless of the hue.
- * Must be in the range of 0 (inclusive) to 1 (exclusive).
- */
-Blockly.HSV_SATURATION = 0.45;
-/**
- * The intensity of block colours, regardless of the hue.
- * Must be in the range of 0 (inclusive) to 1 (exclusive).
- */
-Blockly.HSV_VALUE = 0.65;
-
-/**
- * Sprited icons and images.
- */
-Blockly.SPRITE = {
-  width: 96,
-  height: 124,
-  url: 'sprites.png'
-};
-
-/**
- * Convert a hue (HSV model) into an RGB hex triplet.
- * @param {number} hue Hue on a colour wheel (0-360).
- * @return {string} RGB code, e.g. '#5ba65b'.
- */
-Blockly.hueToRgb = function(hue) {
-  return goog.color.hsvToHex(hue, Blockly.HSV_SATURATION,
-      Blockly.HSV_VALUE * 255);
-};
-
-/**
- * ENUM for a right-facing value input.  E.g. 'set item to' or 'return'.
- * @const
- */
-Blockly.INPUT_VALUE = 1;
-/**
- * ENUM for a left-facing value output.  E.g. 'random fraction'.
- * @const
- */
-Blockly.OUTPUT_VALUE = 2;
-/**
- * ENUM for a down-facing block stack.  E.g. 'if-do' or 'else'.
- * @const
- */
-Blockly.NEXT_STATEMENT = 3;
-/**
- * ENUM for an up-facing block stack.  E.g. 'break out of loop'.
- * @const
- */
-Blockly.PREVIOUS_STATEMENT = 4;
-/**
- * ENUM for an dummy input.  Used to add field(s) with no input.
- * @const
- */
-Blockly.DUMMY_INPUT = 5;
-
-/**
- * ENUM for left alignment.
- * @const
- */
-Blockly.ALIGN_LEFT = -1;
-/**
- * ENUM for centre alignment.
- * @const
- */
-Blockly.ALIGN_CENTRE = 0;
-/**
- * ENUM for right alignment.
- * @const
- */
-Blockly.ALIGN_RIGHT = 1;
-
-/**
- * Lookup table for determining the opposite type of a connection.
- * @const
- */
-Blockly.OPPOSITE_TYPE = [];
-Blockly.OPPOSITE_TYPE[Blockly.INPUT_VALUE] = Blockly.OUTPUT_VALUE;
-Blockly.OPPOSITE_TYPE[Blockly.OUTPUT_VALUE] = Blockly.INPUT_VALUE;
-Blockly.OPPOSITE_TYPE[Blockly.NEXT_STATEMENT] = Blockly.PREVIOUS_STATEMENT;
-Blockly.OPPOSITE_TYPE[Blockly.PREVIOUS_STATEMENT] = Blockly.NEXT_STATEMENT;
+Blockly.mainWorkspace = null;
 
 /**
  * Currently selected block.
@@ -167,36 +87,35 @@ Blockly.highlightedConnection_ = null;
 Blockly.localConnection_ = null;
 
 /**
- * Number of pixels the mouse must move before a drag starts.
+ * All of the connections on blocks that are currently being dragged.
+ * @type {!Array.<!Blockly.Connection>}
+ * @private
  */
-Blockly.DRAG_RADIUS = 5;
+Blockly.draggingConnections_ = [];
 
 /**
- * Maximum misalignment between connections for them to snap together.
+ * Connection on the insertion marker block that matches
+ * Blockly.localConnection_ on the dragged block.
+ * @type {Blockly.Connection}
+ * @private
  */
-Blockly.SNAP_RADIUS = 20;
+Blockly.insertionMarkerConnection_ = null;
 
 /**
- * Delay in ms between trigger and bumping unconnected block out of alignment.
+ * Grayed-out block that indicates to the user what will happen if they release
+ * a drag immediately.
+ * @type {Blockly.Block}
+ * @private
  */
-Blockly.BUMP_DELAY = 250;
+Blockly.insertionMarker_ = null;
 
 /**
- * Number of characters to truncate a collapsed block to.
+ * Connection that was bumped out of the way by an insertion marker, and may
+ * need to be put back as the drag continues.
+ * @type {Blockly.Connection}
+ * @private
  */
-Blockly.COLLAPSE_CHARS = 30;
-
-/**
- * Length in ms for a touch to become a long press.
- */
-Blockly.LONGPRESS = 750;
-
-/**
- * The main workspace most recently used.
- * Set by Blockly.WorkspaceSvg.prototype.markFocused
- * @type {Blockly.Workspace}
- */
-Blockly.mainWorkspace = null;
+Blockly.bumpedConnection_ = null;
 
 /**
  * Contents of the local clipboard.
@@ -219,7 +138,7 @@ Blockly.clipboardSource_ = null;
  * 2 - Freely draggable.
  * @private
  */
-Blockly.dragMode_ = 0;
+Blockly.dragMode_ = Blockly.DRAG_NONE;
 
 /**
  * Wrapper function called when a touch mouseUp occurs during a drag operation.
@@ -227,6 +146,16 @@ Blockly.dragMode_ = 0;
  * @private
  */
 Blockly.onTouchUpWrapper_ = null;
+
+/**
+ * Convert a hue (HSV model) into an RGB hex triplet.
+ * @param {number} hue Hue on a colour wheel (0-360).
+ * @return {string} RGB code, e.g. '#5ba65b'.
+ */
+Blockly.hueToRgb = function(hue) {
+  return goog.color.hsvToHex(hue, Blockly.HSV_SATURATION,
+      Blockly.HSV_VALUE * 255);
+};
 
 /**
  * Returns the dimensions of the specified SVG image.
@@ -239,11 +168,36 @@ Blockly.svgSize = function(svg) {
 };
 
 /**
+ * Schedule a call to the resize handler.  Groups of simultaneous events (e.g.
+ * a tree of blocks being deleted) are merged into one call.
+ * @param {Blockly.WorkspaceSvg} workspace Any workspace in the SVG.
+ */
+Blockly.asyncSvgResize = function(workspace) {
+  if (Blockly.svgResizePending_) {
+    return;
+  }
+  if (!workspace) {
+    workspace = Blockly.getMainWorkspace();
+  }
+  Blockly.svgResizePending_ = true;
+  setTimeout(function() {Blockly.svgResize(workspace);}, 0);
+};
+
+/**
+ * Flag indicating a resize event is scheduled.
+ * Used to fire only one resize after multiple changes.
+ * @type {boolean}
+ * @private
+ */
+Blockly.svgResizePending_ = false;
+
+/**
  * Size the SVG image to completely fill its container.
  * Record the height/width of the SVG image.
  * @param {!Blockly.WorkspaceSvg} workspace Any workspace in the SVG.
  */
 Blockly.svgResize = function(workspace) {
+  Blockly.svgResizePending_ = false;
   var mainWorkspace = workspace;
   while (mainWorkspace.options.parentWorkspace) {
     mainWorkspace = mainWorkspace.options.parentWorkspace;
@@ -251,7 +205,7 @@ Blockly.svgResize = function(workspace) {
   var svg = mainWorkspace.getParentSvg();
   var div = svg.parentNode;
   if (!div) {
-    // Workspace deteted, or something.
+    // Workspace deleted, or something.
     return;
   }
   var width = div.offsetWidth;
@@ -276,7 +230,6 @@ Blockly.onMouseUp_ = function(e) {
   var workspace = Blockly.getMainWorkspace();
   Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
   workspace.isScrolling = false;
-
   // Unbind the touch event if it exists.
   if (Blockly.onTouchUpWrapper_) {
     Blockly.unbindEvent_(Blockly.onTouchUpWrapper_);
@@ -299,27 +252,17 @@ Blockly.onMouseMove_ = function(e) {
   }
   var workspace = Blockly.getMainWorkspace();
   if (workspace.isScrolling) {
-    Blockly.removeAllRanges();
     var dx = e.clientX - workspace.startDragMouseX;
     var dy = e.clientY - workspace.startDragMouseY;
-    var metrics = workspace.startDragMetrics;
     var x = workspace.startScrollX + dx;
     var y = workspace.startScrollY + dy;
-    x = Math.min(x, -metrics.contentLeft);
-    y = Math.min(y, -metrics.contentTop);
-    x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
-                 metrics.contentWidth);
-    y = Math.max(y, metrics.viewHeight - metrics.contentTop -
-                 metrics.contentHeight);
-
-    // Move the scrollbars and the page will scroll automatically.
-    workspace.scrollbar.set(-x - metrics.contentLeft,
-                            -y - metrics.contentTop);
+    workspace.scroll(x, y);
     // Cancel the long-press if the drag has moved too far.
     if (Math.sqrt(dx * dx + dy * dy) > Blockly.DRAG_RADIUS) {
       Blockly.longStop_();
     }
     e.stopPropagation();
+    e.preventDefault();
   }
 };
 
@@ -329,26 +272,19 @@ Blockly.onMouseMove_ = function(e) {
  * @private
  */
 Blockly.onKeyDown_ = function(e) {
-  if (Blockly.isTargetInput_(e)) {
+  if (Blockly.mainWorkspace.options.readOnly || Blockly.isTargetInput_(e)) {
+    // No key actions on readonly workspaces.
     // When focused on an HTML text input widget, don't trap any keys.
     return;
   }
-  var deleteBlock = false;
   if (e.keyCode == 27) {
-    // Pressing esc closes the context menu.
+    // Pressing esc closes the context menu and any drop-down
     Blockly.hideChaff();
+    Blockly.DropDownDiv.hide();
   } else if (e.keyCode == 8 || e.keyCode == 46) {
     // Delete or backspace.
-    try {
-      if (Blockly.selected && Blockly.selected.isDeletable()) {
-        deleteBlock = true;
-      }
-    } finally {
-      // Stop the browser from going back to the previous page.
-      // Use a finally so that any error in delete code above doesn't disappear
-      // from the console when the page rolls back.
-      e.preventDefault();
-    }
+    // Stop the browser from going back to the previous page.
+    e.preventDefault();
   } else if (e.altKey || e.ctrlKey || e.metaKey) {
     if (Blockly.selected &&
         Blockly.selected.isDeletable() && Blockly.selected.isMovable()) {
@@ -359,7 +295,13 @@ Blockly.onKeyDown_ = function(e) {
       } else if (e.keyCode == 88) {
         // 'x' for cut.
         Blockly.copy_(Blockly.selected);
-        deleteBlock = true;
+        Blockly.hideChaff();
+        var heal = Blockly.dragMode_ != Blockly.DRAG_FREE;
+        Blockly.selected.dispose(heal, true);
+        if (Blockly.highlightedConnection_) {
+          Blockly.highlightedConnection_.unhighlight();
+          Blockly.highlightedConnection_ = null;
+        }
       }
     }
     if (e.keyCode == 86) {
@@ -367,16 +309,10 @@ Blockly.onKeyDown_ = function(e) {
       if (Blockly.clipboardXml_) {
         Blockly.clipboardSource_.paste(Blockly.clipboardXml_);
       }
-    }
-  }
-  if (deleteBlock) {
-    // Common code for delete and cut.
-    Blockly.hideChaff();
-    var heal = Blockly.dragMode_ != 2;
-    Blockly.selected.dispose(heal, true);
-    if (Blockly.highlightedConnection_) {
-      Blockly.highlightedConnection_.unhighlight();
-      Blockly.highlightedConnection_ = null;
+    } else if (e.keyCode == 90) {
+      // 'z' for undo 'Z' is for redo.
+      Blockly.hideChaff();
+      Blockly.mainWorkspace.undo(e.shiftKey);
     }
   }
 };
@@ -433,8 +369,8 @@ Blockly.longStop_ = function() {
  * @private
  */
 Blockly.copy_ = function(block) {
-  var xmlBlock = Blockly.Xml.blockToDom_(block);
-  if (Blockly.dragMode_ != 2) {
+  var xmlBlock = Blockly.Xml.blockToDom(block);
+  if (Blockly.dragMode_ != Blockly.DRAG_FREE) {
     Blockly.Xml.deleteNext(xmlBlock);
   }
   // Encode start position in XML.
@@ -520,12 +456,8 @@ Blockly.getMainWorkspaceMetrics_ = function() {
   var MARGIN = Blockly.Flyout.prototype.CORNER_RADIUS - 1;
   var viewWidth = svgSize.width - MARGIN;
   var viewHeight = svgSize.height - MARGIN;
-  try {
-    var blockBox = this.getCanvas().getBBox();
-  } catch (e) {
-    // Firefox has trouble with hidden elements (Bug 528969).
-    return null;
-  }
+  var blockBox = this.getBlocksBoundingBox();
+
   // Fix scale.
   var contentWidth = blockBox.width * this.scale;
   var contentHeight = blockBox.height * this.scale;
@@ -549,7 +481,7 @@ Blockly.getMainWorkspaceMetrics_ = function() {
     var bottomEdge = topEdge + blockBox.height;
   }
   var absoluteLeft = 0;
-  if (!this.RTL && this.toolbox_) {
+  if (this.toolbox_ && this.toolbox_.toolboxPosition == Blockly.TOOLBOX_AT_LEFT) {
     absoluteLeft = this.toolbox_.width;
   }
   var metrics = {
@@ -596,20 +528,6 @@ Blockly.setMainWorkspaceMetrics_ = function(xyRatio) {
       this.updateGridPattern_();
     }
   }
-};
-
-/**
- * When something in Blockly's workspace changes, call a function.
- * @param {!Function} func Function to call.
- * @return {!Array.<!Array>} Opaque data that can be passed to
- *     removeChangeListener.
- * @deprecated April 2015
- */
-Blockly.addChangeListener = function(func) {
-  // Backwards compatability from before there could be multiple workspaces.
-  console.warn('Deprecated call to Blockly.addChangeListener, ' +
-               'use workspace.addChangeListener instead.');
-  return Blockly.getMainWorkspace().addChangeListener(func);
 };
 
 /**

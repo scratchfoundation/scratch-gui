@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Spec tool</title>
+<script src="../blockly_uncompressed_horizontal.js"></script>
+<script src="../generators/javascript.js"></script>
+<script src="../generators/javascript/control.js"></script>
+<script src="../generators/javascript/looks.js"></script>
+<script src="../generators/javascript/math.js"></script>
+<script src="../generators/javascript/motion.js"></script>
+<script src="../generators/javascript/event.js"></script>
+<script src="../msg/messages.js"></script>
+<script src="../blocks/math.js"></script>
+<script src="../blocks/text.js"></script>
+<script src="../blocks_horizontal/control.js"></script>
+<script src="../blocks_horizontal/event.js"></script>
+<script src="../blocks_horizontal/wedo.js"></script>
+<script>
+'use strict';
+// Depending on the URL argument, render as LTR or RTL.
+var rtl = (document.location.search == '?rtl');
+var workspace = null;
+
+function start() {
+  var toolbox = document.getElementById('toolbox');
+  workspace = Blockly.inject('blocklyDiv', {
+    comments: false,
+    disable: false,
+    collapse: false,
+    maxBlocks: Infinity,
+    media: '../media/',
+    readOnly: false,
+    rtl: rtl,
+    scrollbars: true,
+    toolbox: toolbox,
+    trashcan: true,
+    horizontalLayout: true,
+    toolboxPosition: 'start',
+    zoom: {
+      controls: true,
+      wheel: true,
+      startScale: 8.0,
+      maxScale: 10,
+      minScale: 0.25,
+      scaleSpeed: 1.1
+    },
+    grid:
+      {spacing: 4,
+      length: 50,
+      colour: '#ccc',
+      snap: false},
+  });
+}
+</script>
+
+<style>
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+#blocklyDiv {
+  float: right;
+  height: 95%;
+  width: 90%;
+}
+.blocklySvg {
+  background-image: url(./spec.png) !important;
+  background-repeat: no-repeat;
+}
+.blocklyWorkspace {
+  opacity: .8;
+}
+</style>
+</head>
+<body onload="start()">
+
+  <div id="blocklyDiv"></div>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Events">
+      <block type="event_whenflagclicked"></block>
+      <block type="event_whenbroadcastreceived">
+        <value name="CHOICE">
+          <shadow type="dropdown_whenbroadcast">
+            <field name="CHOICE">blue</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="event_broadcast">
+      </block>
+      <block type="event_broadcast_text">
+          <value name="STRING">
+            <shadow type="text">
+              <field name="TEXT">Hi</field>
+            </shadow>
+          </value>
+      </block>
+    </category>
+
+    <category name="Control">
+      <block type="control_forever"></block>
+      <block type="control_repeat">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="control_stop"></block>
+      <block type="control_wait">
+        <value name="DURATION">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Wedo">
+        <block type="wedo_setcolor">
+        </block>
+        <block type="wedo_motorclockwise">
+            <value name="DURATION">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+        </block>
+        <block type="wedo_motorcounterclockwise">
+            <value name="DURATION">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+        </block>
+        <block type="wedo_motorspeed">
+        </block>
+        <block type="wedo_whentilt">
+        </block>
+        <block type="wedo_whendistanceclose"></block>
+    </category>
+  </xml>
+
+  <h1>Spec tool!</h1>
+
+  <script>
+    if (rtl) {
+      document.write('[ &larr; RTL. Switch to <A HREF="?ltr">LTR</A>. ]');
+    } else {
+      document.write('[ &rarr; LTR. Switch to <A HREF="?rtl">RTL</A>. ]');
+    }
+  </script>
+</body>
+</html>

@@ -30,9 +30,8 @@
 #
 # This script also generates:
 #   blocks_compressed.js: The compressed Blockly language blocks.
-#   javascript_compressed.js: The compressed Javascript generator.
-#   python_compressed.js: The compressed Python generator.
-#   dart_compressed.js: The compressed Dart generator.
+#   blocks_horizontal_compressed.js: The compressed Scratch horizontal blocks.
+#   blocks_vertical_compressed.js: The compressed Scratch vertical blocks.
 #   msg/js/<LANG>.js for every language <LANG> defined in msg/js/<LANG>.json.
 
 import sys
@@ -70,16 +69,21 @@ class Gen_uncompressed(threading.Thread):
   """Generate a JavaScript file that loads Blockly's raw files.
   Runs in a separate thread.
   """
-  def __init__(self, search_paths):
+  def __init__(self, search_paths, vertical):
     threading.Thread.__init__(self)
     self.search_paths = search_paths
+    self.vertical = vertical
 
   def run(self):
-    target_filename = 'blockly_uncompressed.js'
+    if self.vertical:
+      target_filename = 'blockly_uncompressed_vertical.js'
+    else:
+      target_filename = 'blockly_uncompressed_horizontal.js'
     f = open(target_filename, 'w')
     f.write(HEADER)
     f.write("""
-var isNodeJS = !!(typeof module !== 'undefined' && module.exports);
+var isNodeJS = !!(typeof module !== 'undefined' && module.exports &&
+                  typeof window === 'undefined');
 
 if (isNodeJS) {
   var window = {};
@@ -90,7 +94,7 @@ window.BLOCKLY_DIR = (function() {
   if (!isNodeJS) {
     // Find name of current directory.
     var scripts = document.getElementsByTagName('script');
-    var re = new RegExp('(.+)[\/]blockly_uncompressed\.js$');
+    var re = new RegExp('(.+)[\/]blockly_uncompressed(_vertical|_horizontal|)\.js$');
     for (var i = 0, script; script = scripts[i]; i++) {
       var match = re.exec(script.src);
       if (match) {
@@ -166,20 +170,25 @@ class Gen_compressed(threading.Thread):
   Uses the Closure Compiler's online API.
   Runs in a separate thread.
   """
-  def __init__(self, search_paths):
+  def __init__(self, search_paths_vertical, search_paths_horizontal):
     threading.Thread.__init__(self)
-    self.search_paths = search_paths
+    self.search_paths_vertical = search_paths_vertical
+    self.search_paths_horizontal = search_paths_horizontal
 
   def run(self):
-    self.gen_core()
-    self.gen_blocks()
-    self.gen_generator("javascript")
-    self.gen_generator("python")
-    self.gen_generator("php")
-    self.gen_generator("dart")
+    self.gen_core(True)
+    self.gen_core(False)
+    self.gen_blocks("horizontal")
+    self.gen_blocks("vertical")
+    self.gen_blocks("common")
 
-  def gen_core(self):
-    target_filename = "blockly_compressed.js"
+  def gen_core(self, vertical):
+    if vertical:
+      target_filename = 'blockly_compressed_vertical.js'
+      search_paths = self.search_paths_vertical
+    else:
+      target_filename = 'blockly_compressed_horizontal.js'
+      search_paths = self.search_paths_horizontal
     # Define the parameters for the POST request.
     params = [
         ("compilation_level", "SIMPLE_OPTIMIZATIONS"),
@@ -192,7 +201,7 @@ class Gen_compressed(threading.Thread):
       ]
 
     # Read in all the source files.
-    filenames = calcdeps.CalculateDependencies(self.search_paths,
+    filenames = calcdeps.CalculateDependencies(search_paths,
         [os.path.join("core", "blockly.js")])
     for filename in filenames:
       # Filter out the Closure files (the compiler will add them).
@@ -204,8 +213,16 @@ class Gen_compressed(threading.Thread):
 
     self.do_compile(params, target_filename, filenames, "")
 
-  def gen_blocks(self):
-    target_filename = "blocks_compressed.js"
+  def gen_blocks(self, block_type):
+    if block_type == "horizontal":
+      target_filename = "blocks_compressed_horizontal.js"
+      filenames = glob.glob(os.path.join("blocks_horizontal", "*.js"))
+    elif block_type == "vertical":
+      target_filename = "blocks_compressed_vertical.js"
+      filenames = glob.glob(os.path.join("blocks_vertical", "*.js"))
+    elif block_type == "common":
+      target_filename = "blocks_compressed.js"
+      filenames = glob.glob(os.path.join("blocks", "*.js"))
     # Define the parameters for the POST request.
     params = [
         ("compilation_level", "SIMPLE_OPTIMIZATIONS"),
@@ -219,7 +236,8 @@ class Gen_compressed(threading.Thread):
     # Read in all the source files.
     # Add Blockly.Blocks to be compatible with the compiler.
     params.append(("js_code", "goog.provide('Blockly.Blocks');"))
-    filenames = glob.glob(os.path.join("blocks", "*.js"))
+    # Add Blockly.Colours for use of centralized colour bank
+    filenames.append(os.path.join("core", "colours.js"))
     for filename in filenames:
       f = open(filename)
       params.append(("js_code", "".join(f.readlines())))
@@ -227,34 +245,6 @@ class Gen_compressed(threading.Thread):
 
     # Remove Blockly.Blocks to be compatible with Blockly.
     remove = "var Blockly={Blocks:{}};"
-    self.do_compile(params, target_filename, filenames, remove)
-
-  def gen_generator(self, language):
-    target_filename = language + "_compressed.js"
-    # Define the parameters for the POST request.
-    params = [
-        ("compilation_level", "SIMPLE_OPTIMIZATIONS"),
-        ("output_format", "json"),
-        ("output_info", "compiled_code"),
-        ("output_info", "warnings"),
-        ("output_info", "errors"),
-        ("output_info", "statistics"),
-      ]
-
-    # Read in all the source files.
-    # Add Blockly.Generator to be compatible with the compiler.
-    params.append(("js_code", "goog.provide('Blockly.Generator');"))
-    filenames = glob.glob(
-        os.path.join("generators", language, "*.js"))
-    filenames.insert(0, os.path.join("generators", language + ".js"))
-    for filename in filenames:
-      f = open(filename)
-      params.append(("js_code", "".join(f.readlines())))
-      f.close()
-    filenames.insert(0, "[goog.provide]")
-
-    # Remove Blockly.Generator to be compatible with Blockly.
-    remove = "var Blockly={Generator:{}};"
     self.do_compile(params, target_filename, filenames, remove)
 
   def do_compile(self, params, target_filename, filenames, remove):
@@ -429,6 +419,11 @@ class Gen_langfiles(threading.Thread):
       else:
         print("FAILED to create " + f)
 
+def exclude_vertical(item):
+  return not item.endswith("block_render_svg_vertical.js")
+
+def exclude_horizontal(item):
+  return not item.endswith("block_render_svg_horizontal.js")
 
 if __name__ == "__main__":
   try:
@@ -455,11 +450,19 @@ https://developers.google.com/blockly/hacking/closure""")
   search_paths = calcdeps.ExpandDirectories(
       ["core", os.path.join(os.path.pardir, "closure-library")])
 
-  # Run both tasks in parallel threads.
+  search_paths_horizontal = filter(exclude_vertical, search_paths)
+  search_paths_vertical = filter(exclude_horizontal, search_paths)
+
+  # Run all tasks in parallel threads.
   # Uncompressed is limited by processor speed.
   # Compressed is limited by network and server speed.
-  Gen_uncompressed(search_paths).start()
-  Gen_compressed(search_paths).start()
+  # Vertical:
+  Gen_uncompressed(search_paths_vertical, True).start()
+  # Horizontal:
+  Gen_uncompressed(search_paths_horizontal, False).start()
+
+  # Compressed forms of vertical and horizontal.
+  Gen_compressed(search_paths_vertical, search_paths_horizontal).start()
 
   # This is run locally in a separate thread.
   Gen_langfiles().start()

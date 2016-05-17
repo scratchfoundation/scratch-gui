@@ -26,6 +26,9 @@
 
 goog.provide('Blockly.Css');
 
+goog.require('Blockly.Colours');
+
+goog.require('goog.userAgent');
 
 /**
  * List of cursors.
@@ -84,6 +87,17 @@ Blockly.Css.inject = function(hasCss, pathToMedia) {
   // Strip off any trailing slash (either Unix or Windows).
   Blockly.Css.mediaPath_ = pathToMedia.replace(/[\\\/]$/, '');
   text = text.replace(/<<<PATH>>>/g, Blockly.Css.mediaPath_);
+  // Dynamically replace colours in the CSS text, in case they have
+  // been set at run-time injection.
+  for (var colourProperty in Blockly.Colours) {
+    if (Blockly.Colours.hasOwnProperty(colourProperty)) {
+      // Replace all
+      text = text.replace(
+        new RegExp('\\$colour\\_' + colourProperty, 'g'),
+        Blockly.Colours[colourProperty]
+      );
+    }
+  }
   // Inject CSS tag.
   var cssNode = document.createElement('style');
   document.head.appendChild(cssNode);
@@ -98,6 +112,11 @@ Blockly.Css.inject = function(hasCss, pathToMedia) {
  * @param {Blockly.Css.Cursor} cursor Enum.
  */
 Blockly.Css.setCursor = function(cursor) {
+  if (goog.userAgent.MOBILE || goog.userAgent.ANDROID || goog.userAgent.IPAD) {
+    // Don't try to switch the mouse cursor on a mobile device.
+    // This is an optimization - since we almost never have cursors on mobile anyway.
+    return;
+  }
   if (Blockly.Css.currentCursor_ == cursor) {
     return;
   }
@@ -132,15 +151,39 @@ Blockly.Css.setCursor = function(cursor) {
  */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
-    'background-color: #fff;',
+    'background-color: $colour_workspace;',
     'outline: none;',
     'overflow: hidden;',  /* IE overflows by default. */
+  '}',
+
+  /* Necessary to position the drag surface */
+  '.blocklyRelativeWrapper {',
+    'position: relative;',
+    'width: 100%;',
+    'height: 100%;',
   '}',
 
   '.blocklyWidgetDiv {',
     'display: none;',
     'position: absolute;',
     'z-index: 999;',
+  '}',
+
+  '.blocklyWidgetDiv.fieldTextInput {',
+    'overflow: hidden;',
+    'border: 1px solid;',
+    'box-sizing: border-box;',
+    'transform-origin: 0 0;',
+    '-ms-transform-origin: 0 0;',
+    '-moz-transform-origin: 0 0;',
+    '-webkit-transform-origin: 0 0;',
+  '}',
+
+  '.blocklyNonSelectable {',
+    'user-select: none;',
+    '-moz-user-select: none;',
+    '-webkit-user-select: none;',
+    '-ms-user-select: none;',
   '}',
 
   '.blocklyTooltipDiv {',
@@ -155,6 +198,118 @@ Blockly.Css.CONTENT = [
     'padding: 2px;',
     'position: absolute;',
     'z-index: 1000;',
+  '}',
+
+  '.blocklyDragSurface {',
+    'display: none;',
+    'position: absolute;',
+    'top: 0;',
+    'left: 0;',
+    'right: 0;',
+    'bottom: 0;',
+    'overflow: visible !important;',
+    'z-index: 5000;', /* Always display on top */
+    '-webkit-backface-visibility: hidden;',
+    'backface-visibility: hidden;',
+    '-webkit-perspective: 1000;',
+    'perspective: 1000;',
+  '}',
+
+  '.blocklyDropDownDiv {',
+    'position: absolute;',
+    'left: 0;',
+    'top: 0;',
+    'z-index: 1000;',
+    'display: none;',
+    'border: 1px solid;',
+    'border-radius: 4px;',
+    'box-shadow: 0px 0px 8px 1px ' + Blockly.Colours.dropDownShadow + ';',
+    'padding: 4px;',
+    '-webkit-user-select: none;',
+  '}',
+
+  '.blocklyDropDownArrow {',
+    'position: absolute;',
+    'left: 0;',
+    'top: 0;',
+    'width: 16px;',
+    'height: 16px;',
+    'z-index: -1;',
+  '}',
+
+  '.blocklyDropDownButton {',
+    'display: inline-block;',
+    'float: left;',
+    'padding: 0;',
+    'margin: 4px;',
+    'border-radius: 4px;',
+    'outline: none;',
+    'border: 1px solid;',
+    'transition: box-shadow .1s;',
+    'cursor: pointer;',
+  '}',
+
+  '.blocklyDropDownButtonHover {',
+    'box-shadow: 0px 0px 0px 4px ' + Blockly.Colours.fieldShadow + ';',
+  '}',
+
+  '.blocklyDropDownButton:active {',
+    'box-shadow: 0px 0px 0px 6px ' + Blockly.Colours.fieldShadow + ';',
+  '}',
+
+  '.blocklyDropDownButton > img {',
+    'width: 80%;',
+    'height: 80%;',
+    'margin-top: 5%',
+  '}',
+
+  '.blocklyDropDownPlaceholder {',
+    'display: inline-block;',
+    'float: left;',
+    'padding: 0;',
+    'margin: 4px;',
+  '}',
+
+  '.blocklyNumPadButton {',
+    'display: inline-block;',
+    'float: left;',
+    'padding: 0;',
+    'width: 48px;',
+    'height: 48px;',
+    'margin: 4px;',
+    'border-radius: 4px;',
+    'background: $colour_numPadBackground;',
+    'color: $colour_numPadText;',
+    'outline: none;',
+    'border: 1px solid $colour_numPadBorder;',
+    'cursor: pointer;',
+    'font-weight: 600;',
+    'font-family: sans-serif;',
+    'font-size: 12pt;',
+    '-webkit-tap-highlight-color: rgba(0,0,0,0);',
+  '}',
+
+  '.blocklyNumPadButton > img {',
+    'margin-top: 10%;',
+    'width: 80%;',
+    'height: 80%;',
+  '}',
+
+  '.blocklyNumPadButton:active {',
+    'background: $colour_numPadActiveBackground;',
+    '-webkit-tap-highlight-color: rgba(0,0,0,0);',
+  '}',
+
+  '.arrowTop {',
+    'border-top: 1px solid;',
+    'border-left: 1px solid;',
+    'border-top-left-radius: 4px;',
+  '}',
+
+  '.arrowBottom {',
+    'border-bottom: 1px solid;',
+    'border-right: 1px solid;',
+    'border-bottom-right-radius: 4px;',
   '}',
 
   '.blocklyResizeSE {',
@@ -178,29 +333,16 @@ Blockly.Css.CONTENT = [
     'stroke-width: 4px;',
   '}',
 
-  '.blocklyPathLight {',
-    'fill: none;',
-    'stroke-linecap: round;',
-    'stroke-width: 1;',
+  '.blocklyPath {',
+    'stroke-width: 1px;',
   '}',
 
   '.blocklySelected>.blocklyPath {',
-    'stroke: #fc3;',
-    'stroke-width: 3px;',
+    // 'stroke: #fc3;',
+    // 'stroke-width: 3px;',
   '}',
 
-  '.blocklySelected>.blocklyPathLight {',
-    'display: none;',
-  '}',
-
-  '.blocklyDragging>.blocklyPath,',
-  '.blocklyDragging>.blocklyPathLight {',
-    'fill-opacity: .8;',
-    'stroke-opacity: .8;',
-  '}',
-
-  '.blocklyDragging>.blocklyPathDark {',
-    'display: none;',
+  '.blocklyDragging>.blocklyPath {',
   '}',
 
   '.blocklyDisabled>.blocklyPath {',
@@ -208,15 +350,15 @@ Blockly.Css.CONTENT = [
     'stroke-opacity: .5;',
   '}',
 
-  '.blocklyDisabled>.blocklyPathLight,',
-  '.blocklyDisabled>.blocklyPathDark {',
-    'display: none;',
-  '}',
-
   '.blocklyText {',
     'cursor: default;',
     'fill: #fff;',
     'font-family: sans-serif;',
+    'font-size: 12pt;',
+    'font-weight: 600;',
+  '}',
+
+  '.blocklyTextTruncated {',
     'font-size: 11pt;',
   '}',
 
@@ -232,7 +374,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyNonEditableText>text,',
   '.blocklyEditableText>text {',
-    'fill: #000;',
+    'fill: $colour_text;',
   '}',
 
   '.blocklyEditableText:hover>rect {',
@@ -241,7 +383,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyBubbleText {',
-    'fill: #000;',
+    'fill: $colour_text;',
   '}',
 
   /*
@@ -297,13 +439,17 @@ Blockly.Css.CONTENT = [
 
   '.blocklyHtmlInput {',
     'border: none;',
-    'border-radius: 4px;',
     'font-family: sans-serif;',
+    'font-size: 12pt;',
     'height: 100%;',
     'margin: 0;',
     'outline: none;',
-    'padding: 0 1px;',
-    'width: 100%',
+    'box-sizing: border-box;',
+    'padding: 2px 8px 0 8px;',
+    'width: 100%;',
+    'text-align: center;',
+    'color: $colour_text;',
+    'font-weight: 600;',
   '}',
 
   '.blocklyMainBackground {',
@@ -318,7 +464,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyFlyoutBackground {',
-    'fill: #ddd;',
+    'fill: $colour_flyout;',
     'fill-opacity: .8;',
   '}',
 
@@ -327,12 +473,12 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyScrollbarKnob {',
-    'fill: #ccc;',
+    'fill: $colour_scrollbar;',
   '}',
 
   '.blocklyScrollbarBackground:hover+.blocklyScrollbarKnob,',
   '.blocklyScrollbarKnob:hover {',
-    'fill: #bbb;',
+    'fill: $colour_scrollbarHover;',
   '}',
 
   '.blocklyZoom>image {',
@@ -393,6 +539,10 @@ Blockly.Css.CONTENT = [
     'padding: 0 !important;',
   '}',
 
+  '.blocklyDropDownNumPad {',
+    'background-color: $colour_numPadBackground;',
+  '}',
+
   /* Override the default Closure URL. */
   '.blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,',
   '.blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {',
@@ -401,7 +551,8 @@ Blockly.Css.CONTENT = [
 
   /* Category tree in Toolbox. */
   '.blocklyToolboxDiv {',
-    'background-color: #ddd;',
+    'background-color: $colour_toolbox;',
+    'color: $colour_toolboxText;',
     'overflow-x: visible;',
     'overflow-y: auto;',
     'position: absolute;',
@@ -423,6 +574,16 @@ Blockly.Css.CONTENT = [
     'white-space: nowrap;',
   '}',
 
+  '.blocklyHorizontalTree {',
+    'float: left;',
+    'margin: 1px 5px 8px 0px;',
+  '}',
+
+  '.blocklyHorizontalTreeRtl {',
+    'float: right;',
+    'margin: 1px 0px 8px 5px;',
+  '}',
+
   '.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {',
     'margin-left: 8px;',
   '}',
@@ -435,6 +596,13 @@ Blockly.Css.CONTENT = [
     'border-bottom: solid #e5e5e5 1px;',
     'height: 0px;',
     'margin: 5px 0;',
+  '}',
+
+  '.blocklyTreeSeparatorHorizontal {',
+    'border-right: solid #e5e5e5 1px;',
+    'width: 0px;',
+    'padding: 5px 0;',
+    'margin: 0 5px;',
   '}',
 
   '.blocklyTreeIcon {',

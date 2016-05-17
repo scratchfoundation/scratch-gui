@@ -32,19 +32,51 @@ goog.require('goog.math');
 /**
  * Class for a workspace.  This is a data structure that contains blocks.
  * There is no UI, and can be created headlessly.
- * @param {Object=} opt_options Dictionary of options.
+ * @param {Blockly.Options} opt_options Dictionary of options.
  * @constructor
  */
 Blockly.Workspace = function(opt_options) {
   /** @type {string} */
   this.id = Blockly.genUid();
   Blockly.Workspace.WorkspaceDB_[this.id] = this;
-  /** @type {!Object} */
+  /** @type {!Blockly.Options} */
   this.options = opt_options || {};
   /** @type {boolean} */
   this.RTL = !!this.options.RTL;
-  /** @type {!Array.<!Blockly.Block>} */
+  /** @type {boolean} */
+  this.horizontalLayout = !!this.options.horizontalLayout;
+
+  /**
+   * @type {!Array.<!Blockly.Block>}
+   * @private
+   */
   this.topBlocks_ = [];
+  /**
+   * @type {!Array.<!Function>}
+   * @private
+   */
+  this.listeners_ = [];
+
+  /** @type {!Array.<!Function>} */
+  this.tapListeners_ = [];
+
+  /**
+   * @type {!Array.<!Blockly.Events.Abstract>}
+   * @private
+   */
+  this.undoStack_ = [];
+
+  /**
+   * @type {!Array.<!Blockly.Events.Abstract>}
+   * @private
+   */
+  this.redoStack_ = [];
+
+  /**
+   * @type {!Object}
+   * @private
+   */
+  this.blockDB_ = Object.create(null);
 };
 
 /**
@@ -54,10 +86,17 @@ Blockly.Workspace = function(opt_options) {
 Blockly.Workspace.prototype.rendered = false;
 
 /**
+ * Maximum number of undo events in stack.
+ * @type {number} 0 to turn off undo, Infinity for unlimited.
+ */
+Blockly.Workspace.prototype.MAX_UNDO = 1024;
+
+/**
  * Dispose of this workspace.
  * Unlink from all DOM elements to prevent memory leaks.
  */
 Blockly.Workspace.prototype.dispose = function() {
+  this.listeners_.length = 0;
   this.clear();
   // Remove from workspace database.
   delete Blockly.Workspace.WorkspaceDB_[this.id];
@@ -77,7 +116,6 @@ Blockly.Workspace.SCAN_ANGLE = 3;
  */
 Blockly.Workspace.prototype.addTopBlock = function(block) {
   this.topBlocks_.push(block);
-  this.fireChangeEvent();
 };
 
 /**
@@ -96,7 +134,6 @@ Blockly.Workspace.prototype.removeTopBlock = function(block) {
   if (!found) {
     throw 'Block not present in workspace\'s list of top-most blocks.';
   }
-  this.fireChangeEvent();
 };
 
 /**
@@ -138,8 +175,15 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
  * Dispose of all blocks in workspace.
  */
 Blockly.Workspace.prototype.clear = function() {
+  var existingGroup = Blockly.Events.getGroup();
+  if (!existingGroup) {
+    Blockly.Events.setGroup(true);
+  }
   while (this.topBlocks_.length) {
     this.topBlocks_[0].dispose();
+  }
+  if (!existingGroup) {
+    Blockly.Events.setGroup(false);
   }
 };
 
@@ -166,22 +210,6 @@ Blockly.Workspace.prototype.newBlock = function(prototypeName, opt_id) {
 };
 
 /**
- * Finds the block with the specified ID in this workspace.
- * @param {string} id ID of block to find.
- * @return {Blockly.Block} The matching block, or null if not found.
- */
-Blockly.Workspace.prototype.getBlockById = function(id) {
-  // If this O(n) function fails to scale well, maintain a hash table of IDs.
-  var blocks = this.getAllBlocks();
-  for (var i = 0, block; block = blocks[i]; i++) {
-    if (block.id == id) {
-      return block;
-    }
-  }
-  return null;
-};
-
-/**
  * The number of blocks that may be added to the workspace before reaching
  *     the maxBlocks.
  * @return {number} Number of blocks left.
@@ -194,10 +222,124 @@ Blockly.Workspace.prototype.remainingCapacity = function() {
 };
 
 /**
- * Something on this workspace has changed.
+ * Undo or redo the previous action.
+ * @param {boolean} redo False if undo, true if redo.
  */
-Blockly.Workspace.prototype.fireChangeEvent = function() {
-  // NOP.
+Blockly.Workspace.prototype.undo = function(redo) {
+  var inputStack = redo ? this.redoStack_ : this.undoStack_;
+  var outputStack = redo ? this.undoStack_ : this.redoStack_;
+  var inputEvent = inputStack.pop();
+  if (!inputEvent) {
+    return;
+  }
+  var events = [inputEvent];
+  // Do another undo/redo if the next one is of the same group.
+  while (inputStack.length && inputEvent.group &&
+      inputEvent.group == inputStack[inputStack.length - 1].group) {
+    events.push(inputStack.pop());
+  }
+  // Push these popped events on the opposite stack.
+  for (var i = 0, event; event = events[i]; i++) {
+    outputStack.push(event);
+  }
+  events = Blockly.Events.filter(events, redo);
+  Blockly.Events.recordUndo = false;
+  for (var i = 0, event; event = events[i]; i++) {
+    event.run(redo);
+  }
+  Blockly.Events.recordUndo = true;
+};
+
+/**
+ * Clear the undo/redo stacks.
+ */
+Blockly.Workspace.prototype.clearUndo = function() {
+  this.undoStack_.length = 0;
+  this.redoStack_.length = 0;
+  // Stop any events already in the firing queue from being undoable.
+  Blockly.Events.clearPendingUndo();
+};
+
+/**
+ * When something in this workspace changes, call a function.
+ * @param {!Function} func Function to call.
+ * @return {!Function} Function that can be passed to
+ *     removeChangeListener.
+ */
+Blockly.Workspace.prototype.addChangeListener = function(func) {
+  this.listeners_.push(func);
+  return func;
+};
+
+/**
+ * Stop listening for this workspace's changes.
+ * @param {Function} func Function to stop calling.
+ */
+Blockly.Workspace.prototype.removeChangeListener = function(func) {
+  var i = this.listeners_.indexOf(func);
+  if (i != -1) {
+    this.listeners_.splice(i, 1);
+  }
+};
+
+/**
+ * Fire a change event.
+ * @param {!Blockly.Events.Abstract} event Event to fire.
+ */
+Blockly.Workspace.prototype.fireChangeListener = function(event) {
+  if (event.recordUndo) {
+    this.undoStack_.push(event);
+    this.redoStack_.length = 0;
+    if (this.undoStack_.length > this.MAX_UNDO) {
+      this.undoStack_.unshift();
+    }
+  }
+  for (var i = 0, func; func = this.listeners_[i]; i++) {
+    func(event);
+  }
+};
+
+/**
+ * When a block in the workspace is tapped, call a function with the
+ *  blockId and root blockId.
+ * @param {!Function} func Function to call.
+ * @return {!Function} Function that can be passed to
+ *     removeTapListener.
+ */
+Blockly.Workspace.prototype.addTapListener = function(func) {
+  this.tapListeners_.push(func);
+  return func;
+};
+
+/**
+ * Stop listening for this workspace's taps.
+ * @param {Function} func Function to stop calling.
+ */
+Blockly.Workspace.prototype.removeTapListener = function(func) {
+  var i = this.tapListeners_.indexOf(func);
+  if (i != -1) {
+    this.tapListeners_.splice(i, 1);
+  }
+};
+
+/**
+ * Fire a tap event.
+ * @param {string} blockId ID of block that was tapped
+ * @param {string} rootBlockId ID of root block in tree that was tapped
+ */
+Blockly.Workspace.prototype.fireTapListener = function(blockId, rootBlockId) {
+  for (var i = 0, func; func = this.tapListeners_[i]; i++) {
+    func(blockId, rootBlockId);
+  }
+};
+
+/**
+ * Find the block on this workspace with the specified ID.
+ * @param {string} id ID of block to find.
+ * @return {Blockly.Block} The sought after block or null if not found.
+ */
+Blockly.Workspace.prototype.getBlockById = function(id) {
+  return this.blockDB_[id] || null;
 };
 
 /**
@@ -217,3 +359,9 @@ Blockly.Workspace.getById = function(id) {
 
 // Export symbols that would otherwise be renamed by Closure compiler.
 Blockly.Workspace.prototype['clear'] = Blockly.Workspace.prototype.clear;
+Blockly.Workspace.prototype['clearUndo'] =
+    Blockly.Workspace.prototype.clearUndo;
+Blockly.Workspace.prototype['addChangeListener'] =
+    Blockly.Workspace.prototype.addChangeListener;
+Blockly.Workspace.prototype['removeChangeListener'] =
+    Blockly.Workspace.prototype.removeChangeListener;

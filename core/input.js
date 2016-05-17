@@ -47,7 +47,10 @@ Blockly.Input = function(type, name, block, connection) {
   this.type = type;
   /** @type {string} */
   this.name = name;
-  /** @type {!Blockly.Block} */
+  /**
+   * @type {!Blockly.Block}
+   * @private
+   */
   this.sourceBlock_ = block;
   /** @type {Blockly.Connection} */
   this.connection = connection;
@@ -84,8 +87,9 @@ Blockly.Input.prototype.appendField = function(field, opt_name) {
   if (goog.isString(field)) {
     field = new Blockly.FieldLabel(/** @type {string} */ (field));
   }
+  field.setSourceBlock(this.sourceBlock_);
   if (this.sourceBlock_.rendered) {
-    field.init(this.sourceBlock_);
+    field.init();
   }
   field.name = opt_name;
 
@@ -106,19 +110,6 @@ Blockly.Input.prototype.appendField = function(field, opt_name) {
     this.sourceBlock_.bumpNeighbours_();
   }
   return this;
-};
-
-/**
- * Add an item to the end of the input's field row.
- * @param {*} field Something to add as a field.
- * @param {string=} opt_name Language-neutral identifier which may used to find
- *     this field again.  Should be unique to the host block.
- * @return {!Blockly.Input} The input being append to (to allow chaining).
- * @deprecated December 2013
- */
-Blockly.Input.prototype.appendTitle = function(field, opt_name) {
-  console.warn('Deprecated call to appendTitle, use appendField instead.');
-  return this.appendField(field, opt_name);
 };
 
 /**

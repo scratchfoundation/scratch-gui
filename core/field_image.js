@@ -38,17 +38,18 @@ goog.require('goog.userAgent');
  * @param {number} width Width of the image.
  * @param {number} height Height of the image.
  * @param {string=} opt_alt Optional alt text for when block is collapsed.
+ * @param {boolean} flip_rtl Whether to flip the icon in RTL
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldImage = function(src, width, height, opt_alt) {
+Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl) {
   this.sourceBlock_ = null;
   // Ensure height and width are numbers.  Strings are bad at math.
   this.height_ = Number(height);
   this.width_ = Number(width);
-  this.size_ = new goog.math.Size(this.width_,
-      this.height_ + 2 * Blockly.BlockSvg.INLINE_PADDING_Y);
+  this.size_ = new goog.math.Size(this.width_, this.height_);
   this.text_ = opt_alt || '';
+  this.flipRTL_ = flip_rtl;
   this.setValue(src);
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
@@ -67,14 +68,12 @@ Blockly.FieldImage.prototype.EDITABLE = false;
 
 /**
  * Install this image on a block.
- * @param {!Blockly.Block} block The block containing this text.
  */
-Blockly.FieldImage.prototype.init = function(block) {
-  if (this.sourceBlock_) {
+Blockly.FieldImage.prototype.init = function() {
+  if (this.fieldGroup_) {
     // Image has already been initialized once.
     return;
   }
-  this.sourceBlock_ = block;
   // Build the DOM.
   /** @type {SVGElement} */
   this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
@@ -97,7 +96,7 @@ Blockly.FieldImage.prototype.init = function(block) {
          'width': this.width_ + 'px',
          'fill-opacity': 0}, this.fieldGroup_);
   }
-  block.getSvgRoot().appendChild(this.fieldGroup_);
+  this.sourceBlock_.getSvgRoot().appendChild(this.fieldGroup_);
 
   // Configure the field to be transparent with respect to tooltips.
   var topElement = this.rectElement_ || this.imageElement_;
@@ -149,6 +148,14 @@ Blockly.FieldImage.prototype.setValue = function(src) {
     this.imageElement_.setAttributeNS('http://www.w3.org/1999/xlink',
         'xlink:href', goog.isString(src) ? src : '');
   }
+};
+
+/**
+ * Get whether to flip this image in RTL
+ * @return {boolean} True if we should flip in RTL.
+ */
+Blockly.FieldImage.prototype.getFlipRTL = function() {
+  return this.flipRTL_;
 };
 
 /**

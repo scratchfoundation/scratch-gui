@@ -1,32 +1,18 @@
 {
-  "name": "blockly",
+  "name": "scratch-blocks",
   "version": "1.0.0",
-  "description": "Blockly is a library for building visual programming editors.",
-  "keywords": ["blockly"],
-  "scripts": {
-    "lint": "jshint ."
-  },
+  "description": "Scratch Blocks is a library for building creative computing interfaces.",
+  "author": "Massachusetts Institute of Technology",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/LLK/scratch-blocks#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/google/blockly.git"
+    "url": "https://github.com/LLK/scratch-blocks.git"
   },
-  "bugs": {
-    "url": "https://github.com/google/blockly/issues"
+  "scripts": {
+    "test": "./node_modules/.bin/eslint ."
   },
-  "homepage": "https://developers.google.com/blockly/",
-  "author": {
-    "name": "Neil Fraser"
-  },
-  "license": "Apache-2.0",
-  "private": true,
   "devDependencies": {
-    "jshint": "latest"
-  },
-  "jshintConfig": {
-    "globalstrict": true,
-    "predef": ["Blockly", "goog", "window", "document", "soy", "XMLHttpRequest"],
-    "sub": true,
-    "undef": true,
-    "unused": true
+    "eslint": "~2.9.0"
   }
 }

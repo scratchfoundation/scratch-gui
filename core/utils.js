@@ -35,6 +35,13 @@ goog.require('goog.userAgent');
 
 
 /**
+ * Cached value for whether 3D is supported
+ * @type {boolean}
+ * @private
+ */
+Blockly.cache3dSupported_ = null;
+
+/**
  * Add a CSS class to a element.
  * Similar to Closure's goog.dom.classes.add, except it handles SVG elements.
  * @param {!Element} element DOM element to add class to.
@@ -164,66 +171,6 @@ Blockly.unbindEvent_ = function(bindData) {
 };
 
 /**
- * Fire a synthetic event synchronously.
- * @param {!EventTarget} node The event's target node.
- * @param {string} eventName Name of event (e.g. 'click').
- */
-Blockly.fireUiEventNow = function(node, eventName) {
-  // Remove the event from the anti-duplicate database.
-  var list = Blockly.fireUiEvent.DB_[eventName];
-  if (list) {
-    var i = list.indexOf(node);
-    if (i != -1) {
-      list.splice(i, 1);
-    }
-  }
-  // Fire the event in a browser-compatible way.
-  if (document.createEvent) {
-    // W3
-    var evt = document.createEvent('UIEvents');
-    evt.initEvent(eventName, true, true);  // event type, bubbling, cancelable
-    node.dispatchEvent(evt);
-  } else if (document.createEventObject) {
-    // MSIE
-    var evt = document.createEventObject();
-    node.fireEvent('on' + eventName, evt);
-  } else {
-    throw 'FireEvent: No event creation mechanism.';
-  }
-};
-
-/**
- * Fire a synthetic event asynchronously.  Groups of simultaneous events (e.g.
- * a tree of blocks being deleted) are merged into one event.
- * @param {!EventTarget} node The event's target node.
- * @param {string} eventName Name of event (e.g. 'click').
- */
-Blockly.fireUiEvent = function(node, eventName) {
-  var list = Blockly.fireUiEvent.DB_[eventName];
-  if (list) {
-    if (list.indexOf(node) != -1) {
-      // This event is already scheduled to fire.
-      return;
-    }
-    list.push(node);
-  } else {
-    Blockly.fireUiEvent.DB_[eventName] = [node];
-  }
-  var fire = function() {
-    Blockly.fireUiEventNow(node, eventName);
-  };
-  setTimeout(fire, 0);
-};
-
-/**
- * Database of upcoming firing event types.
- * Used to fire only one event after multiple changes.
- * @type {!Object}
- * @private
- */
-Blockly.fireUiEvent.DB_ = {};
-
-/**
  * Don't do anything for this event, just halt propagation.
  * @param {!Event} e An event.
  */
@@ -267,13 +214,28 @@ Blockly.getRelativeXY_ = function(element) {
   }
   // Second, check for transform="translate(...)" attribute.
   var transform = element.getAttribute('transform');
-  var r = transform && transform.match(Blockly.getRelativeXY_.XY_REGEXP_);
-  if (r) {
-    xy.x += parseFloat(r[1]);
-    if (r[3]) {
-      xy.y += parseFloat(r[3]);
+  if (transform) {
+    var transformComponents = transform.match(Blockly.getRelativeXY_.XY_REGEXP_);
+    if (transformComponents) {
+      xy.x += parseFloat(transformComponents[1]);
+      if (transformComponents[3]) {
+        xy.y += parseFloat(transformComponents[3]);
+      }
     }
   }
+
+  // Third, check for style="transform: translate3d(...)".
+  var style = element.getAttribute('style');
+  if (style && style.indexOf('translate3d') > -1) {
+    var styleComponents = style.match(Blockly.getRelativeXY_.XY_3D_REGEXP_);
+    if (styleComponents) {
+      xy.x += parseFloat(styleComponents[1]);
+      if (styleComponents[3]) {
+        xy.y += parseFloat(styleComponents[3]);
+      }
+    }
+  }
+
   return xy;
 };
 
@@ -288,6 +250,15 @@ Blockly.getRelativeXY_ = function(element) {
  */
 Blockly.getRelativeXY_.XY_REGEXP_ =
     /translate\(\s*([-+\d.e]+)([ ,]\s*([-+\d.e]+)\s*\))?/;
+
+/**
+ * Static regex to pull the x,y,z values out of a translate3d() style property.
+ * Accounts for same exceptions as XY_REGEXP_.
+ * @type {!RegExp}
+ * @private
+ */
+Blockly.getRelativeXY_.XY_3D_REGEXP_ =
+  /transform:\s*translate3d\(\s*([-+\d.e]+)px([ ,]\s*([-+\d.e]+)\s*)px([ ,]\s*([-+\d.e]+)\s*)px\)?/;
 
 /**
  * Return the absolute coordinates of the top-left corner of this element,
@@ -323,6 +294,46 @@ Blockly.getSvgXY_ = function(element, workspace) {
 };
 
 /**
+ * Check if 3D transforms are supported by adding an element
+ * and attempting to set the property.
+ * @return {boolean} true if 3D transforms are supported
+ */
+Blockly.is3dSupported = function() {
+  if (Blockly.cache3dSupported_ !== null) {
+    return Blockly.cache3dSupported_;
+  }
+  // CC-BY-SA Lorenzo Polidori
+  // https://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
+  if (!window.getComputedStyle) {
+    return false;
+  }
+
+  var el = document.createElement('p'),
+    has3d,
+    transforms = {
+    'webkitTransform':'-webkit-transform',
+    'OTransform':'-o-transform',
+    'msTransform':'-ms-transform',
+    'MozTransform':'-moz-transform',
+    'transform':'transform'
+  };
+
+  // Add it to the body to get the computed style.
+  document.body.insertBefore(el, null);
+
+  for (var t in transforms) {
+    if (el.style[t] !== undefined) {
+      el.style[t] = "translate3d(1px,1px,1px)";
+      has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+    }
+  }
+
+  document.body.removeChild(el);
+  Blockly.cache3dSupported_ = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+  return Blockly.cache3dSupported_;
+};
+
+/**
  * Helper method for creating SVG elements.
  * @param {string} name Element's tag name.
  * @param {!Object} attrs Dictionary of attribute names and values.
@@ -347,26 +358,6 @@ Blockly.createSvgElement = function(name, attrs, parent, opt_workspace) {
     parent.appendChild(e);
   }
   return e;
-};
-
-/**
- * Deselect any selections on the webpage.
- * Chrome will select text outside the SVG when double-clicking.
- * Deselect this text, so that it doesn't mess up any subsequent drag.
- */
-Blockly.removeAllRanges = function() {
-  if (window.getSelection) {
-    setTimeout(function() {
-        try {
-          var selection = window.getSelection();
-          if (!selection.isCollapsed) {
-            selection.removeAllRanges();
-          }
-        } catch (e) {
-          // MSIE throws 'error 800a025e' here.
-        }
-      }, 0);
-  }
 };
 
 /**
@@ -554,40 +545,39 @@ Blockly.tokenizeInterpolation = function(message) {
 
 /**
  * Generate a unique ID.  This should be globally unique.
- * 88 characters ^ 20 length ≈ 129 bits (one bit better than a UUID).
- * @return {string}
+ * 87 characters ^ 20 length > 128 bits (better than a UUID).
+ * @return {string} A globally unique ID string.
  */
 Blockly.genUid = function() {
   var length = 20;
   var soupLength = Blockly.genUid.soup_.length;
   var id = [];
-  if (Blockly.genUid.crypto_) {
-    // Cryptographically strong randomness is supported.
-    var array = new Uint32Array(length);
-    Blockly.genUid.crypto_.getRandomValues(array);
-    for (var i = 0; i < length; i++) {
-      id[i] = Blockly.genUid.soup_.charAt(array[i] % soupLength);
-    }
-  } else {
-    // Fall back to Math.random for IE 10.
-    for (var i = 0; i < length; i++) {
-      id[i] = Blockly.genUid.soup_.charAt(Math.random() * soupLength);
-    }
+  for (var i = 0; i < length; i++) {
+    id[i] = Blockly.genUid.soup_.charAt(Math.random() * soupLength);
   }
   return id.join('');
 };
 
 /**
- * Determine if window.crypto or global.crypto exists.
- * @type {=RandomSource}
- * @private
- */
-Blockly.genUid.crypto_ = this.crypto;
-
-/**
  * Legal characters for the unique ID.
  * Should be all on a US keyboard.  No XML special characters or control codes.
+ * Removed $ due to issue 251.
  * @private
  */
-Blockly.genUid.soup_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
+Blockly.genUid.soup_ = '!#%()*+,-./:;=?@[]^_`{|}~' +
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+/**
+ * Measure some text using a canvas in-memory.
+ * @param {string} fontSize E.g., '10pt'
+ * @param {string} fontFamily E.g., 'Arial'
+ * @param {string} fontWeight E.g., '600'
+ * @param {string} text The actual text to measure
+ * @return {number} Width of the text in px.
+ */
+Blockly.measureText = function(fontSize, fontFamily, fontWeight, text) {
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+  context.font = fontWeight + ' ' + fontSize + ' ' + fontFamily;
+  return context.measureText(text).width;
+};

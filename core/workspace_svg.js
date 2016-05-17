@@ -28,11 +28,14 @@ goog.provide('Blockly.WorkspaceSvg');
 
 // TODO(scr): Fix circular dependencies
 // goog.require('Blockly.Block');
+goog.require('Blockly.ConnectionDB');
+goog.require('Blockly.Events');
+goog.require('Blockly.Options');
 goog.require('Blockly.ScrollbarPair');
 goog.require('Blockly.Trashcan');
-goog.require('Blockly.ZoomControls');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+goog.require('Blockly.ZoomControls');
 
 goog.require('goog.dom');
 goog.require('goog.math.Coordinate');
@@ -42,30 +45,29 @@ goog.require('goog.userAgent');
 /**
  * Class for a workspace.  This is an onscreen area with optional trashcan,
  * scrollbars, bubbles, and dragging.
- * @param {!Object} options Dictionary of options.
+ * @param {!Blockly.Options} options Dictionary of options.
+ * @param {Blockly.DragSurfaceSvg=} opt_dragSurface Drag surface for the workspace.
  * @extends {Blockly.Workspace}
  * @constructor
  */
-Blockly.WorkspaceSvg = function(options) {
+Blockly.WorkspaceSvg = function(options, opt_dragSurface) {
   Blockly.WorkspaceSvg.superClass_.constructor.call(this, options);
   this.getMetrics = options.getMetrics;
   this.setMetrics = options.setMetrics;
 
   Blockly.ConnectionDB.init(this);
 
+  if (opt_dragSurface) {
+    this.dragSurface = opt_dragSurface;
+  }
+
+  Blockly.ConnectionDB.init(this);
   /**
    * Database of pre-loaded sounds.
    * @private
    * @const
    */
   this.SOUNDS_ = Object.create(null);
-
-  /**
-   * Opaque data that can be passed to Blockly.unbindEvent_.
-   * @type {!Array.<!Array>}
-   * @private
-   */
-  this.eventWrappers_ = [];
 };
 goog.inherits(Blockly.WorkspaceSvg, Blockly.Workspace);
 
@@ -112,18 +114,11 @@ Blockly.WorkspaceSvg.prototype.startScrollX = 0;
 Blockly.WorkspaceSvg.prototype.startScrollY = 0;
 
 /**
- * Horizontal distance from mouse to object being dragged.
- * @type {number}
+ * Distance from mouse to object being dragged.
+ * @type {goog.math.Coordinate}
  * @private
  */
-Blockly.WorkspaceSvg.prototype.dragDeltaX_ = 0;
-
-/**
- * Vertical distance from mouse to object being dragged.
- * @type {number}
- * @private
- */
-Blockly.WorkspaceSvg.prototype.dragDeltaY_ = 0;
+Blockly.WorkspaceSvg.prototype.dragDeltaXY_ = null;
 
 /**
  * Current scale.
@@ -142,6 +137,12 @@ Blockly.WorkspaceSvg.prototype.trashcan = null;
  * @type {Blockly.ScrollbarPair}
  */
 Blockly.WorkspaceSvg.prototype.scrollbar = null;
+
+/**
+ * This workspace's drag surface, if it exists.
+ * @type {Blockly.DragSurfaceSvg}
+ */
+Blockly.WorkspaceSvg.prototype.dragSurface = null;
 
 /**
  * Create the workspace DOM elements.
@@ -212,7 +213,6 @@ Blockly.WorkspaceSvg.prototype.createDom = function(opt_backgroundClass) {
 Blockly.WorkspaceSvg.prototype.dispose = function() {
   // Stop rerendering.
   this.rendered = false;
-  Blockly.unbindEvent_(this.eventWrappers_);
   Blockly.WorkspaceSvg.superClass_.dispose.call(this);
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
@@ -250,7 +250,7 @@ Blockly.WorkspaceSvg.prototype.dispose = function() {
  * Obtain a newly created block.
  * @param {?string} prototypeName Name of the language object containing
  *     type-specific functions for this block.
- * @param {=string} opt_id Optional ID.  Use this ID if provided, otherwise
+ * @param {string=} opt_id Optional ID.  Use this ID if provided, otherwise
  *     create a new id.
  * @return {!Blockly.BlockSvg} The created block.
  */
@@ -294,7 +294,9 @@ Blockly.WorkspaceSvg.prototype.addFlyout_ = function() {
   var workspaceOptions = {
     disabledPatternId: this.options.disabledPatternId,
     parentWorkspace: this,
-    RTL: this.RTL
+    RTL: this.RTL,
+    horizontalLayout: this.horizontalLayout,
+    toolboxPosition: this.options.toolboxPosition
   };
   /** @type {Blockly.Flyout} */
   this.flyout_ = new Blockly.Flyout(workspaceOptions);
@@ -369,6 +371,9 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
       'scale(' + this.scale + ')';
   this.svgBlockCanvas_.setAttribute('transform', translation);
   this.svgBubbleCanvas_.setAttribute('transform', translation);
+  if (this.dragSurface) {
+    this.dragSurface.translateAndScaleGroup(x, y, this.scale);
+  }
 };
 
 /**
@@ -377,7 +382,8 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
  * @return {number} Width.
  */
 Blockly.WorkspaceSvg.prototype.getWidth = function() {
-  return this.getMetrics().viewWidth;
+  var metrics = this.getMetrics();
+  return metrics ? metrics.viewWidth / this.scale : 0;
 };
 
 /**
@@ -398,6 +404,7 @@ Blockly.WorkspaceSvg.prototype.setVisible = function(isVisible) {
     }
   } else {
     Blockly.hideChaff(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
   }
 };
 
@@ -425,7 +432,7 @@ Blockly.WorkspaceSvg.prototype.traceOn = function(armed) {
   }
   if (armed) {
     this.traceWrapper_ = Blockly.bindEvent_(this.svgBlockCanvas_,
-        'blocklySelectChange', this, function() {this.traceOn_ = false});
+        'blocklySelectChange', this, function() {this.traceOn_ = false; });
   }
 };
 
@@ -434,7 +441,7 @@ Blockly.WorkspaceSvg.prototype.traceOn = function(armed) {
  * @param {?string} id ID of block to find.
  */
 Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
-  if (this.traceOn_ && Blockly.dragMode_ != 0) {
+  if (this.traceOn_ && Blockly.dragMode_ != Blockly.DRAG_NONE) {
     // The blocklySelectChange event normally prevents this, but sometimes
     // there is a race condition on fast-executing apps.
     this.traceOn(false);
@@ -444,7 +451,7 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
   }
   var block = null;
   if (id) {
-    block = Blockly.Block.getById(id);
+    block = this.getBlockById(id);
     if (!block) {
       return;
     }
@@ -464,16 +471,35 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
 };
 
 /**
- * Fire a change event for this workspace.  Changes include new block, dropdown
- * edits, mutations, connections, etc.  Groups of simultaneous changes (e.g.
- * a tree of blocks being deleted) are merged into one event.
- * Applications may hook workspace changes by listening for
- * 'blocklyWorkspaceChange' on workspace.getCanvas().
+ * Glow/unglow a block in the workspace.
+ * @param {?string} id ID of block to find.
+ * @param {boolean} isGlowingBlock Whether to glow the block.
  */
-Blockly.WorkspaceSvg.prototype.fireChangeEvent = function() {
-  if (this.rendered && this.svgBlockCanvas_) {
-    Blockly.fireUiEvent(this.svgBlockCanvas_, 'blocklyWorkspaceChange');
+Blockly.WorkspaceSvg.prototype.glowBlock = function(id, isGlowingBlock) {
+  var block = null;
+  if (id) {
+    block = this.getBlockById(id);
+    if (!block) {
+      throw 'Tried to glow block that does not exist.';
+    }
   }
+  block.setGlowBlock(isGlowingBlock);
+};
+
+/**
+ * Glow/unglow a stack in the workspace.
+ * @param {?string} id ID of block which starts the stack.
+ * @param {boolean} isGlowingStack Whether to glow the stack.
+ */
+Blockly.WorkspaceSvg.prototype.glowStack = function(id, isGlowingStack) {
+  var block = null;
+  if (id) {
+    block = this.getBlockById(id);
+    if (!block) {
+      throw 'Tried to glow stack on block that does not exist.';
+    }
+  }
+  block.setGlowStack(isGlowingStack);
 };
 
 /**
@@ -486,7 +512,8 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
     return;
   }
   Blockly.terminateDrag_();  // Dragging while pasting?  No.
-  var block = Blockly.Xml.domToBlock(this, xmlBlock);
+  Blockly.Events.disable();
+  var block = Blockly.Xml.domToBlock(xmlBlock, this);
   // Move the duplicate to original position.
   var blockX = parseInt(xmlBlock.getAttribute('x'), 10);
   var blockY = parseInt(xmlBlock.getAttribute('y'), 10);
@@ -511,8 +538,8 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
         // Check for blocks in snap range to any of its connections.
         var connections = block.getConnections_(false);
         for (var i = 0, connection; connection = connections[i]; i++) {
-          var neighbour =
-              connection.closest(Blockly.SNAP_RADIUS, blockX, blockY);
+          var neighbour = connection.closest(Blockly.SNAP_RADIUS,
+              new goog.math.Coordinate(blockX, blockY));
           if (neighbour.connection) {
             collide = true;
             break;
@@ -530,6 +557,10 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
     } while (collide);
     block.moveBy(blockX, blockY);
   }
+  Blockly.Events.enable();
+  if (Blockly.Events.isEnabled() && !block.isShadow()) {
+    Blockly.Events.fire(new Blockly.Events.Create(block));
+  }
   block.select();
 };
 
@@ -538,29 +569,27 @@ Blockly.WorkspaceSvg.prototype.paste = function(xmlBlock) {
  */
 Blockly.WorkspaceSvg.prototype.recordDeleteAreas = function() {
   if (this.trashcan) {
-    this.deleteAreaTrash_ = this.trashcan.getRect();
+    this.deleteAreaTrash_ = this.trashcan.getClientRect();
   } else {
     this.deleteAreaTrash_ = null;
   }
   if (this.flyout_) {
-    this.deleteAreaToolbox_ = this.flyout_.getRect();
+    this.deleteAreaToolbox_ = this.flyout_.getClientRect();
   } else if (this.toolbox_) {
-    this.deleteAreaToolbox_ = this.toolbox_.getRect();
+    this.deleteAreaToolbox_ = this.toolbox_.getClientRect();
   } else {
     this.deleteAreaToolbox_ = null;
   }
 };
 
 /**
- * Is the mouse event over a delete area (toolbar or non-closing flyout)?
+ * Is the mouse event over a delete area (toolbox or non-closing flyout)?
  * Opens or closes the trashcan and sets the cursor as a side effect.
  * @param {!Event} e Mouse move event.
  * @return {boolean} True if event is in a delete area.
  */
 Blockly.WorkspaceSvg.prototype.isDeleteArea = function(e) {
-  var isDelete = false;
-  var mouseXY = Blockly.mouseToSvg(e, Blockly.mainWorkspace.getParentSvg());
-  var xy = new goog.math.Coordinate(mouseXY.x, mouseXY.y);
+  var xy = new goog.math.Coordinate(e.clientX, e.clientY);
   if (this.deleteAreaTrash_) {
     if (this.deleteAreaTrash_.contains(xy)) {
       this.trashcan.setOpen_(true);
@@ -592,6 +621,7 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
   Blockly.svgResize(this);
   Blockly.terminateDrag_();  // In case mouse-up event was lost.
   Blockly.hideChaff();
+  Blockly.DropDownDiv.hide();
   var isTargetWorkspace = e.target && e.target.nodeName &&
       (e.target.nodeName.toLowerCase() == 'svg' ||
        e.target == this.svgBackground_);
@@ -603,7 +633,6 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
     // Right-click.
     this.showContextMenu_(e);
   } else if (this.scrollbar) {
-    Blockly.removeAllRanges();
     // If the workspace is editable, only allow scrolling when gripping empty
     // space.  Otherwise, allow scrolling when gripping anywhere.
     this.isScrolling = true;
@@ -619,30 +648,31 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
     // See comment in inject.js Blockly.init_ as to why mouseup events are
     // bound to the document instead of the SVG's surface.
     if ('mouseup' in Blockly.bindEvent_.TOUCH_MAP) {
-      Blockly.onTouchUpWrapper_ =
-          Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
+      Blockly.onTouchUpWrapper_ = Blockly.onTouchUpWrapper_ || [];
+      Blockly.onTouchUpWrapper_ = Blockly.onTouchUpWrapper_.concat(
+          Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_));
     }
-    Blockly.onMouseMoveWrapper_ =
-        Blockly.bindEvent_(document, 'mousemove', null, Blockly.onMouseMove_);
+    Blockly.onMouseMoveWrapper_ = Blockly.onMouseMoveWrapper_ || [];
+    Blockly.onMouseMoveWrapper_ = Blockly.onMouseMoveWrapper_.concat(
+        Blockly.bindEvent_(document, 'mousemove', null, Blockly.onMouseMove_));
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
+  e.preventDefault();
 };
 
 /**
  * Start tracking a drag of an object on this workspace.
  * @param {!Event} e Mouse down event.
- * @param {number} x Starting horizontal location of object.
- * @param {number} y Starting vertical location of object.
+ * @param {!goog.math.Coordinate} xy Starting location of object.
  */
-Blockly.WorkspaceSvg.prototype.startDrag = function(e, x, y) {
+Blockly.WorkspaceSvg.prototype.startDrag = function(e, xy) {
   // Record the starting offset between the bubble's location and the mouse.
   var point = Blockly.mouseToSvg(e, this.getParentSvg());
   // Fix scale of mouse event.
   point.x /= this.scale;
   point.y /= this.scale;
-  this.dragDeltaX_ = x - point.x;
-  this.dragDeltaY_ = y - point.y;
+  this.dragDeltaXY_ = goog.math.Coordinate.difference(xy, point);
 };
 
 /**
@@ -655,9 +685,7 @@ Blockly.WorkspaceSvg.prototype.moveDrag = function(e) {
   // Fix scale of mouse event.
   point.x /= this.scale;
   point.y /= this.scale;
-  var x = this.dragDeltaX_ + point.x;
-  var y = this.dragDeltaY_ + point.y;
-  return new goog.math.Coordinate(x, y);
+  return goog.math.Coordinate.sum(this.dragDeltaXY_, point);
 };
 
 /**
@@ -667,11 +695,64 @@ Blockly.WorkspaceSvg.prototype.moveDrag = function(e) {
  */
 Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
   // TODO: Remove terminateDrag and compensate for coordinate skew during zoom.
-  Blockly.terminateDrag_();
-  var delta = e.deltaY > 0 ? -1 : 1;
-  var position = Blockly.mouseToSvg(e, this.getParentSvg());
-  this.zoom(position.x, position.y, delta);
+  if (e.ctrlKey) {
+    // Pinch-to-zoom in Chrome only
+    Blockly.terminateDrag_();
+    var delta = e.deltaY > 0 ? -1 : 1;
+    var position = Blockly.mouseToSvg(e, this.getParentSvg());
+    this.zoom(position.x, position.y, delta);
+  } else {
+    // This is a regular mouse wheel event - scroll the workspace
+    // First hide the WidgetDiv without animation
+    // (mouse scroll makes field out of place with div)
+    Blockly.WidgetDiv.hide(true);
+    Blockly.DropDownDiv.hideWithoutAnimation();
+    var x = this.scrollX - e.deltaX;
+    var y = this.scrollY - e.deltaY;
+    this.startDragMetrics = this.getMetrics();
+    this.scroll(x, y);
+  }
   e.preventDefault();
+};
+
+/**
+ * Calculate the bounding box for the blocks on the workspace.
+ *
+ * @return {Object} Contains the position and size of the bounding box
+ *   containing the blocks on the workspace.
+ */
+Blockly.WorkspaceSvg.prototype.getBlocksBoundingBox = function() {
+  var topBlocks = this.getTopBlocks();
+  // There are no blocks, return empty rectangle.
+  if (!topBlocks.length) {
+    return {x: 0, y: 0, width: 0, height: 0};
+  }
+
+  // Initialize boundary using the first block.
+  var boundary = topBlocks[0].getBoundingRectangle();
+
+  // Start at 1 since the 0th block was used for initialization
+  for (var i = 1; i < topBlocks.length; i++) {
+    var blockBoundary = topBlocks[i].getBoundingRectangle();
+    if (blockBoundary.topLeft.x < boundary.topLeft.x) {
+      boundary.topLeft.x = blockBoundary.topLeft.x;
+    }
+    if (blockBoundary.bottomRight.x > boundary.bottomRight.x) {
+      boundary.bottomRight.x = blockBoundary.bottomRight.x;
+    }
+    if (blockBoundary.topLeft.y < boundary.topLeft.y) {
+      boundary.topLeft.y = blockBoundary.topLeft.y;
+    }
+    if (blockBoundary.bottomRight.y > boundary.bottomRight.y) {
+      boundary.bottomRight.y = blockBoundary.bottomRight.y;
+    }
+  }
+  return {
+    x: boundary.topLeft.x,
+    y: boundary.topLeft.y,
+    width: boundary.bottomRight.x - boundary.topLeft.x,
+    height: boundary.bottomRight.y - boundary.topLeft.y
+  };
 };
 
 /**
@@ -679,6 +760,7 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
  * @private
  */
 Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
+  Blockly.Events.setGroup(true);
   var topBlocks = this.getTopBlocks(true);
   var cursorY = 0;
   for (var i = 0, block; block = topBlocks[i]; i++) {
@@ -688,9 +770,9 @@ Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
     cursorY = block.getRelativeToSurfaceXY().y +
         block.getHeightWidth().height + Blockly.BlockSvg.MIN_BLOCK_Y;
   }
+  Blockly.Events.setGroup(false);
   // Fire an event to allow scrollbars to resize.
-  Blockly.fireUiEvent(window, 'resize');
-  this.fireChangeEvent();
+  Blockly.asyncSvgResize(this);
 };
 
 /**
@@ -704,12 +786,28 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
   }
   var menuOptions = [];
   var topBlocks = this.getTopBlocks(true);
+  var eventGroup = Blockly.genUid();
+
+  // Options to undo/redo previous action.
+  var undoOption = {};
+  undoOption.text = Blockly.Msg.UNDO;
+  undoOption.enabled = this.undoStack_.length > 0;
+  undoOption.callback = this.undo.bind(this, false);
+  menuOptions.push(undoOption);
+  var redoOption = {};
+  redoOption.text = Blockly.Msg.REDO;
+  redoOption.enabled = this.redoStack_.length > 0;
+  redoOption.callback = this.undo.bind(this, true);
+  menuOptions.push(redoOption);
+
   // Option to clean up blocks.
-  var cleanOption = {};
-  cleanOption.text = Blockly.Msg.CLEAN_UP;
-  cleanOption.enabled = topBlocks.length > 1;
-  cleanOption.callback = this.cleanUp_.bind(this);
-  menuOptions.push(cleanOption);
+  if (this.scrollbar) {
+    var cleanOption = {};
+    cleanOption.text = Blockly.Msg.CLEAN_UP;
+    cleanOption.enabled = topBlocks.length > 1;
+    cleanOption.callback = this.cleanUp_.bind(this);
+    menuOptions.push(cleanOption);
+  }
 
   // Add a little animation to collapsing and expanding.
   var DELAY = 10;
@@ -779,7 +877,7 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
     addDeletableBlocks(topBlocks[i]);
   }
   var deleteOption = {
-    text: deleteList.length <= 1 ? Blockly.Msg.DELETE_BLOCK :
+    text: deleteList.length == 1 ? Blockly.Msg.DELETE_BLOCK :
         Blockly.Msg.DELETE_X_BLOCKS.replace('%1', String(deleteList.length)),
     enabled: deleteList.length > 0,
     callback: function() {
@@ -791,6 +889,7 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
     }
   };
   function deleteNext() {
+    Blockly.Events.setGroup(eventGroup);
     var block = deleteList.shift();
     if (block) {
       if (block.workspace) {
@@ -800,6 +899,7 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
         deleteNext();
       }
     }
+    Blockly.Events.setGroup(false);
   }
   menuOptions.push(deleteOption);
 
@@ -865,6 +965,10 @@ Blockly.WorkspaceSvg.prototype.preloadAudio_ = function() {
  * @param {number=} opt_volume Volume of sound (0-1).
  */
 Blockly.WorkspaceSvg.prototype.playAudio = function(name, opt_volume) {
+  // Send a UI event in case we wish to play the sound externally
+  var event = new Blockly.Events.Ui(null, 'sound', null, name);
+  event.workspaceId = this.id;
+  Blockly.Events.fire(event);
   var sound = this.SOUNDS_[name];
   if (sound) {
     var mySound;
@@ -891,18 +995,17 @@ Blockly.WorkspaceSvg.prototype.playAudio = function(name, opt_volume) {
  * @param {Node|string} tree DOM tree of blocks, or text representation of same.
  */
 Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
-  tree = Blockly.parseToolboxTree_(tree);
+  tree = Blockly.Options.parseToolboxTree(tree);
   if (!tree) {
     if (this.options.languageTree) {
       throw 'Can\'t nullify an existing toolbox.';
     }
-    // No change (null to null).
-    return;
+    return;  // No change (null to null).
   }
   if (!this.options.languageTree) {
     throw 'Existing toolbox is null.  Can\'t create new toolbox.';
   }
-  if (this.options.hasCategories) {
+  if (tree.getElementsByTagName('category').length) {
     if (!this.toolbox_) {
       throw 'Existing toolbox has no categories.  Can\'t change mode.';
     }
@@ -915,31 +1018,6 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
     }
     this.options.languageTree = tree;
     this.flyout_.show(tree.childNodes);
-  }
-};
-
-/**
- * When something in this workspace changes, call a function.
- * @param {!Function} func Function to call.
- * @return {!Array.<!Array>} Opaque data that can be passed to
- *     removeChangeListener.
- */
-Blockly.WorkspaceSvg.prototype.addChangeListener = function(func) {
-  var wrapper = Blockly.bindEvent_(this.getCanvas(),
-      'blocklyWorkspaceChange', null, func);
-  Array.prototype.push.apply(this.eventWrappers_, wrapper);
-  return wrapper;
-};
-
-/**
- * Stop listening for this workspace's changes.
- * @param {!Array.<!Array>} bindData Opaque data from addChangeListener.
- */
-Blockly.WorkspaceSvg.prototype.removeChangeListener = function(bindData) {
-  Blockly.unbindEvent_(bindData);
-  var i = this.eventWrappers_.indexOf(bindData);
-  if (i != -1) {
-    this.eventWrappers_.splice(i, 1);
   }
 };
 
@@ -979,27 +1057,21 @@ Blockly.WorkspaceSvg.prototype.zoom = function(x, y, type) {
   } else if (newScale < this.options.zoomOptions.minScale) {
     scaleChange = this.options.zoomOptions.minScale / this.scale;
   }
-  var matrix = canvas.getCTM()
-      .translate(x * (1 - scaleChange), y * (1 - scaleChange))
-      .scale(scaleChange);
-  // newScale and matrix.a should be identical (within a rounding error).
-  if (this.scale == matrix.a) {
+  if (this.scale == newScale) {
     return;  // No change in zoom.
   }
-  this.scale = matrix.a;
-  this.scrollX = matrix.e - metrics.absoluteLeft;
-  this.scrollY = matrix.f - metrics.absoluteTop;
-  this.updateGridPattern_();
   if (this.scrollbar) {
-    this.scrollbar.resize();
-  } else {
-    this.translate(0, 0);
+    var matrix = canvas.getCTM()
+        .translate(x * (1 - scaleChange), y * (1 - scaleChange))
+        .scale(scaleChange);
+    // newScale and matrix.a should be identical (within a rounding error).
+    this.scrollX = matrix.e - metrics.absoluteLeft;
+    this.scrollY = matrix.f - metrics.absoluteTop;
   }
-  Blockly.hideChaff(false);
-  if (this.flyout_) {
-    // No toolbox, resize flyout.
-    this.flyout_.reflow();
-  }
+  this.setScale(newScale);
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
 };
 
 /**
@@ -1014,31 +1086,103 @@ Blockly.WorkspaceSvg.prototype.zoomCenter = function(type) {
 };
 
 /**
- * Reset zooming and dragging.
- * @param {!Event} e Mouse down event.
+ * Zoom the blocks to fit in the workspace if possible.
  */
-Blockly.WorkspaceSvg.prototype.zoomReset = function(e) {
-  this.scale = 1;
+Blockly.WorkspaceSvg.prototype.zoomToFit = function() {
+  var metrics = this.getMetrics();
+  var blocksBox = this.getBlocksBoundingBox();
+  var blocksWidth = blocksBox.width;
+  var blocksHeight = blocksBox.height;
+  if (!blocksWidth) {
+    return;  // Prevents zooming to infinity.
+  }
+  var workspaceWidth = metrics.viewWidth;
+  var workspaceHeight = metrics.viewHeight;
+  if (this.flyout_) {
+    workspaceWidth -= this.flyout_.width_;
+  }
+  if (!this.scrollbar) {
+    // Orgin point of 0,0 is fixed, blocks will not scroll to center.
+    blocksWidth += metrics.contentLeft;
+    blocksHeight += metrics.contentTop;
+  }
+  var ratioX = workspaceWidth / blocksWidth;
+  var ratioY = workspaceHeight / blocksHeight;
+  this.setScale(Math.min(ratioX, ratioY));
+  this.scrollCenter();
+};
+
+/**
+ * Center the workspace.
+ */
+Blockly.WorkspaceSvg.prototype.scrollCenter = function() {
+  if (!this.scrollbar) {
+    // Can't center a non-scrolling workspace.
+    return;
+  }
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
+  Blockly.hideChaff(false);
+  var metrics = this.getMetrics();
+  var x = (metrics.contentWidth - metrics.viewWidth) / 2;
+  if (this.flyout_) {
+    x -= this.flyout_.width_ / 2;
+  }
+  var y = (metrics.contentHeight - metrics.viewHeight) / 2;
+  this.scrollbar.set(x, y);
+};
+
+/**
+ * Set the workspace's zoom factor.
+ * @param {number} newScale Zoom factor.
+ */
+Blockly.WorkspaceSvg.prototype.setScale = function(newScale) {
+  if (this.options.zoomOptions.maxScale &&
+      newScale > this.options.zoomOptions.maxScale) {
+    newScale = this.options.zoomOptions.maxScale;
+  } else if (this.options.zoomOptions.minScale &&
+      newScale < this.options.zoomOptions.minScale) {
+    newScale = this.options.zoomOptions.minScale;
+  }
+  this.scale = newScale;
   this.updateGridPattern_();
+  // Hide the WidgetDiv without animation (zoom makes field out of place with div)
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
+  if (this.scrollbar) {
+    this.scrollbar.resize();
+  } else {
+    this.translate(this.scrollX, this.scrollY);
+  }
   Blockly.hideChaff(false);
   if (this.flyout_) {
     // No toolbox, resize flyout.
     this.flyout_.reflow();
   }
-  // Zoom level has changed, update the scrollbars.
-  if (this.scrollbar) {
-    this.scrollbar.resize();
-  }
-  // Center the workspace.
-  var metrics = this.getMetrics();
-  if (this.scrollbar) {
-    this.scrollbar.set((metrics.contentWidth - metrics.viewWidth) / 2,
-        (metrics.contentHeight - metrics.viewHeight) / 2);
-  } else {
-    this.translate(0, 0);
-  }
-  // This event has been handled.  Don't start a workspace drag.
-  e.stopPropagation();
+};
+
+/**
+ * Scroll the workspace by a specified amount, keeping in the bounds.
+ * Be sure to set this.startDragMetrics with cached metrics before calling.
+ * @param {number} x Target X to scroll to
+ * @param {number} y Target Y to scroll to
+ */
+Blockly.WorkspaceSvg.prototype.scroll = function(x, y) {
+  var metrics = this.startDragMetrics; // Cached values
+  x = Math.min(x, -metrics.contentLeft);
+  y = Math.min(y, -metrics.contentTop);
+  x = Math.max(x, metrics.viewWidth - metrics.contentLeft -
+               metrics.contentWidth);
+  y = Math.max(y, metrics.viewHeight - metrics.contentTop -
+               metrics.contentHeight);
+   // When the workspace starts scrolling, hide the WidgetDiv without animation.
+   // This is to prevent a dispoal animation from happening in the wrong location.
+  Blockly.WidgetDiv.hide(true);
+  Blockly.DropDownDiv.hideWithoutAnimation();
+  // Move the scrollbars and the page will scroll automatically.
+  this.scrollbar.set(-x - metrics.contentLeft,
+                     -y - metrics.contentTop);
 };
 
 /**
@@ -1080,7 +1224,3 @@ Blockly.WorkspaceSvg.prototype.updateGridPattern_ = function() {
 // Export symbols that would otherwise be renamed by Closure compiler.
 Blockly.WorkspaceSvg.prototype['setVisible'] =
     Blockly.WorkspaceSvg.prototype.setVisible;
-Blockly.WorkspaceSvg.prototype['addChangeListener'] =
-    Blockly.WorkspaceSvg.prototype.addChangeListener;
-Blockly.WorkspaceSvg.prototype['removeChangeListener'] =
-    Blockly.WorkspaceSvg.prototype.removeChangeListener;

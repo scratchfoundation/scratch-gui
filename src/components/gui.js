@@ -1,9 +1,9 @@
-import React from 'react';
-import VM from 'scratch-vm';
-import Blocks from './blocks';
-import Toolbox from './toolbox';
+const React = require('react');
+const VM = require('scratch-vm');
+const Blocks = require('./blocks');
+const Toolbox = require('./toolbox');
 
-export default class GUI extends React.Component {
+class GUI extends React.Component {
     render () {
         return (
             <div className="scratch-gui">
@@ -26,3 +26,5 @@ GUI.propTypes = {
 GUI.defaultProps = {
     vm: new VM()
 };
+
+module.exports = GUI;

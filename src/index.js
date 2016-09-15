@@ -1,2 +1,4 @@
-export {default as GUI} from './components/gui';
-export {default as Blocks} from './components/blocks';
+module.exports = {
+    GUI: require('./components/gui'),
+    Blocks: require('./components/blocks')
+};

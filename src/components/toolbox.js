@@ -1,9 +1,11 @@
-import React from 'react';
+const React = require('react');
 
-export default class Toolbox extends React.Component {
+class Toolbox extends React.Component {
     render () {
         return (
             <div className="scratch-toolbox" />
         );
     }
 }
+
+module.exports = Toolbox;

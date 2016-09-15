@@ -1,8 +1,8 @@
-import defaultsDeep from 'lodash.defaultsdeep';
-import React from 'react';
-import ScratchBlocks from 'scratch-blocks/blocks_compressed_vertical';
+const defaultsDeep = require('lodash.defaultsdeep');
+const React = require('react');
+const ScratchBlocks = require('scratch-blocks/blocks_compressed_vertical');
 
-export default class Blocks extends React.Component {
+class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.mountBlocks = this.mountBlocks.bind(this);
@@ -69,3 +69,5 @@ Blocks.defaultOptions = {
 Blocks.defaultProps = {
     options: Blocks.defaultOptions
 };
+
+module.exports = Blocks;

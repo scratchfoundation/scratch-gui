@@ -12,6 +12,9 @@ export default class Blocks extends React.Component {
             component,
             defaultsDeep({}, this.props.options, Blocks.defaultOptions)
         );
+        if (this.props.vm) {
+            this.workspace.addChangeListener(this.props.vm.blockListener);
+        }
     }
     render () {
         return (

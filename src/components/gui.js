@@ -12,11 +12,16 @@ export default class GUI extends React.Component {
                     options={{
                         toolbox: this.toolbox
                     }}
+                    vm={this.props.vm}
                 />
             </div>
         );
     }
 }
+
+GUI.propTypes = {
+    vm: React.PropTypes.object
+};
 
 GUI.defaultProps = {
     vm: new VM()

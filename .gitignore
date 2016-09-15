@@ -8,3 +8,7 @@ npm-*
 # Testing
 /.nyc_output
 /coverage
+
+# Build
+/gui.js
+/playground.js

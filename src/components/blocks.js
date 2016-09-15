@@ -1,4 +1,4 @@
-import defaultsDeep from 'lodash.defaultsDeep';
+import defaultsDeep from 'lodash.defaultsdeep';
 import React from 'react';
 import ScratchBlocks from 'scratch-blocks/blocks_compressed_vertical';
 

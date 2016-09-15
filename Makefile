@@ -6,7 +6,7 @@ WEBPACK_DEV_SERVER=./node_modules/.bin/webpack-dev-server
 # ------------------------------------------------------------------------------
 
 build:
-	$(WEBPACK)
+	$(WEBPACK) --bail
 
 watch:
 	$(WEBPACK) --watch

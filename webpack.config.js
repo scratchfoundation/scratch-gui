@@ -40,16 +40,18 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.min.js'
-        }),
+        })
+    ].concat(process.env.NODE_ENV == 'production' ? [
         new webpack.optimize.UglifyJsPlugin({
             include: /\.min\.js$/,
             minimize: true,
             compress: {
                 warnings: false
             }
-        }),
+        })
+    ] : []).concat([
         new HtmlWebpackPlugin({
             title: 'Scratch 3.0 GUI'
         })
-    ]
+    ])
 };

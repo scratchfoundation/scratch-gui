@@ -4,7 +4,8 @@
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./src/index.js",
   "scripts": {
-    "start": "make serve"
+    "start": "make serve",
+    "test": "make test"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",

@@ -6,13 +6,18 @@ WEBPACK_DEV_SERVER=./node_modules/.bin/webpack-dev-server
 # ------------------------------------------------------------------------------
 
 build:
+	@make clean
 	$(WEBPACK) --bail
+
+clean:
+	rm -rf ./build
+	mkdir -p build
 
 watch:
 	$(WEBPACK) --watch
 
 serve:
-	$(WEBPACK_DEV_SERVER) --port 8601 --config playground.config.js
+	$(WEBPACK_DEV_SERVER) --port 8601 --content-base=./build
 
 # ------------------------------------------------------------------------------
 
@@ -24,4 +29,4 @@ test:
 	@make build
 	$(WEBPACK) --bail --config playground.config.js
 
-.PHONY: build watch serve lint
+.PHONY: build clean watch serve lint test

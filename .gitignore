@@ -10,5 +10,4 @@ npm-*
 /coverage
 
 # Build
-/gui.js
-/playground.js
+/build

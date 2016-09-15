@@ -1,14 +1,20 @@
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 module.exports = {
     entry: {
+        vendor: ['react', 'react-dom'],
         gui: './src/index.js'
     },
     output: {
-        library: 'ScratchGUI',
-        path: __dirname,
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
     },
     module: {
+        externals: {
+            React: 'react',
+            ReactDOM: 'react-dom'
+        },
         loaders: [{
             test: /\.js$/,
             loader: 'babel-loader',
@@ -29,5 +35,21 @@ module.exports = {
             test: require.resolve('scratch-blocks/blocks_compressed_vertical'),
             loader: 'imports?Blockly=scratch-blocks/blocks_compressed!exports?Blockly'
         }]
-    }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.min.js'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            include: /\.min\.js$/,
+            minimize: true,
+            compress: {
+                warnings: false
+            }
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Scratch 3.0 GUI'
+        })
+    ]
 };

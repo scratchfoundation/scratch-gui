@@ -1,5 +1,2 @@
-import GUIComponent from './components/gui.jsx';
-import BlocksComponent from './components/blocks.jsx';
-
-export const GUI = GUIComponent;
-export const Blocks = BlocksComponent;
+export {default as GUI} from './components/gui';
+export {default as Blocks} from './components/blocks';

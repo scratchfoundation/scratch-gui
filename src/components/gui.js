@@ -1,6 +1,6 @@
 import React from 'react';
 import VM from 'scratch-vm';
-import Blocks from './blocks.jsx';
+import Blocks from './blocks';
 
 export default class GUI extends React.Component {
     render () {

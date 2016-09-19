@@ -4,13 +4,19 @@ const Blocks = require('./blocks');
 const Toolbox = require('./toolbox');
 
 class GUI extends React.Component {
+    constructor (props) {
+        this.state = {};
+    }
+    componentDidMount () {
+        this.setState({toolbox: this._toolbox});
+    }
     render () {
         return (
             <div className="scratch-gui">
-                <Toolbox ref={toolbox => this.toolbox = toolbox} />
+                <Toolbox toolboxRef={(toolbox) => this._toolbox = toolbox} />
                 <Blocks
                     options={{
-                        toolbox: this.toolbox
+                        toolbox: this.state.toolbox
                     }}
                     vm={this.props.vm}
                 />

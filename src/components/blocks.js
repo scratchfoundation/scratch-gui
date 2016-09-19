@@ -1,33 +1,31 @@
 const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
-const ScratchBlocks = require('scratch-blocks/blocks_compressed_vertical');
+const ScratchBlocks = require('scratch-blocks');
 
 class Blocks extends React.Component {
-    constructor (props) {
-        super(props);
-        this.mountBlocks = this.mountBlocks.bind(this);
-    }
-    mountBlocks (component) {
-        this.workspace = ScratchBlocks.inject(
-            component,
-            defaultsDeep({}, this.props.options, Blocks.defaultOptions)
-        );
-        if (this.props.vm) {
-            this.workspace.addChangeListener(this.props.vm.blockListener);
+    componentDidUpdate (prevProps) {
+        if (!prevProps.options.toolbox && this.props.options.toolbox) {
+            let workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+            this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
+            if (this.props.vm) {
+                this.workspace.addChangeListener(this.props.vm.blockListener);
+            }
         }
     }
     render () {
         return (
             <div
                 className="scratch-blocks"
-                ref={this.mountBlocks} />
+                ref="scratchBlocks"
+            />
         );
     }
 }
 
 Blocks.propTypes = {
     options: React.PropTypes.shape({
-        toolbox: React.PropTypes.element,
+        // The toolbox is actually an element, but React doesn't agree :/
+        toolbox: React.PropTypes.object,
         media: React.PropTypes.string,
         zoom: React.PropTypes.shape({
             controls: React.PropTypes.boolean,

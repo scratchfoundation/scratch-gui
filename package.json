@@ -26,6 +26,7 @@
     "babel-preset-react": "6.11.1",
     "eslint": "3.5.0",
     "eslint-plugin-react": "6.2.1",
+    "gh-pages": "0.11.0",
     "html-webpack-plugin": "2.22.0",
     "json-loader": "0.5.4",
     "lodash.defaultsdeep": "4.4.0",

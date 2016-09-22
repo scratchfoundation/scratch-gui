@@ -4,3 +4,15 @@ node_js:
 cache:
   directories:
   - node_modules
+env:
+  global:
+  - DEPLOY_MESSAGE='"Travis build ${TRAVIS_BUILD_NUMBER}"'
+before_deploy:
+    - git config --global user.email "no-reply@scratch.mit.edu"
+    - git config --global user.name "scratch-gui"
+deploy:
+  provider: script
+  script: make deploy
+  skip_cleanup: true
+  on:
+    branch: master

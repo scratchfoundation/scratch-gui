@@ -1,4 +1,5 @@
 ESLINT=./node_modules/.bin/eslint
+GH_PAGES=./node_modules/.bin/gh-pages
 NODE=node
 WEBPACK=./node_modules/.bin/webpack --progress --colors
 WEBPACK_DEV_SERVER=./node_modules/.bin/webpack-dev-server
@@ -28,4 +29,9 @@ test:
 	@make lint
 	@make build
 
-.PHONY: build clean watch serve lint test
+# ------------------------------------------------------------------------------
+
+deploy:
+	$(GH_PAGES) -r $(GH_PAGES_URL) -d build -m $(DEPLOY_MESSAGE)
+
+.PHONY: build clean watch serve lint test deploy

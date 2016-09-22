@@ -64,7 +64,7 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
-    onReceiveWorkspace: function (workspace) {},
+    onReceiveWorkspace: function () {},
     options: Blocks.defaultOptions
 };
 

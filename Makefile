@@ -27,6 +27,5 @@ lint:
 test:
 	@make lint
 	@make build
-	$(WEBPACK) --bail --config playground.config.js
 
 .PHONY: build clean watch serve lint test

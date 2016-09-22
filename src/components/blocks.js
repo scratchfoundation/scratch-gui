@@ -7,9 +7,7 @@ class Blocks extends React.Component {
         if (!prevProps.options.toolbox && this.props.options.toolbox) {
             let workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
             this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
-            if (this.props.vm) {
-                this.workspace.addChangeListener(this.props.vm.blockListener);
-            }
+            this.props.onReceiveWorkspace(this.workspace);
         }
     }
     render () {
@@ -23,6 +21,7 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
+    onReceiveWorkspace: React.PropTypes.func,
     options: React.PropTypes.shape({
         // The toolbox is actually an element, but React doesn't agree :/
         toolbox: React.PropTypes.object,
@@ -65,6 +64,7 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
+    onReceiveWorkspace: function (workspace) {},
     options: Blocks.defaultOptions
 };
 

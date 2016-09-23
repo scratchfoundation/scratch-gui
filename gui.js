@@ -7743,7 +7743,7 @@ webpackJsonp([0],{
 		d.setAttribute("name",c);for(var e=0;e<this.arguments_.length;e++)c=goog.dom.createDom("arg"),c.setAttribute("name",this.arguments_[e]),d.appendChild(c);d=goog.dom.createDom("block",null,d);d.setAttribute("type",this.callType_);b.callback=Blockly.ContextMenu.callbackFactory(this,d);a.push(b);if(!this.isCollapsed())for(e=0;e<this.arguments_.length;e++)b={enabled:!0},c=this.arguments_[e],b.text=Blockly.Msg.VARIABLES_SET_CREATE_GET.replace("%1",c),d=goog.dom.createDom("field",null,c),d.setAttribute("name",
 		"VAR"),d=goog.dom.createDom("block",null,d),d.setAttribute("type","variables_get"),b.callback=Blockly.ContextMenu.callbackFactory(this,d),a.push(b)},callType_:"procedures_callnoreturn"};
 		Blockly.Blocks.procedures_defreturn={init:function(){var a=new Blockly.FieldTextInput(Blockly.Msg.PROCEDURES_DEFRETURN_PROCEDURE,Blockly.Procedures.rename);a.setSpellcheck(!1);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_DEFRETURN_TITLE).appendField(a,"NAME").appendField("","PARAMS");this.setMutator(new Blockly.Mutator(["procedures_mutatorarg"]));this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);
-		this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);this.arguments_=[];this.appendStatementInput("STACK").appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO);this.appendValueInput("RETURN").setAlign(Blockly.ALIGN_RIGHT).appendField("report");this.statementConnection_=null},updateParams_:Blockly.Blocks.procedures_defnoreturn.updateParams_,mutationToDom:Blockly.Blocks.procedures_defnoreturn.mutationToDom,domToMutation:Blockly.Blocks.procedures_defnoreturn.domToMutation,decompose:Blockly.Blocks.procedures_defnoreturn.decompose,
+		this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);this.arguments_=[];this.appendStatementInput("STACK").appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO);this.appendValueInput("RETURN").setAlign(Blockly.ALIGN_LEFT).appendField("report");this.statementConnection_=null},updateParams_:Blockly.Blocks.procedures_defnoreturn.updateParams_,mutationToDom:Blockly.Blocks.procedures_defnoreturn.mutationToDom,domToMutation:Blockly.Blocks.procedures_defnoreturn.domToMutation,decompose:Blockly.Blocks.procedures_defnoreturn.decompose,
 		compose:Blockly.Blocks.procedures_defnoreturn.compose,getProcedureDef:function(){return[this.getFieldValue("NAME"),this.arguments_,!0]},getVars:Blockly.Blocks.procedures_defnoreturn.getVars,renameVar:Blockly.Blocks.procedures_defnoreturn.renameVar,customContextMenu:Blockly.Blocks.procedures_defnoreturn.customContextMenu,callType_:"procedures_callreturn"};
 		Blockly.Blocks.procedures_mutatorcontainer={init:function(){this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);this.appendStatementInput("STACK");this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP);this.contextMenu=!1}};
 		Blockly.Blocks.procedures_mutatorarg={init:function(){var a=new Blockly.FieldTextInput("x",this.validator_);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_MUTATORARG_TITLE).appendField(a,"NAME");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP);this.contextMenu=!1;a.onFinishEditing_=this.createNewVar_;a.onFinishEditing_("x")},
@@ -8828,8 +8828,8 @@ webpackJsonp([0],{
 		Blockly.Workspace.prototype.clear=function(){var a=Blockly.Events.getGroup();for(a||Blockly.Events.setGroup(!0);this.topBlocks_.length;)this.topBlocks_[0].dispose();a||Blockly.Events.setGroup(!1);this.variableList.length=0};Blockly.Workspace.prototype.updateVariableList=function(a){if(!this.isFlyout){a&&(this.variableList.length=0);a=Blockly.Variables.allUsedVariables(this);for(var b=0;b<a.length;b++)this.createVariable(a[b])}};
 		Blockly.Workspace.prototype.renameVariable=function(a,b){var c=this.variableIndexOf(a),d=this.variableIndexOf(b);if(-1!=d&&this.variableList[d]!=b)var e=this.variableList[d];Blockly.Events.setGroup(!0);for(var f=this.getAllBlocks(),g=0;g<f.length;g++)f[g].renameVar(a,b),e&&f[g].renameVar(e,b);Blockly.Events.setGroup(!1);c==d||-1!=c&&-1==d?this.variableList[c]=b:-1!=c&&-1!=d?(this.variableList.splice(c,1),this.variableList[d]=b):(this.variableList.push(b),console.log("Tried to rename an non-existent variable."))};
 		Blockly.Workspace.prototype.createVariable=function(a){-1==this.variableIndexOf(a)&&this.variableList.push(a)};Blockly.Workspace.prototype.getVariableUses=function(a){for(var b=[],c=this.getAllBlocks(),d=0;d<c.length;d++){var e=c[d].getVars();if(e)for(var f=0;f<e.length;f++){var g=e[f];g&&Blockly.Names.equals(g,a)&&b.push(c[d])}}return b};
-		Blockly.Workspace.prototype.deleteVariable=function(a){var b=this.variableIndexOf(a);if(-1!=b){var c=this.getVariableUses(a);if(1<c.length){for(var d=0,e;e=c[d];d++)if("procedures_defnoreturn"==e.type||"procedures_defreturn"==e.type){b=e.getFieldValue("NAME");window.alert(Blockly.Msg.CANNOT_DELETE_VARIABLE_PROCEDURE.replace("%1",a).replace("%2",b));return}window.confirm(Blockly.Msg.DELETE_VARIABLE_CONFIRMATION.replace("%1",c.length).replace("%2",a))}Blockly.Events.setGroup(!0);for(d=0;d<c.length;d++)c[d].dispose(!0,
-		!1);Blockly.Events.setGroup(!1);this.variableList.splice(b,1)}};Blockly.Workspace.prototype.variableIndexOf=function(a){for(var b=0,c;c=this.variableList[b];b++)if(Blockly.Names.equals(c,a))return b;return-1};Blockly.Workspace.prototype.getWidth=function(){return 0};Blockly.Workspace.prototype.newBlock=function(a,b){return new Blockly.Block(this,a,b)};
+		Blockly.Workspace.prototype.deleteVariable=function(a){var b=this.variableIndexOf(a);if(-1!=b){var c=this.getVariableUses(a);if(1<c.length){for(var d=0,e;e=c[d];d++)if("procedures_defnoreturn"==e.type||"procedures_defreturn"==e.type){b=e.getFieldValue("NAME");window.alert(Blockly.Msg.CANNOT_DELETE_VARIABLE_PROCEDURE.replace("%1",a).replace("%2",b));return}if(!window.confirm(Blockly.Msg.DELETE_VARIABLE_CONFIRMATION.replace("%1",c.length).replace("%2",a)))return}Blockly.Events.setGroup(!0);for(d=0;d<
+		c.length;d++)c[d].dispose(!0,!1);Blockly.Events.setGroup(!1);this.variableList.splice(b,1)}};Blockly.Workspace.prototype.variableIndexOf=function(a){for(var b=0,c;c=this.variableList[b];b++)if(Blockly.Names.equals(c,a))return b;return-1};Blockly.Workspace.prototype.getWidth=function(){return 0};Blockly.Workspace.prototype.newBlock=function(a,b){return new Blockly.Block(this,a,b)};
 		Blockly.Workspace.prototype.undo=function(a){var b=a?this.redoStack_:this.undoStack_,c=a?this.undoStack_:this.redoStack_,d=b.pop();if(d){for(var e=[d];b.length&&d.group&&d.group==b[b.length-1].group;)e.push(b.pop());for(b=0;d=e[b];b++)c.push(d);e=Blockly.Events.filter(e,a);Blockly.Events.recordUndo=!1;for(b=0;d=e[b];b++)d.run(a);Blockly.Events.recordUndo=!0}};Blockly.Workspace.prototype.clearUndo=function(){this.undoStack_.length=0;this.redoStack_.length=0;Blockly.Events.clearPendingUndo()};
 		Blockly.Workspace.prototype.addChangeListener=function(a){this.listeners_.push(a);return a};Blockly.Workspace.prototype.removeChangeListener=function(a){a=this.listeners_.indexOf(a);-1!=a&&this.listeners_.splice(a,1)};Blockly.Workspace.prototype.fireChangeListener=function(a){a.recordUndo&&(this.undoStack_.push(a),this.redoStack_.length=0,this.undoStack_.length>this.MAX_UNDO&&this.undoStack_.unshift());for(var b=0,c;c=this.listeners_[b];b++)c(a)};
 		Blockly.Workspace.prototype.getBlockById=function(a){return this.blockDB_[a]||null};Blockly.Workspace.WorkspaceDB_=Object.create(null);Blockly.Workspace.getById=function(a){return Blockly.Workspace.WorkspaceDB_[a]||null};Blockly.Workspace.prototype.clear=Blockly.Workspace.prototype.clear;Blockly.Workspace.prototype.clearUndo=Blockly.Workspace.prototype.clearUndo;Blockly.Workspace.prototype.addChangeListener=Blockly.Workspace.prototype.addChangeListener;
@@ -9025,7 +9025,7 @@ webpackJsonp([0],{
 		Blockly.WorkspaceSvg.prototype.lastRecordedPageScroll_=null;Blockly.WorkspaceSvg.prototype.inverseScreenCTM_=null;Blockly.WorkspaceSvg.prototype.getInverseScreenCTM=function(){return this.inverseScreenCTM_};Blockly.WorkspaceSvg.prototype.updateInverseScreenCTM=function(){this.inverseScreenCTM_=this.getParentSvg().getScreenCTM().inverse()};Blockly.WorkspaceSvg.prototype.setResizeHandlerWrapper=function(a){this.resizeHandlerWrapper_=a};
 		Blockly.WorkspaceSvg.prototype.createDom=function(a){this.svgGroup_=Blockly.createSvgElement("g",{"class":"blocklyWorkspace"},null);a&&(this.svgBackground_=Blockly.createSvgElement("rect",{height:"100%",width:"100%","class":a},this.svgGroup_),"blocklyMainBackground"==a&&(this.svgBackground_.style.fill="url(#"+this.options.gridPattern.id+")"));this.svgBlockCanvas_=Blockly.createSvgElement("g",{"class":"blocklyBlockCanvas"},this.svgGroup_,this);this.svgBubbleCanvas_=Blockly.createSvgElement("g",{"class":"blocklyBubbleCanvas"},
 		this.svgGroup_,this);a=Blockly.Scrollbar.scrollbarThickness;this.options.hasTrashcan&&(a=this.addTrashcan_(a));this.options.zoomOptions&&this.options.zoomOptions.controls&&(a=this.addZoomControls_(a));if(!this.isFlyout){Blockly.bindEvent_(this.svgGroup_,"mousedown",this,this.onMouseDown_);var b=this;Blockly.bindEvent_(this.svgGroup_,"touchstart",null,function(a){Blockly.longStart_(a,b)});this.options.zoomOptions&&this.options.zoomOptions.wheel&&Blockly.bindEvent_(this.svgGroup_,"wheel",this,this.onMouseWheel_)}this.options.hasCategories?
-		this.toolbox_=new Blockly.Toolbox(this):this.options.languageTree&&this.addFlyout_();this.updateGridPattern_();this.recordDeleteAreas();return this.svgGroup_};
+		this.toolbox_=new Blockly.Toolbox(this):this.options.languageTree&&this.addFlyout_();this.updateGridPattern_();this.updateStackGlowScale_();this.recordDeleteAreas();return this.svgGroup_};
 		Blockly.WorkspaceSvg.prototype.dispose=function(){this.rendered=!1;Blockly.WorkspaceSvg.superClass_.dispose.call(this);this.svgGroup_&&(goog.dom.removeNode(this.svgGroup_),this.svgGroup_=null);this.svgBubbleCanvas_=this.svgBlockCanvas_=null;this.toolbox_&&(this.toolbox_.dispose(),this.toolbox_=null);this.flyout_&&(this.flyout_.dispose(),this.flyout_=null);this.trashcan&&(this.trashcan.dispose(),this.trashcan=null);this.scrollbar&&(this.scrollbar.dispose(),this.scrollbar=null);this.zoomControls_&&
 		(this.zoomControls_.dispose(),this.zoomControls_=null);this.options.parentWorkspace||goog.dom.removeNode(this.getParentSvg().parentNode);this.resizeHandlerWrapper_&&(Blockly.unbindEvent_(this.resizeHandlerWrapper_),this.resizeHandlerWrapper_=null)};Blockly.WorkspaceSvg.prototype.newBlock=function(a,b){return new Blockly.BlockSvg(this,a,b)};
 		Blockly.WorkspaceSvg.prototype.addTrashcan_=function(a){this.trashcan=new Blockly.Trashcan(this);var b=this.trashcan.createDom();this.svgGroup_.insertBefore(b,this.svgBlockCanvas_);return this.trashcan.init(a)};Blockly.WorkspaceSvg.prototype.addZoomControls_=function(a){this.zoomControls_=new Blockly.ZoomControls(this);var b=this.zoomControls_.createDom();this.svgGroup_.appendChild(b);return this.zoomControls_.init(a)};
@@ -9062,10 +9062,10 @@ webpackJsonp([0],{
 		(1-d),b*(1-d)).scale(d),this.scrollX=a.e-e.absoluteLeft,this.scrollY=a.f-e.absoluteTop),this.setScale(c),Blockly.WidgetDiv.hide(!0),Blockly.DropDownDiv.hideWithoutAnimation())};Blockly.WorkspaceSvg.prototype.zoomCenter=function(a){var b=this.getMetrics();this.zoom(b.viewWidth/2,b.viewHeight/2,a)};
 		Blockly.WorkspaceSvg.prototype.zoomToFit=function(){var a=this.getMetrics(),b=this.getBlocksBoundingBox(),c=b.width,b=b.height;if(c){var d=a.viewWidth,e=a.viewHeight;this.flyout_&&(d-=this.flyout_.width_);this.scrollbar||(c+=a.contentLeft,b+=a.contentTop);this.setScale(Math.min(d/c,e/b));this.scrollCenter()}};
 		Blockly.WorkspaceSvg.prototype.scrollCenter=function(){if(this.scrollbar){Blockly.WidgetDiv.hide(!0);Blockly.DropDownDiv.hideWithoutAnimation();Blockly.hideChaff(!1);var a=this.getMetrics(),b=(a.contentWidth-a.viewWidth)/2;this.flyout_&&(b-=this.flyout_.width_/2);this.scrollbar.set(b,(a.contentHeight-a.viewHeight)/2)}};
-		Blockly.WorkspaceSvg.prototype.setScale=function(a){this.options.zoomOptions.maxScale&&a>this.options.zoomOptions.maxScale?a=this.options.zoomOptions.maxScale:this.options.zoomOptions.minScale&&a<this.options.zoomOptions.minScale&&(a=this.options.zoomOptions.minScale);this.scale=a;this.updateGridPattern_();Blockly.WidgetDiv.hide(!0);Blockly.DropDownDiv.hideWithoutAnimation();this.scrollbar?this.scrollbar.resize():this.translate(this.scrollX,this.scrollY);Blockly.hideChaff(!1);this.flyout_&&this.flyout_.reflow()};
-		Blockly.WorkspaceSvg.prototype.scroll=function(a,b){var c=this.startDragMetrics;a=Math.min(a,-c.contentLeft);b=Math.min(b,-c.contentTop);a=Math.max(a,c.viewWidth-c.contentLeft-c.contentWidth);b=Math.max(b,c.viewHeight-c.contentTop-c.contentHeight);Blockly.WidgetDiv.hide(!0);Blockly.DropDownDiv.hideWithoutAnimation();this.scrollbar.set(-a-c.contentLeft,-b-c.contentTop)};
+		Blockly.WorkspaceSvg.prototype.setScale=function(a){this.options.zoomOptions.maxScale&&a>this.options.zoomOptions.maxScale?a=this.options.zoomOptions.maxScale:this.options.zoomOptions.minScale&&a<this.options.zoomOptions.minScale&&(a=this.options.zoomOptions.minScale);this.scale=a;this.updateStackGlowScale_();this.updateGridPattern_();Blockly.WidgetDiv.hide(!0);Blockly.DropDownDiv.hideWithoutAnimation();this.scrollbar?this.scrollbar.resize():this.translate(this.scrollX,this.scrollY);Blockly.hideChaff(!1);
+		this.flyout_&&this.flyout_.reflow()};Blockly.WorkspaceSvg.prototype.scroll=function(a,b){var c=this.startDragMetrics;a=Math.min(a,-c.contentLeft);b=Math.min(b,-c.contentTop);a=Math.max(a,c.viewWidth-c.contentLeft-c.contentWidth);b=Math.max(b,c.viewHeight-c.contentTop-c.contentHeight);Blockly.WidgetDiv.hide(!0);Blockly.DropDownDiv.hideWithoutAnimation();this.scrollbar.set(-a-c.contentLeft,-b-c.contentTop)};
 		Blockly.WorkspaceSvg.prototype.updateGridPattern_=function(){if(this.options.gridPattern){var a=this.options.gridOptions.spacing*this.scale||100;this.options.gridPattern.setAttribute("width",a);this.options.gridPattern.setAttribute("height",a);var a=Math.floor(this.options.gridOptions.spacing/2)+.5,b=a-this.options.gridOptions.length/2,c=a+this.options.gridOptions.length/2,d=this.options.gridPattern.firstChild,e=d&&d.nextSibling,a=a*this.scale,b=b*this.scale,c=c*this.scale;d&&(d.setAttribute("stroke-width",
-		this.scale),d.setAttribute("x1",b),d.setAttribute("y1",a),d.setAttribute("x2",c),d.setAttribute("y2",a));e&&(e.setAttribute("stroke-width",this.scale),e.setAttribute("x1",a),e.setAttribute("y1",b),e.setAttribute("x2",a),e.setAttribute("y2",c))}};
+		this.scale),d.setAttribute("x1",b),d.setAttribute("y1",a),d.setAttribute("x2",c),d.setAttribute("y2",a));e&&(e.setAttribute("stroke-width",this.scale),e.setAttribute("x1",a),e.setAttribute("y1",b),e.setAttribute("x2",a),e.setAttribute("y2",c))}};Blockly.WorkspaceSvg.prototype.updateStackGlowScale_=function(){this.options.stackGlowBlur&&this.options.stackGlowBlur.setAttribute("stdDeviation",Blockly.STACK_GLOW_RADIUS/this.scale)};
 		Blockly.WorkspaceSvg.getTopLevelWorkspaceMetrics_=function(){var a=Blockly.svgSize(this.getParentSvg());if(this.toolbox_)if(this.toolboxPosition==Blockly.TOOLBOX_AT_TOP||this.toolboxPosition==Blockly.TOOLBOX_AT_BOTTOM)a.height-=this.toolbox_.getHeight();else if(this.toolboxPosition==Blockly.TOOLBOX_AT_LEFT||this.toolboxPosition==Blockly.TOOLBOX_AT_RIGHT)a.width-=this.toolbox_.getWidth();var b=Blockly.Flyout.prototype.CORNER_RADIUS-1,c=a.width-b,d=a.height-b,e=this.getBlocksBoundingBox(),f=e.width*
 		this.scale,g=e.height*this.scale,h=e.x*this.scale,k=e.y*this.scale;this.scrollbar?(b=Math.min(h-c/2,h+f-c),c=Math.max(h+f+c/2,h+c),f=Math.min(k-d/2,k+g-d),d=Math.max(k+g+d/2,k+d)):(b=e.x,c=b+e.width,f=e.y,d=f+e.height);e=0;this.toolbox_&&this.toolboxPosition==Blockly.TOOLBOX_AT_LEFT&&(e=this.toolbox_.getWidth());g=0;this.toolbox_&&this.toolboxPosition==Blockly.TOOLBOX_AT_TOP&&(g=this.toolbox_.getHeight());return{viewHeight:a.height,viewWidth:a.width,contentHeight:d-f,contentWidth:c-b,viewTop:-this.scrollY,
 		viewLeft:-this.scrollX,contentTop:f,contentLeft:b,absoluteTop:g,absoluteLeft:e,toolboxWidth:this.toolbox_?this.toolbox_.getWidth():0,toolboxHeight:this.toolbox_?this.toolbox_.getHeight():0,flyoutWidth:this.flyout_?this.flyout_.getWidth():0,flyoutHeight:this.flyout_?this.flyout_.getHeight():0,toolboxPosition:this.toolboxPosition}};
@@ -9354,9 +9354,10 @@ webpackJsonp([0],{
 		Blockly.Procedures.getCallers=function(a,b){for(var c=[],d=b.getAllBlocks(),e=0;e<d.length;e++)if(d[e].getProcedureCall){var f=d[e].getProcedureCall();f&&Blockly.Names.equals(f,a)&&c.push(d[e])}return c};
 		Blockly.Procedures.mutateCallers=function(a){var b=Blockly.Events.recordUndo,c=a.getProcedureDef()[0],d=a.mutationToDom(!0);a=Blockly.Procedures.getCallers(c,a.workspace);for(var c=0,e;e=a[c];c++){var f=e.mutationToDom(),f=f&&Blockly.Xml.domToText(f);e.domToMutation(d);var g=e.mutationToDom(),g=g&&Blockly.Xml.domToText(g);f!=g&&(Blockly.Events.recordUndo=!1,Blockly.Events.fire(new Blockly.Events.Change(e,"mutation",null,f,g)),Blockly.Events.recordUndo=b)}};
 		Blockly.Procedures.getDefinition=function(a,b){for(var c=b.getTopBlocks(!1),d=0;d<c.length;d++)if(c[d].getProcedureDef){var e=c[d].getProcedureDef();if(e&&Blockly.Names.equals(e[0],a))return c[d]}return null};Blockly.FlyoutButton=function(a,b,c){this.workspace_=a;this.targetWorkspace_=b;this.text_=c;this.position_=new goog.math.Coordinate(0,0)};Blockly.FlyoutButton.MARGIN=5;Blockly.FlyoutButton.prototype.width=0;Blockly.FlyoutButton.prototype.height=0;
-		Blockly.FlyoutButton.prototype.createDom=function(){this.svgGroup_=Blockly.createSvgElement("g",{"class":"blocklyFlyoutButton"},this.workspace_.getCanvas());var a=Blockly.createSvgElement("rect",{rx:4,ry:4,height:0,width:0},this.svgGroup_),b=Blockly.createSvgElement("text",{"class":"blocklyText",x:0,y:0,"text-anchor":"middle"},this.svgGroup_);b.textContent=this.text_;this.width=b.getComputedTextLength()+2*Blockly.FlyoutButton.MARGIN;this.height=20;a.setAttribute("width",this.width);a.setAttribute("height",
-		this.height);b.setAttribute("x",this.width/2);b.setAttribute("y",this.height-Blockly.FlyoutButton.MARGIN);this.updateTransform_();return this.svgGroup_};Blockly.FlyoutButton.prototype.show=function(){this.updateTransform_();this.svgGroup_.setAttribute("display","block")};Blockly.FlyoutButton.prototype.updateTransform_=function(){this.svgGroup_.setAttribute("transform","translate("+this.position_.x+","+this.position_.y+")")};
-		Blockly.FlyoutButton.prototype.moveTo=function(a,b){this.position_.x=a;this.position_.y=b;this.updateTransform_()};Blockly.FlyoutButton.prototype.dispose=function(){this.svgGroup_&&(goog.dom.removeNode(this.svgGroup_),this.svgGroup_=null);this.targetWorkspace_=this.workspace_=null};Blockly.FlyoutButton.prototype.onMouseUp=function(a){a.preventDefault();a.stopPropagation();Blockly.Flyout.terminateDrag_();Blockly.Variables.createVariable(this.targetWorkspace_)};Blockly.Flyout=function(a){a.getMetrics=this.getMetrics_.bind(this);a.setMetrics=this.setMetrics_.bind(this);this.workspace_=new Blockly.WorkspaceSvg(a);this.workspace_.isFlyout=!0;this.RTL=!!a.RTL;this.horizontalLayout_=a.horizontalLayout;this.toolboxPosition_=a.toolboxPosition;this.eventWrappers_=[];this.backgroundButtons_=[];this.buttons_=[];this.checkboxes_=[];this.listeners_=[];this.permanentlyDisabled_=[];this.startDragMouseX_=this.startDragMouseY_=0};Blockly.Flyout.startFlyout_=null;
+		Blockly.FlyoutButton.prototype.createDom=function(){this.svgGroup_=Blockly.createSvgElement("g",{"class":"blocklyFlyoutButton"},this.workspace_.getCanvas());var a=Blockly.createSvgElement("rect",{"class":"blocklyFlyoutButtonShadow",rx:4,ry:4,x:1,y:1},this.svgGroup_),b=Blockly.createSvgElement("rect",{"class":"blocklyFlyoutButtonBackground",rx:4,ry:4},this.svgGroup_),c=Blockly.createSvgElement("text",{"class":"blocklyText",x:0,y:0,"text-anchor":"middle"},this.svgGroup_);c.textContent=this.text_;this.width=
+		c.getComputedTextLength()+2*Blockly.FlyoutButton.MARGIN;this.height=20;a.setAttribute("width",this.width);a.setAttribute("height",this.height);b.setAttribute("width",this.width);b.setAttribute("height",this.height);c.setAttribute("x",this.width/2);c.setAttribute("y",this.height-Blockly.FlyoutButton.MARGIN);this.updateTransform_();return this.svgGroup_};Blockly.FlyoutButton.prototype.show=function(){this.updateTransform_();this.svgGroup_.setAttribute("display","block")};
+		Blockly.FlyoutButton.prototype.updateTransform_=function(){this.svgGroup_.setAttribute("transform","translate("+this.position_.x+","+this.position_.y+")")};Blockly.FlyoutButton.prototype.moveTo=function(a,b){this.position_.x=a;this.position_.y=b;this.updateTransform_()};Blockly.FlyoutButton.prototype.dispose=function(){this.svgGroup_&&(goog.dom.removeNode(this.svgGroup_),this.svgGroup_=null);this.targetWorkspace_=this.workspace_=null};
+		Blockly.FlyoutButton.prototype.onMouseUp=function(a){a.preventDefault();a.stopPropagation();Blockly.Flyout.terminateDrag_();Blockly.Variables.createVariable(this.targetWorkspace_)};Blockly.Flyout=function(a){a.getMetrics=this.getMetrics_.bind(this);a.setMetrics=this.setMetrics_.bind(this);this.workspace_=new Blockly.WorkspaceSvg(a);this.workspace_.isFlyout=!0;this.RTL=!!a.RTL;this.horizontalLayout_=a.horizontalLayout;this.toolboxPosition_=a.toolboxPosition;this.eventWrappers_=[];this.backgroundButtons_=[];this.buttons_=[];this.checkboxes_=[];this.listeners_=[];this.permanentlyDisabled_=[];this.startDragMouseX_=this.startDragMouseY_=0};Blockly.Flyout.startFlyout_=null;
 		Blockly.Flyout.startDownEvent_=null;Blockly.Flyout.startBlock_=null;Blockly.Flyout.onMouseUpWrapper_=null;Blockly.Flyout.onMouseMoveWrapper_=null;Blockly.Flyout.onMouseMoveBlockWrapper_=null;Blockly.Flyout.prototype.autoClose=!0;Blockly.Flyout.prototype.CORNER_RADIUS=0;Blockly.Flyout.prototype.DRAG_RADIUS=10;Blockly.Flyout.prototype.MARGIN=12;Blockly.Flyout.prototype.GAP_X=3*Blockly.Flyout.prototype.MARGIN;Blockly.Flyout.prototype.GAP_Y=3*Blockly.Flyout.prototype.MARGIN;
 		Blockly.Flyout.prototype.SCROLLBAR_PADDING=2;Blockly.Flyout.prototype.CHECKBOX_SIZE=20;Blockly.Flyout.prototype.CHECKBOX_MARGIN=Blockly.Flyout.prototype.MARGIN;Blockly.Flyout.prototype.CHECKBOX_SPACE_X=Blockly.Flyout.prototype.CHECKBOX_SIZE+2*Blockly.Flyout.prototype.CHECKBOX_MARGIN;Blockly.Flyout.prototype.width_=0;Blockly.Flyout.prototype.height_=0;Blockly.Flyout.prototype.contentWidth_=0;Blockly.Flyout.prototype.contentHeight_=0;Blockly.Flyout.prototype.verticalOffset_=0;
 		Blockly.Flyout.prototype.dragAngleRange_=70;Blockly.Flyout.prototype.dragMode_=Blockly.DRAG_NONE;Blockly.Flyout.prototype.createDom=function(){this.svgGroup_=Blockly.createSvgElement("g",{"class":"blocklyFlyout"},null);this.svgBackground_=Blockly.createSvgElement("path",{"class":"blocklyFlyoutBackground"},this.svgGroup_);this.svgGroup_.appendChild(this.workspace_.createDom());return this.svgGroup_};
@@ -9434,11 +9435,11 @@ webpackJsonp([0],{
 		"-webkit-tap-highlight-color: rgba(0,0,0,0);","}",".arrowTop {","border-top: 1px solid;","border-left: 1px solid;","border-top-left-radius: 4px;","border-color: inherit;","}",".arrowBottom {","border-bottom: 1px solid;","border-right: 1px solid;","border-bottom-right-radius: 4px;","border-color: inherit;","}",".valueReportBox {","min-width: 50px;","max-width: 300px;","max-height: 200px;","overflow: auto;","word-wrap: break-word;","text-align: center;",'font-family: "Helvetica Neue", Helvetica, sans-serif;',
 		"font-size: .8em;","}",".blocklyResizeSE {","cursor: se-resize;","fill: #aaa;","}",".blocklyResizeSW {","cursor: sw-resize;","fill: #aaa;","}",".blocklyResizeLine {","stroke: #888;","stroke-width: 1;","}",".blocklyHighlightedConnectionPath {","fill: none;","stroke: #fc3;","stroke-width: 4px;","}",".blocklyPath {","stroke-width: 1px;","}",".blocklySelected>.blocklyPath {","}",".blocklyDragging>.blocklyPath {","}",".blocklyDisabled>.blocklyPath {","fill-opacity: .5;","stroke-opacity: .5;","}",".blocklyText {",
 		"fill: #fff;",'font-family: "Helvetica Neue", Helvetica, sans-serif;',"font-size: 12pt;","font-weight: 500;","}",".blocklyTextTruncated {","font-size: 11pt;","}",".blocklyNonEditableText>text {","pointer-events: none;","}",".blocklyNonEditableText>rect,",".blocklyEditableText>rect {","fill-opacity: 0;","}",".blocklyNonEditableText>text,",".blocklyEditableText>text {","fill: $colour_text;","}",".blocklyDropdownText {","fill: #fff !important;","}",".blocklyBubbleText {","fill: $colour_text;","}",".blocklyFlyoutButton {",
-		"fill: #888;","cursor: default","}",".blocklyFlyoutButton:hover {","fill: #ccc;","}",".blocklySvg text {","user-select: none;","-moz-user-select: none;","-webkit-user-select: none;","cursor: inherit;","}",".blocklyHidden {","display: none;","}",".blocklyFieldDropdown:not(.blocklyHidden) {","display: block;","}",".blocklyIconGroup {","cursor: default;","}",".blocklyIconGroup:not(:hover),",".blocklyIconGroupReadonly {","opacity: .6;","}",".blocklyIconShape {","fill: #00f;","stroke: #fff;","stroke-width: 1px;",
-		"}",".blocklyIconSymbol {","fill: #fff;","}",".blocklyMinimalBody {","margin: 0;","padding: 0;","}",".blocklyCommentTextarea {","background-color: #ffc;","border: 0;","margin: 0;","padding: 2px;","resize: none;","}",".blocklyHtmlInput {","border: none;",'font-family: "Helvetica Neue", Helvetica, sans-serif;',"font-size: 12pt;","height: 100%;","margin: 0;","outline: none;","box-sizing: border-box;","width: 100%;","text-align: center;","color: $colour_text;","font-weight: 500;","}",".blocklyMainBackground {",
-		"stroke-width: 1;","stroke: #c6c6c6;","}",".blocklyMutatorBackground {","fill: #fff;","stroke: #ddd;","stroke-width: 1;","}",".blocklyFlyoutBackground {","fill: $colour_flyout;","fill-opacity: .8;","}",".blocklyScrollbarBackground {","opacity: 0;","}",".blocklyScrollbarHandle {","fill: $colour_scrollbar;","}",".blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,",".blocklyScrollbarHandle:hover {","fill: $colour_scrollbarHover;","}",".blocklyZoom>image {","opacity: .4;","}",".blocklyZoom>image:hover {",
-		"opacity: .6;","}",".blocklyZoom>image:active {","opacity: .8;","}",".blocklyFlyout .blocklyScrollbarHandle {","fill: #bbb;","}",".blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,",".blocklyFlyout .blocklyScrollbarHandle:hover {","fill: #aaa;","}",".blocklyInvalidInput {","background: #faa;","}",".blocklyAngleCircle {","stroke: #444;","stroke-width: 1;","fill: #ddd;","fill-opacity: .8;","}",".blocklyAngleMarks {","stroke: #444;","stroke-width: 1;","}",".blocklyAngleGauge {",
-		"fill: #f88;","fill-opacity: .8;","}",".blocklyAngleLine {","stroke: #f00;","stroke-width: 2;","stroke-linecap: round;","}",".blocklyContextMenu {","border-radius: 4px;","}",".blocklyDropdownMenu {","padding: 0 !important;","}",".blocklyDropDownNumPad {","background-color: $colour_numPadBackground;","}",".blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,",".blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {","background: url(<<<PATH>>>/sprites.png) no-repeat -48px -16px !important;",
+		"fill: #888;","cursor: default;","}",".blocklyFlyoutButtonShadow {","fill: #666;","}",".blocklyFlyoutButton:hover {","fill: #aaa;","}",".blocklySvg text {","user-select: none;","-moz-user-select: none;","-webkit-user-select: none;","cursor: inherit;","}",".blocklyHidden {","display: none;","}",".blocklyFieldDropdown:not(.blocklyHidden) {","display: block;","}",".blocklyIconGroup {","cursor: default;","}",".blocklyIconGroup:not(:hover),",".blocklyIconGroupReadonly {","opacity: .6;","}",".blocklyIconShape {",
+		"fill: #00f;","stroke: #fff;","stroke-width: 1px;","}",".blocklyIconSymbol {","fill: #fff;","}",".blocklyMinimalBody {","margin: 0;","padding: 0;","}",".blocklyCommentTextarea {","background-color: #ffc;","border: 0;","margin: 0;","padding: 2px;","resize: none;","}",".blocklyHtmlInput {","border: none;",'font-family: "Helvetica Neue", Helvetica, sans-serif;',"font-size: 12pt;","height: 100%;","margin: 0;","outline: none;","box-sizing: border-box;","width: 100%;","text-align: center;","color: $colour_text;",
+		"font-weight: 500;","}",".blocklyMainBackground {","stroke-width: 1;","stroke: #c6c6c6;","}",".blocklyMutatorBackground {","fill: #fff;","stroke: #ddd;","stroke-width: 1;","}",".blocklyFlyoutBackground {","fill: $colour_flyout;","fill-opacity: .8;","}",".blocklyScrollbarBackground {","opacity: 0;","}",".blocklyScrollbarHandle {","fill: $colour_scrollbar;","}",".blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,",".blocklyScrollbarHandle:hover {","fill: $colour_scrollbarHover;","}",".blocklyZoom>image {",
+		"opacity: .4;","}",".blocklyZoom>image:hover {","opacity: .6;","}",".blocklyZoom>image:active {","opacity: .8;","}",".blocklyFlyout .blocklyScrollbarHandle {","fill: #bbb;","}",".blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,",".blocklyFlyout .blocklyScrollbarHandle:hover {","fill: #aaa;","}",".blocklyInvalidInput {","background: #faa;","}",".blocklyAngleCircle {","stroke: #444;","stroke-width: 1;","fill: #ddd;","fill-opacity: .8;","}",".blocklyAngleMarks {","stroke: #444;",
+		"stroke-width: 1;","}",".blocklyAngleGauge {","fill: #f88;","fill-opacity: .8;","}",".blocklyAngleLine {","stroke: #f00;","stroke-width: 2;","stroke-linecap: round;","}",".blocklyContextMenu {","border-radius: 4px;","}",".blocklyDropdownMenu {","padding: 0 !important;","}",".blocklyDropDownNumPad {","background-color: $colour_numPadBackground;","}",".blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,",".blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {","background: url(<<<PATH>>>/sprites.png) no-repeat -48px -16px !important;",
 		"}",".blocklyToolboxDiv {","background-color: $colour_toolbox;","color: $colour_toolboxText;","overflow-x: visible;","overflow-y: auto;","position: absolute;","}",".blocklyTreeRoot {","padding: 4px 0;","}",".blocklyTreeRoot:focus {","outline: none;","}",".blocklyTreeRow {","height: 22px;","line-height: 22px;","margin-bottom: 3px;","padding-right: 8px;","white-space: nowrap;","}",".blocklyHorizontalTree {","float: left;","margin: 1px 5px 8px 0;","}",".blocklyHorizontalTreeRtl {","float: right;","margin: 1px 0 8px 5px;",
 		"}",'.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {',"margin-left: 8px;","}",".blocklyTreeRow:not(.blocklyTreeSelected):hover {","background-color: #e4e4e4;","}",".blocklyTreeSeparator {","border-bottom: solid #e5e5e5 1px;","height: 0;","margin: 5px 0;","}",".blocklyTreeSeparatorHorizontal {","border-right: solid #e5e5e5 1px;","width: 0;","padding: 5px 0;","margin: 0 5px;","}",".blocklyTreeIcon {","background-image: url(<<<PATH>>>/sprites.png);","height: 16px;","vertical-align: middle;","width: 16px;",
 		"}",".blocklyTreeIconClosedLtr {","background-position: -32px -1px;","}",".blocklyTreeIconClosedRtl {","background-position: 0px -1px;","}",".blocklyTreeIconOpen {","background-position: -16px -1px;","}",".blocklyTreeSelected>.blocklyTreeIconClosedLtr {","background-position: -32px -17px;","}",".blocklyTreeSelected>.blocklyTreeIconClosedRtl {","background-position: 0px -17px;","}",".blocklyTreeSelected>.blocklyTreeIconOpen {","background-position: -16px -17px;","}",".blocklyTreeIconNone,",".blocklyTreeSelected>.blocklyTreeIconNone {",
@@ -9467,10 +9468,11 @@ webpackJsonp([0],{
 		Blockly.DragSurfaceSvg.prototype.getGroup=function(){return this.dragGroup_};Blockly.DragSurfaceSvg.prototype.getCurrentBlock=function(){return this.dragGroup_.childNodes[0]};Blockly.DragSurfaceSvg.prototype.clearAndHide=function(a){a.appendChild(this.getCurrentBlock());this.SVG_.style.display="none";goog.asserts.assert(0==this.dragGroup_.childNodes.length,"Drag group was not cleared.")};Blockly.STACK_GLOW_RADIUS=1;Blockly.REPLACEMENT_GLOW_RADIUS=2;
 		Blockly.inject=function(a,b){goog.isString(a)&&(a=document.getElementById(a)||document.querySelector(a));if(!goog.dom.contains(document,a))throw"Error: container is not in current document.";var c=new Blockly.Options(b||{}),d=goog.dom.createDom("div","injectionDiv");a.appendChild(d);var e=Blockly.createDom_(d,c),d=new Blockly.DragSurfaceSvg(d);d.createDom();c=Blockly.createMainWorkspace_(e,c,d);Blockly.init_(c);c.markFocused();Blockly.bindEvent_(e,"focus",c,c.markFocused);Blockly.svgResize(c);return c};
 		Blockly.createDom_=function(a,b){a.setAttribute("dir","LTR");goog.ui.Component.setDefaultRightToLeft(b.RTL);Blockly.Css.inject(b.hasCss,b.pathToMedia);var c=Blockly.createSvgElement("svg",{xmlns:"http://www.w3.org/2000/svg","xmlns:html":"http://www.w3.org/1999/xhtml","xmlns:xlink":"http://www.w3.org/1999/xlink",version:"1.1","class":"blocklySvg"},a),d=Blockly.createSvgElement("defs",{},c),e=String(Math.random()).substring(2),f=Blockly.createSvgElement("filter",{id:"blocklyStackGlowFilter",height:"160%",
-		width:"180%",y:"-30%",x:"-40%"},d);Blockly.createSvgElement("feGaussianBlur",{"in":"SourceGraphic",stdDeviation:Blockly.STACK_GLOW_RADIUS},f);var g=Blockly.createSvgElement("feComponentTransfer",{result:"outBlur"},f);Blockly.createSvgElement("feFuncA",{type:"table",tableValues:"0"+" 1".repeat(16)},g);Blockly.createSvgElement("feFlood",{"flood-color":Blockly.Colours.stackGlow,"flood-opacity":Blockly.Colours.stackGlowOpacity,result:"outColor"},f);Blockly.createSvgElement("feComposite",{"in":"outColor",
-		in2:"outBlur",operator:"in",result:"outGlow"},f);Blockly.createSvgElement("feComposite",{"in":"SourceGraphic",in2:"outGlow",operator:"over"},f);f=Blockly.createSvgElement("filter",{id:"blocklyReplacementGlowFilter",height:"160%",width:"180%",y:"-30%",x:"-40%"},d);Blockly.createSvgElement("feGaussianBlur",{"in":"SourceGraphic",stdDeviation:Blockly.REPLACEMENT_GLOW_RADIUS},f);g=Blockly.createSvgElement("feComponentTransfer",{result:"outBlur"},f);Blockly.createSvgElement("feFuncA",{type:"table",tableValues:"0"+
-		" 1".repeat(16)},g);Blockly.createSvgElement("feFlood",{"flood-color":Blockly.Colours.replacementGlow,"flood-opacity":Blockly.Colours.replacementGlowOpacity,result:"outColor"},f);Blockly.createSvgElement("feComposite",{"in":"outColor",in2:"outBlur",operator:"in",result:"outGlow"},f);Blockly.createSvgElement("feComposite",{"in":"SourceGraphic",in2:"outGlow",operator:"over"},f);g=Blockly.createSvgElement("pattern",{id:"blocklyDisabledPattern"+e,patternUnits:"userSpaceOnUse",width:10,height:10},d);Blockly.createSvgElement("rect",
-		{width:10,height:10,fill:"#aaa"},g);Blockly.createSvgElement("path",{d:"M 0 0 L 10 10 M 10 0 L 0 10",stroke:"#cc0"},g);b.disabledPatternId=g.id;d=Blockly.createSvgElement("pattern",{id:"blocklyGridPattern"+e,patternUnits:"userSpaceOnUse"},d);0<b.gridOptions.length&&0<b.gridOptions.spacing&&(Blockly.createSvgElement("line",{stroke:b.gridOptions.colour},d),1<b.gridOptions.length&&Blockly.createSvgElement("line",{stroke:b.gridOptions.colour},d));b.gridPattern=d;return c};
+		width:"180%",y:"-30%",x:"-40%"},d);b.stackGlowBlur=Blockly.createSvgElement("feGaussianBlur",{"in":"SourceGraphic",stdDeviation:Blockly.STACK_GLOW_RADIUS},f);var g=Blockly.createSvgElement("feComponentTransfer",{result:"outBlur"},f);Blockly.createSvgElement("feFuncA",{type:"table",tableValues:"0"+" 1".repeat(16)},g);Blockly.createSvgElement("feFlood",{"flood-color":Blockly.Colours.stackGlow,"flood-opacity":Blockly.Colours.stackGlowOpacity,result:"outColor"},f);Blockly.createSvgElement("feComposite",
+		{"in":"outColor",in2:"outBlur",operator:"in",result:"outGlow"},f);Blockly.createSvgElement("feComposite",{"in":"SourceGraphic",in2:"outGlow",operator:"over"},f);f=Blockly.createSvgElement("filter",{id:"blocklyReplacementGlowFilter",height:"160%",width:"180%",y:"-30%",x:"-40%"},d);Blockly.createSvgElement("feGaussianBlur",{"in":"SourceGraphic",stdDeviation:Blockly.REPLACEMENT_GLOW_RADIUS},f);g=Blockly.createSvgElement("feComponentTransfer",{result:"outBlur"},f);Blockly.createSvgElement("feFuncA",{type:"table",
+		tableValues:"0"+" 1".repeat(16)},g);Blockly.createSvgElement("feFlood",{"flood-color":Blockly.Colours.replacementGlow,"flood-opacity":Blockly.Colours.replacementGlowOpacity,result:"outColor"},f);Blockly.createSvgElement("feComposite",{"in":"outColor",in2:"outBlur",operator:"in",result:"outGlow"},f);Blockly.createSvgElement("feComposite",{"in":"SourceGraphic",in2:"outGlow",operator:"over"},f);g=Blockly.createSvgElement("pattern",{id:"blocklyDisabledPattern"+e,patternUnits:"userSpaceOnUse",width:10,
+		height:10},d);Blockly.createSvgElement("rect",{width:10,height:10,fill:"#aaa"},g);Blockly.createSvgElement("path",{d:"M 0 0 L 10 10 M 10 0 L 0 10",stroke:"#cc0"},g);b.disabledPatternId=g.id;d=Blockly.createSvgElement("pattern",{id:"blocklyGridPattern"+e,patternUnits:"userSpaceOnUse"},d);0<b.gridOptions.length&&0<b.gridOptions.spacing&&(Blockly.createSvgElement("line",{stroke:b.gridOptions.colour},d),1<b.gridOptions.length&&Blockly.createSvgElement("line",{stroke:b.gridOptions.colour},d));b.gridPattern=
+		d;return c};
 		Blockly.createMainWorkspace_=function(a,b,c){b.parentWorkspace=null;var d=new Blockly.WorkspaceSvg(b,c);d.scale=b.zoomOptions.startScale;a.appendChild(d.createDom("blocklyMainBackground"));d.translate(0,0);d.markFocused();b.readOnly||b.hasScrollbars||d.addChangeListener(function(){if(Blockly.dragMode_==Blockly.DRAG_NONE){var a=d.getMetrics(),c=a.viewLeft+a.absoluteLeft,g=a.viewTop+a.absoluteTop;if(a.contentTop<g||a.contentTop+a.contentHeight>a.viewHeight+g||a.contentLeft<(b.RTL?a.viewLeft:c)||a.contentLeft+
 		a.contentWidth>(b.RTL?a.viewWidth:a.viewWidth+c))for(var h=d.getTopBlocks(!1),k=0,l;l=h[k];k++){var m=l.getRelativeToSurfaceXY(),n=l.getHeightWidth(),p=g+25-n.height-m.y;0<p&&l.moveBy(0,p);p=g+a.viewHeight-25-m.y;0>p&&l.moveBy(0,p);p=25+c-m.x-(b.RTL?0:n.width);0<p&&l.moveBy(p,0);m=c+a.viewWidth-25-m.x+(b.RTL?n.width:0);0>m&&l.moveBy(m,0)}}});Blockly.svgResize(d);Blockly.WidgetDiv.createDom();Blockly.DropDownDiv.createDom();Blockly.Tooltip.createDom();return d};
 		Blockly.init_=function(a){var b=a.options,c=a.getParentSvg();Blockly.bindEvent_(c,"contextmenu",null,function(a){Blockly.isTargetInput_(a)||a.preventDefault()});c=Blockly.bindEvent_(window,"resize",null,function(){Blockly.hideChaff(!0);Blockly.svgResize(a)});a.setResizeHandlerWrapper(c);Blockly.inject.bindDocumentEvents_();b.languageTree&&(a.toolbox_?a.toolbox_.init(a):a.flyout_&&(a.flyout_.init(a),a.flyout_.show(b.languageTree.childNodes),a.flyout_.scrollToStart(),b.horizontalLayout?(a.scrollY=a.flyout_.height_,
@@ -11791,6 +11793,7 @@ webpackJsonp([0],{
 
 		'use strict'
 
+		exports.byteLength = byteLength
 		exports.toByteArray = toByteArray
 		exports.fromByteArray = fromByteArray
 
@@ -11798,23 +11801,17 @@ webpackJsonp([0],{
 		var revLookup = []
 		var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-		function init () {
-		  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-		  for (var i = 0, len = code.length; i < len; ++i) {
-		    lookup[i] = code[i]
-		    revLookup[code.charCodeAt(i)] = i
-		  }
-
-		  revLookup['-'.charCodeAt(0)] = 62
-		  revLookup['_'.charCodeAt(0)] = 63
+		var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+		for (var i = 0, len = code.length; i < len; ++i) {
+		  lookup[i] = code[i]
+		  revLookup[code.charCodeAt(i)] = i
 		}
 
-		init()
+		revLookup['-'.charCodeAt(0)] = 62
+		revLookup['_'.charCodeAt(0)] = 63
 
-		function toByteArray (b64) {
-		  var i, j, l, tmp, placeHolders, arr
+		function placeHoldersCount (b64) {
 		  var len = b64.length
-
 		  if (len % 4 > 0) {
 		    throw new Error('Invalid string. Length must be a multiple of 4')
 		  }
@@ -11824,9 +11821,19 @@ webpackJsonp([0],{
 		  // represent one byte
 		  // if there is only one, then the three characters before it represent 2 bytes
 		  // this is just a cheap hack to not do indexOf twice
-		  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+		  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+		}
 
+		function byteLength (b64) {
 		  // base64 is 4/3 + up to two characters of the original data
+		  return b64.length * 3 / 4 - placeHoldersCount(b64)
+		}
+
+		function toByteArray (b64) {
+		  var i, j, l, tmp, placeHolders, arr
+		  var len = b64.length
+		  placeHolders = placeHoldersCount(b64)
+
 		  arr = new Arr(len * 3 / 4 - placeHolders)
 
 		  // if there are placeholders, only get up to the last complete 4 chars
@@ -26376,6 +26383,7 @@ webpackJsonp([0],{
 		        'control_repeat_until': this.repeatUntil,
 		        'control_forever': this.forever,
 		        'control_wait': this.wait,
+		        'control_wait_until': this.waitUntil,
 		        'control_if': this.if,
 		        'control_if_else': this.ifElse,
 		        'control_stop': this.stop,
@@ -26429,6 +26437,14 @@ webpackJsonp([0],{
 		        }
 		    } else {
 		        util.stackFrame.executedInFrame = false;
+		        util.yieldFrame();
+		    }
+		};
+
+		Scratch3ControlBlocks.prototype.waitUntil = function(args, util) {
+		    var condition = Cast.toBoolean(args.CONDITION);
+		    // Only execute once per frame.
+		    if (!condition) {
 		        util.yieldFrame();
 		    }
 		};
@@ -36208,6 +36224,7 @@ webpackJsonp([0],{
 
 		'use strict'
 
+		exports.byteLength = byteLength
 		exports.toByteArray = toByteArray
 		exports.fromByteArray = fromByteArray
 
@@ -36215,23 +36232,17 @@ webpackJsonp([0],{
 		var revLookup = []
 		var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
 
-		function init () {
-		  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-		  for (var i = 0, len = code.length; i < len; ++i) {
-		    lookup[i] = code[i]
-		    revLookup[code.charCodeAt(i)] = i
-		  }
-
-		  revLookup['-'.charCodeAt(0)] = 62
-		  revLookup['_'.charCodeAt(0)] = 63
+		var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+		for (var i = 0, len = code.length; i < len; ++i) {
+		  lookup[i] = code[i]
+		  revLookup[code.charCodeAt(i)] = i
 		}
 
-		init()
+		revLookup['-'.charCodeAt(0)] = 62
+		revLookup['_'.charCodeAt(0)] = 63
 
-		function toByteArray (b64) {
-		  var i, j, l, tmp, placeHolders, arr
+		function placeHoldersCount (b64) {
 		  var len = b64.length
-
 		  if (len % 4 > 0) {
 		    throw new Error('Invalid string. Length must be a multiple of 4')
 		  }
@@ -36241,9 +36252,19 @@ webpackJsonp([0],{
 		  // represent one byte
 		  // if there is only one, then the three characters before it represent 2 bytes
 		  // this is just a cheap hack to not do indexOf twice
-		  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+		  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+		}
 
+		function byteLength (b64) {
 		  // base64 is 4/3 + up to two characters of the original data
+		  return b64.length * 3 / 4 - placeHoldersCount(b64)
+		}
+
+		function toByteArray (b64) {
+		  var i, j, l, tmp, placeHolders, arr
+		  var len = b64.length
+		  placeHolders = placeHoldersCount(b64)
+
 		  arr = new Arr(len * 3 / 4 - placeHolders)
 
 		  // if there are placeholders, only get up to the last complete 4 chars

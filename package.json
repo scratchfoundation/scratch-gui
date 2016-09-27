@@ -33,6 +33,7 @@
     "scratch-blocks": "*",
     "scratch-render": "*",
     "scratch-vm": "*",
+    "travis-after-all": "1.4.4",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.15.2"
   }

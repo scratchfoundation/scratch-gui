@@ -11,7 +11,8 @@ after_script:
 - |
   # RELEASE_BRANCHES and NPM_TOKEN defined in Travis settings panel
   declare exitCode
-  $(npm bin)/travis-after-all
+  # To retrieve your access token, use travis token --pro if it's for a private repo
+  node -e "require('travis-after-all')(null, {API_HOST: '${TRAVIS_API_HOST}', ACCESS_TOKEN: '${TRAVIS_ACCESS_TOKEN}'})"
   exitCode=$?
   if [[
     # Execute after all jobs finish successfully

@@ -30,9 +30,9 @@
     "html-webpack-plugin": "2.22.0",
     "json-loader": "0.5.4",
     "lodash.defaultsdeep": "4.4.0",
-    "scratch-blocks": "*",
-    "scratch-render": "*",
-    "scratch-vm": "*",
+    "scratch-blocks": "^0.1.0-prerelease",
+    "scratch-render": "^0.1.0-prerelease",
+    "scratch-vm": "^0.1.0-prerelease",
     "travis-after-all": "1.4.4",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.15.2"

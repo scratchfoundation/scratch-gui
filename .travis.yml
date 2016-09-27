@@ -5,6 +5,8 @@ node_js:
 cache:
   directories:
   - node_modules
+before_install:
+- npm install react@15 react-dom@15
 after_script:
 - |
   # RELEASE_BRANCHES and NPM_TOKEN defined in Travis settings panel

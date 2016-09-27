@@ -1,3 +1,5 @@
+const ScratchBlocks = require('scratch-blocks');
+
 module.exports = {
     attachWorkspace: function (vm, workspace) {
         vm.on('STACK_GLOW_ON', data => workspace.glowStack(data.id, true));
@@ -5,6 +7,13 @@ module.exports = {
         vm.on('BLOCK_GLOW_ON', data => workspace.glowBlock(data.id, true));
         vm.on('BLOCK_GLOW_OFF', data => workspace.glowBlock(data.id, false));
         vm.on('VISUAL_REPORT', data => workspace.reportValue(data.id, data.value));
+        vm.on('workspaceUpdate', data => {
+            ScratchBlocks.Events.disable();
+            workspace.clear();
+            let dom = ScratchBlocks.Xml.textToDom(data.xml);
+            ScratchBlocks.Xml.domToWorkspace(dom, workspace);
+            ScratchBlocks.Events.enable();
+        });
     },
     attachMouseEvents: function (vm, stage) {
         document.addEventListener('mousemove', function (e) {

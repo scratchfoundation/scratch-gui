@@ -17,8 +17,8 @@ module.exports = {
     },
     attachMouseEvents: function (vm, stage) {
         document.addEventListener('mousemove', function (e) {
-            var rect = stage.getBoundingClientRect();
-            var coordinates = {
+            let rect = stage.getBoundingClientRect();
+            let coordinates = {
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top,
                 canvasWidth: rect.width,
@@ -27,8 +27,8 @@ module.exports = {
             vm.postIOData('mouse', coordinates);
         });
         stage.addEventListener('mousedown', function (e) {
-            var rect = stage.getBoundingClientRect();
-            var data = {
+            let rect = stage.getBoundingClientRect();
+            let data = {
                 isDown: true,
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top,
@@ -39,8 +39,8 @@ module.exports = {
             e.preventDefault();
         });
         stage.addEventListener('mouseup', function (e) {
-            var rect = stage.getBoundingClientRect();
-            var data = {
+            let rect = stage.getBoundingClientRect();
+            let data = {
                 isDown: false,
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top,

@@ -2,6 +2,7 @@ const ScratchBlocks = require('scratch-blocks');
 
 module.exports = {
     attachWorkspace: function (vm, workspace) {
+        workspace.addChangeListener(vm.blockListener);
         vm.on('STACK_GLOW_ON', data => workspace.glowStack(data.id, true));
         vm.on('STACK_GLOW_OFF', data => workspace.glowStack(data.id, false));
         vm.on('BLOCK_GLOW_ON', data => workspace.glowBlock(data.id, true));

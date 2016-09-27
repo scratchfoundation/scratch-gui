@@ -22,7 +22,6 @@ class GUI extends React.Component {
     }
     onReceiveWorkspace (workspace) {
         this.workspace = workspace;
-        this.workspace.addChangeListener(this.props.vm.blockListener);
         VMManager.attachWorkspace(this.props.vm, this.workspace);
         VMManager.attachMouseEvents(this.props.vm, this.stage);
         VMManager.attachKeyboardEvents(this.props.vm);

@@ -29,6 +29,7 @@ class GUI extends React.Component {
         this.props.vm.attachRenderer(this.renderer);
         this.props.vm.createEmptyProject();
         this.props.vm.start();
+        requestAnimationFrame(this.animate);
     }
     animate () {
         this.props.vm.animationFrame();

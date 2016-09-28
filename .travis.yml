@@ -10,13 +10,9 @@ before_install:
 after_script:
 - |
   # RELEASE_BRANCHES and NPM_TOKEN defined in Travis settings panel
-  declare exitCode
-  # To retrieve your access token, use travis token --pro if it's for a private repo
-  node -e "require('travis-after-all')(null, {API_HOST: '${TRAVIS_API_HOST}', ACCESS_TOKEN: '${TRAVIS_ACCESS_TOKEN}'})"
-  exitCode=$?
   if [[
-    # Execute after all jobs finish successfully
-    $exitCode = 0 &&
+    # For now only release on the Node 4 environment
+    $TRAVIS_NODE_VERSION = "4.2" &&
     # Only release on release branches
     $RELEASE_BRANCHES =~ $TRAVIS_BRANCH &&
     # Don't release on PR builds

@@ -46,6 +46,7 @@ Blocks.propTypes = {
 };
 
 Blocks.defaultOptions = {
+    media: '/static/blocks-media/',
     zoom: {
         controls: true,
         wheel: true,

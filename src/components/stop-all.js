@@ -1,30 +1,30 @@
 const React = require('react');
 
-class GreenFlag extends React.Component {
+class StopAll extends React.Component {
     constructor (props) {
         super(props);
         this.onClick = this.onClick.bind(this);
     }
     onClick (e) {
         e.preventDefault();
-        this.props.vm.greenFlag();
+        this.props.vm.stopAll();
     }
     render () {
         return (
-            <div className="scratch-green-flag">
+            <div className="scratch-stop-all">
                 <button onClick={this.onClick}>{this.props.title}</button>
             </div>
         );
     }
 }
 
-GreenFlag.propTypes = {
+StopAll.propTypes = {
     title: React.PropTypes.string,
     vm: React.PropTypes.object
 };
 
-GreenFlag.defaultProps = {
-    title: 'Go'
+StopAll.defaultProps = {
+    title: 'Stop'
 };
 
-module.exports = GreenFlag;
+module.exports = StopAll;

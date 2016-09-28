@@ -5,6 +5,7 @@ const GreenFlag = require('./green-flag');
 const Renderer = require('scratch-render');
 const SpriteSelector = require('./sprite-selector');
 const Stage = require('./stage');
+const StopAll = require('./stop-all');
 const Toolbox = require('./toolbox');
 const VM = require('scratch-vm');
 const VMManager = require('../lib/vm-manager');
@@ -40,6 +41,7 @@ class GUI extends React.Component {
         return (
             <div className="scratch-gui">
                 <GreenFlag vm={this.props.vm} />
+                <StopAll vm={this.props.vm} />
                 <Stage stageRef={stage => this.stage = stage} />
                 <SpriteSelector vm={this.props.vm} />
                 <Toolbox toolboxRef={toolbox => this.toolbox = toolbox} />

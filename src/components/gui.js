@@ -1,6 +1,7 @@
 const React = require('react');
 
 const Blocks = require('./blocks');
+const GreenFlag = require('./green-flag');
 const Renderer = require('scratch-render');
 const SpriteSelector = require('./sprite-selector');
 const Stage = require('./stage');
@@ -38,6 +39,7 @@ class GUI extends React.Component {
     render () {
         return (
             <div className="scratch-gui">
+                <GreenFlag vm={this.props.vm} />
                 <Stage stageRef={stage => this.stage = stage} />
                 <SpriteSelector vm={this.props.vm} />
                 <Toolbox toolboxRef={toolbox => this.toolbox = toolbox} />

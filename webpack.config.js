@@ -26,6 +26,9 @@ module.exports = {
         }]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'BASE_PATH': '"' + (process.env.BASE_PATH || '/') + '"'
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.min.js'

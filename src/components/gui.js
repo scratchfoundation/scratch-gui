@@ -64,6 +64,7 @@ class GUI extends React.Component {
                 <Toolbox toolboxRef={toolbox => this.toolbox = toolbox} />
                 <Blocks
                     options={{
+                        media: this.props.basePath + 'static/blocks-media/',
                         toolbox: this.state.toolbox
                     }}
                     vm={this.props.vm}
@@ -75,11 +76,12 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    projectData: React.PropTypes.string,
+    basePath: React.PropTypes.string,
     vm: React.PropTypes.object,
 };
 
 GUI.defaultProps = {
+    basePath: '/',
     vm: new VM()
 };
 

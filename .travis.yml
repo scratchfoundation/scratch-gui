@@ -5,6 +5,9 @@ node_js:
 cache:
   directories:
   - node_modules
+env:
+  global:
+  - BASE_PATH=/scratch-gui/
 before_install:
 - npm install react@15 react-dom@15
 after_script:

@@ -12,7 +12,7 @@ webpackJsonp([0],{
 	var app = document.createElement('div');
 	document.body.appendChild(app);
 
-	ReactDOM.render(React.createElement(GUI, null), app);
+	ReactDOM.render(React.createElement(GUI, { basePath: ("/scratch-gui/") }), app);
 
 /***/ },
 
@@ -121,6 +121,7 @@ webpackJsonp([0],{
 	                    } }),
 	                React.createElement(Blocks, {
 	                    options: {
+	                        media: this.props.basePath + 'static/blocks-media/',
 	                        toolbox: this.state.toolbox
 	                    },
 	                    vm: this.props.vm,
@@ -134,11 +135,12 @@ webpackJsonp([0],{
 	}(React.Component);
 
 	GUI.propTypes = {
-	    projectData: React.PropTypes.string,
+	    basePath: React.PropTypes.string,
 	    vm: React.PropTypes.object
 	};
 
 	GUI.defaultProps = {
+	    basePath: '/',
 	    vm: new VM()
 	};
 
@@ -638,7 +640,6 @@ webpackJsonp([0],{
 	};
 
 	Blocks.defaultOptions = {
-	    media: '/static/blocks-media/',
 	    zoom: {
 	        controls: true,
 	        wheel: true,

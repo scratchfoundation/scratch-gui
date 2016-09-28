@@ -32,12 +32,14 @@ webpackJsonp([0],{
 	var React = __webpack_require__(1);
 
 	var Blocks = __webpack_require__(173);
-	var Renderer = __webpack_require__(183);
-	var SpriteSelector = __webpack_require__(184);
-	var Stage = __webpack_require__(185);
-	var Toolbox = __webpack_require__(186);
-	var VM = __webpack_require__(187);
-	var VMManager = __webpack_require__(188);
+	var GreenFlag = __webpack_require__(183);
+	var Renderer = __webpack_require__(184);
+	var SpriteSelector = __webpack_require__(185);
+	var Stage = __webpack_require__(186);
+	var StopAll = __webpack_require__(187);
+	var Toolbox = __webpack_require__(188);
+	var VM = __webpack_require__(189);
+	var VMManager = __webpack_require__(190);
 
 	var GUI = function (_React$Component) {
 	    _inherits(GUI, _React$Component);
@@ -64,7 +66,6 @@ webpackJsonp([0],{
 	        key: 'onReceiveWorkspace',
 	        value: function onReceiveWorkspace(workspace) {
 	            this.workspace = workspace;
-	            this.workspace.addChangeListener(this.props.vm.blockListener);
 	            VMManager.attachWorkspace(this.props.vm, this.workspace);
 	            VMManager.attachMouseEvents(this.props.vm, this.stage);
 	            VMManager.attachKeyboardEvents(this.props.vm);
@@ -72,6 +73,7 @@ webpackJsonp([0],{
 	            this.props.vm.attachRenderer(this.renderer);
 	            this.props.vm.createEmptyProject();
 	            this.props.vm.start();
+	            requestAnimationFrame(this.animate);
 	        }
 	    }, {
 	        key: 'animate',
@@ -87,6 +89,8 @@ webpackJsonp([0],{
 	            return React.createElement(
 	                'div',
 	                { className: 'scratch-gui' },
+	                React.createElement(GreenFlag, { vm: this.props.vm }),
+	                React.createElement(StopAll, { vm: this.props.vm }),
 	                React.createElement(Stage, { stageRef: function stageRef(stage) {
 	                        return _this2.stage = stage;
 	                    } }),
@@ -194,6 +198,7 @@ webpackJsonp([0],{
 	};
 
 	Blocks.defaultOptions = {
+	    media: '/static/blocks-media/',
 	    zoom: {
 	        controls: true,
 	        wheel: true,
@@ -9508,6 +9513,70 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 183:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var GreenFlag = function (_React$Component) {
+	    _inherits(GreenFlag, _React$Component);
+
+	    function GreenFlag(props) {
+	        _classCallCheck(this, GreenFlag);
+
+	        var _this = _possibleConstructorReturn(this, (GreenFlag.__proto__ || Object.getPrototypeOf(GreenFlag)).call(this, props));
+
+	        _this.onClick = _this.onClick.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(GreenFlag, [{
+	        key: 'onClick',
+	        value: function onClick(e) {
+	            e.preventDefault();
+	            this.props.vm.greenFlag();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'div',
+	                { className: 'scratch-green-flag' },
+	                React.createElement(
+	                    'button',
+	                    { onClick: this.onClick },
+	                    this.props.title
+	                )
+	            );
+	        }
+	    }]);
+
+	    return GreenFlag;
+	}(React.Component);
+
+	GreenFlag.propTypes = {
+	    title: React.PropTypes.string,
+	    vm: React.PropTypes.object
+	};
+
+	GreenFlag.defaultProps = {
+	    title: 'Go'
+	};
+
+	module.exports = GreenFlag;
+
+/***/ },
+
+/***/ 184:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -21641,7 +21710,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 184:
+/***/ 185:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21721,7 +21790,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 185:
+/***/ 186:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21770,7 +21839,71 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 186:
+/***/ 187:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var StopAll = function (_React$Component) {
+	    _inherits(StopAll, _React$Component);
+
+	    function StopAll(props) {
+	        _classCallCheck(this, StopAll);
+
+	        var _this = _possibleConstructorReturn(this, (StopAll.__proto__ || Object.getPrototypeOf(StopAll)).call(this, props));
+
+	        _this.onClick = _this.onClick.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(StopAll, [{
+	        key: 'onClick',
+	        value: function onClick(e) {
+	            e.preventDefault();
+	            this.props.vm.stopAll();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'div',
+	                { className: 'scratch-stop-all' },
+	                React.createElement(
+	                    'button',
+	                    { onClick: this.onClick },
+	                    this.props.title
+	                )
+	            );
+	        }
+	    }]);
+
+	    return StopAll;
+	}(React.Component);
+
+	StopAll.propTypes = {
+	    title: React.PropTypes.string,
+	    vm: React.PropTypes.object
+	};
+
+	StopAll.defaultProps = {
+	    title: 'Stop'
+	};
+
+	module.exports = StopAll;
+
+/***/ },
+
+/***/ 188:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23184,7 +23317,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 187:
+/***/ 189:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -40746,13 +40879,16 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 188:
-/***/ function(module, exports) {
+/***/ 190:
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	var ScratchBlocks = __webpack_require__(182);
+
 	module.exports = {
 	    attachWorkspace: function attachWorkspace(vm, workspace) {
+	        workspace.addChangeListener(vm.blockListener);
 	        vm.on('STACK_GLOW_ON', function (data) {
 	            return workspace.glowStack(data.id, true);
 	        });
@@ -40767,6 +40903,13 @@ webpackJsonp([0],{
 	        });
 	        vm.on('VISUAL_REPORT', function (data) {
 	            return workspace.reportValue(data.id, data.value);
+	        });
+	        vm.on('workspaceUpdate', function (data) {
+	            ScratchBlocks.Events.disable();
+	            workspace.clear();
+	            var dom = ScratchBlocks.Xml.textToDom(data.xml);
+	            ScratchBlocks.Xml.domToWorkspace(dom, workspace);
+	            ScratchBlocks.Events.enable();
 	        });
 	    },
 	    attachMouseEvents: function attachMouseEvents(vm, stage) {

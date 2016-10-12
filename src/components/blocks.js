@@ -15,6 +15,13 @@ class Blocks extends React.Component {
             <div
                 className="scratch-blocks"
                 ref="scratchBlocks"
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: '40%',
+                    bottom: 0,
+                    left: 0
+                }}
             />
         );
     }

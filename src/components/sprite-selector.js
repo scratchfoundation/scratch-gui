@@ -22,15 +22,25 @@ class SpriteSelector extends React.Component {
     }
     render () {
         return (
-            <select
-                multiple
-                value={[this.state.targets.editingTarget]}
-                onChange={this.onChange}
+            <div 
+                style={{
+                    position: 'absolute',
+                    top: 380,
+                    right: 10,
+                }}
             >
-                {this.state.targets.targetList.map(
-                    target => <option value={target[0]} key={target[0]}>{target[1]}</option>
-                )}
-            </select>
+                <select
+                    multiple
+                    value={[this.state.targets.editingTarget]}
+                    onChange={this.onChange}
+
+                >
+                    {this.state.targets.targetList.map(
+                        target => <option value={target[0]} key={target[0]}>{target[1]}</option>
+                    )}
+                </select>
+            </div>
+
         );
     }
 }

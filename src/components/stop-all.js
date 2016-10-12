@@ -11,7 +11,15 @@ class StopAll extends React.Component {
     }
     render () {
         return (
-            <div className="scratch-stop-all">
+            <div 
+                className="scratch-stop-all"
+                style={{
+                    position: 'absolute',
+                    top: 380,
+                    right: 400,
+                    width: 50
+                }}
+            >
                 <button onClick={this.onClick}>{this.props.title}</button>
             </div>
         );

@@ -6,8 +6,13 @@ class Stage extends React.Component {
             <canvas
                 className="scratch-stage"
                 ref={this.props.stageRef}
-                width={this.props.width}
-                height={this.props.height}
+                style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    width: this.props.width,
+                    height: this.props.height,
+                }}
             />
         );
     }

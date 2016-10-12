@@ -56,7 +56,16 @@ class GUI extends React.Component {
     }
     render () {
         return (
-            <div className="scratch-gui">
+            <div
+                className="scratch-gui"
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                }}
+            >
                 <GreenFlag vm={this.props.vm} />
                 <StopAll vm={this.props.vm} />
                 <Stage stageRef={stage => this.stage = stage} />

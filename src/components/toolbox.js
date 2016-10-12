@@ -22,7 +22,7 @@ Toolbox.propTypes = {
 Toolbox.defaultProps = {
     toolboxRef: function () {},
     children: [
-        <category is key="motion" name="Motion" colour="#4C97FF">
+        <category is key="motion" name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
             <block type="motion_movesteps">
                 <value name="STEPS">
                     <shadow type="math_number">
@@ -130,7 +130,7 @@ Toolbox.defaultProps = {
             <block type="motion_yposition"></block>
             <block type="motion_direction"></block>
         </category>,
-        <category is key="looks" name="Looks" colour="#9966FF">
+        <category is key="looks" name="Looks" colour="#9966FF" secondaryColour="#774DCB">
             <block type="looks_sayforsecs">
                 <value name="MESSAGE">
                     <shadow type="text">
@@ -236,7 +236,7 @@ Toolbox.defaultProps = {
             <block type="looks_backdropname"></block>
             <block type="looks_size"></block>
         </category>,
-        <category is key="sound" name="Sound" colour="#D65CD6">
+        <category is key="sound" name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
             <block type="sound_play">
                 <value name="SOUND_MENU">
                     <shadow type="sound_sounds_option"></shadow>
@@ -286,6 +286,23 @@ Toolbox.defaultProps = {
                     </shadow>
                 </value>
             </block>
+            <block type="sound_changeeffectby">
+                <value name="EFFECT">
+                    <shadow type="sound_effects_menu"></shadow>
+                </value>
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </block>
+            <block type="sound_seteffectto">
+                <value name="EFFECT">
+                    <shadow type="sound_effects_menu"></shadow>
+                </value>
+                <shadow type="math_number">
+                    <field name="NUM">100</field>
+                </shadow>
+            </block>
+            <block type="sound_cleareffects"></block>            
             <block type="sound_changevolumeby">
                 <value name="VOLUME">
                     <shadow type="math_number">
@@ -317,7 +334,7 @@ Toolbox.defaultProps = {
             </block>
             <block type="sound_tempo"></block>
         </category>,
-        <category is key="pen" name="Pen" colour="#00B295">
+        <category is key="pen" name="Pen" colour="#00B295" secondaryColour="#0B8E69">
             <block type="pen_clear"></block>
             <block type="pen_stamp"></block>
             <block type="pen_pendown"></block>
@@ -371,8 +388,8 @@ Toolbox.defaultProps = {
                 </value>
             </block>
         </category>,
-        <category is key="data" name="Data" colour="#FF8C1A" custom="VARIABLE"></category>,
-        <category is key="events" name="Events" colour="#FFD500">
+        <category is key="data" name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE"></category>,
+        <category is key="events" name="Events" colour="#FFD500" secondaryColour="#CC9900">
             <block type="event_whenflagclicked"></block>
             <block type="event_whenkeypressed">
                 <value name="KEY_OPTION">
@@ -411,7 +428,7 @@ Toolbox.defaultProps = {
                 </value>
             </block>
         </category>,
-        <category is key="control" name="Control" colour="#FFAB19">
+        <category is key="control" name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
             <block type="control_wait">
                 <value name="DURATION">
                     <shadow type="math_positive_number">
@@ -444,7 +461,7 @@ Toolbox.defaultProps = {
             </block>
             <block type="control_delete_this_clone"></block>
         </category>,
-        <category is key="sensing" name="Sensing" colour="#4CBFE6">
+        <category is key="sensing" name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
                     <shadow type="sensing_touchingobjectmenu"></shadow>
@@ -515,7 +532,7 @@ Toolbox.defaultProps = {
             <block type="sensing_dayssince2000"></block>
             <block type="sensing_username"></block>
         </category>,
-        <category is key="operators" name="Operators" colour="#40BF4A">
+        <category is key="operators" name="Operators" colour="#40BF4A" secondaryColour="#389438">
             <block type="operator_add">
                 <value name="NUM1">
                     <shadow type="math_number">
@@ -676,7 +693,7 @@ Toolbox.defaultProps = {
                 </value>
             </block>
         </category>,
-        <category is key="more" name="More Blocks" colour="#FF6680"></category>
+        <category is key="more" name="More Blocks" colour="#FF6680" secondaryColour="#FF3355"></category>
     ]
 };
 

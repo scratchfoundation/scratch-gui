@@ -22,7 +22,7 @@ class SpriteSelector extends React.Component {
     }
     render () {
         return (
-            <div 
+            <div
                 style={{
                     position: 'absolute',
                     top: 380,

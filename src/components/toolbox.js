@@ -302,7 +302,7 @@ Toolbox.defaultProps = {
                     <field name="NUM">100</field>
                 </shadow>
             </block>
-            <block type="sound_cleareffects"></block>            
+            <block type="sound_cleareffects"></block>
             <block type="sound_changevolumeby">
                 <value name="VOLUME">
                     <shadow type="math_number">

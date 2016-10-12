@@ -11,7 +11,7 @@ class StopAll extends React.Component {
     }
     render () {
         return (
-            <div 
+            <div
                 className="scratch-stop-all"
                 style={{
                     position: 'absolute',

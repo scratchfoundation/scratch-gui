@@ -11,7 +11,7 @@ class GreenFlag extends React.Component {
     }
     render () {
         return (
-            <div 
+            <div
                 className="scratch-green-flag"
                 style={{
                     position: 'absolute',

@@ -109,7 +109,16 @@ webpackJsonp([0],{
 
 	            return React.createElement(
 	                'div',
-	                { className: 'scratch-gui' },
+	                {
+	                    className: 'scratch-gui',
+	                    style: {
+	                        position: 'absolute',
+	                        top: 0,
+	                        right: 0,
+	                        bottom: 0,
+	                        left: 0
+	                    }
+	                },
 	                React.createElement(GreenFlag, { vm: this.props.vm }),
 	                React.createElement(StopAll, { vm: this.props.vm }),
 	                React.createElement(Stage, { stageRef: function stageRef(stage) {
@@ -606,7 +615,14 @@ webpackJsonp([0],{
 	        value: function render() {
 	            return React.createElement('div', {
 	                className: 'scratch-blocks',
-	                ref: 'scratchBlocks'
+	                ref: 'scratchBlocks',
+	                style: {
+	                    position: 'absolute',
+	                    top: 0,
+	                    right: '40%',
+	                    bottom: 0,
+	                    left: 0
+	                }
 	            });
 	        }
 	    }]);
@@ -9991,7 +10007,15 @@ webpackJsonp([0],{
 	        value: function render() {
 	            return React.createElement(
 	                'div',
-	                { className: 'scratch-green-flag' },
+	                {
+	                    className: 'scratch-green-flag',
+	                    style: {
+	                        position: 'absolute',
+	                        top: 380,
+	                        right: 440,
+	                        width: 50
+	                    }
+	                },
 	                React.createElement(
 	                    'button',
 	                    { onClick: this.onClick },
@@ -22203,19 +22227,30 @@ webpackJsonp([0],{
 	        key: 'render',
 	        value: function render() {
 	            return React.createElement(
-	                'select',
+	                'div',
 	                {
-	                    multiple: true,
-	                    value: [this.state.targets.editingTarget],
-	                    onChange: this.onChange
+	                    style: {
+	                        position: 'absolute',
+	                        top: 380,
+	                        right: 10
+	                    }
 	                },
-	                this.state.targets.targetList.map(function (target) {
-	                    return React.createElement(
-	                        'option',
-	                        { value: target[0], key: target[0] },
-	                        target[1]
-	                    );
-	                })
+	                React.createElement(
+	                    'select',
+	                    {
+	                        multiple: true,
+	                        value: [this.state.targets.editingTarget],
+	                        onChange: this.onChange
+
+	                    },
+	                    this.state.targets.targetList.map(function (target) {
+	                        return React.createElement(
+	                            'option',
+	                            { value: target[0], key: target[0] },
+	                            target[1]
+	                        );
+	                    })
+	                )
 	            );
 	        }
 	    }]);
@@ -22234,7 +22269,7 @@ webpackJsonp([0],{
 /***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22256,13 +22291,18 @@ webpackJsonp([0],{
 	    }
 
 	    _createClass(Stage, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
-	            return React.createElement("canvas", {
-	                className: "scratch-stage",
+	            return React.createElement('canvas', {
+	                className: 'scratch-stage',
 	                ref: this.props.stageRef,
-	                width: this.props.width,
-	                height: this.props.height
+	                style: {
+	                    position: 'absolute',
+	                    top: 10,
+	                    right: 10,
+	                    width: this.props.width,
+	                    height: this.props.height
+	                }
 	            });
 	        }
 	    }]);
@@ -22324,7 +22364,15 @@ webpackJsonp([0],{
 	        value: function render() {
 	            return React.createElement(
 	                'div',
-	                { className: 'scratch-stop-all' },
+	                {
+	                    className: 'scratch-stop-all',
+	                    style: {
+	                        position: 'absolute',
+	                        top: 380,
+	                        right: 400,
+	                        width: 50
+	                    }
+	                },
 	                React.createElement(
 	                    'button',
 	                    { onClick: this.onClick },
@@ -22401,7 +22449,7 @@ webpackJsonp([0],{
 	    toolboxRef: function toolboxRef() {},
 	    children: [React.createElement(
 	        'category',
-	        { is: true, key: 'motion', name: 'Motion', colour: '#4C97FF' },
+	        { is: true, key: 'motion', name: 'Motion', colour: '#4C97FF', secondaryColour: '#3373CC' },
 	        React.createElement(
 	            'block',
 	            { type: 'motion_movesteps' },
@@ -22644,7 +22692,7 @@ webpackJsonp([0],{
 	        React.createElement('block', { type: 'motion_direction' })
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'looks', name: 'Looks', colour: '#9966FF' },
+	        { is: true, key: 'looks', name: 'Looks', colour: '#9966FF', secondaryColour: '#774DCB' },
 	        React.createElement(
 	            'block',
 	            { type: 'looks_sayforsecs' },
@@ -22873,7 +22921,7 @@ webpackJsonp([0],{
 	        React.createElement('block', { type: 'looks_size' })
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'sound', name: 'Sound', colour: '#D65CD6' },
+	        { is: true, key: 'sound', name: 'Sound', colour: '#D65CD6', secondaryColour: '#BD42BD' },
 	        React.createElement(
 	            'block',
 	            { type: 'sound_play' },
@@ -22989,6 +23037,43 @@ webpackJsonp([0],{
 	        ),
 	        React.createElement(
 	            'block',
+	            { type: 'sound_changeeffectby' },
+	            React.createElement(
+	                'value',
+	                { name: 'EFFECT' },
+	                React.createElement('shadow', { type: 'sound_effects_menu' })
+	            ),
+	            React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '10'
+	                )
+	            )
+	        ),
+	        React.createElement(
+	            'block',
+	            { type: 'sound_seteffectto' },
+	            React.createElement(
+	                'value',
+	                { name: 'EFFECT' },
+	                React.createElement('shadow', { type: 'sound_effects_menu' })
+	            ),
+	            React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '100'
+	                )
+	            )
+	        ),
+	        React.createElement('block', { type: 'sound_cleareffects' }),
+	        React.createElement(
+	            'block',
 	            { type: 'sound_changevolumeby' },
 	            React.createElement(
 	                'value',
@@ -23059,7 +23144,7 @@ webpackJsonp([0],{
 	        React.createElement('block', { type: 'sound_tempo' })
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'pen', name: 'Pen', colour: '#00B295' },
+	        { is: true, key: 'pen', name: 'Pen', colour: '#00B295', secondaryColour: '#0B8E69' },
 	        React.createElement('block', { type: 'pen_clear' }),
 	        React.createElement('block', { type: 'pen_stamp' }),
 	        React.createElement('block', { type: 'pen_pendown' }),
@@ -23175,9 +23260,9 @@ webpackJsonp([0],{
 	                )
 	            )
 	        )
-	    ), React.createElement('category', { is: true, key: 'data', name: 'Data', colour: '#FF8C1A', custom: 'VARIABLE' }), React.createElement(
+	    ), React.createElement('category', { is: true, key: 'data', name: 'Data', colour: '#FF8C1A', secondaryColour: '#DB6E00', custom: 'VARIABLE' }), React.createElement(
 	        'category',
-	        { is: true, key: 'events', name: 'Events', colour: '#FFD500' },
+	        { is: true, key: 'events', name: 'Events', colour: '#FFD500', secondaryColour: '#CC9900' },
 	        React.createElement('block', { type: 'event_whenflagclicked' }),
 	        React.createElement(
 	            'block',
@@ -23249,7 +23334,7 @@ webpackJsonp([0],{
 	        )
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'control', name: 'Control', colour: '#FFAB19' },
+	        { is: true, key: 'control', name: 'Control', colour: '#FFAB19', secondaryColour: '#CF8B17' },
 	        React.createElement(
 	            'block',
 	            { type: 'control_wait' },
@@ -23311,7 +23396,7 @@ webpackJsonp([0],{
 	        React.createElement('block', { type: 'control_delete_this_clone' })
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'sensing', name: 'Sensing', colour: '#4CBFE6' },
+	        { is: true, key: 'sensing', name: 'Sensing', colour: '#4CBFE6', secondaryColour: '#2E8EB8' },
 	        React.createElement(
 	            'block',
 	            { type: 'sensing_touchingobject' },
@@ -23439,7 +23524,7 @@ webpackJsonp([0],{
 	        React.createElement('block', { type: 'sensing_username' })
 	    ), React.createElement(
 	        'category',
-	        { is: true, key: 'operators', name: 'Operators', colour: '#40BF4A' },
+	        { is: true, key: 'operators', name: 'Operators', colour: '#40BF4A', secondaryColour: '#389438' },
 	        React.createElement(
 	            'block',
 	            { type: 'operator_add' },
@@ -23757,7 +23842,7 @@ webpackJsonp([0],{
 	                )
 	            )
 	        )
-	    ), React.createElement('category', { is: true, key: 'more', name: 'More Blocks', colour: '#FF6680' })]
+	    ), React.createElement('category', { is: true, key: 'more', name: 'More Blocks', colour: '#FF6680', secondaryColour: '#FF3355' })]
 	};
 
 	module.exports = Toolbox;

@@ -22260,7 +22260,9 @@ webpackJsonp([0],{
 	        value: function render() {
 	            return React.createElement("canvas", {
 	                className: "scratch-stage",
-	                ref: this.props.stageRef
+	                ref: this.props.stageRef,
+	                width: this.props.width,
+	                height: this.props.height
 	            });
 	        }
 	    }]);
@@ -22269,11 +22271,15 @@ webpackJsonp([0],{
 	}(React.Component);
 
 	Stage.propTypes = {
-	    stageRef: React.PropTypes.func
+	    stageRef: React.PropTypes.func,
+	    width: React.PropTypes.number,
+	    height: React.PropTypes.number
 	};
 
 	Stage.defaultProps = {
-	    stageRef: function stageRef() {}
+	    stageRef: function stageRef() {},
+	    width: 480,
+	    height: 360
 	};
 
 	module.exports = Stage;

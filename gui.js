@@ -16,8 +16,8 @@ webpackJsonp([0],{
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 	var GUI = __webpack_require__(172);
-	var log = __webpack_require__(191);
-	var ProjectLoader = __webpack_require__(204);
+	var log = __webpack_require__(190);
+	var ProjectLoader = __webpack_require__(203);
 
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -117,9 +117,8 @@ webpackJsonp([0],{
 	var SpriteSelector = __webpack_require__(185);
 	var Stage = __webpack_require__(186);
 	var StopAll = __webpack_require__(187);
-	var Toolbox = __webpack_require__(188);
-	var VM = __webpack_require__(189);
-	var VMManager = __webpack_require__(190);
+	var VM = __webpack_require__(188);
+	var VMManager = __webpack_require__(189);
 
 	var GUI = function (_React$Component) {
 	    _inherits(GUI, _React$Component);
@@ -136,13 +135,6 @@ webpackJsonp([0],{
 	    }
 
 	    _createClass(GUI, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.setState({
-	                toolbox: this.toolbox
-	            });
-	        }
-	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (this.props.projectData !== nextProps.projectData) {
@@ -191,13 +183,9 @@ webpackJsonp([0],{
 	                        return _this2.stage = stage;
 	                    } }),
 	                React.createElement(SpriteSelector, { vm: this.props.vm }),
-	                React.createElement(Toolbox, { toolboxRef: function toolboxRef(toolbox) {
-	                        return _this2.toolbox = toolbox;
-	                    } }),
 	                React.createElement(Blocks, {
 	                    options: {
-	                        media: this.props.basePath + 'static/blocks-media/',
-	                        toolbox: this.state.toolbox
+	                        media: this.props.basePath + 'static/blocks-media/'
 	                    },
 	                    vm: this.props.vm,
 	                    onReceiveWorkspace: this.onReceiveWorkspace
@@ -251,13 +239,16 @@ webpackJsonp([0],{
 	    }
 
 	    _createClass(Blocks, [{
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate(prevProps) {
-	            if (!prevProps.options.toolbox && this.props.options.toolbox) {
-	                var workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-	                this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
-	                this.props.onReceiveWorkspace(this.workspace);
-	            }
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+	            this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
+	            this.props.onReceiveWorkspace(this.workspace);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.workspace.dispose();
 	        }
 	    }, {
 	        key: 'render',
@@ -22781,1457 +22772,6 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 188:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(1);
-
-	var Toolbox = function (_React$Component) {
-	    _inherits(Toolbox, _React$Component);
-
-	    function Toolbox() {
-	        _classCallCheck(this, Toolbox);
-
-	        return _possibleConstructorReturn(this, (Toolbox.__proto__ || Object.getPrototypeOf(Toolbox)).apply(this, arguments));
-	    }
-
-	    _createClass(Toolbox, [{
-	        key: 'render',
-	        value: function render() {
-	            return React.createElement(
-	                'xml',
-	                {
-	                    className: 'scratch-toolbox',
-	                    style: { display: 'none' },
-	                    ref: this.props.toolboxRef
-	                },
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return Toolbox;
-	}(React.Component);
-
-	Toolbox.propTypes = {
-	    children: React.PropTypes.node,
-	    toolboxRef: React.PropTypes.func
-	};
-
-	Toolbox.defaultProps = {
-	    toolboxRef: function toolboxRef() {},
-	    children: [React.createElement(
-	        'category',
-	        { is: true, key: 'motion', name: 'Motion', colour: '#4C97FF', secondaryColour: '#3373CC' },
-	        React.createElement(
-	            'block',
-	            { type: 'motion_movesteps' },
-	            React.createElement(
-	                'value',
-	                { name: 'STEPS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_turnright' },
-	            React.createElement(
-	                'value',
-	                { name: 'DEGREES' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '15'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_turnleft' },
-	            React.createElement(
-	                'value',
-	                { name: 'DEGREES' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '15'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_pointindirection' },
-	            React.createElement(
-	                'value',
-	                { name: 'DIRECTION' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_angle' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '90'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_pointtowards' },
-	            React.createElement(
-	                'value',
-	                { name: 'TOWARDS' },
-	                React.createElement('shadow', { type: 'motion_pointtowards_menu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_gotoxy' },
-	            React.createElement(
-	                'value',
-	                { name: 'X' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'Y' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_goto' },
-	            React.createElement(
-	                'value',
-	                { name: 'TO' },
-	                React.createElement('shadow', { type: 'motion_goto_menu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_glidesecstoxy' },
-	            React.createElement(
-	                'value',
-	                { name: 'SECS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'X' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'Y' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_changexby' },
-	            React.createElement(
-	                'value',
-	                { name: 'DX' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_setx' },
-	            React.createElement(
-	                'value',
-	                { name: 'X' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_changeyby' },
-	            React.createElement(
-	                'value',
-	                { name: 'DY' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_sety' },
-	            React.createElement(
-	                'value',
-	                { name: 'Y' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'motion_ifonedgebounce' }),
-	        React.createElement(
-	            'block',
-	            { type: 'motion_setrotationstyle' },
-	            React.createElement(
-	                'value',
-	                { name: 'STYLE' },
-	                React.createElement('shadow', { type: 'motion_setrotationstyle_menu' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'motion_xposition' }),
-	        React.createElement('block', { type: 'motion_yposition' }),
-	        React.createElement('block', { type: 'motion_direction' })
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'looks', name: 'Looks', colour: '#9966FF', secondaryColour: '#774DCB' },
-	        React.createElement(
-	            'block',
-	            { type: 'looks_sayforsecs' },
-	            React.createElement(
-	                'value',
-	                { name: 'MESSAGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'Hello!'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'SECS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '2'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_say' },
-	            React.createElement(
-	                'value',
-	                { name: 'MESSAGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'Hello!'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_thinkforsecs' },
-	            React.createElement(
-	                'value',
-	                { name: 'MESSAGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'Hmm...'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'SECS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '2'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_think' },
-	            React.createElement(
-	                'value',
-	                { name: 'MESSAGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'Hmm...'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'looks_show' }),
-	        React.createElement('block', { type: 'looks_hide' }),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_switchcostumeto' },
-	            React.createElement(
-	                'value',
-	                { name: 'COSTUME' },
-	                React.createElement('shadow', { type: 'looks_costume' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'looks_nextcostume' }),
-	        React.createElement('block', { type: 'looks_nextbackdrop' }),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_switchbackdropto' },
-	            React.createElement(
-	                'value',
-	                { name: 'BACKDROP' },
-	                React.createElement('shadow', { type: 'looks_backdrops' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_switchbackdroptoandwait' },
-	            React.createElement(
-	                'value',
-	                { name: 'BACKDROP' },
-	                React.createElement('shadow', { type: 'looks_backdrops' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_changeeffectby' },
-	            React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'looks_effectmenu' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'CHANGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_seteffectto' },
-	            React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'looks_effectmenu' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'VALUE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'looks_cleargraphiceffects' }),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_changesizeby' },
-	            React.createElement(
-	                'value',
-	                { name: 'CHANGE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_setsizeto' },
-	            React.createElement(
-	                'value',
-	                { name: 'SIZE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '100'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'looks_gotofront' }),
-	        React.createElement(
-	            'block',
-	            { type: 'looks_gobacklayers' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_integer' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'looks_costumeorder' }),
-	        React.createElement('block', { type: 'looks_backdroporder' }),
-	        React.createElement('block', { type: 'looks_backdropname' }),
-	        React.createElement('block', { type: 'looks_size' })
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'sound', name: 'Sound', colour: '#D65CD6', secondaryColour: '#BD42BD' },
-	        React.createElement(
-	            'block',
-	            { type: 'sound_play' },
-	            React.createElement(
-	                'value',
-	                { name: 'SOUND_MENU' },
-	                React.createElement('shadow', { type: 'sound_sounds_option' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_playuntildone' },
-	            React.createElement(
-	                'value',
-	                { name: 'SOUND_MENU' },
-	                React.createElement('shadow', { type: 'sound_sounds_option' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'sound_stopallsounds' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_playdrumforbeats' },
-	            React.createElement(
-	                'value',
-	                { name: 'DRUMTYPE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0.25'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_restforbeats' },
-	            React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0.25'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_playnoteforbeats' },
-	            React.createElement(
-	                'value',
-	                { name: 'NOTE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0.5'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_setinstrumentto' },
-	            React.createElement(
-	                'value',
-	                { name: 'INSTRUMENT' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_changeeffectby' },
-	            React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'sound_effects_menu' })
-	            ),
-	            React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '10'
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_seteffectto' },
-	            React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'sound_effects_menu' })
-	            ),
-	            React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '100'
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'sound_cleareffects' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_changevolumeby' },
-	            React.createElement(
-	                'value',
-	                { name: 'VOLUME' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '-10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_setvolumeto' },
-	            React.createElement(
-	                'value',
-	                { name: 'VOLUME' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '100'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'sound_volume' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_changetempoby' },
-	            React.createElement(
-	                'value',
-	                { name: 'TEMPO' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '20'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sound_settempotobpm' },
-	            React.createElement(
-	                'value',
-	                { name: 'TEMPO' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '60'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'sound_tempo' })
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'pen', name: 'Pen', colour: '#00B295', secondaryColour: '#0B8E69' },
-	        React.createElement('block', { type: 'pen_clear' }),
-	        React.createElement('block', { type: 'pen_stamp' }),
-	        React.createElement('block', { type: 'pen_pendown' }),
-	        React.createElement('block', { type: 'pen_penup' }),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_setpencolortocolor' },
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR' },
-	                React.createElement('shadow', { type: 'colour_picker' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_changepencolorby' },
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_setpencolortonum' },
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '0'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_changepenshadeby' },
-	            React.createElement(
-	                'value',
-	                { name: 'SHADE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_setpenshadeto' },
-	            React.createElement(
-	                'value',
-	                { name: 'SHADE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '50'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_changepensizeby' },
-	            React.createElement(
-	                'value',
-	                { name: 'SIZE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'pen_setpensizeto' },
-	            React.createElement(
-	                'value',
-	                { name: 'SIZE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            )
-	        )
-	    ), React.createElement('category', { is: true, key: 'data', name: 'Data', colour: '#FF8C1A', secondaryColour: '#DB6E00', custom: 'VARIABLE' }), React.createElement(
-	        'category',
-	        { is: true, key: 'events', name: 'Events', colour: '#FFD500', secondaryColour: '#CC9900' },
-	        React.createElement('block', { type: 'event_whenflagclicked' }),
-	        React.createElement(
-	            'block',
-	            { type: 'event_whenkeypressed' },
-	            React.createElement(
-	                'value',
-	                { name: 'KEY_OPTION' },
-	                React.createElement('shadow', { type: 'event_keyoptions' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'event_whenthisspriteclicked' }),
-	        React.createElement(
-	            'block',
-	            { type: 'event_whenbackdropswitchesto' },
-	            React.createElement(
-	                'value',
-	                { name: 'BACKDROP' },
-	                React.createElement('shadow', { type: 'event_backdrops' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'event_whengreaterthan' },
-	            React.createElement(
-	                'value',
-	                { name: 'WHENGREATERTHANMENU' },
-	                React.createElement('shadow', { type: 'event_whengreaterthanmenu' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'VALUE' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'event_whenbroadcastreceived' },
-	            React.createElement(
-	                'value',
-	                { name: 'BROADCAST_OPTION' },
-	                React.createElement('shadow', { type: 'event_broadcast_menu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'event_broadcast' },
-	            React.createElement(
-	                'value',
-	                { name: 'BROADCAST_OPTION' },
-	                React.createElement('shadow', { type: 'event_broadcast_menu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'event_broadcastandwait' },
-	            React.createElement(
-	                'value',
-	                { name: 'BROADCAST_OPTION' },
-	                React.createElement('shadow', { type: 'event_broadcast_menu' })
-	            )
-	        )
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'control', name: 'Control', colour: '#FFAB19', secondaryColour: '#CF8B17' },
-	        React.createElement(
-	            'block',
-	            { type: 'control_wait' },
-	            React.createElement(
-	                'value',
-	                { name: 'DURATION' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_positive_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'control_repeat' },
-	            React.createElement(
-	                'value',
-	                { name: 'TIMES' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_whole_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'control_forever' }),
-	        React.createElement('block', { type: 'control_if' }),
-	        React.createElement('block', { type: 'control_if_else' }),
-	        React.createElement('block', { type: 'control_wait_until' }),
-	        React.createElement('block', { type: 'control_repeat_until' }),
-	        React.createElement(
-	            'block',
-	            { type: 'control_stop' },
-	            React.createElement(
-	                'value',
-	                { name: 'STOP_OPTION' },
-	                React.createElement('shadow', { type: 'control_stop_menu' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'control_start_as_clone' }),
-	        React.createElement(
-	            'block',
-	            { type: 'control_create_clone_of' },
-	            React.createElement(
-	                'value',
-	                { name: 'CLONE_OPTION' },
-	                React.createElement('shadow', { type: 'control_create_clone_of_menu' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'control_delete_this_clone' })
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'sensing', name: 'Sensing', colour: '#4CBFE6', secondaryColour: '#2E8EB8' },
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_touchingobject' },
-	            React.createElement(
-	                'value',
-	                { name: 'TOUCHINGOBJECTMENU' },
-	                React.createElement('shadow', { type: 'sensing_touchingobjectmenu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_touchingcolor' },
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR' },
-	                React.createElement('shadow', { type: 'colour_picker' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_coloristouchingcolor' },
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR' },
-	                React.createElement('shadow', { type: 'colour_picker' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'COLOR2' },
-	                React.createElement('shadow', { type: 'colour_picker' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_distanceto' },
-	            React.createElement(
-	                'value',
-	                { name: 'DISTANCETOMENU' },
-	                React.createElement('shadow', { type: 'sensing_distancetomenu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_askandwait' },
-	            React.createElement(
-	                'value',
-	                { name: 'QUESTION' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'What\'s your name?'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'sensing_answer' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_keypressed' },
-	            React.createElement(
-	                'value',
-	                { name: 'KEY_OPTION' },
-	                React.createElement('shadow', { type: 'sensing_keyoptions' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'sensing_mousedown' }),
-	        React.createElement('block', { type: 'sensing_mousex' }),
-	        React.createElement('block', { type: 'sensing_mousey' }),
-	        React.createElement('block', { type: 'sensing_loudness' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_videoon' },
-	            React.createElement(
-	                'value',
-	                { name: 'VIDEOONMENU1' },
-	                React.createElement('shadow', { type: 'sensing_videoonmenuone' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'VIDEOONMENU2' },
-	                React.createElement('shadow', { type: 'sensing_videoonmenutwo' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_videotoggle' },
-	            React.createElement(
-	                'value',
-	                { name: 'VIDEOTOGGLEMENU' },
-	                React.createElement('shadow', { type: 'sensing_videotogglemenu' })
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_setvideotransparency' },
-	            React.createElement(
-	                'value',
-	                { name: 'TRANSPARENCY' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '50'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'sensing_timer' }),
-	        React.createElement('block', { type: 'sensing_resettimer' }),
-	        React.createElement(
-	            'block',
-	            { type: 'sensing_current' },
-	            React.createElement(
-	                'value',
-	                { name: 'CURRENTMENU' },
-	                React.createElement('shadow', { type: 'sensing_currentmenu' })
-	            )
-	        ),
-	        React.createElement('block', { type: 'sensing_dayssince2000' }),
-	        React.createElement('block', { type: 'sensing_username' })
-	    ), React.createElement(
-	        'category',
-	        { is: true, key: 'operators', name: 'Operators', colour: '#40BF4A', secondaryColour: '#389438' },
-	        React.createElement(
-	            'block',
-	            { type: 'operator_add' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_subtract' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_multiply' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_divide' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_random' },
-	            React.createElement(
-	                'value',
-	                { name: 'FROM' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'TO' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '10'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_lt' },
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_equals' },
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_gt' },
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement('field', { name: 'TEXT' })
-	                )
-	            )
-	        ),
-	        React.createElement('block', { type: 'operator_and' }),
-	        React.createElement('block', { type: 'operator_or' }),
-	        React.createElement('block', { type: 'operator_not' }),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_join' },
-	            React.createElement(
-	                'value',
-	                { name: 'STRING1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'hello'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'STRING2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'world'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_letter_of' },
-	            React.createElement(
-	                'value',
-	                { name: 'LETTER' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_whole_number' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'NUM' },
-	                        '1'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'STRING' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'world'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_length' },
-	            React.createElement(
-	                'value',
-	                { name: 'STRING' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'text' },
-	                    React.createElement(
-	                        'field',
-	                        { name: 'TEXT' },
-	                        'world'
-	                    )
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_mod' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_round' },
-	            React.createElement(
-	                'value',
-	                { name: 'NUM' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        ),
-	        React.createElement(
-	            'block',
-	            { type: 'operator_mathop' },
-	            React.createElement(
-	                'value',
-	                { name: 'OPERATOR' },
-	                React.createElement('shadow', { type: 'operator_mathop_menu' })
-	            ),
-	            React.createElement(
-	                'value',
-	                { name: 'NUM' },
-	                React.createElement(
-	                    'shadow',
-	                    { type: 'math_number' },
-	                    React.createElement('field', { name: 'NUM' })
-	                )
-	            )
-	        )
-	    ), React.createElement('category', { is: true, key: 'more', name: 'More Blocks', colour: '#FF6680', secondaryColour: '#FF3355' })]
-	};
-
-	module.exports = Toolbox;
-
-/***/ },
-
-/***/ 189:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -42248,7 +40788,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 190:
+/***/ 189:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42347,27 +40887,27 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 191:
+/***/ 190:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var minilog = __webpack_require__(192);
+	var minilog = __webpack_require__(191);
 	minilog.enable();
 
 	module.exports = minilog('www');
 
 /***/ },
 
-/***/ 192:
+/***/ 191:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Minilog = __webpack_require__(193);
+	var Minilog = __webpack_require__(192);
 
 	var oldEnable = Minilog.enable,
 	    oldDisable = Minilog.disable,
 	    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
-	    console = __webpack_require__(197);
+	    console = __webpack_require__(196);
 
 	// Use a more capable logging backend if on Chrome
 	Minilog.defaultBackend = (isChrome ? console.minilog : console);
@@ -42399,20 +40939,20 @@ webpackJsonp([0],{
 	exports = module.exports = Minilog;
 
 	exports.backends = {
-	  array: __webpack_require__(201),
+	  array: __webpack_require__(200),
 	  browser: Minilog.defaultBackend,
-	  localStorage: __webpack_require__(202),
-	  jQuery: __webpack_require__(203)
+	  localStorage: __webpack_require__(201),
+	  jQuery: __webpack_require__(202)
 	};
 
 
 /***/ },
 
-/***/ 193:
+/***/ 192:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194),
-	    Filter = __webpack_require__(196);
+	var Transform = __webpack_require__(193),
+	    Filter = __webpack_require__(195);
 
 	var log = new Transform(),
 	    slice = Array.prototype.slice;
@@ -42460,10 +41000,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 194:
+/***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
-	var microee = __webpack_require__(195);
+	var microee = __webpack_require__(194);
 
 	// Implements a subset of Node's stream.Transform - in a cross-platform manner.
 	function Transform() {}
@@ -42539,7 +41079,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 195:
+/***/ 194:
 /***/ function(module, exports) {
 
 	function M() { this._events = {}; }
@@ -42593,11 +41133,11 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 196:
+/***/ 195:
 /***/ function(module, exports, __webpack_require__) {
 
 	// default filter
-	var Transform = __webpack_require__(194);
+	var Transform = __webpack_require__(193);
 
 	var levelMap = { debug: 1, info: 2, warn: 3, error: 4 };
 
@@ -42656,10 +41196,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 197:
+/***/ 196:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194);
+	var Transform = __webpack_require__(193);
 
 	var newlines = /\n+$/,
 	    logger = new Transform();
@@ -42687,19 +41227,19 @@ webpackJsonp([0],{
 	};
 
 	logger.formatters = ['color', 'minilog'];
-	logger.color = __webpack_require__(198);
-	logger.minilog = __webpack_require__(200);
+	logger.color = __webpack_require__(197);
+	logger.minilog = __webpack_require__(199);
 
 	module.exports = logger;
 
 
 /***/ },
 
-/***/ 198:
+/***/ 197:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194),
-	    color = __webpack_require__(199);
+	var Transform = __webpack_require__(193),
+	    color = __webpack_require__(198);
 
 	var colors = { debug: ['cyan'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
@@ -42720,7 +41260,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 199:
+/***/ 198:
 /***/ function(module, exports) {
 
 	var hex = {
@@ -42747,11 +41287,11 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 200:
+/***/ 199:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194),
-	    color = __webpack_require__(199),
+	var Transform = __webpack_require__(193),
+	    color = __webpack_require__(198),
 	    colors = { debug: ['gray'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
 
@@ -42780,10 +41320,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 201:
+/***/ 200:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194),
+	var Transform = __webpack_require__(193),
 	    cache = [ ];
 
 	var logger = new Transform();
@@ -42801,10 +41341,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 202:
+/***/ 201:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194),
+	var Transform = __webpack_require__(193),
 	    cache = false;
 
 	var logger = new Transform();
@@ -42822,10 +41362,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 203:
+/***/ 202:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(194);
+	var Transform = __webpack_require__(193);
 
 	var cid = new Date().valueOf().toString(36);
 
@@ -42903,7 +41443,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 204:
+/***/ 203:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42912,9 +41452,9 @@ webpackJsonp([0],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var xhr = __webpack_require__(205);
+	var xhr = __webpack_require__(204);
 
-	var log = __webpack_require__(191);
+	var log = __webpack_require__(190);
 
 	var ProjectLoader = function () {
 	    function ProjectLoader() {
@@ -42941,20 +41481,20 @@ webpackJsonp([0],{
 	    return ProjectLoader;
 	}();
 
-	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(212);
+	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(211);
 
 	module.exports = new ProjectLoader();
 
 /***/ },
 
-/***/ 205:
+/***/ 204:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var window = __webpack_require__(206)
-	var isFunction = __webpack_require__(207)
-	var parseHeaders = __webpack_require__(208)
-	var xtend = __webpack_require__(211)
+	var window = __webpack_require__(205)
+	var isFunction = __webpack_require__(206)
+	var parseHeaders = __webpack_require__(207)
+	var xtend = __webpack_require__(210)
 
 	module.exports = createXHR
 	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -43189,7 +41729,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 206:
+/***/ 205:
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
@@ -43206,7 +41746,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 207:
+/***/ 206:
 /***/ function(module, exports) {
 
 	module.exports = isFunction
@@ -43228,11 +41768,11 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 208:
+/***/ 207:
 /***/ function(module, exports, __webpack_require__) {
 
-	var trim = __webpack_require__(209)
-	  , forEach = __webpack_require__(210)
+	var trim = __webpack_require__(208)
+	  , forEach = __webpack_require__(209)
 	  , isArray = function(arg) {
 	      return Object.prototype.toString.call(arg) === '[object Array]';
 	    }
@@ -43265,7 +41805,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 209:
+/***/ 208:
 /***/ function(module, exports) {
 
 	
@@ -43286,10 +41826,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 210:
+/***/ 209:
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(207)
+	var isFunction = __webpack_require__(206)
 
 	module.exports = forEach
 
@@ -43339,7 +41879,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 211:
+/***/ 210:
 /***/ function(module, exports) {
 
 	module.exports = extend
@@ -43365,7 +41905,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 212:
+/***/ 211:
 /***/ function(module, exports) {
 
 	module.exports = {

@@ -31,6 +31,7 @@
     "html-webpack-plugin": "2.22.0",
     "json-loader": "0.5.4",
     "lodash.defaultsdeep": "4.4.0",
+    "minilog": "3.0.1",
     "scratch-blocks": "^0.1.0-prerelease",
     "scratch-render": "^0.1.0-prerelease",
     "scratch-vm": "^0.1.0-prerelease",

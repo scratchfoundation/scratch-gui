@@ -1,5 +1,4 @@
 const React = require('react');
-const xhr = require('xhr');
 
 const Blocks = require('./blocks');
 const GreenFlag = require('./green-flag');
@@ -15,7 +14,6 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         this.animate = this.animate.bind(this);
-        this.getProject = this.getProject.bind(this);
         this.onReceiveWorkspace = this.onReceiveWorkspace.bind(this);
         this.state = {};
     }
@@ -24,18 +22,14 @@ class GUI extends React.Component {
             toolbox: this.toolbox
         });
     }
+    componentWillReceiveProps (nextProps) {
+        if (this.props.projectData !== nextProps.projectData) {
+            this.props.vm.loadProject(nextProps.projectData);
+        }
+    }
     animate () {
         this.props.vm.animationFrame();
         requestAnimationFrame(this.animate);
-    }
-    getProject (callback) {
-        let id = location.hash.substring(1);
-        if (id.length < 1) return callback();
-        xhr({
-            uri: `https://projects.scratch.mit.edu/internalapi/project/${id}/get/`
-        }, (err, res, body) => {
-            callback(body);
-        });
     }
     onReceiveWorkspace (workspace) {
         this.workspace = workspace;
@@ -44,15 +38,9 @@ class GUI extends React.Component {
         VMManager.attachKeyboardEvents(this.props.vm);
         this.renderer = new Renderer(this.stage);
         this.props.vm.attachRenderer(this.renderer);
-        this.getProject(projectData => {
-            if (projectData) {
-                this.props.vm.loadProject(projectData);
-            } else {
-                this.props.vm.createEmptyProject();
-            }
-            this.props.vm.start();
-            requestAnimationFrame(this.animate);
-        });
+        this.props.vm.loadProject(this.props.projectData);
+        this.props.vm.start();
+        requestAnimationFrame(this.animate);
     }
     render () {
         return (
@@ -86,6 +74,7 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     basePath: React.PropTypes.string,
+    projectData: React.PropTypes.string,
     vm: React.PropTypes.object,
 };
 

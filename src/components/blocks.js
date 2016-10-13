@@ -3,12 +3,13 @@ const React = require('react');
 const ScratchBlocks = require('scratch-blocks');
 
 class Blocks extends React.Component {
-    componentDidUpdate (prevProps) {
-        if (!prevProps.options.toolbox && this.props.options.toolbox) {
-            let workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-            this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
-            this.props.onReceiveWorkspace(this.workspace);
-        }
+    componentDidMount () {
+        let workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+        this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
+        this.props.onReceiveWorkspace(this.workspace);
+    }
+    componentWillUnmount () {
+        this.workspace.dispose();
     }
     render () {
         return (

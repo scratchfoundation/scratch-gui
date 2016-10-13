@@ -5,14 +5,94 @@ webpackJsonp([0],{
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 	var GUI = __webpack_require__(172);
+	var log = __webpack_require__(191);
+	var ProjectLoader = __webpack_require__(204);
 
-	var app = document.createElement('div');
-	document.body.appendChild(app);
+	var App = function (_React$Component) {
+	    _inherits(App, _React$Component);
 
-	ReactDOM.render(React.createElement(GUI, { basePath: ("/scratch-gui/") }), app);
+	    function App(props) {
+	        _classCallCheck(this, App);
+
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+	        _this.fetchProjectId = _this.fetchProjectId.bind(_this);
+	        _this.updateProject = _this.updateProject.bind(_this);
+	        _this.state = {
+	            projectId: null,
+	            projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+	        };
+	        return _this;
+	    }
+
+	    _createClass(App, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.addEventListener('hashchange', this.updateProject);
+	            this.updateProject();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            window.removeEventListener('hashchange', this.updateProject);
+	        }
+	    }, {
+	        key: 'fetchProjectId',
+	        value: function fetchProjectId() {
+	            return location.hash.substring(1);
+	        }
+	    }, {
+	        key: 'updateProject',
+	        value: function updateProject() {
+	            var _this2 = this;
+
+	            var projectId = this.fetchProjectId();
+	            if (projectId !== this.state.projectId) {
+	                if (projectId.length < 1) {
+	                    return this.setState({
+	                        projectId: projectId,
+	                        projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+	                    });
+	                }
+	                ProjectLoader.load(projectId, function (err, body) {
+	                    if (err) return log.error(err);
+	                    _this2.setState({ projectData: body });
+	                });
+	                this.setState({ projectId: projectId });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(GUI, {
+	                basePath: this.props.basePath,
+	                projectData: this.state.projectData
+	            });
+	        }
+	    }]);
+
+	    return App;
+	}(React.Component);
+
+	App.propTypes = {
+	    basePath: React.PropTypes.string
+	};
+
+	var appTarget = document.createElement('div');
+	document.body.appendChild(appTarget);
+
+	ReactDOM.render(React.createElement(App, { basePath: ("/scratch-gui/") }), appTarget);
 
 /***/ },
 
@@ -30,17 +110,16 @@ webpackJsonp([0],{
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(1);
-	var xhr = __webpack_require__(173);
 
-	var Blocks = __webpack_require__(180);
-	var GreenFlag = __webpack_require__(190);
-	var Renderer = __webpack_require__(191);
-	var SpriteSelector = __webpack_require__(192);
-	var Stage = __webpack_require__(193);
-	var StopAll = __webpack_require__(194);
-	var Toolbox = __webpack_require__(195);
-	var VM = __webpack_require__(196);
-	var VMManager = __webpack_require__(197);
+	var Blocks = __webpack_require__(173);
+	var GreenFlag = __webpack_require__(183);
+	var Renderer = __webpack_require__(184);
+	var SpriteSelector = __webpack_require__(185);
+	var Stage = __webpack_require__(186);
+	var StopAll = __webpack_require__(187);
+	var Toolbox = __webpack_require__(188);
+	var VM = __webpack_require__(189);
+	var VMManager = __webpack_require__(190);
 
 	var GUI = function (_React$Component) {
 	    _inherits(GUI, _React$Component);
@@ -51,7 +130,6 @@ webpackJsonp([0],{
 	        var _this = _possibleConstructorReturn(this, (GUI.__proto__ || Object.getPrototypeOf(GUI)).call(this, props));
 
 	        _this.animate = _this.animate.bind(_this);
-	        _this.getProject = _this.getProject.bind(_this);
 	        _this.onReceiveWorkspace = _this.onReceiveWorkspace.bind(_this);
 	        _this.state = {};
 	        return _this;
@@ -65,47 +143,35 @@ webpackJsonp([0],{
 	            });
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (this.props.projectData !== nextProps.projectData) {
+	                this.props.vm.loadProject(nextProps.projectData);
+	            }
+	        }
+	    }, {
 	        key: 'animate',
 	        value: function animate() {
 	            this.props.vm.animationFrame();
 	            requestAnimationFrame(this.animate);
 	        }
 	    }, {
-	        key: 'getProject',
-	        value: function getProject(callback) {
-	            var id = location.hash.substring(1);
-	            if (id.length < 1) return callback();
-	            xhr({
-	                uri: 'https://projects.scratch.mit.edu/internalapi/project/' + id + '/get/'
-	            }, function (err, res, body) {
-	                callback(body);
-	            });
-	        }
-	    }, {
 	        key: 'onReceiveWorkspace',
 	        value: function onReceiveWorkspace(workspace) {
-	            var _this2 = this;
-
 	            this.workspace = workspace;
 	            VMManager.attachWorkspace(this.props.vm, this.workspace);
 	            VMManager.attachMouseEvents(this.props.vm, this.stage);
 	            VMManager.attachKeyboardEvents(this.props.vm);
 	            this.renderer = new Renderer(this.stage);
 	            this.props.vm.attachRenderer(this.renderer);
-	            this.getProject(function (projectData) {
-	                if (projectData) {
-	                    _this2.props.vm.loadProject(projectData);
-	                } else {
-	                    _this2.props.vm.createEmptyProject();
-	                }
-	                _this2.props.vm.start();
-	                requestAnimationFrame(_this2.animate);
-	            });
+	            this.props.vm.loadProject(this.props.projectData);
+	            this.props.vm.start();
+	            requestAnimationFrame(this.animate);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this2 = this;
 
 	            return React.createElement(
 	                'div',
@@ -122,11 +188,11 @@ webpackJsonp([0],{
 	                React.createElement(GreenFlag, { vm: this.props.vm }),
 	                React.createElement(StopAll, { vm: this.props.vm }),
 	                React.createElement(Stage, { stageRef: function stageRef(stage) {
-	                        return _this3.stage = stage;
+	                        return _this2.stage = stage;
 	                    } }),
 	                React.createElement(SpriteSelector, { vm: this.props.vm }),
 	                React.createElement(Toolbox, { toolboxRef: function toolboxRef(toolbox) {
-	                        return _this3.toolbox = toolbox;
+	                        return _this2.toolbox = toolbox;
 	                    } }),
 	                React.createElement(Blocks, {
 	                    options: {
@@ -145,6 +211,7 @@ webpackJsonp([0],{
 
 	GUI.propTypes = {
 	    basePath: React.PropTypes.string,
+	    projectData: React.PropTypes.string,
 	    vm: React.PropTypes.object
 	};
 
@@ -160,424 +227,6 @@ webpackJsonp([0],{
 /***/ 173:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	var window = __webpack_require__(174)
-	var isFunction = __webpack_require__(175)
-	var parseHeaders = __webpack_require__(176)
-	var xtend = __webpack_require__(179)
-
-	module.exports = createXHR
-	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
-	createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
-
-	forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
-	    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
-	        options = initParams(uri, options, callback)
-	        options.method = method.toUpperCase()
-	        return _createXHR(options)
-	    }
-	})
-
-	function forEachArray(array, iterator) {
-	    for (var i = 0; i < array.length; i++) {
-	        iterator(array[i])
-	    }
-	}
-
-	function isEmpty(obj){
-	    for(var i in obj){
-	        if(obj.hasOwnProperty(i)) return false
-	    }
-	    return true
-	}
-
-	function initParams(uri, options, callback) {
-	    var params = uri
-
-	    if (isFunction(options)) {
-	        callback = options
-	        if (typeof uri === "string") {
-	            params = {uri:uri}
-	        }
-	    } else {
-	        params = xtend(options, {uri: uri})
-	    }
-
-	    params.callback = callback
-	    return params
-	}
-
-	function createXHR(uri, options, callback) {
-	    options = initParams(uri, options, callback)
-	    return _createXHR(options)
-	}
-
-	function _createXHR(options) {
-	    if(typeof options.callback === "undefined"){
-	        throw new Error("callback argument missing")
-	    }
-
-	    var called = false
-	    var callback = function cbOnce(err, response, body){
-	        if(!called){
-	            called = true
-	            options.callback(err, response, body)
-	        }
-	    }
-
-	    function readystatechange() {
-	        if (xhr.readyState === 4) {
-	            loadFunc()
-	        }
-	    }
-
-	    function getBody() {
-	        // Chrome with requestType=blob throws errors arround when even testing access to responseText
-	        var body = undefined
-
-	        if (xhr.response) {
-	            body = xhr.response
-	        } else {
-	            body = xhr.responseText || getXml(xhr)
-	        }
-
-	        if (isJson) {
-	            try {
-	                body = JSON.parse(body)
-	            } catch (e) {}
-	        }
-
-	        return body
-	    }
-
-	    var failureResponse = {
-	                body: undefined,
-	                headers: {},
-	                statusCode: 0,
-	                method: method,
-	                url: uri,
-	                rawRequest: xhr
-	            }
-
-	    function errorFunc(evt) {
-	        clearTimeout(timeoutTimer)
-	        if(!(evt instanceof Error)){
-	            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
-	        }
-	        evt.statusCode = 0
-	        return callback(evt, failureResponse)
-	    }
-
-	    // will load the data & process the response in a special response object
-	    function loadFunc() {
-	        if (aborted) return
-	        var status
-	        clearTimeout(timeoutTimer)
-	        if(options.useXDR && xhr.status===undefined) {
-	            //IE8 CORS GET successful response doesn't have a status field, but body is fine
-	            status = 200
-	        } else {
-	            status = (xhr.status === 1223 ? 204 : xhr.status)
-	        }
-	        var response = failureResponse
-	        var err = null
-
-	        if (status !== 0){
-	            response = {
-	                body: getBody(),
-	                statusCode: status,
-	                method: method,
-	                headers: {},
-	                url: uri,
-	                rawRequest: xhr
-	            }
-	            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
-	                response.headers = parseHeaders(xhr.getAllResponseHeaders())
-	            }
-	        } else {
-	            err = new Error("Internal XMLHttpRequest Error")
-	        }
-	        return callback(err, response, response.body)
-	    }
-
-	    var xhr = options.xhr || null
-
-	    if (!xhr) {
-	        if (options.cors || options.useXDR) {
-	            xhr = new createXHR.XDomainRequest()
-	        }else{
-	            xhr = new createXHR.XMLHttpRequest()
-	        }
-	    }
-
-	    var key
-	    var aborted
-	    var uri = xhr.url = options.uri || options.url
-	    var method = xhr.method = options.method || "GET"
-	    var body = options.body || options.data || null
-	    var headers = xhr.headers = options.headers || {}
-	    var sync = !!options.sync
-	    var isJson = false
-	    var timeoutTimer
-
-	    if ("json" in options) {
-	        isJson = true
-	        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
-	        if (method !== "GET" && method !== "HEAD") {
-	            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
-	            body = JSON.stringify(options.json)
-	        }
-	    }
-
-	    xhr.onreadystatechange = readystatechange
-	    xhr.onload = loadFunc
-	    xhr.onerror = errorFunc
-	    // IE9 must have onprogress be set to a unique function.
-	    xhr.onprogress = function () {
-	        // IE must die
-	    }
-	    xhr.ontimeout = errorFunc
-	    xhr.open(method, uri, !sync, options.username, options.password)
-	    //has to be after open
-	    if(!sync) {
-	        xhr.withCredentials = !!options.withCredentials
-	    }
-	    // Cannot set timeout with sync request
-	    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
-	    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
-	    if (!sync && options.timeout > 0 ) {
-	        timeoutTimer = setTimeout(function(){
-	            aborted=true//IE9 may still call readystatechange
-	            xhr.abort("timeout")
-	            var e = new Error("XMLHttpRequest timeout")
-	            e.code = "ETIMEDOUT"
-	            errorFunc(e)
-	        }, options.timeout )
-	    }
-
-	    if (xhr.setRequestHeader) {
-	        for(key in headers){
-	            if(headers.hasOwnProperty(key)){
-	                xhr.setRequestHeader(key, headers[key])
-	            }
-	        }
-	    } else if (options.headers && !isEmpty(options.headers)) {
-	        throw new Error("Headers cannot be set on an XDomainRequest object")
-	    }
-
-	    if ("responseType" in options) {
-	        xhr.responseType = options.responseType
-	    }
-
-	    if ("beforeSend" in options &&
-	        typeof options.beforeSend === "function"
-	    ) {
-	        options.beforeSend(xhr)
-	    }
-
-	    xhr.send(body)
-
-	    return xhr
-
-
-	}
-
-	function getXml(xhr) {
-	    if (xhr.responseType === "document") {
-	        return xhr.responseXML
-	    }
-	    var firefoxBugTakenEffect = xhr.status === 204 && xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
-	    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
-	        return xhr.responseXML
-	    }
-
-	    return null
-	}
-
-	function noop() {}
-
-
-/***/ },
-
-/***/ 174:
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
-	    module.exports = window;
-	} else if (typeof global !== "undefined") {
-	    module.exports = global;
-	} else if (typeof self !== "undefined"){
-	    module.exports = self;
-	} else {
-	    module.exports = {};
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-
-/***/ 175:
-/***/ function(module, exports) {
-
-	module.exports = isFunction
-
-	var toString = Object.prototype.toString
-
-	function isFunction (fn) {
-	  var string = toString.call(fn)
-	  return string === '[object Function]' ||
-	    (typeof fn === 'function' && string !== '[object RegExp]') ||
-	    (typeof window !== 'undefined' &&
-	     // IE8 and below
-	     (fn === window.setTimeout ||
-	      fn === window.alert ||
-	      fn === window.confirm ||
-	      fn === window.prompt))
-	};
-
-
-/***/ },
-
-/***/ 176:
-/***/ function(module, exports, __webpack_require__) {
-
-	var trim = __webpack_require__(177)
-	  , forEach = __webpack_require__(178)
-	  , isArray = function(arg) {
-	      return Object.prototype.toString.call(arg) === '[object Array]';
-	    }
-
-	module.exports = function (headers) {
-	  if (!headers)
-	    return {}
-
-	  var result = {}
-
-	  forEach(
-	      trim(headers).split('\n')
-	    , function (row) {
-	        var index = row.indexOf(':')
-	          , key = trim(row.slice(0, index)).toLowerCase()
-	          , value = trim(row.slice(index + 1))
-
-	        if (typeof(result[key]) === 'undefined') {
-	          result[key] = value
-	        } else if (isArray(result[key])) {
-	          result[key].push(value)
-	        } else {
-	          result[key] = [ result[key], value ]
-	        }
-	      }
-	  )
-
-	  return result
-	}
-
-/***/ },
-
-/***/ 177:
-/***/ function(module, exports) {
-
-	
-	exports = module.exports = trim;
-
-	function trim(str){
-	  return str.replace(/^\s*|\s*$/g, '');
-	}
-
-	exports.left = function(str){
-	  return str.replace(/^\s*/, '');
-	};
-
-	exports.right = function(str){
-	  return str.replace(/\s*$/, '');
-	};
-
-
-/***/ },
-
-/***/ 178:
-/***/ function(module, exports, __webpack_require__) {
-
-	var isFunction = __webpack_require__(175)
-
-	module.exports = forEach
-
-	var toString = Object.prototype.toString
-	var hasOwnProperty = Object.prototype.hasOwnProperty
-
-	function forEach(list, iterator, context) {
-	    if (!isFunction(iterator)) {
-	        throw new TypeError('iterator must be a function')
-	    }
-
-	    if (arguments.length < 3) {
-	        context = this
-	    }
-	    
-	    if (toString.call(list) === '[object Array]')
-	        forEachArray(list, iterator, context)
-	    else if (typeof list === 'string')
-	        forEachString(list, iterator, context)
-	    else
-	        forEachObject(list, iterator, context)
-	}
-
-	function forEachArray(array, iterator, context) {
-	    for (var i = 0, len = array.length; i < len; i++) {
-	        if (hasOwnProperty.call(array, i)) {
-	            iterator.call(context, array[i], i, array)
-	        }
-	    }
-	}
-
-	function forEachString(string, iterator, context) {
-	    for (var i = 0, len = string.length; i < len; i++) {
-	        // no such thing as a sparse string.
-	        iterator.call(context, string.charAt(i), i, string)
-	    }
-	}
-
-	function forEachObject(object, iterator, context) {
-	    for (var k in object) {
-	        if (hasOwnProperty.call(object, k)) {
-	            iterator.call(context, object[k], k, object)
-	        }
-	    }
-	}
-
-
-/***/ },
-
-/***/ 179:
-/***/ function(module, exports) {
-
-	module.exports = extend
-
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-	function extend() {
-	    var target = {}
-
-	    for (var i = 0; i < arguments.length; i++) {
-	        var source = arguments[i]
-
-	        for (var key in source) {
-	            if (hasOwnProperty.call(source, key)) {
-	                target[key] = source[key]
-	            }
-	        }
-	    }
-
-	    return target
-	}
-
-
-/***/ },
-
-/***/ 180:
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -588,9 +237,9 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultsDeep = __webpack_require__(181);
+	var defaultsDeep = __webpack_require__(174);
 	var React = __webpack_require__(1);
-	var ScratchBlocks = __webpack_require__(189);
+	var ScratchBlocks = __webpack_require__(182);
 
 	var Blocks = function (_React$Component) {
 	    _inherits(Blocks, _React$Component);
@@ -682,7 +331,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 181:
+/***/ 174:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -693,12 +342,12 @@ webpackJsonp([0],{
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
 	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 */
-	var baseClone = __webpack_require__(182),
-	    isPlainObject = __webpack_require__(184),
-	    keysIn = __webpack_require__(185),
-	    mergeWith = __webpack_require__(186),
-	    rest = __webpack_require__(187),
-	    root = __webpack_require__(188);
+	var baseClone = __webpack_require__(175),
+	    isPlainObject = __webpack_require__(177),
+	    keysIn = __webpack_require__(178),
+	    mergeWith = __webpack_require__(179),
+	    rest = __webpack_require__(180),
+	    root = __webpack_require__(181);
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -1929,7 +1578,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 182:
+/***/ 175:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -3718,11 +3367,11 @@ webpackJsonp([0],{
 
 	module.exports = baseClone;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(176)(module), (function() { return this; }())))
 
 /***/ },
 
-/***/ 183:
+/***/ 176:
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -3739,7 +3388,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 184:
+/***/ 177:
 /***/ function(module, exports) {
 
 	/**
@@ -3885,7 +3534,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 185:
+/***/ 178:
 /***/ function(module, exports) {
 
 	/**
@@ -4292,7 +3941,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 186:
+/***/ 179:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -6503,11 +6152,11 @@ webpackJsonp([0],{
 
 	module.exports = mergeWith;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(183)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(176)(module)))
 
 /***/ },
 
-/***/ 187:
+/***/ 180:
 /***/ function(module, exports) {
 
 	/**
@@ -6837,7 +6486,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 188:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -6900,11 +6549,11 @@ webpackJsonp([0],{
 
 	module.exports = root;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(176)(module), (function() { return this; }())))
 
 /***/ },
 
-/***/ 189:
+/***/ 182:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -9969,7 +9618,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 190:
+/***/ 183:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10041,7 +9690,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 191:
+/***/ 184:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -22175,7 +21824,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 192:
+/***/ 185:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22266,7 +21915,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 193:
+/***/ 186:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22326,7 +21975,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 194:
+/***/ 187:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22398,7 +22047,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 195:
+/***/ 188:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23849,7 +23498,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 196:
+/***/ 189:
 /***/ function(module, exports) {
 
 	module.exports =
@@ -41411,12 +41060,12 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 197:
+/***/ 190:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var ScratchBlocks = __webpack_require__(189);
+	var ScratchBlocks = __webpack_require__(182);
 
 	module.exports = {
 	    attachWorkspace: function attachWorkspace(vm, workspace) {
@@ -41506,6 +41155,1101 @@ webpackJsonp([0],{
 	            }
 	        });
 	    }
+	};
+
+/***/ },
+
+/***/ 191:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var minilog = __webpack_require__(192);
+	minilog.enable();
+
+	module.exports = minilog('www');
+
+/***/ },
+
+/***/ 192:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Minilog = __webpack_require__(193);
+
+	var oldEnable = Minilog.enable,
+	    oldDisable = Minilog.disable,
+	    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
+	    console = __webpack_require__(197);
+
+	// Use a more capable logging backend if on Chrome
+	Minilog.defaultBackend = (isChrome ? console.minilog : console);
+
+	// apply enable inputs from localStorage and from the URL
+	if(typeof window != 'undefined') {
+	  try {
+	    Minilog.enable(JSON.parse(window.localStorage['minilogSettings']));
+	  } catch(e) {}
+	  if(window.location && window.location.search) {
+	    var match = RegExp('[?&]minilog=([^&]*)').exec(window.location.search);
+	    match && Minilog.enable(decodeURIComponent(match[1]));
+	  }
+	}
+
+	// Make enable also add to localStorage
+	Minilog.enable = function() {
+	  oldEnable.call(Minilog, true);
+	  try { window.localStorage['minilogSettings'] = JSON.stringify(true); } catch(e) {}
+	  return this;
+	};
+
+	Minilog.disable = function() {
+	  oldDisable.call(Minilog);
+	  try { delete window.localStorage.minilogSettings; } catch(e) {}
+	  return this;
+	};
+
+	exports = module.exports = Minilog;
+
+	exports.backends = {
+	  array: __webpack_require__(201),
+	  browser: Minilog.defaultBackend,
+	  localStorage: __webpack_require__(202),
+	  jQuery: __webpack_require__(203)
+	};
+
+
+/***/ },
+
+/***/ 193:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194),
+	    Filter = __webpack_require__(196);
+
+	var log = new Transform(),
+	    slice = Array.prototype.slice;
+
+	exports = module.exports = function create(name) {
+	  var o   = function() { log.write(name, undefined, slice.call(arguments)); return o; };
+	  o.debug = function() { log.write(name, 'debug', slice.call(arguments)); return o; };
+	  o.info  = function() { log.write(name, 'info',  slice.call(arguments)); return o; };
+	  o.warn  = function() { log.write(name, 'warn',  slice.call(arguments)); return o; };
+	  o.error = function() { log.write(name, 'error', slice.call(arguments)); return o; };
+	  o.log   = o.debug; // for interface compliance with Node and browser consoles
+	  o.suggest = exports.suggest;
+	  o.format = log.format;
+	  return o;
+	};
+
+	// filled in separately
+	exports.defaultBackend = exports.defaultFormatter = null;
+
+	exports.pipe = function(dest) {
+	  return log.pipe(dest);
+	};
+
+	exports.end = exports.unpipe = exports.disable = function(from) {
+	  return log.unpipe(from);
+	};
+
+	exports.Transform = Transform;
+	exports.Filter = Filter;
+	// this is the default filter that's applied when .enable() is called normally
+	// you can bypass it completely and set up your own pipes
+	exports.suggest = new Filter();
+
+	exports.enable = function() {
+	  if(exports.defaultFormatter) {
+	    return log.pipe(exports.suggest) // filter
+	              .pipe(exports.defaultFormatter) // formatter
+	              .pipe(exports.defaultBackend); // backend
+	  }
+	  return log.pipe(exports.suggest) // filter
+	            .pipe(exports.defaultBackend); // formatter
+	};
+
+
+
+/***/ },
+
+/***/ 194:
+/***/ function(module, exports, __webpack_require__) {
+
+	var microee = __webpack_require__(195);
+
+	// Implements a subset of Node's stream.Transform - in a cross-platform manner.
+	function Transform() {}
+
+	microee.mixin(Transform);
+
+	// The write() signature is different from Node's
+	// --> makes it much easier to work with objects in logs.
+	// One of the lessons from v1 was that it's better to target
+	// a good browser rather than the lowest common denominator
+	// internally.
+	// If you want to use external streams, pipe() to ./stringify.js first.
+	Transform.prototype.write = function(name, level, args) {
+	  this.emit('item', name, level, args);
+	};
+
+	Transform.prototype.end = function() {
+	  this.emit('end');
+	  this.removeAllListeners();
+	};
+
+	Transform.prototype.pipe = function(dest) {
+	  var s = this;
+	  // prevent double piping
+	  s.emit('unpipe', dest);
+	  // tell the dest that it's being piped to
+	  dest.emit('pipe', s);
+
+	  function onItem() {
+	    dest.write.apply(dest, Array.prototype.slice.call(arguments));
+	  }
+	  function onEnd() { !dest._isStdio && dest.end(); }
+
+	  s.on('item', onItem);
+	  s.on('end', onEnd);
+
+	  s.when('unpipe', function(from) {
+	    var match = (from === dest) || typeof from == 'undefined';
+	    if(match) {
+	      s.removeListener('item', onItem);
+	      s.removeListener('end', onEnd);
+	      dest.emit('unpipe');
+	    }
+	    return match;
+	  });
+
+	  return dest;
+	};
+
+	Transform.prototype.unpipe = function(from) {
+	  this.emit('unpipe', from);
+	  return this;
+	};
+
+	Transform.prototype.format = function(dest) {
+	  throw new Error([
+	    'Warning: .format() is deprecated in Minilog v2! Use .pipe() instead. For example:',
+	    'var Minilog = require(\'minilog\');',
+	    'Minilog',
+	    '  .pipe(Minilog.backends.console.formatClean)',
+	    '  .pipe(Minilog.backends.console);'].join('\n'));
+	};
+
+	Transform.mixin = function(dest) {
+	  var o = Transform.prototype, k;
+	  for (k in o) {
+	    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
+	  }
+	};
+
+	module.exports = Transform;
+
+
+/***/ },
+
+/***/ 195:
+/***/ function(module, exports) {
+
+	function M() { this._events = {}; }
+	M.prototype = {
+	  on: function(ev, cb) {
+	    this._events || (this._events = {});
+	    var e = this._events;
+	    (e[ev] || (e[ev] = [])).push(cb);
+	    return this;
+	  },
+	  removeListener: function(ev, cb) {
+	    var e = this._events[ev] || [], i;
+	    for(i = e.length-1; i >= 0 && e[i]; i--){
+	      if(e[i] === cb || e[i].cb === cb) { e.splice(i, 1); }
+	    }
+	  },
+	  removeAllListeners: function(ev) {
+	    if(!ev) { this._events = {}; }
+	    else { this._events[ev] && (this._events[ev] = []); }
+	  },
+	  emit: function(ev) {
+	    this._events || (this._events = {});
+	    var args = Array.prototype.slice.call(arguments, 1), i, e = this._events[ev] || [];
+	    for(i = e.length-1; i >= 0 && e[i]; i--){
+	      e[i].apply(this, args);
+	    }
+	    return this;
+	  },
+	  when: function(ev, cb) {
+	    return this.once(ev, cb, true);
+	  },
+	  once: function(ev, cb, when) {
+	    if(!cb) return this;
+	    function c() {
+	      if(!when) this.removeListener(ev, c);
+	      if(cb.apply(this, arguments) && when) this.removeListener(ev, c);
+	    }
+	    c.cb = cb;
+	    this.on(ev, c);
+	    return this;
+	  }
+	};
+	M.mixin = function(dest) {
+	  var o = M.prototype, k;
+	  for (k in o) {
+	    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
+	  }
+	};
+	module.exports = M;
+
+
+/***/ },
+
+/***/ 196:
+/***/ function(module, exports, __webpack_require__) {
+
+	// default filter
+	var Transform = __webpack_require__(194);
+
+	var levelMap = { debug: 1, info: 2, warn: 3, error: 4 };
+
+	function Filter() {
+	  this.enabled = true;
+	  this.defaultResult = true;
+	  this.clear();
+	}
+
+	Transform.mixin(Filter);
+
+	// allow all matching, with level >= given level
+	Filter.prototype.allow = function(name, level) {
+	  this._white.push({ n: name, l: levelMap[level] });
+	  return this;
+	};
+
+	// deny all matching, with level <= given level
+	Filter.prototype.deny = function(name, level) {
+	  this._black.push({ n: name, l: levelMap[level] });
+	  return this;
+	};
+
+	Filter.prototype.clear = function() {
+	  this._white = [];
+	  this._black = [];
+	  return this;
+	};
+
+	function test(rule, name) {
+	  // use .test for RegExps
+	  return (rule.n.test ? rule.n.test(name) : rule.n == name);
+	};
+
+	Filter.prototype.test = function(name, level) {
+	  var i, len = Math.max(this._white.length, this._black.length);
+	  for(i = 0; i < len; i++) {
+	    if(this._white[i] && test(this._white[i], name) && levelMap[level] >= this._white[i].l) {
+	      return true;
+	    }
+	    if(this._black[i] && test(this._black[i], name) && levelMap[level] < this._black[i].l) {
+	      return false;
+	    }
+	  }
+	  return this.defaultResult;
+	};
+
+	Filter.prototype.write = function(name, level, args) {
+	  if(!this.enabled || this.test(name, level)) {
+	    return this.emit('item', name, level, args);
+	  }
+	};
+
+	module.exports = Filter;
+
+
+/***/ },
+
+/***/ 197:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194);
+
+	var newlines = /\n+$/,
+	    logger = new Transform();
+
+	logger.write = function(name, level, args) {
+	  var i = args.length-1;
+	  if (typeof console === 'undefined' || !console.log) {
+	    return;
+	  }
+	  if(console.log.apply) {
+	    return console.log.apply(console, [name, level].concat(args));
+	  } else if(JSON && JSON.stringify) {
+	    // console.log.apply is undefined in IE8 and IE9
+	    // for IE8/9: make console.log at least a bit less awful
+	    if(args[i] && typeof args[i] == 'string') {
+	      args[i] = args[i].replace(newlines, '');
+	    }
+	    try {
+	      for(i = 0; i < args.length; i++) {
+	        args[i] = JSON.stringify(args[i]);
+	      }
+	    } catch(e) {}
+	    console.log(args.join(' '));
+	  }
+	};
+
+	logger.formatters = ['color', 'minilog'];
+	logger.color = __webpack_require__(198);
+	logger.minilog = __webpack_require__(200);
+
+	module.exports = logger;
+
+
+/***/ },
+
+/***/ 198:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194),
+	    color = __webpack_require__(199);
+
+	var colors = { debug: ['cyan'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
+	    logger = new Transform();
+
+	logger.write = function(name, level, args) {
+	  var fn = console.log;
+	  if(console[level] && console[level].apply) {
+	    fn = console[level];
+	    fn.apply(console, [ '%c'+name+' %c'+level, color('gray'), color.apply(color, colors[level])].concat(args));
+	  }
+	};
+
+	// NOP, because piping the formatted logs can only cause trouble.
+	logger.pipe = function() { };
+
+	module.exports = logger;
+
+
+/***/ },
+
+/***/ 199:
+/***/ function(module, exports) {
+
+	var hex = {
+	  black: '#000',
+	  red: '#c23621',
+	  green: '#25bc26',
+	  yellow: '#bbbb00',
+	  blue:  '#492ee1',
+	  magenta: '#d338d3',
+	  cyan: '#33bbc8',
+	  gray: '#808080',
+	  purple: '#708'
+	};
+	function color(fg, isInverse) {
+	  if(isInverse) {
+	    return 'color: #fff; background: '+hex[fg]+';';
+	  } else {
+	    return 'color: '+hex[fg]+';';
+	  }
+	}
+
+	module.exports = color;
+
+
+/***/ },
+
+/***/ 200:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194),
+	    color = __webpack_require__(199),
+	    colors = { debug: ['gray'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
+	    logger = new Transform();
+
+	logger.write = function(name, level, args) {
+	  var fn = console.log;
+	  if(level != 'debug' && console[level]) {
+	    fn = console[level];
+	  }
+
+	  var subset = [], i = 0;
+	  if(level != 'info') {
+	    for(; i < args.length; i++) {
+	      if(typeof args[i] != 'string') break;
+	    }
+	    fn.apply(console, [ '%c'+name +' '+ args.slice(0, i).join(' '), color.apply(color, colors[level]) ].concat(args.slice(i)));
+	  } else {
+	    fn.apply(console, [ '%c'+name, color.apply(color, colors[level]) ].concat(args));
+	  }
+	};
+
+	// NOP, because piping the formatted logs can only cause trouble.
+	logger.pipe = function() { };
+
+	module.exports = logger;
+
+
+/***/ },
+
+/***/ 201:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194),
+	    cache = [ ];
+
+	var logger = new Transform();
+
+	logger.write = function(name, level, args) {
+	  cache.push([ name, level, args ]);
+	};
+
+	// utility functions
+	logger.get = function() { return cache; };
+	logger.empty = function() { cache = []; };
+
+	module.exports = logger;
+
+
+/***/ },
+
+/***/ 202:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194),
+	    cache = false;
+
+	var logger = new Transform();
+
+	logger.write = function(name, level, args) {
+	  if(typeof window == 'undefined' || typeof JSON == 'undefined' || !JSON.stringify || !JSON.parse) return;
+	  try {
+	    if(!cache) { cache = (window.localStorage.minilog ? JSON.parse(window.localStorage.minilog) : []); }
+	    cache.push([ new Date().toString(), name, level, args ]);
+	    window.localStorage.minilog = JSON.stringify(cache);
+	  } catch(e) {}
+	};
+
+	module.exports = logger;
+
+/***/ },
+
+/***/ 203:
+/***/ function(module, exports, __webpack_require__) {
+
+	var Transform = __webpack_require__(194);
+
+	var cid = new Date().valueOf().toString(36);
+
+	function AjaxLogger(options) {
+	  this.url = options.url || '';
+	  this.cache = [];
+	  this.timer = null;
+	  this.interval = options.interval || 30*1000;
+	  this.enabled = true;
+	  this.jQuery = window.jQuery;
+	  this.extras = {};
+	}
+
+	Transform.mixin(AjaxLogger);
+
+	AjaxLogger.prototype.write = function(name, level, args) {
+	  if(!this.timer) { this.init(); }
+	  this.cache.push([name, level].concat(args));
+	};
+
+	AjaxLogger.prototype.init = function() {
+	  if(!this.enabled || !this.jQuery) return;
+	  var self = this;
+	  this.timer = setTimeout(function() {
+	    var i, logs = [], ajaxData, url = self.url;
+	    if(self.cache.length == 0) return self.init();
+	    // Test each log line and only log the ones that are valid (e.g. don't have circular references).
+	    // Slight performance hit but benefit is we log all valid lines.
+	    for(i = 0; i < self.cache.length; i++) {
+	      try {
+	        JSON.stringify(self.cache[i]);
+	        logs.push(self.cache[i]);
+	      } catch(e) { }
+	    }
+	    if(self.jQuery.isEmptyObject(self.extras)) {
+	        ajaxData = JSON.stringify({ logs: logs });
+	        url = self.url + '?client_id=' + cid;
+	    } else {
+	        ajaxData = JSON.stringify(self.jQuery.extend({logs: logs}, self.extras));
+	    }
+
+	    self.jQuery.ajax(url, {
+	      type: 'POST',
+	      cache: false,
+	      processData: false,
+	      data: ajaxData,
+	      contentType: 'application/json',
+	      timeout: 10000
+	    }).success(function(data, status, jqxhr) {
+	      if(data.interval) {
+	        self.interval = Math.max(1000, data.interval);
+	      }
+	    }).error(function() {
+	      self.interval = 30000;
+	    }).always(function() {
+	      self.init();
+	    });
+	    self.cache = [];
+	  }, this.interval);
+	};
+
+	AjaxLogger.prototype.end = function() {};
+
+	// wait until jQuery is defined. Useful if you don't control the load order.
+	AjaxLogger.jQueryWait = function(onDone) {
+	  if(typeof window !== 'undefined' && (window.jQuery || window.$)) {
+	    return onDone(window.jQuery || window.$);
+	  } else if (typeof window !== 'undefined') {
+	    setTimeout(function() { AjaxLogger.jQueryWait(onDone); }, 200);
+	  }
+	};
+
+	module.exports = AjaxLogger;
+
+
+/***/ },
+
+/***/ 204:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var xhr = __webpack_require__(205);
+
+	var log = __webpack_require__(191);
+
+	var ProjectLoader = function () {
+	    function ProjectLoader() {
+	        _classCallCheck(this, ProjectLoader);
+
+	        this.DEFAULT_PROJECT_DATA = ProjectLoader.DEFAULT_PROJECT_DATA;
+	    }
+
+	    _createClass(ProjectLoader, [{
+	        key: 'load',
+	        value: function load(id, callback) {
+	            callback = callback || function (err) {
+	                return log.error(err);
+	            };
+	            xhr({
+	                uri: 'https://projects.scratch.mit.edu/internalapi/project/' + id + '/get/'
+	            }, function (err, res, body) {
+	                if (err) return callback(err);
+	                callback(null, body);
+	            });
+	        }
+	    }]);
+
+	    return ProjectLoader;
+	}();
+
+	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(212);
+
+	module.exports = new ProjectLoader();
+
+/***/ },
+
+/***/ 205:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var window = __webpack_require__(206)
+	var isFunction = __webpack_require__(207)
+	var parseHeaders = __webpack_require__(208)
+	var xtend = __webpack_require__(211)
+
+	module.exports = createXHR
+	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+	createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+	forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+	    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+	        options = initParams(uri, options, callback)
+	        options.method = method.toUpperCase()
+	        return _createXHR(options)
+	    }
+	})
+
+	function forEachArray(array, iterator) {
+	    for (var i = 0; i < array.length; i++) {
+	        iterator(array[i])
+	    }
+	}
+
+	function isEmpty(obj){
+	    for(var i in obj){
+	        if(obj.hasOwnProperty(i)) return false
+	    }
+	    return true
+	}
+
+	function initParams(uri, options, callback) {
+	    var params = uri
+
+	    if (isFunction(options)) {
+	        callback = options
+	        if (typeof uri === "string") {
+	            params = {uri:uri}
+	        }
+	    } else {
+	        params = xtend(options, {uri: uri})
+	    }
+
+	    params.callback = callback
+	    return params
+	}
+
+	function createXHR(uri, options, callback) {
+	    options = initParams(uri, options, callback)
+	    return _createXHR(options)
+	}
+
+	function _createXHR(options) {
+	    if(typeof options.callback === "undefined"){
+	        throw new Error("callback argument missing")
+	    }
+
+	    var called = false
+	    var callback = function cbOnce(err, response, body){
+	        if(!called){
+	            called = true
+	            options.callback(err, response, body)
+	        }
+	    }
+
+	    function readystatechange() {
+	        if (xhr.readyState === 4) {
+	            loadFunc()
+	        }
+	    }
+
+	    function getBody() {
+	        // Chrome with requestType=blob throws errors arround when even testing access to responseText
+	        var body = undefined
+
+	        if (xhr.response) {
+	            body = xhr.response
+	        } else {
+	            body = xhr.responseText || getXml(xhr)
+	        }
+
+	        if (isJson) {
+	            try {
+	                body = JSON.parse(body)
+	            } catch (e) {}
+	        }
+
+	        return body
+	    }
+
+	    var failureResponse = {
+	                body: undefined,
+	                headers: {},
+	                statusCode: 0,
+	                method: method,
+	                url: uri,
+	                rawRequest: xhr
+	            }
+
+	    function errorFunc(evt) {
+	        clearTimeout(timeoutTimer)
+	        if(!(evt instanceof Error)){
+	            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
+	        }
+	        evt.statusCode = 0
+	        return callback(evt, failureResponse)
+	    }
+
+	    // will load the data & process the response in a special response object
+	    function loadFunc() {
+	        if (aborted) return
+	        var status
+	        clearTimeout(timeoutTimer)
+	        if(options.useXDR && xhr.status===undefined) {
+	            //IE8 CORS GET successful response doesn't have a status field, but body is fine
+	            status = 200
+	        } else {
+	            status = (xhr.status === 1223 ? 204 : xhr.status)
+	        }
+	        var response = failureResponse
+	        var err = null
+
+	        if (status !== 0){
+	            response = {
+	                body: getBody(),
+	                statusCode: status,
+	                method: method,
+	                headers: {},
+	                url: uri,
+	                rawRequest: xhr
+	            }
+	            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
+	                response.headers = parseHeaders(xhr.getAllResponseHeaders())
+	            }
+	        } else {
+	            err = new Error("Internal XMLHttpRequest Error")
+	        }
+	        return callback(err, response, response.body)
+	    }
+
+	    var xhr = options.xhr || null
+
+	    if (!xhr) {
+	        if (options.cors || options.useXDR) {
+	            xhr = new createXHR.XDomainRequest()
+	        }else{
+	            xhr = new createXHR.XMLHttpRequest()
+	        }
+	    }
+
+	    var key
+	    var aborted
+	    var uri = xhr.url = options.uri || options.url
+	    var method = xhr.method = options.method || "GET"
+	    var body = options.body || options.data || null
+	    var headers = xhr.headers = options.headers || {}
+	    var sync = !!options.sync
+	    var isJson = false
+	    var timeoutTimer
+
+	    if ("json" in options) {
+	        isJson = true
+	        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
+	        if (method !== "GET" && method !== "HEAD") {
+	            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
+	            body = JSON.stringify(options.json)
+	        }
+	    }
+
+	    xhr.onreadystatechange = readystatechange
+	    xhr.onload = loadFunc
+	    xhr.onerror = errorFunc
+	    // IE9 must have onprogress be set to a unique function.
+	    xhr.onprogress = function () {
+	        // IE must die
+	    }
+	    xhr.ontimeout = errorFunc
+	    xhr.open(method, uri, !sync, options.username, options.password)
+	    //has to be after open
+	    if(!sync) {
+	        xhr.withCredentials = !!options.withCredentials
+	    }
+	    // Cannot set timeout with sync request
+	    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
+	    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
+	    if (!sync && options.timeout > 0 ) {
+	        timeoutTimer = setTimeout(function(){
+	            aborted=true//IE9 may still call readystatechange
+	            xhr.abort("timeout")
+	            var e = new Error("XMLHttpRequest timeout")
+	            e.code = "ETIMEDOUT"
+	            errorFunc(e)
+	        }, options.timeout )
+	    }
+
+	    if (xhr.setRequestHeader) {
+	        for(key in headers){
+	            if(headers.hasOwnProperty(key)){
+	                xhr.setRequestHeader(key, headers[key])
+	            }
+	        }
+	    } else if (options.headers && !isEmpty(options.headers)) {
+	        throw new Error("Headers cannot be set on an XDomainRequest object")
+	    }
+
+	    if ("responseType" in options) {
+	        xhr.responseType = options.responseType
+	    }
+
+	    if ("beforeSend" in options &&
+	        typeof options.beforeSend === "function"
+	    ) {
+	        options.beforeSend(xhr)
+	    }
+
+	    xhr.send(body)
+
+	    return xhr
+
+
+	}
+
+	function getXml(xhr) {
+	    if (xhr.responseType === "document") {
+	        return xhr.responseXML
+	    }
+	    var firefoxBugTakenEffect = xhr.status === 204 && xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+	    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+	        return xhr.responseXML
+	    }
+
+	    return null
+	}
+
+	function noop() {}
+
+
+/***/ },
+
+/***/ 206:
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
+	    module.exports = window;
+	} else if (typeof global !== "undefined") {
+	    module.exports = global;
+	} else if (typeof self !== "undefined"){
+	    module.exports = self;
+	} else {
+	    module.exports = {};
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+
+/***/ 207:
+/***/ function(module, exports) {
+
+	module.exports = isFunction
+
+	var toString = Object.prototype.toString
+
+	function isFunction (fn) {
+	  var string = toString.call(fn)
+	  return string === '[object Function]' ||
+	    (typeof fn === 'function' && string !== '[object RegExp]') ||
+	    (typeof window !== 'undefined' &&
+	     // IE8 and below
+	     (fn === window.setTimeout ||
+	      fn === window.alert ||
+	      fn === window.confirm ||
+	      fn === window.prompt))
+	};
+
+
+/***/ },
+
+/***/ 208:
+/***/ function(module, exports, __webpack_require__) {
+
+	var trim = __webpack_require__(209)
+	  , forEach = __webpack_require__(210)
+	  , isArray = function(arg) {
+	      return Object.prototype.toString.call(arg) === '[object Array]';
+	    }
+
+	module.exports = function (headers) {
+	  if (!headers)
+	    return {}
+
+	  var result = {}
+
+	  forEach(
+	      trim(headers).split('\n')
+	    , function (row) {
+	        var index = row.indexOf(':')
+	          , key = trim(row.slice(0, index)).toLowerCase()
+	          , value = trim(row.slice(index + 1))
+
+	        if (typeof(result[key]) === 'undefined') {
+	          result[key] = value
+	        } else if (isArray(result[key])) {
+	          result[key].push(value)
+	        } else {
+	          result[key] = [ result[key], value ]
+	        }
+	      }
+	  )
+
+	  return result
+	}
+
+/***/ },
+
+/***/ 209:
+/***/ function(module, exports) {
+
+	
+	exports = module.exports = trim;
+
+	function trim(str){
+	  return str.replace(/^\s*|\s*$/g, '');
+	}
+
+	exports.left = function(str){
+	  return str.replace(/^\s*/, '');
+	};
+
+	exports.right = function(str){
+	  return str.replace(/\s*$/, '');
+	};
+
+
+/***/ },
+
+/***/ 210:
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(207)
+
+	module.exports = forEach
+
+	var toString = Object.prototype.toString
+	var hasOwnProperty = Object.prototype.hasOwnProperty
+
+	function forEach(list, iterator, context) {
+	    if (!isFunction(iterator)) {
+	        throw new TypeError('iterator must be a function')
+	    }
+
+	    if (arguments.length < 3) {
+	        context = this
+	    }
+	    
+	    if (toString.call(list) === '[object Array]')
+	        forEachArray(list, iterator, context)
+	    else if (typeof list === 'string')
+	        forEachString(list, iterator, context)
+	    else
+	        forEachObject(list, iterator, context)
+	}
+
+	function forEachArray(array, iterator, context) {
+	    for (var i = 0, len = array.length; i < len; i++) {
+	        if (hasOwnProperty.call(array, i)) {
+	            iterator.call(context, array[i], i, array)
+	        }
+	    }
+	}
+
+	function forEachString(string, iterator, context) {
+	    for (var i = 0, len = string.length; i < len; i++) {
+	        // no such thing as a sparse string.
+	        iterator.call(context, string.charAt(i), i, string)
+	    }
+	}
+
+	function forEachObject(object, iterator, context) {
+	    for (var k in object) {
+	        if (hasOwnProperty.call(object, k)) {
+	            iterator.call(context, object[k], k, object)
+	        }
+	    }
+	}
+
+
+/***/ },
+
+/***/ 211:
+/***/ function(module, exports) {
+
+	module.exports = extend
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	function extend() {
+	    var target = {}
+
+	    for (var i = 0; i < arguments.length; i++) {
+	        var source = arguments[i]
+
+	        for (var key in source) {
+	            if (hasOwnProperty.call(source, key)) {
+	                target[key] = source[key]
+	            }
+	        }
+	    }
+
+	    return target
+	}
+
+
+/***/ },
+
+/***/ 212:
+/***/ function(module, exports) {
+
+	module.exports = {
+		"objName": "Stage",
+		"sounds": [
+			{
+				"soundName": "pop",
+				"soundID": 1,
+				"md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+				"sampleCount": 258,
+				"rate": 11025,
+				"format": ""
+			}
+		],
+		"costumes": [
+			{
+				"costumeName": "backdrop1",
+				"baseLayerID": 2,
+				"baseLayerMD5": "739b5e2a2435f6e1ec2993791b423146.png",
+				"bitmapResolution": 1,
+				"rotationCenterX": 240,
+				"rotationCenterY": 180
+			}
+		],
+		"currentCostumeIndex": 0,
+		"penLayerMD5": "5c81a336fab8be57adc039a8a2b33ca9.png",
+		"penLayerID": -1,
+		"tempoBPM": 60,
+		"videoAlpha": 0.5,
+		"children": [
+			{
+				"objName": "Sprite1",
+				"sounds": [
+					{
+						"soundName": "meow",
+						"soundID": 0,
+						"md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+						"sampleCount": 18688,
+						"rate": 22050,
+						"format": ""
+					}
+				],
+				"costumes": [
+					{
+						"costumeName": "costume1",
+						"baseLayerID": 0,
+						"baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
+						"bitmapResolution": 1,
+						"rotationCenterX": 47,
+						"rotationCenterY": 55
+					},
+					{
+						"costumeName": "costume2",
+						"baseLayerID": 1,
+						"baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
+						"bitmapResolution": 1,
+						"rotationCenterX": 47,
+						"rotationCenterY": 55
+					}
+				],
+				"currentCostumeIndex": 0,
+				"scratchX": 0,
+				"scratchY": 0,
+				"scale": 1,
+				"direction": 90,
+				"rotationStyle": "normal",
+				"isDraggable": false,
+				"indexInLibrary": 1,
+				"visible": true,
+				"spriteInfo": {}
+			}
+		]
 	};
 
 /***/ }

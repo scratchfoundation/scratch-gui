@@ -6,7 +6,6 @@ const Renderer = require('scratch-render');
 const SpriteSelector = require('./sprite-selector');
 const Stage = require('./stage');
 const StopAll = require('./stop-all');
-const Toolbox = require('./toolbox');
 const VM = require('scratch-vm');
 const VMManager = require('../lib/vm-manager');
 
@@ -16,11 +15,6 @@ class GUI extends React.Component {
         this.animate = this.animate.bind(this);
         this.onReceiveWorkspace = this.onReceiveWorkspace.bind(this);
         this.state = {};
-    }
-    componentDidMount () {
-        this.setState({
-            toolbox: this.toolbox
-        });
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
@@ -58,11 +52,9 @@ class GUI extends React.Component {
                 <StopAll vm={this.props.vm} />
                 <Stage stageRef={stage => this.stage = stage} />
                 <SpriteSelector vm={this.props.vm} />
-                <Toolbox toolboxRef={toolbox => this.toolbox = toolbox} />
                 <Blocks
                     options={{
-                        media: this.props.basePath + 'static/blocks-media/',
-                        toolbox: this.state.toolbox
+                        media: this.props.basePath + 'static/blocks-media/'
                     }}
                     vm={this.props.vm}
                     onReceiveWorkspace={this.onReceiveWorkspace}

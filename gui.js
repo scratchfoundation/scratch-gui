@@ -7897,35 +7897,15 @@ webpackJsonp([0],{
 		Blockly.Blocks.pen_setpenshadeto={init:function(){this.jsonInit({message0:"set pen shade to %1",args0:[{type:"input_value",name:"SHADE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.pen,colour:Blockly.Colours.pen.primary,colourSecondary:Blockly.Colours.pen.secondary,colourTertiary:Blockly.Colours.pen.tertiary})}};
 		Blockly.Blocks.pen_changepensizeby={init:function(){this.jsonInit({message0:"change pen size by %1",args0:[{type:"input_value",name:"SIZE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.pen,colour:Blockly.Colours.pen.primary,colourSecondary:Blockly.Colours.pen.secondary,colourTertiary:Blockly.Colours.pen.tertiary})}};
 		Blockly.Blocks.pen_setpensizeto={init:function(){this.jsonInit({message0:"set pen size to %1",args0:[{type:"input_value",name:"SIZE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.pen,colour:Blockly.Colours.pen.primary,colourSecondary:Blockly.Colours.pen.secondary,colourTertiary:Blockly.Colours.pen.tertiary})}};Blockly.Blocks.procedures={};
-		Blockly.Blocks.procedures_defnoreturn={init:function(){var a=new Blockly.FieldTextInput(Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE,Blockly.Procedures.rename);a.setSpellcheck(!1);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE).appendField(a,"NAME").appendField("","PARAMS");this.setMutator(new Blockly.Mutator(["procedures_mutatorarg"]));this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);
-		this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);this.arguments_=[];this.setNextStatement(!0)},updateParams_:function(){for(var a=!1,b={},c=0;c<this.arguments_.length;c++){if(b["arg_"+this.arguments_[c].toLowerCase()]){a=!0;break}b["arg_"+this.arguments_[c].toLowerCase()]=!0}a?this.setWarningText(Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING):this.setWarningText(null);a="";this.arguments_.length&&(a=Blockly.Msg.PROCEDURES_BEFORE_PARAMS+
-		" "+this.arguments_.join(", "));Blockly.Events.disable();try{this.setFieldValue(a,"PARAMS")}finally{Blockly.Events.enable()}},mutationToDom:function(a){var b=document.createElement("mutation");a&&b.setAttribute("name",this.getFieldValue("NAME"));for(var c=0;c<this.arguments_.length;c++){var d=document.createElement("arg");d.setAttribute("name",this.arguments_[c]);a&&this.paramIds_&&d.setAttribute("paramId",this.paramIds_[c]);b.appendChild(d)}return b},domToMutation:function(a){this.arguments_=[];
-		for(var b=0,c;c=a.childNodes[b];b++)"arg"==c.nodeName.toLowerCase()&&this.arguments_.push(c.getAttribute("name"));this.updateParams_();Blockly.Procedures.mutateCallers(this)},decompose:function(a){var b=a.newBlock("procedures_mutatorcontainer");b.initSvg();for(var c=b.getInput("STACK").connection,d=0;d<this.arguments_.length;d++){var e=a.newBlock("procedures_mutatorarg");e.initSvg();e.setFieldValue(this.arguments_[d],"NAME");e.oldLocation=d;c.connect(e.previousConnection);c=e.nextConnection}Blockly.Procedures.mutateCallers(this);
-		return b},compose:function(a){this.arguments_=[];this.paramIds_=[];for(a=a.getInputTargetBlock("STACK");a;)this.arguments_.push(a.getFieldValue("NAME")),this.paramIds_.push(a.id),a=a.nextConnection&&a.nextConnection.targetBlock();this.updateParams_();Blockly.Procedures.mutateCallers(this);Blockly.Mutator.reconnect(this.statementConnection_,this,"STACK");this.statementConnection_=null},getProcedureDef:function(){return[this.getFieldValue("NAME"),this.arguments_,!1]},getVars:function(){return this.arguments_},
-		renameVar:function(a,b){for(var c=!1,d=0;d<this.arguments_.length;d++)Blockly.Names.equals(a,this.arguments_[d])&&(this.arguments_[d]=b,c=!0);if(c&&(this.updateParams_(),this.mutator.isVisible()))for(var c=this.mutator.workspace_.getAllBlocks(),d=0,e;e=c[d];d++)"procedures_mutatorarg"==e.type&&Blockly.Names.equals(a,e.getFieldValue("NAME"))&&e.setFieldValue(b,"NAME")},customContextMenu:function(a){var b={enabled:!0},c=this.getFieldValue("NAME");b.text=Blockly.Msg.PROCEDURES_CREATE_DO.replace("%1",
-		c);var d=goog.dom.createDom("mutation");d.setAttribute("name",c);for(var e=0;e<this.arguments_.length;e++)c=goog.dom.createDom("arg"),c.setAttribute("name",this.arguments_[e]),d.appendChild(c);d=goog.dom.createDom("block",null,d);d.setAttribute("type",this.callType_);b.callback=Blockly.ContextMenu.callbackFactory(this,d);a.push(b);if(!this.isCollapsed())for(e=0;e<this.arguments_.length;e++)b={enabled:!0},c=this.arguments_[e],b.text=Blockly.Msg.VARIABLES_SET_CREATE_GET.replace("%1",c),d=goog.dom.createDom("field",
-		null,c),d.setAttribute("name","VAR"),d=goog.dom.createDom("block",null,d),d.setAttribute("type","variables_get"),b.callback=Blockly.ContextMenu.callbackFactory(this,d),a.push(b)},callType_:"procedures_callnoreturn"};
-		Blockly.Blocks.procedures_defreturn={init:function(){var a=new Blockly.FieldTextInput(Blockly.Msg.PROCEDURES_DEFRETURN_PROCEDURE,Blockly.Procedures.rename);a.setSpellcheck(!1);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_DEFRETURN_TITLE).appendField(a,"NAME").appendField("","PARAMS");this.setMutator(new Blockly.Mutator(["procedures_mutatorarg"]));this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);
-		this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);this.arguments_=[];this.appendStatementInput("STACK").appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO);this.appendValueInput("RETURN").setAlign(Blockly.ALIGN_LEFT).appendField("report");this.statementConnection_=null},updateParams_:Blockly.Blocks.procedures_defnoreturn.updateParams_,mutationToDom:Blockly.Blocks.procedures_defnoreturn.mutationToDom,domToMutation:Blockly.Blocks.procedures_defnoreturn.domToMutation,
-		decompose:Blockly.Blocks.procedures_defnoreturn.decompose,compose:Blockly.Blocks.procedures_defnoreturn.compose,getProcedureDef:function(){return[this.getFieldValue("NAME"),this.arguments_,!0]},getVars:Blockly.Blocks.procedures_defnoreturn.getVars,renameVar:Blockly.Blocks.procedures_defnoreturn.renameVar,customContextMenu:Blockly.Blocks.procedures_defnoreturn.customContextMenu,callType_:"procedures_callreturn"};
-		Blockly.Blocks.procedures_mutatorcontainer={init:function(){this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);this.appendStatementInput("STACK");this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP);this.contextMenu=!1}};
-		Blockly.Blocks.procedures_mutatorarg={init:function(){var a=new Blockly.FieldTextInput("x",this.validator_);this.appendDummyInput().appendField(Blockly.Msg.PROCEDURES_MUTATORARG_TITLE).appendField(a,"NAME");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP);this.contextMenu=!1;a.onFinishEditing_=
-		this.createNewVar_;a.onFinishEditing_("x")},validator_:function(a){return(a=a.replace(/[\s\xa0]+/g," ").replace(/^ | $/g,""))||null},createNewVar_:function(a){var b=this.sourceBlock_;b&&b.workspace&&b.workspace.options&&b.workspace.options.parentWorkspace&&b.workspace.options.parentWorkspace.createVariable(a)}};
-		Blockly.Blocks.procedures_callnoreturn={init:function(){this.appendDummyInput("TOPROW").appendField(this.id,"NAME");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);this.arguments_=[];this.quarkConnections_={};this.quarkIds_=null},getProcedureCall:function(){return this.getFieldValue("NAME")},
-		renameProcedure:function(a,b){Blockly.Names.equals(a,this.getProcedureCall())&&(this.setFieldValue(b,"NAME"),this.setTooltip((this.outputConnection?Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP:Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP).replace("%1",b)))},setProcedureParameters_:function(a,b){var c=Blockly.Procedures.getDefinition(this.getProcedureCall(),this.workspace),d=c&&c.mutator&&c.mutator.isVisible();d||(this.quarkConnections_={},this.quarkIds_=null);if(b)if(goog.array.equals(this.arguments_,
-		a))this.quarkIds_=b;else{if(b.length!=a.length)throw"Error: paramNames and paramIds must be the same length.";this.setCollapsed(!1);this.quarkIds_||(this.quarkConnections_={},a.join("\n")==this.arguments_.join("\n")?this.quarkIds_=b:this.quarkIds_=[]);c=this.rendered;this.rendered=!1;for(var e=0;e<this.arguments_.length;e++){var f=this.getInput("ARG"+e);f&&(f=f.connection.targetConnection,this.quarkConnections_[this.quarkIds_[e]]=f,d&&f&&-1==b.indexOf(this.quarkIds_[e])&&(f.disconnect(),f.getSourceBlock().bumpNeighbours_()))}this.arguments_=
-		[].concat(a);this.updateShape_();if(this.quarkIds_=b)for(e=0;e<this.arguments_.length;e++)d=this.quarkIds_[e],d in this.quarkConnections_&&(f=this.quarkConnections_[d],Blockly.Mutator.reconnect(f,this,"ARG"+e)||delete this.quarkConnections_[d]);(this.rendered=c)&&this.render()}},updateShape_:function(){for(var a=0;a<this.arguments_.length;a++){var b=this.getField("ARGNAME"+a);if(b){Blockly.Events.disable();try{b.setValue(this.arguments_[a])}finally{Blockly.Events.enable()}}else b=new Blockly.FieldLabel(this.arguments_[a]),
-		this.appendValueInput("ARG"+a).appendField(b,"ARGNAME"+a).init()}for(;this.getInput("ARG"+a);)this.removeInput("ARG"+a),a++;if(a=this.getInput("TOPROW"))this.arguments_.length?this.getField("WITH")||(a.appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS,"WITH"),a.init()):this.getField("WITH")&&a.removeField("WITH")},mutationToDom:function(){var a=document.createElement("mutation");a.setAttribute("name",this.getProcedureCall());for(var b=0;b<this.arguments_.length;b++){var c=document.createElement("arg");
-		c.setAttribute("name",this.arguments_[b]);a.appendChild(c)}return a},domToMutation:function(a){var b=a.getAttribute("name");this.renameProcedure(this.getProcedureCall(),b);for(var b=[],c=[],d=0,e;e=a.childNodes[d];d++)"arg"==e.nodeName.toLowerCase()&&(b.push(e.getAttribute("name")),c.push(e.getAttribute("paramId")));this.setProcedureParameters_(b,c)},renameVar:function(a,b){for(var c=0;c<this.arguments_.length;c++)Blockly.Names.equals(a,this.arguments_[c])&&(this.arguments_[c]=b,this.getField("ARGNAME"+
-		c).setValue(b))},onchange:function(a){if(this.workspace&&!this.workspace.isFlyout)if(a.type==Blockly.Events.CREATE&&-1!=a.ids.indexOf(this.id)){var b=this.getProcedureCall(),b=Blockly.Procedures.getDefinition(b,this.workspace);!b||b.type==this.defType_&&JSON.stringify(b.arguments_)==JSON.stringify(this.arguments_)||(b=null);if(!b){Blockly.Events.setGroup(a.group);a=goog.dom.createDom("xml");b=goog.dom.createDom("block");b.setAttribute("type",this.defType_);var c=this.getRelativeToSurfaceXY(),d=c.y+
-		2*Blockly.SNAP_RADIUS;b.setAttribute("x",c.x+Blockly.SNAP_RADIUS*(this.RTL?-1:1));b.setAttribute("y",d);c=this.mutationToDom();b.appendChild(c);c=goog.dom.createDom("field");c.setAttribute("name","NAME");c.appendChild(document.createTextNode(this.getProcedureCall()));b.appendChild(c);a.appendChild(b);Blockly.Xml.domToWorkspace(a,this.workspace);Blockly.Events.setGroup(!1)}}else a.type==Blockly.Events.DELETE&&(b=this.getProcedureCall(),b=Blockly.Procedures.getDefinition(b,this.workspace),b||(Blockly.Events.setGroup(a.group),
-		this.dispose(!0,!1),Blockly.Events.setGroup(!1)))},customContextMenu:function(a){var b={enabled:!0};b.text=Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;var c=this.getProcedureCall(),d=this.workspace;b.callback=function(){var a=Blockly.Procedures.getDefinition(c,d);a&&a.select()};a.push(b)},defType_:"procedures_defnoreturn"};
-		Blockly.Blocks.procedures_callreturn={init:function(){this.appendDummyInput("TOPROW").appendField("","NAME");this.setOutput(!0);this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);this.arguments_=[];this.quarkConnections_={};this.quarkIds_=null},getProcedureCall:Blockly.Blocks.procedures_callnoreturn.getProcedureCall,
-		renameProcedure:Blockly.Blocks.procedures_callnoreturn.renameProcedure,setProcedureParameters_:Blockly.Blocks.procedures_callnoreturn.setProcedureParameters_,updateShape_:Blockly.Blocks.procedures_callnoreturn.updateShape_,mutationToDom:Blockly.Blocks.procedures_callnoreturn.mutationToDom,domToMutation:Blockly.Blocks.procedures_callnoreturn.domToMutation,renameVar:Blockly.Blocks.procedures_callnoreturn.renameVar,onchange:Blockly.Blocks.procedures_callnoreturn.onchange,customContextMenu:Blockly.Blocks.procedures_callnoreturn.customContextMenu,
-		defType_:"procedures_defreturn"};
-		Blockly.Blocks.procedures_report={init:function(){this.appendValueInput("VALUE").appendField("report");this.setInputsInline(!0);this.setPreviousStatement(!0);this.setNextStatement(!1);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setTooltip(Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP);this.setHelpUrl(Blockly.Msg.PROCEDURES_IFRETURN_HELPURL);this.hasReturnValue_=!0},mutationToDom:function(){var a=
-		document.createElement("mutation");a.setAttribute("value",Number(this.hasReturnValue_));return a},domToMutation:function(a){this.hasReturnValue_=1==a.getAttribute("value");this.hasReturnValue_||(this.removeInput("VALUE"),this.appendDummyInput("VALUE").appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN))},onchange:function(){var a=!1,b=this;do{if(-1!=this.FUNCTION_TYPES.indexOf(b.type)){a=!0;break}b=b.getSurroundParent()}while(b);a?("procedures_defnoreturn"==b.type&&this.hasReturnValue_?(this.removeInput("VALUE"),
-		this.appendDummyInput("VALUE").appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN),this.hasReturnValue_=!1):"procedures_defreturn"!=b.type||this.hasReturnValue_||(this.removeInput("VALUE"),this.appendValueInput("VALUE").appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN),this.hasReturnValue_=!0),this.setWarningText(null)):this.setWarningText(Blockly.Msg.PROCEDURES_IFRETURN_WARNING)},FUNCTION_TYPES:["procedures_defnoreturn","procedures_defreturn"]};Blockly.Blocks.sensing={};Blockly.Blocks.sensing_touchingobject={init:function(){this.jsonInit({message0:"touching %1?",args0:[{type:"input_value",name:"TOUCHINGOBJECTMENU"}],inputsInline:!0,output:"Boolean",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL})}};
+		Blockly.Blocks.procedures_defnoreturn={init:function(){this.appendDummyInput().appendField(new Blockly.FieldLabel,"procCode");this.appendDummyInput().appendField(new Blockly.FieldLabel,"argumentNames");this.appendDummyInput().appendField(new Blockly.FieldLabel,"argumentDefaults");this.appendDummyInput().appendField(new Blockly.FieldLabel,"warp");this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this.setNextStatement(!0);
+		this._procCode="";this._argumentNames=[];this._argumentDefaults=[];this._warp=!1},mutationToDom:function(){var a=document.createElement("mutation"),b=document.createElement("proccode");b.setAttribute("value",this._procCode);a.appendChild(b);b=document.createElement("argumentnames");b.setAttribute("value",JSON.stringify(this._argumentNames));a.appendChild(b);b=document.createElement("argumentdefaults");b.setAttribute("value",JSON.stringify(this._argumentDefaults));a.appendChild(b);b=document.createElement("warp");
+		b.setAttribute("value",this._warp);a.appendChild(b);return a},domToMutation:function(a){this._procCode=a.getAttribute("proccode");this._argumentNames=JSON.parse(a.getAttribute("argumentnames"));this._argumentValues=JSON.parse(a.getAttribute("argumentvalues"));this._warp=a.getAttribute("warp");this._updateDisplay()},_updateDisplay:function(){this.setFieldValue(this._procCode,"procCode");this.setFieldValue(this._argumentNames,"argumentNames");this.setFieldValue(this._argumentDefaults,"argumentDefaults");
+		this.setFieldValue(this._warp,"warp")}};
+		Blockly.Blocks.procedures_callnoreturn={init:function(){this.setPreviousStatement(!0);this.setNextStatement(!0);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this._procCode=""},mutationToDom:function(){var a=document.createElement("mutation");a.setAttribute("proccode",this._procCode);return a},domToMutation:function(a){this._procCode=a.getAttribute("proccode");this._updateDisplay()},_updateDisplay:function(){for(var a=
+		this._procCode.split(/(?=[^\\]\%[nbs])/),a=a.map(function(a){return a.trim()}),b=0,f=0,d;d=a[f];f++){if("%"==d.substring(0,1)){var e=d.substring(1,2);d=d.substring(2).trim();var c="input"+b++;switch(e){case "n":e=this.appendValueInput(c);c=this.workspace.newBlock("math_number");c.setShadow(!0);c.outputConnection.connect(e.connection);break;case "b":e=this.appendValueInput(c);e.setCheck("Boolean");break;case "s":e=this.appendValueInput(c),c=this.workspace.newBlock("text"),c.setShadow(!0),c.outputConnection.connect(e.connection)}}else d=
+		d.trim();this.appendDummyInput().appendField(d.replace(/\\%/,"%"))}}};
+		Blockly.Blocks.procedures_param={init:function(){this.appendDummyInput().appendField(new Blockly.FieldLabel,"paramName");this.setPreviousStatement(!1);this.setNextStatement(!1);this.setOutput(!0);this.setCategory(Blockly.Categories.more);this.setColour(Blockly.Colours.more.primary,Blockly.Colours.more.secondary,Blockly.Colours.more.tertiary);this._paramName="undefined";this._shape="r"},mutationToDom:function(){var a=document.createElement("mutation");a.setAttribute("paramname",this._paramName);a.setAttribute("shape",
+		this._shape);return a},domToMutation:function(a){this._paramName=a.getAttribute("paramname");this._shape=a.getAttribute("shape");this._updateDisplay()},_updateDisplay:function(){this.setFieldValue(this._paramName,"paramName");switch(this._shape){case "b":this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL);this.setOutput(!0,"Boolean");break;default:this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND),this.setOutput(!0,"String")}}};Blockly.Blocks.sensing={};Blockly.Blocks.sensing_touchingobject={init:function(){this.jsonInit({message0:"touching %1?",args0:[{type:"input_value",name:"TOUCHINGOBJECTMENU"}],inputsInline:!0,output:"Boolean",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL})}};
 		Blockly.Blocks.sensing_touchingobjectmenu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"TOUCHINGOBJECTMENU",options:[["mouse-pointer","_mouse_"],["edge","_edge_"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sensing.secondary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sensing_touchingcolor={init:function(){this.jsonInit({message0:"touching color %1?",args0:[{type:"input_value",name:"COLOR"}],inputsInline:!0,output:"Boolean",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL})}};
 		Blockly.Blocks.sensing_coloristouchingcolor={init:function(){this.jsonInit({message0:"color %1 is touching %2?",args0:[{type:"input_value",name:"COLOR"},{type:"input_value",name:"COLOR2"}],inputsInline:!0,output:"Boolean",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL})}};
@@ -7954,13 +7934,24 @@ webpackJsonp([0],{
 		Blockly.Blocks.sensing_current={init:function(){this.jsonInit({message0:"current %1",args0:[{type:"input_value",name:"CURRENTMENU"}],inputsInline:!0,output:"Number",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
 		Blockly.Blocks.sensing_currentmenu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"CURRENTMENU",options:[["year","YEAR"],["month","MONTH"],["date","DATE"],["day of week","DAYOFWEEK"],["hour","HOUR"],["minute","MINUTE"],["second","SECOND"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sensing.secondary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sensing_dayssince2000={init:function(){this.jsonInit({message0:"days since 2000",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.sensing_username={init:function(){this.jsonInit({message0:"username",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};Blockly.Blocks.sound={};Blockly.Blocks.sound_sounds_option={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SOUND_MENU",options:[["meow","MEOW"],["meow2","MEOW2"],["pop","POP"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sensing_username={init:function(){this.jsonInit({message0:"username",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};Blockly.Blocks.sound={};Blockly.Blocks.sound_sounds_option={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SOUND_MENU",options:[["meow","0"],["boing","1"],["cave","2"],["drip drop","3"],["drum machine","4"],["eggs","5"],["zoop","6"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sound_play={init:function(){this.jsonInit({message0:"play sound %1",args0:[{type:"input_value",name:"SOUND_MENU"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
-		Blockly.Blocks.sound_playuntildone={init:function(){this.jsonInit({message0:"play sound %1 until done",args0:[{type:"input_value",name:"SOUND_MENU"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_playuntildone={init:function(){this.jsonInit({message0:"play sound %1 until done",args0:[{type:"input_value",name:"SOUND_MENU"}],inputsInline:!0,previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_playwithpitch={init:function(){this.jsonInit({message0:"play sound %1 with pitch %2",args0:[{type:"input_value",name:"SOUND_NUM"},{type:"input_value",name:"PITCH"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_stopallsounds={init:function(){this.jsonInit({message0:"stop all sounds",previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_beats_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"BEATS",options:[["1/8","0.125"],["1/4","0.25"],["1/2","0.5"],["1","1"],["2","2"],["4","4"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sound_playdrum={init:function(){this.jsonInit({message0:"play drum %1",args0:[{type:"input_value",name:"DRUMTYPE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_playdrumforbeats={init:function(){this.jsonInit({message0:"play drum %1 for %2 beats",args0:[{type:"input_value",name:"DRUMTYPE"},{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_restforbeats={init:function(){this.jsonInit({message0:"rest for %1 beats",args0:[{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
-		Blockly.Blocks.sound_playnoteforbeats={init:function(){this.jsonInit({message0:"play note %1 to %2 beats",args0:[{type:"input_value",name:"NOTE"},{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_playnote={init:function(){this.jsonInit({message0:"play note %1",args0:[{type:"input_value",name:"NOTE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_playnoteforbeats={init:function(){this.jsonInit({message0:"play note %1 for %2 beats",args0:[{type:"input_value",name:"NOTE"},{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_scales_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SCALE",options:[["major","MAJOR"],["minor","MINOR"],["pentatonic","PENTATONIC"],["chromatic","CHROMATIC"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sound_roots_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"ROOT",options:[["C","0"],["C#","1"],["D","2"],["D#","3"],["E","4"],["F","5"],["F#","6"],["G","7"],["G#","8"],["A","9"],["A#","10"],["B","11"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sound_setkey={init:function(){this.jsonInit({message0:"set key %1 %2",args0:[{type:"input_value",name:"ROOT"},{type:"input_value",name:"SCALE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_effects_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"EFFECT",options:[["echo","ECHO"],["pan left/right","PAN"],["reverb","REVERB"],["pitch","PITCH"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sound_seteffectto={init:function(){this.jsonInit({message0:"set effect %1 to %2",args0:[{type:"input_value",name:"EFFECT"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_changeeffectby={init:function(){this.jsonInit({message0:"change effect %1 by %2",args0:[{type:"input_value",name:"EFFECT"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_cleareffects={init:function(){this.jsonInit({message0:"clear audio effects",previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_setinstrumentto={init:function(){this.jsonInit({message0:"set instrument to %1",args0:[{type:"input_value",name:"INSTRUMENT"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_changevolumeby={init:function(){this.jsonInit({message0:"change volume by %1",args0:[{type:"input_value",name:"VOLUME"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_setvolumeto={init:function(){this.jsonInit({message0:"set volume to %1%",args0:[{type:"input_value",name:"VOLUME"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
@@ -9643,7 +9634,7 @@ webpackJsonp([0],{
 		*/
 		Blockly.Colours={motion:{primary:"#4C97FF",secondary:"#4280D7",tertiary:"#3373CC"},looks:{primary:"#9966FF",secondary:"#855CD6",tertiary:"#774DCB"},sounds:{primary:"#CF63CF",secondary:"#C94FC9",tertiary:"#BD42BD"},control:{primary:"#FFAB19",secondary:"#EC9C13",tertiary:"#CF8B17"},event:{primary:"#FFBF00",secondary:"#E6AC00",tertiary:"#CC9900"},sensing:{primary:"#5CB1D6",secondary:"#47A8D1",tertiary:"#2E8EB8"},pen:{primary:"#0fBD8C",secondary:"#0DA57A",tertiary:"#0B8E69"},operators:{primary:"#59C059",
 		secondary:"#46B946",tertiary:"#389438"},data:{primary:"#FF8C1A",secondary:"#FF8000",tertiary:"#DB6E00"},more:{primary:"#FF6680",secondary:"#FF4D6A",tertiary:"#FF3355"},text:"#575E75",workspace:"#F5F8FF",toolboxHover:"#4C97FF",toolboxSelected:"#e9eef2",toolboxText:"#575E75",toolbox:"#FFFFFF",flyout:"#DDDDDD",scrollbar:"#CCCCCC",scrollbarHover:"#BBBBBB",textField:"#FFFFFF",insertionMarker:"#949494",insertionMarkerOpacity:.6,dragShadowOpacity:.3,stackGlow:"#FFF200",stackGlowOpacity:1,replacementGlow:"#FFFFFF",
-		replacementGlowOpacity:1,colourPickerStroke:"#FFFFFF",fieldShadow:"rgba(0,0,0,0.1)",dropDownShadow:"rgba(0, 0, 0, .3)",numPadBackground:"#547AB2",numPadBorder:"#435F91",numPadActiveBackground:"#435F91",numPadText:"#FFFFFF",valueReportBackground:"#FFFFFF",valueReportBorder:"#AAAAAA"};Blockly.Blocks.math={};Blockly.Blocks.math_number={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM"}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};Blockly.Blocks.math_integer={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM",precision:1}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
+		replacementGlowOpacity:1,colourPickerStroke:"#FFFFFF",fieldShadow:"rgba(0,0,0,0.1)",dropDownShadow:"rgba(0, 0, 0, .3)",numPadBackground:"#547AB2",numPadBorder:"#435F91",numPadActiveBackground:"#435F91",numPadText:"#FFFFFF",valueReportBackground:"#FFFFFF",valueReportBorder:"#AAAAAA"};Blockly.Blocks.math={};Blockly.Blocks.math_number={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM",value:"0"}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};Blockly.Blocks.math_integer={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM",precision:1}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
 		Blockly.Blocks.math_whole_number={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM",min:0,precision:1}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};Blockly.Blocks.math_positive_number={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_number",name:"NUM",min:0}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
 		Blockly.Blocks.math_angle={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_angle",name:"NUM",value:90}],output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};Blockly.Blocks.texts={};Blockly.Blocks.text={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_input",name:"TEXT"}],output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
 
@@ -26428,6 +26419,11 @@ webpackJsonp([0],{
 		Sequencer.prototype.stepToProcedure = function (thread, procedureName) {
 		    var definition = thread.target.blocks.getProcedureDefinition(procedureName);
 		    thread.pushStack(definition);
+		    // Check if the call is recursive. If so, yield.
+		    // @todo: Have behavior match Scratch 2.0.
+		    if (thread.stack.indexOf(definition) > -1) {
+		        thread.setStatus(Thread.STATUS_YIELD_FRAME);
+		    }
 		};
 
 		/**
@@ -26650,6 +26646,7 @@ webpackJsonp([0],{
 		        this.stackFrames.push({
 		            reported: {}, // Collects reported input values.
 		            waitingReporter: null, // Name of waiting reporter.
+		            params: {}, // Procedure parameters.
 		            executionContext: {} // A context passed to block implementations.
 		        });
 		    }
@@ -26700,6 +26697,21 @@ webpackJsonp([0],{
 		        parentStackFrame.reported[waitingReporter] = value;
 		        parentStackFrame.waitingReporter = null;
 		    }
+		};
+
+		Thread.prototype.pushParam = function (paramName, value) {
+		    var stackFrame = this.peekStackFrame();
+		    stackFrame.params[paramName] = value;
+		};
+
+		Thread.prototype.getParam = function (paramName) {
+		    for (var i = this.stackFrames.length - 1; i >= 0; i--) {
+		        var frame = this.stackFrames[i];
+		        if (frame.params.hasOwnProperty(paramName)) {
+		            return frame.params[paramName];
+		        }
+		    }
+		    return null;
 		};
 
 		/**
@@ -26906,6 +26918,15 @@ webpackJsonp([0],{
 		        },
 		        startProcedure: function (procedureName) {
 		            sequencer.stepToProcedure(thread, procedureName);
+		        },
+		        getProcedureParamNames: function (procedureName) {
+		            return thread.target.blocks.getProcedureParamNames(procedureName);
+		        },
+		        pushParam: function (paramName, paramValue) {
+		            thread.pushParam(paramName, paramValue);
+		        },
+		        getParam: function (paramName) {
+		            return thread.getParam(paramName);
 		        },
 		        startHats: function(requestedHat, opt_matchFields, opt_target) {
 		            return (
@@ -29421,7 +29442,8 @@ webpackJsonp([0],{
 		Scratch3ProcedureBlocks.prototype.getPrimitives = function() {
 		    return {
 		        'procedures_defnoreturn': this.defNoReturn,
-		        'procedures_callnoreturn': this.callNoReturn
+		        'procedures_callnoreturn': this.callNoReturn,
+		        'procedures_param': this.param
 		    };
 		};
 
@@ -29431,10 +29453,24 @@ webpackJsonp([0],{
 
 		Scratch3ProcedureBlocks.prototype.callNoReturn = function (args, util) {
 		    if (!util.stackFrame.executed) {
-		        var procedureName = args.mutation.name;
+		        var procedureName = args.mutation.proccode;
+		        var paramNames = util.getProcedureParamNames(procedureName);
+		        for (var i = 0; i < paramNames.length; i++) {
+		            if (args.hasOwnProperty('input' + i)) {
+		                util.pushParam(paramNames[i], args['input' + i]);
+		            }
+		        }
 		        util.stackFrame.executed = true;
 		        util.startProcedure(procedureName);
 		    }
+		};
+
+		Scratch3ProcedureBlocks.prototype.param = function (args, util) {
+		    var value = util.getParam(args.mutation.paramname);
+		    if (!value) {
+		        return 0;
+		    }
+		    return value;
 		};
 
 		module.exports = Scratch3ProcedureBlocks;
@@ -29650,6 +29686,40 @@ webpackJsonp([0],{
 		}
 
 		/**
+		 * Convert a Scratch 2.0 procedure string (e.g., "my_procedure %s %b %n")
+		 * into an argument map. This allows us to provide the expected inputs
+		 * to a mutated procedure call.
+		 * @param {string} procCode Scratch 2.0 procedure string.
+		 * @return {Object} Argument map compatible with those in sb2specmap.
+		 */
+		function parseProcedureArgMap (procCode) {
+		    var argMap = [
+		        {} // First item in list is op string.
+		    ];
+		    var INPUT_PREFIX = 'input';
+		    var inputCount = 0;
+		    // Split by %n, %b, %s.
+		    var parts = procCode.split(/(?=[^\\]\%[nbs])/);
+		    for (var i = 0; i < parts.length; i++) {
+		        var part = parts[i].trim();
+		        if (part.substring(0, 1) == '%') {
+		            var argType = part.substring(1, 2);
+		            var arg = {
+		                type: 'input',
+		                inputName: INPUT_PREFIX + (inputCount++)
+		            };
+		            if (argType == 'n') {
+		                arg.inputOp = 'math_number';
+		            } else if (argType == 's') {
+		                arg.inputOp = 'text';
+		            }
+		            argMap.push(arg);
+		        }
+		    }
+		    return argMap;
+		}
+
+		/**
 		 * Parse a single SB2 JSON-formatted block and its children.
 		 * @param {!Object} sb2block SB2 JSON-formatted block.
 		 * @return {Object} Scratch VM format block.
@@ -29673,6 +29743,10 @@ webpackJsonp([0],{
 		        shadow: false, // No shadow blocks in an SB2 by default.
 		        children: [] // Store any generated children, flattened in `flatten`.
 		    };
+		    // For a procedure call, generate argument map from proc string.
+		    if (oldOpcode == 'call') {
+		        blockMetadata.argMap = parseProcedureArgMap(sb2block[1]);
+		    }
 		    // Look at the expected arguments in `blockMetadata.argMap.`
 		    // The basic problem here is to turn positional SB2 arguments into
 		    // non-positional named Scratch VM arguments.
@@ -29774,11 +29848,43 @@ webpackJsonp([0],{
 		        }
 		    }
 		    // Special cases to generate mutations.
-		    if (oldOpcode == 'call') {
+		    if (oldOpcode == 'stopScripts') {
+		        // Mutation for stop block: if the argument is 'other scripts',
+		        // the block needs a next connection.
+		        if (sb2block[1] == 'other scripts in sprite') {
+		            activeBlock.mutation = {
+		                tagName: 'mutation',
+		                hasnext: 'true',
+		                children: []
+		            };
+		        }
+		    } else if (oldOpcode == 'procDef') {
+		        // Mutation for procedure definition:
+		        // store all 2.0 proc data.
+		        var procData = sb2block.slice(1);
+		        activeBlock.mutation = {
+		            tagName: 'mutation',
+		            proccode: procData[0], // e.g., "abc %n %b %s"
+		            argumentnames: JSON.stringify(procData[1]), // e.g. ['arg1', 'arg2']
+		            argumentdefaults: JSON.stringify(procData[2]), // e.g., [1, 'abc']
+		            warp: procData[3], // Warp mode, e.g., true/false.
+		            children: []
+		        };
+		    } else if (oldOpcode == 'call') {
+		        // Mutation for procedure call:
+		        // string for proc code (e.g., "abc %n %b %s").
 		        activeBlock.mutation = {
 		            tagName: 'mutation',
 		            children: [],
-		            name: sb2block[1]
+		            proccode: sb2block[1]
+		        };
+		    } else if (oldOpcode == 'getParam') {
+		        // Mutation for procedure parameter.
+		        activeBlock.mutation = {
+		            tagName: 'mutation',
+		            children: [],
+		            paramname: sb2block[1], // Name of parameter.
+		            shape: sb2block[2] // Shape - in 2.0, 'r' or 'b'.
 		        };
 		    }
 		    return activeBlock;
@@ -29944,8 +30050,25 @@ webpackJsonp([0],{
 		        var block = this._blocks[id];
 		        if ((block.opcode == 'procedures_defnoreturn' ||
 		            block.opcode == 'procedures_defreturn') &&
-		            block.fields['NAME'].value == name) {
+		            block.mutation.proccode == name) {
 		            return id;
+		        }
+		    }
+		    return null;
+		};
+
+		/**
+		 * Get the procedure definition for a given name.
+		 * @param {?string} name Name of procedure to query.
+		 * @return {?string} ID of procedure definition.
+		 */
+		Blocks.prototype.getProcedureParamNames = function (name) {
+		    for (var id in this._blocks) {
+		        var block = this._blocks[id];
+		        if ((block.opcode == 'procedures_defnoreturn' ||
+		            block.opcode == 'procedures_defreturn') &&
+		            block.mutation.proccode == name) {
+		            return JSON.parse(block.mutation.argumentnames);
 		        }
 		    }
 		    return null;
@@ -30227,7 +30350,9 @@ webpackJsonp([0],{
 		    var mutationString = '<' + mutation.tagName;
 		    for (var prop in mutation) {
 		        if (prop == 'children' || prop == 'tagName') continue;
-		        mutationString += ' ' + prop + '="' + mutation[prop] + '"';
+		        var mutationValue = (typeof mutation[prop] === 'string') ?
+		            xmlEscape(mutation[prop]) : mutation[prop];
+		        mutationString += ' ' + prop + '="' + mutationValue + '"';
 		    }
 		    mutationString += '>';
 		    for (var i = 0; i < mutation.children.length; i++) {
@@ -41482,9 +41607,8 @@ webpackJsonp([0],{
 		        'opcode':'control_stop',
 		        'argMap':[
 		            {
-		                'type':'input',
-		                'inputOp':'control_stop_menu',
-		                'inputName':'STOP_OPTION'
+		                'type':'field',
+		                'fieldName':'STOP_OPTION'
 		            }
 		        ]
 		    },
@@ -42105,15 +42229,10 @@ webpackJsonp([0],{
 		    },
 		    'procDef':{
 		        'opcode':'procedures_defnoreturn',
-		        'argMap':[
-		            {
-		                'type':'field',
-		                'fieldName':'NAME'
-		            }
-		        ]
+		        'argMap':[]
 		    },
 		    'getParam':{
-		        'opcode':'proc_param',
+		        'opcode':'procedures_param',
 		        'argMap':[]
 		    },
 		    'call':{

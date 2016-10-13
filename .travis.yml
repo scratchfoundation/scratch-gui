@@ -9,7 +9,6 @@ env:
   global:
   - BASE_PATH=/scratch-gui/
 before_install:
-- npm install react@15 react-dom@15
 - rm -rf node_modules/scratch-*
 after_script:
 - |

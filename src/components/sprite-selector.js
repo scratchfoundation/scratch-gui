@@ -1,15 +1,15 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
 
 class SpriteSelector extends React.Component {
     constructor (props) {
         super(props);
+        bindAll(this, ['onChange', 'targetsUpdate']);
         this.state = {
             targets: {
                 targetList: []
             }
         };
-        this.targetsUpdate = this.targetsUpdate.bind(this);
-        this.onChange = this.onChange.bind(this);
     }
     componentDidMount () {
         this.props.vm.on('targetsUpdate', this.targetsUpdate);

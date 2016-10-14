@@ -1,9 +1,10 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
 
 class StopAll extends React.Component {
     constructor (props) {
         super(props);
-        this.onClick = this.onClick.bind(this);
+        bindAll(this, ['onClick']);
     }
     onClick (e) {
         e.preventDefault();

@@ -1,11 +1,22 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
+const Renderer = require('scratch-render');
 
 class Stage extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, ['initRenderer']);
+    }
+    initRenderer (stage) {
+        this.stage = stage;
+        this.renderer = new Renderer(stage);
+        this.props.onReceiveRenderer(this.renderer, this.stage);
+    }
     render () {
         return (
             <canvas
                 className="scratch-stage"
-                ref={this.props.stageRef}
+                ref={this.initRenderer}
                 style={{
                     position: 'absolute',
                     top: 10,
@@ -19,13 +30,13 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    stageRef: React.PropTypes.func,
+    onReceiveRenderer: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number
 };
 
 Stage.defaultProps = {
-    stageRef: function () {},
+    onReceiveRenderer: function () {},
     width: 480,
     height: 360
 };

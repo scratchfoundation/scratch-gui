@@ -109,10 +109,9 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var bindAll = __webpack_require__(173);
 	var React = __webpack_require__(1);
 
-	var Blocks = __webpack_require__(174);
+	var Blocks = __webpack_require__(173);
 	var GreenFlag = __webpack_require__(184);
 	var SpriteSelector = __webpack_require__(185);
 	var Stage = __webpack_require__(186);
@@ -128,8 +127,6 @@ webpackJsonp([0],{
 
 	        var _this = _possibleConstructorReturn(this, (GUI.__proto__ || Object.getPrototypeOf(GUI)).call(this, props));
 
-	        bindAll(_this, ['animate', 'onReceiveRenderer', 'onReceiveWorkspace']);
-	        _this.state = {};
 	        _this.vmManager = new VMManager(_this.props.vm);
 	        return _this;
 	    }
@@ -140,7 +137,14 @@ webpackJsonp([0],{
 	            this.vmManager.attachKeyboardEvents();
 	            this.props.vm.loadProject(this.props.projectData);
 	            this.props.vm.start();
-	            requestAnimationFrame(this.animate);
+	            this.vmManager.startAnimation();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.vmManager.detachKeyboardEvents();
+	            this.props.vm.stopAll();
+	            this.vmManager.stopAnimation();
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
@@ -148,26 +152,6 @@ webpackJsonp([0],{
 	            if (this.props.projectData !== nextProps.projectData) {
 	                this.props.vm.loadProject(nextProps.projectData);
 	            }
-	        }
-	    }, {
-	        key: 'animate',
-	        value: function animate() {
-	            this.props.vm.animationFrame();
-	            requestAnimationFrame(this.animate);
-	        }
-	    }, {
-	        key: 'onReceiveRenderer',
-	        value: function onReceiveRenderer(renderer, stage) {
-	            this.renderer = renderer;
-	            this.stage = stage;
-	            this.props.vm.attachRenderer(this.renderer);
-	            this.vmManager.attachMouseEvents(this.stage);
-	        }
-	    }, {
-	        key: 'onReceiveWorkspace',
-	        value: function onReceiveWorkspace(workspace) {
-	            this.workspace = workspace;
-	            this.vmManager.attachWorkspace(this.workspace);
 	        }
 	    }, {
 	        key: 'render',
@@ -186,16 +170,13 @@ webpackJsonp([0],{
 	                },
 	                React.createElement(GreenFlag, { vm: this.props.vm }),
 	                React.createElement(StopAll, { vm: this.props.vm }),
-	                React.createElement(Stage, {
-	                    onReceiveRenderer: this.onReceiveRenderer
-	                }),
+	                React.createElement(Stage, { vm: this.props.vm }),
 	                React.createElement(SpriteSelector, { vm: this.props.vm }),
 	                React.createElement(Blocks, {
 	                    options: {
 	                        media: this.props.basePath + 'static/blocks-media/'
 	                    },
-	                    vm: this.props.vm,
-	                    onReceiveWorkspace: this.onReceiveWorkspace
+	                    vm: this.props.vm
 	                })
 	            );
 	        }
@@ -220,6 +201,173 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 173:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var defaultsDeep = __webpack_require__(175);
+	var React = __webpack_require__(1);
+	var ScratchBlocks = __webpack_require__(183);
+
+	var Blocks = function (_React$Component) {
+	    _inherits(Blocks, _React$Component);
+
+	    function Blocks(props) {
+	        _classCallCheck(this, Blocks);
+
+	        var _this = _possibleConstructorReturn(this, (Blocks.__proto__ || Object.getPrototypeOf(Blocks)).call(this, props));
+
+	        bindAll(_this, ['attachVM', 'detachVM', 'onStackGlowOn', 'onStackGlowOff', 'onBlockGlowOn', 'onBlockGlowOff', 'onVisualReport', 'onWorkspaceUpdate']);
+	        return _this;
+	    }
+
+	    _createClass(Blocks, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+	            this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
+	            this.attachVM();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.detachVM();
+	            this.workspace.dispose();
+	        }
+	    }, {
+	        key: 'attachVM',
+	        value: function attachVM() {
+	            this.workspace.addChangeListener(this.props.vm.blockListener);
+	            this.workspace.getFlyout().getWorkspace().addChangeListener(this.props.vm.flyoutBlockListener);
+	            this.props.vm.on('STACK_GLOW_ON', this.onStackGlowOn);
+	            this.props.vm.on('STACK_GLOW_OFF', this.onStackGlowOff);
+	            this.props.vm.on('BLOCK_GLOW_ON', this.onBlockGlowOn);
+	            this.props.vm.on('BLOCK_GLOW_OFF', this.onBlockGlowOff);
+	            this.props.vm.on('VISUAL_REPORT', this.onVisualReport);
+	            this.props.vm.on('workspaceUpdate', this.onWorkspaceUpdate);
+	        }
+	    }, {
+	        key: 'detachVM',
+	        value: function detachVM() {
+	            this.props.vm.off('STACK_GLOW_ON', this.onStackGlowOn);
+	            this.props.vm.off('STACK_GLOW_OFF', this.onStackGlowOff);
+	            this.props.vm.off('BLOCK_GLOW_ON', this.onBlockGlowOn);
+	            this.props.vm.off('BLOCK_GLOW_OFF', this.onBlockGlowOff);
+	            this.props.vm.off('VISUAL_REPORT', this.onVisualReport);
+	            this.props.vm.off('workspaceUpdate', this.onWorkspaceUpdate);
+	        }
+	    }, {
+	        key: 'onStackGlowOn',
+	        value: function onStackGlowOn(data) {
+	            this.workspace.glowStack(data.id, true);
+	        }
+	    }, {
+	        key: 'onStackGlowOff',
+	        value: function onStackGlowOff(data) {
+	            this.workspace.glowStack(data.id, false);
+	        }
+	    }, {
+	        key: 'onBlockGlowOn',
+	        value: function onBlockGlowOn(data) {
+	            this.workspace.glowBlock(data.id, true);
+	        }
+	    }, {
+	        key: 'onBlockGlowOff',
+	        value: function onBlockGlowOff(data) {
+	            this.workspace.glowBlock(data.id, false);
+	        }
+	    }, {
+	        key: 'onVisualReport',
+	        value: function onVisualReport(data) {
+	            this.workspace.reportValue(data.id, data.value);
+	        }
+	    }, {
+	        key: 'onWorkspaceUpdate',
+	        value: function onWorkspaceUpdate(data) {
+	            ScratchBlocks.Events.disable();
+	            this.workspace.clear();
+	            var dom = ScratchBlocks.Xml.textToDom(data.xml);
+	            ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
+	            ScratchBlocks.Events.enable();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement('div', {
+	                className: 'scratch-blocks',
+	                ref: 'scratchBlocks',
+	                style: {
+	                    position: 'absolute',
+	                    top: 0,
+	                    right: '40%',
+	                    bottom: 0,
+	                    left: 0
+	                }
+	            });
+	        }
+	    }]);
+
+	    return Blocks;
+	}(React.Component);
+
+	Blocks.propTypes = {
+	    options: React.PropTypes.shape({
+	        media: React.PropTypes.string,
+	        zoom: React.PropTypes.shape({
+	            controls: React.PropTypes.boolean,
+	            wheel: React.PropTypes.boolean,
+	            startScale: React.PropTypes.number
+	        }),
+	        colours: React.PropTypes.shape({
+	            workspace: React.PropTypes.string,
+	            flyout: React.PropTypes.string,
+	            scrollbar: React.PropTypes.string,
+	            scrollbarHover: React.PropTypes.string,
+	            insertionMarker: React.PropTypes.string,
+	            insertionMarkerOpacity: React.PropTypes.number,
+	            fieldShadow: React.PropTypes.string,
+	            dragShadowOpacity: React.PropTypes.number
+	        })
+	    }),
+	    vm: React.PropTypes.object
+	};
+
+	Blocks.defaultOptions = {
+	    zoom: {
+	        controls: true,
+	        wheel: true,
+	        startScale: 0.75
+	    },
+	    colours: {
+	        workspace: '#334771',
+	        flyout: '#283856',
+	        scrollbar: '#24324D',
+	        scrollbarHover: '#0C111A',
+	        insertionMarker: '#FFFFFF',
+	        insertionMarkerOpacity: 0.3,
+	        fieldShadow: 'rgba(255, 255, 255, 0.3)',
+	        dragShadowOpacity: 0.6
+	    }
+	};
+
+	Blocks.defaultProps = {
+	    options: Blocks.defaultOptions
+	};
+
+	module.exports = Blocks;
+
+/***/ },
+
+/***/ 174:
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -1734,116 +1882,6 @@ webpackJsonp([0],{
 	module.exports = bindAll;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-
-/***/ 174:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var defaultsDeep = __webpack_require__(175);
-	var React = __webpack_require__(1);
-	var ScratchBlocks = __webpack_require__(183);
-
-	var Blocks = function (_React$Component) {
-	    _inherits(Blocks, _React$Component);
-
-	    function Blocks() {
-	        _classCallCheck(this, Blocks);
-
-	        return _possibleConstructorReturn(this, (Blocks.__proto__ || Object.getPrototypeOf(Blocks)).apply(this, arguments));
-	    }
-
-	    _createClass(Blocks, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-	            this.workspace = ScratchBlocks.inject(this.refs.scratchBlocks, workspaceConfig);
-	            this.props.onReceiveWorkspace(this.workspace);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            this.workspace.dispose();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return React.createElement('div', {
-	                className: 'scratch-blocks',
-	                ref: 'scratchBlocks',
-	                style: {
-	                    position: 'absolute',
-	                    top: 0,
-	                    right: '40%',
-	                    bottom: 0,
-	                    left: 0
-	                }
-	            });
-	        }
-	    }]);
-
-	    return Blocks;
-	}(React.Component);
-
-	Blocks.propTypes = {
-	    onReceiveWorkspace: React.PropTypes.func,
-	    options: React.PropTypes.shape({
-	        // The toolbox is actually an element, but React doesn't agree :/
-	        toolbox: React.PropTypes.object,
-	        media: React.PropTypes.string,
-	        zoom: React.PropTypes.shape({
-	            controls: React.PropTypes.boolean,
-	            wheel: React.PropTypes.boolean,
-	            startScale: React.PropTypes.number
-	        }),
-	        colours: React.PropTypes.shape({
-	            workspace: React.PropTypes.string,
-	            flyout: React.PropTypes.string,
-	            scrollbar: React.PropTypes.string,
-	            scrollbarHover: React.PropTypes.string,
-	            insertionMarker: React.PropTypes.string,
-	            insertionMarkerOpacity: React.PropTypes.number,
-	            fieldShadow: React.PropTypes.string,
-	            dragShadowOpacity: React.PropTypes.number
-	        })
-	    }),
-	    vm: React.PropTypes.object
-	};
-
-	Blocks.defaultOptions = {
-	    zoom: {
-	        controls: true,
-	        wheel: true,
-	        startScale: 0.75
-	    },
-	    colours: {
-	        workspace: '#334771',
-	        flyout: '#283856',
-	        scrollbar: '#24324D',
-	        scrollbarHover: '#0C111A',
-	        insertionMarker: '#FFFFFF',
-	        insertionMarkerOpacity: 0.3,
-	        fieldShadow: 'rgba(255, 255, 255, 0.3)',
-	        dragShadowOpacity: 0.6
-	    }
-	};
-
-	Blocks.defaultProps = {
-	    onReceiveWorkspace: function onReceiveWorkspace() {},
-	    options: Blocks.defaultOptions
-	};
-
-	module.exports = Blocks;
 
 /***/ },
 
@@ -11184,7 +11222,7 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var bindAll = __webpack_require__(173);
+	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
 
 	var GreenFlag = function (_React$Component) {
@@ -11257,7 +11295,7 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var bindAll = __webpack_require__(173);
+	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
 
 	var SpriteSelector = function (_React$Component) {
@@ -11340,6 +11378,8 @@ webpackJsonp([0],{
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11348,7 +11388,7 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var bindAll = __webpack_require__(173);
+	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
 	var Renderer = __webpack_require__(187);
 
@@ -11360,23 +11400,114 @@ webpackJsonp([0],{
 
 	        var _this = _possibleConstructorReturn(this, (Stage.__proto__ || Object.getPrototypeOf(Stage)).call(this, props));
 
-	        bindAll(_this, ['initRenderer']);
+	        bindAll(_this, ['attachMouseEvents', 'detachMouseEvents', 'onMouseUp', 'onMouseMove', 'onMouseDown']);
 	        return _this;
 	    }
 
 	    _createClass(Stage, [{
-	        key: 'initRenderer',
-	        value: function initRenderer(stage) {
-	            this.stage = stage;
-	            this.renderer = new Renderer(stage);
-	            this.props.onReceiveRenderer(this.renderer, this.stage);
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.renderer = new Renderer(this.canvas);
+	            this.props.vm.attachRenderer(this.renderer);
+	            this.attachMouseEvents(this.canvas);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.detachMouseEvents(this.canvas);
+	        }
+	    }, {
+	        key: 'attachMouseEvents',
+	        value: function attachMouseEvents(canvas) {
+	            document.addEventListener('mousemove', this.onMouseMove);
+	            canvas.addEventListener('mouseup', this.onMouseUp);
+	            canvas.addEventListener('mousedown', this.onMouseDown);
+	        }
+	    }, {
+	        key: 'detachMouseEvents',
+	        value: function detachMouseEvents(canvas) {
+	            document.removeEventListener('mousemove', this.onMouseMove);
+	            canvas.removeEventListener('mouseup', this.onMouseUp);
+	            canvas.removeEventListener('mousedown', this.onMouseDown);
+	        }
+	    }, {
+	        key: 'onMouseMove',
+	        value: function onMouseMove(e) {
+	            var rect = this.canvas.getBoundingClientRect();
+	            var coordinates = {
+	                x: e.clientX - rect.left,
+	                y: e.clientY - rect.top,
+	                canvasWidth: rect.width,
+	                canvasHeight: rect.height
+	            };
+	            this.props.vm.postIOData('mouse', coordinates);
+	        }
+	    }, {
+	        key: 'onMouseUp',
+	        value: function onMouseUp(e) {
+	            var rect = this.canvas.getBoundingClientRect();
+	            var data = {
+	                isDown: false,
+	                x: e.clientX - rect.left,
+	                y: e.clientY - rect.top,
+	                canvasWidth: rect.width,
+	                canvasHeight: rect.height
+	            };
+	            this.props.vm.postIOData('mouse', data);
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: 'onMouseDown',
+	        value: function onMouseDown(e) {
+	            var rect = this.canvas.getBoundingClientRect();
+	            var data = {
+	                isDown: true,
+	                x: e.clientX - rect.left,
+	                y: e.clientY - rect.top,
+	                canvasWidth: rect.width,
+	                canvasHeight: rect.height
+	            };
+	            this.props.vm.postIOData('mouse', data);
+	            e.preventDefault();
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
+	            return React.createElement(StageCanvas, _extends({}, this.props, {
+	                canvasRef: function canvasRef(canvas) {
+	                    return _this2.canvas = canvas;
+	                }
+	            }));
+	        }
+	    }]);
+
+	    return Stage;
+	}(React.Component);
+
+	Stage.propTypes = {
+	    vm: React.PropTypes.shape({
+	        attachRenderer: React.PropTypes.func,
+	        postIOData: React.PropTypes.func
+	    }).isRequired
+	};
+
+	var StageCanvas = function (_React$Component2) {
+	    _inherits(StageCanvas, _React$Component2);
+
+	    function StageCanvas() {
+	        _classCallCheck(this, StageCanvas);
+
+	        return _possibleConstructorReturn(this, (StageCanvas.__proto__ || Object.getPrototypeOf(StageCanvas)).apply(this, arguments));
+	    }
+
+	    _createClass(StageCanvas, [{
+	        key: 'render',
+	        value: function render() {
 	            return React.createElement('canvas', {
 	                className: 'scratch-stage',
-	                ref: this.initRenderer,
+	                ref: this.props.canvasRef,
 	                style: {
 	                    position: 'absolute',
 	                    top: 10,
@@ -11388,17 +11519,17 @@ webpackJsonp([0],{
 	        }
 	    }]);
 
-	    return Stage;
+	    return StageCanvas;
 	}(React.Component);
 
-	Stage.propTypes = {
-	    onReceiveRenderer: React.PropTypes.func,
+	StageCanvas.propTypes = {
+	    canvasRef: React.PropTypes.func,
 	    width: React.PropTypes.number,
 	    height: React.PropTypes.number
 	};
 
-	Stage.defaultProps = {
-	    onReceiveRenderer: function onReceiveRenderer() {},
+	StageCanvas.defaultProps = {
+	    canvasRef: function canvasRef() {},
 	    width: 480,
 	    height: 360
 	};
@@ -24251,7 +24382,7 @@ webpackJsonp([0],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var bindAll = __webpack_require__(173);
+	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
 
 	var StopAll = function (_React$Component) {
@@ -42391,115 +42522,71 @@ webpackJsonp([0],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var bindAll = __webpack_require__(173);
-	var ScratchBlocks = __webpack_require__(183);
+	var bindAll = __webpack_require__(174);
 
 	var VMManager = function () {
 	    function VMManager(vm) {
 	        _classCallCheck(this, VMManager);
 
-	        bindAll(this, ['attachWorkspace', 'attachMouseEvents', 'attachKeyboardEvents']);
+	        bindAll(this, ['attachKeyboardEvents', 'detachKeyboardEvents', 'onKeyDown', 'onKeyUp', 'animate', 'startAnimation', 'stopAnimation']);
 	        this.vm = vm;
 	    }
 
 	    _createClass(VMManager, [{
-	        key: 'attachWorkspace',
-	        value: function attachWorkspace(workspace) {
-	            workspace.addChangeListener(this.vm.blockListener);
-	            var flyoutWorkspace = workspace.getFlyout().getWorkspace();
-	            flyoutWorkspace.addChangeListener(this.vm.flyoutBlockListener);
-	            this.vm.on('STACK_GLOW_ON', function (data) {
-	                return workspace.glowStack(data.id, true);
-	            });
-	            this.vm.on('STACK_GLOW_OFF', function (data) {
-	                return workspace.glowStack(data.id, false);
-	            });
-	            this.vm.on('BLOCK_GLOW_ON', function (data) {
-	                return workspace.glowBlock(data.id, true);
-	            });
-	            this.vm.on('BLOCK_GLOW_OFF', function (data) {
-	                return workspace.glowBlock(data.id, false);
-	            });
-	            this.vm.on('VISUAL_REPORT', function (data) {
-	                return workspace.reportValue(data.id, data.value);
-	            });
-	            this.vm.on('workspaceUpdate', function (data) {
-	                ScratchBlocks.Events.disable();
-	                workspace.clear();
-	                var dom = ScratchBlocks.Xml.textToDom(data.xml);
-	                ScratchBlocks.Xml.domToWorkspace(dom, workspace);
-	                ScratchBlocks.Events.enable();
-	            });
+	        key: 'startAnimation',
+	        value: function startAnimation() {
+	            this.animationFrame = requestAnimationFrame(this.animate);
 	        }
 	    }, {
-	        key: 'attachMouseEvents',
-	        value: function attachMouseEvents(stage) {
-	            var _this = this;
-
-	            document.addEventListener('mousemove', function (e) {
-	                var rect = stage.getBoundingClientRect();
-	                var coordinates = {
-	                    x: e.clientX - rect.left,
-	                    y: e.clientY - rect.top,
-	                    canvasWidth: rect.width,
-	                    canvasHeight: rect.height
-	                };
-	                _this.vm.postIOData('mouse', coordinates);
-	            });
-	            stage.addEventListener('mousedown', function (e) {
-	                var rect = stage.getBoundingClientRect();
-	                var data = {
-	                    isDown: true,
-	                    x: e.clientX - rect.left,
-	                    y: e.clientY - rect.top,
-	                    canvasWidth: rect.width,
-	                    canvasHeight: rect.height
-	                };
-	                _this.vm.postIOData('mouse', data);
-	                e.preventDefault();
-	            });
-	            stage.addEventListener('mouseup', function (e) {
-	                var rect = stage.getBoundingClientRect();
-	                var data = {
-	                    isDown: false,
-	                    x: e.clientX - rect.left,
-	                    y: e.clientY - rect.top,
-	                    canvasWidth: rect.width,
-	                    canvasHeight: rect.height
-	                };
-	                _this.vm.postIOData('mouse', data);
-	                e.preventDefault();
-	            });
+	        key: 'stopAnimation',
+	        value: function stopAnimation() {
+	            cancelAnimationFrame(this.animationFrame);
+	        }
+	    }, {
+	        key: 'animate',
+	        value: function animate() {
+	            this.vm.animationFrame();
+	            this.animationFrame = requestAnimationFrame(this.animate);
 	        }
 	    }, {
 	        key: 'attachKeyboardEvents',
 	        value: function attachKeyboardEvents() {
-	            var _this2 = this;
-
 	            // Feed keyboard events as VM I/O events.
-	            document.addEventListener('keydown', function (e) {
-	                // Don't capture keys intended for Blockly inputs.
-	                if (e.target != document && e.target != document.body) {
-	                    return;
-	                }
-	                _this2.vm.postIOData('keyboard', {
-	                    keyCode: e.keyCode,
-	                    isDown: true
-	                });
+	            document.addEventListener('keydown', this.onKeyDown);
+	            document.addEventListener('keyup', this.onKeyUp);
+	        }
+	    }, {
+	        key: 'detachKeyboardEvents',
+	        value: function detachKeyboardEvents() {
+	            document.removeEventListener('keydown', this.onKeyDown);
+	            document.removeEventListener('keyup', this.onKeyUp);
+	        }
+	    }, {
+	        key: 'onKeyDown',
+	        value: function onKeyDown(e) {
+	            // Don't capture keys intended for Blockly inputs.
+	            if (e.target != document && e.target != document.body) {
+	                return;
+	            }
+	            this.vm.postIOData('keyboard', {
+	                keyCode: e.keyCode,
+	                isDown: true
+	            });
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: 'onKeyUp',
+	        value: function onKeyUp(e) {
+	            // Always capture up events,
+	            // even those that have switched to other targets.
+	            this.vm.postIOData('keyboard', {
+	                keyCode: e.keyCode,
+	                isDown: false
+	            });
+	            // E.g., prevent scroll.
+	            if (e.target != document && e.target != document.body) {
 	                e.preventDefault();
-	            });
-	            document.addEventListener('keyup', function (e) {
-	                // Always capture up events,
-	                // even those that have switched to other targets.
-	                _this2.vm.postIOData('keyboard', {
-	                    keyCode: e.keyCode,
-	                    isDown: false
-	                });
-	                // E.g., prevent scroll.
-	                if (e.target != document && e.target != document.body) {
-	                    e.preventDefault();
-	                }
-	            });
+	            }
 	        }
 	    }]);
 

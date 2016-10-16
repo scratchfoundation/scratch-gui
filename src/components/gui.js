@@ -1,4 +1,3 @@
-const bindAll = require('lodash.bindall');
 const React = require('react');
 
 const Blocks = require('./blocks');
@@ -12,34 +11,23 @@ const VMManager = require('../lib/vm-manager');
 class GUI extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['animate', 'onReceiveRenderer', 'onReceiveWorkspace']);
-        this.state = {};
         this.vmManager = new VMManager(this.props.vm);
     }
     componentDidMount () {
         this.vmManager.attachKeyboardEvents();
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.start();
-        requestAnimationFrame(this.animate);
+        this.vmManager.startAnimation();
+    }
+    componentWillUnmount () {
+        this.vmManager.detachKeyboardEvents();
+        this.props.vm.stopAll();
+        this.vmManager.stopAnimation();
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
             this.props.vm.loadProject(nextProps.projectData);
         }
-    }
-    animate () {
-        this.props.vm.animationFrame();
-        requestAnimationFrame(this.animate);
-    }
-    onReceiveRenderer (renderer, stage) {
-        this.renderer = renderer;
-        this.stage = stage;
-        this.props.vm.attachRenderer(this.renderer);
-        this.vmManager.attachMouseEvents(this.stage);
-    }
-    onReceiveWorkspace (workspace) {
-        this.workspace = workspace;
-        this.vmManager.attachWorkspace(this.workspace);
     }
     render () {
         return (
@@ -55,16 +43,13 @@ class GUI extends React.Component {
             >
                 <GreenFlag vm={this.props.vm} />
                 <StopAll vm={this.props.vm} />
-                <Stage
-                    onReceiveRenderer={this.onReceiveRenderer}
-                />
+                <Stage vm={this.props.vm} />
                 <SpriteSelector vm={this.props.vm} />
                 <Blocks
                     options={{
                         media: this.props.basePath + 'static/blocks-media/'
                     }}
                     vm={this.props.vm}
-                    onReceiveWorkspace={this.onReceiveWorkspace}
                 />
             </div>
         );

@@ -11,6 +11,10 @@
     "clean": "rm -rf ./build && mkdir -p build",
     "deploy": "gh-pages -x -r $GH_PAGES_URL -d build -m $DEPLOY_MESSAGE",
     "lint": "eslint .",
+    "postmerge": "npm install",
+    "postrewrite": "npm install",
+    "precommit": "npm run lint",
+    "prepush": "npm run test",
     "start": "webpack-dev-server --port $npm_package_config_port --content-base=./build",
     "test": "npm run lint && npm run build"
   },
@@ -32,6 +36,7 @@
     "eslint-plugin-react": "6.2.1",
     "gh-pages": "0.11.0",
     "html-webpack-plugin": "2.22.0",
+    "husky": "0.11.9",
     "json-loader": "0.5.4",
     "lodash.bindall": "4.4.0",
     "lodash.defaultsdeep": "4.4.0",

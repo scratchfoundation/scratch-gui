@@ -25,7 +25,7 @@ class SpriteSelector extends React.Component {
     render () {
         return (
             <SpriteSelectorComponent
-                value={[this.state.targets.editingTarget]}
+                value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
                 onChange={this.onChange}
                 sprites={this.state.targets.targetList.map(target => (
                     {

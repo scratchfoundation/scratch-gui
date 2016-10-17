@@ -1,15 +1,6 @@
-const bindAll = require('lodash.bindall');
 const React = require('react');
 
-class StopAll extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, ['onClick']);
-    }
-    onClick (e) {
-        e.preventDefault();
-        this.props.vm.stopAll();
-    }
+class StopAllComponent extends React.Component {
     render () {
         return (
             <div
@@ -21,19 +12,18 @@ class StopAll extends React.Component {
                     width: 50
                 }}
             >
-                <button onClick={this.onClick}>{this.props.title}</button>
+                <button onClick={this.props.onClick}>{this.props.title}</button>
             </div>
         );
     }
 }
 
-StopAll.propTypes = {
+StopAllComponent.propTypes = {
     title: React.PropTypes.string,
-    vm: React.PropTypes.object
 };
 
-StopAll.defaultProps = {
+StopAllComponent.defaultProps = {
     title: 'Stop'
 };
 
-module.exports = StopAll;
+module.exports = StopAllComponent;

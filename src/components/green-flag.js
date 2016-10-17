@@ -1,15 +1,6 @@
-const bindAll = require('lodash.bindall');
 const React = require('react');
 
-class GreenFlag extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, ['onClick']);
-    }
-    onClick (e) {
-        e.preventDefault();
-        this.props.vm.greenFlag();
-    }
+class GreenFlagComponent extends React.Component {
     render () {
         return (
             <div
@@ -21,19 +12,19 @@ class GreenFlag extends React.Component {
                     width: 50
                 }}
             >
-                <button onClick={this.onClick}>{this.props.title}</button>
+                <button onClick={this.props.onClick}>{this.props.title}</button>
             </div>
         );
     }
 }
 
-GreenFlag.propTypes = {
+GreenFlagComponent.propTypes = {
+    onClick: React.PropTypes.func,
     title: React.PropTypes.string,
-    vm: React.PropTypes.object
 };
 
-GreenFlag.defaultProps = {
+GreenFlagComponent.defaultProps = {
     title: 'Go'
 };
 
-module.exports = GreenFlag;
+module.exports = GreenFlagComponent;

@@ -1,25 +1,6 @@
-const bindAll = require('lodash.bindall');
 const React = require('react');
 
-class SpriteSelector extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, ['onChange', 'targetsUpdate']);
-        this.state = {
-            targets: {
-                targetList: []
-            }
-        };
-    }
-    componentDidMount () {
-        this.props.vm.on('targetsUpdate', this.targetsUpdate);
-    }
-    onChange (event) {
-        this.props.vm.setEditingTarget(event.target.value);
-    }
-    targetsUpdate (data) {
-        this.setState({targets: data});
-    }
+class SpriteSelectorComponent extends React.Component {
     render () {
         return (
             <div
@@ -31,22 +12,18 @@ class SpriteSelector extends React.Component {
             >
                 <select
                     multiple
-                    value={[this.state.targets.editingTarget]}
-                    onChange={this.onChange}
-
+                    value={this.props.value}
+                    onChange={this.props.onChange}
                 >
-                    {this.state.targets.targetList.map(
-                        target => <option value={target[0]} key={target[0]}>{target[1]}</option>
-                    )}
+                    {this.props.sprites.map(sprite => (
+                        <option value={sprite.id} key={sprite.id}>
+                            {sprite.name}
+                        </option>
+                    ))}
                 </select>
             </div>
-
         );
     }
 }
 
-SpriteSelector.propTypes = {
-    vm: React.PropTypes.object.isRequired
-};
-
-module.exports = SpriteSelector;
+module.exports = SpriteSelectorComponent;

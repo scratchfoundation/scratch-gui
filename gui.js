@@ -308,14 +308,12 @@ webpackJsonp([0],[
 	            this.vmManager.attachKeyboardEvents();
 	            this.props.vm.loadProject(this.props.projectData);
 	            this.props.vm.start();
-	            this.vmManager.startAnimation();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.vmManager.detachKeyboardEvents();
 	            this.props.vm.stopAll();
-	            this.vmManager.stopAnimation();
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
@@ -18474,27 +18472,11 @@ webpackJsonp([0],[
 	    function VMManager(vm) {
 	        _classCallCheck(this, VMManager);
 
-	        bindAll(this, ['attachKeyboardEvents', 'detachKeyboardEvents', 'onKeyDown', 'onKeyUp', 'animate', 'startAnimation', 'stopAnimation']);
+	        bindAll(this, ['attachKeyboardEvents', 'detachKeyboardEvents', 'onKeyDown', 'onKeyUp']);
 	        this.vm = vm;
 	    }
 
 	    _createClass(VMManager, [{
-	        key: 'startAnimation',
-	        value: function startAnimation() {
-	            this.animationFrame = requestAnimationFrame(this.animate);
-	        }
-	    }, {
-	        key: 'stopAnimation',
-	        value: function stopAnimation() {
-	            cancelAnimationFrame(this.animationFrame);
-	        }
-	    }, {
-	        key: 'animate',
-	        value: function animate() {
-	            this.vm.animationFrame();
-	            this.animationFrame = requestAnimationFrame(this.animate);
-	        }
-	    }, {
 	        key: 'attachKeyboardEvents',
 	        value: function attachKeyboardEvents() {
 	            // Feed keyboard events as VM I/O events.
@@ -20076,6 +20058,7 @@ webpackJsonp([0],[
 	var defaultsDeep = __webpack_require__(177);
 	var React = __webpack_require__(1);
 	var ScratchBlocks = __webpack_require__(185);
+	var VM = __webpack_require__(173);
 
 	var BlocksComponent = __webpack_require__(186);
 
@@ -20193,7 +20176,7 @@ webpackJsonp([0],[
 	            dragShadowOpacity: React.PropTypes.number
 	        })
 	    }),
-	    vm: React.PropTypes.object
+	    vm: React.PropTypes.instanceOf(VM).isRequired
 	};
 
 	Blocks.defaultOptions = {
@@ -28813,7 +28796,7 @@ webpackJsonp([0],[
 		Blockly.Icon.prototype.setIconLocation=function(a){this.iconXY_=a;this.isVisible()&&this.bubble_.setAnchorLocation(a)};Blockly.Icon.prototype.computeIconLocation=function(){var a=this.block_.getRelativeToSurfaceXY(),b=Blockly.getRelativeXY_(this.iconGroup_),a=new goog.math.Coordinate(a.x+b.x+this.SIZE/2,a.y+b.y+this.SIZE/2);goog.math.Coordinate.equals(this.getIconLocation(),a)||this.setIconLocation(a)};Blockly.Icon.prototype.getIconLocation=function(){return this.iconXY_};
 		// Copyright 2011 Google Inc.  Apache License 2.0
 		Blockly.Comment=function(a){Blockly.Comment.superClass_.constructor.call(this,a);this.createIcon()};goog.inherits(Blockly.Comment,Blockly.Icon);Blockly.Comment.prototype.text_="";Blockly.Comment.prototype.width_=160;Blockly.Comment.prototype.height_=80;
-		Blockly.Comment.prototype.drawIcon_=function(a){Blockly.createSvgElement("circle",{"class":"blocklyIconShape",r:"8",cx:"8",cy:"8"},a);Blockly.createSvgElement("path",{"class":"blocklyIconSymbol",d:"m6.8,10h2c0.003,-0.617 0.271,-0.962 0.633,-1.266 2.875,-2.405        0.607,-5.534 -3.765,-3.874v1.7c3.12,-1.657 3.698,0.118 2.336,1.25        -1.201,0.998 -1.201,1.528 -1.204,2.19z"},a);Blockly.createSvgElement("rect",{"class":"blocklyIconSymbol",x:"6.8",y:"10.78",height:"2",width:"2"},a)};
+		Blockly.Comment.prototype.drawIcon_=function(a){Blockly.createSvgElement("circle",{"class":"blocklyIconShape",r:"8",cx:"8",cy:"8"},a);Blockly.createSvgElement("path",{"class":"blocklyIconSymbol",d:"m6.8,10h2c0.003,-0.617 0.271,-0.962 0.633,-1.266 2.875,-2.405 0.607,-5.534 -3.765,-3.874v1.7c3.12,-1.657 3.698,0.118 2.336,1.25 -1.201,0.998 -1.201,1.528 -1.204,2.19z"},a);Blockly.createSvgElement("rect",{"class":"blocklyIconSymbol",x:"6.8",y:"10.78",height:"2",width:"2"},a)};
 		Blockly.Comment.prototype.createEditor_=function(){this.foreignObject_=Blockly.createSvgElement("foreignObject",{x:Blockly.Bubble.BORDER_WIDTH,y:Blockly.Bubble.BORDER_WIDTH},null);var a=document.createElementNS(Blockly.HTML_NS,"body");a.setAttribute("xmlns",Blockly.HTML_NS);a.className="blocklyMinimalBody";var b=document.createElementNS(Blockly.HTML_NS,"textarea");b.className="blocklyCommentTextarea";b.setAttribute("dir",this.block_.RTL?"RTL":"LTR");a.appendChild(b);this.textarea_=b;this.foreignObject_.appendChild(a);
 		Blockly.bindEvent_(b,"mouseup",this,this.textareaFocus_);Blockly.bindEvent_(b,"wheel",this,function(a){a.stopPropagation()});Blockly.bindEvent_(b,"change",this,function(){this.text_!=b.value&&(Blockly.Events.fire(new Blockly.Events.Change(this.block_,"comment",null,this.text_,b.value)),this.text_=b.value)});setTimeout(function(){b.focus()},0);return this.foreignObject_};Blockly.Comment.prototype.updateEditable=function(){this.isVisible()&&(this.setVisible(!1),this.setVisible(!0));Blockly.Icon.prototype.updateEditable.call(this)};
 		Blockly.Comment.prototype.resizeBubble_=function(){if(this.isVisible()){var a=this.bubble_.getBubbleSize(),b=2*Blockly.Bubble.BORDER_WIDTH;this.foreignObject_.setAttribute("width",a.width-b);this.foreignObject_.setAttribute("height",a.height-b);this.textarea_.style.width=a.width-b-4+"px";this.textarea_.style.height=a.height-b-4+"px"}};
@@ -29025,7 +29008,7 @@ webpackJsonp([0],[
 		viewLeft:-this.scrollX,contentTop:f,contentLeft:b,absoluteTop:g,absoluteLeft:e,toolboxWidth:this.toolbox_?this.toolbox_.getWidth():0,toolboxHeight:this.toolbox_?this.toolbox_.getHeight():0,flyoutWidth:this.flyout_?this.flyout_.getWidth():0,flyoutHeight:this.flyout_?this.flyout_.getHeight():0,toolboxPosition:this.toolboxPosition}};
 		Blockly.WorkspaceSvg.setTopLevelWorkspaceMetrics_=function(a){if(!this.scrollbar)throw"Attempt to set top level workspace scroll without scrollbars.";var b=this.getMetrics();goog.isNumber(a.x)&&(this.scrollX=-b.contentWidth*a.x-b.contentLeft);goog.isNumber(a.y)&&(this.scrollY=-b.contentHeight*a.y-b.contentTop);a=this.scrollX+b.absoluteLeft;b=this.scrollY+b.absoluteTop;this.translate(a,b);this.options.gridPattern&&(this.options.gridPattern.setAttribute("x",a),this.options.gridPattern.setAttribute("y",
 		b),goog.userAgent.IE&&this.updateGridPattern_())};Blockly.WorkspaceSvg.prototype.setResizesEnabled=function(a){var b=!this.resizesEnabled_&&a;this.resizesEnabled_=a;b&&this.resizeContents()};Blockly.WorkspaceSvg.prototype.clear=function(){this.setResizesEnabled(!1);Blockly.WorkspaceSvg.superClass_.clear.call(this);this.setResizesEnabled(!0)};Blockly.WorkspaceSvg.prototype.setVisible=Blockly.WorkspaceSvg.prototype.setVisible;Blockly.Mutator=function(a){Blockly.Mutator.superClass_.constructor.call(this,null);this.quarkNames_=a};goog.inherits(Blockly.Mutator,Blockly.Icon);Blockly.Mutator.prototype.workspaceWidth_=0;Blockly.Mutator.prototype.workspaceHeight_=0;
-		Blockly.Mutator.prototype.drawIcon_=function(a){Blockly.createSvgElement("rect",{"class":"blocklyIconShape",rx:"4",ry:"4",height:"16",width:"16"},a);Blockly.createSvgElement("path",{"class":"blocklyIconSymbol",d:"m4.203,7.296 0,1.368 -0.92,0.677 -0.11,0.41 0.9,1.559        0.41,0.11 1.043,-0.457 1.187,0.683 0.127,1.134 0.3,0.3        1.8,0 0.3,-0.299 0.127,-1.138 1.185,-0.682 1.046,0.458 0.409,-0.11        0.9,-1.559 -0.11,-0.41 -0.92,-0.677 0,-1.366 0.92,-0.677 0.11,-0.41        -0.9,-1.559 -0.409,-0.109 -1.046,0.458 -1.185,-0.682 -0.127,-1.138        -0.3,-0.299 -1.8,0 -0.3,0.3 -0.126,1.135 -1.187,0.682 -1.043,-0.457        -0.41,0.11 -0.899,1.559 0.108,0.409z"},a);
+		Blockly.Mutator.prototype.drawIcon_=function(a){Blockly.createSvgElement("rect",{"class":"blocklyIconShape",rx:"4",ry:"4",height:"16",width:"16"},a);Blockly.createSvgElement("path",{"class":"blocklyIconSymbol",d:"m4.203,7.296 0,1.368 -0.92,0.677 -0.11,0.41 0.9,1.559 0.41,0.11 1.043,-0.457 1.187,0.683 0.127,1.134 0.3,0.3 1.8,0 0.3,-0.299 0.127,-1.138 1.185,-0.682 1.046,0.458 0.409,-0.11 0.9,-1.559 -0.11,-0.41 -0.92,-0.677 0,-1.366 0.92,-0.677 0.11,-0.41 -0.9,-1.559 -0.409,-0.109 -1.046,0.458 -1.185,-0.682 -0.127,-1.138 -0.3,-0.299 -1.8,0 -0.3,0.3 -0.126,1.135 -1.187,0.682 -1.043,-0.457 -0.41,0.11 -0.899,1.559 0.108,0.409z"},a);
 		Blockly.createSvgElement("circle",{"class":"blocklyIconShape",r:"2.7",cx:"8",cy:"8"},a)};Blockly.Mutator.prototype.iconClick_=function(a){this.block_.isEditable()&&Blockly.Icon.prototype.iconClick_.call(this,a)};
 		Blockly.Mutator.prototype.createEditor_=function(){this.svgDialog_=Blockly.createSvgElement("svg",{x:Blockly.Bubble.BORDER_WIDTH,y:Blockly.Bubble.BORDER_WIDTH},null);if(this.quarkNames_.length)for(var a=goog.dom.createDom("xml"),b=0,c;c=this.quarkNames_[b];b++)a.appendChild(goog.dom.createDom("block",{type:c}));else a=null;a={languageTree:a,parentWorkspace:this.block_.workspace,pathToMedia:this.block_.workspace.options.pathToMedia,RTL:this.block_.RTL,toolboxPosition:this.block_.RTL?Blockly.TOOLBOX_AT_RIGHT:
 		Blockly.TOOLBOX_AT_LEFT,horizontalLayout:!1,getMetrics:this.getFlyoutMetrics_.bind(this),setMetrics:null};this.workspace_=new Blockly.WorkspaceSvg(a,this.block_.workspace.dragSurface);this.workspace_.isMutator=!0;this.svgDialog_.appendChild(this.workspace_.createDom("blocklyMutatorBackground"));return this.svgDialog_};
@@ -29918,6 +29901,7 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(175);
 	var React = __webpack_require__(1);
 	var Renderer = __webpack_require__(193);
+	var VM = __webpack_require__(173);
 
 	var StageComponent = __webpack_require__(194);
 
@@ -29929,7 +29913,7 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (Stage.__proto__ || Object.getPrototypeOf(Stage)).call(this, props));
 
-	        bindAll(_this, ['attachMouseEvents', 'detachMouseEvents', 'onMouseUp', 'onMouseMove', 'onMouseDown']);
+	        bindAll(_this, ['attachMouseEvents', 'detachMouseEvents', 'onMouseUp', 'onMouseMove', 'onMouseDown', 'animate', 'startAnimation', 'stopAnimation']);
 	        return _this;
 	    }
 
@@ -29939,11 +29923,13 @@ webpackJsonp([0],[
 	            this.renderer = new Renderer(this.canvas);
 	            this.props.vm.attachRenderer(this.renderer);
 	            this.attachMouseEvents(this.canvas);
+	            this.startAnimation();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.detachMouseEvents(this.canvas);
+	            this.stopAnimation();
 	        }
 	    }, {
 	        key: 'attachMouseEvents',
@@ -30000,6 +29986,22 @@ webpackJsonp([0],[
 	            e.preventDefault();
 	        }
 	    }, {
+	        key: 'startAnimation',
+	        value: function startAnimation() {
+	            this.animationFrame = requestAnimationFrame(this.animate);
+	        }
+	    }, {
+	        key: 'stopAnimation',
+	        value: function stopAnimation() {
+	            cancelAnimationFrame(this.animationFrame);
+	        }
+	    }, {
+	        key: 'animate',
+	        value: function animate() {
+	            this.props.vm.animationFrame();
+	            this.animationFrame = requestAnimationFrame(this.animate);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
@@ -30014,10 +30016,7 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	Stage.propTypes = {
-	    vm: React.PropTypes.shape({
-	        attachRenderer: React.PropTypes.func,
-	        postIOData: React.PropTypes.func
-	    }).isRequired
+	    vm: React.PropTypes.instanceOf(VM).isRequired
 	};
 
 	module.exports = Stage;

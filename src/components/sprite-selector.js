@@ -34,7 +34,7 @@ SpriteSelectorComponent.propTypes = {
             name: React.PropTypes.string
         })
     ),
-    value: React.PropTypes.string
+    value: React.PropTypes.arrayOf(React.PropTypes.string)
 };
 
 module.exports = SpriteSelectorComponent;

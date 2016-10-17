@@ -19,12 +19,10 @@ class GUI extends React.Component {
         this.vmManager.attachKeyboardEvents();
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.start();
-        this.vmManager.startAnimation();
     }
     componentWillUnmount () {
         this.vmManager.detachKeyboardEvents();
         this.props.vm.stopAll();
-        this.vmManager.stopAnimation();
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {

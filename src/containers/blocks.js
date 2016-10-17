@@ -2,6 +2,7 @@ const bindAll = require('lodash.bindall');
 const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const ScratchBlocks = require('scratch-blocks');
+const VM = require('scratch-vm');
 
 const BlocksComponent = require('../components/blocks');
 
@@ -96,7 +97,7 @@ Blocks.propTypes = {
             dragShadowOpacity: React.PropTypes.number
         })
     }),
-    vm: React.PropTypes.object
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 Blocks.defaultOptions = {

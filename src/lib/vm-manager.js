@@ -6,22 +6,9 @@ class VMManager {
             'attachKeyboardEvents',
             'detachKeyboardEvents',
             'onKeyDown',
-            'onKeyUp',
-            'animate',
-            'startAnimation',
-            'stopAnimation'
+            'onKeyUp'
         ]);
         this.vm = vm;
-    }
-    startAnimation () {
-        this.animationFrame = requestAnimationFrame(this.animate);
-    }
-    stopAnimation () {
-        cancelAnimationFrame(this.animationFrame);
-    }
-    animate () {
-        this.vm.animationFrame();
-        this.animationFrame = requestAnimationFrame(this.animate);
     }
     attachKeyboardEvents () {
         // Feed keyboard events as VM I/O events.

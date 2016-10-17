@@ -1,6 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 const Renderer = require('scratch-render');
+const VM = require('scratch-vm');
 
 const StageComponent = require('../components/stage');
 
@@ -12,16 +13,21 @@ class Stage extends React.Component {
             'detachMouseEvents',
             'onMouseUp',
             'onMouseMove',
-            'onMouseDown'
+            'onMouseDown',
+            'animate',
+            'startAnimation',
+            'stopAnimation'
         ]);
     }
     componentDidMount () {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
         this.attachMouseEvents(this.canvas);
+        this.startAnimation();
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
+        this.stopAnimation();
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -67,6 +73,16 @@ class Stage extends React.Component {
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();
     }
+    startAnimation () {
+        this.animationFrame = requestAnimationFrame(this.animate);
+    }
+    stopAnimation () {
+        cancelAnimationFrame(this.animationFrame);
+    }
+    animate () {
+        this.props.vm.animationFrame();
+        this.animationFrame = requestAnimationFrame(this.animate);
+    }
     render () {
         return (
             <StageComponent canvasRef={canvas => this.canvas = canvas} />
@@ -75,10 +91,7 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: React.PropTypes.shape({
-        attachRenderer: React.PropTypes.func,
-        postIOData: React.PropTypes.func
-    }).isRequired
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = Stage;

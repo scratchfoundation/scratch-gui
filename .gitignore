@@ -11,3 +11,4 @@ npm-*
 
 # Build
 /build
+/.opt-in

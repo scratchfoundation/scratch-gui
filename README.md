@@ -29,7 +29,7 @@ Then go to [http://localhost:8601/](http://localhost:8601/) - the playground out
 
 ## Testing
 ```bash
-make test
+npm test
 ```
 
 ## Donate

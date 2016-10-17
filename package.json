@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./src/index.js",
+  "config": {
+    "port": 8061
+  },
   "scripts": {
-    "start": "make serve",
-    "test": "make test"
+    "build": "npm run clean && webpack --progress --colors --bail",
+    "clean": "rm -rf ./build && mkdir -p build",
+    "deploy": "gh-pages -x -r $GH_PAGES_URL -d build -m $DEPLOY_MESSAGE",
+    "lint": "eslint .",
+    "start": "webpack-dev-server --port $npm_package_config_port --content-base=./build",
+    "test": "npm run lint && npm run build"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",

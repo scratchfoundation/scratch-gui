@@ -19,6 +19,7 @@ class StopAllComponent extends React.Component {
 }
 
 StopAllComponent.propTypes = {
+    onClick: React.PropTypes.func,
     title: React.PropTypes.string,
 };
 

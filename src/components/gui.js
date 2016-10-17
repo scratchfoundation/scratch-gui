@@ -19,4 +19,8 @@ class GUIComponent extends React.Component {
     }
 }
 
+GUIComponent.propTypes = {
+    children: React.PropTypes.arrayOf(React.PropTypes.node)
+};
+
 module.exports = GUIComponent;

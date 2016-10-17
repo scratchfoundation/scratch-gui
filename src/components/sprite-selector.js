@@ -26,4 +26,15 @@ class SpriteSelectorComponent extends React.Component {
     }
 }
 
+SpriteSelectorComponent.propTypes = {
+    onChange: React.PropTypes.func,
+    sprites: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+            id: React.PropTypes.string,
+            name: React.PropTypes.string
+        })
+    ),
+    value: React.PropTypes.string
+};
+
 module.exports = SpriteSelectorComponent;

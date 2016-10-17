@@ -487,6 +487,15 @@ webpackJsonp([0],[
 		};
 
 		/**
+		 * Clear out current running project data.
+		 */
+		VirtualMachine.prototype.clear = function () {
+		    this.runtime.dispose();
+		    this.editingTarget = null;
+		    this.emitTargetsUpdate();
+		};
+
+		/**
 		 * Get data for playground. Data comes back in an emitted event.
 		 */
 		VirtualMachine.prototype.getPlaygroundData = function () {
@@ -529,6 +538,7 @@ webpackJsonp([0],[
 		 * @param {?string} json JSON string representing the project.
 		 */
 		VirtualMachine.prototype.loadProject = function (json) {
+		    this.clear();
 		    // @todo: Handle other formats, e.g., Scratch 1.4, Scratch 3.0.
 		    sb2import(json, this.runtime);
 		    // Select the first target for editing, e.g., the stage.
@@ -650,7 +660,7 @@ webpackJsonp([0],[
 		            return [target.id, target.getName()];
 		        }),
 		        // Currently editing target id.
-		        editingTarget: this.editingTarget.id
+		        editingTarget: this.editingTarget ? this.editingTarget.id : null
 		    });
 		};
 
@@ -2169,17 +2179,25 @@ webpackJsonp([0],[
 		};
 
 		/**
-		 * Dispose of a target.
-		 * @param {!Target} target Target to dispose of.
+		 * Dispose all targets. Return to clean state.
 		 */
-		Runtime.prototype.disposeTarget = function (target) {
-		    // Allow target to do dispose actions.
-		    target.dispose();
-		    // Remove from list of targets.
-		    var index = this.targets.indexOf(target);
-		    if (index > -1) {
-		        this.targets.splice(index, 1);
-		    }
+		Runtime.prototype.dispose = function () {
+		    this.stopAll();
+		    this.targets.map(this.disposeTarget, this);
+		};
+
+		/**
+		 * Dispose of a target.
+		 * @param {!Target} disposingTarget Target to dispose of.
+		 */
+		Runtime.prototype.disposeTarget = function (disposingTarget) {
+		    this.targets = this.targets.filter(function (target) {
+		        if (disposingTarget !== target) return true;
+		        // Allow target to do dispose actions.
+		        target.dispose();
+		        // Remove from list of targets.
+		        return false;
+		    });
 		};
 
 		/**
@@ -13842,7 +13860,7 @@ webpackJsonp([0],[
 		 * @return {!number} Equivalent value in radians.
 		 */
 		MathUtil.degToRad = function (deg) {
-		    return (Math.PI * (90 - deg)) / 180;
+		    return deg * Math.PI / 180;
 		};
 
 		/**
@@ -14057,6 +14075,7 @@ webpackJsonp([0],[
 		};
 
 		Scratch3ControlBlocks.prototype.deleteClone = function (args, util) {
+		    if (util.target.isOriginal) return;
 		    this.runtime.disposeTarget(util.target);
 		    this.runtime.stopForTarget(util.target);
 		};
@@ -15321,7 +15340,7 @@ webpackJsonp([0],[
 
 		Scratch3MotionBlocks.prototype.moveSteps = function (args, util) {
 		    var steps = Cast.toNumber(args.STEPS);
-		    var radians = MathUtil.degToRad(util.target.direction);
+		    var radians = MathUtil.degToRad(90 - util.target.direction);
 		    var dx = steps * Math.cos(radians);
 		    var dy = steps * Math.sin(radians);
 		    util.target.setXY(util.target.x + dx, util.target.y + dy);
@@ -15639,7 +15658,8 @@ webpackJsonp([0],[
 		        'sensing_mousey': this.getMouseY,
 		        'sensing_mousedown': this.getMouseDown,
 		        'sensing_keypressed': this.getKeyPressed,
-		        'sensing_current': this.current
+		        'sensing_current': this.current,
+		        'sensing_dayssince2000': this.daysSince2000
 		    };
 		};
 
@@ -15713,6 +15733,17 @@ webpackJsonp([0],[
 
 		Scratch3SensingBlocks.prototype.getKeyPressed = function (args, util) {
 		    return util.ioQuery('keyboard', 'getKeyIsDown', args.KEY_OPTION);
+		};
+
+		Scratch3SensingBlocks.prototype.daysSince2000 = function()
+		{
+		    var msPerDay = 24 * 60 * 60 * 1000;
+		    var start = new Date(2000, 1-1, 1); 
+		    var today = new Date(); 
+		    var dstAdjust = today.getTimezoneOffset() - start.getTimezoneOffset();
+		    var mSecsSinceStart = today.valueOf() - start.valueOf();
+		    mSecsSinceStart += ((today.getTimezoneOffset() - dstAdjust) * 60 * 1000);
+		    return mSecsSinceStart / msPerDay;
 		};
 
 		module.exports = Scratch3SensingBlocks;
@@ -16755,9 +16786,6 @@ webpackJsonp([0],[
 		 * Dispose of this clone, destroying any run-time properties.
 		 */
 		Clone.prototype.dispose = function () {
-		    if (this.isOriginal) { // Don't allow a non-clone to delete itself.
-		        return;
-		    }
 		    this.runtime.changeCloneCounter(-1);
 		    if (this.renderer && this.drawableID !== null) {
 		        this.renderer.destroyDrawable(this.drawableID);
@@ -29782,7 +29810,7 @@ webpackJsonp([0],[
 	        key: 'render',
 	        value: function render() {
 	            return React.createElement(SpriteSelectorComponent, {
-	                value: [this.state.targets.editingTarget],
+	                value: this.state.targets.editingTarget && [this.state.targets.editingTarget],
 	                onChange: this.onChange,
 	                sprites: this.state.targets.targetList.map(function (target) {
 	                    return {
@@ -29868,7 +29896,7 @@ webpackJsonp([0],[
 	        id: React.PropTypes.string,
 	        name: React.PropTypes.string
 	    })),
-	    value: React.PropTypes.string
+	    value: React.PropTypes.arrayOf(React.PropTypes.string)
 	};
 
 	module.exports = SpriteSelectorComponent;

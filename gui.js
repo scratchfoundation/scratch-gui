@@ -413,8 +413,8 @@ webpackJsonp([0],[
 		var util = __webpack_require__(2);
 
 		var Runtime = __webpack_require__(6);
-		var sb2import = __webpack_require__(90);
-		var Sprite = __webpack_require__(96);
+		var sb2import = __webpack_require__(80);
+		var Sprite = __webpack_require__(86);
 		var Blocks = __webpack_require__(11);
 
 		/**
@@ -476,6 +476,53 @@ webpackJsonp([0],[
 		VirtualMachine.prototype.greenFlag = function () {
 		    this.runtime.greenFlag();
 		};
+
+		/**
+		 * Set whether the VM is in "turbo mode."
+		 * When true, loops don't yield to redraw.
+		 * @param {Boolean} turboModeOn Whether turbo mode should be set.
+		 */
+		VirtualMachine.prototype.setTurboMode = function (turboModeOn) {
+		    this.runtime.turboMode = !!turboModeOn;
+		};
+
+		/**
+		 * Set whether the VM is in "pause mode."
+		 * When true, nothing is stepped.
+		 * @param {Boolean} pauseModeOn Whether pause mode should be set.
+		 */
+		VirtualMachine.prototype.setPauseMode = function (pauseModeOn) {
+		    this.runtime.setPauseMode(!!pauseModeOn);
+		};
+
+		/**
+		 * Set whether the VM is in 2.0 "compatibility mode."
+		 * When true, ticks go at 2.0 speed (30 TPS).
+		 * @param {Boolean} compatibilityModeOn Whether compatibility mode is set.
+		 */
+		VirtualMachine.prototype.setCompatibilityMode = function (compatibilityModeOn) {
+		    this.runtime.setCompatibilityMode(!!compatibilityModeOn);
+		};
+
+		/**
+		 * Set whether the VM is in "single stepping mode."
+		 * When true, blocks execute slowly and are highlighted visually.
+		 * @param {Boolean} singleSteppingOn Whether single-stepping mode is set.
+		 */
+		VirtualMachine.prototype.setSingleSteppingMode = function (singleSteppingOn) {
+		    this.runtime.setSingleSteppingMode(!!singleSteppingOn);
+		};
+
+
+		/**
+		 * Set single-stepping mode speed.
+		 * When in single-stepping mode, adjusts the speed of execution.
+		 * @param {Number} speed Interval length in ms.
+		 */
+		VirtualMachine.prototype.setSingleSteppingSpeed = function (speed) {
+		    this.runtime.setSingleSteppingSpeed(speed);
+		};
+
 
 		/**
 		 * Stop all threads and running activities.
@@ -1819,13 +1866,13 @@ webpackJsonp([0],[
 
 		var defaultBlockPackages = {
 		    'scratch3_control': __webpack_require__(72),
-		    'scratch3_event': __webpack_require__(83),
-		    'scratch3_looks': __webpack_require__(84),
-		    'scratch3_motion': __webpack_require__(85),
-		    'scratch3_operators': __webpack_require__(86),
-		    'scratch3_sensing': __webpack_require__(87),
-		    'scratch3_data': __webpack_require__(88),
-		    'scratch3_procedures': __webpack_require__(89)
+		    'scratch3_event': __webpack_require__(73),
+		    'scratch3_looks': __webpack_require__(74),
+		    'scratch3_motion': __webpack_require__(75),
+		    'scratch3_operators': __webpack_require__(76),
+		    'scratch3_sensing': __webpack_require__(77),
+		    'scratch3_data': __webpack_require__(78),
+		    'scratch3_procedures': __webpack_require__(79)
 		};
 
 		/**
@@ -1834,8 +1881,6 @@ webpackJsonp([0],[
 		function Runtime () {
 		    // Bind event emitter
 		    EventEmitter.call(this);
-
-		    // State for the runtime
 
 		    /**
 		     * Target management and storage.
@@ -1853,7 +1898,18 @@ webpackJsonp([0],[
 		    /** @type {!Sequencer} */
 		    this.sequencer = new Sequencer(this);
 
+		    /**
+		     * Storage container for flyout blocks.
+		     * These will execute on `_editingTarget.`
+		     * @type {!Blocks}
+		     */
 		    this.flyoutBlocks = new Blocks();
+
+		    /**
+		     * Currently known editing target for the VM.
+		     * @type {?Target}
+		     */
+		    this._editingTarget = null;
 
 		    /**
 		     * Map to look up a block primitive's implementation function by its opcode.
@@ -1861,24 +1917,111 @@ webpackJsonp([0],[
 		     * @type {Object.<string, Function>}
 		     */
 		    this._primitives = {};
+
+		    /**
+		     * Map to look up hat blocks' metadata.
+		     * Keys are opcode for hat, values are metadata objects.
+		     * @type {Object.<string, Object>}
+		     */
 		    this._hats = {};
+
+		    /**
+		     * Currently known values for edge-activated hats.
+		     * Keys are block ID for the hat; values are the currently known values.
+		     * @type {Object.<string, *>}
+		     */
 		    this._edgeActivatedHatValues = {};
+
+		    /**
+		     * A list of script block IDs that were glowing during the previous frame.
+		     * @type {!Array.<!string>}
+		     */
+		    this._scriptGlowsPreviousFrame = [];
+
+		    /**
+		     * A list of block IDs that were glowing during the previous frame.
+		     * @type {!Array.<!string>}
+		     */
+		    this._blockGlowsPreviousFrame = [];
+
+		    /**
+		     * Currently known number of clones, used to enforce clone limit.
+		     * @type {number}
+		     */
+		    this._cloneCounter = 0;
+
+		    /**
+		     * Whether the project is in "turbo mode."
+		     * @type {Boolean}
+		     */
+		    this.turboMode = false;
+
+		    /**
+		     * Whether the project is in "pause mode."
+		     * @type {Boolean}
+		     */
+		    this.pauseMode = false;
+
+		    /**
+		     * Whether the project is in "compatibility mode" (30 TPS).
+		     * @type {Boolean}
+		     */
+		    this.compatibilityMode = false;
+
+		    /**
+		     * Whether the project is in "single stepping mode."
+		     * @type {Boolean}
+		     */
+		    this.singleStepping = false;
+
+		    /**
+		     * How fast in ms "single stepping mode" should run, in ms.
+		     * Can be updated dynamically.
+		     * @type {!number}
+		     */
+		    this.singleStepInterval = 1000 / 10;
+
+		    /**
+		     * A reference to the current runtime stepping interval, set
+		     * by a `setInterval`.
+		     * @type {!number}
+		     */
+		    this._steppingInterval = null;
+
+		    /**
+		     * Current length of a step.
+		     * Changes as mode switches, and used by the sequencer to calculate
+		     * WORK_TIME.
+		     * @type {!number}
+		     */
+		    this.currentStepTime = null;
+
+		    /**
+		     * Whether any primitive has requested a redraw.
+		     * Affects whether `Sequencer.stepThreads` will yield
+		     * after stepping each thread.
+		     * Reset on every frame.
+		     * @type {boolean}
+		     */
+		    this.redrawRequested = false;
+
+		    // Register all given block packages.
 		    this._registerBlockPackages();
 
+		    // Register and initialize "IO devices", containers for processing
+		    // I/O related data.
+		    /** @type {Object.<string, Object>} */
 		    this.ioDevices = {
 		        'clock': new Clock(),
 		        'keyboard': new Keyboard(this),
 		        'mouse': new Mouse(this)
 		    };
-
-		    this._scriptGlowsPreviousFrame = [];
-		    this._editingTarget = null;
-		    /**
-		     * Currently known number of clones.
-		     * @type {number}
-		     */
-		    this._cloneCounter = 0;
 		}
+
+		/**
+		 * Inherit from EventEmitter
+		 */
+		util.inherits(Runtime, EventEmitter);
 
 		/**
 		 * Width of the stage, in pixels.
@@ -1923,14 +2066,14 @@ webpackJsonp([0],[
 		Runtime.VISUAL_REPORT = 'VISUAL_REPORT';
 
 		/**
-		 * Inherit from EventEmitter
-		 */
-		util.inherits(Runtime, EventEmitter);
-
-		/**
-		 * How rapidly we try to step threads, in ms.
+		 * How rapidly we try to step threads by default, in ms.
 		 */
 		Runtime.THREAD_STEP_INTERVAL = 1000 / 60;
+
+		/**
+		 * In compatibility mode, how rapidly we try to step threads, in ms.
+		 */
+		Runtime.THREAD_STEP_INTERVAL_COMPATIBILITY = 1000 / 30;
 
 		/**
 		 * How many clones can be created at a time.
@@ -1982,9 +2125,6 @@ webpackJsonp([0],[
 		Runtime.prototype.getOpcodeFunction = function (opcode) {
 		    return this._primitives[opcode];
 		};
-
-		// -----------------------------------------------------------------------------
-		// -----------------------------------------------------------------------------
 
 		/**
 		 * Return whether an opcode represents a hat block.
@@ -2043,7 +2183,7 @@ webpackJsonp([0],[
 		 */
 		Runtime.prototype._pushThread = function (id, target) {
 		    var thread = new Thread(id);
-		    thread.setTarget(target);
+		    thread.target = target;
 		    thread.pushStack(id);
 		    this.threads.push(thread);
 		    return thread;
@@ -2257,6 +2397,10 @@ webpackJsonp([0],[
 		 * inactive threads after each iteration.
 		 */
 		Runtime.prototype._step = function () {
+		    if (this.pauseMode) {
+		        // Don't do any execution while in pause mode.
+		        return;
+		    }
 		    // Find all edge-activated hats, and add them to threads to be evaluated.
 		    for (var hatType in this._hats) {
 		        var hat = this._hats[hatType];
@@ -2264,37 +2408,113 @@ webpackJsonp([0],[
 		            this.startHats(hatType);
 		        }
 		    }
-		    var inactiveThreads = this.sequencer.stepThreads(this.threads);
-		    this._updateScriptGlows();
-		    for (var i = 0; i < inactiveThreads.length; i++) {
-		        this._removeThread(inactiveThreads[i]);
+		    this.redrawRequested = false;
+		    var inactiveThreads = this.sequencer.stepThreads();
+		    this._updateGlows(inactiveThreads);
+		};
+
+		/**
+		 * Set the current editing target known by the runtime.
+		 * @param {!Target} editingTarget New editing target.
+		 */
+		Runtime.prototype.setEditingTarget = function (editingTarget) {
+		    this._editingTarget = editingTarget;
+		    // Script glows must be cleared.
+		    this._scriptGlowsPreviousFrame = [];
+		    this._updateGlows();
+		};
+
+		/**
+		 * Set whether we are in pause mode.
+		 * @param {boolean} pauseModeOn True iff in pause mode.
+		 */
+		Runtime.prototype.setPauseMode = function (pauseModeOn) {
+		    // Inform the project clock/timer to pause/resume its time.
+		    if (this.ioDevices.clock) {
+		        if (pauseModeOn && !this.pauseMode) {
+		            this.ioDevices.clock.pause();
+		        }
+		        if (!pauseModeOn && this.pauseMode) {
+		            this.ioDevices.clock.resume();
+		        }
+		    }
+		    this.pauseMode = pauseModeOn;
+		};
+
+		/**
+		 * Set whether we are in 30 TPS compatibility mode.
+		 * @param {boolean} compatibilityModeOn True iff in compatibility mode.
+		 */
+		Runtime.prototype.setCompatibilityMode = function (compatibilityModeOn) {
+		    this.compatibilityMode = compatibilityModeOn;
+		    if (this._steppingInterval) {
+		        self.clearInterval(this._steppingInterval);
+		        this.start();
 		    }
 		};
 
-		Runtime.prototype.setEditingTarget = function (editingTarget) {
-		    this._scriptGlowsPreviousFrame = [];
-		    this._editingTarget = editingTarget;
-		    this._updateScriptGlows();
+		/**
+		 * Set whether we are in single-stepping mode.
+		 * @param {boolean} singleSteppingOn True iff in single-stepping mode.
+		 */
+		Runtime.prototype.setSingleSteppingMode = function (singleSteppingOn) {
+		    this.singleStepping = singleSteppingOn;
+		    if (this._steppingInterval) {
+		        self.clearInterval(this._steppingInterval);
+		        this.start();
+		    }
 		};
 
-		Runtime.prototype._updateScriptGlows = function () {
+		/**
+		 * Set the speed during single-stepping mode.
+		 * @param {number} speed Interval length to step threads, in ms.
+		 */
+		Runtime.prototype.setSingleSteppingSpeed = function (speed) {
+		    this.singleStepInterval = 1000 / speed;
+		    if (this._steppingInterval) {
+		        self.clearInterval(this._steppingInterval);
+		        this.start();
+		    }
+		};
+
+		/**
+		 * Emit glows/glow clears for blocks and scripts after a single tick.
+		 * Looks at `this.threads` and notices which have turned on/off new glows.
+		 * @param {Array.<Thread>=} opt_extraThreads Optional list of inactive threads.
+		 */
+		Runtime.prototype._updateGlows = function (opt_extraThreads) {
+		    var searchThreads = [];
+		    searchThreads.push.apply(searchThreads, this.threads);
+		    if (opt_extraThreads) {
+		        searchThreads.push.apply(searchThreads, opt_extraThreads);
+		    }
 		    // Set of scripts that request a glow this frame.
 		    var requestedGlowsThisFrame = [];
+		    var requestedBlockGlowsThisFrame = [];
 		    // Final set of scripts glowing during this frame.
 		    var finalScriptGlows = [];
+		    var finalBlockGlows = [];
 		    // Find all scripts that should be glowing.
-		    for (var i = 0; i < this.threads.length; i++) {
-		        var thread = this.threads[i];
+		    for (var i = 0; i < searchThreads.length; i++) {
+		        var thread = searchThreads[i];
 		        var target = thread.target;
-		        if (thread.requestScriptGlowInFrame && target == this._editingTarget) {
-		            var blockForThread = thread.peekStack() || thread.topBlock;
-		            var script = target.blocks.getTopLevelScript(blockForThread);
-		            if (!script) {
-		                // Attempt to find in flyout blocks.
-		                script = this.flyoutBlocks.getTopLevelScript(blockForThread);
+		        if (target == this._editingTarget) {
+		            var blockForThread = thread.blockGlowInFrame;
+		            if (thread.requestScriptGlowInFrame) {
+		                var script = target.blocks.getTopLevelScript(blockForThread);
+		                if (!script) {
+		                    // Attempt to find in flyout blocks.
+		                    script = this.flyoutBlocks.getTopLevelScript(
+		                        blockForThread
+		                    );
+		                }
+		                if (script) {
+		                    requestedGlowsThisFrame.push(script);
+		                }
 		            }
-		            if (script) {
-		                requestedGlowsThisFrame.push(script);
+		            // Only show block glows in single-stepping mode.
+		            if (this.singleStepping && blockForThread) {
+		                requestedBlockGlowsThisFrame.push(blockForThread);
 		            }
 		        }
 		    }
@@ -2317,7 +2537,30 @@ webpackJsonp([0],[
 		            finalScriptGlows.push(currentFrameGlow);
 		        }
 		    }
+		    for (var m = 0; m < this._blockGlowsPreviousFrame.length; m++) {
+		        var previousBlockGlow = this._blockGlowsPreviousFrame[m];
+		        if (requestedBlockGlowsThisFrame.indexOf(previousBlockGlow) < 0) {
+		            // Glow turned off.
+		            try {
+		                this.glowBlock(previousBlockGlow, false);
+		            } catch (e) {
+		                // Block has been removed.
+		            }
+		        } else {
+		            // Still glowing.
+		            finalBlockGlows.push(previousBlockGlow);
+		        }
+		    }
+		    for (var p = 0; p < requestedBlockGlowsThisFrame.length; p++) {
+		        var currentBlockFrameGlow = requestedBlockGlowsThisFrame[p];
+		        if (this._blockGlowsPreviousFrame.indexOf(currentBlockFrameGlow) < 0) {
+		            // Glow turned on.
+		            this.glowBlock(currentBlockFrameGlow, true);
+		            finalBlockGlows.push(currentBlockFrameGlow);
+		        }
+		    }
 		    this._scriptGlowsPreviousFrame = finalScriptGlows;
+		    this._blockGlowsPreviousFrame = finalBlockGlows;
 		};
 
 		/**
@@ -2426,21 +2669,37 @@ webpackJsonp([0],[
 		};
 
 		/**
+		 * Tell the runtime to request a redraw.
+		 * Use after a clone/sprite has completed some visible operation on the stage.
+		 */
+		Runtime.prototype.requestRedraw = function () {
+		    this.redrawRequested = true;
+		};
+
+		/**
 		 * Handle an animation frame from the main thread.
 		 */
 		Runtime.prototype.animationFrame = function () {
 		    if (this.renderer) {
+		        // @todo: Only render when this.redrawRequested or clones rendered.
 		        this.renderer.draw();
 		    }
 		};
 
 		/**
-		 * Set up timers to repeatedly step in a browser
+		 * Set up timers to repeatedly step in a browser.
 		 */
 		Runtime.prototype.start = function () {
-		    self.setInterval(function() {
+		    var interval = Runtime.THREAD_STEP_INTERVAL;
+		    if (this.singleStepping) {
+		        interval = this.singleStepInterval;
+		    } else if (this.compatibilityMode) {
+		        interval = Runtime.THREAD_STEP_INTERVAL_COMPATIBILITY;
+		    }
+		    this.currentStepTime = interval;
+		    this._steppingInterval = self.setInterval(function() {
 		        this._step();
-		    }.bind(this), Runtime.THREAD_STEP_INTERVAL);
+		    }.bind(this), interval);
 		};
 
 		module.exports = Runtime;
@@ -2469,87 +2728,163 @@ webpackJsonp([0],[
 		}
 
 		/**
-		 * The sequencer does as much work as it can within WORK_TIME milliseconds,
-		 * then yields. This is essentially a rate-limiter for blocks.
-		 * In Scratch 2.0, this is set to 75% of the target stage frame-rate (30fps).
-		 * @const {!number}
+		 * Time to run a warp-mode thread, in ms.
+		 * @type {number}
 		 */
-		Sequencer.WORK_TIME = 10;
+		Sequencer.WARP_TIME = 500;
 
 		/**
-		 * Step through all threads in `this.threads`, running them in order.
-		 * @param {Array.<Thread>} threads List of which threads to step.
-		 * @return {Array.<Thread>} All threads which have finished in this iteration.
+		 * Step through all threads in `this.runtime.threads`, running them in order.
+		 * @return {Array.<!Thread>} List of inactive threads after stepping.
 		 */
-		Sequencer.prototype.stepThreads = function (threads) {
-		    // Start counting toward WORK_TIME
+		Sequencer.prototype.stepThreads = function () {
+		    // Work time is 75% of the thread stepping interval.
+		    var WORK_TIME = 0.75 * this.runtime.currentStepTime;
+		    // Start counting toward WORK_TIME.
 		    this.timer.start();
-		    // List of threads which have been killed by this step.
+		    // Count of active threads.
+		    var numActiveThreads = Infinity;
+		    // Whether `stepThreads` has run through a full single tick.
+		    var ranFirstTick = false;
 		    var inactiveThreads = [];
-		    // If all of the threads are yielding, we should yield.
-		    var numYieldingThreads = 0;
-		    // Clear all yield statuses that were for the previous frame.
-		    for (var t = 0; t < threads.length; t++) {
-		        if (threads[t].status === Thread.STATUS_YIELD_FRAME) {
-		            threads[t].setStatus(Thread.STATUS_RUNNING);
-		        }
-		    }
-
-		    // While there are still threads to run and we are within WORK_TIME,
-		    // continue executing threads.
-		    while (threads.length > 0 &&
-		           threads.length > numYieldingThreads &&
-		           this.timer.timeElapsed() < Sequencer.WORK_TIME) {
-		        // New threads at the end of the iteration.
-		        var newThreads = [];
-		        // Reset yielding thread count.
-		        numYieldingThreads = 0;
-		        // Attempt to run each thread one time
-		        for (var i = 0; i < threads.length; i++) {
-		            var activeThread = threads[i];
-		            if (activeThread.status === Thread.STATUS_RUNNING) {
-		                // Normal-mode thread: step.
-		                this.startThread(activeThread);
-		            } else if (activeThread.status === Thread.STATUS_YIELD ||
-		                       activeThread.status === Thread.STATUS_YIELD_FRAME) {
-		                // Yielding thread: do nothing for this step.
-		                numYieldingThreads++;
-		            }
-		            if (activeThread.stack.length === 0 &&
+		    // Conditions for continuing to stepping threads:
+		    // 1. We must have threads in the list, and some must be active.
+		    // 2. Time elapsed must be less than WORK_TIME.
+		    // 3. Either turbo mode, or no redraw has been requested by a primitive.
+		    while (this.runtime.threads.length > 0 &&
+		           numActiveThreads > 0 &&
+		           this.timer.timeElapsed() < WORK_TIME &&
+		           (this.runtime.turboMode || !this.runtime.redrawRequested)) {
+		        numActiveThreads = 0;
+		        // Inline copy of the threads, updated on each step.
+		        var threadsCopy = this.runtime.threads.slice();
+		        // Attempt to run each thread one time.
+		        for (var i = 0; i < threadsCopy.length; i++) {
+		            var activeThread = threadsCopy[i];
+		            if (activeThread.stack.length === 0 ||
 		                activeThread.status === Thread.STATUS_DONE) {
-		                // Finished with this thread - tell runtime to clean it up.
-		                inactiveThreads.push(activeThread);
-		            } else {
-		                // Keep this thead in the loop.
-		                newThreads.push(activeThread);
+		                // Finished with this thread.
+		                if (inactiveThreads.indexOf(activeThread) < 0) {
+		                    inactiveThreads.push(activeThread);
+		                }
+		                continue;
+		            }
+		            if (activeThread.status === Thread.STATUS_YIELD_TICK &&
+		                !ranFirstTick) {
+		                // Clear single-tick yield from the last call of `stepThreads`.
+		                activeThread.status = Thread.STATUS_RUNNING;
+		            }
+		            if (activeThread.status === Thread.STATUS_RUNNING ||
+		                activeThread.status === Thread.STATUS_YIELD) {
+		                // Normal-mode thread: step.
+		                this.stepThread(activeThread);
+		                activeThread.warpTimer = null;
+		            }
+		            if (activeThread.status === Thread.STATUS_RUNNING) {
+		                // After stepping, status is still running.
+		                // If we're in single-stepping mode, mark the thread as
+		                // a single-tick yield so it doesn't re-execute
+		                // until the next frame.
+		                if (this.runtime.singleStepping) {
+		                    activeThread.status = Thread.STATUS_YIELD_TICK;
+		                }
+		                numActiveThreads++;
 		            }
 		        }
-		        // Effectively filters out threads that have stopped.
-		        threads = newThreads;
+		        // We successfully ticked once. Prevents running STATUS_YIELD_TICK
+		        // threads on the next tick.
+		        ranFirstTick = true;
 		    }
+		    // Filter inactive threads from `this.runtime.threads`.
+		    this.runtime.threads = this.runtime.threads.filter(function(thread) {
+		        if (inactiveThreads.indexOf(thread) > -1) {
+		            return false;
+		        }
+		        return true;
+		    });
 		    return inactiveThreads;
 		};
 
 		/**
-		 * Step the requested thread
-		 * @param {!Thread} thread Thread object to step
+		 * Step the requested thread for as long as necessary.
+		 * @param {!Thread} thread Thread object to step.
 		 */
-		Sequencer.prototype.startThread = function (thread) {
+		Sequencer.prototype.stepThread = function (thread) {
 		    var currentBlockId = thread.peekStack();
 		    if (!currentBlockId) {
 		        // A "null block" - empty branch.
-		        // Yield for the frame.
 		        thread.popStack();
-		        thread.setStatus(Thread.STATUS_YIELD_FRAME);
-		        return;
 		    }
-		    // Execute the current block
-		    execute(this, thread);
-		    // If the block executed without yielding and without doing control flow,
-		    // move to done.
-		    if (thread.status === Thread.STATUS_RUNNING &&
-		        thread.peekStack() === currentBlockId) {
-		        this.proceedThread(thread);
+		    while (thread.peekStack()) {
+		        var isWarpMode = thread.peekStackFrame().warpMode;
+		        if (isWarpMode && !thread.warpTimer) {
+		            // Initialize warp-mode timer if it hasn't been already.
+		            // This will start counting the thread toward `Sequencer.WARP_TIME`.
+		            thread.warpTimer = new Timer();
+		            thread.warpTimer.start();
+		        }
+		        // Execute the current block.
+		        // Save the current block ID to notice if we did control flow.
+		        currentBlockId = thread.peekStack();
+		        execute(this, thread);
+		        thread.blockGlowInFrame = currentBlockId;
+		        // If the thread has yielded or is waiting, yield to other threads.
+		        if (thread.status === Thread.STATUS_YIELD) {
+		            // Mark as running for next iteration.
+		            thread.status = Thread.STATUS_RUNNING;
+		            // In warp mode, yielded blocks are re-executed immediately.
+		            if (isWarpMode &&
+		                thread.warpTimer.timeElapsed() <= Sequencer.WARP_TIME) {
+		                continue;
+		            }
+		            return;
+		        } else if (thread.status === Thread.STATUS_PROMISE_WAIT) {
+		            // A promise was returned by the primitive. Yield the thread
+		            // until the promise resolves. Promise resolution should reset
+		            // thread.status to Thread.STATUS_RUNNING.
+		            return;
+		        }
+		        // If no control flow has happened, switch to next block.
+		        if (thread.peekStack() === currentBlockId) {
+		            thread.goToNextBlock();
+		        }
+		        // If no next block has been found at this point, look on the stack.
+		        while (!thread.peekStack()) {
+		            thread.popStack();
+		            if (thread.stack.length === 0) {
+		                // No more stack to run!
+		                thread.status = Thread.STATUS_DONE;
+		                return;
+		            }
+		            if (thread.peekStackFrame().isLoop) {
+		                // The current level of the stack is marked as a loop.
+		                // Return to yield for the frame/tick in general.
+		                // Unless we're in warp mode - then only return if the
+		                // warp timer is up.
+		                if (!isWarpMode ||
+		                    thread.warpTimer.timeElapsed() > Sequencer.WARP_TIME) {
+		                    // Don't do anything to the stack, since loops need
+		                    // to be re-executed.
+		                    return;
+		                } else {
+		                    // Don't go to the next block for this level of the stack,
+		                    // since loops need to be re-executed.
+		                    continue;
+		                }
+		            } else if (thread.peekStackFrame().waitingReporter) {
+		                // This level of the stack was waiting for a value.
+		                // This means a reporter has just returned - so don't go
+		                // to the next block for this level of the stack.
+		                return;
+		            }
+		            // Get next block of existing block on the stack.
+		            thread.goToNextBlock();
+		        }
+		        // In single-stepping mode, force `stepThread` to only run one block
+		        // at a time.
+		        if (this.runtime.singleStepping) {
+		            return;
+		        }
 		    }
 		};
 
@@ -2557,8 +2892,9 @@ webpackJsonp([0],[
 		 * Step a thread into a block's branch.
 		 * @param {!Thread} thread Thread object to step to branch.
 		 * @param {Number} branchNum Which branch to step to (i.e., 1, 2).
+		 * @param {Boolean} isLoop Whether this block is a loop.
 		 */
-		Sequencer.prototype.stepToBranch = function (thread, branchNum) {
+		Sequencer.prototype.stepToBranch = function (thread, branchNum, isLoop) {
 		    if (!branchNum) {
 		        branchNum = 1;
 		    }
@@ -2567,11 +2903,11 @@ webpackJsonp([0],[
 		        currentBlockId,
 		        branchNum
 		    );
+		    thread.peekStackFrame().isLoop = isLoop;
 		    if (branchId) {
 		        // Push branch ID to the thread's stack.
 		        thread.pushStack(branchId);
 		    } else {
-		        // Push null, so we come back to the current block.
 		        thread.pushStack(null);
 		    }
 		};
@@ -2579,56 +2915,39 @@ webpackJsonp([0],[
 		/**
 		 * Step a procedure.
 		 * @param {!Thread} thread Thread object to step to procedure.
-		 * @param {!string} procedureName Name of procedure defined in this target.
+		 * @param {!string} procedureCode Procedure code of procedure to step to.
 		 */
-		Sequencer.prototype.stepToProcedure = function (thread, procedureName) {
-		    var definition = thread.target.blocks.getProcedureDefinition(procedureName);
+		Sequencer.prototype.stepToProcedure = function (thread, procedureCode) {
+		    var definition = thread.target.blocks.getProcedureDefinition(procedureCode);
+		    if (!definition) {
+		        return;
+		    }
+		    // Check if the call is recursive.
+		    // If so, set the thread to yield after pushing.
+		    var isRecursive = thread.isRecursiveCall(procedureCode);
+		    // To step to a procedure, we put its definition on the stack.
+		    // Execution for the thread will proceed through the definition hat
+		    // and on to the main definition of the procedure.
+		    // When that set of blocks finishes executing, it will be popped
+		    // from the stack by the sequencer, returning control to the caller.
 		    thread.pushStack(definition);
-		    // Check if the call is recursive. If so, yield.
-		    // @todo: Have behavior match Scratch 2.0.
-		    if (thread.stack.indexOf(definition) > -1) {
-		        thread.setStatus(Thread.STATUS_YIELD_FRAME);
-		    }
-		};
-
-		/**
-		 * Step a thread into an input reporter, and manage its status appropriately.
-		 * @param {!Thread} thread Thread object to step to reporter.
-		 * @param {!string} blockId ID of reporter block.
-		 * @param {!string} inputName Name of input on parent block.
-		 * @return {boolean} True if yielded, false if it finished immediately.
-		 */
-		Sequencer.prototype.stepToReporter = function (thread, blockId, inputName) {
-		    var currentStackFrame = thread.peekStackFrame();
-		    // Push to the stack to evaluate the reporter block.
-		    thread.pushStack(blockId);
-		    // Save name of input for `Thread.pushReportedValue`.
-		    currentStackFrame.waitingReporter = inputName;
-		    // Actually execute the block.
-		    this.startThread(thread);
-		    // If a reporter yielded, caller must wait for it to unyield.
-		    // The value will be populated once the reporter unyields,
-		    // and passed up to the currentStackFrame on next execution.
-		    return thread.status === Thread.STATUS_YIELD;
-		};
-
-		/**
-		 * Finish stepping a thread and proceed it to the next block.
-		 * @param {!Thread} thread Thread object to proceed.
-		 */
-		Sequencer.prototype.proceedThread = function (thread) {
-		    var currentBlockId = thread.peekStack();
-		    // Mark the status as done and proceed to the next block.
-		    // Pop from the stack - finished this level of execution.
-		    thread.popStack();
-		    // Push next connected block, if there is one.
-		    var nextBlockId = thread.target.blocks.getNextBlock(currentBlockId);
-		    if (nextBlockId) {
-		        thread.pushStack(nextBlockId);
-		    }
-		    // If we can't find a next block to run, mark the thread as done.
-		    if (!thread.peekStack()) {
-		        thread.setStatus(Thread.STATUS_DONE);
+		    // In known warp-mode threads, only yield when time is up.
+		    if (thread.peekStackFrame().warpMode &&
+		        thread.warpTimer.timeElapsed() > Sequencer.WARP_TIME) {
+		        thread.status = Thread.STATUS_YIELD;
+		    } else {
+		        // Look for warp-mode flag on definition, and set the thread
+		        // to warp-mode if needed.
+		        var definitionBlock = thread.target.blocks.getBlock(definition);
+		        var doWarp = definitionBlock.mutation.warp;
+		        if (doWarp) {
+		            thread.peekStackFrame().warpMode = true;
+		        } else {
+		            // In normal-mode threads, yield any time we have a recursive call.
+		            if (isRecursive) {
+		                thread.status = Thread.STATUS_YIELD;
+		            }
+		        }
 		    }
 		};
 
@@ -2640,7 +2959,7 @@ webpackJsonp([0],[
 		    thread.stack = [];
 		    thread.stackFrame = [];
 		    thread.requestScriptGlowInFrame = false;
-		    thread.setStatus(Thread.STATUS_DONE);
+		    thread.status = Thread.STATUS_DONE;
 		};
 
 		module.exports = Sequencer;
@@ -2768,6 +3087,19 @@ webpackJsonp([0],[
 		     * @type {boolean}
 		     */
 		    this.requestScriptGlowInFrame = false;
+
+		    /**
+		     * Which block ID should glow during this frame, if any.
+		     * @type {?string}
+		     */
+		    this.blockGlowInFrame = null;
+
+		    /**
+		     * A timer for when the thread enters warp mode.
+		     * Substitutes the sequencer's count toward WORK_TIME on a per-thread basis.
+		     * @type {?Timer}
+		     */
+		    this.warpTimer = null;
 		}
 
 		/**
@@ -2779,25 +3111,31 @@ webpackJsonp([0],[
 		Thread.STATUS_RUNNING = 0;
 
 		/**
-		 * Thread status for a yielded thread.
-		 * Threads are in this state when a primitive has yielded; execution is paused
-		 * until the relevant primitive unyields.
+		 * Threads are in this state when a primitive is waiting on a promise;
+		 * execution is paused until the promise changes thread status.
 		 * @const
 		 */
-		Thread.STATUS_YIELD = 1;
+		Thread.STATUS_PROMISE_WAIT = 1;
 
 		/**
-		 * Thread status for a single-frame yield.
+		 * Thread status for yield.
 		 * @const
 		 */
-		Thread.STATUS_YIELD_FRAME = 2;
+		Thread.STATUS_YIELD = 2;
+
+		/**
+		 * Thread status for a single-tick yield. This will be cleared when the
+		 * thread is resumed.
+		 * @const
+		 */
+		Thread.STATUS_YIELD_TICK = 3;
 
 		/**
 		 * Thread status for a finished/done thread.
 		 * Thread is in this state when there are no more blocks to execute.
 		 * @const
 		 */
-		Thread.STATUS_DONE = 3;
+		Thread.STATUS_DONE = 4;
 
 		/**
 		 * Push stack and update stack frames appropriately.
@@ -2808,7 +3146,14 @@ webpackJsonp([0],[
 		    // Push an empty stack frame, if we need one.
 		    // Might not, if we just popped the stack.
 		    if (this.stack.length > this.stackFrames.length) {
+		        // Copy warp mode from any higher level.
+		        var warpMode = false;
+		        if (this.stackFrames[this.stackFrames.length - 1]) {
+		            warpMode = this.stackFrames[this.stackFrames.length - 1].warpMode;
+		        }
 		        this.stackFrames.push({
+		            isLoop: false, // Whether this level of the stack is a loop.
+		            warpMode: warpMode, // Whether this level is in warp mode.
 		            reported: {}, // Collects reported input values.
 		            waitingReporter: null, // Name of waiting reporter.
 		            params: {}, // Procedure parameters.
@@ -2853,22 +3198,32 @@ webpackJsonp([0],[
 
 		/**
 		 * Push a reported value to the parent of the current stack frame.
-		 * @param {!Any} value Reported value to push.
+		 * @param {*} value Reported value to push.
 		 */
 		Thread.prototype.pushReportedValue = function (value) {
 		    var parentStackFrame = this.peekParentStackFrame();
 		    if (parentStackFrame) {
 		        var waitingReporter = parentStackFrame.waitingReporter;
 		        parentStackFrame.reported[waitingReporter] = value;
-		        parentStackFrame.waitingReporter = null;
 		    }
 		};
 
+		/**
+		 * Add a parameter to the stack frame.
+		 * Use when calling a procedure with parameter values.
+		 * @param {!string} paramName Name of parameter.
+		 * @param {*} value Value to set for parameter.
+		 */
 		Thread.prototype.pushParam = function (paramName, value) {
 		    var stackFrame = this.peekStackFrame();
 		    stackFrame.params[paramName] = value;
 		};
 
+		/**
+		 * Get a parameter at the lowest possible level of the stack.
+		 * @param {!string} paramName Name of parameter.
+		 * @return {*} value Value for parameter.
+		 */
 		Thread.prototype.getParam = function (paramName) {
 		    for (var i = this.stackFrames.length - 1; i >= 0; i--) {
 		        var frame = this.stackFrames[i];
@@ -2887,28 +3242,43 @@ webpackJsonp([0],[
 		    return this.peekStack() === this.topBlock;
 		};
 
+
 		/**
-		 * Set thread status.
-		 * @param {number} status Enum representing thread status.
+		 * Switch the thread to the next block at the current level of the stack.
+		 * For example, this is used in a standard sequence of blocks,
+		 * where execution proceeds from one block to the next.
 		 */
-		Thread.prototype.setStatus = function (status) {
-		    this.status = status;
+		Thread.prototype.goToNextBlock = function () {
+		    var nextBlockId = this.target.blocks.getNextBlock(this.peekStack());
+		    // Copy warp mode to next block.
+		    var warpMode = this.peekStackFrame().warpMode;
+		    // The current block is on the stack - pop it and push the next.
+		    // Note that this could push `null` - that is handled by the sequencer.
+		    this.popStack();
+		    this.pushStack(nextBlockId);
+		    if (this.peekStackFrame()) {
+		        this.peekStackFrame().warpMode = warpMode;
+		    }
 		};
 
 		/**
-		 * Set thread target.
-		 * @param {?Target} target Target for this thread.
+		 * Attempt to determine whether a procedure call is recursive,
+		 * by examining the stack.
+		 * @param {!string} procedureCode Procedure code of procedure being called.
+		 * @return {boolean} True if the call appears recursive.
 		 */
-		Thread.prototype.setTarget = function (target) {
-		    this.target = target;
-		};
-
-		/**
-		 * Get thread target.
-		 * @return {?Target} Target for this thread, if available.
-		 */
-		Thread.prototype.getTarget = function () {
-		    return this.target;
+		Thread.prototype.isRecursiveCall = function (procedureCode) {
+		    var callCount = 5; // Max number of enclosing procedure calls to examine.
+		    var sp = this.stack.length - 1;
+		    for (var i = sp - 1; i >= 0; i--) {
+		        var block = this.target.blocks.getBlock(this.stack[i]);
+		        if (block.opcode == 'procedures_callnoreturn' &&
+		            block.mutation.proccode == procedureCode)  {
+		            return true;
+		        }
+		        if (--callCount < 0) return false;
+		    }
+		    return false;
 		};
 
 		module.exports = Thread;
@@ -3010,7 +3380,7 @@ webpackJsonp([0],[
 		                runtime.visualReport(currentBlockId, resolvedValue);
 		            }
 		            // Finished any yields.
-		            thread.setStatus(Thread.STATUS_RUNNING);
+		            thread.status = Thread.STATUS_RUNNING;
 		        }
 		    };
 
@@ -3053,15 +3423,22 @@ webpackJsonp([0],[
 		        var input = inputs[inputName];
 		        var inputBlockId = input.block;
 		        // Is there no value for this input waiting in the stack frame?
-		        if (typeof currentStackFrame.reported[inputName] === 'undefined') {
+		        if (typeof currentStackFrame.reported[inputName] === 'undefined'
+		            && inputBlockId) {
 		            // If there's not, we need to evaluate the block.
-		            var reporterYielded = (
-		                sequencer.stepToReporter(thread, inputBlockId, inputName)
-		            );
-		            // If the reporter yielded, return immediately;
-		            // it needs time to finish and report its value.
-		            if (reporterYielded) {
+		            // Push to the stack to evaluate the reporter block.
+		            thread.pushStack(inputBlockId);
+		            // Save name of input for `Thread.pushReportedValue`.
+		            currentStackFrame.waitingReporter = inputName;
+		            // Actually execute the block.
+		            execute(sequencer, thread);
+		            if (thread.status === Thread.STATUS_PROMISE_WAIT) {
 		                return;
+		            } else {
+		                // Execution returned immediately,
+		                // and presumably a value was reported, so pop the stack.
+		                currentStackFrame.waitingReporter = null;
+		                thread.popStack();
 		            }
 		        }
 		        argValues[inputName] = currentStackFrame.reported[inputName];
@@ -3084,17 +3461,10 @@ webpackJsonp([0],[
 		        stackFrame: currentStackFrame.executionContext,
 		        target: target,
 		        yield: function() {
-		            thread.setStatus(Thread.STATUS_YIELD);
+		            thread.status = Thread.STATUS_YIELD;
 		        },
-		        yieldFrame: function() {
-		            thread.setStatus(Thread.STATUS_YIELD_FRAME);
-		        },
-		        done: function() {
-		            thread.setStatus(Thread.STATUS_RUNNING);
-		            sequencer.proceedThread(thread);
-		        },
-		        startBranch: function (branchNum) {
-		            sequencer.stepToBranch(thread, branchNum);
+		        startBranch: function (branchNum, isLoop) {
+		            sequencer.stepToBranch(thread, branchNum, isLoop);
 		        },
 		        stopAll: function () {
 		            runtime.stopAll();
@@ -3105,11 +3475,11 @@ webpackJsonp([0],[
 		        stopThread: function() {
 		            sequencer.retireThread(thread);
 		        },
-		        startProcedure: function (procedureName) {
-		            sequencer.stepToProcedure(thread, procedureName);
+		        startProcedure: function (procedureCode) {
+		            sequencer.stepToProcedure(thread, procedureCode);
 		        },
-		        getProcedureParamNames: function (procedureName) {
-		            return blockContainer.getProcedureParamNames(procedureName);
+		        getProcedureParamNames: function (procedureCode) {
+		            return blockContainer.getProcedureParamNames(procedureCode);
 		        },
 		        pushParam: function (paramName, paramValue) {
 		            thread.pushParam(paramName, paramValue);
@@ -3141,18 +3511,24 @@ webpackJsonp([0],[
 		    if (isPromise(primitiveReportedValue)) {
 		        if (thread.status === Thread.STATUS_RUNNING) {
 		            // Primitive returned a promise; automatically yield thread.
-		            thread.setStatus(Thread.STATUS_YIELD);
+		            thread.status = Thread.STATUS_PROMISE_WAIT;
 		        }
 		        // Promise handlers
 		        primitiveReportedValue.then(function(resolvedValue) {
 		            handleReport(resolvedValue);
-		            sequencer.proceedThread(thread);
+		            if (typeof resolvedValue !== 'undefined') {
+		                thread.popStack();
+		            } else {
+		                var popped = thread.popStack();
+		                var nextBlockId = thread.target.blocks.getNextBlock(popped);
+		                thread.pushStack(nextBlockId);
+		            }
 		        }, function(rejectionReason) {
 		            // Promise rejected: the primitive had some error.
 		            // Log it and proceed.
 		            console.warn('Primitive rejected promise: ', rejectionReason);
-		            thread.setStatus(Thread.STATUS_RUNNING);
-		            sequencer.proceedThread(thread);
+		            thread.status = Thread.STATUS_RUNNING;
+		            thread.popStack();
 		        });
 		    } else if (thread.status === Thread.STATUS_RUNNING) {
 		        handleReport(primitiveReportedValue);
@@ -13425,13 +13801,34 @@ webpackJsonp([0],[
 
 		var Timer = __webpack_require__(8);
 
-		function Clock () {
+		function Clock (runtime) {
 		    this._projectTimer = new Timer();
 		    this._projectTimer.start();
+		    this._pausedTime = null;
+		    this._paused = false;
+		    /**
+		     * Reference to the owning Runtime.
+		     * @type{!Runtime}
+		     */
+		    this.runtime = runtime;
 		}
 
 		Clock.prototype.projectTimer = function () {
+		    if (this._paused) {
+		        return this._pausedTime / 1000;
+		    }
 		    return this._projectTimer.timeElapsed() / 1000;
+		};
+
+		Clock.prototype.pause = function () {
+		    this._paused = true;
+		    this._pausedTime = this._projectTimer.timeElapsed();
+		};
+
+		Clock.prototype.resume = function () {
+		    this._paused = false;
+		    var dt = this._projectTimer.timeElapsed() - this._pausedTime;
+		    this._projectTimer.startTime += dt;
 		};
 
 		Clock.prototype.resetProjectTimer = function () {
@@ -13905,7 +14302,7 @@ webpackJsonp([0],[
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
-		var Promise = __webpack_require__(73);
+		var Timer = __webpack_require__(8);
 
 		function Scratch3ControlBlocks(runtime) {
 		    /**
@@ -13929,7 +14326,6 @@ webpackJsonp([0],[
 		        'control_if': this.if,
 		        'control_if_else': this.ifElse,
 		        'control_stop': this.stop,
-		        'control_create_clone_of_menu': this.createCloneMenu,
 		        'control_create_clone_of': this.createClone,
 		        'control_delete_this_clone': this.deleteClone
 		    };
@@ -13952,90 +14348,60 @@ webpackJsonp([0],[
 		    // Only execute once per frame.
 		    // When the branch finishes, `repeat` will be executed again and
 		    // the second branch will be taken, yielding for the rest of the frame.
-		    if (!util.stackFrame.executedInFrame) {
-		        util.stackFrame.executedInFrame = true;
-		        // Decrease counter
-		        util.stackFrame.loopCounter--;
-		        // If we still have some left, start the branch.
-		        if (util.stackFrame.loopCounter >= 0) {
-		            util.startBranch();
-		        }
-		    } else {
-		        util.stackFrame.executedInFrame = false;
-		        util.yieldFrame();
+		    // Decrease counter
+		    util.stackFrame.loopCounter--;
+		    // If we still have some left, start the branch.
+		    if (util.stackFrame.loopCounter >= 0) {
+		        util.startBranch(1, true);
 		    }
 		};
 
 		Scratch3ControlBlocks.prototype.repeatUntil = function(args, util) {
 		    var condition = Cast.toBoolean(args.CONDITION);
-		    // Only execute once per frame.
-		    // When the branch finishes, `repeat` will be executed again and
-		    // the second branch will be taken, yielding for the rest of the frame.
-		    if (!util.stackFrame.executedInFrame) {
-		        util.stackFrame.executedInFrame = true;
-		        // If the condition is true, start the branch.
-		        if (!condition) {
-		            util.startBranch();
-		        }
-		    } else {
-		        util.stackFrame.executedInFrame = false;
-		        util.yieldFrame();
+		    // If the condition is true, start the branch.
+		    if (!condition) {
+		        util.startBranch(1, true);
 		    }
 		};
 
 		Scratch3ControlBlocks.prototype.waitUntil = function(args, util) {
 		    var condition = Cast.toBoolean(args.CONDITION);
-		    // Only execute once per frame.
 		    if (!condition) {
-		        util.yieldFrame();
+		        util.yield();
 		    }
 		};
 
 		Scratch3ControlBlocks.prototype.forever = function(args, util) {
-		    // Only execute once per frame.
-		    // When the branch finishes, `forever` will be executed again and
-		    // the second branch will be taken, yielding for the rest of the frame.
-		    if (!util.stackFrame.executedInFrame) {
-		        util.stackFrame.executedInFrame = true;
-		        util.startBranch();
-		    } else {
-		        util.stackFrame.executedInFrame = false;
-		        util.yieldFrame();
-		    }
+		    util.startBranch(1, true);
 		};
 
-		Scratch3ControlBlocks.prototype.wait = function(args) {
-		    var duration = Cast.toNumber(args.DURATION);
-		    return new Promise(function(resolve) {
-		        setTimeout(function() {
-		            resolve();
-		        }, 1000 * duration);
-		    });
+		Scratch3ControlBlocks.prototype.wait = function(args, util) {
+		    if (!util.stackFrame.timer) {
+		        util.stackFrame.timer = new Timer();
+		        util.stackFrame.timer.start();
+		        util.yield();
+		        this.runtime.requestRedraw();
+		    } else {
+		        var duration = Math.max(0, 1000 * Cast.toNumber(args.DURATION));
+		        if (util.stackFrame.timer.timeElapsed() < duration) {
+		            util.yield();
+		        }
+		    }
 		};
 
 		Scratch3ControlBlocks.prototype.if = function(args, util) {
 		    var condition = Cast.toBoolean(args.CONDITION);
-		    // Only execute one time. `if` will be returned to
-		    // when the branch finishes, but it shouldn't execute again.
-		    if (util.stackFrame.executedInFrame === undefined) {
-		        util.stackFrame.executedInFrame = true;
-		        if (condition) {
-		            util.startBranch();
-		        }
+		    if (condition) {
+		        util.startBranch(1, false);
 		    }
 		};
 
 		Scratch3ControlBlocks.prototype.ifElse = function(args, util) {
 		    var condition = Cast.toBoolean(args.CONDITION);
-		    // Only execute one time. `ifElse` will be returned to
-		    // when the branch finishes, but it shouldn't execute again.
-		    if (util.stackFrame.executedInFrame === undefined) {
-		        util.stackFrame.executedInFrame = true;
-		        if (condition) {
-		            util.startBranch(1);
-		        } else {
-		            util.startBranch(2);
-		        }
+		    if (condition) {
+		        util.startBranch(1, false);
+		    } else {
+		        util.startBranch(2, false);
 		    }
 		};
 
@@ -14049,11 +14415,6 @@ webpackJsonp([0],[
 		    } else if (option == 'this script') {
 		        util.stopThread();
 		    }
-		};
-
-		// @todo (GH-146): remove.
-		Scratch3ControlBlocks.prototype.createCloneMenu = function (args) {
-		    return args.CLONE_OPTION;
 		};
 
 		Scratch3ControlBlocks.prototype.createClone = function (args, util) {
@@ -14083,908 +14444,6 @@ webpackJsonp([0],[
 
 	/***/ },
 	/* 73 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		module.exports = __webpack_require__(74)
-
-
-	/***/ },
-	/* 74 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		module.exports = __webpack_require__(75);
-		__webpack_require__(77);
-		__webpack_require__(78);
-		__webpack_require__(79);
-		__webpack_require__(80);
-		__webpack_require__(82);
-
-
-	/***/ },
-	/* 75 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		var asap = __webpack_require__(76);
-
-		function noop() {}
-
-		// States:
-		//
-		// 0 - pending
-		// 1 - fulfilled with _value
-		// 2 - rejected with _value
-		// 3 - adopted the state of another promise, _value
-		//
-		// once the state is no longer pending (0) it is immutable
-
-		// All `_` prefixed properties will be reduced to `_{random number}`
-		// at build time to obfuscate them and discourage their use.
-		// We don't use symbols or Object.defineProperty to fully hide them
-		// because the performance isn't good enough.
-
-
-		// to avoid using try/catch inside critical functions, we
-		// extract them to here.
-		var LAST_ERROR = null;
-		var IS_ERROR = {};
-		function getThen(obj) {
-		  try {
-		    return obj.then;
-		  } catch (ex) {
-		    LAST_ERROR = ex;
-		    return IS_ERROR;
-		  }
-		}
-
-		function tryCallOne(fn, a) {
-		  try {
-		    return fn(a);
-		  } catch (ex) {
-		    LAST_ERROR = ex;
-		    return IS_ERROR;
-		  }
-		}
-		function tryCallTwo(fn, a, b) {
-		  try {
-		    fn(a, b);
-		  } catch (ex) {
-		    LAST_ERROR = ex;
-		    return IS_ERROR;
-		  }
-		}
-
-		module.exports = Promise;
-
-		function Promise(fn) {
-		  if (typeof this !== 'object') {
-		    throw new TypeError('Promises must be constructed via new');
-		  }
-		  if (typeof fn !== 'function') {
-		    throw new TypeError('not a function');
-		  }
-		  this._45 = 0;
-		  this._81 = 0;
-		  this._65 = null;
-		  this._54 = null;
-		  if (fn === noop) return;
-		  doResolve(fn, this);
-		}
-		Promise._10 = null;
-		Promise._97 = null;
-		Promise._61 = noop;
-
-		Promise.prototype.then = function(onFulfilled, onRejected) {
-		  if (this.constructor !== Promise) {
-		    return safeThen(this, onFulfilled, onRejected);
-		  }
-		  var res = new Promise(noop);
-		  handle(this, new Handler(onFulfilled, onRejected, res));
-		  return res;
-		};
-
-		function safeThen(self, onFulfilled, onRejected) {
-		  return new self.constructor(function (resolve, reject) {
-		    var res = new Promise(noop);
-		    res.then(resolve, reject);
-		    handle(self, new Handler(onFulfilled, onRejected, res));
-		  });
-		};
-		function handle(self, deferred) {
-		  while (self._81 === 3) {
-		    self = self._65;
-		  }
-		  if (Promise._10) {
-		    Promise._10(self);
-		  }
-		  if (self._81 === 0) {
-		    if (self._45 === 0) {
-		      self._45 = 1;
-		      self._54 = deferred;
-		      return;
-		    }
-		    if (self._45 === 1) {
-		      self._45 = 2;
-		      self._54 = [self._54, deferred];
-		      return;
-		    }
-		    self._54.push(deferred);
-		    return;
-		  }
-		  handleResolved(self, deferred);
-		}
-
-		function handleResolved(self, deferred) {
-		  asap(function() {
-		    var cb = self._81 === 1 ? deferred.onFulfilled : deferred.onRejected;
-		    if (cb === null) {
-		      if (self._81 === 1) {
-		        resolve(deferred.promise, self._65);
-		      } else {
-		        reject(deferred.promise, self._65);
-		      }
-		      return;
-		    }
-		    var ret = tryCallOne(cb, self._65);
-		    if (ret === IS_ERROR) {
-		      reject(deferred.promise, LAST_ERROR);
-		    } else {
-		      resolve(deferred.promise, ret);
-		    }
-		  });
-		}
-		function resolve(self, newValue) {
-		  // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-		  if (newValue === self) {
-		    return reject(
-		      self,
-		      new TypeError('A promise cannot be resolved with itself.')
-		    );
-		  }
-		  if (
-		    newValue &&
-		    (typeof newValue === 'object' || typeof newValue === 'function')
-		  ) {
-		    var then = getThen(newValue);
-		    if (then === IS_ERROR) {
-		      return reject(self, LAST_ERROR);
-		    }
-		    if (
-		      then === self.then &&
-		      newValue instanceof Promise
-		    ) {
-		      self._81 = 3;
-		      self._65 = newValue;
-		      finale(self);
-		      return;
-		    } else if (typeof then === 'function') {
-		      doResolve(then.bind(newValue), self);
-		      return;
-		    }
-		  }
-		  self._81 = 1;
-		  self._65 = newValue;
-		  finale(self);
-		}
-
-		function reject(self, newValue) {
-		  self._81 = 2;
-		  self._65 = newValue;
-		  if (Promise._97) {
-		    Promise._97(self, newValue);
-		  }
-		  finale(self);
-		}
-		function finale(self) {
-		  if (self._45 === 1) {
-		    handle(self, self._54);
-		    self._54 = null;
-		  }
-		  if (self._45 === 2) {
-		    for (var i = 0; i < self._54.length; i++) {
-		      handle(self, self._54[i]);
-		    }
-		    self._54 = null;
-		  }
-		}
-
-		function Handler(onFulfilled, onRejected, promise){
-		  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
-		  this.onRejected = typeof onRejected === 'function' ? onRejected : null;
-		  this.promise = promise;
-		}
-
-		/**
-		 * Take a potentially misbehaving resolver function and make sure
-		 * onFulfilled and onRejected are only called once.
-		 *
-		 * Makes no guarantees about asynchrony.
-		 */
-		function doResolve(fn, promise) {
-		  var done = false;
-		  var res = tryCallTwo(fn, function (value) {
-		    if (done) return;
-		    done = true;
-		    resolve(promise, value);
-		  }, function (reason) {
-		    if (done) return;
-		    done = true;
-		    reject(promise, reason);
-		  })
-		  if (!done && res === IS_ERROR) {
-		    done = true;
-		    reject(promise, LAST_ERROR);
-		  }
-		}
-
-
-	/***/ },
-	/* 76 */
-	/***/ function(module, exports) {
-
-		/* WEBPACK VAR INJECTION */(function(global) {"use strict";
-
-		// Use the fastest means possible to execute a task in its own turn, with
-		// priority over other events including IO, animation, reflow, and redraw
-		// events in browsers.
-		//
-		// An exception thrown by a task will permanently interrupt the processing of
-		// subsequent tasks. The higher level `asap` function ensures that if an
-		// exception is thrown by a task, that the task queue will continue flushing as
-		// soon as possible, but if you use `rawAsap` directly, you are responsible to
-		// either ensure that no exceptions are thrown from your task, or to manually
-		// call `rawAsap.requestFlush` if an exception is thrown.
-		module.exports = rawAsap;
-		function rawAsap(task) {
-		    if (!queue.length) {
-		        requestFlush();
-		        flushing = true;
-		    }
-		    // Equivalent to push, but avoids a function call.
-		    queue[queue.length] = task;
-		}
-
-		var queue = [];
-		// Once a flush has been requested, no further calls to `requestFlush` are
-		// necessary until the next `flush` completes.
-		var flushing = false;
-		// `requestFlush` is an implementation-specific method that attempts to kick
-		// off a `flush` event as quickly as possible. `flush` will attempt to exhaust
-		// the event queue before yielding to the browser's own event loop.
-		var requestFlush;
-		// The position of the next task to execute in the task queue. This is
-		// preserved between calls to `flush` so that it can be resumed if
-		// a task throws an exception.
-		var index = 0;
-		// If a task schedules additional tasks recursively, the task queue can grow
-		// unbounded. To prevent memory exhaustion, the task queue will periodically
-		// truncate already-completed tasks.
-		var capacity = 1024;
-
-		// The flush function processes all tasks that have been scheduled with
-		// `rawAsap` unless and until one of those tasks throws an exception.
-		// If a task throws an exception, `flush` ensures that its state will remain
-		// consistent and will resume where it left off when called again.
-		// However, `flush` does not make any arrangements to be called again if an
-		// exception is thrown.
-		function flush() {
-		    while (index < queue.length) {
-		        var currentIndex = index;
-		        // Advance the index before calling the task. This ensures that we will
-		        // begin flushing on the next task the task throws an error.
-		        index = index + 1;
-		        queue[currentIndex].call();
-		        // Prevent leaking memory for long chains of recursive calls to `asap`.
-		        // If we call `asap` within tasks scheduled by `asap`, the queue will
-		        // grow, but to avoid an O(n) walk for every task we execute, we don't
-		        // shift tasks off the queue after they have been executed.
-		        // Instead, we periodically shift 1024 tasks off the queue.
-		        if (index > capacity) {
-		            // Manually shift all values starting at the index back to the
-		            // beginning of the queue.
-		            for (var scan = 0, newLength = queue.length - index; scan < newLength; scan++) {
-		                queue[scan] = queue[scan + index];
-		            }
-		            queue.length -= index;
-		            index = 0;
-		        }
-		    }
-		    queue.length = 0;
-		    index = 0;
-		    flushing = false;
-		}
-
-		// `requestFlush` is implemented using a strategy based on data collected from
-		// every available SauceLabs Selenium web driver worker at time of writing.
-		// https://docs.google.com/spreadsheets/d/1mG-5UYGup5qxGdEMWkhP6BWCz053NUb2E1QoUTU16uA/edit#gid=783724593
-
-		// Safari 6 and 6.1 for desktop, iPad, and iPhone are the only browsers that
-		// have WebKitMutationObserver but not un-prefixed MutationObserver.
-		// Must use `global` or `self` instead of `window` to work in both frames and web
-		// workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
-
-		/* globals self */
-		var scope = typeof global !== "undefined" ? global : self;
-		var BrowserMutationObserver = scope.MutationObserver || scope.WebKitMutationObserver;
-
-		// MutationObservers are desirable because they have high priority and work
-		// reliably everywhere they are implemented.
-		// They are implemented in all modern browsers.
-		//
-		// - Android 4-4.3
-		// - Chrome 26-34
-		// - Firefox 14-29
-		// - Internet Explorer 11
-		// - iPad Safari 6-7.1
-		// - iPhone Safari 7-7.1
-		// - Safari 6-7
-		if (typeof BrowserMutationObserver === "function") {
-		    requestFlush = makeRequestCallFromMutationObserver(flush);
-
-		// MessageChannels are desirable because they give direct access to the HTML
-		// task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
-		// 11-12, and in web workers in many engines.
-		// Although message channels yield to any queued rendering and IO tasks, they
-		// would be better than imposing the 4ms delay of timers.
-		// However, they do not work reliably in Internet Explorer or Safari.
-
-		// Internet Explorer 10 is the only browser that has setImmediate but does
-		// not have MutationObservers.
-		// Although setImmediate yields to the browser's renderer, it would be
-		// preferrable to falling back to setTimeout since it does not have
-		// the minimum 4ms penalty.
-		// Unfortunately there appears to be a bug in Internet Explorer 10 Mobile (and
-		// Desktop to a lesser extent) that renders both setImmediate and
-		// MessageChannel useless for the purposes of ASAP.
-		// https://github.com/kriskowal/q/issues/396
-
-		// Timers are implemented universally.
-		// We fall back to timers in workers in most engines, and in foreground
-		// contexts in the following browsers.
-		// However, note that even this simple case requires nuances to operate in a
-		// broad spectrum of browsers.
-		//
-		// - Firefox 3-13
-		// - Internet Explorer 6-9
-		// - iPad Safari 4.3
-		// - Lynx 2.8.7
-		} else {
-		    requestFlush = makeRequestCallFromTimer(flush);
-		}
-
-		// `requestFlush` requests that the high priority event queue be flushed as
-		// soon as possible.
-		// This is useful to prevent an error thrown in a task from stalling the event
-		// queue if the exception handled by Node.js’s
-		// `process.on("uncaughtException")` or by a domain.
-		rawAsap.requestFlush = requestFlush;
-
-		// To request a high priority event, we induce a mutation observer by toggling
-		// the text of a text node between "1" and "-1".
-		function makeRequestCallFromMutationObserver(callback) {
-		    var toggle = 1;
-		    var observer = new BrowserMutationObserver(callback);
-		    var node = document.createTextNode("");
-		    observer.observe(node, {characterData: true});
-		    return function requestCall() {
-		        toggle = -toggle;
-		        node.data = toggle;
-		    };
-		}
-
-		// The message channel technique was discovered by Malte Ubl and was the
-		// original foundation for this library.
-		// http://www.nonblocking.io/2011/06/windownexttick.html
-
-		// Safari 6.0.5 (at least) intermittently fails to create message ports on a
-		// page's first load. Thankfully, this version of Safari supports
-		// MutationObservers, so we don't need to fall back in that case.
-
-		// function makeRequestCallFromMessageChannel(callback) {
-		//     var channel = new MessageChannel();
-		//     channel.port1.onmessage = callback;
-		//     return function requestCall() {
-		//         channel.port2.postMessage(0);
-		//     };
-		// }
-
-		// For reasons explained above, we are also unable to use `setImmediate`
-		// under any circumstances.
-		// Even if we were, there is another bug in Internet Explorer 10.
-		// It is not sufficient to assign `setImmediate` to `requestFlush` because
-		// `setImmediate` must be called *by name* and therefore must be wrapped in a
-		// closure.
-		// Never forget.
-
-		// function makeRequestCallFromSetImmediate(callback) {
-		//     return function requestCall() {
-		//         setImmediate(callback);
-		//     };
-		// }
-
-		// Safari 6.0 has a problem where timers will get lost while the user is
-		// scrolling. This problem does not impact ASAP because Safari 6.0 supports
-		// mutation observers, so that implementation is used instead.
-		// However, if we ever elect to use timers in Safari, the prevalent work-around
-		// is to add a scroll event listener that calls for a flush.
-
-		// `setTimeout` does not call the passed callback if the delay is less than
-		// approximately 7 in web workers in Firefox 8 through 18, and sometimes not
-		// even then.
-
-		function makeRequestCallFromTimer(callback) {
-		    return function requestCall() {
-		        // We dispatch a timeout with a specified delay of 0 for engines that
-		        // can reliably accommodate that request. This will usually be snapped
-		        // to a 4 milisecond delay, but once we're flushing, there's no delay
-		        // between events.
-		        var timeoutHandle = setTimeout(handleTimer, 0);
-		        // However, since this timer gets frequently dropped in Firefox
-		        // workers, we enlist an interval handle that will try to fire
-		        // an event 20 times per second until it succeeds.
-		        var intervalHandle = setInterval(handleTimer, 50);
-
-		        function handleTimer() {
-		            // Whichever timer succeeds will cancel both timers and
-		            // execute the callback.
-		            clearTimeout(timeoutHandle);
-		            clearInterval(intervalHandle);
-		            callback();
-		        }
-		    };
-		}
-
-		// This is for `asap.js` only.
-		// Its name will be periodically randomized to break any code that depends on
-		// its existence.
-		rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
-
-		// ASAP was originally a nextTick shim included in Q. This was factored out
-		// into this ASAP package. It was later adapted to RSVP which made further
-		// amendments. These decisions, particularly to marginalize MessageChannel and
-		// to capture the MutationObserver implementation in a closure, were integrated
-		// back into ASAP proper.
-		// https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
-
-		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-	/***/ },
-	/* 77 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		var Promise = __webpack_require__(75);
-
-		module.exports = Promise;
-		Promise.prototype.done = function (onFulfilled, onRejected) {
-		  var self = arguments.length ? this.then.apply(this, arguments) : this;
-		  self.then(null, function (err) {
-		    setTimeout(function () {
-		      throw err;
-		    }, 0);
-		  });
-		};
-
-
-	/***/ },
-	/* 78 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		var Promise = __webpack_require__(75);
-
-		module.exports = Promise;
-		Promise.prototype['finally'] = function (f) {
-		  return this.then(function (value) {
-		    return Promise.resolve(f()).then(function () {
-		      return value;
-		    });
-		  }, function (err) {
-		    return Promise.resolve(f()).then(function () {
-		      throw err;
-		    });
-		  });
-		};
-
-
-	/***/ },
-	/* 79 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		//This file contains the ES6 extensions to the core Promises/A+ API
-
-		var Promise = __webpack_require__(75);
-
-		module.exports = Promise;
-
-		/* Static Functions */
-
-		var TRUE = valuePromise(true);
-		var FALSE = valuePromise(false);
-		var NULL = valuePromise(null);
-		var UNDEFINED = valuePromise(undefined);
-		var ZERO = valuePromise(0);
-		var EMPTYSTRING = valuePromise('');
-
-		function valuePromise(value) {
-		  var p = new Promise(Promise._61);
-		  p._81 = 1;
-		  p._65 = value;
-		  return p;
-		}
-		Promise.resolve = function (value) {
-		  if (value instanceof Promise) return value;
-
-		  if (value === null) return NULL;
-		  if (value === undefined) return UNDEFINED;
-		  if (value === true) return TRUE;
-		  if (value === false) return FALSE;
-		  if (value === 0) return ZERO;
-		  if (value === '') return EMPTYSTRING;
-
-		  if (typeof value === 'object' || typeof value === 'function') {
-		    try {
-		      var then = value.then;
-		      if (typeof then === 'function') {
-		        return new Promise(then.bind(value));
-		      }
-		    } catch (ex) {
-		      return new Promise(function (resolve, reject) {
-		        reject(ex);
-		      });
-		    }
-		  }
-		  return valuePromise(value);
-		};
-
-		Promise.all = function (arr) {
-		  var args = Array.prototype.slice.call(arr);
-
-		  return new Promise(function (resolve, reject) {
-		    if (args.length === 0) return resolve([]);
-		    var remaining = args.length;
-		    function res(i, val) {
-		      if (val && (typeof val === 'object' || typeof val === 'function')) {
-		        if (val instanceof Promise && val.then === Promise.prototype.then) {
-		          while (val._81 === 3) {
-		            val = val._65;
-		          }
-		          if (val._81 === 1) return res(i, val._65);
-		          if (val._81 === 2) reject(val._65);
-		          val.then(function (val) {
-		            res(i, val);
-		          }, reject);
-		          return;
-		        } else {
-		          var then = val.then;
-		          if (typeof then === 'function') {
-		            var p = new Promise(then.bind(val));
-		            p.then(function (val) {
-		              res(i, val);
-		            }, reject);
-		            return;
-		          }
-		        }
-		      }
-		      args[i] = val;
-		      if (--remaining === 0) {
-		        resolve(args);
-		      }
-		    }
-		    for (var i = 0; i < args.length; i++) {
-		      res(i, args[i]);
-		    }
-		  });
-		};
-
-		Promise.reject = function (value) {
-		  return new Promise(function (resolve, reject) {
-		    reject(value);
-		  });
-		};
-
-		Promise.race = function (values) {
-		  return new Promise(function (resolve, reject) {
-		    values.forEach(function(value){
-		      Promise.resolve(value).then(resolve, reject);
-		    });
-		  });
-		};
-
-		/* Prototype Methods */
-
-		Promise.prototype['catch'] = function (onRejected) {
-		  return this.then(null, onRejected);
-		};
-
-
-	/***/ },
-	/* 80 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		// This file contains then/promise specific extensions that are only useful
-		// for node.js interop
-
-		var Promise = __webpack_require__(75);
-		var asap = __webpack_require__(81);
-
-		module.exports = Promise;
-
-		/* Static Functions */
-
-		Promise.denodeify = function (fn, argumentCount) {
-		  if (
-		    typeof argumentCount === 'number' && argumentCount !== Infinity
-		  ) {
-		    return denodeifyWithCount(fn, argumentCount);
-		  } else {
-		    return denodeifyWithoutCount(fn);
-		  }
-		}
-
-		var callbackFn = (
-		  'function (err, res) {' +
-		  'if (err) { rj(err); } else { rs(res); }' +
-		  '}'
-		);
-		function denodeifyWithCount(fn, argumentCount) {
-		  var args = [];
-		  for (var i = 0; i < argumentCount; i++) {
-		    args.push('a' + i);
-		  }
-		  var body = [
-		    'return function (' + args.join(',') + ') {',
-		    'var self = this;',
-		    'return new Promise(function (rs, rj) {',
-		    'var res = fn.call(',
-		    ['self'].concat(args).concat([callbackFn]).join(','),
-		    ');',
-		    'if (res &&',
-		    '(typeof res === "object" || typeof res === "function") &&',
-		    'typeof res.then === "function"',
-		    ') {rs(res);}',
-		    '});',
-		    '};'
-		  ].join('');
-		  return Function(['Promise', 'fn'], body)(Promise, fn);
-		}
-		function denodeifyWithoutCount(fn) {
-		  var fnLength = Math.max(fn.length - 1, 3);
-		  var args = [];
-		  for (var i = 0; i < fnLength; i++) {
-		    args.push('a' + i);
-		  }
-		  var body = [
-		    'return function (' + args.join(',') + ') {',
-		    'var self = this;',
-		    'var args;',
-		    'var argLength = arguments.length;',
-		    'if (arguments.length > ' + fnLength + ') {',
-		    'args = new Array(arguments.length + 1);',
-		    'for (var i = 0; i < arguments.length; i++) {',
-		    'args[i] = arguments[i];',
-		    '}',
-		    '}',
-		    'return new Promise(function (rs, rj) {',
-		    'var cb = ' + callbackFn + ';',
-		    'var res;',
-		    'switch (argLength) {',
-		    args.concat(['extra']).map(function (_, index) {
-		      return (
-		        'case ' + (index) + ':' +
-		        'res = fn.call(' + ['self'].concat(args.slice(0, index)).concat('cb').join(',') + ');' +
-		        'break;'
-		      );
-		    }).join(''),
-		    'default:',
-		    'args[argLength] = cb;',
-		    'res = fn.apply(self, args);',
-		    '}',
-		    
-		    'if (res &&',
-		    '(typeof res === "object" || typeof res === "function") &&',
-		    'typeof res.then === "function"',
-		    ') {rs(res);}',
-		    '});',
-		    '};'
-		  ].join('');
-
-		  return Function(
-		    ['Promise', 'fn'],
-		    body
-		  )(Promise, fn);
-		}
-
-		Promise.nodeify = function (fn) {
-		  return function () {
-		    var args = Array.prototype.slice.call(arguments);
-		    var callback =
-		      typeof args[args.length - 1] === 'function' ? args.pop() : null;
-		    var ctx = this;
-		    try {
-		      return fn.apply(this, arguments).nodeify(callback, ctx);
-		    } catch (ex) {
-		      if (callback === null || typeof callback == 'undefined') {
-		        return new Promise(function (resolve, reject) {
-		          reject(ex);
-		        });
-		      } else {
-		        asap(function () {
-		          callback.call(ctx, ex);
-		        })
-		      }
-		    }
-		  }
-		}
-
-		Promise.prototype.nodeify = function (callback, ctx) {
-		  if (typeof callback != 'function') return this;
-
-		  this.then(function (value) {
-		    asap(function () {
-		      callback.call(ctx, null, value);
-		    });
-		  }, function (err) {
-		    asap(function () {
-		      callback.call(ctx, err);
-		    });
-		  });
-		}
-
-
-	/***/ },
-	/* 81 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		"use strict";
-
-		// rawAsap provides everything we need except exception management.
-		var rawAsap = __webpack_require__(76);
-		// RawTasks are recycled to reduce GC churn.
-		var freeTasks = [];
-		// We queue errors to ensure they are thrown in right order (FIFO).
-		// Array-as-queue is good enough here, since we are just dealing with exceptions.
-		var pendingErrors = [];
-		var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
-
-		function throwFirstError() {
-		    if (pendingErrors.length) {
-		        throw pendingErrors.shift();
-		    }
-		}
-
-		/**
-		 * Calls a task as soon as possible after returning, in its own event, with priority
-		 * over other events like animation, reflow, and repaint. An error thrown from an
-		 * event will not interrupt, nor even substantially slow down the processing of
-		 * other events, but will be rather postponed to a lower priority event.
-		 * @param {{call}} task A callable object, typically a function that takes no
-		 * arguments.
-		 */
-		module.exports = asap;
-		function asap(task) {
-		    var rawTask;
-		    if (freeTasks.length) {
-		        rawTask = freeTasks.pop();
-		    } else {
-		        rawTask = new RawTask();
-		    }
-		    rawTask.task = task;
-		    rawAsap(rawTask);
-		}
-
-		// We wrap tasks with recyclable task objects.  A task object implements
-		// `call`, just like a function.
-		function RawTask() {
-		    this.task = null;
-		}
-
-		// The sole purpose of wrapping the task is to catch the exception and recycle
-		// the task object after its single use.
-		RawTask.prototype.call = function () {
-		    try {
-		        this.task.call();
-		    } catch (error) {
-		        if (asap.onerror) {
-		            // This hook exists purely for testing purposes.
-		            // Its name will be periodically randomized to break any code that
-		            // depends on its existence.
-		            asap.onerror(error);
-		        } else {
-		            // In a web browser, exceptions are not fatal. However, to avoid
-		            // slowing down the queue of pending tasks, we rethrow the error in a
-		            // lower priority turn.
-		            pendingErrors.push(error);
-		            requestErrorThrow();
-		        }
-		    } finally {
-		        this.task = null;
-		        freeTasks[freeTasks.length] = this;
-		    }
-		};
-
-
-	/***/ },
-	/* 82 */
-	/***/ function(module, exports, __webpack_require__) {
-
-		'use strict';
-
-		var Promise = __webpack_require__(75);
-
-		module.exports = Promise;
-		Promise.enableSynchronous = function () {
-		  Promise.prototype.isPending = function() {
-		    return this.getState() == 0;
-		  };
-
-		  Promise.prototype.isFulfilled = function() {
-		    return this.getState() == 1;
-		  };
-
-		  Promise.prototype.isRejected = function() {
-		    return this.getState() == 2;
-		  };
-
-		  Promise.prototype.getValue = function () {
-		    if (this._81 === 3) {
-		      return this._65.getValue();
-		    }
-
-		    if (!this.isFulfilled()) {
-		      throw new Error('Cannot get a value of an unfulfilled promise.');
-		    }
-
-		    return this._65;
-		  };
-
-		  Promise.prototype.getReason = function () {
-		    if (this._81 === 3) {
-		      return this._65.getReason();
-		    }
-
-		    if (!this.isRejected()) {
-		      throw new Error('Cannot get a rejection reason of a non-rejected promise.');
-		    }
-
-		    return this._65;
-		  };
-
-		  Promise.prototype.getState = function () {
-		    if (this._81 === 3) {
-		      return this._65.getState();
-		    }
-		    if (this._81 === -1 || this._81 === -2) {
-		      return 0;
-		    }
-
-		    return this._81;
-		  };
-		};
-
-		Promise.disableSynchronous = function() {
-		  Promise.prototype.isPending = undefined;
-		  Promise.prototype.isFulfilled = undefined;
-		  Promise.prototype.isRejected = undefined;
-		  Promise.prototype.getValue = undefined;
-		  Promise.prototype.getReason = undefined;
-		  Promise.prototype.getState = undefined;
-		};
-
-
-	/***/ },
-	/* 83 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15071,7 +14530,7 @@ webpackJsonp([0],[
 		        return instance.runtime.isActiveThread(thread);
 		    });
 		    if (waiting) {
-		        util.yieldFrame();
+		        util.yield();
 		    }
 		};
 
@@ -15079,7 +14538,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 84 */
+	/* 74 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15114,6 +14573,8 @@ webpackJsonp([0],[
 		        'looks_cleargraphiceffects': this.clearEffects,
 		        'looks_changesizeby': this.changeSize,
 		        'looks_setsizeto': this.setSize,
+		        'looks_gotofront': this.goToFront,
+		        'looks_gobacklayers': this.goBackLayers,
 		        'looks_size': this.getSize,
 		        'looks_costumeorder': this.getCostumeIndex,
 		        'looks_backdroporder': this.getBackdropIndex,
@@ -15235,7 +14696,7 @@ webpackJsonp([0],[
 		        return instance.runtime.isActiveThread(thread);
 		    });
 		    if (waiting) {
-		        util.yieldFrame();
+		        util.yield();
 		    }
 		};
 
@@ -15274,6 +14735,14 @@ webpackJsonp([0],[
 		    util.target.setSize(size);
 		};
 
+		Scratch3LooksBlocks.prototype.goToFront = function (args, util) {
+		    util.target.goToFront();
+		};
+
+		Scratch3LooksBlocks.prototype.goBackLayers = function (args, util) {
+		    util.target.goBackLayers(args.NUM);
+		};
+
 		Scratch3LooksBlocks.prototype.getSize = function (args, util) {
 		    return util.target.size;
 		};
@@ -15296,7 +14765,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 85 */
+	/* 75 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15325,6 +14794,7 @@ webpackJsonp([0],[
 		        'motion_pointindirection': this.pointInDirection,
 		        'motion_pointtowards': this.pointTowards,
 		        'motion_glidesecstoxy': this.glide,
+		        'motion_ifonedgebounce': this.ifOnEdgeBounce,
 		        'motion_setrotationstyle': this.setRotationStyle,
 		        'motion_changexby': this.changeX,
 		        'motion_setx': this.setX,
@@ -15419,7 +14889,7 @@ webpackJsonp([0],[
 		            util.target.setXY(util.stackFrame.endX, util.stackFrame.endY);
 		            return;
 		        }
-		        util.yieldFrame();
+		        util.yield();
 		    } else {
 		        var timeElapsed = util.stackFrame.timer.timeElapsed();
 		        if (timeElapsed < util.stackFrame.duration * 1000) {
@@ -15431,12 +14901,68 @@ webpackJsonp([0],[
 		                util.stackFrame.startX + dx,
 		                util.stackFrame.startY + dy
 		            );
-		            util.yieldFrame();
+		            util.yield();
 		        } else {
 		            // Finished: move to final position.
 		            util.target.setXY(util.stackFrame.endX, util.stackFrame.endY);
 		        }
 		    }
+		};
+
+		Scratch3MotionBlocks.prototype.ifOnEdgeBounce = function (args, util) {
+		    var bounds = util.target.getBounds();
+		    if (!bounds) {
+		        return;
+		    }
+		    // Measure distance to edges.
+		    // Values are positive when the sprite is far away,
+		    // and clamped to zero when the sprite is beyond.
+		    var stageWidth = this.runtime.constructor.STAGE_WIDTH;
+		    var stageHeight = this.runtime.constructor.STAGE_HEIGHT;
+		    var distLeft = Math.max(0, stageWidth / 2 + bounds.left);
+		    var distTop = Math.max(0, stageHeight / 2 - bounds.top);
+		    var distRight = Math.max(0, stageWidth / 2 - bounds.right);
+		    var distBottom = Math.max(0, stageHeight / 2 + bounds.bottom);
+		    // Find the nearest edge.
+		    var nearestEdge = '';
+		    var minDist = Infinity;
+		    if (distLeft < minDist) {
+		        minDist = distLeft;
+		        nearestEdge = 'left';
+		    }
+		    if (distTop < minDist) {
+		        minDist = distTop;
+		        nearestEdge = 'top';
+		    }
+		    if (distRight < minDist) {
+		        minDist = distRight;
+		        nearestEdge = 'right';
+		    }
+		    if (distBottom < minDist) {
+		        minDist = distBottom;
+		        nearestEdge = 'bottom';
+		    }
+		    if (minDist > 0) {
+		        return; // Not touching any edge.
+		    }
+		    // Point away from the nearest edge.
+		    var radians = MathUtil.degToRad(90 - util.target.direction);
+		    var dx = Math.cos(radians);
+		    var dy = -Math.sin(radians);
+		    if (nearestEdge == 'left') {
+		        dx = Math.max(0.2, Math.abs(dx));
+		    } else if (nearestEdge == 'top') {
+		        dy = Math.max(0.2, Math.abs(dy));
+		    } else if (nearestEdge == 'right') {
+		        dx = 0 - Math.max(0.2, Math.abs(dx));
+		    } else if (nearestEdge == 'bottom') {
+		        dy = 0 - Math.max(0.2, Math.abs(dy));
+		    }
+		    var newDirection = MathUtil.radToDeg(Math.atan2(dy, dx)) + 90;
+		    util.target.setDirection(newDirection);
+		    // Keep within the stage.
+		    var fencedPosition = util.target.keepInFence(util.target.x, util.target.y);
+		    util.target.setXY(fencedPosition[0], fencedPosition[1]);
 		};
 
 		Scratch3MotionBlocks.prototype.setRotationStyle = function (args, util) {
@@ -15479,7 +15005,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 86 */
+	/* 76 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15628,7 +15154,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 87 */
+	/* 77 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15647,6 +15173,7 @@ webpackJsonp([0],[
 		 */
 		Scratch3SensingBlocks.prototype.getPrimitives = function() {
 		    return {
+		        'sensing_touchingobject': this.touchingObject,
 		        'sensing_touchingcolor': this.touchingColor,
 		        'sensing_coloristouchingcolor': this.colorTouchingColor,
 		        'sensing_distanceto': this.distanceTo,
@@ -15659,6 +15186,19 @@ webpackJsonp([0],[
 		        'sensing_current': this.current,
 		        'sensing_dayssince2000': this.daysSince2000
 		    };
+		};
+
+		Scratch3SensingBlocks.prototype.touchingObject = function (args, util) {
+		    var requestedObject = args.TOUCHINGOBJECTMENU;
+		    if (requestedObject == '_mouse_') {
+		        var mouseX = util.ioQuery('mouse', 'getX');
+		        var mouseY = util.ioQuery('mouse', 'getY');
+		        return util.target.isTouchingPoint(mouseX, mouseY);
+		    } else if (requestedObject == '_edge_') {
+		        return util.target.isTouchingEdge();
+		    } else {
+		        return util.target.isTouchingSprite(requestedObject);
+		    }
 		};
 
 		Scratch3SensingBlocks.prototype.touchingColor = function (args, util) {
@@ -15748,7 +15288,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 88 */
+	/* 78 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Cast = __webpack_require__(68);
@@ -15890,7 +15430,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 89 */
+	/* 79 */
 	/***/ function(module, exports) {
 
 		function Scratch3ProcedureBlocks(runtime) {
@@ -15919,23 +15459,20 @@ webpackJsonp([0],[
 
 		Scratch3ProcedureBlocks.prototype.callNoReturn = function (args, util) {
 		    if (!util.stackFrame.executed) {
-		        var procedureName = args.mutation.proccode;
-		        var paramNames = util.getProcedureParamNames(procedureName);
+		        var procedureCode = args.mutation.proccode;
+		        var paramNames = util.getProcedureParamNames(procedureCode);
 		        for (var i = 0; i < paramNames.length; i++) {
 		            if (args.hasOwnProperty('input' + i)) {
 		                util.pushParam(paramNames[i], args['input' + i]);
 		            }
 		        }
 		        util.stackFrame.executed = true;
-		        util.startProcedure(procedureName);
+		        util.startProcedure(procedureCode);
 		    }
 		};
 
 		Scratch3ProcedureBlocks.prototype.param = function (args, util) {
 		    var value = util.getParam(args.mutation.paramname);
-		    if (!value) {
-		        return 0;
-		    }
 		    return value;
 		};
 
@@ -15943,7 +15480,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 90 */
+	/* 80 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		/**
@@ -15954,13 +15491,13 @@ webpackJsonp([0],[
 		 */
 
 		var Blocks = __webpack_require__(11);
-		var Clone = __webpack_require__(91);
-		var Sprite = __webpack_require__(96);
+		var Clone = __webpack_require__(81);
+		var Sprite = __webpack_require__(86);
 		var Color = __webpack_require__(69);
-		var uid = __webpack_require__(95);
-		var specMap = __webpack_require__(97);
-		var Variable = __webpack_require__(93);
-		var List = __webpack_require__(94);
+		var uid = __webpack_require__(85);
+		var specMap = __webpack_require__(87);
+		var Variable = __webpack_require__(83);
+		var List = __webpack_require__(84);
 
 		/**
 		 * Top-level handler. Parse provided JSON,
@@ -16240,8 +15777,14 @@ webpackJsonp([0],[
 		                    // Single block occupies the input.
 		                    innerBlocks = [parseBlock(providedArg)];
 		                }
+		                var previousBlock = null;
 		                for (var j = 0; j < innerBlocks.length; j++) {
-		                    innerBlocks[j].parent = activeBlock.id;
+		                    if (j == 0) {
+		                        innerBlocks[j].parent = activeBlock.id;
+		                    } else {
+		                        innerBlocks[j].parent = previousBlock;
+		                    }
+		                    previousBlock = innerBlocks[j].id;
 		                }
 		                // Obscures any shadow.
 		                shadowObscured = true;
@@ -16361,12 +15904,12 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 91 */
+	/* 81 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
 		var MathUtil = __webpack_require__(71);
-		var Target = __webpack_require__(92);
+		var Target = __webpack_require__(82);
 
 		/**
 		 * Clone (instance) of a sprite.
@@ -16518,6 +16061,9 @@ webpackJsonp([0],[
 		        this.renderer.updateDrawableProperties(this.drawableID, {
 		            position: [this.x, this.y]
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16557,6 +16103,9 @@ webpackJsonp([0],[
 		            direction: renderedDirectionScale.direction,
 		            scale: renderedDirectionScale.scale
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16590,6 +16139,9 @@ webpackJsonp([0],[
 		        this.renderer.updateDrawableProperties(this.drawableID, {
 		            visible: this.visible
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16609,6 +16161,9 @@ webpackJsonp([0],[
 		            direction: renderedDirectionScale.direction,
 		            scale: renderedDirectionScale.scale
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16624,6 +16179,9 @@ webpackJsonp([0],[
 		        var props = {};
 		        props[effectName] = this.effects[effectName];
 		        this.renderer.updateDrawableProperties(this.drawableID, props);
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16636,6 +16194,9 @@ webpackJsonp([0],[
 		    }
 		    if (this.renderer) {
 		        this.renderer.updateDrawableProperties(this.drawableID, this.effects);
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16653,6 +16214,9 @@ webpackJsonp([0],[
 		        this.renderer.updateDrawableProperties(this.drawableID, {
 		            skin: this.sprite.costumes[this.currentCostume].skin
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16674,6 +16238,9 @@ webpackJsonp([0],[
 		            direction: renderedDirectionScale.direction,
 		            scale: renderedDirectionScale.scale
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16705,6 +16272,9 @@ webpackJsonp([0],[
 		            visible: this.visible,
 		            skin: this.sprite.costumes[this.currentCostume].skin
 		        });
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16715,6 +16285,76 @@ webpackJsonp([0],[
 		 */
 		Clone.prototype.getName = function () {
 		    return this.sprite.name;
+		};
+
+		/**
+		 * Return the clone's tight bounding box.
+		 * Includes top, left, bottom, right attributes in Scratch coordinates.
+		 * @return {?Object} Tight bounding box of clone, or null.
+		 */
+		Clone.prototype.getBounds = function () {
+		    if (this.renderer) {
+		        return this.runtime.renderer.getBounds(this.drawableID);
+		    }
+		    return null;
+		};
+
+		/**
+		 * Return whether the clone is touching a point.
+		 * @param {number} x X coordinate of test point.
+		 * @param {number} y Y coordinate of test point.
+		 * @return {Boolean} True iff the clone is touching the point.
+		 */
+		Clone.prototype.isTouchingPoint = function (x, y) {
+		    if (this.renderer) {
+		        // @todo: Update once pick is in Scratch coordinates.
+		        // Limits test to this Drawable, so this will return true
+		        // even if the clone is obscured by another Drawable.
+		        var pickResult = this.runtime.renderer.pick(
+		            x + this.runtime.constructor.STAGE_WIDTH / 2,
+		            -y + this.runtime.constructor.STAGE_HEIGHT / 2,
+		            null, null,
+		            [this.drawableID]
+		        );
+		        return pickResult === this.drawableID;
+		    }
+		    return false;
+		};
+
+		/**
+		 * Return whether the clone is touching a stage edge.
+		 * @return {Boolean} True iff the clone is touching the stage edge.
+		 */
+		Clone.prototype.isTouchingEdge = function () {
+		    if (this.renderer) {
+		        var stageWidth = this.runtime.constructor.STAGE_WIDTH;
+		        var stageHeight = this.runtime.constructor.STAGE_HEIGHT;
+		        var bounds = this.getBounds();
+		        if (bounds.left < -stageWidth / 2 ||
+		            bounds.right > stageWidth / 2 ||
+		            bounds.top > stageHeight / 2 ||
+		            bounds.bottom < -stageHeight / 2) {
+		            return true;
+		        }
+		    }
+		    return false;
+		};
+
+		/**
+		 * Return whether the clone is touching a named sprite.
+		 * @param {string} spriteName Name fo the sprite.
+		 * @return {Boolean} True iff the clone is touching a clone of the sprite.
+		 */
+		Clone.prototype.isTouchingSprite = function (spriteName) {
+		    var firstClone = this.runtime.getSpriteTargetByName(spriteName);
+		    if (!firstClone || !this.renderer) {
+		        return false;
+		    }
+		    var drawableCandidates = firstClone.sprite.clones.map(function(clone) {
+		        return clone.drawableID;
+		    });
+		    return this.renderer.isTouchingDrawables(
+		        this.drawableID, drawableCandidates);
 		};
 
 		/**
@@ -16744,6 +16384,67 @@ webpackJsonp([0],[
 		        );
 		    }
 		    return false;
+		};
+
+		/**
+		 * Move clone to the front layer.
+		 */
+		Clone.prototype.goToFront = function () {
+		    if (this.renderer) {
+		        this.renderer.setDrawableOrder(this.drawableID, Infinity);
+		    }
+		};
+
+		/**
+		 * Move clone back a number of layers.
+		 * @param {number} nLayers How many layers to go back.
+		 */
+		Clone.prototype.goBackLayers = function (nLayers) {
+		    if (this.renderer) {
+		        this.renderer.setDrawableOrder(this.drawableID, -nLayers, true, 1);
+		    }
+		};
+
+		/**
+		 * Keep a desired position within a fence.
+		 * @param {number} newX New desired X position.
+		 * @param {number} newY New desired Y position.
+		 * @param {Object=} opt_fence Optional fence with left, right, top bottom.
+		 * @return {Array.<number>} Fenced X and Y coordinates.
+		 */
+		Clone.prototype.keepInFence = function (newX, newY, opt_fence) {
+		    var fence = opt_fence;
+		    if (!fence) {
+		        fence = {
+		            left: -this.runtime.constructor.STAGE_WIDTH / 2,
+		            right: this.runtime.constructor.STAGE_WIDTH / 2,
+		            top: this.runtime.constructor.STAGE_HEIGHT / 2,
+		            bottom: -this.runtime.constructor.STAGE_HEIGHT / 2
+		        };
+		    }
+		    var bounds = this.getBounds();
+		    if (!bounds) return;
+		    // Adjust the known bounds to the target position.
+		    bounds.left += (newX - this.x);
+		    bounds.right += (newX - this.x);
+		    bounds.top += (newY - this.y);
+		    bounds.bottom += (newY - this.y);
+		    // Find how far we need to move the target position.
+		    var dx = 0;
+		    var dy = 0;
+		    if (bounds.left < fence.left) {
+		        dx += fence.left - bounds.left;
+		    }
+		    if (bounds.right > fence.right) {
+		        dx += fence.right - bounds.right;
+		    }
+		    if (bounds.top > fence.top) {
+		        dy += fence.top - bounds.top;
+		    }
+		    if (bounds.bottom < fence.bottom) {
+		        dy += fence.bottom - bounds.bottom;
+		    }
+		    return [newX + dx, newY + dy];
 		};
 
 		/**
@@ -16787,6 +16488,9 @@ webpackJsonp([0],[
 		    this.runtime.changeCloneCounter(-1);
 		    if (this.renderer && this.drawableID !== null) {
 		        this.renderer.destroyDrawable(this.drawableID);
+		        if (this.visible) {
+		            this.runtime.requestRedraw();
+		        }
 		    }
 		};
 
@@ -16794,13 +16498,13 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 92 */
+	/* 82 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		var Blocks = __webpack_require__(11);
-		var Variable = __webpack_require__(93);
-		var List = __webpack_require__(94);
-		var uid = __webpack_require__(95);
+		var Variable = __webpack_require__(83);
+		var List = __webpack_require__(84);
+		var uid = __webpack_require__(85);
 
 		/**
 		 * @fileoverview
@@ -16916,7 +16620,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 93 */
+	/* 83 */
 	/***/ function(module, exports) {
 
 		/**
@@ -16940,7 +16644,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 94 */
+	/* 84 */
 	/***/ function(module, exports) {
 
 		/**
@@ -16962,7 +16666,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 95 */
+	/* 85 */
 	/***/ function(module, exports) {
 
 		/**
@@ -16997,10 +16701,10 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 96 */
+	/* 86 */
 	/***/ function(module, exports, __webpack_require__) {
 
-		var Clone = __webpack_require__(91);
+		var Clone = __webpack_require__(81);
 		var Blocks = __webpack_require__(11);
 
 		/**
@@ -17060,7 +16764,7 @@ webpackJsonp([0],[
 
 
 	/***/ },
-	/* 97 */
+	/* 87 */
 	/***/ function(module, exports) {
 
 		/**

@@ -35,6 +35,7 @@ class GUI extends React.Component {
             basePath,
             blocksProps,
             greenFlagProps,
+            projectData, // eslint-disable-line no-unused-vars
             spriteSelectorProps,
             stageProps,
             stopAllProps,

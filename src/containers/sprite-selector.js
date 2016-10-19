@@ -27,6 +27,9 @@ class SpriteSelector extends React.Component {
             <SpriteSelectorComponent
                 value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
                 onChange={this.onChange}
+                openNewSprite={this.props.openNewSprite}
+                openNewCostume={this.props.openNewCostume}
+                openNewBackdrop={this.props.openNewBackdrop}
                 sprites={this.state.targets.targetList.map(target => (
                     {
                         id: target[0],
@@ -39,7 +42,10 @@ class SpriteSelector extends React.Component {
 }
 
 SpriteSelector.propTypes = {
-    vm: React.PropTypes.object.isRequired
+    vm: React.PropTypes.object.isRequired,
+    openNewSprite: React.PropTypes.func,
+    openNewCostume: React.PropTypes.func,
+    openNewBackdrop: React.PropTypes.func
 };
 
 module.exports = SpriteSelector;

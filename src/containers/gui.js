@@ -47,21 +47,30 @@ class GUI extends React.Component {
                 media: basePath + 'static/blocks-media/'
             }
         });
-        return (
-            <GUIComponent {... guiProps}>
-                <GreenFlag vm={vm} {...greenFlagProps} />
-                <StopAll vm={vm} {...stopAllProps} />
-                <Stage vm={vm} {...stageProps} />
-                <SpriteSelector vm={vm} {... spriteSelectorProps} />
-                <Blocks vm={vm} {... blocksProps} />
-            </GUIComponent>
-        );
+        if (this.props.children) {
+            return (
+                <GUIComponent {... guiProps}>
+                    {this.props.children}
+                </GUIComponent>
+            );
+        } else {
+            return (
+                <GUIComponent {... guiProps}>
+                    <GreenFlag vm={vm} {...greenFlagProps} />
+                    <StopAll vm={vm} {...stopAllProps} />
+                    <Stage vm={vm} {...stageProps} />
+                    <SpriteSelector vm={vm} {... spriteSelectorProps} />
+                    <Blocks vm={vm} {... blocksProps} />
+                </GUIComponent>
+            );
+        }
     }
 }
 
 GUI.propTypes = {
     basePath: React.PropTypes.string,
     blocksProps: React.PropTypes.object,
+    children: React.PropTypes.node,
     greenFlagProps: React.PropTypes.object,
     projectData: React.PropTypes.string,
     spriteSelectorProps: React.PropTypes.object,

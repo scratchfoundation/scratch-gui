@@ -1,3 +1,4 @@
+const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -30,18 +31,28 @@ class GUI extends React.Component {
         }
     }
     render () {
+        let {
+            basePath,
+            blocksProps,
+            greenFlagProps,
+            spriteSelectorProps,
+            stageProps,
+            stopAllProps,
+            vm,
+            ...guiProps
+        } = this.props;
+        blocksProps = defaultsDeep({}, blocksProps, {
+            options: {
+                media: basePath + 'static/blocks-media/'
+            }
+        });
         return (
-            <GUIComponent>
-                <GreenFlag vm={this.props.vm} />
-                <StopAll vm={this.props.vm} />
-                <Stage vm={this.props.vm} />
-                <SpriteSelector vm={this.props.vm} />
-                <Blocks
-                    options={{
-                        media: this.props.basePath + 'static/blocks-media/'
-                    }}
-                    vm={this.props.vm}
-                />
+            <GUIComponent {... guiProps}>
+                <GreenFlag vm={vm} {...greenFlagProps} />
+                <StopAll vm={vm} {...stopAllProps} />
+                <Stage vm={vm} {...stageProps} />
+                <SpriteSelector vm={vm} {... spriteSelectorProps} />
+                <Blocks vm={vm} {... blocksProps} />
             </GUIComponent>
         );
     }
@@ -49,12 +60,22 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     basePath: React.PropTypes.string,
+    blocksProps: React.PropTypes.object,
+    greenFlagProps: React.PropTypes.object,
     projectData: React.PropTypes.string,
+    spriteSelectorProps: React.PropTypes.object,
+    stageProps: React.PropTypes.object,
+    stopAllProps: React.PropTypes.object,
     vm: React.PropTypes.object,
 };
 
 GUI.defaultProps = {
     basePath: '/',
+    blocksProps: {},
+    greenFlagProps: {},
+    spriteSelectorProps: {},
+    stageProps: {},
+    stopAllProps: {},
     vm: new VM()
 };
 

@@ -334,27 +334,36 @@ webpackJsonp([0],[
 	            var basePath = _props.basePath;
 	            var blocksProps = _props.blocksProps;
 	            var greenFlagProps = _props.greenFlagProps;
+	            var projectData = _props.projectData;
 	            var spriteSelectorProps = _props.spriteSelectorProps;
 	            var stageProps = _props.stageProps;
 	            var stopAllProps = _props.stopAllProps;
 	            var vm = _props.vm;
 
-	            var guiProps = _objectWithoutProperties(_props, ['basePath', 'blocksProps', 'greenFlagProps', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
+	            var guiProps = _objectWithoutProperties(_props, ['basePath', 'blocksProps', 'greenFlagProps', 'projectData', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
 
 	            blocksProps = defaultsDeep({}, blocksProps, {
 	                options: {
 	                    media: basePath + 'static/blocks-media/'
 	                }
 	            });
-	            return React.createElement(
-	                GUIComponent,
-	                guiProps,
-	                React.createElement(GreenFlag, _extends({ vm: vm }, greenFlagProps)),
-	                React.createElement(StopAll, _extends({ vm: vm }, stopAllProps)),
-	                React.createElement(Stage, _extends({ vm: vm }, stageProps)),
-	                React.createElement(SpriteSelector, _extends({ vm: vm }, spriteSelectorProps)),
-	                React.createElement(Blocks, _extends({ vm: vm }, blocksProps))
-	            );
+	            if (this.props.children) {
+	                return React.createElement(
+	                    GUIComponent,
+	                    guiProps,
+	                    this.props.children
+	                );
+	            } else {
+	                return React.createElement(
+	                    GUIComponent,
+	                    guiProps,
+	                    React.createElement(GreenFlag, _extends({ vm: vm }, greenFlagProps)),
+	                    React.createElement(StopAll, _extends({ vm: vm }, stopAllProps)),
+	                    React.createElement(Stage, _extends({ vm: vm }, stageProps)),
+	                    React.createElement(SpriteSelector, _extends({ vm: vm }, spriteSelectorProps)),
+	                    React.createElement(Blocks, _extends({ vm: vm }, blocksProps))
+	                );
+	            }
 	        }
 	    }]);
 
@@ -364,6 +373,7 @@ webpackJsonp([0],[
 	GUI.propTypes = {
 	    basePath: React.PropTypes.string,
 	    blocksProps: React.PropTypes.object,
+	    children: React.PropTypes.node,
 	    greenFlagProps: React.PropTypes.object,
 	    projectData: React.PropTypes.string,
 	    spriteSelectorProps: React.PropTypes.object,
@@ -25990,7 +26000,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -26092,9 +26106,17 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _this2 = this;
 
-	            return React.createElement(BlocksComponent, { componentRef: function componentRef(c) {
+	            var _props = this.props;
+	            var options = _props.options;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['options', 'vm']);
+
+	            return React.createElement(BlocksComponent, _extends({
+	                componentRef: function componentRef(c) {
 	                    return _this2.blocks = c;
-	                } });
+	                }
+	            }, props));
 	        }
 	    }]);
 
@@ -29255,7 +29277,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29277,8 +29303,13 @@ webpackJsonp([0],[
 	    _createClass(BlocksComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement('div', {
-	                ref: this.props.componentRef,
+	            var _props = this.props;
+	            var componentRef = _props.componentRef;
+
+	            var props = _objectWithoutProperties(_props, ['componentRef']);
+
+	            return React.createElement('div', _extends({
+	                ref: componentRef,
 	                className: 'scratch-blocks',
 	                style: {
 	                    position: 'absolute',
@@ -29287,7 +29318,7 @@ webpackJsonp([0],[
 	                    bottom: 0,
 	                    left: 0
 	                }
-	            });
+	            }, props));
 	        }
 	    }]);
 
@@ -29306,7 +29337,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29328,9 +29363,14 @@ webpackJsonp([0],[
 	    _createClass(GUIComponent, [{
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var children = _props.children;
+
+	            var props = _objectWithoutProperties(_props, ['children']);
+
 	            return React.createElement(
 	                'div',
-	                {
+	                _extends({
 	                    className: 'scratch-gui',
 	                    style: {
 	                        position: 'absolute',
@@ -29339,8 +29379,8 @@ webpackJsonp([0],[
 	                        bottom: 0,
 	                        left: 0
 	                    }
-	                },
-	                this.props.children
+	                }, props),
+	                children
 	            );
 	        }
 	    }]);
@@ -29349,7 +29389,7 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	GUIComponent.propTypes = {
-	    children: React.PropTypes.arrayOf(React.PropTypes.node)
+	    children: React.PropTypes.node
 	};
 
 	module.exports = GUIComponent;
@@ -29360,7 +29400,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29394,7 +29438,14 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement(GreenFlagComponent, { onClick: this.onClick });
+	            var _props = this.props;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['vm']);
+
+	            return React.createElement(GreenFlagComponent, _extends({
+	                onClick: this.onClick
+	            }, props));
 	        }
 	    }]);
 
@@ -29413,7 +29464,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29435,9 +29490,15 @@ webpackJsonp([0],[
 	    _createClass(GreenFlagComponent, [{
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var onClick = _props.onClick;
+	            var title = _props.title;
+
+	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
+
 	            return React.createElement(
 	                'div',
-	                {
+	                _extends({
 	                    className: 'scratch-green-flag',
 	                    style: {
 	                        position: 'absolute',
@@ -29445,11 +29506,11 @@ webpackJsonp([0],[
 	                        right: 440,
 	                        width: 50
 	                    }
-	                },
+	                }, props),
 	                React.createElement(
 	                    'button',
-	                    { onClick: this.props.onClick },
-	                    this.props.title
+	                    { onClick: onClick },
+	                    title
 	                )
 	            );
 	        }
@@ -29475,7 +29536,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29523,7 +29588,12 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement(SpriteSelectorComponent, {
+	            var _props = this.props;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['vm']);
+
+	            return React.createElement(SpriteSelectorComponent, _extends({
 	                value: this.state.targets.editingTarget && [this.state.targets.editingTarget],
 	                onChange: this.onChange,
 	                sprites: this.state.targets.targetList.map(function (target) {
@@ -29532,7 +29602,7 @@ webpackJsonp([0],[
 	                        name: target[1]
 	                    };
 	                })
-	            });
+	            }, props));
 	        }
 	    }]);
 
@@ -29551,7 +29621,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29573,23 +29647,30 @@ webpackJsonp([0],[
 	    _createClass(SpriteSelectorComponent, [{
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var onChange = _props.onChange;
+	            var sprites = _props.sprites;
+	            var value = _props.value;
+
+	            var props = _objectWithoutProperties(_props, ['onChange', 'sprites', 'value']);
+
 	            return React.createElement(
 	                'div',
-	                {
+	                _extends({
 	                    style: {
 	                        position: 'absolute',
 	                        top: 380,
 	                        right: 10
 	                    }
-	                },
+	                }, props),
 	                React.createElement(
 	                    'select',
 	                    {
 	                        multiple: true,
-	                        value: this.props.value,
-	                        onChange: this.props.onChange
+	                        value: value,
+	                        onChange: onChange
 	                    },
-	                    this.props.sprites.map(function (sprite) {
+	                    sprites.map(function (sprite) {
 	                        return React.createElement(
 	                            'option',
 	                            { value: sprite.id, key: sprite.id },
@@ -29621,7 +29702,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29737,9 +29822,16 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _this2 = this;
 
-	            return React.createElement(StageComponent, { canvasRef: function canvasRef(canvas) {
+	            var _props = this.props;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['vm']);
+
+	            return React.createElement(StageComponent, _extends({
+	                canvasRef: function canvasRef(canvas) {
 	                    return _this2.canvas = canvas;
-	                } });
+	                }
+	            }, props));
 	        }
 	    }]);
 
@@ -42592,7 +42684,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42614,17 +42710,24 @@ webpackJsonp([0],[
 	    _createClass(StageComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement('canvas', {
+	            var _props = this.props;
+	            var canvasRef = _props.canvasRef;
+	            var width = _props.width;
+	            var height = _props.height;
+
+	            var props = _objectWithoutProperties(_props, ['canvasRef', 'width', 'height']);
+
+	            return React.createElement('canvas', _extends({
 	                className: 'scratch-stage',
-	                ref: this.props.canvasRef,
+	                ref: canvasRef,
 	                style: {
 	                    position: 'absolute',
 	                    top: 10,
 	                    right: 10,
-	                    width: this.props.width,
-	                    height: this.props.height
+	                    width: width,
+	                    height: height
 	                }
-	            });
+	            }, props));
 	        }
 	    }]);
 
@@ -42654,6 +42757,8 @@ webpackJsonp([0],[
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42687,9 +42792,14 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['vm']);
+
 	            return React.createElement(StopAllComponent, _extends({
 	                onClick: this.onClick
-	            }, this.props));
+	            }, props));
 	        }
 	    }]);
 
@@ -42708,7 +42818,11 @@ webpackJsonp([0],[
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42730,9 +42844,15 @@ webpackJsonp([0],[
 	    _createClass(StopAllComponent, [{
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var onClick = _props.onClick;
+	            var title = _props.title;
+
+	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
+
 	            return React.createElement(
 	                'div',
-	                {
+	                _extends({
 	                    className: 'scratch-stop-all',
 	                    style: {
 	                        position: 'absolute',
@@ -42740,11 +42860,11 @@ webpackJsonp([0],[
 	                        right: 400,
 	                        width: 50
 	                    }
-	                },
+	                }, props),
 	                React.createElement(
 	                    'button',
-	                    { onClick: this.props.onClick },
-	                    this.props.title
+	                    { onClick: onClick },
+	                    title
 	                )
 	            );
 	        }

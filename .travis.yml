@@ -23,7 +23,7 @@ after_script:
     $TRAVIS_PULL_REQUEST = "false"
   ]]; then
     # Publish to gh-pages as most recent committer
-    git config --global user.email $(git log --pretty=format:"%ce" -n1)
-    git config --global user.name $(git log --pretty=format:"%cn" -n1)
-    GH_PAGES_URL=https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git DEPLOY_MESSAGE="Build for $(git log --pretty=format:%H)" npm run deploy
+    git config --global user.email $(git log --pretty=format:"%ae" -n1)
+    git config --global user.name $(git log --pretty=format:"%an" -n1)
+    npm run --silent deploy -- -x -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
   fi

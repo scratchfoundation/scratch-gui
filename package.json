@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rm -rf ./build && mkdir -p build",
-    "deploy": "gh-pages -x -r $GH_PAGES_URL -d build -m $DEPLOY_MESSAGE",
+    "deploy": "gh-pages -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint .",
     "postmerge": "opt --in postmerge --exec 'npm install'",
     "postrewrite": "opt --in postrewrite --exec 'npm install'",

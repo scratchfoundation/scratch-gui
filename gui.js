@@ -22,95 +22,842 @@ webpackJsonp([0],[
 	var ProjectLoader = __webpack_require__(210);
 
 	var App = function (_React$Component) {
-	    _inherits(App, _React$Component);
+	  _inherits(App, _React$Component);
 
-	    function App(props) {
-	        _classCallCheck(this, App);
+	  function App(props) {
+	    _classCallCheck(this, App);
 
-	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	        _this.fetchProjectId = _this.fetchProjectId.bind(_this);
-	        _this.updateProject = _this.updateProject.bind(_this);
-	        _this.state = {
-	            projectId: null,
-	            projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
-	        };
-	        return _this;
+	    _this.fetchProjectId = _this.fetchProjectId.bind(_this);
+	    _this.updateProject = _this.updateProject.bind(_this);
+	    _this.state = {
+	      projectId: null,
+	      projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+	    };
+	    return _this;
+	  }
+
+	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.addEventListener('hashchange', this.updateProject);
+	      this.setState({ toolbox: this.toolbox });
+	      this.updateProject();
 	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener('hashchange', this.updateProject);
+	    }
+	  }, {
+	    key: 'fetchProjectId',
+	    value: function fetchProjectId() {
+	      return location.hash.substring(1);
+	    }
+	  }, {
+	    key: 'updateProject',
+	    value: function updateProject() {
+	      var _this2 = this;
 
-	    _createClass(App, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            window.addEventListener('hashchange', this.updateProject);
-	            this.updateProject();
+	      var projectId = this.fetchProjectId();
+	      if (projectId !== this.state.projectId) {
+	        if (projectId.length < 1) {
+	          return this.setState({
+	            projectId: projectId,
+	            projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+	          });
 	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            window.removeEventListener('hashchange', this.updateProject);
-	        }
-	    }, {
-	        key: 'fetchProjectId',
-	        value: function fetchProjectId() {
-	            return location.hash.substring(1);
-	        }
-	    }, {
-	        key: 'updateProject',
-	        value: function updateProject() {
-	            var _this2 = this;
+	        ProjectLoader.load(projectId, function (err, body) {
+	          if (err) return log.error(err);
+	          _this2.setState({ projectData: body });
+	        });
+	        this.setState({ projectId: projectId });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
 
-	            var projectId = this.fetchProjectId();
-	            if (projectId !== this.state.projectId) {
-	                if (projectId.length < 1) {
-	                    return this.setState({
-	                        projectId: projectId,
-	                        projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
-	                    });
-	                }
-	                ProjectLoader.load(projectId, function (err, body) {
-	                    if (err) return log.error(err);
-	                    _this2.setState({ projectData: body });
-	                });
-	                this.setState({ projectId: projectId });
+	      return React.createElement(
+	        GUI,
+	        {
+	          basePath: this.props.basePath,
+	          projectData: this.state.projectData,
+	          vm: this.props.vm
+	        },
+	        React.createElement(
+	          'xml',
+	          {
+	            style: { display: 'none' },
+	            ref: function ref(tb) {
+	              return _this3.toolbox = tb;
 	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return React.createElement(
-	                GUI,
-	                {
-	                    basePath: this.props.basePath,
-	                    projectData: this.state.projectData,
-	                    vm: this.props.vm
-	                },
-	                React.createElement(Blocks, {
-	                    options: {
-	                        media: this.props.basePath + 'static/blocks-media/'
-	                    },
-	                    vm: this.props.vm,
-	                    style: {
-	                        position: 'absolute',
-	                        top: 0,
-	                        right: 0,
-	                        bottom: 0,
-	                        left: 0
-	                    }
-	                })
-	            );
-	        }
-	    }]);
+	          },
+	          React.createElement(
+	            'block',
+	            { type: 'sound_play' },
+	            React.createElement(
+	              'value',
+	              { name: 'SOUND_MENU' },
+	              React.createElement('shadow', { type: 'sound_sounds_option' })
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_playuntildone' },
+	            React.createElement(
+	              'value',
+	              { name: 'SOUND_MENU' },
+	              React.createElement('shadow', { type: 'sound_sounds_option' })
+	            )
+	          ),
+	          React.createElement('block', { type: 'sound_stopallsounds' }),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_playdrumforbeats' },
+	            React.createElement(
+	              'value',
+	              { name: 'DRUMTYPE' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'BEATS' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '0.25'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_restforbeats' },
+	            React.createElement(
+	              'value',
+	              { name: 'BEATS' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '0.25'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_playnoteforbeats' },
+	            React.createElement(
+	              'value',
+	              { name: 'NOTE' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'BEATS' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '0.5'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_setinstrumentto' },
+	            React.createElement(
+	              'value',
+	              { name: 'INSTRUMENT' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_seteffectto' },
+	            React.createElement(
+	              'value',
+	              { name: 'EFFECT' },
+	              React.createElement('shadow', { type: 'sound_effects_menu' })
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'VALUE' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '10'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_changeeffectby' },
+	            React.createElement(
+	              'value',
+	              { name: 'EFFECT' },
+	              React.createElement('shadow', { type: 'sound_effects_menu' })
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'VALUE' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '10'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'sound_cleareffects' }),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_changevolumeby' },
+	            React.createElement(
+	              'value',
+	              { name: 'VOLUME' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '-10'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_setvolumeto' },
+	            React.createElement(
+	              'value',
+	              { name: 'VOLUME' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '100'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'sound_volume' }),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_changetempoby' },
+	            React.createElement(
+	              'value',
+	              { name: 'TEMPO' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '20'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'sound_settempotobpm' },
+	            React.createElement(
+	              'value',
+	              { name: 'TEMPO' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '60'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'sound_tempo' }),
+	          React.createElement('block', { type: 'data_listcontents' }),
+	          React.createElement(
+	            'block',
+	            { type: 'data_addtolist' },
+	            React.createElement(
+	              'value',
+	              { name: 'ITEM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'thing'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'data_deleteoflist' },
+	            React.createElement(
+	              'value',
+	              { name: 'INDEX' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'data_listindexall' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'INDEX' },
+	                  '1'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'data_insertatlist' },
+	            React.createElement(
+	              'value',
+	              { name: 'INDEX' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'data_listindexrandom' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'INDEX' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'ITEM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'thing'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'data_replaceitemoflist' },
+	            React.createElement(
+	              'value',
+	              { name: 'INDEX' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'data_listindexrandom' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'INDEX' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'ITEM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'thing'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'data_itemoflist' },
+	            React.createElement(
+	              'value',
+	              { name: 'INDEX' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'data_listindexrandom' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'INDEX' },
+	                  '1'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'data_lengthoflist' }),
+	          React.createElement(
+	            'block',
+	            { type: 'data_listcontainsitem' },
+	            React.createElement(
+	              'value',
+	              { name: 'ITEM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'thing'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'data_showlist' }),
+	          React.createElement('block', { type: 'data_hidelist' }),
+	          React.createElement('block', { type: 'event_whenflagclicked' }),
+	          React.createElement('block', { type: 'event_whenkeypressed' }),
+	          React.createElement(
+	            'block',
+	            { type: 'control_wait' },
+	            React.createElement(
+	              'value',
+	              { name: 'DURATION' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_positive_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'control_repeat' },
+	            React.createElement(
+	              'value',
+	              { name: 'TIMES' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_whole_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '10'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'control_forever' }),
+	          React.createElement('block', { type: 'control_if' }),
+	          React.createElement('block', { type: 'control_if_else' }),
+	          React.createElement('block', { type: 'control_wait_until' }),
+	          React.createElement('block', { type: 'control_repeat_until' }),
+	          React.createElement('block', { type: 'control_stop' }),
+	          React.createElement(
+	            'block',
+	            { type: 'sensing_keypressed' },
+	            React.createElement(
+	              'value',
+	              { name: 'KEY_OPTION' },
+	              React.createElement('shadow', { type: 'sensing_keyoptions' })
+	            )
+	          ),
+	          React.createElement('block', { type: 'sensing_mousedown' }),
+	          React.createElement('block', { type: 'sensing_mousex' }),
+	          React.createElement('block', { type: 'sensing_mousey' }),
+	          React.createElement('block', { type: 'sensing_timer' }),
+	          React.createElement('block', { type: 'sensing_resettimer' }),
+	          React.createElement('block', { type: 'sensing_dayssince2000' }),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_add' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_subtract' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_multiply' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_divide' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_random' },
+	            React.createElement(
+	              'value',
+	              { name: 'FROM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'TO' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '10'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_lt' },
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_equals' },
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_gt' },
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'OPERAND2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement('field', { name: 'TEXT' })
+	              )
+	            )
+	          ),
+	          React.createElement('block', { type: 'operator_and' }),
+	          React.createElement('block', { type: 'operator_or' }),
+	          React.createElement('block', { type: 'operator_not' }),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_join' },
+	            React.createElement(
+	              'value',
+	              { name: 'STRING1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'hello'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'STRING2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'world'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_letter_of' },
+	            React.createElement(
+	              'value',
+	              { name: 'LETTER' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_whole_number' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'NUM' },
+	                  '1'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'STRING' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'world'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_length' },
+	            React.createElement(
+	              'value',
+	              { name: 'STRING' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'text' },
+	                React.createElement(
+	                  'field',
+	                  { name: 'TEXT' },
+	                  'world'
+	                )
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_mod' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM1' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM2' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_round' },
+	            React.createElement(
+	              'value',
+	              { name: 'NUM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'block',
+	            { type: 'operator_mathop' },
+	            React.createElement(
+	              'value',
+	              { name: 'OPERATOR' },
+	              React.createElement('shadow', { type: 'operator_mathop_menu' })
+	            ),
+	            React.createElement(
+	              'value',
+	              { name: 'NUM' },
+	              React.createElement(
+	                'shadow',
+	                { type: 'math_number' },
+	                React.createElement('field', { name: 'NUM' })
+	              )
+	            )
+	          )
+	        ),
+	        this.state.toolbox ? React.createElement(Blocks, {
+	          vm: this.props.vm,
+	          style: {
+	            position: 'absolute',
+	            top: 0,
+	            right: 0,
+	            bottom: 0,
+	            left: 0
+	          },
+	          options: {
+	            media: this.props.basePath + 'static/blocks-media/',
+	            toolbox: this.state.toolbox
+	          }
+	        }) : null
+	      );
+	    }
+	  }]);
 
-	    return App;
+	  return App;
 	}(React.Component);
 
 	App.propTypes = {
-	    basePath: React.PropTypes.string,
-	    vm: React.PropTypes.instanceOf(VM)
+	  basePath: React.PropTypes.string,
+	  vm: React.PropTypes.instanceOf(VM)
 	};
 
 	App.defaultProps = {
-	    vm: new VM()
+	  vm: new VM()
 	};
 
 	var appTarget = document.createElement('div');

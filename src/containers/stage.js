@@ -91,7 +91,11 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: React.PropTypes.instanceOf(VM)
+};
+
+Stage.defaultProps = {
+    vm: new VM()
 };
 
 module.exports = Stage;

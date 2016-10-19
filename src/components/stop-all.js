@@ -2,6 +2,11 @@ const React = require('react');
 
 class StopAllComponent extends React.Component {
     render () {
+        const {
+            onClick,
+            title,
+            ...props
+        } = this.props;
         return (
             <div
                 className="scratch-stop-all"
@@ -11,8 +16,9 @@ class StopAllComponent extends React.Component {
                     right: 400,
                     width: 50
                 }}
+                {...props}
             >
-                <button onClick={this.props.onClick}>{this.props.title}</button>
+                <button onClick={onClick}>{title}</button>
             </div>
         );
     }

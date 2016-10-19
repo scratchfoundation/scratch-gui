@@ -2,6 +2,10 @@ const React = require('react');
 
 class GUIComponent extends React.Component {
     render () {
+        const {
+            children,
+            ...props
+        } = this.props;
         return (
             <div
                 className="scratch-gui"
@@ -12,15 +16,16 @@ class GUIComponent extends React.Component {
                     bottom: 0,
                     left: 0
                 }}
+                {...props}
             >
-                {this.props.children}
+                {children}
             </div>
         );
     }
 }
 
 GUIComponent.propTypes = {
-    children: React.PropTypes.arrayOf(React.PropTypes.node)
+    children: React.PropTypes.node
 };
 
 module.exports = GUIComponent;

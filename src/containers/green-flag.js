@@ -13,7 +13,16 @@ class GreenFlag extends React.Component {
         this.props.vm.greenFlag();
     }
     render () {
-        return <GreenFlagComponent onClick={this.onClick} />;
+        const {
+            vm, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
+        return (
+            <GreenFlagComponent
+                onClick={this.onClick}
+                {...props}
+            />
+        );
     }
 }
 

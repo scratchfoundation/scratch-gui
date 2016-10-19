@@ -2,17 +2,24 @@ const React = require('react');
 
 class StageComponent extends React.Component {
     render () {
+        const {
+            canvasRef,
+            width,
+            height,
+            ...props
+        } = this.props;
         return (
             <canvas
                 className="scratch-stage"
-                ref={this.props.canvasRef}
+                ref={canvasRef}
                 style={{
                     position: 'absolute',
                     top: 10,
                     right: 10,
-                    width: this.props.width,
-                    height: this.props.height,
+                    width: width,
+                    height: height,
                 }}
+                {...props}
             />
         );
     }

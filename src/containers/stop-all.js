@@ -13,10 +13,14 @@ class StopAll extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
+        const {
+            vm, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
         return (
             <StopAllComponent
                 onClick={this.onClick}
-                {... this.props}
+                {...props}
             />
         );
     }

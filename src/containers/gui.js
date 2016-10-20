@@ -119,10 +119,13 @@ GUI.propTypes = {
 };
 
 GUI.defaultProps = {
+    backdropLibraryProps: {},
     basePath: '/',
     blocksProps: {},
+    costumeLibraryProps: {},
     greenFlagProps: {},
     spriteSelectorProps: {},
+    spriteLibraryProps: {},
     stageProps: {},
     stopAllProps: {},
     vm: new VM()

@@ -90,9 +90,11 @@ class CostumeCanvas extends React.Component {
         }
     }
     render () {
-        return <canvas ref='costumeCanvas'
+        return <canvas
+            ref='costumeCanvas'
             width={this.props.width}
-            height={this.props.height} />;
+            height={this.props.height}
+        />;
     }
 }
 

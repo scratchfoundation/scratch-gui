@@ -36,7 +36,8 @@ class BackdropLibrary extends React.Component {
             visible={this.props.visible}
             data={this.state.backdropData}
             onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem.bind(this)} />;
+            onItemSelected={this.selectItem.bind(this)}
+        />;
     }
 }
 

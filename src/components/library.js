@@ -42,8 +42,10 @@ class LibraryComponent extends React.Component {
         };
 
         return (
-            <ModalComponent onRequestClose={this.props.onRequestClose}
-                visible={this.props.visible}>
+            <ModalComponent
+                onRequestClose={this.props.onRequestClose}
+                visible={this.props.visible}
+            >
                 <h1>{this.props.title}</h1>
                 <div style={scrollGridStyle}>
                     {gridItems}

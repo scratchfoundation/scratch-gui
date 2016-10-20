@@ -47,7 +47,8 @@ class SpriteLibrary extends React.Component {
             data={libraryData}
             mediaLibrary={this.props.mediaLibrary}
             onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem.bind(this)} />;
+            onItemSelected={this.selectItem.bind(this)}
+        />;
     }
 }
 

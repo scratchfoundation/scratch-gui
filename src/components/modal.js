@@ -8,10 +8,14 @@ class ModalComponent extends React.Component {
                 ref="modal"
                 style={this.props.modalStyle}
                 isOpen={this.props.visible}
-                onRequestClose={this.props.onRequestClose}>
+                onRequestClose={this.props.onRequestClose}
+            >
                 <div
                     onClick={this.props.onRequestClose}
-                    style={this.props.closeButtonStyle}>x</div>
+                    style={this.props.closeButtonStyle}
+                >
+                    x
+                </div>
                 {this.props.children}
             </ReactModal>
         );

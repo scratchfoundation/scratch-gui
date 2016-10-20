@@ -36,7 +36,8 @@ class CostumeLibrary extends React.Component {
             visible={this.props.visible}
             data={this.state.costumeData}
             onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem.bind(this)} />;
+            onItemSelected={this.selectItem.bind(this)}
+        />;
     }
 }
 

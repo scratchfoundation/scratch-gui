@@ -6,6 +6,9 @@ class SpriteSelectorComponent extends React.Component {
             onChange,
             sprites,
             value,
+            openNewSprite,
+            openNewCostume,
+            openNewBackdrop,
             ...props
         } = this.props;
         return (
@@ -29,9 +32,9 @@ class SpriteSelectorComponent extends React.Component {
                     ))}
                 </select>
                 <p>
-                    <button onClick={this.props.openNewSprite}>New sprite</button>
-                    <button onClick={this.props.openNewCostume}>New costume</button>
-                    <button onClick={this.props.openNewBackdrop}>New backdrop</button>
+                    <button onClick={openNewSprite}>New sprite</button>
+                    <button onClick={openNewCostume}>New costume</button>
+                    <button onClick={openNewBackdrop}>New backdrop</button>
                 </p>
             </div>
         );

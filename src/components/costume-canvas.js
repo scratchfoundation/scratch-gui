@@ -25,6 +25,9 @@ class CostumeCanvas extends React.Component {
         }
     }
     draw () {
+        if (!this.refs.costumeCanvas) {
+            return;
+        }
         // Draw the costume to the rendered canvas.
         const img = this.img;
         const context = this.refs.costumeCanvas.getContext('2d');

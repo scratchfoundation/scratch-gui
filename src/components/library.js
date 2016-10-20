@@ -28,8 +28,8 @@ class LibraryComponent extends React.Component {
             return <LibraryItem
                 name={dataItem.name}
                 iconURL={scratchURL}
-                key={'item_' + itemId}
-                selected={this.state.selectedItem == itemId}
+                key={'item_' + id}
+                selected={this.state.selectedItem == id}
                 onSelect={this.onSelect}
                 id={id} />;
         });

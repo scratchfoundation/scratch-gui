@@ -1,3 +1,4 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
 
 const LibraryItem = require('./library-item');
@@ -6,6 +7,7 @@ const ModalComponent = require('./modal');
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
+        bindAll(this, ['onSelect']);
         this.state = {selectedItem: null};
     }
     onSelect (id) {
@@ -28,7 +30,7 @@ class LibraryComponent extends React.Component {
                 iconURL={scratchURL}
                 key={'item_' + itemId}
                 selected={this.state.selectedItem == itemId}
-                onSelect={this.onSelect.bind(this)}
+                onSelect={this.onSelect}
                 id={id} />;
         });
 

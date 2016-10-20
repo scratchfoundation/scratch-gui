@@ -1,3 +1,4 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
@@ -8,11 +9,12 @@ const LibaryComponent = require('../components/library');
 class CostumeLibrary extends React.Component {
     constructor (props) {
         super(props);
+        bindAll(this, ['setData', 'selectItem']);
         this.state = {costumeData: []};
     }
     componentWillReceiveProps (nextProps) {
         if (nextProps.visible && this.state.costumeData.length === 0) {
-            this.props.mediaLibrary.getMediaLibrary('costume', this.setData.bind(this));
+            this.props.mediaLibrary.getMediaLibrary('costume', this.setData);
         }
     }
     setData (data) {
@@ -36,7 +38,7 @@ class CostumeLibrary extends React.Component {
             visible={this.props.visible}
             data={this.state.costumeData}
             onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem.bind(this)}
+            onItemSelected={this.selectItem}
         />;
     }
 }

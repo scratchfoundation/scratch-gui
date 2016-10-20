@@ -1,3 +1,4 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
@@ -7,17 +8,18 @@ const LibaryComponent = require('../components/library');
 class SpriteLibrary extends React.Component {
     constructor (props) {
         super(props);
+        bindAll(this, ['setData', 'selectItem', 'setSpriteData']);
         this.state = {data: [], spriteData: {}};
     }
     componentWillReceiveProps (nextProps) {
         if (nextProps.visible && this.state.data.length === 0) {
-            this.props.mediaLibrary.getMediaLibrary('sprite', this.setData.bind(this));
+            this.props.mediaLibrary.getMediaLibrary('sprite', this.setData);
         }
     }
     setData (data) {
         this.setState({data: data});
         for (let sprite of data) {
-            this.props.mediaLibrary.getSprite(sprite.md5, this.setSpriteData.bind(this));
+            this.props.mediaLibrary.getSprite(sprite.md5, this.setSpriteData);
         }
     }
     setSpriteData (md5, data) {
@@ -47,7 +49,7 @@ class SpriteLibrary extends React.Component {
             data={libraryData}
             mediaLibrary={this.props.mediaLibrary}
             onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem.bind(this)}
+            onItemSelected={this.selectItem}
         />;
     }
 }

@@ -31,7 +31,8 @@ class LibraryComponent extends React.Component {
                 key={'item_' + id}
                 selected={this.state.selectedItem == id}
                 onSelect={this.onSelect}
-                id={id} />;
+                id={id}
+            />;
         });
 
         const scrollGridStyle = {

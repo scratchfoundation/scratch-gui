@@ -32,16 +32,13 @@ class SpriteLibrary extends React.Component {
         this.props.vm.addSprite2(spriteData);
     }
     render () {
-        let libraryData = [];
-        Object.keys(this.state.spriteData).map((libraryKey) => {
+        let libraryData = Object.keys(this.state.spriteData).map((libraryKey) => {
             let libraryItem = this.state.spriteData[libraryKey];
-            libraryData.push(
-                {
-                    name: libraryItem.objName,
-                    md5: libraryItem.costumes[0].baseLayerMD5,
-                    json: libraryKey
-                }
-            );
+            return {
+                name: libraryItem.objName,
+                md5: libraryItem.costumes[0].baseLayerMD5,
+                json: libraryKey
+            };
         });
         return <LibaryComponent
             title="Sprite Library"

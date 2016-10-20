@@ -25,15 +25,18 @@ class SpriteSelector extends React.Component {
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
+            openNewSprite,
+            openNewCostume,
+            openNewBackdrop,
             ...props
         } = this.props;
         return (
             <SpriteSelectorComponent
                 value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
                 onChange={this.onChange}
-                openNewSprite={this.props.openNewSprite}
-                openNewCostume={this.props.openNewCostume}
-                openNewBackdrop={this.props.openNewBackdrop}
+                openNewSprite={openNewSprite}
+                openNewCostume={openNewCostume}
+                openNewBackdrop={openNewBackdrop}
                 sprites={this.state.targets.targetList.map(target => (
                     {
                         id: target[0],

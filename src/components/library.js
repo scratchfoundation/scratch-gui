@@ -20,7 +20,7 @@ class LibraryComponent extends React.Component {
     }
     render () {
         let itemId = 0;
-        let gridItems = this.props.data.map(function (dataItem) {
+        let gridItems = this.props.data.map((dataItem) => {
             let id = itemId;
             itemId++;
             const scratchURL = (dataItem.md5) ? 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' +

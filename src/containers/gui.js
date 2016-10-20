@@ -65,21 +65,26 @@ class GUI extends React.Component {
                 media: basePath + 'static/blocks-media/'
             }
         });
-        spriteLibraryProps = {
+        spriteSelectorProps = defaultsDeep({}, spriteSelectorProps, {
+            openNewBackdrop: () => this.openModal('backdrop-library'),
+            openNewCostume: () => this.openModal('costume-library'),
+            openNewSprite: () => this.openModal('sprite-library')
+        });
+        spriteLibraryProps = defaultsDeep({}, spriteLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
             visible: this.state.currentModal == 'sprite-library'
-        };
-        costumeLibraryProps = {
+        });
+        costumeLibraryProps = defaultsDeep({}, costumeLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
             visible: this.state.currentModal == 'costume-library'
-        };
-        backdropLibraryProps = {
+        });
+        backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
             visible: this.state.currentModal == 'backdrop-library'
-        };
+        });
         if (this.props.children) {
             return (
                 <GUIComponent {... guiProps}>

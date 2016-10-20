@@ -84,14 +84,25 @@ class Stage extends React.Component {
         this.animationFrame = requestAnimationFrame(this.animate);
     }
     render () {
+        const {
+            vm, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
         return (
-            <StageComponent canvasRef={canvas => this.canvas = canvas} />
+            <StageComponent
+                canvasRef={canvas => this.canvas = canvas}
+                {...props}
+            />
         );
     }
 }
 
 Stage.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: React.PropTypes.instanceOf(VM)
+};
+
+Stage.defaultProps = {
+    vm: new VM()
 };
 
 module.exports = Stage;

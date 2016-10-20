@@ -2,6 +2,12 @@ const React = require('react');
 
 class SpriteSelectorComponent extends React.Component {
     render () {
+        const {
+            onChange,
+            sprites,
+            value,
+            ...props
+        } = this.props;
         return (
             <div
                 style={{
@@ -9,13 +15,14 @@ class SpriteSelectorComponent extends React.Component {
                     top: 380,
                     right: 10,
                 }}
+                {...props}
             >
                 <select
                     multiple
-                    value={this.props.value}
-                    onChange={this.props.onChange}
+                    value={value}
+                    onChange={onChange}
                 >
-                    {this.props.sprites.map(sprite => (
+                    {sprites.map(sprite => (
                         <option value={sprite.id} key={sprite.id}>
                             {sprite.name}
                         </option>

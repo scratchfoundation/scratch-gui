@@ -1,3 +1,4 @@
+const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -43,22 +44,37 @@ class GUI extends React.Component {
         this.setState({currentModal: null});
     }
     render () {
-        return (
-            <GUIComponent>
-                <GreenFlag vm={this.props.vm} />
-                <StopAll vm={this.props.vm} />
-                <Stage vm={this.props.vm} />
-                <SpriteSelector vm={this.props.vm}
-                    openNewSprite={() => this.openModal('sprite-library')}
-                    openNewCostume={() => this.openModal('costume-library')}
-                    openNewBackdrop={() => this.openModal('backdrop-library')} />
-                <Blocks
-                    options={{
-                        media: this.props.basePath + 'static/blocks-media/'
-                    }}
-                    vm={this.props.vm}
-                />
-                <SpriteLibrary
+        let {
+            basePath,
+            blocksProps,
+            greenFlagProps,
+            projectData, // eslint-disable-line no-unused-vars
+            spriteSelectorProps,
+            stageProps,
+            stopAllProps,
+            vm,
+            ...guiProps
+        } = this.props;
+        blocksProps = defaultsDeep({}, blocksProps, {
+            options: {
+                media: basePath + 'static/blocks-media/'
+            }
+        });
+        if (this.props.children) {
+            return (
+                <GUIComponent {... guiProps}>
+                    {this.props.children}
+                </GUIComponent>
+            );
+        } else {
+            return (
+                <GUIComponent {... guiProps}>
+                    <GreenFlag vm={vm} {...greenFlagProps} />
+                    <StopAll vm={vm} {...stopAllProps} />
+                    <Stage vm={vm} {...stageProps} />
+                    <SpriteSelector vm={vm} {... spriteSelectorProps} />
+                    <Blocks vm={vm} {... blocksProps} />
+<SpriteLibrary
                     vm={this.props.vm}
                     mediaLibrary={this.mediaLibrary}
                     onRequestClose={this.closeModal.bind(this)}
@@ -76,19 +92,31 @@ class GUI extends React.Component {
                     onRequestClose={this.closeModal.bind(this)}
                     visible={this.state.currentModal == 'backdrop-library'}
                     key='backdrop-library' />
-            </GUIComponent>
-        );
+                </GUIComponent>
+            );
+        }
     }
 }
 
 GUI.propTypes = {
     basePath: React.PropTypes.string,
+    blocksProps: React.PropTypes.object,
+    children: React.PropTypes.node,
+    greenFlagProps: React.PropTypes.object,
     projectData: React.PropTypes.string,
+    spriteSelectorProps: React.PropTypes.object,
+    stageProps: React.PropTypes.object,
+    stopAllProps: React.PropTypes.object,
     vm: React.PropTypes.object,
 };
 
 GUI.defaultProps = {
     basePath: '/',
+    blocksProps: {},
+    greenFlagProps: {},
+    spriteSelectorProps: {},
+    stageProps: {},
+    stopAllProps: {},
     vm: new VM()
 };
 

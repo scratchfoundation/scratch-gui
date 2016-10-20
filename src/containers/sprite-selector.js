@@ -23,6 +23,10 @@ class SpriteSelector extends React.Component {
         this.setState({targets: data});
     }
     render () {
+        const {
+            vm, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
         return (
             <SpriteSelectorComponent
                 value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
@@ -36,6 +40,7 @@ class SpriteSelector extends React.Component {
                         name: target[1]
                     }
                 ))}
+                {...props}
             />
         );
     }

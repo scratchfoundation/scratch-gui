@@ -2,6 +2,11 @@ const React = require('react');
 
 class GreenFlagComponent extends React.Component {
     render () {
+        const {
+            onClick,
+            title,
+            ...props
+        } = this.props;
         return (
             <div
                 className="scratch-green-flag"
@@ -11,8 +16,9 @@ class GreenFlagComponent extends React.Component {
                     right: 440,
                     width: 50
                 }}
+                {...props}
             >
-                <button onClick={this.props.onClick}>{this.props.title}</button>
+                <button onClick={onClick}>{title}</button>
             </div>
         );
     }

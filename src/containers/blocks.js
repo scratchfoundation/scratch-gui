@@ -67,13 +67,21 @@ class Blocks extends React.Component {
     onWorkspaceUpdate (data) {
         ScratchBlocks.Events.disable();
         this.workspace.clear();
-        let dom = ScratchBlocks.Xml.textToDom(data.xml);
+        const dom = ScratchBlocks.Xml.textToDom(data.xml);
         ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
         ScratchBlocks.Events.enable();
     }
     render () {
+        const {
+            options, // eslint-disable-line no-unused-vars
+            vm, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
         return (
-            <BlocksComponent componentRef={c => this.blocks = c} />
+            <BlocksComponent
+                componentRef={c => this.blocks = c}
+                {...props}
+            />
         );
     }
 }
@@ -97,7 +105,7 @@ Blocks.propTypes = {
             dragShadowOpacity: React.PropTypes.number
         })
     }),
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: React.PropTypes.instanceOf(VM)
 };
 
 Blocks.defaultOptions = {
@@ -119,7 +127,8 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
-    options: Blocks.defaultOptions
+    options: Blocks.defaultOptions,
+    vm: new VM()
 };
 
 module.exports = Blocks;

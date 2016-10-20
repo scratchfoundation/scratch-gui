@@ -17,22 +17,20 @@ class LibraryComponent extends React.Component {
         this.setState({selectedItem: id});
     }
     render () {
-        let gridItems = [];
         let itemId = 0;
-        for (let dataItem of this.props.data) {
+        let gridItems = this.props.data.map(function (dataItem) {
+            let id = itemId;
+            itemId++;
             const scratchURL = (dataItem.md5) ? 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' +
                 dataItem.md5 + '/get/' : dataItem.rawURL;
-            gridItems.push(
-                <LibraryItem
-                    name={dataItem.name}
-                    iconURL={scratchURL}
-                    key={'item_' + itemId}
-                    selected={this.state.selectedItem == itemId}
-                    onSelect={this.onSelect.bind(this)}
-                    id={itemId} />
-            );
-            itemId++;
-        }
+            return <LibraryItem
+                name={dataItem.name}
+                iconURL={scratchURL}
+                key={'item_' + itemId}
+                selected={this.state.selectedItem == itemId}
+                onSelect={this.onSelect.bind(this)}
+                id={id} />;
+        });
 
         const scrollGridStyle = {
             overflow: 'scroll',

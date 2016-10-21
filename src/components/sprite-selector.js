@@ -6,6 +6,9 @@ class SpriteSelectorComponent extends React.Component {
             onChange,
             sprites,
             value,
+            openNewSprite,
+            openNewCostume,
+            openNewBackdrop,
             ...props
         } = this.props;
         return (
@@ -28,6 +31,11 @@ class SpriteSelectorComponent extends React.Component {
                         </option>
                     ))}
                 </select>
+                <p>
+                    <button onClick={openNewSprite}>New sprite</button>
+                    <button onClick={openNewCostume}>New costume</button>
+                    <button onClick={openNewBackdrop}>New backdrop</button>
+                </p>
             </div>
         );
     }
@@ -41,7 +49,10 @@ SpriteSelectorComponent.propTypes = {
             name: React.PropTypes.string
         })
     ),
-    value: React.PropTypes.arrayOf(React.PropTypes.string)
+    value: React.PropTypes.arrayOf(React.PropTypes.string),
+    openNewSprite: React.PropTypes.func,
+    openNewCostume: React.PropTypes.func,
+    openNewBackdrop: React.PropTypes.func
 };
 
 module.exports = SpriteSelectorComponent;

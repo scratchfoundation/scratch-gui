@@ -25,6 +25,10 @@
     "type": "git",
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
+  "peerDependencies": {
+    "react": "15.x.x",
+    "react-dom": "15.x.x"
+  },
   "devDependencies": {
     "babel-core": "6.14.0",
     "babel-eslint": "6.1.2",
@@ -43,8 +47,8 @@
     "lodash.defaultsdeep": "4.4.0",
     "minilog": "3.0.1",
     "opt-cli": "1.5.1",
-    "react": "15.x.x",
-    "react-dom": "15.x.x",
+    "react": "15.3.2",
+    "react-dom": "15.3.2",
     "react-modal": "1.5.2",
     "scratch-blocks": "latest",
     "scratch-render": "latest",

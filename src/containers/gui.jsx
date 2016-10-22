@@ -5,6 +5,7 @@ const VM = require('scratch-vm');
 
 const VMManager = require('../lib/vm-manager');
 const MediaLibrary = require('../lib/media-library');
+const shapeFromPropTypes = require('../lib/shape-from-prop-types');
 
 const Blocks = require('./blocks.jsx');
 const GUIComponent = require('../components/gui.jsx');
@@ -60,30 +61,30 @@ class GUI extends React.Component {
             vm,
             ...guiProps
         } = this.props;
+        backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
+            mediaLibrary: this.mediaLibrary,
+            onRequestClose: this.closeModal,
+            visible: this.state.currentModal === 'backdrop-library'
+        });
         blocksProps = defaultsDeep({}, blocksProps, {
             options: {
                 media: `${basePath}static/blocks-media/`
             }
-        });
-        spriteSelectorProps = defaultsDeep({}, spriteSelectorProps, {
-            openNewBackdrop: () => this.openModal('backdrop-library'),
-            openNewCostume: () => this.openModal('costume-library'),
-            openNewSprite: () => this.openModal('sprite-library')
-        });
-        spriteLibraryProps = defaultsDeep({}, spriteLibraryProps, {
-            mediaLibrary: this.mediaLibrary,
-            onRequestClose: this.closeModal,
-            visible: this.state.currentModal === 'sprite-library'
         });
         costumeLibraryProps = defaultsDeep({}, costumeLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
             visible: this.state.currentModal === 'costume-library'
         });
-        backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
+        spriteLibraryProps = defaultsDeep({}, spriteLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
-            visible: this.state.currentModal === 'backdrop-library'
+            visible: this.state.currentModal === 'sprite-library'
+        });
+        spriteSelectorProps = defaultsDeep({}, spriteSelectorProps, {
+            openNewBackdrop: () => this.openModal('backdrop-library'),
+            openNewCostume: () => this.openModal('costume-library'),
+            openNewSprite: () => this.openModal('sprite-library')
         });
         if (this.props.children) {
             return (
@@ -110,17 +111,17 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    backdropLibraryProps: React.PropTypes.shape(BackdropLibrary.propTypes),
+    backdropLibraryProps: shapeFromPropTypes(BackdropLibrary.propTypes, {omit: ['vm']}),
     basePath: React.PropTypes.string,
-    blocksProps: React.PropTypes.shape(Blocks.propTypes),
+    blocksProps: shapeFromPropTypes(Blocks.propTypes, {omit: ['vm']}),
     children: React.PropTypes.node,
-    costumeLibraryProps: React.PropTypes.shape(CostumeLibrary.propTypes),
-    greenFlagProps: React.PropTypes.shape(GreenFlag.propTypes),
+    costumeLibraryProps: shapeFromPropTypes(CostumeLibrary.propTypes, {omit: ['vm']}),
+    greenFlagProps: shapeFromPropTypes(GreenFlag.propTypes, {omit: ['vm']}),
     projectData: React.PropTypes.string,
-    spriteLibraryProps: React.PropTypes.shape(SpriteLibrary.propTypes),
-    spriteSelectorProps: React.PropTypes.shape(SpriteSelector.propTypes),
-    stageProps: React.PropTypes.shape(Stage.propTypes),
-    stopAllProps: React.PropTypes.shape(StopAll.propTypes),
+    spriteLibraryProps: shapeFromPropTypes(SpriteLibrary.propTypes, {omit: ['vm']}),
+    spriteSelectorProps: shapeFromPropTypes(SpriteSelector.propTypes, {omit: ['vm']}),
+    stageProps: shapeFromPropTypes(Stage.propTypes, {omit: ['vm']}),
+    stopAllProps: shapeFromPropTypes(StopAll.propTypes, {omit: ['vm']}),
     vm: React.PropTypes.instanceOf(VM),
 };
 

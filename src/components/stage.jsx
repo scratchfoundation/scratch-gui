@@ -27,12 +27,12 @@ class StageComponent extends React.Component {
 
 StageComponent.propTypes = {
     canvasRef: React.PropTypes.func,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number
+    height: React.PropTypes.number,
+    width: React.PropTypes.number
 };
 
 StageComponent.defaultProps = {
-    canvasRef: function () {},
+    canvasRef: () => {},
     width: 480,
     height: 360
 };

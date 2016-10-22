@@ -8,8 +8,8 @@ class BlocksComponent extends React.Component {
         } = this.props;
         return (
             <div
-                ref={componentRef}
                 className="scratch-blocks"
+                ref={componentRef}
                 style={{
                     position: 'absolute',
                     top: 0,

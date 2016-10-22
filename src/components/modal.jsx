@@ -1,20 +1,21 @@
 const React = require('react');
 const ReactModal = require('react-modal');
+const stylePropType = require('react-style-proptype');
 
 class ModalComponent extends React.Component {
     render () {
         return (
             <ReactModal
-                ref="modal"
-                style={this.props.modalStyle}
                 isOpen={this.props.visible}
+                ref={m => (this.modal = m)}
+                style={this.props.modalStyle}
                 onRequestClose={this.props.onRequestClose}
             >
                 <div
-                    onClick={this.props.onRequestClose}
                     style={this.props.closeButtonStyle}
+                    onClick={this.props.onRequestClose}
                 >
-                    x
+                    {'x'}
                 </div>
                 {this.props.children}
             </ReactModal>
@@ -61,8 +62,8 @@ ModalComponent.defaultProps = {
 
 ModalComponent.propTypes = {
     children: React.PropTypes.node,
-    modalStyle: React.PropTypes.object,
-    closeButtonStyle: React.PropTypes.object,
+    closeButtonStyle: stylePropType,
+    modalStyle: stylePropType,
     onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool
 };

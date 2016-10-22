@@ -30,14 +30,14 @@ class GUI extends React.Component {
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.start();
     }
-    componentWillUnmount () {
-        this.vmManager.detachKeyboardEvents();
-        this.props.vm.stopAll();
-    }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
             this.props.vm.loadProject(nextProps.projectData);
         }
+    }
+    componentWillUnmount () {
+        this.vmManager.detachKeyboardEvents();
+        this.props.vm.stopAll();
     }
     openModal (modalName) {
         this.setState({currentModal: modalName});
@@ -62,7 +62,7 @@ class GUI extends React.Component {
         } = this.props;
         blocksProps = defaultsDeep({}, blocksProps, {
             options: {
-                media: basePath + 'static/blocks-media/'
+                media: `${basePath}static/blocks-media/`
             }
         });
         spriteSelectorProps = defaultsDeep({}, spriteSelectorProps, {
@@ -73,17 +73,17 @@ class GUI extends React.Component {
         spriteLibraryProps = defaultsDeep({}, spriteLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
-            visible: this.state.currentModal == 'sprite-library'
+            visible: this.state.currentModal === 'sprite-library'
         });
         costumeLibraryProps = defaultsDeep({}, costumeLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
-            visible: this.state.currentModal == 'costume-library'
+            visible: this.state.currentModal === 'costume-library'
         });
         backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
             mediaLibrary: this.mediaLibrary,
             onRequestClose: this.closeModal,
-            visible: this.state.currentModal == 'backdrop-library'
+            visible: this.state.currentModal === 'backdrop-library'
         });
         if (this.props.children) {
             return (
@@ -91,36 +91,37 @@ class GUI extends React.Component {
                     {this.props.children}
                 </GUIComponent>
             );
-        } else {
-            return (
-                <GUIComponent {... guiProps}>
-                    <GreenFlag vm={vm} {...greenFlagProps} />
-                    <StopAll vm={vm} {...stopAllProps} />
-                    <Stage vm={vm} {...stageProps} />
-                    <SpriteSelector vm={vm} {... spriteSelectorProps} />
-                    <Blocks vm={vm} {... blocksProps} />
-                    <SpriteLibrary vm={vm} {...spriteLibraryProps} />
-                    <CostumeLibrary vm={vm} {...costumeLibraryProps} />
-                    <BackdropLibrary vm={vm} {...backdropLibraryProps} />
-                </GUIComponent>
-            );
         }
+        /* eslint-disable react/jsx-max-props-per-line, lines-around-comment */
+        return (
+            <GUIComponent {... guiProps}>
+                <GreenFlag vm={vm} {...greenFlagProps} />
+                <StopAll vm={vm} {...stopAllProps} />
+                <Stage vm={vm} {...stageProps} />
+                <SpriteSelector vm={vm} {... spriteSelectorProps} />
+                <Blocks vm={vm} {... blocksProps} />
+                <SpriteLibrary vm={vm} {...spriteLibraryProps} />
+                <CostumeLibrary vm={vm} {...costumeLibraryProps} />
+                <BackdropLibrary vm={vm} {...backdropLibraryProps} />
+            </GUIComponent>
+        );
+        /* eslint-enable react/jsx-max-props-per-line, lines-around-comment */
     }
 }
 
 GUI.propTypes = {
-    backdropLibraryProps: React.PropTypes.object,
+    backdropLibraryProps: React.PropTypes.shape(BackdropLibrary.propTypes),
     basePath: React.PropTypes.string,
-    blocksProps: React.PropTypes.object,
-    costumeLibraryProps: React.PropTypes.object,
+    blocksProps: React.PropTypes.shape(Blocks.propTypes),
     children: React.PropTypes.node,
-    greenFlagProps: React.PropTypes.object,
+    costumeLibraryProps: React.PropTypes.shape(CostumeLibrary.propTypes),
+    greenFlagProps: React.PropTypes.shape(GreenFlag.propTypes),
     projectData: React.PropTypes.string,
-    spriteLibraryProps: React.PropTypes.object,
-    spriteSelectorProps: React.PropTypes.object,
-    stageProps: React.PropTypes.object,
-    stopAllProps: React.PropTypes.object,
-    vm: React.PropTypes.object,
+    spriteLibraryProps: React.PropTypes.shape(SpriteLibrary.propTypes),
+    spriteSelectorProps: React.PropTypes.shape(SpriteSelector.propTypes),
+    stageProps: React.PropTypes.shape(Stage.propTypes),
+    stopAllProps: React.PropTypes.shape(StopAll.propTypes),
+    vm: React.PropTypes.instanceOf(VM),
 };
 
 GUI.defaultProps = {

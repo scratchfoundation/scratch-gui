@@ -8,7 +8,7 @@ const LibaryComponent = require('../components/library.jsx');
 class SpriteLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'selectItem', 'setSpriteData']);
+        bindAll(this, ['setData', 'handleItemSelect', 'setSpriteData']);
         this.state = {data: [], spriteData: {}};
     }
     componentWillReceiveProps (nextProps) {
@@ -18,44 +18,45 @@ class SpriteLibrary extends React.Component {
     }
     setData (data) {
         this.setState({data: data});
-        for (let sprite of data) {
+        for (const sprite of data) {
             this.props.mediaLibrary.getSprite(sprite.md5, this.setSpriteData);
         }
     }
     setSpriteData (md5, data) {
-        let spriteData = this.state.spriteData;
-        spriteData[md5] = data;
-        this.setState({spriteData: spriteData});
+        this.setState({
+            spriteData: Object.assign({}, this.state.spriteData, {[md5]: data})
+        });
     }
-    selectItem (item) {
-        var spriteData = JSON.stringify(this.state.spriteData[item.json]);
+    handleItemSelect (item) {
+        const spriteData = JSON.stringify(this.state.spriteData[item.json]);
         this.props.vm.addSprite2(spriteData);
     }
     render () {
-        let libraryData = Object.keys(this.state.spriteData).map((libraryKey) => {
-            let libraryItem = this.state.spriteData[libraryKey];
-            return {
-                name: libraryItem.objName,
-                md5: libraryItem.costumes[0].baseLayerMD5,
-                json: libraryKey
-            };
-        });
-        return <LibaryComponent
-            title="Sprite Library"
-            visible={this.props.visible}
-            data={libraryData}
-            mediaLibrary={this.props.mediaLibrary}
-            onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem}
-        />;
+        return (
+            <LibaryComponent
+                data={Object.keys(this.state.spriteData).map(libraryKey => {
+                    const libraryItem = this.state.spriteData[libraryKey];
+                    return {
+                        name: libraryItem.objName,
+                        md5: libraryItem.costumes[0].baseLayerMD5,
+                        json: libraryKey
+                    };
+                })}
+                mediaLibrary={this.props.mediaLibrary}
+                title="Sprite Library"
+                visible={this.props.visible}
+                onItemSelected={this.handleItemSelect}
+                onRequestClose={this.props.onRequestClose}
+            />
+        );
     }
 }
 
 SpriteLibrary.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = SpriteLibrary;

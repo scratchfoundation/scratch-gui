@@ -25,7 +25,7 @@ class App extends React.Component {
         return location.hash.substring(1);
     }
     updateProject () {
-        let projectId = this.fetchProjectId();
+        const projectId = this.fetchProjectId();
         if (projectId !== this.state.projectId) {
             if (projectId.length < 1) {
                 return this.setState({

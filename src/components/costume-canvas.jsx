@@ -16,46 +16,54 @@ class CostumeCanvas extends React.Component {
     componentDidUpdate (prevProps) {
         if (prevProps.url !== this.props.url) {
             this.load();
-        } else {
-            if (prevProps.width !== this.props.width ||
-                prevProps.height !== this.props.height ||
-                prevProps.direction !== this.props.direction) {
-                this.draw();
-            }
+        } else if (
+            prevProps.width !== this.props.width ||
+            prevProps.height !== this.props.height ||
+            prevProps.direction !== this.props.direction
+          ) {
+            this.draw();
         }
     }
     draw () {
-        if (!this.refs.costumeCanvas) {
+        if (!this.canvas) {
             return;
         }
+
         // Draw the costume to the rendered canvas.
         const img = this.img;
-        const context = this.refs.costumeCanvas.getContext('2d');
+        const context = this.canvas.getContext('2d');
+
         // Scale to fit.
         let scale;
+
         // Choose the larger dimension to scale by.
         if (img.width > img.height) {
-            scale = this.refs.costumeCanvas.width / img.width;
+            scale = this.canvas.width / img.width;
         } else {
-            scale = this.refs.costumeCanvas.height / img.height;
+            scale = this.canvas.height / img.height;
         }
+
         // Rotate by the Scratch-value direction.
         const angle = (-90 + this.props.direction) * Math.PI / 180;
+
         // Rotation origin point will be center of the canvas.
-        const contextTranslateX = this.refs.costumeCanvas.width / 2;
-        const contextTranslateY = this.refs.costumeCanvas.height / 2;
+        const contextTranslateX = this.canvas.width / 2;
+        const contextTranslateY = this.canvas.height / 2;
+
         // First, clear the canvas.
         context.clearRect(0, 0,
-            this.refs.costumeCanvas.width, this.refs.costumeCanvas.height);
+            this.canvas.width, this.canvas.height);
+
         // Translate the context to the center of the canvas,
         // then rotate canvas drawing by `angle`.
         context.translate(contextTranslateX, contextTranslateY);
         context.rotate(angle);
         context.drawImage(img,
             0, 0, img.width, img.height,
-            -(scale * img.width / 2),  -(scale * img.height / 2),
+            -(scale * img.width / 2), -(scale * img.height / 2),
             scale * img.width,
             scale * img.height);
+
         // Reset the canvas rotation and translation to 0, (0, 0).
         context.rotate(-angle);
         context.translate(-contextTranslateX, -contextTranslateY);
@@ -72,8 +80,8 @@ class CostumeCanvas extends React.Component {
                     url: url
                 }, (err, response, body) => {
                     if (!err) {
-                        svgToImage(body, (err, img) => {
-                            if (!err) {
+                        svgToImage(body, (svgErr, img) => {
+                            if (!svgErr) {
                                 this.img = img;
                                 this.draw();
                             }
@@ -84,7 +92,7 @@ class CostumeCanvas extends React.Component {
 
         } else {
             // Raster graphics: create Image and draw it.
-            let img = new Image();
+            const img = new Image();
             img.src = url;
             img.onload = () => {
                 this.img = img;
@@ -93,11 +101,13 @@ class CostumeCanvas extends React.Component {
         }
     }
     render () {
-        return <canvas
-            ref='costumeCanvas'
-            width={this.props.width}
-            height={this.props.height}
-        />;
+        return (
+            <canvas
+                height={this.props.height}
+                width={this.props.width}
+                ref={this._getCanvas} // eslint-disable-line react/jsx-sort-props
+            />
+        );
     }
 }
 
@@ -108,10 +118,10 @@ CostumeCanvas.defaultProps = {
 };
 
 CostumeCanvas.propTypes = {
-    url: React.PropTypes.string,
-    width: React.PropTypes.number,
+    direction: React.PropTypes.number,
     height: React.PropTypes.number,
-    direction: React.PropTypes.number
+    url: React.PropTypes.string,
+    width: React.PropTypes.number
 };
 
 module.exports = CostumeCanvas;

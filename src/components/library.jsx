@@ -7,11 +7,11 @@ const ModalComponent = require('./modal.jsx');
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['onSelect']);
+        bindAll(this, ['handleSelect']);
         this.state = {selectedItem: null};
     }
-    onSelect (id) {
-        if (this.state.selectedItem == id) {
+    handleSelect (id) {
+        if (this.state.selectedItem === id) {
             // Double select: select as the library's value.
             this.props.onRequestClose();
             this.props.onItemSelected(this.props.data[id]);
@@ -19,22 +19,6 @@ class LibraryComponent extends React.Component {
         this.setState({selectedItem: id});
     }
     render () {
-        let itemId = 0;
-        let gridItems = this.props.data.map((dataItem) => {
-            let id = itemId;
-            itemId++;
-            const scratchURL = (dataItem.md5) ? 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' +
-                dataItem.md5 + '/get/' : dataItem.rawURL;
-            return <LibraryItem
-                name={dataItem.name}
-                iconURL={scratchURL}
-                key={'item_' + id}
-                selected={this.state.selectedItem == id}
-                onSelect={this.onSelect}
-                id={id}
-            />;
-        });
-
         const scrollGridStyle = {
             overflow: 'scroll',
             position: 'absolute',
@@ -43,15 +27,28 @@ class LibraryComponent extends React.Component {
             left: '30px',
             right: '30px'
         };
-
         return (
             <ModalComponent
-                onRequestClose={this.props.onRequestClose}
                 visible={this.props.visible}
+                onRequestClose={this.props.onRequestClose}
             >
                 <h1>{this.props.title}</h1>
                 <div style={scrollGridStyle}>
-                    {gridItems}
+                    {this.props.data.map((dataItem, itemId) => {
+                        const scratchURL = dataItem.md5 ?
+                            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
+                            dataItem.rawURL;
+                        return (
+                            <LibraryItem
+                                iconURL={scratchURL}
+                                id={itemId}
+                                key={`item_${itemId}`}
+                                name={dataItem.name}
+                                selected={this.state.selectedItem === itemId}
+                                onSelect={this.handleSelect}
+                            />
+                        );
+                    })}
                 </div>
             </ModalComponent>
         );
@@ -59,11 +56,19 @@ class LibraryComponent extends React.Component {
 }
 
 LibraryComponent.propTypes = {
-    title: React.PropTypes.string,
-    data: React.PropTypes.array,
-    visible: React.PropTypes.bool,
+    data: React.PropTypes.arrayOf(
+        /* eslint-disable react/no-unused-prop-types, lines-around-comment */
+        React.PropTypes.shape({
+            md5: React.PropTypes.string,
+            name: React.PropTypes.string,
+            rawURL: React.PropTypes.string,
+        })
+        /* eslint-enable react/no-unused-prop-types, lines-around-comment */
+    ),
+    onItemSelected: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
-    onItemSelected: React.PropTypes.func
+    title: React.PropTypes.string,
+    visible: React.PropTypes.bool
 };
 
 module.exports = LibraryComponent;

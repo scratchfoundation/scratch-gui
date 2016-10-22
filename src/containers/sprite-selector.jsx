@@ -1,7 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const SpriteSelectorComponent = require('../components/sprite-selector');
+const SpriteSelectorComponent = require('../components/sprite-selector.jsx');
 
 class SpriteSelector extends React.Component {
     constructor (props) {

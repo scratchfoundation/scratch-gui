@@ -1,16 +1,16 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const StopAllComponent = require('../components/stop-all');
+const GreenFlagComponent = require('../components/green-flag.jsx');
 
-class StopAll extends React.Component {
+class GreenFlag extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, ['onClick']);
     }
     onClick (e) {
         e.preventDefault();
-        this.props.vm.stopAll();
+        this.props.vm.greenFlag();
     }
     render () {
         const {
@@ -18,7 +18,7 @@ class StopAll extends React.Component {
             ...props
         } = this.props;
         return (
-            <StopAllComponent
+            <GreenFlagComponent
                 onClick={this.onClick}
                 {...props}
             />
@@ -26,8 +26,8 @@ class StopAll extends React.Component {
     }
 }
 
-StopAll.propTypes = {
+GreenFlag.propTypes = {
     vm: React.PropTypes.object
 };
 
-module.exports = StopAll;
+module.exports = GreenFlag;

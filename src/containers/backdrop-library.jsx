@@ -3,7 +3,7 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library');
+const LibaryComponent = require('../components/library.jsx');
 
 
 class BackdropLibrary extends React.Component {

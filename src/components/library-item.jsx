@@ -1,6 +1,6 @@
 const React = require('react');
 
-const CostumeCanvas = require('./costume-canvas');
+const CostumeCanvas = require('./costume-canvas.jsx');
 
 class LibraryItem extends React.Component {
     render () {

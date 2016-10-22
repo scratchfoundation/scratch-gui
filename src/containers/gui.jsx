@@ -6,16 +6,16 @@ const VM = require('scratch-vm');
 const VMManager = require('../lib/vm-manager');
 const MediaLibrary = require('../lib/media-library');
 
-const Blocks = require('./blocks');
-const GUIComponent = require('../components/gui');
-const GreenFlag = require('./green-flag');
-const SpriteSelector = require('./sprite-selector');
-const Stage = require('./stage');
-const StopAll = require('./stop-all');
+const Blocks = require('./blocks.jsx');
+const GUIComponent = require('../components/gui.jsx');
+const GreenFlag = require('./green-flag.jsx');
+const SpriteSelector = require('./sprite-selector.jsx');
+const Stage = require('./stage.jsx');
+const StopAll = require('./stop-all.jsx');
 
-const SpriteLibrary = require('./sprite-library');
-const CostumeLibrary = require('./costume-library');
-const BackdropLibrary = require('./backdrop-library');
+const SpriteLibrary = require('./sprite-library.jsx');
+const CostumeLibrary = require('./costume-library.jsx');
+const BackdropLibrary = require('./backdrop-library.jsx');
 
 class GUI extends React.Component {
     constructor (props) {

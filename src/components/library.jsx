@@ -1,8 +1,8 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const LibraryItem = require('./library-item');
-const ModalComponent = require('./modal');
+const LibraryItem = require('./library-item.jsx');
+const ModalComponent = require('./modal.jsx');
 
 class LibraryComponent extends React.Component {
     constructor (props) {

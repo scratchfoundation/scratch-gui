@@ -5,7 +5,7 @@ var webpack = require('webpack');
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        gui: './src/index.js'
+        gui: './src/index.jsx'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -17,7 +17,7 @@ module.exports = {
             ReactDOM: 'react-dom'
         },
         loaders: [{
-            test: /\.js$/,
+            test: /\.jsx?$/,
             loader: 'babel-loader',
             include: path.resolve(__dirname, 'src'),
             query: {

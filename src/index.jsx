@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const GUI = require('./containers/gui');
+const GUI = require('./containers/gui.jsx');
 const log = require('./lib/log');
 const ProjectLoader = require('./lib/project-loader');
 

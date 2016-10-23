@@ -1,4 +1,3 @@
-/* eslint-disable no-var, prefer-template */
 var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');

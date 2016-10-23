@@ -41,7 +41,7 @@
     "babel-preset-react": "6.11.1",
     "copy-webpack-plugin": "3.0.1",
     "eslint": "3.5.0",
-    "eslint-config-scratch": "LLK/eslint-config-scratch",
+    "eslint-config-scratch": "^1.0.0",
     "eslint-plugin-react": "6.4.1",
     "gh-pages": "0.11.0",
     "html-webpack-plugin": "2.22.0",

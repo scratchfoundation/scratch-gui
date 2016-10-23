@@ -31,7 +31,7 @@ class MediaLibrary {
      * e.g., for offline support.
      * @param {string} libraryType Type of library, i.e., sprite, costume, sound, backdrop.
      * @param {!Function} callback Callback, called with list of data.
-     * @returns {null} null
+     * @return {undefined}
      */
     getMediaLibrary (libraryType, callback) {
         if (!this._libraryData.hasOwnProperty(libraryType)) {
@@ -59,7 +59,7 @@ class MediaLibrary {
      * e.g., for offline support.
      * @param {string} url URL to sprite (md5.json).
      * @param {!Function} callback Callback, called with sprite data.
-     * @returns {null} null
+     * @return {undefined}
      */
     getSprite (url, callback) {
         if (this._spriteData.hasOwnProperty(url)) {

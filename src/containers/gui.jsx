@@ -122,7 +122,7 @@ GUI.propTypes = {
     spriteSelectorProps: shapeFromPropTypes(SpriteSelector.propTypes, {omit: ['vm']}),
     stageProps: shapeFromPropTypes(Stage.propTypes, {omit: ['vm']}),
     stopAllProps: shapeFromPropTypes(StopAll.propTypes, {omit: ['vm']}),
-    vm: React.PropTypes.instanceOf(VM),
+    vm: React.PropTypes.instanceOf(VM)
 };
 
 GUI.defaultProps = {

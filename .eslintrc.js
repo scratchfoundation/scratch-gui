@@ -1,5 +1,3 @@
 module.exports = {
-    env: {
-        node: true
-    }
+    extends: ['scratch', 'scratch/node']
 };

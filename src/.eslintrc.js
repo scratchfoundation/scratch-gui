@@ -3,5 +3,8 @@ module.exports = {
         node: false,
         browser: true
     },
-    extends: ['scratch/es6', 'scratch/react']
+    extends: ['scratch/es6', 'scratch/react'],
+    globals: {
+        process: true
+    }
 };

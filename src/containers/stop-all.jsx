@@ -1,14 +1,15 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
+const VM = require('scratch-vm');
 
-const StopAllComponent = require('../components/stop-all');
+const StopAllComponent = require('../components/stop-all.jsx');
 
 class StopAll extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['onClick']);
+        bindAll(this, ['handleClick']);
     }
-    onClick (e) {
+    handleClick (e) {
         e.preventDefault();
         this.props.vm.stopAll();
     }
@@ -19,7 +20,7 @@ class StopAll extends React.Component {
         } = this.props;
         return (
             <StopAllComponent
-                onClick={this.onClick}
+                onClick={this.handleClick}
                 {...props}
             />
         );
@@ -27,7 +28,7 @@ class StopAll extends React.Component {
 }
 
 StopAll.propTypes = {
-    vm: React.PropTypes.object
+    vm: React.PropTypes.instanceOf(VM)
 };
 
 module.exports = StopAll;

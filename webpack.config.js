@@ -2,10 +2,11 @@ var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
+
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        gui: './src/index.js'
+        gui: './src/index.jsx'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -17,7 +18,7 @@ module.exports = {
             ReactDOM: 'react-dom'
         },
         loaders: [{
-            test: /\.js$/,
+            test: /\.jsx?$/,
             loader: 'babel-loader',
             include: path.resolve(__dirname, 'src'),
             query: {
@@ -45,7 +46,7 @@ module.exports = {
             from: 'node_modules/scratch-blocks/media',
             to: 'static/blocks-media'
         }])
-    ].concat(process.env.NODE_ENV == 'production' ? [
+    ].concat(process.env.NODE_ENV === 'production' ? [
         new webpack.optimize.UglifyJsPlugin({
             include: /\.min\.js$/,
             minimize: true,

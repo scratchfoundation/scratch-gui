@@ -1,13 +1,26 @@
+const bindAll = require('lodash.bindall');
 const React = require('react');
+const stylePropType = require('react-style-proptype');
 
-const CostumeCanvas = require('./costume-canvas');
+const CostumeCanvas = require('./costume-canvas.jsx');
 
 class LibraryItem extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, ['handleClick']);
+    }
+    handleClick (e) {
+        this.props.onSelect(this.props.id);
+        e.preventDefault();
+    }
     render () {
-        let style = (this.props.selected) ?
+        const style = (this.props.selected) ?
             this.props.selectedGridTileStyle : this.props.gridTileStyle;
         return (
-            <div style={style} onClick={() => this.props.onSelect(this.props.id)}>
+            <div
+                style={style}
+                onClick={this.handleClick}
+            >
                 <CostumeCanvas url={this.props.iconURL} />
                 <p>{this.props.name}</p>
             </div>
@@ -37,13 +50,13 @@ LibraryItem.defaultProps = {
 };
 
 LibraryItem.propTypes = {
-    name: React.PropTypes.string,
+    gridTileStyle: stylePropType,
     iconURL: React.PropTypes.string,
-    gridTileStyle: React.PropTypes.object,
-    selectedGridTileStyle: React.PropTypes.object,
-    selected: React.PropTypes.bool,
+    id: React.PropTypes.number,
+    name: React.PropTypes.string,
     onSelect: React.PropTypes.func,
-    id: React.PropTypes.number
+    selected: React.PropTypes.bool,
+    selectedGridTileStyle: stylePropType
 };
 
 module.exports = LibraryItem;

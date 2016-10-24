@@ -1,12 +1,13 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
+const VM = require('scratch-vm');
 
-const SpriteSelectorComponent = require('../components/sprite-selector');
+const SpriteSelectorComponent = require('../components/sprite-selector.jsx');
 
 class SpriteSelector extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['onChange', 'targetsUpdate']);
+        bindAll(this, ['handleChange', 'targetsUpdate']);
         this.state = {
             targets: {
                 targetList: []
@@ -16,7 +17,7 @@ class SpriteSelector extends React.Component {
     componentDidMount () {
         this.props.vm.on('targetsUpdate', this.targetsUpdate);
     }
-    onChange (event) {
+    handleChange (event) {
         this.props.vm.setEditingTarget(event.target.value);
     }
     targetsUpdate (data) {
@@ -32,17 +33,17 @@ class SpriteSelector extends React.Component {
         } = this.props;
         return (
             <SpriteSelectorComponent
-                value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
-                onChange={this.onChange}
-                openNewSprite={openNewSprite}
-                openNewCostume={openNewCostume}
                 openNewBackdrop={openNewBackdrop}
+                openNewCostume={openNewCostume}
+                openNewSprite={openNewSprite}
                 sprites={this.state.targets.targetList.map(target => (
                     {
                         id: target[0],
                         name: target[1]
                     }
                 ))}
+                value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
+                onChange={this.handleChange}
                 {...props}
             />
         );
@@ -50,10 +51,10 @@ class SpriteSelector extends React.Component {
 }
 
 SpriteSelector.propTypes = {
-    vm: React.PropTypes.object.isRequired,
-    openNewSprite: React.PropTypes.func,
+    openNewBackdrop: React.PropTypes.func,
     openNewCostume: React.PropTypes.func,
-    openNewBackdrop: React.PropTypes.func
+    openNewSprite: React.PropTypes.func,
+    vm: React.PropTypes.instanceOf(VM)
 };
 
 module.exports = SpriteSelector;

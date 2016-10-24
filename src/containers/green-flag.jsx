@@ -1,14 +1,16 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const GreenFlagComponent = require('../components/green-flag');
+const VM = require('scratch-vm');
+
+const GreenFlagComponent = require('../components/green-flag.jsx');
 
 class GreenFlag extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['onClick']);
+        bindAll(this, ['handleClick']);
     }
-    onClick (e) {
+    handleClick (e) {
         e.preventDefault();
         this.props.vm.greenFlag();
     }
@@ -19,7 +21,7 @@ class GreenFlag extends React.Component {
         } = this.props;
         return (
             <GreenFlagComponent
-                onClick={this.onClick}
+                onClick={this.handleClick}
                 {...props}
             />
         );
@@ -27,7 +29,7 @@ class GreenFlag extends React.Component {
 }
 
 GreenFlag.propTypes = {
-    vm: React.PropTypes.object
+    vm: React.PropTypes.instanceOf(VM)
 };
 
 module.exports = GreenFlag;

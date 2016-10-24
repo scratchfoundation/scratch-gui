@@ -3,7 +3,7 @@ const React = require('react');
 const Renderer = require('scratch-render');
 const VM = require('scratch-vm');
 
-const StageComponent = require('../components/stage');
+const StageComponent = require('../components/stage.jsx');
 
 class Stage extends React.Component {
     constructor (props) {
@@ -40,8 +40,8 @@ class Stage extends React.Component {
         canvas.removeEventListener('mousedown', this.onMouseDown);
     }
     onMouseMove (e) {
-        let rect = this.canvas.getBoundingClientRect();
-        let coordinates = {
+        const rect = this.canvas.getBoundingClientRect();
+        const coordinates = {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
             canvasWidth: rect.width,
@@ -50,8 +50,8 @@ class Stage extends React.Component {
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {
-        let rect = this.canvas.getBoundingClientRect();
-        let data = {
+        const rect = this.canvas.getBoundingClientRect();
+        const data = {
             isDown: false,
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
@@ -62,8 +62,8 @@ class Stage extends React.Component {
         e.preventDefault();
     }
     onMouseDown (e) {
-        let rect = this.canvas.getBoundingClientRect();
-        let data = {
+        const rect = this.canvas.getBoundingClientRect();
+        const data = {
             isDown: true,
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
@@ -90,7 +90,7 @@ class Stage extends React.Component {
         } = this.props;
         return (
             <StageComponent
-                canvasRef={canvas => this.canvas = canvas}
+                canvasRef={canvas => (this.canvas = canvas)}
                 {...props}
             />
         );

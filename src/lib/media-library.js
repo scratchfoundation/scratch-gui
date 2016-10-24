@@ -3,9 +3,9 @@ const xhr = require('xhr');
 const LIBRARY_PREFIX = 'https://cdn.scratch.mit.edu/scratchr2/static/' +
     '__8d9c95eb5aa1272a311775ca32568417__/medialibraries/';
 const LIBRARY_URL = {
-    sprite: LIBRARY_PREFIX + 'spriteLibrary.json',
-    costume: LIBRARY_PREFIX + 'costumeLibrary.json',
-    backdrop: LIBRARY_PREFIX + 'backdropLibrary.json'
+    sprite: `${LIBRARY_PREFIX}spriteLibrary.json`,
+    costume: `${LIBRARY_PREFIX}costumeLibrary.json`,
+    backdrop: `${LIBRARY_PREFIX}backdropLibrary.json`
 };
 const SPRITE_OBJECT_PREFIX = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/';
 const SPRITE_OBJECT_SUFFIX = '/get/';
@@ -44,7 +44,7 @@ class MediaLibrary {
                 url: LIBRARY_URL[libraryType]
             }, (err, response, body) => {
                 if (!err) {
-                    let data = JSON.parse(body);
+                    const data = JSON.parse(body);
                     this._libraryData[libraryType] = data;
                     callback(this._libraryData[libraryType]);
                 }
@@ -68,7 +68,7 @@ class MediaLibrary {
                 url: SPRITE_OBJECT_PREFIX + url + SPRITE_OBJECT_SUFFIX
             }, (err, response, body) => {
                 if (!err) {
-                    let data = JSON.parse(body);
+                    const data = JSON.parse(body);
                     this._spriteData[url] = data;
                     callback(url, data);
                 }

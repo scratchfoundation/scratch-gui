@@ -3,13 +3,13 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library');
+const LibaryComponent = require('../components/library.jsx');
 
 
 class CostumeLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'selectItem']);
+        bindAll(this, ['setData', 'handleItemSelected']);
         this.state = {costumeData: []};
     }
     componentWillReceiveProps (nextProps) {
@@ -20,9 +20,9 @@ class CostumeLibrary extends React.Component {
     setData (data) {
         this.setState({costumeData: data});
     }
-    selectItem (item) {
-        var vmCostume = {
-            skin: 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' + item.md5 + '/get/',
+    handleItemSelected (item) {
+        const vmCostume = {
+            skin: `https://cdn.assets.scratch.mit.edu/internalapi/asset/$(item.md5)/get/`,
             name: item.name,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1]
@@ -33,21 +33,23 @@ class CostumeLibrary extends React.Component {
         this.props.vm.addCostume(vmCostume);
     }
     render () {
-        return <LibaryComponent
-            title="Costume Library"
-            visible={this.props.visible}
-            data={this.state.costumeData}
-            onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem}
-        />;
+        return (
+            <LibaryComponent
+                data={this.state.costumeData}
+                title="Costume Library"
+                visible={this.props.visible}
+                onItemSelected={this.handleItemSelected}
+                onRequestClose={this.props.onRequestClose}
+            />
+        );
     }
 }
 
 CostumeLibrary.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = CostumeLibrary;

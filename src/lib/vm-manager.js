@@ -21,7 +21,7 @@ class VMManager {
     }
     onKeyDown (e) {
         // Don't capture keys intended for Blockly inputs.
-        if (e.target != document && e.target != document.body) {
+        if (e.target !== document && e.target !== document.body) {
             return;
         }
         this.vm.postIOData('keyboard', {
@@ -37,8 +37,9 @@ class VMManager {
             keyCode: e.keyCode,
             isDown: false
         });
+
         // E.g., prevent scroll.
-        if (e.target != document && e.target != document.body) {
+        if (e.target !== document && e.target !== document.body) {
             e.preventDefault();
         }
     }

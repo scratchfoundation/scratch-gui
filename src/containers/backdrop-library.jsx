@@ -3,13 +3,13 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library');
+const LibaryComponent = require('../components/library.jsx');
 
 
 class BackdropLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'selectItem']);
+        bindAll(this, ['setData', 'handleItemSelect']);
         this.state = {backdropData: []};
     }
     componentWillReceiveProps (nextProps) {
@@ -20,9 +20,9 @@ class BackdropLibrary extends React.Component {
     setData (data) {
         this.setState({backdropData: data});
     }
-    selectItem (item) {
-        var vmBackdrop = {
-            skin: 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' + item.md5 + '/get/',
+    handleItemSelect (item) {
+        const vmBackdrop = {
+            skin: `https://cdn.assets.scratch.mit.edu/internalapi/asset/${item.md5}/get/`,
             name: item.name,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1]
@@ -33,21 +33,23 @@ class BackdropLibrary extends React.Component {
         this.props.vm.addBackdrop(vmBackdrop);
     }
     render () {
-        return <LibaryComponent
-            title="Backdrop Library"
-            visible={this.props.visible}
-            data={this.state.backdropData}
-            onRequestClose={this.props.onRequestClose}
-            onItemSelected={this.selectItem}
-        />;
+        return (
+            <LibaryComponent
+                data={this.state.backdropData}
+                title="Backdrop Library"
+                visible={this.props.visible}
+                onItemSelected={this.handleItemSelect}
+                onRequestClose={this.props.onRequestClose}
+            />
+        );
     }
 }
 
 BackdropLibrary.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = BackdropLibrary;

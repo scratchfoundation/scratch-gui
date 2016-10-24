@@ -4,7 +4,7 @@ const React = require('react');
 const ScratchBlocks = require('scratch-blocks');
 const VM = require('scratch-vm');
 
-const BlocksComponent = require('../components/blocks');
+const BlocksComponent = require('../components/blocks.jsx');
 
 class Blocks extends React.Component {
     constructor (props) {
@@ -21,7 +21,7 @@ class Blocks extends React.Component {
         ]);
     }
     componentDidMount () {
-        let workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+        const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
         this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
         this.attachVM();
     }
@@ -31,9 +31,10 @@ class Blocks extends React.Component {
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
-        this.workspace.getFlyout().getWorkspace().addChangeListener(
-            this.props.vm.flyoutBlockListener
-        );
+        this.workspace
+            .getFlyout()
+            .getWorkspace()
+            .addChangeListener(this.props.vm.flyoutBlockListener);
         this.props.vm.on('STACK_GLOW_ON', this.onStackGlowOn);
         this.props.vm.on('STACK_GLOW_OFF', this.onStackGlowOff);
         this.props.vm.on('BLOCK_GLOW_ON', this.onBlockGlowOn);
@@ -79,7 +80,7 @@ class Blocks extends React.Component {
         } = this.props;
         return (
             <BlocksComponent
-                componentRef={c => this.blocks = c}
+                componentRef={c => (this.blocks = c)}
                 {...props}
             />
         );

@@ -17,7 +17,7 @@ class StageComponent extends React.Component {
                     top: 10,
                     right: 10,
                     width: width,
-                    height: height,
+                    height: height
                 }}
                 {...props}
             />

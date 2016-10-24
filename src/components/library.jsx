@@ -61,7 +61,7 @@ LibraryComponent.propTypes = {
         React.PropTypes.shape({
             md5: React.PropTypes.string,
             name: React.PropTypes.string,
-            rawURL: React.PropTypes.string,
+            rawURL: React.PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),

@@ -16,7 +16,7 @@ class SpriteSelectorComponent extends React.Component {
                 style={{
                     position: 'absolute',
                     top: 380,
-                    right: 10,
+                    right: 10
                 }}
                 {...props}
             >

@@ -26,7 +26,7 @@ class GreenFlagComponent extends React.Component {
 
 GreenFlagComponent.propTypes = {
     onClick: React.PropTypes.func,
-    title: React.PropTypes.string,
+    title: React.PropTypes.string
 };
 
 GreenFlagComponent.defaultProps = {

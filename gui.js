@@ -96,736 +96,650 @@ webpackJsonp([0],[
 	            }
 	          },
 	          React.createElement(
-	            'block',
-	            { type: 'sound_play' },
+	            'category',
+	            { is: true, name: 'Sound', colour: '#D65CD6', secondaryColour: '#BD42BD' },
 	            React.createElement(
-	              'value',
-	              { name: 'SOUND_MENU' },
-	              React.createElement('shadow', { type: 'sound_sounds_option' })
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_playuntildone' },
-	            React.createElement(
-	              'value',
-	              { name: 'SOUND_MENU' },
-	              React.createElement('shadow', { type: 'sound_sounds_option' })
-	            )
-	          ),
-	          React.createElement('block', { type: 'sound_stopallsounds' }),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_playdrumforbeats' },
-	            React.createElement(
-	              'value',
-	              { name: 'DRUMTYPE' },
+	              'block',
+	              { type: 'sound_play' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
+	                'value',
+	                { name: 'SOUND_MENU' },
+	                React.createElement('shadow', { type: 'sound_sounds_option' })
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'sound_playuntildone' },
+	              React.createElement(
+	                'value',
+	                { name: 'SOUND_MENU' },
+	                React.createElement('shadow', { type: 'sound_sounds_option' })
+	              )
+	            ),
+	            React.createElement('block', { type: 'sound_stopallsounds' }),
+	            React.createElement(
+	              'block',
+	              { type: 'sound_playdrumforbeats' },
+	              React.createElement(
+	                'value',
+	                { name: 'DRUMTYPE' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '1'
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'BEATS' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '0.25'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'BEATS' },
+	              'block',
+	              { type: 'sound_restforbeats' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
+	                'value',
+	                { name: 'BEATS' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '0.25'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_restforbeats' },
-	            React.createElement(
-	              'value',
-	              { name: 'BEATS' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '0.25'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_playnoteforbeats' },
-	            React.createElement(
-	              'value',
-	              { name: 'NOTE' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '0.25'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'BEATS' },
+	              'block',
+	              { type: 'sound_playnoteforbeats' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
+	                'value',
+	                { name: 'NOTE' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '0.5'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '60'
+	                  )
 	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_setinstrumentto' },
-	            React.createElement(
-	              'value',
-	              { name: 'INSTRUMENT' },
+	              ),
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
+	                'value',
+	                { name: 'BEATS' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_seteffectto' },
-	            React.createElement(
-	              'value',
-	              { name: 'EFFECT' },
-	              React.createElement('shadow', { type: 'sound_effects_menu' })
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'VALUE' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '10'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_changeeffectby' },
-	            React.createElement(
-	              'value',
-	              { name: 'EFFECT' },
-	              React.createElement('shadow', { type: 'sound_effects_menu' })
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'VALUE' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '10'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'sound_cleareffects' }),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_changevolumeby' },
-	            React.createElement(
-	              'value',
-	              { name: 'VOLUME' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '-10'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_setvolumeto' },
-	            React.createElement(
-	              'value',
-	              { name: 'VOLUME' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '100'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'sound_volume' }),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_changetempoby' },
-	            React.createElement(
-	              'value',
-	              { name: 'TEMPO' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '20'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'sound_settempotobpm' },
-	            React.createElement(
-	              'value',
-	              { name: 'TEMPO' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '60'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'sound_tempo' }),
-	          React.createElement('block', { type: 'data_listcontents' }),
-	          React.createElement(
-	            'block',
-	            { type: 'data_addtolist' },
-	            React.createElement(
-	              'value',
-	              { name: 'ITEM' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'thing'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'data_deleteoflist' },
-	            React.createElement(
-	              'value',
-	              { name: 'INDEX' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'data_listindexall' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'INDEX' },
-	                  '1'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'data_insertatlist' },
-	            React.createElement(
-	              'value',
-	              { name: 'INDEX' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'data_listindexrandom' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'INDEX' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '0.5'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'ITEM' },
+	              'block',
+	              { type: 'sound_setinstrumentto' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
+	                'value',
+	                { name: 'INSTRUMENT' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'thing'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'data_replaceitemoflist' },
-	            React.createElement(
-	              'value',
-	              { name: 'INDEX' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'data_listindexrandom' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'INDEX' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '1'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'ITEM' },
+	              'block',
+	              { type: 'sound_playthereminforbeats' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
+	                'value',
+	                { name: 'NOTE' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'thing'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '60'
+	                  )
 	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'data_itemoflist' },
-	            React.createElement(
-	              'value',
-	              { name: 'INDEX' },
+	              ),
 	              React.createElement(
-	                'shadow',
-	                { type: 'data_listindexrandom' },
+	                'value',
+	                { name: 'BEATS' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'INDEX' },
-	                  '1'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'data_lengthoflist' }),
-	          React.createElement(
-	            'block',
-	            { type: 'data_listcontainsitem' },
-	            React.createElement(
-	              'value',
-	              { name: 'ITEM' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'thing'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'data_showlist' }),
-	          React.createElement('block', { type: 'data_hidelist' }),
-	          React.createElement('block', { type: 'event_whenflagclicked' }),
-	          React.createElement('block', { type: 'event_whenkeypressed' }),
-	          React.createElement(
-	            'block',
-	            { type: 'control_wait' },
-	            React.createElement(
-	              'value',
-	              { name: 'DURATION' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_positive_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'control_repeat' },
-	            React.createElement(
-	              'value',
-	              { name: 'TIMES' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_whole_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '10'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'control_forever' }),
-	          React.createElement('block', { type: 'control_if' }),
-	          React.createElement('block', { type: 'control_if_else' }),
-	          React.createElement('block', { type: 'control_wait_until' }),
-	          React.createElement('block', { type: 'control_repeat_until' }),
-	          React.createElement('block', { type: 'control_stop' }),
-	          React.createElement(
-	            'block',
-	            { type: 'sensing_keypressed' },
-	            React.createElement(
-	              'value',
-	              { name: 'KEY_OPTION' },
-	              React.createElement('shadow', { type: 'sensing_keyoptions' })
-	            )
-	          ),
-	          React.createElement('block', { type: 'sensing_mousedown' }),
-	          React.createElement('block', { type: 'sensing_mousex' }),
-	          React.createElement('block', { type: 'sensing_mousey' }),
-	          React.createElement('block', { type: 'sensing_timer' }),
-	          React.createElement('block', { type: 'sensing_resettimer' }),
-	          React.createElement('block', { type: 'sensing_dayssince2000' }),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_add' },
-	            React.createElement(
-	              'value',
-	              { name: 'NUM1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'NUM2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_subtract' },
-	            React.createElement(
-	              'value',
-	              { name: 'NUM1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'NUM2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_multiply' },
-	            React.createElement(
-	              'value',
-	              { name: 'NUM1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'NUM2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_divide' },
-	            React.createElement(
-	              'value',
-	              { name: 'NUM1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'NUM2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_random' },
-	            React.createElement(
-	              'value',
-	              { name: 'FROM' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '0.5'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'TO' },
+	              'block',
+	              { type: 'sound_seteffectto' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
+	                'value',
+	                { name: 'EFFECT' },
+	                React.createElement('shadow', { type: 'sound_effects_menu' })
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'VALUE' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '10'
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_lt' },
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_equals' },
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_gt' },
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            ),
-	            React.createElement(
-	              'value',
-	              { name: 'OPERAND2' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement('field', { name: 'TEXT' })
-	              )
-	            )
-	          ),
-	          React.createElement('block', { type: 'operator_and' }),
-	          React.createElement('block', { type: 'operator_or' }),
-	          React.createElement('block', { type: 'operator_not' }),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_join' },
-	            React.createElement(
-	              'value',
-	              { name: 'STRING1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
-	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'hello'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '100'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'STRING2' },
+	              'block',
+	              { type: 'sound_changeeffectby' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
+	                'value',
+	                { name: 'EFFECT' },
+	                React.createElement('shadow', { type: 'sound_effects_menu' })
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'VALUE' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'world'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '10'
+	                  )
 	                )
 	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_letter_of' },
+	            ),
+	            React.createElement('block', { type: 'sound_cleareffects' }),
 	            React.createElement(
-	              'value',
-	              { name: 'LETTER' },
+	              'block',
+	              { type: 'sound_changevolumeby' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_whole_number' },
+	                'value',
+	                { name: 'VOLUME' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'NUM' },
-	                  '1'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '-10'
+	                  )
 	                )
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'STRING' },
+	              'block',
+	              { type: 'sound_setvolumeto' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
+	                'value',
+	                { name: 'VOLUME' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'world'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '100'
+	                  )
 	                )
 	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_length' },
+	            ),
+	            React.createElement('block', { type: 'sound_volume' }),
 	            React.createElement(
-	              'value',
-	              { name: 'STRING' },
+	              'block',
+	              { type: 'sound_changetempoby' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'text' },
+	                'value',
+	                { name: 'TEMPO' },
 	                React.createElement(
-	                  'field',
-	                  { name: 'TEXT' },
-	                  'world'
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '20'
+	                  )
 	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_mod' },
-	            React.createElement(
-	              'value',
-	              { name: 'NUM1' },
-	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
 	              )
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'NUM2' },
+	              'block',
+	              { type: 'sound_settempotobpm' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
+	                'value',
+	                { name: 'TEMPO' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '60'
+	                  )
+	                )
 	              )
-	            )
+	            ),
+	            React.createElement('block', { type: 'sound_tempo' })
 	          ),
 	          React.createElement(
-	            'block',
-	            { type: 'operator_round' },
+	            'category',
+	            { is: true, name: 'Events', colour: '#FFD500', secondaryColour: '#CC9900' },
+	            React.createElement('block', { type: 'event_whenflagclicked' }),
+	            React.createElement('block', { type: 'event_whenkeypressed' }),
 	            React.createElement(
-	              'value',
-	              { name: 'NUM' },
+	              'block',
+	              { type: 'control_wait' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
+	                'value',
+	                { name: 'DURATION' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_positive_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '1'
+	                  )
+	                )
 	              )
-	            )
-	          ),
-	          React.createElement(
-	            'block',
-	            { type: 'operator_mathop' },
-	            React.createElement(
-	              'value',
-	              { name: 'OPERATOR' },
-	              React.createElement('shadow', { type: 'operator_mathop_menu' })
 	            ),
 	            React.createElement(
-	              'value',
-	              { name: 'NUM' },
+	              'block',
+	              { type: 'control_repeat' },
 	              React.createElement(
-	                'shadow',
-	                { type: 'math_number' },
-	                React.createElement('field', { name: 'NUM' })
+	                'value',
+	                { name: 'TIMES' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_whole_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '10'
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement('block', { type: 'control_forever' }),
+	            React.createElement('block', { type: 'control_if' }),
+	            React.createElement('block', { type: 'control_if_else' }),
+	            React.createElement('block', { type: 'control_wait_until' }),
+	            React.createElement('block', { type: 'control_repeat_until' }),
+	            React.createElement('block', { type: 'control_stop' })
+	          ),
+	          React.createElement(
+	            'category',
+	            { is: true, name: 'Sensing', colour: '#4CBFE6', secondaryColour: '#2E8EB8' },
+	            React.createElement(
+	              'block',
+	              { type: 'sensing_keypressed' },
+	              React.createElement(
+	                'value',
+	                { name: 'KEY_OPTION' },
+	                React.createElement('shadow', { type: 'sensing_keyoptions' })
+	              )
+	            ),
+	            React.createElement('block', { type: 'sensing_mousedown' }),
+	            React.createElement('block', { type: 'sensing_mousex' }),
+	            React.createElement('block', { type: 'sensing_mousey' }),
+	            React.createElement('block', { type: 'sensing_timer' }),
+	            React.createElement('block', { type: 'sensing_resettimer' }),
+	            React.createElement('block', { type: 'sensing_dayssince2000' })
+	          ),
+	          React.createElement(
+	            'category',
+	            { is: true, name: 'Operators', colour: '#40BF4A', secondaryColour: '#389438' },
+	            React.createElement(
+	              'block',
+	              { type: 'operator_add' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_subtract' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_multiply' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_divide' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_random' },
+	              React.createElement(
+	                'value',
+	                { name: 'FROM' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '1'
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'TO' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '10'
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_lt' },
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_equals' },
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_gt' },
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'OPERAND2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement('field', { name: 'TEXT' })
+	                )
+	              )
+	            ),
+	            React.createElement('block', { type: 'operator_and' }),
+	            React.createElement('block', { type: 'operator_or' }),
+	            React.createElement('block', { type: 'operator_not' }),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_join' },
+	              React.createElement(
+	                'value',
+	                { name: 'STRING1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'TEXT' },
+	                    'hello'
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'STRING2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'TEXT' },
+	                    'world'
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_letter_of' },
+	              React.createElement(
+	                'value',
+	                { name: 'LETTER' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_whole_number' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'NUM' },
+	                    '1'
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'STRING' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'TEXT' },
+	                    'world'
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_length' },
+	              React.createElement(
+	                'value',
+	                { name: 'STRING' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'text' },
+	                  React.createElement(
+	                    'field',
+	                    { name: 'TEXT' },
+	                    'world'
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_mod' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM1' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM2' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_round' },
+	              React.createElement(
+	                'value',
+	                { name: 'NUM' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'block',
+	              { type: 'operator_mathop' },
+	              React.createElement(
+	                'value',
+	                { name: 'OPERATOR' },
+	                React.createElement('shadow', { type: 'operator_mathop_menu' })
+	              ),
+	              React.createElement(
+	                'value',
+	                { name: 'NUM' },
+	                React.createElement(
+	                  'shadow',
+	                  { type: 'math_number' },
+	                  React.createElement('field', { name: 'NUM' })
+	                )
 	              )
 	            )
 	          )
@@ -53273,7 +53187,7 @@ webpackJsonp([0],[
 		Blockly.DropDownDiv.getPositionMetrics=function(a,b,c,d){var e=Blockly.DropDownDiv.DIV_,f=goog.style.getPageOffset(Blockly.DropDownDiv.boundsElement_),g=goog.style.getSize(Blockly.DropDownDiv.boundsElement_),e=goog.style.getSize(e),h;b+e.height>f.y+g.height?d-e.height<f.y?(c=b+Blockly.DropDownDiv.PADDING_Y,h=!1):(a=c,c=d-e.height-Blockly.DropDownDiv.PADDING_Y,h=!0):(c=b+Blockly.DropDownDiv.PADDING_Y,h=!1);var k=a-Blockly.DropDownDiv.ARROW_SIZE/2,k=Math.max(f.x,Math.min(k,f.x+g.width));a=Math.max(f.x,
 		Math.min(a-e.width/2,f.x+g.width-e.width));k=Math.max(Blockly.DropDownDiv.ARROW_HORIZONTAL_PADDING,Math.min(k-a,e.width-Blockly.DropDownDiv.ARROW_HORIZONTAL_PADDING-Blockly.DropDownDiv.ARROW_SIZE));f=h?e.height-Blockly.DropDownDiv.BORDER_SIZE:0;f-=Blockly.DropDownDiv.ARROW_SIZE/2+Blockly.DropDownDiv.BORDER_SIZE;return{initialX:a,initialY:h?d-e.height:b,finalX:a,finalY:c,arrowX:k,arrowY:f,arrowAtTop:!h}};Blockly.DropDownDiv.isVisible=function(){return!!Blockly.DropDownDiv.owner_};
 		Blockly.DropDownDiv.hideIfOwner=function(a){return Blockly.DropDownDiv.owner_===a?(Blockly.DropDownDiv.hide(),!0):!1};Blockly.DropDownDiv.hide=function(){var a=Blockly.DropDownDiv.DIV_;a.style.transform="translate(0px, 0px)";a.style.opacity=0;Blockly.DropDownDiv.animateOutTimer_=setTimeout(function(){Blockly.DropDownDiv.hideWithoutAnimation()},1E3*Blockly.DropDownDiv.ANIMATION_TIME);Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)};
-		Blockly.DropDownDiv.hideWithoutAnimation=function(){var a=Blockly.DropDownDiv.DIV_;Blockly.DropDownDiv.animateOutTimer_&&window.clearTimeout(Blockly.DropDownDiv.animateOutTimer_);a.style.transform="";a.style.top="";a.style.left="";a.style.display="none";Blockly.DropDownDiv.clearContent();Blockly.DropDownDiv.owner_=null;Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)};Blockly.Events={};Blockly.Events.group_="";Blockly.Events.recordUndo=!0;Blockly.Events.disabled_=0;Blockly.Events.CREATE="create";Blockly.Events.DELETE="delete";Blockly.Events.CHANGE="change";Blockly.Events.MOVE="move";Blockly.Events.UI="ui";Blockly.Events.FIRE_QUEUE_=[];Blockly.Events.fire=function(a){Blockly.Events.isEnabled()&&(Blockly.Events.FIRE_QUEUE_.length||setTimeout(Blockly.Events.fireNow_,0),Blockly.Events.FIRE_QUEUE_.push(a))};
+		Blockly.DropDownDiv.hideWithoutAnimation=function(){if(Blockly.DropDownDiv.isVisible()){var a=Blockly.DropDownDiv.DIV_;Blockly.DropDownDiv.animateOutTimer_&&window.clearTimeout(Blockly.DropDownDiv.animateOutTimer_);a.style.transform="";a.style.top="";a.style.left="";a.style.display="none";Blockly.DropDownDiv.clearContent();Blockly.DropDownDiv.owner_=null;Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)}};Blockly.Events={};Blockly.Events.group_="";Blockly.Events.recordUndo=!0;Blockly.Events.disabled_=0;Blockly.Events.CREATE="create";Blockly.Events.DELETE="delete";Blockly.Events.CHANGE="change";Blockly.Events.MOVE="move";Blockly.Events.UI="ui";Blockly.Events.FIRE_QUEUE_=[];Blockly.Events.fire=function(a){Blockly.Events.isEnabled()&&(Blockly.Events.FIRE_QUEUE_.length||setTimeout(Blockly.Events.fireNow_,0),Blockly.Events.FIRE_QUEUE_.push(a))};
 		Blockly.Events.fireNow_=function(){for(var a=Blockly.Events.filter(Blockly.Events.FIRE_QUEUE_,!0),b=Blockly.Events.FIRE_QUEUE_.length=0,c;c=a[b];b++){var d=Blockly.Workspace.getById(c.workspaceId);d&&d.fireChangeListener(c)}};
 		Blockly.Events.filter=function(a,b){var c=goog.array.clone(a);b||c.reverse();for(var d=0,e;e=c[d];d++)for(var f=d+1,g;g=c[f];f++)e.type==g.type&&e.blockId==g.blockId&&e.workspaceId==g.workspaceId&&(e.type==Blockly.Events.MOVE?(e.newParentId=g.newParentId,e.newInputName=g.newInputName,e.newCoordinate=g.newCoordinate,c.splice(f,1),f--):e.type==Blockly.Events.CHANGE&&e.element==g.element&&e.name==g.name?(e.newValue=g.newValue,c.splice(f,1),f--):e.type!=Blockly.Events.UI||"click"!=g.element||"commentOpen"!=
 		e.element&&"mutatorOpen"!=e.element&&"warningOpen"!=e.element||(e.newValue=g.newValue,c.splice(f,1),f--));for(d=c.length-1;0<=d;d--)c[d].isNull()&&c.splice(d,1);b||c.reverse();for(d=1;e=c[d];d++)e.type==Blockly.Events.CHANGE&&"mutation"==e.element&&c.unshift(c.splice(d,1)[0]);return c};Blockly.Events.clearPendingUndo=function(){for(var a=0,b;b=Blockly.Events.FIRE_QUEUE_[a];a++)b.recordUndo=!1};Blockly.Events.disable=function(){Blockly.Events.disabled_++};Blockly.Events.enable=function(){Blockly.Events.disabled_--};
@@ -53492,7 +53406,7 @@ webpackJsonp([0],[
 		Blockly.RenderedConnection.prototype.connect_=function(a){Blockly.RenderedConnection.superClass_.connect_.call(this,a);var b=this.getSourceBlock();a=a.getSourceBlock();b.rendered&&b.updateDisabled();a.rendered&&a.updateDisabled();b.rendered&&a.rendered&&(this.type==Blockly.NEXT_STATEMENT||this.type==Blockly.PREVIOUS_STATEMENT?a.render():b.render())};Blockly.BlockSvg=function(a,b,c){this.svgGroup_=Blockly.createSvgElement("g",{},null);this.svgPath_=Blockly.createSvgElement("path",{"class":"blocklyPath blocklyBlockBackground"},this.svgGroup_);this.svgPath_.tooltip=this;this.rendered=!1;this.inputShapes_={};Blockly.Tooltip.bindMouseEvents(this.svgPath_);Blockly.BlockSvg.superClass_.constructor.call(this,a,b,c)};goog.inherits(Blockly.BlockSvg,Blockly.Block);Blockly.BlockSvg.prototype.height=0;Blockly.BlockSvg.prototype.width=0;
 		Blockly.BlockSvg.prototype.insertionMarkerMinWidth_=0;Blockly.BlockSvg.prototype.opacity_=1;Blockly.BlockSvg.prototype.dragStartXY_=null;Blockly.BlockSvg.prototype.isGlowingBlock_=!1;Blockly.BlockSvg.prototype.isGlowingStack_=!1;Blockly.BlockSvg.INLINE=-1;
 		Blockly.BlockSvg.prototype.initSvg=function(){goog.asserts.assert(this.workspace.rendered,"Workspace is headless.");if(!this.isInsertionMarker()){for(var a=0,b;b=this.inputList[a];a++)b.init(),b.type===Blockly.INPUT_VALUE&&this.initInputShape(b);b=this.getIcons();for(a=0;a<b.length;a++)b[a].createIcon()}this.updateColour();this.updateMovable();if(!this.workspace.options.readOnly&&!this.eventsInit_){Blockly.bindEvent_(this.getSvgRoot(),"mousedown",this,this.onMouseDown_);var c=this;Blockly.bindEvent_(this.getSvgRoot(),
-		"touchstart",null,function(a){Blockly.longStart_(a,c)})}this.eventsInit_=!0;this.getSvgRoot().parentNode||this.workspace.getCanvas().appendChild(this.getSvgRoot())};Blockly.BlockSvg.prototype.initInputShape=function(a){this.inputShapes_[a.name]||(this.inputShapes_[a.name]=Blockly.createSvgElement("path",{"class":"blocklyPath",style:"visibility: hidden"},this.svgGroup_))};
+		"touchstart",null,function(a){Blockly.longStart_(a,c)})}this.eventsInit_=!0;this.getSvgRoot().parentNode||this.workspace.getCanvas().appendChild(this.getSvgRoot())};Blockly.BlockSvg.prototype.initInputShape=function(a){this.inputShapes_[a.name]||a.connection.getShadowDom()||(this.inputShapes_[a.name]=Blockly.createSvgElement("path",{"class":"blocklyPath",style:"visibility: hidden"},this.svgGroup_))};
 		Blockly.BlockSvg.prototype.select=function(){if(this.isShadow()&&this.getParent())this.getParent().select();else if(Blockly.selected!=this){var a=null;if(Blockly.selected){a=Blockly.selected.id;Blockly.Events.disable();try{Blockly.selected.unselect()}finally{Blockly.Events.enable()}}a=new Blockly.Events.Ui(null,"selected",a,this.id);a.workspaceId=this.workspace.id;Blockly.Events.fire(a);Blockly.selected=this;this.addSelect()}};
 		Blockly.BlockSvg.prototype.unselect=function(){if(Blockly.selected==this){var a=new Blockly.Events.Ui(null,"selected",this.id,null);a.workspaceId=this.workspace.id;Blockly.Events.fire(a);Blockly.selected=null;this.removeSelect()}};Blockly.BlockSvg.prototype.setGlowBlock=function(a){this.isGlowingBlock_=a;this.updateColour()};
 		Blockly.BlockSvg.prototype.setGlowStack=function(a){this.isGlowingStack_=a;a=this.getSvgRoot();this.isGlowingStack_&&!a.hasAttribute("filter")?a.setAttribute("filter","url(#blocklyStackGlowFilter)"):!this.isGlowingStack_&&a.hasAttribute("filter")&&a.removeAttribute("filter")};Blockly.BlockSvg.prototype.mutator=null;Blockly.BlockSvg.prototype.comment=null;Blockly.BlockSvg.prototype.warning=null;
@@ -53619,7 +53533,7 @@ webpackJsonp([0],[
 		"s");b.style.transition=d;f.style.transition="font-size "+Blockly.FieldTextInput.ANIMATION_TIME+"s";f.style.fontSize=Blockly.BlockSvg.FIELD_TEXTINPUT_FONTSIZE_FINAL+"pt";b.style.boxShadow="0px 0px 0px 4px "+Blockly.Colours.fieldShadow};
 		Blockly.FieldTextInput.prototype.onHtmlInputKeyDown_=function(a){var b=Blockly.FieldTextInput.htmlInput_;13==a.keyCode?Blockly.WidgetDiv.hide():27==a.keyCode?(b.value=b.defaultValue,Blockly.WidgetDiv.hide()):9==a.keyCode&&(Blockly.WidgetDiv.hide(),this.sourceBlock_.tab(this,!a.shiftKey),a.preventDefault())};Blockly.FieldTextInput.GECKO_KEYCODE_WHITELIST=[97,99,118,120];
 		Blockly.FieldTextInput.prototype.onHtmlInputChange_=function(a){if("keypress"===a.type&&this.restrictor_){var b,c=!1;if(goog.userAgent.GECKO)if(b=a.charCode,32>b||127==b)c=!0;else{if(a.metaKey||a.ctrlKey)c=-1<Blockly.FieldTextInput.GECKO_KEYCODE_WHITELIST.indexOf(b)}else b=a.keyCode;b=String.fromCharCode(b);if(!c&&!this.restrictor_.test(b)&&a.preventDefault){a.preventDefault();return}}a=Blockly.FieldTextInput.htmlInput_;c=a.value;c!==a.oldValue_?(a.oldValue_=c,this.setValue(c),this.validate_()):goog.userAgent.WEBKIT&&
-		this.sourceBlock_.render();this.resizeEditor_();Blockly.svgResize(this.sourceBlock_.workspace)};Blockly.FieldTextInput.prototype.validate_=function(){var a=!0;goog.asserts.assertObject(Blockly.FieldTextInput.htmlInput_);var b=Blockly.FieldTextInput.htmlInput_;this.sourceBlock_&&(a=this.callValidator(b.value));null===a?Blockly.addClass_(b,"blocklyInvalidInput"):Blockly.removeClass_(b,"blocklyInvalidInput")};
+		this.sourceBlock_.render();this.resizeEditor_()};Blockly.FieldTextInput.prototype.validate_=function(){var a=!0;goog.asserts.assertObject(Blockly.FieldTextInput.htmlInput_);var b=Blockly.FieldTextInput.htmlInput_;this.sourceBlock_&&(a=this.callValidator(b.value));null===a?Blockly.addClass_(b,"blocklyInvalidInput"):Blockly.removeClass_(b,"blocklyInvalidInput")};
 		Blockly.FieldTextInput.prototype.resizeEditor_=function(){var a=this.sourceBlock_.workspace.scale,b=Blockly.WidgetDiv.DIV,c;Blockly.BlockSvg.FIELD_TEXTINPUT_EXPAND_PAST_TRUNCATION?(c=Blockly.measureText(Blockly.FieldTextInput.htmlInput_.style.fontSize,Blockly.FieldTextInput.htmlInput_.style.fontFamily,Blockly.FieldTextInput.htmlInput_.style.fontWeight,Blockly.FieldTextInput.htmlInput_.value),c+=Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC,c*=a):c=this.sourceBlock_.getHeightWidth().width*a;c=
 		Math.max(c,Blockly.BlockSvg.FIELD_WIDTH_MIN_EDIT*a);c=Math.min(c,Blockly.BlockSvg.FIELD_WIDTH_MAX_EDIT*a);b.style.width=c/a+1+"px";b.style.height=Blockly.BlockSvg.FIELD_HEIGHT+1+"px";b.style.transform="scale("+a+")";var d=this.sourceBlock_.getHeightWidth().width;b.style.marginLeft=-.5*(c-d*a)+"px";d=this.getBorderRadius()+.5;b.style.borderRadius=d+"px";Blockly.FieldTextInput.htmlInput_.style.borderRadius=d+"px";d=this.sourceBlock_.getColourTertiary();b.style.borderColor=d;d=this.getAbsoluteXY_();
 		d.x-=a/2;d.y-=a/2;this.sourceBlock_.RTL&&(d.x+=c,d.x-=b.offsetWidth*a,d.x+=1*a);d.y+=1*a;goog.userAgent.GECKO&&Blockly.WidgetDiv.DIV.style.top&&(d.x+=2*a,d.y+=1*a);goog.userAgent.WEBKIT&&(d.y-=1*a);b.style.left=d.x+"px";b.style.top=d.y+"px"};Blockly.FieldTextInput.prototype.getBorderRadius=function(){return this.sourceBlock_.getOutputShape()==Blockly.OUTPUT_SHAPE_ROUND?Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS:Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS};
@@ -53676,15 +53590,15 @@ webpackJsonp([0],[
 		Blockly.FieldTextDropdown.prototype.showEditor_=function(){this.dropDownOpen_||Blockly.FieldTextDropdown.superClass_.showEditor_.call(this,null,null,!0,function(){Blockly.WidgetDiv.hide();this.showDropdown_();Blockly.Touch.clearTouchIdentifier()})};Blockly.FieldTextDropdown.prototype.getOptions_=Blockly.FieldDropdown.prototype.getOptions_;Blockly.FieldTextDropdown.prototype.positionArrow=Blockly.FieldDropdown.prototype.positionArrow;Blockly.FieldTextDropdown.prototype.showDropdown_=Blockly.FieldDropdown.prototype.showEditor_;
 		Blockly.FieldTextDropdown.prototype.onHide=Blockly.FieldDropdown.prototype.onHide;Blockly.FieldNumber=function(a,b,c,d,e){b=this.getNumRestrictor(b,c,d);Blockly.FieldNumber.superClass_.constructor.call(this,a,e,b);this.addArgType("number")};goog.inherits(Blockly.FieldNumber,Blockly.FieldTextInput);Blockly.FieldNumber.DROPDOWN_WIDTH=168;Blockly.FieldNumber.DROPDOWN_Y_PADDING=8;Blockly.FieldNumber.NUMPAD_BUTTONS="789456123.0".split("");
 		Blockly.FieldNumber.NUMPAD_DELETE_ICON='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M28.89,11.45H16.79a2.86,2.86,0,0,0-2,.84L9.09,18a2.85,2.85,0,0,0,0,4l5.69,5.69a2.86,2.86,0,0,0,2,.84h12.1a2.86,2.86,0,0,0,2.86-2.86V14.31A2.86,2.86,0,0,0,28.89,11.45ZM27.15,22.73a1,1,0,0,1,0,1.41,1,1,0,0,1-.71.3,1,1,0,0,1-.71-0.3L23,21.41l-2.73,2.73a1,1,0,0,1-1.41,0,1,1,0,0,1,0-1.41L21.59,20l-2.73-2.73a1,1,0,0,1,0-1.41,1,1,0,0,1,1.41,0L23,18.59l2.73-2.73a1,1,0,1,1,1.42,1.41L24.42,20Z" fill="'+Blockly.Colours.numPadText+
-		'"/></svg>';Blockly.FieldNumber.activeField_=null;Blockly.FieldNumber.prototype.getNumRestrictor=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a;a="[\\d]";this.decimalAllowed_&&(a+="|[\\.]");this.negativeAllowed_&&(a+="|[-]");return new RegExp(a)};
-		Blockly.FieldNumber.prototype.setConstraints_=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a};Blockly.FieldNumber.prototype.showEditor_=function(){Blockly.FieldNumber.activeField_=this;var a=goog.userAgent.MOBILE||goog.userAgent.ANDROID||goog.userAgent.IPAD;Blockly.FieldNumber.superClass_.showEditor_.call(this,!1,a);a&&this.showNumPad_()};
-		Blockly.FieldNumber.prototype.showNumPad_=function(){Blockly.DropDownDiv.hideWithoutAnimation();Blockly.DropDownDiv.clearContent();var a=Blockly.DropDownDiv.getContentDiv();a.setAttribute("role","menu");a.setAttribute("aria-haspopup","true");for(var b=Blockly.FieldNumber.NUMPAD_BUTTONS,c=0,d;d=b[c];c++){var e=document.createElement("button");e.setAttribute("role","menuitem");e.setAttribute("class","blocklyNumPadButton");e.title=d;e.innerHTML=d;Blockly.bindEvent_(e,"mousedown",e,Blockly.FieldNumber.numPadButtonTouch_);
-		"."!=d||this.decimalAllowed_||e.setAttribute("style","visibility: hidden");a.appendChild(e)}b=document.createElement("button");b.setAttribute("role","menuitem");b.setAttribute("class","blocklyNumPadButton");b.title="Delete";c=document.createElement("img");c.src=Blockly.FieldNumber.NUMPAD_DELETE_ICON;b.appendChild(c);Blockly.bindEvent_(b,"mousedown",null,Blockly.FieldNumber.numPadEraseButtonTouch_);a.appendChild(b);Blockly.DropDownDiv.setColour(Blockly.Colours.numPadBackground,Blockly.Colours.numPadBorder);
-		a.style.width=Blockly.FieldNumber.DROPDOWN_WIDTH+"px";b=this.sourceBlock_.workspace.scale;d=this.sourceBlock_.getHeightWidth();d.width*=b;d.height*=b;c=this.getAbsoluteXY_();a=c.x+d.width/2;d=c.y+d.height+Blockly.FieldNumber.DROPDOWN_Y_PADDING;b=c.y-Blockly.BlockSvg.MIN_BLOCK_Y*b-Blockly.BlockSvg.FIELD_Y_OFFSET*b;Blockly.DropDownDiv.setBoundsElement(this.sourceBlock_.workspace.getParentSvg().parentNode);Blockly.DropDownDiv.show(this,a,d,a,b,this.onHide_.bind(this))};
-		Blockly.FieldNumber.numPadButtonTouch_=function(){var a=this.innerHTML,b=Blockly.FieldTextInput.htmlInput_.value,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,a=b.slice(0,Blockly.FieldTextInput.htmlInput_.selectionStart)+a+b.slice(c);Blockly.FieldTextInput.htmlInput_.value=a;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(a.length,a.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=Blockly.FieldTextInput.htmlInput_.scrollWidth;
-		Blockly.FieldNumber.activeField_.validate_()};
-		Blockly.FieldNumber.numPadEraseButtonTouch_=function(){var a=Blockly.FieldTextInput.htmlInput_.value,b=Blockly.FieldTextInput.htmlInput_.selectionStart,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,d=a.slice(0,b)+a.slice(c);0==c-b&&(d=a.slice(0,b-1)+a.slice(b));Blockly.FieldTextInput.htmlInput_.value=d;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(d.length,d.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=
-		Blockly.FieldTextInput.htmlInput_.scrollWidth;Blockly.FieldNumber.activeField_.validate_()};Blockly.FieldNumber.prototype.onHide_=function(){Blockly.DropDownDiv.content_.removeAttribute("role");Blockly.DropDownDiv.content_.removeAttribute("aria-haspopup")};Blockly.FieldNumberDropdown=function(a,b,c,d,e,f){c=Blockly.FieldNumber.prototype.getNumRestrictor.call(this,c,d,e);Blockly.FieldNumberDropdown.superClass_.constructor.call(this,a,b,f,c);this.addArgType("numberdropdown")};goog.inherits(Blockly.FieldNumberDropdown,Blockly.FieldTextDropdown);Blockly.Variables={};Blockly.Variables.NAME_TYPE="VARIABLE";Blockly.Variables.allUsedVariables=function(a){var b;if(a instanceof Blockly.Block)b=a.getDescendants();else if(a instanceof Blockly.Workspace||a instanceof Blockly.WorkspaceSvg)b=a.getAllBlocks();else throw"Not Block or Workspace: "+a;a=Object.create(null);for(var c=0;c<b.length;c++){var d=b[c].getVars();if(d)for(var e=0;e<d.length;e++){var f=d[e];f&&(a[f.toLowerCase()]=f)}}b=[];for(var g in a)b.push(a[g]);return b};
+		'"/></svg>';Blockly.FieldNumber.activeField_=null;Blockly.FieldNumber.prototype.getNumRestrictor=function(a,b,c){this.setConstraints_(a,b,c);a="[\\d]";this.decimalAllowed_&&(a+="|[\\.]");this.negativeAllowed_&&(a+="|[-]");return new RegExp(a)};Blockly.FieldNumber.prototype.setConstraints_=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a};
+		Blockly.FieldNumber.prototype.showEditor_=function(){Blockly.FieldNumber.activeField_=this;var a=goog.userAgent.MOBILE||goog.userAgent.ANDROID||goog.userAgent.IPAD;Blockly.FieldNumber.superClass_.showEditor_.call(this,!1,a);a&&this.showNumPad_()};
+		Blockly.FieldNumber.prototype.showNumPad_=function(){Blockly.DropDownDiv.hideWithoutAnimation();Blockly.DropDownDiv.clearContent();var a=Blockly.DropDownDiv.getContentDiv();a.setAttribute("role","menu");a.setAttribute("aria-haspopup","true");this.addButtons_(a);Blockly.DropDownDiv.setColour(Blockly.Colours.numPadBackground,Blockly.Colours.numPadBorder);a.style.width=Blockly.FieldNumber.DROPDOWN_WIDTH+"px";this.position_()};
+		Blockly.FieldNumber.prototype.position_=function(){var a=this.sourceBlock_.workspace.scale,b=this.sourceBlock_.getHeightWidth();b.width*=a;b.height*=a;var c=this.getAbsoluteXY_(),d=c.x+b.width/2,b=c.y+b.height+Blockly.FieldNumber.DROPDOWN_Y_PADDING,a=c.y-Blockly.BlockSvg.MIN_BLOCK_Y*a-Blockly.BlockSvg.FIELD_Y_OFFSET*a;Blockly.DropDownDiv.setBoundsElement(this.sourceBlock_.workspace.getParentSvg().parentNode);Blockly.DropDownDiv.show(this,d,b,d,a,this.onHide_.bind(this))};
+		Blockly.FieldNumber.prototype.addButtons_=function(a){for(var b=Blockly.FieldNumber.NUMPAD_BUTTONS,c=0,d;d=b[c];c++){var e=document.createElement("button");e.setAttribute("role","menuitem");e.setAttribute("class","blocklyNumPadButton");e.title=d;e.innerHTML=d;Blockly.bindEvent_(e,"mousedown",e,Blockly.FieldNumber.numPadButtonTouch);"."!=d||this.decimalAllowed_||e.setAttribute("style","visibility: hidden");a.appendChild(e)}b=document.createElement("button");b.setAttribute("role","menuitem");b.setAttribute("class",
+		"blocklyNumPadButton");b.title="Delete";c=document.createElement("img");c.src=Blockly.FieldNumber.NUMPAD_DELETE_ICON;b.appendChild(c);Blockly.bindEvent_(b,"mousedown",null,Blockly.FieldNumber.numPadEraseButtonTouch);a.appendChild(b)};
+		Blockly.FieldNumber.numPadButtonTouch=function(){var a=this.innerHTML,b=Blockly.FieldTextInput.htmlInput_.value,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,a=b.slice(0,Blockly.FieldTextInput.htmlInput_.selectionStart)+a+b.slice(c);Blockly.FieldNumber.updateDisplay_(a);Blockly.Touch.clearTouchIdentifier()};
+		Blockly.FieldNumber.numPadEraseButtonTouch=function(){var a=Blockly.FieldTextInput.htmlInput_.value,b=Blockly.FieldTextInput.htmlInput_.selectionStart,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,d=a.slice(0,b)+a.slice(c);0==c-b&&(d=a.slice(0,b-1)+a.slice(b));Blockly.FieldNumber.updateDisplay_(d);Blockly.Touch.clearTouchIdentifier()};
+		Blockly.FieldNumber.updateDisplay_=function(a){Blockly.FieldTextInput.htmlInput_.value=a;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(a.length,a.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=Blockly.FieldTextInput.htmlInput_.scrollWidth;Blockly.FieldNumber.activeField_.validate_()};Blockly.FieldNumber.prototype.onHide_=function(){Blockly.DropDownDiv.content_.removeAttribute("role");Blockly.DropDownDiv.content_.removeAttribute("aria-haspopup")};Blockly.FieldNumberDropdown=function(a,b,c,d,e,f){c=Blockly.FieldNumber.prototype.getNumRestrictor.call(this,c,d,e);Blockly.FieldNumberDropdown.superClass_.constructor.call(this,a,b,f,c);this.addArgType("numberdropdown")};goog.inherits(Blockly.FieldNumberDropdown,Blockly.FieldTextDropdown);Blockly.Variables={};Blockly.Variables.NAME_TYPE="VARIABLE";Blockly.Variables.allUsedVariables=function(a){var b;if(a instanceof Blockly.Block)b=a.getDescendants();else if(a instanceof Blockly.Workspace||a instanceof Blockly.WorkspaceSvg)b=a.getAllBlocks();else throw"Not Block or Workspace: "+a;a=Object.create(null);for(var c=0;c<b.length;c++){var d=b[c].getVars();if(d)for(var e=0;e<d.length;e++){var f=d[e];f&&(a[f.toLowerCase()]=f)}}b=[];for(var g in a)b.push(a[g]);return b};
 		Blockly.Variables.allVariables=function(a){a instanceof Blockly.Block&&console.warn("Deprecated call to Blockly.Variables.allVariables with a block instead of a workspace.  You may want Blockly.Variables.allUsedVariables");return a.variableList};
 		Blockly.Variables.flyoutCategory=function(a){a=a.variableList;a.sort(goog.string.caseInsensitiveCompare);var b=[],c=goog.dom.createDom("button");c.setAttribute("text",Blockly.Msg.NEW_VARIABLE);b.push(c);for(c=0;c<a.length;c++)if(Blockly.Blocks.data_variable){var d=goog.dom.createDom("block");d.setAttribute("type","data_variable");d.setAttribute("gap",8);d.appendChild(Blockly.Variables.createVariableDom_(a[c]));b.push(d)}1<b.length&&(b[b.length-1].setAttribute("gap",24),Blockly.Blocks.data_setvariableto&&
 		(d=goog.dom.createDom("block"),d.setAttribute("type","data_setvariableto"),d.setAttribute("gap",8),d.appendChild(Blockly.Variables.createVariableDom_(a[0])),d.appendChild(Blockly.Variables.createTextDom_()),b.push(d)),Blockly.Blocks.data_changevariableby&&(d=goog.dom.createDom("block"),d.setAttribute("type","data_changevariableby"),d.setAttribute("gap",8),d.appendChild(Blockly.Variables.createVariableDom_(a[0])),d.appendChild(Blockly.Variables.createMathNumberDom_()),b.push(d)),Blockly.Blocks.data_showvariable&&
@@ -53785,9 +53699,9 @@ webpackJsonp([0],[
 		Blockly.Toolbox.prototype.position=function(){var a=this.HtmlDiv;if(a){var b=this.workspace_.getParentSvg(),b=Blockly.svgSize(b);this.horizontalLayout_?(a.style.left="0",a.style.height="auto",a.style.width=b.width+"px",this.height=a.offsetHeight,this.toolboxPosition==Blockly.TOOLBOX_AT_TOP?a.style.top="0":a.style.bottom="0"):(this.toolboxPosition==Blockly.TOOLBOX_AT_RIGHT?a.style.right="0":a.style.left="0",a.style.height=this.getHeight()+"px",a.style.width=this.width+"px");this.flyout_.position()}};
 		Blockly.Toolbox.prototype.clearSelection=function(){this.setSelectedItem(null)};
 		Blockly.Toolbox.prototype.getClientRect=function(){if(!this.HtmlDiv)return null;var a=this.HtmlDiv.getBoundingClientRect(),b=a.left,c=a.top,d=a.width,a=a.height;return this.toolboxPosition==Blockly.TOOLBOX_AT_LEFT?new goog.math.Rect(-1E7,-1E7,1E7+b+d,2E7):this.toolboxPosition==Blockly.TOOLBOX_AT_RIGHT?new goog.math.Rect(b,-1E7,1E7+d,2E7):this.toolboxPosition==Blockly.TOOLBOX_AT_TOP?new goog.math.Rect(-1E7,-1E7,2E7,1E7+c+a):new goog.math.Rect(0,c,2E7,1E7+d)};
-		Blockly.Toolbox.prototype.refreshSelection=function(){var a=this.getSelectedItem();a&&a.getContents()&&this.flyout_.show(a.getContents())};Blockly.Toolbox.prototype.getSelectedItem=function(){return this.selectedItem_};Blockly.Toolbox.prototype.setSelectedItem=function(a){this.selectedItem_&&this.selectedItem_.setSelected(!1);this.selectedItem_=a;null!=this.selectedItem_&&(this.selectedItem_.setSelected(!0),this.flyout_.show(a.getContents()))};
-		Blockly.Toolbox.prototype.setSelectedItemFactory=function(a){return function(){this.setSelectedItem(a);Blockly.Touch.clearTouchIdentifier()}};Blockly.Toolbox.CategoryMenu=function(a,b){this.parent_=a;this.parentHtml_=b;this.createDom();this.categories_=[]};Blockly.Toolbox.CategoryMenu.prototype.getHeight=function(){return this.table.offsetHeight};Blockly.Toolbox.CategoryMenu.prototype.createDom=function(){this.table=goog.dom.createDom("table","scratchCategoryMenu");this.parentHtml_.appendChild(this.table)};
-		Blockly.Toolbox.CategoryMenu.prototype.populate=function(a){if(a){for(var b=[],c=0,d;d=a.childNodes[c];c++)d.tagName&&"CATEGORY"==d.tagName.toUpperCase()&&b.push(d);a=Math.ceil(b.length/2);for(c=0;c<a;c+=1){d=b[c];var e=goog.dom.createDom("tr","scratchCategoryMenuRow");this.table.appendChild(e);this.categories_.push(new Blockly.Toolbox.Category(this,e,d));b[c+a]&&this.categories_.push(new Blockly.Toolbox.Category(this,e,b[c+a]))}}};
+		Blockly.Toolbox.prototype.refreshSelection=function(){var a=this.getSelectedItem();a&&a.getContents()&&this.flyout_.show(a.getContents())};Blockly.Toolbox.prototype.getSelectedItem=function(){return this.selectedItem_};Blockly.Toolbox.prototype.setSelectedItem=function(a){if(this.selectedItem_){if(this.selectedItem_==a)return;this.selectedItem_.setSelected(!1)}this.selectedItem_=a;null!=this.selectedItem_&&(this.selectedItem_.setSelected(!0),this.flyout_.show(a.getContents()),this.flyout_.scrollToStart())};
+		Blockly.Toolbox.prototype.setSelectedItemFactory=function(a){return function(){this.setSelectedItem(a);Blockly.Touch.clearTouchIdentifier()}};Blockly.Toolbox.CategoryMenu=function(a,b){this.parent_=a;this.height_=0;this.parentHtml_=b;this.createDom();this.categories_=[]};Blockly.Toolbox.CategoryMenu.prototype.getHeight=function(){return this.height_};Blockly.Toolbox.CategoryMenu.prototype.createDom=function(){this.table=goog.dom.createDom("table","scratchCategoryMenu");this.parentHtml_.appendChild(this.table)};
+		Blockly.Toolbox.CategoryMenu.prototype.populate=function(a){if(a){for(var b=[],c=0,d;d=a.childNodes[c];c++)d.tagName&&"CATEGORY"==d.tagName.toUpperCase()&&b.push(d);a=Math.ceil(b.length/2);for(c=0;c<a;c+=1){d=b[c];var e=goog.dom.createDom("tr","scratchCategoryMenuRow");this.table.appendChild(e);this.categories_.push(new Blockly.Toolbox.Category(this,e,d));b[c+a]&&this.categories_.push(new Blockly.Toolbox.Category(this,e,b[c+a]))}this.height_=this.table.offsetHeight}};
 		Blockly.Toolbox.CategoryMenu.prototype.dispose=function(){for(var a=0,b;b=this.categories_[a];a++)b.dispose();this.table&&(goog.dom.removeNode(this.table),this.table=null)};Blockly.Toolbox.Category=function(a,b,c){this.parent_=a;this.parentHtml_=b;this.name_=c.getAttribute("name");this.setColour(c);this.custom_=c.getAttribute("custom");this.contents_=[];this.custom_||this.parseContents_(c);this.createDom()};
 		Blockly.Toolbox.Category.prototype.dispose=function(){this.item_&&(goog.dom.removeNode(this.item_),this.item=null);this.contents_=this.parentHtml_=this.parent_=null};
 		Blockly.Toolbox.Category.prototype.createDom=function(){var a=this.parent_.parent_;this.item_=goog.dom.createDom("td",{"class":"scratchCategoryMenuItem"},this.name_);this.bubble_=goog.dom.createDom("div",{"class":a.RTL?"scratchCategoryItemBubbleRTL":"scratchCategoryItemBubbleLTR"});this.bubble_.style.backgroundColor=this.colour_;this.bubble_.style.borderColor=this.secondaryColour_;this.item_.appendChild(this.bubble_);this.parentHtml_.appendChild(this.item_);Blockly.bindEvent_(this.item_,"mousedown",
@@ -54773,7 +54687,7 @@ webpackJsonp([0],[
 		var twgl = __webpack_require__(11);
 
 		var Drawable = __webpack_require__(12);
-		var ShaderManager = __webpack_require__(24);
+		var ShaderManager = __webpack_require__(25);
 
 		var RenderWebGL =
 		/**
@@ -55003,16 +54917,22 @@ webpackJsonp([0],[
 		 * @returns {Boolean} True iff the Drawable is touching the color.
 		 */
 		RenderWebGL.prototype.isTouchingColor = function (drawableID, color3b, mask3b) {
-
 		    var gl = this._gl;
-
 		    twgl.bindFramebufferInfo(gl, this._queryBufferInfo);
 
-		    // TODO: restrict to only the area overlapped by the target Drawable
-		    // - limit size of viewport to the AABB around the target Drawable
-		    // - draw only the Drawables which could overlap the target Drawable
-		    // - read only the pixels in the AABB around the target Drawable
-		    gl.viewport(0, 0, this._nativeSize[0], this._nativeSize[1]);
+		    var bounds = this._touchingBounds(drawableID);
+		    if (!bounds) {
+		        return;
+		    }
+		    var candidateIDs = this._filterCandidatesTouching(drawableID, this._drawables, bounds);
+		    if (!candidateIDs) {
+		        return;
+		    }
+
+		    // Limit size of viewport to the bounds around the target Drawable,
+		    // and create the projection matrix for the draw.
+		    gl.viewport(0, 0, bounds.width, bounds.height);
+		    var projection = twgl.m4.ortho(bounds.left, bounds.right, bounds.bottom, bounds.top, -1, 1);
 
 		    gl.clearColor.apply(gl, this._backgroundColor);
 		    gl.clear(gl.COLOR_BUFFER_BIT | gl.STENCIL_BUFFER_BIT);
@@ -55030,15 +54950,13 @@ webpackJsonp([0],[
 		        gl.stencilFunc(gl.ALWAYS, 1, 1);
 		        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
 		        gl.colorMask(false, false, false, false);
-		        this._drawThese([drawableID], mask3b ? ShaderManager.DRAW_MODE.colorMask : ShaderManager.DRAW_MODE.silhouette, this._projection, undefined, extraUniforms);
+		        this._drawThese([drawableID], mask3b ? ShaderManager.DRAW_MODE.colorMask : ShaderManager.DRAW_MODE.silhouette, projection, undefined, extraUniforms);
 
 		        gl.stencilFunc(gl.EQUAL, 1, 1);
 		        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
 		        gl.colorMask(true, true, true, true);
 
-		        // TODO: only draw items which could possibly overlap target Drawable
-		        // It might work to use the filter function for that
-		        this._drawThese(this._drawables, ShaderManager.DRAW_MODE.default, this._projection, function (testID) {
+		        this._drawThese(candidateIDs, ShaderManager.DRAW_MODE.default, projection, function (testID) {
 		            return testID != drawableID;
 		        });
 		    } finally {
@@ -55046,14 +54964,14 @@ webpackJsonp([0],[
 		        gl.disable(gl.STENCIL_TEST);
 		    }
 
-		    var pixels = new Buffer(this._nativeSize[0] * this._nativeSize[1] * 4);
-		    gl.readPixels(0, 0, this._nativeSize[0], this._nativeSize[1], gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+		    var pixels = new Buffer(bounds.width * bounds.height * 4);
+		    gl.readPixels(0, 0, bounds.width, bounds.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
 		    if (this._debugCanvas) {
-		        this._debugCanvas.width = this._nativeSize[0];
-		        this._debugCanvas.height = this._nativeSize[1];
+		        this._debugCanvas.width = bounds.width;
+		        this._debugCanvas.height = bounds.height;
 		        var context = this._debugCanvas.getContext('2d');
-		        var imageData = context.getImageData(0, 0, this._nativeSize[0], this._nativeSize[1]);
+		        var imageData = context.getImageData(0, 0, bounds.width, bounds.height);
 		        for (var i = 0, bytes = pixels.length; i < bytes; ++i) {
 		            imageData.data[i] = pixels[i];
 		        }
@@ -55086,11 +55004,19 @@ webpackJsonp([0],[
 
 		    twgl.bindFramebufferInfo(gl, this._queryBufferInfo);
 
-		    // TODO: restrict to only the area overlapped by the target Drawable
-		    // - limit size of viewport to the AABB around the target Drawable
-		    // - draw only the Drawables which could overlap the target Drawable
-		    // - read only the pixels in the AABB around the target Drawable
-		    gl.viewport(0, 0, this._nativeSize[0], this._nativeSize[1]);
+		    var bounds = this._touchingBounds(drawableID);
+		    if (!bounds) {
+		        return;
+		    }
+		    candidateIDs = this._filterCandidatesTouching(drawableID, candidateIDs, bounds);
+		    if (!candidateIDs) {
+		        return;
+		    }
+
+		    // Limit size of viewport to the bounds around the target Drawable,
+		    // and create the projection matrix for the draw.
+		    gl.viewport(0, 0, bounds.width, bounds.height);
+		    var projection = twgl.m4.ortho(bounds.left, bounds.right, bounds.bottom, bounds.top, -1, 1);
 
 		    var noneColor = Drawable.color4fFromID(Drawable.NONE);
 		    gl.clearColor.apply(gl, noneColor);
@@ -55101,28 +55027,28 @@ webpackJsonp([0],[
 		        gl.stencilFunc(gl.ALWAYS, 1, 1);
 		        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
 		        gl.colorMask(false, false, false, false);
-		        this._drawThese([drawableID], ShaderManager.DRAW_MODE.silhouette, this._projection);
+		        this._drawThese([drawableID], ShaderManager.DRAW_MODE.silhouette, projection);
 
 		        gl.stencilFunc(gl.EQUAL, 1, 1);
 		        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
 		        gl.colorMask(true, true, true, true);
 
-		        // TODO: only draw items which could possibly overlap target Drawable
-		        // It might work to use the filter function for that
-		        this._drawThese(candidateIDs, ShaderManager.DRAW_MODE.silhouette, this._projection);
+		        this._drawThese(candidateIDs, ShaderManager.DRAW_MODE.silhouette, projection, function (testID) {
+		            return testID != drawableID;
+		        });
 		    } finally {
 		        gl.colorMask(true, true, true, true);
 		        gl.disable(gl.STENCIL_TEST);
 		    }
 
-		    var pixels = new Buffer(this._nativeSize[0] * this._nativeSize[1] * 4);
-		    gl.readPixels(0, 0, this._nativeSize[0], this._nativeSize[1], gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+		    var pixels = new Buffer(bounds.width * bounds.height * 4);
+		    gl.readPixels(0, 0, bounds.width, bounds.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
 
 		    if (this._debugCanvas) {
-		        this._debugCanvas.width = this._nativeSize[0];
-		        this._debugCanvas.height = this._nativeSize[1];
+		        this._debugCanvas.width = bounds.width;
+		        this._debugCanvas.height = bounds.height;
 		        var context = this._debugCanvas.getContext('2d');
-		        var imageData = context.getImageData(0, 0, this._nativeSize[0], this._nativeSize[1]);
+		        var imageData = context.getImageData(0, 0, bounds.width, bounds.height);
 		        for (var i = 0, bytes = pixels.length; i < bytes; ++i) {
 		            imageData.data[i] = pixels[i];
 		        }
@@ -55222,6 +55148,55 @@ webpackJsonp([0],[
 		    }
 
 		    return hit | 0;
+		};
+
+		/**
+		 * Get the candidate bounding box for a touching query.
+		 * @param {int} drawableID ID for drawable of query.
+		 * @return {?Rectangle} Rectangle bounds for touching query, or null.
+		 */
+		RenderWebGL.prototype._touchingBounds = function (drawableID) {
+		    var drawable = Drawable.getDrawableByID(drawableID);
+		    var bounds = drawable.getFastBounds();
+
+		    // Limit queries to the stage size.
+		    bounds.clamp(this._xLeft, this._xRight, this._yBottom, this._yTop);
+
+		    // Use integer coordinates for queries - weird things happen
+		    // when you provide float width/heights to gl.viewport and projection.
+		    bounds.snapToInt();
+
+		    if (bounds.width == 0 || bounds.height == 0) {
+		        // No space to query.
+		        return null;
+		    }
+		    return bounds;
+		};
+
+		/**
+		 * Filter a list of candidates for a touching query into only those that
+		 * could possibly intersect the given bounds.
+		 * @param {int} drawableID ID for drawable of query.
+		 * @param {Array.<int>} candidateIDs Candidates for touching query.
+		 * @param {Rectangle} Bounds to limit candidates to.
+		 * @return {?Array.<int>} Filtered candidateIDs, or null if none.
+		 */
+		RenderWebGL.prototype._filterCandidatesTouching = function (drawableID, candidateIDs, bounds) {
+		    // Filter candidates by rough bounding box intersection.
+		    // Do this before _drawThese, so we can prevent any GL operations
+		    // and readback by returning early.
+		    candidateIDs = candidateIDs.filter(function (testID) {
+		        if (testID == drawableID) return false;
+		        // Only draw items which could possibly overlap target Drawable.
+		        var candidate = Drawable.getDrawableByID(testID);
+		        var candidateBounds = candidate.getFastBounds();
+		        return bounds.intersects(candidateBounds);
+		    });
+		    if (candidateIDs.length == 0) {
+		        // No possible intersections based on bounding boxes.
+		        return null;
+		    }
+		    return candidateIDs;
 		};
 
 		/**
@@ -66127,7 +66102,8 @@ webpackJsonp([0],[
 		var svgToImage = __webpack_require__(13);
 		var xhr = __webpack_require__(16);
 
-		var ShaderManager = __webpack_require__(24);
+		var Rectangle = __webpack_require__(24);
+		var ShaderManager = __webpack_require__(25);
 
 		var Drawable =
 		/**
@@ -66187,6 +66163,7 @@ webpackJsonp([0],[
 
 		    this._position = twgl.v3.create(0, 0);
 		    this._scale = twgl.v3.create(100, 100);
+		    this._rotationCenter = twgl.v3.create(0, 0);
 		    this._direction = 90;
 		    this._transformDirty = true;
 		    this._visible = true;
@@ -66279,8 +66256,9 @@ webpackJsonp([0],[
 		 * The Drawable will continue using the existing skin until the new one loads.
 		 * If there is no existing skin, the Drawable will use a 1x1 transparent image.
 		 * @param {string} skin_url The URL of the skin.
+		 * @param {number=} opt_costumeResolution Optionally, a resolution for the skin.
 		 */
-		Drawable.prototype.setSkin = function (skin_url) {
+		Drawable.prototype.setSkin = function (skin_url, opt_costumeResolution) {
 		    // TODO: cache Skins instead of loading each time. Ref count them?
 		    // TODO: share Skins across Drawables - see also destroy()
 		    if (skin_url) {
@@ -66293,7 +66271,7 @@ webpackJsonp([0],[
 		                this._setSkinSVG(skin_url);
 		                break;
 		            default:
-		                this._setSkinBitmap(skin_url);
+		                this._setSkinBitmap(skin_url, opt_costumeResolution);
 		                break;
 		        }
 		    } else {
@@ -66333,11 +66311,12 @@ webpackJsonp([0],[
 		/**
 		 * Load a bitmap skin. Supports the same formats as the Image element.
 		 * @param {string} skin_md5ext The MD5 and file extension of the bitmap skin.
+		 * @param {number=} opt_costumeResolution Optionally, a resolution for the skin.
 		 * @private
 		 */
-		Drawable.prototype._setSkinBitmap = function (skin_md5ext) {
+		Drawable.prototype._setSkinBitmap = function (skin_md5ext, opt_costumeResolution) {
 		    var url = skin_md5ext;
-		    this._setSkinCore(url, 2);
+		    this._setSkinCore(url, opt_costumeResolution);
 		};
 
 		/**
@@ -66429,7 +66408,7 @@ webpackJsonp([0],[
 		Drawable.prototype.updateProperties = function (properties) {
 		    var dirty = false;
 		    if ('skin' in properties) {
-		        this.setSkin(properties.skin);
+		        this.setSkin(properties.skin, properties.costumeResolution);
 		        this.setConvexHullDirty();
 		    }
 		    if ('position' in properties && (this._position[0] != properties.position[0] || this._position[1] != properties.position[1])) {
@@ -66444,6 +66423,11 @@ webpackJsonp([0],[
 		    if ('scale' in properties && (this._scale[0] != properties.scale[0] || this._scale[1] != properties.scale[1])) {
 		        this._scale[0] = properties.scale[0];
 		        this._scale[1] = properties.scale[1];
+		        dirty = true;
+		    }
+		    if ('rotationCenter' in properties && (this._rotationCenter[0] != properties.rotationCenter[0] || this._rotationCenter[1] != properties.rotationCenter[1])) {
+		        this._rotationCenter[0] = properties.rotationCenter[0];
+		        this._rotationCenter[1] = properties.rotationCenter[1];
 		        dirty = true;
 		    }
 		    if ('visible' in properties) {
@@ -66513,6 +66497,13 @@ webpackJsonp([0],[
 		    var rotation = (270 - this._direction) * Math.PI / 180;
 		    twgl.m4.rotateZ(modelMatrix, rotation, modelMatrix);
 
+		    // Adjust rotation center relative to the skin.
+		    var rotationAdjusted = twgl.v3.subtract(this._rotationCenter, twgl.v3.divScalar(this._uniforms.u_skinSize, 2));
+		    rotationAdjusted[1] *= -1; // Y flipped to Scratch coordinate.
+		    rotationAdjusted[2] = 0; // Z coordinate is 0.
+
+		    twgl.m4.translate(modelMatrix, rotationAdjusted, modelMatrix);
+
 		    var scaledSize = twgl.v3.divScalar(twgl.v3.multiply(this._uniforms.u_skinSize, this._scale), 100);
 		    scaledSize[2] = 0; // was NaN because the vectors have only 2 components.
 		    twgl.m4.scale(modelMatrix, scaledSize, modelMatrix);
@@ -66550,7 +66541,7 @@ webpackJsonp([0],[
 		 * This function applies the transform matrix to the known convex hull,
 		 * and then finds the minimum box along the axes.
 		 * Before calling this, ensure the renderer has updated convex hull points.
-		 * @return {Object} Bounds for a tight box around the Drawable.
+		 * @return {!Rectangle} Bounds for a tight box around the Drawable.
 		 */
 		Drawable.prototype.getBounds = function () {
 		    if (this.needsConvexHullPoints()) {
@@ -66573,29 +66564,41 @@ webpackJsonp([0],[
 		        transformedHullPoints.push(glPoint);
 		    }
 		    // Search through transformed points to generate box on axes.
-		    var bounds = {
-		        left: Infinity,
-		        right: -Infinity,
-		        top: -Infinity,
-		        bottom: Infinity
-		    };
-		    for (var _i = 0; _i < transformedHullPoints.length; _i++) {
-		        var x = transformedHullPoints[_i][0];
-		        var y = transformedHullPoints[_i][1];
-		        if (x < bounds.left) {
-		            bounds.left = x;
-		        }
-		        if (x > bounds.right) {
-		            bounds.right = x;
-		        }
-		        if (y > bounds.top) {
-		            bounds.top = y;
-		        }
-		        if (y < bounds.bottom) {
-		            bounds.bottom = y;
-		        }
-		    }
+		    var bounds = new Rectangle();
+		    bounds.initFromPointsAABB(transformedHullPoints);
 		    return bounds;
+		};
+
+		/**
+		 * Get the rough axis-aligned bounding box for the Drawable.
+		 * Calculated by transforming the skin's bounds.
+		 * Note that this is less precise than the box returned by `getBounds`,
+		 * which is tightly snapped to account for a Drawable's transparent regions.
+		 * `getAABB` returns a much less accurate bounding box, but will be much
+		 * faster to calculate so may be desired for quick checks/optimizations.
+		 * @return {!Rectangle} Rough axis-aligned bounding box for Drawable.
+		 */
+		Drawable.prototype.getAABB = function () {
+		    if (this._transformDirty) {
+		        this._calculateTransform();
+		    }
+		    var tm = this._uniforms.u_modelMatrix;
+		    var bounds = new Rectangle();
+		    bounds.initFromPointsAABB([twgl.m4.transformPoint(tm, [-0.5, -0.5, 0]), twgl.m4.transformPoint(tm, [0.5, -0.5, 0]), twgl.m4.transformPoint(tm, [-0.5, 0.5, 0]), twgl.m4.transformPoint(tm, [0.5, 0.5, 0])]);
+		    return bounds;
+		};
+
+		/**
+		 * Return the best Drawable bounds possible without performing graphics queries.
+		 * I.e., returns the tight bounding box when the convex hull points are already
+		 * known, but otherwise return the rough AABB of the Drawable.
+		 * @return {!Rectangle} Bounds for the Drawable.
+		 */
+		Drawable.prototype.getFastBounds = function () {
+		    if (!this.needsConvexHullPoints()) {
+		        return this.getBounds();
+		    }
+		    return this.getAABB();
 		};
 
 		/**
@@ -67350,6 +67353,175 @@ webpackJsonp([0],[
 
 	/***/ },
 	/* 24 */
+	/***/ function(module, exports) {
+
+		"use strict";
+
+		var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+		/**
+		 * @fileoverview
+		 * A utility for creating and comparing axis-aligned rectangles.
+		 */
+
+		var Rectangle = function () {
+		    /**
+		     * Rectangles are always initialized to the "largest possible rectangle";
+		     * use one of the init* methods below to set up a particular rectangle.
+		     * @constructor
+		     */
+		    function Rectangle() {
+		        _classCallCheck(this, Rectangle);
+
+		        this.left = -Infinity;
+		        this.right = Infinity;
+		        this.bottom = -Infinity;
+		        this.top = Infinity;
+		    }
+
+		    /**
+		     * Initialize a Rectangle from given Scratch-coordinate bounds.
+		     * @param {number} left Left bound of the rectangle.
+		     * @param {number} right Right bound of the rectangle.
+		     * @param {number} bottom Bottom bound of the rectangle.
+		     * @param {number} top Top bound of the rectangle.
+		     */
+
+
+		    _createClass(Rectangle, [{
+		        key: "initFromBounds",
+		        value: function initFromBounds(left, right, bottom, top) {
+		            this.left = left;
+		            this.right = right;
+		            this.bottom = bottom;
+		            this.top = top;
+		        }
+
+		        /**
+		         * Initialize a Rectangle to the minimum AABB around a set of points.
+		         * @param {Array.<Array.<number>>} points Array of [x, y] points.
+		         */
+
+		    }, {
+		        key: "initFromPointsAABB",
+		        value: function initFromPointsAABB(points) {
+		            this.left = Infinity;
+		            this.right = -Infinity;
+		            this.top = -Infinity;
+		            this.bottom = Infinity;
+		            for (var i = 0; i < points.length; i++) {
+		                var x = points[i][0];
+		                var y = points[i][1];
+		                if (x < this.left) {
+		                    this.left = x;
+		                }
+		                if (x > this.right) {
+		                    this.right = x;
+		                }
+		                if (y > this.top) {
+		                    this.top = y;
+		                }
+		                if (y < this.bottom) {
+		                    this.bottom = y;
+		                }
+		            }
+		        }
+
+		        /**
+		         * Determine if this Rectangle intersects some other.
+		         * Note that this is a comparison assuming the Rectangle was
+		         * initialized with Scratch-space bounds or points.
+		         * @param {!Rectangle} other Rectangle to check if intersecting.
+		         * @return {Boolean} True if this Rectangle intersects other.
+		         */
+
+		    }, {
+		        key: "intersects",
+		        value: function intersects(other) {
+		            return this.left <= other.right && other.left <= this.right && this.top >= other.bottom && other.top >= this.bottom;
+		        }
+
+		        /**
+		         * Determine if this Rectangle fully contains some other.
+		         * Note that this is a comparison assuming the Rectangle was
+		         * initialized with Scratch-space bounds or points.
+		         * @param {!Rectangle} other Rectangle to check if fully contained.
+		         * @return {Boolean} True if this Rectangle fully contains other.
+		         */
+
+		    }, {
+		        key: "contains",
+		        value: function contains(other) {
+		            return other.left > this.left && other.right < this.right && other.top < this.top && other.bottom > this.bottom;
+		        }
+
+		        /**
+		         * Clamp a Rectangle to bounds.
+		         * @param {number} left Left clamp.
+		         * @param {number} right Right clamp.
+		         * @param {number} bottom Bottom clamp.
+		         * @param {number} top Top clamp.
+		         */
+
+		    }, {
+		        key: "clamp",
+		        value: function clamp(left, right, bottom, top) {
+		            this.left = Math.max(this.left, left);
+		            this.right = Math.min(this.right, right);
+		            this.bottom = Math.max(this.bottom, bottom);
+		            this.top = Math.min(this.top, top);
+		            // Ensure rectangle coordinates in order.
+		            this.left = Math.min(this.left, this.right);
+		            this.right = Math.max(this.right, this.left);
+		            this.bottom = Math.min(this.bottom, this.top);
+		            this.top = Math.max(this.top, this.bottom);
+		        }
+
+		        /**
+		         * Push out the Rectangle to integer bounds.
+		         */
+
+		    }, {
+		        key: "snapToInt",
+		        value: function snapToInt() {
+		            this.left = Math.floor(this.left);
+		            this.right = Math.ceil(this.right);
+		            this.bottom = Math.floor(this.bottom);
+		            this.top = Math.ceil(this.top);
+		        }
+
+		        /**
+		         * Width of the Rectangle.
+		         * @return {number} Width of rectangle.
+		         */
+
+		    }, {
+		        key: "width",
+		        get: function get() {
+		            return Math.abs(this.left - this.right);
+		        }
+
+		        /**
+		         * Height of the Rectangle.
+		         * @return {number} Height of rectangle.
+		         */
+
+		    }, {
+		        key: "height",
+		        get: function get() {
+		            return Math.abs(this.top - this.bottom);
+		        }
+		    }]);
+
+		    return Rectangle;
+		}();
+
+		module.exports = Rectangle;
+
+	/***/ },
+	/* 25 */
 	/***/ function(module, exports, __webpack_require__) {
 
 		'use strict';
@@ -67508,20 +67680,20 @@ webpackJsonp([0],[
 		    }
 
 		    var definesText = defines.join('\n') + '\n';
-		    var vsFullText = definesText + __webpack_require__(25);
-		    var fsFullText = definesText + __webpack_require__(26);
+		    var vsFullText = definesText + __webpack_require__(26);
+		    var fsFullText = definesText + __webpack_require__(27);
 
 		    return twgl.createProgramInfo(this._gl, [vsFullText, fsFullText]);
 		};
 
 	/***/ },
-	/* 25 */
+	/* 26 */
 	/***/ function(module, exports) {
 
 		module.exports = "uniform mat4 u_projectionMatrix;\nuniform mat4 u_modelMatrix;\n\nattribute vec2 a_position;\nattribute vec2 a_texCoord;\n\nvarying vec2 v_texCoord;\n\nvoid main() {\n    gl_Position = u_projectionMatrix * u_modelMatrix * vec4(a_position, 0, 1);\n    v_texCoord = a_texCoord;\n}\n"
 
 	/***/ },
-	/* 26 */
+	/* 27 */
 	/***/ function(module, exports) {
 
 		module.exports = "precision mediump float;\n\nuniform float u_fudge;\n\n#ifdef DRAW_MODE_silhouette\nuniform vec4 u_silhouetteColor;\n#else // DRAW_MODE_silhouette\n# ifdef ENABLE_color\nuniform float u_color;\n# endif // ENABLE_color\n# ifdef ENABLE_brightness\nuniform float u_brightness;\n# endif // ENABLE_brightness\n#endif // DRAW_MODE_silhouette\n\n#ifdef DRAW_MODE_colorMask\nuniform vec3 u_colorMask;\nuniform float u_colorMaskTolerance;\n#endif // DRAW_MODE_colorMask\n\n#ifdef ENABLE_fisheye\nuniform float u_fisheye;\n#endif // ENABLE_fisheye\n#ifdef ENABLE_whirl\nuniform float u_whirl;\n#endif // ENABLE_whirl\n#ifdef ENABLE_pixelate\nuniform float u_pixelate;\nuniform vec2 u_skinSize;\n#endif // ENABLE_pixelate\n#ifdef ENABLE_mosaic\nuniform float u_mosaic;\n#endif // ENABLE_mosaic\n#ifdef ENABLE_ghost\nuniform float u_ghost;\n#endif // ENABLE_ghost\n\nuniform sampler2D u_skin;\n\nvarying vec2 v_texCoord;\n\n#if !defined(DRAW_MODE_silhouette) && (defined(ENABLE_color) || defined(ENABLE_brightness))\n// Branchless color conversions based on code from:\n// http://www.chilliant.com/rgb2hsv.html by Ian Taylor\n// Based in part on work by Sam Hocevar and Emil Persson\n\nconst float kEpsilon = 1e-6;\n\nvec3 convertRGB2HCV(vec3 rgb)\n{\n\tvec4 p = (rgb.g < rgb.b) ? vec4(rgb.bg, -1, 2.0/3.0) : vec4(rgb.gb, 0, -1.0/3.0);\n\tvec4 q = (rgb.r < p.x) ? vec4(p.xyw, rgb.r) : vec4(rgb.r, p.yzx);\n\tfloat c = q.x - min(q.w, q.y);\n\tfloat h = abs((q.w - q.y) / (6.0 * c + kEpsilon) + q.z);\n\treturn vec3(h, c, q.x);\n}\n\nvec3 convertRGB2HSL(vec3 rgb)\n{\n\tvec3 hcv = convertRGB2HCV(rgb);\n\tfloat l = hcv.z - hcv.y * 0.5;\n\tfloat s = hcv.y / (1.0 - abs(l * 2.0 - 1.0) + kEpsilon);\n\treturn vec3(hcv.x, s, l);\n}\n\nvec3 convertHue2RGB(float hue)\n{\n\tfloat r = abs(hue * 6.0 - 3.0) - 1.0;\n\tfloat g = 2.0 - abs(hue * 6.0 - 2.0);\n\tfloat b = 2.0 - abs(hue * 6.0 - 4.0);\n\treturn clamp(vec3(r, g, b), 0.0, 1.0);\n}\n\nvec3 convertHSL2RGB(vec3 hsl)\n{\n\tvec3 rgb = convertHue2RGB(hsl.x);\n\tfloat c = (1.0 - abs(2.0 * hsl.z - 1.0)) * hsl.y;\n\treturn (rgb - 0.5) * c + hsl.z;\n}\n#endif // !defined(DRAW_MODE_silhouette) && (defined(ENABLE_color) || defined(ENABLE_brightness))\n\nconst vec2 kCenter = vec2(0.5, 0.5);\n\nvoid main()\n{\n\tvec2 texcoord0 = v_texCoord;\n\n\t#ifdef ENABLE_mosaic\n\ttexcoord0 = fract(u_mosaic * texcoord0);\n\t#endif // ENABLE_mosaic\n\n\t#ifdef ENABLE_pixelate\n\t{\n\t\t// TODO: clean up \"pixel\" edges\n\t\tvec2 pixelTexelSize = u_skinSize / u_pixelate;\n\t\ttexcoord0 = (floor(texcoord0 * pixelTexelSize) + kCenter) / pixelTexelSize;\n\t}\n\t#endif // ENABLE_pixelate\n\n\t#ifdef ENABLE_whirl\n\t{\n\t\tconst float kRadius = 0.5;\n\t\tvec2 offset = texcoord0 - kCenter;\n\t\tfloat offsetMagnitude = length(offset);\n\t\tfloat whirlFactor = 1.0 - (offsetMagnitude / kRadius);\n\t\tfloat whirlActual = u_whirl * whirlFactor * whirlFactor;\n\t\tfloat sinWhirl = sin(whirlActual);\n\t\tfloat cosWhirl = cos(whirlActual);\n\t\tmat2 rotationMatrix = mat2(\n\t\t\tcosWhirl, -sinWhirl,\n\t\t\tsinWhirl, cosWhirl\n\t\t);\n\n\t\t// TODO: tweak this algorithm such that texture coordinates don't depend on conditionals.\n\t\t// see: https://www.opengl.org/wiki/Sampler_%28GLSL%29#Non-uniform_flow_control\n\t\tif (offsetMagnitude <= kRadius)\n\t\t{\n\t\t\ttexcoord0 = rotationMatrix * offset + kCenter;\n\t\t}\n\t}\n\t#endif // ENABLE_whirl\n\n\t#ifdef ENABLE_fisheye\n\t{\n\t\tvec2 vec = (texcoord0 - kCenter) / kCenter;\n\t\tfloat r = pow(length(vec), u_fisheye);\n\t\tfloat angle = atan(vec.y, vec.x);\n\t\t// TODO: tweak this algorithm such that texture coordinates don't depend on conditionals.\n\t\t// see: https://www.opengl.org/wiki/Sampler_%28GLSL%29#Non-uniform_flow_control\n\t\tif (r <= 1.0)\n\t\t{\n\t\t\ttexcoord0 = kCenter + r * vec2(cos(angle), sin(angle)) * kCenter;\n\t\t}\n\t}\n\t#endif // ENABLE_fisheye\n\n\tgl_FragColor = texture2D(u_skin, texcoord0);\n\n\n\tif (gl_FragColor.a == 0.0)\n\t{\n\t\tdiscard;\n\t}\n\n    #ifdef ENABLE_ghost\n    gl_FragColor.a *= u_ghost;\n    #endif // ENABLE_ghost\n\n\t#ifdef DRAW_MODE_silhouette\n\t// switch to u_silhouetteColor only AFTER the alpha test\n\tgl_FragColor = u_silhouetteColor;\n\t#else // DRAW_MODE_silhouette\n\n\t#if defined(ENABLE_color) || defined(ENABLE_brightness)\n\t{\n\t\tvec3 hsl = convertRGB2HSL(gl_FragColor.xyz);\n\n\t\t#ifdef ENABLE_color\n\t\t{\n\t\t\t// this code forces grayscale values to be slightly saturated\n\t\t\t// so that some slight change of hue will be visible\n\t\t\tconst float minLightness = 0.11 / 2.0;\n\t\t\tconst float minSaturation = 0.09;\n\t\t\tif (hsl.z < minLightness) hsl = vec3(0.0, 1.0, minLightness);\n\t\t\telse if (hsl.y < minSaturation) hsl = vec3(0.0, minSaturation, hsl.z);\n\n\t\t\thsl.x = mod(hsl.x + u_color, 1.0);\n\t\t\tif (hsl.x < 0.0) hsl.x += 1.0;\n\t\t}\n\t\t#endif // ENABLE_color\n\n\t\t#ifdef ENABLE_brightness\n\t\thsl.z = clamp(hsl.z + u_brightness, 0.0, 1.0);\n\t\t#endif // ENABLE_brightness\n\n\t\tgl_FragColor.rgb = convertHSL2RGB(hsl);\n\t}\n\t#endif // defined(ENABLE_color) || defined(ENABLE_brightness)\n\n\t#ifdef DRAW_MODE_colorMask\n\tvec3 maskDistance = abs(gl_FragColor.rgb - u_colorMask);\n\tvec3 colorMaskTolerance = vec3(u_colorMaskTolerance, u_colorMaskTolerance, u_colorMaskTolerance);\n\tif (any(greaterThan(maskDistance, colorMaskTolerance)))\n\t{\n\t\tdiscard;\n\t}\n\t#endif // DRAW_MODE_colorMask\n\n\t// WebGL defaults to premultiplied alpha\n\tgl_FragColor.rgb *= gl_FragColor.a;\n\n\t#endif // DRAW_MODE_silhouette\n}\n"
@@ -67744,7 +67916,7 @@ webpackJsonp([0],[
 	var minilog = __webpack_require__(198);
 	minilog.enable();
 
-	module.exports = minilog('www');
+	module.exports = minilog('scratch-gui');
 
 /***/ },
 /* 198 */

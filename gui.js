@@ -18,760 +18,761 @@ webpackJsonp([0],[
 
 	var Blocks = __webpack_require__(173);
 	var GUI = __webpack_require__(185);
-	var log = __webpack_require__(197);
-	var ProjectLoader = __webpack_require__(210);
+	var log = __webpack_require__(237);
+	var ProjectLoader = __webpack_require__(250);
 
 	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	    _inherits(App, _React$Component);
 
-	  function App(props) {
-	    _classCallCheck(this, App);
+	    function App(props) {
+	        _classCallCheck(this, App);
 
-	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	    _this.fetchProjectId = _this.fetchProjectId.bind(_this);
-	    _this.updateProject = _this.updateProject.bind(_this);
-	    _this.state = {
-	      projectId: null,
-	      projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
-	    };
-	    return _this;
-	  }
-
-	  _createClass(App, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      window.addEventListener('hashchange', this.updateProject);
-	      this.setState({ toolbox: this.toolbox });
-	      this.updateProject();
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      window.removeEventListener('hashchange', this.updateProject);
-	    }
-	  }, {
-	    key: 'fetchProjectId',
-	    value: function fetchProjectId() {
-	      return location.hash.substring(1);
-	    }
-	  }, {
-	    key: 'updateProject',
-	    value: function updateProject() {
-	      var _this2 = this;
-
-	      var projectId = this.fetchProjectId();
-	      if (projectId !== this.state.projectId) {
-	        if (projectId.length < 1) {
-	          return this.setState({
-	            projectId: projectId,
+	        _this.fetchProjectId = _this.fetchProjectId.bind(_this);
+	        _this.updateProject = _this.updateProject.bind(_this);
+	        _this.state = {
+	            projectId: null,
 	            projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
-	          });
+	        };
+	        return _this;
+	    }
+
+	    _createClass(App, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.addEventListener('hashchange', this.updateProject);
+	            // eslint-disable-next-line react/no-did-mount-set-state
+	            this.setState({ toolbox: this.toolbox });
+	            this.updateProject();
 	        }
-	        ProjectLoader.load(projectId, function (err, body) {
-	          if (err) return log.error(err);
-	          _this2.setState({ projectData: body });
-	        });
-	        this.setState({ projectId: projectId });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this3 = this;
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            window.removeEventListener('hashchange', this.updateProject);
+	        }
+	    }, {
+	        key: 'fetchProjectId',
+	        value: function fetchProjectId() {
+	            return location.hash.substring(1);
+	        }
+	    }, {
+	        key: 'updateProject',
+	        value: function updateProject() {
+	            var _this2 = this;
 
-	      return React.createElement(
-	        GUI,
-	        {
-	          basePath: this.props.basePath,
-	          projectData: this.state.projectData,
-	          vm: this.props.vm
-	        },
-	        React.createElement(
-	          'xml',
-	          {
-	            style: { display: 'none' },
-	            ref: function ref(tb) {
-	              return _this3.toolbox = tb;
+	            var projectId = this.fetchProjectId();
+	            if (projectId !== this.state.projectId) {
+	                if (projectId.length < 1) {
+	                    return this.setState({
+	                        projectId: projectId,
+	                        projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+	                    });
+	                }
+	                ProjectLoader.load(projectId, function (err, body) {
+	                    if (err) return log.error(err);
+	                    _this2.setState({ projectData: body });
+	                });
+	                this.setState({ projectId: projectId });
 	            }
-	          },
-	          React.createElement(
-	            'category',
-	            { is: true, name: 'Sound', colour: '#D65CD6', secondaryColour: '#BD42BD' },
-	            React.createElement(
-	              'block',
-	              { type: 'sound_play' },
-	              React.createElement(
-	                'value',
-	                { name: 'SOUND_MENU' },
-	                React.createElement('shadow', { type: 'sound_sounds_option' })
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_playuntildone' },
-	              React.createElement(
-	                'value',
-	                { name: 'SOUND_MENU' },
-	                React.createElement('shadow', { type: 'sound_sounds_option' })
-	              )
-	            ),
-	            React.createElement('block', { type: 'sound_stopallsounds' }),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_playdrumforbeats' },
-	              React.createElement(
-	                'value',
-	                { name: 'DRUMTYPE' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '1'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '0.25'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_restforbeats' },
-	              React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '0.25'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_playnoteforbeats' },
-	              React.createElement(
-	                'value',
-	                { name: 'NOTE' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '60'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '0.5'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_setinstrumentto' },
-	              React.createElement(
-	                'value',
-	                { name: 'INSTRUMENT' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '1'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_playthereminforbeats' },
-	              React.createElement(
-	                'value',
-	                { name: 'NOTE' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '60'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'BEATS' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '0.5'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_seteffectto' },
-	              React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'sound_effects_menu' })
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'VALUE' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '100'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_changeeffectby' },
-	              React.createElement(
-	                'value',
-	                { name: 'EFFECT' },
-	                React.createElement('shadow', { type: 'sound_effects_menu' })
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'VALUE' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '10'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement('block', { type: 'sound_cleareffects' }),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_changevolumeby' },
-	              React.createElement(
-	                'value',
-	                { name: 'VOLUME' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '-10'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_setvolumeto' },
-	              React.createElement(
-	                'value',
-	                { name: 'VOLUME' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '100'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement('block', { type: 'sound_volume' }),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_changetempoby' },
-	              React.createElement(
-	                'value',
-	                { name: 'TEMPO' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '20'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'sound_settempotobpm' },
-	              React.createElement(
-	                'value',
-	                { name: 'TEMPO' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '60'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement('block', { type: 'sound_tempo' })
-	          ),
-	          React.createElement(
-	            'category',
-	            { is: true, name: 'Events', colour: '#FFD500', secondaryColour: '#CC9900' },
-	            React.createElement('block', { type: 'event_whenflagclicked' }),
-	            React.createElement('block', { type: 'event_whenkeypressed' }),
-	            React.createElement(
-	              'block',
-	              { type: 'control_wait' },
-	              React.createElement(
-	                'value',
-	                { name: 'DURATION' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_positive_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '1'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'control_repeat' },
-	              React.createElement(
-	                'value',
-	                { name: 'TIMES' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_whole_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '10'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement('block', { type: 'control_forever' }),
-	            React.createElement('block', { type: 'control_if' }),
-	            React.createElement('block', { type: 'control_if_else' }),
-	            React.createElement('block', { type: 'control_wait_until' }),
-	            React.createElement('block', { type: 'control_repeat_until' }),
-	            React.createElement('block', { type: 'control_stop' })
-	          ),
-	          React.createElement(
-	            'category',
-	            { is: true, name: 'Sensing', colour: '#4CBFE6', secondaryColour: '#2E8EB8' },
-	            React.createElement(
-	              'block',
-	              { type: 'sensing_keypressed' },
-	              React.createElement(
-	                'value',
-	                { name: 'KEY_OPTION' },
-	                React.createElement('shadow', { type: 'sensing_keyoptions' })
-	              )
-	            ),
-	            React.createElement('block', { type: 'sensing_mousedown' }),
-	            React.createElement('block', { type: 'sensing_mousex' }),
-	            React.createElement('block', { type: 'sensing_mousey' }),
-	            React.createElement('block', { type: 'sensing_timer' }),
-	            React.createElement('block', { type: 'sensing_resettimer' }),
-	            React.createElement('block', { type: 'sensing_dayssince2000' })
-	          ),
-	          React.createElement(
-	            'category',
-	            { is: true, name: 'Operators', colour: '#40BF4A', secondaryColour: '#389438' },
-	            React.createElement(
-	              'block',
-	              { type: 'operator_add' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_subtract' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_multiply' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_divide' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_random' },
-	              React.createElement(
-	                'value',
-	                { name: 'FROM' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '1'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'TO' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '10'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_lt' },
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_equals' },
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_gt' },
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'OPERAND2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement('field', { name: 'TEXT' })
-	                )
-	              )
-	            ),
-	            React.createElement('block', { type: 'operator_and' }),
-	            React.createElement('block', { type: 'operator_or' }),
-	            React.createElement('block', { type: 'operator_not' }),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_join' },
-	              React.createElement(
-	                'value',
-	                { name: 'STRING1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'TEXT' },
-	                    'hello'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'STRING2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'TEXT' },
-	                    'world'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_letter_of' },
-	              React.createElement(
-	                'value',
-	                { name: 'LETTER' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_whole_number' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'NUM' },
-	                    '1'
-	                  )
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'STRING' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'TEXT' },
-	                    'world'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_length' },
-	              React.createElement(
-	                'value',
-	                { name: 'STRING' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'text' },
-	                  React.createElement(
-	                    'field',
-	                    { name: 'TEXT' },
-	                    'world'
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_mod' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM1' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM2' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_round' },
-	              React.createElement(
-	                'value',
-	                { name: 'NUM' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'block',
-	              { type: 'operator_mathop' },
-	              React.createElement(
-	                'value',
-	                { name: 'OPERATOR' },
-	                React.createElement('shadow', { type: 'operator_mathop_menu' })
-	              ),
-	              React.createElement(
-	                'value',
-	                { name: 'NUM' },
-	                React.createElement(
-	                  'shadow',
-	                  { type: 'math_number' },
-	                  React.createElement('field', { name: 'NUM' })
-	                )
-	              )
-	            )
-	          )
-	        ),
-	        this.state.toolbox ? React.createElement(Blocks, {
-	          vm: this.props.vm,
-	          style: {
-	            position: 'absolute',
-	            top: 0,
-	            right: 0,
-	            bottom: 0,
-	            left: 0
-	          },
-	          options: {
-	            media: this.props.basePath + 'static/blocks-media/',
-	            toolbox: this.state.toolbox
-	          }
-	        }) : null
-	      );
-	    }
-	  }]);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
 
-	  return App;
+	            return React.createElement(
+	                GUI,
+	                {
+	                    basePath: this.props.basePath,
+	                    projectData: this.state.projectData,
+	                    vm: this.props.vm
+	                },
+	                React.createElement(
+	                    'xml',
+	                    {
+	                        ref: function ref(tb) {
+	                            return _this3.toolbox = tb;
+	                        },
+	                        style: { display: 'none' }
+	                    },
+	                    React.createElement(
+	                        'category',
+	                        { is: true, name: 'Sound', colour: '#D65CD6', secondaryColour: '#BD42BD' },
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_play' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'SOUND_MENU' },
+	                                React.createElement('shadow', { type: 'sound_sounds_option' })
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_playuntildone' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'SOUND_MENU' },
+	                                React.createElement('shadow', { type: 'sound_sounds_option' })
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'sound_stopallsounds' }),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_playdrumforbeats' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'DRUMTYPE' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '1'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'BEATS' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '0.25'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_restforbeats' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'BEATS' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '0.25'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_playnoteforbeats' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NOTE' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '60'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'BEATS' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '0.5'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_setinstrumentto' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'INSTRUMENT' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '1'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_playthereminforbeats' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NOTE' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '60'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'BEATS' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '0.5'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_seteffectto' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'EFFECT' },
+	                                React.createElement('shadow', { type: 'sound_effects_menu' })
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'VALUE' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '100'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_changeeffectby' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'EFFECT' },
+	                                React.createElement('shadow', { type: 'sound_effects_menu' })
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'VALUE' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '10'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'sound_cleareffects' }),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_changevolumeby' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'VOLUME' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '-10'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_setvolumeto' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'VOLUME' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '100'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'sound_volume' }),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_changetempoby' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'TEMPO' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '20'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sound_settempotobpm' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'TEMPO' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '60'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'sound_tempo' })
+	                    ),
+	                    React.createElement(
+	                        'category',
+	                        { is: true, name: 'Events', colour: '#FFD500', secondaryColour: '#CC9900' },
+	                        React.createElement('block', { type: 'event_whenflagclicked' }),
+	                        React.createElement('block', { type: 'event_whenkeypressed' }),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'control_wait' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'DURATION' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_positive_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '1'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'control_repeat' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'TIMES' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_whole_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '10'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'control_forever' }),
+	                        React.createElement('block', { type: 'control_if' }),
+	                        React.createElement('block', { type: 'control_if_else' }),
+	                        React.createElement('block', { type: 'control_wait_until' }),
+	                        React.createElement('block', { type: 'control_repeat_until' }),
+	                        React.createElement('block', { type: 'control_stop' })
+	                    ),
+	                    React.createElement(
+	                        'category',
+	                        { is: true, name: 'Sensing', colour: '#4CBFE6', secondaryColour: '#2E8EB8' },
+	                        React.createElement(
+	                            'block',
+	                            { type: 'sensing_keypressed' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'KEY_OPTION' },
+	                                React.createElement('shadow', { type: 'sensing_keyoptions' })
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'sensing_mousedown' }),
+	                        React.createElement('block', { type: 'sensing_mousex' }),
+	                        React.createElement('block', { type: 'sensing_mousey' }),
+	                        React.createElement('block', { type: 'sensing_timer' }),
+	                        React.createElement('block', { type: 'sensing_resettimer' }),
+	                        React.createElement('block', { type: 'sensing_dayssince2000' })
+	                    ),
+	                    React.createElement(
+	                        'category',
+	                        { is: true, name: 'Operators', colour: '#40BF4A', secondaryColour: '#389438' },
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_add' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_subtract' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_multiply' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_divide' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_random' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'FROM' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '1'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'TO' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '10'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_lt' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_equals' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_gt' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERAND2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement('field', { name: 'TEXT' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement('block', { type: 'operator_and' }),
+	                        React.createElement('block', { type: 'operator_or' }),
+	                        React.createElement('block', { type: 'operator_not' }),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_join' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'STRING1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'TEXT' },
+	                                        'hello'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'STRING2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'TEXT' },
+	                                        'world'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_letter_of' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'LETTER' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_whole_number' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'NUM' },
+	                                        '1'
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'STRING' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'TEXT' },
+	                                        'world'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_length' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'STRING' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'text' },
+	                                    React.createElement(
+	                                        'field',
+	                                        { name: 'TEXT' },
+	                                        'world'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_mod' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM1' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM2' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_round' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'block',
+	                            { type: 'operator_mathop' },
+	                            React.createElement(
+	                                'value',
+	                                { name: 'OPERATOR' },
+	                                React.createElement('shadow', { type: 'operator_mathop_menu' })
+	                            ),
+	                            React.createElement(
+	                                'value',
+	                                { name: 'NUM' },
+	                                React.createElement(
+	                                    'shadow',
+	                                    { type: 'math_number' },
+	                                    React.createElement('field', { name: 'NUM' })
+	                                )
+	                            )
+	                        )
+	                    )
+	                ),
+	                this.state.toolbox ? React.createElement(Blocks, {
+	                    options: {
+	                        media: this.props.basePath + 'static/blocks-media/',
+	                        toolbox: this.state.toolbox
+	                    },
+	                    style: {
+	                        position: 'absolute',
+	                        top: 0,
+	                        right: 0,
+	                        bottom: 0,
+	                        left: 0
+	                    },
+	                    vm: this.props.vm
+	                }) : null
+	            );
+	        }
+	    }]);
+
+	    return App;
 	}(React.Component);
 
 	App.propTypes = {
-	  basePath: React.PropTypes.string,
-	  vm: React.PropTypes.instanceOf(VM)
+	    basePath: React.PropTypes.string,
+	    vm: React.PropTypes.instanceOf(VM)
 	};
 
 	App.defaultProps = {
-	  vm: new VM()
+	    vm: new VM()
 	};
 
 	var appTarget = document.createElement('div');
@@ -53877,8 +53878,8 @@ webpackJsonp([0],[
 	            var props = _objectWithoutProperties(_props, ['componentRef']);
 
 	            return React.createElement('div', _extends({
-	                ref: componentRef,
 	                className: 'scratch-blocks',
+	                ref: componentRef,
 	                style: {
 	                    position: 'absolute',
 	                    top: 0,
@@ -53917,18 +53918,25 @@ webpackJsonp([0],[
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var bindAll = __webpack_require__(174);
 	var defaultsDeep = __webpack_require__(175);
 	var React = __webpack_require__(1);
 	var VM = __webpack_require__(172);
 
 	var VMManager = __webpack_require__(186);
+	var MediaLibrary = __webpack_require__(187);
+	var shapeFromPropTypes = __webpack_require__(195);
 
 	var Blocks = __webpack_require__(173);
-	var GUIComponent = __webpack_require__(187);
-	var GreenFlag = __webpack_require__(188);
-	var SpriteSelector = __webpack_require__(190);
-	var Stage = __webpack_require__(192);
-	var StopAll = __webpack_require__(195);
+	var GUIComponent = __webpack_require__(196);
+	var GreenFlag = __webpack_require__(197);
+	var SpriteSelector = __webpack_require__(199);
+	var Stage = __webpack_require__(201);
+	var StopAll = __webpack_require__(204);
+
+	var SpriteLibrary = __webpack_require__(206);
+	var CostumeLibrary = __webpack_require__(235);
+	var BackdropLibrary = __webpack_require__(236);
 
 	var GUI = function (_React$Component) {
 	    _inherits(GUI, _React$Component);
@@ -53938,7 +53946,10 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (GUI.__proto__ || Object.getPrototypeOf(GUI)).call(this, props));
 
+	        bindAll(_this, ['closeModal']);
 	        _this.vmManager = new VMManager(_this.props.vm);
+	        _this.mediaLibrary = new MediaLibrary();
+	        _this.state = { currentModal: null };
 	        return _this;
 	    }
 
@@ -53950,12 +53961,6 @@ webpackJsonp([0],[
 	            this.props.vm.start();
 	        }
 	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            this.vmManager.detachKeyboardEvents();
-	            this.props.vm.stopAll();
-	        }
-	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (this.props.projectData !== nextProps.projectData) {
@@ -53963,23 +53968,70 @@ webpackJsonp([0],[
 	            }
 	        }
 	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.vmManager.detachKeyboardEvents();
+	            this.props.vm.stopAll();
+	        }
+	    }, {
+	        key: 'openModal',
+	        value: function openModal(modalName) {
+	            this.setState({ currentModal: modalName });
+	        }
+	    }, {
+	        key: 'closeModal',
+	        value: function closeModal() {
+	            this.setState({ currentModal: null });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            var _props = this.props;
+	            var backdropLibraryProps = _props.backdropLibraryProps;
 	            var basePath = _props.basePath;
 	            var blocksProps = _props.blocksProps;
+	            var costumeLibraryProps = _props.costumeLibraryProps;
 	            var greenFlagProps = _props.greenFlagProps;
 	            var projectData = _props.projectData;
+	            var spriteLibraryProps = _props.spriteLibraryProps;
 	            var spriteSelectorProps = _props.spriteSelectorProps;
 	            var stageProps = _props.stageProps;
 	            var stopAllProps = _props.stopAllProps;
 	            var vm = _props.vm;
 
-	            var guiProps = _objectWithoutProperties(_props, ['basePath', 'blocksProps', 'greenFlagProps', 'projectData', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
+	            var guiProps = _objectWithoutProperties(_props, ['backdropLibraryProps', 'basePath', 'blocksProps', 'costumeLibraryProps', 'greenFlagProps', 'projectData', 'spriteLibraryProps', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
 
+	            backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
+	                mediaLibrary: this.mediaLibrary,
+	                onRequestClose: this.closeModal,
+	                visible: this.state.currentModal === 'backdrop-library'
+	            });
 	            blocksProps = defaultsDeep({}, blocksProps, {
 	                options: {
 	                    media: basePath + 'static/blocks-media/'
+	                }
+	            });
+	            costumeLibraryProps = defaultsDeep({}, costumeLibraryProps, {
+	                mediaLibrary: this.mediaLibrary,
+	                onRequestClose: this.closeModal,
+	                visible: this.state.currentModal === 'costume-library'
+	            });
+	            spriteLibraryProps = defaultsDeep({}, spriteLibraryProps, {
+	                mediaLibrary: this.mediaLibrary,
+	                onRequestClose: this.closeModal,
+	                visible: this.state.currentModal === 'sprite-library'
+	            });
+	            spriteSelectorProps = defaultsDeep({}, spriteSelectorProps, {
+	                openNewBackdrop: function openNewBackdrop() {
+	                    return _this2.openModal('backdrop-library');
+	                },
+	                openNewCostume: function openNewCostume() {
+	                    return _this2.openModal('costume-library');
+	                },
+	                openNewSprite: function openNewSprite() {
+	                    return _this2.openModal('sprite-library');
 	                }
 	            });
 	            if (this.props.children) {
@@ -53988,17 +54040,21 @@ webpackJsonp([0],[
 	                    guiProps,
 	                    this.props.children
 	                );
-	            } else {
-	                return React.createElement(
-	                    GUIComponent,
-	                    guiProps,
-	                    React.createElement(GreenFlag, _extends({ vm: vm }, greenFlagProps)),
-	                    React.createElement(StopAll, _extends({ vm: vm }, stopAllProps)),
-	                    React.createElement(Stage, _extends({ vm: vm }, stageProps)),
-	                    React.createElement(SpriteSelector, _extends({ vm: vm }, spriteSelectorProps)),
-	                    React.createElement(Blocks, _extends({ vm: vm }, blocksProps))
-	                );
 	            }
+	            /* eslint-disable react/jsx-max-props-per-line, lines-around-comment */
+	            return React.createElement(
+	                GUIComponent,
+	                guiProps,
+	                React.createElement(GreenFlag, _extends({ vm: vm }, greenFlagProps)),
+	                React.createElement(StopAll, _extends({ vm: vm }, stopAllProps)),
+	                React.createElement(Stage, _extends({ vm: vm }, stageProps)),
+	                React.createElement(SpriteSelector, _extends({ vm: vm }, spriteSelectorProps)),
+	                React.createElement(Blocks, _extends({ vm: vm }, blocksProps)),
+	                React.createElement(SpriteLibrary, _extends({ vm: vm }, spriteLibraryProps)),
+	                React.createElement(CostumeLibrary, _extends({ vm: vm }, costumeLibraryProps)),
+	                React.createElement(BackdropLibrary, _extends({ vm: vm }, backdropLibraryProps))
+	            );
+	            /* eslint-enable react/jsx-max-props-per-line, lines-around-comment */
 	        }
 	    }]);
 
@@ -54006,22 +54062,28 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	GUI.propTypes = {
+	    backdropLibraryProps: shapeFromPropTypes(BackdropLibrary.propTypes, { omit: ['vm'] }),
 	    basePath: React.PropTypes.string,
-	    blocksProps: React.PropTypes.object,
+	    blocksProps: shapeFromPropTypes(Blocks.propTypes, { omit: ['vm'] }),
 	    children: React.PropTypes.node,
-	    greenFlagProps: React.PropTypes.object,
+	    costumeLibraryProps: shapeFromPropTypes(CostumeLibrary.propTypes, { omit: ['vm'] }),
+	    greenFlagProps: shapeFromPropTypes(GreenFlag.propTypes, { omit: ['vm'] }),
 	    projectData: React.PropTypes.string,
-	    spriteSelectorProps: React.PropTypes.object,
-	    stageProps: React.PropTypes.object,
-	    stopAllProps: React.PropTypes.object,
-	    vm: React.PropTypes.object
+	    spriteLibraryProps: shapeFromPropTypes(SpriteLibrary.propTypes, { omit: ['vm'] }),
+	    spriteSelectorProps: shapeFromPropTypes(SpriteSelector.propTypes, { omit: ['vm'] }),
+	    stageProps: shapeFromPropTypes(Stage.propTypes, { omit: ['vm'] }),
+	    stopAllProps: shapeFromPropTypes(StopAll.propTypes, { omit: ['vm'] }),
+	    vm: React.PropTypes.instanceOf(VM)
 	};
 
 	GUI.defaultProps = {
+	    backdropLibraryProps: {},
 	    basePath: '/',
 	    blocksProps: {},
+	    costumeLibraryProps: {},
 	    greenFlagProps: {},
 	    spriteSelectorProps: {},
+	    spriteLibraryProps: {},
 	    stageProps: {},
 	    stopAllProps: {},
 	    vm: new VM()
@@ -54066,7 +54128,7 @@ webpackJsonp([0],[
 	        key: 'onKeyDown',
 	        value: function onKeyDown(e) {
 	            // Don't capture keys intended for Blockly inputs.
-	            if (e.target != document && e.target != document.body) {
+	            if (e.target !== document && e.target !== document.body) {
 	                return;
 	            }
 	            this.vm.postIOData('keyboard', {
@@ -54084,8 +54146,9 @@ webpackJsonp([0],[
 	                keyCode: e.keyCode,
 	                isDown: false
 	            });
+
 	            // E.g., prevent scroll.
-	            if (e.target != document && e.target != document.body) {
+	            if (e.target !== document && e.target !== document.body) {
 	                e.preventDefault();
 	            }
 	        }
@@ -54098,6 +54161,542 @@ webpackJsonp([0],[
 
 /***/ },
 /* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var xhr = __webpack_require__(188);
+
+	var LIBRARY_PREFIX = 'https://cdn.scratch.mit.edu/scratchr2/static/' + '__8d9c95eb5aa1272a311775ca32568417__/medialibraries/';
+	var LIBRARY_URL = {
+	    sprite: LIBRARY_PREFIX + 'spriteLibrary.json',
+	    costume: LIBRARY_PREFIX + 'costumeLibrary.json',
+	    backdrop: LIBRARY_PREFIX + 'backdropLibrary.json'
+	};
+	var SPRITE_OBJECT_PREFIX = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/';
+	var SPRITE_OBJECT_SUFFIX = '/get/';
+
+	var MediaLibrary = function () {
+	    function MediaLibrary() {
+	        _classCallCheck(this, MediaLibrary);
+
+	        /*
+	         * Cached library data, from JSON.
+	         * @type {Object}
+	         */
+	        this._libraryData = {};
+
+	        /**
+	         * Cached sprite data, from JSON.
+	         * @type {Object.<!string, Object>}
+	         */
+	        this._spriteData = {};
+	    }
+
+	    /**
+	     * Get the media library data for a particular scratchr2 library.
+	     * In the future, load this from `scratch-storage` asset manager,
+	     * e.g., for offline support.
+	     * @param {string} libraryType Type of library, i.e., sprite, costume, sound, backdrop.
+	     * @param {!Function} callback Callback, called with list of data.
+	     */
+
+
+	    _createClass(MediaLibrary, [{
+	        key: 'getMediaLibrary',
+	        value: function getMediaLibrary(libraryType, callback) {
+	            var _this = this;
+
+	            if (!this._libraryData.hasOwnProperty(libraryType)) {
+	                this._libraryData[libraryType] = null;
+	            }
+	            if (this._libraryData[libraryType]) {
+	                callback(this._libraryData[libraryType]);
+	            } else {
+	                xhr.get({
+	                    useXDR: true,
+	                    url: LIBRARY_URL[libraryType]
+	                }, function (err, response, body) {
+	                    if (!err) {
+	                        var data = JSON.parse(body);
+	                        _this._libraryData[libraryType] = data;
+	                        callback(_this._libraryData[libraryType]);
+	                    }
+	                });
+	            }
+	        }
+
+	        /**
+	         * Get media library info for a specific scratchr2 sprite.
+	         * In the future, load this from `scratch-storage` asset manager,
+	         * e.g., for offline support.
+	         * @param {string} url URL to sprite (md5.json).
+	         * @param {!Function} callback Callback, called with sprite data.
+	         */
+
+	    }, {
+	        key: 'getSprite',
+	        value: function getSprite(url, callback) {
+	            var _this2 = this;
+
+	            if (this._spriteData.hasOwnProperty(url)) {
+	                callback(url, this._spriteData[url]);
+	            } else {
+	                xhr.get({
+	                    useXDR: true,
+	                    url: SPRITE_OBJECT_PREFIX + url + SPRITE_OBJECT_SUFFIX
+	                }, function (err, response, body) {
+	                    if (!err) {
+	                        var data = JSON.parse(body);
+	                        _this2._spriteData[url] = data;
+	                        callback(url, data);
+	                    }
+	                });
+	            }
+	        }
+	    }]);
+
+	    return MediaLibrary;
+	}();
+
+	module.exports = MediaLibrary;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var window = __webpack_require__(189)
+	var isFunction = __webpack_require__(190)
+	var parseHeaders = __webpack_require__(191)
+	var xtend = __webpack_require__(194)
+
+	module.exports = createXHR
+	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+	createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+	forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+	    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+	        options = initParams(uri, options, callback)
+	        options.method = method.toUpperCase()
+	        return _createXHR(options)
+	    }
+	})
+
+	function forEachArray(array, iterator) {
+	    for (var i = 0; i < array.length; i++) {
+	        iterator(array[i])
+	    }
+	}
+
+	function isEmpty(obj){
+	    for(var i in obj){
+	        if(obj.hasOwnProperty(i)) return false
+	    }
+	    return true
+	}
+
+	function initParams(uri, options, callback) {
+	    var params = uri
+
+	    if (isFunction(options)) {
+	        callback = options
+	        if (typeof uri === "string") {
+	            params = {uri:uri}
+	        }
+	    } else {
+	        params = xtend(options, {uri: uri})
+	    }
+
+	    params.callback = callback
+	    return params
+	}
+
+	function createXHR(uri, options, callback) {
+	    options = initParams(uri, options, callback)
+	    return _createXHR(options)
+	}
+
+	function _createXHR(options) {
+	    if(typeof options.callback === "undefined"){
+	        throw new Error("callback argument missing")
+	    }
+
+	    var called = false
+	    var callback = function cbOnce(err, response, body){
+	        if(!called){
+	            called = true
+	            options.callback(err, response, body)
+	        }
+	    }
+
+	    function readystatechange() {
+	        if (xhr.readyState === 4) {
+	            loadFunc()
+	        }
+	    }
+
+	    function getBody() {
+	        // Chrome with requestType=blob throws errors arround when even testing access to responseText
+	        var body = undefined
+
+	        if (xhr.response) {
+	            body = xhr.response
+	        } else {
+	            body = xhr.responseText || getXml(xhr)
+	        }
+
+	        if (isJson) {
+	            try {
+	                body = JSON.parse(body)
+	            } catch (e) {}
+	        }
+
+	        return body
+	    }
+
+	    var failureResponse = {
+	                body: undefined,
+	                headers: {},
+	                statusCode: 0,
+	                method: method,
+	                url: uri,
+	                rawRequest: xhr
+	            }
+
+	    function errorFunc(evt) {
+	        clearTimeout(timeoutTimer)
+	        if(!(evt instanceof Error)){
+	            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
+	        }
+	        evt.statusCode = 0
+	        return callback(evt, failureResponse)
+	    }
+
+	    // will load the data & process the response in a special response object
+	    function loadFunc() {
+	        if (aborted) return
+	        var status
+	        clearTimeout(timeoutTimer)
+	        if(options.useXDR && xhr.status===undefined) {
+	            //IE8 CORS GET successful response doesn't have a status field, but body is fine
+	            status = 200
+	        } else {
+	            status = (xhr.status === 1223 ? 204 : xhr.status)
+	        }
+	        var response = failureResponse
+	        var err = null
+
+	        if (status !== 0){
+	            response = {
+	                body: getBody(),
+	                statusCode: status,
+	                method: method,
+	                headers: {},
+	                url: uri,
+	                rawRequest: xhr
+	            }
+	            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
+	                response.headers = parseHeaders(xhr.getAllResponseHeaders())
+	            }
+	        } else {
+	            err = new Error("Internal XMLHttpRequest Error")
+	        }
+	        return callback(err, response, response.body)
+	    }
+
+	    var xhr = options.xhr || null
+
+	    if (!xhr) {
+	        if (options.cors || options.useXDR) {
+	            xhr = new createXHR.XDomainRequest()
+	        }else{
+	            xhr = new createXHR.XMLHttpRequest()
+	        }
+	    }
+
+	    var key
+	    var aborted
+	    var uri = xhr.url = options.uri || options.url
+	    var method = xhr.method = options.method || "GET"
+	    var body = options.body || options.data || null
+	    var headers = xhr.headers = options.headers || {}
+	    var sync = !!options.sync
+	    var isJson = false
+	    var timeoutTimer
+
+	    if ("json" in options) {
+	        isJson = true
+	        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
+	        if (method !== "GET" && method !== "HEAD") {
+	            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
+	            body = JSON.stringify(options.json)
+	        }
+	    }
+
+	    xhr.onreadystatechange = readystatechange
+	    xhr.onload = loadFunc
+	    xhr.onerror = errorFunc
+	    // IE9 must have onprogress be set to a unique function.
+	    xhr.onprogress = function () {
+	        // IE must die
+	    }
+	    xhr.ontimeout = errorFunc
+	    xhr.open(method, uri, !sync, options.username, options.password)
+	    //has to be after open
+	    if(!sync) {
+	        xhr.withCredentials = !!options.withCredentials
+	    }
+	    // Cannot set timeout with sync request
+	    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
+	    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
+	    if (!sync && options.timeout > 0 ) {
+	        timeoutTimer = setTimeout(function(){
+	            aborted=true//IE9 may still call readystatechange
+	            xhr.abort("timeout")
+	            var e = new Error("XMLHttpRequest timeout")
+	            e.code = "ETIMEDOUT"
+	            errorFunc(e)
+	        }, options.timeout )
+	    }
+
+	    if (xhr.setRequestHeader) {
+	        for(key in headers){
+	            if(headers.hasOwnProperty(key)){
+	                xhr.setRequestHeader(key, headers[key])
+	            }
+	        }
+	    } else if (options.headers && !isEmpty(options.headers)) {
+	        throw new Error("Headers cannot be set on an XDomainRequest object")
+	    }
+
+	    if ("responseType" in options) {
+	        xhr.responseType = options.responseType
+	    }
+
+	    if ("beforeSend" in options &&
+	        typeof options.beforeSend === "function"
+	    ) {
+	        options.beforeSend(xhr)
+	    }
+
+	    xhr.send(body)
+
+	    return xhr
+
+
+	}
+
+	function getXml(xhr) {
+	    if (xhr.responseType === "document") {
+	        return xhr.responseXML
+	    }
+	    var firefoxBugTakenEffect = xhr.status === 204 && xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+	    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+	        return xhr.responseXML
+	    }
+
+	    return null
+	}
+
+	function noop() {}
+
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
+	    module.exports = window;
+	} else if (typeof global !== "undefined") {
+	    module.exports = global;
+	} else if (typeof self !== "undefined"){
+	    module.exports = self;
+	} else {
+	    module.exports = {};
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 190 */
+/***/ function(module, exports) {
+
+	module.exports = isFunction
+
+	var toString = Object.prototype.toString
+
+	function isFunction (fn) {
+	  var string = toString.call(fn)
+	  return string === '[object Function]' ||
+	    (typeof fn === 'function' && string !== '[object RegExp]') ||
+	    (typeof window !== 'undefined' &&
+	     // IE8 and below
+	     (fn === window.setTimeout ||
+	      fn === window.alert ||
+	      fn === window.confirm ||
+	      fn === window.prompt))
+	};
+
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var trim = __webpack_require__(192)
+	  , forEach = __webpack_require__(193)
+	  , isArray = function(arg) {
+	      return Object.prototype.toString.call(arg) === '[object Array]';
+	    }
+
+	module.exports = function (headers) {
+	  if (!headers)
+	    return {}
+
+	  var result = {}
+
+	  forEach(
+	      trim(headers).split('\n')
+	    , function (row) {
+	        var index = row.indexOf(':')
+	          , key = trim(row.slice(0, index)).toLowerCase()
+	          , value = trim(row.slice(index + 1))
+
+	        if (typeof(result[key]) === 'undefined') {
+	          result[key] = value
+	        } else if (isArray(result[key])) {
+	          result[key].push(value)
+	        } else {
+	          result[key] = [ result[key], value ]
+	        }
+	      }
+	  )
+
+	  return result
+	}
+
+/***/ },
+/* 192 */
+/***/ function(module, exports) {
+
+	
+	exports = module.exports = trim;
+
+	function trim(str){
+	  return str.replace(/^\s*|\s*$/g, '');
+	}
+
+	exports.left = function(str){
+	  return str.replace(/^\s*/, '');
+	};
+
+	exports.right = function(str){
+	  return str.replace(/\s*$/, '');
+	};
+
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(190)
+
+	module.exports = forEach
+
+	var toString = Object.prototype.toString
+	var hasOwnProperty = Object.prototype.hasOwnProperty
+
+	function forEach(list, iterator, context) {
+	    if (!isFunction(iterator)) {
+	        throw new TypeError('iterator must be a function')
+	    }
+
+	    if (arguments.length < 3) {
+	        context = this
+	    }
+	    
+	    if (toString.call(list) === '[object Array]')
+	        forEachArray(list, iterator, context)
+	    else if (typeof list === 'string')
+	        forEachString(list, iterator, context)
+	    else
+	        forEachObject(list, iterator, context)
+	}
+
+	function forEachArray(array, iterator, context) {
+	    for (var i = 0, len = array.length; i < len; i++) {
+	        if (hasOwnProperty.call(array, i)) {
+	            iterator.call(context, array[i], i, array)
+	        }
+	    }
+	}
+
+	function forEachString(string, iterator, context) {
+	    for (var i = 0, len = string.length; i < len; i++) {
+	        // no such thing as a sparse string.
+	        iterator.call(context, string.charAt(i), i, string)
+	    }
+	}
+
+	function forEachObject(object, iterator, context) {
+	    for (var k in object) {
+	        if (hasOwnProperty.call(object, k)) {
+	            iterator.call(context, object[k], k, object)
+	        }
+	    }
+	}
+
+
+/***/ },
+/* 194 */
+/***/ function(module, exports) {
+
+	module.exports = extend
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	function extend() {
+	    var target = {}
+
+	    for (var i = 0; i < arguments.length; i++) {
+	        var source = arguments[i]
+
+	        for (var key in source) {
+	            if (hasOwnProperty.call(source, key)) {
+	                target[key] = source[key]
+	            }
+	        }
+	    }
+
+	    return target
+	}
+
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	module.exports = function shapeFromPropTypes(propTypes, opts) {
+	    opts = Object.assign({}, opts, { omit: [] });
+	    var shape = Object.keys(propTypes).filter(function (key) {
+	        return opts.omit.indexOf(key) !== -1;
+	    }).reduce(function (newPropTypes, key) {
+	        newPropTypes[key] = propTypes[key];
+	        return newPropTypes;
+	    }, {});
+	    return React.PropTypes.shape(shape);
+	};
+
+/***/ },
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54160,7 +54759,7 @@ webpackJsonp([0],[
 	module.exports = GUIComponent;
 
 /***/ },
-/* 188 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54180,7 +54779,9 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
 
-	var GreenFlagComponent = __webpack_require__(189);
+	var VM = __webpack_require__(172);
+
+	var GreenFlagComponent = __webpack_require__(198);
 
 	var GreenFlag = function (_React$Component) {
 	    _inherits(GreenFlag, _React$Component);
@@ -54190,13 +54791,13 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (GreenFlag.__proto__ || Object.getPrototypeOf(GreenFlag)).call(this, props));
 
-	        bindAll(_this, ['onClick']);
+	        bindAll(_this, ['handleClick']);
 	        return _this;
 	    }
 
 	    _createClass(GreenFlag, [{
-	        key: 'onClick',
-	        value: function onClick(e) {
+	        key: 'handleClick',
+	        value: function handleClick(e) {
 	            e.preventDefault();
 	            this.props.vm.greenFlag();
 	        }
@@ -54209,7 +54810,7 @@ webpackJsonp([0],[
 	            var props = _objectWithoutProperties(_props, ['vm']);
 
 	            return React.createElement(GreenFlagComponent, _extends({
-	                onClick: this.onClick
+	                onClick: this.handleClick
 	            }, props));
 	        }
 	    }]);
@@ -54218,13 +54819,13 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	GreenFlag.propTypes = {
-	    vm: React.PropTypes.object
+	    vm: React.PropTypes.instanceOf(VM)
 	};
 
 	module.exports = GreenFlag;
 
 /***/ },
-/* 189 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54296,7 +54897,7 @@ webpackJsonp([0],[
 	module.exports = GreenFlagComponent;
 
 /***/ },
-/* 190 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54315,8 +54916,9 @@ webpackJsonp([0],[
 
 	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
+	var VM = __webpack_require__(172);
 
-	var SpriteSelectorComponent = __webpack_require__(191);
+	var SpriteSelectorComponent = __webpack_require__(200);
 
 	var SpriteSelector = function (_React$Component) {
 	    _inherits(SpriteSelector, _React$Component);
@@ -54326,7 +54928,7 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (SpriteSelector.__proto__ || Object.getPrototypeOf(SpriteSelector)).call(this, props));
 
-	        bindAll(_this, ['onChange', 'targetsUpdate']);
+	        bindAll(_this, ['handleChange', 'targetsUpdate']);
 	        _this.state = {
 	            targets: {
 	                targetList: []
@@ -54341,8 +54943,8 @@ webpackJsonp([0],[
 	            this.props.vm.on('targetsUpdate', this.targetsUpdate);
 	        }
 	    }, {
-	        key: 'onChange',
-	        value: function onChange(event) {
+	        key: 'handleChange',
+	        value: function handleChange(event) {
 	            this.props.vm.setEditingTarget(event.target.value);
 	        }
 	    }, {
@@ -54355,18 +54957,24 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _props = this.props;
 	            var vm = _props.vm;
+	            var openNewSprite = _props.openNewSprite;
+	            var openNewCostume = _props.openNewCostume;
+	            var openNewBackdrop = _props.openNewBackdrop;
 
-	            var props = _objectWithoutProperties(_props, ['vm']);
+	            var props = _objectWithoutProperties(_props, ['vm', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
 
 	            return React.createElement(SpriteSelectorComponent, _extends({
-	                value: this.state.targets.editingTarget && [this.state.targets.editingTarget],
-	                onChange: this.onChange,
+	                openNewBackdrop: openNewBackdrop,
+	                openNewCostume: openNewCostume,
+	                openNewSprite: openNewSprite,
 	                sprites: this.state.targets.targetList.map(function (target) {
 	                    return {
 	                        id: target[0],
 	                        name: target[1]
 	                    };
-	                })
+	                }),
+	                value: this.state.targets.editingTarget && [this.state.targets.editingTarget],
+	                onChange: this.handleChange
 	            }, props));
 	        }
 	    }]);
@@ -54375,13 +54983,16 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	SpriteSelector.propTypes = {
-	    vm: React.PropTypes.object.isRequired
+	    openNewBackdrop: React.PropTypes.func,
+	    openNewCostume: React.PropTypes.func,
+	    openNewSprite: React.PropTypes.func,
+	    vm: React.PropTypes.instanceOf(VM)
 	};
 
 	module.exports = SpriteSelector;
 
 /***/ },
-/* 191 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54416,8 +55027,11 @@ webpackJsonp([0],[
 	            var onChange = _props.onChange;
 	            var sprites = _props.sprites;
 	            var value = _props.value;
+	            var openNewSprite = _props.openNewSprite;
+	            var openNewCostume = _props.openNewCostume;
+	            var openNewBackdrop = _props.openNewBackdrop;
 
-	            var props = _objectWithoutProperties(_props, ['onChange', 'sprites', 'value']);
+	            var props = _objectWithoutProperties(_props, ['onChange', 'sprites', 'value', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
 
 	            return React.createElement(
 	                'div',
@@ -54438,10 +55052,32 @@ webpackJsonp([0],[
 	                    sprites.map(function (sprite) {
 	                        return React.createElement(
 	                            'option',
-	                            { value: sprite.id, key: sprite.id },
+	                            {
+	                                key: sprite.id,
+	                                value: sprite.id
+	                            },
 	                            sprite.name
 	                        );
 	                    })
+	                ),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    React.createElement(
+	                        'button',
+	                        { onClick: openNewSprite },
+	                        'New sprite'
+	                    ),
+	                    React.createElement(
+	                        'button',
+	                        { onClick: openNewCostume },
+	                        'New costume'
+	                    ),
+	                    React.createElement(
+	                        'button',
+	                        { onClick: openNewBackdrop },
+	                        'New backdrop'
+	                    )
 	                )
 	            );
 	        }
@@ -54452,6 +55088,9 @@ webpackJsonp([0],[
 
 	SpriteSelectorComponent.propTypes = {
 	    onChange: React.PropTypes.func,
+	    openNewBackdrop: React.PropTypes.func,
+	    openNewCostume: React.PropTypes.func,
+	    openNewSprite: React.PropTypes.func,
 	    sprites: React.PropTypes.arrayOf(React.PropTypes.shape({
 	        id: React.PropTypes.string,
 	        name: React.PropTypes.string
@@ -54462,7 +55101,7 @@ webpackJsonp([0],[
 	module.exports = SpriteSelectorComponent;
 
 /***/ },
-/* 192 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54481,10 +55120,10 @@ webpackJsonp([0],[
 
 	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
-	var Renderer = __webpack_require__(193);
+	var Renderer = __webpack_require__(202);
 	var VM = __webpack_require__(172);
 
-	var StageComponent = __webpack_require__(194);
+	var StageComponent = __webpack_require__(203);
 
 	var Stage = function (_React$Component) {
 	    _inherits(Stage, _React$Component);
@@ -54614,7 +55253,7 @@ webpackJsonp([0],[
 	module.exports = Stage;
 
 /***/ },
-/* 193 */
+/* 202 */
 /***/ function(module, exports) {
 
 	module.exports =
@@ -67702,7 +68341,7 @@ webpackJsonp([0],[
 	/******/ ]);
 
 /***/ },
-/* 194 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67759,8 +68398,8 @@ webpackJsonp([0],[
 
 	StageComponent.propTypes = {
 	    canvasRef: React.PropTypes.func,
-	    width: React.PropTypes.number,
-	    height: React.PropTypes.number
+	    height: React.PropTypes.number,
+	    width: React.PropTypes.number
 	};
 
 	StageComponent.defaultProps = {
@@ -67772,7 +68411,7 @@ webpackJsonp([0],[
 	module.exports = StageComponent;
 
 /***/ },
-/* 195 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67791,8 +68430,9 @@ webpackJsonp([0],[
 
 	var bindAll = __webpack_require__(174);
 	var React = __webpack_require__(1);
+	var VM = __webpack_require__(172);
 
-	var StopAllComponent = __webpack_require__(196);
+	var StopAllComponent = __webpack_require__(205);
 
 	var StopAll = function (_React$Component) {
 	    _inherits(StopAll, _React$Component);
@@ -67802,13 +68442,13 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (StopAll.__proto__ || Object.getPrototypeOf(StopAll)).call(this, props));
 
-	        bindAll(_this, ['onClick']);
+	        bindAll(_this, ['handleClick']);
 	        return _this;
 	    }
 
 	    _createClass(StopAll, [{
-	        key: 'onClick',
-	        value: function onClick(e) {
+	        key: 'handleClick',
+	        value: function handleClick(e) {
 	            e.preventDefault();
 	            this.props.vm.stopAll();
 	        }
@@ -67821,7 +68461,7 @@ webpackJsonp([0],[
 	            var props = _objectWithoutProperties(_props, ['vm']);
 
 	            return React.createElement(StopAllComponent, _extends({
-	                onClick: this.onClick
+	                onClick: this.handleClick
 	            }, props));
 	        }
 	    }]);
@@ -67830,13 +68470,13 @@ webpackJsonp([0],[
 	}(React.Component);
 
 	StopAll.propTypes = {
-	    vm: React.PropTypes.object
+	    vm: React.PropTypes.instanceOf(VM)
 	};
 
 	module.exports = StopAll;
 
 /***/ },
-/* 196 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67908,26 +68548,4461 @@ webpackJsonp([0],[
 	module.exports = StopAllComponent;
 
 /***/ },
-/* 197 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var minilog = __webpack_require__(198);
-	minilog.enable();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	module.exports = minilog('scratch-gui');
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var React = __webpack_require__(1);
+	var VM = __webpack_require__(172);
+	var MediaLibrary = __webpack_require__(187);
+
+	var LibaryComponent = __webpack_require__(207);
+
+	var SpriteLibrary = function (_React$Component) {
+	    _inherits(SpriteLibrary, _React$Component);
+
+	    function SpriteLibrary(props) {
+	        _classCallCheck(this, SpriteLibrary);
+
+	        var _this = _possibleConstructorReturn(this, (SpriteLibrary.__proto__ || Object.getPrototypeOf(SpriteLibrary)).call(this, props));
+
+	        bindAll(_this, ['setData', 'handleItemSelect', 'setSpriteData']);
+	        _this.state = { data: [], spriteData: {} };
+	        return _this;
+	    }
+
+	    _createClass(SpriteLibrary, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.visible && this.state.data.length === 0) {
+	                this.props.mediaLibrary.getMediaLibrary('sprite', this.setData);
+	            }
+	        }
+	    }, {
+	        key: 'setData',
+	        value: function setData(data) {
+	            this.setState({ data: data });
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
+
+	            try {
+	                for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var sprite = _step.value;
+
+	                    this.props.mediaLibrary.getSprite(sprite.md5, this.setSpriteData);
+	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator.return) {
+	                        _iterator.return();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'setSpriteData',
+	        value: function setSpriteData(md5, data) {
+	            this.setState({
+	                spriteData: Object.assign({}, this.state.spriteData, _defineProperty({}, md5, data))
+	            });
+	        }
+	    }, {
+	        key: 'handleItemSelect',
+	        value: function handleItemSelect(item) {
+	            var spriteData = JSON.stringify(this.state.spriteData[item.json]);
+	            this.props.vm.addSprite2(spriteData);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            return React.createElement(LibaryComponent, {
+	                data: Object.keys(this.state.spriteData).map(function (libraryKey) {
+	                    var libraryItem = _this2.state.spriteData[libraryKey];
+	                    return {
+	                        name: libraryItem.objName,
+	                        md5: libraryItem.costumes[0].baseLayerMD5,
+	                        json: libraryKey
+	                    };
+	                }),
+	                mediaLibrary: this.props.mediaLibrary,
+	                title: 'Sprite Library',
+	                visible: this.props.visible,
+	                onItemSelected: this.handleItemSelect,
+	                onRequestClose: this.props.onRequestClose
+	            });
+	        }
+	    }]);
+
+	    return SpriteLibrary;
+	}(React.Component);
+
+	SpriteLibrary.propTypes = {
+	    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+	    onRequestClose: React.PropTypes.func,
+	    visible: React.PropTypes.bool,
+	    vm: React.PropTypes.instanceOf(VM).isRequired
+	};
+
+	module.exports = SpriteLibrary;
 
 /***/ },
-/* 198 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Minilog = __webpack_require__(199);
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var React = __webpack_require__(1);
+
+	var LibraryItem = __webpack_require__(208);
+	var ModalComponent = __webpack_require__(214);
+
+	var LibraryComponent = function (_React$Component) {
+	    _inherits(LibraryComponent, _React$Component);
+
+	    function LibraryComponent(props) {
+	        _classCallCheck(this, LibraryComponent);
+
+	        var _this = _possibleConstructorReturn(this, (LibraryComponent.__proto__ || Object.getPrototypeOf(LibraryComponent)).call(this, props));
+
+	        bindAll(_this, ['handleSelect']);
+	        _this.state = { selectedItem: null };
+	        return _this;
+	    }
+
+	    _createClass(LibraryComponent, [{
+	        key: 'handleSelect',
+	        value: function handleSelect(id) {
+	            if (this.state.selectedItem === id) {
+	                // Double select: select as the library's value.
+	                this.props.onRequestClose();
+	                this.props.onItemSelected(this.props.data[id]);
+	            }
+	            this.setState({ selectedItem: id });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var scrollGridStyle = {
+	                overflow: 'scroll',
+	                position: 'absolute',
+	                top: '70px',
+	                bottom: '20px',
+	                left: '30px',
+	                right: '30px'
+	            };
+	            return React.createElement(
+	                ModalComponent,
+	                {
+	                    visible: this.props.visible,
+	                    onRequestClose: this.props.onRequestClose
+	                },
+	                React.createElement(
+	                    'h1',
+	                    null,
+	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { style: scrollGridStyle },
+	                    this.props.data.map(function (dataItem, itemId) {
+	                        var scratchURL = dataItem.md5 ? 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' + dataItem.md5 + '/get/' : dataItem.rawURL;
+	                        return React.createElement(LibraryItem, {
+	                            iconURL: scratchURL,
+	                            id: itemId,
+	                            key: 'item_' + itemId,
+	                            name: dataItem.name,
+	                            selected: _this2.state.selectedItem === itemId,
+	                            onSelect: _this2.handleSelect
+	                        });
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return LibraryComponent;
+	}(React.Component);
+
+	LibraryComponent.propTypes = {
+	    data: React.PropTypes.arrayOf(
+	    /* eslint-disable react/no-unused-prop-types, lines-around-comment */
+	    React.PropTypes.shape({
+	        md5: React.PropTypes.string,
+	        name: React.PropTypes.string,
+	        rawURL: React.PropTypes.string
+	    })
+	    /* eslint-enable react/no-unused-prop-types, lines-around-comment */
+	    ),
+	    onItemSelected: React.PropTypes.func,
+	    onRequestClose: React.PropTypes.func,
+	    title: React.PropTypes.string,
+	    visible: React.PropTypes.bool
+	};
+
+	module.exports = LibraryComponent;
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var React = __webpack_require__(1);
+	var stylePropType = __webpack_require__(209);
+
+	var CostumeCanvas = __webpack_require__(211);
+
+	var LibraryItem = function (_React$Component) {
+	    _inherits(LibraryItem, _React$Component);
+
+	    function LibraryItem(props) {
+	        _classCallCheck(this, LibraryItem);
+
+	        var _this = _possibleConstructorReturn(this, (LibraryItem.__proto__ || Object.getPrototypeOf(LibraryItem)).call(this, props));
+
+	        bindAll(_this, ['handleClick']);
+	        return _this;
+	    }
+
+	    _createClass(LibraryItem, [{
+	        key: 'handleClick',
+	        value: function handleClick(e) {
+	            this.props.onSelect(this.props.id);
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var style = this.props.selected ? this.props.selectedGridTileStyle : this.props.gridTileStyle;
+	            return React.createElement(
+	                'div',
+	                {
+	                    style: style,
+	                    onClick: this.handleClick
+	                },
+	                React.createElement(CostumeCanvas, { url: this.props.iconURL }),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    this.props.name
+	                )
+	            );
+	        }
+	    }]);
+
+	    return LibraryItem;
+	}(React.Component);
+
+	LibraryItem.defaultProps = {
+	    gridTileStyle: {
+	        float: 'left',
+	        width: '140px',
+	        marginLeft: '5px',
+	        marginRight: '5px',
+	        textAlign: 'center',
+	        cursor: 'pointer'
+	    },
+	    selectedGridTileStyle: {
+	        float: 'left',
+	        width: '140px',
+	        marginLeft: '5px',
+	        marginRight: '5px',
+	        textAlign: 'center',
+	        cursor: 'pointer',
+	        background: '#aaa',
+	        borderRadius: '6px'
+	    }
+	};
+
+	LibraryItem.propTypes = {
+	    gridTileStyle: stylePropType,
+	    iconURL: React.PropTypes.string,
+	    id: React.PropTypes.number,
+	    name: React.PropTypes.string,
+	    onSelect: React.PropTypes.func,
+	    selected: React.PropTypes.bool,
+	    selectedGridTileStyle: stylePropType
+	};
+
+	module.exports = LibraryItem;
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var properties = __webpack_require__(210);
+
+	module.exports = function(props, propName, componentName) {
+	  var styles = props[propName];
+	  if (!styles) {
+	    return;
+	  }
+
+	  var failures = [];
+	  Object.keys(styles).forEach(function(styleKey){
+	    if (properties.indexOf(styleKey) === -1) {
+	      failures.push(styleKey);
+	    }
+	  });
+	  if (failures.length) {
+	    throw new Error('Prop ' + propName + ' passed to ' + componentName + '. Has invalid keys ' + failures.join(', '));
+	  }
+	};
+
+	module.exports.isRequired = function(props, propName, componentName) {
+	  if (!props[propName]) {
+	    throw new Error('Prop ' + propName + ' passed to ' + componentName + ' is required');
+	  }
+	  return module.exports(props, propName, componentName);
+	};
+
+
+
+/***/ },
+/* 210 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  "alignContent",
+	  "MozAlignContent",
+	  "WebKitAlignContent",
+	  "MSAlignContent",
+	  "OAlignContent",
+	  "alignItems",
+	  "MozAlignItems",
+	  "WebKitAlignItems",
+	  "MSAlignItems",
+	  "OAlignItems",
+	  "alignSelf",
+	  "MozAlignSelf",
+	  "WebKitAlignSelf",
+	  "MSAlignSelf",
+	  "OAlignSelf",
+	  "all",
+	  "MozAll",
+	  "WebKitAll",
+	  "MSAll",
+	  "OAll",
+	  "animation",
+	  "MozAnimation",
+	  "WebKitAnimation",
+	  "MSAnimation",
+	  "OAnimation",
+	  "animationDelay",
+	  "MozAnimationDelay",
+	  "WebKitAnimationDelay",
+	  "MSAnimationDelay",
+	  "OAnimationDelay",
+	  "animationDirection",
+	  "MozAnimationDirection",
+	  "WebKitAnimationDirection",
+	  "MSAnimationDirection",
+	  "OAnimationDirection",
+	  "animationDuration",
+	  "MozAnimationDuration",
+	  "WebKitAnimationDuration",
+	  "MSAnimationDuration",
+	  "OAnimationDuration",
+	  "animationFillMode",
+	  "MozAnimationFillMode",
+	  "WebKitAnimationFillMode",
+	  "MSAnimationFillMode",
+	  "OAnimationFillMode",
+	  "animationIterationCount",
+	  "MozAnimationIterationCount",
+	  "WebKitAnimationIterationCount",
+	  "MSAnimationIterationCount",
+	  "OAnimationIterationCount",
+	  "animationName",
+	  "MozAnimationName",
+	  "WebKitAnimationName",
+	  "MSAnimationName",
+	  "OAnimationName",
+	  "animationPlayState",
+	  "MozAnimationPlayState",
+	  "WebKitAnimationPlayState",
+	  "MSAnimationPlayState",
+	  "OAnimationPlayState",
+	  "animationTimingFunction",
+	  "MozAnimationTimingFunction",
+	  "WebKitAnimationTimingFunction",
+	  "MSAnimationTimingFunction",
+	  "OAnimationTimingFunction",
+	  "backfaceVisibility",
+	  "MozBackfaceVisibility",
+	  "WebKitBackfaceVisibility",
+	  "MSBackfaceVisibility",
+	  "OBackfaceVisibility",
+	  "background",
+	  "MozBackground",
+	  "WebKitBackground",
+	  "MSBackground",
+	  "OBackground",
+	  "backgroundAttachment",
+	  "MozBackgroundAttachment",
+	  "WebKitBackgroundAttachment",
+	  "MSBackgroundAttachment",
+	  "OBackgroundAttachment",
+	  "backgroundBlendMode",
+	  "MozBackgroundBlendMode",
+	  "WebKitBackgroundBlendMode",
+	  "MSBackgroundBlendMode",
+	  "OBackgroundBlendMode",
+	  "backgroundClip",
+	  "MozBackgroundClip",
+	  "WebKitBackgroundClip",
+	  "MSBackgroundClip",
+	  "OBackgroundClip",
+	  "backgroundColor",
+	  "MozBackgroundColor",
+	  "WebKitBackgroundColor",
+	  "MSBackgroundColor",
+	  "OBackgroundColor",
+	  "backgroundImage",
+	  "MozBackgroundImage",
+	  "WebKitBackgroundImage",
+	  "MSBackgroundImage",
+	  "OBackgroundImage",
+	  "backgroundOrigin",
+	  "MozBackgroundOrigin",
+	  "WebKitBackgroundOrigin",
+	  "MSBackgroundOrigin",
+	  "OBackgroundOrigin",
+	  "backgroundPosition",
+	  "MozBackgroundPosition",
+	  "WebKitBackgroundPosition",
+	  "MSBackgroundPosition",
+	  "OBackgroundPosition",
+	  "backgroundRepeat",
+	  "MozBackgroundRepeat",
+	  "WebKitBackgroundRepeat",
+	  "MSBackgroundRepeat",
+	  "OBackgroundRepeat",
+	  "backgroundSize",
+	  "MozBackgroundSize",
+	  "WebKitBackgroundSize",
+	  "MSBackgroundSize",
+	  "OBackgroundSize",
+	  "blockSize",
+	  "MozBlockSize",
+	  "WebKitBlockSize",
+	  "MSBlockSize",
+	  "OBlockSize",
+	  "border",
+	  "MozBorder",
+	  "WebKitBorder",
+	  "MSBorder",
+	  "OBorder",
+	  "borderBlockEnd",
+	  "MozBorderBlockEnd",
+	  "WebKitBorderBlockEnd",
+	  "MSBorderBlockEnd",
+	  "OBorderBlockEnd",
+	  "borderBlockEndColor",
+	  "MozBorderBlockEndColor",
+	  "WebKitBorderBlockEndColor",
+	  "MSBorderBlockEndColor",
+	  "OBorderBlockEndColor",
+	  "borderBlockEndStyle",
+	  "MozBorderBlockEndStyle",
+	  "WebKitBorderBlockEndStyle",
+	  "MSBorderBlockEndStyle",
+	  "OBorderBlockEndStyle",
+	  "borderBlockEndWidth",
+	  "MozBorderBlockEndWidth",
+	  "WebKitBorderBlockEndWidth",
+	  "MSBorderBlockEndWidth",
+	  "OBorderBlockEndWidth",
+	  "borderBlockStart",
+	  "MozBorderBlockStart",
+	  "WebKitBorderBlockStart",
+	  "MSBorderBlockStart",
+	  "OBorderBlockStart",
+	  "borderBlockStartColor",
+	  "MozBorderBlockStartColor",
+	  "WebKitBorderBlockStartColor",
+	  "MSBorderBlockStartColor",
+	  "OBorderBlockStartColor",
+	  "borderBlockStartStyle",
+	  "MozBorderBlockStartStyle",
+	  "WebKitBorderBlockStartStyle",
+	  "MSBorderBlockStartStyle",
+	  "OBorderBlockStartStyle",
+	  "borderBlockStartWidth",
+	  "MozBorderBlockStartWidth",
+	  "WebKitBorderBlockStartWidth",
+	  "MSBorderBlockStartWidth",
+	  "OBorderBlockStartWidth",
+	  "borderBottom",
+	  "MozBorderBottom",
+	  "WebKitBorderBottom",
+	  "MSBorderBottom",
+	  "OBorderBottom",
+	  "borderBottomColor",
+	  "MozBorderBottomColor",
+	  "WebKitBorderBottomColor",
+	  "MSBorderBottomColor",
+	  "OBorderBottomColor",
+	  "borderBottomLeftRadius",
+	  "MozBorderBottomLeftRadius",
+	  "WebKitBorderBottomLeftRadius",
+	  "MSBorderBottomLeftRadius",
+	  "OBorderBottomLeftRadius",
+	  "borderBottomRightRadius",
+	  "MozBorderBottomRightRadius",
+	  "WebKitBorderBottomRightRadius",
+	  "MSBorderBottomRightRadius",
+	  "OBorderBottomRightRadius",
+	  "borderBottomStyle",
+	  "MozBorderBottomStyle",
+	  "WebKitBorderBottomStyle",
+	  "MSBorderBottomStyle",
+	  "OBorderBottomStyle",
+	  "borderBottomWidth",
+	  "MozBorderBottomWidth",
+	  "WebKitBorderBottomWidth",
+	  "MSBorderBottomWidth",
+	  "OBorderBottomWidth",
+	  "borderCollapse",
+	  "MozBorderCollapse",
+	  "WebKitBorderCollapse",
+	  "MSBorderCollapse",
+	  "OBorderCollapse",
+	  "borderColor",
+	  "MozBorderColor",
+	  "WebKitBorderColor",
+	  "MSBorderColor",
+	  "OBorderColor",
+	  "borderImage",
+	  "MozBorderImage",
+	  "WebKitBorderImage",
+	  "MSBorderImage",
+	  "OBorderImage",
+	  "borderImageOutset",
+	  "MozBorderImageOutset",
+	  "WebKitBorderImageOutset",
+	  "MSBorderImageOutset",
+	  "OBorderImageOutset",
+	  "borderImageRepeat",
+	  "MozBorderImageRepeat",
+	  "WebKitBorderImageRepeat",
+	  "MSBorderImageRepeat",
+	  "OBorderImageRepeat",
+	  "borderImageSlice",
+	  "MozBorderImageSlice",
+	  "WebKitBorderImageSlice",
+	  "MSBorderImageSlice",
+	  "OBorderImageSlice",
+	  "borderImageSource",
+	  "MozBorderImageSource",
+	  "WebKitBorderImageSource",
+	  "MSBorderImageSource",
+	  "OBorderImageSource",
+	  "borderImageWidth",
+	  "MozBorderImageWidth",
+	  "WebKitBorderImageWidth",
+	  "MSBorderImageWidth",
+	  "OBorderImageWidth",
+	  "borderInlineEnd",
+	  "MozBorderInlineEnd",
+	  "WebKitBorderInlineEnd",
+	  "MSBorderInlineEnd",
+	  "OBorderInlineEnd",
+	  "borderInlineEndColor",
+	  "MozBorderInlineEndColor",
+	  "WebKitBorderInlineEndColor",
+	  "MSBorderInlineEndColor",
+	  "OBorderInlineEndColor",
+	  "borderInlineEndStyle",
+	  "MozBorderInlineEndStyle",
+	  "WebKitBorderInlineEndStyle",
+	  "MSBorderInlineEndStyle",
+	  "OBorderInlineEndStyle",
+	  "borderInlineEndWidth",
+	  "MozBorderInlineEndWidth",
+	  "WebKitBorderInlineEndWidth",
+	  "MSBorderInlineEndWidth",
+	  "OBorderInlineEndWidth",
+	  "borderInlineStart",
+	  "MozBorderInlineStart",
+	  "WebKitBorderInlineStart",
+	  "MSBorderInlineStart",
+	  "OBorderInlineStart",
+	  "borderInlineStartColor",
+	  "MozBorderInlineStartColor",
+	  "WebKitBorderInlineStartColor",
+	  "MSBorderInlineStartColor",
+	  "OBorderInlineStartColor",
+	  "borderInlineStartStyle",
+	  "MozBorderInlineStartStyle",
+	  "WebKitBorderInlineStartStyle",
+	  "MSBorderInlineStartStyle",
+	  "OBorderInlineStartStyle",
+	  "borderInlineStartWidth",
+	  "MozBorderInlineStartWidth",
+	  "WebKitBorderInlineStartWidth",
+	  "MSBorderInlineStartWidth",
+	  "OBorderInlineStartWidth",
+	  "borderLeft",
+	  "MozBorderLeft",
+	  "WebKitBorderLeft",
+	  "MSBorderLeft",
+	  "OBorderLeft",
+	  "borderLeftColor",
+	  "MozBorderLeftColor",
+	  "WebKitBorderLeftColor",
+	  "MSBorderLeftColor",
+	  "OBorderLeftColor",
+	  "borderLeftStyle",
+	  "MozBorderLeftStyle",
+	  "WebKitBorderLeftStyle",
+	  "MSBorderLeftStyle",
+	  "OBorderLeftStyle",
+	  "borderLeftWidth",
+	  "MozBorderLeftWidth",
+	  "WebKitBorderLeftWidth",
+	  "MSBorderLeftWidth",
+	  "OBorderLeftWidth",
+	  "borderRadius",
+	  "MozBorderRadius",
+	  "WebKitBorderRadius",
+	  "MSBorderRadius",
+	  "OBorderRadius",
+	  "borderRight",
+	  "MozBorderRight",
+	  "WebKitBorderRight",
+	  "MSBorderRight",
+	  "OBorderRight",
+	  "borderRightColor",
+	  "MozBorderRightColor",
+	  "WebKitBorderRightColor",
+	  "MSBorderRightColor",
+	  "OBorderRightColor",
+	  "borderRightStyle",
+	  "MozBorderRightStyle",
+	  "WebKitBorderRightStyle",
+	  "MSBorderRightStyle",
+	  "OBorderRightStyle",
+	  "borderRightWidth",
+	  "MozBorderRightWidth",
+	  "WebKitBorderRightWidth",
+	  "MSBorderRightWidth",
+	  "OBorderRightWidth",
+	  "borderSpacing",
+	  "MozBorderSpacing",
+	  "WebKitBorderSpacing",
+	  "MSBorderSpacing",
+	  "OBorderSpacing",
+	  "borderStyle",
+	  "MozBorderStyle",
+	  "WebKitBorderStyle",
+	  "MSBorderStyle",
+	  "OBorderStyle",
+	  "borderTop",
+	  "MozBorderTop",
+	  "WebKitBorderTop",
+	  "MSBorderTop",
+	  "OBorderTop",
+	  "borderTopColor",
+	  "MozBorderTopColor",
+	  "WebKitBorderTopColor",
+	  "MSBorderTopColor",
+	  "OBorderTopColor",
+	  "borderTopLeftRadius",
+	  "MozBorderTopLeftRadius",
+	  "WebKitBorderTopLeftRadius",
+	  "MSBorderTopLeftRadius",
+	  "OBorderTopLeftRadius",
+	  "borderTopRightRadius",
+	  "MozBorderTopRightRadius",
+	  "WebKitBorderTopRightRadius",
+	  "MSBorderTopRightRadius",
+	  "OBorderTopRightRadius",
+	  "borderTopStyle",
+	  "MozBorderTopStyle",
+	  "WebKitBorderTopStyle",
+	  "MSBorderTopStyle",
+	  "OBorderTopStyle",
+	  "borderTopWidth",
+	  "MozBorderTopWidth",
+	  "WebKitBorderTopWidth",
+	  "MSBorderTopWidth",
+	  "OBorderTopWidth",
+	  "borderWidth",
+	  "MozBorderWidth",
+	  "WebKitBorderWidth",
+	  "MSBorderWidth",
+	  "OBorderWidth",
+	  "bottom",
+	  "MozBottom",
+	  "WebKitBottom",
+	  "MSBottom",
+	  "OBottom",
+	  "boxDecorationBreak",
+	  "MozBoxDecorationBreak",
+	  "WebKitBoxDecorationBreak",
+	  "MSBoxDecorationBreak",
+	  "OBoxDecorationBreak",
+	  "boxShadow",
+	  "MozBoxShadow",
+	  "WebKitBoxShadow",
+	  "MSBoxShadow",
+	  "OBoxShadow",
+	  "boxSizing",
+	  "MozBoxSizing",
+	  "WebKitBoxSizing",
+	  "MSBoxSizing",
+	  "OBoxSizing",
+	  "breakAfter",
+	  "MozBreakAfter",
+	  "WebKitBreakAfter",
+	  "MSBreakAfter",
+	  "OBreakAfter",
+	  "breakBefore",
+	  "MozBreakBefore",
+	  "WebKitBreakBefore",
+	  "MSBreakBefore",
+	  "OBreakBefore",
+	  "breakInside",
+	  "MozBreakInside",
+	  "WebKitBreakInside",
+	  "MSBreakInside",
+	  "OBreakInside",
+	  "captionSide",
+	  "MozCaptionSide",
+	  "WebKitCaptionSide",
+	  "MSCaptionSide",
+	  "OCaptionSide",
+	  "ch",
+	  "MozCh",
+	  "WebKitCh",
+	  "MSCh",
+	  "OCh",
+	  "clear",
+	  "MozClear",
+	  "WebKitClear",
+	  "MSClear",
+	  "OClear",
+	  "clip",
+	  "MozClip",
+	  "WebKitClip",
+	  "MSClip",
+	  "OClip",
+	  "clipPath",
+	  "MozClipPath",
+	  "WebKitClipPath",
+	  "MSClipPath",
+	  "OClipPath",
+	  "cm",
+	  "MozCm",
+	  "WebKitCm",
+	  "MSCm",
+	  "OCm",
+	  "color",
+	  "MozColor",
+	  "WebKitColor",
+	  "MSColor",
+	  "OColor",
+	  "columnCount",
+	  "MozColumnCount",
+	  "WebKitColumnCount",
+	  "MSColumnCount",
+	  "OColumnCount",
+	  "columnFill",
+	  "MozColumnFill",
+	  "WebKitColumnFill",
+	  "MSColumnFill",
+	  "OColumnFill",
+	  "columnGap",
+	  "MozColumnGap",
+	  "WebKitColumnGap",
+	  "MSColumnGap",
+	  "OColumnGap",
+	  "columnRule",
+	  "MozColumnRule",
+	  "WebKitColumnRule",
+	  "MSColumnRule",
+	  "OColumnRule",
+	  "columnRuleColor",
+	  "MozColumnRuleColor",
+	  "WebKitColumnRuleColor",
+	  "MSColumnRuleColor",
+	  "OColumnRuleColor",
+	  "columnRuleStyle",
+	  "MozColumnRuleStyle",
+	  "WebKitColumnRuleStyle",
+	  "MSColumnRuleStyle",
+	  "OColumnRuleStyle",
+	  "columnRuleWidth",
+	  "MozColumnRuleWidth",
+	  "WebKitColumnRuleWidth",
+	  "MSColumnRuleWidth",
+	  "OColumnRuleWidth",
+	  "columnSpan",
+	  "MozColumnSpan",
+	  "WebKitColumnSpan",
+	  "MSColumnSpan",
+	  "OColumnSpan",
+	  "columnWidth",
+	  "MozColumnWidth",
+	  "WebKitColumnWidth",
+	  "MSColumnWidth",
+	  "OColumnWidth",
+	  "columns",
+	  "MozColumns",
+	  "WebKitColumns",
+	  "MSColumns",
+	  "OColumns",
+	  "content",
+	  "MozContent",
+	  "WebKitContent",
+	  "MSContent",
+	  "OContent",
+	  "counterIncrement",
+	  "MozCounterIncrement",
+	  "WebKitCounterIncrement",
+	  "MSCounterIncrement",
+	  "OCounterIncrement",
+	  "counterReset",
+	  "MozCounterReset",
+	  "WebKitCounterReset",
+	  "MSCounterReset",
+	  "OCounterReset",
+	  "cursor",
+	  "MozCursor",
+	  "WebKitCursor",
+	  "MSCursor",
+	  "OCursor",
+	  "deg",
+	  "MozDeg",
+	  "WebKitDeg",
+	  "MSDeg",
+	  "ODeg",
+	  "direction",
+	  "MozDirection",
+	  "WebKitDirection",
+	  "MSDirection",
+	  "ODirection",
+	  "display",
+	  "MozDisplay",
+	  "WebKitDisplay",
+	  "MSDisplay",
+	  "ODisplay",
+	  "dpcm",
+	  "MozDpcm",
+	  "WebKitDpcm",
+	  "MSDpcm",
+	  "ODpcm",
+	  "dpi",
+	  "MozDpi",
+	  "WebKitDpi",
+	  "MSDpi",
+	  "ODpi",
+	  "dppx",
+	  "MozDppx",
+	  "WebKitDppx",
+	  "MSDppx",
+	  "ODppx",
+	  "em",
+	  "MozEm",
+	  "WebKitEm",
+	  "MSEm",
+	  "OEm",
+	  "emptyCells",
+	  "MozEmptyCells",
+	  "WebKitEmptyCells",
+	  "MSEmptyCells",
+	  "OEmptyCells",
+	  "ex",
+	  "MozEx",
+	  "WebKitEx",
+	  "MSEx",
+	  "OEx",
+	  "filter",
+	  "MozFilter",
+	  "WebKitFilter",
+	  "MSFilter",
+	  "OFilter",
+	  "flex",
+	  "MozFlex",
+	  "WebKitFlex",
+	  "MSFlex",
+	  "OFlex",
+	  "flexBasis",
+	  "MozFlexBasis",
+	  "WebKitFlexBasis",
+	  "MSFlexBasis",
+	  "OFlexBasis",
+	  "flexDirection",
+	  "MozFlexDirection",
+	  "WebKitFlexDirection",
+	  "MSFlexDirection",
+	  "OFlexDirection",
+	  "flexFlow",
+	  "MozFlexFlow",
+	  "WebKitFlexFlow",
+	  "MSFlexFlow",
+	  "OFlexFlow",
+	  "flexGrow",
+	  "MozFlexGrow",
+	  "WebKitFlexGrow",
+	  "MSFlexGrow",
+	  "OFlexGrow",
+	  "flexShrink",
+	  "MozFlexShrink",
+	  "WebKitFlexShrink",
+	  "MSFlexShrink",
+	  "OFlexShrink",
+	  "flexWrap",
+	  "MozFlexWrap",
+	  "WebKitFlexWrap",
+	  "MSFlexWrap",
+	  "OFlexWrap",
+	  "float",
+	  "MozFloat",
+	  "WebKitFloat",
+	  "MSFloat",
+	  "OFloat",
+	  "font",
+	  "MozFont",
+	  "WebKitFont",
+	  "MSFont",
+	  "OFont",
+	  "fontFamily",
+	  "MozFontFamily",
+	  "WebKitFontFamily",
+	  "MSFontFamily",
+	  "OFontFamily",
+	  "fontFeatureSettings",
+	  "MozFontFeatureSettings",
+	  "WebKitFontFeatureSettings",
+	  "MSFontFeatureSettings",
+	  "OFontFeatureSettings",
+	  "fontKerning",
+	  "MozFontKerning",
+	  "WebKitFontKerning",
+	  "MSFontKerning",
+	  "OFontKerning",
+	  "fontLanguageOverride",
+	  "MozFontLanguageOverride",
+	  "WebKitFontLanguageOverride",
+	  "MSFontLanguageOverride",
+	  "OFontLanguageOverride",
+	  "fontSize",
+	  "MozFontSize",
+	  "WebKitFontSize",
+	  "MSFontSize",
+	  "OFontSize",
+	  "fontSizeAdjust",
+	  "MozFontSizeAdjust",
+	  "WebKitFontSizeAdjust",
+	  "MSFontSizeAdjust",
+	  "OFontSizeAdjust",
+	  "fontStretch",
+	  "MozFontStretch",
+	  "WebKitFontStretch",
+	  "MSFontStretch",
+	  "OFontStretch",
+	  "fontStyle",
+	  "MozFontStyle",
+	  "WebKitFontStyle",
+	  "MSFontStyle",
+	  "OFontStyle",
+	  "fontSynthesis",
+	  "MozFontSynthesis",
+	  "WebKitFontSynthesis",
+	  "MSFontSynthesis",
+	  "OFontSynthesis",
+	  "fontVariant",
+	  "MozFontVariant",
+	  "WebKitFontVariant",
+	  "MSFontVariant",
+	  "OFontVariant",
+	  "fontVariantAlternates",
+	  "MozFontVariantAlternates",
+	  "WebKitFontVariantAlternates",
+	  "MSFontVariantAlternates",
+	  "OFontVariantAlternates",
+	  "fontVariantCaps",
+	  "MozFontVariantCaps",
+	  "WebKitFontVariantCaps",
+	  "MSFontVariantCaps",
+	  "OFontVariantCaps",
+	  "fontVariantEastAsian",
+	  "MozFontVariantEastAsian",
+	  "WebKitFontVariantEastAsian",
+	  "MSFontVariantEastAsian",
+	  "OFontVariantEastAsian",
+	  "fontVariantLigatures",
+	  "MozFontVariantLigatures",
+	  "WebKitFontVariantLigatures",
+	  "MSFontVariantLigatures",
+	  "OFontVariantLigatures",
+	  "fontVariantNumeric",
+	  "MozFontVariantNumeric",
+	  "WebKitFontVariantNumeric",
+	  "MSFontVariantNumeric",
+	  "OFontVariantNumeric",
+	  "fontVariantPosition",
+	  "MozFontVariantPosition",
+	  "WebKitFontVariantPosition",
+	  "MSFontVariantPosition",
+	  "OFontVariantPosition",
+	  "fontWeight",
+	  "MozFontWeight",
+	  "WebKitFontWeight",
+	  "MSFontWeight",
+	  "OFontWeight",
+	  "grad",
+	  "MozGrad",
+	  "WebKitGrad",
+	  "MSGrad",
+	  "OGrad",
+	  "grid",
+	  "MozGrid",
+	  "WebKitGrid",
+	  "MSGrid",
+	  "OGrid",
+	  "gridArea",
+	  "MozGridArea",
+	  "WebKitGridArea",
+	  "MSGridArea",
+	  "OGridArea",
+	  "gridAutoColumns",
+	  "MozGridAutoColumns",
+	  "WebKitGridAutoColumns",
+	  "MSGridAutoColumns",
+	  "OGridAutoColumns",
+	  "gridAutoFlow",
+	  "MozGridAutoFlow",
+	  "WebKitGridAutoFlow",
+	  "MSGridAutoFlow",
+	  "OGridAutoFlow",
+	  "gridAutoRows",
+	  "MozGridAutoRows",
+	  "WebKitGridAutoRows",
+	  "MSGridAutoRows",
+	  "OGridAutoRows",
+	  "gridColumn",
+	  "MozGridColumn",
+	  "WebKitGridColumn",
+	  "MSGridColumn",
+	  "OGridColumn",
+	  "gridColumnEnd",
+	  "MozGridColumnEnd",
+	  "WebKitGridColumnEnd",
+	  "MSGridColumnEnd",
+	  "OGridColumnEnd",
+	  "gridColumnGap",
+	  "MozGridColumnGap",
+	  "WebKitGridColumnGap",
+	  "MSGridColumnGap",
+	  "OGridColumnGap",
+	  "gridColumnStart",
+	  "MozGridColumnStart",
+	  "WebKitGridColumnStart",
+	  "MSGridColumnStart",
+	  "OGridColumnStart",
+	  "gridGap",
+	  "MozGridGap",
+	  "WebKitGridGap",
+	  "MSGridGap",
+	  "OGridGap",
+	  "gridRow",
+	  "MozGridRow",
+	  "WebKitGridRow",
+	  "MSGridRow",
+	  "OGridRow",
+	  "gridRowEnd",
+	  "MozGridRowEnd",
+	  "WebKitGridRowEnd",
+	  "MSGridRowEnd",
+	  "OGridRowEnd",
+	  "gridRowGap",
+	  "MozGridRowGap",
+	  "WebKitGridRowGap",
+	  "MSGridRowGap",
+	  "OGridRowGap",
+	  "gridRowStart",
+	  "MozGridRowStart",
+	  "WebKitGridRowStart",
+	  "MSGridRowStart",
+	  "OGridRowStart",
+	  "gridTemplate",
+	  "MozGridTemplate",
+	  "WebKitGridTemplate",
+	  "MSGridTemplate",
+	  "OGridTemplate",
+	  "gridTemplateAreas",
+	  "MozGridTemplateAreas",
+	  "WebKitGridTemplateAreas",
+	  "MSGridTemplateAreas",
+	  "OGridTemplateAreas",
+	  "gridTemplateColumns",
+	  "MozGridTemplateColumns",
+	  "WebKitGridTemplateColumns",
+	  "MSGridTemplateColumns",
+	  "OGridTemplateColumns",
+	  "gridTemplateRows",
+	  "MozGridTemplateRows",
+	  "WebKitGridTemplateRows",
+	  "MSGridTemplateRows",
+	  "OGridTemplateRows",
+	  "height",
+	  "MozHeight",
+	  "WebKitHeight",
+	  "MSHeight",
+	  "OHeight",
+	  "hyphens",
+	  "MozHyphens",
+	  "WebKitHyphens",
+	  "MSHyphens",
+	  "OHyphens",
+	  "hz",
+	  "MozHz",
+	  "WebKitHz",
+	  "MSHz",
+	  "OHz",
+	  "imageOrientation",
+	  "MozImageOrientation",
+	  "WebKitImageOrientation",
+	  "MSImageOrientation",
+	  "OImageOrientation",
+	  "imageRendering",
+	  "MozImageRendering",
+	  "WebKitImageRendering",
+	  "MSImageRendering",
+	  "OImageRendering",
+	  "imageResolution",
+	  "MozImageResolution",
+	  "WebKitImageResolution",
+	  "MSImageResolution",
+	  "OImageResolution",
+	  "imeMode",
+	  "MozImeMode",
+	  "WebKitImeMode",
+	  "MSImeMode",
+	  "OImeMode",
+	  "in",
+	  "MozIn",
+	  "WebKitIn",
+	  "MSIn",
+	  "OIn",
+	  "inherit",
+	  "MozInherit",
+	  "WebKitInherit",
+	  "MSInherit",
+	  "OInherit",
+	  "initial",
+	  "MozInitial",
+	  "WebKitInitial",
+	  "MSInitial",
+	  "OInitial",
+	  "inlineSize",
+	  "MozInlineSize",
+	  "WebKitInlineSize",
+	  "MSInlineSize",
+	  "OInlineSize",
+	  "isolation",
+	  "MozIsolation",
+	  "WebKitIsolation",
+	  "MSIsolation",
+	  "OIsolation",
+	  "justifyContent",
+	  "MozJustifyContent",
+	  "WebKitJustifyContent",
+	  "MSJustifyContent",
+	  "OJustifyContent",
+	  "khz",
+	  "MozKhz",
+	  "WebKitKhz",
+	  "MSKhz",
+	  "OKhz",
+	  "left",
+	  "MozLeft",
+	  "WebKitLeft",
+	  "MSLeft",
+	  "OLeft",
+	  "letterSpacing",
+	  "MozLetterSpacing",
+	  "WebKitLetterSpacing",
+	  "MSLetterSpacing",
+	  "OLetterSpacing",
+	  "lineBreak",
+	  "MozLineBreak",
+	  "WebKitLineBreak",
+	  "MSLineBreak",
+	  "OLineBreak",
+	  "lineHeight",
+	  "MozLineHeight",
+	  "WebKitLineHeight",
+	  "MSLineHeight",
+	  "OLineHeight",
+	  "listStyle",
+	  "MozListStyle",
+	  "WebKitListStyle",
+	  "MSListStyle",
+	  "OListStyle",
+	  "listStyleImage",
+	  "MozListStyleImage",
+	  "WebKitListStyleImage",
+	  "MSListStyleImage",
+	  "OListStyleImage",
+	  "listStylePosition",
+	  "MozListStylePosition",
+	  "WebKitListStylePosition",
+	  "MSListStylePosition",
+	  "OListStylePosition",
+	  "listStyleType",
+	  "MozListStyleType",
+	  "WebKitListStyleType",
+	  "MSListStyleType",
+	  "OListStyleType",
+	  "margin",
+	  "MozMargin",
+	  "WebKitMargin",
+	  "MSMargin",
+	  "OMargin",
+	  "marginBlockEnd",
+	  "MozMarginBlockEnd",
+	  "WebKitMarginBlockEnd",
+	  "MSMarginBlockEnd",
+	  "OMarginBlockEnd",
+	  "marginBlockStart",
+	  "MozMarginBlockStart",
+	  "WebKitMarginBlockStart",
+	  "MSMarginBlockStart",
+	  "OMarginBlockStart",
+	  "marginBottom",
+	  "MozMarginBottom",
+	  "WebKitMarginBottom",
+	  "MSMarginBottom",
+	  "OMarginBottom",
+	  "marginInlineEnd",
+	  "MozMarginInlineEnd",
+	  "WebKitMarginInlineEnd",
+	  "MSMarginInlineEnd",
+	  "OMarginInlineEnd",
+	  "marginInlineStart",
+	  "MozMarginInlineStart",
+	  "WebKitMarginInlineStart",
+	  "MSMarginInlineStart",
+	  "OMarginInlineStart",
+	  "marginLeft",
+	  "MozMarginLeft",
+	  "WebKitMarginLeft",
+	  "MSMarginLeft",
+	  "OMarginLeft",
+	  "marginRight",
+	  "MozMarginRight",
+	  "WebKitMarginRight",
+	  "MSMarginRight",
+	  "OMarginRight",
+	  "marginTop",
+	  "MozMarginTop",
+	  "WebKitMarginTop",
+	  "MSMarginTop",
+	  "OMarginTop",
+	  "mask",
+	  "MozMask",
+	  "WebKitMask",
+	  "MSMask",
+	  "OMask",
+	  "maskClip",
+	  "MozMaskClip",
+	  "WebKitMaskClip",
+	  "MSMaskClip",
+	  "OMaskClip",
+	  "maskComposite",
+	  "MozMaskComposite",
+	  "WebKitMaskComposite",
+	  "MSMaskComposite",
+	  "OMaskComposite",
+	  "maskImage",
+	  "MozMaskImage",
+	  "WebKitMaskImage",
+	  "MSMaskImage",
+	  "OMaskImage",
+	  "maskMode",
+	  "MozMaskMode",
+	  "WebKitMaskMode",
+	  "MSMaskMode",
+	  "OMaskMode",
+	  "maskOrigin",
+	  "MozMaskOrigin",
+	  "WebKitMaskOrigin",
+	  "MSMaskOrigin",
+	  "OMaskOrigin",
+	  "maskPosition",
+	  "MozMaskPosition",
+	  "WebKitMaskPosition",
+	  "MSMaskPosition",
+	  "OMaskPosition",
+	  "maskRepeat",
+	  "MozMaskRepeat",
+	  "WebKitMaskRepeat",
+	  "MSMaskRepeat",
+	  "OMaskRepeat",
+	  "maskSize",
+	  "MozMaskSize",
+	  "WebKitMaskSize",
+	  "MSMaskSize",
+	  "OMaskSize",
+	  "maskType",
+	  "MozMaskType",
+	  "WebKitMaskType",
+	  "MSMaskType",
+	  "OMaskType",
+	  "maxBlockSize",
+	  "MozMaxBlockSize",
+	  "WebKitMaxBlockSize",
+	  "MSMaxBlockSize",
+	  "OMaxBlockSize",
+	  "maxHeight",
+	  "MozMaxHeight",
+	  "WebKitMaxHeight",
+	  "MSMaxHeight",
+	  "OMaxHeight",
+	  "maxInlineSize",
+	  "MozMaxInlineSize",
+	  "WebKitMaxInlineSize",
+	  "MSMaxInlineSize",
+	  "OMaxInlineSize",
+	  "maxWidth",
+	  "MozMaxWidth",
+	  "WebKitMaxWidth",
+	  "MSMaxWidth",
+	  "OMaxWidth",
+	  "minBlockSize",
+	  "MozMinBlockSize",
+	  "WebKitMinBlockSize",
+	  "MSMinBlockSize",
+	  "OMinBlockSize",
+	  "minHeight",
+	  "MozMinHeight",
+	  "WebKitMinHeight",
+	  "MSMinHeight",
+	  "OMinHeight",
+	  "minInlineSize",
+	  "MozMinInlineSize",
+	  "WebKitMinInlineSize",
+	  "MSMinInlineSize",
+	  "OMinInlineSize",
+	  "minWidth",
+	  "MozMinWidth",
+	  "WebKitMinWidth",
+	  "MSMinWidth",
+	  "OMinWidth",
+	  "mixBlendMode",
+	  "MozMixBlendMode",
+	  "WebKitMixBlendMode",
+	  "MSMixBlendMode",
+	  "OMixBlendMode",
+	  "mm",
+	  "MozMm",
+	  "WebKitMm",
+	  "MSMm",
+	  "OMm",
+	  "ms",
+	  "MozMs",
+	  "WebKitMs",
+	  "MSMs",
+	  "OMs",
+	  "objectFit",
+	  "MozObjectFit",
+	  "WebKitObjectFit",
+	  "MSObjectFit",
+	  "OObjectFit",
+	  "objectPosition",
+	  "MozObjectPosition",
+	  "WebKitObjectPosition",
+	  "MSObjectPosition",
+	  "OObjectPosition",
+	  "offsetBlockEnd",
+	  "MozOffsetBlockEnd",
+	  "WebKitOffsetBlockEnd",
+	  "MSOffsetBlockEnd",
+	  "OOffsetBlockEnd",
+	  "offsetBlockStart",
+	  "MozOffsetBlockStart",
+	  "WebKitOffsetBlockStart",
+	  "MSOffsetBlockStart",
+	  "OOffsetBlockStart",
+	  "offsetInlineEnd",
+	  "MozOffsetInlineEnd",
+	  "WebKitOffsetInlineEnd",
+	  "MSOffsetInlineEnd",
+	  "OOffsetInlineEnd",
+	  "offsetInlineStart",
+	  "MozOffsetInlineStart",
+	  "WebKitOffsetInlineStart",
+	  "MSOffsetInlineStart",
+	  "OOffsetInlineStart",
+	  "opacity",
+	  "MozOpacity",
+	  "WebKitOpacity",
+	  "MSOpacity",
+	  "OOpacity",
+	  "order",
+	  "MozOrder",
+	  "WebKitOrder",
+	  "MSOrder",
+	  "OOrder",
+	  "orphans",
+	  "MozOrphans",
+	  "WebKitOrphans",
+	  "MSOrphans",
+	  "OOrphans",
+	  "outline",
+	  "MozOutline",
+	  "WebKitOutline",
+	  "MSOutline",
+	  "OOutline",
+	  "outlineColor",
+	  "MozOutlineColor",
+	  "WebKitOutlineColor",
+	  "MSOutlineColor",
+	  "OOutlineColor",
+	  "outlineOffset",
+	  "MozOutlineOffset",
+	  "WebKitOutlineOffset",
+	  "MSOutlineOffset",
+	  "OOutlineOffset",
+	  "outlineStyle",
+	  "MozOutlineStyle",
+	  "WebKitOutlineStyle",
+	  "MSOutlineStyle",
+	  "OOutlineStyle",
+	  "outlineWidth",
+	  "MozOutlineWidth",
+	  "WebKitOutlineWidth",
+	  "MSOutlineWidth",
+	  "OOutlineWidth",
+	  "overflow",
+	  "MozOverflow",
+	  "WebKitOverflow",
+	  "MSOverflow",
+	  "OOverflow",
+	  "overflowWrap",
+	  "MozOverflowWrap",
+	  "WebKitOverflowWrap",
+	  "MSOverflowWrap",
+	  "OOverflowWrap",
+	  "overflowX",
+	  "MozOverflowX",
+	  "WebKitOverflowX",
+	  "MSOverflowX",
+	  "OOverflowX",
+	  "overflowY",
+	  "MozOverflowY",
+	  "WebKitOverflowY",
+	  "MSOverflowY",
+	  "OOverflowY",
+	  "padding",
+	  "MozPadding",
+	  "WebKitPadding",
+	  "MSPadding",
+	  "OPadding",
+	  "paddingBlockEnd",
+	  "MozPaddingBlockEnd",
+	  "WebKitPaddingBlockEnd",
+	  "MSPaddingBlockEnd",
+	  "OPaddingBlockEnd",
+	  "paddingBlockStart",
+	  "MozPaddingBlockStart",
+	  "WebKitPaddingBlockStart",
+	  "MSPaddingBlockStart",
+	  "OPaddingBlockStart",
+	  "paddingBottom",
+	  "MozPaddingBottom",
+	  "WebKitPaddingBottom",
+	  "MSPaddingBottom",
+	  "OPaddingBottom",
+	  "paddingInlineEnd",
+	  "MozPaddingInlineEnd",
+	  "WebKitPaddingInlineEnd",
+	  "MSPaddingInlineEnd",
+	  "OPaddingInlineEnd",
+	  "paddingInlineStart",
+	  "MozPaddingInlineStart",
+	  "WebKitPaddingInlineStart",
+	  "MSPaddingInlineStart",
+	  "OPaddingInlineStart",
+	  "paddingLeft",
+	  "MozPaddingLeft",
+	  "WebKitPaddingLeft",
+	  "MSPaddingLeft",
+	  "OPaddingLeft",
+	  "paddingRight",
+	  "MozPaddingRight",
+	  "WebKitPaddingRight",
+	  "MSPaddingRight",
+	  "OPaddingRight",
+	  "paddingTop",
+	  "MozPaddingTop",
+	  "WebKitPaddingTop",
+	  "MSPaddingTop",
+	  "OPaddingTop",
+	  "pageBreakAfter",
+	  "MozPageBreakAfter",
+	  "WebKitPageBreakAfter",
+	  "MSPageBreakAfter",
+	  "OPageBreakAfter",
+	  "pageBreakBefore",
+	  "MozPageBreakBefore",
+	  "WebKitPageBreakBefore",
+	  "MSPageBreakBefore",
+	  "OPageBreakBefore",
+	  "pageBreakInside",
+	  "MozPageBreakInside",
+	  "WebKitPageBreakInside",
+	  "MSPageBreakInside",
+	  "OPageBreakInside",
+	  "pc",
+	  "MozPc",
+	  "WebKitPc",
+	  "MSPc",
+	  "OPc",
+	  "perspective",
+	  "MozPerspective",
+	  "WebKitPerspective",
+	  "MSPerspective",
+	  "OPerspective",
+	  "perspectiveOrigin",
+	  "MozPerspectiveOrigin",
+	  "WebKitPerspectiveOrigin",
+	  "MSPerspectiveOrigin",
+	  "OPerspectiveOrigin",
+	  "pointerEvents",
+	  "MozPointerEvents",
+	  "WebKitPointerEvents",
+	  "MSPointerEvents",
+	  "OPointerEvents",
+	  "position",
+	  "MozPosition",
+	  "WebKitPosition",
+	  "MSPosition",
+	  "OPosition",
+	  "pt",
+	  "MozPt",
+	  "WebKitPt",
+	  "MSPt",
+	  "OPt",
+	  "px",
+	  "MozPx",
+	  "WebKitPx",
+	  "MSPx",
+	  "OPx",
+	  "q",
+	  "MozQ",
+	  "WebKitQ",
+	  "MSQ",
+	  "OQ",
+	  "quotes",
+	  "MozQuotes",
+	  "WebKitQuotes",
+	  "MSQuotes",
+	  "OQuotes",
+	  "rad",
+	  "MozRad",
+	  "WebKitRad",
+	  "MSRad",
+	  "ORad",
+	  "rem",
+	  "MozRem",
+	  "WebKitRem",
+	  "MSRem",
+	  "ORem",
+	  "resize",
+	  "MozResize",
+	  "WebKitResize",
+	  "MSResize",
+	  "OResize",
+	  "revert",
+	  "MozRevert",
+	  "WebKitRevert",
+	  "MSRevert",
+	  "ORevert",
+	  "right",
+	  "MozRight",
+	  "WebKitRight",
+	  "MSRight",
+	  "ORight",
+	  "rubyAlign",
+	  "MozRubyAlign",
+	  "WebKitRubyAlign",
+	  "MSRubyAlign",
+	  "ORubyAlign",
+	  "rubyMerge",
+	  "MozRubyMerge",
+	  "WebKitRubyMerge",
+	  "MSRubyMerge",
+	  "ORubyMerge",
+	  "rubyPosition",
+	  "MozRubyPosition",
+	  "WebKitRubyPosition",
+	  "MSRubyPosition",
+	  "ORubyPosition",
+	  "s",
+	  "MozS",
+	  "WebKitS",
+	  "MSS",
+	  "OS",
+	  "scrollBehavior",
+	  "MozScrollBehavior",
+	  "WebKitScrollBehavior",
+	  "MSScrollBehavior",
+	  "OScrollBehavior",
+	  "scrollSnapCoordinate",
+	  "MozScrollSnapCoordinate",
+	  "WebKitScrollSnapCoordinate",
+	  "MSScrollSnapCoordinate",
+	  "OScrollSnapCoordinate",
+	  "scrollSnapDestination",
+	  "MozScrollSnapDestination",
+	  "WebKitScrollSnapDestination",
+	  "MSScrollSnapDestination",
+	  "OScrollSnapDestination",
+	  "scrollSnapType",
+	  "MozScrollSnapType",
+	  "WebKitScrollSnapType",
+	  "MSScrollSnapType",
+	  "OScrollSnapType",
+	  "shapeImageThreshold",
+	  "MozShapeImageThreshold",
+	  "WebKitShapeImageThreshold",
+	  "MSShapeImageThreshold",
+	  "OShapeImageThreshold",
+	  "shapeMargin",
+	  "MozShapeMargin",
+	  "WebKitShapeMargin",
+	  "MSShapeMargin",
+	  "OShapeMargin",
+	  "shapeOutside",
+	  "MozShapeOutside",
+	  "WebKitShapeOutside",
+	  "MSShapeOutside",
+	  "OShapeOutside",
+	  "tabSize",
+	  "MozTabSize",
+	  "WebKitTabSize",
+	  "MSTabSize",
+	  "OTabSize",
+	  "tableLayout",
+	  "MozTableLayout",
+	  "WebKitTableLayout",
+	  "MSTableLayout",
+	  "OTableLayout",
+	  "textAlign",
+	  "MozTextAlign",
+	  "WebKitTextAlign",
+	  "MSTextAlign",
+	  "OTextAlign",
+	  "textAlignLast",
+	  "MozTextAlignLast",
+	  "WebKitTextAlignLast",
+	  "MSTextAlignLast",
+	  "OTextAlignLast",
+	  "textCombineUpright",
+	  "MozTextCombineUpright",
+	  "WebKitTextCombineUpright",
+	  "MSTextCombineUpright",
+	  "OTextCombineUpright",
+	  "textDecoration",
+	  "MozTextDecoration",
+	  "WebKitTextDecoration",
+	  "MSTextDecoration",
+	  "OTextDecoration",
+	  "textDecorationColor",
+	  "MozTextDecorationColor",
+	  "WebKitTextDecorationColor",
+	  "MSTextDecorationColor",
+	  "OTextDecorationColor",
+	  "textDecorationLine",
+	  "MozTextDecorationLine",
+	  "WebKitTextDecorationLine",
+	  "MSTextDecorationLine",
+	  "OTextDecorationLine",
+	  "textDecorationStyle",
+	  "MozTextDecorationStyle",
+	  "WebKitTextDecorationStyle",
+	  "MSTextDecorationStyle",
+	  "OTextDecorationStyle",
+	  "textEmphasis",
+	  "MozTextEmphasis",
+	  "WebKitTextEmphasis",
+	  "MSTextEmphasis",
+	  "OTextEmphasis",
+	  "textEmphasisColor",
+	  "MozTextEmphasisColor",
+	  "WebKitTextEmphasisColor",
+	  "MSTextEmphasisColor",
+	  "OTextEmphasisColor",
+	  "textEmphasisPosition",
+	  "MozTextEmphasisPosition",
+	  "WebKitTextEmphasisPosition",
+	  "MSTextEmphasisPosition",
+	  "OTextEmphasisPosition",
+	  "textEmphasisStyle",
+	  "MozTextEmphasisStyle",
+	  "WebKitTextEmphasisStyle",
+	  "MSTextEmphasisStyle",
+	  "OTextEmphasisStyle",
+	  "textIndent",
+	  "MozTextIndent",
+	  "WebKitTextIndent",
+	  "MSTextIndent",
+	  "OTextIndent",
+	  "textOrientation",
+	  "MozTextOrientation",
+	  "WebKitTextOrientation",
+	  "MSTextOrientation",
+	  "OTextOrientation",
+	  "textOverflow",
+	  "MozTextOverflow",
+	  "WebKitTextOverflow",
+	  "MSTextOverflow",
+	  "OTextOverflow",
+	  "textRendering",
+	  "MozTextRendering",
+	  "WebKitTextRendering",
+	  "MSTextRendering",
+	  "OTextRendering",
+	  "textShadow",
+	  "MozTextShadow",
+	  "WebKitTextShadow",
+	  "MSTextShadow",
+	  "OTextShadow",
+	  "textTransform",
+	  "MozTextTransform",
+	  "WebKitTextTransform",
+	  "MSTextTransform",
+	  "OTextTransform",
+	  "textUnderlinePosition",
+	  "MozTextUnderlinePosition",
+	  "WebKitTextUnderlinePosition",
+	  "MSTextUnderlinePosition",
+	  "OTextUnderlinePosition",
+	  "top",
+	  "MozTop",
+	  "WebKitTop",
+	  "MSTop",
+	  "OTop",
+	  "touchAction",
+	  "MozTouchAction",
+	  "WebKitTouchAction",
+	  "MSTouchAction",
+	  "OTouchAction",
+	  "transform",
+	  "MozTransform",
+	  "WebKitTransform",
+	  "MSTransform",
+	  "OTransform",
+	  "transformBox",
+	  "MozTransformBox",
+	  "WebKitTransformBox",
+	  "MSTransformBox",
+	  "OTransformBox",
+	  "transformOrigin",
+	  "MozTransformOrigin",
+	  "WebKitTransformOrigin",
+	  "MSTransformOrigin",
+	  "OTransformOrigin",
+	  "transformStyle",
+	  "MozTransformStyle",
+	  "WebKitTransformStyle",
+	  "MSTransformStyle",
+	  "OTransformStyle",
+	  "transition",
+	  "MozTransition",
+	  "WebKitTransition",
+	  "MSTransition",
+	  "OTransition",
+	  "transitionDelay",
+	  "MozTransitionDelay",
+	  "WebKitTransitionDelay",
+	  "MSTransitionDelay",
+	  "OTransitionDelay",
+	  "transitionDuration",
+	  "MozTransitionDuration",
+	  "WebKitTransitionDuration",
+	  "MSTransitionDuration",
+	  "OTransitionDuration",
+	  "transitionProperty",
+	  "MozTransitionProperty",
+	  "WebKitTransitionProperty",
+	  "MSTransitionProperty",
+	  "OTransitionProperty",
+	  "transitionTimingFunction",
+	  "MozTransitionTimingFunction",
+	  "WebKitTransitionTimingFunction",
+	  "MSTransitionTimingFunction",
+	  "OTransitionTimingFunction",
+	  "turn",
+	  "MozTurn",
+	  "WebKitTurn",
+	  "MSTurn",
+	  "OTurn",
+	  "unicodeBidi",
+	  "MozUnicodeBidi",
+	  "WebKitUnicodeBidi",
+	  "MSUnicodeBidi",
+	  "OUnicodeBidi",
+	  "unset",
+	  "MozUnset",
+	  "WebKitUnset",
+	  "MSUnset",
+	  "OUnset",
+	  "verticalAlign",
+	  "MozVerticalAlign",
+	  "WebKitVerticalAlign",
+	  "MSVerticalAlign",
+	  "OVerticalAlign",
+	  "vh",
+	  "MozVh",
+	  "WebKitVh",
+	  "MSVh",
+	  "OVh",
+	  "visibility",
+	  "MozVisibility",
+	  "WebKitVisibility",
+	  "MSVisibility",
+	  "OVisibility",
+	  "vmax",
+	  "MozVmax",
+	  "WebKitVmax",
+	  "MSVmax",
+	  "OVmax",
+	  "vmin",
+	  "MozVmin",
+	  "WebKitVmin",
+	  "MSVmin",
+	  "OVmin",
+	  "vw",
+	  "MozVw",
+	  "WebKitVw",
+	  "MSVw",
+	  "OVw",
+	  "whiteSpace",
+	  "MozWhiteSpace",
+	  "WebKitWhiteSpace",
+	  "MSWhiteSpace",
+	  "OWhiteSpace",
+	  "widows",
+	  "MozWidows",
+	  "WebKitWidows",
+	  "MSWidows",
+	  "OWidows",
+	  "width",
+	  "MozWidth",
+	  "WebKitWidth",
+	  "MSWidth",
+	  "OWidth",
+	  "willChange",
+	  "MozWillChange",
+	  "WebKitWillChange",
+	  "MSWillChange",
+	  "OWillChange",
+	  "wordBreak",
+	  "MozWordBreak",
+	  "WebKitWordBreak",
+	  "MSWordBreak",
+	  "OWordBreak",
+	  "wordSpacing",
+	  "MozWordSpacing",
+	  "WebKitWordSpacing",
+	  "MSWordSpacing",
+	  "OWordSpacing",
+	  "wordWrap",
+	  "MozWordWrap",
+	  "WebKitWordWrap",
+	  "MSWordWrap",
+	  "OWordWrap",
+	  "writingMode",
+	  "MozWritingMode",
+	  "WebKitWritingMode",
+	  "MSWritingMode",
+	  "OWritingMode",
+	  "zIndex",
+	  "MozZIndex",
+	  "WebKitZIndex",
+	  "MSZIndex",
+	  "OZIndex",
+	  "fontSize",
+	  "MozFontSize",
+	  "WebKitFontSize",
+	  "MSFontSize",
+	  "OFontSize"
+	]
+
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+	var svgToImage = __webpack_require__(212);
+	var xhr = __webpack_require__(188);
+
+	/**
+	 * @fileoverview
+	 * A component for rendering Scratch costume URLs to canvases.
+	 * Use for sprite library, costume library, sprite selector, etc.
+	 * Props include width, height, and direction (direction in Scratch value).
+	 */
+
+	var CostumeCanvas = function (_React$Component) {
+	    _inherits(CostumeCanvas, _React$Component);
+
+	    function CostumeCanvas() {
+	        _classCallCheck(this, CostumeCanvas);
+
+	        return _possibleConstructorReturn(this, (CostumeCanvas.__proto__ || Object.getPrototypeOf(CostumeCanvas)).apply(this, arguments));
+	    }
+
+	    _createClass(CostumeCanvas, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.load();
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps) {
+	            if (prevProps.url !== this.props.url) {
+	                this.load();
+	            } else if (prevProps.width !== this.props.width || prevProps.height !== this.props.height || prevProps.direction !== this.props.direction) {
+	                this.draw();
+	            }
+	        }
+	    }, {
+	        key: 'draw',
+	        value: function draw() {
+	            if (!this.canvas) {
+	                return;
+	            }
+
+	            // Draw the costume to the rendered canvas.
+	            var img = this.img;
+	            var context = this.canvas.getContext('2d');
+
+	            // Scale to fit.
+	            var scale = void 0;
+
+	            // Choose the larger dimension to scale by.
+	            if (img.width > img.height) {
+	                scale = this.canvas.width / img.width;
+	            } else {
+	                scale = this.canvas.height / img.height;
+	            }
+
+	            // Rotate by the Scratch-value direction.
+	            var angle = (-90 + this.props.direction) * Math.PI / 180;
+
+	            // Rotation origin point will be center of the canvas.
+	            var contextTranslateX = this.canvas.width / 2;
+	            var contextTranslateY = this.canvas.height / 2;
+
+	            // First, clear the canvas.
+	            context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+	            // Translate the context to the center of the canvas,
+	            // then rotate canvas drawing by `angle`.
+	            context.translate(contextTranslateX, contextTranslateY);
+	            context.rotate(angle);
+	            context.drawImage(img, 0, 0, img.width, img.height, -(scale * img.width / 2), -(scale * img.height / 2), scale * img.width, scale * img.height);
+
+	            // Reset the canvas rotation and translation to 0, (0, 0).
+	            context.rotate(-angle);
+	            context.translate(-contextTranslateX, -contextTranslateY);
+	        }
+	    }, {
+	        key: 'load',
+	        value: function load() {
+	            var _this2 = this;
+
+	            // Draw the icon on our canvas.
+	            var url = this.props.url;
+	            if (url.indexOf('.svg') > -1) {
+	                // Vector graphics: need to download with XDR and rasterize.
+	                // Queue request asynchronously.
+	                setTimeout(function () {
+	                    xhr.get({
+	                        useXDR: true,
+	                        url: url
+	                    }, function (err, response, body) {
+	                        if (!err) {
+	                            svgToImage(body, function (svgErr, img) {
+	                                if (!svgErr) {
+	                                    _this2.img = img;
+	                                    _this2.draw();
+	                                }
+	                            });
+	                        }
+	                    });
+	                }, 0);
+	            } else {
+	                (function () {
+	                    // Raster graphics: create Image and draw it.
+	                    var img = new Image();
+	                    img.src = url;
+	                    img.onload = function () {
+	                        _this2.img = img;
+	                        _this2.draw();
+	                    };
+	                })();
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement('canvas', {
+	                height: this.props.height,
+	                width: this.props.width,
+	                ref: this._getCanvas // eslint-disable-line react/jsx-sort-props
+	            });
+	        }
+	    }]);
+
+	    return CostumeCanvas;
+	}(React.Component);
+
+	CostumeCanvas.defaultProps = {
+	    width: 100,
+	    height: 100,
+	    direction: 90
+	};
+
+	CostumeCanvas.propTypes = {
+	    direction: React.PropTypes.number,
+	    height: React.PropTypes.number,
+	    url: React.PropTypes.string,
+	    width: React.PropTypes.number
+	};
+
+	module.exports = CostumeCanvas;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var loadImage = __webpack_require__(213)
+	var noop = function () {}
+
+	module.exports = svgToImage
+	function svgToImage (svg, opt, cb) {
+	  if (typeof opt === 'function') {
+	    cb = opt
+	    opt = {}
+	  }
+	  cb = cb || noop
+	  opt = opt || {}
+
+	  if (typeof window === 'undefined') {
+	    return bail('window global is undefined; not in a browser')
+	  }
+
+	  var DOMURL = getURL()
+	  if (!DOMURL ||
+	    typeof DOMURL.createObjectURL !== 'function' ||
+	    typeof DOMURL.revokeObjectURL !== 'function') {
+	    return bail('browser does not support URL.createObjectURL')
+	  }
+
+	  if (typeof window.Blob === 'undefined') {
+	    return bail('browser does not support Blob constructor')
+	  }
+
+	  if (!Array.isArray(svg)) {
+	    svg = [ svg ]
+	  }
+
+	  var blob
+	  try {
+	    blob = new window.Blob(svg, {
+	      type: 'image/svg+xml;charset=utf-8'
+	    })
+	  } catch (e) {
+	    return bail(e)
+	  }
+
+	  var url = DOMURL.createObjectURL(blob)
+	  loadImage(url, opt, function (err, img) {
+	    DOMURL.revokeObjectURL(url)
+	    if (err) {
+	      // try again for Safari 8.0, using simple encodeURIComponent
+	      // this will fail with DOM content but at least it works with SVG
+	      var url2 = 'data:image/svg+xml,' + encodeURIComponent(svg.join(''))
+	      return loadImage(url2, opt, cb)
+	    }
+
+	    cb(err, img)
+	  })
+
+	  function bail (msg) {
+	    process.nextTick(function () {
+	      cb(new Error(msg))
+	    })
+	  }
+	}
+
+	function getURL () {
+	  return window.URL ||
+	  window.webkitURL ||
+	  window.mozURL ||
+	  window.msURL
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
+	module.exports = loadImage;
+	function loadImage (src, opt, callback) {
+	  if (typeof opt === 'function') {
+	    callback = opt;
+	    opt = null;
+	  }
+
+	  var el = document.createElement('img');
+	  var locked;
+
+	  el.onload = function onLoaded () {
+	    if (locked) return;
+	    locked = true;
+
+	    if (callback) callback(undefined, el);
+	  };
+
+	  el.onerror = function onError () {
+	    if (locked) return;
+	    locked = true;
+
+	    if (callback) callback(new Error('Unable to load "' + src + '"'), el);
+	  };
+
+	  if (opt && opt.crossOrigin) {
+	    el.crossOrigin = opt.crossOrigin;
+	  }
+
+	  el.src = src;
+
+	  return el;
+	}
+
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+	var ReactModal = __webpack_require__(215);
+	var stylePropType = __webpack_require__(209);
+
+	var ModalComponent = function (_React$Component) {
+	    _inherits(ModalComponent, _React$Component);
+
+	    function ModalComponent() {
+	        _classCallCheck(this, ModalComponent);
+
+	        return _possibleConstructorReturn(this, (ModalComponent.__proto__ || Object.getPrototypeOf(ModalComponent)).apply(this, arguments));
+	    }
+
+	    _createClass(ModalComponent, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            return React.createElement(
+	                ReactModal,
+	                {
+	                    isOpen: this.props.visible,
+	                    ref: function ref(m) {
+	                        return _this2.modal = m;
+	                    },
+	                    style: this.props.modalStyle,
+	                    onRequestClose: this.props.onRequestClose
+	                },
+	                React.createElement(
+	                    'div',
+	                    {
+	                        style: this.props.closeButtonStyle,
+	                        onClick: this.props.onRequestClose
+	                    },
+	                    'x'
+	                ),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return ModalComponent;
+	}(React.Component);
+
+	var modalStyle = {
+	    overlay: {
+	        zIndex: 1000,
+	        backgroundColor: 'rgba(0, 0, 0, .75)'
+	    },
+	    content: {
+	        position: 'absolute',
+	        overflow: 'visible',
+	        borderRadius: '6px',
+	        padding: 0,
+	        top: '5%',
+	        bottom: '5%',
+	        left: '5%',
+	        right: '5%',
+	        background: '#fcfcfc'
+	    }
+	};
+
+	var closeButtonStyle = {
+	    color: 'rgb(255, 255, 255)',
+	    background: 'rgb(50, 50, 50)',
+	    borderRadius: '15px',
+	    width: '30px',
+	    height: '25px',
+	    textAlign: 'center',
+	    paddingTop: '5px',
+	    position: 'absolute',
+	    right: '3px',
+	    top: '3px',
+	    cursor: 'pointer'
+	};
+
+	ModalComponent.defaultProps = {
+	    modalStyle: modalStyle,
+	    closeButtonStyle: closeButtonStyle
+	};
+
+	ModalComponent.propTypes = {
+	    children: React.PropTypes.node,
+	    closeButtonStyle: stylePropType,
+	    modalStyle: stylePropType,
+	    onRequestClose: React.PropTypes.func,
+	    visible: React.PropTypes.bool
+	};
+
+	module.exports = ModalComponent;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(216);
+
+
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(34);
+	var ExecutionEnvironment = __webpack_require__(217);
+	var ModalPortal = React.createFactory(__webpack_require__(218));
+	var ariaAppHider = __webpack_require__(233);
+	var elementClass = __webpack_require__(234);
+	var renderSubtreeIntoContainer = __webpack_require__(34).unstable_renderSubtreeIntoContainer;
+	var Assign = __webpack_require__(222);
+
+	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
+	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
+
+	var Modal = React.createClass({
+
+	  displayName: 'Modal',
+	  statics: {
+	    setAppElement: function(element) {
+	        AppElement = ariaAppHider.setElement(element);
+	    },
+	    injectCSS: function() {
+	      "production" !== process.env.NODE_ENV
+	        && console.warn('React-Modal: injectCSS has been deprecated ' +
+	                        'and no longer has any effect. It will be removed in a later version');
+	    }
+	  },
+
+	  propTypes: {
+	    isOpen: React.PropTypes.bool.isRequired,
+	    style: React.PropTypes.shape({
+	      content: React.PropTypes.object,
+	      overlay: React.PropTypes.object
+	    }),
+	    portalClassName: React.PropTypes.string,
+	    appElement: React.PropTypes.instanceOf(SafeHTMLElement),
+	    onAfterOpen: React.PropTypes.func,
+	    onRequestClose: React.PropTypes.func,
+	    closeTimeoutMS: React.PropTypes.number,
+	    ariaHideApp: React.PropTypes.bool,
+	    shouldCloseOnOverlayClick: React.PropTypes.bool,
+	    role: React.PropTypes.string
+	  },
+
+	  getDefaultProps: function () {
+	    return {
+	      isOpen: false,
+	      portalClassName: 'ReactModalPortal',
+	      ariaHideApp: true,
+	      closeTimeoutMS: 0,
+	      shouldCloseOnOverlayClick: true
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.node = document.createElement('div');
+	    this.node.className = this.props.portalClassName;
+	    document.body.appendChild(this.node);
+	    this.renderPortal(this.props);
+	  },
+
+	  componentWillReceiveProps: function(newProps) {
+	    this.renderPortal(newProps);
+	  },
+
+	  componentWillUnmount: function() {
+	    ReactDOM.unmountComponentAtNode(this.node);
+	    document.body.removeChild(this.node);
+	    elementClass(document.body).remove('ReactModal__Body--open');
+	  },
+
+	  renderPortal: function(props) {
+	    if (props.isOpen) {
+	      elementClass(document.body).add('ReactModal__Body--open');
+	    } else {
+	      elementClass(document.body).remove('ReactModal__Body--open');
+	    }
+
+	    if (props.ariaHideApp) {
+	      ariaAppHider.toggle(props.isOpen, props.appElement);
+	    }
+
+	    this.portal = renderSubtreeIntoContainer(this, ModalPortal(Assign({}, props, {defaultStyles: Modal.defaultStyles})), this.node);
+	  },
+
+	  render: function () {
+	    return React.DOM.noscript();
+	  }
+	});
+
+	Modal.defaultStyles = {
+	  overlay: {
+	    position        : 'fixed',
+	    top             : 0,
+	    left            : 0,
+	    right           : 0,
+	    bottom          : 0,
+	    backgroundColor : 'rgba(255, 255, 255, 0.75)'
+	  },
+	  content: {
+	    position                : 'absolute',
+	    top                     : '40px',
+	    left                    : '40px',
+	    right                   : '40px',
+	    bottom                  : '40px',
+	    border                  : '1px solid #ccc',
+	    background              : '#fff',
+	    overflow                : 'auto',
+	    WebkitOverflowScrolling : 'touch',
+	    borderRadius            : '4px',
+	    outline                 : 'none',
+	    padding                 : '20px'
+	  }
+	}
+
+	module.exports = Modal
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Based on code that is Copyright 2013-2015, Facebook, Inc.
+	  All rights reserved.
+	*/
+
+	(function () {
+		'use strict';
+
+		var canUseDOM = !!(
+			typeof window !== 'undefined' &&
+			window.document &&
+			window.document.createElement
+		);
+
+		var ExecutionEnvironment = {
+
+			canUseDOM: canUseDOM,
+
+			canUseWorkers: typeof Worker !== 'undefined',
+
+			canUseEventListeners:
+				canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+			canUseViewport: canUseDOM && !!window.screen
+
+		};
+
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return ExecutionEnvironment;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			module.exports = ExecutionEnvironment;
+		} else {
+			window.ExecutionEnvironment = ExecutionEnvironment;
+		}
+
+	}());
+
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var div = React.DOM.div;
+	var focusManager = __webpack_require__(219);
+	var scopeTab = __webpack_require__(221);
+	var Assign = __webpack_require__(222);
+
+	// so that our CSS is statically analyzable
+	var CLASS_NAMES = {
+	  overlay: {
+	    base: 'ReactModal__Overlay',
+	    afterOpen: 'ReactModal__Overlay--after-open',
+	    beforeClose: 'ReactModal__Overlay--before-close'
+	  },
+	  content: {
+	    base: 'ReactModal__Content',
+	    afterOpen: 'ReactModal__Content--after-open',
+	    beforeClose: 'ReactModal__Content--before-close'
+	  }
+	};
+
+	var ModalPortal = module.exports = React.createClass({
+
+	  displayName: 'ModalPortal',
+	  shouldClose: null,
+
+	  getDefaultProps: function() {
+	    return {
+	      style: {
+	        overlay: {},
+	        content: {}
+	      }
+	    };
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      afterOpen: false,
+	      beforeClose: false
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    // Focus needs to be set when mounting and already open
+	    if (this.props.isOpen) {
+	      this.setFocusAfterRender(true);
+	      this.open();
+	    }
+	  },
+
+	  componentWillUnmount: function() {
+	    clearTimeout(this.closeTimer);
+	  },
+
+	  componentWillReceiveProps: function(newProps) {
+	    // Focus only needs to be set once when the modal is being opened
+	    if (!this.props.isOpen && newProps.isOpen) {
+	      this.setFocusAfterRender(true);
+	      this.open();
+	    } else if (this.props.isOpen && !newProps.isOpen) {
+	      this.close();
+	    }
+	  },
+
+	  componentDidUpdate: function () {
+	    if (this.focusAfterRender) {
+	      this.focusContent();
+	      this.setFocusAfterRender(false);
+	    }
+	  },
+
+	  setFocusAfterRender: function (focus) {
+	    this.focusAfterRender = focus;
+	  },
+
+	  open: function() {
+	    if (this.state.afterOpen && this.state.beforeClose) {
+	      clearTimeout(this.closeTimer);
+	      this.setState({ beforeClose: false });
+	    } else {
+	      focusManager.setupScopedFocus(this.node);
+	      focusManager.markForFocusLater();
+	      this.setState({isOpen: true}, function() {
+	        this.setState({afterOpen: true});
+
+	        if (this.props.isOpen && this.props.onAfterOpen) {
+	          this.props.onAfterOpen();
+	        }
+	      }.bind(this));
+	    }
+	  },
+
+	  close: function() {
+	    if (!this.ownerHandlesClose())
+	      return;
+	    if (this.props.closeTimeoutMS > 0)
+	      this.closeWithTimeout();
+	    else
+	      this.closeWithoutTimeout();
+	  },
+
+	  focusContent: function() {
+	    // Don't steal focus from inner elements
+	    if (!this.contentHasFocus()) {
+	      this.refs.content.focus();
+	    }
+	  },
+
+	  closeWithTimeout: function() {
+	    this.setState({beforeClose: true}, function() {
+	      this.closeTimer = setTimeout(this.closeWithoutTimeout, this.props.closeTimeoutMS);
+	    }.bind(this));
+	  },
+
+	  closeWithoutTimeout: function() {
+	    this.setState({
+	      beforeClose: false,
+	      isOpen: false,
+	      afterOpen: false,
+	    }, this.afterClose);
+	  },
+
+	  afterClose: function() {
+	    focusManager.returnFocus();
+	    focusManager.teardownScopedFocus();
+	  },
+
+	  handleKeyDown: function(event) {
+	    if (event.keyCode == 9 /*tab*/) scopeTab(this.refs.content, event);
+	    if (event.keyCode == 27 /*esc*/) {
+	      event.preventDefault();
+	      this.requestClose(event);
+	    }
+	  },
+
+	  handleOverlayMouseDown: function(event) {
+	    if (this.shouldClose === null) {
+	      this.shouldClose = true;
+	    }
+	  },
+
+	  handleOverlayMouseUp: function(event) {
+	    if (this.shouldClose && this.props.shouldCloseOnOverlayClick) {
+	      if (this.ownerHandlesClose())
+	        this.requestClose(event);
+	      else
+	        this.focusContent();
+	    }
+	    this.shouldClose = null;
+	  },
+
+	  handleContentMouseDown: function(event) {
+	    this.shouldClose = false;
+	  },
+
+	  handleContentMouseUp: function(event) {
+	    this.shouldClose = false;
+	  },
+
+	  requestClose: function(event) {
+	    if (this.ownerHandlesClose())
+	      this.props.onRequestClose(event);
+	  },
+
+	  ownerHandlesClose: function() {
+	    return this.props.onRequestClose;
+	  },
+
+	  shouldBeClosed: function() {
+	    return !this.props.isOpen && !this.state.beforeClose;
+	  },
+
+	  contentHasFocus: function() {
+	    return document.activeElement === this.refs.content || this.refs.content.contains(document.activeElement);
+	  },
+
+	  buildClassName: function(which, additional) {
+	    var className = CLASS_NAMES[which].base;
+	    if (this.state.afterOpen)
+	      className += ' '+CLASS_NAMES[which].afterOpen;
+	    if (this.state.beforeClose)
+	      className += ' '+CLASS_NAMES[which].beforeClose;
+	    return additional ? className + ' ' + additional : className;
+	  },
+
+	  render: function() {
+	    var contentStyles = (this.props.className) ? {} : this.props.defaultStyles.content;
+	    var overlayStyles = (this.props.overlayClassName) ? {} : this.props.defaultStyles.overlay;
+
+	    return this.shouldBeClosed() ? div() : (
+	      div({
+	        ref: "overlay",
+	        className: this.buildClassName('overlay', this.props.overlayClassName),
+	        style: Assign({}, overlayStyles, this.props.style.overlay || {}),
+	        onMouseDown: this.handleOverlayMouseDown,
+	        onMouseUp: this.handleOverlayMouseUp
+	      },
+	        div({
+	          ref: "content",
+	          style: Assign({}, contentStyles, this.props.style.content || {}),
+	          className: this.buildClassName('content', this.props.className),
+	          tabIndex: "-1",
+	          onKeyDown: this.handleKeyDown,
+	          onMouseDown: this.handleContentMouseDown,
+	          onMouseUp: this.handleContentMouseUp,
+	          role: this.props.role
+	        },
+	          this.props.children
+	        )
+	      )
+	    );
+	  }
+	});
+
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var findTabbable = __webpack_require__(220);
+	var modalElement = null;
+	var focusLaterElement = null;
+	var needToFocus = false;
+
+	function handleBlur(event) {
+	  needToFocus = true;
+	}
+
+	function handleFocus(event) {
+	  if (needToFocus) {
+	    needToFocus = false;
+	    if (!modalElement) {
+	      return;
+	    }
+	    // need to see how jQuery shims document.on('focusin') so we don't need the
+	    // setTimeout, firefox doesn't support focusin, if it did, we could focus
+	    // the element outside of a setTimeout. Side-effect of this implementation 
+	    // is that the document.body gets focus, and then we focus our element right 
+	    // after, seems fine.
+	    setTimeout(function() {
+	      if (modalElement.contains(document.activeElement))
+	        return;
+	      var el = (findTabbable(modalElement)[0] || modalElement);
+	      el.focus();
+	    }, 0);
+	  }
+	}
+
+	exports.markForFocusLater = function() {
+	  focusLaterElement = document.activeElement;
+	};
+
+	exports.returnFocus = function() {
+	  try {
+	    focusLaterElement.focus();
+	  }
+	  catch (e) {
+	    console.warn('You tried to return focus to '+focusLaterElement+' but it is not in the DOM anymore');
+	  }
+	  focusLaterElement = null;
+	};
+
+	exports.setupScopedFocus = function(element) {
+	  modalElement = element;
+
+	  if (window.addEventListener) {
+	    window.addEventListener('blur', handleBlur, false);
+	    document.addEventListener('focus', handleFocus, true);
+	  } else {
+	    window.attachEvent('onBlur', handleBlur);
+	    document.attachEvent('onFocus', handleFocus);
+	  }
+	};
+
+	exports.teardownScopedFocus = function() {
+	  modalElement = null;
+
+	  if (window.addEventListener) {
+	    window.removeEventListener('blur', handleBlur);
+	    document.removeEventListener('focus', handleFocus);
+	  } else {
+	    window.detachEvent('onBlur', handleBlur);
+	    document.detachEvent('onFocus', handleFocus);
+	  }
+	};
+
+
+
+
+/***/ },
+/* 220 */
+/***/ function(module, exports) {
+
+	/*!
+	 * Adapted from jQuery UI core
+	 *
+	 * http://jqueryui.com
+	 *
+	 * Copyright 2014 jQuery Foundation and other contributors
+	 * Released under the MIT license.
+	 * http://jquery.org/license
+	 *
+	 * http://api.jqueryui.com/category/ui-core/
+	 */
+
+	function focusable(element, isTabIndexNotNaN) {
+	  var nodeName = element.nodeName.toLowerCase();
+	  return (/input|select|textarea|button|object/.test(nodeName) ?
+	    !element.disabled :
+	    "a" === nodeName ?
+	      element.href || isTabIndexNotNaN :
+	      isTabIndexNotNaN) && visible(element);
+	}
+
+	function hidden(el) {
+	  return (el.offsetWidth <= 0 && el.offsetHeight <= 0) ||
+	    el.style.display === 'none';
+	}
+
+	function visible(element) {
+	  while (element) {
+	    if (element === document.body) break;
+	    if (hidden(element)) return false;
+	    element = element.parentNode;
+	  }
+	  return true;
+	}
+
+	function tabbable(element) {
+	  var tabIndex = element.getAttribute('tabindex');
+	  if (tabIndex === null) tabIndex = undefined;
+	  var isTabIndexNaN = isNaN(tabIndex);
+	  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
+	}
+
+	function findTabbableDescendants(element) {
+	  return [].slice.call(element.querySelectorAll('*'), 0).filter(function(el) {
+	    return tabbable(el);
+	  });
+	}
+
+	module.exports = findTabbableDescendants;
+
+
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var findTabbable = __webpack_require__(220);
+
+	module.exports = function(node, event) {
+	  var tabbable = findTabbable(node);
+	  if (!tabbable.length) {
+	      event.preventDefault();
+	      return;
+	  }
+	  var finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1];
+	  var leavingFinalTabbable = (
+	    finalTabbable === document.activeElement ||
+	    // handle immediate shift+tab after opening with mouse
+	    node === document.activeElement
+	  );
+	  if (!leavingFinalTabbable) return;
+	  event.preventDefault();
+	  var target = tabbable[event.shiftKey ? tabbable.length - 1 : 0];
+	  target.focus();
+	};
+
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.2.0 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var baseAssign = __webpack_require__(223),
+	    createAssigner = __webpack_require__(229),
+	    keys = __webpack_require__(225);
+
+	/**
+	 * A specialized version of `_.assign` for customizing assigned values without
+	 * support for argument juggling, multiple sources, and `this` binding `customizer`
+	 * functions.
+	 *
+	 * @private
+	 * @param {Object} object The destination object.
+	 * @param {Object} source The source object.
+	 * @param {Function} customizer The function to customize assigned values.
+	 * @returns {Object} Returns `object`.
+	 */
+	function assignWith(object, source, customizer) {
+	  var index = -1,
+	      props = keys(source),
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index],
+	        value = object[key],
+	        result = customizer(value, source[key], key, object, source);
+
+	    if ((result === result ? (result !== value) : (value === value)) ||
+	        (value === undefined && !(key in object))) {
+	      object[key] = result;
+	    }
+	  }
+	  return object;
+	}
+
+	/**
+	 * Assigns own enumerable properties of source object(s) to the destination
+	 * object. Subsequent sources overwrite property assignments of previous sources.
+	 * If `customizer` is provided it is invoked to produce the assigned values.
+	 * The `customizer` is bound to `thisArg` and invoked with five arguments:
+	 * (objectValue, sourceValue, key, object, source).
+	 *
+	 * **Note:** This method mutates `object` and is based on
+	 * [`Object.assign`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @alias extend
+	 * @category Object
+	 * @param {Object} object The destination object.
+	 * @param {...Object} [sources] The source objects.
+	 * @param {Function} [customizer] The function to customize assigned values.
+	 * @param {*} [thisArg] The `this` binding of `customizer`.
+	 * @returns {Object} Returns `object`.
+	 * @example
+	 *
+	 * _.assign({ 'user': 'barney' }, { 'age': 40 }, { 'user': 'fred' });
+	 * // => { 'user': 'fred', 'age': 40 }
+	 *
+	 * // using a customizer callback
+	 * var defaults = _.partialRight(_.assign, function(value, other) {
+	 *   return _.isUndefined(value) ? other : value;
+	 * });
+	 *
+	 * defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
+	 * // => { 'user': 'barney', 'age': 36 }
+	 */
+	var assign = createAssigner(function(object, source, customizer) {
+	  return customizer
+	    ? assignWith(object, source, customizer)
+	    : baseAssign(object, source);
+	});
+
+	module.exports = assign;
+
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.2.0 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var baseCopy = __webpack_require__(224),
+	    keys = __webpack_require__(225);
+
+	/**
+	 * The base implementation of `_.assign` without support for argument juggling,
+	 * multiple sources, and `customizer` functions.
+	 *
+	 * @private
+	 * @param {Object} object The destination object.
+	 * @param {Object} source The source object.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseAssign(object, source) {
+	  return source == null
+	    ? object
+	    : baseCopy(source, keys(source), object);
+	}
+
+	module.exports = baseAssign;
+
+
+/***/ },
+/* 224 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/**
+	 * Copies properties of `source` to `object`.
+	 *
+	 * @private
+	 * @param {Object} source The object to copy properties from.
+	 * @param {Array} props The property names to copy.
+	 * @param {Object} [object={}] The object to copy properties to.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseCopy(source, props, object) {
+	  object || (object = {});
+
+	  var index = -1,
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index];
+	    object[key] = source[key];
+	  }
+	  return object;
+	}
+
+	module.exports = baseCopy;
+
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.1.2 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var getNative = __webpack_require__(226),
+	    isArguments = __webpack_require__(227),
+	    isArray = __webpack_require__(228);
+
+	/** Used to detect unsigned integer values. */
+	var reIsUint = /^\d+$/;
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeKeys = getNative(Object, 'keys');
+
+	/**
+	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/**
+	 * The base implementation of `_.property` without support for deep paths.
+	 *
+	 * @private
+	 * @param {string} key The key of the property to get.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseProperty(key) {
+	  return function(object) {
+	    return object == null ? undefined : object[key];
+	  };
+	}
+
+	/**
+	 * Gets the "length" property value of `object`.
+	 *
+	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
+	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {*} Returns the "length" value.
+	 */
+	var getLength = baseProperty('length');
+
+	/**
+	 * Checks if `value` is array-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+	 */
+	function isArrayLike(value) {
+	  return value != null && isLength(getLength(value));
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return value > -1 && value % 1 == 0 && value < length;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * A fallback implementation of `Object.keys` which creates an array of the
+	 * own enumerable property names of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function shimKeys(object) {
+	  var props = keysIn(object),
+	      propsLength = props.length,
+	      length = propsLength && object.length;
+
+	  var allowIndexes = !!length && isLength(length) &&
+	    (isArray(object) || isArguments(object));
+
+	  var index = -1,
+	      result = [];
+
+	  while (++index < propsLength) {
+	    var key = props[index];
+	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	/**
+	 * Creates an array of the own enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects. See the
+	 * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
+	 * for more details.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keys(new Foo);
+	 * // => ['a', 'b'] (iteration order is not guaranteed)
+	 *
+	 * _.keys('hi');
+	 * // => ['0', '1']
+	 */
+	var keys = !nativeKeys ? shimKeys : function(object) {
+	  var Ctor = object == null ? undefined : object.constructor;
+	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
+	      (typeof object != 'function' && isArrayLike(object))) {
+	    return shimKeys(object);
+	  }
+	  return isObject(object) ? nativeKeys(object) : [];
+	};
+
+	/**
+	 * Creates an array of the own and inherited enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keysIn(new Foo);
+	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+	 */
+	function keysIn(object) {
+	  if (object == null) {
+	    return [];
+	  }
+	  if (!isObject(object)) {
+	    object = Object(object);
+	  }
+	  var length = object.length;
+	  length = (length && isLength(length) &&
+	    (isArray(object) || isArguments(object)) && length) || 0;
+
+	  var Ctor = object.constructor,
+	      index = -1,
+	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+	      result = Array(length),
+	      skipIndexes = length > 0;
+
+	  while (++index < length) {
+	    result[index] = (index + '');
+	  }
+	  for (var key in object) {
+	    if (!(skipIndexes && isIndex(key, length)) &&
+	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = keys;
+
+
+/***/ },
+/* 226 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.9.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = object == null ? undefined : object[key];
+	  return isNative(value) ? value : undefined;
+	}
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in older versions of Chrome and Safari which return 'function' for regexes
+	  // and Safari 8 equivalents which return 'object' for typed array constructors.
+	  return isObject(value) && objToString.call(value) == funcTag;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (isFunction(value)) {
+	    return reIsNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reIsHostCtor.test(value);
+	}
+
+	module.exports = getNative;
+
+
+/***/ },
+/* 227 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modularize exports="npm" -o ./`
+	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+	 * Released under MIT license <https://lodash.com/license>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 */
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    funcTag = '[object Function]',
+	    genTag = '[object GeneratorFunction]';
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+
+	/** Built-in value references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+	/**
+	 * Checks if `value` is likely an `arguments` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isArguments(function() { return arguments; }());
+	 * // => true
+	 *
+	 * _.isArguments([1, 2, 3]);
+	 * // => false
+	 */
+	function isArguments(value) {
+	  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+	  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+	    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
+	}
+
+	/**
+	 * Checks if `value` is array-like. A value is considered array-like if it's
+	 * not a function and has a `value.length` that's an integer greater than or
+	 * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+	 * @example
+	 *
+	 * _.isArrayLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArrayLike(document.body.children);
+	 * // => true
+	 *
+	 * _.isArrayLike('abc');
+	 * // => true
+	 *
+	 * _.isArrayLike(_.noop);
+	 * // => false
+	 */
+	function isArrayLike(value) {
+	  return value != null && isLength(value.length) && !isFunction(value);
+	}
+
+	/**
+	 * This method is like `_.isArrayLike` except that it also checks if `value`
+	 * is an object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an array-like object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isArrayLikeObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArrayLikeObject(document.body.children);
+	 * // => true
+	 *
+	 * _.isArrayLikeObject('abc');
+	 * // => false
+	 *
+	 * _.isArrayLikeObject(_.noop);
+	 * // => false
+	 */
+	function isArrayLikeObject(value) {
+	  return isObjectLike(value) && isArrayLike(value);
+	}
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+	  var tag = isObject(value) ? objectToString.call(value) : '';
+	  return tag == funcTag || tag == genTag;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This method is loosely based on
+	 * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 * @example
+	 *
+	 * _.isLength(3);
+	 * // => true
+	 *
+	 * _.isLength(Number.MIN_VALUE);
+	 * // => false
+	 *
+	 * _.isLength(Infinity);
+	 * // => false
+	 *
+	 * _.isLength('3');
+	 * // => false
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' &&
+	    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is the
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(_.noop);
+	 * // => true
+	 *
+	 * _.isObject(null);
+	 * // => false
+	 */
+	function isObject(value) {
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	module.exports = isArguments;
+
+
+/***/ },
+/* 228 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.0.4 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var arrayTag = '[object Array]',
+	    funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeIsArray = getNative(Array, 'isArray');
+
+	/**
+	 * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = object == null ? undefined : object[key];
+	  return isNative(value) ? value : undefined;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(function() { return arguments; }());
+	 * // => false
+	 */
+	var isArray = nativeIsArray || function(value) {
+	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
+	};
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in older versions of Chrome and Safari which return 'function' for regexes
+	  // and Safari 8 equivalents which return 'object' for typed array constructors.
+	  return isObject(value) && objToString.call(value) == funcTag;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (isFunction(value)) {
+	    return reIsNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reIsHostCtor.test(value);
+	}
+
+	module.exports = isArray;
+
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.1.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var bindCallback = __webpack_require__(230),
+	    isIterateeCall = __webpack_require__(231),
+	    restParam = __webpack_require__(232);
+
+	/**
+	 * Creates a function that assigns properties of source object(s) to a given
+	 * destination object.
+	 *
+	 * **Note:** This function is used to create `_.assign`, `_.defaults`, and `_.merge`.
+	 *
+	 * @private
+	 * @param {Function} assigner The function to assign values.
+	 * @returns {Function} Returns the new assigner function.
+	 */
+	function createAssigner(assigner) {
+	  return restParam(function(object, sources) {
+	    var index = -1,
+	        length = object == null ? 0 : sources.length,
+	        customizer = length > 2 ? sources[length - 2] : undefined,
+	        guard = length > 2 ? sources[2] : undefined,
+	        thisArg = length > 1 ? sources[length - 1] : undefined;
+
+	    if (typeof customizer == 'function') {
+	      customizer = bindCallback(customizer, thisArg, 5);
+	      length -= 2;
+	    } else {
+	      customizer = typeof thisArg == 'function' ? thisArg : undefined;
+	      length -= (customizer ? 1 : 0);
+	    }
+	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+	      customizer = length < 3 ? undefined : customizer;
+	      length = 1;
+	    }
+	    while (++index < length) {
+	      var source = sources[index];
+	      if (source) {
+	        assigner(object, source, customizer);
+	      }
+	    }
+	    return object;
+	  });
+	}
+
+	module.exports = createAssigner;
+
+
+/***/ },
+/* 230 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/**
+	 * A specialized version of `baseCallback` which only supports `this` binding
+	 * and specifying the number of arguments to provide to `func`.
+	 *
+	 * @private
+	 * @param {Function} func The function to bind.
+	 * @param {*} thisArg The `this` binding of `func`.
+	 * @param {number} [argCount] The number of arguments to provide to `func`.
+	 * @returns {Function} Returns the callback.
+	 */
+	function bindCallback(func, thisArg, argCount) {
+	  if (typeof func != 'function') {
+	    return identity;
+	  }
+	  if (thisArg === undefined) {
+	    return func;
+	  }
+	  switch (argCount) {
+	    case 1: return function(value) {
+	      return func.call(thisArg, value);
+	    };
+	    case 3: return function(value, index, collection) {
+	      return func.call(thisArg, value, index, collection);
+	    };
+	    case 4: return function(accumulator, value, index, collection) {
+	      return func.call(thisArg, accumulator, value, index, collection);
+	    };
+	    case 5: return function(value, other, key, object, source) {
+	      return func.call(thisArg, value, other, key, object, source);
+	    };
+	  }
+	  return function() {
+	    return func.apply(thisArg, arguments);
+	  };
+	}
+
+	/**
+	 * This method returns the first argument provided to it.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 *
+	 * _.identity(object) === object;
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = bindCallback;
+
+
+/***/ },
+/* 231 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.0.9 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** Used to detect unsigned integer values. */
+	var reIsUint = /^\d+$/;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+
+	/**
+	 * The base implementation of `_.property` without support for deep paths.
+	 *
+	 * @private
+	 * @param {string} key The key of the property to get.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseProperty(key) {
+	  return function(object) {
+	    return object == null ? undefined : object[key];
+	  };
+	}
+
+	/**
+	 * Gets the "length" property value of `object`.
+	 *
+	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
+	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {*} Returns the "length" value.
+	 */
+	var getLength = baseProperty('length');
+
+	/**
+	 * Checks if `value` is array-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+	 */
+	function isArrayLike(value) {
+	  return value != null && isLength(getLength(value));
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return value > -1 && value % 1 == 0 && value < length;
+	}
+
+	/**
+	 * Checks if the provided arguments are from an iteratee call.
+	 *
+	 * @private
+	 * @param {*} value The potential iteratee value argument.
+	 * @param {*} index The potential iteratee index or key argument.
+	 * @param {*} object The potential iteratee object argument.
+	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
+	 */
+	function isIterateeCall(value, index, object) {
+	  if (!isObject(object)) {
+	    return false;
+	  }
+	  var type = typeof index;
+	  if (type == 'number'
+	      ? (isArrayLike(object) && isIndex(index, object.length))
+	      : (type == 'string' && index in object)) {
+	    var other = object[index];
+	    return value === value ? (value === other) : (other !== other);
+	  }
+	  return false;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	module.exports = isIterateeCall;
+
+
+/***/ },
+/* 232 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 3.6.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * Creates a function that invokes `func` with the `this` binding of the
+	 * created function and arguments from `start` and beyond provided as an array.
+	 *
+	 * **Note:** This method is based on the [rest parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to apply a rest parameter to.
+	 * @param {number} [start=func.length-1] The start position of the rest parameter.
+	 * @returns {Function} Returns the new function.
+	 * @example
+	 *
+	 * var say = _.restParam(function(what, names) {
+	 *   return what + ' ' + _.initial(names).join(', ') +
+	 *     (_.size(names) > 1 ? ', & ' : '') + _.last(names);
+	 * });
+	 *
+	 * say('hello', 'fred', 'barney', 'pebbles');
+	 * // => 'hello fred, barney, & pebbles'
+	 */
+	function restParam(func, start) {
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  start = nativeMax(start === undefined ? (func.length - 1) : (+start || 0), 0);
+	  return function() {
+	    var args = arguments,
+	        index = -1,
+	        length = nativeMax(args.length - start, 0),
+	        rest = Array(length);
+
+	    while (++index < length) {
+	      rest[index] = args[start + index];
+	    }
+	    switch (start) {
+	      case 0: return func.call(this, rest);
+	      case 1: return func.call(this, args[0], rest);
+	      case 2: return func.call(this, args[0], args[1], rest);
+	    }
+	    var otherArgs = Array(start + 1);
+	    index = -1;
+	    while (++index < start) {
+	      otherArgs[index] = args[index];
+	    }
+	    otherArgs[start] = rest;
+	    return func.apply(this, otherArgs);
+	  };
+	}
+
+	module.exports = restParam;
+
+
+/***/ },
+/* 233 */
+/***/ function(module, exports) {
+
+	var _element = typeof document !== 'undefined' ? document.body : null;
+
+	function setElement(element) {
+	  if (typeof element === 'string') {
+	    var el = document.querySelectorAll(element);
+	    element = 'length' in el ? el[0] : el;
+	  }
+	  _element = element || _element;
+	  return _element;
+	}
+
+	function hide(appElement) {
+	  validateElement(appElement);
+	  (appElement || _element).setAttribute('aria-hidden', 'true');
+	}
+
+	function show(appElement) {
+	  validateElement(appElement);
+	  (appElement || _element).removeAttribute('aria-hidden');
+	}
+
+	function toggle(shouldHide, appElement) {
+	  if (shouldHide)
+	    hide(appElement);
+	  else
+	    show(appElement);
+	}
+
+	function validateElement(appElement) {
+	  if (!appElement && !_element)
+	    throw new Error('react-modal: You must set an element with `Modal.setAppElement(el)` to make this accessible');
+	}
+
+	function resetForTesting() {
+	  _element = document.body;
+	}
+
+	exports.toggle = toggle;
+	exports.setElement = setElement;
+	exports.show = show;
+	exports.hide = hide;
+	exports.resetForTesting = resetForTesting;
+
+
+/***/ },
+/* 234 */
+/***/ function(module, exports) {
+
+	module.exports = function(opts) {
+	  return new ElementClass(opts)
+	}
+
+	function indexOf(arr, prop) {
+	  if (arr.indexOf) return arr.indexOf(prop)
+	  for (var i = 0, len = arr.length; i < len; i++)
+	    if (arr[i] === prop) return i
+	  return -1
+	}
+
+	function ElementClass(opts) {
+	  if (!(this instanceof ElementClass)) return new ElementClass(opts)
+	  var self = this
+	  if (!opts) opts = {}
+
+	  // similar doing instanceof HTMLElement but works in IE8
+	  if (opts.nodeType) opts = {el: opts}
+
+	  this.opts = opts
+	  this.el = opts.el || document.body
+	  if (typeof this.el !== 'object') this.el = document.querySelector(this.el)
+	}
+
+	ElementClass.prototype.add = function(className) {
+	  var el = this.el
+	  if (!el) return
+	  if (el.className === "") return el.className = className
+	  var classes = el.className.split(' ')
+	  if (indexOf(classes, className) > -1) return classes
+	  classes.push(className)
+	  el.className = classes.join(' ')
+	  return classes
+	}
+
+	ElementClass.prototype.remove = function(className) {
+	  var el = this.el
+	  if (!el) return
+	  if (el.className === "") return
+	  var classes = el.className.split(' ')
+	  var idx = indexOf(classes, className)
+	  if (idx > -1) classes.splice(idx, 1)
+	  el.className = classes.join(' ')
+	  return classes
+	}
+
+	ElementClass.prototype.has = function(className) {
+	  var el = this.el
+	  if (!el) return
+	  var classes = el.className.split(' ')
+	  return indexOf(classes, className) > -1
+	}
+
+	ElementClass.prototype.toggle = function(className) {
+	  var el = this.el
+	  if (!el) return
+	  if (this.has(className)) this.remove(className)
+	  else this.add(className)
+	}
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var React = __webpack_require__(1);
+	var VM = __webpack_require__(172);
+	var MediaLibrary = __webpack_require__(187);
+
+	var LibaryComponent = __webpack_require__(207);
+
+	var CostumeLibrary = function (_React$Component) {
+	    _inherits(CostumeLibrary, _React$Component);
+
+	    function CostumeLibrary(props) {
+	        _classCallCheck(this, CostumeLibrary);
+
+	        var _this = _possibleConstructorReturn(this, (CostumeLibrary.__proto__ || Object.getPrototypeOf(CostumeLibrary)).call(this, props));
+
+	        bindAll(_this, ['setData', 'handleItemSelected']);
+	        _this.state = { costumeData: [] };
+	        return _this;
+	    }
+
+	    _createClass(CostumeLibrary, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.visible && this.state.costumeData.length === 0) {
+	                this.props.mediaLibrary.getMediaLibrary('costume', this.setData);
+	            }
+	        }
+	    }, {
+	        key: 'setData',
+	        value: function setData(data) {
+	            this.setState({ costumeData: data });
+	        }
+	    }, {
+	        key: 'handleItemSelected',
+	        value: function handleItemSelected(item) {
+	            var vmCostume = {
+	                skin: 'https://cdn.assets.scratch.mit.edu/internalapi/asset/$(item.md5)/get/',
+	                name: item.name,
+	                rotationCenterX: item.info[0],
+	                rotationCenterY: item.info[1]
+	            };
+	            if (item.info.length > 2) {
+	                vmCostume.bitmapResolution = item.info[2];
+	            }
+	            this.props.vm.addCostume(vmCostume);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(LibaryComponent, {
+	                data: this.state.costumeData,
+	                title: 'Costume Library',
+	                visible: this.props.visible,
+	                onItemSelected: this.handleItemSelected,
+	                onRequestClose: this.props.onRequestClose
+	            });
+	        }
+	    }]);
+
+	    return CostumeLibrary;
+	}(React.Component);
+
+	CostumeLibrary.propTypes = {
+	    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+	    onRequestClose: React.PropTypes.func,
+	    visible: React.PropTypes.bool,
+	    vm: React.PropTypes.instanceOf(VM).isRequired
+	};
+
+	module.exports = CostumeLibrary;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(174);
+	var React = __webpack_require__(1);
+	var VM = __webpack_require__(172);
+	var MediaLibrary = __webpack_require__(187);
+
+	var LibaryComponent = __webpack_require__(207);
+
+	var BackdropLibrary = function (_React$Component) {
+	    _inherits(BackdropLibrary, _React$Component);
+
+	    function BackdropLibrary(props) {
+	        _classCallCheck(this, BackdropLibrary);
+
+	        var _this = _possibleConstructorReturn(this, (BackdropLibrary.__proto__ || Object.getPrototypeOf(BackdropLibrary)).call(this, props));
+
+	        bindAll(_this, ['setData', 'handleItemSelect']);
+	        _this.state = { backdropData: [] };
+	        return _this;
+	    }
+
+	    _createClass(BackdropLibrary, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.visible && this.state.backdropData.length === 0) {
+	                this.props.mediaLibrary.getMediaLibrary('backdrop', this.setData);
+	            }
+	        }
+	    }, {
+	        key: 'setData',
+	        value: function setData(data) {
+	            this.setState({ backdropData: data });
+	        }
+	    }, {
+	        key: 'handleItemSelect',
+	        value: function handleItemSelect(item) {
+	            var vmBackdrop = {
+	                skin: 'https://cdn.assets.scratch.mit.edu/internalapi/asset/' + item.md5 + '/get/',
+	                name: item.name,
+	                rotationCenterX: item.info[0],
+	                rotationCenterY: item.info[1]
+	            };
+	            if (item.info.length > 2) {
+	                vmBackdrop.bitmapResolution = item.info[2];
+	            }
+	            this.props.vm.addBackdrop(vmBackdrop);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(LibaryComponent, {
+	                data: this.state.backdropData,
+	                title: 'Backdrop Library',
+	                visible: this.props.visible,
+	                onItemSelected: this.handleItemSelect,
+	                onRequestClose: this.props.onRequestClose
+	            });
+	        }
+	    }]);
+
+	    return BackdropLibrary;
+	}(React.Component);
+
+	BackdropLibrary.propTypes = {
+	    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+	    onRequestClose: React.PropTypes.func,
+	    visible: React.PropTypes.bool,
+	    vm: React.PropTypes.instanceOf(VM).isRequired
+	};
+
+	module.exports = BackdropLibrary;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var minilog = __webpack_require__(238);
+	minilog.enable();
+
+	module.exports = minilog('gui');
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Minilog = __webpack_require__(239);
 
 	var oldEnable = Minilog.enable,
 	    oldDisable = Minilog.disable,
 	    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
-	    console = __webpack_require__(203);
+	    console = __webpack_require__(243);
 
 	// Use a more capable logging backend if on Chrome
 	Minilog.defaultBackend = (isChrome ? console.minilog : console);
@@ -67959,19 +73034,19 @@ webpackJsonp([0],[
 	exports = module.exports = Minilog;
 
 	exports.backends = {
-	  array: __webpack_require__(207),
+	  array: __webpack_require__(247),
 	  browser: Minilog.defaultBackend,
-	  localStorage: __webpack_require__(208),
-	  jQuery: __webpack_require__(209)
+	  localStorage: __webpack_require__(248),
+	  jQuery: __webpack_require__(249)
 	};
 
 
 /***/ },
-/* 199 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200),
-	    Filter = __webpack_require__(202);
+	var Transform = __webpack_require__(240),
+	    Filter = __webpack_require__(242);
 
 	var log = new Transform(),
 	    slice = Array.prototype.slice;
@@ -68018,10 +73093,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 200 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var microee = __webpack_require__(201);
+	var microee = __webpack_require__(241);
 
 	// Implements a subset of Node's stream.Transform - in a cross-platform manner.
 	function Transform() {}
@@ -68096,7 +73171,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 201 */
+/* 241 */
 /***/ function(module, exports) {
 
 	function M() { this._events = {}; }
@@ -68149,11 +73224,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 202 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// default filter
-	var Transform = __webpack_require__(200);
+	var Transform = __webpack_require__(240);
 
 	var levelMap = { debug: 1, info: 2, warn: 3, error: 4 };
 
@@ -68211,10 +73286,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 203 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200);
+	var Transform = __webpack_require__(240);
 
 	var newlines = /\n+$/,
 	    logger = new Transform();
@@ -68242,18 +73317,18 @@ webpackJsonp([0],[
 	};
 
 	logger.formatters = ['color', 'minilog'];
-	logger.color = __webpack_require__(204);
-	logger.minilog = __webpack_require__(206);
+	logger.color = __webpack_require__(244);
+	logger.minilog = __webpack_require__(246);
 
 	module.exports = logger;
 
 
 /***/ },
-/* 204 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200),
-	    color = __webpack_require__(205);
+	var Transform = __webpack_require__(240),
+	    color = __webpack_require__(245);
 
 	var colors = { debug: ['cyan'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
@@ -68273,7 +73348,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 205 */
+/* 245 */
 /***/ function(module, exports) {
 
 	var hex = {
@@ -68299,11 +73374,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 206 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200),
-	    color = __webpack_require__(205),
+	var Transform = __webpack_require__(240),
+	    color = __webpack_require__(245),
 	    colors = { debug: ['gray'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
 
@@ -68331,10 +73406,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 207 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200),
+	var Transform = __webpack_require__(240),
 	    cache = [ ];
 
 	var logger = new Transform();
@@ -68351,10 +73426,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 208 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200),
+	var Transform = __webpack_require__(240),
 	    cache = false;
 
 	var logger = new Transform();
@@ -68371,10 +73446,10 @@ webpackJsonp([0],[
 	module.exports = logger;
 
 /***/ },
-/* 209 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(200);
+	var Transform = __webpack_require__(240);
 
 	var cid = new Date().valueOf().toString(36);
 
@@ -68451,7 +73526,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 210 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68460,9 +73535,9 @@ webpackJsonp([0],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var xhr = __webpack_require__(211);
+	var xhr = __webpack_require__(188);
 
-	var log = __webpack_require__(197);
+	var log = __webpack_require__(237);
 
 	var ProjectLoader = function () {
 	    function ProjectLoader() {
@@ -68489,423 +73564,12 @@ webpackJsonp([0],[
 	    return ProjectLoader;
 	}();
 
-	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(218);
+	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(251);
 
 	module.exports = new ProjectLoader();
 
 /***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var window = __webpack_require__(212)
-	var isFunction = __webpack_require__(213)
-	var parseHeaders = __webpack_require__(214)
-	var xtend = __webpack_require__(217)
-
-	module.exports = createXHR
-	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
-	createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
-
-	forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
-	    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
-	        options = initParams(uri, options, callback)
-	        options.method = method.toUpperCase()
-	        return _createXHR(options)
-	    }
-	})
-
-	function forEachArray(array, iterator) {
-	    for (var i = 0; i < array.length; i++) {
-	        iterator(array[i])
-	    }
-	}
-
-	function isEmpty(obj){
-	    for(var i in obj){
-	        if(obj.hasOwnProperty(i)) return false
-	    }
-	    return true
-	}
-
-	function initParams(uri, options, callback) {
-	    var params = uri
-
-	    if (isFunction(options)) {
-	        callback = options
-	        if (typeof uri === "string") {
-	            params = {uri:uri}
-	        }
-	    } else {
-	        params = xtend(options, {uri: uri})
-	    }
-
-	    params.callback = callback
-	    return params
-	}
-
-	function createXHR(uri, options, callback) {
-	    options = initParams(uri, options, callback)
-	    return _createXHR(options)
-	}
-
-	function _createXHR(options) {
-	    if(typeof options.callback === "undefined"){
-	        throw new Error("callback argument missing")
-	    }
-
-	    var called = false
-	    var callback = function cbOnce(err, response, body){
-	        if(!called){
-	            called = true
-	            options.callback(err, response, body)
-	        }
-	    }
-
-	    function readystatechange() {
-	        if (xhr.readyState === 4) {
-	            loadFunc()
-	        }
-	    }
-
-	    function getBody() {
-	        // Chrome with requestType=blob throws errors arround when even testing access to responseText
-	        var body = undefined
-
-	        if (xhr.response) {
-	            body = xhr.response
-	        } else {
-	            body = xhr.responseText || getXml(xhr)
-	        }
-
-	        if (isJson) {
-	            try {
-	                body = JSON.parse(body)
-	            } catch (e) {}
-	        }
-
-	        return body
-	    }
-
-	    var failureResponse = {
-	                body: undefined,
-	                headers: {},
-	                statusCode: 0,
-	                method: method,
-	                url: uri,
-	                rawRequest: xhr
-	            }
-
-	    function errorFunc(evt) {
-	        clearTimeout(timeoutTimer)
-	        if(!(evt instanceof Error)){
-	            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
-	        }
-	        evt.statusCode = 0
-	        return callback(evt, failureResponse)
-	    }
-
-	    // will load the data & process the response in a special response object
-	    function loadFunc() {
-	        if (aborted) return
-	        var status
-	        clearTimeout(timeoutTimer)
-	        if(options.useXDR && xhr.status===undefined) {
-	            //IE8 CORS GET successful response doesn't have a status field, but body is fine
-	            status = 200
-	        } else {
-	            status = (xhr.status === 1223 ? 204 : xhr.status)
-	        }
-	        var response = failureResponse
-	        var err = null
-
-	        if (status !== 0){
-	            response = {
-	                body: getBody(),
-	                statusCode: status,
-	                method: method,
-	                headers: {},
-	                url: uri,
-	                rawRequest: xhr
-	            }
-	            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
-	                response.headers = parseHeaders(xhr.getAllResponseHeaders())
-	            }
-	        } else {
-	            err = new Error("Internal XMLHttpRequest Error")
-	        }
-	        return callback(err, response, response.body)
-	    }
-
-	    var xhr = options.xhr || null
-
-	    if (!xhr) {
-	        if (options.cors || options.useXDR) {
-	            xhr = new createXHR.XDomainRequest()
-	        }else{
-	            xhr = new createXHR.XMLHttpRequest()
-	        }
-	    }
-
-	    var key
-	    var aborted
-	    var uri = xhr.url = options.uri || options.url
-	    var method = xhr.method = options.method || "GET"
-	    var body = options.body || options.data || null
-	    var headers = xhr.headers = options.headers || {}
-	    var sync = !!options.sync
-	    var isJson = false
-	    var timeoutTimer
-
-	    if ("json" in options) {
-	        isJson = true
-	        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
-	        if (method !== "GET" && method !== "HEAD") {
-	            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
-	            body = JSON.stringify(options.json)
-	        }
-	    }
-
-	    xhr.onreadystatechange = readystatechange
-	    xhr.onload = loadFunc
-	    xhr.onerror = errorFunc
-	    // IE9 must have onprogress be set to a unique function.
-	    xhr.onprogress = function () {
-	        // IE must die
-	    }
-	    xhr.ontimeout = errorFunc
-	    xhr.open(method, uri, !sync, options.username, options.password)
-	    //has to be after open
-	    if(!sync) {
-	        xhr.withCredentials = !!options.withCredentials
-	    }
-	    // Cannot set timeout with sync request
-	    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
-	    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
-	    if (!sync && options.timeout > 0 ) {
-	        timeoutTimer = setTimeout(function(){
-	            aborted=true//IE9 may still call readystatechange
-	            xhr.abort("timeout")
-	            var e = new Error("XMLHttpRequest timeout")
-	            e.code = "ETIMEDOUT"
-	            errorFunc(e)
-	        }, options.timeout )
-	    }
-
-	    if (xhr.setRequestHeader) {
-	        for(key in headers){
-	            if(headers.hasOwnProperty(key)){
-	                xhr.setRequestHeader(key, headers[key])
-	            }
-	        }
-	    } else if (options.headers && !isEmpty(options.headers)) {
-	        throw new Error("Headers cannot be set on an XDomainRequest object")
-	    }
-
-	    if ("responseType" in options) {
-	        xhr.responseType = options.responseType
-	    }
-
-	    if ("beforeSend" in options &&
-	        typeof options.beforeSend === "function"
-	    ) {
-	        options.beforeSend(xhr)
-	    }
-
-	    xhr.send(body)
-
-	    return xhr
-
-
-	}
-
-	function getXml(xhr) {
-	    if (xhr.responseType === "document") {
-	        return xhr.responseXML
-	    }
-	    var firefoxBugTakenEffect = xhr.status === 204 && xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
-	    if (xhr.responseType === "" && !firefoxBugTakenEffect) {
-	        return xhr.responseXML
-	    }
-
-	    return null
-	}
-
-	function noop() {}
-
-
-/***/ },
-/* 212 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
-	    module.exports = window;
-	} else if (typeof global !== "undefined") {
-	    module.exports = global;
-	} else if (typeof self !== "undefined"){
-	    module.exports = self;
-	} else {
-	    module.exports = {};
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 213 */
-/***/ function(module, exports) {
-
-	module.exports = isFunction
-
-	var toString = Object.prototype.toString
-
-	function isFunction (fn) {
-	  var string = toString.call(fn)
-	  return string === '[object Function]' ||
-	    (typeof fn === 'function' && string !== '[object RegExp]') ||
-	    (typeof window !== 'undefined' &&
-	     // IE8 and below
-	     (fn === window.setTimeout ||
-	      fn === window.alert ||
-	      fn === window.confirm ||
-	      fn === window.prompt))
-	};
-
-
-/***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var trim = __webpack_require__(215)
-	  , forEach = __webpack_require__(216)
-	  , isArray = function(arg) {
-	      return Object.prototype.toString.call(arg) === '[object Array]';
-	    }
-
-	module.exports = function (headers) {
-	  if (!headers)
-	    return {}
-
-	  var result = {}
-
-	  forEach(
-	      trim(headers).split('\n')
-	    , function (row) {
-	        var index = row.indexOf(':')
-	          , key = trim(row.slice(0, index)).toLowerCase()
-	          , value = trim(row.slice(index + 1))
-
-	        if (typeof(result[key]) === 'undefined') {
-	          result[key] = value
-	        } else if (isArray(result[key])) {
-	          result[key].push(value)
-	        } else {
-	          result[key] = [ result[key], value ]
-	        }
-	      }
-	  )
-
-	  return result
-	}
-
-/***/ },
-/* 215 */
-/***/ function(module, exports) {
-
-	
-	exports = module.exports = trim;
-
-	function trim(str){
-	  return str.replace(/^\s*|\s*$/g, '');
-	}
-
-	exports.left = function(str){
-	  return str.replace(/^\s*/, '');
-	};
-
-	exports.right = function(str){
-	  return str.replace(/\s*$/, '');
-	};
-
-
-/***/ },
-/* 216 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isFunction = __webpack_require__(213)
-
-	module.exports = forEach
-
-	var toString = Object.prototype.toString
-	var hasOwnProperty = Object.prototype.hasOwnProperty
-
-	function forEach(list, iterator, context) {
-	    if (!isFunction(iterator)) {
-	        throw new TypeError('iterator must be a function')
-	    }
-
-	    if (arguments.length < 3) {
-	        context = this
-	    }
-	    
-	    if (toString.call(list) === '[object Array]')
-	        forEachArray(list, iterator, context)
-	    else if (typeof list === 'string')
-	        forEachString(list, iterator, context)
-	    else
-	        forEachObject(list, iterator, context)
-	}
-
-	function forEachArray(array, iterator, context) {
-	    for (var i = 0, len = array.length; i < len; i++) {
-	        if (hasOwnProperty.call(array, i)) {
-	            iterator.call(context, array[i], i, array)
-	        }
-	    }
-	}
-
-	function forEachString(string, iterator, context) {
-	    for (var i = 0, len = string.length; i < len; i++) {
-	        // no such thing as a sparse string.
-	        iterator.call(context, string.charAt(i), i, string)
-	    }
-	}
-
-	function forEachObject(object, iterator, context) {
-	    for (var k in object) {
-	        if (hasOwnProperty.call(object, k)) {
-	            iterator.call(context, object[k], k, object)
-	        }
-	    }
-	}
-
-
-/***/ },
-/* 217 */
-/***/ function(module, exports) {
-
-	module.exports = extend
-
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-	function extend() {
-	    var target = {}
-
-	    for (var i = 0; i < arguments.length; i++) {
-	        var source = arguments[i]
-
-	        for (var key in source) {
-	            if (hasOwnProperty.call(source, key)) {
-	                target[key] = source[key]
-	            }
-	        }
-	    }
-
-	    return target
-	}
-
-
-/***/ },
-/* 218 */
+/* 251 */
 /***/ function(module, exports) {
 
 	module.exports = {

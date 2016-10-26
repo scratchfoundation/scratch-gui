@@ -30,7 +30,7 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	        bindAll(_this, ['onMouseMove', 'onMouseUp', 'onMouseDown']);
+	        bindAll(_this, ['onMouseMove']);
 	        _this.fetchProjectId = _this.fetchProjectId.bind(_this);
 	        _this.updateProject = _this.updateProject.bind(_this);
 	        _this.state = {
@@ -50,8 +50,6 @@ webpackJsonp([0],[
 	            };
 	            window.addEventListener('hashchange', this.hashChangeListener);
 	            window.addEventListener('mousemove', this.onMouseMove);
-	            window.addEventListener('mouseup', this.onMouseUp);
-	            window.addEventListener('mousedown', this.onMouseDown);
 	            // eslint-disable-next-line react/no-did-mount-set-state
 	            this.setState({ toolbox: this.toolbox });
 	            this.updateProject(this.props.initialProjectId);
@@ -61,46 +59,19 @@ webpackJsonp([0],[
 	        value: function componentWillUnmount() {
 	            window.removeEventListener('hashchange', this.hashChangeListener);
 	            window.removeEventListener('mousemove', this.onMouseMove);
-	            window.removeEventListener('mouseup', this.onMouseUp);
-	            window.removeEventListener('mousedown', this.onMouseDown);
 	        }
 	    }, {
 	        key: 'onMouseMove',
 	        value: function onMouseMove(e) {
-	            var rect = document.body.getBoundingClientRect();
+	            var width = window.innerWidth;
+	            var height = window.innerHeight;
 	            var coordinates = {
-	                x: e.clientX - rect.left,
-	                y: e.clientY - rect.top,
-	                canvasWidth: rect.width,
-	                canvasHeight: rect.height
+	                x: Math.round(e.clientX / width * 200),
+	                y: Math.round(e.clientY / height * 200),
+	                canvasWidth: 200,
+	                canvasHeight: 200
 	            };
 	            this.props.vm.postIOData('mouse', coordinates);
-	        }
-	    }, {
-	        key: 'onMouseUp',
-	        value: function onMouseUp(e) {
-	            var rect = document.body.getBoundingClientRect();
-	            var data = {
-	                isDown: false,
-	                x: e.clientX - rect.left,
-	                y: e.clientY - rect.top,
-	                canvasWidth: rect.width,
-	                canvasHeight: rect.height
-	            };
-	            this.props.vm.postIOData('mouse', data);
-	        }
-	    }, {
-	        key: 'onMouseDown',
-	        value: function onMouseDown(e) {
-	            var rect = document.body.getBoundingClientRect();
-	            var data = {
-	                isDown: true,
-	                x: e.clientX - rect.left,
-	                y: e.clientY - rect.top,
-	                canvasWidth: rect.width,
-	                canvasHeight: rect.height
-	            };
-	            this.props.vm.postIOData('mouse', data);
 	        }
 	    }, {
 	        key: 'fetchProjectId',

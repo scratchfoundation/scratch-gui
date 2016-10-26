@@ -30,9 +30,7 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	        bindAll(_this, ['onMouseMove']);
-	        _this.fetchProjectId = _this.fetchProjectId.bind(_this);
-	        _this.updateProject = _this.updateProject.bind(_this);
+	        bindAll(_this, ['fetchProjectId', 'updateProject', 'onMouseMove']);
 	        _this.state = {
 	            projectId: null,
 	            projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
@@ -52,7 +50,7 @@ webpackJsonp([0],[
 	            window.addEventListener('mousemove', this.onMouseMove);
 	            // eslint-disable-next-line react/no-did-mount-set-state
 	            this.setState({ toolbox: this.toolbox });
-	            this.updateProject(this.props.initialProjectId);
+	            this.updateProject(this.fetchProjectId() || this.props.initialProjectId);
 	        }
 	    }, {
 	        key: 'componentWillUnmount',

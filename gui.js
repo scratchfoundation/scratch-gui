@@ -831,7 +831,10 @@ webpackJsonp([0],[
 	var appTarget = document.createElement('div');
 	document.body.appendChild(appTarget);
 
-	ReactDOM.render(React.createElement(App, { basePath: ("/scratch-gui/") }), appTarget);
+	ReactDOM.render(React.createElement(App, {
+	    basePath: ("/scratch-gui/"),
+	    initialProjectId: 123236165
+	}), appTarget);
 
 /***/ },
 /* 1 */

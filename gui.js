@@ -4393,6 +4393,7 @@ webpackJsonp([0],[
 		    // Dispose all clones.
 		    var newTargets = [];
 		    for (var i = 0; i < this.targets.length; i++) {
+		        this.targets[i].onStopAll();
 		        if (this.targets[i].hasOwnProperty('isOriginal') &&
 		            !this.targets[i].isOriginal) {
 		            this.targets[i].dispose();
@@ -17818,7 +17819,11 @@ webpackJsonp([0],[
 		        'sound_cleareffects' : this.clearEffects,
 		        'sound_sounds_menu' : this.soundsMenu,
 		        'sound_beats_menu' : this.beatsMenu,
-		        'sound_effects_menu' : this.effectsMenu
+		        'sound_effects_menu' : this.effectsMenu,
+		        'sound_setvolumeto' : this.setVolume,
+		        'sound_changevolumeby' : this.changeVolume,
+		        'sound_sound_settempotobpm' : this.setTempo,
+		        'sound_changetempoby' : this.changeTempo
 		    };
 		};
 
@@ -17829,15 +17834,7 @@ webpackJsonp([0],[
 
 		Scratch3SoundBlocks.prototype.playSoundAndWait = function (args, util) {
 		    var index = this._getSoundIndex(args.SOUND_MENU, util);
-		    util.target.audioEngine.playSound(index);
-
-		    var duration = util.target.audioEngine.getSoundDuration(index);
-
-		    return new Promise(function(resolve) {
-		        setTimeout(function() {
-		            resolve();
-		        }, 1000*duration);
-		    });
+		    return util.target.audioEngine.playSound(index);
 		};
 
 		Scratch3SoundBlocks.prototype._getSoundIndex = function (soundName, util) {
@@ -17845,6 +17842,9 @@ webpackJsonp([0],[
 		        return 0;
 		    }
 		    var index;
+		    if (Number(soundName)) {
+		        soundName = Number(soundName);
+		    }
 		    if (typeof soundName === 'number') {
 		        var len = util.target.sprite.sounds.length;
 		        index = MathUtil.wrapClamp(soundName,0,len-1);
@@ -17894,15 +17894,37 @@ webpackJsonp([0],[
 		};
 
 		Scratch3SoundBlocks.prototype.setEffect = function (args, util) {
-		    util.target.audioEngine.setEffect(args.EFFECT, args.VALUE);
+		    var value = Cast.toNumber(args.VALUE);
+		    util.target.audioEngine.setEffect(args.EFFECT, value);
 		};
 
 		Scratch3SoundBlocks.prototype.changeEffect = function (args, util) {
-		    util.target.audioEngine.changeEffect(args.EFFECT, args.VALUE);
+		    var value = Cast.toNumber(args.VALUE);
+		    util.target.audioEngine.changeEffect(args.EFFECT, value);
 		};
 
 		Scratch3SoundBlocks.prototype.clearEffects = function (args, util) {
 		    util.target.audioEngine.clearEffects();
+		};
+
+		Scratch3SoundBlocks.prototype.setVolume = function (args, util) {
+		    var value = Cast.toNumber(args.VOLUME);
+		    util.target.audioEngine.setVolume(value);
+		};
+
+		Scratch3SoundBlocks.prototype.changeVolume = function (args, util) {
+		    var value = Cast.toNumber(args.VOLUME);
+		    util.target.audioEngine.changeVolume(value);
+		};
+
+		Scratch3SoundBlocks.prototype.setTempo = function (args, util) {
+		    var value = Cast.toNumber(args.TEMPO);
+		    util.target.audioEngine.setTempo(value);
+		};
+
+		Scratch3SoundBlocks.prototype.changeTempo = function (args, util) {
+		    var value = Cast.toNumber(args.TEMPO);
+		    util.target.audioEngine.changeTempo(value);
 		};
 
 		Scratch3SoundBlocks.prototype.soundsMenu = function (args) {
@@ -19115,6 +19137,21 @@ webpackJsonp([0],[
 		 */
 		Clone.prototype.onGreenFlag = function () {
 		    this.clearEffects();
+		    if (this.audioEngine) {
+		        this.audioEngine.stopAllSounds();
+		        this.audioEngine.clearEffects();
+		    }
+		};
+
+		/**
+		 * Called when the project receives a "stop all"
+		 * Stop all sounds
+		 */
+		Clone.prototype.onStopAll = function () {
+		    if (this.audioEngine) {
+		        this.audioEngine.stopAllSounds();
+		        this.audioEngine.clearEffects();
+		    }
 		};
 
 		/**
@@ -45120,11 +45157,10 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _this2 = this;
 
-	            var _props = this.props;
-	            var options = _props.options;
-	            var vm = _props.vm;
-
-	            var props = _objectWithoutProperties(_props, ['options', 'vm']);
+	            var _props = this.props,
+	                options = _props.options,
+	                vm = _props.vm,
+	                props = _objectWithoutProperties(_props, ['options', 'vm']);
 
 	            return React.createElement(BlocksComponent, _extends({
 	                componentRef: function componentRef(c) {
@@ -54549,10 +54585,9 @@ webpackJsonp([0],[
 	    _createClass(BlocksComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var componentRef = _props.componentRef;
-
-	            var props = _objectWithoutProperties(_props, ['componentRef']);
+	            var _props = this.props,
+	                componentRef = _props.componentRef,
+	                props = _objectWithoutProperties(_props, ['componentRef']);
 
 	            return React.createElement('div', _extends({
 	                className: 'scratch-blocks',
@@ -54623,10 +54658,9 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var vm = _props.vm;
-
-	            var props = _objectWithoutProperties(_props, ['vm']);
+	            var _props = this.props,
+	                vm = _props.vm,
+	                props = _objectWithoutProperties(_props, ['vm']);
 
 	            return React.createElement(GreenFlagComponent, _extends({
 	                onClick: this.handleClick
@@ -54676,11 +54710,10 @@ webpackJsonp([0],[
 	    _createClass(GreenFlagComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var onClick = _props.onClick;
-	            var title = _props.title;
-
-	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
+	            var _props = this.props,
+	                onClick = _props.onClick,
+	                title = _props.title,
+	                props = _objectWithoutProperties(_props, ['onClick', 'title']);
 
 	            return React.createElement('img', _extends({
 	                className: 'scratch-green-flag',
@@ -54805,20 +54838,19 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _this2 = this;
 
-	            var _props = this.props;
-	            var backdropLibraryProps = _props.backdropLibraryProps;
-	            var basePath = _props.basePath;
-	            var blocksProps = _props.blocksProps;
-	            var costumeLibraryProps = _props.costumeLibraryProps;
-	            var greenFlagProps = _props.greenFlagProps;
-	            var projectData = _props.projectData;
-	            var spriteLibraryProps = _props.spriteLibraryProps;
-	            var spriteSelectorProps = _props.spriteSelectorProps;
-	            var stageProps = _props.stageProps;
-	            var stopAllProps = _props.stopAllProps;
-	            var vm = _props.vm;
-
-	            var guiProps = _objectWithoutProperties(_props, ['backdropLibraryProps', 'basePath', 'blocksProps', 'costumeLibraryProps', 'greenFlagProps', 'projectData', 'spriteLibraryProps', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
+	            var _props = this.props,
+	                backdropLibraryProps = _props.backdropLibraryProps,
+	                basePath = _props.basePath,
+	                blocksProps = _props.blocksProps,
+	                costumeLibraryProps = _props.costumeLibraryProps,
+	                greenFlagProps = _props.greenFlagProps,
+	                projectData = _props.projectData,
+	                spriteLibraryProps = _props.spriteLibraryProps,
+	                spriteSelectorProps = _props.spriteSelectorProps,
+	                stageProps = _props.stageProps,
+	                stopAllProps = _props.stopAllProps,
+	                vm = _props.vm,
+	                guiProps = _objectWithoutProperties(_props, ['backdropLibraryProps', 'basePath', 'blocksProps', 'costumeLibraryProps', 'greenFlagProps', 'projectData', 'spriteLibraryProps', 'spriteSelectorProps', 'stageProps', 'stopAllProps', 'vm']);
 
 	            backdropLibraryProps = defaultsDeep({}, backdropLibraryProps, {
 	                mediaLibrary: this.mediaLibrary,
@@ -55544,10 +55576,9 @@ webpackJsonp([0],[
 	    _createClass(GUIComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var children = _props.children;
-
-	            var props = _objectWithoutProperties(_props, ['children']);
+	            var _props = this.props,
+	                children = _props.children,
+	                props = _objectWithoutProperties(_props, ['children']);
 
 	            return React.createElement(
 	                'div',
@@ -55634,13 +55665,12 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var vm = _props.vm;
-	            var openNewSprite = _props.openNewSprite;
-	            var openNewCostume = _props.openNewCostume;
-	            var openNewBackdrop = _props.openNewBackdrop;
-
-	            var props = _objectWithoutProperties(_props, ['vm', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
+	            var _props = this.props,
+	                vm = _props.vm,
+	                openNewSprite = _props.openNewSprite,
+	                openNewCostume = _props.openNewCostume,
+	                openNewBackdrop = _props.openNewBackdrop,
+	                props = _objectWithoutProperties(_props, ['vm', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
 
 	            return React.createElement(SpriteSelectorComponent, _extends({
 	                openNewBackdrop: openNewBackdrop,
@@ -55702,15 +55732,14 @@ webpackJsonp([0],[
 	    _createClass(SpriteSelectorComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var onChange = _props.onChange;
-	            var sprites = _props.sprites;
-	            var value = _props.value;
-	            var openNewSprite = _props.openNewSprite;
-	            var openNewCostume = _props.openNewCostume;
-	            var openNewBackdrop = _props.openNewBackdrop;
-
-	            var props = _objectWithoutProperties(_props, ['onChange', 'sprites', 'value', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
+	            var _props = this.props,
+	                onChange = _props.onChange,
+	                sprites = _props.sprites,
+	                value = _props.value,
+	                openNewSprite = _props.openNewSprite,
+	                openNewCostume = _props.openNewCostume,
+	                openNewBackdrop = _props.openNewBackdrop,
+	                props = _objectWithoutProperties(_props, ['onChange', 'sprites', 'value', 'openNewSprite', 'openNewCostume', 'openNewBackdrop']);
 
 	            return React.createElement(
 	                'div',
@@ -55905,10 +55934,9 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var _this2 = this;
 
-	            var _props = this.props;
-	            var vm = _props.vm;
-
-	            var props = _objectWithoutProperties(_props, ['vm']);
+	            var _props = this.props,
+	                vm = _props.vm,
+	                props = _objectWithoutProperties(_props, ['vm']);
 
 	            return React.createElement(StageComponent, _extends({
 	                canvasRef: function canvasRef(canvas) {
@@ -69051,12 +69079,11 @@ webpackJsonp([0],[
 	    _createClass(StageComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var canvasRef = _props.canvasRef;
-	            var width = _props.width;
-	            var height = _props.height;
-
-	            var props = _objectWithoutProperties(_props, ['canvasRef', 'width', 'height']);
+	            var _props = this.props,
+	                canvasRef = _props.canvasRef,
+	                width = _props.width,
+	                height = _props.height,
+	                props = _objectWithoutProperties(_props, ['canvasRef', 'width', 'height']);
 
 	            return React.createElement('canvas', _extends({
 	                className: 'scratch-stage',
@@ -69134,10 +69161,9 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var vm = _props.vm;
-
-	            var props = _objectWithoutProperties(_props, ['vm']);
+	            var _props = this.props,
+	                vm = _props.vm,
+	                props = _objectWithoutProperties(_props, ['vm']);
 
 	            return React.createElement(StopAllComponent, _extends({
 	                onClick: this.handleClick
@@ -69187,11 +69213,10 @@ webpackJsonp([0],[
 	    _createClass(StopAllComponent, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var onClick = _props.onClick;
-	            var title = _props.title;
-
-	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
+	            var _props = this.props,
+	                onClick = _props.onClick,
+	                title = _props.title,
+	                props = _objectWithoutProperties(_props, ['onClick', 'title']);
 
 	            return React.createElement('img', _extends({
 	                className: 'scratch-stop-all',

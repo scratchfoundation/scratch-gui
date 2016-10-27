@@ -1,4 +1,5 @@
 const React = require('react');
+const stopAllIcon = require('./stop-all.svg');
 
 class StopAllComponent extends React.Component {
     render () {
@@ -8,18 +9,19 @@ class StopAllComponent extends React.Component {
             ...props
         } = this.props;
         return (
-            <div
+            <img
                 className="scratch-stop-all"
+                src={stopAllIcon}
                 style={{
                     position: 'absolute',
                     top: 380,
-                    right: 400,
+                    right: 380,
                     width: 50
                 }}
+                title={title}
+                onClick={onClick}
                 {...props}
-            >
-                <button onClick={onClick}>{title}</button>
-            </div>
+            />
         );
     }
 }

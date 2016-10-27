@@ -2,7 +2,7 @@ const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const StopAllComponent = require('../components/stop-all.jsx');
+const StopAllComponent = require('../components/stop-all/stop-all.jsx');
 
 class StopAll extends React.Component {
     constructor (props) {

@@ -1,4 +1,5 @@
 const React = require('react');
+const greenFlagIcon = require('./green-flag.svg');
 
 class GreenFlagComponent extends React.Component {
     render () {
@@ -8,18 +9,19 @@ class GreenFlagComponent extends React.Component {
             ...props
         } = this.props;
         return (
-            <div
+            <img
                 className="scratch-green-flag"
+                src={greenFlagIcon}
                 style={{
                     position: 'absolute',
                     top: 380,
                     right: 440,
                     width: 50
                 }}
+                title={title}
+                onClick={onClick}
                 {...props}
-            >
-                <button onClick={onClick}>{title}</button>
-            </div>
+            />
         );
     }
 }

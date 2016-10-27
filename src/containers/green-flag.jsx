@@ -3,7 +3,7 @@ const React = require('react');
 
 const VM = require('scratch-vm');
 
-const GreenFlagComponent = require('../components/green-flag.jsx');
+const GreenFlagComponent = require('../components/green-flag/green-flag.jsx');
 
 class GreenFlag extends React.Component {
     constructor (props) {

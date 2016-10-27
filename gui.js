@@ -18,9 +18,11 @@ webpackJsonp([0],[
 	var VM = __webpack_require__(173);
 
 	var Blocks = __webpack_require__(174);
-	var GUI = __webpack_require__(185);
-	var log = __webpack_require__(237);
-	var ProjectLoader = __webpack_require__(250);
+	var GreenFlag = __webpack_require__(185);
+	var GUI = __webpack_require__(188);
+	var log = __webpack_require__(239);
+	var ProjectLoader = __webpack_require__(252);
+	var StopAll = __webpack_require__(205);
 
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -766,7 +768,8 @@ webpackJsonp([0],[
 	                        )
 	                    )
 	                ),
-	                this.state.toolbox ? React.createElement(Blocks, {
+	                this.state.toolbox ? [React.createElement(Blocks, {
+	                    key: 'blocks',
 	                    options: {
 	                        media: this.props.basePath + 'static/blocks-media/',
 	                        toolbox: this.state.toolbox
@@ -779,7 +782,25 @@ webpackJsonp([0],[
 	                        left: 0
 	                    },
 	                    vm: this.props.vm
-	                }) : null
+	                }), React.createElement(GreenFlag, {
+	                    key: 'green-flag',
+	                    style: {
+	                        position: 'absolute',
+	                        top: 10,
+	                        right: 70,
+	                        width: 50
+	                    },
+	                    vm: this.props.vm
+	                }), React.createElement(StopAll, {
+	                    key: 'stop-all',
+	                    style: {
+	                        position: 'absolute',
+	                        top: 10,
+	                        right: 10,
+	                        width: 50
+	                    },
+	                    vm: this.props.vm
+	                })] : null
 	            );
 	        }
 	    }]);
@@ -53961,24 +53982,164 @@ webpackJsonp([0],[
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var bindAll = __webpack_require__(1);
+	var React = __webpack_require__(2);
+
+	var VM = __webpack_require__(173);
+
+	var GreenFlagComponent = __webpack_require__(186);
+
+	var GreenFlag = function (_React$Component) {
+	    _inherits(GreenFlag, _React$Component);
+
+	    function GreenFlag(props) {
+	        _classCallCheck(this, GreenFlag);
+
+	        var _this = _possibleConstructorReturn(this, (GreenFlag.__proto__ || Object.getPrototypeOf(GreenFlag)).call(this, props));
+
+	        bindAll(_this, ['handleClick']);
+	        return _this;
+	    }
+
+	    _createClass(GreenFlag, [{
+	        key: 'handleClick',
+	        value: function handleClick(e) {
+	            e.preventDefault();
+	            this.props.vm.greenFlag();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var vm = _props.vm;
+
+	            var props = _objectWithoutProperties(_props, ['vm']);
+
+	            return React.createElement(GreenFlagComponent, _extends({
+	                onClick: this.handleClick
+	            }, props));
+	        }
+	    }]);
+
+	    return GreenFlag;
+	}(React.Component);
+
+	GreenFlag.propTypes = {
+	    vm: React.PropTypes.instanceOf(VM)
+	};
+
+	module.exports = GreenFlag;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(2);
+	var greenFlagIcon = __webpack_require__(187);
+
+	var GreenFlagComponent = function (_React$Component) {
+	    _inherits(GreenFlagComponent, _React$Component);
+
+	    function GreenFlagComponent() {
+	        _classCallCheck(this, GreenFlagComponent);
+
+	        return _possibleConstructorReturn(this, (GreenFlagComponent.__proto__ || Object.getPrototypeOf(GreenFlagComponent)).apply(this, arguments));
+	    }
+
+	    _createClass(GreenFlagComponent, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var onClick = _props.onClick;
+	            var title = _props.title;
+
+	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
+
+	            return React.createElement('img', _extends({
+	                className: 'scratch-green-flag',
+	                src: greenFlagIcon,
+	                style: {
+	                    position: 'absolute',
+	                    top: 380,
+	                    right: 440,
+	                    width: 50
+	                },
+	                title: title,
+	                onClick: onClick
+	            }, props));
+	        }
+	    }]);
+
+	    return GreenFlagComponent;
+	}(React.Component);
+
+	GreenFlagComponent.propTypes = {
+	    onClick: React.PropTypes.func,
+	    title: React.PropTypes.string
+	};
+
+	GreenFlagComponent.defaultProps = {
+	    title: 'Go'
+	};
+
+	module.exports = GreenFlagComponent;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E %3C!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E %3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 13.8 14.5' style='enable-background:new 0 0 13.8 14.5;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7Bfill:%2355BA58;stroke:%23469945;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;%7D .st1%7Bfill:%2355BA58;stroke:%23469945;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;%7D %3C/style%3E %3Cg%3E %3Cpath class='st0' d='M0.8,1.8c1.7-1.4,4.5-1.4,6.2,0l0,0c1.7,1.4,4.5,1.4,6.2,0v8.4c-1.7,1.4-4.5,1.4-6.2,0l0,0 c-1.7-1.4-4.5-1.4-6.2,0'/%3E %3Cline class='st1' x1='0.8' y1='13.8' x2='0.8' y2='0.8'/%3E %3C/g%3E %3C/svg%3E"
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var bindAll = __webpack_require__(1);
 	var defaultsDeep = __webpack_require__(175);
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
 
-	var VMManager = __webpack_require__(186);
-	var MediaLibrary = __webpack_require__(187);
-	var shapeFromPropTypes = __webpack_require__(195);
+	var VMManager = __webpack_require__(189);
+	var MediaLibrary = __webpack_require__(190);
+	var shapeFromPropTypes = __webpack_require__(198);
 
 	var Blocks = __webpack_require__(174);
-	var GUIComponent = __webpack_require__(196);
-	var GreenFlag = __webpack_require__(197);
-	var SpriteSelector = __webpack_require__(199);
-	var Stage = __webpack_require__(201);
-	var StopAll = __webpack_require__(204);
+	var GUIComponent = __webpack_require__(199);
+	var GreenFlag = __webpack_require__(185);
+	var SpriteSelector = __webpack_require__(200);
+	var Stage = __webpack_require__(202);
+	var StopAll = __webpack_require__(205);
 
-	var SpriteLibrary = __webpack_require__(206);
-	var CostumeLibrary = __webpack_require__(235);
-	var BackdropLibrary = __webpack_require__(236);
+	var SpriteLibrary = __webpack_require__(208);
+	var CostumeLibrary = __webpack_require__(237);
+	var BackdropLibrary = __webpack_require__(238);
 
 	var GUI = function (_React$Component) {
 	    _inherits(GUI, _React$Component);
@@ -54134,7 +54295,7 @@ webpackJsonp([0],[
 	module.exports = GUI;
 
 /***/ },
-/* 186 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54202,7 +54363,7 @@ webpackJsonp([0],[
 	module.exports = VMManager;
 
 /***/ },
-/* 187 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54211,7 +54372,7 @@ webpackJsonp([0],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var xhr = __webpack_require__(188);
+	var xhr = __webpack_require__(191);
 
 	var LIBRARY_PREFIX = 'https://cdn.scratch.mit.edu/scratchr2/static/' + '__8d9c95eb5aa1272a311775ca32568417__/medialibraries/';
 	var LIBRARY_URL = {
@@ -54308,14 +54469,14 @@ webpackJsonp([0],[
 	module.exports = MediaLibrary;
 
 /***/ },
-/* 188 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var window = __webpack_require__(189)
-	var isFunction = __webpack_require__(190)
-	var parseHeaders = __webpack_require__(191)
-	var xtend = __webpack_require__(194)
+	var window = __webpack_require__(192)
+	var isFunction = __webpack_require__(193)
+	var parseHeaders = __webpack_require__(194)
+	var xtend = __webpack_require__(197)
 
 	module.exports = createXHR
 	createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -54549,7 +54710,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 189 */
+/* 192 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
@@ -54565,7 +54726,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 190 */
+/* 193 */
 /***/ function(module, exports) {
 
 	module.exports = isFunction
@@ -54586,11 +54747,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 191 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var trim = __webpack_require__(192)
-	  , forEach = __webpack_require__(193)
+	var trim = __webpack_require__(195)
+	  , forEach = __webpack_require__(196)
 	  , isArray = function(arg) {
 	      return Object.prototype.toString.call(arg) === '[object Array]';
 	    }
@@ -54622,7 +54783,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 192 */
+/* 195 */
 /***/ function(module, exports) {
 
 	
@@ -54642,10 +54803,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 193 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(190)
+	var isFunction = __webpack_require__(193)
 
 	module.exports = forEach
 
@@ -54694,7 +54855,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 194 */
+/* 197 */
 /***/ function(module, exports) {
 
 	module.exports = extend
@@ -54719,7 +54880,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 195 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54738,7 +54899,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 196 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54801,145 +54962,7 @@ webpackJsonp([0],[
 	module.exports = GUIComponent;
 
 /***/ },
-/* 197 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var bindAll = __webpack_require__(1);
-	var React = __webpack_require__(2);
-
-	var VM = __webpack_require__(173);
-
-	var GreenFlagComponent = __webpack_require__(198);
-
-	var GreenFlag = function (_React$Component) {
-	    _inherits(GreenFlag, _React$Component);
-
-	    function GreenFlag(props) {
-	        _classCallCheck(this, GreenFlag);
-
-	        var _this = _possibleConstructorReturn(this, (GreenFlag.__proto__ || Object.getPrototypeOf(GreenFlag)).call(this, props));
-
-	        bindAll(_this, ['handleClick']);
-	        return _this;
-	    }
-
-	    _createClass(GreenFlag, [{
-	        key: 'handleClick',
-	        value: function handleClick(e) {
-	            e.preventDefault();
-	            this.props.vm.greenFlag();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var vm = _props.vm;
-
-	            var props = _objectWithoutProperties(_props, ['vm']);
-
-	            return React.createElement(GreenFlagComponent, _extends({
-	                onClick: this.handleClick
-	            }, props));
-	        }
-	    }]);
-
-	    return GreenFlag;
-	}(React.Component);
-
-	GreenFlag.propTypes = {
-	    vm: React.PropTypes.instanceOf(VM)
-	};
-
-	module.exports = GreenFlag;
-
-/***/ },
-/* 198 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(2);
-
-	var GreenFlagComponent = function (_React$Component) {
-	    _inherits(GreenFlagComponent, _React$Component);
-
-	    function GreenFlagComponent() {
-	        _classCallCheck(this, GreenFlagComponent);
-
-	        return _possibleConstructorReturn(this, (GreenFlagComponent.__proto__ || Object.getPrototypeOf(GreenFlagComponent)).apply(this, arguments));
-	    }
-
-	    _createClass(GreenFlagComponent, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var onClick = _props.onClick;
-	            var title = _props.title;
-
-	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
-
-	            return React.createElement(
-	                'div',
-	                _extends({
-	                    className: 'scratch-green-flag',
-	                    style: {
-	                        position: 'absolute',
-	                        top: 380,
-	                        right: 440,
-	                        width: 50
-	                    }
-	                }, props),
-	                React.createElement(
-	                    'button',
-	                    { onClick: onClick },
-	                    title
-	                )
-	            );
-	        }
-	    }]);
-
-	    return GreenFlagComponent;
-	}(React.Component);
-
-	GreenFlagComponent.propTypes = {
-	    onClick: React.PropTypes.func,
-	    title: React.PropTypes.string
-	};
-
-	GreenFlagComponent.defaultProps = {
-	    title: 'Go'
-	};
-
-	module.exports = GreenFlagComponent;
-
-/***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54960,7 +54983,7 @@ webpackJsonp([0],[
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
 
-	var SpriteSelectorComponent = __webpack_require__(200);
+	var SpriteSelectorComponent = __webpack_require__(201);
 
 	var SpriteSelector = function (_React$Component) {
 	    _inherits(SpriteSelector, _React$Component);
@@ -55034,7 +55057,7 @@ webpackJsonp([0],[
 	module.exports = SpriteSelector;
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55143,7 +55166,7 @@ webpackJsonp([0],[
 	module.exports = SpriteSelectorComponent;
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55162,10 +55185,10 @@ webpackJsonp([0],[
 
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
-	var Renderer = __webpack_require__(202);
+	var Renderer = __webpack_require__(203);
 	var VM = __webpack_require__(173);
 
-	var StageComponent = __webpack_require__(203);
+	var StageComponent = __webpack_require__(204);
 
 	var Stage = function (_React$Component) {
 	    _inherits(Stage, _React$Component);
@@ -55295,7 +55318,7 @@ webpackJsonp([0],[
 	module.exports = Stage;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports) {
 
 	module.exports =
@@ -68383,7 +68406,7 @@ webpackJsonp([0],[
 	/******/ ]);
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68453,7 +68476,7 @@ webpackJsonp([0],[
 	module.exports = StageComponent;
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68474,7 +68497,7 @@ webpackJsonp([0],[
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
 
-	var StopAllComponent = __webpack_require__(205);
+	var StopAllComponent = __webpack_require__(206);
 
 	var StopAll = function (_React$Component) {
 	    _inherits(StopAll, _React$Component);
@@ -68518,7 +68541,7 @@ webpackJsonp([0],[
 	module.exports = StopAll;
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68536,6 +68559,7 @@ webpackJsonp([0],[
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(2);
+	var stopAllIcon = __webpack_require__(207);
 
 	var StopAllComponent = function (_React$Component) {
 	    _inherits(StopAllComponent, _React$Component);
@@ -68555,23 +68579,18 @@ webpackJsonp([0],[
 
 	            var props = _objectWithoutProperties(_props, ['onClick', 'title']);
 
-	            return React.createElement(
-	                'div',
-	                _extends({
-	                    className: 'scratch-stop-all',
-	                    style: {
-	                        position: 'absolute',
-	                        top: 380,
-	                        right: 400,
-	                        width: 50
-	                    }
-	                }, props),
-	                React.createElement(
-	                    'button',
-	                    { onClick: onClick },
-	                    title
-	                )
-	            );
+	            return React.createElement('img', _extends({
+	                className: 'scratch-stop-all',
+	                src: stopAllIcon,
+	                style: {
+	                    position: 'absolute',
+	                    top: 380,
+	                    right: 380,
+	                    width: 50
+	                },
+	                title: title,
+	                onClick: onClick
+	            }, props));
 	        }
 	    }]);
 
@@ -68590,7 +68609,13 @@ webpackJsonp([0],[
 	module.exports = StopAllComponent;
 
 /***/ },
-/* 206 */
+/* 207 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E %3C!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E %3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 14 14' style='enable-background:new 0 0 14 14;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7Bfill:%23EC5959;stroke:%23B84848;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;%7D %3C/style%3E %3Cpolygon class='st0' points='4.3,0.5 9.7,0.5 13.5,4.3 13.5,9.7 9.7,13.5 4.3,13.5 0.5,9.7 0.5,4.3 '/%3E %3C/svg%3E"
+
+/***/ },
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68608,9 +68633,9 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
-	var MediaLibrary = __webpack_require__(187);
+	var MediaLibrary = __webpack_require__(190);
 
-	var LibaryComponent = __webpack_require__(207);
+	var LibaryComponent = __webpack_require__(209);
 
 	var SpriteLibrary = function (_React$Component) {
 	    _inherits(SpriteLibrary, _React$Component);
@@ -68710,7 +68735,7 @@ webpackJsonp([0],[
 	module.exports = SpriteLibrary;
 
 /***/ },
-/* 207 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68726,8 +68751,8 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
 
-	var LibraryItem = __webpack_require__(208);
-	var ModalComponent = __webpack_require__(214);
+	var LibraryItem = __webpack_require__(210);
+	var ModalComponent = __webpack_require__(216);
 
 	var LibraryComponent = function (_React$Component) {
 	    _inherits(LibraryComponent, _React$Component);
@@ -68817,7 +68842,7 @@ webpackJsonp([0],[
 	module.exports = LibraryComponent;
 
 /***/ },
-/* 208 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68832,9 +68857,9 @@ webpackJsonp([0],[
 
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
-	var stylePropType = __webpack_require__(209);
+	var stylePropType = __webpack_require__(211);
 
-	var CostumeCanvas = __webpack_require__(211);
+	var CostumeCanvas = __webpack_require__(213);
 
 	var LibraryItem = function (_React$Component) {
 	    _inherits(LibraryItem, _React$Component);
@@ -68911,10 +68936,10 @@ webpackJsonp([0],[
 	module.exports = LibraryItem;
 
 /***/ },
-/* 209 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var properties = __webpack_require__(210);
+	var properties = __webpack_require__(212);
 
 	module.exports = function(props, propName, componentName) {
 	  var styles = props[propName];
@@ -68943,7 +68968,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 210 */
+/* 212 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -70521,7 +70546,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 211 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70535,8 +70560,8 @@ webpackJsonp([0],[
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(2);
-	var svgToImage = __webpack_require__(212);
-	var xhr = __webpack_require__(188);
+	var svgToImage = __webpack_require__(214);
+	var xhr = __webpack_require__(191);
 
 	/**
 	 * @fileoverview
@@ -70676,10 +70701,10 @@ webpackJsonp([0],[
 	module.exports = CostumeCanvas;
 
 /***/ },
-/* 212 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {var loadImage = __webpack_require__(213)
+	/* WEBPACK VAR INJECTION */(function(process) {var loadImage = __webpack_require__(215)
 	var noop = function () {}
 
 	module.exports = svgToImage
@@ -70749,7 +70774,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 213 */
+/* 215 */
 /***/ function(module, exports) {
 
 	module.exports = loadImage;
@@ -70787,7 +70812,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 214 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70801,8 +70826,8 @@ webpackJsonp([0],[
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(2);
-	var ReactModal = __webpack_require__(215);
-	var stylePropType = __webpack_require__(209);
+	var ReactModal = __webpack_require__(217);
+	var stylePropType = __webpack_require__(211);
 
 	var ModalComponent = function (_React$Component) {
 	    _inherits(ModalComponent, _React$Component);
@@ -70892,25 +70917,25 @@ webpackJsonp([0],[
 	module.exports = ModalComponent;
 
 /***/ },
-/* 215 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(216);
+	module.exports = __webpack_require__(218);
 
 
 
 /***/ },
-/* 216 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(35);
-	var ExecutionEnvironment = __webpack_require__(217);
-	var ModalPortal = React.createFactory(__webpack_require__(218));
-	var ariaAppHider = __webpack_require__(233);
-	var elementClass = __webpack_require__(234);
+	var ExecutionEnvironment = __webpack_require__(219);
+	var ModalPortal = React.createFactory(__webpack_require__(220));
+	var ariaAppHider = __webpack_require__(235);
+	var elementClass = __webpack_require__(236);
 	var renderSubtreeIntoContainer = __webpack_require__(35).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(222);
+	var Assign = __webpack_require__(224);
 
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -71021,7 +71046,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 217 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71066,14 +71091,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 218 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(2);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(219);
-	var scopeTab = __webpack_require__(221);
-	var Assign = __webpack_require__(222);
+	var focusManager = __webpack_require__(221);
+	var scopeTab = __webpack_require__(223);
+	var Assign = __webpack_require__(224);
 
 	// so that our CSS is statically analyzable
 	var CLASS_NAMES = {
@@ -71284,10 +71309,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 219 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(220);
+	var findTabbable = __webpack_require__(222);
 	var modalElement = null;
 	var focusLaterElement = null;
 	var needToFocus = false;
@@ -71358,7 +71383,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 220 */
+/* 222 */
 /***/ function(module, exports) {
 
 	/*!
@@ -71414,10 +71439,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 221 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(220);
+	var findTabbable = __webpack_require__(222);
 
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -71439,7 +71464,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 222 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -71450,9 +71475,9 @@ webpackJsonp([0],[
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(223),
-	    createAssigner = __webpack_require__(229),
-	    keys = __webpack_require__(225);
+	var baseAssign = __webpack_require__(225),
+	    createAssigner = __webpack_require__(231),
+	    keys = __webpack_require__(227);
 
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -71525,7 +71550,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -71536,8 +71561,8 @@ webpackJsonp([0],[
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseCopy = __webpack_require__(224),
-	    keys = __webpack_require__(225);
+	var baseCopy = __webpack_require__(226),
+	    keys = __webpack_require__(227);
 
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -71558,7 +71583,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports) {
 
 	/**
@@ -71596,7 +71621,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 225 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -71607,9 +71632,9 @@ webpackJsonp([0],[
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(226),
-	    isArguments = __webpack_require__(227),
-	    isArray = __webpack_require__(228);
+	var getNative = __webpack_require__(228),
+	    isArguments = __webpack_require__(229),
+	    isArray = __webpack_require__(230);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -71838,7 +71863,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 226 */
+/* 228 */
 /***/ function(module, exports) {
 
 	/**
@@ -71981,7 +72006,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 227 */
+/* 229 */
 /***/ function(module, exports) {
 
 	/**
@@ -72216,7 +72241,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 228 */
+/* 230 */
 /***/ function(module, exports) {
 
 	/**
@@ -72402,7 +72427,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 229 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -72413,9 +72438,9 @@ webpackJsonp([0],[
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var bindCallback = __webpack_require__(230),
-	    isIterateeCall = __webpack_require__(231),
-	    restParam = __webpack_require__(232);
+	var bindCallback = __webpack_require__(232),
+	    isIterateeCall = __webpack_require__(233),
+	    restParam = __webpack_require__(234);
 
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -72460,7 +72485,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 230 */
+/* 232 */
 /***/ function(module, exports) {
 
 	/**
@@ -72531,7 +72556,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 231 */
+/* 233 */
 /***/ function(module, exports) {
 
 	/**
@@ -72669,7 +72694,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 232 */
+/* 234 */
 /***/ function(module, exports) {
 
 	/**
@@ -72742,7 +72767,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 233 */
+/* 235 */
 /***/ function(module, exports) {
 
 	var _element = typeof document !== 'undefined' ? document.body : null;
@@ -72790,7 +72815,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports) {
 
 	module.exports = function(opts) {
@@ -72855,7 +72880,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72871,9 +72896,9 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
-	var MediaLibrary = __webpack_require__(187);
+	var MediaLibrary = __webpack_require__(190);
 
-	var LibaryComponent = __webpack_require__(207);
+	var LibaryComponent = __webpack_require__(209);
 
 	var CostumeLibrary = function (_React$Component) {
 	    _inherits(CostumeLibrary, _React$Component);
@@ -72940,7 +72965,7 @@ webpackJsonp([0],[
 	module.exports = CostumeLibrary;
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72956,9 +72981,9 @@ webpackJsonp([0],[
 	var bindAll = __webpack_require__(1);
 	var React = __webpack_require__(2);
 	var VM = __webpack_require__(173);
-	var MediaLibrary = __webpack_require__(187);
+	var MediaLibrary = __webpack_require__(190);
 
-	var LibaryComponent = __webpack_require__(207);
+	var LibaryComponent = __webpack_require__(209);
 
 	var BackdropLibrary = function (_React$Component) {
 	    _inherits(BackdropLibrary, _React$Component);
@@ -73025,26 +73050,26 @@ webpackJsonp([0],[
 	module.exports = BackdropLibrary;
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var minilog = __webpack_require__(238);
+	var minilog = __webpack_require__(240);
 	minilog.enable();
 
 	module.exports = minilog('gui');
 
 /***/ },
-/* 238 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Minilog = __webpack_require__(239);
+	var Minilog = __webpack_require__(241);
 
 	var oldEnable = Minilog.enable,
 	    oldDisable = Minilog.disable,
 	    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
-	    console = __webpack_require__(243);
+	    console = __webpack_require__(245);
 
 	// Use a more capable logging backend if on Chrome
 	Minilog.defaultBackend = (isChrome ? console.minilog : console);
@@ -73076,19 +73101,19 @@ webpackJsonp([0],[
 	exports = module.exports = Minilog;
 
 	exports.backends = {
-	  array: __webpack_require__(247),
+	  array: __webpack_require__(249),
 	  browser: Minilog.defaultBackend,
-	  localStorage: __webpack_require__(248),
-	  jQuery: __webpack_require__(249)
+	  localStorage: __webpack_require__(250),
+	  jQuery: __webpack_require__(251)
 	};
 
 
 /***/ },
-/* 239 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240),
-	    Filter = __webpack_require__(242);
+	var Transform = __webpack_require__(242),
+	    Filter = __webpack_require__(244);
 
 	var log = new Transform(),
 	    slice = Array.prototype.slice;
@@ -73135,10 +73160,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var microee = __webpack_require__(241);
+	var microee = __webpack_require__(243);
 
 	// Implements a subset of Node's stream.Transform - in a cross-platform manner.
 	function Transform() {}
@@ -73213,7 +73238,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports) {
 
 	function M() { this._events = {}; }
@@ -73266,11 +73291,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// default filter
-	var Transform = __webpack_require__(240);
+	var Transform = __webpack_require__(242);
 
 	var levelMap = { debug: 1, info: 2, warn: 3, error: 4 };
 
@@ -73328,10 +73353,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240);
+	var Transform = __webpack_require__(242);
 
 	var newlines = /\n+$/,
 	    logger = new Transform();
@@ -73359,18 +73384,18 @@ webpackJsonp([0],[
 	};
 
 	logger.formatters = ['color', 'minilog'];
-	logger.color = __webpack_require__(244);
-	logger.minilog = __webpack_require__(246);
+	logger.color = __webpack_require__(246);
+	logger.minilog = __webpack_require__(248);
 
 	module.exports = logger;
 
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240),
-	    color = __webpack_require__(245);
+	var Transform = __webpack_require__(242),
+	    color = __webpack_require__(247);
 
 	var colors = { debug: ['cyan'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
@@ -73390,7 +73415,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports) {
 
 	var hex = {
@@ -73416,11 +73441,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240),
-	    color = __webpack_require__(245),
+	var Transform = __webpack_require__(242),
+	    color = __webpack_require__(247),
 	    colors = { debug: ['gray'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
 	    logger = new Transform();
 
@@ -73448,10 +73473,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 247 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240),
+	var Transform = __webpack_require__(242),
 	    cache = [ ];
 
 	var logger = new Transform();
@@ -73468,10 +73493,10 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240),
+	var Transform = __webpack_require__(242),
 	    cache = false;
 
 	var logger = new Transform();
@@ -73488,10 +73513,10 @@ webpackJsonp([0],[
 	module.exports = logger;
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Transform = __webpack_require__(240);
+	var Transform = __webpack_require__(242);
 
 	var cid = new Date().valueOf().toString(36);
 
@@ -73568,7 +73593,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73577,9 +73602,9 @@ webpackJsonp([0],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var xhr = __webpack_require__(188);
+	var xhr = __webpack_require__(191);
 
-	var log = __webpack_require__(237);
+	var log = __webpack_require__(239);
 
 	var ProjectLoader = function () {
 	    function ProjectLoader() {
@@ -73606,12 +73631,12 @@ webpackJsonp([0],[
 	    return ProjectLoader;
 	}();
 
-	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(251);
+	ProjectLoader.DEFAULT_PROJECT_DATA = __webpack_require__(253);
 
 	module.exports = new ProjectLoader();
 
 /***/ },
-/* 251 */
+/* 253 */
 /***/ function(module, exports) {
 
 	module.exports = {

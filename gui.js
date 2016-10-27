@@ -19386,8 +19386,9 @@ webpackJsonp([0],[
 
 			'use strict';
 
-			var Tone = __webpack_require__(1);
-			var Soundfont = __webpack_require__(2);
+			var log = __webpack_require__(1);
+			var Tone = __webpack_require__(14);
+			var Soundfont = __webpack_require__(15);
 
 			function AudioEngine(sounds) {
 
@@ -19401,25 +19402,21 @@ webpackJsonp([0],[
 			    this.delay = new Tone.FeedbackDelay(0.25, 0.5);
 			    this.panner = new Tone.Panner();
 			    this.reverb = new Tone.Freeverb();
-			    this.pitchShiftRatio;
+			    this.distortion = new Tone.Distortion();
+			    this.pitchEffectValue;
+
+			    // the effects are chained to an effects node for this clone, then to the master output
+			    // so audio is sent from each player or instrument, through the effects in order, then out
+			    // note that the pitch effect works differently - it sets the playback rate for each player
+			    this.effectsNode = new Tone.Gain();
+			    this.effectsNode.chain(this.distortion, this.delay, this.panner, this.reverb, Tone.Master);
 
 			    // reset effects to their default parameters
 			    this.clearEffects();
 
-			    // the effects are chained to an effects node for this clone, then to the master output
-			    // so audio is sent from each sampler or instrument, through the effects in order, then out
-			    // note that the pitch effect works differently - it sets the playback rate for each sampler
-			    this.effectsNode = new Tone.Gain();
-			    this.effectsNode.chain(this.delay, this.panner, this.reverb, Tone.Master);
+			    // load sounds
 
-			    // drum sounds
-
-			    // var drumFileNames = ['high_conga', 'small_cowbell',
-			    // 'snare_drum', 'splash cymbal'];
-			    // this.drumSamplers = this._loadSoundFiles(drumFileNames);
-
-			    // sound urls - map each url to its tone.sampler
-			    this.soundSamplers = [];
+			    this.soundPlayers = [];
 			    this.loadSounds(sounds);
 
 			    // soundfont setup
@@ -19429,6 +19426,11 @@ webpackJsonp([0],[
 			    this.instrumentNames = ['acoustic_grand_piano', 'electric_piano_1', 'drawbar_organ', 'acoustic_guitar_nylon', 'electric_guitar_clean', 'acoustic_bass', 'pizzicato_strings', 'cello', 'trombone', 'clarinet', 'tenor_sax', 'flute', 'pan_flute', 'bassoon', 'choir_aahs', 'vibraphone', 'music_box', 'steel_drums', 'marimba', 'lead_1_square', 'fx_4_atmosphere'];
 
 			    this.setInstrument(0);
+
+			    // tempo in bpm (beats per minute)
+			    // default is 60bpm
+
+			    this.currentTempo = 60;
 
 			    // theremin setup
 
@@ -19442,25 +19444,43 @@ webpackJsonp([0],[
 
 			AudioEngine.prototype.loadSounds = function (sounds) {
 			    for (var i = 0; i < sounds.length; i++) {
-			        var url = sounds[i].fileUrl;
 			        // skip adpcm form sounds since we can't load them yet
 			        if (sounds[i].format == 'adpcm') {
+			            log.warn('cannot load sound in adpcm format');
 			            continue;
 			        }
-			        var sampler = new Tone.Sampler(url);
-			        sampler.connect(this.effectsNode);
-			        // this.soundSamplers.push(sampler);
-			        this.soundSamplers[i] = sampler;
+			        this.soundPlayers[i] = new Tone.Player(sounds[i].fileUrl);
+			        this.soundPlayers[i].connect(this.effectsNode);
 			    }
 			};
 
 			AudioEngine.prototype.playSound = function (index) {
-			    this.soundSamplers[index].triggerAttack();
-			    this.soundSamplers[index].player.playbackRate = 1 + this.pitchShiftRatio;
+			    var player = this.soundPlayers[index];
+			    if (player && player.buffer.loaded) {
+			        player.start();
+			        return new Promise(function (resolve) {
+			            setTimeout(function () {
+			                resolve();
+			            }, player.buffer.duration * 1000 / player.playbackRate);
+			        });
+			    } else {
+			        // if the sound has not yet loaded, wait and try again
+			        log.warn('sound ' + index + ' not loaded yet');
+			        if (player) {
+			            setTimeout(function () {
+			                this.playSound(index);
+			            }.bind(this), 500);
+			        }
+			    }
 			};
 
 			AudioEngine.prototype.getSoundDuration = function (index) {
-			    return this.soundSamplers[index].player.buffer.duration;
+			    var player = this.soundPlayers[index];
+			    if (player && player.buffer.loaded) {
+			        return player.buffer.duration;
+			    } else {
+			        return 0;
+			    }
 			};
 
 			AudioEngine.prototype.playNoteForBeats = function (note, beats) {
@@ -19474,7 +19494,7 @@ webpackJsonp([0],[
 			    //      trigger attack
 			    // create a timeout for slightly longer than the duration of the block
 			    // that releases the theremin - so we can slide continuously between
-			    // successive notes without releasing and attacking
+			    // successive notes without releasing and re-attacking
 
 			    var freq = this._midiToFreq(note);
 
@@ -19505,12 +19525,16 @@ webpackJsonp([0],[
 			    // for (var i = 0; i<this.drumSamplers.length; i++) {
 			    //     this.drumSamplers[i].triggerRelease();
 			    // }
-			    // stop sounds triggered with playSound (indexed by their urls)
-			    for (var key in this.soundSamplers) {
-			        this.soundSamplers[key].triggerRelease();
+			    // stop sounds triggered with playSound
+			    if (this.soundPlayers && this.soundPlayers.length > 0) {
+			        for (var i = 0; i < this.soundPlayers.length; i++) {
+			            this.soundPlayers[i].stop();
+			        }
 			    }
 			    // stop soundfont notes
-			    this.instrument.stop();
+			    if (this.instrument) {
+			        this.instrument.stop();
+			    }
 			};
 
 			AudioEngine.prototype.setEffect = function (effect, value) {
@@ -19525,7 +19549,13 @@ webpackJsonp([0],[
 			            this.reverb.wet.value = value / 100;
 			            break;
 			        case 'PITCH':
-			            this._setPitchShift(value / 20);
+			            this._setPitchShift(value);
+			            break;
+			        case 'DISTORTION':
+			            this.distortion.wet.value = value / 100;
+			            break;
+			        case 'ROBOTIC':
+			            // vocoder effect?
 			            break;
 			    }
 			};
@@ -19545,15 +19575,30 @@ webpackJsonp([0],[
 			            this.reverb.wet.value = this._clamp(this.reverb.wet.value, 0, 1);
 			            break;
 			        case 'PITCH':
-			            this._setPitchShift(this.pitchShiftRatio + value / 20);
+			            this._setPitchShift(this.pitchEffectValue + Number(value));
 			            break;
+			        case 'DISTORTION':
+			            this.distortion.wet.value += value / 100;
+			            this.distortion.wet.value = this._clamp(this.distortion.wet.value, 0, 1);
+			            break;
+			        case 'ROBOTIC':
+			            // vocoder effect?
+			            break;
+
 			    }
 			};
 
 			AudioEngine.prototype._setPitchShift = function (value) {
-			    this.pitchShiftRatio = value;
-			    for (var i in this.soundSamplers) {
-			        this.soundSamplers[i].player.playbackRate = 1 + this.pitchShiftRatio;
+			    this.pitchEffectValue = value;
+			    if (!this.soundPlayers) {
+			        return;
+			    }
+			    var ratio = this.tone.intervalToFrequencyRatio(this.pitchEffectValue / 10);
+			    for (var i = 0; i < this.soundPlayers.length; i++) {
+			        var s = this.soundPlayers[i];
+			        if (s) {
+			            s.playbackRate = ratio;
+			        }
 			    }
 			};
 
@@ -19569,6 +19614,31 @@ webpackJsonp([0],[
 			    this._setPitchShift(0);
 			    this.panner.pan.value = 0;
 			    this.reverb.wet.value = 0;
+			    this.distortion.wet.value = 0;
+
+			    this.effectsNode.gain.value = 1;
+			};
+
+			AudioEngine.prototype.setVolume = function (value) {
+			    var vol = this._clamp(value, 0, 100);
+			    vol /= 100;
+			    this.effectsNode.gain.value = vol;
+			};
+
+			AudioEngine.prototype.changeVolume = function (value) {
+			    value /= 100;
+			    var newVol = this.effectsNode.gain.value + value;
+			    this.effectsNode.gain.value = this._clamp(newVol, 0, 1);
+			};
+
+			AudioEngine.prototype.setTempo = function (value) {
+			    var newTempo = this._clamp(value, 10, 1000);
+			    this.currentTempo = newTempo;
+			};
+
+			AudioEngine.prototype.changeTempo = function (value) {
+			    var newTempo = this._clamp(this.currentTempo + value, 10, 1000);
+			    this.currentTempo = newTempo;
 			};
 
 			AudioEngine.prototype._clamp = function (input, min, max) {
@@ -19579,6 +19649,549 @@ webpackJsonp([0],[
 
 		/***/ },
 		/* 1 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			'use strict';
+
+			var minilog = __webpack_require__(2);
+			minilog.enable();
+
+			module.exports = minilog('scratch-audioengine');
+
+		/***/ },
+		/* 2 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Minilog = __webpack_require__(3);
+
+			var oldEnable = Minilog.enable,
+			    oldDisable = Minilog.disable,
+			    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
+			    console = __webpack_require__(7);
+
+			// Use a more capable logging backend if on Chrome
+			Minilog.defaultBackend = (isChrome ? console.minilog : console);
+
+			// apply enable inputs from localStorage and from the URL
+			if(typeof window != 'undefined') {
+			  try {
+			    Minilog.enable(JSON.parse(window.localStorage['minilogSettings']));
+			  } catch(e) {}
+			  if(window.location && window.location.search) {
+			    var match = RegExp('[?&]minilog=([^&]*)').exec(window.location.search);
+			    match && Minilog.enable(decodeURIComponent(match[1]));
+			  }
+			}
+
+			// Make enable also add to localStorage
+			Minilog.enable = function() {
+			  oldEnable.call(Minilog, true);
+			  try { window.localStorage['minilogSettings'] = JSON.stringify(true); } catch(e) {}
+			  return this;
+			};
+
+			Minilog.disable = function() {
+			  oldDisable.call(Minilog);
+			  try { delete window.localStorage.minilogSettings; } catch(e) {}
+			  return this;
+			};
+
+			exports = module.exports = Minilog;
+
+			exports.backends = {
+			  array: __webpack_require__(11),
+			  browser: Minilog.defaultBackend,
+			  localStorage: __webpack_require__(12),
+			  jQuery: __webpack_require__(13)
+			};
+
+
+		/***/ },
+		/* 3 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4),
+			    Filter = __webpack_require__(6);
+
+			var log = new Transform(),
+			    slice = Array.prototype.slice;
+
+			exports = module.exports = function create(name) {
+			  var o   = function() { log.write(name, undefined, slice.call(arguments)); return o; };
+			  o.debug = function() { log.write(name, 'debug', slice.call(arguments)); return o; };
+			  o.info  = function() { log.write(name, 'info',  slice.call(arguments)); return o; };
+			  o.warn  = function() { log.write(name, 'warn',  slice.call(arguments)); return o; };
+			  o.error = function() { log.write(name, 'error', slice.call(arguments)); return o; };
+			  o.log   = o.debug; // for interface compliance with Node and browser consoles
+			  o.suggest = exports.suggest;
+			  o.format = log.format;
+			  return o;
+			};
+
+			// filled in separately
+			exports.defaultBackend = exports.defaultFormatter = null;
+
+			exports.pipe = function(dest) {
+			  return log.pipe(dest);
+			};
+
+			exports.end = exports.unpipe = exports.disable = function(from) {
+			  return log.unpipe(from);
+			};
+
+			exports.Transform = Transform;
+			exports.Filter = Filter;
+			// this is the default filter that's applied when .enable() is called normally
+			// you can bypass it completely and set up your own pipes
+			exports.suggest = new Filter();
+
+			exports.enable = function() {
+			  if(exports.defaultFormatter) {
+			    return log.pipe(exports.suggest) // filter
+			              .pipe(exports.defaultFormatter) // formatter
+			              .pipe(exports.defaultBackend); // backend
+			  }
+			  return log.pipe(exports.suggest) // filter
+			            .pipe(exports.defaultBackend); // formatter
+			};
+
+
+
+		/***/ },
+		/* 4 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var microee = __webpack_require__(5);
+
+			// Implements a subset of Node's stream.Transform - in a cross-platform manner.
+			function Transform() {}
+
+			microee.mixin(Transform);
+
+			// The write() signature is different from Node's
+			// --> makes it much easier to work with objects in logs.
+			// One of the lessons from v1 was that it's better to target
+			// a good browser rather than the lowest common denominator
+			// internally.
+			// If you want to use external streams, pipe() to ./stringify.js first.
+			Transform.prototype.write = function(name, level, args) {
+			  this.emit('item', name, level, args);
+			};
+
+			Transform.prototype.end = function() {
+			  this.emit('end');
+			  this.removeAllListeners();
+			};
+
+			Transform.prototype.pipe = function(dest) {
+			  var s = this;
+			  // prevent double piping
+			  s.emit('unpipe', dest);
+			  // tell the dest that it's being piped to
+			  dest.emit('pipe', s);
+
+			  function onItem() {
+			    dest.write.apply(dest, Array.prototype.slice.call(arguments));
+			  }
+			  function onEnd() { !dest._isStdio && dest.end(); }
+
+			  s.on('item', onItem);
+			  s.on('end', onEnd);
+
+			  s.when('unpipe', function(from) {
+			    var match = (from === dest) || typeof from == 'undefined';
+			    if(match) {
+			      s.removeListener('item', onItem);
+			      s.removeListener('end', onEnd);
+			      dest.emit('unpipe');
+			    }
+			    return match;
+			  });
+
+			  return dest;
+			};
+
+			Transform.prototype.unpipe = function(from) {
+			  this.emit('unpipe', from);
+			  return this;
+			};
+
+			Transform.prototype.format = function(dest) {
+			  throw new Error([
+			    'Warning: .format() is deprecated in Minilog v2! Use .pipe() instead. For example:',
+			    'var Minilog = require(\'minilog\');',
+			    'Minilog',
+			    '  .pipe(Minilog.backends.console.formatClean)',
+			    '  .pipe(Minilog.backends.console);'].join('\n'));
+			};
+
+			Transform.mixin = function(dest) {
+			  var o = Transform.prototype, k;
+			  for (k in o) {
+			    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
+			  }
+			};
+
+			module.exports = Transform;
+
+
+		/***/ },
+		/* 5 */
+		/***/ function(module, exports) {
+
+			function M() { this._events = {}; }
+			M.prototype = {
+			  on: function(ev, cb) {
+			    this._events || (this._events = {});
+			    var e = this._events;
+			    (e[ev] || (e[ev] = [])).push(cb);
+			    return this;
+			  },
+			  removeListener: function(ev, cb) {
+			    var e = this._events[ev] || [], i;
+			    for(i = e.length-1; i >= 0 && e[i]; i--){
+			      if(e[i] === cb || e[i].cb === cb) { e.splice(i, 1); }
+			    }
+			  },
+			  removeAllListeners: function(ev) {
+			    if(!ev) { this._events = {}; }
+			    else { this._events[ev] && (this._events[ev] = []); }
+			  },
+			  emit: function(ev) {
+			    this._events || (this._events = {});
+			    var args = Array.prototype.slice.call(arguments, 1), i, e = this._events[ev] || [];
+			    for(i = e.length-1; i >= 0 && e[i]; i--){
+			      e[i].apply(this, args);
+			    }
+			    return this;
+			  },
+			  when: function(ev, cb) {
+			    return this.once(ev, cb, true);
+			  },
+			  once: function(ev, cb, when) {
+			    if(!cb) return this;
+			    function c() {
+			      if(!when) this.removeListener(ev, c);
+			      if(cb.apply(this, arguments) && when) this.removeListener(ev, c);
+			    }
+			    c.cb = cb;
+			    this.on(ev, c);
+			    return this;
+			  }
+			};
+			M.mixin = function(dest) {
+			  var o = M.prototype, k;
+			  for (k in o) {
+			    o.hasOwnProperty(k) && (dest.prototype[k] = o[k]);
+			  }
+			};
+			module.exports = M;
+
+
+		/***/ },
+		/* 6 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			// default filter
+			var Transform = __webpack_require__(4);
+
+			var levelMap = { debug: 1, info: 2, warn: 3, error: 4 };
+
+			function Filter() {
+			  this.enabled = true;
+			  this.defaultResult = true;
+			  this.clear();
+			}
+
+			Transform.mixin(Filter);
+
+			// allow all matching, with level >= given level
+			Filter.prototype.allow = function(name, level) {
+			  this._white.push({ n: name, l: levelMap[level] });
+			  return this;
+			};
+
+			// deny all matching, with level <= given level
+			Filter.prototype.deny = function(name, level) {
+			  this._black.push({ n: name, l: levelMap[level] });
+			  return this;
+			};
+
+			Filter.prototype.clear = function() {
+			  this._white = [];
+			  this._black = [];
+			  return this;
+			};
+
+			function test(rule, name) {
+			  // use .test for RegExps
+			  return (rule.n.test ? rule.n.test(name) : rule.n == name);
+			};
+
+			Filter.prototype.test = function(name, level) {
+			  var i, len = Math.max(this._white.length, this._black.length);
+			  for(i = 0; i < len; i++) {
+			    if(this._white[i] && test(this._white[i], name) && levelMap[level] >= this._white[i].l) {
+			      return true;
+			    }
+			    if(this._black[i] && test(this._black[i], name) && levelMap[level] < this._black[i].l) {
+			      return false;
+			    }
+			  }
+			  return this.defaultResult;
+			};
+
+			Filter.prototype.write = function(name, level, args) {
+			  if(!this.enabled || this.test(name, level)) {
+			    return this.emit('item', name, level, args);
+			  }
+			};
+
+			module.exports = Filter;
+
+
+		/***/ },
+		/* 7 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4);
+
+			var newlines = /\n+$/,
+			    logger = new Transform();
+
+			logger.write = function(name, level, args) {
+			  var i = args.length-1;
+			  if (typeof console === 'undefined' || !console.log) {
+			    return;
+			  }
+			  if(console.log.apply) {
+			    return console.log.apply(console, [name, level].concat(args));
+			  } else if(JSON && JSON.stringify) {
+			    // console.log.apply is undefined in IE8 and IE9
+			    // for IE8/9: make console.log at least a bit less awful
+			    if(args[i] && typeof args[i] == 'string') {
+			      args[i] = args[i].replace(newlines, '');
+			    }
+			    try {
+			      for(i = 0; i < args.length; i++) {
+			        args[i] = JSON.stringify(args[i]);
+			      }
+			    } catch(e) {}
+			    console.log(args.join(' '));
+			  }
+			};
+
+			logger.formatters = ['color', 'minilog'];
+			logger.color = __webpack_require__(8);
+			logger.minilog = __webpack_require__(10);
+
+			module.exports = logger;
+
+
+		/***/ },
+		/* 8 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4),
+			    color = __webpack_require__(9);
+
+			var colors = { debug: ['cyan'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
+			    logger = new Transform();
+
+			logger.write = function(name, level, args) {
+			  var fn = console.log;
+			  if(console[level] && console[level].apply) {
+			    fn = console[level];
+			    fn.apply(console, [ '%c'+name+' %c'+level, color('gray'), color.apply(color, colors[level])].concat(args));
+			  }
+			};
+
+			// NOP, because piping the formatted logs can only cause trouble.
+			logger.pipe = function() { };
+
+			module.exports = logger;
+
+
+		/***/ },
+		/* 9 */
+		/***/ function(module, exports) {
+
+			var hex = {
+			  black: '#000',
+			  red: '#c23621',
+			  green: '#25bc26',
+			  yellow: '#bbbb00',
+			  blue:  '#492ee1',
+			  magenta: '#d338d3',
+			  cyan: '#33bbc8',
+			  gray: '#808080',
+			  purple: '#708'
+			};
+			function color(fg, isInverse) {
+			  if(isInverse) {
+			    return 'color: #fff; background: '+hex[fg]+';';
+			  } else {
+			    return 'color: '+hex[fg]+';';
+			  }
+			}
+
+			module.exports = color;
+
+
+		/***/ },
+		/* 10 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4),
+			    color = __webpack_require__(9),
+			    colors = { debug: ['gray'], info: ['purple' ], warn: [ 'yellow', true ], error: [ 'red', true ] },
+			    logger = new Transform();
+
+			logger.write = function(name, level, args) {
+			  var fn = console.log;
+			  if(level != 'debug' && console[level]) {
+			    fn = console[level];
+			  }
+
+			  var subset = [], i = 0;
+			  if(level != 'info') {
+			    for(; i < args.length; i++) {
+			      if(typeof args[i] != 'string') break;
+			    }
+			    fn.apply(console, [ '%c'+name +' '+ args.slice(0, i).join(' '), color.apply(color, colors[level]) ].concat(args.slice(i)));
+			  } else {
+			    fn.apply(console, [ '%c'+name, color.apply(color, colors[level]) ].concat(args));
+			  }
+			};
+
+			// NOP, because piping the formatted logs can only cause trouble.
+			logger.pipe = function() { };
+
+			module.exports = logger;
+
+
+		/***/ },
+		/* 11 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4),
+			    cache = [ ];
+
+			var logger = new Transform();
+
+			logger.write = function(name, level, args) {
+			  cache.push([ name, level, args ]);
+			};
+
+			// utility functions
+			logger.get = function() { return cache; };
+			logger.empty = function() { cache = []; };
+
+			module.exports = logger;
+
+
+		/***/ },
+		/* 12 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4),
+			    cache = false;
+
+			var logger = new Transform();
+
+			logger.write = function(name, level, args) {
+			  if(typeof window == 'undefined' || typeof JSON == 'undefined' || !JSON.stringify || !JSON.parse) return;
+			  try {
+			    if(!cache) { cache = (window.localStorage.minilog ? JSON.parse(window.localStorage.minilog) : []); }
+			    cache.push([ new Date().toString(), name, level, args ]);
+			    window.localStorage.minilog = JSON.stringify(cache);
+			  } catch(e) {}
+			};
+
+			module.exports = logger;
+
+		/***/ },
+		/* 13 */
+		/***/ function(module, exports, __webpack_require__) {
+
+			var Transform = __webpack_require__(4);
+
+			var cid = new Date().valueOf().toString(36);
+
+			function AjaxLogger(options) {
+			  this.url = options.url || '';
+			  this.cache = [];
+			  this.timer = null;
+			  this.interval = options.interval || 30*1000;
+			  this.enabled = true;
+			  this.jQuery = window.jQuery;
+			  this.extras = {};
+			}
+
+			Transform.mixin(AjaxLogger);
+
+			AjaxLogger.prototype.write = function(name, level, args) {
+			  if(!this.timer) { this.init(); }
+			  this.cache.push([name, level].concat(args));
+			};
+
+			AjaxLogger.prototype.init = function() {
+			  if(!this.enabled || !this.jQuery) return;
+			  var self = this;
+			  this.timer = setTimeout(function() {
+			    var i, logs = [], ajaxData, url = self.url;
+			    if(self.cache.length == 0) return self.init();
+			    // Test each log line and only log the ones that are valid (e.g. don't have circular references).
+			    // Slight performance hit but benefit is we log all valid lines.
+			    for(i = 0; i < self.cache.length; i++) {
+			      try {
+			        JSON.stringify(self.cache[i]);
+			        logs.push(self.cache[i]);
+			      } catch(e) { }
+			    }
+			    if(self.jQuery.isEmptyObject(self.extras)) {
+			        ajaxData = JSON.stringify({ logs: logs });
+			        url = self.url + '?client_id=' + cid;
+			    } else {
+			        ajaxData = JSON.stringify(self.jQuery.extend({logs: logs}, self.extras));
+			    }
+
+			    self.jQuery.ajax(url, {
+			      type: 'POST',
+			      cache: false,
+			      processData: false,
+			      data: ajaxData,
+			      contentType: 'application/json',
+			      timeout: 10000
+			    }).success(function(data, status, jqxhr) {
+			      if(data.interval) {
+			        self.interval = Math.max(1000, data.interval);
+			      }
+			    }).error(function() {
+			      self.interval = 30000;
+			    }).always(function() {
+			      self.init();
+			    });
+			    self.cache = [];
+			  }, this.interval);
+			};
+
+			AjaxLogger.prototype.end = function() {};
+
+			// wait until jQuery is defined. Useful if you don't control the load order.
+			AjaxLogger.jQueryWait = function(onDone) {
+			  if(typeof window !== 'undefined' && (window.jQuery || window.$)) {
+			    return onDone(window.jQuery || window.$);
+			  } else if (typeof window !== 'undefined') {
+			    setTimeout(function() { AjaxLogger.jQueryWait(onDone); }, 200);
+			  }
+			};
+
+			module.exports = AjaxLogger;
+
+
+		/***/ },
+		/* 14 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			var __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory){
@@ -41501,13 +42114,13 @@ webpackJsonp([0],[
 			}));
 
 		/***/ },
-		/* 2 */
+		/* 15 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			'use strict'
 
-			var load = __webpack_require__(3)
-			var player = __webpack_require__(6)
+			var load = __webpack_require__(16)
+			var player = __webpack_require__(19)
 
 			/**
 			 * Load a soundfont instrument. It returns a promise that resolves to a
@@ -41583,7 +42196,7 @@ webpackJsonp([0],[
 
 			// In the 1.0.0 release it will be:
 			// var Soundfont = {}
-			var Soundfont = __webpack_require__(15)
+			var Soundfont = __webpack_require__(28)
 			Soundfont.instrument = instrument
 			Soundfont.nameToUrl = nameToUrl
 
@@ -41592,13 +42205,13 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 3 */
+		/* 16 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			'use strict'
 
-			var base64 = __webpack_require__(4)
-			var fetch = __webpack_require__(5)
+			var base64 = __webpack_require__(17)
+			var fetch = __webpack_require__(18)
 
 			// Given a regex, return a function that test if against a string
 			function fromRegex (r) {
@@ -41745,7 +42358,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 4 */
+		/* 17 */
 		/***/ function(module, exports) {
 
 			'use strict'
@@ -41787,7 +42400,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 5 */
+		/* 18 */
 		/***/ function(module, exports) {
 
 			/* global XMLHttpRequest */
@@ -41817,16 +42430,16 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 6 */
+		/* 19 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			'use strict'
 
-			var player = __webpack_require__(7)
-			var events = __webpack_require__(9)
-			var notes = __webpack_require__(10)
-			var scheduler = __webpack_require__(12)
-			var midi = __webpack_require__(13)
+			var player = __webpack_require__(20)
+			var events = __webpack_require__(22)
+			var notes = __webpack_require__(23)
+			var scheduler = __webpack_require__(25)
+			var midi = __webpack_require__(26)
 
 			function SamplePlayer (ac, source, options) {
 			  return midi(scheduler(notes(events(player(ac, source, options)))))
@@ -41837,13 +42450,13 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 7 */
+		/* 20 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			/* global AudioBuffer */
 			'use strict'
 
-			var ADSR = __webpack_require__(8)
+			var ADSR = __webpack_require__(21)
 
 			var EMPTY = {}
 			var DEFAULTS = {
@@ -42055,7 +42668,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 8 */
+		/* 21 */
 		/***/ function(module, exports) {
 
 			module.exports = ADSR
@@ -42221,7 +42834,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 9 */
+		/* 22 */
 		/***/ function(module, exports) {
 
 			
@@ -42253,12 +42866,12 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 10 */
+		/* 23 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			'use strict'
 
-			var note = __webpack_require__(11)
+			var note = __webpack_require__(24)
 			var isMidi = function (n) { return n !== null && n !== [] && n >= 0 && n < 129 }
 			var toMidi = function (n) { return isMidi(n) ? +n : note.midi(n) }
 
@@ -42295,7 +42908,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 11 */
+		/* 24 */
 		/***/ function(module, exports) {
 
 			'use strict'
@@ -42450,7 +43063,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 12 */
+		/* 25 */
 		/***/ function(module, exports) {
 
 			'use strict'
@@ -42518,10 +43131,10 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 13 */
+		/* 26 */
 		/***/ function(module, exports, __webpack_require__) {
 
-			var midimessage = __webpack_require__(14)
+			var midimessage = __webpack_require__(27)
 
 			module.exports = function (player) {
 			  /**
@@ -42573,19 +43186,19 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 14 */
+		/* 27 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			var require;var require;(function(e){if(true){module.exports=e()}else if(typeof define==="function"&&define.amd){define([],e)}else{var t;if(typeof window!=="undefined"){t=window}else if(typeof global!=="undefined"){t=global}else if(typeof self!=="undefined"){t=self}else{t=this}t.midimessage=e()}})(function(){var e,t,s;return function o(e,t,s){function a(n,i){if(!t[n]){if(!e[n]){var l=typeof require=="function"&&require;if(!i&&l)return require(n,!0);if(r)return r(n,!0);var h=new Error("Cannot find module '"+n+"'");throw h.code="MODULE_NOT_FOUND",h}var c=t[n]={exports:{}};e[n][0].call(c.exports,function(t){var s=e[n][1][t];return a(s?s:t)},c,c.exports,o,e,t,s)}return t[n].exports}var r=typeof require=="function"&&require;for(var n=0;n<s.length;n++)a(s[n]);return a}({1:[function(e,t,s){"use strict";Object.defineProperty(s,"__esModule",{value:true});s["default"]=function(e){function t(e){this._event=e;this._data=e.data;this.receivedTime=e.receivedTime;if(this._data&&this._data.length<2){console.warn("Illegal MIDI message of length",this._data.length);return}this._messageCode=e.data[0]&240;this.channel=e.data[0]&15;switch(this._messageCode){case 128:this.messageType="noteoff";this.key=e.data[1]&127;this.velocity=e.data[2]&127;break;case 144:this.messageType="noteon";this.key=e.data[1]&127;this.velocity=e.data[2]&127;break;case 160:this.messageType="keypressure";this.key=e.data[1]&127;this.pressure=e.data[2]&127;break;case 176:this.messageType="controlchange";this.controllerNumber=e.data[1]&127;this.controllerValue=e.data[2]&127;if(this.controllerNumber===120&&this.controllerValue===0){this.channelModeMessage="allsoundoff"}else if(this.controllerNumber===121){this.channelModeMessage="resetallcontrollers"}else if(this.controllerNumber===122){if(this.controllerValue===0){this.channelModeMessage="localcontroloff"}else{this.channelModeMessage="localcontrolon"}}else if(this.controllerNumber===123&&this.controllerValue===0){this.channelModeMessage="allnotesoff"}else if(this.controllerNumber===124&&this.controllerValue===0){this.channelModeMessage="omnimodeoff"}else if(this.controllerNumber===125&&this.controllerValue===0){this.channelModeMessage="omnimodeon"}else if(this.controllerNumber===126){this.channelModeMessage="monomodeon"}else if(this.controllerNumber===127){this.channelModeMessage="polymodeon"}break;case 192:this.messageType="programchange";this.program=e.data[1];break;case 208:this.messageType="channelpressure";this.pressure=e.data[1]&127;break;case 224:this.messageType="pitchbendchange";var t=e.data[2]&127;var s=e.data[1]&127;this.pitchBend=(t<<8)+s;break}}return new t(e)};t.exports=s["default"]},{}]},{},[1])(1)});
 			//# sourceMappingURL=dist/index.js.map
 
 		/***/ },
-		/* 15 */
+		/* 28 */
 		/***/ function(module, exports, __webpack_require__) {
 
 			'use strict'
 
-			var parser = __webpack_require__(16)
+			var parser = __webpack_require__(29)
 
 			/**
 			 * Create a Soundfont object
@@ -42726,7 +43339,7 @@ webpackJsonp([0],[
 
 
 		/***/ },
-		/* 16 */
+		/* 29 */
 		/***/ function(module, exports) {
 
 			'use strict'
@@ -52027,28 +52640,11 @@ webpackJsonp([0],[
 		colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};Blockly.Blocks.control_start_as_clone={init:function(){this.jsonInit({id:"control_start_as_clone",message0:"when I start as a clone",args0:[],inputsInline:!0,nextStatement:null,category:Blockly.Categories.control,colour:Blockly.Colours.control.primary,colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};
 		Blockly.Blocks.control_create_clone_of_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"CLONE_OPTION",options:[["myself","_myself_"]]}],inputsInline:!0,output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.control.secondary,colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};
 		Blockly.Blocks.control_create_clone_of={init:function(){this.jsonInit({id:"control_start_as_clone",message0:"create clone of %1",args0:[{type:"input_value",name:"CLONE_OPTION"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.control,colour:Blockly.Colours.control.primary,colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};
-		Blockly.Blocks.control_delete_this_clone={init:function(){this.jsonInit({message0:"delete this clone",args0:[],inputsInline:!0,previousStatement:null,category:Blockly.Categories.control,colour:Blockly.Colours.control.primary,colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};
+		Blockly.Blocks.control_delete_this_clone={init:function(){this.jsonInit({message0:"delete this clone",args0:[],inputsInline:!0,previousStatement:null,category:Blockly.Categories.control,colour:Blockly.Colours.control.primary,colourSecondary:Blockly.Colours.control.secondary,colourTertiary:Blockly.Colours.control.tertiary})}};Blockly.Blocks.defaultToolbox='<xml id="toolbox-categories" style="display: none"><category name="Motion" colour="#4C97FF" secondaryColour="#3373CC"><block type="motion_movesteps"><value name="STEPS"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_turnright"><value name="DEGREES"><shadow type="math_number"><field name="NUM">15</field></shadow></value></block><block type="motion_turnleft"><value name="DEGREES"><shadow type="math_number"><field name="NUM">15</field></shadow></value></block><block type="motion_pointindirection"><value name="DIRECTION"><shadow type="math_angle"><field name="NUM">90</field></shadow></value></block><block type="motion_pointtowards"><value name="TOWARDS"><shadow type="motion_pointtowards_menu"></shadow></value></block><block type="motion_gotoxy"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_goto"><value name="TO"><shadow type="motion_goto_menu"></shadow></value></block><block type="motion_glidesecstoxy"><value name="SECS"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_changexby"><value name="DX"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_setx"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_changeyby"><value name="DY"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_sety"><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_ifonedgebounce"></block><block type="motion_setrotationstyle"><value name="STYLE"><shadow type="motion_setrotationstyle_menu"></shadow></value></block><block type="motion_xposition"></block><block type="motion_yposition"></block><block type="motion_direction"></block></category><category name="Looks" colour="#9966FF" secondaryColour="#774DCB"><block type="looks_sayforsecs"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hello!</field></shadow></value><value name="SECS"><shadow type="math_number"><field name="NUM">2</field></shadow></value></block><block type="looks_say"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hello!</field></shadow></value></block><block type="looks_thinkforsecs"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hmm...</field></shadow></value><value name="SECS"><shadow type="math_number"><field name="NUM">2</field></shadow></value></block><block type="looks_think"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hmm...</field></shadow></value></block><block type="looks_show"></block><block type="looks_hide"></block><block type="looks_switchcostumeto"><value name="COSTUME"><shadow type="looks_costume"></shadow></value></block><block type="looks_nextcostume"></block><block type="looks_nextbackdrop"></block><block type="looks_switchbackdropto"><value name="BACKDROP"><shadow type="looks_backdrops"></shadow></value></block><block type="looks_switchbackdroptoandwait"><value name="BACKDROP"><shadow type="looks_backdrops"></shadow></value></block><block type="looks_changeeffectby"><value name="EFFECT"><shadow type="looks_effectmenu"></shadow></value><value name="CHANGE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_seteffectto"><value name="EFFECT"><shadow type="looks_effectmenu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_cleargraphiceffects"></block><block type="looks_changesizeby"><value name="CHANGE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_setsizeto"><value name="SIZE"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block><block type="looks_gotofront"></block><block type="looks_gobacklayers"><value name="NUM"><shadow type="math_integer"><field name="NUM">1</field></shadow></value></block><block type="looks_costumeorder"></block><block type="looks_backdroporder"></block><block type="looks_backdropname"></block><block type="looks_size"></block></category><category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD"><block type="sound_play"><value name="SOUND_MENU"><shadow type="sound_sounds_option"></shadow></value></block><block type="sound_playuntildone"><value name="SOUND_MENU"><shadow type="sound_sounds_option"></shadow></value></block><block type="sound_stopallsounds"></block><block type="sound_playdrumforbeats"><value name="DRUMTYPE"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="BEATS"><shadow type="math_number"><field name="NUM">0.25</field></shadow></value></block><block type="sound_restforbeats"><value name="BEATS"><shadow type="math_number"><field name="NUM">0.25</field></shadow></value></block><block type="sound_playnoteforbeats"><value name="NOTE"><shadow type="math_number"><field name="NUM">60</field></shadow></value><value name="BEATS"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block><block type="sound_setinstrumentto"><value name="INSTRUMENT"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block><block type="sound_playthereminforbeats"><value name="NOTE"><shadow type="math_number"><field name="NUM">60</field></shadow></value><value name="BEATS"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block><block type="sound_seteffectto"><value name="EFFECT"><shadow type="sound_effects_menu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block><block type="sound_changeeffectby"><value name="EFFECT"><shadow type="sound_effects_menu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="sound_cleareffects"></block><block type="sound_changevolumeby"><value name="VOLUME"><shadow type="math_number"><field name="NUM">-10</field></shadow></value></block><block type="sound_setvolumeto"><value name="VOLUME"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block><block type="sound_volume"></block><block type="sound_changetempoby"><value name="TEMPO"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block><block type="sound_settempotobpm"><value name="TEMPO"><shadow type="math_number"><field name="NUM">60</field></shadow></value></block><block type="sound_tempo"></block></category><category name="Pen" colour="#00B295" secondaryColour="#0B8E69"><block type="pen_clear"></block><block type="pen_stamp"></block><block type="pen_pendown"></block><block type="pen_penup"></block><block type="pen_setpencolortocolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value></block><block type="pen_changepencolorby"><value name="COLOR"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="pen_setpencolortonum"><value name="COLOR"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="pen_changepenshadeby"><value name="SHADE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="pen_setpenshadeto"><value name="SHADE"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block><block type="pen_changepensizeby"><value name="SIZE"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block><block type="pen_setpensizeto"><value name="SIZE"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block></category><category name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE"></category><category name="Lists" colour="#FF8C1A" secondaryColour="#DB6E00"><block type="data_listcontents"></block><block type="data_addtolist"><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_deleteoflist"><value name="INDEX"><shadow type="data_listindexall"><field name="INDEX">1</field></shadow></value></block><block type="data_insertatlist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_replaceitemoflist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_itemoflist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value></block><block type="data_lengthoflist"></block><block type="data_listcontainsitem"><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_showlist"></block><block type="data_hidelist"></block></category><category name="Events" colour="#FFD500" secondaryColour="#CC9900"><block type="event_whenflagclicked"></block><block type="event_whenkeypressed"></block><block type="event_whenthisspriteclicked"></block><block type="event_whenbackdropswitchesto"></block><block type="event_whengreaterthan"><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="event_whenbroadcastreceived"></block><block type="event_broadcast"><value name="BROADCAST_OPTION"><shadow type="event_broadcast_menu"></shadow></value></block><block type="event_broadcastandwait"><value name="BROADCAST_OPTION"><shadow type="event_broadcast_menu"></shadow></value></block></category><category name="Control" colour="#FFAB19" secondaryColour="#CF8B17"><block type="control_wait"><value name="DURATION"><shadow type="math_positive_number"><field name="NUM">1</field></shadow></value></block><block type="control_repeat"><value name="TIMES"><shadow type="math_whole_number"><field name="NUM">10</field></shadow></value></block><block type="control_forever"></block><block type="control_if"></block><block type="control_if_else"></block><block type="control_wait_until"></block><block type="control_repeat_until"></block><block type="control_stop"></block><block type="control_start_as_clone"></block><block type="control_create_clone_of"><value name="CLONE_OPTION"><shadow type="control_create_clone_of_menu"></shadow></value></block><block type="control_delete_this_clone"></block></category><category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8"><block type="sensing_touchingobject"><value name="TOUCHINGOBJECTMENU"><shadow type="sensing_touchingobjectmenu"></shadow></value></block><block type="sensing_touchingcolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value></block><block type="sensing_coloristouchingcolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value><value name="COLOR2"><shadow type="colour_picker"></shadow></value></block><block type="sensing_distanceto"><value name="DISTANCETOMENU"><shadow type="sensing_distancetomenu"></shadow></value></block><block type="sensing_askandwait"><value name="QUESTION"><shadow type="text"><field name="TEXT">What\'s your name?</field></shadow></value></block><block type="sensing_answer"></block><block type="sensing_keypressed"><value name="KEY_OPTION"><shadow type="sensing_keyoptions"></shadow></value></block><block type="sensing_mousedown"></block><block type="sensing_mousex"></block><block type="sensing_mousey"></block><block type="sensing_loudness"></block><block type="sensing_videoon"><value name="VIDEOONMENU1"><shadow type="sensing_videoonmenuone"></shadow></value><value name="VIDEOONMENU2"><shadow type="sensing_videoonmenutwo"></shadow></value></block><block type="sensing_videotoggle"><value name="VIDEOTOGGLEMENU"><shadow type="sensing_videotogglemenu"></shadow></value></block><block type="sensing_setvideotransparency"><value name="TRANSPARENCY"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block><block type="sensing_timer"></block><block type="sensing_resettimer"></block><block type="sensing_of"><value name="PROPERTY"><shadow type="sensing_of_property_menu"></shadow></value><value name="OBJECT"><shadow type="sensing_of_object_menu"></shadow></value></block><block type="sensing_current"><value name="CURRENTMENU"><shadow type="sensing_currentmenu"></shadow></value></block><block type="sensing_dayssince2000"></block><block type="sensing_username"></block></category><category name="Operators" colour="#40BF4A" secondaryColour="#389438"><block type="operator_add"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_subtract"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_multiply"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_divide"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_random"><value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="TO"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="operator_lt"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_equals"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_gt"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_and"></block><block type="operator_or"></block><block type="operator_not"></block><block type="operator_join"><value name="STRING1"><shadow type="text"><field name="TEXT">hello</field></shadow></value><value name="STRING2"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_letter_of"><value name="LETTER"><shadow type="math_whole_number"><field name="NUM">1</field></shadow></value><value name="STRING"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_length"><value name="STRING"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_mod"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_round"><value name="NUM"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_mathop"><value name="OPERATOR"><shadow type="operator_mathop_menu"></shadow></value><value name="NUM"><shadow type="math_number"><field name="NUM"></field></shadow></value></block></category><category name="More Blocks" colour="#FF6680" secondaryColour="#FF3355" custom="PROCEDURE"></category></xml>';
 		// Copyright 2016 Google Inc.  Apache License 2.0
 		Blockly.constants={};Blockly.DRAG_RADIUS=3;Blockly.SNAP_RADIUS=48;Blockly.CONNECTING_SNAP_RADIUS=96;Blockly.CURRENT_CONNECTION_PREFERENCE=20;Blockly.BUMP_DELAY=0;Blockly.COLLAPSE_CHARS=30;Blockly.LONGPRESS=750;Blockly.SOUND_LIMIT=100;Blockly.HSV_SATURATION=.45;Blockly.HSV_VALUE=.65;Blockly.SPRITE={width:96,height:124,url:"sprites.png"};Blockly.SVG_NS="http://www.w3.org/2000/svg";Blockly.HTML_NS="http://www.w3.org/1999/xhtml";Blockly.INPUT_VALUE=1;Blockly.OUTPUT_VALUE=2;Blockly.NEXT_STATEMENT=3;
 		Blockly.PREVIOUS_STATEMENT=4;Blockly.DUMMY_INPUT=5;Blockly.ALIGN_LEFT=-1;Blockly.ALIGN_CENTRE=0;Blockly.ALIGN_RIGHT=1;Blockly.DRAG_NONE=0;Blockly.DRAG_STICKY=1;Blockly.DRAG_BEGIN=1;Blockly.DRAG_FREE=2;Blockly.OPPOSITE_TYPE=[];Blockly.OPPOSITE_TYPE[Blockly.INPUT_VALUE]=Blockly.OUTPUT_VALUE;Blockly.OPPOSITE_TYPE[Blockly.OUTPUT_VALUE]=Blockly.INPUT_VALUE;Blockly.OPPOSITE_TYPE[Blockly.NEXT_STATEMENT]=Blockly.PREVIOUS_STATEMENT;Blockly.OPPOSITE_TYPE[Blockly.PREVIOUS_STATEMENT]=Blockly.NEXT_STATEMENT;
-		Blockly.TOOLBOX_AT_TOP=0;Blockly.TOOLBOX_AT_BOTTOM=1;Blockly.TOOLBOX_AT_LEFT=2;Blockly.TOOLBOX_AT_RIGHT=3;Blockly.OUTPUT_SHAPE_HEXAGONAL=1;Blockly.OUTPUT_SHAPE_ROUND=2;Blockly.OUTPUT_SHAPE_SQUARE=3;Blockly.STACK_GLOW_RADIUS=1.3;Blockly.REPLACEMENT_GLOW_RADIUS=2;Blockly.Categories={motion:"motion",looks:"looks",sound:"sounds",pen:"pen",data:"data",event:"events",control:"control",sensing:"sensing",operators:"operators",more:"more"};Blockly.Blocks.data={};Blockly.Blocks.data_variablemenu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_variable",name:"VARIABLE"}],inputsInline:!0,output:"String",colour:Blockly.Colours.data.secondary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.data_variable={init:function(){this.jsonInit({message0:"%1",args0:[{type:"input_value",name:"VARIABLE"}],category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
-		Blockly.Blocks.data_setvariableto={init:function(){this.jsonInit({message0:"set %1 to %2",args0:[{type:"input_value",name:"VARIABLE"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_changevariableby={init:function(){this.jsonInit({message0:"change %1 by %2",args0:[{type:"input_value",name:"VARIABLE"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_showvariable={init:function(){this.jsonInit({message0:"show variable %1",args0:[{type:"input_value",name:"VARIABLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_hidevariable={init:function(){this.jsonInit({message0:"hide variable %1",args0:[{type:"input_value",name:"VARIABLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_listcontents={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_variable",name:"LIST"}],category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
-		Blockly.Blocks.data_listindexall={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_numberdropdown",name:"INDEX",value:"1",min:1,precision:1,options:[["1","1"],["last","last"],["all","all"]]}],output:"String",category:Blockly.Categories.data,outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
-		Blockly.Blocks.data_listindexrandom={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_numberdropdown",name:"INDEX",value:"1",min:1,precision:1,options:[["1","1"],["last","last"],["random","random"]]}],output:"String",category:Blockly.Categories.data,outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
-		Blockly.Blocks.data_addtolist={init:function(){this.jsonInit({message0:"add %1 to %2",args0:[{type:"input_value",name:"ITEM"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_deleteoflist={init:function(){this.jsonInit({message0:"delete %1 of %2",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_insertatlist={init:function(){this.jsonInit({message0:"insert %1 at %2 of %3",args0:[{type:"input_value",name:"ITEM"},{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_replaceitemoflist={init:function(){this.jsonInit({message0:"replace item %1 of %2 with %3",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"},{type:"input_value",name:"ITEM"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_itemoflist={init:function(){this.jsonInit({message0:"item %1 of %2",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],output:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.data_lengthoflist={init:function(){this.jsonInit({message0:"length of %1",args0:[{type:"field_variable",name:"LIST"}],output:"Number",category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.data_listcontainsitem={init:function(){this.jsonInit({message0:"%1 contains %2?",args0:[{type:"field_variable",name:"LIST"},{type:"input_value",name:"ITEM"}],output:"Boolean",outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_showlist={init:function(){this.jsonInit({message0:"show list %1",args0:[{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
-		Blockly.Blocks.data_hidelist={init:function(){this.jsonInit({message0:"hide list %1",args0:[{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};Blockly.Blocks.defaultToolbox='<xml id="toolbox-categories" style="display: none"><category name="Motion" colour="#4C97FF" secondaryColour="#3373CC"><block type="motion_movesteps"><value name="STEPS"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_turnright"><value name="DEGREES"><shadow type="math_number"><field name="NUM">15</field></shadow></value></block><block type="motion_turnleft"><value name="DEGREES"><shadow type="math_number"><field name="NUM">15</field></shadow></value></block><block type="motion_pointindirection"><value name="DIRECTION"><shadow type="math_angle"><field name="NUM">90</field></shadow></value></block><block type="motion_pointtowards"><value name="TOWARDS"><shadow type="motion_pointtowards_menu"></shadow></value></block><block type="motion_gotoxy"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_goto"><value name="TO"><shadow type="motion_goto_menu"></shadow></value></block><block type="motion_glidesecstoxy"><value name="SECS"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_changexby"><value name="DX"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_setx"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_changeyby"><value name="DY"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="motion_sety"><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="motion_ifonedgebounce"></block><block type="motion_setrotationstyle"><value name="STYLE"><shadow type="motion_setrotationstyle_menu"></shadow></value></block><block type="motion_xposition"></block><block type="motion_yposition"></block><block type="motion_direction"></block></category><category name="Looks" colour="#9966FF" secondaryColour="#774DCB"><block type="looks_sayforsecs"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hello!</field></shadow></value><value name="SECS"><shadow type="math_number"><field name="NUM">2</field></shadow></value></block><block type="looks_say"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hello!</field></shadow></value></block><block type="looks_thinkforsecs"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hmm...</field></shadow></value><value name="SECS"><shadow type="math_number"><field name="NUM">2</field></shadow></value></block><block type="looks_think"><value name="MESSAGE"><shadow type="text"><field name="TEXT">Hmm...</field></shadow></value></block><block type="looks_show"></block><block type="looks_hide"></block><block type="looks_switchcostumeto"><value name="COSTUME"><shadow type="looks_costume"></shadow></value></block><block type="looks_nextcostume"></block><block type="looks_nextbackdrop"></block><block type="looks_switchbackdropto"><value name="BACKDROP"><shadow type="looks_backdrops"></shadow></value></block><block type="looks_switchbackdroptoandwait"><value name="BACKDROP"><shadow type="looks_backdrops"></shadow></value></block><block type="looks_changeeffectby"><value name="EFFECT"><shadow type="looks_effectmenu"></shadow></value><value name="CHANGE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_seteffectto"><value name="EFFECT"><shadow type="looks_effectmenu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_cleargraphiceffects"></block><block type="looks_changesizeby"><value name="CHANGE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="looks_setsizeto"><value name="SIZE"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block><block type="looks_gotofront"></block><block type="looks_gobacklayers"><value name="NUM"><shadow type="math_integer"><field name="NUM">1</field></shadow></value></block><block type="looks_costumeorder"></block><block type="looks_backdroporder"></block><block type="looks_backdropname"></block><block type="looks_size"></block></category><category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD"><block type="sound_play"><value name="SOUND_MENU"><shadow type="sound_sounds_option"></shadow></value></block><block type="sound_playuntildone"><value name="SOUND_MENU"><shadow type="sound_sounds_option"></shadow></value></block><block type="sound_stopallsounds"></block><block type="sound_playdrumforbeats"><value name="DRUMTYPE"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="BEATS"><shadow type="math_number"><field name="NUM">0.25</field></shadow></value></block><block type="sound_restforbeats"><value name="BEATS"><shadow type="math_number"><field name="NUM">0.25</field></shadow></value></block><block type="sound_playnoteforbeats"><value name="NOTE"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="BEATS"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block><block type="sound_setinstrumentto"><value name="INSTRUMENT"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block><block type="sound_seteffectto"><value name="EFFECT"><shadow type="sound_effects_menu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="sound_changeeffectby"><value name="EFFECT"><shadow type="sound_effects_menu"></shadow></value><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="sound_cleareffects"></block><block type="sound_changevolumeby"><value name="VOLUME"><shadow type="math_number"><field name="NUM">-10</field></shadow></value></block><block type="sound_setvolumeto"><value name="VOLUME"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block><block type="sound_volume"></block><block type="sound_changetempoby"><value name="TEMPO"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block><block type="sound_settempotobpm"><value name="TEMPO"><shadow type="math_number"><field name="NUM">60</field></shadow></value></block><block type="sound_tempo"></block></category><category name="Pen" colour="#00B295" secondaryColour="#0B8E69"><block type="pen_clear"></block><block type="pen_stamp"></block><block type="pen_pendown"></block><block type="pen_penup"></block><block type="pen_setpencolortocolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value></block><block type="pen_changepencolorby"><value name="COLOR"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="pen_setpencolortonum"><value name="COLOR"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block><block type="pen_changepenshadeby"><value name="SHADE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="pen_setpenshadeto"><value name="SHADE"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block><block type="pen_changepensizeby"><value name="SIZE"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block><block type="pen_setpensizeto"><value name="SIZE"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block></category><category name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE"></category><category name="Lists" colour="#FF8C1A" secondaryColour="#DB6E00"><block type="data_listcontents"></block><block type="data_addtolist"><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_deleteoflist"><value name="INDEX"><shadow type="data_listindexall"><field name="INDEX">1</field></shadow></value></block><block type="data_insertatlist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_replaceitemoflist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_itemoflist"><value name="INDEX"><shadow type="data_listindexrandom"><field name="INDEX">1</field></shadow></value></block><block type="data_lengthoflist"></block><block type="data_listcontainsitem"><value name="ITEM"><shadow type="text"><field name="TEXT">thing</field></shadow></value></block><block type="data_showlist"></block><block type="data_hidelist"></block></category><category name="Events" colour="#FFD500" secondaryColour="#CC9900"><block type="event_whenflagclicked"></block><block type="event_whenkeypressed"></block><block type="event_whenthisspriteclicked"></block><block type="event_whenbackdropswitchesto"></block><block type="event_whengreaterthan"><value name="VALUE"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="event_whenbroadcastreceived"></block><block type="event_broadcast"><value name="BROADCAST_OPTION"><shadow type="event_broadcast_menu"></shadow></value></block><block type="event_broadcastandwait"><value name="BROADCAST_OPTION"><shadow type="event_broadcast_menu"></shadow></value></block></category><category name="Control" colour="#FFAB19" secondaryColour="#CF8B17"><block type="control_wait"><value name="DURATION"><shadow type="math_positive_number"><field name="NUM">1</field></shadow></value></block><block type="control_repeat"><value name="TIMES"><shadow type="math_whole_number"><field name="NUM">10</field></shadow></value></block><block type="control_forever"></block><block type="control_if"></block><block type="control_if_else"></block><block type="control_wait_until"></block><block type="control_repeat_until"></block><block type="control_stop"></block><block type="control_start_as_clone"></block><block type="control_create_clone_of"><value name="CLONE_OPTION"><shadow type="control_create_clone_of_menu"></shadow></value></block><block type="control_delete_this_clone"></block></category><category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8"><block type="sensing_touchingobject"><value name="TOUCHINGOBJECTMENU"><shadow type="sensing_touchingobjectmenu"></shadow></value></block><block type="sensing_touchingcolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value></block><block type="sensing_coloristouchingcolor"><value name="COLOR"><shadow type="colour_picker"></shadow></value><value name="COLOR2"><shadow type="colour_picker"></shadow></value></block><block type="sensing_distanceto"><value name="DISTANCETOMENU"><shadow type="sensing_distancetomenu"></shadow></value></block><block type="sensing_askandwait"><value name="QUESTION"><shadow type="text"><field name="TEXT">What\'s your name?</field></shadow></value></block><block type="sensing_answer"></block><block type="sensing_keypressed"><value name="KEY_OPTION"><shadow type="sensing_keyoptions"></shadow></value></block><block type="sensing_mousedown"></block><block type="sensing_mousex"></block><block type="sensing_mousey"></block><block type="sensing_loudness"></block><block type="sensing_videoon"><value name="VIDEOONMENU1"><shadow type="sensing_videoonmenuone"></shadow></value><value name="VIDEOONMENU2"><shadow type="sensing_videoonmenutwo"></shadow></value></block><block type="sensing_videotoggle"><value name="VIDEOTOGGLEMENU"><shadow type="sensing_videotogglemenu"></shadow></value></block><block type="sensing_setvideotransparency"><value name="TRANSPARENCY"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block><block type="sensing_timer"></block><block type="sensing_resettimer"></block><block type="sensing_of"><value name="PROPERTY"><shadow type="sensing_of_property_menu"></shadow></value><value name="OBJECT"><shadow type="sensing_of_object_menu"></shadow></value></block><block type="sensing_current"><value name="CURRENTMENU"><shadow type="sensing_currentmenu"></shadow></value></block><block type="sensing_dayssince2000"></block><block type="sensing_username"></block></category><category name="Operators" colour="#40BF4A" secondaryColour="#389438"><block type="operator_add"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_subtract"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_multiply"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_divide"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_random"><value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="TO"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block><block type="operator_lt"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_equals"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_gt"><value name="OPERAND1"><shadow type="text"><field name="TEXT"></field></shadow></value><value name="OPERAND2"><shadow type="text"><field name="TEXT"></field></shadow></value></block><block type="operator_and"></block><block type="operator_or"></block><block type="operator_not"></block><block type="operator_join"><value name="STRING1"><shadow type="text"><field name="TEXT">hello</field></shadow></value><value name="STRING2"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_letter_of"><value name="LETTER"><shadow type="math_whole_number"><field name="NUM">1</field></shadow></value><value name="STRING"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_length"><value name="STRING"><shadow type="text"><field name="TEXT">world</field></shadow></value></block><block type="operator_mod"><value name="NUM1"><shadow type="math_number"><field name="NUM"></field></shadow></value><value name="NUM2"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_round"><value name="NUM"><shadow type="math_number"><field name="NUM"></field></shadow></value></block><block type="operator_mathop"><value name="OPERATOR"><shadow type="operator_mathop_menu"></shadow></value><value name="NUM"><shadow type="math_number"><field name="NUM"></field></shadow></value></block></category><category name="More Blocks" colour="#FF6680" secondaryColour="#FF3355" custom="PROCEDURE"></category></xml>';Blockly.Blocks.event={};Blockly.Blocks.event_whenflagclicked={init:function(){this.jsonInit({id:"event_whenflagclicked",message0:"when %1 clicked",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"icons/event_whenflagclicked.svg",width:24,height:24,alt:"flag",flip_rtl:!0}],inputsInline:!0,nextStatement:null,category:Blockly.Categories.event,colour:Blockly.Colours.event.primary,colourSecondary:Blockly.Colours.event.secondary,colourTertiary:Blockly.Colours.event.tertiary})}};
+		Blockly.TOOLBOX_AT_TOP=0;Blockly.TOOLBOX_AT_BOTTOM=1;Blockly.TOOLBOX_AT_LEFT=2;Blockly.TOOLBOX_AT_RIGHT=3;Blockly.OUTPUT_SHAPE_HEXAGONAL=1;Blockly.OUTPUT_SHAPE_ROUND=2;Blockly.OUTPUT_SHAPE_SQUARE=3;Blockly.STACK_GLOW_RADIUS=1.3;Blockly.REPLACEMENT_GLOW_RADIUS=2;Blockly.Categories={motion:"motion",looks:"looks",sound:"sounds",pen:"pen",data:"data",event:"events",control:"control",sensing:"sensing",operators:"operators",more:"more"};Blockly.Blocks.event={};Blockly.Blocks.event_whenflagclicked={init:function(){this.jsonInit({id:"event_whenflagclicked",message0:"when %1 clicked",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"icons/event_whenflagclicked.svg",width:24,height:24,alt:"flag",flip_rtl:!0}],inputsInline:!0,nextStatement:null,category:Blockly.Categories.event,colour:Blockly.Colours.event.primary,colourSecondary:Blockly.Colours.event.secondary,colourTertiary:Blockly.Colours.event.tertiary})}};
 		Blockly.Blocks.event_whenthisspriteclicked={init:function(){this.jsonInit({message0:"when this sprite clicked",inputsInline:!0,nextStatement:null,category:Blockly.Categories.event,colour:Blockly.Colours.event.primary,colourSecondary:Blockly.Colours.event.secondary,colourTertiary:Blockly.Colours.event.tertiary})}};
 		Blockly.Blocks.event_whenbroadcastreceived={init:function(){this.jsonInit({id:"event_whenbroadcastreceived",message0:"when I receive %1",args0:[{type:"field_dropdown",name:"BROADCAST_OPTION",options:[["message1","message1"],["message2","message2"],["new message","new message"]]}],inputsInline:!0,nextStatement:null,category:Blockly.Categories.event,colour:Blockly.Colours.event.primary,colourSecondary:Blockly.Colours.event.secondary,colourTertiary:Blockly.Colours.event.tertiary})}};
 		Blockly.Blocks.event_whenbackdropswitchesto={init:function(){this.jsonInit({message0:"when backdrop switches to %1",args0:[{type:"field_dropdown",name:"BACKDROP",options:[["backdrop1","BACKDROP1"]]}],inputsInline:!0,nextStatement:null,category:Blockly.Categories.event,colour:Blockly.Colours.event.primary,colourSecondary:Blockly.Colours.event.secondary,colourTertiary:Blockly.Colours.event.tertiary})}};
@@ -52081,26 +52677,24 @@ webpackJsonp([0],[
 		Blockly.Blocks.looks_costumeorder={init:function(){this.jsonInit({message0:"costume #",category:Blockly.Categories.looks,colour:Blockly.Colours.looks.primary,colourSecondary:Blockly.Colours.looks.secondary,colourTertiary:Blockly.Colours.looks.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
 		Blockly.Blocks.looks_backdroporder={init:function(){this.jsonInit({message0:"backdrop #",category:Blockly.Categories.looks,colour:Blockly.Colours.looks.primary,colourSecondary:Blockly.Colours.looks.secondary,colourTertiary:Blockly.Colours.looks.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
 		Blockly.Blocks.looks_switchbackdroptoandwait={init:function(){this.jsonInit({message0:"switch backdrop to %1 and wait",args0:[{type:"input_value",name:"BACKDROP"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.looks,colour:Blockly.Colours.looks.primary,colourSecondary:Blockly.Colours.looks.secondary,colourTertiary:Blockly.Colours.looks.tertiary})}};
-		Blockly.Blocks.looks_nextbackdrop={init:function(){this.jsonInit({message0:"next backdrop",previousStatement:null,nextStatement:null,category:Blockly.Categories.looks,colour:Blockly.Colours.looks.primary,colourSecondary:Blockly.Colours.looks.secondary,colourTertiary:Blockly.Colours.looks.tertiary})}};Blockly.Blocks.motion={};Blockly.Blocks.motion_movesteps={init:function(){this.jsonInit({message0:"move %1 steps",args0:[{type:"input_value",name:"STEPS"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_turnright={init:function(){this.jsonInit({message0:"turn %1 %2 degrees",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"/turnright_arrow.png",width:16,height:16},{type:"input_value",name:"DEGREES"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_turnleft={init:function(){this.jsonInit({message0:"turn %1 %2 degrees",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"/turnleft_arrow.png",width:16,height:16},{type:"input_value",name:"DEGREES"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_pointindirection={init:function(){this.jsonInit({message0:"point in direction %1",args0:[{type:"input_value",name:"DIRECTION"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_pointtowards_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"TOWARDS",options:[["mouse-pointer","_mouse_"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.motion_pointtowards={init:function(){this.jsonInit({message0:"point towards %1",args0:[{type:"input_value",name:"TOWARDS"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_goto_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"TO",options:[["mouse-pointer","_mouse_"],["random position","_random_"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.motion_gotoxy={init:function(){this.jsonInit({message0:"go to x: %1 y: %2",args0:[{type:"input_value",name:"X"},{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_goto={init:function(){this.jsonInit({message0:"go to %1",args0:[{type:"input_value",name:"TO"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_glidesecstoxy={init:function(){this.jsonInit({message0:"glide %1 secs to x: %2 y: %3",args0:[{type:"input_value",name:"SECS"},{type:"input_value",name:"X"},{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_changexby={init:function(){this.jsonInit({message0:"change x by %1",args0:[{type:"input_value",name:"DX"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_setx={init:function(){this.jsonInit({message0:"set x to %1",args0:[{type:"input_value",name:"X"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_changeyby={init:function(){this.jsonInit({message0:"change y by %1",args0:[{type:"input_value",name:"DY"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_sety={init:function(){this.jsonInit({message0:"set y to %1",args0:[{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_ifonedgebounce={init:function(){this.jsonInit({message0:"if on edge, bounce",previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_setrotationstyle_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"STYLE",options:[["left-right","left-right"],["don't rotate","don't rotate"],["all around","all around"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.motion_setrotationstyle={init:function(){this.jsonInit({message0:"set rotation style %1",args0:[{type:"input_value",name:"STYLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
-		Blockly.Blocks.motion_xposition={init:function(){this.jsonInit({message0:"x position",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
-		Blockly.Blocks.motion_yposition={init:function(){this.jsonInit({message0:"y position",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
-		Blockly.Blocks.motion_direction={init:function(){this.jsonInit({message0:"direction",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
+		Blockly.Blocks.looks_nextbackdrop={init:function(){this.jsonInit({message0:"next backdrop",previousStatement:null,nextStatement:null,category:Blockly.Categories.looks,colour:Blockly.Colours.looks.primary,colourSecondary:Blockly.Colours.looks.secondary,colourTertiary:Blockly.Colours.looks.tertiary})}};Blockly.Blocks.data={};Blockly.Blocks.data_variablemenu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_variable",name:"VARIABLE"}],inputsInline:!0,output:"String",colour:Blockly.Colours.data.secondary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.data_variable={init:function(){this.jsonInit({message0:"%1",args0:[{type:"input_value",name:"VARIABLE"}],category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
+		Blockly.Blocks.data_setvariableto={init:function(){this.jsonInit({message0:"set %1 to %2",args0:[{type:"input_value",name:"VARIABLE"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_changevariableby={init:function(){this.jsonInit({message0:"change %1 by %2",args0:[{type:"input_value",name:"VARIABLE"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_showvariable={init:function(){this.jsonInit({message0:"show variable %1",args0:[{type:"input_value",name:"VARIABLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_hidevariable={init:function(){this.jsonInit({message0:"hide variable %1",args0:[{type:"input_value",name:"VARIABLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_listcontents={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_variable",name:"LIST"}],category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,output:"String",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
+		Blockly.Blocks.data_listindexall={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_numberdropdown",name:"INDEX",value:"1",min:1,precision:1,options:[["1","1"],["last","last"],["all","all"]]}],output:"String",category:Blockly.Categories.data,outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
+		Blockly.Blocks.data_listindexrandom={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_numberdropdown",name:"INDEX",value:"1",min:1,precision:1,options:[["1","1"],["last","last"],["random","random"]]}],output:"String",category:Blockly.Categories.data,outputShape:Blockly.OUTPUT_SHAPE_ROUND,colour:Blockly.Colours.textField})}};
+		Blockly.Blocks.data_addtolist={init:function(){this.jsonInit({message0:"add %1 to %2",args0:[{type:"input_value",name:"ITEM"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_deleteoflist={init:function(){this.jsonInit({message0:"delete %1 of %2",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_insertatlist={init:function(){this.jsonInit({message0:"insert %1 at %2 of %3",args0:[{type:"input_value",name:"ITEM"},{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_replaceitemoflist={init:function(){this.jsonInit({message0:"replace item %1 of %2 with %3",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"},{type:"input_value",name:"ITEM"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_itemoflist={init:function(){this.jsonInit({message0:"item %1 of %2",args0:[{type:"input_value",name:"INDEX"},{type:"field_variable",name:"LIST"}],output:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.data_lengthoflist={init:function(){this.jsonInit({message0:"length of %1",args0:[{type:"field_variable",name:"LIST"}],output:"Number",category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.data_listcontainsitem={init:function(){this.jsonInit({message0:"%1 contains %2?",args0:[{type:"field_variable",name:"LIST"},{type:"input_value",name:"ITEM"}],output:"Boolean",outputShape:Blockly.OUTPUT_SHAPE_HEXAGONAL,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_showlist={init:function(){this.jsonInit({message0:"show list %1",args0:[{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
+		Blockly.Blocks.data_hidelist={init:function(){this.jsonInit({message0:"hide list %1",args0:[{type:"field_variable",name:"LIST"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.data,colour:Blockly.Colours.data.primary,colourSecondary:Blockly.Colours.data.secondary,colourTertiary:Blockly.Colours.data.tertiary})}};
 		// Copyright 2012 Google Inc.  Apache License 2.0
 		Blockly.Blocks.operators={};Blockly.Blocks.operator_add={init:function(){this.jsonInit({message0:"%1 + %2",args0:[{type:"input_value",name:"NUM1"},{type:"input_value",name:"NUM2"}],inputsInline:!0,output:"Number",category:Blockly.Categories.operators,colour:Blockly.Colours.operators.primary,colourSecondary:Blockly.Colours.operators.secondary,colourTertiary:Blockly.Colours.operators.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.operator_subtract={init:function(){this.jsonInit({message0:"%1 - %2",args0:[{type:"input_value",name:"NUM1"},{type:"input_value",name:"NUM2"}],inputsInline:!0,output:"Number",category:Blockly.Categories.operators,colour:Blockly.Colours.operators.primary,colourSecondary:Blockly.Colours.operators.secondary,colourTertiary:Blockly.Colours.operators.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
@@ -52167,7 +52761,7 @@ webpackJsonp([0],[
 		Blockly.Blocks.sensing_current={init:function(){this.jsonInit({message0:"current %1",args0:[{type:"input_value",name:"CURRENTMENU"}],inputsInline:!0,output:"Number",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
 		Blockly.Blocks.sensing_currentmenu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"CURRENTMENU",options:[["year","YEAR"],["month","MONTH"],["date","DATE"],["day of week","DAYOFWEEK"],["hour","HOUR"],["minute","MINUTE"],["second","SECOND"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sensing.secondary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sensing_dayssince2000={init:function(){this.jsonInit({message0:"days since 2000",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
-		Blockly.Blocks.sensing_username={init:function(){this.jsonInit({message0:"username",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};Blockly.Blocks.sound={};Blockly.Blocks.sound_sounds_option={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SOUND_MENU",options:[["meow","0"],["boing","1"],["cave","2"],["drip drop","3"],["drum machine","4"],["eggs","5"],["zoop","6"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sensing_username={init:function(){this.jsonInit({message0:"username",category:Blockly.Categories.sensing,colour:Blockly.Colours.sensing.primary,colourSecondary:Blockly.Colours.sensing.secondary,colourTertiary:Blockly.Colours.sensing.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};Blockly.Blocks.sound={};Blockly.Blocks.sound_sounds_option={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SOUND_MENU",options:[["1","0"],["2","1"],["3","2"],["4","3"],["5","4"],["6","5"],["7","6"],["8","7"],["9","8"],["10","9"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sound_play={init:function(){this.jsonInit({message0:"play sound %1",args0:[{type:"input_value",name:"SOUND_MENU"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_playuntildone={init:function(){this.jsonInit({message0:"play sound %1 until done",args0:[{type:"input_value",name:"SOUND_MENU"}],inputsInline:!0,previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_playwithpitch={init:function(){this.jsonInit({message0:"play sound %1 with pitch %2",args0:[{type:"input_value",name:"SOUND_NUM"},{type:"input_value",name:"PITCH"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
@@ -52178,10 +52772,11 @@ webpackJsonp([0],[
 		Blockly.Blocks.sound_restforbeats={init:function(){this.jsonInit({message0:"rest for %1 beats",args0:[{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_playnote={init:function(){this.jsonInit({message0:"play note %1",args0:[{type:"input_value",name:"NOTE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_playnoteforbeats={init:function(){this.jsonInit({message0:"play note %1 for %2 beats",args0:[{type:"input_value",name:"NOTE"},{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
+		Blockly.Blocks.sound_playthereminforbeats={init:function(){this.jsonInit({message0:"play spooky note %1 for %2 beats",args0:[{type:"input_value",name:"NOTE"},{type:"input_value",name:"BEATS"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_scales_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"SCALE",options:[["major","MAJOR"],["minor","MINOR"],["pentatonic","PENTATONIC"],["chromatic","CHROMATIC"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sound_roots_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"ROOT",options:[["C","0"],["C#","1"],["D","2"],["D#","3"],["E","4"],["F","5"],["F#","6"],["G","7"],["G#","8"],["A","9"],["A#","10"],["B","11"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sound_setkey={init:function(){this.jsonInit({message0:"set key %1 %2",args0:[{type:"input_value",name:"ROOT"},{type:"input_value",name:"SCALE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
-		Blockly.Blocks.sound_effects_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"EFFECT",options:[["echo","ECHO"],["pan left/right","PAN"],["reverb","REVERB"],["pitch","PITCH"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.sound_effects_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"EFFECT",options:[["pitch","PITCH"],["pan left/right","PAN"],["echo","ECHO"],["reverb","REVERB"],["distortion","DISTORTION"],["robotic","ROBOTIC"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.sounds.secondary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
 		Blockly.Blocks.sound_seteffectto={init:function(){this.jsonInit({message0:"set effect %1 to %2",args0:[{type:"input_value",name:"EFFECT"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_changeeffectby={init:function(){this.jsonInit({message0:"change effect %1 by %2",args0:[{type:"input_value",name:"EFFECT"},{type:"input_value",name:"VALUE"}],previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_cleareffects={init:function(){this.jsonInit({message0:"clear audio effects",previousStatement:null,nextStatement:null,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
@@ -52191,7 +52786,26 @@ webpackJsonp([0],[
 		Blockly.Blocks.sound_volume={init:function(){this.jsonInit({message0:"volume",category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
 		Blockly.Blocks.sound_changetempoby={init:function(){this.jsonInit({message0:"change tempo by %1",args0:[{type:"input_value",name:"TEMPO"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
 		Blockly.Blocks.sound_settempotobpm={init:function(){this.jsonInit({message0:"set tempo to %1 bpm",args0:[{type:"input_value",name:"TEMPO"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary})}};
-		Blockly.Blocks.sound_tempo={init:function(){this.jsonInit({message0:"tempo",category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};
+		Blockly.Blocks.sound_tempo={init:function(){this.jsonInit({message0:"tempo",category:Blockly.Categories.sound,colour:Blockly.Colours.sounds.primary,colourSecondary:Blockly.Colours.sounds.secondary,colourTertiary:Blockly.Colours.sounds.tertiary,output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,checkboxInFlyout:!0})}};Blockly.Blocks.motion={};Blockly.Blocks.motion_movesteps={init:function(){this.jsonInit({message0:"move %1 steps",args0:[{type:"input_value",name:"STEPS"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_turnright={init:function(){this.jsonInit({message0:"turn %1 %2 degrees",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"/turnright_arrow.png",width:16,height:16},{type:"input_value",name:"DEGREES"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_turnleft={init:function(){this.jsonInit({message0:"turn %1 %2 degrees",args0:[{type:"field_image",src:Blockly.mainWorkspace.options.pathToMedia+"/turnleft_arrow.png",width:16,height:16},{type:"input_value",name:"DEGREES"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_pointindirection={init:function(){this.jsonInit({message0:"point in direction %1",args0:[{type:"input_value",name:"DIRECTION"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_pointtowards_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"TOWARDS",options:[["mouse-pointer","_mouse_"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.motion_pointtowards={init:function(){this.jsonInit({message0:"point towards %1",args0:[{type:"input_value",name:"TOWARDS"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_goto_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"TO",options:[["mouse-pointer","_mouse_"],["random position","_random_"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.motion_gotoxy={init:function(){this.jsonInit({message0:"go to x: %1 y: %2",args0:[{type:"input_value",name:"X"},{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_goto={init:function(){this.jsonInit({message0:"go to %1",args0:[{type:"input_value",name:"TO"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_glidesecstoxy={init:function(){this.jsonInit({message0:"glide %1 secs to x: %2 y: %3",args0:[{type:"input_value",name:"SECS"},{type:"input_value",name:"X"},{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_changexby={init:function(){this.jsonInit({message0:"change x by %1",args0:[{type:"input_value",name:"DX"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_setx={init:function(){this.jsonInit({message0:"set x to %1",args0:[{type:"input_value",name:"X"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_changeyby={init:function(){this.jsonInit({message0:"change y by %1",args0:[{type:"input_value",name:"DY"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_sety={init:function(){this.jsonInit({message0:"set y to %1",args0:[{type:"input_value",name:"Y"}],inputsInline:!0,previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_ifonedgebounce={init:function(){this.jsonInit({message0:"if on edge, bounce",previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_setrotationstyle_menu={init:function(){this.jsonInit({message0:"%1",args0:[{type:"field_dropdown",name:"STYLE",options:[["left-right","left-right"],["don't rotate","don't rotate"],["all around","all around"]]}],inputsInline:!0,output:"String",colour:Blockly.Colours.motion.secondary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,outputShape:Blockly.OUTPUT_SHAPE_ROUND})}};
+		Blockly.Blocks.motion_setrotationstyle={init:function(){this.jsonInit({message0:"set rotation style %1",args0:[{type:"input_value",name:"STYLE"}],previousStatement:null,nextStatement:null,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary})}};
+		Blockly.Blocks.motion_xposition={init:function(){this.jsonInit({message0:"x position",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
+		Blockly.Blocks.motion_yposition={init:function(){this.jsonInit({message0:"y position",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
+		Blockly.Blocks.motion_direction={init:function(){this.jsonInit({message0:"direction",output:"Number",outputShape:Blockly.OUTPUT_SHAPE_ROUND,category:Blockly.Categories.motion,colour:Blockly.Colours.motion.primary,colourSecondary:Blockly.Colours.motion.secondary,colourTertiary:Blockly.Colours.motion.tertiary,checkboxInFlyout:!0})}};
 
 		/*** EXPORTS FROM exports-loader ***/
 		module.exports = Blockly;
@@ -53251,7 +53865,7 @@ webpackJsonp([0],[
 		Blockly.DropDownDiv.getPositionMetrics=function(a,b,c,d){var e=Blockly.DropDownDiv.DIV_,f=goog.style.getPageOffset(Blockly.DropDownDiv.boundsElement_),g=goog.style.getSize(Blockly.DropDownDiv.boundsElement_),e=goog.style.getSize(e),h;b+e.height>f.y+g.height?d-e.height<f.y?(c=b+Blockly.DropDownDiv.PADDING_Y,h=!1):(a=c,c=d-e.height-Blockly.DropDownDiv.PADDING_Y,h=!0):(c=b+Blockly.DropDownDiv.PADDING_Y,h=!1);var k=a-Blockly.DropDownDiv.ARROW_SIZE/2,k=Math.max(f.x,Math.min(k,f.x+g.width));a=Math.max(f.x,
 		Math.min(a-e.width/2,f.x+g.width-e.width));k=Math.max(Blockly.DropDownDiv.ARROW_HORIZONTAL_PADDING,Math.min(k-a,e.width-Blockly.DropDownDiv.ARROW_HORIZONTAL_PADDING-Blockly.DropDownDiv.ARROW_SIZE));f=h?e.height-Blockly.DropDownDiv.BORDER_SIZE:0;f-=Blockly.DropDownDiv.ARROW_SIZE/2+Blockly.DropDownDiv.BORDER_SIZE;return{initialX:a,initialY:h?d-e.height:b,finalX:a,finalY:c,arrowX:k,arrowY:f,arrowAtTop:!h}};Blockly.DropDownDiv.isVisible=function(){return!!Blockly.DropDownDiv.owner_};
 		Blockly.DropDownDiv.hideIfOwner=function(a){return Blockly.DropDownDiv.owner_===a?(Blockly.DropDownDiv.hide(),!0):!1};Blockly.DropDownDiv.hide=function(){var a=Blockly.DropDownDiv.DIV_;a.style.transform="translate(0px, 0px)";a.style.opacity=0;Blockly.DropDownDiv.animateOutTimer_=setTimeout(function(){Blockly.DropDownDiv.hideWithoutAnimation()},1E3*Blockly.DropDownDiv.ANIMATION_TIME);Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)};
-		Blockly.DropDownDiv.hideWithoutAnimation=function(){if(Blockly.DropDownDiv.isVisible()){var a=Blockly.DropDownDiv.DIV_;Blockly.DropDownDiv.animateOutTimer_&&window.clearTimeout(Blockly.DropDownDiv.animateOutTimer_);a.style.transform="";a.style.top="";a.style.left="";a.style.display="none";Blockly.DropDownDiv.clearContent();Blockly.DropDownDiv.owner_=null;Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)}};Blockly.Events={};Blockly.Events.group_="";Blockly.Events.recordUndo=!0;Blockly.Events.disabled_=0;Blockly.Events.CREATE="create";Blockly.Events.DELETE="delete";Blockly.Events.CHANGE="change";Blockly.Events.MOVE="move";Blockly.Events.UI="ui";Blockly.Events.FIRE_QUEUE_=[];Blockly.Events.fire=function(a){Blockly.Events.isEnabled()&&(Blockly.Events.FIRE_QUEUE_.length||setTimeout(Blockly.Events.fireNow_,0),Blockly.Events.FIRE_QUEUE_.push(a))};
+		Blockly.DropDownDiv.hideWithoutAnimation=function(){var a=Blockly.DropDownDiv.DIV_;Blockly.DropDownDiv.animateOutTimer_&&window.clearTimeout(Blockly.DropDownDiv.animateOutTimer_);a.style.transform="";a.style.top="";a.style.left="";a.style.display="none";Blockly.DropDownDiv.clearContent();Blockly.DropDownDiv.owner_=null;Blockly.DropDownDiv.onHide_&&(Blockly.DropDownDiv.onHide_(),Blockly.DropDownDiv.onHide_=null)};Blockly.Events={};Blockly.Events.group_="";Blockly.Events.recordUndo=!0;Blockly.Events.disabled_=0;Blockly.Events.CREATE="create";Blockly.Events.DELETE="delete";Blockly.Events.CHANGE="change";Blockly.Events.MOVE="move";Blockly.Events.UI="ui";Blockly.Events.FIRE_QUEUE_=[];Blockly.Events.fire=function(a){Blockly.Events.isEnabled()&&(Blockly.Events.FIRE_QUEUE_.length||setTimeout(Blockly.Events.fireNow_,0),Blockly.Events.FIRE_QUEUE_.push(a))};
 		Blockly.Events.fireNow_=function(){for(var a=Blockly.Events.filter(Blockly.Events.FIRE_QUEUE_,!0),b=Blockly.Events.FIRE_QUEUE_.length=0,c;c=a[b];b++){var d=Blockly.Workspace.getById(c.workspaceId);d&&d.fireChangeListener(c)}};
 		Blockly.Events.filter=function(a,b){var c=goog.array.clone(a);b||c.reverse();for(var d=0,e;e=c[d];d++)for(var f=d+1,g;g=c[f];f++)e.type==g.type&&e.blockId==g.blockId&&e.workspaceId==g.workspaceId&&(e.type==Blockly.Events.MOVE?(e.newParentId=g.newParentId,e.newInputName=g.newInputName,e.newCoordinate=g.newCoordinate,c.splice(f,1),f--):e.type==Blockly.Events.CHANGE&&e.element==g.element&&e.name==g.name?(e.newValue=g.newValue,c.splice(f,1),f--):e.type!=Blockly.Events.UI||"click"!=g.element||"commentOpen"!=
 		e.element&&"mutatorOpen"!=e.element&&"warningOpen"!=e.element||(e.newValue=g.newValue,c.splice(f,1),f--));for(d=c.length-1;0<=d;d--)c[d].isNull()&&c.splice(d,1);b||c.reverse();for(d=1;e=c[d];d++)e.type==Blockly.Events.CHANGE&&"mutation"==e.element&&c.unshift(c.splice(d,1)[0]);return c};Blockly.Events.clearPendingUndo=function(){for(var a=0,b;b=Blockly.Events.FIRE_QUEUE_[a];a++)b.recordUndo=!1};Blockly.Events.disable=function(){Blockly.Events.disabled_++};Blockly.Events.enable=function(){Blockly.Events.disabled_--};
@@ -53470,7 +54084,7 @@ webpackJsonp([0],[
 		Blockly.RenderedConnection.prototype.connect_=function(a){Blockly.RenderedConnection.superClass_.connect_.call(this,a);var b=this.getSourceBlock();a=a.getSourceBlock();b.rendered&&b.updateDisabled();a.rendered&&a.updateDisabled();b.rendered&&a.rendered&&(this.type==Blockly.NEXT_STATEMENT||this.type==Blockly.PREVIOUS_STATEMENT?a.render():b.render())};Blockly.BlockSvg=function(a,b,c){this.svgGroup_=Blockly.createSvgElement("g",{},null);this.svgPath_=Blockly.createSvgElement("path",{"class":"blocklyPath blocklyBlockBackground"},this.svgGroup_);this.svgPath_.tooltip=this;this.rendered=!1;this.inputShapes_={};Blockly.Tooltip.bindMouseEvents(this.svgPath_);Blockly.BlockSvg.superClass_.constructor.call(this,a,b,c)};goog.inherits(Blockly.BlockSvg,Blockly.Block);Blockly.BlockSvg.prototype.height=0;Blockly.BlockSvg.prototype.width=0;
 		Blockly.BlockSvg.prototype.insertionMarkerMinWidth_=0;Blockly.BlockSvg.prototype.opacity_=1;Blockly.BlockSvg.prototype.dragStartXY_=null;Blockly.BlockSvg.prototype.isGlowingBlock_=!1;Blockly.BlockSvg.prototype.isGlowingStack_=!1;Blockly.BlockSvg.INLINE=-1;
 		Blockly.BlockSvg.prototype.initSvg=function(){goog.asserts.assert(this.workspace.rendered,"Workspace is headless.");if(!this.isInsertionMarker()){for(var a=0,b;b=this.inputList[a];a++)b.init(),b.type===Blockly.INPUT_VALUE&&this.initInputShape(b);b=this.getIcons();for(a=0;a<b.length;a++)b[a].createIcon()}this.updateColour();this.updateMovable();if(!this.workspace.options.readOnly&&!this.eventsInit_){Blockly.bindEvent_(this.getSvgRoot(),"mousedown",this,this.onMouseDown_);var c=this;Blockly.bindEvent_(this.getSvgRoot(),
-		"touchstart",null,function(a){Blockly.longStart_(a,c)})}this.eventsInit_=!0;this.getSvgRoot().parentNode||this.workspace.getCanvas().appendChild(this.getSvgRoot())};Blockly.BlockSvg.prototype.initInputShape=function(a){this.inputShapes_[a.name]||a.connection.getShadowDom()||(this.inputShapes_[a.name]=Blockly.createSvgElement("path",{"class":"blocklyPath",style:"visibility: hidden"},this.svgGroup_))};
+		"touchstart",null,function(a){Blockly.longStart_(a,c)})}this.eventsInit_=!0;this.getSvgRoot().parentNode||this.workspace.getCanvas().appendChild(this.getSvgRoot())};Blockly.BlockSvg.prototype.initInputShape=function(a){this.inputShapes_[a.name]||(this.inputShapes_[a.name]=Blockly.createSvgElement("path",{"class":"blocklyPath",style:"visibility: hidden"},this.svgGroup_))};
 		Blockly.BlockSvg.prototype.select=function(){if(this.isShadow()&&this.getParent())this.getParent().select();else if(Blockly.selected!=this){var a=null;if(Blockly.selected){a=Blockly.selected.id;Blockly.Events.disable();try{Blockly.selected.unselect()}finally{Blockly.Events.enable()}}a=new Blockly.Events.Ui(null,"selected",a,this.id);a.workspaceId=this.workspace.id;Blockly.Events.fire(a);Blockly.selected=this;this.addSelect()}};
 		Blockly.BlockSvg.prototype.unselect=function(){if(Blockly.selected==this){var a=new Blockly.Events.Ui(null,"selected",this.id,null);a.workspaceId=this.workspace.id;Blockly.Events.fire(a);Blockly.selected=null;this.removeSelect()}};Blockly.BlockSvg.prototype.setGlowBlock=function(a){this.isGlowingBlock_=a;this.updateColour()};
 		Blockly.BlockSvg.prototype.setGlowStack=function(a){this.isGlowingStack_=a;a=this.getSvgRoot();this.isGlowingStack_&&!a.hasAttribute("filter")?a.setAttribute("filter","url(#blocklyStackGlowFilter)"):!this.isGlowingStack_&&a.hasAttribute("filter")&&a.removeAttribute("filter")};Blockly.BlockSvg.prototype.mutator=null;Blockly.BlockSvg.prototype.comment=null;Blockly.BlockSvg.prototype.warning=null;
@@ -53597,7 +54211,7 @@ webpackJsonp([0],[
 		"s");b.style.transition=d;f.style.transition="font-size "+Blockly.FieldTextInput.ANIMATION_TIME+"s";f.style.fontSize=Blockly.BlockSvg.FIELD_TEXTINPUT_FONTSIZE_FINAL+"pt";b.style.boxShadow="0px 0px 0px 4px "+Blockly.Colours.fieldShadow};
 		Blockly.FieldTextInput.prototype.onHtmlInputKeyDown_=function(a){var b=Blockly.FieldTextInput.htmlInput_;13==a.keyCode?Blockly.WidgetDiv.hide():27==a.keyCode?(b.value=b.defaultValue,Blockly.WidgetDiv.hide()):9==a.keyCode&&(Blockly.WidgetDiv.hide(),this.sourceBlock_.tab(this,!a.shiftKey),a.preventDefault())};Blockly.FieldTextInput.GECKO_KEYCODE_WHITELIST=[97,99,118,120];
 		Blockly.FieldTextInput.prototype.onHtmlInputChange_=function(a){if("keypress"===a.type&&this.restrictor_){var b,c=!1;if(goog.userAgent.GECKO)if(b=a.charCode,32>b||127==b)c=!0;else{if(a.metaKey||a.ctrlKey)c=-1<Blockly.FieldTextInput.GECKO_KEYCODE_WHITELIST.indexOf(b)}else b=a.keyCode;b=String.fromCharCode(b);if(!c&&!this.restrictor_.test(b)&&a.preventDefault){a.preventDefault();return}}a=Blockly.FieldTextInput.htmlInput_;c=a.value;c!==a.oldValue_?(a.oldValue_=c,this.setValue(c),this.validate_()):goog.userAgent.WEBKIT&&
-		this.sourceBlock_.render();this.resizeEditor_()};Blockly.FieldTextInput.prototype.validate_=function(){var a=!0;goog.asserts.assertObject(Blockly.FieldTextInput.htmlInput_);var b=Blockly.FieldTextInput.htmlInput_;this.sourceBlock_&&(a=this.callValidator(b.value));null===a?Blockly.addClass_(b,"blocklyInvalidInput"):Blockly.removeClass_(b,"blocklyInvalidInput")};
+		this.sourceBlock_.render();this.resizeEditor_();Blockly.svgResize(this.sourceBlock_.workspace)};Blockly.FieldTextInput.prototype.validate_=function(){var a=!0;goog.asserts.assertObject(Blockly.FieldTextInput.htmlInput_);var b=Blockly.FieldTextInput.htmlInput_;this.sourceBlock_&&(a=this.callValidator(b.value));null===a?Blockly.addClass_(b,"blocklyInvalidInput"):Blockly.removeClass_(b,"blocklyInvalidInput")};
 		Blockly.FieldTextInput.prototype.resizeEditor_=function(){var a=this.sourceBlock_.workspace.scale,b=Blockly.WidgetDiv.DIV,c;Blockly.BlockSvg.FIELD_TEXTINPUT_EXPAND_PAST_TRUNCATION?(c=Blockly.measureText(Blockly.FieldTextInput.htmlInput_.style.fontSize,Blockly.FieldTextInput.htmlInput_.style.fontFamily,Blockly.FieldTextInput.htmlInput_.style.fontWeight,Blockly.FieldTextInput.htmlInput_.value),c+=Blockly.FieldTextInput.TEXT_MEASURE_PADDING_MAGIC,c*=a):c=this.sourceBlock_.getHeightWidth().width*a;c=
 		Math.max(c,Blockly.BlockSvg.FIELD_WIDTH_MIN_EDIT*a);c=Math.min(c,Blockly.BlockSvg.FIELD_WIDTH_MAX_EDIT*a);b.style.width=c/a+1+"px";b.style.height=Blockly.BlockSvg.FIELD_HEIGHT+1+"px";b.style.transform="scale("+a+")";var d=this.sourceBlock_.getHeightWidth().width;b.style.marginLeft=-.5*(c-d*a)+"px";d=this.getBorderRadius()+.5;b.style.borderRadius=d+"px";Blockly.FieldTextInput.htmlInput_.style.borderRadius=d+"px";d=this.sourceBlock_.getColourTertiary();b.style.borderColor=d;d=this.getAbsoluteXY_();
 		d.x-=a/2;d.y-=a/2;this.sourceBlock_.RTL&&(d.x+=c,d.x-=b.offsetWidth*a,d.x+=1*a);d.y+=1*a;goog.userAgent.GECKO&&Blockly.WidgetDiv.DIV.style.top&&(d.x+=2*a,d.y+=1*a);goog.userAgent.WEBKIT&&(d.y-=1*a);b.style.left=d.x+"px";b.style.top=d.y+"px"};Blockly.FieldTextInput.prototype.getBorderRadius=function(){return this.sourceBlock_.getOutputShape()==Blockly.OUTPUT_SHAPE_ROUND?Blockly.BlockSvg.NUMBER_FIELD_CORNER_RADIUS:Blockly.BlockSvg.TEXT_FIELD_CORNER_RADIUS};
@@ -53654,15 +54268,15 @@ webpackJsonp([0],[
 		Blockly.FieldTextDropdown.prototype.showEditor_=function(){this.dropDownOpen_||Blockly.FieldTextDropdown.superClass_.showEditor_.call(this,null,null,!0,function(){Blockly.WidgetDiv.hide();this.showDropdown_();Blockly.Touch.clearTouchIdentifier()})};Blockly.FieldTextDropdown.prototype.getOptions_=Blockly.FieldDropdown.prototype.getOptions_;Blockly.FieldTextDropdown.prototype.positionArrow=Blockly.FieldDropdown.prototype.positionArrow;Blockly.FieldTextDropdown.prototype.showDropdown_=Blockly.FieldDropdown.prototype.showEditor_;
 		Blockly.FieldTextDropdown.prototype.onHide=Blockly.FieldDropdown.prototype.onHide;Blockly.FieldNumber=function(a,b,c,d,e){b=this.getNumRestrictor(b,c,d);Blockly.FieldNumber.superClass_.constructor.call(this,a,e,b);this.addArgType("number")};goog.inherits(Blockly.FieldNumber,Blockly.FieldTextInput);Blockly.FieldNumber.DROPDOWN_WIDTH=168;Blockly.FieldNumber.DROPDOWN_Y_PADDING=8;Blockly.FieldNumber.NUMPAD_BUTTONS="789456123.0".split("");
 		Blockly.FieldNumber.NUMPAD_DELETE_ICON='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M28.89,11.45H16.79a2.86,2.86,0,0,0-2,.84L9.09,18a2.85,2.85,0,0,0,0,4l5.69,5.69a2.86,2.86,0,0,0,2,.84h12.1a2.86,2.86,0,0,0,2.86-2.86V14.31A2.86,2.86,0,0,0,28.89,11.45ZM27.15,22.73a1,1,0,0,1,0,1.41,1,1,0,0,1-.71.3,1,1,0,0,1-.71-0.3L23,21.41l-2.73,2.73a1,1,0,0,1-1.41,0,1,1,0,0,1,0-1.41L21.59,20l-2.73-2.73a1,1,0,0,1,0-1.41,1,1,0,0,1,1.41,0L23,18.59l2.73-2.73a1,1,0,1,1,1.42,1.41L24.42,20Z" fill="'+Blockly.Colours.numPadText+
-		'"/></svg>';Blockly.FieldNumber.activeField_=null;Blockly.FieldNumber.prototype.getNumRestrictor=function(a,b,c){this.setConstraints_(a,b,c);a="[\\d]";this.decimalAllowed_&&(a+="|[\\.]");this.negativeAllowed_&&(a+="|[-]");return new RegExp(a)};Blockly.FieldNumber.prototype.setConstraints_=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a};
-		Blockly.FieldNumber.prototype.showEditor_=function(){Blockly.FieldNumber.activeField_=this;var a=goog.userAgent.MOBILE||goog.userAgent.ANDROID||goog.userAgent.IPAD;Blockly.FieldNumber.superClass_.showEditor_.call(this,!1,a);a&&this.showNumPad_()};
-		Blockly.FieldNumber.prototype.showNumPad_=function(){Blockly.DropDownDiv.hideWithoutAnimation();Blockly.DropDownDiv.clearContent();var a=Blockly.DropDownDiv.getContentDiv();a.setAttribute("role","menu");a.setAttribute("aria-haspopup","true");this.addButtons_(a);Blockly.DropDownDiv.setColour(Blockly.Colours.numPadBackground,Blockly.Colours.numPadBorder);a.style.width=Blockly.FieldNumber.DROPDOWN_WIDTH+"px";this.position_()};
-		Blockly.FieldNumber.prototype.position_=function(){var a=this.sourceBlock_.workspace.scale,b=this.sourceBlock_.getHeightWidth();b.width*=a;b.height*=a;var c=this.getAbsoluteXY_(),d=c.x+b.width/2,b=c.y+b.height+Blockly.FieldNumber.DROPDOWN_Y_PADDING,a=c.y-Blockly.BlockSvg.MIN_BLOCK_Y*a-Blockly.BlockSvg.FIELD_Y_OFFSET*a;Blockly.DropDownDiv.setBoundsElement(this.sourceBlock_.workspace.getParentSvg().parentNode);Blockly.DropDownDiv.show(this,d,b,d,a,this.onHide_.bind(this))};
-		Blockly.FieldNumber.prototype.addButtons_=function(a){for(var b=Blockly.FieldNumber.NUMPAD_BUTTONS,c=0,d;d=b[c];c++){var e=document.createElement("button");e.setAttribute("role","menuitem");e.setAttribute("class","blocklyNumPadButton");e.title=d;e.innerHTML=d;Blockly.bindEvent_(e,"mousedown",e,Blockly.FieldNumber.numPadButtonTouch);"."!=d||this.decimalAllowed_||e.setAttribute("style","visibility: hidden");a.appendChild(e)}b=document.createElement("button");b.setAttribute("role","menuitem");b.setAttribute("class",
-		"blocklyNumPadButton");b.title="Delete";c=document.createElement("img");c.src=Blockly.FieldNumber.NUMPAD_DELETE_ICON;b.appendChild(c);Blockly.bindEvent_(b,"mousedown",null,Blockly.FieldNumber.numPadEraseButtonTouch);a.appendChild(b)};
-		Blockly.FieldNumber.numPadButtonTouch=function(){var a=this.innerHTML,b=Blockly.FieldTextInput.htmlInput_.value,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,a=b.slice(0,Blockly.FieldTextInput.htmlInput_.selectionStart)+a+b.slice(c);Blockly.FieldNumber.updateDisplay_(a);Blockly.Touch.clearTouchIdentifier()};
-		Blockly.FieldNumber.numPadEraseButtonTouch=function(){var a=Blockly.FieldTextInput.htmlInput_.value,b=Blockly.FieldTextInput.htmlInput_.selectionStart,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,d=a.slice(0,b)+a.slice(c);0==c-b&&(d=a.slice(0,b-1)+a.slice(b));Blockly.FieldNumber.updateDisplay_(d);Blockly.Touch.clearTouchIdentifier()};
-		Blockly.FieldNumber.updateDisplay_=function(a){Blockly.FieldTextInput.htmlInput_.value=a;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(a.length,a.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=Blockly.FieldTextInput.htmlInput_.scrollWidth;Blockly.FieldNumber.activeField_.validate_()};Blockly.FieldNumber.prototype.onHide_=function(){Blockly.DropDownDiv.content_.removeAttribute("role");Blockly.DropDownDiv.content_.removeAttribute("aria-haspopup")};Blockly.FieldNumberDropdown=function(a,b,c,d,e,f){c=Blockly.FieldNumber.prototype.getNumRestrictor.call(this,c,d,e);Blockly.FieldNumberDropdown.superClass_.constructor.call(this,a,b,f,c);this.addArgType("numberdropdown")};goog.inherits(Blockly.FieldNumberDropdown,Blockly.FieldTextDropdown);Blockly.Variables={};Blockly.Variables.NAME_TYPE="VARIABLE";Blockly.Variables.allUsedVariables=function(a){var b;if(a instanceof Blockly.Block)b=a.getDescendants();else if(a instanceof Blockly.Workspace||a instanceof Blockly.WorkspaceSvg)b=a.getAllBlocks();else throw"Not Block or Workspace: "+a;a=Object.create(null);for(var c=0;c<b.length;c++){var d=b[c].getVars();if(d)for(var e=0;e<d.length;e++){var f=d[e];f&&(a[f.toLowerCase()]=f)}}b=[];for(var g in a)b.push(a[g]);return b};
+		'"/></svg>';Blockly.FieldNumber.activeField_=null;Blockly.FieldNumber.prototype.getNumRestrictor=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a;a="[\\d]";this.decimalAllowed_&&(a+="|[\\.]");this.negativeAllowed_&&(a+="|[-]");return new RegExp(a)};
+		Blockly.FieldNumber.prototype.setConstraints_=function(a,b,c){this.decimalAllowed_="undefined"==typeof c||isNaN(c)||0==c||Math.floor(c)!=c;this.negativeAllowed_="undefined"==typeof a||isNaN(a)||0>a};Blockly.FieldNumber.prototype.showEditor_=function(){Blockly.FieldNumber.activeField_=this;var a=goog.userAgent.MOBILE||goog.userAgent.ANDROID||goog.userAgent.IPAD;Blockly.FieldNumber.superClass_.showEditor_.call(this,!1,a);a&&this.showNumPad_()};
+		Blockly.FieldNumber.prototype.showNumPad_=function(){Blockly.DropDownDiv.hideWithoutAnimation();Blockly.DropDownDiv.clearContent();var a=Blockly.DropDownDiv.getContentDiv();a.setAttribute("role","menu");a.setAttribute("aria-haspopup","true");for(var b=Blockly.FieldNumber.NUMPAD_BUTTONS,c=0,d;d=b[c];c++){var e=document.createElement("button");e.setAttribute("role","menuitem");e.setAttribute("class","blocklyNumPadButton");e.title=d;e.innerHTML=d;Blockly.bindEvent_(e,"mousedown",e,Blockly.FieldNumber.numPadButtonTouch_);
+		"."!=d||this.decimalAllowed_||e.setAttribute("style","visibility: hidden");a.appendChild(e)}b=document.createElement("button");b.setAttribute("role","menuitem");b.setAttribute("class","blocklyNumPadButton");b.title="Delete";c=document.createElement("img");c.src=Blockly.FieldNumber.NUMPAD_DELETE_ICON;b.appendChild(c);Blockly.bindEvent_(b,"mousedown",null,Blockly.FieldNumber.numPadEraseButtonTouch_);a.appendChild(b);Blockly.DropDownDiv.setColour(Blockly.Colours.numPadBackground,Blockly.Colours.numPadBorder);
+		a.style.width=Blockly.FieldNumber.DROPDOWN_WIDTH+"px";b=this.sourceBlock_.workspace.scale;d=this.sourceBlock_.getHeightWidth();d.width*=b;d.height*=b;c=this.getAbsoluteXY_();a=c.x+d.width/2;d=c.y+d.height+Blockly.FieldNumber.DROPDOWN_Y_PADDING;b=c.y-Blockly.BlockSvg.MIN_BLOCK_Y*b-Blockly.BlockSvg.FIELD_Y_OFFSET*b;Blockly.DropDownDiv.setBoundsElement(this.sourceBlock_.workspace.getParentSvg().parentNode);Blockly.DropDownDiv.show(this,a,d,a,b,this.onHide_.bind(this))};
+		Blockly.FieldNumber.numPadButtonTouch_=function(){var a=this.innerHTML,b=Blockly.FieldTextInput.htmlInput_.value,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,a=b.slice(0,Blockly.FieldTextInput.htmlInput_.selectionStart)+a+b.slice(c);Blockly.FieldTextInput.htmlInput_.value=a;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(a.length,a.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=Blockly.FieldTextInput.htmlInput_.scrollWidth;
+		Blockly.FieldNumber.activeField_.validate_()};
+		Blockly.FieldNumber.numPadEraseButtonTouch_=function(){var a=Blockly.FieldTextInput.htmlInput_.value,b=Blockly.FieldTextInput.htmlInput_.selectionStart,c=Blockly.FieldTextInput.htmlInput_.selectionEnd,d=a.slice(0,b)+a.slice(c);0==c-b&&(d=a.slice(0,b-1)+a.slice(b));Blockly.FieldTextInput.htmlInput_.value=d;Blockly.FieldNumber.superClass_.resizeEditor_.call(Blockly.FieldNumber.activeField_);Blockly.FieldTextInput.htmlInput_.setSelectionRange(d.length,d.length);Blockly.FieldTextInput.htmlInput_.scrollLeft=
+		Blockly.FieldTextInput.htmlInput_.scrollWidth;Blockly.FieldNumber.activeField_.validate_()};Blockly.FieldNumber.prototype.onHide_=function(){Blockly.DropDownDiv.content_.removeAttribute("role");Blockly.DropDownDiv.content_.removeAttribute("aria-haspopup")};Blockly.FieldNumberDropdown=function(a,b,c,d,e,f){c=Blockly.FieldNumber.prototype.getNumRestrictor.call(this,c,d,e);Blockly.FieldNumberDropdown.superClass_.constructor.call(this,a,b,f,c);this.addArgType("numberdropdown")};goog.inherits(Blockly.FieldNumberDropdown,Blockly.FieldTextDropdown);Blockly.Variables={};Blockly.Variables.NAME_TYPE="VARIABLE";Blockly.Variables.allUsedVariables=function(a){var b;if(a instanceof Blockly.Block)b=a.getDescendants();else if(a instanceof Blockly.Workspace||a instanceof Blockly.WorkspaceSvg)b=a.getAllBlocks();else throw"Not Block or Workspace: "+a;a=Object.create(null);for(var c=0;c<b.length;c++){var d=b[c].getVars();if(d)for(var e=0;e<d.length;e++){var f=d[e];f&&(a[f.toLowerCase()]=f)}}b=[];for(var g in a)b.push(a[g]);return b};
 		Blockly.Variables.allVariables=function(a){a instanceof Blockly.Block&&console.warn("Deprecated call to Blockly.Variables.allVariables with a block instead of a workspace.  You may want Blockly.Variables.allUsedVariables");return a.variableList};
 		Blockly.Variables.flyoutCategory=function(a){a=a.variableList;a.sort(goog.string.caseInsensitiveCompare);var b=[],c=goog.dom.createDom("button");c.setAttribute("text",Blockly.Msg.NEW_VARIABLE);b.push(c);for(c=0;c<a.length;c++)if(Blockly.Blocks.data_variable){var d=goog.dom.createDom("block");d.setAttribute("type","data_variable");d.setAttribute("gap",8);d.appendChild(Blockly.Variables.createVariableDom_(a[c]));b.push(d)}1<b.length&&(b[b.length-1].setAttribute("gap",24),Blockly.Blocks.data_setvariableto&&
 		(d=goog.dom.createDom("block"),d.setAttribute("type","data_setvariableto"),d.setAttribute("gap",8),d.appendChild(Blockly.Variables.createVariableDom_(a[0])),d.appendChild(Blockly.Variables.createTextDom_()),b.push(d)),Blockly.Blocks.data_changevariableby&&(d=goog.dom.createDom("block"),d.setAttribute("type","data_changevariableby"),d.setAttribute("gap",8),d.appendChild(Blockly.Variables.createVariableDom_(a[0])),d.appendChild(Blockly.Variables.createMathNumberDom_()),b.push(d)),Blockly.Blocks.data_showvariable&&
@@ -53763,9 +54377,9 @@ webpackJsonp([0],[
 		Blockly.Toolbox.prototype.position=function(){var a=this.HtmlDiv;if(a){var b=this.workspace_.getParentSvg(),b=Blockly.svgSize(b);this.horizontalLayout_?(a.style.left="0",a.style.height="auto",a.style.width=b.width+"px",this.height=a.offsetHeight,this.toolboxPosition==Blockly.TOOLBOX_AT_TOP?a.style.top="0":a.style.bottom="0"):(this.toolboxPosition==Blockly.TOOLBOX_AT_RIGHT?a.style.right="0":a.style.left="0",a.style.height=this.getHeight()+"px",a.style.width=this.width+"px");this.flyout_.position()}};
 		Blockly.Toolbox.prototype.clearSelection=function(){this.setSelectedItem(null)};
 		Blockly.Toolbox.prototype.getClientRect=function(){if(!this.HtmlDiv)return null;var a=this.HtmlDiv.getBoundingClientRect(),b=a.left,c=a.top,d=a.width,a=a.height;return this.toolboxPosition==Blockly.TOOLBOX_AT_LEFT?new goog.math.Rect(-1E7,-1E7,1E7+b+d,2E7):this.toolboxPosition==Blockly.TOOLBOX_AT_RIGHT?new goog.math.Rect(b,-1E7,1E7+d,2E7):this.toolboxPosition==Blockly.TOOLBOX_AT_TOP?new goog.math.Rect(-1E7,-1E7,2E7,1E7+c+a):new goog.math.Rect(0,c,2E7,1E7+d)};
-		Blockly.Toolbox.prototype.refreshSelection=function(){var a=this.getSelectedItem();a&&a.getContents()&&this.flyout_.show(a.getContents())};Blockly.Toolbox.prototype.getSelectedItem=function(){return this.selectedItem_};Blockly.Toolbox.prototype.setSelectedItem=function(a){if(this.selectedItem_){if(this.selectedItem_==a)return;this.selectedItem_.setSelected(!1)}this.selectedItem_=a;null!=this.selectedItem_&&(this.selectedItem_.setSelected(!0),this.flyout_.show(a.getContents()),this.flyout_.scrollToStart())};
-		Blockly.Toolbox.prototype.setSelectedItemFactory=function(a){return function(){this.setSelectedItem(a);Blockly.Touch.clearTouchIdentifier()}};Blockly.Toolbox.CategoryMenu=function(a,b){this.parent_=a;this.height_=0;this.parentHtml_=b;this.createDom();this.categories_=[]};Blockly.Toolbox.CategoryMenu.prototype.getHeight=function(){return this.height_};Blockly.Toolbox.CategoryMenu.prototype.createDom=function(){this.table=goog.dom.createDom("table","scratchCategoryMenu");this.parentHtml_.appendChild(this.table)};
-		Blockly.Toolbox.CategoryMenu.prototype.populate=function(a){if(a){for(var b=[],c=0,d;d=a.childNodes[c];c++)d.tagName&&"CATEGORY"==d.tagName.toUpperCase()&&b.push(d);a=Math.ceil(b.length/2);for(c=0;c<a;c+=1){d=b[c];var e=goog.dom.createDom("tr","scratchCategoryMenuRow");this.table.appendChild(e);d&&this.categories_.push(new Blockly.Toolbox.Category(this,e,d));b[c+a]&&this.categories_.push(new Blockly.Toolbox.Category(this,e,b[c+a]))}this.height_=this.table.offsetHeight}};
+		Blockly.Toolbox.prototype.refreshSelection=function(){var a=this.getSelectedItem();a&&a.getContents()&&this.flyout_.show(a.getContents())};Blockly.Toolbox.prototype.getSelectedItem=function(){return this.selectedItem_};Blockly.Toolbox.prototype.setSelectedItem=function(a){this.selectedItem_&&this.selectedItem_.setSelected(!1);this.selectedItem_=a;null!=this.selectedItem_&&(this.selectedItem_.setSelected(!0),this.flyout_.show(a.getContents()))};
+		Blockly.Toolbox.prototype.setSelectedItemFactory=function(a){return function(){this.setSelectedItem(a);Blockly.Touch.clearTouchIdentifier()}};Blockly.Toolbox.CategoryMenu=function(a,b){this.parent_=a;this.parentHtml_=b;this.createDom();this.categories_=[]};Blockly.Toolbox.CategoryMenu.prototype.getHeight=function(){return this.table.offsetHeight};Blockly.Toolbox.CategoryMenu.prototype.createDom=function(){this.table=goog.dom.createDom("table","scratchCategoryMenu");this.parentHtml_.appendChild(this.table)};
+		Blockly.Toolbox.CategoryMenu.prototype.populate=function(a){if(a){for(var b=[],c=0,d;d=a.childNodes[c];c++)d.tagName&&"CATEGORY"==d.tagName.toUpperCase()&&b.push(d);a=Math.ceil(b.length/2);for(c=0;c<a;c+=1){d=b[c];var e=goog.dom.createDom("tr","scratchCategoryMenuRow");this.table.appendChild(e);this.categories_.push(new Blockly.Toolbox.Category(this,e,d));b[c+a]&&this.categories_.push(new Blockly.Toolbox.Category(this,e,b[c+a]))}}};
 		Blockly.Toolbox.CategoryMenu.prototype.dispose=function(){for(var a=0,b;b=this.categories_[a];a++)b.dispose();this.table&&(goog.dom.removeNode(this.table),this.table=null)};Blockly.Toolbox.Category=function(a,b,c){this.parent_=a;this.parentHtml_=b;this.name_=c.getAttribute("name");this.setColour(c);this.custom_=c.getAttribute("custom");this.contents_=[];this.custom_||this.parseContents_(c);this.createDom()};
 		Blockly.Toolbox.Category.prototype.dispose=function(){this.item_&&(goog.dom.removeNode(this.item_),this.item=null);this.contents_=this.parentHtml_=this.parent_=null};
 		Blockly.Toolbox.Category.prototype.createDom=function(){var a=this.parent_.parent_;this.item_=goog.dom.createDom("td",{"class":"scratchCategoryMenuItem"},this.name_);this.bubble_=goog.dom.createDom("div",{"class":a.RTL?"scratchCategoryItemBubbleRTL":"scratchCategoryItemBubbleLTR"});this.bubble_.style.backgroundColor=this.colour_;this.bubble_.style.borderColor=this.secondaryColour_;this.item_.appendChild(this.bubble_);this.parentHtml_.appendChild(this.item_);Blockly.bindEvent_(this.item_,"mousedown",

@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rm -rf ./build && mkdir -p build",
-    "deploy": "gh-pages -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
+    "deploy": "touch build/.nojekyll && gh-pages -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint . --ext .js,.jsx",
     "postmerge": "opt --in postmerge --exec 'npm install'",
     "postrewrite": "opt --in postrewrite --exec 'npm install'",

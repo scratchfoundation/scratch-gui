@@ -5,7 +5,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        vendor: ['react', 'react-dom'],
+        external: ['react', 'react-dom'],
         gui: './src/index.jsx'
     },
     output: {

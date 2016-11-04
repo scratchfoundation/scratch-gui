@@ -5,7 +5,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        external: ['react', 'react-dom'],
+        lib: ['react', 'react-dom'],
         gui: './src/index.jsx'
     },
     output: {
@@ -40,8 +40,8 @@ module.exports = {
             'process.env.BASE_PATH': '"' + (process.env.BASE_PATH || '/') + '"'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.min.js'
+            name: 'lib',
+            filename: 'lib.min.js'
         }),
         new HtmlWebpackPlugin({
             title: 'Scratch 3.0 GUI'

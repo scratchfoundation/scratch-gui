@@ -105,7 +105,7 @@ class CostumeCanvas extends React.Component {
             <canvas
                 height={this.props.height}
                 width={this.props.width}
-                ref={this._getCanvas} // eslint-disable-line react/jsx-sort-props
+                ref={c => (this.canvas = c)} // eslint-disable-line react/jsx-sort-props
             />
         );
     }

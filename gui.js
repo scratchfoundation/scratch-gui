@@ -1,4 +1,4 @@
-webpackJsonp([0],[
+webpackJsonp([1],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31074,7 +31074,7 @@ webpackJsonp([0],[
 
 	        var _this = _possibleConstructorReturn(this, (Stage.__proto__ || Object.getPrototypeOf(Stage)).call(this, props));
 
-	        bindAll(_this, ['attachMouseEvents', 'detachMouseEvents', 'onMouseUp', 'onMouseMove', 'onMouseDown', 'animate', 'startAnimation', 'stopAnimation']);
+	        bindAll(_this, ['attachMouseEvents', 'detachMouseEvents', 'onMouseUp', 'onMouseMove', 'onMouseDown']);
 	        return _this;
 	    }
 
@@ -31084,13 +31084,11 @@ webpackJsonp([0],[
 	            this.renderer = new Renderer(this.canvas);
 	            this.props.vm.attachRenderer(this.renderer);
 	            this.attachMouseEvents(this.canvas);
-	            this.startAnimation();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.detachMouseEvents(this.canvas);
-	            this.stopAnimation();
 	        }
 	    }, {
 	        key: 'attachMouseEvents',
@@ -31145,22 +31143,6 @@ webpackJsonp([0],[
 	            };
 	            this.props.vm.postIOData('mouse', data);
 	            e.preventDefault();
-	        }
-	    }, {
-	        key: 'startAnimation',
-	        value: function startAnimation() {
-	            this.animationFrame = requestAnimationFrame(this.animate);
-	        }
-	    }, {
-	        key: 'stopAnimation',
-	        value: function stopAnimation() {
-	            cancelAnimationFrame(this.animationFrame);
-	        }
-	    }, {
-	        key: 'animate',
-	        value: function animate() {
-	            this.props.vm.animationFrame();
-	            this.animationFrame = requestAnimationFrame(this.animate);
 	        }
 	    }, {
 	        key: 'render',

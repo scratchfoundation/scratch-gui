@@ -46532,10 +46532,14 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
 	            return React.createElement('canvas', {
 	                height: this.props.height,
 	                width: this.props.width,
-	                ref: this._getCanvas // eslint-disable-line react/jsx-sort-props
+	                ref: function ref(c) {
+	                    return _this3.canvas = c;
+	                } // eslint-disable-line react/jsx-sort-props
 	            });
 	        }
 	    }]);

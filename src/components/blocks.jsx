@@ -13,7 +13,7 @@ class BlocksComponent extends React.Component {
                 style={{
                     position: 'absolute',
                     top: 0,
-                    right: 470,
+                    right: 500,
                     bottom: 0,
                     left: 0
                 }}

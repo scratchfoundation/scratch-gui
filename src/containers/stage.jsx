@@ -13,21 +13,16 @@ class Stage extends React.Component {
             'detachMouseEvents',
             'onMouseUp',
             'onMouseMove',
-            'onMouseDown',
-            'animate',
-            'startAnimation',
-            'stopAnimation'
+            'onMouseDown'
         ]);
     }
     componentDidMount () {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
         this.attachMouseEvents(this.canvas);
-        this.startAnimation();
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
-        this.stopAnimation();
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -72,16 +67,6 @@ class Stage extends React.Component {
         };
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();
-    }
-    startAnimation () {
-        this.animationFrame = requestAnimationFrame(this.animate);
-    }
-    stopAnimation () {
-        cancelAnimationFrame(this.animationFrame);
-    }
-    animate () {
-        this.props.vm.animationFrame();
-        this.animationFrame = requestAnimationFrame(this.animate);
     }
     render () {
         const {

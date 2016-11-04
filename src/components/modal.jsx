@@ -63,7 +63,10 @@ ModalComponent.defaultProps = {
 ModalComponent.propTypes = {
     children: React.PropTypes.node,
     closeButtonStyle: stylePropType,
-    modalStyle: stylePropType,
+    modalStyle: React.PropTypes.shape({
+        overlay: stylePropType, // eslint-disable-line react/no-unused-prop-types
+        content: stylePropType // eslint-disable-line react/no-unused-prop-types
+    }),
     onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool
 };

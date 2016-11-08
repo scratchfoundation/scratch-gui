@@ -1,6 +1,8 @@
 # scratch-gui
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
+## Please note: scratch-gui is at an early stage and we are not ready for pull requests yet
+
 [![Build Status](https://travis-ci.com/LLK/scratch-gui.svg?token=Yfq2ryN1BwaxDME69Lnc&branch=master)](https://travis-ci.com/LLK/scratch-gui)
 
 ## Installation
@@ -17,10 +19,10 @@ cd scratch-gui
 npm install
 ```
 
-## Playground
-This requires Node.js to be installed.
+## Getting started
+Running the project requires Node.js to be installed.
 
-## Running the Playground
+## Running
 Open a Command Prompt or Terminal in the repository and run:
 ```bash
 npm start

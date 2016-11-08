@@ -57,7 +57,7 @@
     "scratch-vm": "latest",
     "svg-to-image": "1.1.3",
     "svg-url-loader": "1.1.0",
-    "travis-after-all": "jamesarosen/travis-after-all#override-api-urls",
+    "travis-after-all": "1.4.4",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.15.2",
     "xhr": "2.2.2"

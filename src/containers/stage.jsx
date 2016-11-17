@@ -13,7 +13,8 @@ class Stage extends React.Component {
             'detachMouseEvents',
             'onMouseUp',
             'onMouseMove',
-            'onMouseDown'
+            'onMouseDown',
+            'setCanvas'
         ]);
     }
     componentDidMount () {
@@ -68,6 +69,9 @@ class Stage extends React.Component {
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();
     }
+    setCanvas (canvas) {
+        this.canvas = canvas;
+    }
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
@@ -75,7 +79,7 @@ class Stage extends React.Component {
         } = this.props;
         return (
             <StageComponent
-                canvasRef={canvas => (this.canvas = canvas)}
+                canvasRef={this.setCanvas}
                 {...props}
             />
         );

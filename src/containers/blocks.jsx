@@ -17,7 +17,8 @@ class Blocks extends React.Component {
             'onBlockGlowOn',
             'onBlockGlowOff',
             'onVisualReport',
-            'onWorkspaceUpdate'
+            'onWorkspaceUpdate',
+            'setBlocks'
         ]);
     }
     componentDidMount () {
@@ -72,6 +73,9 @@ class Blocks extends React.Component {
         ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
         ScratchBlocks.Events.enable();
     }
+    setBlocks (blocks) {
+        this.blocks = blocks;
+    }
     render () {
         const {
             options, // eslint-disable-line no-unused-vars
@@ -80,7 +84,7 @@ class Blocks extends React.Component {
         } = this.props;
         return (
             <BlocksComponent
-                componentRef={c => (this.blocks = c)}
+                componentRef={this.setBlocks}
                 {...props}
             />
         );

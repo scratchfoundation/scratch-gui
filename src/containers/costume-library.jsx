@@ -22,7 +22,7 @@ class CostumeLibrary extends React.Component {
     }
     handleItemSelected (item) {
         const vmCostume = {
-            skin: `https://cdn.assets.scratch.mit.edu/internalapi/asset/$(item.md5)/get/`,
+            skin: `https://cdn.assets.scratch.mit.edu/internalapi/asset/${item.md5}/get/`,
             name: item.name,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1]

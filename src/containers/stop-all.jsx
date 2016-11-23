@@ -7,7 +7,26 @@ const StopAllComponent = require('../components/stop-all/stop-all.jsx');
 class StopAll extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['handleClick']);
+        bindAll(this, [
+            'handleClick',
+            'onProjectRunStart',
+            'onProjectRunStop'
+        ]);
+        this.state = {projectRunning: false};
+    }
+    componentDidMount () {
+        this.props.vm.on('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.on('PROJECT_RUN_STOP', this.onProjectRunStop);
+    }
+    componentWillUnmount () {
+        this.props.vm.off('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.off('PROJECT_RUN_STOP', this.onProjectRunStop);
+    }
+    onProjectRunStart () {
+        this.setState({projectRunning: true});
+    }
+    onProjectRunStop () {
+        this.setState({projectRunning: false});
     }
     handleClick (e) {
         e.preventDefault();
@@ -20,6 +39,7 @@ class StopAll extends React.Component {
         } = this.props;
         return (
             <StopAllComponent
+                active={!this.state.projectRunning}
                 onClick={this.handleClick}
                 {...props}
             />

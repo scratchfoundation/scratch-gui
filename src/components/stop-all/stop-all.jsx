@@ -3,6 +3,7 @@ const stopAllIcon = require('./stop-all.svg');
 
 const StopAllComponent = function (props) {
     const {
+        active,
         onClick,
         title,
         ...componentProps
@@ -15,7 +16,9 @@ const StopAllComponent = function (props) {
                 position: 'absolute',
                 top: 380,
                 right: 380,
-                width: 50
+                width: 50,
+                // @todo Get real design here
+                filter: active ? 'saturate(200%) brightness(150%)' : 'none'
             }}
             title={title}
             onClick={onClick}
@@ -25,11 +28,13 @@ const StopAllComponent = function (props) {
 };
 
 StopAllComponent.propTypes = {
+    active: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     title: React.PropTypes.string
 };
 
 StopAllComponent.defaultProps = {
+    active: false,
     title: 'Stop'
 };
 

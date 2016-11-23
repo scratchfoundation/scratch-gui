@@ -8,7 +8,26 @@ const GreenFlagComponent = require('../components/green-flag/green-flag.jsx');
 class GreenFlag extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['handleClick']);
+        bindAll(this, [
+            'handleClick',
+            'onProjectRunStart',
+            'onProjectRunStop'
+        ]);
+        this.state = {projectRunning: false};
+    }
+    componentDidMount () {
+        this.props.vm.on('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.on('PROJECT_RUN_STOP', this.onProjectRunStop);
+    }
+    componentWillUnmount () {
+        this.props.vm.off('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.off('PROJECT_RUN_STOP', this.onProjectRunStop);
+    }
+    onProjectRunStart () {
+        this.setState({projectRunning: true});
+    }
+    onProjectRunStop () {
+        this.setState({projectRunning: false});
     }
     handleClick (e) {
         e.preventDefault();
@@ -21,6 +40,7 @@ class GreenFlag extends React.Component {
         } = this.props;
         return (
             <GreenFlagComponent
+                active={this.state.projectRunning}
                 onClick={this.handleClick}
                 {...props}
             />

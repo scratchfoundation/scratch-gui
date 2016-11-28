@@ -3,6 +3,7 @@ const greenFlagIcon = require('./green-flag.svg');
 
 const GreenFlagComponent = function (props) {
     const {
+        active,
         onClick,
         title,
         ...componentProps
@@ -15,7 +16,9 @@ const GreenFlagComponent = function (props) {
                 position: 'absolute',
                 top: 380,
                 right: 440,
-                width: 50
+                width: 50,
+                // @todo Get real design here
+                filter: active ? 'saturate(200%) brightness(150%)' : 'none'
             }}
             title={title}
             onClick={onClick}
@@ -25,11 +28,13 @@ const GreenFlagComponent = function (props) {
 };
 
 GreenFlagComponent.propTypes = {
+    active: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     title: React.PropTypes.string
 };
 
 GreenFlagComponent.defaultProps = {
+    active: false,
     title: 'Go'
 };
 

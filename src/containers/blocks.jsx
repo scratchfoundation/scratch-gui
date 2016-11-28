@@ -12,8 +12,8 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
-            'onStackGlowOn',
-            'onStackGlowOff',
+            'onScriptGlowOn',
+            'onScriptGlowOff',
             'onBlockGlowOn',
             'onBlockGlowOff',
             'onVisualReport',
@@ -36,25 +36,25 @@ class Blocks extends React.Component {
             .getFlyout()
             .getWorkspace()
             .addChangeListener(this.props.vm.flyoutBlockListener);
-        this.props.vm.on('STACK_GLOW_ON', this.onStackGlowOn);
-        this.props.vm.on('STACK_GLOW_OFF', this.onStackGlowOff);
+        this.props.vm.on('SCRIPT_GLOW_ON', this.onScriptGlowOn);
+        this.props.vm.on('SCRIPT_GLOW_OFF', this.onScriptGlowOff);
         this.props.vm.on('BLOCK_GLOW_ON', this.onBlockGlowOn);
         this.props.vm.on('BLOCK_GLOW_OFF', this.onBlockGlowOff);
         this.props.vm.on('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.on('workspaceUpdate', this.onWorkspaceUpdate);
     }
     detachVM () {
-        this.props.vm.off('STACK_GLOW_ON', this.onStackGlowOn);
-        this.props.vm.off('STACK_GLOW_OFF', this.onStackGlowOff);
+        this.props.vm.off('SCRIPT_GLOW_ON', this.onScriptGlowOn);
+        this.props.vm.off('SCRIPT_GLOW_OFF', this.onScriptGlowOff);
         this.props.vm.off('BLOCK_GLOW_ON', this.onBlockGlowOn);
         this.props.vm.off('BLOCK_GLOW_OFF', this.onBlockGlowOff);
         this.props.vm.off('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.off('workspaceUpdate', this.onWorkspaceUpdate);
     }
-    onStackGlowOn (data) {
+    onScriptGlowOn (data) {
         this.workspace.glowStack(data.id, true);
     }
-    onStackGlowOff (data) {
+    onScriptGlowOff (data) {
         this.workspace.glowStack(data.id, false);
     }
     onBlockGlowOn (data) {

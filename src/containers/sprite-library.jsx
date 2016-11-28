@@ -8,8 +8,15 @@ const LibaryComponent = require('../components/library.jsx');
 class SpriteLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'handleItemSelect', 'setSpriteData']);
-        this.state = {data: [], spriteData: {}};
+        bindAll(this, [
+            'handleItemSelect',
+            'setData',
+            'setSpriteData'
+        ]);
+        this.state = {
+            data: [],
+            spriteData: {}
+        };
     }
     componentWillReceiveProps (nextProps) {
         if (nextProps.visible && this.state.data.length === 0) {
@@ -34,6 +41,7 @@ class SpriteLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
+                className="scratch-sprite-library"
                 data={Object.keys(this.state.spriteData).map(libraryKey => {
                     const libraryItem = this.state.spriteData[libraryKey];
                     return {

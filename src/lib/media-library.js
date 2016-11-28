@@ -1,7 +1,6 @@
 const xhr = require('xhr');
 
-const LIBRARY_PREFIX = 'https://cdn.scratch.mit.edu/scratchr2/static/' +
-    '__8d9c95eb5aa1272a311775ca32568417__/medialibraries/';
+const LIBRARY_PREFIX = 'https://cdn.scratch.mit.edu/scratchr2/static/__8d9c95eb5aa1272a311775ca32568417__/medialibraries/';
 const LIBRARY_URL = {
     sprite: `${LIBRARY_PREFIX}spriteLibrary.json`,
     costume: `${LIBRARY_PREFIX}costumeLibrary.json`,

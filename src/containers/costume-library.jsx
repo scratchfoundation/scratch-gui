@@ -9,7 +9,10 @@ const LibaryComponent = require('../components/library.jsx');
 class CostumeLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'handleItemSelected']);
+        bindAll(this, [
+            'handleItemSelected',
+            'setData'
+        ]);
         this.state = {costumeData: []};
     }
     componentWillReceiveProps (nextProps) {

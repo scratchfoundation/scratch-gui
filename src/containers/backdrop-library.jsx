@@ -9,7 +9,10 @@ const LibaryComponent = require('../components/library.jsx');
 class BackdropLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'handleItemSelect']);
+        bindAll(this, [
+            'setData',
+            'handleItemSelect'
+        ]);
         this.state = {backdropData: []};
     }
     componentWillReceiveProps (nextProps) {
@@ -35,6 +38,7 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
+                className="scratch-backdrop-library"
                 data={this.state.backdropData}
                 title="Backdrop Library"
                 visible={this.props.visible}

@@ -21,9 +21,11 @@ class VMManager {
     }
     onKeyDown (e) {
         // Don't capture keys intended for Blockly inputs.
-        if (e.target !== document && e.target !== document.body) {
-            return;
-        }
+        if (e.target !== document && e.target !== document.body) return;
+
+        // Don't capture browser keyboard shortcuts
+        if (e.metaKey || e.altKey || e.ctrlKey) return;
+
         this.vm.postIOData('keyboard', {
             keyCode: e.keyCode,
             isDown: true

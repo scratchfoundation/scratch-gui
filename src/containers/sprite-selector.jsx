@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -12,29 +13,33 @@ class SpriteSelector extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleChange',
+            'handleSelectSprite',
             'handleCloseBackdropLibrary',
             'handleCloseCostumeLibrary',
             'handleCloseSpriteLibrary',
             'handleNewBackdropClick',
             'handleNewCostumeClick',
             'handleNewSpriteClick',
+            'handleSpriteInfoReport',
             'targetsUpdate'
         ]);
         this.state = {
             backdropLibraryVisible: false,
             costumeLibraryVisible: false,
             spriteLibraryVisible: false,
-            targets: {
-                targetList: []
-            }
+            targets: {}
         };
     }
     componentDidMount () {
         this.props.vm.on('targetsUpdate', this.targetsUpdate);
+        this.props.vm.on('SPRITE_INFO_REPORT', this.handleSpriteInfoReport);
     }
-    handleChange (event) {
-        this.props.vm.setEditingTarget(event.target.value);
+    componentWillUnmount () {
+        this.props.vm.off('targetsUpdate', this.targetsUpdate);
+        this.props.vm.off('SPRITE_INFO_REPORT', this.handleSpriteInfoReport);
+    }
+    handleSelectSprite (spriteId) {
+        this.props.vm.setEditingTarget(spriteId);
     }
     handleNewBackdropClick (e) {
         e.preventDefault();
@@ -57,8 +62,27 @@ class SpriteSelector extends React.Component {
     handleCloseSpriteLibrary () {
         this.setState({spriteLibraryVisible: false});
     }
+    handleSpriteInfoReport (spriteInfo) {
+        this.setState(prevState => ({
+            // Merge sprite info with list from targetsUpdate. This data may
+            // come before targetsUpdate, so add it pre-emptively
+            targets: defaultsDeep({[spriteInfo.id]: spriteInfo}, prevState.targets)
+        }));
+    }
     targetsUpdate (data) {
-        this.setState({targets: data});
+        this.setState(prevState => ({
+            editingTarget: data.editingTarget,
+            // Merge new target list with data from sprite info reports
+            // Maintain list order with `order` attribute
+            targets: data.targetList.reduce(
+                (targets, target, listId) => defaultsDeep(
+                    {[target[0]]: {name: target[1], order: listId}},
+                    {[target[0]]: prevState.targets[target[0]]},
+                    targets
+                ),
+                {}
+            )
+        }));
     }
     render () {
         const {
@@ -76,14 +100,9 @@ class SpriteSelector extends React.Component {
                 }}
             >
                 <SpriteSelectorComponent
-                    sprites={this.state.targets.targetList.map(target => (
-                        {
-                            id: target[0],
-                            name: target[1]
-                        }
-                    ))}
-                    value={this.state.targets.editingTarget && [this.state.targets.editingTarget]}
-                    onChange={this.handleChange}
+                    selectedId={this.state.editingTarget}
+                    sprites={this.state.targets}
+                    onSelectSprite={this.handleSelectSprite}
                     {...props}
                 />
                 <p>

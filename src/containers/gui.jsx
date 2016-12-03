@@ -1,11 +1,10 @@
-const bindAll = require('lodash.bindall');
 const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const VMManager = require('../lib/vm-manager');
 const MediaLibrary = require('../lib/media-library');
 const shapeFromPropTypes = require('../lib/shape-from-prop-types');
+const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 
 const Blocks = require('./blocks.jsx');
 const GUIComponent = require('../components/gui.jsx');
@@ -15,14 +14,7 @@ const Stage = require('./stage.jsx');
 const StopAll = require('./stop-all.jsx');
 
 class GUI extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, ['closeModal']);
-        this.vmManager = new VMManager(this.props.vm);
-        this.state = {currentModal: null};
-    }
     componentDidMount () {
-        this.vmManager.attachKeyboardEvents();
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.start();
     }
@@ -32,14 +24,7 @@ class GUI extends React.Component {
         }
     }
     componentWillUnmount () {
-        this.vmManager.detachKeyboardEvents();
         this.props.vm.stopAll();
-    }
-    openModal (modalName) {
-        this.setState({currentModal: modalName});
-    }
-    closeModal () {
-        this.setState({currentModal: null});
     }
     render () {
         let {
@@ -118,4 +103,4 @@ GUI.defaultProps = {
     vm: new VM()
 };
 
-module.exports = GUI;
+module.exports = vmListenerHOC(GUI);

@@ -1,8 +1,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const {Provider} = require('react-redux');
+const {createStore} = require('redux');
+
 const GUI = require('./containers/gui.jsx');
 const log = require('./lib/log');
 const ProjectLoader = require('./lib/project-loader');
+const reducer = require('./reducers/gui');
 
 class App extends React.Component {
     constructor (props) {
@@ -22,7 +26,7 @@ class App extends React.Component {
         window.removeEventListener('hashchange', this.updateProject);
     }
     fetchProjectId () {
-        return location.hash.substring(1);
+        return window.location.hash.substring(1);
     }
     updateProject () {
         const projectId = this.fetchProjectId();
@@ -56,5 +60,12 @@ App.propTypes = {
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-
-ReactDOM.render(<App basePath={process.env.BASE_PATH} />, appTarget);
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+ReactDOM.render((
+    <Provider store={store}>
+        <App basePath={process.env.BASE_PATH} />
+    </Provider>
+), appTarget);

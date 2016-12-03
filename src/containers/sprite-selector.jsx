@@ -1,7 +1,9 @@
 const bindAll = require('lodash.bindall');
-const defaultsDeep = require('lodash.defaultsdeep');
+const {connect} = require('react-redux');
 const React = require('react');
 const VM = require('scratch-vm');
+
+const {updateEditingTarget} = require('../reducers/targets');
 
 const BackdropLibrary = require('./backdrop-library.jsx');
 const CostumeLibrary = require('./costume-library.jsx');
@@ -13,15 +15,12 @@ class SpriteSelector extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleSelectSprite',
             'handleCloseBackdropLibrary',
             'handleCloseCostumeLibrary',
             'handleCloseSpriteLibrary',
             'handleNewBackdropClick',
             'handleNewCostumeClick',
-            'handleNewSpriteClick',
-            'handleSpriteInfoReport',
-            'targetsUpdate'
+            'handleNewSpriteClick'
         ]);
         this.state = {
             backdropLibraryVisible: false,
@@ -29,17 +28,6 @@ class SpriteSelector extends React.Component {
             spriteLibraryVisible: false,
             targets: {}
         };
-    }
-    componentDidMount () {
-        this.props.vm.on('targetsUpdate', this.targetsUpdate);
-        this.props.vm.on('SPRITE_INFO_REPORT', this.handleSpriteInfoReport);
-    }
-    componentWillUnmount () {
-        this.props.vm.off('targetsUpdate', this.targetsUpdate);
-        this.props.vm.off('SPRITE_INFO_REPORT', this.handleSpriteInfoReport);
-    }
-    handleSelectSprite (spriteId) {
-        this.props.vm.setEditingTarget(spriteId);
     }
     handleNewBackdropClick (e) {
         e.preventDefault();
@@ -62,32 +50,14 @@ class SpriteSelector extends React.Component {
     handleCloseSpriteLibrary () {
         this.setState({spriteLibraryVisible: false});
     }
-    handleSpriteInfoReport (spriteInfo) {
-        this.setState(prevState => ({
-            // Merge sprite info with list from targetsUpdate. This data may
-            // come before targetsUpdate, so add it pre-emptively
-            targets: defaultsDeep({[spriteInfo.id]: spriteInfo}, prevState.targets)
-        }));
-    }
-    targetsUpdate (data) {
-        this.setState(prevState => ({
-            editingTarget: data.editingTarget,
-            // Merge new target list with data from sprite info reports
-            // Maintain list order with `order` attribute
-            targets: data.targetList.reduce(
-                (targets, target, listId) => defaultsDeep(
-                    {[target[0]]: {name: target[1], order: listId}},
-                    {[target[0]]: prevState.targets[target[0]]},
-                    targets
-                ),
-                {}
-            )
-        }));
-    }
     render () {
         const {
+            /* eslint-disable no-unused-vars */
+            editingTarget,
             mediaLibrary,
-            vm, // eslint-disable-line no-unused-vars
+            targets,
+            vm,
+            /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
         return (
@@ -100,9 +70,9 @@ class SpriteSelector extends React.Component {
                 }}
             >
                 <SpriteSelectorComponent
-                    selectedId={this.state.editingTarget}
-                    sprites={this.state.targets}
-                    onSelectSprite={this.handleSelectSprite}
+                    selectedId={this.props.editingTarget}
+                    sprites={this.props.targets}
+                    onSelectSprite={this.props.onSelectSprite}
                     {...props}
                 />
                 <p>
@@ -134,8 +104,33 @@ class SpriteSelector extends React.Component {
 }
 
 SpriteSelector.propTypes = {
+    editingTarget: React.PropTypes.string,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    onSelectSprite: React.PropTypes.func,
+    targets: React.PropTypes.objectOf(React.PropTypes.shape({
+        costume: React.PropTypes.shape({
+            skin: React.PropTypes.string,
+            name: React.PropTypes.string,
+            bitmapResolution: React.PropTypes.number,
+            rotationCenterX: React.PropTypes.number,
+            rotationCenterY: React.PropTypes.number
+        }),
+        id: React.PropTypes.string,
+        name: React.PropTypes.string,
+        order: React.PropTypes.number
+    })),
     vm: React.PropTypes.instanceOf(VM)
 };
 
-module.exports = SpriteSelector;
+const mapStateToProps = state => ({
+    targets: state.targets.targets,
+    editingTarget: state.targets.editingTarget
+});
+const mapDispatchToProps = dispatch => ({
+    onSelectSprite: id => dispatch(updateEditingTarget(id))
+});
+
+module.exports = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SpriteSelector);

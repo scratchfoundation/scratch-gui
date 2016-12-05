@@ -4,6 +4,15 @@ const VM = require('scratch-vm');
 
 const {connect} = require('react-redux');
 
+const {
+    openBackdropLibrary,
+    openCostumeLibrary,
+    openSpriteLibrary,
+    closeBackdropLibrary,
+    closeCostumeLibrary,
+    closeSpriteLibrary
+} = require('../reducers/modals');
+
 const BackdropLibrary = require('./backdrop-library.jsx');
 const CostumeLibrary = require('./costume-library.jsx');
 const MediaLibrary = require('../lib/media-library');
@@ -14,41 +23,9 @@ class SpriteSelector extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCloseBackdropLibrary',
-            'handleCloseCostumeLibrary',
-            'handleCloseSpriteLibrary',
-            'handleNewBackdropClick',
-            'handleNewCostumeClick',
-            'handleNewSpriteClick',
             'handleSelectSprite'
         ]);
-        this.state = {
-            backdropLibraryVisible: false,
-            costumeLibraryVisible: false,
-            spriteLibraryVisible: false,
-            targets: {}
-        };
     }
-    handleNewBackdropClick (e) {
-        e.preventDefault();
-        this.setState({backdropLibraryVisible: true});
-    }
-    handleCloseBackdropLibrary () {
-        this.setState({backdropLibraryVisible: false});
-    }
-    handleNewCostumeClick (e) {
-        e.preventDefault();
-        this.setState({costumeLibraryVisible: true});
-    }
-    handleCloseCostumeLibrary () {
-        this.setState({costumeLibraryVisible: false});
-    }
-    handleNewSpriteClick (e) {
-        e.preventDefault();
-        this.setState({spriteLibraryVisible: true});
-    }
-    handleCloseSpriteLibrary () {
-        this.setState({spriteLibraryVisible: false});
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
@@ -57,6 +34,15 @@ class SpriteSelector extends React.Component {
             /* eslint-disable no-unused-vars */
             editingTarget,
             mediaLibrary,
+            backdropLibraryVisible,
+            costumeLibraryVisible,
+            spriteLibraryVisible,
+            onNewSpriteClick,
+            onNewCostumeClick,
+            onNewBackdropClick,
+            onRequestCloseBackdropLibrary,
+            onRequestCloseCostumeLibrary,
+            onRequestCloseSpriteLibrary,
             targets,
             vm,
             /* eslint-enable no-unused-vars */
@@ -78,26 +64,26 @@ class SpriteSelector extends React.Component {
                     {...componentProps}
                 />
                 <p>
-                    <button onClick={this.handleNewSpriteClick}>New Sprite</button>
+                    <button onClick={onNewSpriteClick}>New Sprite</button>
                     <SpriteLibrary
                         mediaLibrary={mediaLibrary}
-                        visible={this.state.spriteLibraryVisible}
-                        onRequestClose={this.handleCloseSpriteLibrary}
+                        visible={spriteLibraryVisible}
                         vm={vm}
+                        onRequestClose={onRequestCloseSpriteLibrary}
                     />
-                    <button onClick={this.handleNewCostumeClick}>New Costume</button>
+                    <button onClick={onNewCostumeClick}>New Costume</button>
                     <CostumeLibrary
                         mediaLibrary={mediaLibrary}
-                        visible={this.state.costumeLibraryVisible}
-                        onRequestClose={this.handleCloseCostumeLibrary}
+                        visible={costumeLibraryVisible}
                         vm={vm}
+                        onRequestClose={onRequestCloseCostumeLibrary}
                     />
-                    <button onClick={this.handleNewBackdropClick}>New Backdrop</button>
+                    <button onClick={onNewBackdropClick}>New Backdrop</button>
                     <BackdropLibrary
                         mediaLibrary={mediaLibrary}
-                        visible={this.state.backdropLibraryVisible}
-                        onRequestClose={this.handleCloseBackdropLibrary}
+                        visible={backdropLibraryVisible}
                         vm={vm}
+                        onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 </p>
             </div>
@@ -106,8 +92,17 @@ class SpriteSelector extends React.Component {
 }
 
 SpriteSelector.propTypes = {
+    backdropLibraryVisible: React.PropTypes.bool,
+    costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    onNewBackdropClick: React.PropTypes.func,
+    onNewCostumeClick: React.PropTypes.func,
+    onNewSpriteClick: React.PropTypes.func,
+    onRequestCloseBackdropLibrary: React.PropTypes.func,
+    onRequestCloseCostumeLibrary: React.PropTypes.func,
+    onRequestCloseSpriteLibrary: React.PropTypes.func,
+    spriteLibraryVisible: React.PropTypes.bool,
     targets: React.PropTypes.objectOf(React.PropTypes.shape({
         costume: React.PropTypes.shape({
             skin: React.PropTypes.string,
@@ -124,10 +119,34 @@ SpriteSelector.propTypes = {
 };
 
 const mapStateToProps = state => ({
+    editingTarget: state.targets.editingTarget,
     targets: state.targets.targets,
-    editingTarget: state.targets.editingTarget
+    spriteLibraryVisible: state.modals.spriteLibrary,
+    costumeLibraryVisible: state.modals.costumeLibrary,
+    backdropLibraryVisible: state.modals.backdropLibrary
 });
 const mapDispatchToProps = dispatch => ({
+    onNewBackdropClick: e => {
+        e.preventDefault();
+        dispatch(openBackdropLibrary());
+    },
+    onNewCostumeClick: e => {
+        e.preventDefault();
+        dispatch(openCostumeLibrary());
+    },
+    onNewSpriteClick: e => {
+        e.preventDefault();
+        dispatch(openSpriteLibrary());
+    },
+    onRequestCloseBackdropLibrary: () => {
+        dispatch(closeBackdropLibrary());
+    },
+    onRequestCloseCostumeLibrary: () => {
+        dispatch(closeCostumeLibrary());
+    },
+    onRequestCloseSpriteLibrary: () => {
+        dispatch(closeSpriteLibrary());
+    }
 });
 
 module.exports = connect(

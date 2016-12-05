@@ -18,6 +18,7 @@ const CostumeLibrary = require('./costume-library.jsx');
 const MediaLibrary = require('../lib/media-library');
 const SpriteLibrary = require('./sprite-library.jsx');
 const SpriteSelectorComponent = require('../components/sprite-selector.jsx');
+const StageSelector = require('./stage-selector.jsx');
 
 class SpriteSelector extends React.Component {
     constructor (props) {
@@ -43,7 +44,8 @@ class SpriteSelector extends React.Component {
             onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,
             onRequestCloseSpriteLibrary,
-            targets,
+            stage,
+            sprites,
             vm,
             /* eslint-enable no-unused-vars */
             ...componentProps
@@ -56,12 +58,19 @@ class SpriteSelector extends React.Component {
                     top: 380,
                     right: 10
                 }}
+                {...componentProps}
             >
                 <SpriteSelectorComponent
                     selectedId={editingTarget}
-                    sprites={targets}
+                    sprites={sprites}
                     onSelectSprite={this.handleSelectSprite}
-                    {...componentProps}
+                />
+                <StageSelector
+                    backdropCount={stage.costumeCount}
+                    id={stage.id}
+                    selected={stage.id === editingTarget}
+                    url={stage.costume && stage.costume.skin}
+                    onSelect={this.handleSelectSprite}
                 />
                 <p>
                     <button onClick={onNewSpriteClick}>New Sprite</button>
@@ -91,6 +100,19 @@ class SpriteSelector extends React.Component {
     }
 }
 
+const spriteShape = React.PropTypes.shape({
+    costume: React.PropTypes.shape({
+        skin: React.PropTypes.string,
+        name: React.PropTypes.string,
+        bitmapResolution: React.PropTypes.number,
+        rotationCenterX: React.PropTypes.number,
+        rotationCenterY: React.PropTypes.number
+    }),
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    order: React.PropTypes.number
+});
+
 SpriteSelector.propTypes = {
     backdropLibraryVisible: React.PropTypes.bool,
     costumeLibraryVisible: React.PropTypes.bool,
@@ -103,24 +125,15 @@ SpriteSelector.propTypes = {
     onRequestCloseCostumeLibrary: React.PropTypes.func,
     onRequestCloseSpriteLibrary: React.PropTypes.func,
     spriteLibraryVisible: React.PropTypes.bool,
-    targets: React.PropTypes.objectOf(React.PropTypes.shape({
-        costume: React.PropTypes.shape({
-            skin: React.PropTypes.string,
-            name: React.PropTypes.string,
-            bitmapResolution: React.PropTypes.number,
-            rotationCenterX: React.PropTypes.number,
-            rotationCenterY: React.PropTypes.number
-        }),
-        id: React.PropTypes.string,
-        name: React.PropTypes.string,
-        order: React.PropTypes.number
-    })),
+    sprites: React.PropTypes.objectOf(spriteShape),
+    stage: spriteShape,
     vm: React.PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
-    targets: state.targets.targets,
+    sprites: state.targets.sprites,
+    stage: state.targets.stage,
     spriteLibraryVisible: state.modals.spriteLibrary,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary

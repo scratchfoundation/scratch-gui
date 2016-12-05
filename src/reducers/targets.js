@@ -5,29 +5,46 @@ const UPDATE_TARGET_LIST = 'scratch-gui/targets/UPDATE_TARGET_LIST';
 const UPDATE_TARGET = 'scratch/targets/UPDATE_TARGET';
 
 const initialState = {
-    targets: {}
+    sprites: {},
+    stage: {}
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case UPDATE_TARGET:
+        if (action.target.id === state.stage.id) {
+            return Object.assign({}, state, {
+                stage: Object.assign({}, state.stage, action.target)
+            });
+        }
         return Object.assign({}, state, {
-            targets: defaultsDeep(
+            sprites: defaultsDeep(
                 {[action.target.id]: action.target},
-                state.targets
+                state.sprites
             )
         });
     case UPDATE_TARGET_LIST:
         return Object.assign({}, state, {
-            targets: action.targets.reduce(
-                (targets, target, listId) => defaultsDeep(
-                    {[target[0]]: {name: target[1], order: listId}},
-                    {[target[0]]: state.targets[target[0]]},
-                    targets
+            sprites: action.targets
+                .filter(target => !target.isStage)
+                .reduce(
+                    (targets, target, listId) => defaultsDeep(
+                        {[target.id]: {order: listId}},
+                        {[target.id]: state.sprites[target.id]},
+                        targets
+                    ),
+                    {}
                 ),
-                {}
-            )
+            stage: action.targets
+                .filter(target => target.isStage)
+                .reduce(
+                    (stage, target) => {
+                        if (target.id !== stage.id) return target;
+                        return defaultsDeep(target, stage);
+                    },
+                    state.stage
+                )
         });
     case UPDATE_EDITING_TARGET:
         return Object.assign({}, state, {editingTarget: action.target});

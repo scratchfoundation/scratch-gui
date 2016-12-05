@@ -1,9 +1,8 @@
 const bindAll = require('lodash.bindall');
-const {connect} = require('react-redux');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const {updateEditingTarget} = require('../reducers/targets');
+const {connect} = require('react-redux');
 
 const BackdropLibrary = require('./backdrop-library.jsx');
 const CostumeLibrary = require('./costume-library.jsx');
@@ -20,7 +19,8 @@ class SpriteSelector extends React.Component {
             'handleCloseSpriteLibrary',
             'handleNewBackdropClick',
             'handleNewCostumeClick',
-            'handleNewSpriteClick'
+            'handleNewSpriteClick',
+            'handleSelectSprite'
         ]);
         this.state = {
             backdropLibraryVisible: false,
@@ -49,6 +49,8 @@ class SpriteSelector extends React.Component {
     }
     handleCloseSpriteLibrary () {
         this.setState({spriteLibraryVisible: false});
+    handleSelectSprite (id) {
+        this.props.vm.setEditingTarget(id);
     }
     render () {
         const {
@@ -58,7 +60,7 @@ class SpriteSelector extends React.Component {
             targets,
             vm,
             /* eslint-enable no-unused-vars */
-            ...props
+            ...componentProps
         } = this.props;
         return (
             <div
@@ -70,32 +72,32 @@ class SpriteSelector extends React.Component {
                 }}
             >
                 <SpriteSelectorComponent
-                    selectedId={this.props.editingTarget}
-                    sprites={this.props.targets}
-                    onSelectSprite={this.props.onSelectSprite}
-                    {...props}
+                    selectedId={editingTarget}
+                    sprites={targets}
+                    onSelectSprite={this.handleSelectSprite}
+                    {...componentProps}
                 />
                 <p>
                     <button onClick={this.handleNewSpriteClick}>New Sprite</button>
                     <SpriteLibrary
                         mediaLibrary={mediaLibrary}
                         visible={this.state.spriteLibraryVisible}
-                        vm={this.props.vm}
                         onRequestClose={this.handleCloseSpriteLibrary}
+                        vm={vm}
                     />
                     <button onClick={this.handleNewCostumeClick}>New Costume</button>
                     <CostumeLibrary
                         mediaLibrary={mediaLibrary}
                         visible={this.state.costumeLibraryVisible}
-                        vm={this.props.vm}
                         onRequestClose={this.handleCloseCostumeLibrary}
+                        vm={vm}
                     />
                     <button onClick={this.handleNewBackdropClick}>New Backdrop</button>
                     <BackdropLibrary
                         mediaLibrary={mediaLibrary}
                         visible={this.state.backdropLibraryVisible}
-                        vm={this.props.vm}
                         onRequestClose={this.handleCloseBackdropLibrary}
+                        vm={vm}
                     />
                 </p>
             </div>
@@ -106,7 +108,6 @@ class SpriteSelector extends React.Component {
 SpriteSelector.propTypes = {
     editingTarget: React.PropTypes.string,
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
-    onSelectSprite: React.PropTypes.func,
     targets: React.PropTypes.objectOf(React.PropTypes.shape({
         costume: React.PropTypes.shape({
             skin: React.PropTypes.string,
@@ -127,7 +128,6 @@ const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget
 });
 const mapDispatchToProps = dispatch => ({
-    onSelectSprite: id => dispatch(updateEditingTarget(id))
 });
 
 module.exports = connect(

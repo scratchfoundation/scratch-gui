@@ -2,13 +2,27 @@ const React = require('react');
 
 const CostumeCanvas = require('./costume-canvas.jsx');
 
+const style = {
+    base: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: 72,
+        border: '1px solid',
+        borderColor: 'transparent'
+    },
+    selected: {
+        borderColor: 'black'
+    }
+};
+
 const StageSelector = props => (
     <div
         className="scratch-stage-selector"
-        style={{
-            border: '1px solid',
-            borderColor: props.selected ? 'black' : 'transparent'
-        }}
+        style={Object.assign({},
+            style.base,
+            props.selected ? style.selected : {}
+        )}
         onClick={props.onClick}
     >
         <div>Stage</div>
@@ -17,7 +31,7 @@ const StageSelector = props => (
         <hr />
         {props.url ? (
             <CostumeCanvas
-                height={43}
+                height={42}
                 url={props.url}
                 width={50}
             />

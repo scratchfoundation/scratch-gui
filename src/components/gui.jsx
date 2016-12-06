@@ -11,9 +11,9 @@ const GUIComponent = function (props) {
             style={{
                 position: 'absolute',
                 top: 0,
-                right: 0,
+                right: 4,
                 bottom: 0,
-                left: 0
+                left: 4
             }}
             {...componentProps}
         >

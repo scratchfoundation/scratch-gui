@@ -9,7 +9,7 @@ const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 const Blocks = require('./blocks.jsx');
 const GUIComponent = require('../components/gui.jsx');
 const GreenFlag = require('./green-flag.jsx');
-const SpriteSelector = require('./sprite-selector.jsx');
+const TargetPane = require('./target-pane.jsx');
 const Stage = require('./stage.jsx');
 const StopAll = require('./stop-all.jsx');
 
@@ -33,7 +33,7 @@ class GUI extends React.Component {
             greenFlagProps,
             mediaLibrary,
             projectData, // eslint-disable-line no-unused-vars
-            spriteSelectorProps,
+            targetPaneProps,
             stageProps,
             stopAllProps,
             vm,
@@ -65,10 +65,10 @@ class GUI extends React.Component {
                     vm={vm}
                     {...stageProps}
                 />
-                <SpriteSelector
+                <TargetPane
                     mediaLibrary={mediaLibrary}
                     vm={vm}
-                    {... spriteSelectorProps}
+                    {... targetPaneProps}
                 />
                 <Blocks
                     vm={vm}
@@ -86,9 +86,9 @@ GUI.propTypes = {
     greenFlagProps: shapeFromPropTypes(GreenFlag.propTypes, {omit: ['vm']}),
     mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
     projectData: React.PropTypes.string,
-    spriteSelectorProps: shapeFromPropTypes(SpriteSelector.propTypes, {omit: ['vm']}),
     stageProps: shapeFromPropTypes(Stage.propTypes, {omit: ['vm']}),
     stopAllProps: shapeFromPropTypes(StopAll.propTypes, {omit: ['vm']}),
+    targetPaneProps: shapeFromPropTypes(TargetPane.propTypes, {omit: ['vm']}),
     vm: React.PropTypes.instanceOf(VM)
 };
 
@@ -97,7 +97,7 @@ GUI.defaultProps = {
     blocksProps: {},
     greenFlagProps: {},
     mediaLibrary: new MediaLibrary(),
-    spriteSelectorProps: {},
+    targetPaneProps: {},
     stageProps: {},
     stopAllProps: {},
     vm: new VM()

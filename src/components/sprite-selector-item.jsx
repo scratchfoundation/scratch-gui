@@ -2,16 +2,30 @@ const React = require('react');
 
 const CostumeCanvas = require('./costume-canvas.jsx');
 
+const style = {
+    base: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        border: '1px solid',
+        borderColor: 'transparent',
+        display: 'inline-block',
+        height: 72,
+        width: 72
+    },
+    selected: {
+        borderColor: 'black'
+    }
+};
+
+
 const SpriteSelectorItem = props => (
     <div
         className="scratch-sprite-selector-item"
-        style={{
-            border: '1px solid',
-            borderColor: props.selected ? 'black' : 'transparent',
-            display: 'inline-block',
-            height: 75,
-            width: 75
-        }}
+        style={Object.assign({},
+            style.base,
+            props.selected ? style.selected : {}
+        )}
         onClick={props.onClick}
     >
         {props.costumeURL ? (

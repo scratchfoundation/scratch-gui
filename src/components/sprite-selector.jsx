@@ -11,6 +11,9 @@ const SpriteSelectorComponent = function (props) {
     } = props;
     return (
         <div
+            style={{
+                width: 400
+            }}
             {...componentProps}
         >
             {Object.keys(sprites)

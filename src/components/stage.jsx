@@ -14,8 +14,8 @@ class StageComponent extends React.Component {
                 ref={canvasRef}
                 style={{
                     position: 'absolute',
-                    top: 10,
-                    right: 10,
+                    top: 40,
+                    right: 0,
                     width: width,
                     height: height
                 }}

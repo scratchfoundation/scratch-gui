@@ -14,9 +14,10 @@ const GreenFlagComponent = function (props) {
             src={greenFlagIcon}
             style={{
                 position: 'absolute',
-                top: 380,
-                right: 440,
-                width: 50,
+                top: 8,
+                right: 480 - 16,
+                width: 16,
+                height: 16,
                 // @todo Get real design here
                 filter: active ? 'saturate(200%) brightness(150%)' : 'none'
             }}

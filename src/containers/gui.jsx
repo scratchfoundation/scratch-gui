@@ -1,17 +1,9 @@
-const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const MediaLibrary = require('../lib/media-library');
-const shapeFromPropTypes = require('../lib/shape-from-prop-types');
 const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 
-const Blocks = require('./blocks.jsx');
 const GUIComponent = require('../components/gui/gui.jsx');
-const GreenFlag = require('./green-flag.jsx');
-const TargetPane = require('./target-pane.jsx');
-const Stage = require('./stage.jsx');
-const StopAll = require('./stop-all.jsx');
 
 class GUI extends React.Component {
     componentDidMount () {
@@ -27,80 +19,26 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
-        let {
-            basePath,
-            blocksProps,
-            greenFlagProps,
-            mediaLibrary,
+        const {
             projectData, // eslint-disable-line no-unused-vars
-            targetPaneProps,
-            stageProps,
-            stopAllProps,
             vm,
-            ...guiProps
+            ...componentProps
         } = this.props;
-        blocksProps = defaultsDeep({}, blocksProps, {
-            options: {
-                media: `${basePath}static/blocks-media/`
-            }
-        });
-        if (this.props.children) {
-            return (
-                <GUIComponent {... guiProps}>
-                    {this.props.children}
-                </GUIComponent>
-            );
-        }
         return (
-            <GUIComponent {... guiProps}>
-                <GreenFlag
-                    vm={vm}
-                    {...greenFlagProps}
-                />
-                <StopAll
-                    vm={vm}
-                    {...stopAllProps}
-                />
-                <Stage
-                    vm={vm}
-                    {...stageProps}
-                />
-                <TargetPane
-                    mediaLibrary={mediaLibrary}
-                    vm={vm}
-                    {... targetPaneProps}
-                />
-                <Blocks
-                    vm={vm}
-                    {... blocksProps}
-                />
-            </GUIComponent>
+            <GUIComponent
+                vm={vm}
+                {...componentProps}
+            />
         );
     }
 }
 
 GUI.propTypes = {
-    basePath: React.PropTypes.string,
-    blocksProps: shapeFromPropTypes(Blocks.propTypes, {omit: ['vm']}),
-    children: React.PropTypes.node,
-    greenFlagProps: shapeFromPropTypes(GreenFlag.propTypes, {omit: ['vm']}),
-    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
+    ...GUIComponent.propTypes,
     projectData: React.PropTypes.string,
-    stageProps: shapeFromPropTypes(Stage.propTypes, {omit: ['vm']}),
-    stopAllProps: shapeFromPropTypes(StopAll.propTypes, {omit: ['vm']}),
-    targetPaneProps: shapeFromPropTypes(TargetPane.propTypes, {omit: ['vm']}),
     vm: React.PropTypes.instanceOf(VM)
 };
 
-GUI.defaultProps = {
-    basePath: '/',
-    blocksProps: {},
-    greenFlagProps: {},
-    mediaLibrary: new MediaLibrary(),
-    targetPaneProps: {},
-    stageProps: {},
-    stopAllProps: {},
-    vm: new VM()
-};
+GUI.defaultProps = GUIComponent.defaultProps;
 
 module.exports = vmListenerHOC(GUI);

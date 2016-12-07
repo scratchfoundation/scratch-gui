@@ -1,7 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const StageSelectorComponent = require('../components/stage-selector.jsx');
+const StageSelectorComponent = require('../components/stage-selector/stage-selector.jsx');
 
 class StageSelector extends React.Component {
     constructor (props) {

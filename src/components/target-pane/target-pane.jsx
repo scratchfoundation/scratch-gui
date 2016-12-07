@@ -1,13 +1,15 @@
 const React = require('react');
 
-const MediaLibrary = require('../lib/media-library');
+const MediaLibrary = require('../../lib/media-library');
 const VM = require('scratch-vm');
 
-const BackdropLibrary = require('../containers/backdrop-library.jsx');
-const CostumeLibrary = require('../containers/costume-library.jsx');
-const SpriteLibrary = require('../containers/sprite-library.jsx');
-const SpriteSelectorComponent = require('./sprite-selector.jsx');
-const StageSelector = require('../containers/stage-selector.jsx');
+const BackdropLibrary = require('../../containers/backdrop-library.jsx');
+const CostumeLibrary = require('../../containers/costume-library.jsx');
+const SpriteLibrary = require('../../containers/sprite-library.jsx');
+const SpriteSelectorComponent = require('../sprite-selector/sprite-selector.jsx');
+const StageSelector = require('../../containers/stage-selector.jsx');
+
+const styles = require('./target-pane.css');
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -36,13 +38,7 @@ const TargetPane = function (props) {
     } = props;
     return (
         <div
-            className="scratch-target-pane"
-            style={{
-                position: 'absolute',
-                top: 40 + 360 + 8,
-                right: 0,
-                width: 480
-            }}
+            className={styles.targetPane}
             {...componentProps}
         >
             <SpriteSelectorComponent
@@ -57,14 +53,7 @@ const TargetPane = function (props) {
                 url={stage.costume && stage.costume.skin}
                 onSelect={onSelectSprite}
             />
-            <p
-                style={{
-                    position: 'absolute',
-                    right: 0,
-                    top: 108,
-                    width: 72
-                }}
-            >
+            <p className={styles.targetPaneLibraryButtons}>
                 <button onClick={onNewSpriteClick}>New Sprite</button>
                 {editingTarget === stage.id ? (
                     <button onClick={onNewBackdropClick}>New Backdrop</button>

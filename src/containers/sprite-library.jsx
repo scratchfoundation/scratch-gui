@@ -3,7 +3,7 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library.jsx');
+const LibaryComponent = require('../components/library/library.jsx');
 
 class SpriteLibrary extends React.Component {
     constructor (props) {
@@ -41,7 +41,6 @@ class SpriteLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
-                className="scratch-sprite-library"
                 data={Object.keys(this.state.spriteData).map(libraryKey => {
                     const libraryItem = this.state.spriteData[libraryKey];
                     return {

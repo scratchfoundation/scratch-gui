@@ -1,28 +1,15 @@
+const classNames = require('classnames');
 const React = require('react');
 
-const CostumeCanvas = require('./costume-canvas.jsx');
-
-const style = {
-    base: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: 72,
-        border: '1px solid',
-        borderColor: 'transparent'
-    },
-    selected: {
-        borderColor: 'black'
-    }
-};
+const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
+const styles = require('./stage-selector.css');
 
 const StageSelector = props => (
     <div
-        className="scratch-stage-selector"
-        style={Object.assign({},
-            style.base,
-            props.selected ? style.selected : {}
-        )}
+        className={classNames({
+            [styles.stageSelector]: true,
+            [styles.isSelected]: props.selected
+        })}
         onClick={props.onClick}
     >
         <div>Stage</div>

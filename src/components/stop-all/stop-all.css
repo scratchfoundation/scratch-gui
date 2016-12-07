@@ -1,0 +1,11 @@
+.stop-all {
+    position: absolute;
+    top: 8px;
+    right: calc(480px - 16px - 12px - 16px);
+    width: 16px;
+    height: 16px;
+}
+
+.active {
+    filter: saturate(200%) brightness(150%);
+}

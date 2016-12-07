@@ -7,7 +7,7 @@ const shapeFromPropTypes = require('../lib/shape-from-prop-types');
 const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 
 const Blocks = require('./blocks.jsx');
-const GUIComponent = require('../components/gui.jsx');
+const GUIComponent = require('../components/gui/gui.jsx');
 const GreenFlag = require('./green-flag.jsx');
 const TargetPane = require('./target-pane.jsx');
 const Stage = require('./stage.jsx');

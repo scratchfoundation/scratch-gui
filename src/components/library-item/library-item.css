@@ -1,0 +1,12 @@
+.library-item {
+    float: left;
+    width: 140px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.library-item.is-selected {
+    background: #aaa;
+    border-radius: 6px;
+}

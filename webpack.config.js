@@ -1,3 +1,5 @@
+var autoprefixer = require('autoprefixer');
+var combineLoaders = require('webpack-combine-loaders');
 var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -27,6 +29,21 @@ module.exports = {
             }
         },
         {
+            test: /\.css$/,
+            loader: combineLoaders([{
+                loader: 'style'
+            }, {
+                loader: 'css',
+                query: {
+                    modules: true,
+                    localIdentName: '[name]_[local]_[hash:base64:5]',
+                    camelCase: true
+                }
+            }, {
+                loader: 'postcss'
+            }])
+        },
+        {
             test: /\.svg$/,
             loader: 'svg-url-loader?noquotes'
         },
@@ -35,6 +52,7 @@ module.exports = {
             loader: 'json-loader'
         }]
     },
+    postcss: [autoprefixer],
     plugins: [
         new webpack.DefinePlugin({
             'process.env.BASE_PATH': '"' + (process.env.BASE_PATH || '/') + '"'

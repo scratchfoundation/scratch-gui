@@ -1,31 +1,15 @@
+const classNames = require('classnames');
 const React = require('react');
 
-const CostumeCanvas = require('./costume-canvas.jsx');
-
-const style = {
-    base: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        border: '1px solid',
-        borderColor: 'transparent',
-        display: 'inline-block',
-        height: 72,
-        width: 72
-    },
-    selected: {
-        borderColor: 'black'
-    }
-};
-
+const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
+const styles = require('./sprite-selector-item.css');
 
 const SpriteSelectorItem = props => (
     <div
-        className="scratch-sprite-selector-item"
-        style={Object.assign({},
-            style.base,
-            props.selected ? style.selected : {}
-        )}
+        className={classNames({
+            [styles.spriteSelectorItem]: true,
+            [styles.isSelected]: props.selected
+        })}
         onClick={props.onClick}
     >
         {props.costumeURL ? (
@@ -35,7 +19,7 @@ const SpriteSelectorItem = props => (
                 width={50}
             />
         ) : null}
-        {props.name}
+        <div>{props.name}</div>
     </div>
 );
 

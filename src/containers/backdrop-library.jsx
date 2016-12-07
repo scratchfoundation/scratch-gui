@@ -3,7 +3,7 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library.jsx');
+const LibaryComponent = require('../components/library/library.jsx');
 
 
 class BackdropLibrary extends React.Component {
@@ -38,7 +38,6 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
-                className="scratch-backdrop-library"
                 data={this.state.backdropData}
                 title="Backdrop Library"
                 visible={this.props.visible}

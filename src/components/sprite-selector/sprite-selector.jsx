@@ -1,6 +1,8 @@
 const React = require('react');
 
-const SpriteSelectorItem = require('../containers/sprite-selector-item.jsx');
+const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
+
+const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
@@ -11,9 +13,7 @@ const SpriteSelectorComponent = function (props) {
     } = props;
     return (
         <div
-            style={{
-                width: 400
-            }}
+            className={styles.spriteSelector}
             {...componentProps}
         >
             {Object.keys(sprites)

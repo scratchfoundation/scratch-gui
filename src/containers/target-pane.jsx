@@ -12,7 +12,7 @@ const {
     closeSpriteLibrary
 } = require('../reducers/modals');
 
-const TargetPaneComponent = require('../components/target-pane.jsx');
+const TargetPaneComponent = require('../components/target-pane/target-pane.jsx');
 
 class TargetPane extends React.Component {
     constructor (props) {

@@ -2,7 +2,6 @@ const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const MediaLibrary = require('../../lib/media-library');
 const shapeFromPropTypes = require('../../lib/shape-from-prop-types');
 
 const Blocks = require('../../containers/blocks.jsx');
@@ -19,7 +18,6 @@ const GUIComponent = props => {
         blocksProps,
         children,
         greenFlagProps,
-        mediaLibrary,
         targetPaneProps,
         stageProps,
         stopAllProps,
@@ -52,7 +50,6 @@ const GUIComponent = props => {
                 {...stageProps}
             />
             <TargetPane
-                mediaLibrary={mediaLibrary}
                 vm={vm}
                 {...targetPaneProps}
             />
@@ -69,7 +66,6 @@ GUIComponent.propTypes = {
     blocksProps: shapeFromPropTypes(Blocks.propTypes, {omit: ['vm']}),
     children: React.PropTypes.node,
     greenFlagProps: shapeFromPropTypes(GreenFlag.propTypes, {omit: ['vm']}),
-    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
     stageProps: shapeFromPropTypes(Stage.propTypes, {omit: ['vm']}),
     stopAllProps: shapeFromPropTypes(StopAll.propTypes, {omit: ['vm']}),
     targetPaneProps: shapeFromPropTypes(TargetPane.propTypes, {omit: ['vm']}),
@@ -80,7 +76,6 @@ GUIComponent.defaultProps = {
     basePath: '/',
     blocksProps: {},
     greenFlagProps: {},
-    mediaLibrary: new MediaLibrary(),
     targetPaneProps: {},
     stageProps: {},
     stopAllProps: {},

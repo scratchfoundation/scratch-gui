@@ -113,4 +113,8 @@ TargetPane.propTypes = {
     vm: React.PropTypes.instanceOf(VM)
 };
 
+TargetPane.defaultProps = {
+    mediaLibrary: new MediaLibrary()
+};
+
 module.exports = TargetPane;

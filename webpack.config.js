@@ -36,6 +36,7 @@ module.exports = {
                 loader: 'css',
                 query: {
                     modules: true,
+                    importLoaders: 1,
                     localIdentName: '[name]_[local]_[hash:base64:5]',
                     camelCase: true
                 }
@@ -52,7 +53,11 @@ module.exports = {
             loader: 'json-loader'
         }]
     },
-    postcss: [autoprefixer],
+    postcss: [
+        autoprefixer({
+            browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
+        })
+    ],
     plugins: [
         new webpack.DefinePlugin({
             'process.env.BASE_PATH': '"' + (process.env.BASE_PATH || '/') + '"'

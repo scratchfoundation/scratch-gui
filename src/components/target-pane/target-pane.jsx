@@ -50,7 +50,7 @@ const TargetPane = function (props) {
                 backdropCount={stage.costumeCount}
                 id={stage.id}
                 selected={stage.id === editingTarget}
-                url={stage.costume && stage.costume.skin}
+                url={stage.costume.skin}
                 onSelect={onSelectSprite}
             />
             <p className={styles.targetPaneLibraryButtons}>

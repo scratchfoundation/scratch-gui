@@ -17,8 +17,6 @@ const SpriteSelectorComponent = function (props) {
             {...componentProps}
         >
             {Object.keys(sprites)
-                // Only render ready sprites
-                .filter(id => 'costume' in sprites[id] && 'order' in sprites[id])
                 // Re-order by list order
                 .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
                 .map(id => (

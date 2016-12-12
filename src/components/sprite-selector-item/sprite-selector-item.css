@@ -1,0 +1,10 @@
+.sprite-selector-item {
+    border: 1px solid;
+    border-color: transparent;
+    display: inline-block;
+    height: 72px;
+    width: 72px;
+}
+.sprite-selector-item.is-selected {
+    border-color: black;
+}

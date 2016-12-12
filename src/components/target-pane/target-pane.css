@@ -1,0 +1,12 @@
+.target-pane {
+    position: absolute;
+    top: calc(40px + 360px + 8px);
+    right: 0;
+    width: 480px;
+}
+.target-pane-library-buttons {
+    position: absolute;
+    right: 0;
+    top: 108px;
+    width: 72px;
+}

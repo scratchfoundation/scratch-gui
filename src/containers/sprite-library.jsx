@@ -3,13 +3,20 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library.jsx');
+const LibaryComponent = require('../components/library/library.jsx');
 
 class SpriteLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'handleItemSelect', 'setSpriteData']);
-        this.state = {data: [], spriteData: {}};
+        bindAll(this, [
+            'handleItemSelect',
+            'setData',
+            'setSpriteData'
+        ]);
+        this.state = {
+            data: [],
+            spriteData: {}
+        };
     }
     componentWillReceiveProps (nextProps) {
         if (nextProps.visible && this.state.data.length === 0) {

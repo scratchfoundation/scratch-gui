@@ -1,5 +1,8 @@
+const classNames = require('classnames');
 const React = require('react');
+
 const stopAllIcon = require('./stop-all.svg');
+const styles = require('./stop-all.css');
 
 const StopAllComponent = function (props) {
     const {
@@ -10,16 +13,11 @@ const StopAllComponent = function (props) {
     } = props;
     return (
         <img
-            className="scratch-stop-all"
+            className={classNames({
+                [styles.stopAll]: true,
+                [styles.active]: active
+            })}
             src={stopAllIcon}
-            style={{
-                position: 'absolute',
-                top: 380,
-                right: 380,
-                width: 50,
-                // @todo Get real design here
-                filter: active ? 'saturate(200%) brightness(150%)' : 'none'
-            }}
             title={title}
             onClick={onClick}
             {...componentProps}

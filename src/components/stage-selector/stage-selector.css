@@ -1,0 +1,11 @@
+.stage-selector {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 72px;
+        border: 1px solid;
+        border-color: transparent;
+}
+.stage-selector.is-selected {
+        border-color: black;
+}

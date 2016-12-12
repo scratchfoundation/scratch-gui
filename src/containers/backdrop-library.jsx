@@ -3,13 +3,16 @@ const React = require('react');
 const VM = require('scratch-vm');
 const MediaLibrary = require('../lib/media-library');
 
-const LibaryComponent = require('../components/library.jsx');
+const LibaryComponent = require('../components/library/library.jsx');
 
 
 class BackdropLibrary extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['setData', 'handleItemSelect']);
+        bindAll(this, [
+            'setData',
+            'handleItemSelect'
+        ]);
         this.state = {backdropData: []};
     }
     componentWillReceiveProps (nextProps) {

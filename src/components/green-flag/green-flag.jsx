@@ -1,5 +1,8 @@
+const classNames = require('classnames');
 const React = require('react');
+
 const greenFlagIcon = require('./green-flag.svg');
+const styles = require('./green-flag.css');
 
 const GreenFlagComponent = function (props) {
     const {
@@ -10,16 +13,11 @@ const GreenFlagComponent = function (props) {
     } = props;
     return (
         <img
-            className="scratch-green-flag"
+            className={classNames({
+                [styles.greenFlag]: true,
+                [styles.active]: active
+            })}
             src={greenFlagIcon}
-            style={{
-                position: 'absolute',
-                top: 380,
-                right: 440,
-                width: 50,
-                // @todo Get real design here
-                filter: active ? 'saturate(200%) brightness(150%)' : 'none'
-            }}
             title={title}
             onClick={onClick}
             {...componentProps}

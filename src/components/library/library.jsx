@@ -1,8 +1,10 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
-const LibraryItem = require('./library-item.jsx');
-const ModalComponent = require('./modal.jsx');
+const LibraryItem = require('../library-item/library-item.jsx');
+const ModalComponent = require('../modal/modal.jsx');
+
+const styles = require('./library.css');
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -19,21 +21,13 @@ class LibraryComponent extends React.Component {
         this.setState({selectedItem: id});
     }
     render () {
-        const scrollGridStyle = {
-            overflow: 'scroll',
-            position: 'absolute',
-            top: '70px',
-            bottom: '20px',
-            left: '30px',
-            right: '30px'
-        };
         return (
             <ModalComponent
                 visible={this.props.visible}
                 onRequestClose={this.props.onRequestClose}
             >
                 <h1>{this.props.title}</h1>
-                <div style={scrollGridStyle}>
+                <div className={styles.libraryScrollGrid}>
                     {this.props.data.map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :

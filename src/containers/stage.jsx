@@ -3,7 +3,7 @@ const React = require('react');
 const Renderer = require('scratch-render');
 const VM = require('scratch-vm');
 
-const StageComponent = require('../components/stage.jsx');
+const StageComponent = require('../components/stage/stage.jsx');
 
 class Stage extends React.Component {
     constructor (props) {

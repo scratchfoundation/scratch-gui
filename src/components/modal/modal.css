@@ -1,0 +1,36 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .75);
+}
+.modal-content {
+    outline: none;
+    position: absolute;
+    overflow: visible;
+    -webkit-overflow-scrolling: 'touch';
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0;
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    left: 5%;
+    background: #fcfcfc;
+}
+.modal-close-button {
+    color: rgb(255, 255, 255);
+    background: rgb(50, 50, 50);
+    border-radius: 15px;
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    padding-top: 5px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer
+}

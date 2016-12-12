@@ -4,7 +4,7 @@ const React = require('react');
 const ScratchBlocks = require('scratch-blocks');
 const VM = require('scratch-vm');
 
-const BlocksComponent = require('../components/blocks.jsx');
+const BlocksComponent = require('../components/blocks/blocks.jsx');
 
 class Blocks extends React.Component {
     constructor (props) {

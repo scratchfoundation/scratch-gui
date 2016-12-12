@@ -1,5 +1,7 @@
 const React = require('react');
 
+const styles = require('./stage.css');
+
 class StageComponent extends React.Component {
     render () {
         const {
@@ -10,12 +12,9 @@ class StageComponent extends React.Component {
         } = this.props;
         return (
             <canvas
-                className="scratch-stage"
+                className={styles.stage}
                 ref={canvasRef}
                 style={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 10,
                     width: width,
                     height: height
                 }}

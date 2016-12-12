@@ -1,5 +1,7 @@
 const React = require('react');
 
+const styles = require('./blocks.css');
+
 class BlocksComponent extends React.Component {
     render () {
         const {
@@ -8,15 +10,8 @@ class BlocksComponent extends React.Component {
         } = this.props;
         return (
             <div
-                className="scratch-blocks"
+                className={styles.blocks}
                 ref={componentRef}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 500,
-                    bottom: 0,
-                    left: 0
-                }}
                 {...props}
             />
         );

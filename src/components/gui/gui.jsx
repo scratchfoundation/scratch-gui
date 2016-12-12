@@ -54,11 +54,11 @@ const GUIComponent = props => {
             <TargetPane
                 mediaLibrary={mediaLibrary}
                 vm={vm}
-                {... targetPaneProps}
+                {...targetPaneProps}
             />
             <Blocks
                 vm={vm}
-                {... blocksProps}
+                {...blocksProps}
             />
         </div>
     );

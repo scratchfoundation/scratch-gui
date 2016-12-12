@@ -23,7 +23,7 @@ class SpriteSelectorItem extends React.Component {
         return (
             <SpriteSelectorItemComponent
                 onClick={this.handleClick}
-                {... props}
+                {...props}
             />
         );
     }

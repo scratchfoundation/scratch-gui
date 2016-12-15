@@ -13,8 +13,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "postmerge": "opt --in postmerge --exec 'npm install'",
     "postrewrite": "opt --in postrewrite --exec 'npm install'",
-    "precommit": "opt --in precommit --exec 'npm run lint'",
-    "prepush": "opt --in prepush --exec 'npm run test'",
+    "prepush": "opt --in prepush --exec 'npm run lint'",
     "start": "webpack-dev-server --port $npm_package_config_port --content-base=./build",
     "test": "npm run lint && npm run build"
   },

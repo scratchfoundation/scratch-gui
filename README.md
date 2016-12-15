@@ -40,7 +40,6 @@ to the git hooks for the project. Create a file called `.opt-in` in the root of
 the project with the contents:
 
 ```
-precommit
 prepush
 postmerge
 postrewrite
@@ -48,11 +47,8 @@ postrewrite
 
 Or you can include only the hooks you would like to use.
 
-### precommit
-Run lint before committing
-
 ### prepush
-Run tests before pushing
+Run lint before pushing
 
 ### postmerge
 `npm install` after merging

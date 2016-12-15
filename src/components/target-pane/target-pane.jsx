@@ -69,8 +69,8 @@ const TargetPane = function (props) {
                     alignContent="flex-start"
                     alignItems="flex-start"
                     direction="column"
-                    shrink={0}
                     grow={1}
+                    shrink={0}
                 >
                     <button onClick={onNewSpriteClick}>New Sprite</button>
                     {editingTarget === stage.id ? (

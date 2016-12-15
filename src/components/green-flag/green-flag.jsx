@@ -15,7 +15,7 @@ const GreenFlagComponent = function (props) {
         <img
             className={classNames({
                 [styles.greenFlag]: true,
-                [styles.active]: active
+                [styles.isActive]: active
             })}
             src={greenFlagIcon}
             title={title}
@@ -24,16 +24,13 @@ const GreenFlagComponent = function (props) {
         />
     );
 };
-
 GreenFlagComponent.propTypes = {
     active: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     title: React.PropTypes.string
 };
-
 GreenFlagComponent.defaultProps = {
     active: false,
     title: 'Go'
 };
-
 module.exports = GreenFlagComponent;

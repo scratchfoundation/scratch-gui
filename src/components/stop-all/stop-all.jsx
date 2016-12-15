@@ -15,7 +15,7 @@ const StopAllComponent = function (props) {
         <img
             className={classNames({
                 [styles.stopAll]: true,
-                [styles.active]: active
+                [styles.isActive]: active
             })}
             src={stopAllIcon}
             title={title}

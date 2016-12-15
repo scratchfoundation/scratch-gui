@@ -1,6 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
+const Box = require('../box/box.jsx');
 const LibraryItem = require('../library-item/library-item.jsx');
 const ModalComponent = require('../modal/modal.jsx');
 
@@ -27,7 +28,12 @@ class LibraryComponent extends React.Component {
                 onRequestClose={this.props.onRequestClose}
             >
                 <h1>{this.props.title}</h1>
-                <div className={styles.libraryScrollGrid}>
+                <Box
+                    className={styles.libraryScrollGrid}
+                    grow={1}
+                    justifyContent="space-around"
+                    wrap="wrap"
+                >
                     {this.props.data.map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
@@ -43,7 +49,7 @@ class LibraryComponent extends React.Component {
                             />
                         );
                     })}
-                </div>
+                </Box>
             </ModalComponent>
         );
     }

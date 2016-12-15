@@ -2,6 +2,7 @@ const classNames = require('classnames');
 const bindAll = require('lodash.bindall');
 const React = require('react');
 
+const Box = require('../box/box.jsx');
 const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
 const styles = require('./library-item.css');
 
@@ -16,16 +17,20 @@ class LibraryItem extends React.Component {
     }
     render () {
         return (
-            <div
+            <Box
+                alignContent="center"
+                alignItems="center"
                 className={classNames({
                     [styles.libraryItem]: true,
                     [styles.isSelected]: this.props.selected
                 })}
+                direction="column"
+                width={140}
                 onClick={this.handleClick}
             >
                 <CostumeCanvas url={this.props.iconURL} />
                 <p>{this.props.name}</p>
-            </div>
+            </Box>
         );
     }
 }

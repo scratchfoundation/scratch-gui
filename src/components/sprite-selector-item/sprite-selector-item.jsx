@@ -1,11 +1,12 @@
 const classNames = require('classnames');
 const React = require('react');
 
+const Box = require('../box/box.jsx');
 const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
 const styles = require('./sprite-selector-item.css');
 
 const SpriteSelectorItem = props => (
-    <div
+    <Box
         className={classNames({
             [styles.spriteSelectorItem]: true,
             [styles.isSelected]: props.selected
@@ -20,7 +21,7 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div>{props.name}</div>
-    </div>
+    </Box>
 );
 
 SpriteSelectorItem.propTypes = {

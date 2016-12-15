@@ -1,25 +1,21 @@
 const React = require('react');
-
+const Box = require('../box/box.jsx');
 const styles = require('./blocks.css');
 
-class BlocksComponent extends React.Component {
-    render () {
-        const {
-            componentRef,
-            ...props
-        } = this.props;
-        return (
-            <div
-                className={styles.blocks}
-                ref={componentRef}
-                {...props}
-            />
-        );
-    }
-}
-
+const BlocksComponent = props => {
+    const {
+        componentRef,
+        ...componentProps
+    } = props;
+    return (
+        <Box
+            className={styles.blocks}
+            componentRef={componentRef}
+            {...componentProps}
+        />
+    );
+};
 BlocksComponent.propTypes = {
     componentRef: React.PropTypes.func
 };
-
 module.exports = BlocksComponent;

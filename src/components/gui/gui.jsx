@@ -10,7 +10,7 @@ const TargetPane = require('../../containers/target-pane.jsx');
 const Stage = require('../../containers/stage.jsx');
 const StopAll = require('../../containers/stop-all.jsx');
 
-const styles = require('./gui.css');
+const Box = require('../box/box.jsx');
 
 const GUIComponent = props => {
     let {
@@ -30,37 +30,71 @@ const GUIComponent = props => {
     });
     if (children) {
         return (
-            <div className={styles.gui}>
+            <Box>
                 {children}
-            </div>
+            </Box>
         );
     }
     return (
-        <div className={styles.gui}>
-            <GreenFlag
-                vm={vm}
-                {...greenFlagProps}
-            />
-            <StopAll
-                vm={vm}
-                {...stopAllProps}
-            />
-            <Stage
-                vm={vm}
-                {...stageProps}
-            />
-            <TargetPane
-                vm={vm}
-                {...targetPaneProps}
-            />
-            <Blocks
-                vm={vm}
-                {...blocksProps}
-            />
-        </div>
+        <Box
+            grow={1}
+            height="100%"
+            style={{overflow: 'hidden'}}
+        >
+            <Box
+                direction="column"
+                grow={1}
+                shrink={0}
+                width={600}
+            >
+                <Box
+                    height={32}
+                    style={{
+                        marginTop: 8
+                    }}
+                />
+                <Blocks
+                    grow={1}
+                    vm={vm}
+                    {...blocksProps}
+                />
+            </Box>
+            <Box
+                direction="column"
+                shrink={0}
+                width={480}
+            >
+                <Box
+                    alignItems="center"
+                    height={32}
+                    shrink={0}
+                    style={{
+                        marginTop: 8
+                    }}
+                >
+                    <GreenFlag
+                        vm={vm}
+                        {...greenFlagProps}
+                    />
+                    <StopAll
+                        vm={vm}
+                        {...stopAllProps}
+                    />
+                </Box>
+                <Stage
+                    shrink={0}
+                    vm={vm}
+                    {...stageProps}
+                />
+                <TargetPane
+                    grow={1}
+                    vm={vm}
+                    {...targetPaneProps}
+                />
+            </Box>
+        </Box>
     );
 };
-
 GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     blocksProps: shapeFromPropTypes(Blocks.propTypes, {omit: ['vm']}),
@@ -71,7 +105,6 @@ GUIComponent.propTypes = {
     targetPaneProps: shapeFromPropTypes(TargetPane.propTypes, {omit: ['vm']}),
     vm: React.PropTypes.instanceOf(VM)
 };
-
 GUIComponent.defaultProps = {
     basePath: '/',
     blocksProps: {},
@@ -81,5 +114,4 @@ GUIComponent.defaultProps = {
     stopAllProps: {},
     vm: new VM()
 };
-
 module.exports = GUIComponent;

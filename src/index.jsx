@@ -8,6 +8,8 @@ const log = require('./lib/log');
 const ProjectLoader = require('./lib/project-loader');
 const reducer = require('./reducers/gui');
 
+const styles = require('./index.css');
+
 class App extends React.Component {
     constructor (props) {
         super(props);
@@ -59,6 +61,7 @@ App.propTypes = {
 };
 
 const appTarget = document.createElement('div');
+appTarget.className = styles.app;
 document.body.appendChild(appTarget);
 const store = createStore(
     reducer,

@@ -1,8 +1,7 @@
 const React = require('react');
 
+const Box = require('../box/box.jsx');
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
-
-const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
@@ -12,8 +11,11 @@ const SpriteSelectorComponent = function (props) {
         ...componentProps
     } = props;
     return (
-        <div
-            className={styles.spriteSelector}
+        <Box
+            alignContent="flex-start"
+            alignItems="flex-start"
+            justifyContent="flex-start"
+            wrap="wrap"
             {...componentProps}
         >
             {Object.keys(sprites)
@@ -30,7 +32,7 @@ const SpriteSelectorComponent = function (props) {
                     />
                 ))
             }
-        </div>
+        </Box>
     );
 };
 

@@ -3,13 +3,12 @@ const React = require('react');
 const MediaLibrary = require('../../lib/media-library');
 const VM = require('scratch-vm');
 
+const Box = require('../box/box.jsx');
 const BackdropLibrary = require('../../containers/backdrop-library.jsx');
 const CostumeLibrary = require('../../containers/costume-library.jsx');
 const SpriteLibrary = require('../../containers/sprite-library.jsx');
 const SpriteSelectorComponent = require('../sprite-selector/sprite-selector.jsx');
 const StageSelector = require('../../containers/stage-selector.jsx');
-
-const styles = require('./target-pane.css');
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -37,49 +36,69 @@ const TargetPane = function (props) {
         ...componentProps
     } = props;
     return (
-        <div
-            className={styles.targetPane}
-            {...componentProps}
-        >
-            <SpriteSelectorComponent
-                selectedId={editingTarget}
-                sprites={sprites}
-                onSelectSprite={onSelectSprite}
-            />
-            <StageSelector
-                backdropCount={stage.costumeCount}
-                id={stage.id}
-                selected={stage.id === editingTarget}
-                url={stage.costume.skin}
-                onSelect={onSelectSprite}
-            />
-            <p className={styles.targetPaneLibraryButtons}>
-                <button onClick={onNewSpriteClick}>New Sprite</button>
-                {editingTarget === stage.id ? (
-                    <button onClick={onNewBackdropClick}>New Backdrop</button>
-                ) : (
-                    <button onClick={onNewCostumeClick}>New Costume</button>
-                )}
-                <SpriteLibrary
-                    mediaLibrary={mediaLibrary}
-                    visible={spriteLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseSpriteLibrary}
+        <Box {...componentProps}>
+            <Box
+                alignContent="flex-start"
+                alignItems="flex-start"
+                grow={1}
+                style={{overflowY: 'auto'}}
+            >
+                <SpriteSelectorComponent
+                    grow={1}
+                    selectedId={editingTarget}
+                    shrink={0}
+                    sprites={sprites}
+                    width="100%"
+                    onSelectSprite={onSelectSprite}
                 />
-                <CostumeLibrary
-                    mediaLibrary={mediaLibrary}
-                    visible={costumeLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseCostumeLibrary}
-                />
-                <BackdropLibrary
-                    mediaLibrary={mediaLibrary}
-                    visible={backdropLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseBackdropLibrary}
-                />
-            </p>
-        </div>
+            </Box>
+            <Box
+                direction="column"
+                shrink={0}
+                width={72}
+            >
+                {stage.id && <StageSelector
+                    backdropCount={stage.costumeCount}
+                    id={stage.id}
+                    selected={stage.id === editingTarget}
+                    shrink={0}
+                    url={stage.costume.skin}
+                    onSelect={onSelectSprite}
+                />}
+                <Box
+                    alignContent="flex-start"
+                    alignItems="flex-start"
+                    direction="column"
+                    grow={1}
+                    shrink={0}
+                >
+                    <button onClick={onNewSpriteClick}>New Sprite</button>
+                    {editingTarget === stage.id ? (
+                        <button onClick={onNewBackdropClick}>New Backdrop</button>
+                    ) : (
+                        <button onClick={onNewCostumeClick}>New Costume</button>
+                    )}
+                    <SpriteLibrary
+                        mediaLibrary={mediaLibrary}
+                        visible={spriteLibraryVisible}
+                        vm={vm}
+                        onRequestClose={onRequestCloseSpriteLibrary}
+                    />
+                    <CostumeLibrary
+                        mediaLibrary={mediaLibrary}
+                        visible={costumeLibraryVisible}
+                        vm={vm}
+                        onRequestClose={onRequestCloseCostumeLibrary}
+                    />
+                    <BackdropLibrary
+                        mediaLibrary={mediaLibrary}
+                        visible={backdropLibraryVisible}
+                        vm={vm}
+                        onRequestClose={onRequestCloseBackdropLibrary}
+                    />
+                </Box>
+            </Box>
+        </Box>
     );
 };
 const spriteShape = React.PropTypes.shape({
@@ -111,6 +130,10 @@ TargetPane.propTypes = {
     sprites: React.PropTypes.objectOf(spriteShape),
     stage: spriteShape,
     vm: React.PropTypes.instanceOf(VM)
+};
+
+TargetPane.defaultProps = {
+    mediaLibrary: new MediaLibrary()
 };
 
 module.exports = TargetPane;

@@ -1,6 +1,8 @@
 const React = require('react');
 const ReactModal = require('react-modal');
 
+const Box = require('../box/box.jsx');
+
 const styles = require('./modal.css');
 
 class ModalComponent extends React.Component {
@@ -19,7 +21,12 @@ class ModalComponent extends React.Component {
                 >
                     {'x'}
                 </div>
-                {this.props.children}
+                <Box
+                    className={styles.modalChildren}
+                    direction="column"
+                >
+                    {this.props.children}
+                </Box>
             </ReactModal>
         );
     }

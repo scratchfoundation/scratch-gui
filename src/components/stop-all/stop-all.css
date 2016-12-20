@@ -1,7 +1,9 @@
 .stop-all {
     width: 16px;
     height: 16px;
+    opacity: 0.5;
 }
-.stop-all.is-active {
-    filter: saturate(200%) brightness(150%);
+.stop-all.is-active,
+.stop-all:hover {
+    opacity: 1;
 }

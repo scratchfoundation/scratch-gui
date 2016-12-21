@@ -2751,7 +2751,7 @@ webpackJsonp([0],[
 		            // Don't report clones.
 		            return !target.hasOwnProperty('isOriginal') || target.isOriginal;
 		        }).map(function (target) {
-		            return [target.id, target.getName()];
+		            return target.toJSON();
 		        }),
 		        // Currently editing target id.
 		        editingTarget: this.editingTarget ? this.editingTarget.id : null
@@ -4635,20 +4635,13 @@ webpackJsonp([0],[
 		};
 
 		/**
-		 * Emit a sprite info report if the provided target is the editing target.
+		 * Emit a sprite info report if the provided target is the original sprite
 		 * @param {!Target} target Target to report sprite info for.
 		 */
 		Runtime.prototype.spriteInfoReport = function (target) {
-		    if (target !== this._editingTarget) {
-		        return;
-		    }
-		    this.emit(Runtime.SPRITE_INFO_REPORT, {
-		        x: target.x,
-		        y: target.y,
-		        direction: target.direction,
-		        visible: target.visible,
-		        rotationStyle: target.rotationStyle
-		    });
+		    if (!target.isOriginal) return;
+
+		    this.emit(Runtime.SPRITE_INFO_REPORT, target.toJSON());
 		};
 
 		/**
@@ -18894,6 +18887,7 @@ webpackJsonp([0],[
 		            this.runtime.requestRedraw();
 		        }
 		    }
+		    this.runtime.spriteInfoReport(this);
 		};
 
 		/**
@@ -18933,6 +18927,22 @@ webpackJsonp([0],[
 		        }
 		    }
 		    return -1;
+		};
+
+		/**
+		 * Get a costume of this rendered target by id.
+		 * @return {object} current costume
+		 */
+		RenderedTarget.prototype.getCurrentCostume = function () {
+		    return this.sprite.costumes[this.currentCostume];
+		};
+
+		/**
+		 * Get full costume list
+		 * @return {object[]} list of costumes
+		 */
+		RenderedTarget.prototype.getCostumes = function () {
+		    return this.sprite.costumes;
 		};
 
 		/**
@@ -19208,6 +19218,25 @@ webpackJsonp([0],[
 		    if (data.hasOwnProperty('visible')) {
 		        this.setVisible(data.visible);
 		    }
+		};
+
+		/**
+		 * Serialize sprite info, used when emitting events about the sprite
+		 * @returns {object} sprite data as a simple object
+		 */
+		RenderedTarget.prototype.toJSON = function () {
+		    return {
+		        id: this.id,
+		        name: this.getName(),
+		        isStage: this.isStage,
+		        x: this.x,
+		        y: this.y,
+		        direction: this.direction,
+		        costume: this.getCurrentCostume(),
+		        costumeCount: this.getCostumes().length,
+		        visible: this.visible,
+		        rotationStyle: this.rotationStyle
+		    };
 		};
 
 		/**

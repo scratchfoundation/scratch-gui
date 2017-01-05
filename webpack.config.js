@@ -6,6 +6,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
+    devServer: {
+        contentBase: path.resolve(__dirname, 'build'),
+        host: '0.0.0.0',
+        port: process.env.PORT || 8601
+    },
     entry: {
         lib: ['react', 'react-dom'],
         gui: './src/index.jsx'

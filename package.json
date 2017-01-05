@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./src/index.js",
-  "config": {
-    "port": 8601
-  },
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rm -rf ./build && mkdir -p build",
@@ -14,7 +11,7 @@
     "postmerge": "opt --in postmerge --exec 'npm install'",
     "postrewrite": "opt --in postrewrite --exec 'npm install'",
     "prepush": "opt --in prepush --exec 'npm run lint'",
-    "start": "webpack-dev-server --port $npm_package_config_port --content-base=./build",
+    "start": "webpack-dev-server",
     "test": "npm run lint && npm run build"
   },
   "author": "Massachusetts Institute of Technology",

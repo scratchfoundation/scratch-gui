@@ -1,7 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 const Renderer = require('scratch-render');
-const AudioEngine = require('scratch-audioengine');
+const AudioEngine = require('scratch-audio');
 const VM = require('scratch-vm');
 
 const StageComponent = require('../components/stage/stage.jsx');

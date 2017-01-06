@@ -54,6 +54,7 @@
     "react-redux": "4.4.6",
     "react-style-proptype": "1.2.0",
     "redux": "3.6.0",
+    "scratch-audio": "latest",
     "scratch-blocks": "latest",
     "scratch-render": "latest",
     "scratch-vm": "latest",

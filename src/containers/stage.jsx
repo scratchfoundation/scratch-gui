@@ -1,6 +1,7 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 const Renderer = require('scratch-render');
+const AudioEngine = require('scratch-audio');
 const VM = require('scratch-vm');
 
 const StageComponent = require('../components/stage/stage.jsx');
@@ -20,6 +21,8 @@ class Stage extends React.Component {
     componentDidMount () {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
+        this.audioEngine = new AudioEngine();
+        this.props.vm.attachAudioEngine(this.audioEngine);
         this.attachMouseEvents(this.canvas);
     }
     componentWillUnmount () {

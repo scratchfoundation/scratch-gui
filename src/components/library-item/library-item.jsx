@@ -3,7 +3,6 @@ const bindAll = require('lodash.bindall');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
-const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
 const styles = require('./library-item.css');
 
 class LibraryItem extends React.Component {
@@ -25,10 +24,14 @@ class LibraryItem extends React.Component {
                     [styles.isSelected]: this.props.selected
                 })}
                 direction="column"
-                width={140}
                 onClick={this.handleClick}
             >
-                <CostumeCanvas url={this.props.iconURL} />
+                <Box className={styles.libraryItemImageContainer}>
+                    <img
+                        className={styles.libraryItemImage}
+                        src={this.props.iconURL}
+                    />
+                </Box>
                 <p>{this.props.name}</p>
             </Box>
         );

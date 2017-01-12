@@ -1,6 +1,5 @@
 const React = require('react');
 
-const MediaLibrary = require('../../lib/media-library');
 const VM = require('scratch-vm');
 
 const Box = require('../box/box.jsx');
@@ -19,7 +18,6 @@ const StageSelector = require('../../containers/stage-selector.jsx');
 const TargetPane = function (props) {
     const {
         editingTarget,
-        mediaLibrary,
         backdropLibraryVisible,
         costumeLibraryVisible,
         spriteLibraryVisible,
@@ -79,19 +77,16 @@ const TargetPane = function (props) {
                         <button onClick={onNewCostumeClick}>New Costume</button>
                     )}
                     <SpriteLibrary
-                        mediaLibrary={mediaLibrary}
                         visible={spriteLibraryVisible}
                         vm={vm}
                         onRequestClose={onRequestCloseSpriteLibrary}
                     />
                     <CostumeLibrary
-                        mediaLibrary={mediaLibrary}
                         visible={costumeLibraryVisible}
                         vm={vm}
                         onRequestClose={onRequestCloseCostumeLibrary}
                     />
                     <BackdropLibrary
-                        mediaLibrary={mediaLibrary}
                         visible={backdropLibraryVisible}
                         vm={vm}
                         onRequestClose={onRequestCloseBackdropLibrary}
@@ -118,7 +113,6 @@ TargetPane.propTypes = {
     backdropLibraryVisible: React.PropTypes.bool,
     costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
-    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
     onNewBackdropClick: React.PropTypes.func,
     onNewCostumeClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
@@ -130,10 +124,6 @@ TargetPane.propTypes = {
     sprites: React.PropTypes.objectOf(spriteShape),
     stage: spriteShape,
     vm: React.PropTypes.instanceOf(VM)
-};
-
-TargetPane.defaultProps = {
-    mediaLibrary: new MediaLibrary()
 };
 
 module.exports = TargetPane;

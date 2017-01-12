@@ -1,8 +1,8 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
-const MediaLibrary = require('../lib/media-library');
 
+const costumeLibraryContent = require('../lib/libraries/costumes.json');
 const LibaryComponent = require('../components/library/library.jsx');
 
 
@@ -10,18 +10,8 @@ class CostumeLibrary extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleItemSelected',
-            'setData'
+            'handleItemSelected'
         ]);
-        this.state = {costumeData: []};
-    }
-    componentWillReceiveProps (nextProps) {
-        if (nextProps.visible && this.state.costumeData.length === 0) {
-            this.props.mediaLibrary.getMediaLibrary('costume', this.setData);
-        }
-    }
-    setData (data) {
-        this.setState({costumeData: data});
     }
     handleItemSelected (item) {
         const vmCostume = {
@@ -38,7 +28,7 @@ class CostumeLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
-                data={this.state.costumeData}
+                data={costumeLibraryContent}
                 title="Costume Library"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelected}
@@ -49,7 +39,6 @@ class CostumeLibrary extends React.Component {
 }
 
 CostumeLibrary.propTypes = {
-    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
     onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool,
     vm: React.PropTypes.instanceOf(VM).isRequired

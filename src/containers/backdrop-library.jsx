@@ -1,8 +1,8 @@
 const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
-const MediaLibrary = require('../lib/media-library');
 
+const backdropLibraryContent = require('../lib/libraries/backdrops.json');
 const LibaryComponent = require('../components/library/library.jsx');
 
 
@@ -10,18 +10,8 @@ class BackdropLibrary extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'setData',
             'handleItemSelect'
         ]);
-        this.state = {backdropData: []};
-    }
-    componentWillReceiveProps (nextProps) {
-        if (nextProps.visible && this.state.backdropData.length === 0) {
-            this.props.mediaLibrary.getMediaLibrary('backdrop', this.setData);
-        }
-    }
-    setData (data) {
-        this.setState({backdropData: data});
     }
     handleItemSelect (item) {
         const vmBackdrop = {
@@ -38,7 +28,7 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibaryComponent
-                data={this.state.backdropData}
+                data={backdropLibraryContent}
                 title="Backdrop Library"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
@@ -49,7 +39,6 @@ class BackdropLibrary extends React.Component {
 }
 
 BackdropLibrary.propTypes = {
-    mediaLibrary: React.PropTypes.instanceOf(MediaLibrary),
     onRequestClose: React.PropTypes.func,
     visible: React.PropTypes.bool,
     vm: React.PropTypes.instanceOf(VM).isRequired

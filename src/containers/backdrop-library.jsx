@@ -17,8 +17,8 @@ class BackdropLibrary extends React.Component {
         const vmBackdrop = {
             skin: `https://cdn.assets.scratch.mit.edu/internalapi/asset/${item.md5}/get/`,
             name: item.name,
-            rotationCenterX: item.info[0],
-            rotationCenterY: item.info[1]
+            rotationCenterX: item.info[0] && item.info[0] / 2,
+            rotationCenterY: item.info[1] && item.info[1] / 2
         };
         if (item.info.length > 2) {
             vmBackdrop.bitmapResolution = item.info[2];

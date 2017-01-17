@@ -1,8 +1,17 @@
 .library-item {
     cursor: pointer;
     text-align: center;
+    width: 140px;
 }
 .library-item.is-selected {
     background: #aaa;
     border-radius: 6px;
+}
+.library-item-image-container {
+    height: 140px;
+}
+.library-item-image {
+    align-self: center;
+    max-width: 100%;
+    max-height: 100%;
 }

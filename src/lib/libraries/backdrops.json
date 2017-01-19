@@ -8,7 +8,11 @@
             "city",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+            ]
     },
     {
         "name": "baseball-field",
@@ -34,7 +38,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -48,7 +53,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -61,7 +67,11 @@
             "underwater",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "beach rio",
@@ -84,7 +94,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "bedroom2",
@@ -93,7 +107,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "bench with view",
@@ -104,7 +122,11 @@
             "city",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "berkeley mural",
@@ -115,7 +137,11 @@
             "city",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "blue sky",
@@ -143,7 +169,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -158,7 +185,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -170,7 +198,11 @@
             "outdoors",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "brick wall and stairs",
@@ -180,7 +212,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "brick wall1",
@@ -192,7 +228,11 @@
             "sports",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "brick wall2",
@@ -203,7 +243,11 @@
             "city",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "building at mit",
@@ -214,7 +258,11 @@
             "city",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "canyon",
@@ -225,7 +273,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "castle1",
@@ -235,7 +287,11 @@
             "outdoors",
             "castle"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "castle2",
@@ -245,7 +301,11 @@
             "outdoors",
             "castle"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "castle3",
@@ -255,7 +315,11 @@
             "outdoors",
             "castle"
         ],
-        "info": []
+        "info": [
+            480,
+            359,
+            1
+        ]
     },
     {
         "name": "castle4",
@@ -265,7 +329,11 @@
             "indoors",
             "castle"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "castle5",
@@ -275,7 +343,11 @@
             "outdoors",
             "castle"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "chalkboard",
@@ -284,7 +356,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "circles",
@@ -295,7 +371,8 @@
         ],
         "info": [
             480,
-            364
+            364,
+            1
         ]
     },
     {
@@ -307,7 +384,11 @@
             "city",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "city with water2",
@@ -318,7 +399,11 @@
             "city",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "clothing store",
@@ -328,7 +413,11 @@
             "indoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "desert",
@@ -339,7 +428,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "doily",
@@ -351,7 +444,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -361,7 +455,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "flower bed",
@@ -371,7 +469,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "flowers",
@@ -381,7 +483,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "forest",
@@ -391,7 +497,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "garden rock",
@@ -401,7 +511,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "gingerbread",
@@ -412,7 +526,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -423,7 +538,11 @@
             "outdoors",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "goal2",
@@ -433,7 +552,11 @@
             "outdoors",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "graffiti",
@@ -444,7 +567,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "grand canyon",
@@ -455,7 +582,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "gravel desert",
@@ -466,7 +597,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "greek theater",
@@ -476,7 +611,11 @@
             "outdoors",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "hall",
@@ -485,7 +624,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "hallway outdoors",
@@ -494,7 +637,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "hay field",
@@ -505,7 +652,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "hearts1",
@@ -517,7 +668,8 @@
         ],
         "info": [
             480,
-            362
+            362,
+            1
         ]
     },
     {
@@ -530,7 +682,8 @@
         ],
         "info": [
             480,
-            362
+            362,
+            1
         ]
     },
     {
@@ -542,7 +695,11 @@
             "nature",
             "flying"
         ],
-        "info": []
+        "info": [
+            480,
+            362,
+            1
+        ]
     },
     {
         "name": "houses",
@@ -551,7 +708,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "kitchen",
@@ -560,7 +721,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "lake",
@@ -570,7 +735,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "light",
@@ -582,7 +751,8 @@
         ],
         "info": [
             494,
-            372
+            372,
+            1
         ]
     },
     {
@@ -593,7 +763,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "moon",
@@ -603,7 +777,11 @@
             "other",
             "space"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "neon tunnel",
@@ -616,7 +794,8 @@
         ],
         "info": [
             495,
-            376
+            376,
+            1
         ]
     },
     {
@@ -627,7 +806,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "night city",
@@ -637,7 +820,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "parking-ramp",
@@ -647,7 +834,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "party",
@@ -660,7 +851,8 @@
         ],
         "info": [
             503,
-            380
+            380,
+            1
         ]
     },
     {
@@ -671,7 +863,11 @@
             "indoors",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "pathway",
@@ -681,7 +877,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "playing-field",
@@ -705,7 +905,11 @@
             "outdoors",
             "sports"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "purple",
@@ -717,7 +921,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -727,7 +932,11 @@
         "tags": [
             "other"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "room1",
@@ -736,7 +945,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "room2",
@@ -745,7 +958,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "room3",
@@ -754,7 +971,11 @@
         "tags": [
             "indoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "route66",
@@ -763,7 +984,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "school1",
@@ -773,7 +998,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "school2",
@@ -783,7 +1012,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "slopes",
@@ -796,7 +1029,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -807,7 +1041,11 @@
             "flying",
             "space"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "sparkling",
@@ -818,7 +1056,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -829,7 +1068,11 @@
             "indoors",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "spotlight-stage2",
@@ -841,7 +1084,8 @@
         ],
         "info": [
             496,
-            364
+            364,
+            1
         ]
     },
     {
@@ -852,7 +1096,11 @@
             "indoors",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "stage2",
@@ -862,7 +1110,11 @@
             "indoors",
             "music-and-dance"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "stars",
@@ -871,7 +1123,11 @@
         "tags": [
             "space"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "stripes",
@@ -894,7 +1150,11 @@
             "indoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "the movies outside",
@@ -904,7 +1164,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "track",
@@ -916,7 +1180,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -926,7 +1191,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "train tracks2",
@@ -935,7 +1204,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "tree",
@@ -945,7 +1218,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "tree-gifts",
@@ -956,7 +1233,8 @@
         ],
         "info": [
             480,
-            360
+            360,
+            1
         ]
     },
     {
@@ -968,7 +1246,11 @@
             "nature",
             "underwater"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "underwater2",
@@ -979,7 +1261,11 @@
             "nature",
             "underwater"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "underwater3",
@@ -990,7 +1276,11 @@
             "nature",
             "underwater"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "urban1",
@@ -1000,7 +1290,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "urban2",
@@ -1010,7 +1304,11 @@
             "outdoors",
             "city"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "village",
@@ -1019,7 +1317,11 @@
         "tags": [
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "water and rocks",
@@ -1029,7 +1331,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "wave",
@@ -1040,7 +1346,11 @@
             "nature",
             "underwater"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "winter",
@@ -1051,7 +1361,11 @@
             "nature",
             "outdoors"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "winter-lights",
@@ -1060,7 +1374,11 @@
         "tags": [
             "holiday"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "woods and bench",
@@ -1070,7 +1388,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "woods",
@@ -1080,7 +1402,11 @@
             "outdoors",
             "nature"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     },
     {
         "name": "xy-grid",
@@ -1089,6 +1415,10 @@
         "tags": [
             "other"
         ],
-        "info": []
+        "info": [
+            480,
+            360,
+            1
+        ]
     }
 ]

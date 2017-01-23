@@ -10,8 +10,11 @@ class BackdropLibrary extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleItemSelect'
+            'handleItemSelect',
+            'selectBackdropToImport',
+            'importBackdrop'
         ]);
+        this.props.vm.filepicker = null;
     }
     handleItemSelect (item) {
         const vmBackdrop = {
@@ -25,10 +28,65 @@ class BackdropLibrary extends React.Component {
         }
         this.props.vm.addBackdrop(vmBackdrop);
     }
+    
+    selectBackdropToImport () {
+        const vm = this.props.vm;
+        const backdrop = this;
+        const inp = document.createElement('input');
+        const imageSelectedCallback = function () {
+            document.body.removeChild(inp);
+            vm.filePicker = null;
+            for (let i = 0; i < inp.files.length; i++){
+                backdrop.importBackdrop(inp.files[i], vm);
+            }
+        };
+        if (vm.filePicker) {
+            document.body.removeChild(vm.filePicker);
+            vm.filePicker = null;
+        }
+        inp.type = 'file';
+        inp.style.color = 'transparent';
+        inp.style.backgroundColor = 'transparent';
+        inp.style.border = 'none';
+        inp.style.outline = 'none';
+        inp.style.position = 'absolute';
+        inp.style.top = '0px';
+        inp.style.left = '0px';
+        inp.style.width = '0px';
+        inp.style.height = '0px';
+        inp.style.display = 'none';
+        inp.addEventListener('change', imageSelectedCallback, false);
+        
+        document.body.appendChild(inp);
+        vm.filePicker = inp;
+        inp.click();
+    }
+
+    importBackdrop (aFile, vm) {
+        const frd = new FileReader();
+        const pic = new Image();
+        pic.onload = function () {
+            const vmBackdrop = {
+                skin: pic.src,
+                name: aFile.name,
+                rotationCenterX: pic.width / 2,
+                rotationCenterY: pic.height / 2,
+                bitmapResolution: 1
+            };
+            vm.addBackdrop(vmBackdrop);
+        };
+        frd.onloadend = function (e) {
+            pic.src = e.target.result;
+        };
+        frd.readAsDataURL(aFile);
+    }
+    
     render () {
         return (
             <LibaryComponent
                 data={backdropLibraryContent}
+                import={this.selectBackdropToImport}
+                showImport={this.props.visible}
                 title="Backdrop Library"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

@@ -40,7 +40,17 @@ const GUIComponent = props => {
             >
                 <Menu
                     height={50}
-                />
+                    alignItems="center"
+                    style={{
+                        paddingLeft: 25
+                    }}
+                >
+                    <img
+                        src="static/assets/Scratch.png"
+                        width="81"
+                        height="30"
+                    ></img>
+                </Menu>
                 <Box
                     height={32}
                     style={{
@@ -62,6 +72,10 @@ const GUIComponent = props => {
             >
                 <Menu
                     height={50}
+                    alignItems="center"
+                    style={{
+                        paddingRight: 25
+                    }}
                 />
                 <Box
                     alignItems="center"

@@ -123,7 +123,7 @@ Blocks.defaultOptions = {
     },
     colours: {
         workspace: '#F9F9F9',
-        flyout: '#283856',
+        flyout: '#F9F9F9',
         toolbox: '#FFFFFF',
         toolboxSelected: '#E9EEF2',
         scrollbar: '#CECDCE',

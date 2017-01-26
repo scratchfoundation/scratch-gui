@@ -68,6 +68,7 @@ class Blocks extends React.Component {
     }
     onWorkspaceUpdate (data) {
         ScratchBlocks.Events.disable();
+
         this.workspace.clear();
         const dom = ScratchBlocks.Xml.textToDom(data.xml);
         ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
@@ -102,6 +103,8 @@ Blocks.propTypes = {
         colours: React.PropTypes.shape({
             workspace: React.PropTypes.string,
             flyout: React.PropTypes.string,
+            toolbox: React.PropTypes.string,
+            toolboxSelected: React.PropTypes.string,
             scrollbar: React.PropTypes.string,
             scrollbarHover: React.PropTypes.string,
             insertionMarker: React.PropTypes.string,
@@ -122,6 +125,8 @@ Blocks.defaultOptions = {
     colours: {
         workspace: '#334771',
         flyout: '#283856',
+        toolbox: '#E9EEF2',
+        toolboxSelected: '#c8d5df',
         scrollbar: '#24324D',
         scrollbarHover: '#0C111A',
         insertionMarker: '#FFFFFF',

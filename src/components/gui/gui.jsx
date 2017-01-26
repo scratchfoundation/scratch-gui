@@ -42,7 +42,7 @@ const GUIComponent = props => {
                     height={50}
                     alignItems="center"
                     style={{
-                        paddingLeft: 25
+                        paddingLeft: 20
                     }}
                 >
                     <img
@@ -74,7 +74,7 @@ const GUIComponent = props => {
                     height={50}
                     alignItems="center"
                     style={{
-                        paddingRight: 25
+                        paddingRight: 20
                     }}
                 />
                 <Box

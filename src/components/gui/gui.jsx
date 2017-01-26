@@ -26,14 +26,6 @@ const GUIComponent = props => {
         );
     }
     return (
-        <Menu
-            alignItems="center"
-            height={32}
-            shrink={0}
-            style={{
-                marginTop: 8
-            }}
-        ></Menu>
         <Box
             grow={1}
             height="100%"
@@ -46,6 +38,12 @@ const GUIComponent = props => {
                 shrink={0}
                 width={600}
             >
+                <Menu
+                    height={32}
+                    style={{
+                        marginTop: 8
+                    }}
+                />
                 <Box
                     height={32}
                     style={{
@@ -65,6 +63,12 @@ const GUIComponent = props => {
                 shrink={0}
                 width={480}
             >
+                <Menu
+                    height={32}
+                    style={{
+                        marginTop: 8
+                    }}
+                />
                 <Box
                     alignItems="center"
                     height={32}

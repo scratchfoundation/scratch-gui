@@ -23,7 +23,8 @@ class Blocks extends React.Component {
     }
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);        this.attachVM();
+        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
+        this.attachVM();
     }
     componentWillUnmount () {
         this.detachVM();

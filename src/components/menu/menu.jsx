@@ -48,7 +48,7 @@ const Menu = props => {
         ...componentProps
     } = props;
     return React.createElement(element, {
-        className: classNames(styles.box, className),
+        className: classNames(styles.menu, className),
         ref: componentRef,
         style: Object.assign(
             {

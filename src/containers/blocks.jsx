@@ -23,8 +23,7 @@ class Blocks extends React.Component {
     }
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
-        this.attachVM();
+        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);        this.attachVM();
     }
     componentWillUnmount () {
         this.detachVM();
@@ -68,7 +67,6 @@ class Blocks extends React.Component {
     }
     onWorkspaceUpdate (data) {
         ScratchBlocks.Events.disable();
-
         this.workspace.clear();
         const dom = ScratchBlocks.Xml.textToDom(data.xml);
         ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);

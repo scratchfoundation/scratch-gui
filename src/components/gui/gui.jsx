@@ -9,6 +9,8 @@ const StopAll = require('../../containers/stop-all.jsx');
 
 const Box = require('../box/box.jsx');
 
+const Menu = require('../menu/menu.jsx');
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -55,6 +57,14 @@ const GUIComponent = props => {
                 shrink={0}
                 width={480}
             >
+                <Menu
+                    alignItems="center"
+                    height={32}
+                    shrink={0}
+                    style={{
+                        marginTop: 8
+                    }}
+                    ></Menu>
                 <Box
                     alignItems="center"
                     height={32}

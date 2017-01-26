@@ -52,19 +52,19 @@ const GUIComponent = props => {
                     vm={vm}
                 />
             </Box>
+            <Menu
+                alignItems="center"
+                height={32}
+                shrink={0}
+                style={{
+                    marginTop: 8
+                }}
+            ></Menu>
             <Box
                 direction="column"
                 shrink={0}
                 width={480}
             >
-                <Menu
-                    alignItems="center"
-                    height={32}
-                    shrink={0}
-                    style={{
-                        marginTop: 8
-                    }}
-                    ></Menu>
                 <Box
                     alignItems="center"
                     height={32}

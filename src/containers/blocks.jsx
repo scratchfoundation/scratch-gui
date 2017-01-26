@@ -122,12 +122,12 @@ Blocks.defaultOptions = {
         startScale: 0.75
     },
     colours: {
-        workspace: '#334771',
+        workspace: '#F9F9F9',
         flyout: '#283856',
-        toolbox: '#E9EEF2',
-        toolboxSelected: '#c8d5df',
-        scrollbar: '#24324D',
-        scrollbarHover: '#0C111A',
+        toolbox: '#FFFFFF',
+        toolboxSelected: '#E9EEF2',
+        scrollbar: '#CECDCE',
+        scrollbarHover: '#CECDCE',
         insertionMarker: '#FFFFFF',
         insertionMarkerOpacity: 0.3,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',

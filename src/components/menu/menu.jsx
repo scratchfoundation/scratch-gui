@@ -27,7 +27,7 @@ const getRandomColor = (function () {
     };
 }());
 
-const Box = props => {
+const Menu = props => {
     const {
         alignContent,
         alignItems,

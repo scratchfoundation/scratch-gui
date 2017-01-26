@@ -39,10 +39,7 @@ const GUIComponent = props => {
                 width={600}
             >
                 <Menu
-                    height={32}
-                    style={{
-                        marginTop: 8
-                    }}
+                    height={50}
                 />
                 <Box
                     height={32}
@@ -64,10 +61,7 @@ const GUIComponent = props => {
                 width={480}
             >
                 <Menu
-                    height={32}
-                    style={{
-                        marginTop: 8
-                    }}
+                    height={50}
                 />
                 <Box
                     alignItems="center"

@@ -73,7 +73,7 @@ const Menu = props => {
         ...componentProps
     }, children);
 };
-Box.propTypes = {
+Menu.propTypes = {
     alignContent: React.PropTypes.oneOf([
         'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'stretch'
     ]),
@@ -112,8 +112,8 @@ Box.propTypes = {
         'nowrap', 'wrap', 'wrap-reverse'
     ])
 };
-Box.defaultProps = {
+Menu.defaultProps = {
     element: 'div',
     style: {}
 };
-module.exports = Box;
+module.exports = Menu;

@@ -53,10 +53,12 @@ const GUIComponent = props => {
                 />
             </Box>
             <Menu
-                direction="column"
-                grow={1}
+                alignItems="center"
+                height={32}
                 shrink={0}
-                width={600}
+                style={{
+                    marginTop: 8
+                }}
             ></Menu>
             <Box
                 direction="column"

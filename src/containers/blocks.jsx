@@ -102,6 +102,8 @@ Blocks.propTypes = {
         colours: React.PropTypes.shape({
             workspace: React.PropTypes.string,
             flyout: React.PropTypes.string,
+            toolbox: React.PropTypes.string,
+            toolboxSelected: React.PropTypes.string,
             scrollbar: React.PropTypes.string,
             scrollbarHover: React.PropTypes.string,
             insertionMarker: React.PropTypes.string,
@@ -120,10 +122,12 @@ Blocks.defaultOptions = {
         startScale: 0.75
     },
     colours: {
-        workspace: '#334771',
-        flyout: '#283856',
-        scrollbar: '#24324D',
-        scrollbarHover: '#0C111A',
+        workspace: '#F9F9F9',
+        flyout: '#F9F9F9',
+        toolbox: '#FFFFFF',
+        toolboxSelected: '#E9EEF2',
+        scrollbar: '#CECDCE',
+        scrollbarHover: '#CECDCE',
         insertionMarker: '#FFFFFF',
         insertionMarkerOpacity: 0.3,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',

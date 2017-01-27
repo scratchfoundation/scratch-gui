@@ -45,11 +45,15 @@ const GUIComponent = props => {
                         paddingLeft: 10
                     }}
                 >
-                    <img
-                        src="static/assets/Scratch.png"
-                        width="81"
-                        height="30"
-                    ></img>
+                    <a
+                        href="http://scratch.mit.edu"
+                    >
+                        <img
+                            src="static/assets/Scratch.png"
+                            width="81"
+                            height="30"
+                        />
+                    </a>
                 </Menu>
                 <Box
                     height={32}

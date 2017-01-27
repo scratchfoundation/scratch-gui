@@ -47,7 +47,6 @@ const GUIComponent = props => {
                 >
                     <a
                         href="http://scratch.mit.edu"
-                        alignItems="center"
                     >
                         <img
                             src="static/assets/Scratch.png"

@@ -15,18 +15,22 @@ class Stage extends React.Component {
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
+            'updateRect',
             'setCanvas'
         ]);
     }
     componentDidMount () {
+        this.attachRectEvents();
+        this.attachMouseEvents(this.canvas);
+        this.updateRect();
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
-        this.attachMouseEvents(this.canvas);
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
+        this.detachRectEvents();
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -38,36 +42,44 @@ class Stage extends React.Component {
         canvas.removeEventListener('mouseup', this.onMouseUp);
         canvas.removeEventListener('mousedown', this.onMouseDown);
     }
+    attachRectEvents () {
+        window.addEventListener('resize', this.updateRect);
+        window.addEventListener('scroll', this.updateRect);
+    }
+    detachRectEvents () {
+        window.removeEventListener('resize', this.updateRect);
+        window.removeEventListener('scroll', this.updateRect);
+    }
+    updateRect () {
+        this.rect = this.canvas.getBoundingClientRect();
+    }
     onMouseMove (e) {
-        const rect = this.canvas.getBoundingClientRect();
         const coordinates = {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-            canvasWidth: rect.width,
-            canvasHeight: rect.height
+            x: e.clientX - this.rect.left,
+            y: e.clientY - this.rect.top,
+            canvasWidth: this.rect.width,
+            canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {
-        const rect = this.canvas.getBoundingClientRect();
         const data = {
             isDown: false,
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-            canvasWidth: rect.width,
-            canvasHeight: rect.height
+            x: e.clientX - this.rect.left,
+            y: e.clientY - this.rect.top,
+            canvasWidth: this.rect.width,
+            canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();
     }
     onMouseDown (e) {
-        const rect = this.canvas.getBoundingClientRect();
         const data = {
             isDown: true,
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-            canvasWidth: rect.width,
-            canvasHeight: rect.height
+            x: e.clientX - this.rect.left,
+            y: e.clientY - this.rect.top,
+            canvasWidth: this.rect.width,
+            canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();

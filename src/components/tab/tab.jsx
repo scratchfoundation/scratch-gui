@@ -48,7 +48,7 @@ const Tab = props => {
         ...componentProps
     } = props;
     return React.createElement(element, {
-        className: classNames(eval("styles.tab" + (this.props.selected == true) ? "Selected" : ""), className),
+        className: classNames(eval("styles.tab" + ((props.selected == true) ? "Selected" : "")), className),
         ref: componentRef,
         style: Object.assign(
             {

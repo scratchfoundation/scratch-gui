@@ -10,6 +10,7 @@ const StopAll = require('../../containers/stop-all.jsx');
 const Box = require('../box/box.jsx');
 
 const Tab = require('../tab/tab.jsx');
+const TabText = require('../tab/tabText.jsx');
 const TabSelected = require('../tab/tabSelected.jsx');
 
 const GUIComponent = props => {
@@ -44,7 +45,17 @@ const GUIComponent = props => {
                     style={{
                         marginTop: 8
                     }}
-                />
+                >
+                    <TabSelected>
+                        <TabText>Sprites</TabText>
+                    </TabSelected>
+                    <Tab>
+                        <TabText>Costumes</TabText>
+                    </Tab>
+                    <Tab>
+                        <TabText>Sounds</TabText>
+                    </Tab>
+                </Box>
                 <Blocks
                     grow={1}
                     options={{

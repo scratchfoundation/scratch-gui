@@ -16,3 +16,12 @@
   float: left;
   color: #40B9F5;
 }
+.tabText {
+  display: inline;
+  font-weight: bold;
+  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: left;
+  font-size: 16px;
+}

@@ -46,15 +46,19 @@ const GUIComponent = props => {
                         marginTop: 8
                     }}
                 >
-                    <TabSelected>
-                        <TabText>Scripts</TabText>
-                    </TabSelected>
-                    <Tab>
-                        <TabText>Costumes</TabText>
-                    </Tab>
-                    <Tab>
-                        <TabText>Sounds</TabText>
-                    </Tab>
+                    <div
+                        style="height: 100%; width: 250px;"
+                    >
+                        <TabSelected>
+                            <TabText>Scripts</TabText>
+                        </TabSelected>
+                        <Tab>
+                            <TabText>Costumes</TabText>
+                        </Tab>
+                        <Tab>
+                            <TabText>Sounds</TabText>
+                        </Tab>
+                    </div>
                 </Box>
                 <Blocks
                     grow={1}

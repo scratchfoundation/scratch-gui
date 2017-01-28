@@ -47,7 +47,7 @@ const GUIComponent = props => {
                     }}
                 >
                     <TabSelected>
-                        <TabText>Sprites</TabText>
+                        <TabText>Scripts</TabText>
                     </TabSelected>
                     <Tab>
                         <TabText>Costumes</TabText>

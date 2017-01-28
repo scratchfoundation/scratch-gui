@@ -50,7 +50,7 @@ const GUIComponent = props => {
                         width={250}
                     >
                         <Tab
-                            selected="true"
+                            selected={true}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>

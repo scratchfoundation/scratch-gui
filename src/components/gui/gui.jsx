@@ -9,6 +9,9 @@ const StopAll = require('../../containers/stop-all.jsx');
 
 const Box = require('../box/box.jsx');
 
+const Tab = require('../tab/tab.jsx');
+const TabSelected = require('../tab/tabSelected.jsx');
+
 const GUIComponent = props => {
     const {
         basePath,

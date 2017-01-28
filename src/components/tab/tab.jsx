@@ -48,7 +48,7 @@ const Tab = props => {
         ...componentProps
     } = props;
     return React.createElement(element, {
-        className: classNames(styles.box, className),
+        className: classNames(styles.tab, className),
         ref: componentRef,
         style: Object.assign(
             {

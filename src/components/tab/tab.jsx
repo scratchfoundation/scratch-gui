@@ -48,7 +48,7 @@ const Tab = props => {
         ...componentProps
     } = props;
     return React.createElement(element, {
-        className: classNames(styles.tab, className),
+        className: classNames(eval("styles.tab" + (this.props.selected == true) ? "Selected" : "", className),
         ref: componentRef,
         style: Object.assign(
             {
@@ -110,7 +110,8 @@ Tab.propTypes = {
     ]),
     wrap: React.PropTypes.oneOf([
         'nowrap', 'wrap', 'wrap-reverse'
-    ])
+    ]),
+    selected: React.PropTypes.bool,
 };
 Tab.defaultProps = {
     element: 'div',

@@ -5,6 +5,7 @@
   float: left;
   color: #9AA1B5;
   width: 83.3px;
+  text-align: center;
 }
 .tab:hover {
   background-color: #FBFCFD;
@@ -17,6 +18,7 @@
   float: left;
   color: #40B9F5;
   width: 83.3px;
+  text-align: center;
 }
 .tabText {
   display: inline;
@@ -24,6 +26,6 @@
   margin: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
-  float: left;
+  position: relative;
   font-size: 16px;
 }

@@ -1,0 +1,18 @@
+.tab {
+  border-radius: 10px 10px 0 0;
+  background-color: #F6F8FA;
+  display: inline;
+  float: left;
+  color: #9AA1B5;
+}
+.tab:hover {
+  background-color: #FBFCFD;
+  color: #6DADD5;
+}
+.tabSelected {
+  border-radius: 10px 10px 0 0;
+  background-color: #FFFFFF;
+  display: inline;
+  float: left;
+  color: #40B9F5;
+}

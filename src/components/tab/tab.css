@@ -21,7 +21,7 @@
   text-align: center;
 }
 .tabText {
-  display: inline;
+  display: inline-block;
   font-weight: bold;
   margin: 10px;
   margin-top: 5px;

@@ -128,8 +128,8 @@ Blocks.defaultOptions = {
         toolboxSelected: '#E9EEF2',
         scrollbar: '#CECDCE',
         scrollbarHover: '#CECDCE',
-        insertionMarker: '#FFFFFF',
-        insertionMarkerOpacity: 0.3,
+        insertionMarker: '#000000',
+        insertionMarkerOpacity: 0.2,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     }

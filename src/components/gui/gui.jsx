@@ -11,7 +11,7 @@ const Box = require('../box/box.jsx');
 
 const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
-const TabSelected = require('../tab/tabSelected.jsx');
+// const TabSelected = require('../tab/tabSelected.jsx');
 
 const GUIComponent = props => {
     const {
@@ -49,9 +49,11 @@ const GUIComponent = props => {
                     <Box
                         width={250}
                     >
-                        <TabSelected>
+                        <Tab
+                            selected="true"
+                        >
                             <TabText>Scripts</TabText>
-                        </TabSelected>
+                        </Tab>
                         <Tab>
                             <TabText>Costumes</TabText>
                         </Tab>

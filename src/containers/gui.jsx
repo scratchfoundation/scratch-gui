@@ -19,6 +19,7 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
+        this.props.forceUpdate = this.forceUpdate();
         const {
             projectData, // eslint-disable-line no-unused-vars
             vm,

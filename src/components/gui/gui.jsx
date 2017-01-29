@@ -104,9 +104,9 @@ const GUIComponent = props => {
                     direction="column"
                     grow={1}
                     shrink={0}
-                    width={600}
+                    width="100%"
                     style={{
-                        display: (props.this.state.tabTwo == true) ? "initial" : "none"
+                        display: (props.this.state.tabTwo == true) ? "initial" : "none",
                         backgroundColor: "#FFFFFF"
                     }}
                 />
@@ -114,9 +114,9 @@ const GUIComponent = props => {
                     direction="column"
                     grow={1}
                     shrink={0}
-                    width={600}
+                    width="100%"
                     style={{
-                        display: (props.this.state.tabThree == true) ? "initial" : "none"
+                        display: (props.this.state.tabThree == true) ? "initial" : "none",
                         backgroundColor: "#FFFFFF"
                     }}
                 />

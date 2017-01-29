@@ -12,29 +12,6 @@ const Box = require('../box/box.jsx');
 const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
 
-var tabOne = true;
-var tabTwo = false;
-var tabThree = false;
-
-function toggleTabOne () {
-    tabOne = true;
-    tabTwo = false;
-    tabThree = false;
-    props.forceUpdate();
-}
-function toggleTabTwo () {
-    tabOne = false;
-    tabTwo = true;
-    tabThree = false;
-    props.forceUpdate();
-}
-function toggleTabThree () {
-    tabOne = false;
-    tabTwo = false;
-    tabThree = true;
-    props.forceUpdate();
-}
-
 const GUIComponent = props => {
     const {
         basePath,
@@ -42,6 +19,28 @@ const GUIComponent = props => {
         vm,
         ...componentProps
     } = props;
+    var tabOne = true;
+    var tabTwo = false;
+    var tabThree = false;
+
+    function toggleTabOne () {
+        tabOne = true;
+        tabTwo = false;
+        tabThree = false;
+        props.forceUpdate();
+    }
+    function toggleTabTwo () {
+        tabOne = false;
+        tabTwo = true;
+        tabThree = false;
+        props.forceUpdate();
+    }
+    function toggleTabThree () {
+        tabOne = false;
+        tabTwo = false;
+        tabThree = true;
+        props.forceUpdate();
+    }
     if (children) {
         return (
             <Box {...componentProps}>
@@ -130,7 +129,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     children: React.PropTypes.node,
-    vm: React.PropTypes.instanceOf(VM)
+    vm: React.PropTypes.instanceOf(VM),
+    forceUpdate: React.PropTypes.func
 };
 GUIComponent.defaultProps = {
     basePath: '/',

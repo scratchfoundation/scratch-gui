@@ -6,14 +6,6 @@ const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 const GUIComponent = require('../components/gui/gui.jsx');
 
 class GUI extends React.Component {
-    constructor () {
-        super();
-        this.state = {
-            tabOne: true,
-            tabTwo: false,
-            tabThree: false,
-        };
-    }
     componentDidMount () {
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.start();
@@ -27,8 +19,6 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
-        this.props.state = this.state;
-        this.props.setState = this.setState;
         const {
             projectData, // eslint-disable-line no-unused-vars
             vm,

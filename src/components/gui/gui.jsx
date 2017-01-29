@@ -13,13 +13,13 @@ const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
 
 function tabOne () {
-    this.setState({tabOne: true, tabTwo: false, tabThree: false});
+    setState({tabOne: true, tabTwo: false, tabThree: false});
 }
 function tabTwo () {
-    this.setState({tabOne: false, tabTwo: true, tabThree: false});
+    setState({tabOne: false, tabTwo: true, tabThree: false});
 }
 function tabThree () {
-    this.setState({tabOne: false, tabTwo: false, tabThree: true});
+    setState({tabOne: false, tabTwo: false, tabThree: true});
 }
 
 const GUIComponent = props => {
@@ -59,19 +59,19 @@ const GUIComponent = props => {
                         width={250}
                     >
                         <Tab
-                            selected={this.state.tabOne}
+                            selected={state.tabOne}
                             onClick={tabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
                         <Tab
-                            selected={this.state.tabTwo}
+                            selected={state.tabTwo}
                             onClick={tabTwo}
                         >
                             <TabText>Costumes</TabText>
                         </Tab>
                         <Tab
-                            selected={this.state.tabThree}
+                            selected={state.tabThree}
                             onClick={tabThree}
                         >
                             <TabText>Sounds</TabText>

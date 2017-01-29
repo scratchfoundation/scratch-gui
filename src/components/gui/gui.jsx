@@ -71,19 +71,19 @@ const GUIComponent = props => {
                         width={250}
                     >
                         <Tab
-                            selected={props.state.tabOne}
+                            selected={props.this.state.tabOne}
                             onClick={toggleTabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
                         <Tab
-                            selected={props.state.tabTwo}
+                            selected={props.this.state.tabTwo}
                             onClick={toggleTabTwo}
                         >
                             <TabText>Costumes</TabText>
                         </Tab>
                         <Tab
-                            selected={props.state.tabThree}
+                            selected={props.this.state.tabThree}
                             onClick={toggleTabThree}
                         >
                             <TabText>Sounds</TabText>

@@ -27,13 +27,10 @@ class GUI extends React.Component {
         return (
             <GUIComponent
                 vm={vm}
-                forceUpdate={this.update}
+                this={this}
                 {...componentProps}
             />
         );
-    }
-    update () {
-        this.forceUpdate();
     }
 }
 

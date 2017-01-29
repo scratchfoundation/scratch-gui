@@ -5,7 +5,7 @@ const Box = require('../box/box.jsx');
 const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
 const styles = require('./sprite-selector-item.css');
 
-const SpriteSelectorItem = props => (
+const SpriteSelectorItem = (props, state, setState) => (
     <Box
         className={classNames({
             [styles.spriteSelectorItem]: true,

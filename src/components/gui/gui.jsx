@@ -22,7 +22,7 @@ function tabThree () {
     setState({tabOne: false, tabTwo: false, tabThree: true});
 }
 
-const GUIComponent = props => {
+const GUIComponent = (props, state, setState) => {
     const {
         basePath,
         children,

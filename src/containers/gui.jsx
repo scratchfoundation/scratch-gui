@@ -6,7 +6,7 @@ const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 const GUIComponent = require('../components/gui/gui.jsx');
 
 class GUI extends React.Component {
-    constructor() {
+    constructor () {
         super();
         this.state = {
             tabOne: true,

@@ -27,19 +27,19 @@ const GUIComponent = props => {
         tabOne = true;
         tabTwo = false;
         tabThree = false;
-        props.forceUpdate();
+        props.this.forceUpdate();
     }
     function toggleTabTwo () {
         tabOne = false;
         tabTwo = true;
         tabThree = false;
-        props.forceUpdate();
+        props.this.forceUpdate();
     }
     function toggleTabThree () {
         tabOne = false;
         tabTwo = false;
         tabThree = true;
-        props.forceUpdate();
+        props.this.forceUpdate();
     }
     if (children) {
         return (

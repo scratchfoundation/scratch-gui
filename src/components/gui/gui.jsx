@@ -16,6 +16,25 @@ var tabOne = true;
 var tabTwo = false;
 var tabThree = false;
 
+function toggleTabOne () {
+    tabOne = true;
+    tabTwo = false;
+    tabThree = false;
+    props.forceUpdate();
+}
+function toggleTabTwo () {
+    tabOne = false;
+    tabTwo = true;
+    tabThree = false;
+    props.forceUpdate();
+}
+function toggleTabThree () {
+    tabOne = false;
+    tabTwo = false;
+    tabThree = true;
+    props.forceUpdate();
+}
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -54,16 +73,19 @@ const GUIComponent = props => {
                     >
                         <Tab
                             selected={tabOne}
+                            onClick={toggleTabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
                         <Tab
                             selected={tabTwo}
+                            onClick={toggleTabTwo}
                         >
                             <TabText>Costumes</TabText>
                         </Tab>
                         <Tab
                             selected={tabThree}
+                            onClick={toggleTabThree}
                         >
                             <TabText>Sounds</TabText>
                         </Tab>

@@ -19,27 +19,27 @@ const GUIComponent = props => {
         vm,
         ...componentProps
     } = props;
-    var tabOne = true;
-    var tabTwo = false;
-    var tabThree = false;
-
+    
     function toggleTabOne () {
-        tabOne = true;
-        tabTwo = false;
-        tabThree = false;
-        props.this.forceUpdate();
+        props.this.setState({
+            tabOne: true,
+            tabTwo: false,
+            tabThree: false
+        });
     }
     function toggleTabTwo () {
-        tabOne = false;
-        tabTwo = true;
-        tabThree = false;
-        props.this.forceUpdate();
+        props.this.setState({
+            tabOne: false,
+            tabTwo: true,
+            tabThree: false
+        });
     }
     function toggleTabThree () {
-        tabOne = false;
-        tabTwo = false;
-        tabThree = true;
-        props.this.forceUpdate();
+        props.this.setState({
+            tabOne: false,
+            tabTwo: false,
+            tabThree: true
+        });
     }
     if (children) {
         return (
@@ -71,19 +71,19 @@ const GUIComponent = props => {
                         width={250}
                     >
                         <Tab
-                            selected={tabOne}
+                            selected={props.state.tabOne}
                             onClick={toggleTabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
                         <Tab
-                            selected={tabTwo}
+                            selected={props.state.tabTwo}
                             onClick={toggleTabTwo}
                         >
                             <TabText>Costumes</TabText>
                         </Tab>
                         <Tab
-                            selected={tabThree}
+                            selected={props.state.tabThree}
                             onClick={toggleTabThree}
                         >
                             <TabText>Sounds</TabText>

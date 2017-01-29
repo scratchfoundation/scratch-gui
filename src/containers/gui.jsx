@@ -13,8 +13,6 @@ class GUI extends React.Component {
             tabTwo: false,
             tabThree: false,
         };
-        this.props.state = this.state;
-        this.props.setState = this.setState;
     }
     componentDidMount () {
         this.props.vm.loadProject(this.props.projectData);
@@ -29,6 +27,8 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
+        this.props.state = this.state;
+        this.props.setState = this.setState;
         const {
             projectData, // eslint-disable-line no-unused-vars
             vm,

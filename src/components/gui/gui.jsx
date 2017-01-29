@@ -12,6 +12,16 @@ const Box = require('../box/box.jsx');
 const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
 
+function tabOne {
+    this.setState({tabOne: true, tabTwo: false, tabThree: false});
+}
+function tabTwo {
+    this.setState({tabOne: false, tabTwo: true, tabThree: false});
+}
+function tabThree {
+    this.setState({tabOne: false, tabTwo: false, tabThree: true});
+}
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -49,14 +59,21 @@ const GUIComponent = props => {
                         width={250}
                     >
                         <Tab
-                            selected={true}
+                            selected={this.state.tabOne}
+                            onClick={tabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
-                        <Tab>
+                        <Tab
+                            selected={this.state.tabTwo}
+                            onClick={tabTwo}
+                        >
                             <TabText>Costumes</TabText>
                         </Tab>
-                        <Tab>
+                        <Tab
+                            selected={this.state.tabThree}
+                            onClick={tabThree}
+                        >
                             <TabText>Sounds</TabText>
                         </Tab>
                     </Box>

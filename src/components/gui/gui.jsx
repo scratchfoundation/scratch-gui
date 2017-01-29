@@ -12,13 +12,13 @@ const Box = require('../box/box.jsx');
 const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
 
-function tabOne {
+function tabOne () {
     this.setState({tabOne: true, tabTwo: false, tabThree: false});
 }
-function tabTwo {
+function tabTwo () {
     this.setState({tabOne: false, tabTwo: true, tabThree: false});
 }
-function tabThree {
+function tabThree () {
     this.setState({tabOne: false, tabTwo: false, tabThree: true});
 }
 

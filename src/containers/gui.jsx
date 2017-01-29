@@ -11,7 +11,7 @@ class GUI extends React.Component {
         this.state = {
             tabOne: true,
             tabTwo: false,
-            tabThree: false
+            tabThree: false,
         };
     }
     componentDidMount () {

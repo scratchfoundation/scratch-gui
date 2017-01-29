@@ -107,6 +107,7 @@ const GUIComponent = props => {
                     width={600}
                     style={{
                         display: (props.this.state.tabTwo == true) ? "initial" : "none"
+                        backgroundColor: "#FFFFFF"
                     }}
                 />
                 <Box
@@ -116,6 +117,7 @@ const GUIComponent = props => {
                     width={600}
                     style={{
                         display: (props.this.state.tabThree == true) ? "initial" : "none"
+                        backgroundColor: "#FFFFFF"
                     }}
                 />
             </Box>

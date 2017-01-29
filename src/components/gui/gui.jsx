@@ -96,6 +96,27 @@ const GUIComponent = props => {
                         media: `${basePath}static/blocks-media/`
                     }}
                     vm={vm}
+                    style={{
+                        display: (props.this.state.tabOne == true) ? "initial" : "none"
+                    }}
+                />
+                <Box
+                    direction="column"
+                    grow={1}
+                    shrink={0}
+                    width={600}
+                    style={{
+                        display: (props.this.state.tabTwo == true) ? "initial" : "none"
+                    }}
+                />
+                <Box
+                    direction="column"
+                    grow={1}
+                    shrink={0}
+                    width={600}
+                    style={{
+                        display: (props.this.state.tabThree == true) ? "initial" : "none"
+                    }}
                 />
             </Box>
             <Box

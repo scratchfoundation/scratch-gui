@@ -153,7 +153,7 @@ GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     children: React.PropTypes.node,
     vm: React.PropTypes.instanceOf(VM),
-    forceUpdate: React.PropTypes.func
+    this: React.PropTypes.object
 };
 GUIComponent.defaultProps = {
     basePath: '/',

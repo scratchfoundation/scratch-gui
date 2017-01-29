@@ -13,16 +13,16 @@ const Tab = require('../tab/tab.jsx');
 const TabText = require('../tab/tabText.jsx');
 
 function tabOne () {
-    setState({tabOne: true, tabTwo: false, tabThree: false});
+    props.setState({tabOne: true, tabTwo: false, tabThree: false});
 }
 function tabTwo () {
-    setState({tabOne: false, tabTwo: true, tabThree: false});
+    props.setState({tabOne: false, tabTwo: true, tabThree: false});
 }
 function tabThree () {
-    setState({tabOne: false, tabTwo: false, tabThree: true});
+    props.setState({tabOne: false, tabTwo: false, tabThree: true});
 }
 
-const GUIComponent = (props, state, setState) => {
+const GUIComponent = props => {
     const {
         basePath,
         children,
@@ -59,19 +59,19 @@ const GUIComponent = (props, state, setState) => {
                         width={250}
                     >
                         <Tab
-                            selected={state.tabOne}
+                            selected={props.state.tabOne}
                             onClick={tabOne}
                         >
                             <TabText>Scripts</TabText>
                         </Tab>
                         <Tab
-                            selected={state.tabTwo}
+                            selected={props.state.tabTwo}
                             onClick={tabTwo}
                         >
                             <TabText>Costumes</TabText>
                         </Tab>
                         <Tab
-                            selected={state.tabThree}
+                            selected={props.state.tabThree}
                             onClick={tabThree}
                         >
                             <TabText>Sounds</TabText>

@@ -10,7 +10,7 @@ const styles = require('./library.css');
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['handleSelect']);
+        bindAll(this, ['handleSelect', 'handleImport']);
         this.state = {selectedItem: null};
     }
     handleSelect (id) {
@@ -21,7 +21,19 @@ class LibraryComponent extends React.Component {
         }
         this.setState({selectedItem: id});
     }
+    handleImport () {
+        this.props.onRequestClose();
+        this.props.import();
+    }
     render () {
+        let importButton;
+        if (this.props.showImport){
+            importButton = (
+                <div style={{padding: '50px 10px 50px 10px'}}>
+                    <button onClick={this.handleImport}>Import Backdrop</button>
+                </div>
+            );
+        }
         return (
             <ModalComponent
                 visible={this.props.visible}
@@ -34,6 +46,7 @@ class LibraryComponent extends React.Component {
                     justifyContent="space-around"
                     wrap="wrap"
                 >
+                    {importButton}
                     {this.props.data.map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
@@ -65,8 +78,10 @@ LibraryComponent.propTypes = {
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
+    import: React.PropTypes.func,
     onItemSelected: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
+    showImport: React.PropTypes.bool,
     title: React.PropTypes.string,
     visible: React.PropTypes.bool
 };

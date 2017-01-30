@@ -8,6 +8,7 @@ const GUIComponent = require('../components/gui/gui.jsx');
 class GUI extends React.Component {
     componentDidMount () {
         this.props.vm.loadProject(this.props.projectData);
+        this.props.vm.setCompatibilityMode(true);
         this.props.vm.start();
     }
     componentWillReceiveProps (nextProps) {

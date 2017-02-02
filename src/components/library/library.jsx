@@ -22,6 +22,7 @@ class LibraryComponent extends React.Component {
         this.setState({selectedItem: id});
     }
     render () {
+        if (!this.props.visible) return null;
         return (
             <ModalComponent
                 visible={this.props.visible}

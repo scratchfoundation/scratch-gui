@@ -42,7 +42,6 @@
     "gh-pages": "0.12.0",
     "html-webpack-plugin": "2.28.0",
     "husky": "0.13.1",
-    "json-loader": "0.5.4",
     "lodash.bindall": "4.4.0",
     "lodash.defaultsdeep": "4.6.0",
     "minilog": "3.1.0",

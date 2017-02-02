@@ -8,6 +8,7 @@ cache:
 env:
   global:
   - BASE_PATH=/scratch-gui/
+  - NODE_ENV=production
 install:
 - npm install
 - npm update

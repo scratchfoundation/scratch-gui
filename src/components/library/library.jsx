@@ -24,6 +24,7 @@ class LibraryComponent extends React.Component {
     render () {
         return (
             <ModalComponent
+                contentLabel={this.props.title}
                 visible={this.props.visible}
                 onRequestClose={this.props.onRequestClose}
             >
@@ -67,7 +68,7 @@ LibraryComponent.propTypes = {
     ),
     onItemSelected: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
-    title: React.PropTypes.string,
+    title: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool
 };
 

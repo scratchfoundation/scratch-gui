@@ -1,3 +1,5 @@
+const isEqual = require('lodash.isequal');
+const omit = require('lodash.omit');
 const React = require('react');
 
 const VM = require('scratch-vm');
@@ -15,87 +17,98 @@ const StageSelector = require('../../containers/stage-selector.jsx');
  * @param {object} props Props for the component
  * @returns {React.Component} rendered component
  */
-const TargetPane = function (props) {
-    const {
-        editingTarget,
-        backdropLibraryVisible,
-        costumeLibraryVisible,
-        spriteLibraryVisible,
-        onNewSpriteClick,
-        onNewCostumeClick,
-        onNewBackdropClick,
-        onRequestCloseBackdropLibrary,
-        onRequestCloseCostumeLibrary,
-        onRequestCloseSpriteLibrary,
-        onSelectSprite,
-        stage,
-        sprites,
-        vm,
-        ...componentProps
-    } = props;
-    return (
-        <Box {...componentProps}>
-            <Box
-                alignContent="flex-start"
-                alignItems="flex-start"
-                grow={1}
-                style={{overflowY: 'auto'}}
-            >
-                <SpriteSelectorComponent
-                    grow={1}
-                    selectedId={editingTarget}
-                    shrink={0}
-                    sprites={sprites}
-                    width="100%"
-                    onSelectSprite={onSelectSprite}
-                />
-            </Box>
-            <Box
-                direction="column"
-                shrink={0}
-                width={72}
-            >
-                {stage.id && <StageSelector
-                    backdropCount={stage.costumeCount}
-                    id={stage.id}
-                    selected={stage.id === editingTarget}
-                    shrink={0}
-                    url={stage.costume.skin}
-                    onSelect={onSelectSprite}
-                />}
+class TargetPane extends React.Component {
+    shouldComponentUpdate (nextProps) {
+        return (
+            // Do a normal shallow compare on all props except sprites
+            Object.keys(omit(nextProps, ['sprites']))
+                .reduce((all, k) => all || nextProps[k] !== this.props[k], false) ||
+            // Deep compare on sprites object
+            !isEqual(this.props.sprites, nextProps.sprites)
+        );
+    }
+    render () {
+        const {
+            editingTarget,
+            backdropLibraryVisible,
+            costumeLibraryVisible,
+            spriteLibraryVisible,
+            onNewSpriteClick,
+            onNewCostumeClick,
+            onNewBackdropClick,
+            onRequestCloseBackdropLibrary,
+            onRequestCloseCostumeLibrary,
+            onRequestCloseSpriteLibrary,
+            onSelectSprite,
+            stage,
+            sprites,
+            vm,
+            ...componentProps
+        } = this.props;
+        return (
+            <Box {...componentProps}>
                 <Box
                     alignContent="flex-start"
                     alignItems="flex-start"
-                    direction="column"
                     grow={1}
-                    shrink={0}
+                    style={{overflowY: 'auto'}}
                 >
-                    <button onClick={onNewSpriteClick}>New Sprite</button>
-                    {editingTarget === stage.id ? (
-                        <button onClick={onNewBackdropClick}>New Backdrop</button>
-                    ) : (
-                        <button onClick={onNewCostumeClick}>New Costume</button>
-                    )}
-                    <SpriteLibrary
-                        visible={spriteLibraryVisible}
-                        vm={vm}
-                        onRequestClose={onRequestCloseSpriteLibrary}
-                    />
-                    <CostumeLibrary
-                        visible={costumeLibraryVisible}
-                        vm={vm}
-                        onRequestClose={onRequestCloseCostumeLibrary}
-                    />
-                    <BackdropLibrary
-                        visible={backdropLibraryVisible}
-                        vm={vm}
-                        onRequestClose={onRequestCloseBackdropLibrary}
+                    <SpriteSelectorComponent
+                        grow={1}
+                        selectedId={editingTarget}
+                        shrink={0}
+                        sprites={sprites}
+                        width="100%"
+                        onSelectSprite={onSelectSprite}
                     />
                 </Box>
+                <Box
+                    direction="column"
+                    shrink={0}
+                    width={72}
+                >
+                    {stage.id && <StageSelector
+                        backdropCount={stage.costumeCount}
+                        id={stage.id}
+                        selected={stage.id === editingTarget}
+                        shrink={0}
+                        url={stage.costume.skin}
+                        onSelect={onSelectSprite}
+                    />}
+                    <Box
+                        alignContent="flex-start"
+                        alignItems="flex-start"
+                        direction="column"
+                        grow={1}
+                        shrink={0}
+                    >
+                        <button onClick={onNewSpriteClick}>New Sprite</button>
+                        {editingTarget === stage.id ? (
+                            <button onClick={onNewBackdropClick}>New Backdrop</button>
+                        ) : (
+                            <button onClick={onNewCostumeClick}>New Costume</button>
+                        )}
+                        <SpriteLibrary
+                            visible={spriteLibraryVisible}
+                            vm={vm}
+                            onRequestClose={onRequestCloseSpriteLibrary}
+                        />
+                        <CostumeLibrary
+                            visible={costumeLibraryVisible}
+                            vm={vm}
+                            onRequestClose={onRequestCloseCostumeLibrary}
+                        />
+                        <BackdropLibrary
+                            visible={backdropLibraryVisible}
+                            vm={vm}
+                            onRequestClose={onRequestCloseBackdropLibrary}
+                        />
+                    </Box>
+                </Box>
             </Box>
-        </Box>
-    );
-};
+        );
+    }
+}
 const spriteShape = React.PropTypes.shape({
     costume: React.PropTypes.shape({
         skin: React.PropTypes.string,

@@ -8,9 +8,10 @@ cache:
 env:
   global:
   - BASE_PATH=/scratch-gui/
+  - NODE_ENV=production
 install:
-- npm install
-- npm update
+- npm --production=false install
+- npm --production=false update
 after_script:
 - |
   # RELEASE_BRANCHES and NPM_TOKEN defined in Travis settings panel

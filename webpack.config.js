@@ -73,6 +73,7 @@ module.exports = {
             filename: 'lib.min.js'
         }),
         new HtmlWebpackPlugin({
+            template: 'src/index.ejs',
             title: 'Scratch 3.0 GUI'
         }),
         new CopyWebpackPlugin([{

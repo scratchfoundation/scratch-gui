@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const pick = require('lodash.pick');
 const React = require('react');
 
 const {connect} = require('react-redux');
@@ -36,16 +37,19 @@ class TargetPane extends React.Component {
 
 const {
     onSelectSprite, // eslint-disable-line no-unused-vars
-    ...targetSelectorProps
+    ...targetPaneProps
 } = TargetPaneComponent.propTypes;
 
 TargetPane.propTypes = {
-    ...targetSelectorProps
+    ...targetPaneProps
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
-    sprites: state.targets.sprites,
+    sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
+        sprites[k] = pick(state.targets.sprites[k], ['costume', 'name', 'order']);
+        return sprites;
+    }, {}),
     stage: state.targets.stage,
     spriteLibraryVisible: state.modals.spriteLibrary,
     costumeLibraryVisible: state.modals.costumeLibrary,

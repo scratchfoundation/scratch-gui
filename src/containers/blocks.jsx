@@ -1,7 +1,7 @@
 const bindAll = require('lodash.bindall');
 const defaultsDeep = require('lodash.defaultsdeep');
 const React = require('react');
-const ScratchBlocks = require('scratch-blocks');
+const VMScratchBlocks = require('../lib/blocks');
 const VM = require('scratch-vm');
 
 const BlocksComponent = require('../components/blocks/blocks.jsx');
@@ -9,6 +9,7 @@ const BlocksComponent = require('../components/blocks/blocks.jsx');
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
+        this.ScratchBlocks = VMScratchBlocks(props.vm);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -23,7 +24,7 @@ class Blocks extends React.Component {
     }
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
-        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
+        this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
         this.attachVM();
     }
     componentWillUnmount () {
@@ -67,11 +68,11 @@ class Blocks extends React.Component {
         this.workspace.reportValue(data.id, data.value);
     }
     onWorkspaceUpdate (data) {
-        ScratchBlocks.Events.disable();
+        this.ScratchBlocks.Events.disable();
         this.workspace.clear();
-        const dom = ScratchBlocks.Xml.textToDom(data.xml);
-        ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
-        ScratchBlocks.Events.enable();
+        const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
+        this.ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
+        this.ScratchBlocks.Events.enable();
     }
     setBlocks (blocks) {
         this.blocks = blocks;

@@ -73,6 +73,7 @@ class Blocks extends React.Component {
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
         this.ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
         this.ScratchBlocks.Events.enable();
+        this.workspace.toolbox_.refreshSelection();
     }
     setBlocks (blocks) {
         this.blocks = blocks;

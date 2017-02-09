@@ -29,7 +29,7 @@ class LibraryComponent extends React.Component {
                 visible={this.props.visible}
                 onRequestClose={this.props.onRequestClose}
             >
-                <h1>{this.props.title}</h1>
+                <h1 className={styles.modalHeader}>{this.props.title}</h1>
                 <Box
                     className={styles.libraryScrollGrid}
                     grow={1}

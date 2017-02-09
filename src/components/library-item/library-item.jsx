@@ -17,13 +17,10 @@ class LibraryItem extends React.Component {
     render () {
         return (
             <Box
-                alignContent="center"
-                alignItems="center"
                 className={classNames({
                     [styles.libraryItem]: true,
                     [styles.isSelected]: this.props.selected
                 })}
-                direction="column"
                 onClick={this.handleClick}
             >
                 <Box className={styles.libraryItemImageContainer}>
@@ -32,7 +29,7 @@ class LibraryItem extends React.Component {
                         src={this.props.iconURL}
                     />
                 </Box>
-                <p>{this.props.name}</p>
+                <span className={styles.libraryItemName}>{this.props.name}</span>
             </Box>
         );
     }

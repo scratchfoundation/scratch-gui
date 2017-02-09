@@ -20,7 +20,8 @@ const SpriteSelectorItem = props => (
                 width={50}
             />
         ) : null}
-        <div>{props.name}</div>
+        <div className={styles.spriteName}>{props.name}</div>
+        <div className={styles.infoButton}>i</div>
     </Box>
 );
 

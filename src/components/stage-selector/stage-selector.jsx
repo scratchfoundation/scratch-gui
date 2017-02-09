@@ -15,19 +15,15 @@ const StageSelector = props => {
     } = props;
     return (
         <Box
-            alignItems="center"
             className={classNames({
                 [styles.stageSelector]: true,
                 [styles.isSelected]: selected
             })}
-            direction="column"
             onClick={onClick}
             {...componentProps}
         >
-            <div>Stage</div>
-            <div>Backgrounds</div>
-            <div>{backdropCount}</div>
-            <hr />
+            <div className="header">Stage</div>
+            <div>{backdropCount}<br />Backdrops</div>
             {url ? (
                 <CostumeCanvas
                     height={42}

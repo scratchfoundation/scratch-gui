@@ -1,3 +1,4 @@
+const classNames = require('classnames');
 const React = require('react');
 
 const VM = require('scratch-vm');
@@ -8,6 +9,9 @@ const CostumeLibrary = require('../../containers/costume-library.jsx');
 const SpriteLibrary = require('../../containers/sprite-library.jsx');
 const SpriteSelectorComponent = require('../sprite-selector/sprite-selector.jsx');
 const StageSelector = require('../../containers/stage-selector.jsx');
+
+const styles = require('./target-pane.css');
+const addIcon = require('./icon--add.svg');
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -34,47 +38,57 @@ const TargetPane = function (props) {
         ...componentProps
     } = props;
     return (
-        <Box {...componentProps}>
-            <Box
-                alignContent="flex-start"
-                alignItems="flex-start"
-                grow={1}
-                style={{overflowY: 'auto'}}
-            >
-                <SpriteSelectorComponent
-                    grow={1}
-                    selectedId={editingTarget}
-                    shrink={0}
-                    sprites={sprites}
-                    width="100%"
-                    onSelectSprite={onSelectSprite}
-                />
-            </Box>
-            <Box
-                direction="column"
-                shrink={0}
-                width={72}
-            >
+        <Box
+            className={styles.targetPane}
+            {...componentProps}
+        >
+            <SpriteSelectorComponent
+                selectedId={editingTarget}
+                sprites={sprites}
+                onSelectSprite={onSelectSprite}
+            />
+
+            <Box className={styles.stageSelectorWrapper}>
                 {stage.id && <StageSelector
                     backdropCount={stage.costumeCount}
                     id={stage.id}
                     selected={stage.id === editingTarget}
-                    shrink={0}
                     url={stage.costume.skin}
                     onSelect={onSelectSprite}
                 />}
-                <Box
-                    alignContent="flex-start"
-                    alignItems="flex-start"
-                    direction="column"
-                    grow={1}
-                    shrink={0}
-                >
-                    <button onClick={onNewSpriteClick}>New Sprite</button>
+
+                <Box>
+                    <button
+                        className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
+                        onClick={onNewSpriteClick}
+                    >
+                        <img
+                            className={styles.addButton}
+                            src={addIcon}
+                        />
+                    </button>
+
+
                     {editingTarget === stage.id ? (
-                        <button onClick={onNewBackdropClick}>New Backdrop</button>
+                        <button
+                            className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
+                            onClick={onNewBackdropClick}
+                        >
+                            <img
+                                className={styles.addButton}
+                                src={addIcon}
+                            />
+                        </button>
                     ) : (
-                        <button onClick={onNewCostumeClick}>New Costume</button>
+                        <button
+                            className={classNames(styles.addButtonWrapper, styles.addButtonWrapperCostume)}
+                            onClick={onNewCostumeClick}
+                        >
+                            <img
+                                className={styles.addButton}
+                                src={addIcon}
+                            />
+                        </button>
                     )}
                     <SpriteLibrary
                         visible={spriteLibraryVisible}

@@ -1,6 +1,7 @@
 const React = require('react');
 
 const Box = require('../box/box.jsx');
+const styles = require('./stage.css');
 
 const StageComponent = props => {
     const {
@@ -11,6 +12,7 @@ const StageComponent = props => {
     } = props;
     return (
         <Box
+            className={styles.stage}
             componentRef={canvasRef}
             element="canvas"
             height={height}

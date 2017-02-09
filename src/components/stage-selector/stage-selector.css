@@ -1,6 +1,17 @@
 .stage-selector {
-    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: white;
+    border-color: lightgray;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0.75rem; 
 }
+
 .stage-selector.is-selected {
-        border-color: black;
+    border-color: #1dacf4;
+}
+
+.header {
+    min-height: 4.5rem;
+    background-color: blue; 
 }

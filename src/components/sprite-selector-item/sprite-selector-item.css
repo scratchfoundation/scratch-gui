@@ -1,10 +1,77 @@
 .sprite-selector-item {
-    border: 1px solid;
-    border-color: transparent;
-    display: inline-block;
-    height: 72px;
-    width: 72px;
+
+    /* For absolutely positioning the sprite's info icon, a child element */
+    position: relative;  
+
+    /* 
+        We want 4 items in each row, so we start with a width of 25%.
+        Then, we need to subtract left + right border-radius, and left + right spacing
+        TODO: Bring in _spacer-unit from variables, and make the border-radius(4px) a var
+    */
+    width: calc(25% - (4px + 0.25rem)); 
+
+    /* 
+        TODO: How can we make flexbox also distribute the space-between for the cross-axis, 
+        ie, top + bottom margin. I don't think we can, so need to think more about how this
+    */
+    margin-bottom: 0.5rem; /* A bit smaller than a standard spacer unit, but it works better */
+    padding-top: 0.3rem;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    background: white;
+    color: #5d647a;
+    border-color: #e9eef2;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0.75rem; /* TODO: import spacer unit, and use instead of 0.75rem */
+    text-align: center;
 }
+
+/* TODO: refactor out descendent selector into a regular class */
 .sprite-selector-item.is-selected {
-    border-color: black;
+    border-color: #1dacf4;
+    transition: 0.25s ease-out;
+}
+
+/* 
+    OQ: Do this with react prolly? 
+    TODO: Refactor out descendent selector into a regular class
+*/
+.sprite-selector-item.is-selected .info-button {
+    display: block; 
+}
+
+.sprite-name {
+    display: inline-block;
+    width: 80%;
+
+    /* 
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+    */
+    overflow: hidden;  
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+/* TODO: Convert to SVG */
+.info-button {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: -2px;
+    left: -2px;
+    border-radius: 1rem;
+    background: #1dacf4;
+    color: white;
+    padding: 0.05rem;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: black;
+    font-family: serif;
+    cursor: pointer;
 }

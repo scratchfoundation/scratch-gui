@@ -1,8 +1,13 @@
-var autoprefixer = require('autoprefixer');
 var path = require('path');
+var webpack = require('webpack');
+
+// Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
+
+// PostCss
+var autoprefixer = require('autoprefixer');
+var values = require('postcss-modules-values');
 
 module.exports = {
     devServer: {
@@ -49,6 +54,7 @@ module.exports = {
                 options: {
                     plugins: function () {
                         return [
+                            values,
                             autoprefixer({
                                 browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
                             })

@@ -6,8 +6,10 @@ const GreenFlag = require('../../containers/green-flag.jsx');
 const TargetPane = require('../../containers/target-pane.jsx');
 const Stage = require('../../containers/stage.jsx');
 const StopAll = require('../../containers/stop-all.jsx');
+const MenuBar = require('../menu-bar/menu-bar.jsx');
 
 const Box = require('../box/box.jsx');
+const styles = require('./gui.css');
 
 const GUIComponent = props => {
     const {
@@ -25,55 +27,42 @@ const GUIComponent = props => {
     }
     return (
         <Box
-            grow={1}
-            height="100%"
-            style={{overflow: 'hidden'}}
+            className={styles.pageWrapper}
             {...componentProps}
         >
-            <Box
-                direction="column"
-                grow={1}
-                shrink={0}
-                width={600}
-            >
-                <Box
-                    height={32}
-                    style={{
-                        marginTop: 8
-                    }}
-                />
-                <Blocks
-                    grow={1}
-                    options={{
-                        media: `${basePath}static/blocks-media/`
-                    }}
-                    vm={vm}
-                />
-            </Box>
-            <Box
-                direction="column"
-                shrink={0}
-                width={480}
-            >
-                <Box
-                    alignItems="center"
-                    height={32}
-                    shrink={0}
-                    style={{
-                        marginTop: 8
-                    }}
-                >
-                    <GreenFlag vm={vm} />
-                    <StopAll vm={vm} />
+            <MenuBar />
+            <Box className={styles.bodyWrapper}>
+                <Box className={styles.flexWrapper}>
+                    <Box className={styles.blocksWrapper}>
+                        <Blocks
+                            grow={1}
+                            options={{
+                                media: `${basePath}static/blocks-media/`
+                            }}
+                            vm={vm}
+                        />
+                    </Box>
+
+                    <Box className={styles.stageAndTargetWrapper} >
+                        <Box className={styles.stageMenuWrapper} >
+                            <GreenFlag vm={vm} />
+                            <StopAll vm={vm} />
+                        </Box>
+                        
+                        <Box className={styles.stageWrapper} >
+                            <Stage
+                                shrink={0}
+                                vm={vm}
+                            />
+                        </Box>
+
+                        <Box className={styles.targetWrapper} >
+                            <TargetPane
+                                vm={vm}
+                            />
+                        </Box>
+                    </Box>
                 </Box>
-                <Stage
-                    shrink={0}
-                    vm={vm}
-                />
-                <TargetPane
-                    grow={1}
-                    vm={vm}
-                />
             </Box>
         </Box>
     );

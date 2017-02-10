@@ -2,14 +2,14 @@ const ScratchBlocks = require('scratch-blocks');
 
 module.exports = function (vm) {
 
-    const jsonForMenuBlock = function (name, menuOptionsFn, colors, static) {
+    const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',
             args0: [
                 {
                     type: 'field_dropdown',
                     name: name,
-                    options: staic.concat(menuOptionsFn)
+                    options: start.concat(menuOptionsFn)
                 }
             ],
             inputsInline: true,
@@ -37,10 +37,10 @@ module.exports = function (vm) {
         var i = 0;
         var sprites = [];
         var k = 0;
-        for (i = 0; i < vm.runtime.targets.length) {
+        for (i = 0; i < vm.runtime.targets.length; i++) {
             if (vm.runtime.targets[i].isOriginal == true) {
                 if (vm.runtime.targets[i].isStae == false) {
-                    var sprites[k] = [];
+                    sprites[k] = [];
                     sprites[k][0] = vm.runtime.targets[k].sprite.name;
                     sprites[k][1] = vm.runtime.targets[k].sprite.name;
                     k++;

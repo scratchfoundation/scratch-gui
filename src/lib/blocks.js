@@ -41,8 +41,8 @@ module.exports = function (vm) {
             if (vm.runtime.targets[i].isOriginal == true) {
                 if (vm.runtime.targets[i].isStage == false) {
                     sprites[k] = [];
-                    sprites[k][0] = vm.runtime.targets[k].sprite.name;
-                    sprites[k][1] = vm.runtime.targets[k].sprite.name;
+                    sprites[k][0] = vm.runtime.targets[i].sprite.name;
+                    sprites[k][1] = vm.runtime.targets[i].sprite.name;
                     k++;
                 }
             }

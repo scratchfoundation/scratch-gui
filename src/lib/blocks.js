@@ -55,6 +55,8 @@ module.exports = function (vm) {
     const looksColors = ScratchBlocks.Colours.looks;
     
     const motionColors = ScratchBlocks.Colours.motion;
+    
+    const sensingColors = ScratchBlocks.Colours.sensing;
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
@@ -82,6 +84,20 @@ module.exports = function (vm) {
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
             ['mouse-pointer', '_mouse_'],
             ['random position', '_random_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
+        const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
+            ['Stage', '_stage_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.sensing_videoonmenutwo.init = function () {
+        const json = jsonForMenuBlock('VIDEOONMENU2', spriteMenu, sensingColors, [
+            ['stage', 'STAGE']
         ]);
         this.jsonInit(json);
     };

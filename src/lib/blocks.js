@@ -57,6 +57,8 @@ module.exports = function (vm) {
     const motionColors = ScratchBlocks.Colours.motion;
     
     const sensingColors = ScratchBlocks.Colours.sensing;
+    
+    const controlColors = ScratchBlocks.Colours.control;
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
@@ -113,6 +115,13 @@ module.exports = function (vm) {
         const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, sensingColors, [
             ['mouse-pointer', '_mouse_'],
             ['edge', '_edge_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
+        const json = jsonForMenuBlock('CLONE_OPTION', spriteMenu, controlColors, [
+            ['myself', '_myself_']
         ]);
         this.jsonInit(json);
     };

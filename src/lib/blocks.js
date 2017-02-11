@@ -38,9 +38,9 @@ module.exports = function (vm) {
         var sprites = [];
         var k = 0;
         for (i = 0; i < vm.runtime.targets.length; i++) {
-            if (vm.runtime.targets[i].isOriginal == true) {
-                if (vm.runtime.targets[i].isStage == false) {
-                    if (vm.runtime.targets[i].sprite.name == vm.editingTarget.sprite.name) {
+            if (vm.runtime.targets[i].isOriginal === true) {
+                if (vm.runtime.targets[i].isStage === false) {
+                    if (vm.runtime.targets[i].sprite.name === vm.editingTarget.sprite.name) {
                         continue;
                     }
                     sprites[k] = [];
@@ -51,7 +51,7 @@ module.exports = function (vm) {
             }
         }
         return sprites;
-    }
+    };
 
     const soundColors = ScratchBlocks.Colours.sounds;
 

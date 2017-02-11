@@ -101,6 +101,21 @@ module.exports = function (vm) {
         ]);
         this.jsonInit(json);
     };
+    
+    ScratchBlocks.Blocks.sensing_distancetomenu.init = function () {
+        const json = jsonForMenuBlock('DISTANCETOMENU', spriteMenu, sensingColors, [
+            ['mouse-pointer', '_mouse_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.sensing_touchingobjectmenu.init = function () {
+        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, sensingColors, [
+            ['mouse-pointer', '_mouse_'],
+            ['edge', '_edge_']
+        ]);
+        this.jsonInit(json);
+    };
 
     return ScratchBlocks;
 };

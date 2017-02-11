@@ -39,7 +39,7 @@ module.exports = function (vm) {
         var k = 0;
         for (i = 0; i < vm.runtime.targets.length; i++) {
             if (vm.runtime.targets[i].isOriginal == true) {
-                if (vm.runtime.targets[i].isStae == false) {
+                if (vm.runtime.targets[i].isStage == false) {
                     sprites[k] = [];
                     sprites[k][0] = vm.runtime.targets[k].sprite.name;
                     sprites[k][1] = vm.runtime.targets[k].sprite.name;
@@ -71,8 +71,8 @@ module.exports = function (vm) {
         this.jsonInit(json);
     };
     
-    ScratchBlocks.Blocks.motion_pointtowards_menu = function () {
-        const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, []);
+    ScratchBlocks.Blocks.motion_pointtowards_menu.init = function () {
+        const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [['mouse-pointer', '_mouse_']]);
         this.jsonInit(json);
     };
 

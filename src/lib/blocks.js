@@ -72,7 +72,17 @@ module.exports = function (vm) {
     };
     
     ScratchBlocks.Blocks.motion_pointtowards_menu.init = function () {
-        const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [['mouse-pointer', '_mouse_']]);
+        const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [
+            ['mouse-pointer', '_mouse_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.motion_goto_menu.init = function () {
+        const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
+            ['mouse-pointer', '_mouse_'],
+            ['random position', '_random_']
+        ]);
         this.jsonInit(json);
     };
 

@@ -40,6 +40,9 @@ module.exports = function (vm) {
         for (i = 0; i < vm.runtime.targets.length; i++) {
             if (vm.runtime.targets[i].isOriginal == true) {
                 if (vm.runtime.targets[i].isStage == false) {
+                    if (vm.runtime.targets[i].sprite.name == vm.editingTarget.sprite.name) {
+                        continue;
+                    }
                     sprites[k] = [];
                     sprites[k][0] = vm.runtime.targets[i].sprite.name;
                     sprites[k][1] = vm.runtime.targets[i].sprite.name;

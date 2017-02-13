@@ -18,22 +18,24 @@ const SpriteSelectorComponent = function (props) {
             {...componentProps}
         >
             <SpriteInfo name="Sprite" />
-            <Box className={styles.itemsWrapper}>
 
-                {Object.keys(sprites)
-                    // Re-order by list order
-                    .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
-                    .map(id => (
-                        <SpriteSelectorItem
-                            costumeURL={sprites[id].costume.skin}
-                            id={id}
-                            key={id}
-                            name={sprites[id].name}
-                            selected={id === selectedId}
-                            onClick={onSelectSprite}
-                        />
-                    ))
-                }
+            <Box className={styles.scrollWrapper}>
+                <Box className={styles.itemsWrapper}>
+                    {Object.keys(sprites)
+                        // Re-order by list order
+                        .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
+                        .map(id => (
+                            <SpriteSelectorItem
+                                costumeURL={sprites[id].costume.skin}
+                                id={id}
+                                key={id}
+                                name={sprites[id].name}
+                                selected={id === selectedId}
+                                onClick={onSelectSprite}
+                            />
+                        ))
+                    }
+                </Box>
             </Box>
         </Box>
     );

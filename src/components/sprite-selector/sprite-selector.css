@@ -7,27 +7,29 @@
     border-top-left-radius: 0.75rem;
 }
 
-.items-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    /* 
-        TODO: When there are 2 or 3 sprites are on a row, they don't flow correctly
-        TODO: Ensure space unit amount between sprites, without applying margin to item component? 
-    */
-    justify-content: space-between;
-
+.scroll-wrapper {
     /*
        Sets the sprite-selector items as a scrollable pane, 
        using height of .sprite-info (5rem)
 
        TODO: Make and link a variable for the height
-       TODO: FFx: skews the height of items, where number of rows doesnt overflow
-             Related?: https://bugzilla.mozilla.org/show_bug.cgi?id=594933
        TODO: Safari: Doesn't work, can't scroll 
     */
     height: calc(100% - 5rem); 
     overflow-y: scroll;
+}
+
+.items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+    /* 
+        See more comments in .sprite-selector-item
+        
+        TODO: When there are 2 or 3 sprites are on a row, they don't flow correctly
+        TODO: Ensure space unit amount between sprites, without applying margin to item component? 
+    /* justify-content: space-between; */
 
     padding-top: 0.75rem;
     padding-left: 0.75rem;

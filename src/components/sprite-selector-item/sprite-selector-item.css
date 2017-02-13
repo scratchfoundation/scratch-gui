@@ -13,10 +13,16 @@
     /* 
         TODO: How can we make flexbox also distribute the space-between for the cross-axis, 
         ie, top + bottom margin. I don't think we can, so need to think more about how this
-    */
-    margin-bottom: 0.5rem; /* A bit smaller than a standard spacer unit, but it works better */
-    padding-top: 0.3rem;
 
+        Also, space-between causes another issue: when there are either 2 or 3 items in the
+        last row, they fall out of the grid. `flex-grow: 1;` fixes this, but then makes 
+        them double width. 
+
+        Haven't yet figured out another solution, so adding margin to the item directly.         
+    */
+    margin: 0.25rem; /* A bit smaller than a standard spacer unit, but it works better */ 
+
+    padding-top: 0.3rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     background: white;

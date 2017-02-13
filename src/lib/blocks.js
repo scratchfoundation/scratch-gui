@@ -34,19 +34,15 @@ module.exports = function (vm) {
     };
     
     const spriteMenu = function () {
-        var i = 0;
         var sprites = [];
-        var k = 0;
-        for (i = 0; i < vm.runtime.targets.length; i++) {
-            if (vm.runtime.targets[i].isOriginal === true) {
-                if (vm.runtime.targets[i].isStage === false) {
-                    if (vm.runtime.targets[i].sprite.name === vm.editingTarget.sprite.name) {
+        for (var targetId in vm.runtime.targets) {
+            if (!vm.runtime.targets.hasOwnProperty(targetId)) continue;
+            if (vm.runtime.targets[targetId].isOriginal) {
+                if (!vm.runtime.targets[targetId].isStage) {
+                    if (vm.runtime.targets[targetId].sprite.id === vm.editingTarget.sprite.id) {
                         continue;
                     }
-                    sprites[k] = [];
-                    sprites[k][0] = vm.runtime.targets[i].sprite.name;
-                    sprites[k][1] = vm.runtime.targets[i].sprite.name;
-                    k++;
+                    sprites.push([vm.runtime.targets[targetId].sprite.name, vm.runtime.targets[targetId].sprite.name]);
                 }
             }
         }

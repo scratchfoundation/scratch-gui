@@ -9,6 +9,8 @@ const StopAll = require('../../containers/stop-all.jsx');
 
 const Box = require('../box/box.jsx');
 
+const Menu = require('../menu/menu.jsx');
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -36,6 +38,23 @@ const GUIComponent = props => {
                 shrink={0}
                 width={600}
             >
+                <Menu
+                    height={50}
+                    alignItems="center"
+                    style={{
+                        paddingLeft: 10
+                    }}
+                >
+                    <a
+                        href="http://scratch.mit.edu"
+                    >
+                        <img
+                            src="static/assets/Scratch.png"
+                            width="81"
+                            height="30"
+                        />
+                    </a>
+                </Menu>
                 <Box
                     height={32}
                     style={{
@@ -55,6 +74,13 @@ const GUIComponent = props => {
                 shrink={0}
                 width={480}
             >
+                <Menu
+                    height={50}
+                    alignItems="center"
+                    style={{
+                        paddingRight: 10
+                    }}
+                />
                 <Box
                     alignItems="center"
                     height={32}

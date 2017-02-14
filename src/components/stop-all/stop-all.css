@@ -1,6 +1,6 @@
 .stop-all {
-    width: 1rem;
-    height: 1rem;
+    width: 1.1rem;
+    height: 1.1rem;
     opacity: 0.5;
     transition: opacity 0.2s ease-out; /* TODO: standardize with var */ 
 }

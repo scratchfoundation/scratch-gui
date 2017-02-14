@@ -33,7 +33,7 @@
 .modal-close-button {
     display: flex;
     position: absolute;
-    z-index: 2147483647; /* the max z-index value available on Earth. Currently. */
+    z-index: 2147483647;
     align-items: center;
     justify-content: center;
 

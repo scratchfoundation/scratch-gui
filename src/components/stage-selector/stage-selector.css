@@ -1,10 +1,15 @@
 .stage-selector {
+    height: 100%;
+    padding: 0.5rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     border-color: lightgray;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    border-radius: 0.75rem; 
+    border-radius: 0.5rem; 
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: 0;
 }
 
 .stage-selector.is-selected {
@@ -12,6 +17,6 @@
 }
 
 .header {
-    min-height: 4.5rem;
+    min-height: 5rem;
     background-color: blue; 
 }

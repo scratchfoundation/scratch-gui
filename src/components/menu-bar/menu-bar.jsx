@@ -13,7 +13,6 @@ const MenuBar = props => (
     >
         <div className={styles.logoWrapper}>
             <img
-                alt={props.name}
                 className={styles.scratchLogo}
                 src={scratchLogo}
             />
@@ -22,9 +21,5 @@ const MenuBar = props => (
         <span className={styles.title}>Animation Playtest Prototype</span>
     </Box>
 );
-
-MenuBar.propTypes = {
-    name: React.PropTypes.string
-};
 
 module.exports = MenuBar;

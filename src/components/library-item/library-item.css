@@ -9,22 +9,22 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #575e75;
     cursor: pointer;
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     border-color: transparent;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     transition: all 1s ease-out;  /* slower fade out */ 
 }
 
 .library-item:hover {
     border-color: #e1e1e1;
-    background: linear-gradient(25deg, #f0f0f0, #fafafa 60%, #e1e1e1);
     transition: 0.25s ease-out;
+    background: #f0f0f0;
 }
 
 .library-item.is-selected {
     border-color: #1dacf4;
-    background: linear-gradient(25deg, #f0f0f0, #fafafa 60%, #e1e1e1);
+    background: #f0f0f0;
     transition: 0.25s ease-out;
 }
 
@@ -51,4 +51,3 @@
     white-space: nowrap;
     min-width: 0; 
 }
-

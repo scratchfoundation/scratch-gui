@@ -7,10 +7,13 @@ const styles = require('./sprite-selector-item.css');
 
 const SpriteSelectorItem = props => (
     <Box
-        className={classNames({
-            [styles.spriteSelectorItem]: true,
-            [styles.isSelected]: props.selected
-        })}
+        className={classNames(
+            props.className,
+            styles.spriteSelectorItem,
+            {
+                [styles.isSelected]: props.selected
+            }
+        )}
         onClick={props.onClick}
     >
         {props.costumeURL ? (
@@ -28,6 +31,7 @@ const SpriteSelectorItem = props => (
 SpriteSelectorItem.propTypes = {
     costumeURL: React.PropTypes.string,
     name: React.PropTypes.string,
+    className: React.PropTypes.string,
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool
 };

@@ -1,8 +1,8 @@
 .green-flag {
-    width: 1rem;
-    height: 1rem;
+    width: 1.1rem;
+    height: 1.1rem;
     opacity: 0.5;
-    margin: 0.25rem 0.75rem;
+    margin: 0.25rem 0.6rem;
     cursor: pointer;
     transition: opacity 0.2s ease-out; /* TODO: standardize with var */ 
 }

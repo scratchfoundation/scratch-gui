@@ -26,6 +26,7 @@ const SpriteSelectorComponent = function (props) {
                         .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
                         .map(id => (
                             <SpriteSelectorItem
+                                className={styles.spriteItemSelectorSpriteItem}
                                 costumeURL={sprites[id].costume.skin}
                                 id={id}
                                 key={id}

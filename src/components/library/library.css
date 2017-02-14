@@ -1,5 +1,5 @@
 .library-scroll-grid {
-	display: flex;
+    display: flex;
     overflow-y: scroll;
     height: 100%;
 }
@@ -7,10 +7,10 @@
 .modal-header {
     width: 100%;
     margin-bottom: 3rem;
-    padding: 1rem;
+    padding: 0.5rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.5rem;
     font-weight: normal;
     color: #8e8f95;
-    border-bottom: 2px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }

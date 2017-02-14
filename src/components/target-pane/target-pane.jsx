@@ -47,7 +47,6 @@ const TargetPane = function (props) {
                 sprites={sprites}
                 onSelectSprite={onSelectSprite}
             />
-
             <Box className={styles.stageSelectorWrapper}>
                 {stage.id && <StageSelector
                     backdropCount={stage.costumeCount}
@@ -56,7 +55,6 @@ const TargetPane = function (props) {
                     url={stage.costume.skin}
                     onSelect={onSelectSprite}
                 />}
-
                 <Box>
                     <button
                         className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
@@ -67,8 +65,6 @@ const TargetPane = function (props) {
                             src={addIcon}
                         />
                     </button>
-
-
                     {editingTarget === stage.id ? (
                         <button
                             className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}

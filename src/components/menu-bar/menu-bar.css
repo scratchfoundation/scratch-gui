@@ -1,6 +1,6 @@
 .menu-bar {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     
     /* 
         TODO: This adds ~20px in Chrome, when scrolling to the right, 
@@ -23,29 +23,29 @@
         TODO: make a var for height, use it in the calc, in gui.bodyWrapper
     */
     box-sizing: border-box;
-	height: 3rem; 
+    height: 3rem; 
 }
 
 /* Using a wrapper so when logo is hovered, it transforms via its center point */
 .logo-wrapper {
-	display: flex;
+    display: flex;
     justify-content: center;
 }
 
 .scratch-logo {
-	height: 1.5rem;
-	transition: all 2s ease-out;  /* slower fade out */ 
+    height: 1.5rem;
+    transition: all 2s ease-out;  /* slower fade out */ 
     cursor: pointer;
 }
 
 /* http://blog.teamtreehouse.com/create-smoother-animations-transitions-browser */
 .scratch-logo:hover {
     transform: scale(1.1, 1.1);
-	transition: all .075s ease-in; /* quick transition in */
+    transition: all .075s ease-in; /* quick transition in */
     background-size: 100%;
 }
 
 .title {
-	display: inline-block;
-	margin:0 3rem;
+    display: inline-block;
+    margin: 0 2rem;
 }

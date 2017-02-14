@@ -6,9 +6,9 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #575e75;
-    border-top-left-radius: 0.75rem;
-    border-top-right-radius: 0.75rem;
-    border-bottom: 2px solid #eaeaea;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .row { display: flex; }
@@ -74,7 +74,7 @@
     padding: 0.3rem 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.85rem;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid; 
     border-color: #e9eef2; 
     border-radius: 2rem; 
@@ -85,6 +85,7 @@
     /* 
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+        TODO: move this out into a mixin or a helper component
     */
     overflow: hidden;  
     text-overflow: ellipsis;

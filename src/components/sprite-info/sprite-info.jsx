@@ -13,9 +13,7 @@ const notDraggableIcon = require('./icon--not-draggable.svg');
 
 const SpriteInfo = props => (
     <Box
-        className={classNames({
-            [styles.spriteInfo]: true
-        })}
+        className={styles.spriteInfo}
     >
         <div className={styles.row}>
             <div className={styles.group}>

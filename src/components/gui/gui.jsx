@@ -9,6 +9,9 @@ const StopAll = require('../../containers/stop-all.jsx');
 
 const Box = require('../box/box.jsx');
 
+const Tab = require('../tab/tab.jsx');
+const TabText = require('../tab/tabText.jsx');
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -16,6 +19,28 @@ const GUIComponent = props => {
         vm,
         ...componentProps
     } = props;
+    
+    function toggleTabOne () {
+        props.this.setState({
+            tabOne: true,
+            tabTwo: false,
+            tabThree: false
+        });
+    }
+    function toggleTabTwo () {
+        props.this.setState({
+            tabOne: false,
+            tabTwo: true,
+            tabThree: false
+        });
+    }
+    function toggleTabThree () {
+        props.this.setState({
+            tabOne: false,
+            tabTwo: false,
+            tabThree: true
+        });
+    }
     if (children) {
         return (
             <Box {...componentProps}>
@@ -41,13 +66,59 @@ const GUIComponent = props => {
                     style={{
                         marginTop: 8
                     }}
-                />
+                >
+                    <Box
+                        width={250}
+                    >
+                        <Tab
+                            selected={props.this.state.tabOne}
+                            onClick={toggleTabOne}
+                        >
+                            <TabText>Scripts</TabText>
+                        </Tab>
+                        <Tab
+                            selected={props.this.state.tabTwo}
+                            onClick={toggleTabTwo}
+                        >
+                            <TabText>Costumes</TabText>
+                        </Tab>
+                        <Tab
+                            selected={props.this.state.tabThree}
+                            onClick={toggleTabThree}
+                        >
+                            <TabText>Sounds</TabText>
+                        </Tab>
+                    </Box>
+                </Box>
                 <Blocks
                     grow={1}
                     options={{
                         media: `${basePath}static/blocks-media/`
                     }}
                     vm={vm}
+                    style={{
+                        display: (props.this.state.tabOne == true) ? "initial" : "none"
+                    }}
+                />
+                <Box
+                    direction="column"
+                    grow={1}
+                    shrink={0}
+                    width="100%"
+                    style={{
+                        display: (props.this.state.tabTwo == true) ? "initial" : "none",
+                        backgroundColor: "#FFFFFF"
+                    }}
+                />
+                <Box
+                    direction="column"
+                    grow={1}
+                    shrink={0}
+                    width="100%"
+                    style={{
+                        display: (props.this.state.tabThree == true) ? "initial" : "none",
+                        backgroundColor: "#FFFFFF"
+                    }}
                 />
             </Box>
             <Box
@@ -81,7 +152,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     children: React.PropTypes.node,
-    vm: React.PropTypes.instanceOf(VM)
+    vm: React.PropTypes.instanceOf(VM),
+    this: React.PropTypes.object
 };
 GUIComponent.defaultProps = {
     basePath: '/',

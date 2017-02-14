@@ -1,0 +1,33 @@
+.tab {
+  border-radius: 10px 10px 0 0;
+  background-color: #F6F8FA;
+  display: inline;
+  float: left;
+  color: #9AA1B5;
+  width: 33.33%;
+  width: calc(100% / 3);
+  text-align: center;
+}
+.tab:hover {
+  background-color: #FBFCFD;
+  color: #6DADD5;
+}
+.tabSelected {
+  border-radius: 10px 10px 0 0;
+  background-color: #FFFFFF;
+  display: inline;
+  float: left;
+  color: #40B9F5;
+  width: 33.33%;
+  width: calc(100% / 3);
+  text-align: center;
+}
+.tabText {
+  display: inline-block;
+  font-weight: bold;
+  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  font-size: 16px;
+}

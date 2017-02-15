@@ -1,7 +1,7 @@
 const classNames = require('classnames');
 const React = require('react');
 
-const stopAllIcon = require('./stop-all.svg');
+const stopAllIcon = require('./icon--stop-all.svg');
 const styles = require('./stop-all.css');
 
 const StopAllComponent = function (props) {

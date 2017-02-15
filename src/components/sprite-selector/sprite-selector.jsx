@@ -2,6 +2,8 @@ const React = require('react');
 
 const Box = require('../box/box.jsx');
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
+const SpriteInfo = require('../sprite-info/sprite-info.jsx');
+const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
@@ -12,26 +14,30 @@ const SpriteSelectorComponent = function (props) {
     } = props;
     return (
         <Box
-            alignContent="flex-start"
-            alignItems="flex-start"
-            justifyContent="flex-start"
-            wrap="wrap"
+            className={styles.spriteSelector}
             {...componentProps}
         >
-            {Object.keys(sprites)
-                // Re-order by list order
-                .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
-                .map(id => (
-                    <SpriteSelectorItem
-                        costumeURL={sprites[id].costume.skin}
-                        id={id}
-                        key={id}
-                        name={sprites[id].name}
-                        selected={id === selectedId}
-                        onClick={onSelectSprite}
-                    />
-                ))
-            }
+            <SpriteInfo name="Sprite" />
+
+            <Box className={styles.scrollWrapper}>
+                <Box className={styles.itemsWrapper}>
+                    {Object.keys(sprites)
+                        // Re-order by list order
+                        .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
+                        .map(id => (
+                            <SpriteSelectorItem
+                                className={styles.spriteItemSelectorSpriteItem}
+                                costumeURL={sprites[id].costume.skin}
+                                id={id}
+                                key={id}
+                                name={sprites[id].name}
+                                selected={id === selectedId}
+                                onClick={onSelectSprite}
+                            />
+                        ))
+                    }
+                </Box>
+            </Box>
         </Box>
     );
 };

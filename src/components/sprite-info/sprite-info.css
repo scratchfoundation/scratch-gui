@@ -1,0 +1,114 @@
+/* TODO: Refactor layout. Sloppy spacing, padding, width etc */
+
+.sprite-info {
+    height: 5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: white;
+    color: #575e75;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.row { display: flex; }
+
+.row:nth-of-type(1){ margin-bottom: 0.5rem; }
+
+.row:nth-of-type(1) .group:nth-of-type(1)  { width: 50%; }
+.row:nth-of-type(1) .group:nth-of-type(2)  { width: 25%; }
+.row:nth-of-type(1) .group:nth-of-type(3)  { width: 25%; }
+
+.row:nth-of-type(2) .group:nth-of-type(1)  { width: 26%; }
+.row:nth-of-type(2) .group:nth-of-type(2)  { width: 30%; }
+.row:nth-of-type(2) .group:nth-of-type(3)  { width: 50%; }
+
+.label { opacity: 0.8; }
+
+.group {
+    display: inline-flex;
+    flex-direction: row; /* to make columns, for each label/form group */
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 0.25rem;
+}
+
+/* TODO: refactor from descendant selector, to a regular class */
+.group img { 
+    display: inline-block;
+    width: 1rem; 
+    height: 1rem;
+    margin: 0 0.1rem;
+}
+
+.draggable-icon {
+    width: 0.55rem !important;
+    opacity: 1 !important;
+}
+
+.not-draggable-icon {
+    width: 0.75rem !important;
+    opacity: 0.4 !important;
+}
+
+.show-icon {
+    opacity: 1 !important;
+}
+
+.hide-icon {
+    opacity: 0.4 !important;
+}
+
+.input-label {
+    font-size: 0.85rem;
+    margin: 0 0.3rem;
+}
+
+.input-label-small {
+    font-size: 0.7rem;
+    margin: 0 0.2rem;
+}
+
+.input-form {
+    outline: none;
+    padding: 0.3rem 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    border-width: 1px;
+    border-style: solid; 
+    border-color: #e9eef2; 
+    border-radius: 2rem; 
+    cursor: text;
+    transition: 0.25s ease-out; /* TODO: standardize with var */ 
+    box-shadow: none;
+
+    /* 
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+        TODO: move this out into a mixin or a helper component
+    */
+    overflow: hidden;  
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.input-form:focus {
+  border-color: #4c97ff;
+  box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
+}
+
+.input-form--x                  { width: 3.5rem; text-align: center; }
+.input-form--y                  { width: 3.5rem; text-align: center; }
+.input-form--rotation-select    { width: 100%; }
+.input-form--sprite-name        { width: 100%; }
+
+.radio-box {
+    display: flex;
+    padding: 0.25rem;
+    opacity: 0.5;
+    border: 1px solid #e9eef2;
+    border-radius:  0.4rem;
+    cursor: pointer;
+    transition: 0.25s ease-out; /* TODO: standardize with var */ 
+}

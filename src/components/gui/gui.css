@@ -1,0 +1,103 @@
+/* 
+    OQ: convention: _ for variables?
+    TODO: refactor into resuable vars file
+    https://github.com/css-modules/css-modules/blob/master/docs/values-variables.md
+*/
+@value _space: 0.5rem;
+
+.page-wrapper {
+    height: 100%;
+}
+
+.body-wrapper {
+    /*  
+        Calc the height by subtracting the menu bar height
+        TODO: Make height a reusable variable, link to use in .menu-bar
+    */
+    height: calc(100% - 3rem); 
+    background-color: #e8edf1;
+}
+
+.flex-wrapper {
+    display: flex;
+
+    /* 
+        Make 2 columns: 
+        a) for the blocks + workspace panes, and 
+        b) for combined stage menu + stage + sprite/stage selectors 
+    */
+    flex-direction: row; 
+    height: 100%;
+}
+
+.blocks-wrapper {
+    /* 
+        scratch-blocks is based on absolute positioning, which injects 
+        inside this element and becomes the child
+    */
+    position: relative; 
+
+    flex-basis: 600px;
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    /* 
+        Normally we'd use padding, but the absolute positioning ignores it, 
+        so use margin instead. Temporary, until tabs are inserted. 
+    */
+    margin-top: 3rem;  
+
+    background: #e8edf1;
+}
+
+.stage-and-target-wrapper {
+    /*  
+        Make rows for children: 
+          1) stage menu
+          2) stage
+          3) sprite/stage selectors
+        Only reason we need this, is so .targetWrapper, which holds the selectors, 
+        goes to full vertical height of the window
+    */
+    display: flex;
+    flex-direction: column; 
+
+    /* 
+        Calc the minimum width for this pane, accounting for left + right spacing. 
+        If and when the width doesn't need to be fixed, we can move the spacing out 
+        of this calc, and into padding instead  
+    */
+    flex-basis: calc(480px + (_space * 2));  
+}    
+
+.stage-wrapper {
+    padding-left: _space;
+    padding-right: _space;
+}
+
+.target-wrapper {
+    /*  Take all the available vertical space available.
+        Works in tandem with height: 100%; which is set on the child: .targetPane 
+        TODO: Not working in Safari, not great in FFx 
+    */
+    flex-grow: 1;
+    flex-basis: 0;
+
+    padding-top: _space;
+    padding-left: _space;
+    padding-right: _space;
+    
+    /* 
+        For making the sprite-selector a scrollable pane.
+        TODO: Not working in Safari 
+    */
+    overflow: hidden;
+}
+
+.stage-menu-wrapper {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 3rem;
+    padding: _space;
+}

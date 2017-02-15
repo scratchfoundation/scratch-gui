@@ -7,10 +7,13 @@ const styles = require('./sprite-selector-item.css');
 
 const SpriteSelectorItem = props => (
     <Box
-        className={classNames({
-            [styles.spriteSelectorItem]: true,
-            [styles.isSelected]: props.selected
-        })}
+        className={classNames(
+            props.className,
+            styles.spriteSelectorItem,
+            {
+                [styles.isSelected]: props.selected
+            }
+        )}
         onClick={props.onClick}
     >
         {props.costumeURL ? (
@@ -20,11 +23,13 @@ const SpriteSelectorItem = props => (
                 width={50}
             />
         ) : null}
-        <div>{props.name}</div>
+        <div className={styles.spriteName}>{props.name}</div>
+        <div className={styles.infoButton}>i</div>
     </Box>
 );
 
 SpriteSelectorItem.propTypes = {
+    className: React.PropTypes.string,
     costumeURL: React.PropTypes.string,
     name: React.PropTypes.string,
     onClick: React.PropTypes.func,

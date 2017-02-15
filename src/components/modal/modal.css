@@ -7,10 +7,11 @@
     z-index: 1000;
     background-color: rgba(0, 0, 0, .75);
 }
+
 .modal-content {
-    outline: none;
     position: absolute;
-    overflow: hidden;
+    outline: none;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -21,22 +22,46 @@
     left: 5%;
     background: #fcfcfc;
 }
+
 .modal-children {
     overflow: hidden;
     height: 100%;
     z-index: 0;
+    padding: 2rem;
 }
+
 .modal-close-button {
-    color: rgb(255, 255, 255);
-    background: rgb(50, 50, 50);
-    border-radius: 15px;
-    width: 30px;
-    height: 25px;
-    text-align: center;
-    padding-top: 5px;
+    display: flex;
     position: absolute;
-    right: 3px;
-    top: 3px;
+    z-index: 2147483647;
+    align-items: center;
+    justify-content: center;
+
+    top: 2rem;
+    right: 2rem;
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+
+    color: gray;
+    background-color: #cbcbcb;
+
+    border-radius: 50% !important;
+    border: 2px solid #dbdbdb;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     cursor: pointer;
-    z-index: 1;
+    transition: all 0.15s ease-out; /* standardize with var */ 
+}
+
+.modal-close-button:hover {
+    transform: scale(1.1, 1.1);
+}
+
+/*  Same icon as Sprite Selector Add button, but rotated.
+    TODO: reuse? 
+*/
+.close-icon {
+    transform-origin: 50%;
+    transform: rotate(45deg);
+    width: 40%;
 }

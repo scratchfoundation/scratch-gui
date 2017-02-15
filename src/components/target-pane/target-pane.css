@@ -1,0 +1,44 @@
+.target-pane {
+    display: flex;
+    flex-direction: row; /* Make columns for the sprite library selector + and the stage selector */
+    height: 100%;
+}
+
+.stage-selector-wrapper {
+    flex-basis: 20%;
+    margin-left: calc(0.5rem / 2); /* TODO: import spacer unit, and use instead of 0.5rem */
+}
+
+.add-button-wrapper {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    bottom: 1rem;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    background-color: #4c97ff;
+    border-radius: 50% !important;
+    border: 2px solid rgba(43, 141, 255, 0.4);
+    transition: all 0.15s ease-out; /* TODO: standardize with var */ 
+    cursor: pointer;
+}
+
+.add-button-wrapper:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.add-button-wrapper:focus {
+    outline: none;
+    border: 0;
+}
+
+.add-button {
+    height: 0.8rem;
+}
+
+/* TODO: This is hacky. Better: move buttons in their corresponding panes, and set values relatively */
+.add-button-wrapper--sprite   { right: 8.5rem; }
+.add-button-wrapper--stage    { right: 2.2rem; }
+.add-button-wrapper--costume  { right: 2.2rem; }

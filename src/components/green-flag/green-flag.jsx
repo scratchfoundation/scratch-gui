@@ -1,7 +1,7 @@
 const classNames = require('classnames');
 const React = require('react');
 
-const greenFlagIcon = require('./green-flag.svg');
+const greenFlagIcon = require('./icon--green-flag.svg');
 const styles = require('./green-flag.css');
 
 const GreenFlagComponent = function (props) {

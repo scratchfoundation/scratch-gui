@@ -1,0 +1,57 @@
+/* TODO: refactor this class name, and component: `sprite-selector` to `sprite` */
+.sprite-selector {
+    position: relative; 
+    flex-basis: 80%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-right: calc(0.5rem / 2);
+    background-color: #f9f9f9;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+}
+
+/* 
+    Using `justify-content: space-between` on the .items-wrapper almost works, to
+    distribute free space around the sprite selector items, except when there are 
+    between 2 and 3 items in the row (out of 4 total that fit currently). 
+    When this happens, the space does not distribute evenly.
+
+    Thus, manually setting margin and passing it down to the component via JSX
+    works, without committing the margin to the component, which lets us use it 
+    elsewhere. 
+
+    TODO: experiment with Lost grid here, which could simplify this layout even more
+*/
+.sprite-item-selector-sprite-item {
+    margin: 0.125rem;  /* TODO: refactor to var: _space / 4 */
+}
+
+.scroll-wrapper {
+    /*
+       Sets the sprite-selector items as a scrollable pane, 
+       using height of .sprite-info (5rem)
+
+        TODO: Safari: pane doesn't stretch to fill height;
+        TODO: Adding `position: relative` still doesn't fix Safari scrolling pane, and 
+                also introduces a new bug in Chrome when vertically resizing window down, 
+                then back up, introduces white space in the outside the page container. 
+        TODO: Make a variable for the height, link up to .menu-bar height
+    */
+    height: calc(100% - 5rem); 
+    overflow-y: scroll;
+}
+
+.items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    /* 
+        TODO: Currently, the last row of sprite items are pushing the wrapper down, 
+        one space unit, properly. When we correctly remove margin bottom from sprite 
+        items, we'll need to add this back.
+    padding-bottom: 0.5rem; 
+    */
+}

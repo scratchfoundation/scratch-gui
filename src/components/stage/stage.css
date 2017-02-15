@@ -1,0 +1,11 @@
+.stage {
+    /* 
+        Fixes a few extra pixels of margin/padding, that adds on to the bottom 
+        of the element, which messes up the chrome padding consistency
+    */
+    display: block; 
+    border-radius: 0.5rem; 
+
+    /* TODO: This is for overriding the value being set somewhere. Where is it being set? */
+    background-color: transparent; 
+}

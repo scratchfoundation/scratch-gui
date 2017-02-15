@@ -50,6 +50,7 @@
     "minilog": "3.1.0",
     "opt-cli": "1.5.1",
     "postcss-loader": "1.2.2",
+    "postcss-modules-values": "1.2.2",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-modal": "1.6.5",

@@ -4,4 +4,10 @@
     right: 0;
     bottom: 0;
     left: 0;
+
+    /* 
+        TODO: using _space (0.5rem doesn't compute to the right amount? 
+        Related to `scratch-blocks` 
+    */
+    border-top-right-radius: 0.75rem;
 }

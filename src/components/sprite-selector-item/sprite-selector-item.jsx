@@ -29,9 +29,9 @@ const SpriteSelectorItem = props => (
 );
 
 SpriteSelectorItem.propTypes = {
+    className: React.PropTypes.string,
     costumeURL: React.PropTypes.string,
     name: React.PropTypes.string,
-    className: React.PropTypes.string,
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool
 };

@@ -22,7 +22,11 @@ module.exports = function (vm) {
     };
 
     const soundsMenu = function () {
-        return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
+        const sounds = vm.editingTarget.sprite.sounds;
+        if (sounds.length === 0) {
+            return [['', '']];
+        }
+        return sounds.map(sound => [sound.name, sound.name]);
     };
 
     const costumesMenu = function () {

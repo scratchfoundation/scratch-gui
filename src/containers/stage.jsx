@@ -11,13 +11,19 @@ class Stage extends React.Component {
         super(props);
         bindAll(this, [
             'attachMouseEvents',
+            'cancelMouseDownTimeout',
             'detachMouseEvents',
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
+            'onStartDrag',
             'updateRect',
             'setCanvas'
         ]);
+        this.state = {
+            mouseDownTimeoutId: null,
+            isDragging: false
+        };
     }
     componentDidMount () {
         this.attachRectEvents();
@@ -54,35 +60,68 @@ class Stage extends React.Component {
         this.rect = this.canvas.getBoundingClientRect();
     }
     onMouseMove (e) {
+        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        this.cancelMouseDownTimeout();
+        if (this.state.mouseDown && !this.state.isDragging) {
+            this.onStartDrag(mousePosition[0], mousePosition[1]);
+        }
         const coordinates = {
-            x: e.clientX - this.rect.left,
-            y: e.clientY - this.rect.top,
+            x: mousePosition[0],
+            y: mousePosition[1],
             canvasWidth: this.rect.width,
             canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {
+        this.cancelMouseDownTimeout();
+        this.setState({
+            mouseDown: false
+        });
+        if (this.state.isDragging) {
+            this.setState({isDragging: false});
+            // TODO: return to stage from drag
+        } else {
+            const data = {
+                isDown: false,
+                x: e.clientX - this.rect.left,
+                y: e.clientY - this.rect.top,
+                canvasWidth: this.rect.width,
+                canvasHeight: this.rect.height
+            };
+            this.props.vm.postIOData('mouse', data);
+        }
+        e.preventDefault();
+    }
+    onMouseDown (e) {
+        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        this.setState({
+            mouseDown: true,
+            mouseDownTimeoutId: setTimeout(
+                this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
+                500
+            )
+        });
         const data = {
-            isDown: false,
-            x: e.clientX - this.rect.left,
-            y: e.clientY - this.rect.top,
+            isDown: true,
+            x: mousePosition[0],
+            y: mousePosition[1],
             canvasWidth: this.rect.width,
             canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', data);
         e.preventDefault();
     }
-    onMouseDown (e) {
-        const data = {
-            isDown: true,
-            x: e.clientX - this.rect.left,
-            y: e.clientY - this.rect.top,
-            canvasWidth: this.rect.width,
-            canvasHeight: this.rect.height
-        };
-        this.props.vm.postIOData('mouse', data);
-        e.preventDefault();
+    cancelMouseDownTimeout () {
+        if (this.state.mouseDownTimeoutId !== null) {
+            clearTimeout(this.state.mouseDownTimeoutId);
+        }
+        this.setState({mouseDownTimeoutId: null});
+    }
+    onStartDrag (x, y) {
+        const drawableID = this.renderer.pick(x, y);
+        this.renderer.pickUp(drawableID, x, y);
+        this.setState({isDragging: true});
     }
     setCanvas (canvas) {
         this.canvas = canvas;

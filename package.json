@@ -36,7 +36,7 @@
     "classnames": "2.2.5",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.26.1",
-    "eslint": "3.15.0",
+    "eslint": "3.16.0",
     "eslint-config-scratch": "^3.0.0",
     "eslint-plugin-react": "6.9.0",
     "gh-pages": "0.12.0",

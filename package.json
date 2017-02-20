@@ -67,7 +67,7 @@
     "travis-after-all": "1.4.4",
     "webpack": "2.2.1",
     "webpack-combine-loaders": "2.0.3",
-    "webpack-dev-server": "2.3.0",
+    "webpack-dev-server": "2.4.0",
     "xhr": "2.3.3"
   }
 }

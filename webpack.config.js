@@ -7,7 +7,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // PostCss
 var autoprefixer = require('autoprefixer');
-var values = require('postcss-modules-values');
+var postcssVars = require('postcss-simple-vars');
+var postcssImport = require('postcss-import');
 
 module.exports = {
     devServer: {
@@ -52,9 +53,11 @@ module.exports = {
             }, {
                 loader: 'postcss-loader',
                 options: {
+                    ident: 'postcss',
                     plugins: function () {
                         return [
-                            values,
+                            postcssImport,
+                            postcssVars,
                             autoprefixer({
                                 browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
                             })

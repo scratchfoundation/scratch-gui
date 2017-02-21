@@ -22,7 +22,8 @@ class Stage extends React.Component {
         ]);
         this.state = {
             mouseDownTimeoutId: null,
-            isDragging: false
+            isDragging: false,
+            dragOffset: null
         };
     }
     componentDidMount () {
@@ -34,18 +35,21 @@ class Stage extends React.Component {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
     }
+    shouldComponentUpdate () {
+        return false;
+    }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
         this.detachRectEvents();
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
-        canvas.addEventListener('mouseup', this.onMouseUp);
+        document.addEventListener('mouseup', this.onMouseUp);
         canvas.addEventListener('mousedown', this.onMouseDown);
     }
     detachMouseEvents (canvas) {
         document.removeEventListener('mousemove', this.onMouseMove);
-        canvas.removeEventListener('mouseup', this.onMouseUp);
+        document.removeEventListener('mouseup', this.onMouseUp);
         canvas.removeEventListener('mousedown', this.onMouseDown);
     }
     attachRectEvents () {
@@ -65,6 +69,10 @@ class Stage extends React.Component {
         if (this.state.mouseDown && !this.state.isDragging) {
             this.onStartDrag(mousePosition[0], mousePosition[1]);
         }
+        if (this.state.mouseDown && this.state.isDragging && this.dragCanvas) {
+            this.dragCanvas.style.left = `${e.clientX - this.state.dragOffset[0]}px`;
+            this.dragCanvas.style.top = `${e.clientY - this.state.dragOffset[1]}px`;
+        }
         const coordinates = {
             x: mousePosition[0],
             y: mousePosition[1],
@@ -79,8 +87,12 @@ class Stage extends React.Component {
             mouseDown: false
         });
         if (this.state.isDragging) {
-            this.setState({isDragging: false});
-            // TODO: return to stage from drag
+            this.setState({
+                isDragging: false,
+                dragOffset: null
+            });
+            document.body.removeChild(this.dragCanvas);
+            delete this.dragCanvas;
         } else {
             const data = {
                 isDown: false,
@@ -91,7 +103,6 @@ class Stage extends React.Component {
             };
             this.props.vm.postIOData('mouse', data);
         }
-        e.preventDefault();
     }
     onMouseDown (e) {
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
@@ -120,8 +131,23 @@ class Stage extends React.Component {
     }
     onStartDrag (x, y) {
         const drawableID = this.renderer.pick(x, y);
-        this.renderer.pickUp(drawableID, x, y);
-        this.setState({isDragging: true});
+        const imageData = this.renderer.extractDrawable(drawableID, x, y);
+        this.dragCanvas = document.createElement('canvas');
+        this.dragCanvas.style.position = 'absolute';
+        document.body.appendChild(this.dragCanvas);
+        const ctx = this.dragCanvas.getContext('2d');
+        const canvasImageData = ctx.createImageData(imageData.width, imageData.height);
+        canvasImageData.data.set(imageData.data);
+        ctx.putImageData(canvasImageData, 0, 0);
+        this.dragCanvas.style.left = `${this.rect.left + x - imageData.x}px`;
+        this.dragCanvas.style.top = `${this.rect.top + y - imageData.y}px`;
+        this.dragCanvas.width = imageData.width;
+        this.dragCanvas.height = imageData.height;
+        ctx.putImageData(canvasImageData, 0, 0);
+        this.setState({
+            isDragging: true,
+            dragOffset: [imageData.x, imageData.y]
+        });
     }
     setCanvas (canvas) {
         this.canvas = canvas;

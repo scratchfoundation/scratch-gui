@@ -1,7 +1,5 @@
 @import "../../css/units.css";
 
-/* TODO: refactor this class name, and component: `sprite-selector` to `sprite` */
-/* TODO: make space for the scrollbar */
 .sprite-selector {
     position: relative; 
     flex-basis: 80%;
@@ -12,9 +10,10 @@
     border-top-left-radius: $space;
 }
 
-.sprite-item-selector-sprite-item {
+/* in prep for renaming sprite-selector-item to sprite */
+.sprite {
     /* 
-        Explicitly calc the width to make sprite items line up perfectly, and flow predictably
+        Explicitly calc the width to make sprite items line up and flow predictably
         across rows. Flexbox's `space between` property would prevent us from having to calc
         the width, but it doesn't flowing well when the # of items per row, is greater than 1
         and less than the max.
@@ -23,34 +22,15 @@
         in the width, and thus we can leave it out of this calc. That just leaves us to divide the space equally,
         accounting for margin between items. 
 
-        TODO: See diagram:
-
-        Note, that the left margin of the first item in a row, and the right margin in the last item of row
-        are not included in the available-row-width, because the parent container already gave us left + right padding of
-        one space unit
-
-        OQ: would it make more sense to remove the container L/R padding, and use 
-        equal left + right margin to simplify the calc the width calc? Doing so means
-        we could delete the .sprite-item-selector-sprite-item:nth-child(3n+3) 
-
+        TODO: make room for the scrollbar
     */
     box-sizing: border-box;
-    width: calc((100% - (($sprites-per-row - 1) * $space)) / $sprites-per-row);
+    /*width: calc((100% - (($sprites-per-row - 1) * $space)) / $sprites-per-row);*/
+    width: calc((100% / $sprites-per-row ) - $space);
+
     min-height: 4rem; /* TODO: calc height same as width */
-    margin-bottom: $space;
+    margin: calc($space / 2); 
 }
-
-/* Calc the margin between items:
-    a + b work together
-    b needs to be second
-    OQ: is there a better way?
-*/
-
-/* a) assign the margin right for the items... */
-.sprite-item-selector-sprite-item { margin-right: $space; }
-
-/* b) cancel out the margin on last item, in each row */
-.sprite-item-selector-sprite-item:nth-child($(sprites-per-row)n+$(sprites-per-row)){ margin-right: 0; }
 
 
 .scroll-wrapper {
@@ -71,9 +51,9 @@
     flex-wrap: wrap;
     flex-direction: row;
 
-    padding-top: $space;
-    padding-left: $space;
-    padding-right: $space;
+    padding-top: calc($space / 2);
+    padding-left: calc($space / 2);
+    padding-right: calc($space / 2);
     /* 
         TODO: Currently, the last row of sprite items are pushing the wrapper down, 
         one space unit, properly. When we correctly remove margin bottom from sprite 

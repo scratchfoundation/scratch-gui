@@ -18,6 +18,7 @@ const SpriteSelectorItem = props => (
     >
         {props.costumeURL ? (
             <CostumeCanvas
+                className={styles.spriteImage}
                 height={32}
                 url={props.costumeURL}
                 width={32}

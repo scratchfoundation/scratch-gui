@@ -1,52 +1,31 @@
+@import "../../css/units.css";
+
 .sprite-selector-item {
-
-    /* For absolutely positioning the sprite's info icon, a child element */
-    position: relative;  
-
-    /* 
-        We want 4 items in each row, so we start with a width of 25%.
-        Then, we need to subtract left + right border-radius, and left + right spacing
-        TODO: Bring in _spacer-unit from variables, and make the border-radius(1px) a var
-    */
-    width: calc(25% - (2px + (0.25rem / 2))); 
-
-    /* 
-        TODO: How can we make flexbox also distribute the space-between for the cross-axis, 
-        ie, top + bottom margin. I don't think we can, so need to think more about how this
-
-        Also, space-between causes another issue: when there are either 2 or 3 items in the
-        last row, they fall out of the grid. `flex-grow: 1;` fixes this, but then makes 
-        them double width. 
-
-        Haven't yet figured out another solution, so adding margin to the item directly.         
-    */
-    padding: 0.25rem;
+    padding: calc($space / 2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     background: white;
     color: #5d647a;
-    border-color: #e9eef2;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
-    border-radius: 0.5rem;
+    border-color: #e9eef2;
+    border-radius: $space;
     text-align: center;
     cursor: pointer;
 }
 
 .sprite-selector-item:hover {
+    border-width: 2px;
     border-color: #1dacf4;
     transition: 0.25s ease-out;
 }
 
-/* TODO: refactor out descendent selector into a regular class */
+/* TODO: refactor out descendent selectors into regular classes */
 .sprite-selector-item.is-selected {
+    border-width: 2px;
     border-color: #1dacf4;
     transition: 0.25s ease-out;
 }
-
-/* 
-    TODO: Refactor out descendent selector into a regular class
-*/
 .sprite-selector-item.is-selected .info-button {
     display: block; 
 }
@@ -61,24 +40,4 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     min-width: 0;
-}
-
-/* TODO: Convert to SVG */
-.info-button {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    width: 1.25rem;
-    height: 1.25rem;
-    top: -1px;
-    left: -1px;
-    border-radius: 1rem;
-    background: #1dacf4;
-    color: white;
-    padding: 0.05rem;
-    font-style: italic;
-    font-size: 1rem;
-    font-weight: black;
-    font-family: serif;
-    cursor: pointer;
 }

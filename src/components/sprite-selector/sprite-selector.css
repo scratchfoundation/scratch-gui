@@ -1,42 +1,68 @@
+@import "../../css/units.css";
+
 /* TODO: refactor this class name, and component: `sprite-selector` to `sprite` */
+/* TODO: make space for the scrollbar */
 .sprite-selector {
     position: relative; 
     flex-basis: 80%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-right: calc(0.5rem / 2);
+    margin-right: calc($space / 2);
     background-color: #f9f9f9;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
+    border-top-right-radius: $space;
+    border-top-left-radius: $space;
 }
 
-/* 
-    Using `justify-content: space-between` on the .items-wrapper almost works, to
-    distribute free space around the sprite selector items, except when there are 
-    between 2 and 3 items in the row (out of 4 total that fit currently). 
-    When this happens, the space does not distribute evenly.
-
-    Thus, manually setting margin and passing it down to the component via JSX
-    works, without committing the margin to the component, which lets us use it 
-    elsewhere. 
-
-    TODO: experiment with Lost grid here, which could simplify this layout even more
-*/
 .sprite-item-selector-sprite-item {
-    margin: 0.125rem;  /* TODO: refactor to var: _space / 4 */
+    /* 
+        Explicitly calc the width to make sprite items line up perfectly, and flow predictably
+        across rows. Flexbox's `space between` property would prevent us from having to calc
+        the width, but it doesn't flowing well when the # of items per row, is greater than 1
+        and less than the max.
+
+        Setting `border-box` simplifies things, because content, padding and border width all get included 
+        in the width, and thus we can leave it out of this calc. That just leaves us to divide the space equally,
+        accounting for margin between items. 
+
+        TODO: See diagram:
+
+        Note, that the left margin of the first item in a row, and the right margin in the last item of row
+        are not included in the available-row-width, because the parent container already gave us left + right padding of
+        one space unit
+
+        OQ: would it make more sense to remove the container L/R padding, and use 
+        equal left + right margin to simplify the calc the width calc? Doing so means
+        we could delete the .sprite-item-selector-sprite-item:nth-child(3n+3) 
+
+    */
+    box-sizing: border-box;
+    width: calc((100% - (($sprites-per-row - 1) * $space)) / $sprites-per-row);
+    min-height: 4rem; /* TODO: calc height same as width */
+    margin-bottom: $space;
 }
+
+/* Calc the margin between items:
+    a + b work together
+    b needs to be second
+    OQ: is there a better way?
+*/
+
+/* a) assign the margin right for the items... */
+.sprite-item-selector-sprite-item { margin-right: $space; }
+
+/* b) cancel out the margin on last item, in each row */
+.sprite-item-selector-sprite-item:nth-child($(sprites-per-row)n+$(sprites-per-row)){ margin-right: 0; }
+
 
 .scroll-wrapper {
     /*
-       Sets the sprite-selector items as a scrollable pane, 
-       using height of .sprite-info (5rem)
+       Sets the sprite-selector items as a scrollable pane
 
         TODO: Safari: pane doesn't stretch to fill height;
         TODO: Adding `position: relative` still doesn't fix Safari scrolling pane, and 
-                also introduces a new bug in Chrome when vertically resizing window down, 
-                then back up, introduces white space in the outside the page container. 
-        TODO: Make a variable for the height, link up to .menu-bar height
+              also introduces a new bug in Chrome when vertically resizing window down, 
+              then back up, introduces white space in the outside the page container. 
     */
-    height: calc(100% - 5rem); 
+    height: calc(100% - $sprite-info-height); 
     overflow-y: scroll;
 }
 
@@ -45,13 +71,13 @@
     flex-wrap: wrap;
     flex-direction: row;
 
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-top: $space;
+    padding-left: $space;
+    padding-right: $space;
     /* 
         TODO: Currently, the last row of sprite items are pushing the wrapper down, 
         one space unit, properly. When we correctly remove margin bottom from sprite 
         items, we'll need to add this back.
-    padding-bottom: 0.5rem; 
+    padding-bottom: $space; 
     */
 }

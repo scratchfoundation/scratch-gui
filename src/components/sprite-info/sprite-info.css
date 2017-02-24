@@ -1,19 +1,21 @@
+@import "../../css/units.css";
+
 /* TODO: Refactor layout. Sloppy spacing, padding, width etc */
 
 .sprite-info {
-    height: 5rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+    height: sprite-info-height;
+    padding: $space $space $space calc($space / 2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #575e75;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: $space;
+    border-top-right-radius: $space;
     border-bottom: 1px solid #eaeaea;
 }
 
 .row { display: flex; }
 
-.row:nth-of-type(1){ margin-bottom: 0.5rem; }
+.row:nth-of-type(1){ margin-bottom: $space; }
 
 .row:nth-of-type(1) .group:nth-of-type(1)  { width: 50%; }
 .row:nth-of-type(1) .group:nth-of-type(2)  { width: 25%; }
@@ -105,8 +107,8 @@
 
 .radio-box {
     display: flex;
-    padding: 0.25rem;
     opacity: 0.5;
+    padding: 0.25rem;
     border: 1px solid #e9eef2;
     border-radius:  0.4rem;
     cursor: pointer;

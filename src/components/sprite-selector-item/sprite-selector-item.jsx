@@ -18,13 +18,12 @@ const SpriteSelectorItem = props => (
     >
         {props.costumeURL ? (
             <CostumeCanvas
-                height={50}
+                height={32}
                 url={props.costumeURL}
-                width={50}
+                width={32}
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
-        <div className={styles.infoButton}>i</div>
     </Box>
 );
 

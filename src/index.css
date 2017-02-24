@@ -1,5 +1,5 @@
-:global(html),
-:global(body),
+html,
+body,
 .app {
     /* probably unecessary, transitional until layout is refactored */
     width: 100%; 

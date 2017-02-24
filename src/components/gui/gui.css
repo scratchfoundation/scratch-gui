@@ -5,11 +5,7 @@
 }
 
 .body-wrapper {
-    /*
-        Calc the height by subtracting the menu bar height
-        TODO: Make height a reusable variable, link to use in .menu-bar
-    */
-    height: calc(100% - 3rem);
+    height: calc(100% - $menu-bar-height);
     background-color: #e8edf1;
 }
 
@@ -40,14 +36,14 @@
         Normally we'd use padding, but the absolute positioning ignores it,
         so use margin instead. Temporary, until tabs are inserted.
     */
-    margin-top: 3rem;
+    margin-top: $stage-menu-height;
 
     background: #e8edf1;
 }
 
 .stage-and-target-wrapper {
     /*
-        Make rows for children:
+        Makes rows for children:
           1) stage menu
           2) stage
           3) sprite/stage selectors
@@ -83,7 +79,7 @@
     padding-right: $space;
 
     /*
-        For making the sprite-selector a scrollable pane.
+        For making the sprite-selector a scrollable pane
         TODO: Not working in Safari
     */
     overflow: hidden;
@@ -93,6 +89,6 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    height: 3rem;
+    height: $stage-menu-height;
     padding: $space;
 }

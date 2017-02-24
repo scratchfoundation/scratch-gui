@@ -1,51 +1,70 @@
+@import "../../css/units.css";
+
 .menu-bar {
     display: flex;
-    align-items: center;
-    
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    /* 
+        For most things, we shouldn't explicitly set height, and let the content 
+        push the element to whatever fits. Using a fixed height instead, will help 
+        us subtract the value we assign from the body, adding up to a perfect 
+        100%. This means we don't need to set overflow: hidden, which makes it hard 
+        to debug. border-box simplifies by removing padding from the equation. 
+    */
+    box-sizing: border-box;
+    height: $menu-bar-height; 
+
     /* 
         TODO: This adds ~20px in Chrome, when scrolling to the right, 
         but fixes [FFx + Safari] [resize window down + scroll to the right] bug.
         width: 100%; 
     */
 
-    padding: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #4c97ff;
     color: white;
-
-    /* 
-        For most things, we shouldn't explicitly set height, and let the content 
-        push the element to whatever fits. Using a fixed height instead, will help 
-        us subtract the value we assign (3rem) from the body, adding up to a perfect 
-        100%. This means we don't need to set overflow: hidden, which makes it hard 
-        to debug. (In theory). border-box makes for easier to read calc by removing
-        padding from the equation.
-        TODO: make a var for height, use it in the calc, in gui.bodyWrapper
-    */
-    box-sizing: border-box;
-    height: 3rem; 
 }
 
-/* Using a wrapper so when logo is hovered, it transforms via its center point */
+/* 
+    TODO: not sure if this is needed 
+    Using a wrapper so when logo is hovered, it transforms via its center point 
+*/
 .logo-wrapper {
-    display: flex;
-    justify-content: center;
 }
 
 .scratch-logo {
-    height: 1.5rem;
-    transition: all 2s ease-out;  /* slower fade out */ 
-    cursor: pointer;
+    height:  $menu-bar-height; 
+    padding: 0.8rem 0;
 }
 
-/* http://blog.teamtreehouse.com/create-smoother-animations-transitions-browser */
 .scratch-logo:hover {
     transform: scale(1.1, 1.1);
-    transition: all .075s ease-in; /* quick transition in */
     background-size: 100%;
+    transition: all .075s ease-in;
 }
 
 .title {
     display: inline-block;
     margin: 0 2rem;
 }
+
+.menu-item {
+    display: block;
+    padding: 0 1.5rem;
+    line-height: $menu-bar-height; 
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.menu-item:hover {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.2)
+}
+
+.menu-item:nth-child(3) {
+    margin-right: auto;
+}
+
+

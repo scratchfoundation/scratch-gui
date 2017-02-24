@@ -19,13 +19,6 @@ const MenuBar = function MenuBar () {
                 />
             </div>
             <div className={styles.menuItem} >Animation Playtest Prototype</div>
-
-            {/*
-
-                <a className={styles.menuItem} href="#" >Load</a>
-                <a className={styles.menuItem} href="#" >Save</a>
-                <a className={styles.menuItem} href="#" >Open in Scratch</a>
-            */}
         </Box>
     );
 };

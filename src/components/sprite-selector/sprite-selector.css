@@ -13,14 +13,14 @@
 /* n prep for renaming sprite-selector-item to sprite */
 .sprite {
     /* 
-        Explicitly calc the width to make sprite items line up and flow predictably
-        across rows. Flexbox's `space between` property would prevent us from having to calc
-        the width, but it doesn't flowing well when the # of items per row, is greater than 1
-        and less than the max.
+        Our goal is to fit sprites evenly in a row without leftover space.
+        Flexbox's `space between` property gets us close, but doesn't flow 
+        well when the # of items per row > 1 and less than the max per row.
 
-        Setting `border-box` simplifies things, because content, padding and border width all get included 
-        in the width, and thus we can leave it out of this calc. That just leaves us to divide the space equally,
-        accounting for margin between items. 
+        Solving by explicitly calc'ing the width of each sprite. Setting 
+        `border-box` simplifies things, because content, padding and 
+        border-width all are included in the width, leaving us only to subtract 
+        the left + right margins.
 
         TODO: make room for the scrollbar
     */

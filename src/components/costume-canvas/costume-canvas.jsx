@@ -119,6 +119,7 @@ CostumeCanvas.defaultProps = {
 };
 
 CostumeCanvas.propTypes = {
+    className: React.PropTypes.string,
     direction: React.PropTypes.number,
     height: React.PropTypes.number,
     url: React.PropTypes.string,

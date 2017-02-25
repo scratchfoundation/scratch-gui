@@ -10,7 +10,7 @@
     border-top-left-radius: $space;
 }
 
-/* in prep for renaming sprite-selector-item to sprite */
+/* n prep for renaming sprite-selector-item to sprite */
 .sprite {
     /* 
         Explicitly calc the width to make sprite items line up and flow predictably
@@ -25,7 +25,6 @@
         TODO: make room for the scrollbar
     */
     box-sizing: border-box;
-    /*width: calc((100% - (($sprites-per-row - 1) * $space)) / $sprites-per-row);*/
     width: calc((100% / $sprites-per-row ) - $space);
 
     min-height: 4rem; /* TODO: calc height same as width */

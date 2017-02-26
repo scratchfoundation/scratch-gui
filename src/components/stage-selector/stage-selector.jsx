@@ -19,26 +19,27 @@ const StageSelector = props => {
             onClick={onClick}
             {...componentProps}
         >
-            <div
-                className={classNames({
-                    [styles.border]: true,
-                    [styles.isSelected]: selected
-                })}
-            />
             <div className={styles.header}>
                 <div className={styles.title}>Stage</div>
                 <div className={styles.count}>{backdropCount}</div>
                 <div className={styles.label}>Backdrops</div>
             </div>
             <div className={styles.body}>
-                {url ? (
-                    <CostumeCanvas
-                        className={styles.costumeCanvas}
-                        height={44}
-                        url={url}
-                        width={56}
-                    />
-                ) : null}
+                <div
+                    className={classNames({
+                      [styles.canvasWrapper]: true,
+                      [styles.isSelected]: selected
+                    })}
+                >
+                    {url ? (
+                        <CostumeCanvas
+                            className={styles.costumeCanvas}
+                            height={44}
+                            url={url}
+                            width={56}
+                        />
+                    ) : null}
+                </div>
             </div>
         </Box>
     );

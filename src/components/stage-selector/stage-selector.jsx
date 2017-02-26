@@ -27,8 +27,8 @@ const StageSelector = props => {
             <div className={styles.body}>
                 <div
                     className={classNames({
-                      [styles.canvasWrapper]: true,
-                      [styles.isSelected]: selected
+                        [styles.canvasWrapper]: true,
+                        [styles.isSelected]: selected
                     })}
                 >
                     {url ? (

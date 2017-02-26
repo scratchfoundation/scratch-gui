@@ -64,13 +64,16 @@ $header-height: 5rem;
 .canvas-wrapper {
     position: relative;
     border-radius: calc($space / 2);
+    cursor: pointer;
 }
 
 .canvas-wrapper.is-selected::before {
     content: '';
     position: absolute;
-    height: 40px; /* canvas element height in JSX - (border width px * 2) */
-    width: 52px;  /* canvas element width in JSX - (border width px * 2) */
+
+    /* subtract (border width px * 2) from each dimension declared in JSX */
+    height: 40px;
+    width: 52px;
     border-radius: calc($space / 2);
     border: 2px solid #1dacf4;
 }

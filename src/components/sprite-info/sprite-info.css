@@ -2,6 +2,8 @@
 
 .sprite-info {
     height: 5rem;
+
+    /* TODO: Identical to stage-header */
     padding: 0.5rem 0.5rem 0.5rem 0.25rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
@@ -60,12 +62,14 @@
 }
 
 .input-label {
-    font-size: 0.85rem;
+    font-size: 0.625rem;
+    font-weight: bold;
     margin: 0 0.3rem;
 }
 
 .input-label-small {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
+    font-weight: bold;
     margin: 0 0.2rem;
 }
 
@@ -73,7 +77,8 @@
     outline: none;
     padding: 0.3rem 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.625rem;
+    font-weight: bold;
     border-width: 1px;
     border-style: solid; 
     border-color: #e9eef2; 

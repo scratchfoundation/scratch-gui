@@ -5,7 +5,8 @@
 }
 
 .stage-selector-wrapper {
-    flex-basis: 20%;
+    flex-basis: 72px;
+    flex-shrink: 0;
     margin-left: calc(0.5rem / 2); /* TODO: import spacer unit, and use instead of 0.5rem */
 }
 
@@ -39,6 +40,6 @@
 }
 
 /* TODO: This is hacky. Better: move buttons in their corresponding panes, and set values relatively */
-.add-button-wrapper--sprite   { right: 8.5rem; }
-.add-button-wrapper--stage    { right: 2.2rem; }
-.add-button-wrapper--costume  { right: 2.2rem; }
+.add-button-wrapper--sprite   { right: 7rem; }
+.add-button-wrapper--stage    { right: 1.6rem; }
+.add-button-wrapper--costume  { right: 1.6rem; }

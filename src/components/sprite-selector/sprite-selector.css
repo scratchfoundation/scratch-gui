@@ -1,7 +1,6 @@
 /* TODO: refactor this class name, and component: `sprite-selector` to `sprite` */
 .sprite-selector {
     position: relative; 
-    flex-basis: 80%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-right: calc(0.5rem / 2);
     background-color: #f9f9f9;

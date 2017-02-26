@@ -103,6 +103,7 @@ class CostumeCanvas extends React.Component {
     render () {
         return (
             <canvas
+                className={this.props.className}
                 height={this.props.height}
                 width={this.props.width}
                 ref={c => (this.canvas = c)} // eslint-disable-line react/jsx-sort-props
@@ -118,6 +119,7 @@ CostumeCanvas.defaultProps = {
 };
 
 CostumeCanvas.propTypes = {
+    className: React.PropTypes.string,
     direction: React.PropTypes.number,
     height: React.PropTypes.number,
     url: React.PropTypes.string,

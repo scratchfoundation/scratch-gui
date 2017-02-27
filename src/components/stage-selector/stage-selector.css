@@ -1,12 +1,14 @@
+@import "../../css/units.css";
+
 .stage-selector {
     height: 100%;
-    padding: 0.5rem;
+    padding: $space;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     border-color: lightgray;
     border-width: 1px;
     border-style: solid;
-    border-radius: 0.5rem; 
+    border-radius: $space; 
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     border-bottom: 0;
@@ -17,6 +19,6 @@
 }
 
 .header {
-    min-height: 5rem;
+    min-height: $sprite-info-height; /* TODO: more appropriate name */
     background-color: blue; 
 }

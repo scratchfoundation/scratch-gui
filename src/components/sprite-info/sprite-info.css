@@ -68,8 +68,7 @@
 }
 
 .input-label-small {
-    font-size: 0.5rem;
-    font-weight: bold;
+    font-size: 0.625rem;
     margin: 0 0.2rem;
 }
 
@@ -113,7 +112,7 @@
     padding: 0.25rem;
     opacity: 0.5;
     border: 1px solid #e9eef2;
-    border-radius:  0.4rem;
+    border-radius: 0.25rem;
     cursor: pointer;
     transition: 0.25s ease-out; /* TODO: standardize with var */ 
 }

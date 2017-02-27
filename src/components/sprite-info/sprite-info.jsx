@@ -96,8 +96,8 @@ const SpriteInfo = props => (
                     className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
                 >
                     <option value="left-right">left-right</option>
-                    <option value="clockwise">clockwise</option>
-                    <option value="anchored">anchored</option>
+                    <option value="clockwise">don't rotate</option>
+                    <option value="anchored">all around</option>
                 </select>
             </div>
         </div>

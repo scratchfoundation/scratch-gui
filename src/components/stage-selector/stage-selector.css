@@ -1,6 +1,6 @@
 @import "../../css/units.css";
 
-$header-height: 5rem;
+$header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
 
 .stage-selector {
     position: relative; /* for the child element border */
@@ -17,11 +17,9 @@ $header-height: 5rem;
 .header {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-
+    justify-content: center;
     height: $header-height;
-
     padding: 0.5rem 0.5rem 0.5rem 0.25rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
@@ -31,55 +29,69 @@ $header-height: 5rem;
     border-bottom: 1px solid #eaeaea;
 }
 
-.title {
+.header-title {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.625rem;
     font-weight: bold;
     color: #575e75;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
+}
+
+.body {
+    justify-content: space-around;
+    padding: $space;
+    height: calc(100% - $header-height);
+    background-color: #f9f9f9;
 }
 
 .count {
-    padding: 0.25rem 1rem;
+    margin: 0 0 0.3rem 0;
+    padding: 0.15rem 0.5rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.625rem;
     font-weight: bold;
     color: #575e75;
     background: #ededed;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
 }
 
 .label {
+    margin: 0.4rem 0 0.25rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.5rem;
     font-weight: bold;
     color: #575e75;
 }
 
-.body {
-    padding: $space;
-    height: calc(100% - $header-height);
-    background-color: #f9f9f9;
-}
+$border-width: 2px;
 
-.canvas-wrapper {
-    position: relative;
+.flex-wrapper {
+    display: flex;
+    flex-direction: column; /* to make rows */
+    align-items: center;
+    background-color: white;
     border-radius: calc($space / 2);
+    border-width: $border-width;
+    border-style: solid;
+    border-color: #e9eef2;
     cursor: pointer;
+    transition: border-color 0.1s ease-out; 
 }
 
-.canvas-wrapper.is-selected::before {
-    content: '';
-    position: absolute;
+.flex-wrapper:hover {
+    border-color: #1dacf4;
+}
 
-    /* subtract (border width px * 2) from each dimension declared in JSX */
-    height: 40px;
-    width: 52px;
-    border-radius: calc($space / 2);
-    border: 2px solid #1dacf4;
+.flex-wrapper.is-selected {
+    border-color: #1dacf4;
 }
 
 .costume-canvas {
     display: block;
     width: 100%;
-    border-radius: calc($space / 2);
+    border-top-left-radius: calc($space / 2);
+    border-top-right-radius: calc($space / 2);
 }

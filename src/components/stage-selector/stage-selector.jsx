@@ -20,14 +20,12 @@ const StageSelector = props => {
             {...componentProps}
         >
             <div className={styles.header}>
-                <div className={styles.title}>Stage</div>
-                <div className={styles.count}>{backdropCount}</div>
-                <div className={styles.label}>Backdrops</div>
+                <div className={styles.headerTitle}>Stage</div>
             </div>
             <div className={styles.body}>
                 <div
                     className={classNames({
-                        [styles.canvasWrapper]: true,
+                        [styles.flexWrapper]: true,
                         [styles.isSelected]: selected
                     })}
                 >
@@ -39,7 +37,10 @@ const StageSelector = props => {
                             width={56}
                         />
                     ) : null}
+                    <div className={styles.label}>Backdrops</div>
+                    <div className={styles.count}>{backdropCount}</div>
                 </div>
+                
             </div>
         </Box>
     );

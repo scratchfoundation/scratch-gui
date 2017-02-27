@@ -1,3 +1,5 @@
+@import "../../css/units.css";
+
 .library-item {
     display: flex;
     flex-direction: column;
@@ -8,11 +10,11 @@
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #575e75;
-    cursor: pointer;
-    border-radius: 0.5rem;
+    border-radius: $space;
     border-color: transparent;
     border-width: 1px;
     border-style: solid;
+    cursor: pointer;
     transition: all 1s ease-out;  /* slower fade out */ 
 }
 

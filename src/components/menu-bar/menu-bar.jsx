@@ -12,14 +12,13 @@ const MenuBar = function MenuBar () {
                 [styles.menuBar]: true
             })}
         >
-            <div className={styles.logoWrapper}>
+            <div className={classNames(styles.logoWrapper, styles.menuItem)}>
                 <img
                     className={styles.scratchLogo}
                     src={scratchLogo}
                 />
             </div>
-
-            <span className={styles.title}>Animation Playtest Prototype</span>
+            <div className={styles.menuItem} >Animation Playtest Prototype</div>
         </Box>
     );
 };

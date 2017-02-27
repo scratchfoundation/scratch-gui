@@ -5,13 +5,15 @@ $header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
 .stage-selector {
     position: relative; /* for the child element border */
     height: 100%;
-
-    /* TODO: Identical to stage-header */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #575e75;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
+    border-color: lightgray;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: 0;
 }
 
 .header {

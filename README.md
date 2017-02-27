@@ -33,27 +33,5 @@ Then go to [http://localhost:8601/](http://localhost:8601/) - the playground out
 npm test
 ```
 
-## Git Hooks
-If you would like to ensure your contributions build cleanly every time, opt in
-to the git hooks for the project. Create a file called `.opt-in` in the root of
-the project with the contents:
-
-```
-prepush
-postmerge
-postrewrite
-```
-
-Or you can include only the hooks you would like to use.
-
-### prepush
-Run lint before pushing
-
-### postmerge
-`npm install` after merging
-
-### postrewrite
-`npm install` after rebasing
-
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!

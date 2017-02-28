@@ -15,25 +15,37 @@ const StageSelector = props => {
     } = props;
     return (
         <Box
-            className={classNames({
-                [styles.stageSelector]: true,
-                [styles.isSelected]: selected
-            })}
+            className={styles.stageSelector}
             onClick={onClick}
             {...componentProps}
         >
-            <div className="header">Stage</div>
-            <div>{backdropCount}<br />Backdrops</div>
-            {url ? (
-                <CostumeCanvas
-                    height={42}
-                    url={url}
-                    width={50}
-                />
-            ) : null}
+            <div className={styles.header}>
+                <div className={styles.headerTitle}>Stage</div>
+            </div>
+            <div className={styles.body}>
+                <div
+                    className={classNames({
+                        [styles.flexWrapper]: true,
+                        [styles.isSelected]: selected
+                    })}
+                >
+                    {url ? (
+                        <CostumeCanvas
+                            className={styles.costumeCanvas}
+                            height={44}
+                            url={url}
+                            width={56}
+                        />
+                    ) : null}
+                    <div className={styles.label}>Backdrops</div>
+                    <div className={styles.count}>{backdropCount}</div>
+                </div>
+                
+            </div>
         </Box>
     );
 };
+
 StageSelector.propTypes = {
     backdropCount: React.PropTypes.number,
     onClick: React.PropTypes.func,

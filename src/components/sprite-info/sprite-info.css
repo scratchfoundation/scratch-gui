@@ -62,20 +62,30 @@
 }
 
 .input-label {
-    font-size: 0.85rem;
+    font-size: 0.625rem;
+    font-weight: bold;
     margin: 0 0.3rem;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
 }
 
 .input-label-small {
-    font-size: 0.7rem;
+    font-size: 0.625rem;
     margin: 0 0.2rem;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
 }
 
 .input-form {
     outline: none;
     padding: 0.3rem 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.625rem;
+    font-weight: bold;
     border-width: 1px;
     border-style: solid; 
     border-color: #e9eef2; 
@@ -110,7 +120,7 @@
     opacity: 0.5;
     padding: 0.25rem;
     border: 1px solid #e9eef2;
-    border-radius:  0.4rem;
+    border-radius: 0.25rem;
     cursor: pointer;
     transition: 0.25s ease-out; /* TODO: standardize with var */ 
 }

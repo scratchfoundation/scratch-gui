@@ -38,7 +38,7 @@
 }
 
 .sprite-name {
-    font-size: 0.7rem;
+    font-size: 0.625rem;
     margin: 0.15rem;
     /* 
         For truncating overflowing text gracefully

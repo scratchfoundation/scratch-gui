@@ -1,24 +1,99 @@
 @import "../../css/units.css";
 
+$header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
+
 .stage-selector {
+    position: relative; /* for the child element border */
     height: 100%;
-    padding: $space;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
-    border-color: lightgray;
+    color: #575e75;
+    border-top-left-radius: $space;
+    border-top-right-radius: $space;
+    border-color: #dbdbdb;
     border-width: 1px;
     border-style: solid;
-    border-radius: $space; 
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
     border-bottom: 0;
 }
 
-.stage-selector.is-selected {
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: $header-height;
+    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: white;
+    color: #575e75;
+    border-top-left-radius: $space;
+    border-top-right-radius: $space;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.header-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: #575e75;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
+}
+
+.body {
+    justify-content: space-around;
+    padding: $space;
+    height: calc(100% - $header-height);
+    background-color: #f9f9f9;
+}
+
+.count {
+    margin: 0 0 0.3rem 0;
+    padding: 0.15rem 0.5rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: #575e75;
+    background: #ededed;
+    border-radius: 0.25rem;
+}
+
+.label {
+    margin: 0.4rem 0 0.25rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #575e75;
+}
+
+$border-width: 2px;
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: column; /* to make rows */
+    align-items: center;
+    background-color: white;
+    border-radius: calc($space / 2);
+    border-width: $border-width;
+    border-style: solid;
+    border-color: #e9eef2;
+    cursor: pointer;
+    transition: border-color 0.1s ease-out; 
+}
+
+.flex-wrapper:hover {
     border-color: #1dacf4;
 }
 
-.header {
-    min-height: $sprite-info-height; /* TODO: more appropriate name */
-    background-color: blue; 
+.flex-wrapper.is-selected {
+    border-color: #1dacf4;
+}
+
+.costume-canvas {
+    display: block;
+    width: 100%;
+    border-top-left-radius: calc($space / 2);
+    border-top-right-radius: calc($space / 2);
 }

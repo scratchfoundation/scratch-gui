@@ -65,11 +65,19 @@
     font-size: 0.625rem;
     font-weight: bold;
     margin: 0 0.3rem;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
 }
 
 .input-label-small {
     font-size: 0.625rem;
     margin: 0 0.2rem;
+
+    /* TODO: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
 }
 
 .input-form {

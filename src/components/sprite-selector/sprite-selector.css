@@ -7,6 +7,10 @@
     background-color: #f9f9f9;
     border-top-right-radius: $space;
     border-top-left-radius: $space;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: 0;
 }
 
 /* n prep for renaming sprite-selector-item to sprite */
@@ -52,10 +56,5 @@
     padding-top: calc($space / 2);
     padding-left: calc($space / 2);
     padding-right: calc($space / 2);
-    /* 
-        TODO: Currently, the last row of sprite items are pushing the wrapper down, 
-        one space unit, properly. When we correctly remove margin bottom from sprite 
-        items, we'll need to add this back.
     padding-bottom: $space; 
-    */
 }

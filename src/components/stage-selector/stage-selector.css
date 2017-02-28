@@ -10,7 +10,7 @@ $header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
     color: #575e75;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
-    border-color: lightgray;
+    border-color: #dbdbdb;
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;

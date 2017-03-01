@@ -66,11 +66,24 @@ const SpriteInfo = props => (
                 </span>
                 <div className={styles.radioBox}>
                     <img
-                        className={classNames(styles.showIcon, styles.icon)}
+                        className={classNames(
+                            styles.icon,
+                            styles.showIcon,
+                            {
+                                [styles.isActive]: props.visible
+                            }
+                        )}
                         src={showIcon}
+                        onClick={props.onChangeVisibility}
                     />
                     <img
-                        className={classNames(styles.hideIcon, styles.icon)}
+                        className={classNames(
+                            styles.icon,
+                            styles.hideIcon,
+                            {
+                                [styles.isActive]: !props.visible
+                            }
+                        )}
                         src={hideIcon}
                     />
                 </div>
@@ -82,12 +95,26 @@ const SpriteInfo = props => (
                 </span>
                 <div className={styles.radioBox}>
                     <img
-                        className={classNames(styles.draggableIcon, styles.icon)}
+                        className={classNames(
+                            styles.icon,
+                            styles.draggableIcon,
+                            {
+                                [styles.isActive]: props.draggable
+                            }
+                        )}
                         src={draggableIcon}
+                        onClick={props.onChangeDraggability}
                     />
                     <img
-                        className={classNames(styles.notDraggableIcon, styles.icon)}
+                        className={classNames(
+                            styles.icon,
+                            styles.notDraggableIcon,
+                            {
+                                [styles.isActive]: !props.draggable
+                            }
+                        )}
                         src={notDraggableIcon}
+                        onClick={props.onChangeDraggability}
                     />
                 </div>
             </div>
@@ -109,10 +136,14 @@ const SpriteInfo = props => (
 );
 
 SpriteInfo.propTypes = {
+    draggable: React.PropTypes.bool,
     name: React.PropTypes.string,
+    onChangeDraggability: React.PropTypes.func,
     onChangeName: React.PropTypes.func,
+    onChangeVisibility: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
     onChangeY: React.PropTypes.func,
+    visible: React.PropTypes.bool,
     x: React.PropTypes.number,
     y: React.PropTypes.number
 };

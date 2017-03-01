@@ -1,13 +1,15 @@
 const React = require('react');
 
 const Box = require('../box/box.jsx');
-const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
 const SpriteInfo = require('../sprite-info/sprite-info.jsx');
+const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
 const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
+        onChangeSpriteDraggability,
         onChangeSpriteName,
+        onChangeSpriteVisibility,
         onChangeSpriteX,
         onChangeSpriteY,
         onSelectSprite,
@@ -22,10 +24,14 @@ const SpriteSelectorComponent = function (props) {
             {...componentProps}
         >
             <SpriteInfo
+                draggable={selectedSprite.draggable}
                 name={selectedSprite.name}
+                visible={selectedSprite.visible}
                 x={selectedSprite.x}
                 y={selectedSprite.y}
+                onChangeDraggability={onChangeSpriteDraggability}
                 onChangeName={onChangeSpriteName}
+                onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
                 onChangeY={onChangeSpriteY}
             />
@@ -54,7 +60,9 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    onChangeSpriteDraggability: React.PropTypes.func,
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteVisibility: React.PropTypes.func,
     onChangeSpriteX: React.PropTypes.func,
     onChangeSpriteY: React.PropTypes.func,
     onSelectSprite: React.PropTypes.func,

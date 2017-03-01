@@ -37,7 +37,9 @@ class TargetPane extends React.Component {
             backdropLibraryVisible,
             costumeLibraryVisible,
             spriteLibraryVisible,
+            onChangeSpriteDraggability,
             onChangeSpriteName,
+            onChangeSpriteVisibility,
             onChangeSpriteX,
             onChangeSpriteY,
             onNewSpriteClick,
@@ -60,7 +62,9 @@ class TargetPane extends React.Component {
                 <SpriteSelectorComponent
                     selectedId={editingTarget}
                     sprites={sprites}
+                    onChangeSpriteDraggability={onChangeSpriteDraggability}
                     onChangeSpriteName={onChangeSpriteName}
+                    onChangeSpriteVisibility={onChangeSpriteVisibility}
                     onChangeSpriteX={onChangeSpriteX}
                     onChangeSpriteY={onChangeSpriteY}
                     onSelectSprite={onSelectSprite}
@@ -124,16 +128,22 @@ const spriteShape = React.PropTypes.shape({
         rotationCenterX: React.PropTypes.number,
         rotationCenterY: React.PropTypes.number
     }),
+    draggable: React.PropTypes.bool,
     id: React.PropTypes.string,
     name: React.PropTypes.string,
-    order: React.PropTypes.number
+    order: React.PropTypes.number,
+    visibility: React.PropTypes.bool,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
 });
 
 TargetPane.propTypes = {
     backdropLibraryVisible: React.PropTypes.bool,
     costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
+    onChangeSpriteDraggability: React.PropTypes.func,
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteVisibility: React.PropTypes.func,
     onChangeSpriteX: React.PropTypes.func,
     onChangeSpriteY: React.PropTypes.func,
     onNewBackdropClick: React.PropTypes.func,

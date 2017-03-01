@@ -17,14 +17,22 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleChangeSpriteDraggability',
             'handleChangeSpriteName',
+            'handleChangeSpriteVisibility',
             'handleChangeSpriteX',
             'handleChangeSpriteY',
             'handleSelectSprite'
         ]);
     }
+    handleChangeSpriteDraggability () {
+        this.props.vm.postSpriteInfo({draggable: true});
+    }
     handleChangeSpriteName (e) {
         this.props.vm.renameSprite(this.props.editingTarget, e.target.value);
+    }
+    handleChangeSpriteVisibility () {
+        this.props.vm.postSpriteInfo({visible: false});
     }
     handleChangeSpriteX (e) {
         let x = e.target.value;
@@ -45,7 +53,9 @@ class TargetPane extends React.Component {
         return (
             <TargetPaneComponent
                 {...this.props}
+                onChangeSpriteDraggability={this.handleChangeSpriteDraggability}
                 onChangeSpriteName={this.handleChangeSpriteName}
+                onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onSelectSprite={this.handleSelectSprite}

@@ -36,29 +36,27 @@
 }
 
 /* TODO: refactor from descendant selector, to a regular class */
-.group img { 
+.group img {
     display: inline-block;
-    width: 1rem; 
+    width: 1rem;
     height: 1rem;
     margin: 0 0.1rem;
 }
 
+.icon {
+    opacity: 0.4;
+}
+
+.icon.is-active {
+    opacity: 1;
+}
+
 .draggable-icon {
-    width: 0.55rem !important;
-    opacity: 1 !important;
+    width: 0.55rem;
 }
 
 .not-draggable-icon {
-    width: 0.75rem !important;
-    opacity: 0.4 !important;
-}
-
-.show-icon {
-    opacity: 1 !important;
-}
-
-.hide-icon {
-    opacity: 0.4 !important;
+    width: 0.75rem;
 }
 
 .input-label {
@@ -87,19 +85,19 @@
     font-size: 0.625rem;
     font-weight: bold;
     border-width: 1px;
-    border-style: solid; 
-    border-color: #e9eef2; 
-    border-radius: 2rem; 
+    border-style: solid;
+    border-color: #e9eef2;
+    border-radius: 2rem;
     cursor: text;
-    transition: 0.25s ease-out; /* TODO: standardize with var */ 
+    transition: 0.25s ease-out; /* TODO: standardize with var */
     box-shadow: none;
 
-    /* 
+    /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
         TODO: move this out into a mixin or a helper component
     */
-    overflow: hidden;  
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     min-width: 0;
@@ -122,5 +120,5 @@
     border: 1px solid #e9eef2;
     border-radius: 0.25rem;
     cursor: pointer;
-    transition: 0.25s ease-out; /* TODO: standardize with var */ 
+    transition: 0.25s ease-out; /* TODO: standardize with var */
 }

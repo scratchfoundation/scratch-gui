@@ -38,6 +38,8 @@ class TargetPane extends React.Component {
             costumeLibraryVisible,
             spriteLibraryVisible,
             onChangeSpriteName,
+            onChangeSpriteX,
+            onChangeSpriteY,
             onNewSpriteClick,
             onNewBackdropClick,
             onRequestCloseBackdropLibrary,
@@ -59,6 +61,8 @@ class TargetPane extends React.Component {
                     selectedId={editingTarget}
                     sprites={sprites}
                     onChangeSpriteName={onChangeSpriteName}
+                    onChangeSpriteX={onChangeSpriteX}
+                    onChangeSpriteY={onChangeSpriteY}
                     onSelectSprite={onSelectSprite}
                 />
                 <Box className={styles.stageSelectorWrapper}>
@@ -130,6 +134,8 @@ TargetPane.propTypes = {
     costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteX: React.PropTypes.func,
+    onChangeSpriteY: React.PropTypes.func,
     onNewBackdropClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
     onRequestCloseBackdropLibrary: React.PropTypes.func,

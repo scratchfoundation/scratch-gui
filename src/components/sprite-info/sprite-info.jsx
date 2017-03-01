@@ -37,6 +37,8 @@ const SpriteInfo = props => (
                     className={classNames(styles.inputForm, styles.inputFormX)}
                     placeholder="x"
                     type="text"
+                    value={typeof props.x === 'undefined' ? '' : props.x}
+                    onChange={props.onChangeX}
                 />
             </div>
 
@@ -50,6 +52,8 @@ const SpriteInfo = props => (
                     className={classNames(styles.inputForm, styles.inputFormY)}
                     placeholder="y"
                     type="text"
+                    value={typeof props.y === 'undefined' ? '' : props.y}
+                    onChange={props.onChangeY}
                 />
             </div>
         </div>
@@ -106,7 +110,11 @@ const SpriteInfo = props => (
 
 SpriteInfo.propTypes = {
     name: React.PropTypes.string,
-    onChangeName: React.PropTypes.func
+    onChangeName: React.PropTypes.func,
+    onChangeX: React.PropTypes.func,
+    onChangeY: React.PropTypes.func,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
 };
 
 SpriteInfo.defaultProps = {

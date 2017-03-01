@@ -8,6 +8,8 @@ const styles = require('./sprite-selector.css');
 const SpriteSelectorComponent = function (props) {
     const {
         onChangeSpriteName,
+        onChangeSpriteX,
+        onChangeSpriteY,
         onSelectSprite,
         selectedId,
         sprites,
@@ -21,7 +23,11 @@ const SpriteSelectorComponent = function (props) {
         >
             <SpriteInfo
                 name={selectedSprite.name}
+                x={selectedSprite.x}
+                y={selectedSprite.y}
                 onChangeName={onChangeSpriteName}
+                onChangeX={onChangeSpriteX}
+                onChangeY={onChangeSpriteY}
             />
 
             <Box className={styles.scrollWrapper}>
@@ -49,6 +55,8 @@ const SpriteSelectorComponent = function (props) {
 
 SpriteSelectorComponent.propTypes = {
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteX: React.PropTypes.func,
+    onChangeSpriteY: React.PropTypes.func,
     onSelectSprite: React.PropTypes.func,
     selectedId: React.PropTypes.string,
     sprites: React.PropTypes.shape({

@@ -1,5 +1,4 @@
 const bindAll = require('lodash.bindall');
-const pick = require('lodash.pick');
 const React = require('react');
 
 const {connect} = require('react-redux');
@@ -19,11 +18,25 @@ class TargetPane extends React.Component {
         super(props);
         bindAll(this, [
             'handleChangeSpriteName',
+            'handleChangeSpriteX',
+            'handleChangeSpriteY',
             'handleSelectSprite'
         ]);
     }
     handleChangeSpriteName (e) {
         this.props.vm.renameSprite(this.props.editingTarget, e.target.value);
+    }
+    handleChangeSpriteX (e) {
+        let x = e.target.value;
+        if (x === '-') x = -1;
+        if (isNaN(x)) return;
+        this.props.vm.postSpriteInfo({x});
+    }
+    handleChangeSpriteY (e) {
+        let y = e.target.value;
+        if (y === '-') y = -1;
+        if (isNaN(y)) return;
+        this.props.vm.postSpriteInfo({y});
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
@@ -33,6 +46,8 @@ class TargetPane extends React.Component {
             <TargetPaneComponent
                 {...this.props}
                 onChangeSpriteName={this.handleChangeSpriteName}
+                onChangeSpriteX={this.handleChangeSpriteX}
+                onChangeSpriteY={this.handleChangeSpriteY}
                 onSelectSprite={this.handleSelectSprite}
             />
         );
@@ -51,7 +66,10 @@ TargetPane.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
-        sprites[k] = pick(state.targets.sprites[k], ['costume', 'name', 'order']);
+        let {x, y, ...sprite} = state.targets.sprites[k];
+        if (typeof x !== 'undefined') x = Math.round(x);
+        if (typeof y !== 'undefined') y = Math.round(y);
+        sprites[k] = {...sprite, x, y};
         return sprites;
     }, {}),
     stage: state.targets.stage,

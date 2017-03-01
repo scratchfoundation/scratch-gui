@@ -128,7 +128,6 @@ TargetPane.propTypes = {
     costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
     onNewBackdropClick: React.PropTypes.func,
-    onNewCostumeClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
     onRequestCloseBackdropLibrary: React.PropTypes.func,
     onRequestCloseCostumeLibrary: React.PropTypes.func,

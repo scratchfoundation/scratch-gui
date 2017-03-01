@@ -6,7 +6,6 @@ const {connect} = require('react-redux');
 
 const {
     openBackdropLibrary,
-    openCostumeLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
@@ -59,10 +58,6 @@ const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());
-    },
-    onNewCostumeClick: e => {
-        e.preventDefault();
-        dispatch(openCostumeLibrary());
     },
     onNewSpriteClick: e => {
         e.preventDefault();

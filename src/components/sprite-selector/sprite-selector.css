@@ -1,6 +1,7 @@
 @import "../../css/units.css";
 
 .sprite-selector {
+    flex-grow: 1;
     position: relative; 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-right: calc($space / 2);

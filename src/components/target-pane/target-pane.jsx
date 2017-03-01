@@ -38,7 +38,6 @@ class TargetPane extends React.Component {
             costumeLibraryVisible,
             spriteLibraryVisible,
             onNewSpriteClick,
-            onNewCostumeClick,
             onNewBackdropClick,
             onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,
@@ -80,27 +79,16 @@ class TargetPane extends React.Component {
                             />
                         </button>
 
-                        {editingTarget === stage.id ? (
-                            <button
-                                className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
-                                onClick={onNewBackdropClick}
-                            >
-                                <img
-                                    className={styles.addButton}
-                                    src={addIcon}
-                                />
-                            </button>
-                        ) : (
-                            <button
-                                className={classNames(styles.addButtonWrapper, styles.addButtonWrapperCostume)}
-                                onClick={onNewCostumeClick}
-                            >
-                                <img
-                                    className={styles.addButton}
-                                    src={addIcon}
-                                />
-                            </button>
-                        )}
+                        <button
+                            className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
+                            onClick={onNewBackdropClick}
+                        >
+                            <img
+                                className={styles.addButton}
+                                src={addIcon}
+                            />
+                        </button>
+
                         <SpriteLibrary
                             visible={spriteLibraryVisible}
                             vm={vm}

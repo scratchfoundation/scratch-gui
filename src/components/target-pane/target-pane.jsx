@@ -38,7 +38,6 @@ class TargetPane extends React.Component {
             costumeLibraryVisible,
             spriteLibraryVisible,
             onNewSpriteClick,
-            onNewCostumeClick,
             onNewBackdropClick,
             onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,

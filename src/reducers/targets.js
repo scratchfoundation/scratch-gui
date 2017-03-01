@@ -30,7 +30,7 @@ const reducer = function (state, action) {
                 .filter(target => !target.isStage)
                 .reduce(
                     (targets, target, listId) => defaultsDeep(
-                        {[target.id]: {order: listId}},
+                        {[target.id]: {order: listId, ...target}},
                         {[target.id]: state.sprites[target.id]},
                         targets
                     ),

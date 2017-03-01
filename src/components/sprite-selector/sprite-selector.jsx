@@ -7,17 +7,22 @@ const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
+        onChangeSpriteName,
         onSelectSprite,
         selectedId,
         sprites,
         ...componentProps
     } = props;
+    const selectedSprite = sprites[selectedId] || {};
     return (
         <Box
             className={styles.spriteSelector}
             {...componentProps}
         >
-            <SpriteInfo name="Sprite" />
+            <SpriteInfo
+                name={selectedSprite.name}
+                onChangeName={onChangeSpriteName}
+            />
 
             <Box className={styles.scrollWrapper}>
                 <Box className={styles.itemsWrapper}>
@@ -43,6 +48,7 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    onChangeSpriteName: React.PropTypes.func,
     onSelectSprite: React.PropTypes.func,
     selectedId: React.PropTypes.string,
     sprites: React.PropTypes.shape({

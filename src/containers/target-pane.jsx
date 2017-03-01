@@ -18,8 +18,12 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleChangeSpriteName',
             'handleSelectSprite'
         ]);
+    }
+    handleChangeSpriteName (e) {
+        this.props.vm.renameSprite(this.props.editingTarget, e.target.value);
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
@@ -28,6 +32,7 @@ class TargetPane extends React.Component {
         return (
             <TargetPaneComponent
                 {...this.props}
+                onChangeSpriteName={this.handleChangeSpriteName}
                 onSelectSprite={this.handleSelectSprite}
             />
         );

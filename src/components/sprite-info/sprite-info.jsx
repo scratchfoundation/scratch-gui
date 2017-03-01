@@ -17,13 +17,13 @@ const SpriteInfo = props => (
     >
         <div className={styles.row}>
             <div className={styles.group}>
-                <span className={styles.inputLabel}>
-                    {props.name}
-                </span>
+                <span className={styles.inputLabel}>Sprite</span>
                 <input
                     className={classNames(styles.inputForm, styles.inputFormSpriteName)}
                     placeholder="Name"
                     type="text"
+                    value={props.name}
+                    onChange={props.onChangeName}
                 />
             </div>
 
@@ -39,7 +39,7 @@ const SpriteInfo = props => (
                     type="text"
                 />
             </div>
-            
+
             <div className={styles.group}>
                 <img
                     className={classNames(styles.yIcon, styles.icon)}
@@ -87,7 +87,7 @@ const SpriteInfo = props => (
                     />
                 </div>
             </div>
-            
+
             <div className={styles.group}>
                 <span className={styles.inputLabelSmall}>
                     Rotation
@@ -105,7 +105,12 @@ const SpriteInfo = props => (
 );
 
 SpriteInfo.propTypes = {
-    name: React.PropTypes.string
+    name: React.PropTypes.string,
+    onChangeName: React.PropTypes.func
+};
+
+SpriteInfo.defaultProps = {
+    name: ''
 };
 
 module.exports = SpriteInfo;

@@ -61,8 +61,8 @@ class SpriteInfo extends React.Component {
                 onChangeY={this.handleChangeY}
                 onClickDraggable={this.handleClickDraggable}
                 onClickNotDraggable={this.handleClickNotDraggable}
-                onClickVisible={this.handleClickVisible}
                 onClickNotVisible={this.handleClickNotVisible}
+                onClickVisible={this.handleClickVisible}
             />
         );
     }
@@ -74,7 +74,7 @@ SpriteInfo.propTypes = {
     onChangeRotationStyle: React.PropTypes.func,
     onChangeVisibility: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
-    onChangeY: React.PropTypes.func,
+    onChangeY: React.PropTypes.func
 };
 
 module.exports = SpriteInfo;

@@ -74,7 +74,7 @@ const SpriteInfo = props => (
                             }
                         )}
                         src={showIcon}
-                        onClick={props.onChangeVisibility}
+                        onClick={props.onClickVisible}
                     />
                     <img
                         className={classNames(
@@ -85,6 +85,7 @@ const SpriteInfo = props => (
                             }
                         )}
                         src={hideIcon}
+                        onClick={props.onClickNotVisible}
                     />
                 </div>
             </div>
@@ -103,7 +104,7 @@ const SpriteInfo = props => (
                             }
                         )}
                         src={draggableIcon}
-                        onClick={props.onChangeDraggability}
+                        onClick={props.onClickDraggable}
                     />
                     <img
                         className={classNames(
@@ -114,7 +115,7 @@ const SpriteInfo = props => (
                             }
                         )}
                         src={notDraggableIcon}
-                        onClick={props.onChangeDraggability}
+                        onClick={props.onClickNotDraggable}
                     />
                 </div>
             </div>
@@ -138,11 +139,13 @@ const SpriteInfo = props => (
 SpriteInfo.propTypes = {
     draggable: React.PropTypes.bool,
     name: React.PropTypes.string,
-    onChangeDraggability: React.PropTypes.func,
     onChangeName: React.PropTypes.func,
-    onChangeVisibility: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
     onChangeY: React.PropTypes.func,
+    onClickDraggable: React.PropTypes.func,
+    onClickNotDraggable: React.PropTypes.func,
+    onClickNotVisible: React.PropTypes.func,
+    onClickVisible: React.PropTypes.func,
     visible: React.PropTypes.bool,
     x: React.PropTypes.number,
     y: React.PropTypes.number

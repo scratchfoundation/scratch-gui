@@ -1,7 +1,7 @@
 const React = require('react');
 
 const Box = require('../box/box.jsx');
-const SpriteInfo = require('../sprite-info/sprite-info.jsx');
+const SpriteInfo = require('../../containers/sprite-info.jsx');
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
 const styles = require('./sprite-selector.css');
 

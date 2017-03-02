@@ -25,25 +25,19 @@ class TargetPane extends React.Component {
             'handleSelectSprite'
         ]);
     }
-    handleChangeSpriteDraggability () {
-        this.props.vm.postSpriteInfo({draggable: true});
+    handleChangeSpriteDraggability (draggable) {
+        this.props.vm.postSpriteInfo({draggable});
     }
-    handleChangeSpriteName (e) {
-        this.props.vm.renameSprite(this.props.editingTarget, e.target.value);
+    handleChangeSpriteName (name) {
+        this.props.vm.renameSprite(this.props.editingTarget, name);
     }
-    handleChangeSpriteVisibility () {
-        this.props.vm.postSpriteInfo({visible: false});
+    handleChangeSpriteVisibility (visible) {
+        this.props.vm.postSpriteInfo({visible});
     }
-    handleChangeSpriteX (e) {
-        let x = e.target.value;
-        if (x === '-') x = -1;
-        if (isNaN(x)) return;
+    handleChangeSpriteX (x) {
         this.props.vm.postSpriteInfo({x});
     }
-    handleChangeSpriteY (e) {
-        let y = e.target.value;
-        if (y === '-') y = -1;
-        if (isNaN(y)) return;
+    handleChangeSpriteY (y) {
         this.props.vm.postSpriteInfo({y});
     }
     handleSelectSprite (id) {

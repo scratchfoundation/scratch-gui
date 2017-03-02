@@ -1,5 +1,4 @@
 const bindAll = require('lodash.bindall');
-const pick = require('lodash.pick');
 const React = require('react');
 
 const {connect} = require('react-redux');
@@ -18,8 +17,32 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleChangeSpriteDraggability',
+            'handleChangeSpriteName',
+            'handleChangeSpriteRotationStyle',
+            'handleChangeSpriteVisibility',
+            'handleChangeSpriteX',
+            'handleChangeSpriteY',
             'handleSelectSprite'
         ]);
+    }
+    handleChangeSpriteDraggability (draggable) {
+        this.props.vm.postSpriteInfo({draggable});
+    }
+    handleChangeSpriteName (name) {
+        this.props.vm.renameSprite(this.props.editingTarget, name);
+    }
+    handleChangeSpriteRotationStyle (rotationStyle) {
+        this.props.vm.postSpriteInfo({rotationStyle});
+    }
+    handleChangeSpriteVisibility (visible) {
+        this.props.vm.postSpriteInfo({visible});
+    }
+    handleChangeSpriteX (x) {
+        this.props.vm.postSpriteInfo({x});
+    }
+    handleChangeSpriteY (y) {
+        this.props.vm.postSpriteInfo({y});
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
@@ -28,6 +51,12 @@ class TargetPane extends React.Component {
         return (
             <TargetPaneComponent
                 {...this.props}
+                onChangeSpriteDraggability={this.handleChangeSpriteDraggability}
+                onChangeSpriteName={this.handleChangeSpriteName}
+                onChangeSpriteRotationStyle={this.handleChangeSpriteRotationStyle}
+                onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
+                onChangeSpriteX={this.handleChangeSpriteX}
+                onChangeSpriteY={this.handleChangeSpriteY}
                 onSelectSprite={this.handleSelectSprite}
             />
         );
@@ -46,7 +75,10 @@ TargetPane.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
-        sprites[k] = pick(state.targets.sprites[k], ['costume', 'name', 'order']);
+        let {x, y, ...sprite} = state.targets.sprites[k];
+        if (typeof x !== 'undefined') x = Math.round(x);
+        if (typeof y !== 'undefined') y = Math.round(y);
+        sprites[k] = {...sprite, x, y};
         return sprites;
     }, {}),
     stage: state.targets.stage,

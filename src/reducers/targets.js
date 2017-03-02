@@ -30,7 +30,7 @@ const reducer = function (state, action) {
                 .filter(target => !target.isStage)
                 .reduce(
                     (targets, target, listId) => defaultsDeep(
-                        {[target.id]: {order: listId}},
+                        {[target.id]: {order: listId, ...target}},
                         {[target.id]: state.sprites[target.id]},
                         targets
                     ),
@@ -55,19 +55,28 @@ const reducer = function (state, action) {
 reducer.updateTarget = function (target) {
     return {
         type: UPDATE_TARGET,
-        target: target
+        target: target,
+        meta: {
+            throttle: 30
+        }
     };
 };
 reducer.updateTargets = function (targetList) {
     return {
         type: UPDATE_TARGET_LIST,
-        targets: targetList
+        targets: targetList,
+        meta: {
+            throttle: 30
+        }
     };
 };
 reducer.updateEditingTarget = function (editingTarget) {
     return {
         type: UPDATE_EDITING_TARGET,
-        target: editingTarget
+        target: editingTarget,
+        meta: {
+            throttle: 30
+        }
     };
 };
 module.exports = reducer;

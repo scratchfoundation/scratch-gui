@@ -37,6 +37,12 @@ class TargetPane extends React.Component {
             backdropLibraryVisible,
             costumeLibraryVisible,
             spriteLibraryVisible,
+            onChangeSpriteDraggability,
+            onChangeSpriteName,
+            onChangeSpriteRotationStyle,
+            onChangeSpriteVisibility,
+            onChangeSpriteX,
+            onChangeSpriteY,
             onNewSpriteClick,
             onNewBackdropClick,
             onRequestCloseBackdropLibrary,
@@ -53,10 +59,16 @@ class TargetPane extends React.Component {
                 className={styles.targetPane}
                 {...componentProps}
             >
-               
+
                 <SpriteSelectorComponent
                     selectedId={editingTarget}
                     sprites={sprites}
+                    onChangeSpriteDraggability={onChangeSpriteDraggability}
+                    onChangeSpriteName={onChangeSpriteName}
+                    onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
+                    onChangeSpriteVisibility={onChangeSpriteVisibility}
+                    onChangeSpriteX={onChangeSpriteX}
+                    onChangeSpriteY={onChangeSpriteY}
                     onSelectSprite={onSelectSprite}
                 />
                 <Box className={styles.stageSelectorWrapper}>
@@ -118,15 +130,26 @@ const spriteShape = React.PropTypes.shape({
         rotationCenterX: React.PropTypes.number,
         rotationCenterY: React.PropTypes.number
     }),
+    draggable: React.PropTypes.bool,
     id: React.PropTypes.string,
     name: React.PropTypes.string,
-    order: React.PropTypes.number
+    order: React.PropTypes.number,
+    rotationStyle: React.PropTypes.string,
+    visibility: React.PropTypes.bool,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
 });
 
 TargetPane.propTypes = {
     backdropLibraryVisible: React.PropTypes.bool,
     costumeLibraryVisible: React.PropTypes.bool,
     editingTarget: React.PropTypes.string,
+    onChangeSpriteDraggability: React.PropTypes.func,
+    onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteRotationStyle: React.PropTypes.func,
+    onChangeSpriteVisibility: React.PropTypes.func,
+    onChangeSpriteX: React.PropTypes.func,
+    onChangeSpriteY: React.PropTypes.func,
     onNewBackdropClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
     onRequestCloseBackdropLibrary: React.PropTypes.func,

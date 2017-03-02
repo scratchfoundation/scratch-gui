@@ -1,7 +1,8 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {Provider} = require('react-redux');
-const {createStore} = require('redux');
+const {createStore, applyMiddleware} = require('redux');
+const throttle = require('redux-throttle').default;
 
 const GUI = require('./containers/gui.jsx');
 const log = require('./lib/log');
@@ -63,7 +64,9 @@ App.propTypes = {
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;
 document.body.appendChild(appTarget);
-const store = createStore(
+const store = applyMiddleware(
+    throttle(300, {leading: true, trailing: true})
+)(createStore)(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

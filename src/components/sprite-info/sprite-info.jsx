@@ -9,7 +9,7 @@ const yIcon = require('./icon--y.svg');
 const showIcon = require('./icon--show.svg');
 const hideIcon = require('./icon--hide.svg');
 const draggableIcon = require('./icon--draggable-on.svg');
-const notDraggableIcon = require('./icon--draggable-off.min.svg');
+const notDraggableIcon = require('./icon--draggable-off.svg');
 
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 

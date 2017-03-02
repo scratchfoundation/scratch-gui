@@ -9,6 +9,7 @@ const SpriteSelectorComponent = function (props) {
     const {
         onChangeSpriteDraggability,
         onChangeSpriteName,
+        onChangeSpriteRotationStyle,
         onChangeSpriteVisibility,
         onChangeSpriteX,
         onChangeSpriteY,
@@ -26,11 +27,13 @@ const SpriteSelectorComponent = function (props) {
             <SpriteInfo
                 draggable={selectedSprite.draggable}
                 name={selectedSprite.name}
+                rotationStyle={selectedSprite.rotationStyle}
                 visible={selectedSprite.visible}
                 x={selectedSprite.x}
                 y={selectedSprite.y}
                 onChangeDraggability={onChangeSpriteDraggability}
                 onChangeName={onChangeSpriteName}
+                onChangeRotationStyle={onChangeSpriteRotationStyle}
                 onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
                 onChangeY={onChangeSpriteY}
@@ -62,6 +65,7 @@ const SpriteSelectorComponent = function (props) {
 SpriteSelectorComponent.propTypes = {
     onChangeSpriteDraggability: React.PropTypes.func,
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteRotationStyle: React.PropTypes.func,
     onChangeSpriteVisibility: React.PropTypes.func,
     onChangeSpriteX: React.PropTypes.func,
     onChangeSpriteY: React.PropTypes.func,

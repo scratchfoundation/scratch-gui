@@ -39,6 +39,7 @@ class TargetPane extends React.Component {
             spriteLibraryVisible,
             onChangeSpriteDraggability,
             onChangeSpriteName,
+            onChangeSpriteRotationStyle,
             onChangeSpriteVisibility,
             onChangeSpriteX,
             onChangeSpriteY,
@@ -64,6 +65,7 @@ class TargetPane extends React.Component {
                     sprites={sprites}
                     onChangeSpriteDraggability={onChangeSpriteDraggability}
                     onChangeSpriteName={onChangeSpriteName}
+                    onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
                     onChangeSpriteVisibility={onChangeSpriteVisibility}
                     onChangeSpriteX={onChangeSpriteX}
                     onChangeSpriteY={onChangeSpriteY}
@@ -132,6 +134,7 @@ const spriteShape = React.PropTypes.shape({
     id: React.PropTypes.string,
     name: React.PropTypes.string,
     order: React.PropTypes.number,
+    rotationStyle: React.PropTypes.string,
     visibility: React.PropTypes.bool,
     x: React.PropTypes.number,
     y: React.PropTypes.number
@@ -143,6 +146,7 @@ TargetPane.propTypes = {
     editingTarget: React.PropTypes.string,
     onChangeSpriteDraggability: React.PropTypes.func,
     onChangeSpriteName: React.PropTypes.func,
+    onChangeSpriteRotationStyle: React.PropTypes.func,
     onChangeSpriteVisibility: React.PropTypes.func,
     onChangeSpriteX: React.PropTypes.func,
     onChangeSpriteY: React.PropTypes.func,

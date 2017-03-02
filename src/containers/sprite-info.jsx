@@ -8,6 +8,7 @@ class SpriteInfo extends React.Component {
         super(props);
         bindAll(this, [
             'handleChangeName',
+            'handleChangeRotationStyle',
             'handleChangeX',
             'handleChangeY',
             'handleClickVisible',
@@ -18,6 +19,9 @@ class SpriteInfo extends React.Component {
     }
     handleChangeName (e) {
         this.props.onChangeName(e.target.value);
+    }
+    handleChangeRotationStyle (e) {
+        this.props.onChangeRotationStyle(e.target.value);
     }
     handleChangeX (e) {
         let x = e.target.value;
@@ -50,14 +54,15 @@ class SpriteInfo extends React.Component {
     render () {
         return (
             <SpriteInfoComponent
+                {...this.props}
                 onChangeName={this.handleChangeName}
+                onChangeRotationStyle={this.handleChangeRotationStyle}
                 onChangeX={this.handleChangeX}
                 onChangeY={this.handleChangeY}
                 onClickDraggable={this.handleClickDraggable}
                 onClickNotDraggable={this.handleClickNotDraggable}
                 onClickVisible={this.handleClickVisible}
                 onClickNotVisible={this.handleClickNotVisible}
-                {...this.props}
             />
         );
     }
@@ -66,6 +71,7 @@ class SpriteInfo extends React.Component {
 SpriteInfo.propTypes = {
     onChangeDraggability: React.PropTypes.func,
     onChangeName: React.PropTypes.func,
+    onChangeRotationStyle: React.PropTypes.func,
     onChangeVisibility: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
     onChangeY: React.PropTypes.func,

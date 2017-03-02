@@ -11,6 +11,8 @@ const hideIcon = require('./icon--hide.svg');
 const draggableIcon = require('./icon--draggable.svg');
 const notDraggableIcon = require('./icon--not-draggable.svg');
 
+const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
+
 const SpriteInfo = props => (
     <Box
         className={styles.spriteInfo}
@@ -126,10 +128,17 @@ const SpriteInfo = props => (
                 </span>
                 <select
                     className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
+                    value={props.rotationStyle}
+                    onChange={props.onChangeRotationStyle}
                 >
-                    <option value="left-right">left-right</option>
-                    <option value="clockwise">don&#39;t rotate</option>
-                    <option value="anchored">all around</option>
+                    {ROTATION_STYLES.map(style => (
+                        <option
+                            key={style}
+                            value={style}
+                        >
+                            {style}
+                        </option>
+                    ))}
                 </select>
             </div>
         </div>
@@ -140,12 +149,14 @@ SpriteInfo.propTypes = {
     draggable: React.PropTypes.bool,
     name: React.PropTypes.string,
     onChangeName: React.PropTypes.func,
+    onChangeRotationStyle: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
     onChangeY: React.PropTypes.func,
     onClickDraggable: React.PropTypes.func,
     onClickNotDraggable: React.PropTypes.func,
     onClickNotVisible: React.PropTypes.func,
     onClickVisible: React.PropTypes.func,
+    rotationStyle: React.PropTypes.oneOf(ROTATION_STYLES),
     visible: React.PropTypes.bool,
     x: React.PropTypes.number,
     y: React.PropTypes.number

@@ -16,6 +16,7 @@ const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
         return (
+            this.props.disabled !== nextProps.disabled ||
             this.props.draggable !== nextProps.draggable ||
             this.props.name !== nextProps.name ||
             this.props.rotationStyle !== nextProps.rotationStyle ||
@@ -25,12 +26,6 @@ class SpriteInfo extends React.Component {
         );
     }
     render () {
-        const nameDisabled = typeof this.props.name === 'undefined';
-        const xDisabled = typeof this.props.x === 'undefined';
-        const yDisabled = typeof this.props.y === 'undefined';
-        const visibleDisabled = typeof this.props.visible === 'undefined';
-        const draggableDisabled = typeof this.props.draggable === 'undefined';
-        const rotationStyleDisabled = typeof this.props.rotationStyle === 'undefined';
         return (
             <Box
                 className={styles.spriteInfo}
@@ -40,10 +35,10 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabel}>Sprite</span>
                         <input
                             className={classNames(styles.inputForm, styles.inputFormSpriteName)}
-                            disabled={nameDisabled}
+                            disabled={this.props.disabled}
                             placeholder="Name"
                             type="text"
-                            value={nameDisabled ? '' : this.props.name}
+                            value={this.props.disabled ? '' : this.props.name}
                             onChange={this.props.onChangeName}
                         />
                     </div>
@@ -56,10 +51,10 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabel}>x</span>
                         <input
                             className={classNames(styles.inputForm, styles.inputFormX)}
-                            disabled={xDisabled}
+                            disabled={this.props.disabled}
                             placeholder="x"
                             type="text"
-                            value={xDisabled ? '' : this.props.x}
+                            value={this.props.disabled ? '' : this.props.x}
                             onChange={this.props.onChangeX}
                         />
                     </div>
@@ -72,10 +67,10 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabel}>y</span>
                         <input
                             className={classNames(styles.inputForm, styles.inputFormY)}
-                            disabled={yDisabled}
+                            disabled={this.props.disabled}
                             placeholder="y"
                             type="text"
-                            value={yDisabled ? '' : this.props.y}
+                            value={this.props.disabled ? '' : this.props.y}
                             onChange={this.props.onChangeY}
                         />
                     </div>
@@ -87,13 +82,13 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabelSmall}>
                             Show
                         </span>
-                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: visibleDisabled})}>
+                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
                             <img
                                 className={classNames(
                                     styles.icon,
                                     styles.showIcon,
                                     {
-                                        [styles.isActive]: this.props.visible && !visibleDisabled
+                                        [styles.isActive]: this.props.visible && !this.props.disabled
                                     }
                                 )}
                                 src={showIcon}
@@ -104,7 +99,7 @@ class SpriteInfo extends React.Component {
                                     styles.icon,
                                     styles.hideIcon,
                                     {
-                                        [styles.isActive]: !this.props.visible && !visibleDisabled
+                                        [styles.isActive]: !this.props.visible && !this.props.disabled
                                     }
                                 )}
                                 src={hideIcon}
@@ -117,13 +112,13 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabelSmall}>
                             Draggable
                         </span>
-                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: visibleDisabled})}>
+                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
                             <img
                                 className={classNames(
                                     styles.icon,
                                     styles.draggableIcon,
                                     {
-                                        [styles.isActive]: this.props.draggable && !draggableDisabled
+                                        [styles.isActive]: this.props.draggable && !this.props.disabled
                                     }
                                 )}
                                 src={draggableIcon}
@@ -134,7 +129,7 @@ class SpriteInfo extends React.Component {
                                     styles.icon,
                                     styles.notDraggableIcon,
                                     {
-                                        [styles.isActive]: !this.props.draggable && !draggableDisabled
+                                        [styles.isActive]: !this.props.draggable && !this.props.disabled
                                     }
                                 )}
                                 src={notDraggableIcon}
@@ -149,7 +144,7 @@ class SpriteInfo extends React.Component {
                         </span>
                         <select
                             className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
-                            disabled={rotationStyleDisabled}
+                            disabled={this.props.disabled}
                             value={this.props.rotationStyle}
                             onChange={this.props.onChangeRotationStyle}
                         >
@@ -170,6 +165,7 @@ class SpriteInfo extends React.Component {
 }
 
 SpriteInfo.propTypes = {
+    disabled: React.PropTypes.bool,
     draggable: React.PropTypes.bool,
     name: React.PropTypes.string,
     onChangeName: React.PropTypes.func,

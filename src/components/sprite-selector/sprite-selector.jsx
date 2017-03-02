@@ -18,13 +18,19 @@ const SpriteSelectorComponent = function (props) {
         sprites,
         ...componentProps
     } = props;
-    const selectedSprite = sprites[selectedId] || {};
+    let selectedSprite = sprites[selectedId];
+    let spriteInfoDisabled = false;
+    if (typeof selectedSprite === 'undefined') {
+        selectedSprite = {};
+        spriteInfoDisabled = true;
+    }
     return (
         <Box
             className={styles.spriteSelector}
             {...componentProps}
         >
             <SpriteInfo
+                disabled={spriteInfoDisabled}
                 draggable={selectedSprite.draggable}
                 name={selectedSprite.name}
                 rotationStyle={selectedSprite.rotationStyle}

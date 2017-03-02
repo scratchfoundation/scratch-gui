@@ -1,6 +1,6 @@
 @import "../../css/units.css";
 
-/* TODO: Refactor layout. Sloppy spacing, padding, width etc */
+/* @todo: Refactor layout. Sloppy spacing, padding, width etc */
 
 $form-border: #E9EEF2;
 $form-radius: calc($space / 2);
@@ -27,7 +27,7 @@ $form-radius: calc($space / 2);
 
 .group {
     display: inline-flex;
-    flex-direction: row; /* to make columns, for each label/form group */
+    flex-direction: row; /* makes columns, for each label/form group */
     align-items: center;
 }
 
@@ -69,7 +69,7 @@ $form-radius: calc($space / 2);
     font-weight: bold;
     margin-right: calc($space / 2);
 
-    /* TODO: make this a mixin for all UI text labels */
+    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
     cursor: default;
 }
@@ -78,7 +78,7 @@ $form-radius: calc($space / 2);
     font-size: 0.625rem;
     margin-right: calc($space / 2);
 
-    /* TODO: make this a mixin for all UI text labels */
+    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
     cursor: default;
 }
@@ -94,13 +94,13 @@ $form-radius: calc($space / 2);
     border-color: $form-border;
     border-radius: 2rem;
     cursor: text;
-    transition: 0.25s ease-out; /* TODO: standardize with var */
+    transition: 0.25s ease-out; /* @todo: standardize with var */
     box-shadow: none;
 
     /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
-        TODO: move this out into a mixin or a helper component
+        @todo: move this out into a mixin or a helper component
     */
     overflow: hidden;
     text-overflow: ellipsis;

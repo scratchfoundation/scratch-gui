@@ -13,137 +13,149 @@ const notDraggableIcon = require('./icon--not-draggable.svg');
 
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 
-const SpriteInfo = props => (
-    <Box
-        className={styles.spriteInfo}
-    >
-        <div className={styles.row}>
-            <div className={styles.group}>
-                <span className={styles.inputLabel}>Sprite</span>
-                <input
-                    className={classNames(styles.inputForm, styles.inputFormSpriteName)}
-                    placeholder="Name"
-                    type="text"
-                    value={props.name}
-                    onChange={props.onChangeName}
-                />
-            </div>
-
-            <div className={styles.group}>
-                <img
-                    className={classNames(styles.xIcon, styles.icon)}
-                    src={xIcon}
-                />
-                <span className={styles.inputLabel}>x</span>
-                <input
-                    className={classNames(styles.inputForm, styles.inputFormX)}
-                    placeholder="x"
-                    type="text"
-                    value={typeof props.x === 'undefined' ? '' : props.x}
-                    onChange={props.onChangeX}
-                />
-            </div>
-
-            <div className={styles.group}>
-                <img
-                    className={classNames(styles.yIcon, styles.icon)}
-                    src={yIcon}
-                />
-                <span className={styles.inputLabel}>y</span>
-                <input
-                    className={classNames(styles.inputForm, styles.inputFormY)}
-                    placeholder="y"
-                    type="text"
-                    value={typeof props.y === 'undefined' ? '' : props.y}
-                    onChange={props.onChangeY}
-                />
-            </div>
-        </div>
-
-
-        <div className={styles.row}>
-            <div className={styles.group}>
-                <span className={styles.inputLabelSmall}>
-                    Show
-                </span>
-                <div className={styles.radioBox}>
-                    <img
-                        className={classNames(
-                            styles.icon,
-                            styles.showIcon,
-                            {
-                                [styles.isActive]: props.visible
-                            }
-                        )}
-                        src={showIcon}
-                        onClick={props.onClickVisible}
+const SpriteInfo = props => {
+    const nameDisabled = typeof props.name === 'undefined';
+    const xDisabled = typeof props.x === 'undefined';
+    const yDisabled = typeof props.y === 'undefined';
+    const visibleDisabled = typeof props.visible === 'undefined';
+    const draggableDisabled = typeof props.draggable === 'undefined';
+    const rotationStyleDisabled = typeof props.rotationStyle === 'undefined';
+    return (
+        <Box
+            className={styles.spriteInfo}
+        >
+            <div className={styles.row}>
+                <div className={styles.group}>
+                    <span className={styles.inputLabel}>Sprite</span>
+                    <input
+                        className={classNames(styles.inputForm, styles.inputFormSpriteName)}
+                        disabled={nameDisabled}
+                        placeholder="Name"
+                        type="text"
+                        value={nameDisabled ? '' : props.name}
+                        onChange={props.onChangeName}
                     />
+                </div>
+
+                <div className={styles.group}>
                     <img
-                        className={classNames(
-                            styles.icon,
-                            styles.hideIcon,
-                            {
-                                [styles.isActive]: !props.visible
-                            }
-                        )}
-                        src={hideIcon}
-                        onClick={props.onClickNotVisible}
+                        className={classNames(styles.xIcon, styles.icon)}
+                        src={xIcon}
+                    />
+                    <span className={styles.inputLabel}>x</span>
+                    <input
+                        className={classNames(styles.inputForm, styles.inputFormX)}
+                        disabled={xDisabled}
+                        placeholder="x"
+                        type="text"
+                        value={xDisabled ? '' : props.x}
+                        onChange={props.onChangeX}
+                    />
+                </div>
+
+                <div className={styles.group}>
+                    <img
+                        className={classNames(styles.yIcon, styles.icon)}
+                        src={yIcon}
+                    />
+                    <span className={styles.inputLabel}>y</span>
+                    <input
+                        className={classNames(styles.inputForm, styles.inputFormY)}
+                        disabled={yDisabled}
+                        placeholder="y"
+                        type="text"
+                        value={yDisabled ? '' : props.y}
+                        onChange={props.onChangeY}
                     />
                 </div>
             </div>
 
-            <div className={styles.group}>
-                <span className={styles.inputLabelSmall}>
-                    Draggable
-                </span>
-                <div className={styles.radioBox}>
-                    <img
-                        className={classNames(
-                            styles.icon,
-                            styles.draggableIcon,
-                            {
-                                [styles.isActive]: props.draggable
-                            }
-                        )}
-                        src={draggableIcon}
-                        onClick={props.onClickDraggable}
-                    />
-                    <img
-                        className={classNames(
-                            styles.icon,
-                            styles.notDraggableIcon,
-                            {
-                                [styles.isActive]: !props.draggable
-                            }
-                        )}
-                        src={notDraggableIcon}
-                        onClick={props.onClickNotDraggable}
-                    />
+
+            <div className={styles.row}>
+                <div className={styles.group}>
+                    <span className={styles.inputLabelSmall}>
+                        Show
+                    </span>
+                    <div className={classNames(styles.radioBox, {[styles.isDisabled]: visibleDisabled})}>
+                        <img
+                            className={classNames(
+                                styles.icon,
+                                styles.showIcon,
+                                {
+                                    [styles.isActive]: props.visible && !visibleDisabled
+                                }
+                            )}
+                            src={showIcon}
+                            onClick={props.onClickVisible}
+                        />
+                        <img
+                            className={classNames(
+                                styles.icon,
+                                styles.hideIcon,
+                                {
+                                    [styles.isActive]: !props.visible && !visibleDisabled
+                                }
+                            )}
+                            src={hideIcon}
+                            onClick={props.onClickNotVisible}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.group}>
+                    <span className={styles.inputLabelSmall}>
+                        Draggable
+                    </span>
+                    <div className={classNames(styles.radioBox, {[styles.isDisabled]: visibleDisabled})}>
+                        <img
+                            className={classNames(
+                                styles.icon,
+                                styles.draggableIcon,
+                                {
+                                    [styles.isActive]: props.draggable && !draggableDisabled
+                                }
+                            )}
+                            src={draggableIcon}
+                            onClick={props.onClickDraggable}
+                        />
+                        <img
+                            className={classNames(
+                                styles.icon,
+                                styles.notDraggableIcon,
+                                {
+                                    [styles.isActive]: !props.draggable && !draggableDisabled
+                                }
+                            )}
+                            src={notDraggableIcon}
+                            onClick={props.onClickNotDraggable}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.group}>
+                    <span className={styles.inputLabelSmall}>
+                        Rotation
+                    </span>
+                    <select
+                        className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
+                        disabled={rotationStyleDisabled}
+                        value={props.rotationStyle}
+                        onChange={props.onChangeRotationStyle}
+                    >
+                        {ROTATION_STYLES.map(style => (
+                            <option
+                                key={style}
+                                value={style}
+                            >
+                                {style}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
-
-            <div className={styles.group}>
-                <span className={styles.inputLabelSmall}>
-                    Rotation
-                </span>
-                <select
-                    className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
-                    value={props.rotationStyle}
-                    onChange={props.onChangeRotationStyle}
-                >
-                    {ROTATION_STYLES.map(style => (
-                        <option
-                            key={style}
-                            value={style}
-                        >
-                            {style}
-                        </option>
-                    ))}
-                </select>
-            </div>
-        </div>
-    </Box>
-);
+        </Box>
+    );
+};
 
 SpriteInfo.propTypes = {
     draggable: React.PropTypes.bool,
@@ -160,10 +172,6 @@ SpriteInfo.propTypes = {
     visible: React.PropTypes.bool,
     x: React.PropTypes.number,
     y: React.PropTypes.number
-};
-
-SpriteInfo.defaultProps = {
-    name: ''
 };
 
 module.exports = SpriteInfo;

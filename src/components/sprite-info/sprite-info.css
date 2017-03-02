@@ -122,3 +122,7 @@
     cursor: pointer;
     transition: 0.25s ease-out; /* TODO: standardize with var */
 }
+
+.radio-box.is-disabled {
+    cursor: default;
+}

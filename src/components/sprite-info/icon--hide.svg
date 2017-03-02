@@ -1,1 +1,13 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 11"><defs><style>.cls-1{fill:none;stroke:#575e75;stroke-linecap:round;stroke-linejoin:round;}</style></defs><title>icon--hide</title><path class="cls-1" d="M13.5,5.5s-2.91,4-6.5,4S.5,5.5.5,5.5s2.91-4,6.5-4S13.5,5.5,13.5,5.5Z"/><circle class="cls-1" cx="7" cy="5.5" r="2"/><line class="cls-1" x1="2" y1="10.5" x2="12" y2="0.5"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#575E75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st0" d="M14.5,8c0,0-2.9,4-6.5,4S1.5,8,1.5,8S4.4,4,8,4S14.5,8,14.5,8z"/>
+	<circle class="st0" cx="8" cy="8" r="2"/>
+	<line class="st0" x1="3" y1="13" x2="13" y2="3"/>
+</g>
+</svg>

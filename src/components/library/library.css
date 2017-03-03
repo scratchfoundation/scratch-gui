@@ -5,6 +5,12 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     height: calc(100% - 6rem); /* @todo: fix hackiness */
+
+    /* 
+        Gives sprites a bit of room so they don't get cut off when they grow on hover
+        @todo: this can be synced with the transform value as a var
+    */
+    padding: 0.15rem; 
 }
 
 .modal-header {

@@ -1,3 +1,6 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -14,13 +17,12 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';
     border: 1px solid #ccc;
-    border-radius: 6px;
     padding: 0;
     top: 5%;
     right: 5%;
     bottom: 5%;
     left: 5%;
-    background: #fcfcfc;
+    border-radius: $space;
 }
 
 .modal-children {
@@ -28,6 +30,7 @@
     height: 100%;
     z-index: 0;
     padding: 2rem;
+    background: $ui-pane-gray;
 }
 
 .modal-close-button {
@@ -37,13 +40,13 @@
     align-items: center;
     justify-content: center;
 
-    top: 2rem;
-    right: 2rem;
+    top: 1rem;
+    right: 1rem;
     width: 2.75rem !important;
     height: 2.75rem !important;
 
     color: gray;
-    background-color: #cbcbcb;
+    background-color: $blue;
 
     border-radius: 50% !important;
     border: 2px solid #dbdbdb;

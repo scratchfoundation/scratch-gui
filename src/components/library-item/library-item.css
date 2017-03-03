@@ -18,7 +18,6 @@
     border-radius: $space;
     text-align: center;
     cursor: pointer;
-    z-index: 1;
 }
 
 .library-item:hover {

@@ -38,6 +38,7 @@ $form-radius: calc($space / 2);
     height: 1.25rem;
     padding: calc($space / 2);
     cursor: pointer;
+    outline: none;
 }
 
 .icon {
@@ -45,16 +46,22 @@ $form-radius: calc($space / 2);
     height: 100%;
 }
 
-.radio-box .icon { opacity: 0.4; }
-.radio-box .icon.is-active { opacity: 1; }
+.show-icon,
+.hide-icon,
+.draggable-icon,
+.not-draggable-icon {
+    opacity: 0.4;
+}
 
-.radio-box .icon-wrapper:nth-of-type(1) {
+.icon.is-active { opacity: 1; }
+
+.left-radio {
     border: 1px solid $form-border;
     border-top-left-radius: $form-radius;
     border-bottom-left-radius: $form-radius;
 }
 
-.radio-box .icon-wrapper:nth-of-type(2) {
+.right-radio {
     border-bottom: 1px solid $form-border;
     border-top: 1px solid $form-border;
     border-right: 1px solid $form-border;
@@ -85,7 +92,7 @@ $form-radius: calc($space / 2);
 
 .input-form {
     outline: none;
-    padding: $space;
+    padding: $space 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.625rem;
     font-weight: bold;

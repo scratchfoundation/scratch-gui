@@ -39,6 +39,10 @@ $form-radius: calc($space / 2);
     padding: calc($space / 2);
     cursor: pointer;
     outline: none;
+
+    /* @todo: make this a mixin for all UI text labels */
+    user-select: none;
+    cursor: default;
 }
 
 .icon {
@@ -46,17 +50,17 @@ $form-radius: calc($space / 2);
     height: 100%;
 }
 
-.radio-icon {
+.icon.is-active { opacity: 1; }
+
+.radio-icon { 
     opacity: 0.4;
 }
-
-
-.icon.is-active { opacity: 1; }
 
 .left-radio {
     border: 1px solid $form-border;
     border-top-left-radius: $form-radius;
     border-bottom-left-radius: $form-radius;
+    cursor: pointer;
 }
 
 .right-radio {
@@ -65,9 +69,10 @@ $form-radius: calc($space / 2);
     border-right: 1px solid $form-border;
     border-top-right-radius: $form-radius;
     border-bottom-right-radius: $form-radius;
+    cursor: pointer;
 }
 
-.radio-box.is-disabled { cursor: default; }
+.radio-button.is-disabled { cursor: default; }
 
 .input-label {
     font-size: 0.625rem;
@@ -130,6 +135,3 @@ $form-radius: calc($space / 2);
 
 .input-form--sprite-name        { width: 100%; }
 
-.input-radio {
-
-}

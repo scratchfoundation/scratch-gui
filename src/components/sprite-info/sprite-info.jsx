@@ -88,7 +88,7 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabelSmall}>
                             Show
                         </span>
-                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
+                        <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
                             <div
                                 className={classNames(styles.iconWrapper, styles.leftRadio)}
                                 tabIndex="4"
@@ -128,7 +128,7 @@ class SpriteInfo extends React.Component {
                         <span className={styles.inputLabelSmall}>
                             Draggable
                         </span>
-                        <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
+                        <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
                             <div
                                 className={classNames(styles.iconWrapper, styles.leftRadio)}
                                 tabIndex="5"

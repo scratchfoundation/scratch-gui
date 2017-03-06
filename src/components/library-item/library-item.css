@@ -7,26 +7,29 @@
     justify-content: center;
     flex-basis: 160px;
     height: 160px;
+    margin: calc($space / 2);
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #575e75;
-    border-radius: $space;
-    border-color: transparent;
-    border-width: 1px;
+    background: white;
+    border-width: 2px;
     border-style: solid;
+    border-color: #e9eef2;
+    border-radius: $space;
+    text-align: center;
     cursor: pointer;
-    transition: all 1s ease-out;  /* slower fade out */ 
 }
 
 .library-item:hover {
-    border-color: #e1e1e1;
-    transition: 0.25s ease-out;
-    background: #f0f0f0;
+    border-width: 2px;
+    border-color: #1dacf4;
+    transition: 0.1s ease-out;
+    transform: scale(1.02, 1.02);
 }
 
 .library-item.is-selected {
+    border-width: 2px;
     border-color: #1dacf4;
-    background: #f0f0f0;
     transition: 0.25s ease-out;
 }
 

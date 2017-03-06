@@ -83,22 +83,20 @@ class SpriteInfo extends React.Component {
                     </div>
                 </div>
 
-
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
                         <span className={styles.inputLabelSmall}>
                             Show
                         </span>
                         <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
-                            <a
+                            <div
                                 className={classNames(styles.iconWrapper, styles.leftRadio)}
-                                href="#"
                                 tabIndex="4"
                             >
                                 <img
                                     className={classNames(
                                         styles.icon,
-                                        styles.showIcon,
+                                        styles.radioIcon,
                                         {
                                             [styles.isActive]: this.props.visible && !this.props.disabled
                                         }
@@ -106,16 +104,15 @@ class SpriteInfo extends React.Component {
                                     src={showIcon}
                                     onClick={this.props.onClickVisible}
                                 />
-                            </a>
-                            <a
+                            </div>
+                            <div
                                 className={classNames(styles.iconWrapper, styles.rightRadio)}
-                                href="#"
                                 tabIndex="4"
                             >
                                 <img
                                     className={classNames(
                                         styles.icon,
-                                        styles.hideIcon,
+                                        styles.radioIcon,
                                         {
                                             [styles.isActive]: !this.props.visible && !this.props.disabled
                                         }
@@ -123,7 +120,7 @@ class SpriteInfo extends React.Component {
                                     src={hideIcon}
                                     onClick={this.props.onClickNotVisible}
                                 />
-                            </a>
+                            </div>
                         </div>
                     </div>
 
@@ -132,15 +129,14 @@ class SpriteInfo extends React.Component {
                             Draggable
                         </span>
                         <div className={classNames(styles.radioBox, {[styles.isDisabled]: this.props.disabled})}>
-                            <a
+                            <div
                                 className={classNames(styles.iconWrapper, styles.leftRadio)}
-                                href="#"
                                 tabIndex="5"
                             >
                                 <img
                                     className={classNames(
                                         styles.icon,
-                                        styles.draggableIcon,
+                                        styles.radioIcon,
                                         {
                                             [styles.isActive]: this.props.draggable && !this.props.disabled
                                         }
@@ -148,16 +144,15 @@ class SpriteInfo extends React.Component {
                                     src={draggableIcon}
                                     onClick={this.props.onClickDraggable}
                                 />
-                            </a>
-                            <a
+                            </div>
+                            <div
                                 className={classNames(styles.iconWrapper, styles.rightRadio)}
-                                href="#"
                                 tabIndex="6"
                             >
                                 <img
                                     className={classNames(
                                         styles.icon,
-                                        styles.notDraggableIcon,
+                                        styles.radioIcon,
                                         {
                                             [styles.isActive]: !this.props.draggable && !this.props.disabled
                                         }
@@ -165,7 +160,7 @@ class SpriteInfo extends React.Component {
                                     src={notDraggableIcon}
                                     onClick={this.props.onClickNotDraggable}
                                 />
-                            </a>
+                            </div>
                         </div>
                     </div>
 

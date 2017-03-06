@@ -1,6 +1,6 @@
-@import "../../css/units.css";
+/* @todo: Refactor: make better classnames */
 
-/* @todo: Refactor layout. Sloppy spacing, padding, width etc */
+@import "../../css/units.css";
 
 $form-border: #E9EEF2;
 $form-radius: calc($space / 2);
@@ -46,12 +46,10 @@ $form-radius: calc($space / 2);
     height: 100%;
 }
 
-.show-icon,
-.hide-icon,
-.draggable-icon,
-.not-draggable-icon {
+.radio-icon {
     opacity: 0.4;
 }
+
 
 .icon.is-active { opacity: 1; }
 
@@ -131,3 +129,7 @@ $form-radius: calc($space / 2);
 }
 
 .input-form--sprite-name        { width: 100%; }
+
+.input-radio {
+
+}

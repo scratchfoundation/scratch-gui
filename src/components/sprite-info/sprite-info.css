@@ -1,6 +1,6 @@
 @import "../../css/units.css";
 
-/* TODO: Refactor layout. Sloppy spacing, padding, width etc */
+/* @todo: Refactor layout. Sloppy spacing, padding, width etc */
 
 .sprite-info {
     height: sprite-info-height;
@@ -35,7 +35,7 @@
     padding: 0 0.25rem;
 }
 
-/* TODO: refactor from descendant selector, to a regular class */
+/* @todo: refactor from descendant selector, to a regular class */
 .group img {
     display: inline-block;
     width: 1rem;
@@ -64,7 +64,7 @@
     font-weight: bold;
     margin: 0 0.3rem;
 
-    /* TODO: make this a mixin for all UI text labels */
+    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
     cursor: default;
 }
@@ -73,7 +73,7 @@
     font-size: 0.625rem;
     margin: 0 0.2rem;
 
-    /* TODO: make this a mixin for all UI text labels */
+    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
     cursor: default;
 }
@@ -89,13 +89,13 @@
     border-color: #e9eef2;
     border-radius: 2rem;
     cursor: text;
-    transition: 0.25s ease-out; /* TODO: standardize with var */
+    transition: 0.25s ease-out; /* @todo: standardize with var */
     box-shadow: none;
 
     /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
-        TODO: move this out into a mixin or a helper component
+        @todo: move this out into a mixin or a helper component
     */
     overflow: hidden;
     text-overflow: ellipsis;
@@ -120,7 +120,7 @@
     border: 1px solid #e9eef2;
     border-radius: 0.25rem;
     cursor: pointer;
-    transition: 0.25s ease-out; /* TODO: standardize with var */
+    transition: 0.25s ease-out; /* @todo: standardize with var */
 }
 
 .radio-box.is-disabled {

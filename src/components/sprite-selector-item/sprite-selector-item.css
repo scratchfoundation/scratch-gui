@@ -1,6 +1,6 @@
 @import "../../css/units.css";
 
-/* TODO: refactor this class name, and component: `sprite-selector` to `sprite` */
+/* @todo: refactor this class name, and component: `sprite-selector` to `sprite` */
 .sprite-selector-item {
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     transition: 0.25s ease-out;
 }
 
-/* TODO: refactor out descendent selectors into regular classes */
+/* @todo: refactor out descendent selectors into regular classes */
 .sprite-selector-item.is-selected {
     border-width: 2px;
     border-color: #1dacf4;

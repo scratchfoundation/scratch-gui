@@ -1,6 +1,6 @@
 @import "../../css/units.css";
 
-$header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
+$header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
 
 .stage-selector {
     position: relative; /* for the child element border */
@@ -37,7 +37,7 @@ $header-height: 2.5rem; /* TODO: half the Sprite Info area header? */
     font-weight: bold;
     color: #575e75;
 
-    /* TODO: make this a mixin for all UI text labels */
+    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
     cursor: default;
 }

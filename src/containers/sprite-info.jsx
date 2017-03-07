@@ -25,7 +25,10 @@ class SpriteInfo extends React.Component {
         };
     }
     handleKeyPress (e) {
-        if (e.key === 'Enter') this.handleFlush();
+        if (e.key === 'Enter') {
+            this.handleFlush();
+            e.target.blur();
+        }
     }
     handleFlush () {
         if (this.state.name !== null) {

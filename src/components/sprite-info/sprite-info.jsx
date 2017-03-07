@@ -188,8 +188,8 @@ SpriteInfo.propTypes = {
     onKeyPress: React.PropTypes.func,
     rotationStyle: React.PropTypes.oneOf(ROTATION_STYLES),
     visible: React.PropTypes.bool,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    x: React.PropTypes.string,
+    y: React.PropTypes.string
 };
 
 module.exports = SpriteInfo;

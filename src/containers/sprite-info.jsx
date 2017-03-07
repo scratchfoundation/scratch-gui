@@ -108,7 +108,9 @@ SpriteInfo.propTypes = {
     onChangeRotationStyle: React.PropTypes.func,
     onChangeVisibility: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
-    onChangeY: React.PropTypes.func
+    onChangeY: React.PropTypes.func,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
 };
 
 module.exports = SpriteInfo;

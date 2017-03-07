@@ -2,7 +2,6 @@
     width: 1.1rem;
     height: 1.1rem;
     opacity: 0.5;
-    user-drag: none; 
     user-select: none;
     cursor: pointer;
     transition: opacity 0.2s ease-out; /* TODO: standardize with var */ 

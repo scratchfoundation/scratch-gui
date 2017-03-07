@@ -9,6 +9,6 @@
     
     border-radius: $space; 
 
-    /* TODO: This is for overriding the value being set somewhere. Where is it being set? */
+    /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent; 
 }

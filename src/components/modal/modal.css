@@ -53,7 +53,7 @@
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     cursor: pointer;
-    transition: all 0.15s ease-out; /* standardize with var */ 
+    transition: all 0.15s ease-out; /* @todo: standardize with var */ 
 }
 
 .modal-close-button:hover {
@@ -61,7 +61,7 @@
 }
 
 /*  Same icon as Sprite Selector Add button, but rotated.
-    TODO: reuse? 
+    @todo: reuse? 
 */
 .close-icon {
     transform-origin: 50%;

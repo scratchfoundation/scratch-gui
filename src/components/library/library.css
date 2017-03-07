@@ -4,11 +4,11 @@
     justify-content: space-between;
     flex-wrap: wrap;
     overflow-y: scroll;
-    height: calc(100% - 6rem); /* @todo: fix hackiness */
+    height: calc(100% - 6rem); /* @todo: currently estimate, fix precision */
 
     /* 
         Gives sprites a bit of room so they don't get cut off when they grow on hover
-        @todo: this can be synced with the transform value as a var
+        @todo: sync as a var, with the transform defined on .library-item:hover
     */
     padding: 0.15rem; 
 }

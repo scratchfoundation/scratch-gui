@@ -7,5 +7,5 @@ body,
     margin: 0;
 }
 
-/* TODO: move globally? Safe / side FX, for blocks particularly? */
+/* @todo: move globally? Safe / side FX, for blocks particularly? */
 * { box-sizing: border-box; }

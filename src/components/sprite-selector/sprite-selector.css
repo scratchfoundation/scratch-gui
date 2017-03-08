@@ -14,7 +14,7 @@
     border-bottom: 0;
 }
 
-/* n prep for renaming sprite-selector-item to sprite */
+/* In prep for renaming sprite-selector-item to sprite */
 .sprite {
     /* 
         Our goal is to fit sprites evenly in a row without leftover space.
@@ -26,12 +26,12 @@
         border-width all are included in the width, leaving us only to subtract 
         the left + right margins.
 
-        TODO: make room for the scrollbar
+        @todo: make room for the scrollbar
     */
     box-sizing: border-box;
     width: calc((100% / $sprites-per-row ) - $space);
 
-    min-height: 4rem; /* TODO: calc height same as width */
+    min-height: 4rem; /* @todo: calc height same as width */
     margin: calc($space / 2); 
 }
 
@@ -40,8 +40,8 @@
     /*
        Sets the sprite-selector items as a scrollable pane
 
-        TODO: Safari: pane doesn't stretch to fill height;
-        TODO: Adding `position: relative` still doesn't fix Safari scrolling pane, and 
+        @todo: Safari: pane doesn't stretch to fill height;
+        @todo: Adding `position: relative` still doesn't fix Safari scrolling pane, and 
               also introduces a new bug in Chrome when vertically resizing window down, 
               then back up, introduces white space in the outside the page container. 
     */

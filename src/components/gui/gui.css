@@ -69,7 +69,7 @@
 .target-wrapper {
     /*  Take all the available vertical space available.
         Works in tandem with height: 100%; which is set on the child: .targetPane
-        TODO: Not working in Safari, not great in FFx
+        @todo: Not working in Safari, not great in FFx
     */
     flex-grow: 1;
     flex-basis: 0;
@@ -80,7 +80,7 @@
 
     /*
         For making the sprite-selector a scrollable pane
-        TODO: Not working in Safari
+        @todo: Not working in Safari
     */
     overflow: hidden;
 }

@@ -40,7 +40,9 @@ class SpriteInfo extends React.Component {
                             tabIndex="1"
                             type="text"
                             value={this.props.disabled ? '' : this.props.name}
+                            onBlur={this.props.onBlurName}
                             onChange={this.props.onChangeName}
+                            onKeyPress={this.props.onKeyPress}
                         />
                     </div>
 
@@ -59,7 +61,9 @@ class SpriteInfo extends React.Component {
                             tabIndex="2"
                             type="text"
                             value={this.props.disabled ? '' : this.props.x}
+                            onBlur={this.props.onBlurX}
                             onChange={this.props.onChangeX}
+                            onKeyPress={this.props.onKeyPress}
                         />
                     </div>
 
@@ -78,7 +82,9 @@ class SpriteInfo extends React.Component {
                             tabIndex="3"
                             type="text"
                             value={this.props.disabled ? '' : this.props.y}
+                            onBlur={this.props.onBlurY}
                             onChange={this.props.onChangeY}
+                            onKeyPress={this.props.onKeyPress}
                         />
                     </div>
                 </div>
@@ -194,6 +200,9 @@ SpriteInfo.propTypes = {
     disabled: React.PropTypes.bool,
     draggable: React.PropTypes.bool,
     name: React.PropTypes.string,
+    onBlurName: React.PropTypes.func,
+    onBlurX: React.PropTypes.func,
+    onBlurY: React.PropTypes.func,
     onChangeName: React.PropTypes.func,
     onChangeRotationStyle: React.PropTypes.func,
     onChangeX: React.PropTypes.func,
@@ -202,10 +211,11 @@ SpriteInfo.propTypes = {
     onClickNotDraggable: React.PropTypes.func,
     onClickNotVisible: React.PropTypes.func,
     onClickVisible: React.PropTypes.func,
+    onKeyPress: React.PropTypes.func,
     rotationStyle: React.PropTypes.oneOf(ROTATION_STYLES),
     visible: React.PropTypes.bool,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    x: React.PropTypes.string,
+    y: React.PropTypes.string
 };
 
 module.exports = SpriteInfo;

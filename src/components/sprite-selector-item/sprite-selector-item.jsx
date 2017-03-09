@@ -17,6 +17,13 @@ const SpriteSelectorItem = props => (
         )}
         onClick={props.onClick}
     >
+        {props.selected ? (
+            <CloseButton
+                className={styles.deleteButton}
+                size={CloseButton.SIZE_SMALL}
+                onClick={props.onDeleteButtonClick}
+            />
+        ) : null }
         {props.costumeURL ? (
             <CostumeCanvas
                 className={styles.spriteImage}
@@ -26,11 +33,6 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
-        <CloseButton
-            className={styles.deleteButton}
-            size={CloseButton.SIZE_SMALL}
-            onClick={props.onDeleteButtonClick}
-        />
     </Box>
 );
 

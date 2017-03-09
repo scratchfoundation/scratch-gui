@@ -25,8 +25,6 @@ class Blocks extends React.Component {
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
-        const filteredToolbox = this.props.vm.filterToolbox(this.workspace.options.languageTree);
-        this.workspace.updateToolbox(filteredToolbox);
         this.attachVM();
     }
     componentWillUnmount () {

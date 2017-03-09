@@ -25,6 +25,12 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
+        <div
+            className={styles.spriteDeleteButton}
+            onClick={props.onDeleteButtonClick}
+        >
+            𝘅
+        </div>
     </Box>
 );
 
@@ -33,6 +39,7 @@ SpriteSelectorItem.propTypes = {
     costumeURL: React.PropTypes.string,
     name: React.PropTypes.string,
     onClick: React.PropTypes.func,
+    onDeleteButtonClick: React.PropTypes.func,
     selected: React.PropTypes.bool
 };
 

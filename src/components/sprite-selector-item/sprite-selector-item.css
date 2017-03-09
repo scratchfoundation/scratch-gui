@@ -49,3 +49,8 @@
     white-space: nowrap;
     min-width: 0;
 }
+
+.sprite-delete-button {
+    background: red;
+    color: white;
+}

@@ -14897,7 +14897,7 @@
     },
     {
         "name": "A-Story",
-        "md5": "5406b37278d819d4787a588b9c91f68e.svg",
+        "md5": "a541431ea1b67b2100b2ef59927df0d7.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15029,7 +15029,7 @@
                 {
                     "costumeName": "A-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5406b37278d819d4787a588b9c91f68e.svg",
+                    "baseLayerMD5": "a541431ea1b67b2100b2ef59927df0d7.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 23,
                     "rotationCenterY": 26
@@ -15065,7 +15065,7 @@
     },
     {
         "name": "B-Story",
-        "md5": "2a8fac3c82d95f13203843a597b5757b.svg",
+        "md5": "3f3b274d161bae432bd5966a33114fd0.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15197,7 +15197,7 @@
                 {
                     "costumeName": "B-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "2a8fac3c82d95f13203843a597b5757b.svg",
+                    "baseLayerMD5": "3f3b274d161bae432bd5966a33114fd0.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 20,
                     "rotationCenterY": 25
@@ -15233,7 +15233,7 @@
     },
     {
         "name": "C-Story",
-        "md5": "144845715016910e88e2a223ed4d3df1.svg",
+        "md5": "786383a7baf7ff58bdcbd55d8a7395a1.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15365,7 +15365,7 @@
                 {
                     "costumeName": "C-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "144845715016910e88e2a223ed4d3df1.svg",
+                    "baseLayerMD5": "786383a7baf7ff58bdcbd55d8a7395a1.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 26
@@ -15401,7 +15401,7 @@
     },
     {
         "name": "D-Story",
-        "md5": "dfd362f2da975c20aa7849a8fa2fb4df.svg",
+        "md5": "ec60df3b4dfde735f72d3a641b737800.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15533,7 +15533,7 @@
                 {
                     "costumeName": "D-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "dfd362f2da975c20aa7849a8fa2fb4df.svg",
+                    "baseLayerMD5": "ec60df3b4dfde735f72d3a641b737800.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 25,
                     "rotationCenterY": 26
@@ -15569,7 +15569,7 @@
     },
     {
         "name": "E-Story",
-        "md5": "56473bacbdf6f0dbca1afb04e5aebaf7.svg",
+        "md5": "c227b91edab98c183bb0700acf00764f.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15701,7 +15701,7 @@
                 {
                     "costumeName": "E-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "56473bacbdf6f0dbca1afb04e5aebaf7.svg",
+                    "baseLayerMD5": "c227b91edab98c183bb0700acf00764f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 20,
                     "rotationCenterY": 25
@@ -15737,7 +15737,7 @@
     },
     {
         "name": "F-Story",
-        "md5": "5844ff29fc8663c8613f12169d2f07ef.svg",
+        "md5": "0ffc2ff1c96a596a72552c85c9a5be1a.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -15869,7 +15869,7 @@
                 {
                     "costumeName": "F-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5844ff29fc8663c8613f12169d2f07ef.svg",
+                    "baseLayerMD5": "0ffc2ff1c96a596a72552c85c9a5be1a.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 18,
                     "rotationCenterY": 26
@@ -15905,7 +15905,7 @@
     },
     {
         "name": "G-Story",
-        "md5": "ee6454d15fbbe93e908a2ebbfad483a0.svg",
+        "md5": "d39a8a56ea511a40d3b98300dbd19f9b.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16037,7 +16037,7 @@
                 {
                     "costumeName": "G-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "ee6454d15fbbe93e908a2ebbfad483a0.svg",
+                    "baseLayerMD5": "d39a8a56ea511a40d3b98300dbd19f9b.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 23,
                     "rotationCenterY": 25
@@ -16073,7 +16073,7 @@
     },
     {
         "name": "H-Story",
-        "md5": "2a0e1308d6cb806818af696a89b21863.svg",
+        "md5": "28461ea7b94a55ce4ecf54241a0b7523.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16205,7 +16205,7 @@
                 {
                     "costumeName": "H-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "2a0e1308d6cb806818af696a89b21863.svg",
+                    "baseLayerMD5": "28461ea7b94a55ce4ecf54241a0b7523.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 24,
                     "rotationCenterY": 25
@@ -16241,7 +16241,7 @@
     },
     {
         "name": "I-Story",
-        "md5": "705297637ea83af5b94b6fe2e34aeef4.svg",
+        "md5": "cdf36c8bd803819996a392089b040c3d.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16373,7 +16373,7 @@
                 {
                     "costumeName": "I-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "705297637ea83af5b94b6fe2e34aeef4.svg",
+                    "baseLayerMD5": "cdf36c8bd803819996a392089b040c3d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 9,
                     "rotationCenterY": 26
@@ -16409,7 +16409,7 @@
     },
     {
         "name": "J-Story",
-        "md5": "ac2e7eaecb80c5501e5e56802d03af00.svg",
+        "md5": "6a10a69d1ce075a24abc8073bb402ab6.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16541,7 +16541,7 @@
                 {
                     "costumeName": "J-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "ac2e7eaecb80c5501e5e56802d03af00.svg",
+                    "baseLayerMD5": "6a10a69d1ce075a24abc8073bb402ab6.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 14,
                     "rotationCenterY": 25
@@ -16577,7 +16577,7 @@
     },
     {
         "name": "K-Story",
-        "md5": "62dcc92dc3c6cb0271244190320c4f71.svg",
+        "md5": "76812d04542ffbd8aa77d593f1bced44.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16709,7 +16709,7 @@
                 {
                     "costumeName": "K-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "62dcc92dc3c6cb0271244190320c4f71.svg",
+                    "baseLayerMD5": "76812d04542ffbd8aa77d593f1bced44.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 24,
                     "rotationCenterY": 26
@@ -16745,7 +16745,7 @@
     },
     {
         "name": "L-Story",
-        "md5": "7ce306e9c9c0dd0a24279606301f1d05.svg",
+        "md5": "444e9ceca500ef96a92879678109ef38.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -16877,7 +16877,7 @@
                 {
                     "costumeName": "L-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7ce306e9c9c0dd0a24279606301f1d05.svg",
+                    "baseLayerMD5": "444e9ceca500ef96a92879678109ef38.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 19,
                     "rotationCenterY": 26
@@ -16913,7 +16913,7 @@
     },
     {
         "name": "M-Story",
-        "md5": "b27f166f9ab4a3fb93a50a77c58c3df3.svg",
+        "md5": "9197a1edb925c94fc912367a2943bc69.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17045,7 +17045,7 @@
                 {
                     "costumeName": "M-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b27f166f9ab4a3fb93a50a77c58c3df3.svg",
+                    "baseLayerMD5": "9197a1edb925c94fc912367a2943bc69.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 30,
                     "rotationCenterY": 25
@@ -17081,7 +17081,7 @@
     },
     {
         "name": "N-Story",
-        "md5": "293589fd5bbc358a20c165ab49c19833.svg",
+        "md5": "d604d95ad1367813fdc67c362bb9d298.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17213,7 +17213,7 @@
                 {
                     "costumeName": "N-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "293589fd5bbc358a20c165ab49c19833.svg",
+                    "baseLayerMD5": "d604d95ad1367813fdc67c362bb9d298.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 26,
                     "rotationCenterY": 25
@@ -17249,7 +17249,7 @@
     },
     {
         "name": "O-Story",
-        "md5": "088beed7ce0dff554da06f54d0558bc0.svg",
+        "md5": "46173e0ec42c17d22b29c88929c49f2c.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17381,7 +17381,7 @@
                 {
                     "costumeName": "O-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "088beed7ce0dff554da06f54d0558bc0.svg",
+                    "baseLayerMD5": "46173e0ec42c17d22b29c88929c49f2c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 25,
                     "rotationCenterY": 25
@@ -17417,7 +17417,7 @@
     },
     {
         "name": "P-Story",
-        "md5": "ad4a101b83f28ced16849be3e393caa9.svg",
+        "md5": "e6e5ccc4bd44680b4c21fabefc009e4f.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17549,7 +17549,7 @@
                 {
                     "costumeName": "P-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "ad4a101b83f28ced16849be3e393caa9.svg",
+                    "baseLayerMD5": "e6e5ccc4bd44680b4c21fabefc009e4f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 20,
                     "rotationCenterY": 25
@@ -17585,7 +17585,7 @@
     },
     {
         "name": "Q-Story",
-        "md5": "484e44f908e84d795c87cf994364e722.svg",
+        "md5": "24c5beac46f4452bffe23e3c4e8a4a4c.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17717,7 +17717,7 @@
                 {
                     "costumeName": "Q-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "484e44f908e84d795c87cf994364e722.svg",
+                    "baseLayerMD5": "24c5beac46f4452bffe23e3c4e8a4a4c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 25,
                     "rotationCenterY": 30
@@ -17753,7 +17753,7 @@
     },
     {
         "name": "R-Story",
-        "md5": "55999cb6783ef8351d841294d75af942.svg",
+        "md5": "ef26045ebaccbf271ca2370ed95c73ab.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -17885,7 +17885,7 @@
                 {
                     "costumeName": "R-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "55999cb6783ef8351d841294d75af942.svg",
+                    "baseLayerMD5": "ef26045ebaccbf271ca2370ed95c73ab.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 26
@@ -17921,7 +17921,7 @@
     },
     {
         "name": "S-Story",
-        "md5": "fca1555f335392f1c4ef620bf098c0de.svg",
+        "md5": "dccb5c52aa6e674d7747e172f9c52cb6.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18053,7 +18053,7 @@
                 {
                     "costumeName": "S-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fca1555f335392f1c4ef620bf098c0de.svg",
+                    "baseLayerMD5": "dccb5c52aa6e674d7747e172f9c52cb6.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 16,
                     "rotationCenterY": 25
@@ -18089,7 +18089,7 @@
     },
     {
         "name": "T-Story",
-        "md5": "d3b342c795a620b69639c02a419e8535.svg",
+        "md5": "0333054ad39b919687a53924b4849be9.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18221,7 +18221,7 @@
                 {
                     "costumeName": "T-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d3b342c795a620b69639c02a419e8535.svg",
+                    "baseLayerMD5": "0333054ad39b919687a53924b4849be9.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 27
@@ -18257,7 +18257,7 @@
     },
     {
         "name": "U-Story",
-        "md5": "fcf99b6e8aeb2d504e1e9b2194640916.svg",
+        "md5": "57a7bbdd3cd819e62363ef0f151bcea0.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18389,7 +18389,7 @@
                 {
                     "costumeName": "U-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fcf99b6e8aeb2d504e1e9b2194640916.svg",
+                    "baseLayerMD5": "57a7bbdd3cd819e62363ef0f151bcea0.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 24,
                     "rotationCenterY": 26
@@ -18425,7 +18425,7 @@
     },
     {
         "name": "V-Story",
-        "md5": "750b47f1de2143f76354239b27e1e5f0.svg",
+        "md5": "3895ca10e7ae39bc513ba285d07cba69.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18557,7 +18557,7 @@
                 {
                     "costumeName": "V-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "750b47f1de2143f76354239b27e1e5f0.svg",
+                    "baseLayerMD5": "3895ca10e7ae39bc513ba285d07cba69.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 25,
                     "rotationCenterY": 25
@@ -18593,7 +18593,7 @@
     },
     {
         "name": "W-Story",
-        "md5": "7d9d4c0da9bd1a3ddf253d1bea26f4e9.svg",
+        "md5": "e691a91fd45b0c302f3d954515ed164a.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18725,7 +18725,7 @@
                 {
                     "costumeName": "W-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7d9d4c0da9bd1a3ddf253d1bea26f4e9.svg",
+                    "baseLayerMD5": "e691a91fd45b0c302f3d954515ed164a.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 37,
                     "rotationCenterY": 25
@@ -18761,7 +18761,7 @@
     },
     {
         "name": "X-Story",
-        "md5": "92c452555b3d5a4993f107810043ea03.svg",
+        "md5": "2370b2a2fd153d18d1ad0ef64565b620.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -18893,7 +18893,7 @@
                 {
                     "costumeName": "X-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "92c452555b3d5a4993f107810043ea03.svg",
+                    "baseLayerMD5": "2370b2a2fd153d18d1ad0ef64565b620.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 26
@@ -18929,7 +18929,7 @@
     },
     {
         "name": "Y-Story",
-        "md5": "b3c252450d413fc75be0eafdbe4490dc.svg",
+        "md5": "850386477f82d80fb0e79e5c675dd906.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -19061,7 +19061,7 @@
                 {
                     "costumeName": "Y-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b3c252450d413fc75be0eafdbe4490dc.svg",
+                    "baseLayerMD5": "850386477f82d80fb0e79e5c675dd906.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 27
@@ -19097,7 +19097,7 @@
     },
     {
         "name": "Z-Story",
-        "md5": "86326c9180c485b557a075f4794939d7.svg",
+        "md5": "9a0a64558a53fde1af44dad5fb021199.svg",
         "type": "sprite",
         "tags": [
             "letters",
@@ -19229,7 +19229,7 @@
                 {
                     "costumeName": "Z-story-1",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "86326c9180c485b557a075f4794939d7.svg",
+                    "baseLayerMD5": "9a0a64558a53fde1af44dad5fb021199.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 19,
                     "rotationCenterY": 26

@@ -43,6 +43,7 @@ class TargetPane extends React.Component {
             onChangeSpriteVisibility,
             onChangeSpriteX,
             onChangeSpriteY,
+            onDeleteSprite,
             onNewSpriteClick,
             onNewBackdropClick,
             onRequestCloseBackdropLibrary,
@@ -69,6 +70,7 @@ class TargetPane extends React.Component {
                     onChangeSpriteVisibility={onChangeSpriteVisibility}
                     onChangeSpriteX={onChangeSpriteX}
                     onChangeSpriteY={onChangeSpriteY}
+                    onDeleteSprite={onDeleteSprite}
                     onSelectSprite={onSelectSprite}
                 />
                 <Box className={styles.stageSelectorWrapper}>
@@ -150,6 +152,7 @@ TargetPane.propTypes = {
     onChangeSpriteVisibility: React.PropTypes.func,
     onChangeSpriteX: React.PropTypes.func,
     onChangeSpriteY: React.PropTypes.func,
+    onDeleteSprite: React.PropTypes.func,
     onNewBackdropClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
     onRequestCloseBackdropLibrary: React.PropTypes.func,

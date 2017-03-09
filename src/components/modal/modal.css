@@ -33,38 +33,9 @@
     background: $ui-pane-gray;
 }
 
-.modal-close-button {
-    display: flex;
+.close-button {
     position: absolute;
-    z-index: 2147483647;
-    align-items: center;
-    justify-content: center;
-
     top: 1rem;
     right: 1rem;
-    width: 2.75rem !important;
-    height: 2.75rem !important;
-
-    color: gray;
-    background-color: $blue;
-
-    border-radius: 50% !important;
-    border: 2px solid #dbdbdb;
-
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    cursor: pointer;
-    transition: all 0.15s ease-out; /* @todo: standardize with var */ 
-}
-
-.modal-close-button:hover {
-    transform: scale(1.1, 1.1);
-}
-
-/*  Same icon as Sprite Selector Add button, but rotated.
-    @todo: reuse? 
-*/
-.close-icon {
-    transform-origin: 50%;
-    transform: rotate(45deg);
-    width: 40%;
+    z-index: 2;
 }

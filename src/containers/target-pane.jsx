@@ -23,6 +23,7 @@ class TargetPane extends React.Component {
             'handleChangeSpriteVisibility',
             'handleChangeSpriteX',
             'handleChangeSpriteY',
+            'handleDeleteSprite',
             'handleSelectSprite'
         ]);
     }
@@ -44,6 +45,9 @@ class TargetPane extends React.Component {
     handleChangeSpriteY (y) {
         this.props.vm.postSpriteInfo({y});
     }
+    handleDeleteSprite (id) {
+        this.props.vm.deleteSprite(id);
+    }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
@@ -57,6 +61,7 @@ class TargetPane extends React.Component {
                 onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
+                onDeleteSprite={this.handleDeleteSprite}
                 onSelectSprite={this.handleSelectSprite}
             />
         );

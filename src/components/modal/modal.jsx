@@ -2,9 +2,9 @@ const React = require('react');
 const ReactModal = require('react-modal');
 
 const Box = require('../box/box.jsx');
+const CloseButton = require('../close-button/close-button.jsx');
 
 const styles = require('./modal.css');
-const closeIcon = require('./icon--close.svg');
 
 class ModalComponent extends React.Component {
     render () {
@@ -17,15 +17,10 @@ class ModalComponent extends React.Component {
                 ref={m => (this.modal = m)}
                 onRequestClose={this.props.onRequestClose}
             >
-                <div
-                    className={styles.modalCloseButton}
+                <CloseButton
+                    className={styles.closeButton}
                     onClick={this.props.onRequestClose}
-                >
-                    <img
-                        className={styles.closeIcon}
-                        src={closeIcon}
-                    />
-                </div>
+                />
                 <Box
                     className={styles.modalChildren}
                     direction="column"

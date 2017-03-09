@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: relative;
+
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     background: white;
@@ -50,7 +52,9 @@
     min-width: 0;
 }
 
-.sprite-delete-button {
-    background: red;
-    color: white;
+.delete-button {
+    position: absolute;
+    top: 0.125rem;
+    right: 0.125rem;
+    z-index: 2;
 }

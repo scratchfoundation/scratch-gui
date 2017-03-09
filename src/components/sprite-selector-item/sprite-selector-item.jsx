@@ -3,6 +3,7 @@ const React = require('react');
 
 const Box = require('../box/box.jsx');
 const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
+const CloseButton = require('../close-button/close-button.jsx');
 const styles = require('./sprite-selector-item.css');
 
 const SpriteSelectorItem = props => (
@@ -25,12 +26,11 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
-        <div
-            className={styles.spriteDeleteButton}
+        <CloseButton
+            className={styles.deleteButton}
+            size={CloseButton.SIZE_SMALL}
             onClick={props.onDeleteButtonClick}
-        >
-            𝘅
-        </div>
+        />
     </Box>
 );
 

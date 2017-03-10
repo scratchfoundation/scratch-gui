@@ -37,11 +37,14 @@
 
 .sprite-image {
     margin: auto;
+    user-select: none;
 }
 
 .sprite-name {
     font-size: 0.625rem;
     margin: 0.15rem;
+    user-select: none;
+    
     /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text

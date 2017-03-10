@@ -57,6 +57,7 @@
     cursor: pointer;
     text-decoration: none;
     color: white;
+    user-select: none;
 }
 
 .menu-item:hover {

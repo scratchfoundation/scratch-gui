@@ -10,7 +10,7 @@ module.exports = function (vm) {
                     type: 'field_dropdown',
                     name: name,
                     options: function () {
-                        start.concat(menuOptionsFn())
+                        return start.concat(menuOptionsFn());
                     }
                 }
             ],

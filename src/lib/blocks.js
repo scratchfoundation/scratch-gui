@@ -54,13 +54,15 @@ module.exports = function (vm) {
     };
     
     const variableMenu = function () {
-        var variables = this.getParent().variables;
-        var i = 0;
-        var menu = [];
-        for (i = 0; i < variables.length; i++) {
-            menu.push([variables[i], variables[i]]);
+        if (this.getParent) {
+            var variables = this.getParent().variables;
+            var i = 0;
+            var menu = [];
+            for (i = 0; i < variables.length; i++) {
+                menu.push([variables[i], variables[i]]);
+            }
+            return menu;
         }
-        return menu;
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -132,7 +134,7 @@ module.exports = function (vm) {
         this.jsonInit(json);
     };
     
-    ScratchBlocks.Blocks.sensing_of.variables = [""];
+    ScratchBlocks.Blocks.sensing_of.variables = [];
     
     ScratchBlocks.Blocks.sensing_of_object_menu.onchange = function () {
         if (this.getParent()) {
@@ -146,9 +148,6 @@ module.exports = function (vm) {
             }
             for (x in listsObject) {
                 variables.push(listsObject[x].name);
-            }
-            if (variables.length < 1) {
-                variables[0] = "";
             }
             this.getParent().variables = variables;
         }

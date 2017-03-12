@@ -52,6 +52,16 @@ module.exports = function (vm) {
         }
         return sprites;
     };
+    
+    const variableMenu = function () {
+        var variables = this.getParent().variables;
+        var i = 0;
+        var menu = [];
+        for (i = 0; i < variables.length; i++) {
+            menu.push([variables[i], variables[i]]);
+        }
+        return menu;
+    };
 
     const soundColors = ScratchBlocks.Colours.sounds;
 
@@ -118,6 +128,43 @@ module.exports = function (vm) {
         const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, sensingColors, [
             ['mouse-pointer', '_mouse_'],
             ['edge', '_edge_']
+        ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.sensing_of.variables = [""];
+    
+    ScratchBlocks.Blocks.sensing_of_object_menu.onchange = function () {
+        if (this.getParent()) {
+            var text = this.inputList[0].fieldRow[0].getText();
+            var variablesObject = vm.runtime.getSpriteTargetByName(text).variables;
+            var listsObject = vm.runtime.getSpriteTargetByName(text).lists;
+            var variables = [];
+            var x = 0;
+            for (x in variablesObject) {
+                variables.push(variablesObject[x].name);
+            }
+            for (x in listsObject) {
+                variables.push(listsObject[x].name);
+            }
+            if (variables.length < 1) {
+                variables[0] = "";
+            }
+            this.getParent().variables = variables;
+        }
+    }
+    
+    ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
+        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', variableMenu, sensingColors, [
+            ['x position', 'x position'],
+            ['y position', 'y position'],
+            ['direction', 'direction'],
+            ['costume #', 'costume #'],
+            ['costume name', 'costume name'],
+            ['size', 'size'],
+            ['volume', 'volume'],
+            ['backdrop #', 'backdrop #'],
+            ['backdrop name', 'backdrop name']
         ]);
         this.jsonInit(json);
     };

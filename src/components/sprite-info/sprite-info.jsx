@@ -138,35 +138,37 @@ class SpriteInfo extends React.Component {
                         </span>
                         <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
                             <div
-                                className={classNames(styles.iconWrapper, styles.leftRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioLeft,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.draggable && !this.props.disabled
+                                    }
+                                )}
                                 tabIndex="5"
+                                onClick={this.props.onClickDraggable}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: this.props.draggable && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={draggableIcon}
-                                    onClick={this.props.onClickDraggable}
                                 />
                             </div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.rightRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioRight,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: !this.props.draggable && !this.props.disabled
+                                    }
+                                )}
                                 tabIndex="6"
+                                onClick={this.props.onClickNotDraggable}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: !this.props.draggable && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={notDraggableIcon}
-                                    onClick={this.props.onClickNotDraggable}
                                 />
                             </div>
                         </div>

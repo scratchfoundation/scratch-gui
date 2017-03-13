@@ -38,10 +38,7 @@ $form-radius: calc($space / 2);
     height: 1.25rem;
     padding: calc($space / 2);
     outline: none;
-
-    /* @todo: make this a mixin for all UI text labels */
     user-select: none;
-    cursor: default;
 }
 
 .icon {

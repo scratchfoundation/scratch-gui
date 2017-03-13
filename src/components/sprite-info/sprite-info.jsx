@@ -96,35 +96,37 @@ class SpriteInfo extends React.Component {
                         </span>
                         <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
                             <div
-                                className={classNames(styles.iconWrapper, styles.leftRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioLeft,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.visible && !this.props.disabled
+                                    }
+                                )}
                                 tabIndex="4"
+                                onClick={this.props.onClickVisible}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: this.props.visible && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={showIcon}
-                                    onClick={this.props.onClickVisible}
                                 />
                             </div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.rightRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioRight,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.visible && !this.props.disabled
+                                    }
+                                )}
                                 tabIndex="4"
+                                onClick={this.props.onClickNotVisible}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: !this.props.visible && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={hideIcon}
-                                    onClick={this.props.onClickNotVisible}
                                 />
                             </div>
                         </div>

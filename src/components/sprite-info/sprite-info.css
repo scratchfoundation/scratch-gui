@@ -31,49 +31,46 @@ $form-radius: calc($space / 2);
     align-items: center;
 }
 
-/* @todo: refactor from descendant selector, to a regular class */
 .icon-wrapper {
     display: inline-block;
-    box-sizing: content-box;
+
+    /* 
+        content-box is normally the browser's default. 
+        We're overriding the global, which we set to border-box 
+    */
+    box-sizing: content-box; 
     width: 1.25rem;
     height: 1.25rem;
     padding: calc($space / 2);
-    cursor: pointer;
     outline: none;
 
     /* @todo: make this a mixin for all UI text labels */
     user-select: none;
-    cursor: default;
+}
+
+.radio { cursor: pointer; }
+
+.is-active   { opacity: 1; }
+.is-disabled { opacity: 0.4; }
+
+.radio-left {
+    border: 1px solid $form-border;
+    border-top-left-radius: $form-radius;
+    border-bottom-left-radius: $form-radius;
+}
+
+.radio-right {
+    border-bottom: 1px solid $form-border;
+    border-top: 1px solid $form-border;
+    border-right: 1px solid $form-border;
+    border-top-right-radius: $form-radius;
+    border-bottom-right-radius: $form-radius;
 }
 
 .icon {
     width: 100%;
     height: 100%;
 }
-
-.icon.is-active { opacity: 1; }
-
-.radio-icon { 
-    opacity: 0.4;
-}
-
-.left-radio {
-    border: 1px solid $form-border;
-    border-top-left-radius: $form-radius;
-    border-bottom-left-radius: $form-radius;
-    cursor: pointer;
-}
-
-.right-radio {
-    border-bottom: 1px solid $form-border;
-    border-top: 1px solid $form-border;
-    border-right: 1px solid $form-border;
-    border-top-right-radius: $form-radius;
-    border-bottom-right-radius: $form-radius;
-    cursor: pointer;
-}
-
-.radio-button.is-disabled { cursor: default; }
 
 .input-label {
     font-size: 0.625rem;

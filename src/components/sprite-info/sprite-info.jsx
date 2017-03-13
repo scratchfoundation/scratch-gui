@@ -118,7 +118,7 @@ class SpriteInfo extends React.Component {
                                     styles.radioRight,
                                     styles.iconWrapper,
                                     {
-                                        [styles.isActive]: this.props.visible && !this.props.disabled
+                                        [styles.isActive]: !this.props.visible && !this.props.disabled
                                     }
                                 )}
                                 tabIndex="4"

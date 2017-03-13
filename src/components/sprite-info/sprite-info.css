@@ -48,10 +48,11 @@ $form-radius: calc($space / 2);
     user-select: none;
 }
 
-.radio { cursor: pointer; }
+.radio { opacity: 0.4; cursor: pointer; }
 
-.is-active   { opacity: 1; }
-.is-disabled { opacity: 0.4; }
+.radio.is-active   { opacity: 1; }
+.radio.is-disabled { cursor: default; }
+.radio-button.is-disabled { cursor: default; }
 
 .radio-left {
     border: 1px solid $form-border;

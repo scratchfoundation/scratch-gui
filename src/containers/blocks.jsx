@@ -123,6 +123,11 @@ Blocks.defaultOptions = {
         wheel: true,
         startScale: 0.75
     },
+    grid: {
+        spacing: 40,
+        length: 2,
+        colour: '#ddd'
+    },
     colours: {
         workspace: '#F9F9F9',
         flyout: '#F9F9F9',

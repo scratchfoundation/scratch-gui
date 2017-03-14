@@ -159,6 +159,22 @@ module.exports = function (vm) {
     }
     
     ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
+        var menu = [];
+        var objectBlock = null;
+        var i = 0;
+        for (i = 0; i < this.getChildren().length; i++) {
+            if (this.getChildren()[i].type === "sensing_of_object_menu") {
+                objectBlock = this.getChildren()[i];
+            }
+        }
+        var stage = false;
+        if (objectBlock) {
+            var object = objectBlock.inputList[0].fieldRow[0].getText();
+            if (vm.runtime.getSpriteTargetByName(object).isStage) {
+                stage = true;
+            }
+        }
+        if (
         const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, [
             ['x position', 'x position'],
             ['y position', 'y position'],

@@ -174,18 +174,24 @@ module.exports = function (vm) {
                 stage = true;
             }
         }
-        if (
-        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, [
-            ['x position', 'x position'],
-            ['y position', 'y position'],
-            ['direction', 'direction'],
-            ['costume #', 'costume #'],
-            ['costume name', 'costume name'],
-            ['size', 'size'],
-            ['volume', 'volume'],
-            ['backdrop #', 'backdrop #'],
-            ['backdrop name', 'backdrop name']
-        ]);
+        if (stage) {
+            menu = [
+                ['volume', 'volume'],
+                ['backdrop #', 'backdrop #'],
+                ['backdrop name', 'backdrop name']
+            ];
+        } else {
+            menu = [
+                ['x position', 'x position'],
+                ['y position', 'y position'],
+                ['direction', 'direction'],
+                ['costume #', 'costume #'],
+                ['costume name', 'costume name'],
+                ['size', 'size'],
+                ['volume', 'volume']
+            ];
+        }
+        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, menu);
         this.jsonInit(json);
     };
 

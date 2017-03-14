@@ -10,7 +10,7 @@ module.exports = function (vm) {
                     type: 'field_dropdown',
                     name: name,
                     options: function () {
-                        return start.concat(menuOptionsFn());
+                        return start.concat(menuOptionsFn(this.sourceBlock_));
                     }
                 }
             ],
@@ -55,16 +55,19 @@ module.exports = function (vm) {
         return sprites;
     };
     
-    const variableMenu = function () {
-        if (this.getParent) {
-            var variables = this.getParent().variables;
-            var i = 0;
-            var menu = [];
-            for (i = 0; i < variables.length; i++) {
-                menu.push([variables[i], variables[i]]);
+    const variableMenu = function (block) {
+        if (block) {
+            if (this.getParent()) {
+                var variables = this.getParent().variables;
+                var i = 0;
+                var menu = [];
+                for (i = 0; i < variables.length; i++) {
+                    menu.push([variables[i], variables[i]]);
+                }
+                return menu;
             }
-            return menu;
         }
+        return [];
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -156,7 +159,7 @@ module.exports = function (vm) {
     }
     
     ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
-        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', variableMenu, sensingColors, [
+        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, [
             ['x position', 'x position'],
             ['y position', 'y position'],
             ['direction', 'direction'],

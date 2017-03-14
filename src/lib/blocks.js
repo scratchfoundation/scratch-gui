@@ -57,8 +57,8 @@ module.exports = function (vm) {
     
     const variableMenu = function (block) {
         if (block) {
-            if (this.getParent()) {
-                var variables = this.getParent().variables;
+            if (block.getParent()) {
+                var variables = block.getParent().variables;
                 var i = 0;
                 var menu = [];
                 for (i = 0; i < variables.length; i++) {

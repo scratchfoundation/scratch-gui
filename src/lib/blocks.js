@@ -56,18 +56,48 @@ module.exports = function (vm) {
     };
     
     const variableMenu = function (block) {
+        var stageMenu = [
+            ['volume', 'volume'],
+            ['backdrop #', 'backdrop #'],
+            ['backdrop name', 'backdrop name']
+        ];
+        var spriteMenu = [
+            ['x position', 'x position'],
+            ['y position', 'y position'],
+            ['direction', 'direction'],
+            ['costume #', 'costume #'],
+            ['costume name', 'costume name'],
+            ['size', 'size'],
+            ['volume', 'volume']
+        ];
         if (block) {
             if (block.getParent()) {
+                var objectBlock = block.getParent();
+                var stage = false;
+                var startMenu = [];
+                if (objectBlock) {
+                    var object = objectBlock.spriteName;
+                    if (vm.runtime.getSpriteTargetByName(object)) {
+                        if (vm.runtime.getSpriteTargetByName(object).isStage) {
+                            stage = true;
+                        }
+                    }
+                }
+                if (stage) {
+                    startMenu = stageMenu;
+                } else {
+                    startMenu = spriteMenu;
+                }
                 var variables = block.getParent().variables;
                 var i = 0;
                 var menu = [];
                 for (i = 0; i < variables.length; i++) {
                     menu.push([variables[i], variables[i]]);
                 }
-                return menu;
+                return startMenu.concat(menu);
             }
         }
-        return [];
+        return stageMenu;
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -155,43 +185,12 @@ module.exports = function (vm) {
                 variables.push(listsObject[x].name);
             }
             this.getParent().variables = variables;
+            this.getParent().spriteName = text;
         }
     }
     
     ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
-        var menu = [];
-        var objectBlock = null;
-        var i = 0;
-        for (i = 0; i < this.getChildren().length; i++) {
-            if (this.getChildren()[i].type === "sensing_of_object_menu") {
-                objectBlock = this.getChildren()[i];
-            }
-        }
-        var stage = false;
-        if (objectBlock) {
-            var object = objectBlock.inputList[0].fieldRow[0].getText();
-            if (vm.runtime.getSpriteTargetByName(object).isStage) {
-                stage = true;
-            }
-        }
-        if (stage) {
-            menu = [
-                ['volume', 'volume'],
-                ['backdrop #', 'backdrop #'],
-                ['backdrop name', 'backdrop name']
-            ];
-        } else {
-            menu = [
-                ['x position', 'x position'],
-                ['y position', 'y position'],
-                ['direction', 'direction'],
-                ['costume #', 'costume #'],
-                ['costume name', 'costume name'],
-                ['size', 'size'],
-                ['volume', 'volume']
-            ];
-        }
-        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, menu);
+        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, []);
         this.jsonInit(json);
     };
 

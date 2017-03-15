@@ -171,6 +171,8 @@ module.exports = function (vm) {
     
     ScratchBlocks.Blocks.sensing_of.variables = [];
     
+    ScratchBlocks.Blocks.sensing_of.spriteName = "";
+    
     ScratchBlocks.Blocks.sensing_of_object_menu.onchange = function () {
         if (this.getParent()) {
             var text = this.inputList[0].fieldRow[0].getText();

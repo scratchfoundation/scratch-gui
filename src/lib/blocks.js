@@ -59,7 +59,7 @@ module.exports = function (vm) {
             ['backdrop name', 'backdrop name'],
             ['volume', 'volume']
         ];
-        var spriteMenu = [
+        var spriteMenu2 = [
             ['x position', 'x position'],
             ['y position', 'y position'],
             ['direction', 'direction'],
@@ -84,7 +84,7 @@ module.exports = function (vm) {
                 if (stage) {
                     startMenu = stageMenu;
                 } else {
-                    startMenu = spriteMenu;
+                    startMenu = spriteMenu2;
                 }
                 var variables = block.getParent().variables;
                 var i = 0;
@@ -169,7 +169,7 @@ module.exports = function (vm) {
     
     ScratchBlocks.Blocks.sensing_of.variables = [];
     
-    ScratchBlocks.Blocks.sensing_of.spriteName = "";
+    ScratchBlocks.Blocks.sensing_of.spriteName = '';
     
     ScratchBlocks.Blocks.sensing_of_object_menu.onchange = function () {
         if (this.getParent()) {
@@ -187,7 +187,7 @@ module.exports = function (vm) {
             this.getParent().variables = variables;
             this.getParent().spriteName = text;
         }
-    }
+    };
     
     ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
         const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, []);

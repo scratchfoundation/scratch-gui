@@ -9,9 +9,7 @@ module.exports = function (vm) {
                 {
                     type: 'field_dropdown',
                     name: name,
-                    options: function () {
-                        return start.concat(menuOptionsFn(this.sourceBlock_));
-                    }
+                    options: start.concat(menuOptionsFn(this.sourceBlock_))
                 }
             ],
             inputsInline: true,

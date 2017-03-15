@@ -57,9 +57,9 @@ module.exports = function (vm) {
     
     const variableMenu = function (block) {
         var stageMenu = [
-            ['volume', 'volume'],
             ['backdrop #', 'backdrop #'],
-            ['backdrop name', 'backdrop name']
+            ['backdrop name', 'backdrop name'],
+            ['volume', 'volume']
         ];
         var spriteMenu = [
             ['x position', 'x position'],

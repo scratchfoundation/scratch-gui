@@ -5,9 +5,11 @@ const {connect} = require('react-redux');
 
 const {
     openBackdropLibrary,
+    openSoundLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
+    closeSoundLibrary,
     closeSpriteLibrary
 } = require('../reducers/modals');
 
@@ -87,6 +89,7 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
+    soundLibraryVisible: state.modals.soundLibrary,
     spriteLibraryVisible: state.modals.spriteLibrary,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
@@ -95,6 +98,10 @@ const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());
+    },
+    onNewSoundClick: e => {
+        e.preventDefault();
+        dispatch(openSoundLibrary());
     },
     onNewSpriteClick: e => {
         e.preventDefault();
@@ -105,6 +112,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());
+    },
+    onRequestCloseSoundLibrary: () => {
+        dispatch(closeSoundLibrary());
     },
     onRequestCloseSpriteLibrary: () => {
         dispatch(closeSpriteLibrary());

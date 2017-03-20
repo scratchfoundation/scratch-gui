@@ -29,6 +29,7 @@
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     transition: all 0.15s ease-out; /* @todo: standardize with var */ 
     cursor: pointer;
+    user-select: none;
 }
 
 .add-button-wrapper:hover {

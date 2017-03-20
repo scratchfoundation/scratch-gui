@@ -23,6 +23,7 @@
     bottom: 5%;
     left: 5%;
     border-radius: $space;
+    user-select: none;
 }
 
 .modal-children {

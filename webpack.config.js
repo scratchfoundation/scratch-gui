@@ -16,6 +16,7 @@ module.exports = {
         host: '0.0.0.0',
         port: process.env.PORT || 8601
     },
+    devtool: 'cheap-module-source-map',
     entry: {
         lib: ['react', 'react-dom'],
         gui: './src/index.jsx'
@@ -24,15 +25,18 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
     },
+    resolve: {
+        symlinks: false
+    },
     externals: {
         React: 'react',
         ReactDOM: 'react-dom'
     },
     module: {
         rules: [{
-            test: /\.jsx?$/,
+            // allow ES2015 in any *.js or *.jsx file under .../scratch-*/src/...
+            test: /[\\/]+scratch-[^\\/]+[\\/]+src[\\/]+.+\.jsx?$/,
             loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
             options: {
                 plugins: ['transform-object-rest-spread'],
                 presets: [['es2015', {modules: false}], 'react']

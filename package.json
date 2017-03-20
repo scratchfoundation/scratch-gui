@@ -57,6 +57,7 @@
     "scratch-audio": "latest",
     "scratch-blocks": "latest",
     "scratch-render": "latest",
+    "scratch-storage": "latest",
     "scratch-vm": "latest",
     "style-loader": "0.13.2",
     "svg-to-image": "1.1.3",

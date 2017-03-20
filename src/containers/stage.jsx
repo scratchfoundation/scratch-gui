@@ -1,10 +1,11 @@
 const bindAll = require('lodash.bindall');
+const AudioEngine = require('scratch-audio');
 const React = require('react');
 const Renderer = require('scratch-render');
-const AudioEngine = require('scratch-audio');
 const VM = require('scratch-vm');
 
 const StageComponent = require('../components/stage/stage.jsx');
+const Storage = require('../lib/storage');
 
 class Stage extends React.Component {
     constructor (props) {
@@ -32,10 +33,12 @@ class Stage extends React.Component {
         this.attachRectEvents();
         this.attachMouseEvents(this.canvas);
         this.updateRect();
-        this.renderer = new Renderer(this.canvas);
-        this.props.vm.attachRenderer(this.renderer);
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
+        this.renderer = new Renderer(this.canvas);
+        this.props.vm.attachRenderer(this.renderer);
+        this.storage = new Storage();
+        this.props.vm.attachStorage(this.storage);
     }
     shouldComponentUpdate () {
         return false;

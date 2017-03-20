@@ -34,7 +34,7 @@ class SpriteInfo extends React.Component {
                     <div className={styles.group}>
                         <span className={styles.inputLabel}>Sprite</span>
                         <input
-                            className={classNames(styles.inputForm, styles.inputFormSpriteName)}
+                            className={classNames(styles.inputForm, styles.spriteName)}
                             disabled={this.props.disabled}
                             placeholder="Name"
                             tabIndex="1"
@@ -55,7 +55,7 @@ class SpriteInfo extends React.Component {
                         </div>
                         <span className={styles.inputLabel}>x</span>
                         <input
-                            className={classNames(styles.inputForm, styles.inputFormX)}
+                            className={classNames(styles.inputForm, styles.x)}
                             disabled={this.props.disabled}
                             placeholder="x"
                             tabIndex="2"
@@ -76,7 +76,7 @@ class SpriteInfo extends React.Component {
                         </div>
                         <span className={styles.inputLabel}>y</span>
                         <input
-                            className={classNames(styles.inputForm, styles.inputFormY)}
+                            className={classNames(styles.inputForm, styles.y)}
                             disabled={this.props.disabled}
                             placeholder="y"
                             tabIndex="3"
@@ -91,91 +91,99 @@ class SpriteInfo extends React.Component {
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSmall}>
+                        <span className={styles.inputLabelSecondary}>
                             Show
                         </span>
-                        <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
+                        <div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.leftRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioLeft,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
                                 tabIndex="4"
+                                onClick={this.props.onClickVisible}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: this.props.visible && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={showIcon}
-                                    onClick={this.props.onClickVisible}
                                 />
                             </div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.rightRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioRight,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
                                 tabIndex="4"
+                                onClick={this.props.onClickNotVisible}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: !this.props.visible && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={hideIcon}
-                                    onClick={this.props.onClickNotVisible}
                                 />
                             </div>
                         </div>
                     </div>
 
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSmall}>
+                        <span className={styles.inputLabelSecondary}>
                             Draggable
                         </span>
-                        <div className={classNames(styles.radioButton, {[styles.isDisabled]: this.props.disabled})}>
+                        <div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.leftRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioLeft,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.draggable && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
                                 tabIndex="5"
+                                onClick={this.props.onClickDraggable}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: this.props.draggable && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={draggableIcon}
-                                    onClick={this.props.onClickDraggable}
                                 />
                             </div>
                             <div
-                                className={classNames(styles.iconWrapper, styles.rightRadio)}
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioRight,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: !this.props.draggable && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
                                 tabIndex="6"
+                                onClick={this.props.onClickNotDraggable}
                             >
                                 <img
-                                    className={classNames(
-                                        styles.icon,
-                                        styles.radioIcon,
-                                        {
-                                            [styles.isActive]: !this.props.draggable && !this.props.disabled
-                                        }
-                                    )}
+                                    className={styles.icon}
                                     src={notDraggableIcon}
-                                    onClick={this.props.onClickNotDraggable}
                                 />
                             </div>
                         </div>
                     </div>
 
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSmall}>
+                        <span className={styles.inputLabelSecondary}>
                             Rotation
                         </span>
                         <select
-                            className={classNames(styles.selectForm, styles.inputFormRotationSelect)}
+                            className={classNames(styles.selectForm, styles.rotationSelect)}
                             disabled={this.props.disabled}
                             value={this.props.rotationStyle}
                             onChange={this.props.onChangeRotationStyle}

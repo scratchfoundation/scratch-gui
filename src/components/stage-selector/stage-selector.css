@@ -58,6 +58,7 @@ $header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
     color: #575e75;
     background: #ededed;
     border-radius: 0.25rem;
+    user-select: none;
 }
 
 .label {
@@ -66,13 +67,14 @@ $header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
     font-size: 0.5rem;
     font-weight: bold;
     color: #575e75;
+    user-select: none;
 }
 
 $border-width: 2px;
 
 .flex-wrapper {
     display: flex;
-    flex-direction: column; /* to make rows */
+    flex-direction: column; /* makes rows */
     align-items: center;
     background-color: white;
     border-radius: calc($space / 2);
@@ -96,4 +98,5 @@ $border-width: 2px;
     width: 100%;
     border-top-left-radius: calc($space / 2);
     border-top-right-radius: calc($space / 2);
+    user-select: none;
 }

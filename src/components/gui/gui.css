@@ -21,24 +21,48 @@
     height: 100%;
 }
 
-.blocks-wrapper {
-    /*
-        scratch-blocks is based on absolute positioning, which injects
-        inside this element and becomes the child
-    */
-    position: relative;
-
+.editor-wrapper {
     flex-basis: 600px;
     flex-grow: 1;
     flex-shrink: 0;
+    position: relative;
 
-    /*
-        Normally we'd use padding, but the absolute positioning ignores it,
-        so use margin instead. Temporary, until tabs are inserted.
-    */
-    margin-top: $stage-menu-height;
+    display: flex;
+    flex-direction: column;
+}
 
-    background: #e8edf1;
+.tab-list {
+    height: $stage-menu-height;
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+
+    /* Overrides for react-tabs styling */
+    margin: 0 0 0 1rem !important;
+    border-bottom: 0 !important;
+}
+
+.tabs {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-panel {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+}
+
+.blocks-wrapper {
+    flex-grow: 1;
+    position: relative;
 }
 
 .stage-and-target-wrapper {

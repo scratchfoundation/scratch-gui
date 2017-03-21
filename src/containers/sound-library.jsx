@@ -4,7 +4,8 @@ const VM = require('scratch-vm');
 const AudioEngine = require('scratch-audio');
 
 const LibaryComponent = require('../components/library/library.jsx');
-const soundIcon = require('../components/target-pane/icon--sound-dark.svg');
+
+const soundIcon = require('../components/asset-panel/icon--sound.svg');
 
 const soundLibraryContent = require('../lib/libraries/sounds.json');
 

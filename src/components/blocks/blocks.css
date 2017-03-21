@@ -1,13 +1,31 @@
+$border-style: 1px solid #dbdbdb;
+
 .blocks :global(.injectionDiv){
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    border: $border-style;
 
     /* 
         @todo: using _space doesn't compute to the right amount? 
         Related to `scratch-blocks` 
     */
     border-top-right-radius: 0.75rem;
+}
+
+.blocks :global(.blocklyMainBackground) {
+    stroke: none;
+}
+
+.blocks :global(.blocklyToolboxDiv) {
+    border-right: $border-style;
+    border-bottom: $border-style;
+    box-sizing: content-box;
+}
+
+.blocks :global(.blocklyFlyout) {
+    border-right: $border-style;
+    box-sizing: content-box;
 }

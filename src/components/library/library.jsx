@@ -17,6 +17,10 @@ class LibraryComponent extends React.Component {
             // Double select: select as the library's value.
             this.props.onRequestClose();
             this.props.onItemSelected(this.props.data[id]);
+        } else {
+            if (this.props.onItemChosen) {
+                this.props.onItemChosen(this.props.data[id]);
+            }
         }
         this.setState({selectedItem: id});
     }
@@ -61,6 +65,7 @@ LibraryComponent.propTypes = {
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
+    onItemChosen: React.PropTypes.func,
     onItemSelected: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     title: React.PropTypes.string.isRequired,

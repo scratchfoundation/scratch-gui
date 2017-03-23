@@ -3,11 +3,13 @@ const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
+const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
+    [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false
 };
 
@@ -44,6 +46,9 @@ reducer.openBackdropLibrary = function () {
 reducer.openCostumeLibrary = function () {
     return reducer.openModal(MODAL_COSTUME_LIBRARY);
 };
+reducer.openSoundLibrary = function () {
+    return reducer.openModal(MODAL_SOUND_LIBRARY);
+};
 reducer.openSpriteLibrary = function () {
     return reducer.openModal(MODAL_SPRITE_LIBRARY);
 };
@@ -55,5 +60,8 @@ reducer.closeCostumeLibrary = function () {
 };
 reducer.closeSpriteLibrary = function () {
     return reducer.closeModal(MODAL_SPRITE_LIBRARY);
+};
+reducer.closeSoundLibrary = function () {
+    return reducer.closeModal(MODAL_SOUND_LIBRARY);
 };
 module.exports = reducer;

@@ -1,0 +1,1045 @@
+[
+    {
+        "name": "boing",
+        "md5": "53a3c2e27d1fb5fdb14aaf0cb41e7889.wav",
+        "sampleCount": 6804,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "chomp",
+        "md5": "0b1e3033140d094563248e61de4039e5.wav",
+        "sampleCount": 2912,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "gong",
+        "md5": "6af567714db37721a11c55d2a2648aec.wav",
+        "sampleCount": 46848,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "pop",
+        "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+        "sampleCount": 258,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "space ripple",
+        "md5": "ff8b8c3bf841a11fd5fe3afaa92be1b5.wav",
+        "sampleCount": 41149,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "beeps",
+        "md5": "3be0a558370fedba3a6b315e0ca15b33.wav",
+        "sampleCount": 9536,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "woof",
+        "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
+        "sampleCount": 3168,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "squawk",
+        "md5": "e140d7ff07de8fa35c3d1595bba835ac.wav",
+        "sampleCount": 8208,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "cheer",
+        "md5": "4b36eebf22be4667fc2f15b78c805b4c.wav",
+        "sampleCount": 62528,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "wub",
+        "md5": "e1f32c057411da4237181ce72ae15d23.wav",
+        "sampleCount": 7392,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hey",
+        "md5": "ec7c272faa862c9f8f731792e686e3c9.wav",
+        "sampleCount": 5414,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "C major ukulele",
+        "md5": "aa2ca112507b59b5337f341aaa75fb08.wav",
+        "sampleCount": 18203,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "dance loop",
+        "md5": "e936679bac519b1df3ddea3f5db7594f.wav",
+        "sampleCount": 92800,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "funky loop",
+        "md5": "fb56022366d21b299cbc3fd5e16000c2.wav",
+        "sampleCount": 44748,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "dance celebrate",
+        "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
+        "sampleCount": 176401,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "odesong-b",
+        "md5": "2c41921491b1da2bfa1ebcaba34265ca.wav",
+        "sampleCount": 212553,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "C bass",
+        "md5": "c3566ec797b483acde28f790994cc409.wav",
+        "sampleCount": 44608,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D bass",
+        "md5": "5a3ae8a2665f50fdc38cc301fbac79ba.wav",
+        "sampleCount": 40192,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E bass",
+        "md5": "0657e39bae81a232b01a18f727d3b891.wav",
+        "sampleCount": 36160,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F bass",
+        "md5": "ea21bdae86f70d60b28f1dddcf50d104.wav",
+        "sampleCount": 34368,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G bass",
+        "md5": "05c192194e8f1944514dce3833e33439.wav",
+        "sampleCount": 30976,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A bass",
+        "md5": "c04ebf21e5e19342fa1535e4efcdb43b.wav",
+        "sampleCount": 28160,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B bass",
+        "md5": "e31dcaf7bcdf58ac2a26533c48936c45.wav",
+        "sampleCount": 25792,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 bass",
+        "md5": "667d6c527b79321d398e85b526f15b99.wav",
+        "sampleCount": 24128,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "plunge",
+        "md5": "c09455ee9da0e7eeead42d4e73c2555d.wav",
+        "sampleCount": 22400,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "meow",
+        "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+        "sampleCount": 18688,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "xylo1",
+        "md5": "6ac484e97c1c1fe1384642e26a125e70.wav",
+        "sampleCount": 238232,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "bell toll",
+        "md5": "25d61e79cbeba4041eebeaebd7bf9598.wav",
+        "sampleCount": 45168,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "water drop",
+        "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
+        "sampleCount": 8136,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "strum",
+        "md5": "b92de59d992a655c1b542223a784cda6.wav",
+        "sampleCount": 11247,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "meow2",
+        "md5": "cf51a0c4088942d95bcc20af13202710.wav",
+        "sampleCount": 6512,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "ripples",
+        "md5": "4da8a805673c288965e1e5535c3f7f2b.wav",
+        "sampleCount": 10144,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "dance snare beat",
+        "md5": "562587bdb75e3a8124cdaa46ba0f648b.wav",
+        "sampleCount": 176401,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "small cowbell",
+        "md5": "e29154f53f56f96f8a3292bdcddcec54.wav",
+        "sampleCount": 9718,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "large cowbell",
+        "md5": "006316650ffc673dc02d36aa55881327.wav",
+        "sampleCount": 20856,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "crash cymbal",
+        "md5": "f2c47a46f614f467a7ac802ed9ec3d8e.wav",
+        "sampleCount": 25220,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hihat cymbal",
+        "md5": "2d01f60d0f20ab39facbf707899c6b2a.wav",
+        "sampleCount": 2752,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "splash cymbal",
+        "md5": "9d63ed5be96c43b06492e8b4a9cea8d8.wav",
+        "sampleCount": 9600,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "roll cymbal",
+        "md5": "da8355d753cd2a5ddd19cb2bb41c1547.wav",
+        "sampleCount": 26432,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "bell cymbal",
+        "md5": "efddec047de95492f775a1b5b2e8d19e.wav",
+        "sampleCount": 19328,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "dog1",
+        "md5": "b15adefc3c12f758b6dc6a045362532f.wav",
+        "sampleCount": 3672,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "dog2",
+        "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
+        "sampleCount": 3168,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "bird",
+        "md5": "18bd4b634a3f992a16b30344c7d810e0.wav",
+        "sampleCount": 3840,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "drum bass1",
+        "md5": "48328c874353617451e4c7902cc82817.wav",
+        "sampleCount": 6528,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "drum bass2",
+        "md5": "711a1270d1cf2e5de9b145ee539213e4.wav",
+        "sampleCount": 3791,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "drum bass3",
+        "md5": "c21704337b16359ea631b5f8eb48f765.wav",
+        "sampleCount": 8576,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "high conga",
+        "md5": "16144544de90e98a92a265d4fc3241ea.wav",
+        "sampleCount": 8192,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "low conga",
+        "md5": "0b6f94487cd8a1cf0bb77e15966656c3.wav",
+        "sampleCount": 8384,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "muted conga",
+        "md5": "1d4abbe3c9bfe198a88badb10762de75.wav",
+        "sampleCount": 4544,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "tap conga",
+        "md5": "fd9a67157f57f9cc6fe3cdce38a6d4a8.wav",
+        "sampleCount": 6880,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "tap snare",
+        "md5": "d55b3954d72c6275917f375e49b502f3.wav",
+        "sampleCount": 3296,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "sidestick snare",
+        "md5": "f6868ee5cf626fc4ef3ca1119dc95592.wav",
+        "sampleCount": 2336,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "flam snare",
+        "md5": "3b6cce9f8c56c0537ca61eee3945cd1d.wav",
+        "sampleCount": 4416,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hi na tabla",
+        "md5": "35b42d98c43404a5b1b52fb232a62bd7.wav",
+        "sampleCount": 4096,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hi tun tabla",
+        "md5": "da734693dfa6a9a7eccdc7f9a0ca9840.wav",
+        "sampleCount": 18656,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "lo gliss tabla",
+        "md5": "d7cd24689737569c93e7ea7344ba6b0e.wav",
+        "sampleCount": 7008,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "lo geh tabla",
+        "md5": "9205359ab69d042ed3da8a160a651690.wav",
+        "sampleCount": 30784,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "high tom",
+        "md5": "d623f99b3c8d33932eb2c6c9cfd817c5.wav",
+        "sampleCount": 12320,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "low tom",
+        "md5": "1569bbbd8952b0575e5a5cb5aefb50ba.wav",
+        "sampleCount": 20000,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "duck",
+        "md5": "af5b039e1b05e0ccb12944f648a8884e.wav",
+        "sampleCount": 5792,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C guitar",
+        "md5": "22baa07795a9a524614075cdea543793.wav",
+        "sampleCount": 44864,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D guitar",
+        "md5": "2dbcfae6a55738f94bbb40aa5fcbf7ce.wav",
+        "sampleCount": 41120,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E guitar",
+        "md5": "4b5d1da83e59bf35578324573c991666.wav",
+        "sampleCount": 38400,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F guitar",
+        "md5": "b51d086aeb1921ec405561df52ecbc50.wav",
+        "sampleCount": 36416,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G guitar",
+        "md5": "98a835713ecea2f3ef9f4f442d52ad20.wav",
+        "sampleCount": 33600,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A guitar",
+        "md5": "ee753e87d212d4b2fb650ca660f1e839.wav",
+        "sampleCount": 31872,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B guitar",
+        "md5": "2ae2d67de62df8ca54d638b4ad2466c3.wav",
+        "sampleCount": 29504,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 guitar",
+        "md5": "c8d2851bd99d8e0ce6c1f05e4acc7f34.wav",
+        "sampleCount": 27712,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C elec bass",
+        "md5": "69eee3d038ea0f1c34ec9156a789236d.wav",
+        "sampleCount": 5216,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D elec bass",
+        "md5": "67a6d1aa68233a2fa641aee88c7f051f.wav",
+        "sampleCount": 5568,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E elec bass",
+        "md5": "0704b8ceabe54f1dcedda8c98f1119fd.wav",
+        "sampleCount": 5691,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F elec bass",
+        "md5": "45eedb4ce62a9cbbd2207824b94a4641.wav",
+        "sampleCount": 5312,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G elec bass",
+        "md5": "97b187d72219b994a6ef6a5a6b09605c.wav",
+        "sampleCount": 5568,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A elec bass",
+        "md5": "5cb46ddd903fc2c9976ff881df9273c9.wav",
+        "sampleCount": 5920,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B elec bass",
+        "md5": "5a0701d0a914223b5288300ac94e90e4.wav",
+        "sampleCount": 6208,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 elec bass",
+        "md5": "56fc995b8860e713c5948ecd1c2ae572.wav",
+        "sampleCount": 5792,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C elec guitar",
+        "md5": "0d340de02e14bebaf8dfa0e43eb3f1f9.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D elec guitar",
+        "md5": "1b5de9866801eb2f9d4f57c7c3b473f5.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E elec guitar",
+        "md5": "2e6a6ae3e0f72bf78c74def8130f459a.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F elec guitar",
+        "md5": "5eb00f15f21f734986aa45156d44478d.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G elec guitar",
+        "md5": "cd0d0e7dad415b2ffa2ba7a61860eaf8.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A elec guitar",
+        "md5": "fa5f7fea601e9368dd68449d9a54c995.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B elec guitar",
+        "md5": "81f142d0b00189703d7fe9b1f13f6f87.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 elec guitar",
+        "md5": "3a8ed3129f22cba5b0810bc030d16b5f.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "xylo3",
+        "md5": "3395cade6d7c0cc9ce73a8c12f40319b.wav",
+        "sampleCount": 209502,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "tom drum",
+        "md5": "ca350a536d60bb8ed50f24677d65eed8.wav",
+        "sampleCount": 33920,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "dance celebrate2",
+        "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
+        "sampleCount": 176401,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "bass beatbox",
+        "md5": "28153621d293c86da0b246d314458faf.wav",
+        "sampleCount": 6720,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hi beatbox",
+        "md5": "5a07847bf246c227204728b05a3fc8f3.wav",
+        "sampleCount": 5856,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "snare beatbox",
+        "md5": "c642c4c00135d890998f351faec55498.wav",
+        "sampleCount": 5630,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "scratching beatbox",
+        "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
+        "sampleCount": 11552,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "crash beatbox",
+        "md5": "725e29369e9138a43f11e0e5eb3eb562.wav",
+        "sampleCount": 26883,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "wub beatbox",
+        "md5": "e1f32c057411da4237181ce72ae15d23.wav",
+        "sampleCount": 7392,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "hihat beatbox",
+        "md5": "0c77025e2e874f05cd3c7d850874d56d.wav",
+        "sampleCount": 4274,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "rim beatbox",
+        "md5": "7ede1382b578d8fc32850b48d082d914.wav",
+        "sampleCount": 4960,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "clap beatbox",
+        "md5": "abc70bb390f8e55f22f32265500d814a.wav",
+        "sampleCount": 4224,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "wah beatbox",
+        "md5": "9021b7bb06f2399f18e2db4fb87095dc.wav",
+        "sampleCount": 6624,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "chee chee",
+        "md5": "25f4826cdd61e0a1c623ec2324c16ca0.wav",
+        "sampleCount": 34560,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "horse",
+        "md5": "45ffcf97ee2edca0199ff5aa71a5b72e.wav",
+        "sampleCount": 14464,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "name": "C piano",
+        "md5": "d27ed8d953fe8f03c00f4d733d31d2cc.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D piano",
+        "md5": "51381ac422605ee8c7d64cfcbfd75efc.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E piano",
+        "md5": "c818fdfaf8a0efcb562e24e794700a57.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F piano",
+        "md5": "cdab3cce84f74ecf53e3941c6a003b5e.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G piano",
+        "md5": "42bb2ed28e7023e111b33220e1594a6f.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A piano",
+        "md5": "0727959edb2ea0525feed9b0c816991c.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B piano",
+        "md5": "86826c6022a46370ed1afae69f1ab1b9.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 piano",
+        "md5": "75d7d2c9b5d40dd4e1cb268111abf1a2.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C elec piano",
+        "md5": "8366ee963cc57ad24a8a35a26f722c2b.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D elec piano",
+        "md5": "835f136ca8d346a17b4d4baf8405be37.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E elec piano",
+        "md5": "ab3c198f8e36efff14f0a5bad35fa3cd.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F elec piano",
+        "md5": "dc5e368fc0d0dad1da609bfc3e29aa15.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G elec piano",
+        "md5": "39525f6545d62a95d05153f92d63301a.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A elec piano",
+        "md5": "0cfa8e84d6a5cd63afa31d541625a9ef.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B elec piano",
+        "md5": "9cc77167419f228503dd57fddaa5b2a6.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 elec piano",
+        "md5": "366c7edbd4dd5cca68bf62902999bd66.wav",
+        "sampleCount": 44100,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C sax",
+        "md5": "4d2c939d6953b5f241a27a62cf72de64.wav",
+        "sampleCount": 9491,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D sax",
+        "md5": "39f41954a73c0e15d842061e1a4c5e1d.wav",
+        "sampleCount": 9555,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E sax",
+        "md5": "3568b7dfe173fab6877a9ff1dcbcf1aa.wav",
+        "sampleCount": 7489,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F sax",
+        "md5": "2ae3083817bcd595e26ea2884b6684d5.wav",
+        "sampleCount": 7361,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "G sax",
+        "md5": "cefba5de46adfe5702485e0934bb1e13.wav",
+        "sampleCount": 7349,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "A sax",
+        "md5": "420991e0d6d99292c6d736963842536a.wav",
+        "sampleCount": 6472,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B sax",
+        "md5": "653ebe92d491b49ad5d8101d629f567b.wav",
+        "sampleCount": 9555,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 sax",
+        "md5": "ea8d34b18c3d8fe328cea201666458bf.wav",
+        "sampleCount": 7349,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "drive around",
+        "md5": "a3a85fb8564b0266f50a9c091087b7aa.wav",
+        "sampleCount": 44096,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "scratchy beat",
+        "md5": "289dc558e076971e74dd1a0bd55719b1.wav",
+        "sampleCount": 44096,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "drum jam",
+        "md5": "8b5486ccc806e97e83049d25b071f7e4.wav",
+        "sampleCount": 44288,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "cymbal echo",
+        "md5": "bb243badd1201b2607bf2513df10cd97.wav",
+        "sampleCount": 44326,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "drum satellite",
+        "md5": "079067d7909f791b29f8be1c00fc2131.wav",
+        "sampleCount": 44096,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "kick back",
+        "md5": "9cd340d9d568b1479f731e69e103b3ce.wav",
+        "sampleCount": 44748,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "drum funky",
+        "md5": "fb56022366d21b299cbc3fd5e16000c2.wav",
+        "sampleCount": 44748,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "C trombone",
+        "md5": "821b23a489201a0f21f47ba8528ba47f.wav",
+        "sampleCount": 19053,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D trombone",
+        "md5": "f3afca380ba74372d611d3f518c2f35b.wav",
+        "sampleCount": 17339,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E trombone",
+        "md5": "c859fb0954acaa25c4b329df5fb76434.wav",
+        "sampleCount": 16699,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F trombone",
+        "md5": "d6758470457aac2aa712717a676a5163.wav",
+        "sampleCount": 19373,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G trombone",
+        "md5": "9436fd7a0eacb4a6067e7db14236dde1.wav",
+        "sampleCount": 17179,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A trombone",
+        "md5": "863ccc8ba66e6dabbce2a1261c22be0f.wav",
+        "sampleCount": 17227,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "B trombone",
+        "md5": "85b663229525b73d9f6647f78eb23e0a.wav",
+        "sampleCount": 15522,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 trombone",
+        "md5": "68aec107bd3633b2ee40c532eedc3897.wav",
+        "sampleCount": 13904,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C trumpet",
+        "md5": "8970afcdc4e47bb54959a81fe27522bd.wav",
+        "sampleCount": 13118,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "D trumpet",
+        "md5": "0b1345b8fe2ba3076fedb4f3ae48748a.wav",
+        "sampleCount": 12702,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "E trumpet",
+        "md5": "494295a92314cadb220945a6711c568c.wav",
+        "sampleCount": 8680,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "F trumpet",
+        "md5": "5fa3108b119ca266029b4caa340a7cd0.wav",
+        "sampleCount": 12766,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G trumpet",
+        "md5": "e84afda25975f14b364118591538ccf4.wav",
+        "sampleCount": 14640,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A trumpet",
+        "md5": "d2dd6b4372ca17411965dc92d52b2172.wav",
+        "sampleCount": 13911,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "B trumpet",
+        "md5": "cad2bc57729942ed9b605145fc9ea65d.wav",
+        "sampleCount": 14704,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "C2 trumpet",
+        "md5": "df08249ed5446cc5e10b7ac62faac89b.wav",
+        "sampleCount": 15849,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "F major ukulele",
+        "md5": "cd0ab5d1b0120c6ed92a1654ccf81376.wav",
+        "sampleCount": 18235,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "A minor ukulele",
+        "md5": "69d25af0fd065da39c71439174efc589.wav",
+        "sampleCount": 18267,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "G ukulele",
+        "md5": "d20218f92ee606277658959005538e2d.wav",
+        "sampleCount": 18235,
+        "rate": 22050,
+        "format": ""
+    }
+]

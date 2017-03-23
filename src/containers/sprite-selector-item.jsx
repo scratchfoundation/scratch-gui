@@ -40,7 +40,7 @@ class SpriteSelectorItem extends React.Component {
 
 SpriteSelectorItem.propTypes = {
     costumeURL: React.PropTypes.string,
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     name: React.PropTypes.string,
     onClick: React.PropTypes.func,
     onDeleteButtonClick: React.PropTypes.func,

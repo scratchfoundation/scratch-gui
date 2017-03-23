@@ -11,8 +11,6 @@ const MenuBar = require('../menu-bar/menu-bar.jsx');
 const Box = require('../box/box.jsx');
 const styles = require('./gui.css');
 
-const Storage = require('../../lib/storage');
-
 const GUIComponent = props => {
     const {
         basePath,
@@ -72,12 +70,9 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     children: React.PropTypes.node,
-    vm: React.PropTypes.instanceOf(VM)
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    basePath: '/',
-    vm: new VM(),
-    storage: new Storage()
+    basePath: '/'
 };
-GUIComponent.defaultProps.vm.attachStorage(GUIComponent.defaultProps.storage);
 module.exports = GUIComponent;

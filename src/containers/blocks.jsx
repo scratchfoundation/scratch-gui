@@ -159,7 +159,7 @@ Blocks.propTypes = {
             dragShadowOpacity: React.PropTypes.number
         })
     }),
-    vm: React.PropTypes.instanceOf(VM)
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 Blocks.defaultOptions = {
@@ -188,8 +188,7 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
-    options: Blocks.defaultOptions,
-    vm: new VM()
+    options: Blocks.defaultOptions
 };
 
 module.exports = Blocks;

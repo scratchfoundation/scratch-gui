@@ -50,9 +50,9 @@ const GUIComponent = props => {
                             onSelect={handleTabSelect}
                         >
                             <TabList className={styles.tabList}>
-                                <Tab>Scripts</Tab>
-                                <Tab>Costumes</Tab>
-                                <Tab>Sounds</Tab>
+                                <Tab className={styles.tab}>Scripts</Tab>
+                                <Tab className={styles.tab}>Costumes</Tab>
+                                <Tab className={styles.tab}>Sounds</Tab>
                             </TabList>
                             <TabPanel className={styles.tabPanel}>
                                 <Box className={styles.blocksWrapper}>

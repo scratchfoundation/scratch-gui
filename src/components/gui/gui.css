@@ -21,24 +21,71 @@
     height: 100%;
 }
 
-.blocks-wrapper {
-    /*
-        scratch-blocks is based on absolute positioning, which injects
-        inside this element and becomes the child
-    */
-    position: relative;
-
+.editor-wrapper {
     flex-basis: 600px;
     flex-grow: 1;
     flex-shrink: 0;
+    position: relative;
 
-    /*
-        Normally we'd use padding, but the absolute positioning ignores it,
-        so use margin instead. Temporary, until tabs are inserted.
-    */
-    margin-top: $stage-menu-height;
+    display: flex;
+    flex-direction: column;
+}
 
-    background: #e8edf1;
+.tab-list {
+    height: $stage-menu-height;
+    width: 250px; /* Match width of the toolbox */
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.80rem;
+
+    /* Overrides for react-tabs styling */
+    margin: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.tab-list .tab {
+    flex-grow: 1;
+    height: 80%;
+    margin-left: 1px;
+
+    border-radius: $space $space 0 0;
+    border: none;
+
+    background-color: #F6F8FA;
+    color: #9AA1B5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.tab-list .tab[aria-selected="true"] {
+    color: #40B9F5;
+}
+
+.tabs {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-panel {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+}
+
+.blocks-wrapper {
+    flex-grow: 1;
+    position: relative;
 }
 
 .stage-and-target-wrapper {
@@ -66,7 +113,7 @@
     padding-right: $space;
 
     /* Hides negative space between edge of rounded corners + container, when selected */
-    user-select: none; 
+    user-select: none;
 }
 
 .target-wrapper {

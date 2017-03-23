@@ -1,0 +1,38 @@
+/* Need to use a fixed height for the new container to make list scrollable */
+$new-height: 60px;
+
+.wrapper {
+    width: 200px;
+    position: relative;
+}
+
+.new-item {
+    background: white;
+    border-bottom: 1px solid #ddd;
+    height: $new-height;
+    display: flex;
+    align-items: center;
+    padding-left: 1.75rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.list-area {
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    height: calc(100% - $new-height);
+    overflow-y: scroll;
+}
+
+.list-item {
+    width: 5rem;
+    min-height: 5rem;
+    margin: 1rem auto;
+}
+
+.delete-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}

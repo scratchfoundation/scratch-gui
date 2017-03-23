@@ -162,7 +162,6 @@ TargetPane.propTypes = {
     onChangeSpriteY: React.PropTypes.func,
     onDeleteSprite: React.PropTypes.func,
     onNewBackdropClick: React.PropTypes.func,
-    onNewSoundClick: React.PropTypes.func,
     onNewSpriteClick: React.PropTypes.func,
     onRequestCloseBackdropLibrary: React.PropTypes.func,
     onRequestCloseCostumeLibrary: React.PropTypes.func,

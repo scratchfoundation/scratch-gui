@@ -5,7 +5,6 @@ const {connect} = require('react-redux');
 
 const {
     openBackdropLibrary,
-    openSoundLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
@@ -98,10 +97,6 @@ const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());
-    },
-    onNewSoundClick: e => {
-        e.preventDefault();
-        dispatch(openSoundLibrary());
     },
     onNewSpriteClick: e => {
         e.preventDefault();

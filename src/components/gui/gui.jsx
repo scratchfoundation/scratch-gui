@@ -11,6 +11,8 @@ const MenuBar = require('../menu-bar/menu-bar.jsx');
 const Box = require('../box/box.jsx');
 const styles = require('./gui.css');
 
+const Storage = require('../../lib/storage');
+
 const GUIComponent = props => {
     const {
         basePath,
@@ -48,7 +50,7 @@ const GUIComponent = props => {
                             <GreenFlag vm={vm} />
                             <StopAll vm={vm} />
                         </Box>
-                        
+
                         <Box className={styles.stageWrapper} >
                             <Stage
                                 shrink={0}
@@ -74,6 +76,8 @@ GUIComponent.propTypes = {
 };
 GUIComponent.defaultProps = {
     basePath: '/',
-    vm: new VM()
+    vm: new VM(),
+    storage: new Storage()
 };
+GUIComponent.defaultProps.vm.attachStorage(GUIComponent.defaultProps.storage);
 module.exports = GUIComponent;

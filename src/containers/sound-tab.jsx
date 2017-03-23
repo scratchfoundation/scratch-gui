@@ -16,38 +16,24 @@ class SoundTab extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'getSoundIndexByName',
             'handleSelectSound',
             'handleDeleteSound'
         ]);
         this.state = {selectedSoundIndex: 0};
     }
 
-    getSoundIndexByName (name) {
-        // @todo should be in VM
-        let i = -1;
-        this.props.vm.editingTarget.sprite.sounds.forEach((sound, soundIndex) => {
-            if (sound.name === name) {
-                i = soundIndex;
-            }
-        });
-        return i;
-    }
-
-    handleSelectSound (item) {
-        const selectedSoundIndex = this.getSoundIndexByName(item.name);
-        const sound = this.props.vm.editingTarget.sprite.sounds[selectedSoundIndex];
+    handleSelectSound (soundIndex) {
+        const sound = this.props.vm.editingTarget.sprite.sounds[soundIndex];
         this.props.vm.editingTarget.audioPlayer.playSound(sound.md5);
-        this.setState({selectedSoundIndex});
+        this.setState({selectedSoundIndex: soundIndex});
     }
 
-    handleDeleteSound (item) {
+    handleDeleteSound (soundIndex) {
         // @todo the VM should handle all of this logic
         const {editingTarget} = this.props.vm;
-        const i = this.getSoundIndexByName(item.name);
         editingTarget.sprite.sounds = editingTarget.sprite.sounds
-            .slice(0, i)
-            .concat(editingTarget.sprite.sounds.slice(i + 1));
+            .slice(0, soundIndex)
+            .concat(editingTarget.sprite.sounds.slice(soundIndex + 1));
         this.props.vm.emitTargetsUpdate();
         this.props.vm.runtime.requestRedraw();
 

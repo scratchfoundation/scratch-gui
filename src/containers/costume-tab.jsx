@@ -21,22 +21,21 @@ class CostumeTab extends React.Component {
         this.state = {selectedCostumeIndex: 0};
     }
 
-    handleSelectCostume (item) {
-        this.setState({selectedCostumeIndex: this.props.vm.editingTarget.getCostumeIndexByName(item.name)});
+    handleSelectCostume (costumeIndex) {
+        this.setState({selectedCostumeIndex: costumeIndex});
     }
 
-    handleDeleteCostume (item) {
+    handleDeleteCostume (costumeIndex) {
         // @todo the VM should handle all of this logic
         const {editingTarget} = this.props.vm;
-        const i = editingTarget.getCostumeIndexByName(item.name);
 
-        if (i === editingTarget.currentCostume) {
-            editingTarget.setCostume(i - 1);
+        if (costumeIndex === editingTarget.currentCostume) {
+            editingTarget.setCostume(costumeIndex - 1);
         }
 
         editingTarget.sprite.costumes = editingTarget.sprite.costumes
-            .slice(0, i)
-            .concat(editingTarget.sprite.costumes.slice(i + 1));
+            .slice(0, costumeIndex)
+            .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
         this.props.vm.emitTargetsUpdate();
         // @todo not sure if this is getting redrawn correctly
         this.props.vm.runtime.requestRedraw();

@@ -101,10 +101,9 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: React.PropTypes.string,
     children: React.PropTypes.node,
-    vm: React.PropTypes.instanceOf(VM)
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    basePath: '/',
-    vm: new VM()
+    basePath: '/'
 };
 module.exports = GUIComponent;

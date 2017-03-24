@@ -2,6 +2,8 @@ const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
 
+const Storage = require('./storage');
+
 const {connect} = require('react-redux');
 
 const targets = require('../reducers/targets');
@@ -89,9 +91,11 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: React.PropTypes.func,
         vm: React.PropTypes.instanceOf(VM).isRequired
     };
+    const defaultVM = new VM('vm-listener-hoc');
+    defaultVM.attachStorage(new Storage());
     VMListener.defaultProps = {
         attachKeyboardEvents: true,
-        vm: new VM()
+        vm: defaultVM
     };
     const mapStateToProps = () => ({});
     const mapDispatchToProps = dispatch => ({

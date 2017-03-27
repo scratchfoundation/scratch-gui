@@ -1,3 +1,4 @@
+var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 
@@ -9,6 +10,24 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var postcssVars = require('postcss-simple-vars');
 var postcssImport = require('postcss-import');
+
+/**
+ * Resolve a babel plugin or preset to a real path, resolving symlinks the way that Node.js would.
+ * Helps work around the differences between webpack's module lookup and Node's when `npm link` is in use.
+ * @param {string} prefix - 'babel-plugin' for a plugin, 'babel-preset' for a preset, etc.
+ * @param {string|Array} item - either a plugin/preset name or path or an array with such a string at index 0.
+ * @returns {string|Array} - the same type as `item` but the name/path will be replaced with an absolute path.
+ */
+const babelRealPath = function (prefix, item) {
+    if (typeof item === 'string') {
+        if (item.indexOf(prefix) !== 0) {
+            item = [prefix, item].join('-');
+        }
+        return fs.realpathSync(require.resolve(item));
+    }
+    item[0] = babelRealPath(prefix, item[0]);
+    return item;
+};
 
 module.exports = {
     devServer: {
@@ -25,21 +44,29 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
     },
-    resolve: {
-        symlinks: false
-    },
     externals: {
         React: 'react',
         ReactDOM: 'react-dom'
     },
     module: {
         rules: [{
-            // allow ES2015 in any *.js or *.jsx file under .../scratch-*/src/...
-            test: /[\\/]+scratch-[^\\/]+[\\/]+src[\\/]+.+\.jsx?$/,
+            include: [
+                path.resolve(__dirname, 'node_modules', 'scratch-audio', 'src'),
+                path.resolve(__dirname, 'node_modules', 'scratch-render', 'src'),
+                path.resolve(__dirname, 'node_modules', 'scratch-storage', 'src'),
+                path.resolve(__dirname, 'node_modules', 'scratch-vm', 'src'),
+                path.resolve(__dirname, 'src')
+            ].map(x => fs.realpathSync(x)),
+            test: /\.jsx?$/,
             loader: 'babel-loader',
             options: {
-                plugins: ['transform-object-rest-spread'],
-                presets: [['es2015', {modules: false}], 'react']
+                plugins: [
+                    'transform-object-rest-spread'
+                ].map(x => babelRealPath('babel-plugin', x)),
+                presets: [
+                    ['es2015', {modules: false}],
+                    'react'
+                ].map(x => babelRealPath('babel-preset', x))
             }
         },
         {

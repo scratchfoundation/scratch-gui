@@ -15,12 +15,12 @@ class StopAll extends React.Component {
         this.state = {projectRunning: false};
     }
     componentDidMount () {
-        this.props.vm.on('PROJECT_RUN_START', this.onProjectRunStart);
-        this.props.vm.on('PROJECT_RUN_STOP', this.onProjectRunStop);
+        this.props.vm.addListener('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.addListener('PROJECT_RUN_STOP', this.onProjectRunStop);
     }
     componentWillUnmount () {
-        this.props.vm.off('PROJECT_RUN_START', this.onProjectRunStart);
-        this.props.vm.off('PROJECT_RUN_STOP', this.onProjectRunStop);
+        this.props.vm.removeListener('PROJECT_RUN_START', this.onProjectRunStart);
+        this.props.vm.removeListener('PROJECT_RUN_STOP', this.onProjectRunStop);
     }
     onProjectRunStart () {
         this.setState({projectRunning: true});

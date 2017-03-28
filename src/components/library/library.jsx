@@ -59,8 +59,9 @@ LibraryComponent.propTypes = {
     data: React.PropTypes.arrayOf(
         /* eslint-disable react/no-unused-prop-types, lines-around-comment */
         React.PropTypes.shape({
+            // @todo remove md5/rawURL prop from library, refactor to use storage
             md5: React.PropTypes.string,
-            name: React.PropTypes.string,
+            name: React.PropTypes.string.isRequired,
             rawURL: React.PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
@@ -69,7 +70,7 @@ LibraryComponent.propTypes = {
     onItemSelected: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     title: React.PropTypes.string.isRequired,
-    visible: React.PropTypes.bool
+    visible: React.PropTypes.bool.isRequired
 };
 
 module.exports = LibraryComponent;

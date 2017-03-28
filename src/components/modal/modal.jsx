@@ -35,8 +35,8 @@ class ModalComponent extends React.Component {
 ModalComponent.propTypes = {
     children: React.PropTypes.node,
     contentLabel: React.PropTypes.string.isRequired,
-    onRequestClose: React.PropTypes.func,
-    visible: React.PropTypes.bool
+    onRequestClose: React.PropTypes.func.isRequired,
+    visible: React.PropTypes.bool.isRequired
 };
 
 module.exports = ModalComponent;

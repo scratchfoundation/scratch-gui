@@ -27,7 +27,7 @@ const StopAllComponent = function (props) {
 
 StopAllComponent.propTypes = {
     active: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
+    onClick: React.PropTypes.func.isRequired,
     title: React.PropTypes.string
 };
 

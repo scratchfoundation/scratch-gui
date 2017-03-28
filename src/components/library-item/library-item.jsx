@@ -36,11 +36,11 @@ class LibraryItem extends React.Component {
 }
 
 LibraryItem.propTypes = {
-    iconURL: React.PropTypes.string,
-    id: React.PropTypes.number,
-    name: React.PropTypes.string,
-    onSelect: React.PropTypes.func,
-    selected: React.PropTypes.bool
+    iconURL: React.PropTypes.string.isRequired,
+    id: React.PropTypes.number.isRequired,
+    name: React.PropTypes.string.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
+    selected: React.PropTypes.bool.isRequired
 };
 
 module.exports = LibraryItem;

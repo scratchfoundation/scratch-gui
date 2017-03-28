@@ -26,7 +26,7 @@ const GreenFlagComponent = function (props) {
 };
 GreenFlagComponent.propTypes = {
     active: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
+    onClick: React.PropTypes.func.isRequired,
     title: React.PropTypes.string
 };
 GreenFlagComponent.defaultProps = {

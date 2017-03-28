@@ -83,14 +83,14 @@ SpriteSelectorComponent.propTypes = {
     sprites: React.PropTypes.shape({
         id: React.PropTypes.shape({
             costume: React.PropTypes.shape({
-                skin: React.PropTypes.string,
-                name: React.PropTypes.string,
-                bitmapResolution: React.PropTypes.number,
-                rotationCenterX: React.PropTypes.number,
-                rotationCenterY: React.PropTypes.number
+                skin: React.PropTypes.string.isRequired,
+                name: React.PropTypes.string.isRequired,
+                bitmapResolution: React.PropTypes.number.isRequired,
+                rotationCenterX: React.PropTypes.number.isRequired,
+                rotationCenterY: React.PropTypes.number.isRequired
             }),
-            name: React.PropTypes.string,
-            order: React.PropTypes.number
+            name: React.PropTypes.string.isRequired,
+            order: React.PropTypes.number.isRequired
         })
     })
 };

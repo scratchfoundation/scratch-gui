@@ -28,7 +28,7 @@ CloseButton.SIZE_SMALL = 'small';
 
 CloseButton.propTypes = {
     className: React.PropTypes.string,
-    onClick: React.PropTypes.func,
+    onClick: React.PropTypes.func.isRequired,
     size: React.PropTypes.oneOf([CloseButton.SIZE_LARGE, CloseButton.SIZE_SMALL])
 };
 

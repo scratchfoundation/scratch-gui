@@ -70,8 +70,8 @@ class SoundTab extends React.Component {
 }
 
 SoundTab.propTypes = {
-    ...AssetPanel.propTypes,
-    vm: React.PropTypes.instanceOf(VM)
+    onNewSoundClick: React.PropTypes.func.isRequired,
+    vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({

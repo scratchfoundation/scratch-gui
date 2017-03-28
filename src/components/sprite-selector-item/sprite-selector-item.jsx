@@ -38,11 +38,11 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: React.PropTypes.string,
-    costumeURL: React.PropTypes.string,
-    name: React.PropTypes.string,
+    costumeURL: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func,
     onDeleteButtonClick: React.PropTypes.func,
-    selected: React.PropTypes.bool
+    selected: React.PropTypes.bool.isRequired
 };
 
 module.exports = SpriteSelectorItem;

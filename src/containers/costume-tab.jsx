@@ -74,7 +74,7 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
-    ...AssetPanel.propTypes,
+    onNewCostumeClick: React.PropTypes.func.isRequired,
     vm: React.PropTypes.instanceOf(VM)
 };
 

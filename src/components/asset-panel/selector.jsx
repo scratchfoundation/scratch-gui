@@ -43,14 +43,14 @@ const Selector = props => {
 
 Selector.propTypes = {
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
-        image: React.PropTypes.string,
-        name: React.PropTypes.string
+        image: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired
     })),
-    newText: React.PropTypes.string,
-    onDeleteClick: React.PropTypes.func,
-    onItemClick: React.PropTypes.func,
+    newText: React.PropTypes.string.isRequired,
+    onDeleteClick: React.PropTypes.func.isRequired,
+    onItemClick: React.PropTypes.func.isRequired,
     onNewClick: React.PropTypes.func,
-    selectedItemIndex: React.PropTypes.number
+    selectedItemIndex: React.PropTypes.number.isRequired
 };
 
 module.exports = Selector;

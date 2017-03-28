@@ -40,16 +40,16 @@ const StageSelector = props => {
                     <div className={styles.label}>Backdrops</div>
                     <div className={styles.count}>{backdropCount}</div>
                 </div>
-                
+
             </div>
         </Box>
     );
 };
 
 StageSelector.propTypes = {
-    backdropCount: React.PropTypes.number,
+    backdropCount: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func,
-    selected: React.PropTypes.bool,
+    selected: React.PropTypes.bool.isRequired,
     url: React.PropTypes.string
 };
 module.exports = StageSelector;

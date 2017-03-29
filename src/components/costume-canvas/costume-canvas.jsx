@@ -51,8 +51,8 @@ class CostumeCanvas extends React.Component {
         let contextTranslateY = this.canvas.height / 2;
 
         // If vertical align is top, draw the image from the top of the canvas
-        if(this.props.verticalAlign === 'top') {
-            contextTranslateY = this.canvas.height / 2 - (this.canvas.height - scale * img.height) / 2;
+        if (this.props.verticalAlign === 'top') {
+            contextTranslateY = (this.canvas.height / 2) - ((this.canvas.height - (scale * img.height)) / 2);
         }
 
         // First, clear the canvas.
@@ -126,10 +126,10 @@ CostumeCanvas.defaultProps = {
 
 CostumeCanvas.propTypes = {
     className: React.PropTypes.string,
-    verticalAlign: React.PropTypes.string,
     direction: React.PropTypes.number,
     height: React.PropTypes.number,
     url: React.PropTypes.string.isRequired,
+    verticalAlign: React.PropTypes.string,
     width: React.PropTypes.number
 };
 

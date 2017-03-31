@@ -2,14 +2,12 @@ const bindAll = require('lodash.bindall');
 const React = require('react');
 const VM = require('scratch-vm');
 const AudioEngine = require('scratch-audio');
-
+const AssetType = require('scratch-storage').AssetType;
 const LibaryComponent = require('../components/library/library.jsx');
 
 const soundIcon = require('../components/asset-panel/icon--sound.svg');
 
 const soundLibraryContent = require('../lib/libraries/sounds.json');
-
-const md5ToUrl = md5 => (`https://cdn.assets.scratch.mit.edu/internalapi/asset/${md5}/get/`);
 
 class SoundLibrary extends React.Component {
     constructor (props) {
@@ -20,39 +18,36 @@ class SoundLibrary extends React.Component {
         ]);
     }
     componentDidMount () {
-        // @todo lots of architectural questions here
-        // - Should the sound library component own an audio player, or use the VM?
-        // - Should the sound library load up all the sounds or only on demand?
-        // - How can we get a callback for knowing when the sound has been loaded?
         this.audioEngine = new AudioEngine();
         this.player = this.audioEngine.createPlayer();
-        this.audioEngine.loadSounds(soundLibraryContent.map(sound => (
-            {
-                fileUrl: md5ToUrl(sound.md5),
-                ...sound
-            }
-        )));
     }
-    handleItemChosen (item) {
-        this.player.playSound(item._md5);
+    handleItemChosen (soundItem) {
+        const md5ext = soundItem._md5;
+        const idParts = md5ext.split('.');
+        const md5 = idParts[0];
+        const vm = this.props.vm;
+        vm.runtime.storage.load(AssetType.Sound, md5).then(soundAsset => {
+            const sound = {
+                md5: md5ext,
+                name: soundItem.name,
+                format: soundItem.format,
+                data: soundAsset.data
+            };
+            return this.audioEngine.decodeSound(sound);
+        })
+        .then(() => {
+            this.player.playSound(soundItem._md5);
+        });
     }
-    handleItemSelected (item) {
-        // @todo these two props should be handled by a VM.addSound function
-        const nextSoundId = this.props.vm.editingTarget.sprite.sounds.length;
-        const fileUrl = md5ToUrl(item._md5);
+    handleItemSelected (soundItem) {
         const vmSound = {
-            fileUrl,
-            format: item.format,
-            md5: item._md5,
-            rate: item.rate,
-            sampleCount: item.sampleCount,
-            soundID: nextSoundId,
-            name: item.name
+            format: soundItem.format,
+            md5: soundItem._md5,
+            rate: soundItem.rate,
+            sampleCount: soundItem.sampleCount,
+            name: soundItem.name
         };
-        // @todo awaiting an official VM.addSound function
-        // it will need to both add to sprite and load the sound
-        this.props.vm.editingTarget.sprite.sounds.push(vmSound);
-        this.props.vm.runtime.audioEngine.loadSounds([vmSound]);
+        this.props.vm.addSound(vmSound);
     }
     render () {
         // @todo need to use this hack to avoid library using md5 for image

@@ -18,11 +18,9 @@ class CostumeLibrary extends React.Component {
             name: item.name,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1],
+            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        if (item.info.length > 2) {
-            vmCostume.bitmapResolution = item.info[2];
-        }
         this.props.vm.addCostume(item.md5, vmCostume);
     }
     render () {

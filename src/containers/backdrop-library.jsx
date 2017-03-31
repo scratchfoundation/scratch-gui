@@ -18,11 +18,9 @@ class BackdropLibrary extends React.Component {
             name: item.name,
             rotationCenterX: item.info[0] && item.info[0] / 2,
             rotationCenterY: item.info[1] && item.info[1] / 2,
+            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        if (item.info.length > 2) {
-            vmBackdrop.bitmapResolution = item.info[2];
-        }
         this.props.vm.addBackdrop(item.md5, vmBackdrop);
     }
     render () {

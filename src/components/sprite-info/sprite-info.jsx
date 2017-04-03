@@ -222,8 +222,14 @@ SpriteInfo.propTypes = {
     onKeyPress: React.PropTypes.func,
     rotationStyle: React.PropTypes.oneOf(ROTATION_STYLES),
     visible: React.PropTypes.bool,
-    x: React.PropTypes.string,
-    y: React.PropTypes.string
+    x: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+    ]),
+    y: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+    ])
 };
 
 module.exports = SpriteInfo;

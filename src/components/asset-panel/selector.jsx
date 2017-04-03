@@ -27,7 +27,7 @@ const Selector = props => {
                 {items.map((item, index) => (
                     <SpriteSelectorItem
                         className={styles.listItem}
-                        costumeURL={item.image}
+                        costumeURL={item.url}
                         id={index}
                         key={`asset-${index}`}
                         name={item.name}
@@ -43,7 +43,7 @@ const Selector = props => {
 
 Selector.propTypes = {
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
-        image: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string,
         name: React.PropTypes.string.isRequired
     })),
     newText: React.PropTypes.string.isRequired,

@@ -51,12 +51,7 @@ class CostumeTab extends React.Component {
             onNewCostumeClick
         } = this.props;
 
-        const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes.map(costume => (
-            {
-                image: costume.skin,
-                name: costume.name
-            }
-        )) : [];
+        const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes : [];
 
         const addText = vm.editingTarget && vm.editingTarget.isStage ? 'Add Backdrop' : 'Add Costume';
 

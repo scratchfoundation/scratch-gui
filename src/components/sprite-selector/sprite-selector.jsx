@@ -54,7 +54,10 @@ const SpriteSelectorComponent = function (props) {
                         .map(id => (
                             <SpriteSelectorItem
                                 className={styles.sprite}
-                                costumeURL={sprites[id].costume.skin}
+                                costumeURL={
+                                    sprites[id].costume &&
+                                    sprites[id].costume.url
+                                }
                                 id={id}
                                 key={id}
                                 name={sprites[id].name}
@@ -83,7 +86,7 @@ SpriteSelectorComponent.propTypes = {
     sprites: React.PropTypes.shape({
         id: React.PropTypes.shape({
             costume: React.PropTypes.shape({
-                skin: React.PropTypes.string.isRequired,
+                url: React.PropTypes.string,
                 name: React.PropTypes.string.isRequired,
                 bitmapResolution: React.PropTypes.number.isRequired,
                 rotationCenterX: React.PropTypes.number.isRequired,

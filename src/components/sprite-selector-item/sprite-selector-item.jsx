@@ -38,7 +38,7 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: React.PropTypes.string,
-    costumeURL: React.PropTypes.string.isRequired,
+    costumeURL: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func,
     onDeleteButtonClick: React.PropTypes.func,

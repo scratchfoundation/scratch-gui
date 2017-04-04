@@ -8,7 +8,8 @@ const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
 const {connect} = require('react-redux');
 
 const {
-    openCostumeLibrary
+    openCostumeLibrary,
+    openBackdropLibrary
 } = require('../reducers/modals');
 
 class CostumeTab extends React.Component {
@@ -48,7 +49,8 @@ class CostumeTab extends React.Component {
     render () {
         const {
             vm,
-            onNewCostumeClick
+            onNewCostumeClick,
+            onNewBackdropClick
         } = this.props;
 
         const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes.map(costume => (
@@ -59,6 +61,7 @@ class CostumeTab extends React.Component {
         )) : [];
 
         const addText = vm.editingTarget && vm.editingTarget.isStage ? 'Add Backdrop' : 'Add Costume';
+        const addFunc = vm.editingTarget && vm.editingTarget.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
@@ -67,13 +70,14 @@ class CostumeTab extends React.Component {
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-                onNewClick={onNewCostumeClick}
+                onNewClick={addFunc}
             />
         );
     }
 }
 
 CostumeTab.propTypes = {
+    onNewBackdropClick: React.PropTypes.func.isRequired,
     onNewCostumeClick: React.PropTypes.func.isRequired,
     vm: React.PropTypes.instanceOf(VM)
 };
@@ -81,10 +85,15 @@ CostumeTab.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
-    costumeLibraryVisible: state.modals.costumeLibrary
+    costumeLibraryVisible: state.modals.costumeLibrary,
+    backdropLibraryVisible: state.modals.backdropLibrary
 });
 
 const mapDispatchToProps = dispatch => ({
+    onNewBackdropClick: e => {
+        e.preventDefault();
+        dispatch(openBackdropLibrary());
+    },
     onNewCostumeClick: e => {
         e.preventDefault();
         dispatch(openCostumeLibrary());

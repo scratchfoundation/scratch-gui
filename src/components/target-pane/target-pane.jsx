@@ -81,7 +81,10 @@ class TargetPane extends React.Component {
                         backdropCount={stage.costumeCount}
                         id={stage.id}
                         selected={stage.id === editingTarget}
-                        url={stage.costume.skin}
+                        url={
+                            stage.costume &&
+                            stage.costume.url
+                        }
                         onSelect={onSelectSprite}
                     />}
                     <Box>
@@ -134,11 +137,11 @@ class TargetPane extends React.Component {
 }
 const spriteShape = React.PropTypes.shape({
     costume: React.PropTypes.shape({
-        skin: React.PropTypes.string,
-        name: React.PropTypes.string,
-        bitmapResolution: React.PropTypes.number,
-        rotationCenterX: React.PropTypes.number,
-        rotationCenterY: React.PropTypes.number
+        url: React.PropTypes.string,
+        name: React.PropTypes.string.isRequired,
+        bitmapResolution: React.PropTypes.number.isRequired,
+        rotationCenterX: React.PropTypes.number.isRequired,
+        rotationCenterY: React.PropTypes.number.isRequired
     }),
     draggable: React.PropTypes.bool,
     id: React.PropTypes.string,

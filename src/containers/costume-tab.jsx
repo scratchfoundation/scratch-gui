@@ -48,19 +48,18 @@ class CostumeTab extends React.Component {
 
     render () {
         const {
-            vm,
+            editingTarget,
+            sprites,
             onNewCostumeClick,
             onNewBackdropClick
         } = this.props;
 
-        const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes : [];
-
-        const addText = vm.editingTarget && vm.editingTarget.isStage ? 'Add Backdrop' : 'Add Costume';
-        const addFunc = vm.editingTarget && vm.editingTarget.isStage ? onNewBackdropClick : onNewCostumeClick;
+        const addText = editingTarget && sprites[editingTarget].isStage ? 'Add Backdrop' : 'Add Costume';
+        const addFunc = editingTarget && sprites[editingTarget].isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
-                items={costumes}
+                items={editingTarget ? sprites[editingTarget].costumes : []}
                 newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
@@ -72,8 +71,17 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
+    editingTarget: React.PropTypes.string,
     onNewBackdropClick: React.PropTypes.func.isRequired,
     onNewCostumeClick: React.PropTypes.func.isRequired,
+    sprites: React.PropTypes.shape({
+        id: React.PropTypes.shape({
+            costumes: React.PropTypes.arrayOf(React.PropTypes.shape({
+                url: React.PropTypes.string,
+                name: React.PropTypes.string.isRequired
+            }))
+        })
+    }),
     vm: React.PropTypes.instanceOf(VM)
 };
 

@@ -44,21 +44,24 @@ class SoundTab extends React.Component {
 
     render () {
         const {
-            vm,
+            editingTarget,
+            sprites,
             onNewSoundClick
         } = this.props;
 
-        const sounds = vm.editingTarget ? vm.editingTarget.sprite.sounds.map(sound => (
+        const sounds = editingTarget ? sprites[editingTarget].sounds.map(sound => (
             {
                 url: soundIcon,
                 name: sound.name
             }
         )) : [];
 
-
         return (
             <AssetPanel
-                items={sounds}
+                items={sounds.map(sound => ({
+                    url: soundIcon,
+                    ...sound
+                }))}
                 newText={'Add Sound'}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}
@@ -70,7 +73,15 @@ class SoundTab extends React.Component {
 }
 
 SoundTab.propTypes = {
+    editingTarget: React.PropTypes.string,
     onNewSoundClick: React.PropTypes.func.isRequired,
+    sprites: React.PropTypes.shape({
+        id: React.PropTypes.shape({
+            sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
+                name: React.PropTypes.string.isRequired
+            }))
+        })
+    }),
     vm: React.PropTypes.instanceOf(VM).isRequired
 };
 

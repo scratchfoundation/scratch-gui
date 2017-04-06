@@ -50,7 +50,7 @@ class SoundTab extends React.Component {
 
         const sounds = vm.editingTarget ? vm.editingTarget.sprite.sounds.map(sound => (
             {
-                image: soundIcon,
+                url: soundIcon,
                 name: sound.name
             }
         )) : [];

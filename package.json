@@ -19,7 +19,7 @@
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
   "peerDependencies": {
-    "react": "15.x.x",
+    "react": "^15.5.0",
     "react-dom": "15.x.x"
   },
   "devDependencies": {

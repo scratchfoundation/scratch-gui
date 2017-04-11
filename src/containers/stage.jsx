@@ -13,6 +13,7 @@ class Stage extends React.Component {
             'attachMouseEvents',
             'cancelMouseDownTimeout',
             'detachMouseEvents',
+            'onDoubleClick',
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
@@ -70,6 +71,14 @@ class Stage extends React.Component {
             x - (this.rect.width / 2),
             y - (this.rect.height / 2)
         ];
+    }
+    onDoubleClick (e) {
+        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        const drawableId = this.renderer.pick(mousePosition[0], mousePosition[1]);
+        if (drawableId === null) return;
+        const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
+        if (targetId === null) return;
+        this.props.vm.setEditingTarget(targetId);
     }
     onMouseMove (e) {
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
@@ -168,6 +177,7 @@ class Stage extends React.Component {
         return (
             <StageComponent
                 canvasRef={this.setCanvas}
+                onDoubleClick={this.onDoubleClick}
                 {...props}
             />
         );

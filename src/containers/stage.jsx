@@ -100,7 +100,7 @@ class Stage extends React.Component {
         this.cancelMouseDownTimeout();
         this.setState({
             mouseDown: false,
-            mouseDownPosition: null,
+            mouseDownPosition: null
         });
         if (this.state.isDragging) {
             this.onStopDrag();

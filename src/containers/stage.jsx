@@ -13,7 +13,7 @@ class Stage extends React.Component {
             'attachMouseEvents',
             'cancelMouseDownTimeout',
             'detachMouseEvents',
-            'onDoubleClick',
+            'handleDoubleClick',
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
@@ -72,7 +72,8 @@ class Stage extends React.Component {
             y - (this.rect.height / 2)
         ];
     }
-    onDoubleClick (e) {
+    handleDoubleClick (e) {
+        // Set editing target from cursor position, if clicking on a sprite.
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
         const drawableId = this.renderer.pick(mousePosition[0], mousePosition[1]);
         if (drawableId === null) return;
@@ -177,7 +178,7 @@ class Stage extends React.Component {
         return (
             <StageComponent
                 canvasRef={this.setCanvas}
-                onDoubleClick={this.onDoubleClick}
+                onDoubleClick={this.handleDoubleClick}
                 {...props}
             />
         );

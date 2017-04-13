@@ -23,6 +23,7 @@ class Stage extends React.Component {
         ]);
         this.state = {
             mouseDownTimeoutId: null,
+            mouseDownPosition: null,
             isDragging: false,
             dragOffset: null,
             dragId: null
@@ -73,9 +74,11 @@ class Stage extends React.Component {
     }
     onMouseMove (e) {
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
-        this.cancelMouseDownTimeout();
-        if (this.state.mouseDown && !this.state.isDragging) {
-            this.onStartDrag(mousePosition[0], mousePosition[1]);
+        if (this.state.mouseDownTimeoutId !== null) {
+            this.cancelMouseDownTimeout();
+            if (this.state.mouseDown && !this.state.isDragging) {
+                this.onStartDrag(...this.state.mouseDownPosition);
+            }
         }
         if (this.state.mouseDown && this.state.isDragging) {
             const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
@@ -96,7 +99,8 @@ class Stage extends React.Component {
     onMouseUp (e) {
         this.cancelMouseDownTimeout();
         this.setState({
-            mouseDown: false
+            mouseDown: false,
+            mouseDownPosition: null
         });
         if (this.state.isDragging) {
             this.onStopDrag();
@@ -115,6 +119,7 @@ class Stage extends React.Component {
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
         this.setState({
             mouseDown: true,
+            mouseDownPosition: mousePosition,
             mouseDownTimeoutId: setTimeout(
                 this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
                 500

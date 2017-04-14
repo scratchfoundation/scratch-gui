@@ -4,7 +4,7 @@
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./src/index.js",
   "scripts": {
-    "build": "npm run clean && webpack --progress --colors --bail",
+    "build": "webpack --progress --colors --bail",
     "clean": "rm -rf ./build && mkdir -p build",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint . --ext .js,.jsx",

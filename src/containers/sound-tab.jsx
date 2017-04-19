@@ -46,10 +46,17 @@ class SoundTab extends React.Component {
         const {
             editingTarget,
             sprites,
+            stage,
             onNewSoundClick
         } = this.props;
 
-        const sounds = editingTarget ? sprites[editingTarget].sounds.map(sound => (
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+
+        if (!target) {
+            return null;
+        }
+
+        const sounds = target.sounds ? target.sounds.map(sound => (
             {
                 url: soundIcon,
                 name: sound.name
@@ -82,12 +89,18 @@ SoundTab.propTypes = {
             }))
         })
     }),
+    stage: React.PropTypes.shape({
+        sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired
+        }))
+    }),
     vm: React.PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
+    stage: state.targets.stage,
     soundLibraryVisible: state.modals.soundLibrary
 });
 

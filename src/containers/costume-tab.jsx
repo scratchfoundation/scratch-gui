@@ -37,7 +37,7 @@ class CostumeTab extends React.Component {
         editingTarget.sprite.costumes = editingTarget.sprite.costumes
             .slice(0, costumeIndex)
             .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
-        this.props.vm.emitTargetsUpdate();
+        this.props.vm.runtime.spriteInfoReport(editingTarget);
         // @todo not sure if this is getting redrawn correctly
         this.props.vm.runtime.requestRedraw();
 
@@ -50,16 +50,23 @@ class CostumeTab extends React.Component {
         const {
             editingTarget,
             sprites,
+            stage,
             onNewCostumeClick,
             onNewBackdropClick
         } = this.props;
 
-        const addText = editingTarget && sprites[editingTarget].isStage ? 'Add Backdrop' : 'Add Costume';
-        const addFunc = editingTarget && sprites[editingTarget].isStage ? onNewBackdropClick : onNewCostumeClick;
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+
+        if (!target) {
+            return null;
+        }
+
+        const addText = target.isStage ? 'Add Backdrop' : 'Add Costume';
+        const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
-                items={editingTarget ? sprites[editingTarget].costumes : []}
+                items={target.costumes || []}
                 newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
@@ -82,12 +89,18 @@ CostumeTab.propTypes = {
             }))
         })
     }),
+    stage: React.PropTypes.shape({
+        sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired
+        }))
+    }),
     vm: React.PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
+    stage: state.targets.stage,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });

@@ -37,7 +37,7 @@ class CostumeTab extends React.Component {
         editingTarget.sprite.costumes = editingTarget.sprite.costumes
             .slice(0, costumeIndex)
             .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
-        this.props.vm.emitTargetsUpdate();
+        this.props.vm.runtime.spriteInfoReport(editingTarget);
         // @todo not sure if this is getting redrawn correctly
         this.props.vm.runtime.requestRedraw();
 
@@ -48,19 +48,25 @@ class CostumeTab extends React.Component {
 
     render () {
         const {
-            vm,
+            editingTarget,
+            sprites,
+            stage,
             onNewCostumeClick,
             onNewBackdropClick
         } = this.props;
 
-        const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes : [];
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
-        const addText = vm.editingTarget && vm.editingTarget.isStage ? 'Add Backdrop' : 'Add Costume';
-        const addFunc = vm.editingTarget && vm.editingTarget.isStage ? onNewBackdropClick : onNewCostumeClick;
+        if (!target) {
+            return null;
+        }
+
+        const addText = target.isStage ? 'Add Backdrop' : 'Add Costume';
+        const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
-                items={costumes}
+                items={target.costumes || []}
                 newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
@@ -72,14 +78,29 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
+    editingTarget: React.PropTypes.string,
     onNewBackdropClick: React.PropTypes.func.isRequired,
     onNewCostumeClick: React.PropTypes.func.isRequired,
+    sprites: React.PropTypes.shape({
+        id: React.PropTypes.shape({
+            costumes: React.PropTypes.arrayOf(React.PropTypes.shape({
+                url: React.PropTypes.string,
+                name: React.PropTypes.string.isRequired
+            }))
+        })
+    }),
+    stage: React.PropTypes.shape({
+        sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired
+        }))
+    }),
     vm: React.PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
+    stage: state.targets.stage,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });

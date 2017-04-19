@@ -48,7 +48,12 @@ class CostumeCanvas extends React.Component {
 
         // Rotation origin point will be center of the canvas.
         const contextTranslateX = this.canvas.width / 2;
-        const contextTranslateY = this.canvas.height / 2;
+        let contextTranslateY = this.canvas.height / 2;
+
+        // If vertical align is top, draw the image from the top of the canvas
+        if (this.props.verticalAlign === 'top') {
+            contextTranslateY = (this.canvas.height / 2) - ((this.canvas.height - (scale * img.height)) / 2);
+        }
 
         // First, clear the canvas.
         context.clearRect(0, 0,
@@ -115,7 +120,8 @@ class CostumeCanvas extends React.Component {
 CostumeCanvas.defaultProps = {
     width: 100,
     height: 100,
-    direction: 90
+    direction: 90,
+    verticalAlign: 'center'
 };
 
 CostumeCanvas.propTypes = {
@@ -123,6 +129,7 @@ CostumeCanvas.propTypes = {
     direction: React.PropTypes.number,
     height: React.PropTypes.number,
     url: React.PropTypes.string.isRequired,
+    verticalAlign: React.PropTypes.string,
     width: React.PropTypes.number
 };
 

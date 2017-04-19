@@ -16,6 +16,7 @@ module.exports = {
         host: '0.0.0.0',
         port: process.env.PORT || 8601
     },
+    devtool: 'cheap-module-source-map',
     entry: {
         lib: ['react', 'react-dom'],
         gui: './src/index.jsx'

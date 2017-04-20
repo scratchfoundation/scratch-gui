@@ -19,8 +19,8 @@
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
   "peerDependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react": "^15",
+    "react-dom": "^15"
   },
   "devDependencies": {
     "autoprefixer": "6.7.7",
@@ -48,8 +48,8 @@
     "postcss-import": "9.1.0",
     "postcss-loader": "1.3.3",
     "postcss-simple-vars": "3.1.0",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
     "react-modal": "1.7.7",
     "react-redux": "5.0.4",
     "react-style-proptype": "3.0.0",

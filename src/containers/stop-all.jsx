@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -48,7 +49,7 @@ class StopAll extends React.Component {
 }
 
 StopAll.propTypes = {
-    vm: React.PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM)
 };
 
 module.exports = StopAll;

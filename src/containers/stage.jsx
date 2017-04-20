@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 const Renderer = require('scratch-render');
 const AudioEngine = require('scratch-audio');
@@ -191,7 +192,7 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = Stage;

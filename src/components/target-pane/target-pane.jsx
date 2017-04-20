@@ -1,6 +1,7 @@
 const isEqual = require('lodash.isequal');
 const omit = require('lodash.omit');
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const VM = require('scratch-vm');
@@ -135,47 +136,47 @@ class TargetPane extends React.Component {
         );
     }
 }
-const spriteShape = React.PropTypes.shape({
-    costume: React.PropTypes.shape({
-        url: React.PropTypes.string,
-        name: React.PropTypes.string.isRequired,
-        bitmapResolution: React.PropTypes.number.isRequired,
-        rotationCenterX: React.PropTypes.number.isRequired,
-        rotationCenterY: React.PropTypes.number.isRequired
+const spriteShape = PropTypes.shape({
+    costume: PropTypes.shape({
+        url: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        bitmapResolution: PropTypes.number.isRequired,
+        rotationCenterX: PropTypes.number.isRequired,
+        rotationCenterY: PropTypes.number.isRequired
     }),
-    draggable: React.PropTypes.bool,
-    id: React.PropTypes.string,
-    name: React.PropTypes.string,
-    order: React.PropTypes.number,
-    rotationStyle: React.PropTypes.string,
-    visibility: React.PropTypes.bool,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    draggable: PropTypes.bool,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    order: PropTypes.number,
+    rotationStyle: PropTypes.string,
+    visibility: PropTypes.bool,
+    x: PropTypes.number,
+    y: PropTypes.number
 });
 
 TargetPane.propTypes = {
-    backdropLibraryVisible: React.PropTypes.bool,
-    costumeLibraryVisible: React.PropTypes.bool,
-    editingTarget: React.PropTypes.string,
-    onChangeSpriteDraggability: React.PropTypes.func,
-    onChangeSpriteName: React.PropTypes.func,
-    onChangeSpriteRotationStyle: React.PropTypes.func,
-    onChangeSpriteVisibility: React.PropTypes.func,
-    onChangeSpriteX: React.PropTypes.func,
-    onChangeSpriteY: React.PropTypes.func,
-    onDeleteSprite: React.PropTypes.func,
-    onNewBackdropClick: React.PropTypes.func,
-    onNewSpriteClick: React.PropTypes.func,
-    onRequestCloseBackdropLibrary: React.PropTypes.func,
-    onRequestCloseCostumeLibrary: React.PropTypes.func,
-    onRequestCloseSoundLibrary: React.PropTypes.func,
-    onRequestCloseSpriteLibrary: React.PropTypes.func,
-    onSelectSprite: React.PropTypes.func,
-    soundLibraryVisible: React.PropTypes.bool,
-    spriteLibraryVisible: React.PropTypes.bool,
-    sprites: React.PropTypes.objectOf(spriteShape),
+    backdropLibraryVisible: PropTypes.bool,
+    costumeLibraryVisible: PropTypes.bool,
+    editingTarget: PropTypes.string,
+    onChangeSpriteDraggability: PropTypes.func,
+    onChangeSpriteName: PropTypes.func,
+    onChangeSpriteRotationStyle: PropTypes.func,
+    onChangeSpriteVisibility: PropTypes.func,
+    onChangeSpriteX: PropTypes.func,
+    onChangeSpriteY: PropTypes.func,
+    onDeleteSprite: PropTypes.func,
+    onNewBackdropClick: PropTypes.func,
+    onNewSpriteClick: PropTypes.func,
+    onRequestCloseBackdropLibrary: PropTypes.func,
+    onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseSoundLibrary: PropTypes.func,
+    onRequestCloseSpriteLibrary: PropTypes.func,
+    onSelectSprite: PropTypes.func,
+    soundLibraryVisible: PropTypes.bool,
+    spriteLibraryVisible: PropTypes.bool,
+    sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
-    vm: React.PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM)
 };
 
 module.exports = TargetPane;

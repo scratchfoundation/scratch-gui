@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StageSelectorComponent = require('../components/stage-selector/stage-selector.jsx');
@@ -32,7 +33,7 @@ class StageSelector extends React.Component {
 }
 StageSelector.propTypes = {
     ...StageSelectorComponent.propTypes,
-    id: React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    id: PropTypes.string,
+    onSelect: PropTypes.func
 };
 module.exports = StageSelector;

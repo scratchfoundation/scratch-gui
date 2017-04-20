@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -36,8 +37,8 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     ...GUIComponent.propTypes,
-    projectData: React.PropTypes.string,
-    vm: React.PropTypes.instanceOf(VM)
+    projectData: PropTypes.string,
+    vm: PropTypes.instanceOf(VM)
 };
 
 GUI.defaultProps = GUIComponent.defaultProps;

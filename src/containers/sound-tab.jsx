@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
 
@@ -80,21 +81,21 @@ class SoundTab extends React.Component {
 }
 
 SoundTab.propTypes = {
-    editingTarget: React.PropTypes.string,
-    onNewSoundClick: React.PropTypes.func.isRequired,
-    sprites: React.PropTypes.shape({
-        id: React.PropTypes.shape({
-            sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
-                name: React.PropTypes.string.isRequired
+    editingTarget: PropTypes.string,
+    onNewSoundClick: PropTypes.func.isRequired,
+    sprites: PropTypes.shape({
+        id: PropTypes.shape({
+            sounds: PropTypes.arrayOf(PropTypes.shape({
+                name: PropTypes.string.isRequired
             }))
         })
     }),
-    stage: React.PropTypes.shape({
-        sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired
+    stage: PropTypes.shape({
+        sounds: PropTypes.arrayOf(PropTypes.shape({
+            name: PropTypes.string.isRequired
         }))
     }),
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({

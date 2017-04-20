@@ -1,4 +1,5 @@
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -37,12 +38,12 @@ const SpriteSelectorItem = props => (
 );
 
 SpriteSelectorItem.propTypes = {
-    className: React.PropTypes.string,
-    costumeURL: React.PropTypes.string,
-    name: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func,
-    onDeleteButtonClick: React.PropTypes.func,
-    selected: React.PropTypes.bool.isRequired
+    className: PropTypes.string,
+    costumeURL: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func,
+    selected: PropTypes.bool.isRequired
 };
 
 module.exports = SpriteSelectorItem;

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const ReactModal = require('react-modal');
 
@@ -33,10 +34,10 @@ class ModalComponent extends React.Component {
 }
 
 ModalComponent.propTypes = {
-    children: React.PropTypes.node,
-    contentLabel: React.PropTypes.string.isRequired,
-    onRequestClose: React.PropTypes.func.isRequired,
-    visible: React.PropTypes.bool.isRequired
+    children: PropTypes.node,
+    contentLabel: PropTypes.string.isRequired,
+    onRequestClose: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired
 };
 
 module.exports = ModalComponent;

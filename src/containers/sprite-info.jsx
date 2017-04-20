@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const SpriteInfoComponent = require('../components/sprite-info/sprite-info.jsx');
@@ -103,14 +104,14 @@ class SpriteInfo extends React.Component {
 
 SpriteInfo.propTypes = {
     ...SpriteInfoComponent.propTypes,
-    onChangeDraggability: React.PropTypes.func,
-    onChangeName: React.PropTypes.func,
-    onChangeRotationStyle: React.PropTypes.func,
-    onChangeVisibility: React.PropTypes.func,
-    onChangeX: React.PropTypes.func,
-    onChangeY: React.PropTypes.func,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    onChangeDraggability: PropTypes.func,
+    onChangeName: PropTypes.func,
+    onChangeRotationStyle: PropTypes.func,
+    onChangeVisibility: PropTypes.func,
+    onChangeX: PropTypes.func,
+    onChangeY: PropTypes.func,
+    x: PropTypes.number,
+    y: PropTypes.number
 };
 
 module.exports = SpriteInfo;

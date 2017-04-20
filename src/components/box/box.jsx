@@ -1,4 +1,5 @@
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 const stylePropType = require('react-style-proptype');
 const styles = require('./box.css');
@@ -74,41 +75,41 @@ const Box = props => {
     }, children);
 };
 Box.propTypes = {
-    alignContent: React.PropTypes.oneOf([
+    alignContent: PropTypes.oneOf([
         'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'stretch'
     ]),
-    alignItems: React.PropTypes.oneOf([
+    alignItems: PropTypes.oneOf([
         'flex-start', 'flex-end', 'center', 'baseline', 'stretch'
     ]),
-    alignSelf: React.PropTypes.oneOf([
+    alignSelf: PropTypes.oneOf([
         'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'
     ]),
-    basis: React.PropTypes.oneOfType([
-        React.PropTypes.number,
-        React.PropTypes.oneOf(['auto'])
+    basis: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.oneOf(['auto'])
     ]),
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    componentRef: React.PropTypes.func,
-    direction: React.PropTypes.oneOf([
+    children: PropTypes.node,
+    className: PropTypes.string,
+    componentRef: PropTypes.func,
+    direction: PropTypes.oneOf([
         'row', 'row-reverse', 'column', 'column-reverse'
     ]),
-    element: React.PropTypes.string,
-    grow: React.PropTypes.number,
-    height: React.PropTypes.oneOfType([
-        React.PropTypes.number,
-        React.PropTypes.string
+    element: PropTypes.string,
+    grow: PropTypes.number,
+    height: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
     ]),
-    justifyContent: React.PropTypes.oneOf([
+    justifyContent: PropTypes.oneOf([
         'flex-start', 'flex-end', 'center', 'space-between', 'space-around'
     ]),
-    shrink: React.PropTypes.number,
+    shrink: PropTypes.number,
     style: stylePropType,
-    width: React.PropTypes.oneOfType([
-        React.PropTypes.number,
-        React.PropTypes.string
+    width: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
     ]),
-    wrap: React.PropTypes.oneOf([
+    wrap: PropTypes.oneOf([
         'nowrap', 'wrap', 'wrap-reverse'
     ])
 };

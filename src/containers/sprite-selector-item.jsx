@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const SpriteSelectorItemComponent = require('../components/sprite-selector-item/sprite-selector-item.jsx');
@@ -39,12 +40,12 @@ class SpriteSelectorItem extends React.Component {
 }
 
 SpriteSelectorItem.propTypes = {
-    costumeURL: React.PropTypes.string,
-    id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    name: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    onDeleteButtonClick: React.PropTypes.func,
-    selected: React.PropTypes.bool
+    costumeURL: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    onClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func,
+    selected: PropTypes.bool
 };
 
 module.exports = SpriteSelectorItem;

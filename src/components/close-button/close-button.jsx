@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const classNames = require('classnames');
 
@@ -27,9 +28,9 @@ CloseButton.SIZE_LARGE = 'large';
 CloseButton.SIZE_SMALL = 'small';
 
 CloseButton.propTypes = {
-    className: React.PropTypes.string,
-    onClick: React.PropTypes.func.isRequired,
-    size: React.PropTypes.oneOf([CloseButton.SIZE_LARGE, CloseButton.SIZE_SMALL])
+    className: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
+    size: PropTypes.oneOf([CloseButton.SIZE_LARGE, CloseButton.SIZE_SMALL])
 };
 
 CloseButton.defaultProps = {

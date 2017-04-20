@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const VM = require('scratch-vm');
@@ -49,7 +50,7 @@ class GreenFlag extends React.Component {
 }
 
 GreenFlag.propTypes = {
-    vm: React.PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM)
 };
 
 module.exports = GreenFlag;

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
 
@@ -78,23 +79,23 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
-    editingTarget: React.PropTypes.string,
-    onNewBackdropClick: React.PropTypes.func.isRequired,
-    onNewCostumeClick: React.PropTypes.func.isRequired,
-    sprites: React.PropTypes.shape({
-        id: React.PropTypes.shape({
-            costumes: React.PropTypes.arrayOf(React.PropTypes.shape({
-                url: React.PropTypes.string,
-                name: React.PropTypes.string.isRequired
+    editingTarget: PropTypes.string,
+    onNewBackdropClick: PropTypes.func.isRequired,
+    onNewCostumeClick: PropTypes.func.isRequired,
+    sprites: PropTypes.shape({
+        id: PropTypes.shape({
+            costumes: PropTypes.arrayOf(PropTypes.shape({
+                url: PropTypes.string,
+                name: PropTypes.string.isRequired
             }))
         })
     }),
-    stage: React.PropTypes.shape({
-        sounds: React.PropTypes.arrayOf(React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired
+    stage: PropTypes.shape({
+        sounds: PropTypes.arrayOf(PropTypes.shape({
+            name: PropTypes.string.isRequired
         }))
     }),
-    vm: React.PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({

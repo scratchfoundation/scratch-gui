@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -37,9 +38,9 @@ class CostumeLibrary extends React.Component {
 }
 
 CostumeLibrary.propTypes = {
-    onRequestClose: React.PropTypes.func,
-    visible: React.PropTypes.bool,
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    onRequestClose: PropTypes.func,
+    visible: PropTypes.bool,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 module.exports = CostumeLibrary;

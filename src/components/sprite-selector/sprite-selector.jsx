@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -74,26 +75,26 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
-    onChangeSpriteDraggability: React.PropTypes.func,
-    onChangeSpriteName: React.PropTypes.func,
-    onChangeSpriteRotationStyle: React.PropTypes.func,
-    onChangeSpriteVisibility: React.PropTypes.func,
-    onChangeSpriteX: React.PropTypes.func,
-    onChangeSpriteY: React.PropTypes.func,
-    onDeleteSprite: React.PropTypes.func,
-    onSelectSprite: React.PropTypes.func,
-    selectedId: React.PropTypes.string,
-    sprites: React.PropTypes.shape({
-        id: React.PropTypes.shape({
-            costume: React.PropTypes.shape({
-                url: React.PropTypes.string,
-                name: React.PropTypes.string.isRequired,
-                bitmapResolution: React.PropTypes.number.isRequired,
-                rotationCenterX: React.PropTypes.number.isRequired,
-                rotationCenterY: React.PropTypes.number.isRequired
+    onChangeSpriteDraggability: PropTypes.func,
+    onChangeSpriteName: PropTypes.func,
+    onChangeSpriteRotationStyle: PropTypes.func,
+    onChangeSpriteVisibility: PropTypes.func,
+    onChangeSpriteX: PropTypes.func,
+    onChangeSpriteY: PropTypes.func,
+    onDeleteSprite: PropTypes.func,
+    onSelectSprite: PropTypes.func,
+    selectedId: PropTypes.string,
+    sprites: PropTypes.shape({
+        id: PropTypes.shape({
+            costume: PropTypes.shape({
+                url: PropTypes.string,
+                name: PropTypes.string.isRequired,
+                bitmapResolution: PropTypes.number.isRequired,
+                rotationCenterX: PropTypes.number.isRequired,
+                rotationCenterY: PropTypes.number.isRequired
             }),
-            name: React.PropTypes.string.isRequired,
-            order: React.PropTypes.number.isRequired
+            name: PropTypes.string.isRequired,
+            order: PropTypes.number.isRequired
         })
     })
 };

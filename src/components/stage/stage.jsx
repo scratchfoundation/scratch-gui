@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -22,9 +23,9 @@ const StageComponent = props => {
     );
 };
 StageComponent.propTypes = {
-    canvasRef: React.PropTypes.func,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number
+    canvasRef: PropTypes.func,
+    height: PropTypes.number,
+    width: PropTypes.number
 };
 StageComponent.defaultProps = {
     canvasRef: () => {},

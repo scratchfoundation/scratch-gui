@@ -1,4 +1,5 @@
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -205,30 +206,30 @@ class SpriteInfo extends React.Component {
 }
 
 SpriteInfo.propTypes = {
-    disabled: React.PropTypes.bool,
-    draggable: React.PropTypes.bool,
-    name: React.PropTypes.string,
-    onBlurName: React.PropTypes.func,
-    onBlurX: React.PropTypes.func,
-    onBlurY: React.PropTypes.func,
-    onChangeName: React.PropTypes.func,
-    onChangeRotationStyle: React.PropTypes.func,
-    onChangeX: React.PropTypes.func,
-    onChangeY: React.PropTypes.func,
-    onClickDraggable: React.PropTypes.func,
-    onClickNotDraggable: React.PropTypes.func,
-    onClickNotVisible: React.PropTypes.func,
-    onClickVisible: React.PropTypes.func,
-    onKeyPress: React.PropTypes.func,
-    rotationStyle: React.PropTypes.oneOf(ROTATION_STYLES),
-    visible: React.PropTypes.bool,
-    x: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
+    disabled: PropTypes.bool,
+    draggable: PropTypes.bool,
+    name: PropTypes.string,
+    onBlurName: PropTypes.func,
+    onBlurX: PropTypes.func,
+    onBlurY: PropTypes.func,
+    onChangeName: PropTypes.func,
+    onChangeRotationStyle: PropTypes.func,
+    onChangeX: PropTypes.func,
+    onChangeY: PropTypes.func,
+    onClickDraggable: PropTypes.func,
+    onClickNotDraggable: PropTypes.func,
+    onClickNotVisible: PropTypes.func,
+    onClickVisible: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    rotationStyle: PropTypes.oneOf(ROTATION_STYLES),
+    visible: PropTypes.bool,
+    x: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
     ]),
-    y: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
+    y: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
     ])
 };
 

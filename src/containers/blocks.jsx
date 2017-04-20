@@ -1,5 +1,6 @@
 const bindAll = require('lodash.bindall');
 const defaultsDeep = require('lodash.defaultsdeep');
+const PropTypes = require('prop-types');
 const React = require('react');
 const VMScratchBlocks = require('../lib/blocks');
 const VM = require('scratch-vm');
@@ -139,27 +140,27 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
-    options: React.PropTypes.shape({
-        media: React.PropTypes.string,
-        zoom: React.PropTypes.shape({
-            controls: React.PropTypes.boolean,
-            wheel: React.PropTypes.boolean,
-            startScale: React.PropTypes.number
+    options: PropTypes.shape({
+        media: PropTypes.string,
+        zoom: PropTypes.shape({
+            controls: PropTypes.boolean,
+            wheel: PropTypes.boolean,
+            startScale: PropTypes.number
         }),
-        colours: React.PropTypes.shape({
-            workspace: React.PropTypes.string,
-            flyout: React.PropTypes.string,
-            toolbox: React.PropTypes.string,
-            toolboxSelected: React.PropTypes.string,
-            scrollbar: React.PropTypes.string,
-            scrollbarHover: React.PropTypes.string,
-            insertionMarker: React.PropTypes.string,
-            insertionMarkerOpacity: React.PropTypes.number,
-            fieldShadow: React.PropTypes.string,
-            dragShadowOpacity: React.PropTypes.number
+        colours: PropTypes.shape({
+            workspace: PropTypes.string,
+            flyout: PropTypes.string,
+            toolbox: PropTypes.string,
+            toolboxSelected: PropTypes.string,
+            scrollbar: PropTypes.string,
+            scrollbarHover: PropTypes.string,
+            insertionMarker: PropTypes.string,
+            insertionMarkerOpacity: PropTypes.number,
+            fieldShadow: PropTypes.string,
+            dragShadowOpacity: PropTypes.number
         })
     }),
-    vm: React.PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 Blocks.defaultOptions = {

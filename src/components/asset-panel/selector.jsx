@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
@@ -42,15 +43,15 @@ const Selector = props => {
 };
 
 Selector.propTypes = {
-    items: React.PropTypes.arrayOf(React.PropTypes.shape({
-        url: React.PropTypes.string,
-        name: React.PropTypes.string.isRequired
+    items: PropTypes.arrayOf(PropTypes.shape({
+        url: PropTypes.string,
+        name: PropTypes.string.isRequired
     })),
-    newText: React.PropTypes.string.isRequired,
-    onDeleteClick: React.PropTypes.func.isRequired,
-    onItemClick: React.PropTypes.func.isRequired,
-    onNewClick: React.PropTypes.func,
-    selectedItemIndex: React.PropTypes.number.isRequired
+    newText: PropTypes.string.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
+    onItemClick: PropTypes.func.isRequired,
+    onNewClick: PropTypes.func,
+    selectedItemIndex: PropTypes.number.isRequired
 };
 
 module.exports = Selector;

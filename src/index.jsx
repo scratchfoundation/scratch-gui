@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {Provider} = require('react-redux');
@@ -58,7 +59,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    basePath: React.PropTypes.string
+    basePath: PropTypes.string
 };
 
 const appTarget = document.createElement('div');

@@ -1,4 +1,5 @@
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -47,9 +48,9 @@ const StageSelector = props => {
 };
 
 StageSelector.propTypes = {
-    backdropCount: React.PropTypes.number.isRequired,
-    onClick: React.PropTypes.func,
-    selected: React.PropTypes.bool.isRequired,
-    url: React.PropTypes.string
+    backdropCount: PropTypes.number.isRequired,
+    onClick: PropTypes.func,
+    selected: PropTypes.bool.isRequired,
+    url: PropTypes.string
 };
 module.exports = StageSelector;

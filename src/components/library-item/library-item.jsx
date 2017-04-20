@@ -1,5 +1,6 @@
 const classNames = require('classnames');
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
@@ -36,11 +37,11 @@ class LibraryItem extends React.Component {
 }
 
 LibraryItem.propTypes = {
-    iconURL: React.PropTypes.string.isRequired,
-    id: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired,
-    onSelect: React.PropTypes.func.isRequired,
-    selected: React.PropTypes.bool.isRequired
+    iconURL: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    selected: PropTypes.bool.isRequired
 };
 
 module.exports = LibraryItem;

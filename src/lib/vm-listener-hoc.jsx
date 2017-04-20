@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
@@ -84,12 +85,12 @@ const vmListenerHOC = function (WrappedComponent) {
         }
     }
     VMListener.propTypes = {
-        attachKeyboardEvents: React.PropTypes.bool,
-        onKeyDown: React.PropTypes.func,
-        onKeyUp: React.PropTypes.func,
-        onSpriteInfoReport: React.PropTypes.func,
-        onTargetsUpdate: React.PropTypes.func,
-        vm: React.PropTypes.instanceOf(VM).isRequired
+        attachKeyboardEvents: PropTypes.bool,
+        onKeyDown: PropTypes.func,
+        onKeyUp: PropTypes.func,
+        onSpriteInfoReport: PropTypes.func,
+        onTargetsUpdate: PropTypes.func,
+        vm: PropTypes.instanceOf(VM).isRequired
     };
     const defaultVM = new VM('vm-listener-hoc');
     defaultVM.attachStorage(new Storage());

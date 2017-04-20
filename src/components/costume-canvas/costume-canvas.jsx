@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const svgToImage = require('svg-to-image');
 const xhr = require('xhr');
@@ -119,11 +120,11 @@ CostumeCanvas.defaultProps = {
 };
 
 CostumeCanvas.propTypes = {
-    className: React.PropTypes.string,
-    direction: React.PropTypes.number,
-    height: React.PropTypes.number,
-    url: React.PropTypes.string.isRequired,
-    width: React.PropTypes.number
+    className: PropTypes.string,
+    direction: PropTypes.number,
+    height: PropTypes.number,
+    url: PropTypes.string.isRequired,
+    width: PropTypes.number
 };
 
 module.exports = CostumeCanvas;

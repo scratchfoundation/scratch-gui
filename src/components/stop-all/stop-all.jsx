@@ -1,4 +1,5 @@
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const stopAllIcon = require('./icon--stop-all.svg');
@@ -26,9 +27,9 @@ const StopAllComponent = function (props) {
 };
 
 StopAllComponent.propTypes = {
-    active: React.PropTypes.bool,
-    onClick: React.PropTypes.func.isRequired,
-    title: React.PropTypes.string
+    active: PropTypes.bool,
+    onClick: PropTypes.func.isRequired,
+    title: PropTypes.string
 };
 
 StopAllComponent.defaultProps = {

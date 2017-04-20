@@ -1,5 +1,4 @@
 const ScratchStorage = require('scratch-storage');
-const AssetType = ScratchStorage.AssetType;
 
 const PROJECT_SERVER = 'https://cdn.projects.scratch.mit.edu';
 const ASSET_SERVER = 'https://cdn.assets.scratch.mit.edu';
@@ -12,7 +11,7 @@ class Storage extends ScratchStorage {
     constructor () {
         super();
         this.addWebSource(
-            [AssetType.Project],
+            [this.AssetType.Project],
             projectAsset => {
                 const [projectId, revision] = projectAsset.assetId.split('.');
                 return revision ?
@@ -21,7 +20,7 @@ class Storage extends ScratchStorage {
             }
         );
         this.addWebSource(
-            [AssetType.ImageVector, AssetType.ImageBitmap, AssetType.Sound],
+            [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
             asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.assetType.runtimeFormat}/get/`
         );
     }

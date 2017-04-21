@@ -40,7 +40,7 @@ class TargetPane extends React.Component {
             costumeLibraryVisible,
             soundLibraryVisible,
             spriteLibraryVisible,
-            onChangeSpriteDraggability,
+            onChangeSpriteDirection,
             onChangeSpriteName,
             onChangeSpriteRotationStyle,
             onChangeSpriteVisibility,
@@ -68,7 +68,7 @@ class TargetPane extends React.Component {
                 <SpriteSelectorComponent
                     selectedId={editingTarget}
                     sprites={sprites}
-                    onChangeSpriteDraggability={onChangeSpriteDraggability}
+                    onChangeSpriteDirection={onChangeSpriteDirection}
                     onChangeSpriteName={onChangeSpriteName}
                     onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
                     onChangeSpriteVisibility={onChangeSpriteVisibility}
@@ -144,7 +144,7 @@ const spriteShape = PropTypes.shape({
         rotationCenterX: PropTypes.number.isRequired,
         rotationCenterY: PropTypes.number.isRequired
     }),
-    draggable: PropTypes.bool,
+    direction: PropTypes.number,
     id: PropTypes.string,
     name: PropTypes.string,
     order: PropTypes.number,
@@ -158,7 +158,7 @@ TargetPane.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
-    onChangeSpriteDraggability: PropTypes.func,
+    onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,

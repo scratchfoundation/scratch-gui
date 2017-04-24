@@ -19,7 +19,7 @@ class App extends React.Component {
         this.updateProject = this.updateProject.bind(this);
         this.state = {
             projectId: null,
-            projectData: this.fetchProjectId().length ? null : ProjectLoader.DEFAULT_PROJECT_DATA
+            projectData: this.fetchProjectId().length ? null : JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
         };
     }
     componentDidMount () {

@@ -76,13 +76,14 @@ $border-width: 2px;
     display: flex;
     flex-direction: column; /* makes rows */
     align-items: center;
+    overflow: hidden;
     background-color: white;
     border-radius: calc($space / 2);
     border-width: $border-width;
     border-style: solid;
     border-color: #e9eef2;
     cursor: pointer;
-    transition: border-color 0.1s ease-out; 
+    transition: border-color 0.1s ease-out;
 }
 
 .flex-wrapper:hover {
@@ -96,7 +97,5 @@ $border-width: 2px;
 .costume-canvas {
     display: block;
     width: 100%;
-    border-top-left-radius: calc($space / 2);
-    border-top-right-radius: calc($space / 2);
     user-select: none;
 }

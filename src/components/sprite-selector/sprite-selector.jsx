@@ -8,7 +8,7 @@ const styles = require('./sprite-selector.css');
 
 const SpriteSelectorComponent = function (props) {
     const {
-        onChangeSpriteDraggability,
+        onChangeSpriteDirection,
         onChangeSpriteName,
         onChangeSpriteRotationStyle,
         onChangeSpriteVisibility,
@@ -31,15 +31,16 @@ const SpriteSelectorComponent = function (props) {
             className={styles.spriteSelector}
             {...componentProps}
         >
+
             <SpriteInfo
+                direction={selectedSprite.direction}
                 disabled={spriteInfoDisabled}
-                draggable={selectedSprite.draggable}
                 name={selectedSprite.name}
                 rotationStyle={selectedSprite.rotationStyle}
                 visible={selectedSprite.visible}
                 x={selectedSprite.x}
                 y={selectedSprite.y}
-                onChangeDraggability={onChangeSpriteDraggability}
+                onChangeDirection={onChangeSpriteDirection}
                 onChangeName={onChangeSpriteName}
                 onChangeRotationStyle={onChangeSpriteRotationStyle}
                 onChangeVisibility={onChangeSpriteVisibility}
@@ -75,7 +76,7 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
-    onChangeSpriteDraggability: PropTypes.func,
+    onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,

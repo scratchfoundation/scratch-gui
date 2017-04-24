@@ -10,16 +10,16 @@ class SpriteInfo extends React.Component {
         bindAll(this, [
             'handleChangeName',
             'handleChangeRotationStyle',
+            'handleChangeDirection',
             'handleChangeX',
             'handleChangeY',
             'handleClickVisible',
             'handleClickNotVisible',
-            'handleClickDraggable',
-            'handleClickNotDraggable',
             'handleFlush',
             'handleKeyPress'
         ]);
         this.state = {
+            direction: null,
             name: null,
             x: null,
             y: null
@@ -32,6 +32,9 @@ class SpriteInfo extends React.Component {
         }
     }
     handleFlush () {
+        if (this.state.direction !== null && !isNaN(this.state.direction)) {
+            this.props.onChangeDirection(this.state.direction);
+        }
         if (this.state.name !== null) {
             this.props.onChangeName(this.state.name);
         }
@@ -42,10 +45,14 @@ class SpriteInfo extends React.Component {
             this.props.onChangeY(this.state.y);
         }
         this.setState({
+            direction: null,
             name: null,
             x: null,
             y: null
         });
+    }
+    handleChangeDirection (e) {
+        this.setState({direction: e.target.value});
     }
     handleChangeName (e) {
         this.setState({name: e.target.value});
@@ -67,16 +74,9 @@ class SpriteInfo extends React.Component {
         e.preventDefault();
         this.props.onChangeVisibility(false);
     }
-    handleClickDraggable (e) {
-        e.preventDefault();
-        this.props.onChangeDraggability(true);
-    }
-    handleClickNotDraggable (e) {
-        e.preventDefault();
-        this.props.onChangeDraggability(false);
-    }
     render () {
         const bufferedInputs = {
+            direction: this.state.direction === null ? this.props.direction : this.state.direction,
             name: this.state.name === null ? this.props.name : this.state.name,
             x: this.state.x === null ? this.props.x : this.state.x,
             y: this.state.y === null ? this.props.y : this.state.y
@@ -85,15 +85,15 @@ class SpriteInfo extends React.Component {
             <SpriteInfoComponent
                 {...this.props}
                 {...bufferedInputs}
+                onBlurDirection={this.handleFlush}
                 onBlurName={this.handleFlush}
                 onBlurX={this.handleFlush}
                 onBlurY={this.handleFlush}
+                onChangeDirection={this.handleChangeDirection}
                 onChangeName={this.handleChangeName}
                 onChangeRotationStyle={this.handleChangeRotationStyle}
                 onChangeX={this.handleChangeX}
                 onChangeY={this.handleChangeY}
-                onClickDraggable={this.handleClickDraggable}
-                onClickNotDraggable={this.handleClickNotDraggable}
                 onClickNotVisible={this.handleClickNotVisible}
                 onClickVisible={this.handleClickVisible}
                 onKeyPress={this.handleKeyPress}
@@ -104,7 +104,7 @@ class SpriteInfo extends React.Component {
 
 SpriteInfo.propTypes = {
     ...SpriteInfoComponent.propTypes,
-    onChangeDraggability: PropTypes.func,
+    onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
     onChangeRotationStyle: PropTypes.func,
     onChangeVisibility: PropTypes.func,

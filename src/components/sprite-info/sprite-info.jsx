@@ -137,7 +137,6 @@ class SpriteInfo extends React.Component {
                         <input
                             className={classNames(styles.inputForm, styles.direction)}
                             disabled={this.props.disabled}
-                            placeholder="dir"
                             tabIndex="5"
                             type="text"
                             value={this.props.disabled ? '' : this.props.direction}

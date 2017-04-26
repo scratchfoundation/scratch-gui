@@ -25,6 +25,16 @@
     overflow: hidden;
 }
 
+.header {
+    font-size: 1.25rem;
+    height: 3.25rem;
+    background-color: $blue;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    line-height: 3.25rem;
+}
+
 .body {
     background: $ui-pane-gray;
     padding: 1.5rem 2.25rem;

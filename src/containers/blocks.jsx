@@ -4,7 +4,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VMScratchBlocks = require('../lib/blocks');
 const VM = require('scratch-vm');
-const Prompt = require('../components/prompt/prompt.jsx');
+const Prompt = require('./prompt.jsx');
 const BlocksComponent = require('../components/blocks/blocks.jsx');
 
 const addFunctionListener = (object, property, callback) => {
@@ -23,6 +23,7 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
+            'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
             'onScriptGlowOn',
@@ -34,6 +35,7 @@ class Blocks extends React.Component {
             'onWorkspaceMetricsChange',
             'setBlocks'
         ]);
+        this.ScratchBlocks.prompt = this.handlePromptStart;
         this.state = {
             workspaceMetrics: {},
             prompt: null
@@ -42,10 +44,6 @@ class Blocks extends React.Component {
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
-
-        this.ScratchBlocks.prompt = (message, defaultValue, callback) => {
-            this.setState({prompt: {callback, message, defaultValue}});
-        };
 
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
@@ -134,6 +132,9 @@ class Blocks extends React.Component {
     setBlocks (blocks) {
         this.blocks = blocks;
     }
+    handlePromptStart (message, defaultValue, callback) {
+        this.setState({prompt: {callback, message, defaultValue}});
+    }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
         this.handlePromptClose();
@@ -157,6 +158,7 @@ class Blocks extends React.Component {
                     <Prompt
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
+                        title="New Variable" // @todo the only prompt is for new variables
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />

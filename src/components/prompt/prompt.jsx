@@ -1,70 +1,59 @@
 const React = require('react');
 const ReactModal = require('react-modal');
-const bindAll = require('lodash.bindall');
 const Box = require('../box/box.jsx');
 
 const styles = require('./prompt.css');
 
-class PromptComponent extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleOk',
-            'handleKeyPress'
-        ]);
-    }
-    handleKeyPress (event) {
-        if (event.key === 'Enter') this.handleOk();
-    }
-    handleOk () {
-        this.props.onOk(this.input.value);
-    }
-    render () {
-        return (
-            <ReactModal
-                isOpen
-                className={styles.modalContent}
-                overlayClassName={styles.modalOverlay}
-                onRequestClose={this.props.onCancel}
-            >
-                <Box className={styles.body}>
-                    <Box className={styles.label}>
-                        {this.props.label}
-                    </Box>
-                    <Box>
-                        <input
-                            autoFocus
-                            className={styles.input}
-                            placeholder={this.props.placeholder}
-                            ref={el => (this.input = el)}
-                            onKeyPress={this.handleKeyPress}
-                        />
-                    </Box>
-                    <Box className={styles.buttonRow}>
-                        <button
-                            className={styles.cancelButton}
-                            onClick={this.props.onCancel}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            className={styles.okButton}
-                            onClick={this.handleOk}
-                        >
-                            OK
-                        </button>
-                    </Box>
-                </Box>
-            </ReactModal>
-        );
-    }
-}
+const PromptComponent = props => (
+    <ReactModal
+        isOpen
+        className={styles.modalContent}
+        contentLabel={props.title}
+        overlayClassName={styles.modalOverlay}
+        onRequestClose={props.onCancel}
+    >
+        <Box className={styles.header}>
+            {props.title}
+        </Box>
+        <Box className={styles.body}>
+            <Box className={styles.label}>
+                {props.label}
+            </Box>
+            <Box>
+                <input
+                    autoFocus
+                    className={styles.input}
+                    placeholder={props.placeholder}
+                    onChange={props.onChange}
+                    onKeyPress={props.onKeyPress}
+                />
+            </Box>
+            <Box className={styles.buttonRow}>
+                <button
+                    className={styles.cancelButton}
+                    onClick={props.onCancel}
+                >
+                    Cancel
+                </button>
+                <button
+                    className={styles.okButton}
+                    onClick={props.onOk}
+                >
+                    OK
+                </button>
+            </Box>
+        </Box>
+    </ReactModal>
+);
 
 PromptComponent.propTypes = {
     label: React.PropTypes.string.isRequired,
     onCancel: React.PropTypes.func.isRequired,
+    onChange: React.PropTypes.func.isRequired,
+    onKeyPress: React.PropTypes.func.isRequired,
     onOk: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    title: React.PropTypes.string.isRequired
 };
 
 PromptComponent.defaultProps = {

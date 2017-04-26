@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
 const PromptComponent = require('../components/prompt/prompt.jsx');
@@ -43,15 +44,11 @@ class Prompt extends React.Component {
 }
 
 Prompt.propTypes = {
-    label: React.PropTypes.string.isRequired,
-    onCancel: React.PropTypes.func.isRequired,
-    onOk: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    title: React.PropTypes.string.isRequired
-};
-
-PromptComponent.defaultProps = {
-    placeholder: '...'
+    label: PropTypes.string.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onOk: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    title: PropTypes.string.isRequired
 };
 
 module.exports = Prompt;

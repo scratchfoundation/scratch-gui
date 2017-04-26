@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const ReactModal = require('react-modal');
 const Box = require('../box/box.jsx');
@@ -47,17 +48,13 @@ const PromptComponent = props => (
 );
 
 PromptComponent.propTypes = {
-    label: React.PropTypes.string.isRequired,
-    onCancel: React.PropTypes.func.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    onKeyPress: React.PropTypes.func.isRequired,
-    onOk: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    title: React.PropTypes.string.isRequired
-};
-
-PromptComponent.defaultProps = {
-    placeholder: '...'
+    label: PropTypes.string.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
+    onOk: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    title: PropTypes.string.isRequired
 };
 
 module.exports = PromptComponent;

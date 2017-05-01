@@ -63,7 +63,7 @@
     "scratch-render": "latest",
     "scratch-storage": "latest",
     "scratch-vm": "latest",
-    "style-loader": "0.16.1",
+    "style-loader": "0.17.0",
     "svg-to-image": "1.1.3",
     "svg-url-loader": "2.0.2",
     "travis-after-all": "^1.4.4",

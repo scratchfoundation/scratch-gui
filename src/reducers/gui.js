@@ -2,5 +2,6 @@ const {combineReducers} = require('redux');
 
 module.exports = combineReducers({
     modals: require('./modals'),
-    targets: require('./targets')
+    targets: require('./targets'),
+    monitors: require('./monitors')
 });

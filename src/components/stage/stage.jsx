@@ -22,7 +22,9 @@ const StageComponent = props => {
                 width={width}
                 {...boxProps}
             />
-            <MonitorList />
+            <Box className={styles.monitorWrapper}>
+                <MonitorList />
+            </Box>
         </Box>
     );
 };

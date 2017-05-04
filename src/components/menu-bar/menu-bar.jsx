@@ -2,6 +2,9 @@ const classNames = require('classnames');
 const React = require('react');
 
 const Box = require('../box/box.jsx');
+const LoadButton = require('../../containers/load-button.jsx');
+const SaveButton = require('../../containers/save-button.jsx');
+
 const styles = require('./menu-bar.css');
 const scratchLogo = require('./scratch-logo.svg');
 
@@ -18,7 +21,8 @@ const MenuBar = function MenuBar () {
                     src={scratchLogo}
                 />
             </div>
-            <div className={styles.menuItem} >Animation Playtest Prototype</div>
+            <SaveButton className={styles.menuItem} />
+            <LoadButton className={styles.menuItem} />
         </Box>
     );
 };

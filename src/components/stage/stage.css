@@ -1,14 +1,26 @@
 @import "../../css/units.css";
 
 .stage {
-    /* 
-        Fixes a few extra pixels of margin/padding, that adds on to the bottom 
+    /*
+        Fixes a few extra pixels of margin/padding, that adds on to the bottom
         of the element, which messes up the chrome padding consistency
     */
-    display: block; 
-    
-    border-radius: $space; 
+    display: block;
+
+    border-radius: $space;
 
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
-    background-color: transparent; 
+    background-color: transparent;
+}
+
+.stage-wrapper {
+    position: relative;
+}
+
+.monitor-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

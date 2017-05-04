@@ -26,7 +26,7 @@ class MonitorList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    monitors: state.monitors.monitors
+    monitors: state.monitors
 });
 const mapDispatchToProps = () => ({});
 

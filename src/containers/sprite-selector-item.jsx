@@ -26,9 +26,12 @@ class SpriteSelectorItem extends React.Component {
     }
     render () {
         const {
-            id, // eslint-disable-line no-unused-vars
-            onClick, // eslint-disable-line no-unused-vars
-            onDeleteButtonClick, // eslint-disable-line no-unused-vars
+            /* eslint-disable no-unused-vars */
+            assetId,
+            id,
+            onClick,
+            onDeleteButtonClick,
+            /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
         return (
@@ -51,8 +54,8 @@ SpriteSelectorItem.propTypes = {
     selected: PropTypes.bool
 };
 
-const mapStateToProps = (state, {assetId}) => ({
-    costumeURL: assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()
+const mapStateToProps = (state, {assetId, costumeURL}) => ({
+    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI())
 });
 
 module.exports = connect(

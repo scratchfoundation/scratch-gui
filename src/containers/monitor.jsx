@@ -10,7 +10,7 @@ class Monitor extends React.Component {
             'handleDragEnd'
         ]);
     }
-    handleDragEnd (_, {x, y}) {
+    handleDragEnd (e, {x, y}) {
         this.props.onDragEnd(
             this.props.id,
             x,

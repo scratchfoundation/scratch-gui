@@ -60,10 +60,11 @@ class Blocks extends React.Component {
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
-        this.workspace
+        this.flyoutWorkspace = this.workspace
             .getFlyout()
-            .getWorkspace()
-            .addChangeListener(this.props.vm.flyoutBlockListener);
+            .getWorkspace();
+        this.flyoutWorkspace.addChangeListener(this.props.vm.flyoutBlockListener);
+        this.flyoutWorkspace.addChangeListener(this.props.vm.monitorBlockListener);
         this.props.vm.addListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
         this.props.vm.addListener('SCRIPT_GLOW_OFF', this.onScriptGlowOff);
         this.props.vm.addListener('BLOCK_GLOW_ON', this.onBlockGlowOn);

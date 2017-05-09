@@ -5,8 +5,9 @@ const initialState = [];
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
+    // Adds or updates monitors
     case UPDATE_MONITORS:
-        return [...action.monitors];
+        return [...action.monitors, ...state];
     default:
         return state;
     }

@@ -11,7 +11,7 @@ class ModalComponent extends React.Component {
     render () {
         return (
             <ReactModal
-                className={styles.modalContent}
+                className={styles.fullModalContent}
                 contentLabel={this.props.contentLabel}
                 isOpen={this.props.visible}
                 overlayClassName={styles.modalOverlay}

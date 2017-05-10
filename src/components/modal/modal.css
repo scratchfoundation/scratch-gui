@@ -40,3 +40,22 @@
     right: 1rem;
     z-index: 2;
 }
+
+.full-modal-content {
+    // same as .modal-children
+    position: absolute;
+    outline: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: 'touch';
+    border: 1px solid #ccc;
+    padding: 0;
+    user-select: none;
+
+    // different from .modal-children
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+
+}

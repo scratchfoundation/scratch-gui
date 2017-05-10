@@ -33,6 +33,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('SPRITE_INFO_REPORT', this.props.onSpriteInfoReport);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('MONITORS_REMOVED', this.props.onMonitorsRemoved);
+            this.props.vm.on('MONITORS_ADDED', this.props.onMonitorsAdded);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -80,6 +81,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onKeyDown,
                 onKeyUp,
                 onSpriteInfoReport,
+                onMonitorsAdded,
                 onMonitorsUpdate,
                 onMonitorsRemoved,
                 onTargetsUpdate,
@@ -93,6 +95,7 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: PropTypes.bool,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
+        onMonitorsAdded: PropTypes.func,
         onMonitorsRemoved: PropTypes.func,
         onMonitorsUpdate: PropTypes.func,
         onSpriteInfoReport: PropTypes.func,
@@ -113,6 +116,9 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onSpriteInfoReport: spriteInfo => {
             dispatch(targets.updateTarget(spriteInfo));
+        },
+        onMonitorsAdded: monitorList => {
+            dispatch(monitors.addMonitors(monitorList));
         },
         onMonitorsUpdate: monitorList => {
             dispatch(monitors.updateMonitors(monitorList));

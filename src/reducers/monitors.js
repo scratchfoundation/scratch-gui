@@ -12,7 +12,7 @@ const reducer = function (state, action) {
         newState = [...state];
         for (let i = 0, updated = false; i < action.monitors.length; i++) {
             for (let j = 0; j < state.length; j++) {
-                if (action.monitors[i].id == state[j].id) {
+                if (action.monitors[i].id === state[j].id) {
                     newState[j] = action.monitors[i];
                     updated = true;
                     continue;
@@ -30,7 +30,7 @@ const reducer = function (state, action) {
         for (let i = 0; i < action.monitors.length; i++) {
             // Move backwards to keep indices aligned
             for (let j = state.length - 1; j >= 0; j--) {
-                if (action.monitors[i].id == state[j].id) {
+                if (action.monitors[i].id === state[j].id) {
                     newState.splice(j, 1);
                     continue;
                 }
@@ -47,7 +47,7 @@ reducer.updateMonitors = function (monitors) {
         type: UPDATE_MONITORS,
         monitors: monitors,
         meta: {
-            throttle: 100
+            throttle: 30
         }
     };
 };

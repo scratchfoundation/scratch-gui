@@ -32,6 +32,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
             this.props.vm.on('SPRITE_INFO_REPORT', this.props.onSpriteInfoReport);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
+            this.props.vm.on('MONITORS_REMOVED', this.props.onMonitorsRemoved);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -80,6 +81,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onKeyUp,
                 onSpriteInfoReport,
                 onMonitorsUpdate,
+                onMonitorsRemoved,
                 onTargetsUpdate,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -91,6 +93,7 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: PropTypes.bool,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
+        onMonitorsRemoved: PropTypes.func,
         onMonitorsUpdate: PropTypes.func,
         onSpriteInfoReport: PropTypes.func,
         onTargetsUpdate: PropTypes.func,
@@ -113,6 +116,9 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onMonitorsUpdate: monitorList => {
             dispatch(monitors.updateMonitors(monitorList));
+        },
+        onMonitorsRemoved: monitorList => {
+            dispatch(monitors.removeMonitors(monitorList));
         }
     });
     return connect(

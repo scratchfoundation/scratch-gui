@@ -7,7 +7,22 @@ const reducer = function (state, action) {
     switch (action.type) {
     // Adds or updates monitors
     case UPDATE_MONITORS:
-        return [...action.monitors, ...state];
+        let newState = [...state];
+        let updated = false;
+        for (let i = 0; i < action.monitors.length; i++) {
+            for (let j = 0; j < state.length; j++) {
+                if (action.monitors[i].id == state[j].id) {
+                    newState[j] = action.monitors[i];
+                    updated = true;
+                    continue;
+                }
+            }
+            if (!updated) {
+                newState.push(action.monitors[i]);
+            }
+            updated = false;
+        }
+        return newState;
     default:
         return state;
     }
@@ -18,7 +33,7 @@ reducer.updateMonitors = function (monitors) {
         type: UPDATE_MONITORS,
         monitors: monitors,
         meta: {
-            throttle: 30
+            throttle: 100
         }
     };
 };

@@ -23,14 +23,11 @@
 .library-item:hover {
     border-width: 2px;
     border-color: #1dacf4;
-    transition: 0.1s ease-out;
-    transform: scale(1.02, 1.02);
 }
 
 .library-item.is-selected {
     border-width: 2px;
     border-color: #1dacf4;
-    transition: 0.25s ease-out;
 }
 
 .library-item-image-container {
@@ -47,12 +44,12 @@
     margin: 0.25rem 0;
     text-align: center;
 
-    /* 
+    /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
     */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    min-width: 0; 
+    min-width: 0;
 }

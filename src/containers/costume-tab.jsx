@@ -38,7 +38,7 @@ class CostumeTab extends React.Component {
         editingTarget.sprite.costumes = editingTarget.sprite.costumes
             .slice(0, costumeIndex)
             .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
-        this.props.vm.runtime.spriteInfoReport(editingTarget);
+        this.props.vm.emitTargetsUpdate();
         // @todo not sure if this is getting redrawn correctly
         this.props.vm.runtime.requestRedraw();
 
@@ -49,25 +49,19 @@ class CostumeTab extends React.Component {
 
     render () {
         const {
-            editingTarget,
-            sprites,
-            stage,
+            vm,
             onNewCostumeClick,
             onNewBackdropClick
         } = this.props;
 
-        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+        const costumes = vm.editingTarget ? vm.editingTarget.sprite.costumes : [];
 
-        if (!target) {
-            return null;
-        }
-
-        const addText = target.isStage ? 'Add Backdrop' : 'Add Costume';
-        const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
+        const addText = vm.editingTarget && vm.editingTarget.isStage ? 'Add Backdrop' : 'Add Costume';
+        const addFunc = vm.editingTarget && vm.editingTarget.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
-                items={target.costumes || []}
+                items={costumes}
                 newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
@@ -79,29 +73,14 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
-    editingTarget: PropTypes.string,
     onNewBackdropClick: PropTypes.func.isRequired,
     onNewCostumeClick: PropTypes.func.isRequired,
-    sprites: PropTypes.shape({
-        id: PropTypes.shape({
-            costumes: PropTypes.arrayOf(PropTypes.shape({
-                url: PropTypes.string,
-                name: PropTypes.string.isRequired
-            }))
-        })
-    }),
-    stage: PropTypes.shape({
-        sounds: PropTypes.arrayOf(PropTypes.shape({
-            name: PropTypes.string.isRequired
-        }))
-    }),
     vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
-    stage: state.targets.stage,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });

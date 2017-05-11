@@ -15,6 +15,7 @@ const ButtonComponent = ({
             styles.button,
             className
         )}
+        role="button"
         onClick={onClick}
         {...props}
     >

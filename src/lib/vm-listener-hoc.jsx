@@ -3,8 +3,6 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const Storage = require('./storage');
-
 const {connect} = require('react-redux');
 
 const targets = require('../reducers/targets');
@@ -92,13 +90,12 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };
-    const defaultVM = new VM('vm-listener-hoc');
-    defaultVM.attachStorage(new Storage());
     VMListener.defaultProps = {
-        attachKeyboardEvents: true,
-        vm: defaultVM
+        attachKeyboardEvents: true
     };
-    const mapStateToProps = () => ({});
+    const mapStateToProps = state => ({
+        vm: state.vm
+    });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
             dispatch(targets.updateEditingTarget(data.editingTarget));

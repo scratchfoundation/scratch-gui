@@ -30,7 +30,6 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-content: center;
 
     box-sizing: border-box;
     width: 100%;
@@ -70,8 +69,8 @@ $sides: 20rem;
     flex-shrink: 0;
     justify-content: center;
     user-select: none;
-    cursor: default;
     letter-spacing: 0.4px;
+    cursor: default;
 }
 
 .header-item-close {
@@ -82,9 +81,7 @@ $sides: 20rem;
 /* @todo: make filter component */
 .filter-component {
     display: flex;
-    box-sizing: border-box;
     flex-direction: row;
-    align-content: center;
     align-items: center;
 
     padding: 0.3rem 0.5rem;
@@ -93,11 +90,16 @@ $sides: 20rem;
     border-radius: 10rem;
 
     user-select: none;
-    transition: all 0.15s ease-out;
 }
 
 .filter-component:hover {
     background: rgba(0, 0, 0, 0.15);
+}
+
+/* @todo: move this animation to onClick?  */
+.filter-component:hover .x-icon-wrapper .x-icon {
+    left: 0;
+    opacity: 1;
 }
 
 .filter-icon {
@@ -111,6 +113,7 @@ $sides: 20rem;
     justify-content: center;
     align-items: center;
 
+    overflow: hidden;  /* Mask the icon animation */
     height: 1.25rem;
     width: 1.25rem;
     margin: 0 0.25rem 0 0.5rem;
@@ -124,8 +127,16 @@ $sides: 20rem;
 }
 
 .x-icon {
+    position: relative;
+    left: 10px;
+    opacity: 0;
+
     margin: 0.25rem;
     user-select: none;
+
+    /* @todo: transforms instead of left, for smoother perf? */
+    transition: left 0.09s cubic-bezier(0.78, 1, 1, 1),
+                opacity 0.04s ease;
 }
 
 .filter-input {

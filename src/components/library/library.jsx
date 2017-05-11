@@ -5,8 +5,8 @@ const React = require('react');
 
 const LibraryItem = require('../library-item/library-item.jsx');
 const ModalComponent = require('../modal/modal.jsx');
-const searchIcon = require('./icon--search.svg');
-const searchIconUrl =  "url(" + searchIcon + ")";
+const filterIcon = require('./icon--filter.svg');
+const xIcon = require('./icon--x.svg');
 
 const styles = require('./library.css');
 
@@ -37,19 +37,35 @@ class LibraryComponent extends React.Component {
                 onRequestClose={this.props.onRequestClose}
             >
                 <div className={classNames(styles.menuBar, styles.fullModalHeader)}>
-                    <div className={classNames(styles.modalHeaderItem, styles.headerItemSearch)}>
-
-                        <input
-                            className={styles.inputSearch}
-                            type='text'
-                            placeholder='what are you looking for?'
-                            // style={{backgroundImage: categories[props.category]}}
-                            style={{ backgroundImage: searchIconUrl }}
+                    <div className={classNames(styles.modalHeaderItem, styles.headerItemFilter)}>
+                        <div
+                            className={classNames(
+                                styles.filterComponent,
+                                styles.headerItemTitle
+                            )}
                         >
-                        </input>
+                            <img
+                                className={styles.filterIcon}
+                                src={filterIcon}
+                            ></img>
+                            <input
+                                className={styles.filterInput}
+                                type='text'
+                                placeholder='what are you looking for?'
+                            >
+                            </input>
+                            <img
+                                className={styles.xIcon}
+                                src={xIcon}
+                            ></img>
+                        </div>
                     </div>
-                    <div className={classNames(styles.modalHeaderItem, styles.headerItemTitle)}>{this.props.title} </div>
-                    <div className={classNames(styles.modalHeaderItem, styles.headerItemClose)}>right</div>
+                    <div
+                        className={classNames(
+                            styles.modalHeaderItem,
+                            styles.headerItemTitle
+                        )}>{this.props.title}</div>
+                    <div className={classNames(styles.modalHeaderItem, styles.headerItemClose)}></div>
                 </div>
 
                 <div className={styles.libraryScrollGrid}>

@@ -8,7 +8,6 @@
     justify-content: space-between;
 
     overflow-y: scroll;
-    /* height: calc(100% - $menu-bar-height); */
 }
 
 .modal-header {
@@ -29,7 +28,6 @@
     align-content: center;
 
     box-sizing: border-box;
-    /* height: $menu-bar-height; */
     width: 100%;
     background-color: $blue;
 
@@ -38,46 +36,93 @@
     font-weight: normal;
 }
 
-
 .modal-header-item {
     display: flex;
     align-items: center;
-    padding: 1rem 1.5rem;
-    /* line-height: $menu-bar-height; */
+    padding: 1rem;
     cursor: pointer;
     text-decoration: none;
     color: white;
     user-select: none;
 }
 
-.header-item-search {
+/*
+    Modal header has 3 items:
+
+    |filter     title       x|
+
+    Use the same width for both side item containers,
+    so that title remains centered
+*/
+$sides: 20rem;
+
+.header-item-filter {
     display: flex;
-    flex-basis: 15rem;
+    flex-basis: $sides;
     justify-content: flex-end;
 }
 
 .header-item-title {
     flex-grow: 1;
+    flex-shrink: 0;
     justify-content: center;
 }
 
 .header-item-close {
-    flex-basis: 15rem;
+    flex-basis: $sides;
     justify-content: flex-end;
 }
 
-.input-search {
-    /* position: relative; */
-    outline: none;
-    line-height: 2rem;
-    border-radius: 10rem;
-    font-size: 1.25rem;
-    -webkit-appearance: none;
-    border: 0;
-    background: rgba(0,0,0,.10);
-    color: white;
-    padding: 0.25rem 1rem;
+/* @todo: make filter component */
+.filter-component {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
 
-    background-position: 50% 50%;
-    background-size: fit;
+    padding: $space;
+    background: rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10rem;
+    cursor: initial;
+}
+
+.filter-icon {
+    height: 1rem;
+    width: 1rem;
+    margin: 0 0.5rem 0 0.75rem;
+    cursor: initial;
+}
+
+.x-icon {
+    position: relative;
+    margin: 0 0.75rem 0 0.5rem;
+}
+
+.x-icon:hover:before {
+    position: absolute;
+    height: 1.25rem;
+    width: 1.25rem;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.filter-input {
+    flex-grow: 1;
+    line-height: 1.25rem;
+    background-color: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+    cursor: text;
+}
+
+.filter-input::placeholder {
+    color: white;
+    opacity: 0.75;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+    padding: 0 0 0 0.25rem;
 }

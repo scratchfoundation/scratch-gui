@@ -54,18 +54,29 @@ class LibraryComponent extends React.Component {
                                 placeholder='what are you looking for?'
                             >
                             </input>
-                            <img
-                                className={styles.xIcon}
-                                src={xIcon}
-                            ></img>
+                            <div className={styles.xIconWrapper}>
+                                <img
+                                    className={styles.xIcon}
+                                    src={xIcon}
+                                ></img>
+                            </div>
                         </div>
                     </div>
                     <div
                         className={classNames(
                             styles.modalHeaderItem,
                             styles.headerItemTitle
-                        )}>{this.props.title}</div>
-                    <div className={classNames(styles.modalHeaderItem, styles.headerItemClose)}></div>
+                        )}
+                    >
+                        {this.props.title}
+                    </div>
+                    <div
+                        className={classNames(
+                            styles.modalHeaderItem,
+                            styles.headerItemClose
+                        )}
+                    >
+                    </div>
                 </div>
 
                 <div className={styles.libraryScrollGrid}>

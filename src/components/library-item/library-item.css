@@ -7,7 +7,7 @@
     justify-content: center;
     flex-basis: 160px;
     height: 160px;
-    margin: calc($space / 2);
+    margin: $space;
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #575e75;

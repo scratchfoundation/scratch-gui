@@ -1,16 +1,14 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
 .library-scroll-grid {
     display: flex;
     flex-grow: 1;
-    justify-content: space-between;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    height: calc(100% - 6rem); /* @todo: currently estimate, fix precision */
+    justify-content: space-between;
 
-    /* 
-        Gives sprites a bit of room so they don't get cut off when they grow on hover
-        @todo: sync as a var, with the transform defined on .library-item:hover
-    */
-    padding: 0.15rem; 
+    overflow-y: scroll;
+    /* height: calc(100% - $menu-bar-height); */
 }
 
 .modal-header {
@@ -21,4 +19,65 @@
     font-size: 1.5rem;
     font-weight: normal;
     color: #8e8f95;
+}
+
+.full-modal-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+
+    box-sizing: border-box;
+    /* height: $menu-bar-height; */
+    width: 100%;
+    background-color: $blue;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+
+.modal-header-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    /* line-height: $menu-bar-height; */
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    user-select: none;
+}
+
+.header-item-search {
+    display: flex;
+    flex-basis: 15rem;
+    justify-content: flex-end;
+}
+
+.header-item-title {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.header-item-close {
+    flex-basis: 15rem;
+    justify-content: flex-end;
+}
+
+.input-search {
+    /* position: relative; */
+    outline: none;
+    line-height: 2rem;
+    border-radius: 10rem;
+    font-size: 1.25rem;
+    -webkit-appearance: none;
+    border: 0;
+    background: rgba(0,0,0,.10);
+    color: white;
+    padding: 0.25rem 1rem;
+
+    background-position: 50% 50%;
+    background-size: fit;
 }

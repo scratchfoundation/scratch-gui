@@ -42,20 +42,17 @@
 }
 
 .full-modal-content {
-    // same as .modal-children
     position: absolute;
     outline: none;
     overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';
-    border: 1px solid #ccc;
-    padding: 0;
     user-select: none;
+    height: 100%;
+}
 
-    // different from .modal-children
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 0;
-
+.full-modal-children {
+    overflow: hidden;
+    height: 100%;
+    z-index: 0;
+    background: $ui-pane-gray;
 }

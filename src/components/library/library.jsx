@@ -1,9 +1,12 @@
+const classNames = require('classnames');
 const bindAll = require('lodash.bindall');
 const PropTypes = require('prop-types');
 const React = require('react');
 
 const LibraryItem = require('../library-item/library-item.jsx');
 const ModalComponent = require('../modal/modal.jsx');
+const searchIcon = require('./icon--search.svg');
+const searchIconUrl =  "url(" + searchIcon + ")";
 
 const styles = require('./library.css');
 
@@ -33,7 +36,22 @@ class LibraryComponent extends React.Component {
                 visible={this.props.visible}
                 onRequestClose={this.props.onRequestClose}
             >
-                // <h1 className={styles.modalHeader}>{this.props.title}</h1>
+                <div className={classNames(styles.menuBar, styles.fullModalHeader)}>
+                    <div className={classNames(styles.modalHeaderItem, styles.headerItemSearch)}>
+
+                        <input
+                            className={styles.inputSearch}
+                            type='text'
+                            placeholder='what are you looking for?'
+                            // style={{backgroundImage: categories[props.category]}}
+                            style={{ backgroundImage: searchIconUrl }}
+                        >
+                        </input>
+                    </div>
+                    <div className={classNames(styles.modalHeaderItem, styles.headerItemTitle)}>{this.props.title} </div>
+                    <div className={classNames(styles.modalHeaderItem, styles.headerItemClose)}>right</div>
+                </div>
+
                 <div className={styles.libraryScrollGrid}>
                     {this.props.data.map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?

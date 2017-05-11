@@ -23,7 +23,7 @@ class ModalComponent extends React.Component {
                     onClick={this.props.onRequestClose}
                 />
                 <Box
-                    className={styles.modalChildren}
+                    className={styles.fullModalChildren}
                     direction="column"
                 >
                     {this.props.children}

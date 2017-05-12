@@ -15,8 +15,8 @@ const reducer = function (state, action) {
                 .filter(target => !target.isStage)
                 .reduce(
                     (targets, target, listId) => Object.assign(
-                        {[target.id]: {order: listId, ...target}},
-                        targets
+                        targets,
+                        {[target.id]: {order: listId, ...target}}
                     ),
                     {}
                 ),

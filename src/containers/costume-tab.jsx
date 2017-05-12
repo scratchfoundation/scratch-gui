@@ -38,7 +38,7 @@ class CostumeTab extends React.Component {
         editingTarget.sprite.costumes = editingTarget.sprite.costumes
             .slice(0, costumeIndex)
             .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
-        this.props.vm.runtime.spriteInfoReport(editingTarget);
+        this.props.vm.runtime.requestTargetsUpdate(editingTarget);
         // @todo not sure if this is getting redrawn correctly
         this.props.vm.runtime.requestRedraw();
 

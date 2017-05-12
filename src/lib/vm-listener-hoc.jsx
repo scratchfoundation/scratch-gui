@@ -27,7 +27,6 @@ const vmListenerHOC = function (WrappedComponent) {
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
-            this.props.vm.on('SPRITE_INFO_REPORT', this.props.onSpriteInfoReport);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -100,9 +99,6 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: data => {
             dispatch(targets.updateEditingTarget(data.editingTarget));
             dispatch(targets.updateTargets(data.targetList));
-        },
-        onSpriteInfoReport: spriteInfo => {
-            dispatch(targets.updateTarget(spriteInfo));
         }
     });
     return connect(

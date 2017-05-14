@@ -9,7 +9,7 @@ module.exports = function (vm) {
                 {
                     type: 'field_dropdown',
                     name: name,
-                    options: start.concat(menuOptionsFn())
+                    options: start.concat(menuOptionsFn(this.sourceBlock_))
                 }
             ],
             inputsInline: true,
@@ -51,6 +51,51 @@ module.exports = function (vm) {
             }
         }
         return sprites;
+    };
+    
+    const variableMenu = function (block) {
+        var stageMenu = [
+            ['backdrop #', 'backdrop #'],
+            ['backdrop name', 'backdrop name'],
+            ['volume', 'volume']
+        ];
+        var spriteMenu2 = [
+            ['x position', 'x position'],
+            ['y position', 'y position'],
+            ['direction', 'direction'],
+            ['costume #', 'costume #'],
+            ['costume name', 'costume name'],
+            ['size', 'size'],
+            ['volume', 'volume']
+        ];
+        if (block) {
+            if (block.getParent()) {
+                var objectBlock = block.getParent();
+                var stage = false;
+                var startMenu = [];
+                if (objectBlock) {
+                    var object = objectBlock.spriteName;
+                    if (vm.runtime.getSpriteTargetByName(object)) {
+                        if (vm.runtime.getSpriteTargetByName(object).isStage) {
+                            stage = true;
+                        }
+                    }
+                }
+                if (stage) {
+                    startMenu = stageMenu;
+                } else {
+                    startMenu = spriteMenu2;
+                }
+                var variables = block.getParent().variables;
+                var i = 0;
+                var menu = [];
+                for (i = 0; i < variables.length; i++) {
+                    menu.push([variables[i], variables[i]]);
+                }
+                return startMenu.concat(menu);
+            }
+        }
+        return stageMenu;
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -119,6 +164,33 @@ module.exports = function (vm) {
             ['mouse-pointer', '_mouse_'],
             ['edge', '_edge_']
         ]);
+        this.jsonInit(json);
+    };
+    
+    ScratchBlocks.Blocks.sensing_of.variables = [];
+    
+    ScratchBlocks.Blocks.sensing_of.spriteName = '';
+    
+    ScratchBlocks.Blocks.sensing_of_object_menu.onchange = function () {
+        if (this.getParent()) {
+            var text = this.inputList[0].fieldRow[0].getText();
+            var variablesObject = vm.runtime.getSpriteTargetByName(text).variables;
+            var listsObject = vm.runtime.getSpriteTargetByName(text).lists;
+            var variables = [];
+            var x = 0;
+            for (x in variablesObject) {
+                variables.push(variablesObject[x].name);
+            }
+            for (x in listsObject) {
+                variables.push(listsObject[x].name);
+            }
+            this.getParent().variables = variables;
+            this.getParent().spriteName = text;
+        }
+    };
+    
+    ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
+        const json = jsonForMenuBlock('PROPERTY', variableMenu, sensingColors, []);
         this.jsonInit(json);
     };
 

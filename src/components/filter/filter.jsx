@@ -18,7 +18,6 @@ const FilterComponent = props => {
             className={classNames({
                 [styles.filter]: true,
                 [styles.isActive]: active
-                // styles.headerItemTitle
             })}
         >
             <img

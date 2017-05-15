@@ -6,6 +6,7 @@ const React = require('react');
 const LibraryItem = require('../library-item/library-item.jsx');
 const ModalComponent = require('../modal/modal.jsx');
 const Filter = require('../../containers/filter.jsx');
+const CloseButton = require('../close-button/close-button.jsx');
 
 const styles = require('./library.css');
 
@@ -37,8 +38,7 @@ class LibraryComponent extends React.Component {
             >
                 <div className={classNames(styles.menuBar, styles.fullModalHeader)}>
                     <div className={classNames(styles.modalHeaderItem, styles.headerItemFilter)}>
-                        <Filter>
-                        </Filter>
+                        <Filter></Filter>
                     </div>
                     <div
                         className={classNames(
@@ -54,6 +54,11 @@ class LibraryComponent extends React.Component {
                             styles.headerItemClose
                         )}
                     >
+                        <CloseButton
+                            // className={styles.deleteButton}
+                            size={CloseButton.SIZE_SMALL}
+                            onClick={this.props.onRequestClose}
+                        />
                     </div>
                 </div>
 

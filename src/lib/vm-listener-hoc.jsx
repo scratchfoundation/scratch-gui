@@ -104,15 +104,9 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: data => {
             dispatch(targets.updateEditingTarget(data.editingTarget));
             dispatch(targets.updateTargets(data.targetList));
-<<<<<<< HEAD
-        },
-        onSpriteInfoReport: spriteInfo => {
-            dispatch(targets.updateTarget(spriteInfo));
         },
         onMonitorsUpdate: monitorList => {
             dispatch(monitors.updateMonitors(monitorList));
-=======
->>>>>>> develop
         }
     });
     return connect(

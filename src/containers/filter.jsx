@@ -9,11 +9,18 @@ class Filter extends React.Component {
         super(props);
         bindAll(this, [
             'handleClick',
-            'handleBlur'
+            'handleBlur',
+            'updateSearch'
         ]);
         this.state = {
-            active: false
+            active: false,
+            filterQuery: ''
         };
+    }
+    updateSearch(event) {
+        this.setState({
+            filterQuery: event.target.value
+        })
     }
     handleClick () {
         this.setState({active: true});
@@ -25,8 +32,10 @@ class Filter extends React.Component {
         return (
             <FilterComponent
                 active={this.state.active}
+                filterQuery={this.state.filterQuery}
                 onClick={this.handleClick}
                 onBlur={this.handleBlur}
+                onChange={this.updateSearch}
             />
         );
     }

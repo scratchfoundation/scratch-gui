@@ -11,7 +11,9 @@ const FilterComponent = props => {
         active,
         onClick,
         onBlur,
-        placeholderText
+        onChange,
+        placeholderText,
+        filterQuery
     } = props;
     return (
         <div
@@ -32,6 +34,8 @@ const FilterComponent = props => {
                 className={styles.filterInput}
                 type='text'
                 placeholder={placeholderText}
+                value={filterQuery}
+                onChange={onChange}
             >
             </input>
             <div className={styles.xIconWrapper}>

@@ -76,7 +76,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 attachKeyboardEvents,
                 onKeyDown,
                 onKeyUp,
-                onSpriteInfoReport,
                 onMonitorsUpdate,
                 onTargetsUpdate,
                 /* eslint-enable no-unused-vars */
@@ -90,7 +89,6 @@ const vmListenerHOC = function (WrappedComponent) {
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
         onMonitorsUpdate: PropTypes.func,
-        onSpriteInfoReport: PropTypes.func,
         onTargetsUpdate: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };

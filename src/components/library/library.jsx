@@ -5,8 +5,7 @@ const React = require('react');
 
 const LibraryItem = require('../library-item/library-item.jsx');
 const ModalComponent = require('../modal/modal.jsx');
-const filterIcon = require('./icon--filter.svg');
-const xIcon = require('./icon--x.svg');
+const Filter = require('../../containers/filter.jsx');
 
 const styles = require('./library.css');
 
@@ -38,29 +37,8 @@ class LibraryComponent extends React.Component {
             >
                 <div className={classNames(styles.menuBar, styles.fullModalHeader)}>
                     <div className={classNames(styles.modalHeaderItem, styles.headerItemFilter)}>
-                        <div
-                            className={classNames(
-                                styles.filterComponent,
-                                styles.headerItemTitle
-                            )}
-                        >
-                            <img
-                                className={styles.filterIcon}
-                                src={filterIcon}
-                            ></img>
-                            <input
-                                className={styles.filterInput}
-                                type='text'
-                                placeholder='what are you looking for?'
-                            >
-                            </input>
-                            <div className={styles.xIconWrapper}>
-                                <img
-                                    className={styles.xIcon}
-                                    src={xIcon}
-                                ></img>
-                            </div>
-                        </div>
+                        <Filter>
+                        </Filter>
                     </div>
                     <div
                         className={classNames(

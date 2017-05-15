@@ -1,0 +1,80 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 0.3rem 0.5rem;
+    background: rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10rem;
+
+    user-select: none;
+}
+
+.filter:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* @todo: move this animation to onClick?  */
+.filter:hover .x-icon-wrapper .x-icon {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.filter-icon {
+    height: 0.9rem;
+    width: 0.9rem;
+    margin: 0 0.5rem 0 0.75rem;
+}
+
+.x-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;  /* Mask the icon animation */
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0 0.25rem 0 0.5rem;
+
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.x-icon-wrapper:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.x-icon {
+    position: relative;
+    transform: translateX(0.5rem);
+    opacity: 0;
+    margin: 0.25rem;
+    user-select: none;
+    transition: transform 0.085s cubic-bezier(0.78, 1, 1, 1),
+                opacity 0.05s linear;
+}
+
+.filter-input {
+    flex-grow: 1;
+    line-height: 1.25rem;
+    background-color: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+    cursor: text;
+}
+
+.filter-input::placeholder {
+    opacity: 0.75;
+    padding: 0 0 0 0.25rem;
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+}

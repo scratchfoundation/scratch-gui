@@ -9,8 +9,6 @@ const styles = require('./filter.css');
 const FilterComponent = props => {
     const {
         active,
-        onClick,
-        onBlur,
         onChange,
         placeholderText,
         filterQuery
@@ -19,12 +17,9 @@ const FilterComponent = props => {
         <div
             className={classNames({
                 [styles.filter]: true,
-                [styles.isActive]: active,
+                [styles.isActive]: active
                 // styles.headerItemTitle
-
             })}
-            onClick={onClick}
-            onBlur={onBlur}
         >
             <img
                 className={styles.filterIcon}
@@ -50,8 +45,6 @@ const FilterComponent = props => {
 
 FilterComponent.propTypes = {
     active: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
     placeholderText: PropTypes.string
 };
 FilterComponent.defaultProps = {

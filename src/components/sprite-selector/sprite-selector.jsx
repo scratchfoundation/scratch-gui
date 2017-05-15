@@ -53,17 +53,15 @@ const SpriteSelectorComponent = function (props) {
                     {Object.keys(sprites)
                         // Re-order by list order
                         .sort((id1, id2) => sprites[id1].order - sprites[id2].order)
-                        .map(id => (
+                        .map(id => sprites[id])
+                        .map(sprite => (
                             <SpriteSelectorItem
+                                assetId={sprite.costume && sprite.costume.assetId}
                                 className={styles.sprite}
-                                costumeURL={
-                                    sprites[id].costume &&
-                                    sprites[id].costume.url
-                                }
-                                id={id}
-                                key={id}
-                                name={sprites[id].name}
-                                selected={id === selectedId}
+                                id={sprite.id}
+                                key={sprite.id}
+                                name={sprite.name}
+                                selected={sprite.id === selectedId}
                                 onClick={onSelectSprite}
                                 onDeleteButtonClick={onDeleteSprite}
                             />

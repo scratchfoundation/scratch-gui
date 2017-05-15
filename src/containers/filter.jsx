@@ -12,23 +12,19 @@ class Filter extends React.Component {
             'handleBlur'
         ]);
         this.state = {
-            selected: false
+            active: false
         };
     }
-    handleClick (e) {
-        this.state.selected = true;
-        console.log(this.state.selected);
-        // add class here, to show X icon
+    handleClick () {
+        this.setState({active: true});
     }
     handleBlur () {
-        this.state.selected = false;
-        console.log(this.state.selected);
-        // remove class
+        this.setState({active: false});
     }
     render () {
         return (
             <FilterComponent
-                placeholderText="hello"
+                active={this.state.active}
                 onClick={this.handleClick}
                 onBlur={this.handleBlur}
             />

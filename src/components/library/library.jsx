@@ -1,4 +1,3 @@
-const classNames = require('classnames');
 const bindAll = require('lodash.bindall');
 const PropTypes = require('prop-types');
 const React = require('react');

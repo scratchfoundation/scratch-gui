@@ -23,21 +23,20 @@ const FilterComponent = props => {
             <img
                 className={styles.filterIcon}
                 src={filterIcon}
-            ></img>
+            />
             <input
                 autoFocus
                 className={styles.filterInput}
-                type='text'
                 placeholder={placeholderText}
+                type="text"
                 value={filterQuery}
                 onChange={onChange}
-            >
-            </input>
+            />
             <div className={styles.xIconWrapper}>
                 <img
                     className={styles.xIcon}
                     src={xIcon}
-                ></img>
+                />
             </div>
         </div>
     );
@@ -45,6 +44,8 @@ const FilterComponent = props => {
 
 FilterComponent.propTypes = {
     active: PropTypes.bool,
+    filterQuery: PropTypes.string,
+    onChange: PropTypes.func,
     placeholderText: PropTypes.string
 };
 FilterComponent.defaultProps = {

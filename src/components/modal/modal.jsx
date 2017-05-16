@@ -24,7 +24,7 @@ class ModalComponent extends React.Component {
                 >
                     <div className={styles.header}>
                         <div className={classNames(styles.headerItem, styles.headerItemFilter)}>
-                            <Filter></Filter>
+                            <Filter />
                         </div>
                         <div
                             className={classNames(
@@ -56,6 +56,7 @@ class ModalComponent extends React.Component {
 ModalComponent.propTypes = {
     children: PropTypes.node,
     contentLabel: PropTypes.string.isRequired,
+    onRequestClose: PropTypes.func,
     visible: PropTypes.bool.isRequired
 };
 

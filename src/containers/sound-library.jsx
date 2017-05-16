@@ -23,6 +23,7 @@ class SoundLibrary extends React.Component {
         this.player = this.audioEngine.createPlayer();
     }
     componentWillReceiveProps (newProps) {
+        // Stop playing sounds if the library closes without a mouseleave (e.g. by using the escape key)
         if (this.player && !newProps.visible) this.player.stopAllSounds();
     }
     handleItemMouseEnter (soundItem) {

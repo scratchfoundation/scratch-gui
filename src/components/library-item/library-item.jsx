@@ -1,4 +1,3 @@
-const classNames = require('classnames');
 const bindAll = require('lodash.bindall');
 const PropTypes = require('prop-types');
 const React = require('react');
@@ -18,10 +17,7 @@ class LibraryItem extends React.Component {
     render () {
         return (
             <Box
-                className={classNames({
-                    [styles.libraryItem]: true,
-                    [styles.isSelected]: this.props.selected
-                })}
+                className={styles.libraryItem}
                 onClick={this.handleClick}
             >
                 <Box className={styles.libraryItemImageContainer}>
@@ -40,8 +36,7 @@ LibraryItem.propTypes = {
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    selected: PropTypes.bool.isRequired
+    onSelect: PropTypes.func.isRequired
 };
 
 module.exports = LibraryItem;

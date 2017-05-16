@@ -11,19 +11,10 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, ['handleSelect']);
-        this.state = {selectedItem: null};
     }
     handleSelect (id) {
-        if (this.state.selectedItem === id) {
-            // Double select: select as the library's value.
-            this.props.onRequestClose();
-            this.props.onItemSelected(this.props.data[id]);
-        } else {
-            if (this.props.onItemChosen) {
-                this.props.onItemChosen(this.props.data[id]);
-            }
-        }
-        this.setState({selectedItem: id});
+        this.props.onRequestClose();
+        this.props.onItemSelected(this.props.data[id]);
     }
     render () {
         if (!this.props.visible) return null;
@@ -45,7 +36,6 @@ class LibraryComponent extends React.Component {
                                 id={itemId}
                                 key={`item_${itemId}`}
                                 name={dataItem.name}
-                                selected={this.state.selectedItem === itemId}
                                 onSelect={this.handleSelect}
                             />
                         );
@@ -67,7 +57,6 @@ LibraryComponent.propTypes = {
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
-    onItemChosen: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     title: PropTypes.string.isRequired,

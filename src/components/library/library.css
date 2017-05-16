@@ -5,19 +5,10 @@
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 
     height: 100%;
     overflow-y: scroll;
     padding: 1rem 1rem 5rem 1rem;
+    background: $ui-pane-gray;
 }
-
-/*.modal-header {
-    width: 100%;
-    margin-bottom: 2rem;
-    padding: 0.5rem;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: #8e8f95;
-}*/

@@ -11,36 +11,7 @@
     background-color: rgba(0, 0, 0, .75);
 }
 
-.modal-content {
-    position: absolute;
-    outline: none;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: 'touch';
-    border: 1px solid #ccc;
-    padding: 0;
-    top: 5%;
-    right: 5%;
-    bottom: 5%;
-    left: 5%;
-    border-radius: $space;
-    user-select: none;
-}
-
-.modal-children {
-    overflow: hidden;
-    height: 100%;
-    z-index: 0;
-    padding: 2rem;
-    background: $ui-pane-gray;
-}
-
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-}
-
+/* @todo: extract to type: full ? */
 .full-modal-content {
     position: absolute;
     outline: none;
@@ -50,18 +21,16 @@
     height: 100%;
 }
 
-.full-modal-children {
-    overflow: hidden;
-    height: 100%;
-    z-index: 0;
-    background: $ui-pane-gray;
-}
-
-
 /*
-    @todo: move to Modal component?
+    Modal header has 3 items:
+    |filter     title       x|
+
+    Use the same width for both side item containers,
+    so that title remains centered
 */
-.full-modal-header {
+$sides: 20rem;
+
+.header {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -76,7 +45,7 @@
     font-weight: normal;
 }
 
-.modal-header-item {
+.header-item {
     display: flex;
     align-items: center;
     padding: 1rem;
@@ -85,19 +54,10 @@
     user-select: none;
 }
 
-/*
-    Modal header has 3 items:
-    |filter     title       x|
-
-    Use the same width for both side item containers,
-    so that title remains centered
-*/
-$sides: 20rem;
-
 .header-item-filter {
     display: flex;
     flex-basis: $sides;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .header-item-title {
@@ -113,3 +73,28 @@ $sides: 20rem;
     flex-basis: $sides;
     justify-content: flex-end;
 }
+
+
+/*.base-modal-content {
+    position: absolute;
+    outline: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: 'touch';
+    border: 1px solid #ccc;
+    padding: 0;
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    left: 5%;
+    border-radius: $space;
+    user-select: none;
+}*/
+
+
+/*
+.base-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+}*/

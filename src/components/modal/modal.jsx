@@ -20,16 +20,15 @@ class ModalComponent extends React.Component {
                 ref={m => (this.modal = m)}
             >
                 <Box
-                    className={styles.fullModalChildren}
                     direction="column"
                 >
-                    <div className={classNames(styles.menuBar, styles.fullModalHeader)}>
-                        <div className={classNames(styles.modalHeaderItem, styles.headerItemFilter)}>
+                    <div className={styles.header}>
+                        <div className={classNames(styles.headerItem, styles.headerItemFilter)}>
                             <Filter></Filter>
                         </div>
                         <div
                             className={classNames(
-                                styles.modalHeaderItem,
+                                styles.headerItem,
                                 styles.headerItemTitle
                             )}
                         >
@@ -37,12 +36,11 @@ class ModalComponent extends React.Component {
                         </div>
                         <div
                             className={classNames(
-                                styles.modalHeaderItem,
+                                styles.headerItem,
                                 styles.headerItemClose
                             )}
                         >
                             <CloseButton
-                                // className={styles.deleteButton}
                                 size={CloseButton.SIZE_LARGE}
                                 onClick={this.props.onRequestClose}
                             />

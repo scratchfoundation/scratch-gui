@@ -14,14 +14,18 @@ class SoundLibrary extends React.Component {
         super(props);
         bindAll(this, [
             'handleItemSelected',
-            'handleItemChosen'
+            'handleItemMouseEnter',
+            'handleItemMouseLeave'
         ]);
     }
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.player = this.audioEngine.createPlayer();
     }
-    handleItemChosen (soundItem) {
+    componentWillReceiveProps (newProps) {
+        if (this.player && !newProps.visible) this.player.stopAllSounds();
+    }
+    handleItemMouseEnter (soundItem) {
         const md5ext = soundItem._md5;
         const idParts = md5ext.split('.');
         const md5 = idParts[0];
@@ -38,6 +42,9 @@ class SoundLibrary extends React.Component {
         .then(() => {
             this.player.playSound(soundItem._md5);
         });
+    }
+    handleItemMouseLeave () {
+        this.player.stopAllSounds();
     }
     handleItemSelected (soundItem) {
         const vmSound = {
@@ -68,7 +75,8 @@ class SoundLibrary extends React.Component {
                 data={soundLibraryThumbnailData}
                 title="Sound Library"
                 visible={this.props.visible}
-                onItemChosen={this.handleItemChosen}
+                onItemMouseEnter={this.handleItemMouseEnter}
+                onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}
             />

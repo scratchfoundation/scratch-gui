@@ -10,11 +10,21 @@ const styles = require('./library.css');
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['handleSelect']);
+        bindAll(this, [
+            'handleSelect',
+            'handleMouseEnter',
+            'handleMouseLeave'
+        ]);
     }
     handleSelect (id) {
         this.props.onRequestClose();
         this.props.onItemSelected(this.props.data[id]);
+    }
+    handleMouseEnter (id) {
+        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.props.data[id]);
+    }
+    handleMouseLeave (id) {
+        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.props.data[id]);
     }
     render () {
         if (!this.props.visible) return null;
@@ -36,6 +46,8 @@ class LibraryComponent extends React.Component {
                                 id={itemId}
                                 key={`item_${itemId}`}
                                 name={dataItem.name}
+                                onMouseEnter={this.handleMouseEnter}
+                                onMouseLeave={this.handleMouseLeave}
                                 onSelect={this.handleSelect}
                             />
                         );
@@ -57,6 +69,8 @@ LibraryComponent.propTypes = {
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
+    onItemMouseEnter: PropTypes.func,
+    onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     title: PropTypes.string.isRequired,

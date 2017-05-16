@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 const AudioEngine = require('scratch-audio');
-const LibaryComponent = require('../components/library/library.jsx');
+const LibraryComponent = require('../components/library/library.jsx');
 
 const soundIcon = require('../components/asset-panel/icon--sound.svg');
 
@@ -71,7 +71,7 @@ class SoundLibrary extends React.Component {
         });
 
         return (
-            <LibaryComponent
+            <LibraryComponent
                 data={soundLibraryThumbnailData}
                 title="Sound Library"
                 visible={this.props.visible}

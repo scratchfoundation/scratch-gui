@@ -3,8 +3,6 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const Storage = require('./storage');
-
 const {connect} = require('react-redux');
 
 const targets = require('../reducers/targets');
@@ -29,7 +27,6 @@ const vmListenerHOC = function (WrappedComponent) {
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
-            this.props.vm.on('SPRITE_INFO_REPORT', this.props.onSpriteInfoReport);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -92,20 +89,16 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };
-    const defaultVM = new VM('vm-listener-hoc');
-    defaultVM.attachStorage(new Storage());
     VMListener.defaultProps = {
-        attachKeyboardEvents: true,
-        vm: defaultVM
+        attachKeyboardEvents: true
     };
-    const mapStateToProps = () => ({});
+    const mapStateToProps = state => ({
+        vm: state.vm
+    });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
             dispatch(targets.updateEditingTarget(data.editingTarget));
             dispatch(targets.updateTargets(data.targetList));
-        },
-        onSpriteInfoReport: spriteInfo => {
-            dispatch(targets.updateTarget(spriteInfo));
         }
     });
     return connect(

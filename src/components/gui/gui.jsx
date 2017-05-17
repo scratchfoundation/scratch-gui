@@ -19,6 +19,8 @@ const GUIComponent = props => {
         basePath,
         children,
         vm,
+        onTabSelect,
+        tabIndex,
         ...componentProps
     } = props;
     if (children) {
@@ -28,13 +30,6 @@ const GUIComponent = props => {
             </Box>
         );
     }
-
-    // @todo hack to resize blockly manually in case resize happened while hidden
-    const handleTabSelect = tabIndex => {
-        if (tabIndex === 0) {
-            setTimeout(() => window.dispatchEvent(new Event('resize')));
-        }
-    };
 
     return (
         <Box
@@ -48,7 +43,7 @@ const GUIComponent = props => {
                         <Tabs
                             className={styles.tabs}
                             forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
-                            onSelect={handleTabSelect}
+                            onSelect={onTabSelect}
                         >
                             <TabList className={styles.tabList}>
                                 <Tab className={styles.tab}>Scripts</Tab>
@@ -59,6 +54,7 @@ const GUIComponent = props => {
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
+                                        isVisible={tabIndex === 0} // Scripts tab
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}
@@ -102,6 +98,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
+    onTabSelect: PropTypes.func,
+    tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

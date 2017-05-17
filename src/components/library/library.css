@@ -3,12 +3,11 @@
 
 .library-scroll-grid {
     display: flex;
+    justify-content: center;
+    background: $ui-pane-gray;
     flex-grow: 1;
     flex-wrap: wrap;
-    justify-content: flex-start;
-
-    height: 100%;
     overflow-y: scroll;
-    padding: 1rem 1rem 5rem 1rem;
-    background: $ui-pane-gray;
+    height: 100%;
+    padding: 0.5rem;
 }

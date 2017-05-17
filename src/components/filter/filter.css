@@ -44,12 +44,8 @@
     margin: 0 0.25rem 0 0.5rem; /* @todo: move to parent to make component*/
 
     border-radius: 50%;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.2);
-
     pointer-events: none;
     cursor: default;
-
     transition: opacity 0.05s linear;
 }
 
@@ -60,6 +56,11 @@
     pointer-events: auto;
     cursor: pointer;
     opacity: 1;
+    transition: opacity 0.05s linear;
+}
+
+.filter.is-active .x-icon-wrapper:hover {
+    transform: scale(1.2, 1.2);
 }
 
 /*
@@ -79,7 +80,6 @@
 .filter.is-active .x-icon-wrapper .x-icon {
     transform: translateX(0);
 }
-
 
 .filter-input {
     flex-grow: 1;

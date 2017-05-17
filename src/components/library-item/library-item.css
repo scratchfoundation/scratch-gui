@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     flex-basis: 160px;
+    max-width: 160px;
     height: 160px;
     margin: $space;
     padding: 1rem 1rem 0 1rem;

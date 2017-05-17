@@ -1,12 +1,20 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
+const bindAll = require('lodash.bindall');
 
 const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 
 const GUIComponent = require('../components/gui/gui.jsx');
 
 class GUI extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'handleTabSelect'
+        ]);
+        this.state = {tabIndex: 0};
+    }
     componentDidMount () {
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.setCompatibilityMode(true);
@@ -20,6 +28,9 @@ class GUI extends React.Component {
     componentWillUnmount () {
         this.props.vm.stopAll();
     }
+    handleTabSelect (tabIndex) {
+        this.setState({tabIndex});
+    }
     render () {
         const {
             projectData, // eslint-disable-line no-unused-vars
@@ -28,7 +39,9 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
+                tabIndex={this.state.tabIndex}
                 vm={vm}
+                onTabSelect={this.handleTabSelect}
                 {...componentProps}
             />
         );

@@ -12,15 +12,18 @@ const MONITOR_HEIGHT = 23;
 
 const isUndefined = a => typeof a === 'undefined';
 
-module.exports = function ({id, opcode, value, x, y}, monitorIndex) {
-
-    // Look up category and label from opcode label file
+module.exports = function ({id, opcode, params, value, x, y}, monitorIndex) {
     let opcodeData = OpcodeLabels[opcode];
     if (isUndefined(opcodeData)) {
-        log.error(`No category/label found for opcode: ${opcode}`);
+        log.error(`No data found for opcode: ${opcode}`);
         opcodeData = {category: 'data', label: opcode};
     }
-    const {label, category} = opcodeData;
+
+    // Use labelFn with fields if provided for dynamic labelling (e.g. variables)
+    let {label, category, labelFn} = opcodeData;
+    if (!isUndefined(labelFn)) {
+        label = labelFn(params);
+    }
 
     // Simple layout if x or y are undefined
     // @todo scratch2 has a more complex layout behavior we may want to adopt

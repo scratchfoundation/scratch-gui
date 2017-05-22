@@ -34,7 +34,7 @@ module.exports = {
     // Data
     data_variable: {
         category: 'data',
-        label: 'Variable _' // @todo placeholder for params
+        labelFn: params => params.VARIABLE
     },
 
     // Sound
@@ -50,18 +50,18 @@ module.exports = {
     // Sensing
     sensing_loudness: {
         category: 'sensing',
-        label: 'loundness'
+        label: 'loudness'
     },
     sensing_of: {
         category: 'sensing',
-        label: '_ of _' // @todo placeholder for params
+        labelFn: params => `${params.PROPERTY} of ${params.OBJECT}`
     },
     sensing_current: {
         category: 'sensing',
-        label: 'current _' // @todo placeholder for param
+        labelFn: params => params.CURRENTMENU.toLowerCase()
     },
     sensing_timer: {
-        category: 'timer',
+        category: 'sensing',
         label: 'timer'
     }
 };

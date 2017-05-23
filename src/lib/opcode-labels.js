@@ -1,4 +1,4 @@
-module.exports = {
+const opcodeMap = {
     // Motion
     motion_direction: {
         category: 'motion',
@@ -64,4 +64,12 @@ module.exports = {
         category: 'sensing',
         label: 'timer'
     }
+};
+
+module.exports = function (opcode) {
+    if (opcode in opcodeMap) return opcodeMap[opcode];
+    return {
+        category: 'data',
+        label: opcode
+    };
 };

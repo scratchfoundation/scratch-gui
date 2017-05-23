@@ -6,8 +6,9 @@
     align-items: center;
     justify-content: center;
     flex-basis: 160px;
+    max-width: 160px;
     height: 160px;
-    margin: calc($space / 2);
+    margin: $space;
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #575e75;
@@ -23,14 +24,11 @@
 .library-item:hover {
     border-width: 2px;
     border-color: #1dacf4;
-    transition: 0.1s ease-out;
-    transform: scale(1.02, 1.02);
 }
 
 .library-item.is-selected {
     border-width: 2px;
     border-color: #1dacf4;
-    transition: 0.25s ease-out;
 }
 
 .library-item-image-container {
@@ -47,12 +45,12 @@
     margin: 0.25rem 0;
     text-align: center;
 
-    /* 
+    /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
     */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    min-width: 0; 
+    min-width: 0;
 }

@@ -33,7 +33,6 @@ class LibraryComponent extends React.Component {
                 visible={this.props.visible}
                 onRequestClose={this.props.onRequestClose}
             >
-                <h1 className={styles.modalHeader}>{this.props.title}</h1>
                 <div className={styles.libraryScrollGrid}>
                     {this.props.data.map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?

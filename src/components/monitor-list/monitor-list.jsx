@@ -2,7 +2,7 @@ const React = require('react');
 const Box = require('../box/box.jsx');
 const Monitor = require('../../containers/monitor.jsx');
 const PropTypes = require('prop-types');
-const {Map} = require('immutable');
+const {OrderedMap} = require('immutable');
 
 
 const styles = require('./monitor-list.css');
@@ -13,12 +13,12 @@ const MonitorList = props => (
     >
         {props.monitors.valueSeq().map(monitorData => (
             <Monitor
-                color={monitorData.get('color')}
-                key={monitorData.get('id')}
-                label={monitorData.get('label')}
-                value={monitorData.get('value')}
-                x={monitorData.get('x')}
-                y={monitorData.get('y')}
+                color={monitorData.color}
+                key={monitorData.id}
+                label={monitorData.label}
+                value={monitorData.value}
+                x={monitorData.x}
+                y={monitorData.y}
                 onDragEnd={props.onMonitorChange}
             />
         ))}
@@ -26,7 +26,7 @@ const MonitorList = props => (
 );
 
 MonitorList.propTypes = {
-    monitors: PropTypes.instanceOf(Map),
+    monitors: PropTypes.instanceOf(OrderedMap),
     onMonitorChange: PropTypes.func.isRequired
 };
 

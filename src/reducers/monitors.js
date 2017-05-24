@@ -1,7 +1,7 @@
 const UPDATE_MONITORS = 'scratch-gui/monitors/UPDATE_MONITORS';
-const {Map} = require('immutable');
+const {OrderedMap} = require('immutable');
 
-const initialState = Map();
+const initialState = OrderedMap();
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;

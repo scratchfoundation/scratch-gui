@@ -14,6 +14,9 @@ class LibraryItem extends React.Component {
             'handleMouseLeave'
         ]);
     }
+    shouldComponentUpdate (nextProps) {
+        return this.props.iconURL !== nextProps.iconURL;
+    }
     handleClick (e) {
         this.props.onSelect(this.props.id);
         e.preventDefault();

@@ -7,8 +7,6 @@ const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
 
 const GUIComponent = require('../components/gui/gui.jsx');
 
-const {connect} = require('react-redux');
-
 class GUI extends React.Component {
     constructor (props) {
         super(props);
@@ -37,16 +35,10 @@ class GUI extends React.Component {
         const {
             projectData, // eslint-disable-line no-unused-vars
             vm,
-            editingTarget,
-            sprites,
             ...componentProps
         } = this.props;
-        
-        const costumeTabText = editingTarget && sprites[editingTarget] ? 'Costumes' : 'Backdrops';
-        
         return (
             <GUIComponent
-                costumeTabText={costumeTabText}
                 tabIndex={this.state.tabIndex}
                 vm={vm}
                 onTabSelect={this.handleTabSelect}
@@ -58,24 +50,10 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     ...GUIComponent.propTypes,
-    editingTarget: PropTypes.string,
     projectData: PropTypes.string,
-    sprites: PropTypes.shape({
-        id: PropTypes.shape({
-            costumes: PropTypes.arrayOf(PropTypes.shape({
-                url: PropTypes.string,
-                name: PropTypes.string.isRequired
-            }))
-        })
-    }),
     vm: PropTypes.instanceOf(VM)
 };
 
 GUI.defaultProps = GUIComponent.defaultProps;
 
-const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    sprites: state.targets.sprites
-});
-
-module.exports = vmListenerHOC(connect(mapStateToProps)(GUI));
+module.exports = vmListenerHOC(GUI);

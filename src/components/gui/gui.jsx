@@ -25,7 +25,6 @@ const GUIComponent = props => {
         children,
         vm,
         onTabSelect,
-        costumeTabText,
         tabIndex,
         ...componentProps
     } = props;
@@ -64,7 +63,7 @@ const GUIComponent = props => {
                         >
                             <TabList className={tabClassNames.tabList}>
                                 <Tab className={tabClassNames.tab}>Scripts</Tab>
-                                <Tab className={tabClassNames.tab}>{costumeTabText}</Tab>
+                                <Tab className={tabClassNames.tab}>Costumes</Tab>
                                 <Tab className={tabClassNames.tab}>Sounds</Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
@@ -115,7 +114,6 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
-    costumeTabText: PropTypes.string,
     onTabSelect: PropTypes.func,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired

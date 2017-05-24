@@ -23,6 +23,20 @@ class SoundTab extends React.Component {
         this.state = {selectedSoundIndex: 0};
     }
 
+    componentWillReceiveProps (nextProps) {
+        const {
+            editingTarget,
+            sprites,
+            stage
+        } = nextProps;
+
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+
+        if (target && target.sounds && this.state.selectedSoundIndex > target.sounds.length - 1) {
+            this.setState({selectedSoundIndex: target.sounds.length - 1});
+        }
+    }
+
     handleSelectSound (soundIndex) {
         const sound = this.props.vm.editingTarget.sprite.sounds[soundIndex];
         this.props.vm.editingTarget.audioPlayer.playSound(sound.md5);
@@ -30,17 +44,7 @@ class SoundTab extends React.Component {
     }
 
     handleDeleteSound (soundIndex) {
-        // @todo the VM should handle all of this logic
-        const {editingTarget} = this.props.vm;
-        editingTarget.sprite.sounds = editingTarget.sprite.sounds
-            .slice(0, soundIndex)
-            .concat(editingTarget.sprite.sounds.slice(soundIndex + 1));
-        this.props.vm.emitTargetsUpdate();
-        this.props.vm.runtime.requestRedraw();
-
-        this.setState({
-            selectedSoundIndex: this.state.selectedSoundIndex % editingTarget.sprite.sounds.length
-        });
+        this.props.vm.deleteSound(soundIndex);
     }
 
     render () {

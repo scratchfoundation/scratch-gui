@@ -47,7 +47,9 @@ class LibraryComponent extends React.Component {
                 onRequestClose={this.props.onRequestClose}
             >
                 <div className={styles.libraryScrollGrid}>
-                    {this.props.data.map((dataItem, itemId) => {
+                    {this.props.data.filter(dataItem =>
+                        dataItem.name.toLowerCase().indexOf(this.state.filterQuery.toLowerCase()) !== -1
+                    ).map((dataItem, itemId) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
                             dataItem.rawURL;
@@ -71,6 +73,7 @@ class LibraryComponent extends React.Component {
 LibraryComponent.propTypes = {
     data: PropTypes.arrayOf(
         /* eslint-disable react/no-unused-prop-types, lines-around-comment */
+        // An item in the library
         PropTypes.shape({
             // @todo remove md5/rawURL prop from library, refactor to use storage
             md5: PropTypes.string,

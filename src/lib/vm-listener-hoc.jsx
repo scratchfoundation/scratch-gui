@@ -3,11 +3,10 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const Storage = require('./storage');
-
 const {connect} = require('react-redux');
 
 const targets = require('../reducers/targets');
+const monitors = require('../reducers/monitors');
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -29,7 +28,8 @@ const vmListenerHOC = function (WrappedComponent) {
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
-            this.props.vm.on('SPRITE_INFO_REPORT', this.props.onSpriteInfoReport);
+            this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
+
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -76,7 +76,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 attachKeyboardEvents,
                 onKeyDown,
                 onKeyUp,
-                onSpriteInfoReport,
+                onMonitorsUpdate,
                 onTargetsUpdate,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -88,24 +88,23 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: PropTypes.bool,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
-        onSpriteInfoReport: PropTypes.func,
+        onMonitorsUpdate: PropTypes.func,
         onTargetsUpdate: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };
-    const defaultVM = new VM('vm-listener-hoc');
-    defaultVM.attachStorage(new Storage());
     VMListener.defaultProps = {
-        attachKeyboardEvents: true,
-        vm: defaultVM
+        attachKeyboardEvents: true
     };
-    const mapStateToProps = () => ({});
+    const mapStateToProps = state => ({
+        vm: state.vm
+    });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
             dispatch(targets.updateEditingTarget(data.editingTarget));
             dispatch(targets.updateTargets(data.targetList));
         },
-        onSpriteInfoReport: spriteInfo => {
-            dispatch(targets.updateTarget(spriteInfo));
+        onMonitorsUpdate: monitorList => {
+            dispatch(monitors.updateMonitors(monitorList));
         }
     });
     return connect(

@@ -27,6 +27,7 @@ const Selector = props => {
             <Box className={styles.listArea}>
                 {items.map((item, index) => (
                     <SpriteSelectorItem
+                        assetId={item.assetId}
                         className={styles.listItem}
                         costumeURL={item.url}
                         id={index}

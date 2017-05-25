@@ -11,8 +11,10 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleSelect',
-            'handleFilterChange'
+            'handleFilterChange',
+            'handleMouseEnter',
+            'handleMouseLeave',
+            'handleSelect'
         ]);
         this.state = {
             selectedItem: null,
@@ -20,16 +22,14 @@ class LibraryComponent extends React.Component {
         };
     }
     handleSelect (id) {
-        if (this.state.selectedItem === id) {
-            // Double select: select as the library's value.
-            this.props.onRequestClose();
-            this.props.onItemSelected(this.getFilteredData()[id]);
-        } else {
-            if (this.props.onItemChosen) {
-                this.props.onItemChosen(this.getFilteredData()[id]);
-            }
-        }
-        this.setState({selectedItem: id});
+        this.props.onRequestClose();
+        this.props.onItemSelected(this.getFilteredData()[id]);
+    }
+    handleMouseEnter (id) {
+        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
+    }
+    handleMouseLeave (id) {
+        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
     }
     handleFilterChange (event) {
         this.setState({
@@ -61,7 +61,8 @@ class LibraryComponent extends React.Component {
                                 id={index}
                                 key={`item_${index}`}
                                 name={dataItem.name}
-                                selected={this.state.selectedItem === index}
+                                onMouseEnter={this.handleMouseEnter}
+                                onMouseLeave={this.handleMouseLeave}
                                 onSelect={this.handleSelect}
                             />
                         );
@@ -84,7 +85,8 @@ LibraryComponent.propTypes = {
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
-    onItemChosen: PropTypes.func,
+    onItemMouseEnter: PropTypes.func,
+    onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     title: PropTypes.string.isRequired,

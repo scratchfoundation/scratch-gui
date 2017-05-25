@@ -1,6 +1,10 @@
+const classNames = require('classnames');
 const PropTypes = require('prop-types');
 const React = require('react');
+const {Tab, Tabs, TabList, TabPanel} = require('react-tabs');
+const tabStyles = require('react-tabs/style/react-tabs.css');
 const VM = require('scratch-vm');
+
 const Blocks = require('../../containers/blocks.jsx');
 const CostumeTab = require('../../containers/costume-tab.jsx');
 const GreenFlag = require('../../containers/green-flag.jsx');
@@ -8,17 +12,20 @@ const TargetPane = require('../../containers/target-pane.jsx');
 const SoundTab = require('../../containers/sound-tab.jsx');
 const Stage = require('../../containers/stage.jsx');
 const StopAll = require('../../containers/stop-all.jsx');
-const MenuBar = require('../menu-bar/menu-bar.jsx');
-const {Tab, Tabs, TabList, TabPanel} = require('react-tabs');
 
 const Box = require('../box/box.jsx');
+const MenuBar = require('../menu-bar/menu-bar.jsx');
+
 const styles = require('./gui.css');
+
 
 const GUIComponent = props => {
     const {
         basePath,
         children,
         vm,
+        onTabSelect,
+        tabIndex,
         ...componentProps
     } = props;
     if (children) {
@@ -29,11 +36,13 @@ const GUIComponent = props => {
         );
     }
 
-    // @todo hack to resize blockly manually in case resize happened while hidden
-    const handleTabSelect = tabIndex => {
-        if (tabIndex === 0) {
-            setTimeout(() => window.dispatchEvent(new Event('resize')));
-        }
+    const tabClassNames = {
+        tabs: styles.tabs,
+        tab: classNames(tabStyles.reactTabsTab, styles.tab),
+        tabList: classNames(tabStyles.reactTabsTabList, styles.tabList),
+        tabPanel: classNames(tabStyles.reactTabsTabPanel, styles.tabPanel),
+        tabPanelSelected: classNames(tabStyles.reactTabsTabPanelSelected, styles.isSelected),
+        tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
     return (
@@ -46,19 +55,22 @@ const GUIComponent = props => {
                 <Box className={styles.flexWrapper}>
                     <Box className={styles.editorWrapper}>
                         <Tabs
-                            className={styles.tabs}
+                            className={tabClassNames.tabs}
                             forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
-                            onSelect={handleTabSelect}
+                            selectedTabClassName={tabClassNames.tabSelected}
+                            selectedTabPanelClassName={tabClassNames.tabPanelSelected}
+                            onSelect={onTabSelect}
                         >
-                            <TabList className={styles.tabList}>
-                                <Tab className={styles.tab}>Scripts</Tab>
-                                <Tab className={styles.tab}>Costumes</Tab>
-                                <Tab className={styles.tab}>Sounds</Tab>
+                            <TabList className={tabClassNames.tabList}>
+                                <Tab className={tabClassNames.tab}>Scripts</Tab>
+                                <Tab className={tabClassNames.tab}>Costumes</Tab>
+                                <Tab className={tabClassNames.tab}>Sounds</Tab>
                             </TabList>
-                            <TabPanel className={styles.tabPanel}>
+                            <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
+                                        isVisible={tabIndex === 0} // Scripts tab
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}
@@ -66,10 +78,10 @@ const GUIComponent = props => {
                                     />
                                 </Box>
                             </TabPanel>
-                            <TabPanel className={styles.tabPanel}>
+                            <TabPanel className={tabClassNames.tabPanel}>
                                 <CostumeTab vm={vm} />
                             </TabPanel>
-                            <TabPanel className={styles.tabPanel}>
+                            <TabPanel className={tabClassNames.tabPanel}>
                                 <SoundTab vm={vm} />
                             </TabPanel>
                         </Tabs>
@@ -102,6 +114,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
+    onTabSelect: PropTypes.func,
+    tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

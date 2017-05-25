@@ -26,11 +26,6 @@
     border-color: #1dacf4;
 }
 
-.library-item.is-selected {
-    border-width: 2px;
-    border-color: #1dacf4;
-}
-
 .library-item-image-container {
     height: 100px;
 }

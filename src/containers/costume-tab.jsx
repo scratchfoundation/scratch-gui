@@ -23,28 +23,25 @@ class CostumeTab extends React.Component {
         this.state = {selectedCostumeIndex: 0};
     }
 
+    componentWillReceiveProps (nextProps) {
+        const {
+            editingTarget,
+            sprites,
+            stage
+        } = nextProps;
+
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+        if (target && target.costumes && this.state.selectedCostumeIndex > target.costumes.length - 1) {
+            this.setState({selectedCostumeIndex: target.costumes.length - 1});
+        }
+    }
+
     handleSelectCostume (costumeIndex) {
         this.setState({selectedCostumeIndex: costumeIndex});
     }
 
     handleDeleteCostume (costumeIndex) {
-        // @todo the VM should handle all of this logic
-        const {editingTarget} = this.props.vm;
-
-        if (costumeIndex === editingTarget.currentCostume) {
-            editingTarget.setCostume(costumeIndex - 1);
-        }
-
-        editingTarget.sprite.costumes = editingTarget.sprite.costumes
-            .slice(0, costumeIndex)
-            .concat(editingTarget.sprite.costumes.slice(costumeIndex + 1));
-        this.props.vm.runtime.spriteInfoReport(editingTarget);
-        // @todo not sure if this is getting redrawn correctly
-        this.props.vm.runtime.requestRedraw();
-
-        this.setState({
-            selectedCostumeIndex: this.state.selectedCostumeIndex % editingTarget.sprite.costumes.length
-        });
+        this.props.vm.deleteCostume(costumeIndex);
     }
 
     render () {

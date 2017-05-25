@@ -52,7 +52,21 @@ class Blocks extends React.Component {
         this.attachVM();
     }
     shouldComponentUpdate (nextProps, nextState) {
-        return this.state.prompt !== nextState.prompt;
+        return this.state.prompt !== nextState.prompt || this.props.isVisible !== nextProps.isVisible;
+    }
+    componentDidUpdate (prevProps) {
+        if (this.props.isVisible === prevProps.isVisible) {
+            return;
+        }
+
+        // @todo hack to resize blockly manually in case resize happened while hidden
+        if (this.props.isVisible) { // Scripts tab
+            window.dispatchEvent(new Event('resize'));
+            this.workspace.setVisible(true);
+            this.workspace.toolbox_.refreshSelection();
+        } else {
+            this.workspace.setVisible(false);
+        }
     }
     componentWillUnmount () {
         this.detachVM();
@@ -60,10 +74,11 @@ class Blocks extends React.Component {
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
-        this.workspace
+        this.flyoutWorkspace = this.workspace
             .getFlyout()
-            .getWorkspace()
-            .addChangeListener(this.props.vm.flyoutBlockListener);
+            .getWorkspace();
+        this.flyoutWorkspace.addChangeListener(this.props.vm.flyoutBlockListener);
+        this.flyoutWorkspace.addChangeListener(this.props.vm.monitorBlockListener);
         this.props.vm.addListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
         this.props.vm.addListener('SCRIPT_GLOW_OFF', this.onScriptGlowOff);
         this.props.vm.addListener('BLOCK_GLOW_ON', this.onBlockGlowOn);
@@ -146,6 +161,7 @@ class Blocks extends React.Component {
         const {
             options, // eslint-disable-line no-unused-vars
             vm, // eslint-disable-line no-unused-vars
+            isVisible, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -169,11 +185,12 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
+    isVisible: PropTypes.bool.isRequired,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
-            controls: PropTypes.boolean,
-            wheel: PropTypes.boolean,
+            controls: PropTypes.bool,
+            wheel: PropTypes.bool,
             startScale: PropTypes.number
         }),
         colours: PropTypes.shape({

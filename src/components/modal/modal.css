@@ -77,27 +77,3 @@ $sides: 20rem;
     justify-content: flex-end;
 }
 
-
-/*.base-modal-content {
-    position: absolute;
-    outline: none;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: 'touch';
-    border: 1px solid #ccc;
-    padding: 0;
-    top: 5%;
-    right: 5%;
-    bottom: 5%;
-    left: 5%;
-    border-radius: $space;
-    user-select: none;
-}*/
-
-
-/*
-.base-close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-}*/

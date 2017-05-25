@@ -9,6 +9,7 @@ const styles = require('./filter.css');
 const FilterComponent = props => {
     const {
         onChange,
+        onClear,
         placeholderText,
         filterQuery
     } = props;
@@ -31,7 +32,10 @@ const FilterComponent = props => {
                 value={filterQuery}
                 onChange={onChange}
             />
-            <div className={styles.xIconWrapper}>
+            <div
+                className={styles.xIconWrapper}
+                onClick={onClear}
+            >
                 <img
                     className={styles.xIcon}
                     src={xIcon}
@@ -44,6 +48,7 @@ const FilterComponent = props => {
 FilterComponent.propTypes = {
     filterQuery: PropTypes.string,
     onChange: PropTypes.func,
+    onClear: PropTypes.func,
     placeholderText: PropTypes.string
 };
 FilterComponent.defaultProps = {

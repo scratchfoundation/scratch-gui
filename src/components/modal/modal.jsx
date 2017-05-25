@@ -28,6 +28,7 @@ class ModalComponent extends React.Component {
                             <Filter
                                 filterQuery={this.props.filterQuery}
                                 onChange={this.props.onFilterChange}
+                                onClear={this.props.onFilterClear}
                             />
                         </div>
                         <div
@@ -62,6 +63,7 @@ ModalComponent.propTypes = {
     contentLabel: PropTypes.string.isRequired,
     filterQuery: PropTypes.string,
     onFilterChange: PropTypes.func,
+    onFilterClear: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool.isRequired
 };

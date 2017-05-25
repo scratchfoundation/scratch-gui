@@ -12,6 +12,7 @@ class LibraryComponent extends React.Component {
         super(props);
         bindAll(this, [
             'handleFilterChange',
+            'handleFilterClear',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect'
@@ -32,9 +33,10 @@ class LibraryComponent extends React.Component {
         if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
     }
     handleFilterChange (event) {
-        this.setState({
-            filterQuery: event.target.value
-        });
+        this.setState({filterQuery: event.target.value});
+    }
+    handleFilterClear () {
+        this.setState({filterQuery: ''});
     }
     getFilteredData () {
         return this.props.data.filter(dataItem =>
@@ -48,6 +50,7 @@ class LibraryComponent extends React.Component {
                 filterQuery={this.state.filterQuery}
                 visible={this.props.visible}
                 onFilterChange={this.handleFilterChange}
+                onFilterClear={this.handleFilterClear}
                 onRequestClose={this.props.onRequestClose}
             >
                 <div className={styles.libraryScrollGrid}>

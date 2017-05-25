@@ -21,6 +21,7 @@ class ModalComponent extends React.Component {
             >
                 <Box
                     direction="column"
+                    grow="1"
                 >
                     <div className={styles.header}>
                         <div className={classNames(styles.headerItem, styles.headerItemFilter)}>

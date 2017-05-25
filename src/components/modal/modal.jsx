@@ -5,7 +5,7 @@ const ReactModal = require('react-modal');
 
 const Box = require('../box/box.jsx');
 const CloseButton = require('../close-button/close-button.jsx');
-const Filter = require('../../containers/filter.jsx');
+const Filter = require('../filter/filter.jsx');
 
 const styles = require('./modal.css');
 
@@ -24,7 +24,10 @@ class ModalComponent extends React.Component {
                 >
                     <div className={styles.header}>
                         <div className={classNames(styles.headerItem, styles.headerItemFilter)}>
-                            <Filter />
+                            <Filter
+                                filterQuery={this.props.filterQuery}
+                                onChange={this.props.onFilterChange}
+                            />
                         </div>
                         <div
                             className={classNames(
@@ -56,6 +59,8 @@ class ModalComponent extends React.Component {
 ModalComponent.propTypes = {
     children: PropTypes.node,
     contentLabel: PropTypes.string.isRequired,
+    filterQuery: PropTypes.string,
+    onFilterChange: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool.isRequired
 };

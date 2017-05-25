@@ -10,8 +10,14 @@ const styles = require('./library.css');
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, ['handleSelect']);
-        this.state = {selectedItem: null};
+        bindAll(this, [
+            'handleSelect',
+            'handleFilterChange'
+        ]);
+        this.state = {
+            selectedItem: null,
+            filterQuery: ''
+        };
     }
     handleSelect (id) {
         if (this.state.selectedItem === id) {
@@ -25,12 +31,19 @@ class LibraryComponent extends React.Component {
         }
         this.setState({selectedItem: id});
     }
+    handleFilterChange (event) {
+        this.setState({
+            filterQuery: event.target.value
+        });
+    }
     render () {
         if (!this.props.visible) return null;
         return (
             <ModalComponent
                 contentLabel={this.props.title}
+                filterQuery={this.state.filterQuery}
                 visible={this.props.visible}
+                onFilterChange={this.handleFilterChange}
                 onRequestClose={this.props.onRequestClose}
             >
                 <div className={styles.libraryScrollGrid}>

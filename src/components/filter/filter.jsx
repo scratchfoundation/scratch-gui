@@ -8,7 +8,6 @@ const styles = require('./filter.css');
 
 const FilterComponent = props => {
     const {
-        active,
         onChange,
         placeholderText,
         filterQuery
@@ -17,7 +16,7 @@ const FilterComponent = props => {
         <div
             className={classNames({
                 [styles.filter]: true,
-                [styles.isActive]: active
+                [styles.isActive]: filterQuery.length > 0
             })}
         >
             <img
@@ -43,13 +42,11 @@ const FilterComponent = props => {
 };
 
 FilterComponent.propTypes = {
-    active: PropTypes.bool,
     filterQuery: PropTypes.string,
     onChange: PropTypes.func,
     placeholderText: PropTypes.string
 };
 FilterComponent.defaultProps = {
-    active: false,
     placeholderText: 'what are you looking for?'
 };
 module.exports = FilterComponent;

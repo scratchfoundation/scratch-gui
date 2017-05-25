@@ -23,10 +23,10 @@ class LibraryComponent extends React.Component {
         if (this.state.selectedItem === id) {
             // Double select: select as the library's value.
             this.props.onRequestClose();
-            this.props.onItemSelected(this.props.data[id]);
+            this.props.onItemSelected(this.getFilteredData()[id]);
         } else {
             if (this.props.onItemChosen) {
-                this.props.onItemChosen(this.props.data[id]);
+                this.props.onItemChosen(this.getFilteredData()[id]);
             }
         }
         this.setState({selectedItem: id});
@@ -35,6 +35,10 @@ class LibraryComponent extends React.Component {
         this.setState({
             filterQuery: event.target.value
         });
+    }
+    getFilteredData () {
+        return this.props.data.filter(dataItem =>
+            dataItem.name.toLowerCase().indexOf(this.state.filterQuery.toLowerCase()) !== -1);
     }
     render () {
         if (!this.props.visible) return null;
@@ -47,19 +51,17 @@ class LibraryComponent extends React.Component {
                 onRequestClose={this.props.onRequestClose}
             >
                 <div className={styles.libraryScrollGrid}>
-                    {this.props.data.filter(dataItem =>
-                        dataItem.name.toLowerCase().indexOf(this.state.filterQuery.toLowerCase()) !== -1
-                    ).map((dataItem, itemId) => {
+                    {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
                             dataItem.rawURL;
                         return (
                             <LibraryItem
                                 iconURL={scratchURL}
-                                id={itemId}
-                                key={`item_${itemId}`}
+                                id={index}
+                                key={`item_${index}`}
                                 name={dataItem.name}
-                                selected={this.state.selectedItem === itemId}
+                                selected={this.state.selectedItem === index}
                                 onSelect={this.handleSelect}
                             />
                         );

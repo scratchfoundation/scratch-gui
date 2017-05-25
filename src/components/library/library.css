@@ -4,10 +4,11 @@
 .library-scroll-grid {
     display: flex;
     justify-content: center;
+    align-content: flex-start;
     background: $ui-pane-gray;
     flex-grow: 1;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 100%;
+    overflow-y: auto;
+    height: calc(100% - $library-header-height);
     padding: 0.5rem;
 }

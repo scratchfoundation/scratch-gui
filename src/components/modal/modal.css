@@ -15,7 +15,7 @@
 .full-modal-content {
     position: absolute;
     outline: none;
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: 'touch';
     user-select: none;
     height: 100%;
@@ -37,6 +37,7 @@ $sides: 20rem;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    height: $library-header-height;
 
     box-sizing: border-box;
     width: 100%;

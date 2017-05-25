@@ -18,6 +18,7 @@ module.exports = function ({id, opcode, params, value, x, y}, monitorIndex) {
 
     // Simple layout if x or y are undefined
     // @todo scratch2 has a more complex layout behavior we may want to adopt
+    // @todo e.g. this does not work well when monitors have already been moved
     if (isUndefined(x)) x = PADDING;
     if (isUndefined(y)) y = PADDING + (monitorIndex * (PADDING + MONITOR_HEIGHT));
 

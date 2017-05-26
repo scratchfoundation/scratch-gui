@@ -39,6 +39,7 @@ class SpriteLibrary extends React.PureComponent {
     }
     startRotatingCostumes () {
         if (!this.state.activeSprite) return;
+        this.rotateCostume();
         this.intervalId = setInterval(this.rotateCostume, 300);
     }
     stopRotatingCostumes () {

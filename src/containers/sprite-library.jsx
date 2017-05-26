@@ -5,7 +5,7 @@ const VM = require('scratch-vm');
 
 const spriteLibraryContent = require('../lib/libraries/sprites.json');
 
-const LibaryComponent = require('../components/library/library.jsx');
+const LibraryComponent = require('../components/library/library.jsx');
 
 class SpriteLibrary extends React.Component {
     constructor (props) {
@@ -19,7 +19,7 @@ class SpriteLibrary extends React.Component {
     }
     render () {
         return (
-            <LibaryComponent
+            <LibraryComponent
                 data={spriteLibraryContent}
                 title="Sprite Library"
                 visible={this.props.visible}

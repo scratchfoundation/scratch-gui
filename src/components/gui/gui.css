@@ -47,7 +47,7 @@
     border-bottom: 0 !important;
 }
 
-.tab-list .tab {
+.tab {
     flex-grow: 1;
     height: 80%;
     margin-left: 1px;
@@ -63,9 +63,9 @@
     align-items: center;
 }
 
-
-.tab-list .tab[aria-selected="true"] {
+.tab.is-selected {
     color: #40B9F5;
+    background-color: #FFFFFF;
 }
 
 .tabs {
@@ -80,6 +80,10 @@
     position: relative;
     flex-grow: 1;
     flex-shrink: 0;
+    display: none;
+}
+
+.tab-panel.is-selected {
     display: flex;
 }
 

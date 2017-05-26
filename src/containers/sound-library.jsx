@@ -3,25 +3,30 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 const AudioEngine = require('scratch-audio');
-const LibaryComponent = require('../components/library/library.jsx');
+const LibraryComponent = require('../components/library/library.jsx');
 
 const soundIcon = require('../components/asset-panel/icon--sound.svg');
 
 const soundLibraryContent = require('../lib/libraries/sounds.json');
 
-class SoundLibrary extends React.Component {
+class SoundLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleItemSelected',
-            'handleItemChosen'
+            'handleItemMouseEnter',
+            'handleItemMouseLeave'
         ]);
     }
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.player = this.audioEngine.createPlayer();
     }
-    handleItemChosen (soundItem) {
+    componentWillReceiveProps (newProps) {
+        // Stop playing sounds if the library closes without a mouseleave (e.g. by using the escape key)
+        if (this.player && !newProps.visible) this.player.stopAllSounds();
+    }
+    handleItemMouseEnter (soundItem) {
         const md5ext = soundItem._md5;
         const idParts = md5ext.split('.');
         const md5 = idParts[0];
@@ -38,6 +43,9 @@ class SoundLibrary extends React.Component {
         .then(() => {
             this.player.playSound(soundItem._md5);
         });
+    }
+    handleItemMouseLeave () {
+        this.player.stopAllSounds();
     }
     handleItemSelected (soundItem) {
         const vmSound = {
@@ -64,11 +72,12 @@ class SoundLibrary extends React.Component {
         });
 
         return (
-            <LibaryComponent
+            <LibraryComponent
                 data={soundLibraryThumbnailData}
                 title="Sound Library"
                 visible={this.props.visible}
-                onItemChosen={this.handleItemChosen}
+                onItemMouseEnter={this.handleItemMouseEnter}
+                onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}
             />

@@ -35,11 +35,14 @@ class LibraryItem extends React.Component {
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >
-                <Box className={styles.libraryItemImageContainer}>
-                    <img
-                        className={styles.libraryItemImage}
-                        src={this.props.iconURL}
-                    />
+                {/* Layers of wrapping is to prevent layout thrashing on animation */}
+                <Box className={styles.libraryItemImageContainerWrapper}>
+                    <Box className={styles.libraryItemImageContainer}>
+                        <img
+                            className={styles.libraryItemImage}
+                            src={this.props.iconURL}
+                        />
+                    </Box>
                 </Box>
                 <span className={styles.libraryItemName}>{this.props.name}</span>
             </Box>

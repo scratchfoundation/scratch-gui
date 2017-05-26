@@ -26,8 +26,16 @@
     border-color: #1dacf4;
 }
 
-.library-item-image-container {
+.library-item-image-container-wrapper {
     height: 100px;
+    width: 100%;
+    position: relative;
+}
+
+.library-item-image-container {
+    position: absolute;
+    height: 100px;
+    width: 100%;
 }
 
 .library-item-image {

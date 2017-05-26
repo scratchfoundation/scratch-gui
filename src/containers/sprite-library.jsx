@@ -7,7 +7,7 @@ const spriteLibraryContent = require('../lib/libraries/sprites.json');
 
 const LibraryComponent = require('../components/library/library.jsx');
 
-class SpriteLibrary extends React.Component {
+class SpriteLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [

@@ -7,7 +7,7 @@ const costumeLibraryContent = require('../lib/libraries/costumes.json');
 const LibraryComponent = require('../components/library/library.jsx');
 
 
-class CostumeLibrary extends React.Component {
+class CostumeLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [

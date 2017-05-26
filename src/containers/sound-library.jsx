@@ -9,7 +9,7 @@ const soundIcon = require('../components/asset-panel/icon--sound.svg');
 
 const soundLibraryContent = require('../lib/libraries/sounds.json');
 
-class SoundLibrary extends React.Component {
+class SoundLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [

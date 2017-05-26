@@ -14,7 +14,9 @@ class SpriteLibrary extends React.Component {
             'handleItemSelect',
             'handleMouseEnter',
             'handleMouseLeave',
-            'rotateCostume'
+            'rotateCostume',
+            'startRotatingCostumes',
+            'stopRotatingCostumes'
         ]);
         this.state = {
             activeSprite: null,
@@ -29,11 +31,17 @@ class SpriteLibrary extends React.Component {
         this.props.vm.addSprite2(JSON.stringify(item.json));
     }
     handleMouseEnter (item) {
-        this.setState({activeSprite: item});
-        if (this.intervalId) clearInterval(this.intervalId);
-        this.intervalId = setInterval(this.rotateCostume, 300);
+        this.stopRotatingCostumes();
+        this.setState({activeSprite: item}, this.startRotatingCostumes);
     }
     handleMouseLeave () {
+        this.stopRotatingCostumes();
+    }
+    startRotatingCostumes () {
+        if (!this.state.activeSprite) return;
+        this.intervalId = setInterval(this.rotateCostume, 300);
+    }
+    stopRotatingCostumes () {
         this.intervalId = clearInterval(this.intervalId);
     }
     rotateCostume () {

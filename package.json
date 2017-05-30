@@ -38,6 +38,7 @@
     "eslint-plugin-react": "^7.0.1",
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "2.28.0",
+    "immutable": "3.8.1",
     "lodash.bindall": "4.4.0",
     "lodash.debounce": "4.0.8",
     "lodash.defaultsdeep": "4.6.0",

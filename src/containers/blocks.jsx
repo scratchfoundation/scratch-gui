@@ -148,7 +148,6 @@ class Blocks extends React.Component {
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
-
         this.ScratchBlocks.Events.disable();
         this.workspace.clear();
 
@@ -173,6 +172,7 @@ class Blocks extends React.Component {
     }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
+        this.props.vm.createVariable(data);
         this.handlePromptClose();
     }
     handlePromptClose () {

@@ -1,24 +1,14 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
 .library-scroll-grid {
     display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    background: $ui-pane-gray;
     flex-grow: 1;
-    justify-content: space-between;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    height: calc(100% - 6rem); /* @todo: currently estimate, fix precision */
-
-    /* 
-        Gives sprites a bit of room so they don't get cut off when they grow on hover
-        @todo: sync as a var, with the transform defined on .library-item:hover
-    */
-    padding: 0.15rem; 
-}
-
-.modal-header {
-    width: 100%;
-    margin-bottom: 2rem;
+    overflow-y: auto;
+    height: calc(100% - $library-header-height);
     padding: 0.5rem;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: #8e8f95;
 }

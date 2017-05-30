@@ -1,4 +1,5 @@
 const bindAll = require('lodash.bindall');
+const debounce = require('lodash.debounce');
 const defaultsDeep = require('lodash.defaultsdeep');
 const PropTypes = require('prop-types');
 const React = require('react');
@@ -30,6 +31,7 @@ class Blocks extends React.Component {
             'onScriptGlowOff',
             'onBlockGlowOn',
             'onBlockGlowOff',
+            'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',
             'onWorkspaceMetricsChange',
@@ -40,6 +42,7 @@ class Blocks extends React.Component {
             workspaceMetrics: {},
             prompt: null
         };
+        this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
     }
     componentDidMount () {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
@@ -85,6 +88,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('BLOCK_GLOW_OFF', this.onBlockGlowOff);
         this.props.vm.addListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.addListener('workspaceUpdate', this.onWorkspaceUpdate);
+        this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -93,8 +97,25 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('BLOCK_GLOW_OFF', this.onBlockGlowOff);
         this.props.vm.removeListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.removeListener('workspaceUpdate', this.onWorkspaceUpdate);
+        this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
     }
-
+    updateToolboxBlockValue (id, value) {
+        this.workspace
+            .getFlyout()
+            .getWorkspace()
+            .getBlockById(id)
+            .inputList[0]
+            .fieldRow[0]
+            .setValue(value);
+    }
+    onTargetsUpdate () {
+        if (this.props.vm.editingTarget) {
+            ['glide', 'move', 'set'].forEach(prefix => {
+                this.updateToolboxBlockValue(`${prefix}x`, this.props.vm.editingTarget.x.toFixed(0));
+                this.updateToolboxBlockValue(`${prefix}y`, this.props.vm.editingTarget.y.toFixed(0));
+            });
+        }
+    }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;
         if (target && target.id) {
@@ -127,7 +148,6 @@ class Blocks extends React.Component {
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
-
         this.ScratchBlocks.Events.disable();
         this.workspace.clear();
 
@@ -152,6 +172,7 @@ class Blocks extends React.Component {
     }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
+        this.props.vm.createVariable(data);
         this.handlePromptClose();
     }
     handlePromptClose () {

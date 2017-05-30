@@ -4,10 +4,10 @@ const React = require('react');
 const VM = require('scratch-vm');
 
 const costumeLibraryContent = require('../lib/libraries/costumes.json');
-const LibaryComponent = require('../components/library/library.jsx');
+const LibraryComponent = require('../components/library/library.jsx');
 
 
-class CostumeLibrary extends React.Component {
+class CostumeLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -26,7 +26,7 @@ class CostumeLibrary extends React.Component {
     }
     render () {
         return (
-            <LibaryComponent
+            <LibraryComponent
                 data={costumeLibraryContent}
                 title="Costume Library"
                 visible={this.props.visible}

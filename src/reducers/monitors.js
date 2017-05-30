@@ -9,7 +9,7 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case UPDATE_MONITORS:
-        return action.monitors.map(monitorAdapter);
+        return action.monitors.mapEntries(monitorAdapter);
     default:
         return state;
     }

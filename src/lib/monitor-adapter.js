@@ -11,16 +11,17 @@ const MONITOR_HEIGHT = 23;
 
 const isUndefined = a => typeof a === 'undefined';
 
-module.exports = function ({id, opcode, params, value, x, y}) {
+module.exports = function ([key, {id, opcode, params, value, x, y}], index) {
     let {label, category, labelFn} = OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
     if (!isUndefined(labelFn)) label = labelFn(params);
 
-    // @todo fix layout
-    const index = 0;
+    // Simple layout if x or y are undefined
+    // @todo scratch2 has a more complex layout behavior we may want to adopt
+    // @todo e.g. this does not work well when monitors have already been moved
     if (isUndefined(x)) x = PADDING;
     if (isUndefined(y)) y = PADDING + (index * (PADDING + MONITOR_HEIGHT));
 
-    return MonitorRecord({id, label, category, value, x, y});
+    return [key, MonitorRecord({id, label, category, value, x, y})];
 };

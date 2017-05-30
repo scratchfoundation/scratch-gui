@@ -13,7 +13,7 @@ const MonitorList = props => (
     >
         {props.monitors.valueSeq().map(monitorData => (
             <Monitor
-                color={monitorData.color}
+                category={monitorData.category}
                 key={monitorData.id}
                 label={monitorData.label}
                 value={monitorData.value}

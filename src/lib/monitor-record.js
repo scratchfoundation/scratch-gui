@@ -5,7 +5,6 @@ const MonitorRecord = Record({
     label: null,
     value: null,
     category: null,
-    color: null,
     x: null,
     y: null
 });

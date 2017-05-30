@@ -40,7 +40,6 @@ MonitorComponent.categories = categories;
 
 MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categories)),
-    index: PropTypes.number,
     label: PropTypes.string.isRequired,
     onDragEnd: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,

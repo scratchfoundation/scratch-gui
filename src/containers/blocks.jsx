@@ -64,8 +64,8 @@ class Blocks extends React.Component {
 
         // @todo hack to resize blockly manually in case resize happened while hidden
         if (this.props.isVisible) { // Scripts tab
-            window.dispatchEvent(new Event('resize'));
             this.workspace.setVisible(true);
+            window.dispatchEvent(new Event('resize'));
             this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);

@@ -19,6 +19,12 @@
     */
     flex-direction: row;
     height: 100%;
+
+    /*
+        Stop scrollbar popping in and out from scratch-blocks border issue
+        https://github.com/LLK/scratch-gui/issues/318
+    */
+    overflow-y: hidden;
 }
 
 .editor-wrapper {
@@ -64,8 +70,10 @@
 }
 
 .tab.is-selected {
+    z-index: 1;
     color: #40B9F5;
     background-color: #FFFFFF;
+    border-bottom: white 1px solid;
 }
 
 .tabs {

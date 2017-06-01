@@ -7,7 +7,7 @@ const styles = require('./monitor.css');
 const categories = {
     data: '#FF8C1A',
     sensing: '#5CB1D6',
-    sounds: '#CF63CF',
+    sound: '#CF63CF',
     looks: '#9966FF',
     motion: '#4C97FF'
 };

@@ -1,12 +1,13 @@
 const UPDATE_MONITORS = 'scratch-gui/monitors/UPDATE_MONITORS';
+const {OrderedMap} = require('immutable');
 
-const initialState = [];
+const initialState = OrderedMap();
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case UPDATE_MONITORS:
-        return [...action.monitors];
+        return action.monitors;
     default:
         return state;
     }

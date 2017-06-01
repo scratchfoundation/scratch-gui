@@ -6,40 +6,46 @@
     align-items: center;
     justify-content: center;
 
-    color: gray;
-    background-color: $blue;
-
+    overflow: hidden;  /* Mask the icon animation */
+    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    border-color: #dbdbdb;
-    border-style: solid;
-
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    cursor: pointer;
     user-select: none;
-    transition: all 0.15s ease-out; /* @todo: standardize with var */
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.close-button.large:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
 .small {
     width: 1rem;
     height: 1rem;
-    border-width: 1px;
+    color: #FFF;
+    background-color: $blue;
 }
 
 .large {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-width: 2px;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
-.close-button:hover {
-    transform: scale(1.1, 1.1);
-}
-
-/*  Same icon as Sprite Selector Add button, but rotated.
-    @todo: reuse?
-*/
 .close-icon {
+    position: relative;
+    margin: 0.25rem;
+    user-select: none;
     transform-origin: 50%;
     transform: rotate(45deg);
+}
+
+.small .close-icon {
     width: 40%;
+}
+
+.large .close-icon {
+    width: 0.75rem;
+    height: 0.75rem;
 }

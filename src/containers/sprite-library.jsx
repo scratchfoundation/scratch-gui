@@ -2,25 +2,10 @@ const bindAll = require('lodash.bindall');
 const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
-const Renderer = require('scratch-render');
-const Storage = require('../lib/storage');
-const xhr = require('xhr');
 
 const spriteLibraryContent = require('../lib/libraries/sprites.json');
 
 const LibraryComponent = require('../components/library/library.jsx');
-
-function download (content, contentType, filename) {
-    const blob = new Blob([content], {type: contentType});
-    const link = document.createElement('a');
-    link.download = filename;
-    link.href = window.URL.createObjectURL(blob);
-    link.onclick = function () {
-        setTimeout(() => window.URL.revokeObjectURL(this.href), 10);
-    };
-    link.click();
-    link.remove();
-}
 
 class SpriteLibrary extends React.PureComponent {
     constructor (props) {
@@ -38,40 +23,6 @@ class SpriteLibrary extends React.PureComponent {
             costumeIndex: 0,
             sprites: spriteLibraryContent
         };
-    }
-    componentDidMount () {
-        const storage = new Storage();
-        Promise.all(spriteLibraryContent.map(sprite =>
-            Promise.all(sprite.json.costumes.map(costume => {
-                const [md5, ext] = costume.baseLayerMD5.split('.');
-                if (ext !== 'svg') return Promise.resolve(costume);
-                return storage.load(storage.AssetType.ImageVector, md5)
-                    .then(costumeAsset =>
-                        new Promise(resolveSVG => {
-                            const svgRenderer = new Renderer.SVGRenderer();
-                            svgRenderer.fromString(costumeAsset.decodeText(), () => {
-                                resolveSVG(svgRenderer._toString());
-                            });
-                        })
-                    )
-                    .then(svgContents => {
-                        const newMd5 = storage.builtinHelper.cache(
-                            storage.AssetType.ImageVector,
-                            storage.DataFormat.SVG,
-                            svgContents
-                        );
-                        // download(svgContents, 'image/svg+xml', `${newMd5}.svg`);
-                        costume.baseLayerMD5 = `${newMd5}.svg`;
-                        return costume;
-                    });
-            }))
-            .then(costumes => {
-                sprite.json.costumes = costumes;
-                if (costumes[0].baseLayerMD5.split('.')[1] === 'svg') sprite.md5 = costumes[0].baseLayerMD5;
-                return sprite;
-            })
-        ))
-        .then(sprites => download(JSON.stringify(sprites, null, 4), 'application/json', 'sprites.json'));
     }
     componentWillReceiveProps (newProps) {
         if (!newProps.visible) clearInterval(this.intervalId);

@@ -5,7 +5,7 @@ const React = require('react');
 const Box = require('../box/box.jsx');
 const styles = require('./library-item.css');
 
-class LibraryItem extends React.Component {
+class LibraryItem extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -13,9 +13,6 @@ class LibraryItem extends React.Component {
             'handleMouseEnter',
             'handleMouseLeave'
         ]);
-    }
-    shouldComponentUpdate (nextProps) {
-        return this.props.iconURL !== nextProps.iconURL;
     }
     handleClick (e) {
         this.props.onSelect(this.props.id);

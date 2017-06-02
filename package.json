@@ -64,7 +64,7 @@
     "scratch-audio": "^0.1.0-prerelease.0",
     "scratch-blocks": "^0.1.0-prerelease.0",
     "scratch-render": "^0.1.0-prerelease.0",
-    "scratch-storage": "^0.1.0",
+    "scratch-storage": "^0.2.0",
     "scratch-vm": "^0.1.0-prerelease.0",
     "style-loader": "^0.18.0",
     "svg-to-image": "1.1.3",

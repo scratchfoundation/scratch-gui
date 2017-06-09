@@ -12,23 +12,18 @@ env:
 install:
 - npm --production=false install
 - npm --production=false update
-jobs:
-    include:
-        - script: npm test
-        - stage: deploy
-          script: npm run build
-          before_deploy:
-            - git config --global user.email $(git log --pretty=format:"%ae" -n1)
-            - git config --global user.name $(git log --pretty=format:"%an" -n1)
-          deploy:
-            - provider: script
-              on:
-                all_branches: true
-                condition: $TRAVIS_BRANCH != master
-              skip_cleanup: true
-              script: npm run deploy -- -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-            - provider: script
-              on:
-                branch: master
-              skip_cleanup: true
-              script: npm run deploy -- -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+before_deploy:
+- git config --global user.email $(git log --pretty=format:"%ae" -n1)
+- git config --global user.name $(git log --pretty=format:"%an" -n1)
+deploy:
+- provider: script
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH != master
+  skip_cleanup: true
+  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: script
+  on:
+    branch: master
+  skip_cleanup: true
+  script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git

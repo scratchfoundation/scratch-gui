@@ -9,7 +9,8 @@
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint . --ext .js,.jsx",
     "start": "webpack-dev-server",
-    "test": "jest"
+    "unit-test": "jest",
+    "test": "npm run lint && npm run unit-test && npm run build"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
@@ -74,5 +75,10 @@
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.1",
     "xhr": "2.4.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "src/test.js"
+    ]
   }
 }

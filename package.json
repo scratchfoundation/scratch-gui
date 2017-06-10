@@ -9,7 +9,7 @@
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint . --ext .js,.jsx",
     "start": "webpack-dev-server",
-    "test": "npm run lint && npm run build"
+    "test": "jest && npm run lint && npm run build"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
@@ -63,6 +63,7 @@
     "react-test-renderer": "^15.5.4",
     "redux": "3.6.0",
     "redux-throttle": "0.1.1",
+    "regenerator-runtime": "^0.10.5",
     "rimraf": "^2.6.1",
     "scratch-audio": "^0.1.0-prerelease.0",
     "scratch-blocks": "^0.1.0-prerelease.0",
@@ -76,5 +77,19 @@
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.1",
     "xhr": "2.4.0"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }

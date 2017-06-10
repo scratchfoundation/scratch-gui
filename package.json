@@ -9,7 +9,7 @@
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "lint": "eslint . --ext .js,.jsx",
     "start": "webpack-dev-server",
-    "test": "jest && npm run lint && npm run build"
+    "test": "jest"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
@@ -26,11 +26,10 @@
     "autoprefixer": "7.1.1",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
     "classnames": "2.2.5",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.28.3",
@@ -60,10 +59,8 @@
     "react-redux": "5.0.5",
     "react-style-proptype": "3.0.0",
     "react-tabs": "1.0.0",
-    "react-test-renderer": "^15.5.4",
     "redux": "3.6.0",
     "redux-throttle": "0.1.1",
-    "regenerator-runtime": "^0.10.5",
     "rimraf": "^2.6.1",
     "scratch-audio": "^0.1.0-prerelease.0",
     "scratch-blocks": "^0.1.0-prerelease.0",
@@ -77,19 +74,5 @@
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.1",
     "xhr": "2.4.0"
-  },
-  "jest": {
-    "verbose": true,
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
   }
 }

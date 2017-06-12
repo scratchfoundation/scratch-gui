@@ -225,7 +225,8 @@ Blocks.propTypes = {
             insertionMarkerOpacity: PropTypes.number,
             fieldShadow: PropTypes.string,
             dragShadowOpacity: PropTypes.number
-        })
+        }),
+        comments: PropTypes.bool
     }),
     vm: PropTypes.instanceOf(VM).isRequired
 };
@@ -252,7 +253,8 @@ Blocks.defaultOptions = {
         insertionMarkerOpacity: 0.2,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
-    }
+    },
+    comments: false
 };
 
 Blocks.defaultProps = {

@@ -5,12 +5,14 @@ const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
+const MODAL_SOUND_RECORDER = 'soundRecorder';
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_SOUND_LIBRARY]: false,
-    [MODAL_SPRITE_LIBRARY]: false
+    [MODAL_SPRITE_LIBRARY]: false,
+    [MODAL_SOUND_RECORDER]: false
 };
 
 const reducer = function (state, action) {
@@ -52,6 +54,9 @@ reducer.openSoundLibrary = function () {
 reducer.openSpriteLibrary = function () {
     return reducer.openModal(MODAL_SPRITE_LIBRARY);
 };
+reducer.openSoundRecorder = function () {
+    return reducer.openModal(MODAL_SOUND_RECORDER);
+};
 reducer.closeBackdropLibrary = function () {
     return reducer.closeModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -63,5 +68,8 @@ reducer.closeSpriteLibrary = function () {
 };
 reducer.closeSoundLibrary = function () {
     return reducer.closeModal(MODAL_SOUND_LIBRARY);
+};
+reducer.closeSoundRecorder = function () {
+    return reducer.closeModal(MODAL_SOUND_RECORDER);
 };
 module.exports = reducer;

@@ -46,6 +46,8 @@ Run unit tests in watch mode (watches for code changes and continuously runs tes
 npm run unit-test -- --watch
 ```
 
+You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.
+
 ## Publishing to GitHub Pages
 
 You can publish the GUI to github.io so that others on the Internet can view it.

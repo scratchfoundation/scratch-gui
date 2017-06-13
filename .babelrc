@@ -4,7 +4,6 @@
     "react"
   ],
   "plugins": [
-    "transform-es2015-destructuring",
     "transform-object-rest-spread"
   ]
 }

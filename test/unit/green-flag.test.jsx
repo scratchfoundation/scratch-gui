@@ -19,6 +19,13 @@ describe('GreenFlag', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
+    test('renders inactive state', () => {
+        const component = renderer.create(
+            <GreenFlag active={false} vm={vm}/>
+        );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
     test('triggers onClick when active', () => {
         const onClick = jest.fn();
         const componentShallowWrapper = shallow(
@@ -27,4 +34,8 @@ describe('GreenFlag', () => {
         componentShallowWrapper.simulate('click');
         expect(onClick).toHaveBeenCalled();
     });
+
+    // TODO(bogusred): Test for handles key events.
+    // TODO(bogusred): Test project run start.
+    // TODO(bogusred): Test project run stop.
 });

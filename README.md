@@ -29,8 +29,21 @@ npm start
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
 
 ## Testing
+NOTE: If you're a windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.
+
+Run linter, unit tests, and build.
 ```bash
 npm test
+```
+
+Run unit tests in isolation.
+```bash
+npm run unit-test
+```
+
+Run unit tests in watch mode (watches for code changes and continuously runs tests). See [jest cli docs](https://facebook.github.io/jest/docs/en/cli.html#content) for more options.
+```bash
+npm run unit-test -- --watch
 ```
 
 ## Donate

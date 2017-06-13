@@ -1,14 +1,14 @@
 /* eslint-env jest */
-const React = require('react');
+const React = require('react'); // eslint-disable-line no-unused-vars
 const {shallow} = require('enzyme');
-const GreenFlag = require('../../src/containers/green-flag');
+const GreenFlag = require('../../src/containers/green-flag'); // eslint-disable-line no-unused-vars
 const renderer = require('react-test-renderer');
 const VM = require('scratch-vm');
 
 describe('GreenFlag', () => {
     let vm;
     beforeEach(() => {
-        // TODO(bogusred): Ask scratch team their thoughts on mocking the VM.
+        // @todo: Ask scratch team their thoughts on mocking the VM.
         vm = new VM();
     });
 
@@ -35,7 +35,7 @@ describe('GreenFlag', () => {
         expect(onClick).toHaveBeenCalled();
     });
 
-    // TODO(bogusred): Test for handles key events.
-    // TODO(bogusred): Test project run start.
-    // TODO(bogusred): Test project run stop.
+    // @todo: Test for handles key events.
+    // @todo: Test project run start.
+    // @todo: Test project run stop.
 });

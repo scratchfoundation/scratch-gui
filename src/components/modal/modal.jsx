@@ -18,6 +18,7 @@ class ModalComponent extends React.Component {
                 isOpen={this.props.visible}
                 overlayClassName={styles.modalOverlay}
                 ref={m => (this.modal = m)}
+                onRequestClose={this.props.onRequestClose}
             >
                 <Box
                     direction="column"

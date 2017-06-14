@@ -64,8 +64,8 @@ class Blocks extends React.Component {
 
         // @todo hack to resize blockly manually in case resize happened while hidden
         if (this.props.isVisible) { // Scripts tab
-            window.dispatchEvent(new Event('resize'));
             this.workspace.setVisible(true);
+            window.dispatchEvent(new Event('resize'));
             this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);
@@ -100,13 +100,13 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
     }
     updateToolboxBlockValue (id, value) {
-        this.workspace
+        const block = this.workspace
             .getFlyout()
             .getWorkspace()
-            .getBlockById(id)
-            .inputList[0]
-            .fieldRow[0]
-            .setValue(value);
+            .getBlockById(id);
+        if (block) {
+            block.inputList[0].fieldRow[0].setValue(value);
+        }
     }
     onTargetsUpdate () {
         if (this.props.vm.editingTarget) {
@@ -225,7 +225,8 @@ Blocks.propTypes = {
             insertionMarkerOpacity: PropTypes.number,
             fieldShadow: PropTypes.string,
             dragShadowOpacity: PropTypes.number
-        })
+        }),
+        comments: PropTypes.bool
     }),
     vm: PropTypes.instanceOf(VM).isRequired
 };
@@ -252,7 +253,8 @@ Blocks.defaultOptions = {
         insertionMarkerOpacity: 0.2,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
-    }
+    },
+    comments: false
 };
 
 Blocks.defaultProps = {

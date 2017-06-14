@@ -75,7 +75,6 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
-            'process.env.BASE_PATH': '"' + (process.env.BASE_PATH || '/') + '"',
             'process.env.DEBUG': Boolean(process.env.DEBUG)
         }),
         new webpack.optimize.CommonsChunkPlugin({

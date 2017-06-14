@@ -131,5 +131,10 @@ module.exports = function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
+        const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
+        return monitoredBlock ? monitoredBlock.isMonitored : false;
+    };
+
     return ScratchBlocks;
 };

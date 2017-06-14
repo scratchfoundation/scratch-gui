@@ -37,7 +37,7 @@
     "eslint": "^3.16.1",
     "eslint-config-scratch": "^3.0.0",
     "eslint-plugin-react": "^7.0.1",
-    "gh-pages": "github:jfschwarz/gh-pages#publish-branch-to-subfolder",
+    "gh-pages": "github:rschamp/gh-pages#publish-branch-to-subfolder",
     "html-webpack-plugin": "2.28.0",
     "immutable": "3.8.1",
     "lodash.bindall": "4.4.0",

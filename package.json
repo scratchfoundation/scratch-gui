@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "react": "^15",
-    "react-dom": "^15"
+    "react-dom": "^15.6.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.1",

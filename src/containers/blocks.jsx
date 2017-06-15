@@ -63,8 +63,10 @@ class Blocks extends React.Component {
         }
 
         // @todo hack to resize blockly manually in case resize happened while hidden
+        // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
+            this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
             this.workspace.toolbox_.refreshSelection();
         } else {

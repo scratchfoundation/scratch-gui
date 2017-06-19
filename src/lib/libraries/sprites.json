@@ -1231,7 +1231,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -1318,7 +1328,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -2667,7 +2687,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -4728,7 +4758,8 @@
                     "format": ""
                 }
             ],
-            "costumes": [{
+            "costumes": [
+                {
                     "costumeName": "Dinosaur4-16",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4e330592c1f1b80a4b182cc00cf8d6bf.png",
@@ -4855,7 +4886,8 @@
                     "bitmapResolution": 2,
                     "rotationCenterX": 82,
                     "rotationCenterY": 134
-                }],
+                }
+            ],
             "currentCostumeIndex": 0,
             "scratchX": 0,
             "scratchY": 0,
@@ -5366,7 +5398,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -6698,7 +6740,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -7045,7 +7097,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -10594,7 +10656,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -12588,7 +12660,17 @@
             "isDraggable": true,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -12692,7 +12774,17 @@
             "isDraggable": true,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -13725,7 +13817,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {
@@ -13818,7 +13920,17 @@
             "isDraggable": false,
             "indexInLibrary": 100000,
             "visible": true,
-            "spriteInfo": {}
+            "spriteInfo": {},
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ]
         }
     },
     {

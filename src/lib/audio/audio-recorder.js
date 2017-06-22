@@ -13,7 +13,6 @@ const AudioRecorder = function () {
     this.recording = false;
     this.leftBuffers = [];
     this.rightBuffers = [];
-    this.levels = [];
 
     this.disposed = false;
 };
@@ -71,18 +70,10 @@ AudioRecorder.prototype.attachUserMediaStream = function (userMediaStream, onUpd
     const dataArray = new Float32Array(bufferLength);
 
     const update = () => {
-        if (!this.disposed) {
-            requestAnimationFrame(update);
-        } else {
-            return;
-        }
-
+        if (this.disposed) return;
+        requestAnimationFrame(update);
         this.analyserNode.getFloatTimeDomainData(dataArray);
-        const rms = this.calculateRMS(dataArray);
-        if (this.recording) {
-            this.levels.push(rms);
-        }
-        onUpdate(rms);
+        onUpdate(this.calculateRMS(dataArray));
     };
 
     requestAnimationFrame(update);

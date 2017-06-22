@@ -11,8 +11,7 @@ const AudioRecorder = function () {
 
     this.recordedSamples = 0;
     this.recording = false;
-    this.leftBuffers = [];
-    this.rightBuffers = [];
+    this.buffers = [];
 
     this.disposed = false;
 };
@@ -53,12 +52,7 @@ AudioRecorder.prototype.attachUserMediaStream = function (userMediaStream, onUpd
 
     this.scriptProcessorNode.onaudioprocess = processEvent => {
         if (this.recording) {
-            const leftBuffer = new Float32Array(processEvent.inputBuffer.getChannelData(0));
-            const rightBuffer = new Float32Array(processEvent.inputBuffer.getChannelData(1));
-
-            this.leftBuffers.push(leftBuffer);
-            this.rightBuffers.push(rightBuffer);
-            this.recordedSamples += this.bufferLength;
+            this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
         }
     };
 
@@ -89,9 +83,8 @@ AudioRecorder.prototype.stop = function () {
     let offset = 0;
     let maxRMS = 0;
     const chunkLevels = [];
-    for (let i = 0; i < this.leftBuffers.length; i++) {
-        const leftBufferChunk = this.leftBuffers[i];
-        const rms = this.calculateRMS(leftBufferChunk);
+    for (let i = 0; i < this.buffers.length; i++) {
+        const rms = this.calculateRMS(this.buffers[i]);
         maxRMS = Math.max(maxRMS, rms);
         chunkLevels.push(rms);
     }
@@ -119,27 +112,22 @@ AudioRecorder.prototype.stop = function () {
     }
 
     const usedSamples = lastChunkAboveThreshold - firstChunkAboveThreshold + 2;
-    const buffers = [
-        new Float32Array(usedSamples * this.bufferLength),
-        new Float32Array(usedSamples * this.bufferLength)
-    ];
+    const buffer = new Float32Array(usedSamples * this.bufferLength);
 
     const usedChunkLevels = [];
-    for (let i = 0; i < this.leftBuffers.length; i++) {
-        const leftBufferChunk = this.leftBuffers[i];
-        const rightBufferChunk = this.rightBuffers[i];
+    for (let i = 0; i < this.buffers.length; i++) {
+        const bufferChunk = this.buffers[i];
 
         if (i > firstChunkAboveThreshold - 2 && i < lastChunkAboveThreshold + 1) {
             usedChunkLevels.push(chunkLevels[i]);
-            buffers[0].set(leftBufferChunk, offset);
-            buffers[1].set(rightBufferChunk, offset);
-            offset += leftBufferChunk.length;
+            buffer.set(bufferChunk, offset);
+            offset += bufferChunk.length;
         }
     }
 
     return {
         levels: usedChunkLevels,
-        channelData: buffers,
+        samples: buffer,
         sampleRate: this.audioContext.sampleRate
     };
 };

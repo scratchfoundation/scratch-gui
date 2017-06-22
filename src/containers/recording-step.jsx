@@ -39,8 +39,8 @@ class RecordingStep extends React.Component {
         this.props.onRecord();
     }
     handleStopRecording () {
-        const {channelData, sampleRate, levels} = this.audioRecorder.stop();
-        this.props.onStopRecording(channelData, sampleRate, levels);
+        const {samples, sampleRate, levels} = this.audioRecorder.stop();
+        this.props.onStopRecording(samples, sampleRate, levels);
     }
     render () {
         const {

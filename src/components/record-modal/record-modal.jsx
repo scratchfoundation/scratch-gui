@@ -32,12 +32,12 @@ const RecordModal = props => (
             </div>
         </div>
         <Box className={styles.body}>
-            {props.channelData ? (
+            {props.samples ? (
                 <PlaybackStep
-                    channelData={props.channelData}
                     encoding={props.encoding}
                     levels={props.levels}
                     playing={props.playing}
+                    samples={props.samples}
                     onBack={props.onBack}
                     onPlay={props.onPlay}
                     onStopPlaying={props.onStopPlaying}
@@ -55,7 +55,6 @@ const RecordModal = props => (
 );
 
 RecordModal.propTypes = {
-    channelData: PropTypes.arrayOf(PropTypes.instanceOf(Float32Array)),
     encoding: PropTypes.bool.isRequired,
     levels: PropTypes.arrayOf(PropTypes.number),
     onBack: PropTypes.func.isRequired,
@@ -66,7 +65,8 @@ RecordModal.propTypes = {
     onStopRecording: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     playing: PropTypes.bool,
-    recording: PropTypes.bool
+    recording: PropTypes.bool,
+    samples: PropTypes.instanceOf(Float32Array)
 };
 
 module.exports = RecordModal;

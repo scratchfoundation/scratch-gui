@@ -1,9 +1,9 @@
 const SharedAudioContext = require('./shared-audio-context.js');
 
-const AudioBufferPlayer = function (channelData) {
+const AudioBufferPlayer = function (samples) {
     this.audioContext = new SharedAudioContext();
-    this.buffer = this.audioContext.createBuffer(1, channelData[0].length, this.audioContext.sampleRate);
-    this.buffer.getChannelData(0).set(channelData[0]);
+    this.buffer = this.audioContext.createBuffer(1, samples.length, this.audioContext.sampleRate);
+    this.buffer.getChannelData(0).set(samples);
     this.source = null;
 };
 

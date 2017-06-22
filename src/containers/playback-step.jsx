@@ -13,7 +13,7 @@ class PlaybackStep extends React.Component {
         ]);
     }
     componentDidMount () {
-        this.audioBufferPlayer = new AudioBufferPlayer(this.props.channelData);
+        this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples);
     }
     componentWillUnmount () {
         this.audioBufferPlayer.stop();
@@ -43,7 +43,7 @@ class PlaybackStep extends React.Component {
 }
 
 PlaybackStep.propTypes = {
-    channelData: PropTypes.arrayOf(PropTypes.instanceOf(Float32Array)).isRequired,
+    samples: PropTypes.instanceOf(Float32Array).isRequired,
     ...PlaybackStepComponent.propTypes
 };
 

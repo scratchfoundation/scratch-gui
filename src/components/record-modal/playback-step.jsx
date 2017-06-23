@@ -70,7 +70,7 @@ const PlaybackStep = props => (
                                     fill="#4280D7"
                                     points="15 15 35 25 15 35"
                                     stroke="#4280D7"
-                                    strokeLineCap="round"
+                                    strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth="7"
                                 />

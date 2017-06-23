@@ -78,18 +78,29 @@ $sides: 5rem;
     padding: 1.5rem 2.25rem;
 }
 
-.waveform-container {
-    padding: 15px;
-    margin: auto;
+.visualization-container {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+}
+
+.meter-container, .waveform-container {
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    text-align: center;
+    padding: 3px;
+
+}
+.meter-container {
+    margin-right: 5px;
     height: 180px;
+}
+
+.waveform-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
+    height: 180px;
 }
 
 .help-text {
@@ -154,21 +165,6 @@ $sides: 5rem;
 
 .main-button {
     text-align: center;
-}
-
-.visualization-container {
-    display: flex;
-    justify-content: space-around;
-
-}
-
-.meter-container {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 5px;
-    padding: 3px;
-    height: 180px;
 }
 
 .record-button {

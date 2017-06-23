@@ -4,6 +4,7 @@ const Box = require('../box/box.jsx');
 const Waveform = require('./waveform.jsx');
 const Meter = require('./meter.jsx');
 const styles = require('./record-modal.css');
+const reRecordIcon = require('./re-record-icon.svg');
 
 const PlaybackStep = props => (
     <Box>
@@ -45,6 +46,7 @@ const PlaybackStep = props => (
                                     height={30}
                                     rx={3}
                                     ry={3}
+                                    stroke="#4280D7"
                                     width={30}
                                     x={10}
                                     y={10}
@@ -55,19 +57,31 @@ const PlaybackStep = props => (
                                     height={30}
                                     rx={3}
                                     ry={3}
+                                    stroke="#4280D7"
                                     width={30}
                                     x={10}
                                     y={10}
                                 />
                             </g>
                         ) : (
-                            <polygon
-                                fill="#4C97FF"
-                                points="15 15 35 25 15 35"
-                                stroke="#4C97FF"
-                                strokeLinejoin="round"
-                                strokeWidth="5"
-                            />
+                            <g>
+                                <polygon
+                                    fill="#4280D7"
+                                    points="15 15 35 25 15 35"
+                                    stroke="#4280D7"
+                                    strokeLineCap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="7"
+                                />
+                                <polygon
+                                    fill="#4C97FF"
+                                    points="15 15 35 25 15 35"
+                                    stroke="#4C97FF"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="5"
+                                />
+                            </g>
                         )}
                     </g>
                 </svg>
@@ -83,7 +97,7 @@ const PlaybackStep = props => (
                 className={styles.cancelButton}
                 onClick={props.onBack}
             >
-                ⬅ Re-record
+                <img src={reRecordIcon} /> Re-record
             </button>
             <button
                 className={styles.okButton}

@@ -46,20 +46,22 @@ const RecordingStep = props => (
                         {props.recording ? (
                             <g>
                                 <rect
-                                    fill="rgb(237, 111, 54)"
+                                    fill="#FF661A"
                                     height={30}
                                     rx={3}
                                     ry={3}
+                                    stroke="#E64D00"
                                     width={30}
                                     x={10}
                                     y={10}
                                 />
                                 <rect
                                     className={styles.pulser}
-                                    fill="rgb(237, 111, 54)"
+                                    fill="#FF661A"
                                     height={30}
                                     rx={3}
                                     ry={3}
+                                    stroke="#E64D00"
                                     width={30}
                                     x={10}
                                     y={10}
@@ -70,13 +72,14 @@ const RecordingStep = props => (
                                 <circle
                                     cx={25}
                                     cy={25}
-                                    fill="rgb(237, 111, 54)"
+                                    fill="#FF661A"
                                     r={15}
+                                    stroke="#E64D00"
                                 />
                                 <circle
                                     cx={25}
                                     cy={25}
-                                    fill="rgb(237, 111, 54)"
+                                    fill="#FF661A"
                                     r={18 + props.level * 10}
                                     style={{opacity: 0.15, transition: '0.1s'}}
                                 />

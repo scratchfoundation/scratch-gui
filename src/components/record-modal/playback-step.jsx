@@ -1,8 +1,9 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const Box = require('../box/box.jsx');
-const Waveform = require('./waveform.jsx');
-const Meter = require('./meter.jsx');
+const Waveform = require('../waveform/waveform.jsx');
+const Meter = require('../meter/meter.jsx');
+
 const styles = require('./record-modal.css');
 const reRecordIcon = require('./re-record-icon.svg');
 

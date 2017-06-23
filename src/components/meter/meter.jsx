@@ -4,11 +4,10 @@ const styles = require('./meter.css');
 
 const Meter = props => {
     const {
+        level,
         width,
         height
     } = props;
-    
-    const level = Math.min(1, Math.max(0, props.level || 0));
 
     const nGreen = 11;
     const nYellow = 5;
@@ -18,8 +17,9 @@ const Meter = props => {
 
     const barSpacing = 2.5;
     const barRounding = 3;
-    const barHeight = (height + barSpacing / 2 - barSpacing * nBars) / nBars;
-    const barWidth = width;
+    const barHeight = (height - barSpacing * (nBars + 1)) / nBars;
+
+    const nBarsToMask = nBars - Math.floor(level * nBars);
 
     return (
         <svg
@@ -36,18 +36,18 @@ const Meter = props => {
                         key={index}
                         rx={barRounding}
                         ry={barRounding}
-                        width={barWidth}
-                        x={0}
-                        y={height - barHeight - index * (barHeight + barSpacing)}
+                        width={width - 2}
+                        x={1}
+                        y={height - (barSpacing + barHeight) * (index + 1)}
                     />
                 ))}
             <rect
                 fill="white"
-                height={Math.floor(nBars * (1 - level)) * (barHeight + barSpacing) + 2}
+                height={nBarsToMask * (barHeight + barSpacing) + barSpacing / 2}
                 opacity="0.75"
-                width={width + 4}
-                x={-2}
-                y={-2}
+                width={width}
+                x={0}
+                y={0}
             />
         </svg>
     );

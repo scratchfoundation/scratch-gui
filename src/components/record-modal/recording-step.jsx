@@ -1,9 +1,10 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const Box = require('../box/box.jsx');
-const Meter = require('./meter.jsx');
+const Meter = require('../meter/meter.jsx');
+const Waveform = require('../waveform/waveform.jsx');
+
 const styles = require('./record-modal.css');
-const Waveform = require('./waveform.jsx');
 
 const RecordingStep = props => (
     <Box>
@@ -37,9 +38,6 @@ const RecordingStep = props => (
             >
                 <svg
                     height={70}
-                    style={{
-                        overflow: 'visible'
-                    }}
                     width={70}
                 >
                     <g transform="translate(-35,-35) scale(1.5) translate(23, 23)">

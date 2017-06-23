@@ -1,5 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const styles = require('./waveform.css');
 
 const Waveform = props => {
     const {
@@ -31,9 +32,8 @@ const Waveform = props => {
         >
             <g transform={`scale(1, -1) translate(0, -${height / 2})`}>
                 <path
+                    className={styles.waveformPath}
                     d={`M0 0${pathComponents.join()}Z`}
-                    fill="#CF63CF"
-                    stroke="#A63FA6"
                     strokeLinejoin={'round'}
                     strokeWidth={2}
                 />

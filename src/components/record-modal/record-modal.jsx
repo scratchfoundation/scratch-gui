@@ -1,13 +1,13 @@
+const classNames = require('classnames');
 const PropTypes = require('prop-types');
 const React = require('react');
 const ReactModal = require('react-modal');
 const Box = require('../box/box.jsx');
-const styles = require('./record-modal.css');
-const classNames = require('classnames');
 const CloseButton = require('../close-button/close-button.jsx');
-
 const RecordingStep = require('../../containers/recording-step.jsx');
 const PlaybackStep = require('../../containers/playback-step.jsx');
+
+const styles = require('./record-modal.css');
 
 const RecordModal = props => (
     <ReactModal

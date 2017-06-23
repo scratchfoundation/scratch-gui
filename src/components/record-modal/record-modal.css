@@ -26,133 +26,6 @@
 }
 
 .header {
-    font-size: 1.25rem;
-    height: 3.25rem;
-    background-color: $blue;
-    font-weight: 500;
-    color: #fff;
-    text-align: center;
-    line-height: 3.25rem;
-}
-
-.body {
-    background: $ui-pane-gray;
-    padding: 1.5rem 2.25rem;
-}
-.waveform-container {
-    padding-bottom: 15px;
-
-    padding: 15px;
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-    height: 180px;
-    width: 100%;
-}
-
-.help-text {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: rgb(167, 170, 181);
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
-.playing-text {
-    color: #4C97FF;
-}
-.recording-text {
-    color: rgb(237, 111, 54);
-}
-
-.main-button-row {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-}
-
-.main-button-row button {
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.25rem;
-    background: transparent;
-    border: none;
-}
-
-.main-button-row button:active, .main-button-row button:focus {
-    outline: none;
-}
-
-.button-row {
-    font-weight: bolder;
-    text-align: right;
-    display: flex;
-    justify-content: space-between;
-}
-
-.button-row button {
-    padding: 0.75rem 1rem;
-    border-radius: 0.25rem;
-    background: white;
-    border: 1px solid $ui-pane-border;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: $blue;
-}
-
-.button-row button.ok-button {
-    background: $blue;
-    border: $blue;
-    color: white;
-}
-
-.button-row button + button {
-    margin-left: 0.5rem;
-}
-
-.main-button {
-    text-align: center;
-}
-
-.visualization-container {
-    display: flex;
-    justify-content: space-around;
-
-}
-
-.meter-container {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 5px;
-    padding: 3px;
-    height: 180px;
-}
-
-/* SVG styling */
-.pulser {
-    transform: scale(1.0);
-    transform-origin: center center;
-    animation: pulse-me 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-me{
-	0%{
-		transform: scale(1.05);
-		opacity: 0.05;
-	}
-	100%{
-		opacity: 0.2;
-        transform: scale(1.25);
-	}
-}
-
-
-
-.header {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -161,7 +34,7 @@
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $blue;
+    background-color: $motion-primary;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
@@ -198,4 +71,119 @@ $sides: 5rem;
 .header-item-close {
     flex-basis: $sides;
     justify-content: flex-end;
+}
+
+.body {
+    background: $ui-pane-gray;
+    padding: 1.5rem 2.25rem;
+}
+
+.waveform-container {
+    padding: 15px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    height: 180px;
+    width: 100%;
+}
+
+.help-text {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(167, 170, 181);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.playing-text {
+    color: $motion-primary;
+}
+
+.recording-text {
+    color: $red-primary;
+}
+
+.main-button-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.main-button-row button {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    background: transparent;
+    border: none;
+}
+
+.main-button-row button:active, .main-button-row button:focus {
+    outline: none;
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-row button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    background: white;
+    border: 1px solid $ui-pane-border;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: $motion-primary;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+}
+
+.button-row button + button {
+    margin-left: 0.5rem;
+}
+
+.main-button {
+    text-align: center;
+}
+
+.visualization-container {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.meter-container {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 3px;
+    height: 180px;
+}
+
+/* SVG styling */
+.pulser {
+    transform: scale(1.0);
+    transform-origin: center center;
+    animation: pulse-me 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-me {
+    0% {
+        transform: scale(1.05);
+        opacity: 0.05;
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(1.25);
+    }
 }

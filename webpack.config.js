@@ -70,6 +70,10 @@ module.exports = {
         {
             test: /\.svg$/,
             loader: 'svg-url-loader?noquotes'
+        },
+        {
+            test: /node_modules\/(linebreak|grapheme-breaker)\/.*\.js$/,
+            loader: 'ify-loader'
         }]
     },
     plugins: [

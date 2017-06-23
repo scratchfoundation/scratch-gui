@@ -80,34 +80,16 @@ AudioRecorder.prototype.attachUserMediaStream = function (userMediaStream, onUpd
 };
 
 AudioRecorder.prototype.stop = function () {
-    let offset = 0;
-    let maxRMS = 0;
-    const chunkLevels = [];
-    for (let i = 0; i < this.buffers.length; i++) {
-        const rms = this.calculateRMS(this.buffers[i]);
-        maxRMS = Math.max(maxRMS, rms);
-        chunkLevels.push(rms);
-    }
-
+    const chunkLevels = this.buffers.map(buffer => this.calculateRMS(buffer));
+    const maxRMS = Math.max.apply(null, chunkLevels);
     const threshold = maxRMS / 8;
 
     let firstChunkAboveThreshold = null;
-    let chunkIndex = 0;
-    while (firstChunkAboveThreshold === null && chunkIndex < chunkLevels.length - 1) {
-        if (chunkLevels[chunkIndex] > threshold) {
-            firstChunkAboveThreshold = chunkIndex;
-        } else {
-            chunkIndex += 1;
-        }
-    }
-
     let lastChunkAboveThreshold = null;
-    chunkIndex = chunkLevels.length - 1;
-    while (lastChunkAboveThreshold === null && chunkIndex > 0) {
-        if (chunkLevels[chunkIndex] > threshold) {
-            lastChunkAboveThreshold = chunkIndex;
-        } else {
-            chunkIndex -= 1;
+    for (let i = 0; i < chunkLevels.length; i++) {
+        if (chunkLevels[i] > threshold) {
+            if (firstChunkAboveThreshold === null) firstChunkAboveThreshold = i;
+            lastChunkAboveThreshold = i;
         }
     }
 
@@ -115,9 +97,10 @@ AudioRecorder.prototype.stop = function () {
     const buffer = new Float32Array(usedSamples * this.bufferLength);
 
     const usedChunkLevels = [];
+
+    let offset = 0;
     for (let i = 0; i < this.buffers.length; i++) {
         const bufferChunk = this.buffers[i];
-
         if (i > firstChunkAboveThreshold - 2 && i < lastChunkAboveThreshold + 1) {
             usedChunkLevels.push(chunkLevels[i]);
             buffer.set(bufferChunk, offset);

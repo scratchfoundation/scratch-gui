@@ -5,7 +5,9 @@ const Waveform = require('../waveform/waveform.jsx');
 const Meter = require('../meter/meter.jsx');
 
 const styles = require('./record-modal.css');
-const reRecordIcon = require('./re-record-icon.svg');
+const backIcon = require('./icon--back.svg');
+const stopIcon = require('./icon--stop-playback.svg');
+const playIcon = require('./icon--play.svg');
 
 const PlaybackStep = props => (
     <Box>
@@ -32,60 +34,7 @@ const PlaybackStep = props => (
                 className={styles.mainButton}
                 onClick={props.playing ? props.onStopPlaying : props.onPlay}
             >
-                <svg
-                    height={70}
-                    style={{
-                        overflow: 'visible'
-                    }}
-                    width={70}
-                >
-                    <g transform="translate(-35,-35) scale(1.5) translate(23, 23)">
-                        {props.playing ? (
-                            <g>
-                                <rect
-                                    fill="#4C97FF"
-                                    height={30}
-                                    rx={3}
-                                    ry={3}
-                                    stroke="#4280D7"
-                                    width={30}
-                                    x={10}
-                                    y={10}
-                                />
-                                <rect
-                                    className={styles.pulser}
-                                    fill="#4C97FF"
-                                    height={30}
-                                    rx={3}
-                                    ry={3}
-                                    stroke="#4280D7"
-                                    width={30}
-                                    x={10}
-                                    y={10}
-                                />
-                            </g>
-                        ) : (
-                            <g>
-                                <polygon
-                                    fill="#4280D7"
-                                    points="15 15 35 25 15 35"
-                                    stroke="#4280D7"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="7"
-                                />
-                                <polygon
-                                    fill="#4C97FF"
-                                    points="15 15 35 25 15 35"
-                                    stroke="#4C97FF"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="5"
-                                />
-                            </g>
-                        )}
-                    </g>
-                </svg>
+                <img src={props.playing ? stopIcon : playIcon} />
                 <div className={styles.helpText}>
                     <span className={styles.playingText}>
                         {props.playing ? 'Stop' : 'Play'}
@@ -98,7 +47,7 @@ const PlaybackStep = props => (
                 className={styles.cancelButton}
                 onClick={props.onBack}
             >
-                <img src={reRecordIcon} /> Re-record
+                <img src={backIcon} /> Re-record
             </button>
             <button
                 className={styles.okButton}

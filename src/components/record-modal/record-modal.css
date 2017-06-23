@@ -93,6 +93,7 @@ $sides: 5rem;
 }
 
 .help-text {
+    margin: 10px auto 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: rgb(167, 170, 181);
     font-size: 0.95rem;
@@ -170,20 +171,17 @@ $sides: 5rem;
     height: 180px;
 }
 
-/* SVG styling */
-.pulser {
-    transform: scale(1.0);
-    transform-origin: center center;
-    animation: pulse-me 0.5s ease-in-out infinite alternate;
+.record-button {
+    overflow: visible;
 }
 
-@keyframes pulse-me {
-    0% {
-        transform: scale(1.05);
-        opacity: 0.05;
-    }
-    100% {
-        opacity: 0.2;
-        transform: scale(1.25);
-    }
+.record-button-circle {
+    fill: #FF661A;
+    stroke: #E64D00;
+}
+
+.record-button-circle-outline {
+    fill: #FF661A;
+    opacity: 0.2;
+    transition: 0.1s;
 }

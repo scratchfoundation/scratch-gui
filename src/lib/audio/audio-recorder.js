@@ -135,6 +135,7 @@ AudioRecorder.prototype.stop = function () {
 AudioRecorder.prototype.dispose = function () {
     this.scriptProcessorNode.onaudioprocess = null;
     this.scriptProcessorNode.disconnect();
+    this.analyserNode.disconnect();
     this.sourceNode.disconnect();
     this.mediaStreamSource.disconnect();
     this.userMediaStream.getAudioTracks()[0].stop();

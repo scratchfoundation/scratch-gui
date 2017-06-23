@@ -5,6 +5,7 @@ const Meter = require('../meter/meter.jsx');
 const Waveform = require('../waveform/waveform.jsx');
 
 const styles = require('./record-modal.css');
+const stopIcon = require('./icon--stop-recording.svg');
 
 const RecordingStep = props => (
     <Box>
@@ -36,55 +37,28 @@ const RecordingStep = props => (
                 className={styles.mainButton}
                 onClick={props.recording ? props.onStopRecording : props.onRecord}
             >
-                <svg
-                    height={70}
-                    width={70}
-                >
-                    <g transform="translate(-35,-35) scale(1.5) translate(23, 23)">
-                        {props.recording ? (
-                            <g>
-                                <rect
-                                    fill="#FF661A"
-                                    height={30}
-                                    rx={3}
-                                    ry={3}
-                                    stroke="#E64D00"
-                                    width={30}
-                                    x={10}
-                                    y={10}
-                                />
-                                <rect
-                                    className={styles.pulser}
-                                    fill="#FF661A"
-                                    height={30}
-                                    rx={3}
-                                    ry={3}
-                                    stroke="#E64D00"
-                                    width={30}
-                                    x={10}
-                                    y={10}
-                                />
-                            </g>
-                        ) : (
-                            <g>
-                                <circle
-                                    cx={25}
-                                    cy={25}
-                                    fill="#FF661A"
-                                    r={15}
-                                    stroke="#E64D00"
-                                />
-                                <circle
-                                    cx={25}
-                                    cy={25}
-                                    fill="#FF661A"
-                                    r={18 + props.level * 10}
-                                    style={{opacity: 0.15, transition: '0.1s'}}
-                                />
-                            </g>
-                        )}
-                    </g>
-                </svg>
+                {props.recording ? (
+                    <img src={stopIcon} />
+                ) : (
+                    <svg
+                        className={styles.recordButton}
+                        height="52"
+                        width="52"
+                    >
+                        <circle
+                            className={styles.recordButtonCircle}
+                            cx="26"
+                            cy="26"
+                            r="25"
+                        />
+                        <circle
+                            className={styles.recordButtonCircleOutline}
+                            cx="26"
+                            cy="26"
+                            r={27 + props.level * 5}
+                        />
+                    </svg>
+                )}
                 <div className={styles.helpText}>
                     <span className={styles.recordingText}>
                         {props.recording ? 'Stop recording' : 'Record'}

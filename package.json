@@ -34,7 +34,7 @@
     "classnames": "2.2.5",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.28.3",
-    "eslint": "^3.16.1",
+    "eslint": "^4.1.0",
     "eslint-config-scratch": "^3.0.0",
     "eslint-plugin-react": "^7.0.1",
     "gh-pages": "github:rschamp/gh-pages#publish-branch-to-subfolder",

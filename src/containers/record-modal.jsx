@@ -49,10 +49,7 @@ class RecordModal extends React.Component {
         this.setState({playing: false, samples: null});
     }
     handleSubmit () {
-        this.setState({encoding: true});
-
-        // Allow enough time for UI refresh before starting encoding
-        setTimeout(() => {
+        this.setState({encoding: true}, () => {
             WavEncoder.encode({
                 sampleRate: this.state.sampleRate,
                 channelData: [this.state.samples]
@@ -76,7 +73,7 @@ class RecordModal extends React.Component {
                 this.props.vm.addSound(vmSound);
                 this.handleCancel();
             });
-        }, 100);
+        });
     }
     handleCancel () {
         this.props.onClose();

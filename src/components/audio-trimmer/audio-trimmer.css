@@ -1,0 +1,94 @@
+
+.trim-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.trim-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+.trim-background-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FF661A;
+    border: 1px solid #E64D00;
+    opacity: 0.5;
+
+    background: repeating-linear-gradient(
+        45deg,
+        #FF661A,
+        #FF661A 10px,
+        #E64D00 10px,
+        #E64D00 20px
+    );
+}
+
+.start-trim-background .trim-background-mask {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.end-trim-background .trim-background-mask {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.trim-line {
+    width: 0px;
+    height: 100%;
+    border: 1px solid #E64D00;
+    position: absolute;
+    top: 0;
+}
+
+.start-trim-line {
+    right: 0;
+}
+
+.end-trim-line {
+    left: 0;
+}
+
+$trim-handle-width: 12px;
+$trim-handle-height: 14px;
+
+.trim-handle {
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+
+    position: absolute;
+    left: calc(-$trim-handle-width / 2);
+}
+
+.trim-handle img {
+    position: absolute;
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+
+    user-select: none;
+    user-drag: none;
+    -webkit-user-drag: none; /* Why doesn't autoprefixer work for this? */
+}
+
+.top-trim-handle img {
+    transform: rotate(180deg);
+}
+
+.top-trim-handle {
+    top: -$trim-handle-height;
+}
+
+.bottom-trim-handle {
+    bottom: -$trim-handle-height;
+}

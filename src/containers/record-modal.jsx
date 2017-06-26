@@ -21,7 +21,9 @@ class RecordModal extends React.Component {
             'handleStopPlaying',
             'handleBack',
             'handleSubmit',
-            'handleCancel'
+            'handleCancel',
+            'handleSetTrimStart',
+            'handleSetTrimEnd'
         ]);
 
         this.state = {
@@ -30,14 +32,16 @@ class RecordModal extends React.Component {
             levels: null,
             playing: false,
             recording: false,
-            sampleRate: null
+            sampleRate: null,
+            trimStart: 0,
+            trimEnd: 100
         };
     }
     handleRecord () {
         this.setState({recording: true});
     }
-    handleStopRecording (samples, sampleRate, levels) {
-        this.setState({samples, sampleRate, levels, recording: false});
+    handleStopRecording (samples, sampleRate, levels, trimStart, trimEnd) {
+        this.setState({samples, sampleRate, levels, trimStart, trimEnd, recording: false});
     }
     handlePlay () {
         this.setState({playing: true});
@@ -48,11 +52,21 @@ class RecordModal extends React.Component {
     handleBack () {
         this.setState({playing: false, samples: null});
     }
+    handleSetTrimEnd (trimEnd) {
+        this.setState({trimEnd});
+    }
+    handleSetTrimStart (trimStart) {
+        this.setState({trimStart});
+    }
     handleSubmit () {
         this.setState({encoding: true}, () => {
+            const sampleCount = this.state.samples.length;
+            const startIndex = Math.floor(this.state.trimStart * sampleCount / 100);
+            const endIndex = Math.floor(this.state.trimEnd * sampleCount / 100);
+            const clippedSamples = this.state.samples.slice(startIndex, endIndex);
             WavEncoder.encode({
                 sampleRate: this.state.sampleRate,
-                channelData: [this.state.samples]
+                channelData: [clippedSamples]
             }).then(wavBuffer => {
                 const md5 = String(Math.floor(100000 * Math.random()));
                 const vmSound = {
@@ -86,10 +100,14 @@ class RecordModal extends React.Component {
                 playing={this.state.playing}
                 recording={this.state.recording}
                 samples={this.state.samples}
+                trimEnd={this.state.trimEnd}
+                trimStart={this.state.trimStart}
                 onBack={this.handleBack}
                 onCancel={this.handleCancel}
                 onPlay={this.handlePlay}
                 onRecord={this.handleRecord}
+                onSetTrimEnd={this.handleSetTrimEnd}
+                onSetTrimStart={this.handleSetTrimStart}
                 onStopPlaying={this.handleStopPlaying}
                 onStopRecording={this.handleStopRecording}
                 onSubmit={this.handleSubmit}

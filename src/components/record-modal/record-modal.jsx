@@ -20,8 +20,12 @@ const RecordModal = props => (
                     levels={props.levels}
                     playing={props.playing}
                     samples={props.samples}
+                    trimEnd={props.trimEnd}
+                    trimStart={props.trimStart}
                     onBack={props.onBack}
                     onPlay={props.onPlay}
+                    onSetTrimEnd={props.onSetTrimEnd}
+                    onSetTrimStart={props.onSetTrimStart}
                     onStopPlaying={props.onStopPlaying}
                     onSubmit={props.onSubmit}
                 />
@@ -43,12 +47,16 @@ RecordModal.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRecord: PropTypes.func.isRequired,
+    onSetTrimEnd: PropTypes.func.isRequired,
+    onSetTrimStart: PropTypes.func.isRequired,
     onStopPlaying: PropTypes.func.isRequired,
     onStopRecording: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     playing: PropTypes.bool,
     recording: PropTypes.bool,
-    samples: PropTypes.instanceOf(Float32Array)
+    samples: PropTypes.instanceOf(Float32Array),
+    trimEnd: PropTypes.number.isRequired,
+    trimStart: PropTypes.number.isRequired
 };
 
 module.exports = RecordModal;

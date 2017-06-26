@@ -19,7 +19,7 @@ class PlaybackStep extends React.Component {
         this.audioBufferPlayer.stop();
     }
     handlePlay () {
-        this.audioBufferPlayer.play(this.props.onStopPlaying);
+        this.audioBufferPlayer.play(this.props.trimStart, this.props.trimEnd, this.props.onStopPlaying);
         this.props.onPlay();
     }
     handleStopPlaying () {

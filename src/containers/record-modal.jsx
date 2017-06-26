@@ -66,7 +66,7 @@ class RecordModal extends React.Component {
                 storage.builtinHelper.cache(
                     storage.AssetType.Sound,
                     storage.DataFormat.WAV,
-                    new Uint8Array(wavBuffer), // @todo ask cwf about the need for this?
+                    new Uint8Array(wavBuffer),
                     md5
                 );
 

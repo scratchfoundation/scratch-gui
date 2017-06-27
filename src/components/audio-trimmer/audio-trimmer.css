@@ -84,11 +84,22 @@ $trim-handle-height: 14px;
     user-select: none;
     user-drag: none;
     -webkit-user-drag: none; /* Why doesn't autoprefixer work for this? */
+
+    transition: 0.2s;
+}
+
+.trim-background:hover img {
+    transform: scale(2);
+}
+
+.trim-background:hover .top-trim-handle img {
+    transform: rotate(180deg) scale(2);
 }
 
 .top-trim-handle img {
     transform: rotate(180deg);
 }
+
 
 .top-trim-handle {
     top: -$trim-handle-height;

@@ -8,22 +8,15 @@ const styles = require('./selector.css');
 
 const Selector = props => {
     const {
+        buttons,
         items,
-        newText,
         selectedItemIndex,
         onDeleteClick,
-        onItemClick,
-        onNewClick
+        onItemClick
     } = props;
 
     return (
         <Box className={styles.wrapper}>
-            <Box
-                className={styles.newItem}
-                onClick={onNewClick}
-            >
-                {newText}
-            </Box>
             <Box className={styles.listArea}>
                 {items.map((item, index) => (
                     <SpriteSelectorItem
@@ -39,19 +32,39 @@ const Selector = props => {
                     />
                 ))}
             </Box>
+            <Box className={styles.newButtons}>
+                {buttons.map(({text, img, onClick}, index) => (
+                    <Box
+                        className={styles.newButton}
+                        key={index}
+                        onClick={onClick}
+                    >
+                        <img
+                            className={styles.newButtonIcon}
+                            src={img}
+                        />
+                        <Box className={styles.newButtonLabel}>
+                            {text}
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
         </Box>
     );
 };
 
 Selector.propTypes = {
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        onClick: PropTypes.func.isRequired
+    })),
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired
     })),
-    newText: PropTypes.string.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
     onItemClick: PropTypes.func.isRequired,
-    onNewClick: PropTypes.func,
     selectedItemIndex: PropTypes.number.isRequired
 };
 

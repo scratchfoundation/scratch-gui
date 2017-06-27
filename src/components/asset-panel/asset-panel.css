@@ -6,7 +6,7 @@
     flex-grow: 1;
     border: 1px solid $ui-pane-border;
     border-top-right-radius: $space;
-    background: $ui-pane-gray;
+    background: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.85rem;
 }

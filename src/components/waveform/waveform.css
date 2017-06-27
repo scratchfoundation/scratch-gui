@@ -1,0 +1,6 @@
+@import "../../css/colors.css";
+
+.waveform-path {
+    fill: $sound-primary;
+    stroke: $sound-tertiary;
+}

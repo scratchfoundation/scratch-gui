@@ -74,7 +74,7 @@ $sides: 5rem;
 }
 
 .body {
-    background: $ui-pane-gray;
+    background: white;
     padding: 1.5rem 2.25rem;
 }
 
@@ -84,8 +84,8 @@ $sides: 5rem;
 }
 
 .meter-container, .waveform-container {
-    background: white;
-    border: 1px solid #ddd;
+    background: $ui-pane-gray;
+    border: 1px solid $ui-pane-border;
     border-radius: 5px;
     padding: 3px;
 

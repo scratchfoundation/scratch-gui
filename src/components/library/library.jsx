@@ -46,6 +46,7 @@ class LibraryComponent extends React.Component {
         if (!this.props.visible) return null;
         return (
             <ModalComponent
+                className={styles.modalContent}
                 contentLabel={this.props.title}
                 filterQuery={this.state.filterQuery}
                 visible={this.props.visible}

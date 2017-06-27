@@ -1,21 +1,17 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const ReactModal = require('react-modal');
+const Modal = require('../modal/modal.jsx');
 const Box = require('../box/box.jsx');
 
 const styles = require('./prompt.css');
 
 const PromptComponent = props => (
-    <ReactModal
-        isOpen
+    <Modal
+        visible
         className={styles.modalContent}
         contentLabel={props.title}
-        overlayClassName={styles.modalOverlay}
         onRequestClose={props.onCancel}
     >
-        <Box className={styles.header}>
-            {props.title}
-        </Box>
         <Box className={styles.body}>
             <Box className={styles.label}>
                 {props.label}
@@ -44,7 +40,7 @@ const PromptComponent = props => (
                 </button>
             </Box>
         </Box>
-    </ReactModal>
+    </Modal>
 );
 
 PromptComponent.propTypes = {

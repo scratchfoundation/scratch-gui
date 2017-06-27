@@ -1,36 +1,18 @@
-const classNames = require('classnames');
 const PropTypes = require('prop-types');
 const React = require('react');
-const ReactModal = require('react-modal');
 const Box = require('../box/box.jsx');
-const CloseButton = require('../close-button/close-button.jsx');
 const RecordingStep = require('../../containers/recording-step.jsx');
 const PlaybackStep = require('../../containers/playback-step.jsx');
-
+const Modal = require('../modal/modal.jsx');
 const styles = require('./record-modal.css');
 
 const RecordModal = props => (
-    <ReactModal
-        isOpen
+    <Modal
+        visible
         className={styles.modalContent}
         contentLabel={'Record Sound'}
-        overlayClassName={styles.modalOverlay}
         onRequestClose={props.onCancel}
     >
-        <div className={styles.header}>
-            <div className={classNames(styles.headerItem, styles.headerItemFilter)}>
-                {/* Nothing here, just for spacing */}
-            </div>
-            <div className={classNames(styles.headerItem, styles.headerItemTitle)}>
-                Record Sound
-            </div>
-            <div className={classNames(styles.headerItem, styles.headerItemClose)}>
-                <CloseButton
-                    size={CloseButton.SIZE_LARGE}
-                    onClick={props.onCancel}
-                />
-            </div>
-        </div>
         <Box className={styles.body}>
             {props.samples ? (
                 <PlaybackStep
@@ -51,7 +33,7 @@ const RecordModal = props => (
                 />
             )}
         </Box>
-    </ReactModal>
+    </Modal>
 );
 
 RecordModal.propTypes = {

@@ -48,6 +48,7 @@ class AudioTrimmer extends React.Component {
     render () {
         return (
             <AudioTrimmerComponent
+                playhead={this.props.playhead}
                 trimEnd={this.props.trimEnd}
                 trimStart={this.props.trimStart}
                 onTrimEndMouseDown={this.handleTrimEndMouseDown}
@@ -60,6 +61,7 @@ class AudioTrimmer extends React.Component {
 AudioTrimmer.propTypes = {
     onSetTrimEnd: PropTypes.func,
     onSetTrimStart: PropTypes.func,
+    playhead: PropTypes.number,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number
 };

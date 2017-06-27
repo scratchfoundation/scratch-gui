@@ -22,6 +22,7 @@ class RecordModal extends React.Component {
             'handleBack',
             'handleSubmit',
             'handleCancel',
+            'handleSetPlayhead',
             'handleSetTrimStart',
             'handleSetTrimEnd'
         ]);
@@ -30,6 +31,7 @@ class RecordModal extends React.Component {
             samples: null,
             encoding: false,
             levels: null,
+            playhead: null,
             playing: false,
             recording: false,
             sampleRate: null,
@@ -47,7 +49,7 @@ class RecordModal extends React.Component {
         this.setState({playing: true});
     }
     handleStopPlaying () {
-        this.setState({playing: false});
+        this.setState({playing: false, playhead: null});
     }
     handleBack () {
         this.setState({playing: false, samples: null});
@@ -57,6 +59,9 @@ class RecordModal extends React.Component {
     }
     handleSetTrimStart (trimStart) {
         this.setState({trimStart});
+    }
+    handleSetPlayhead (playhead) {
+        this.setState({playhead});
     }
     handleSubmit () {
         this.setState({encoding: true}, () => {
@@ -97,6 +102,7 @@ class RecordModal extends React.Component {
             <RecordModalComponent
                 encoding={this.state.encoding}
                 levels={this.state.levels}
+                playhead={this.state.playhead}
                 playing={this.state.playing}
                 recording={this.state.recording}
                 samples={this.state.samples}
@@ -106,6 +112,7 @@ class RecordModal extends React.Component {
                 onCancel={this.handleCancel}
                 onPlay={this.handlePlay}
                 onRecord={this.handleRecord}
+                onSetPlayhead={this.handleSetPlayhead}
                 onSetTrimEnd={this.handleSetTrimEnd}
                 onSetTrimStart={this.handleSetTrimStart}
                 onStopPlaying={this.handleStopPlaying}

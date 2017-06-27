@@ -102,7 +102,7 @@ class AudioRecorder {
             }
         }
 
-        const trimStart = 100 * Math.max(1, firstChunkAboveThreshold - 2) / this.buffers.length;
+        const trimStart = 100 * Math.max(2, firstChunkAboveThreshold - 2) / this.buffers.length;
         const trimEnd = 100 * Math.min(this.buffers.length - 2, lastChunkAboveThreshold + 2) / this.buffers.length;
 
         const buffer = new Float32Array(this.buffers.length * this.bufferLength);

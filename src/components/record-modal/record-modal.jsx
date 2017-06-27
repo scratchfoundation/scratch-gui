@@ -18,12 +18,14 @@ const RecordModal = props => (
                 <PlaybackStep
                     encoding={props.encoding}
                     levels={props.levels}
+                    playhead={props.playhead}
                     playing={props.playing}
                     samples={props.samples}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
                     onBack={props.onBack}
                     onPlay={props.onPlay}
+                    onSetPlayhead={props.onSetPlayhead}
                     onSetTrimEnd={props.onSetTrimEnd}
                     onSetTrimStart={props.onSetTrimStart}
                     onStopPlaying={props.onStopPlaying}
@@ -47,11 +49,13 @@ RecordModal.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRecord: PropTypes.func.isRequired,
+    onSetPlayhead: PropTypes.func.isRequired,
     onSetTrimEnd: PropTypes.func.isRequired,
     onSetTrimStart: PropTypes.func.isRequired,
     onStopPlaying: PropTypes.func.isRequired,
     onStopRecording: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    playhead: PropTypes.number,
     playing: PropTypes.bool,
     recording: PropTypes.bool,
     samples: PropTypes.instanceOf(Float32Array),

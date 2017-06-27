@@ -30,6 +30,7 @@ const PlaybackStep = props => (
                     width={480}
                 />
                 <AudioTrimmer
+                    playhead={props.playhead}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
                     onSetTrimEnd={props.onSetTrimEnd}
@@ -77,6 +78,7 @@ PlaybackStep.propTypes = {
     onSetTrimStart: PropTypes.func.isRequired,
     onStopPlaying: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    playhead: PropTypes.number,
     playing: PropTypes.bool.isRequired,
     trimEnd: PropTypes.number.isRequired,
     trimStart: PropTypes.number.isRequired

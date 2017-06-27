@@ -25,6 +25,15 @@ const AudioTrimmer = props => (
             </Box>
         </Box>
 
+        {props.playhead ? (
+            <Box
+                className={classNames(styles.trimLine, styles.playhead)}
+                style={{
+                    left: `${props.playhead}%`
+                }}
+            />
+        ) : null}
+
         <Box
             className={classNames(styles.trimBackground, styles.endTrimBackground)}
             style={{
@@ -49,6 +58,7 @@ const AudioTrimmer = props => (
 AudioTrimmer.propTypes = {
     onTrimEndMouseDown: PropTypes.func.isRequired,
     onTrimStartMouseDown: PropTypes.func.isRequired,
+    playhead: PropTypes.number,
     trimEnd: PropTypes.number.isRequired,
     trimStart: PropTypes.number.isRequired
 };

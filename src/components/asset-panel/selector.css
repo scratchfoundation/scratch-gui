@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: 0.2s;
 }

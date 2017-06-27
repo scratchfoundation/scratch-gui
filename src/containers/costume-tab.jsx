@@ -5,7 +5,7 @@ const bindAll = require('lodash.bindall');
 const VM = require('scratch-vm');
 
 const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
-const addCostumeIcon = require('../components/asset-panel/icon--add-sound-lib.svg');
+const addCostumeIcon = require('../components/asset-panel/icon--add-costume-lib.svg');
 
 const {connect} = require('react-redux');
 

@@ -66,8 +66,8 @@ class RecordModal extends React.Component {
     handleSubmit () {
         this.setState({encoding: true}, () => {
             const sampleCount = this.state.samples.length;
-            const startIndex = Math.floor(this.state.trimStart * sampleCount / 100);
-            const endIndex = Math.floor(this.state.trimEnd * sampleCount / 100);
+            const startIndex = Math.floor(this.state.trimStart * sampleCount);
+            const endIndex = Math.floor(this.state.trimEnd * sampleCount);
             const clippedSamples = this.state.samples.slice(startIndex, endIndex);
             WavEncoder.encode({
                 sampleRate: this.state.sampleRate,

@@ -16,8 +16,8 @@ class AudioBufferPlayer {
         this.trimEnd = trimEnd;
         this.startTime = Date.now();
 
-        const trimStartTime = this.buffer.duration * trimStart / 100;
-        const trimmedDuration = this.buffer.duration * trimEnd / 100 - trimStartTime;
+        const trimStartTime = this.buffer.duration * trimStart;
+        const trimmedDuration = this.buffer.duration * trimEnd - trimStartTime;
 
         this.source = this.audioContext.createBufferSource();
         this.source.onended = onEnded;
@@ -30,7 +30,7 @@ class AudioBufferPlayer {
 
     update () {
         const timeSinceStart = (Date.now() - this.startTime) / 1000;
-        const percentage = 100 * timeSinceStart / this.buffer.duration;
+        const percentage = timeSinceStart / this.buffer.duration;
         if (percentage + this.trimStart < this.trimEnd && this.source.onended) {
             requestAnimationFrame(this.update.bind(this));
             this.updateCallback(percentage + this.trimStart);

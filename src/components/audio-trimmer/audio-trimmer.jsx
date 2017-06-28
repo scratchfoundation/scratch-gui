@@ -13,7 +13,7 @@ const AudioTrimmer = props => (
         <Box
             className={classNames(styles.trimBackground, styles.startTrimBackground)}
             style={{
-                width: `${props.trimStart}%`
+                width: `${100 * props.trimStart}%`
             }}
             onMouseDown={props.onTrimStartMouseDown}
         >
@@ -32,7 +32,7 @@ const AudioTrimmer = props => (
             <Box
                 className={classNames(styles.trimLine, styles.playhead)}
                 style={{
-                    left: `${props.playhead}%`
+                    left: `${100 * props.playhead}%`
                 }}
             />
         ) : null}
@@ -40,8 +40,8 @@ const AudioTrimmer = props => (
         <Box
             className={classNames(styles.trimBackground, styles.endTrimBackground)}
             style={{
-                left: `${props.trimEnd}%`,
-                width: `${100 - props.trimEnd}%`
+                left: `${100 * props.trimEnd}%`,
+                width: `${100 - 100 * props.trimEnd}%`
             }}
             onMouseDown={props.onTrimEndMouseDown}
         >

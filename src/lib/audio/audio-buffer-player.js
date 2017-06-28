@@ -6,11 +6,14 @@ class AudioBufferPlayer {
         this.buffer = this.audioContext.createBuffer(1, samples.length, this.audioContext.sampleRate);
         this.buffer.getChannelData(0).set(samples);
         this.source = null;
-        this.stopped = true;
+
+        this.startTime = null;
+        this.updateCallback = null;
+        this.trimStart = null;
+        this.trimEnd = null;
     }
 
     play (trimStart, trimEnd, onUpdate, onEnded) {
-        this.stopped = false;
         this.updateCallback = onUpdate;
         this.trimStart = trimStart;
         this.trimEnd = trimEnd;
@@ -34,6 +37,8 @@ class AudioBufferPlayer {
         if (percentage + this.trimStart < this.trimEnd && this.source.onended) {
             requestAnimationFrame(this.update.bind(this));
             this.updateCallback(percentage + this.trimStart);
+        } else {
+            this.updateCallback = null;
         }
     }
 

@@ -7,17 +7,17 @@ const handleIcon = require('./icon--handle.svg');
 
 const AudioTrimmer = props => (
     <div
-        className={styles.trimContainer}
+        className={styles.absolute}
         ref={props.containerRef}
     >
         <Box
-            className={classNames(styles.trimBackground, styles.startTrimBackground)}
+            className={classNames(styles.absolute, styles.trimBackground, styles.startTrimBackground)}
             style={{
                 width: `${100 * props.trimStart}%`
             }}
             onMouseDown={props.onTrimStartMouseDown}
         >
-            <Box className={styles.trimBackgroundMask} />
+            <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
             <Box className={classNames(styles.trimLine, styles.startTrimLine)}>
                 <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
                     <img src={handleIcon} />
@@ -38,14 +38,14 @@ const AudioTrimmer = props => (
         ) : null}
 
         <Box
-            className={classNames(styles.trimBackground, styles.endTrimBackground)}
+            className={classNames(styles.absolute, styles.trimBackground, styles.endTrimBackground)}
             style={{
                 left: `${100 * props.trimEnd}%`,
                 width: `${100 - 100 * props.trimEnd}%`
             }}
             onMouseDown={props.onTrimEndMouseDown}
         >
-            <Box className={styles.trimBackgroundMask} />
+            <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
             <Box className={classNames(styles.trimLine, styles.endTrimLine)}>
                 <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
                     <img src={handleIcon} />

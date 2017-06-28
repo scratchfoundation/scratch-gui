@@ -36,7 +36,7 @@ class RecordModal extends React.Component {
             recording: false,
             sampleRate: null,
             trimStart: 0,
-            trimEnd: 100
+            trimEnd: 1
         };
     }
     handleRecord () {

@@ -109,12 +109,12 @@
 }
 
 .record-button-circle {
-    fill: #FF661A;
-    stroke: #E64D00;
+    fill: $red-primary;
+    stroke: $red-tertiary;
 }
 
 .record-button-circle-outline {
-    fill: #FF661A;
+    fill: $red-primary;
     opacity: 0.2;
     transition: 0.1s;
 }

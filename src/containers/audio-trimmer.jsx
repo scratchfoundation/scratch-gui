@@ -16,12 +16,14 @@ class AudioTrimmer extends React.Component {
         ]);
     }
     handleTrimStartMouseMove (e) {
-        const dx = 100 * (e.clientX - this.initialX) / 480;
+        const containerSize = this.containerElement.getBoundingClientRect().width;
+        const dx = 100 * (e.clientX - this.initialX) / containerSize;
         const newTrim = Math.max(1, Math.min(this.props.trimEnd, this.initialTrim + dx));
         this.props.onSetTrimStart(newTrim);
     }
     handleTrimEndMouseMove (e) {
-        const dx = 100 * (e.clientX - this.initialX) / 480;
+        const containerSize = this.containerElement.getBoundingClientRect().width;
+        const dx = 100 * (e.clientX - this.initialX) / containerSize;
         const newTrim = Math.min(99, Math.max(this.props.trimStart, this.initialTrim + dx));
         this.props.onSetTrimEnd(newTrim);
     }
@@ -48,6 +50,7 @@ class AudioTrimmer extends React.Component {
     render () {
         return (
             <AudioTrimmerComponent
+                containerRef={el => (this.containerElement = el)}
                 playhead={this.props.playhead}
                 trimEnd={this.props.trimEnd}
                 trimStart={this.props.trimStart}

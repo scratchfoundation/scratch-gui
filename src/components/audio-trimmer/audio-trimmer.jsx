@@ -6,7 +6,10 @@ const styles = require('./audio-trimmer.css');
 const handleIcon = require('./icon--handle.svg');
 
 const AudioTrimmer = props => (
-    <Box className={styles.trimContainer}>
+    <div
+        className={styles.trimContainer}
+        ref={props.containerRef}
+    >
         <Box
             className={classNames(styles.trimBackground, styles.startTrimBackground)}
             style={{
@@ -52,10 +55,11 @@ const AudioTrimmer = props => (
                 </Box>
             </Box>
         </Box>
-    </Box>
+    </div>
 );
 
 AudioTrimmer.propTypes = {
+    containerRef: PropTypes.func,
     onTrimEndMouseDown: PropTypes.func.isRequired,
     onTrimStartMouseDown: PropTypes.func.isRequired,
     playhead: PropTypes.number,

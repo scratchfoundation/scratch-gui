@@ -55,7 +55,7 @@
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-draggable": "2.2.6",
-    "react-modal": "1.7.7",
+    "react-modal": "1.7.8",
     "react-redux": "5.0.5",
     "react-style-proptype": "3.0.0",
     "react-tabs": "1.0.0",

@@ -78,6 +78,7 @@ const TargetPane = ({
 
                 <button
                     className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
+                    title="Add sprite"
                     onClick={onNewSpriteClick}
                 >
                     <img
@@ -88,6 +89,7 @@ const TargetPane = ({
 
                 <button
                     className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
+                    title="Add backdrop"
                     onClick={onNewBackdropClick}
                 >
                     <img

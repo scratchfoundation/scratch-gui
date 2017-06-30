@@ -3,33 +3,27 @@ sudo: false
 dist: trusty
 node_js:
 - 6
-- 'node'
 cache:
   directories:
   - node_modules
 env:
   global:
-  - BASE_PATH=/scratch-gui/
   - NODE_ENV=production
 install:
 - npm --production=false install
 - npm --production=false update
-after_script:
-- |
-  # RELEASE_BRANCHES and NPM_TOKEN defined in Travis settings panel
-  declare exitCode
-  $(npm bin)/travis-after-all
-  exitCode=$?
-  if [[
-    # Execute after all jobs finish successfully
-    $exitCode = 0 &&
-    # Only release on release branches
-    $RELEASE_BRANCHES =~ $TRAVIS_BRANCH &&
-    # Don't release on PR builds
-    $TRAVIS_PULL_REQUEST = "false"
-  ]]; then
-    # Publish to gh-pages as most recent committer
-    git config --global user.email $(git log --pretty=format:"%ae" -n1)
-    git config --global user.name $(git log --pretty=format:"%an" -n1)
-    npm run --silent deploy -- -x -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-  fi
+before_deploy:
+- git config --global user.email $(git log --pretty=format:"%ae" -n1)
+- git config --global user.name $(git log --pretty=format:"%an" -n1)
+deploy:
+- provider: script
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH != master
+  skip_cleanup: true
+  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: script
+  on:
+    branch: master
+  skip_cleanup: true
+  script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git

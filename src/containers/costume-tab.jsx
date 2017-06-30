@@ -5,6 +5,7 @@ const bindAll = require('lodash.bindall');
 const VM = require('scratch-vm');
 
 const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
+const addCostumeIcon = require('../components/asset-panel/icon--add-costume-lib.svg');
 
 const {connect} = require('react-redux');
 
@@ -37,6 +38,7 @@ class CostumeTab extends React.Component {
     }
 
     handleSelectCostume (costumeIndex) {
+        this.props.vm.editingTarget.setCostume(costumeIndex);
         this.setState({selectedCostumeIndex: costumeIndex});
     }
 
@@ -64,12 +66,16 @@ class CostumeTab extends React.Component {
 
         return (
             <AssetPanel
+                buttons={[{
+                    text: addText,
+                    img: addCostumeIcon,
+                    onClick: addFunc
+                }]}
                 items={target.costumes || []}
                 newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-                onNewClick={addFunc}
             />
         );
     }

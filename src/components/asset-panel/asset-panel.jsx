@@ -11,7 +11,7 @@ const AssetPanel = props => (
             {...props}
         />
         <Box className={styles.detailArea}>
-            {/* @todo editor area */}
+            {props.children}
         </Box>
     </Box>
 );

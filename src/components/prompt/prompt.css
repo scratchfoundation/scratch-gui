@@ -1,38 +1,8 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    background-color: rgba(94, 102, 125, .95);
-}
-
 .modal-content {
     width: 360px;
-    margin: 100px auto;
-    outline: none;
-    border: 3px solid rgb(126, 133, 151);
-    padding: 0;
-    border-radius: $space;
-    user-select: none;
-
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #5d647a;
-    overflow: hidden;
-}
-
-.header {
-    font-size: 1.25rem;
-    height: 3.25rem;
-    background-color: $blue;
-    font-weight: 500;
-    color: #fff;
-    text-align: center;
-    line-height: 3.25rem;
 }
 
 .body {
@@ -71,8 +41,8 @@
 }
 
 .button-row button.ok-button {
-    background: $blue;
-    border: $blue;
+    background: $motion-primary;
+    border: $motion-primary;
     color: white;
 }
 

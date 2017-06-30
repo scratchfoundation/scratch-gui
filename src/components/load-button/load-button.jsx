@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const ButtonComponent = require('../button/button.jsx');
+import ButtonComponent from '../button/button.jsx';
 
-const styles = require('./load-button.css');
+import styles from './load-button.css';
 
 const LoadButtonComponent = ({
     inputRef,

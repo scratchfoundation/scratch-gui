@@ -1,14 +1,13 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const bindAll = require('lodash.bindall');
-const {defineMessages} = require('react-intl');
+import PropTypes from 'prop-types';
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import {defineMessages} from 'react-intl';
+import VM from 'scratch-vm';
 
-const VM = require('scratch-vm');
+import AssetPanel from '../components/asset-panel/asset-panel.jsx';
+import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 
-const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
-const addCostumeIcon = require('../components/asset-panel/icon--add-costume-lib.svg');
-
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
 const {
     openCostumeLibrary,

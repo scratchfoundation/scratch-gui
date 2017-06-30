@@ -1,8 +1,8 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const SpriteInfoComponent = require('../components/sprite-info/sprite-info.jsx');
+import SpriteInfoComponent from '../components/sprite-info/sprite-info.jsx';
 
 class SpriteInfo extends React.Component {
     constructor (props) {

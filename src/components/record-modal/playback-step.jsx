@@ -1,13 +1,13 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Box = require('../box/box.jsx');
-const Waveform = require('../waveform/waveform.jsx');
-const Meter = require('../meter/meter.jsx');
+import PropTypes from 'prop-types';
+import React from 'react';
+import Box from '../box/box.jsx';
+import Waveform from '../waveform/waveform.jsx';
+import Meter from '../meter/meter.jsx';
 
-const styles = require('./record-modal.css');
-const backIcon = require('./icon--back.svg');
-const stopIcon = require('./icon--stop-playback.svg');
-const playIcon = require('./icon--play.svg');
+import styles from './record-modal.css';
+import backIcon from './icon--back.svg';
+import stopIcon from './icon--stop-playback.svg';
+import playIcon from './icon--play.svg';
 
 const PlaybackStep = props => (
     <Box>

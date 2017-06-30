@@ -1,13 +1,13 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
-const ReactModal = require('react-modal');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ReactModal from 'react-modal';
 
-const Box = require('../box/box.jsx');
-const CloseButton = require('../close-button/close-button.jsx');
-const Filter = require('../filter/filter.jsx');
+import Box from '../box/box.jsx';
+import CloseButton from '../close-button/close-button.jsx';
+import Filter from '../filter/filter.jsx';
 
-const styles = require('./modal.css');
+import styles from './modal.css';
 
 class ModalComponent extends React.Component {
     render () {

@@ -1,9 +1,9 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
 
-const StopAllComponent = require('../components/stop-all/stop-all.jsx');
+import StopAllComponent from '../components/stop-all/stop-all.jsx';
 
 class StopAll extends React.Component {
     constructor (props) {

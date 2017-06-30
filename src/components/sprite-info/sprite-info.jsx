@@ -1,14 +1,14 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const styles = require('./sprite-info.css');
+import Box from '../box/box.jsx';
+import styles from './sprite-info.css';
 
-const xIcon = require('./icon--x.svg');
-const yIcon = require('./icon--y.svg');
-const showIcon = require('./icon--show.svg');
-const hideIcon = require('./icon--hide.svg');
+import xIcon from './icon--x.svg';
+import yIcon from './icon--y.svg';
+import showIcon from './icon--show.svg';
+import hideIcon from './icon--hide.svg';
 
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 

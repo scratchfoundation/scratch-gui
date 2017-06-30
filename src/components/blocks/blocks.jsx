@@ -1,7 +1,7 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Box = require('../box/box.jsx');
-const styles = require('./blocks.css');
+import PropTypes from 'prop-types';
+import React from 'react';
+import Box from '../box/box.jsx';
+import styles from './blocks.css';
 
 const BlocksComponent = props => {
     const {

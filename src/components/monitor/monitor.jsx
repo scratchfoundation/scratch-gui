@@ -1,8 +1,8 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const Draggable = require('react-draggable');
-const Box = require('../box/box.jsx');
-const styles = require('./monitor.css');
+import React from 'react';
+import PropTypes from 'prop-types';
+import Draggable from 'react-draggable';
+import Box from '../box/box.jsx';
+import styles from './monitor.css';
 
 const categories = {
     data: '#FF8C1A',

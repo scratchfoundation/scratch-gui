@@ -1,6 +1,6 @@
-const xhr = require('xhr');
+import xhr from 'xhr';
 
-const log = require('./log');
+import log from './log';
 
 class ProjectLoader {
     constructor () {

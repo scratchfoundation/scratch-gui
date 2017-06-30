@@ -1,10 +1,10 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Box = require('../box/box.jsx');
-const RecordingStep = require('../../containers/recording-step.jsx');
-const PlaybackStep = require('../../containers/playback-step.jsx');
-const Modal = require('../modal/modal.jsx');
-const styles = require('./record-modal.css');
+import PropTypes from 'prop-types';
+import React from 'react';
+import Box from '../box/box.jsx';
+import RecordingStep from '../../containers/recording-step.jsx';
+import PlaybackStep from '../../containers/playback-step.jsx';
+import Modal from '../modal/modal.jsx';
+import styles from './record-modal.css';
 
 const RecordModal = props => (
     <Modal

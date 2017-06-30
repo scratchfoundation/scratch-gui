@@ -1,14 +1,13 @@
 /* eslint-env jest */
 const React = require('react'); // eslint-disable-line no-unused-vars
 const {shallow} = require('enzyme');
-const GreenFlag = require('../../src/containers/green-flag'); // eslint-disable-line no-unused-vars
+const GreenFlag = require('../../../src/containers/green-flag'); // eslint-disable-line no-unused-vars
 const renderer = require('react-test-renderer');
 const VM = require('scratch-vm');
 
-describe('GreenFlag', () => {
+describe('GreenFlag Container', () => {
     let vm;
     beforeEach(() => {
-        // @todo: Ask scratch team their thoughts on mocking the VM.
         vm = new VM();
     });
 

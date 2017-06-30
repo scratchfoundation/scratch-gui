@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GreenFlag renders active state 1`] = `
+exports[`GreenFlag Container renders active state 1`] = `
 <img
   className="undefined"
   onClick={[Function]}
@@ -9,7 +9,7 @@ exports[`GreenFlag renders active state 1`] = `
 />
 `;
 
-exports[`GreenFlag renders inactive state 1`] = `
+exports[`GreenFlag Container renders inactive state 1`] = `
 <img
   className=""
   onClick={[Function]}

@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const {FormattedMessage} = require('react-intl');
 
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
 
@@ -33,7 +34,7 @@ const Selector = props => {
                 ))}
             </Box>
             <Box className={styles.newButtons}>
-                {buttons.map(({text, img, onClick}, index) => (
+                {buttons.map(({message, img, onClick}, index) => (
                     <Box
                         className={styles.newButton}
                         key={index}
@@ -44,7 +45,7 @@ const Selector = props => {
                             src={img}
                         />
                         <Box className={styles.newButtonLabel}>
-                            {text}
+                            <FormattedMessage {...message} />
                         </Box>
                     </Box>
                 ))}
@@ -55,7 +56,11 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
+        message: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            defaultMessage: PropTypes.string,
+            description: PropTypes.string
+        }),
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })),

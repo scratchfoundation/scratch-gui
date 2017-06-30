@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
+const {defineMessages} = require('react-intl');
 
 const VM = require('scratch-vm');
 
@@ -61,18 +62,30 @@ class CostumeTab extends React.Component {
             return null;
         }
 
-        const addText = target.isStage ? 'Add Backdrop' : 'Add Costume';
+        const messages = defineMessages({
+            addBackdrop: {
+                id: 'action.addBackdrop',
+                defaultMessage: 'Add Backdrop',
+                description: 'Button to add a backdrop in the editor tab'
+            },
+            addCostume: {
+                id: 'action.addCostume',
+                defaultMessage: 'Add Costume',
+                description: 'Button to add a costume in the editor tab'
+            }
+        });
+
+        const addMessage = target.isStage ? messages.addBackdrop : messages.addCostume;
         const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
                 buttons={[{
-                    text: addText,
+                    message: addMessage,
                     img: addCostumeIcon,
                     onClick: addFunc
                 }]}
                 items={target.costumes || []}
-                newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}

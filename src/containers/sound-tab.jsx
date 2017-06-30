@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
+const {defineMessages} = require('react-intl');
 
 const VM = require('scratch-vm');
 
@@ -74,14 +75,27 @@ class SoundTab extends React.Component {
             }
         )) : [];
 
+        const messages = defineMessages({
+            recordSound: {
+                id: 'action.recordSound',
+                defaultMessage: 'Record Sound',
+                description: 'Button to record a sound in the editor tab'
+            },
+            addSound: {
+                id: 'action.addSound',
+                defaultMessage: 'Add Sound',
+                description: 'Button to add a sound in the editor tab'
+            }
+        });
+
         return (
             <AssetPanel
                 buttons={[{
-                    text: 'Record Sound',
+                    message: messages.recordSound,
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    text: 'Add Sound',
+                    message: messages.addSound,
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}

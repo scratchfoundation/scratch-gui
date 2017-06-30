@@ -2,9 +2,10 @@
 const React = require('react'); // eslint-disable-line no-unused-vars
 const {mount} = require('enzyme');
 import configureStore from 'redux-mock-store';
-import {Provider} from 'react-redux';
+import {Provider} from 'react-redux'; // eslint-disable-line no-unused-vars
 
-const SpriteSelectorItem = require('../../../src/containers/sprite-selector-item'); // eslint-disable-line no-unused-vars
+const SpriteSelectorItem = require( // eslint-disable-line no-unused-vars
+    '../../../src/containers/sprite-selector-item');
 const CloseButton = require('../../../src/components/close-button/close-button'); // eslint-disable-line no-unused-vars
 
 describe('SpriteSelectorItem Container', () => {

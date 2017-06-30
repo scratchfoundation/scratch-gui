@@ -1,8 +1,10 @@
 /* eslint-env jest */
 const React = require('react'); // eslint-disable-line no-unused-vars
 const {shallow} = require('enzyme');
-const SpriteSelectorItemComponent = require('../../../src/components/sprite-selector-item/sprite-selector-item'); // eslint-disable-line no-unused-vars
-const CostumeCanvas = require('../../../src/components/costume-canvas/costume-canvas'); // eslint-disable-line no-unused-vars
+const SpriteSelectorItemComponent = require( // eslint-disable-line no-unused-vars
+    '../../../src/components/sprite-selector-item/sprite-selector-item');
+const CostumeCanvas = require( // eslint-disable-line no-unused-vars
+    '../../../src/components/costume-canvas/costume-canvas');
 const CloseButton = require('../../../src/components/close-button/close-button'); // eslint-disable-line no-unused-vars
 const renderer = require('react-test-renderer');
 

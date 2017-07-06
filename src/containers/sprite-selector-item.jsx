@@ -34,9 +34,11 @@ class SpriteSelectorItem extends React.Component {
         this.props.onClick(this.props.id);
     }
     handleDelete () {
-        this.setState({prompt: {function () {
+        function callback() {
             this.props.onDeleteButtonClick(this.props.id);
-        }, "Are you sure you want to delete this?"}});
+        }
+        var message = "Are you sure you want to delete this?";
+        this.setState({prompt: {callback, message}});
     }
     render () {
         const {
@@ -57,7 +59,6 @@ class SpriteSelectorItem extends React.Component {
             {this.state.prompt ? (
                 <Prompt
                     label={this.state.prompt.message}
-                    placeholder={this.state.prompt.defaultValue}
                     title="Are you sure?"
                     onCancel={this.handlePromptClose}
                     onOk={this.handlePromptCallback}

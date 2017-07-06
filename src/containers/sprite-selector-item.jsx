@@ -6,23 +6,37 @@ const {connect} = require('react-redux');
 
 const SpriteSelectorItemComponent = require('../components/sprite-selector-item/sprite-selector-item.jsx');
 
+const AssetDelete = require('./asset-delete.jsx');
+
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleClick',
-            'handleDelete'
+            'handleDelete',
+            'handlePromptCallback',
+            'handlePromptClose'
         ]);
+        this.state = {prompt: null};
+    }
+    shouldComponentUpdate (nextProps, nextState) {
+        return this.state.prompt !== nextState.prompt;
+    }
+    handlePromptCallback (data) {
+        this.state.prompt.callback(data);
+        this.handlePromptClose();
+    }
+    handlePromptClose () {
+        this.setState({prompt: null});
     }
     handleClick (e) {
         e.preventDefault();
         this.props.onClick(this.props.id);
     }
     handleDelete () {
-        // eslint-disable-next-line no-alert
-        if (window.confirm('Are you sure you want to delete this sprite?')) {
+        this.setState({prompt: {function () {
             this.props.onDeleteButtonClick(this.props.id);
-        }
+        }, "Are you sure you want to delete this?"}});
     }
     render () {
         const {
@@ -40,6 +54,15 @@ class SpriteSelectorItem extends React.Component {
                 onDeleteButtonClick={this.handleDelete}
                 {...props}
             />
+            {this.state.prompt ? (
+                <Prompt
+                    label={this.state.prompt.message}
+                    placeholder={this.state.prompt.defaultValue}
+                    title="Are you sure?"
+                    onCancel={this.handlePromptClose}
+                    onOk={this.handlePromptCallback}
+                />
+            ) : null}
         );
     }
 }

@@ -17,9 +17,10 @@ class AudioRecorder {
         this.disposed = false;
     }
 
-    startListening (onUpdate, onError) {
+    startListening (onStarted, onUpdate, onError) {
         try {
             navigator.getUserMedia({audio: true}, userMediaStream => {
+                onStarted();
                 this.attachUserMediaStream(userMediaStream, onUpdate);
             }, e => {
                 onError(e);

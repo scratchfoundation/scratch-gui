@@ -9,21 +9,26 @@ class RecordingStep extends React.Component {
         bindAll(this, [
             'handleRecord',
             'handleStopRecording',
+            'handleStarted',
             'handleLevelUpdate',
             'handleRecordingError'
         ]);
 
         this.state = {
+            listening: false,
             level: 0,
             levels: null
         };
     }
     componentDidMount () {
         this.audioRecorder = new AudioRecorder();
-        this.audioRecorder.startListening(this.handleLevelUpdate, this.handleRecordingError);
+        this.audioRecorder.startListening(this.handleStarted, this.handleLevelUpdate, this.handleRecordingError);
     }
     componentWillUnmount () {
         this.audioRecorder.dispose();
+    }
+    handleStarted () {
+        this.setState({listening: true});
     }
     handleRecordingError () {
         alert('Could not start recording'); // eslint-disable-line no-alert
@@ -52,6 +57,7 @@ class RecordingStep extends React.Component {
             <RecordingStepComponent
                 level={this.state.level}
                 levels={this.state.levels}
+                listening={this.state.listening}
                 onRecord={this.handleRecord}
                 onStopRecording={this.handleStopRecording}
                 {...componentProps}

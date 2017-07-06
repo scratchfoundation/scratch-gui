@@ -35,6 +35,7 @@ const RecordingStep = props => (
         <Box className={styles.mainButtonRow}>
             <button
                 className={styles.mainButton}
+                disabled={!props.listening}
                 onClick={props.recording ? props.onStopRecording : props.onRecord}
             >
                 {props.recording ? (
@@ -72,6 +73,7 @@ const RecordingStep = props => (
 RecordingStep.propTypes = {
     level: PropTypes.number,
     levels: PropTypes.arrayOf(PropTypes.number),
+    listening: PropTypes.bool.isRequired,
     onRecord: PropTypes.func.isRequired,
     onStopRecording: PropTypes.func.isRequired,
     recording: PropTypes.bool

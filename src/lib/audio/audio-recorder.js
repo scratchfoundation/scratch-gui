@@ -12,6 +12,7 @@ class AudioRecorder {
 
         this.recordedSamples = 0;
         this.recording = false;
+        this.started = false;
         this.buffers = [];
 
         this.disposed = false;
@@ -20,13 +21,20 @@ class AudioRecorder {
     startListening (onStarted, onUpdate, onError) {
         try {
             navigator.getUserMedia({audio: true}, userMediaStream => {
-                onStarted();
-                this.attachUserMediaStream(userMediaStream, onUpdate);
+                if (!this.disposed) {
+                    this.started = true;
+                    onStarted();
+                    this.attachUserMediaStream(userMediaStream, onUpdate);
+                }
             }, e => {
-                onError(e);
+                if (!this.disposed) {
+                    onError(e);
+                }
             });
         } catch (e) {
-            onError(e);
+            if (!this.disposed) {
+                onError(e);
+            }
         }
     }
 
@@ -51,9 +59,8 @@ class AudioRecorder {
         this.sourceNode = this.audioContext.createGain();
         this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
 
-
         this.scriptProcessorNode.onaudioprocess = processEvent => {
-            if (this.recording) {
+            if (this.recording && !this.disposed) {
                 this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
             }
         };
@@ -118,12 +125,14 @@ class AudioRecorder {
     }
 
     dispose () {
-        this.scriptProcessorNode.onaudioprocess = null;
-        this.scriptProcessorNode.disconnect();
-        this.analyserNode.disconnect();
-        this.sourceNode.disconnect();
-        this.mediaStreamSource.disconnect();
-        this.userMediaStream.getAudioTracks()[0].stop();
+        if (this.started) {
+            this.scriptProcessorNode.onaudioprocess = null;
+            this.scriptProcessorNode.disconnect();
+            this.analyserNode.disconnect();
+            this.sourceNode.disconnect();
+            this.mediaStreamSource.disconnect();
+            this.userMediaStream.getAudioTracks()[0].stop();
+        }
         this.disposed = true;
     }
 }

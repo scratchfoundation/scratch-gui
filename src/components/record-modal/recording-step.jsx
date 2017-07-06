@@ -27,7 +27,8 @@ const RecordingStep = props => (
                     />
                 ) : (
                     <span className={styles.helpText}>
-                        Begin recording by clicking the button below
+                        {props.listening ? 'Begin recording by clicking the button below' :
+                            '↖️ \u00A0We need your permission to use your microphone'}
                     </span>
                 )}
             </Box>
@@ -73,7 +74,7 @@ const RecordingStep = props => (
 RecordingStep.propTypes = {
     level: PropTypes.number,
     levels: PropTypes.arrayOf(PropTypes.number),
-    listening: PropTypes.bool.isRequired,
+    listening: PropTypes.bool,
     onRecord: PropTypes.func.isRequired,
     onStopRecording: PropTypes.func.isRequired,
     recording: PropTypes.bool

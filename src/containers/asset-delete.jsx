@@ -1,49 +1,35 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const bindAll = require('lodash.bindall');
-const PromptComponent = require('../components/prompt/prompt.jsx');
+const AssetDeleteComponent = require('../components/prompt/asset-delete.jsx');
 
-class Prompt extends React.Component {
+class AssetDelete extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleOk',
-            'handleCancel',
-            'handleChange',
-            'handleKeyPress'
+            'handleCancel'
         ]);
-        this.state = {
-            inputValue: ''
-        };
-    }
-    handleKeyPress (event) {
-        if (event.key === 'Enter') this.handleOk();
     }
     handleOk () {
-        this.props.onOk(this.state.inputValue);
+        this.props.onOk();
     }
     handleCancel () {
         this.props.onCancel();
     }
-    handleChange (e) {
-        this.setState({inputValue: e.target.value});
-    }
     render () {
         return (
-            <PromptComponent
+            <AssetDeleteComponent
                 label={this.props.label}
-                placeholder={this.props.placeholder}
                 title={this.props.title}
                 onCancel={this.handleCancel}
-                onChange={this.handleChange}
-                onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
             />
         );
     }
 }
 
-Prompt.propTypes = {
+AssetDelete.propTypes = {
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
@@ -51,4 +37,4 @@ Prompt.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-module.exports = Prompt;
+module.exports = AssetDelete;

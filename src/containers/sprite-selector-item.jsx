@@ -51,19 +51,21 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <SpriteSelectorItemComponent
-                onClick={this.handleClick}
-                onDeleteButtonClick={this.handleDelete}
-                {...props}
-            />
-            {this.state.prompt ? (
-                <Prompt
-                    label={this.state.prompt.message}
-                    title="Are you sure?"
-                    onCancel={this.handlePromptClose}
-                    onOk={this.handlePromptCallback}
+            <div>
+                <SpriteSelectorItemComponent
+                    onClick={this.handleClick}
+                    onDeleteButtonClick={this.handleDelete}
+                    {...props}
                 />
-            ) : null}
+                {this.state.prompt ? (
+                    <Prompt
+                        label={this.state.prompt.message}
+                        title="Are you sure?"
+                        onCancel={this.handlePromptClose}
+                        onOk={this.handlePromptCallback}
+                    />
+                ) : null}
+            </div>
         );
     }
 }

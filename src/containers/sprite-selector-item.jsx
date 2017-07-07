@@ -2,11 +2,9 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import styles = from '../components/sprite-selector/sprite-selector.css';
 import Box = from '../components/box/box.jsx';
 
 import {connect} from 'react-redux';
-
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
@@ -56,7 +54,6 @@ class SpriteSelectorItem extends React.Component {
         } = this.props;
         return (
             <Box
-                className={styles.itemsWrapper}
                 grow={1}
             >
                 <SpriteSelectorItemComponent

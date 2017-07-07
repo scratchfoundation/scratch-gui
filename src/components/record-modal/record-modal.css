@@ -64,6 +64,10 @@
     border: none;
 }
 
+.main-button-row button:disabled {
+    opacity: 0.25;
+}
+
 .main-button-row button:active, .main-button-row button:focus {
     outline: none;
 }

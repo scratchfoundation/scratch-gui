@@ -54,7 +54,10 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <Box className={styles.itemsWrapper}>
+            <Box
+                className={styles.itemsWrapper}
+                grow={1}
+            >
                 <SpriteSelectorItemComponent
                     onClick={this.handleClick}
                     onDeleteButtonClick={this.handleDelete}

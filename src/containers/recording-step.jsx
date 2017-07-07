@@ -1,7 +1,7 @@
-const React = require('react');
-const bindAll = require('lodash.bindall');
-const RecordingStepComponent = require('../components/record-modal/recording-step.jsx');
-const AudioRecorder = require('../lib/audio/audio-recorder.js');
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import RecordingStepComponent from '../components/record-modal/recording-step.jsx';
+import AudioRecorder from '../lib/audio/audio-recorder.js';
 
 class RecordingStep extends React.Component {
     constructor (props) {

@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const styles = require('./waveform.css');
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './waveform.css';
 
 const Waveform = props => {
     const {

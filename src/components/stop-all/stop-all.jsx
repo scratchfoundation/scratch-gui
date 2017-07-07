@@ -1,9 +1,9 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const stopAllIcon = require('./icon--stop-all.svg');
-const styles = require('./stop-all.css');
+import stopAllIcon from './icon--stop-all.svg';
+import styles from './stop-all.css';
 
 const StopAllComponent = function (props) {
     const {

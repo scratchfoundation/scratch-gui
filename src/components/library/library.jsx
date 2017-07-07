@@ -1,11 +1,11 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const LibraryItem = require('../library-item/library-item.jsx');
-const ModalComponent = require('../modal/modal.jsx');
+import LibraryItem from '../library-item/library-item.jsx';
+import ModalComponent from '../modal/modal.jsx';
 
-const styles = require('./library.css');
+import styles from './library.css';
 
 class LibraryComponent extends React.Component {
     constructor (props) {

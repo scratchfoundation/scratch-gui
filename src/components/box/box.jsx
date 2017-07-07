@@ -1,8 +1,8 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
-const stylePropType = require('react-style-proptype');
-const styles = require('./box.css');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import stylePropType from 'react-style-proptype';
+import styles from './box.css';
 
 const getRandomColor = (function () {
     // In "DEBUG" mode this is used to output a random background color for each

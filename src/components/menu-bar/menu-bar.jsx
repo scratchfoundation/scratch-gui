@@ -1,12 +1,12 @@
-const classNames = require('classnames');
-const React = require('react');
+import classNames from 'classnames';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const LoadButton = require('../../containers/load-button.jsx');
-const SaveButton = require('../../containers/save-button.jsx');
+import Box from '../box/box.jsx';
+import LoadButton from '../../containers/load-button.jsx';
+import SaveButton from '../../containers/save-button.jsx';
 
-const styles = require('./menu-bar.css');
-const scratchLogo = require('./scratch-logo.svg');
+import styles from './menu-bar.css';
+import scratchLogo from './scratch-logo.svg';
 
 const MenuBar = function MenuBar () {
     return (

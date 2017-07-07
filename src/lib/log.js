@@ -1,4 +1,4 @@
-const minilog = require('minilog');
+import minilog from 'minilog';
 minilog.enable();
 
 module.exports = minilog('gui');

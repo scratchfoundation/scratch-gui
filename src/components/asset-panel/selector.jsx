@@ -1,11 +1,11 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const {FormattedMessage} = require('react-intl');
+import PropTypes from 'prop-types';
+import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
-const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
+import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
-const Box = require('../box/box.jsx');
-const styles = require('./selector.css');
+import Box from '../box/box.jsx';
+import styles from './selector.css';
 
 const Selector = props => {
     const {

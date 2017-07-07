@@ -1,12 +1,12 @@
-const bindAll = require('lodash.bindall');
-const debounce = require('lodash.debounce');
-const defaultsDeep = require('lodash.defaultsdeep');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VMScratchBlocks = require('../lib/blocks');
-const VM = require('scratch-vm');
-const Prompt = require('./prompt.jsx');
-const BlocksComponent = require('../components/blocks/blocks.jsx');
+import bindAll from 'lodash.bindall';
+import debounce from 'lodash.debounce';
+import defaultsDeep from 'lodash.defaultsdeep';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VMScratchBlocks from '../lib/blocks';
+import VM from 'scratch-vm';
+import Prompt from './prompt.jsx';
+import BlocksComponent from '../components/blocks/blocks.jsx';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];

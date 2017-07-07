@@ -22,8 +22,8 @@ class SpriteSelectorItem extends React.Component {
     shouldComponentUpdate (nextProps, nextState) {
         return this.state.prompt !== nextState.prompt;
     }
-    handlePromptCallback (data) {
-        this.state.prompt.callback(data);
+    handlePromptCallback () {
+        this.state.prompt.callback(this.props);
         this.handlePromptClose();
     }
     handlePromptClose () {
@@ -34,8 +34,8 @@ class SpriteSelectorItem extends React.Component {
         this.props.onClick(this.props.id);
     }
     handleDelete () {
-        function callback() {
-            this.props.onDeleteButtonClick(this.props.id);
+        function callback(props) {
+            props.onDeleteButtonClick(props.id);
         }
         var message = "Are you sure you want to delete this?";
         this.setState({prompt: {callback, message}});
@@ -51,21 +51,20 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <div>
-                <SpriteSelectorItemComponent
-                    onClick={this.handleClick}
-                    onDeleteButtonClick={this.handleDelete}
-                    {...props}
-                />
+            <SpriteSelectorItemComponent
+                onClick={this.handleClick}
+                onDeleteButtonClick={this.handleDelete}
+                {...props}
+            >
                 {this.state.prompt ? (
-                    <Prompt
+                    <AssetDelete
                         label={this.state.prompt.message}
                         title="Are you sure?"
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
-            </div>
+            </SpriteSelectorItemComponent>
         );
     }
 }

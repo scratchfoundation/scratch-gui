@@ -54,7 +54,7 @@ class CostumeTab extends React.Component {
             onNewCostumeClick,
             onNewBackdropClick
         } = this.props;
-
+        
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
         if (!target) {

@@ -33,7 +33,6 @@ AssetDelete.propTypes = {
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
     title: PropTypes.string.isRequired
 };
 

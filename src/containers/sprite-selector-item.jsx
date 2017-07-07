@@ -2,6 +2,8 @@ const bindAll = require('lodash.bindall');
 const PropTypes = require('prop-types');
 const React = require('react');
 
+const styles = require('../components/sprite-selector/sprite-selector.css');
+
 const {connect} = require('react-redux');
 
 const SpriteSelectorItemComponent = require('../components/sprite-selector-item/sprite-selector-item.jsx');
@@ -51,11 +53,12 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <SpriteSelectorItemComponent
-                onClick={this.handleClick}
-                onDeleteButtonClick={this.handleDelete}
-                {...props}
-            >
+            <Box className={styles.itemsWrapper}>
+                <SpriteSelectorItemComponent
+                    onClick={this.handleClick}
+                    onDeleteButtonClick={this.handleDelete}
+                    {...props}
+                />
                 {this.state.prompt ? (
                     <AssetDelete
                         label={this.state.prompt.message}
@@ -64,7 +67,7 @@ class SpriteSelectorItem extends React.Component {
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
-            </SpriteSelectorItemComponent>
+            </Box>
         );
     }
 }

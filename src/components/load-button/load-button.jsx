@@ -12,8 +12,8 @@ const LoadButtonComponent = ({
     title,
     ...props
 }) => (
-    <span {...props}>
-        <ButtonComponent onClick={onClick}>{title}</ButtonComponent>
+    <span>
+        <ButtonComponent onClick={onClick} {...props}>{title}</ButtonComponent>
         <input
             className={styles.fileInput}
             ref={inputRef}

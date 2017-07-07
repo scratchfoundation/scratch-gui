@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 
 const styles = require('../components/sprite-selector/sprite-selector.css');
+const Box = require('../components/box/box.jsx');
 
 const {connect} = require('react-redux');
 

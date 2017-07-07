@@ -1,8 +1,8 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const styles = require('./button.css');
+import styles from './button.css';
 
 const ButtonComponent = ({
     className,

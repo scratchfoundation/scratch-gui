@@ -1,8 +1,8 @@
-const React = require('react');
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const Selector = require('./selector.jsx');
-const styles = require('./asset-panel.css');
+import Box from '../box/box.jsx';
+import Selector from './selector.jsx';
+import styles from './asset-panel.css';
 
 const AssetPanel = props => (
     <Box className={styles.wrapper}>

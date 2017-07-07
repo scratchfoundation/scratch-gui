@@ -1,11 +1,11 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
-const WavEncoder = require('wav-encoder');
-const {connect} = require('react-redux');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
+import WavEncoder from 'wav-encoder';
+import {connect} from 'react-redux';
 
-const RecordModalComponent = require('../components/record-modal/record-modal.jsx');
+import RecordModalComponent from '../components/record-modal/record-modal.jsx';
 
 const {
     closeSoundRecorder

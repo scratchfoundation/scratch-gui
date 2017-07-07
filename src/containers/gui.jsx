@@ -1,11 +1,11 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
-const bindAll = require('lodash.bindall');
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
+import bindAll from 'lodash.bindall';
 
-const vmListenerHOC = require('../lib/vm-listener-hoc.jsx');
+import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
-const GUIComponent = require('../components/gui/gui.jsx');
+import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
     constructor (props) {

@@ -1,13 +1,14 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const styles = require('../components/sprite-selector/sprite-selector.css');
-const Box = require('../components/box/box.jsx');
+import styles = from '../components/sprite-selector/sprite-selector.css';
+import Box = from '../components/box/box.jsx';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const SpriteSelectorItemComponent = require('../components/sprite-selector-item/sprite-selector-item.jsx');
+
+import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
 const AssetDelete = require('./asset-delete.jsx');
 

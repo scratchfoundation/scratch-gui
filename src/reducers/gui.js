@@ -1,4 +1,4 @@
-const {combineReducers} = require('redux');
+import {combineReducers} from 'redux';
 
 module.exports = combineReducers({
     modals: require('./modals'),

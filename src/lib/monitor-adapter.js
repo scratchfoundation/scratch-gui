@@ -3,7 +3,7 @@
  * - Convert opcode to a label and a category
  * - Add missing XY position data if needed
  */
-const OpcodeLabels = require('./opcode-labels.js');
+import OpcodeLabels from './opcode-labels.js';
 
 const PADDING = 5;
 const MONITOR_HEIGHT = 23;

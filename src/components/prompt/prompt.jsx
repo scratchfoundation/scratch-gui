@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Modal = require('../modal/modal.jsx');
-const Box = require('../box/box.jsx');
+import PropTypes from 'prop-types';
+import React from 'react';
+import Modal from '../modal/modal.jsx';
+import Box from '../box/box.jsx';
 
-const styles = require('./prompt.css');
+import styles from './prompt.css';
 
 const PromptComponent = props => (
     <Modal

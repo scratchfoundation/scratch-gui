@@ -1,10 +1,10 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const SpriteInfo = require('../../containers/sprite-info.jsx');
-const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
-const styles = require('./sprite-selector.css');
+import Box from '../box/box.jsx';
+import SpriteInfo from '../../containers/sprite-info.jsx';
+import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
+import styles from './sprite-selector.css';
 
 const SpriteSelectorComponent = function (props) {
     const {

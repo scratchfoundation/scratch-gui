@@ -1,10 +1,10 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const filterIcon = require('./icon--filter.svg');
-const xIcon = require('./icon--x.svg');
-const styles = require('./filter.css');
+import filterIcon from './icon--filter.svg';
+import xIcon from './icon--x.svg';
+import styles from './filter.css';
 
 const FilterComponent = props => {
     const {

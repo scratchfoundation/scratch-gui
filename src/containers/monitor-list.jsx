@@ -1,9 +1,9 @@
-const bindAll = require('lodash.bindall');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import React from 'react';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const MonitorListComponent = require('../components/monitor-list/monitor-list.jsx');
+import MonitorListComponent from '../components/monitor-list/monitor-list.jsx';
 
 class MonitorList extends React.Component {
     constructor (props) {

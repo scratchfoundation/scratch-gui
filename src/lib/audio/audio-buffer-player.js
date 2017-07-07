@@ -1,4 +1,4 @@
-const SharedAudioContext = require('./shared-audio-context.js');
+import SharedAudioContext from './shared-audio-context.js';
 
 class AudioBufferPlayer {
     constructor (samples) {

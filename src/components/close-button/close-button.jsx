@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const classNames = require('classnames');
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
-const styles = require('./close-button.css');
-const closeIcon = require('./icon--close.svg');
+import styles from './close-button.css';
+import closeIcon from './icon--close.svg';
 
 const CloseButton = props => (
     <div

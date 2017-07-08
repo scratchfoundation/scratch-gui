@@ -25,7 +25,7 @@ const AssetDeleteComponent = props => (
                 <SpriteSelectorItem
                     costumeURL={this.props.assetURL}
                     name={this.props.assetName}
-                    selected=false
+                    selected={false}
                 />
             </Box>
             <Box className={styles.buttonRow}>

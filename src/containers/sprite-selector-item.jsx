@@ -35,7 +35,7 @@ class SpriteSelectorItem extends React.Component {
     handleDelete () {
         const callback = function (props) {
             props.onDeleteButtonClick(props.id);
-        }
+        };
         const message = 'Are you sure you want to delete this?';
         this.setState({prompt: {callback, message}});
     }

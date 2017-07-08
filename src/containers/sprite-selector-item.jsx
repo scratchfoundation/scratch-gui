@@ -2,8 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Box from '../components/box/box.jsx';
-
 import {connect} from 'react-redux';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
@@ -50,10 +48,9 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <Box
-                grow={1}
-            >
+            <div>
                 <SpriteSelectorItemComponent
+                    style={width:'64px'}
                     onClick={this.handleClick}
                     onDeleteButtonClick={this.handleDelete}
                     {...props}
@@ -66,7 +63,7 @@ class SpriteSelectorItem extends React.Component {
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
-            </Box>
+            </div>
         );
     }
 }

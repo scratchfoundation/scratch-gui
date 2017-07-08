@@ -56,8 +56,8 @@ class SpriteSelectorItem extends React.Component {
                 />
                 {this.state.prompt ? (
                     <AssetDelete
-                        assetURL={this.props.costumeURL}
                         assetName={this.props.name}
+                        assetURL={this.props.costumeURL}
                         label={this.state.prompt.message}
                         title="Are you sure?"
                         onCancel={this.handlePromptClose}

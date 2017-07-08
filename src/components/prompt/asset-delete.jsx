@@ -19,12 +19,12 @@ const AssetDeleteComponent = props => (
                 {props.label}
             </Box>
             <Box
-                width="100%"
                 alignItems="center"
+                width="100%"
             >
                 <SpriteSelectorItem
-                    costumeURL={this.props.assetURL}
-                    name={this.props.assetName}
+                    costumeURL={props.assetURL}
+                    name={props.assetName}
                     selected={false}
                 />
             </Box>
@@ -47,12 +47,12 @@ const AssetDeleteComponent = props => (
 );
 
 AssetDeleteComponent.propTypes = {
+    assetURL: PropTypes.string.isRequired,
+    assetName: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    assetURL: PropTypes.string.isRequired,
-    assetName: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
 };
 
 module.exports = AssetDeleteComponent;

@@ -20,24 +20,24 @@ class AssetDelete extends React.Component {
     render () {
         return (
             <AssetDeleteComponent
+                assetURL={this.props.assetURL}
+                assetName={this.props.assetName}
                 label={this.props.label}
                 title={this.props.title}
                 onCancel={this.handleCancel}
                 onOk={this.handleOk}
-                assetURL={this.props.assetURL}
-                assetName={this.props.assetName}
             />
         );
     }
 }
 
-AssetDelete.propTypes = {
+AssetDelete.propTypes = {,
+    assetURL: PropTypes.string.isRequired,
+    assetName: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    assetURL: PropTypes.string.isRequired,
-    assetName: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
 };
 
 module.exports = AssetDelete;

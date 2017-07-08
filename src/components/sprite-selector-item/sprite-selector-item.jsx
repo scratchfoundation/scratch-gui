@@ -16,8 +16,8 @@ const SpriteSelectorItem = props => (
                 [styles.isSelected]: props.selected
             }
         )}
-        onClick={props.onClick}
         width='64px'
+        onClick={props.onClick}
     >
         {props.selected ? (
             <CloseButton

@@ -20,7 +20,9 @@ const AssetDeleteComponent = props => (
             </Box>
             <Box
                 alignItems="center"
-                width="100%"
+                className={styles.label}
+                justifyContent="center"
+                style={{display: "flex"}}
             >
                 <SpriteSelectorItemComponent
                     costumeURL={props.assetURL}

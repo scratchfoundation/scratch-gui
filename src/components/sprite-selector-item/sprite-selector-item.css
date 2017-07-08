@@ -17,6 +17,7 @@
     border-radius: $space;
     text-align: center;
     cursor: pointer;
+    width: 64px;
 }
 
 .sprite-selector-item:hover {

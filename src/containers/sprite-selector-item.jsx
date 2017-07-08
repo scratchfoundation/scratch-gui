@@ -21,9 +21,6 @@ class SpriteSelectorItem extends React.Component {
         ]);
         this.state = {prompt: null};
     }
-    shouldComponentUpdate (nextProps, nextState) {
-        return this.state.prompt !== nextState.prompt;
-    }
     handlePromptCallback () {
         this.state.prompt.callback(this.props);
         this.handlePromptClose();

@@ -5,6 +5,8 @@ const Box = require('../box/box.jsx');
 
 const styles = require('./prompt.css');
 
+const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
+
 const AssetDeleteComponent = props => (
     <Modal
         visible
@@ -15,6 +17,16 @@ const AssetDeleteComponent = props => (
         <Box className={styles.body}>
             <Box className={styles.label}>
                 {props.label}
+            </Box>
+            <Box
+                width="100%"
+                alignItems="center"
+            >
+                <SpriteSelectorItem
+                    costumeURL={this.props.assetURL}
+                    name={this.props.assetName}
+                    selected=false
+                />
             </Box>
             <Box className={styles.buttonRow}>
                 <button
@@ -38,7 +50,9 @@ AssetDeleteComponent.propTypes = {
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    assetURL: PropTypes.string.isRequired,
+    assetName: PropTypes.string.isRequired
 };
 
 module.exports = AssetDeleteComponent;

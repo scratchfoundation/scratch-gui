@@ -47,8 +47,8 @@ const AssetDeleteComponent = props => (
 );
 
 AssetDeleteComponent.propTypes = {
-    assetURL: PropTypes.string.isRequired,
     assetName: PropTypes.string.isRequired,
+    assetURL: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,

@@ -50,7 +50,6 @@ class SpriteSelectorItem extends React.Component {
         return (
             <div>
                 <SpriteSelectorItemComponent
-                    style={{width: '64px'}}
                     onClick={this.handleClick}
                     onDeleteButtonClick={this.handleDelete}
                     {...props}

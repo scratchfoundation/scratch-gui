@@ -2,13 +2,13 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Box = from '../components/box/box.jsx';
+import Box from '../components/box/box.jsx';
 
 import {connect} from 'react-redux';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
-const AssetDelete = require('./asset-delete.jsx');
+import AssetDelete from './asset-delete.jsx';
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {

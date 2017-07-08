@@ -22,7 +22,7 @@ const AssetDeleteComponent = props => (
                 alignItems="center"
                 width="100%"
             >
-                <SpriteSelectorItem
+                <SpriteSelectorItemComponent
                     costumeURL={props.assetURL}
                     name={props.assetName}
                     selected={false}

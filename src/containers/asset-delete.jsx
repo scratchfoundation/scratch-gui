@@ -31,7 +31,7 @@ class AssetDelete extends React.Component {
     }
 }
 
-AssetDelete.propTypes = {,
+AssetDelete.propTypes = {
     assetURL: PropTypes.string.isRequired,
     assetName: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,

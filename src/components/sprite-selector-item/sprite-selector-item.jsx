@@ -35,10 +35,12 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
+        {props.children}
     </Box>
 );
 
 SpriteSelectorItem.propTypes = {
+    children: PropTypes.node,
     className: PropTypes.string,
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,

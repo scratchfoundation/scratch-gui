@@ -16,6 +16,7 @@ const SpriteSelectorItem = props => (
                 [styles.isSelected]: props.selected
             }
         )}
+        width={this.props.width}
         onClick={props.onClick}
     >
         {props.selected ? (
@@ -45,7 +46,11 @@ SpriteSelectorItem.propTypes = {
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
-    selected: PropTypes.bool.isRequired
+    selected: PropTypes.bool.isRequired,
+    width: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ])
 };
 
 module.exports = SpriteSelectorItem;

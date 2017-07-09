@@ -16,7 +16,6 @@ const SpriteSelectorItem = props => (
                 [styles.isSelected]: props.selected
             }
         )}
-        width="64px"
         onClick={props.onClick}
     >
         {props.selected ? (

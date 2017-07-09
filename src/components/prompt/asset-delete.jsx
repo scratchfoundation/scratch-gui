@@ -28,6 +28,7 @@ const AssetDeleteComponent = props => (
                     costumeURL={props.assetURL}
                     name={props.assetName}
                     selected={false}
+                    width="20%"
                 />
             </Box>
             <Box className={styles.buttonRow}>

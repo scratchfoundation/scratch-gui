@@ -48,12 +48,11 @@ class SpriteSelectorItem extends React.Component {
             ...props
         } = this.props;
         return (
-            <div>
-                <SpriteSelectorItemComponent
-                    onClick={this.handleClick}
-                    onDeleteButtonClick={this.handleDelete}
-                    {...props}
-                />
+            <SpriteSelectorItemComponent
+                onClick={this.handleClick}
+                onDeleteButtonClick={this.handleDelete}
+                {...props}
+            >
                 {this.state.prompt ? (
                     <AssetDelete
                         assetName={this.props.name}
@@ -64,7 +63,7 @@ class SpriteSelectorItem extends React.Component {
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
-            </div>
+            </SpriteSelectorItemComponent>
         );
     }
 }

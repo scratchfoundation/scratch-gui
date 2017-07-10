@@ -59,7 +59,7 @@
     "react-modal": "1.7.7",
     "react-redux": "5.0.5",
     "react-style-proptype": "3.0.0",
-    "react-tabs": "1.0.0",
+    "react-tabs": "1.1.0",
     "redux": "3.6.0",
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",

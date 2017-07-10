@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const bindAll = require('lodash.bindall');
-const AudioTrimmerComponent = require('../components/audio-trimmer/audio-trimmer.jsx');
+import React from 'react';
+import PropTypes from 'prop-types';
+import bindAll from 'lodash.bindall';
+import AudioTrimmerComponent from '../components/audio-trimmer/audio-trimmer.jsx';
 
 class AudioTrimmer extends React.Component {
     constructor (props) {

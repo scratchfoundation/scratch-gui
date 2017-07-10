@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const classNames = require('classnames');
-const Box = require('../box/box.jsx');
-const styles = require('./audio-trimmer.css');
-const handleIcon = require('./icon--handle.svg');
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
+import Box from '../box/box.jsx';
+import styles from './audio-trimmer.css';
+import handleIcon from './icon--handle.svg';
 
 const AudioTrimmer = props => (
     <div

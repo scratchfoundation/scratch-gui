@@ -19,7 +19,12 @@ class PlaybackStep extends React.Component {
         this.audioBufferPlayer.stop();
     }
     handlePlay () {
-        this.audioBufferPlayer.play(this.props.onStopPlaying);
+        this.audioBufferPlayer.play(
+            this.props.trimStart,
+            this.props.trimEnd,
+            this.props.onSetPlayhead,
+            this.props.onStopPlaying
+        );
         this.props.onPlay();
     }
     handleStopPlaying () {
@@ -30,6 +35,7 @@ class PlaybackStep extends React.Component {
         const {
             onPlay, // eslint-disable-line no-unused-vars
             onStopPlaying, // eslint-disable-line no-unused-vars
+            onSetPlayhead, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (

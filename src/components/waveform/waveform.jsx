@@ -27,8 +27,8 @@ const Waveform = props => {
 
     return (
         <svg
-            height={height}
-            width={width}
+            className={styles.container}
+            viewBox={`0 0 ${width} ${height}`}
         >
             <g transform={`scale(1, -1) translate(0, -${height / 2})`}>
                 <path

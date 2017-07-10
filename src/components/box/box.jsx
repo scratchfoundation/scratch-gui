@@ -96,9 +96,9 @@ Box.propTypes = {
     children: PropTypes.node,
     /** Specifies the class name that will be set on this box */
     className: PropTypes.string,
-    /** 
-     * A callback function whose first parameter is the underlying dom elements. 
-     * This call back will be executed immediately after the component is mounted or unmounted 
+    /**
+     * A callback function whose first parameter is the underlying dom elements.
+     * This call back will be executed immediately after the component is mounted or unmounted
      */
     componentRef: PropTypes.func,
     /** https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction */

@@ -62,7 +62,7 @@ const GUIComponent = props => {
                             onSelect={onTabSelect}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>Scripts</Tab>
+                                <Tab className={tabClassNames.tab}>Blocks</Tab>
                                 <Tab className={tabClassNames.tab}>Costumes</Tab>
                                 <Tab className={tabClassNames.tab}>Sounds</Tab>
                             </TabList>
@@ -70,7 +70,7 @@ const GUIComponent = props => {
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
-                                        isVisible={tabIndex === 0} // Scripts tab
+                                        isVisible={tabIndex === 0} // Blocks tab
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}

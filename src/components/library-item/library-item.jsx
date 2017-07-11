@@ -1,9 +1,9 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const styles = require('./library-item.css');
+import Box from '../box/box.jsx';
+import styles from './library-item.css';
 
 class LibraryItem extends React.PureComponent {
     constructor (props) {

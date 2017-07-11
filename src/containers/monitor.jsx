@@ -1,9 +1,9 @@
-const bindAll = require('lodash.bindall');
-const React = require('react');
-const PropTypes = require('prop-types');
+import bindAll from 'lodash.bindall';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const monitorAdapter = require('../lib/monitor-adapter.js');
-const MonitorComponent = require('../components/monitor/monitor.jsx');
+import monitorAdapter from '../lib/monitor-adapter.js';
+import MonitorComponent from '../components/monitor/monitor.jsx';
 
 class Monitor extends React.Component {
     constructor (props) {

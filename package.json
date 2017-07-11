@@ -20,11 +20,11 @@
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
   "peerDependencies": {
-    "react": "^15",
+    "react": "^15.6.0",
     "react-dom": "^15.6.0"
   },
   "devDependencies": {
-    "autoprefixer": "7.1.1",
+    "autoprefixer": "7.1.2",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
@@ -55,10 +55,11 @@
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-draggable": "2.2.6",
-    "react-modal": "1.7.7",
+    "react-modal": "2.2.1",
+    "react-intl": "2.3.0",
     "react-redux": "5.0.5",
     "react-style-proptype": "3.0.0",
-    "react-tabs": "1.0.0",
+    "react-tabs": "1.1.0",
     "redux": "3.6.0",
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
@@ -69,7 +70,8 @@
     "scratch-vm": "latest",
     "style-loader": "^0.18.0",
     "svg-to-image": "1.1.3",
-    "svg-url-loader": "2.0.2",
+    "svg-url-loader": "2.1.0",
+    "wav-encoder": "1.1.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.1",
     "xhr": "2.4.0"

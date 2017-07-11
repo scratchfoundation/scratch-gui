@@ -1,4 +1,4 @@
-const ScratchStorage = require('scratch-storage');
+import ScratchStorage from 'scratch-storage';
 
 const PROJECT_SERVER = 'https://cdn.projects.scratch.mit.edu';
 const ASSET_SERVER = 'https://cdn.assets.scratch.mit.edu';

@@ -1,9 +1,9 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const {connect} = require('react-redux');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {connect} from 'react-redux';
 
-const LoadButtonComponent = require('../components/load-button/load-button.jsx');
+import LoadButtonComponent from '../components/load-button/load-button.jsx';
 
 class LoadButton extends React.Component {
     constructor (props) {

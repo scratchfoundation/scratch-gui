@@ -1,0 +1,14 @@
+.green {
+    fill: rgb(171, 220, 170);
+    stroke: rgb(174, 211, 168);
+}
+
+.yellow {
+    fill: rgb(251, 219, 130);
+    stroke: rgb(239, 212, 134);
+}
+
+.red {
+    fill: rgb(251, 194, 142);
+    stroke: rgb(235, 189, 142);
+}

@@ -1,10 +1,10 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
-const styles = require('./stage-selector.css');
+import Box from '../box/box.jsx';
+import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
+import styles from './stage-selector.css';
 
 const StageSelector = props => {
     const {

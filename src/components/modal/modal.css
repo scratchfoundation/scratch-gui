@@ -11,16 +11,17 @@
     background-color: rgba(0, 0, 0, .75);
 }
 
-/* @todo: extract to type: full ? */
-.full-modal-content {
-    position: absolute;
+.modal-content {
+    margin: 100px auto;
     outline: none;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: 'touch';
+    border: 3px solid rgb(126, 133, 151);
+    padding: 0;
+    border-radius: $space;
     user-select: none;
-    height: 100%;
-    width: 100%;
-    display: flex;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #5d647a;
+    overflow: hidden;
 }
 
 /*
@@ -41,7 +42,7 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $blue;
+    background-color: $motion-primary;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
@@ -76,4 +77,3 @@ $sides: 20rem;
     flex-basis: $sides;
     justify-content: flex-end;
 }
-

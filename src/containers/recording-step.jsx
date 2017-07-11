@@ -1,7 +1,7 @@
-const React = require('react');
-const bindAll = require('lodash.bindall');
-const RecordingStepComponent = require('../components/record-modal/recording-step.jsx');
-const AudioRecorder = require('../lib/audio/audio-recorder.js');
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import RecordingStepComponent from '../components/record-modal/recording-step.jsx';
+import AudioRecorder from '../lib/audio/audio-recorder.js';
 
 class RecordingStep extends React.Component {
     constructor (props) {
@@ -9,21 +9,26 @@ class RecordingStep extends React.Component {
         bindAll(this, [
             'handleRecord',
             'handleStopRecording',
+            'handleStarted',
             'handleLevelUpdate',
             'handleRecordingError'
         ]);
 
         this.state = {
+            listening: false,
             level: 0,
             levels: null
         };
     }
     componentDidMount () {
         this.audioRecorder = new AudioRecorder();
-        this.audioRecorder.startListening(this.handleLevelUpdate, this.handleRecordingError);
+        this.audioRecorder.startListening(this.handleStarted, this.handleLevelUpdate, this.handleRecordingError);
     }
     componentWillUnmount () {
         this.audioRecorder.dispose();
+    }
+    handleStarted () {
+        this.setState({listening: true});
     }
     handleRecordingError () {
         alert('Could not start recording'); // eslint-disable-line no-alert
@@ -39,8 +44,8 @@ class RecordingStep extends React.Component {
         this.props.onRecord();
     }
     handleStopRecording () {
-        const {samples, sampleRate, levels} = this.audioRecorder.stop();
-        this.props.onStopRecording(samples, sampleRate, levels);
+        const {samples, sampleRate, levels, trimStart, trimEnd} = this.audioRecorder.stop();
+        this.props.onStopRecording(samples, sampleRate, levels, trimStart, trimEnd);
     }
     render () {
         const {
@@ -52,6 +57,7 @@ class RecordingStep extends React.Component {
             <RecordingStepComponent
                 level={this.state.level}
                 levels={this.state.levels}
+                listening={this.state.listening}
                 onRecord={this.handleRecord}
                 onStopRecording={this.handleStopRecording}
                 {...componentProps}

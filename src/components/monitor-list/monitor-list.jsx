@@ -1,11 +1,11 @@
-const React = require('react');
-const Box = require('../box/box.jsx');
-const Monitor = require('../../containers/monitor.jsx');
-const PropTypes = require('prop-types');
-const {OrderedMap} = require('immutable');
+import React from 'react';
+import Box from '../box/box.jsx';
+import Monitor from '../../containers/monitor.jsx';
+import PropTypes from 'prop-types';
+import {OrderedMap} from 'immutable';
 
 
-const styles = require('./monitor-list.css');
+import styles from './monitor-list.css';
 
 const MonitorList = props => (
     <Box

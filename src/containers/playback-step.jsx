@@ -1,8 +1,8 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const bindAll = require('lodash.bindall');
-const PlaybackStepComponent = require('../components/record-modal/playback-step.jsx');
-const AudioBufferPlayer = require('../lib/audio/audio-buffer-player.js');
+import React from 'react';
+import PropTypes from 'prop-types';
+import bindAll from 'lodash.bindall';
+import PlaybackStepComponent from '../components/record-modal/playback-step.jsx';
+import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
 
 class PlaybackStep extends React.Component {
     constructor (props) {
@@ -19,7 +19,12 @@ class PlaybackStep extends React.Component {
         this.audioBufferPlayer.stop();
     }
     handlePlay () {
-        this.audioBufferPlayer.play(this.props.onStopPlaying);
+        this.audioBufferPlayer.play(
+            this.props.trimStart,
+            this.props.trimEnd,
+            this.props.onSetPlayhead,
+            this.props.onStopPlaying
+        );
         this.props.onPlay();
     }
     handleStopPlaying () {
@@ -30,6 +35,7 @@ class PlaybackStep extends React.Component {
         const {
             onPlay, // eslint-disable-line no-unused-vars
             onStopPlaying, // eslint-disable-line no-unused-vars
+            onSetPlayhead, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (

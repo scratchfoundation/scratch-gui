@@ -1,12 +1,12 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const targets = require('../reducers/targets');
-const monitors = require('../reducers/monitors');
+import targets from '../reducers/targets';
+import monitors from '../reducers/monitors';
 
 /*
  * Higher Order Component to manage events emitted by the VM

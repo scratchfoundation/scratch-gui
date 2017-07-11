@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const MonitorList = require('../../containers/monitor-list.jsx');
-const styles = require('./stage.css');
+import Box from '../box/box.jsx';
+import MonitorList from '../../containers/monitor-list.jsx';
+import styles from './stage.css';
 
 const StageComponent = props => {
     const {

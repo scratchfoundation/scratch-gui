@@ -1,11 +1,11 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const Renderer = require('scratch-render');
-const AudioEngine = require('scratch-audio');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Renderer from 'scratch-render';
+import AudioEngine from 'scratch-audio';
+import VM from 'scratch-vm';
 
-const StageComponent = require('../components/stage/stage.jsx');
+import StageComponent from '../components/stage/stage.jsx';
 
 class Stage extends React.Component {
     constructor (props) {

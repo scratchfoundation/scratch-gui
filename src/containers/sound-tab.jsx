@@ -1,17 +1,17 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const bindAll = require('lodash.bindall');
+import PropTypes from 'prop-types';
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import {defineMessages} from 'react-intl';
+import VM from 'scratch-vm';
 
-const VM = require('scratch-vm');
+import AssetPanel from '../components/asset-panel/asset-panel.jsx';
+import soundIcon from '../components/asset-panel/icon--sound.svg';
+import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-lib.svg';
+import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
 
-const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
-const soundIcon = require('../components/asset-panel/icon--sound.svg');
-const addSoundFromLibraryIcon = require('../components/asset-panel/icon--add-sound-lib.svg');
-const addSoundFromRecordingIcon = require('../components/asset-panel/icon--add-sound-record.svg');
+import RecordModal from './record-modal.jsx';
 
-const RecordModal = require('./record-modal.jsx');
-
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
 const {
     openSoundLibrary,
@@ -74,14 +74,27 @@ class SoundTab extends React.Component {
             }
         )) : [];
 
+        const messages = defineMessages({
+            recordSound: {
+                id: 'action.recordSound',
+                defaultMessage: 'Record Sound',
+                description: 'Button to record a sound in the editor tab'
+            },
+            addSound: {
+                id: 'action.addSound',
+                defaultMessage: 'Add Sound',
+                description: 'Button to add a sound in the editor tab'
+            }
+        });
+
         return (
             <AssetPanel
                 buttons={[{
-                    text: 'Record Sound',
+                    message: messages.recordSound,
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    text: 'Add Sound',
+                    message: messages.addSound,
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}

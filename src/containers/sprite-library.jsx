@@ -1,11 +1,11 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
 
-const spriteLibraryContent = require('../lib/libraries/sprites.json');
+import spriteLibraryContent from '../lib/libraries/sprites.json';
 
-const LibraryComponent = require('../components/library/library.jsx');
+import LibraryComponent from '../components/library/library.jsx';
 
 class SpriteLibrary extends React.PureComponent {
     constructor (props) {

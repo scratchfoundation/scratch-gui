@@ -1,13 +1,14 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Box = require('../box/box.jsx');
-const Waveform = require('../waveform/waveform.jsx');
-const Meter = require('../meter/meter.jsx');
+import PropTypes from 'prop-types';
+import React from 'react';
+import Box from '../box/box.jsx';
+import Waveform from '../waveform/waveform.jsx';
+import Meter from '../meter/meter.jsx';
+import AudioTrimmer from '../../containers/audio-trimmer.jsx';
 
-const styles = require('./record-modal.css');
-const backIcon = require('./icon--back.svg');
-const stopIcon = require('./icon--stop-playback.svg');
-const playIcon = require('./icon--play.svg');
+import styles from './record-modal.css';
+import backIcon from './icon--back.svg';
+import stopIcon from './icon--stop-playback.svg';
+import playIcon from './icon--play.svg';
 
 const PlaybackStep = props => (
     <Box>
@@ -25,7 +26,14 @@ const PlaybackStep = props => (
                     data={props.levels}
                     height={150}
                     level={0}
-                    width={440}
+                    width={480}
+                />
+                <AudioTrimmer
+                    playhead={props.playhead}
+                    trimEnd={props.trimEnd}
+                    trimStart={props.trimStart}
+                    onSetTrimEnd={props.onSetTrimEnd}
+                    onSetTrimStart={props.onSetTrimStart}
                 />
             </Box>
         </Box>
@@ -54,7 +62,7 @@ const PlaybackStep = props => (
                 disabled={props.encoding}
                 onClick={props.onSubmit}
             >
-                {props.encoding ? 'Loading...' : 'OK'}
+                {props.encoding ? 'Loading...' : 'Save'}
             </button>
         </Box>
     </Box>
@@ -65,9 +73,14 @@ PlaybackStep.propTypes = {
     levels: PropTypes.arrayOf(PropTypes.number).isRequired,
     onBack: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
+    onSetTrimEnd: PropTypes.func.isRequired,
+    onSetTrimStart: PropTypes.func.isRequired,
     onStopPlaying: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    playing: PropTypes.bool.isRequired
+    playhead: PropTypes.number,
+    playing: PropTypes.bool.isRequired,
+    trimEnd: PropTypes.number.isRequired,
+    trimStart: PropTypes.number.isRequired
 };
 
 module.exports = PlaybackStep;

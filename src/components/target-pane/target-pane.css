@@ -44,6 +44,7 @@
 
 .add-button {
     height: 0.8rem;
+    margin: auto;
 }
 
 /* @todo: This is hacky. Better: move buttons in their corresponding panes, and set values relatively */

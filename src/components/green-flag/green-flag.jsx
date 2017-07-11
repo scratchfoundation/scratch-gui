@@ -1,9 +1,9 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const greenFlagIcon = require('./icon--green-flag.svg');
-const styles = require('./green-flag.css');
+import greenFlagIcon from './icon--green-flag.svg';
+import styles from './green-flag.css';
 
 const GreenFlagComponent = function (props) {
     const {

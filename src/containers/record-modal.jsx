@@ -1,11 +1,11 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
-const WavEncoder = require('wav-encoder');
-const {connect} = require('react-redux');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
+import WavEncoder from 'wav-encoder';
+import {connect} from 'react-redux';
 
-const RecordModalComponent = require('../components/record-modal/record-modal.jsx');
+import RecordModalComponent from '../components/record-modal/record-modal.jsx';
 
 const {
     closeSoundRecorder
@@ -21,38 +21,57 @@ class RecordModal extends React.Component {
             'handleStopPlaying',
             'handleBack',
             'handleSubmit',
-            'handleCancel'
+            'handleCancel',
+            'handleSetPlayhead',
+            'handleSetTrimStart',
+            'handleSetTrimEnd'
         ]);
 
         this.state = {
             samples: null,
             encoding: false,
             levels: null,
+            playhead: null,
             playing: false,
             recording: false,
-            sampleRate: null
+            sampleRate: null,
+            trimStart: 0,
+            trimEnd: 1
         };
     }
     handleRecord () {
         this.setState({recording: true});
     }
-    handleStopRecording (samples, sampleRate, levels) {
-        this.setState({samples, sampleRate, levels, recording: false});
+    handleStopRecording (samples, sampleRate, levels, trimStart, trimEnd) {
+        this.setState({samples, sampleRate, levels, trimStart, trimEnd, recording: false});
     }
     handlePlay () {
         this.setState({playing: true});
     }
     handleStopPlaying () {
-        this.setState({playing: false});
+        this.setState({playing: false, playhead: null});
     }
     handleBack () {
         this.setState({playing: false, samples: null});
     }
+    handleSetTrimEnd (trimEnd) {
+        this.setState({trimEnd});
+    }
+    handleSetTrimStart (trimStart) {
+        this.setState({trimStart});
+    }
+    handleSetPlayhead (playhead) {
+        this.setState({playhead});
+    }
     handleSubmit () {
         this.setState({encoding: true}, () => {
+            const sampleCount = this.state.samples.length;
+            const startIndex = Math.floor(this.state.trimStart * sampleCount);
+            const endIndex = Math.floor(this.state.trimEnd * sampleCount);
+            const clippedSamples = this.state.samples.slice(startIndex, endIndex);
             WavEncoder.encode({
                 sampleRate: this.state.sampleRate,
-                channelData: [this.state.samples]
+                channelData: [clippedSamples]
             }).then(wavBuffer => {
                 const md5 = String(Math.floor(100000 * Math.random()));
                 const vmSound = {
@@ -83,13 +102,19 @@ class RecordModal extends React.Component {
             <RecordModalComponent
                 encoding={this.state.encoding}
                 levels={this.state.levels}
+                playhead={this.state.playhead}
                 playing={this.state.playing}
                 recording={this.state.recording}
                 samples={this.state.samples}
+                trimEnd={this.state.trimEnd}
+                trimStart={this.state.trimStart}
                 onBack={this.handleBack}
                 onCancel={this.handleCancel}
                 onPlay={this.handlePlay}
                 onRecord={this.handleRecord}
+                onSetPlayhead={this.handleSetPlayhead}
+                onSetTrimEnd={this.handleSetTrimEnd}
+                onSetTrimStart={this.handleSetTrimStart}
                 onStopPlaying={this.handleStopPlaying}
                 onStopRecording={this.handleStopRecording}
                 onSubmit={this.handleSubmit}

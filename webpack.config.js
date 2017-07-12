@@ -38,7 +38,7 @@ module.exports = {
                 plugins: [
                     'transform-object-rest-spread',
                     ['react-intl', {
-                        messagesDir: './build/messages/'
+                        messagesDir: './translations/messages/'
                     }]],
                 presets: ['es2015', 'react']
             }

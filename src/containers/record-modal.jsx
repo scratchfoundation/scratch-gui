@@ -105,6 +105,7 @@ class RecordModal extends React.Component {
                 playhead={this.state.playhead}
                 playing={this.state.playing}
                 recording={this.state.recording}
+                sampleRate={this.state.sampleRate}
                 samples={this.state.samples}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}

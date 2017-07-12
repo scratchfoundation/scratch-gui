@@ -8,8 +8,8 @@ import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import soundIcon from '../components/asset-panel/icon--sound.svg';
 import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-lib.svg';
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
-
 import RecordModal from './record-modal.jsx';
+import SoundEditor from './sound-editor.jsx';
 
 import {connect} from 'react-redux';
 
@@ -43,8 +43,6 @@ class SoundTab extends React.Component {
     }
 
     handleSelectSound (soundIndex) {
-        const sound = this.props.vm.editingTarget.sprite.sounds[soundIndex];
-        this.props.vm.editingTarget.audioPlayer.playSound(sound.md5);
         this.setState({selectedSoundIndex: soundIndex});
     }
 
@@ -108,6 +106,9 @@ class SoundTab extends React.Component {
                 onDeleteClick={this.handleDeleteSound}
                 onItemClick={this.handleSelectSound}
             >
+                {target.sounds ? (
+                    <SoundEditor soundIndex={this.state.selectedSoundIndex} />
+                ) : null}
                 {this.props.soundRecorderVisible ? (
                     <RecordModal />
                 ) : null}

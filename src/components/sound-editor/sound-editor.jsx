@@ -6,6 +6,7 @@ const Waveform = require('../waveform/waveform.jsx');
 const BufferedInput = require('../buffered-input/buffered-input.jsx');
 
 const styles = require('./sound-editor.css');
+const formStyles = require('../../css/forms.css');
 
 const playIcon = require('../record-modal/icon--play.svg');
 const stopIcon = require('../record-modal/icon--stop-playback.svg');
@@ -31,10 +32,9 @@ const SoundEditor = props => (
                 )}
             </Box>
             <Box className={styles.inputGroup}>
-                <span className={styles.inputLabel}>Sound</span>
+                <span className={formStyles.inputLabel}>Sound</span>
                 <BufferedInput
-                    className={classNames(styles.inputForm, styles.soundName)}
-                    placeholder="Sound Name"
+                    className={classNames(formStyles.inputForm, styles.soundName)}
                     tabIndex="1"
                     type="text"
                     value={props.name}

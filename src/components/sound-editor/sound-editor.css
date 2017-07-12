@@ -1,13 +1,10 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-$spacing: 1rem;
-$button-border-radius: 3px;
-
 .editor-container {
     display: flex;
     flex-direction: column;
-    padding: $spacing;
+    padding: calc(2 * $space);
 }
 
 .row {
@@ -17,14 +14,11 @@ $button-border-radius: 3px;
 }
 
 .row + .row {
-    margin-top: $spacing;
+    margin-top: calc(2 * $space);
 }
 
-.input-group {
-
-}
 .input-group + .input-group {
-    margin-left: calc($spacing);
+    margin-left: calc(2 * $space);
 }
 
 .waveform-container {
@@ -47,90 +41,12 @@ $button-border-radius: 3px;
     padding: 0.25rem;
     outline: none;
     background: white;
-    border-radius: $button-border-radius;
+    border-radius: 0.25rem;
     border: 1px solid #ddd;
-
-    /*display: flex;
-    align-items: center;
-    justify-content: center;*/
 }
 
 .button img {
     flex-grow: 1;
     max-width: 100%;
     max-height: 100%;
-}
-
-.trim-red img {
-    filter: hue-rotate(180deg);
-}
-.button-group .button {
-    border-radius: 0;
-}
-.button-group .button:first-of-type {
-    border-top-left-radius: $button-border-radius;
-    border-bottom-left-radius: $button-border-radius;
-}
-.button-group .button:last-of-type {
-    border-top-right-radius: $button-border-radius;
-    border-bottom-right-radius: $button-border-radius;
-}
-.button-group .button + .button {
-    border-left: 0px;
-}
-
-.input-label {
-    font-size: 0.625rem;
-    font-weight: bold;
-    margin-right: calc($space / 2);
-    color: #575e75;
-
-    /* @todo: make this a mixin for all UI text labels */
-    user-select: none;
-    cursor: default;
-}
-
-.input-form {
-    padding: $space 0.75rem;
-
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.625rem;
-    font-weight: bold;
-
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ddd;
-    /*border-radius: $button-border-radius;*/
-    border-radius: 2rem;
-
-    outline: none;
-    cursor: text;
-    transition: 0.25s ease-out; /* @todo: standardize with var */
-    box-shadow: none;
-
-    /*
-        For truncating overflowing text gracefully
-        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
-        @todo: move this out into a mixin or a helper component
-    */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 0;
-}
-
-.input-form:focus {
-    border-color: #4c97ff;
-    box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-button {
-    background: #ddd;
-    color: $motion-primary;
-    height: 2rem;
-    padding: 0 1rem;
-    line-height: 2rem;
-    border-radius: $button-border-radius;
-    font-weight: bold;
-    font-size: 0.625rem;
 }

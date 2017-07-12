@@ -5,6 +5,7 @@ import React from 'react';
 import Box from '../box/box.jsx';
 import BufferedInput from '../buffered-input/buffered-input.jsx';
 import styles from './sprite-info.css';
+import formStyles from '../../css/forms.css';
 
 import xIcon from './icon--x.svg';
 import yIcon from './icon--y.svg';
@@ -32,9 +33,9 @@ class SpriteInfo extends React.Component {
             >
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabel}>Sprite</span>
+                        <span className={formStyles.inputLabel}>Sprite</span>
                         <BufferedInput
-                            className={classNames(styles.inputForm, styles.spriteName)}
+                            className={classNames(formStyles.inputForm, styles.spriteName)}
                             disabled={this.props.disabled}
                             placeholder="Name"
                             tabIndex="1"
@@ -51,9 +52,9 @@ class SpriteInfo extends React.Component {
                                 src={xIcon}
                             />
                         </div>
-                        <span className={styles.inputLabel}>x</span>
+                        <span className={formStyles.inputLabel}>x</span>
                         <BufferedInput
-                            className={classNames(styles.inputForm, styles.x)}
+                            className={classNames(formStyles.inputForm, styles.x)}
                             disabled={this.props.disabled}
                             placeholder="x"
                             tabIndex="2"
@@ -70,9 +71,9 @@ class SpriteInfo extends React.Component {
                                 src={yIcon}
                             />
                         </div>
-                        <span className={styles.inputLabel}>y</span>
+                        <span className={formStyles.inputLabel}>y</span>
                         <BufferedInput
-                            className={classNames(styles.inputForm, styles.y)}
+                            className={classNames(formStyles.inputForm, styles.y)}
                             disabled={this.props.disabled}
                             placeholder="y"
                             tabIndex="3"
@@ -85,7 +86,7 @@ class SpriteInfo extends React.Component {
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
+                        <span className={formStyles.inputLabelSecondary}>
                             Show
                         </span>
                         <div>
@@ -128,9 +129,9 @@ class SpriteInfo extends React.Component {
                         </div>
                     </div>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>Direction</span>
+                        <span className={formStyles.inputLabelSecondary}>Direction</span>
                         <BufferedInput
-                            className={classNames(styles.inputForm, styles.direction)}
+                            className={classNames(formStyles.inputForm, styles.direction)}
                             disabled={this.props.disabled}
                             tabIndex="5"
                             type="text"
@@ -139,7 +140,7 @@ class SpriteInfo extends React.Component {
                         />
                     </div>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
+                        <span className={formStyles.inputLabelSecondary}>
                             Rotation
                         </span>
                         <select

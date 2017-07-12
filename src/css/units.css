@@ -7,3 +7,5 @@ $sprite-info-height: 5.25rem; /* @todo: SpriteInfo isn't explicitly set to this 
 $stage-menu-height: 3rem;
 
 $library-header-height: 4.375rem;
+
+$form-radius: calc($space / 2);

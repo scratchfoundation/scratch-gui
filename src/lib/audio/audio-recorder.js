@@ -1,4 +1,5 @@
 import SharedAudioContext from './shared-audio-context.js';
+import {computeRMS} from './audio-util.js';
 
 class AudioRecorder {
     constructor () {
@@ -42,17 +43,6 @@ class AudioRecorder {
         this.recording = true;
     }
 
-    calculateRMS (samples) {
-        // Calculate RMS, adapted from https://github.com/Tonejs/Tone.js/blob/master/Tone/component/Meter.js#L88
-        const sum = samples.reduce((acc, v) => acc + Math.pow(v, 2), 0);
-        const rms = Math.sqrt(sum / samples.length);
-        // Scale it
-        const unity = 0.35;
-        const val = rms / unity;
-        // Scale the output curve
-        return Math.sqrt(val);
-    }
-
     attachUserMediaStream (userMediaStream, onUpdate) {
         this.userMediaStream = userMediaStream;
         this.mediaStreamSource = this.audioContext.createMediaStreamSource(userMediaStream);
@@ -76,7 +66,7 @@ class AudioRecorder {
             if (this.disposed) return;
             requestAnimationFrame(update);
             this.analyserNode.getFloatTimeDomainData(dataArray);
-            onUpdate(this.calculateRMS(dataArray));
+            onUpdate(computeRMS(dataArray));
         };
 
         requestAnimationFrame(update);
@@ -89,7 +79,7 @@ class AudioRecorder {
     }
 
     stop () {
-        const chunkLevels = this.buffers.map(buffer => this.calculateRMS(buffer));
+        const chunkLevels = this.buffers.map(buffer => computeRMS(buffer));
         const maxRMS = Math.max.apply(null, chunkLevels);
         const threshold = maxRMS / 8;
 

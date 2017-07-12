@@ -20,6 +20,7 @@ const RecordModal = props => (
                     levels={props.levels}
                     playhead={props.playhead}
                     playing={props.playing}
+                    sampleRate={props.sampleRate}
                     samples={props.samples}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
@@ -58,6 +59,7 @@ RecordModal.propTypes = {
     playhead: PropTypes.number,
     playing: PropTypes.bool,
     recording: PropTypes.bool,
+    sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
     trimEnd: PropTypes.number.isRequired,
     trimStart: PropTypes.number.isRequired

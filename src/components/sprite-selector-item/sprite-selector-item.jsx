@@ -1,11 +1,11 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const CostumeCanvas = require('../costume-canvas/costume-canvas.jsx');
-const CloseButton = require('../close-button/close-button.jsx');
-const styles = require('./sprite-selector-item.css');
+import Box from '../box/box.jsx';
+import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
+import CloseButton from '../close-button/close-button.jsx';
+import styles from './sprite-selector-item.css';
 
 const SpriteSelectorItem = props => (
     <Box

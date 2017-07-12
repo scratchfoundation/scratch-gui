@@ -1,22 +1,22 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
-const {Tab, Tabs, TabList, TabPanel} = require('react-tabs');
-const tabStyles = require('react-tabs/style/react-tabs.css');
-const VM = require('scratch-vm');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import tabStyles from 'react-tabs/style/react-tabs.css';
+import VM from 'scratch-vm';
 
-const Blocks = require('../../containers/blocks.jsx');
-const CostumeTab = require('../../containers/costume-tab.jsx');
-const GreenFlag = require('../../containers/green-flag.jsx');
-const TargetPane = require('../../containers/target-pane.jsx');
-const SoundTab = require('../../containers/sound-tab.jsx');
-const Stage = require('../../containers/stage.jsx');
-const StopAll = require('../../containers/stop-all.jsx');
+import Blocks from '../../containers/blocks.jsx';
+import CostumeTab from '../../containers/costume-tab.jsx';
+import GreenFlag from '../../containers/green-flag.jsx';
+import TargetPane from '../../containers/target-pane.jsx';
+import SoundTab from '../../containers/sound-tab.jsx';
+import Stage from '../../containers/stage.jsx';
+import StopAll from '../../containers/stop-all.jsx';
 
-const Box = require('../box/box.jsx');
-const MenuBar = require('../menu-bar/menu-bar.jsx');
+import Box from '../box/box.jsx';
+import MenuBar from '../menu-bar/menu-bar.jsx';
 
-const styles = require('./gui.css');
+import styles from './gui.css';
 
 
 const GUIComponent = props => {
@@ -62,7 +62,7 @@ const GUIComponent = props => {
                             onSelect={onTabSelect}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>Scripts</Tab>
+                                <Tab className={tabClassNames.tab}>Blocks</Tab>
                                 <Tab className={tabClassNames.tab}>Costumes</Tab>
                                 <Tab className={tabClassNames.tab}>Sounds</Tab>
                             </TabList>
@@ -70,7 +70,7 @@ const GUIComponent = props => {
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
-                                        isVisible={tabIndex === 0} // Scripts tab
+                                        isVisible={tabIndex === 0} // Blocks tab
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}

@@ -1,14 +1,15 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const styles = require('./sprite-info.css');
+import Box from '../box/box.jsx';
+import BufferedInput from '../buffered-input/buffered-input.jsx';
+import styles from './sprite-info.css';
 
-const xIcon = require('./icon--x.svg');
-const yIcon = require('./icon--y.svg');
-const showIcon = require('./icon--show.svg');
-const hideIcon = require('./icon--hide.svg');
+import xIcon from './icon--x.svg';
+import yIcon from './icon--y.svg';
+import showIcon from './icon--show.svg';
+import hideIcon from './icon--hide.svg';
 
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 
@@ -32,16 +33,14 @@ class SpriteInfo extends React.Component {
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
                         <span className={styles.inputLabel}>Sprite</span>
-                        <input
+                        <BufferedInput
                             className={classNames(styles.inputForm, styles.spriteName)}
                             disabled={this.props.disabled}
                             placeholder="Name"
                             tabIndex="1"
                             type="text"
                             value={this.props.disabled ? '' : this.props.name}
-                            onBlur={this.props.onBlurName}
-                            onChange={this.props.onChangeName}
-                            onKeyPress={this.props.onKeyPress}
+                            onSubmit={this.props.onChangeName}
                         />
                     </div>
 
@@ -53,16 +52,14 @@ class SpriteInfo extends React.Component {
                             />
                         </div>
                         <span className={styles.inputLabel}>x</span>
-                        <input
+                        <BufferedInput
                             className={classNames(styles.inputForm, styles.x)}
                             disabled={this.props.disabled}
                             placeholder="x"
                             tabIndex="2"
                             type="text"
                             value={this.props.disabled ? '' : this.props.x}
-                            onBlur={this.props.onBlurX}
-                            onChange={this.props.onChangeX}
-                            onKeyPress={this.props.onKeyPress}
+                            onSubmit={this.props.onChangeX}
                         />
                     </div>
 
@@ -74,16 +71,14 @@ class SpriteInfo extends React.Component {
                             />
                         </div>
                         <span className={styles.inputLabel}>y</span>
-                        <input
+                        <BufferedInput
                             className={classNames(styles.inputForm, styles.y)}
                             disabled={this.props.disabled}
                             placeholder="y"
                             tabIndex="3"
                             type="text"
                             value={this.props.disabled ? '' : this.props.y}
-                            onBlur={this.props.onBlurY}
-                            onChange={this.props.onChangeY}
-                            onKeyPress={this.props.onKeyPress}
+                            onSubmit={this.props.onChangeY}
                         />
                     </div>
                 </div>
@@ -134,15 +129,13 @@ class SpriteInfo extends React.Component {
                     </div>
                     <div className={styles.group}>
                         <span className={styles.inputLabelSecondary}>Direction</span>
-                        <input
+                        <BufferedInput
                             className={classNames(styles.inputForm, styles.direction)}
                             disabled={this.props.disabled}
                             tabIndex="5"
                             type="text"
                             value={this.props.disabled ? '' : this.props.direction}
-                            onBlur={this.props.onBlurDirection}
-                            onChange={this.props.onChangeDirection}
-                            onKeyPress={this.props.onKeyPress}
+                            onSubmit={this.props.onChangeDirection}
                         />
                     </div>
                     <div className={styles.group}>
@@ -178,10 +171,6 @@ SpriteInfo.propTypes = {
     ]),
     disabled: PropTypes.bool,
     name: PropTypes.string,
-    onBlurDirection: PropTypes.func,
-    onBlurName: PropTypes.func,
-    onBlurX: PropTypes.func,
-    onBlurY: PropTypes.func,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
     onChangeRotationStyle: PropTypes.func,
@@ -189,7 +178,6 @@ SpriteInfo.propTypes = {
     onChangeY: PropTypes.func,
     onClickNotVisible: PropTypes.func,
     onClickVisible: PropTypes.func,
-    onKeyPress: PropTypes.func,
     rotationStyle: PropTypes.oneOf(ROTATION_STYLES),
     visible: PropTypes.bool,
     x: PropTypes.oneOfType([

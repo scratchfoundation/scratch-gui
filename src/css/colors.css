@@ -1,3 +1,12 @@
 $ui-pane-border: #D9D9D9;
 $ui-pane-gray: #F9F9F9;
-$blue: #4C97FF;
+$ui-background-blue: #e8edf1;
+
+$motion-primary: #4C97FF;
+$motion-tertiary: #3373CC;
+
+$red-primary: #FF661A;
+$red-tertiary: #E64D00;
+
+$sound-primary: #CF63CF;
+$sound-tertiary: #A63FA6;

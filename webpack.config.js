@@ -36,7 +36,7 @@ module.exports = {
             include: path.resolve(__dirname, 'src'),
             options: {
                 plugins: ['transform-object-rest-spread'],
-                presets: [['es2015', {modules: false}], 'react']
+                presets: ['es2015', 'react']
             }
         },
         {

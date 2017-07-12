@@ -1,12 +1,13 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const bindAll = require('lodash.bindall');
+import PropTypes from 'prop-types';
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import {defineMessages} from 'react-intl';
+import VM from 'scratch-vm';
 
-const VM = require('scratch-vm');
+import AssetPanel from '../components/asset-panel/asset-panel.jsx';
+import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 
-const AssetPanel = require('../components/asset-panel/asset-panel.jsx');
-
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
 const {
     openCostumeLibrary,
@@ -37,6 +38,7 @@ class CostumeTab extends React.Component {
     }
 
     handleSelectCostume (costumeIndex) {
+        this.props.vm.editingTarget.setCostume(costumeIndex);
         this.setState({selectedCostumeIndex: costumeIndex});
     }
 
@@ -59,17 +61,33 @@ class CostumeTab extends React.Component {
             return null;
         }
 
-        const addText = target.isStage ? 'Add Backdrop' : 'Add Costume';
+        const messages = defineMessages({
+            addBackdrop: {
+                id: 'action.addBackdrop',
+                defaultMessage: 'Add Backdrop',
+                description: 'Button to add a backdrop in the editor tab'
+            },
+            addCostume: {
+                id: 'action.addCostume',
+                defaultMessage: 'Add Costume',
+                description: 'Button to add a costume in the editor tab'
+            }
+        });
+
+        const addMessage = target.isStage ? messages.addBackdrop : messages.addCostume;
         const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (
             <AssetPanel
+                buttons={[{
+                    message: addMessage,
+                    img: addCostumeIcon,
+                    onClick: addFunc
+                }]}
                 items={target.costumes || []}
-                newText={addText}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-                onNewClick={addFunc}
             />
         );
     }

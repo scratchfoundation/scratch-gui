@@ -1,12 +1,12 @@
-const bindAll = require('lodash.bindall');
-const debounce = require('lodash.debounce');
-const defaultsDeep = require('lodash.defaultsdeep');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VMScratchBlocks = require('../lib/blocks');
-const VM = require('scratch-vm');
-const Prompt = require('./prompt.jsx');
-const BlocksComponent = require('../components/blocks/blocks.jsx');
+import bindAll from 'lodash.bindall';
+import debounce from 'lodash.debounce';
+import defaultsDeep from 'lodash.defaultsdeep';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VMScratchBlocks from '../lib/blocks';
+import VM from 'scratch-vm';
+import Prompt from './prompt.jsx';
+import BlocksComponent from '../components/blocks/blocks.jsx';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -63,8 +63,10 @@ class Blocks extends React.Component {
         }
 
         // @todo hack to resize blockly manually in case resize happened while hidden
+        // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
+            this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
             this.workspace.toolbox_.refreshSelection();
         } else {
@@ -148,6 +150,7 @@ class Blocks extends React.Component {
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
+
         this.ScratchBlocks.Events.disable();
         this.workspace.clear();
 
@@ -172,7 +175,6 @@ class Blocks extends React.Component {
     }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
-        this.props.vm.createVariable(data);
         this.handlePromptClose();
     }
     handlePromptClose () {

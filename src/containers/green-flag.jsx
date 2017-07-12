@@ -1,10 +1,10 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const VM = require('scratch-vm');
+import VM from 'scratch-vm';
 
-const GreenFlagComponent = require('../components/green-flag/green-flag.jsx');
+import GreenFlagComponent from '../components/green-flag/green-flag.jsx';
 
 class GreenFlag extends React.Component {
     constructor (props) {

@@ -24,6 +24,7 @@
     "react-dom": "^15"
   },
   "devDependencies": {
+    "@mohayonao/web-audio-api-shim": "^0.3.0",
     "autoprefixer": "7.1.2",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
@@ -45,7 +44,7 @@ const Selector = props => {
                             src={img}
                         />
                         <Box className={styles.newButtonLabel}>
-                            <FormattedMessage {...message} />
+                            {message}
                         </Box>
                     </Box>
                 ))}
@@ -56,11 +55,7 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        message: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            defaultMessage: PropTypes.string,
-            description: PropTypes.string
-        }),
+        message: PropTypes.node.isRequired,
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })),

@@ -4,7 +4,7 @@
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./src/index.js",
   "scripts": {
-    "build": "npm run clean && webpack --progress --colors --bail",
+    "build": "npm run clean && npm run i18n:msgs && webpack --progress --colors --bail",
     "clean": "rimraf ./build && mkdirp build",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "i18n:msgs": "./scripts/generate-locale-messages.js",
@@ -60,6 +60,7 @@
     "react-dom": "15.5.4",
     "react-draggable": "2.2.6",
     "react-intl": "2.3.0",
+    "react-intl-redux": "0.6.0",
     "react-modal": "2.2.1",
     "react-redux": "5.0.5",
     "react-style-proptype": "3.0.0",

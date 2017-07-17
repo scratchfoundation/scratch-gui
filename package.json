@@ -25,6 +25,7 @@
     "react-dom": "^15.6.0"
   },
   "devDependencies": {
+    "@mohayonao/web-audio-api-shim": "^0.3.0",
     "autoprefixer": "7.1.2",
     "babel-cli": "6.24.1",
     "babel-core": "^6.23.1",

@@ -12,3 +12,6 @@ npm-*
 # Build
 /build
 /.opt-in
+
+# generated/external transifex translation files per language
+/translations

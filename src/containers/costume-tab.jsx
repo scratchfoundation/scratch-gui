@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
@@ -61,20 +61,22 @@ class CostumeTab extends React.Component {
             return null;
         }
 
-        const messages = defineMessages({
-            addBackdrop: {
-                id: 'action.addBackdrop',
-                defaultMessage: 'Add Backdrop',
-                description: 'Button to add a backdrop in the editor tab'
-            },
-            addCostume: {
-                id: 'action.addCostume',
-                defaultMessage: 'Add Costume',
-                description: 'Button to add a costume in the editor tab'
-            }
-        });
+        const addBackdropMsg = (
+            <FormattedMessage
+                defaultMessage="Add Backdrop"
+                description="Button to add a backdrop in the editor tab"
+                id="action.addBackdrop"
+            />
+        );
+        const addCostumeMsg = (
+            <FormattedMessage
+                defaultMessage="Add Costume"
+                description="Button to add a costume in the editor tab"
+                id="action.addCostume"
+            />
+        );
 
-        const addMessage = target.isStage ? messages.addBackdrop : messages.addCostume;
+        const addMessage = target.isStage ? addBackdropMsg : addCostumeMsg;
         const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
 
         return (

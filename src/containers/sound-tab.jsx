@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
@@ -74,27 +74,29 @@ class SoundTab extends React.Component {
             }
         )) : [];
 
-        const messages = defineMessages({
-            recordSound: {
-                id: 'action.recordSound',
-                defaultMessage: 'Record Sound',
-                description: 'Button to record a sound in the editor tab'
-            },
-            addSound: {
-                id: 'action.addSound',
-                defaultMessage: 'Add Sound',
-                description: 'Button to add a sound in the editor tab'
-            }
-        });
+        const recordSoundMsg = (
+            <FormattedMessage
+                defaultMessage="Record Sound"
+                description="Button to record a sound in the editor tab"
+                id="action.recordSound"
+            />
+        );
+        const addSoundMsg = (
+            <FormattedMessage
+                defaultMessage="Add Sound"
+                description="Button to add a sound in the editor tab"
+                id="action.addSound"
+            />
+        );
 
         return (
             <AssetPanel
                 buttons={[{
-                    message: messages.recordSound,
+                    message: recordSoundMsg,
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    message: messages.addSound,
+                    message: addSoundMsg,
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}

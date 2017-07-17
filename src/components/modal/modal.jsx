@@ -1,19 +1,19 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
-const ReactModal = require('react-modal');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ReactModal from 'react-modal';
 
-const Box = require('../box/box.jsx');
-const CloseButton = require('../close-button/close-button.jsx');
-const Filter = require('../filter/filter.jsx');
+import Box from '../box/box.jsx';
+import CloseButton from '../close-button/close-button.jsx';
+import Filter from '../filter/filter.jsx';
 
-const styles = require('./modal.css');
+import styles from './modal.css';
 
 class ModalComponent extends React.Component {
     render () {
         return (
             <ReactModal
-                className={styles.fullModalContent}
+                className={classNames(styles.modalContent, this.props.className)}
                 contentLabel={this.props.contentLabel}
                 isOpen={this.props.visible}
                 overlayClassName={styles.modalOverlay}
@@ -26,11 +26,13 @@ class ModalComponent extends React.Component {
                 >
                     <div className={styles.header}>
                         <div className={classNames(styles.headerItem, styles.headerItemFilter)}>
-                            <Filter
-                                filterQuery={this.props.filterQuery}
-                                onChange={this.props.onFilterChange}
-                                onClear={this.props.onFilterClear}
-                            />
+                            {this.props.onFilterChange ? (
+                                <Filter
+                                    filterQuery={this.props.filterQuery}
+                                    onChange={this.props.onFilterChange}
+                                    onClear={this.props.onFilterClear}
+                                />
+                            ) : null}
                         </div>
                         <div
                             className={classNames(
@@ -61,6 +63,7 @@ class ModalComponent extends React.Component {
 
 ModalComponent.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     contentLabel: PropTypes.string.isRequired,
     filterQuery: PropTypes.string,
     onFilterChange: PropTypes.func,

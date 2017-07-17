@@ -1,27 +1,48 @@
-/* Need to use a fixed height for the new container to make list scrollable */
-$new-height: 60px;
+@import "../../css/colors.css";
 
 .wrapper {
-    width: 250px;
+    width: 150px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: $ui-background-blue;
 }
 
-.new-item {
-    background: white;
-    border-bottom: 1px solid #ddd;
-    height: $new-height;
+.new-buttons {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding-left: 1.75rem;
+    justify-content: space-around;
+    margin: 1.25rem 0;
+    color: $motion-primary;
+}
+
+.new-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
     cursor: pointer;
-    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.new-button:hover {
+    transform: scale(1.2);
+}
+
+.new-button + .new-button {
+    margin-top: 1.25rem;
+}
+
+.new-button-icon + .new-button-label {
+    margin-top: 0.5rem;
 }
 
 .list-area {
-    position: absolute;
-    width: 100%;
-    top: 60px;
-    height: calc(100% - $new-height);
+    /* Must have some height (recalculated by flex-grow) in order to scroll */
+    height: 0;
+    flex-grow: 1;
     overflow-y: scroll;
 }
 
@@ -29,10 +50,4 @@ $new-height: 60px;
     width: 5rem;
     min-height: 5rem;
     margin: 1rem auto;
-}
-
-.delete-button {
-    position: absolute;
-    top: 2px;
-    right: 2px;
 }

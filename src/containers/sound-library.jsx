@@ -1,13 +1,13 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
-const AudioEngine = require('scratch-audio');
-const LibraryComponent = require('../components/library/library.jsx');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
+import AudioEngine from 'scratch-audio';
+import LibraryComponent from '../components/library/library.jsx';
 
-const soundIcon = require('../components/asset-panel/icon--sound.svg');
+import soundIcon from '../components/asset-panel/icon--sound.svg';
 
-const soundLibraryContent = require('../lib/libraries/sounds.json');
+import soundLibraryContent from '../lib/libraries/sounds.json';
 
 class SoundLibrary extends React.PureComponent {
     constructor (props) {

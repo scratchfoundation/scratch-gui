@@ -1,19 +1,19 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const VM = require('scratch-vm');
+import VM from 'scratch-vm';
 
-const Box = require('../box/box.jsx');
-const BackdropLibrary = require('../../containers/backdrop-library.jsx');
-const CostumeLibrary = require('../../containers/costume-library.jsx');
-const SoundLibrary = require('../../containers/sound-library.jsx');
-const SpriteLibrary = require('../../containers/sprite-library.jsx');
-const SpriteSelectorComponent = require('../sprite-selector/sprite-selector.jsx');
-const StageSelector = require('../../containers/stage-selector.jsx');
+import Box from '../box/box.jsx';
+import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import CostumeLibrary from '../../containers/costume-library.jsx';
+import SoundLibrary from '../../containers/sound-library.jsx';
+import SpriteLibrary from '../../containers/sprite-library.jsx';
+import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
+import StageSelector from '../../containers/stage-selector.jsx';
 
-const styles = require('./target-pane.css');
-const addIcon = require('./icon--add.svg');
+import styles from './target-pane.css';
+import addIcon from './icon--add.svg';
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -78,6 +78,7 @@ const TargetPane = ({
 
                 <button
                     className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
+                    title="Add sprite"
                     onClick={onNewSpriteClick}
                 >
                     <img
@@ -88,6 +89,7 @@ const TargetPane = ({
 
                 <button
                     className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
+                    title="Add backdrop"
                     onClick={onNewBackdropClick}
                 >
                     <img

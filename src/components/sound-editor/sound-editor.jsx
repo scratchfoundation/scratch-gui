@@ -1,15 +1,15 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const classNames = require('classnames');
-const Box = require('../box/box.jsx');
-const Waveform = require('../waveform/waveform.jsx');
-const BufferedInput = require('../buffered-input/buffered-input.jsx');
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
+import Box from '../box/box.jsx';
+import Waveform from '../waveform/waveform.jsx';
+import BufferedInput from '../buffered-input/buffered-input.jsx';
 
-const styles = require('./sound-editor.css');
-const formStyles = require('../../css/forms.css');
+import styles from './sound-editor.css';
+import formStyles from '../../css/forms.css';
 
-const playIcon = require('../record-modal/icon--play.svg');
-const stopIcon = require('../record-modal/icon--stop-playback.svg');
+import playIcon from '../record-modal/icon--play.svg';
+import stopIcon from '../record-modal/icon--stop-playback.svg';
 
 const SoundEditor = props => (
     <Box className={styles.editorContainer}>

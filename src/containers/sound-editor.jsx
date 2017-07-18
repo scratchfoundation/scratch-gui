@@ -1,13 +1,13 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const {computeRMS} = require('../lib/audio/audio-util.js');
+import {computeRMS} from '../lib/audio/audio-util.js';
 
-const SoundEditorComponent = require('../components/sound-editor/sound-editor.jsx');
-const AudioBufferPlayer = require('../lib/audio/audio-buffer-player.js');
+import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
+import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
 
 const getChunkLevels = (samples, chunkSize = 1024) => {
     const sampleCount = samples.length;

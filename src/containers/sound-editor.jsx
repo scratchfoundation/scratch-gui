@@ -4,20 +4,10 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import {computeRMS} from '../lib/audio/audio-util.js';
+import {computeChunkedRMS} from '../lib/audio/audio-util.js';
 
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
-
-const getChunkLevels = (samples, chunkSize = 1024) => {
-    const sampleCount = samples.length;
-    const chunkLevels = [];
-    for (let i = 0; i < sampleCount; i += chunkSize) {
-        const maxIndex = Math.min(sampleCount - 1, i + chunkSize);
-        chunkLevels.push(computeRMS(samples.slice(i, maxIndex), true));
-    }
-    return chunkLevels;
-};
 
 class SoundEditor extends React.Component {
     constructor (props) {
@@ -31,7 +21,7 @@ class SoundEditor extends React.Component {
         ]);
         this.state = {
             playhead: null, // null is not playing, [0 -> 1] is playing percent
-            chunkLevels: getChunkLevels(this.props.samples)
+            chunkLevels: computeChunkedRMS(this.props.samples)
         };
     }
     componentDidMount () {
@@ -41,7 +31,7 @@ class SoundEditor extends React.Component {
         if (newProps.soundIndex !== this.props.soundIndex) {
             this.audioBufferPlayer.stop();
             this.audioBufferPlayer = new AudioBufferPlayer(newProps.samples, newProps.sampleRate);
-            this.setState({chunkLevels: getChunkLevels(newProps.samples)});
+            this.setState({chunkLevels: computeChunkedRMS(newProps.samples)});
         }
     }
     componentWillUnmount () {

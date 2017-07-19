@@ -2,17 +2,14 @@ import {addLocaleData} from 'react-intl';
 import {updateIntl as superUpdateIntl} from 'react-intl-redux';
 import languages from '../languages.json';
 import messages from '../../locale/messages.json';
-
-export {IntlProvider, intlReducer as default} from 'react-intl-redux';
+import {IntlProvider, intlReducer} from 'react-intl-redux';
 
 Object.keys(languages).forEach(locale => {
     // TODO: will need to handle locales not in the default intl - see www/custom-locales
-    const data = require(`react-intl/locale-data/${locale}`);
-    addLocaleData(data);
+    import(`react-intl/locale-data/${locale}`).then(data => addLocaleData(data));
 });
 
-// start with English
-export const intlInitialState = {
+const intlInitialState = {
     intl: {
         defaultLocale: 'en',
         locale: 'en',
@@ -20,7 +17,9 @@ export const intlInitialState = {
     }
 };
 
-export const updateIntl = locale => superUpdateIntl({
+const updateIntl = locale => superUpdateIntl({
     locale: locale,
     messages: messages[locale] || messages.en
 });
+
+export {intlReducer as default, IntlProvider, intlInitialState, updateIntl};

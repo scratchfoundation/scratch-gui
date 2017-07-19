@@ -22,12 +22,12 @@ const LanguageSelector = ({
                 value={currentLocale}
                 onChange={onChange}
             >
-                {Object.keys(languages).map(loc => (
+                {Object.keys(languages).map(locale => (
                     <option
-                        key={loc}
-                        value={loc}
+                        key={locale}
+                        value={locale}
                     >
-                        {languages[loc]}
+                        {languages[locale]}
                     </option>
                 ))}
             </select>

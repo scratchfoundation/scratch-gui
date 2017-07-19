@@ -13,5 +13,6 @@ npm-*
 /build
 /.opt-in
 
-# generated/external transifex translation files per language
+# generated translation files
 /translations
+/locale

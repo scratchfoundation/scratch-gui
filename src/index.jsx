@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import throttle from 'redux-throttle';
-import {intlInitialState, IntlProvider} from './lib/intl.jsx';
+import {intlInitialState, IntlProvider} from './reducers/intl.js';
 
 import GUI from './containers/gui.jsx';
 import log from './lib/log';
@@ -61,16 +61,14 @@ class App extends React.Component {
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;
 document.body.appendChild(appTarget);
-const store = applyMiddleware(
-    throttle(300, {leading: true, trailing: true})
-)(createStore)(
-    reducer,
-    Object.assign(
-        {},
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-        intlInitialState
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(
+    applyMiddleware(
+        throttle(300, {leading: true, trailing: true})
     )
 );
+const store = createStore(reducer, intlInitialState, enhancer);
 
 ReactDOM.render((
     <Provider store={store}>

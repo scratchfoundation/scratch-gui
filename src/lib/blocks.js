@@ -1,6 +1,6 @@
 import ScratchBlocks from 'scratch-blocks';
 
-module.exports = function (vm) {
+export default function (vm) {
 
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
@@ -137,4 +137,4 @@ module.exports = function (vm) {
     };
 
     return ScratchBlocks;
-};
+}

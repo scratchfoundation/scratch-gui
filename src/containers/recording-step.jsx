@@ -68,4 +68,4 @@ class RecordingStep extends React.Component {
 
 RecordingStep.propTypes = RecordingStepComponent.propTypes;
 
-module.exports = RecordingStep;
+export default RecordingStep;

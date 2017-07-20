@@ -136,4 +136,4 @@ Box.defaultProps = {
     element: 'div',
     style: {}
 };
-module.exports = Box;
+export default Box;

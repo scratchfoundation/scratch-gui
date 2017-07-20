@@ -68,4 +68,4 @@ Selector.propTypes = {
     selectedItemIndex: PropTypes.number.isRequired
 };
 
-module.exports = Selector;
+export default Selector;

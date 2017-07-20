@@ -80,4 +80,4 @@ RecordingStep.propTypes = {
     recording: PropTypes.bool
 };
 
-module.exports = RecordingStep;
+export default RecordingStep;

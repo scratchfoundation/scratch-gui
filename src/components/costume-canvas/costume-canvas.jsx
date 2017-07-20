@@ -127,4 +127,4 @@ CostumeCanvas.propTypes = {
     width: PropTypes.number
 };
 
-module.exports = CostumeCanvas;
+export default CostumeCanvas;

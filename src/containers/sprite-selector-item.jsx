@@ -58,6 +58,6 @@ const mapStateToProps = (state, {assetId, costumeURL}) => ({
     costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI())
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps
 )(SpriteSelectorItem);

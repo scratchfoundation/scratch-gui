@@ -49,4 +49,4 @@ BufferedInput.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
-module.exports = BufferedInput;
+export default BufferedInput;

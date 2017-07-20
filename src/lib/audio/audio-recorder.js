@@ -136,4 +136,4 @@ class AudioRecorder {
     }
 }
 
-module.exports = AudioRecorder;
+export default AudioRecorder;

@@ -28,4 +28,4 @@ ButtonComponent.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired
 };
-module.exports = ButtonComponent;
+export default ButtonComponent;

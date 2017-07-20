@@ -1,4 +1,4 @@
 import minilog from 'minilog';
 minilog.enable();
 
-module.exports = minilog('gui');
+export default minilog('gui');

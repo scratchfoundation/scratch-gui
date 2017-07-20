@@ -63,4 +63,4 @@ RecordModal.propTypes = {
     trimStart: PropTypes.number.isRequired
 };
 
-module.exports = RecordModal;
+export default RecordModal;

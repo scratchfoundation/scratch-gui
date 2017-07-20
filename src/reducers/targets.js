@@ -29,7 +29,7 @@ const reducer = function (state, action) {
         return state;
     }
 };
-reducer.updateTargets = function (targetList) {
+const updateTargets = function (targetList) {
     return {
         type: UPDATE_TARGET_LIST,
         targets: targetList,
@@ -38,7 +38,7 @@ reducer.updateTargets = function (targetList) {
         }
     };
 };
-reducer.updateEditingTarget = function (editingTarget) {
+const updateEditingTarget = function (editingTarget) {
     return {
         type: UPDATE_EDITING_TARGET,
         target: editingTarget,
@@ -47,4 +47,8 @@ reducer.updateEditingTarget = function (editingTarget) {
         }
     };
 };
-module.exports = reducer;
+export {
+    reducer as default,
+    updateTargets,
+    updateEditingTarget
+};

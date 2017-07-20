@@ -121,4 +121,4 @@ GUIComponent.propTypes = {
 GUIComponent.defaultProps = {
     basePath: './'
 };
-module.exports = GUIComponent;
+export default GUIComponent;

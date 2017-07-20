@@ -56,4 +56,4 @@ GUI.propTypes = {
 
 GUI.defaultProps = GUIComponent.defaultProps;
 
-module.exports = vmListenerHOC(GUI);
+export default vmListenerHOC(GUI);

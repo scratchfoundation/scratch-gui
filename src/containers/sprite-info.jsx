@@ -48,4 +48,4 @@ SpriteInfo.propTypes = {
     y: PropTypes.number
 };
 
-module.exports = SpriteInfo;
+export default SpriteInfo;

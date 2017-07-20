@@ -6,7 +6,7 @@ import targetReducer from './targets';
 import vmReducer from './vm';
 
 
-module.exports = combineReducers({
+export default combineReducers({
     intl: intlReducer,
     modals: modalReducer,
     monitors: monitorReducer,

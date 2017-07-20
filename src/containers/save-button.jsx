@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
     saveProjectSb3: state.vm.saveProjectSb3.bind(state.vm)
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
 )(SaveButton);

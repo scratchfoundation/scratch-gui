@@ -69,4 +69,4 @@ GreenFlag.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-module.exports = GreenFlag;
+export default GreenFlag;

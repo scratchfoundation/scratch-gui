@@ -22,4 +22,9 @@ const updateIntl = locale => superUpdateIntl({
     messages: messages[locale] || messages.en
 });
 
-export {intlReducer as default, IntlProvider, intlInitialState, updateIntl};
+export {
+    intlReducer as default,
+    IntlProvider,
+    intlInitialState,
+    updateIntl
+};

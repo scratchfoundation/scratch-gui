@@ -53,4 +53,4 @@ PromptComponent.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-module.exports = PromptComponent;
+export default PromptComponent;

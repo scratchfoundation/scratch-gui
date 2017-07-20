@@ -48,4 +48,4 @@ Waveform.propTypes = {
     width: PropTypes.number
 };
 
-module.exports = Waveform;
+export default Waveform;

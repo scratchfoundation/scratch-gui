@@ -53,4 +53,4 @@ PlaybackStep.propTypes = {
     ...PlaybackStepComponent.propTypes
 };
 
-module.exports = PlaybackStep;
+export default PlaybackStep;

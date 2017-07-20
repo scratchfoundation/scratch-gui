@@ -34,4 +34,4 @@ GreenFlagComponent.defaultProps = {
     active: false,
     title: 'Go'
 };
-module.exports = GreenFlagComponent;
+export default GreenFlagComponent;

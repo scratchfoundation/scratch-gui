@@ -10,7 +10,7 @@ const MONITOR_HEIGHT = 23;
 
 const isUndefined = a => typeof a === 'undefined';
 
-module.exports = function ({id, index, opcode, params, value, x, y}) {
+export default function ({id, index, opcode, params, value, x, y}) {
     let {label, category, labelFn} = OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
@@ -23,4 +23,4 @@ module.exports = function ({id, index, opcode, params, value, x, y}) {
     if (isUndefined(y)) y = PADDING + (index * (PADDING + MONITOR_HEIGHT));
 
     return {id, label, category, value, x, y};
-};
+}

@@ -15,10 +15,13 @@ const reducer = function (state, action) {
         return state;
     }
 };
-reducer.setVM = function (vm) {
+const setVM = function (vm) {
     return {
         type: SET_VM,
         vm: vm
     };
 };
-module.exports = reducer;
+export {
+    reducer as default,
+    setVM
+};

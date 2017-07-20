@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const styles = require('./waveform.css');
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './waveform.css';
 
 const Waveform = props => {
     const {
@@ -27,8 +27,8 @@ const Waveform = props => {
 
     return (
         <svg
-            height={height}
-            width={width}
+            className={styles.container}
+            viewBox={`0 0 ${width} ${height}`}
         >
             <g transform={`scale(1, -1) translate(0, -${height / 2})`}>
                 <path

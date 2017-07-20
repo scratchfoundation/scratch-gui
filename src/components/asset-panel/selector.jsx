@@ -1,10 +1,10 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
+import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
-const Box = require('../box/box.jsx');
-const styles = require('./selector.css');
+import Box from '../box/box.jsx';
+import styles from './selector.css';
 
 const Selector = props => {
     const {
@@ -33,7 +33,7 @@ const Selector = props => {
                 ))}
             </Box>
             <Box className={styles.newButtons}>
-                {buttons.map(({text, img, onClick}, index) => (
+                {buttons.map(({message, img, onClick}, index) => (
                     <Box
                         className={styles.newButton}
                         key={index}
@@ -44,7 +44,7 @@ const Selector = props => {
                             src={img}
                         />
                         <Box className={styles.newButtonLabel}>
-                            {text}
+                            {message}
                         </Box>
                     </Box>
                 ))}
@@ -55,7 +55,7 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string.isRequired,
+        message: PropTypes.node.isRequired,
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })),

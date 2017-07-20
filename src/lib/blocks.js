@@ -1,4 +1,4 @@
-const ScratchBlocks = require('scratch-blocks');
+import ScratchBlocks from 'scratch-blocks';
 
 module.exports = function (vm) {
 

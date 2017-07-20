@@ -1,4 +1,4 @@
-const SharedAudioContext = require('./shared-audio-context.js');
+import SharedAudioContext from './shared-audio-context.js';
 
 class AudioRecorder {
     constructor () {
@@ -12,20 +12,29 @@ class AudioRecorder {
 
         this.recordedSamples = 0;
         this.recording = false;
+        this.started = false;
         this.buffers = [];
 
         this.disposed = false;
     }
 
-    startListening (onUpdate, onError) {
+    startListening (onStarted, onUpdate, onError) {
         try {
             navigator.getUserMedia({audio: true}, userMediaStream => {
-                this.attachUserMediaStream(userMediaStream, onUpdate);
+                if (!this.disposed) {
+                    this.started = true;
+                    onStarted();
+                    this.attachUserMediaStream(userMediaStream, onUpdate);
+                }
             }, e => {
-                onError(e);
+                if (!this.disposed) {
+                    onError(e);
+                }
             });
         } catch (e) {
-            onError(e);
+            if (!this.disposed) {
+                onError(e);
+            }
         }
     }
 
@@ -50,9 +59,8 @@ class AudioRecorder {
         this.sourceNode = this.audioContext.createGain();
         this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
 
-
         this.scriptProcessorNode.onaudioprocess = processEvent => {
-            if (this.recording) {
+            if (this.recording && !this.disposed) {
                 this.buffers.push(new Float32Array(processEvent.inputBuffer.getChannelData(0)));
             }
         };
@@ -89,40 +97,41 @@ class AudioRecorder {
         let lastChunkAboveThreshold = null;
         for (let i = 0; i < chunkLevels.length; i++) {
             if (chunkLevels[i] > threshold) {
-                if (firstChunkAboveThreshold === null) firstChunkAboveThreshold = i;
-                lastChunkAboveThreshold = i;
+                if (firstChunkAboveThreshold === null) firstChunkAboveThreshold = i + 1;
+                lastChunkAboveThreshold = i + 1;
             }
         }
 
-        const usedSamples = lastChunkAboveThreshold - firstChunkAboveThreshold + 2;
-        const buffer = new Float32Array(usedSamples * this.bufferLength);
+        const trimStart = Math.max(2, firstChunkAboveThreshold - 2) / this.buffers.length;
+        const trimEnd = Math.min(this.buffers.length - 2, lastChunkAboveThreshold + 2) / this.buffers.length;
 
-        const usedChunkLevels = [];
+        const buffer = new Float32Array(this.buffers.length * this.bufferLength);
 
         let offset = 0;
         for (let i = 0; i < this.buffers.length; i++) {
             const bufferChunk = this.buffers[i];
-            if (i > firstChunkAboveThreshold - 2 && i < lastChunkAboveThreshold + 1) {
-                usedChunkLevels.push(chunkLevels[i]);
-                buffer.set(bufferChunk, offset);
-                offset += bufferChunk.length;
-            }
+            buffer.set(bufferChunk, offset);
+            offset += bufferChunk.length;
         }
 
         return {
-            levels: usedChunkLevels,
+            levels: chunkLevels,
             samples: buffer,
-            sampleRate: this.audioContext.sampleRate
+            sampleRate: this.audioContext.sampleRate,
+            trimStart: trimStart,
+            trimEnd: trimEnd
         };
     }
 
     dispose () {
-        this.scriptProcessorNode.onaudioprocess = null;
-        this.scriptProcessorNode.disconnect();
-        this.analyserNode.disconnect();
-        this.sourceNode.disconnect();
-        this.mediaStreamSource.disconnect();
-        this.userMediaStream.getAudioTracks()[0].stop();
+        if (this.started) {
+            this.scriptProcessorNode.onaudioprocess = null;
+            this.scriptProcessorNode.disconnect();
+            this.analyserNode.disconnect();
+            this.sourceNode.disconnect();
+            this.mediaStreamSource.disconnect();
+            this.userMediaStream.getAudioTracks()[0].stop();
+        }
         this.disposed = true;
     }
 }

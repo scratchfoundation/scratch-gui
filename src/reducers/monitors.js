@@ -1,5 +1,5 @@
 const UPDATE_MONITORS = 'scratch-gui/monitors/UPDATE_MONITORS';
-const {OrderedMap} = require('immutable');
+import {OrderedMap} from 'immutable';
 
 const initialState = OrderedMap();
 

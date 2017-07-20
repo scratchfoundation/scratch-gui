@@ -1,7 +1,7 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const svgToImage = require('svg-to-image');
-const xhr = require('xhr');
+import PropTypes from 'prop-types';
+import React from 'react';
+import svgToImage from 'svg-to-image';
+import xhr from 'xhr';
 
 /**
  * @fileoverview

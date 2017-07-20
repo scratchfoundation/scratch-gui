@@ -72,8 +72,6 @@
     pointer-events: none;
 }
 
-.x, .y, .direction { width: 3.5rem; text-align: center; }
-
 .rotation-select {
     width: 100%;
     height: 1.85rem;
@@ -81,5 +79,3 @@
     user-select: none;
     outline: none;
 }
-
-.sprite-name { width: 100%; }

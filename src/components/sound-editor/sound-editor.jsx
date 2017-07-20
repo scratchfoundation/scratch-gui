@@ -3,13 +3,16 @@ import React from 'react';
 import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import Waveform from '../waveform/waveform.jsx';
-import BufferedInput from '../buffered-input/buffered-input.jsx';
+import Label from '../forms/label.jsx';
+import Input from '../forms/input.jsx';
+import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 
 import styles from './sound-editor.css';
-import formStyles from '../../css/forms.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
+
+const BufferedInput = BufferedInputHOC(Input);
 
 const SoundEditor = props => (
     <Box className={styles.editorContainer}>
@@ -32,14 +35,14 @@ const SoundEditor = props => (
                 )}
             </Box>
             <Box className={styles.inputGroup}>
-                <span className={formStyles.inputLabel}>Sound</span>
-                <BufferedInput
-                    className={classNames(formStyles.inputForm, styles.soundName)}
-                    tabIndex="1"
-                    type="text"
-                    value={props.name}
-                    onSubmit={props.onChangeName}
-                />
+                <Label text="Sound">
+                    <BufferedInput
+                        tabIndex="1"
+                        type="text"
+                        value={props.name}
+                        onSubmit={props.onChangeName}
+                    />
+                </Label>
             </Box>
         </Box>
         <Box className={styles.row}>

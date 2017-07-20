@@ -1,24 +1,5 @@
-@import "./units.css";
-@import "./colors.css";
-
-.input-label {
-    font-size: 0.625rem;
-    font-weight: bold;
-    margin-right: calc($space / 2);
-
-    /* @todo: make this a mixin for all UI text labels */
-    user-select: none;
-    cursor: default;
-}
-
-.input-label-secondary {
-    font-size: 0.625rem;
-    margin-right: calc($space / 2);
-
-    /* @todo: make this a mixin for all UI text labels */
-    user-select: none;
-    cursor: default;
-}
+@import "../../css/units.css";
+@import "../../css/colors.css";
 
 .input-form {
     padding: $space 0.75rem;
@@ -51,4 +32,9 @@
 .input-form:focus {
     border-color: #4c97ff;
     box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
+}
+
+.input-small {
+    width: 3.5rem; 
+    text-align: center;
 }

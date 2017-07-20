@@ -6,6 +6,7 @@ import {IntlProvider, intlReducer} from 'react-intl-redux';
 
 Object.keys(languages).forEach(locale => {
     // TODO: will need to handle locales not in the default intl - see www/custom-locales
+    // eslint-disable-line import/no-unresolved
     import(`react-intl/locale-data/${locale}`).then(data => addLocaleData(data));
 });
 

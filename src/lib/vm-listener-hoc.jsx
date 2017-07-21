@@ -5,8 +5,8 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
-import targets from '../reducers/targets';
-import monitors from '../reducers/monitors';
+import {updateEditingTarget, updateTargets} from '../reducers/targets';
+import {updateMonitors} from '../reducers/monitors';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -100,11 +100,11 @@ const vmListenerHOC = function (WrappedComponent) {
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
-            dispatch(targets.updateEditingTarget(data.editingTarget));
-            dispatch(targets.updateTargets(data.targetList));
+            dispatch(updateEditingTarget(data.editingTarget));
+            dispatch(updateTargets(data.targetList));
         },
         onMonitorsUpdate: monitorList => {
-            dispatch(monitors.updateMonitors(monitorList));
+            dispatch(updateMonitors(monitorList));
         }
     });
     return connect(

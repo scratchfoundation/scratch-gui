@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
+<div
+  className="ponies undefined"
+  onClick={[Function]}
+  style={
+    Object {
+      "alignContent": undefined,
+      "alignItems": undefined,
+      "alignSelf": undefined,
+      "flexBasis": undefined,
+      "flexDirection": undefined,
+      "flexGrow": undefined,
+      "flexShrink": undefined,
+      "flexWrap": undefined,
+      "height": undefined,
+      "justifyContent": undefined,
+      "width": undefined,
+    }
+  }
+>
+  <div
+    className=""
+    onClick={[Function]}
+  >
+    <img
+      className={undefined}
+      src="test-file-stub"
+    />
+  </div>
+  <canvas
+    className={undefined}
+    height={32}
+    width={32}
+  />
+  <div
+    className={undefined}
+  >
+    Pony sprite
+  </div>
+</div>
+`;

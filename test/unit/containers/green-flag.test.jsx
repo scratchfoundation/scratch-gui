@@ -1,9 +1,9 @@
 /* eslint-env jest */
-const React = require('react'); // eslint-disable-line no-unused-vars
-const {shallow} = require('enzyme');
-const GreenFlag = require('../../../src/containers/green-flag'); // eslint-disable-line no-unused-vars
-const renderer = require('react-test-renderer');
-const VM = require('scratch-vm');
+import React from 'react'; // eslint-disable-line no-unused-vars
+import {shallow} from 'enzyme';
+import GreenFlag from '../../../src/containers/green-flag'; // eslint-disable-line no-unused-vars
+import renderer from 'react-test-renderer';
+import VM from 'scratch-vm';
 
 describe('GreenFlag Container', () => {
     let vm;

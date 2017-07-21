@@ -1,8 +1,8 @@
 /* eslint-env jest */
-const React = require('react'); // eslint-disable-line no-unused-vars
-const {shallow} = require('enzyme');
-const ButtonComponent = require('../../../src/components/button/button'); // eslint-disable-line no-unused-vars
-const renderer = require('react-test-renderer');
+import React from 'react'; // eslint-disable-line no-unused-vars
+import {shallow} from 'enzyme';
+import ButtonComponent from '../../../src/components/button/button'; // eslint-disable-line no-unused-vars
+import renderer from 'react-test-renderer';
 
 describe('ButtonComponent', () => {
     test('matches snapshot', () => {

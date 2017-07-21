@@ -15,8 +15,8 @@ const computeChunkedRMS = function (samples, chunkSize = 1024) {
     const sampleCount = samples.length;
     const chunkLevels = [];
     for (let i = 0; i < sampleCount; i += chunkSize) {
-        const maxIndex = Math.min(sampleCount - 1, i + chunkSize);
-        chunkLevels.push(computeRMS(samples.slice(i, maxIndex), true));
+        const maxIndex = Math.min(sampleCount, i + chunkSize);
+        chunkLevels.push(computeRMS(samples.slice(i, maxIndex)));
     }
     return chunkLevels;
 };

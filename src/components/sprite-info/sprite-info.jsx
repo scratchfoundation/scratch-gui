@@ -190,4 +190,4 @@ SpriteInfo.propTypes = {
     ])
 };
 
-module.exports = SpriteInfo;
+export default SpriteInfo;

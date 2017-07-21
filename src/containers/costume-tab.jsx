@@ -9,10 +9,10 @@ import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg'
 
 import {connect} from 'react-redux';
 
-const {
+import {
     openCostumeLibrary,
     openBackdropLibrary
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 class CostumeTab extends React.Component {
     constructor (props) {
@@ -134,7 +134,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(CostumeTab);

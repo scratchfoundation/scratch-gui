@@ -20,4 +20,4 @@ AssetPanel.propTypes = {
     ...Selector.propTypes
 };
 
-module.exports = AssetPanel;
+export default AssetPanel;

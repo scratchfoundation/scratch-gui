@@ -41,4 +41,4 @@ LanguageSelector.propTypes = {
     onChange: PropTypes.func
 };
 
-module.exports = LanguageSelector;
+export default LanguageSelector;

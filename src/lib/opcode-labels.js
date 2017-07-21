@@ -66,10 +66,10 @@ const opcodeMap = {
     }
 };
 
-module.exports = function (opcode) {
+export default function (opcode) {
     if (opcode in opcodeMap) return opcodeMap[opcode];
     return {
         category: 'data',
         label: opcode
     };
-};
+}

@@ -13,10 +13,10 @@ import RecordModal from './record-modal.jsx';
 
 import {connect} from 'react-redux';
 
-const {
+import {
     openSoundLibrary,
     openSoundRecorder
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 class SoundTab extends React.Component {
     constructor (props) {
@@ -153,7 +153,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SoundTab);

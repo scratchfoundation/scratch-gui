@@ -29,4 +29,4 @@ const MenuBar = function MenuBar () {
     );
 };
 
-module.exports = MenuBar;
+export default MenuBar;

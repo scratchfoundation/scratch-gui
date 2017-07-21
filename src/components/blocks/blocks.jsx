@@ -19,4 +19,4 @@ const BlocksComponent = props => {
 BlocksComponent.propTypes = {
     componentRef: PropTypes.func
 };
-module.exports = BlocksComponent;
+export default BlocksComponent;

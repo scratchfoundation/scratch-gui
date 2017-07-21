@@ -1,7 +1,8 @@
 import {addLocaleData} from 'react-intl';
 import {updateIntl as superUpdateIntl} from 'react-intl-redux';
 import languages from '../languages.json';
-import messages from '../../locale/messages.json';
+import messages from '../../locale/messages.json'; // eslint-disable-line import/no-unresolved
+
 import {IntlProvider, intlReducer} from 'react-intl-redux';
 
 Object.keys(languages).forEach(locale => {
@@ -22,4 +23,9 @@ const updateIntl = locale => superUpdateIntl({
     messages: messages[locale] || messages.en
 });
 
-export {intlReducer as default, IntlProvider, intlInitialState, updateIntl};
+export {
+    intlReducer as default,
+    IntlProvider,
+    intlInitialState,
+    updateIntl
+};

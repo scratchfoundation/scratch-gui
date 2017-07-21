@@ -56,4 +56,4 @@ LibraryItem.propTypes = {
     onSelect: PropTypes.func.isRequired
 };
 
-module.exports = LibraryItem;
+export default LibraryItem;

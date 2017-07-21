@@ -3,14 +3,14 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-const {
+import {
     openBackdropLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeSoundLibrary,
     closeSpriteLibrary
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 
@@ -117,7 +117,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(TargetPane);

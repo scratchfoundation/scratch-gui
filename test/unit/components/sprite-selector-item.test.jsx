@@ -1,12 +1,11 @@
 /* eslint-env jest */
-const React = require('react'); // eslint-disable-line no-unused-vars
-const {shallow} = require('enzyme');
-const SpriteSelectorItemComponent = require( // eslint-disable-line no-unused-vars
-    '../../../src/components/sprite-selector-item/sprite-selector-item');
-const CostumeCanvas = require( // eslint-disable-line no-unused-vars
-    '../../../src/components/costume-canvas/costume-canvas');
-const CloseButton = require('../../../src/components/close-button/close-button'); // eslint-disable-line no-unused-vars
-const renderer = require('react-test-renderer');
+import React from 'react'; // eslint-disable-line no-unused-vars
+import {shallow} from 'enzyme';
+// eslint-disable-next-line no-unused-vars
+import SpriteSelectorItemComponent from '../../../src/components/sprite-selector-item/sprite-selector-item';
+import CostumeCanvas from '../../../src/components/costume-canvas/costume-canvas';
+import CloseButton from '../../../src/components/close-button/close-button'; // eslint-disable-line no-unused-vars
+import renderer from 'react-test-renderer';
 
 describe('SpriteSelectorItemComponent', () => {
     let className;

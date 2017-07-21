@@ -113,4 +113,4 @@ const vmListenerHOC = function (WrappedComponent) {
     )(VMListener);
 };
 
-module.exports = vmListenerHOC;
+export default vmListenerHOC;

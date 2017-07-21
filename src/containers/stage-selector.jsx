@@ -44,7 +44,7 @@ const mapStateToProps = (state, {assetId}) => ({
     url: assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
 )(StageSelector);

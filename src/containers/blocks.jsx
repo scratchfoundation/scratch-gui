@@ -263,4 +263,4 @@ Blocks.defaultProps = {
     options: Blocks.defaultOptions
 };
 
-module.exports = Blocks;
+export default Blocks;

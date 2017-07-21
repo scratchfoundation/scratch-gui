@@ -1,6 +1,7 @@
 import xhr from 'xhr';
 
 import log from './log';
+import emptyProject from './empty-project.json';
 
 class ProjectLoader {
     constructor () {
@@ -17,6 +18,6 @@ class ProjectLoader {
     }
 }
 
-ProjectLoader.DEFAULT_PROJECT_DATA = require('./empty-project.json');
+ProjectLoader.DEFAULT_PROJECT_DATA = emptyProject;
 
-module.exports = new ProjectLoader();
+export default new ProjectLoader();

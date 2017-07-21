@@ -51,4 +51,4 @@ Prompt.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-module.exports = Prompt;
+export default Prompt;

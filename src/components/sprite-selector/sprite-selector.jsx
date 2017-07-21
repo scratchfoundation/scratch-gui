@@ -98,4 +98,4 @@ SpriteSelectorComponent.propTypes = {
     })
 };
 
-module.exports = SpriteSelectorComponent;
+export default SpriteSelectorComponent;

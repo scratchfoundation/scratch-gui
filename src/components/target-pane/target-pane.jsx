@@ -166,4 +166,4 @@ TargetPane.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-module.exports = TargetPane;
+export default TargetPane;

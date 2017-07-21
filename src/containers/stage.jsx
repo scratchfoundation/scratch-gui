@@ -195,4 +195,4 @@ Stage.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-module.exports = Stage;
+export default Stage;

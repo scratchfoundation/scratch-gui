@@ -53,4 +53,4 @@ MonitorComponent.defaultProps = {
     y: 0
 };
 
-module.exports = MonitorComponent;
+export default MonitorComponent;

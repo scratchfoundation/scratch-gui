@@ -83,4 +83,4 @@ PlaybackStep.propTypes = {
     trimStart: PropTypes.number.isRequired
 };
 
-module.exports = PlaybackStep;
+export default PlaybackStep;

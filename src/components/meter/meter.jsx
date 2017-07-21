@@ -59,4 +59,4 @@ Meter.propTypes = {
     width: PropTypes.number
 };
 
-module.exports = Meter;
+export default Meter;

@@ -67,4 +67,4 @@ AudioTrimmer.propTypes = {
     trimStart: PropTypes.number.isRequired
 };
 
-module.exports = AudioTrimmer;
+export default AudioTrimmer;

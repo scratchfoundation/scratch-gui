@@ -50,4 +50,4 @@ class AudioBufferPlayer {
     }
 }
 
-module.exports = AudioBufferPlayer;
+export default AudioBufferPlayer;

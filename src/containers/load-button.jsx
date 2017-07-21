@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
     loadProject: state.vm.fromJSON.bind(state.vm)
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
 )(LoadButton);

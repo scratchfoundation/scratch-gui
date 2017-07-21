@@ -53,4 +53,4 @@ StageSelector.propTypes = {
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };
-module.exports = StageSelector;
+export default StageSelector;

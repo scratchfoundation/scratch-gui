@@ -91,4 +91,4 @@ SoundLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-module.exports = SoundLibrary;
+export default SoundLibrary;

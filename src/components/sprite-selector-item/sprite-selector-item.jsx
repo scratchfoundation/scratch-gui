@@ -46,4 +46,4 @@ SpriteSelectorItem.propTypes = {
     selected: PropTypes.bool.isRequired
 };
 
-module.exports = SpriteSelectorItem;
+export default SpriteSelectorItem;

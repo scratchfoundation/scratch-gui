@@ -95,6 +95,6 @@ const mapStateToProps = (state, {soundIndex}) => {
     };
 };
 
-module.exports = connect(
+export default connect(
     mapStateToProps
 )(SoundEditor);

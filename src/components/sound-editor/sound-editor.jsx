@@ -66,4 +66,4 @@ SoundEditor.propTypes = {
     playhead: PropTypes.number
 };
 
-module.exports = SoundEditor;
+export default SoundEditor;

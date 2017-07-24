@@ -1,0 +1,19 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.input-group {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-label, .input-label-secondary {
+    font-size: 0.625rem;
+    margin-right: calc($space / 2);
+    user-select: none;
+    cursor: default;
+}
+
+.input-label {
+    font-weight: bold;
+}

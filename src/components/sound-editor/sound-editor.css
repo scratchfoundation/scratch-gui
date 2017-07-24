@@ -1,0 +1,52 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    padding: calc(2 * $space);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.row + .row {
+    margin-top: calc(2 * $space);
+}
+
+.input-group + .input-group {
+    margin-left: calc(2 * $space);
+}
+
+.waveform-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    position: relative;
+
+    background: $ui-pane-gray;
+    border: 1px solid $ui-pane-border;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.button {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.25rem;
+    outline: none;
+    background: white;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+}
+
+.button img {
+    flex-grow: 1;
+    max-width: 100%;
+    max-height: 100%;
+}

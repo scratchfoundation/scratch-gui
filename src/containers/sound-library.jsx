@@ -40,8 +40,8 @@ class SoundLibrary extends React.PureComponent {
             };
             return this.audioEngine.decodeSound(sound);
         })
-        .then(() => {
-            this.player.playSound(soundItem._md5);
+        .then(soundId => {
+            this.player.playSound(soundId);
         });
     }
     handleItemMouseLeave () {

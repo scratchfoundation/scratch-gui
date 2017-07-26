@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
-import languages from '../../languages.json';
+import languages from '../../locale.js';
 import languageIcon from './language-icon.svg';
 import styles from './language-selector.css';
 
@@ -27,7 +27,7 @@ const LanguageSelector = ({
                         key={locale}
                         value={locale}
                     >
-                        {languages[locale]}
+                        {languages[locale].name}
                     </option>
                 ))}
             </select>

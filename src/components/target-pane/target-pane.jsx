@@ -11,9 +11,12 @@ import SoundLibrary from '../../containers/sound-library.jsx';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './target-pane.css';
-import addIcon from './icon--add.svg';
+import spriteIcon from './icon--sprite.svg';
+import backdropIcon from './icon--backdrop.svg';
+
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -75,29 +78,22 @@ const TargetPane = ({
                 onSelect={onSelectSprite}
             />}
             <Box>
-
-                <button
-                    className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
-                    title="Add sprite"
-                    onClick={onNewSpriteClick}
-                >
-                    <img
+                <Box className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}>
+                    <IconButton
                         className={styles.addButton}
-                        src={addIcon}
+                        img={spriteIcon}
+                        title="Add Sprite"
+                        onClick={onNewSpriteClick}
                     />
-                </button>
-
-                <button
-                    className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
-                    title="Add backdrop"
-                    onClick={onNewBackdropClick}
-                >
-                    <img
+                </Box>
+                <Box className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}>
+                    <IconButton
                         className={styles.addButton}
-                        src={addIcon}
+                        img={backdropIcon}
+                        title="Add Backdrop"
+                        onClick={onNewBackdropClick}
                     />
-                </button>
-
+                </Box>
                 <SpriteLibrary
                     visible={spriteLibraryVisible}
                     vm={vm}

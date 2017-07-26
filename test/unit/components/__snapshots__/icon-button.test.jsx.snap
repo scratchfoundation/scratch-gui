@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButtonComponent matches snapshot 1`] = `
+<div
+  className="custom-class-name"
+  onClick={[Function]}
+  style={
+    Object {
+      "alignContent": undefined,
+      "alignItems": undefined,
+      "alignSelf": undefined,
+      "flexBasis": undefined,
+      "flexDirection": undefined,
+      "flexGrow": undefined,
+      "flexShrink": undefined,
+      "flexWrap": undefined,
+      "height": undefined,
+      "justifyContent": undefined,
+      "width": undefined,
+    }
+  }
+>
+  <img
+    className={undefined}
+    src="imgSrc"
+  />
+  <div
+    className=""
+    style={
+      Object {
+        "alignContent": undefined,
+        "alignItems": undefined,
+        "alignSelf": undefined,
+        "flexBasis": undefined,
+        "flexDirection": undefined,
+        "flexGrow": undefined,
+        "flexShrink": undefined,
+        "flexWrap": undefined,
+        "height": undefined,
+        "justifyContent": undefined,
+        "width": undefined,
+      }
+    }
+  >
+    <div>
+      Text
+    </div>
+  </div>
+</div>
+`;

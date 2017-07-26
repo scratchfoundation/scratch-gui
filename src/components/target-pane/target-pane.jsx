@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import VM from 'scratch-vm';
 
@@ -17,6 +18,21 @@ import styles from './target-pane.css';
 import spriteIcon from './icon--sprite.svg';
 import backdropIcon from './icon--backdrop.svg';
 
+const addSpriteMessage = (
+    <FormattedMessage
+        defaultMessage="Add Sprite"
+        description="Button to add a sprite in the target pane"
+        id="targetPane.addSprite"
+    />
+);
+
+const addBackdropMessage = (
+    <FormattedMessage
+        defaultMessage="Add Backdrop"
+        description="Button to add a backdrop in the target pane"
+        id="targetPane.addBackdrop"
+    />
+);
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -82,7 +98,7 @@ const TargetPane = ({
                     <IconButton
                         className={styles.addButton}
                         img={spriteIcon}
-                        title="Add Sprite"
+                        title={addSpriteMessage}
                         onClick={onNewSpriteClick}
                     />
                 </Box>
@@ -90,7 +106,7 @@ const TargetPane = ({
                     <IconButton
                         className={styles.addButton}
                         img={backdropIcon}
-                        title="Add Backdrop"
+                        title={addBackdropMessage}
                         onClick={onNewBackdropClick}
                     />
                 </Box>

@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-
-import Box from '../box/box.jsx';
 import styles from './icon-button.css';
 
 const IconButton = ({
@@ -11,7 +9,7 @@ const IconButton = ({
     title,
     onClick
 }) => (
-    <Box
+    <div
         className={classNames(styles.container, className)}
         onClick={onClick}
     >
@@ -19,10 +17,10 @@ const IconButton = ({
             className={styles.icon}
             src={img}
         />
-        <Box className={styles.title}>
+        <div className={styles.title}>
             {title}
-        </Box>
-    </Box>
+        </div>
+    </div>
 );
 
 IconButton.propTypes = {

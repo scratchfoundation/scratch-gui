@@ -36,17 +36,36 @@
 }
 
 .button {
-    width: 2rem;
     height: 2rem;
     padding: 0.25rem;
     outline: none;
     background: white;
     border-radius: 0.25rem;
     border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.2s;
 }
 
 .button img {
     flex-grow: 1;
     max-width: 100%;
     max-height: 100%;
+    min-width: 1.5rem;
+}
+
+.trim-button {
+    display: flex;
+    align-items: center;
+    padding-right: 10px; /* To equalize with empty whitespace from image on left */
+}
+
+.trim-button-active {
+    filter: hue-rotate(155deg); /* @todo replace blue -> red with real submit icon */
+}
+
+.input-group-right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row-reverse;
 }

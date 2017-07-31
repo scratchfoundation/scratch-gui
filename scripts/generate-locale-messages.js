@@ -42,12 +42,11 @@ Missing locales are ignored, react-intl will use the default messages for them.
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const languages = require('../src/languages.json');
 
+const locales = ['en', 'es', 'fr'];
 const LANG_DIR = './translations/';
 const MSGS_DIR = './locale/';
 
-const locales = Object.keys(languages);
 let messages = locales.reduce((collection, lang) => {
     let langMessages = {};
     try {

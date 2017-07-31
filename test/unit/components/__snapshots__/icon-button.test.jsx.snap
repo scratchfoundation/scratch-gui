@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButtonComponent matches snapshot 1`] = `
+<div
+  className="custom-class-name"
+  onClick={[Function]}
+>
+  <img
+    className={undefined}
+    src="imgSrc"
+  />
+  <div
+    className={undefined}
+  >
+    <div>
+      Text
+    </div>
+  </div>
+</div>
+`;

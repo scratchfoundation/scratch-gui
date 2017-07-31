@@ -9,6 +9,7 @@
 
 .language-icon {
     height:  2rem;
+    display:none;
 }
 
 .language-select {
@@ -17,7 +18,7 @@
     border: 1px solid #4c97ff;
     user-select: none;
     outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: rgba(255, 255, 255, 0.5);
+    color: #3373cc;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

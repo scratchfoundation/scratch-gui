@@ -1,26 +1,25 @@
 import {addLocaleData} from 'react-intl';
 import {updateIntl as superUpdateIntl} from 'react-intl-redux';
-import languages from '../languages.json';
-import messages from '../../locale/messages.json'; // eslint-disable-line import/no-unresolved
-
 import {IntlProvider, intlReducer} from 'react-intl-redux';
 
-Object.keys(languages).forEach(locale => {
+import locales from '../locale.js';
+
+Object.keys(locales).forEach(locale => {
     // TODO: will need to handle locales not in the default intl - see www/custom-locales
-    import(`react-intl/locale-data/${locale}`).then(data => addLocaleData(data));
+    addLocaleData(locales[locale].localeData);
 });
 
 const intlInitialState = {
     intl: {
         defaultLocale: 'en',
         locale: 'en',
-        messages: messages.en
+        messages: locales.en.messages
     }
 };
 
 const updateIntl = locale => superUpdateIntl({
     locale: locale,
-    messages: messages[locale] || messages.en
+    messages: locales[locale].messages || locales.en.messages
 });
 
 export {

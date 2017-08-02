@@ -20,7 +20,8 @@ class SoundEditor extends React.Component {
             'handleUpdatePlayhead',
             'handleActivateTrim',
             'handleUpdateTrimEnd',
-            'handleUpdateTrimStart'
+            'handleUpdateTrimStart',
+            'handleEffect'
         ]);
         this.state = {
             chunkLevels: computeChunkedRMS(this.props.samples),
@@ -94,6 +95,12 @@ class SoundEditor extends React.Component {
     handleUpdateTrimStart (trimStart) {
         this.setState({trimStart});
     }
+    effectFactory (name) {
+        return () => this.handleEffect(name);
+    }
+    handleEffect (/* name */) {
+        // @todo implement effects
+    }
     render () {
         return (
             <SoundEditorComponent
@@ -104,9 +111,16 @@ class SoundEditor extends React.Component {
                 trimStart={this.state.trimStart}
                 onActivateTrim={this.handleActivateTrim}
                 onChangeName={this.handleChangeName}
+                onEcho={this.effectFactory('echo')}
+                onFaster={this.effectFactory('faster')}
+                onLouder={this.effectFactory('louder')}
                 onPlay={this.handlePlay}
+                onReverse={this.effectFactory('reverse')}
+                onRobot={this.effectFactory('robot')}
                 onSetTrimEnd={this.handleUpdateTrimEnd}
                 onSetTrimStart={this.handleUpdateTrimStart}
+                onSlower={this.effectFactory('slower')}
+                onSofter={this.effectFactory('softer')}
                 onStop={this.handleStopPlaying}
             />
         );

@@ -69,3 +69,17 @@
     display: flex;
     flex-direction: row-reverse;
 }
+
+.effect-button {
+    flex-basis: 150px;
+    color: #575e75; /* @todo discuss the multiple font colors with Carl, move to variable */
+}
+
+.effect-button + .effect-button {
+    margin: 0;
+}
+
+.effect-button img {
+    width: 60px;
+    height: 60px;
+}

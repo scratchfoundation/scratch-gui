@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+
 import Waveform from '../waveform/waveform.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
@@ -15,6 +17,34 @@ import trimIcon from './icon--trim.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
+const messages = defineMessages({
+    sound: {
+        id: 'soundEditor.sound',
+        description: 'Lable for the name of the sound',
+        defaultMessage: 'Sound'
+    },
+    play: {
+        id: 'soundEditor.play',
+        description: 'Title of the button to start playing the sound',
+        defaultMessage: 'Play'
+    },
+    stop: {
+        id: 'soundEditor.stop',
+        description: 'Title of the button to stop the sound',
+        defaultMessage: 'Stop'
+    },
+    trim: {
+        id: 'soundEditor.trim',
+        description: 'Title of the button to start trimminging the sound',
+        defaultMessage: 'Trim'
+    },
+    save: {
+        id: 'soundEditor.save',
+        description: 'Title of the button to save trimmed sound',
+        defaultMessage: 'Save'
+    }
+});
+
 const SoundEditor = props => (
     <div className={styles.editorContainer}>
         <div className={styles.row}>
@@ -22,7 +52,7 @@ const SoundEditor = props => (
                 {props.playhead ? (
                     <button
                         className={classNames(styles.button, styles.stopButtonn)}
-                        title={'Stop'}
+                        title={props.intl.formatMessage(messages.stop)}
                         onClick={props.onStop}
                     >
                         <img src={stopIcon} />
@@ -30,7 +60,7 @@ const SoundEditor = props => (
                 ) : (
                     <button
                         className={classNames(styles.button, styles.playButton)}
-                        title={'Play'}
+                        title={props.intl.formatMessage(messages.play)}
                         onClick={props.onPlay}
                     >
                         <img src={playIcon} />
@@ -38,7 +68,7 @@ const SoundEditor = props => (
                 )}
             </div>
             <div className={styles.inputGroup}>
-                <Label text="Sound">
+                <Label text={props.intl.formatMessage(messages.sound)}>
                     <BufferedInput
                         tabIndex="1"
                         type="text"
@@ -52,11 +82,19 @@ const SoundEditor = props => (
                     className={classNames(styles.button, styles.trimButton, {
                         [styles.trimButtonActive]: props.trimStart !== null
                     })}
-                    title={props.trimStart === null ? 'Trim' : 'Save'}
+                    title={props.trimStart === null ? (
+                        props.intl.formatMessage(messages.trim)
+                    ) : (
+                        props.intl.formatMessage(messages.save)
+                    )}
                     onClick={props.onActivateTrim}
                 >
                     <img src={trimIcon} />
-                    {props.trimStart === null ? 'Trim' : 'Save'}
+                    {props.trimStart === null ? (
+                        <FormattedMessage {...messages.trim} />
+                    ) : (
+                        <FormattedMessage {...messages.save} />
+                    )}
                 </button>
             </div>
         </div>
@@ -81,6 +119,7 @@ const SoundEditor = props => (
 
 SoundEditor.propTypes = {
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
+    intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
     onChangeName: PropTypes.func.isRequired,
@@ -93,4 +132,4 @@ SoundEditor.propTypes = {
     trimStart: PropTypes.number
 };
 
-export default SoundEditor;
+export default injectIntl(SoundEditor);

@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React from 'react'; // eslint-disable-line no-unused-vars
-import {mount} from 'enzyme';
+import {mountWithIntl} from '../../helpers/intl-helpers';
 import configureStore from 'redux-mock-store';
 import mockAudioBufferPlayer from '../../__mocks__/audio-buffer-player.js';
 
@@ -38,7 +38,7 @@ describe('Sound Editor Container', () => {
     });
 
     test('should pass the correct data to the component from the store', () => {
-        const wrapper = mount(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
         const componentProps = wrapper.find(SoundEditorComponent).props();
         // Data retreived and processed by the `connect` with the store
         expect(componentProps.name).toEqual('first name');
@@ -52,7 +52,7 @@ describe('Sound Editor Container', () => {
     });
 
     test('it plays when clicked and stops when clicked again', () => {
-        const wrapper = mount(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
         const component = wrapper.find(SoundEditorComponent);
         // Ensure rendering doesn't start playing any sounds
         expect(mockAudioBufferPlayer.instance.play.mock.calls).toEqual([]);
@@ -71,7 +71,7 @@ describe('Sound Editor Container', () => {
     });
 
     test('it sets the component props for trimming and submits to the vm', () => {
-        const wrapper = mount(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
         const component = wrapper.find(SoundEditorComponent);
 
         component.props().onActivateTrim();
@@ -85,7 +85,7 @@ describe('Sound Editor Container', () => {
     });
 
     test('it submits name changes to the vm', () => {
-        const wrapper = mount(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
         const component = wrapper.find(SoundEditorComponent);
         component.props().onChangeName('hello');
         expect(vm.renameSound).toHaveBeenCalledWith(soundIndex, 'hello');

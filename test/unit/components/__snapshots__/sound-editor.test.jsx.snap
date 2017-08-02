@@ -54,7 +54,9 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         <img
           src="test-file-stub"
         />
-        Save
+        <span>
+          Save
+        </span>
       </button>
     </div>
   </div>

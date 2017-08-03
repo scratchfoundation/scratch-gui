@@ -48,6 +48,15 @@ describe('costumes, sounds and variables', () => {
         .then(() => clickXpath('//button[@title="Play"]'))
         .then(() => clickText('meow'))
         .then(() => clickXpath('//button[@title="Play"]'))
+
+        .then(() => clickText('Louder'))
+        .then(() => clickText('Softer'))
+        .then(() => clickText('Faster'))
+        .then(() => clickText('Slower'))
+        .then(() => clickText('Robot'))
+        .then(() => clickText('Echo'))
+        .then(() => clickText('Reverse'))
+
         .then(() => getLogs(errorWhitelist))
         .then(logs => expect(logs).toEqual([]));
     });

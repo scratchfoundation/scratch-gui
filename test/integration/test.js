@@ -1,4 +1,6 @@
 /* eslint-env jest */
+/* globals Promise */
+
 import path from 'path';
 import {
     clickText,
@@ -59,10 +61,11 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Load a project by ID', () => {
-        // @todo choose a more interesting project?
-        const projectId = '168754184';
+        const projectId = '96708228';
         return driver.get('file://' + uri + '#' + projectId)
+        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
         .then(() => clickXpath('//img[@title="Go"]'))
+        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
         .then(() => clickXpath('//img[@title="Stop"]'))
         .then(() => getLogs(errorWhitelist))
         .then(logs => expect(logs).toEqual([]));

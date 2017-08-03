@@ -68,13 +68,17 @@ describe('costumes, sounds and variables', () => {
         .then(logs => expect(logs).toEqual([]));
     });
 
-    test('Creating a variable', () => {
+    test('Creating variables', () => {
         return driver.get('file://' + uri)
         .then(() => clickText('Blocks'))
         .then(() => clickText('Data'))
         .then(() => clickText('Create variable...'))
         .then(() => findByXpath("//input[@placeholder='']"))
         .then((el) => el.sendKeys('score'))
+        .then(() => clickButton('OK'))
+        .then(() => clickText('Create variable...'))
+        .then(() => findByXpath("//input[@placeholder='']"))
+        .then((el) => el.sendKeys('second variable'))
         .then(() => clickButton('OK'))
         .then(() => getLogs(errorWhitelist))
         .then(logs => expect(logs).toEqual([]));

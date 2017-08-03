@@ -1,17 +1,14 @@
 /* eslint-env jest */
-const {
-    getLogs,
+import path from 'path';
+import {
     clickText,
     clickButton,
     clickXpath,
+    driver,
     findByXpath,
-    clickCostumeTab,
-    clickScriptsTab,
-    clickSoundsTab,
-    driver
-} = require('../helpers/selenium-helpers');
+    getLogs
+} from '../helpers/selenium-helpers';
 
-const path = require('path');
 const uri = path.resolve(__dirname, '../../build/index.html');
 
 const errorWhitelist = [
@@ -25,7 +22,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Adding a costume', () => {
         return driver.get('file://' + uri)
-        .then(() => clickCostumeTab())
+        .then(() => clickText('Costumes'))
         .then(() => clickText('Add Costume'))
         .then(() => findByXpath("//input[@placeholder='what are you looking for?']"))
         .then((el) => el.sendKeys('abb'))
@@ -38,7 +35,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Adding a sound', () => {
         return driver.get('file://' + uri)
-        .then(() => clickSoundsTab())
+        .then(() => clickText('Sounds'))
         .then(() => clickText('Add Sound'))
         .then(() => findByXpath("//input[@placeholder='what are you looking for?']"))
         .then((el) => el.sendKeys('chom'))
@@ -73,7 +70,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Creating a variable', () => {
         return driver.get('file://' + uri)
-        .then(() => clickScriptsTab())
+        .then(() => clickText('Blocks'))
         .then(() => clickText('Data'))
         .then(() => clickText('Create variable...'))
         .then(() => findByXpath("//input[@placeholder='']"))

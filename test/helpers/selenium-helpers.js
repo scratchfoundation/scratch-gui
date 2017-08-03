@@ -1,17 +1,13 @@
 /* eslint-env jest */
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 
-const webdriver = require('selenium-webdriver');
+import webdriver from 'selenium-webdriver';
 
 const {By, until} = webdriver;
 
 const driver = new webdriver.Builder()
     .forBrowser('chrome')
     .build();
-
-const clickScriptsTab = () => driver.findElement(By.id('react-tabs-0')).click();
-const clickCostumeTab = () => driver.findElement(By.id('react-tabs-2')).click();
-const clickSoundsTab = () => driver.findElement(By.id('react-tabs-4')).click();
 
 const findByXpath = (xpath) => {
     return driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
@@ -24,6 +20,7 @@ const clickXpath = (xpath) => {
 const clickText = (text) => {
     return clickXpath(`//*[contains(text(), '${text}')]`);
 };
+
 const clickButton = (text) => {
     return clickXpath(`//button[contains(text(), '${text}')]`);
 };
@@ -48,13 +45,10 @@ const getLogs = (whitelist) => {
 };
 
 export {
-    getLogs,
     clickText,
     clickButton,
     clickXpath,
+    driver,
     findByXpath,
-    clickCostumeTab,
-    clickScriptsTab,
-    clickSoundsTab,
-    driver
+    getLogs
 };

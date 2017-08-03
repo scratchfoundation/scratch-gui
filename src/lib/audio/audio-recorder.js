@@ -1,3 +1,4 @@
+import 'get-float-time-domain-data';
 import SharedAudioContext from './shared-audio-context.js';
 import {computeRMS} from './audio-util.js';
 

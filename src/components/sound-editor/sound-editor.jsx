@@ -6,14 +6,23 @@ import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-int
 import Waveform from '../waveform/waveform.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
+
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import AudioTrimmer from '../../containers/audio-trimmer.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './sound-editor.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
 import trimIcon from './icon--trim.svg';
+import echoIcon from './icon--echo.svg';
+import higherIcon from './icon--higher.svg';
+import lowerIcon from './icon--lower.svg';
+import louderIcon from './icon--louder.svg';
+import softerIcon from './icon--softer.svg';
+import robotIcon from './icon--robot.svg';
+import reverseIcon from './icon--reverse.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -42,6 +51,41 @@ const messages = defineMessages({
         id: 'soundEditor.save',
         description: 'Title of the button to save trimmed sound',
         defaultMessage: 'Save'
+    },
+    faster: {
+        id: 'soundEditor.faster',
+        description: 'Title of the button to apply the faster effect',
+        defaultMessage: 'Faster'
+    },
+    slower: {
+        id: 'soundEditor.slower',
+        description: 'Title of the button to apply the slower effect',
+        defaultMessage: 'Slower'
+    },
+    echo: {
+        id: 'soundEditor.echo',
+        description: 'Title of the button to apply the echo effect',
+        defaultMessage: 'Echo'
+    },
+    robot: {
+        id: 'soundEditor.robot',
+        description: 'Title of the button to apply the robot effect',
+        defaultMessage: 'Robot'
+    },
+    louder: {
+        id: 'soundEditor.louder',
+        description: 'Title of the button to apply the louder effect',
+        defaultMessage: 'Louder'
+    },
+    softer: {
+        id: 'soundEditor.softer',
+        description: 'Title of the button to apply thr.softer effect',
+        defaultMessage: 'Softer'
+    },
+    reverse: {
+        id: 'soundEditor.reverse',
+        description: 'Title of the button to apply the reverse effect',
+        defaultMessage: 'Reverse'
     }
 });
 
@@ -114,6 +158,50 @@ const SoundEditor = props => (
                 />
             </div>
         </div>
+        <div className={styles.row}>
+            <IconButton
+                className={styles.effectButton}
+                img={higherIcon}
+                title={<FormattedMessage {...messages.faster} />}
+                onClick={props.onFaster}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={lowerIcon}
+                title={<FormattedMessage {...messages.slower} />}
+                onClick={props.onSlower}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={echoIcon}
+                title={<FormattedMessage {...messages.echo} />}
+                onClick={props.onEcho}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={robotIcon}
+                title={<FormattedMessage {...messages.robot} />}
+                onClick={props.onRobot}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={louderIcon}
+                title={<FormattedMessage {...messages.louder} />}
+                onClick={props.onLouder}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={softerIcon}
+                title={<FormattedMessage {...messages.softer} />}
+                onClick={props.onSofter}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={reverseIcon}
+                title={<FormattedMessage {...messages.reverse} />}
+                onClick={props.onReverse}
+            />
+        </div>
     </div>
 );
 
@@ -123,9 +211,16 @@ SoundEditor.propTypes = {
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
     onChangeName: PropTypes.func.isRequired,
+    onEcho: PropTypes.func.isRequired,
+    onFaster: PropTypes.func.isRequired,
+    onLouder: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
+    onReverse: PropTypes.func.isRequired,
+    onRobot: PropTypes.func.isRequired,
     onSetTrimEnd: PropTypes.func,
     onSetTrimStart: PropTypes.func,
+    onSlower: PropTypes.func.isRequired,
+    onSofter: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
     playhead: PropTypes.number,
     trimEnd: PropTypes.number,

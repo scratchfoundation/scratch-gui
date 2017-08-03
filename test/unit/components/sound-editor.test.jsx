@@ -15,6 +15,13 @@ describe('Sound Editor Component', () => {
             onActivateTrim: jest.fn(),
             onChangeName: jest.fn(),
             onPlay: jest.fn(),
+            onReverse: jest.fn(),
+            onSofter: jest.fn(),
+            onLouder: jest.fn(),
+            onRobot: jest.fn(),
+            onEcho: jest.fn(),
+            onFaster: jest.fn(),
+            onSlower: jest.fn(),
             onSetTrimEnd: jest.fn(),
             onSetTrimStart: jest.fn(),
             onStop: jest.fn()
@@ -56,5 +63,29 @@ describe('Sound Editor Component', () => {
             .simulate('change', {target: {value: 'hello'}})
             .simulate('blur');
         expect(props.onChangeName).toHaveBeenCalled();
+    });
+    test('effect buttons call the correct callbacks', () => {
+        const wrapper = mountWithIntl(<SoundEditor {...props} />);
+
+        wrapper.find('[children="Reverse"]').simulate('click');
+        expect(props.onReverse).toHaveBeenCalled();
+
+        wrapper.find('[children="Echo"]').simulate('click');
+        expect(props.onEcho).toHaveBeenCalled();
+
+        wrapper.find('[children="Robot"]').simulate('click');
+        expect(props.onRobot).toHaveBeenCalled();
+
+        wrapper.find('[children="Faster"]').simulate('click');
+        expect(props.onFaster).toHaveBeenCalled();
+
+        wrapper.find('[children="Slower"]').simulate('click');
+        expect(props.onSlower).toHaveBeenCalled();
+
+        wrapper.find('[children="Louder"]').simulate('click');
+        expect(props.onLouder).toHaveBeenCalled();
+
+        wrapper.find('[children="Softer"]').simulate('click');
+        expect(props.onSofter).toHaveBeenCalled();
     });
 });

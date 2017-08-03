@@ -3,7 +3,6 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import {mountWithIntl} from '../../helpers/intl-helpers';
 import configureStore from 'redux-mock-store';
 import mockAudioBufferPlayer from '../../__mocks__/audio-buffer-player.js';
-
 import SoundEditor from '../../../src/containers/sound-editor'; // eslint-disable-line no-unused-vars
 // eslint-disable-next-line no-unused-vars
 import SoundEditorComponent from '../../../src/components/sound-editor/sound-editor';

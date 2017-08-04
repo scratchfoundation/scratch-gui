@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {computeChunkedRMS} from '../lib/audio/audio-util.js';
-
+import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
 
@@ -98,10 +98,17 @@ class SoundEditor extends React.Component {
     effectFactory (name) {
         return () => this.handleEffect(name);
     }
-    handleEffect (/* name */) {
-        // @todo implement effects
+    handleEffect (name) {
+        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
+        effects.process().then(newBuffer => {
+            const samples = newBuffer.getChannelData(0);
+            const sampleRate = newBuffer.sampleRate;
+            this.submitNewSamples(samples, sampleRate);
+            this.handlePlay();
+        });
     }
     render () {
+        const {effectTypes} = AudioEffects;
         return (
             <SoundEditorComponent
                 chunkLevels={this.state.chunkLevels}
@@ -111,16 +118,16 @@ class SoundEditor extends React.Component {
                 trimStart={this.state.trimStart}
                 onActivateTrim={this.handleActivateTrim}
                 onChangeName={this.handleChangeName}
-                onEcho={this.effectFactory('echo')}
-                onFaster={this.effectFactory('faster')}
-                onLouder={this.effectFactory('louder')}
+                onEcho={this.effectFactory(effectTypes.ECHO)}
+                onFaster={this.effectFactory(effectTypes.FASTER)}
+                onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onPlay={this.handlePlay}
-                onReverse={this.effectFactory('reverse')}
-                onRobot={this.effectFactory('robot')}
+                onReverse={this.effectFactory(effectTypes.REVERSE)}
+                onRobot={this.effectFactory(effectTypes.ROBOT)}
                 onSetTrimEnd={this.handleUpdateTrimEnd}
                 onSetTrimStart={this.handleUpdateTrimStart}
-                onSlower={this.effectFactory('slower')}
-                onSofter={this.effectFactory('softer')}
+                onSlower={this.effectFactory(effectTypes.SLOWER)}
+                onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}
             />
         );

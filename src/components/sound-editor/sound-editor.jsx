@@ -16,6 +16,8 @@ import styles from './sound-editor.css';
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
 import trimIcon from './icon--trim.svg';
+import redoIcon from './icon--redo.svg';
+import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';
 import higherIcon from './icon--higher.svg';
 import lowerIcon from './icon--lower.svg';
@@ -51,6 +53,16 @@ const messages = defineMessages({
         id: 'soundEditor.save',
         description: 'Title of the button to save trimmed sound',
         defaultMessage: 'Save'
+    },
+    undo: {
+        id: 'soundEditor.undo',
+        description: 'Title of the button to undo',
+        defaultMessage: 'Undo'
+    },
+    redo: {
+        id: 'soundEditor.redo',
+        description: 'Title of the button to redo',
+        defaultMessage: 'Redo'
     },
     faster: {
         id: 'soundEditor.faster',
@@ -140,6 +152,24 @@ const SoundEditor = props => (
                         <FormattedMessage {...messages.save} />
                     )}
                 </button>
+                <div className={styles.buttonGroup}>
+                    <button
+                        className={styles.button}
+                        disabled={!props.canUndo}
+                        title={props.intl.formatMessage(messages.undo)}
+                        onClick={props.onUndo}
+                    >
+                        <img src={undoIcon} />
+                    </button>
+                    <button
+                        className={styles.button}
+                        disabled={!props.canRedo}
+                        title={props.intl.formatMessage(messages.redo)}
+                        onClick={props.onRedo}
+                    >
+                        <img src={redoIcon} />
+                    </button>
+                </div>
             </div>
         </div>
         <div className={styles.row}>
@@ -206,6 +236,8 @@ const SoundEditor = props => (
 );
 
 SoundEditor.propTypes = {
+    canRedo: PropTypes.bool.isRequired,
+    canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
     intl: intlShape,
     name: PropTypes.string.isRequired,
@@ -215,6 +247,7 @@ SoundEditor.propTypes = {
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
+    onRedo: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,
     onRobot: PropTypes.func.isRequired,
     onSetTrimEnd: PropTypes.func,
@@ -222,6 +255,7 @@ SoundEditor.propTypes = {
     onSlower: PropTypes.func.isRequired,
     onSofter: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
+    onUndo: PropTypes.func.isRequired,
     playhead: PropTypes.number,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number

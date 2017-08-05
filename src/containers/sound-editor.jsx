@@ -21,7 +21,10 @@ class SoundEditor extends React.Component {
             'handleActivateTrim',
             'handleUpdateTrimEnd',
             'handleUpdateTrimStart',
-            'handleEffect'
+            'handleEffect',
+            'handleUndo',
+            'handleRedo',
+            'submitNewSamples'
         ]);
         this.state = {
             chunkLevels: computeChunkedRMS(this.props.samples),
@@ -29,12 +32,17 @@ class SoundEditor extends React.Component {
             trimStart: null,
             trimEnd: null
         };
+
+        this.redoStack = [];
+        this.undoStack = [];
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
     }
     componentWillReceiveProps (newProps) {
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
+            this.redoStack = [];
+            this.undoStack = [];
             this.resetState(newProps.samples, newProps.sampleRate);
         }
     }
@@ -51,7 +59,11 @@ class SoundEditor extends React.Component {
             trimEnd: null
         });
     }
-    submitNewSamples (samples, sampleRate) {
+    submitNewSamples (samples, sampleRate, skipUndo) {
+        if (!skipUndo) {
+            this.redoStack = [];
+            this.undoStack.push(this.props.samples.slice(0));
+        }
         this.resetState(samples, sampleRate);
         this.props.onUpdateSoundBuffer(
             this.props.soundIndex,
@@ -101,9 +113,25 @@ class SoundEditor extends React.Component {
     handleEffect (/* name */) {
         // @todo implement effects
     }
+    handleUndo () {
+        this.redoStack.push(this.props.samples.slice(0));
+        const samples = this.undoStack.pop();
+        if (samples) {
+            this.submitNewSamples(samples, this.props.sampleRate, true);
+        }
+    }
+    handleRedo () {
+        const samples = this.redoStack.pop();
+        if (samples) {
+            this.undoStack.push(this.props.samples.slice(0));
+            this.submitNewSamples(samples, this.props.sampleRate, true);
+        }
+    }
     render () {
         return (
             <SoundEditorComponent
+                canRedo={this.redoStack.length > 0}
+                canUndo={this.undoStack.length > 0}
                 chunkLevels={this.state.chunkLevels}
                 name={this.props.name}
                 playhead={this.state.playhead}
@@ -115,6 +143,7 @@ class SoundEditor extends React.Component {
                 onFaster={this.effectFactory('faster')}
                 onLouder={this.effectFactory('louder')}
                 onPlay={this.handlePlay}
+                onRedo={this.handleRedo}
                 onReverse={this.effectFactory('reverse')}
                 onRobot={this.effectFactory('robot')}
                 onSetTrimEnd={this.handleUpdateTrimEnd}
@@ -122,6 +151,7 @@ class SoundEditor extends React.Component {
                 onSlower={this.effectFactory('slower')}
                 onSofter={this.effectFactory('softer')}
                 onStop={this.handleStopPlaying}
+                onUndo={this.handleUndo}
             />
         );
     }

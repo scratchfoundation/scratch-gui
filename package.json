@@ -69,7 +69,7 @@
     "react-intl": "2.3.0",
     "react-intl-redux": "0.6.0",
     "react-modal": "2.2.2",
-    "react-redux": "5.0.5",
+    "react-redux": "5.0.6",
     "react-style-proptype": "3.0.0",
     "react-tabs": "1.1.0",
     "react-test-renderer": "^15.5.4",

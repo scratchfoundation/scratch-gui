@@ -69,9 +69,10 @@ class Stage extends React.Component {
         this.rect = this.canvas.getBoundingClientRect();
     }
     getScratchCoords (x, y) {
+        const nativeSize = this.renderer.getNativeSize();
         return [
-            x - (this.rect.width / 2),
-            y - (this.rect.height / 2)
+            (nativeSize[0] / this.rect.width) * (x - (this.rect.width / 2)),
+            (nativeSize[1] / this.rect.height) * (y - (this.rect.height / 2))
         ];
     }
     handleDoubleClick (e) {
@@ -127,6 +128,7 @@ class Stage extends React.Component {
         }
     }
     onMouseDown (e) {
+        this.updateRect();
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
         this.setState({
             mouseDown: true,

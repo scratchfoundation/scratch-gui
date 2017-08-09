@@ -59,12 +59,11 @@ class RobotEffect {
         const vcDiode4 = createDiodeNode(this.audioContext);
 
         const compressor = this.audioContext.createDynamicsCompressor();
-        compressor.threshold.value = -35;
-        compressor.knee.value = 40;
+        compressor.threshold.value = -5;
+        compressor.knee.value = 15;
         compressor.ratio.value = 12;
         compressor.attack.value = 0;
         compressor.release.value = 0.25;
-
 
         const biquadFilter = this.audioContext.createBiquadFilter();
         biquadFilter.type = 'highpass';

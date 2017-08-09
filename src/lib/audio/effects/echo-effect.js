@@ -14,8 +14,8 @@ class EchoEffect {
         this.decay.gain.value = 0.3;
 
         this.compressor = this.audioContext.createDynamicsCompressor();
-        this.compressor.threshold.value = -30;
-        this.compressor.knee.value = 40;
+        this.compressor.threshold.value = -5;
+        this.compressor.knee.value = 15;
         this.compressor.ratio.value = 12;
         this.compressor.attack.value = 0;
         this.compressor.release.value = 0.25;

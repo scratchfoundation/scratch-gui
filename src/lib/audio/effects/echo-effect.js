@@ -5,18 +5,12 @@ class EchoEffect {
         this.input = this.audioContext.createGain();
         this.output = this.audioContext.createGain();
 
-        if (delayTime === 0) {
-            this.input.connect(this.output);
-            return;
-        }
-
         this.effectInput = this.audioContext.createGain();
         this.effectInput.gain.value = 0.75;
-        // this.effectInput.gain.setValueAtTime(0.5, this.audioContext.currentTime + Math.max(0, 0.75 * duration))
 
         this.delay = this.audioContext.createDelay(1);
         this.delay.delayTime.value = delayTime;
-        this.decay = this.audioContext.createGain(); // @todo chain
+        this.decay = this.audioContext.createGain();
         this.decay.gain.value = 0.3;
 
         this.compressor = this.audioContext.createDynamicsCompressor();

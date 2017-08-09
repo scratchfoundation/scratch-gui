@@ -4,7 +4,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-    openBackdropLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
@@ -95,10 +94,6 @@ const mapStateToProps = state => ({
     backdropLibraryVisible: state.modals.backdropLibrary
 });
 const mapDispatchToProps = dispatch => ({
-    onNewBackdropClick: e => {
-        e.preventDefault();
-        dispatch(openBackdropLibrary());
-    },
     onNewSpriteClick: e => {
         e.preventDefault();
         dispatch(openSpriteLibrary());

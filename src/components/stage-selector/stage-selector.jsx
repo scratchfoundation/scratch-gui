@@ -1,10 +1,21 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
+import backdropIcon from './icon--backdrop.svg';
+
+const addBackdropMessage = (
+    <FormattedMessage
+        defaultMessage="Add Backdrop"
+        description="Button to add a backdrop in the target pane"
+        id="targetPane.addBackdrop"
+    />
+);
 
 const StageSelector = props => {
     const {
@@ -12,6 +23,7 @@ const StageSelector = props => {
         selected,
         url,
         onClick,
+        onNewBackdropClick,
         ...componentProps
     } = props;
     return (
@@ -41,7 +53,12 @@ const StageSelector = props => {
                     <div className={styles.label}>Backdrops</div>
                     <div className={styles.count}>{backdropCount}</div>
                 </div>
-
+                <IconButton
+                    className={styles.addButton}
+                    img={backdropIcon}
+                    title={addBackdropMessage}
+                    onClick={onNewBackdropClick}
+                />
             </div>
         </Box>
     );
@@ -50,6 +67,7 @@ const StageSelector = props => {
 StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
     onClick: PropTypes.func,
+    onNewBackdropClick: PropTypes.func,
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };

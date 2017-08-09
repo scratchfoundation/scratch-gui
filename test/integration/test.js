@@ -18,72 +18,72 @@ const errorWhitelist = [
 ];
 
 describe('costumes, sounds and variables', () => {
-    afterAll(() => {
-        return driver.quit();
+    afterAll(async () => {
+        await driver.quit();
     });
 
-    test('Adding a costume', () => {
-        return driver.get('file://' + uri)
-        .then(() => clickText('Costumes'))
-        .then(() => clickText('Add Costume'))
-        .then(() => findByXpath("//input[@placeholder='what are you looking for?']"))
-        .then((el) => el.sendKeys('abb'))
-        .then(() => clickText('abby-a')) // Should close the modal, then click the costumes in the selector
-        .then(() => clickText('costume1'))
-        .then(() => clickText('abby-a'))
-        .then(() => getLogs(errorWhitelist))
-        .then(logs => expect(logs).toEqual([]));
+    test('Adding a costume', async () => {
+        await driver.get('file://' + uri);
+        await clickText('Costumes');
+        await clickText('Add Costume');
+        const el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        await el.sendKeys('abb');
+        await clickText('abby-a'); // Should close the modal, then click the costumes in the selector
+        await clickText('costume1');
+        await clickText('abby-a');
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
     });
 
-    test('Adding a sound', () => {
-        return driver.get('file://' + uri)
-        .then(() => clickText('Sounds'))
-        .then(() => clickText('Add Sound'))
-        .then(() => findByXpath("//input[@placeholder='what are you looking for?']"))
-        .then((el) => el.sendKeys('chom'))
-        .then(() => clickText('chomp')) // Should close the modal, then click the sounds in the selector
-        .then(() => clickText('meow'))
-        .then(() => clickText('chomp'))
-        .then(() => clickXpath('//button[@title="Play"]'))
-        .then(() => clickText('meow'))
-        .then(() => clickXpath('//button[@title="Play"]'))
+    test('Adding a sound', async () => {
+        await driver.get('file://' + uri);
+        await clickText('Sounds');
+        await clickText('Add Sound');
+        const el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        await el.sendKeys('chom');
+        await clickText('chomp'); // Should close the modal, then click the sounds in the selector
+        await clickText('meow');
+        await clickText('chomp');
+        await clickXpath('//button[@title="Play"]');
+        await clickText('meow');
+        await clickXpath('//button[@title="Play"]');
 
-        .then(() => clickText('Louder'))
-        .then(() => clickText('Softer'))
-        .then(() => clickText('Faster'))
-        .then(() => clickText('Slower'))
-        .then(() => clickText('Robot'))
-        .then(() => clickText('Echo'))
-        .then(() => clickText('Reverse'))
+        await clickText('Louder');
+        await clickText('Softer');
+        await clickText('Faster');
+        await clickText('Slower');
+        await clickText('Robot');
+        await clickText('Echo');
+        await clickText('Reverse');
 
-        .then(() => getLogs(errorWhitelist))
-        .then(logs => expect(logs).toEqual([]));
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
     });
 
-    test('Load a project by ID', () => {
+    test('Load a project by ID', async () => {
         const projectId = '96708228';
-        return driver.get('file://' + uri + '#' + projectId)
-        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
-        .then(() => clickXpath('//img[@title="Go"]'))
-        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
-        .then(() => clickXpath('//img[@title="Stop"]'))
-        .then(() => getLogs(errorWhitelist))
-        .then(logs => expect(logs).toEqual([]));
+        await driver.get('file://' + uri + '#' + projectId);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await clickXpath('//img[@title="Go"]');
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await clickXpath('//img[@title="Stop"]');
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
     });
 
-    test('Creating variables', () => {
-        return driver.get('file://' + uri)
-        .then(() => clickText('Blocks'))
-        .then(() => clickText('Data'))
-        .then(() => clickText('Create variable...'))
-        .then(() => findByXpath("//input[@placeholder='']"))
-        .then((el) => el.sendKeys('score'))
-        .then(() => clickButton('OK'))
-        .then(() => clickText('Create variable...'))
-        .then(() => findByXpath("//input[@placeholder='']"))
-        .then((el) => el.sendKeys('second variable'))
-        .then(() => clickButton('OK'))
-        .then(() => getLogs(errorWhitelist))
-        .then(logs => expect(logs).toEqual([]));
+    test('Creating variables', async () => {
+        await driver.get('file://' + uri);
+        await clickText('Blocks');
+        await clickText('Data');
+        await clickText('Create variable...');
+        let el = await findByXpath("//input[@placeholder='']");
+        await el.sendKeys('score');
+        await clickButton('OK');
+        await clickText('Create variable...');
+        el = await findByXpath("//input[@placeholder='']");
+        await el.sendKeys('second variable');
+        await clickButton('OK');
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
     });
 });

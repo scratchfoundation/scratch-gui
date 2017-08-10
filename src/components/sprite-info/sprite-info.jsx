@@ -49,7 +49,7 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <div className={styles.iconWrapper}>
+                        <div className={classNames(styles.iconWrapper, styles.nonEssential)}>
                             <img
                                 className={classNames(styles.xIcon, styles.icon)}
                                 src={xIcon}
@@ -69,7 +69,7 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <div className={styles.iconWrapper}>
+                        <div className={classNames(styles.iconWrapper, styles.nonEssential)}>
                             <img
                                 className={classNames(styles.yIcon, styles.icon)}
                                 src={yIcon}

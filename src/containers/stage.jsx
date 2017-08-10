@@ -40,8 +40,8 @@ class Stage extends React.Component {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
     }
-    shouldComponentUpdate () {
-        return false;
+    shouldComponentUpdate (nextProps) {
+        return this.props.width !== nextProps.width || this.props.height !== nextProps.height;
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -194,7 +194,9 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: PropTypes.instanceOf(VM).isRequired
+    height: PropTypes.number,
+    vm: PropTypes.instanceOf(VM).isRequired,
+    width: PropTypes.number
 };
 
 export default Stage;

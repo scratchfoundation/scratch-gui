@@ -1,1 +1,23 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><defs><style>.cls-1{fill:none;stroke:#575e75;stroke-linecap:round;stroke-linejoin:round}</style></defs><title>show</title><path class="cls-1" d="M14.5 8s-2.91 4-6.5 4-6.5-4-6.5-4S4.41 4 8 4s6.5 4 6.5 4z"/><circle class="cls-1" cx="8" cy="8" r="2"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="11px" viewBox="0 0 16 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>show-icon-active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop---1280x720" transform="translate(-843.000000, -523.000000)" fill-rule="nonzero" fill="#4C97FF">
+            <g id="Sprite-Area" transform="translate(792.000000, 460.000000)">
+                <g id="Sprite-Info">
+                    <g id="show-toggle" transform="translate(12.000000, 52.000000)">
+                        <g id="show-option" transform="translate(31.000000, 0.000000)">
+                            <g id="show-icon-active" transform="translate(8.000000, 11.000000)">
+                                <path d="M14.7867241,3.74707941 C15.4555764,4.62273609 15.482771,6.06288956 14.7867241,6.91811275 C14.7867241,6.91811275 12.6649157,10.6651922 7.99889412,10.6651922 C3.33287255,10.6651922 1.21106414,6.91811275 1.21106414,6.91811275 C0.542211884,6.04245607 0.515017251,4.6023026 1.21106414,3.74707941 C1.21106414,3.74707941 3.33287255,3.80948559e-16 7.99889412,0 C12.6649157,0 14.7867241,3.74707941 14.7867241,3.74707941 Z M7.99889412,9.33204314 C10.2077277,9.33204314 11.9983412,7.5414297 11.9983412,5.33259608 C11.9983412,3.12376246 10.2077277,1.33314902 7.99889412,1.33314902 C5.7900605,1.33314902 3.99944706,3.12376246 3.99944706,5.33259608 C3.99944706,7.5414297 5.7900605,9.33204314 7.99889412,9.33204314 Z" id="Combined-Shape"></path>
+                                <circle id="Oval" cx="8" cy="5.33333333" r="2"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

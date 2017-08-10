@@ -28,7 +28,9 @@ const StageSelector = props => {
     } = props;
     return (
         <Box
-            className={styles.stageSelector}
+            className={classNames(styles.stageSelector, {
+                [styles.isSelected]: selected
+            })}
             onClick={onClick}
             {...componentProps}
         >
@@ -37,10 +39,7 @@ const StageSelector = props => {
             </div>
             <div className={styles.body}>
                 <div
-                    className={classNames({
-                        [styles.flexWrapper]: true,
-                        [styles.isSelected]: selected
-                    })}
+                    className={styles.flexWrapper}
                 >
                     {url ? (
                         <CostumeCanvas
@@ -50,7 +49,13 @@ const StageSelector = props => {
                             width={56}
                         />
                     ) : null}
-                    <div className={styles.label}>Backdrops</div>
+                    <div className={styles.label}>
+                        <FormattedMessage
+                            defaultMessage="Backdrops"
+                            description="Label for the backdrops in the stage selector"
+                            id="stageSelector.backdrops"
+                        />
+                    </div>
                     <div className={styles.count}>{backdropCount}</div>
                 </div>
                 <IconButton

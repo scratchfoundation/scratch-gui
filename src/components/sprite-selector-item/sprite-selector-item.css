@@ -1,4 +1,5 @@
 @import "../../css/units.css";
+@import "../../css/colors.css";
 
 /* @todo: refactor this class name, and component: `sprite-selector` to `sprite` */
 .sprite-selector-item {
@@ -17,22 +18,13 @@
     border-radius: $space;
     text-align: center;
     cursor: pointer;
-}
-
-.sprite-selector-item:hover {
-    border-width: 2px;
-    border-color: #1dacf4;
     transition: 0.25s ease-out;
 }
 
-/* @todo: refactor out descendent selectors into regular classes */
-.sprite-selector-item.is-selected {
+.sprite-selector-item:hover, .sprite-selector-item.is-selected {
     border-width: 2px;
-    border-color: #1dacf4;
-    transition: 0.25s ease-out;
-}
-.sprite-selector-item.is-selected .info-button {
-    display: block;
+    border-color: $motion-primary;
+    box-shadow: 0px 0px 0px 3px $motion-transparent;
 }
 
 .sprite-image {
@@ -44,7 +36,7 @@
     font-size: 0.625rem;
     margin: 0.15rem;
     user-select: none;
-    
+
     /*
         For truncating overflowing text gracefully
         Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text

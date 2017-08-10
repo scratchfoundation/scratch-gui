@@ -1,6 +1,7 @@
 @import "../../css/units.css";
+@import "../../css/colors.css";
 
-$header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
+$header-height: calc(2rem - 2px); /* @todo: half the SpriteInfo area header? */
 
 .stage-selector {
     position: relative; /* for the child element border */
@@ -14,6 +15,13 @@ $header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;
+    cursor: pointer;
+    transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+
+.stage-selector:hover, .stage-selector.is-selected {
+    border-color: $motion-primary;
+    box-shadow: 0px 0px 0px 3px $motion-transparent;
 }
 
 .header {
@@ -22,7 +30,6 @@ $header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
     align-items: center;
     justify-content: center;
     height: $header-height;
-    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #575e75;
@@ -39,65 +46,45 @@ $header-height: 2.5rem; /* @todo: half the SpriteInfo area header? */
 
     /* @todo: make this a mixin for all UI text labels */
     user-select: none;
-    cursor: default;
 }
 
 .body {
     justify-content: space-around;
-    padding: $space;
     height: calc(100% - $header-height);
     background-color: #f9f9f9;
 }
 
 .count {
-    margin: 0 0 0.3rem 0;
-    padding: 0.15rem 0.5rem;
+    padding: 0.3rem 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.625rem;
-    font-weight: bold;
     color: #575e75;
-    background: #ededed;
+    background: white;
+    border: 1px solid #eaeaea;
     border-radius: 0.25rem;
     user-select: none;
 }
 
 .label {
-    margin: 0.4rem 0 0.25rem;
+    margin: 0.75rem 0 0.25rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.5rem;
-    font-weight: bold;
+    font-size: 0.6rem;
     color: #575e75;
     user-select: none;
 }
-
-$border-width: 2px;
 
 .flex-wrapper {
     display: flex;
     flex-direction: column; /* makes rows */
     align-items: center;
     overflow: hidden;
-    background-color: white;
-    border-radius: calc($space / 2);
-    border-width: $border-width;
-    border-style: solid;
-    border-color: #e9eef2;
-    cursor: pointer;
-    transition: border-color 0.1s ease-out;
-}
-
-.flex-wrapper:hover {
-    border-color: #1dacf4;
-}
-
-.flex-wrapper.is-selected {
-    border-color: #1dacf4;
 }
 
 .costume-canvas {
     display: block;
     width: 100%;
     user-select: none;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .add-button {

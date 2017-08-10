@@ -16,14 +16,14 @@ describe('Audio Effects manager', () => {
 
     test('changes buffer length and playback rate for faster effect', () => {
         const audioEffects = new AudioEffects(audioBuffer, 'faster');
-        expect(audioEffects.audioContext._.length).toEqual(Math.floor(400 / 1.5));
-        expect(audioEffects.source.playbackRate.value).toEqual(1.5);
+        expect(audioEffects.audioContext._.length).toBeLessThan(400);
+        expect(audioEffects.source.playbackRate.value).toBeGreaterThan(1);
     });
 
     test('changes buffer length  and playback rate for slower effect', () => {
         const audioEffects = new AudioEffects(audioBuffer, 'slower');
-        expect(audioEffects.audioContext._.length).toEqual(Math.floor(400 / 0.5));
-        expect(audioEffects.source.playbackRate.value).toEqual(0.5);
+        expect(audioEffects.audioContext._.length).toBeGreaterThan(400);
+        expect(audioEffects.source.playbackRate.value).toBeLessThan(1);
     });
 
     test('changes buffer length for echo effect', () => {

@@ -1,12 +1,14 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import MediaQuery from 'react-responsive';
 
 import Box from '../box/box.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 
+import layout from '../../lib/layout-constants.js';
 import styles from './sprite-info.css';
 
 import xIcon from './icon--x.svg';
@@ -49,12 +51,14 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <div className={classNames(styles.iconWrapper, styles.nonEssential)}>
-                            <img
-                                className={classNames(styles.xIcon, styles.icon)}
-                                src={xIcon}
-                            />
-                        </div>
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <div className={styles.iconWrapper}>
+                                <img
+                                    className={classNames(styles.xIcon, styles.icon)}
+                                    src={xIcon}
+                                />
+                            </div>
+                        </MediaQuery>
                         <Label text="x">
                             <BufferedInput
                                 small
@@ -69,12 +73,14 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <div className={classNames(styles.iconWrapper, styles.nonEssential)}>
-                            <img
-                                className={classNames(styles.yIcon, styles.icon)}
-                                src={yIcon}
-                            />
-                        </div>
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <div className={styles.iconWrapper}>
+                                <img
+                                    className={classNames(styles.yIcon, styles.icon)}
+                                    src={yIcon}
+                                />
+                            </div>
+                        </MediaQuery>
                         <Label text="y">
                             <BufferedInput
                                 small

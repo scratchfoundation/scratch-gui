@@ -17,15 +17,8 @@ import StopAll from '../../containers/stop-all.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
+import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
-
-const layout = {
-    fullStageWidth: 480,
-    fullStageHeight: 360,
-    smallerStageWidth: 480 * 0.85,
-    smallerStageHeight: 360 * 0.85,
-    fullSizeMinWidth: 1096
-};
 
 const GUIComponent = props => {
     const {
@@ -95,31 +88,27 @@ const GUIComponent = props => {
                         </Tabs>
                     </Box>
 
-                    <MediaQuery minWidth={layout.fullSizeMinWidth}>
-                        {isFullSize => (
-                            <Box className={styles.stageAndTargetWrapper}>
-                                <Box className={styles.stageMenuWrapper}>
-                                    <GreenFlag vm={vm} />
-                                    <StopAll vm={vm} />
-                                </Box>
-
-                                <Box className={styles.stageWrapper}>
-                                    <Stage
-                                        height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                        shrink={0}
-                                        vm={vm}
-                                        width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                    />
-                                </Box>
-
-                                <Box className={styles.targetWrapper}>
-                                    <TargetPane
-                                        vm={vm}
-                                    />
-                                </Box>
-                            </Box>
-                        )}
-                    </MediaQuery>
+                    <Box className={styles.stageAndTargetWrapper}>
+                        <Box className={styles.stageMenuWrapper}>
+                            <GreenFlag vm={vm} />
+                            <StopAll vm={vm} />
+                        </Box>
+                        <Box className={styles.stageWrapper}>
+                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
+                                <Stage
+                                    height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
+                                    shrink={0}
+                                    vm={vm}
+                                    width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
+                                />
+                            )}</MediaQuery>
+                        </Box>
+                        <Box className={styles.targetWrapper}>
+                            <TargetPane
+                                vm={vm}
+                            />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         </Box>

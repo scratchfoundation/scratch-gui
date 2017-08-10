@@ -79,9 +79,3 @@
     user-select: none;
     outline: none;
 }
-
-@media only screen and (max-width: 1096px) {
-    .non-essential {
-        display: none;
-    }
-}

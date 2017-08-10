@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React from 'react'; // eslint-disable-line no-unused-vars
-import {mount} from 'enzyme';
+import {mountWithIntl} from '../../helpers/intl-helpers';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux'; // eslint-disable-line no-unused-vars
 
@@ -43,7 +43,7 @@ describe('SpriteSelectorItem Container', () => {
     });
 
     test('should confirm if the user really wants to delete the sprite', () => {
-        const wrapper = mount(getContainer());
+        const wrapper = mountWithIntl(getContainer());
         wrapper.find(CloseButton).simulate('click');
         expect(global.confirm).toHaveBeenCalled();
         expect(onDeleteButtonClick).toHaveBeenCalledWith(1337);
@@ -51,7 +51,7 @@ describe('SpriteSelectorItem Container', () => {
 
     test('should not delete the sprite if the user cancels', () => {
         global.confirm = jest.fn(() => false);
-        const wrapper = mount(getContainer());
+        const wrapper = mountWithIntl(getContainer());
         wrapper.find(CloseButton).simulate('click');
         expect(global.confirm).toHaveBeenCalled();
         expect(onDeleteButtonClick).not.toHaveBeenCalled();

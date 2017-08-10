@@ -112,13 +112,6 @@
     */
     display: flex;
     flex-direction: column;
-
-    /*
-        Calc the minimum width for this pane, accounting for left + right spacing.
-        If and when the width doesn't need to be fixed, we can move the spacing out
-        of this calc, and into padding instead
-    */
-    flex-basis: calc(480px + ($space * 2));
 }
 
 .stage-wrapper {

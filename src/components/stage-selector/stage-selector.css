@@ -1,7 +1,7 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-$header-height: calc(2rem - 2px); /* @todo: half the SpriteInfo area header? */
+$header-height: calc($stage-menu-height - 2px);
 
 .stage-selector {
     position: relative; /* for the child element border */

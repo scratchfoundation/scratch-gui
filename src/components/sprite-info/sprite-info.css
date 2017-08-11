@@ -3,7 +3,7 @@
 
 .sprite-info {
     height: $sprite-info-height;
-    padding: $space;
+    padding: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #575e75;
@@ -17,7 +17,9 @@
     justify-content: space-between;
 }
 
-.row-primary { margin-bottom: $space; }
+.row-primary {
+    margin-bottom: 0.5rem;
+}
 
 .label { opacity: 0.8; }
 
@@ -29,15 +31,9 @@
 
 .icon-wrapper {
     display: inline-block;
-
-    /*
-        content-box is normally the browser's default.
-        We're overriding the global, which we set to border-box
-    */
-    box-sizing: content-box;
-    width: 1.0rem;
-    height: 1.0rem;
-    padding: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
     outline: none;
     user-select: none;
 }

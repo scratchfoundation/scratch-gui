@@ -3,11 +3,14 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import {mountWithIntl} from '../../helpers/intl-helpers';
 import configureStore from 'redux-mock-store';
 import mockAudioBufferPlayer from '../../__mocks__/audio-buffer-player.js';
+import mockAudioEffects from '../../__mocks__/audio-effects.js';
+
 import SoundEditor from '../../../src/containers/sound-editor'; // eslint-disable-line no-unused-vars
 // eslint-disable-next-line no-unused-vars
 import SoundEditorComponent from '../../../src/components/sound-editor/sound-editor';
 
 jest.mock('../../../src/lib/audio/audio-buffer-player', () => mockAudioBufferPlayer);
+jest.mock('../../../src/lib/audio/audio-effects', () => mockAudioEffects);
 
 describe('Sound Editor Container', () => {
     const mockStore = configureStore();
@@ -88,6 +91,74 @@ describe('Sound Editor Container', () => {
         const component = wrapper.find(SoundEditorComponent);
         component.props().onChangeName('hello');
         expect(vm.renameSound).toHaveBeenCalledWith(soundIndex, 'hello');
+    });
+
+    test('it handles an effect by submitting the result and playing', (done) => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onReverse(); // Could be any of the effects, just testing the end result
+        mockAudioEffects.instance._finishProcessing(soundBuffer);
+        process.nextTick(() => {
+            expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
+            expect(vm.updateSoundBuffer).toHaveBeenCalled();
+            done();
+        });
+    });
+
+    test('it handles reverse effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onReverse();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.REVERSE);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles louder effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onLouder();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.LOUDER);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles softer effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onSofter();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.SOFTER);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles faster effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onFaster();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.FASTER);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles slower effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onSlower();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.SLOWER);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles echo effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onEcho();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.ECHO);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
+    });
+
+    test('it handles robot effect correctly', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        component.props().onRobot();
+        expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.ROBOT);
+        expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
 
     test('undo/redo functionality', () => {

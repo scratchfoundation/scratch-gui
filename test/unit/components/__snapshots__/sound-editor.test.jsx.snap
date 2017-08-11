@@ -58,6 +58,30 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           Save
         </span>
       </button>
+      <div
+        className={undefined}
+      >
+        <button
+          className={undefined}
+          disabled={false}
+          onClick={[Function]}
+          title="Undo"
+        >
+          <img
+            src="test-file-stub"
+          />
+        </button>
+        <button
+          className={undefined}
+          disabled={true}
+          onClick={[Function]}
+          title="Redo"
+        >
+          <img
+            src="test-file-stub"
+          />
+        </button>
+      </div>
     </div>
   </div>
   <div

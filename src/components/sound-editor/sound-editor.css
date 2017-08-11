@@ -35,12 +35,14 @@
     padding: 3px;
 }
 
+$border-radius: 0.25rem;
+
 .button {
     height: 2rem;
     padding: 0.25rem;
     outline: none;
     background: white;
-    border-radius: 0.25rem;
+    border-radius: $border-radius;
     border: 1px solid #ddd;
     cursor: pointer;
     font-size: 0.85rem;
@@ -82,4 +84,28 @@
 .effect-button img {
     width: 60px;
     height: 60px;
+}
+
+.button-group {
+    margin: 0 1rem;
+}
+
+.button-group .button {
+    border-radius: 0;
+    border-left: none;
+}
+
+.button-group .button:last-of-type {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.button-group .button:first-of-type {
+    border-left: 1px solid #ddd;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+}
+
+.button:disabled > img {
+    opacity: 0.25;
 }

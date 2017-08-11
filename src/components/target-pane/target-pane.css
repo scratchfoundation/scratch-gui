@@ -4,22 +4,12 @@
     /* Makes columns for the sprite library selector + and the stage selector */
     display: flex;
     flex-direction: row;
-
-    height: 100%;
+    flex-grow: 1;
 }
 
 .stage-selector-wrapper {
+    display: flex;
     flex-basis: 72px;
     flex-shrink: 0;
     margin-left: calc($space / 2);
-}
-
-.add-button-wrapper {
-    position: absolute;
-    z-index: 1;
-    bottom: 0.5rem;
-    border: 0;
-    transition: all 0.15s ease-out; /* @todo: standardize with var */
-    cursor: pointer;
-    user-select: none;
 }

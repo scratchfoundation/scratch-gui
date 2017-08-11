@@ -37,34 +37,28 @@ const StageSelector = props => {
             <div className={styles.header}>
                 <div className={styles.headerTitle}>Stage</div>
             </div>
-            <div className={styles.body}>
-                <div
-                    className={styles.flexWrapper}
-                >
-                    {url ? (
-                        <CostumeCanvas
-                            className={styles.costumeCanvas}
-                            height={42}
-                            url={url}
-                            width={56}
-                        />
-                    ) : null}
-                    <div className={styles.label}>
-                        <FormattedMessage
-                            defaultMessage="Backdrops"
-                            description="Label for the backdrops in the stage selector"
-                            id="stageSelector.backdrops"
-                        />
-                    </div>
-                    <div className={styles.count}>{backdropCount}</div>
-                </div>
-                <IconButton
-                    className={styles.addButton}
-                    img={backdropIcon}
-                    title={addBackdropMessage}
-                    onClick={onNewBackdropClick}
+            {url ? (
+                <CostumeCanvas
+                    className={styles.costumeCanvas}
+                    height={42}
+                    url={url}
+                    width={56}
+                />
+            ) : null}
+            <div className={styles.label}>
+                <FormattedMessage
+                    defaultMessage="Backdrops"
+                    description="Label for the backdrops in the stage selector"
+                    id="stageSelector.backdrops"
                 />
             </div>
+            <div className={styles.count}>{backdropCount}</div>
+            <IconButton
+                className={styles.addButton}
+                img={backdropIcon}
+                title={addBackdropMessage}
+                onClick={onNewBackdropClick}
+            />
         </Box>
     );
 };

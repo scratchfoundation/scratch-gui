@@ -160,4 +160,39 @@ describe('Sound Editor Container', () => {
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.ROBOT);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
+
+    test('undo/redo functionality', () => {
+        const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
+        const component = wrapper.find(SoundEditorComponent);
+        // Undo and redo should be disabled initially
+        expect(component.prop('canUndo')).toEqual(false);
+        expect(component.prop('canRedo')).toEqual(false);
+
+        // Submitting new samples should make it possible to undo
+        component.props().onActivateTrim(); // Activate trimming
+        component.props().onActivateTrim(); // Submit new samples by calling again
+        wrapper.update();
+        expect(component.prop('canUndo')).toEqual(true);
+        expect(component.prop('canRedo')).toEqual(false);
+
+        // Undoing should make it possible to redo and not possible to undo again
+        component.props().onUndo();
+        wrapper.update();
+        expect(component.prop('canUndo')).toEqual(false);
+        expect(component.prop('canRedo')).toEqual(true);
+
+        // Redoing should make it possible to undo and not possible to redo again
+        component.props().onRedo();
+        wrapper.update();
+        expect(component.prop('canUndo')).toEqual(true);
+        expect(component.prop('canRedo')).toEqual(false);
+
+        // New submission should clear the redo stack
+        component.props().onUndo(); // Undo to go back to a state where redo is enabled
+        wrapper.update();
+        expect(component.prop('canRedo')).toEqual(true);
+        component.props().onActivateTrim(); // Activate trimming
+        component.props().onActivateTrim(); // Submit new samples by calling again
+        expect(component.prop('canRedo')).toEqual(false);
+    });
 });

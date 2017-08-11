@@ -31,7 +31,7 @@ Then go to [http://localhost:8601/](http://localhost:8601/) - the playground out
 ## Testing
 NOTE: If you're a windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.
 
-Run linter, unit tests, and build.
+Run linter, unit tests, build, and integration tests.
 ```bash
 npm test
 ```
@@ -44,6 +44,11 @@ npm run unit-test
 Run unit tests in watch mode (watches for code changes and continuously runs tests). See [jest cli docs](https://facebook.github.io/jest/docs/en/cli.html#content) for more options.
 ```bash
 npm run unit-test -- --watch
+```
+
+Run integration tests in isolation.
+```bash
+npm run integration-test
 ```
 
 You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.

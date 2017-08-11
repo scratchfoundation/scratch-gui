@@ -40,8 +40,8 @@ class Stage extends React.Component {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
     }
-    shouldComponentUpdate () {
-        return false;
+    shouldComponentUpdate (nextProps) {
+        return this.props.width !== nextProps.width || this.props.height !== nextProps.height;
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -69,9 +69,10 @@ class Stage extends React.Component {
         this.rect = this.canvas.getBoundingClientRect();
     }
     getScratchCoords (x, y) {
+        const nativeSize = this.renderer.getNativeSize();
         return [
-            x - (this.rect.width / 2),
-            y - (this.rect.height / 2)
+            (nativeSize[0] / this.rect.width) * (x - (this.rect.width / 2)),
+            (nativeSize[1] / this.rect.height) * (y - (this.rect.height / 2))
         ];
     }
     handleDoubleClick (e) {
@@ -127,6 +128,7 @@ class Stage extends React.Component {
         }
     }
     onMouseDown (e) {
+        this.updateRect();
         const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
         this.setState({
             mouseDown: true,
@@ -192,7 +194,9 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: PropTypes.instanceOf(VM).isRequired
+    height: PropTypes.number,
+    vm: PropTypes.instanceOf(VM).isRequired,
+    width: PropTypes.number
 };
 
 export default Stage;

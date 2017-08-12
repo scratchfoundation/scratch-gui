@@ -106,7 +106,7 @@ class SoundTab extends React.Component {
                 onDeleteClick={this.handleDeleteSound}
                 onItemClick={this.handleSelectSound}
             >
-                {target.sounds && target.sounds.length > 0 ? (
+                {editingTarget && target.sounds && target.sounds.length > 0 ? (
                     <SoundEditor soundIndex={this.state.selectedSoundIndex} />
                 ) : null}
                 {this.props.soundRecorderVisible ? (

@@ -18,15 +18,15 @@ class RobotEffect {
             // Piecewise function given by (2) in Parker paper
             const transform = (v, vb = 0.2, vl = 0.4, h = 0.65) => {
                 if (v <= vb) return 0;
-                if (v <= vl) return h * (Math.pow(v - vb, 2) / (2 * vl - 2 * vb));
-                return h * v - h * vl + h * (Math.pow(v - vb, 2) / (2 * vl - 2 * vb));
+                if (v <= vl) return h * (Math.pow(v - vb, 2) / ((2 * vl) - (2 * vb)));
+                return (h * v) - (h * vl) + (h * (Math.pow(v - vb, 2) / ((2 * vl) - (2 * vb))));
             };
 
             // Create the waveshaper curve with the voltage transform above
             const bufferLength = 1024;
             const curve = new Float32Array(bufferLength);
             for (let i = 0; i < bufferLength; i++) {
-                const voltage = 2 * (i / bufferLength) - 1;
+                const voltage = (2 * (i / bufferLength)) - 1;
                 curve[i] = transform(voltage);
             }
             node.curve = curve;

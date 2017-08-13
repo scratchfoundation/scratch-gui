@@ -9,7 +9,7 @@ describe('computeRMS', () => {
         const unity = 0.5;
         const samples = [3, 2, 1];
         expect(computeRMS(samples, unity)).toEqual(
-            Math.sqrt(Math.sqrt((3 * 3 + 2 * 2 + 1 * 1) / 3) / 0.5)
+            Math.sqrt(Math.sqrt(((3 * 3) + (2 * 2) + (1 * 1)) / 3) / 0.5)
         );
     });
     test('uses a default unity value of 0.55', () => {
@@ -28,8 +28,8 @@ describe('computeChunkedRMS', () => {
         // rms scaled with default unity of 0.55
         expect(chunkedLevels.length).toEqual(3);
         expect(chunkedLevels).toEqual([
-            Math.sqrt(Math.sqrt((2 * 2 + 1 * 1) / 2) / 0.55),
-            Math.sqrt(Math.sqrt((3 * 3 + 2 * 2) / 2) / 0.55),
+            Math.sqrt(Math.sqrt(((2 * 2) + (1 * 1)) / 2) / 0.55),
+            Math.sqrt(Math.sqrt(((3 * 3) + (2 * 2)) / 2) / 0.55),
             Math.sqrt(Math.sqrt((5 * 5) / 1) / 0.55)
         ]);
     });

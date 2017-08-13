@@ -66,6 +66,11 @@ const opcodeMap = {
     }
 };
 
+/**
+ * Get the label for an opcode
+ * @param {string} opcode the opcode you want a label for
+ * @return {object} object with label and category
+ */
 export default function (opcode) {
     if (opcode in opcodeMap) return opcodeMap[opcode];
     return {

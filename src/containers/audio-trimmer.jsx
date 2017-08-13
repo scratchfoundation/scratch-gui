@@ -52,7 +52,7 @@ class AudioTrimmer extends React.Component {
     render () {
         return (
             <AudioTrimmerComponent
-                containerRef={el => (this.containerElement = el)}
+                containerRef={el => (this.containerElement = el)} // eslint-disable-line react/jsx-no-bind
                 playhead={this.props.playhead}
                 trimEnd={this.props.trimEnd}
                 trimStart={this.props.trimStart}

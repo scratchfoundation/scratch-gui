@@ -10,7 +10,7 @@ const AudioTrimmer = props => (
         className={styles.absolute}
         ref={props.containerRef}
     >
-        {props.trimStart !== null ? (
+        {props.trimStart === null ? null : (
             <Box
                 className={classNames(styles.absolute, styles.trimBackground, styles.startTrimBackground)}
                 style={{
@@ -28,7 +28,7 @@ const AudioTrimmer = props => (
                     </Box>
                 </Box>
             </Box>
-        ) : null}
+        )}
 
         {props.playhead ? (
             <Box
@@ -39,12 +39,12 @@ const AudioTrimmer = props => (
             />
         ) : null}
 
-        {props.trimEnd !== null ? (
+        {props.trimEnd === null ? null : (
             <Box
                 className={classNames(styles.absolute, styles.trimBackground, styles.endTrimBackground)}
                 style={{
                     left: `${100 * props.trimEnd}%`,
-                    width: `${100 - 100 * props.trimEnd}%`
+                    width: `${100 - (100 * props.trimEnd)}%`
                 }}
                 onMouseDown={props.onTrimEndMouseDown}
             >
@@ -58,7 +58,7 @@ const AudioTrimmer = props => (
                     </Box>
                 </Box>
             </Box>
-        ) : null }
+        )}
     </div>
 );
 

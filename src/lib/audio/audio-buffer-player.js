@@ -20,7 +20,7 @@ class AudioBufferPlayer {
         this.startTime = Date.now();
 
         const trimStartTime = this.buffer.duration * trimStart;
-        const trimmedDuration = this.buffer.duration * trimEnd - trimStartTime;
+        const trimmedDuration = (this.buffer.duration * trimEnd) - trimStartTime;
 
         this.source = this.audioContext.createBufferSource();
         this.source.onended = onEnded;

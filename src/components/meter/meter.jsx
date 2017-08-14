@@ -17,7 +17,7 @@ const Meter = props => {
 
     const barSpacing = 2.5;
     const barRounding = 3;
-    const barHeight = (height - barSpacing * (nBars + 1)) / nBars;
+    const barHeight = (height - (barSpacing * (nBars + 1))) / nBars;
 
     const nBarsToMask = nBars - Math.floor(level * nBars);
 
@@ -38,12 +38,12 @@ const Meter = props => {
                         ry={barRounding}
                         width={width - 2}
                         x={1}
-                        y={height - (barSpacing + barHeight) * (index + 1)}
+                        y={height - ((barSpacing + barHeight) * (index + 1))}
                     />
                 ))}
             <rect
                 fill="white"
-                height={nBarsToMask * (barHeight + barSpacing) + barSpacing / 2}
+                height={(nBarsToMask * (barHeight + barSpacing)) + (barSpacing / 2)}
                 opacity="0.75"
                 width={width}
                 x={0}

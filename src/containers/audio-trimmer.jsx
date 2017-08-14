@@ -12,7 +12,8 @@ class AudioTrimmer extends React.Component {
             'handleTrimStartMouseMove',
             'handleTrimEndMouseMove',
             'handleTrimStartMouseUp',
-            'handleTrimEndMouseUp'
+            'handleTrimEndMouseUp',
+            'storeRef'
         ]);
     }
     handleTrimStartMouseMove (e) {
@@ -49,10 +50,13 @@ class AudioTrimmer extends React.Component {
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
     }
+    storeRef (el) {
+        this.containerElement = el;
+    }
     render () {
         return (
             <AudioTrimmerComponent
-                containerRef={el => (this.containerElement = el)}
+                containerRef={this.storeRef}
                 playhead={this.props.playhead}
                 trimEnd={this.props.trimEnd}
                 trimStart={this.props.trimStart}

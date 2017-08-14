@@ -42,8 +42,8 @@ const getLogs = (whitelist) => {
                         console.warn('Ignoring non-SEVERE entry: ' + message);
                         return false;
                     }
-                    return true;
                 }
+                return true;
             });
         });
 };

@@ -24,7 +24,7 @@ class AudioEffects {
         let playbackRate = 1;
         switch (name) {
         case effectTypes.ECHO:
-            sampleCount = buffer.length + 0.25 * 3 * buffer.sampleRate;
+            sampleCount = buffer.length + (0.25 * 3 * buffer.sampleRate);
             break;
         case effectTypes.FASTER:
             playbackRate = pitchRatio;

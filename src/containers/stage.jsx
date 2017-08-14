@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Renderer from 'scratch-render';
-import AudioEngine from 'scratch-audio';
 import VM from 'scratch-vm';
 
 import StageComponent from '../components/stage/stage.jsx';
@@ -37,8 +36,6 @@ class Stage extends React.Component {
         this.updateRect();
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
-        this.audioEngine = new AudioEngine();
-        this.props.vm.attachAudioEngine(this.audioEngine);
     }
     shouldComponentUpdate (nextProps) {
         return this.props.width !== nextProps.width || this.props.height !== nextProps.height;

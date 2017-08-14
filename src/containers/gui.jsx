@@ -1,3 +1,4 @@
+import AudioEngine from 'scratch-audio';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
@@ -16,6 +17,8 @@ class GUI extends React.Component {
         this.state = {tabIndex: 0};
     }
     componentDidMount () {
+        this.audioEngine = new AudioEngine();
+        this.props.vm.attachAudioEngine(this.audioEngine);
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.setCompatibilityMode(true);
         this.props.vm.start();

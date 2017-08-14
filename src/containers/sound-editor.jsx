@@ -112,9 +112,9 @@ class SoundEditor extends React.Component {
     }
     handleEffect (name) {
         const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
-        effects.process().then(newBuffer => {
-            const samples = newBuffer.getChannelData(0);
-            const sampleRate = newBuffer.sampleRate;
+        effects.process(({renderedBuffer}) => {
+            const samples = renderedBuffer.getChannelData(0);
+            const sampleRate = renderedBuffer.sampleRate;
             this.submitNewSamples(samples, sampleRate);
             this.handlePlay();
         });

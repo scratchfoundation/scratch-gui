@@ -38,7 +38,7 @@ class AudioEffects {
             buffer.getChannelData(0).reverse();
             break;
         }
-
+        const OfflineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
         this.audioContext = new OfflineAudioContext(1, sampleCount, buffer.sampleRate);
         this.buffer = buffer;
         this.source = this.audioContext.createBufferSource();
@@ -46,7 +46,7 @@ class AudioEffects {
         this.source.playbackRate.value = playbackRate;
         this.name = name;
     }
-    process () {
+    process (done) {
         // Some effects need to use more nodes and must expose an input and output
         let input;
         let output;
@@ -75,7 +75,8 @@ class AudioEffects {
 
         this.source.start();
 
-        return this.audioContext.startRendering();
+        this.audioContext.startRendering();
+        this.audioContext.oncomplete = done;
     }
 }
 

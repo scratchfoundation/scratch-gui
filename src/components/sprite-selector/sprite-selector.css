@@ -59,3 +59,11 @@
     padding-right: calc($space / 2);
     padding-bottom: $space; 
 }
+
+.add-button {
+    font-size: 0.55rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+}

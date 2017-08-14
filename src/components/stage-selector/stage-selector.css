@@ -99,3 +99,12 @@ $border-width: 2px;
     width: 100%;
     user-select: none;
 }
+
+.add-button {
+    font-size: 0.55rem;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.25rem;
+}

@@ -23,12 +23,3 @@
     cursor: pointer;
     user-select: none;
 }
-
-.add-button {
-    font-size: 0.55rem;
-    font-weight: bold;
-}
-
-/* @todo: This is hacky. Better: move buttons in their corresponding panes, and set values relatively */
-.add-button-wrapper--sprite   { right: 7rem; }
-.add-button-wrapper--stage    { right: 0.8rem; }

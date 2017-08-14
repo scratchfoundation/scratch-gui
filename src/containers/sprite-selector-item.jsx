@@ -6,23 +6,36 @@ import {connect} from 'react-redux';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
+import AssetDelete from './asset-delete.jsx';
+
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleClick',
-            'handleDelete'
+            'handleDelete',
+            'handlePromptCallback',
+            'handlePromptClose'
         ]);
+        this.state = {prompt: null};
+    }
+    handlePromptCallback () {
+        this.state.prompt.callback(this.props);
+        this.handlePromptClose();
+    }
+    handlePromptClose () {
+        this.setState({prompt: null});
     }
     handleClick (e) {
         e.preventDefault();
         this.props.onClick(this.props.id);
     }
     handleDelete () {
-        // eslint-disable-next-line no-alert
-        if (window.confirm('Are you sure you want to delete this sprite?')) {
-            this.props.onDeleteButtonClick(this.props.id);
-        }
+        const callback = function (props) {
+            props.onDeleteButtonClick(props.id);
+        };
+        const message = `Are you sure you want to delete ${this.props.name}?`;
+        this.setState({prompt: {callback, message}});
     }
     render () {
         const {
@@ -39,7 +52,18 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={this.handleDelete}
                 {...props}
-            />
+            >
+                {this.state.prompt ? (
+                    <AssetDelete
+                        assetName={this.props.name}
+                        assetURL={this.props.costumeURL}
+                        label={this.state.prompt.message}
+                        title="Are you sure?"
+                        onCancel={this.handlePromptClose}
+                        onOk={this.handlePromptCallback}
+                    />
+                ) : null}
+            </SpriteSelectorItemComponent>
         );
     }
 }

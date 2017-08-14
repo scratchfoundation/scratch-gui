@@ -36,6 +36,7 @@ class GUI extends React.Component {
     }
     render () {
         const {
+            children,
             projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
@@ -46,7 +47,9 @@ class GUI extends React.Component {
                 vm={vm}
                 onTabSelect={this.handleTabSelect}
                 {...componentProps}
-            />
+            >
+                {children}
+            </GUIComponent>
         );
     }
 }

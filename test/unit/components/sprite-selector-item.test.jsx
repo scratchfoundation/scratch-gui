@@ -5,7 +5,6 @@ import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/i
 import SpriteSelectorItemComponent from '../../../src/components/sprite-selector-item/sprite-selector-item';
 import CostumeCanvas from '../../../src/components/costume-canvas/costume-canvas';
 import CloseButton from '../../../src/components/close-button/close-button'; // eslint-disable-line no-unused-vars
-import {MenuItem} from '../../../src/components/context-menu/context-menu'; // eslint-disable-line no-unused-vars
 
 describe('SpriteSelectorItemComponent', () => {
     let className;
@@ -74,7 +73,7 @@ describe('SpriteSelectorItemComponent', () => {
         const wrapper = mountWithIntl(getComponent());
         const contextMenu = wrapper.find('ContextMenu');
         expect(contextMenu.exists()).toBe(true);
-        
+
         contextMenu.find('[children="delete"]').simulate('click');
         expect(onDeleteButtonClick).toHaveBeenCalled();
     });

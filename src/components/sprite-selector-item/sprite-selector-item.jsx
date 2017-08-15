@@ -28,7 +28,7 @@ const SpriteSelectorItem = props => (
                 size={CloseButton.SIZE_SMALL}
                 onClick={props.onDeleteButtonClick}
             />
-            ) : null }
+        ) : null }
         {props.costumeURL ? (
             <CostumeCanvas
                 className={styles.spriteImage}
@@ -36,7 +36,7 @@ const SpriteSelectorItem = props => (
                 url={props.costumeURL}
                 width={32}
             />
-            ) : null}
+        ) : null}
         <div className={styles.spriteName}>{props.name}</div>
         <ContextMenu id={`${props.name}-${contextMenuId++}`}>
             <MenuItem onClick={props.onDeleteButtonClick}>

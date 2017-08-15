@@ -101,6 +101,10 @@
     position: relative;
 }
 
+.green-flag {
+    margin: 0.25rem 0.6rem;
+}
+
 .stage-and-target-wrapper {
     /*
         Makes rows for children:

@@ -1,3 +1,13 @@
-.app {
-    
+.green-flag {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 50px;
+}
+
+.stop-all {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 15px;
 }

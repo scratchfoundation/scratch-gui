@@ -93,16 +93,13 @@ describe('Sound Editor Container', () => {
         expect(vm.renameSound).toHaveBeenCalledWith(soundIndex, 'hello');
     });
 
-    test('it handles an effect by submitting the result and playing', (done) => {
+    test('it handles an effect by submitting the result and playing', () => {
         const wrapper = mountWithIntl(<SoundEditor store={store} soundIndex={soundIndex} />);
         const component = wrapper.find(SoundEditorComponent);
         component.props().onReverse(); // Could be any of the effects, just testing the end result
         mockAudioEffects.instance._finishProcessing(soundBuffer);
-        process.nextTick(() => {
-            expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
-            expect(vm.updateSoundBuffer).toHaveBeenCalled();
-            done();
-        });
+        expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
+        expect(vm.updateSoundBuffer).toHaveBeenCalled();
     });
 
     test('it handles reverse effect correctly', () => {

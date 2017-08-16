@@ -16,6 +16,7 @@ $hover-scale: 2;
 
 .trim-background {
     cursor: pointer;
+    touch-action: none;
 }
 
 .trim-background-mask {

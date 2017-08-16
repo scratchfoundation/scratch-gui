@@ -20,7 +20,8 @@ module.exports = {
     entry: {
         lib: ['react', 'react-dom'],
         gui: './src/index.jsx',
-        blocksonly: './src/examples/blocks-only.jsx'
+        blocksonly: './src/examples/blocks-only.jsx',
+        player: './src/examples/player.jsx'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -88,6 +89,12 @@ module.exports = {
             template: 'src/index.ejs',
             filename: 'blocks-only.html',
             title: 'Scratch 3.0 GUI: Blocks Only Example'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['lib', 'player'],
+            template: 'src/index.ejs',
+            filename: 'player.html',
+            title: 'Scratch 3.0 GUI: Player Example'
         }),
         new CopyWebpackPlugin([{
             from: 'node_modules/scratch-blocks/media',

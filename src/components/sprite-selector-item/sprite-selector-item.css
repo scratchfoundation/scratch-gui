@@ -21,10 +21,13 @@
     transition: 0.25s ease-out;
 }
 
-.sprite-selector-item:hover, .sprite-selector-item.is-selected {
-    border-width: 2px;
-    border-color: $motion-primary;
+.sprite-selector-item.is-selected {
+    border: 2px solid $motion-primary;
     box-shadow: 0px 0px 0px 3px $motion-transparent;
+}
+
+.sprite-selector-item:hover {
+    border: 2px solid $motion-primary;
 }
 
 .sprite-image {

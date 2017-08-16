@@ -31,15 +31,16 @@ class SoundLibrary extends React.PureComponent {
         const idParts = md5ext.split('.');
         const md5 = idParts[0];
         const vm = this.props.vm;
-        vm.runtime.storage.load(vm.runtime.storage.AssetType.Sound, md5).then(soundAsset => {
-            const sound = {
-                md5: md5ext,
-                name: soundItem.name,
-                format: soundItem.format,
-                data: soundAsset.data
-            };
-            return this.audioEngine.decodeSound(sound);
-        })
+        vm.runtime.storage.load(vm.runtime.storage.AssetType.Sound, md5)
+            .then(soundAsset => {
+                const sound = {
+                    md5: md5ext,
+                    name: soundItem.name,
+                    format: soundItem.format,
+                    data: soundAsset.data
+                };
+                return this.audioEngine.decodeSound(sound);
+            })
             .then(soundId => {
                 this.player.playSound(soundId);
             });

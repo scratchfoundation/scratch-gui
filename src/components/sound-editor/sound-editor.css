@@ -78,7 +78,7 @@ $border-radius: 0.25rem;
 
 .effect-button {
     flex-basis: 150px;
-    color: #575e75; /* @todo discuss the multiple font colors with Carl, move to variable */
+    color: $text-primary;
 }
 
 .effect-button + .effect-button {

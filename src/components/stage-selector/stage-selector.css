@@ -11,7 +11,7 @@ $header-height: calc($stage-menu-height - 2px);
     flex-grow: 1;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #f9f9f9;
-    color: #575e75;
+    color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
     border-color: #dbdbdb;
@@ -34,7 +34,7 @@ $header-height: calc($stage-menu-height - 2px);
     justify-content: center;
     height: $header-height;
     background-color: white;
-    color: #575e75;
+    color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
     border-bottom: 1px solid #eaeaea;
@@ -44,7 +44,7 @@ $header-height: calc($stage-menu-height - 2px);
 .header-title {
     font-size: 0.625rem;
     font-weight: bold;
-    color: #575e75;
+    color: $text-primary;
 
     /* @todo: make this a mixin for all UI text labels */
     user-select: none;
@@ -53,7 +53,7 @@ $header-height: calc($stage-menu-height - 2px);
 .count {
     padding: 0.3rem 0.75rem;
     font-size: 0.625rem;
-    color: #575e75;
+    color: $text-primary;
     background: white;
     border: 1px solid #eaeaea;
     border-radius: 0.25rem;
@@ -63,7 +63,7 @@ $header-height: calc($stage-menu-height - 2px);
 .label {
     margin: 0.75rem 0 0.25rem;
     font-size: 0.6rem;
-    color: #575e75;
+    color: $text-primary;
     user-select: none;
 }
 

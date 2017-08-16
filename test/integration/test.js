@@ -2,14 +2,16 @@
 /* globals Promise */
 
 import path from 'path';
-import {
+import SeleniumHelper from '../helpers/selenium-helper';
+
+const {
     clickText,
     clickButton,
     clickXpath,
-    driver,
     findByXpath,
+    getDriver,
     getLogs
-} from '../helpers/selenium-helpers';
+} = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
 
@@ -17,7 +19,13 @@ const errorWhitelist = [
     'The play() request was interrupted by a call to pause()'
 ];
 
+let driver;
+
 describe('costumes, sounds and variables', () => {
+    beforeAll(() => {
+        driver = getDriver();
+    });
+
     afterAll(async () => {
         await driver.quit();
     });

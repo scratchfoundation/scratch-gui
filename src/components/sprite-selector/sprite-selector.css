@@ -30,7 +30,7 @@
     */
     box-sizing: border-box;
     width: calc((100% / $sprites-per-row ) - $space);
-
+    min-width: 4rem;
     min-height: 4rem; /* @todo: calc height same as width */
     margin: calc($space / 2); 
 }
@@ -64,6 +64,6 @@
     font-size: 0.55rem;
     font-weight: bold;
     position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
+    bottom: 0.75rem;
+    right: 1rem;
 }

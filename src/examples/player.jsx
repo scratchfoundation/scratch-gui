@@ -10,7 +10,7 @@ import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
-import styles from './player.css';
+import './player.css';
 
 const mapStateToProps = state => ({vm: state.vm});
 
@@ -24,6 +24,12 @@ class Player extends React.Component {
         this.handleResize = this.handleResize.bind(this);
         this.state = this.getWindowSize();
     }
+    componentDidMount () {
+        window.addEventListener('resize', this.handleResize);
+    }
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.handleResize);
+    }
     getWindowSize () {
         return {
             width: window.innerWidth,
@@ -33,15 +39,9 @@ class Player extends React.Component {
     handleResize () {
         this.setState(this.getWindowSize());
     }
-    componentDidMount () {
-        window.addEventListener('resize', this.handleResize);
-    }
-    componentWillUnmount () {
-        window.removeEventListener('resize', this.handleResize);
-    }
     render () {
         let height = this.state.height - 40;
-        let width = height + height/3;
+        let width = height + (height / 3);
         if (width > this.state.width) {
             width = this.state.width;
             height = width * .75;
@@ -49,10 +49,10 @@ class Player extends React.Component {
         return (
             <GUI
                 {...this.props}
-                width={width}
                 style={{
                     margin: '0 auto'
                 }}
+                width={width}
             >
                 <Box height={40}>
                     <VMGreenFlag
@@ -68,8 +68,8 @@ class Player extends React.Component {
                     />
                 </Box>
                 <VMStage
-                    width={width}
                     height={height}
+                    width={width}
                 />
             </GUI>
         );

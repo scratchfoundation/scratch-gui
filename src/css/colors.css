@@ -6,7 +6,7 @@ $text-primary: #575e75;
 
 $motion-primary: #4C97FF;
 $motion-tertiary: #3373CC;
-$motion-transparent: rgba(76, 151, 255, 0.25);
+$motion-transparent: hsla(215, 100%, 65%, 0.20);
 
 $red-primary: #FF661A;
 $red-tertiary: #E64D00;

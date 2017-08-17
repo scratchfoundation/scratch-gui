@@ -17,6 +17,7 @@ const AudioTrimmer = props => (
                     width: `${100 * props.trimStart}%`
                 }}
                 onMouseDown={props.onTrimStartMouseDown}
+                onTouchStart={props.onTrimStartMouseDown}
             >
                 <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
                 <Box className={classNames(styles.trimLine, styles.startTrimLine)}>
@@ -47,6 +48,7 @@ const AudioTrimmer = props => (
                     width: `${100 - (100 * props.trimEnd)}%`
                 }}
                 onMouseDown={props.onTrimEndMouseDown}
+                onTouchStart={props.onTrimEndMouseDown}
             >
                 <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
                 <Box className={classNames(styles.trimLine, styles.endTrimLine)}>

@@ -60,7 +60,7 @@ class Stage extends React.Component {
         document.removeEventListener('mousemove', this.onMouseMove);
         document.removeEventListener('mouseup', this.onMouseUp);
         document.removeEventListener('touchmove', this.onMouseMove);
-        document.removeEventListener('touchend', this.onMouseEnd);
+        document.removeEventListener('touchend', this.onMouseUp);
         canvas.removeEventListener('mousedown', this.onMouseDown);
         canvas.removeEventListener('touchstart', this.onMouseDown);
     }

@@ -111,6 +111,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         <div
           className=""
           onMouseDown={[Function]}
+          onTouchStart={[Function]}
           style={
             Object {
               "alignContent": undefined,
@@ -231,6 +232,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         <div
           className=""
           onMouseDown={[Function]}
+          onTouchStart={[Function]}
           style={
             Object {
               "alignContent": undefined,

@@ -1,20 +1,23 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import VM from 'scratch-vm';
 
-import GreenFlagComponent from '../components/green-flag/green-flag.jsx';
+import ControlsComponent from '../components/controls/controls.jsx';
 
-class GreenFlag extends React.Component {
+class Controls extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleClick',
+            'handleGreenFlagClick',
+            'handleStopAllClick',
             'onProjectRunStart',
             'onProjectRunStop'
         ]);
-        this.state = {projectRunning: false, shiftKeyDown: false};
+        this.state = {
+            projectRunning: false,
+            turbo: false
+        };
     }
     componentDidMount () {
         this.props.vm.addListener('PROJECT_RUN_START', this.onProjectRunStart);
@@ -30,13 +33,18 @@ class GreenFlag extends React.Component {
     onProjectRunStop () {
         this.setState({projectRunning: false});
     }
-    handleClick (e) {
+    handleGreenFlagClick (e) {
         e.preventDefault();
         if (e.shiftKey) {
-            this.props.vm.setTurboMode(!this.props.vm.runtime.turboMode);
+            this.setState({turbo: !this.state.turbo});
+            this.props.vm.setTurboMode(!this.state.turbo);
         } else {
             this.props.vm.greenFlag();
         }
+    }
+    handleStopAllClick (e) {
+        e.preventDefault();
+        this.props.vm.stopAll();
     }
     render () {
         const {
@@ -44,17 +52,19 @@ class GreenFlag extends React.Component {
             ...props
         } = this.props;
         return (
-            <GreenFlagComponent
-                active={this.state.projectRunning}
-                onClick={this.handleClick}
+            <ControlsComponent
                 {...props}
+                active={this.state.projectRunning}
+                turbo={this.state.turbo}
+                onGreenFlagClick={this.handleGreenFlagClick}
+                onStopAllClick={this.handleStopAllClick}
             />
         );
     }
 }
 
-GreenFlag.propTypes = {
+Controls.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-export default GreenFlag;
+export default Controls;

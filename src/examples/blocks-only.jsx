@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
-import GreenFlag from '../containers/green-flag.jsx';
-import StopAll from '../containers/stop-all.jsx';
+import Controls from '../containers/controls.jsx';
 import Blocks from '../containers/blocks.jsx';
 import GUI from '../containers/gui.jsx';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
@@ -14,8 +13,7 @@ import styles from './blocks-only.css';
 const mapStateToProps = state => ({vm: state.vm});
 
 const VMBlocks = connect(mapStateToProps)(Blocks);
-const VMGreenFlag = connect(mapStateToProps)(GreenFlag);
-const VMStopAll = connect(mapStateToProps)(StopAll);
+const VMControls = connect(mapStateToProps)(Controls);
 
 const BlocksOnly = props => (
     <GUI {...props}>
@@ -25,8 +23,7 @@ const BlocksOnly = props => (
                 media: `static/blocks-media/`
             }}
         />
-        <VMGreenFlag className={styles.greenFlag} />
-        <VMStopAll className={styles.stopAll} />
+        <VMControls className={styles.controls} />
     </GUI>
 );
 

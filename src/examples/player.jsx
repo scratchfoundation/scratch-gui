@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
-import GreenFlag from '../containers/green-flag.jsx';
-import StopAll from '../containers/stop-all.jsx';
+import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
@@ -15,8 +14,7 @@ import './player.css';
 const mapStateToProps = state => ({vm: state.vm});
 
 const VMStage = connect(mapStateToProps)(Stage);
-const VMGreenFlag = connect(mapStateToProps)(GreenFlag);
-const VMStopAll = connect(mapStateToProps)(StopAll);
+const VMControls = connect(mapStateToProps)(Controls);
 
 class Player extends React.Component {
     constructor (props) {
@@ -55,14 +53,9 @@ class Player extends React.Component {
                 width={width}
             >
                 <Box height={40}>
-                    <VMGreenFlag
+                    <VMControls
                         style={{
                             marginRight: 10,
-                            height: 40
-                        }}
-                    />
-                    <VMStopAll
-                        style={{
                             height: 40
                         }}
                     />

@@ -1,0 +1,20 @@
+@import "../../css/colors.css";
+
+.turbo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    user-select: none;
+}
+
+.turbo-icon {
+    margin: 0.25rem;
+}
+
+.turbo-label {
+    font-size: 0.625rem;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $control-primary;
+    white-space: nowrap;
+}

@@ -1,7 +1,6 @@
-/* eslint-env jest */
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import {shallow} from 'enzyme';
-import GreenFlag from '../../../src/containers/green-flag'; // eslint-disable-line no-unused-vars
+import GreenFlag from '../../../src/containers/green-flag';
 import renderer from 'react-test-renderer';
 import VM from 'scratch-vm';
 
@@ -13,14 +12,20 @@ describe('GreenFlag Container', () => {
 
     test('renders active state', () => {
         const component = renderer.create(
-            <GreenFlag active={true} vm={vm}/>
+            <GreenFlag
+                active
+                vm={vm}
+            />
         );
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     test('renders inactive state', () => {
         const component = renderer.create(
-            <GreenFlag active={false} vm={vm}/>
+            <GreenFlag
+                active={false}
+                vm={vm}
+            />
         );
         expect(component.toJSON()).toMatchSnapshot();
     });
@@ -28,7 +33,11 @@ describe('GreenFlag Container', () => {
     test('triggers onClick when active', () => {
         const onClick = jest.fn();
         const componentShallowWrapper = shallow(
-            <GreenFlag active={true} onClick={onClick} vm={vm}/>
+            <GreenFlag
+                active
+                vm={vm}
+                onClick={onClick}
+            />
         );
         componentShallowWrapper.simulate('click');
         expect(onClick).toHaveBeenCalled();

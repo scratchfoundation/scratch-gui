@@ -90,7 +90,10 @@ const GUIComponent = props => {
 
                     <Box className={styles.stageAndTargetWrapper}>
                         <Box className={styles.stageMenuWrapper}>
-                            <GreenFlag vm={vm} />
+                            <GreenFlag
+                                className={styles.greenFlag}
+                                vm={vm}
+                            />
                             <StopAll vm={vm} />
                         </Box>
                         <Box className={styles.stageWrapper}>

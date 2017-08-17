@@ -8,16 +8,20 @@ import styles from './stop-all.css';
 const StopAllComponent = function (props) {
     const {
         active,
+        className,
         onClick,
         title,
         ...componentProps
     } = props;
     return (
         <img
-            className={classNames({
-                [styles.stopAll]: true,
-                [styles.isActive]: active
-            })}
+            className={classNames(
+                className,
+                styles.stopAll,
+                {
+                    [styles.isActive]: active
+                }
+            )}
             src={stopAllIcon}
             title={title}
             onClick={onClick}
@@ -28,6 +32,7 @@ const StopAllComponent = function (props) {
 
 StopAllComponent.propTypes = {
     active: PropTypes.bool,
+    className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string
 };

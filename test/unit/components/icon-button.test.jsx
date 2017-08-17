@@ -1,7 +1,6 @@
-/* eslint-env jest */
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import {shallow} from 'enzyme';
-import IconButton from '../../../src/components/icon-button/icon-button'; // eslint-disable-line no-unused-vars
+import IconButton from '../../../src/components/icon-button/icon-button';
 import renderer from 'react-test-renderer';
 
 describe('IconButtonComponent', () => {

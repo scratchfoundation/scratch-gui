@@ -1,5 +1,4 @@
-/* eslint-env jest */
-/* global AudioNode AudioContext WebAudioTestAPI */
+/* global WebAudioTestAPI */
 import 'web-audio-test-api';
 WebAudioTestAPI.setState({
     'OfflineAudioContext#startRendering': 'promise'
@@ -11,8 +10,8 @@ import EchoEffect from '../../../src/lib/audio/effects/echo-effect';
 import VolumeEffect from '../../../src/lib/audio/effects/volume-effect';
 
 describe('Audio Effects manager', () => {
-    let audioContext = new AudioContext();
-    let audioBuffer = audioContext.createBuffer(1, 400, 44100);
+    const audioContext = new AudioContext();
+    const audioBuffer = audioContext.createBuffer(1, 400, 44100);
 
     test('changes buffer length and playback rate for faster effect', () => {
         const audioEffects = new AudioEffects(audioBuffer, 'faster');

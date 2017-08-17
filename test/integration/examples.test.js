@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /* globals Promise */
 
 import path from 'path';
@@ -29,7 +28,7 @@ describe('player example', () => {
 
     test('Load a project by ID', async () => {
         const projectId = '96708228';
-        await driver.get('file://' + uri + '#' + projectId);
+        await driver.get(`file://${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -52,7 +51,7 @@ describe('blocks example', () => {
 
     test('Load a project by ID', async () => {
         const projectId = '96708228';
-        await driver.get('file://' + uri + '#' + projectId);
+        await driver.get(`file://${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));

@@ -1,4 +1,3 @@
-/* eslint-env jest */
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
@@ -45,23 +44,21 @@ class SeleniumHelper {
         return this.driver.manage()
             .logs()
             .get('browser')
-            .then((entries) => {
-                return entries.filter((entry) => {
-                    const message = entry.message;
-                    for (let i = 0; i < whitelist.length; i++) {
-                        if (message.indexOf(whitelist[i]) !== -1) {
-                            // eslint-disable-next-line no-console
-                            console.warn('Ignoring whitelisted error: ' + whitelist[i]);
-                            return false;
-                        } else if (entry.level !== 'SEVERE') {
-                            // eslint-disable-next-line no-console
-                            console.warn('Ignoring non-SEVERE entry: ' + message);
-                            return false;
-                        }
+            .then(entries => entries.filter(entry => {
+                const message = entry.message;
+                for (let i = 0; i < whitelist.length; i++) {
+                    if (message.indexOf(whitelist[i]) !== -1) {
+                        // eslint-disable-next-line no-console
+                        console.warn(`Ignoring whitelisted error: ${whitelist[i]}`);
+                        return false;
+                    } else if (entry.level !== 'SEVERE') {
+                        // eslint-disable-next-line no-console
+                        console.warn(`Ignoring non-SEVERE entry: ${message}`);
+                        return false;
                     }
-                    return true;
-                });
-            });
+                }
+                return true;
+            }));
     }
 }
 

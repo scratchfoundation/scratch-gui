@@ -1,4 +1,3 @@
-/* eslint-env jest */
 export default class MockAudioBufferPlayer {
     constructor (samples, sampleRate) {
         this.samples = samples;

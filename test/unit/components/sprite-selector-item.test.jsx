@@ -1,10 +1,8 @@
-/* eslint-env jest */
-import React from 'react'; // eslint-disable-line no-unused-vars
-import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers';
-// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
 import SpriteSelectorItemComponent from '../../../src/components/sprite-selector-item/sprite-selector-item';
 import CostumeCanvas from '../../../src/components/costume-canvas/costume-canvas';
-import CloseButton from '../../../src/components/close-button/close-button'; // eslint-disable-line no-unused-vars
+import CloseButton from '../../../src/components/close-button/close-button';
 
 describe('SpriteSelectorItemComponent', () => {
     let className;
@@ -16,13 +14,16 @@ describe('SpriteSelectorItemComponent', () => {
 
     // Wrap this in a function so it gets test specific states and can be reused.
     const getComponent = function () {
-        return <SpriteSelectorItemComponent
-            className={className}
-            costumeURL={costumeURL}
-            name={name}
-            onClick={onClick}
-            onDeleteButtonClick={onDeleteButtonClick}
-            selected={selected}/>;
+        return (
+            <SpriteSelectorItemComponent
+                className={className}
+                costumeURL={costumeURL}
+                name={name}
+                selected={selected}
+                onClick={onClick}
+                onDeleteButtonClick={onDeleteButtonClick}
+            />
+        );
     };
 
     beforeEach(() => {

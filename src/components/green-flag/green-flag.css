@@ -10,7 +10,10 @@
 }
 
 .green-flag:hover {
-    transform: scale(1.2);
+    /* Scale flag image by 1.2, but keep background static */
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.25rem;
 }
 
 .green-flag.is-active {

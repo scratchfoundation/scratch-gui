@@ -111,7 +111,7 @@ describe('Sound Editor Container', () => {
         expect(vm.renameSound).toHaveBeenCalledWith(soundIndex, 'hello');
     });
 
-    test('it handles an effect by submitting the result and playing', done => {
+    test('it handles an effect by submitting the result and playing', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 soundIndex={soundIndex}

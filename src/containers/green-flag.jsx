@@ -14,7 +14,7 @@ class GreenFlag extends React.Component {
             'onProjectRunStart',
             'onProjectRunStop'
         ]);
-        this.state = {projectRunning: false, shiftKeyDown: false};
+        this.state = {projectRunning: false};
     }
     componentDidMount () {
         this.props.vm.addListener('PROJECT_RUN_START', this.onProjectRunStart);

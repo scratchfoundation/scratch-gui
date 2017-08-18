@@ -13,11 +13,9 @@ export default class MockAudioEffects {
     constructor (buffer, name) {
         this.buffer = buffer;
         this.name = name;
-        this._mockResult = {};
-        this._bufferPromise = new Promise(resolve => { // eslint-disable-line no-undef
-            this._finishProcessing = newBuffer => resolve(newBuffer);
+        this.process = jest.fn(done => {
+            this._finishProcessing = renderedBuffer => done({renderedBuffer});
         });
-        this.process = jest.fn(() => this._bufferPromise);
         MockAudioEffects.instance = this;
     }
 }

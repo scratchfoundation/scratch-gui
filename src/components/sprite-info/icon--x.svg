@@ -1,1 +1,15 @@
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><style>.st0{fill:none;stroke:#575e75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10}.st1{fill:#575e75}</style><path class="st0" d="M3 8h10M11.2 6.2L13 8l-1.8 1.8M4.8 9.8L3 8l1.8-1.8"/><path class="st1" d="M7.5 14c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5zm0-2c0-.3.2-.5.5-.5s.5.2.5.5-.2.5-.5.5-.5-.2-.5-.5z"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>x-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="x-icon">
+            <path d="M3,8 L12,8" id="Stroke-1" stroke="#575E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <rect id="path-1" fill="#575E75" x="7.5" y="2" width="1" height="12" rx="0.5"></rect>
+            <polyline id="Stroke-5" stroke="#575E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="4 10 2 7.99943423 4 6"></polyline>
+            <polyline id="Stroke-5-Copy" stroke="#575E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(13.000000, 8.000000) scale(-1, 1) translate(-13.000000, -8.000000) " points="14 10 12 7.99943423 14 6"></polyline>
+        </g>
+    </g>
+</svg>

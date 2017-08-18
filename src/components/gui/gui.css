@@ -123,10 +123,7 @@
 }
 
 .target-wrapper {
-    /*  Take all the available vertical space available.
-        Works in tandem with height: 100%; which is set on the child: .targetPane
-        @todo: Not working in Safari, not great in FFx
-    */
+    display: flex;
     flex-grow: 1;
     flex-basis: 0;
 

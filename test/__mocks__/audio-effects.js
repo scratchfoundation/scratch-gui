@@ -1,4 +1,3 @@
-/* eslint-env jest */
 export default class MockAudioEffects {
     static get effectTypes () { // @todo can this be imported from the real file?
         return {

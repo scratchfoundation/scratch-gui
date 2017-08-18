@@ -97,49 +97,50 @@ class SpriteInfo extends React.Component {
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <Label
-                            secondary
-                            text="Show"
-                        >
-                            <div>
-                                <div
-                                    className={classNames(
-                                        styles.radio,
-                                        styles.radioLeft,
-                                        styles.iconWrapper,
-                                        {
-                                            [styles.isActive]: this.props.visible && !this.props.disabled,
-                                            [styles.isDisabled]: this.props.disabled
-                                        }
-                                    )}
-                                    tabIndex="4"
-                                    onClick={this.props.onClickVisible}
-                                >
-                                    <img
-                                        className={styles.icon}
-                                        src={showIcon}
-                                    />
-                                </div>
-                                <div
-                                    className={classNames(
-                                        styles.radio,
-                                        styles.radioRight,
-                                        styles.iconWrapper,
-                                        {
-                                            [styles.isActive]: !this.props.visible && !this.props.disabled,
-                                            [styles.isDisabled]: this.props.disabled
-                                        }
-                                    )}
-                                    tabIndex="4"
-                                    onClick={this.props.onClickNotVisible}
-                                >
-                                    <img
-                                        className={styles.icon}
-                                        src={hideIcon}
-                                    />
-                                </div>
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <Label
+                                secondary
+                                text="Show"
+                            />
+                        </MediaQuery>
+                        <div>
+                            <div
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioLeft,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
+                                tabIndex="4"
+                                onClick={this.props.onClickVisible}
+                            >
+                                <img
+                                    className={styles.icon}
+                                    src={showIcon}
+                                />
                             </div>
-                        </Label>
+                            <div
+                                className={classNames(
+                                    styles.radio,
+                                    styles.radioRight,
+                                    styles.iconWrapper,
+                                    {
+                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    }
+                                )}
+                                tabIndex="4"
+                                onClick={this.props.onClickNotVisible}
+                            >
+                                <img
+                                    className={styles.icon}
+                                    src={hideIcon}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className={styles.group}>
                         <Label

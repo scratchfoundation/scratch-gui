@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import {computeRMS, computeChunkedRMS} from '../../../src/lib/audio/audio-util';
 
 describe('computeRMS', () => {

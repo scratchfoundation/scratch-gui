@@ -11,24 +11,18 @@ class GreenFlag extends React.Component {
         super(props);
         bindAll(this, [
             'handleClick',
-            'handleKeyDown',
-            'handleKeyUp',
             'onProjectRunStart',
             'onProjectRunStop'
         ]);
-        this.state = {projectRunning: false, shiftKeyDown: false};
+        this.state = {projectRunning: false};
     }
     componentDidMount () {
         this.props.vm.addListener('PROJECT_RUN_START', this.onProjectRunStart);
         this.props.vm.addListener('PROJECT_RUN_STOP', this.onProjectRunStop);
-        document.addEventListener('keydown', this.handleKeyDown);
-        document.addEventListener('keyup', this.handleKeyUp);
     }
     componentWillUnmount () {
         this.props.vm.removeListener('PROJECT_RUN_START', this.onProjectRunStart);
         this.props.vm.removeListener('PROJECT_RUN_STOP', this.onProjectRunStop);
-        document.removeEventListener('keydown', this.handleKeyDown);
-        document.removeEventListener('keyup', this.handleKeyUp);
     }
     onProjectRunStart () {
         this.setState({projectRunning: true});
@@ -36,15 +30,9 @@ class GreenFlag extends React.Component {
     onProjectRunStop () {
         this.setState({projectRunning: false});
     }
-    handleKeyDown (e) {
-        this.setState({shiftKeyDown: e.shiftKey});
-    }
-    handleKeyUp (e) {
-        this.setState({shiftKeyDown: e.shiftKey});
-    }
     handleClick (e) {
         e.preventDefault();
-        if (this.state.shiftKeyDown) {
+        if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.vm.runtime.turboMode);
         } else {
             this.props.vm.greenFlag();

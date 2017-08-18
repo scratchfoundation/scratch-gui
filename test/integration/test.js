@@ -1,15 +1,14 @@
-/* eslint-env jest */
-/* globals Promise */
-
 import path from 'path';
-import {
+import SeleniumHelper from '../helpers/selenium-helper';
+
+const {
     clickText,
     clickButton,
     clickXpath,
-    driver,
     findByXpath,
+    getDriver,
     getLogs
-} from '../helpers/selenium-helpers';
+} = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
 
@@ -17,13 +16,19 @@ const errorWhitelist = [
     'The play() request was interrupted by a call to pause()'
 ];
 
+let driver;
+
 describe('costumes, sounds and variables', () => {
+    beforeAll(() => {
+        driver = getDriver();
+    });
+
     afterAll(async () => {
         await driver.quit();
     });
 
     test('Adding a costume', async () => {
-        await driver.get('file://' + uri);
+        await driver.get(`file://${uri}`);
         await clickText('Costumes');
         await clickText('Add Costume');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
@@ -36,7 +41,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Adding a sound', async () => {
-        await driver.get('file://' + uri);
+        await driver.get(`file://${uri}`);
         await clickText('Sounds');
         await clickText('Add Sound');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
@@ -62,7 +67,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Load a project by ID', async () => {
         const projectId = '96708228';
-        await driver.get('file://' + uri + '#' + projectId);
+        await driver.get(`file://${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -72,7 +77,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Creating variables', async () => {
-        await driver.get('file://' + uri);
+        await driver.get(`file://${uri}`);
         await clickText('Blocks');
         await clickText('Data');
         await clickText('Create variable...');

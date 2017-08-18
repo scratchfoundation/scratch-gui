@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 695:
+/***/ 701:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20,15 +20,11 @@ var _appStateHoc = __webpack_require__(98);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _greenFlag = __webpack_require__(119);
+var _controls = __webpack_require__(119);
 
-var _greenFlag2 = _interopRequireDefault(_greenFlag);
+var _controls2 = _interopRequireDefault(_controls);
 
-var _stopAll = __webpack_require__(122);
-
-var _stopAll2 = _interopRequireDefault(_stopAll);
-
-var _blocks = __webpack_require__(219);
+var _blocks = __webpack_require__(218);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
@@ -36,11 +32,11 @@ var _gui = __webpack_require__(116);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(123);
+var _projectLoaderHoc = __webpack_require__(122);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _blocksOnly = __webpack_require__(696);
+var _blocksOnly = __webpack_require__(702);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -51,8 +47,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var VMBlocks = (0, _reactRedux.connect)(mapStateToProps)(_blocks2.default);
-var VMGreenFlag = (0, _reactRedux.connect)(mapStateToProps)(_greenFlag2.default);
-var VMStopAll = (0, _reactRedux.connect)(mapStateToProps)(_stopAll2.default);
+var VMControls = (0, _reactRedux.connect)(mapStateToProps)(_controls2.default);
 
 var BlocksOnly = function BlocksOnly(props) {
     return _react2.default.createElement(
@@ -64,8 +59,7 @@ var BlocksOnly = function BlocksOnly(props) {
                 media: 'static/blocks-media/'
             }
         }),
-        _react2.default.createElement(VMGreenFlag, { className: _blocksOnly2.default.greenFlag }),
-        _react2.default.createElement(VMStopAll, { className: _blocksOnly2.default.stopAll })
+        _react2.default.createElement(VMControls, { className: _blocksOnly2.default.controls })
     );
 };
 
@@ -78,13 +72,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 696:
+/***/ 702:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(697);
+var content = __webpack_require__(703);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -110,7 +104,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 697:
+/***/ 703:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(undefined);
@@ -118,17 +112,14 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, ".blocks-only_green-flag_1bT2v {\n    position: absolute;\n    z-index: 2;\n    top: 10px;\n    right: 50px;\n}\n\n.blocks-only_stop-all_TWY-P {\n    position: absolute;\n    z-index: 2;\n    top: 10px;\n    right: 15px;\n}\n", ""]);
+exports.push([module.i, ".blocks-only_controls_1gHLl {\n    position: absolute;\n    z-index: 2;\n    top: 10px;\n    right: 15px;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"green-flag": "blocks-only_green-flag_1bT2v",
-	"greenFlag": "blocks-only_green-flag_1bT2v",
-	"stop-all": "blocks-only_stop-all_TWY-P",
-	"stopAll": "blocks-only_stop-all_TWY-P"
+	"controls": "blocks-only_controls_1gHLl"
 };
 
 /***/ })
 
-},[695]);
+},[701]);
 //# sourceMappingURL=blocksonly.js.map

@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 698:
+/***/ 704:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24,15 +24,11 @@ var _appStateHoc = __webpack_require__(98);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _greenFlag = __webpack_require__(119);
+var _controls = __webpack_require__(119);
 
-var _greenFlag2 = _interopRequireDefault(_greenFlag);
+var _controls2 = _interopRequireDefault(_controls);
 
-var _stopAll = __webpack_require__(122);
-
-var _stopAll2 = _interopRequireDefault(_stopAll);
-
-var _stage = __webpack_require__(249);
+var _stage = __webpack_require__(248);
 
 var _stage2 = _interopRequireDefault(_stage);
 
@@ -44,11 +40,11 @@ var _gui = __webpack_require__(116);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(123);
+var _projectLoaderHoc = __webpack_require__(122);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-__webpack_require__(699);
+__webpack_require__(705);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,8 +59,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var VMStage = (0, _reactRedux.connect)(mapStateToProps)(_stage2.default);
-var VMGreenFlag = (0, _reactRedux.connect)(mapStateToProps)(_greenFlag2.default);
-var VMStopAll = (0, _reactRedux.connect)(mapStateToProps)(_stopAll2.default);
+var VMControls = (0, _reactRedux.connect)(mapStateToProps)(_controls2.default);
 
 var Player = function (_React$Component) {
     _inherits(Player, _React$Component);
@@ -122,14 +117,9 @@ var Player = function (_React$Component) {
                 _react2.default.createElement(
                     _box2.default,
                     { height: 40 },
-                    _react2.default.createElement(VMGreenFlag, {
+                    _react2.default.createElement(VMControls, {
                         style: {
                             marginRight: 10,
-                            height: 40
-                        }
-                    }),
-                    _react2.default.createElement(VMStopAll, {
-                        style: {
                             height: 40
                         }
                     })
@@ -154,13 +144,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 699:
+/***/ 705:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(700);
+var content = __webpack_require__(706);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -186,7 +176,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 700:
+/***/ 706:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(undefined);
@@ -201,5 +191,5 @@ exports.push([module.i, "body {\n    padding: 0;\n    margin: 0;\n}\n", ""]);
 
 /***/ })
 
-},[698]);
+},[704]);
 //# sourceMappingURL=player.js.map

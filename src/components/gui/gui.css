@@ -101,10 +101,6 @@
     position: relative;
 }
 
-.green-flag {
-    margin: 0.25rem 0.6rem;
-}
-
 .stage-and-target-wrapper {
     /*
         Makes rows for children:
@@ -130,7 +126,7 @@
     display: flex;
     flex-grow: 1;
     flex-basis: 0;
-    
+
     padding-top: $space;
     padding-left: $space;
     padding-right: $space;

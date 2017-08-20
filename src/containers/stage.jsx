@@ -15,6 +15,8 @@ class Stage extends React.Component {
             'cancelMouseDownTimeout',
             'detachMouseEvents',
             'handleDoubleClick',
+            'handleZoomOpen',
+            'handleZoomClose',
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
@@ -28,7 +30,8 @@ class Stage extends React.Component {
             mouseDownPosition: null,
             isDragging: false,
             dragOffset: null,
-            dragId: null
+            dragId: null,
+            zoomed: false
         };
     }
     componentDidMount () {
@@ -38,8 +41,8 @@ class Stage extends React.Component {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
     }
-    shouldComponentUpdate (nextProps) {
-        return this.props.width !== nextProps.width || this.props.height !== nextProps.height;
+    shouldComponentUpdate (nextProps, nextState) {
+        return this.props.width !== nextProps.width || this.props.height !== nextProps.height || this.state.zoomed !== nextState.zoomed;
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -188,17 +191,30 @@ class Stage extends React.Component {
     setCanvas (canvas) {
         this.canvas = canvas;
     }
+    handleZoomClose () {
+        this.setState({zoomed: false});
+    }
+    handleZoomOpen () {
+        this.setState({zoomed: true});
+    }
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
+
             <StageComponent
+                onZoomOpen={this.handleZoomOpen}
+                onZoomClose={this.handleZoomClose}
+                isZoomed={this.state.zoomed}
+                vm={this.props.vm}
                 canvasRef={this.setCanvas}
                 onDoubleClick={this.handleDoubleClick}
                 {...props}
             />
+
+
         );
     }
 }

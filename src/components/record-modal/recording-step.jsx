@@ -57,7 +57,7 @@ const RecordingStep = props => (
                             className={styles.recordButtonCircleOutline}
                             cx="26"
                             cy="26"
-                            r={27 + props.level * 5}
+                            r={27 + (props.level * 5)}
                         />
                     </svg>
                 )}
@@ -80,4 +80,4 @@ RecordingStep.propTypes = {
     recording: PropTypes.bool
 };
 
-module.exports = RecordingStep;
+export default RecordingStep;

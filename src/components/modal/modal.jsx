@@ -72,4 +72,4 @@ ModalComponent.propTypes = {
     visible: PropTypes.bool.isRequired
 };
 
-module.exports = ModalComponent;
+export default ModalComponent;

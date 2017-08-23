@@ -26,4 +26,4 @@ class Storage extends ScratchStorage {
     }
 }
 
-module.exports = Storage;
+export default Storage;

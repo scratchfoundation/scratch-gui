@@ -1,10 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
+
 import styles from './sprite-selector.css';
+import spriteIcon from './icon--sprite.svg';
+
+const addSpriteMessage = (
+    <FormattedMessage
+        defaultMessage="Add Sprite"
+        description="Button to add a sprite in the target pane"
+        id="targetPane.addSprite"
+    />
+);
 
 const SpriteSelectorComponent = function (props) {
     const {
@@ -15,6 +27,7 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteX,
         onChangeSpriteY,
         onDeleteSprite,
+        onNewSpriteClick,
         onSelectSprite,
         selectedId,
         sprites,
@@ -69,6 +82,12 @@ const SpriteSelectorComponent = function (props) {
                     }
                 </Box>
             </Box>
+            <IconButton
+                className={styles.addButton}
+                img={spriteIcon}
+                title={addSpriteMessage}
+                onClick={onNewSpriteClick}
+            />
         </Box>
     );
 };
@@ -81,6 +100,7 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     selectedId: PropTypes.string,
     sprites: PropTypes.shape({
@@ -98,4 +118,4 @@ SpriteSelectorComponent.propTypes = {
     })
 };
 
-module.exports = SpriteSelectorComponent;
+export default SpriteSelectorComponent;

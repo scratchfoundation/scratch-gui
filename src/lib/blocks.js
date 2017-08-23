@@ -1,6 +1,11 @@
 import ScratchBlocks from 'scratch-blocks';
 
-module.exports = function (vm) {
+/**
+ * Connect scratch blocks with the vm
+ * @param {VirtualMachine} vm - The scratch vm
+ * @return {ScratchBlocks} ScratchBlocks connected with the vm
+ */
+export default function (vm) {
 
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
@@ -137,4 +142,4 @@ module.exports = function (vm) {
     };
 
     return ScratchBlocks;
-};
+}

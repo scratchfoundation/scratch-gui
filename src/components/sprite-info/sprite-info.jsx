@@ -1,9 +1,14 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import MediaQuery from 'react-responsive';
 
 import Box from '../box/box.jsx';
-import BufferedInput from '../buffered-input/buffered-input.jsx';
+import Label from '../forms/label.jsx';
+import Input from '../forms/input.jsx';
+import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+
+import layout from '../../lib/layout-constants.js';
 import styles from './sprite-info.css';
 
 import xIcon from './icon--x.svg';
@@ -11,6 +16,7 @@ import yIcon from './icon--y.svg';
 import showIcon from './icon--show.svg';
 import hideIcon from './icon--hide.svg';
 
+const BufferedInput = BufferedInputHOC(Input);
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 
 class SpriteInfo extends React.Component {
@@ -32,62 +38,71 @@ class SpriteInfo extends React.Component {
             >
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabel}>Sprite</span>
-                        <BufferedInput
-                            className={classNames(styles.inputForm, styles.spriteName)}
-                            disabled={this.props.disabled}
-                            placeholder="Name"
-                            tabIndex="1"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.name}
-                            onSubmit={this.props.onChangeName}
-                        />
+                        <Label text="Sprite">
+                            <BufferedInput
+                                disabled={this.props.disabled}
+                                placeholder="Name"
+                                tabIndex="1"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.name}
+                                onSubmit={this.props.onChangeName}
+                            />
+                        </Label>
                     </div>
 
                     <div className={styles.group}>
-                        <div className={styles.iconWrapper}>
-                            <img
-                                className={classNames(styles.xIcon, styles.icon)}
-                                src={xIcon}
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <div className={styles.iconWrapper}>
+                                <img
+                                    className={classNames(styles.xIcon, styles.icon)}
+                                    src={xIcon}
+                                />
+                            </div>
+                        </MediaQuery>
+                        <Label text="x">
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                placeholder="x"
+                                tabIndex="2"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.x}
+                                onSubmit={this.props.onChangeX}
                             />
-                        </div>
-                        <span className={styles.inputLabel}>x</span>
-                        <BufferedInput
-                            className={classNames(styles.inputForm, styles.x)}
-                            disabled={this.props.disabled}
-                            placeholder="x"
-                            tabIndex="2"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.x}
-                            onSubmit={this.props.onChangeX}
-                        />
+                        </Label>
                     </div>
 
                     <div className={styles.group}>
-                        <div className={styles.iconWrapper}>
-                            <img
-                                className={classNames(styles.yIcon, styles.icon)}
-                                src={yIcon}
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <div className={styles.iconWrapper}>
+                                <img
+                                    className={classNames(styles.yIcon, styles.icon)}
+                                    src={yIcon}
+                                />
+                            </div>
+                        </MediaQuery>
+                        <Label text="y">
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                placeholder="y"
+                                tabIndex="3"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.y}
+                                onSubmit={this.props.onChangeY}
                             />
-                        </div>
-                        <span className={styles.inputLabel}>y</span>
-                        <BufferedInput
-                            className={classNames(styles.inputForm, styles.y)}
-                            disabled={this.props.disabled}
-                            placeholder="y"
-                            tabIndex="3"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.y}
-                            onSubmit={this.props.onChangeY}
-                        />
+                        </Label>
                     </div>
                 </div>
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
-                            Show
-                        </span>
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
+                            <Label
+                                secondary
+                                text="Show"
+                            />
+                        </MediaQuery>
                         <div>
                             <div
                                 className={classNames(
@@ -128,35 +143,42 @@ class SpriteInfo extends React.Component {
                         </div>
                     </div>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>Direction</span>
-                        <BufferedInput
-                            className={classNames(styles.inputForm, styles.direction)}
-                            disabled={this.props.disabled}
-                            tabIndex="5"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.direction}
-                            onSubmit={this.props.onChangeDirection}
-                        />
+                        <Label
+                            secondary
+                            text="Direction"
+                        >
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                label="Direction"
+                                tabIndex="5"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.direction}
+                                onSubmit={this.props.onChangeDirection}
+                            />
+                        </Label>
                     </div>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
-                            Rotation
-                        </span>
-                        <select
-                            className={classNames(styles.selectForm, styles.rotationSelect)}
-                            disabled={this.props.disabled}
-                            value={this.props.rotationStyle}
-                            onChange={this.props.onChangeRotationStyle}
+                        <Label
+                            secondary
+                            text="Rotation"
                         >
-                            {ROTATION_STYLES.map(style => (
-                                <option
-                                    key={style}
-                                    value={style}
-                                >
-                                    {style}
-                                </option>
-                            ))}
-                        </select>
+                            <select
+                                className={classNames(styles.selectForm, styles.rotationSelect)}
+                                disabled={this.props.disabled}
+                                value={this.props.rotationStyle}
+                                onChange={this.props.onChangeRotationStyle}
+                            >
+                                {ROTATION_STYLES.map(style => (
+                                    <option
+                                        key={style}
+                                        value={style}
+                                    >
+                                        {style}
+                                    </option>
+                                ))}
+                            </select>
+                        </Label>
                     </div>
                 </div>
             </Box>
@@ -190,4 +212,4 @@ SpriteInfo.propTypes = {
     ])
 };
 
-module.exports = SpriteInfo;
+export default SpriteInfo;

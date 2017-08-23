@@ -10,23 +10,26 @@ const AudioTrimmer = props => (
         className={styles.absolute}
         ref={props.containerRef}
     >
-        <Box
-            className={classNames(styles.absolute, styles.trimBackground, styles.startTrimBackground)}
-            style={{
-                width: `${100 * props.trimStart}%`
-            }}
-            onMouseDown={props.onTrimStartMouseDown}
-        >
-            <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
-            <Box className={classNames(styles.trimLine, styles.startTrimLine)}>
-                <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
-                    <img src={handleIcon} />
-                </Box>
-                <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.startTrimHandle)}>
-                    <img src={handleIcon} />
+        {props.trimStart === null ? null : (
+            <Box
+                className={classNames(styles.absolute, styles.trimBackground, styles.startTrimBackground)}
+                style={{
+                    width: `${100 * props.trimStart}%`
+                }}
+                onMouseDown={props.onTrimStartMouseDown}
+                onTouchStart={props.onTrimStartMouseDown}
+            >
+                <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
+                <Box className={classNames(styles.trimLine, styles.startTrimLine)}>
+                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
+                        <img src={handleIcon} />
+                    </Box>
+                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.startTrimHandle)}>
+                        <img src={handleIcon} />
+                    </Box>
                 </Box>
             </Box>
-        </Box>
+        )}
 
         {props.playhead ? (
             <Box
@@ -37,24 +40,27 @@ const AudioTrimmer = props => (
             />
         ) : null}
 
-        <Box
-            className={classNames(styles.absolute, styles.trimBackground, styles.endTrimBackground)}
-            style={{
-                left: `${100 * props.trimEnd}%`,
-                width: `${100 - 100 * props.trimEnd}%`
-            }}
-            onMouseDown={props.onTrimEndMouseDown}
-        >
-            <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
-            <Box className={classNames(styles.trimLine, styles.endTrimLine)}>
-                <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
-                    <img src={handleIcon} />
-                </Box>
-                <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.endTrimHandle)}>
-                    <img src={handleIcon} />
+        {props.trimEnd === null ? null : (
+            <Box
+                className={classNames(styles.absolute, styles.trimBackground, styles.endTrimBackground)}
+                style={{
+                    left: `${100 * props.trimEnd}%`,
+                    width: `${100 - (100 * props.trimEnd)}%`
+                }}
+                onMouseDown={props.onTrimEndMouseDown}
+                onTouchStart={props.onTrimEndMouseDown}
+            >
+                <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
+                <Box className={classNames(styles.trimLine, styles.endTrimLine)}>
+                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
+                        <img src={handleIcon} />
+                    </Box>
+                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.endTrimHandle)}>
+                        <img src={handleIcon} />
+                    </Box>
                 </Box>
             </Box>
-        </Box>
+        )}
     </div>
 );
 
@@ -63,8 +69,8 @@ AudioTrimmer.propTypes = {
     onTrimEndMouseDown: PropTypes.func.isRequired,
     onTrimStartMouseDown: PropTypes.func.isRequired,
     playhead: PropTypes.number,
-    trimEnd: PropTypes.number.isRequired,
-    trimStart: PropTypes.number.isRequired
+    trimEnd: PropTypes.number,
+    trimStart: PropTypes.number
 };
 
-module.exports = AudioTrimmer;
+export default AudioTrimmer;

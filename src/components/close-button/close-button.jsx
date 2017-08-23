@@ -37,4 +37,4 @@ CloseButton.defaultProps = {
     size: CloseButton.SIZE_LARGE
 };
 
-module.exports = CloseButton;
+export default CloseButton;

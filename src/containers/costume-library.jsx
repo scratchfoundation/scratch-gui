@@ -43,4 +43,4 @@ CostumeLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-module.exports = CostumeLibrary;
+export default CostumeLibrary;

@@ -52,4 +52,4 @@ StopAll.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-module.exports = StopAll;
+export default StopAll;

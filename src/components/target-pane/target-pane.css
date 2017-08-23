@@ -3,51 +3,13 @@
 .target-pane {
     /* Makes columns for the sprite library selector + and the stage selector */
     display: flex;
-    flex-direction: row; 
-    
-    height: 100%;
+    flex-direction: row;
+    flex-grow: 1;
 }
 
 .stage-selector-wrapper {
+    display: flex;
     flex-basis: 72px;
     flex-shrink: 0;
-    margin-left: calc($space / 2); 
+    margin-left: calc($space / 2);
 }
-
-.add-button-wrapper {
-    display: flex;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    bottom: 1rem;
-    width: 2.25rem !important;
-    height: 2.25rem !important;
-    background-color: #4c97ff;
-    border: 0;
-    border-radius: 50% !important;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-    transition: all 0.15s ease-out; /* @todo: standardize with var */ 
-    cursor: pointer;
-    user-select: none;
-}
-
-.add-button-wrapper:hover {
-    transform: scale(1.1, 1.1);
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
-}
-
-.add-button-wrapper:focus {
-    outline: none;
-    border: 0;
-}
-
-.add-button {
-    height: 0.8rem;
-    margin: auto;
-}
-
-/* @todo: This is hacky. Better: move buttons in their corresponding panes, and set values relatively */
-.add-button-wrapper--sprite   { right: 7rem; }
-.add-button-wrapper--stage    { right: 1.6rem; }
-.add-button-wrapper--costume  { right: 1.6rem; }

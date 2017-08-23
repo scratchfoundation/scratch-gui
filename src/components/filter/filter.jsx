@@ -54,4 +54,4 @@ FilterComponent.propTypes = {
 FilterComponent.defaultProps = {
     placeholderText: 'what are you looking for?'
 };
-module.exports = FilterComponent;
+export default FilterComponent;

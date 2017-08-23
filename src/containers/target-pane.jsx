@@ -3,14 +3,13 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-const {
-    openBackdropLibrary,
+import {
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeSoundLibrary,
     closeSpriteLibrary
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 
@@ -95,10 +94,6 @@ const mapStateToProps = state => ({
     backdropLibraryVisible: state.modals.backdropLibrary
 });
 const mapDispatchToProps = dispatch => ({
-    onNewBackdropClick: e => {
-        e.preventDefault();
-        dispatch(openBackdropLibrary());
-    },
     onNewSpriteClick: e => {
         e.preventDefault();
         dispatch(openSpriteLibrary());
@@ -117,7 +112,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(TargetPane);

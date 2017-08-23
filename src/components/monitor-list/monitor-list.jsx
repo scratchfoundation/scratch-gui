@@ -30,4 +30,4 @@ MonitorList.propTypes = {
     onMonitorChange: PropTypes.func.isRequired
 };
 
-module.exports = MonitorList;
+export default MonitorList;

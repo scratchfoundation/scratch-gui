@@ -2,8 +2,8 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Renderer from 'scratch-render';
-import AudioEngine from 'scratch-audio';
 import VM from 'scratch-vm';
+import {getEventXY} from '../lib/touch-utils';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -37,11 +37,9 @@ class Stage extends React.Component {
         this.updateRect();
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
-        this.audioEngine = new AudioEngine();
-        this.props.vm.attachAudioEngine(this.audioEngine);
     }
-    shouldComponentUpdate () {
-        return false;
+    shouldComponentUpdate (nextProps) {
+        return this.props.width !== nextProps.width || this.props.height !== nextProps.height;
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -50,12 +48,18 @@ class Stage extends React.Component {
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
         document.addEventListener('mouseup', this.onMouseUp);
+        document.addEventListener('touchmove', this.onMouseMove);
+        document.addEventListener('touchend', this.onMouseUp);
         canvas.addEventListener('mousedown', this.onMouseDown);
+        canvas.addEventListener('touchstart', this.onMouseDown);
     }
     detachMouseEvents (canvas) {
         document.removeEventListener('mousemove', this.onMouseMove);
         document.removeEventListener('mouseup', this.onMouseUp);
+        document.removeEventListener('touchmove', this.onMouseMove);
+        document.removeEventListener('touchend', this.onMouseUp);
         canvas.removeEventListener('mousedown', this.onMouseDown);
+        canvas.removeEventListener('touchstart', this.onMouseDown);
     }
     attachRectEvents () {
         window.addEventListener('resize', this.updateRect);
@@ -69,14 +73,16 @@ class Stage extends React.Component {
         this.rect = this.canvas.getBoundingClientRect();
     }
     getScratchCoords (x, y) {
+        const nativeSize = this.renderer.getNativeSize();
         return [
-            x - (this.rect.width / 2),
-            y - (this.rect.height / 2)
+            (nativeSize[0] / this.rect.width) * (x - (this.rect.width / 2)),
+            (nativeSize[1] / this.rect.height) * (y - (this.rect.height / 2))
         ];
     }
     handleDoubleClick (e) {
+        const {x, y} = getEventXY(e);
         // Set editing target from cursor position, if clicking on a sprite.
-        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
         const drawableId = this.renderer.pick(mousePosition[0], mousePosition[1]);
         if (drawableId === null) return;
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
@@ -84,7 +90,8 @@ class Stage extends React.Component {
         this.props.vm.setEditingTarget(targetId);
     }
     onMouseMove (e) {
-        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        const {x, y} = getEventXY(e);
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
         if (this.state.mouseDownTimeoutId !== null) {
             this.cancelMouseDownTimeout();
             if (this.state.mouseDown && !this.state.isDragging) {
@@ -108,6 +115,7 @@ class Stage extends React.Component {
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {
+        const {x, y} = getEventXY(e);
         this.cancelMouseDownTimeout();
         this.setState({
             mouseDown: false,
@@ -118,8 +126,8 @@ class Stage extends React.Component {
         } else {
             const data = {
                 isDown: false,
-                x: e.clientX - this.rect.left,
-                y: e.clientY - this.rect.top,
+                x: x - this.rect.left,
+                y: y - this.rect.top,
                 canvasWidth: this.rect.width,
                 canvasHeight: this.rect.height
             };
@@ -127,7 +135,9 @@ class Stage extends React.Component {
         }
     }
     onMouseDown (e) {
-        const mousePosition = [e.clientX - this.rect.left, e.clientY - this.rect.top];
+        this.updateRect();
+        const {x, y} = getEventXY(e);
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
         this.setState({
             mouseDown: true,
             mouseDownPosition: mousePosition,
@@ -144,7 +154,9 @@ class Stage extends React.Component {
             canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', data);
-        e.preventDefault();
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
     }
     cancelMouseDownTimeout () {
         if (this.state.mouseDownTimeoutId !== null) {
@@ -192,7 +204,9 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    vm: PropTypes.instanceOf(VM).isRequired
+    height: PropTypes.number,
+    vm: PropTypes.instanceOf(VM).isRequired,
+    width: PropTypes.number
 };
 
-module.exports = Stage;
+export default Stage;

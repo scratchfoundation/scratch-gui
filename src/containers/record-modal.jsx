@@ -7,9 +7,9 @@ import {connect} from 'react-redux';
 
 import RecordModalComponent from '../components/record-modal/record-modal.jsx';
 
-const {
+import {
     closeSoundRecorder
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 class RecordModal extends React.Component {
     constructor (props) {
@@ -105,6 +105,7 @@ class RecordModal extends React.Component {
                 playhead={this.state.playhead}
                 playing={this.state.playing}
                 recording={this.state.recording}
+                sampleRate={this.state.sampleRate}
                 samples={this.state.samples}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
@@ -139,7 +140,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(RecordModal);

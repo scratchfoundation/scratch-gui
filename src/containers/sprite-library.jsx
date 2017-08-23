@@ -82,4 +82,4 @@ SpriteLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-module.exports = SpriteLibrary;
+export default SpriteLibrary;

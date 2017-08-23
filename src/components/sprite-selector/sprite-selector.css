@@ -30,7 +30,7 @@
     */
     box-sizing: border-box;
     width: calc((100% / $sprites-per-row ) - $space);
-
+    min-width: 4rem;
     min-height: 4rem; /* @todo: calc height same as width */
     margin: calc($space / 2); 
 }
@@ -58,4 +58,12 @@
     padding-left: calc($space / 2);
     padding-right: calc($space / 2);
     padding-bottom: $space; 
+}
+
+.add-button {
+    font-size: 0.55rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
 }

@@ -19,7 +19,9 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
         lib: ['react', 'react-dom'],
-        gui: './src/index.jsx'
+        gui: './src/index.jsx',
+        blocksonly: './src/examples/blocks-only.jsx',
+        player: './src/examples/player.jsx'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -33,11 +35,7 @@ module.exports = {
         rules: [{
             test: /\.jsx?$/,
             loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
-            options: {
-                plugins: ['transform-object-rest-spread'],
-                presets: ['es2015', 'react']
-            }
+            include: path.resolve(__dirname, 'src')
         },
         {
             test: /\.css$/,
@@ -82,8 +80,21 @@ module.exports = {
             filename: 'lib.min.js'
         }),
         new HtmlWebpackPlugin({
+            chunks: ['lib', 'gui'],
             template: 'src/index.ejs',
             title: 'Scratch 3.0 GUI'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['lib', 'blocksonly'],
+            template: 'src/index.ejs',
+            filename: 'blocks-only.html',
+            title: 'Scratch 3.0 GUI: Blocks Only Example'
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['lib', 'player'],
+            template: 'src/index.ejs',
+            filename: 'player.html',
+            title: 'Scratch 3.0 GUI: Player Example'
         }),
         new CopyWebpackPlugin([{
             from: 'node_modules/scratch-blocks/media',

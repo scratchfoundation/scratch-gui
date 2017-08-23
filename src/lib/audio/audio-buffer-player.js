@@ -1,9 +1,9 @@
 import SharedAudioContext from './shared-audio-context.js';
 
 class AudioBufferPlayer {
-    constructor (samples) {
+    constructor (samples, sampleRate) {
         this.audioContext = new SharedAudioContext();
-        this.buffer = this.audioContext.createBuffer(1, samples.length, this.audioContext.sampleRate);
+        this.buffer = this.audioContext.createBuffer(1, samples.length, sampleRate);
         this.buffer.getChannelData(0).set(samples);
         this.source = null;
 
@@ -20,7 +20,7 @@ class AudioBufferPlayer {
         this.startTime = Date.now();
 
         const trimStartTime = this.buffer.duration * trimStart;
-        const trimmedDuration = this.buffer.duration * trimEnd - trimStartTime;
+        const trimmedDuration = (this.buffer.duration * trimEnd) - trimStartTime;
 
         this.source = this.audioContext.createBufferSource();
         this.source.onended = onEnded;
@@ -50,4 +50,4 @@ class AudioBufferPlayer {
     }
 }
 
-module.exports = AudioBufferPlayer;
+export default AudioBufferPlayer;

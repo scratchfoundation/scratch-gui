@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {connect} from 'react-redux';
-
+import {openBackdropLibrary} from '../reducers/modals';
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
 class StageSelector extends React.Component {
@@ -44,7 +44,14 @@ const mapStateToProps = (state, {assetId}) => ({
     url: assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()
 });
 
-module.exports = connect(
+const mapDispatchToProps = dispatch => ({
+    onNewBackdropClick: e => {
+        e.preventDefault();
+        dispatch(openBackdropLibrary());
+    }
+});
+
+export default connect(
     mapStateToProps,
-    () => ({}) // omit dispatch prop
+    mapDispatchToProps
 )(StageSelector);

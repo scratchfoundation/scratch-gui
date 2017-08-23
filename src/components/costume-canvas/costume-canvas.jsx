@@ -21,7 +21,7 @@ class CostumeCanvas extends React.Component {
             prevProps.width !== this.props.width ||
             prevProps.height !== this.props.height ||
             prevProps.direction !== this.props.direction
-          ) {
+        ) {
             this.draw();
         }
     }
@@ -127,4 +127,4 @@ CostumeCanvas.propTypes = {
     width: PropTypes.number
 };
 
-module.exports = CostumeCanvas;
+export default CostumeCanvas;

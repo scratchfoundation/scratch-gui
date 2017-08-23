@@ -39,4 +39,4 @@ Monitor.propTypes = {
     value: PropTypes.string.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
-module.exports = Monitor;
+export default Monitor;

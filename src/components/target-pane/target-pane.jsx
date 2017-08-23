@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -13,7 +12,6 @@ import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 
 import styles from './target-pane.css';
-import addIcon from './icon--add.svg';
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -35,7 +33,6 @@ const TargetPane = ({
     onChangeSpriteY,
     onDeleteSprite,
     onNewSpriteClick,
-    onNewBackdropClick,
     onRequestCloseBackdropLibrary,
     onRequestCloseCostumeLibrary,
     onRequestCloseSoundLibrary,
@@ -61,6 +58,7 @@ const TargetPane = ({
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
         <Box className={styles.stageSelectorWrapper}>
@@ -75,29 +73,6 @@ const TargetPane = ({
                 onSelect={onSelectSprite}
             />}
             <Box>
-
-                <button
-                    className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}
-                    title="Add sprite"
-                    onClick={onNewSpriteClick}
-                >
-                    <img
-                        className={styles.addButton}
-                        src={addIcon}
-                    />
-                </button>
-
-                <button
-                    className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}
-                    title="Add backdrop"
-                    onClick={onNewBackdropClick}
-                >
-                    <img
-                        className={styles.addButton}
-                        src={addIcon}
-                    />
-                </button>
-
                 <SpriteLibrary
                     visible={spriteLibraryVisible}
                     vm={vm}
@@ -152,7 +127,6 @@ TargetPane.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
-    onNewBackdropClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
@@ -166,4 +140,4 @@ TargetPane.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-module.exports = TargetPane;
+export default TargetPane;

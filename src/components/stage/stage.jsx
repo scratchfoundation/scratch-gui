@@ -38,4 +38,4 @@ StageComponent.defaultProps = {
     width: 480,
     height: 360
 };
-module.exports = StageComponent;
+export default StageComponent;

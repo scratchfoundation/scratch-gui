@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
 import Box from '../box/box.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 import styles from './selector.css';
 
 const Selector = props => {
@@ -35,19 +35,12 @@ const Selector = props => {
             </Box>
             <Box className={styles.newButtons}>
                 {buttons.map(({message, img, onClick}, index) => (
-                    <Box
-                        className={styles.newButton}
+                    <IconButton
+                        img={img}
                         key={index}
+                        title={message}
                         onClick={onClick}
-                    >
-                        <img
-                            className={styles.newButtonIcon}
-                            src={img}
-                        />
-                        <Box className={styles.newButtonLabel}>
-                            <FormattedMessage {...message} />
-                        </Box>
-                    </Box>
+                    />
                 ))}
             </Box>
         </Box>
@@ -56,11 +49,7 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        message: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            defaultMessage: PropTypes.string,
-            description: PropTypes.string
-        }),
+        message: PropTypes.node.isRequired,
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })),
@@ -73,4 +62,4 @@ Selector.propTypes = {
     selectedItemIndex: PropTypes.number.isRequired
 };
 
-module.exports = Selector;
+export default Selector;

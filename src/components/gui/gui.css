@@ -113,12 +113,8 @@
     display: flex;
     flex-direction: column;
 
-    /*
-        Calc the minimum width for this pane, accounting for left + right spacing.
-        If and when the width doesn't need to be fixed, we can move the spacing out
-        of this calc, and into padding instead
-    */
-    flex-basis: calc(480px + ($space * 2));
+    /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(480px + calc($space * 2));
 }
 
 .stage-wrapper {
@@ -130,10 +126,7 @@
 }
 
 .target-wrapper {
-    /*  Take all the available vertical space available.
-        Works in tandem with height: 100%; which is set on the child: .targetPane
-        @todo: Not working in Safari, not great in FFx
-    */
+    display: flex;
     flex-grow: 1;
     flex-basis: 0;
 

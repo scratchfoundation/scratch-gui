@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = () => ({});
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(MonitorList);

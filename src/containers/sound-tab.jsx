@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import soundIcon from '../components/asset-panel/icon--sound.svg';
 import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-lib.svg';
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
-
 import RecordModal from './record-modal.jsx';
+import SoundEditor from './sound-editor.jsx';
 
 import {connect} from 'react-redux';
 
-const {
+import {
     openSoundLibrary,
     openSoundRecorder
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
 class SoundTab extends React.Component {
     constructor (props) {
@@ -38,13 +38,11 @@ class SoundTab extends React.Component {
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
         if (target && target.sounds && this.state.selectedSoundIndex > target.sounds.length - 1) {
-            this.setState({selectedSoundIndex: target.sounds.length - 1});
+            this.setState({selectedSoundIndex: Math.max(target.sounds.length - 1, 0)});
         }
     }
 
     handleSelectSound (soundIndex) {
-        const sound = this.props.vm.editingTarget.sprite.sounds[soundIndex];
-        this.props.vm.editingTarget.audioPlayer.playSound(sound.md5);
         this.setState({selectedSoundIndex: soundIndex});
     }
 
@@ -74,27 +72,29 @@ class SoundTab extends React.Component {
             }
         )) : [];
 
-        const messages = defineMessages({
-            recordSound: {
-                id: 'action.recordSound',
-                defaultMessage: 'Record Sound',
-                description: 'Button to record a sound in the editor tab'
-            },
-            addSound: {
-                id: 'action.addSound',
-                defaultMessage: 'Add Sound',
-                description: 'Button to add a sound in the editor tab'
-            }
-        });
+        const recordSoundMsg = (
+            <FormattedMessage
+                defaultMessage="Record Sound"
+                description="Button to record a sound in the editor tab"
+                id="action.recordSound"
+            />
+        );
+        const addSoundMsg = (
+            <FormattedMessage
+                defaultMessage="Add Sound"
+                description="Button to add a sound in the editor tab"
+                id="action.addSound"
+            />
+        );
 
         return (
             <AssetPanel
                 buttons={[{
-                    message: messages.recordSound,
+                    message: recordSoundMsg,
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    message: messages.addSound,
+                    message: addSoundMsg,
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}
@@ -106,6 +106,9 @@ class SoundTab extends React.Component {
                 onDeleteClick={this.handleDeleteSound}
                 onItemClick={this.handleSelectSound}
             >
+                {target.sounds && target.sounds.length > 0 ? (
+                    <SoundEditor soundIndex={this.state.selectedSoundIndex} />
+                ) : null}
                 {this.props.soundRecorderVisible ? (
                     <RecordModal />
                 ) : null}
@@ -151,7 +154,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SoundTab);

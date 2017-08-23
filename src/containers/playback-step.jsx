@@ -13,7 +13,7 @@ class PlaybackStep extends React.Component {
         ]);
     }
     componentDidMount () {
-        this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples);
+        this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
     }
     componentWillUnmount () {
         this.audioBufferPlayer.stop();
@@ -33,6 +33,7 @@ class PlaybackStep extends React.Component {
     }
     render () {
         const {
+            sampleRate, // eslint-disable-line no-unused-vars
             onPlay, // eslint-disable-line no-unused-vars
             onStopPlaying, // eslint-disable-line no-unused-vars
             onSetPlayhead, // eslint-disable-line no-unused-vars
@@ -49,8 +50,9 @@ class PlaybackStep extends React.Component {
 }
 
 PlaybackStep.propTypes = {
+    sampleRate: PropTypes.number.isRequired,
     samples: PropTypes.instanceOf(Float32Array).isRequired,
     ...PlaybackStepComponent.propTypes
 };
 
-module.exports = PlaybackStep;
+export default PlaybackStep;

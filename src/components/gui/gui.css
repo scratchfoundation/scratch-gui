@@ -112,6 +112,9 @@
     */
     display: flex;
     flex-direction: column;
+
+    /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(480px + calc($space * 2));
 }
 
 .stage-wrapper {

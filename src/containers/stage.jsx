@@ -34,13 +34,6 @@ class Stage extends React.Component {
             isZoomed: false
         };
     }
-    componentWillReceiveProps(nextProps) {
-        const {
-	    isZoomed
-	} = nextProps;
-
-	this.setState({isZoomed: isZoomed});
-    }
     componentDidMount () {
         this.attachRectEvents();
         this.attachMouseEvents(this.canvas);
@@ -48,12 +41,21 @@ class Stage extends React.Component {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
     }
-    shouldComponentUpdate (nextProps, nextState) {
-        return this.props.width !== nextProps.width || this.props.height !== nextProps.height || this.state.isZoomed !== nextState.isZoomed;
+    componentWillReceiveProps (nextProps) {
+        const {
+            isZoomed
+        } = nextProps;
+
+        this.setState({isZoomed: isZoomed});
     }
-    componentDidUpdate() {
-	this.updateRect();
-	this.renderer.resize(this.rect.width, this.rect.height);
+    shouldComponentUpdate (nextProps, nextState) {
+        return this.props.width !== nextProps.width ||
+               this.props.height !== nextProps.height ||
+               this.state.isZoomed !== nextState.isZoomed;
+    }
+    componentDidUpdate () {
+        this.updateRect();
+        this.renderer.resize(this.rect.width, this.rect.height);
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -209,8 +211,8 @@ class Stage extends React.Component {
         } = this.props;
         return (
             <StageComponent
-                isZoomed={this.state.isZoomed}
                 canvasRef={this.setCanvas}
+                isZoomed={this.state.isZoomed}
                 onDoubleClick={this.handleDoubleClick}
                 {...props}
             />
@@ -220,6 +222,7 @@ class Stage extends React.Component {
 
 Stage.propTypes = {
     height: PropTypes.number,
+    isZoomed: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     width: PropTypes.number
 };

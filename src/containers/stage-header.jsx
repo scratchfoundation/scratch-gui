@@ -19,16 +19,18 @@ class StageHeader extends React.Component {
         };
     }
     shouldComponentUpdate (nextProps, nextState) {
-        return this.props.width !== nextProps.width || this.props.height !== nextProps.height || this.state.isZoomed !== nextState.isZoomed;
+        return this.props.width !== nextProps.width ||
+               this.props.height !== nextProps.height ||
+               this.state.isZoomed !== nextState.isZoomed;
     }
     handleZoom () {
         this.setState({isZoomed: true});
-        this.props.dispatch({type: 'scratch-gui/Zoomed/SET_ZOOMED', isZoomed: true });
+        this.props.dispatch({type: 'scratch-gui/Zoomed/SET_ZOOMED', isZoomed: true});
 
     }
     handleUnzoom () {
         this.setState({isZoomed: false});
-        this.props.dispatch({type: 'scratch-gui/Zoomed/SET_ZOOMED', isZoomed: false });
+        this.props.dispatch({type: 'scratch-gui/Zoomed/SET_ZOOMED', isZoomed: false});
     }
     render () {
         const {
@@ -38,9 +40,9 @@ class StageHeader extends React.Component {
         return (
             <StageHeaderComponent
                 isZoomed={this.state.isZoomed}
-                onZoom={this.handleZoom}
+                vm={this.props.vm}
                 onUnzoom={this.handleUnzoom}
-		vm={this.props.vm}
+                onZoom={this.handleZoom}
                 {...props}
             />
         );
@@ -48,9 +50,10 @@ class StageHeader extends React.Component {
 }
 
 StageHeader.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     height: PropTypes.number,
-    width: PropTypes.number,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    width: PropTypes.number
 };
 
 const mapStateToProps = state => ({
@@ -60,4 +63,3 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps
 )(StageHeader);
-

@@ -7,10 +7,10 @@ import styles from './stage.css';
 
 const StageComponent = props => {
     const {
-        isZoomed,
         canvasRef,
-        width,
         height,
+        isZoomed,
+        width,
         ...boxProps
     } = props;
     return isZoomed === false ? (
@@ -33,20 +33,20 @@ const StageComponent = props => {
                 className={styles.stage}
                 componentRef={canvasRef}
                 element="canvas"
-                height={"100%"}
-                width={"100%"}
+                height={'100%'}
+                width={'100%'}
                 {...boxProps}
             />
             <Box className={styles.monitorWrapper}>
                 <MonitorList />
             </Box>
-       </Box>
+        </Box>
     );
 };
 StageComponent.propTypes = {
-    isZoomed: PropTypes.bool.isRequired,
     canvasRef: PropTypes.func,
     height: PropTypes.number,
+    isZoomed: PropTypes.bool.isRequired,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

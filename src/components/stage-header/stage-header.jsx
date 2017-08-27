@@ -11,26 +11,25 @@ import styles from './stage-header.css';
 
 const StageHeaderComponent = function (props) {
     const {
-	isZoomed,
-        onZoom,
-	onUnzoom,
-	width,
-	height,
-	vm,
         className,
-        title,
-	titleZoomIcon,
+        height,
+        isZoomed,
+        onUnzoom,
+        onZoom,
+        titleZoomIcon,
+        vm,
+        width,
         ...componentProps
     } = props;
     return isZoomed === false ? (
         <Box className={styles.stageHeaderWrapper}>
             <Box
-	        className={styles.stageMenuWrapper}
-	        height={height}
+                className={styles.stageMenuWrapper}
+                height={height}
                 width={width}
-	    >
+            >
                 <Controls vm={vm} />
-	        <img
+                <img
                     className={classNames(
                         className,
                         styles.stageZoomIcon
@@ -44,11 +43,11 @@ const StageHeaderComponent = function (props) {
         </Box>
     ) : (
         <Box className={styles.stageHeaderWrapperOverlay}>
-            <Box 
-	        className={styles.stageMenuWrapper}
-	        height={"100%"}
-                width={"100%"}
-	    >
+            <Box
+                className={styles.stageMenuWrapper}
+                height={'100%'}
+                width={'100%'}
+            >
                 <Controls vm={vm} />
                 <img
                     className={classNames(
@@ -65,19 +64,18 @@ const StageHeaderComponent = function (props) {
     );
 };
 StageHeaderComponent.propTypes = {
-    isZoomed: PropTypes.bool.isRequired,
-    onZoom: PropTypes.func.isRequired,
-    onUnzoom: PropTypes.func.isRequired,
-    height: PropTypes.number,
-    width: PropTypes.number,
     className: PropTypes.string,
-    title: PropTypes.string,
-    titleZoomIcon: PropTypes.string
+    height: PropTypes.number,
+    isZoomed: PropTypes.bool.isRequired,
+    onUnzoom: PropTypes.func.isRequired,
+    onZoom: PropTypes.func.isRequired,
+    titleZoomIcon: PropTypes.string,
+    vm: PropTypes.instanceOf(VM).isRequired,
+    width: PropTypes.number
 };
 StageHeaderComponent.defaultProps = {
     width: 480,
     height: 360,
-    title: 'Stage Header',
     titleZoomIcon: 'Zoom Control'
 };
 export default StageHeaderComponent;

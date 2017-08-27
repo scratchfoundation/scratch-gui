@@ -4,6 +4,7 @@ import modalReducer from './modals';
 import monitorReducer from './monitors';
 import targetReducer from './targets';
 import vmReducer from './vm';
+import zoomReducer from './zoom';
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
     modals: modalReducer,
     monitors: monitorReducer,
     targets: targetReducer,
-    vm: vmReducer
+    vm: vmReducer,
+    isZoomed: zoomReducer
 });

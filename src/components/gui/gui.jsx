@@ -8,9 +8,9 @@ import VM from 'scratch-vm';
 
 import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
-import Controls from '../../containers/controls.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
+import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 
 import Box from '../box/box.jsx';
@@ -89,7 +89,7 @@ const GUIComponent = props => {
 
                     <Box className={styles.stageAndTargetWrapper}>
                         <Box className={styles.stageMenuWrapper}>
-                            <Controls vm={vm} />
+                            <StageHeader vm={vm} />
                         </Box>
                         <Box className={styles.stageWrapper}>
                             <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (

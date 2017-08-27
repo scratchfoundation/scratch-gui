@@ -19,31 +19,9 @@
 
 .stage-wrapper-overlay {
     position: fixed;
-    top: 0;
+    top: $stage-menu-height;
     left: 0;
     right: 0;
-    bottom: 0;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 999;
-}
-
-.stage-wrapper-overlay-controls {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 999;
-}
-
-.stage-wrapper-overlay-close {
-    position: fixed;
-    top: 2%;
-    left: 97%;
-    right: 5%;
     bottom: 0;
     width: 100% !important;
     height: 100% !important;

@@ -5,6 +5,8 @@ import Renderer from 'scratch-render';
 import VM from 'scratch-vm';
 import {getEventXY} from '../lib/touch-utils';
 
+import {connect} from 'react-redux';
+
 import StageComponent from '../components/stage/stage.jsx';
 
 class Stage extends React.Component {
@@ -15,8 +17,6 @@ class Stage extends React.Component {
             'cancelMouseDownTimeout',
             'detachMouseEvents',
             'handleDoubleClick',
-            'handleZoomOpen',
-            'handleZoomClose',
             'onMouseUp',
             'onMouseMove',
             'onMouseDown',
@@ -31,8 +31,15 @@ class Stage extends React.Component {
             isDragging: false,
             dragOffset: null,
             dragId: null,
-            zoomed: false
+            isZoomed: false
         };
+    }
+    componentWillReceiveProps(nextProps) {
+        const {
+	    isZoomed
+	} = nextProps;
+
+	this.setState({isZoomed: isZoomed});
     }
     componentDidMount () {
         this.attachRectEvents();
@@ -42,7 +49,11 @@ class Stage extends React.Component {
         this.props.vm.attachRenderer(this.renderer);
     }
     shouldComponentUpdate (nextProps, nextState) {
-        return this.props.width !== nextProps.width || this.props.height !== nextProps.height || this.state.zoomed !== nextState.zoomed;
+        return this.props.width !== nextProps.width || this.props.height !== nextProps.height || this.state.isZoomed !== nextState.isZoomed;
+    }
+    componentDidUpdate() {
+	this.updateRect();
+	this.renderer.resize(this.rect.width, this.rect.height);
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
@@ -191,30 +202,18 @@ class Stage extends React.Component {
     setCanvas (canvas) {
         this.canvas = canvas;
     }
-    handleZoomClose () {
-        this.setState({zoomed: false});
-    }
-    handleZoomOpen () {
-        this.setState({zoomed: true});
-    }
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
-
             <StageComponent
-                onZoomOpen={this.handleZoomOpen}
-                onZoomClose={this.handleZoomClose}
-                isZoomed={this.state.zoomed}
-                vm={this.props.vm}
+                isZoomed={this.state.isZoomed}
                 canvasRef={this.setCanvas}
                 onDoubleClick={this.handleDoubleClick}
                 {...props}
             />
-
-
         );
     }
 }
@@ -225,4 +224,10 @@ Stage.propTypes = {
     width: PropTypes.number
 };
 
-export default Stage;
+const mapStateToProps = state => ({
+    isZoomed: state.isZoomed
+});
+
+export default connect(
+    mapStateToProps
+)(Stage);

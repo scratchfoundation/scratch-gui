@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
+import PaintEditor from 'scratch-paint';
 
 import {connect} from 'react-redux';
 
@@ -90,7 +91,9 @@ class CostumeTab extends React.Component {
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-            />
+            >
+                <PaintEditor/>
+            </AssetPanel>
         );
     }
 }

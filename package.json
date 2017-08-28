@@ -82,6 +82,7 @@
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
     "scratch-audio": "latest",
+    "scratch-paint": "latest",
     "scratch-blocks": "latest",
     "scratch-render": "latest",
     "scratch-storage": "^0.2.0",

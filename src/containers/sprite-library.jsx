@@ -64,9 +64,9 @@ class SpriteLibrary extends React.PureComponent {
     render () {
         return (
             <LibraryComponent
+                visible
                 data={this.state.sprites}
                 title="Sprite Library"
-                visible={this.props.visible}
                 onItemMouseEnter={this.handleMouseEnter}
                 onItemMouseLeave={this.handleMouseLeave}
                 onItemSelected={this.handleItemSelect}
@@ -78,7 +78,6 @@ class SpriteLibrary extends React.PureComponent {
 
 SpriteLibrary.propTypes = {
     onRequestClose: PropTypes.func,
-    visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

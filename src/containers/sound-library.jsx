@@ -74,9 +74,9 @@ class SoundLibrary extends React.PureComponent {
 
         return (
             <LibraryComponent
+                visible
                 data={soundLibraryThumbnailData}
                 title="Sound Library"
-                visible={this.props.visible}
                 onItemMouseEnter={this.handleItemMouseEnter}
                 onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}
@@ -88,7 +88,6 @@ class SoundLibrary extends React.PureComponent {
 
 SoundLibrary.propTypes = {
     onRequestClose: PropTypes.func,
-    visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

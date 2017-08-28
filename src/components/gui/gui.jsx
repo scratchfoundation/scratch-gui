@@ -79,10 +79,10 @@ const GUIComponent = props => {
                                 </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                <CostumeTab vm={vm} />
+                                {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                <SoundTab vm={vm} />
+                                {tabIndex === 2 ? <SoundTab vm={vm} /> : null}
                             </TabPanel>
                         </Tabs>
                     </Box>

@@ -27,9 +27,9 @@ class CostumeLibrary extends React.PureComponent {
     render () {
         return (
             <LibraryComponent
+                visible
                 data={costumeLibraryContent}
                 title="Costume Library"
-                visible={this.props.visible}
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}
             />
@@ -39,7 +39,6 @@ class CostumeLibrary extends React.PureComponent {
 
 CostumeLibrary.propTypes = {
     onRequestClose: PropTypes.func,
-    visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

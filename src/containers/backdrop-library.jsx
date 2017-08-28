@@ -27,9 +27,9 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibraryComponent
+                visible
                 data={backdropLibraryContent}
                 title="Backdrop Library"
-                visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
             />
@@ -39,7 +39,6 @@ class BackdropLibrary extends React.Component {
 
 BackdropLibrary.propTypes = {
     onRequestClose: PropTypes.func,
-    visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

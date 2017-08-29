@@ -101,11 +101,12 @@ module.exports = {
             to: 'static/blocks-media'
         }]),
         new CopyWebpackPlugin([{
-            from: 'extension-worker.{js,js.map}',
-            context: 'node_modules/scratch-vm/dist/web'
+            from: 'extensions/**',
+            to: 'static',
+            context: 'src/examples'
         }]),
         new CopyWebpackPlugin([{
-            from: 'extensions/**',
+            from: 'extension-worker.{js,js.map}',
             context: 'node_modules/scratch-vm/dist/web'
         }])
     ].concat(process.env.NODE_ENV === 'production' ? [

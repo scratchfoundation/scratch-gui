@@ -58,7 +58,7 @@ const GUIComponent = props => {
 
     const onAddExtensionClick = () => {
         /** @TODO open modal for the extension library instead */
-        vm.extensionManager.loadExtensionURL('extensions/example-extension.js');
+        vm.extensionManager.loadExtensionURL('static/extensions/example-extension.js');
     };
 
     return (

@@ -195,7 +195,7 @@ class Blocks extends React.Component {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
         const toolboxXML = makeToolboxXML(dynamicBlocksXML);
-        this.props.updateToolbox(toolboxXML);
+        this.props.sendToolboxUpdate(toolboxXML);
     }
     setBlocks (blocks) {
         this.blocks = blocks;
@@ -215,6 +215,8 @@ class Blocks extends React.Component {
             options, // eslint-disable-line no-unused-vars
             vm, // eslint-disable-line no-unused-vars
             isVisible, // eslint-disable-line no-unused-vars
+            toolboxXML, // eslint-disable-line no-unused-vars
+            sendToolboxUpdate, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -260,8 +262,8 @@ Blocks.propTypes = {
         }),
         comments: PropTypes.bool
     }),
+    sendToolboxUpdate: PropTypes.func,
     toolboxXML: PropTypes.string,
-    updateToolbox: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -301,7 +303,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateToolbox: toolboxXML => {
+    sendToolboxUpdate: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     }
 });

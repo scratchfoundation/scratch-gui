@@ -50,7 +50,6 @@ class TargetPane extends React.Component {
         this.props.vm.deleteSprite(id);
     }
     handleNewExtensionClick () {
-        /** @TODO: Replace this with `dispatch(openExtensionLibrary());` in `mapDispatchToProps` below */
         this.props.vm.extensionManager.loadExtensionURL('extensions/example-extension.js');
     }
     handleSelectSprite (id) {

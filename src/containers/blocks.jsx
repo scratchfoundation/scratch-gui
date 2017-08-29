@@ -208,7 +208,7 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
-    isVisible: PropTypes.bool.isRequired,
+    isVisible: PropTypes.bool,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -260,6 +260,7 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
+    isVisible: true,
     options: Blocks.defaultOptions
 };
 

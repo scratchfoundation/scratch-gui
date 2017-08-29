@@ -2,21 +2,25 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Box from '../box/box.jsx';
 import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 import styles from './sprite-selector-item.css';
+import {ContextMenuTrigger} from 'react-contextmenu';
+import {ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
+import {FormattedMessage} from 'react-intl';
+
+// react-contextmenu requires unique id to match trigger and context menu
+let contextMenuId = 0;
 
 const SpriteSelectorItem = props => (
-    <Box
-        className={classNames(
-            props.className,
-            styles.spriteSelectorItem,
-            {
+    <ContextMenuTrigger
+        attributes={{
+            className: classNames(props.className, styles.spriteSelectorItem, {
                 [styles.isSelected]: props.selected
-            }
-        )}
-        onClick={props.onClick}
+            }),
+            onClick: props.onClick
+        }}
+        id={`${props.name}-${contextMenuId}`}
     >
         {props.selected ? (
             <CloseButton
@@ -34,7 +38,16 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
-    </Box>
+        <ContextMenu id={`${props.name}-${contextMenuId++}`}>
+            <MenuItem onClick={props.onDeleteButtonClick}>
+                <FormattedMessage
+                    defaultMessage="delete"
+                    description="Menu item to delete in the right click menu"
+                    id="contextMenu.delete"
+                />
+            </MenuItem>
+        </ContextMenu>
+    </ContextMenuTrigger>
 );
 
 SpriteSelectorItem.propTypes = {

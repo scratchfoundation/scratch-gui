@@ -1,7 +1,5 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 
 import VM from 'scratch-vm';
 
@@ -12,27 +10,8 @@ import SoundLibrary from '../../containers/sound-library.jsx';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './target-pane.css';
-import spriteIcon from './icon--sprite.svg';
-import backdropIcon from './icon--backdrop.svg';
-
-const addSpriteMessage = (
-    <FormattedMessage
-        defaultMessage="Add Sprite"
-        description="Button to add a sprite in the target pane"
-        id="targetPane.addSprite"
-    />
-);
-
-const addBackdropMessage = (
-    <FormattedMessage
-        defaultMessage="Add Backdrop"
-        description="Button to add a backdrop in the target pane"
-        id="targetPane.addBackdrop"
-    />
-);
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -54,7 +33,6 @@ const TargetPane = ({
     onChangeSpriteY,
     onDeleteSprite,
     onNewSpriteClick,
-    onNewBackdropClick,
     onRequestCloseBackdropLibrary,
     onRequestCloseCostumeLibrary,
     onRequestCloseSoundLibrary,
@@ -80,6 +58,7 @@ const TargetPane = ({
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
         <Box className={styles.stageSelectorWrapper}>
@@ -94,22 +73,6 @@ const TargetPane = ({
                 onSelect={onSelectSprite}
             />}
             <Box>
-                <Box className={classNames(styles.addButtonWrapper, styles.addButtonWrapperSprite)}>
-                    <IconButton
-                        className={styles.addButton}
-                        img={spriteIcon}
-                        title={addSpriteMessage}
-                        onClick={onNewSpriteClick}
-                    />
-                </Box>
-                <Box className={classNames(styles.addButtonWrapper, styles.addButtonWrapperStage)}>
-                    <IconButton
-                        className={styles.addButton}
-                        img={backdropIcon}
-                        title={addBackdropMessage}
-                        onClick={onNewBackdropClick}
-                    />
-                </Box>
                 <SpriteLibrary
                     visible={spriteLibraryVisible}
                     vm={vm}
@@ -164,7 +127,6 @@ TargetPane.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
-    onNewBackdropClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,

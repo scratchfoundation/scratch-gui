@@ -1,0 +1,455 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sound Editor Component matches snapshot 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <button
+        className=""
+        onClick={[Function]}
+        title="Stop"
+      >
+        <img
+          src="test-file-stub"
+        />
+      </button>
+    </div>
+    <div
+      className={undefined}
+    >
+      <label
+        className={undefined}
+      >
+        <span
+          className={undefined}
+        >
+          Sound
+        </span>
+        <input
+          className=""
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          onSubmit={[Function]}
+          tabIndex="1"
+          type="text"
+          value="sound name"
+        />
+      </label>
+    </div>
+    <div
+      className={undefined}
+    >
+      <button
+        className="undefined"
+        onClick={[Function]}
+        title="Save"
+      >
+        <img
+          src="test-file-stub"
+        />
+        <span>
+          Save
+        </span>
+      </button>
+      <div
+        className={undefined}
+      >
+        <button
+          className={undefined}
+          disabled={false}
+          onClick={[Function]}
+          title="Undo"
+        >
+          <img
+            src="test-file-stub"
+          />
+        </button>
+        <button
+          className={undefined}
+          disabled={true}
+          onClick={[Function]}
+          title="Redo"
+        >
+          <img
+            src="test-file-stub"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <svg
+        className={undefined}
+        viewBox="0 0 600 180"
+      >
+        <g
+          transform="scale(1, -1) translate(0, -90)"
+        >
+          <path
+            className={undefined}
+            d="M0 0Q0 0 60 45,Q120 90 180 135,Q240 180 300 225,Q360 270 420 135,Q480 0 480 0,Q480 0 420 -135,Q360 -270 300 -225,Q240 -180 180 -135,Q120 -90 60 -45,Q0 0 0 0Z"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+        </g>
+      </svg>
+      <div
+        className={undefined}
+      >
+        <div
+          className=""
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "alignContent": undefined,
+              "alignItems": undefined,
+              "alignSelf": undefined,
+              "flexBasis": undefined,
+              "flexDirection": undefined,
+              "flexGrow": undefined,
+              "flexShrink": undefined,
+              "flexWrap": undefined,
+              "height": undefined,
+              "justifyContent": undefined,
+              "width": "20%",
+            }
+          }
+        >
+          <div
+            className=""
+            style={
+              Object {
+                "alignContent": undefined,
+                "alignItems": undefined,
+                "alignSelf": undefined,
+                "flexBasis": undefined,
+                "flexDirection": undefined,
+                "flexGrow": undefined,
+                "flexShrink": undefined,
+                "flexWrap": undefined,
+                "height": undefined,
+                "justifyContent": undefined,
+                "width": undefined,
+              }
+            }
+          />
+          <div
+            className=""
+            style={
+              Object {
+                "alignContent": undefined,
+                "alignItems": undefined,
+                "alignSelf": undefined,
+                "flexBasis": undefined,
+                "flexDirection": undefined,
+                "flexGrow": undefined,
+                "flexShrink": undefined,
+                "flexWrap": undefined,
+                "height": undefined,
+                "justifyContent": undefined,
+                "width": undefined,
+              }
+            }
+          >
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className=""
+          style={
+            Object {
+              "alignContent": undefined,
+              "alignItems": undefined,
+              "alignSelf": undefined,
+              "flexBasis": undefined,
+              "flexDirection": undefined,
+              "flexGrow": undefined,
+              "flexShrink": undefined,
+              "flexWrap": undefined,
+              "height": undefined,
+              "justifyContent": undefined,
+              "left": "50%",
+              "width": undefined,
+            }
+          }
+        />
+        <div
+          className=""
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "alignContent": undefined,
+              "alignItems": undefined,
+              "alignSelf": undefined,
+              "flexBasis": undefined,
+              "flexDirection": undefined,
+              "flexGrow": undefined,
+              "flexShrink": undefined,
+              "flexWrap": undefined,
+              "height": undefined,
+              "justifyContent": undefined,
+              "left": "80%",
+              "width": "20%",
+            }
+          }
+        >
+          <div
+            className=""
+            style={
+              Object {
+                "alignContent": undefined,
+                "alignItems": undefined,
+                "alignSelf": undefined,
+                "flexBasis": undefined,
+                "flexDirection": undefined,
+                "flexGrow": undefined,
+                "flexShrink": undefined,
+                "flexWrap": undefined,
+                "height": undefined,
+                "justifyContent": undefined,
+                "width": undefined,
+              }
+            }
+          />
+          <div
+            className=""
+            style={
+              Object {
+                "alignContent": undefined,
+                "alignItems": undefined,
+                "alignSelf": undefined,
+                "flexBasis": undefined,
+                "flexDirection": undefined,
+                "flexGrow": undefined,
+                "flexShrink": undefined,
+                "flexWrap": undefined,
+                "height": undefined,
+                "justifyContent": undefined,
+                "width": undefined,
+              }
+            }
+          >
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Faster
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Slower
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Echo
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Robot
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Louder
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Softer
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Reverse
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -2,11 +2,13 @@
 @import "../../css/colors.css";
 
 .input-form {
-    padding: $space 0.75rem;
+    height: 2rem;
+    padding: 0 0.75rem;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.625rem;
     font-weight: bold;
+    color: $text-primary;
 
     border-width: 1px;
     border-style: solid;
@@ -35,6 +37,6 @@
 }
 
 .input-small {
-    width: 3.5rem; 
+    width: 3rem; 
     text-align: center;
 }

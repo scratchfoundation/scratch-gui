@@ -2,23 +2,14 @@
 
 exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
 <div
-  className="ponies undefined"
+  className="react-contextmenu-wrapper ponies undefined"
   onClick={[Function]}
-  style={
-    Object {
-      "alignContent": undefined,
-      "alignItems": undefined,
-      "alignSelf": undefined,
-      "flexBasis": undefined,
-      "flexDirection": undefined,
-      "flexGrow": undefined,
-      "flexShrink": undefined,
-      "flexWrap": undefined,
-      "height": undefined,
-      "justifyContent": undefined,
-      "width": undefined,
-    }
-  }
+  onContextMenu={[Function]}
+  onMouseDown={[Function]}
+  onMouseOut={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
 >
   <div
     className=""
@@ -39,5 +30,35 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   >
     Pony sprite
   </div>
+  <nav
+    className="react-contextmenu"
+    onContextMenu={[Function]}
+    onMouseLeave={[Function]}
+    role="menu"
+    style={
+      Object {
+        "opacity": 0,
+        "pointerEvents": "none",
+        "position": "fixed",
+      }
+    }
+    tabIndex="-1"
+  >
+    <div
+      aria-disabled="false"
+      aria-orientation={null}
+      className="react-contextmenu-item"
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      onTouchEnd={[Function]}
+      role="menuitem"
+      tabIndex="-1"
+    >
+      <span>
+        delete
+      </span>
+    </div>
+  </nav>
 </div>
 `;

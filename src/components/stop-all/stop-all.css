@@ -1,13 +1,22 @@
 .stop-all {
-    width: 1.1rem;
-    height: 1.1rem;
-    opacity: 0.5;
+    box-sizing: content-box;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0.375rem;
+    border-radius: 0.25rem;
     user-select: none;
     cursor: pointer;
-    transition: opacity 0.2s ease-out; /* @todo: standardize with var */ 
+    transition: 0.2s ease-out;
 }
 
-.stop-all.is-active,
+.stop-all {
+    opacity: 0.5;
+}
+
 .stop-all:hover {
+    transform: scale(1.2);
+}
+
+.stop-all.is-active {
     opacity: 1;
 }

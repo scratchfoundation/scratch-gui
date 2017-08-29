@@ -2,22 +2,22 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import MediaQuery from 'react-responsive';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 
 import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
-import GreenFlag from '../../containers/green-flag.jsx';
+import Controls from '../../containers/controls.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import Stage from '../../containers/stage.jsx';
-import StopAll from '../../containers/stop-all.jsx';
 
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
+import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
-
 
 const GUIComponent = props => {
     const {
@@ -87,20 +87,21 @@ const GUIComponent = props => {
                         </Tabs>
                     </Box>
 
-                    <Box className={styles.stageAndTargetWrapper} >
-                        <Box className={styles.stageMenuWrapper} >
-                            <GreenFlag vm={vm} />
-                            <StopAll vm={vm} />
+                    <Box className={styles.stageAndTargetWrapper}>
+                        <Box className={styles.stageMenuWrapper}>
+                            <Controls vm={vm} />
                         </Box>
-
-                        <Box className={styles.stageWrapper} >
-                            <Stage
-                                shrink={0}
-                                vm={vm}
-                            />
+                        <Box className={styles.stageWrapper}>
+                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
+                                <Stage
+                                    height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
+                                    shrink={0}
+                                    vm={vm}
+                                    width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
+                                />
+                            )}</MediaQuery>
                         </Box>
-
-                        <Box className={styles.targetWrapper} >
+                        <Box className={styles.targetWrapper}>
                             <TargetPane
                                 vm={vm}
                             />

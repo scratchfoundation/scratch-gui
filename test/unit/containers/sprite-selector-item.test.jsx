@@ -1,11 +1,10 @@
-/* eslint-env jest */
-import React from 'react'; // eslint-disable-line no-unused-vars
-import {mount} from 'enzyme';
+import React from 'react';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 import configureStore from 'redux-mock-store';
-import {Provider} from 'react-redux'; // eslint-disable-line no-unused-vars
+import {Provider} from 'react-redux';
 
-import SpriteSelectorItem from '../../../src/containers/sprite-selector-item'; // eslint-disable-line no-unused-vars
-import CloseButton from '../../../src/components/close-button/close-button'; // eslint-disable-line no-unused-vars
+import SpriteSelectorItem from '../../../src/containers/sprite-selector-item';
+import CloseButton from '../../../src/components/close-button/close-button';
 
 describe('SpriteSelectorItem Container', () => {
     const mockStore = configureStore();
@@ -19,14 +18,19 @@ describe('SpriteSelectorItem Container', () => {
     let store;
     // Wrap this in a function so it gets test specific states and can be reused.
     const getContainer = function () {
-        return <Provider store={store}><SpriteSelectorItem
-            className={className}
-            costumeURL={costumeURL}
-            id={id}
-            name={name}
-            onClick={onClick}
-            onDeleteButtonClick={onDeleteButtonClick}
-            selected={selected}/></Provider>;
+        return (
+            <Provider store={store}>
+                <SpriteSelectorItem
+                    className={className}
+                    costumeURL={costumeURL}
+                    id={id}
+                    name={name}
+                    selected={selected}
+                    onClick={onClick}
+                    onDeleteButtonClick={onDeleteButtonClick}
+                />
+            </Provider>
+        );
     };
 
     beforeEach(() => {
@@ -43,7 +47,7 @@ describe('SpriteSelectorItem Container', () => {
     });
 
     test('should confirm if the user really wants to delete the sprite', () => {
-        const wrapper = mount(getContainer());
+        const wrapper = mountWithIntl(getContainer());
         wrapper.find(CloseButton).simulate('click');
         expect(global.confirm).toHaveBeenCalled();
         expect(onDeleteButtonClick).toHaveBeenCalledWith(1337);
@@ -51,7 +55,7 @@ describe('SpriteSelectorItem Container', () => {
 
     test('should not delete the sprite if the user cancels', () => {
         global.confirm = jest.fn(() => false);
-        const wrapper = mount(getContainer());
+        const wrapper = mountWithIntl(getContainer());
         wrapper.find(CloseButton).simulate('click');
         expect(global.confirm).toHaveBeenCalled();
         expect(onDeleteButtonClick).not.toHaveBeenCalled();

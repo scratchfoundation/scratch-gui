@@ -9,7 +9,6 @@
     overflow: hidden;  /* Mask the icon animation */
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     user-select: none;
     cursor: pointer;
@@ -22,8 +21,8 @@
 }
 
 .small {
-    width: 1rem;
-    height: 1rem;
+    width: 0.825rem;
+    height: 0.825rem;
     color: #FFF;
     background-color: $motion-primary;
 }
@@ -31,6 +30,7 @@
 .large {
     width: 1.75rem;
     height: 1.75rem;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .close-icon {
@@ -42,7 +42,7 @@
 }
 
 .small .close-icon {
-    width: 40%;
+    width: 50%;
 }
 
 .large .close-icon {

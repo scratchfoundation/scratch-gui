@@ -12,12 +12,23 @@ import Controls from '../../containers/controls.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import Stage from '../../containers/stage.jsx';
+import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
+import addExtensionIcon from '../sprite-selector/icon--sprite.svg';
+
+const addExtensionMessage = (
+    <FormattedMessage
+        defaultMessage="Add Extension"
+        description="Button to add an extension in the target pane"
+        id="targetPane.addExtension"
+    />
+);
 
 const GUIComponent = props => {
     const {
@@ -43,6 +54,11 @@ const GUIComponent = props => {
         tabPanel: classNames(tabStyles.reactTabsTabPanel, styles.tabPanel),
         tabPanelSelected: classNames(tabStyles.reactTabsTabPanelSelected, styles.isSelected),
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
+    };
+
+    const onAddExtensionClick = () => {
+        /** @TODO open modal for the extension library instead */
+        vm.extensionManager.loadExtensionURL('extensions/example-extension.js');
     };
 
     return (
@@ -77,6 +93,12 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
+                                <IconButton
+                                    className={styles.extensionButton}
+                                    img={addExtensionIcon}
+                                    title={addExtensionMessage}
+                                    onClick={onAddExtensionClick}
+                                />
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <CostumeTab vm={vm} />

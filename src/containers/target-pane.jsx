@@ -24,7 +24,6 @@ class TargetPane extends React.Component {
             'handleChangeSpriteX',
             'handleChangeSpriteY',
             'handleDeleteSprite',
-            'handleNewExtensionClick',
             'handleSelectSprite'
         ]);
     }
@@ -49,9 +48,6 @@ class TargetPane extends React.Component {
     handleDeleteSprite (id) {
         this.props.vm.deleteSprite(id);
     }
-    handleNewExtensionClick () {
-        this.props.vm.extensionManager.loadExtensionURL('extensions/example-extension.js');
-    }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
@@ -66,7 +62,6 @@ class TargetPane extends React.Component {
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
-                onNewExtensionClick={this.handleNewExtensionClick}
                 onSelectSprite={this.handleSelectSprite}
             />
         );

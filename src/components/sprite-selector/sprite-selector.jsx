@@ -10,14 +10,6 @@ import IconButton from '../icon-button/icon-button.jsx';
 import styles from './sprite-selector.css';
 import spriteIcon from './icon--sprite.svg';
 
-const addExtensionMessage = (
-    <FormattedMessage
-        defaultMessage="Add Extension"
-        description="Button to add an extension in the target pane"
-        id="targetPane.addExtension"
-    />
-);
-
 const addSpriteMessage = (
     <FormattedMessage
         defaultMessage="Add Sprite"
@@ -35,7 +27,6 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteX,
         onChangeSpriteY,
         onDeleteSprite,
-        onNewExtensionClick,
         onNewSpriteClick,
         onSelectSprite,
         selectedId,
@@ -91,22 +82,12 @@ const SpriteSelectorComponent = function (props) {
                     }
                 </Box>
             </Box>
-            <Box
-                className={styles.addButtons}
-            >
-                <IconButton
-                    className={styles.addButton}
-                    img={spriteIcon}
-                    title={addExtensionMessage}
-                    onClick={onNewExtensionClick}
-                />
-                <IconButton
-                    className={styles.addButton}
-                    img={spriteIcon}
-                    title={addSpriteMessage}
-                    onClick={onNewSpriteClick}
-                />
-            </Box>
+            <IconButton
+                className={styles.addButton}
+                img={spriteIcon}
+                title={addSpriteMessage}
+                onClick={onNewSpriteClick}
+            />
         </Box>
     );
 };
@@ -119,7 +100,6 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
-    onNewExtensionClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     selectedId: PropTypes.string,

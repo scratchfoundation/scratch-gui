@@ -99,6 +99,7 @@
 .blocks-wrapper {
     flex-grow: 1;
     position: relative;
+    z-index: 0;
 }
 
 .stage-and-target-wrapper {
@@ -147,4 +148,12 @@
     align-items: center;
     height: $stage-menu-height;
     padding: $space;
+}
+
+.extensionButton {
+    font-size: 0.55rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0.75rem;
+    left: 14rem;
 }

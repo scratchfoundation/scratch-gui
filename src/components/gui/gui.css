@@ -155,5 +155,7 @@
     font-weight: bold;
     position: absolute;
     bottom: 0.75rem;
-    left: 14rem;
+    left: 1rem;
+    border: 1px solid lightgray;
+    background: white;
 }

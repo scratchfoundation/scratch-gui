@@ -47,6 +47,9 @@ const GUIComponent = props => {
         );
     }
 
+    const enableExtensions = window.location.search.includes('extensions');
+    const extensionButtonClasses = `${styles.extensionButton} ${enableExtensions ? '' : styles.hidden}`;
+
     const tabClassNames = {
         tabs: styles.tabs,
         tab: classNames(tabStyles.reactTabsTab, styles.tab),
@@ -94,7 +97,7 @@ const GUIComponent = props => {
                                     />
                                 </Box>
                                 <IconButton
-                                    className={styles.extensionButton}
+                                    className={extensionButtonClasses}
                                     img={addExtensionIcon}
                                     title={addExtensionMessage}
                                     onClick={onAddExtensionClick}

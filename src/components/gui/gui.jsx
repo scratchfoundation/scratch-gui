@@ -20,11 +20,11 @@ import MenuBar from '../menu-bar/menu-bar.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
-import addExtensionIcon from '../sprite-selector/icon--sprite.svg';
+import addExtensionIcon from './icon--extensions.svg';
 
 const addExtensionMessage = (
     <FormattedMessage
-        defaultMessage="Add Extension"
+        defaultMessage="Extensions"
         description="Button to add an extension in the target pane"
         id="targetPane.addExtension"
     />
@@ -36,7 +36,7 @@ const GUIComponent = props => {
         children,
         enableExtensions,
         vm,
-        onAddExtensionClick,
+        onExtensionButtonClick,
         onTabSelect,
         tabIndex,
         ...componentProps
@@ -90,14 +90,16 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
-                                <IconButton
-                                    className={classNames(styles.extensionButton, {
-                                        [styles.hidden]: !enableExtensions
-                                    })}
-                                    img={addExtensionIcon}
-                                    title={addExtensionMessage}
-                                    onClick={onAddExtensionClick}
-                                />
+                                <Box className={styles.extensionButtonContainer}>
+                                    <IconButton
+                                        className={classNames(styles.extensionButton, {
+                                            [styles.hidden]: !enableExtensions
+                                        })}
+                                        img={addExtensionIcon}
+                                        title={addExtensionMessage}
+                                        onClick={onExtensionButtonClick}
+                                    />
+                                </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
@@ -137,7 +139,7 @@ GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
     enableExtensions: PropTypes.bool,
-    onAddExtensionClick: PropTypes.func,
+    onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired

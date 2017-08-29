@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 import bindAll from 'lodash.bindall';
+import {connect} from 'react-redux';
+
+import {openExtensionLibrary} from '../reducers/modals.js';
 
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -12,7 +15,6 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleAddExtensionClick',
             'handleTabSelect'
         ]);
         this.state = {tabIndex: 0};
@@ -35,10 +37,6 @@ class GUI extends React.Component {
     handleTabSelect (tabIndex) {
         this.setState({tabIndex});
     }
-    handleAddExtensionClick () {
-        /** @TODO open modal for the extension library instead */
-        this.props.vm.extensionManager.loadExtensionURL('static/extensions/example-extension.js');
-    }
     render () {
         const {
             children,
@@ -51,7 +49,6 @@ class GUI extends React.Component {
                 enableExtensions={window.location.search.includes('extensions')}
                 tabIndex={this.state.tabIndex}
                 vm={vm}
-                onAddExtensionClick={this.handleAddExtensionClick}
                 onTabSelect={this.handleTabSelect}
                 {...componentProps}
             >
@@ -69,4 +66,15 @@ GUI.propTypes = {
 
 GUI.defaultProps = GUIComponent.defaultProps;
 
-export default vmListenerHOC(GUI);
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = dispatch => ({
+    onExtensionButtonClick: () => dispatch(openExtensionLibrary())
+});
+
+const ConnectedGUI = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(GUI);
+
+export default vmListenerHOC(ConnectedGUI);

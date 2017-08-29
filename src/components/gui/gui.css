@@ -149,17 +149,23 @@
     padding: $space;
 }
 
+.extension-button-container {
+    width: 60px;
+    height: 3.25rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
+    background: white;
+
+    border: 1px solid #ddd;
+    box-sizing: content-box; /* To match scratch-block vertical toolbox borders */
+}
+
 .extension-button {
     font-size: 0.55rem;
     font-weight: bold;
-    position: absolute;
-    bottom: 0.75rem;
-    left: 1rem;
-    border: 1px solid lightgray;
-    background: white;
-    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
 }
-
-.hidden {
-    display: none;
+.extension-button > div {
+    margin-top: 0;
 }

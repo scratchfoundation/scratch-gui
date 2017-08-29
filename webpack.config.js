@@ -99,6 +99,14 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: 'node_modules/scratch-blocks/media',
             to: 'static/blocks-media'
+        }]),
+        new CopyWebpackPlugin([{
+            from: 'extension-worker.{js,js.map}',
+            context: 'node_modules/scratch-vm/dist/web'
+        }]),
+        new CopyWebpackPlugin([{
+            from: 'extensions/**',
+            context: 'node_modules/scratch-vm/dist/web'
         }])
     ].concat(process.env.NODE_ENV === 'production' ? [
         new webpack.optimize.UglifyJsPlugin({

@@ -20,7 +20,8 @@ class CostumeTab extends React.Component {
         super(props);
         bindAll(this, [
             'handleSelectCostume',
-            'handleDeleteCostume'
+            'handleDeleteCostume',
+            'handleUpdateSvg'
         ]);
         this.state = {selectedCostumeIndex: 0};
     }
@@ -45,6 +46,10 @@ class CostumeTab extends React.Component {
 
     handleDeleteCostume (costumeIndex) {
         this.props.vm.deleteCostume(costumeIndex);
+    }
+
+    handleUpdateSvg (svg) {
+        this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg);
     }
 
     render () {
@@ -93,7 +98,10 @@ class CostumeTab extends React.Component {
                 onItemClick={this.handleSelectCostume}
             >
             {target.costumes ?
-                <PaintEditor svg={this.props.vm.getCostumeSVG(this.state.selectedCostumeIndex)}/>
+                <PaintEditor
+                    svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
+                    onUpdateSvg={this.handleUpdateSvg}
+                />
                 : null
             }
             </AssetPanel>

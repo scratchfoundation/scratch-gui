@@ -92,7 +92,10 @@ class CostumeTab extends React.Component {
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
             >
-                <PaintEditor/>
+            {target.costumes ?
+                <PaintEditor svg={this.props.vm.getCostumeSVG(this.state.selectedCostumeIndex)}/>
+                : null
+            }
             </AssetPanel>
         );
     }

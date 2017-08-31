@@ -70,6 +70,8 @@ class Blocks extends React.Component {
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
             this.workspace.updateToolbox(this.props.toolboxXML);
+            // Blockly throws if we don't select a category after updating the toolbox.
+            /** @TODO Find a way to avoid the exception without accessing private properties. */
             this.setToolboxSelectedItemByName(selectedCategoryName);
         }
         if (this.props.isVisible === prevProps.isVisible) {
@@ -91,6 +93,12 @@ class Blocks extends React.Component {
         this.detachVM();
         this.workspace.dispose();
     }
+    /**
+     * Select a particular category in the toolbox by specifying the category name.
+     * This is a workaround for a bug: @see {@link componentDidUpdate} above.
+     * @TODO Remove this or reimplement using only public APIs.
+     * @param {string} name - the name of the category to select.
+     */
     setToolboxSelectedItemByName (name) {
         const categories = this.workspace.toolbox_.categoryMenu_.categories_;
         for (let i = 0; i < categories.length; i++) {

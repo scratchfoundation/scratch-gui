@@ -99,7 +99,6 @@
 .blocks-wrapper {
     flex-grow: 1;
     position: relative;
-    z-index: 0;
 }
 
 .stage-and-target-wrapper {
@@ -150,7 +149,7 @@
     padding: $space;
 }
 
-.extensionButton {
+.extension-button {
     font-size: 0.55rem;
     font-weight: bold;
     position: absolute;
@@ -158,6 +157,7 @@
     left: 1rem;
     border: 1px solid lightgray;
     background: white;
+    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
 }
 
 .hidden {

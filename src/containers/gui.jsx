@@ -12,6 +12,7 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleAddExtensionClick',
             'handleTabSelect'
         ]);
         this.state = {tabIndex: 0};
@@ -34,6 +35,10 @@ class GUI extends React.Component {
     handleTabSelect (tabIndex) {
         this.setState({tabIndex});
     }
+    handleAddExtensionClick () {
+        /** @TODO open modal for the extension library instead */
+        this.props.vm.extensionManager.loadExtensionURL('static/extensions/example-extension.js');
+    }
     render () {
         const {
             children,
@@ -43,8 +48,10 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
+                enableExtensions={window.location.search.includes('extensions')}
                 tabIndex={this.state.tabIndex}
                 vm={vm}
+                onAddExtensionClick={this.handleAddExtensionClick}
                 onTabSelect={this.handleTabSelect}
                 {...componentProps}
             >

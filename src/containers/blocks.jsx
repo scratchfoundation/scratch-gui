@@ -35,7 +35,7 @@ class Blocks extends React.Component {
             'onScriptGlowOff',
             'onBlockGlowOn',
             'onBlockGlowOff',
-            'onExtensionWasAdded',
+            'handleExtensionAdded',
             'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',
@@ -121,7 +121,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.addListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
-        this.props.vm.addListener('EXTENSION_WAS_ADDED', this.onExtensionWasAdded);
+        this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -131,7 +131,7 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.removeListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
-        this.props.vm.removeListener('EXTENSION_WAS_ADDED', this.onExtensionWasAdded);
+        this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
     }
     updateToolboxBlockValue (id, value) {
         const block = this.workspace
@@ -199,11 +199,11 @@ class Blocks extends React.Component {
             this.workspace.resize();
         }
     }
-    onExtensionWasAdded (blocksInfo) {
+    handleExtensionAdded (blocksInfo) {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
         const toolboxXML = makeToolboxXML(dynamicBlocksXML);
-        this.props.sendToolboxUpdate(toolboxXML);
+        this.props.onExtensionAdded(toolboxXML);
     }
     setBlocks (blocks) {
         this.blocks = blocks;
@@ -223,8 +223,8 @@ class Blocks extends React.Component {
             options, // eslint-disable-line no-unused-vars
             vm, // eslint-disable-line no-unused-vars
             isVisible, // eslint-disable-line no-unused-vars
+            onExtensionAdded, // eslint-disable-line no-unused-vars
             toolboxXML, // eslint-disable-line no-unused-vars
-            sendToolboxUpdate, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -249,6 +249,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     isVisible: PropTypes.bool,
+    onExtensionAdded: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -270,7 +271,6 @@ Blocks.propTypes = {
         }),
         comments: PropTypes.bool
     }),
-    sendToolboxUpdate: PropTypes.func,
     toolboxXML: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
@@ -311,7 +311,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    sendToolboxUpdate: toolboxXML => {
+    onExtensionAdded: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     }
 });

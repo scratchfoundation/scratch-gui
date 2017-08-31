@@ -34,7 +34,9 @@ const GUIComponent = props => {
     const {
         basePath,
         children,
+        enableExtensions,
         vm,
+        onAddExtensionClick,
         onTabSelect,
         tabIndex,
         ...componentProps
@@ -47,9 +49,6 @@ const GUIComponent = props => {
         );
     }
 
-    const enableExtensions = window.location.search.includes('extensions');
-    const extensionButtonClasses = `${styles.extensionButton} ${enableExtensions ? '' : styles.hidden}`;
-
     const tabClassNames = {
         tabs: styles.tabs,
         tab: classNames(tabStyles.reactTabsTab, styles.tab),
@@ -57,11 +56,6 @@ const GUIComponent = props => {
         tabPanel: classNames(tabStyles.reactTabsTabPanel, styles.tabPanel),
         tabPanelSelected: classNames(tabStyles.reactTabsTabPanelSelected, styles.isSelected),
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
-    };
-
-    const onAddExtensionClick = () => {
-        /** @TODO open modal for the extension library instead */
-        vm.extensionManager.loadExtensionURL('static/extensions/example-extension.js');
     };
 
     return (
@@ -97,7 +91,9 @@ const GUIComponent = props => {
                                     />
                                 </Box>
                                 <IconButton
-                                    className={extensionButtonClasses}
+                                    className={classNames(styles.extensionButton, {
+                                        [styles.hidden]: !enableExtensions
+                                    })}
                                     img={addExtensionIcon}
                                     title={addExtensionMessage}
                                     onClick={onAddExtensionClick}
@@ -140,6 +136,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
+    enableExtensions: PropTypes.bool,
+    onAddExtensionClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired

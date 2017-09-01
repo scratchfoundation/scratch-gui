@@ -27,7 +27,6 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibraryComponent
-                visible
                 data={backdropLibraryContent}
                 title="Backdrop Library"
                 onItemSelected={this.handleItemSelect}

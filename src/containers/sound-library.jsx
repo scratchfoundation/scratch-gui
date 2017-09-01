@@ -22,9 +22,8 @@ class SoundLibrary extends React.PureComponent {
         this.audioEngine = new AudioEngine();
         this.player = this.audioEngine.createPlayer();
     }
-    componentWillReceiveProps (newProps) {
-        // Stop playing sounds if the library closes without a mouseleave (e.g. by using the escape key)
-        if (this.player && !newProps.visible) this.player.stopAllSounds();
+    componentWillUnmount () {
+        this.player.stopAllSounds();
     }
     handleItemMouseEnter (soundItem) {
         const md5ext = soundItem._md5;
@@ -74,7 +73,6 @@ class SoundLibrary extends React.PureComponent {
 
         return (
             <LibraryComponent
-                visible
                 data={soundLibraryThumbnailData}
                 title="Sound Library"
                 onItemMouseEnter={this.handleItemMouseEnter}

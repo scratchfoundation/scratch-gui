@@ -27,7 +27,6 @@ class CostumeLibrary extends React.PureComponent {
     render () {
         return (
             <LibraryComponent
-                visible
                 data={costumeLibraryContent}
                 title="Costume Library"
                 onItemSelected={this.handleItemSelected}

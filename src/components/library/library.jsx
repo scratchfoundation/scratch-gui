@@ -43,13 +43,11 @@ class LibraryComponent extends React.Component {
             dataItem.name.toLowerCase().indexOf(this.state.filterQuery.toLowerCase()) !== -1);
     }
     render () {
-        if (!this.props.visible) return null;
         return (
             <ModalComponent
                 className={styles.modalContent}
                 contentLabel={this.props.title}
                 filterQuery={this.state.filterQuery}
-                visible={this.props.visible}
                 onFilterChange={this.handleFilterChange}
                 onFilterClear={this.handleFilterClear}
                 onRequestClose={this.props.onRequestClose}
@@ -93,8 +91,7 @@ LibraryComponent.propTypes = {
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
-    title: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired
+    title: PropTypes.string.isRequired
 };
 
 export default LibraryComponent;

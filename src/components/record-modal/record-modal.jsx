@@ -8,7 +8,6 @@ import styles from './record-modal.css';
 
 const RecordModal = props => (
     <Modal
-        visible
         className={styles.modalContent}
         contentLabel={'Record Sound'}
         onRequestClose={props.onCancel}

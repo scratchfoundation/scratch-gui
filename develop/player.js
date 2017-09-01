@@ -32,7 +32,7 @@ var _stage = __webpack_require__(248);
 
 var _stage2 = _interopRequireDefault(_stage);
 
-var _box = __webpack_require__(14);
+var _box = __webpack_require__(15);
 
 var _box2 = _interopRequireDefault(_box);
 

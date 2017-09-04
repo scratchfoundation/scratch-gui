@@ -81,9 +81,9 @@ describe('costumes, sounds and variables', () => {
             .window()
             .maximize();
         const projectId = '96708228';
-        await clickXpath('//img[@title="Zoom Control"]');
         await driver.get(`file://${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
+        await clickXpath('//img[@title="Zoom Control"]');
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');

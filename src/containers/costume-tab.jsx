@@ -48,8 +48,8 @@ class CostumeTab extends React.Component {
         this.props.vm.deleteCostume(costumeIndex);
     }
 
-    handleUpdateSvg (svg) {
-        this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg);
+    handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
+        this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
 
     render () {
@@ -100,6 +100,8 @@ class CostumeTab extends React.Component {
             {target.costumes ?
                 <PaintEditor
                     svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
+                    rotationCenterX={this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].rotationCenterX}
+                    rotationCenterY={this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].rotationCenterY}
                     onUpdateSvg={this.handleUpdateSvg}
                 />
                 : null

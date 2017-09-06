@@ -130,7 +130,6 @@ RecordModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    visible: state.modals.soundRecorder,
     vm: state.vm
 });
 

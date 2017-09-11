@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Scratch 3.0 GUI</title>
+    <script>
+    (function() {
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+      }
+    })();
+    </script>
   </head>
   <body>
   <script type="text/javascript" src="lib.min.js"></script><script type="text/javascript" src="gui.js"></script></body>
-  <script>
-  (function() {
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    }
-  })();
-  </script>
 </html>

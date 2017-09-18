@@ -148,3 +148,18 @@
     height: $stage-menu-height;
     padding: $space;
 }
+
+.extension-button {
+    font-size: 0.55rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0.75rem;
+    left: 1rem;
+    border: 1px solid lightgray;
+    background: white;
+    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
+}
+
+.hidden {
+    display: none;
+}

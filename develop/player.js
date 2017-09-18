@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 709:
+/***/ 711:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,7 +18,7 @@ var _reactDom = __webpack_require__(36);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(18);
+var _reactRedux = __webpack_require__(17);
 
 var _appStateHoc = __webpack_require__(94);
 
@@ -28,7 +28,7 @@ var _controls = __webpack_require__(116);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _stage = __webpack_require__(242);
+var _stage = __webpack_require__(245);
 
 var _stage2 = _interopRequireDefault(_stage);
 
@@ -44,7 +44,7 @@ var _projectLoaderHoc = __webpack_require__(119);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-__webpack_require__(710);
+__webpack_require__(712);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,13 +144,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 710:
+/***/ 712:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(711);
+var content = __webpack_require__(713);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -176,7 +176,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 711:
+/***/ 713:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(undefined);
@@ -191,5 +191,5 @@ exports.push([module.i, "body {\n    padding: 0;\n    margin: 0;\n}\n", ""]);
 
 /***/ })
 
-},[709]);
+},[711]);
 //# sourceMappingURL=player.js.map

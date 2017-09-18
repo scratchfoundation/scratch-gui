@@ -105,6 +105,14 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.Blocks.motion_glideto_menu.init = function () {
+        const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
+            ['mouse-pointer', '_mouse_'],
+            ['random position', '_random_']
+        ]);
+        this.jsonInit(json);
+    };
+
     ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             ['Stage', '_stage_']

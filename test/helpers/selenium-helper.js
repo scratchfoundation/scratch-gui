@@ -1,6 +1,7 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
+import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
 const {By, until} = webdriver;

@@ -54,9 +54,25 @@ class Stage extends React.Component {
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo;
     }
+    componentDidUpdate (prevProps) {
+        if (this.props.isColorPicking && !prevProps.isColorPicking) {
+            this.startColorPickingLoop();
+        } else if (!this.props.isColorPicking && prevProps.isColorPicking) {
+            this.stopColorPickingLoop();
+        }
+    }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);
         this.detachRectEvents();
+        this.stopColorPickingLoop();
+    }
+    startColorPickingLoop () {
+        this.intervalId = setInterval(() => {
+            this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+        }, 30);
+    }
+    stopColorPickingLoop () {
+        clearInterval(this.intervalId);
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -112,6 +128,11 @@ class Stage extends React.Component {
     onMouseMove (e) {
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
+
+        // Set the pickX/Y for the color picker loop to pick up
+        this.pickX = mousePosition[0];
+        this.pickY = mousePosition[1];
+
         if (this.state.mouseDownTimeoutId !== null) {
             this.cancelMouseDownTimeout();
             if (this.state.mouseDown && !this.state.isDragging) {
@@ -133,10 +154,6 @@ class Stage extends React.Component {
             canvasHeight: this.rect.height
         };
         this.props.vm.postIOData('mouse', coordinates);
-
-        if (this.props.isColorPicking) {
-            this.setState({colorInfo: this.getColorInfo(mousePosition[0], mousePosition[1])});
-        }
     }
     onMouseUp (e) {
         const {x, y} = getEventXY(e);

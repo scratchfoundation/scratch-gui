@@ -23,9 +23,21 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100% !important;
-    height: 100% !important;
     z-index: 999;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.stage-overlay-content {
+    outline: none;
+    margin: auto;
+    border: 3px solid rgb(126, 133, 151);
+    padding: 0;
+    border-radius: $space;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .monitor-wrapper {

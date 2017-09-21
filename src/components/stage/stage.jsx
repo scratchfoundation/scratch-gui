@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -13,6 +14,12 @@ const StageComponent = props => {
         width,
         ...boxProps
     } = props;
+    let heightCorrectedAspect = window.innerHeight - 40;
+    let widthCorrectedAspect = heightCorrectedAspect + (heightCorrectedAspect / 3);
+    if (widthCorrectedAspect > window.innerWidth) {
+        widthCorrectedAspect = window.innerWidth;
+        heightCorrectedAspect = widthCorrectedAspect * .75;
+    }
     return isZoomed === false ? (
         <Box className={styles.stageWrapper}>
             <Box
@@ -30,11 +37,11 @@ const StageComponent = props => {
     ) : (
         <Box className={styles.stageWrapperOverlay}>
             <Box
-                className={styles.stage}
+                className={classNames(styles.stage, styles.stageOverlayContent)}
                 componentRef={canvasRef}
                 element="canvas"
-                height={'100%'}
-                width={'100%'}
+                height={heightCorrectedAspect}
+                width={widthCorrectedAspect}
                 {...boxProps}
             />
             <Box className={styles.monitorWrapper}>

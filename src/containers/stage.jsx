@@ -212,7 +212,9 @@ class Stage extends React.Component {
         return (
             <StageComponent
                 canvasRef={this.setCanvas}
+                height={this.props.height}
                 isZoomed={this.state.isZoomed}
+                width={this.props.width}
                 onDoubleClick={this.handleDoubleClick}
                 {...props}
             />

@@ -21,6 +21,7 @@ $border-style: 1px solid $ui-pane-border;
     border-right: $border-style;
     border-bottom: $border-style;
     box-sizing: content-box;
+    height: calc(100% - 3.25rem) !important;
 }
 
 .blocks :global(.blocklyFlyout) {

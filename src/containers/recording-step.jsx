@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import RecordingStepComponent from '../components/record-modal/recording-step.jsx';
 import AudioRecorder from '../lib/audio/audio-recorder.js';
@@ -66,6 +67,10 @@ class RecordingStep extends React.Component {
     }
 }
 
-RecordingStep.propTypes = RecordingStepComponent.propTypes;
+RecordingStep.propTypes = {
+    onRecord: PropTypes.func.isRequired,
+    onStopRecording: PropTypes.func.isRequired,
+    recording: PropTypes.bool
+};
 
 export default RecordingStep;

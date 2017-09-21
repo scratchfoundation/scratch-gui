@@ -1,12 +1,16 @@
 import bindAll from 'lodash.bindall';
 import debounce from 'lodash.debounce';
 import defaultsDeep from 'lodash.defaultsdeep';
+import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
+
+import {connect} from 'react-redux';
+import {updateToolbox} from '../reducers/toolbox';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -31,6 +35,7 @@ class Blocks extends React.Component {
             'onScriptGlowOff',
             'onBlockGlowOn',
             'onBlockGlowOff',
+            'handleExtensionAdded',
             'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',
@@ -55,9 +60,20 @@ class Blocks extends React.Component {
         this.attachVM();
     }
     shouldComponentUpdate (nextProps, nextState) {
-        return this.state.prompt !== nextState.prompt || this.props.isVisible !== nextProps.isVisible;
+        return (
+            this.state.prompt !== nextState.prompt ||
+            this.props.isVisible !== nextProps.isVisible ||
+            this.props.toolboxXML !== nextProps.toolboxXML
+        );
     }
     componentDidUpdate (prevProps) {
+        if (prevProps.toolboxXML !== this.props.toolboxXML) {
+            const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
+            this.workspace.updateToolbox(this.props.toolboxXML);
+            // Blockly throws if we don't select a category after updating the toolbox.
+            /** @TODO Find a way to avoid the exception without accessing private properties. */
+            this.setToolboxSelectedItemByName(selectedCategoryName);
+        }
         if (this.props.isVisible === prevProps.isVisible) {
             return;
         }
@@ -77,6 +93,20 @@ class Blocks extends React.Component {
         this.detachVM();
         this.workspace.dispose();
     }
+    /**
+     * Select a particular category in the toolbox by specifying the category name.
+     * This is a workaround for a bug: @see {@link componentDidUpdate} above.
+     * @TODO Remove this or reimplement using only public APIs.
+     * @param {string} name - the name of the category to select.
+     */
+    setToolboxSelectedItemByName (name) {
+        const categories = this.workspace.toolbox_.categoryMenu_.categories_;
+        for (let i = 0; i < categories.length; i++) {
+            if (categories[i].name_ === name) {
+                this.workspace.toolbox_.setSelectedItem(categories[i]);
+            }
+        }
+    }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
         this.flyoutWorkspace = this.workspace
@@ -91,6 +121,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.addListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
+        this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -100,6 +131,7 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('VISUAL_REPORT', this.onVisualReport);
         this.props.vm.removeListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
+        this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
     }
     updateToolboxBlockValue (id, value) {
         const block = this.workspace
@@ -167,6 +199,12 @@ class Blocks extends React.Component {
             this.workspace.resize();
         }
     }
+    handleExtensionAdded (blocksInfo) {
+        this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
+        const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+        const toolboxXML = makeToolboxXML(dynamicBlocksXML);
+        this.props.onExtensionAdded(toolboxXML);
+    }
     setBlocks (blocks) {
         this.blocks = blocks;
     }
@@ -185,6 +223,8 @@ class Blocks extends React.Component {
             options, // eslint-disable-line no-unused-vars
             vm, // eslint-disable-line no-unused-vars
             isVisible, // eslint-disable-line no-unused-vars
+            onExtensionAdded, // eslint-disable-line no-unused-vars
+            toolboxXML, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -209,6 +249,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     isVisible: PropTypes.bool,
+    onExtensionAdded: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -230,6 +271,7 @@ Blocks.propTypes = {
         }),
         comments: PropTypes.bool
     }),
+    toolboxXML: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -264,4 +306,17 @@ Blocks.defaultProps = {
     options: Blocks.defaultOptions
 };
 
-export default Blocks;
+const mapStateToProps = state => ({
+    toolboxXML: state.toolbox.toolboxXML
+});
+
+const mapDispatchToProps = dispatch => ({
+    onExtensionAdded: toolboxXML => {
+        dispatch(updateToolbox(toolboxXML));
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Blocks);

@@ -12,18 +12,31 @@ import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
+import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
+import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
+import addExtensionIcon from './icon--extensions.svg';
+
+const addExtensionMessage = (
+    <FormattedMessage
+        defaultMessage="Extensions"
+        description="Button to add an extension in the target pane"
+        id="targetPane.addExtension"
+    />
+);
 
 const GUIComponent = props => {
     const {
         basePath,
         children,
+        enableExtensions,
         vm,
+        onExtensionButtonClick,
         onTabSelect,
         tabIndex,
         ...componentProps
@@ -77,6 +90,16 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
+                                <Box className={styles.extensionButtonContainer}>
+                                    <IconButton
+                                        className={classNames(styles.extensionButton, {
+                                            [styles.hidden]: !enableExtensions
+                                        })}
+                                        img={addExtensionIcon}
+                                        title={addExtensionMessage}
+                                        onClick={onExtensionButtonClick}
+                                    />
+                                </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
@@ -121,6 +144,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
+    enableExtensions: PropTypes.bool,
+    onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired

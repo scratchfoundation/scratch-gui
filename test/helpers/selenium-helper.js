@@ -33,7 +33,7 @@ class SeleniumHelper {
     }
 
     clickText (text) {
-        return this.clickXpath(`//*[contains(text(), '${text}')]`);
+        return this.clickXpath(`//body//*[contains(text(), '${text}')]`);
     }
 
     clickButton (text) {

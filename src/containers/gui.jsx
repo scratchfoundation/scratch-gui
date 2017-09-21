@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 import bindAll from 'lodash.bindall';
+import {connect} from 'react-redux';
+
+import {openExtensionLibrary} from '../reducers/modals.js';
 
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -43,6 +46,7 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
+                enableExtensions={window.location.search.includes('extensions')}
                 tabIndex={this.state.tabIndex}
                 vm={vm}
                 onTabSelect={this.handleTabSelect}
@@ -62,4 +66,15 @@ GUI.propTypes = {
 
 GUI.defaultProps = GUIComponent.defaultProps;
 
-export default vmListenerHOC(GUI);
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = dispatch => ({
+    onExtensionButtonClick: () => dispatch(openExtensionLibrary())
+});
+
+const ConnectedGUI = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(GUI);
+
+export default vmListenerHOC(ConnectedGUI);

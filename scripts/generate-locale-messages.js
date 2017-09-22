@@ -43,7 +43,7 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 
-const locales = ['en', 'es', 'fr'];
+const locales = ['en', 'es', 'de', 'ar', 'he'];
 const LANG_DIR = './translations/';
 const MSGS_DIR = './locale/';
 

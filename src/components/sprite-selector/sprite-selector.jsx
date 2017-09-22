@@ -14,7 +14,7 @@ const addSpriteMessage = (
     <FormattedMessage
         defaultMessage="Add Sprite"
         description="Button to add a sprite in the target pane"
-        id="targetPane.addSprite"
+        id="giu.SpriteSelectorComponent.targetPaneAddSprite"
     />
 );
 

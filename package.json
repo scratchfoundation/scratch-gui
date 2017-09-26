@@ -67,7 +67,7 @@
     "prop-types": "^15.5.10",
     "react": "16.0.0",
     "react-contextmenu": "2.7.0",
-    "react-dom": "15.6.1",
+    "react-dom": "16.0.0",
     "react-draggable": "3.0.3",
     "react-intl": "2.4.0",
     "react-intl-redux": "0.6.0",

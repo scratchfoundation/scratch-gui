@@ -43,7 +43,7 @@
     "classnames": "2.2.5",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.7",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.0.0",
     "eslint": "^4.7.1",
     "eslint-config-scratch": "^4.0.0",
     "eslint-plugin-import": "^2.7.0",

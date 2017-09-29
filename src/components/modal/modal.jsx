@@ -13,9 +13,9 @@ class ModalComponent extends React.Component {
     render () {
         return (
             <ReactModal
+                isOpen
                 className={classNames(styles.modalContent, this.props.className)}
                 contentLabel={this.props.contentLabel}
-                isOpen={this.props.visible}
                 overlayClassName={styles.modalOverlay}
                 ref={m => (this.modal = m)}
                 onRequestClose={this.props.onRequestClose}
@@ -68,8 +68,7 @@ ModalComponent.propTypes = {
     filterQuery: PropTypes.string,
     onFilterChange: PropTypes.func,
     onFilterClear: PropTypes.func,
-    onRequestClose: PropTypes.func,
-    visible: PropTypes.bool.isRequired
+    onRequestClose: PropTypes.func
 };
 
 export default ModalComponent;

@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
+import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import styles from './stage.css';
 
@@ -10,27 +12,50 @@ const StageComponent = props => {
         canvasRef,
         width,
         height,
+        colorInfo,
+        onDeactivateColorPicker,
+        isColorPicking,
         ...boxProps
     } = props;
     return (
-        <Box className={styles.stageWrapper}>
+        <div>
             <Box
-                className={styles.stage}
-                componentRef={canvasRef}
-                element="canvas"
-                height={height}
-                width={width}
-                {...boxProps}
-            />
-            <Box className={styles.monitorWrapper}>
-                <MonitorList />
+                className={classNames(styles.stageWrapper, {
+                    [styles.withColorPicker]: isColorPicking
+                })}
+            >
+                <Box
+                    className={styles.stage}
+                    componentRef={canvasRef}
+                    element="canvas"
+                    height={height}
+                    width={width}
+                    {...boxProps}
+                />
+                <Box className={styles.monitorWrapper}>
+                    <MonitorList />
+                </Box>
+                {isColorPicking && colorInfo ? (
+                    <Box className={styles.colorPickerWrapper}>
+                        <Loupe colorInfo={colorInfo} />
+                    </Box>
+                ) : null}
             </Box>
-        </Box>
+            {isColorPicking ? (
+                <Box
+                    className={styles.colorPickerBackground}
+                    onClick={onDeactivateColorPicker}
+                />
+            ) : null}
+        </div>
     );
 };
 StageComponent.propTypes = {
     canvasRef: PropTypes.func,
+    colorInfo: Loupe.propTypes.colorInfo,
     height: PropTypes.number,
+    isColorPicking: PropTypes.bool,
+    onDeactivateColorPicker: PropTypes.func,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

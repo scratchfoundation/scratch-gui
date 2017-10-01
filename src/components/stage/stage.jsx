@@ -1,8 +1,9 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
+import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import styles from './stage.css';
 
@@ -10,8 +11,11 @@ const StageComponent = props => {
     const {
         canvasRef,
         height,
+        isColorPicking,
         isZoomed,
         width,
+        colorInfo,
+        onDeactivateColorPicker,
         ...boxProps
     } = props;
     let heightCorrectedAspect = window.innerHeight - 40;
@@ -21,39 +25,61 @@ const StageComponent = props => {
         heightCorrectedAspect = widthCorrectedAspect * .75;
     }
     return isZoomed === false ? (
-        <Box className={styles.stageWrapper}>
+        <div>
             <Box
-                className={styles.stage}
-                componentRef={canvasRef}
-                element="canvas"
-                height={height}
-                width={width}
-                {...boxProps}
-            />
-            <Box className={styles.monitorWrapper}>
-                <MonitorList />
+                className={classNames(styles.stageWrapper, {
+                    [styles.withColorPicker]: isColorPicking
+                })}
+            >
+                <Box
+                    className={styles.stage}
+                    componentRef={canvasRef}
+                    element="canvas"
+                    height={height}
+                    width={width}
+                    {...boxProps}
+                />
+                <Box className={styles.monitorWrapper}>
+                    <MonitorList />
+                </Box>
+                {isColorPicking && colorInfo ? (
+                    <Box className={styles.colorPickerWrapper}>
+                        <Loupe colorInfo={colorInfo} />
+                    </Box>
+                ) : null}
             </Box>
-        </Box>
+            {isColorPicking ? (
+                <Box
+                    className={styles.colorPickerBackground}
+                    onClick={onDeactivateColorPicker}
+                />
+            ) : null}
+        </div>
     ) : (
-        <Box className={styles.stageWrapperOverlay}>
-            <Box
-                className={classNames(styles.stage, styles.stageOverlayContent)}
-                componentRef={canvasRef}
-                element="canvas"
-                height={heightCorrectedAspect}
-                width={widthCorrectedAspect}
-                {...boxProps}
-            />
-            <Box className={styles.monitorWrapper}>
-                <MonitorList />
+        <div>
+            <Box className={styles.stageWrapperOverlay}>
+                <Box
+                    className={classNames(styles.stage, styles.stageOverlayContent)}
+                    componentRef={canvasRef}
+                    element="canvas"
+                    height={heightCorrectedAspect}
+                    width={widthCorrectedAspect}
+                    {...boxProps}
+                />
+                <Box className={styles.monitorWrapper}>
+                    <MonitorList />
+                </Box>
             </Box>
-        </Box>
+        </div>
     );
 };
 StageComponent.propTypes = {
     canvasRef: PropTypes.func,
+    colorInfo: Loupe.propTypes.colorInfo,
     height: PropTypes.number,
+    isColorPicking: PropTypes.bool,
     isZoomed: PropTypes.bool.isRequired,
+    onDeactivateColorPicker: PropTypes.func,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

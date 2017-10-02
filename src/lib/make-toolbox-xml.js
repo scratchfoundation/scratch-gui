@@ -71,6 +71,17 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="motion_glideto_menu">
+                </shadow>
+            </value>
+        </block>
         <block type="motion_changexby">
             <value name="DX">
                 <shadow type="math_number">

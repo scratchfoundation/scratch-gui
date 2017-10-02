@@ -1,5 +1,82 @@
 const separator = '<sep gap="45"/>';
 
+const top = `
+    <category name="Top" colour="#FFFFFF" secondaryColour="#CCCCCC">
+        <block type="event_whenflagclicked"/>
+        <block type="event_whenkeypressed">
+        </block>
+        <block type="event_whenthisspriteclicked"/>
+        <block type="motion_movesteps">
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_ifonedgebounce"/>
+        <block type="sound_playuntildone">
+            <value name="SOUND_MENU">
+                <shadow type="sound_sounds_menu"/>
+            </value>
+        </block>
+        ` +
+    // @todo: uncomment to add "say" block once it's implemented
+    // <block type="looks_sayforsecs">
+    //     <value name="MESSAGE">
+    //         <shadow type="text">
+    //             <field name="TEXT">Hello!</field>
+    //         </shadow>
+    //     </value>
+    //     <value name="SECS">
+    //         <shadow type="math_number">
+    //             <field name="NUM">2</field>
+    //         </shadow>
+    //     </value>
+    // </block>
+        `
+        <block type="looks_changeeffectby">
+            <value name="CHANGE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_repeat">
+            <value name="TIMES">
+                <shadow type="math_whole_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_wait">
+            <value name="DURATION">
+                <shadow type="math_positive_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_random">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+`;
+
 const motion = `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
         <block type="motion_movesteps">
@@ -71,6 +148,17 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="motion_glideto_menu">
+                </shadow>
+            </value>
+        </block>
         <block type="motion_changexby">
             <value name="DX">
                 <shadow type="math_number">
@@ -109,6 +197,47 @@ const motion = `
 
 const looks = `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+    ` +
+    // @todo: uncomment to add "say" and "think" blocks once they're implemented
+    // <block type="looks_sayforsecs">
+    //     <value name="MESSAGE">
+    //         <shadow type="text">
+    //             <field name="TEXT">Hello!</field>
+    //         </shadow>
+    //     </value>
+    //     <value name="SECS">
+    //         <shadow type="math_number">
+    //             <field name="NUM">2</field>
+    //         </shadow>
+    //     </value>
+    // </block>
+    // <block type="looks_say">
+    //     <value name="MESSAGE">
+    //         <shadow type="text">
+    //             <field name="TEXT">Hello!</field>
+    //         </shadow>
+    //     </value>
+    // </block>
+    // <block type="looks_thinkforsecs">
+    //     <value name="MESSAGE">
+    //         <shadow type="text">
+    //             <field name="TEXT">Hmm...</field>
+    //         </shadow>
+    //     </value>
+    //     <value name="SECS">
+    //         <shadow type="math_number">
+    //             <field name="NUM">2</field>
+    //         </shadow>
+    //     </value>
+    // </block>
+    // <block type="looks_think">
+    //     <value name="MESSAGE">
+    //         <shadow type="text">
+    //             <field name="TEXT">Hmm...</field>
+    //         </shadow>
+    //     </value>
+    // </block>
+    `
         <block type="looks_show"/>
         <block type="looks_hide"/>
         <block type="looks_switchcostumeto">
@@ -617,15 +746,16 @@ const makeToolboxXML = function (categoriesXML) {
 
     const everything = [
         xmlOpen,
+        top, gap,
         motion, gap,
         looks, gap,
         sound, gap,
-        pen, gap,
-        data, gap,
         events, gap,
         control, gap,
         sensing, gap,
-        operators
+        pen, gap,
+        operators, gap,
+        data
     ];
 
     if (categoriesXML) {

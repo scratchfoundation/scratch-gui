@@ -66,7 +66,7 @@
     "postcss-simple-vars": "^4.0.0",
     "prop-types": "^15.5.10",
     "react": "15.6.1",
-    "react-contextmenu": "2.7.0",
+    "react-contextmenu": "2.8.0",
     "react-dom": "15.6.1",
     "react-draggable": "3.0.3",
     "react-intl": "2.4.0",

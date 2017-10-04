@@ -56,6 +56,9 @@ class Blocks extends React.Component {
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
+        // Load the toolbox from the GUI (otherwise we get the scratch-blocks default toolbox)
+        this.workspace.updateToolbox(this.props.toolboxXML);
+
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);

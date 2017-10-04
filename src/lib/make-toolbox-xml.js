@@ -71,6 +71,17 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="motion_glideto_menu">
+                </shadow>
+            </value>
+        </block>
         <block type="motion_changexby">
             <value name="DX">
                 <shadow type="math_number">
@@ -318,6 +329,20 @@ const pen = `
             <value name="SIZE">
                 <shadow type="math_number">
                     <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="pen_changepentransparencyby" id="pen_changepentransparencyby">
+            <value name="TRANSPARENCY">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="pen_setpentransparencyto" id="pen_setpentransparencyto">
+            <value name="TRANSPARENCY">
+                <shadow type="math_number">
+                    <field name="NUM">50</field>
                 </shadow>
             </value>
         </block>
@@ -620,12 +645,12 @@ const makeToolboxXML = function (categoriesXML) {
         motion, gap,
         looks, gap,
         sound, gap,
-        pen, gap,
-        data, gap,
         events, gap,
         control, gap,
         sensing, gap,
-        operators
+        pen, gap,
+        operators, gap,
+        data
     ];
 
     if (categoriesXML) {

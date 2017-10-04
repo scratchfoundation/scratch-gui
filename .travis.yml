@@ -18,6 +18,7 @@ install:
 - npm --production=false install
 - npm --production=false update
 before_deploy:
+- npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)
 - git config --global user.name $(git log --pretty=format:"%an" -n1)
 deploy:
@@ -32,3 +33,10 @@ deploy:
     branch: master
   skip_cleanup: true
   script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: npm
+  on:
+    branch: master
+  skip_cleanup: true
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+

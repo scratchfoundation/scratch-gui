@@ -344,9 +344,10 @@ module.exports = new WorkerDispatch();
 
 
 var ArgumentType = {
+    BOOLEAN: 'Boolean',
+    COLOR: 'color',
     NUMBER: 'number',
-    STRING: 'string',
-    BOOLEAN: 'Boolean'
+    STRING: 'string'
 };
 
 module.exports = ArgumentType;
@@ -359,11 +360,11 @@ module.exports = ArgumentType;
 
 
 var BlockType = {
-    COMMAND: 'command',
-    REPORTER: 'reporter',
     BOOLEAN: 'Boolean',
+    COMMAND: 'command',
+    CONDITIONAL: 'conditional',
     HAT: 'hat',
-    CONDITIONAL: 'conditional'
+    REPORTER: 'reporter'
 };
 
 module.exports = BlockType;

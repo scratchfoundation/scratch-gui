@@ -637,12 +637,10 @@ const makeToolboxXML = function (categoriesXML) {
         motion, gap,
         looks, gap,
         sound, gap,
-        pen, gap,
         data, gap,
         events, gap,
         control, gap,
         sensing, gap,
-        pen, gap,
         operators, gap,
         data
     ];

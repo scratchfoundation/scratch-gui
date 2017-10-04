@@ -179,15 +179,16 @@ class Stage extends React.Component {
         this.updateRect();
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
-        this.setState({
-            mouseDown: true,
-            mouseDownPosition: mousePosition,
-            mouseDownTimeoutId: setTimeout(
-                this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
-                500
-            )
-        });
-
+        if (e.which !== 3) {
+            this.setState({
+                mouseDown: true,
+                mouseDownPosition: mousePosition,
+                mouseDownTimeoutId: setTimeout(
+                    this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
+                    500
+                )
+            });
+        }
         const data = {
             isDown: true,
             x: mousePosition[0],

@@ -3,5 +3,10 @@
         "name": "Some Blocks",
         "extensionURL": "static/extensions/example-extension.js",
         "md5": "76f99773dd4eb59f86cd11bba6ad3cb9.svg"
+    },
+    {
+        "name": "Pen",
+        "extensionURL": "",
+        "md5": "76f99773dd4eb59f86cd11bba6ad3cb9.svg"
     }
 ]

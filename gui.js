@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 342:
+/***/ 343:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,15 +10,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(36);
+var _reactDom = __webpack_require__(37);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _appStateHoc = __webpack_require__(98);
+var _appStateHoc = __webpack_require__(95);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(116);
+var _gui = __webpack_require__(115);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -26,7 +26,7 @@ var _projectLoaderHoc = __webpack_require__(122);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(700);
+var _index = __webpack_require__(716);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -42,13 +42,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 700:
+/***/ 716:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(701);
+var content = __webpack_require__(717);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -56,7 +56,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -74,10 +74,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 701:
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(undefined);
+exports = module.exports = __webpack_require__(4)(undefined);
 // imports
 
 
@@ -91,5 +91,5 @@ exports.locals = {
 
 /***/ })
 
-},[342]);
+},[343]);
 //# sourceMappingURL=gui.js.map

@@ -7,6 +7,7 @@ import {
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
+    closeExtensionLibrary,
     closeSoundLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
@@ -91,7 +92,8 @@ const mapStateToProps = state => ({
     soundLibraryVisible: state.modals.soundLibrary,
     spriteLibraryVisible: state.modals.spriteLibrary,
     costumeLibraryVisible: state.modals.costumeLibrary,
-    backdropLibraryVisible: state.modals.backdropLibrary
+    backdropLibraryVisible: state.modals.backdropLibrary,
+    extensionLibraryVisible: state.modals.extensionLibrary
 });
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
@@ -103,6 +105,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());
+    },
+    onRequestCloseExtensionLibrary: () => {
+        dispatch(closeExtensionLibrary());
     },
     onRequestCloseSoundLibrary: () => {
         dispatch(closeSoundLibrary());

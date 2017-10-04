@@ -7,7 +7,6 @@ import styles from './prompt.css';
 
 const PromptComponent = props => (
     <Modal
-        visible
         className={styles.modalContent}
         contentLabel={props.title}
         onRequestClose={props.onCancel}

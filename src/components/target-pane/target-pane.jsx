@@ -3,11 +3,12 @@ import React from 'react';
 
 import VM from 'scratch-vm';
 
-import Box from '../box/box.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import SoundLibrary from '../../containers/sound-library.jsx';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
+import ExtensionLibrary from '../../containers/extension-library.jsx';
+
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 
@@ -21,6 +22,7 @@ import styles from './target-pane.css';
  */
 const TargetPane = ({
     editingTarget,
+    extensionLibraryVisible,
     backdropLibraryVisible,
     costumeLibraryVisible,
     soundLibraryVisible,
@@ -37,13 +39,14 @@ const TargetPane = ({
     onRequestCloseCostumeLibrary,
     onRequestCloseSoundLibrary,
     onRequestCloseSpriteLibrary,
+    onRequestCloseExtensionLibrary,
     onSelectSprite,
     stage,
     sprites,
     vm,
     ...componentProps
 }) => (
-    <Box
+    <div
         className={styles.targetPane}
         {...componentProps}
     >
@@ -61,7 +64,7 @@ const TargetPane = ({
             onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
-        <Box className={styles.stageSelectorWrapper}>
+        <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
                 assetId={
                     stage.costume &&
@@ -72,30 +75,40 @@ const TargetPane = ({
                 selected={stage.id === editingTarget}
                 onSelect={onSelectSprite}
             />}
-            <Box>
-                <SpriteLibrary
-                    visible={spriteLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseSpriteLibrary}
-                />
-                <CostumeLibrary
-                    visible={costumeLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseCostumeLibrary}
-                />
-                <SoundLibrary
-                    visible={soundLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseSoundLibrary}
-                />
-                <BackdropLibrary
-                    visible={backdropLibraryVisible}
-                    vm={vm}
-                    onRequestClose={onRequestCloseBackdropLibrary}
-                />
-            </Box>
-        </Box>
-    </Box>
+            <div>
+                {extensionLibraryVisible ? (
+                    <ExtensionLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseExtensionLibrary}
+                    />
+                ) : null}
+                {spriteLibraryVisible ? (
+                    <SpriteLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseSpriteLibrary}
+                    />
+                ) : null}
+                {costumeLibraryVisible ? (
+                    <CostumeLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseCostumeLibrary}
+                    />
+                ) : null}
+                {soundLibraryVisible ? (
+                    <SoundLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseSoundLibrary}
+                    />
+                ) : null}
+                {backdropLibraryVisible ? (
+                    <BackdropLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseBackdropLibrary}
+                    />
+                ) : null}
+            </div>
+        </div>
+    </div>
 );
 
 const spriteShape = PropTypes.shape({
@@ -120,6 +133,7 @@ TargetPane.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
+    extensionLibraryVisible: PropTypes.bool,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,
@@ -130,6 +144,7 @@ TargetPane.propTypes = {
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSoundLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,

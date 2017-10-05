@@ -65,14 +65,14 @@ class CostumeTab extends React.Component {
             <FormattedMessage
                 defaultMessage="Add Backdrop"
                 description="Button to add a backdrop in the editor tab"
-                id="gui.CostumeTab.addBackdrop"
+                id="gui.costumeTab.addBackdrop"
             />
         );
         const addCostumeMsg = (
             <FormattedMessage
                 defaultMessage="Add Costume"
                 description="Button to add a costume in the editor tab"
-                id="gui.CostumeTab.addCostume"
+                id="gui.costumeTab.addCostume"
             />
         );
 

@@ -43,7 +43,7 @@ const SpriteSelectorItem = props => (
                 <FormattedMessage
                     defaultMessage="delete"
                     description="Menu item to delete in the right click menu"
-                    id="gui.SpriteSelectorItem.contextMenuDelete"
+                    id="gui.spriteSelectorItem.contextMenuDelete"
                 />
             </MenuItem>
         </ContextMenu>

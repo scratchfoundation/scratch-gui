@@ -1,5 +1,67 @@
 const separator = '<sep gap="45"/>';
 
+const top = `
+    <category name="Top" colour="#FFFFFF" secondaryColour="#CCCCCC">
+        <block type="event_whenflagclicked"/>
+        <block type="event_whenkeypressed">
+        </block>
+        <block type="event_whenthisspriteclicked"/>
+        <block type="motion_movesteps">
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_ifonedgebounce"/>
+        <block type="sound_playuntildone">
+            <value name="SOUND_MENU">
+                <shadow type="sound_sounds_menu"/>
+            </value>
+        </block>
+        <block type="looks_changeeffectby">
+            <value name="CHANGE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_repeat">
+            <value name="TIMES">
+                <shadow type="math_whole_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_wait">
+            <value name="DURATION">
+                <shadow type="math_positive_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_random">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+`;
+
 const motion = `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
         <block type="motion_movesteps">
@@ -68,6 +130,17 @@ const motion = `
             <value name="Y">
                 <shadow type="math_number">
                     <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="motion_glideto_menu">
                 </shadow>
             </value>
         </block>
@@ -318,6 +391,20 @@ const pen = `
             <value name="SIZE">
                 <shadow type="math_number">
                     <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="pen_changepentransparencyby" id="pen_changepentransparencyby">
+            <value name="TRANSPARENCY">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="pen_setpentransparencyto" id="pen_setpentransparencyto">
+            <value name="TRANSPARENCY">
+                <shadow type="math_number">
+                    <field name="NUM">50</field>
                 </shadow>
             </value>
         </block>
@@ -617,15 +704,16 @@ const makeToolboxXML = function (categoriesXML) {
 
     const everything = [
         xmlOpen,
+        top, gap,
         motion, gap,
         looks, gap,
         sound, gap,
-        pen, gap,
-        data, gap,
         events, gap,
         control, gap,
         sensing, gap,
-        operators
+        pen, gap,
+        operators, gap,
+        data
     ];
 
     if (categoriesXML) {

@@ -45,7 +45,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^2.8.2",
     "eslint": "^4.7.1",
-    "eslint-config-scratch": "^4.0.0",
+    "eslint-config-scratch": "^5.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.2.1",
     "get-float-time-domain-data": "0.1.0",

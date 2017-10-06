@@ -26,6 +26,18 @@ const top = `
                 <shadow type="sound_sounds_menu"/>
             </value>
         </block>
+        <block type="looks_sayforsecs">
+            <value name="MESSAGE">
+                <shadow type="text">
+                    <field name="TEXT">Hello!</field>
+                </shadow>
+            </value>
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
         <block type="looks_changeeffectby">
             <value name="CHANGE">
                 <shadow type="math_number">
@@ -182,6 +194,44 @@ const motion = `
 
 const looks = `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+        <block type="looks_sayforsecs">
+            <value name="MESSAGE">
+                <shadow type="text">
+                    <field name="TEXT">Hello!</field>
+                </shadow>
+            </value>
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="looks_say">
+            <value name="MESSAGE">
+                <shadow type="text">
+                    <field name="TEXT">Hello!</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="looks_thinkforsecs">
+            <value name="MESSAGE">
+                <shadow type="text">
+                    <field name="TEXT">Hmm...</field>
+                </shadow>
+            </value>
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="looks_think">
+            <value name="MESSAGE">
+                <shadow type="text">
+                    <field name="TEXT">Hmm...</field>
+                </shadow>
+            </value>
+        </block>
         <block type="looks_show"/>
         <block type="looks_hide"/>
         <block type="looks_switchcostumeto">

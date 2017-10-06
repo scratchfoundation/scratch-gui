@@ -32,8 +32,8 @@ class SeleniumHelper {
         return this.findByXpath(xpath).then(el => el.click());
     }
 
-    clickText (text) {
-        return this.clickXpath(`//body//*[contains(text(), '${text}')]`);
+    clickText (text, scope) {
+        return this.clickXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
     }
 
     clickButton (text) {

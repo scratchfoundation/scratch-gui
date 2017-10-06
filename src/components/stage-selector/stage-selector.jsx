@@ -13,7 +13,7 @@ const addBackdropMessage = (
     <FormattedMessage
         defaultMessage="Add Backdrop"
         description="Button to add a backdrop in the target pane"
-        id="targetPane.addBackdrop"
+        id="gui.stageSelector.targetPaneAddBackdrop"
     />
 );
 
@@ -49,7 +49,7 @@ const StageSelector = props => {
                 <FormattedMessage
                     defaultMessage="Backdrops"
                     description="Label for the backdrops in the stage selector"
-                    id="stageSelector.backdrops"
+                    id="gui.stageSelector.backdrops"
                 />
             </div>
             <div className={styles.count}>{backdropCount}</div>

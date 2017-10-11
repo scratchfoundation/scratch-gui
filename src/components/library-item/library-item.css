@@ -58,3 +58,27 @@
     white-space: nowrap;
     min-width: 0;
 }
+
+.featured-item {
+    flex-basis: 300px;
+    max-width: 300px;
+    height: 320px;
+}
+
+.featured-image {
+    height: 160px;
+    margin: 20px;
+}
+
+.featured-text {
+    border-top: 1px solid #e9eef2;
+    font-weight: bold;
+    padding: 10px;
+    height: 140px;
+    width: 300px;
+}
+
+.featured-description {
+    font-weight: normal;
+    line-height: 2;
+}

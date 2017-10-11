@@ -57,8 +57,11 @@ class LibraryComponent extends React.Component {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
                             dataItem.rawURL;
+                        const isFeatured = dataItem.featured === 'true';
                         return (
                             <LibraryItem
+                                description={dataItem.description}
+                                featured={isFeatured}
                                 iconURL={scratchURL}
                                 id={index}
                                 key={`item_${index}`}

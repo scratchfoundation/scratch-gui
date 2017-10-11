@@ -1,12 +1,24 @@
 [
-    {
-        "name": "Some Blocks",
-        "extensionURL": "static/extensions/example-extension.js",
-        "md5": "76f99773dd4eb59f86cd11bba6ad3cb9.svg"
+        {
+        "name": "Lego WeDo 2.0",
+        "extensionURL": "wedo2",
+        "md5": "17813b4f018e831a9c64d32c37a30914.png",
+        "description": "Build with motors and sensors.",
+        "featured": "true"
+
     },
     {
         "name": "Pen",
-        "extensionURL": "",
-        "md5": "76f99773dd4eb59f86cd11bba6ad3cb9.svg"
+        "extensionURL": "pen",
+        "md5": "fb280e60e152cfe11ff4c3331fb2c495.svg",
+        "description": "Draw with your sprites.",
+        "featured": "true"
+    },
+    {
+        "name": "Pitch",
+        "extensionURL": "pitch",
+        "description": "Interact by singing.",
+        "md5": "777d79979182fa22b27fbc10f40c42af.svg",
+	    "featured": "true"
     }
 ]

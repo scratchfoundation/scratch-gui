@@ -18,6 +18,10 @@ const errorWhitelist = [
 
 let driver;
 
+const blocksTabScope = "*[@id='react-tabs-1']";
+const costumesTabScope = "*[@id='react-tabs-3']";
+const soundsTabScope = "*[@id='react-tabs-5']";
+
 describe('costumes, sounds and variables', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -34,8 +38,8 @@ describe('costumes, sounds and variables', () => {
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
         await clickText('abby-a'); // Should close the modal, then click the costumes in the selector
-        await clickText('costume1');
-        await clickText('abby-a');
+        await clickText('costume1', costumesTabScope);
+        await clickText('abby-a', costumesTabScope);
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
@@ -47,10 +51,10 @@ describe('costumes, sounds and variables', () => {
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('meow');
-        await clickText('chomp');
+        await clickText('meow', soundsTabScope);
+        await clickText('chomp', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
-        await clickText('meow');
+        await clickText('meow', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');
@@ -79,7 +83,8 @@ describe('costumes, sounds and variables', () => {
     test('Creating variables', async () => {
         await driver.get(`file://${uri}`);
         await clickText('Blocks');
-        await clickText('Data');
+        await clickText('Data', blocksTabScope);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Create variable...');
         let el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('score');

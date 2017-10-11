@@ -26,7 +26,7 @@ const addExtensionMessage = (
     <FormattedMessage
         defaultMessage="Extensions"
         description="Button to add an extension in the target pane"
-        id="targetPane.addExtension"
+        id="gui.gui.addExtension"
     />
 );
 

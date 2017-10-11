@@ -11,6 +11,7 @@ import BlocksComponent from '../components/blocks/blocks.jsx';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
+import {activateColorPicker} from '../reducers/color-picker';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -50,8 +51,13 @@ class Blocks extends React.Component {
         this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
     }
     componentDidMount () {
+        this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
+
         const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
+
+        // Load the toolbox from the GUI (otherwise we get the scratch-blocks default toolbox)
+        this.workspace.updateToolbox(this.props.toolboxXML);
 
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
@@ -219,14 +225,17 @@ class Blocks extends React.Component {
         this.setState({prompt: null});
     }
     render () {
+        /* eslint-disable no-unused-vars */
         const {
-            options, // eslint-disable-line no-unused-vars
-            vm, // eslint-disable-line no-unused-vars
-            isVisible, // eslint-disable-line no-unused-vars
-            onExtensionAdded, // eslint-disable-line no-unused-vars
-            toolboxXML, // eslint-disable-line no-unused-vars
+            options,
+            vm,
+            isVisible,
+            onActivateColorPicker,
+            onExtensionAdded,
+            toolboxXML,
             ...props
         } = this.props;
+        /* eslint-enable no-unused-vars */
         return (
             <div>
                 <BlocksComponent
@@ -249,6 +258,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     isVisible: PropTypes.bool,
+    onActivateColorPicker: PropTypes.func,
     onExtensionAdded: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -311,6 +321,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onExtensionAdded: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     }

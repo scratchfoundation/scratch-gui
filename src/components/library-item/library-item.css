@@ -63,15 +63,15 @@
     flex-basis: 300px;
     max-width: 300px;
     height: 320px;
+    overflow: hidden;
+    padding: 0;
 }
 
 .featured-image {
-    height: 160px;
-    margin: 20px;
+    width: 100%;
 }
 
 .featured-text {
-    border-top: 1px solid #e9eef2;
     font-weight: bold;
     padding: 10px;
     height: 140px;

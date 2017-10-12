@@ -2,7 +2,7 @@
         {
         "name": "Lego WeDo 2.0",
         "extensionURL": "wedo2",
-        "md5": "17813b4f018e831a9c64d32c37a30914.png",
+        "md5": "d01a387d869d8fbe54ec3c094f1c4137.png",
         "description": "Build with motors and sensors.",
         "featured": "true"
 
@@ -10,7 +10,7 @@
     {
         "name": "Pen",
         "extensionURL": "pen",
-        "md5": "fb280e60e152cfe11ff4c3331fb2c495.svg",
+        "md5": "1a2ec605e73000897797f0c851134f5b.png",
         "description": "Draw with your sprites.",
         "featured": "true"
     },
@@ -18,7 +18,7 @@
         "name": "Pitch",
         "extensionURL": "pitch",
         "description": "Interact by singing.",
-        "md5": "777d79979182fa22b27fbc10f40c42af.svg",
+        "md5": "9fac2d4e674af017675225c6bfea7aea.png",
 	    "featured": "true"
     }
 ]

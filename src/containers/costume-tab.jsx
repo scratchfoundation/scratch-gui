@@ -84,6 +84,7 @@ class CostumeTab extends React.Component {
 
         const addMessage = target.isStage ? addBackdropMsg : addCostumeMsg;
         const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
+        const costume = this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex];
 
         return (
             <AssetPanel
@@ -97,15 +98,15 @@ class CostumeTab extends React.Component {
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
             >
-            {target.costumes ?
-                <PaintEditor
-                    svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
-                    rotationCenterX={this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].rotationCenterX}
-                    rotationCenterY={this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].rotationCenterY}
-                    onUpdateSvg={this.handleUpdateSvg}
-                />
-                : null
-            }
+                {target.costumes ?
+                    <PaintEditor
+                        rotationCenterX={costume.rotationCenterX}
+                        rotationCenterY={costume.rotationCenterY}
+                        svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
+                        onUpdateSvg={this.handleUpdateSvg}
+                    /> :
+                    null
+                }
             </AssetPanel>
         );
     }

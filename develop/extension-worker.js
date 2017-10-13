@@ -344,6 +344,7 @@ module.exports = new WorkerDispatch();
 
 
 var ArgumentType = {
+    ANGLE: 'angle',
     BOOLEAN: 'Boolean',
     COLOR: 'color',
     NUMBER: 'number',
@@ -523,6 +524,19 @@ var SharedDispatch = function () {
             } catch (e) {
                 return Promise.reject(e);
             }
+        }
+
+        /**
+         * Check if a particular service lives on another worker.
+         * @param {string} service - the service to check.
+         * @returns {boolean} - true if the service is remote (calls must cross a Worker boundary), false otherwise.
+         * @private
+         */
+
+    }, {
+        key: '_isRemoteService',
+        value: function _isRemoteService(service) {
+            return this._getServiceProvider(service).isRemote;
         }
 
         /**

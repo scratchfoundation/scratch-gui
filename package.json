@@ -10,7 +10,7 @@
     "i18n:msgs": "node ./scripts/generate-locale-messages.js",
     "i18n:src": "babel src > tmp.js && rimraf tmp.js && ./scripts/build-i18n-source.js ./translations/messages/ ./translations/",
     "start": "npm run i18n:msgs && webpack-dev-server",
-    "test": "npm run test:lint && npm run build && npm run test:unit && npm run test:integration",
+    "test": "npm run test:lint && npm run test:unit && NODE_ENV=production npm run build && npm run test:integration",
     "test:integration": "jest --runInBand test[\\\\/]integration",
     "test:lint": "eslint . --ext .js,.jsx",
     "test:unit": "jest test[\\\\/]unit",
@@ -101,8 +101,8 @@
   },
   "jest": {
     "setupFiles": [
-      "<rootDir>/test/helpers/enzyme-setup.js",
-      "raf/polyfill"
+      "raf/polyfill",
+      "<rootDir>/test/helpers/enzyme-setup.js"
     ],
     "testPathIgnorePatterns": [
       "src/test.js"

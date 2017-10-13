@@ -11,9 +11,6 @@ node_js:
 cache:
   directories:
   - node_modules
-env:
-  global:
-  - NODE_ENV=production
 install:
 - npm --production=false install
 - npm --production=false update

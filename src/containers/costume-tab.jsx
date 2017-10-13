@@ -49,6 +49,13 @@ class CostumeTab extends React.Component {
     }
 
     handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
+        const storage = this.props.vm.runtime.storage;
+        const newAssetId = storage.builtinHelper.cache(
+            storage.AssetType.ImageVector,
+            storage.DataFormat.SVG,
+            (new TextEncoder()).encode(svg),
+        );
+        this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].assetId = newAssetId;
         this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
 
@@ -84,7 +91,6 @@ class CostumeTab extends React.Component {
 
         const addMessage = target.isStage ? addBackdropMsg : addCostumeMsg;
         const addFunc = target.isStage ? onNewBackdropClick : onNewCostumeClick;
-        const costume = this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex];
 
         return (
             <AssetPanel
@@ -100,8 +106,8 @@ class CostumeTab extends React.Component {
             >
                 {target.costumes ?
                     <PaintEditor
-                        rotationCenterX={costume.rotationCenterX}
-                        rotationCenterY={costume.rotationCenterY}
+                        rotationCenterX={target.costumes[this.state.selectedCostumeIndex].rotationCenterX}
+                        rotationCenterY={target.costumes[this.state.selectedCostumeIndex].rotationCenterY}
                         svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
                         onUpdateSvg={this.handleUpdateSvg}
                     /> :

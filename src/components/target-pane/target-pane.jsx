@@ -34,6 +34,7 @@ const TargetPane = ({
     onChangeSpriteX,
     onChangeSpriteY,
     onDeleteSprite,
+    onDuplicateSprite,
     onNewSpriteClick,
     onRequestCloseBackdropLibrary,
     onRequestCloseCostumeLibrary,
@@ -61,6 +62,7 @@ const TargetPane = ({
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onDuplicateSprite={onDuplicateSprite}
             onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
@@ -141,6 +143,7 @@ TargetPane.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,

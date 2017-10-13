@@ -57,7 +57,7 @@ SpriteSelectorItem.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func.isRequired,
     onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool
 };

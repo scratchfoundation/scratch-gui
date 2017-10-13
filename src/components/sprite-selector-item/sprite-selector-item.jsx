@@ -64,7 +64,7 @@ SpriteSelectorItem.propTypes = {
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func.isRequired,
     onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool.isRequired
 };

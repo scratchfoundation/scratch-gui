@@ -49,13 +49,6 @@ class CostumeTab extends React.Component {
     }
 
     handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
-        const storage = this.props.vm.runtime.storage;
-        const newAssetId = storage.builtinHelper.cache(
-            storage.AssetType.ImageVector,
-            storage.DataFormat.SVG,
-            (new TextEncoder()).encode(svg),
-        );
-        this.props.vm.editingTarget.sprite.costumes[this.state.selectedCostumeIndex].assetId = newAssetId;
         this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
 

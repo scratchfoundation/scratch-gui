@@ -12,8 +12,8 @@ cache:
   directories:
   - node_modules
 install:
-- npm --production=false install
-- npm --production=false update
+- npm install
+- npm update
 before_deploy:
 - npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)
@@ -36,4 +36,3 @@ deploy:
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
-

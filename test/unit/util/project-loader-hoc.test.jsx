@@ -45,7 +45,7 @@ describe('ProjectLoaderHOC', () => {
         const before = mounted.find('div').text();
         ProjectLoader.load = jest.fn((id, cb) => cb(null, id));
         window.location.hash = `#winning`;
-        mounted.node.updateProject();
+        mounted.instance().updateProject();
         expect(mounted.find('div').text()).not.toEqual(before);
     });
 });

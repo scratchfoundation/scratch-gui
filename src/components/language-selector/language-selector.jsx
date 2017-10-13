@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
-import languages from '../../locale.js';
+import locales from 'scratch-l10n';
 import languageIcon from './language-icon.svg';
 import styles from './language-selector.css';
 
@@ -22,12 +22,12 @@ const LanguageSelector = ({
                 value={currentLocale}
                 onChange={onChange}
             >
-                {Object.keys(languages).map(locale => (
+                {Object.keys(locales).map(locale => (
                     <option
                         key={locale}
                         value={locale}
                     >
-                        {languages[locale].name}
+                        {locales[locale].name}
                     </option>
                 ))}
             </select>

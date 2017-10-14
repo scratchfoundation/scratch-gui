@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
+import PaintEditor from 'scratch-paint';
 
 import {connect} from 'react-redux';
 
@@ -19,7 +20,8 @@ class CostumeTab extends React.Component {
         super(props);
         bindAll(this, [
             'handleSelectCostume',
-            'handleDeleteCostume'
+            'handleDeleteCostume',
+            'handleUpdateSvg'
         ]);
         this.state = {selectedCostumeIndex: 0};
     }
@@ -44,6 +46,10 @@ class CostumeTab extends React.Component {
 
     handleDeleteCostume (costumeIndex) {
         this.props.vm.deleteCostume(costumeIndex);
+    }
+
+    handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
+        this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
 
     render () {
@@ -90,7 +96,17 @@ class CostumeTab extends React.Component {
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-            />
+            >
+                {target.costumes ?
+                    <PaintEditor
+                        rotationCenterX={target.costumes[this.state.selectedCostumeIndex].rotationCenterX}
+                        rotationCenterY={target.costumes[this.state.selectedCostumeIndex].rotationCenterY}
+                        svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
+                        onUpdateSvg={this.handleUpdateSvg}
+                    /> :
+                    null
+                }
+            </AssetPanel>
         );
     }
 }

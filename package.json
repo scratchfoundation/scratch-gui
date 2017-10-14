@@ -73,7 +73,7 @@
     "react-draggable": "3.0.3",
     "react-intl": "2.4.0",
     "react-intl-redux": "0.6.0",
-    "react-modal": "3.0.0",
+    "react-modal": "3.0.2",
     "react-redux": "5.0.6",
     "react-responsive": "2.0.0",
     "react-style-proptype": "3.0.0",

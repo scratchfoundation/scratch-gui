@@ -6,7 +6,7 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
-import PaintEditor from 'scratch-paint';
+import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 
 import {connect} from 'react-redux';
 
@@ -20,8 +20,7 @@ class CostumeTab extends React.Component {
         super(props);
         bindAll(this, [
             'handleSelectCostume',
-            'handleDeleteCostume',
-            'handleUpdateSvg'
+            'handleDeleteCostume'
         ]);
         this.state = {selectedCostumeIndex: 0};
     }
@@ -39,25 +38,6 @@ class CostumeTab extends React.Component {
         }
     }
 
-    shouldComponentUpdate (nextProps) {
-        const {
-            editingTarget,
-            sprites,
-            stage
-        } = nextProps;
-        const nextTarget = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        const currentTarget =
-            this.props.editingTarget && this.props.sprites[this.props.editingTarget] ?
-                this.props.sprites[this.props.editingTarget] :
-                this.props.stage;
-
-        if (this.props.editingTarget !== editingTarget ||
-                currentTarget.currentCostume !== nextTarget.currentCostume) {
-            return true;
-        }
-        return false;
-    }
-
     handleSelectCostume (costumeIndex) {
         this.props.vm.editingTarget.setCostume(costumeIndex);
         this.setState({selectedCostumeIndex: costumeIndex});
@@ -67,18 +47,19 @@ class CostumeTab extends React.Component {
         this.props.vm.deleteCostume(costumeIndex);
     }
 
-    handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
-        this.props.vm.updateSvg(this.state.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
-    }
-
     render () {
+        // For paint wrapper
+        const {
+            onNewBackdropClick,
+            onNewCostumeClick,
+            ...props
+        } = this.props;
+
         const {
             editingTarget,
             sprites,
-            stage,
-            onNewCostumeClick,
-            onNewBackdropClick
-        } = this.props;
+            stage
+        } = props;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
@@ -117,11 +98,9 @@ class CostumeTab extends React.Component {
                 onItemClick={this.handleSelectCostume}
             >
                 {target.costumes ?
-                    <PaintEditor
-                        rotationCenterX={target.costumes[this.state.selectedCostumeIndex].rotationCenterX}
-                        rotationCenterY={target.costumes[this.state.selectedCostumeIndex].rotationCenterY}
-                        svg={this.props.vm.getCostumeSvg(this.state.selectedCostumeIndex)}
-                        onUpdateSvg={this.handleUpdateSvg}
+                    <PaintEditorWrapper
+                        {...props}
+                        selectedCostumeIndex={this.state.selectedCostumeIndex}
                     /> :
                     null
                 }

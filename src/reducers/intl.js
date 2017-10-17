@@ -1,25 +1,30 @@
 import {addLocaleData} from 'react-intl';
 import {updateIntl as superUpdateIntl} from 'react-intl-redux';
 import {IntlProvider, intlReducer} from 'react-intl-redux';
+import defaultsDeep from 'lodash.defaultsdeep';
 
-import locales from 'scratch-l10n';
+import localeData from 'scratch-l10n';
+import guiMessages from 'scratch-l10n/locales/gui-msgs';
+import paintMessages from 'scratch-l10n/locales/paint-msgs';
 
-Object.keys(locales).forEach(locale => {
+const combinedMessages = defaultsDeep({}, guiMessages.messages, paintMessages.messages);
+
+Object.keys(localeData).forEach(locale => {
     // TODO: will need to handle locales not in the default intl - see www/custom-locales
-    addLocaleData(locales[locale].localeData);
+    addLocaleData(localeData[locale].localeData);
 });
 
 const intlInitialState = {
     intl: {
         defaultLocale: 'en',
         locale: 'en',
-        messages: locales.en.messages
+        messages: combinedMessages.en.messages
     }
 };
 
 const updateIntl = locale => superUpdateIntl({
     locale: locale,
-    messages: locales[locale].messages || locales.en.messages
+    messages: combinedMessages[locale].messages || combinedMessages.en.messages
 });
 
 export {

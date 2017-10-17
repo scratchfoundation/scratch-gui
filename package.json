@@ -85,7 +85,7 @@
     "scratch-audio": "latest",
     "scratch-paint": "latest",
     "scratch-blocks": "latest",
-    "scratch-l10n": "1.0.20171013211708",
+    "scratch-l10n": "^2.0.0",
     "scratch-render": "latest",
     "scratch-storage": "^0.2.0",
     "scratch-vm": "latest",

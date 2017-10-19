@@ -82,12 +82,10 @@ class Blocks extends React.Component {
             return;
         }
         // @todo hack to resize blockly manually in case resize happened while hidden
-        // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
-            this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);
         }
@@ -178,7 +176,6 @@ class Blocks extends React.Component {
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
         this.ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
         this.ScratchBlocks.Events.enable();
-        this.workspace.toolbox_.refreshSelection();
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];

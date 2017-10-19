@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import addCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
+import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 
 import {connect} from 'react-redux';
 
@@ -47,13 +48,18 @@ class CostumeTab extends React.Component {
     }
 
     render () {
+        // For paint wrapper
+        const {
+            onNewBackdropClick,
+            onNewCostumeClick,
+            ...props
+        } = this.props;
+
         const {
             editingTarget,
             sprites,
-            stage,
-            onNewCostumeClick,
-            onNewBackdropClick
-        } = this.props;
+            stage
+        } = props;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
@@ -65,14 +71,14 @@ class CostumeTab extends React.Component {
             <FormattedMessage
                 defaultMessage="Add Backdrop"
                 description="Button to add a backdrop in the editor tab"
-                id="action.addBackdrop"
+                id="gui.costumeTab.addBackdrop"
             />
         );
         const addCostumeMsg = (
             <FormattedMessage
                 defaultMessage="Add Costume"
                 description="Button to add a costume in the editor tab"
-                id="action.addCostume"
+                id="gui.costumeTab.addCostume"
             />
         );
 
@@ -90,7 +96,15 @@ class CostumeTab extends React.Component {
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={this.handleDeleteCostume}
                 onItemClick={this.handleSelectCostume}
-            />
+            >
+                {target.costumes ?
+                    <PaintEditorWrapper
+                        {...props}
+                        selectedCostumeIndex={this.state.selectedCostumeIndex}
+                    /> :
+                    null
+                }
+            </AssetPanel>
         );
     }
 }

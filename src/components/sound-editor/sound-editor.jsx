@@ -30,72 +30,72 @@ const BufferedInput = BufferedInputHOC(Input);
 
 const messages = defineMessages({
     sound: {
-        id: 'soundEditor.sound',
-        description: 'Lable for the name of the sound',
+        id: 'gui.soundEditor.sound',
+        description: 'Label for the name of the sound',
         defaultMessage: 'Sound'
     },
     play: {
-        id: 'soundEditor.play',
+        id: 'gui.soundEditor.play',
         description: 'Title of the button to start playing the sound',
         defaultMessage: 'Play'
     },
     stop: {
-        id: 'soundEditor.stop',
+        id: 'gui.soundEditor.stop',
         description: 'Title of the button to stop the sound',
         defaultMessage: 'Stop'
     },
     trim: {
-        id: 'soundEditor.trim',
+        id: 'gui.soundEditor.trim',
         description: 'Title of the button to start trimminging the sound',
         defaultMessage: 'Trim'
     },
     save: {
-        id: 'soundEditor.save',
+        id: 'gui.soundEditor.save',
         description: 'Title of the button to save trimmed sound',
         defaultMessage: 'Save'
     },
     undo: {
-        id: 'soundEditor.undo',
+        id: 'gui.soundEditor.undo',
         description: 'Title of the button to undo',
         defaultMessage: 'Undo'
     },
     redo: {
-        id: 'soundEditor.redo',
+        id: 'gui.soundEditor.redo',
         description: 'Title of the button to redo',
         defaultMessage: 'Redo'
     },
     faster: {
-        id: 'soundEditor.faster',
+        id: 'gui.soundEditor.faster',
         description: 'Title of the button to apply the faster effect',
         defaultMessage: 'Faster'
     },
     slower: {
-        id: 'soundEditor.slower',
+        id: 'gui.soundEditor.slower',
         description: 'Title of the button to apply the slower effect',
         defaultMessage: 'Slower'
     },
     echo: {
-        id: 'soundEditor.echo',
+        id: 'gui.soundEditor.echo',
         description: 'Title of the button to apply the echo effect',
         defaultMessage: 'Echo'
     },
     robot: {
-        id: 'soundEditor.robot',
+        id: 'gui.soundEditor.robot',
         description: 'Title of the button to apply the robot effect',
         defaultMessage: 'Robot'
     },
     louder: {
-        id: 'soundEditor.louder',
+        id: 'gui.soundEditor.louder',
         description: 'Title of the button to apply the louder effect',
         defaultMessage: 'Louder'
     },
     softer: {
-        id: 'soundEditor.softer',
+        id: 'gui.soundEditor.softer',
         description: 'Title of the button to apply thr.softer effect',
         defaultMessage: 'Softer'
     },
     reverse: {
-        id: 'soundEditor.reverse',
+        id: 'gui.soundEditor.reverse',
         description: 'Title of the button to apply the reverse effect',
         defaultMessage: 'Reverse'
     }

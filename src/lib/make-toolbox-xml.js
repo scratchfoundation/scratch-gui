@@ -390,77 +390,6 @@ const sound = `
     </category>
 `;
 
-const pen = `
-    <category name="Pen" colour="#00B295" secondaryColour="#0B8E69">
-        <block type="pen_clear"/>
-        <block type="pen_stamp"/>
-        <block type="pen_pendown"/>
-        <block type="pen_penup"/>
-        <block type="pen_setpencolortocolor">
-            <value name="COLOR">
-                <shadow type="colour_picker">
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_changepencolorby">
-            <value name="COLOR">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_setpencolortonum">
-            <value name="COLOR">
-                <shadow type="math_number">
-                    <field name="NUM">0</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_changepenshadeby">
-            <value name="SHADE">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_setpenshadeto">
-            <value name="SHADE">
-                <shadow type="math_number">
-                    <field name="NUM">50</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_changepensizeby">
-            <value name="SIZE">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_setpensizeto">
-            <value name="SIZE">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="pen_changepentransparencyby" id="pen_changepentransparencyby">
-            <value name="TRANSPARENCY">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="pen_setpentransparencyto" id="pen_setpentransparencyto">
-            <value name="TRANSPARENCY">
-                <shadow type="math_number">
-                    <field name="NUM">50</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-`;
-
 const events = `
     <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
@@ -761,7 +690,6 @@ const makeToolboxXML = function (categoriesXML) {
         events, gap,
         control, gap,
         sensing, gap,
-        pen, gap,
         operators, gap,
         data
     ];

@@ -96,4 +96,15 @@ describe('costumes, sounds and variables', () => {
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
+
+    test('Importing extensions', async () => {
+        await driver.get(`file://${uri}`);
+        await clickText('Blocks');
+        await clickText('Extensions');
+        await clickText('Pen'); // Modal closes
+        await clickText('Pen', blocksTabScope); // Click the new category
+        await clickText('stamp', blocksTabScope); // Click the "stamp" block
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
 });

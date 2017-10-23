@@ -5,6 +5,7 @@ const {
     clickText,
     clickButton,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs
@@ -21,6 +22,7 @@ let driver;
 const blocksTabScope = "*[@id='react-tabs-1']";
 const costumesTabScope = "*[@id='react-tabs-3']";
 const soundsTabScope = "*[@id='react-tabs-5']";
+const reportedValueScope = '*[@class="blocklyDropDownContent"]';
 
 describe('costumes, sounds and variables', () => {
     beforeAll(() => {
@@ -29,6 +31,18 @@ describe('costumes, sounds and variables', () => {
 
     afterAll(async () => {
         await driver.quit();
+    });
+
+
+    test('Blocks report when clicked in the toolbox', async () => {
+        await driver.get(`file://${uri}`);
+        await clickText('Blocks');
+        await clickText('Operators', blocksTabScope);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('join', blocksTabScope); // Click "join <hello> <world>" block
+        await findByText('helloworld', reportedValueScope); // Tooltip with result
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
     });
 
     test('Adding a costume', async () => {
@@ -93,6 +107,13 @@ describe('costumes, sounds and variables', () => {
         el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('second variable');
         await clickButton('OK');
+
+        // Make sure reporting works on a new variable
+        await clickText('Data', blocksTabScope);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('score', blocksTabScope);
+        await findByText('0', reportedValueScope); // Tooltip with result
+
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });

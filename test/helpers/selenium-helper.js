@@ -12,6 +12,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'findByText',
             'findByXpath',
             'getDriver',
             'getLogs'
@@ -29,12 +30,16 @@ class SeleniumHelper {
         return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
     }
 
+    findByText (text, scope) {
+        return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+    }
+
     clickXpath (xpath) {
         return this.findByXpath(xpath).then(el => el.click());
     }
 
     clickText (text, scope) {
-        return this.clickXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+        return this.findByText(text, scope).then(el => el.click());
     }
 
     clickButton (text) {

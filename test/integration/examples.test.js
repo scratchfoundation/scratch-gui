@@ -67,7 +67,6 @@ describe('blocks example', () => {
         await driver.get(`file://${uri}`);
         await clickText('Looks');
         await clickText('Sound');
-        await clickText('Pen');
         await clickText('Events');
         await clickText('Control');
         await clickText('Sensing');

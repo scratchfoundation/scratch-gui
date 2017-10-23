@@ -63,7 +63,7 @@ describe('Sound Editor Container', () => {
                 store={store}
             />
         );
-        const component = wrapper.find(SoundEditorComponent);
+        let component = wrapper.find(SoundEditorComponent);
         // Ensure rendering doesn't start playing any sounds
         expect(mockAudioBufferPlayer.instance.play.mock.calls).toEqual([]);
         expect(mockAudioBufferPlayer.instance.stop.mock.calls).toEqual([]);
@@ -73,9 +73,13 @@ describe('Sound Editor Container', () => {
 
         // Mock the audio buffer player calling onUpdate
         mockAudioBufferPlayer.instance.onUpdate(0.5);
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.props().playhead).toEqual(0.5);
 
         component.props().onStop();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(mockAudioBufferPlayer.instance.stop).toHaveBeenCalled();
         expect(component.props().playhead).toEqual(null);
     });
@@ -87,13 +91,17 @@ describe('Sound Editor Container', () => {
                 store={store}
             />
         );
-        const component = wrapper.find(SoundEditorComponent);
+        let component = wrapper.find(SoundEditorComponent);
 
         component.props().onActivateTrim();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.props().trimStart).not.toEqual(null);
         expect(component.props().trimEnd).not.toEqual(null);
 
         component.props().onActivateTrim();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
         expect(component.props().trimStart).toEqual(null);
         expect(component.props().trimEnd).toEqual(null);
@@ -223,7 +231,7 @@ describe('Sound Editor Container', () => {
                 store={store}
             />
         );
-        const component = wrapper.find(SoundEditorComponent);
+        let component = wrapper.find(SoundEditorComponent);
         // Undo and redo should be disabled initially
         expect(component.prop('canUndo')).toEqual(false);
         expect(component.prop('canRedo')).toEqual(false);
@@ -232,27 +240,34 @@ describe('Sound Editor Container', () => {
         component.props().onActivateTrim(); // Activate trimming
         component.props().onActivateTrim(); // Submit new samples by calling again
         wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(true);
         expect(component.prop('canRedo')).toEqual(false);
 
         // Undoing should make it possible to redo and not possible to undo again
         component.props().onUndo();
         wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(false);
         expect(component.prop('canRedo')).toEqual(true);
 
         // Redoing should make it possible to undo and not possible to redo again
         component.props().onRedo();
         wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(true);
         expect(component.prop('canRedo')).toEqual(false);
 
         // New submission should clear the redo stack
         component.props().onUndo(); // Undo to go back to a state where redo is enabled
         wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(true);
         component.props().onActivateTrim(); // Activate trimming
         component.props().onActivateTrim(); // Submit new samples by calling again
+
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(false);
     });
 });

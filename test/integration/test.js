@@ -45,6 +45,19 @@ describe('costumes, sounds and variables', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Switching sprites updates the block menus', async () => {
+        await driver.get(`file://${uri}`);
+        await clickText('Sound', blocksTabScope);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        // "meow" sound block should be visible
+        await findByText('meow', blocksTabScope);
+        await clickText('Backdrops'); // Switch to the backdrop
+        // Now "pop" sound block should be visible
+        await findByText('pop', blocksTabScope);
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a costume', async () => {
         await driver.get(`file://${uri}`);
         await clickText('Costumes');

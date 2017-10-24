@@ -477,6 +477,14 @@ const sensing = `
                 <shadow type="sensing_distancetomenu"/>
             </value>
         </block>
+        <block type="sensing_askandwait">
+            <value name="QUESTION">
+                <shadow type="text">
+                    <field name="TEXT">What's your name?</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="sensing_answer"/>
         <block type="sensing_keypressed">
             <value name="KEY_OPTION">
                 <shadow type="sensing_keyoptions"/>

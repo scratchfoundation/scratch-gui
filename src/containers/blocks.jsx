@@ -87,7 +87,6 @@ class Blocks extends React.Component {
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
-            this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);
         }

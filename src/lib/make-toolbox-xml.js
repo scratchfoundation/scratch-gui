@@ -186,9 +186,9 @@ const motion = `
         </block>
         <block type="motion_ifonedgebounce"/>
         <block type="motion_setrotationstyle"/>
-        <block type="motion_xposition"/>
-        <block type="motion_yposition"/>
-        <block type="motion_direction"/>
+        <block id="xposition" type="motion_xposition"/>
+        <block id="yposition" type="motion_yposition"/>
+        <block id="direction" type="motion_direction"/>
     </category>
 `;
 
@@ -288,10 +288,10 @@ const looks = `
                 </shadow>
             </value>
         </block>
-        <block type="looks_costumeorder"/>
-        <block type="looks_backdroporder"/>
-        <block type="looks_backdropname"/>
-        <block type="looks_size"/>
+        <block id="costumeorder" type="looks_costumeorder"/>
+        <block id="backdroporder" type="looks_backdroporder"/>
+        <block id="backdropname" type="looks_backdropname"/>
+        <block id="size" type="looks_size"/>
     </category>
 `;
 
@@ -371,7 +371,7 @@ const sound = `
                 </shadow>
             </value>
         </block>
-        <block type="sound_volume"/>
+        <block id="volume" type="sound_volume"/>
         <block type="sound_changetempoby">
             <value name="TEMPO">
                 <shadow type="math_number">
@@ -386,7 +386,7 @@ const sound = `
                 </shadow>
             </value>
         </block>
-        <block type="sound_tempo"/>
+        <block id="tempo" type="sound_tempo"/>
     </category>
 `;
 
@@ -485,10 +485,10 @@ const sensing = `
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>
-        <block type="sensing_loudness"/>
-        <block type="sensing_timer"/>
+        <block id="loudness" type="sensing_loudness"/>
+        <block id="timer" type="sensing_timer"/>
         <block type="sensing_resettimer"/>
-        <block type="sensing_of">
+        <block id="of" type="sensing_of">
             <value name="PROPERTY">
                 <shadow type="sensing_of_property_menu"/>
             </value>
@@ -496,7 +496,7 @@ const sensing = `
                 <shadow type="sensing_of_object_menu"/>
             </value>
         </block>
-        <block type="sensing_current">
+        <block id="current" type="sensing_current">
             <value name="CURRENTMENU">
                 <shadow type="sensing_currentmenu"/>
             </value>

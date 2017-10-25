@@ -371,7 +371,7 @@ const sound = `
                 </shadow>
             </value>
         </block>
-        <block type="sound_volume"/>
+        <block id="volume" type="sound_volume"/>
         <block type="sound_changetempoby">
             <value name="TEMPO">
                 <shadow type="math_number">

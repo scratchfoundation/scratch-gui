@@ -71,7 +71,7 @@
     "react-dom": "16.0.0",
     "react-draggable": "3.0.3",
     "react-intl": "2.4.0",
-    "react-intl-redux": "0.6.0",
+    "react-intl-redux": "0.7.0",
     "react-modal": "3.0.2",
     "react-redux": "5.0.6",
     "react-responsive": "3.0.0",

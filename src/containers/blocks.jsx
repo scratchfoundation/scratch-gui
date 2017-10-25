@@ -87,7 +87,6 @@ class Blocks extends React.Component {
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
-            this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);
         }
@@ -172,13 +171,11 @@ class Blocks extends React.Component {
             this.onWorkspaceMetricsChange();
         }
 
-        this.ScratchBlocks.Events.disable();
-        this.workspace.clear();
-
+        // Remove and reattach the workspace listener (but allow flyout events)
+        this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
-        this.ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
-        this.ScratchBlocks.Events.enable();
-        this.workspace.toolbox_.refreshSelection();
+        this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
+        this.workspace.addChangeListener(this.props.vm.blockListener);
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];

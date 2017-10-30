@@ -67,7 +67,7 @@ module.exports = {
         },
         {
             test: /\.svg$/,
-            loader: 'svg-url-loader?noquotes'
+            loader: 'file-loader'
         }]
     },
     plugins: [

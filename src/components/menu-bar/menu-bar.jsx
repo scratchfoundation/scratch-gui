@@ -20,6 +20,7 @@ const MenuBar = function MenuBar () {
                 <img
                     className={styles.scratchLogo}
                     src={scratchLogo}
+                    alt="Scratch logo"
                 />
             </div>
             <SaveButton className={styles.menuItem} />

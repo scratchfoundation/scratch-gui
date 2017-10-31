@@ -16,6 +16,7 @@ const IconButton = ({
         <img
             className={styles.icon}
             src={img}
+            aria-hidden="true"
         />
         <div className={styles.title}>
             {title}

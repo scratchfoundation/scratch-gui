@@ -20,6 +20,7 @@ const CloseButton = props => (
         <img
             className={styles.closeIcon}
             src={closeIcon}
+            aria-hidden="true"
         />
     </div>
 );

@@ -62,12 +62,22 @@
     border-bottom-left-radius: $form-radius;
 }
 
+.radio-left:focus {
+    border-color: #4c97ff;
+    box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
+}
+
 .radio-right {
     border-bottom: 1px solid $form-border;
     border-top: 1px solid $form-border;
     border-right: 1px solid $form-border;
     border-top-right-radius: $form-radius;
     border-bottom-right-radius: $form-radius;
+}
+
+.radio-right:focus {
+    border-color: #4c97ff;
+    box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
 }
 
 .icon {

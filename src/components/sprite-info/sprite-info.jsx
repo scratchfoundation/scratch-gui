@@ -56,6 +56,7 @@ class SpriteInfo extends React.Component {
                                 <img
                                     className={classNames(styles.xIcon, styles.icon)}
                                     src={xIcon}
+                                    aria-hidden="true"
                                 />
                             </div>
                         </MediaQuery>
@@ -78,6 +79,7 @@ class SpriteInfo extends React.Component {
                                 <img
                                     className={classNames(styles.yIcon, styles.icon)}
                                     src={yIcon}
+                                    aria-hidden="true"
                                 />
                             </div>
                         </MediaQuery>

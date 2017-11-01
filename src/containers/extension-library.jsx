@@ -20,9 +20,10 @@ class ExtensionLibrary extends React.PureComponent {
         const url = item.extensionURL || prompt('Enter the URL of the extension');
         if (url) {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
-                return;
+                this.props.onCategorySelected(item.name);
+            } else {
+                this.props.vm.extensionManager.loadExtensionURL(url);
             }
-            this.props.vm.extensionManager.loadExtensionURL(url);
         }
     }
     render () {
@@ -43,6 +44,7 @@ class ExtensionLibrary extends React.PureComponent {
 }
 
 ExtensionLibrary.propTypes = {
+    onCategorySelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types

@@ -31,6 +31,7 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
+            'handleCategorySelected',
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
@@ -194,6 +195,9 @@ class Blocks extends React.Component {
         const toolboxXML = makeToolboxXML(dynamicBlocksXML);
         this.props.onExtensionAdded(toolboxXML);
         const categoryName = blocksInfo[0].json.category;
+        this.handleCategorySelected(categoryName);
+    }
+    handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
     }
     setBlocks (blocks) {
@@ -241,6 +245,7 @@ class Blocks extends React.Component {
                 {extensionLibraryVisible ? (
                     <ExtensionLibrary
                         vm={vm}
+                        onCategorySelected={this.handleCategorySelected}
                         onRequestClose={onRequestCloseExtensionLibrary}
                     />
                 ) : null}

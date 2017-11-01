@@ -416,15 +416,15 @@ const sensing = `
         <block type="sensing_resettimer"/>
         <block id="of" type="sensing_of">
             <value name="PROPERTY">
-                <shadow type="sensing_of_property_menu"/>
+                <shadow id="sensing_of_property_menu" type="sensing_of_property_menu"/>
             </value>
             <value name="OBJECT">
-                <shadow type="sensing_of_object_menu"/>
+                <shadow id="sensing_of_object_menu" type="sensing_of_object_menu"/>
             </value>
         </block>
         <block id="current" type="sensing_current">
             <value name="CURRENTMENU">
-                <shadow type="sensing_currentmenu"/>
+                <shadow id="sensing_currentmenu" type="sensing_currentmenu"/>
             </value>
         </block>
         <block type="sensing_dayssince2000"/>

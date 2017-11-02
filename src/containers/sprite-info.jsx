@@ -27,13 +27,13 @@ class SpriteInfo extends React.Component {
         this.props.onChangeVisibility(false);
     }
     handlePressVisible (e) {
-        if (e.key === " " || e.key === "Enter") {
+        if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
             this.props.onChangeVisibility(true);
         }
     }
     handlePressNotVisible (e) {
-        if (e.key === " " || e.key === "Enter") {
+        if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
             this.props.onChangeVisibility(false);
         }

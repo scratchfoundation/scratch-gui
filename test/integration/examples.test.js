@@ -72,6 +72,7 @@ describe('blocks example', () => {
         await clickText('Sensing');
         await clickText('Operators');
         await clickText('Data');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Create variable...');
         let el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('score');

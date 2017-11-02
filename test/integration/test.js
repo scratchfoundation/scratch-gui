@@ -23,6 +23,7 @@ const blocksTabScope = "*[@id='react-tabs-1']";
 const costumesTabScope = "*[@id='react-tabs-3']";
 const soundsTabScope = "*[@id='react-tabs-5']";
 const reportedValueScope = '*[@class="blocklyDropDownContent"]';
+const modalScope = '*[@class="ReactModalPortal"]';
 
 describe('costumes, sounds and variables', () => {
     beforeAll(() => {
@@ -135,9 +136,18 @@ describe('costumes, sounds and variables', () => {
         await driver.get(`file://${uri}`);
         await clickText('Blocks');
         await clickText('Extensions');
-        await clickText('Pen'); // Modal closes
-        await clickText('Pen', blocksTabScope); // Click the new category
+        await clickText('Pen', modalScope); // Modal closes
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('stamp', blocksTabScope); // Click the "stamp" block
+
+        // Make sure trying to load the extension again scrolls back down
+        await clickText('Motion', blocksTabScope); // To scroll the list back to the top
+        await clickText('Extensions');
+        await clickText('Pen', modalScope); // Modal closes
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('stamp', blocksTabScope); // Would fail if didn't scroll back
+
+
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });

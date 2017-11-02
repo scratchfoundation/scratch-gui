@@ -1,3 +1,4 @@
+import {TextEncoder} from 'text-encoding';
 import projectJson from './project.json';
 
 /* eslint-disable import/no-unresolved */

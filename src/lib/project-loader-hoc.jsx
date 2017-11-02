@@ -27,7 +27,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             if (this.state.projectId !== prevState.projectId) {
                 storage
                     .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
-                    .then(projectAsset => this.setState({projectData: JSON.stringify(projectAsset.data)}))
+                    .then(projectAsset => projectAsset && this.setState({
+                        projectData: JSON.stringify(projectAsset.data)
+                    }))
                     .catch(err => log.error(err));
             }
         }

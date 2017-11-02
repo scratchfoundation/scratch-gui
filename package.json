@@ -87,7 +87,7 @@
     "scratch-blocks": "latest",
     "scratch-l10n": "^2.0.0",
     "scratch-render": "latest",
-    "scratch-storage": "^0.2.0",
+    "scratch-storage": "^0.3.0",
     "scratch-vm": "latest",
     "selenium-webdriver": "3.5.0",
     "startaudiocontext": "1.2.1",

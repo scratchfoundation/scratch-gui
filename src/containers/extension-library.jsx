@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
-import extensionLibraryContent from '../lib/libraries/extensions.json';
+import extensionLibraryContent from '../lib/libraries/extensions/index';
 
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/sprite-selector/icon--sprite.svg';

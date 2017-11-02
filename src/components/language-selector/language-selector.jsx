@@ -18,10 +18,10 @@ const LanguageSelector = ({
                 src={languageIcon}
             />
             <select
+                aria-label="language selector"
                 className={styles.languageSelect}
                 value={currentLocale}
                 onChange={onChange}
-                aria-label="language selector"
             >
                 {Object.keys(locales).map(locale => (
                     <option

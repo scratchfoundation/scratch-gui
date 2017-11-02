@@ -117,8 +117,6 @@ class SpriteInfo extends React.Component {
                                 tabIndex="4"
                                 onClick={this.props.onClickVisible}
                                 onKeyPress={this.props.onPressVisible}
-                                aria-label="Show sprite"
-                                role="button"
                             >
                                 <img
                                     className={styles.icon}
@@ -138,8 +136,6 @@ class SpriteInfo extends React.Component {
                                 tabIndex="5"
                                 onClick={this.props.onClickNotVisible}
                                 onKeyPress={this.props.onPressNotVisible}
-                                aria-label="Hide sprite"
-                                role="button"
                             >
                                 <img
                                     className={styles.icon}

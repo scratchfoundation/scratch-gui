@@ -18,9 +18,9 @@ const CloseButton = props => (
         onClick={props.onClick}
     >
         <img
+            aria-hidden="true"
             className={styles.closeIcon}
             src={closeIcon}
-            aria-hidden="true"
         />
     </div>
 );

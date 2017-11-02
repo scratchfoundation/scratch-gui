@@ -54,9 +54,9 @@ class SpriteInfo extends React.Component {
                         <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <div className={styles.iconWrapper}>
                                 <img
+                                    aria-hidden="true"
                                     className={classNames(styles.xIcon, styles.icon)}
                                     src={xIcon}
-                                    aria-hidden="true"
                                 />
                             </div>
                         </MediaQuery>
@@ -77,9 +77,9 @@ class SpriteInfo extends React.Component {
                         <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <div className={styles.iconWrapper}>
                                 <img
+                                    aria-hidden="true"
                                     className={classNames(styles.yIcon, styles.icon)}
                                     src={yIcon}
-                                    aria-hidden="true"
                                 />
                             </div>
                         </MediaQuery>

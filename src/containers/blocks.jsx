@@ -195,8 +195,6 @@ class Blocks extends React.Component {
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
         const toolboxXML = makeToolboxXML(dynamicBlocksXML);
         this.props.onExtensionAdded(toolboxXML);
-        const categoryName = blocksInfo[0].json.category;
-        this.handleCategorySelected(categoryName);
     }
     handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);

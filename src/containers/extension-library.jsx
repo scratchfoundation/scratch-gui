@@ -22,7 +22,9 @@ class ExtensionLibrary extends React.PureComponent {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(item.name);
             } else {
-                this.props.vm.extensionManager.loadExtensionURL(url);
+                this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
+                    this.props.onCategorySelected(item.name);
+                });
             }
         }
     }

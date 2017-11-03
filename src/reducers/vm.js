@@ -1,9 +1,9 @@
 import VM from 'scratch-vm';
-import Storage from '../lib/storage';
+import storage from '../lib/storage';
 
 const SET_VM = 'scratch-gui/vm/SET_VM';
 const defaultVM = new VM();
-defaultVM.attachStorage(new Storage());
+defaultVM.attachStorage(storage);
 const initialState = defaultVM;
 
 const reducer = function (state, action) {

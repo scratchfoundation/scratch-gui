@@ -59,6 +59,8 @@ class LibraryComponent extends React.Component {
                             dataItem.rawURL;
                         return (
                             <LibraryItem
+                                description={dataItem.description}
+                                featured={dataItem.featured}
                                 iconURL={scratchURL}
                                 id={index}
                                 key={`item_${index}`}

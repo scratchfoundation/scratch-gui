@@ -15,7 +15,7 @@ const TurboMode = () => (
             <FormattedMessage
                 defaultMessage="Turbo Mode"
                 description="Label indicating turbo mode is active"
-                id="controls.turboMode"
+                id="gui.turboMode.active"
             />
         </div>
     </div>

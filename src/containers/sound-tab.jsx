@@ -76,14 +76,14 @@ class SoundTab extends React.Component {
             <FormattedMessage
                 defaultMessage="Record Sound"
                 description="Button to record a sound in the editor tab"
-                id="action.recordSound"
+                id="gui.soundTab.recordSound"
             />
         );
         const addSoundMsg = (
             <FormattedMessage
                 defaultMessage="Add Sound"
                 description="Button to add a sound in the editor tab"
-                id="action.addSound"
+                id="gui.soundTab.addSound"
             />
         );
 

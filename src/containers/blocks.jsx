@@ -8,10 +8,12 @@ import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
+import ExtensionLibrary from './extension-library.jsx';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
+import {closeExtensionLibrary} from '../reducers/modals';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -29,6 +31,7 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
+            'handleCategorySelected',
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
@@ -53,11 +56,12 @@ class Blocks extends React.Component {
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
 
-        const workspaceConfig = defaultsDeep({}, Blocks.defaultOptions, this.props.options);
+        const workspaceConfig = defaultsDeep({},
+            Blocks.defaultOptions,
+            this.props.options,
+            {toolbox: this.props.toolboxXML}
+        );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
-
-        // Load the toolbox from the GUI (otherwise we get the scratch-blocks default toolbox)
-        this.workspace.updateToolbox(this.props.toolboxXML);
 
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
@@ -69,28 +73,25 @@ class Blocks extends React.Component {
         return (
             this.state.prompt !== nextState.prompt ||
             this.props.isVisible !== nextProps.isVisible ||
-            this.props.toolboxXML !== nextProps.toolboxXML
+            this.props.toolboxXML !== nextProps.toolboxXML ||
+            this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible
         );
     }
     componentDidUpdate (prevProps) {
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
             this.workspace.updateToolbox(this.props.toolboxXML);
-            // Blockly throws if we don't select a category after updating the toolbox.
-            /** @TODO Find a way to avoid the exception without accessing private properties. */
-            this.setToolboxSelectedItemByName(selectedCategoryName);
+            this.workspace.toolbox_.setSelectedCategoryByName(selectedCategoryName);
         }
         if (this.props.isVisible === prevProps.isVisible) {
             return;
         }
-
         // @todo hack to resize blockly manually in case resize happened while hidden
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
             window.dispatchEvent(new Event('resize'));
-            this.workspace.toolbox_.refreshSelection();
         } else {
             this.workspace.setVisible(false);
         }
@@ -98,20 +99,6 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.workspace.dispose();
-    }
-    /**
-     * Select a particular category in the toolbox by specifying the category name.
-     * This is a workaround for a bug: @see {@link componentDidUpdate} above.
-     * @TODO Remove this or reimplement using only public APIs.
-     * @param {string} name - the name of the category to select.
-     */
-    setToolboxSelectedItemByName (name) {
-        const categories = this.workspace.toolbox_.categoryMenu_.categories_;
-        for (let i = 0; i < categories.length; i++) {
-            if (categories[i].name_ === name) {
-                this.workspace.toolbox_.setSelectedItem(categories[i]);
-            }
-        }
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
@@ -189,13 +176,11 @@ class Blocks extends React.Component {
             this.onWorkspaceMetricsChange();
         }
 
-        this.ScratchBlocks.Events.disable();
-        this.workspace.clear();
-
+        // Remove and reattach the workspace listener (but allow flyout events)
+        this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
-        this.ScratchBlocks.Xml.domToWorkspace(dom, this.workspace);
-        this.ScratchBlocks.Events.enable();
-        this.workspace.toolbox_.refreshSelection();
+        this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
+        this.workspace.addChangeListener(this.props.vm.blockListener);
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
@@ -210,6 +195,9 @@ class Blocks extends React.Component {
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
         const toolboxXML = makeToolboxXML(dynamicBlocksXML);
         this.props.onExtensionAdded(toolboxXML);
+    }
+    handleCategorySelected (categoryName) {
+        this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
     }
     setBlocks (blocks) {
         this.blocks = blocks;
@@ -227,11 +215,13 @@ class Blocks extends React.Component {
     render () {
         /* eslint-disable no-unused-vars */
         const {
+            extensionLibraryVisible,
             options,
             vm,
             isVisible,
             onActivateColorPicker,
             onExtensionAdded,
+            onRequestCloseExtensionLibrary,
             toolboxXML,
             ...props
         } = this.props;
@@ -251,15 +241,24 @@ class Blocks extends React.Component {
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
+                {extensionLibraryVisible ? (
+                    <ExtensionLibrary
+                        vm={vm}
+                        onCategorySelected={this.handleCategorySelected}
+                        onRequestClose={onRequestCloseExtensionLibrary}
+                    />
+                ) : null}
             </div>
         );
     }
 }
 
 Blocks.propTypes = {
+    extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
     onExtensionAdded: PropTypes.func,
+    onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -317,6 +316,7 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    extensionLibraryVisible: state.modals.extensionLibrary,
     toolboxXML: state.toolbox.toolboxXML
 });
 
@@ -324,6 +324,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onExtensionAdded: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
+    },
+    onRequestCloseExtensionLibrary: () => {
+        dispatch(closeExtensionLibrary());
     }
 });
 

@@ -15,7 +15,7 @@ export default [{
     id: 0,
     assetType: 'Project',
     dataFormat: 'JSON',
-    data: projectJson
+    data: JSON.stringify(projectJson)
 }, {
     id: '83a9787d4cb6f3b7632b4ddfebf74367',
     assetType: 'Sound',

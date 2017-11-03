@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 440:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44,7 +44,7 @@ var _projectLoaderHoc = __webpack_require__(50);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-__webpack_require__(441);
+__webpack_require__(451);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,13 +144,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 441:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(442);
+var content = __webpack_require__(452);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -176,7 +176,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 442:
+/***/ 452:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -191,5 +191,5 @@ exports.push([module.i, "body {\n    padding: 0;\n    margin: 0;\n}\n", ""]);
 
 /***/ })
 
-},[440]);
+},[450]);
 //# sourceMappingURL=player.js.map

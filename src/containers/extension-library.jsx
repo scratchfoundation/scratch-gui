@@ -19,7 +19,11 @@ class ExtensionLibrary extends React.PureComponent {
         // eslint-disable-next-line no-alert
         const url = item.extensionURL || prompt('Enter the URL of the extension');
         if (url) {
-            this.props.vm.extensionManager.loadExtensionURL(url);
+            if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
+                this.props.onCategorySelected(item.name);
+            } else {
+                this.props.vm.extensionManager.loadExtensionURL(url);
+            }
         }
     }
     render () {
@@ -40,6 +44,7 @@ class ExtensionLibrary extends React.PureComponent {
 }
 
 ExtensionLibrary.propTypes = {
+    onCategorySelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types

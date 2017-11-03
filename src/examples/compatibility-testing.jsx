@@ -14,16 +14,22 @@ const mapStateToProps = state => ({vm: state.vm});
 const VMStage = connect(mapStateToProps)(Stage);
 const VMControls = connect(mapStateToProps)(Controls);
 
+const DEFAULT_PROJECT_ID = '10015059';
+
 class Player extends React.Component {
     constructor (props) {
         super(props);
         this.updateProject = this.updateProject.bind(this);
+
         this.state = {
-            projectId: window.location.hash.substring(1) || '10015059'
+            projectId: window.location.hash.substring(1) || DEFAULT_PROJECT_ID
         };
     }
     componentDidMount () {
         window.addEventListener('hashchange', this.updateProject);
+        if (!window.location.hash.substring(1)) {
+            window.location.hash = DEFAULT_PROJECT_ID;
+        }
     }
     componentWillUnmount () {
         window.addEventListener('hashchange', this.updateProject);

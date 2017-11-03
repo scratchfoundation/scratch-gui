@@ -66,8 +66,12 @@ module.exports = {
             }]
         },
         {
+            test: /\.(png|wav)$/,
+            loader: 'raw-loader'
+        },
+        {
             test: /\.svg$/,
-            loader: 'svg-url-loader?noquotes'
+            loader: 'file-loader'
         }]
     },
     plugins: [

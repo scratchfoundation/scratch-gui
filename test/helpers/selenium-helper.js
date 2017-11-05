@@ -1,6 +1,7 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
+import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
 const {By, until} = webdriver;
@@ -11,6 +12,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'findByText',
             'findByXpath',
             'getDriver',
             'getLogs'
@@ -28,12 +30,16 @@ class SeleniumHelper {
         return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
     }
 
+    findByText (text, scope) {
+        return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+    }
+
     clickXpath (xpath) {
         return this.findByXpath(xpath).then(el => el.click());
     }
 
-    clickText (text) {
-        return this.clickXpath(`//*[contains(text(), '${text}')]`);
+    clickText (text, scope) {
+        return this.findByText(text, scope).then(el => el.click());
     }
 
     clickButton (text) {

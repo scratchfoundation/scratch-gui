@@ -14,7 +14,7 @@ const addSpriteMessage = (
     <FormattedMessage
         defaultMessage="Add Sprite"
         description="Button to add a sprite in the target pane"
-        id="targetPane.addSprite"
+        id="gui.spriteSelector.addSprite"
     />
 );
 
@@ -27,6 +27,7 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteX,
         onChangeSpriteY,
         onDeleteSprite,
+        onDuplicateSprite,
         onNewSpriteClick,
         onSelectSprite,
         selectedId,
@@ -77,6 +78,7 @@ const SpriteSelectorComponent = function (props) {
                                 selected={sprite.id === selectedId}
                                 onClick={onSelectSprite}
                                 onDeleteButtonClick={onDeleteSprite}
+                                onDuplicateButtonClick={onDuplicateSprite}
                             />
                         ))
                     }
@@ -100,6 +102,7 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     selectedId: PropTypes.string,

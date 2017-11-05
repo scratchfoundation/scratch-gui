@@ -39,11 +39,20 @@ const SpriteSelectorItem = props => (
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
         <ContextMenu id={`${props.name}-${contextMenuId++}`}>
+            {props.onDuplicateButtonClick ? (
+                <MenuItem onClick={props.onDuplicateButtonClick}>
+                    <FormattedMessage
+                        defaultMessage="duplicate"
+                        description="Menu item to duplicate in the right click menu"
+                        id="gui.spriteSelectorItem.contextMenuDuplicate"
+                    />
+                </MenuItem>
+            ) : null}
             <MenuItem onClick={props.onDeleteButtonClick}>
                 <FormattedMessage
                     defaultMessage="delete"
                     description="Menu item to delete in the right click menu"
-                    id="contextMenu.delete"
+                    id="gui.spriteSelectorItem.contextMenuDelete"
                 />
             </MenuItem>
         </ContextMenu>
@@ -55,7 +64,8 @@ SpriteSelectorItem.propTypes = {
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func.isRequired,
+    onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool.isRequired
 };
 

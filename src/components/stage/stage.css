@@ -1,4 +1,5 @@
 @import "../../css/units.css";
+@import "../../css/colors.css";
 
 .stage {
     /*
@@ -7,21 +8,40 @@
     */
     display: block;
 
-    border-radius: $space;
-
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent;
 }
 
-.stage-wrapper {
-    position: relative;
+.with-color-picker {
+    cursor: none;
+    z-index: 2001;
 }
 
-.monitor-wrapper {
+.color-picker-background {
+    position: absolute;;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: block;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+}
+
+.stage-wrapper {
+    position: relative;
+    border-radius: $space;
+    border: 1px solid $ui-pane-border;
+    /* Keep the canvas inside the border radius */
+    overflow: hidden;
+}
+
+.monitor-wrapper, .color-picker-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
+    overflow: hidden;
 }

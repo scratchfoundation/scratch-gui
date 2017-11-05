@@ -66,8 +66,8 @@ module.exports = {
             }]
         },
         {
-            test: /\.svg$/,
-            loader: 'svg-url-loader?noquotes'
+            test: /\.(svg|png|wav)$/,
+            loader: 'file-loader'
         }]
     },
     plugins: [
@@ -99,6 +99,15 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: 'node_modules/scratch-blocks/media',
             to: 'static/blocks-media'
+        }]),
+        new CopyWebpackPlugin([{
+            from: 'extensions/**',
+            to: 'static',
+            context: 'src/examples'
+        }]),
+        new CopyWebpackPlugin([{
+            from: 'extension-worker.{js,js.map}',
+            context: 'node_modules/scratch-vm/dist/web'
         }])
     ].concat(process.env.NODE_ENV === 'production' ? [
         new webpack.optimize.UglifyJsPlugin({

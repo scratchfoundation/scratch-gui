@@ -1,4 +1,5 @@
 @import "../../css/units.css";
+@import "../../css/colors.css";
 
 .stage {
     /*
@@ -6,8 +7,6 @@
         of the element, which messes up the chrome padding consistency
     */
     display: block;
-
-    border-radius: $space;
 
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent;
@@ -31,6 +30,10 @@
 
 .stage-wrapper {
     position: relative;
+    border-radius: $space;
+    border: 1px solid $ui-pane-border;
+    /* Keep the canvas inside the border radius */
+    overflow: hidden;
 }
 
 .monitor-wrapper, .color-picker-wrapper {

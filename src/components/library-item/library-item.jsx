@@ -4,6 +4,7 @@ import React from 'react';
 
 import Box from '../box/box.jsx';
 import styles from './library-item.css';
+import classNames from 'classnames';
 
 class LibraryItem extends React.PureComponent {
     constructor (props) {
@@ -25,7 +26,26 @@ class LibraryItem extends React.PureComponent {
         this.props.onMouseLeave(this.props.id);
     }
     render () {
-        return (
+        return this.props.featured ? (
+            <div
+                className={classNames(styles.libraryItem, styles.featuredItem)}
+                onClick={this.handleClick}
+            >
+                <div>
+                    <img
+                        className={styles.featuredImage}
+                        src={this.props.iconURL}
+                    />
+                </div>
+                <div
+                    className={styles.featuredText}
+                >
+                    <span className={styles.libraryItemName}>{this.props.name}</span>
+                    <br />
+                    <span className={styles.featuredDescription}>{this.props.description}</span>
+                </div>
+            </div>
+        ) : (
             <Box
                 className={styles.libraryItem}
                 onClick={this.handleClick}
@@ -48,6 +68,8 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
+    description: PropTypes.string,
+    featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

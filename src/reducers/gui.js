@@ -6,6 +6,7 @@ import monitorReducer from './monitors';
 import targetReducer from './targets';
 import toolboxReducer from './toolbox';
 import vmReducer from './vm';
+import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
     colorPicker: colorPickerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     monitors: monitorReducer,
     targets: targetReducer,
     toolbox: toolboxReducer,
-    vm: vmReducer
+    vm: vmReducer,
+    scratchPaint: ScratchPaintReducer
 });

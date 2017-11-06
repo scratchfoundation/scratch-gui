@@ -11,7 +11,8 @@ class SpriteSelectorItem extends React.Component {
         super(props);
         bindAll(this, [
             'handleClick',
-            'handleDelete'
+            'handleDelete',
+            'handleDuplicate'
         ]);
     }
     handleClick (e) {
@@ -24,6 +25,10 @@ class SpriteSelectorItem extends React.Component {
             this.props.onDeleteButtonClick(this.props.id);
         }
     }
+    handleDuplicate (e) {
+        e.stopPropagation(); // To prevent from bubbling back to handleClick
+        this.props.onDuplicateButtonClick(this.props.id);
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -31,6 +36,7 @@ class SpriteSelectorItem extends React.Component {
             id,
             onClick,
             onDeleteButtonClick,
+            onDuplicateButtonClick,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
@@ -38,6 +44,7 @@ class SpriteSelectorItem extends React.Component {
             <SpriteSelectorItemComponent
                 onClick={this.handleClick}
                 onDeleteButtonClick={this.handleDelete}
+                onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
                 {...props}
             />
         );
@@ -50,7 +57,8 @@ SpriteSelectorItem.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func,
+    onDeleteButtonClick: PropTypes.func.isRequired,
+    onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool
 };
 

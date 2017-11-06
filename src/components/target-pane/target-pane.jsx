@@ -7,7 +7,6 @@ import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import SoundLibrary from '../../containers/sound-library.jsx';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
-import ExtensionLibrary from '../../containers/extension-library.jsx';
 
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
@@ -22,7 +21,6 @@ import styles from './target-pane.css';
  */
 const TargetPane = ({
     editingTarget,
-    extensionLibraryVisible,
     backdropLibraryVisible,
     costumeLibraryVisible,
     soundLibraryVisible,
@@ -34,12 +32,12 @@ const TargetPane = ({
     onChangeSpriteX,
     onChangeSpriteY,
     onDeleteSprite,
+    onDuplicateSprite,
     onNewSpriteClick,
     onRequestCloseBackdropLibrary,
     onRequestCloseCostumeLibrary,
     onRequestCloseSoundLibrary,
     onRequestCloseSpriteLibrary,
-    onRequestCloseExtensionLibrary,
     onSelectSprite,
     stage,
     sprites,
@@ -61,6 +59,7 @@ const TargetPane = ({
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onDuplicateSprite={onDuplicateSprite}
             onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
@@ -76,12 +75,6 @@ const TargetPane = ({
                 onSelect={onSelectSprite}
             />}
             <div>
-                {extensionLibraryVisible ? (
-                    <ExtensionLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseExtensionLibrary}
-                    />
-                ) : null}
                 {spriteLibraryVisible ? (
                     <SpriteLibrary
                         vm={vm}
@@ -141,6 +134,7 @@ TargetPane.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,

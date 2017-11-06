@@ -1,5 +1,6 @@
 import React from 'react';
-import ProjectLoaderHOC, {ProjectLoader} from '../../../src/lib/project-loader-hoc.jsx';
+import ProjectLoaderHOC from '../../../src/lib/project-loader-hoc.jsx';
+import storage from '../../../src/lib/storage';
 import {mount} from 'enzyme';
 
 describe('ProjectLoaderHOC', () => {
@@ -7,34 +8,41 @@ describe('ProjectLoaderHOC', () => {
         const Component = ({projectData}) => <div>{projectData}</div>;
         const WrappedComponent = ProjectLoaderHOC(Component);
         window.location.hash = '#winning';
-        ProjectLoader.load = jest.fn((id, cb) => cb(null, null));
+        const originalLoad = storage.load;
+        storage.load = jest.fn(() => Promise.resolve(null));
         const mounted = mount(<WrappedComponent />);
-        ProjectLoader.load.mockRestore();
+        storage.load = originalLoad;
         window.location.hash = '';
-        expect(mounted.find('div').exists()).toEqual(false);
+        const mountedDiv = mounted.find('div');
+        expect(mountedDiv.exists()).toEqual(false);
     });
 
     test('when there is no hash, it loads the default project', () => {
         const Component = ({projectData}) => <div>{projectData}</div>;
         const WrappedComponent = ProjectLoaderHOC(Component);
         window.location.hash = '';
+        const originalLoad = storage.load;
+        storage.load = jest.fn((type, id) => Promise.resolve(id));
         const mounted = mount(<WrappedComponent />);
-        expect(mounted.find('div').text()).toEqual(JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA));
+        expect(mounted.state().projectId).toEqual(0);
+        expect(storage.load).toHaveBeenCalledWith(
+            storage.AssetType.Project, 0, storage.DataFormat.JSON
+        );
+        storage.load = originalLoad;
     });
 
     test('when there is a hash, it tries to load that project', () => {
         const Component = ({projectData}) => <div>{projectData}</div>;
         const WrappedComponent = ProjectLoaderHOC(Component);
         window.location.hash = '#winning';
-        ProjectLoader.load = jest.fn((id, cb) => cb(null, id));
+        const originalLoad = storage.load;
+        storage.load = jest.fn((type, id) => Promise.resolve({data: id}));
         const mounted = mount(<WrappedComponent />);
-        mounted.update();
-        ProjectLoader.load.mockRestore();
-        window.location.hash = '';
-        expect(mounted
-            .find('div')
-            .text()
-        ).toEqual('winning');
+        expect(mounted.state().projectId).toEqual('winning');
+        expect(storage.load).toHaveBeenLastCalledWith(
+            storage.AssetType.Project, 'winning', storage.DataFormat.JSON
+        );
+        storage.load = originalLoad;
     });
 
     test('when hash change happens, the project data state is changed', () => {
@@ -42,10 +50,12 @@ describe('ProjectLoaderHOC', () => {
         const WrappedComponent = ProjectLoaderHOC(Component);
         window.location.hash = '';
         const mounted = mount(<WrappedComponent />);
-        const before = mounted.find('div').text();
-        ProjectLoader.load = jest.fn((id, cb) => cb(null, id));
-        window.location.hash = `#winning`;
-        mounted.node.updateProject();
-        expect(mounted.find('div').text()).not.toEqual(before);
+        expect(mounted.state().projectId).toEqual(0);
+        const originalLoad = storage.load;
+        storage.load = jest.fn((type, id) => Promise.resolve({data: id}));
+        window.location.hash = '#winning';
+        mounted.instance().updateProject();
+        expect(mounted.state().projectId).toEqual('winning');
+        storage.load = originalLoad;
     });
 });

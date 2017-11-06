@@ -1,26 +1,7 @@
 import React from 'react';
-import xhr from 'xhr';
 
 import log from './log';
-import emptyProject from './empty-project.json';
-
-class ProjectLoaderConstructor {
-    get DEFAULT_PROJECT_DATA () {
-        return emptyProject;
-    }
-
-    load (id, callback) {
-        callback = callback || (err => log.error(err));
-        xhr({
-            uri: `https://projects.scratch.mit.edu/internalapi/project/${id}/get/`
-        }, (err, res, body) => {
-            if (err) return callback(err);
-            callback(null, body);
-        });
-    }
-}
-
-const ProjectLoader = new ProjectLoaderConstructor();
+import storage from './storage';
 
 /* Higher Order Component to provide behavior for loading projects by id from
  * the window's hash (#this part in the url)
@@ -35,12 +16,22 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             this.updateProject = this.updateProject.bind(this);
             this.state = {
                 projectId: null,
-                projectData: this.fetchProjectId().length ? null : JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
+                projectData: null
             };
         }
         componentDidMount () {
             window.addEventListener('hashchange', this.updateProject);
             this.updateProject();
+        }
+        componentDidUpdate (prevProps, prevState) {
+            if (this.state.projectId !== prevState.projectId) {
+                storage
+                    .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
+                    .then(projectAsset => projectAsset && this.setState({
+                        projectData: projectAsset.data.toString()
+                    }))
+                    .catch(err => log.error(err));
+            }
         }
         componentWillUnmount () {
             window.removeEventListener('hashchange', this.updateProject);
@@ -49,18 +40,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             return window.location.hash.substring(1);
         }
         updateProject () {
-            const projectId = this.fetchProjectId();
+            let projectId = this.fetchProjectId();
             if (projectId !== this.state.projectId) {
-                if (projectId.length < 1) {
-                    return this.setState({
-                        projectId: projectId,
-                        projectData: JSON.stringify(ProjectLoader.DEFAULT_PROJECT_DATA)
-                    });
-                }
-                ProjectLoader.load(projectId, (err, body) => {
-                    if (err) return log.error(err);
-                    this.setState({projectData: body});
-                });
+                if (projectId.length < 1) projectId = 0;
                 this.setState({projectId: projectId});
             }
         }
@@ -80,6 +62,5 @@ const ProjectLoaderHOC = function (WrappedComponent) {
 
 
 export {
-    ProjectLoaderHOC as default,
-    ProjectLoader
+    ProjectLoaderHOC as default
 };

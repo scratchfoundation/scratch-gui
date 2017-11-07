@@ -434,6 +434,15 @@ const sensing = `
             </value>
         </block>
         ${blockSeparator}
+        <block type="sensing_askandwait">
+            <value name="QUESTION">
+                <shadow type="text">
+                    <field name="TEXT">What's your name?</field>
+                </shadow>
+            </value>
+        </block>
+        <block id="answer" type="sensing_answer"/>
+        ${blockSeparator}
         <block type="sensing_keypressed">
             <value name="KEY_OPTION">
                 <shadow type="sensing_keyoptions"/>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
-import extensionLibraryContent from '../lib/libraries/extensions.json';
+import extensionLibraryContent from '../lib/libraries/extensions/index';
 
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/sprite-selector/icon--sprite.svg';
@@ -19,7 +19,13 @@ class ExtensionLibrary extends React.PureComponent {
         // eslint-disable-next-line no-alert
         const url = item.extensionURL || prompt('Enter the URL of the extension');
         if (url) {
-            this.props.vm.extensionManager.loadExtensionURL(url);
+            if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
+                this.props.onCategorySelected(item.name);
+            } else {
+                this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
+                    this.props.onCategorySelected(item.name);
+                });
+            }
         }
     }
     render () {
@@ -40,6 +46,7 @@ class ExtensionLibrary extends React.PureComponent {
 }
 
 ExtensionLibrary.propTypes = {
+    onCategorySelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types

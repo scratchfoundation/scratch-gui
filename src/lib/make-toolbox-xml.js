@@ -1,78 +1,6 @@
-const separator = '<sep gap="45"/>';
+const categorySeparator = '<sep gap="36"/>';
 
-const top = `
-    <category name="Top" colour="#FFFFFF" secondaryColour="#CCCCCC">
-        <block type="event_whenflagclicked"/>
-        <block type="event_whenkeypressed">
-        </block>
-        <block type="event_whenthisspriteclicked"/>
-        <block type="motion_movesteps">
-            <value name="STEPS">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_turnright">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_ifonedgebounce"/>
-        <block type="sound_playuntildone">
-            <value name="SOUND_MENU">
-                <shadow type="sound_sounds_menu"/>
-            </value>
-        </block>
-        <block type="looks_sayforsecs">
-            <value name="MESSAGE">
-                <shadow type="text">
-                    <field name="TEXT">Hello!</field>
-                </shadow>
-            </value>
-            <value name="SECS">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="looks_changeeffectby">
-            <value name="CHANGE">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="control_repeat">
-            <value name="TIMES">
-                <shadow type="math_whole_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="control_wait">
-            <value name="DURATION">
-                <shadow type="math_positive_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="operator_random">
-            <value name="FROM">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-`;
+const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
@@ -97,6 +25,7 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="motion_pointindirection">
             <value name="DIRECTION">
                 <shadow type="math_angle">
@@ -110,6 +39,7 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="motion_gotoxy">
             <value name="X">
                 <shadow id="movex" type="math_number">
@@ -156,6 +86,7 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="motion_changexby">
             <value name="DX">
                 <shadow type="math_number">
@@ -184,11 +115,15 @@ const motion = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="motion_ifonedgebounce"/>
+        ${blockSeparator}
         <block type="motion_setrotationstyle"/>
-        <block type="motion_xposition"/>
-        <block type="motion_yposition"/>
-        <block type="motion_direction"/>
+        ${blockSeparator}
+        <block id="xposition" type="motion_xposition"/>
+        <block id="yposition" type="motion_yposition"/>
+        <block id="direction" type="motion_direction"/>
+        ${categorySeparator}
     </category>
 `;
 
@@ -232,8 +167,10 @@ const looks = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="looks_show"/>
         <block type="looks_hide"/>
+        ${blockSeparator}
         <block type="looks_switchcostumeto">
             <value name="COSTUME">
                 <shadow type="looks_costume"/>
@@ -251,6 +188,7 @@ const looks = `
                 <shadow type="looks_backdrops"/>
             </value>
         </block>
+        ${blockSeparator}
         <block type="looks_changeeffectby">
             <value name="CHANGE">
                 <shadow type="math_number">
@@ -266,6 +204,7 @@ const looks = `
             </value>
         </block>
         <block type="looks_cleargraphiceffects"/>
+        ${blockSeparator}
         <block type="looks_changesizeby">
             <value name="CHANGE">
                 <shadow type="math_number">
@@ -280,6 +219,7 @@ const looks = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="looks_gotofront"/>
         <block type="looks_gobacklayers">
             <value name="NUM">
@@ -288,10 +228,12 @@ const looks = `
                 </shadow>
             </value>
         </block>
-        <block type="looks_costumeorder"/>
-        <block type="looks_backdroporder"/>
-        <block type="looks_backdropname"/>
-        <block type="looks_size"/>
+        ${blockSeparator}
+        <block id="costumeorder" type="looks_costumeorder"/>
+        <block id="backdroporder" type="looks_backdroporder"/>
+        <block id="backdropname" type="looks_backdropname"/>
+        <block id="size" type="looks_size"/>
+        ${categorySeparator}
     </category>
 `;
 
@@ -308,6 +250,7 @@ const sound = `
             </value>
         </block>
         <block type="sound_stopallsounds"/>
+        ${blockSeparator}
         <block type="sound_playdrumforbeats">
             <value name="DRUM">
                 <shadow type="sound_drums_menu"/>
@@ -325,6 +268,7 @@ const sound = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="sound_playnoteforbeats">
             <value name="NOTE">
                 <shadow type="math_number">
@@ -342,6 +286,7 @@ const sound = `
                 <shadow type="sound_instruments_menu"/>
             </value>
         </block>
+        ${blockSeparator}
         <block type="sound_changeeffectby">
             <value name="VALUE">
                 <shadow type="math_number">
@@ -357,6 +302,7 @@ const sound = `
             </value>
         </block>
         <block type="sound_cleareffects"/>
+        ${blockSeparator}
         <block type="sound_changevolumeby">
             <value name="VOLUME">
                 <shadow type="math_number">
@@ -371,7 +317,8 @@ const sound = `
                 </shadow>
             </value>
         </block>
-        <block type="sound_volume"/>
+        <block id="volume" type="sound_volume"/>
+        ${blockSeparator}
         <block type="sound_changetempoby">
             <value name="TEMPO">
                 <shadow type="math_number">
@@ -386,7 +333,8 @@ const sound = `
                 </shadow>
             </value>
         </block>
-        <block type="sound_tempo"/>
+        <block id="tempo" type="sound_tempo"/>
+        ${categorySeparator}
     </category>
 `;
 
@@ -398,6 +346,7 @@ const events = `
         <block type="event_whenthisspriteclicked"/>
         <block type="event_whenbackdropswitchesto">
         </block>
+        ${blockSeparator}
         <block type="event_whengreaterthan">
             <value name="VALUE">
                 <shadow type="math_number">
@@ -405,6 +354,7 @@ const events = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="event_whenbroadcastreceived">
         </block>
         <block type="event_broadcast">
@@ -417,6 +367,7 @@ const events = `
                 <shadow type="event_broadcast_menu"/>
             </value>
         </block>
+        ${categorySeparator}
     </category>
 `;
 
@@ -429,6 +380,7 @@ const control = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="control_repeat">
             <value name="TIMES">
                 <shadow type="math_whole_number">
@@ -437,11 +389,14 @@ const control = `
             </value>
         </block>
         <block type="control_forever"/>
+        ${blockSeparator}
         <block type="control_if"/>
         <block type="control_if_else"/>
         <block type="control_wait_until"/>
         <block type="control_repeat_until"/>
+        ${blockSeparator}
         <block type="control_stop"/>
+        ${blockSeparator}
         <block type="control_start_as_clone"/>
         <block type="control_create_clone_of">
             <value name="CLONE_OPTION">
@@ -449,6 +404,7 @@ const control = `
             </value>
         </block>
         <block type="control_delete_this_clone"/>
+        ${categorySeparator}
     </category>
 `;
 
@@ -477,6 +433,7 @@ const sensing = `
                 <shadow type="sensing_distancetomenu"/>
             </value>
         </block>
+        ${blockSeparator}
         <block type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
@@ -484,7 +441,8 @@ const sensing = `
                 </shadow>
             </value>
         </block>
-        <block type="sensing_answer"/>
+        <block id="answer" type="sensing_answer"/>
+        ${blockSeparator}
         <block type="sensing_keypressed">
             <value name="KEY_OPTION">
                 <shadow type="sensing_keyoptions"/>
@@ -493,23 +451,28 @@ const sensing = `
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>
-        <block type="sensing_loudness"/>
-        <block type="sensing_timer"/>
+        ${blockSeparator}
+        <block id="loudness" type="sensing_loudness"/>
+        ${blockSeparator}
+        <block id="timer" type="sensing_timer"/>
         <block type="sensing_resettimer"/>
-        <block type="sensing_of">
+        ${blockSeparator}
+        <block id="of" type="sensing_of">
             <value name="PROPERTY">
-                <shadow type="sensing_of_property_menu"/>
+                <shadow id="sensing_of_property_menu" type="sensing_of_property_menu"/>
             </value>
             <value name="OBJECT">
-                <shadow type="sensing_of_object_menu"/>
+                <shadow id="sensing_of_object_menu" type="sensing_of_object_menu"/>
             </value>
         </block>
-        <block type="sensing_current">
+        ${blockSeparator}
+        <block id="current" type="sensing_current">
             <value name="CURRENTMENU">
-                <shadow type="sensing_currentmenu"/>
+                <shadow id="sensing_currentmenu" type="sensing_currentmenu"/>
             </value>
         </block>
         <block type="sensing_dayssince2000"/>
+        ${categorySeparator}
     </category>
 `;
 
@@ -563,6 +526,7 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="operator_random">
             <value name="FROM">
                 <shadow type="math_number">
@@ -575,6 +539,7 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="operator_lt">
             <value name="OPERAND1">
                 <shadow type="text">
@@ -611,9 +576,11 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="operator_and"/>
         <block type="operator_or"/>
         <block type="operator_not"/>
+        ${blockSeparator}
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
@@ -645,6 +612,19 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        <block type="operator_contains" id="operator_contains">
+          <value name="STRING1">
+            <shadow type="text">
+              <field name="TEXT">hello</field>
+            </shadow>
+          </value>
+          <value name="STRING2">
+            <shadow type="text">
+              <field name="TEXT">world</field>
+            </shadow>
+          </value>
+        </block>
+        ${blockSeparator}
         <block type="operator_mod">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -664,6 +644,7 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
         <block type="operator_mathop">
             <value name="NUM">
                 <shadow type="math_number">
@@ -671,6 +652,7 @@ const operators = `
                 </shadow>
             </value>
         </block>
+        ${categorySeparator}
     </category>
 `;
 
@@ -687,11 +669,10 @@ const xmlClose = '</xml>';
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (categoriesXML) {
-    const gap = [separator];
+    const gap = [categorySeparator];
 
     const everything = [
         xmlOpen,
-        top, gap,
         motion, gap,
         looks, gap,
         sound, gap,
@@ -707,7 +688,6 @@ const makeToolboxXML = function (categoriesXML) {
     }
 
     everything.push(xmlClose);
-
     return everything.join('\n');
 };
 

@@ -251,42 +251,6 @@ const sound = `
         </block>
         <block type="sound_stopallsounds"/>
         ${blockSeparator}
-        <block type="sound_playdrumforbeats">
-            <value name="DRUM">
-                <shadow type="sound_drums_menu"/>
-            </value>
-            <value name="BEATS">
-                <shadow type="math_number">
-                    <field name="NUM">0.25</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="sound_restforbeats">
-            <value name="BEATS">
-                <shadow type="math_number">
-                    <field name="NUM">0.25</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="sound_playnoteforbeats">
-            <value name="NOTE">
-                <shadow type="math_number">
-                    <field name="NUM">60</field>
-                </shadow>
-            </value>
-            <value name="BEATS">
-                <shadow type="math_number">
-                    <field name="NUM">0.5</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="sound_setinstrumentto">
-            <value name="INSTRUMENT">
-                <shadow type="sound_instruments_menu"/>
-            </value>
-        </block>
-        ${blockSeparator}
         <block type="sound_changeeffectby">
             <value name="VALUE">
                 <shadow type="math_number">
@@ -318,22 +282,6 @@ const sound = `
             </value>
         </block>
         <block id="volume" type="sound_volume"/>
-        ${blockSeparator}
-        <block type="sound_changetempoby">
-            <value name="TEMPO">
-                <shadow type="math_number">
-                    <field name="NUM">20</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="sound_settempotobpm">
-            <value name="TEMPO">
-                <shadow type="math_number">
-                    <field name="NUM">60</field>
-                </shadow>
-            </value>
-        </block>
-        <block id="tempo" type="sound_tempo"/>
         ${categorySeparator}
     </category>
 `;

@@ -9,11 +9,13 @@ import VM from 'scratch-vm';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
+import CustomProcedures from './custom-procedures.jsx';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary} from '../reducers/modals';
+import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -35,6 +37,7 @@ class Blocks extends React.Component {
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
+            'handleCustomProceduresClose',
             'onScriptGlowOn',
             'onScriptGlowOff',
             'onBlockGlowOn',
@@ -55,6 +58,7 @@ class Blocks extends React.Component {
     }
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
+        this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
 
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
@@ -74,7 +78,8 @@ class Blocks extends React.Component {
             this.state.prompt !== nextState.prompt ||
             this.props.isVisible !== nextProps.isVisible ||
             this.props.toolboxXML !== nextProps.toolboxXML ||
-            this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible
+            this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
+            this.props.customProceduresVisible !== nextProps.customProceduresVisible
         );
     }
     componentDidUpdate (prevProps) {
@@ -221,9 +226,14 @@ class Blocks extends React.Component {
     handlePromptClose () {
         this.setState({prompt: null});
     }
+    handleCustomProceduresClose (data) {
+        this.props.onRequestCloseCustomProcedures(data);
+        this.workspace.refreshToolboxSelection_();
+    }
     render () {
         /* eslint-disable no-unused-vars */
         const {
+            customProceduresVisible,
             extensionLibraryVisible,
             options,
             vm,
@@ -231,6 +241,7 @@ class Blocks extends React.Component {
             onActivateColorPicker,
             updateToolboxState,
             onRequestCloseExtensionLibrary,
+            onRequestCloseCustomProcedures,
             toolboxXML,
             ...props
         } = this.props;
@@ -257,15 +268,26 @@ class Blocks extends React.Component {
                         onRequestClose={onRequestCloseExtensionLibrary}
                     />
                 ) : null}
+                {customProceduresVisible ? (
+                    <CustomProcedures
+                        options={{
+                            media: options.media
+                        }}
+                        onRequestClose={this.handleCustomProceduresClose}
+                    />
+                ) : null}
             </div>
         );
     }
 }
 
 Blocks.propTypes = {
+    customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
+    onActivateCustomProcedures: PropTypes.func,
+    onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -326,13 +348,18 @@ Blocks.defaultProps = {
 
 const mapStateToProps = state => ({
     extensionLibraryVisible: state.modals.extensionLibrary,
-    toolboxXML: state.toolbox.toolboxXML
+    toolboxXML: state.toolbox.toolboxXML,
+    customProceduresVisible: state.customProcedures.active
 });
 
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
+    onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
     onRequestCloseExtensionLibrary: () => {
         dispatch(closeExtensionLibrary());
+    },
+    onRequestCloseCustomProcedures: data => {
+        dispatch(deactivateCustomProcedures(data));
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));

@@ -36,7 +36,6 @@ class Stage extends React.Component {
             mouseDownTimeoutId: null,
             mouseDownPosition: null,
             isDragging: false,
-            isZoomed: false,
             dragOffset: null,
             dragId: null,
             colorInfo: null
@@ -49,19 +48,12 @@ class Stage extends React.Component {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
     }
-    componentWillReceiveProps (nextProps) {
-        const {
-            isZoomed
-        } = nextProps;
-
-        this.setState({isZoomed: isZoomed});
-    }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.width !== nextProps.width ||
             this.props.height !== nextProps.height ||
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
-            this.state.isZoomed !== nextState.isZoomed;
+            this.props.isZoomed !== nextProps.isZoomed;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -262,9 +254,6 @@ class Stage extends React.Component {
             <StageComponent
                 canvasRef={this.setCanvas}
                 colorInfo={this.state.colorInfo}
-                height={this.props.height}
-                isZoomed={this.state.isZoomed}
-                width={this.props.width}
                 onDoubleClick={this.handleDoubleClick}
                 {...props}
             />

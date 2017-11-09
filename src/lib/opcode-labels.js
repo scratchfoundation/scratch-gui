@@ -48,6 +48,10 @@ const opcodeMap = {
     },
 
     // Sensing
+    sensing_answer: {
+        category: 'sensing',
+        label: 'answer'
+    },
     sensing_loudness: {
         category: 'sensing',
         label: 'loudness'

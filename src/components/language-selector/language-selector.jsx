@@ -18,6 +18,7 @@ const LanguageSelector = ({
                 src={languageIcon}
             />
             <select
+                aria-label="language selector"
                 className={styles.languageSelect}
                 value={currentLocale}
                 onChange={onChange}

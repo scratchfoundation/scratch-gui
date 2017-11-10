@@ -18,7 +18,7 @@ const MenuBar = function MenuBar () {
         >
             <div className={classNames(styles.logoWrapper, styles.menuItem)}>
                 <img
-                    alt="Scratch logo"
+                    alt="Scratch"
                     className={styles.scratchLogo}
                     src={scratchLogo}
                 />

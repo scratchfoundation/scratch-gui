@@ -45,9 +45,10 @@
     background: $motion-primary;
 }
 
-/* Input overrides: width, font-weight and focus outline */
+/* Input overrides: width, font-weight, focus outline and padding */
 .question-input > input {
     width: 100%;
+    padding: 0 2rem 0 0.75rem; /* To make room for the submit button */
     font-weight: normal;
 }
 

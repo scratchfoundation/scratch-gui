@@ -24,6 +24,5 @@
 }
 
 .language-select:focus {
-    border-color: white;
-    box-shadow: 0 0 0 -2px white;
+    border: 1px solid white;
 }

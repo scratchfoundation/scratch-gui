@@ -382,7 +382,7 @@ const sensing = `
             </value>
         </block>
         ${blockSeparator}
-        <block type="sensing_askandwait">
+        <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
                     <field name="TEXT">What's your name?</field>

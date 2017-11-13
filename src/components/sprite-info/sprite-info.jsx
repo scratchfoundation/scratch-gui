@@ -171,6 +171,7 @@ class SpriteInfo extends React.Component {
                                 className={classNames(styles.selectForm, styles.rotationSelect)}
                                 disabled={this.props.disabled}
                                 value={this.props.rotationStyle}
+                                tabIndex="7"
                                 onChange={this.props.onChangeRotationStyle}
                             >
                                 {ROTATION_STYLES.map(style => (

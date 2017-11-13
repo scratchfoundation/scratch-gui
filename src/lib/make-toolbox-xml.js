@@ -336,12 +336,12 @@ const control = `
                 </shadow>
             </value>
         </block>
-        <block type="control_forever"/>
+        <block id="forever" type="control_forever"/>
         ${blockSeparator}
         <block type="control_if"/>
         <block type="control_if_else"/>
-        <block type="control_wait_until"/>
-        <block type="control_repeat_until"/>
+        <block id="wait_until" type="control_wait_until"/>
+        <block id="repeat_until" type="control_repeat_until"/>
         ${blockSeparator}
         <block type="control_stop"/>
         ${blockSeparator}
@@ -382,7 +382,7 @@ const sensing = `
             </value>
         </block>
         ${blockSeparator}
-        <block type="sensing_askandwait">
+        <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
                     <field name="TEXT">What's your name?</field>

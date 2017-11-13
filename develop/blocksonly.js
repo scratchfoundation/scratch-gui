@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 454:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24,7 +24,7 @@ var _controls = __webpack_require__(32);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(97);
+var _blocks = __webpack_require__(96);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
@@ -36,7 +36,7 @@ var _projectLoaderHoc = __webpack_require__(33);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _blocksOnly = __webpack_require__(455);
+var _blocksOnly = __webpack_require__(454);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -72,13 +72,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 455:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(456);
+var content = __webpack_require__(455);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -104,7 +104,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 456:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -121,5 +121,5 @@ exports.locals = {
 
 /***/ })
 
-},[454]);
+},[453]);
 //# sourceMappingURL=blocksonly.js.map

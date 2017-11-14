@@ -46,8 +46,10 @@ class LibraryItem extends React.PureComponent {
                 </div>
             </div>
         ) : (
-            <Box
+            <div
                 className={styles.libraryItem}
+                role="button"
+                tabIndex="0"
                 onClick={this.handleClick}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
@@ -62,7 +64,7 @@ class LibraryItem extends React.PureComponent {
                     </Box>
                 </Box>
                 <span className={styles.libraryItemName}>{this.props.name}</span>
-            </Box>
+            </div>
         );
     }
 }

@@ -118,6 +118,7 @@ class SpriteInfo extends React.Component {
                                 )}
                                 tabIndex="4"
                                 onClick={this.props.onClickVisible}
+                                onKeyPress={this.props.onPressVisible}
                             >
                                 <img
                                     className={styles.icon}
@@ -134,8 +135,9 @@ class SpriteInfo extends React.Component {
                                         [styles.isDisabled]: this.props.disabled
                                     }
                                 )}
-                                tabIndex="4"
+                                tabIndex="5"
                                 onClick={this.props.onClickNotVisible}
+                                onKeyPress={this.props.onPressNotVisible}
                             >
                                 <img
                                     className={styles.icon}
@@ -153,7 +155,7 @@ class SpriteInfo extends React.Component {
                                 small
                                 disabled={this.props.disabled}
                                 label="Direction"
-                                tabIndex="5"
+                                tabIndex="6"
                                 type="text"
                                 value={this.props.disabled ? '' : this.props.direction}
                                 onSubmit={this.props.onChangeDirection}
@@ -202,6 +204,8 @@ SpriteInfo.propTypes = {
     onChangeY: PropTypes.func,
     onClickNotVisible: PropTypes.func,
     onClickVisible: PropTypes.func,
+    onPressNotVisible: PropTypes.func,
+    onPressVisible: PropTypes.func,
     rotationStyle: PropTypes.oneOf(ROTATION_STYLES),
     visible: PropTypes.bool,
     x: PropTypes.oneOfType([

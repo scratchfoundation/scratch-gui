@@ -10,7 +10,9 @@ class SpriteInfo extends React.Component {
         bindAll(this, [
             'handleChangeRotationStyle',
             'handleClickVisible',
-            'handleClickNotVisible'
+            'handleClickNotVisible',
+            'handlePressVisible',
+            'handlePressNotVisible'
         ]);
     }
     handleChangeRotationStyle (e) {
@@ -24,6 +26,18 @@ class SpriteInfo extends React.Component {
         e.preventDefault();
         this.props.onChangeVisibility(false);
     }
+    handlePressVisible (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.props.onChangeVisibility(true);
+        }
+    }
+    handlePressNotVisible (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.props.onChangeVisibility(false);
+        }
+    }
     render () {
         return (
             <SpriteInfoComponent
@@ -31,6 +45,8 @@ class SpriteInfo extends React.Component {
                 onChangeRotationStyle={this.handleChangeRotationStyle}
                 onClickNotVisible={this.handleClickNotVisible}
                 onClickVisible={this.handleClickVisible}
+                onPressNotVisible={this.handlePressNotVisible}
+                onPressVisible={this.handlePressVisible}
             />
         );
     }

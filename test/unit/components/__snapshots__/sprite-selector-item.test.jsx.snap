@@ -12,8 +12,10 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   onTouchStart={[Function]}
 >
   <div
+    aria-label="Close"
     className=""
     onClick={[Function]}
+    role="button"
   >
     <img
       className={undefined}

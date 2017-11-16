@@ -120,9 +120,9 @@ const motion = `
         ${blockSeparator}
         <block type="motion_setrotationstyle"/>
         ${blockSeparator}
-        <block id="xposition" type="motion_xposition"/>
-        <block id="yposition" type="motion_yposition"/>
-        <block id="direction" type="motion_direction"/>
+        <block id="<TARGET_ID>_xposition" type="motion_xposition"/>
+        <block id="<TARGET_ID>_yposition" type="motion_yposition"/>
+        <block id="<TARGET_ID>_direction" type="motion_direction"/>
         ${categorySeparator}
     </category>
 `;
@@ -229,10 +229,10 @@ const looks = `
             </value>
         </block>
         ${blockSeparator}
-        <block id="costumeorder" type="looks_costumeorder"/>
+        <block id="<TARGET_ID>_costumeorder" type="looks_costumeorder"/>
         <block id="backdroporder" type="looks_backdroporder"/>
         <block id="backdropname" type="looks_backdropname"/>
-        <block id="size" type="looks_size"/>
+        <block id="<TARGET_ID>_size" type="looks_size"/>
         ${categorySeparator}
     </category>
 `;
@@ -613,10 +613,11 @@ const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
 /**
+ * @param {!string} targetId - The current editing target
  * @param {string?} categoriesXML - null for default toolbox, or an XML string with <category> elements.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
-const makeToolboxXML = function (categoriesXML) {
+const makeToolboxXML = function (targetId, categoriesXML) {
     const gap = [categorySeparator];
 
     const everything = [
@@ -636,7 +637,9 @@ const makeToolboxXML = function (categoriesXML) {
     }
 
     everything.push(xmlClose);
-    return everything.join('\n');
+    return everything.join('\n').split('<TARGET_ID>')
+        .join(targetId); // targetIds are designed to not break XML.
+    // @todo consider something less hacky?
 };
 
 export default makeToolboxXML;

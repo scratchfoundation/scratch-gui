@@ -172,6 +172,11 @@ class Blocks extends React.Component {
         this.workspace.reportValue(data.id, data.value);
     }
     onWorkspaceUpdate (data) {
+        // When we change sprites, update the toolbox to have the new sprite's blocks
+        if (this.props.vm.editingTarget) {
+            this.props.updateToolboxState(makeToolboxXML(this.props.vm.editingTarget.id));
+        }
+
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
@@ -193,8 +198,8 @@ class Blocks extends React.Component {
     handleExtensionAdded (blocksInfo) {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-        const toolboxXML = makeToolboxXML(dynamicBlocksXML);
-        this.props.onExtensionAdded(toolboxXML);
+        const toolboxXML = makeToolboxXML(this.props.vm.editingTarget.id, dynamicBlocksXML);
+        this.props.updateToolboxState(toolboxXML);
     }
     handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
@@ -220,7 +225,7 @@ class Blocks extends React.Component {
             vm,
             isVisible,
             onActivateColorPicker,
-            onExtensionAdded,
+            updateToolboxState,
             onRequestCloseExtensionLibrary,
             toolboxXML,
             ...props
@@ -257,7 +262,6 @@ Blocks.propTypes = {
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
-    onExtensionAdded: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -281,6 +285,7 @@ Blocks.propTypes = {
         comments: PropTypes.bool
     }),
     toolboxXML: PropTypes.string,
+    updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -322,11 +327,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
-    onExtensionAdded: toolboxXML => {
-        dispatch(updateToolbox(toolboxXML));
-    },
     onRequestCloseExtensionLibrary: () => {
         dispatch(closeExtensionLibrary());
+    },
+    updateToolboxState: toolboxXML => {
+        dispatch(updateToolbox(toolboxXML));
     }
 });
 

@@ -184,6 +184,8 @@ class Blocks extends React.Component {
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
+        // @todo This line rerenders toolbox, and the change in the toolbox XML also rerenders the toolbox.
+        // We should only rerender the toolbox once. See https://github.com/LLK/scratch-gui/issues/901
         this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
         this.workspace.addChangeListener(this.props.vm.blockListener);
 

@@ -59,6 +59,7 @@ class Blocks extends React.Component {
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
+        this.props.vm.setLocale(this.props.locale, this.props.messages);
 
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
@@ -79,10 +80,15 @@ class Blocks extends React.Component {
             this.props.isVisible !== nextProps.isVisible ||
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
-            this.props.customProceduresVisible !== nextProps.customProceduresVisible
+            this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
+            this.props.locale !== nextProps.locale
         );
     }
     componentDidUpdate (prevProps) {
+        if (prevProps.locale !== this.props.locale) {
+            this.props.vm.setLocale(this.props.locale, this.props.messages);
+        }
+
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
             this.workspace.updateToolbox(this.props.toolboxXML);
@@ -288,6 +294,8 @@ Blocks.propTypes = {
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
+    locale: PropTypes.string,
+    messages: PropTypes.objectOf(PropTypes.string),
     onActivateColorPicker: PropTypes.func,
     onActivateCustomProcedures: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
@@ -351,6 +359,8 @@ Blocks.defaultProps = {
 
 const mapStateToProps = state => ({
     extensionLibraryVisible: state.modals.extensionLibrary,
+    locale: state.intl.locale,
+    messages: state.intl.messages,
     toolboxXML: state.toolbox.toolboxXML,
     customProceduresVisible: state.customProcedures.active
 });

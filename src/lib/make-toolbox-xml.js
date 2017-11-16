@@ -2,7 +2,8 @@ const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
-const motion = `
+const motion = function (targetId) {
+    return `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
         <block type="motion_movesteps">
             <value name="STEPS">
@@ -120,14 +121,16 @@ const motion = `
         ${blockSeparator}
         <block type="motion_setrotationstyle"/>
         ${blockSeparator}
-        <block id="<TARGET_ID>_xposition" type="motion_xposition"/>
-        <block id="<TARGET_ID>_yposition" type="motion_yposition"/>
-        <block id="<TARGET_ID>_direction" type="motion_direction"/>
+        <block id="${targetId}_xposition" type="motion_xposition"/>
+        <block id="${targetId}_yposition" type="motion_yposition"/>
+        <block id="${targetId}_direction" type="motion_direction"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const looks = `
+const looks = function (targetId) {
+    return `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
@@ -229,15 +232,17 @@ const looks = `
             </value>
         </block>
         ${blockSeparator}
-        <block id="<TARGET_ID>_costumeorder" type="looks_costumeorder"/>
+        <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
         <block id="backdroporder" type="looks_backdroporder"/>
         <block id="backdropname" type="looks_backdropname"/>
-        <block id="<TARGET_ID>_size" type="looks_size"/>
+        <block id="${targetId}_size" type="looks_size"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const sound = `
+const sound = function () {
+    return `
     <category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
         <block type="sound_play">
             <value name="SOUND_MENU">
@@ -284,9 +289,11 @@ const sound = `
         <block id="volume" type="sound_volume"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const events = `
+const events = function () {
+    return `
     <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
@@ -317,9 +324,11 @@ const events = `
         </block>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const control = `
+const control = function () {
+    return `
     <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
             <value name="DURATION">
@@ -354,9 +363,11 @@ const control = `
         <block type="control_delete_this_clone"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const sensing = `
+const sensing = function () {
+    return `
     <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         <block type="sensing_touchingobject">
             <value name="TOUCHINGOBJECTMENU">
@@ -422,9 +433,11 @@ const sensing = `
         <block type="sensing_dayssince2000"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const operators = `
+const operators = function () {
+    return `
     <category name="Operators" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
             <value name="NUM1">
@@ -602,12 +615,15 @@ const operators = `
         </block>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const data = `
+const data = function () {
+    return `
     <category name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
     </category>
-`;
+    `;
+};
 
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
@@ -622,14 +638,14 @@ const makeToolboxXML = function (targetId, categoriesXML) {
 
     const everything = [
         xmlOpen,
-        motion, gap,
-        looks, gap,
-        sound, gap,
-        events, gap,
-        control, gap,
-        sensing, gap,
-        operators, gap,
-        data
+        motion(targetId), gap,
+        looks(targetId), gap,
+        sound(targetId), gap,
+        events(targetId), gap,
+        control(targetId), gap,
+        sensing(targetId), gap,
+        operators(targetId), gap,
+        data(targetId)
     ];
 
     if (categoriesXML) {
@@ -637,9 +653,7 @@ const makeToolboxXML = function (targetId, categoriesXML) {
     }
 
     everything.push(xmlClose);
-    return everything.join('\n').split('<TARGET_ID>')
-        .join(targetId); // targetIds are designed to not break XML.
-    // @todo consider something less hacky?
+    return everything.join('\n');
 };
 
 export default makeToolboxXML;

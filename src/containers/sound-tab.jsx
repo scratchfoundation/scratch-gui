@@ -57,11 +57,11 @@ class SoundTab extends React.Component {
             onNewSoundFromRecordingClick
         } = this.props;
 
-        const sprite = vm.editingTarget.sprite;
-
-        if (!sprite) {
+        if (!vm.editingTarget) {
             return null;
         }
+
+        const sprite = vm.editingTarget.sprite;
 
         const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {

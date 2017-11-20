@@ -16,6 +16,7 @@ class SeleniumHelper {
             'findByXpath',
             'getDriver',
             'getLogs',
+            'loadUri',
             'rightClickText'
         ]);
     }
@@ -33,6 +34,14 @@ class SeleniumHelper {
 
     findByText (text, scope) {
         return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+    }
+
+    loadUri (uri) {
+        return this.driver
+            .get(`file://${uri}`)
+            .then(() => (
+                this.driver.executeScript('window.onbeforeunload = undefined;')
+            ));
     }
 
     clickXpath (xpath) {

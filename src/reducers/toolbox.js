@@ -1,9 +1,9 @@
 const UPDATE_TOOLBOX = 'scratch-gui/toolbox/UPDATE_TOOLBOX';
-
 import makeToolboxXML from '../lib/make-toolbox-xml';
 
 const initialState = {
-    toolboxXML: makeToolboxXML()
+    // @todo switch this to make the stage's XML
+    toolboxXML: makeToolboxXML('')
 };
 
 const reducer = function (state, action) {

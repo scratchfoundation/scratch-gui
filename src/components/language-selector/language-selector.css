@@ -22,3 +22,7 @@
     color: #3373cc;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.language-select:focus {
+    border: 1px solid white;
+}

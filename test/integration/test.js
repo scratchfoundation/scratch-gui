@@ -8,7 +8,9 @@ const {
     findByText,
     findByXpath,
     getDriver,
-    getLogs
+    getLogs,
+    loadUri,
+    rightClickText
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -34,9 +36,8 @@ describe('costumes, sounds and variables', () => {
         await driver.quit();
     });
 
-
     test('Blocks report when clicked in the toolbox', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Operators', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -47,7 +48,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Switching sprites updates the block menus', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Sound', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "meow" sound block should be visible
@@ -60,7 +61,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Adding a costume', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Costumes');
         await clickText('Add Costume');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
@@ -73,16 +74,21 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Adding a sound', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Sounds');
+
+        // Delete the sound
+        await rightClickText('meow', soundsTabScope);
+        await clickText('delete', soundsTabScope);
+        await driver.switchTo().alert()
+            .accept();
+
+        // Add a sound
         await clickText('Add Sound');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('meow', soundsTabScope);
         await clickText('chomp', soundsTabScope);
-        await clickXpath('//button[@title="Play"]');
-        await clickText('meow', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');
@@ -99,7 +105,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Load a project by ID', async () => {
         const projectId = '96708228';
-        await driver.get(`file://${uri}#${projectId}`);
+        await loadUri(`${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -109,7 +115,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Creating variables', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Data', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -133,7 +139,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Importing extensions', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Extensions');
         await clickText('Pen', modalScope); // Modal closes

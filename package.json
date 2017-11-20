@@ -78,7 +78,7 @@
     "react-responsive": "3.0.0",
     "react-style-proptype": "3.1.0",
     "react-tabs": "2.1.1",
-    "react-test-renderer": "16.1.0",
+    "react-test-renderer": "16.1.1",
     "redux": "3.7.0",
     "redux-mock-store": "^1.2.3",
     "redux-throttle": "0.1.1",

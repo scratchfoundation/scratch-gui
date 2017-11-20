@@ -54,8 +54,11 @@ describe('costumes, sounds and variables', () => {
         // "meow" sound block should be visible
         await findByText('meow', blocksTabScope);
         await clickText('Backdrops'); // Switch to the backdrop
-        // Now "pop" sound block should be visible
+        // Now "pop" sound block should be visible and motion blocks hidden
         await findByText('pop', blocksTabScope);
+        await clickText('Motion', blocksTabScope);
+        await findByText('Stage selected: no motion blocks');
+
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });

@@ -6,6 +6,8 @@ webpackJsonp([0],{
 "use strict";
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -31,6 +33,13 @@ var _index = __webpack_require__(451);
 var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
+    // Warn before navigating away
+    window.onbeforeunload = function () {
+        return true;
+    };
+}
 
 var App = (0, _appStateHoc2.default)((0, _projectLoaderHoc2.default)(_gui2.default));
 

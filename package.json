@@ -75,7 +75,7 @@
     "react-intl-redux": "0.7.0",
     "react-modal": "3.1.2",
     "react-redux": "5.0.6",
-    "react-responsive": "3.0.0",
+    "react-responsive": "4.0.0",
     "react-style-proptype": "3.1.0",
     "react-tabs": "2.1.1",
     "react-test-renderer": "16.1.1",

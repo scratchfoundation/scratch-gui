@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
-const {By, until} = webdriver;
+const {By, until, Button} = webdriver;
 
 class SeleniumHelper {
     constructor () {
@@ -15,7 +15,8 @@ class SeleniumHelper {
             'findByText',
             'findByXpath',
             'getDriver',
-            'getLogs'
+            'getLogs',
+            'rightClickText'
         ]);
     }
 
@@ -40,6 +41,12 @@ class SeleniumHelper {
 
     clickText (text, scope) {
         return this.findByText(text, scope).then(el => el.click());
+    }
+
+    rightClickText (text, scope) {
+        return this.findByText(text, scope).then(el => this.driver.actions()
+            .click(el, Button.RIGHT)
+            .perform());
     }
 
     clickButton (text) {

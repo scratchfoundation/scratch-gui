@@ -8,7 +8,8 @@ const {
     findByText,
     findByXpath,
     getDriver,
-    getLogs
+    getLogs,
+    rightClickText
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -33,7 +34,6 @@ describe('costumes, sounds and variables', () => {
     afterAll(async () => {
         await driver.quit();
     });
-
 
     test('Blocks report when clicked in the toolbox', async () => {
         await driver.get(`file://${uri}`);
@@ -75,14 +75,19 @@ describe('costumes, sounds and variables', () => {
     test('Adding a sound', async () => {
         await driver.get(`file://${uri}`);
         await clickText('Sounds');
+
+        // Delete the sound
+        await rightClickText('meow', soundsTabScope);
+        await clickText('delete', soundsTabScope);
+        await driver.switchTo().alert()
+            .accept();
+
+        // Add a sound
         await clickText('Add Sound');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('meow', soundsTabScope);
         await clickText('chomp', soundsTabScope);
-        await clickXpath('//button[@title="Play"]');
-        await clickText('meow', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');

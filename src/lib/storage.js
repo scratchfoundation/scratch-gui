@@ -27,7 +27,7 @@ class Storage extends ScratchStorage {
         );
         this.addWebSource(
             [this.AssetType.Sound],
-            asset => `/static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
+            asset => `static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
         );
         defaultProjectAssets.forEach(asset => this.cache(
             this.AssetType[asset.assetType],

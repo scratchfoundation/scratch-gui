@@ -46,7 +46,7 @@ class LibraryItem extends React.PureComponent {
                 </div>
             </div>
         ) : (
-            <div
+            <Box
                 className={styles.libraryItem}
                 role="button"
                 tabIndex="0"
@@ -64,7 +64,7 @@ class LibraryItem extends React.PureComponent {
                     </Box>
                 </Box>
                 <span className={styles.libraryItemName}>{this.props.name}</span>
-            </div>
+            </Box>
         );
     }
 }

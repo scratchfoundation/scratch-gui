@@ -7,6 +7,7 @@ import closeIcon from './icon--close.svg';
 
 const CloseButton = props => (
     <div
+        aria-label="Close"
         className={classNames(
             styles.closeButton,
             props.className,
@@ -15,6 +16,7 @@ const CloseButton = props => (
                 [styles.large]: props.size === CloseButton.SIZE_LARGE
             }
         )}
+        role="button"
         onClick={props.onClick}
     >
         <img

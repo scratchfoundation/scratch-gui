@@ -2,9 +2,12 @@ const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
-const motion = function (targetId) {
+const motion = function (isStage, targetId) {
     return `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
+        ${isStage ? `
+        <label text="Stage selected: no motion blocks"></label>
+        ` : `
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -123,15 +126,16 @@ const motion = function (targetId) {
         ${blockSeparator}
         <block id="${targetId}_xposition" type="motion_xposition"/>
         <block id="${targetId}_yposition" type="motion_yposition"/>
-        <block id="${targetId}_direction" type="motion_direction"/>
+        <block id="${targetId}_direction" type="motion_direction"/>`}
         ${categorySeparator}
     </category>
     `;
 };
 
-const looks = function (targetId) {
+const looks = function (isStage, targetId) {
     return `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+        ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
@@ -174,23 +178,32 @@ const looks = function (targetId) {
         <block type="looks_show"/>
         <block type="looks_hide"/>
         ${blockSeparator}
-        <block type="looks_switchcostumeto">
-            <value name="COSTUME">
-                <shadow type="looks_costume"/>
-            </value>
-        </block>
-        <block type="looks_nextcostume"/>
-        <block type="looks_nextbackdrop"/>
-        <block type="looks_switchbackdropto">
-            <value name="BACKDROP">
-                <shadow type="looks_backdrops"/>
-            </value>
-        </block>
-        <block type="looks_switchbackdroptoandwait">
-            <value name="BACKDROP">
-                <shadow type="looks_backdrops"/>
-            </value>
-        </block>
+        `}
+        ${isStage ? `
+            <block type="looks_switchbackdropto">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+            <block type="looks_switchbackdroptoandwait">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+            <block type="looks_nextbackdrop"/>
+        ` : `
+            <block type="looks_switchcostumeto">
+                <value name="COSTUME">
+                    <shadow type="looks_costume"/>
+                </value>
+            </block>
+            <block type="looks_nextcostume"/>
+            <block type="looks_switchbackdropto">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+        `}
         ${blockSeparator}
         <block type="looks_changeeffectby">
             <value name="CHANGE">
@@ -208,34 +221,40 @@ const looks = function (targetId) {
         </block>
         <block type="looks_cleargraphiceffects"/>
         ${blockSeparator}
-        <block type="looks_changesizeby">
-            <value name="CHANGE">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="looks_setsizeto">
-            <value name="SIZE">
-                <shadow type="math_number">
-                    <field name="NUM">100</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="looks_gotofront"/>
-        <block type="looks_gobacklayers">
-            <value name="NUM">
-                <shadow type="math_integer">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
-        <block id="backdroporder" type="looks_backdroporder"/>
-        <block id="backdropname" type="looks_backdropname"/>
-        <block id="${targetId}_size" type="looks_size"/>
+        ${isStage ? '' : `
+            <block type="looks_changesizeby">
+                <value name="CHANGE">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="looks_setsizeto">
+                <value name="SIZE">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+            ${blockSeparator}
+            <block type="looks_gotofront"/>
+            <block type="looks_gobacklayers">
+                <value name="NUM">
+                    <shadow type="math_integer">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+            ${blockSeparator}
+        `}
+        ${isStage ? `
+            <block id="backdroporder" type="looks_backdroporder"/>
+            <block id="backdropname" type="looks_backdropname"/>
+        ` : `
+            <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
+            <block id="backdropname" type="looks_backdropname"/>
+            <block id="${targetId}_size" type="looks_size"/>
+        `}
         ${categorySeparator}
     </category>
     `;
@@ -327,7 +346,7 @@ const events = function () {
     `;
 };
 
-const control = function () {
+const control = function (isStage) {
     return `
     <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
@@ -354,45 +373,55 @@ const control = function () {
         ${blockSeparator}
         <block type="control_stop"/>
         ${blockSeparator}
-        <block type="control_start_as_clone"/>
-        <block type="control_create_clone_of">
-            <value name="CLONE_OPTION">
-                <shadow type="control_create_clone_of_menu"/>
-            </value>
-        </block>
-        <block type="control_delete_this_clone"/>
+        ${isStage ? `
+            <block type="control_create_clone_of">
+                <value name="CLONE_OPTION">
+                    <shadow type="control_create_clone_of_menu"/>
+                </value>
+            </block>
+        ` : `
+            <block type="control_start_as_clone"/>
+            <block type="control_create_clone_of">
+                <value name="CLONE_OPTION">
+                    <shadow type="control_create_clone_of_menu"/>
+                </value>
+            </block>
+            <block type="control_delete_this_clone"/>
+        `}
         ${categorySeparator}
     </category>
     `;
 };
 
-const sensing = function () {
+const sensing = function (isStage) {
     return `
     <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
-        <block type="sensing_touchingobject">
-            <value name="TOUCHINGOBJECTMENU">
-                <shadow type="sensing_touchingobjectmenu"/>
-            </value>
-        </block>
-        <block type="sensing_touchingcolor">
-            <value name="COLOR">
-                <shadow type="colour_picker"/>
-            </value>
-        </block>
-        <block type="sensing_coloristouchingcolor">
-            <value name="COLOR">
-                <shadow type="colour_picker"/>
-            </value>
-            <value name="COLOR2">
-                <shadow type="colour_picker"/>
-            </value>
-        </block>
-        <block type="sensing_distanceto">
-            <value name="DISTANCETOMENU">
-                <shadow type="sensing_distancetomenu"/>
-            </value>
-        </block>
-        ${blockSeparator}
+        ${isStage ? '' : `
+            <block type="sensing_touchingobject">
+                <value name="TOUCHINGOBJECTMENU">
+                    <shadow type="sensing_touchingobjectmenu"/>
+                </value>
+            </block>
+            <block type="sensing_touchingcolor">
+                <value name="COLOR">
+                    <shadow type="colour_picker"/>
+                </value>
+            </block>
+            <block type="sensing_coloristouchingcolor">
+                <value name="COLOR">
+                    <shadow type="colour_picker"/>
+                </value>
+                <value name="COLOR2">
+                    <shadow type="colour_picker"/>
+                </value>
+            </block>
+            <block type="sensing_distanceto">
+                <value name="DISTANCETOMENU">
+                    <shadow type="sensing_distancetomenu"/>
+                </value>
+            </block>
+            ${blockSeparator}
+        `}
         <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
@@ -629,23 +658,24 @@ const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
 /**
- * @param {!string} targetId - The current editing target
+ * @param {!boolean} isStage - Whether the toolbox is for a stage-type target.
+ * @param {?string} targetId - The current editing target
  * @param {string?} categoriesXML - null for default toolbox, or an XML string with <category> elements.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
-const makeToolboxXML = function (targetId, categoriesXML) {
+const makeToolboxXML = function (isStage, targetId, categoriesXML) {
     const gap = [categorySeparator];
 
     const everything = [
         xmlOpen,
-        motion(targetId), gap,
-        looks(targetId), gap,
-        sound(targetId), gap,
-        events(targetId), gap,
-        control(targetId), gap,
-        sensing(targetId), gap,
-        operators(targetId), gap,
-        data(targetId)
+        motion(isStage, targetId), gap,
+        looks(isStage, targetId), gap,
+        sound(isStage, targetId), gap,
+        events(isStage, targetId), gap,
+        control(isStage, targetId), gap,
+        sensing(isStage, targetId), gap,
+        operators(isStage, targetId), gap,
+        data(isStage, targetId)
     ];
 
     if (categoriesXML) {

@@ -174,7 +174,8 @@ class Blocks extends React.Component {
     onWorkspaceUpdate (data) {
         // When we change sprites, update the toolbox to have the new sprite's blocks
         if (this.props.vm.editingTarget) {
-            this.props.updateToolboxState(makeToolboxXML(this.props.vm.editingTarget.id));
+            const target = this.props.vm.editingTarget;
+            this.props.updateToolboxState(makeToolboxXML(target.isStage, target.id));
         }
 
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
@@ -200,7 +201,8 @@ class Blocks extends React.Component {
     handleExtensionAdded (blocksInfo) {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-        const toolboxXML = makeToolboxXML(this.props.vm.editingTarget.id, dynamicBlocksXML);
+        const target = this.props.vm.editingTarget;
+        const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
         this.props.updateToolboxState(toolboxXML);
     }
     handleCategorySelected (categoryName) {

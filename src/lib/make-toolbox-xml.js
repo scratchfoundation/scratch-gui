@@ -252,7 +252,7 @@ const looks = function (isStage, targetId) {
             <block id="backdropname" type="looks_backdropname"/>
         ` : `
             <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
-            <block id="backdroporder" type="looks_backdroporder"/>
+            <block id="backdropname" type="looks_backdropname"/>
             <block id="${targetId}_size" type="looks_size"/>
         `}
         ${categorySeparator}

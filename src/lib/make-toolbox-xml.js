@@ -654,6 +654,13 @@ const data = function () {
     `;
 };
 
+const more = function () {
+    return `
+    <category name="More" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
+    </category>
+    `;
+};
+
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -675,7 +682,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML) {
         control(isStage, targetId), gap,
         sensing(isStage, targetId), gap,
         operators(isStage, targetId), gap,
-        data(isStage, targetId)
+        data(isStage, targetId), gap,
+        more(isStage, targetId)
     ];
 
     if (categoriesXML) {

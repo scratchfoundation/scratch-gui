@@ -2,7 +2,7 @@ const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
-const motion = function (targetId, isStage) {
+const motion = function (isStage, targetId) {
     return `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
         ${isStage ? `
@@ -132,7 +132,7 @@ const motion = function (targetId, isStage) {
     `;
 };
 
-const looks = function (targetId, isStage) {
+const looks = function (isStage, targetId) {
     return `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
@@ -346,7 +346,7 @@ const events = function () {
     `;
 };
 
-const control = function (_targetId, isStage) {
+const control = function (isStage) {
     return `
     <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
@@ -393,7 +393,7 @@ const control = function (_targetId, isStage) {
     `;
 };
 
-const sensing = function (_targetId, isStage) {
+const sensing = function (isStage) {
     return `
     <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
@@ -658,24 +658,24 @@ const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
 /**
- * @param {!string} targetId - The current editing target
  * @param {!boolean} isStage - Whether the toolbox is for a stage-type target.
+ * @param {!string} targetId - The current editing target
  * @param {string?} categoriesXML - null for default toolbox, or an XML string with <category> elements.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
-const makeToolboxXML = function (targetId, isStage, categoriesXML) {
+const makeToolboxXML = function (isStage, targetId, categoriesXML) {
     const gap = [categorySeparator];
 
     const everything = [
         xmlOpen,
-        motion(targetId, isStage), gap,
-        looks(targetId, isStage), gap,
-        sound(targetId, isStage), gap,
-        events(targetId, isStage), gap,
-        control(targetId, isStage), gap,
-        sensing(targetId, isStage), gap,
-        operators(targetId, isStage), gap,
-        data(targetId, isStage)
+        motion(isStage, targetId), gap,
+        looks(isStage, targetId), gap,
+        sound(isStage, targetId), gap,
+        events(isStage, targetId), gap,
+        control(isStage, targetId), gap,
+        sensing(isStage, targetId), gap,
+        operators(isStage, targetId), gap,
+        data(isStage, targetId)
     ];
 
     if (categoriesXML) {

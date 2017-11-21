@@ -659,7 +659,7 @@ const xmlClose = '</xml>';
 
 /**
  * @param {!boolean} isStage - Whether the toolbox is for a stage-type target.
- * @param {!string} targetId - The current editing target
+ * @param {?string} targetId - The current editing target
  * @param {string?} categoriesXML - null for default toolbox, or an XML string with <category> elements.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */

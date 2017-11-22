@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
+import Question from '../../containers/question.jsx';
 import styles from './stage.css';
 
 const StageComponent = props => {
@@ -16,6 +17,8 @@ const StageComponent = props => {
         width,
         colorInfo,
         onDeactivateColorPicker,
+        question,
+        onQuestionAnswered,
         ...boxProps
     } = props;
     let heightCorrectedAspect = window.innerHeight - 40;
@@ -47,6 +50,12 @@ const StageComponent = props => {
                         <Loupe colorInfo={colorInfo} />
                     </Box>
                 ) : null}
+                {question === null ? null : (
+                    <Question
+                        question={question}
+                        onQuestionAnswered={onQuestionAnswered}
+                    />
+                )}
             </Box>
             {isColorPicking ? (
                 <Box
@@ -69,6 +78,12 @@ const StageComponent = props => {
                 <Box className={styles.monitorWrapper}>
                     <MonitorList />
                 </Box>
+                {question === null ? null : (
+                    <Question
+                        question={question}
+                        onQuestionAnswered={onQuestionAnswered}
+                    />
+                )}
             </Box>
         </div>
     );
@@ -80,6 +95,8 @@ StageComponent.propTypes = {
     isColorPicking: PropTypes.bool,
     isZoomed: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
+    onQuestionAnswered: PropTypes.func,
+    question: PropTypes.string,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

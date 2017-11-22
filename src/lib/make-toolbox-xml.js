@@ -2,8 +2,12 @@ const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
-const motion = `
+const motion = function (isStage, targetId) {
+    return `
     <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
+        ${isStage ? `
+        <label text="Stage selected: no motion blocks"></label>
+        ` : `
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -120,15 +124,18 @@ const motion = `
         ${blockSeparator}
         <block type="motion_setrotationstyle"/>
         ${blockSeparator}
-        <block id="xposition" type="motion_xposition"/>
-        <block id="yposition" type="motion_yposition"/>
-        <block id="direction" type="motion_direction"/>
+        <block id="${targetId}_xposition" type="motion_xposition"/>
+        <block id="${targetId}_yposition" type="motion_yposition"/>
+        <block id="${targetId}_direction" type="motion_direction"/>`}
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const looks = `
+const looks = function (isStage, targetId) {
+    return `
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+        ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
@@ -171,23 +178,32 @@ const looks = `
         <block type="looks_show"/>
         <block type="looks_hide"/>
         ${blockSeparator}
-        <block type="looks_switchcostumeto">
-            <value name="COSTUME">
-                <shadow type="looks_costume"/>
-            </value>
-        </block>
-        <block type="looks_nextcostume"/>
-        <block type="looks_nextbackdrop"/>
-        <block type="looks_switchbackdropto">
-            <value name="BACKDROP">
-                <shadow type="looks_backdrops"/>
-            </value>
-        </block>
-        <block type="looks_switchbackdroptoandwait">
-            <value name="BACKDROP">
-                <shadow type="looks_backdrops"/>
-            </value>
-        </block>
+        `}
+        ${isStage ? `
+            <block type="looks_switchbackdropto">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+            <block type="looks_switchbackdroptoandwait">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+            <block type="looks_nextbackdrop"/>
+        ` : `
+            <block type="looks_switchcostumeto">
+                <value name="COSTUME">
+                    <shadow type="looks_costume"/>
+                </value>
+            </block>
+            <block type="looks_nextcostume"/>
+            <block type="looks_switchbackdropto">
+                <value name="BACKDROP">
+                    <shadow type="looks_backdrops"/>
+                </value>
+            </block>
+        `}
         ${blockSeparator}
         <block type="looks_changeeffectby">
             <value name="CHANGE">
@@ -205,39 +221,47 @@ const looks = `
         </block>
         <block type="looks_cleargraphiceffects"/>
         ${blockSeparator}
-        <block type="looks_changesizeby">
-            <value name="CHANGE">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="looks_setsizeto">
-            <value name="SIZE">
-                <shadow type="math_number">
-                    <field name="NUM">100</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="looks_gotofront"/>
-        <block type="looks_gobacklayers">
-            <value name="NUM">
-                <shadow type="math_integer">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block id="costumeorder" type="looks_costumeorder"/>
-        <block id="backdroporder" type="looks_backdroporder"/>
-        <block id="backdropname" type="looks_backdropname"/>
-        <block id="size" type="looks_size"/>
+        ${isStage ? '' : `
+            <block type="looks_changesizeby">
+                <value name="CHANGE">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="looks_setsizeto">
+                <value name="SIZE">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+            ${blockSeparator}
+            <block type="looks_gotofront"/>
+            <block type="looks_gobacklayers">
+                <value name="NUM">
+                    <shadow type="math_integer">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+            ${blockSeparator}
+        `}
+        ${isStage ? `
+            <block id="backdroporder" type="looks_backdroporder"/>
+            <block id="backdropname" type="looks_backdropname"/>
+        ` : `
+            <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
+            <block id="backdropname" type="looks_backdropname"/>
+            <block id="${targetId}_size" type="looks_size"/>
+        `}
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const sound = `
+const sound = function () {
+    return `
     <category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
         <block type="sound_play">
             <value name="SOUND_MENU">
@@ -284,9 +308,11 @@ const sound = `
         <block id="volume" type="sound_volume"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const events = `
+const events = function () {
+    return `
     <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
@@ -317,9 +343,11 @@ const events = `
         </block>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const control = `
+const control = function (isStage) {
+    return `
     <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
             <value name="DURATION">
@@ -336,53 +364,65 @@ const control = `
                 </shadow>
             </value>
         </block>
-        <block type="control_forever"/>
+        <block id="forever" type="control_forever"/>
         ${blockSeparator}
         <block type="control_if"/>
         <block type="control_if_else"/>
-        <block type="control_wait_until"/>
-        <block type="control_repeat_until"/>
+        <block id="wait_until" type="control_wait_until"/>
+        <block id="repeat_until" type="control_repeat_until"/>
         ${blockSeparator}
         <block type="control_stop"/>
         ${blockSeparator}
-        <block type="control_start_as_clone"/>
-        <block type="control_create_clone_of">
-            <value name="CLONE_OPTION">
-                <shadow type="control_create_clone_of_menu"/>
-            </value>
-        </block>
-        <block type="control_delete_this_clone"/>
+        ${isStage ? `
+            <block type="control_create_clone_of">
+                <value name="CLONE_OPTION">
+                    <shadow type="control_create_clone_of_menu"/>
+                </value>
+            </block>
+        ` : `
+            <block type="control_start_as_clone"/>
+            <block type="control_create_clone_of">
+                <value name="CLONE_OPTION">
+                    <shadow type="control_create_clone_of_menu"/>
+                </value>
+            </block>
+            <block type="control_delete_this_clone"/>
+        `}
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const sensing = `
+const sensing = function (isStage) {
+    return `
     <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
-        <block type="sensing_touchingobject">
-            <value name="TOUCHINGOBJECTMENU">
-                <shadow type="sensing_touchingobjectmenu"/>
-            </value>
-        </block>
-        <block type="sensing_touchingcolor">
-            <value name="COLOR">
-                <shadow type="colour_picker"/>
-            </value>
-        </block>
-        <block type="sensing_coloristouchingcolor">
-            <value name="COLOR">
-                <shadow type="colour_picker"/>
-            </value>
-            <value name="COLOR2">
-                <shadow type="colour_picker"/>
-            </value>
-        </block>
-        <block type="sensing_distanceto">
-            <value name="DISTANCETOMENU">
-                <shadow type="sensing_distancetomenu"/>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="sensing_askandwait">
+        ${isStage ? '' : `
+            <block type="sensing_touchingobject">
+                <value name="TOUCHINGOBJECTMENU">
+                    <shadow type="sensing_touchingobjectmenu"/>
+                </value>
+            </block>
+            <block type="sensing_touchingcolor">
+                <value name="COLOR">
+                    <shadow type="colour_picker"/>
+                </value>
+            </block>
+            <block type="sensing_coloristouchingcolor">
+                <value name="COLOR">
+                    <shadow type="colour_picker"/>
+                </value>
+                <value name="COLOR2">
+                    <shadow type="colour_picker"/>
+                </value>
+            </block>
+            <block type="sensing_distanceto">
+                <value name="DISTANCETOMENU">
+                    <shadow type="sensing_distancetomenu"/>
+                </value>
+            </block>
+            ${blockSeparator}
+        `}
+        <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
                     <field name="TEXT">What's your name?</field>
@@ -422,9 +462,11 @@ const sensing = `
         <block type="sensing_dayssince2000"/>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const operators = `
+const operators = function () {
+    return `
     <category name="Operators" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
             <value name="NUM1">
@@ -602,33 +644,38 @@ const operators = `
         </block>
         ${categorySeparator}
     </category>
-`;
+    `;
+};
 
-const data = `
+const data = function () {
+    return `
     <category name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
     </category>
-`;
+    `;
+};
 
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
 /**
+ * @param {!boolean} isStage - Whether the toolbox is for a stage-type target.
+ * @param {?string} targetId - The current editing target
  * @param {string?} categoriesXML - null for default toolbox, or an XML string with <category> elements.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
-const makeToolboxXML = function (categoriesXML) {
+const makeToolboxXML = function (isStage, targetId, categoriesXML) {
     const gap = [categorySeparator];
 
     const everything = [
         xmlOpen,
-        motion, gap,
-        looks, gap,
-        sound, gap,
-        events, gap,
-        control, gap,
-        sensing, gap,
-        operators, gap,
-        data
+        motion(isStage, targetId), gap,
+        looks(isStage, targetId), gap,
+        sound(isStage, targetId), gap,
+        events(isStage, targetId), gap,
+        control(isStage, targetId), gap,
+        sensing(isStage, targetId), gap,
+        operators(isStage, targetId), gap,
+        data(isStage, targetId)
     ];
 
     if (categoriesXML) {

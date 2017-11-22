@@ -65,6 +65,13 @@ export default function (vm) {
         return sprites;
     };
 
+    const cloneMenu = function () {
+        if (vm.editingTarget && vm.editingTarget.isStage) {
+            return spriteMenu();
+        }
+        return [['myself', '_myself_']].concat(spriteMenu());
+    };
+
     const soundColors = ScratchBlocks.Colours.sounds;
 
     const looksColors = ScratchBlocks.Colours.looks;
@@ -143,9 +150,7 @@ export default function (vm) {
     };
 
     ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
-        const json = jsonForMenuBlock('CLONE_OPTION', spriteMenu, controlColors, [
-            ['myself', '_myself_']
-        ]);
+        const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
         this.jsonInit(json);
     };
 

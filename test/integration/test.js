@@ -156,6 +156,9 @@ describe('costumes, sounds and variables', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('stamp', blocksTabScope); // Would fail if didn't scroll back
 
+        // Make sure switching sprites doesn't clear extensions
+        await clickText('Backdrops'); // Switch to the backdrop
+        await findByText('Pen', blocksTabScope); // Pen extension should still be loaded
 
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);

@@ -78,12 +78,19 @@ const StageComponent = props => {
                 <Box className={styles.monitorWrapper}>
                     <MonitorList />
                 </Box>
-                {question === null ? null : (
-                    <Question
-                        question={question}
-                        onQuestionAnswered={onQuestionAnswered}
-                    />
-                )}
+                <div className={styles.stageOverlayContent}>
+                    <div
+                        className={styles.questionWrapper}
+                        style={{width: widthCorrectedAspect}}
+                    >
+                        {question === null ? null : (
+                            <Question
+                                question={question}
+                                onQuestionAnswered={onQuestionAnswered}
+                            />
+                        )}
+                    </div>
+                </div>
             </Box>
         </div>
     );

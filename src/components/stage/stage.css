@@ -59,7 +59,11 @@
     justify-content: center;
 }
 
-.monitor-wrapper, .color-picker-wrapper {
+.question-wrapper {
+    position: absolute;
+}
+
+.monitor-wrapper, .color-picker-wrapper, .queston-wrapper {
     position: absolute;
     top: 0;
     left: 0;

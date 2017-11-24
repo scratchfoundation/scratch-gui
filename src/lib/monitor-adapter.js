@@ -37,7 +37,7 @@ export default function ({id, spriteName, index, opcode, params, value, x, y}) {
     if (isUndefined(y)) y = PADDING + (index * (PADDING + MONITOR_HEIGHT));
     
     // If value is a number, round it to six decimal places
-    if (!isNaN(value)) {
+    if (typeof value === "number" || (typeof value === "string" && String(parseFloat(value)) === value)) {
         value = Number(Number(value).toFixed(6));
     }
     

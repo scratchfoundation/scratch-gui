@@ -126,7 +126,7 @@ describe('costumes, sounds and variables', () => {
             .window()
             .setSize(1920, 1080);
         const projectId = '96708228';
-        await driver.get(`file://${uri}#${projectId}`);
+        await loadUri(`${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Zoom Control"]');
         await clickXpath('//img[@title="Go"]');

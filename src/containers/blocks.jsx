@@ -175,7 +175,9 @@ class Blocks extends React.Component {
         // When we change sprites, update the toolbox to have the new sprite's blocks
         if (this.props.vm.editingTarget) {
             const target = this.props.vm.editingTarget;
-            this.props.updateToolboxState(makeToolboxXML(target.isStage, target.id));
+            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+            this.props.updateToolboxState(toolboxXML);
         }
 
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {

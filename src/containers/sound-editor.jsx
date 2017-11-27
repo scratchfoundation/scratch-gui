@@ -124,6 +124,7 @@ class SoundEditor extends React.Component {
         const samples = this.undoStack.pop();
         if (samples) {
             this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.handlePlay();
         }
     }
     handleRedo () {
@@ -131,6 +132,7 @@ class SoundEditor extends React.Component {
         if (samples) {
             this.undoStack.push(this.props.samples.slice(0));
             this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.handlePlay();
         }
     }
     render () {

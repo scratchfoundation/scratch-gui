@@ -69,7 +69,7 @@
     "raw-loader": "0.5.1",
     "react": "16.2.0",
     "react-contextmenu": "2.8.0",
-    "react-dom": "16.1.1",
+    "react-dom": "16.2.0",
     "react-draggable": "3.0.3",
     "react-intl": "2.4.0",
     "react-intl-redux": "0.6.0",

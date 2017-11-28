@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 454:
+/***/ 401:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,33 +10,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(13);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _appStateHoc = __webpack_require__(27);
+var _appStateHoc = __webpack_require__(21);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _controls = __webpack_require__(32);
+var _controls = __webpack_require__(24);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(96);
+var _blocks = __webpack_require__(69);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(30);
+var _gui = __webpack_require__(22);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(33);
+var _projectLoaderHoc = __webpack_require__(25);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _blocksOnly = __webpack_require__(455);
+var _blocksOnly = __webpack_require__(402);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -72,13 +72,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 455:
+/***/ 402:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(456);
+var content = __webpack_require__(403);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -104,7 +104,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 456:
+/***/ 403:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -121,5 +121,5 @@ exports.locals = {
 
 /***/ })
 
-},[454]);
+},[401]);
 //# sourceMappingURL=blocksonly.js.map

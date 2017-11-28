@@ -25,11 +25,9 @@ class LibraryComponent extends React.Component {
         };
     }
     handleBlur (id) {
-        console.log('library handling blur');
         this.handleMouseLeave(id);
     }
     handleFocus (id) {
-        console.log('library handling focus');
         this.handleMouseEnter(id);
     }
     handleSelect (id) {
@@ -75,8 +73,8 @@ class LibraryComponent extends React.Component {
                                 id={index}
                                 key={`item_${index}`}
                                 name={dataItem.name}
-                                onFocus={this.handleFocus}
                                 onBlur={this.handleBlur}
+                                onFocus={this.handleFocus}
                                 onMouseEnter={this.handleMouseEnter}
                                 onMouseLeave={this.handleMouseLeave}
                                 onSelect={this.handleSelect}

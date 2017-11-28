@@ -17,10 +17,10 @@ class LibraryItem extends React.PureComponent {
             'handleMouseLeave'
         ]);
     }
-    handleBlur (e) {
+    handleBlur () {
         this.props.onBlur(this.props.id);
     }
-    handleFocus (e) {
+    handleFocus () {
         this.props.onFocus(this.props.id);
     }
     handleClick (e) {
@@ -59,8 +59,8 @@ class LibraryItem extends React.PureComponent {
                 role="button"
                 tabIndex="0"
                 onBlur={this.handleBlur}
-                onFocus={this.handleFocus}
                 onClick={this.handleClick}
+                onFocus={this.handleFocus}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >

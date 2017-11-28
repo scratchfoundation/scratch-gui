@@ -1,1423 +1,166 @@
 [
     {
-        "name": "atom playground",
-        "md5": "dd85f581a3ba8d590543bd6e87d6fd14.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-            ]
-    },
-    {
-        "name": "baseball-field",
-        "md5": "6b3d87ba2a7f89be703163b6c1d4c964.png",
-        "type": "backdrop",
-        "tags": [
-            "sports"
-        ],
-        "info": [
-            960,
-            720,
-            2
-        ]
-    },
-    {
-        "name": "basketball-court1-a",
-        "md5": "c3464cbe80c4d3adb225383d9e84b5d4.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "basketball-court1-b",
-        "md5": "2dbde2ae53f2744b87be09581281610f.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "beach malibu",
-        "md5": "fd66e7be2200f27f6475b8673c8214ab.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "underwater",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "beach rio",
-        "md5": "968f0ede6e70e1dbb763d6fd4c5003e0.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "sports"
-        ],
-        "info": [
-            960,
-            720
-        ]
-    },
-    {
-        "name": "bedroom1",
-        "md5": "4230e474051a8ec30fa766871489e330.gif",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "bedroom2",
-        "md5": "181916364097d7e7e24a761534a64a48.gif",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "bench with view",
-        "md5": "38fd6334f8cfdbc80619adcb006a2da5.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "berkeley mural",
-        "md5": "e79adb9aba060af11c37b4781f91feb9.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "blue sky",
+        "name": "Blue Sky",
         "md5": "32c395c60534db0e100c962cdbb1d7a7.svg",
         "type": "backdrop",
-        "tags": [
-            "flying",
-            "outdoors",
-            "nature"
-        ],
+        "tags": [],
         "info": [
-            492,
-            367
+            245,
+            183,
+            1
         ]
     },
     {
-        "name": "blue sky2",
+        "name": "Blue Sky2",
         "md5": "d4db494dcf0e5ddbac875a437c2f166a.svg",
         "type": "backdrop",
-        "tags": [
-            "flying",
-            "outdoors",
-            "nature",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            240,
+            180,
             1
         ]
     },
     {
-        "name": "blue sky3",
+        "name": "Blue Sky3",
         "md5": "5a0159578408d7da9bac6d2379cabfe1.svg",
         "type": "backdrop",
-        "tags": [
-            "flying",
-            "outdoors",
-            "nature",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            240,
+            179,
             1
         ]
     },
     {
-        "name": "boardwalk",
-        "md5": "acbae935194a383f9200b99bbc0697bf.jpg",
-        "type": "backdrop",
-        "tags": [
-            "music-and-dance",
-            "outdoors",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "brick wall and stairs",
-        "md5": "31b49fc0b7593aadb804a0bd5c069fc5.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "brick wall1",
-        "md5": "4f234884958b11023d44abc010ad50ec.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "brick wall2",
-        "md5": "900041259dd4cf03d5d1e15e928b5dbf.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "building at mit",
-        "md5": "fe5e3566965f9de793beeffce377d054.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "canyon",
-        "md5": "e9d5577287db24f92b6447c7fbd8fcc0.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "castle1",
-        "md5": "033f926829a446a28970f59302b0572d.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "castle"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "castle2",
-        "md5": "e70cff23d246dff3174903b42353848c.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "castle"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "castle3",
-        "md5": "e2730c93885bf3f61b0d8cd79050f556.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "castle"
-        ],
-        "info": [
-            480,
-            359,
-            1
-        ]
-    },
-    {
-        "name": "castle4",
-        "md5": "392fd702b7ad08c467fa96dfc732feb3.png",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "castle"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "castle5",
-        "md5": "a4d3b1643090c8d28e85b8a3bb3f344c.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "castle"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "chalkboard",
-        "md5": "56db999ade99274a76ae7717eb256e06.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "circles",
+        "name": "Circles",
         "md5": "4e29033ec2b891a8f1ca21242811d403.svg",
         "type": "backdrop",
-        "tags": [
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            364,
+            240,
+            180,
             1
         ]
     },
     {
-        "name": "city with water",
-        "md5": "a1b28b2a48a3609b5b0562a53bc797bd.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "city with water2",
-        "md5": "35a49599b015bdb0d77e389471b1146a.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "clothing store",
-        "md5": "0ad4262c47875748b626dc41aad4c10b.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "desert",
-        "md5": "5e012b80c8c2c99be0bff0e24e9d6342.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "doily",
-        "md5": "074ee3f137e955fbf169bcf3cfbd8a8f.svg",
-        "type": "backdrop",
-        "tags": [
-            "holiday",
-            "other"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "driveway",
-        "md5": "16c84de201792c1ce1954686ceb8f4eb.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "flower bed",
-        "md5": "4b6314596a007a6a9ddb0430458c5133.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "flowers",
-        "md5": "63499cf8a5dc32a78ed8ba6b114f0a4b.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "forest",
-        "md5": "2c6429f7d3be6415851ff9915cc0e7b7.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "garden rock",
-        "md5": "7a70c9cd40754733cde1db6cf83eef49.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "gingerbread",
-        "md5": "a4fa918fb6ac923835dc1b4f3cce317c.png",
-        "type": "backdrop",
-        "tags": [
-            "holiday"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "goal1",
-        "md5": "7aad07c010c0df9f2682701463d98c37.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "goal2",
-        "md5": "ddd4f56b8de53c46638089726fdd354c.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "graffiti",
-        "md5": "ff2749b1ac5d35011576dabfee7cb7fa.jpg",
-        "type": "backdrop",
-        "tags": [
-            "music-and-dance",
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "grand canyon",
-        "md5": "9792b60aeb8005f2191d6c84abfdc61b.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "gravel desert",
-        "md5": "245a2c52dbbedeea390c3e22d49430c0.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "greek theater",
-        "md5": "34d1a90d0075b4c057c8bce42a7c2463.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "hall",
-        "md5": "5da017ab11b920a262f2553a4186e23e.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "hallway outdoors",
-        "md5": "9e7c48d569daeb76d976f7a674198528.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "hay field",
-        "md5": "d1b761a18f525a2a20caa2a5da12bbf1.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "hearts1",
+        "name": "Hearts1",
         "md5": "4bfd6a761ff985e342acbf2e07f63526.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            362,
+            240,
+            181,
             1
         ]
     },
     {
-        "name": "hearts2",
+        "name": "Hearts2",
         "md5": "b6602e32d55ed75eaea1b646f61b6c17.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            362,
+            240,
+            181,
             1
         ]
     },
     {
-        "name": "hill",
-        "md5": "857b121a567626fe88159215c5373742.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "flying"
-        ],
-        "info": [
-            480,
-            362,
-            1
-        ]
-    },
-    {
-        "name": "houses",
-        "md5": "7d5dda5b40d6d8217f3b3cd9d71755b1.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "kitchen",
-        "md5": "586e4724e1af9fddec64f83d90997c4a.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "lake",
-        "md5": "07338ae08528c6d7ca542f9da016c025.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "light",
+        "name": "Light",
         "md5": "4b98c07876ed8997c3762e75790507b4.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            494,
-            372,
+            246,
+            185,
             1
         ]
     },
     {
-        "name": "metro1",
-        "md5": "a532a0529ba13c17e3c8fd32d25693ae.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "moon",
-        "md5": "98758dc52f937a33a565c933f8eb9358.jpg",
-        "type": "backdrop",
-        "tags": [
-            "other",
-            "space"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "neon tunnel",
-        "md5": "7f7b9943a3824c6bd2576f8768f286b1.svg",
-        "type": "backdrop",
-        "tags": [
-            "space",
-            "sports",
-            "other"
-        ],
-        "info": [
-            495,
-            376,
-            1
-        ]
-    },
-    {
-        "name": "night city with street",
-        "md5": "03a38fe7e5ce233f145e3a5b6b96b4bf.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "night city",
-        "md5": "761f9ed01b0f96650fcc77b4c6cc8219.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "parking-ramp",
-        "md5": "9f523828fb41da9a040623e25a7df6ea.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "party",
+        "name": "Party",
         "md5": "108160d0e44d1c340182e31c9dc0758a.svg",
         "type": "backdrop",
-        "tags": [
-            "indoors",
-            "holiday",
-            "music-and-dance"
-        ],
+        "tags": [],
         "info": [
-            503,
-            380,
+            251,
+            189,
             1
         ]
     },
     {
-        "name": "party room",
-        "md5": "30e8c3fd0be6f40b37785d83b8153b21.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "pathway",
-        "md5": "a944ac0c1fc3e3b8feef0ddf691de726.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "playing-field",
-        "md5": "2de108f3098e92f5c5976cf75d38e99d.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "sports"
-        ],
-        "info": [
-            960,
-            720,
-            2
-        ]
-    },
-    {
-        "name": "pool",
-        "md5": "6d92c738150a821531061bcc9743c44c.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "purple",
+        "name": "Purple",
         "md5": "b16a7870ab4287f0f46816b3c5061c9f.svg",
         "type": "backdrop",
-        "tags": [
-            "flying",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            240,
+            180,
             1
         ]
     },
     {
-        "name": "rays",
+        "name": "Rays",
         "md5": "87e963282db9e020e8c4d075891ea12b.svg",
         "type": "backdrop",
-        "tags": [
-            "other"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            240,
+            180,
             1
         ]
     },
     {
-        "name": "room1",
-        "md5": "c283de2416525f69cd8655053022d34a.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "room2",
-        "md5": "7c1afda6967294c8256b389516c83dfc.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "room3",
-        "md5": "61e3239fe9e0600cf11218b89f94a051.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "route66",
-        "md5": "943ed51116fbbf4d4cd18a5f08274a18.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "school1",
-        "md5": "52d676e1f3e1cd8995e7040af39b9667.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "school2",
-        "md5": "85fda24ae18655fed894f2017914dca2.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "slopes",
-        "md5": "a22b84c4cfd6b108eebf69398473c9cb.svg",
-        "type": "backdrop",
-        "tags": [
-            "holiday",
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "space",
+        "name": "Space",
         "md5": "b579aeeb143e79c47e2e65cbd3c0fe36.svg",
         "type": "backdrop",
-        "tags": [
-            "flying",
-            "space"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            240,
+            180,
             1
         ]
     },
     {
-        "name": "sparkling",
-        "md5": "a2c28220872e715ef729c82fd12c2668.svg",
-        "type": "backdrop",
-        "tags": [
-            "holiday"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "spotlight-stage",
-        "md5": "871a93bbd5547e3ad3a95eaa1d63c5e8.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "spotlight-stage2",
+        "name": "Spotlight-stage2",
         "md5": "12288218b23a264c84bd3c22bd03e90a.svg",
         "type": "backdrop",
-        "tags": [
-            "indoors",
-            "music-and-dance"
-        ],
+        "tags": [],
         "info": [
-            496,
-            364,
+            248,
+            181,
             1
         ]
     },
     {
-        "name": "stage1",
-        "md5": "99c5e811cfdac4d08ff9b9b0d4404412.png",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "stage2",
-        "md5": "350ae82c294d50f64bf75964d4a0cd2d.png",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "music-and-dance"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "stars",
-        "md5": "552e05774979b3ec52fd1251e01eb032.gif",
-        "type": "backdrop",
-        "tags": [
-            "space"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "stripes",
+        "name": "Stripes",
         "md5": "a6a21f5c08d586e8daaebde37c97fb6f.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday",
-            "other"
-        ],
+        "tags": [],
         "info": [
-            495,
-            369
-        ]
-    },
-    {
-        "name": "the movies inside",
-        "md5": "fb64c872492a50bd0e0b17157fbb098d.jpg",
-        "type": "backdrop",
-        "tags": [
-            "indoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
+            247,
+            184,
             1
         ]
     },
     {
-        "name": "the movies outside",
-        "md5": "df281f3cc7f437c31d0ad45b72315d81.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "track",
-        "md5": "4588d5d6560068fc7d4204c911cdc8d5.svg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "sports"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "train tracks1",
-        "md5": "4641f5115f12b7b7be000915af958048.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "train tracks2",
-        "md5": "642b12186c7f9488a0bf509c4d6572cd.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "tree",
-        "md5": "e770d073f62fe8ce28e25b54bdb2122a.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "tree-gifts",
-        "md5": "e058f6d1246f6b94bbc67c5fd04fb25f.png",
-        "type": "backdrop",
-        "tags": [
-            "holiday"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "underwater1",
-        "md5": "efad1bcdc7a2945871136e14ba1f9838.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "underwater"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "underwater2",
-        "md5": "ae3aac79accf4fa93ffbe3296dd3730d.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "underwater"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "underwater3",
-        "md5": "be203c37c3ea07b39a5519d1a55214ff.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "underwater"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "urban1",
-        "md5": "d8c6128aeb2e84ff751f7efef3eb0d03.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "urban2",
-        "md5": "afd61866da06305f09ea3aa42e6705db.png",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "city"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "village",
-        "md5": "47dd0064409d8c4db9da24fe7989034c.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "water and rocks",
-        "md5": "b19ad0e0046cee5282d3f6ff311f37bf.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "wave",
-        "md5": "989c99466d14ca77424e7dd8b1fb9bee.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature",
-            "underwater"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "winter",
+        "name": "Winter",
         "md5": "5fa9385a60b904672d0e46e9d768bb32.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday",
-            "nature",
-            "outdoors"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
+            167,
+            173,
             1
         ]
     },
     {
-        "name": "winter-lights",
+        "name": "Winter-lights",
         "md5": "381f471693238611a1b54da4e771637a.svg",
         "type": "backdrop",
-        "tags": [
-            "holiday"
-        ],
+        "tags": [],
         "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "woods and bench",
-        "md5": "10cdd2d4cf5359debb2b4d4bd6edd5a1.jpg",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "woods",
-        "md5": "82a2fd67a3e7449bd9e9d2a9757119fa.gif",
-        "type": "backdrop",
-        "tags": [
-            "outdoors",
-            "nature"
-        ],
-        "info": [
-            480,
-            360,
-            1
-        ]
-    },
-    {
-        "name": "xy-grid",
-        "md5": "c7170e868695b784217edac305bb791d.gif",
-        "type": "backdrop",
-        "tags": [
-            "other"
-        ],
-        "info": [
-            480,
-            360,
+            240,
+            180,
             1
         ]
     }

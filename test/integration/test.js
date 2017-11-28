@@ -69,9 +69,9 @@ describe('costumes, sounds and variables', () => {
         await clickText('Add Costume');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
-        await clickText('abby-a'); // Should close the modal, then click the costumes in the selector
+        await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector
         await clickText('costume1', costumesTabScope);
-        await clickText('abby-a', costumesTabScope);
+        await clickText('Abby-a', costumesTabScope);
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
@@ -90,8 +90,8 @@ describe('costumes, sounds and variables', () => {
         await clickText('Add Sound');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
-        await clickText('chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('chomp', soundsTabScope);
+        await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
+        await clickText('Chomp', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');

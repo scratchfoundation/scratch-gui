@@ -172,6 +172,14 @@ class Blocks extends React.Component {
         this.workspace.reportValue(data.id, data.value);
     }
     onWorkspaceUpdate (data) {
+        // When we change sprites, update the toolbox to have the new sprite's blocks
+        if (this.props.vm.editingTarget) {
+            const target = this.props.vm.editingTarget;
+            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+            this.props.updateToolboxState(toolboxXML);
+        }
+
         if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
@@ -179,6 +187,8 @@ class Blocks extends React.Component {
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
+        // @todo This line rerenders toolbox, and the change in the toolbox XML also rerenders the toolbox.
+        // We should only rerender the toolbox once. See https://github.com/LLK/scratch-gui/issues/901
         this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
         this.workspace.addChangeListener(this.props.vm.blockListener);
 
@@ -193,8 +203,9 @@ class Blocks extends React.Component {
     handleExtensionAdded (blocksInfo) {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-        const toolboxXML = makeToolboxXML(dynamicBlocksXML);
-        this.props.onExtensionAdded(toolboxXML);
+        const target = this.props.vm.editingTarget;
+        const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        this.props.updateToolboxState(toolboxXML);
     }
     handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
@@ -220,7 +231,7 @@ class Blocks extends React.Component {
             vm,
             isVisible,
             onActivateColorPicker,
-            onExtensionAdded,
+            updateToolboxState,
             onRequestCloseExtensionLibrary,
             toolboxXML,
             ...props
@@ -257,7 +268,6 @@ Blocks.propTypes = {
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
-    onExtensionAdded: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -281,6 +291,7 @@ Blocks.propTypes = {
         comments: PropTypes.bool
     }),
     toolboxXML: PropTypes.string,
+    updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -322,11 +333,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
-    onExtensionAdded: toolboxXML => {
-        dispatch(updateToolbox(toolboxXML));
-    },
     onRequestCloseExtensionLibrary: () => {
         dispatch(closeExtensionLibrary());
+    },
+    updateToolboxState: toolboxXML => {
+        dispatch(updateToolbox(toolboxXML));
     }
 });
 

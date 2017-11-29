@@ -25,6 +25,10 @@ class Storage extends ScratchStorage {
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
             asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`
         );
+        this.addWebSource(
+            [this.AssetType.Sound],
+            asset => `static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
+        );
         defaultProjectAssets.forEach(asset => this.cache(
             this.AssetType[asset.assetType],
             this.DataFormat[asset.dataFormat],

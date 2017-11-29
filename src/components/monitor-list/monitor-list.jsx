@@ -18,6 +18,7 @@ const MonitorList = props => (
                 key={monitorData.id}
                 opcode={monitorData.opcode}
                 params={monitorData.params}
+                spriteName={monitorData.spriteName}
                 value={monitorData.value}
                 onDragEnd={props.onMonitorChange}
             />

@@ -11,6 +11,8 @@ const isUndefined = a => typeof a === 'undefined';
  * - Add missing XY position data if needed
  * @param {object} block - The monitor block
  * @param {string} block.id - The id of the monitor block
+ * @param {string} block.spriteName - Present only if the monitor applies only to the sprite
+ *     with given target ID. The name of the target sprite when the monitor was created
  * @param {number} block.index - The index of the monitor
  * @param {string} block.opcode - The opcode of the monitor
  * @param {object} block.params - Extra params to the monitor block
@@ -19,12 +21,15 @@ const isUndefined = a => typeof a === 'undefined';
  * @param {number} y - The monitor y position
  * @return {object} The adapted monitor with label and category
  */
-export default function ({id, index, opcode, params, value, x, y}) {
+export default function ({id, spriteName, index, opcode, params, value, x, y}) {
     let {label, category, labelFn} = OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
     if (!isUndefined(labelFn)) label = labelFn(params);
 
+    if (spriteName) {
+        label = `${spriteName}: ${label}`;
+    }
     // Simple layout if x or y are undefined
     // @todo scratch2 has a more complex layout behavior we may want to adopt
     // @todo e.g. this does not work well when monitors have already been moved

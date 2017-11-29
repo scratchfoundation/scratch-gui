@@ -52,20 +52,18 @@ class SoundTab extends React.Component {
 
     render () {
         const {
-            editingTarget,
-            sprites,
-            stage,
+            vm,
             onNewSoundFromLibraryClick,
             onNewSoundFromRecordingClick
         } = this.props;
 
-        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-
-        if (!target) {
+        if (!vm.editingTarget) {
             return null;
         }
 
-        const sounds = target.sounds ? target.sounds.map(sound => (
+        const sprite = vm.editingTarget.sprite;
+
+        const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {
                 url: soundIcon,
                 name: sound.name
@@ -106,7 +104,7 @@ class SoundTab extends React.Component {
                 onDeleteClick={this.handleDeleteSound}
                 onItemClick={this.handleSelectSound}
             >
-                {editingTarget && target.sounds && target.sounds.length > 0 ? (
+                {sprite.sounds && sprite.sounds.length > 0 ? (
                     <SoundEditor soundIndex={this.state.selectedSoundIndex} />
                 ) : null}
                 {this.props.soundRecorderVisible ? (

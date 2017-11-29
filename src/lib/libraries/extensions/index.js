@@ -16,12 +16,5 @@ export default [
         iconURL: penImage,
         description: 'Draw with your sprites.',
         featured: true
-    },
-    {
-        name: 'Lego WeDo 2.0',
-        extensionURL: 'wedo2',
-        iconURL: wedoImage,
-        description: 'Build with motors and sensors.',
-        featured: true
     }
 ];

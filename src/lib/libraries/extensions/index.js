@@ -1,6 +1,5 @@
 import musicImage from './music.png';
 import penImage from './pen.png';
-import wedoImage from './wedo.png';
 
 export default [
     {

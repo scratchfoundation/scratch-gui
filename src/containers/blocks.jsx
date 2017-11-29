@@ -43,6 +43,7 @@ class Blocks extends React.Component {
             'onBlockGlowOn',
             'onBlockGlowOff',
             'handleExtensionAdded',
+            'handleBlocksInfoUpdate',
             'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',
@@ -73,6 +74,7 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
+        this.props.vm.setLocale(this.props.locale, this.props.messages);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -126,6 +128,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
+        this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -136,6 +139,7 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
+        this.props.vm.removeListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
     }
     updateToolboxBlockValue (id, value) {
         const block = this.workspace
@@ -212,6 +216,13 @@ class Blocks extends React.Component {
         }
     }
     handleExtensionAdded (blocksInfo) {
+        this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
+        const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+        const target = this.props.vm.editingTarget;
+        const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        this.props.updateToolboxState(toolboxXML);
+    }
+    handleBlocksInfoUpdate (blocksInfo) {
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
         const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
         const target = this.props.vm.editingTarget;

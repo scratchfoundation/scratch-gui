@@ -35,6 +35,11 @@ export default function ({id, spriteName, index, opcode, params, value, x, y}) {
     // @todo e.g. this does not work well when monitors have already been moved
     if (isUndefined(x)) x = PADDING;
     if (isUndefined(y)) y = PADDING + (index * (PADDING + MONITOR_HEIGHT));
-
+    
+    // If value is a number, round it to six decimal places
+    if (typeof value === 'number' || (typeof value === 'string' && String(parseFloat(value)) === value)) {
+        value = Number(Number(value).toFixed(6));
+    }
+    
     return {id, label, category, value, x, y};
 }

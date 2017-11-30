@@ -163,4 +163,18 @@ describe('costumes, sounds and variables', () => {
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
+
+    test('Deleting only sprite does not crash', async () => {
+        const spriteTileContext = '*[starts-with(@class,"react-contextmenu-wrapper")]';
+        await loadUri(uri);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await rightClickText('Sprite1', spriteTileContext);
+        await clickText('delete', spriteTileContext);
+        await driver.switchTo().alert()
+            .accept();
+        // Confirm that the stage has been switched to
+        await findByText('Stage selected: no motion blocks');
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
 });

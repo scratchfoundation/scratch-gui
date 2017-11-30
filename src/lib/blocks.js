@@ -67,7 +67,11 @@ export default function (vm) {
 
     const cloneMenu = function () {
         if (vm.editingTarget && vm.editingTarget.isStage) {
-            return spriteMenu();
+            const menu = spriteMenu();
+            if (menu.length === 0) {
+                return [['', '']]; // Empty menu matches Scratch 2 behavior
+            }
+            return menu;
         }
         return [['myself', '_myself_']].concat(spriteMenu());
     };

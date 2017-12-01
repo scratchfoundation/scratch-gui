@@ -332,14 +332,8 @@ const events = function () {
         <block type="event_whenbroadcastreceived">
         </block>
         <block type="event_broadcast">
-            <value name="BROADCAST_OPTION">
-                <shadow type="event_broadcast_menu"/>
-            </value>
         </block>
         <block type="event_broadcastandwait">
-            <value name="BROADCAST_OPTION">
-                <shadow type="event_broadcast_menu"/>
-            </value>
         </block>
         ${categorySeparator}
     </category>

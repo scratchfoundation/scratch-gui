@@ -223,11 +223,8 @@ class Blocks extends React.Component {
         this.props.updateToolboxState(toolboxXML);
     }
     handleBlocksInfoUpdate (blocksInfo) {
-        this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json));
-        const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-        const target = this.props.vm.editingTarget;
-        const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
-        this.props.updateToolboxState(toolboxXML);
+        // @todo Later we should replace this to avoid all the warnings from redefining blocks.
+        this.handleExtensionAdded(blocksInfo);
     }
     handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);

@@ -39,8 +39,9 @@ class CustomProcedures extends React.Component {
 
         // Create the procedure declaration block for editing the mutation.
         this.mutationRoot = this.workspace.newBlock('procedures_declaration');
-        // Make the declaration fixed and have no context menu
+        // Make the declaration immovable, undeletable and have no context menu
         this.mutationRoot.setMovable(false);
+        this.mutationRoot.setDeletable(false);
         this.mutationRoot.contextMenu = false;
 
         this.workspace.addChangeListener(() => {

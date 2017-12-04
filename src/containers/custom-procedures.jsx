@@ -112,7 +112,8 @@ CustomProcedures.defaultOptions = {
         wheel: false,
         startScale: 0.9
     },
-    comments: false
+    comments: false,
+    scrollbars: true
 };
 
 CustomProcedures.defaultProps = {

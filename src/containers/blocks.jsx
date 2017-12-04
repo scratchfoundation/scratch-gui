@@ -240,6 +240,7 @@ class Blocks extends React.Component {
             isVisible,
             onActivateColorPicker,
             updateToolboxState,
+            onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
             toolboxXML,

@@ -39,16 +39,18 @@ class CustomProcedures extends React.Component {
 
         // Create the procedure declaration block for editing the mutation.
         this.mutationRoot = this.workspace.newBlock('procedures_declaration');
-        this.workspace.addChangeListener(() => this.mutationRoot.onChangeFn());
+        this.workspace.addChangeListener(() => {
+            this.mutationRoot.onChangeFn();
+            // Keep the block centered on the workspace
+            const metrics = this.workspace.getMetrics();
+            const {x, y} = this.mutationRoot.getRelativeToSurfaceXY();
+            const dx = (metrics.viewWidth / 2) - (this.mutationRoot.width / 2) - x;
+            const dy = (metrics.viewHeight / 2) - (this.mutationRoot.height / 2) - y;
+            this.mutationRoot.moveBy(dx, dy);
+        });
         this.mutationRoot.domToMutation(this.props.mutator);
         this.mutationRoot.initSvg();
         this.mutationRoot.render();
-
-        // Center the procedure declaration block.
-        const metrics = this.workspace.getMetrics();
-        const dx = (metrics.viewWidth / 2) - (this.mutationRoot.width / 2);
-        const dy = (metrics.viewHeight / 2) - (this.mutationRoot.height / 2);
-        this.mutationRoot.moveBy(dx, dy);
     }
     handleCancel () {
         this.props.onRequestClose();

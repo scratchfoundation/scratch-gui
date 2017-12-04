@@ -39,6 +39,7 @@ class CustomProcedures extends React.Component {
 
         // Create the procedure declaration block for editing the mutation.
         this.mutationRoot = this.workspace.newBlock('procedures_declaration');
+        this.mutationRoot.setMovable(false);
         this.workspace.addChangeListener(() => {
             this.mutationRoot.onChangeFn();
             // Keep the block centered on the workspace

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 109:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24,11 +24,11 @@ var _gui = __webpack_require__(22);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(25);
+var _projectLoaderHoc = __webpack_require__(26);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(398);
+var _index = __webpack_require__(406);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -51,13 +51,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 398:
+/***/ 406:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(399);
+var content = __webpack_require__(407);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -83,7 +83,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 399:
+/***/ 407:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -100,5 +100,5 @@ exports.locals = {
 
 /***/ })
 
-},[109]);
+},[111]);
 //# sourceMappingURL=gui.js.map

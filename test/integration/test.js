@@ -177,4 +177,22 @@ describe('costumes, sounds and variables', () => {
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
+
+    test('Custom procedures', async () => {
+        await loadUri(uri);
+        await clickText('More');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('Make a Block...');
+        // Click on the "add an input" buttons
+        await clickText('number or text', modalScope);
+        await clickText('boolean', modalScope);
+        await clickText('Add a label', modalScope);
+        await clickText('OK', modalScope);
+
+        // Make sure a "define" block has been added to the workspace
+        await findByText('define', blocksTabScope);
+
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
 });

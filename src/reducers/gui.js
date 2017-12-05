@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import colorPickerReducer from './color-picker';
+import customProceduresReducer from './custom-procedures';
 import intlReducer from './intl';
 import modalReducer from './modals';
 import monitorReducer from './monitors';
@@ -10,6 +11,7 @@ import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
     colorPicker: colorPickerReducer,
+    customProcedures: customProceduresReducer,
     intl: intlReducer,
     modals: modalReducer,
     monitors: monitorReducer,

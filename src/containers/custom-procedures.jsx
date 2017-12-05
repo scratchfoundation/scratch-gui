@@ -125,9 +125,7 @@ const mapStateToProps = state => ({
     mutator: state.customProcedures.mutator
 });
 
-const mapDispatchToProps = () => ({});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    () => ({}) // omit dispatch prop
 )(CustomProcedures);

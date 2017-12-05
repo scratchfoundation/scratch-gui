@@ -35,7 +35,7 @@ const CustomProcedures = props => (
                     <div className={styles.optionTitle}>
                         <FormattedMessage
                             defaultMessage="Add an input"
-                            description="Label for button to add a numeric"
+                            description="Label for button to add a number/text input"
                             id="gui.customProcedures.addAnInputNumberText"
                         />
                     </div>
@@ -92,7 +92,7 @@ const CustomProcedures = props => (
                 </div>
             </div>
             <div className={styles.checkboxRow}>
-                {/* @todo Implement "run without screen refresh" */}
+                {/* @todo (#993) Implement "run without screen refresh" */}
                 {/* <label><input type="checkbox" />Run without screen refresh</label> */}
             </div>
             <Box className={styles.buttonRow}>

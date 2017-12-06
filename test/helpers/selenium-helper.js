@@ -37,10 +37,17 @@ class SeleniumHelper {
     }
 
     loadUri (uri) {
+        const WINDOW_WIDTH = 1024;
+        const WINDOW_HEIGHT = 768;
         return this.driver
             .get(`file://${uri}`)
             .then(() => (
                 this.driver.executeScript('window.onbeforeunload = undefined;')
+            ))
+            .then(() => (
+                this.driver.manage()
+                    .window()
+                    .setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
             ));
     }
 

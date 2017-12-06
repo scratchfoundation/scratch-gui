@@ -74,7 +74,7 @@
     z-index: 1;
     color: #40B9F5;
     background-color: #FFFFFF;
-    border-bottom: white 1px solid;
+    border-bottom: $ui-background-blue 1px solid;
 }
 
 .tabs {

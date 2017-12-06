@@ -49,8 +49,13 @@ class CustomProcedures extends React.Component {
             // Keep the block centered on the workspace
             const metrics = this.workspace.getMetrics();
             const {x, y} = this.mutationRoot.getRelativeToSurfaceXY();
-            const dx = (metrics.viewWidth / 2) - (this.mutationRoot.width / 2) - x;
             const dy = (metrics.viewHeight / 2) - (this.mutationRoot.height / 2) - y;
+            let dx = (metrics.viewWidth / 2) - (this.mutationRoot.width / 2) - x;
+            // If the procedure declaration is wider than the view width,
+            // keep the right-hand side of the procedure in view.
+            if (this.mutationRoot.width > metrics.viewWidth) {
+                dx = metrics.viewWidth - this.mutationRoot.width - x;
+            }
             this.mutationRoot.moveBy(dx, dy);
         });
         this.mutationRoot.domToMutation(this.props.mutator);

@@ -1,7 +1,9 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
+import {moveMonitorRect} from '../reducers/monitor-layout';
 
 import MonitorListComponent from '../components/monitor-list/monitor-list.jsx';
 
@@ -13,7 +15,7 @@ class MonitorList extends React.Component {
         ]);
     }
     handleMonitorChange (id, x, y) { // eslint-disable-line no-unused-vars
-        // @todo send this event to the VM
+        this.props.moveMonitorRect(id, x, y);
     }
     render () {
         return (
@@ -25,10 +27,15 @@ class MonitorList extends React.Component {
     }
 }
 
+MonitorList.propTypes = {
+    moveMonitorRect: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
     monitors: state.monitors
 });
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+    moveMonitorRect: (id, x, y) => dispatch(moveMonitorRect(id, x, y))
+});
 
 export default connect(
     mapStateToProps,

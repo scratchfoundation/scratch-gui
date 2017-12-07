@@ -16,13 +16,12 @@ const MonitorComponent = props => (
     <Draggable
         bounds="parent"
         defaultClassNameDragging={styles.dragging}
-        defaultPosition={{
-            x: props.x,
-            y: props.y
-        }}
         onStop={props.onDragEnd}
     >
-        <Box className={styles.monitor}>
+        <Box
+            className={styles.monitor}
+            componentRef={props.componentRef}
+        >
             <Box className={styles.label}>
                 {props.label}
             </Box>
@@ -40,17 +39,14 @@ MonitorComponent.categories = categories;
 
 MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categories)),
+    componentRef: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     onDragEnd: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
-    x: PropTypes.number,
-    y: PropTypes.number
+    value: PropTypes.string.isRequired
 };
 
 MonitorComponent.defaultProps = {
-    category: 'data',
-    x: 0,
-    y: 0
+    category: 'data'
 };
 
 export default MonitorComponent;

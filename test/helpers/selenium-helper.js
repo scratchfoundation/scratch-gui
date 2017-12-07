@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
-const {By, until} = webdriver;
+const {By, until, Button} = webdriver;
 
 class SeleniumHelper {
     constructor () {
@@ -12,9 +12,12 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'findByText',
             'findByXpath',
             'getDriver',
-            'getLogs'
+            'getLogs',
+            'loadUri',
+            'rightClickText'
         ]);
     }
 
@@ -29,12 +32,37 @@ class SeleniumHelper {
         return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
     }
 
+    findByText (text, scope) {
+        return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+    }
+
+    loadUri (uri) {
+        const WINDOW_WIDTH = 1024;
+        const WINDOW_HEIGHT = 768;
+        return this.driver
+            .get(`file://${uri}`)
+            .then(() => (
+                this.driver.executeScript('window.onbeforeunload = undefined;')
+            ))
+            .then(() => (
+                this.driver.manage()
+                    .window()
+                    .setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
+            ));
+    }
+
     clickXpath (xpath) {
         return this.findByXpath(xpath).then(el => el.click());
     }
 
     clickText (text, scope) {
-        return this.clickXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+        return this.findByText(text, scope).then(el => el.click());
+    }
+
+    rightClickText (text, scope) {
+        return this.findByText(text, scope).then(el => this.driver.actions()
+            .click(el, Button.RIGHT)
+            .perform());
     }
 
     clickButton (text) {

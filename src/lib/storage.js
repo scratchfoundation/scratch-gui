@@ -1,5 +1,7 @@
 import ScratchStorage from 'scratch-storage';
 
+import defaultProjectAssets from './default-project';
+
 const PROJECT_SERVER = 'https://cdn.projects.scratch.mit.edu';
 const ASSET_SERVER = 'https://cdn.assets.scratch.mit.edu';
 
@@ -23,7 +25,19 @@ class Storage extends ScratchStorage {
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
             asset => `${ASSET_SERVER}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`
         );
+        this.addWebSource(
+            [this.AssetType.Sound],
+            asset => `static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
+        );
+        defaultProjectAssets.forEach(asset => this.cache(
+            this.AssetType[asset.assetType],
+            this.DataFormat[asset.dataFormat],
+            asset.data,
+            asset.id
+        ));
     }
 }
 
-export default Storage;
+const storage = new Storage();
+
+export default storage;

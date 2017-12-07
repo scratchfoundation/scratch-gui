@@ -224,7 +224,7 @@ describe('Sound Editor Container', () => {
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
 
-    test('undo/redo functionality', () => {
+    test('undo/redo stack state', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 soundIndex={soundIndex}
@@ -269,5 +269,35 @@ describe('Sound Editor Container', () => {
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(false);
+    });
+
+    test('undo and redo submit new samples and play the sound', () => {
+        const wrapper = mountWithIntl(
+            <SoundEditor
+                soundIndex={soundIndex}
+                store={store}
+            />
+        );
+        let component = wrapper.find(SoundEditorComponent);
+
+        // Set up an undoable state
+        component.props().onActivateTrim(); // Activate trimming
+        component.props().onActivateTrim(); // Submit new samples by calling again
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
+
+        // Undo should update the sound buffer and play the new samples
+        component.props().onUndo();
+        expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
+        expect(vm.updateSoundBuffer).toHaveBeenCalled();
+
+        // Clear the mocks call history to assert again for redo.
+        vm.updateSoundBuffer.mockClear();
+        mockAudioBufferPlayer.instance.play.mockClear();
+
+        // Undo should update the sound buffer and play the new samples
+        component.props().onRedo();
+        expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
+        expect(vm.updateSoundBuffer).toHaveBeenCalled();
     });
 });

@@ -36,6 +36,7 @@ Monitor.propTypes = {
     onDragEnd: PropTypes.func.isRequired,
     opcode: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     params: PropTypes.object, // eslint-disable-line react/no-unused-prop-types, react/forbid-prop-types
+    spriteName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     value: PropTypes.string.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 

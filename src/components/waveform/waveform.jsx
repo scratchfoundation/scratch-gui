@@ -33,7 +33,7 @@ const Waveform = props => {
             <g transform={`scale(1, -1) translate(0, -${height / 2})`}>
                 <path
                     className={styles.waveformPath}
-                    d={`M0 0${pathComponents.join()}Z`}
+                    d={`M0 0${pathComponents.join(' ')}Z`}
                     strokeLinejoin={'round'}
                     strokeWidth={2}
                 />

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 114:
+/***/ 115:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15,6 +15,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactModal = __webpack_require__(42);
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
 
 var _appStateHoc = __webpack_require__(21);
 
@@ -46,6 +50,8 @@ var App = (0, _appStateHoc2.default)((0, _projectLoaderHoc2.default)(_gui2.defau
 var appTarget = document.createElement('div');
 appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
+
+_reactModal2.default.setAppElement(appTarget);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
@@ -100,5 +106,5 @@ exports.locals = {
 
 /***/ })
 
-},[114]);
+},[115]);
 //# sourceMappingURL=gui.js.map

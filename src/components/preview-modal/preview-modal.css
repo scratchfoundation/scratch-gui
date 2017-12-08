@@ -1,0 +1,37 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 700px;
+}
+
+.body {
+    background: $ui-pane-gray;
+    padding: 1.5rem 2.25rem;
+}
+
+/* Confirmation buttons at the bottom of the modal */
+.button-row {
+    margin-top: 1rem;
+    font-weight: bolder;
+    text-align: right;
+}
+
+.button-row button {
+    border: 1px solid $ui-pane-border;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+}
+
+.button-row button + button {
+    margin-left: 0.5rem;
+}

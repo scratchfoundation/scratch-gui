@@ -7,11 +7,14 @@ const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
+const MODAL_PREVIEW_INFO = 'previewInfo';
+
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
+    [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false
@@ -62,6 +65,9 @@ const openSoundRecorder = function () {
 const openExtensionLibrary = function () {
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
+const openPreviewInfo = function () {
+    return openModal(MODAL_PREVIEW_INFO);
+};
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -70,6 +76,9 @@ const closeCostumeLibrary = function () {
 };
 const closeExtensionLibrary = function () {
     return closeModal(MODAL_EXTENSION_LIBRARY);
+};
+const closePreviewInfo = function () {
+    return closeModal(MODAL_PREVIEW_INFO);
 };
 const closeSpriteLibrary = function () {
     return closeModal(MODAL_SPRITE_LIBRARY);
@@ -85,12 +94,14 @@ export {
     openExtensionLibrary,
     openBackdropLibrary,
     openCostumeLibrary,
+    openPreviewInfo,
     openSoundLibrary,
     openSpriteLibrary,
     openSoundRecorder,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
+    closePreviewInfo,
     closeSpriteLibrary,
     closeSoundLibrary,
     closeSoundRecorder

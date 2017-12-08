@@ -13,6 +13,7 @@ class LibraryItem extends React.PureComponent {
             'handleBlur',
             'handleClick',
             'handleFocus',
+            'handleKeyPress',
             'handleMouseEnter',
             'handleMouseLeave'
         ]);
@@ -26,6 +27,12 @@ class LibraryItem extends React.PureComponent {
     handleClick (e) {
         this.props.onSelect(this.props.id);
         e.preventDefault();
+    }
+    handleKeyPress (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.props.onSelect(this.props.id);
+        }
     }
     handleMouseEnter () {
         this.props.onMouseEnter(this.props.id);
@@ -61,6 +68,7 @@ class LibraryItem extends React.PureComponent {
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
                 onFocus={this.handleFocus}
+                onKeyPress={this.handleKeyPress}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >

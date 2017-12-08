@@ -16,6 +16,7 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
     className=""
     onClick={[Function]}
     role="button"
+    tabIndex="0"
   >
     <img
       className={undefined}

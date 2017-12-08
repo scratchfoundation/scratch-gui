@@ -11,8 +11,10 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleBlur',
             'handleFilterChange',
             'handleFilterClear',
+            'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect'
@@ -21,6 +23,12 @@ class LibraryComponent extends React.Component {
             selectedItem: null,
             filterQuery: ''
         };
+    }
+    handleBlur (id) {
+        this.handleMouseLeave(id);
+    }
+    handleFocus (id) {
+        this.handleMouseEnter(id);
     }
     handleSelect (id) {
         this.props.onRequestClose();
@@ -65,6 +73,8 @@ class LibraryComponent extends React.Component {
                                 id={index}
                                 key={`item_${index}`}
                                 name={dataItem.name}
+                                onBlur={this.handleBlur}
+                                onFocus={this.handleFocus}
                                 onMouseEnter={this.handleMouseEnter}
                                 onMouseLeave={this.handleMouseLeave}
                                 onSelect={this.handleSelect}

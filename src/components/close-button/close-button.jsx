@@ -17,6 +17,7 @@ const CloseButton = props => (
             }
         )}
         role="button"
+        tabIndex="0"
         onClick={props.onClick}
     >
         <img

@@ -1733,7 +1733,7 @@
     },
     {
         "name": "Empty",
-        "md5": "d36f6603ec293d2c2198d3ea05109fe0.png",
+        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
         "type": "sprite",
         "tags": [],
         "info": [
@@ -1757,8 +1757,8 @@
                 {
                     "costumeName": "empty",
                     "baseLayerID": 0,
-                    "baseLayerMD5": "d36f6603ec293d2c2198d3ea05109fe0.png",
-                    "bitmapResolution": 2,
+                    "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "bitmapResolution": 1,
                     "rotationCenterX": 0,
                     "rotationCenterY": 0
                 }

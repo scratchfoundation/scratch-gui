@@ -1732,6 +1732,50 @@
         }
     },
     {
+        "name": "Empty",
+        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Empty",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "empty",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 36,
+            "scratchY": 28,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 68,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Fish1",
         "md5": "df78f8195f72372846d96dc70cb0ad95.svg",
         "type": "sprite",

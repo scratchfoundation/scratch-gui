@@ -781,6 +781,17 @@
         ]
     },
     {
+        "name": "Empty",
+        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            0,
+            0,
+            1
+        ]
+    },
+    {
         "name": "Fish1",
         "md5": "df78f8195f72372846d96dc70cb0ad95.svg",
         "type": "costume",

@@ -11,13 +11,13 @@ const MonitorList = props => (
     <Box
         className={styles.monitorList}
     >
-        {props.monitors.valueSeq().map((monitorData, index) => (
+        {props.monitors.valueSeq().map(monitorData => (
             <Monitor
                 id={monitorData.id}
-                index={index}
                 key={monitorData.id}
                 opcode={monitorData.opcode}
                 params={monitorData.params}
+                spriteName={monitorData.spriteName}
                 value={monitorData.value}
                 onDragEnd={props.onMonitorChange}
             />

@@ -68,13 +68,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    user-select: none;
 }
 
 .tab.is-selected {
     z-index: 1;
     color: #40B9F5;
     background-color: #FFFFFF;
-    border-bottom: white 1px solid;
+    border-bottom: $ui-background-blue 1px solid;
 }
 
 .tabs {

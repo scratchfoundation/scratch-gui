@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
+import Question from '../../containers/question.jsx';
 import styles from './stage.css';
 
 const StageComponent = props => {
@@ -15,6 +16,8 @@ const StageComponent = props => {
         colorInfo,
         onDeactivateColorPicker,
         isColorPicking,
+        question,
+        onQuestionAnswered,
         ...boxProps
     } = props;
     return (
@@ -40,6 +43,12 @@ const StageComponent = props => {
                         <Loupe colorInfo={colorInfo} />
                     </Box>
                 ) : null}
+                {question === null ? null : (
+                    <Question
+                        question={question}
+                        onQuestionAnswered={onQuestionAnswered}
+                    />
+                )}
             </Box>
             {isColorPicking ? (
                 <Box
@@ -56,6 +65,8 @@ StageComponent.propTypes = {
     height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     onDeactivateColorPicker: PropTypes.func,
+    onQuestionAnswered: PropTypes.func,
+    question: PropTypes.string,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

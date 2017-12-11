@@ -11,6 +11,7 @@ const IconButton = ({
 }) => (
     <div
         className={classNames(styles.container, className)}
+        role="button"
         onClick={onClick}
     >
         <img

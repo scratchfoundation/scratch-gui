@@ -104,8 +104,16 @@ module.exports = {
             title: 'Scratch 3.0 GUI: Player Example'
         }),
         new CopyWebpackPlugin([{
+            from: 'static',
+            to: 'static'
+        }]),
+        new CopyWebpackPlugin([{
             from: 'node_modules/scratch-blocks/media',
             to: 'static/blocks-media'
+        }]),
+        new CopyWebpackPlugin([{
+            from: 'node_modules/scratch-vm/dist/node/assets',
+            to: 'static/extension-assets'
         }]),
         new CopyWebpackPlugin([{
             from: 'extensions/**',

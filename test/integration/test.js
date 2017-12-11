@@ -8,7 +8,9 @@ const {
     findByText,
     findByXpath,
     getDriver,
-    getLogs
+    getLogs,
+    loadUri,
+    rightClickText
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -34,9 +36,8 @@ describe('costumes, sounds and variables', () => {
         await driver.quit();
     });
 
-
     test('Blocks report when clicked in the toolbox', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Operators', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -47,42 +48,50 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Switching sprites updates the block menus', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Sound', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "meow" sound block should be visible
         await findByText('meow', blocksTabScope);
         await clickText('Backdrops'); // Switch to the backdrop
-        // Now "pop" sound block should be visible
+        // Now "pop" sound block should be visible and motion blocks hidden
         await findByText('pop', blocksTabScope);
+        await clickText('Motion', blocksTabScope);
+        await findByText('Stage selected: no motion blocks');
+
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
 
     test('Adding a costume', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Costumes');
         await clickText('Add Costume');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
-        await clickText('abby-a'); // Should close the modal, then click the costumes in the selector
+        await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector
         await clickText('costume1', costumesTabScope);
-        await clickText('abby-a', costumesTabScope);
+        await clickText('Abby-a', costumesTabScope);
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
 
     test('Adding a sound', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Sounds');
+
+        // Delete the sound
+        await rightClickText('meow', soundsTabScope);
+        await clickText('delete', soundsTabScope);
+        await driver.switchTo().alert()
+            .accept();
+
+        // Add a sound
         await clickText('Add Sound');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
-        await clickText('chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('meow', soundsTabScope);
-        await clickText('chomp', soundsTabScope);
-        await clickXpath('//button[@title="Play"]');
-        await clickText('meow', soundsTabScope);
+        await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
+        await clickText('Chomp', soundsTabScope);
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');
@@ -99,7 +108,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Load a project by ID', async () => {
         const projectId = '96708228';
-        await driver.get(`file://${uri}#${projectId}`);
+        await loadUri(`${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -109,7 +118,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Creating variables', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Data', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -133,7 +142,7 @@ describe('costumes, sounds and variables', () => {
     });
 
     test('Importing extensions', async () => {
-        await driver.get(`file://${uri}`);
+        await loadUri(uri);
         await clickText('Blocks');
         await clickText('Extensions');
         await clickText('Pen', modalScope); // Modal closes
@@ -147,6 +156,41 @@ describe('costumes, sounds and variables', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('stamp', blocksTabScope); // Would fail if didn't scroll back
 
+        // Make sure switching sprites doesn't clear extensions
+        await clickText('Backdrops'); // Switch to the backdrop
+        await findByText('Pen', blocksTabScope); // Pen extension should still be loaded
+
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
+
+    test('Deleting only sprite does not crash', async () => {
+        const spriteTileContext = '*[starts-with(@class,"react-contextmenu-wrapper")]';
+        await loadUri(uri);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await rightClickText('Sprite1', spriteTileContext);
+        await clickText('delete', spriteTileContext);
+        await driver.switchTo().alert()
+            .accept();
+        // Confirm that the stage has been switched to
+        await findByText('Stage selected: no motion blocks');
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
+
+    test('Custom procedures', async () => {
+        await loadUri(uri);
+        await clickText('More');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('Make a Block...');
+        // Click on the "add an input" buttons
+        await clickText('number or text', modalScope);
+        await clickText('boolean', modalScope);
+        await clickText('Add a label', modalScope);
+        await clickText('OK', modalScope);
+
+        // Make sure a "define" block has been added to the workspace
+        await findByText('define', blocksTabScope);
 
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);

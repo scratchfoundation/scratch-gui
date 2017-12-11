@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="static/favicon.ico">
     <title>Scratch 3.0 GUI: Player Example</title>
+
+    <!-- Sentry error logging to help with finding bugs -->
+    <script src="https://cdn.ravenjs.com/3.20.1/raven.min.js" crossorigin="anonymous"></script>
+    <script>
+        Raven.config('https://dcc4ed76876b411c99997f4ad5ab78a5@sentry.io/253297').install();
+    </script>
+    <!-- /Sentry -->
+
   </head>
   <body>
   <script type="text/javascript" src="lib.min.js"></script><script type="text/javascript" src="player.js"></script></body>

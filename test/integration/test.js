@@ -238,5 +238,5 @@ describe('costumes, sounds and variables', () => {
 
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
-    })
+    });
 });

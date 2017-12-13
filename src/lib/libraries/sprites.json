@@ -1061,7 +1061,7 @@
             "objName": "Cat",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,
@@ -2145,7 +2145,7 @@
             "objName": "Hippo1",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,
@@ -2197,7 +2197,7 @@
             "objName": "Horse1",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,
@@ -2337,7 +2337,7 @@
             "objName": "Lion",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,
@@ -2517,7 +2517,7 @@
             "objName": "Octopus",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,
@@ -3429,7 +3429,7 @@
             "objName": "Watermelon",
             "sounds": [
                 {
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": -1,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,

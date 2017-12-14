@@ -117,6 +117,30 @@ describe('costumes, sounds and variables', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Load a project by ID (fullscreen)', async () => {
+        const prevSize = driver.manage()
+            .window()
+            .getSize();
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        driver.manage()
+            .window()
+            .setSize(1920, 1080);
+        const projectId = '96708228';
+        await loadUri(`${uri}#${projectId}`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await clickXpath('//img[@title="Zoom Control"]');
+        await clickXpath('//img[@title="Go"]');
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await clickXpath('//img[@title="Stop"]');
+        prevSize.then(value => {
+            driver.manage()
+                .window()
+                .setSize(value.width, value.height);
+        });
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
+
     test('Creating variables', async () => {
         await loadUri(uri);
         await clickText('Blocks');

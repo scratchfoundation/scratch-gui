@@ -3,9 +3,6 @@ import React from 'react';
 
 import VM from 'scratch-vm';
 
-import BackdropLibrary from '../../containers/backdrop-library.jsx';
-import CostumeLibrary from '../../containers/costume-library.jsx';
-import SoundLibrary from '../../containers/sound-library.jsx';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
@@ -21,9 +18,6 @@ import styles from './target-pane.css';
  */
 const TargetPane = ({
     editingTarget,
-    backdropLibraryVisible,
-    costumeLibraryVisible,
-    soundLibraryVisible,
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
@@ -34,9 +28,6 @@ const TargetPane = ({
     onDeleteSprite,
     onDuplicateSprite,
     onNewSpriteClick,
-    onRequestCloseBackdropLibrary,
-    onRequestCloseCostumeLibrary,
-    onRequestCloseSoundLibrary,
     onRequestCloseSpriteLibrary,
     onSelectSprite,
     stage,
@@ -81,24 +72,6 @@ const TargetPane = ({
                         onRequestClose={onRequestCloseSpriteLibrary}
                     />
                 ) : null}
-                {costumeLibraryVisible ? (
-                    <CostumeLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseCostumeLibrary}
-                    />
-                ) : null}
-                {soundLibraryVisible ? (
-                    <SoundLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseSoundLibrary}
-                    />
-                ) : null}
-                {backdropLibraryVisible ? (
-                    <BackdropLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseBackdropLibrary}
-                    />
-                ) : null}
             </div>
         </div>
     </div>
@@ -123,8 +96,6 @@ const spriteShape = PropTypes.shape({
 });
 
 TargetPane.propTypes = {
-    backdropLibraryVisible: PropTypes.bool,
-    costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
     onChangeSpriteDirection: PropTypes.func,
@@ -136,13 +107,9 @@ TargetPane.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
-    onRequestCloseBackdropLibrary: PropTypes.func,
-    onRequestCloseCostumeLibrary: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
-    onRequestCloseSoundLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
-    soundLibraryVisible: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,

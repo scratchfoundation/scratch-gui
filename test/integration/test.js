@@ -22,7 +22,6 @@ const errorWhitelist = [
 let driver;
 
 const blocksTabScope = "*[@id='react-tabs-1']";
-const costumesTabScope = "*[@id='react-tabs-3']";
 const soundsTabScope = "*[@id='react-tabs-5']";
 const reportedValueScope = '*[@class="blocklyDropDownContent"]';
 const modalScope = '*[@class="ReactModalPortal"]';
@@ -70,8 +69,7 @@ describe('costumes, sounds and variables', () => {
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
         await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector
-        await clickText('costume1', costumesTabScope);
-        await clickText('Abby-a', costumesTabScope);
+        await findByXpath("//input[@value='Abby-a']"); // Should show editor for new costume
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
@@ -86,12 +84,19 @@ describe('costumes, sounds and variables', () => {
         await driver.switchTo().alert()
             .accept();
 
-        // Add a sound
+        // Add it back
         await clickText('Add Sound');
-        const el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        let el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        await el.sendKeys('meow');
+        await clickText('meow'); // Should close the modal
+
+        // Add a new sound
+        await clickText('Add Sound');
+        el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
-        await clickText('Chomp', soundsTabScope);
+        await findByXpath("//input[@value='Chomp']"); // Should show editor for new sound
+
         await clickXpath('//button[@title="Play"]');
 
         await clickText('Louder');

@@ -55,7 +55,9 @@ class SoundLibrary extends React.PureComponent {
             sampleCount: soundItem.sampleCount,
             name: soundItem.name
         };
-        this.props.vm.addSound(vmSound);
+        this.props.vm.addSound(vmSound).then(() => {
+            this.props.onNewSound();
+        });
     }
     render () {
         // @todo need to use this hack to avoid library using md5 for image
@@ -85,6 +87,7 @@ class SoundLibrary extends React.PureComponent {
 }
 
 SoundLibrary.propTypes = {
+    onNewSound: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

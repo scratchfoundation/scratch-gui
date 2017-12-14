@@ -21,25 +21,37 @@ const StageComponent = props => {
         onQuestionAnswered,
         ...boxProps
     } = props;
-    let heightCorrectedAspect = window.innerHeight - 40;
-    let widthCorrectedAspect = heightCorrectedAspect + (heightCorrectedAspect / 3);
-    if (widthCorrectedAspect > window.innerWidth) {
-        widthCorrectedAspect = window.innerWidth;
-        heightCorrectedAspect = widthCorrectedAspect * .75;
+
+    let heightCorrectedAspect = height;
+    let widthCorrectedAspect = width;
+    const spacingBorderAdjustment = 9;
+    const stageMenuHeightAdjustment = 40;
+    if (isZoomed) {
+        heightCorrectedAspect = window.innerHeight - stageMenuHeightAdjustment - spacingBorderAdjustment;
+        widthCorrectedAspect = heightCorrectedAspect + (heightCorrectedAspect / 3);
+        if (widthCorrectedAspect > window.innerWidth) {
+            widthCorrectedAspect = window.innerWidth;
+            heightCorrectedAspect = widthCorrectedAspect * .75;
+        }
     }
-    return isZoomed === false ? (
+    return (
         <div>
             <Box
-                className={classNames(styles.stageWrapper, {
-                    [styles.withColorPicker]: isColorPicking
+                className={classNames({
+                    [styles.stageWrapper]: !isZoomed,
+                    [styles.stageWrapperOverlay]: isZoomed,
+                    [styles.withColorPicker]: !isZoomed && isColorPicking
                 })}
             >
                 <Box
-                    className={styles.stage}
+                    className={classNames(
+                        styles.stage,
+                        {[styles.stageOverlayContent]: isZoomed}
+                    )}
                     componentRef={canvasRef}
                     element="canvas"
-                    height={height}
-                    width={width}
+                    height={heightCorrectedAspect}
+                    width={widthCorrectedAspect}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
@@ -51,10 +63,22 @@ const StageComponent = props => {
                     </Box>
                 ) : null}
                 {question === null ? null : (
-                    <Question
-                        question={question}
-                        onQuestionAnswered={onQuestionAnswered}
-                    />
+                    <div
+                        className={classNames(
+                            styles.stageOverlayContent,
+                            styles.stageOverlayContentBorderOverride
+                        )}
+                    >
+                        <div
+                            className={styles.questionWrapper}
+                            style={{width: widthCorrectedAspect}}
+                        >
+                            <Question
+                                question={question}
+                                onQuestionAnswered={onQuestionAnswered}
+                            />
+                        </div>
+                    </div>
                 )}
             </Box>
             {isColorPicking ? (
@@ -63,35 +87,6 @@ const StageComponent = props => {
                     onClick={onDeactivateColorPicker}
                 />
             ) : null}
-        </div>
-    ) : (
-        <div>
-            <Box className={styles.stageWrapperOverlay}>
-                <Box
-                    className={classNames(styles.stage, styles.stageOverlayContent)}
-                    componentRef={canvasRef}
-                    element="canvas"
-                    height={heightCorrectedAspect}
-                    width={widthCorrectedAspect}
-                    {...boxProps}
-                />
-                <Box className={styles.monitorWrapper}>
-                    <MonitorList />
-                </Box>
-                <div className={styles.stageOverlayContent}>
-                    <div
-                        className={styles.questionWrapper}
-                        style={{width: widthCorrectedAspect}}
-                    >
-                        {question === null ? null : (
-                            <Question
-                                question={question}
-                                onQuestionAnswered={onQuestionAnswered}
-                            />
-                        )}
-                    </div>
-                </div>
-            </Box>
         </div>
     );
 };

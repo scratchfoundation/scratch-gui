@@ -51,8 +51,8 @@ describe('costumes, sounds and variables', () => {
         await loadUri(uri);
         await clickText('Sound', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        // "meow" sound block should be visible
-        await findByText('meow', blocksTabScope);
+        // "Meow" sound block should be visible
+        await findByText('Meow', blocksTabScope);
         await clickText('Backdrops'); // Switch to the backdrop
         // Now "pop" sound block should be visible and motion blocks hidden
         await findByText('pop', blocksTabScope);
@@ -81,7 +81,7 @@ describe('costumes, sounds and variables', () => {
         await clickText('Sounds');
 
         // Delete the sound
-        await rightClickText('meow', soundsTabScope);
+        await rightClickText('Meow', soundsTabScope);
         await clickText('delete', soundsTabScope);
         await driver.switchTo().alert()
             .accept();

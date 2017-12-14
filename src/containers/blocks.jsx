@@ -43,6 +43,7 @@ class Blocks extends React.Component {
             'onBlockGlowOn',
             'onBlockGlowOff',
             'handleExtensionAdded',
+            'handleBlocksInfoUpdate',
             'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',
@@ -72,6 +73,7 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
+        this.props.vm.setLocale(this.props.locale, this.props.messages);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -79,10 +81,15 @@ class Blocks extends React.Component {
             this.props.isVisible !== nextProps.isVisible ||
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
-            this.props.customProceduresVisible !== nextProps.customProceduresVisible
+            this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
+            this.props.locale !== nextProps.locale
         );
     }
     componentDidUpdate (prevProps) {
+        if (prevProps.locale !== this.props.locale) {
+            this.props.vm.setLocale(this.props.locale, this.props.messages);
+        }
+
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
             this.workspace.updateToolbox(this.props.toolboxXML);
@@ -120,6 +127,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
+        this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -130,6 +138,7 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('workspaceUpdate', this.onWorkspaceUpdate);
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
+        this.props.vm.removeListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
     }
     updateToolboxBlockValue (id, value) {
         const block = this.workspace
@@ -212,6 +221,10 @@ class Blocks extends React.Component {
         const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
         this.props.updateToolboxState(toolboxXML);
     }
+    handleBlocksInfoUpdate (blocksInfo) {
+        // @todo Later we should replace this to avoid all the warnings from redefining blocks.
+        this.handleExtensionAdded(blocksInfo);
+    }
     handleCategorySelected (categoryName) {
         this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
     }
@@ -288,6 +301,8 @@ Blocks.propTypes = {
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
+    locale: PropTypes.string,
+    messages: PropTypes.objectOf(PropTypes.string),
     onActivateColorPicker: PropTypes.func,
     onActivateCustomProcedures: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
@@ -351,6 +366,8 @@ Blocks.defaultProps = {
 
 const mapStateToProps = state => ({
     extensionLibraryVisible: state.modals.extensionLibrary,
+    locale: state.intl.locale,
+    messages: state.intl.messages,
     toolboxXML: state.toolbox.toolboxXML,
     customProceduresVisible: state.customProcedures.active
 });

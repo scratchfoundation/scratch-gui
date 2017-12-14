@@ -60,7 +60,6 @@ class Blocks extends React.Component {
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
-        this.props.vm.setLocale(this.props.locale, this.props.messages);
 
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,

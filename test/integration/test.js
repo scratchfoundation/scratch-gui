@@ -229,12 +229,12 @@ describe('costumes, sounds and variables', () => {
         await clickText('English');
         await clickText('Deutsch');
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks refresh
-        await clickText('Pen', blocksTabScope); // will need to be updated when 'Pen' is translated
+        await clickText('Pen'); // will need to be updated when 'Pen' is translated
 
         // Make sure "Add Sprite" has changed to "Figur hinzufügen"
         await findByText('Figur hinzufügen');
         // Find the stamp block in German
-        await findByText('Abdruck', blocksTabScope);
+        await findByText('Abdruck');
 
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);

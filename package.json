@@ -99,7 +99,7 @@
     "web-audio-test-api": "^0.5.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.7",
-    "xhr": "2.4.0"
+    "xhr": "2.4.1"
   },
   "jest": {
     "setupFiles": [

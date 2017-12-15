@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 116:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12,27 +12,27 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(10);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactModal = __webpack_require__(42);
+var _reactModal = __webpack_require__(44);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
-var _appStateHoc = __webpack_require__(21);
+var _appStateHoc = __webpack_require__(22);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(22);
+var _gui = __webpack_require__(23);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(26);
+var _projectLoaderHoc = __webpack_require__(27);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(415);
+var _index = __webpack_require__(443);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -57,13 +57,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 415:
+/***/ 443:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(416);
+var content = __webpack_require__(444);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -89,7 +89,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 416:
+/***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -106,5 +106,5 @@ exports.locals = {
 
 /***/ })
 
-},[116]);
+},[122]);
 //# sourceMappingURL=gui.js.map

@@ -17,21 +17,25 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             this.updateProject = this.updateProject.bind(this);
             this.state = {
                 projectId: null,
-                projectData: null
+                projectData: null,
+                fetchingProject: false
             };
         }
         componentDidMount () {
             window.addEventListener('hashchange', this.updateProject);
             this.updateProject();
         }
-        componentDidUpdate (prevProps, prevState) {
-            if (this.state.projectId !== prevState.projectId) {
-                storage
-                    .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
-                    .then(projectAsset => projectAsset && this.setState({
-                        projectData: projectAsset.data.toString()
-                    }))
-                    .catch(err => log.error(err));
+        componentWillUpdate (nextProps, nextState) {
+            if (this.state.projectId !== nextState.projectId) {
+                this.setState({fetchingProject: true}, () => {
+                    storage
+                        .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
+                        .then(projectAsset => projectAsset && this.setState({
+                            projectData: projectAsset.data.toString(),
+                            fetchingProject: false
+                        }))
+                        .catch(err => log.error(err));
+                });
             }
         }
         componentWillUnmount () {
@@ -60,6 +64,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             if (!this.state.projectData) return null;
             return (
                 <WrappedComponent
+                    fetchingProject={this.state.fetchingProject}
                     projectData={this.state.projectData}
                     {...this.props}
                 />

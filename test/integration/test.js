@@ -88,7 +88,7 @@ describe('costumes, sounds and variables', () => {
         await clickText('Add Sound');
         let el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('meow');
-        await clickText('meow'); // Should close the modal
+        await clickText('Meow', modalScope); // Should close the modal
 
         // Add a new sound
         await clickText('Add Sound');

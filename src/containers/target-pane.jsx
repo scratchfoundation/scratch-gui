@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {
     openSpriteLibrary,
+    closeBackdropLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
 
@@ -90,7 +91,8 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
-    spriteLibraryVisible: state.modals.spriteLibrary
+    spriteLibraryVisible: state.modals.spriteLibrary,
+    backdropLibraryVisible: state.modals.backdropLibrary
 });
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
@@ -99,6 +101,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseSpriteLibrary: () => {
         dispatch(closeSpriteLibrary());
+    },
+    onRequestCloseBackdropLibrary: () => {
+        dispatch(closeBackdropLibrary());
     }
 });
 

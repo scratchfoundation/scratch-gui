@@ -4,7 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
-
+import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 
@@ -17,6 +17,7 @@ import styles from './target-pane.css';
  * @returns {React.Component} rendered component
  */
 const TargetPane = ({
+    backdropLibraryVisible,
     editingTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
@@ -29,6 +30,7 @@ const TargetPane = ({
     onDuplicateSprite,
     onNewSpriteClick,
     onRequestCloseSpriteLibrary,
+    onRequestCloseBackdropLibrary,
     onSelectSprite,
     stage,
     sprites,
@@ -72,6 +74,12 @@ const TargetPane = ({
                         onRequestClose={onRequestCloseSpriteLibrary}
                     />
                 ) : null}
+                {backdropLibraryVisible ? (
+                    <BackdropLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseBackdropLibrary}
+                    />
+                ) : null}
             </div>
         </div>
     </div>
@@ -96,6 +104,7 @@ const spriteShape = PropTypes.shape({
 });
 
 TargetPane.propTypes = {
+    backdropLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
     onChangeSpriteDirection: PropTypes.func,
@@ -107,6 +116,7 @@ TargetPane.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,

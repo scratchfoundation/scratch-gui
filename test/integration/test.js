@@ -74,6 +74,16 @@ describe('costumes, sounds and variables', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding a backdrop', async () => {
+        await loadUri(uri);
+        await clickText('Add Backdrop');
+        const el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        await el.sendKeys('blue');
+        await clickText('Blue Sky'); // Should close the modal
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a sound', async () => {
         await loadUri(uri);
         await clickText('Sounds');

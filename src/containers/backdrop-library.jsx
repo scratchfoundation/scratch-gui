@@ -23,7 +23,9 @@ class BackdropLibrary extends React.Component {
             skinId: null
         };
         this.props.vm.addBackdrop(item.md5, vmBackdrop).then(() => {
-            this.props.onNewBackdrop();
+            if (this.props.onNewBackdrop) {
+                this.props.onNewBackdrop();
+            }
         });
     }
     render () {
@@ -39,7 +41,7 @@ class BackdropLibrary extends React.Component {
 }
 
 BackdropLibrary.propTypes = {
-    onNewBackdrop: PropTypes.func.isRequired,
+    onNewBackdrop: PropTypes.func,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

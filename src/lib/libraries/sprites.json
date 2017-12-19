@@ -360,6 +360,106 @@
         }
     },
     {
+        "name": "Bass",
+        "md5": "bdbd2876847e54309a5ff3ee0895d724.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            8
+        ],
+        "json": {
+            "objName": "Bass",
+            "sounds": [
+                {
+                    "soundName": "C bass",
+                    "soundID": -1,
+                    "md5": "c3566ec797b483acde28f790994cc409.wav",
+                    "sampleCount": 44608,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D bass",
+                    "soundID": -1,
+                    "md5": "5a3ae8a2665f50fdc38cc301fbac79ba.wav",
+                    "sampleCount": 40192,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E bass",
+                    "soundID": -1,
+                    "md5": "0657e39bae81a232b01a18f727d3b891.wav",
+                    "sampleCount": 36160,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F bass",
+                    "soundID": -1,
+                    "md5": "ea21bdae86f70d60b28f1dddcf50d104.wav",
+                    "sampleCount": 34368,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G bass",
+                    "soundID": -1,
+                    "md5": "05c192194e8f1944514dce3833e33439.wav",
+                    "sampleCount": 30976,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A bass",
+                    "soundID": -1,
+                    "md5": "c04ebf21e5e19342fa1535e4efcdb43b.wav",
+                    "sampleCount": 28160,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B bass",
+                    "soundID": -1,
+                    "md5": "e31dcaf7bcdf58ac2a26533c48936c45.wav",
+                    "sampleCount": 25792,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 bass",
+                    "soundID": -1,
+                    "md5": "667d6c527b79321d398e85b526f15b99.wav",
+                    "sampleCount": 24128,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "bass",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "bdbd2876847e54309a5ff3ee0895d724.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 60,
+                    "rotationCenterY": 110
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -95,
+            "scratchY": 46,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 2,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Bat1",
         "md5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
         "type": "sprite",
@@ -599,6 +699,122 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 14,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Buildings",
+        "md5": "d713270e235851e5962becd73a951771.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            10,
+            1
+        ],
+        "json": {
+            "objName": "Buildings",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "building-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d713270e235851e5962becd73a951771.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 30
+                },
+                {
+                    "costumeName": "building-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8c2d59c50a97d33b096f629258f02be6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 46,
+                    "rotationCenterY": -11
+                },
+                {
+                    "costumeName": "building-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7f3f51f495c39809bed95991dfa1f80d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 25,
+                    "rotationCenterY": 17
+                },
+                {
+                    "costumeName": "building-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "bbe68ab80b36e4c71f4e28414c7f781e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 59,
+                    "rotationCenterY": -10
+                },
+                {
+                    "costumeName": "building-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1beeb8f034a1128c9a799297b0b7fc26.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 55
+                },
+                {
+                    "costumeName": "building-f",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "451e0a565e95d945fe2addfe609ee9df.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 41,
+                    "rotationCenterY": 27
+                },
+                {
+                    "costumeName": "building-g",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "58b3c9b7a41dde698fa2b427b502c1fa.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 64,
+                    "rotationCenterY": -65
+                },
+                {
+                    "costumeName": "building-h",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e952c8b14eeac894302d07d37a45ed99.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 136
+                },
+                {
+                    "costumeName": "building-i",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b00b1123e3bfcb600242528d059ffcfb.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": -12
+                },
+                {
+                    "costumeName": "building-j",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e08fd1a7397efcfe0e3691f945693cb4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 4,
+            "scratchY": -24,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 68,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1152,6 +1368,126 @@
         }
     },
     {
+        "name": "Clouds",
+        "md5": "c7d7de8e29179407f03b054fa640f4d0.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Clouds",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "cloud-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c7d7de8e29179407f03b054fa640f4d0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 76,
+                    "rotationCenterY": 19
+                },
+                {
+                    "costumeName": "cloud-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d8595350ebb460494c9189dabb968336.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 101,
+                    "rotationCenterY": 20
+                },
+                {
+                    "costumeName": "cloud-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "395fc991e64ac0a4aa46758ab4bc65cb.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 97,
+                    "rotationCenterY": 9
+                },
+                {
+                    "costumeName": "cloud-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1767e704acb11ffa409f77cc79ba7e86.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 87,
+                    "rotationCenterY": 21
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -21,
+            "scratchY": 16,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 69,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Cowbell",
+        "md5": "3b00920b17d43986685f3855bcb6afe7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            2
+        ],
+        "json": {
+            "objName": "Cowbell",
+            "sounds": [
+                {
+                    "soundName": "small cowbell",
+                    "soundID": -1,
+                    "md5": "e29154f53f56f96f8a3292bdcddcec54.wav",
+                    "sampleCount": 9718,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "large cowbell",
+                    "soundID": -1,
+                    "md5": "006316650ffc673dc02d36aa55881327.wav",
+                    "sampleCount": 20856,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "cowbell",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3b00920b17d43986685f3855bcb6afe7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 30
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 55,
+            "scratchY": 48,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 1,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Crab",
         "md5": "114249a5660f7948663d95de575cfd8d.svg",
         "type": "sprite",
@@ -1199,6 +1535,90 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 23,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Cymbal",
+        "md5": "532860ee3ecfd05d5f473dbe3ea69c8e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            5
+        ],
+        "json": {
+            "objName": "Cymbal",
+            "sounds": [
+                {
+                    "soundName": "crash cymbal",
+                    "soundID": -1,
+                    "md5": "f2c47a46f614f467a7ac802ed9ec3d8e.wav",
+                    "sampleCount": 25220,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hihat cymbal",
+                    "soundID": -1,
+                    "md5": "2d01f60d0f20ab39facbf707899c6b2a.wav",
+                    "sampleCount": 2752,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "splash cymbal",
+                    "soundID": -1,
+                    "md5": "9d63ed5be96c43b06492e8b4a9cea8d8.wav",
+                    "sampleCount": 9600,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "roll cymbal",
+                    "soundID": -1,
+                    "md5": "da8355d753cd2a5ddd19cb2bb41c1547.wav",
+                    "sampleCount": 26432,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "bell cymbal",
+                    "soundID": -1,
+                    "md5": "efddec047de95492f775a1b5b2e8d19e.wav",
+                    "sampleCount": 19328,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "cymbal-a",
+                    "baseLayerID": 2,
+                    "baseLayerMD5": "532860ee3ecfd05d5f473dbe3ea69c8e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 34,
+                    "rotationCenterY": 60
+                },
+                {
+                    "costumeName": "cymbal-b",
+                    "baseLayerID": 3,
+                    "baseLayerMD5": "ae5b19022fa882ff95790b25279b9a3f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 73
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -68,
+            "scratchY": -46,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1636,6 +2056,414 @@
         }
     },
     {
+        "name": "Drum-Bass",
+        "md5": "3308e038214f5a4adc53076a9fee9021.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            3
+        ],
+        "json": {
+            "objName": "Drum-Bass",
+            "sounds": [
+                {
+                    "soundName": "drum bass1",
+                    "soundID": -1,
+                    "md5": "48328c874353617451e4c7902cc82817.wav",
+                    "sampleCount": 6528,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "drum bass2",
+                    "soundID": -1,
+                    "md5": "711a1270d1cf2e5de9b145ee539213e4.wav",
+                    "sampleCount": 3791,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "drum bass3",
+                    "soundID": -1,
+                    "md5": "c21704337b16359ea631b5f8eb48f765.wav",
+                    "sampleCount": 8576,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "drum bass-a",
+                    "baseLayerID": 4,
+                    "baseLayerMD5": "3308e038214f5a4adc53076a9fee9021.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 46
+                },
+                {
+                    "costumeName": "drum bass-b",
+                    "baseLayerID": 5,
+                    "baseLayerMD5": "5febb3df727fb6624946e807a665b866.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 46
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 78,
+            "scratchY": 23,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 11,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Drum-Conga",
+        "md5": "b3da94523b6d3df2dd30602399599ab4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            4
+        ],
+        "json": {
+            "objName": "Drum-Conga",
+            "sounds": [
+                {
+                    "soundName": "high conga",
+                    "soundID": -1,
+                    "md5": "16144544de90e98a92a265d4fc3241ea.wav",
+                    "sampleCount": 8192,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "low conga",
+                    "soundID": -1,
+                    "md5": "0b6f94487cd8a1cf0bb77e15966656c3.wav",
+                    "sampleCount": 8384,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "muted conga",
+                    "soundID": -1,
+                    "md5": "1d4abbe3c9bfe198a88badb10762de75.wav",
+                    "sampleCount": 4544,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "tap conga",
+                    "soundID": -1,
+                    "md5": "fd9a67157f57f9cc6fe3cdce38a6d4a8.wav",
+                    "sampleCount": 6880,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "drums conga-a",
+                    "baseLayerID": 8,
+                    "baseLayerMD5": "b3da94523b6d3df2dd30602399599ab4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 51,
+                    "rotationCenterY": 51
+                },
+                {
+                    "costumeName": "drums conga-b",
+                    "baseLayerID": 9,
+                    "baseLayerMD5": "d4398062ed6e09927ab52823255186d3.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 79
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 98,
+            "scratchY": 34,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 13,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Drum-Snare",
+        "md5": "868f700de73a35c4d6fa4c93507c348d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            3
+        ],
+        "json": {
+            "objName": "Drum-Snare",
+            "sounds": [
+                {
+                    "soundName": "tap snare",
+                    "soundID": -1,
+                    "md5": "d55b3954d72c6275917f375e49b502f3.wav",
+                    "sampleCount": 3296,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "sidestick snare",
+                    "soundID": -1,
+                    "md5": "f6868ee5cf626fc4ef3ca1119dc95592.wav",
+                    "sampleCount": 2336,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "flam snare",
+                    "soundID": -1,
+                    "md5": "3b6cce9f8c56c0537ca61eee3945cd1d.wav",
+                    "sampleCount": 4416,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "drum snare-a",
+                    "baseLayerID": 6,
+                    "baseLayerMD5": "868f700de73a35c4d6fa4c93507c348d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 51,
+                    "rotationCenterY": 37
+                },
+                {
+                    "costumeName": "drum snare-b",
+                    "baseLayerID": 7,
+                    "baseLayerMD5": "93738cb485ef57cbd4b9bff386d0bba2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 57,
+                    "rotationCenterY": 59
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 67,
+            "scratchY": -40,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 12,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Drum-Tabla",
+        "md5": "68ce53b53fcc68744584c28d20144c4f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            4
+        ],
+        "json": {
+            "objName": "Drum-Tabla",
+            "sounds": [
+                {
+                    "soundName": "hi na tabla",
+                    "soundID": -1,
+                    "md5": "35b42d98c43404a5b1b52fb232a62bd7.wav",
+                    "sampleCount": 4096,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hi tun tabla",
+                    "soundID": -1,
+                    "md5": "da734693dfa6a9a7eccdc7f9a0ca9840.wav",
+                    "sampleCount": 18656,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "lo gliss tabla",
+                    "soundID": -1,
+                    "md5": "d7cd24689737569c93e7ea7344ba6b0e.wav",
+                    "sampleCount": 7008,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "lo geh tabla",
+                    "soundID": -1,
+                    "md5": "9205359ab69d042ed3da8a160a651690.wav",
+                    "sampleCount": 30784,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "tabla-a",
+                    "baseLayerID": 10,
+                    "baseLayerMD5": "68ce53b53fcc68744584c28d20144c4f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 75,
+                    "rotationCenterY": 45
+                },
+                {
+                    "costumeName": "tabla-b",
+                    "baseLayerID": 11,
+                    "baseLayerMD5": "01b6ffb8691d32be10fabc77ddfb55b0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 78,
+                    "rotationCenterY": 48
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -1,
+            "scratchY": -6,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 14,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Drum1",
+        "md5": "daad8bc865f55200844dbce476d2f1e9.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            2
+        ],
+        "json": {
+            "objName": "Drum1",
+            "sounds": [
+                {
+                    "soundName": "high tom",
+                    "soundID": -1,
+                    "md5": "d623f99b3c8d33932eb2c6c9cfd817c5.wav",
+                    "sampleCount": 12320,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "low tom",
+                    "soundID": -1,
+                    "md5": "1569bbbd8952b0575e5a5cb5aefb50ba.wav",
+                    "sampleCount": 20000,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "drum1-a",
+                    "baseLayerID": 12,
+                    "baseLayerMD5": "daad8bc865f55200844dbce476d2f1e9.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 49,
+                    "rotationCenterY": 44
+                },
+                {
+                    "costumeName": "drum1-b",
+                    "baseLayerID": 13,
+                    "baseLayerMD5": "8a2e9596b02ecdc195d76c1f34a48f76.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 60,
+                    "rotationCenterY": 61
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 48,
+            "scratchY": 36,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 15,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Drum2",
+        "md5": "68baa189ac7afb9426db1818aa88be8e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            2
+        ],
+        "json": {
+            "objName": "Drum2",
+            "sounds": [
+                {
+                    "soundName": "high tom",
+                    "soundID": -1,
+                    "md5": "d623f99b3c8d33932eb2c6c9cfd817c5.wav",
+                    "sampleCount": 12320,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "low tom",
+                    "soundID": -1,
+                    "md5": "1569bbbd8952b0575e5a5cb5aefb50ba.wav",
+                    "sampleCount": 20000,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "drum2-a",
+                    "baseLayerID": 14,
+                    "baseLayerMD5": "68baa189ac7afb9426db1818aa88be8e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 47,
+                    "rotationCenterY": 39
+                },
+                {
+                    "costumeName": "drum2-b",
+                    "baseLayerID": 15,
+                    "baseLayerMD5": "4a58fe0f173104aab03aaccdd3ce5280.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 47,
+                    "rotationCenterY": 54
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -49,
+            "scratchY": 34,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 16,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Duck",
         "md5": "c3baf7eedfbdac8cd1e4f1f1f779dc0c.svg",
         "type": "sprite",
@@ -1727,6 +2555,50 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 50,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Empty",
+        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "Empty",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "empty",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 36,
+            "scratchY": 28,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 67,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2132,6 +3004,306 @@
         }
     },
     {
+        "name": "Guitar",
+        "md5": "dfa85e2a962b725ee53f61cea2edc1fb.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            8
+        ],
+        "json": {
+            "objName": "Guitar",
+            "sounds": [
+                {
+                    "soundName": "C guitar",
+                    "soundID": -1,
+                    "md5": "22baa07795a9a524614075cdea543793.wav",
+                    "sampleCount": 44864,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D guitar",
+                    "soundID": -1,
+                    "md5": "2dbcfae6a55738f94bbb40aa5fcbf7ce.wav",
+                    "sampleCount": 41120,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E guitar",
+                    "soundID": -1,
+                    "md5": "4b5d1da83e59bf35578324573c991666.wav",
+                    "sampleCount": 38400,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F guitar",
+                    "soundID": -1,
+                    "md5": "b51d086aeb1921ec405561df52ecbc50.wav",
+                    "sampleCount": 36416,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G guitar",
+                    "soundID": -1,
+                    "md5": "98a835713ecea2f3ef9f4f442d52ad20.wav",
+                    "sampleCount": 33600,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A guitar",
+                    "soundID": -1,
+                    "md5": "ee753e87d212d4b2fb650ca660f1e839.wav",
+                    "sampleCount": 31872,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B guitar",
+                    "soundID": -1,
+                    "md5": "2ae2d67de62df8ca54d638b4ad2466c3.wav",
+                    "sampleCount": 29504,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 guitar",
+                    "soundID": -1,
+                    "md5": "c8d2851bd99d8e0ce6c1f05e4acc7f34.wav",
+                    "sampleCount": 27712,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "guitar",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "dfa85e2a962b725ee53f61cea2edc1fb.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 98
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 13,
+            "scratchY": -2,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 5,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Guitar-Bass",
+        "md5": "83cf122ec4a291e2a17910f718b583a5.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            8
+        ],
+        "json": {
+            "objName": "Guitar-Bass",
+            "sounds": [
+                {
+                    "soundName": "C elec bass",
+                    "soundID": -1,
+                    "md5": "69eee3d038ea0f1c34ec9156a789236d.wav",
+                    "sampleCount": 5216,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D elec bass",
+                    "soundID": -1,
+                    "md5": "67a6d1aa68233a2fa641aee88c7f051f.wav",
+                    "sampleCount": 5568,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E elec bass",
+                    "soundID": -1,
+                    "md5": "0704b8ceabe54f1dcedda8c98f1119fd.wav",
+                    "sampleCount": 5691,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F elec bass",
+                    "soundID": -1,
+                    "md5": "45eedb4ce62a9cbbd2207824b94a4641.wav",
+                    "sampleCount": 5312,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G elec bass",
+                    "soundID": -1,
+                    "md5": "97b187d72219b994a6ef6a5a6b09605c.wav",
+                    "sampleCount": 5568,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A elec bass",
+                    "soundID": -1,
+                    "md5": "5cb46ddd903fc2c9976ff881df9273c9.wav",
+                    "sampleCount": 5920,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B elec bass",
+                    "soundID": -1,
+                    "md5": "5a0701d0a914223b5288300ac94e90e4.wav",
+                    "sampleCount": 6208,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 elec bass",
+                    "soundID": -1,
+                    "md5": "56fc995b8860e713c5948ecd1c2ae572.wav",
+                    "sampleCount": 5792,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "guitar bass",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "83cf122ec4a291e2a17910f718b583a5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 53,
+                    "rotationCenterY": 145
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 50,
+            "scratchY": 40,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 4,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Guitar-Electric",
+        "md5": "18d7b47368ba1ead0d1ca436b8369211.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            8
+        ],
+        "json": {
+            "objName": "Guitar-Electric",
+            "sounds": [
+                {
+                    "soundName": "C elec guitar",
+                    "soundID": -1,
+                    "md5": "0d340de02e14bebaf8dfa0e43eb3f1f9.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D elec guitar",
+                    "soundID": -1,
+                    "md5": "1b5de9866801eb2f9d4f57c7c3b473f5.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E elec guitar",
+                    "soundID": -1,
+                    "md5": "2e6a6ae3e0f72bf78c74def8130f459a.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F elec guitar",
+                    "soundID": -1,
+                    "md5": "5eb00f15f21f734986aa45156d44478d.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G elec guitar",
+                    "soundID": -1,
+                    "md5": "cd0d0e7dad415b2ffa2ba7a61860eaf8.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A elec guitar",
+                    "soundID": -1,
+                    "md5": "fa5f7fea601e9368dd68449d9a54c995.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B elec guitar",
+                    "soundID": -1,
+                    "md5": "81f142d0b00189703d7fe9b1f13f6f87.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 elec guitar",
+                    "soundID": -1,
+                    "md5": "3a8ed3129f22cba5b0810bc030d16b5f.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "guitar electric",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "18d7b47368ba1ead0d1ca436b8369211.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 114
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -80,
+            "scratchY": -41,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 6,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Hippo1",
         "md5": "c1353c4a5eec5e6f32ed053e6f6e8f99.svg",
         "type": "sprite",
@@ -2371,6 +3543,238 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 57,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Microphone",
+        "md5": "59109aefada55997b9497c6266695830.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            10
+        ],
+        "json": {
+            "objName": "Microphone",
+            "sounds": [
+                {
+                    "soundName": "bass beatbox",
+                    "soundID": -1,
+                    "md5": "28153621d293c86da0b246d314458faf.wav",
+                    "sampleCount": 6720,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hi beatbox",
+                    "soundID": -1,
+                    "md5": "5a07847bf246c227204728b05a3fc8f3.wav",
+                    "sampleCount": 5856,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "snare beatbox",
+                    "soundID": -1,
+                    "md5": "c642c4c00135d890998f351faec55498.wav",
+                    "sampleCount": 5630,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "scratching beatbox",
+                    "soundID": -1,
+                    "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
+                    "sampleCount": 11552,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "crash beatbox",
+                    "soundID": -1,
+                    "md5": "725e29369e9138a43f11e0e5eb3eb562.wav",
+                    "sampleCount": 26883,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "wub beatbox",
+                    "soundID": -1,
+                    "md5": "e1f32c057411da4237181ce72ae15d23.wav",
+                    "sampleCount": 7392,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hihat beatbox",
+                    "soundID": 0,
+                    "md5": "0c77025e2e874f05cd3c7d850874d56d.wav",
+                    "sampleCount": 4274,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "rim beatbox",
+                    "soundID": -1,
+                    "md5": "7ede1382b578d8fc32850b48d082d914.wav",
+                    "sampleCount": 4960,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "clap beatbox",
+                    "soundID": -1,
+                    "md5": "abc70bb390f8e55f22f32265500d814a.wav",
+                    "sampleCount": 4224,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "wah beatbox",
+                    "soundID": -1,
+                    "md5": "9021b7bb06f2399f18e2db4fb87095dc.wav",
+                    "sampleCount": 6624,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "microphone",
+                    "baseLayerID": 16,
+                    "baseLayerMD5": "59109aefada55997b9497c6266695830.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 27,
+                    "rotationCenterY": 31
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 47,
+            "scratchY": -45,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 17,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Microphone Stand",
+        "md5": "fe85f2d5a94d27b6d793361c3fddcf77.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            10
+        ],
+        "json": {
+            "objName": "Microphone Stand",
+            "sounds": [
+                {
+                    "soundName": "bass beatbox",
+                    "soundID": -1,
+                    "md5": "28153621d293c86da0b246d314458faf.wav",
+                    "sampleCount": 6720,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hi beatbox",
+                    "soundID": -1,
+                    "md5": "5a07847bf246c227204728b05a3fc8f3.wav",
+                    "sampleCount": 5856,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "snare beatbox",
+                    "soundID": 1,
+                    "md5": "726fea2968a387ef566c03d163f17668.wav",
+                    "sampleCount": 6102,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "scratching beatbox",
+                    "soundID": -1,
+                    "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
+                    "sampleCount": 11552,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "crash beatbox",
+                    "soundID": -1,
+                    "md5": "725e29369e9138a43f11e0e5eb3eb562.wav",
+                    "sampleCount": 26883,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "wub beatbox",
+                    "soundID": -1,
+                    "md5": "e1f32c057411da4237181ce72ae15d23.wav",
+                    "sampleCount": 7392,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "hihat beatbox",
+                    "soundID": 0,
+                    "md5": "0c77025e2e874f05cd3c7d850874d56d.wav",
+                    "sampleCount": 4274,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "rim beatbox",
+                    "soundID": -1,
+                    "md5": "7ede1382b578d8fc32850b48d082d914.wav",
+                    "sampleCount": 4960,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "clap beatbox",
+                    "soundID": -1,
+                    "md5": "abc70bb390f8e55f22f32265500d814a.wav",
+                    "sampleCount": 4224,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "wah beatbox",
+                    "soundID": -1,
+                    "md5": "9021b7bb06f2399f18e2db4fb87095dc.wav",
+                    "sampleCount": 6624,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "microphonestand",
+                    "baseLayerID": 21,
+                    "baseLayerMD5": "fe85f2d5a94d27b6d793361c3fddcf77.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 57,
+                    "rotationCenterY": 55
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -2,
+            "scratchY": 49,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 19,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2652,6 +4056,230 @@
         }
     },
     {
+        "name": "Piano",
+        "md5": "a79a9794c290e5aa533230cc3d13795b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            8
+        ],
+        "json": {
+            "objName": "Piano",
+            "sounds": [
+                {
+                    "soundName": "C piano",
+                    "soundID": -1,
+                    "md5": "d27ed8d953fe8f03c00f4d733d31d2cc.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D piano",
+                    "soundID": -1,
+                    "md5": "51381ac422605ee8c7d64cfcbfd75efc.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E piano",
+                    "soundID": -1,
+                    "md5": "c818fdfaf8a0efcb562e24e794700a57.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F piano",
+                    "soundID": -1,
+                    "md5": "cdab3cce84f74ecf53e3941c6a003b5e.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G piano",
+                    "soundID": -1,
+                    "md5": "42bb2ed28e7023e111b33220e1594a6f.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A piano",
+                    "soundID": -1,
+                    "md5": "0727959edb2ea0525feed9b0c816991c.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B piano",
+                    "soundID": -1,
+                    "md5": "86826c6022a46370ed1afae69f1ab1b9.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 piano",
+                    "soundID": -1,
+                    "md5": "75d7d2c9b5d40dd4e1cb268111abf1a2.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "piano",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "a79a9794c290e5aa533230cc3d13795b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 142,
+                    "rotationCenterY": 88
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -83,
+            "scratchY": 3,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 7,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Piano-Electric",
+        "md5": "337368e789abc17beb1a2bacbb9d3bdc.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            4,
+            8
+        ],
+        "json": {
+            "objName": "Piano-Electric",
+            "sounds": [
+                {
+                    "soundName": "C elec piano",
+                    "soundID": -1,
+                    "md5": "8366ee963cc57ad24a8a35a26f722c2b.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D elec piano",
+                    "soundID": -1,
+                    "md5": "835f136ca8d346a17b4d4baf8405be37.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E elec piano",
+                    "soundID": -1,
+                    "md5": "ab3c198f8e36efff14f0a5bad35fa3cd.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F elec piano",
+                    "soundID": -1,
+                    "md5": "dc5e368fc0d0dad1da609bfc3e29aa15.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G elec piano",
+                    "soundID": -1,
+                    "md5": "39525f6545d62a95d05153f92d63301a.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A elec piano",
+                    "soundID": -1,
+                    "md5": "0cfa8e84d6a5cd63afa31d541625a9ef.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B elec piano",
+                    "soundID": -1,
+                    "md5": "9cc77167419f228503dd57fddaa5b2a6.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 elec piano",
+                    "soundID": -1,
+                    "md5": "366c7edbd4dd5cca68bf62902999bd66.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "keyboard-a",
+                    "baseLayerID": 17,
+                    "baseLayerMD5": "337368e789abc17beb1a2bacbb9d3bdc.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 88,
+                    "rotationCenterY": 24
+                },
+                {
+                    "costumeName": "keyboard-b",
+                    "baseLayerID": 18,
+                    "baseLayerMD5": "290216dfdf0cffea57743d91f130b2c7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 89,
+                    "rotationCenterY": 24
+                },
+                {
+                    "costumeName": "keyboard-c",
+                    "baseLayerID": 19,
+                    "baseLayerMD5": "750cbbcd66cb893cd5a66ee0a663e486.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 89,
+                    "rotationCenterY": 24
+                },
+                {
+                    "costumeName": "keyboard-d",
+                    "baseLayerID": 20,
+                    "baseLayerMD5": "46b0d833ad845d88585fbd0cb4b070ee.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 89,
+                    "rotationCenterY": 24
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -93,
+            "scratchY": 0,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 18,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Pico",
         "md5": "0579fe60bb3717c49dfd7743caa84ada.svg",
         "type": "sprite",
@@ -2714,7 +4342,7 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 67,
+            "indexInLibrary": 66,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2860,13 +4488,13 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -51,
-            "scratchY": 23,
+            "scratchX": 59,
+            "scratchY": 30,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 62,
+            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2926,7 +4554,7 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 63,
+            "indexInLibrary": 62,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3298,7 +4926,7 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 64,
+            "indexInLibrary": 63,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3366,7 +4994,298 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 65,
+            "indexInLibrary": 64,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Trombone",
+        "md5": "7d7098a45ab54def8d919141e90db4c5.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            8
+        ],
+        "json": {
+            "objName": "Trombone",
+            "sounds": [
+                {
+                    "soundName": "C trombone",
+                    "soundID": -1,
+                    "md5": "821b23a489201a0f21f47ba8528ba47f.wav",
+                    "sampleCount": 19053,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D trombone",
+                    "soundID": -1,
+                    "md5": "f3afca380ba74372d611d3f518c2f35b.wav",
+                    "sampleCount": 17339,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E trombone",
+                    "soundID": -1,
+                    "md5": "c859fb0954acaa25c4b329df5fb76434.wav",
+                    "sampleCount": 16699,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F trombone",
+                    "soundID": -1,
+                    "md5": "d6758470457aac2aa712717a676a5163.wav",
+                    "sampleCount": 19373,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G trombone",
+                    "soundID": -1,
+                    "md5": "9436fd7a0eacb4a6067e7db14236dde1.wav",
+                    "sampleCount": 17179,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A trombone",
+                    "soundID": -1,
+                    "md5": "863ccc8ba66e6dabbce2a1261c22be0f.wav",
+                    "sampleCount": 17227,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "B trombone",
+                    "soundID": -1,
+                    "md5": "85b663229525b73d9f6647f78eb23e0a.wav",
+                    "sampleCount": 15522,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 trombone",
+                    "soundID": -1,
+                    "md5": "68aec107bd3633b2ee40c532eedc3897.wav",
+                    "sampleCount": 13904,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "trombone-a",
+                    "baseLayerID": 24,
+                    "baseLayerMD5": "7d7098a45ab54def8d919141e90db4c5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 73,
+                    "rotationCenterY": 43
+                },
+                {
+                    "costumeName": "trombone-b",
+                    "baseLayerID": 25,
+                    "baseLayerMD5": "08edef976dbc09e8b62bce0f4607ea4a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 73,
+                    "rotationCenterY": 43
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 4,
+            "scratchY": 0,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 21,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Trumpet",
+        "md5": "3bcbd84df7924b6f97a2fa5d9bce56c8.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            2,
+            8
+        ],
+        "json": {
+            "objName": "Trumpet",
+            "sounds": [
+                {
+                    "soundName": "C trumpet",
+                    "soundID": -1,
+                    "md5": "8970afcdc4e47bb54959a81fe27522bd.wav",
+                    "sampleCount": 13118,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D trumpet",
+                    "soundID": -1,
+                    "md5": "0b1345b8fe2ba3076fedb4f3ae48748a.wav",
+                    "sampleCount": 12702,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E trumpet",
+                    "soundID": -1,
+                    "md5": "494295a92314cadb220945a6711c568c.wav",
+                    "sampleCount": 8680,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "F trumpet",
+                    "soundID": -1,
+                    "md5": "5fa3108b119ca266029b4caa340a7cd0.wav",
+                    "sampleCount": 12766,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G trumpet",
+                    "soundID": -1,
+                    "md5": "e84afda25975f14b364118591538ccf4.wav",
+                    "sampleCount": 14640,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A trumpet",
+                    "soundID": -1,
+                    "md5": "d2dd6b4372ca17411965dc92d52b2172.wav",
+                    "sampleCount": 13911,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B trumpet",
+                    "soundID": -1,
+                    "md5": "cad2bc57729942ed9b605145fc9ea65d.wav",
+                    "sampleCount": 14704,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 trumpet",
+                    "soundID": -1,
+                    "md5": "df08249ed5446cc5e10b7ac62faac89b.wav",
+                    "sampleCount": 15849,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "trumpet-a",
+                    "baseLayerID": 22,
+                    "baseLayerMD5": "3bcbd84df7924b6f97a2fa5d9bce56c8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 84,
+                    "rotationCenterY": 25
+                },
+                {
+                    "costumeName": "trumpet-a2",
+                    "baseLayerID": 23,
+                    "baseLayerMD5": "5c0db80c63a72e8ab07d047183575378.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 84,
+                    "rotationCenterY": 25
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -58,
+            "scratchY": -47,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 20,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Ukulele",
+        "md5": "39215565394d6280c6c81e7ad86c7ca0.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            4
+        ],
+        "json": {
+            "objName": "Ukulele",
+            "variables": [
+                {
+                    "name": "counter",
+                    "value": 5,
+                    "isPersistent": false
+                }
+            ],
+            "sounds": [
+                {
+                    "soundName": "C major ukulele",
+                    "soundID": -1,
+                    "md5": "aa2ca112507b59b5337f341aaa75fb08.wav",
+                    "sampleCount": 18203,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F major ukulele",
+                    "soundID": -1,
+                    "md5": "cd0ab5d1b0120c6ed92a1654ccf81376.wav",
+                    "sampleCount": 18235,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A minor ukulele",
+                    "soundID": -1,
+                    "md5": "69d25af0fd065da39c71439174efc589.wav",
+                    "sampleCount": 18267,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G ukulele",
+                    "soundID": -1,
+                    "md5": "d20218f92ee606277658959005538e2d.wav",
+                    "sampleCount": 18235,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "ukulele",
+                    "baseLayerID": 1,
+                    "baseLayerMD5": "39215565394d6280c6c81e7ad86c7ca0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 30,
+                    "rotationCenterY": 78
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -88,
+            "scratchY": 7,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 9,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3470,7 +5389,7 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 66,
+            "indexInLibrary": 65,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3647,6 +5566,4318 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 42,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-A",
+        "md5": "602a16930a8050e1298e1a0ae844363e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-A",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "602a16930a8050e1298e1a0ae844363e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 36,
+            "scratchY": -31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 1,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-B",
+        "md5": "f8c683cf71660e8ac1f8855599857a25.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-B",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f8c683cf71660e8ac1f8855599857a25.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 42
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -24,
+            "scratchY": -45,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 2,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-C",
+        "md5": "f8f4cc686ffc5a4113a99f70b09abd32.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-C",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f8f4cc686ffc5a4113a99f70b09abd32.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 43
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 42,
+            "scratchY": 22,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 3,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-D",
+        "md5": "aee2d71ef0293b33479bff9423d16b67.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-D",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "aee2d71ef0293b33479bff9423d16b67.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 30,
+            "scratchY": -39,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 4,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-E",
+        "md5": "16c6257316ff94cc7539ccdfc24e5fb8.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-E",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "16c6257316ff94cc7539ccdfc24e5fb8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 25,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -87,
+            "scratchY": -22,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 5,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-F",
+        "md5": "34c090c1f573c569332ead68cb99b595.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-F",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-f",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "34c090c1f573c569332ead68cb99b595.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 23,
+                    "rotationCenterY": 40
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -80,
+            "scratchY": 21,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 7,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-G",
+        "md5": "8bb2382627004eb08ff10ea8171cc724.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-G",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-g",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8bb2382627004eb08ff10ea8171cc724.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 3,
+            "scratchY": 33,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 10,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-H",
+        "md5": "f1578807d4a124fc02b639a8febeaab3.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-H",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-h",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f1578807d4a124fc02b639a8febeaab3.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 27,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 96,
+            "scratchY": 42,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 12,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-I",
+        "md5": "341bc70442886d6fdf959f2a97a63554.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-I",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-i",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "341bc70442886d6fdf959f2a97a63554.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 19,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 23,
+            "scratchY": 25,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 14,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-J",
+        "md5": "4b420cce964beedf2c1dc43faa59fdec.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-J",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-j",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4b420cce964beedf2c1dc43faa59fdec.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 25,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -26,
+            "scratchY": 39,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 16,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-K",
+        "md5": "19601cc33449813aa93a47c63167e5c1.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-K",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-k",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "19601cc33449813aa93a47c63167e5c1.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 24,
+                    "rotationCenterY": 40
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -10,
+            "scratchY": -31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 18,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-L",
+        "md5": "87358e3c9b9f5be4376253ce08d0192d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-L",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-l",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "87358e3c9b9f5be4376253ce08d0192d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 40
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -40,
+            "scratchY": -33,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 20,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-M",
+        "md5": "7ba0642be1f0080c0d273ea96e29b1e8.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-M",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-m",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7ba0642be1f0080c0d273ea96e29b1e8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -80,
+            "scratchY": 10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 22,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-N",
+        "md5": "6c1fbc57821744bd9356ce9a21ed70f7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-N",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-n",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6c1fbc57821744bd9356ce9a21ed70f7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 66,
+            "scratchY": 0,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 24,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-O",
+        "md5": "e88638200a73e167d0e266a343019cec.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-O",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-o",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e88638200a73e167d0e266a343019cec.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 40
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -82,
+            "scratchY": -14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 28,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-P",
+        "md5": "ad2fc3a1c6538678915633a11ab6ec73.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-P",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-p",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ad2fc3a1c6538678915633a11ab6ec73.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 18,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 53,
+            "scratchY": 43,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 26,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-Q",
+        "md5": "64da9da8684c74deb567dbdb661d3a52.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-Q",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-q",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "64da9da8684c74deb567dbdb661d3a52.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 52,
+            "scratchY": 47,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 36,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-R",
+        "md5": "73e8d46f7475476d8cb4cfcfc75ee50d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-R",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-r",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "73e8d46f7475476d8cb4cfcfc75ee50d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 22,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -88,
+            "scratchY": 14,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 31,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-S",
+        "md5": "9feb5593fed51e88dbb3128cfc290d29.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-S",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-s",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9feb5593fed51e88dbb3128cfc290d29.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 30
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -74,
+            "scratchY": -29,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 33,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-T",
+        "md5": "d29c1caf5cf195740c38f279e82a77a4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-T",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-t",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d29c1caf5cf195740c38f279e82a77a4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 25,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 41,
+            "scratchY": 26,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 38,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-U",
+        "md5": "faef46b7bf589c36300142f6f03c5d32.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-U",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-u",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "faef46b7bf589c36300142f6f03c5d32.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 52,
+            "scratchY": -28,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 40,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-V",
+        "md5": "65e2f4821ab084827e22920acb61c92b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-V",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-v",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "65e2f4821ab084827e22920acb61c92b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 73,
+            "scratchY": -32,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 43,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-W",
+        "md5": "5ab197b4f70b2f98a3658c7ccdc3351d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-W",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-w",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5ab197b4f70b2f98a3658c7ccdc3351d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 47,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 1,
+            "scratchY": -49,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 45,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-X",
+        "md5": "cb9dff35f05e823d954e47e4a717a48c.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-X",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-x",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cb9dff35f05e823d954e47e4a717a48c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 25,
+                    "rotationCenterY": 32
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 61,
+            "scratchY": -35,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 47,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-Y",
+        "md5": "4c13c440bcb35c8c3aa6226374fced3f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-Y",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-y",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4c13c440bcb35c8c3aa6226374fced3f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 33
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 53,
+            "scratchY": -12,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 49,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZBlock-Z",
+        "md5": "0ccff1898f1bf1b25333d581db09fae2.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zBlock-Z",
+            "sounds": [
+                {
+                    "soundName": "meow",
+                    "soundID": -1,
+                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+                    "sampleCount": 18688,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zBlock-z",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0ccff1898f1bf1b25333d581db09fae2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 24,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -33,
+            "scratchY": -20,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 51,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-0",
+        "md5": "38b2b342659adc6fa289090975e0e71d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-0",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-0",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "38b2b342659adc6fa289090975e0e71d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -31,
+            "scratchY": -37,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 53,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-1",
+        "md5": "2c88706210672655401fe09edd8ff6a7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-1",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-1",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "2c88706210672655401fe09edd8ff6a7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 24,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 95,
+            "scratchY": -19,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 54,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-2",
+        "md5": "b9faa5708a799a1607f0325a7af2561c.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-2",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-2",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b9faa5708a799a1607f0325a7af2561c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -44,
+            "scratchY": -10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 55,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-3",
+        "md5": "cf42a50552ce26032ead712ac4f36c23.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-3",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-3",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cf42a50552ce26032ead712ac4f36c23.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 42
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 48,
+            "scratchY": 7,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 56,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-4",
+        "md5": "3ffa6aee373e28fc36b9395ac4d0467e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-4",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-4",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3ffa6aee373e28fc36b9395ac4d0467e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 50,
+            "scratchY": -12,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 57,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-5",
+        "md5": "85d87d32e7e9e6be122c905b0d2e7e33.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-5",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-5",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "85d87d32e7e9e6be122c905b0d2e7e33.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 30,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -88,
+            "scratchY": -37,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 58,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-6",
+        "md5": "62cc2a6def27f19d11ed56e86e95aac5.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-6",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-6",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "62cc2a6def27f19d11ed56e86e95aac5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 30,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 35,
+            "scratchY": 31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 59,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-7",
+        "md5": "8887983eb4df2e62a2ed4770a1d98d60.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-7",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-7",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8887983eb4df2e62a2ed4770a1d98d60.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 42
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 30,
+            "scratchY": 5,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 60,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-8",
+        "md5": "4c42c4cb0c1e090d0f9570416d3c80c8.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-8",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-8",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4c42c4cb0c1e090d0f9570416d3c80c8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 31,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -39,
+            "scratchY": -8,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 61,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-9",
+        "md5": "7bcb7e2e48f5cb770c83d4267922fec0.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-9",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-9",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7bcb7e2e48f5cb770c83d4267922fec0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 36
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 87,
+            "scratchY": 36,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 62,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-A",
+        "md5": "d5aa299350c24c747200a64b63b1aa52.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-A",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-A",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d5aa299350c24c747200a64b63b1aa52.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 48,
+            "scratchY": -44,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 6,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-B",
+        "md5": "a2e95f268a6cab03f3e94b3b0b792d83.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-B",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-B",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a2e95f268a6cab03f3e94b3b0b792d83.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 35
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -85,
+            "scratchY": 45,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 8,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-C",
+        "md5": "9779a4a40934f04a4bf84920b258d7c9.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-C",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-C",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9779a4a40934f04a4bf84920b258d7c9.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 27,
+                    "rotationCenterY": 35
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -98,
+            "scratchY": 35,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 9,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-D",
+        "md5": "3555b8bbbbcdc00354bf6fa81ac7042f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-D",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-D",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3555b8bbbbcdc00354bf6fa81ac7042f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 35
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 25,
+            "scratchY": -13,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 11,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-E",
+        "md5": "44dbc655d5ac9f13618473848e23484e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-E",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-E",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "44dbc655d5ac9f13618473848e23484e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 34,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -5,
+            "scratchY": -19,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 13,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-F",
+        "md5": "dec417e749e43d7de3985155f5f5a7a0.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-F",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-F",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "dec417e749e43d7de3985155f5f5a7a0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -89,
+            "scratchY": -22,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 15,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-G",
+        "md5": "cf4aa465cd8fb7049cc571d7546a7eb1.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-G",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-G",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cf4aa465cd8fb7049cc571d7546a7eb1.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 28,
+            "scratchY": 16,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 17,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-H",
+        "md5": "8d9bd5f00ea1ac6f92d0f97ee491b0f3.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-H",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-H",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8d9bd5f00ea1ac6f92d0f97ee491b0f3.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 46
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 91,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 19,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-I",
+        "md5": "0e86de55840103dcd50199ab2b765de7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-I",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-I",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0e86de55840103dcd50199ab2b765de7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 21,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -38,
+            "scratchY": -29,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 21,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-J",
+        "md5": "b3832145eacc39f91bd3a9a6673fa05c.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-J",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-J",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b3832145eacc39f91bd3a9a6673fa05c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -34,
+            "scratchY": 1,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 23,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-K",
+        "md5": "f4e37a7552ba05e995613211a7146de5.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-K",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-K",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f4e37a7552ba05e995613211a7146de5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 38,
+                    "rotationCenterY": 36
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -41,
+            "scratchY": 30,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 25,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-L",
+        "md5": "a75e45773ea6afaf8ae44f79f936fc82.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-L",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-L",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a75e45773ea6afaf8ae44f79f936fc82.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 35
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 54,
+            "scratchY": -21,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 27,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-M",
+        "md5": "219b06faa5b816347165450d148213b4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-M",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-M",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "219b06faa5b816347165450d148213b4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 42,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -43,
+            "scratchY": -15,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 29,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-N",
+        "md5": "4b724479fb3b2184fd8be6f83fb20e54.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-N",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-N",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4b724479fb3b2184fd8be6f83fb20e54.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -23,
+            "scratchY": -33,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 30,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-O",
+        "md5": "38b2b342659adc6fa289090975e0e71d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-O",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-O",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "38b2b342659adc6fa289090975e0e71d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -40,
+            "scratchY": 26,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 32,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-P",
+        "md5": "1cfa849cc967069730b7e9d0809c9dc1.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-P",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-P",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1cfa849cc967069730b7e9d0809c9dc1.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -10,
+            "scratchY": -9,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 34,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-Q",
+        "md5": "9d35979e9404ac234301269fcd7de288.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-Q",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-Q",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9d35979e9404ac234301269fcd7de288.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 43
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -85,
+            "scratchY": -1,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 35,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-R",
+        "md5": "fc067ee076ecaba8430ccd54d9414c1b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-R",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-R",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "fc067ee076ecaba8430ccd54d9414c1b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 26,
+            "scratchY": 37,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 37,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-S",
+        "md5": "19a93db8a294ccaec4d6eef4020a446f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-S",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-S",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "19a93db8a294ccaec4d6eef4020a446f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 27,
+                    "rotationCenterY": 40
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -94,
+            "scratchY": -36,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 39,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-T",
+        "md5": "d7bcda522a1e9504dafcf2fa0fcde39b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-T",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-T",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d7bcda522a1e9504dafcf2fa0fcde39b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 38
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 37,
+            "scratchY": -20,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 41,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-U",
+        "md5": "790482a3c3691a1e96ef34eee7303872.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-U",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-U",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "790482a3c3691a1e96ef34eee7303872.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 37
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 17,
+            "scratchY": 31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 42,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-V",
+        "md5": "6a00388d8dc6be645b843cef9c22681c.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-V",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-V",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6a00388d8dc6be645b843cef9c22681c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 35,
+                    "rotationCenterY": 42
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 82,
+            "scratchY": 26,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 44,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-W",
+        "md5": "1a9ea7305a85b271c1de79beafe16cb4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-W",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-W",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1a9ea7305a85b271c1de79beafe16cb4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 45,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -18,
+            "scratchY": 11,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 46,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-X",
+        "md5": "ec4e65b9ae475a676973128f4205df5f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-X",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-X",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ec4e65b9ae475a676973128f4205df5f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -84,
+            "scratchY": 46,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 48,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-Y",
+        "md5": "683cd093bb3b254733a15df6f843464c.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-Y",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-Y",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "683cd093bb3b254733a15df6f843464c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 38,
+                    "rotationCenterY": 41
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -34,
+            "scratchY": 46,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 50,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZGlow-Z",
+        "md5": "db89a4c9b123123542e0b7556ed3ff9f.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zGlow-Z",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zGlow-Z",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "db89a4c9b123123542e0b7556ed3ff9f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 30,
+                    "rotationCenterY": 39
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 87,
+            "scratchY": 15,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 52,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-0",
+        "md5": "cd1f984997b44de464bbf86fc073b280.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-0",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-0",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cd1f984997b44de464bbf86fc073b280.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 9,
+            "scratchY": 1,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 89,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-1",
+        "md5": "4ec3d6c4ef14112ed7c6ba6b9549da3b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-1",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-1",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4ec3d6c4ef14112ed7c6ba6b9549da3b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 7,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 71,
+            "scratchY": 8,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 90,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-2",
+        "md5": "d0136e77a646a3ad719aaa7f8f95a7ff.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-2",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-2",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d0136e77a646a3ad719aaa7f8f95a7ff.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 17
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 37,
+            "scratchY": -16,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 91,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-3",
+        "md5": "7c1700f0dcfb418662d29ba6faa114e7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-3",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-3",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7c1700f0dcfb418662d29ba6faa114e7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -4,
+            "scratchY": -44,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 92,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-4",
+        "md5": "6238b9b95fad7f7aa9cef9bde5bde474.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-4",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-4",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6238b9b95fad7f7aa9cef9bde5bde474.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -32,
+            "scratchY": 42,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 93,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-5",
+        "md5": "aef915acf1d49deed46692411e6c6039.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-5",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-5",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "aef915acf1d49deed46692411e6c6039.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 12,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -26,
+            "scratchY": 43,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 94,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-6",
+        "md5": "e6ad1d1fe44a1c63c8f99c0bbb893a44.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-6",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-6",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e6ad1d1fe44a1c63c8f99c0bbb893a44.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 17
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -33,
+            "scratchY": -47,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 95,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-7",
+        "md5": "469b4fb6f6f8721e2c244ae9c71a7e66.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-7",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-7",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "469b4fb6f6f8721e2c244ae9c71a7e66.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 12,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -7,
+            "scratchY": -29,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 96,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-8",
+        "md5": "5bfcf2c715b81ae380ae2983bb4c5bb2.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-8",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-8",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5bfcf2c715b81ae380ae2983bb4c5bb2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -16,
+            "scratchY": 10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 97,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-9",
+        "md5": "8014a66c758f1bc389194c988badb382.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-9",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-9",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8014a66c758f1bc389194c988badb382.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 12,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 50,
+            "scratchY": 24,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 98,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-A",
+        "md5": "a54da6be420c9e8e7cb02e2a568f3442.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-A",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-A",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a54da6be420c9e8e7cb02e2a568f3442.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -50,
+            "scratchY": -31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 63,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-B",
+        "md5": "e47682020873e276f550421f0d854523.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-B",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-B",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e47682020873e276f550421f0d854523.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -15,
+            "scratchY": -36,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 64,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-C",
+        "md5": "ee1958ffbae4e0fd836622ae183b55bd.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-C",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-C",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ee1958ffbae4e0fd836622ae183b55bd.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 69,
+            "scratchY": 31,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 65,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-D",
+        "md5": "d759df99f347d9b7d59e1f703e8e1438.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-D",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-D",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d759df99f347d9b7d59e1f703e8e1438.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 50,
+            "scratchY": 12,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 66,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-E",
+        "md5": "059a64a90014dc69c510b562cdf94df7.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-E",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-E",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "059a64a90014dc69c510b562cdf94df7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 11,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -42,
+            "scratchY": 17,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 67,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-F",
+        "md5": "ebbc6dc0f7d1a89b159aac3f76fe52f4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-F",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-F",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ebbc6dc0f7d1a89b159aac3f76fe52f4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 10,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 32,
+            "scratchY": 10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 68,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-G",
+        "md5": "203dfa253635f0e52059e835c51fa6f8.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-G",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-G",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "203dfa253635f0e52059e835c51fa6f8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 15,
+                    "rotationCenterY": 22
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 37,
+            "scratchY": -2,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 69,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-H",
+        "md5": "d9a94d9b9abc9e26eb91d22d197a1556.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-H",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-H",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d9a94d9b9abc9e26eb91d22d197a1556.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 15,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -20,
+            "scratchY": 24,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 70,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-I",
+        "md5": "aeb851adc39da9582a379af1ed6d0efe.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-I",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-I",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "aeb851adc39da9582a379af1ed6d0efe.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 9,
+                    "rotationCenterY": 21
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -48,
+            "scratchY": -38,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 71,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-J",
+        "md5": "c18906f764b2889a8fc0b3c16db28bf0.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-J",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-J",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c18906f764b2889a8fc0b3c16db28bf0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 13,
+            "scratchY": 46,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 72,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-K",
+        "md5": "4483633d2ae26987d0efe359aaf1357b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-K",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-K",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4483633d2ae26987d0efe359aaf1357b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 13,
+            "scratchY": -41,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 73,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-L",
+        "md5": "0625b64705d62748c6105e969859fe0d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-L",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-L",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0625b64705d62748c6105e969859fe0d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 11,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -75,
+            "scratchY": -15,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 74,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-M",
+        "md5": "46ccf731f158b9dda75f4e71a5bcd282.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-M",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-M",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "46ccf731f158b9dda75f4e71a5bcd282.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 19,
+                    "rotationCenterY": 16
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 75,
+            "scratchY": -18,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 75,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-N",
+        "md5": "f9d3b49b5962ff4070fae186b8b71e39.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-N",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-N",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f9d3b49b5962ff4070fae186b8b71e39.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -66,
+            "scratchY": -37,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 77,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-O",
+        "md5": "668b21968078f3b7b1a9ccd74407fa1e.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-O",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-O",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "668b21968078f3b7b1a9ccd74407fa1e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 20,
+            "scratchY": -37,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 76,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-P",
+        "md5": "02011265d2597175c7496da667265f4a.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-P",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-P",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "02011265d2597175c7496da667265f4a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 67,
+            "scratchY": -22,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 78,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-Q",
+        "md5": "8c77c87dd0ed2613873cff0795ffc701.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-Q",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-Q",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8c77c87dd0ed2613873cff0795ffc701.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 21
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 87,
+            "scratchY": -42,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 79,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-R",
+        "md5": "c94daea3bd1e8cec36e1aa4e0b1d3f2b.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-R",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-R",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c94daea3bd1e8cec36e1aa4e0b1d3f2b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 16,
+            "scratchY": -10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 80,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-S",
+        "md5": "2fedb1b52f4a4500938a3a52085344e6.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-S",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-S",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "2fedb1b52f4a4500938a3a52085344e6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 55,
+            "scratchY": 16,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 81,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-T",
+        "md5": "3f481b967f82014c7cf6dd14d438c32d.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-T",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-T",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3f481b967f82014c7cf6dd14d438c32d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -74,
+            "scratchY": 10,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 82,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-U",
+        "md5": "a207644e4adb613f410f80a7e123db60.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-U",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-U",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a207644e4adb613f410f80a7e123db60.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -46,
+            "scratchY": -12,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 83,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-V",
+        "md5": "1bb20febe562fa291bea94be1e2d44ba.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-V",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-V",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1bb20febe562fa291bea94be1e2d44ba.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 20
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -86,
+            "scratchY": 27,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 84,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-W",
+        "md5": "34b628e8c84cc551a1fa740b85afb750.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-W",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-W",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "34b628e8c84cc551a1fa740b85afb750.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -44,
+            "scratchY": 19,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 85,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-X",
+        "md5": "4cc2d68ceb08176481e882ed39e4f5d5.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-X",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-X",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4cc2d68ceb08176481e882ed39e4f5d5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 14,
+                    "rotationCenterY": 19
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 12,
+            "scratchY": 15,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 86,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-Y",
+        "md5": "e6c377982c023761796eaed1047169e6.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-Y",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-Y",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e6c377982c023761796eaed1047169e6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 13,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 14,
+            "scratchY": -15,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 87,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "ZPixel-Z",
+        "md5": "ecadc3a562c9aa963717fcdf07ec96b4.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            1,
+            1
+        ],
+        "json": {
+            "objName": "zPixel-Z",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zPixel-Z",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ecadc3a562c9aa963717fcdf07ec96b4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 12,
+                    "rotationCenterY": 18
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 97,
+            "scratchY": 0,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 88,
             "visible": true,
             "spriteInfo": {}
         }

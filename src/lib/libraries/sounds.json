@@ -1358,6 +1358,13 @@
         "format": ""
     },
     {
+        "name": "Rim Beatbox",
+        "md5": "7ede1382b578d8fc32850b48d082d914.wav",
+        "sampleCount": 4960,
+        "rate": 22050,
+        "format": ""
+    },
+    {
         "name": "Ripples",
         "md5": "d3c95a4ba37dcf90c8a57e8b2fd1632d.wav",
         "sampleCount": 21504,
@@ -1380,6 +1387,13 @@
     },
     {
         "name": "Scratch Beatbox",
+        "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
+        "sampleCount": 11552,
+        "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "Scratching Beatbox",
         "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
         "sampleCount": 11552,
         "rate": 22050,

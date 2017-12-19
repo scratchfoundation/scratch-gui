@@ -24,7 +24,7 @@
     "children": [{
             "objName": "Sprite1",
             "sounds": [{
-                    "soundName": "meow",
+                    "soundName": "Meow",
                     "soundID": 0,
                     "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
                     "sampleCount": 18688,

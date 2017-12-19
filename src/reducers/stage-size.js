@@ -6,6 +6,7 @@ const initialState = {
     stageSize: 'large'
 };
 
+// stage size constants
 const STAGE_SIZES = {
     small: 'small',
     large: 'large'
@@ -36,6 +37,9 @@ const setStageSize = function (stageSize) {
     };
 };
 
+// `isFullScreen` is a separate value because "stage size" does not
+// actually apply to full screen mode, so they are treated as separate
+// values to be assessed.
 const setFullScreen = function (isFullScreen) {
     return {
         type: SET_FULL_SCREEN,

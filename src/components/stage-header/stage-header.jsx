@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
@@ -18,37 +18,28 @@ import unFullScreenIcon from './icon--unfullscreen.svg';
 
 import styles from './stage-header.css';
 
-const largeStageSizeMessage = (
-    <FormattedMessage
-        defaultMessage="Stage Size Toggle - Large"
-        description="Button to change stage size to large"
-        id="gui.gui.stageSizeLarge"
-    />
-);
-
-const smallStageSizeMessage = (
-    <FormattedMessage
-        defaultMessage="Stage Size Toggle - Small"
-        description="Button to change stage size to small"
-        id="gui.gui.stageSizeSmall"
-    />
-);
-
-const fullStageSizeMessage = (
-    <FormattedMessage
-        defaultMessage="Stage Size Toggle - Full Screen"
-        description="Button to change stage size to full screen"
-        id="gui.gui.stageSizeFull"
-    />
-);
-
-const unFullStageSizeMessage = (
-    <FormattedMessage
-        defaultMessage="Stage Size Toggle - Un-full screen"
-        description="Button to get out of full screen mode"
-        id="gui.gui.stageSizeUnFull"
-    />
-);
+const messages = defineMessages({
+    largeStageSizeMessage: {
+        defaultMessage: 'Stage Size Toggle - Large',
+        description: 'Button to change stage size to large',
+        id: 'gui.gui.stageSizeLarge'
+    },
+    smallStageSizeMessage: {
+        defaultMessage: 'Stage Size Toggle - Small',
+        description: 'Button to change stage size to small',
+        id: 'gui.gui.stageSizeSmall'
+    },
+    fullStageSizeMessage: {
+        defaultMessage: 'Stage Size Toggle - Full Screen',
+        description: 'Button to change stage size to full screen',
+        id: 'gui.gui.stageSizeFull'
+    },
+    unFullStageSizeMessage: {
+        defaultMessage: 'Stage Size Toggle - Un-full screen',
+        description: 'Button to get out of full screen mode',
+        id: 'gui.gui.stageSizeUnFull'
+    }
+});
 
 const StageHeaderComponent = function (props) {
     const {
@@ -75,7 +66,7 @@ const StageHeaderComponent = function (props) {
                         onClick={onSetStageUnFull}
                     >
                         <img
-                            alt={unFullStageSizeMessage}
+                            alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
                             className={styles.stageButtonIcon}
                             src={unFullScreenIcon}
                         />
@@ -105,7 +96,7 @@ const StageHeaderComponent = function (props) {
                                 >
                                     <img
                                         disabled
-                                        alt={smallStageSizeMessage}
+                                        alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
                                         className={styles.stageButtonIcon}
                                         src={smallStageIcon}
                                     />
@@ -123,7 +114,7 @@ const StageHeaderComponent = function (props) {
                                     onClick={onSetStageLarge}
                                 >
                                     <img
-                                        alt={largeStageSizeMessage}
+                                        alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
                                         className={styles.stageButtonIcon}
                                         src={largeStageIcon}
                                     />
@@ -136,7 +127,7 @@ const StageHeaderComponent = function (props) {
                                 onClick={onSetStageFull}
                             >
                                 <img
-                                    alt={fullStageSizeMessage}
+                                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
                                     className={styles.stageButtonIcon}
                                     src={fullScreenIcon}
                                 />
@@ -152,6 +143,7 @@ const StageHeaderComponent = function (props) {
 };
 
 StageHeaderComponent.propTypes = {
+    intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
@@ -160,4 +152,4 @@ StageHeaderComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default StageHeaderComponent;
+export default injectIntl(StageHeaderComponent);

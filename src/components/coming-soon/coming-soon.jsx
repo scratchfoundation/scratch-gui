@@ -36,9 +36,10 @@ class ComingSoonContent extends React.Component {
         ]);
     }
     getRandomMessage () {
+        // randomly chooses a messages from `messages` to display in the tooltip.
         const images = [awwCatIcon, coolCatIcon];
-        const messageNumber = Math.floor(Math.random() * 3) + 1;
-        const imageNumber = Math.floor(Math.random() * 2);
+        const messageNumber = Math.floor(Math.random() * Object.keys(messages).length) + 1;
+        const imageNumber = Math.floor(Math.random() * Object.keys(images).length);
         return (
             <FormattedMessage
                 {...messages[`message${messageNumber}`]}

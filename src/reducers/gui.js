@@ -8,14 +8,14 @@ import monitorLayoutReducer from './monitor-layout';
 import targetReducer from './targets';
 import toolboxReducer from './toolbox';
 import vmReducer from './vm';
-import zoomReducer from './zoom';
+import stageSizeReducer from './stage-size';
 import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     intl: intlReducer,
-    isZoomed: zoomReducer,
+    stageSize: stageSizeReducer,
     modals: modalReducer,
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,

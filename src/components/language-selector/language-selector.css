@@ -1,3 +1,4 @@
+@import "../../css/colors.css";
 @import "../../css/units.css";
 
 .group {
@@ -9,7 +10,7 @@
 
 .language-icon {
     height:  2rem;
-    display:none;
+    display: none;
 }
 
 .language-select {
@@ -19,7 +20,7 @@
     user-select: none;
     outline: none;
     background: rgba(255, 255, 255, 0.5);
-    color: #3373cc;
+    color: $motion-tertiary;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 

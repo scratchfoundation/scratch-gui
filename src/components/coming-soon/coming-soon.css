@@ -37,7 +37,7 @@
 }
 
 .right:after {
-    margin-bottom: -.5rem !important;
+    margin-top: -.5rem !important;
     left: -.5rem !important;
     transform: rotate(-135deg) !important;
 }

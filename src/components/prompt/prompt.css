@@ -49,3 +49,29 @@
 .button-row button + button {
     margin-left: 0.5rem;
 }
+
+.more-options {
+    border-top: 1px dashed hsla(0, 0%, 0%, .25);
+    overflow: visible;
+    padding: 1rem;
+    text-align: center;
+    margin: 0 0 1rem;
+}
+
+.more-options-accordion {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.more-options-text {
+    opacity: .5;
+}
+
+.more-options-icon {
+    width: .75rem;
+    height: .75rem;
+    margin-left: .5rem;
+    vertical-align: middle;
+    padding-bottom: .2rem;
+    opacity: .5;
+}

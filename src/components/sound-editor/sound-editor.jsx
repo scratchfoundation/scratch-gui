@@ -16,11 +16,12 @@ import styles from './sound-editor.css';
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
 import trimIcon from './icon--trim.svg';
+import trimConfirmIcon from './icon--trim-confirm.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';
-import higherIcon from './icon--higher.svg';
-import lowerIcon from './icon--lower.svg';
+import fasterIcon from './icon--faster.svg';
+import slowerIcon from './icon--slower.svg';
 import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
@@ -105,25 +106,6 @@ const SoundEditor = props => (
     <div className={styles.editorContainer}>
         <div className={styles.row}>
             <div className={styles.inputGroup}>
-                {props.playhead ? (
-                    <button
-                        className={classNames(styles.button, styles.stopButtonn)}
-                        title={props.intl.formatMessage(messages.stop)}
-                        onClick={props.onStop}
-                    >
-                        <img src={stopIcon} />
-                    </button>
-                ) : (
-                    <button
-                        className={classNames(styles.button, styles.playButton)}
-                        title={props.intl.formatMessage(messages.play)}
-                        onClick={props.onPlay}
-                    >
-                        <img src={playIcon} />
-                    </button>
-                )}
-            </div>
-            <div className={styles.inputGroup}>
                 <Label text={props.intl.formatMessage(messages.sound)}>
                     <BufferedInput
                         tabIndex="1"
@@ -132,26 +114,6 @@ const SoundEditor = props => (
                         onSubmit={props.onChangeName}
                     />
                 </Label>
-            </div>
-            <div className={styles.inputGroupRight}>
-                <button
-                    className={classNames(styles.button, styles.trimButton, {
-                        [styles.trimButtonActive]: props.trimStart !== null
-                    })}
-                    title={props.trimStart === null ? (
-                        props.intl.formatMessage(messages.trim)
-                    ) : (
-                        props.intl.formatMessage(messages.save)
-                    )}
-                    onClick={props.onActivateTrim}
-                >
-                    <img src={trimIcon} />
-                    {props.trimStart === null ? (
-                        <FormattedMessage {...messages.trim} />
-                    ) : (
-                        <FormattedMessage {...messages.save} />
-                    )}
-                </button>
                 <div className={styles.buttonGroup}>
                     <button
                         className={styles.button}
@@ -171,12 +133,24 @@ const SoundEditor = props => (
                     </button>
                 </div>
             </div>
+            <IconButton
+                className={classNames(styles.trimButton, {
+                    [styles.trimButtonActive]: props.trimStart !== null
+                })}
+                img={props.trimStart === null ? trimIcon : trimConfirmIcon}
+                title={props.trimStart === null ? (
+                    <FormattedMessage {...messages.trim} />
+                ) : (
+                    <FormattedMessage {...messages.save} />
+                )}
+                onClick={props.onActivateTrim}
+            />
         </div>
         <div className={styles.row}>
             <div className={styles.waveformContainer}>
                 <Waveform
                     data={props.chunkLevels}
-                    height={180}
+                    height={160}
                     width={600}
                 />
                 <AudioTrimmer
@@ -189,15 +163,34 @@ const SoundEditor = props => (
             </div>
         </div>
         <div className={styles.row}>
+            <div className={styles.inputGroup}>
+                {props.playhead ? (
+                    <button
+                        className={classNames(styles.roundButton, styles.stopButtonn)}
+                        title={props.intl.formatMessage(messages.stop)}
+                        onClick={props.onStop}
+                    >
+                        <img src={stopIcon} />
+                    </button>
+                ) : (
+                    <button
+                        className={classNames(styles.roundButton, styles.playButton)}
+                        title={props.intl.formatMessage(messages.play)}
+                        onClick={props.onPlay}
+                    >
+                        <img src={playIcon} />
+                    </button>
+                )}
+            </div>
             <IconButton
                 className={styles.effectButton}
-                img={higherIcon}
+                img={fasterIcon}
                 title={<FormattedMessage {...messages.faster} />}
                 onClick={props.onFaster}
             />
             <IconButton
                 className={styles.effectButton}
-                img={lowerIcon}
+                img={slowerIcon}
                 title={<FormattedMessage {...messages.slower} />}
                 onClick={props.onSlower}
             />

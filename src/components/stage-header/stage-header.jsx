@@ -69,6 +69,7 @@ const StageHeaderComponent = function (props) {
                             alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
                             className={styles.stageButtonIcon}
                             src={unFullScreenIcon}
+                            title="Full Screen Control"
                         />
                     </Button>
                 </Box>
@@ -130,6 +131,7 @@ const StageHeaderComponent = function (props) {
                                     alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
                                     className={styles.stageButtonIcon}
                                     src={fullScreenIcon}
+                                    title="Full Screen Control"
                                 />
                             </Button>
                         </div>

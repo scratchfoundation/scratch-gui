@@ -143,7 +143,7 @@ describe('costumes, sounds and variables', () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));
-        await clickXpath('//img[@title="Zoom Control"]');
+        await clickXpath('//img[@title="Full Screen Control"]');
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
@@ -235,7 +235,9 @@ describe('costumes, sounds and variables', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Localization', async () => {
+    // Skipped temporarily while the language selector is marked as
+    // "Coming Soon"
+    test.skip('Localization', async () => {
         await loadUri(uri);
         await clickText('Blocks');
         await clickText('Extensions');

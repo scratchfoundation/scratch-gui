@@ -64,6 +64,11 @@
     font-weight: bold;
 }
 
+/* "Run without screen refresh" row */
+.checkbox-row {
+    margin-top: 1rem;
+}
+
 /* Confirmation buttons at the bottom of the modal */
 .button-row {
     margin-top: 1rem;

@@ -9,23 +9,35 @@ const ButtonComponent = ({
     onClick,
     children,
     ...props
-}) => (
-    <span
-        className={classNames(
-            styles.button,
-            className
-        )}
-        role="button"
-        onClick={onClick}
-        {...props}
-    >
-        {children}
-    </span>
-);
+}) => {
+    if (props.disabled === true) {
+        onClick = function () {};
+    }
+
+    return (
+        <span
+            className={classNames(
+                styles.button,
+                className
+            )}
+            role="button"
+            onClick={onClick}
+            {...props}
+        >
+            {children}
+        </span>
+    );
+};
 
 ButtonComponent.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     onClick: PropTypes.func.isRequired
 };
+
+ButtonComponent.defaultProps = {
+    disabled: false
+};
+
 export default ButtonComponent;

@@ -36,8 +36,4 @@ ButtonComponent.propTypes = {
     onClick: PropTypes.func.isRequired
 };
 
-ButtonComponent.defaultProps = {
-    disabled: false
-};
-
 export default ButtonComponent;

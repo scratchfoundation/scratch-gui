@@ -159,7 +159,7 @@ describe('costumes, sounds and variables', () => {
     test('Creating variables', async () => {
         await loadUri(uri);
         await clickText('Blocks');
-        await clickText('Data', blocksTabScope);
+        await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Create variable...');
         let el = await findByXpath("//input[@placeholder='']");
@@ -171,7 +171,7 @@ describe('costumes, sounds and variables', () => {
         await clickButton('OK');
 
         // Make sure reporting works on a new variable
-        await clickText('Data', blocksTabScope);
+        await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('score', blocksTabScope);
         await findByText('0', reportedValueScope); // Tooltip with result

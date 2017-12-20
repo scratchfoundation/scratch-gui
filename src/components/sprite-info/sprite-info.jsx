@@ -17,7 +17,6 @@ import showIcon from './icon--show.svg';
 import hideIcon from './icon--hide.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
-const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 
 class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
@@ -25,7 +24,7 @@ class SpriteInfo extends React.Component {
             this.props.direction !== nextProps.direction ||
             this.props.disabled !== nextProps.disabled ||
             this.props.name !== nextProps.name ||
-            this.props.rotationStyle !== nextProps.rotationStyle ||
+            this.props.size !== nextProps.size ||
             this.props.visible !== nextProps.visible ||
             this.props.x !== nextProps.x ||
             this.props.y !== nextProps.y
@@ -149,6 +148,22 @@ class SpriteInfo extends React.Component {
                     <div className={styles.group}>
                         <Label
                             secondary
+                            text="Size"
+                        >
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                label="Size"
+                                tabIndex="0"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.size}
+                                onSubmit={this.props.onChangeSize}
+                            />
+                        </Label>
+                    </div>
+                    <div className={styles.group}>
+                        <Label
+                            secondary
                             text="Direction"
                         >
                             <BufferedInput
@@ -160,29 +175,6 @@ class SpriteInfo extends React.Component {
                                 value={this.props.disabled ? '' : this.props.direction}
                                 onSubmit={this.props.onChangeDirection}
                             />
-                        </Label>
-                    </div>
-                    <div className={styles.group}>
-                        <Label
-                            secondary
-                            text="Rotation"
-                        >
-                            <select
-                                className={classNames(styles.selectForm, styles.rotationSelect)}
-                                disabled={this.props.disabled}
-                                tabIndex="0"
-                                value={this.props.rotationStyle}
-                                onChange={this.props.onChangeRotationStyle}
-                            >
-                                {ROTATION_STYLES.map(style => (
-                                    <option
-                                        key={style}
-                                        value={style}
-                                    >
-                                        {style}
-                                    </option>
-                                ))}
-                            </select>
                         </Label>
                     </div>
                 </div>
@@ -200,14 +192,17 @@ SpriteInfo.propTypes = {
     name: PropTypes.string,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
-    onChangeRotationStyle: PropTypes.func,
+    onChangeSize: PropTypes.func,
     onChangeX: PropTypes.func,
     onChangeY: PropTypes.func,
     onClickNotVisible: PropTypes.func,
     onClickVisible: PropTypes.func,
     onPressNotVisible: PropTypes.func,
     onPressVisible: PropTypes.func,
-    rotationStyle: PropTypes.oneOf(ROTATION_STYLES),
+    size: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
     visible: PropTypes.bool,
     x: PropTypes.oneOfType([
         PropTypes.string,

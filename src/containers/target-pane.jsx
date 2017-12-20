@@ -17,7 +17,7 @@ class TargetPane extends React.Component {
         bindAll(this, [
             'handleChangeSpriteDirection',
             'handleChangeSpriteName',
-            'handleChangeSpriteRotationStyle',
+            'handleChangeSpriteSize',
             'handleChangeSpriteVisibility',
             'handleChangeSpriteX',
             'handleChangeSpriteY',
@@ -32,8 +32,8 @@ class TargetPane extends React.Component {
     handleChangeSpriteName (name) {
         this.props.vm.renameSprite(this.props.editingTarget, name);
     }
-    handleChangeSpriteRotationStyle (rotationStyle) {
-        this.props.vm.postSpriteInfo({rotationStyle});
+    handleChangeSpriteSize (size) {
+        this.props.vm.postSpriteInfo({size});
     }
     handleChangeSpriteVisibility (visible) {
         this.props.vm.postSpriteInfo({visible});
@@ -59,7 +59,7 @@ class TargetPane extends React.Component {
                 {...this.props}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
-                onChangeSpriteRotationStyle={this.handleChangeSpriteRotationStyle}
+                onChangeSpriteSize={this.handleChangeSpriteSize}
                 onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}

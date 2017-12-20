@@ -648,9 +648,9 @@ const data = function () {
     `;
 };
 
-const more = function () {
+const myBlocks = function () {
     return `
-    <category name="More" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
+    <category name="My Blocks" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
     </category>
     `;
 };
@@ -677,7 +677,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML) {
         sensing(isStage, targetId), gap,
         operators(isStage, targetId), gap,
         data(isStage, targetId), gap,
-        more(isStage, targetId)
+        myBlocks(isStage, targetId)
     ];
 
     if (categoriesXML) {

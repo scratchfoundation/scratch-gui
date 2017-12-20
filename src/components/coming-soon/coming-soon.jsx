@@ -133,8 +133,8 @@ ComingSoonTooltip.propTypes = {
 };
 
 ComingSoonTooltip.defaultProps = {
-    delayHide: 200,
-    delayShow: 200
+    delayHide: 0,
+    delayShow: 0
 };
 
 export {

@@ -29,7 +29,7 @@
     width: 100%;
     height: 208px;
     background-color: $motion-primary;
-    background-image: url('./info.png');
+    background-image: url('./unsupported.png');
 }
 
 .body {
@@ -51,29 +51,10 @@
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
     padding: 0.5rem 2.75rem;
-    background: white;
-    font-weight: bold;
-    font-size: 0.85rem;
-
-}
-
-.button-row button.ok-button {
     background: $motion-primary;
     color: white;
-}
-
-.button-row button.no-button {
-    color: $motion-primary;
-}
-.button-row button + button {
-    margin-left: 0.5rem;
-}
-
-.cat-icon {
-    margin-left: .125rem;
-    width: 2rem;
-    height: 2rem;
-    vertical-align: middle;
+    font-weight: bold;
+    font-size: 0.85rem;
 }
 
 .faq-link-text {

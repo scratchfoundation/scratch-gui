@@ -60,13 +60,16 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     ...GUIComponent.propTypes,
+    previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
 GUI.defaultProps = GUIComponent.defaultProps;
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    previewInfoVisible: state.modals.previewInfo
+});
 
 const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary())

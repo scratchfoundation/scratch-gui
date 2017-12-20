@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx';
+import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 
 import {
     closePreviewInfo
@@ -28,12 +29,22 @@ class PreviewModal extends React.Component {
     handleCancel () {
         window.history.back();
     }
+    supportedBrowser () {
+        const userAgent = (typeof navigator === 'undefined') ? '' : navigator.userAgent;
+        if (userAgent === '' || userAgent.indexOf('MSIE') > 0 || userAgent.indexOf('Trident') > 0) {
+            return false;
+        }
+        return true;
+    }
     render () {
-        return (
+        return (this.supportedBrowser() ?
             <PreviewModalComponent
                 previewing={this.state.previewing}
                 onCancel={this.handleCancel}
                 onTryIt={this.handleTryIt}
+            /> :
+            <BrowserModalComponent
+                onBack={this.handleCancel}
             />
         );
     }
@@ -43,9 +54,11 @@ PreviewModal.propTypes = {
     onTryIt: PropTypes.func
 };
 
+const mapStateToProps = () => ({});
+
 const mapDispatchToProps = dispatch => ({
     onTryIt: () => {
-        dispatch(closePreViewInfo());
+        dispatch(closePreviewInfo());
     }
 });
 

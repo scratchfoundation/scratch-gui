@@ -32,8 +32,20 @@ class ComingSoonContent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'setHide',
+            'setShow',
             'getRandomMessage'
         ]);
+        this.state = {
+            isShowing: false
+        };
+    }
+    setShow () {
+        // needed to set the opacity to 1, since the default is .9 on show
+        this.setState({isShowing: true});
+    }
+    setHide () {
+        this.setState({isShowing: false});
     }
     getRandomMessage () {
         // randomly chooses a messages from `messages` to display in the tooltip.
@@ -57,10 +69,13 @@ class ComingSoonContent extends React.Component {
     render () {
         return (
             <ReactTooltip
+                afterHide={this.setHide}
+                afterShow={this.setShow}
                 className={classNames(
                     styles.comingSoon,
                     this.props.className,
                     {
+                        [styles.show]: (this.state.isShowing),
                         [styles.left]: (this.props.place === 'left'),
                         [styles.right]: (this.props.place === 'right'),
                         [styles.top]: (this.props.place === 'top'),
@@ -90,8 +105,8 @@ const ComingSoon = injectIntl(ComingSoonContent);
 const ComingSoonTooltip = props => (
     <div className={props.className}>
         <div
-            data-delay-hide={0}
-            data-delay-show={0}
+            data-delay-hide={props.delayHide}
+            data-delay-show={props.delayShow}
             data-effect="solid"
             data-for={props.tooltipId}
             data-place={props.place}
@@ -110,9 +125,16 @@ const ComingSoonTooltip = props => (
 ComingSoonTooltip.propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    delayHide: PropTypes.number,
+    delayShow: PropTypes.number,
     place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     tooltipClassName: PropTypes.string,
     tooltipId: PropTypes.string.isRequired
+};
+
+ComingSoonTooltip.defaultProps = {
+    delayHide: 200,
+    delayShow: 200
 };
 
 export {

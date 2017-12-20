@@ -1,10 +1,10 @@
-@import "../../css/colors.css";
+/*
+ * NOTE: the copious use of `important` is needed to overwrite
+ * the default tooltip styling, and is required by the 3rd party
+ * library being used, `react-tooltip`
+ */
 
-.coming-soon,
-.coming-soon:before,
-.coming-soon:after {
-    opacity: 1 !important;
-}
+@import "../../css/colors.css";
 
 .coming-soon {
     background-color: $data-primary !important;
@@ -28,6 +28,12 @@
     background-color: $data-primary !important;
     height: 1rem !important;
     width: 1rem !important;
+}
+
+.show,
+.show:before,
+.show:after {
+    opacity: 1 !important;
 }
 
 .left:after {

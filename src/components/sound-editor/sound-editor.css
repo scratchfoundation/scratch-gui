@@ -17,8 +17,18 @@
     margin-top: calc(2 * $space);
 }
 
+.input-group {
+    display: flex;
+    flex-direction: row;
+}
+
 .input-group + .input-group {
     margin-left: calc(2 * $space);
+}
+
+.input-group {
+    padding-right: calc(2 * $space);
+    border-right: 1px dashed $ui-pane-border;
 }
 
 .waveform-container {
@@ -29,7 +39,7 @@
 
     position: relative;
 
-    background: $ui-pane-gray;
+    background: hsla(300, 53%, 60%, 0.15);
     border: 1px solid $ui-pane-border;
     border-radius: 5px;
     padding: 3px;
@@ -39,7 +49,7 @@ $border-radius: 0.25rem;
 
 .button {
     height: 2rem;
-    padding: 0.25rem;
+    padding: 0.35rem;
     outline: none;
     background: white;
     border-radius: $border-radius;
@@ -53,21 +63,38 @@ $border-radius: 0.25rem;
     flex-grow: 1;
     max-width: 100%;
     max-height: 100%;
-    min-width: 1.5rem;
+    min-width: 1.25rem;
+}
+
+.round-button {
+    height: 3rem;
+    width: 3rem;
+    outline: none;
+    background: white;
+    border-radius: 100%;
+    border: 1px solid $ui-pane-border;
+    cursor: pointer;
+    padding: 0.75rem;
+}
+
+.round-button > img {
+    flex-grow: 1;
+    max-width: 100%;
+    max-height: 100%;
+    /*min-width: 1.5rem;*/
 }
 
 .trim-button {
     display: flex;
     align-items: center;
-    padding-right: 10px; /* To equalize with empty whitespace from image on left */
+    color: $text-primary;
+    font-size: 0.625rem;
+    margin-left: 1rem;
 }
 
 .trim-button > img {
-    width: 1.5rem;
-}
-
-.trim-button-active {
-    filter: hue-rotate(155deg); /* @todo replace blue -> red with real submit icon */
+    width: 1.25rem;
+    margin-bottom: -0.375rem;
 }
 
 .input-group-right {
@@ -77,8 +104,9 @@ $border-radius: 0.25rem;
 }
 
 .effect-button {
-    flex-basis: 150px;
+    flex-basis: 60px;
     color: $text-primary;
+    font-size: 0.625rem;
 }
 
 .effect-button + .effect-button {
@@ -86,12 +114,13 @@ $border-radius: 0.25rem;
 }
 
 .effect-button img {
-    width: 60px;
-    height: 60px;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-bottom: -0.375rem;
 }
 
 .button-group {
-    margin: 0 1rem;
+    margin-left: 1rem;
 }
 
 .button-group .button {

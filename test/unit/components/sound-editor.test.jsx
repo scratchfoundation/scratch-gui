@@ -44,7 +44,7 @@ describe('Sound Editor Component', () => {
                 trimStart={null}
             />
         );
-        wrapper.find('button[title="Trim"]').simulate('click');
+        wrapper.find('[children="Trim"]').simulate('click');
         expect(props.onActivateTrim).toHaveBeenCalled();
     });
 
@@ -56,7 +56,7 @@ describe('Sound Editor Component', () => {
                 trimStart={0.25}
             />
         );
-        wrapper.find('button[title="Save"]').simulate('click');
+        wrapper.find('[children="Save"]').simulate('click');
         expect(props.onActivateTrim).toHaveBeenCalled();
     });
 

@@ -10,19 +10,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     <div
       className={undefined}
     >
-      <button
-        className=""
-        onClick={[Function]}
-        title="Stop"
-      >
-        <img
-          src="test-file-stub"
-        />
-      </button>
-    </div>
-    <div
-      className={undefined}
-    >
       <label
         className={undefined}
       >
@@ -42,22 +29,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           value="sound name"
         />
       </label>
-    </div>
-    <div
-      className={undefined}
-    >
-      <button
-        className="undefined"
-        onClick={[Function]}
-        title="Save"
-      >
-        <img
-          src="test-file-stub"
-        />
-        <span>
-          Save
-        </span>
-      </button>
       <div
         className={undefined}
       >
@@ -83,6 +54,23 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         </button>
       </div>
     </div>
+    <div
+      className="undefined"
+      onClick={[Function]}
+      role="button"
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Save
+        </span>
+      </div>
+    </div>
   </div>
   <div
     className={undefined}
@@ -92,16 +80,23 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <svg
         className={undefined}
-        viewBox="0 0 600 180"
+        viewBox="-1 0 600 160"
       >
+        <line
+          className={undefined}
+          x1={-1}
+          x2={600}
+          y1={80}
+          y2={80}
+        />
         <g
-          transform="scale(1, -1) translate(0, -90)"
+          transform="scale(1, -1) translate(0, -80)"
         >
           <path
             className={undefined}
-            d="M0 0Q0 0 60 45 Q120 90 180 135 Q240 180 300 225 Q360 270 420 135 Q480 0 480 0 Q480 0 420 -135 Q360 -270 300 -225 Q240 -180 180 -135 Q120 -90 60 -45 Q0 0 0 0Z"
+            d="M0 0Q0 0 60 40 Q120 80 180 120 Q240 160 300 200 Q360 240 420 120 Q480 0 480 0 Q480 0 420 -120 Q360 -240 300 -200 Q240 -160 180 -120 Q120 -80 60 -40 Q0 0 0 0Z"
             strokeLinejoin="round"
-            strokeWidth={2}
+            strokeWidth={1}
           />
         </g>
       </svg>
@@ -338,6 +333,19 @@ exports[`Sound Editor Component matches snapshot 1`] = `
   <div
     className={undefined}
   >
+    <div
+      className={undefined}
+    >
+      <button
+        className=""
+        onClick={[Function]}
+        title="Stop"
+      >
+        <img
+          src="test-file-stub"
+        />
+      </button>
+    </div>
     <div
       className=""
       onClick={[Function]}

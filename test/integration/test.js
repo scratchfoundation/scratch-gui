@@ -219,7 +219,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickText('More');
+        await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Make a Block...');
         // Click on the "add an input" buttons

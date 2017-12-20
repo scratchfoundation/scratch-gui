@@ -28,3 +28,12 @@ $border-style: 1px solid $ui-pane-border;
     border-right: $border-style;
     box-sizing: content-box;
 }
+
+/*
+    Shrink category font to fit "My Blocks" for now.
+    Probably will need different solutions for language support later, so
+    make the change here instead of in scratch-blocks.
+*/
+.blocks :global(.scratchCategoryMenuItemLabel) {
+    font-size: 0.65rem;
+}

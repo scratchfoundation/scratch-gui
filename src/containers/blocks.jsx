@@ -326,7 +326,8 @@ Blocks.propTypes = {
             fieldShadow: PropTypes.string,
             dragShadowOpacity: PropTypes.number
         }),
-        comments: PropTypes.bool
+        comments: PropTypes.bool,
+        collapse: PropTypes.bool
     }),
     toolboxXML: PropTypes.string,
     updateToolboxState: PropTypes.func,
@@ -356,7 +357,8 @@ Blocks.defaultOptions = {
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     },
-    comments: false
+    comments: false,
+    collapse: false
 };
 
 Blocks.defaultProps = {

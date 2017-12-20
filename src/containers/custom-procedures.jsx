@@ -108,7 +108,8 @@ CustomProcedures.propTypes = {
             wheel: PropTypes.bool,
             startScale: PropTypes.number
         }),
-        comments: PropTypes.bool
+        comments: PropTypes.bool,
+        collapse: PropTypes.bool
     })
 };
 
@@ -119,6 +120,7 @@ CustomProcedures.defaultOptions = {
         startScale: 0.9
     },
     comments: false,
+    collapse: false,
     scrollbars: true
 };
 

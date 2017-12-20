@@ -112,13 +112,7 @@ const GUIComponent = props => {
 
                     <Box className={styles.stageAndTargetWrapper}>
                         <Box className={styles.stageMenuWrapper}>
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
-                                <StageHeader
-                                    height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                    vm={vm}
-                                    width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                />
-                            )}</MediaQuery>
+                            <StageHeader vm={vm} />
                         </Box>
                         <Box className={styles.stageWrapper}>
                             <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (

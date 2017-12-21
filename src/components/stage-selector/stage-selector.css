@@ -58,9 +58,6 @@ $header-height: calc($stage-menu-height - 2px);
     padding: 0.3rem 0.75rem;
     font-size: 0.625rem;
     color: $text-primary;
-    background: white;
-    border: 1px solid #eaeaea;
-    border-radius: 0.25rem;
     user-select: none;
 }
 

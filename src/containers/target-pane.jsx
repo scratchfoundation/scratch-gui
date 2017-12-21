@@ -83,11 +83,12 @@ TargetPane.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
-        let {direction, x, y, ...sprite} = state.targets.sprites[k];
+        let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
         if (typeof x !== 'undefined') x = Math.round(x);
         if (typeof y !== 'undefined') y = Math.round(y);
-        sprites[k] = {...sprite, direction, x, y};
+        if (typeof size !== 'undefined') size = Math.round(size);
+        sprites[k] = {...sprite, direction, size, x, y};
         return sprites;
     }, {}),
     stage: state.targets.stage,

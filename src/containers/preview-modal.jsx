@@ -31,7 +31,7 @@ class PreviewModal extends React.Component {
     }
     supportedBrowser () {
         const userAgent = (typeof navigator === 'undefined') ? '' : navigator.userAgent;
-        if (userAgent === '' || userAgent.indexOf('MSIE') > 0 || userAgent.indexOf('Trident') > 0) {
+        if (userAgent === '' || userAgent.indexOf('Chrome') > 0 || userAgent.indexOf('Trident') > 0) {
             return false;
         }
         return true;

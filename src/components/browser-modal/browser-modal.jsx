@@ -28,7 +28,7 @@ const BrowserModal = ({intl, ...props}) => (
             <h2>
                 <FormattedMessage {...messages.label} />
             </h2>
-            <div>
+            <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
                     defaultMessage="We're very sorry, but Scratch 3.0 does not support Internet Explorer. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
@@ -36,7 +36,7 @@ const BrowserModal = ({intl, ...props}) => (
                     id="gui.unsupportedBrowser.description"
                 />
                 { /* eslint-enable max-len */ }
-            </div>
+            </p>
 
             <Box className={styles.buttonRow}>
                 <button

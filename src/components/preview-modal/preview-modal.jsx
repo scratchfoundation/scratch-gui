@@ -5,7 +5,7 @@ import Box from '../box/box.jsx';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import styles from './preview-modal.css';
-import catIcon from './cat.png';
+import catIcon from './happy-cat.svg';
 
 const messages = defineMessages({
     label: {
@@ -33,13 +33,13 @@ const PreviewModal = ({intl, ...props}) => (
                     id="gui.previewInfo.welcome"
                 />
             </h2>
-            <div>
+            <p>
                 <FormattedMessage
                     defaultMessage="We're working on the next generation of Scratch. We're excited for you to try it!"
                     description="Invitation to try 3.0 preview"
                     id="gui.previewInfo.invitation"
                 />
-            </div>
+            </p>
 
             <Box className={styles.buttonRow}>
                 <button
@@ -84,8 +84,8 @@ const PreviewModal = ({intl, ...props}) => (
                                 href="//scratch.mit.edu/preview-faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="preview FAQ"
-                                    description="link to Scratch 3.0preview FAQpage"
+                                    defaultMessage="Preview FAQ"
+                                    description="link to Scratch 3.0 preview FAQ page"
                                     id="gui.previewInfo.previewfaqlink"
                                 />
                             </a>

@@ -13,6 +13,7 @@ import SoundTab from '../../containers/sound-tab.jsx';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 import {FormattedMessage} from 'react-intl';
+import PreviewModal from '../../containers/preview-modal.jsx';
 
 import Box from '../box/box.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
@@ -36,6 +37,7 @@ const GUIComponent = props => {
         children,
         enableExtensions,
         vm,
+        previewInfoVisible,
         onExtensionButtonClick,
         onTabSelect,
         tabIndex,
@@ -63,6 +65,9 @@ const GUIComponent = props => {
             className={styles.pageWrapper}
             {...componentProps}
         >
+            {previewInfoVisible ? (
+                <PreviewModal />
+            ) : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -141,6 +146,7 @@ GUIComponent.propTypes = {
     enableExtensions: PropTypes.bool,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
+    previewInfoVisible: PropTypes.bool,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired
 };

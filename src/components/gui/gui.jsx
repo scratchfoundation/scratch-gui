@@ -19,6 +19,7 @@ import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
+import WebGlModal from '../../containers/webgl-modal.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
@@ -73,6 +74,7 @@ const GUIComponent = props => {
             {feedbackFormVisible ? (
                 <FeedbackForm />
             ) : null}
+            {(window.WebGLRenderingContext) ? null : (<WebGlModal />)}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>

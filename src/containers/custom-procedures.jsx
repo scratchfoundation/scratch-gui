@@ -13,10 +13,14 @@ class CustomProcedures extends React.Component {
             'handleAddLabel',
             'handleAddBoolean',
             'handleAddTextNumber',
+            'handleToggleWarp',
             'handleCancel',
             'handleOk',
             'setBlocks'
         ]);
+        this.state = {
+            warp: false
+        };
     }
     componentWillUnmount () {
         if (this.workspace) {
@@ -61,6 +65,8 @@ class CustomProcedures extends React.Component {
         this.mutationRoot.domToMutation(this.props.mutator);
         this.mutationRoot.initSvg();
         this.mutationRoot.render();
+
+        this.setState({warp: this.mutationRoot.getWarp()});
     }
     handleCancel () {
         this.props.onRequestClose();
@@ -84,15 +90,24 @@ class CustomProcedures extends React.Component {
             this.mutationRoot.addStringNumberExternal();
         }
     }
+    handleToggleWarp () {
+        if (this.mutationRoot) {
+            const newWarp = !this.mutationRoot.getWarp();
+            this.mutationRoot.setWarp(newWarp);
+            this.setState({warp: newWarp});
+        }
+    }
     render () {
         return (
             <CustomProceduresComponent
                 componentRef={this.setBlocks}
+                warp={this.state.warp}
                 onAddBoolean={this.handleAddBoolean}
                 onAddLabel={this.handleAddLabel}
                 onAddTextNumber={this.handleAddTextNumber}
                 onCancel={this.handleCancel}
                 onOk={this.handleOk}
+                onToggleWarp={this.handleToggleWarp}
             />
         );
     }

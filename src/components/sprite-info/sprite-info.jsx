@@ -145,7 +145,7 @@ class SpriteInfo extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.group}>
+                    <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
                             text="Size"
@@ -161,7 +161,7 @@ class SpriteInfo extends React.Component {
                             />
                         </Label>
                     </div>
-                    <div className={styles.group}>
+                    <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
                             text="Direction"

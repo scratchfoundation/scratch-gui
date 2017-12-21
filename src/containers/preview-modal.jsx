@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import platform from 'platform';
 
 import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
@@ -30,8 +31,7 @@ class PreviewModal extends React.Component {
         window.history.back();
     }
     supportedBrowser () {
-        const userAgent = (typeof navigator === 'undefined') ? '' : navigator.userAgent;
-        if (userAgent === '' || userAgent.indexOf('Chrome') > 0 || userAgent.indexOf('Trident') > 0) {
+        if (platform.name === 'IE') {
             return false;
         }
         return true;

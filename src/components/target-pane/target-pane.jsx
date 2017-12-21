@@ -97,7 +97,7 @@ const spriteShape = PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     order: PropTypes.number,
-    size: PropTypes.string,
+    size: PropTypes.number,
     visibility: PropTypes.bool,
     x: PropTypes.number,
     y: PropTypes.number

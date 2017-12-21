@@ -161,6 +161,11 @@ describe('costumes, sounds and variables', () => {
         await clickText('Blocks');
         await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+
+        // Expect a default variable "count" to be visible
+        await clickText('count', blocksTabScope);
+        await findByText('0', reportedValueScope);
+
         await clickText('Make a Variable');
         let el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('score');

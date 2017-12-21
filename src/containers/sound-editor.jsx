@@ -9,6 +9,8 @@ import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
 
+const UNDO_STACK_SIZE = 99;
+
 class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
@@ -62,6 +64,9 @@ class SoundEditor extends React.Component {
     submitNewSamples (samples, sampleRate, skipUndo) {
         if (!skipUndo) {
             this.redoStack = [];
+            if (this.undoStack.length >= UNDO_STACK_SIZE) {
+                this.undoStack.shift(); // Drop the first element off the array
+            }
             this.undoStack.push(this.props.samples.slice(0));
         }
         this.resetState(samples, sampleRate);

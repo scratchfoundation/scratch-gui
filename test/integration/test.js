@@ -161,11 +161,11 @@ describe('costumes, sounds and variables', () => {
         await clickText('Blocks');
         await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        await clickText('Create variable...');
+        await clickText('Make a Variable');
         let el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('score');
         await clickButton('OK');
-        await clickText('Create variable...');
+        await clickText('Make a Variable');
         el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('second variable');
         await clickButton('OK');
@@ -221,7 +221,7 @@ describe('costumes, sounds and variables', () => {
         await loadUri(uri);
         await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        await clickText('Make a Block...');
+        await clickText('Make a Block');
         // Click on the "add an input" buttons
         await clickText('number or text', modalScope);
         await clickText('boolean', modalScope);

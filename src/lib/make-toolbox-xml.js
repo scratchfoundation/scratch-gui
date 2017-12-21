@@ -175,9 +175,6 @@ const looks = function (isStage, targetId) {
             </value>
         </block>
         ${blockSeparator}
-        <block type="looks_show"/>
-        <block type="looks_hide"/>
-        ${blockSeparator}
         `}
         ${isStage ? `
             <block type="looks_switchbackdropto">
@@ -203,6 +200,22 @@ const looks = function (isStage, targetId) {
                     <shadow type="looks_backdrops"/>
                 </value>
             </block>
+            <block type="looks_nextbackdrop"/>
+            ${blockSeparator}
+            <block type="looks_changesizeby">
+                <value name="CHANGE">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="looks_setsizeto">
+                <value name="SIZE">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
         `}
         ${blockSeparator}
         <block type="looks_changeeffectby">
@@ -221,22 +234,10 @@ const looks = function (isStage, targetId) {
         </block>
         <block type="looks_cleargraphiceffects"/>
         ${blockSeparator}
+        <block type="looks_show"/>
+        <block type="looks_hide"/>
+        ${blockSeparator}
         ${isStage ? '' : `
-            <block type="looks_changesizeby">
-                <value name="CHANGE">
-                    <shadow type="math_number">
-                        <field name="NUM">10</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="looks_setsizeto">
-                <value name="SIZE">
-                    <shadow type="math_number">
-                        <field name="NUM">100</field>
-                    </shadow>
-                </value>
-            </block>
-            ${blockSeparator}
             <block type="looks_gotofront"/>
             <block type="looks_gobacklayers">
                 <value name="NUM">

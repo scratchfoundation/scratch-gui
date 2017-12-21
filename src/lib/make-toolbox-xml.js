@@ -641,9 +641,9 @@ const operators = function () {
     `;
 };
 
-const data = function () {
+const variables = function () {
     return `
-    <category name="Data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
+    <category name="Variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
     </category>
     `;
 };
@@ -676,7 +676,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML) {
         control(isStage, targetId), gap,
         sensing(isStage, targetId), gap,
         operators(isStage, targetId), gap,
-        data(isStage, targetId), gap,
+        variables(isStage, targetId), gap,
         myBlocks(isStage, targetId)
     ];
 

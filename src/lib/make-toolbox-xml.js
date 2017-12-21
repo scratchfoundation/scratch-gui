@@ -208,14 +208,14 @@ const looks = function (isStage, targetId) {
         <block type="looks_changeeffectby">
             <value name="CHANGE">
                 <shadow type="math_number">
-                    <field name="NUM">10</field>
+                    <field name="NUM">25</field>
                 </shadow>
             </value>
         </block>
         <block type="looks_seteffectto">
             <value name="VALUE">
                 <shadow type="math_number">
-                    <field name="NUM">10</field>
+                    <field name="NUM">0</field>
                 </shadow>
             </value>
         </block>

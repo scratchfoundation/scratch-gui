@@ -231,9 +231,9 @@ class Blocks extends React.Component {
     setBlocks (blocks) {
         this.blocks = blocks;
     }
-    handlePromptStart (message, defaultValue, callback, opt_title) {
-        var p = {prompt: {callback, message, defaultValue}};
-        p.prompt.title = opt_title ? opt_title : "New Variable";
+    handlePromptStart (message, defaultValue, callback, optTitle) {
+        const p = {prompt: {callback, message, defaultValue}};
+        p.prompt.title = optTitle ? optTitle : 'New Variable';
         this.setState(p);
     }
     handlePromptCallback (data) {

@@ -39,6 +39,7 @@
     box-sizing: content-box;
     width: 1.25rem;
     height: 1.25rem;
+    background: #FFF;
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
@@ -60,11 +61,8 @@
     border-bottom-right-radius: 0;
 }
 
-.stage-button-active {
-    background: #FFF;
-}
-
 .stage-button-disabled {
     opacity: .5;
     cursor: auto;
+    background: transparent;
 }

@@ -59,10 +59,7 @@ const StageHeaderComponent = function (props) {
                 <Box className={styles.stageMenuWrapper}>
                     <Controls vm={vm} />
                     <Button
-                        className={classNames(
-                            styles.stageButton,
-                            styles.stageButtonActive
-                        )}
+                        className={styles.stageButton}
                         onClick={onSetStageUnFull}
                     >
                         <img
@@ -107,10 +104,7 @@ const StageHeaderComponent = function (props) {
                                 <Button
                                     className={classNames(
                                         styles.stageButton,
-                                        styles.stageButtonRight,
-                                        {
-                                            [styles.stageButtonActive]: stageSize === STAGE_SIZES.large
-                                        }
+                                        styles.stageButtonRight
                                     )}
                                     onClick={onSetStageLarge}
                                 >

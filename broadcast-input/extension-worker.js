@@ -33,9 +33,6 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -63,14 +60,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var microee = __webpack_require__(9);
+var microee = __webpack_require__(11);
 
 // Implements a subset of Node's stream.Transform - in a cross-platform manner.
 function Transform() {}
@@ -151,7 +148,7 @@ module.exports = Transform;
 "use strict";
 
 
-var minilog = __webpack_require__(16);
+var minilog = __webpack_require__(9);
 minilog.enable();
 
 module.exports = minilog('vm');
@@ -187,6 +184,154 @@ module.exports = color;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* eslint-env worker */
+
+var ArgumentType = __webpack_require__(5);
+var BlockType = __webpack_require__(6);
+var dispatch = __webpack_require__(7);
+
+var ExtensionWorker = function () {
+    function ExtensionWorker() {
+        var _this = this;
+
+        _classCallCheck(this, ExtensionWorker);
+
+        this.nextExtensionId = 0;
+
+        this.initialRegistrations = [];
+
+        dispatch.waitForConnection.then(function () {
+            dispatch.call('extensions', 'allocateWorker').then(function (x) {
+                var _x = _slicedToArray(x, 2),
+                    id = _x[0],
+                    extension = _x[1];
+
+                _this.workerId = id;
+
+                try {
+                    importScripts(extension);
+
+                    var initialRegistrations = _this.initialRegistrations;
+                    _this.initialRegistrations = null;
+
+                    Promise.all(initialRegistrations).then(function () {
+                        return dispatch.call('extensions', 'onWorkerInit', id);
+                    });
+                } catch (e) {
+                    dispatch.call('extensions', 'onWorkerInit', id, e);
+                }
+            });
+        });
+
+        this.extensions = [];
+    }
+
+    _createClass(ExtensionWorker, [{
+        key: 'register',
+        value: function register(extensionObject) {
+            var extensionId = this.nextExtensionId++;
+            this.extensions.push(extensionObject);
+            var serviceName = 'extension.' + this.workerId + '.' + extensionId;
+            var promise = dispatch.setService(serviceName, extensionObject).then(function () {
+                return dispatch.call('extensions', 'registerExtensionService', serviceName);
+            });
+            if (this.initialRegistrations) {
+                this.initialRegistrations.push(promise);
+            }
+            return promise;
+        }
+    }]);
+
+    return ExtensionWorker;
+}();
+
+global.Scratch = global.Scratch || {};
+global.Scratch.ArgumentType = ArgumentType;
+global.Scratch.BlockType = BlockType;
+
+/**
+ * Expose only specific parts of the worker to extensions.
+ */
+var extensionWorker = new ExtensionWorker();
+global.Scratch.extensions = {
+    register: extensionWorker.register.bind(extensionWorker)
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ArgumentType = {
+    ANGLE: 'angle',
+    BOOLEAN: 'Boolean',
+    COLOR: 'color',
+    NUMBER: 'number',
+    STRING: 'string'
+};
+
+module.exports = ArgumentType;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var BlockType = {
+    BOOLEAN: 'Boolean',
+    COMMAND: 'command',
+    CONDITIONAL: 'conditional',
+    HAT: 'hat',
+    REPORTER: 'reporter'
+};
+
+module.exports = BlockType;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -197,7 +342,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SharedDispatch = __webpack_require__(7);
+var SharedDispatch = __webpack_require__(8);
 
 var log = __webpack_require__(1);
 
@@ -337,68 +482,7 @@ var WorkerDispatch = function (_SharedDispatch) {
 module.exports = new WorkerDispatch();
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var ArgumentType = {
-    ANGLE: 'angle',
-    BOOLEAN: 'Boolean',
-    COLOR: 'color',
-    NUMBER: 'number',
-    STRING: 'string'
-};
-
-module.exports = ArgumentType;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var BlockType = {
-    BOOLEAN: 'Boolean',
-    COMMAND: 'command',
-    CONDITIONAL: 'conditional',
-    HAT: 'hat',
-    REPORTER: 'reporter'
-};
-
-module.exports = BlockType;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -709,94 +793,106 @@ var SharedDispatch = function () {
 module.exports = SharedDispatch;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+var Minilog = __webpack_require__(10);
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var oldEnable = Minilog.enable,
+    oldDisable = Minilog.disable,
+    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
+    console = __webpack_require__(13);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+// Use a more capable logging backend if on Chrome
+Minilog.defaultBackend = (isChrome ? console.minilog : console);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// apply enable inputs from localStorage and from the URL
+if(typeof window != 'undefined') {
+  try {
+    Minilog.enable(JSON.parse(window.localStorage['minilogSettings']));
+  } catch(e) {}
+  if(window.location && window.location.search) {
+    var match = RegExp('[?&]minilog=([^&]*)').exec(window.location.search);
+    match && Minilog.enable(decodeURIComponent(match[1]));
+  }
+}
 
-/* eslint-env worker */
-
-var ArgumentType = __webpack_require__(4);
-var BlockType = __webpack_require__(5);
-var dispatch = __webpack_require__(3);
-
-var ExtensionWorker = function () {
-    function ExtensionWorker() {
-        var _this = this;
-
-        _classCallCheck(this, ExtensionWorker);
-
-        this.nextExtensionId = 0;
-
-        this.initialRegistrations = [];
-
-        dispatch.waitForConnection.then(function () {
-            dispatch.call('extensions', 'allocateWorker').then(function (x) {
-                var _x = _slicedToArray(x, 2),
-                    id = _x[0],
-                    extension = _x[1];
-
-                _this.workerId = id;
-
-                try {
-                    importScripts(extension);
-
-                    var initialRegistrations = _this.initialRegistrations;
-                    _this.initialRegistrations = null;
-
-                    Promise.all(initialRegistrations).then(function () {
-                        return dispatch.call('extensions', 'onWorkerInit', id);
-                    });
-                } catch (e) {
-                    dispatch.call('extensions', 'onWorkerInit', id, e);
-                }
-            });
-        });
-
-        this.extensions = [];
-    }
-
-    _createClass(ExtensionWorker, [{
-        key: 'register',
-        value: function register(extensionObject) {
-            var extensionId = this.nextExtensionId++;
-            this.extensions.push(extensionObject);
-            var serviceName = 'extension.' + this.workerId + '.' + extensionId;
-            var promise = dispatch.setService(serviceName, extensionObject).then(function () {
-                return dispatch.call('extensions', 'registerExtensionService', serviceName);
-            });
-            if (this.initialRegistrations) {
-                this.initialRegistrations.push(promise);
-            }
-            return promise;
-        }
-    }]);
-
-    return ExtensionWorker;
-}();
-
-global.Scratch = global.Scratch || {};
-global.Scratch.ArgumentType = ArgumentType;
-global.Scratch.BlockType = BlockType;
-
-/**
- * Expose only specific parts of the worker to extensions.
- */
-var extensionWorker = new ExtensionWorker();
-global.Scratch.extensions = {
-    register: extensionWorker.register.bind(extensionWorker)
+// Make enable also add to localStorage
+Minilog.enable = function() {
+  oldEnable.call(Minilog, true);
+  try { window.localStorage['minilogSettings'] = JSON.stringify(true); } catch(e) {}
+  return this;
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+Minilog.disable = function() {
+  oldDisable.call(Minilog);
+  try { delete window.localStorage.minilogSettings; } catch(e) {}
+  return this;
+};
+
+exports = module.exports = Minilog;
+
+exports.backends = {
+  array: __webpack_require__(16),
+  browser: Minilog.defaultBackend,
+  localStorage: __webpack_require__(17),
+  jQuery: __webpack_require__(18)
+};
+
 
 /***/ }),
-/* 9 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Transform = __webpack_require__(0),
+    Filter = __webpack_require__(12);
+
+var log = new Transform(),
+    slice = Array.prototype.slice;
+
+exports = module.exports = function create(name) {
+  var o   = function() { log.write(name, undefined, slice.call(arguments)); return o; };
+  o.debug = function() { log.write(name, 'debug', slice.call(arguments)); return o; };
+  o.info  = function() { log.write(name, 'info',  slice.call(arguments)); return o; };
+  o.warn  = function() { log.write(name, 'warn',  slice.call(arguments)); return o; };
+  o.error = function() { log.write(name, 'error', slice.call(arguments)); return o; };
+  o.log   = o.debug; // for interface compliance with Node and browser consoles
+  o.suggest = exports.suggest;
+  o.format = log.format;
+  return o;
+};
+
+// filled in separately
+exports.defaultBackend = exports.defaultFormatter = null;
+
+exports.pipe = function(dest) {
+  return log.pipe(dest);
+};
+
+exports.end = exports.unpipe = exports.disable = function(from) {
+  return log.unpipe(from);
+};
+
+exports.Transform = Transform;
+exports.Filter = Filter;
+// this is the default filter that's applied when .enable() is called normally
+// you can bypass it completely and set up your own pipes
+exports.suggest = new Filter();
+
+exports.enable = function() {
+  if(exports.defaultFormatter) {
+    return log.pipe(exports.suggest) // filter
+              .pipe(exports.defaultFormatter) // formatter
+              .pipe(exports.defaultBackend); // backend
+  }
+  return log.pipe(exports.suggest) // filter
+            .pipe(exports.defaultBackend); // formatter
+};
+
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 function M() { this._events = {}; }
@@ -852,7 +948,7 @@ module.exports = M;
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // default filter
@@ -911,77 +1007,6 @@ Filter.prototype.write = function(name, level, args) {
 };
 
 module.exports = Filter;
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Transform = __webpack_require__(0),
-    Filter = __webpack_require__(10);
-
-var log = new Transform(),
-    slice = Array.prototype.slice;
-
-exports = module.exports = function create(name) {
-  var o   = function() { log.write(name, undefined, slice.call(arguments)); return o; };
-  o.debug = function() { log.write(name, 'debug', slice.call(arguments)); return o; };
-  o.info  = function() { log.write(name, 'info',  slice.call(arguments)); return o; };
-  o.warn  = function() { log.write(name, 'warn',  slice.call(arguments)); return o; };
-  o.error = function() { log.write(name, 'error', slice.call(arguments)); return o; };
-  o.log   = o.debug; // for interface compliance with Node and browser consoles
-  o.suggest = exports.suggest;
-  o.format = log.format;
-  return o;
-};
-
-// filled in separately
-exports.defaultBackend = exports.defaultFormatter = null;
-
-exports.pipe = function(dest) {
-  return log.pipe(dest);
-};
-
-exports.end = exports.unpipe = exports.disable = function(from) {
-  return log.unpipe(from);
-};
-
-exports.Transform = Transform;
-exports.Filter = Filter;
-// this is the default filter that's applied when .enable() is called normally
-// you can bypass it completely and set up your own pipes
-exports.suggest = new Filter();
-
-exports.enable = function() {
-  if(exports.defaultFormatter) {
-    return log.pipe(exports.suggest) // filter
-              .pipe(exports.defaultFormatter) // formatter
-              .pipe(exports.defaultBackend); // backend
-  }
-  return log.pipe(exports.suggest) // filter
-            .pipe(exports.defaultBackend); // formatter
-};
-
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Transform = __webpack_require__(0),
-    cache = [ ];
-
-var logger = new Transform();
-
-logger.write = function(name, level, args) {
-  cache.push([ name, level, args ]);
-};
-
-// utility functions
-logger.get = function() { return cache; };
-logger.empty = function() { cache = []; };
-
-module.exports = logger;
 
 
 /***/ }),
@@ -1082,52 +1107,44 @@ module.exports = logger;
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Minilog = __webpack_require__(11);
+var Transform = __webpack_require__(0),
+    cache = [ ];
 
-var oldEnable = Minilog.enable,
-    oldDisable = Minilog.disable,
-    isChrome = (typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent)),
-    console = __webpack_require__(13);
+var logger = new Transform();
 
-// Use a more capable logging backend if on Chrome
-Minilog.defaultBackend = (isChrome ? console.minilog : console);
-
-// apply enable inputs from localStorage and from the URL
-if(typeof window != 'undefined') {
-  try {
-    Minilog.enable(JSON.parse(window.localStorage['minilogSettings']));
-  } catch(e) {}
-  if(window.location && window.location.search) {
-    var match = RegExp('[?&]minilog=([^&]*)').exec(window.location.search);
-    match && Minilog.enable(decodeURIComponent(match[1]));
-  }
-}
-
-// Make enable also add to localStorage
-Minilog.enable = function() {
-  oldEnable.call(Minilog, true);
-  try { window.localStorage['minilogSettings'] = JSON.stringify(true); } catch(e) {}
-  return this;
+logger.write = function(name, level, args) {
+  cache.push([ name, level, args ]);
 };
 
-Minilog.disable = function() {
-  oldDisable.call(Minilog);
-  try { delete window.localStorage.minilogSettings; } catch(e) {}
-  return this;
-};
+// utility functions
+logger.get = function() { return cache; };
+logger.empty = function() { cache = []; };
 
-exports = module.exports = Minilog;
-
-exports.backends = {
-  array: __webpack_require__(12),
-  browser: Minilog.defaultBackend,
-  localStorage: __webpack_require__(18),
-  jQuery: __webpack_require__(17)
-};
+module.exports = logger;
 
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Transform = __webpack_require__(0),
+    cache = false;
+
+var logger = new Transform();
+
+logger.write = function(name, level, args) {
+  if(typeof window == 'undefined' || typeof JSON == 'undefined' || !JSON.stringify || !JSON.parse) return;
+  try {
+    if(!cache) { cache = (window.localStorage.minilog ? JSON.parse(window.localStorage.minilog) : []); }
+    cache.push([ new Date().toString(), name, level, args ]);
+    window.localStorage.minilog = JSON.stringify(cache);
+  } catch(e) {}
+};
+
+module.exports = logger;
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Transform = __webpack_require__(0);
@@ -1205,26 +1222,6 @@ AjaxLogger.jQueryWait = function(onDone) {
 
 module.exports = AjaxLogger;
 
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Transform = __webpack_require__(0),
-    cache = false;
-
-var logger = new Transform();
-
-logger.write = function(name, level, args) {
-  if(typeof window == 'undefined' || typeof JSON == 'undefined' || !JSON.stringify || !JSON.parse) return;
-  try {
-    if(!cache) { cache = (window.localStorage.minilog ? JSON.parse(window.localStorage.minilog) : []); }
-    cache.push([ new Date().toString(), name, level, args ]);
-    window.localStorage.minilog = JSON.stringify(cache);
-  } catch(e) {}
-};
-
-module.exports = logger;
 
 /***/ })
 /******/ ]);

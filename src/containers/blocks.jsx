@@ -231,8 +231,10 @@ class Blocks extends React.Component {
     setBlocks (blocks) {
         this.blocks = blocks;
     }
-    handlePromptStart (message, defaultValue, callback) {
-        this.setState({prompt: {callback, message, defaultValue}});
+    handlePromptStart (message, defaultValue, callback, opt_title) {
+        var p = {prompt: {callback, message, defaultValue}};
+        p.prompt.title = opt_title ? opt_title : "New Variable";
+        this.setState(p);
     }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
@@ -272,7 +274,7 @@ class Blocks extends React.Component {
                     <Prompt
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
-                        title="New Variable" // @todo the only prompt is for new variables
+                        title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />

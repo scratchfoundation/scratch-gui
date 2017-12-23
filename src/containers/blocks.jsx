@@ -152,8 +152,8 @@ class Blocks extends React.Component {
     onTargetsUpdate () {
         if (this.props.vm.editingTarget) {
             ['glide', 'move', 'set'].forEach(prefix => {
-                this.updateToolboxBlockValue(`${prefix}x`, this.props.vm.editingTarget.x.toFixed(0));
-                this.updateToolboxBlockValue(`${prefix}y`, this.props.vm.editingTarget.y.toFixed(0));
+                this.updateToolboxBlockValue(`${prefix}x`, Math.round(this.props.vm.editingTarget.x).toString());
+                this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
     }

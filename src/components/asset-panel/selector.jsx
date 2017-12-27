@@ -23,6 +23,7 @@ const Selector = props => {
                     <SpriteSelectorItem
                         assetId={item.assetId}
                         className={styles.listItem}
+                        costumeCount={items.length}
                         costumeURL={item.url}
                         id={index}
                         key={`asset-${index}`}

@@ -53,6 +53,7 @@ class SpriteSelectorItem extends React.Component {
 
 SpriteSelectorItem.propTypes = {
     assetId: PropTypes.string,
+    costumeCount: PropTypes.number,
     costumeURL: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,

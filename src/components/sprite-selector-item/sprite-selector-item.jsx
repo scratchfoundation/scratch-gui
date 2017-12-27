@@ -22,7 +22,7 @@ const SpriteSelectorItem = props => (
         }}
         id={`${props.name}-${contextMenuId}`}
     >
-        {props.selected ? (
+        {(props.selected && props.costumeCount > 1) ? (
             <CloseButton
                 className={styles.deleteButton}
                 size={CloseButton.SIZE_SMALL}
@@ -61,6 +61,7 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
+    costumeCount: PropTypes.number,
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,

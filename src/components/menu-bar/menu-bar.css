@@ -4,7 +4,7 @@
 .menu-bar {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: nowrap;
     
     /* 
@@ -26,6 +26,13 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: $motion-primary;
     color: white;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 
 /* 
@@ -59,4 +66,30 @@
     text-decoration: none;
     color: $motion-tertiary;
     user-select: none;
+}
+
+.feedback-button-wrapper {
+    align-self: center;
+    padding: 0 .5rem;
+    line-height: $menu-bar-height;
+}
+
+.feedback-button {
+    border-radius: 5px;
+    padding: .75rem;
+    background-color: #FFF;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: bold;
+    color: $motion-primary;
+}
+
+.feedback-button-icon {
+    vertical-align: middle;
+}
+
+.feedback-button-icon {
+    margin-right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }

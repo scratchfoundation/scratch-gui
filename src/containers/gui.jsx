@@ -60,6 +60,7 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     ...GUIComponent.propTypes,
+    feedbackFormVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
@@ -68,6 +69,7 @@ GUI.propTypes = {
 GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
+    feedbackFormVisible: state.modals.feedbackForm,
     previewInfoVisible: state.modals.previewInfo
 });
 

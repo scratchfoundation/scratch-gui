@@ -1,4 +1,5 @@
 import bindAll from 'lodash.bindall';
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -43,10 +44,25 @@ class LibraryItem extends React.PureComponent {
     render () {
         return this.props.featured ? (
             <div
-                className={classNames(styles.libraryItem, styles.featuredItem)}
+                className={classNames(
+                    styles.libraryItem,
+                    styles.featuredItem,
+                    {
+                        [styles.disabled]: this.props.disabled
+                    }
+                )}
                 onClick={this.handleClick}
             >
-                <div>
+                <div className={styles.featuredImageContainer}>
+                    {this.props.disabled ? (
+                        <div className={styles.comingSoonText}>
+                            <FormattedMessage
+                                defaultMessage="Coming Soon"
+                                description="Label for extensions that are not yet implemented"
+                                id="gui.extensionLibrary.comingSoon"
+                            />
+                        </div>
+                    ) : null}
                     <img
                         className={styles.featuredImage}
                         src={this.props.iconURL}
@@ -89,6 +105,7 @@ class LibraryItem extends React.PureComponent {
 
 LibraryItem.propTypes = {
     description: PropTypes.string,
+    disabled: PropTypes.bool,
     featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
@@ -98,6 +115,10 @@ LibraryItem.propTypes = {
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired
+};
+
+LibraryItem.defaultProps = {
+    disabled: false
 };
 
 export default LibraryItem;

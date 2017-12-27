@@ -26,7 +26,9 @@ class LibraryItem extends React.PureComponent {
         this.props.onFocus(this.props.id);
     }
     handleClick (e) {
-        this.props.onSelect(this.props.id);
+        if (!this.props.disabled) {
+            this.props.onSelect(this.props.id);
+        }
         e.preventDefault();
     }
     handleKeyPress (e) {

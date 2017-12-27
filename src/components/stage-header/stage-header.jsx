@@ -9,8 +9,6 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Controls from '../../containers/controls.jsx';
 
-import {STAGE_SIZES} from '../../reducers/stage-size';
-
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
 import smallStageIcon from './icon--small-stage.svg';
@@ -43,7 +41,6 @@ const messages = defineMessages({
 
 const StageHeaderComponent = function (props) {
     const {
-        stageSize,
         isFullScreen,
         onSetStageLarge,
         onSetStageFull,
@@ -144,7 +141,6 @@ StageHeaderComponent.propTypes = {
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

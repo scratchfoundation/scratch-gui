@@ -20,6 +20,7 @@ class SpriteSelectorItem extends React.Component {
         this.props.onClick(this.props.id);
     }
     handleDelete () {
+        // @todo add i18n here
         // eslint-disable-next-line no-alert
         if (window.confirm('Are you sure you want to delete this sprite?')) {
             this.props.onDeleteButtonClick(this.props.id);
@@ -43,7 +44,7 @@ class SpriteSelectorItem extends React.Component {
         return (
             <SpriteSelectorItemComponent
                 onClick={this.handleClick}
-                onDeleteButtonClick={this.handleDelete}
+                onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
                 {...props}
             />
@@ -53,12 +54,11 @@ class SpriteSelectorItem extends React.Component {
 
 SpriteSelectorItem.propTypes = {
     assetId: PropTypes.string,
-    costumeCount: PropTypes.number,
     costumeURL: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func.isRequired,
+    onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool
 };

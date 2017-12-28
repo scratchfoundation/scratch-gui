@@ -23,14 +23,13 @@ const Selector = props => {
                     <SpriteSelectorItem
                         assetId={item.assetId}
                         className={styles.listItem}
-                        costumeCount={items.length}
                         costumeURL={item.url}
                         id={index}
                         key={`asset-${index}`}
                         name={item.name}
                         selected={index === selectedItemIndex}
                         onClick={onItemClick}
-                        onDeleteButtonClick={onDeleteClick}
+                        onDeleteButtonClick={items.length > 1 ? onDeleteClick : null}
                     />
                 ))}
             </Box>

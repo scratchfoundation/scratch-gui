@@ -22,7 +22,7 @@ const SpriteSelectorItem = props => (
         }}
         id={`${props.name}-${contextMenuId}`}
     >
-        {props.selected ? (
+        {(props.selected && props.onDeleteButtonClick) ? (
             <CloseButton
                 className={styles.deleteButton}
                 size={CloseButton.SIZE_SMALL}
@@ -38,24 +38,28 @@ const SpriteSelectorItem = props => (
             />
         ) : null}
         <div className={styles.spriteName}>{props.name}</div>
-        <ContextMenu id={`${props.name}-${contextMenuId++}`}>
-            {props.onDuplicateButtonClick ? (
-                <MenuItem onClick={props.onDuplicateButtonClick}>
-                    <FormattedMessage
-                        defaultMessage="duplicate"
-                        description="Menu item to duplicate in the right click menu"
-                        id="gui.spriteSelectorItem.contextMenuDuplicate"
-                    />
-                </MenuItem>
-            ) : null}
-            <MenuItem onClick={props.onDeleteButtonClick}>
-                <FormattedMessage
-                    defaultMessage="delete"
-                    description="Menu item to delete in the right click menu"
-                    id="gui.spriteSelectorItem.contextMenuDelete"
-                />
-            </MenuItem>
-        </ContextMenu>
+        {props.onDuplicateButtonClick || props.onDeleteButtonClick ? (
+            <ContextMenu id={`${props.name}-${contextMenuId++}`}>
+                {props.onDuplicateButtonClick ? (
+                    <MenuItem onClick={props.onDuplicateButtonClick}>
+                        <FormattedMessage
+                            defaultMessage="duplicate"
+                            description="Menu item to duplicate in the right click menu"
+                            id="gui.spriteSelectorItem.contextMenuDuplicate"
+                        />
+                    </MenuItem>
+                ) : null}
+                {props.onDeleteButtonClick ? (
+                    <MenuItem onClick={props.onDeleteButtonClick}>
+                        <FormattedMessage
+                            defaultMessage="delete"
+                            description="Menu item to delete in the right click menu"
+                            id="gui.spriteSelectorItem.contextMenuDelete"
+                        />
+                    </MenuItem>
+                ) : null }
+            </ContextMenu>
+        ) : null}
     </ContextMenuTrigger>
 );
 
@@ -64,7 +68,7 @@ SpriteSelectorItem.propTypes = {
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     onClick: PropTypes.func,
-    onDeleteButtonClick: PropTypes.func.isRequired,
+    onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
     selected: PropTypes.bool.isRequired
 };

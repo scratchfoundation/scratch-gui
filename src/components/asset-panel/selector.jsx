@@ -29,7 +29,7 @@ const Selector = props => {
                         name={item.name}
                         selected={index === selectedItemIndex}
                         onClick={onItemClick}
-                        onDeleteButtonClick={items.length > 1 ? onDeleteClick : null}
+                        onDeleteButtonClick={onDeleteClick}
                     />
                 ))}
             </Box>
@@ -57,7 +57,7 @@ Selector.propTypes = {
         url: PropTypes.string,
         name: PropTypes.string.isRequired
     })),
-    onDeleteClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func,
     onItemClick: PropTypes.func.isRequired,
     selectedItemIndex: PropTypes.number.isRequired
 };

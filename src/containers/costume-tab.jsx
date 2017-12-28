@@ -18,6 +18,7 @@ import {
 } from '../reducers/modals';
 
 import addBlankCostumeIcon from '../components/asset-panel/icon--add-blank-costume.svg';
+import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 
@@ -91,8 +92,7 @@ class CostumeTab extends React.Component {
         const emptyItem = costumeLibraryContent.find(item => (
             item.name === 'Empty'
         ));
-        const costumes = this.props.vm.editingTarget.sprite.costumes || [];
-        const name = this.props.vm.editingTarget.isStage ? `backdrop${costumes.length}` : `costume${costumes.length}`;
+        const name = this.props.vm.editingTarget.isStage ? `backdrop1` : `costume1`;
         const vmCostume = {
             name: name,
             rotationCenterX: emptyItem.info[0],
@@ -133,6 +133,7 @@ class CostumeTab extends React.Component {
         const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
         const addBlankMessage = target.isStage ? messages.addBlankBackdropMsg : messages.addBlankCostumeMsg;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
+        const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
 
         return (
             <AssetPanel
@@ -144,7 +145,7 @@ class CostumeTab extends React.Component {
                     },
                     {
                         message: addLibraryMessage,
-                        img: addLibraryCostumeIcon,
+                        img: addLibraryIcon,
                         onClick: addLibraryFunc
                     }
                 ]}

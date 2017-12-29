@@ -238,8 +238,8 @@ const looks = function (isStage, targetId) {
         <block type="looks_hide"/>
         ${blockSeparator}
         ${isStage ? '' : `
-            <block type="looks_gotofront"/>
-            <block type="looks_gobacklayers">
+            <block type="looks_gotofrontback"/>
+            <block type="looks_goforwardbackwardlayers">
                 <value name="NUM">
                     <shadow type="math_integer">
                         <field name="NUM">1</field>

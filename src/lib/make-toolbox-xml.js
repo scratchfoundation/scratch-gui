@@ -440,6 +440,11 @@ const sensing = function (isStage) {
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>
+        ${isStage ? '' : `
+            ${blockSeparator}
+            '<block type="sensing_setdragmode" id="sensing_setdragmode"></block>'+
+            ${blockSeparator}
+        `}
         ${blockSeparator}
         <block id="loudness" type="sensing_loudness"/>
         ${blockSeparator}

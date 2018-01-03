@@ -1,6 +1,7 @@
 import boostImage from './boost.png';
 import musicImage from './music.png';
 import penImage from './pen.png';
+import speechImage from './speech.png';
 import videoImage from './video-sensing.png';
 import wedoImage from './wedo.png';
 
@@ -30,7 +31,7 @@ export default [
     {
         name: 'Speech',
         extensionURL: '',
-        iconURL: musicImage,
+        iconURL: speechImage,
         description: 'Talk to your projects.',
         featured: true,
         disabled: true

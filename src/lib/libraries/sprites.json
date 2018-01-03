@@ -724,74 +724,6 @@
         }
     },
     {
-        "name": "Brontosaurus",
-        "md5": "75d367961807fff8e81f556da81dec24.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            4,
-            1
-        ],
-        "json": {
-            "objName": "brontosaurus",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "brontosaurus-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "75d367961807fff8e81f556da81dec24.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 98,
-                    "rotationCenterY": 92
-                },
-                {
-                    "costumeName": "brontosaurus-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 98,
-                    "rotationCenterY": 47
-                },
-                {
-                    "costumeName": "brontosaurus-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "02078a81abd2e10cb62ebcc853a40c92.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 81,
-                    "rotationCenterY": 91
-                },
-                {
-                    "costumeName": "brontosaurus-d",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "c9ed031bc9bf11416142880f89436be9.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 98,
-                    "rotationCenterY": 91
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -138,
-            "scratchY": -51,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 1,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
         "name": "Buildings",
         "md5": "d713270e235851e5962becd73a951771.svg",
         "type": "sprite",
@@ -1639,6 +1571,286 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 23,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Dinosaur1",
+        "md5": "75d367961807fff8e81f556da81dec24.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "dinosaur1",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "brontosaurus-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "75d367961807fff8e81f556da81dec24.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 98,
+                    "rotationCenterY": 92
+                },
+                {
+                    "costumeName": "brontosaurus-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 98,
+                    "rotationCenterY": 47
+                },
+                {
+                    "costumeName": "brontosaurus-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "02078a81abd2e10cb62ebcc853a40c92.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 81,
+                    "rotationCenterY": 91
+                },
+                {
+                    "costumeName": "brontosaurus-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c9ed031bc9bf11416142880f89436be9.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 98,
+                    "rotationCenterY": 91
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -138,
+            "scratchY": -51,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 1,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Dinosaur2",
+        "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "dinosaur2",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "triceratops-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5493f5deffe7aed451cd8b255740de4a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                },
+                {
+                    "costumeName": "triceratops-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "70bba739b7df0bd08abb31026d078ee7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 74,
+                    "rotationCenterY": 67
+                },
+                {
+                    "costumeName": "triceratops-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4a51679d86aafcc9cee1c010fc141288.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 62,
+                    "rotationCenterY": 67
+                },
+                {
+                    "costumeName": "triceratops-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "47053664449b24749aaf199925b19f8e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 71,
+                    "rotationCenterY": 66
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 10,
+            "scratchY": 26,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 3,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Dinosaur3",
+        "md5": "17636db6f607c14a03a36e18abfea86a.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            5,
+            1
+        ],
+        "json": {
+            "objName": "dinosaur3",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "pterosaur-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "17636db6f607c14a03a36e18abfea86a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                },
+                {
+                    "costumeName": "pterosaur-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                },
+                {
+                    "costumeName": "pterosaur-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "4700613077afa7c62659b3fd7d7c748e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                },
+                {
+                    "costumeName": "pterosaur-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                },
+                {
+                    "costumeName": "pterosaur-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "00e24e40535a1a621fee0f70895b2b61.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 115,
+                    "rotationCenterY": 72
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -76,
+            "scratchY": 101,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 2,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Dinosaur4",
+        "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
+        "type": "sprite",
+        "tags": [],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "dinosaur4",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "tyrannosaurus-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9da591f8a6da251c800adb12a02c43cb.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 54
+                },
+                {
+                    "costumeName": "tyrannosaurus-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 54
+                },
+                {
+                    "costumeName": "tyrannosaurus-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 54
+                },
+                {
+                    "costumeName": "tyrannosaurus-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "45061ff84a25723625d04f0476687633.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 89,
+                    "rotationCenterY": 90
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 128,
+            "scratchY": -19,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5056,82 +5268,6 @@
         }
     },
     {
-        "name": "Pterosaur",
-        "md5": "17636db6f607c14a03a36e18abfea86a.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            5,
-            1
-        ],
-        "json": {
-            "objName": "pterosaur",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "pterosaur-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "17636db6f607c14a03a36e18abfea86a.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                },
-                {
-                    "costumeName": "pterosaur-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                },
-                {
-                    "costumeName": "pterosaur-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4700613077afa7c62659b3fd7d7c748e.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                },
-                {
-                    "costumeName": "pterosaur-d",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                },
-                {
-                    "costumeName": "pterosaur-e",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "00e24e40535a1a621fee0f70895b2b61.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -76,
-            "scratchY": 101,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 2,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
         "name": "Pufferfish",
         "md5": "81d7db99142a39c9082be2c2183f2175.svg",
         "type": "sprite",
@@ -6504,74 +6640,6 @@
         }
     },
     {
-        "name": "Triceratops",
-        "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            4,
-            1
-        ],
-        "json": {
-            "objName": "triceratops",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "triceratops-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "5493f5deffe7aed451cd8b255740de4a.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 115,
-                    "rotationCenterY": 72
-                },
-                {
-                    "costumeName": "triceratops-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "70bba739b7df0bd08abb31026d078ee7.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 74,
-                    "rotationCenterY": 67
-                },
-                {
-                    "costumeName": "triceratops-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4a51679d86aafcc9cee1c010fc141288.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 62,
-                    "rotationCenterY": 67
-                },
-                {
-                    "costumeName": "triceratops-d",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "47053664449b24749aaf199925b19f8e.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 71,
-                    "rotationCenterY": 66
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": 10,
-            "scratchY": 26,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 3,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
         "name": "Trumpet",
         "md5": "8fa7459ed5877bb14c6625e688be70e7.svg",
         "type": "sprite",
@@ -6683,74 +6751,6 @@
             "rotationStyle": "normal",
             "isDraggable": false,
             "indexInLibrary": 10,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Tyrannosaurus",
-        "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            4,
-            1
-        ],
-        "json": {
-            "objName": "tyrannosaurus",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "tyrannosaurus-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "9da591f8a6da251c800adb12a02c43cb.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 59,
-                    "rotationCenterY": 54
-                },
-                {
-                    "costumeName": "tyrannosaurus-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 59,
-                    "rotationCenterY": 54
-                },
-                {
-                    "costumeName": "tyrannosaurus-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 86,
-                    "rotationCenterY": 54
-                },
-                {
-                    "costumeName": "tyrannosaurus-d",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "45061ff84a25723625d04f0476687633.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 89,
-                    "rotationCenterY": 90
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": 128,
-            "scratchY": -19,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }

@@ -29,7 +29,7 @@
     width: 100%;
     height: 208px;
     background-color: $motion-primary;
-    background-image: url('./info.png');
+    background-image: url('./welcome.png');
     background-size: cover;
 }
 

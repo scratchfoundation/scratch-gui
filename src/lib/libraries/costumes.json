@@ -1,49 +1,5 @@
 [
     {
-        "name": "101-a",
-        "md5": "6921a0e33644ef9f58ae1213932b3b3f.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            96,
-            1
-        ]
-    },
-    {
-        "name": "101-b",
-        "md5": "fc9276d0909539fd31c30db7b2e08bf9.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            56,
-            97,
-            1
-        ]
-    },
-    {
-        "name": "101-c",
-        "md5": "c5e02f00d233199fea1c51b71c402ce4.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            63,
-            97,
-            1
-        ]
-    },
-    {
-        "name": "101-d",
-        "md5": "ca2cf7d6c0446fbce36621006a4b0fac.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            95,
-            1
-        ]
-    },
-    {
         "name": "Abby-a",
         "md5": "afab2d2141e9811bd89e385e9628cb5f.svg",
         "type": "costume",
@@ -337,50 +293,6 @@
         "info": [
             59,
             69,
-            1
-        ]
-    },
-    {
-        "name": "Brontosaurus-a",
-        "md5": "75d367961807fff8e81f556da81dec24.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            98,
-            92,
-            1
-        ]
-    },
-    {
-        "name": "Brontosaurus-b",
-        "md5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            98,
-            47,
-            1
-        ]
-    },
-    {
-        "name": "Brontosaurus-c",
-        "md5": "02078a81abd2e10cb62ebcc853a40c92.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            81,
-            91,
-            1
-        ]
-    },
-    {
-        "name": "Brontosaurus-d",
-        "md5": "c9ed031bc9bf11416142880f89436be9.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            98,
-            91,
             1
         ]
     },
@@ -810,6 +722,193 @@
         "info": [
             75,
             75,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur1-a",
+        "md5": "75d367961807fff8e81f556da81dec24.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            98,
+            92,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur1-b",
+        "md5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            98,
+            47,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur1-c",
+        "md5": "02078a81abd2e10cb62ebcc853a40c92.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            81,
+            91,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur1-d",
+        "md5": "c9ed031bc9bf11416142880f89436be9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            98,
+            91,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur2-a",
+        "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur2-b",
+        "md5": "70bba739b7df0bd08abb31026d078ee7.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            74,
+            67,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur2-c",
+        "md5": "4a51679d86aafcc9cee1c010fc141288.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            62,
+            67,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur2-d",
+        "md5": "47053664449b24749aaf199925b19f8e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            71,
+            66,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur3-a",
+        "md5": "17636db6f607c14a03a36e18abfea86a.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur3-b",
+        "md5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur3-c",
+        "md5": "4700613077afa7c62659b3fd7d7c748e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur3-d",
+        "md5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur3-e",
+        "md5": "00e24e40535a1a621fee0f70895b2b61.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            115,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur4-a",
+        "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            59,
+            54,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur4-b",
+        "md5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            86,
+            54,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur4-c",
+        "md5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            59,
+            54,
+            1
+        ]
+    },
+    {
+        "name": "Dinosaur4-d",
+        "md5": "45061ff84a25723625d04f0476687633.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            89,
+            90,
             1
         ]
     },
@@ -2497,61 +2596,6 @@
         ]
     },
     {
-        "name": "Pterosaur-a",
-        "md5": "17636db6f607c14a03a36e18abfea86a.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
-        "name": "Pterosaur-b",
-        "md5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
-        "name": "Pterosaur-c",
-        "md5": "4700613077afa7c62659b3fd7d7c748e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
-        "name": "Pterosaur-d",
-        "md5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
-        "name": "Pterosaur-e",
-        "md5": "00e24e40535a1a621fee0f70895b2b61.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
         "name": "Pufferfish-a",
         "md5": "81d7db99142a39c9082be2c2183f2175.svg",
         "type": "costume",
@@ -2768,6 +2812,50 @@
         "info": [
             58,
             90,
+            1
+        ]
+    },
+    {
+        "name": "Robot-a",
+        "md5": "cb3985cd066ccbab11954709b3d54c17.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            74,
+            109,
+            1
+        ]
+    },
+    {
+        "name": "Robot-b",
+        "md5": "fc9276d0909539fd31c30db7b2e08bf9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            56,
+            97,
+            1
+        ]
+    },
+    {
+        "name": "Robot-c",
+        "md5": "c5e02f00d233199fea1c51b71c402ce4.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            63,
+            97,
+            1
+        ]
+    },
+    {
+        "name": "Robot-d",
+        "md5": "ca2cf7d6c0446fbce36621006a4b0fac.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            59,
+            95,
             1
         ]
     },
@@ -3157,50 +3245,6 @@
         ]
     },
     {
-        "name": "Triceratops-a",
-        "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            115,
-            72,
-            1
-        ]
-    },
-    {
-        "name": "Triceratops-b",
-        "md5": "70bba739b7df0bd08abb31026d078ee7.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            74,
-            67,
-            1
-        ]
-    },
-    {
-        "name": "Triceratops-c",
-        "md5": "4a51679d86aafcc9cee1c010fc141288.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            62,
-            67,
-            1
-        ]
-    },
-    {
-        "name": "Triceratops-d",
-        "md5": "47053664449b24749aaf199925b19f8e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            71,
-            66,
-            1
-        ]
-    },
-    {
         "name": "Trumpet-a",
         "md5": "8fa7459ed5877bb14c6625e688be70e7.svg",
         "type": "costume",
@@ -3230,50 +3274,6 @@
         "info": [
             37,
             73,
-            1
-        ]
-    },
-    {
-        "name": "Tyrannosaurus-a",
-        "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            54,
-            1
-        ]
-    },
-    {
-        "name": "Tyrannosaurus-b",
-        "md5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            86,
-            54,
-            1
-        ]
-    },
-    {
-        "name": "Tyrannosaurus-c",
-        "md5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            54,
-            1
-        ]
-    },
-    {
-        "name": "Tyrannosaurus-d",
-        "md5": "45061ff84a25723625d04f0476687633.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            89,
-            90,
             1
         ]
     },

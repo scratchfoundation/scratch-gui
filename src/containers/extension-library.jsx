@@ -16,9 +16,12 @@ class ExtensionLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        // eslint-disable-next-line no-alert
-        const url = item.extensionURL || prompt('Enter the URL of the extension');
-        if (url) {
+        let url = item.extensionURL;
+        if (!item.disabled && !item.extensionURL) {
+            // eslint-disable-next-line no-alert
+            url = prompt('Enter the URL of the extension');
+        }
+        if (url && !item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(item.name);
             } else {

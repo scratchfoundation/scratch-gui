@@ -17,6 +17,7 @@
     justify-content: space-around;
     margin: 1.25rem 0;
     color: $motion-primary;
+    text-align: center;
 }
 
 .new-button {

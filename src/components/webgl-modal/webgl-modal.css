@@ -29,7 +29,7 @@
     width: 100%;
     height: 208px;
     background-color: $motion-primary;
-    background-image: url('./webgl.png');
+    background-image: url('../browser-modal/unsupported.png');
     background-size: cover;
 }
 

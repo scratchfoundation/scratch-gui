@@ -249,11 +249,10 @@ const looks = function (isStage, targetId) {
             ${blockSeparator}
         `}
         ${isStage ? `
-            <block id="backdroporder" type="looks_backdroporder"/>
-            <block id="backdropname" type="looks_backdropname"/>
+            <block id="backdropnumbername" type="looks_backdropnumbername"/>
         ` : `
-            <block id="${targetId}_costumeorder" type="looks_costumeorder"/>
-            <block id="backdropname" type="looks_backdropname"/>
+            <block id="${targetId}_costumenumbername" type="looks_costumenumbername"/>
+            <block id="backdropnumbername" type="looks_backdropnumbername"/>
             <block id="${targetId}_size" type="looks_size"/>
         `}
         ${categorySeparator}

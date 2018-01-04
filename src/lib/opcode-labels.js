@@ -18,13 +18,13 @@ const opcodeMap = {
         category: 'looks',
         label: 'size'
     },
-    looks_costumeorder: {
+    looks_costumenumbername: {
         category: 'looks',
-        label: 'costume #'
+        labelFn: params => `costume ${params.NUMBER_NAME}`
     },
-    looks_backdroporder: {
+    looks_backdropnumbername: {
         category: 'looks',
-        label: 'backdrop #'
+        labelFn: params => `backdrop ${params.NUMBER_NAME}`
     },
     looks_backdropname: {
         category: 'looks',

@@ -55,6 +55,7 @@
     background: white;
     font-weight: bold;
     font-size: .875rem;
+    cursor: pointer;
 }
 
 .button-row button.ok-button {

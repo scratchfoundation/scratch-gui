@@ -169,8 +169,8 @@ describe('costumes, sounds and variables', () => {
         await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
 
-        // Expect a default variable "count" to be visible
-        await clickText('count', blocksTabScope);
+        // Expect a default variable "my variable" to be visible
+        await clickText('my\u00A0variable', blocksTabScope);
         await findByText('0', reportedValueScope);
 
         await clickText('Make a Variable');

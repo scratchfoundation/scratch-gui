@@ -22,7 +22,7 @@
     "tempoBPM": 60,
     "videoAlpha": 0.5,
     "variables": [{
-        "name": "count",
+        "name": "my variable",
         "isPersistent": false,
         "value": 0
     }],

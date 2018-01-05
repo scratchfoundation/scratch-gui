@@ -36,3 +36,13 @@ deploy:
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
+- provider: s3
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: $AWS_BUCKET_NAME
+  acl: public_read
+  detect_encoding: true
+  skip_cleanup: true
+  local_dir: build

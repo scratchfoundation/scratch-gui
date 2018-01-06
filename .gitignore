@@ -18,4 +18,5 @@ npm-*
 /locale
 
 
-.package-lock.json
+package-lock.json
+.vscode

@@ -3,10 +3,10 @@ import React from 'react';
 import log from './log';
 import storage from './storage';
 
-/* Higher Order Component to provide behavior for loading projects by id from
+/* 加载项目的高阶组件 (Higher Order Component to provide behavior for loading projects by id from)
  * the window's hash (#this part in the url)
- * @param {React.Component} WrappedComponent component to receive projectData prop
- * @returns {React.Component} component with project loading behavior
+ * @param {React.Component} WrappedComponent 接收 projectData prop 的组件 (component to receive projectData prop)
+ * @returns {React.Component} 带有项目加载行为的组件 (component with project loading behavior)
  */
 const ProjectLoaderHOC = function (WrappedComponent) {
     class ProjectLoaderComponent extends React.Component {
@@ -60,7 +60,4 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     return ProjectLoaderComponent;
 };
 
-
-export {
-    ProjectLoaderHOC as default
-};
+export default ProjectLoaderHOC;

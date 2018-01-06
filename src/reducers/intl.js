@@ -15,6 +15,9 @@ Object.keys(localeData).forEach(locale => {
     addLocaleData(localeData[locale].localeData);
 });
 
+/**
+ * 初始化 state
+ */
 const intlInitialState = {
     intl: {
         defaultLocale: 'en',

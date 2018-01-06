@@ -8,6 +8,7 @@ import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 
 import Blocks from '../../containers/blocks.jsx';
+import BlockTab from '../../containers/block-tab.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
@@ -85,9 +86,9 @@ const GUIComponent = props => {
                             onSelect={onTabSelect}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>Blocks</Tab>
-                                <Tab className={tabClassNames.tab}>Costumes</Tab>
-                                <Tab className={tabClassNames.tab}>Sounds</Tab>
+                                <Tab className={tabClassNames.tab}>模块</Tab>
+                                <Tab className={tabClassNames.tab}>角色</Tab>
+                                <Tab className={tabClassNames.tab}>音频</Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>
@@ -110,6 +111,7 @@ const GUIComponent = props => {
                                         onClick={onExtensionButtonClick}
                                     />
                                 </Box>
+                                {/* tabIndex === 0 ? <BlockTab vm={vm} /> : null*/}
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
@@ -159,4 +161,5 @@ GUIComponent.propTypes = {
 GUIComponent.defaultProps = {
     basePath: './'
 };
+
 export default GUIComponent;

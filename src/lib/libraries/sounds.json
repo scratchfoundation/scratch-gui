@@ -455,14 +455,14 @@
         "format": ""
     },
     {
-        "name": "Cough-female",
+        "name": "Cough1",
         "md5": "98ec3e1eeb7893fca519aa52cc1ef3c1.wav",
         "sampleCount": 7516,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Cough-male",
+        "name": "Cough2",
         "md5": "467fe8ef3cab475af4b3088fd1261510.wav",
         "sampleCount": 16612,
         "rate": 22050,
@@ -1225,21 +1225,21 @@
         "format": ""
     },
     {
-        "name": "Laugh-female",
+        "name": "Laugh1",
         "md5": "1e8e7fb94103282d02a4bb597248c788.wav",
         "sampleCount": 13547,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Laugh-male1",
+        "name": "Laugh2",
         "md5": "8b1e025f38b0635f7e34e9afcace1b5e.wav",
         "sampleCount": 14662,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Laugh-male2",
+        "name": "Laugh3",
         "md5": "86dee6fa7cd73095ba17e4d666a27804.wav",
         "sampleCount": 32065,
         "rate": 11025,
@@ -1407,14 +1407,14 @@
         "format": ""
     },
     {
-        "name": "Scream-female",
+        "name": "Scream1",
         "md5": "10420bb2f5a3ab440f3b10fc8ea2b08b.wav",
         "sampleCount": 6628,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Scream-male1",
+        "name": "Scream2",
         "md5": "e06e29398d770dae3cd57447439752ef.wav",
         "sampleCount": 17010,
         "rate": 22050,
@@ -1491,14 +1491,14 @@
         "format": "adpcm"
     },
     {
-        "name": "Sneeze-female",
+        "name": "Sneeze1",
         "md5": "31600c613823710b66a74f4dd54c4cdd.wav",
         "sampleCount": 11818,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Sneeze-male",
+        "name": "Sneeze2",
         "md5": "42b5a31628083f3089f494f2ba644660.wav",
         "sampleCount": 15218,
         "rate": 22050,

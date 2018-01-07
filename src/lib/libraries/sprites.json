@@ -1743,19 +1743,19 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "dinosaur4-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 59,
-                    "rotationCenterY": 54
-                },
-                {
                     "costumeName": "dinosaur4-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 86,
+                    "rotationCenterY": 54
+                },
+                {
+                    "costumeName": "dinosaur4-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 59,
                     "rotationCenterY": 54
                 },
                 {
@@ -2512,11 +2512,11 @@
                 },
                 {
                     "costumeName": "drum-snare-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "b72e49aa2547f69edb9d9d0760d5e633.svg",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "f6d2f2a6e1055dab6262336625ddf652.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 40,
-                    "rotationCenterY": 69
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 66
                 },
                 {
                     "costumeName": "drum-snare-c",
@@ -2527,7 +2527,7 @@
                     "rotationCenterY": 69
                 }
             ],
-            "currentCostumeIndex": 0,
+            "currentCostumeIndex": 1,
             "scratchX": 45,
             "scratchY": -33,
             "scale": 1,
@@ -2585,7 +2585,7 @@
     },
     {
         "name": "Egg",
-        "md5": "83016b7ff817f99be4a454600b4a78fc.svg",
+        "md5": "bc723738dfe626c5c3bb90970d985961.svg",
         "type": "sprite",
         "tags": [],
         "info": [
@@ -2609,7 +2609,7 @@
                 {
                     "costumeName": "egg-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "83016b7ff817f99be4a454600b4a78fc.svg",
+                    "baseLayerMD5": "bc723738dfe626c5c3bb90970d985961.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 54
@@ -2617,7 +2617,7 @@
                 {
                     "costumeName": "egg-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d9a44d151fbd909bdbbcf7877055af6d.svg",
+                    "baseLayerMD5": "83016b7ff817f99be4a454600b4a78fc.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 54
@@ -2625,7 +2625,7 @@
                 {
                     "costumeName": "egg-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "c91c7f72b8523b0910a84bce7d99c37b.svg",
+                    "baseLayerMD5": "d9a44d151fbd909bdbbcf7877055af6d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 54
@@ -2633,7 +2633,7 @@
                 {
                     "costumeName": "egg-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "65c15516e62596e1f72e874359fc7254.svg",
+                    "baseLayerMD5": "c91c7f72b8523b0910a84bce7d99c37b.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 54
@@ -2641,15 +2641,15 @@
                 {
                     "costumeName": "egg-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "bc723738dfe626c5c3bb90970d985961.svg",
+                    "baseLayerMD5": "65c15516e62596e1f72e874359fc7254.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 54
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -99,
-            "scratchY": 77,
+            "scratchX": -95,
+            "scratchY": 60,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -3632,11 +3632,11 @@
                 },
                 {
                     "costumeName": "hedgehog-e",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "454037f03e7808dc715b69b2b30d8110.svg",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "78a0e3789f6d778e20f9bf3d308a0b19.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 71,
-                    "rotationCenterY": 56
+                    "rotationCenterX": 61,
+                    "rotationCenterY": 45
                 }
             ],
             "currentCostumeIndex": 0,
@@ -4553,7 +4553,7 @@
     },
     {
         "name": "Milk",
-        "md5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
+        "md5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
         "type": "sprite",
         "tags": [],
         "info": [
@@ -4577,7 +4577,7 @@
                 {
                     "costumeName": "milk-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
+                    "baseLayerMD5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 71
@@ -4585,13 +4585,21 @@
                 {
                     "costumeName": "milk-b",
                     "baseLayerID": -1,
+                    "baseLayerMD5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 68,
+                    "rotationCenterY": 71
+                },
+                {
+                    "costumeName": "milk-c",
+                    "baseLayerID": -1,
                     "baseLayerMD5": "50afc991b6fdad4b6547ba98ecf8a6af.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 47,
                     "rotationCenterY": 44
                 },
                 {
-                    "costumeName": "milk-c",
+                    "costumeName": "milk-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8fc7606a176149d225a541a04fa67473.svg",
                     "bitmapResolution": 1,
@@ -4599,25 +4607,17 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "milk-d",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "f2373d449b1226c44436dced422c2935.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 68,
-                    "rotationCenterY": 71
-                },
-                {
                     "costumeName": "milk-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
+                    "baseLayerMD5": "f2373d449b1226c44436dced422c2935.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 68,
                     "rotationCenterY": 71
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 22,
-            "scratchY": -64,
+            "scratchX": -2,
+            "scratchY": -85,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -6361,7 +6361,7 @@
     },
     {
         "name": "Strawberry",
-        "md5": "77dadaa80bc5156f655c2196f57972f7.svg",
+        "md5": "734556fb8e14740f2cbc971238b71d47.svg",
         "type": "sprite",
         "tags": [],
         "info": [
@@ -6385,7 +6385,7 @@
                 {
                     "costumeName": "strawberry-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "77dadaa80bc5156f655c2196f57972f7.svg",
+                    "baseLayerMD5": "734556fb8e14740f2cbc971238b71d47.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
                     "rotationCenterY": 58
@@ -6393,7 +6393,7 @@
                 {
                     "costumeName": "strawberry-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "19f933b3cf3e8e150753f8fb9bb7a779.svg",
+                    "baseLayerMD5": "77dadaa80bc5156f655c2196f57972f7.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
                     "rotationCenterY": 58
@@ -6401,7 +6401,7 @@
                 {
                     "costumeName": "strawberry-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "8e8057da8457e6167de36b7d3d28b4bb.svg",
+                    "baseLayerMD5": "19f933b3cf3e8e150753f8fb9bb7a779.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
                     "rotationCenterY": 58
@@ -6409,7 +6409,7 @@
                 {
                     "costumeName": "strawberry-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5eb63e64b83f5aa5b75a55329a34efec.svg",
+                    "baseLayerMD5": "8e8057da8457e6167de36b7d3d28b4bb.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
                     "rotationCenterY": 58
@@ -6417,15 +6417,15 @@
                 {
                     "costumeName": "strawberry-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "734556fb8e14740f2cbc971238b71d47.svg",
+                    "baseLayerMD5": "5eb63e64b83f5aa5b75a55329a34efec.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
                     "rotationCenterY": 58
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 141,
-            "scratchY": 104,
+            "scratchX": 138,
+            "scratchY": 91,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -6437,7 +6437,7 @@
     },
     {
         "name": "Takeout",
-        "md5": "48b19c48e32c98a35836ee40e3a7accf.svg",
+        "md5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
         "type": "sprite",
         "tags": [],
         "info": [
@@ -6461,7 +6461,7 @@
                 {
                     "costumeName": "takeout-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "48b19c48e32c98a35836ee40e3a7accf.svg",
+                    "baseLayerMD5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 78,
                     "rotationCenterY": 61
@@ -6469,7 +6469,7 @@
                 {
                     "costumeName": "takeout-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "22d33d87883f8fb26c642eccc9b339f0.svg",
+                    "baseLayerMD5": "48b19c48e32c98a35836ee40e3a7accf.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 78,
                     "rotationCenterY": 61
@@ -6477,7 +6477,7 @@
                 {
                     "costumeName": "takeout-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "262f1a3730d669dc9d43b3853e397361.svg",
+                    "baseLayerMD5": "22d33d87883f8fb26c642eccc9b339f0.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 78,
                     "rotationCenterY": 61
@@ -6485,7 +6485,7 @@
                 {
                     "costumeName": "takeout-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "528e9df8c3bd173867be4143f8563e87.svg",
+                    "baseLayerMD5": "262f1a3730d669dc9d43b3853e397361.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 78,
                     "rotationCenterY": 61
@@ -6493,7 +6493,7 @@
                 {
                     "costumeName": "takeout-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
+                    "baseLayerMD5": "528e9df8c3bd173867be4143f8563e87.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 78,
                     "rotationCenterY": 61
@@ -6501,7 +6501,7 @@
             ],
             "currentCostumeIndex": 0,
             "scratchX": -5,
-            "scratchY": 84,
+            "scratchY": 65,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

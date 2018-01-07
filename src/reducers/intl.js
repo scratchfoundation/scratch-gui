@@ -20,15 +20,15 @@ Object.keys(localeData).forEach(locale => {
  */
 const intlInitialState = {
     intl: {
-        defaultLocale: 'en',
-        locale: 'en',
-        messages: combinedMessages.en.messages
+        defaultLocale: 'zh',
+        locale: 'zh',
+        messages: combinedMessages.zh.messages
     }
 };
 
 const updateIntl = locale => superUpdateIntl({
     locale: locale,
-    messages: combinedMessages[locale].messages || combinedMessages.en.messages
+    messages: combinedMessages[locale].messages || combinedMessages.zh.messages
 });
 
 export {

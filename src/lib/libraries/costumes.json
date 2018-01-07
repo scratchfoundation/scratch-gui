@@ -1914,17 +1914,6 @@
         ]
     },
     {
-        "name": "Jez-a",
-        "md5": "9de23c4a7a7fbb67136b539241346854.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
         "name": "Jez-b",
         "md5": "f1e74f3c02333e9e2068e8baf4e77aa0.svg",
         "type": "costume",
@@ -2053,6 +2042,17 @@
         "info": [
             72,
             68,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-a",
+        "md5": "9de23c4a7a7fbb67136b539241346854.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
             1
         ]
     },

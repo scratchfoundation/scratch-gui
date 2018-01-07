@@ -8,6 +8,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Controls from '../../containers/controls.jsx';
+import {getStageSize} from '../../lib/screen-utils.js';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -49,11 +50,15 @@ const StageHeaderComponent = function (props) {
     } = props;
 
     let header = null;
+    const stageSize = getStageSize(isFullScreen);
 
     if (isFullScreen) {
         header = (
             <Box className={styles.stageHeaderWrapperOverlay}>
-                <Box className={styles.stageMenuWrapper}>
+                <Box
+                    className={styles.stageMenuWrapper}
+                    style={{width: stageSize.width}}
+                >
                     <Controls vm={vm} />
                     <Button
                         className={styles.stageButton}

@@ -10,7 +10,7 @@ const messages = defineMessages({
     label: {
         id: 'gui.webglModal.label',
         defaultMessage: 'Your Browser Does Not Support WebGL',
-        description: ''
+        description: 'WebGL missing title'
     }
 });
 

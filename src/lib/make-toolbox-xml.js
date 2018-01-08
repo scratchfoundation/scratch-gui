@@ -15,34 +15,6 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_turnright">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_turnleft">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="motion_pointindirection">
-            <value name="DIRECTION">
-                <shadow type="math_angle">
-                    <field name="NUM">90</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_pointtowards">
-            <value name="TOWARDS">
-                <shadow type="motion_pointtowards_menu">
-                </shadow>
-            </value>
-        </block>
         ${blockSeparator}
         <block type="motion_gotoxy">
             <value name="X">
@@ -87,6 +59,34 @@ const motion = function (isStage, targetId) {
             </value>
             <value name="TO">
                 <shadow type="motion_glideto_menu">
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnleft">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_pointindirection">
+            <value name="DIRECTION">
+                <shadow type="math_angle">
+                    <field name="NUM">90</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_pointtowards">
+            <value name="TOWARDS">
+                <shadow type="motion_pointtowards_menu">
                 </shadow>
             </value>
         </block>

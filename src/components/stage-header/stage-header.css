@@ -16,6 +16,7 @@
 
 .stage-menu-wrapper {
     display: flex;
+    margin: auto;
     justify-content: space-between;
     flex-shrink: 0;
     align-items: center;

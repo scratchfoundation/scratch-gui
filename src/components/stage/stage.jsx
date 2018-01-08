@@ -6,6 +6,7 @@ import Box from '../box/box.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
+import {getStageSize} from '../../lib/screen-utils.js';
 import styles from './stage.css';
 
 const StageComponent = props => {
@@ -22,18 +23,8 @@ const StageComponent = props => {
         ...boxProps
     } = props;
 
-    let heightCorrectedAspect = height;
-    let widthCorrectedAspect = width;
-    const spacingBorderAdjustment = 9;
-    const stageMenuHeightAdjustment = 40;
-    if (isFullScreen) {
-        heightCorrectedAspect = window.innerHeight - stageMenuHeightAdjustment - spacingBorderAdjustment;
-        widthCorrectedAspect = heightCorrectedAspect + (heightCorrectedAspect / 3);
-        if (widthCorrectedAspect > window.innerWidth) {
-            widthCorrectedAspect = window.innerWidth;
-            heightCorrectedAspect = widthCorrectedAspect * .75;
-        }
-    }
+    const stageSize = getStageSize(isFullScreen, height, width);
+    
     return (
         <div>
             <Box
@@ -50,8 +41,8 @@ const StageComponent = props => {
                     )}
                     componentRef={canvasRef}
                     element="canvas"
-                    height={heightCorrectedAspect}
-                    width={widthCorrectedAspect}
+                    height={stageSize.height}
+                    width={stageSize.width}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
@@ -71,7 +62,7 @@ const StageComponent = props => {
                     >
                         <div
                             className={styles.questionWrapper}
-                            style={{width: widthCorrectedAspect}}
+                            style={{width: stageSize.width}}
                         >
                             <Question
                                 question={question}

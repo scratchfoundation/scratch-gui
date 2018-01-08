@@ -4,6 +4,7 @@
 .editor-container {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     padding: calc(2 * $space);
 }
 

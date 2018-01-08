@@ -29,6 +29,7 @@ const LoadButtonComponent = ({
             disabled={false}
             ref={inputRef}
             type="file"
+            accept=".json, .sb2"
             onChange={onChange}
         />
         {/* </ComingSoonTooltip> */}

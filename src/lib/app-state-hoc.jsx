@@ -14,6 +14,8 @@ const enhancer = composeEnhancers(
 );
 const store = createStore(reducer, intlInitialState, enhancer);
 
+import ErrorBoundary from '../containers/error-boundary.jsx';
+
 /*
  * Higher Order Component to provide redux state
  * @param {React.Component} WrappedComponent - component to provide state for
@@ -23,7 +25,9 @@ const AppStateHOC = function (WrappedComponent) {
     const AppStateWrapper = ({...props}) => (
         <Provider store={store}>
             <IntlProvider>
-                <WrappedComponent {...props} />
+                <ErrorBoundary>
+                    <WrappedComponent {...props} />
+                </ErrorBoundary>
             </IntlProvider>
         </Provider>
     );

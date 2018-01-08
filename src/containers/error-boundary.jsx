@@ -35,7 +35,16 @@ class ErrorBoundary extends React.Component {
             } else {
                 return <WebGlModalComponent onBack={this.handleBack} />;
             }
-            return <h1>Something went wrong.</h1>;
+            return (
+                <div style={{margin: '2rem'}}>
+                    <h1>Oops! Something went wrong.</h1>
+                    <p>
+                        We are so sorry, but it looks like Scratch has crashed. This bug has been
+                        automatically reported to the Scratch Team. Please refresh your page to try
+                        again.
+                    </p>
+                </div>
+            );
         }
         return this.props.children;
     }

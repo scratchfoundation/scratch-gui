@@ -16,3 +16,7 @@ npm-*
 # generated translation files
 /translations
 /locale
+
+
+package-lock.json
+.vscode

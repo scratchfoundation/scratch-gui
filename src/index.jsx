@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     window.onbeforeunload = () => true;
 }
 
+// 加载主界面(动态加载项目)
 const App = AppStateHOC(ProjectLoaderHOC(GUI));
 
 const appTarget = document.createElement('div');

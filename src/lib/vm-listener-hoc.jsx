@@ -9,18 +9,22 @@ import {updateEditingTarget, updateTargets} from '../reducers/targets';
 import {updateMonitors} from '../reducers/monitors';
 
 /*
- * Higher Order Component to manage events emitted by the VM
- * @param {React.Component} WrappedComponent component to manage VM events for
- * @returns {React.Component} connected component with vm events bound to redux
+ * 管理由 VM 发出事件的高阶组件 (Higher Order Component to manage events emitted by the VM)
+ * @param {React.Component} WrappedComponent 用于管理 VM 事件的组件 (component to manage VM events for)
+ * @returns {React.Component} 连接组件与 VM 事件绑定到 redux (connected component with vm events bound to redux)
  */
 const vmListenerHOC = function (WrappedComponent) {
     class VMListener extends React.Component {
         constructor (props) {
             super(props);
+            // 手动绑定按键处理方法
             bindAll(this, [
                 'handleKeyDown',
                 'handleKeyUp'
             ]);
+            // 必须在这里开始监听,而不是在 componentDidMount 中.因为 HOC 挂载了 "包装组件",
+            // 所以 HOC 的 componentDidMount 在 "包装组件" 挂载后才会被触发.
+            // 如果 "包装组件" 在 componentDidMount 中使用了 VM, 就要在 "包装组件" 挂载之前监听
             // We have to start listening to the vm here rather than in
             // componentDidMount because the HOC mounts the wrapped component,
             // so the HOC componentDidMount triggers after the wrapped component
@@ -44,7 +48,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleKeyDown (e) {
-            // Don't capture keys intended for Blockly inputs.
+            // 不要捕获用于 Blockly 的键 (Don't capture keys intended for Blockly inputs)
             if (e.target !== document && e.target !== document.body) return;
 
             this.props.vm.postIOData('keyboard', {
@@ -52,20 +56,20 @@ const vmListenerHOC = function (WrappedComponent) {
                 isDown: true
             });
 
-            // Don't stop browser keyboard shortcuts
+            // 不要停止浏览器的快捷键 (Don't stop browser keyboard shortcuts)
             if (e.metaKey || e.altKey || e.ctrlKey) return;
 
             e.preventDefault();
         }
         handleKeyUp (e) {
-            // Always capture up events,
-            // even those that have switched to other targets.
+            // 总是捕获事件, 即使是切换到其他目标的事件.
+            // Always capture up events, even those that have switched to other targets.
             this.props.vm.postIOData('keyboard', {
                 keyCode: e.keyCode,
                 isDown: false
             });
 
-            // E.g., prevent scroll.
+            // 阻止滚动事件 E.g., prevent scroll.
             if (e.target !== document && e.target !== document.body) {
                 e.preventDefault();
             }
@@ -84,6 +88,7 @@ const vmListenerHOC = function (WrappedComponent) {
             return <WrappedComponent {...props} />;
         }
     }
+    // 定义类型检查器
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
         onKeyDown: PropTypes.func,

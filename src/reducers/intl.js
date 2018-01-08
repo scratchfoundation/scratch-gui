@@ -15,17 +15,20 @@ Object.keys(localeData).forEach(locale => {
     addLocaleData(localeData[locale].localeData);
 });
 
+/**
+ * 初始化 state
+ */
 const intlInitialState = {
     intl: {
-        defaultLocale: 'en',
-        locale: 'en',
-        messages: combinedMessages.en.messages
+        defaultLocale: 'zh',
+        locale: 'zh',
+        messages: combinedMessages.zh.messages
     }
 };
 
 const updateIntl = locale => superUpdateIntl({
     locale: locale,
-    messages: combinedMessages[locale].messages || combinedMessages.en.messages
+    messages: combinedMessages[locale].messages || combinedMessages.zh.messages
 });
 
 export {

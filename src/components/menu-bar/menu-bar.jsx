@@ -18,11 +18,7 @@ import feedbackIcon from './icon--feedback.svg';
 import scratchLogo from './scratch-logo.svg';
 
 const MenuBar = props => (
-    <Box
-        className={classNames({
-            [styles.menuBar]: true
-        })}
-    >
+    <Box className={classNames({[styles.menuBar]: true})}>
         <div className={styles.mainMenu}>
             <div className={classNames(styles.logoWrapper, styles.menuItem)}>
                 <img
@@ -33,7 +29,7 @@ const MenuBar = props => (
             </div>
             <SaveButton className={styles.menuItem} />
             <LoadButton className={styles.menuItem} />
-            <LanguageSelector className={styles.menuItem} />
+            {/* <LanguageSelector className={styles.menuItem} /> */}
         </div>
         <div className={styles.feedbackButtonWrapper}>
             <Button

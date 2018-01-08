@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 421:
+/***/ 467:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,21 +14,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(10);
+var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _appStateHoc = __webpack_require__(21);
+var _appStateHoc = __webpack_require__(23);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _controls = __webpack_require__(25);
+var _controls = __webpack_require__(28);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _stage = __webpack_require__(40);
+var _stage = __webpack_require__(44);
 
 var _stage2 = _interopRequireDefault(_stage);
 
@@ -36,15 +36,15 @@ var _box = __webpack_require__(7);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(22);
+var _gui = __webpack_require__(24);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(26);
+var _projectLoaderHoc = __webpack_require__(29);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-__webpack_require__(422);
+__webpack_require__(468);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,13 +144,13 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 422:
+/***/ 468:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(423);
+var content = __webpack_require__(469);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -176,10 +176,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 423:
+/***/ 469:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(undefined);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -191,5 +191,5 @@ exports.push([module.i, "body {\n    padding: 0;\n    margin: 0;\n}\n", ""]);
 
 /***/ })
 
-},[421]);
+},[467]);
 //# sourceMappingURL=player.js.map

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="29px" height="25px" viewBox="0 0 29 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>add-bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="21" cy="5" r="5"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Desktop---1280x720" transform="translate(-1224.000000, -668.000000)">
+            <g id="Stage-Area" transform="translate(1200.000000, 460.000000)">
+                <g id="Backdrop-Area" transform="translate(0.000000, 43.000000)">
+                    <g id="backdrop-tile">
+                        <g id="add-bg" transform="translate(10.000000, 167.000000)">
+                            <g transform="translate(15.000000, 0.000000)">
+                                <path d="M19,22 L2,22 C0.9,22 0,20.9731544 0,19.7181208 L0,7.28187919 C0,6.02684564 0.9,5 2,5 L19,5 C20.1,5 21,6.02684564 21,7.28187919 L21,19.7181208 C21,20.9731544 20.1,22 19,22 Z" id="Shape" stroke="#4C97FF" stroke-width="2"></path>
+                                <path d="M21,17.5 L16.8,13.3 C16.2,12.7 15.2,12.6 14.5,13.2 L9.3,17.3 C8.5,17.9 7.4,17.8 6.8,17 L6.3,16.4 C5.7,15.6 4.5,15.5 3.8,16.1 L0,19.2 L0,20.1 C0,21.1 0.8,21.9 1.8,21.9 L19.3,21.9 C20.3,21.9 21.1,21.1 21.1,20.1 L21.1,17.5 L21,17.5 Z" id="Shape" stroke="#4C97FF" stroke-width="2" fill="#4C97FF"></path>
+                                <g id="Oval" fill-rule="nonzero">
+                                    <use fill="#4C97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                    <circle stroke="#FFFFFF" stroke-width="2" cx="21" cy="5" r="6"></circle>
+                                </g>
+                                <path d="M21,3 L21,7" id="Shape" stroke="#FFFFFF" stroke-width="2"></path>
+                                <path d="M23,5 L19,5" id="Shape" stroke="#FFFFFF" stroke-width="2"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

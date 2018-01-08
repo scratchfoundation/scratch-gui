@@ -44,7 +44,8 @@ export default function (vm) {
 
     const backdropsMenu = function () {
         if (vm.runtime.targets[0] && vm.runtime.targets[0].sprite.costumes.length > 0) {
-            return vm.runtime.targets[0].sprite.costumes.map(costume => [costume.name, costume.name]);
+            return vm.runtime.targets[0].sprite.costumes.map(costume => [costume.name, costume.name])
+                .concat([['next backdrop', 'next backdrop'], ['previous backdrop', 'previous backdrop']]);
         }
         return [['', '']];
     };

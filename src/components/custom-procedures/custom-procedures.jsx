@@ -13,7 +13,7 @@ import styles from './custom-procedures.css';
 const CustomProcedures = props => (
     <Modal
         className={styles.modalContent}
-        contentLabel="Create new block"
+        contentLabel="Make a Block"
         onRequestClose={props.onCancel}
     >
         <Box
@@ -92,8 +92,18 @@ const CustomProcedures = props => (
                 </div>
             </div>
             <div className={styles.checkboxRow}>
-                {/* @todo (#993) Implement "run without screen refresh" */}
-                {/* <label><input type="checkbox" />Run without screen refresh</label> */}
+                <label>
+                    <input
+                        checked={props.warp}
+                        type="checkbox"
+                        onChange={props.onToggleWarp}
+                    />
+                    <FormattedMessage
+                        defaultMessage="Run without screen refresh"
+                        description="Label for checkbox to run without screen refresh"
+                        id="gui.customProcedures.runWithoutScreenRefresh"
+                    />
+                </label>
             </div>
             <Box className={styles.buttonRow}>
                 <button
@@ -127,7 +137,9 @@ CustomProcedures.propTypes = {
     onAddLabel: PropTypes.func.isRequired,
     onAddTextNumber: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onOk: PropTypes.func.isRequired
+    onOk: PropTypes.func.isRequired,
+    onToggleWarp: PropTypes.func.isRequired,
+    warp: PropTypes.bool.isRequired
 };
 
 export default CustomProcedures;

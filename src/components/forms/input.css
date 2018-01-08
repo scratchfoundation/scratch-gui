@@ -37,6 +37,8 @@
 }
 
 .input-small {
-    width: 3rem; 
+    width: 3rem;
+    padding: 0 0.5rem;
+    text-overflow: clip;
     text-align: center;
 }

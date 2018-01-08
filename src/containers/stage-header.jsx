@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
-import {setZoomed} from '../reducers/zoom';
+import {setStageSize, setFullScreen, STAGE_SIZES} from '../reducers/stage-size';
 
 import {connect} from 'react-redux';
 
@@ -22,19 +22,20 @@ class StageHeader extends React.Component {
 }
 
 StageHeader.propTypes = {
-    height: PropTypes.number,
-    isZoomed: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired,
-    width: PropTypes.number
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_SIZES)),
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
-    isZoomed: state.isZoomed
+    stageSize: state.stageSize.stageSize,
+    isFullScreen: state.stageSize.isFullScreen
 });
 
 const mapDispatchToProps = dispatch => ({
-    onZoom: () => dispatch(setZoomed(true)),
-    onUnzoom: () => dispatch(setZoomed(false))
+    onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZES.large)),
+    onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZES.small)),
+    onSetStageFull: () => dispatch(setFullScreen(true)),
+    onSetStageUnFull: () => dispatch(setFullScreen(false))
 });
 
 export default connect(

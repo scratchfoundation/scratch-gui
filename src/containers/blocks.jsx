@@ -152,8 +152,8 @@ class Blocks extends React.Component {
     onTargetsUpdate () {
         if (this.props.vm.editingTarget) {
             ['glide', 'move', 'set'].forEach(prefix => {
-                this.updateToolboxBlockValue(`${prefix}x`, this.props.vm.editingTarget.x.toFixed(0));
-                this.updateToolboxBlockValue(`${prefix}y`, this.props.vm.editingTarget.y.toFixed(0));
+                this.updateToolboxBlockValue(`${prefix}x`, Math.round(this.props.vm.editingTarget.x).toString());
+                this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
     }
@@ -231,8 +231,10 @@ class Blocks extends React.Component {
     setBlocks (blocks) {
         this.blocks = blocks;
     }
-    handlePromptStart (message, defaultValue, callback) {
-        this.setState({prompt: {callback, message, defaultValue}});
+    handlePromptStart (message, defaultValue, callback, optTitle) {
+        const p = {prompt: {callback, message, defaultValue}};
+        p.prompt.title = optTitle ? optTitle : 'New Variable';
+        this.setState(p);
     }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
@@ -272,7 +274,7 @@ class Blocks extends React.Component {
                     <Prompt
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
-                        title="New Variable" // @todo the only prompt is for new variables
+                        title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />
@@ -326,7 +328,8 @@ Blocks.propTypes = {
             fieldShadow: PropTypes.string,
             dragShadowOpacity: PropTypes.number
         }),
-        comments: PropTypes.bool
+        comments: PropTypes.bool,
+        collapse: PropTypes.bool
     }),
     toolboxXML: PropTypes.string,
     updateToolboxState: PropTypes.func,
@@ -356,7 +359,8 @@ Blocks.defaultOptions = {
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     },
-    comments: false
+    comments: false,
+    collapse: false
 };
 
 Blocks.defaultProps = {

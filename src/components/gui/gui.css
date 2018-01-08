@@ -143,14 +143,6 @@
     overflow: hidden;
 }
 
-.stage-menu-wrapper {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    height: $stage-menu-height;
-    padding: $space;
-}
-
 .extension-button-container {
     width: 3.25rem;
     height: 3.25rem;

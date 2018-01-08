@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>icon--lounder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="lounder">
+            <g id="louder" transform="translate(2.000000, 3.000000)">
+                <path d="M7.54011246,2.3873625 L7.54011246,11.8531125 C7.54011246,12.2457375 7.22294659,12.5629875 6.83155041,12.5629875 L5.50777655,12.5629875 C5.2018577,12.5629875 4.9296799,12.3661125 4.83408026,12.0736125 C4.29422346,10.4266125 2.75788098,9.3128625 1.02471572,9.3128625 L0.709799251,9.3128625 C0.319527773,9.3128625 0.0001125,8.9933625 0.0001125,8.6029875 L0.0001125,5.6374875 C0.0001125,5.2471125 0.319527773,4.9276125 0.709799251,4.9276125 L1.02471572,4.9276125 C2.75788098,4.9276125 4.29422346,3.8138625 4.83408026,2.1668625 C4.9296799,1.8743625 5.2018577,1.6774875 5.50777655,1.6774875 L6.83155041,1.6774875 C7.22294659,1.6774875 7.54011246,1.9947375 7.54011246,2.3873625" id="Fill-1" fill="#CF63CF"></path>
+                <path d="M9.25,5.8645125 C9.9385,6.5541375 9.9385,7.6858875 9.25,8.3755125" id="Stroke-3" stroke="#CF63CF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M10.75,3.3541875 C12.829,5.4331875 12.829,8.8081875 10.75,10.8860625" id="Stroke-5" stroke="#CF63CF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12.5,0.8438625 C15.968375,4.3111125 15.968375,9.9293625 12.5,13.3966125" id="Stroke-7" stroke="#CF63CF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

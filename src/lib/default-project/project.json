@@ -21,6 +21,11 @@
     "penLayerID": -1,
     "tempoBPM": 60,
     "videoAlpha": 0.5,
+    "variables": [{
+        "name": "my variable",
+        "isPersistent": false,
+        "value": 0
+    }],
     "children": [{
             "objName": "Sprite1",
             "sounds": [{

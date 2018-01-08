@@ -22,7 +22,7 @@ const TargetPane = ({
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
-    onChangeSpriteRotationStyle,
+    onChangeSpriteSize,
     onChangeSpriteVisibility,
     onChangeSpriteX,
     onChangeSpriteY,
@@ -47,7 +47,7 @@ const TargetPane = ({
             sprites={sprites}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
-            onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
+            onChangeSpriteSize={onChangeSpriteSize}
             onChangeSpriteVisibility={onChangeSpriteVisibility}
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
@@ -97,7 +97,7 @@ const spriteShape = PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     order: PropTypes.number,
-    rotationStyle: PropTypes.string,
+    size: PropTypes.number,
     visibility: PropTypes.bool,
     x: PropTypes.number,
     y: PropTypes.number
@@ -109,7 +109,7 @@ TargetPane.propTypes = {
     extensionLibraryVisible: PropTypes.bool,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
-    onChangeSpriteRotationStyle: PropTypes.func,
+    onChangeSpriteSize: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,

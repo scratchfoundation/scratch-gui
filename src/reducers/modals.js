@@ -3,15 +3,20 @@ const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
+const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
+const MODAL_FEEDBACK_FORM = 'feedbackForm';
+const MODAL_PREVIEW_INFO = 'previewInfo';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
-const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
+
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
+    [MODAL_FEEDBACK_FORM]: false,
+    [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false
@@ -50,6 +55,12 @@ const openBackdropLibrary = function () {
 const openCostumeLibrary = function () {
     return openModal(MODAL_COSTUME_LIBRARY);
 };
+const openExtensionLibrary = function () {
+    return openModal(MODAL_EXTENSION_LIBRARY);
+};
+const openFeedbackForm = function () {
+    return openModal(MODAL_FEEDBACK_FORM);
+};
 const openSoundLibrary = function () {
     return openModal(MODAL_SOUND_LIBRARY);
 };
@@ -59,8 +70,8 @@ const openSpriteLibrary = function () {
 const openSoundRecorder = function () {
     return openModal(MODAL_SOUND_RECORDER);
 };
-const openExtensionLibrary = function () {
-    return openModal(MODAL_EXTENSION_LIBRARY);
+const openPreviewInfo = function () {
+    return openModal(MODAL_PREVIEW_INFO);
 };
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
@@ -70,6 +81,12 @@ const closeCostumeLibrary = function () {
 };
 const closeExtensionLibrary = function () {
     return closeModal(MODAL_EXTENSION_LIBRARY);
+};
+const closeFeedbackForm = function () {
+    return closeModal(MODAL_FEEDBACK_FORM);
+};
+const closePreviewInfo = function () {
+    return closeModal(MODAL_PREVIEW_INFO);
 };
 const closeSpriteLibrary = function () {
     return closeModal(MODAL_SPRITE_LIBRARY);
@@ -82,15 +99,19 @@ const closeSoundRecorder = function () {
 };
 export {
     reducer as default,
-    openExtensionLibrary,
     openBackdropLibrary,
     openCostumeLibrary,
+    openExtensionLibrary,
+    openFeedbackForm,
+    openPreviewInfo,
     openSoundLibrary,
     openSpriteLibrary,
     openSoundRecorder,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
+    closeFeedbackForm,
+    closePreviewInfo,
     closeSpriteLibrary,
     closeSoundLibrary,
     closeSoundRecorder

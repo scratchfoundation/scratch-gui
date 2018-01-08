@@ -154,6 +154,13 @@
         "format": ""
     },
     {
+        "name": "Bark",
+        "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
+        "sampleCount": 3168,
+        "rate": 22050,
+        "format": ""
+    },
+    {
         "name": "Bass Beatbox",
         "md5": "28153621d293c86da0b246d314458faf.wav",
         "sampleCount": 6720,
@@ -197,20 +204,6 @@
     },
     {
         "name": "Birthday",
-        "md5": "e8df0951694293fe17850260b4d12734.wav",
-        "sampleCount": 167040,
-        "rate": 22050,
-        "format": ""
-    },
-    {
-        "name": "Birthday Bells",
-        "md5": "89691587a169d935a58c48c3d4e78534.wav",
-        "sampleCount": 161408,
-        "rate": 22050,
-        "format": ""
-    },
-    {
-        "name": "Birthday Song",
         "md5": "89691587a169d935a58c48c3d4e78534.wav",
         "sampleCount": 161408,
         "rate": 22050,
@@ -424,6 +417,13 @@
         "md5": "684ffae7bc3a65e35e9f0aaf7a579dd5.wav",
         "sampleCount": 84160,
         "rate": 22050,
+        "format": ""
+    },
+    {
+        "name": "Computer Beep",
+        "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
+        "sampleCount": 9536,
+        "rate": 11025,
         "format": ""
     },
     {
@@ -1358,13 +1358,6 @@
         "format": ""
     },
     {
-        "name": "Rim Beatbox",
-        "md5": "7ede1382b578d8fc32850b48d082d914.wav",
-        "sampleCount": 4960,
-        "rate": 22050,
-        "format": ""
-    },
-    {
         "name": "Ripples",
         "md5": "d3c95a4ba37dcf90c8a57e8b2fd1632d.wav",
         "sampleCount": 21504,
@@ -1387,13 +1380,6 @@
     },
     {
         "name": "Scratch Beatbox",
-        "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
-        "sampleCount": 11552,
-        "rate": 22050,
-        "format": ""
-    },
-    {
-        "name": "Scratching Beatbox",
         "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
         "sampleCount": 11552,
         "rate": 22050,

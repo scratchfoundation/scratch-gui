@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import MediaQuery from 'react-responsive';
+import {FormattedMessage} from 'react-intl';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 
@@ -12,11 +13,12 @@ import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
-import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
+import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import PreviewModal from '../../containers/preview-modal.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
@@ -35,7 +37,9 @@ const GUIComponent = props => {
         basePath,
         children,
         enableExtensions,
+        feedbackFormVisible,
         vm,
+        previewInfoVisible,
         onExtensionButtonClick,
         onTabSelect,
         tabIndex,
@@ -63,6 +67,12 @@ const GUIComponent = props => {
             className={styles.pageWrapper}
             {...componentProps}
         >
+            {previewInfoVisible ? (
+                <PreviewModal />
+            ) : null}
+            {feedbackFormVisible ? (
+                <FeedbackForm />
+            ) : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -112,13 +122,7 @@ const GUIComponent = props => {
 
                     <Box className={styles.stageAndTargetWrapper}>
                         <Box className={styles.stageMenuWrapper}>
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
-                                <StageHeader
-                                    height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                    vm={vm}
-                                    width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                />
-                            )}</MediaQuery>
+                            <StageHeader vm={vm} />
                         </Box>
                         <Box className={styles.stageWrapper}>
                             <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
@@ -145,8 +149,10 @@ GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
     enableExtensions: PropTypes.bool,
+    feedbackFormVisible: PropTypes.bool,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
+    previewInfoVisible: PropTypes.bool,
     tabIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired
 };

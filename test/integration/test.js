@@ -37,6 +37,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Blocks');
         await clickText('Operators', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -48,6 +49,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Switching sprites updates the block menus', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Sound', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "Meow" sound block should be visible
@@ -64,6 +66,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Adding a costume', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Costumes');
         await clickText('Add Costume');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
@@ -76,6 +79,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Adding a backdrop', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Add Backdrop');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('blue');
@@ -86,6 +90,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Adding a sound', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Sounds');
 
         // Delete the sound
@@ -142,8 +147,9 @@ describe('costumes, sounds and variables', () => {
             .setSize(1920, 1080);
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
+        await clickXpath('//button[@title="tryit"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
-        await clickXpath('//img[@title="Zoom Control"]');
+        await clickXpath('//img[@title="Full Screen Control"]');
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
@@ -158,20 +164,26 @@ describe('costumes, sounds and variables', () => {
 
     test('Creating variables', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Blocks');
-        await clickText('Data', blocksTabScope);
+        await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        await clickText('Create variable...');
+
+        // Expect a default variable "my variable" to be visible
+        await clickText('my\u00A0variable', blocksTabScope);
+        await findByText('0', reportedValueScope);
+
+        await clickText('Make a Variable');
         let el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('score');
         await clickButton('OK');
-        await clickText('Create variable...');
+        await clickText('Make a Variable');
         el = await findByXpath("//input[@placeholder='']");
         await el.sendKeys('second variable');
         await clickButton('OK');
 
         // Make sure reporting works on a new variable
-        await clickText('Data', blocksTabScope);
+        await clickText('Variables', blocksTabScope);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('score', blocksTabScope);
         await findByText('0', reportedValueScope); // Tooltip with result
@@ -182,6 +194,7 @@ describe('costumes, sounds and variables', () => {
 
     test('Importing extensions', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Blocks');
         await clickText('Extensions');
         await clickText('Pen', modalScope); // Modal closes
@@ -206,6 +219,7 @@ describe('costumes, sounds and variables', () => {
     test('Deleting only sprite does not crash', async () => {
         const spriteTileContext = '*[starts-with(@class,"react-contextmenu-wrapper")]';
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await rightClickText('Sprite1', spriteTileContext);
         await clickText('delete', spriteTileContext);
@@ -219,9 +233,10 @@ describe('costumes, sounds and variables', () => {
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickText('More');
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        await clickText('Make a Block...');
+        await clickText('Make a Block');
         // Click on the "add an input" buttons
         await clickText('number or text', modalScope);
         await clickText('boolean', modalScope);
@@ -235,8 +250,11 @@ describe('costumes, sounds and variables', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Localization', async () => {
+    // Skipped temporarily while the language selector is marked as
+    // "Coming Soon"
+    test.skip('Localization', async () => {
         await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
         await clickText('Blocks');
         await clickText('Extensions');
         await clickText('Pen', modalScope); // Modal closes

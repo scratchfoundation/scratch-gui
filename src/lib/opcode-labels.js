@@ -56,16 +56,6 @@ const opcodeMap = {
         category: 'sensing',
         label: 'loudness'
     },
-    sensing_of: {
-        category: 'sensing',
-        labelFn: params => {
-            let object = params.OBJECT;
-            if (params.OBJECT === '_stage_') {
-                object = 'Stage';
-            }
-            return `${params.PROPERTY} of ${object}`;
-        }
-    },
     sensing_current: {
         category: 'sensing',
         labelFn: params => {

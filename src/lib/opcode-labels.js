@@ -58,11 +58,23 @@ const opcodeMap = {
     },
     sensing_of: {
         category: 'sensing',
-        labelFn: params => `${params.PROPERTY} of ${params.OBJECT}`
+        labelFn: params => {
+            let object = params.OBJECT;
+            if (params.OBJECT === '_stage_') {
+                object = 'Stage';
+            }
+            return `${params.PROPERTY} of ${object}`;
+        }
     },
     sensing_current: {
         category: 'sensing',
-        labelFn: params => params.CURRENTMENU.toLowerCase()
+        labelFn: params => {
+            let currentMenu = params.CURRENTMENU.toLowerCase();
+            if (currentMenu === 'dayofweek') {
+                currentMenu = 'day of week';
+            }
+            return currentMenu;
+        }
     },
     sensing_timer: {
         category: 'sensing',

@@ -126,16 +126,9 @@ export default function (vm) {
     };
 
     ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
-        const start = [
+        const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             ['Stage', '_stage_']
-        ];
-        if (vm.editingTarget) {
-            start.splice(0, 0,
-                [vm.editingTarget.sprite.name, vm.editingTarget.sprite.name]
-            );
-        }
-
-        const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, start);
+        ]);
         this.jsonInit(json);
     };
 

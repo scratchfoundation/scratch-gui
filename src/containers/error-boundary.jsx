@@ -30,7 +30,7 @@ class ErrorBoundary extends React.Component {
             }
             if (window.WebGLRenderingContext) {
                 const canvas = document.createElement('canvas');
-                if (!canvas.getContext('webgl')) {
+                if (!canvas.getContext('webgl') && !canvas.getContext('experimental-webgl')) {
                     return <WebGlModalComponent onBack={this.handleBack} />;
                 }
             } else {

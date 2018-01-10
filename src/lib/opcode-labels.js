@@ -56,13 +56,15 @@ const opcodeMap = {
         category: 'sensing',
         label: 'loudness'
     },
-    sensing_of: {
-        category: 'sensing',
-        labelFn: params => `${params.PROPERTY} of ${params.OBJECT}`
-    },
     sensing_current: {
         category: 'sensing',
-        labelFn: params => params.CURRENTMENU.toLowerCase()
+        labelFn: params => {
+            let currentMenu = params.CURRENTMENU.toLowerCase();
+            if (currentMenu === 'dayofweek') {
+                currentMenu = 'day of week';
+            }
+            return currentMenu;
+        }
     },
     sensing_timer: {
         category: 'sensing',

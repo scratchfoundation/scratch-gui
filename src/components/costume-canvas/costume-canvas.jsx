@@ -105,8 +105,12 @@ class CostumeCanvas extends React.Component {
         return (
             <canvas
                 className={this.props.className}
-                height={this.props.height}
-                width={this.props.width}
+                height={this.props.height * window.devicePixelRatio}
+                style={{
+                    height: `${this.props.height}px`,
+                    width: `${this.props.width}px`
+                }}
+                width={this.props.width * window.devicePixelRatio}
                 ref={c => (this.canvas = c)} // eslint-disable-line react/jsx-sort-props
             />
         );

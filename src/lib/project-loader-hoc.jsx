@@ -1,5 +1,6 @@
 import React from 'react';
 
+import analytics from './analytics';
 import log from './log';
 import storage from './storage';
 
@@ -44,6 +45,15 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             if (projectId !== this.state.projectId) {
                 if (projectId.length < 1) projectId = 0;
                 this.setState({projectId: projectId});
+
+                if (projectId !== 0) {
+                    analytics.event({
+                        category: 'project',
+                        action: 'Load Project',
+                        value: projectId,
+                        nonInteraction: true
+                    });
+                }
             }
         }
         render () {

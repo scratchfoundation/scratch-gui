@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import platform from 'platform';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
-import WebGlModalComponent from '../components/webgl-modal/webgl-modal.jsx';
 import log from '../lib/log.js';
 
 class ErrorBoundary extends React.Component {
@@ -27,14 +26,6 @@ class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             if (platform.name === 'IE') {
                 return <BrowserModalComponent onBack={this.handleBack} />;
-            }
-            if (window.WebGLRenderingContext) {
-                const canvas = document.createElement('canvas');
-                if (!canvas.getContext('webgl') && !canvas.getContext('experimental-webgl')) {
-                    return <WebGlModalComponent onBack={this.handleBack} />;
-                }
-            } else {
-                return <WebGlModalComponent onBack={this.handleBack} />;
             }
             return (
                 <div style={{margin: '2rem'}}>

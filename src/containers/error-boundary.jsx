@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import platform from 'platform';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
-import WebGlModalComponent from '../components/webgl-modal/webgl-modal.jsx';
 import log from '../lib/log.js';
 
 class ErrorBoundary extends React.Component {

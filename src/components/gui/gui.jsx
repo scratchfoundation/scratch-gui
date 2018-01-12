@@ -6,6 +6,7 @@ import MediaQuery from 'react-responsive';
 import {FormattedMessage} from 'react-intl';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
+import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
@@ -63,6 +64,8 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
+    const isRendererSupported = Renderer.isSupported();
+
     return (
         <Box
             className={styles.pageWrapper}
@@ -74,7 +77,9 @@ const GUIComponent = props => {
             {feedbackFormVisible ? (
                 <FeedbackForm />
             ) : null}
-            {(window.WebGLRenderingContext) ? null : (<WebGlModal />)}
+            {isRendererSupported ? null : (
+                <WebGlModal />
+            )}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -127,14 +132,18 @@ const GUIComponent = props => {
                             <StageHeader vm={vm} />
                         </Box>
                         <Box className={styles.stageWrapper}>
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => (
-                                <Stage
-                                    height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                    shrink={0}
-                                    vm={vm}
-                                    width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                />
-                            )}</MediaQuery>
+                            {/* eslint-disable arrow-body-style */}
+                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
+                                return isRendererSupported ? (
+                                    <Stage
+                                        height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
+                                        shrink={0}
+                                        vm={vm}
+                                        width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
+                                    />
+                                ) : null;
+                            }}</MediaQuery>
+                            {/* eslint-enable arrow-body-style */}
                         </Box>
                         <Box className={styles.targetWrapper}>
                             <TargetPane

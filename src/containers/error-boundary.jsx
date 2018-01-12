@@ -28,14 +28,6 @@ class ErrorBoundary extends React.Component {
             if (platform.name === 'IE') {
                 return <BrowserModalComponent onBack={this.handleBack} />;
             }
-            if (window.WebGLRenderingContext) {
-                const canvas = document.createElement('canvas');
-                if (!canvas.getContext('webgl') && !canvas.getContext('experimental-webgl')) {
-                    return <WebGlModalComponent onBack={this.handleBack} />;
-                }
-            } else {
-                return <WebGlModalComponent onBack={this.handleBack} />;
-            }
             return (
                 <div style={{margin: '2rem'}}>
                     <h1>Oops! Something went wrong.</h1>

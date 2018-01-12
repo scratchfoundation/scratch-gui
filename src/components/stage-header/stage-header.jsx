@@ -43,6 +43,7 @@ const messages = defineMessages({
 const StageHeaderComponent = function (props) {
     const {
         isFullScreen,
+        onKeyPress,
         onSetStageLarge,
         onSetStageFull,
         onSetStageUnFull,
@@ -63,6 +64,7 @@ const StageHeaderComponent = function (props) {
                     <Button
                         className={styles.stageButton}
                         onClick={onSetStageUnFull}
+                        onKeyPress={onKeyPress}
                     >
                         <img
                             alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
@@ -143,6 +145,7 @@ const StageHeaderComponent = function (props) {
 StageHeaderComponent.propTypes = {
     intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,

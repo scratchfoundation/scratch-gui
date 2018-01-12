@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import analytics from '../../lib/analytics';
 import LibraryItem from '../library-item/library-item.jsx';
 import ModalComponent from '../modal/modal.jsx';
 
@@ -34,11 +33,6 @@ class LibraryComponent extends React.Component {
     handleSelect (id) {
         this.props.onRequestClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
-        analytics.event({
-            category: 'library',
-            action: 'Select Item',
-            value: id
-        });
     }
     handleMouseEnter (id) {
         if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);

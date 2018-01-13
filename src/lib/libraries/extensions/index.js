@@ -51,7 +51,7 @@ export default [
         featured: true
     },
     {name: 'My EXT',
-        extensionURL: 'exttest',
+        extensionURL: '/scratch-gui/exttest',
         iconURL: musicImage,
         description: 'My extension',
         featured: true

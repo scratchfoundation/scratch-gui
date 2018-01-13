@@ -51,7 +51,7 @@ export default [
         featured: true
     },
     {name: 'My EXT',
-        extensionURL: '/scratch-gui/exttest',
+        extensionURL: 'https://amazinigmech2418.github.io/scratch-gui/develop/exttest.js',
         iconURL: musicImage,
         description: 'My extension',
         featured: true

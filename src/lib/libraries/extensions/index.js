@@ -5,6 +5,7 @@ import speechImage from './speech.png';
 import videoImage from './video-sensing.png';
 import wedoImage from './wedo.png';
 
+
 export default [
     {
         name: 'Music',
@@ -33,23 +34,26 @@ export default [
         extensionURL: '',
         iconURL: speechImage,
         description: 'Talk to your projects.',
-        featured: true,
-        disabled: true
+        featured: true
     },
     {
         name: 'Video Sensing',
         extensionURL: '',
         iconURL: videoImage,
         description: 'Detect motion with the camera.',
-        featured: true,
-        disabled: true
+        featured: true
     },
     {
         name: 'LEGO Boost',
         extensionURL: '',
         iconURL: boostImage,
         description: 'Build robots and more.',
-        featured: true,
-        disabled: true
+        featured: true
+    },
+    {name: 'My EXT',
+        extensionURL: 'exttest',
+        iconURL: musicImage,
+        description: 'My extension',
+        featured: true
     }
 ];

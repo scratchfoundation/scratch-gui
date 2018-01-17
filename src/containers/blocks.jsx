@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
+
+import analytics from '../lib/analytics';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
@@ -74,6 +76,8 @@ class Blocks extends React.Component {
 
         this.attachVM();
         this.props.vm.setLocale(this.props.locale, this.props.messages);
+
+        analytics.pageview('/editors/blocks');
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (

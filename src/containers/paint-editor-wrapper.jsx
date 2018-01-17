@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
-
 import PaintEditor from 'scratch-paint';
+
+import analytics from '../lib/analytics';
 
 import {connect} from 'react-redux';
 
@@ -14,6 +15,9 @@ class PaintEditorWrapper extends React.Component {
             'handleUpdateName',
             'handleUpdateSvg'
         ]);
+    }
+    componentDidMount () {
+        analytics.pageview('/editors/paint');
     }
     handleUpdateName (name) {
         this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);

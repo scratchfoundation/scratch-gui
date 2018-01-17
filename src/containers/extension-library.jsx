@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index';
 
+import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/sprite-selector/icon--sprite.svg';
 
@@ -30,6 +31,11 @@ class ExtensionLibrary extends React.PureComponent {
                 });
             }
         }
+        analytics.event({
+            category: 'library',
+            action: 'Select Extension',
+            label: item.name
+        });
     }
     render () {
         const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({

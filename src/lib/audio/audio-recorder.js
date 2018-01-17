@@ -1,4 +1,5 @@
 import 'get-float-time-domain-data';
+import getUserMedia from 'get-user-media-promise';
 import SharedAudioContext from './shared-audio-context.js';
 import {computeRMS} from './audio-util.js';
 
@@ -22,17 +23,19 @@ class AudioRecorder {
 
     startListening (onStarted, onUpdate, onError) {
         try {
-            navigator.getUserMedia({audio: true}, userMediaStream => {
-                if (!this.disposed) {
-                    this.started = true;
-                    onStarted();
-                    this.attachUserMediaStream(userMediaStream, onUpdate);
-                }
-            }, e => {
-                if (!this.disposed) {
-                    onError(e);
-                }
-            });
+            getUserMedia({audio: true})
+                .then(userMediaStream => {
+                    if (!this.disposed) {
+                        this.started = true;
+                        onStarted();
+                        this.attachUserMediaStream(userMediaStream, onUpdate);
+                    }
+                })
+                .catch(e => {
+                    if (!this.disposed) {
+                        onError(e);
+                    }
+                });
         } catch (e) {
             if (!this.disposed) {
                 onError(e);

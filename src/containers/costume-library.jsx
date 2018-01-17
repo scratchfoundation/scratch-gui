@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
+import analytics from '../lib/analytics';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import LibraryComponent from '../components/library/library.jsx';
 
@@ -24,6 +25,11 @@ class CostumeLibrary extends React.PureComponent {
         };
         this.props.vm.addCostume(item.md5, vmCostume).then(() => {
             this.props.onNewCostume();
+        });
+        analytics.event({
+            category: 'library',
+            action: 'Select Costume',
+            label: item.name
         });
     }
     render () {

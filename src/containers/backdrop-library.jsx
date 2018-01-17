@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
+import analytics from '../lib/analytics';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import LibraryComponent from '../components/library/library.jsx';
 
@@ -26,6 +27,11 @@ class BackdropLibrary extends React.Component {
             if (this.props.onNewBackdrop) {
                 this.props.onNewBackdrop();
             }
+        });
+        analytics.event({
+            category: 'library',
+            action: 'Select Backdrop',
+            label: item.name
         });
     }
     render () {

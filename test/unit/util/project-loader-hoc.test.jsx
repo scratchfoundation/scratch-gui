@@ -3,6 +3,8 @@ import ProjectLoaderHOC from '../../../src/lib/project-loader-hoc.jsx';
 import storage from '../../../src/lib/storage';
 import {mount} from 'enzyme';
 
+jest.mock('react-ga');
+
 describe('ProjectLoaderHOC', () => {
     test('when there is no project data, it renders null', () => {
         const Component = ({projectData}) => <div>{projectData}</div>;

@@ -15,34 +15,6 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_turnright">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_turnleft">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        ${blockSeparator}
-        <block type="motion_pointindirection">
-            <value name="DIRECTION">
-                <shadow type="math_angle">
-                    <field name="NUM">90</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_pointtowards">
-            <value name="TOWARDS">
-                <shadow type="motion_pointtowards_menu">
-                </shadow>
-            </value>
-        </block>
         ${blockSeparator}
         <block type="motion_gotoxy">
             <value name="X">
@@ -87,6 +59,34 @@ const motion = function (isStage, targetId) {
             </value>
             <value name="TO">
                 <shadow type="motion_glideto_menu">
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnleft">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_pointindirection">
+            <value name="DIRECTION">
+                <shadow type="math_angle">
+                    <field name="NUM">90</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_pointtowards">
+            <value name="TOWARDS">
+                <shadow type="motion_pointtowards_menu">
                 </shadow>
             </value>
         </block>
@@ -431,11 +431,7 @@ const sensing = function (isStage) {
         </block>
         <block id="answer" type="sensing_answer"/>
         ${blockSeparator}
-        <block type="sensing_keypressed">
-            <value name="KEY_OPTION">
-                <shadow type="sensing_keyoptions"/>
-            </value>
-        </block>
+        <block type="sensing_keypressed"/>
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>
@@ -451,19 +447,12 @@ const sensing = function (isStage) {
         <block type="sensing_resettimer"/>
         ${blockSeparator}
         <block id="of" type="sensing_of">
-            <value name="PROPERTY">
-                <shadow id="sensing_of_property_menu" type="sensing_of_property_menu"/>
-            </value>
             <value name="OBJECT">
                 <shadow id="sensing_of_object_menu" type="sensing_of_object_menu"/>
             </value>
         </block>
         ${blockSeparator}
-        <block id="current" type="sensing_current">
-            <value name="CURRENTMENU">
-                <shadow id="sensing_currentmenu" type="sensing_currentmenu"/>
-            </value>
-        </block>
+        <block id="current" type="sensing_current"/>
         <block type="sensing_dayssince2000"/>
         ${categorySeparator}
     </category>

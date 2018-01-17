@@ -26,6 +26,12 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   <canvas
     className={undefined}
     height={32}
+    style={
+      Object {
+        "height": "32px",
+        "width": "32px",
+      }
+    }
     width={32}
   />
   <div

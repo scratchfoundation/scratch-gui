@@ -20,7 +20,7 @@
 
 .library-scroll-grid {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-content: flex-start;
     background: $ui-pane-gray;
     flex-grow: 1;

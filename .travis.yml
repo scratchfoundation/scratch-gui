@@ -48,3 +48,5 @@ deploy:
   detect_encoding: true
   skip_cleanup: true
   local_dir: build
+after_deploy:
+- 'curl -X POST -H "Fastly-Key: $FASTLY_TOKEN" -H "Accept: application/json" https://api.fastly.com/service/$FASTLY_SERVICE_ID/purge_all'

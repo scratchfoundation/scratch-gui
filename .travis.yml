@@ -38,7 +38,9 @@ deploy:
   api_key: $NPM_TOKEN
 - provider: s3
   on:
-    branch: master
+    branch:
+    - master
+    - $PREVIEW_BRANCH
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $AWS_BUCKET_NAME

@@ -272,4 +272,28 @@ describe('costumes, sounds and variables', () => {
         const logs = await getLogs(errorWhitelist);
         await expect(logs).toEqual([]);
     });
+
+    // Regression test for gui issue #1320
+    test('Switching sprites with different numbers of sounds', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+
+        // Add a sound so this sprite has 2 sounds.
+        await clickText('Sounds');
+        await clickText('Add Sound');
+        await clickText('A Bass'); // Closes the modal
+
+        // Now add a sprite with only one sound.
+        await clickText('Add Sprite');
+        await clickText('Abby'); // Doing this used to crash the editor.
+
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error
+
+        // Make sure the 'Oops' screen is not visible
+        const content = await driver.getPageSource();
+        expect(content.indexOf('Oops')).toEqual(-1);
+
+        const logs = await getLogs(errorWhitelist);
+        await expect(logs).toEqual([]);
+    });
 });

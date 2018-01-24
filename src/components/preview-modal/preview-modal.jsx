@@ -54,7 +54,6 @@ const PreviewModal = ({intl, ...props}) => (
                 </button>
                 <button
                     className={styles.okButton}
-                    title="tryit"
                     onClick={props.onTryIt}
                 >
                     <FormattedMessage

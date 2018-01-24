@@ -142,6 +142,10 @@ class Stage extends React.Component {
         this.props.vm.setEditingTarget(targetId);
     }
     onMouseMove (e) {
+        // Fixes scratch/gui issue 1328
+        if (e.movementX === 0 && e.movementY === 0) {
+            return;
+        }
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
 

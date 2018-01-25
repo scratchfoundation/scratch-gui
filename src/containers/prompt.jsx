@@ -33,6 +33,7 @@ class Prompt extends React.Component {
             <PromptComponent
                 label={this.props.label}
                 placeholder={this.props.placeholder}
+                showMoreOptions={this.props.showMoreOptions}
                 title={this.props.title}
                 onCancel={this.handleCancel}
                 onChange={this.handleChange}
@@ -48,6 +49,7 @@ Prompt.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    showMoreOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };
 

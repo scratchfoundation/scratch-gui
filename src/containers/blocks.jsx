@@ -238,6 +238,7 @@ class Blocks extends React.Component {
     handlePromptStart (message, defaultValue, callback, optTitle) {
         const p = {prompt: {callback, message, defaultValue}};
         p.prompt.title = optTitle ? optTitle : 'New Variable';
+        p.prompt.showMoreOptions = optTitle !== 'New Message';
         this.setState(p);
     }
     handlePromptCallback (data) {
@@ -278,6 +279,7 @@ class Blocks extends React.Component {
                     <Prompt
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
+                        showMoreOptions={this.state.prompt.showMoreOptions}
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}

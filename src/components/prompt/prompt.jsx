@@ -37,7 +37,7 @@ const PromptComponent = props => (
                     onKeyPress={props.onKeyPress}
                 />
             </Box>
-            <Box className={styles.moreOptions}>
+            <Box className={props.showMoreOptions ? styles.moreOptions : styles.hideMoreOptions}>
                 <ComingSoonTooltip
                     className={styles.moreOptionsAccordion}
                     place="right"
@@ -79,6 +79,7 @@ PromptComponent.propTypes = {
     onKeyPress: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    showMoreOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };
 

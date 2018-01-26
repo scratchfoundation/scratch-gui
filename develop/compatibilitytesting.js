@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 477:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20,7 +20,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _appStateHoc = __webpack_require__(24);
+var _appStateHoc = __webpack_require__(23);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
@@ -147,5 +147,5 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ })
 
-},[477]);
+},[476]);
 //# sourceMappingURL=compatibilitytesting.js.map

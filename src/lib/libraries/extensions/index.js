@@ -19,7 +19,7 @@ export default [
         extensionURL: 'pen',
         iconURL: penImage,
         description: 'Draw with your sprites.',
-        featured: true        
+        featured: true
     },
     {
         name: 'LEGO WeDo 2.0',

@@ -67,6 +67,7 @@
 /* "Run without screen refresh" row */
 .checkbox-row {
     margin-top: 1rem;
+    text-align: left;
 }
 
 /* Confirmation buttons at the bottom of the modal */

@@ -19,7 +19,7 @@ export default [
         extensionURL: 'pen',
         iconURL: penImage,
         description: 'Draw with your sprites.',
-        featured: true
+        featured: true        
     },
     {
         name: 'LEGO WeDo 2.0',
@@ -34,26 +34,23 @@ export default [
         extensionURL: '',
         iconURL: speechImage,
         description: 'Talk to your projects.',
-        featured: true
+        featured: true,
+        disabled: true
     },
     {
         name: 'Video Sensing',
         extensionURL: '',
         iconURL: videoImage,
         description: 'Detect motion with the camera.',
-        featured: true
+        featured: true,
+        disabled: true
     },
     {
         name: 'LEGO Boost',
         extensionURL: '',
         iconURL: boostImage,
         description: 'Build robots and more.',
-        featured: true
-    },
-    {name: 'My EXT',
-        extensionURL: 'https://amazinigmech2418.github.io/scratch-gui/develop/exttest.js',
-        iconURL: musicImage,
-        description: 'My extension',
-        featured: true
+        featured: true,
+        disabled: true
     }
 ];

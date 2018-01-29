@@ -12,6 +12,6 @@ p {
     line-height: 1.5em;
 }
 
-input {
+input[type="text"] {
     width: 8rem;
 }

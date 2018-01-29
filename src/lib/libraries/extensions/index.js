@@ -5,7 +5,6 @@ import speechImage from './speech.png';
 import videoImage from './video-sensing.png';
 import wedoImage from './wedo.png';
 
-
 export default [
     {
         name: 'Music',

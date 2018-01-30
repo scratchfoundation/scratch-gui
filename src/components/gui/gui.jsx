@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import MediaQuery from 'react-responsive';
-import {FormattedMessage} from 'react-intl';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
@@ -17,7 +16,6 @@ import Stage from '../../containers/stage.jsx';
 
 import Box from '../box/box.jsx';
 import FeedbackForm from '../feedback-form/feedback-form.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
@@ -25,14 +23,6 @@ import WebGlModal from '../../containers/webgl-modal.jsx';
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
-
-const addExtensionMessage = (
-    <FormattedMessage
-        defaultMessage="Extensions"
-        description="Button to add an extension in the target pane"
-        id="gui.gui.addExtension"
-    />
-);
 
 const GUIComponent = props => {
     const {

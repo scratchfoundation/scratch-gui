@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import platform from 'platform';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import log from '../lib/log.js';
+import analytics from '../lib/analytics';
 
 class ErrorBoundary extends React.Component {
     constructor (props) {
@@ -16,6 +17,11 @@ class ErrorBoundary extends React.Component {
         // Display fallback UI
         this.setState({hasError: true});
         log.error(`Unhandled Error: ${error}, info: ${info}`);
+        analytics.event({
+            category: 'error',
+            action: 'Fatal Error',
+            label: error.message
+        });
     }
 
     handleBack () {

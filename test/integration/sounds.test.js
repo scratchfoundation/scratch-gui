@@ -74,7 +74,7 @@ describe('Working with sounds', () => {
         await clickText('A Bass'); // Closes the modal
 
         // Now add a sprite with only one sound.
-        await clickText('Add Sprite');
+        await clickXpath('//button[@title="Add Sprite"]');
         await clickText('Abby'); // Doing this used to crash the editor.
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error

@@ -39,7 +39,7 @@ describe('Working with costumes', () => {
     test('Adding a backdrop', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickText('Add Backdrop');
+        await clickXpath('//button[@title="Add Backdrop"]');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('blue');
         await clickText('Blue Sky'); // Should close the modal

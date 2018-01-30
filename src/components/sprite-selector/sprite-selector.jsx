@@ -1,22 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import AssetButton from '../asset-button/asset-button.jsx';
 
 import styles from './sprite-selector.css';
 import spriteIcon from './icon--sprite.svg';
-
-const addSpriteMessage = (
-    <FormattedMessage
-        defaultMessage="Add Sprite"
-        description="Button to add a sprite in the target pane"
-        id="gui.spriteSelector.addSprite"
-    />
-);
 
 const SpriteSelectorComponent = function (props) {
     const {
@@ -84,10 +75,10 @@ const SpriteSelectorComponent = function (props) {
                     }
                 </Box>
             </Box>
-            <IconButton
+            <AssetButton
                 className={styles.addButton}
                 img={spriteIcon}
-                title={addSpriteMessage}
+                title={'Add Sprite'}
                 onClick={onNewSpriteClick}
             />
         </Box>

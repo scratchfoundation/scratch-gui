@@ -4,18 +4,10 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import AssetButton from '../asset-button/asset-button.jsx';
 import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
 import backdropIcon from './icon--backdrop.svg';
-
-const addBackdropMessage = (
-    <FormattedMessage
-        defaultMessage="Add Backdrop"
-        description="Button to add a backdrop in the target pane"
-        id="gui.stageSelector.targetPaneAddBackdrop"
-    />
-);
 
 const StageSelector = props => {
     const {
@@ -53,10 +45,10 @@ const StageSelector = props => {
                 />
             </div>
             <div className={styles.count}>{backdropCount}</div>
-            <IconButton
+            <AssetButton
                 className={styles.addButton}
                 img={backdropIcon}
-                title={addBackdropMessage}
+                title={'Add Backdrop'}
                 onClick={onNewBackdropClick}
             />
         </Box>

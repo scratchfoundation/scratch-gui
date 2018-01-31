@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
@@ -9,8 +10,17 @@ import AssetButton from '../asset-button/asset-button.jsx';
 import styles from './sprite-selector.css';
 import spriteIcon from './icon--sprite.svg';
 
+const messages = defineMessages({
+    addSprite: {
+        id: 'gui.spriteSelector.addSprite',
+        description: 'Button to add a sprite in the target pane',
+        defaultMessage: 'Add Sprite'
+    }
+});
+
 const SpriteSelectorComponent = function (props) {
     const {
+        intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
         onChangeSpriteSize,
@@ -78,7 +88,7 @@ const SpriteSelectorComponent = function (props) {
             <AssetButton
                 className={styles.addButton}
                 img={spriteIcon}
-                title={'Add Sprite'}
+                title={intl.formatMessage(messages.addSprite)}
                 onClick={onNewSpriteClick}
             />
         </Box>
@@ -86,6 +96,7 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -112,4 +123,4 @@ SpriteSelectorComponent.propTypes = {
     })
 };
 
-export default SpriteSelectorComponent;
+export default injectIntl(SpriteSelectorComponent);

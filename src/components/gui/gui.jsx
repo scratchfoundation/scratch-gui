@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import MediaQuery from 'react-responsive';
 import tabStyles from 'react-tabs/style/react-tabs.css';
@@ -24,11 +25,20 @@ import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
 
+const messages = defineMessages({
+    addExtension: {
+        id: 'gui.gui.addExtension',
+        description: 'Button to add an extension in the target pane',
+        defaultMessage: 'Add Extension'
+    }
+});
+
 const GUIComponent = props => {
     const {
         basePath,
         children,
         enableExtensions,
+        intl,
         feedbackFormVisible,
         vm,
         previewInfoVisible,
@@ -102,7 +112,7 @@ const GUIComponent = props => {
                                         className={classNames(styles.extensionButton, {
                                             [styles.hidden]: !enableExtensions
                                         })}
-                                        title={'Add Extension'}
+                                        title={intl.formatMessage(messages.addExtension)}
                                         onClick={onExtensionButtonClick}
                                     >
                                         <img
@@ -155,6 +165,7 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     enableExtensions: PropTypes.bool,
     feedbackFormVisible: PropTypes.bool,
+    intl: intlShape.isRequired,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
@@ -164,4 +175,4 @@ GUIComponent.propTypes = {
 GUIComponent.defaultProps = {
     basePath: './'
 };
-export default GUIComponent;
+export default injectIntl(GUIComponent);

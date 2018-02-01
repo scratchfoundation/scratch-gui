@@ -5,7 +5,6 @@
     position: absolute;
 
     display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
 
@@ -20,8 +19,13 @@
 }
 
 .library-scroll-grid {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, 160px);
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
     background: $ui-pane-gray;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: calc(100% - $library-header-height);
+    padding: 0.5rem;
 }

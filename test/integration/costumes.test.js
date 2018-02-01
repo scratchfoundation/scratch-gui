@@ -27,7 +27,7 @@ describe('Working with costumes', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
         await clickText('Costumes');
-        await clickText('Add Costume');
+        await clickXpath('//button[@title="Add Costume"]');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
         await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector

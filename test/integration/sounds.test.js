@@ -37,13 +37,13 @@ describe('Working with sounds', () => {
             .accept();
 
         // Add it back
-        await clickText('Add Sound');
+        await clickXpath('//button[@title="Add Sound"]');
         let el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('meow');
         await clickText('Meow', scope.modal); // Should close the modal
 
         // Add a new sound
-        await clickText('Add Sound');
+        await clickXpath('//button[@title="Add Sound"]');
         el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
@@ -70,11 +70,11 @@ describe('Working with sounds', () => {
 
         // Add a sound so this sprite has 2 sounds.
         await clickText('Sounds');
-        await clickText('Add Sound');
+        await clickXpath('//button[@title="Add Sound"]');
         await clickText('A Bass'); // Closes the modal
 
         // Now add a sprite with only one sound.
-        await clickText('Add Sprite');
+        await clickXpath('//button[@title="Add Sprite"]');
         await clickText('Abby'); // Doing this used to crash the editor.
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error

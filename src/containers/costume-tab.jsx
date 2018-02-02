@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, intlShape, injectIntl} from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
@@ -22,36 +22,28 @@ import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 
-const messages = {
-    addLibraryBackdropMsg: (
-        <FormattedMessage
-            defaultMessage="Add Backdrop From Library"
-            description="Button to add a backdrop in the editor tab"
-            id="gui.costumeTab.addBackdrop"
-        />
-    ),
-    addLibraryCostumeMsg: (
-        <FormattedMessage
-            defaultMessage="Add Costume From Library"
-            description="Button to add a costume in the editor tab"
-            id="gui.costumeTab.addCostume"
-        />
-    ),
-    addBlankBackdropMsg: (
-        <FormattedMessage
-            defaultMessage="Add Blank Backdrop"
-            description="Button to add a blank backdrop in the editor tab"
-            id="gui.costumeTab.addBlankBackdrop"
-        />
-    ),
-    addBlankCostumeMsg: (
-        <FormattedMessage
-            defaultMessage="Add Blank Costume"
-            description="Button to add a blank costume in the editor tab"
-            id="gui.costumeTab.addBlankCostume"
-        />
-    )
-};
+const messages = defineMessages({
+    addLibraryBackdropMsg: {
+        defaultMessage: 'Add Backdrop From Library',
+        description: 'Button to add a backdrop in the editor tab',
+        id: 'gui.costumeTab.addBackdrop'
+    },
+    addLibraryCostumeMsg: {
+        defaultMessage: 'Add Costume From Library',
+        description: 'Button to add a costume in the editor tab',
+        id: 'gui.costumeTab.addCostume'
+    },
+    addBlankBackdropMsg: {
+        defaultMessage: 'Add Blank Backdrop',
+        description: 'Button to add a blank backdrop in the editor tab',
+        id: 'gui.costumeTab.addBlankBackdrop'
+    },
+    addBlankCostumeMsg: {
+        defaultMessage: 'Add Blank Costume',
+        description: 'Button to add a blank costume in the editor tab',
+        id: 'gui.costumeTab.addBlankCostume'
+    }
+});
 
 class CostumeTab extends React.Component {
     constructor (props) {
@@ -108,6 +100,7 @@ class CostumeTab extends React.Component {
     render () {
         // For paint wrapper
         const {
+            intl,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
             costumeLibraryVisible,
@@ -139,12 +132,12 @@ class CostumeTab extends React.Component {
             <AssetPanel
                 buttons={[
                     {
-                        message: addBlankMessage,
+                        message: intl.formatMessage(addBlankMessage),
                         img: addBlankCostumeIcon,
                         onClick: this.handleNewBlankCostume
                     },
                     {
-                        message: addLibraryMessage,
+                        message: intl.formatMessage(addLibraryMessage),
                         img: addLibraryIcon,
                         onClick: addLibraryFunc
                     }
@@ -184,6 +177,7 @@ CostumeTab.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
+    intl: intlShape,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseBackdropLibrary: PropTypes.func.isRequired,
@@ -229,7 +223,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(CostumeTab);
+)(CostumeTab));

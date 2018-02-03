@@ -1,5 +1,8 @@
 # Mac OS
 .DS_Store
+# myself
+.idea
+package-lock.json
 
 # NPM
 /node_modules

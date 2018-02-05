@@ -29,6 +29,8 @@ export default {
         gui_toolbox_category_sensing:'侦测',
         gui_toolbox_category_operators:'运算',
         gui_toolbox_category_data:'数据',
+        gui_toolbox_category_variables:'变量',
+        gui_toolbox_category_myblocks:'自定义',
         gui_toolbox_category_gsrobot:'魔洛克',
 
         gui_ex_add_sprite:'添加角色',

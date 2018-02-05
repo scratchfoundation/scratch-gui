@@ -29,6 +29,8 @@ export default {
         gui_toolbox_category_sensing:'Sensing',
         gui_toolbox_category_operators:'Operators',
         gui_toolbox_category_data:'Data',
+        gui_toolbox_category_variables:'Variables',
+        gui_toolbox_category_myblocks:'My Blocks',
         gui_toolbox_category_gsrobot:'Robot',
 
         gui_ex_add_sprite:'Add Sprite',

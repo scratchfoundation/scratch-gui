@@ -1,3 +1,5 @@
+import GsToolbox from '../../mycode/blocks/gs-toolbox';
+import lan from '../../mycode/language/Local'
 const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
@@ -677,6 +679,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML) {
         sensing(isStage, targetId), gap,
         operators(isStage, targetId), gap,
         variables(isStage, targetId), gap,
+        GsToolbox.robotToolbox(isStage, targetId,blockSeparator,categorySeparator), gap,
         myBlocks(isStage, targetId)
     ];
 

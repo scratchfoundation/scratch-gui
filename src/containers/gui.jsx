@@ -1,3 +1,4 @@
+import RobotBlocks from '../../mycode/services/robot/RobotBlocks'
 import AudioEngine from 'scratch-audio';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -25,6 +26,14 @@ class GUI extends React.Component {
         this.props.vm.loadProject(this.props.projectData);
         this.props.vm.setCompatibilityMode(true);
         this.props.vm.start();
+        try{
+            this.robotBlocks = new RobotBlocks();
+            setTimeout(() => {
+                this.robotBlocks.initBindVm(this.props.vm);
+            }, 100);
+        }catch (error){
+            console.error(error);
+        }
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {

@@ -11,9 +11,26 @@ const MODAL_PREVIEW_INFO = 'previewInfo';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
-
+// 固件升级模态框
+const MODAL_FIRMWARE = 'firmware';
+// connect serial
+const MODAL_CONNECT = 'connect';
+// connect serial
+const MODAL_SETTING = 'setting';
+const MODAL_MYAI = 'myai';
+// 自动升级
+const MODAL_UPDATE = 'update';
 
 const initialState = {
+    // 固件升级模态框
+    [MODAL_FIRMWARE]: false,
+    // set模态框
+    [MODAL_SETTING]: false,
+    [MODAL_MYAI]: false,
+    // connect serial
+    [MODAL_CONNECT]: false,
+    // 自动升级
+    [MODAL_UPDATE]: false,
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
@@ -107,6 +124,48 @@ const closeSoundLibrary = function () {
 const closeSoundRecorder = function () {
     return closeModal(MODAL_SOUND_RECORDER);
 };
+
+// 打开固件升级模态框
+const openFirmware = function () {
+    return openModal(MODAL_FIRMWARE);
+};
+// 关闭固件升级模态框
+const closeFirmware = function () {
+    return closeModal(MODAL_FIRMWARE);
+};
+// 打开自动升级模态框
+const openUpdate = function () {
+    return openModal(MODAL_UPDATE);
+};
+// 关闭自动升级模态框
+const closeUpdate = function () {
+    return closeModal(MODAL_UPDATE);
+};
+// 打开连接页面
+const openConnect = function () {
+    return openModal(MODAL_CONNECT);
+};
+// 关闭连接页面
+const closeConnect = function () {
+    return closeModal(MODAL_CONNECT);
+};
+// 打开 set 页面
+const openSetting = function () {
+    return openModal(MODAL_SETTING);
+};
+// 关闭 set 页面
+const closeSetting = function () {
+    return closeModal(MODAL_SETTING);
+};
+// 打开 set 页面
+const openMyai = function () {
+    return openModal(MODAL_MYAI);
+};
+// 关闭 set 页面
+const closeMyai = function () {
+    return closeModal(MODAL_MYAI);
+};
+
 export {
     reducer as default,
     openBackdropLibrary,

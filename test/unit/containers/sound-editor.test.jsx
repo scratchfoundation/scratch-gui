@@ -19,6 +19,7 @@ describe('Sound Editor Container', () => {
     const samples = new Float32Array([0, 0, 0]); // eslint-disable-line no-undef
     let vm;
 
+
     beforeEach(() => {
         soundIndex = 0;
         soundBuffer = {
@@ -35,7 +36,7 @@ describe('Sound Editor Container', () => {
                 }
             }
         };
-        store = mockStore({vm});
+        store = mockStore({gui: {vm}});
     });
 
     test('should pass the correct data to the component from the store', () => {

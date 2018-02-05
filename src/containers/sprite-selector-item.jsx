@@ -64,7 +64,7 @@ SpriteSelectorItem.propTypes = {
 };
 
 const mapStateToProps = (state, {assetId, costumeURL}) => ({
-    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI())
+    costumeURL: costumeURL || (assetId && state.gui.vm.runtime.storage.get(assetId).encodeDataURI())
 });
 
 export default connect(

@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 
 import analytics from './lib/analytics';
 import AppStateHOC from './lib/app-state-hoc.jsx';
-import GUI from './containers/gui.jsx';
+import GUI from './index';
 import ProjectLoaderHOC from './lib/project-loader-hoc.jsx';
 
 import styles from './index.css';

@@ -31,7 +31,7 @@ MonitorList.propTypes = {
     moveMonitorRect: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    monitors: state.monitors
+    monitors: state.gui.monitors
 });
 const mapDispatchToProps = dispatch => ({
     moveMonitorRect: (id, x, y) => dispatch(moveMonitorRect(id, x, y))

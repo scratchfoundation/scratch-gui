@@ -81,9 +81,9 @@ TargetPane.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
-        let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
+    editingTarget: state.gui.targets.editingTarget,
+    sprites: Object.keys(state.gui.targets.sprites).reduce((sprites, k) => {
+        let {direction, size, x, y, ...sprite} = state.gui.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
         if (typeof x !== 'undefined') x = Math.round(x);
         if (typeof y !== 'undefined') y = Math.round(y);
@@ -91,9 +91,9 @@ const mapStateToProps = state => ({
         sprites[k] = {...sprite, direction, size, x, y};
         return sprites;
     }, {}),
-    stage: state.targets.stage,
-    spriteLibraryVisible: state.modals.spriteLibrary,
-    backdropLibraryVisible: state.modals.backdropLibrary
+    stage: state.gui.targets.stage,
+    spriteLibraryVisible: state.gui.modals.spriteLibrary,
+    backdropLibraryVisible: state.gui.modals.backdropLibrary
 });
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {

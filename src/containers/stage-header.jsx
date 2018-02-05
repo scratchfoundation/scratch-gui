@@ -48,8 +48,8 @@ StageHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    stageSize: state.stageSize.stageSize,
-    isFullScreen: state.stageSize.isFullScreen
+    stageSize: state.gui.stageSize.stageSize,
+    isFullScreen: state.gui.stageSize.isFullScreen
 });
 
 const mapDispatchToProps = dispatch => ({

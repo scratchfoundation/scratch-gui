@@ -69,8 +69,8 @@ GUI.propTypes = {
 GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
-    feedbackFormVisible: state.modals.feedbackForm,
-    previewInfoVisible: state.modals.previewInfo
+    feedbackFormVisible: state.gui.modals.feedbackForm,
+    previewInfoVisible: state.gui.modals.previewInfo
 });
 
 const mapDispatchToProps = dispatch => ({

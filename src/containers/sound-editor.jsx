@@ -193,18 +193,18 @@ SoundEditor.propTypes = {
 };
 
 const mapStateToProps = (state, {soundIndex}) => {
-    const sprite = state.vm.editingTarget.sprite;
+    const sprite = state.gui.vm.editingTarget.sprite;
     // Make sure the sound index doesn't go out of range.
     const index = soundIndex < sprite.sounds.length ? soundIndex : sprite.sounds.length - 1;
-    const sound = state.vm.editingTarget.sprite.sounds[index];
-    const audioBuffer = state.vm.getSoundBuffer(index);
+    const sound = state.gui.vm.editingTarget.sprite.sounds[index];
+    const audioBuffer = state.gui.vm.getSoundBuffer(index);
     return {
         soundId: sound.soundId,
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
         name: sound.name,
-        onRenameSound: state.vm.renameSound.bind(state.vm),
-        onUpdateSoundBuffer: state.vm.updateSoundBuffer.bind(state.vm)
+        onRenameSound: state.gui.vm.renameSound.bind(state.gui.vm),
+        onUpdateSoundBuffer: state.gui.vm.updateSoundBuffer.bind(state.gui.vm)
     };
 };
 

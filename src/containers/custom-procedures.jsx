@@ -147,7 +147,7 @@ CustomProcedures.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    mutator: state.customProcedures.mutator
+    mutator: state.gui.customProcedures.mutator
 });
 
 export default connect(

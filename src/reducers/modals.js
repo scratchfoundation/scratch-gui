@@ -167,6 +167,18 @@ const closeMyai = function () {
 };
 
 export {
+    //myself
+    openFirmware,
+    closeFirmware,
+    openUpdate,
+    closeUpdate,
+    openSetting,
+    closeSetting,
+    openMyai,
+    closeMyai,
+    openConnect,
+    closeConnect,
+    //myself end
     reducer as default,
     openBackdropLibrary,
     openCostumeLibrary,

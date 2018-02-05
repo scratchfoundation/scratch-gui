@@ -15,7 +15,14 @@ import {openFeedbackForm} from '../../reducers/modals';
 import styles from './menu-bar.css';
 
 import feedbackIcon from './icon--feedback.svg';
-import scratchLogo from './scratch-logo.svg';
+import scratchLogo from '../../../mycode/res/img/gs-logo.svg';
+
+//import GsFirmwareButton from '../../containers/gs-firmware-button.jsx';
+import GsConnectButton from '../../containers/gs-connect-button.jsx';
+import GsDriverButton from '../../containers/gs-driver-button.jsx';
+import GsSettingButton from '../../containers/gs-setting-button.jsx';
+import GsAiButton from '../../containers/gs-ai-button.jsx';
+import GsUpdateButton from '../../containers/gs-update-button.jsx';
 
 const MenuBar = props => (
     <Box
@@ -23,7 +30,7 @@ const MenuBar = props => (
             [styles.menuBar]: true
         })}
     >
-        <div className={styles.mainMenu}>
+        <div className={styles.menuBarLeft}>
             <div className={classNames(styles.logoWrapper, styles.menuItem)}>
                 <img
                     alt="Scratch"
@@ -33,25 +40,14 @@ const MenuBar = props => (
             </div>
             <SaveButton className={styles.menuItem} />
             <LoadButton className={styles.menuItem} />
-            <LanguageSelector className={styles.menuItem} />
+            <GsDriverButton className={styles.menuItem} />
+            <GsConnectButton className={styles.menuItem} />
+            <GsAiButton className={styles.menuItem} />
         </div>
-        <div className={styles.feedbackButtonWrapper}>
-            <Button
-                className={styles.feedbackButton}
-                onClick={props.onGiveFeedback}
-            >
-                <img
-                    className={styles.feedbackButtonIcon}
-                    src={feedbackIcon}
-                />
-                <span className={styles.feedbackText}>
-                    <FormattedMessage
-                        defaultMessage="Give Feedback"
-                        description="Label for feedback form modal button"
-                        id="gui.menuBar.giveFeedback"
-                    />
-                </span>
-            </Button>
+        <div className={styles.menuBarRight}>
+            <GsUpdateButton className={styles.menuItem} />
+
+            <GsSettingButton className={styles.menuItem} />
         </div>
     </Box>
 );

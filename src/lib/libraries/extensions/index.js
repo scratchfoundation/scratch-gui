@@ -7,6 +7,13 @@ import wedoImage from './wedo.png';
 
 export default [
     {
+        name: 'Test',
+        extensionURL: 'gs1',
+        iconURL: penImage,
+        description: 'Draw with your sprites.',
+        featured: true
+    },
+    {
         name: 'Music',
         extensionURL: 'music',
         iconURL: musicImage,

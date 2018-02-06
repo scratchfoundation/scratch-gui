@@ -26,6 +26,7 @@ import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
 import reverseIcon from './icon--reverse.svg';
+import lan from '../../../mycode/language/Local'
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -139,9 +140,9 @@ const SoundEditor = props => (
                 })}
                 img={props.trimStart === null ? trimIcon : trimConfirmIcon}
                 title={props.trimStart === null ? (
-                    <FormattedMessage {...messages.trim} />
+                    lan.data.gui_sounds_trim
                 ) : (
-                    <FormattedMessage {...messages.save} />
+                    lan.data.gui_sounds_save
                 )}
                 onClick={props.onActivateTrim}
             />
@@ -185,43 +186,43 @@ const SoundEditor = props => (
             <IconButton
                 className={styles.effectButton}
                 img={fasterIcon}
-                title={<FormattedMessage {...messages.faster} />}
+                title={lan.data.gui_sounds_faster}
                 onClick={props.onFaster}
             />
             <IconButton
                 className={styles.effectButton}
                 img={slowerIcon}
-                title={<FormattedMessage {...messages.slower} />}
+                title={lan.data.gui_sounds_slower}
                 onClick={props.onSlower}
             />
             <IconButton
                 className={styles.effectButton}
                 img={echoIcon}
-                title={<FormattedMessage {...messages.echo} />}
+                title={lan.data.gui_sounds_echo}
                 onClick={props.onEcho}
             />
             <IconButton
                 className={styles.effectButton}
                 img={robotIcon}
-                title={<FormattedMessage {...messages.robot} />}
+                title={lan.data.gui_sounds_robot}
                 onClick={props.onRobot}
             />
             <IconButton
                 className={styles.effectButton}
                 img={louderIcon}
-                title={<FormattedMessage {...messages.louder} />}
+                title={lan.data.gui_sounds_louder}
                 onClick={props.onLouder}
             />
             <IconButton
                 className={styles.effectButton}
                 img={softerIcon}
-                title={<FormattedMessage {...messages.softer} />}
+                title={lan.data.gui_sounds_softer}
                 onClick={props.onSofter}
             />
             <IconButton
                 className={styles.effectButton}
                 img={reverseIcon}
-                title={<FormattedMessage {...messages.reverse} />}
+                title={lan.data.gui_sounds_reverse}
                 onClick={props.onReverse}
             />
         </div>

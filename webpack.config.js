@@ -77,7 +77,21 @@ module.exports = [
         externals: {
             React: 'react',
             ReactDOM: 'react-dom'
-        }
+        },
+        plugins: base.plugins.concat([
+            new CopyWebpackPlugin([{
+                from: 'node_modules/scratch-blocks/media',
+                to: 'static/blocks-media'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'node_modules/scratch-vm/dist/node/assets',
+                to: 'static/extension-assets'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'extension-worker.{js,js.map}',
+                context: 'node_modules/scratch-vm/dist/web'
+            }])
+        ])
     }),
     // Node-compatible
     defaultsDeep({}, base, {
@@ -88,7 +102,21 @@ module.exports = [
         output: {
             libraryTarget: 'commonjs2',
             path: path.resolve('dist', 'node')
-        }
+        },
+        plugins: base.plugins.concat([
+            new CopyWebpackPlugin([{
+                from: 'node_modules/scratch-blocks/media',
+                to: 'static/blocks-media'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'node_modules/scratch-vm/dist/node/assets',
+                to: 'static/extension-assets'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'extension-worker.{js,js.map}',
+                context: 'node_modules/scratch-vm/dist/web'
+            }])
+        ])
     }),
     // to run editor examples
     defaultsDeep({}, base, {

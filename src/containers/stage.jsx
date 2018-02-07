@@ -201,7 +201,7 @@ class Stage extends React.Component {
                 mouseDownPosition: mousePosition,
                 mouseDownTimeoutId: setTimeout(
                     this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
-                    500
+                    400
                 )
             });
         }

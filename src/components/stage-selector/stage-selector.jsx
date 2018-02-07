@@ -8,6 +8,7 @@ import IconButton from '../icon-button/icon-button.jsx';
 import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
 import backdropIcon from './icon--backdrop.svg';
+import lan from '../../../mycode/language/Local'
 
 const addBackdropMessage = (
     <FormattedMessage
@@ -56,7 +57,7 @@ const StageSelector = props => {
             <IconButton
                 className={styles.addButton}
                 img={backdropIcon}
-                title={addBackdropMessage}
+                title={lan.data.gui_ex_add_backdrop}
                 onClick={onNewBackdropClick}
             />
         </Box>

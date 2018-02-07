@@ -49,7 +49,7 @@ class SaveButton extends React.Component {
                     onClick={this.handleClick}
                     {...props}
                 >
-                    Save
+                     <i className="fa fa-floppy-o" aria-hidden="true"></i> {lan.data.gui_menu_save}
                 </ButtonComponent>
             </ComingSoonTooltip>
         );

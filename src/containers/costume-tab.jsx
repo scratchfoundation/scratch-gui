@@ -8,6 +8,7 @@ import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
+import lan from '../../mycode/language/Local'
 import {connect} from 'react-redux';
 
 import {
@@ -130,7 +131,7 @@ class CostumeTab extends React.Component {
             return null;
         }
 
-        const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
+        const addLibraryMessage = target.isStage ? lan.data.gui_ex_add_backdrop : lan.data.gui_costumes_add_costume;
         const addBlankMessage = target.isStage ? messages.addBlankBackdropMsg : messages.addBlankCostumeMsg;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;

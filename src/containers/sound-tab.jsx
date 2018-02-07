@@ -10,6 +10,7 @@ import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-l
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
 import RecordModal from './record-modal.jsx';
 import SoundEditor from './sound-editor.jsx';
+import lan from '../../mycode/language/Local'
 import SoundLibrary from './sound-library.jsx';
 
 import {connect} from 'react-redux';
@@ -100,11 +101,11 @@ class SoundTab extends React.Component {
         return (
             <AssetPanel
                 buttons={[{
-                    message: recordSoundMsg,
+                    message: lan.data.gui_sounds_record,
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    message: addSoundMsg,
+                    message: lan.data.gui_sounds_add ,
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}

@@ -5,6 +5,7 @@ import ButtonComponent from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 
 import styles from './load-button.css';
+import lan from '../../../mycode/language/Local';
 
 const LoadButtonComponent = ({
     inputRef,

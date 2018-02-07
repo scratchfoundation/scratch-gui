@@ -9,6 +9,7 @@ import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './sprite-selector.css';
 import spriteIcon from './icon--sprite.svg';
+import lan from '../../../mycode/language/Local';
 
 const addSpriteMessage = (
     <FormattedMessage
@@ -87,7 +88,7 @@ const SpriteSelectorComponent = function (props) {
             <IconButton
                 className={styles.addButton}
                 img={spriteIcon}
-                title={addSpriteMessage}
+                title={lan.data.gui_ex_add_sprite}
                 onClick={onNewSpriteClick}
             />
         </Box>

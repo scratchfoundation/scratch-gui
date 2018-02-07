@@ -682,28 +682,6 @@
         ]
     },
     {
-        "name": "Costume1",
-        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
-            1
-        ]
-    },
-    {
-        "name": "Costume2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
-            1
-        ]
-    },
-    {
         "name": "Crab-a",
         "md5": "114249a5660f7948663d95de575cfd8d.svg",
         "type": "costume",

@@ -25,6 +25,7 @@ import WebGlModal from '../../containers/webgl-modal.jsx';
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
+import lan from '../../../mycode/language/Local';
 
 const addExtensionMessage = (
     <FormattedMessage
@@ -92,9 +93,9 @@ const GUIComponent = props => {
                             onSelect={onTabSelect}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>Blocks</Tab>
-                                <Tab className={tabClassNames.tab}>Costumes</Tab>
-                                <Tab className={tabClassNames.tab}>Sounds</Tab>
+                                <Tab className={tabClassNames.tab}>{lan.data.gui_menu_blocks}</Tab>
+                                <Tab className={tabClassNames.tab}>{lan.data.gui_menu_costumes}</Tab>
+                                <Tab className={tabClassNames.tab}>{lan.data.gui_menu_sounds}</Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>

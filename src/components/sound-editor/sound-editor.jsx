@@ -26,7 +26,7 @@ import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
 import reverseIcon from './icon--reverse.svg';
-import lan from '../../../mycode/language/Local'
+import lan from '../../../mycode/language/Local';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -107,7 +107,7 @@ const SoundEditor = props => (
     <div className={styles.editorContainer}>
         <div className={styles.row}>
             <div className={styles.inputGroup}>
-                <Label text={props.intl.formatMessage(messages.sound)}>
+                <Label text={lan.data.gui_sounds_sound}>
                     <BufferedInput
                         tabIndex="1"
                         type="text"

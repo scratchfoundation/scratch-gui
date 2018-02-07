@@ -80,7 +80,7 @@
     "react-modal": "3.1.12",
     "react-redux": "5.0.6",
     "react-responsive": "4.0.3",
-    "react-style-proptype": "3.1.0",
+    "react-style-proptype": "3.2.0",
     "react-tabs": "2.2.1",
     "react-test-renderer": "16.2.0",
     "react-tooltip": "3.4.0",

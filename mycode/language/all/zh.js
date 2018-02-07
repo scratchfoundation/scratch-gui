@@ -263,7 +263,7 @@ export default {
         blocks_sensing_videoonmenutwo :'',
         blocks_sensing_videotoggle :'将摄像头 %1',
         blocks_sensing_videotogglemenu :'',
-        blocks_sensing_setvideotransparency :'将视屏透明度设置为 %1%',
+        blocks_sensing_setvideotransparency :'将视屏透明度设置为 %1 %',
         blocks_sensing_timer :'计时器',
         blocks_sensing_resettimer :'计时器归零',
         blocks_sensing_of_property_menu :'',

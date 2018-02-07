@@ -83,7 +83,6 @@ export default {
         gui_online_update_detect_version: 'Detect The Latest Version',
         gui_online_update_find_the_latest_version: 'Find the latest version of ',
 
-
         gui_set_title:'Setting',
         gui_set_language:'Language',
         gui_set_info:'For more information please visit :',
@@ -204,7 +203,7 @@ export default {
         blocks_looks_backdrops :'',
         blocks_looks_gotofront :'go to %1',
         blocks_looks_gobacklayers :'go %1 %2 layers',
-        blocks_looks_backdropname :'backdrop 1% ',
+        blocks_looks_backdropname :'costume %1',
         blocks_looks_costumeorder :'costume %1',
         blocks_looks_backdroporder :'backdrop #',
         blocks_looks_switchbackdroptoandwait :'switch backdrop to %1 and wait',
@@ -264,7 +263,7 @@ export default {
         blocks_sensing_videoonmenutwo :'',
         blocks_sensing_videotoggle :'turn video %1',
         blocks_sensing_videotogglemenu :'',
-        blocks_sensing_setvideotransparency :'set video transparency to %1%',
+        blocks_sensing_setvideotransparency :'set video transparency to %1 %',
         blocks_sensing_timer :'timer',
         blocks_sensing_resettimer :'reset timer',
         blocks_sensing_of_property_menu :'',

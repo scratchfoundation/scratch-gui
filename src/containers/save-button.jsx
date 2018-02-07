@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import ButtonComponent from '../components/button/button.jsx';
 import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';
-
+import lan from '../../mycode/language/Local'
 
 class SaveButton extends React.Component {
     constructor (props) {

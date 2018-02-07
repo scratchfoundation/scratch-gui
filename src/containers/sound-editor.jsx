@@ -16,7 +16,7 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'copyCurrentSamples',
+            'copyCurrentBuffer',
             'handleStoppedPlaying',
             'handleChangeName',
             'handlePlay',
@@ -70,7 +70,7 @@ class SoundEditor extends React.Component {
             if (this.undoStack.length >= UNDO_STACK_SIZE) {
                 this.undoStack.shift(); // Drop the first element off the array
             }
-            this.undoStack.push(this.copyCurrentSamples());
+            this.undoStack.push(this.copyCurrentBuffer());
         }
         this.resetState(samples, sampleRate);
         this.props.onUpdateSoundBuffer(
@@ -102,12 +102,12 @@ class SoundEditor extends React.Component {
         if (this.state.trimStart === null && this.state.trimEnd === null) {
             this.setState({trimEnd: 0.95, trimStart: 0.05});
         } else {
-            const samples = this.copyCurrentSamples();
+            const {samples, sampleRate} = this.copyCurrentBuffer();
             const sampleCount = samples.length;
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
             const clippedSamples = samples.slice(startIndex, endIndex);
-            this.submitNewSamples(clippedSamples, this.props.sampleRate);
+            this.submitNewSamples(clippedSamples, sampleRate);
         }
     }
     handleUpdateTrimEnd (trimEnd) {
@@ -119,9 +119,12 @@ class SoundEditor extends React.Component {
     effectFactory (name) {
         return () => this.handleEffect(name);
     }
-    copyCurrentSamples () {
+    copyCurrentBuffer () {
         // Cannot reliably use props.samples because it gets detached by Firefox
-        return this.audioBufferPlayer.buffer.getChannelData(0);
+        return {
+            samples: this.audioBufferPlayer.buffer.getChannelData(0),
+            sampleRate: this.audioBufferPlayer.buffer.sampleRate
+        };
     }
     handleEffect (name) {
         const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
@@ -133,18 +136,18 @@ class SoundEditor extends React.Component {
         });
     }
     handleUndo () {
-        this.redoStack.push(this.copyCurrentSamples());
-        const samples = this.undoStack.pop();
+        this.redoStack.push(this.copyCurrentBuffer());
+        const {samples, sampleRate} = this.undoStack.pop();
         if (samples) {
-            this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
         }
     }
     handleRedo () {
-        const samples = this.redoStack.pop();
+        const {samples, sampleRate} = this.redoStack.pop();
         if (samples) {
-            this.undoStack.push(this.copyCurrentSamples());
-            this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.undoStack.push(this.copyCurrentBuffer());
+            this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
         }
     }

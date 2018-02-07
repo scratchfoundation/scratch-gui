@@ -4,7 +4,7 @@ import React from 'react';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
 import Box from '../box/box.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import AssetButton from '../asset-button/asset-button.jsx';
 import styles from './selector.css';
 
 const Selector = props => {
@@ -35,7 +35,7 @@ const Selector = props => {
             </Box>
             <Box className={styles.newButtons}>
                 {buttons.map(({message, img, onClick}, index) => (
-                    <IconButton
+                    <AssetButton
                         img={img}
                         key={index}
                         title={message}
@@ -49,7 +49,7 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        message: PropTypes.node.isRequired,
+        message: PropTypes.string.isRequired,
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func.isRequired
     })),

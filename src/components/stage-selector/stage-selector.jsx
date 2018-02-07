@@ -1,25 +1,26 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import AssetButton from '../asset-button/asset-button.jsx';
 import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
 import backdropIcon from './icon--backdrop.svg';
 
-const addBackdropMessage = (
-    <FormattedMessage
-        defaultMessage="Add Backdrop"
-        description="Button to add a backdrop in the target pane"
-        id="gui.stageSelector.targetPaneAddBackdrop"
-    />
-);
+const messages = defineMessages({
+    addBackdrop: {
+        id: 'gui.stageSelector.targetPaneAddBackdrop',
+        description: 'Button to add a backdrop in the target pane',
+        defaultMessage: 'Add Backdrop'
+    }
+});
 
 const StageSelector = props => {
     const {
         backdropCount,
+        intl,
         selected,
         url,
         onClick,
@@ -53,10 +54,10 @@ const StageSelector = props => {
                 />
             </div>
             <div className={styles.count}>{backdropCount}</div>
-            <IconButton
+            <AssetButton
                 className={styles.addButton}
                 img={backdropIcon}
-                title={addBackdropMessage}
+                title={intl.formatMessage(messages.addBackdrop)}
                 onClick={onNewBackdropClick}
             />
         </Box>
@@ -65,9 +66,10 @@ const StageSelector = props => {
 
 StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
+    intl: intlShape.isRequired,
     onClick: PropTypes.func,
     onNewBackdropClick: PropTypes.func,
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };
-export default StageSelector;
+export default injectIntl(StageSelector);

@@ -203,7 +203,7 @@ export default {
         blocks_looks_backdrops :'',
         blocks_looks_gotofront :'go to %1',
         blocks_looks_gobacklayers :'go %1 %2 layers',
-        blocks_looks_backdropname :'costume %1',
+        blocks_looks_backdropname :'backdrop %1',
         blocks_looks_costumeorder :'costume %1',
         blocks_looks_backdroporder :'backdrop #',
         blocks_looks_switchbackdroptoandwait :'switch backdrop to %1 and wait',

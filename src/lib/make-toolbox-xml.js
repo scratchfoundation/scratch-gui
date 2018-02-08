@@ -6,7 +6,7 @@ const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = function (isStage, targetId) {
     return `
-    <category name="${lan.data.gui_toolbox_category_motion}" colour="#4C97FF" secondaryColour="#3373CC">
+    <category name="${lan.data.gui_toolbox_category_motion}" colour="#47a970" secondaryColour="#3373CC">
         ${isStage ? `
         <label text="Stage selected: no motion blocks"></label>
         ` : `

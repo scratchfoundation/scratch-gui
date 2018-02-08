@@ -32,7 +32,7 @@
 }
 
 .input-form:focus {
-    border-color: #4c97ff;
+    border-color: #47a970;
     box-shadow: inset 0 0 0 -2px rgba(0, 0, 0, 0.1);
 }
 

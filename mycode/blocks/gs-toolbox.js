@@ -20,7 +20,7 @@ export default new class GsToolbox {
 
     robotToolbox(isStage, targetId, blockSeparator, categorySeparator) {
     return `
-            <category name="${lan.data.gui_toolbox_category_gsrobot}" colour="#4C97FF" secondaryColour="#3373CC">           
+            <category name="${lan.data.gui_toolbox_category_gsrobot}" colour="#47a970" secondaryColour="#3373CC">           
            
             	<block type="gs_motion_move" id="gs_motion_move">
       <value name="LEFT">

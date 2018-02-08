@@ -23,7 +23,7 @@ const LoadButtonComponent = ({
                 disabled
                 onClick={onClick}
             >
-                {title}
+                {lan.data.gui_menu_load}
             </ButtonComponent>
             <input
                 disabled

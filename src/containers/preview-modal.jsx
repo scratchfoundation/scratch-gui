@@ -28,7 +28,7 @@ class PreviewModal extends React.Component {
         this.props.onTryIt();
     }
     handleCancel () {
-        window.history.back();
+        window.location.replace('https://scratch.mit.edu');
     }
     supportedBrowser () {
         if (platform.name === 'IE') {

@@ -2,6 +2,7 @@ import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
+    clickText,
     clickXpath,
     getDriver,
     getLogs,
@@ -11,6 +12,15 @@ const {
 const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
+
+describe('Loading scratch gui', () => {
+    test('The "Not Now" button sends you to scratch', async () => {
+        await loadUri(uri);
+        await clickText('Not Now');
+        const currentUrl = await driver.getCurrentUrl();
+        await expect(currentUrl).toEqual('https://scratch.mit.edu/');
+    });
+});
 
 describe('Loading projects by ID', () => {
     beforeAll(() => {

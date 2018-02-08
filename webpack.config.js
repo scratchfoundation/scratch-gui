@@ -13,6 +13,11 @@ var postcssImport = require('postcss-import');
 
 const base = {
     devtool: 'cheap-module-source-map',
+    devServer: {
+        contentBase: path.resolve(__dirname, 'build'),
+        host: '0.0.0.0',
+        port: process.env.PORT || 8601
+    },
     output: {
         library: 'GUI',
         filename: '[name].js'
@@ -64,7 +69,7 @@ const base = {
     ] : [])
 };
 module.exports = [
-    // Web-compatible
+    // export as library
     defaultsDeep({}, base, {
         target: 'web',
         entry: {
@@ -72,7 +77,7 @@ module.exports = [
         },
         output: {
             libraryTarget: 'umd',
-            path: path.resolve('dist', 'web')
+            path: path.resolve('dist')
         },
         externals: {
             React: 'react',
@@ -93,38 +98,8 @@ module.exports = [
             }])
         ])
     }),
-    // Node-compatible
-    defaultsDeep({}, base, {
-        target: 'node',
-        entry: {
-            'scratch-gui': './src/index.js'
-        },
-        output: {
-            libraryTarget: 'commonjs2',
-            path: path.resolve('dist', 'node')
-        },
-        plugins: base.plugins.concat([
-            new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-blocks/media',
-                to: 'static/blocks-media'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-vm/dist/node/assets',
-                to: 'static/extension-assets'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extension-worker.{js,js.map}',
-                context: 'node_modules/scratch-vm/dist/web'
-            }])
-        ])
-    }),
     // to run editor examples
     defaultsDeep({}, base, {
-        devServer: {
-            contentBase: path.resolve(__dirname, 'build'),
-            host: '0.0.0.0',
-            port: process.env.PORT || 8601
-        },
         entry: {
             lib: ['react', 'react-dom'],
             gui: './src/index.jsx',

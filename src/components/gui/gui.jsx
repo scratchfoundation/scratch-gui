@@ -117,6 +117,7 @@ const GUIComponent = props => {
                                     >
                                         <img
                                             className={styles.extensionButtonIcon}
+                                            draggable={false}
                                             src={addExtensionIcon}
                                         />
                                     </button>

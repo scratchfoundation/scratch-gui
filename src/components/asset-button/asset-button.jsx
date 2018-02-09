@@ -16,6 +16,7 @@ const AssetButton = ({
     >
         <img
             className={styles.icon}
+            draggable={false}
             src={img}
         />
     </button>

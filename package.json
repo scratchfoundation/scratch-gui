@@ -54,7 +54,7 @@
     "gh-pages": "github:rschamp/gh-pages#publish-branch-to-subfolder",
     "html-webpack-plugin": "^2.30.0",
     "immutable": "3.8.2",
-    "jest": "^22.2.2",
+    "jest": "^21.0.0",
     "lodash.bindall": "4.4.0",
     "lodash.debounce": "4.0.8",
     "lodash.defaultsdeep": "4.6.0",

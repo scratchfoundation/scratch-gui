@@ -456,7 +456,7 @@
         }
     },
     {
-        "name": "Bat3",
+        "name": "Bat2",
         "md5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
         "type": "sprite",
         "tags": [],
@@ -466,7 +466,7 @@
             1
         ],
         "json": {
-            "objName": "Bat3",
+            "objName": "Bat2",
             "sounds": [
                 {
                     "soundName": "pop",

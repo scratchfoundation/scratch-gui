@@ -17,7 +17,7 @@ import styles from './menu-bar.css';
 import feedbackIcon from './icon--feedback.svg';
 import scratchLogo from '../../../mycode/res/img/gs-logo.svg';
 
-//import GsFirmwareButton from '../../containers/gs-firmware-button.jsx';
+import GsFirmwareButton from '../../containers/gs-firmware-button.jsx';
 import GsConnectButton from '../../containers/gs-connect-button.jsx';
 import GsDriverButton from '../../containers/gs-driver-button.jsx';
 import GsSettingButton from '../../containers/gs-setting-button.jsx';
@@ -46,7 +46,7 @@ const MenuBar = props => (
         </div>
         <div className={styles.menuBarRight}>
             <GsUpdateButton className={styles.menuItem} />
-
+            <GsFirmwareButton className={styles.menuItem} />
             <GsSettingButton className={styles.menuItem} />
         </div>
     </Box>

@@ -15,29 +15,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    margin: 1.25rem 0;
+    margin: 0.75rem 0;
     color: $motion-primary;
+    text-align: center;
 }
 
-.new-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.new-button:hover {
-    transform: scale(1.2);
-}
-
-.new-button + .new-button {
-    margin-top: 1.25rem;
-}
-
-.new-button-icon + .new-button-label {
-    margin-top: 0.5rem;
+.new-buttons > button + button {
+    margin-top: 0.75rem;
 }
 
 .list-area {

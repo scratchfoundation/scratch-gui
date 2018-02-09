@@ -7,6 +7,7 @@ import mockAudioEffects from '../../__mocks__/audio-effects.js';
 import SoundEditor from '../../../src/containers/sound-editor';
 import SoundEditorComponent from '../../../src/components/sound-editor/sound-editor';
 
+jest.mock('react-ga');
 jest.mock('../../../src/lib/audio/audio-buffer-player', () => mockAudioBufferPlayer);
 jest.mock('../../../src/lib/audio/audio-effects', () => mockAudioEffects);
 

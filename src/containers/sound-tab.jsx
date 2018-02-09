@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, intlShape, injectIntl} from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
@@ -64,6 +64,7 @@ class SoundTab extends React.Component {
 
     render () {
         const {
+            intl,
             vm,
             onNewSoundFromLibraryClick,
             onNewSoundFromRecordingClick
@@ -82,29 +83,27 @@ class SoundTab extends React.Component {
             }
         )) : [];
 
-        const recordSoundMsg = (
-            <FormattedMessage
-                defaultMessage="Record Sound"
-                description="Button to record a sound in the editor tab"
-                id="gui.soundTab.recordSound"
-            />
-        );
-        const addSoundMsg = (
-            <FormattedMessage
-                defaultMessage="Add Sound"
-                description="Button to add a sound in the editor tab"
-                id="gui.soundTab.addSound"
-            />
-        );
+        const messages = defineMessages({
+            recordSound: {
+                defaultMessage: 'Record Sound',
+                description: 'Button to record a sound in the editor tab',
+                id: 'gui.soundTab.recordSound'
+            },
+            addSound: {
+                defaultMessage: 'Add Sound',
+                description: 'Button to add a sound in the editor tab',
+                id: 'gui.soundTab.addSound'
+            }
+        });
 
         return (
             <AssetPanel
                 buttons={[{
-                    message: recordSoundMsg,
+                    message: intl.formatMessage(messages.recordSound),
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }, {
-                    message: addSoundMsg,
+                    message: intl.formatMessage(messages.addSound),
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
                 }]}
@@ -138,6 +137,7 @@ class SoundTab extends React.Component {
 
 SoundTab.propTypes = {
     editingTarget: PropTypes.string,
+    intl: intlShape,
     onNewSoundFromLibraryClick: PropTypes.func.isRequired,
     onNewSoundFromRecordingClick: PropTypes.func.isRequired,
     onRequestCloseSoundLibrary: PropTypes.func.isRequired,
@@ -179,7 +179,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(SoundTab);
+)(SoundTab));

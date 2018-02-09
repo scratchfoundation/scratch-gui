@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index';
 
+import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/sprite-selector/icon--sprite.svg';
 
@@ -16,9 +17,12 @@ class ExtensionLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        // eslint-disable-next-line no-alert
-        const url = item.extensionURL || prompt('Enter the URL of the extension');
-        if (url) {
+        let url = item.extensionURL;
+        if (!item.disabled && !item.extensionURL) {
+            // eslint-disable-next-line no-alert
+            url = prompt('Enter the URL of the extension');
+        }
+        if (url && !item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(item.name);
             } else {
@@ -27,6 +31,11 @@ class ExtensionLibrary extends React.PureComponent {
                 });
             }
         }
+        analytics.event({
+            category: 'library',
+            action: 'Select Extension',
+            label: item.name
+        });
     }
     render () {
         const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({

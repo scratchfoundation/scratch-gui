@@ -1,3 +1,5 @@
+import analytics from '../lib/analytics';
+
 const OPEN_MODAL = 'scratch-gui/modals/OPEN_MODAL';
 const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
@@ -50,27 +52,35 @@ const closeModal = function (modal) {
     };
 };
 const openBackdropLibrary = function () {
+    analytics.pageview('/libraries/backdrops');
     return openModal(MODAL_BACKDROP_LIBRARY);
 };
 const openCostumeLibrary = function () {
+    analytics.pageview('/libraries/costumes');
     return openModal(MODAL_COSTUME_LIBRARY);
 };
 const openExtensionLibrary = function () {
+    analytics.pageview('/libraries/extensions');
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
 const openFeedbackForm = function () {
+    analytics.pageview('/modals/feedback');
     return openModal(MODAL_FEEDBACK_FORM);
 };
 const openSoundLibrary = function () {
+    analytics.pageview('/libraries/sounds');
     return openModal(MODAL_SOUND_LIBRARY);
 };
 const openSpriteLibrary = function () {
+    analytics.pageview('/libraries/sprites');
     return openModal(MODAL_SPRITE_LIBRARY);
 };
 const openSoundRecorder = function () {
+    analytics.pageview('/modals/microphone');
     return openModal(MODAL_SOUND_RECORDER);
 };
 const openPreviewInfo = function () {
+    analytics.pageview('/modals/preview');
     return openModal(MODAL_PREVIEW_INFO);
 };
 const closeBackdropLibrary = function () {

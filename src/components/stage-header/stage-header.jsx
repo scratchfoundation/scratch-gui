@@ -8,6 +8,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Controls from '../../containers/controls.jsx';
+import {getStageSize} from '../../lib/screen-utils.js';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -42,6 +43,7 @@ const messages = defineMessages({
 const StageHeaderComponent = function (props) {
     const {
         isFullScreen,
+        onKeyPress,
         onSetStageLarge,
         onSetStageFull,
         onSetStageUnFull,
@@ -49,19 +51,25 @@ const StageHeaderComponent = function (props) {
     } = props;
 
     let header = null;
+    const stageSize = getStageSize(isFullScreen);
 
     if (isFullScreen) {
         header = (
             <Box className={styles.stageHeaderWrapperOverlay}>
-                <Box className={styles.stageMenuWrapper}>
+                <Box
+                    className={styles.stageMenuWrapper}
+                    style={{width: stageSize.width}}
+                >
                     <Controls vm={vm} />
                     <Button
                         className={styles.stageButton}
                         onClick={onSetStageUnFull}
+                        onKeyPress={onKeyPress}
                     >
                         <img
                             alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
                             className={styles.stageButtonIcon}
+                            draggable={false}
                             src={unFullScreenIcon}
                             title="Full Screen Control"
                         />
@@ -93,6 +101,7 @@ const StageHeaderComponent = function (props) {
                                         disabled
                                         alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
                                         className={styles.stageButtonIcon}
+                                        draggable={false}
                                         src={smallStageIcon}
                                     />
                                 </div>
@@ -108,6 +117,7 @@ const StageHeaderComponent = function (props) {
                                     <img
                                         alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
                                         className={styles.stageButtonIcon}
+                                        draggable={false}
                                         src={largeStageIcon}
                                     />
                                 </Button>
@@ -121,6 +131,7 @@ const StageHeaderComponent = function (props) {
                                 <img
                                     alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
                                     className={styles.stageButtonIcon}
+                                    draggable={false}
                                     src={fullScreenIcon}
                                     title="Full Screen Control"
                                 />
@@ -138,6 +149,7 @@ const StageHeaderComponent = function (props) {
 StageHeaderComponent.propTypes = {
     intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,

@@ -68,6 +68,7 @@ class LibraryComponent extends React.Component {
                         return (
                             <LibraryItem
                                 description={dataItem.description}
+                                disabled={dataItem.disabled}
                                 featured={dataItem.featured}
                                 iconURL={scratchURL}
                                 id={index}

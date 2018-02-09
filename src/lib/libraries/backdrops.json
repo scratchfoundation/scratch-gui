@@ -1,5 +1,16 @@
 [
     {
+        "name": "Basketball",
+        "md5": "e494c4f44897d94e0541f7036a302449.svg",
+        "type": "backdrop",
+        "tags": [],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
         "name": "Blue Sky",
         "md5": "e7c147730f19d284bcd7b3f00af19bb6.svg",
         "type": "backdrop",
@@ -66,6 +77,17 @@
         ]
     },
     {
+        "name": "Jurassic",
+        "md5": "73fd0531a1aaca5dff2d1c67202ff5bd.svg",
+        "type": "backdrop",
+        "tags": [],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
         "name": "Light",
         "md5": "4b98c07876ed8997c3762e75790507b4.svg",
         "type": "backdrop",
@@ -101,6 +123,17 @@
     {
         "name": "Rays",
         "md5": "87e963282db9e020e8c4d075891ea12b.svg",
+        "type": "backdrop",
+        "tags": [],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Refrigerator",
+        "md5": "98f053f9681e872f34fafd783ce72205.svg",
         "type": "backdrop",
         "tags": [],
         "info": [

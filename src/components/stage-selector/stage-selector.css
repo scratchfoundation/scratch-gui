@@ -76,10 +76,6 @@ $header-height: calc($stage-menu-height - 2px);
 }
 
 .add-button {
-    font-size: 0.55rem;
-    font-weight: bold;
-    text-align: center;
     position: absolute;
     bottom: 0.75rem;
-    left: 0.25rem;
 }

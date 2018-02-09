@@ -18,13 +18,13 @@ const opcodeMap = {
         category: 'looks',
         label: 'size'
     },
-    looks_costumeorder: {
+    looks_costumenumbername: {
         category: 'looks',
-        label: 'costume #'
+        labelFn: params => `costume ${params.NUMBER_NAME}`
     },
-    looks_backdroporder: {
+    looks_backdropnumbername: {
         category: 'looks',
-        label: 'backdrop #'
+        labelFn: params => `backdrop ${params.NUMBER_NAME}`
     },
     looks_backdropname: {
         category: 'looks',
@@ -36,7 +36,11 @@ const opcodeMap = {
         category: 'data',
         labelFn: params => params.VARIABLE
     },
-
+    data_listcontents: {
+        category: 'data',
+        labelFn: params => params.LIST
+    },
+    
     // Sound
     sound_volume: {
         category: 'sound',
@@ -56,13 +60,15 @@ const opcodeMap = {
         category: 'sensing',
         label: 'loudness'
     },
-    sensing_of: {
-        category: 'sensing',
-        labelFn: params => `${params.PROPERTY} of ${params.OBJECT}`
-    },
     sensing_current: {
         category: 'sensing',
-        labelFn: params => params.CURRENTMENU.toLowerCase()
+        labelFn: params => {
+            let currentMenu = params.CURRENTMENU.toLowerCase();
+            if (currentMenu === 'dayofweek') {
+                currentMenu = 'day of week';
+            }
+            return currentMenu;
+        }
     },
     sensing_timer: {
         category: 'sensing',

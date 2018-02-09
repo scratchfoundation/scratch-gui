@@ -1,25 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import AssetButton from '../asset-button/asset-button.jsx';
 
 import styles from './sprite-selector.css';
 import spriteIcon from './icon--sprite.svg';
 
-const addSpriteMessage = (
-    <FormattedMessage
-        defaultMessage="Add Sprite"
-        description="Button to add a sprite in the target pane"
-        id="gui.spriteSelector.addSprite"
-    />
-);
+const messages = defineMessages({
+    addSprite: {
+        id: 'gui.spriteSelector.addSprite',
+        description: 'Button to add a sprite in the target pane',
+        defaultMessage: 'Add Sprite'
+    }
+});
 
 const SpriteSelectorComponent = function (props) {
     const {
+        intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
         onChangeSpriteSize,
@@ -84,10 +85,10 @@ const SpriteSelectorComponent = function (props) {
                     }
                 </Box>
             </Box>
-            <IconButton
+            <AssetButton
                 className={styles.addButton}
                 img={spriteIcon}
-                title={addSpriteMessage}
+                title={intl.formatMessage(messages.addSprite)}
                 onClick={onNewSpriteClick}
             />
         </Box>
@@ -95,6 +96,7 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -121,4 +123,4 @@ SpriteSelectorComponent.propTypes = {
     })
 };
 
-export default SpriteSelectorComponent;
+export default injectIntl(SpriteSelectorComponent);

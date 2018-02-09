@@ -2,6 +2,9 @@
 @import "../../css/units.css";
 @import "../../css/typography.css";
 
+$content-width: 500px;
+$content-height: 450px;
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -19,12 +22,18 @@
     padding: 0;
     border-radius: $space;
     user-select: none;
-    width: 500px;
-    height: 450px;
+    width: $content-width;
     color: $text-primary;
     overflow: hidden;
 }
 
 .body {
+    /* Need to repeat dimensions here to allow iframe scrolling for iOS */
+    width: $content-width;
+    height: $content-height;
     background: $ui-pane-gray;
+
+    /* These properties needed to allow iframe scrolling for iOS */
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }

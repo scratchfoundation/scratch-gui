@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
+import analytics from '../lib/analytics';
 import ControlsComponent from '../components/controls/controls.jsx';
 
 class Controls extends React.Component {
@@ -40,11 +41,19 @@ class Controls extends React.Component {
             this.props.vm.setTurboMode(!this.state.turbo);
         } else {
             this.props.vm.greenFlag();
+            analytics.event({
+                category: 'general',
+                action: 'Green Flag'
+            });
         }
     }
     handleStopAllClick (e) {
         e.preventDefault();
         this.props.vm.stopAll();
+        analytics.event({
+            category: 'general',
+            action: 'Stop Button'
+        });
     }
     render () {
         const {

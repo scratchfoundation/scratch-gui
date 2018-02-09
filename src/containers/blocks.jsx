@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
+
+import analytics from '../lib/analytics';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
@@ -74,6 +76,8 @@ class Blocks extends React.Component {
 
         this.attachVM();
         this.props.vm.setLocale(this.props.locale, this.props.messages);
+
+        analytics.pageview('/editors/blocks');
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -231,9 +235,12 @@ class Blocks extends React.Component {
     setBlocks (blocks) {
         this.blocks = blocks;
     }
-    handlePromptStart (message, defaultValue, callback, optTitle) {
+    handlePromptStart (message, defaultValue, callback, optTitle, optVarType) {
         const p = {prompt: {callback, message, defaultValue}};
-        p.prompt.title = optTitle ? optTitle : 'New Variable';
+        p.prompt.title = optTitle ? optTitle :
+            this.ScratchBlocks.VARIABLE_MODAL_TITLE;
+        p.prompt.showMoreOptions =
+            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE;
         this.setState(p);
     }
     handlePromptCallback (data) {
@@ -274,6 +281,7 @@ class Blocks extends React.Component {
                     <Prompt
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
+                        showMoreOptions={this.state.prompt.showMoreOptions}
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}

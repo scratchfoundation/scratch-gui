@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
+import analytics from '../lib/analytics';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 
 import LibraryComponent from '../components/library/library.jsx';
@@ -29,6 +30,11 @@ class SpriteLibrary extends React.PureComponent {
     }
     handleItemSelect (item) {
         this.props.vm.addSprite2(JSON.stringify(item.json));
+        analytics.event({
+            category: 'library',
+            action: 'Select Sprite',
+            label: item.name
+        });
     }
     handleMouseEnter (item) {
         this.stopRotatingCostumes();

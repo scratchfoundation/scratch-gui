@@ -5,7 +5,7 @@ import Box from '../box/box.jsx';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import styles from './preview-modal.css';
-import catIcon from './happy-cat.svg';
+import catIcon from './happy-cat.png';
 
 const messages = defineMessages({
     label: {

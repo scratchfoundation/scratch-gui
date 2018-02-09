@@ -8,6 +8,7 @@ exports[`IconButtonComponent matches snapshot 1`] = `
 >
   <img
     className={undefined}
+    draggable={false}
     src="imgSrc"
   />
   <div

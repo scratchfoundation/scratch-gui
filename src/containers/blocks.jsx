@@ -251,8 +251,15 @@ class Blocks extends React.Component {
         this.setState({prompt: null});
     }
     handleCustomProceduresClose (data) {
+
         this.props.onRequestCloseCustomProcedures(data);
-        this.workspace.refreshToolboxSelection_();
+        const ws = this.workspace;
+        ws.refreshToolboxSelection_();
+        const tb = ws.toolbox_;
+        const cat = tb.categoryMenu_.categories_;
+        const idx = cat.length - 1;
+        const name = cat[idx].name_;
+        ws.toolbox_.scrollToCategoryByName(name); // 'My Blocks'
     }
     render () {
         /* eslint-disable no-unused-vars */

@@ -3717,13 +3717,21 @@
             "objName": "Horse1",
             "sounds": [
                 {
-                    "soundName": "meow",
-                    "soundID": -1,
-                    "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
-                    "sampleCount": 18688,
-                    "rate": 22050,
-                    "format": ""
-                }
+        "soundName": "Horse",
+        "soundID": -1,
+        "md5": "45ffcf97ee2edca0199ff5aa71a5b72e.wav",
+        "sampleCount": 14464,
+        "rate": 11025,
+        "format": ""
+    },
+    {
+        "soundName": "Horse Gallop",
+        "soundID":-1,
+        "md5": "058a34b5fb8b57178b5322d994b6b8c8.wav",
+        "sampleCount": 38336,
+        "rate": 11025,
+        "format": ""
+    }
             ],
             "costumes": [
                 {

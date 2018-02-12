@@ -23,6 +23,8 @@ class TargetPane extends React.Component {
             'handleChangeSpriteY',
             'handleDeleteSprite',
             'handleDuplicateSprite',
+            'handleMouseOutSprite',
+            'handleMouseOverSprite',
             'handleSelectSprite'
         ]);
     }
@@ -50,6 +52,12 @@ class TargetPane extends React.Component {
     handleDuplicateSprite (id) {
         this.props.vm.duplicateSprite(id);
     }
+    handleMouseOutSprite () {
+        this.props.vm.setHoveredSprite(null);
+    }
+    handleMouseOverSprite (id) {
+        this.props.vm.setHoveredSprite(id);
+    }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
@@ -65,6 +73,8 @@ class TargetPane extends React.Component {
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDuplicateSprite={this.handleDuplicateSprite}
+                onMouseOutSprite={this.handleMouseOutSprite}
+                onMouseOverSprite={this.handleMouseOverSprite}
                 onSelectSprite={this.handleSelectSprite}
             />
         );

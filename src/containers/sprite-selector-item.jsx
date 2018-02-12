@@ -12,7 +12,9 @@ class SpriteSelectorItem extends React.Component {
         bindAll(this, [
             'handleClick',
             'handleDelete',
-            'handleDuplicate'
+            'handleDuplicate',
+            'handleMouseOut',
+            'handleMouseOver'
         ]);
     }
     handleClick (e) {
@@ -30,6 +32,12 @@ class SpriteSelectorItem extends React.Component {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDuplicateButtonClick(this.props.id);
     }
+    handleMouseOut () {
+        this.props.onMouseOut(this.props.id);
+    }
+    handleMouseOver () {
+        this.props.onMouseOver(this.props.id);
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -38,6 +46,8 @@ class SpriteSelectorItem extends React.Component {
             onClick,
             onDeleteButtonClick,
             onDuplicateButtonClick,
+            onMouseOut,
+            onMouseOver,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
@@ -46,6 +56,8 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
+                onMouseOut={onMouseOut ? this.handleMouseOut : null}
+                onMouseOver={onMouseOver ? this.handleMouseOver : null}
                 {...props}
             />
         );
@@ -60,7 +72,8 @@ SpriteSelectorItem.propTypes = {
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
-    onHover: PropTypes.func,
+    onMouseOut: PropTypes.func,
+    onMouseOver: PropTypes.func,
     selected: PropTypes.bool
 };
 

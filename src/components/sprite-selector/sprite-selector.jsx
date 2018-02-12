@@ -30,6 +30,8 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteY,
         onDeleteSprite,
         onDuplicateSprite,
+        onMouseOutSprite,
+        onMouseOverSprite,
         onNewSpriteClick,
         onSelectSprite,
         raised,
@@ -85,6 +87,8 @@ const SpriteSelectorComponent = function (props) {
                                 onClick={onSelectSprite}
                                 onDeleteButtonClick={onDeleteSprite}
                                 onDuplicateButtonClick={onDuplicateSprite}
+                                onMouseOut={onMouseOutSprite}
+                                onMouseOver={onMouseOverSprite}
                             />
                         ))
                     }
@@ -110,6 +114,8 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onMouseOutSprite: PropTypes.func,
+    onMouseOverSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     raised: PropTypes.bool,

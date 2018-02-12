@@ -28,6 +28,8 @@ const TargetPane = ({
     onChangeSpriteY,
     onDeleteSprite,
     onDuplicateSprite,
+    onMouseOutSprite,
+    onMouseOverSprite,
     onNewSpriteClick,
     onRequestCloseSpriteLibrary,
     onRequestCloseBackdropLibrary,
@@ -55,6 +57,8 @@ const TargetPane = ({
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
+            onMouseOutSprite={onMouseOutSprite}
+            onMouseOverSprite={onMouseOverSprite}
             onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
@@ -117,6 +121,8 @@ TargetPane.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onMouseOutSprite: PropTypes.func,
+    onMouseOverSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,

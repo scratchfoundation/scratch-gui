@@ -52,7 +52,7 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         editingTarget,
         sprites,
         stage
-    } = state.targets;
+    } = state.gui.targets;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
     const costume = target && target.costumes[selectedCostumeIndex];
     return {

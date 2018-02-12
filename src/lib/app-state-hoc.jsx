@@ -4,7 +4,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import throttle from 'redux-throttle';
 
 import {intlInitialState, IntlProvider} from '../reducers/intl.js';
-import reducer from '../reducers/gui';
+import reducer from '../reducers/combine-reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(

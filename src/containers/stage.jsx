@@ -292,8 +292,8 @@ Stage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isColorPicking: state.colorPicker.active,
-    isFullScreen: state.stageSize.isFullScreen
+    isColorPicking: state.gui.colorPicker.active,
+    isFullScreen: state.gui.stageSize.isFullScreen
 });
 
 const mapDispatchToProps = dispatch => ({

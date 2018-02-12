@@ -6,10 +6,10 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
 import Box from '../components/box/box.jsx';
-import GUI from '../containers/gui.jsx';
+import GUI from '../index';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
-const mapStateToProps = state => ({vm: state.vm});
+const mapStateToProps = state => ({vm: state.gui.vm});
 
 const VMStage = connect(mapStateToProps)(Stage);
 const VMControls = connect(mapStateToProps)(Controls);

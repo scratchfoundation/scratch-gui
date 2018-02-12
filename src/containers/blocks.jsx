@@ -377,11 +377,11 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    extensionLibraryVisible: state.modals.extensionLibrary,
+    extensionLibraryVisible: state.gui.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,
-    toolboxXML: state.toolbox.toolboxXML,
-    customProceduresVisible: state.customProcedures.active
+    toolboxXML: state.gui.toolbox.toolboxXML,
+    customProceduresVisible: state.gui.customProcedures.active
 });
 
 const mapDispatchToProps = dispatch => ({

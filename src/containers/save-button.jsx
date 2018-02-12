@@ -61,7 +61,7 @@ SaveButton.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    saveProjectSb3: state.vm.saveProjectSb3.bind(state.vm)
+    saveProjectSb3: state.gui.vm.saveProjectSb3.bind(state.vm)
 });
 
 export default connect(

@@ -46,7 +46,7 @@ LoadButton.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    loadProject: state.vm.fromJSON.bind(state.vm)
+    loadProject: state.gui.vm.fromJSON.bind(state.vm)
 });
 
 export default connect(

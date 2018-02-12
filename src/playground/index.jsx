@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
-import analytics from './lib/analytics';
-import AppStateHOC from './lib/app-state-hoc.jsx';
-import GUI from './containers/gui.jsx';
-import ProjectLoaderHOC from './lib/project-loader-hoc.jsx';
+import analytics from '../lib/analytics';
+import AppStateHOC from '../lib/app-state-hoc.jsx';
+import GUI from '../containers/gui.jsx';
+import ProjectLoaderHOC from './project-loader-hoc.jsx';
 
 import styles from './index.css';
 

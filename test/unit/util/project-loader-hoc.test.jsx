@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectLoaderHOC from '../../../src/lib/project-loader-hoc.jsx';
+import ProjectLoaderHOC from '../../../src/playground/project-loader-hoc.jsx';
 import storage from '../../../src/lib/storage';
 import {mount} from 'enzyme';
 

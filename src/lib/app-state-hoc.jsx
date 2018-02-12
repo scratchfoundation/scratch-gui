@@ -3,7 +3,9 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import throttle from 'redux-throttle';
 
-import {intlInitialState, IntlProvider} from '../reducers/intl.js';
+import {intlShape} from 'react-intl';
+import {IntlProvider, updateIntl} from 'react-intl-redux';
+import {intlInitialState} from '../reducers/intl.js';
 import reducer from '../reducers/gui';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,7 +14,6 @@ const enhancer = composeEnhancers(
         throttle(300, {leading: true, trailing: true})
     )
 );
-const store = createStore(reducer, intlInitialState, enhancer);
 
 import ErrorBoundary from '../containers/error-boundary.jsx';
 
@@ -22,15 +23,32 @@ import ErrorBoundary from '../containers/error-boundary.jsx';
  * @returns {React.Component} component with redux and intl state provided
  */
 const AppStateHOC = function (WrappedComponent) {
-    const AppStateWrapper = ({...props}) => (
-        <Provider store={store}>
-            <IntlProvider>
-                <ErrorBoundary>
-                    <WrappedComponent {...props} />
-                </ErrorBoundary>
-            </IntlProvider>
-        </Provider>
-    );
+    class AppStateWrapper extends React.Component {
+        constructor (props) {
+            super(props);
+            this.store = createStore(reducer, (props.intl || intlInitialState), enhancer);
+        }
+        componentDidUpdate (prevProps) {
+            if (prevProps.intl !== this.props.intl) updateIntl(this.props.intl);
+        }
+        render () {
+            return (
+                <Provider store={this.store}>
+                    <IntlProvider>
+                        <ErrorBoundary>
+                            <WrappedComponent {...this.props} />
+                        </ErrorBoundary>
+                    </IntlProvider>
+                </Provider>
+            );
+
+        }
+
+
+    }
+    AppStateWrapper.propTypes = {
+        intl: intlShape
+    };
     return AppStateWrapper;
 };
 

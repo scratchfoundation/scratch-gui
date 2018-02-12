@@ -19,10 +19,10 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
         lib: ['react', 'react-dom'],
-        gui: './src/index.jsx',
-        blocksonly: './src/examples/blocks-only.jsx',
-        compatibilitytesting: './src/examples/compatibility-testing.jsx',
-        player: './src/examples/player.jsx'
+        gui: './src/playground/index.jsx',
+        blocksonly: './src/playground/blocks-only.jsx',
+        compatibilitytesting: './src/playground/compatibility-testing.jsx',
+        player: './src/playground/player.jsx'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -82,24 +82,24 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             chunks: ['lib', 'gui'],
-            template: 'src/index.ejs',
+            template: 'src/playground/index.ejs',
             title: 'Scratch 3.0 GUI'
         }),
         new HtmlWebpackPlugin({
             chunks: ['lib', 'blocksonly'],
-            template: 'src/index.ejs',
+            template: 'src/playground/index.ejs',
             filename: 'blocks-only.html',
             title: 'Scratch 3.0 GUI: Blocks Only Example'
         }),
         new HtmlWebpackPlugin({
             chunks: ['lib', 'compatibilitytesting'],
-            template: 'src/index.ejs',
+            template: 'src/playground/index.ejs',
             filename: 'compatibility-testing.html',
             title: 'Scratch 3.0 GUI: Compatibility Testing'
         }),
         new HtmlWebpackPlugin({
             chunks: ['lib', 'player'],
-            template: 'src/index.ejs',
+            template: 'src/playground/index.ejs',
             filename: 'player.html',
             title: 'Scratch 3.0 GUI: Player Example'
         }),

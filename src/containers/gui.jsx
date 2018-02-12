@@ -12,6 +12,7 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import AppStateHOC from '../lib/app-state-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
@@ -115,4 +116,4 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-export default vmListenerHOC(ConnectedGUI);
+export default AppStateHOC(vmListenerHOC(ConnectedGUI));

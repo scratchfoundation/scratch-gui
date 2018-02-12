@@ -15,6 +15,7 @@ import {
 } from '../reducers/color-picker';
 
 const colorPickerRadius = 20;
+const dragThreshold = 3; // Same as the block drag threshold
 
 class Stage extends React.Component {
     constructor (props) {
@@ -149,9 +150,13 @@ class Stage extends React.Component {
         this.pickX = mousePosition[0];
         this.pickY = mousePosition[1];
 
-        if (this.state.mouseDownTimeoutId !== null) {
-            this.cancelMouseDownTimeout();
-            if (this.state.mouseDown && !this.state.isDragging) {
+        if (this.state.mouseDown && !this.state.isDragging) {
+            const distanceFromMouseDown = Math.sqrt(
+                Math.pow(mousePosition[0] - this.state.mouseDownPosition[0], 2) +
+                Math.pow(mousePosition[1] - this.state.mouseDownPosition[1], 2)
+            );
+            if (distanceFromMouseDown > dragThreshold) {
+                this.cancelMouseDownTimeout();
                 this.onStartDrag(...this.state.mouseDownPosition);
             }
         }

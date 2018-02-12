@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
@@ -31,6 +32,7 @@ const SpriteSelectorComponent = function (props) {
         onDuplicateSprite,
         onNewSpriteClick,
         onSelectSprite,
+        raised,
         selectedId,
         sprites,
         ...componentProps
@@ -72,7 +74,10 @@ const SpriteSelectorComponent = function (props) {
                         .map(sprite => (
                             <SpriteSelectorItem
                                 assetId={sprite.costume && sprite.costume.assetId}
-                                className={styles.sprite}
+                                className={
+                                    (raised && sprite.id !== selectedId) ?
+                                    classNames(styles.sprite, styles.raised) : styles.sprite
+                                }
                                 id={sprite.id}
                                 key={sprite.id}
                                 name={sprite.name}
@@ -107,6 +112,7 @@ SpriteSelectorComponent.propTypes = {
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    raised: PropTypes.bool,
     selectedId: PropTypes.string,
     sprites: PropTypes.shape({
         id: PropTypes.shape({

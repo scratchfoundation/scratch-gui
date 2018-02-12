@@ -92,6 +92,7 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
+    raiseSprites: state.blockdrag,
     spriteLibraryVisible: state.modals.spriteLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });

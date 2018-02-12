@@ -32,6 +32,7 @@ const TargetPane = ({
     onRequestCloseSpriteLibrary,
     onRequestCloseBackdropLibrary,
     onSelectSprite,
+    raiseSprites,
     stage,
     sprites,
     vm,
@@ -43,6 +44,7 @@ const TargetPane = ({
     >
 
         <SpriteSelectorComponent
+            raised={raiseSprites}
             selectedId={editingTarget}
             sprites={sprites}
             onChangeSpriteDirection={onChangeSpriteDirection}
@@ -120,6 +122,7 @@ TargetPane.propTypes = {
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,

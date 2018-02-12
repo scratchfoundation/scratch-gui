@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import colorPickerReducer from './color-picker';
 import customProceduresReducer from './custom-procedures';
+import blockDragReducer from './blockdrag';
 import intlReducer from './intl';
 import modalReducer from './modals';
 import monitorReducer from './monitors';
@@ -12,6 +13,7 @@ import stageSizeReducer from './stage-size';
 import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
+    blockdrag: blockDragReducer,
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     intl: intlReducer,

@@ -60,6 +60,7 @@ SpriteSelectorItem.propTypes = {
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
+    onHover: PropTypes.func,
     selected: PropTypes.bool
 };
 

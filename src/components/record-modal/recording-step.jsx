@@ -40,7 +40,10 @@ const RecordingStep = props => (
                 onClick={props.recording ? props.onStopRecording : props.onRecord}
             >
                 {props.recording ? (
-                    <img src={stopIcon} />
+                    <img
+                        draggable={false}
+                        src={stopIcon}
+                    />
                 ) : (
                     <svg
                         className={styles.recordButton}

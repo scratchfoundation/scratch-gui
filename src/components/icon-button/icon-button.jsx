@@ -16,6 +16,7 @@ const IconButton = ({
     >
         <img
             className={styles.icon}
+            draggable={false}
             src={img}
         />
         <div className={styles.title}>

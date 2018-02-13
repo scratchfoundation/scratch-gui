@@ -28,6 +28,7 @@ const MenuBar = props => (
                 <img
                     alt="Scratch"
                     className={styles.scratchLogo}
+                    draggable={false}
                     src={scratchLogo}
                 />
             </div>
@@ -42,6 +43,7 @@ const MenuBar = props => (
             >
                 <img
                     className={styles.feedbackButtonIcon}
+                    draggable={false}
                     src={feedbackIcon}
                 />
                 <span className={styles.feedbackText}>

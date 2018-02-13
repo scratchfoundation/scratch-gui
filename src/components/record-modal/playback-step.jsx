@@ -42,7 +42,10 @@ const PlaybackStep = props => (
                 className={styles.mainButton}
                 onClick={props.playing ? props.onStopPlaying : props.onPlay}
             >
-                <img src={props.playing ? stopIcon : playIcon} />
+                <img
+                    draggable={false}
+                    src={props.playing ? stopIcon : playIcon}
+                />
                 <div className={styles.helpText}>
                     <span className={styles.playingText}>
                         {props.playing ? 'Stop' : 'Play'}
@@ -55,7 +58,10 @@ const PlaybackStep = props => (
                 className={styles.cancelButton}
                 onClick={props.onBack}
             >
-                <img src={backIcon} /> Re-record
+                <img
+                    draggable={false}
+                    src={backIcon}
+                /> Re-record
             </button>
             <button
                 className={styles.okButton}

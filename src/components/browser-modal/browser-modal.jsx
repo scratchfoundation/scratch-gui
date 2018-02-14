@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactModal from 'react-modal';
 import Box from '../box/box.jsx';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import styles from './browser-modal.css';
 
@@ -18,16 +17,14 @@ const BrowserModal = ({intl, ...props}) => (
     <ReactModal
         isOpen
         className={styles.modalContent}
-        contentLabel={intl.formatMessage({...messages.label})}
+        contentLabel="Internet Explorer is not supported"
         overlayClassName={styles.modalOverlay}
         onRequestClose={props.onBack}
     >
         <Box className={styles.illustration} />
 
         <Box className={styles.body}>
-            <h2>
-                <FormattedMessage {...messages.label} />
-            </h2>
+            <h2>Internet Explorer is not supported</h2>
             <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
@@ -43,42 +40,25 @@ const BrowserModal = ({intl, ...props}) => (
                     className={styles.backButton}
                     onClick={props.onBack}
                 >
-                    <FormattedMessage
-                        defaultMessage="Back"
-                        description="Label for button go back when browser is unsupported"
-                        id="gui.unsupportedBrowser.back"
-                    />
+                    Back
                 </button>
 
             </Box>
             <div className={styles.faqLinkText}>
-                <FormattedMessage
-                    defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Scratch 3.0 FAQ description"
-                    id="gui.unsupportedBrowser.previewfaq"
-                    values={{
-                        previewFaqLink: (
-                            <a
-                                className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="preview FAQ"
-                                    description="link to Scratch 3.0 FAQ page"
-                                    id="gui.unsupportedBrowser.previewfaqlink"
-                                />
-                            </a>
-                        )
-                    }}
-                />
+                To learn more, go to the {' '}
+                <a
+                    className={styles.faqLink}
+                    href="//scratch.mit.edu/preview-faq"
+                >
+                    preview FAQ
+                </a>.
             </div>
         </Box>
     </ReactModal>
 );
 
 BrowserModal.propTypes = {
-    intl: intlShape.isRequired,
     onBack: PropTypes.func.isRequired
 };
 
-export default injectIntl(BrowserModal);
+export default BrowserModal;

@@ -22,6 +22,10 @@ const base = {
         library: 'GUI',
         filename: '[name].js'
     },
+    externals: {
+        React: 'react',
+        ReactDOM: 'react-dom'
+    },
     module: {
         rules: [{
             test: /\.jsx?$/,
@@ -69,7 +73,8 @@ const base = {
     ] : [])
 };
 
-module.exports = [
+module.exports = (
+    process.env.NODE_ENV === 'production' ?
     // export as library
     defaultsDeep({}, base, {
         target: 'web',

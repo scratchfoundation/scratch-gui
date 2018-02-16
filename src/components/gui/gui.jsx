@@ -37,7 +37,6 @@ const GUIComponent = props => {
     const {
         basePath,
         children,
-        enableExtensions,
         intl,
         feedbackFormVisible,
         vm,
@@ -109,9 +108,7 @@ const GUIComponent = props => {
                                 </Box>
                                 <Box className={styles.extensionButtonContainer}>
                                     <button
-                                        className={classNames(styles.extensionButton, {
-                                            [styles.hidden]: !enableExtensions
-                                        })}
+                                        className={styles.extensionButton}
                                         title={intl.formatMessage(messages.addExtension)}
                                         onClick={onExtensionButtonClick}
                                     >
@@ -164,7 +161,6 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
-    enableExtensions: PropTypes.bool,
     feedbackFormVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     onExtensionButtonClick: PropTypes.func,

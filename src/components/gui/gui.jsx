@@ -35,15 +35,18 @@ const messages = defineMessages({
 
 const GUIComponent = props => {
     const {
+        activeTabIndex,
         basePath,
+        blocksTabVisible,
         children,
+        costumesTabVisible,
         intl,
         feedbackFormVisible,
         vm,
         previewInfoVisible,
+        soundsTabVisible,
         onExtensionButtonClick,
-        onTabSelect,
-        tabIndex,
+        onActivateTab,
         ...componentProps
     } = props;
     if (children) {
@@ -86,9 +89,10 @@ const GUIComponent = props => {
                         <Tabs
                             className={tabClassNames.tabs}
                             forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
+                            selectedIndex={activeTabIndex}
                             selectedTabClassName={tabClassNames.tabSelected}
                             selectedTabPanelClassName={tabClassNames.tabPanelSelected}
-                            onSelect={onTabSelect}
+                            onSelect={onActivateTab}
                         >
                             <TabList className={tabClassNames.tabList}>
                                 <Tab className={tabClassNames.tab}>Blocks</Tab>
@@ -99,7 +103,7 @@ const GUIComponent = props => {
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
-                                        isVisible={tabIndex === 0} // Blocks tab
+                                        isVisible={blocksTabVisible}
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}
@@ -121,10 +125,10 @@ const GUIComponent = props => {
                                 </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
+                                {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                {tabIndex === 2 ? <SoundTab vm={vm} /> : null}
+                                {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                             </TabPanel>
                         </Tabs>
                     </Box>
@@ -159,14 +163,17 @@ const GUIComponent = props => {
     );
 };
 GUIComponent.propTypes = {
+    activeTabIndex: PropTypes.number,
     basePath: PropTypes.string,
+    blocksTabVisible: PropTypes.bool,
     children: PropTypes.node,
+    costumesTabVisible: PropTypes.bool,
     feedbackFormVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
-    onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    tabIndex: PropTypes.number,
+    soundsTabVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

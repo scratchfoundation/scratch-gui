@@ -9,6 +9,7 @@ import targetReducer from './targets';
 import toolboxReducer from './toolbox';
 import vmReducer from './vm';
 import stageSizeReducer from './stage-size';
+import navigationReducer from './navigation';
 import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
@@ -19,6 +20,7 @@ export default combineReducers({
     modals: modalReducer,
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,
+    navigation: navigationReducer,
     targets: targetReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,

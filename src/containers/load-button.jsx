@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import JSZip from 'jszip';
 
 import LoadButtonComponent from '../components/load-button/load-button.jsx';
 
@@ -16,8 +17,11 @@ class LoadButton extends React.Component {
     }
     handleChange (e) {
         const reader = new FileReader();
-        reader.onload = () => this.props.loadProject(reader.result);
-        reader.readAsText(e.target.files[0]);
+        reader.onload = () => {
+            JSZip.loadAsync(reader.result)
+                .then(zip => this.props.loadProject(zip));
+        };
+        reader.readAsArrayBuffer(e.target.files[0]);
     }
     handleClick () {
         this.fileInput.click();
@@ -46,7 +50,7 @@ LoadButton.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    loadProject: state.vm.fromJSON.bind(state.vm)
+    loadProject: state.vm.loadProjectLocal.bind(state.vm)
 });
 
 export default connect(

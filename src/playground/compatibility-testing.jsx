@@ -6,7 +6,7 @@ import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
-import ProjectLoaderHOC from './project-loader-hoc.jsx';
+import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
 const mapStateToProps = state => ({vm: state.vm});
 

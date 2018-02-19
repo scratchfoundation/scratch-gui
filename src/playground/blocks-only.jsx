@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import Controls from '../containers/controls.jsx';
 import Blocks from '../containers/blocks.jsx';
 import GUI from '../containers/gui.jsx';
-import ProjectLoaderHOC from './project-loader-hoc.jsx';
+import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
 import styles from './blocks-only.css';
 

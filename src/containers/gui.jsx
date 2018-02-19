@@ -13,6 +13,7 @@ import {
 } from '../reducers/editor-tab';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
+import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
@@ -116,4 +117,4 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-export default AppStateHOC(vmListenerHOC(ConnectedGUI));
+export default ProjectLoaderHOC(AppStateHOC(vmListenerHOC(ConnectedGUI)));

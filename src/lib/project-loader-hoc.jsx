@@ -1,8 +1,8 @@
 import React from 'react';
 
-import analytics from '../lib/analytics';
-import log from '../lib/log';
-import storage from '../lib/storage';
+import analytics from './analytics';
+import log from './log';
+import storage from './storage';
 
 /* Higher Order Component to provide behavior for loading projects by id from
  * the window's hash (#this part in the url)

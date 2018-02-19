@@ -62,7 +62,10 @@ const base = {
         },
         {
             test: /\.(svg|png|wav)$/,
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+                outputPath: 'static/assets/'
+            }
         }]
     },
     plugins: [].concat(process.env.NODE_ENV === 'production' ? [
@@ -99,7 +102,7 @@ module.exports = (
                 context: 'node_modules/scratch-vm/dist/web'
             }])
         ])
-    }),
+    }) :
     // to run editor examples
     defaultsDeep({}, base, {
         entry: {
@@ -168,4 +171,4 @@ module.exports = (
             }])
         ])
     })
-];
+);

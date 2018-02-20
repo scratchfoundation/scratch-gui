@@ -78,7 +78,7 @@ const SpriteSelectorComponent = function (props) {
                                 assetId={sprite.costume && sprite.costume.assetId}
                                 className={
                                     (raised && sprite.id !== selectedId) ?
-                                    classNames(styles.sprite, styles.raised) : styles.sprite
+                                        classNames(styles.sprite, styles.raised) : styles.sprite
                                 }
                                 id={sprite.id}
                                 key={sprite.id}

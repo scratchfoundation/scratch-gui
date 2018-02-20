@@ -57,7 +57,6 @@ Selector.propTypes = {
         url: PropTypes.string,
         name: PropTypes.string.isRequired
     })),
-    raiseSprites: PropTypes.bool,
     onDeleteClick: PropTypes.func,
     onItemClick: PropTypes.func.isRequired,
     selectedItemIndex: PropTypes.number.isRequired

@@ -7,6 +7,7 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   onContextMenu={[Function]}
   onMouseDown={[Function]}
   onMouseOut={[Function]}
+  onMouseOver={undefined}
   onMouseUp={[Function]}
   onTouchEnd={[Function]}
   onTouchStart={[Function]}

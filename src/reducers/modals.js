@@ -7,6 +7,7 @@ const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
 const MODAL_FEEDBACK_FORM = 'feedbackForm';
+const MODAL_IMPORT_INFO = 'importInfo';
 const MODAL_PREVIEW_INFO = 'previewInfo';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
@@ -18,6 +19,7 @@ const initialState = {
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
     [MODAL_FEEDBACK_FORM]: false,
+    [MODAL_IMPORT_INFO]: false,
     [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
@@ -67,6 +69,14 @@ const openFeedbackForm = function () {
     analytics.pageview('/modals/feedback');
     return openModal(MODAL_FEEDBACK_FORM);
 };
+const openImportInfo = function () {
+    analytics.pageview('modals/import');
+    return openModal(MODAL_IMPORT_INFO);
+};
+const openPreviewInfo = function () {
+    analytics.pageview('/modals/preview');
+    return openModal(MODAL_PREVIEW_INFO);
+};
 const openSoundLibrary = function () {
     analytics.pageview('/libraries/sounds');
     return openModal(MODAL_SOUND_LIBRARY);
@@ -79,10 +89,6 @@ const openSoundRecorder = function () {
     analytics.pageview('/modals/microphone');
     return openModal(MODAL_SOUND_RECORDER);
 };
-const openPreviewInfo = function () {
-    analytics.pageview('/modals/preview');
-    return openModal(MODAL_PREVIEW_INFO);
-};
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -94,6 +100,9 @@ const closeExtensionLibrary = function () {
 };
 const closeFeedbackForm = function () {
     return closeModal(MODAL_FEEDBACK_FORM);
+};
+const closeImportInfo = function () {
+    return closeModal(MODAL_IMPORT_INFO);
 };
 const closePreviewInfo = function () {
     return closeModal(MODAL_PREVIEW_INFO);
@@ -113,6 +122,7 @@ export {
     openCostumeLibrary,
     openExtensionLibrary,
     openFeedbackForm,
+    openImportInfo,
     openPreviewInfo,
     openSoundLibrary,
     openSpriteLibrary,
@@ -121,6 +131,7 @@ export {
     closeCostumeLibrary,
     closeExtensionLibrary,
     closeFeedbackForm,
+    closeImportInfo,
     closePreviewInfo,
     closeSpriteLibrary,
     closeSoundLibrary,

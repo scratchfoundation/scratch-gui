@@ -1,0 +1,200 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+@import "../../css/typography.css";
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: hsla(215, 100%, 65%, .9);
+}
+
+.modal-content {
+    margin: 100px auto;
+    outline: none;
+    border: .25rem solid hsla(0, 100%, 100%, .25);
+    padding: 0;
+    border-radius: $space;
+    user-select: none;
+    width: 500px;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    color: $text-primary;
+    overflow: hidden;
+}
+
+/* .illustration {
+    width: 100%;
+    height: 208px;
+    background-color: $motion-primary;
+    background-image: url('./welcome.png');
+    background-size: cover;
+} */
+
+/* .input {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+    padding: 0 1rem;
+    height: 3rem;
+    color: #6b6b6b;
+    font-size: .875rem;
+} */
+
+/*
+    Modal header has 3 items:
+    |filter     title       x|
+
+    Use the same width for both side item containers,
+    so that title remains centered
+*/
+$sides: 20rem;
+
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: $library-header-height;
+
+    box-sizing: border-box;
+    width: 100%;
+    background-color: $import-primary;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    color: white;
+    user-select: none;
+}
+
+.header-item-filter {
+    display: flex;
+    flex-basis: $sides;
+    justify-content: flex-end;
+}
+
+.header-item-title {
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    user-select: none;
+    letter-spacing: 0.4px;
+    cursor: default;
+}
+
+.header-item-close {
+    display: flex;
+    flex-basis: $sides;
+    justify-content: flex-start;
+}
+
+.body {
+    background: $ui-pane-gray;
+    padding: 1.5rem 2.25rem;
+    text-align: center;
+}
+
+.input-row {
+    margin: 1.5rem 0;
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    /*border: 1px solid $import-primary;
+    border-radius: 0.25rem;*/
+}
+
+.input-row input {
+    width: 100%;
+    padding: 0 1rem;
+    height: 3rem;
+    color: #6b6b6b;
+    font-size: .875rem;
+}
+
+.input-row input::placeholder {
+    font-style: italic;
+    color: rgba(87,94,117,0.5);
+}
+
+.input-row input:focus {
+    outline: none;
+    border: 1px solid $motion-primary;
+    border-radius: 0.25rem
+}
+
+.input-row button {
+    padding: 0.5rem 2rem;
+    font-weight: bold;
+    font-size: .875rem;
+    cursor: pointer;
+    border: 1px solid $import-primary;
+    border-radius: 0.25rem;
+}
+
+.input-row button.ok-button {
+    background: $import-primary;
+    color: white;
+}
+
+/* .buttonRow input + button {
+    border: 1px solid $motion-primary; /* rgba(0,0,0,.1);
+    border-radius: 0.25rem;
+} */
+
+/* Confirmation buttons at the bottom of the modal */
+.button-row {
+    margin: 1.5rem 0;
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+}
+
+.button-row button {
+    padding: 0.5rem 2rem;
+    background: white;
+    font-weight: bold;
+    font-size: .875rem;
+    cursor: pointer;
+}
+
+.button-row button.no-button {
+    border: 1px solid $motion-primary;
+    border-radius: 0.25rem;
+    color: $motion-primary;
+}
+.button-row button + button {
+    margin-left: 0.5rem;
+}
+
+/* .cat-icon {
+    margin-left: .125rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+} */
+
+.faq-link-text {
+    margin: 2rem 0 .5rem 0;
+    font-size: .875rem;
+    color: $text-primary;
+}
+
+.faq-link {
+    color: $motion-primary;
+    text-decoration: none;
+}

@@ -53,6 +53,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     ...GUIComponent.propTypes,
     feedbackFormVisible: PropTypes.bool,
+    importInfoVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
@@ -65,6 +66,7 @@ const mapStateToProps = state => ({
     blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
+    importInfoVisible: state.modals.importInfo,
     previewInfoVisible: state.modals.previewInfo,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });

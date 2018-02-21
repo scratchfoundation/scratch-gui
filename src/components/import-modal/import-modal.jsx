@@ -6,6 +6,7 @@ import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-int
 import classNames from 'classnames';
 
 import CloseButton from '../close-button/close-button.jsx';
+import ImportInput from '../import-input/import-input.jsx';
 
 import styles from './import-modal.css';
 
@@ -64,12 +65,16 @@ const ImportModal = ({intl, ...props}) => (
             </p>
 
             <Box className={styles.inputRow}>
-                <input
-                    autoFocus
-                    className={styles.input}
+                <ImportInput
                     placeholder={props.placeholder}
                     onChange={props.onChange}
                     onKeyPress={props.onKeyPress}
+                    errorMessage={props.errorMessage}
+                    hasValidationError={props.hasValidationError}
+                    inputValue={props.inputValue}
+                    okClassName={styles.okInput}
+                    badClassName={styles.badInput}
+                    errorDivClassName={styles.errorDiv}
                 />
                 <button
                     className={styles.okButton}
@@ -127,6 +132,8 @@ ImportModal.propTypes = {
     onKeyPress: PropTypes.func.isRequired,
     onViewProject: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    hasValidationError: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string.isRequired
 };
 
 export default injectIntl(ImportModal);

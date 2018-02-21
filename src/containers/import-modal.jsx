@@ -23,7 +23,9 @@ class ImportModal extends React.Component {
         ]);
 
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            hasValidationError: false,
+            errorMessage: ''
         };
     }
     handleKeyPress (event) {
@@ -41,12 +43,10 @@ class ImportModal extends React.Component {
             document.body.removeChild(projectLink);
             this.handleCancel();
         } else {
-            console.log("Error")
+            this.setState({
+                hasValidationError: true,
+                errorMessage: `Uh oh, that link doesn't look quite right.`});
         }
-
-        // window.
-        // this.setState({previewing: true});
-        // this.props.onViewProject();
     }
     handleChange (e) {
         this.setState({inputValue: e.target.value});
@@ -82,6 +82,9 @@ class ImportModal extends React.Component {
                 placeholder='scratch.mit.edu/projects/123456789'
                 onKeyPress={this.handleKeyPress}
                 onChange={this.handleChange}
+                errorMessage={this.state.errorMessage}
+                hasValidationError={this.state.hasValidationError}
+                inputValue={this.state.inputValue}
             /> :
             <BrowserModalComponent
                 onBack={this.handleGoBack}

@@ -113,8 +113,12 @@ $sides: 20rem;
     text-align: right;
     display: flex;
     justify-content: center;
-    /*border: 1px solid $import-primary;
-    border-radius: 0.25rem;*/
+}
+
+.input-row div.error-div {
+    margin: 0;
+    width: 100%;
+    padding: 0;
 }
 
 .input-row input {
@@ -130,9 +134,15 @@ $sides: 20rem;
     color: rgba(87,94,117,0.5);
 }
 
-.input-row input:focus {
+.input-row input.ok-input:focus {
     outline: none;
     border: 1px solid $motion-primary;
+    border-radius: 0.25rem
+}
+
+.input-row input.bad-input:focus {
+    outline: none;
+    border: 1px solid $data-primary;
     border-radius: 0.25rem
 }
 

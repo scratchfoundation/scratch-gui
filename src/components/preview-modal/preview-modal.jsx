@@ -111,7 +111,8 @@ const PreviewModal = ({intl, ...props}) => (
 PreviewModal.propTypes = {
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onTryIt: PropTypes.func.isRequired
+    onTryIt: PropTypes.func.isRequired,
+    onViewProject: PropTypes.func.isRequired
 };
 
 export default injectIntl(PreviewModal);

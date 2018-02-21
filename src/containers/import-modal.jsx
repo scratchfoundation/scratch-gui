@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import platform from 'platform';
-// import RegExp from 'regex';
 
 import ImportModalComponent from '../components/import-modal/import-modal.jsx';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
+
+import log from '../lib/log';
 
 import {
     closeImportInfo
@@ -41,33 +42,33 @@ class ImportModal extends React.Component {
             projectLink.href = `#${projectId}`;
             projectLink.click();
             document.body.removeChild(projectLink);
-            this.handleCancel();
+            this.props.onViewProject();
         } else {
             this.setState({
                 hasValidationError: true,
                 errorMessage: `Uh oh, that link doesn't look quite right.`});
+            log.info('Invalid link error');
         }
     }
     handleChange (e) {
         this.setState({inputValue: e.target.value});
     }
     validate (input) {
-        //const regex1 = RegExp(
-        //const regex2 = RegExp('^scratch.mit.edu/projects/');
         const matches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?)$/);
-        if (matches != null && matches.length > 0) {
-            console.log("Project ID: " + matches[2]);
+        if (matches && matches.length > 0) {
+            log.info(`Project ID: ${matches[2]}`);
             return matches[2];
         }
         return null;
     }
     handleCancel () {
-        // this.setState({previewing: false});
         this.props.onCancel();
     }
     handleGoBack () {
         window.location.replace('https://scratch.mit.edu');
     }
+    // TODO not sure if we need this, since it shouldn't be possible to bring up this
+    // modal without first going through the preview modal
     supportedBrowser () {
         if (platform.name === 'IE') {
             return false;
@@ -77,14 +78,14 @@ class ImportModal extends React.Component {
     render () {
         return (this.supportedBrowser() ?
             <ImportModalComponent
-                onCancel={this.handleCancel}
-                onViewProject={this.handleViewProject}
-                placeholder='scratch.mit.edu/projects/123456789'
-                onKeyPress={this.handleKeyPress}
-                onChange={this.handleChange}
                 errorMessage={this.state.errorMessage}
                 hasValidationError={this.state.hasValidationError}
                 inputValue={this.state.inputValue}
+                placeholder="scratch.mit.edu/projects/123456789"
+                onCancel={this.handleCancel}
+                onChange={this.handleChange}
+                onKeyPress={this.handleKeyPress}
+                onViewProject={this.handleViewProject}
             /> :
             <BrowserModalComponent
                 onBack={this.handleGoBack}
@@ -94,8 +95,8 @@ class ImportModal extends React.Component {
 }
 
 ImportModal.propTypes = {
-    onViewProject: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
+    onViewProject: PropTypes.func
 };
 
 const mapStateToProps = () => ({});

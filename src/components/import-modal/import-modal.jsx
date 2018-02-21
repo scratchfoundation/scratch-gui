@@ -15,6 +15,12 @@ const messages = defineMessages({
         id: 'gui.importInfo.title',
         defaultMessage: 'View a Scratch 2.0 Project',
         description: 'Scratch 2.0 import modal label - for accessibility'
+    },
+    formDescription: {
+        defaultMessage:
+            'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved.',
+        description: 'Import project message',
+        id: 'gui.importInfo.message'
     }
 });
 
@@ -57,24 +63,20 @@ const ImportModal = ({intl, ...props}) => (
 
         <Box className={styles.body}>
             <p>
-                <FormattedMessage
-                    defaultMessage="Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved."
-                    description="Import project message"
-                    id="gui.importInfo.message"
-                />
+                {intl.formatMessage({...messages.formDescription})}
             </p>
 
             <Box className={styles.inputRow}>
                 <ImportInput
-                    placeholder={props.placeholder}
-                    onChange={props.onChange}
-                    onKeyPress={props.onKeyPress}
+                    badClassName={styles.badInput}
+                    errorDivClassName={styles.errorDiv}
                     errorMessage={props.errorMessage}
                     hasValidationError={props.hasValidationError}
                     inputValue={props.inputValue}
                     okClassName={styles.okInput}
-                    badClassName={styles.badInput}
-                    errorDivClassName={styles.errorDiv}
+                    placeholder={props.placeholder}
+                    onChange={props.onChange}
+                    onKeyPress={props.onKeyPress}
                 />
                 <button
                     className={styles.okButton}
@@ -126,14 +128,15 @@ const ImportModal = ({intl, ...props}) => (
 );
 
 ImportModal.propTypes = {
+    errorMessage: PropTypes.string.isRequired,
+    hasValidationError: PropTypes.bool.isRequired,
+    inputValue: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onViewProject: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    hasValidationError: PropTypes.bool.isRequired,
-    errorMessage: PropTypes.string.isRequired
+    placeholder: PropTypes.string
 };
 
 export default injectIntl(ImportModal);

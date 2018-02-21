@@ -1,11 +1,14 @@
 import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {/* defineMessages, */injectIntl/* , intlShape, FormattedMessage*/} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import styles from './import-error.css';
+
+// TODO store different error messages depending on the situation (?) and
+// needs to use intl lib for localization support
 
 class ImportErrorContent extends React.Component {
     constructor (props) {
@@ -56,10 +59,11 @@ class ImportErrorContent extends React.Component {
 
 ImportErrorContent.propTypes = {
     className: PropTypes.string,
-    intl: intlShape,
+    errorMessage: PropTypes.string.isRequired,
+    // intl: intlShape,
     place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    tooltipId: PropTypes.string.isRequired,
-    errorMessage: PropTypes.string.isRequired
+    tooltipId: PropTypes.string.isRequired
+
 };
 
 ImportErrorContent.defaultProps = {
@@ -82,9 +86,9 @@ const ImportErrorTooltip = props => (
         </div>
         <ImportError
             className={props.tooltipClassName}
+            errorMessage={props.errorMessage}
             place={props.place}
             tooltipId={props.tooltipId}
-            errorMessage={props.errorMessage}
         />
     </div>
 );
@@ -94,10 +98,11 @@ ImportErrorTooltip.propTypes = {
     className: PropTypes.string,
     delayHide: PropTypes.number,
     delayShow: PropTypes.number,
+    errorMessage: PropTypes.string.isRequired,
     place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     tooltipClassName: PropTypes.string,
-    tooltipId: PropTypes.string.isRequired,
-    errorMessage: PropTypes.string.isRequired
+    tooltipId: PropTypes.string.isRequired
+
 };
 
 ImportErrorTooltip.defaultProps = {

@@ -142,6 +142,7 @@ class CostumeTab extends React.Component {
         const addBlankMessage = target.isStage ? messages.addBlankBackdropMsg : messages.addBlankCostumeMsg;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
+
         return (
             <AssetPanel
                 buttons={[

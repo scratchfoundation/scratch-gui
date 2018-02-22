@@ -252,7 +252,10 @@ class Blocks extends React.Component {
     }
     handleCustomProceduresClose (data) {
         this.props.onRequestCloseCustomProcedures(data);
-        this.workspace.refreshToolboxSelection_();
+        const ws = this.workspace;
+        ws.refreshToolboxSelection_();
+        // @todo ensure this does not break on localization
+        ws.toolbox_.scrollToCategoryByName('My Blocks');
     }
     render () {
         /* eslint-disable no-unused-vars */

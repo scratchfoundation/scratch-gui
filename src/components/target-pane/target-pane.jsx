@@ -29,6 +29,8 @@ const TargetPane = ({
     onDeleteSprite,
     onDuplicateSprite,
     onNewSpriteClick,
+    onSurpriseSpriteClick,
+    onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
     onRequestCloseBackdropLibrary,
     onSelectSprite,
@@ -54,7 +56,9 @@ const TargetPane = ({
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
             onNewSpriteClick={onNewSpriteClick}
+            onSurpriseSpriteClick={onSurpriseSpriteClick}
             onSelectSprite={onSelectSprite}
+            onPaintSpriteClick={onPaintSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector

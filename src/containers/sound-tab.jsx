@@ -8,9 +8,14 @@ import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import soundIcon from '../components/asset-panel/icon--sound.svg';
 import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-lib.svg';
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
+import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
+import surpriseIcon from '../components/action-menu/icon--surprise.svg';
+
 import RecordModal from './record-modal.jsx';
 import SoundEditor from './sound-editor.jsx';
 import SoundLibrary from './sound-library.jsx';
+
+import soundLibraryContent from '../lib/libraries/sounds.json';
 
 import {connect} from 'react-redux';
 
@@ -27,7 +32,8 @@ class SoundTab extends React.Component {
             'handleSelectSound',
             'handleDeleteSound',
             'handleDuplicateSound',
-            'handleNewSound'
+            'handleNewSound',
+            'handleSurpriseSound'
         ]);
         this.state = {selectedSoundIndex: 0};
     }
@@ -72,6 +78,20 @@ class SoundTab extends React.Component {
         this.setState({selectedSoundIndex: Math.max(sounds.length - 1, 0)});
     }
 
+    handleSurpriseSound () {
+        const soundItem = soundLibraryContent[Math.floor(Math.random() * soundLibraryContent.length)];
+        const vmSound = {
+            format: soundItem.format,
+            md5: soundItem.md5,
+            rate: soundItem.rate,
+            sampleCount: soundItem.sampleCount,
+            name: soundItem.name
+        };
+        this.props.vm.addSound(vmSound).then(() => {
+            this.handleNewSound();
+        });
+    }
+
     render () {
         const {
             intl,
@@ -94,13 +114,23 @@ class SoundTab extends React.Component {
         )) : [];
 
         const messages = defineMessages({
+            fileUploadSound: {
+                defaultMessage: 'Coming Soon',
+                description: 'Button to upload sound from file in the editor tab',
+                id: 'gui.soundTab.fileUploadSound'
+            },
+            surpriseSound: {
+                defaultMessage: 'Surprise',
+                description: 'Button to get a random sound in the editor tab',
+                id: 'gui.soundTab.surpriseSound'
+            },
             recordSound: {
-                defaultMessage: 'Record Sound',
+                defaultMessage: 'Record',
                 description: 'Button to record a sound in the editor tab',
                 id: 'gui.soundTab.recordSound'
             },
             addSound: {
-                defaultMessage: 'Add Sound',
+                defaultMessage: 'Library',
                 description: 'Button to add a sound in the editor tab',
                 id: 'gui.soundTab.addSound'
             }
@@ -109,13 +139,20 @@ class SoundTab extends React.Component {
         return (
             <AssetPanel
                 buttons={[{
-                    message: intl.formatMessage(messages.recordSound),
-                    img: addSoundFromRecordingIcon,
-                    onClick: onNewSoundFromRecordingClick
-                }, {
-                    message: intl.formatMessage(messages.addSound),
+                    title: intl.formatMessage(messages.addSound),
                     img: addSoundFromLibraryIcon,
                     onClick: onNewSoundFromLibraryClick
+                }, {
+                    title: intl.formatMessage(messages.fileUploadSound),
+                    img: fileUploadIcon
+                }, {
+                    title: intl.formatMessage(messages.surpriseSound),
+                    img: surpriseIcon,
+                    onClick: this.handleSurpriseSound
+                }, {
+                    title: intl.formatMessage(messages.recordSound),
+                    img: addSoundFromRecordingIcon,
+                    onClick: onNewSoundFromRecordingClick
                 }]}
                 items={sounds.map(sound => ({
                     url: soundIcon,

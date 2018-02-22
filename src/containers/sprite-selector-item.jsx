@@ -19,7 +19,8 @@ class SpriteSelectorItem extends React.Component {
         e.preventDefault();
         this.props.onClick(this.props.id);
     }
-    handleDelete () {
+    handleDelete (e) {
+        e.stopPropagation(); // To prevent from bubbling back to handleClick
         // @todo add i18n here
         // eslint-disable-next-line no-alert
         if (window.confirm('Are you sure you want to delete this?')) {

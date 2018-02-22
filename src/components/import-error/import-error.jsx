@@ -1,6 +1,6 @@
 import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
-import {/* defineMessages, */injectIntl/* , intlShape, FormattedMessage*/} from 'react-intl';
+import {defineMessages, injectIntl, FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
@@ -9,6 +9,17 @@ import styles from './import-error.css';
 
 // TODO store different error messages depending on the situation (?) and
 // needs to use intl lib for localization support
+
+// TODO error tooltip should be always visible in the error state,
+// instead of popping up hen hovering over the input
+
+const messages = defineMessages({
+    invalidLink: {
+        id: 'gui.importError.invalidLink',
+        defaultMessage: 'Uh oh, that link doesn\'t look quite right.',
+        description: 'Invalid link error message'
+    }
+});
 
 class ImportErrorContent extends React.Component {
     constructor (props) {
@@ -30,8 +41,13 @@ class ImportErrorContent extends React.Component {
         this.setState({isShowing: false});
     }
     getContent () {
+        const messageId = this.props.errorMessage;
         return (
-            <p>{this.props.errorMessage}</p>
+            <p>
+                <FormattedMessage
+                    {...messages[`${messageId}`]}
+                />
+            </p>
         );
     }
     render () {
@@ -60,7 +76,6 @@ class ImportErrorContent extends React.Component {
 ImportErrorContent.propTypes = {
     className: PropTypes.string,
     errorMessage: PropTypes.string.isRequired,
-    // intl: intlShape,
     place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     tooltipId: PropTypes.string.isRequired
 

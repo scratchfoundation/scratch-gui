@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import classNames from 'classnames';
 
 import {ImportErrorTooltip} from '../import-error/import-error.jsx';
 
 
+// TODO error tooltip needs to go around both the input and the button
+// error tooltip should also be always visible
 class ImportInput extends React.Component {
     render () {
         let input = null;

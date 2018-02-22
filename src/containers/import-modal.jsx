@@ -2,12 +2,8 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import platform from 'platform';
 
 import ImportModalComponent from '../components/import-modal/import-modal.jsx';
-import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
-
-import log from '../lib/log';
 
 import {
     closeImportInfo
@@ -44,10 +40,10 @@ class ImportModal extends React.Component {
             document.body.removeChild(projectLink);
             this.props.onViewProject();
         } else {
+            // TODO handle error messages and error states
             this.setState({
                 hasValidationError: true,
-                errorMessage: `Uh oh, that link doesn't look quite right.`});
-            log.info('Invalid link error');
+                errorMessage: `invalidLink`});
         }
     }
     handleChange (e) {
@@ -56,7 +52,6 @@ class ImportModal extends React.Component {
     validate (input) {
         const matches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?)$/);
         if (matches && matches.length > 0) {
-            log.info(`Project ID: ${matches[2]}`);
             return matches[2];
         }
         return null;
@@ -65,18 +60,14 @@ class ImportModal extends React.Component {
         this.props.onCancel();
     }
     handleGoBack () {
+        // TODO what should the go back button actually do? Should it bring the preview modal
+        // back up or just close this modal, or go back to scratch?
         window.location.replace('https://scratch.mit.edu');
     }
     // TODO not sure if we need this, since it shouldn't be possible to bring up this
     // modal without first going through the preview modal
-    supportedBrowser () {
-        if (platform.name === 'IE') {
-            return false;
-        }
-        return true;
-    }
     render () {
-        return (this.supportedBrowser() ?
+        return (
             <ImportModalComponent
                 errorMessage={this.state.errorMessage}
                 hasValidationError={this.state.hasValidationError}
@@ -86,9 +77,6 @@ class ImportModal extends React.Component {
                 onChange={this.handleChange}
                 onKeyPress={this.handleKeyPress}
                 onViewProject={this.handleViewProject}
-            /> :
-            <BrowserModalComponent
-                onBack={this.handleGoBack}
             />
         );
     }

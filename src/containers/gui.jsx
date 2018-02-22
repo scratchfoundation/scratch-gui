@@ -46,7 +46,6 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
-                enableExtensions={window.location.search.includes('extensions')}
                 tabIndex={this.state.tabIndex}
                 vm={vm}
                 onTabSelect={this.handleTabSelect}

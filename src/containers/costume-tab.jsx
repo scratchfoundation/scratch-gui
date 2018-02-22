@@ -77,7 +77,7 @@ class CostumeTab extends React.Component {
     }
     handleNewCostume () {
         if (!this.props.vm.editingTarget) return;
-        const costumes = this.props.vm.editingTarget.sprite.costumes || [];
+        const costumes = this.props.vm.editingTarget.getCostumes() || [];
         this.setState({selectedCostumeIndex: Math.max(costumes.length - 1, 0)});
     }
     handleNewBlankCostume () {

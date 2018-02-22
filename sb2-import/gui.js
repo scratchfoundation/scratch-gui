@@ -30,11 +30,11 @@ var _appStateHoc = __webpack_require__(22);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(26);
+var _gui = __webpack_require__(24);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(31);
+var _projectLoaderHoc = __webpack_require__(29);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 

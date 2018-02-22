@@ -10,7 +10,7 @@ import {
     BLOCKS_TAB_INDEX,
     COSTUMES_TAB_INDEX,
     SOUNDS_TAB_INDEX
-} from '../reducers/navigation';
+} from '../reducers/editor-tab';
 
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -61,12 +61,12 @@ GUI.propTypes = {
 GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
-    activeTabIndex: state.navigation.activeTabIndex,
-    blocksTabVisible: state.navigation.activeTabIndex === BLOCKS_TAB_INDEX,
-    costumesTabVisible: state.navigation.activeTabIndex === COSTUMES_TAB_INDEX,
+    activeTabIndex: state.editorTab.activeTabIndex,
+    blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+    costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
     previewInfoVisible: state.modals.previewInfo,
-    soundsTabVisible: state.navigation.activeTabIndex === SOUNDS_TAB_INDEX
+    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });
 
 const mapDispatchToProps = dispatch => ({

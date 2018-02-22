@@ -40,13 +40,13 @@ const GUIComponent = props => {
         blocksTabVisible,
         children,
         costumesTabVisible,
-        intl,
         feedbackFormVisible,
-        vm,
-        previewInfoVisible,
-        soundsTabVisible,
+        intl,
         onExtensionButtonClick,
         onActivateTab,
+        previewInfoVisible,
+        soundsTabVisible,
+        vm,
         ...componentProps
     } = props;
     if (children) {

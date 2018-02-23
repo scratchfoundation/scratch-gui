@@ -51,6 +51,9 @@ class SoundTab extends React.Component {
 
     handleDeleteSound (soundIndex) {
         this.props.vm.deleteSound(soundIndex);
+        if (soundIndex >= this.state.selectedSoundIndex) {
+            this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
+        }
     }
 
     handleNewSound () {

@@ -50,7 +50,8 @@ class ImportModal extends React.Component {
         this.setState({inputValue: e.target.value, hasValidationError: false});
     }
     validate (input) {
-        const urlMatches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?|(\/#((editor)|(fullscreen)|(player)))?)$/);
+        const urlMatches = input.match(
+            /^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?|(\/#((editor)|(fullscreen)|(player)))?)$/);
         if (urlMatches && urlMatches.length > 0) {
             return urlMatches[2];
         }

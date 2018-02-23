@@ -76,6 +76,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                onBlockDragUpdate,
                 onKeyDown,
                 onKeyUp,
                 onMonitorsUpdate,

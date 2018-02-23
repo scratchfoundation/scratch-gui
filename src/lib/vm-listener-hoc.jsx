@@ -6,7 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {updateEditingTarget, updateTargets} from '../reducers/targets';
-import {updateBlockDrag} from '../reducers/blockdrag';
+import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 
 /*

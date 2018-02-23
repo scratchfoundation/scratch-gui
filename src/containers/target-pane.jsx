@@ -9,6 +9,8 @@ import {
     closeSpriteLibrary
 } from '../reducers/modals';
 
+import {setHoveredSprite} from '../reducers/hovered-target-sprite';
+
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 
 class TargetPane extends React.Component {
@@ -53,10 +55,10 @@ class TargetPane extends React.Component {
         this.props.vm.duplicateSprite(id);
     }
     handleMouseOutSprite () {
-        this.props.vm.setHoveredSprite(null);
+        this.props.setHoveredSprite(null);
     }
     handleMouseOverSprite (id) {
-        this.props.vm.setHoveredSprite(id);
+        this.props.setHoveredSprite(id);
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
@@ -102,7 +104,7 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
-    raiseSprites: state.blockdrag,
+    raiseSprites: state.blockDrag,
     spriteLibraryVisible: state.modals.spriteLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });
@@ -116,6 +118,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
+    },
+    setHoveredSprite: spriteId => {
+        dispatch(setHoveredSprite(spriteId));
     }
 });
 

@@ -87,8 +87,9 @@ class CostumeTab extends React.Component {
         this.props.vm.deleteCostume(costumeIndex);
     }
     handleDuplicateCostume (costumeIndex) {
-        this.props.vm.duplicateCostume(costumeIndex);
-        this.setState({selectedCostumeIndex: costumeIndex + 1});
+        this.props.vm.duplicateCostume(costumeIndex).then(() => {
+            this.setState({selectedCostumeIndex: costumeIndex + 1});
+        });
     }
     handleNewCostume () {
         if (!this.props.vm.editingTarget) return;
@@ -203,7 +204,7 @@ CostumeTab.propTypes = {
             costumes: PropTypes.arrayOf(PropTypes.shape({
                 url: PropTypes.string,
                 name: PropTypes.string.isRequired,
-                costumeId: PropTypes.number
+                skinId: PropTypes.number
             }))
         })
     }),

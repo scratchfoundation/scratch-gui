@@ -26,6 +26,7 @@ class SoundTab extends React.Component {
         bindAll(this, [
             'handleSelectSound',
             'handleDeleteSound',
+            'handleDuplicateSound',
             'handleNewSound'
         ]);
         this.state = {selectedSoundIndex: 0};
@@ -54,6 +55,12 @@ class SoundTab extends React.Component {
         if (soundIndex >= this.state.selectedSoundIndex) {
             this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
         }
+    }
+
+    handleDuplicateSound (soundIndex) {
+        this.props.vm.duplicateSound(soundIndex).then(() => {
+            this.setState({selectedSoundIndex: soundIndex + 1});
+        });
     }
 
     handleNewSound () {
@@ -116,6 +123,7 @@ class SoundTab extends React.Component {
                 }))}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}
+                onDuplicateClick={this.handleDuplicateSound}
                 onItemClick={this.handleSelectSound}
             >
                 {sprite.sounds && sprite.sounds[this.state.selectedSoundIndex] ? (

@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import colorPickerReducer from './color-picker';
 import customProceduresReducer from './custom-procedures';
 import blockDragReducer from './block-drag';
-import hoveredTargetSpriteReducer from './hovered-target-sprite';
+import hoveredTargetReducer from './hovered-target';
 import intlReducer from './intl';
 import modalReducer from './modals';
 import monitorReducer from './monitors';
@@ -17,7 +17,7 @@ export default combineReducers({
     blockDrag: blockDragReducer,
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
-    hoveredTargetSprite: hoveredTargetSpriteReducer,
+    hoveredTarget: hoveredTargetReducer,
     intl: intlReducer,
     stageSize: stageSizeReducer,
     modals: modalReducer,

@@ -21,6 +21,8 @@ const messages = defineMessages({
 
 const SpriteSelectorComponent = function (props) {
     const {
+        editingTarget,
+        hoveredTarget,
         intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
@@ -30,8 +32,6 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteY,
         onDeleteSprite,
         onDuplicateSprite,
-        onMouseOutSprite,
-        onMouseOverSprite,
         onNewSpriteClick,
         onSelectSprite,
         raised,
@@ -76,10 +76,12 @@ const SpriteSelectorComponent = function (props) {
                         .map(sprite => (
                             <SpriteSelectorItem
                                 assetId={sprite.costume && sprite.costume.assetId}
-                                className={
-                                    (raised && sprite.id !== selectedId) ?
-                                        classNames(styles.sprite, styles.raised) : styles.sprite
-                                }
+                                className={hoveredTarget.sprite === sprite.id &&
+                                    sprite.id !== editingTarget &&
+                                    hoveredTarget.receivedBlocks ?
+                                        classNames(styles.sprite, styles.receivedBlocks) :
+                                        raised && sprite.id !== editingTarget ?
+                                            classNames(styles.sprite, styles.raised) : styles.sprite}
                                 id={sprite.id}
                                 key={sprite.id}
                                 name={sprite.name}
@@ -87,8 +89,6 @@ const SpriteSelectorComponent = function (props) {
                                 onClick={onSelectSprite}
                                 onDeleteButtonClick={onDeleteSprite}
                                 onDuplicateButtonClick={onDuplicateSprite}
-                                onMouseOut={onMouseOutSprite}
-                                onMouseOver={onMouseOverSprite}
                             />
                         ))
                     }
@@ -105,6 +105,11 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    editingTarget: PropTypes.string,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
     intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
@@ -114,8 +119,6 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
-    onMouseOutSprite: PropTypes.func,
-    onMouseOverSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     raised: PropTypes.bool,

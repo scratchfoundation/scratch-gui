@@ -1,8 +1,9 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import {connect} from 'react-redux';
+
+import {setHoveredSprite} from '../reducers/hovered-target';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
@@ -33,10 +34,10 @@ class SpriteSelectorItem extends React.Component {
         this.props.onDuplicateButtonClick(this.props.id);
     }
     handleMouseOut () {
-        this.props.onMouseOut(this.props.id);
+        this.props.dispatchSetHoveredSprite(null);
     }
     handleMouseOver () {
-        this.props.onMouseOver(this.props.id);
+        this.props.dispatchSetHoveredSprite(this.props.id);
     }
     render () {
         const {
@@ -46,8 +47,7 @@ class SpriteSelectorItem extends React.Component {
             onClick,
             onDeleteButtonClick,
             onDuplicateButtonClick,
-            onMouseOut,
-            onMouseOver,
+            receivedBlocks,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
@@ -56,8 +56,8 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
-                onMouseOut={onMouseOut ? this.handleMouseOut : null}
-                onMouseOver={onMouseOver ? this.handleMouseOver : null}
+                onMouseOut={this.handleMouseOut}
+                onMouseOver={this.handleMouseOver}
                 {...props}
             />
         );
@@ -67,20 +67,28 @@ class SpriteSelectorItem extends React.Component {
 SpriteSelectorItem.propTypes = {
     assetId: PropTypes.string,
     costumeURL: PropTypes.string,
+    dispatchSetHoveredSprite: PropTypes.func.isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    onMouseOver: PropTypes.func,
+    receivedBlocks: PropTypes.bool,
     selected: PropTypes.bool
 };
 
-const mapStateToProps = (state, {assetId, costumeURL}) => ({
-    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI())
+const mapStateToProps = (state, {assetId, costumeURL, id}) => ({
+    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()),
+    receivedBlocks: state.hoveredTarget.receivedBlocks &&
+            state.hoveredTarget.sprite === id
+});
+const mapDispatchToProps = dispatch => ({
+    dispatchSetHoveredSprite: spriteId => {
+        dispatch(setHoveredSprite(spriteId));
+    }
 });
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(SpriteSelectorItem);

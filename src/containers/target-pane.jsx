@@ -9,8 +9,6 @@ import {
     closeSpriteLibrary
 } from '../reducers/modals';
 
-import {setHoveredSprite} from '../reducers/hovered-target-sprite';
-
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 
 class TargetPane extends React.Component {
@@ -25,8 +23,6 @@ class TargetPane extends React.Component {
             'handleChangeSpriteY',
             'handleDeleteSprite',
             'handleDuplicateSprite',
-            'handleMouseOutSprite',
-            'handleMouseOverSprite',
             'handleSelectSprite'
         ]);
     }
@@ -54,12 +50,6 @@ class TargetPane extends React.Component {
     handleDuplicateSprite (id) {
         this.props.vm.duplicateSprite(id);
     }
-    handleMouseOutSprite () {
-        this.props.setHoveredSprite(null);
-    }
-    handleMouseOverSprite (id) {
-        this.props.setHoveredSprite(id);
-    }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
@@ -75,8 +65,6 @@ class TargetPane extends React.Component {
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDuplicateSprite={this.handleDuplicateSprite}
-                onMouseOutSprite={this.handleMouseOutSprite}
-                onMouseOverSprite={this.handleMouseOverSprite}
                 onSelectSprite={this.handleSelectSprite}
             />
         );
@@ -94,6 +82,7 @@ TargetPane.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
+    hoveredTarget: state.hoveredTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
         let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
@@ -118,9 +107,6 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
-    },
-    setHoveredSprite: spriteId => {
-        dispatch(setHoveredSprite(spriteId));
     }
 });
 

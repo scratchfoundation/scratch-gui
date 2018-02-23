@@ -19,6 +19,7 @@ import styles from './target-pane.css';
 const TargetPane = ({
     backdropLibraryVisible,
     editingTarget,
+    hoveredTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
@@ -28,8 +29,6 @@ const TargetPane = ({
     onChangeSpriteY,
     onDeleteSprite,
     onDuplicateSprite,
-    onMouseOutSprite,
-    onMouseOverSprite,
     onNewSpriteClick,
     onRequestCloseSpriteLibrary,
     onRequestCloseBackdropLibrary,
@@ -46,6 +45,8 @@ const TargetPane = ({
     >
 
         <SpriteSelectorComponent
+            editingTarget={editingTarget}
+            hoveredTarget={hoveredTarget}
             raised={raiseSprites}
             selectedId={editingTarget}
             sprites={sprites}
@@ -57,8 +58,6 @@ const TargetPane = ({
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
-            onMouseOutSprite={onMouseOutSprite}
-            onMouseOverSprite={onMouseOverSprite}
             onNewSpriteClick={onNewSpriteClick}
             onSelectSprite={onSelectSprite}
         />
@@ -113,6 +112,10 @@ TargetPane.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -121,8 +124,6 @@ TargetPane.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
-    onMouseOutSprite: PropTypes.func,
-    onMouseOverSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,

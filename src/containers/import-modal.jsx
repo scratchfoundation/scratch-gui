@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import ImportModalComponent from '../components/import-modal/import-modal.jsx';
 
 import {
-    closeImportInfo
+    closeImportInfo,
+    openPreviewInfo
 } from '../reducers/modals';
 
 class ImportModal extends React.Component {
@@ -15,8 +16,9 @@ class ImportModal extends React.Component {
         bindAll(this, [
             'handleViewProject',
             'handleCancel',
-            'handleKeyPress',
-            'handleChange'
+            'handleChange',
+            'handleGoBack',
+            'handleKeyPress'
         ]);
 
         this.state = {
@@ -40,7 +42,6 @@ class ImportModal extends React.Component {
             document.body.removeChild(projectLink);
             this.props.onViewProject();
         } else {
-            // TODO handle error messages and error states
             this.setState({
                 hasValidationError: true,
                 errorMessage: `invalidFormatError`});
@@ -64,12 +65,8 @@ class ImportModal extends React.Component {
         this.props.onCancel();
     }
     handleGoBack () {
-        // TODO what should the go back button actually do? Should it bring the preview modal
-        // back up or just close this modal, or go back to scratch?
-        window.location.replace('https://scratch.mit.edu');
+        this.props.onBack();
     }
-    // TODO not sure if we need this, since it shouldn't be possible to bring up this
-    // modal without first going through the preview modal
     render () {
         return (
             <ImportModalComponent
@@ -79,6 +76,7 @@ class ImportModal extends React.Component {
                 placeholder="scratch.mit.edu/projects/123456789"
                 onCancel={this.handleCancel}
                 onChange={this.handleChange}
+                onGoBack={this.handleGoBack}
                 onKeyPress={this.handleKeyPress}
                 onViewProject={this.handleViewProject}
             />
@@ -87,6 +85,7 @@ class ImportModal extends React.Component {
 }
 
 ImportModal.propTypes = {
+    onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onViewProject: PropTypes.func
 };
@@ -94,10 +93,14 @@ ImportModal.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    onViewProject: () => {
+    onBack: () => {
         dispatch(closeImportInfo());
+        dispatch(openPreviewInfo());
     },
     onCancel: () => {
+        dispatch(closeImportInfo());
+    },
+    onViewProject: () => {
         dispatch(closeImportInfo());
     }
 });

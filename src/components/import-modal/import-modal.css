@@ -96,6 +96,19 @@ $sides: 20rem;
     text-align: right;
     display: flex;
     justify-content: center;
+    border: 1px solid;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.ok-input-container {
+    border-color: $motion-primary;
+    box-shadow: 0 0 0 0.2rem $motion-transparent;
+}
+
+.bad-input-container {
+    border-color: $data-primary;
+    box-shadow: 0 0 0 0.2rem $data-transparent;
 }
 
 .input-row input {
@@ -104,6 +117,8 @@ $sides: 20rem;
     height: 3rem;
     color: #6b6b6b;
     font-size: .875rem;
+    outline: none;
+    border: none;
 }
 
 .input-row input::placeholder {
@@ -111,25 +126,12 @@ $sides: 20rem;
     color: rgba(87,94,117,0.5);
 }
 
-.input-row input.ok-input {
-    outline: none;
-    border: 1px solid $motion-primary;
-    border-radius: 0.25rem
-}
-
-.input-row input.bad-input {
-    outline: none;
-    border: 1px solid $data-primary;
-    border-radius: 0.25rem
-}
-
 .input-row button {
     padding: 0.5rem 2rem;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-    border: 1px solid $import-primary;
-    border-radius: 0.25rem;
+    border: 0px solid $import-primary;
     outline: none;
 }
 
@@ -138,24 +140,20 @@ $sides: 20rem;
     color: white;
 }
 
-.empty-row {
-    margin: 0;
-}
-
 .error-row {
     margin: 1.5rem 0;
     text-align: center;
     display: flex;
     justify-content: center;
-}
-.error-row div {
-    background: $data-primary;
-    opacity: 0.8;
-    color: white;
-    padding: 0.5rem 1rem;
-    font-size: .5rem;
-    border: 1px solid $data-primary;
+    background: $data-tertiary;
+    color: $data-primary;
+    border: 1px solid $ui-pane-border;
     border-radius: 0.25rem;
+}
+
+.error-row p {
+    font-size: 0.875rem;
+    font-weight: bold;
 }
 
 /* Confirmation buttons at the bottom of the modal */

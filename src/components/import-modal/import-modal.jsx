@@ -46,7 +46,7 @@ const ImportModal = ({intl, ...props}) => (
                 >
                     <CloseButton
                         size={CloseButton.SIZE_LARGE}
-                        onClick={props.onCancel}
+                        onClick={props.onGoBack}
                     />
                 </div>
                 <div
@@ -69,10 +69,13 @@ const ImportModal = ({intl, ...props}) => (
             <p>
                 {intl.formatMessage({...messages.formDescription})}
             </p>
-            <Box className={styles.inputRow}>
+            <Box
+                className={classNames(styles.inputRow,
+                    (props.hasValidationError ? styles.badInputContainer : styles.okInputContainer))
+                }
+            >
                 <input
                     autoFocus
-                    className={props.hasValidationError ? styles.badInput : styles.okInput}
                     placeholder={props.placeholder}
                     value={props.inputValue}
                     onChange={props.onChange}
@@ -90,21 +93,19 @@ const ImportModal = ({intl, ...props}) => (
                     />
                 </button>
             </Box>
-            <Box className={props.hasValidationError ? styles.errorRow : styles.emptyRow}>
-                {props.hasValidationError ?
-                    <div className={styles.importErrorDiv}>
-                        <p>
-                            {/* intl.formatMessage({...messages.invalidLink})*/}
-                            <FormattedMessage
-                                {...messages[`${props.errorMessage}`]}
-                            />
-                        </p>
-                    </div> : null}
-            </Box>
+            {props.hasValidationError ?
+                <Box className={styles.errorRow}>
+                    <p>
+                        <FormattedMessage
+                            {...messages[`${props.errorMessage}`]}
+                        />
+                    </p>
+                </Box> : null
+            }
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.noButton}
-                    onClick={props.onCancel}
+                    onClick={props.onGoBack}
                 >
                     <FormattedMessage
                         defaultMessage="Go Back"
@@ -145,6 +146,7 @@ ImportModal.propTypes = {
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onGoBack: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onViewProject: PropTypes.func.isRequired,
     placeholder: PropTypes.string

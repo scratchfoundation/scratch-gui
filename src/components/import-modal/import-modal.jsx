@@ -45,6 +45,7 @@ const ImportModal = ({intl, ...props}) => (
                     )}
                 >
                     <CloseButton
+                        buttonType="back"
                         size={CloseButton.SIZE_LARGE}
                         onClick={props.onGoBack}
                     />
@@ -104,7 +105,6 @@ const ImportModal = ({intl, ...props}) => (
             }
             <Box className={styles.buttonRow}>
                 <button
-                    className={styles.noButton}
                     onClick={props.onGoBack}
                 >
                     <FormattedMessage

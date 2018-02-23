@@ -20,9 +20,6 @@
     border-radius: $space;
     user-select: none;
     width: 500px;
-
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
     color: $text-primary;
     overflow: hidden;
 }
@@ -48,10 +45,6 @@ $sides: 20rem;
     box-sizing: border-box;
     width: 100%;
     background-color: $import-primary;
-
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: normal;
 }
 
 .header-item {
@@ -76,6 +69,10 @@ $sides: 20rem;
     user-select: none;
     letter-spacing: 0.4px;
     cursor: default;
+}
+
+.header-item-title h2 {
+    font-size: 1.25rem;
 }
 
 .header-item-close {
@@ -108,7 +105,7 @@ $sides: 20rem;
 
 .bad-input-container {
     border-color: $data-primary;
-    box-shadow: 0 0 0 0.2rem $data-transparent;
+    box-shadow: 0 0 0 0.2rem hsla(30, 100%, 55%, 0.15);
 }
 
 .input-row input {
@@ -145,9 +142,9 @@ $sides: 20rem;
     text-align: center;
     display: flex;
     justify-content: center;
-    background: $data-tertiary;
+    background: hsla(30, 100%, 55%, 0.25);
     color: $data-primary;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $data-primary;
     border-radius: 0.25rem;
 }
 
@@ -166,20 +163,14 @@ $sides: 20rem;
 }
 
 .button-row button {
-    padding: 0.5rem 2rem;
+    border: 1px solid $motion-primary;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1.5rem;
     background: white;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-}
-
-.button-row button.no-button {
-    border: 1px solid $motion-primary;
-    border-radius: 0.25rem;
     color: $motion-primary;
-}
-.button-row button + button {
-    margin-left: 0.5rem;
 }
 
 .faq-link-text {

@@ -50,9 +50,13 @@ class ImportModal extends React.Component {
         this.setState({inputValue: e.target.value});
     }
     validate (input) {
-        const matches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?)$/);
-        if (matches && matches.length > 0) {
-            return matches[2];
+        const urlMatches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?|(\/#editor)?)$/);
+        if (urlMatches && urlMatches.length > 0) {
+            return urlMatches[2];
+        }
+        const projectIdMatches = input.match(/^(#?)(\d+)$/);
+        if (projectIdMatches && projectIdMatches.length > 0) {
+            return projectIdMatches[2];
         }
         return null;
     }

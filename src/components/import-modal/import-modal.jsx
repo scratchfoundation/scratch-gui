@@ -6,7 +6,6 @@ import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-int
 import classNames from 'classnames';
 
 import CloseButton from '../close-button/close-button.jsx';
-import ImportInput from '../import-input/import-input.jsx';
 
 import styles from './import-modal.css';
 
@@ -21,6 +20,11 @@ const messages = defineMessages({
             'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved.',
         description: 'Import project message',
         id: 'gui.importInfo.message'
+    },
+    invalidFormatError: {
+        id: 'gui.importInfo.invalidFormatError',
+        defaultMessage: 'Uh oh, that project link or id doesn\'t look quite right.',
+        description: 'Invalid project link or id message'
     }
 });
 
@@ -65,16 +69,12 @@ const ImportModal = ({intl, ...props}) => (
             <p>
                 {intl.formatMessage({...messages.formDescription})}
             </p>
-
             <Box className={styles.inputRow}>
-                <ImportInput
-                    badClassName={styles.badInput}
-                    errorDivClassName={styles.errorDiv}
-                    errorMessage={props.errorMessage}
-                    hasValidationError={props.hasValidationError}
-                    inputValue={props.inputValue}
-                    okClassName={styles.okInput}
+                <input
+                    autoFocus
+                    className={props.hasValidationError ? styles.badInput : styles.okInput}
                     placeholder={props.placeholder}
+                    value={props.inputValue}
                     onChange={props.onChange}
                     onKeyPress={props.onKeyPress}
                 />
@@ -89,6 +89,17 @@ const ImportModal = ({intl, ...props}) => (
                         id="gui.importModal.viewproject"
                     />
                 </button>
+            </Box>
+            <Box className={props.hasValidationError ? styles.errorRow : styles.emptyRow}>
+                {props.hasValidationError ?
+                    <div className={styles.importErrorDiv}>
+                        <p>
+                            {/* intl.formatMessage({...messages.invalidLink})*/}
+                            <FormattedMessage
+                                {...messages[`${props.errorMessage}`]}
+                            />
+                        </p>
+                    </div> : null}
             </Box>
             <Box className={styles.buttonRow}>
                 <button

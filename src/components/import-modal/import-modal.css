@@ -98,12 +98,6 @@ $sides: 20rem;
     justify-content: center;
 }
 
-.input-row div.error-div {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-}
-
 .input-row input {
     width: 100%;
     padding: 0 1rem;
@@ -117,13 +111,13 @@ $sides: 20rem;
     color: rgba(87,94,117,0.5);
 }
 
-.input-row input.ok-input:focus {
+.input-row input.ok-input {
     outline: none;
     border: 1px solid $motion-primary;
     border-radius: 0.25rem
 }
 
-.input-row input.bad-input:focus {
+.input-row input.bad-input {
     outline: none;
     border: 1px solid $data-primary;
     border-radius: 0.25rem
@@ -136,11 +130,32 @@ $sides: 20rem;
     cursor: pointer;
     border: 1px solid $import-primary;
     border-radius: 0.25rem;
+    outline: none;
 }
 
 .input-row button.ok-button {
     background: $import-primary;
     color: white;
+}
+
+.empty-row {
+    margin: 0;
+}
+
+.error-row {
+    margin: 1.5rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.error-row div {
+    background: $data-primary;
+    opacity: 0.8;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: .5rem;
+    border: 1px solid $data-primary;
+    border-radius: 0.25rem;
 }
 
 /* Confirmation buttons at the bottom of the modal */

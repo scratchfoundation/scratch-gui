@@ -43,11 +43,11 @@ class ImportModal extends React.Component {
             // TODO handle error messages and error states
             this.setState({
                 hasValidationError: true,
-                errorMessage: `invalidLink`});
+                errorMessage: `invalidFormatError`});
         }
     }
     handleChange (e) {
-        this.setState({inputValue: e.target.value});
+        this.setState({inputValue: e.target.value, hasValidationError: false});
     }
     validate (input) {
         const urlMatches = input.match(/^(https:\/\/)?scratch\.mit\.edu\/projects\/(\d+)(\/?|(\/#editor)?)$/);

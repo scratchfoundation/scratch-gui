@@ -79,9 +79,9 @@ const SpriteSelectorComponent = function (props) {
                                 className={hoveredTarget.sprite === sprite.id &&
                                     sprite.id !== editingTarget &&
                                     hoveredTarget.receivedBlocks ?
-                                        classNames(styles.sprite, styles.receivedBlocks) :
-                                        raised && sprite.id !== editingTarget ?
-                                            classNames(styles.sprite, styles.raised) : styles.sprite}
+                                    classNames(styles.sprite, styles.receivedBlocks) :
+                                    raised && sprite.id !== editingTarget ?
+                                        classNames(styles.sprite, styles.raised) : styles.sprite}
                                 id={sprite.id}
                                 key={sprite.id}
                                 name={sprite.name}

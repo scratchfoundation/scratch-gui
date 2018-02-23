@@ -19,6 +19,7 @@ const vmListenerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
+                'handleBlockDragEnd',
                 'handleKeyDown',
                 'handleKeyUp'
             ]);
@@ -31,6 +32,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
+            this.props.vm.on('BLOCK_DRAG_END', this.handleBlockDragEnd);
 
         }
         componentDidMount () {
@@ -39,10 +41,18 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.addEventListener('keyup', this.handleKeyUp);
             }
         }
+        shouldComponentUpdate () {
+            return false;
+        }
         componentWillUnmount () {
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
+            }
+        }
+        handleBlockDragEnd (blocks) {
+            if (this.props.hoveredTargetSprite && this.props.hoveredTargetSprite !== this.props.editingTarget) {
+                this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTargetSprite);
             }
         }
         handleKeyDown (e) {
@@ -89,6 +99,8 @@ const vmListenerHOC = function (WrappedComponent) {
     }
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
+        editingTarget: PropTypes.string,
+        hoveredTargetSprite: PropTypes.string,
         onBlockDragUpdate: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
@@ -100,7 +112,9 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.vm
+        vm: state.vm,
+        hoveredTargetSprite: state.hoveredTargetSprite,
+        editingTarget: state.targets.editingTarget
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

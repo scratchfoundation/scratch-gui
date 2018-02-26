@@ -9,7 +9,10 @@ import {
     closeSpriteLibrary
 } from '../reducers/modals';
 
+import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
+import spriteLibraryContent from '../lib/libraries/sprites.json';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -23,7 +26,9 @@ class TargetPane extends React.Component {
             'handleChangeSpriteY',
             'handleDeleteSprite',
             'handleDuplicateSprite',
-            'handleSelectSprite'
+            'handleSelectSprite',
+            'handleSurpriseSpriteClick',
+            'handlePaintSpriteClick'
         ]);
     }
     handleChangeSpriteDirection (direction) {
@@ -53,10 +58,27 @@ class TargetPane extends React.Component {
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
+    handleSurpriseSpriteClick () {
+        const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
+        this.props.vm.addSprite2(JSON.stringify(item.json));
+    }
+    handlePaintSpriteClick () {
+        // @todo this is brittle, will need to be refactored for localized libraries
+        const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
+        if (emptyItem) {
+            this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
+                this.props.onActivateTab(COSTUMES_TAB_INDEX);
+            });
+        }
+    }
     render () {
+        const {
+            onActivateTab, // eslint-disable-line no-unused-vars
+            ...componentProps
+        } = this.props;
         return (
             <TargetPaneComponent
-                {...this.props}
+                {...componentProps}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
                 onChangeSpriteSize={this.handleChangeSpriteSize}
@@ -65,7 +87,9 @@ class TargetPane extends React.Component {
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDuplicateSprite={this.handleDuplicateSprite}
+                onPaintSpriteClick={this.handlePaintSpriteClick}
                 onSelectSprite={this.handleSelectSprite}
+                onSurpriseSpriteClick={this.handleSurpriseSpriteClick}
             />
         );
     }
@@ -107,6 +131,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
+    },
+    onActivateTab: tabIndex => {
+        dispatch(activateTab(tabIndex));
     }
 });
 

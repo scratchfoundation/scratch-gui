@@ -19,6 +19,7 @@ import Box from '../box/box.jsx';
 import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
+import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 
 import layout from '../../lib/layout-constants.js';
@@ -41,6 +42,7 @@ const GUIComponent = props => {
         children,
         costumesTabVisible,
         feedbackFormVisible,
+        importInfoVisible,
         intl,
         onExtensionButtonClick,
         onActivateTab,
@@ -75,6 +77,9 @@ const GUIComponent = props => {
         >
             {previewInfoVisible ? (
                 <PreviewModal />
+            ) : null}
+            {importInfoVisible ? (
+                <ImportModal />
             ) : null}
             {feedbackFormVisible ? (
                 <FeedbackForm />
@@ -169,9 +174,11 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
     feedbackFormVisible: PropTypes.bool,
+    importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired

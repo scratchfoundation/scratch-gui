@@ -71,6 +71,17 @@ const PreviewModal = ({intl, ...props}) => (
                         }}
                     />
                 </button>
+                <button
+                    className={styles.viewProjectButton}
+                    title="viewproject"
+                    onClick={props.onViewProject}
+                >
+                    <FormattedMessage
+                        defaultMessage="View 2.0 Project"
+                        description="Label for button to import a 2.0 project"
+                        id="gui.previewModal.viewproject"
+                    />
+                </button>
             </Box>
             <Box className={styles.faqLinkText}>
                 <FormattedMessage
@@ -100,7 +111,8 @@ const PreviewModal = ({intl, ...props}) => (
 PreviewModal.propTypes = {
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onTryIt: PropTypes.func.isRequired
+    onTryIt: PropTypes.func.isRequired,
+    onViewProject: PropTypes.func.isRequired
 };
 
 export default injectIntl(PreviewModal);

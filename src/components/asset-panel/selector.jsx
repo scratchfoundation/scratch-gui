@@ -4,7 +4,7 @@ import React from 'react';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 
 import Box from '../box/box.jsx';
-import AssetButton from '../asset-button/asset-button.jsx';
+import ActionMenu from '../action-menu/action-menu.jsx';
 import styles from './selector.css';
 
 const Selector = props => {
@@ -16,6 +16,23 @@ const Selector = props => {
         onDuplicateClick,
         onItemClick
     } = props;
+
+    let newButtonSection = null;
+
+    if (buttons.length > 0) {
+        const {img, title, onClick} = buttons[0];
+        const moreButtons = buttons.slice(1);
+        newButtonSection = (
+            <Box className={styles.newButtons}>
+                <ActionMenu
+                    img={img}
+                    moreButtons={moreButtons}
+                    title={title}
+                    onClick={onClick}
+                />
+            </Box>
+        );
+    }
 
     return (
         <Box className={styles.wrapper}>
@@ -35,16 +52,7 @@ const Selector = props => {
                     />
                 ))}
             </Box>
-            <Box className={styles.newButtons}>
-                {buttons.map(({message, img, onClick}, index) => (
-                    <AssetButton
-                        img={img}
-                        key={index}
-                        title={message}
-                        onClick={onClick}
-                    />
-                ))}
-            </Box>
+            {newButtonSection}
         </Box>
     );
 };

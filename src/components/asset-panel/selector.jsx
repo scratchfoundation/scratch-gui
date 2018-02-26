@@ -17,6 +17,23 @@ const Selector = props => {
         onItemClick
     } = props;
 
+    let newButtonSection = null;
+
+    if (buttons.length > 0) {
+        const {img, title, onClick} = buttons[0];
+        const moreButtons = buttons.slice(0);
+        newButtonSection = (
+            <Box className={styles.newButtons}>
+                <ActionMenu
+                    img={img}
+                    moreButtons={moreButtons}
+                    title={title}
+                    onClick={onClick}
+                />
+            </Box>
+        );
+    }
+
     return (
         <Box className={styles.wrapper}>
             <Box className={styles.listArea}>
@@ -35,14 +52,7 @@ const Selector = props => {
                     />
                 ))}
             </Box>
-            <Box className={styles.newButtons}>
-                <ActionMenu
-                    img={buttons[0].img}
-                    moreButtons={buttons.slice(1)}
-                    title={buttons[0].title}
-                    onClick={buttons[0].onClick}
-                />
-            </Box>
+            {newButtonSection}
         </Box>
     );
 };

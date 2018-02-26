@@ -56,9 +56,9 @@ const TargetPane = ({
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
             onNewSpriteClick={onNewSpriteClick}
-            onSurpriseSpriteClick={onSurpriseSpriteClick}
-            onSelectSprite={onSelectSprite}
             onPaintSpriteClick={onPaintSpriteClick}
+            onSelectSprite={onSelectSprite}
+            onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
@@ -120,10 +120,12 @@ TargetPane.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onPaintSpriteClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSurpriseSpriteClick: PropTypes.func,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,

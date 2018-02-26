@@ -113,7 +113,9 @@ StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
     intl: intlShape.isRequired,
     onClick: PropTypes.func,
+    onEmptyBackdropClick: PropTypes.func,
     onNewBackdropClick: PropTypes.func,
+    onSurpriseBackdropClick: PropTypes.func,
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };

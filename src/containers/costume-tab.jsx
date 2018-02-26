@@ -17,12 +17,10 @@ import {
     openBackdropLibrary
 } from '../reducers/modals';
 
-import addBlankCostumeIcon from '../components/asset-panel/icon--add-blank-costume.svg';
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import paintIcon from '../components/action-menu/icon--paint.svg';
-import spriteIcon from '../components/action-menu/icon--sprite.svg';
 import cameraIcon from '../components/action-menu/icon--camera.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
 

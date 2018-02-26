@@ -150,7 +150,9 @@ SpriteSelectorComponent.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onPaintSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSurpriseSpriteClick: PropTypes.func,
     selectedId: PropTypes.string,
     sprites: PropTypes.shape({
         id: PropTypes.shape({

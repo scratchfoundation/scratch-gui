@@ -218,7 +218,6 @@ class CostumeTab extends React.Component {
             >
                 {target.costumes ?
                     <PaintEditorWrapper
-                        {...props}
                         selectedCostumeIndex={this.state.selectedCostumeIndex}
                     /> :
                     null

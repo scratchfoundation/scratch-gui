@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 177:
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ webpackJsonp([0],{
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(178);
+__webpack_require__(187);
 
 var _react = __webpack_require__(0);
 
@@ -30,15 +30,15 @@ var _appStateHoc = __webpack_require__(33);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(35);
+var _gui = __webpack_require__(36);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(44);
+var _projectLoaderHoc = __webpack_require__(47);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(569);
+var _index = __webpack_require__(583);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -66,18 +66,18 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 178:
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(179).polyfill();
+__webpack_require__(188).polyfill();
 
 
 /***/ }),
 
-/***/ 179:
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -131,11 +131,11 @@ module.exports = {
 
 /***/ }),
 
-/***/ 569:
+/***/ 583:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(570);
+var content = __webpack_require__(584);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -182,7 +182,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 570:
+/***/ 584:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -199,5 +199,5 @@ exports.locals = {
 
 /***/ })
 
-},[177]);
+},[186]);
 //# sourceMappingURL=gui.js.map

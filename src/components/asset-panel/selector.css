@@ -35,6 +35,7 @@ $fade-out-distance: 100px;
     background: linear-gradient(rgba(232,237,241, 0),rgba(232,237,241, 1));
     height: $fade-out-distance;
     width: 100%;
+    pointer-events: none;
 }
 
 .new-buttons > button + button {

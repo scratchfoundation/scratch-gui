@@ -13,6 +13,7 @@ const Selector = props => {
         items,
         selectedItemIndex,
         onDeleteClick,
+        onDuplicateClick,
         onItemClick
     } = props;
 
@@ -30,6 +31,7 @@ const Selector = props => {
                         selected={index === selectedItemIndex}
                         onClick={onItemClick}
                         onDeleteButtonClick={onDeleteClick}
+                        onDuplicateButtonClick={onDuplicateClick}
                     />
                 ))}
             </Box>
@@ -58,6 +60,7 @@ Selector.propTypes = {
         name: PropTypes.string.isRequired
     })),
     onDeleteClick: PropTypes.func,
+    onDuplicateClick: PropTypes.func,
     onItemClick: PropTypes.func.isRequired,
     selectedItemIndex: PropTypes.number.isRequired
 };

@@ -63,6 +63,22 @@ describe('Working with sounds', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Duplicating a sound', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Sounds');
+
+        await rightClickText('Meow', scope.soundsTab);
+        await clickText('duplicate', scope.soundsTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error
+
+        // Make sure the duplicated sound is named correctly.
+        await clickText('Meow2', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     // Regression test for gui issue #1320
     test('Switching sprites with different numbers of sounds', async () => {
         await loadUri(uri);

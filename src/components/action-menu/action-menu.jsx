@@ -12,14 +12,24 @@ class ActionMenu extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'clickDelayer',
             'handleClosePopover',
             'handleToggleOpenState',
-            'clickDelayer'
+            'handleTouchStart',
+            'handleTouchOutside',
+            'setButtonRef',
+            'setContainerRef'
         ]);
         this.state = {
             isOpen: false,
             forceHide: false
         };
+    }
+    componentDidMount () {
+        // Touch start on the main button is caught to trigger open and not click
+        this.buttonRef.addEventListener('touchstart', this.handleTouchStart);
+        // Touch start on document is used to trigger close if it is outside
+        document.addEventListener('touchstart', this.handleTouchOutside);
     }
     shouldComponentUpdate (newProps, newState) {
         // This check prevents re-rendering while the project is updating.
@@ -30,6 +40,10 @@ class ActionMenu extends React.Component {
         return newState.isOpen !== this.state.isOpen ||
             newState.forceHide !== this.state.forceHide ||
             newProps.title !== this.props.title;
+    }
+    componentWillUnmount () {
+        this.buttonRef.removeEventListener('touchstart', this.handleTouchStart);
+        document.removeEventListener('touchstart', this.handleTouchOutside);
     }
     handleClosePopover () {
         this.closeTimeoutId = setTimeout(() => {
@@ -49,6 +63,11 @@ class ActionMenu extends React.Component {
             });
         }
     }
+    handleTouchOutside (e) {
+        if (this.state.isOpen && !this.containerRef.contains(e.target)) {
+            this.setState({isOpen: false});
+        }
+    }
     clickDelayer (fn) {
         // Return a wrapped action that manages the menu closing.
         // @todo we may be able to use react-transition for this in the future
@@ -60,6 +79,19 @@ class ActionMenu extends React.Component {
                 setTimeout(() => this.setState({forceHide: false}));
             });
         };
+    }
+    handleTouchStart (e) {
+        // Prevent this touch from becoming a click if menu is closed
+        if (!this.state.isOpen) {
+            e.preventDefault();
+            this.handleToggleOpenState();
+        }
+    }
+    setButtonRef (ref) {
+        this.buttonRef = ref;
+    }
+    setContainerRef (ref) {
+        this.containerRef = ref;
     }
     render () {
         const {
@@ -78,15 +110,16 @@ class ActionMenu extends React.Component {
                     [styles.expanded]: this.state.isOpen,
                     [styles.forceHidden]: this.state.forceHide
                 })}
+                ref={this.setContainerRef}
                 onMouseEnter={this.handleToggleOpenState}
                 onMouseLeave={this.handleClosePopover}
-                onTouchStart={this.handleToggleOpenState}
             >
                 <button
                     aria-label={mainTitle}
                     className={classNames(styles.button, styles.mainButton)}
                     data-for={mainTooltipId}
                     data-tip={mainTitle}
+                    ref={this.setButtonRef}
                     onClick={this.clickDelayer(onClick)}
                 >
                     <img

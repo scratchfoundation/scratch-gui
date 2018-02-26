@@ -14,6 +14,9 @@ class LoadButton extends React.Component {
             'handleClick'
         ]);
     }
+    shouldComponentUpdate () {
+        return false;
+    }
     handleChange (e) {
         const reader = new FileReader();
         reader.onload = () => this.props.loadProject(reader.result);

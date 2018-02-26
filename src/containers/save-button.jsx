@@ -14,6 +14,9 @@ class SaveButton extends React.Component {
             'handleClick'
         ]);
     }
+    shouldComponentUpdate () {
+        return false;
+    }
     handleClick () {
         const json = this.props.saveProjectSb3();
 

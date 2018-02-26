@@ -9,11 +9,13 @@ import targetReducer from './targets';
 import toolboxReducer from './toolbox';
 import vmReducer from './vm';
 import stageSizeReducer from './stage-size';
+import editorTabReducer from './editor-tab';
 import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
+    editorTab: editorTabReducer,
     intl: intlReducer,
     stageSize: stageSizeReducer,
     modals: modalReducer,

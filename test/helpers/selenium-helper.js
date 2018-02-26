@@ -25,6 +25,7 @@ class SeleniumHelper {
         // List of useful xpath scopes for finding elements
         return {
             blocksTab: "*[@id='react-tabs-1']",
+            costumesTab: "*[@id='react-tabs-3']",
             modal: '*[@class="ReactModalPortal"]',
             reportedValue: '*[@class="blocklyDropDownContent"]',
             soundsTab: "*[@id='react-tabs-5']",

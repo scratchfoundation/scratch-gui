@@ -15,6 +15,7 @@ import {
 } from '../reducers/color-picker';
 
 const colorPickerRadius = 20;
+const dragThreshold = 3; // Same as the block drag threshold
 
 class Stage extends React.Component {
     constructor (props) {
@@ -30,6 +31,7 @@ class Stage extends React.Component {
             'onMouseDown',
             'onStartDrag',
             'onStopDrag',
+            'onWheel',
             'updateRect',
             'questionListener',
             'setCanvas'
@@ -97,6 +99,7 @@ class Stage extends React.Component {
         document.addEventListener('touchend', this.onMouseUp);
         canvas.addEventListener('mousedown', this.onMouseDown);
         canvas.addEventListener('touchstart', this.onMouseDown);
+        canvas.addEventListener('wheel', this.onWheel);
     }
     detachMouseEvents (canvas) {
         document.removeEventListener('mousemove', this.onMouseMove);
@@ -105,6 +108,7 @@ class Stage extends React.Component {
         document.removeEventListener('touchend', this.onMouseUp);
         canvas.removeEventListener('mousedown', this.onMouseDown);
         canvas.removeEventListener('touchstart', this.onMouseDown);
+        canvas.removeEventListener('wheel', this.onWheel);
     }
     attachRectEvents () {
         window.addEventListener('resize', this.updateRect);
@@ -149,9 +153,13 @@ class Stage extends React.Component {
         this.pickX = mousePosition[0];
         this.pickY = mousePosition[1];
 
-        if (this.state.mouseDownTimeoutId !== null) {
-            this.cancelMouseDownTimeout();
-            if (this.state.mouseDown && !this.state.isDragging) {
+        if (this.state.mouseDown && !this.state.isDragging) {
+            const distanceFromMouseDown = Math.sqrt(
+                Math.pow(mousePosition[0] - this.state.mouseDownPosition[0], 2) +
+                Math.pow(mousePosition[1] - this.state.mouseDownPosition[1], 2)
+            );
+            if (distanceFromMouseDown > dragThreshold) {
+                this.cancelMouseDownTimeout();
                 this.onStartDrag(...this.state.mouseDownPosition);
             }
         }
@@ -201,7 +209,7 @@ class Stage extends React.Component {
                 mouseDownPosition: mousePosition,
                 mouseDownTimeoutId: setTimeout(
                     this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
-                    500
+                    400
                 )
             });
         }
@@ -226,6 +234,13 @@ class Stage extends React.Component {
             this.props.onDeactivateColorPicker(colorString);
             this.setState({colorInfo: null});
         }
+    }
+    onWheel (e) {
+        const data = {
+            deltaX: e.deltaX,
+            deltaY: e.deltaY
+        };
+        this.props.vm.postIOData('mouseWheel', data);
     }
     cancelMouseDownTimeout () {
         if (this.state.mouseDownTimeoutId !== null) {

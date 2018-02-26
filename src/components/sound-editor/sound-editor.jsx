@@ -121,7 +121,10 @@ const SoundEditor = props => (
                         title={props.intl.formatMessage(messages.undo)}
                         onClick={props.onUndo}
                     >
-                        <img src={undoIcon} />
+                        <img
+                            draggable={false}
+                            src={undoIcon}
+                        />
                     </button>
                     <button
                         className={styles.button}
@@ -129,7 +132,10 @@ const SoundEditor = props => (
                         title={props.intl.formatMessage(messages.redo)}
                         onClick={props.onRedo}
                     >
-                        <img src={redoIcon} />
+                        <img
+                            draggable={false}
+                            src={redoIcon}
+                        />
                     </button>
                 </div>
             </div>
@@ -170,7 +176,10 @@ const SoundEditor = props => (
                         title={props.intl.formatMessage(messages.stop)}
                         onClick={props.onStop}
                     >
-                        <img src={stopIcon} />
+                        <img
+                            draggable={false}
+                            src={stopIcon}
+                        />
                     </button>
                 ) : (
                     <button
@@ -178,7 +187,10 @@ const SoundEditor = props => (
                         title={props.intl.formatMessage(messages.play)}
                         onClick={props.onPlay}
                     >
-                        <img src={playIcon} />
+                        <img
+                            draggable={false}
+                            src={playIcon}
+                        />
                     </button>
                 )}
             </div>

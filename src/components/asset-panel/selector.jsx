@@ -21,7 +21,7 @@ const Selector = props => {
 
     if (buttons.length > 0) {
         const {img, title, onClick} = buttons[0];
-        const moreButtons = buttons.slice(0);
+        const moreButtons = buttons.slice(1);
         newButtonSection = (
             <Box className={styles.newButtons}>
                 <ActionMenu

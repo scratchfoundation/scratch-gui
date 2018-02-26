@@ -27,7 +27,12 @@ class ActionMenu extends React.Component {
             this.closeTimeoutId = null;
         }, CLOSE_DELAY);
     }
-    handleToggleOpenState () {
+    handleToggleOpenState (e) {
+        if (!this.state.isOpen) {
+            e.stopPropagation(); // For touch start, to prevent clicking primary button
+        }
+
+        // Mouse enter back in after timeout was started prevents it from closing.
         if (this.closeTimeoutId) {
             clearTimeout(this.closeTimeoutId);
             this.closeTimeoutId = null;
@@ -69,8 +74,10 @@ class ActionMenu extends React.Component {
                 })}
                 onMouseEnter={this.handleToggleOpenState}
                 onMouseLeave={this.handleClosePopover}
+                onTouchStart={this.handleToggleOpenState}
             >
                 <button
+                    aria-label={mainTitle}
                     className={classNames(styles.button, styles.mainButton)}
                     data-for={mainTooltipId}
                     data-tip={mainTitle}
@@ -96,6 +103,7 @@ class ActionMenu extends React.Component {
                             return (
                                 <div key={tooltipId}>
                                     <button
+                                        aria-label={title}
                                         className={classNames(styles.button, styles.moreButton, {
                                             [styles.comingSoon]: isComingSoon
                                         })}

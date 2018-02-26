@@ -28,6 +28,11 @@ import costumeLibraryContent from '../lib/libraries/costumes.json';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
 const messages = defineMessages({
+    addLibraryBackdropMsg: {
+        defaultMessage: 'Library',
+        description: 'Button to add a backdrop in the editor tab',
+        id: 'gui.costumeTab.addBackdrop'
+    },
     addLibraryCostumeMsg: {
         defaultMessage: 'Library',
         description: 'Button to add a costume in the editor tab',
@@ -177,6 +182,7 @@ class CostumeTab extends React.Component {
             return null;
         }
 
+        const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
         const addSurpriseFunc = target.isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
@@ -185,7 +191,7 @@ class CostumeTab extends React.Component {
             <AssetPanel
                 buttons={[
                     {
-                        title: intl.formatMessage(messages.addLibraryCostumeMsg),
+                        title: intl.formatMessage(addLibraryMessage),
                         img: addLibraryIcon,
                         onClick: addLibraryFunc
                     },

@@ -616,6 +616,17 @@
         ]
     },
     {
+        "name": "Cat1",
+        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            47,
+            55,
+            1
+        ]
+    },
+    {
         "name": "Cat1 Flying-a",
         "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
         "type": "costume",
@@ -634,6 +645,17 @@
         "info": [
             42,
             44,
+            1
+        ]
+    },
+    {
+        "name": "Cat2",
+        "md5": "3696356a03a8d938318876a593572843.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            47,
+            55,
             1
         ]
     },
@@ -678,28 +700,6 @@
         "info": [
             87,
             21,
-            1
-        ]
-    },
-    {
-        "name": "Costume1",
-        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
-            1
-        ]
-    },
-    {
-        "name": "Costume2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
             1
         ]
     },
@@ -1244,12 +1244,12 @@
     },
     {
         "name": "Drum-snare-a",
-        "md5": "31a81bb560abf30cbc44bcdd581d5ccc.svg",
+        "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
         "type": "costume",
         "tags": [],
         "info": [
-            40,
-            69,
+            23,
+            50,
             1
         ]
     },
@@ -1266,12 +1266,12 @@
     },
     {
         "name": "Drum-snare-c",
-        "md5": "878ea646cbbd2a9e24fdeb8d98c3e24f.svg",
+        "md5": "0b50639f4aac75a7e1061083401e0c40.svg",
         "type": "costume",
         "tags": [],
         "info": [
-            40,
-            69,
+            37,
+            61,
             1
         ]
     },
@@ -1914,61 +1914,6 @@
         ]
     },
     {
-        "name": "Jez-b",
-        "md5": "f1e74f3c02333e9e2068e8baf4e77aa0.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-c",
-        "md5": "e2482cf509c312935f08be0e2e2c9d84.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-d",
-        "md5": "569e736b519199efddfbae2572f7e92b.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-e",
-        "md5": "2261bed0f2cc819def17969158297b4f.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            77,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-f",
-        "md5": "d7f44adb3dc7906b9dfb3599a028e0d6.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            62,
-            94,
-            1
-        ]
-    },
-    {
         "name": "Jordyn-a",
         "md5": "8dd2a2abbb8e639da8576b6e72ef9e59.svg",
         "type": "costume",
@@ -2053,6 +1998,61 @@
         "info": [
             67,
             95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-b",
+        "md5": "f1e74f3c02333e9e2068e8baf4e77aa0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-c",
+        "md5": "e2482cf509c312935f08be0e2e2c9d84.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-d",
+        "md5": "569e736b519199efddfbae2572f7e92b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-e",
+        "md5": "2261bed0f2cc819def17969158297b4f.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            77,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-f",
+        "md5": "d7f44adb3dc7906b9dfb3599a028e0d6.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            62,
+            94,
             1
         ]
     },
@@ -2552,6 +2552,61 @@
         ]
     },
     {
+        "name": "Penguin1 Talk-a",
+        "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            48,
+            62,
+            1
+        ]
+    },
+    {
+        "name": "Penguin1 Talk-b",
+        "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            48,
+            61,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2",
+        "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            49,
+            79,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2 Talk-a",
+        "md5": "5a80f4b2fd20d43e4f7cb4189c08d99c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            45,
+            79,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2 Talk-b",
+        "md5": "394e79f5f9a462064ece2a9a6606a07d.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            50,
+            78,
+            1
+        ]
+    },
+    {
         "name": "Pico-a",
         "md5": "0579fe60bb3717c49dfd7743caa84ada.svg",
         "type": "costume",
@@ -2937,6 +2992,39 @@
         ]
     },
     {
+        "name": "Shark-a ",
+        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Shark-b ",
+        "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Shark-c ",
+        "md5": "afeae3f998598424f7c50918507f6ce6.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            77,
+            37,
+            1
+        ]
+    },
+    {
         "name": "Snake-a",
         "md5": "4d06e12d90479461303d828f0970f2d4.svg",
         "type": "costume",
@@ -3054,6 +3142,28 @@
         "info": [
             53,
             79,
+            1
+        ]
+    },
+    {
+        "name": "Starfish-a",
+        "md5": "3d1101bbc24ae292a36356af325f660c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Starfish-b ",
+        "md5": "ad8007f4e63693984d4adc466ffa3ad2.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            53,
+            60,
             1
         ]
     },

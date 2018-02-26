@@ -106,6 +106,7 @@ TargetPane.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
+    hoveredTarget: state.hoveredTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
         let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
@@ -116,6 +117,7 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
+    raiseSprites: state.blockDrag,
     spriteLibraryVisible: state.modals.spriteLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });

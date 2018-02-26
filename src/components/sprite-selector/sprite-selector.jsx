@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
@@ -45,6 +46,8 @@ const messages = defineMessages({
 
 const SpriteSelectorComponent = function (props) {
     const {
+        editingTarget,
+        hoveredTarget,
         intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
@@ -58,6 +61,7 @@ const SpriteSelectorComponent = function (props) {
         onSurpriseSpriteClick,
         onPaintSpriteClick,
         onSelectSprite,
+        raised,
         selectedId,
         sprites,
         ...componentProps
@@ -99,7 +103,12 @@ const SpriteSelectorComponent = function (props) {
                         .map(sprite => (
                             <SpriteSelectorItem
                                 assetId={sprite.costume && sprite.costume.assetId}
-                                className={styles.sprite}
+                                className={hoveredTarget.sprite === sprite.id &&
+                                    sprite.id !== editingTarget &&
+                                    hoveredTarget.receivedBlocks ?
+                                    classNames(styles.sprite, styles.receivedBlocks) :
+                                    raised && sprite.id !== editingTarget ?
+                                        classNames(styles.sprite, styles.raised) : styles.sprite}
                                 id={sprite.id}
                                 key={sprite.id}
                                 name={sprite.name}
@@ -140,6 +149,11 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    editingTarget: PropTypes.string,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
     intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
@@ -153,6 +167,7 @@ SpriteSelectorComponent.propTypes = {
     onPaintSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
+    raised: PropTypes.bool,
     selectedId: PropTypes.string,
     sprites: PropTypes.shape({
         id: PropTypes.shape({

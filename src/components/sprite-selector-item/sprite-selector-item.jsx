@@ -19,8 +19,8 @@ const SpriteSelectorItem = props => (
                 [styles.isSelected]: props.selected
             }),
             onClick: props.onClick,
-            onMouseOver: props.onMouseOver,
-            onMouseOut: props.onMouseOut
+            onMouseEnter: props.onMouseEnter,
+            onMouseLeave: props.onMouseLeave
         }}
         id={`${props.name}-${contextMenuId}`}
     >
@@ -72,8 +72,8 @@ SpriteSelectorItem.propTypes = {
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    onMouseOver: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     selected: PropTypes.bool.isRequired
 };
 

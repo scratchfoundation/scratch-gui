@@ -14,8 +14,8 @@ class SpriteSelectorItem extends React.Component {
             'handleClick',
             'handleDelete',
             'handleDuplicate',
-            'handleMouseOut',
-            'handleMouseOver'
+            'handleMouseEnter',
+            'handleMouseLeave'
         ]);
     }
     handleClick (e) {
@@ -34,10 +34,10 @@ class SpriteSelectorItem extends React.Component {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDuplicateButtonClick(this.props.id);
     }
-    handleMouseOut () {
+    handleMouseLeave () {
         this.props.dispatchSetHoveredSprite(null);
     }
-    handleMouseOver () {
+    handleMouseEnter () {
         this.props.dispatchSetHoveredSprite(this.props.id);
     }
     render () {
@@ -57,8 +57,8 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
-                onMouseOut={this.handleMouseOut}
-                onMouseOver={this.handleMouseOver}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
                 {...props}
             />
         );

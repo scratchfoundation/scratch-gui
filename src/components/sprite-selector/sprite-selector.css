@@ -115,32 +115,32 @@
 }
 
 .receivedBlocks {
-  -webkit-animation: glowing 250ms;
-  -moz-animation: glowing 250ms;
-  -o-animation: glowing 250ms;
-  animation: glowing 250ms;
+    -webkit-animation: glowing 250ms;
+    -moz-animation: glowing 250ms;
+    -o-animation: glowing 250ms;
+    animation: glowing 250ms;
 }
 
 @-webkit-keyframes glowing {
-  10% { -webkit-box-shadow: 0 0 10px #7fff1e; }
-  90% { -webkit-box-shadow: 0 0 10px #7fff1e; }
-  100% { -webkit-box-shadow: none; }
+    10% { -webkit-box-shadow: 0 0 10px #7fff1e; }
+    90% { -webkit-box-shadow: 0 0 10px #7fff1e; }
+    100% { -webkit-box-shadow: none; }
 }
 
 @-moz-keyframes glowing {
-  10% { -moz-box-shadow: 0 0 10px #7fff1e; }
-  90% { -moz-box-shadow: 0 0 10px #7fff1e; }
-  100% { -moz-box-shadow: none; }
+    10% { -moz-box-shadow: 0 0 10px #7fff1e; }
+    90% { -moz-box-shadow: 0 0 10px #7fff1e; }
+    100% { -moz-box-shadow: none; }
 }
 
 @-o-keyframes glowing {
-  10% { box-shadow: 0 0 10px #7fff1e; }
-  90% { box-shadow: 0 0 10px #7fff1e; }
-  100% { box-shadow: none; }
+    10% { box-shadow: 0 0 10px #7fff1e; }
+    90% { box-shadow: 0 0 10px #7fff1e; }
+    100% { box-shadow: none; }
 }
 
 @keyframes glowing {
-  10% { box-shadow: 0 0 10px #7fff1e; }
-  90% { box-shadow: 0 0 10px #7fff1e; }
-  100% { box-shadow: none; }
+    10% { box-shadow: 0 0 10px #7fff1e; }
+    90% { box-shadow: 0 0 10px #7fff1e; }
+    100% { box-shadow: none; }
 }

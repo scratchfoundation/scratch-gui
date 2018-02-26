@@ -51,10 +51,21 @@ class CostumeTab extends React.Component {
         bindAll(this, [
             'handleSelectCostume',
             'handleDeleteCostume',
+            'handleDuplicateCostume',
             'handleNewCostume',
             'handleNewBlankCostume'
         ]);
-        this.state = {selectedCostumeIndex: 0};
+        const {
+            editingTarget,
+            sprites,
+            stage
+        } = props;
+        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
+        if (target && target.currentCostume) {
+            this.state = {selectedCostumeIndex: target.currentCostume};
+        } else {
+            this.state = {selectedCostumeIndex: 0};
+        }
     }
     componentWillReceiveProps (nextProps) {
         const {
@@ -74,6 +85,11 @@ class CostumeTab extends React.Component {
     }
     handleDeleteCostume (costumeIndex) {
         this.props.vm.deleteCostume(costumeIndex);
+    }
+    handleDuplicateCostume (costumeIndex) {
+        this.props.vm.duplicateCostume(costumeIndex).then(() => {
+            this.setState({selectedCostumeIndex: costumeIndex + 1});
+        });
     }
     handleNewCostume () {
         if (!this.props.vm.editingTarget) return;
@@ -145,6 +161,7 @@ class CostumeTab extends React.Component {
                 items={target.costumes || []}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={target.costumes.length > 1 ? this.handleDeleteCostume : null}
+                onDuplicateClick={this.handleDuplicateCostume}
                 onItemClick={this.handleSelectCostume}
             >
                 {target.costumes ?
@@ -186,7 +203,8 @@ CostumeTab.propTypes = {
         id: PropTypes.shape({
             costumes: PropTypes.arrayOf(PropTypes.shape({
                 url: PropTypes.string,
-                name: PropTypes.string.isRequired
+                name: PropTypes.string.isRequired,
+                skinId: PropTypes.number
             }))
         })
     }),

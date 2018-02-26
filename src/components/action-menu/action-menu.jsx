@@ -27,16 +27,12 @@ class ActionMenu extends React.Component {
             this.closeTimeoutId = null;
         }, CLOSE_DELAY);
     }
-    handleToggleOpenState (e) {
-        if (!this.state.isOpen) {
-            e.stopPropagation(); // For touch start, to prevent clicking primary button
-        }
-
+    handleToggleOpenState () {
         // Mouse enter back in after timeout was started prevents it from closing.
         if (this.closeTimeoutId) {
             clearTimeout(this.closeTimeoutId);
             this.closeTimeoutId = null;
-        } else {
+        } else if (!this.state.isOpen) {
             this.setState({
                 isOpen: true,
                 forceHide: false

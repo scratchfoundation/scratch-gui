@@ -21,6 +21,14 @@ export default [
         featured: true
     },
     {
+        name: 'Vision',
+        extensionURL: 'vision',
+        iconURL: videoImage,
+        description: 'Teach your projects to see.',
+        featured: true,
+        disabled: false
+    },
+    {
         name: 'LEGO WeDo 2.0',
         extensionURL: '',
         iconURL: wedoImage,

@@ -14,12 +14,9 @@ class LoadButton extends React.Component {
             'handleClick'
         ]);
     }
-    shouldComponentUpdate () {
-        return false;
-    }
     handleChange (e) {
         const reader = new FileReader();
-        reader.onload = () => this.props.loadProject(reader.result);
+        reader.onload = () => this.props.vm.fromJSON(reader.result);
         reader.readAsText(e.target.files[0]);
     }
     handleClick () {
@@ -30,7 +27,7 @@ class LoadButton extends React.Component {
     }
     render () {
         const {
-            loadProject, // eslint-disable-line no-unused-vars
+            vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -45,11 +42,13 @@ class LoadButton extends React.Component {
 }
 
 LoadButton.propTypes = {
-    loadProject: PropTypes.func.isRequired
+    vm: PropTypes.shape({
+        fromJSON: PropTypes.func
+    })
 };
 
 const mapStateToProps = state => ({
-    loadProject: state.vm.fromJSON.bind(state.vm)
+    vm: state.vm
 });
 
 export default connect(

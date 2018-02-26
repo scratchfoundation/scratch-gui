@@ -14,11 +14,8 @@ class SaveButton extends React.Component {
             'handleClick'
         ]);
     }
-    shouldComponentUpdate () {
-        return false;
-    }
     handleClick () {
-        const json = this.props.saveProjectSb3();
+        const json = this.props.vm.saveProjectSb3();
 
         // Download project data into a file - create link element,
         // simulate click on it, and then remove it.
@@ -39,7 +36,7 @@ class SaveButton extends React.Component {
     }
     render () {
         const {
-            saveProjectSb3, // eslint-disable-line no-unused-vars
+            vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -60,11 +57,12 @@ class SaveButton extends React.Component {
 }
 
 SaveButton.propTypes = {
-    saveProjectSb3: PropTypes.func.isRequired
-};
+    vm: PropTypes.shape({
+        saveProjectSb3: PropTypes.func
+    })};
 
 const mapStateToProps = state => ({
-    saveProjectSb3: state.vm.saveProjectSb3.bind(state.vm)
+    vm: state.vm
 });
 
 export default connect(

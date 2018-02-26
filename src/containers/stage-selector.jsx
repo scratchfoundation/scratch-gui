@@ -54,6 +54,7 @@ class StageSelector extends React.Component {
             /* eslint-disable no-unused-vars */
             assetId,
             id,
+            onActivateTab,
             onSelect,
             /* eslint-enable no-unused-vars */
             ...componentProps

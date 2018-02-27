@@ -34,6 +34,10 @@ const messages = defineMessages({
     }
 });
 
+// Cache this value to only retreive it once the first time.
+// Assume that it doesn't change for a session.
+let isRendererSupported = null;
+
 const GUIComponent = props => {
     const {
         activeTabIndex,
@@ -69,7 +73,9 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    const isRendererSupported = Renderer.isSupported();
+    if (isRendererSupported === null) {
+        isRendererSupported = Renderer.isSupported();
+    }
 
     return (
         <Box

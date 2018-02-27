@@ -9,12 +9,17 @@ import {
     closeSpriteLibrary
 } from '../reducers/modals';
 
+import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+import {setReceivedBlocks} from '../reducers/hovered-target';
+
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
+import spriteLibraryContent from '../lib/libraries/sprites.json';
 
 class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleBlockDragEnd',
             'handleChangeSpriteDirection',
             'handleChangeSpriteName',
             'handleChangeSpriteSize',
@@ -23,8 +28,16 @@ class TargetPane extends React.Component {
             'handleChangeSpriteY',
             'handleDeleteSprite',
             'handleDuplicateSprite',
-            'handleSelectSprite'
+            'handleSelectSprite',
+            'handleSurpriseSpriteClick',
+            'handlePaintSpriteClick'
         ]);
+    }
+    componentDidMount () {
+        this.props.vm.addListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+    }
+    componentWillUnmount () {
+        this.props.vm.removeListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
     }
     handleChangeSpriteDirection (direction) {
         this.props.vm.postSpriteInfo({direction});
@@ -53,10 +66,33 @@ class TargetPane extends React.Component {
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
     }
+    handleSurpriseSpriteClick () {
+        const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
+        this.props.vm.addSprite2(JSON.stringify(item.json));
+    }
+    handlePaintSpriteClick () {
+        // @todo this is brittle, will need to be refactored for localized libraries
+        const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
+        if (emptyItem) {
+            this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
+                this.props.onActivateTab(COSTUMES_TAB_INDEX);
+            });
+        }
+    }
+    handleBlockDragEnd (blocks) {
+        if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
+            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite);
+            this.props.onReceivedBlocks(true);
+        }
+    }
     render () {
+        const {
+            onActivateTab, // eslint-disable-line no-unused-vars
+            ...componentProps
+        } = this.props;
         return (
             <TargetPaneComponent
-                {...this.props}
+                {...componentProps}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
                 onChangeSpriteSize={this.handleChangeSpriteSize}
@@ -65,7 +101,9 @@ class TargetPane extends React.Component {
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDuplicateSprite={this.handleDuplicateSprite}
+                onPaintSpriteClick={this.handlePaintSpriteClick}
                 onSelectSprite={this.handleSelectSprite}
+                onSurpriseSpriteClick={this.handleSurpriseSpriteClick}
             />
         );
     }
@@ -82,6 +120,7 @@ TargetPane.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
+    hoveredTarget: state.hoveredTarget,
     sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
         let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
@@ -92,6 +131,7 @@ const mapStateToProps = state => ({
         return sprites;
     }, {}),
     stage: state.targets.stage,
+    raiseSprites: state.blockDrag,
     spriteLibraryVisible: state.modals.spriteLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });
@@ -105,6 +145,12 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
+    },
+    onActivateTab: tabIndex => {
+        dispatch(activateTab(tabIndex));
+    },
+    onReceivedBlocks: receivedBlocks => {
+        dispatch(setReceivedBlocks(receivedBlocks));
     }
 });
 

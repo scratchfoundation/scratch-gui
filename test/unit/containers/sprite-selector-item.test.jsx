@@ -12,6 +12,7 @@ describe('SpriteSelectorItem Container', () => {
     let costumeURL;
     let name;
     let onClick;
+    let dispatchSetHoveredSprite;
     let onDeleteButtonClick;
     let selected;
     let id;
@@ -23,6 +24,7 @@ describe('SpriteSelectorItem Container', () => {
                 <SpriteSelectorItem
                     className={className}
                     costumeURL={costumeURL}
+                    dispatchSetHoveredSprite={dispatchSetHoveredSprite}
                     id={id}
                     name={name}
                     selected={selected}
@@ -34,13 +36,14 @@ describe('SpriteSelectorItem Container', () => {
     };
 
     beforeEach(() => {
-        store = mockStore();
+        store = mockStore({hoveredTarget: {receivedBlocks: false, sprite: null}});
         className = 'ponies';
         costumeURL = 'https://scratch.mit.edu/foo/bar/pony';
         id = 1337;
         name = 'Pony sprite';
         onClick = jest.fn();
         onDeleteButtonClick = jest.fn();
+        dispatchSetHoveredSprite = jest.fn();
         selected = true;
         // Mock window.confirm() which is called when the close button is clicked.
         global.confirm = jest.fn(() => true);

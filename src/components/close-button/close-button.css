@@ -49,3 +49,18 @@
     width: 0.75rem;
     height: 0.75rem;
 }
+
+.back-icon {
+  position: relative;
+  margin: 0.25rem;
+  user-select: none;
+}
+
+.small .back-icon {
+    width: 50%;
+}
+
+.large .back-icon {
+    width: 2rem;
+    height: 2rem;
+}

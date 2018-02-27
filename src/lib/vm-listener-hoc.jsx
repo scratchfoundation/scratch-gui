@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 import {updateEditingTarget, updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
-import {setReceivedBlocks} from '../reducers/hovered-target';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -20,7 +19,6 @@ const vmListenerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleBlockDragEnd',
                 'handleKeyDown',
                 'handleKeyUp'
             ]);
@@ -33,8 +31,6 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
-            this.props.vm.on('BLOCK_DRAG_END', this.handleBlockDragEnd);
-
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -42,19 +38,10 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.addEventListener('keyup', this.handleKeyUp);
             }
         }
-        shouldComponentUpdate () {
-            return false;
-        }
         componentWillUnmount () {
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
-            }
-        }
-        handleBlockDragEnd (blocks) {
-            if (this.props.hoveredSprite && this.props.hoveredSprite !== this.props.editingTarget) {
-                this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredSprite);
-                this.props.onReceivedBlocks(true);
             }
         }
         handleKeyDown (e) {
@@ -88,13 +75,10 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
-                editingTarget,
-                hoveredSprite,
                 onBlockDragUpdate,
                 onKeyDown,
                 onKeyUp,
                 onMonitorsUpdate,
-                onReceivedBlocks,
                 onTargetsUpdate,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -104,13 +88,10 @@ const vmListenerHOC = function (WrappedComponent) {
     }
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
-        editingTarget: PropTypes.string,
-        hoveredSprite: PropTypes.string,
         onBlockDragUpdate: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
         onMonitorsUpdate: PropTypes.func.isRequired,
-        onReceivedBlocks: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
         vm: PropTypes.instanceOf(VM).isRequired
     };
@@ -132,9 +113,6 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onBlockDragUpdate: areBlocksOverGui => {
             dispatch(updateBlockDrag(areBlocksOverGui));
-        },
-        onReceivedBlocks: receivedBlocks => {
-            dispatch(setReceivedBlocks(receivedBlocks));
         }
     });
     return connect(

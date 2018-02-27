@@ -10,6 +10,7 @@ import {
 } from '../reducers/modals';
 
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+import {setReceivedBlocks} from '../reducers/hovered-target';
 
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
@@ -18,6 +19,7 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleBlockDragEnd',
             'handleChangeSpriteDirection',
             'handleChangeSpriteName',
             'handleChangeSpriteSize',
@@ -30,6 +32,12 @@ class TargetPane extends React.Component {
             'handleSurpriseSpriteClick',
             'handlePaintSpriteClick'
         ]);
+    }
+    componentDidMount () {
+        this.props.vm.addListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+    }
+    componentWillUnmount () {
+        this.props.vm.removeListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
     }
     handleChangeSpriteDirection (direction) {
         this.props.vm.postSpriteInfo({direction});
@@ -69,6 +77,12 @@ class TargetPane extends React.Component {
             this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
                 this.props.onActivateTab(COSTUMES_TAB_INDEX);
             });
+        }
+    }
+    handleBlockDragEnd (blocks) {
+        if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
+            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite);
+            this.props.onReceivedBlocks(true);
         }
     }
     render () {
@@ -134,6 +148,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onActivateTab: tabIndex => {
         dispatch(activateTab(tabIndex));
+    },
+    onReceivedBlocks: receivedBlocks => {
+        dispatch(setReceivedBlocks(receivedBlocks));
     }
 });
 

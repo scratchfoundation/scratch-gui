@@ -144,16 +144,21 @@ const GUIComponent = props => {
                         </Box>
                         <Box className={styles.stageWrapper}>
                             {/* eslint-disable arrow-body-style */}
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
-                                return isRendererSupported ? (
-                                    <Stage
-                                        height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                        shrink={0}
-                                        vm={vm}
-                                        width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                    />
-                                ) : null;
-                            }}</MediaQuery>
+                            <MediaQuery
+                                minHeight={layout.fullSizeMinHeight}
+                                minWidth={layout.fullSizeMinWidth}
+                            >
+                                {isFullSize => {
+                                    return isRendererSupported ? (
+                                        <Stage
+                                            height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
+                                            shrink={0}
+                                            vm={vm}
+                                            width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
+                                        />
+                                    ) : null;
+                                }}
+                            </MediaQuery>
                             {/* eslint-enable arrow-body-style */}
                         </Box>
                         <Box className={styles.targetWrapper}>

@@ -51,10 +51,7 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <MediaQuery
-                            minHeight={layout.fullSizeMinHeight}
-                            minWidth={layout.fullSizeMinWidth}
-                        >
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <div className={styles.iconWrapper}>
                                 <img
                                     aria-hidden="true"
@@ -77,10 +74,7 @@ class SpriteInfo extends React.Component {
                     </div>
 
                     <div className={styles.group}>
-                        <MediaQuery
-                            minHeight={layout.fullSizeMinHeight}
-                            minWidth={layout.fullSizeMinWidth}
-                        >
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <div className={styles.iconWrapper}>
                                 <img
                                     aria-hidden="true"
@@ -105,10 +99,7 @@ class SpriteInfo extends React.Component {
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <MediaQuery
-                            minHeight={layout.fullSizeMinHeight}
-                            minWidth={layout.fullSizeMinWidth}
-                        >
+                        <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <Label
                                 secondary
                                 text="Show"

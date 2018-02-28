@@ -186,9 +186,6 @@ class Stage extends React.Component {
             mouseDown: false,
             mouseDownPosition: null
         });
-        if (this.state.isDragging) {
-            this.onStopDrag();
-        }
         const data = {
             isDown: false,
             x: x - this.rect.left,
@@ -196,6 +193,10 @@ class Stage extends React.Component {
             canvasWidth: this.rect.width,
             canvasHeight: this.rect.height
         };
+        if (this.state.isDragging) {
+            this.onStopDrag();
+            data.wasDragged = true;
+        }
         this.props.vm.postIOData('mouse', data);
     }
     onMouseDown (e) {

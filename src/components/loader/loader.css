@@ -1,0 +1,89 @@
+@import "../../css/colors.css";
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Below preview modal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $motion-primary;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.block-animation {
+    width: 125px;
+    height: 150px;
+    margin: 50px auto 0px;
+}
+
+.block-animation img {
+    display: block;
+    position: relative;
+    height: 30%;
+    margin-top: -4px;
+}
+
+.topBlock {
+    animation: top-slide-in 1.5s ease infinite;
+}
+
+.middleBlock {
+    animation: middle-slide-in 1.5s ease infinite;
+}
+
+.bottomBlock {
+    animation: bottom-slide-in 1.5s ease infinite;
+}
+
+
+@keyframes top-slide-in {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  33% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes middle-slide-in {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  33% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  66% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes bottom-slide-in {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  66% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

@@ -16,7 +16,8 @@ const enhancer = composeEnhancers(
 );
 
 /*
- * Higher Order Component to provide redux state
+ * Higher Order Component to provide redux state. If an `intl` prop is provided
+ * it will override the internal `intl` redux state
  * @param {React.Component} WrappedComponent - component to provide state for
  * @returns {React.Component} component with redux and intl state provided
  */

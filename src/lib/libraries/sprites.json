@@ -370,7 +370,7 @@
             1
         ],
         "json": {
-            "objName": "basketball",
+            "objName": "Basketball",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1218,7 +1218,7 @@
             1
         ],
         "json": {
-            "objName": "casey",
+            "objName": "Casey",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1510,7 +1510,7 @@
             1
         ],
         "json": {
-            "objName": "dinosaur1",
+            "objName": "Dinosaur1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1578,7 +1578,7 @@
             1
         ],
         "json": {
-            "objName": "dinosaur2",
+            "objName": "Dinosaur2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1646,7 +1646,7 @@
             1
         ],
         "json": {
-            "objName": "dinosaur3",
+            "objName": "Dinosaur3",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1722,7 +1722,7 @@
             1
         ],
         "json": {
-            "objName": "dinosaur4",
+            "objName": "Dinosaur4",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2034,7 +2034,7 @@
             1
         ],
         "json": {
-            "objName": "dorian",
+            "objName": "Dorian",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2102,7 +2102,7 @@
             1
         ],
         "json": {
-            "objName": "dot",
+            "objName": "Dot",
             "sounds": [
                 {
                     "soundName": "bark",
@@ -2170,7 +2170,7 @@
             2
         ],
         "json": {
-            "objName": "drum",
+            "objName": "Drum",
             "sounds": [
                 {
                     "soundName": "high tom",
@@ -2238,7 +2238,7 @@
             5
         ],
         "json": {
-            "objName": "drum kit",
+            "objName": "Drum Kit",
             "sounds": [
                 {
                     "soundName": "drum bass1",
@@ -2330,7 +2330,7 @@
             4
         ],
         "json": {
-            "objName": "drum-cymbal",
+            "objName": "Drum-cymbal",
             "sounds": [
                 {
                     "soundName": "crash cymbal",
@@ -2414,7 +2414,7 @@
             1
         ],
         "json": {
-            "objName": "drum-highhat",
+            "objName": "Drum-highhat",
             "sounds": [
                 {
                     "soundName": "hihat cymbal",
@@ -2474,7 +2474,7 @@
             3
         ],
         "json": {
-            "objName": "drum-snare",
+            "objName": "Drum-snare",
             "sounds": [
                 {
                     "soundName": "tap snare",
@@ -2594,7 +2594,7 @@
             1
         ],
         "json": {
-            "objName": "egg",
+            "objName": "Egg",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2766,7 +2766,7 @@
             1
         ],
         "json": {
-            "objName": "fish",
+            "objName": "Fish",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2834,7 +2834,7 @@
             1
         ],
         "json": {
-            "objName": "fox",
+            "objName": "Fox",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3102,7 +3102,7 @@
             1
         ],
         "json": {
-            "objName": "goalie",
+            "objName": "Goalie",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3238,7 +3238,7 @@
             8
         ],
         "json": {
-            "objName": "guitar",
+            "objName": "Guitar",
             "sounds": [
                 {
                     "soundName": "C guitar",
@@ -3354,7 +3354,7 @@
             8
         ],
         "json": {
-            "objName": "guitar-electric2",
+            "objName": "Guitar-electric2",
             "sounds": [
                 {
                     "soundName": "C elec guitar",
@@ -3470,7 +3470,7 @@
             8
         ],
         "json": {
-            "objName": "gutar-electric1",
+            "objName": "Gutar-electric1",
             "sounds": [
                 {
                     "soundName": "C elec guitar",
@@ -3586,7 +3586,7 @@
             1
         ],
         "json": {
-            "objName": "hedgehog",
+            "objName": "Hedgehog",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3766,7 +3766,7 @@
             1
         ],
         "json": {
-            "objName": "jamie",
+            "objName": "Jamie",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3834,7 +3834,7 @@
             1
         ],
         "json": {
-            "objName": "jellyfish",
+            "objName": "Jellyfish",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3902,7 +3902,7 @@
             1
         ],
         "json": {
-            "objName": "jez",
+            "objName": "Jez",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3986,7 +3986,7 @@
             1
         ],
         "json": {
-            "objName": "jordyn",
+            "objName": "Jordyn",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4054,7 +4054,7 @@
             8
         ],
         "json": {
-            "objName": "keyboard",
+            "objName": "Keyboard",
             "sounds": [
                 {
                     "soundName": "C elec piano",
@@ -4310,7 +4310,7 @@
             1
         ],
         "json": {
-            "objName": "llama",
+            "objName": "Llama",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4370,7 +4370,7 @@
             1
         ],
         "json": {
-            "objName": "max",
+            "objName": "Max",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4438,7 +4438,7 @@
             9
         ],
         "json": {
-            "objName": "microphone",
+            "objName": "Microphone",
             "sounds": [
                 {
                     "soundName": "bass beatbox",
@@ -4562,7 +4562,7 @@
             1
         ],
         "json": {
-            "objName": "milk",
+            "objName": "Milk",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4638,7 +4638,7 @@
             1
         ],
         "json": {
-            "objName": "monet",
+            "objName": "Monet",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4842,7 +4842,7 @@
             1
         ],
         "json": {
-            "objName": "octopus",
+            "objName": "Octopus",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4918,7 +4918,7 @@
             1
         ],
         "json": {
-            "objName": "owl",
+            "objName": "Owl",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4978,7 +4978,7 @@
             1
         ],
         "json": {
-            "objName": "panther",
+            "objName": "Panther",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5202,7 +5202,7 @@
             1
         ],
         "json": {
-            "objName": "pufferfish",
+            "objName": "Pufferfish",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5270,7 +5270,7 @@
             1
         ],
         "json": {
-            "objName": "rabbit",
+            "objName": "Rabbit",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5390,7 +5390,7 @@
             1
         ],
         "json": {
-            "objName": "referee",
+            "objName": "Referee",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5458,7 +5458,7 @@
             1
         ],
         "json": {
-            "objName": "ripley",
+            "objName": "Ripley",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5542,7 +5542,7 @@
             2
         ],
         "json": {
-            "objName": "robot",
+            "objName": "Robot",
             "sounds": [
                 {
                     "soundName": "computer beep",
@@ -5618,7 +5618,7 @@
             1
         ],
         "json": {
-            "objName": "sam",
+            "objName": "Sam",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5686,7 +5686,7 @@
             8
         ],
         "json": {
-            "objName": "saxophone",
+            "objName": "Saxophone",
             "sounds": [
                 {
                     "soundName": "C sax",
@@ -5802,7 +5802,7 @@
             1
         ],
         "json": {
-            "objName": "snake",
+            "objName": "Snake",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5906,7 +5906,7 @@
             1
         ],
         "json": {
-            "objName": "soccer ball",
+            "objName": "Soccer Ball",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -5950,7 +5950,7 @@
             3
         ],
         "json": {
-            "objName": "spaceship",
+            "objName": "Spaceship",
             "sounds": [
                 {
                     "soundName": "space ripple",
@@ -6370,7 +6370,7 @@
             1
         ],
         "json": {
-            "objName": "strawberry",
+            "objName": "Strawberry",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6446,7 +6446,7 @@
             1
         ],
         "json": {
-            "objName": "takeout",
+            "objName": "Takeout",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6590,7 +6590,7 @@
             1
         ],
         "json": {
-            "objName": "toucan",
+            "objName": "Toucan",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6650,7 +6650,7 @@
             8
         ],
         "json": {
-            "objName": "trumpet",
+            "objName": "Trumpet",
             "sounds": [
                 {
                     "soundName": "C trumpet",
@@ -7046,7 +7046,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-A",
+            "objName": "ZBlock-A",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7090,7 +7090,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-B",
+            "objName": "ZBlock-B",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7134,7 +7134,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-C",
+            "objName": "ZBlock-C",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7178,7 +7178,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-D",
+            "objName": "ZBlock-D",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7222,7 +7222,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-E",
+            "objName": "ZBlock-E",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7266,7 +7266,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-F",
+            "objName": "ZBlock-F",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7310,7 +7310,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-G",
+            "objName": "ZBlock-G",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7354,7 +7354,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-H",
+            "objName": "ZBlock-H",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7398,7 +7398,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-I",
+            "objName": "ZBlock-I",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7442,7 +7442,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-J",
+            "objName": "ZBlock-J",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7486,7 +7486,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-K",
+            "objName": "ZBlock-K",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7530,7 +7530,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-L",
+            "objName": "ZBlock-L",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7574,7 +7574,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-M",
+            "objName": "ZBlock-M",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7618,7 +7618,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-N",
+            "objName": "ZBlock-N",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7662,7 +7662,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-O",
+            "objName": "ZBlock-O",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7706,7 +7706,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-P",
+            "objName": "ZBlock-P",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7750,7 +7750,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-Q",
+            "objName": "ZBlock-Q",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7794,7 +7794,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-R",
+            "objName": "ZBlock-R",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7838,7 +7838,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-S",
+            "objName": "ZBlock-S",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7882,7 +7882,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-T",
+            "objName": "ZBlock-T",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7926,7 +7926,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-U",
+            "objName": "ZBlock-U",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -7970,7 +7970,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-V",
+            "objName": "ZBlock-V",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8014,7 +8014,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-W",
+            "objName": "ZBlock-W",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8058,7 +8058,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-X",
+            "objName": "ZBlock-X",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8102,7 +8102,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-Y",
+            "objName": "ZBlock-Y",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8146,7 +8146,7 @@
             1
         ],
         "json": {
-            "objName": "zBlock-Z",
+            "objName": "ZBlock-Z",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8190,7 +8190,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-0",
+            "objName": "ZGlow-0",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8234,7 +8234,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-1",
+            "objName": "ZGlow-1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8278,7 +8278,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-2",
+            "objName": "ZGlow-2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8322,7 +8322,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-3",
+            "objName": "ZGlow-3",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8366,7 +8366,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-4",
+            "objName": "ZGlow-4",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8410,7 +8410,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-5",
+            "objName": "ZGlow-5",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8454,7 +8454,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-6",
+            "objName": "ZGlow-6",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8498,7 +8498,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-7",
+            "objName": "ZGlow-7",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8542,7 +8542,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-8",
+            "objName": "ZGlow-8",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8586,7 +8586,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-9",
+            "objName": "ZGlow-9",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8630,7 +8630,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-A",
+            "objName": "ZGlow-A",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8674,7 +8674,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-B",
+            "objName": "ZGlow-B",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8718,7 +8718,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-C",
+            "objName": "ZGlow-C",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8762,7 +8762,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-D",
+            "objName": "ZGlow-D",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8806,7 +8806,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-E",
+            "objName": "ZGlow-E",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8850,7 +8850,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-F",
+            "objName": "ZGlow-F",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8894,7 +8894,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-G",
+            "objName": "ZGlow-G",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8938,7 +8938,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-H",
+            "objName": "ZGlow-H",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8982,7 +8982,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-I",
+            "objName": "ZGlow-I",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9026,7 +9026,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-J",
+            "objName": "ZGlow-J",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9070,7 +9070,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-K",
+            "objName": "ZGlow-K",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9114,7 +9114,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-L",
+            "objName": "ZGlow-L",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9158,7 +9158,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-M",
+            "objName": "ZGlow-M",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9202,7 +9202,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-N",
+            "objName": "ZGlow-N",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9246,7 +9246,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-O",
+            "objName": "ZGlow-O",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9290,7 +9290,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-P",
+            "objName": "ZGlow-P",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9334,7 +9334,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-Q",
+            "objName": "ZGlow-Q",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9378,7 +9378,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-R",
+            "objName": "ZGlow-R",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9422,7 +9422,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-S",
+            "objName": "ZGlow-S",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9466,7 +9466,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-T",
+            "objName": "ZGlow-T",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9510,7 +9510,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-U",
+            "objName": "ZGlow-U",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9554,7 +9554,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-V",
+            "objName": "ZGlow-V",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9598,7 +9598,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-W",
+            "objName": "ZGlow-W",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9642,7 +9642,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-X",
+            "objName": "ZGlow-X",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9686,7 +9686,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-Y",
+            "objName": "ZGlow-Y",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9730,7 +9730,7 @@
             1
         ],
         "json": {
-            "objName": "zGlow-Z",
+            "objName": "ZGlow-Z",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9774,7 +9774,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-0",
+            "objName": "ZPixel-0",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9818,7 +9818,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-1",
+            "objName": "ZPixel-1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9862,7 +9862,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-2",
+            "objName": "ZPixel-2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9906,7 +9906,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-3",
+            "objName": "ZPixel-3",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9950,7 +9950,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-4",
+            "objName": "ZPixel-4",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9994,7 +9994,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-5",
+            "objName": "ZPixel-5",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10038,7 +10038,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-6",
+            "objName": "ZPixel-6",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10082,7 +10082,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-7",
+            "objName": "ZPixel-7",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10126,7 +10126,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-8",
+            "objName": "ZPixel-8",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10170,7 +10170,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-9",
+            "objName": "ZPixel-9",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10214,7 +10214,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-A",
+            "objName": "ZPixel-A",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10258,7 +10258,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-B",
+            "objName": "ZPixel-B",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10302,7 +10302,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-C",
+            "objName": "ZPixel-C",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10346,7 +10346,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-D",
+            "objName": "ZPixel-D",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10390,7 +10390,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-E",
+            "objName": "ZPixel-E",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10434,7 +10434,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-F",
+            "objName": "ZPixel-F",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10478,7 +10478,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-G",
+            "objName": "ZPixel-G",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10522,7 +10522,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-H",
+            "objName": "ZPixel-H",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10566,7 +10566,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-I",
+            "objName": "ZPixel-I",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10610,7 +10610,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-J",
+            "objName": "ZPixel-J",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10654,7 +10654,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-K",
+            "objName": "ZPixel-K",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10698,7 +10698,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-L",
+            "objName": "ZPixel-L",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10742,7 +10742,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-M",
+            "objName": "ZPixel-M",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10786,7 +10786,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-N",
+            "objName": "ZPixel-N",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10830,7 +10830,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-O",
+            "objName": "ZPixel-O",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10874,7 +10874,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-P",
+            "objName": "ZPixel-P",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10918,7 +10918,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-Q",
+            "objName": "ZPixel-Q",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10962,7 +10962,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-R",
+            "objName": "ZPixel-R",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11006,7 +11006,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-S",
+            "objName": "ZPixel-S",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11050,7 +11050,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-T",
+            "objName": "ZPixel-T",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11094,7 +11094,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-U",
+            "objName": "ZPixel-U",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11138,7 +11138,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-V",
+            "objName": "ZPixel-V",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11182,7 +11182,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-W",
+            "objName": "ZPixel-W",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11226,7 +11226,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-X",
+            "objName": "ZPixel-X",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11270,7 +11270,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-Y",
+            "objName": "ZPixel-Y",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11314,7 +11314,7 @@
             1
         ],
         "json": {
-            "objName": "zPixel-Z",
+            "objName": "ZPixel-Z",
             "sounds": [
                 {
                     "soundName": "pop",

@@ -19,6 +19,7 @@ import styles from './target-pane.css';
 const TargetPane = ({
     backdropLibraryVisible,
     editingTarget,
+    hoveredTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
@@ -34,6 +35,7 @@ const TargetPane = ({
     onRequestCloseSpriteLibrary,
     onRequestCloseBackdropLibrary,
     onSelectSprite,
+    raiseSprites,
     stage,
     sprites,
     vm,
@@ -45,6 +47,9 @@ const TargetPane = ({
     >
 
         <SpriteSelectorComponent
+            editingTarget={editingTarget}
+            hoveredTarget={hoveredTarget}
+            raised={raiseSprites}
             selectedId={editingTarget}
             sprites={sprites}
             onChangeSpriteDirection={onChangeSpriteDirection}
@@ -111,6 +116,10 @@ TargetPane.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -126,6 +135,7 @@ TargetPane.propTypes = {
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
+    raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,

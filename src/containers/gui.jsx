@@ -17,16 +17,29 @@ import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            loading: true
+        };
+    }
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
-        this.props.vm.loadProject(this.props.projectData);
-        this.props.vm.setCompatibilityMode(true);
-        this.props.vm.start();
+        this.props.vm.loadProject(this.props.projectData).then(() => {
+            this.setState({loading: false}, () => {
+                this.props.vm.setCompatibilityMode(true);
+                this.props.vm.start();
+            });
+        });
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
-            this.props.vm.loadProject(nextProps.projectData);
+            this.setState({loading: true}, () => {
+                this.props.vm.loadProject(nextProps.projectData).then(() => {
+                    this.setState({loading: false});
+                });
+            });
         }
     }
     componentWillUnmount () {
@@ -35,12 +48,14 @@ class GUI extends React.Component {
     render () {
         const {
             children,
+            fetchingProject,
             projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
         return (
             <GUIComponent
+                loading={fetchingProject || this.state.loading}
                 vm={vm}
                 {...componentProps}
             >
@@ -53,6 +68,8 @@ class GUI extends React.Component {
 GUI.propTypes = {
     ...GUIComponent.propTypes,
     feedbackFormVisible: PropTypes.bool,
+    fetchingProject: PropTypes.bool,
+    importInfoVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
@@ -65,6 +82,7 @@ const mapStateToProps = state => ({
     blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
+    importInfoVisible: state.modals.importInfo,
     previewInfoVisible: state.modals.previewInfo,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });

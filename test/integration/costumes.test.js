@@ -57,6 +57,8 @@ describe('Working with costumes', () => {
     test('Adding a backdrop', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
+        // Not sure why but this fixes this test
+        await clickText('Costumes');
         await clickXpath('//button[@aria-label="Backdrop Library"]');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('blue');

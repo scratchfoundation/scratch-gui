@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import JSZip from 'jszip';
 
 import ButtonComponent from '../components/button/button.jsx';
 import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';

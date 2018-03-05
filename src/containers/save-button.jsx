@@ -16,39 +16,19 @@ class SaveButton extends React.Component {
         ]);
     }
     handleClick () {
-        const zip = new JSZip();
-        // Get the serialized project and assets from vm
-        const projectInfo = this.props.saveProjectSb3();
-
-        const json = projectInfo.projectJson;
-        const sounds = projectInfo.sounds;
-        const costumes = projectInfo.costumes;
-
-        // Put everything in a zip file
-        zip.file('project.json', json);
-        for (let i = 0; i < sounds.length; i++) {
-            const currSound = sounds[i];
-            zip.file(currSound.fileName, currSound.fileContent);
-        }
-        for (let i = 0; i < costumes.length; i++) {
-            const currCostume = costumes[i];
-            zip.file(currCostume.fileName, currCostume.fileContent);
-        }
-
-        // Download project data into a file - create link element,
-        // simulate click on it, and then remove it.
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
-        zip.generateAsync({type: 'blob'}).then(content => {
+        this.props.saveProjectSb3().then(content => {
             const url = window.URL.createObjectURL(content);
 
             saveLink.href = url;
 
-            // TODO Project name/location should be chosen by user
+            // TODO user-friendly project name
             // File name: project-DATE-TIME
             const date = new Date();
             const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
+            // TODO change extension to sb3
             saveLink.download = `project-${timestamp}.zip`;
             saveLink.click();
             window.URL.revokeObjectURL(url);

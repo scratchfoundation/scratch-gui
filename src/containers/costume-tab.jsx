@@ -90,7 +90,14 @@ class CostumeTab extends React.Component {
         } = nextProps;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        if (target && target.costumes && this.state.selectedCostumeIndex > target.costumes.length - 1) {
+        if (!target || !target.costumes) {
+            return;
+        }
+
+        // If switching editing targets, update the costume index
+        if (this.props.editingTarget !== editingTarget) {
+            this.setState({selectedCostumeIndex: target.currentCostume});
+        } else if (this.state.selectedCostumeIndex > target.costumes.length - 1) {
             this.setState({selectedCostumeIndex: target.costumes.length - 1});
         }
     }

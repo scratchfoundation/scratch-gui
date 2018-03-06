@@ -53,6 +53,7 @@
     filter: none;
 }
 .radio.is-disabled {
+    pointer-events: none;
     cursor: default;
 }
 

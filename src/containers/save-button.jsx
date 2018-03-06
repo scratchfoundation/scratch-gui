@@ -18,7 +18,7 @@ class SaveButton extends React.Component {
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
-        this.props.saveProjectSb3().then(content => {
+        this.props.vm.saveProjectSb3().then(content => {
             const url = window.URL.createObjectURL(content);
 
             saveLink.href = url;
@@ -36,7 +36,7 @@ class SaveButton extends React.Component {
     }
     render () {
         const {
-            saveProjectSb3, // eslint-disable-line no-unused-vars
+            vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -57,11 +57,13 @@ class SaveButton extends React.Component {
 }
 
 SaveButton.propTypes = {
-    saveProjectSb3: PropTypes.func.isRequired
+    vm: PropTypes.shape({
+        saveProjectSb3: PropTypes.func
+    })
 };
 
 const mapStateToProps = state => ({
-    saveProjectSb3: state.vm.saveProjectSb3.bind(state.vm)
+    vm: state.vm
 });
 
 export default connect(

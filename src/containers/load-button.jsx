@@ -19,7 +19,7 @@ class LoadButton extends React.Component {
         const reader = new FileReader();
         reader.onload = () => {
             JSZip.loadAsync(reader.result)
-                .then(zip => this.props.loadProject(zip));
+                .then(zip => this.props.vm.loadProjectLocal(zip));
         };
         reader.readAsArrayBuffer(e.target.files[0]);
     }
@@ -31,7 +31,7 @@ class LoadButton extends React.Component {
     }
     render () {
         const {
-            loadProject, // eslint-disable-line no-unused-vars
+            vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -46,11 +46,13 @@ class LoadButton extends React.Component {
 }
 
 LoadButton.propTypes = {
-    loadProject: PropTypes.func.isRequired
+    vm: PropTypes.shape({
+        loadProjectLocal: PropTypes.func
+    })
 };
 
 const mapStateToProps = state => ({
-    loadProject: state.vm.loadProjectLocal.bind(state.vm)
+    vm: state.vm
 });
 
 export default connect(

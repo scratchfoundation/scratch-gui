@@ -51,6 +51,7 @@
 }
 .radio.is-active {
     filter: none;
+    pointer-events: auto;
 }
 .radio.is-disabled {
     pointer-events: none;

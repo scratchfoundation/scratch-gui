@@ -1133,17 +1133,6 @@
         ]
     },
     {
-        "name": "Drum-c",
-        "md5": "50cf928f06481ff823e18e70c01df807.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            43,
-            60,
-            1
-        ]
-    },
-    {
         "name": "Drum-cymbal-a",
         "md5": "d6d41862fda966df1455d2dbff5e1988.svg",
         "type": "costume",
@@ -1157,17 +1146,6 @@
     {
         "name": "Drum-cymbal-b",
         "md5": "e6b7d7d8874bc4b7be58afe927157554.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            30,
-            74,
-            1
-        ]
-    },
-    {
-        "name": "Drum-cymbal-c",
-        "md5": "0e85f690e8eaf153ae20cbbbb88ca60c.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -1199,17 +1177,6 @@
         ]
     },
     {
-        "name": "Drum-highhat-c",
-        "md5": "c6f2467a5226f7d372d15669c5099a41.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            33,
-            73,
-            1
-        ]
-    },
-    {
         "name": "Drum-kit",
         "md5": "131d040d86ecea62ccd175a8709c7866.svg",
         "type": "costume",
@@ -1223,17 +1190,6 @@
     {
         "name": "Drum-kit-b",
         "md5": "ff14be049146cf9ab142e0951cb9b735.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            58,
-            78,
-            1
-        ]
-    },
-    {
-        "name": "Drum-kit-c",
-        "md5": "4ca5c6eee4d907b98fb62340bd4a2cde.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -1261,17 +1217,6 @@
         "info": [
             36,
             66,
-            1
-        ]
-    },
-    {
-        "name": "Drum-snare-c",
-        "md5": "0b50639f4aac75a7e1061083401e0c40.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            37,
-            61,
             1
         ]
     },
@@ -1650,17 +1595,6 @@
         ]
     },
     {
-        "name": "Guitar-c",
-        "md5": "5cfe9faacb98d35a702cfa633967a5b5.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            83,
-            1
-        ]
-    },
-    {
         "name": "Guitar-electric1-a",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "costume",
@@ -1683,17 +1617,6 @@
         ]
     },
     {
-        "name": "Guitar-electric1-c",
-        "md5": "4cb069d2a290c0a153f196de725d357c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            42,
-            85,
-            1
-        ]
-    },
-    {
         "name": "Guitar-electric2-a",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "costume",
@@ -1707,17 +1630,6 @@
     {
         "name": "Guitar-electric2-b",
         "md5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            38,
-            94,
-            1
-        ]
-    },
-    {
-        "name": "Guitar-electric2-c",
-        "md5": "7f5f8b6d772657566e3dee24c9a9c538.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -1980,17 +1892,6 @@
         ]
     },
     {
-        "name": "Keyboard-c",
-        "md5": "4ee5e7c6d0463d9b50e0c593e70e1e31.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            72,
-            68,
-            1
-        ]
-    },
-    {
         "name": "Kiran-a",
         "md5": "9de23c4a7a7fbb67136b539241346854.svg",
         "type": "costume",
@@ -2191,17 +2092,6 @@
     {
         "name": "Microphone-b",
         "md5": "29988ebbde49beaceb06d9eb66138b80.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            40,
-            88,
-            1
-        ]
-    },
-    {
-        "name": "Microphone-c",
-        "md5": "021d6da78b7bda374da4bdb50d4cbc4f.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -2541,7 +2431,7 @@
         ]
     },
     {
-        "name": "Penguin1",
+        "name": "Penguin1-a",
         "md5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
         "type": "costume",
         "tags": [],
@@ -2552,7 +2442,7 @@
         ]
     },
     {
-        "name": "Penguin1 Talk-a",
+        "name": "Penguin1-b",
         "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
         "type": "costume",
         "tags": [],
@@ -2563,7 +2453,7 @@
         ]
     },
     {
-        "name": "Penguin1 Talk-b",
+        "name": "Penguin1-c",
         "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
         "type": "costume",
         "tags": [],
@@ -2574,7 +2464,7 @@
         ]
     },
     {
-        "name": "Penguin2",
+        "name": "Penguin2-a",
         "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
         "type": "costume",
         "tags": [],
@@ -2585,7 +2475,7 @@
         ]
     },
     {
-        "name": "Penguin2 Talk-a",
+        "name": "Penguin2-b",
         "md5": "5a80f4b2fd20d43e4f7cb4189c08d99c.svg",
         "type": "costume",
         "tags": [],
@@ -2596,7 +2486,7 @@
         ]
     },
     {
-        "name": "Penguin2 Talk-b",
+        "name": "Penguin2-c",
         "md5": "394e79f5f9a462064ece2a9a6606a07d.svg",
         "type": "costume",
         "tags": [],
@@ -2972,17 +2862,6 @@
     {
         "name": "Saxophone-b",
         "md5": "04e5650480bfcf9190aa35bbd8d67b8e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            80,
-            1
-        ]
-    },
-    {
-        "name": "Saxophone-c",
-        "md5": "29751826f768bc1568092f267525ae8b.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -3368,17 +3247,6 @@
     {
         "name": "Trumpet-b",
         "md5": "7cedda5ec925118f237094cd05381e5d.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            37,
-            73,
-            1
-        ]
-    },
-    {
-        "name": "Trumpet-c",
-        "md5": "680dd004c24690af1e95c4beb22cd615.svg",
         "type": "costume",
         "tags": [],
         "info": [

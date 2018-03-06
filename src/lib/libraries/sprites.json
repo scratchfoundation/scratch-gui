@@ -2166,7 +2166,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             2
         ],
         "json": {
@@ -2205,14 +2205,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 43,
                     "rotationCenterY": 60
-                },
-                {
-                    "costumeName": "drum-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "50cf928f06481ff823e18e70c01df807.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 43,
-                    "rotationCenterY": 60
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2234,7 +2226,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             5
         ],
         "json": {
@@ -2297,14 +2289,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 58,
                     "rotationCenterY": 78
-                },
-                {
-                    "costumeName": "drum-kit-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4ca5c6eee4d907b98fb62340bd4a2cde.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 58,
-                    "rotationCenterY": 78
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2326,7 +2310,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             4
         ],
         "json": {
@@ -2381,14 +2365,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 30,
                     "rotationCenterY": 74
-                },
-                {
-                    "costumeName": "drum-cymbal-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "0e85f690e8eaf153ae20cbbbb88ca60c.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 30,
-                    "rotationCenterY": 74
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2410,7 +2386,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             1
         ],
         "json": {
@@ -2441,14 +2417,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 33,
                     "rotationCenterY": 73
-                },
-                {
-                    "costumeName": "drum-highhat-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "c6f2467a5226f7d372d15669c5099a41.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 33,
-                    "rotationCenterY": 73
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2470,7 +2438,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             3
         ],
         "json": {
@@ -2504,7 +2472,7 @@
             "costumes": [
                 {
                     "costumeName": "drum-snare-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 23,
@@ -2517,14 +2485,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 36,
                     "rotationCenterY": 66
-                },
-                {
-                    "costumeName": "drum-snare-c",
-                    "baseLayerID": 1,
-                    "baseLayerMD5": "0b50639f4aac75a7e1061083401e0c40.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 37,
-                    "rotationCenterY": 61
                 }
             ],
             "currentCostumeIndex": 0,
@@ -3234,7 +3194,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -3321,14 +3281,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 47,
                     "rotationCenterY": 83
-                },
-                {
-                    "costumeName": "guitar-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "5cfe9faacb98d35a702cfa633967a5b5.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 47,
-                    "rotationCenterY": 83
                 }
             ],
             "currentCostumeIndex": 0,
@@ -3350,7 +3302,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -3437,14 +3389,6 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 38,
                     "rotationCenterY": 94
-                },
-                {
-                    "costumeName": "guitar-electric2-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "7f5f8b6d772657566e3dee24c9a9c538.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 38,
-                    "rotationCenterY": 94
                 }
             ],
             "currentCostumeIndex": 0,
@@ -3466,7 +3410,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -3550,14 +3494,6 @@
                     "costumeName": "guitar-electric1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3632184c19c66a088a99568570d61b13.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 42,
-                    "rotationCenterY": 85
-                },
-                {
-                    "costumeName": "guitar-electric1-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4cb069d2a290c0a153f196de725d357c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 42,
                     "rotationCenterY": 85
@@ -3974,7 +3910,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -4058,14 +3994,6 @@
                     "costumeName": "keyboard-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "dbaf62b33de45093c3c7d13b5d49d637.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 72,
-                    "rotationCenterY": 68
-                },
-                {
-                    "costumeName": "keyboard-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "4ee5e7c6d0463d9b50e0c593e70e1e31.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 72,
                     "rotationCenterY": 68
@@ -4442,7 +4370,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             9
         ],
         "json": {
@@ -4534,14 +4462,6 @@
                     "costumeName": "microphone-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "29988ebbde49beaceb06d9eb66138b80.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 40,
-                    "rotationCenterY": 88
-                },
-                {
-                    "costumeName": "microphone-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "021d6da78b7bda374da4bdb50d4cbc4f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 40,
                     "rotationCenterY": 88
@@ -5111,7 +5031,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "penguin1",
+                    "costumeName": "penguin1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
                     "bitmapResolution": 1,
@@ -5119,7 +5039,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "penguin1 talk-a",
+                    "costumeName": "penguin1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "35fec7aa5f60cca945fe0615413f1f08.svg",
                     "bitmapResolution": 1,
@@ -5127,7 +5047,7 @@
                     "rotationCenterY": 62
                 },
                 {
-                    "costumeName": "penguin1 talk-b",
+                    "costumeName": "penguin1-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "18fa51a64ebd5518f0c5c465525346e5.svg",
                     "bitmapResolution": 1,
@@ -5135,7 +5055,7 @@
                     "rotationCenterY": 61
                 }
             ],
-            "currentCostumeIndex": 1,
+            "currentCostumeIndex": 0,
             "scratchX": -58,
             "scratchY": -19,
             "scale": 1,
@@ -5171,7 +5091,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "penguin2",
+                    "costumeName": "penguin2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
                     "bitmapResolution": 1,
@@ -5179,7 +5099,7 @@
                     "rotationCenterY": 79
                 },
                 {
-                    "costumeName": "penguin2 talk-a",
+                    "costumeName": "penguin2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5a80f4b2fd20d43e4f7cb4189c08d99c.svg",
                     "bitmapResolution": 1,
@@ -5187,7 +5107,7 @@
                     "rotationCenterY": 79
                 },
                 {
-                    "costumeName": "penguin2 talk-b",
+                    "costumeName": "penguin2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "394e79f5f9a462064ece2a9a6606a07d.svg",
                     "bitmapResolution": 1,
@@ -5766,7 +5686,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -5850,14 +5770,6 @@
                     "costumeName": "saxophone-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "04e5650480bfcf9190aa35bbd8d67b8e.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 47,
-                    "rotationCenterY": 80
-                },
-                {
-                    "costumeName": "saxophone-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "29751826f768bc1568092f267525ae8b.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 47,
                     "rotationCenterY": 80
@@ -6842,7 +6754,7 @@
         "tags": [],
         "info": [
             0,
-            3,
+            2,
             8
         ],
         "json": {
@@ -6926,14 +6838,6 @@
                     "costumeName": "trumpet-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7cedda5ec925118f237094cd05381e5d.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 37,
-                    "rotationCenterY": 73
-                },
-                {
-                    "costumeName": "trumpet-c",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "680dd004c24690af1e95c4beb22cd615.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 37,
                     "rotationCenterY": 73

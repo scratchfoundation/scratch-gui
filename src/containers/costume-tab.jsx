@@ -99,7 +99,20 @@ class CostumeTab extends React.Component {
         // If switching editing targets, update the costume index
         if (this.props.editingTarget !== editingTarget) {
             this.setState({selectedCostumeIndex: target.currentCostume});
-        } else if (this.state.selectedCostumeIndex > target.costumes.length - 1) {
+        } else {
+            // Switch to a newly added costume if there is one
+            const oldTarget = this.props.sprites[editingTarget] ?
+                this.props.sprites[editingTarget] : this.props.stage;
+            // @todo: Check that the costume is actually new by making sure it doesn't
+            // exist in the old costume list. This is blocked by
+            // https://github.com/LLK/scratch-vm/issues/967
+            if (oldTarget.costumeCount < target.costumeCount) {
+                this.setState({selectedCostumeIndex: target.currentCostume});
+            }
+        }
+
+        // In case of deleted costumes
+        if (this.state.selectedCostumeIndex > target.costumes.length - 1) {
             this.setState({selectedCostumeIndex: target.costumes.length - 1});
         }
     }

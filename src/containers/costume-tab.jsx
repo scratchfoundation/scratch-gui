@@ -232,9 +232,7 @@ class CostumeTab extends React.Component {
                 onItemClick={this.handleSelectCostume}
             >
                 {target.costumes ?
-                    <PaintEditorWrapper
-                        selectedCostumeIndex={this.props.editingCostumeIndex}
-                    /> :
+                    <PaintEditorWrapper /> :
                     null
                 }
                 {costumeLibraryVisible ? (

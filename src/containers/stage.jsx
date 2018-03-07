@@ -186,18 +186,18 @@ class Stage extends React.Component {
             mouseDown: false,
             mouseDownPosition: null
         });
+        const data = {
+            isDown: false,
+            x: x - this.rect.left,
+            y: y - this.rect.top,
+            canvasWidth: this.rect.width,
+            canvasHeight: this.rect.height,
+            wasDragged: this.state.isDragging
+        };
         if (this.state.isDragging) {
             this.onStopDrag();
-        } else {
-            const data = {
-                isDown: false,
-                x: x - this.rect.left,
-                y: y - this.rect.top,
-                canvasWidth: this.rect.width,
-                canvasHeight: this.rect.height
-            };
-            this.props.vm.postIOData('mouse', data);
         }
+        this.props.vm.postIOData('mouse', data);
     }
     onMouseDown (e) {
         this.updateRect();

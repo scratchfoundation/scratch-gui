@@ -96,10 +96,7 @@ class CostumeTab extends React.Component {
             return;
         }
 
-        // If switching editing targets, update the costume index
-        if (this.props.editingTarget !== editingTarget) {
-            this.setState({selectedCostumeIndex: target.currentCostume});
-        } else {
+        if (this.props.editingTarget === editingTarget) {
             // Switch to a newly added costume if there is one
             const oldTarget = this.props.sprites[editingTarget] ?
                 this.props.sprites[editingTarget] : this.props.stage;
@@ -109,6 +106,9 @@ class CostumeTab extends React.Component {
             if (oldTarget.costumeCount < target.costumeCount) {
                 this.setState({selectedCostumeIndex: target.currentCostume});
             }
+        } else {
+            // If switching editing targets, update the costume index
+            this.setState({selectedCostumeIndex: target.currentCostume});
         }
 
         // In case of deleted costumes

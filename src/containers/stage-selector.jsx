@@ -5,6 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {openBackdropLibrary} from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+import {setEditingCostumeIndex} from '../reducers/editing-costume-index';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
@@ -40,6 +41,7 @@ class StageSelector extends React.Component {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         this.addBackdropFromLibraryItem(item).then(() => {
             this.props.onActivateTab(COSTUMES_TAB_INDEX);
+            this.props.updateEditingCostumeIndex(this.props.backdropCount);
         });
     }
     handleEmptyBackdrop () {
@@ -48,6 +50,7 @@ class StageSelector extends React.Component {
         if (emptyItem) {
             this.addBackdropFromLibraryItem(emptyItem).then(() => {
                 this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                this.props.updateEditingCostumeIndex(this.props.backdropCount);
             });
         }
     }
@@ -58,6 +61,7 @@ class StageSelector extends React.Component {
             id,
             onActivateTab,
             onSelect,
+            updateEditingCostumeIndex,
             /* eslint-enable no-unused-vars */
             ...componentProps
         } = this.props;
@@ -73,8 +77,10 @@ class StageSelector extends React.Component {
 }
 StageSelector.propTypes = {
     ...StageSelectorComponent.propTypes,
+    backdropCount: PropTypes.number.isRequired,
     id: PropTypes.string,
-    onSelect: PropTypes.func
+    onSelect: PropTypes.func,
+    updateEditingCostumeIndex: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, {assetId}) => ({
@@ -90,6 +96,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onActivateTab: tabIndex => {
         dispatch(activateTab(tabIndex));
+    },
+    updateEditingCostumeIndex: index => {
+        dispatch(setEditingCostumeIndex(index));
     }
 });
 

@@ -1,6 +1,3 @@
-import {setEditingCostumeIndex} from './editing-costume-index';
-
-const UPDATE_EDITING_TARGET = 'scratch-gui/targets/UPDATE_EDITING_TARGET';
 const UPDATE_TARGET_LIST = 'scratch-gui/targets/UPDATE_TARGET_LIST';
 
 const initialState = {
@@ -23,18 +20,19 @@ const reducer = function (state, action) {
                     {}
                 ),
             stage: action.targets
-                .filter(target => target.isStage)[0] || {}
+                .filter(target => target.isStage)[0] || {},
+            editingTarget: action.editingTarget
         });
-    case UPDATE_EDITING_TARGET:
-        return Object.assign({}, state, {editingTarget: action.target});
     default:
         return state;
     }
 };
-const updateTargets_ = function (targetList) {
+const updateTargets_ = function (targetList, editingTarget, editingCostume) {
     return {
         type: UPDATE_TARGET_LIST,
         targets: targetList,
+        editingTarget: editingTarget,
+        editingCostume: editingCostume,
         meta: {
             throttle: 30
         }
@@ -43,13 +41,16 @@ const updateTargets_ = function (targetList) {
 const updateTargets = function (editingTarget, targetList) {
     return function (dispatch, getState) {
         const state = getState();
+        let editingCostume = state.editingCostumeIndex ? state.editingCostumeIndex : 0;
         if (!editingTarget || !targetList || !state.targets || !state.targets.sprites) {
-            dispatch(updateTargets_(targetList));
+            dispatch(updateTargets_(targetList, editingTarget, editingCostume));
             return Promise.resolve();
         }
 
         // Detect if a costume has been deleted from the editing target.
         // If so, update the editing costume index to the target's current costume.
+
+        // When the editing target is changed, also update the editing costume index
         let oldCostumes = 0;
         if (state.targets.stage.id === editingTarget) {
             oldCostumes = state.targets.stage.costumeCount;
@@ -65,54 +66,19 @@ const updateTargets = function (editingTarget, targetList) {
         for (const target of targetList) {
             if (target.id === editingTarget) {
                 const newCostumes = target.costumeCount;
-                if (newCostumes < oldCostumes) {
-                    dispatch(setEditingCostumeIndex(target.currentCostume));
+                if (newCostumes < oldCostumes ||
+                        state.targets.editingTarget !== editingTarget) {
+                    editingCostume = target.currentCostume;
                 }
                 break;
             }
         }
-        dispatch(updateTargets_(targetList));
-        return Promise.resolve();
-    };
-};
-const updateEditingTarget_ = function (editingTarget) {
-    return {
-        type: UPDATE_EDITING_TARGET,
-        target: editingTarget,
-        meta: {
-            throttle: 30
-        }
-    };
-};
-/* Updates editing target and editing costume index */
-const updateEditingTarget = function (editingTarget, targetList) {
-    return function (dispatch, getState) {
-        // No change
-        if (getState().targets.editingTarget === editingTarget) {
-            return Promise.resolve();
-        }
-
-        // Changing the editing target to null
-        if (!editingTarget || !targetList) {
-            dispatch(updateEditingTarget_(editingTarget));
-            return Promise.resolve();
-        }
-
-        // When the editing target is changed, also update the editing costume index
-        let index = 0;
-        for (const target of targetList) {
-            if (target.id === editingTarget) {
-                index = target.currentCostume;
-                break;
-            }
-        }
-        dispatch(updateEditingTarget_(editingTarget));
-        dispatch(setEditingCostumeIndex(index));
+        dispatch(updateTargets_(targetList, editingTarget, editingCostume));
         return Promise.resolve();
     };
 };
 export {
     reducer as default,
     updateTargets,
-    updateEditingTarget
+    UPDATE_TARGET_LIST
 };

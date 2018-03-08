@@ -26,11 +26,11 @@ class PaintEditorWrapper extends React.Component {
         this.props.vm.updateSvg(this.props.editingCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
     render () {
+        if (!this.props.svgId) return null;
         const {
             editingCostumeIndex, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
-        if (!this.props.svgId) return null;
         return (
             <PaintEditor
                 {...props}

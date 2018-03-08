@@ -27,7 +27,7 @@ const reducer = function (state, action) {
         return state;
     }
 };
-const updateTargets_ = function (targetList, editingTarget, editingCostume) {
+const updateTargetsAction_ = function (targetList, editingTarget, editingCostume) {
     return {
         type: UPDATE_TARGET_LIST,
         targets: targetList,
@@ -43,7 +43,7 @@ const updateTargets = function (editingTarget, targetList) {
         const state = getState();
         let editingCostume = state.editingCostumeIndex ? state.editingCostumeIndex : 0;
         if (!editingTarget || !targetList || !state.targets || !state.targets.sprites) {
-            dispatch(updateTargets_(targetList, editingTarget, editingCostume));
+            dispatch(updateTargetsAction_(targetList, editingTarget, editingCostume));
             return Promise.resolve();
         }
 
@@ -73,7 +73,7 @@ const updateTargets = function (editingTarget, targetList) {
                 break;
             }
         }
-        dispatch(updateTargets_(targetList, editingTarget, editingCostume));
+        dispatch(updateTargetsAction_(targetList, editingTarget, editingCostume));
         return Promise.resolve();
     };
 };

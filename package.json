@@ -55,7 +55,6 @@
     "html-webpack-plugin": "^3.0.5",
     "immutable": "3.8.2",
     "jest": "^21.0.0",
-    "jszip": "^3.1.5",
     "lodash.bindall": "4.4.0",
     "lodash.debounce": "4.0.8",
     "lodash.defaultsdeep": "4.6.0",

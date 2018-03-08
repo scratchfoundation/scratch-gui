@@ -234,10 +234,10 @@ const looks = function (isStage, targetId) {
         </block>
         <block type="looks_cleargraphiceffects"/>
         ${blockSeparator}
-        <block type="looks_show"/>
-        <block type="looks_hide"/>
-        ${blockSeparator}
         ${isStage ? '' : `
+            <block type="looks_show"/>
+            <block type="looks_hide"/>
+        ${blockSeparator}
             <block type="looks_gotofrontback"/>
             <block type="looks_goforwardbackwardlayers">
                 <value name="NUM">
@@ -246,7 +246,6 @@ const looks = function (isStage, targetId) {
                     </shadow>
                 </value>
             </block>
-            ${blockSeparator}
         `}
         ${isStage ? `
             <block id="backdropnumbername" type="looks_backdropnumbername"/>

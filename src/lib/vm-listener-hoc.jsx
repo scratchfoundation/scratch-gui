@@ -105,8 +105,8 @@ const vmListenerHOC = function (WrappedComponent) {
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
-            dispatch(updateEditingTarget(data.editingTarget));
-            dispatch(updateTargets(data.targetList));
+            dispatch(updateEditingTarget(data.editingTarget, data.targetList));
+            dispatch(updateTargets(data.editingTarget, data.targetList));
         },
         onMonitorsUpdate: monitorList => {
             dispatch(updateMonitors(monitorList));

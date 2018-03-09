@@ -24,7 +24,7 @@ export default [
         name: 'Vision',
         extensionURL: 'vision',
         iconURL: videoImage,
-        description: 'Teach your projects to see.',
+        description: 'Let your projects see the world.',
         featured: true,
         disabled: false
     },
@@ -41,14 +41,6 @@ export default [
         extensionURL: '',
         iconURL: speechImage,
         description: 'Talk to your projects.',
-        featured: true,
-        disabled: true
-    },
-    {
-        name: 'Video Sensing',
-        extensionURL: '',
-        iconURL: videoImage,
-        description: 'Detect motion with the camera.',
         featured: true,
         disabled: true
     },

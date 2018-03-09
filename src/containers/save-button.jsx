@@ -15,24 +15,24 @@ class SaveButton extends React.Component {
         ]);
     }
     handleClick () {
-        const json = this.props.vm.saveProjectSb3();
-
-        // Download project data into a file - create link element,
-        // simulate click on it, and then remove it.
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
-        const data = new Blob([json], {type: 'text'});
-        const url = window.URL.createObjectURL(data);
-        saveLink.href = url;
+        this.props.vm.saveProjectSb3().then(content => {
+            const url = window.URL.createObjectURL(content);
 
-        // File name: project-DATE-TIME
-        const date = new Date();
-        const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-        saveLink.download = `project-${timestamp}.json`;
-        saveLink.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(saveLink);
+            saveLink.href = url;
+
+            // TODO user-friendly project name
+            // File name: project-DATE-TIME
+            const date = new Date();
+            const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
+            // TODO change extension to sb3
+            saveLink.download = `project-${timestamp}.zip`;
+            saveLink.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(saveLink);
+        });
     }
     render () {
         const {
@@ -59,7 +59,8 @@ class SaveButton extends React.Component {
 SaveButton.propTypes = {
     vm: PropTypes.shape({
         saveProjectSb3: PropTypes.func
-    })};
+    })
+};
 
 const mapStateToProps = state => ({
     vm: state.vm

@@ -16,8 +16,8 @@ class LoadButton extends React.Component {
     }
     handleChange (e) {
         const reader = new FileReader();
-        reader.onload = () => this.props.vm.fromJSON(reader.result);
-        reader.readAsText(e.target.files[0]);
+        reader.onload = () => this.props.vm.loadProjectLocal(reader.result);
+        reader.readAsArrayBuffer(e.target.files[0]);
     }
     handleClick () {
         this.fileInput.click();
@@ -43,7 +43,7 @@ class LoadButton extends React.Component {
 
 LoadButton.propTypes = {
     vm: PropTypes.shape({
-        fromJSON: PropTypes.func
+        loadProjectLocal: PropTypes.func
     })
 };
 

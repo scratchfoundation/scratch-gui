@@ -74,7 +74,9 @@ class TargetPane extends React.Component {
         const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
         if (emptyItem) {
             this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                setTimeout(() => { // Wait for targets update to propagate before tab switching
+                    this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                });
             });
         }
     }

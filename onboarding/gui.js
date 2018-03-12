@@ -30,15 +30,15 @@ var _appStateHoc = __webpack_require__(22);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(26);
+var _gui = __webpack_require__(25);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(33);
+var _projectLoaderHoc = __webpack_require__(32);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(503);
+var _index = __webpack_require__(512);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -131,11 +131,11 @@ module.exports = {
 
 /***/ }),
 
-/***/ 503:
+/***/ 512:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(504);
+var content = __webpack_require__(513);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -182,7 +182,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 504:
+/***/ 513:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);

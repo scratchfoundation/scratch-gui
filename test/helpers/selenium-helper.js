@@ -34,8 +34,11 @@ class SeleniumHelper {
     }
 
     getDriver () {
+        const chromeCapabilities = webdriver.Capabilities.chrome();
+        chromeCapabilities.set('chromeOptions', {args: ['--headless']});
         this.driver = new webdriver.Builder()
             .forBrowser('chrome')
+            .withCapabilities(chromeCapabilities)
             .build();
         return this.driver;
     }

@@ -7,10 +7,12 @@ import VM from 'scratch-vm';
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
+import BackdropLibrary from './backdrop-library.jsx';
 import {connect} from 'react-redux';
 
 import {
     closeCostumeLibrary,
+    closeBackdropLibrary,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';
@@ -90,7 +92,14 @@ class CostumeTab extends React.Component {
         } = nextProps;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        if (target && target.costumes && this.state.selectedCostumeIndex > target.costumes.length - 1) {
+        if (!target || !target.costumes) {
+            return;
+        }
+
+        // If switching editing targets, update the costume index
+        if (this.props.editingTarget !== editingTarget) {
+            this.setState({selectedCostumeIndex: target.currentCostume});
+        } else if (this.state.selectedCostumeIndex > target.costumes.length - 1) {
             this.setState({selectedCostumeIndex: target.costumes.length - 1});
         }
     }
@@ -160,7 +169,9 @@ class CostumeTab extends React.Component {
             intl,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
+            backdropLibraryVisible,
             costumeLibraryVisible,
+            onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,
             ...props
         } = this.props;
@@ -218,7 +229,6 @@ class CostumeTab extends React.Component {
             >
                 {target.costumes ?
                     <PaintEditorWrapper
-                        {...props}
                         selectedCostumeIndex={this.state.selectedCostumeIndex}
                     /> :
                     null
@@ -228,6 +238,13 @@ class CostumeTab extends React.Component {
                         vm={vm}
                         onNewCostume={this.handleNewCostume}
                         onRequestClose={onRequestCloseCostumeLibrary}
+                    />
+                ) : null}
+                {backdropLibraryVisible ? (
+                    <BackdropLibrary
+                        vm={vm}
+                        onNewBackdrop={this.handleNewCostume}
+                        onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
             </AssetPanel>
@@ -277,6 +294,9 @@ const mapDispatchToProps = dispatch => ({
     onNewLibraryCostumeClick: e => {
         e.preventDefault();
         dispatch(openCostumeLibrary());
+    },
+    onRequestCloseBackdropLibrary: () => {
+        dispatch(closeBackdropLibrary());
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());

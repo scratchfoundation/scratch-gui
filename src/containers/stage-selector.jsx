@@ -38,7 +38,9 @@ class StageSelector extends React.Component {
     handleSurpriseBackdrop () {
         // @todo should this not add a backdrop you already have?
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
-        this.addBackdropFromLibraryItem(item);
+        this.addBackdropFromLibraryItem(item).then(() => {
+            this.props.onActivateTab(COSTUMES_TAB_INDEX);
+        });
     }
     handleEmptyBackdrop () {
         // @todo this is brittle, will need to be refactored for localized libraries
@@ -83,6 +85,7 @@ const mapStateToProps = (state, {assetId}) => ({
 const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
         e.preventDefault();
+        dispatch(activateTab(COSTUMES_TAB_INDEX));
         dispatch(openBackdropLibrary());
     },
     onActivateTab: tabIndex => {

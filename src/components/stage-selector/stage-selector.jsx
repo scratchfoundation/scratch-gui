@@ -94,12 +94,12 @@ const StageSelector = props => {
                     }, {
                         title: intl.formatMessage(messages.addBackdropFromSurprise),
                         img: surpriseIcon,
-                        onClick: onSurpriseBackdropClick // TODO NEED REAL FUNCTION
+                        onClick: onSurpriseBackdropClick
 
                     }, {
                         title: intl.formatMessage(messages.addBackdropFromPaint),
                         img: paintIcon,
-                        onClick: onEmptyBackdropClick // TODO NEED REAL FUNCTION
+                        onClick: onEmptyBackdropClick
                     }
                 ]}
                 title={intl.formatMessage(messages.addBackdropFromLibrary)}

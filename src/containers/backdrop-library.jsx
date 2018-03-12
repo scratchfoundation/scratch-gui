@@ -47,7 +47,7 @@ class BackdropLibrary extends React.Component {
 }
 
 BackdropLibrary.propTypes = {
-    onNewBackdrop: PropTypes.func,
+    onNewBackdrop: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

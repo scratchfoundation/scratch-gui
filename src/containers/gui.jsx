@@ -20,25 +20,39 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
+            loadingError: false,
+            errorMessage: ''
         };
     }
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
-        this.props.vm.loadProject(this.props.projectData).then(() => {
-            this.setState({loading: false}, () => {
-                this.props.vm.setCompatibilityMode(true);
-                this.props.vm.start();
+        this.props.vm.loadProject(this.props.projectData)
+            .then(() => {
+                this.setState({loading: false}, () => {
+                    this.props.vm.setCompatibilityMode(true);
+                    this.props.vm.start();
+                });
+            })
+            .catch(e => {
+                // Need to catch this error and update component state so that
+                // error page gets rendered if project failed to load
+                this.setState({loadingError: true, errorMessage: e});
             });
-        });
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
             this.setState({loading: true}, () => {
-                this.props.vm.loadProject(nextProps.projectData).then(() => {
-                    this.setState({loading: false});
-                });
+                this.props.vm.loadProject(nextProps.projectData)
+                    .then(() => {
+                        this.setState({loading: false});
+                    })
+                    .catch(e => {
+                        // Need to catch this error and update component state so that
+                        // error page gets rendered if project failed to load
+                        this.setState({loadingError: true, errorMessage: e});
+                    });
             });
         }
     }
@@ -46,6 +60,7 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
+        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
         const {
             children,
             fetchingProject,

@@ -70,7 +70,7 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
-                loading={fetchingProject || this.state.loading}
+                loading={fetchingProject || this.state.loading || this.props.loadingStateVisible}
                 vm={vm}
                 {...componentProps}
             >
@@ -85,6 +85,7 @@ GUI.propTypes = {
     feedbackFormVisible: PropTypes.bool,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
+    loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
@@ -98,6 +99,7 @@ const mapStateToProps = state => ({
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
     importInfoVisible: state.modals.importInfo,
+    loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });

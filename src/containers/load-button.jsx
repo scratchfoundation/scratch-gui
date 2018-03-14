@@ -25,8 +25,10 @@ class LoadButton extends React.Component {
     }
     handleChange (e) {
         this.props.openLoadingState();
+        // Remove the hash if any (without triggering a hash change event or a reload)
+        history.replaceState({}, document.title, '.');
         const reader = new FileReader();
-        reader.onload = () => this.props.vm.loadProjectLocal(reader.result)
+        reader.onload = () => this.props.vm.loadProject(reader.result)
             .then(() => {
                 this.props.closeLoadingState();
             })
@@ -64,7 +66,7 @@ LoadButton.propTypes = {
     closeLoadingState: PropTypes.func,
     openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
-        loadProjectLocal: PropTypes.func
+        loadProject: PropTypes.func
     })
 };
 

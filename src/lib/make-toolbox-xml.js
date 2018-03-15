@@ -430,7 +430,11 @@ const sensing = function (isStage) {
         </block>
         <block id="answer" type="sensing_answer"/>
         ${blockSeparator}
-        <block type="sensing_keypressed"/>
+        <block type="sensing_keypressed">
+            <value name="KEY_OPTION">
+                <shadow type="sensing_keyoptions"/>
+            </value>
+        </block>
         <block type="sensing_mousedown"/>
         <block type="sensing_mousex"/>
         <block type="sensing_mousey"/>

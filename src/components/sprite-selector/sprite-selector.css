@@ -2,7 +2,7 @@
 
 .sprite-selector {
     flex-grow: 1;
-    position: relative; 
+    position: relative;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-right: calc($space / 2);
     background-color: #f9f9f9;
@@ -16,14 +16,14 @@
 
 /* In prep for renaming sprite-selector-item to sprite */
 .sprite {
-    /* 
+    /*
         Our goal is to fit sprites evenly in a row without leftover space.
-        Flexbox's `space between` property gets us close, but doesn't flow 
+        Flexbox's `space between` property gets us close, but doesn't flow
         well when the # of items per row > 1 and less than the max per row.
 
-        Solving by explicitly calc'ing the width of each sprite. Setting 
-        `border-box` simplifies things, because content, padding and 
-        border-width all are included in the width, leaving us only to subtract 
+        Solving by explicitly calc'ing the width of each sprite. Setting
+        `border-box` simplifies things, because content, padding and
+        border-width all are included in the width, leaving us only to subtract
         the left + right margins.
 
         @todo: make room for the scrollbar
@@ -32,7 +32,7 @@
     width: calc((100% / $sprites-per-row ) - $space);
     min-width: 4rem;
     min-height: 4rem; /* @todo: calc height same as width */
-    margin: calc($space / 2); 
+    margin: calc($space / 2);
 }
 
 
@@ -41,11 +41,11 @@
        Sets the sprite-selector items as a scrollable pane
 
         @todo: Safari: pane doesn't stretch to fill height;
-        @todo: Adding `position: relative` still doesn't fix Safari scrolling pane, and 
-              also introduces a new bug in Chrome when vertically resizing window down, 
-              then back up, introduces white space in the outside the page container. 
+        @todo: Adding `position: relative` still doesn't fix Safari scrolling pane, and
+              also introduces a new bug in Chrome when vertically resizing window down,
+              then back up, introduces white space in the outside the page container.
     */
-    height: calc(100% - $sprite-info-height); 
+    height: calc(100% - $sprite-info-height);
     overflow-y: scroll;
 }
 
@@ -57,13 +57,90 @@
     padding-top: calc($space / 2);
     padding-left: calc($space / 2);
     padding-right: calc($space / 2);
-    padding-bottom: $space; 
+    padding-bottom: $space;
 }
 
 .add-button {
-    font-size: 0.55rem;
-    font-weight: bold;
     position: absolute;
     bottom: 0.75rem;
     right: 1rem;
+    z-index: 1; /* TODO overlaps the stage, this doesn't work, fix! */
+}
+
+.raised {
+    background-color: #cce1ff;
+    border-color: #8cbcff;
+    transition: all 0.25s ease;
+}
+
+.raised:hover {
+    background-color: #8cbcff;
+    transform: scale(1.05);
+}
+
+.raised:hover {
+    -webkit-animation-name: wiggle;
+    -ms-animation-name: wiggle;
+    -ms-animation-duration: 500ms;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-iteration-count: 1;
+    -ms-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+    -ms-animation-timing-function: ease-in-out;
+    background-color: #8cbcff;
+}
+
+@-webkit-keyframes wiggle {
+    0% {-webkit-transform: rotate(3deg) scale(1.05);}
+    25% {-webkit-transform: rotate(-3deg) scale(1.05);}
+    50% {-webkit-transform: rotate(5deg) scale(1.05);}
+    75% {-webkit-transform: rotate(-2deg) scale(1.05);}
+    100% {-webkit-transform: rotate(0deg) scale(1.05);}
+}
+
+@-ms-keyframes wiggle {
+    0% {-ms-transform: rotate(3deg) scale(1.05);}
+    25% {-ms-transform: rotate(-3deg) scale(1.05);}
+    50% {-ms-transform: rotate(5deg) scale(1.05);}
+    75% {-ms-transform: rotate(-2deg) scale(1.05);}
+    100% {-ms-transform: rotate(0deg) scale(1.05);}
+}
+
+@keyframes wiggle {
+    0% {transform: rotate(3deg) scale(1.05);}
+    25% {transform: rotate(-3deg) scale(1.05);}
+    50% {transform: rotate(5deg) scale(1.05);}
+    75% {transform: rotate(-2deg) scale(1.05);}
+    100% {transform: rotate(0deg) scale(1.05);}
+}
+
+.receivedBlocks {
+    -webkit-animation: glowing 250ms;
+    -moz-animation: glowing 250ms;
+    -o-animation: glowing 250ms;
+    animation: glowing 250ms;
+}
+
+@-webkit-keyframes glowing {
+    10% { -webkit-box-shadow: 0 0 10px #7fff1e; }
+    90% { -webkit-box-shadow: 0 0 10px #7fff1e; }
+    100% { -webkit-box-shadow: none; }
+}
+
+@-moz-keyframes glowing {
+    10% { -moz-box-shadow: 0 0 10px #7fff1e; }
+    90% { -moz-box-shadow: 0 0 10px #7fff1e; }
+    100% { -moz-box-shadow: none; }
+}
+
+@-o-keyframes glowing {
+    10% { box-shadow: 0 0 10px #7fff1e; }
+    90% { box-shadow: 0 0 10px #7fff1e; }
+    100% { box-shadow: none; }
+}
+
+@keyframes glowing {
+    10% { box-shadow: 0 0 10px #7fff1e; }
+    90% { box-shadow: 0 0 10px #7fff1e; }
+    100% { box-shadow: none; }
 }

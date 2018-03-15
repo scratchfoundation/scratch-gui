@@ -39,6 +39,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           title="Undo"
         >
           <img
+            draggable={false}
             src="test-file-stub"
           />
         </button>
@@ -49,6 +50,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           title="Redo"
         >
           <img
+            draggable={false}
             src="test-file-stub"
           />
         </button>
@@ -61,6 +63,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -342,6 +345,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         title="Stop"
       >
         <img
+          draggable={false}
           src="test-file-stub"
         />
       </button>
@@ -353,6 +357,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -370,6 +375,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -387,6 +393,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -404,6 +411,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -421,6 +429,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -438,6 +447,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div
@@ -455,6 +465,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <img
         className={undefined}
+        draggable={false}
         src="test-file-stub"
       />
       <div

@@ -11,34 +11,35 @@
 }
 
 .new-buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    margin: 1.25rem 0;
+    padding: 0.75rem 0;
     color: $motion-primary;
     text-align: center;
+    background: none;
 }
 
-.new-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: 0.2s;
+$fade-out-distance: 100px;
+
+.new-buttons:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(rgba(232,237,241, 0),rgba(232,237,241, 1));
+    height: $fade-out-distance;
+    width: 100%;
+    pointer-events: none;
 }
 
-.new-button:hover {
-    transform: scale(1.2);
-}
-
-.new-button + .new-button {
-    margin-top: 1.25rem;
-}
-
-.new-button-icon + .new-button-label {
-    margin-top: 0.5rem;
+.new-buttons > button + button {
+    margin-top: 0.75rem;
 }
 
 .list-area {

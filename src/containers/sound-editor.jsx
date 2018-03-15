@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import WavEncoder from 'wav-encoder';
 
 import {connect} from 'react-redux';
 
@@ -9,6 +10,7 @@ import {computeChunkedRMS} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
+import log from '../lib/log.js';
 
 const UNDO_STACK_SIZE = 99;
 
@@ -72,11 +74,25 @@ class SoundEditor extends React.Component {
             }
             this.undoStack.push(this.copyCurrentBuffer());
         }
+        // Encode the new sound into a wav so that it can be stored
+        let wavBuffer = null;
+        try {
+            wavBuffer = WavEncoder.encode.sync({
+                sampleRate: sampleRate,
+                channelData: [samples]
+            });
+        } catch (e) {
+            // This error state is mostly for the mock sounds used during testing.
+            // Any incorrect sound buffer trying to get interpretd as a Wav file
+            // should yield this error.
+            log.error(`Encountered error while trying to encode sound update: ${e}`);
+        }
+
         this.resetState(samples, sampleRate);
-        this.props.onUpdateSoundBuffer(
+        this.props.vm.updateSoundBuffer(
             this.props.soundIndex,
-            this.audioBufferPlayer.buffer
-        );
+            this.audioBufferPlayer.buffer,
+            wavBuffer ? new Uint8Array(wavBuffer) : new Uint8Array());
     }
     handlePlay () {
         this.audioBufferPlayer.play(
@@ -96,7 +112,7 @@ class SoundEditor extends React.Component {
         this.setState({playhead});
     }
     handleChangeName (name) {
-        this.props.onRenameSound(this.props.soundIndex, name);
+        this.props.vm.renameSound(this.props.soundIndex, name);
     }
     handleActivateTrim () {
         if (this.state.trimStart === null && this.state.trimEnd === null) {
@@ -184,12 +200,14 @@ class SoundEditor extends React.Component {
 
 SoundEditor.propTypes = {
     name: PropTypes.string.isRequired,
-    onRenameSound: PropTypes.func.isRequired,
-    onUpdateSoundBuffer: PropTypes.func.isRequired,
     sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
-    soundIndex: PropTypes.number
+    soundIndex: PropTypes.number,
+    vm: PropTypes.shape({
+        updateSoundBuffer: PropTypes.func,
+        renameSound: PropTypes.func
+    })
 };
 
 const mapStateToProps = (state, {soundIndex}) => {
@@ -203,8 +221,7 @@ const mapStateToProps = (state, {soundIndex}) => {
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
         name: sound.name,
-        onRenameSound: state.vm.renameSound.bind(state.vm),
-        onUpdateSoundBuffer: state.vm.updateSoundBuffer.bind(state.vm)
+        vm: state.vm
     };
 };
 

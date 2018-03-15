@@ -8,7 +8,8 @@ import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 
 import {
-    closePreviewInfo
+    closePreviewInfo,
+    openImportInfo
 } from '../reducers/modals';
 
 class PreviewModal extends React.Component {
@@ -16,7 +17,8 @@ class PreviewModal extends React.Component {
         super(props);
         bindAll(this, [
             'handleTryIt',
-            'handleCancel'
+            'handleCancel',
+            'handleViewProject'
         ]);
 
         this.state = {
@@ -28,7 +30,10 @@ class PreviewModal extends React.Component {
         this.props.onTryIt();
     }
     handleCancel () {
-        window.history.back();
+        window.location.replace('https://scratch.mit.edu');
+    }
+    handleViewProject () {
+        this.props.onViewProject();
     }
     supportedBrowser () {
         if (platform.name === 'IE') {
@@ -42,6 +47,7 @@ class PreviewModal extends React.Component {
                 previewing={this.state.previewing}
                 onCancel={this.handleCancel}
                 onTryIt={this.handleTryIt}
+                onViewProject={this.handleViewProject}
             /> :
             <BrowserModalComponent
                 onBack={this.handleCancel}
@@ -51,7 +57,8 @@ class PreviewModal extends React.Component {
 }
 
 PreviewModal.propTypes = {
-    onTryIt: PropTypes.func
+    onTryIt: PropTypes.func,
+    onViewProject: PropTypes.func
 };
 
 const mapStateToProps = () => ({});
@@ -59,6 +66,10 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({
     onTryIt: () => {
         dispatch(closePreviewInfo());
+    },
+    onViewProject: () => {
+        dispatch(closePreviewInfo());
+        dispatch(openImportInfo());
     }
 });
 

@@ -140,7 +140,8 @@
         For making the sprite-selector a scrollable pane
         @todo: Not working in Safari
     */
-    overflow: hidden;
+    /* TODO this also breaks the thermometer menu */
+    /* overflow: hidden; */
 }
 
 .extension-button-container {
@@ -150,16 +151,39 @@
     bottom: 0;
     left: 0;
     z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
-    background: white;
+    background: $motion-primary;
 
-    border: 1px solid #ddd;
+    border: 1px solid $motion-primary;
     box-sizing: content-box; /* To match scratch-block vertical toolbox borders */
 }
 
-.extension-button {
-    font-size: 0.55rem;
-    font-weight: bold;
+$fade-out-distance: 15px;
+
+.extension-button-container:before {
+    content: "";
+    position: absolute;
+    top: calc(calc(-1 * $fade-out-distance) - 1px);
+    left: -1px;
+    background: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15));
+    height: $fade-out-distance;
+    width: calc(100% + 0.5px);
 }
+
+
+.extension-button {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.extension-button-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
 .extension-button > div {
     margin-top: 0;
 }

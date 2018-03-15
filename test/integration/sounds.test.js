@@ -37,13 +37,13 @@ describe('Working with sounds', () => {
             .accept();
 
         // Add it back
-        await clickText('Add Sound');
+        await clickXpath('//button[@aria-label="Sound Library"]');
         let el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('meow');
         await clickText('Meow', scope.modal); // Should close the modal
 
         // Add a new sound
-        await clickText('Add Sound');
+        await clickXpath('//button[@aria-label="Sound Library"]');
         el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('chom');
         await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
@@ -63,6 +63,22 @@ describe('Working with sounds', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Duplicating a sound', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Sounds');
+
+        await rightClickText('Meow', scope.soundsTab);
+        await clickText('duplicate', scope.soundsTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error
+
+        // Make sure the duplicated sound is named correctly.
+        await clickText('Meow2', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     // Regression test for gui issue #1320
     test('Switching sprites with different numbers of sounds', async () => {
         await loadUri(uri);
@@ -70,11 +86,11 @@ describe('Working with sounds', () => {
 
         // Add a sound so this sprite has 2 sounds.
         await clickText('Sounds');
-        await clickText('Add Sound');
+        await clickXpath('//button[@aria-label="Sound Library"]');
         await clickText('A Bass'); // Closes the modal
 
         // Now add a sprite with only one sound.
-        await clickText('Add Sprite');
+        await clickXpath('//button[@aria-label="Sprite Library"]');
         await clickText('Abby'); // Doing this used to crash the editor.
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for error

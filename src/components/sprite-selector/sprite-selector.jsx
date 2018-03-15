@@ -1,25 +1,54 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import classNames from 'classnames';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
+import ActionMenu from '../action-menu/action-menu.jsx';
 
 import styles from './sprite-selector.css';
-import spriteIcon from './icon--sprite.svg';
 
-const addSpriteMessage = (
-    <FormattedMessage
-        defaultMessage="Add Sprite"
-        description="Button to add a sprite in the target pane"
-        id="gui.spriteSelector.addSprite"
-    />
-);
+import cameraIcon from '../action-menu/icon--camera.svg';
+import fileUploadIcon from '../action-menu/icon--file-upload.svg';
+import paintIcon from '../action-menu/icon--paint.svg';
+import spriteIcon from '../action-menu/icon--sprite.svg';
+import surpriseIcon from '../action-menu/icon--surprise.svg';
+
+const messages = defineMessages({
+    addSpriteFromLibrary: {
+        id: 'gui.spriteSelector.addSpriteFromLibrary',
+        description: 'Button to add a sprite in the target pane from library',
+        defaultMessage: 'Sprite Library'
+    },
+    addSpriteFromPaint: {
+        id: 'gui.spriteSelector.addSpriteFromPaint',
+        description: 'Button to add a sprite in the target pane from paint',
+        defaultMessage: 'Paint'
+    },
+    addSpriteFromSurprise: {
+        id: 'gui.spriteSelector.addSpriteFromSurprise',
+        description: 'Button to add a random sprite in the target pane',
+        defaultMessage: 'Surprise'
+    },
+    addSpriteFromFile: {
+        id: 'gui.spriteSelector.addSpriteFromFile',
+        description: 'Button to add a sprite in the target pane from file',
+        defaultMessage: 'Coming Soon'
+    },
+    addSpriteFromCamera: {
+        id: 'gui.spriteSelector.addSpriteFromCamera',
+        description: 'Button to add a sprite in the target pane from camera',
+        defaultMessage: 'Coming Soon'
+    }
+});
 
 const SpriteSelectorComponent = function (props) {
     const {
+        editingTarget,
+        hoveredTarget,
+        intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
         onChangeSpriteSize,
@@ -29,7 +58,10 @@ const SpriteSelectorComponent = function (props) {
         onDeleteSprite,
         onDuplicateSprite,
         onNewSpriteClick,
+        onSurpriseSpriteClick,
+        onPaintSpriteClick,
         onSelectSprite,
+        raised,
         selectedId,
         sprites,
         ...componentProps
@@ -71,7 +103,12 @@ const SpriteSelectorComponent = function (props) {
                         .map(sprite => (
                             <SpriteSelectorItem
                                 assetId={sprite.costume && sprite.costume.assetId}
-                                className={styles.sprite}
+                                className={hoveredTarget.sprite === sprite.id &&
+                                    sprite.id !== editingTarget &&
+                                    hoveredTarget.receivedBlocks ?
+                                    classNames(styles.sprite, styles.receivedBlocks) :
+                                    raised && sprite.id !== editingTarget ?
+                                        classNames(styles.sprite, styles.raised) : styles.sprite}
                                 id={sprite.id}
                                 key={sprite.id}
                                 name={sprite.name}
@@ -84,10 +121,27 @@ const SpriteSelectorComponent = function (props) {
                     }
                 </Box>
             </Box>
-            <IconButton
+            <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}
-                title={addSpriteMessage}
+                moreButtons={[
+                    {
+                        title: intl.formatMessage(messages.addSpriteFromCamera),
+                        img: cameraIcon
+                    }, {
+                        title: intl.formatMessage(messages.addSpriteFromFile),
+                        img: fileUploadIcon
+                    }, {
+                        title: intl.formatMessage(messages.addSpriteFromSurprise),
+                        img: surpriseIcon,
+                        onClick: onSurpriseSpriteClick // TODO need real function for this
+                    }, {
+                        title: intl.formatMessage(messages.addSpriteFromPaint),
+                        img: paintIcon,
+                        onClick: onPaintSpriteClick // TODO need real function for this
+                    }
+                ]}
+                title={intl.formatMessage(messages.addSpriteFromLibrary)}
                 onClick={onNewSpriteClick}
             />
         </Box>
@@ -95,6 +149,12 @@ const SpriteSelectorComponent = function (props) {
 };
 
 SpriteSelectorComponent.propTypes = {
+    editingTarget: PropTypes.string,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
+    intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -104,7 +164,10 @@ SpriteSelectorComponent.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onPaintSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSurpriseSpriteClick: PropTypes.func,
+    raised: PropTypes.bool,
     selectedId: PropTypes.string,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
@@ -121,4 +184,4 @@ SpriteSelectorComponent.propTypes = {
     })
 };
 
-export default SpriteSelectorComponent;
+export default injectIntl(SpriteSelectorComponent);

@@ -51,7 +51,7 @@
 .button-row button {
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     background: white;
     font-weight: bold;
     font-size: .875rem;
@@ -66,6 +66,13 @@
 .button-row button.no-button {
     color: $motion-primary;
 }
+
+.button-row button.view-project-button {
+    background: $import-primary;
+    border-color: $import-primary;
+    color: white;
+}
+
 .button-row button + button {
     margin-left: 0.5rem;
 }

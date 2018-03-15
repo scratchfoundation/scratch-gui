@@ -30,7 +30,7 @@ describe('Localization', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
         await clickText('Blocks');
-        await clickText('Extensions');
+        await clickXpath('//button[@title="Add Extension"]');
         await clickText('Pen', scope.modal); // Modal closes
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('English');

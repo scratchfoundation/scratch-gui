@@ -22,6 +22,7 @@ const GreenFlagComponent = function (props) {
                     [styles.isActive]: active
                 }
             )}
+            draggable={false}
             src={greenFlagIcon}
             title={title}
             onClick={onClick}

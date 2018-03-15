@@ -4,7 +4,6 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
-import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 
@@ -17,8 +16,8 @@ import styles from './target-pane.css';
  * @returns {React.Component} rendered component
  */
 const TargetPane = ({
-    backdropLibraryVisible,
     editingTarget,
+    hoveredTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
@@ -29,9 +28,11 @@ const TargetPane = ({
     onDeleteSprite,
     onDuplicateSprite,
     onNewSpriteClick,
+    onSurpriseSpriteClick,
+    onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
-    onRequestCloseBackdropLibrary,
     onSelectSprite,
+    raiseSprites,
     stage,
     sprites,
     vm,
@@ -43,6 +44,9 @@ const TargetPane = ({
     >
 
         <SpriteSelectorComponent
+            editingTarget={editingTarget}
+            hoveredTarget={hoveredTarget}
+            raised={raiseSprites}
             selectedId={editingTarget}
             sprites={sprites}
             onChangeSpriteDirection={onChangeSpriteDirection}
@@ -54,7 +58,9 @@ const TargetPane = ({
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
             onNewSpriteClick={onNewSpriteClick}
+            onPaintSpriteClick={onPaintSpriteClick}
             onSelectSprite={onSelectSprite}
+            onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
@@ -72,12 +78,6 @@ const TargetPane = ({
                     <SpriteLibrary
                         vm={vm}
                         onRequestClose={onRequestCloseSpriteLibrary}
-                    />
-                ) : null}
-                {backdropLibraryVisible ? (
-                    <BackdropLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
             </div>
@@ -104,9 +104,12 @@ const spriteShape = PropTypes.shape({
 });
 
 TargetPane.propTypes = {
-    backdropLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
+    hoveredTarget: PropTypes.shape({
+        hoveredSprite: PropTypes.string,
+        receivedBlocks: PropTypes.bool
+    }),
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
@@ -116,10 +119,12 @@ TargetPane.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
-    onRequestCloseBackdropLibrary: PropTypes.func,
+    onPaintSpriteClick: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSurpriseSpriteClick: PropTypes.func,
+    raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,

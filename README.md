@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.com/LLK/scratch-gui.svg?token=Yfq2ryN1BwaxDME69Lnc&branch=master)](https://travis-ci.com/LLK/scratch-gui)
 [![Greenkeeper badge](https://badges.greenkeeper.io/LLK/scratch-gui.svg)](https://greenkeeper.io/)
 
+## my fixes
+The console was cleared for production
+
 ## Installation
 This requires you to have Git and Node.js installed.
 

@@ -164,7 +164,6 @@ class CostumeTab extends React.Component {
         });
     }
     render () {
-        // For paint wrapper
         const {
             intl,
             onNewLibraryBackdropClick,
@@ -173,15 +172,11 @@ class CostumeTab extends React.Component {
             costumeLibraryVisible,
             onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,
-            ...props
-        } = this.props;
-
-        const {
             editingTarget,
             sprites,
             stage,
             vm
-        } = props;
+        } = this.props;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 

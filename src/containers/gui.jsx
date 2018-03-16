@@ -64,13 +64,14 @@ class GUI extends React.Component {
         const {
             children,
             fetchingProject,
+            loadingStateVisible,
             projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
         return (
             <GUIComponent
-                loading={fetchingProject || this.state.loading || this.props.loadingStateVisible}
+                loading={fetchingProject || this.state.loading || loadingStateVisible}
                 vm={vm}
                 {...componentProps}
             >

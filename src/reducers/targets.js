@@ -38,6 +38,15 @@ const updateTargetsAction_ = function (targetList, editingTarget, editingCostume
         }
     };
 };
+/**
+ * Updates state.targets and state.editingTarget. Also updates state.editingCostume,
+ * the costume that is active in the paint editor, to match the editing sprite's active
+ * costume if the editing target changes or if costumes have been added or removed.
+ * @param {string} editingTarget Id of the active editing target
+ * @param {Array<Target>} targetList List of all sprite objects in the project
+ * @return {function} function which returns an action that updates the state's targets,
+ *     editingTarget, and editingCostume together.
+ */
 const updateTargets = function (editingTarget, targetList) {
     return function (dispatch, getState) {
         const state = getState();
@@ -66,7 +75,7 @@ const updateTargets = function (editingTarget, targetList) {
         for (const target of targetList) {
             if (target.id === editingTarget) {
                 const newCostumes = target.costumeCount;
-                if (newCostumes < oldCostumes ||
+                if (newCostumes !== oldCostumes ||
                         state.targets.editingTarget !== editingTarget) {
                     editingCostume = target.currentCostume;
                 }

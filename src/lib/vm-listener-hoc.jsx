@@ -52,11 +52,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 keyCode: e.keyCode,
                 isDown: true
             });
-
-            // Don't stop browser keyboard shortcuts
-            if (e.metaKey || e.altKey || e.ctrlKey) return;
-
-            e.preventDefault();
         }
         handleKeyUp (e) {
             // Always capture up events,

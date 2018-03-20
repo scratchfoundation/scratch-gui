@@ -75,6 +75,14 @@
     color: $motion-primary;
     height: 34px;
 }
+.tip-button-icon {
+    vertical-align: middle;
+}
+.tip-button-icon {
+    margin-right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
 .divider {
     border-right: 1px dashed $menubar-gray;

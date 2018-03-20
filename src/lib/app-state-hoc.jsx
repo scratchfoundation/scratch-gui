@@ -2,6 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import throttle from 'redux-throttle';
+import thunk from 'redux-thunk';
 
 import {intlInitialState, IntlProvider} from '../reducers/intl.js';
 import reducer from '../reducers/gui';
@@ -9,7 +10,8 @@ import reducer from '../reducers/gui';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(
     applyMiddleware(
-        throttle(300, {leading: true, trailing: true})
+        throttle(300, {leading: true, trailing: true}),
+        thunk
     )
 );
 const store = createStore(reducer, intlInitialState, enhancer);

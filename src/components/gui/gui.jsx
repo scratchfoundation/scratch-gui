@@ -104,6 +104,7 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
+            {tipsLibraryVisible ? <TipsLibrary /> : null}
             {cardsVisible ? (
                 <Cards />
             ) : null}

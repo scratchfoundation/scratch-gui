@@ -103,7 +103,8 @@ const mapStateToProps = state => ({
     importInfoVisible: state.modals.importInfo,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
-    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
+    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+    tipsLibraryVisible: state.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({

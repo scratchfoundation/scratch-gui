@@ -28,7 +28,7 @@ const initialState = {
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
-    [MODAL_TIPS_LIBRARY]: true
+    [MODAL_TIPS_LIBRARY]: false
 };
 
 const reducer = function (state, action) {

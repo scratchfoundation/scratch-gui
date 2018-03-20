@@ -59,9 +59,9 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        message: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         img: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired
+        onClick: PropTypes.func
     })),
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,

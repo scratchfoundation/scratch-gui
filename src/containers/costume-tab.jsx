@@ -27,6 +27,8 @@ import surpriseIcon from '../components/action-menu/icon--surprise.svg';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
+import {setEditingCostumeIndex} from '../reducers/editing-costume-index';
+
 const messages = defineMessages({
     addLibraryBackdropMsg: {
         defaultMessage: 'Backdrop Library',
@@ -72,53 +74,34 @@ class CostumeTab extends React.Component {
             'handleSurpriseCostume',
             'handleSurpriseBackdrop'
         ]);
-        const {
-            editingTarget,
-            sprites,
-            stage
-        } = props;
-        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        if (target && target.currentCostume) {
-            this.state = {selectedCostumeIndex: target.currentCostume};
-        } else {
-            this.state = {selectedCostumeIndex: 0};
-        }
     }
-    componentWillReceiveProps (nextProps) {
+    componentWillMount () {
         const {
             editingTarget,
             sprites,
             stage
-        } = nextProps;
-
+        } = this.props;
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        if (!target || !target.costumes) {
-            return;
-        }
-
-        // If switching editing targets, update the costume index
-        if (this.props.editingTarget !== editingTarget) {
-            this.setState({selectedCostumeIndex: target.currentCostume});
-        } else if (this.state.selectedCostumeIndex > target.costumes.length - 1) {
-            this.setState({selectedCostumeIndex: target.costumes.length - 1});
+        if (target && !isNaN(target.currentCostume)) {
+            this.props.setEditingCostumeIndex(target.currentCostume);
         }
     }
     handleSelectCostume (costumeIndex) {
         this.props.vm.editingTarget.setCostume(costumeIndex);
-        this.setState({selectedCostumeIndex: costumeIndex});
+        this.props.setEditingCostumeIndex(costumeIndex);
     }
     handleDeleteCostume (costumeIndex) {
         this.props.vm.deleteCostume(costumeIndex);
     }
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex).then(() => {
-            this.setState({selectedCostumeIndex: costumeIndex + 1});
+            this.props.setEditingCostumeIndex(costumeIndex + 1);
         });
     }
     handleNewCostume () {
         if (!this.props.vm.editingTarget) return;
         const costumes = this.props.vm.editingTarget.getCostumes() || [];
-        this.setState({selectedCostumeIndex: Math.max(costumes.length - 1, 0)});
+        this.props.setEditingCostumeIndex(Math.max(costumes.length - 1, 0));
     }
     handleNewBlankCostume () {
         const emptyItem = costumeLibraryContent.find(item => (
@@ -217,15 +200,13 @@ class CostumeTab extends React.Component {
                     }
                 ]}
                 items={target.costumes || []}
-                selectedItemIndex={this.state.selectedCostumeIndex}
+                selectedItemIndex={this.props.editingCostumeIndex}
                 onDeleteClick={target.costumes.length > 1 ? this.handleDeleteCostume : null}
                 onDuplicateClick={this.handleDuplicateCostume}
                 onItemClick={this.handleSelectCostume}
             >
                 {target.costumes ?
-                    <PaintEditorWrapper
-                        selectedCostumeIndex={this.state.selectedCostumeIndex}
-                    /> :
+                    <PaintEditorWrapper /> :
                     null
                 }
                 {costumeLibraryVisible ? (
@@ -250,12 +231,14 @@ class CostumeTab extends React.Component {
 CostumeTab.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
+    editingCostumeIndex: PropTypes.number.isRequired,
     editingTarget: PropTypes.string,
     intl: intlShape,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseBackdropLibrary: PropTypes.func.isRequired,
     onRequestCloseCostumeLibrary: PropTypes.func.isRequired,
+    setEditingCostumeIndex: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
             costumes: PropTypes.arrayOf(PropTypes.shape({
@@ -275,6 +258,7 @@ CostumeTab.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
+    editingCostumeIndex: state.editingCostumeIndex,
     sprites: state.targets.sprites,
     stage: state.targets.stage,
     costumeLibraryVisible: state.modals.costumeLibrary,
@@ -295,6 +279,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());
+    },
+    setEditingCostumeIndex: index => {
+        dispatch(setEditingCostumeIndex(index));
     }
 });
 

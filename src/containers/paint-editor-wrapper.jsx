@@ -20,17 +20,21 @@ class PaintEditorWrapper extends React.Component {
         analytics.pageview('/editors/paint');
     }
     handleUpdateName (name) {
-        this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);
+        this.props.vm.renameCostume(this.props.editingCostumeIndex, name);
     }
     handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
-        this.props.vm.updateSvg(this.props.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
+        this.props.vm.updateSvg(this.props.editingCostumeIndex, svg, rotationCenterX, rotationCenterY);
     }
     render () {
         if (!this.props.svgId) return null;
+        const {
+            editingCostumeIndex, // eslint-disable-line no-unused-vars
+            ...props
+        } = this.props;
         return (
             <PaintEditor
-                {...this.props}
-                svg={this.props.vm.getCostumeSvg(this.props.selectedCostumeIndex)}
+                {...props}
+                svg={this.props.vm.getCostumeSvg(this.props.editingCostumeIndex)}
                 onUpdateName={this.handleUpdateName}
                 onUpdateSvg={this.handleUpdateSvg}
             />
@@ -39,23 +43,25 @@ class PaintEditorWrapper extends React.Component {
 }
 
 PaintEditorWrapper.propTypes = {
+    editingCostumeIndex: PropTypes.number,
     name: PropTypes.string,
     rotationCenterX: PropTypes.number,
     rotationCenterY: PropTypes.number,
-    selectedCostumeIndex: PropTypes.number.isRequired,
     svgId: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
-const mapStateToProps = (state, {selectedCostumeIndex}) => {
+const mapStateToProps = state => {
     const {
         editingTarget,
         sprites,
         stage
     } = state.targets;
+    const editingCostumeIndex = state.editingCostumeIndex;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-    const costume = target && target.costumes[selectedCostumeIndex];
+    const costume = target && target.costumes[editingCostumeIndex];
     return {
+        editingCostumeIndex: editingCostumeIndex,
         name: costume && costume.name,
         rotationCenterX: costume && costume.rotationCenterX,
         rotationCenterY: costume && costume.rotationCenterY,

@@ -33,7 +33,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 // Replace URL hash without triggering a hash change event
                 history.replaceState({}, document.title,
                     projectId ? `./#${projectId}` : '.');
-
+                if (projectId === null) return; // load button triggered this and is already calling setProjectData
                 this.setState({fetchingProject: true}, () => {
                     storage
                         .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)

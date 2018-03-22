@@ -65,14 +65,13 @@ class GUI extends React.Component {
         const {
             children,
             fetchingProject,
-            loadingStateVisible,
             projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
         return (
             <GUIComponent
-                loading={fetchingProject || this.state.loading || loadingStateVisible}
+                loading={fetchingProject || this.state.loading}
                 vm={vm}
                 {...componentProps}
             >
@@ -87,7 +86,6 @@ GUI.propTypes = {
     feedbackFormVisible: PropTypes.bool,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
-    loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     // eslint-disable-line react/forbid-prop-types
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -102,7 +100,6 @@ const mapStateToProps = state => ({
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
     importInfoVisible: state.modals.importInfo,
-    loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
     projectData: state.vm.projectData,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX

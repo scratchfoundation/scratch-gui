@@ -79,7 +79,7 @@ SpriteSelectorItem.propTypes = {
 };
 
 const mapStateToProps = (state, {assetId, costumeURL, id}) => ({
-    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()),
+    costumeURL: costumeURL || (assetId && state.vm.vm.runtime.storage.get(assetId).encodeDataURI()),
     receivedBlocks: state.hoveredTarget.receivedBlocks &&
             state.hoveredTarget.sprite === id
 });

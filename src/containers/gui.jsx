@@ -28,12 +28,12 @@ class GUI extends React.Component {
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
+        this.props.vm.setCompatibilityMode(true);
+        this.props.vm.start();
+        if (!this.props.projectData) return;
         this.props.vm.loadProject(this.props.projectData)
             .then(() => {
-                this.setState({loading: false}, () => {
-                    this.props.vm.setCompatibilityMode(true);
-                    this.props.vm.start();
-                });
+                this.setState({loading: false});
             })
             .catch(e => {
                 // Need to catch this error and update component state so that
@@ -42,6 +42,7 @@ class GUI extends React.Component {
             });
     }
     componentWillReceiveProps (nextProps) {
+        if (!nextProps.projectData) return;
         if (this.props.projectData !== nextProps.projectData) {
             this.setState({loading: true}, () => {
                 this.props.vm.loadProject(nextProps.projectData)
@@ -88,7 +89,8 @@ GUI.propTypes = {
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.string,
+    // eslint-disable-line react/forbid-prop-types
+    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -102,6 +104,7 @@ const mapStateToProps = state => ({
     importInfoVisible: state.modals.importInfo,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
+    projectData: state.vm.projectData,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });
 

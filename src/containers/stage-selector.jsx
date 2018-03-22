@@ -78,8 +78,8 @@ StageSelector.propTypes = {
 };
 
 const mapStateToProps = (state, {assetId}) => ({
-    url: assetId && state.vm.runtime.storage.get(assetId).encodeDataURI(),
-    vm: state.vm
+    url: assetId && state.vm.vm.runtime.storage.get(assetId).encodeDataURI(),
+    vm: state.vm.vm
 });
 
 const mapDispatchToProps = dispatch => ({

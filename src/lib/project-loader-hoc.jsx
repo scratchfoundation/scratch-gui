@@ -1,8 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import analytics from './analytics';
 import log from './log';
 import storage from './storage';
+
+import {setProjectId, setProjectData} from '../reducers/vm';
 
 /* Higher Order Component to provide behavior for loading projects by id from
  * the window's hash (#this part in the url)
@@ -16,8 +20,6 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             this.fetchProjectId = this.fetchProjectId.bind(this);
             this.updateProject = this.updateProject.bind(this);
             this.state = {
-                projectId: null,
-                projectData: null,
                 fetchingProject: false
             };
         }
@@ -25,15 +27,25 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             window.addEventListener('hashchange', this.updateProject);
             this.updateProject();
         }
-        componentWillUpdate (nextProps, nextState) {
-            if (this.state.projectId !== nextState.projectId) {
+        componentWillUpdate (nextProps) {
+            const projectId = nextProps.projectId;
+            if (this.props.projectId !== projectId) {
+                // Replace URL hash without triggering a hash change event
+                history.replaceState({}, document.title,
+                    projectId ? `./#${projectId}` : '.');
+
                 this.setState({fetchingProject: true}, () => {
                     storage
-                        .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
-                        .then(projectAsset => projectAsset && this.setState({
-                            projectData: projectAsset.data.toString(),
-                            fetchingProject: false
-                        }))
+                        .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+                        .then(projectAsset => {
+                            if (!projectAsset) return;
+
+                            this.setState({
+                                fetchingProject: false
+                            });
+
+                            this.props.setNewProjectData(projectAsset.data, projectId);
+                        })
                         .catch(err => log.error(err));
                 });
             }
@@ -46,9 +58,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         }
         updateProject () {
             let projectId = this.fetchProjectId();
-            if (projectId !== this.state.projectId) {
+            if (projectId !== this.props.projectId) {
                 if (projectId.length < 1) projectId = 0;
-                this.setState({projectId: projectId});
+                this.props.setNewProjectId(projectId);
 
                 if (projectId !== 0) {
                     analytics.event({
@@ -61,20 +73,41 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             }
         }
         render () {
-            if (!this.state.projectData) return null;
+            const {
+                projectId, // eslint-disable-line no-unused-vars
+                setNewProjectData, // eslint-disable-line no-unused-vars
+                setNewProjectId, // eslint-disable-line no-unused-vars
+                ...props
+            } = this.props;
             return (
                 <WrappedComponent
                     fetchingProject={this.state.fetchingProject}
-                    projectData={this.state.projectData}
-                    {...this.props}
+                    {...props}
                 />
             );
         }
     }
 
-    return ProjectLoaderComponent;
-};
+    ProjectLoaderComponent.propTypes = {
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        setNewProjectData: PropTypes.func,
+        setNewProjectId: PropTypes.func
+    };
 
+    const mapStateToProps = state => ({
+        projectId: state.vm.projectId
+    });
+
+    const mapDispatchToProps = dispatch => ({
+        setNewProjectId: projectId => dispatch(setProjectId(projectId)),
+        setNewProjectData: (projectData, projectId) => dispatch(setProjectData(projectData, projectId))
+    });
+
+    return connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(ProjectLoaderComponent);
+};
 
 export {
     ProjectLoaderHOC as default

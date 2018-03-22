@@ -5,10 +5,8 @@ import {connect} from 'react-redux';
 
 import LoadButtonComponent from '../components/load-button/load-button.jsx';
 
-import {
-    openLoadingProject,
-    closeLoadingProject
-} from '../reducers/modals';
+import {openLoadingProject} from '../reducers/modals';
+import {setProjectData} from '../reducers/vm';
 
 class LoadButton extends React.Component {
     constructor (props) {
@@ -25,16 +23,8 @@ class LoadButton extends React.Component {
     }
     handleChange (e) {
         this.props.openLoadingState();
-        // Remove the hash if any (without triggering a hash change event or a reload)
-        history.replaceState({}, document.title, '.');
         const reader = new FileReader();
-        reader.onload = () => this.props.vm.loadProject(reader.result)
-            .then(() => {
-                this.props.closeLoadingState();
-            })
-            .catch(error => {
-                this.setState({loadingError: true, errorMessage: error});
-            });
+        reader.onload = () => this.props.setNewProjectData(reader.result, null);
         reader.readAsArrayBuffer(e.target.files[0]);
     }
     handleClick () {
@@ -46,9 +36,8 @@ class LoadButton extends React.Component {
     render () {
         if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
         const {
-            closeLoadingState, // eslint-disable-line no-unused-vars
             openLoadingState, // eslint-disable-line no-unused-vars
-            vm, // eslint-disable-line no-unused-vars
+            setNewProjectData, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -63,20 +52,15 @@ class LoadButton extends React.Component {
 }
 
 LoadButton.propTypes = {
-    closeLoadingState: PropTypes.func,
     openLoadingState: PropTypes.func,
-    vm: PropTypes.shape({
-        loadProject: PropTypes.func
-    })
+    setNewProjectData: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-    vm: state.vm
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    closeLoadingState: () => dispatch(closeLoadingProject()),
-    openLoadingState: () => dispatch(openLoadingProject())
+    openLoadingState: () => dispatch(openLoadingProject()),
+    setNewProjectData: (projectData, projectId) => dispatch(setProjectData(projectData, projectId))
 });
 
 export default connect(

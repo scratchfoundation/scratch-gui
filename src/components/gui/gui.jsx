@@ -18,6 +18,8 @@ import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import Card from '../card/card.jsx';
+
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
@@ -85,9 +87,9 @@ const GUIComponent = props => {
             className={styles.pageWrapper}
             {...componentProps}
         >
-            {previewInfoVisible ? (
+            {/* {previewInfoVisible ? (
                 <PreviewModal />
-            ) : null}
+            ) : null} */}
             {loading ? (
                 <Loader />
             ) : null}
@@ -100,6 +102,7 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
+            <Card vm={vm} />
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>

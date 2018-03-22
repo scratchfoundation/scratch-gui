@@ -1,0 +1,142 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.card-container {
+    position:absolute;
+    z-index: 100;
+}
+
+.left-card {
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: -10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-right: 0;
+    width: 10px;
+    z-index: 99;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+
+    /* box-shadow: -5px 5px 5px 5px rgba(0,0,0,0.1); */
+
+}
+
+.right-card {
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    right: -10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-left: 0;
+    width: 10px;
+    z-index: 99;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    /* box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1); */
+
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.2);
+}
+
+.header-buttons {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.step-title {
+    font-size: 1rem;
+    margin: 0.5rem 0 1rem 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.step-description {
+    text-align: center;
+    margin: 0 0 1rem;
+}
+
+.step-image {
+    background: #F9F9F9;
+    border: 1px solid #ddd;
+    width: 380px;
+    min-height: 160px;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.step-image img {
+    max-width: 250px;
+}
+
+/* .step-image img {
+    display: block;
+    justify-content: c
+} */
+
+.left-button, .right-button {
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    z-index: 101;
+    user-select: none;
+}
+
+.left-button {
+    left: -22px;
+}
+
+.right-button {
+    right: -22px;
+}
+.left-button img {
+    transform: rotate(180deg);
+}
+
+.when-block {
+    color: rgb(247,194,81);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.sound-block {
+    color: rgb(193,108,202);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.color-block {
+    color: rgb(144,110,247);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.25);
+    top: 0;
+    left: 0;
+    z-index: 95;
+}

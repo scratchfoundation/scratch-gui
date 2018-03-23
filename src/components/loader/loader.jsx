@@ -159,8 +159,11 @@ class LoaderComponent extends React.Component {
                             className={styles.messageContainerInner}
                             style={{transform: `translate(0, -${this.state.messageNumber * 25}px)`}}
                         >
-                            {messages.map(m => (
-                                <div className={styles.message}>
+                            {messages.map((m, i) => (
+                                <div
+                                    className={styles.message}
+                                    key={i}
+                                >
                                     {m.message}
                                 </div>
                             ))}

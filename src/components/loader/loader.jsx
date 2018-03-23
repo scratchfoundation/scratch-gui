@@ -89,7 +89,7 @@ const messages = [
     {
         message: (
             <FormattedMessage
-                defaultMessage="Preparing emojiis …"
+                defaultMessage="Preparing emojis …"
                 description="One of the loading messages"
                 id="gui.loader.message8"
             />

@@ -30,12 +30,17 @@ class ErrorBoundary extends React.Component {
     }
 
     handleReload () {
-        window.location.replace(window.location.origin);
+        window.location.replace(window.location.origin + window.location.pathname);
     }
 
     render () {
         if (this.state.hasError) {
-            if (platform.name === 'IE') {
+            // don't use array.includes because that's something that causes IE to crash.
+            if (
+                platform.name === 'IE' ||
+                platform.name === 'Opera' ||
+                platform.name === 'Opera Mini' ||
+                platform.name === 'Silk') {
                 return <BrowserModalComponent onBack={this.handleBack} />;
             }
             return <CrashMessageComponent onReload={this.handleReload} />;

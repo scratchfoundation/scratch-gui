@@ -1,1 +1,128 @@
-{"targets":[{"id":"`jEk@4|i[#Fk?(8x)AV.","name":"Stage","isStage":true,"x":0,"y":0,"size":100,"direction":90,"draggable":false,"currentCostume":0,"costume":{"name":"backdrop1","bitmapResolution":1,"rotationCenterX":240,"rotationCenterY":180,"skinId":2,"dataFormat":"png","assetId":"739b5e2a2435f6e1ec2993791b423146"},"costumeCount":1,"visible":true,"rotationStyle":"all around","blocks":{},"variables":{"`jEk@4|i[#Fk?(8x)AV.-my variable":{"id":"`jEk@4|i[#Fk?(8x)AV.-my variable","name":"my variable","type":"","isCloud":false,"value":0}},"lists":{},"costumes":[{"name":"backdrop1","bitmapResolution":1,"rotationCenterX":240,"rotationCenterY":180,"skinId":2,"dataFormat":"png","assetId":"739b5e2a2435f6e1ec2993791b423146"}],"sounds":[{"name":"pop","format":"","rate":11025,"sampleCount":258,"soundID":1,"md5":"83a9787d4cb6f3b7632b4ddfebf74367.wav","data":null,"dataFormat":"wav","assetId":"83a9787d4cb6f3b7632b4ddfebf74367","soundId":"p=i?*Zt*I]@]x_*V`mut"}]},{"id":"9xJ@2eKXvx:/*Q^3Rib#","name":"Sprite1","isStage":false,"x":0,"y":0,"size":100,"direction":90,"draggable":false,"currentCostume":0,"costume":{"name":"costume1","bitmapResolution":1,"rotationCenterX":47,"rotationCenterY":55,"skinId":0,"dataFormat":"svg","assetId":"09dc888b0b7df19f70d81588ae73420e"},"costumeCount":2,"visible":true,"rotationStyle":"all around","blocks":{},"variables":{},"lists":{},"costumes":[{"name":"costume1","bitmapResolution":1,"rotationCenterX":47,"rotationCenterY":55,"skinId":0,"dataFormat":"svg","assetId":"09dc888b0b7df19f70d81588ae73420e"},{"name":"costume2","bitmapResolution":1,"rotationCenterX":47,"rotationCenterY":55,"skinId":1,"dataFormat":"svg","assetId":"3696356a03a8d938318876a593572843"}],"sounds":[{"name":"Meow","format":"","rate":22050,"sampleCount":18688,"soundID":0,"md5":"83c36d806dc92327b9e7049a565c6bff.wav","data":null,"dataFormat":"wav","assetId":"83c36d806dc92327b9e7049a565c6bff","soundId":"]z6@jLeJ2W%gr/eA1HB+"}]}],"meta":{"semver":"3.0.0","vm":"0.1.0","agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"}}
+{
+	"targets": [
+		{
+			"id": "`jEk@4|i[#Fk?(8x)AV.",
+			"name": "Stage",
+			"isStage": true,
+			"x": 0,
+			"y": 0,
+			"size": 100,
+			"direction": 90,
+			"draggable": false,
+			"currentCostume": 0,
+			"costume": {
+				"name": "backdrop1",
+				"bitmapResolution": 1,
+				"rotationCenterX": 240,
+				"rotationCenterY": 180,
+				"skinId": 2,
+				"dataFormat": "png",
+				"assetId": "739b5e2a2435f6e1ec2993791b423146"
+			},
+			"costumeCount": 1,
+			"visible": true,
+			"rotationStyle": "all around",
+			"blocks": {},
+			"variables": {
+				"`jEk@4|i[#Fk?(8x)AV.-my variable": {
+					"id": "`jEk@4|i[#Fk?(8x)AV.-my variable",
+					"name": "my variable",
+					"type": "",
+					"isCloud": false,
+					"value": 0
+				}
+			},
+			"lists": {},
+			"costumes": [
+				{
+					"name": "backdrop1",
+					"bitmapResolution": 1,
+					"rotationCenterX": 240,
+					"rotationCenterY": 180,
+					"skinId": 2,
+					"dataFormat": "png",
+					"assetId": "739b5e2a2435f6e1ec2993791b423146"
+				}
+			],
+			"sounds": [
+				{
+					"name": "pop",
+					"format": "",
+					"rate": 11025,
+					"sampleCount": 258,
+					"soundID": 1,
+					"md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+					"data": null,
+					"dataFormat": "wav",
+					"assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+					"soundId": "p=i?*Zt*I]@]x_*V`mut"
+				}
+			]
+		},
+		{
+			"id": "9xJ@2eKXvx:/*Q^3Rib#",
+			"name": "Sprite1",
+			"isStage": false,
+			"x": 0,
+			"y": 0,
+			"size": 100,
+			"direction": 90,
+			"draggable": false,
+			"currentCostume": 0,
+			"costume": {
+				"name": "costume1",
+				"bitmapResolution": 1,
+				"rotationCenterX": 47,
+				"rotationCenterY": 55,
+				"skinId": 0,
+				"dataFormat": "svg",
+				"assetId": "09dc888b0b7df19f70d81588ae73420e"
+			},
+			"costumeCount": 2,
+			"visible": true,
+			"rotationStyle": "all around",
+			"blocks": {},
+			"variables": {},
+			"lists": {},
+			"costumes": [
+				{
+					"name": "costume1",
+					"bitmapResolution": 1,
+					"rotationCenterX": 47,
+					"rotationCenterY": 55,
+					"skinId": 0,
+					"dataFormat": "svg",
+					"assetId": "09dc888b0b7df19f70d81588ae73420e"
+				},
+				{
+					"name": "costume2",
+					"bitmapResolution": 1,
+					"rotationCenterX": 47,
+					"rotationCenterY": 55,
+					"skinId": 1,
+					"dataFormat": "svg",
+					"assetId": "3696356a03a8d938318876a593572843"
+				}
+			],
+			"sounds": [
+				{
+					"name": "Meow",
+					"format": "",
+					"rate": 22050,
+					"sampleCount": 18688,
+					"soundID": 0,
+					"md5ext": "83c36d806dc92327b9e7049a565c6bff.wav",
+					"data": null,
+					"dataFormat": "wav",
+					"assetId": "83c36d806dc92327b9e7049a565c6bff",
+					"soundId": "]z6@jLeJ2W%gr/eA1HB+"
+				}
+			]
+		}
+	],
+	"meta": {
+		"semver": "3.0.0",
+		"vm": "0.1.0",
+		"agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+	}
+}

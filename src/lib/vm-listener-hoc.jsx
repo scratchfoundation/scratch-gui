@@ -52,11 +52,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 keyCode: e.keyCode,
                 isDown: true
             });
-
-            // Don't stop browser keyboard shortcuts
-            if (e.metaKey || e.altKey || e.ctrlKey) return;
-
-            e.preventDefault();
         }
         handleKeyUp (e) {
             // Always capture up events,
@@ -99,9 +94,7 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.vm,
-        hoveredSprite: state.hoveredTarget.sprite,
-        editingTarget: state.targets.editingTarget
+        vm: state.vm
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

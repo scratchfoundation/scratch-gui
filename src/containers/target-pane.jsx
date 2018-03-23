@@ -89,6 +89,7 @@ class TargetPane extends React.Component {
     render () {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars
+            onReceivedBlocks, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (

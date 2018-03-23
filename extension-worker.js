@@ -300,12 +300,35 @@ module.exports = g;
 "use strict";
 
 
+/**
+ * Block argument types
+ * @enum {string}
+ */
 var ArgumentType = {
-    ANGLE: 'angle',
-    BOOLEAN: 'Boolean',
-    COLOR: 'color',
-    NUMBER: 'number',
-    STRING: 'string'
+  /**
+   * Numeric value with angle picker
+   */
+  ANGLE: 'angle',
+
+  /**
+   * Boolean value with hexagonal placeholder
+   */
+  BOOLEAN: 'Boolean',
+
+  /**
+   * Numeric value with color picker
+   */
+  COLOR: 'color',
+
+  /**
+   * Numeric value with text field
+   */
+  NUMBER: 'number',
+
+  /**
+   * String value with text field
+   */
+  STRING: 'string'
 };
 
 module.exports = ArgumentType;
@@ -317,12 +340,35 @@ module.exports = ArgumentType;
 "use strict";
 
 
+/**
+ * Types of block
+ * @enum {string}
+ */
 var BlockType = {
-    BOOLEAN: 'Boolean',
-    COMMAND: 'command',
-    CONDITIONAL: 'conditional',
-    HAT: 'hat',
-    REPORTER: 'reporter'
+  /**
+   * Boolean reporter with hexagonal shape
+   */
+  BOOLEAN: 'Boolean',
+
+  /**
+   * Command block
+   */
+  COMMAND: 'command',
+
+  /**
+   * Specialized command block which may or may not run a child branch
+   */
+  CONDITIONAL: 'conditional',
+
+  /**
+   * Hat block which conditionally starts a block stack
+   */
+  HAT: 'hat',
+
+  /**
+   * General reporter with numeric or string value
+   */
+  REPORTER: 'reporter'
 };
 
 module.exports = BlockType;

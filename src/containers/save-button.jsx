@@ -28,7 +28,7 @@ class SaveButton extends React.Component {
             const date = new Date();
             const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
             // TODO change extension to sb3
-            saveLink.download = `project-${timestamp}.zip`;
+            saveLink.download = `untitled-project-${timestamp}.sb3`;
             saveLink.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(saveLink);

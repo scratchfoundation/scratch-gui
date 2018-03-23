@@ -8,6 +8,7 @@ const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
 const MODAL_FEEDBACK_FORM = 'feedbackForm';
 const MODAL_IMPORT_INFO = 'importInfo';
+const MODAL_LOADING_PROJECT = 'loadingProject';
 const MODAL_PREVIEW_INFO = 'previewInfo';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
@@ -20,6 +21,7 @@ const initialState = {
     [MODAL_EXTENSION_LIBRARY]: false,
     [MODAL_FEEDBACK_FORM]: false,
     [MODAL_IMPORT_INFO]: false,
+    [MODAL_LOADING_PROJECT]: false,
     [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
@@ -73,6 +75,10 @@ const openImportInfo = function () {
     analytics.pageview('modals/import');
     return openModal(MODAL_IMPORT_INFO);
 };
+const openLoadingProject = function () {
+    analytics.pageview('modals/loading');
+    return openModal(MODAL_LOADING_PROJECT);
+};
 const openPreviewInfo = function () {
     analytics.pageview('/modals/preview');
     return openModal(MODAL_PREVIEW_INFO);
@@ -104,6 +110,9 @@ const closeFeedbackForm = function () {
 const closeImportInfo = function () {
     return closeModal(MODAL_IMPORT_INFO);
 };
+const closeLoadingProject = function () {
+    return closeModal(MODAL_LOADING_PROJECT);
+};
 const closePreviewInfo = function () {
     return closeModal(MODAL_PREVIEW_INFO);
 };
@@ -123,6 +132,7 @@ export {
     openExtensionLibrary,
     openFeedbackForm,
     openImportInfo,
+    openLoadingProject,
     openPreviewInfo,
     openSoundLibrary,
     openSpriteLibrary,
@@ -132,6 +142,7 @@ export {
     closeExtensionLibrary,
     closeFeedbackForm,
     closeImportInfo,
+    closeLoadingProject,
     closePreviewInfo,
     closeSpriteLibrary,
     closeSoundLibrary,

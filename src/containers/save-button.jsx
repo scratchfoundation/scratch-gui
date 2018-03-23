@@ -63,7 +63,7 @@ SaveButton.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    vm: state.vm.vm
+    vm: state.vm
 });
 
 export default connect(

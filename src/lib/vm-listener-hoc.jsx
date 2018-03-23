@@ -99,7 +99,7 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.vm.vm,
+        vm: state.vm,
         hoveredSprite: state.hoveredTarget.sprite,
         editingTarget: state.targets.editingTarget
     });

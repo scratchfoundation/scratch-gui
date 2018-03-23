@@ -9,7 +9,6 @@ import {
     closeImportInfo,
     openPreviewInfo
 } from '../reducers/modals';
-import {setProjectId} from '../reducers/vm';
 
 class ImportModal extends React.Component {
     constructor (props) {
@@ -36,7 +35,11 @@ class ImportModal extends React.Component {
         const projectId = this.validate(inputValue);
 
         if (projectId) {
-            this.props.setProjectId(projectId);
+            const projectLink = document.createElement('a');
+            document.body.appendChild(projectLink);
+            projectLink.href = `#${projectId}`;
+            projectLink.click();
+            document.body.removeChild(projectLink);
             this.props.onViewProject();
         } else {
             this.setState({
@@ -84,8 +87,7 @@ class ImportModal extends React.Component {
 ImportModal.propTypes = {
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onViewProject: PropTypes.func,
-    setProjectId: PropTypes.func
+    onViewProject: PropTypes.func
 };
 
 const mapStateToProps = () => ({});
@@ -100,9 +102,6 @@ const mapDispatchToProps = dispatch => ({
     },
     onViewProject: () => {
         dispatch(closeImportInfo());
-    },
-    setProjectId: projectId => {
-        dispatch(setProjectId(projectId));
     }
 });
 

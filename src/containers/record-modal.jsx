@@ -135,7 +135,7 @@ RecordModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    vm: state.vm.vm
+    vm: state.vm
 });
 
 const mapDispatchToProps = dispatch => ({

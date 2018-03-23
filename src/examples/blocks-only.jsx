@@ -10,7 +10,7 @@ import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
 import styles from './blocks-only.css';
 
-const mapStateToProps = state => ({vm: state.vm.vm});
+const mapStateToProps = state => ({vm: state.vm});
 
 const VMBlocks = connect(mapStateToProps)(Blocks);
 const VMControls = connect(mapStateToProps)(Controls);

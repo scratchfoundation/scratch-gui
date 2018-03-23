@@ -9,7 +9,7 @@ import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
-const mapStateToProps = state => ({vm: state.vm.vm});
+const mapStateToProps = state => ({vm: state.vm});
 
 const VMStage = connect(mapStateToProps)(Stage);
 const VMControls = connect(mapStateToProps)(Controls);

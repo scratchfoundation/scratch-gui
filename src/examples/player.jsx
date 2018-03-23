@@ -11,7 +11,7 @@ import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 
 import './player.css';
 
-const mapStateToProps = state => ({vm: state.vm.vm});
+const mapStateToProps = state => ({vm: state.vm});
 
 const VMStage = connect(mapStateToProps)(Stage);
 const VMControls = connect(mapStateToProps)(Controls);

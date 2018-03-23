@@ -28,12 +28,12 @@ class GUI extends React.Component {
     componentDidMount () {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
-        this.props.vm.setCompatibilityMode(true);
-        this.props.vm.start();
-        if (!this.props.projectData) return;
         this.props.vm.loadProject(this.props.projectData)
             .then(() => {
-                this.setState({loading: false});
+                this.setState({loading: false}, () => {
+                    this.props.vm.setCompatibilityMode(true);
+                    this.props.vm.start();
+                });
             })
             .catch(e => {
                 // Need to catch this error and update component state so that
@@ -42,7 +42,6 @@ class GUI extends React.Component {
             });
     }
     componentWillReceiveProps (nextProps) {
-        if (!nextProps.projectData) return;
         if (this.props.projectData !== nextProps.projectData) {
             this.setState({loading: true}, () => {
                 this.props.vm.loadProject(nextProps.projectData)
@@ -65,13 +64,14 @@ class GUI extends React.Component {
         const {
             children,
             fetchingProject,
+            loadingStateVisible,
             projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
         return (
             <GUIComponent
-                loading={fetchingProject || this.state.loading}
+                loading={fetchingProject || this.state.loading || loadingStateVisible}
                 vm={vm}
                 {...componentProps}
             >
@@ -86,9 +86,9 @@ GUI.propTypes = {
     feedbackFormVisible: PropTypes.bool,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
+    loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
-    // eslint-disable-line react/forbid-prop-types
-    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    projectData: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -100,8 +100,8 @@ const mapStateToProps = state => ({
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     feedbackFormVisible: state.modals.feedbackForm,
     importInfoVisible: state.modals.importInfo,
+    loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
-    projectData: state.vm.projectData,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
 });
 

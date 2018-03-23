@@ -1,0 +1,19 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.wrapper {
+    display: flex;
+    flex-grow: 1;
+    border: 1px solid $ui-pane-border;
+    border-top-right-radius: $space;
+    background: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+}
+
+.detail-area {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    border-left: 1px solid $ui-pane-border;
+}

@@ -1,0 +1,40 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.monitor {
+    position: absolute;
+    padding: 3px;
+    background: $ui-pane-gray;
+    z-index: 100;
+    border: 1px solid $ui-pane-border;
+    border-radius: calc($space / 2);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    display: flex;
+    transition: box-shadow 0.2s;
+    pointer-events: all;
+}
+
+.monitor:hover {
+    cursor: pointer;
+}
+
+.dragging {
+    z-index: 101;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+.label {
+    font-weight: bold;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.value {
+    min-width: 40px;
+    text-align: center;
+    color: white;
+    margin: 0 5px;
+    border-radius: calc($space / 2);
+    padding: 0 2px;
+}

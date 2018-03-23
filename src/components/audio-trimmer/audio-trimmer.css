@@ -1,0 +1,104 @@
+@import "../../css/colors.css";
+
+$border-radius: 4px;
+$trim-handle-width: 12px;
+$trim-handle-height: 14px;
+$stripe-size: 10px;
+$hover-scale: 2;
+
+.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.trim-background {
+    cursor: pointer;
+    touch-action: none;
+}
+
+.trim-background-mask {
+    border: 1px solid $red-tertiary;
+    opacity: 0.5;
+
+    background: repeating-linear-gradient(
+        45deg,
+        $red-primary,
+        $red-primary $stripe-size,
+        $red-tertiary $stripe-size,
+        $red-tertiary calc(2 * $stripe-size)
+    );
+}
+
+.start-trim-background .trim-background-mask {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+}
+
+.end-trim-background .trim-background-mask {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.trim-line {
+    position: absolute;
+    top: 0;
+    width: 0px;
+    height: 100%;
+    border: 1px solid $red-tertiary;
+}
+
+.playhead {
+    border: 1px solid $motion-primary;
+}
+
+.start-trim-line {
+    right: 0;
+}
+
+.end-trim-line {
+    left: 0;
+}
+
+.trim-handle {
+    position: absolute;
+    left: calc(-$trim-handle-width / 2);
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+}
+
+.trim-handle img {
+    position: absolute;
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+
+    /* Make sure image dragging isn't triggered */
+    user-select: none;
+    user-drag: none;
+    -webkit-user-drag: none; /* Autoprefixer doesn't seem to work for this */
+
+    transition: 0.2s;
+}
+
+.top-trim-handle {
+    top: -$trim-handle-height;
+}
+
+.bottom-trim-handle {
+    bottom: -$trim-handle-height;
+}
+
+.top-trim-handle img {
+    transform: rotate(180deg);
+}
+
+/* Increase handle size when anywhere on draggable area is hovered */
+.trim-background:hover img {
+    transform: scale($hover-scale);
+}
+
+.trim-background:hover .top-trim-handle img {
+    transform: rotate(180deg) scale($hover-scale);
+}

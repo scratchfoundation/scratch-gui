@@ -1,0 +1,109 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.library-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 160px;
+    max-width: 160px;
+    height: 160px;
+    margin: $space;
+    padding: 1rem 1rem 0 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary;
+    background: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #e9eef2;
+    border-radius: $space;
+    text-align: center;
+    cursor: pointer;
+}
+
+.library-item:hover {
+    border-width: 2px;
+    border-color: #1dacf4;
+}
+
+.disabled {
+    opacity: .5;
+    cursor: auto;
+}
+
+.disabled:hover {
+    border-color: #e9eef2;
+}
+
+.library-item-image-container-wrapper {
+    height: 100px;
+    width: 100%;
+    position: relative;
+}
+
+.library-item-image-container {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+}
+
+.library-item-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.library-item-name {
+    width: 80%;
+    margin: 0.25rem 0;
+    text-align: center;
+
+    /*
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+    */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.featured-item {
+    flex-basis: 300px;
+    max-width: 300px;
+    height: 320px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.featured-image-container {
+    position: relative;
+}
+
+.featured-image {
+    width: 100%;
+}
+
+.featured-text {
+    font-weight: bold;
+    padding: 10px;
+    height: 140px;
+    width: 300px;
+}
+
+.featured-description {
+    font-weight: normal;
+    line-height: 2;
+}
+
+.coming-soon-text {
+    position: absolute;
+    transform: translate(calc(2 * $space), calc(2 * $space));
+    background-color: $data-primary;
+    border-radius: 1rem;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25);
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    font-weight: bold;
+    color: #FFF;
+}

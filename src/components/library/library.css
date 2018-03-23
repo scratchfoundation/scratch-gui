@@ -1,0 +1,31 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.modal-content {
+    position: absolute;
+
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: 'touch';
+    user-select: none;
+
+    /* Default modal resets */
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.library-scroll-grid {
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    background: $ui-pane-gray;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: calc(100% - $library-header-height);
+    padding: 0.5rem;
+}

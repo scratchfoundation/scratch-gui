@@ -1,0 +1,80 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.stage {
+    /*
+        Fixes a few extra pixels of margin/padding, that adds on to the bottom
+        of the element, which messes up the chrome padding consistency
+    */
+    display: block;
+
+    /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
+    background-color: transparent;
+}
+
+.with-color-picker {
+    cursor: none;
+    z-index: 2001;
+}
+
+.color-picker-background {
+    position: absolute;;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: block;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+}
+
+.stage-wrapper {
+    position: relative;
+    border-radius: $space;
+    border: 1px solid $ui-pane-border;
+    /* Keep the canvas inside the border radius */
+    overflow: hidden;
+}
+
+.stage-wrapper-overlay {
+    position: fixed;
+    top: $stage-menu-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5000;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.stage-overlay-content {
+    outline: none;
+    margin: auto;
+    border: 3px solid rgb(126, 133, 151);
+    padding: 0;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: $space;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-overlay-content-border-override {
+    border: none;
+}
+
+.question-wrapper {
+    position: absolute;
+}
+
+.monitor-wrapper, .color-picker-wrapper, .queston-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}

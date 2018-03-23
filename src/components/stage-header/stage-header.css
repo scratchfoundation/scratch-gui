@@ -1,0 +1,69 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.stage-header-wrapper {
+    position: relative;
+}
+
+.stage-header-wrapper-overlay {
+    position: fixed;
+    background-color: rgb(232, 237, 241);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+}
+
+.stage-menu-wrapper {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    flex-shrink: 0;
+    align-items: center;
+    height: $stage-menu-height;
+    padding: $space;
+}
+
+.stage-size-row {
+    display: flex;
+}
+
+.stage-size-toggle-group {
+    display: flex;
+    margin-right: .2rem;
+}
+
+.stage-button {
+    display: block;
+    border: 1px solid $ui-pane-border;
+    border-radius: .25rem;
+    box-sizing: content-box;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: #FFF;
+    padding: 0.375rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.stage-button-icon {
+    width: 100%;
+    height: 100%;
+}
+
+.stage-button-right {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.stage-button-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.stage-button-disabled {
+    opacity: .5;
+    cursor: auto;
+    background: transparent;
+}

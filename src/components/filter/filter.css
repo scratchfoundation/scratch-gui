@@ -1,0 +1,103 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+     /*
+        Should we use width 100% instead, for cases when component's
+        parent is not a flexbox container?
+    */
+    flex-grow: 1;
+
+    padding: 0.3rem 0.5rem;
+    background: rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10rem;
+    user-select: none;
+}
+
+.filter:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.filter-icon {
+    height: 0.9rem;
+    width: 0.9rem;
+    margin: 0 0.5rem 0 0.75rem;
+}
+
+/*
+    Hidden state
+*/
+.x-icon-wrapper {
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;  /* Mask the icon animation */
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0 0.25rem 0 0.5rem; /* @todo: move to parent to make component*/
+
+    border-radius: 50%;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 0.05s linear;
+}
+
+/*
+    Shown state
+*/
+.filter.is-active .x-icon-wrapper {
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.05s linear;
+}
+
+.filter.is-active .x-icon-wrapper:hover {
+    transform: scale(1.2, 1.2);
+}
+
+/*
+    Hidden state
+*/
+.x-icon {
+    position: relative;
+    margin: 0.25rem;
+    user-select: none;
+    transform: translateX(0.5rem);
+    transition: transform 0.085s cubic-bezier(0.78, 1, 1, 1);
+}
+
+/*
+    Shown state
+*/
+.filter.is-active .x-icon-wrapper .x-icon {
+    transform: translateX(0);
+}
+
+.filter-input {
+    flex-grow: 1;
+    line-height: 1.25rem;
+    background-color: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+    cursor: text;
+}
+
+.filter-input::placeholder {
+    opacity: 0.75;
+    padding: 0 0 0 0.25rem;
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+}

@@ -1,0 +1,34 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly specify line endings for as many files as possible.
+# People who (for example) rsync between Windows and Linux need this.
+
+# File types which we know are binary
+
+# Prefer LF for most file types
+*.frag text eol=lf
+*.htm text eol=lf
+*.html text eol=lf
+*.iml text eol=lf
+*.js text eol=lf
+*.js.map text eol=lf
+*.json text eol=lf
+*.jsx text eol=lf
+*.md text eol=lf
+*.vert text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+
+# Prefer LF for these files
+.editorconfig text eol=lf
+.eslintrc text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitmodules text eol=lf
+LICENSE text eol=lf
+Makefile text eol=lf
+README text eol=lf
+TRADEMARK text eol=lf
+
+# Use CRLF for Windows-specific file types

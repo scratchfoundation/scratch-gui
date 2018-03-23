@@ -1,0 +1,95 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.menu-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    
+    /* 
+        For most things, we shouldn't explicitly set height, and let the 
+        content push the element to whatever fits. Using a fixed height 
+        instead, will help us subtract the value we assign from the body, 
+        adding up to a perfect 100%. This means we don't need to set 
+        overflow: hidden, which makes it hard to debug. border-box 
+        simplifies by all of this by removing padding from the equation. 
+    */
+    box-sizing: border-box;
+    height: $menu-bar-height; 
+
+    /* 
+        @todo: This adds ~20px in Chrome, when scrolling to the right, 
+        but fixes [FFx + Safari] [resize window down + scroll to the right] bug.
+        width: 100%; 
+    */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: $motion-primary;
+    color: white;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
+/* 
+    Using a wrapper so when logo is hovered, it transforms via its center point 
+    @todo: not sure if this is needed 
+*/
+.logo-wrapper {
+}
+
+.scratch-logo {
+    height:  $menu-bar-height; 
+    padding: 0.8rem 0;
+}
+
+.scratch-logo:hover {
+    transform: scale(1.1, 1.1);
+    background-size: 100%;
+    transition: all .075s ease-in;
+}
+
+.title {
+    display: inline-block;
+    margin: 0 2rem;
+}
+
+.menu-item {
+    display: block;
+    padding: 0 1.5rem;
+    line-height: $menu-bar-height; 
+    cursor: pointer;
+    text-decoration: none;
+    color: $motion-tertiary;
+    user-select: none;
+}
+
+.feedback-button-wrapper {
+    align-self: center;
+    padding: 0 .5rem;
+    line-height: $menu-bar-height;
+}
+
+.feedback-button {
+    border-radius: 5px;
+    padding: .75rem;
+    background-color: #FFF;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: bold;
+    color: $motion-primary;
+}
+
+.feedback-button-icon {
+    vertical-align: middle;
+}
+
+.feedback-button-icon {
+    margin-right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}

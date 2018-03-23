@@ -1,0 +1,15 @@
+$space: 0.5rem;
+
+$sprites-per-row: 5;
+
+$menu-bar-height: 3rem;
+$sprite-info-height: 6rem;
+$stage-menu-height: 2.75rem;
+
+$library-header-height: 4.375rem;
+
+$form-radius: calc($space / 2);
+
+/* layout contants from `layout-constants.js` */
+$full-size: 1095px;
+$full-size-paint: 1249px;

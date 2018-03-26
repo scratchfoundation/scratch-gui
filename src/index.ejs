@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="static/favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <!-- Sentry error logging to help with finding bugs -->
-    <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
-    <script>
-        Raven.config('https://42b7d13da8ad4d68b13e57c5e54f9a23@sentry.io/273218').install();
-    </script>
-    <!-- /Sentry -->
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <link rel="shortcut icon" href="static/favicon.ico">
+  
+  <!-- 移动端适配解决方案 -->
+  <script>
+    var contentWidth;
+    var phoneHeight = parseInt(window.screen.height),
+      phoneScale = parseInt(window.screen.width),
+      ua = navigator.userAgent;
+    // alert(phoneScale);
+    
+    if (window.orientation == 180 || window.orientation == 0) {
+      // alert("竖屏状态！")
+      contentWidth = 750;
+      phoneScale = phoneScale / contentWidth;
+    }
+    if (window.orientation == 90 || window.orientation == -90) {
+      // alert("横屏状态！")
+      contentWidth = 1280;
+      phoneScale = phoneHeight / contentWidth;
+    }
 
-  </head>
-  <body>
-  </body>
+    if(!contentWidth){
+      contentWidth = 750;
+      phoneScale = phoneScale / contentWidth;
+    }
+    // alert(phoneScale);
+
+    if (/Android (\d+\.\d+)/.test(ua)) {
+      // andriod 2.3
+      if (parseFloat(RegExp.$1) > 2.3)
+        document.write('<meta name="viewport" id="viewport" content="width='+ contentWidth +', minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+      else
+        document.write('<meta name="viewport" id="viewport" content="width=' + contentWidth +', target-densitydpi=device-dpi">');
+    }
+    else
+      // 其他系统
+      document.write('<meta name="viewport" id="viewport" content="width=' + contentWidth +', user-scalable=no, target-densitydpi=device-dpi">');
+
+  </script>
+
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+
+  <!-- Sentry error logging to help with finding bugs -->
+  <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
+  <script>
+    Raven.config('https://42b7d13da8ad4d68b13e57c5e54f9a23@sentry.io/273218').install();
+  </script>
+  <!-- /Sentry -->
+
+</head>
+
+<body>
+</body>
+
 </html>

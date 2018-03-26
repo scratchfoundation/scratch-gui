@@ -21,6 +21,13 @@ export default [
         featured: true
     },
     {
+        name: 'Video Sensing',
+        extensionURL: 'videoSensing',
+        iconURL: videoImage,
+        description: 'Detect motion with the camera.',
+        featured: true
+    },
+    {
         name: 'LEGO WeDo 2.0',
         extensionURL: '',
         iconURL: wedoImage,
@@ -33,14 +40,6 @@ export default [
         extensionURL: '',
         iconURL: speechImage,
         description: 'Talk to your projects.',
-        featured: true,
-        disabled: true
-    },
-    {
-        name: 'Video Sensing',
-        extensionURL: '',
-        iconURL: videoImage,
-        description: 'Detect motion with the camera.',
         featured: true,
         disabled: true
     },

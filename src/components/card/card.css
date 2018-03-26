@@ -1,3 +1,6 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
 .container {
     position: absolute;
     top: 0;
@@ -139,4 +142,32 @@
     top: 0;
     left: 0;
     z-index: 95;
+}
+
+.decks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.deck-image {
+    /* filter: hue-rotate(90deg); */
+    width: 150px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+}
+
+.deck-name {
+    /* color: red; */
+    color: $motion-primary;
+    font-weight: bold;
+    margin-top: 5px;
 }

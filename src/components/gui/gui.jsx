@@ -104,8 +104,8 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
-            {tipsLibraryVisible ? <TipsLibrary /> : null}
-            <Card vm={vm} />
+            {/* {tipsLibraryVisible ? <TipsLibrary /> : null} */}
+            {tipsLibraryVisible ? <Card vm={vm} /> : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>

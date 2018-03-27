@@ -6,13 +6,25 @@ import styles from './button.css';
 
 const ButtonComponent = ({
     className,
+    disabled,
+    iconClassName,
+    iconSrc,
     onClick,
     children,
     ...props
 }) => {
-    if (props.disabled === true) {
+
+    if (disabled) {
         onClick = function () {};
     }
+
+    const icon = iconSrc && (
+        <img
+            className={classNames(iconClassName, styles.icon)}
+            draggable={false}
+            src={iconSrc}
+        />
+    );
 
     return (
         <span
@@ -24,6 +36,7 @@ const ButtonComponent = ({
             onClick={onClick}
             {...props}
         >
+            {icon}
             {children}
         </span>
     );
@@ -33,6 +46,8 @@ ButtonComponent.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    iconClassName: PropTypes.string,
+    iconSrc: PropTypes.string,
     onClick: PropTypes.func.isRequired
 };
 

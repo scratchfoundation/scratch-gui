@@ -1,27 +1,22 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
-import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import locales from 'scratch-l10n';
 import languageIcon from './language-icon.svg';
+import dropdownCaret from './dropdown-caret.svg';
 import styles from './language-selector.css';
 
 const LanguageSelector = ({
     currentLocale,
     onChange,
+    open,
     ...props
 }) => (
     <Box {...props}>
-        <ComingSoonTooltip
-            place="bottom"
-            tooltipId="language-selector"
-        >
-            <div className={styles.group}>
-                <img
-                    className={styles.languageIcon}
-                    src={languageIcon}
-                />
+        <div className={styles.group}>
+            {open ? (
                 <select
                     disabled
                     aria-label="language selector"
@@ -38,15 +33,27 @@ const LanguageSelector = ({
                         </option>
                     ))}
                 </select>
-            </div>
-        </ComingSoonTooltip>
+            ) : (
+                <React.Fragment>
+                    <img
+                        className={classNames(styles.languageIcon, styles.disabled)}
+                        src={languageIcon}
+                    />
+                    <img
+                        className={classNames(styles.dropdownCaret, styles.disabled)}
+                        src={dropdownCaret}
+                    />
+                </React.Fragment>
+            )}
+        </div>
     </Box>
 );
 
 
 LanguageSelector.propTypes = {
     currentLocale: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    open: PropTypes.boolean
 };
 
 export default LanguageSelector;

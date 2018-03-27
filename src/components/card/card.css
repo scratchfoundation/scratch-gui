@@ -88,7 +88,7 @@
     align-items: center;
 }
 .step-image img {
-    max-width: 250px;
+    max-width: 350px;
 }
 
 /* .step-image img {
@@ -116,7 +116,7 @@
     transform: rotate(180deg);
 }
 
-.when-block {
+.events-block {
     color: rgb(247,194,81);
     font-weight: bold;
     text-decoration: underline;
@@ -128,8 +128,20 @@
     text-decoration: underline;
 }
 
-.color-block {
+.looks-block {
     color: rgb(144,110,247);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.control-block {
+    color: $control-primary;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.motion-block {
+    color: $motion-primary;
     font-weight: bold;
     text-decoration: underline;
 }

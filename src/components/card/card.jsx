@@ -4,16 +4,27 @@ import React from 'react';
 import styles from './card.css';
 import Draggable from 'react-draggable';
 
-import step1 from './change-color-effect.gif';
-import step2 from './play-sound.gif';
-import step3 from './add-hat.gif';
+import dragSay from './intro/drag-say.gif';
+import addGlide from './intro/add-glide.gif';
+import hatStack from './intro/hat-stack.gif';
+import whenClicked from './intro/when-clicked.gif';
+
+import addSay from './intro/add-say.gif';
+import dragGlide from './intro/drag-glide.gif';
+
+import clickSay from './story/click-say.gif';
+import greenFlag from './story/green-flag.gif';
+import addSprite from './story/add-sprite.gif';
+import anotherSay from './story/another-say.gif';
+import bothSay from './story/both-say.gif';
+import addWait from './story/add-wait.gif';
 
 import {connect} from 'react-redux';
 import {closeTipsLibrary} from '../../reducers/modals';
 
 import arrowIcon from './arrow.svg';
 
-import deck1 from '../../lib/libraries/tips/animate-a-name.png';
+import deck1 from './intro/when-clicked.gif';
 import deck2 from '../../lib/libraries/tips/make-it-fly.png';
 import deck3 from '../../lib/libraries/tips/make-music.png';
 
@@ -28,87 +39,167 @@ class Card extends React.Component {
             'onLooksClick',
             'onEventsClick',
             'onSoundsClick',
+            'onControlClick',
+            'onMotionClick',
             'onChangeDeck'
         ]);
         this.state = {
             step: 0,
-            deck:  null,
+            deck:  'Getting started',
             decks: {
-                'Changing color' : {
-                    name: 'Changing color',
+                'Getting started' : {
+                    name: 'Getting started',
                     img: deck1,
                     steps: [
                         {
-                            title: "Changing color",
+                            title: "Move randomly",
                             description: (
-                                <span>Try the <span className={styles.colorBlock} onClick={this.onLooksClick}>change color effect</span> block</span>
+                                <span>Drag out and click the <span className={styles.motionBlock} onClick={this.onMotionClick}>glide to random position</span> block</span>
                             ),
-                            image: step1,
-                        }, {
-                            title: "Changing color",
+                            image: dragGlide,
+                        },
+                        {
+                            title: "Say something",
                             description: (
-                                <span>Add a <span className={styles.soundBlock} onClick={this.onSoundsClick}>play sound</span> block and try the blocks</span>
+                                <span>Add a <span className={styles.looksBlock} onClick={this.onLooksClick}>say</span> block</span>
                             ),
-                            image: step2,
-                        }, {
-                            title: "Changing color",
+                            image: addSay,
+                        },
+                        {
+                            title: "Start when you click the sprite",
                             description: (
-                                <span>Add a <span className={styles.whenBlock} onClick={this.onEventsClick}>when key pressed</span> block and press space</span>
+                                <span>Add the <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
                             ),
-                            image: step3,
-                        }
+                            image: hatStack,
+                        },
+                        {
+                            title: "Click the sprite to try it",
+                            description: (''
+                            ),
+                            image: whenClicked,
+                        },
+
                     ]
                 },
-                'Changing shape' : {
-                    name: 'Changing shape',
+                /*
+                'Getting started' : {
+                    name: 'Getting started',
+                    img: deck1,
+                    steps: [
+                        {
+                            title: "Say something",
+                            description: (
+                                <span>Drag out and click the <span className={styles.looksBlock} onClick={this.onLooksClick}>say</span> block</span>
+                            ),
+                            image: dragSay,
+                        },
+                        {
+                            title: "Move randomly",
+                            description: (
+                                <span>Add the <span className={styles.motionBlock} onClick={this.onMotionClick}>glide to random position</span> block</span>
+                            ),
+                            image: addGlide,
+                        },
+                        {
+                            title: "Start when you click the sprite",
+                            description: (
+                                <span>Add the <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
+                            ),
+                            image: hatStack,
+                        },
+                        {
+                            title: "Click the sprite to try it",
+                            description: (''
+                            ),
+                            image: whenClicked,
+                        },
+
+                    ]
+                },
+                */
+                /*
+                'Tell a story' : {
+                    name: 'Tell a story',
+                    img: deck1,
+                    steps: [
+                        {
+                            title: "Say something",
+                            description: (
+                                <span>Try the <span className={styles.colorBlock} onClick={this.onLooksClick}>say</span> block.</span>
+                            ),
+                            image: clickSay,
+                        }, {
+                            title: "Start the story",
+                            description: (
+                                <span>Add a <span className={styles.eventsBlock} onClick={this.onEventsClick}>green flag</span> block and try it out.</span>
+                            ),
+                            image: greenFlag,
+                        }, {
+                            title: "Add another character",
+                            description: (
+                                <span>Click the add sprite button.</span>
+                            ),
+                            image: addSprite,
+                        }, {
+                            title: "Say something else",
+                            description: (
+                                <span>What will your new character <span className={styles.colorBlock} onClick={this.onLooksClick}>say</span>?</span>
+                            ),
+                            image: anotherSay,
+                         }, {
+                            title: "Make both talk",
+                            description: (
+                                <span>Click the green flag to make them both talk.</span>
+                            ),
+                            image: bothSay,
+                        }, {
+                            title: "Take turns",
+                            description: (
+                                <span>Insert a <span className={styles.controlBlock} onClick={this.onControlClick}>wait</span> block.</span>
+                            ),
+                            image: addWait,
+                        }
+                        ]
+                },
+                'Clicker game' : {
+                    name: 'Clicker game',
                     img: deck2,
                     steps: [
                         {
-                            title: "Changing shape",
+                            title: "Move randomly",
                             description: (
-                                <span>Try the <span className={styles.colorBlock} onClick={this.onLooksClick}>change color effect</span> block</span>
+                                <span>Try the <span className={styles.motionBlock} onClick={this.onMotionClick}>go to random position</span> block</span>
                             ),
-                            image: step1,
+                            image: addWait,
                         }, {
-                            title: "Changing shape",
+                            title: "Move when clicked",
                             description: (
-                                <span>Add a <span className={styles.soundBlock} onClick={this.onSoundsClick}>play sound</span> block and try the blocks</span>
+                                <span>Add a <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
                             ),
-                            image: step2,
+                            image: addWait,
                         }, {
-                            title: "Changing shape",
+                            title: "Add a sound",
                             description: (
-                                <span>Add a <span className={styles.whenBlock} onClick={this.onEventsClick}>when key pressed</span> block and press space</span>
+                                <span>Add a <span className={styles.soundBlock} onClick={this.onSoundsClick}>play sound</span> block</span>
                             ),
-                            image: step3,
+                            image: addWait,
                         }
                     ]
                 },
-                'Changing size' : {
-                    name: 'Changing size',
+                'Zoom around' : {
+                    name: 'Zoom around',
                     img: deck3,
                     steps: [
                         {
-                            title: "Changing size",
+                            title: "Move and turn",
                             description: (
-                                <span>Try the <span className={styles.colorBlock} onClick={this.onLooksClick}>change color effect</span> block</span>
+                                <span>Try the <span className={styles.motionBlock} onClick={this.onMotionClick}>move and turn</span> blocks</span>
                             ),
-                            image: step1,
-                        }, {
-                            title: "Changing size",
-                            description: (
-                                <span>Add a <span className={styles.soundBlock} onClick={this.onSoundsClick}>play sound</span> block and try the blocks</span>
-                            ),
-                            image: step2,
-                        }, {
-                            title: "Changing size",
-                            description: (
-                                <span>Add a <span className={styles.whenBlock} onClick={this.onEventsClick}>when key pressed</span> block and press space</span>
-                            ),
-                            image: step3,
+                            image: addWait,
                         }
                     ]
                 }
+                */
             }
         };
     }
@@ -131,6 +222,12 @@ class Card extends React.Component {
     }
     onEventsClick () {
         this.props.vm.runtime.emit('CATEGORY', 'Events');
+    }
+    onControlClick () {
+        this.props.vm.runtime.emit('CATEGORY', 'Control');
+    }
+    onMotionClick () {
+        this.props.vm.runtime.emit('CATEGORY', 'Motion');
     }
     nextStep () {
         if (this.state.deck) {
@@ -209,7 +306,7 @@ class Card extends React.Component {
                         <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>Remove</span></div>
                     </div>
                     <div className={styles.stepTitle}>
-                        More things to try
+                        Tips
                     </div>
                     <div className={styles.stepDescription}>
                         <div className={styles.decks}>
@@ -225,7 +322,10 @@ class Card extends React.Component {
             )
         }
         return (
-            <Draggable defaultPosition={{x: 370,y: 20}}>
+            <Draggable
+                bounds="parent"
+                defaultPosition={{x: 336,y: 366}}
+            >
                 <div className={styles.cardContainer}>
                     {/* {hasPrev ? (
                         <div className={styles.leftCard} onClick={this.prevStep}></div>

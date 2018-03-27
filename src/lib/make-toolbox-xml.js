@@ -310,13 +310,17 @@ const sound = function () {
     `;
 };
 
-const events = function () {
+const events = function (isStage) {
     return `
     <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
         </block>
-        <block type="event_whenthisspriteclicked"/>
+        ${isStage ? `
+            <block type="event_whenstageclicked"/>
+        ` : `
+            <block type="event_whenthisspriteclicked"/>
+        `}
         <block type="event_whenbackdropswitchesto">
         </block>
         ${blockSeparator}

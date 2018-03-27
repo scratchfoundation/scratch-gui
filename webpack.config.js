@@ -22,6 +22,7 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         host: '0.0.0.0',
+        open: true,
         port: process.env.PORT || 8601
     },
     // devtool: 'cheap-module-source-map',

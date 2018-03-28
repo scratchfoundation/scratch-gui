@@ -73,7 +73,11 @@ const MenuBar = props => (
                     tooltipClassName={styles.comingSoonTooltip}
                     tooltipId="title-field"
                 >
-                    <div className={classNames(styles.titleField)} />
+                    <input
+                        disabled
+                        className={classNames(styles.titleField)}
+                        placeholder="Untitled-1"
+                    />
                 </ComingSoonTooltip>
             </div>
             <div className={classNames(styles.menuItem)}>
@@ -132,7 +136,10 @@ const MenuBar = props => (
                 tooltipId="mystuff"
             >
                 <div className={styles.mystuffButton}>
-                    <img className={styles.mystuffIcon} src={mystuffIcon} />
+                    <img
+                        className={styles.mystuffIcon}
+                        src={mystuffIcon}
+                    />
                 </div>
             </ComingSoonTooltip>
             <ComingSoonTooltip

@@ -1,14 +1,21 @@
 .outlined-button {
     cursor: pointer;
-    border-radius: 4px;
-    padding: .75rem;
+    border-radius: .25rem;
     font-weight: bold;
     border: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: .75rem;
+    padding-right: .75rem;
 }
 
 .icon {
     margin-right: .5rem;
     width: 1.5rem;
     height: 1.5rem;
-    vertical-align: middle;
+}
+
+.content {
+    white-space: nowrap;
 }

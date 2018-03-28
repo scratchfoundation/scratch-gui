@@ -37,7 +37,7 @@ const ButtonComponent = ({
             {...props}
         >
             {icon}
-            {children}
+            <div className={styles.content}>{children}</div>
         </span>
     );
 };

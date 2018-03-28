@@ -52,12 +52,22 @@
 
 .menu-item {
     display: block;
-    padding: 0 0.5rem;
+    padding: 0 0.25rem;
     cursor: pointer;
     text-decoration: none;
     color: #fff;
     user-select: none;
     align-self: center;
+}
+
+.file-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.file-group .menu-item {
+    padding: 0 0.75rem;
 }
 
 .feedback-button {
@@ -90,11 +100,17 @@
 
 .share-button {
     background: #FFAB19;
-    height: 34px;
+    height: 32px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
 }
 
 .community-button {
-    height: 34px;
+    height: 32px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+
+.community-button-icon {
+    height: 1.25rem;
 }
 
 .coming-soon >:not(.coming-soon-tooltip) {

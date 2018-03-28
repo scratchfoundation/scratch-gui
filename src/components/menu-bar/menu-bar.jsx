@@ -27,43 +27,45 @@ const MenuBar = props => (
         })}
     >
         <div className={styles.mainMenu}>
-            <div className={classNames(styles.logoWrapper, styles.menuItem)}>
-                <img
-                    alt="Scratch"
-                    className={styles.scratchLogo}
-                    draggable={false}
-                    src={scratchLogo}
-                />
-            </div>
-            <div className={classNames(styles.menuItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="menubar-selector"
-                >
-                    <LanguageSelector />
-                </ComingSoonTooltip>
-            </div>
-            <div className={classNames(styles.menuItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="file-menu"
-                >
-                    <div className={classNames(styles.fileMenu)}>File</div>
-                </ComingSoonTooltip>
-            </div>
-            <div className={classNames(styles.menuItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="edit-menu"
-                >
-                    <div className={classNames(styles.editMenu)}>Edit</div>
-                </ComingSoonTooltip>
+            <div className={styles.fileGroup}>
+                <div className={classNames(styles.logoWrapper, styles.menuItem)}>
+                    <img
+                        alt="Scratch"
+                        className={styles.scratchLogo}
+                        draggable={false}
+                        src={scratchLogo}
+                    />
+                </div>
+                <div className={classNames(styles.menuItem)}>
+                    <ComingSoonTooltip
+                        className={styles.comingSoon}
+                        place="bottom"
+                        tooltipClassName={styles.comingSoonTooltip}
+                        tooltipId="menubar-selector"
+                    >
+                        <LanguageSelector />
+                    </ComingSoonTooltip>
+                </div>
+                <div className={classNames(styles.menuItem)}>
+                    <ComingSoonTooltip
+                        className={styles.comingSoon}
+                        place="bottom"
+                        tooltipClassName={styles.comingSoonTooltip}
+                        tooltipId="file-menu"
+                    >
+                        <div className={classNames(styles.fileMenu)}>File</div>
+                    </ComingSoonTooltip>
+                </div>
+                <div className={classNames(styles.menuItem)}>
+                    <ComingSoonTooltip
+                        className={styles.comingSoon}
+                        place="bottom"
+                        tooltipClassName={styles.comingSoonTooltip}
+                        tooltipId="edit-menu"
+                    >
+                        <div className={classNames(styles.editMenu)}>Edit</div>
+                    </ComingSoonTooltip>
+                </div>
             </div>
             <div className={classNames(styles.divider)} />
             <div className={classNames(styles.menuItem)}>
@@ -105,6 +107,7 @@ const MenuBar = props => (
                 >
                     <Button
                         className={classNames(styles.communityButton)}
+                        iconClassName={styles.communityButtonIcon}
                         iconSrc={communityIcon}
                     >
                         <FormattedMessage

@@ -148,9 +148,15 @@ const MenuBar = props => (
                 tooltipId="account-nav"
             >
                 <div className={styles.accountNavMenu}>
-                    <img className={styles.profileIcon} src={profileIcon} />
+                    <img
+                        className={styles.profileIcon}
+                        src={profileIcon}
+                    />
                     <span>scratch-cat</span>
-                    <img className={styles.dropdownCaretIcon} src={dropdownCaret} />
+                    <img
+                        className={styles.dropdownCaretIcon}
+                        src={dropdownCaret}
+                    />
                 </div>
             </ComingSoonTooltip>
         </div>

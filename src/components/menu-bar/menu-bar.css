@@ -104,3 +104,36 @@
 .coming-soon >:not(.coming-soon-tooltip) {
     opacity: 0.5;
 }
+
+.account-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0 .5rem;
+    align-items: center;
+}
+
+.mystuff-icon {
+    margin-right: .5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.account-nav-menu, .mystuff-button {
+    padding: 0 .25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-icon {
+    margin-right: .5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+}
+
+.dropdown-caret-icon {
+    margin-left: .5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+}

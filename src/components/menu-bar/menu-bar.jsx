@@ -131,20 +131,19 @@ const MenuBar = props => (
                 place="bottom"
                 tooltipId="mystuff"
             >
-                <div className={classNames(styles.menuItem, styles.mystuffButton)}>
-                    <img src={mystuffIcon} />
+                <div className={styles.mystuffButton}>
+                    <img className={styles.mystuffIcon} src={mystuffIcon} />
                 </div>
             </ComingSoonTooltip>
             <ComingSoonTooltip
                 className={styles.comingSoon}
-                place="bottom"
+                place="left"
                 tooltipId="account-nav"
             >
-
-                <div className={classNames(styles.menuItem, styles.accountNavMenu)}>
-                    <img src={profileIcon} />
+                <div className={styles.accountNavMenu}>
+                    <img className={styles.profileIcon} src={profileIcon} />
                     <span>scratch-cat</span>
-                    <img src={dropdownCaret} />
+                    <img className={styles.dropdownCaretIcon} src={dropdownCaret} />
                 </div>
             </ComingSoonTooltip>
         </div>

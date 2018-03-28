@@ -41,7 +41,8 @@ class Card extends React.Component {
             'onSoundsClick',
             'onControlClick',
             'onMotionClick',
-            'onChangeDeck'
+            'onChangeDeck',
+            'onHome'
         ]);
         this.state = {
             step: 0,
@@ -259,6 +260,11 @@ class Card extends React.Component {
             step: 0
         })
     }
+    onHome () {
+        this.setState({
+            deck: null, step: 0
+        });
+    }
     render () {
         let inner;
         if (this.state.deck) {
@@ -276,7 +282,8 @@ class Card extends React.Component {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>Remove</span></div>
+                        <div className={styles.collapseButton}><span onClick={this.onCollapse}>↕️ Collapse</span></div>
+                        <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>✖️</span></div>
                     </div>
                     <div className={styles.stepTitle}>
                         {title}
@@ -303,7 +310,8 @@ class Card extends React.Component {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>Remove</span></div>
+                        <div className={styles.collapseButton}><span onClick={this.onHome}>⬆️</span></div>
+                        <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>✖️</span></div>
                     </div>
                     <div className={styles.stepTitle}>
                         Tips

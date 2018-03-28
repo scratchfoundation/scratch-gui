@@ -60,9 +60,16 @@
 }
 
 .header-buttons {
-    text-align: right;
     font-size: 0.75rem;
     color: #888;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.5rem;
+}
+.remove-button {
+
 }
 
 .step-title {

@@ -29,7 +29,7 @@ const ButtonComponent = ({
     return (
         <span
             className={classNames(
-                styles.button,
+                styles.outlinedButton,
                 className
             )}
             role="button"

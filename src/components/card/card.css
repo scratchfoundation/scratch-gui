@@ -93,9 +93,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 .step-image img {
-    max-width: 350px;
+    max-width: 378px;
 }
 
 /* .step-image img {

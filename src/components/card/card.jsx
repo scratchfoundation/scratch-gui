@@ -19,14 +19,25 @@ import anotherSay from './story/another-say.gif';
 import bothSay from './story/both-say.gif';
 import addWait from './story/add-wait.gif';
 
+import step_dragTurn from './zoom/drag-turn.gif';
+import step_clickTurn from './zoom/click-turn.gif';
+import step_forever from './zoom/forever.gif';
+import step_move from './zoom/move.gif';
+import step_color from './zoom/color.gif';
+import step_loudness from './zoom/loudness.gif';
+import step_edge from './zoom/edge.gif';
+import step_greenflag from './zoom/green-flag.gif';
+import step_stop from './zoom/stop.gif';
+import step_zoom from './zoom/zoom.gif';
+
 import {connect} from 'react-redux';
 import {closeTipsLibrary} from '../../reducers/modals';
 
 import arrowIcon from './arrow.svg';
 
 import deck1 from './intro/when-clicked.gif';
-import deck2 from '../../lib/libraries/tips/make-it-fly.png';
-import deck3 from '../../lib/libraries/tips/make-music.png';
+import deck2 from './story/both-say.gif';
+import deck3 from './zoom/zoom.gif';
 
 class Card extends React.Component {
     constructor (props) {
@@ -46,8 +57,9 @@ class Card extends React.Component {
         ]);
         this.state = {
             step: 0,
-            deck:  'Getting started',
+            deck:  null,
             decks: {
+                /*
                 'Getting started' : {
                     name: 'Getting started',
                     img: deck1,
@@ -82,6 +94,7 @@ class Card extends React.Component {
 
                     ]
                 },
+                */
                 /*
                 'Getting started' : {
                     name: 'Getting started',
@@ -118,50 +131,8 @@ class Card extends React.Component {
                     ]
                 },
                 */
+
                 /*
-                'Tell a story' : {
-                    name: 'Tell a story',
-                    img: deck1,
-                    steps: [
-                        {
-                            title: "Say something",
-                            description: (
-                                <span>Try the <span className={styles.colorBlock} onClick={this.onLooksClick}>say</span> block.</span>
-                            ),
-                            image: clickSay,
-                        }, {
-                            title: "Start the story",
-                            description: (
-                                <span>Add a <span className={styles.eventsBlock} onClick={this.onEventsClick}>green flag</span> block and try it out.</span>
-                            ),
-                            image: greenFlag,
-                        }, {
-                            title: "Add another character",
-                            description: (
-                                <span>Click the add sprite button.</span>
-                            ),
-                            image: addSprite,
-                        }, {
-                            title: "Say something else",
-                            description: (
-                                <span>What will your new character <span className={styles.colorBlock} onClick={this.onLooksClick}>say</span>?</span>
-                            ),
-                            image: anotherSay,
-                         }, {
-                            title: "Make both talk",
-                            description: (
-                                <span>Click the green flag to make them both talk.</span>
-                            ),
-                            image: bothSay,
-                        }, {
-                            title: "Take turns",
-                            description: (
-                                <span>Insert a <span className={styles.controlBlock} onClick={this.onControlClick}>wait</span> block.</span>
-                            ),
-                            image: addWait,
-                        }
-                        ]
-                },
                 'Clicker game' : {
                     name: 'Clicker game',
                     img: deck2,
@@ -187,20 +158,70 @@ class Card extends React.Component {
                         }
                     ]
                 },
+                */
+
                 'Zoom around' : {
                     name: 'Zoom around',
                     img: deck3,
                     steps: [
                         {
-                            title: "Move and turn",
-                            description: (
-                                <span>Try the <span className={styles.motionBlock} onClick={this.onMotionClick}>move and turn</span> blocks</span>
-                            ),
+                            title: "Add a turn block",
+                            image: step_dragTurn,
+                        }, {
+                            title: "Click the block to run it",
+                            image: step_clickTurn,
+                        }, {
+                            title: "Use a forever block to keep it going",
+                            image: step_forever ,
+                        }, {
+                            title: "Add a move block",
+                            image: step_move,
+                         }, {
+                            title: "Experiment with color effect block",
+                            image: step_color,
+                        }, {
+                            title: "🗣 Use the loudness block and make some noise!",
+                            image: step_loudness,
+                        }, {
+                            title: "Bounce when you reach the edge",
+                            image: step_edge,
+                        }, {
+                            title: "Add a green flag block to the top",
+                            image: step_greenflag,
+                        }, {
+                            title: "Try the green flag and stop buttons",
+                            image: step_stop,
+                        }, {
+                            title: "Tinker!",
+                            image: step_zoom,
+                        }
+                        ]
+                },
+                'Tell a story' : {
+                    name: 'Tell a story',
+                    img: deck2,
+                    steps: [
+                        {
+                            title: "Add a say block",
+                            image: clickSay,
+                        }, {
+                            title: "Use the green flag block to start",
+                            image: greenFlag,
+                        }, {
+                            title: "Add another character",
+                            image: addSprite,
+                        }, {
+                            title: "What will they say?",
+                            image: anotherSay,
+                         }, {
+                            title: "Start the conversation",
+                            image: bothSay,
+                        }, {
+                            title: "Use a wait block to take turns",
                             image: addWait,
                         }
-                    ]
-                }
-                */
+                        ]
+                },
             }
         };
     }
@@ -282,15 +303,17 @@ class Card extends React.Component {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.collapseButton}><span onClick={this.onCollapse}>↕️ Collapse</span></div>
+                        <div className={styles.collapseButton}><span onClick={this.onHome}>⤴</span></div>
                         <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>✖️</span></div>
                     </div>
                     <div className={styles.stepTitle}>
                         {title}
                     </div>
-                    <div className={styles.stepDescription}>
-                        {description}
-                    </div>
+                    {description ? (
+                        <div className={styles.stepDescription}>
+                            {description}
+                        </div>
+                    ) : null}
                     <div className={styles.stepImage}>
                         <img draggable={false} src={image} />
                     </div>
@@ -310,11 +333,11 @@ class Card extends React.Component {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.collapseButton}><span onClick={this.onHome}>⬆️</span></div>
+                        <div className={styles.collapseButton}></div>
                         <div className={styles.removeButton}><span onClick={this.props.onCloseTipsLibrary}>✖️</span></div>
                     </div>
                     <div className={styles.stepTitle}>
-                        Tips
+                        How Tos
                     </div>
                     <div className={styles.stepDescription}>
                         <div className={styles.decks}>
@@ -332,7 +355,7 @@ class Card extends React.Component {
         return (
             <Draggable
                 bounds="parent"
-                defaultPosition={{x: 336,y: 366}}
+                defaultPosition={{x: 336,y: 436}}
             >
                 <div className={styles.cardContainer}>
                     {/* {hasPrev ? (

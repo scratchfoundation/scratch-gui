@@ -16,6 +16,7 @@ class CustomProcedures extends React.Component {
             'handleToggleWarp',
             'handleCancel',
             'handleOk',
+            'handleKeyPress',
             'setBlocks'
         ]);
         this.state = {
@@ -77,6 +78,9 @@ class CustomProcedures extends React.Component {
     handleOk () {
         const newMutation = this.mutationRoot ? this.mutationRoot.mutationToDom() : null;
         this.props.onRequestClose(newMutation);
+    }
+    handleKeyPress (event) {
+        if (event.key === 'Enter') this.handleOk();
     }
     handleAddLabel () {
         if (this.mutationRoot) {

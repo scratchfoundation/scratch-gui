@@ -25,7 +25,6 @@ const FilterComponent = props => {
                 src={filterIcon}
             />
             <input
-                autoFocus
                 className={styles.filterInput}
                 placeholder={placeholderText}
                 type="text"

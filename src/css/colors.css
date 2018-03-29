@@ -4,12 +4,16 @@ $ui-background-blue: #e8edf1;
 
 $text-primary: #575e75;
 
+$menubar-gray: rgba(0,0,0,0.25);
+
 $motion-primary: #4C97FF;
 $motion-tertiary: #3373CC;
 $motion-transparent: hsla(215, 100%, 65%, 0.20);
 
 $red-primary: #FF661A;
 $red-tertiary: #E64D00;
+
+$share-orange: #FFAB19;
 
 $sound-primary: #CF63CF;
 $sound-tertiary: #A63FA6;

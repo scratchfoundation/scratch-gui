@@ -15,6 +15,7 @@ const CustomProcedures = props => (
         className={styles.modalContent}
         contentLabel="Make a Block"
         onRequestClose={props.onCancel}
+        onKeyPress={porps.onKeyPress}
     >
         <Box
             className={styles.workspace}
@@ -138,6 +139,7 @@ CustomProcedures.propTypes = {
     onAddTextNumber: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
     onToggleWarp: PropTypes.func.isRequired,
     warp: PropTypes.bool.isRequired
 };

@@ -9,8 +9,11 @@
 }
 
 .language-icon {
-    height:  2rem;
-    display: none;
+    height:  1.5rem;
+}
+
+.disabled {
+    opacity: .5;
 }
 
 .language-select {

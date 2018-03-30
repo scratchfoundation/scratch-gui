@@ -4,7 +4,7 @@ dist: trusty
 addons:
     chrome: stable
 node_js:
-- 6
+- 8
 cache:
   directories:
   - node_modules

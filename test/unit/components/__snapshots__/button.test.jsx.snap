@@ -5,5 +5,9 @@ exports[`ButtonComponent matches snapshot 1`] = `
   className=""
   onClick={[Function]}
   role="button"
-/>
+>
+  <div
+    className={undefined}
+  />
+</span>
 `;

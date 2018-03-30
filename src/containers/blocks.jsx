@@ -135,7 +135,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
-        this.props.vm.runtime.addListener('CATEGORY', (categoryName) => {
+        this.props.vm.runtime.addListener('CATEGORY', categoryName => {
             this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
         });
     }

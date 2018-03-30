@@ -9,7 +9,8 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 
-import {openFeedbackForm, openTipsLibrary} from '../../reducers/modals';
+import {openFeedbackForm} from '../../reducers/modals';
+import {viewCards} from '../../reducers/cards';
 
 import styles from './menu-bar.css';
 
@@ -177,7 +178,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(openFeedbackForm());
     },
     onOpenTipLibrary: () => {
-        dispatch(openTipsLibrary());
+        dispatch(viewCards());
     }
 });
 

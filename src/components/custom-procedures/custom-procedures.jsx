@@ -14,8 +14,8 @@ const CustomProcedures = props => (
     <Modal
         className={styles.modalContent}
         contentLabel="Make a Block"
-        onRequestClose={props.onCancel}
         onKeyPress={props.onKeyPress}
+        onRequestClose={props.onCancel}
     >
         <Box
             className={styles.workspace}

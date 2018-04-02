@@ -31,6 +31,9 @@ const SpriteSelectorItem = props => (
                 onClick={props.onDeleteButtonClick}
             />
         ) : null }
+        {typeof props.number === 'undefined' ? null : (
+            <div className={styles.number}>{props.number}</div>
+        )}
         {props.costumeURL ? (
             <CostumeCanvas
                 className={styles.spriteImage}
@@ -69,6 +72,7 @@ SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
+    number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,

@@ -8,6 +8,10 @@
     */
     display: block;
 
+    /* Attach border radius directly to canvas to prevent needing overflow:hidden; */
+    border-radius: $space;
+    border: 1px solid $ui-black-transparent;
+
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent;
 }
@@ -30,10 +34,6 @@
 
 .stage-wrapper {
     position: relative;
-    border-radius: $space;
-    border: 1px solid $ui-black-transparent;
-    /* Keep the canvas inside the border radius */
-    overflow: hidden;
 }
 
 .stage-wrapper-overlay {
@@ -78,3 +78,11 @@
     pointer-events: none;
     overflow: hidden;
 }
+
+.dragging-sprite {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Above everything so it is draggable into other panes */
+    filter: drop-shadow(5px 5px 5px $ui-black-transparent);
+ }

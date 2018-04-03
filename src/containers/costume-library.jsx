@@ -23,9 +23,7 @@ class CostumeLibrary extends React.PureComponent {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume).then(() => {
-            this.props.onNewCostume();
-        });
+        this.props.vm.addCostume(item.md5, vmCostume);
         analytics.event({
             category: 'library',
             action: 'Select Costume',
@@ -45,7 +43,6 @@ class CostumeLibrary extends React.PureComponent {
 }
 
 CostumeLibrary.propTypes = {
-    onNewCostume: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

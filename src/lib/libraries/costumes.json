@@ -616,6 +616,17 @@
         ]
     },
     {
+        "name": "Cat1",
+        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            47,
+            55,
+            1
+        ]
+    },
+    {
         "name": "Cat1 Flying-a",
         "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
         "type": "costume",
@@ -634,6 +645,17 @@
         "info": [
             42,
             44,
+            1
+        ]
+    },
+    {
+        "name": "Cat2",
+        "md5": "3696356a03a8d938318876a593572843.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            47,
+            55,
             1
         ]
     },
@@ -678,28 +700,6 @@
         "info": [
             87,
             21,
-            1
-        ]
-    },
-    {
-        "name": "Costume1",
-        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
-            1
-        ]
-    },
-    {
-        "name": "Costume2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            55,
             1
         ]
     },
@@ -1133,17 +1133,6 @@
         ]
     },
     {
-        "name": "Drum-c",
-        "md5": "50cf928f06481ff823e18e70c01df807.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            43,
-            60,
-            1
-        ]
-    },
-    {
         "name": "Drum-cymbal-a",
         "md5": "d6d41862fda966df1455d2dbff5e1988.svg",
         "type": "costume",
@@ -1157,17 +1146,6 @@
     {
         "name": "Drum-cymbal-b",
         "md5": "e6b7d7d8874bc4b7be58afe927157554.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            30,
-            74,
-            1
-        ]
-    },
-    {
-        "name": "Drum-cymbal-c",
-        "md5": "0e85f690e8eaf153ae20cbbbb88ca60c.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -1199,17 +1177,6 @@
         ]
     },
     {
-        "name": "Drum-highhat-c",
-        "md5": "c6f2467a5226f7d372d15669c5099a41.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            33,
-            73,
-            1
-        ]
-    },
-    {
         "name": "Drum-kit",
         "md5": "131d040d86ecea62ccd175a8709c7866.svg",
         "type": "costume",
@@ -1232,24 +1199,13 @@
         ]
     },
     {
-        "name": "Drum-kit-c",
-        "md5": "4ca5c6eee4d907b98fb62340bd4a2cde.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            58,
-            78,
-            1
-        ]
-    },
-    {
         "name": "Drum-snare-a",
-        "md5": "31a81bb560abf30cbc44bcdd581d5ccc.svg",
+        "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
         "type": "costume",
         "tags": [],
         "info": [
-            40,
-            69,
+            23,
+            50,
             1
         ]
     },
@@ -1261,17 +1217,6 @@
         "info": [
             36,
             66,
-            1
-        ]
-    },
-    {
-        "name": "Drum-snare-c",
-        "md5": "878ea646cbbd2a9e24fdeb8d98c3e24f.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            40,
-            69,
             1
         ]
     },
@@ -1650,17 +1595,6 @@
         ]
     },
     {
-        "name": "Guitar-c",
-        "md5": "5cfe9faacb98d35a702cfa633967a5b5.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            47,
-            83,
-            1
-        ]
-    },
-    {
         "name": "Guitar-electric1-a",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "costume",
@@ -1683,17 +1617,6 @@
         ]
     },
     {
-        "name": "Guitar-electric1-c",
-        "md5": "4cb069d2a290c0a153f196de725d357c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            42,
-            85,
-            1
-        ]
-    },
-    {
         "name": "Guitar-electric2-a",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "costume",
@@ -1707,17 +1630,6 @@
     {
         "name": "Guitar-electric2-b",
         "md5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            38,
-            94,
-            1
-        ]
-    },
-    {
-        "name": "Guitar-electric2-c",
-        "md5": "7f5f8b6d772657566e3dee24c9a9c538.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -1914,61 +1826,6 @@
         ]
     },
     {
-        "name": "Jez-b",
-        "md5": "f1e74f3c02333e9e2068e8baf4e77aa0.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-c",
-        "md5": "e2482cf509c312935f08be0e2e2c9d84.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-d",
-        "md5": "569e736b519199efddfbae2572f7e92b.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            67,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-e",
-        "md5": "2261bed0f2cc819def17969158297b4f.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            77,
-            95,
-            1
-        ]
-    },
-    {
-        "name": "Jez-f",
-        "md5": "d7f44adb3dc7906b9dfb3599a028e0d6.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            62,
-            94,
-            1
-        ]
-    },
-    {
         "name": "Jordyn-a",
         "md5": "8dd2a2abbb8e639da8576b6e72ef9e59.svg",
         "type": "costume",
@@ -2035,17 +1892,6 @@
         ]
     },
     {
-        "name": "Keyboard-c",
-        "md5": "4ee5e7c6d0463d9b50e0c593e70e1e31.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            72,
-            68,
-            1
-        ]
-    },
-    {
         "name": "Kiran-a",
         "md5": "9de23c4a7a7fbb67136b539241346854.svg",
         "type": "costume",
@@ -2053,6 +1899,61 @@
         "info": [
             67,
             95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-b",
+        "md5": "f1e74f3c02333e9e2068e8baf4e77aa0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-c",
+        "md5": "e2482cf509c312935f08be0e2e2c9d84.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-d",
+        "md5": "569e736b519199efddfbae2572f7e92b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            67,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-e",
+        "md5": "2261bed0f2cc819def17969158297b4f.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            77,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Kiran-f",
+        "md5": "d7f44adb3dc7906b9dfb3599a028e0d6.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            62,
+            94,
             1
         ]
     },
@@ -2191,17 +2092,6 @@
     {
         "name": "Microphone-b",
         "md5": "29988ebbde49beaceb06d9eb66138b80.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            40,
-            88,
-            1
-        ]
-    },
-    {
-        "name": "Microphone-c",
-        "md5": "021d6da78b7bda374da4bdb50d4cbc4f.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -2541,13 +2431,68 @@
         ]
     },
     {
-        "name": "Penguin1",
+        "name": "Penguin1-a",
         "md5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
         "type": "costume",
         "tags": [],
         "info": [
             54,
             61,
+            1
+        ]
+    },
+    {
+        "name": "Penguin1-b",
+        "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            48,
+            62,
+            1
+        ]
+    },
+    {
+        "name": "Penguin1-c",
+        "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            48,
+            61,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2-a",
+        "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            49,
+            79,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2-b",
+        "md5": "5a80f4b2fd20d43e4f7cb4189c08d99c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            45,
+            79,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2-c",
+        "md5": "394e79f5f9a462064ece2a9a6606a07d.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            50,
+            78,
             1
         ]
     },
@@ -2926,13 +2871,35 @@
         ]
     },
     {
-        "name": "Saxophone-c",
-        "md5": "29751826f768bc1568092f267525ae8b.svg",
+        "name": "Shark-a ",
+        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
         "type": "costume",
         "tags": [],
         "info": [
-            47,
-            80,
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Shark-b ",
+        "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Shark-c ",
+        "md5": "afeae3f998598424f7c50918507f6ce6.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            77,
+            37,
             1
         ]
     },
@@ -3054,6 +3021,28 @@
         "info": [
             53,
             79,
+            1
+        ]
+    },
+    {
+        "name": "Starfish-a",
+        "md5": "3d1101bbc24ae292a36356af325f660c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            75,
+            75,
+            1
+        ]
+    },
+    {
+        "name": "Starfish-b ",
+        "md5": "ad8007f4e63693984d4adc466ffa3ad2.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            53,
+            60,
             1
         ]
     },
@@ -3258,17 +3247,6 @@
     {
         "name": "Trumpet-b",
         "md5": "7cedda5ec925118f237094cd05381e5d.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            37,
-            73,
-            1
-        ]
-    },
-    {
-        "name": "Trumpet-c",
-        "md5": "680dd004c24690af1e95c4beb22cd615.svg",
         "type": "costume",
         "tags": [],
         "info": [

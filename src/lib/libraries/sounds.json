@@ -470,10 +470,10 @@
     },
     {
         "name": "Cheer",
-        "md5": "4b36eebf22be4667fc2f15b78c805b4c.wav",
-        "sampleCount": 62528,
+        "md5": "170e05c29d50918ae0b482c2955768c0.wav",
+        "sampleCount": 108864,
         "rate": 22050,
-        "format": ""
+        "format": "adpcm"
     },
     {
         "name": "Chirp",
@@ -553,16 +553,9 @@
         "format": ""
     },
     {
-        "name": "Computer Beeps1",
+        "name": "Computer Beep2",
         "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
         "sampleCount": 19200,
-        "rate": 11025,
-        "format": ""
-    },
-    {
-        "name": "Computer Beeps2",
-        "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
-        "sampleCount": 9536,
         "rate": 11025,
         "format": ""
     },
@@ -1842,10 +1835,10 @@
     },
     {
         "name": "Screech",
-        "md5": "3676f478e5e3496034cf100d239160df.wav",
-        "sampleCount": 28928,
-        "rate": 11025,
-        "format": ""
+        "md5": "10644c5cc83a9a2dd3ab466deb0eb03d.wav",
+        "sampleCount": 12907,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Seagulls",
@@ -2269,8 +2262,8 @@
     },
     {
         "name": "Water Drop",
-        "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
-        "sampleCount": 8136,
+        "md5": "e133e625fd367d269e76964d4b722fc2.wav",
+        "sampleCount": 15131,
         "rate": 22050,
         "format": "adpcm"
     },

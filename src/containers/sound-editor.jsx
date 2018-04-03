@@ -89,7 +89,7 @@ class SoundEditor extends React.Component {
         }
 
         this.resetState(samples, sampleRate);
-        this.props.onUpdateSoundBuffer(
+        this.props.vm.updateSoundBuffer(
             this.props.soundIndex,
             this.audioBufferPlayer.buffer,
             wavBuffer ? new Uint8Array(wavBuffer) : new Uint8Array());
@@ -112,7 +112,7 @@ class SoundEditor extends React.Component {
         this.setState({playhead});
     }
     handleChangeName (name) {
-        this.props.onRenameSound(this.props.soundIndex, name);
+        this.props.vm.renameSound(this.props.soundIndex, name);
     }
     handleActivateTrim () {
         if (this.state.trimStart === null && this.state.trimEnd === null) {
@@ -200,12 +200,14 @@ class SoundEditor extends React.Component {
 
 SoundEditor.propTypes = {
     name: PropTypes.string.isRequired,
-    onRenameSound: PropTypes.func.isRequired,
-    onUpdateSoundBuffer: PropTypes.func.isRequired,
     sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
-    soundIndex: PropTypes.number
+    soundIndex: PropTypes.number,
+    vm: PropTypes.shape({
+        updateSoundBuffer: PropTypes.func,
+        renameSound: PropTypes.func
+    })
 };
 
 const mapStateToProps = (state, {soundIndex}) => {
@@ -219,8 +221,7 @@ const mapStateToProps = (state, {soundIndex}) => {
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
         name: sound.name,
-        onRenameSound: state.vm.renameSound.bind(state.vm),
-        onUpdateSoundBuffer: state.vm.updateSoundBuffer.bind(state.vm)
+        vm: state.vm
     };
 };
 

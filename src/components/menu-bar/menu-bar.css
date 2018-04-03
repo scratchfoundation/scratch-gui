@@ -6,24 +6,26 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
-    
-    /* 
-        For most things, we shouldn't explicitly set height, and let the 
-        content push the element to whatever fits. Using a fixed height 
-        instead, will help us subtract the value we assign from the body, 
-        adding up to a perfect 100%. This means we don't need to set 
-        overflow: hidden, which makes it hard to debug. border-box 
-        simplifies by all of this by removing padding from the equation. 
+
+    /*
+        For most things, we shouldn't explicitly set height, and let the
+        content push the element to whatever fits. Using a fixed height
+        instead, will help us subtract the value we assign from the body,
+        adding up to a perfect 100%. This means we don't need to set
+        overflow: hidden, which makes it hard to debug. border-box
+        simplifies by all of this by removing padding from the equation.
     */
     box-sizing: border-box;
-    height: $menu-bar-height; 
+    height: $menu-bar-height;
 
-    /* 
-        @todo: This adds ~20px in Chrome, when scrolling to the right, 
+    /*
+        @todo: This adds ~20px in Chrome, when scrolling to the right,
         but fixes [FFx + Safari] [resize window down + scroll to the right] bug.
-        width: 100%; 
+        width: 100%;
     */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .75rem;
+    font-weight: bold;
     background-color: $motion-primary;
     color: white;
 }
@@ -33,18 +35,13 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: nowrap;
-}
-
-/* 
-    Using a wrapper so when logo is hovered, it transforms via its center point 
-    @todo: not sure if this is needed 
-*/
-.logo-wrapper {
+    align-items: center;
 }
 
 .scratch-logo {
-    height:  $menu-bar-height; 
+    height:  $menu-bar-height;
     padding: 0.8rem 0;
+    vertical-align: middle;
 }
 
 .scratch-logo:hover {
@@ -53,43 +50,101 @@
     transition: all .075s ease-in;
 }
 
-.title {
-    display: inline-block;
-    margin: 0 2rem;
-}
-
 .menu-item {
     display: block;
-    padding: 0 1.5rem;
-    line-height: $menu-bar-height; 
+    padding: 0 0.25rem;
     cursor: pointer;
     text-decoration: none;
-    color: $motion-tertiary;
+    color: #fff;
     user-select: none;
+    align-self: center;
 }
 
-.feedback-button-wrapper {
-    align-self: center;
-    padding: 0 .5rem;
-    line-height: $menu-bar-height;
+.file-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.file-group .menu-item {
+    padding: 0 0.75rem;
 }
 
 .feedback-button {
-    border-radius: 5px;
-    padding: .75rem;
     background-color: #FFF;
-    cursor: pointer;
-    font-size: .75rem;
-    font-weight: bold;
     color: $motion-primary;
+    height: 34px;
 }
 
-.feedback-button-icon {
-    vertical-align: middle;
+.divider {
+    border-right: 1px dashed $menubar-gray;
+    margin: 0 .5rem;
+    height: 34px;
 }
 
-.feedback-button-icon {
+.title-field {
+    border: 1px dashed $menubar-gray;
+    border-radius: .25rem;
+    width: 12rem;
+    height: 34px;
+    background-color: transparent;
+    padding: .5rem;
+}
+
+.title-field,
+.title-field::placeholder {
+    color: #fff;
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+.share-button {
+    background: #FFAB19;
+    height: 32px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+
+.community-button {
+    height: 32px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+
+.community-button-icon {
+    height: 1.25rem;
+}
+
+.coming-soon >:not(.coming-soon-tooltip) {
+    opacity: 0.5;
+}
+
+.account-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0 .5rem;
+    align-items: center;
+}
+
+.mystuff-icon {
     margin-right: .5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    height: 1rem;
+}
+
+.account-nav-menu, .mystuff-button {
+    padding: 0 .25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-icon {
+    margin-right: .5rem;
+    width: 2rem;
+    height: 34px;
+    border-radius: 0.25rem;
+}
+
+.dropdown-caret-icon {
+    margin-left: .5rem;
+    width: 0.5rem;
+    height: 0.5rem;
 }

@@ -45,6 +45,7 @@ const Selector = props => {
                         id={index}
                         key={`asset-${index}`}
                         name={item.name}
+                        number={index + 1 /* 1-indexed */}
                         selected={index === selectedItemIndex}
                         onClick={onItemClick}
                         onDeleteButtonClick={onDeleteClick}
@@ -59,9 +60,9 @@ const Selector = props => {
 
 Selector.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-        message: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         img: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired
+        onClick: PropTypes.func
     })),
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,

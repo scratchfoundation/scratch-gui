@@ -36,10 +36,7 @@ class PreviewModal extends React.Component {
         this.props.onViewProject();
     }
     supportedBrowser () {
-        if (platform.name === 'IE') {
-            return false;
-        }
-        return true;
+        return !['IE', 'Opera', 'Opera Mini', 'Silk', 'Vivaldi'].includes(platform.name);
     }
     render () {
         return (this.supportedBrowser() ?

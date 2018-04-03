@@ -7,10 +7,12 @@ import VM from 'scratch-vm';
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
+import BackdropLibrary from './backdrop-library.jsx';
 import {connect} from 'react-redux';
 
 import {
     closeCostumeLibrary,
+    closeBackdropLibrary,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';
@@ -65,7 +67,6 @@ class CostumeTab extends React.Component {
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
-            'handleNewCostume',
             'handleNewBlankCostume',
             'handleSurpriseCostume',
             'handleSurpriseBackdrop'
@@ -90,8 +91,24 @@ class CostumeTab extends React.Component {
         } = nextProps;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-        if (target && target.costumes && this.state.selectedCostumeIndex > target.costumes.length - 1) {
-            this.setState({selectedCostumeIndex: target.costumes.length - 1});
+        if (!target || !target.costumes) {
+            return;
+        }
+
+        if (this.props.editingTarget === editingTarget) {
+            // If costumes have been added or removed, change costumes to the editing target's
+            // current costume.
+            const oldTarget = this.props.sprites[editingTarget] ?
+                this.props.sprites[editingTarget] : this.props.stage;
+            // @todo: Find and switch to the index of the costume that is new. This is blocked by
+            // https://github.com/LLK/scratch-vm/issues/967
+            // Right now, you can land on the wrong costume if a costume changing script is running.
+            if (oldTarget.costumeCount !== target.costumeCount) {
+                this.setState({selectedCostumeIndex: target.currentCostume});
+            }
+        } else {
+            // If switching editing targets, update the costume index
+            this.setState({selectedCostumeIndex: target.currentCostume});
         }
     }
     handleSelectCostume (costumeIndex) {
@@ -102,14 +119,7 @@ class CostumeTab extends React.Component {
         this.props.vm.deleteCostume(costumeIndex);
     }
     handleDuplicateCostume (costumeIndex) {
-        this.props.vm.duplicateCostume(costumeIndex).then(() => {
-            this.setState({selectedCostumeIndex: costumeIndex + 1});
-        });
-    }
-    handleNewCostume () {
-        if (!this.props.vm.editingTarget) return;
-        const costumes = this.props.vm.editingTarget.getCostumes() || [];
-        this.setState({selectedCostumeIndex: Math.max(costumes.length - 1, 0)});
+        this.props.vm.duplicateCostume(costumeIndex);
     }
     handleNewBlankCostume () {
         const emptyItem = costumeLibraryContent.find(item => (
@@ -124,9 +134,7 @@ class CostumeTab extends React.Component {
             skinId: null
         };
 
-        this.props.vm.addCostume(emptyItem.md5, vmCostume).then(() => {
-            this.handleNewCostume();
-        });
+        this.props.vm.addCostume(emptyItem.md5, vmCostume);
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
@@ -137,9 +145,7 @@ class CostumeTab extends React.Component {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume).then(() => {
-            this.handleNewCostume();
-        });
+        this.props.vm.addCostume(item.md5, vmCostume);
     }
     handleSurpriseBackdrop () {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
@@ -150,27 +156,22 @@ class CostumeTab extends React.Component {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume).then(() => {
-            this.handleNewCostume();
-        });
+        this.props.vm.addCostume(item.md5, vmCostume);
     }
     render () {
-        // For paint wrapper
         const {
             intl,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
+            backdropLibraryVisible,
             costumeLibraryVisible,
+            onRequestCloseBackdropLibrary,
             onRequestCloseCostumeLibrary,
-            ...props
-        } = this.props;
-
-        const {
             editingTarget,
             sprites,
             stage,
             vm
-        } = props;
+        } = this.props;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
 
@@ -218,7 +219,6 @@ class CostumeTab extends React.Component {
             >
                 {target.costumes ?
                     <PaintEditorWrapper
-                        {...props}
                         selectedCostumeIndex={this.state.selectedCostumeIndex}
                     /> :
                     null
@@ -226,8 +226,13 @@ class CostumeTab extends React.Component {
                 {costumeLibraryVisible ? (
                     <CostumeLibrary
                         vm={vm}
-                        onNewCostume={this.handleNewCostume}
                         onRequestClose={onRequestCloseCostumeLibrary}
+                    />
+                ) : null}
+                {backdropLibraryVisible ? (
+                    <BackdropLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
             </AssetPanel>
@@ -277,6 +282,9 @@ const mapDispatchToProps = dispatch => ({
     onNewLibraryCostumeClick: e => {
         e.preventDefault();
         dispatch(openCostumeLibrary());
+    },
+    onRequestCloseBackdropLibrary: () => {
+        dispatch(closeBackdropLibrary());
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());

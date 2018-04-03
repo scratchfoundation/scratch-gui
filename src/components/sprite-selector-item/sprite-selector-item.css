@@ -56,3 +56,11 @@
     right: 0.125rem;
     z-index: 2;
 }
+
+.number {
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    font-size: 0.625rem;
+    z-index: 2;
+}

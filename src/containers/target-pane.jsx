@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 import {
     openSpriteLibrary,
-    closeBackdropLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
 
@@ -75,7 +74,9 @@ class TargetPane extends React.Component {
         const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
         if (emptyItem) {
             this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                setTimeout(() => { // Wait for targets update to propagate before tab switching
+                    this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                });
             });
         }
     }
@@ -88,6 +89,7 @@ class TargetPane extends React.Component {
     render () {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars
+            onReceivedBlocks, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -132,8 +134,7 @@ const mapStateToProps = state => ({
     }, {}),
     stage: state.targets.stage,
     raiseSprites: state.blockDrag,
-    spriteLibraryVisible: state.modals.spriteLibrary,
-    backdropLibraryVisible: state.modals.backdropLibrary
+    spriteLibraryVisible: state.modals.spriteLibrary
 });
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
@@ -142,9 +143,6 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseSpriteLibrary: () => {
         dispatch(closeSpriteLibrary());
-    },
-    onRequestCloseBackdropLibrary: () => {
-        dispatch(closeBackdropLibrary());
     },
     onActivateTab: tabIndex => {
         dispatch(activateTab(tabIndex));

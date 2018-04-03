@@ -29,7 +29,7 @@ describe('Working with the blocks', () => {
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickText('Blocks');
+        await clickText('Code');
         await clickText('Operators', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('join', scope.blocksTab); // Click "join <hello> <world>" block
@@ -58,7 +58,7 @@ describe('Working with the blocks', () => {
     test('Creating variables', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickText('Blocks');
+        await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
 

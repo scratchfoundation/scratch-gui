@@ -29,7 +29,7 @@ describe('Localization', () => {
     test.skip('Localization', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickText('Blocks');
+        await clickText('Code');
         await clickXpath('//button[@title="Add Extension"]');
         await clickText('Pen', scope.modal); // Modal closes
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation

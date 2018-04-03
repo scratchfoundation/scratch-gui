@@ -68,9 +68,9 @@ const StageSelector = props => {
             {url ? (
                 <CostumeCanvas
                     className={styles.costumeCanvas}
-                    height={42}
+                    height={54}
                     url={url}
-                    width={56}
+                    width={72}
                 />
             ) : null}
             <div className={styles.label}>

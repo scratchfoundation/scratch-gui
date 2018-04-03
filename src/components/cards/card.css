@@ -94,6 +94,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: relative;
 }
 .step-image img {
     max-width: 378px;
@@ -190,4 +191,11 @@
     color: $motion-primary;
     font-weight: bold;
     margin-top: 5px;
+}
+
+.zoom-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    pointer-events: none;
 }

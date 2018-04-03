@@ -5,12 +5,14 @@ const VIEW_CARDS = 'scratch-gui/navigation/VIEW_CARDS';
 const ACTIVATE_DECK = 'scratch-gui/navigation/ACTIVATE_DECK';
 const NEXT_STEP = 'scratch-gui/navigation/NEXT_STEP';
 const PREV_STEP = 'scratch-gui/navigation/PREV_STEP';
+const TOGGLE_LIGHTBOX = 'scratch-gui/navigation/TOGGLE_LIGHTBOX';
 
 const initialState = {
     visible: true,
     content: decks,
     activeDeckIndex: null,
-    step: 0
+    step: 0,
+    lightboxVisible: false
 };
 
 const reducer = function (state, action) {
@@ -29,6 +31,10 @@ const reducer = function (state, action) {
             activeDeckIndex: action.activeDeckIndex,
             step: 0
         });
+    case TOGGLE_LIGHTBOX:
+        return Object.assign({}, state, {
+            lightboxVisible: !state.lightboxVisible
+        });
     case NEXT_STEP:
         if (state.activeDeckIndex !== null) {
             const steps = state.content[state.activeDeckIndex].steps.length;
@@ -41,7 +47,7 @@ const reducer = function (state, action) {
                 activeDeckIndex: null,
                 step: 0
             });
-            
+
         }
         return state;
     case PREV_STEP:
@@ -82,11 +88,16 @@ const prevStep = function () {
     return {type: PREV_STEP};
 };
 
+const toggleLightbox = function () {
+    return {type: TOGGLE_LIGHTBOX};
+};
+
 export {
     reducer as default,
     activateDeck,
     viewCards,
     closeCards,
     nextStep,
-    prevStep
+    prevStep,
+    toggleLightbox
 };

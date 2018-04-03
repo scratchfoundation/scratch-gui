@@ -14,10 +14,20 @@ import bothSay from './story/both-say.gif';
 import addWait from './story/add-wait.gif';
 
 import step_dragTurn from './zoom/drag-turn.gif';
+import step_dragTurnZoomed from './zoom/drag-turn--zoomed.gif';
+
 import step_clickTurn from './zoom/click-turn.gif';
+import step_clickTurnZoomed from './zoom/click-turn--zoomed.gif';
+
 import step_forever from './zoom/forever.gif';
+import step_foreverZoomed from './zoom/forever--zoomed.gif';
+
 import step_move from './zoom/move.gif';
+import step_moveZoomed from './zoom/move--zoomed.gif';
+
 import step_color from './zoom/color.gif';
+import step_colorZoomed from './zoom/color--zoomed.gif';
+
 import step_loudness from './zoom/loudness.gif';
 import step_edge from './zoom/edge.gif';
 import step_greenflag from './zoom/green-flag.gif';
@@ -136,19 +146,24 @@ export default [
         steps: [
             {
                 title: 'Add a turn block',
-                image: step_dragTurn
+                image: step_dragTurn,
+                zoomedImage: step_dragTurnZoomed
             }, {
                 title: 'Click the block to run it',
-                image: step_clickTurn
+                image: step_clickTurn,
+                zoomedImage: step_clickTurnZoomed
             }, {
                 title: 'Use a forever block to keep it going',
-                image: step_forever
+                image: step_forever,
+                zoomedImage: step_foreverZoomed
             }, {
                 title: 'Add a move block',
-                image: step_move
+                image: step_move,
+                zoomedImage: step_moveZoomed
             }, {
-                title: 'Experiment with color effect block',
-                image: step_color
+                title: 'Experiment with the color effect block',
+                image: step_color,
+                zoomedImage: step_colorZoomed
             }, {
                 title: '🗣 Use the loudness block and make some noise!',
                 image: step_loudness

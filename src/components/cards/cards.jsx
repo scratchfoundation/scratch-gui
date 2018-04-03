@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './card.css';
 import Draggable from 'react-draggable';
+import Lightbox from 'react-images';
 
 import {connect} from 'react-redux';
 import {closeTipsLibrary} from '../../reducers/modals';
 
 import arrowIcon from './arrow.svg';
+import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
 const Card = props => {
     const {
@@ -19,7 +21,9 @@ const Card = props => {
         onCloseCards,
         onNextStep,
         onPrevStep,
-        onExitDeck
+        onExitDeck,
+        onToggleLightbox,
+        lightboxVisible
     } = props;
 
     let inner;
@@ -32,7 +36,8 @@ const Card = props => {
         const {
             title,
             description,
-            image
+            image,
+            zoomedImage
         } = steps[step];
 
         // const exitDeck = () => onActivateDeck(null);
@@ -51,10 +56,22 @@ const Card = props => {
                         {description}
                     </div>
                 ) : null}
-                <div className={styles.stepImage}>
+                <div
+                    className={styles.stepImage}
+                    onClick={onToggleLightbox}
+                >
                     <img
                         draggable={false}
                         src={image}
+                    />
+                    <img className={styles.zoomIcon} src={zoomIcon} />
+                    <Lightbox
+                        backdropClosesModal={true}
+                        images={[
+                            { src: zoomedImage || image }
+                        ]}
+                        isOpen={lightboxVisible}
+                        onClose={onToggleLightbox}
                     />
                 </div>
                 {hasNext ? (
@@ -128,12 +145,14 @@ Card.propTypes = {
             image: PropTypes.string.isRequired // TODO normalize img/image names
         }))
     })),
+    lightboxVisible: PropTypes.bool.isRequired,
     activeDeckIndex: PropTypes.number, // TODO Can be null
     step: PropTypes.number.isRequired,
     onActivateDeck: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onNextStep: PropTypes.func.isRequired,
-    onPrevStep: PropTypes.func.isRequired
+    onPrevStep: PropTypes.func.isRequired,
+    onToggleLightbox: PropTypes.func.isRequired
 };
 
 export default Card;

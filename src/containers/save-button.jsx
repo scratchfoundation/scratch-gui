@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ButtonComponent from '../components/button/button.jsx';
-import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';
-
-
 class SaveButton extends React.Component {
     constructor (props) {
         super(props);

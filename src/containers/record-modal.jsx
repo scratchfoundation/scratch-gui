@@ -76,6 +76,8 @@ class RecordModal extends React.Component {
                 const vmSound = {
                     format: '',
                     dataFormat: 'wav',
+                    rate: this.state.sampleRate,
+                    sampleCount: clippedSamples.length,
                     name: `recording ${this.props.vm.editingTarget.sprite.sounds.length}`
                 };
 

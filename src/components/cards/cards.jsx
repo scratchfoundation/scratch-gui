@@ -77,6 +77,7 @@ const Cards = props => {
                         isOpen={lightboxVisible}
                         onClose={onToggleLightbox}
                         onClickImage={onToggleLightbox}
+                        showImageCount={false}
                     />
                 </div>
                 {hasNext ? (

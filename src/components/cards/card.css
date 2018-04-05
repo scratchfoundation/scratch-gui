@@ -68,8 +68,8 @@
     justify-content: space-between;
     align-items: center;
     /* margin-bottom: 0.5rem; */
-    background: $pen-primary;
-    color: white;
+    /* background: $pen-primary; */
+    /* color: white; */
     padding: 0.8rem;
 }
 .remove-button, .collapse-button {
@@ -100,7 +100,7 @@
     align-items: center;
     /* overflow: hidden; */
     position: relative;
-    margin: 1rem;
+    margin: 0 1rem 1rem 1rem;
 }
 .step-image img {
     max-width: 378px;
@@ -115,17 +115,17 @@
     width: 40px;
     position: absolute;
     top: 50%;
-    margin-top: -20px;
+    margin-top: -10px;
     z-index: 101;
     user-select: none;
 }
 
 .left-button {
-    left: -22px;
+    left: -25px;
 }
 
 .right-button {
-    right: -22px;
+    right: -25px;
 }
 .left-button img {
     transform: rotate(180deg);

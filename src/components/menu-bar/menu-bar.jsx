@@ -10,7 +10,6 @@ import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 
 import {openFeedbackForm, openTipsLibrary} from '../../reducers/modals';
-import {viewCards} from '../../reducers/cards';
 import styles from './menu-bar.css';
 
 import mystuffIcon from './icon--mystuff.png';
@@ -65,6 +64,9 @@ const MenuBar = props => (
                     >
                         <div className={classNames(styles.editMenu)}>Edit</div>
                     </ComingSoonTooltip>
+                </div>
+                <div className={classNames(styles.menuItem)}>
+                    <div className={classNames(styles.tipsMenu)} onClick={props.onOpenTipLibrary}>Tips</div>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />

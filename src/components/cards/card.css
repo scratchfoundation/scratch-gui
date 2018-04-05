@@ -68,7 +68,7 @@
     justify-content: space-between;
     align-items: center;
     /* margin-bottom: 0.5rem; */
-    background: $motion-primary;
+    background: $pen-primary;
     color: white;
     padding: 0.8rem;
 }

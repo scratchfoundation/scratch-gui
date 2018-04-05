@@ -173,12 +173,6 @@ export default [
             }, {
                 title: 'Add a green flag block to the top',
                 image: step_greenflag
-            }, {
-                title: 'Try the green flag and stop buttons',
-                image: step_stop
-            }, {
-                title: 'Tinker!',
-                image: step_zoom
             }
         ]
     },

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
-import tipLibraryContent from '../lib/libraries/tips/index';
+import decksLibraryContent from '../lib/libraries/decks/index';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
@@ -15,6 +15,10 @@ import {
     closeTipsLibrary
 } from '../reducers/modals';
 
+import {
+    activateDeck
+} from '../reducers/cards';
+
 class TipsLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
@@ -23,20 +27,19 @@ class TipsLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        if (item.externalURL) {
-            window.open(item.externalURL);
-        }
+        this.props.onActivateDeck(item.index);
     }
     render () {
-        const tipLibraryThumbnailData = tipLibraryContent.map(tip => ({
-            rawURL: tip.iconURL || tipIcon,
-            ...tip
+        const decksLibraryThumbnailData = decksLibraryContent.map((deck, i) => ({
+            rawURL: deck.img,
+            index: i,
+            ...deck
         }));
         if (!this.props.visible) return null;
         return (
             <LibraryComponent
-                data={tipLibraryThumbnailData}
-                title="Tips Library"
+                data={decksLibraryThumbnailData}
+                title="How To Library"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
@@ -55,7 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onRequestClose: () => dispatch(closeTipsLibrary())
+    onRequestClose: () => dispatch(closeTipsLibrary()),
+    onActivateDeck: (name) => dispatch(activateDeck(name))
 });
 
 export default connect(

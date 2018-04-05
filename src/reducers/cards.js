@@ -6,13 +6,16 @@ const ACTIVATE_DECK = 'scratch-gui/navigation/ACTIVATE_DECK';
 const NEXT_STEP = 'scratch-gui/navigation/NEXT_STEP';
 const PREV_STEP = 'scratch-gui/navigation/PREV_STEP';
 const TOGGLE_LIGHTBOX = 'scratch-gui/navigation/TOGGLE_LIGHTBOX';
+const DRAG_CARD = 'scratch-gui/navigation/DRAG_CARD';
 
 const initialState = {
     visible: true,
     content: decks,
-    activeDeckIndex: null,
+    activeDeckIndex: 0,
     step: 0,
-    lightboxVisible: false
+    lightboxVisible: false,
+    x: 340,
+    y: 400
 };
 
 const reducer = function (state, action) {
@@ -29,7 +32,8 @@ const reducer = function (state, action) {
     case ACTIVATE_DECK:
         return Object.assign({}, state, {
             activeDeckIndex: action.activeDeckIndex,
-            step: 0
+            step: 0,
+            visible: true
         });
     case TOGGLE_LIGHTBOX:
         return Object.assign({}, state, {
@@ -38,16 +42,11 @@ const reducer = function (state, action) {
     case NEXT_STEP:
         if (state.activeDeckIndex !== null) {
             const steps = state.content[state.activeDeckIndex].steps.length;
-            if (state.step + 1 < steps - 1) {
+            // if (state.step + 1 < steps - 1) {
                 return Object.assign({}, state, {
                     step: state.step + 1
                 });
-            }
-            return Object.assign({}, state, {
-                activeDeckIndex: null,
-                step: 0
-            });
-
+            // }
         }
         return state;
     case PREV_STEP:
@@ -60,6 +59,11 @@ const reducer = function (state, action) {
             }
         }
         return state;
+    case DRAG_CARD:
+        return Object.assign({}, state, {
+            x: action.x,
+            y: action.y
+        });
     default:
         return state;
     }
@@ -92,6 +96,10 @@ const toggleLightbox = function () {
     return {type: TOGGLE_LIGHTBOX};
 };
 
+const dragCard = function (x, y) {
+    return {type: DRAG_CARD, x, y}
+}
+
 export {
     reducer as default,
     activateDeck,
@@ -99,5 +107,6 @@ export {
     closeCards,
     nextStep,
     prevStep,
-    toggleLightbox
+    toggleLightbox,
+    dragCard
 };

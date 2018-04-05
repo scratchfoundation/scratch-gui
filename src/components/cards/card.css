@@ -49,39 +49,44 @@
 
 .card {
     background: white;
-    border: 1px solid #ddd;
+    /* border: 3px solid rgb(126, 133, 151); */
     border-radius: 0.75rem;
-    padding: 1rem;
+    /* padding: 1rem; */
     display: flex;
     flex-direction: column;
     cursor: pointer;
     z-index: 101;
+    overflow: hidden;
     box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.2);
+    align-items: center;
 }
 
 .header-buttons {
-    font-size: 0.75rem;
-    color: #888;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 1.5rem;
+    /* margin-bottom: 0.5rem; */
+    background: $motion-primary;
+    color: white;
+    padding: 0.8rem;
 }
-.remove-button {
-
+.remove-button, .collapse-button {
+    /* color: #888; */
+    /* font-size: 0.75rem; */
 }
 
 .step-title {
     font-size: 1rem;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0 1rem 0;
     text-align: center;
     font-weight: bold;
 }
 
 .step-description {
     text-align: center;
-    margin: 0 0 1rem;
+    /* margin: 0 0 1rem; */
 }
 
 .step-image {
@@ -89,12 +94,13 @@
     border: 1px solid #ddd;
     width: 380px;
     min-height: 160px;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
+    margin: 1rem;
 }
 .step-image img {
     max-width: 378px;
@@ -169,6 +175,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 1rem;
 }
 
 .deck {
@@ -198,4 +205,20 @@
     bottom: 5px;
     right: 5px;
     pointer-events: none;
+}
+
+.see-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0.5rem;
+}
+.see-all-button {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: $motion-primary;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.25rem;
 }

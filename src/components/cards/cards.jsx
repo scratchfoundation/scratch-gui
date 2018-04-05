@@ -11,7 +11,7 @@ import {closeTipsLibrary} from '../../reducers/modals';
 import arrowIcon from './arrow.svg';
 import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
-const Card = props => {
+const Cards = props => {
     const {
         visible,
         content,
@@ -19,20 +19,24 @@ const Card = props => {
         step,
         onActivateDeckFactory,
         onCloseCards,
-        onNextStep,
-        onPrevStep,
         onExitDeck,
         onToggleLightbox,
-        lightboxVisible
+        onNextStep,
+        onPrevStep,
+        lightboxVisible,
+        x,
+        y,
+        onDrag
     } = props;
 
     let inner;
-    if (activeDeckIndex !== null) {
-        const steps = content[activeDeckIndex].steps;
+    if (activeDeckIndex === null) return;
+    const steps = content[activeDeckIndex].steps;
 
-        const hasPrev = step > 0;
-        const hasNext = step < steps.length;
+    const hasPrev = step > 0;
+    const hasNext = step <= steps.length;
 
+    if (step !== steps.length) {
         const {
             title,
             description,
@@ -46,10 +50,10 @@ const Card = props => {
             <div className={styles.card}>
                 <div className={styles.headerButtons}>
                     <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
-                    <div className={styles.removeButton}><span onClick={onCloseCards}>✖️</span></div>
-                </div>
-                <div className={styles.stepTitle}>
-                    {title}
+                    <div className={styles.stepTitle}>
+                        {title}
+                    </div>
+                    <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
                 </div>
                 {description ? (
                     <div className={styles.stepDescription}>
@@ -98,11 +102,11 @@ const Card = props => {
         inner = (
             <div className={styles.card}>
                 <div className={styles.headerButtons}>
-                    <div className={styles.collapseButton} />
-                    <div className={styles.removeButton}><span onClick={onCloseCards}>✖️</span></div>
-                </div>
-                <div className={styles.stepTitle}>
-                    How Tos
+                    <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                    <div className={styles.stepTitle}>
+                        How Tos
+                    </div>
+                    <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
                 </div>
                 <div className={styles.stepDescription}>
                     <div className={styles.decks}>
@@ -120,13 +124,24 @@ const Card = props => {
                         ))}
                     </div>
                 </div>
+                <div className={styles.seeAll}>
+                    <div className={styles.seeAllButton} onClick={onExitDeck}>See all</div>
+                </div>
+                <div className={styles.leftButton}>
+                    <img
+                        draggable={false}
+                        src={arrowIcon}
+                        onClick={onPrevStep}
+                    />
+                </div>
             </div>
         );
     }
     return (
         <Draggable
             bounds="parent"
-            defaultPosition={{x: 336, y: 436}}
+            position={{x, y}}
+            onDrag={onDrag}
         >
             <div className={styles.cardContainer}>
                 {inner}
@@ -135,7 +150,7 @@ const Card = props => {
     );
 };
 
-Card.propTypes = {
+Cards.propTypes = {
     visible: PropTypes.bool.isRequired,
     content: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -155,4 +170,4 @@ Card.propTypes = {
     onToggleLightbox: PropTypes.func.isRequired
 };
 
-export default Card;
+export default Cards;

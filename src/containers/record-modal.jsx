@@ -93,7 +93,7 @@ class RecordModal extends React.Component {
                 vmSound.md5 = `${md5}.${vmSound.dataFormat}`;
                 // The VM will update the sound name to a fresh name
                 // if the following is already taken
-                vmSound.name = 'recording 1';
+                vmSound.name = 'recording1';
 
                 this.props.vm.addSound(vmSound).then(() => {
                     this.props.onClose();

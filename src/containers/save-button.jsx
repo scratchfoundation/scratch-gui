@@ -34,24 +34,18 @@ class SaveButton extends React.Component {
             document.body.removeChild(saveLink);
         });
     }
+    // TODO add back `onClick={this.handleClick}` when enabling button
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
-            <ComingSoonTooltip
-                place="bottom"
-                tooltipId="save-button"
+            <div
+                {...props}
             >
-                <ButtonComponent
-                    disabled
-                    onClick={this.handleClick}
-                    {...props}
-                >
-                    Save
-                </ButtonComponent>
-            </ComingSoonTooltip>
+                File
+            </div>
         );
     }
 }

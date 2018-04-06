@@ -54,7 +54,6 @@ const GUIComponent = props => {
         loading,
         onExtensionButtonClick,
         onActivateCostumesTab,
-        onActivateBlocksTab,
         onActivateSoundsTab,
         onActivateTab,
         previewInfoVisible,
@@ -116,10 +115,7 @@ const GUIComponent = props => {
                             onSelect={onActivateTab}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab
-                                    className={tabClassNames.tab}
-                                    onClick={onActivateBlocksTab}
-                                >
+                                <Tab className={tabClassNames.tab}>
                                     <img
                                         draggable={false}
                                         src={codeIcon}
@@ -232,7 +228,6 @@ GUIComponent.propTypes = {
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
-    onActivateBlocksTab: PropTypes.func,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,

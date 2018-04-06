@@ -53,6 +53,8 @@ const GUIComponent = props => {
         intl,
         loading,
         onExtensionButtonClick,
+        onActivateCostumesTab,
+        onActivateSoundsTab,
         onActivateTab,
         previewInfoVisible,
         soundsTabVisible,
@@ -124,7 +126,10 @@ const GUIComponent = props => {
                                         id="gui.gui.codeTab"
                                     />
                                 </Tab>
-                                <Tab className={tabClassNames.tab}>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateCostumesTab}
+                                >
                                     <img
                                         draggable={false}
                                         src={costumesIcon}
@@ -135,7 +140,10 @@ const GUIComponent = props => {
                                         id="gui.gui.costumesTab"
                                     />
                                 </Tab>
-                                <Tab className={tabClassNames.tab}>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateSoundsTab}
+                                >
                                     <img
                                         draggable={false}
                                         src={soundsIcon}
@@ -220,6 +228,8 @@ GUIComponent.propTypes = {
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
+    onActivateCostumesTab: PropTypes.func,
+    onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,

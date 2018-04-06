@@ -54,6 +54,9 @@ const GUIComponent = props => {
         loading,
         onExtensionButtonClick,
         onActivateTab,
+        onActivateCostumesTab,
+        onActivateSoundsTab,
+        onActivateBlocksTab,
         previewInfoVisible,
         soundsTabVisible,
         vm,
@@ -113,7 +116,10 @@ const GUIComponent = props => {
                             onSelect={onActivateTab}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateBlocksTab}
+                                >
                                     <img
                                         draggable={false}
                                         src={codeIcon}
@@ -124,7 +130,10 @@ const GUIComponent = props => {
                                         id="gui.gui.codeTab"
                                     />
                                 </Tab>
-                                <Tab className={tabClassNames.tab}>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateCostumesTab}
+                                >
                                     <img
                                         draggable={false}
                                         src={costumesIcon}
@@ -135,7 +144,10 @@ const GUIComponent = props => {
                                         id="gui.gui.costumesTab"
                                     />
                                 </Tab>
-                                <Tab className={tabClassNames.tab}>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateSoundsTab}
+                                >
                                     <img
                                         draggable={false}
                                         src={soundsIcon}
@@ -221,6 +233,9 @@ GUIComponent.propTypes = {
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
     onActivateTab: PropTypes.func,
+    onActivateBlocksTab: PropTypes.func,
+    onActivateCostumesTab: PropTypes.func,
+    onActivateSoundsTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,

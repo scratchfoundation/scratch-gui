@@ -8,7 +8,9 @@ import Lightbox from 'react-images';
 import {connect} from 'react-redux';
 import {closeTipsLibrary} from '../../reducers/modals';
 
-import arrowIcon from './arrow.svg';
+import nextIcon from './icon--next.svg';
+import prevIcon from './icon--prev.svg';
+
 import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
 const Cards = props => {
@@ -81,20 +83,18 @@ const Cards = props => {
                     />
                 </div>
                 {hasNext ? (
-                    <div className={styles.rightButton}>
+                    <div className={styles.rightButton} onClick={onNextStep}>
                         <img
                             draggable={false}
-                            src={arrowIcon}
-                            onClick={onNextStep}
+                            src={nextIcon}
                         />
                     </div>
                 ) : null}
                 {hasPrev ? (
-                    <div className={styles.leftButton}>
+                    <div className={styles.leftButton} onClick={onPrevStep}>
                         <img
                             draggable={false}
-                            src={arrowIcon}
-                            onClick={onPrevStep}
+                            src={prevIcon}
                         />
                     </div>
                 ) : null}
@@ -127,13 +127,15 @@ const Cards = props => {
                     </div>
                 </div>
                 <div className={styles.seeAll}>
-                    <div className={styles.seeAllButton} onClick={onExitDeck}>See all</div>
+                    <div className={styles.seeAllButton} onClick={onExitDeck}>
+                        See all
+                        <img src={nextIcon} />
+                    </div>
                 </div>
-                <div className={styles.leftButton}>
+                <div className={styles.leftButton} onClick={onPrevStep}>
                     <img
                         draggable={false}
-                        src={arrowIcon}
-                        onClick={onPrevStep}
+                        src={prevIcon}
                     />
                 </div>
             </div>

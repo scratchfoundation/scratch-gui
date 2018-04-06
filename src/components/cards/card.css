@@ -112,7 +112,14 @@
 } */
 
 .left-button, .right-button {
-    width: 40px;
+    background: $motion-primary;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     top: 50%;
     margin-top: -10px;
@@ -121,15 +128,13 @@
 }
 
 .left-button {
-    left: -25px;
+    left: -22px;
 }
 
 .right-button {
-    right: -25px;
+    right: -22px;
 }
-.left-button img {
-    transform: rotate(180deg);
-}
+
 
 .events-block {
     color: rgb(247,194,81);
@@ -221,4 +226,9 @@
     color: white;
     font-weight: bold;
     border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+}
+.see-all-button img {
+    margin-left: 0.5rem;
 }

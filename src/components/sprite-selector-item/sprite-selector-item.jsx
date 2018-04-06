@@ -42,7 +42,12 @@ const SpriteSelectorItem = props => (
                 width={32}
             />
         ) : null}
-        <div className={styles.spriteName}>{props.name}</div>
+        <div className={styles.spriteInfo}>
+            <div className={styles.spriteName}>{props.name}</div>
+            {props.details ? (
+                <div className={styles.spriteDetails}>{props.details}</div>
+            ) : null}
+        </div>
         {props.onDuplicateButtonClick || props.onDeleteButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (
@@ -73,6 +78,7 @@ SpriteSelectorItem.propTypes = {
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
+    details: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,

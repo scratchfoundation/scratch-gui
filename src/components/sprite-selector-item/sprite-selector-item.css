@@ -10,24 +10,26 @@
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
-    background: white;
     color: $text-primary;
     border-width: 2px;
     border-style: solid;
     border-color: $ui-black-transparent;
     border-radius: $space;
+
     text-align: center;
     cursor: pointer;
     transition: 0.25s ease-out;
 }
 
 .sprite-selector-item.is-selected {
-    border: 2px solid $motion-primary;
     box-shadow: 0px 0px 0px 4px $motion-transparent;
+    border: 2px solid $motion-primary;
+    background: $ui-white;
 }
 
 .sprite-selector-item:hover {
     border: 2px solid $motion-primary;
+    background: $ui-white;
 }
 
 .sprite-image {
@@ -35,9 +37,13 @@
     user-select: none;
 }
 
-.sprite-name {
+.sprite-info {
+    padding: 0.2rem 0.2rem 0.1rem ;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+
     font-size: 0.625rem;
-    margin: 0.15rem;
+    color: $text-primary;
     user-select: none;
 
     /*
@@ -50,6 +56,10 @@
     min-width: 0;
 }
 
+.is-selected .sprite-info {
+    background: $motion-primary;
+    color: $ui-white;
+}
 .delete-button {
     position: absolute;
     top: 0.125rem;
@@ -59,8 +69,9 @@
 
 .number {
     position: absolute;
-    top: 0.125rem;
-    left: 0.125rem;
+    top: 0.15rem;
+    left: 0.15rem;
     font-size: 0.625rem;
+    font-weight: bold;
     z-index: 2;
 }

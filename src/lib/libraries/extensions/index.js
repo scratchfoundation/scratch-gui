@@ -49,11 +49,5 @@ export default [
         iconURL: boostImage,
         description: 'Build robots and more.',
         featured: true
-    },
-    {name: 'My EXT',
-        extensionURL: 'https://amazinigmech2418.github.io/scratch-gui/develop/exttest.js',
-        iconURL: musicImage,
-        description: 'My extension',
-        featured: true
     }
 ];

@@ -2712,7 +2712,7 @@
         }
     },
     {
-        "name": "Empty",
+        "name": "Sprite",
         "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
         "type": "sprite",
         "tags": [],
@@ -2722,7 +2722,7 @@
             1
         ],
         "json": {
-            "objName": "Empty",
+            "objName": "Sprite",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2735,7 +2735,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "empty",
+                    "costumeName": "sprite",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "bitmapResolution": 1,

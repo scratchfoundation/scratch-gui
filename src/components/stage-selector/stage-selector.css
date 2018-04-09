@@ -73,6 +73,7 @@ $header-height: calc($stage-menu-height - 2px);
     width: 100%;
     user-select: none;
     border-bottom: 1px solid $ui-black-transparent;
+    box-shadow: inset 0 0 4px $ui-black-transparent;
 }
 
 .add-button {

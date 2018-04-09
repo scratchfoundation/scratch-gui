@@ -87,7 +87,12 @@
     z-index: 1;
 }
 
+.tab:hover {
+  background-color: $ui-primary;
+}
+
 .tab.is-selected {
+    height: 90%;
     color: $motion-primary;
     background-color: $ui-white;
     z-index: 4; /* Make sure selected is always above */
@@ -95,6 +100,7 @@
 
 .tab img {
     margin-right: 0.125rem;
+    width: 1.375rem;
     filter: grayscale(100%);
 }
 

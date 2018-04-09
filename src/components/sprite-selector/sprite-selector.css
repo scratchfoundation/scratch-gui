@@ -69,8 +69,7 @@
 }
 
 .raised {
-    background-color: #cce1ff;
-    border-color: #8cbcff;
+    background-color: #8cbcff;
     transition: all 0.25s ease;
 }
 

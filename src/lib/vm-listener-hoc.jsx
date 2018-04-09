@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {updateEditingTarget, updateTargets} from '../reducers/targets';
+import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 
 /*
@@ -29,7 +30,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // we need to start listening before mounting the wrapped component.
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
-
+            this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -51,11 +52,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 keyCode: e.keyCode,
                 isDown: true
             });
-
-            // Don't stop browser keyboard shortcuts
-            if (e.metaKey || e.altKey || e.ctrlKey) return;
-
-            e.preventDefault();
         }
         handleKeyUp (e) {
             // Always capture up events,
@@ -74,6 +70,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                onBlockDragUpdate,
                 onKeyDown,
                 onKeyUp,
                 onMonitorsUpdate,
@@ -86,10 +83,11 @@ const vmListenerHOC = function (WrappedComponent) {
     }
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
+        onBlockDragUpdate: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
-        onMonitorsUpdate: PropTypes.func,
-        onTargetsUpdate: PropTypes.func,
+        onMonitorsUpdate: PropTypes.func.isRequired,
+        onTargetsUpdate: PropTypes.func.isRequired,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     VMListener.defaultProps = {
@@ -105,6 +103,9 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onMonitorsUpdate: monitorList => {
             dispatch(updateMonitors(monitorList));
+        },
+        onBlockDragUpdate: areBlocksOverGui => {
+            dispatch(updateBlockDrag(areBlocksOverGui));
         }
     });
     return connect(

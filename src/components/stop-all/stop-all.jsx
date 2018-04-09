@@ -22,6 +22,7 @@ const StopAllComponent = function (props) {
                     [styles.isActive]: active
                 }
             )}
+            draggable={false}
             src={stopAllIcon}
             title={title}
             onClick={onClick}

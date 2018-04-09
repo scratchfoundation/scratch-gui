@@ -36,6 +36,10 @@ const opcodeMap = {
         category: 'data',
         labelFn: params => params.VARIABLE
     },
+    data_listcontents: {
+        category: 'list',
+        labelFn: params => params.LIST
+    },
 
     // Sound
     sound_volume: {

@@ -11,10 +11,10 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     background: white;
-    color: #5d647a;
+    color: $text-primary;
     border-width: 2px;
     border-style: solid;
-    border-color: #e9eef2;
+    border-color: $ui-black-transparent;
     border-radius: $space;
     text-align: center;
     cursor: pointer;
@@ -23,7 +23,7 @@
 
 .sprite-selector-item.is-selected {
     border: 2px solid $motion-primary;
-    box-shadow: 0px 0px 0px 3px $motion-transparent;
+    box-shadow: 0px 0px 0px 4px $motion-transparent;
 }
 
 .sprite-selector-item:hover {
@@ -54,5 +54,13 @@
     position: absolute;
     top: 0.125rem;
     right: 0.125rem;
+    z-index: 2;
+}
+
+.number {
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    font-size: 0.625rem;
     z-index: 2;
 }

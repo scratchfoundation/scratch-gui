@@ -18,7 +18,7 @@
 }
 
 .color-picker-background {
-    position: absolute;;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.55);
@@ -31,7 +31,7 @@
 .stage-wrapper {
     position: relative;
     border-radius: $space;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     /* Keep the canvas inside the border radius */
     overflow: hidden;
 }
@@ -43,7 +43,7 @@
     right: 0;
     bottom: 0;
     z-index: 5000;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: $ui-white;
 }
 
 .stage-overlay-content {

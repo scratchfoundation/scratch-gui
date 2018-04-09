@@ -3,6 +3,7 @@
 exports[`GreenFlag Container renders active state 1`] = `
 <img
   className="undefined"
+  draggable={false}
   onClick={[Function]}
   src="test-file-stub"
   title="Go"
@@ -12,6 +13,7 @@ exports[`GreenFlag Container renders active state 1`] = `
 exports[`GreenFlag Container renders inactive state 1`] = `
 <img
   className=""
+  draggable={false}
   onClick={[Function]}
   src="test-file-stub"
   title="Go"

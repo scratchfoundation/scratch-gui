@@ -77,6 +77,13 @@
         "format": ""
     },
     {
+        "name": "Alert",
+        "md5": "f62e3bfccab9c23eee781473c94a009c.wav",
+        "sampleCount": 21362,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Alien Creak1",
         "md5": "0377a7476136e5e8c780c64a4828922d.wav",
         "sampleCount": 8045,
@@ -154,11 +161,25 @@
         "format": ""
     },
     {
+        "name": "Baa",
+        "md5": "ca694053020e42704bcf1fc01a70f1c3.wav",
+        "sampleCount": 41822,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Bark",
         "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
         "sampleCount": 3168,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Basketball Bounce",
+        "md5": "1727f65b5f22d151685b8e5917456a60.wav",
+        "sampleCount": 8099,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Bass Beatbox",
@@ -196,6 +217,13 @@
         "format": ""
     },
     {
+        "name": "Big Boing",
+        "md5": "00d6e72ef8bf7088233e98fbcee0ec6d.wav",
+        "sampleCount": 18174,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Bird",
         "md5": "18bd4b634a3f992a16b30344c7d810e0.wav",
         "sampleCount": 3840,
@@ -210,9 +238,44 @@
         "format": ""
     },
     {
+        "name": "Bite",
+        "md5": "0039635b1d6853face36581784558454.wav",
+        "sampleCount": 7672,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Boing",
         "md5": "53a3c2e27d1fb5fdb14aaf0cb41e7889.wav",
         "sampleCount": 6804,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Bonk",
+        "md5": "dd93f7835a407d4de5b2512ec4a6a806.wav",
+        "sampleCount": 13908,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Boom Cloud",
+        "md5": "62d87dfb0f873735e59669d965bdbd7d.wav",
+        "sampleCount": 88200,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Boop Bing Bop",
+        "md5": "66968153be7dce9e5abf62d627ffe40f.wav",
+        "sampleCount": 54957,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Bowling Strike",
+        "md5": "32f3af03ddfbd9cc89c8565678a26813.wav",
+        "sampleCount": 26629,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -364,6 +427,13 @@
         "format": ""
     },
     {
+        "name": "Car Horn",
+        "md5": "7c887f6a2ecd1cdb85d5527898d7f7a0.wav",
+        "sampleCount": 42443,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Car Passing",
         "md5": "c21a5ad00b40b5ce923e56c905c94a9f.wav",
         "sampleCount": 84992,
@@ -371,9 +441,23 @@
         "format": ""
     },
     {
+        "name": "Car Vroom",
+        "md5": "ead1da4a87ff6cb53441142f7ac37b8f.wav",
+        "sampleCount": 43358,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Cave",
         "md5": "881f1bf5f301a36efcce4204a44af9ab.wav",
         "sampleCount": 163584,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Chatter",
+        "md5": "fd8543abeeba255072da239223d2d342.wav",
+        "sampleCount": 25843,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -386,10 +470,17 @@
     },
     {
         "name": "Cheer",
-        "md5": "4b36eebf22be4667fc2f15b78c805b4c.wav",
-        "sampleCount": 62528,
+        "md5": "170e05c29d50918ae0b482c2955768c0.wav",
+        "sampleCount": 108864,
         "rate": 22050,
-        "format": ""
+        "format": "adpcm"
+    },
+    {
+        "name": "Chirp",
+        "md5": "3b8236bbb288019d93ae38362e865972.wav",
+        "sampleCount": 5301,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Chomp",
@@ -406,6 +497,13 @@
         "format": ""
     },
     {
+        "name": "Clang",
+        "md5": "4102d78dc98ae81448b140f35fd73e80.wav",
+        "sampleCount": 26703,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Clap Beatbox",
         "md5": "abc70bb390f8e55f22f32265500d814a.wav",
         "sampleCount": 4224,
@@ -420,6 +518,34 @@
         "format": ""
     },
     {
+        "name": "Clock Ticking",
+        "md5": "a634fcb87894520edbd7a534d1479ec4.wav",
+        "sampleCount": 109584,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Clown Honk",
+        "md5": "ec66961f188e9b8a9c75771db744d096.wav",
+        "sampleCount": 9009,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Coin",
+        "md5": "1f81d88fb419084f4d82ffb859b94ed6.wav",
+        "sampleCount": 3975,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Collect",
+        "md5": "32514c51e03db680e9c63857b840ae78.wav",
+        "sampleCount": 13320,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Computer Beep",
         "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
         "sampleCount": 9536,
@@ -427,18 +553,18 @@
         "format": ""
     },
     {
-        "name": "Computer Beeps1",
+        "name": "Computer Beep2",
         "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
         "sampleCount": 19200,
         "rate": 11025,
         "format": ""
     },
     {
-        "name": "Computer Beeps2",
-        "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
-        "sampleCount": 9536,
-        "rate": 11025,
-        "format": ""
+        "name": "Connect",
+        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
+        "sampleCount": 22623,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Cough1",
@@ -455,6 +581,13 @@
         "format": ""
     },
     {
+        "name": "Crank",
+        "md5": "a54f8ce520a0b9fff3cd53817e280ede.wav",
+        "sampleCount": 100649,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Crash Beatbox",
         "md5": "725e29369e9138a43f11e0e5eb3eb562.wav",
         "sampleCount": 26883,
@@ -469,6 +602,13 @@
         "format": ""
     },
     {
+        "name": "Crazy Laugh",
+        "md5": "2293a751b71a2df8cdce1bec5558cc1e.wav",
+        "sampleCount": 37485,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Cricket",
         "md5": "a2b3cac37065c109aac17ed46005445e.wav",
         "sampleCount": 3673,
@@ -481,6 +621,34 @@
         "sampleCount": 92160,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Croak",
+        "md5": "c6ce0aadb89903a43f76fc20ea57633e.wav",
+        "sampleCount": 6424,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Crowd Gasp",
+        "md5": "0eaf773c9d1b06e801e7b5fd56298801.wav",
+        "sampleCount": 27434,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Crowd Laugh",
+        "md5": "f4942ab2532087118e11b0c4d4e0e342.wav",
+        "sampleCount": 91584,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Crunch",
+        "md5": "cac3341417949acc66781308a254529c.wav",
+        "sampleCount": 4297,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Cymbal",
@@ -630,6 +798,13 @@
         "format": "adpcm"
     },
     {
+        "name": "Disconnect",
+        "md5": "56df0714ed1ed455a2befd787a077214.wav",
+        "sampleCount": 27563,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Dog1",
         "md5": "b15adefc3c12f758b6dc6a045362532f.wav",
         "sampleCount": 3672,
@@ -644,11 +819,25 @@
         "format": ""
     },
     {
+        "name": "Door Closing",
+        "md5": "d8c78c6c272cca91342435ff543c1274.wav",
+        "sampleCount": 7454,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Door Creak",
         "md5": "56985da9c052a5e26007c99aa5a958f7.wav",
         "sampleCount": 54272,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Doorbell",
+        "md5": "b67db6ed07f882e52a9ef4dbb76f5f64.wav",
+        "sampleCount": 109662,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Drip Drop",
@@ -693,6 +882,13 @@
         "format": ""
     },
     {
+        "name": "Drum Boing",
+        "md5": "5f4216970527d5a2e259758ba12e6a1b.wav",
+        "sampleCount": 18640,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Drum Buzz",
         "md5": "3650dc4262bcc5010c0d8fa8d7c670cf.wav",
         "sampleCount": 5742,
@@ -717,6 +913,13 @@
         "name": "Drum Machine",
         "md5": "f9d53d773b42e16df3dfca6174015592.wav",
         "sampleCount": 105984,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Drum Roll",
+        "md5": "fb12e119d7a88a7f75ab980243f75073.wav",
+        "sampleCount": 37809,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -747,6 +950,13 @@
         "sampleCount": 5792,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Dun Dun Dunnn",
+        "md5": "e956a99ab9ac64cfb5c6b2d8b1e949eb.wav",
+        "sampleCount": 63729,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "E Bass",
@@ -852,6 +1062,13 @@
         "sampleCount": 43844,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Engine",
+        "md5": "f5c4e2311024f18c989e53f9b3448db8.wav",
+        "sampleCount": 172729,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "F Bass",
@@ -1022,9 +1239,37 @@
         "format": ""
     },
     {
+        "name": "Gallop",
+        "md5": "8388c266cd774a8e8c8796155b18ef47.wav",
+        "sampleCount": 36209,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Garden",
         "md5": "7c25f6d39011cd2ee5ffb1af539d9d0c.wav",
         "sampleCount": 371520,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Glass Breaking",
+        "md5": "4b33c58ba14e4555373fa2478b3f891f.wav",
+        "sampleCount": 52237,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Glug",
+        "md5": "5606722c6105f3c58f9689a958f5c45f.wav",
+        "sampleCount": 12100,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Goal Cheer",
+        "md5": "a434069c58e79d42f5d21abb1c318919.wav",
+        "sampleCount": 84096,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -1041,6 +1286,20 @@
         "sampleCount": 8208,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Growl",
+        "md5": "79d052b0921d2078d42389328b1be168.wav",
+        "sampleCount": 19228,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Grunt",
+        "md5": "caa0a1685ef7a5334413834c6c818c5a.wav",
+        "sampleCount": 20551,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Guitar Chords1",
@@ -1069,6 +1328,13 @@
         "sampleCount": 2464,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Head Shake",
+        "md5": "e56fdc9f76d035ff01f4e7b39e9e9989.wav",
+        "sampleCount": 20025,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Hey",
@@ -1120,6 +1386,13 @@
         "format": ""
     },
     {
+        "name": "High Whoosh",
+        "md5": "6a10c380af8c400f8f6eea84eb28bd12.wav",
+        "sampleCount": 6116,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Hihat Beatbox",
         "md5": "5a07847bf246c227204728b05a3fc8f3.wav",
         "sampleCount": 5856,
@@ -1169,9 +1442,23 @@
         "format": "adpcm"
     },
     {
+        "name": "Jump",
+        "md5": "6fcd64d6357e4ea03704e5f96bfd35ba.wav",
+        "sampleCount": 6867,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Jungle",
         "md5": "b234a04cc3958437c43ed3d93f34a345.wav",
         "sampleCount": 76032,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Jungle Frogs",
+        "md5": "2ca5fbda5288b79a6e12f5ca3c20b0fa.wav",
+        "sampleCount": 291214,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -1246,6 +1533,20 @@
         "format": ""
     },
     {
+        "name": "Lose",
+        "md5": "d73eacaf5a905bf864041c7a70937ac4.wav",
+        "sampleCount": 81379,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Low Boing",
+        "md5": "33e9314fd25ef8e800a749c86487f7a9.wav",
+        "sampleCount": 16592,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Low Conga",
         "md5": "0b6f94487cd8a1cf0bb77e15966656c3.wav",
         "sampleCount": 8384,
@@ -1253,11 +1554,39 @@
         "format": ""
     },
     {
+        "name": "Low Squeak",
+        "md5": "0aae06b65c875a6ba1fd51f4251b16b3.wav",
+        "sampleCount": 16736,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Low Tom",
         "md5": "1569bbbd8952b0575e5a5cb5aefb50ba.wav",
         "sampleCount": 20000,
         "rate": 22050,
         "format": ""
+    },
+    {
+        "name": "Low Whoosh",
+        "md5": "d42f096c89764484a442046f4342c9ad.wav",
+        "sampleCount": 11220,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Machine",
+        "md5": "e7dfb630116153533989ff839c1973a5.wav",
+        "sampleCount": 10209,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Magic Spell",
+        "md5": "1cb60ecdb1075c8769cb346d5c2a22c7.wav",
+        "sampleCount": 43077,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Medieval1",
@@ -1288,6 +1617,13 @@
         "format": ""
     },
     {
+        "name": "Moo",
+        "md5": "7206280bd4444a06d25f19a84dcb56b1.wav",
+        "sampleCount": 27225,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Motorcycle Passing",
         "md5": "b49ab3a926da46578396d1faffd24d3b.wav",
         "sampleCount": 86016,
@@ -1302,9 +1638,30 @@
         "format": ""
     },
     {
+        "name": "Ocean Wave",
+        "md5": "c904610d770398b98872a708a2f75611.wav",
+        "sampleCount": 99206,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Odesong-b",
         "md5": "2c41921491b1da2bfa1ebcaba34265ca.wav",
         "sampleCount": 212553,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Oops",
+        "md5": "1139072c3d2d31fa5903c46632789d08.wav",
+        "sampleCount": 30514,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Orchestra Tuning",
+        "md5": "9fdef8a1f57a24b99add29d4f1925c76.wav",
+        "sampleCount": 221837,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -1323,11 +1680,39 @@
         "format": ""
     },
     {
+        "name": "Pew",
+        "md5": "21a2cc083ef51767fb13791151194348.wav",
+        "sampleCount": 5816,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Ping Pong Hit",
+        "md5": "8357b4bdf6fbe10b972be3b78167b3c8.wav",
+        "sampleCount": 11171,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Pluck",
+        "md5": "0f2aa4c395cb932512defb2d14dc1691.wav",
+        "sampleCount": 6537,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Plunge",
         "md5": "c09455ee9da0e7eeead42d4e73c2555d.wav",
         "sampleCount": 22400,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Police Siren",
+        "md5": "b10dcd209865fbd392534633307dafad.wav",
+        "sampleCount": 8649,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Pop",
@@ -1344,6 +1729,13 @@
         "format": ""
     },
     {
+        "name": "Rain",
+        "md5": "b5db20c28ef4946137129b47772dcf69.wav",
+        "sampleCount": 220295,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Rattle",
         "md5": "74f1c07e0bcd7811fd9d456a5f8667f8.wav",
         "sampleCount": 13184,
@@ -1351,11 +1743,39 @@
         "format": ""
     },
     {
+        "name": "Referee Whistle",
+        "md5": "8468b9b3f11a665ee4d215afd8463b97.wav",
+        "sampleCount": 14034,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Ricochet",
+        "md5": "49407acfc004ec6960e8b84d363bd98d.wav",
+        "sampleCount": 23862,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Ride Cymbal",
         "md5": "53badb02228d10494e0efdd1e839548d.wav",
         "sampleCount": 8144,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Ring Tone",
+        "md5": "895c0887b4de4e0051e3adbceaf96061.wav",
+        "sampleCount": 70656,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Rip",
+        "md5": "4081f8fac2ca83bd34329400eb95bbde.wav",
+        "sampleCount": 11877,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Ripples",
@@ -1377,6 +1797,13 @@
         "sampleCount": 17110,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Scrambling Feet",
+        "md5": "0fbca8db08d46419416c0f104345bc53.wav",
+        "sampleCount": 35770,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Scratch Beatbox",
@@ -1408,10 +1835,24 @@
     },
     {
         "name": "Screech",
-        "md5": "3676f478e5e3496034cf100d239160df.wav",
-        "sampleCount": 28928,
-        "rate": 11025,
-        "format": ""
+        "md5": "10644c5cc83a9a2dd3ab466deb0eb03d.wav",
+        "sampleCount": 12907,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Seagulls",
+        "md5": "42bbbb6c37439abc82057ec2e67b78dc.wav",
+        "sampleCount": 64936,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Sewing Machine",
+        "md5": "7bd800cb66d6fb18886a4c5cea1b76a6.wav",
+        "sampleCount": 107964,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Shaker",
@@ -1419,6 +1860,13 @@
         "sampleCount": 18560,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Ship Bell",
+        "md5": "4cbd4dc0c55656e7edc4b0f00a3f9738.wav",
+        "sampleCount": 78597,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Sidestick Snare",
@@ -1440,6 +1888,27 @@
         "sampleCount": 28636,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Siren Whistle",
+        "md5": "ea0d6aced66db4b8cafaeb6418ef9cf6.wav",
+        "sampleCount": 20821,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Skid",
+        "md5": "2c22bb6e3c65d9430185fd83ec3db64a.wav",
+        "sampleCount": 23939,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Slide Whistle",
+        "md5": "3858bab5ea1211ff3c5902a4b680f7d8.wav",
+        "sampleCount": 12273,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Small Cowbell",
@@ -1477,6 +1946,13 @@
         "format": "adpcm"
     },
     {
+        "name": "Sneaker Squeak",
+        "md5": "03f61f7d2c32da8a1493a380414710a2.wav",
+        "sampleCount": 8370,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Sneeze1",
         "md5": "31600c613823710b66a74f4dd54c4cdd.wav",
         "sampleCount": 11818,
@@ -1491,6 +1967,41 @@
         "format": ""
     },
     {
+        "name": "Snoring",
+        "md5": "5b1a88cd6db7e239642d7ca8a0d74a1a.wav",
+        "sampleCount": 103974,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Snort",
+        "md5": "362d7440a57cab29914fecea621e50d4.wav",
+        "sampleCount": 16421,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Space Ambience",
+        "md5": "f8903e89c1082987f18fc30b3de6d61a.wav",
+        "sampleCount": 220160,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Space Flyby",
+        "md5": "49c2e36b7258338fb3a8576e646c6738.wav",
+        "sampleCount": 52770,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Space Noise",
+        "md5": "a5cd5e83841aaaf34583d6ad53d551f5.wav",
+        "sampleCount": 58212,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Space Ripple",
         "md5": "ff8b8c3bf841a11fd5fe3afaa92be1b5.wav",
         "sampleCount": 41149,
@@ -1503,6 +2014,13 @@
         "sampleCount": 28672,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Splash",
+        "md5": "6aed5e38d40b87a21d893d26fa2858c0.wav",
+        "sampleCount": 46080,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Splash Cymbal",
@@ -1526,6 +2044,27 @@
         "format": ""
     },
     {
+        "name": "Squeaks",
+        "md5": "62244fb9600ee90c780875deba2ba24f.wav",
+        "sampleCount": 53626,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Squeaky Toy",
+        "md5": "09d36c3c7531a0a1224437f3994bad40.wav",
+        "sampleCount": 9982,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Squish Pop",
+        "md5": "853cc25eb47a35c88e3a1fe88b171ed4.wav",
+        "sampleCount": 9355,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "String Accent",
         "md5": "c1b5c86a10f43f87746b1c305d4fd8df.wav",
         "sampleCount": 16896,
@@ -1540,11 +2079,25 @@
         "format": ""
     },
     {
+        "name": "Suction Cup",
+        "md5": "76b9d125d013562dc4f423525b028a19.wav",
+        "sampleCount": 4882,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Suspense",
         "md5": "12f86e0188510860970e04df45370c1d.wav",
         "sampleCount": 16659,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Tada",
+        "md5": "10eed5b6b49ec7baf1d4b3b3fad0ac99.wav",
+        "sampleCount": 55125,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Tambura",
@@ -1582,6 +2135,55 @@
         "format": "adpcm"
     },
     {
+        "name": "Telephone Ring",
+        "md5": "276f97d3a9d0f9938b37db8225af97f5.wav",
+        "sampleCount": 74666,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Telephone Ring2",
+        "md5": "d0096aa9ecc28c0729a99b0349399371.wav",
+        "sampleCount": 25373,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Teleport",
+        "md5": "2d625187556c4323169fc1a8f29a7a7d.wav",
+        "sampleCount": 110250,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Teleport2",
+        "md5": "7e5019890a930f3535604cf9cad63ba4.wav",
+        "sampleCount": 15898,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Teleport3",
+        "md5": "58f76f299a1df2373d4fca3614221186.wav",
+        "sampleCount": 95440,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Tennis Hit",
+        "md5": "01bd4d670cd586613705ee8273f22568.wav",
+        "sampleCount": 18176,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Thunder Storm",
+        "md5": "11f13be7e53b2e9116d59344c5efc66a.wav",
+        "sampleCount": 307513,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Tom Drum",
         "md5": "5a8b8678d37a860dd6c08082d5cda3c2.wav",
         "sampleCount": 35803,
@@ -1589,9 +2191,44 @@
         "format": "adpcm"
     },
     {
+        "name": "Toy Honk",
+        "md5": "67aadcd28620ecdcdee2ad8eeebefa20.wav",
+        "sampleCount": 10726,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Toy Zing",
+        "md5": "52cf0926d9bab8774194a37eba636c0e.wav",
+        "sampleCount": 14103,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Traffic",
+        "md5": "c983b482802b15a80983786019276c28.wav",
+        "sampleCount": 141977,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Train Whistle",
+        "md5": "50f29d0e028ec5c11210d0e2f91f83dd.wav",
+        "sampleCount": 47594,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Triumph",
         "md5": "072f4d9a3dfd2a082d50ff90ac7dc8f2.wav",
         "sampleCount": 89280,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Tropical Birds",
+        "md5": "18e5a88512296cd96417449496bd8711.wav",
+        "sampleCount": 546917,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -1617,9 +2254,37 @@
         "format": ""
     },
     {
+        "name": "Wand",
+        "md5": "d182adef7a68a5f38f1c78ab7d5afd6a.wav",
+        "sampleCount": 47447,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Water Drop",
-        "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
-        "sampleCount": 8136,
+        "md5": "e133e625fd367d269e76964d4b722fc2.wav",
+        "sampleCount": 15131,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Whinny",
+        "md5": "f9513bacf2fc665de05a8dd9bcb88117.wav",
+        "sampleCount": 46108,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Whistle Thump",
+        "md5": "a3fab5681aedaa678982173ed9ca3d36.wav",
+        "sampleCount": 14441,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Whiz",
+        "md5": "d790e1887515deb4097f0946fbf597ad.wav",
+        "sampleCount": 19243,
         "rate": 22050,
         "format": "adpcm"
     },
@@ -1631,11 +2296,32 @@
         "format": ""
     },
     {
+        "name": "Win",
+        "md5": "db480f6d5ae6d494dbb76ffb9bd995d5.wav",
+        "sampleCount": 44771,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
+        "name": "Wobble",
+        "md5": "9913a64bfb5cfa6bb30ec24002cce56b.wav",
+        "sampleCount": 39950,
+        "rate": 22050,
+        "format": "adpcm"
+    },
+    {
         "name": "Wolf Howl",
         "md5": "5e36d74bb16aa5085b901362788b0fbf.wav",
         "sampleCount": 43008,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Wood Tap",
+        "md5": "de5b41c7080396986873d97e9e47acf6.wav",
+        "sampleCount": 2729,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Wub Beatbox",
@@ -1678,6 +2364,13 @@
         "sampleCount": 5691,
         "rate": 11025,
         "format": ""
+    },
+    {
+        "name": "Zip",
+        "md5": "c5f35ef67ab1baccdd3b7df87b329d99.wav",
+        "sampleCount": 10467,
+        "rate": 22050,
+        "format": "adpcm"
     },
     {
         "name": "Zoop",

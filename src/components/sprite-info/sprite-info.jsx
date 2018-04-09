@@ -39,6 +39,7 @@ class SpriteInfo extends React.Component {
                     <div className={styles.group}>
                         <Label text="Sprite">
                             <BufferedInput
+                                className={styles.spriteInput}
                                 disabled={this.props.disabled}
                                 placeholder="Name"
                                 tabIndex="0"

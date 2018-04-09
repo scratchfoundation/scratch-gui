@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import WavEncoder from 'wav-encoder';
 
 import {connect} from 'react-redux';
 
@@ -9,6 +10,7 @@ import {computeChunkedRMS} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
+import log from '../lib/log.js';
 
 const UNDO_STACK_SIZE = 99;
 
@@ -16,7 +18,7 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'copyCurrentSamples',
+            'copyCurrentBuffer',
             'handleStoppedPlaying',
             'handleChangeName',
             'handlePlay',
@@ -70,13 +72,27 @@ class SoundEditor extends React.Component {
             if (this.undoStack.length >= UNDO_STACK_SIZE) {
                 this.undoStack.shift(); // Drop the first element off the array
             }
-            this.undoStack.push(this.copyCurrentSamples());
+            this.undoStack.push(this.copyCurrentBuffer());
         }
+        // Encode the new sound into a wav so that it can be stored
+        let wavBuffer = null;
+        try {
+            wavBuffer = WavEncoder.encode.sync({
+                sampleRate: sampleRate,
+                channelData: [samples]
+            });
+        } catch (e) {
+            // This error state is mostly for the mock sounds used during testing.
+            // Any incorrect sound buffer trying to get interpretd as a Wav file
+            // should yield this error.
+            log.error(`Encountered error while trying to encode sound update: ${e}`);
+        }
+
         this.resetState(samples, sampleRate);
-        this.props.onUpdateSoundBuffer(
+        this.props.vm.updateSoundBuffer(
             this.props.soundIndex,
-            this.audioBufferPlayer.buffer
-        );
+            this.audioBufferPlayer.buffer,
+            wavBuffer ? new Uint8Array(wavBuffer) : new Uint8Array());
     }
     handlePlay () {
         this.audioBufferPlayer.play(
@@ -96,18 +112,18 @@ class SoundEditor extends React.Component {
         this.setState({playhead});
     }
     handleChangeName (name) {
-        this.props.onRenameSound(this.props.soundIndex, name);
+        this.props.vm.renameSound(this.props.soundIndex, name);
     }
     handleActivateTrim () {
         if (this.state.trimStart === null && this.state.trimEnd === null) {
             this.setState({trimEnd: 0.95, trimStart: 0.05});
         } else {
-            const samples = this.copyCurrentSamples();
+            const {samples, sampleRate} = this.copyCurrentBuffer();
             const sampleCount = samples.length;
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
             const clippedSamples = samples.slice(startIndex, endIndex);
-            this.submitNewSamples(clippedSamples, this.props.sampleRate);
+            this.submitNewSamples(clippedSamples, sampleRate);
         }
     }
     handleUpdateTrimEnd (trimEnd) {
@@ -119,9 +135,12 @@ class SoundEditor extends React.Component {
     effectFactory (name) {
         return () => this.handleEffect(name);
     }
-    copyCurrentSamples () {
+    copyCurrentBuffer () {
         // Cannot reliably use props.samples because it gets detached by Firefox
-        return this.audioBufferPlayer.buffer.getChannelData(0);
+        return {
+            samples: this.audioBufferPlayer.buffer.getChannelData(0),
+            sampleRate: this.audioBufferPlayer.buffer.sampleRate
+        };
     }
     handleEffect (name) {
         const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
@@ -133,18 +152,18 @@ class SoundEditor extends React.Component {
         });
     }
     handleUndo () {
-        this.redoStack.push(this.copyCurrentSamples());
-        const samples = this.undoStack.pop();
+        this.redoStack.push(this.copyCurrentBuffer());
+        const {samples, sampleRate} = this.undoStack.pop();
         if (samples) {
-            this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
         }
     }
     handleRedo () {
-        const samples = this.redoStack.pop();
+        const {samples, sampleRate} = this.redoStack.pop();
         if (samples) {
-            this.undoStack.push(this.copyCurrentSamples());
-            this.submitNewSamples(samples, this.props.sampleRate, true);
+            this.undoStack.push(this.copyCurrentBuffer());
+            this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
         }
     }
@@ -181,24 +200,28 @@ class SoundEditor extends React.Component {
 
 SoundEditor.propTypes = {
     name: PropTypes.string.isRequired,
-    onRenameSound: PropTypes.func.isRequired,
-    onUpdateSoundBuffer: PropTypes.func.isRequired,
     sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
-    soundIndex: PropTypes.number
+    soundIndex: PropTypes.number,
+    vm: PropTypes.shape({
+        updateSoundBuffer: PropTypes.func,
+        renameSound: PropTypes.func
+    })
 };
 
 const mapStateToProps = (state, {soundIndex}) => {
-    const sound = state.vm.editingTarget.sprite.sounds[soundIndex];
-    const audioBuffer = state.vm.getSoundBuffer(soundIndex);
+    const sprite = state.vm.editingTarget.sprite;
+    // Make sure the sound index doesn't go out of range.
+    const index = soundIndex < sprite.sounds.length ? soundIndex : sprite.sounds.length - 1;
+    const sound = state.vm.editingTarget.sprite.sounds[index];
+    const audioBuffer = state.vm.getSoundBuffer(index);
     return {
         soundId: sound.soundId,
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
         name: sound.name,
-        onRenameSound: state.vm.renameSound.bind(state.vm),
-        onUpdateSoundBuffer: state.vm.updateSoundBuffer.bind(state.vm)
+        vm: state.vm
     };
 };
 

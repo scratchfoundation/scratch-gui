@@ -4,7 +4,7 @@
 .wrapper {
     display: flex;
     flex-grow: 1;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     border-top-right-radius: $space;
     background: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -15,5 +15,5 @@
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
-    border-left: 1px solid $ui-pane-border;
+    border-left: 1px solid $ui-black-transparent;
 }

@@ -1,3 +1,5 @@
+@import "../../css/colors.css";
+
 .green-flag {
     box-sizing: content-box;
     width: 1.25rem;
@@ -5,6 +7,7 @@
     padding: 0.375rem;
     border-radius: 0.25rem;
     user-select: none;
+    user-drag: none;
     cursor: pointer;
     transition: 0.2s ease-out;
 }
@@ -17,5 +20,5 @@
 }
 
 .green-flag.is-active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $motion-transparent;
 }

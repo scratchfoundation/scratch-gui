@@ -22,7 +22,7 @@
     display: flex;
     justify-content: flex-start;
     align-content: flex-start;
-    background: $ui-pane-gray;
+    background: $ui-secondary;
     flex-grow: 1;
     flex-wrap: wrap;
     overflow-y: auto;

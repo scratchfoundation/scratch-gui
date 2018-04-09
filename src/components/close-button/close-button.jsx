@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import styles from './close-button.css';
 import closeIcon from './icon--close.svg';
+import backIcon from './icon--back.svg';
 
 const CloseButton = props => (
     <div
@@ -20,10 +21,16 @@ const CloseButton = props => (
         tabIndex="0"
         onClick={props.onClick}
     >
-        <img
-            className={styles.closeIcon}
-            src={closeIcon}
-        />
+        {props.buttonType === 'back' ?
+            <img
+                className={styles.backIcon}
+                src={backIcon}
+            /> :
+            <img
+                className={styles.closeIcon}
+                src={closeIcon}
+            />
+        }
     </div>
 );
 
@@ -31,13 +38,15 @@ CloseButton.SIZE_SMALL = 'small';
 CloseButton.SIZE_LARGE = 'large';
 
 CloseButton.propTypes = {
+    buttonType: PropTypes.oneOf(['back', 'close']),
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     size: PropTypes.oneOf([CloseButton.SIZE_SMALL, CloseButton.SIZE_LARGE])
 };
 
 CloseButton.defaultProps = {
-    size: CloseButton.SIZE_LARGE
+    size: CloseButton.SIZE_LARGE,
+    buttonType: 'close'
 };
 
 export default CloseButton;

@@ -21,9 +21,24 @@ class SeleniumHelper {
         ]);
     }
 
+    get scope () {
+        // List of useful xpath scopes for finding elements
+        return {
+            blocksTab: "*[@id='react-tabs-1']",
+            costumesTab: "*[@id='react-tabs-3']",
+            modal: '*[@class="ReactModalPortal"]',
+            reportedValue: '*[@class="blocklyDropDownContent"]',
+            soundsTab: "*[@id='react-tabs-5']",
+            spriteTile: '*[starts-with(@class,"react-contextmenu-wrapper")]'
+        };
+    }
+
     getDriver () {
+        const chromeCapabilities = webdriver.Capabilities.chrome();
+        chromeCapabilities.set('chromeOptions', {args: ['--headless']});
         this.driver = new webdriver.Builder()
             .forBrowser('chrome')
+            .withCapabilities(chromeCapabilities)
             .build();
         return this.driver;
     }
@@ -70,6 +85,12 @@ class SeleniumHelper {
     }
 
     getLogs (whitelist) {
+        if (!whitelist) {
+            // Default whitelist
+            whitelist = [
+                'The play() request was interrupted by a call to pause()'
+            ];
+        }
         return this.driver.manage()
             .logs()
             .get('browser')

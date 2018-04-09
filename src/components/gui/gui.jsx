@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import MediaQuery from 'react-responsive';
-import {FormattedMessage} from 'react-intl';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
@@ -14,37 +14,51 @@ import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
-
+import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import FeedbackForm from '../feedback-form/feedback-form.jsx';
-import IconButton from '../icon-button/icon-button.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
+import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
+import codeIcon from './icon--code.svg';
+import costumesIcon from './icon--costumes.svg';
+import soundsIcon from './icon--sounds.svg';
 
-const addExtensionMessage = (
-    <FormattedMessage
-        defaultMessage="Extensions"
-        description="Button to add an extension in the target pane"
-        id="gui.gui.addExtension"
-    />
-);
+const messages = defineMessages({
+    addExtension: {
+        id: 'gui.gui.addExtension',
+        description: 'Button to add an extension in the target pane',
+        defaultMessage: 'Add Extension'
+    }
+});
+
+// Cache this value to only retreive it once the first time.
+// Assume that it doesn't change for a session.
+let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        activeTabIndex,
         basePath,
+        blocksTabVisible,
         children,
-        enableExtensions,
+        costumesTabVisible,
         feedbackFormVisible,
-        vm,
-        previewInfoVisible,
+        importInfoVisible,
+        intl,
+        loading,
         onExtensionButtonClick,
-        onTabSelect,
-        tabIndex,
+        onActivateCostumesTab,
+        onActivateSoundsTab,
+        onActivateTab,
+        previewInfoVisible,
+        soundsTabVisible,
+        vm,
         ...componentProps
     } = props;
     if (children) {
@@ -64,7 +78,9 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    const isRendererSupported = Renderer.isSupported();
+    if (isRendererSupported === null) {
+        isRendererSupported = Renderer.isSupported();
+    }
 
     return (
         <Box
@@ -73,6 +89,12 @@ const GUIComponent = props => {
         >
             {previewInfoVisible ? (
                 <PreviewModal />
+            ) : null}
+            {loading ? (
+                <Loader />
+            ) : null}
+            {importInfoVisible ? (
+                <ImportModal />
             ) : null}
             {feedbackFormVisible ? (
                 <FeedbackForm />
@@ -87,20 +109,57 @@ const GUIComponent = props => {
                         <Tabs
                             className={tabClassNames.tabs}
                             forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
+                            selectedIndex={activeTabIndex}
                             selectedTabClassName={tabClassNames.tabSelected}
                             selectedTabPanelClassName={tabClassNames.tabPanelSelected}
-                            onSelect={onTabSelect}
+                            onSelect={onActivateTab}
                         >
                             <TabList className={tabClassNames.tabList}>
-                                <Tab className={tabClassNames.tab}>Blocks</Tab>
-                                <Tab className={tabClassNames.tab}>Costumes</Tab>
-                                <Tab className={tabClassNames.tab}>Sounds</Tab>
+                                <Tab className={tabClassNames.tab}>
+                                    <img
+                                        draggable={false}
+                                        src={codeIcon}
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="Code"
+                                        description="Button to get to the code panel"
+                                        id="gui.gui.codeTab"
+                                    />
+                                </Tab>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateCostumesTab}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={costumesIcon}
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="Costumes"
+                                        description="Button to get to the costumes panel"
+                                        id="gui.gui.costumesTab"
+                                    />
+                                </Tab>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateSoundsTab}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={soundsIcon}
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="Sounds"
+                                        description="Button to get to the sounds panel"
+                                        id="gui.gui.soundsTab"
+                                    />
+                                </Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>
                                     <Blocks
                                         grow={1}
-                                        isVisible={tabIndex === 0} // Blocks tab
+                                        isVisible={blocksTabVisible}
                                         options={{
                                             media: `${basePath}static/blocks-media/`
                                         }}
@@ -108,21 +167,24 @@ const GUIComponent = props => {
                                     />
                                 </Box>
                                 <Box className={styles.extensionButtonContainer}>
-                                    <IconButton
-                                        className={classNames(styles.extensionButton, {
-                                            [styles.hidden]: !enableExtensions
-                                        })}
-                                        img={addExtensionIcon}
-                                        title={addExtensionMessage}
+                                    <button
+                                        className={styles.extensionButton}
+                                        title={intl.formatMessage(messages.addExtension)}
                                         onClick={onExtensionButtonClick}
-                                    />
+                                    >
+                                        <img
+                                            className={styles.extensionButtonIcon}
+                                            draggable={false}
+                                            src={addExtensionIcon}
+                                        />
+                                    </button>
                                 </Box>
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                {tabIndex === 1 ? <CostumeTab vm={vm} /> : null}
+                                {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
-                                {tabIndex === 2 ? <SoundTab vm={vm} /> : null}
+                                {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                             </TabPanel>
                         </Tabs>
                     </Box>
@@ -157,17 +219,25 @@ const GUIComponent = props => {
     );
 };
 GUIComponent.propTypes = {
+    activeTabIndex: PropTypes.number,
     basePath: PropTypes.string,
+    blocksTabVisible: PropTypes.bool,
     children: PropTypes.node,
-    enableExtensions: PropTypes.bool,
+    costumesTabVisible: PropTypes.bool,
     feedbackFormVisible: PropTypes.bool,
+    importInfoVisible: PropTypes.bool,
+    intl: intlShape.isRequired,
+    loading: PropTypes.bool,
+    onActivateCostumesTab: PropTypes.func,
+    onActivateSoundsTab: PropTypes.func,
+    onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    tabIndex: PropTypes.number,
+    soundsTabVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
     basePath: './'
 };
-export default GUIComponent;
+export default injectIntl(GUIComponent);

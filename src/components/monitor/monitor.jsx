@@ -9,7 +9,8 @@ const categories = {
     sensing: '#5CB1D6',
     sound: '#CF63CF',
     looks: '#9966FF',
-    motion: '#4C97FF'
+    motion: '#4C97FF',
+    list: '#FC662C'
 };
 
 const MonitorComponent = props => (
@@ -42,7 +43,9 @@ MonitorComponent.propTypes = {
     componentRef: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     onDragEnd: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number])
 };
 
 MonitorComponent.defaultProps = {

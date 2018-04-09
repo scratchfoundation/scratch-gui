@@ -18,7 +18,9 @@ const SpriteSelectorItem = props => (
             className: classNames(props.className, styles.spriteSelectorItem, {
                 [styles.isSelected]: props.selected
             }),
-            onClick: props.onClick
+            onClick: props.onClick,
+            onMouseEnter: props.onMouseEnter,
+            onMouseLeave: props.onMouseLeave
         }}
         id={`${props.name}-${contextMenuId}`}
     >
@@ -29,6 +31,9 @@ const SpriteSelectorItem = props => (
                 onClick={props.onDeleteButtonClick}
             />
         ) : null }
+        {typeof props.number === 'undefined' ? null : (
+            <div className={styles.number}>{props.number}</div>
+        )}
         {props.costumeURL ? (
             <CostumeCanvas
                 className={styles.spriteImage}
@@ -67,9 +72,12 @@ SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
     costumeURL: PropTypes.string,
     name: PropTypes.string.isRequired,
+    number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     selected: PropTypes.bool.isRequired
 };
 

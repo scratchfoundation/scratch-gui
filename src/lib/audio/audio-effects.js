@@ -38,8 +38,14 @@ class AudioEffects {
             buffer.getChannelData(0).reverse();
             break;
         }
-        const OfflineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-        this.audioContext = new OfflineAudioContext(1, sampleCount, buffer.sampleRate);
+        if (window.OfflineAudioContext) {
+            this.audioContext = new window.OfflineAudioContext(1, sampleCount, buffer.sampleRate);
+        } else {
+            // Need to use webkitOfflineAudioContext, which doesn't support all sample rates.
+            // Resample by adjusting sample count to make room and set offline context to desired sample rate.
+            const sampleScale = 44100 / buffer.sampleRate;
+            this.audioContext = new window.webkitOfflineAudioContext(1, sampleScale * sampleCount, 44100);
+        }
         this.buffer = buffer;
         this.source = this.audioContext.createBufferSource();
         this.source.buffer = this.buffer;

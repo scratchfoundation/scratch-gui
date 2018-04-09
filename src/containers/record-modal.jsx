@@ -73,21 +73,27 @@ class RecordModal extends React.Component {
                 sampleRate: this.state.sampleRate,
                 channelData: [clippedSamples]
             }).then(wavBuffer => {
-                const md5 = String(Math.floor(100000 * Math.random()));
                 const vmSound = {
                     format: '',
-                    md5: `${md5}.wav`,
-                    name: `recording ${this.props.vm.editingTarget.sprite.sounds.length}`
+                    dataFormat: 'wav',
+                    rate: this.state.sampleRate,
+                    sampleCount: clippedSamples.length
                 };
 
-                // Load the encoded .wav into the storage cache
+                // Load the encoded .wav into the storage cache and get resulting
+                // md5 from storage
                 const storage = this.props.vm.runtime.storage;
-                storage.builtinHelper.cache(
+                const md5 = storage.builtinHelper.cache(
                     storage.AssetType.Sound,
                     storage.DataFormat.WAV,
                     new Uint8Array(wavBuffer),
-                    md5
                 );
+
+                // update vmSound object with md5 property
+                vmSound.md5 = `${md5}.${vmSound.dataFormat}`;
+                // The VM will update the sound name to a fresh name
+                // if the following is already taken
+                vmSound.name = 'recording1';
 
                 this.props.vm.addSound(vmSound).then(() => {
                     this.props.onClose();

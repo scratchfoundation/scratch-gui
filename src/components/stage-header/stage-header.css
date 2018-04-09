@@ -35,12 +35,12 @@
 
 .stage-button {
     display: block;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     border-radius: .25rem;
     box-sizing: content-box;
     width: 1.25rem;
     height: 1.25rem;
-    background: #FFF;
+    background: $ui-white;
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;

@@ -1,3 +1,5 @@
+@import "../../css/colors.css";
+
 .green-flag {
     box-sizing: content-box;
     width: 1.25rem;
@@ -18,5 +20,5 @@
 }
 
 .green-flag.is-active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $motion-transparent;
 }

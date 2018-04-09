@@ -9,13 +9,13 @@
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background-color: hsla(215, 100%, 65%, .9);
+    background-color: $ui-modal-overlay;
 }
 
 .modal-content {
     margin: 100px auto;
     outline: none;
-    border: .25rem solid hsla(0, 100%, 100%, .25);
+    border: .25rem solid $ui-white-transparent;
     padding: 0;
     border-radius: $space;
     user-select: none;
@@ -34,7 +34,7 @@
 }
 
 .body {
-    background: $ui-pane-gray;
+    background: $ui-white;
     padding: 1.5rem 2.25rem;
     text-align: center;
 }
@@ -68,8 +68,8 @@
 }
 
 .button-row button.view-project-button {
-    background: $import-primary;
-    border-color: $import-primary;
+    background: $pen-primary;
+    border-color: $pen-primary;
     color: white;
 }
 

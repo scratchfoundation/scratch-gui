@@ -16,7 +16,7 @@
     background: white;
     border-width: 2px;
     border-style: solid;
-    border-color: #e9eef2;
+    border-color: $ui-black-transparent;
     border-radius: $space;
     text-align: center;
     cursor: pointer;
@@ -24,7 +24,7 @@
 
 .library-item:hover {
     border-width: 2px;
-    border-color: #1dacf4;
+    border-color: $motion-primary;
 }
 
 .disabled {
@@ -33,7 +33,7 @@
 }
 
 .disabled:hover {
-    border-color: #e9eef2;
+    border-color: $ui-black-transparent;
 }
 
 .library-item-image-container-wrapper {
@@ -105,5 +105,5 @@
     padding: .5rem 1rem;
     font-size: .875rem;
     font-weight: bold;
-    color: #FFF;
+    color: $ui-white;
 }

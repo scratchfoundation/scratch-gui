@@ -1,15 +1,13 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-$border-style: 1px solid $ui-pane-border;
-
 .blocks :global(.injectionDiv){
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    border: $border-style;
+    border: 1px solid $ui-black-transparent;
     border-top-right-radius: $space;
 }
 
@@ -18,14 +16,14 @@ $border-style: 1px solid $ui-pane-border;
 }
 
 .blocks :global(.blocklyToolboxDiv) {
-    border-right: $border-style;
-    border-bottom: $border-style;
+    border-right: 1px solid $ui-black-transparent;
+    border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
     height: calc(100% - 3.25rem) !important;
 }
 
 .blocks :global(.blocklyFlyout) {
-    border-right: $border-style;
+    border-right: 1px solid $ui-black-transparent;
     box-sizing: content-box;
 }
 

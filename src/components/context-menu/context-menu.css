@@ -7,10 +7,10 @@
     margin: 2px 0 0; /* To keep the menu below the cursor comfortably */
     font-size: 0.85rem;
     text-align: left;
-    background-color: #fff;
-    border: 1px solid $ui-pane-border;
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
     border-radius: calc($space / 2);
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px 1px $ui-black-transparent;
     pointer-events: none;
     transition: opacity 0.2s ease;
     z-index: 100;

@@ -12,7 +12,7 @@
 
     border-width: 1px;
     border-style: solid;
-    border-color: $form-border;
+    border-color: $ui-black-transparent;
     border-radius: 2rem;
 
     outline: none;
@@ -31,9 +31,13 @@
     min-width: 0;
 }
 
+.input-form:hover {
+    border-color: $motion-primary;
+}
+
 .input-form:focus {
-    border-color: #4c97ff;
-    box-shadow: 0 0 0 0.2rem $motion-transparent;
+    border-color: $motion-primary;
+    box-shadow: 0 0 0 0.25rem $motion-transparent;
 }
 
 .input-small {

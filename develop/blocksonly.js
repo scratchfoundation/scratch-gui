@@ -24,7 +24,7 @@ var _controls = __webpack_require__(29);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(94);
+var _blocks = __webpack_require__(93);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 

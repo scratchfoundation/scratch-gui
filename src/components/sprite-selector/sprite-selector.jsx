@@ -10,7 +10,6 @@ import ActionMenu from '../action-menu/action-menu.jsx';
 
 import styles from './sprite-selector.css';
 
-import cameraIcon from '../action-menu/icon--camera.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import spriteIcon from '../action-menu/icon--sprite.svg';
@@ -35,11 +34,6 @@ const messages = defineMessages({
     addSpriteFromFile: {
         id: 'gui.spriteSelector.addSpriteFromFile',
         description: 'Button to add a sprite in the target pane from file',
-        defaultMessage: 'Coming Soon'
-    },
-    addSpriteFromCamera: {
-        id: 'gui.spriteSelector.addSpriteFromCamera',
-        description: 'Button to add a sprite in the target pane from camera',
         defaultMessage: 'Coming Soon'
     }
 });
@@ -126,9 +120,6 @@ const SpriteSelectorComponent = function (props) {
                 img={spriteIcon}
                 moreButtons={[
                     {
-                        title: intl.formatMessage(messages.addSpriteFromCamera),
-                        img: cameraIcon
-                    }, {
                         title: intl.formatMessage(messages.addSpriteFromFile),
                         img: fileUploadIcon
                     }, {

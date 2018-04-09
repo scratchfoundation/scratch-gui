@@ -145,7 +145,7 @@ export default [
         img: deck3,
         steps: [
             {
-                title: 'Add a turn block',
+                title: 'Get a turn block',
                 image: step_dragTurn,
                 zoomedImage: step_dragTurnZoomed
             }, {
@@ -161,18 +161,9 @@ export default [
                 image: step_move,
                 zoomedImage: step_moveZoomed
             }, {
-                title: 'Experiment with the color effect block',
+                title: 'Try the color effect block',
                 image: step_color,
                 zoomedImage: step_colorZoomed
-            }, {
-                title: '🗣 Use the loudness block and make some noise!',
-                image: step_loudness
-            }, {
-                title: 'Bounce when you reach the edge',
-                image: step_edge
-            }, {
-                title: 'Add a green flag block to the top',
-                image: step_greenflag
             }
         ]
     },
@@ -187,10 +178,10 @@ export default [
                 title: 'Use the green flag block to start',
                 image: greenFlag
             }, {
-                title: 'Add another character',
+                title: 'Add another sprite',
                 image: addSprite
             }, {
-                title: 'What will they say?',
+                title: 'What will your new sprite say?',
                 image: anotherSay
             }, {
                 title: 'Start the conversation',

@@ -6,12 +6,22 @@ import whenClicked from './intro/when-clicked.gif';
 import addSay from './intro/add-say.gif';
 import dragGlide from './intro/drag-glide.gif';
 
-import clickSay from './story/click-say.gif';
-import greenFlag from './story/green-flag.gif';
-import addSprite from './story/add-sprite.gif';
-import anotherSay from './story/another-say.gif';
+import step_addSay from './story/add-say.gif';
+import step_addSayZoomed from './story/add-say--zoomed.gif';
+
+import step_greenFlag from './story/green-flag.gif';
+import step_greenFlagZoomed from './story/green-flag--zoomed.gif';
+
+import step_addSprite from './story/add-sprite.gif';
+import step_addSpriteZoomed from './story/add-sprite--zoomed.gif';
+
+import step_anotherSay from './story/another-say.gif';
+import step_anotherSayZoomed from './story/another-say--zoomed.gif';
+
 import bothSay from './story/both-say.gif';
-import addWait from './story/add-wait.gif';
+
+import step_addWait from './story/add-wait.gif';
+import step_addWaitZoomed from './story/add-wait--zoomed.gif';
 
 import step_dragTurn from './zoom/drag-turn.gif';
 import step_dragTurnZoomed from './zoom/drag-turn--zoomed.gif';
@@ -32,11 +42,23 @@ import step_loudness from './zoom/loudness.gif';
 import step_edge from './zoom/edge.gif';
 import step_greenflag from './zoom/green-flag.gif';
 import step_stop from './zoom/stop.gif';
-import step_zoom from './zoom/zoom.gif';
 
-import deck1 from './intro/when-clicked.gif';
-import deck2 from './story/both-say.gif';
-import deck3 from './zoom/zoom.gif';
+import step_randomPosition from './clicker/random-position.gif';
+import step_randomPositionZoomed from './clicker/random-position--zoomed.gif';
+import step_whenSpriteClicked from './clicker/when-sprite-clicked.gif';
+import step_whenSpriteClickedZoomed from './clicker/when-sprite-clicked--zoomed.gif';
+import step_tryClickingZoomed from './clicker/try-clicking--zoomed.gif';
+import step_tryClicking from './clicker/try-clicking.gif';
+import step_addSound from './clicker/add-sound.gif';
+import step_addSoundZoomed from './clicker/add-sound--zoomed.gif';
+import step_keepScore from './clicker/keep-score.gif';
+import step_keepScoreZoomed from './clicker/keep-score--zoomed.gif';
+import step_resetScore from './clicker/reset-score.gif';
+import step_resetScoreZoomed from './clicker/reset-score--zoomed.gif';
+
+import clicker_thumb from './clicker/clicker-game.gif';
+import story_thumb from './story/dialog.gif';
+import zoom_thumb from './zoom/zoom-thumb.gif';
 
 import library_zoom from './zoom/zoom-around--library.gif';
 import library_story from './story/story--library.gif';
@@ -114,42 +136,13 @@ export default [
             ]
         },
         */
-
-    /*
-        {
-            name: 'Clicker game',
-            img: deck2,
-            steps: [
-                {
-                    title: "Move randomly",
-                    description: (
-                        <span>Try the <span className={styles.motionBlock} onClick={this.onMotionClick}>go to random position</span> block</span>
-                    ),
-                    image: addWait,
-                }, {
-                    title: "Move when clicked",
-                    description: (
-                        <span>Add a <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
-                    ),
-                    image: addWait,
-                }, {
-                    title: "Add a sound",
-                    description: (
-                        <span>Add a <span className={styles.soundBlock} onClick={this.onSoundsClick}>play sound</span> block</span>
-                    ),
-                    image: addWait,
-                }
-            ]
-        },
-        */
-
     {
         name: 'Zoom around',
-        img: deck3,
+        img: zoom_thumb,
         libraryImg: library_zoom,
         steps: [
             {
-                title: 'Add a turn block',
+                title: 'Get a turn block',
                 image: step_dragTurn,
                 zoomedImage: step_dragTurnZoomed
             }, {
@@ -165,44 +158,71 @@ export default [
                 image: step_move,
                 zoomedImage: step_moveZoomed
             }, {
-                title: 'Experiment with the color effect block',
+                title: 'Try the color effect block',
                 image: step_color,
                 zoomedImage: step_colorZoomed
-            }, {
-                title: '🗣 Use the loudness block and make some noise!',
-                image: step_loudness
-            }, {
-                title: 'Bounce when you reach the edge',
-                image: step_edge
-            }, {
-                title: 'Add a green flag block to the top',
-                image: step_greenflag
             }
         ]
     },
     {
         name: 'Tell a story',
-        img: deck2,
+        img: story_thumb,
         libraryImg: library_story,
         steps: [
             {
                 title: 'Add a say block',
-                image: clickSay
+                image: step_addSay,
+                zoomedImage: step_addSayZoomed
             }, {
                 title: 'Use the green flag block to start',
-                image: greenFlag
+                image: step_greenFlag,
+                zoomedImage: step_greenFlagZoomed
             }, {
-                title: 'Add another character',
-                image: addSprite
+                title: 'Add another sprite',
+                image: step_addSprite,
+                zoomedImage: step_addSpriteZoomed
             }, {
-                title: 'What will they say?',
-                image: anotherSay
+                title: 'What will your new sprite say?',
+                image: step_anotherSay,
+                zoomedImage: step_anotherSayZoomed
             }, {
                 title: 'Start the conversation',
                 image: bothSay
             }, {
                 title: 'Use a wait block to take turns',
-                image: addWait
+                image: step_addWait,
+                zoomedImage: step_addWaitZoomed
+            }
+        ]
+    },
+    {
+        name: 'Clicker game',
+        img: clicker_thumb,
+        steps: [
+            {
+                title: "Go to a random position",
+                image: step_randomPosition,
+                zoomedImage: step_randomPositionZoomed
+            }, {
+                title: "Add a \"when this sprite clicked\" block",
+                image: step_whenSpriteClicked,
+                zoomedImage: step_whenSpriteClickedZoomed
+            }, {
+                title: "Click your sprite to make it go",
+                image: step_tryClicking,
+                zoomedImage: step_tryClickingZoomed
+            }, {
+                title: "Add a sound",
+                image: step_addSound,
+                zoomedImage: step_addSoundZoomed
+            }, {
+                title: "Keep score",
+                image: step_keepScore,
+                zoomedImage: step_keepScoreZoomed
+            }, {
+                title: "Reset the score",
+                image: step_resetScore,
+                zoomedImage: step_resetScoreZoomed
             }
         ]
     }

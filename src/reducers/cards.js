@@ -14,8 +14,8 @@ const initialState = {
     activeDeckIndex: 0,
     step: 0,
     lightboxVisible: false,
-    x: 340,
-    y: 400
+    x: 292,
+    y: 365
 };
 
 const reducer = function (state, action) {

@@ -66,12 +66,21 @@ class LibraryItem extends React.PureComponent {
                         </div>
                     ) : null}
                     {this.props.videoURL ? (
+                            // <iframe
+                            //     width="300"
+                            //     height="250"
+                            //     src={`${this.props.videoURL}?rel=0&amp;showinfo=0`}
+                            //     frameBorder="0"
+                            //     allow="autoplay; encrypted-media"
+                            //     allowFullScreen>
+                            //     Video not available.
+                            // </iframe>
                             <iframe
                                 width="300"
                                 height="250"
-                                src={`${this.props.videoURL}?rel=0&amp;showinfo=0`}
+                                src={`${this.props.vimeoURL}?title=0&byline=0&portrait=0;hd_off=0&"`}
                                 frameBorder="0"
-                                allow="autoplay; encrypted-media"
+                                // allow="autoplay; encrypted-media"
                                 allowFullScreen>
                                 Video not available.
                             </iframe>

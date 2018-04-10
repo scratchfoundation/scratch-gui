@@ -77,6 +77,7 @@ class LibraryComponent extends React.Component {
                                 key={`item_${index}`}
                                 name={dataItem.name}
                                 videoURL={dataItem.videoURL}
+                                vimeoURL={dataItem.vimeoURL}
                                 onBlur={this.handleBlur}
                                 onFocus={this.handleFocus}
                                 onMouseEnter={this.handleMouseEnter}

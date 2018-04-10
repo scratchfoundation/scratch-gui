@@ -76,9 +76,9 @@ const SpriteSelectorItem = props => (
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
     costumeURL: PropTypes.string,
+    details: PropTypes.string,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
-    details: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,

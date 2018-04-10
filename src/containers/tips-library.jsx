@@ -4,6 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import decksLibraryContent from '../lib/libraries/decks/index';
+import tipsLibraryContent from '../lib/libraries/tips/index';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
@@ -27,19 +28,23 @@ class TipsLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        this.props.onActivateDeck(item.index);
+        if (!item.videoURL) {
+            this.props.onActivateDeck(item.index);
+        }
     }
     render () {
         const decksLibraryThumbnailData = decksLibraryContent.map((deck, i) => ({
-            rawURL: deck.img,
+            rawURL: deck.libraryImg,
             index: i,
+            featured: true,
             ...deck
-        }));
+        })).concat(tipsLibraryContent);
+
         if (!this.props.visible) return null;
         return (
             <LibraryComponent
                 data={decksLibraryThumbnailData}
-                title="How To Library"
+                title="Tips"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

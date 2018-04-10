@@ -38,6 +38,9 @@ import deck1 from './intro/when-clicked.gif';
 import deck2 from './story/both-say.gif';
 import deck3 from './zoom/zoom.gif';
 
+import library_zoom from './zoom/zoom-around--library.gif';
+import library_story from './story/story--library.gif';
+
 export default [
     /*
         {
@@ -143,6 +146,7 @@ export default [
     {
         name: 'Zoom around',
         img: deck3,
+        libraryImg: library_zoom,
         steps: [
             {
                 title: 'Add a turn block',
@@ -179,6 +183,7 @@ export default [
     {
         name: 'Tell a story',
         img: deck2,
+        libraryImg: library_story,
         steps: [
             {
                 title: 'Add a say block',

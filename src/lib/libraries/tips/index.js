@@ -4,27 +4,43 @@ import nameImage from './animate-a-name.png';
 
 export default [
     {
-        name: 'Make Music',
-        externalURL: 'https://resources.scratch.mit.edu/www/cards/en/nameCards.pdf',
-        videoURL: 'https://player.vimeo.com/video/163472795?title=0&byline=0&portrait=0;hd_off=0&',
-        iconURL: musicImage,
-        description: 'Choose instruments, add sounds, and press keys to play music.',
-        featured: true
+        name: "Glide Around",
+        // description: "With glide block you can move your character from place to place!",
+        videoURL: "https://www.youtube.com/embed/WUcmsMEIbGg",
+        vimeoURL: "https://player.vimeo.com/video/261304936",
+        featured: true,
+        keepOpen: true
     },
     {
-        name: "Let's Dance",
-        externalURL: 'https://resources.scratch.mit.edu/www/cards/en/danceCards.pdf',
-        videoURL: 'https://player.vimeo.com/video/124055657?title=0&byline=0&portrait=0;hd_off=0&',
-        iconURL: danceImage,
-        description: 'Design an animated dance scene with music and dance moves.',
-        featured: true
+        name: "Change Size",
+        // description: "With the change size block you can make a sprite get bigger or smaller!",
+        videoURL: "https://www.youtube.com/embed/NiK9KcghZ9s",
+        vimeoURL: "https://player.vimeo.com/video/261304523",
+        featured: true,
+        keepOpen: true
     },
     {
-        name: 'Animate a Name',
-        externalURL: 'https://resources.scratch.mit.edu/www/cards/en/nameCards.pdf',
-        videoURL: 'https://player.vimeo.com/video/111342687?title=0&byline=0&portrait=0;hd_off=0&',
-        iconURL: nameImage,
-        description: 'Animate the letters of your username, initials, or favorite word.',
-        featured: true
+        name: "Change Costume",
+        // description: "Change costumes to animate your character! ",
+        videoURL: "https://www.youtube.com/embed/AUBoFxQDPWA",
+        vimeoURL: "https://player.vimeo.com/video/262233006",
+        featured: true,
+        keepOpen: true
+    },
+    {
+        name: "Hide & Show ",
+        // description: "With hide and show you can make your character disappear and appear! ",
+        videoURL: "https://www.youtube.com/embed/jpvqnlfsDTU",
+        vimeoURL: "https://player.vimeo.com/video/263156466",
+        featured: true,
+        keepOpen: true
+    },
+    {
+        name: "Add A Backdrop",
+        // description: "Where do you want your project to take place? ",
+        videoURL: "https://www.youtube.com/embed/WpV05Q7AbPU",
+        vimeoURL: "https://player.vimeo.com/video/263156573",
+        featured: true,
+        keepOpen: true
     }
 ];

@@ -31,7 +31,9 @@ class LibraryComponent extends React.Component {
         this.handleMouseEnter(id);
     }
     handleSelect (id) {
-        this.props.onRequestClose();
+        if (!this.getFilteredData()[id].keepOpen) {
+            this.props.onRequestClose();
+        }
         this.props.onItemSelected(this.getFilteredData()[id]);
     }
     handleMouseEnter (id) {
@@ -74,6 +76,7 @@ class LibraryComponent extends React.Component {
                                 id={index}
                                 key={`item_${index}`}
                                 name={dataItem.name}
+                                videoURL={dataItem.videoURL}
                                 onBlur={this.handleBlur}
                                 onFocus={this.handleFocus}
                                 onMouseEnter={this.handleMouseEnter}

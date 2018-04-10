@@ -7,7 +7,7 @@
     justify-content: center;
 
     overflow: hidden;  /* Mask the icon animation */
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $ui-black-transparent;
     border-radius: 50%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     user-select: none;
@@ -17,20 +17,20 @@
 
 .close-button.large:hover {
     transform: scale(1.1, 1.1);
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 4px $ui-black-transparent;
 }
 
 .small {
     width: 0.825rem;
     height: 0.825rem;
-    color: #FFF;
+    color: $ui-white;
     background-color: $motion-primary;
 }
 
 .large {
     width: 1.75rem;
     height: 1.75rem;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px $ui-black-transparent;
 }
 
 .close-icon {

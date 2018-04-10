@@ -8,19 +8,19 @@
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: $ui-modal-overlay;
 }
 
 .modal-content {
     margin: 100px auto;
     outline: none;
-    border: 3px solid rgb(126, 133, 151);
+    border: 4px solid $ui-white-transparent;
     padding: 0;
     border-radius: $space;
     user-select: none;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #5d647a;
+    color: $text-primary;
     overflow: hidden;
 }
 
@@ -54,7 +54,7 @@ $sides: 20rem;
     align-items: center;
     padding: 1rem;
     text-decoration: none;
-    color: white;
+    color: $ui-white;
     user-select: none;
 }
 

@@ -31,7 +31,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                     storage
                         .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
                         .then(projectAsset => projectAsset && this.setState({
-                            projectData: projectAsset.data.toString(),
+                            projectData: projectAsset.data,
                             fetchingProject: false
                         }))
                         .catch(err => log.error(err));

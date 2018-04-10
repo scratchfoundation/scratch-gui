@@ -29,7 +29,7 @@
 
 .input-group {
     padding-right: calc(2 * $space);
-    border-right: 1px dashed $ui-pane-border;
+    border-right: 1px dashed $ui-black-transparent;
 }
 
 .waveform-container {
@@ -41,7 +41,7 @@
     position: relative;
 
     background: hsla(300, 53%, 60%, 0.15);
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     border-radius: 5px;
     padding: 3px;
 }
@@ -54,7 +54,7 @@ $border-radius: 0.25rem;
     outline: none;
     background: white;
     border-radius: $border-radius;
-    border: 1px solid #ddd;
+    border: 1px solid $ui-black-transparent;
     cursor: pointer;
     font-size: 0.85rem;
     transition: 0.2s;
@@ -73,7 +73,7 @@ $border-radius: 0.25rem;
     outline: none;
     background: white;
     border-radius: 100%;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     cursor: pointer;
     padding: 0.75rem;
 }
@@ -135,7 +135,7 @@ $border-radius: 0.25rem;
 }
 
 .button-group .button:first-of-type {
-    border-left: 1px solid #ddd;
+    border-left: 1px solid $ui-black-transparent;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
 }

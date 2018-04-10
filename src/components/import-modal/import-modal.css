@@ -9,13 +9,13 @@
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background-color: hsla(215, 100%, 65%, .9);
+    background-color: $ui-modal-overlay;
 }
 
 .modal-content {
     margin: 100px auto;
     outline: none;
-    border: .25rem solid hsla(0, 100%, 100%, .25);
+    border: .25rem solid $ui-white-transparent;
     padding: 0;
     border-radius: $space;
     user-select: none;
@@ -44,7 +44,7 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $import-primary;
+    background-color: $pen-primary;
 }
 
 .header-item {
@@ -82,7 +82,7 @@ $sides: 20rem;
 }
 
 .body {
-    background: $ui-pane-gray;
+    background: $ui-white;
     padding: 1.5rem 2.25rem;
     text-align: center;
 }
@@ -112,7 +112,7 @@ $sides: 20rem;
     width: 100%;
     padding: 0 1rem;
     height: 3rem;
-    color: #6b6b6b;
+    color: $text-primary;
     font-size: .875rem;
     outline: none;
     border: none;
@@ -120,7 +120,7 @@ $sides: 20rem;
 
 .input-row input::placeholder {
     font-style: italic;
-    color: rgba(87,94,117,0.5);
+    color: $text-primary-transparent;
 }
 
 .input-row button {
@@ -128,12 +128,12 @@ $sides: 20rem;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-    border: 0px solid $import-primary;
+    border: 0px solid $pen-primary;
     outline: none;
 }
 
 .input-row button.ok-button {
-    background: $import-primary;
+    background: $pen-primary;
     color: white;
 }
 

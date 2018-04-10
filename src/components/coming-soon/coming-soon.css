@@ -8,9 +8,9 @@
 
 .coming-soon {
     background-color: $data-primary !important;
-    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border: 1px solid $ui-black-transparent) !important;
     border-radius: .25rem !important;
-    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
+    box-shadow: 0 0 .5rem $ui-black-transparent !important;
     padding: .75rem 1rem !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 1rem !important;
@@ -20,10 +20,10 @@
 
 .coming-soon:after {
     content: "";
-    border-top: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-top: 1px solid $ui-black-transparent !important;
     border-left: 0 !important;
     border-bottom: 0 !important;
-    border-right: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-right: 1px solid $ui-black-transparent !important;
     border-radius: .25rem;
     background-color: $data-primary !important;
     height: 1rem !important;

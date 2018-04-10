@@ -8,6 +8,8 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
+import SaveButton from '../../containers/save-button.jsx';
+import LoadButton from '../../containers/load-button.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
 
@@ -53,7 +55,7 @@ const MenuBar = props => (
                         tooltipClassName={styles.comingSoonTooltip}
                         tooltipId="file-menu"
                     >
-                        <div className={classNames(styles.fileMenu)}>File</div>
+                        <SaveButton className={classNames(styles.fileMenu)} />
                     </ComingSoonTooltip>
                 </div>
                 <div className={classNames(styles.menuItem)}>
@@ -63,7 +65,7 @@ const MenuBar = props => (
                         tooltipClassName={styles.comingSoonTooltip}
                         tooltipId="edit-menu"
                     >
-                        <div className={classNames(styles.editMenu)}>Edit</div>
+                        <LoadButton className={classNames(styles.editMenu)} />
                     </ComingSoonTooltip>
                 </div>
             </div>

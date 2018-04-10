@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ButtonComponent from '../components/button/button.jsx';
-import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';
-
-
 class SaveButton extends React.Component {
     constructor (props) {
         super(props);
@@ -34,24 +30,18 @@ class SaveButton extends React.Component {
             document.body.removeChild(saveLink);
         });
     }
+    // TODO add back `onClick={this.handleClick}` when enabling button
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
-            <ComingSoonTooltip
-                place="bottom"
-                tooltipId="save-button"
+            <div
+                {...props}
             >
-                <ButtonComponent
-                    disabled
-                    onClick={this.handleClick}
-                    {...props}
-                >
-                    Save
-                </ButtonComponent>
-            </ComingSoonTooltip>
+                File
+            </div>
         );
     }
 }

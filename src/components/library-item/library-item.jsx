@@ -65,10 +65,22 @@ class LibraryItem extends React.PureComponent {
                             />
                         </div>
                     ) : null}
-                    <img
-                        className={styles.featuredImage}
-                        src={this.props.iconURL}
-                    />
+                    {this.props.videoURL ? (
+                            <iframe
+                                width="300"
+                                height="250"
+                                src={`${this.props.videoURL}?rel=0&amp;showinfo=0`}
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen>
+                                Video not available.
+                            </iframe>
+                    ) : (
+                        <img
+                            className={styles.featuredImage}
+                            src={this.props.iconURL}
+                        />
+                    )}
                 </div>
                 <div
                     className={styles.featuredText}

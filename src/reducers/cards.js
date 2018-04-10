@@ -11,7 +11,7 @@ const DRAG_CARD = 'scratch-gui/navigation/DRAG_CARD';
 const initialState = {
     visible: true,
     content: decks,
-    activeDeckIndex: 0,
+    activeDeckIndex: null,
     step: 0,
     lightboxVisible: false,
     x: 292,

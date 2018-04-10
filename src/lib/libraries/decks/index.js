@@ -62,6 +62,7 @@ import zoom_thumb from './zoom/zoom-thumb.gif';
 
 import library_zoom from './zoom/zoom-around--library.gif';
 import library_story from './story/story--library.gif';
+import library_game from './clicker/game--library.gif';
 
 export default [
     /*
@@ -198,6 +199,7 @@ export default [
     {
         name: 'Clicker game',
         img: clicker_thumb,
+        libraryImg: library_game,
         steps: [
             {
                 title: "Go to a random position",

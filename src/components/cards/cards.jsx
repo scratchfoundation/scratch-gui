@@ -32,81 +32,13 @@ const Cards = props => {
     } = props;
 
     let inner;
-    if (activeDeckIndex === null) return;
-    const steps = content[activeDeckIndex].steps;
-
-    const hasPrev = step > 0;
-    const hasNext = step <= steps.length;
-
-    if (step !== steps.length) {
-        const {
-            title,
-            description,
-            image,
-            zoomedImage
-        } = steps[step];
-
-        // const exitDeck = () => onActivateDeck(null);
-
+    if (activeDeckIndex === null) {
         inner = (
             <div className={styles.card}>
                 <div className={styles.headerButtons}>
                     <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
                     <div className={styles.stepTitle}>
-                        {title}
-                    </div>
-                    <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
-                </div>
-                {description ? (
-                    <div className={styles.stepDescription}>
-                        {description}
-                    </div>
-                ) : null}
-                <div
-                    className={styles.stepImage}
-                    onClick={onToggleLightbox}
-                >
-                    <img
-                        draggable={false}
-                        src={image}
-                    />
-                    <img className={styles.zoomIcon} src={zoomIcon} />
-                    <Lightbox
-                        backdropClosesModal={true}
-                        images={[
-                            { src: zoomedImage || image }
-                        ]}
-                        isOpen={lightboxVisible}
-                        onClose={onToggleLightbox}
-                        onClickImage={onToggleLightbox}
-                        showImageCount={false}
-                    />
-                </div>
-                {hasNext ? (
-                    <div className={styles.rightButton} onClick={onNextStep}>
-                        <img
-                            draggable={false}
-                            src={nextIcon}
-                        />
-                    </div>
-                ) : null}
-                {hasPrev ? (
-                    <div className={styles.leftButton} onClick={onPrevStep}>
-                        <img
-                            draggable={false}
-                            src={prevIcon}
-                        />
-                    </div>
-                ) : null}
-            </div>
-        );
-    } else {
-        inner = (
-            <div className={styles.card}>
-                <div className={styles.headerButtons}>
-                    <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
-                    <div className={styles.stepTitle}>
-                        How Tos
+                        Try one of these
                     </div>
                     <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
                 </div>
@@ -126,20 +58,116 @@ const Cards = props => {
                         ))}
                     </div>
                 </div>
-                <div className={styles.seeAll}>
-                    <div className={styles.seeAllButton} onClick={onExitDeck}>
-                        See all
-                        <img src={nextIcon} />
-                    </div>
-                </div>
-                <div className={styles.leftButton} onClick={onPrevStep}>
-                    <img
-                        draggable={false}
-                        src={prevIcon}
-                    />
-                </div>
             </div>
         );
+    } else {
+        const steps = content[activeDeckIndex].steps;
+
+        const hasPrev = step > 0;
+        const hasNext = step <= steps.length;
+        if (step !== steps.length) {
+            const {
+                title,
+                description,
+                image,
+                zoomedImage
+            } = steps[step];
+
+            // const exitDeck = () => onActivateDeck(null);
+
+            inner = (
+                <div className={styles.card}>
+                    <div className={styles.headerButtons}>
+                        <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                        <div className={styles.stepTitle}>
+                            {title}
+                        </div>
+                        <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
+                    </div>
+                    {description ? (
+                        <div className={styles.stepDescription}>
+                            {description}
+                        </div>
+                    ) : null}
+                    <div
+                        className={styles.stepImage}
+                        onClick={onToggleLightbox}
+                    >
+                        <img
+                            draggable={false}
+                            src={image}
+                        />
+                        <img className={styles.zoomIcon} src={zoomIcon} />
+                        <Lightbox
+                            backdropClosesModal={true}
+                            images={[
+                                { src: zoomedImage || image }
+                            ]}
+                            isOpen={lightboxVisible}
+                            onClose={onToggleLightbox}
+                            onClickImage={onToggleLightbox}
+                            showImageCount={false}
+                        />
+                    </div>
+                    {hasNext ? (
+                        <div className={styles.rightButton} onClick={onNextStep}>
+                            <img
+                                draggable={false}
+                                src={nextIcon}
+                            />
+                        </div>
+                    ) : null}
+                    {hasPrev ? (
+                        <div className={styles.leftButton} onClick={onPrevStep}>
+                            <img
+                                draggable={false}
+                                src={prevIcon}
+                            />
+                        </div>
+                    ) : null}
+                </div>
+            );
+        } else {
+            inner = (
+                <div className={styles.card}>
+                    <div className={styles.headerButtons}>
+                        <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                        <div className={styles.stepTitle}>
+                            How Tos
+                        </div>
+                        <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
+                    </div>
+                    <div className={styles.stepDescription}>
+                        <div className={styles.decks}>
+                            {Object.values(content).map((deck, i) => (
+                                <div
+                                    className={styles.deck}
+                                    onClick={onActivateDeckFactory(i)}
+                                >
+                                    <img
+                                        className={styles.deckImage}
+                                        src={deck.img}
+                                    />
+                                    <div className={styles.deckName}>{deck.name}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className={styles.seeAll}>
+                        <div className={styles.seeAllButton} onClick={onExitDeck}>
+                            See all
+                            <img src={nextIcon} />
+                        </div>
+                    </div>
+                    <div className={styles.leftButton} onClick={onPrevStep}>
+                        <img
+                            draggable={false}
+                            src={prevIcon}
+                        />
+                    </div>
+                </div>
+            );
+        }
     }
     return (
         <Draggable

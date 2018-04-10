@@ -52,6 +52,7 @@ const Cards = props => {
                                 <img
                                     className={styles.deckImage}
                                     src={deck.img}
+                                    draggable={false}
                                 />
                                 <div className={styles.deckName}>{deck.name}</div>
                             </div>
@@ -97,7 +98,7 @@ const Cards = props => {
                             draggable={false}
                             src={image}
                         />
-                        <img className={styles.zoomIcon} src={zoomIcon} />
+                        <img draggable={false} className={styles.zoomIcon} src={zoomIcon} />
                         <Lightbox
                             backdropClosesModal={true}
                             images={[
@@ -147,6 +148,7 @@ const Cards = props => {
                                     <img
                                         className={styles.deckImage}
                                         src={deck.img}
+                                        draggable={false}
                                     />
                                     <div className={styles.deckName}>{deck.name}</div>
                                 </div>
@@ -156,7 +158,7 @@ const Cards = props => {
                     <div className={styles.seeAll}>
                         <div className={styles.seeAllButton} onClick={onExitDeck}>
                             See all
-                            <img src={nextIcon} />
+                            <img draggable={false} src={nextIcon} />
                         </div>
                     </div>
                     <div className={styles.leftButton} onClick={onPrevStep}>
@@ -168,6 +170,21 @@ const Cards = props => {
                 </div>
             );
         }
+    }
+    if (activeDeckIndex === null) {
+        return (
+            <div className={styles.backdrop}>
+                <Draggable
+                    bounds="parent"
+                    position={{x, y}}
+                    onDrag={onDrag}
+                >
+                    <div className={styles.cardContainer}>
+                        {inner}
+                    </div>
+                </Draggable>
+            </div>
+        );
     }
     return (
         <Draggable

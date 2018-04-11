@@ -1,29 +1,29 @@
-$ui-pane-border: #D9D9D9;
-$ui-pane-gray: #F9F9F9;
-$ui-background-blue: #e8edf1;
+$ui-primary: hsla(215, 100%, 95%, 1); /* #E5F0FF */
+$ui-secondary: hsla(215, 75%, 95%, 1); /* #E9F1FC */
+$ui-tertiary: hsla(215, 50%, 90%, 1); /* #D9E3F2 */
 
-$text-primary: #575e75;
+$ui-modal-overlay: hsla(215, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
 
-$menubar-gray: rgba(0,0,0,0.25);
+$ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
+$ui-white-transparent: hsla(0, 100%, 100%, 0.25); /* 25% transparent version of ui-white */
 
-$motion-primary: #4C97FF;
-$motion-tertiary: #3373CC;
-$motion-transparent: hsla(215, 100%, 65%, 0.20);
+$ui-black-transparent: hsla(0, 0%, 0%, 0.15); /* 15% transparent version of black */
 
-$red-primary: #FF661A;
-$red-tertiary: #E64D00;
+$text-primary: hsla(225, 15%, 40%, 1); /* #575E75 */
+$text-primary-transparent: hsla(225, 15%, 40%, 0.75);
 
-$share-orange: #FFAB19;
+$motion-primary: hsla(215, 100%, 65%, 1); /* #4C97FF */
+$motion-tertiary: hsla(215, 60%, 50%, 1); /* #3373CC */
+$motion-transparent: hsla(215, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
 
-$sound-primary: #CF63CF;
-$sound-tertiary: #A63FA6;
+$red-primary: hsla(20, 100%, 55%, 1); /* #FF661A */
+$red-tertiary: hsla(20, 100%, 45%, 1); /* #E64D00 */
 
-$control-primary: #FFAB19;
+$sound-primary: hsla(300, 53%, 60%, 1); /* #CF63CF */
+$sound-tertiary: hsla(300, 48%, 50%, 1); /* #BD42BD */
 
-$data-primary: #FF8C1A;
+$control-primary: hsla(38, 100%, 55%, 1); /* #FFAB19 */
 
-$pen-primary: #11B581;
+$data-primary: hsla(30, 100%, 55%, 1); /* #FF8C1A */
 
-$form-border: #E9EEF2;
-
-$import-primary: #0FBD8C;
+$pen-primary: hsla(163, 85%, 40%, 1); /* #0FBD8C */

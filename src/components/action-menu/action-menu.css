@@ -35,7 +35,14 @@ $more-button-size: 2.25rem;
     border-radius: 100%;
     width: $main-button-size;
     height: $main-button-size;
+    box-shadow: 0 0 0 4px $motion-transparent;
     z-index: 20; /* TODO reorder layout to prevent z-index need */
+    transition: transform, box-shadow 0.5s;
+}
+
+.main-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px $motion-transparent;
 }
 
 .main-icon {

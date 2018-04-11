@@ -158,6 +158,11 @@ class CostumeTab extends React.Component {
         };
         this.props.vm.addCostume(item.md5, vmCostume);
     }
+    formatCostumeDetails (size) {
+        // Round up width and height for scratch-flash compatibility
+        // https://github.com/LLK/scratch-flash/blob/9fbac92ef3d09ceca0c0782f8a08deaa79e4df69/src/ui/media/MediaInfo.as#L224-L237
+        return `${Math.ceil(size[0])} x ${Math.ceil(size[1])}`;
+    }
     render () {
         const {
             intl,
@@ -183,6 +188,12 @@ class CostumeTab extends React.Component {
         const addSurpriseFunc = target.isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
+
+        const costumeData = (target.costumes || []).map(costume => ({
+            name: costume.name,
+            assetId: costume.assetId,
+            details: costume.size ? this.formatCostumeDetails(costume.size) : null
+        }));
 
         return (
             <AssetPanel
@@ -211,7 +222,7 @@ class CostumeTab extends React.Component {
                         onClick: this.handleNewBlankCostume
                     }
                 ]}
-                items={target.costumes || []}
+                items={costumeData}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={target.costumes.length > 1 ? this.handleDeleteCostume : null}
                 onDuplicateClick={this.handleDuplicateCostume}

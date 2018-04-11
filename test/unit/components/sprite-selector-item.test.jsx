@@ -12,6 +12,7 @@ describe('SpriteSelectorItemComponent', () => {
     let onDeleteButtonClick;
     let selected;
     let number;
+    let details;
 
     // Wrap this in a function so it gets test specific states and can be reused.
     const getComponent = function () {
@@ -19,6 +20,7 @@ describe('SpriteSelectorItemComponent', () => {
             <SpriteSelectorItemComponent
                 className={className}
                 costumeURL={costumeURL}
+                details={details}
                 name={name}
                 number={number}
                 selected={selected}
@@ -35,8 +37,9 @@ describe('SpriteSelectorItemComponent', () => {
         onClick = jest.fn();
         onDeleteButtonClick = jest.fn();
         selected = true;
-        // Reset number to undefined since it is an optional prop
+        // Reset to undefined since they are optional props
         number = undefined; // eslint-disable-line no-undefined
+        details = undefined; // eslint-disable-line no-undefined
     });
 
     test('matches snapshot when selected', () => {
@@ -44,8 +47,9 @@ describe('SpriteSelectorItemComponent', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('matches snapshot when given a number to show', () => {
+    test('matches snapshot when given a number and details to show', () => {
         number = 5;
+        details = '480 x 360';
         const component = componentWithIntl(getComponent());
         expect(component.toJSON()).toMatchSnapshot();
     });

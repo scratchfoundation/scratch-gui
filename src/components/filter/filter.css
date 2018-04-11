@@ -12,14 +12,14 @@
     flex-grow: 1;
 
     padding: 0.3rem 0.5rem;
-    background: rgba(0, 0, 0, 0.10);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: $ui-black-transparent;
+    border: 1px solid $ui-white-transparent;
     border-radius: 10rem;
     user-select: none;
 }
 
 .filter:hover {
-    background: rgba(0, 0, 0, 0.15);
+    background: $ui-black-transparent;
 }
 
 .filter-icon {

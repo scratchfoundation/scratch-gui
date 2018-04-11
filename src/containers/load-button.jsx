@@ -24,18 +24,24 @@ class LoadButton extends React.Component {
         };
     }
     handleChange (e) {
-        this.props.openLoadingState();
         // Remove the hash if any (without triggering a hash change event or a reload)
         history.replaceState({}, document.title, '.');
         const reader = new FileReader();
+        const thisFileInput = e.target;
         reader.onload = () => this.props.vm.loadProject(reader.result)
             .then(() => {
                 this.props.closeLoadingState();
+                // Reset the file input after project is loaded
+                // This is necessary in case the user wants to reload a project
+                thisFileInput.value = null;
             })
             .catch(error => {
                 this.setState({loadingError: true, errorMessage: error});
             });
-        reader.readAsArrayBuffer(e.target.files[0]);
+        if (thisFileInput.files) { // Don't attempt to load if no file was selected
+            this.props.openLoadingState();
+            reader.readAsArrayBuffer(thisFileInput.files[0]);
+        }
     }
     handleClick () {
         this.fileInput.click();

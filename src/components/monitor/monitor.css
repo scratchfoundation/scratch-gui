@@ -4,9 +4,9 @@
 .monitor {
     position: absolute;
     padding: 3px;
-    background: $ui-pane-gray;
+    background: $ui-primary;
     z-index: 100;
-    border: 1px solid $ui-pane-border;
+    border: 1px solid $ui-black-transparent;
     border-radius: calc($space / 2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.75rem;

@@ -62,6 +62,5 @@ $fade-out-distance: 100px;
 
     .list-item {
         width: 4rem;
-        min-height: 4rem;
     }
 }

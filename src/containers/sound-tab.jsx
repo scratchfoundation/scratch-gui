@@ -115,7 +115,8 @@ class SoundTab extends React.Component {
         const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {
                 url: soundIcon,
-                name: sound.name
+                name: sound.name,
+                details: (sound.sampleCount / sound.rate).toFixed(2)
             }
         )) : [];
 

@@ -8,8 +8,10 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
+import LoadButton from '../../containers/load-button.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem} from '../menu/menu.jsx';
+import SaveButton from '../../containers/save-button.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
 import {openFileMenu, closeFileMenu, MENU_FILE} from '../../reducers/menus';
@@ -117,8 +119,17 @@ const MenuBar = props => (
                         <MenuItemTooltip id="copy">
                             <MenuItem>Save as a copy</MenuItem>
                         </MenuItemTooltip>
-                        <MenuItem>Upload from your computer</MenuItem>
-                        <MenuItem>Download to your computer</MenuItem>
+                        <LoadButton>{(renderFileInput, loadProject) => (
+                            <MenuItem onClick={loadProject}>
+                                Upload from your computer
+                                {renderFileInput()}
+                            </MenuItem>
+                        )}</LoadButton>
+                        <SaveButton>{saveProject => (
+                            <MenuItem onClick={saveProject}>
+                                Download to your computer
+                            </MenuItem>
+                        )}</SaveButton>
                     </MenuBarMenu>
                 </div>
                 <div className={classNames(styles.menuBarItem)}>

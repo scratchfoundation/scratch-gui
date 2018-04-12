@@ -3,18 +3,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ButtonComponent from '../components/button/button.jsx';
-import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';
-
-
 class SaveButton extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleClick'
+            'saveProject'
         ]);
     }
-    handleClick () {
+    saveProject () {
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
@@ -27,7 +23,6 @@ class SaveButton extends React.Component {
             // File name: project-DATE-TIME
             const date = new Date();
             const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            // TODO change extension to sb3
             saveLink.download = `untitled-project-${timestamp}.sb3`;
             saveLink.click();
             window.URL.revokeObjectURL(url);
@@ -35,28 +30,12 @@ class SaveButton extends React.Component {
         });
     }
     render () {
-        const {
-            vm, // eslint-disable-line no-unused-vars
-            ...props
-        } = this.props;
-        return (
-            <ComingSoonTooltip
-                place="bottom"
-                tooltipId="save-button"
-            >
-                <ButtonComponent
-                    disabled
-                    onClick={this.handleClick}
-                    {...props}
-                >
-                    Save
-                </ButtonComponent>
-            </ComingSoonTooltip>
-        );
+        return this.props.children(this.saveProject);
     }
 }
 
 SaveButton.propTypes = {
+    children: PropTypes.func,
     vm: PropTypes.shape({
         saveProjectSb3: PropTypes.func
     })

@@ -69,7 +69,7 @@
 }
 
 .menu-bar-item.active,
-.menu-bar-item:hover {
+.menu-bar-item.hoverable:hover {
     background-color: $ui-black-transparent;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .mystuff-icon {
-    margin-right: .5rem;
+    margin: 0 .25rem;
     height: 1rem;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .profile-icon {
-    margin-right: .5rem;
+    margin: 0 .25rem;
     width: 2rem;
     border-radius: 0.25rem;
 }

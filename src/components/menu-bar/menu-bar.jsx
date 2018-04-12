@@ -100,7 +100,7 @@ const MenuBar = props => (
                         src={scratchLogo}
                     />
                 </div>
-                <div className={classNames(styles.menuBarItem)}>
+                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
                     <MenuBarItemTooltip
                         id="menubar-selector"
                         place="right"
@@ -109,7 +109,7 @@ const MenuBar = props => (
                     </MenuBarItemTooltip>
                 </div>
                 <div
-                    className={classNames(styles.menuBarItem, {
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
                         [styles.active]: props.fileMenuOpen
                     })}
                     onMouseUp={props.onClickFile}
@@ -151,10 +151,10 @@ const MenuBar = props => (
                         </MenuSection>
                     </MenuBarMenu>
                 </div>
-                <div className={classNames(styles.menuBarItem)}>
                     <MenuBarItemTooltip id="edit-menu">
                         <div className={classNames(styles.editMenu)}>Edit</div>
                     </MenuBarItemTooltip>
+                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />
@@ -209,7 +209,13 @@ const MenuBar = props => (
         </div>
         <div className={styles.accountInfoWrapper}>
             <MenuBarItemTooltip id="mystuff">
-                <div className={styles.mystuffButton}>
+                <div
+                    className={classNames(
+                        styles.menuBarItem,
+                        styles.hoverable,
+                        styles.mystuffButton
+                    )}
+                >
                     <img
                         className={styles.mystuffIcon}
                         src={mystuffIcon}
@@ -220,7 +226,13 @@ const MenuBar = props => (
                 id="account-nav"
                 place="left"
             >
-                <div className={styles.accountNavMenu}>
+                <div
+                    className={classNames(
+                        styles.menuBarItem,
+                        styles.hoverable,
+                        styles.accountNavMenu
+                    )}
+                >
                     <img
                         className={styles.profileIcon}
                         src={profileIcon}

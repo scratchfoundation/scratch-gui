@@ -3,7 +3,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-class SaveButton extends React.Component {
+/**
+ * Project saver component passes a saveProject function to its child.
+ * It expects this child to be a function with the signature
+ *     function (saveProject, props) {}
+ * The component can then be used to attach project saving functionality
+ * to any other component:
+ *
+ * <ProjectSaver>{(saveProject, props) => (
+ *     <MyCoolComponent
+ *         onClick={saveProject}
+ *         {...props}
+ *     />
+ * )}</ProjectSaver>
+ */
+class ProjectSaver extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -41,7 +55,7 @@ class SaveButton extends React.Component {
     }
 }
 
-SaveButton.propTypes = {
+ProjectSaver.propTypes = {
     children: PropTypes.func,
     vm: PropTypes.shape({
         saveProjectSb3: PropTypes.func
@@ -55,4 +69,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(SaveButton);
+)(ProjectSaver);

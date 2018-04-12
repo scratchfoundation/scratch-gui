@@ -11,7 +11,7 @@ import LanguageSelector from '../../containers/language-selector.jsx';
 import LoadButton from '../../containers/load-button.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
-import SaveButton from '../../containers/save-button.jsx';
+import ProjectSaver from '../../containers/project-saver.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
 import {
@@ -147,14 +147,14 @@ const MenuBar = props => (
                                     {renderFileInput()}
                                 </MenuItem>
                             )}</LoadButton>
-                            <SaveButton>{(saveProject, saveProps) => (
+                            <ProjectSaver>{(saveProject, saveProps) => (
                                 <MenuItem
                                     onClick={saveProject}
                                     {...saveProps}
                                 >
                                     Download to your computer
                                 </MenuItem>
-                            )}</SaveButton>
+                            )}</ProjectSaver>
                         </MenuSection>
                     </MenuBarMenu>
                 </div>

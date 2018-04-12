@@ -10,7 +10,7 @@ import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import LoadButton from '../../containers/load-button.jsx';
 import Menu from '../../containers/menu.jsx';
-import {MenuItem} from '../menu/menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import SaveButton from '../../containers/save-button.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
@@ -25,9 +25,14 @@ import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
 
-const MenuBarItemTooltip = ({id, place = 'bottom', children}) => (
+const MenuBarItemTooltip = ({
+    children,
+    className,
+    id,
+    place = 'bottom'
+}) => (
     <ComingSoonTooltip
-        className={styles.comingSoon}
+        className={classNames(styles.comingSoon, className)}
         place={place}
         tooltipClassName={styles.comingSoonTooltip}
         tooltipId={id}
@@ -38,13 +43,14 @@ const MenuBarItemTooltip = ({id, place = 'bottom', children}) => (
 
 MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     id: PropTypes.string,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
 
-const MenuItemTooltip = ({id, children}) => (
+const MenuItemTooltip = ({id, children, className}) => (
     <ComingSoonTooltip
-        className={styles.comingSoon}
+        className={classNames(styles.comingSoon, className)}
         place="right"
         tooltipClassName={styles.comingSoonTooltip}
         tooltipId={id}
@@ -55,6 +61,7 @@ const MenuItemTooltip = ({id, children}) => (
 
 MenuItemTooltip.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     id: PropTypes.string
 };
 
@@ -115,23 +122,33 @@ const MenuBar = props => (
                         <MenuItemTooltip id="new">
                             <MenuItem>New</MenuItem>
                         </MenuItemTooltip>
-                        <MenuItemTooltip id="save">
-                            <MenuItem>Save now</MenuItem>
-                        </MenuItemTooltip>
-                        <MenuItemTooltip id="copy">
-                            <MenuItem>Save as a copy</MenuItem>
-                        </MenuItemTooltip>
-                        <LoadButton>{(renderFileInput, loadProject) => (
-                            <MenuItem onClick={loadProject}>
-                                Upload from your computer
-                                {renderFileInput()}
-                            </MenuItem>
-                        )}</LoadButton>
-                        <SaveButton>{saveProject => (
-                            <MenuItem onClick={saveProject}>
-                                Download to your computer
-                            </MenuItem>
-                        )}</SaveButton>
+                        <MenuSection>
+                            <MenuItemTooltip id="save">
+                                <MenuItem>Save now</MenuItem>
+                            </MenuItemTooltip>
+                            <MenuItemTooltip id="copy">
+                                <MenuItem>Save as a copy</MenuItem>
+                            </MenuItemTooltip>
+                        </MenuSection>
+                        <MenuSection>
+                            <LoadButton>{(renderFileInput, loadProject, loadProps) => (
+                                <MenuItem
+                                    onClick={loadProject}
+                                    {...loadProps}
+                                >
+                                    Upload from your computer
+                                    {renderFileInput()}
+                                </MenuItem>
+                            )}</LoadButton>
+                            <SaveButton>{(saveProject, saveProps) => (
+                                <MenuItem
+                                    onClick={saveProject}
+                                    {...saveProps}
+                                >
+                                    Download to your computer
+                                </MenuItem>
+                            )}</SaveButton>
+                        </MenuSection>
                     </MenuBarMenu>
                 </div>
                 <div className={classNames(styles.menuBarItem)}>

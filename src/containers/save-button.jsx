@@ -30,7 +30,14 @@ class SaveButton extends React.Component {
         });
     }
     render () {
-        return this.props.children(this.saveProject);
+        const {
+            /* eslint-disable no-unused-vars */
+            children,
+            vm,
+            /* eslint-enable no-unused-vars */
+            ...props
+        } = this.props;
+        return this.props.children(this.saveProject, props);
     }
 }
 

@@ -33,8 +33,7 @@
     background-color: $ui-black-transparent;
 }
 
-.divider {
-    margin-top: 10px;
+.menu-section {
     border-top: 1px solid $ui-black-transparent;
 }
 

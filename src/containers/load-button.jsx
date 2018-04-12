@@ -61,7 +61,16 @@ class LoadButton extends React.Component {
     }
     render () {
         if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
-        return this.props.children(this.renderFileInput, this.handleClick);
+        const {
+            /* eslint-disable no-unused-vars */
+            children,
+            closeLoadingState,
+            openLoadingState,
+            vm,
+            /* eslint-enable no-unused-vars */
+            ...props
+        } = this.props;
+        return this.props.children(this.renderFileInput, this.handleClick, props);
     }
 }
 

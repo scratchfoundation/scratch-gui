@@ -59,7 +59,27 @@ MenuItem.propTypes = {
     onClick: PropTypes.func
 };
 
+const addDividerClassToFirstChild = (child, id) => (
+    React.cloneElement(child, {
+        className: classNames(child.className, {
+            [styles.menuSection]: id === 0
+        }),
+        key: id
+    })
+);
+
+const MenuSection = ({children}) => (
+    <React.Fragment>{
+        children.map(addDividerClassToFirstChild)
+    }</React.Fragment>
+);
+
+MenuSection.propTypes = {
+    children: PropTypes.node
+};
+
 export {
     MenuComponent as default,
-    MenuItem
+    MenuItem,
+    MenuSection
 };

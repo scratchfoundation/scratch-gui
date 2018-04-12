@@ -162,7 +162,7 @@ const MenuBar = props => (
                     className={classNames(styles.menuBarItem, styles.hoverable, {
                         [styles.active]: props.editMenuOpen
                     })}
-                    onClick={props.onClickEdit}
+                    onMouseUp={props.onClickEdit}
                 >
                     <div className={classNames(styles.editMenu)}>Edit</div>
                     <MenuBarMenu

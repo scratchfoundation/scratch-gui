@@ -8,35 +8,27 @@ const MenuComponent = ({
     className = '',
     children,
     componentRef,
-    open = false,
     place = 'right'
-}) => {
-    if (open) {
-        return (
-            <ul
-                className={classNames(
-                    styles.menu,
-                    className,
-                    {
-                        [styles.open]: open,
-                        [styles.left]: place === 'left',
-                        [styles.right]: place === 'right'
-                    }
-                )}
-                ref={componentRef}
-            >
-                {children}
-            </ul>
-        );
-    }
-    return null;
-};
+}) => (
+    <ul
+        className={classNames(
+            styles.menu,
+            className,
+            {
+                [styles.left]: place === 'left',
+                [styles.right]: place === 'right'
+            }
+        )}
+        ref={componentRef}
+    >
+        {children}
+    </ul>
+);
 
 MenuComponent.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     componentRef: PropTypes.func,
-    open: PropTypes.bool,
     place: PropTypes.oneOf(['left', 'right'])
 };
 

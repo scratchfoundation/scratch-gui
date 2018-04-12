@@ -39,10 +39,10 @@ class Menu extends React.Component {
             children,
             ...props
         } = this.props;
+        if (!open) return null;
         return (
             <MenuComponent
                 componentRef={this.ref}
-                open={open}
                 {...props}
             >
                 {children}
@@ -53,8 +53,8 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
     children: PropTypes.node,
-    onRequestClose: PropTypes.func,
-    open: PropTypes.bool
+    onRequestClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired
 };
 
 export default Menu;

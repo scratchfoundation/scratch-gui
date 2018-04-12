@@ -8,7 +8,23 @@ import {
     closeLoadingProject
 } from '../reducers/modals';
 
-class LoadButton extends React.Component {
+/**
+ * Project loader component passes a file input, load handler and props to its child.
+ * It expects this child to be a function with the signature
+ *     function (renderFileInput, loadProject, props) {}
+ * The component can then be used to attach project loading functionality
+ * to any other component:
+ *
+ * <ProjectLoader>{(renderFileInput, loadProject, props) => (
+ *     <MyCoolComponent
+ *         onClick={loadProject}
+ *         {...props}
+ *     >
+ *         {renderFileInput()}
+ *     </MyCoolComponent>
+ * )}</ProjectLoader>
+ */
+class ProjectLoader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -74,7 +90,7 @@ class LoadButton extends React.Component {
     }
 }
 
-LoadButton.propTypes = {
+ProjectLoader.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     openLoadingState: PropTypes.func,
@@ -95,4 +111,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoadButton);
+)(ProjectLoader);

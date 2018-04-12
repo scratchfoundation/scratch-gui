@@ -8,7 +8,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import LoadButton from '../../containers/load-button.jsx';
+import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
@@ -138,7 +138,7 @@ const MenuBar = props => (
                             </MenuItemTooltip>
                         </MenuSection>
                         <MenuSection>
-                            <LoadButton>{(renderFileInput, loadProject, loadProps) => (
+                            <ProjectLoader>{(renderFileInput, loadProject, loadProps) => (
                                 <MenuItem
                                     onClick={loadProject}
                                     {...loadProps}
@@ -146,7 +146,7 @@ const MenuBar = props => (
                                     Upload from your computer
                                     {renderFileInput()}
                                 </MenuItem>
-                            )}</LoadButton>
+                            )}</ProjectLoader>
                             <ProjectSaver>{(saveProject, saveProps) => (
                                 <MenuItem
                                     onClick={saveProject}

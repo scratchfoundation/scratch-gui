@@ -38,29 +38,3 @@
 .menu-section {
     border-top: 1px solid $ui-black-transparent;
 }
-
-$arrow-border-width: 14px;
-.with-arrow {
-    margin-top: $arrow-border-width;
-    border-radius: 5px;
-    overflow: visible;
-}
-
-.with-arrow:before {
-    display: block;
-    position: absolute;
-    top: -$arrow-border-width / 2;
-    right: 10%;
-
-    transform: rotate(45deg);
-
-    border-top: 1px solid $ui-black-transparent;
-    border-left: 1px solid $ui-black-transparent;
-    border-radius: 5px;
-
-    background-color: $motion-primary;
-    width: $arrow-border-width;
-    height: $arrow-border-width;
-
-    content: "";
-}

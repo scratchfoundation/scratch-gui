@@ -5,10 +5,11 @@ import React from 'react';
 import styles from './menu.css';
 
 const MenuComponent = ({
-    open = false,
-    children,
     className = '',
-    componentRef
+    children,
+    componentRef,
+    open = false,
+    place = 'right'
 }) => {
     if (open) {
         return (
@@ -17,7 +18,9 @@ const MenuComponent = ({
                     styles.menu,
                     className,
                     {
-                        [styles.open]: open
+                        [styles.open]: open,
+                        [styles.left]: place === 'left',
+                        [styles.right]: place === 'right'
                     }
                 )}
                 ref={componentRef}
@@ -33,7 +36,8 @@ MenuComponent.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     componentRef: PropTypes.func,
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    place: PropTypes.oneOf(['left', 'right'])
 };
 
 const MenuItem = ({

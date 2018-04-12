@@ -53,6 +53,7 @@
 .menu {
     /* blocklyToolboxDiv is 40 */
     z-index: 50;
+    top: 31px;
 }
 
 .menu-bar-item {

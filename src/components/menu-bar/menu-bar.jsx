@@ -23,7 +23,7 @@ import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
 
-const MenuBarItemTooltip = ({id, place="bottom", children}) => (
+const MenuBarItemTooltip = ({id, place = 'bottom', children}) => (
     <ComingSoonTooltip
         className={styles.comingSoon}
         place={place}
@@ -38,6 +38,45 @@ MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
     id: PropTypes.string,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
+};
+
+const MenuItemTooltip = ({id, children}) => (
+    <ComingSoonTooltip
+        className={styles.comingSoon}
+        place="right"
+        tooltipClassName={styles.comingSoonTooltip}
+        tooltipId={id}
+    >
+        {children}
+    </ComingSoonTooltip>
+);
+
+MenuItemTooltip.propTypes = {
+    children: PropTypes.node,
+    id: PropTypes.string
+};
+
+const MenuBarMenu = ({
+    children,
+    onRequestClose,
+    open,
+    place = 'right'
+}) => (
+    <Menu
+        className={styles.menu}
+        open={open}
+        place={place}
+        onRequestClose={onRequestClose}
+    >
+        {children}
+    </Menu>
+);
+
+MenuBarMenu.propTypes = {
+    children: PropTypes.node,
+    onRequestClose: PropTypes.func,
+    open: PropTypes.bool,
+    place: PropTypes.oneOf(['left', 'right'])
 };
 
 const MenuBar = props => (
@@ -65,17 +104,22 @@ const MenuBar = props => (
                     onMouseUp={props.onClickFile}
                 >
                     <div className={classNames(styles.fileMenu)}>File</div>
-                    <Menu
-                        className={styles.menu}
+                    <MenuBarMenu
                         open={props.fileMenuOpen}
                         onRequestClose={props.onRequestCloseFile}
                     >
-                        <MenuItem>New</MenuItem>
-                        <MenuItem>Save now</MenuItem>
-                        <MenuItem>Save as a copy</MenuItem>
+                        <MenuItemTooltip id="new">
+                            <MenuItem>New</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuItemTooltip id="save">
+                            <MenuItem>Save now</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuItemTooltip id="copy">
+                            <MenuItem>Save as a copy</MenuItem>
+                        </MenuItemTooltip>
                         <MenuItem>Upload from your computer</MenuItem>
                         <MenuItem>Download to your computer</MenuItem>
-                    </Menu>
+                    </MenuBarMenu>
                 </div>
                 <div className={classNames(styles.menuBarItem)}>
                     <MenuBarItemTooltip id="edit-menu">

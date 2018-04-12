@@ -1,0 +1,90 @@
+@import "../../css/colors.css";
+
+.menu {
+    position: absolute;
+    right: 0;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0 0 5px 5px;
+    background-color: $motion-primary;
+    padding: 10px;
+    max-width: 260px;
+    overflow: visible;
+    color: $ui-white;
+    font-size: .8125rem;
+    font-weight: normal;
+}
+
+/*
+a {
+    &:link,
+    &:visited,
+    &:active {
+        background-color: transparent;
+        color: $ui-white;
+    }
+}
+
+input {
+    // 100% minus border and padding
+    margin-bottom: 12px;
+    width: calc(100% - 30px);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+*/
+.menu-item {
+    display: block;
+    line-height: 30px;
+    white-space: nowrap;
+}
+
+.divider {
+    margin-top: 10px;
+    border-top: 1px solid $ui-black-transparent;
+}
+
+/*    a {
+        display: block;
+        padding: 0 10px;
+
+        &:hover {
+            background-color: $ui-black-transparent;
+            text-decoration: none;
+        }
+    }
+*/
+
+$arrow-border-width: 14px;
+.with-arrow {
+    margin-top: $arrow-border-width;
+    border-radius: 5px;
+    overflow: visible;
+}
+
+.with-arrow:before {
+    display: block;
+    position: absolute;
+    top: -$arrow-border-width / 2;
+    right: 10%;
+
+    transform: rotate(45deg);
+
+    border-top: 1px solid $ui-black-transparent;
+    border-left: 1px solid $ui-black-transparent;
+    border-radius: 5px;
+
+    background-color: $motion-primary;
+    width: $arrow-border-width;
+    height: $arrow-border-width;
+
+    content: "";
+}
+
+/*
+@media only screen and (max-width: $tablet - 1) {
+    min-width: 160px;
+}
+*/

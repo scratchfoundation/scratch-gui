@@ -50,6 +50,11 @@
     transition: all .075s ease-in;
 }
 
+.menu {
+    /* blocklyToolboxDiv is 40 */
+    z-index: 50;
+}
+
 .menu-item {
     display: block;
     padding: 0 0.25rem;
@@ -58,6 +63,7 @@
     color: $ui-white;
     user-select: none;
     align-self: center;
+    position: relative;
 }
 
 .file-group {

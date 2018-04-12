@@ -8,8 +8,11 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
+import Menu from '../../containers/menu.jsx';
+import {MenuItem} from '../menu/menu.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
+import {openFileMenu, closeFileMenu, MENU_FILE} from '../../reducers/menus';
 
 import styles from './menu-bar.css';
 
@@ -46,15 +49,22 @@ const MenuBar = props => (
                         <LanguageSelector />
                     </ComingSoonTooltip>
                 </div>
-                <div className={classNames(styles.menuItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
-                        place="bottom"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="file-menu"
+                <div
+                    className={classNames(styles.menuItem)}
+                    onMouseUp={props.onClickFile}
+                >
+                    <div className={classNames(styles.fileMenu)}>File</div>
+                    <Menu
+                        className={styles.menu}
+                        open={props.fileMenuOpen}
+                        onRequestClose={props.onRequestCloseFile}
                     >
-                        <div className={classNames(styles.fileMenu)}>File</div>
-                    </ComingSoonTooltip>
+                        <MenuItem>New</MenuItem>
+                        <MenuItem>Save now</MenuItem>
+                        <MenuItem>Save as a copy</MenuItem>
+                        <MenuItem>Upload from your computer</MenuItem>
+                        <MenuItem>Download to your computer</MenuItem>
+                    </Menu>
                 </div>
                 <div className={classNames(styles.menuItem)}>
                     <ComingSoonTooltip
@@ -167,14 +177,25 @@ const MenuBar = props => (
 );
 
 MenuBar.propTypes = {
-    onGiveFeedback: PropTypes.func.isRequired
+    fileMenuOpen: PropTypes.bool,
+    onClickFile: PropTypes.func,
+    onGiveFeedback: PropTypes.func.isRequired,
+    onRequestCloseFile: PropTypes.func
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    fileMenuOpen: state.menus[MENU_FILE]
+});
 
 const mapDispatchToProps = dispatch => ({
     onGiveFeedback: () => {
         dispatch(openFeedbackForm());
+    },
+    onClickFile: () => {
+        dispatch(openFileMenu());
+    },
+    onRequestCloseFile: () => {
+        dispatch(closeFileMenu());
     }
 });
 

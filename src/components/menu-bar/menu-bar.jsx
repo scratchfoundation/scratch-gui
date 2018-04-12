@@ -99,7 +99,7 @@ const MenuBar = props => (
     <Box className={styles.menuBar}>
         <div className={styles.mainMenu}>
             <div className={styles.fileGroup}>
-                <div className={classNames(styles.logoWrapper, styles.menuBarItem)}>
+                <div className={classNames(styles.menuBarItem)}>
                     <img
                         alt="Scratch"
                         className={styles.scratchLogo}

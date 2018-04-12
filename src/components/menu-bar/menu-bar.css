@@ -52,7 +52,6 @@
 .menu-bar-item {
     display: flex;
     padding: 0 0.25rem;
-    cursor: pointer;
     text-decoration: none;
     color: $ui-white;
     user-select: none;
@@ -60,6 +59,10 @@
     position: relative;
     align-items: center;
     height: $menu-bar-height;
+}
+
+.menu-bar-item.hoverable {
+    cursor: pointer;
 }
 
 .menu-bar-item.active,

@@ -39,14 +39,8 @@
 }
 
 .scratch-logo {
-    height:  1.4rem;
+    height:  1.6rem;
     vertical-align: middle;
-}
-
-.scratch-logo:hover {
-    transform: scale(1.1, 1.1);
-    background-size: 100%;
-    transition: all .075s ease-in;
 }
 
 .menu {

@@ -11,6 +11,7 @@
     overflow: visible;
     color: $ui-white;
     font-weight: normal;
+    box-shadow: 0 8px 8px 0 $ui-black-transparent;
 }
 
 .menu.left {

@@ -23,12 +23,25 @@ import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
 
-const MenuBar = props => (
-    <Box
-        className={classNames({
-            [styles.menuBar]: true
-        })}
+const MenuBarItemTooltip = ({id, place="bottom", children}) => (
+    <ComingSoonTooltip
+        className={styles.comingSoon}
+        place={place}
+        tooltipClassName={styles.comingSoonTooltip}
+        tooltipId={id}
     >
+        {children}
+    </ComingSoonTooltip>
+);
+
+MenuBarItemTooltip.propTypes = {
+    children: PropTypes.node,
+    id: PropTypes.string,
+    place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
+};
+
+const MenuBar = props => (
+    <Box className={styles.menuBar}>
         <div className={styles.mainMenu}>
             <div className={styles.fileGroup}>
                 <div className={classNames(styles.logoWrapper, styles.menuBarItem)}>
@@ -40,14 +53,12 @@ const MenuBar = props => (
                     />
                 </div>
                 <div className={classNames(styles.menuBarItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
+                    <MenuBarItemTooltip
+                        id="menubar-selector"
                         place="right"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="menubar-selector"
                     >
                         <LanguageSelector />
-                    </ComingSoonTooltip>
+                    </MenuBarItemTooltip>
                 </div>
                 <div
                     className={classNames(styles.menuBarItem)}
@@ -67,38 +78,23 @@ const MenuBar = props => (
                     </Menu>
                 </div>
                 <div className={classNames(styles.menuBarItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
-                        place="bottom"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="edit-menu"
-                    >
+                    <MenuBarItemTooltip id="edit-menu">
                         <div className={classNames(styles.editMenu)}>Edit</div>
-                    </ComingSoonTooltip>
+                    </MenuBarItemTooltip>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />
             <div className={classNames(styles.menuBarItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="title-field"
-                >
+                <MenuBarItemTooltip id="title-field">
                     <input
                         disabled
                         className={classNames(styles.titleField)}
                         placeholder="Untitled-1"
                     />
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
             <div className={classNames(styles.menuBarItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="share-button"
-                >
+                <MenuBarItemTooltip id="share-button">
                     <Button className={classNames(styles.shareButton)}>
                         <FormattedMessage
                             defaultMessage="Share"
@@ -106,15 +102,10 @@ const MenuBar = props => (
                             id="gui.menuBar.share"
                         />
                     </Button>
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
             <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="community-button"
-                >
+                <MenuBarItemTooltip id="community-button">
                     <Button
                         className={classNames(styles.communityButton)}
                         iconClassName={styles.communityButtonIcon}
@@ -126,7 +117,7 @@ const MenuBar = props => (
                             id="gui.menuBar.seeCommunity"
                         />
                     </Button>
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
         </div>
         <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
@@ -143,22 +134,17 @@ const MenuBar = props => (
             </Button>
         </div>
         <div className={styles.accountInfoWrapper}>
-            <ComingSoonTooltip
-                className={styles.comingSoon}
-                place="bottom"
-                tooltipId="mystuff"
-            >
+            <MenuBarItemTooltip id="mystuff">
                 <div className={styles.mystuffButton}>
                     <img
                         className={styles.mystuffIcon}
                         src={mystuffIcon}
                     />
                 </div>
-            </ComingSoonTooltip>
-            <ComingSoonTooltip
-                className={styles.comingSoon}
+            </MenuBarItemTooltip>
+            <MenuBarItemTooltip
+                id="account-nav"
                 place="left"
-                tooltipId="account-nav"
             >
                 <div className={styles.accountNavMenu}>
                     <img
@@ -171,7 +157,7 @@ const MenuBar = props => (
                         src={dropdownCaret}
                     />
                 </div>
-            </ComingSoonTooltip>
+            </MenuBarItemTooltip>
         </div>
     </Box>
 );

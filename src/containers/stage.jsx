@@ -168,13 +168,18 @@ class Stage extends React.Component {
             }
         }
         if (this.state.mouseDown && this.state.isDragging) {
-            const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
-            this.props.vm.postSpriteInfo({
-                x: spritePosition[0] + this.state.dragOffset[0],
-                y: -(spritePosition[1] + this.state.dragOffset[1]),
-                force: true
-            });
-            this.positionDragCanvas(mousePosition[0], mousePosition[1]);
+            // Editor drag style only updates the drag canvas, does full update at the end of drag
+            // Non-editor drag style just updates the sprite continuously.
+            if (this.props.useEditorDragStyle) {
+                this.positionDragCanvas(mousePosition[0], mousePosition[1]);
+            } else {
+                const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
+                this.props.vm.postSpriteInfo({
+                    x: spritePosition[0] + this.state.dragOffset[0],
+                    y: -(spritePosition[1] + this.state.dragOffset[1]),
+                    force: true
+                });
+            }
         }
         const coordinates = {
             x: mousePosition[0],
@@ -186,6 +191,7 @@ class Stage extends React.Component {
     }
     onMouseUp (e) {
         const {x, y} = getEventXY(e);
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
         this.cancelMouseDownTimeout();
         this.setState({
             mouseDown: false,
@@ -200,7 +206,7 @@ class Stage extends React.Component {
             wasDragged: this.state.isDragging
         };
         if (this.state.isDragging) {
-            this.onStopDrag();
+            this.onStopDrag(mousePosition[0], mousePosition[1]);
         }
         this.props.vm.postIOData('mouse', data);
     }
@@ -307,7 +313,7 @@ class Stage extends React.Component {
             this.props.vm.postSpriteInfo({visible: false});
         }
     }
-    onStopDrag () {
+    onStopDrag (mouseX, mouseY) {
         const dragId = this.state.dragId;
         const commonStopDragActions = () => {
             this.props.vm.stopDrag(dragId);
@@ -319,7 +325,17 @@ class Stage extends React.Component {
         };
         if (this.props.useEditorDragStyle) {
             // Need to sequence these actions to prevent flickering.
-            this.props.vm.postSpriteInfo({visible: true});
+            const spriteInfo = {visible: true};
+            // First update the sprite position if dropped in the stage.
+            if (mouseX > 0 && mouseX < this.rect.width &&
+                mouseY > 0 && mouseY < this.rect.height) {
+                const spritePosition = this.getScratchCoords(mouseX, mouseY);
+                spriteInfo.x = spritePosition[0] + this.state.dragOffset[0];
+                spriteInfo.y = -(spritePosition[1] + this.state.dragOffset[1]);
+                spriteInfo.force = true;
+            }
+            this.props.vm.postSpriteInfo(spriteInfo);
+            // Then clear the dragging canvas and stop drag (potentially slow if selecting sprite)
             setTimeout(() => {
                 this.clearDragCanvas();
                 setTimeout(() => {

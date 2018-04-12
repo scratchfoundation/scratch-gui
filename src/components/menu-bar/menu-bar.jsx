@@ -31,7 +31,7 @@ const MenuBar = props => (
     >
         <div className={styles.mainMenu}>
             <div className={styles.fileGroup}>
-                <div className={classNames(styles.logoWrapper, styles.menuItem)}>
+                <div className={classNames(styles.logoWrapper, styles.menuBarItem)}>
                     <img
                         alt="Scratch"
                         className={styles.scratchLogo}
@@ -39,7 +39,7 @@ const MenuBar = props => (
                         src={scratchLogo}
                     />
                 </div>
-                <div className={classNames(styles.menuItem)}>
+                <div className={classNames(styles.menuBarItem)}>
                     <ComingSoonTooltip
                         className={styles.comingSoon}
                         place="right"
@@ -50,7 +50,7 @@ const MenuBar = props => (
                     </ComingSoonTooltip>
                 </div>
                 <div
-                    className={classNames(styles.menuItem)}
+                    className={classNames(styles.menuBarItem)}
                     onMouseUp={props.onClickFile}
                 >
                     <div className={classNames(styles.fileMenu)}>File</div>
@@ -66,7 +66,7 @@ const MenuBar = props => (
                         <MenuItem>Download to your computer</MenuItem>
                     </Menu>
                 </div>
-                <div className={classNames(styles.menuItem)}>
+                <div className={classNames(styles.menuBarItem)}>
                     <ComingSoonTooltip
                         className={styles.comingSoon}
                         place="bottom"
@@ -78,7 +78,7 @@ const MenuBar = props => (
                 </div>
             </div>
             <div className={classNames(styles.divider)} />
-            <div className={classNames(styles.menuItem)}>
+            <div className={classNames(styles.menuBarItem)}>
                 <ComingSoonTooltip
                     className={styles.comingSoon}
                     place="bottom"
@@ -92,7 +92,7 @@ const MenuBar = props => (
                     />
                 </ComingSoonTooltip>
             </div>
-            <div className={classNames(styles.menuItem)}>
+            <div className={classNames(styles.menuBarItem)}>
                 <ComingSoonTooltip
                     className={styles.comingSoon}
                     place="bottom"
@@ -108,7 +108,7 @@ const MenuBar = props => (
                     </Button>
                 </ComingSoonTooltip>
             </div>
-            <div className={classNames(styles.menuItem, styles.communityButtonWrapper)}>
+            <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                 <ComingSoonTooltip
                     className={styles.comingSoon}
                     place="bottom"
@@ -129,7 +129,7 @@ const MenuBar = props => (
                 </ComingSoonTooltip>
             </div>
         </div>
-        <div className={classNames(styles.menuItem, styles.feedbackButtonWrapper)}>
+        <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
             <Button
                 className={styles.feedbackButton}
                 iconSrc={feedbackIcon}

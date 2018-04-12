@@ -278,9 +278,11 @@ class Stage extends React.Component {
         // can use translation to move to mouse position smoothly.
         this.dragCanvas.style.left = `${-x}px`;
         this.dragCanvas.style.top = `${-y}px`;
+        this.dragCanvas.style.display = 'block';
     }
     clearDragCanvas () {
         this.dragCanvas.width = this.dragCanvas.height = 0;
+        this.dragCanvas.style.display = 'none';
     }
     positionDragCanvas (mouseX, mouseY) {
         // mouseX/Y are relative to stage top/left, and dragCanvas is already

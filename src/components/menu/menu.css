@@ -7,6 +7,7 @@
     background-color: $motion-primary;
     padding: 0;
     margin: 0;
+    min-width: 186px;
     max-width: 260px;
     overflow: visible;
     color: $ui-white;

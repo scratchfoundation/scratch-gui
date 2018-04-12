@@ -14,7 +14,14 @@ import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import SaveButton from '../../containers/save-button.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
-import {openFileMenu, closeFileMenu, MENU_FILE} from '../../reducers/menus';
+import {
+    openFileMenu,
+    closeFileMenu,
+    fileMenuOpen,
+    openEditMenu,
+    closeEditMenu,
+    editMenuOpen
+} from '../../reducers/menus';
 
 import styles from './menu-bar.css';
 
@@ -151,10 +158,29 @@ const MenuBar = props => (
                         </MenuSection>
                     </MenuBarMenu>
                 </div>
-                    <MenuBarItemTooltip id="edit-menu">
-                        <div className={classNames(styles.editMenu)}>Edit</div>
-                    </MenuBarItemTooltip>
-                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: props.editMenuOpen
+                    })}
+                    onClick={props.onClickEdit}
+                >
+                    <div className={classNames(styles.editMenu)}>Edit</div>
+                    <MenuBarMenu
+                        open={props.editMenuOpen}
+                        onRequestClose={props.onRequestCloseEdit}
+                    >
+                        <MenuItemTooltip id="undo">
+                            <MenuItem>Undo</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuItemTooltip id="redo">
+                            <MenuItem>Redo</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuSection>
+                            <MenuItemTooltip id="turbo">
+                                <MenuItem>Turbo mode</MenuItem>
+                            </MenuItemTooltip>
+                        </MenuSection>
+                    </MenuBarMenu>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />
@@ -249,26 +275,26 @@ const MenuBar = props => (
 );
 
 MenuBar.propTypes = {
+    editMenuOpen: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onGiveFeedback: PropTypes.func.isRequired,
+    onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    fileMenuOpen: state.menus[MENU_FILE]
+    fileMenuOpen: fileMenuOpen(state),
+    editMenuOpen: editMenuOpen(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-    onGiveFeedback: () => {
-        dispatch(openFeedbackForm());
-    },
-    onClickFile: () => {
-        dispatch(openFileMenu());
-    },
-    onRequestCloseFile: () => {
-        dispatch(closeFileMenu());
-    }
+    onGiveFeedback: () => dispatch(openFeedbackForm()),
+    onClickFile: () => dispatch(openFileMenu()),
+    onRequestCloseFile: () => dispatch(closeFileMenu()),
+    onClickEdit: () => dispatch(openEditMenu()),
+    onRequestCloseEdit: () => dispatch(closeEditMenu())
 });
 
 export default connect(

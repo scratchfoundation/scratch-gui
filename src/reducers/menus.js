@@ -2,10 +2,12 @@ const OPEN_MENU = 'scratch-gui/menus/OPEN_MENU';
 const CLOSE_MENU = 'scratch-gui/menus/CLOSE_MENU';
 
 const MENU_FILE = 'fileMenu';
+const MENU_EDIT = 'editMenu';
 
 
 const initialState = {
-    [MENU_FILE]: false
+    [MENU_FILE]: false,
+    [MENU_EDIT]: false
 };
 
 const reducer = function (state, action) {
@@ -23,28 +25,27 @@ const reducer = function (state, action) {
         return state;
     }
 };
-const openMenu = function (menu) {
-    return {
-        type: OPEN_MENU,
-        menu: menu
-    };
-};
-const closeMenu = function (menu) {
-    return {
-        type: CLOSE_MENU,
-        menu: menu
-    };
-};
-const openFileMenu = function () {
-    return openMenu(MENU_FILE);
-};
-const closeFileMenu = function () {
-    return closeMenu(MENU_FILE);
-};
+const openMenu = menu => ({
+    type: OPEN_MENU,
+    menu: menu
+});
+const closeMenu = menu => ({
+    type: CLOSE_MENU,
+    menu: menu
+});
+const openFileMenu = () => openMenu(MENU_FILE);
+const closeFileMenu = () => closeMenu(MENU_FILE);
+const fileMenuOpen = state => state.menus[MENU_FILE];
+const openEditMenu = () => openMenu(MENU_EDIT);
+const closeEditMenu = () => closeMenu(MENU_EDIT);
+const editMenuOpen = state => state.menus[MENU_EDIT];
 
 export {
     reducer as default,
     openFileMenu,
     closeFileMenu,
-    MENU_FILE
+    openEditMenu,
+    closeEditMenu,
+    fileMenuOpen,
+    editMenuOpen
 };

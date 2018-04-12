@@ -102,7 +102,9 @@ const MenuBar = props => (
                     </MenuBarItemTooltip>
                 </div>
                 <div
-                    className={classNames(styles.menuBarItem)}
+                    className={classNames(styles.menuBarItem, {
+                        [styles.active]: props.fileMenuOpen
+                    })}
                     onMouseUp={props.onClickFile}
                 >
                     <div className={classNames(styles.fileMenu)}>File</div>

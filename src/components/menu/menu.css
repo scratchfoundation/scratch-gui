@@ -5,12 +5,12 @@
     border: 1px solid $ui-black-transparent;
     border-radius: 0 0 4px 4px;
     background-color: $motion-primary;
-    padding: 10px;
+    padding: 0;
+    margin: 0;
     max-width: 260px;
     overflow: visible;
     color: $ui-white;
     font-weight: normal;
-    margin: 0;
 }
 
 .menu.left {
@@ -25,6 +25,12 @@
     display: block;
     line-height: 34px;
     white-space: nowrap;
+    padding: 0 10px;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background-color: $ui-black-transparent;
 }
 
 .divider {

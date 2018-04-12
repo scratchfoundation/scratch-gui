@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactModal from 'react-modal';
 import Box from '../box/box.jsx';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import styles from './browser-modal.css';
 
@@ -17,14 +18,16 @@ const BrowserModal = ({intl, ...props}) => (
     <ReactModal
         isOpen
         className={styles.modalContent}
-        contentLabel="Internet Explorer is not supported"
+        contentLabel={intl.formatMessage({...messages.label})}
         overlayClassName={styles.modalOverlay}
         onRequestClose={props.onBack}
     >
         <Box className={styles.illustration} />
 
         <Box className={styles.body}>
-            <h2>Internet Explorer is not supported</h2>
+            <h2>
+                <FormattedMessage {...messages.label} />
+            </h2>
             <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
@@ -58,7 +61,8 @@ const BrowserModal = ({intl, ...props}) => (
 );
 
 BrowserModal.propTypes = {
+    intl: intlShape.isRequired,
     onBack: PropTypes.func.isRequired
 };
 
-export default BrowserModal;
+export default injectIntl(BrowserModal);

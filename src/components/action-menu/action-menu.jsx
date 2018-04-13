@@ -191,10 +191,9 @@ ActionMenu.propTypes = {
         img: PropTypes.string,
         title: PropTypes.node.isRequired,
         onClick: PropTypes.func, // Optional, "coming soon" if no callback provided
-        fileInput: PropTypes.string, // Optional, only for file and camera upload
-        accept: PropTypes.string, // Optional, only for file and camera upload
-        fileChange: PropTypes.func, // Optional, only for file and camera upload
-        fileInputRef: PropTypes.func
+        fileAccept: PropTypes.string, // Optional, only for file upload
+        fileChange: PropTypes.func, // Optional, only for file upload
+        fileInput: PropTypes.func // Optional, only for file upload
     })),
     onClick: PropTypes.func.isRequired,
     title: PropTypes.node.isRequired

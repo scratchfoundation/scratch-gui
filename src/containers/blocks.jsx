@@ -70,9 +70,9 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
-        // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the entire toolbox
-        // every time we reset the workspace.  We call updateToolbox as a part of componentDidUpdate so the toolbox will
-        // still correctly be updated
+        // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
+        // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
+        // componentDidUpdate so the toolbox will still correctly be updated
         this.setToolboxRefreshEnabled = this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
         this.workspace.setToolboxRefreshEnabled = () => this.setToolboxRefreshEnabled(false);
 

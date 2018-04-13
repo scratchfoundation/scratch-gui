@@ -107,14 +107,19 @@ class SoundTab extends React.Component {
 
     handleSoundUpload (e) {
         const thisFileInput = e.target;
+        let thisFile = null;
         const reader = new FileReader();
         reader.onload = () => {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same sound multiple times if
+            // they choose
+            thisFileInput.value = null;
             // Cache the sound in storage
             const soundBuffer = reader.result;
             const storage = this.props.vm.runtime.storage;
-            // TODO only accepting .wav files right now,
-            // but later will have to do something sensible with other types of sounds
-            const soundFormat = storage.DataFormat.WAV;
+
+            const fileType = thisFile.type; // what file type does the browser think this is
+            const soundFormat = fileType === 'audio/mp3' ? storage.DataFormat.MP3 : storage.DataFormat.WAV;
             const md5 = storage.builtinHelper.cache(
                 storage.AssetType.Sound,
                 soundFormat,
@@ -133,13 +138,12 @@ class SoundTab extends React.Component {
             });
         };
         if (thisFileInput.files) {
-            reader.readAsArrayBuffer(thisFileInput.files[0]);
-            thisFileInput.value = null;
+            thisFile = thisFileInput.files[0];
+            reader.readAsArrayBuffer(thisFile);
         }
     }
 
     setFileInput (input) {
-        console.log('setting file input!');
         if (input && !this.fileInput) this.fileInput = input;
     }
 

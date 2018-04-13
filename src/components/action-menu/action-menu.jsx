@@ -140,7 +140,7 @@ class ActionMenu extends React.Component {
                             fileInput, accept: fileAccept, fileChange, fileInputRef}) => {
                             const isComingSoon = !handleClick;
                             const hasFileInput = fileInput;
-                            const tooltipId = `tooltip-${Math.random()}`;
+                            const tooltipId = title;
                             return (
                                 <div key={tooltipId}>
                                     <button

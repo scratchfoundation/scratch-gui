@@ -137,7 +137,7 @@ class SoundTab extends React.Component {
                 id: 'gui.soundTab.recordSound'
             },
             addSound: {
-                defaultMessage: 'Sound Library',
+                defaultMessage: 'Choose a Sound',
                 description: 'Button to add a sound in the editor tab',
                 id: 'gui.soundTab.addSoundFromLibrary'
             }

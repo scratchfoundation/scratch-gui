@@ -29,12 +29,12 @@ import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
 const messages = defineMessages({
     addLibraryBackdropMsg: {
-        defaultMessage: 'Backdrop Library',
+        defaultMessage: 'Choose a Backdrop',
         description: 'Button to add a backdrop in the editor tab',
         id: 'gui.costumeTab.addBackdropFromLibrary'
     },
     addLibraryCostumeMsg: {
-        defaultMessage: 'Costume Library',
+        defaultMessage: 'Choose a Costume',
         description: 'Button to add a costume in the editor tab',
         id: 'gui.costumeTab.addCostumeFromLibrary'
     },

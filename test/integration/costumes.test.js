@@ -29,7 +29,7 @@ describe('Working with costumes', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
         await clickText('Costumes');
-        await clickXpath('//button[@aria-label="Costume Library"]');
+        await clickXpath('//button[@aria-label="Choose a Costume"]');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('abb');
         await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector
@@ -57,7 +57,7 @@ describe('Working with costumes', () => {
     test('Adding a backdrop', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickXpath('//button[@aria-label="Backdrop Library"]');
+        await clickXpath('//button[@aria-label="Choose a Backdrop"]');
         const el = await findByXpath("//input[@placeholder='what are you looking for?']");
         await el.sendKeys('blue');
         await clickText('Blue Sky'); // Should close the modal

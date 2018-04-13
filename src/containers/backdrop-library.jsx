@@ -34,7 +34,7 @@ class BackdropLibrary extends React.Component {
         return (
             <LibraryComponent
                 data={backdropLibraryContent}
-                title="Backdrop Library"
+                title="Choose a Backdrop"
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
             />

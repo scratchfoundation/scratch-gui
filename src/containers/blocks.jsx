@@ -70,6 +70,12 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
+        // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the entire toolbox
+        // every time we reset the workspace.  We call updateToolbox as a part of componentDidUpdate so the toolbox will
+        // still correctly be updated
+        this.setToolboxRefreshEnabled = this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
+        this.workspace.setToolboxRefreshEnabled = () => this.setToolboxRefreshEnabled(false);
+
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
@@ -97,9 +103,13 @@ class Blocks extends React.Component {
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const categoryName = this.workspace.toolbox_.getSelectedCategoryName();
             const offset = this.workspace.toolbox_.getCategoryScrollOffset();
-            this.workspace.updateToolbox(this.props.toolboxXML);
-            const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
-            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            // rather than update the toolbox "sync" -- update it in the next frame
+            clearTimeout(this.toolboxUpdate);
+            this.toolboxUpdate = setTimeout(() => {
+                this.workspace.updateToolbox(this.props.toolboxXML);
+                const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
+                this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            }, 0);
         }
         if (this.props.isVisible === prevProps.isVisible) {
             return;
@@ -117,6 +127,7 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.workspace.dispose();
+        clearTimeout(this.toolboxUpdate);
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
@@ -213,11 +224,13 @@ class Blocks extends React.Component {
         this.workspace.addChangeListener(this.props.vm.blockListener);
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
-            const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
-            this.workspace.scrollX = scrollX;
-            this.workspace.scrollY = scrollY;
-            this.workspace.scale = scale;
-            this.workspace.resize();
+            setTimeout(() => {
+                const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
+                this.workspace.scrollX = scrollX;
+                this.workspace.scrollY = scrollY;
+                this.workspace.scale = scale;
+                this.workspace.resize();
+            }, 0);
         }
     }
     handleExtensionAdded (blocksInfo) {

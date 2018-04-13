@@ -9,7 +9,7 @@
 
 .input-label, .input-label-secondary {
     font-size: 0.625rem;
-    margin-right: calc($space / 2);
+    margin-right: .5rem;
     user-select: none;
     cursor: default;
 }

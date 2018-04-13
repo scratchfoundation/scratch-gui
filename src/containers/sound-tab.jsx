@@ -115,7 +115,8 @@ class SoundTab extends React.Component {
         const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {
                 url: soundIcon,
-                name: sound.name
+                name: sound.name,
+                details: (sound.sampleCount / sound.rate).toFixed(2)
             }
         )) : [];
 
@@ -136,7 +137,7 @@ class SoundTab extends React.Component {
                 id: 'gui.soundTab.recordSound'
             },
             addSound: {
-                defaultMessage: 'Sound Library',
+                defaultMessage: 'Choose a Sound',
                 description: 'Button to add a sound in the editor tab',
                 id: 'gui.soundTab.addSoundFromLibrary'
             }

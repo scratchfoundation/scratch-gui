@@ -17,7 +17,7 @@ class ErrorBoundary extends React.Component {
     componentDidCatch (error, info) {
         // Display fallback UI
         this.setState({hasError: true});
-        log.error(`Unhandled Error: ${error}, info: ${info}`);
+        log.error(`Unhandled Error: ${error.stack}\nComponent stack: ${info.componentStack}`);
         analytics.event({
             category: 'error',
             action: 'Fatal Error',

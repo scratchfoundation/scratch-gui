@@ -19,7 +19,7 @@
 .language-select {
     width: 100%;
     height: 1.85rem;
-    border: 1px solid #4c97ff;
+    border: 1px solid $motion-primary;
     user-select: none;
     outline: none;
     background: rgba(255, 255, 255, 0.5);

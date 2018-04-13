@@ -34,7 +34,11 @@ class Stage extends React.Component {
             'onWheel',
             'updateRect',
             'questionListener',
-            'setCanvas'
+            'setCanvas',
+            'setDragCanvas',
+            'clearDragCanvas',
+            'drawDragCanvas',
+            'positionDragCanvas'
         ]);
         this.state = {
             mouseDownTimeoutId: null,
@@ -164,12 +168,18 @@ class Stage extends React.Component {
             }
         }
         if (this.state.mouseDown && this.state.isDragging) {
-            const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
-            this.props.vm.postSpriteInfo({
-                x: spritePosition[0] + this.state.dragOffset[0],
-                y: -(spritePosition[1] + this.state.dragOffset[1]),
-                force: true
-            });
+            // Editor drag style only updates the drag canvas, does full update at the end of drag
+            // Non-editor drag style just updates the sprite continuously.
+            if (this.props.useEditorDragStyle) {
+                this.positionDragCanvas(mousePosition[0], mousePosition[1]);
+            } else {
+                const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
+                this.props.vm.postSpriteInfo({
+                    x: spritePosition[0] + this.state.dragOffset[0],
+                    y: -(spritePosition[1] + this.state.dragOffset[1]),
+                    force: true
+                });
+            }
         }
         const coordinates = {
             x: mousePosition[0],
@@ -181,6 +191,7 @@ class Stage extends React.Component {
     }
     onMouseUp (e) {
         const {x, y} = getEventXY(e);
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
         this.cancelMouseDownTimeout();
         this.setState({
             mouseDown: false,
@@ -195,7 +206,7 @@ class Stage extends React.Component {
             wasDragged: this.state.isDragging
         };
         if (this.state.isDragging) {
-            this.onStopDrag();
+            this.onStopDrag(mousePosition[0], mousePosition[1]);
         }
         this.props.vm.postIOData('mouse', data);
     }
@@ -248,11 +259,49 @@ class Stage extends React.Component {
         }
         this.setState({mouseDownTimeoutId: null});
     }
+    drawDragCanvas (drawableData) {
+        const {
+            data,
+            width,
+            height,
+            x,
+            y
+        } = drawableData;
+        this.dragCanvas.width = width;
+        this.dragCanvas.height = height;
+        // Need to convert uint8array from WebGL readPixels into Uint8ClampedArray
+        // for ImageData constructor. Shares underlying buffer, so it is fast.
+        const imageData = new ImageData(
+            new Uint8ClampedArray(data.buffer), width, height);
+        this.dragCanvas.getContext('2d').putImageData(imageData, 0, 0);
+        // Position so that pick location is at (0, 0) so that  positionDragCanvas()
+        // can use translation to move to mouse position smoothly.
+        this.dragCanvas.style.left = `${-x}px`;
+        this.dragCanvas.style.top = `${-y}px`;
+        this.dragCanvas.style.display = 'block';
+    }
+    clearDragCanvas () {
+        this.dragCanvas.width = this.dragCanvas.height = 0;
+        this.dragCanvas.style.display = 'none';
+    }
+    positionDragCanvas (mouseX, mouseY) {
+        // mouseX/Y are relative to stage top/left, and dragCanvas is already
+        // positioned so that the pick location is at (0,0).
+        this.dragCanvas.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    }
     onStartDrag (x, y) {
+        if (this.state.dragId) return;
         const drawableId = this.renderer.pick(x, y);
         if (drawableId === null) return;
         const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
+
+        // Only start drags on non-draggable targets in editor drag mode
+        if (!this.props.useEditorDragStyle) {
+            const target = this.props.vm.runtime.getTargetById(targetId);
+            if (!target.draggable) return;
+        }
+
         if (targetId === null) return;
         this.props.vm.startDrag(targetId);
         this.setState({
@@ -260,28 +309,63 @@ class Stage extends React.Component {
             dragId: targetId,
             dragOffset: drawableData.scratchOffset
         });
+        if (this.props.useEditorDragStyle) {
+            this.drawDragCanvas(drawableData);
+            this.positionDragCanvas(x, y);
+            this.props.vm.postSpriteInfo({visible: false});
+        }
     }
-    onStopDrag () {
-        this.props.vm.stopDrag(this.state.dragId);
-        this.setState({
-            isDragging: false,
-            dragOffset: null,
-            dragId: null
-        });
+    onStopDrag (mouseX, mouseY) {
+        const dragId = this.state.dragId;
+        const commonStopDragActions = () => {
+            this.props.vm.stopDrag(dragId);
+            this.setState({
+                isDragging: false,
+                dragOffset: null,
+                dragId: null
+            });
+        };
+        if (this.props.useEditorDragStyle) {
+            // Need to sequence these actions to prevent flickering.
+            const spriteInfo = {visible: true};
+            // First update the sprite position if dropped in the stage.
+            if (mouseX > 0 && mouseX < this.rect.width &&
+                mouseY > 0 && mouseY < this.rect.height) {
+                const spritePosition = this.getScratchCoords(mouseX, mouseY);
+                spriteInfo.x = spritePosition[0] + this.state.dragOffset[0];
+                spriteInfo.y = -(spritePosition[1] + this.state.dragOffset[1]);
+                spriteInfo.force = true;
+            }
+            this.props.vm.postSpriteInfo(spriteInfo);
+            // Then clear the dragging canvas and stop drag (potentially slow if selecting sprite)
+            setTimeout(() => {
+                this.clearDragCanvas();
+                setTimeout(() => {
+                    commonStopDragActions();
+                }, 30);
+            }, 30);
+        } else {
+            commonStopDragActions();
+        }
     }
     setCanvas (canvas) {
         this.canvas = canvas;
+    }
+    setDragCanvas (canvas) {
+        this.dragCanvas = canvas;
     }
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
+            useEditorDragStyle, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
             <StageComponent
                 canvasRef={this.setCanvas}
                 colorInfo={this.state.colorInfo}
+                dragRef={this.setDragCanvas}
                 question={this.state.question}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}
@@ -297,13 +381,20 @@ Stage.propTypes = {
     isFullScreen: PropTypes.bool.isRequired,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,
+    useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     width: PropTypes.number
 };
 
+Stage.defaultProps = {
+    useEditorDragStyle: true
+};
+
 const mapStateToProps = state => ({
     isColorPicking: state.colorPicker.active,
-    isFullScreen: state.stageSize.isFullScreen
+    isFullScreen: state.stageSize.isFullScreen,
+    // Do not use editor drag style in fullscreen mode.
+    useEditorDragStyle: !state.stageSize.isFullScreen
 });
 
 const mapDispatchToProps = dispatch => ({

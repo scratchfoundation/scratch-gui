@@ -10,11 +10,11 @@ $header-height: calc($stage-menu-height - 2px);
     position: relative; /* For the add backdrop button */
     flex-grow: 1;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #fff;
+    background-color: $ui-white;
     color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
-    border-color: #dbdbdb;
+    border-color: $ui-black-transparent;
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;
@@ -24,7 +24,7 @@ $header-height: calc($stage-menu-height - 2px);
 
 .stage-selector.is-selected {
     border-color: $motion-primary;
-    box-shadow: 0px 0px 0px 3px $motion-transparent;
+    box-shadow: 0px 0px 0px 4px $motion-transparent;
 }
 
 .stage-selector:hover {
@@ -41,7 +41,7 @@ $header-height: calc($stage-menu-height - 2px);
     color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid $ui-black-transparent;
     width: 100%;
 }
 
@@ -72,7 +72,8 @@ $header-height: calc($stage-menu-height - 2px);
     display: block;
     width: 100%;
     user-select: none;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid $ui-black-transparent;
+    box-shadow: inset 0 0 4px $ui-black-transparent;
 }
 
 .add-button {

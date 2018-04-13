@@ -9,7 +9,6 @@ import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
 
 import backdropIcon from '../action-menu/icon--backdrop.svg';
-import cameraIcon from '../action-menu/icon--camera.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
@@ -18,7 +17,7 @@ const messages = defineMessages({
     addBackdropFromLibrary: {
         id: 'gui.spriteSelector.addBackdropFromLibrary',
         description: 'Button to add a stage in the target pane from library',
-        defaultMessage: 'Backdrop Library'
+        defaultMessage: 'Choose a Backdrop'
     },
     addBackdropFromPaint: {
         id: 'gui.stageSelector.addBackdropFromPaint',
@@ -33,11 +32,6 @@ const messages = defineMessages({
     addBackdropFromFile: {
         id: 'gui.stageSelector.addBackdropFromFile',
         description: 'Button to add a stage in the target pane from file',
-        defaultMessage: 'Coming Soon'
-    },
-    addBackdropFromCamera: {
-        id: 'gui.stageSelector.addBackdropFromCamera',
-        description: 'Button to add a stage in the target pane from camera',
         defaultMessage: 'Coming Soon'
     }
 });
@@ -68,9 +62,9 @@ const StageSelector = props => {
             {url ? (
                 <CostumeCanvas
                     className={styles.costumeCanvas}
-                    height={42}
+                    height={54}
                     url={url}
-                    width={56}
+                    width={72}
                 />
             ) : null}
             <div className={styles.label}>
@@ -86,9 +80,6 @@ const StageSelector = props => {
                 img={backdropIcon}
                 moreButtons={[
                     {
-                        title: intl.formatMessage(messages.addBackdropFromCamera),
-                        img: cameraIcon
-                    }, {
                         title: intl.formatMessage(messages.addBackdropFromFile),
                         img: fileUploadIcon
                     }, {

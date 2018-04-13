@@ -42,7 +42,7 @@ const Meter = props => {
                     />
                 ))}
             <rect
-                fill="white"
+                fill="hsla(215, 100%, 95%, 1)"
                 height={(nBarsToMask * (barHeight + barSpacing)) + (barSpacing / 2)}
                 opacity="0.75"
                 width={width}

@@ -7,7 +7,7 @@
 
 .body-wrapper {
     height: calc(100% - $menu-bar-height);
-    background-color: $ui-background-blue;
+    background-color: $ui-primary;
 }
 
 .flex-wrapper {
@@ -57,13 +57,16 @@
 .tab {
     flex-grow: 1;
     height: 80%;
-    margin-left: 1px;
+    margin-left: -0.5rem;
 
-    border-radius: $space $space 0 0;
-    border: none;
+    border-radius: 1rem 1rem 0 0;
+    border: 1px solid $ui-black-transparent;
 
-    background-color: #F6F8FA;
-    color: #9AA1B5;
+    padding: 0.125rem 1.25rem 0;
+    font-size: 0.75rem;
+
+    background-color: $ui-tertiary;
+    color: $text-primary-transparent;
 
     display: flex;
     justify-content: center;
@@ -72,13 +75,55 @@
     user-select: none;
 }
 
-.tab.is-selected {
+/* Use z-indices to force left-on-top for tabs */
+.tab:nth-of-type(1) {
+    margin-left: 0;
+    z-index: 3;
+}
+.tab:nth-of-type(2) {
+    z-index: 2;
+}
+.tab:nth-of-type(3) {
     z-index: 1;
-    color: #40B9F5;
-    background-color: #FFFFFF;
-    border-bottom: $ui-background-blue 1px solid;
 }
 
+.tab:hover {
+  background-color: $ui-primary;
+}
+
+.tab.is-selected {
+    height: 90%;
+    color: $motion-primary;
+    background-color: $ui-white;
+    z-index: 4; /* Make sure selected is always above */
+}
+
+.tab img {
+    margin-right: 0.125rem;
+    width: 1.375rem;
+    filter: grayscale(100%);
+}
+
+.tab.is-selected img {
+    filter: none;
+}
+
+/* Tab style overrides from react-tabs */
+.tab.is-selected:after {
+    display: none;
+}
+
+.tab.is-selected:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: $ui-black-transparent;
+}
+
+.tab.is-selected:focus:after {
+    display: none;
+}
+
+/* Body of the tabs */
 .tabs {
     position: relative;
     flex-grow: 1;

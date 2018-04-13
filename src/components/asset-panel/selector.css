@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: $ui-background-blue;
+    background: $ui-tertiary;
 }
 
 .new-buttons {
@@ -62,6 +62,5 @@ $fade-out-distance: 100px;
 
     .list-item {
         width: 4rem;
-        min-height: 4rem;
     }
 }

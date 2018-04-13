@@ -197,6 +197,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var ArgumentType = __webpack_require__(5);
 var BlockType = __webpack_require__(6);
 var dispatch = __webpack_require__(7);
+var TargetType = __webpack_require__(19);
 
 var ExtensionWorker = function () {
     function ExtensionWorker() {
@@ -256,6 +257,7 @@ var ExtensionWorker = function () {
 global.Scratch = global.Scratch || {};
 global.Scratch.ArgumentType = ArgumentType;
 global.Scratch.BlockType = BlockType;
+global.Scratch.TargetType = TargetType;
 
 /**
  * Expose only specific parts of the worker to extensions.
@@ -357,13 +359,26 @@ var BlockType = {
 
   /**
    * Specialized command block which may or may not run a child branch
+   * The thread continues with the next block whether or not a child branch ran.
    */
   CONDITIONAL: 'conditional',
+
+  /**
+   * Specialized hat block with no implementation function
+   * This stack only runs if the corresponding event is emitted by other code.
+   */
+  EVENT: 'event',
 
   /**
    * Hat block which conditionally starts a block stack
    */
   HAT: 'hat',
+
+  /**
+   * Specialized command block which may or may not run a child branch
+   * If a child branch runs, the thread evaluates the loop block again.
+   */
+  LOOP: 'loop',
 
   /**
    * General reporter with numeric or string value
@@ -1268,6 +1283,31 @@ AjaxLogger.jQueryWait = function(onDone) {
 
 module.exports = AjaxLogger;
 
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Default types of Target supported by the VM
+ * @enum {string}
+ */
+var TargetType = {
+  /**
+   * Rendered target which can move, change costumes, etc.
+   */
+  SPRITE: 'sprite',
+
+  /**
+   * Rendered target which cannot move but can change backdrops
+   */
+  STAGE: 'stage'
+};
+
+module.exports = TargetType;
 
 /***/ })
 /******/ ]);

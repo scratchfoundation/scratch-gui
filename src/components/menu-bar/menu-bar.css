@@ -39,25 +39,35 @@
 }
 
 .scratch-logo {
-    height:  $menu-bar-height;
-    padding: 0.8rem 0;
+    height:  1.6rem;
     vertical-align: middle;
 }
 
-.scratch-logo:hover {
-    transform: scale(1.1, 1.1);
-    background-size: 100%;
-    transition: all .075s ease-in;
+.menu {
+    /* blocklyToolboxDiv is 40 */
+    z-index: 50;
+    top: $menu-bar-height;
 }
 
-.menu-item {
-    display: block;
+.menu-bar-item {
+    display: flex;
     padding: 0 0.25rem;
-    cursor: pointer;
     text-decoration: none;
     color: $ui-white;
     user-select: none;
     align-self: center;
+    position: relative;
+    align-items: center;
+    height: $menu-bar-height;
+}
+
+.menu-bar-item.hoverable {
+    cursor: pointer;
+}
+
+.menu-bar-item.active,
+.menu-bar-item.hoverable:hover {
+    background-color: $ui-black-transparent;
 }
 
 .file-group {
@@ -66,7 +76,7 @@
     align-items: center;
 }
 
-.file-group .menu-item {
+.file-group .menu-bar-item {
     padding: 0 0.75rem;
 }
 
@@ -125,7 +135,7 @@
 }
 
 .mystuff-icon {
-    margin-right: .5rem;
+    margin: 0 .25rem;
     height: 1rem;
 }
 
@@ -137,9 +147,8 @@
 }
 
 .profile-icon {
-    margin-right: .5rem;
+    margin: 0 .25rem;
     width: 2rem;
-    height: 34px;
     border-radius: 0.25rem;
 }
 

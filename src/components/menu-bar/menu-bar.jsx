@@ -8,8 +8,20 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
+import ProjectLoader from '../../containers/project-loader.jsx';
+import Menu from '../../containers/menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import ProjectSaver from '../../containers/project-saver.jsx';
 
 import {openFeedbackForm} from '../../reducers/modals';
+import {
+    openFileMenu,
+    closeFileMenu,
+    fileMenuOpen,
+    openEditMenu,
+    closeEditMenu,
+    editMenuOpen
+} from '../../reducers/menus';
 
 import styles from './menu-bar.css';
 
@@ -20,15 +32,74 @@ import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
 
-const MenuBar = props => (
-    <Box
-        className={classNames({
-            [styles.menuBar]: true
-        })}
+const MenuBarItemTooltip = ({
+    children,
+    className,
+    id,
+    place = 'bottom'
+}) => (
+    <ComingSoonTooltip
+        className={classNames(styles.comingSoon, className)}
+        place={place}
+        tooltipClassName={styles.comingSoonTooltip}
+        tooltipId={id}
     >
+        {children}
+    </ComingSoonTooltip>
+);
+
+MenuBarItemTooltip.propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    id: PropTypes.string,
+    place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
+};
+
+const MenuItemTooltip = ({id, children, className}) => (
+    <ComingSoonTooltip
+        className={classNames(styles.comingSoon, className)}
+        place="right"
+        tooltipClassName={styles.comingSoonTooltip}
+        tooltipId={id}
+    >
+        {children}
+    </ComingSoonTooltip>
+);
+
+MenuItemTooltip.propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    id: PropTypes.string
+};
+
+const MenuBarMenu = ({
+    children,
+    onRequestClose,
+    open,
+    place = 'right'
+}) => (
+    <Menu
+        className={styles.menu}
+        open={open}
+        place={place}
+        onRequestClose={onRequestClose}
+    >
+        {children}
+    </Menu>
+);
+
+MenuBarMenu.propTypes = {
+    children: PropTypes.node,
+    onRequestClose: PropTypes.func,
+    open: PropTypes.bool,
+    place: PropTypes.oneOf(['left', 'right'])
+};
+
+const MenuBar = props => (
+    <Box className={styles.menuBar}>
         <div className={styles.mainMenu}>
             <div className={styles.fileGroup}>
-                <div className={classNames(styles.logoWrapper, styles.menuItem)}>
+                <div className={classNames(styles.menuBarItem)}>
                     <img
                         alt="Scratch"
                         className={styles.scratchLogo}
@@ -36,59 +107,94 @@ const MenuBar = props => (
                         src={scratchLogo}
                     />
                 </div>
-                <div className={classNames(styles.menuItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
+                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                    <MenuBarItemTooltip
+                        id="menubar-selector"
                         place="right"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="menubar-selector"
                     >
                         <LanguageSelector />
-                    </ComingSoonTooltip>
+                    </MenuBarItemTooltip>
                 </div>
-                <div className={classNames(styles.menuItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
-                        place="bottom"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="file-menu"
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: props.fileMenuOpen
+                    })}
+                    onMouseUp={props.onClickFile}
+                >
+                    <div className={classNames(styles.fileMenu)}>File</div>
+                    <MenuBarMenu
+                        open={props.fileMenuOpen}
+                        onRequestClose={props.onRequestCloseFile}
                     >
-                        <div className={classNames(styles.fileMenu)}>File</div>
-                    </ComingSoonTooltip>
+                        <MenuItemTooltip id="new">
+                            <MenuItem>New</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuSection>
+                            <MenuItemTooltip id="save">
+                                <MenuItem>Save now</MenuItem>
+                            </MenuItemTooltip>
+                            <MenuItemTooltip id="copy">
+                                <MenuItem>Save as a copy</MenuItem>
+                            </MenuItemTooltip>
+                        </MenuSection>
+                        <MenuSection>
+                            <ProjectLoader>{(renderFileInput, loadProject, loadProps) => (
+                                <MenuItem
+                                    onClick={loadProject}
+                                    {...loadProps}
+                                >
+                                    Upload from your computer
+                                    {renderFileInput()}
+                                </MenuItem>
+                            )}</ProjectLoader>
+                            <ProjectSaver>{(saveProject, saveProps) => (
+                                <MenuItem
+                                    onClick={saveProject}
+                                    {...saveProps}
+                                >
+                                    Download to your computer
+                                </MenuItem>
+                            )}</ProjectSaver>
+                        </MenuSection>
+                    </MenuBarMenu>
                 </div>
-                <div className={classNames(styles.menuItem)}>
-                    <ComingSoonTooltip
-                        className={styles.comingSoon}
-                        place="bottom"
-                        tooltipClassName={styles.comingSoonTooltip}
-                        tooltipId="edit-menu"
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: props.editMenuOpen
+                    })}
+                    onMouseUp={props.onClickEdit}
+                >
+                    <div className={classNames(styles.editMenu)}>Edit</div>
+                    <MenuBarMenu
+                        open={props.editMenuOpen}
+                        onRequestClose={props.onRequestCloseEdit}
                     >
-                        <div className={classNames(styles.editMenu)}>Edit</div>
-                    </ComingSoonTooltip>
+                        <MenuItemTooltip id="undo">
+                            <MenuItem>Undo</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuItemTooltip id="redo">
+                            <MenuItem>Redo</MenuItem>
+                        </MenuItemTooltip>
+                        <MenuSection>
+                            <MenuItemTooltip id="turbo">
+                                <MenuItem>Turbo mode</MenuItem>
+                            </MenuItemTooltip>
+                        </MenuSection>
+                    </MenuBarMenu>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />
-            <div className={classNames(styles.menuItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="title-field"
-                >
+            <div className={classNames(styles.menuBarItem)}>
+                <MenuBarItemTooltip id="title-field">
                     <input
                         disabled
                         className={classNames(styles.titleField)}
                         placeholder="Untitled-1"
                     />
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
-            <div className={classNames(styles.menuItem)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="share-button"
-                >
+            <div className={classNames(styles.menuBarItem)}>
+                <MenuBarItemTooltip id="share-button">
                     <Button className={classNames(styles.shareButton)}>
                         <FormattedMessage
                             defaultMessage="Share"
@@ -96,15 +202,10 @@ const MenuBar = props => (
                             id="gui.menuBar.share"
                         />
                     </Button>
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
-            <div className={classNames(styles.menuItem, styles.communityButtonWrapper)}>
-                <ComingSoonTooltip
-                    className={styles.comingSoon}
-                    place="bottom"
-                    tooltipClassName={styles.comingSoonTooltip}
-                    tooltipId="community-button"
-                >
+            <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
+                <MenuBarItemTooltip id="community-button">
                     <Button
                         className={classNames(styles.communityButton)}
                         iconClassName={styles.communityButtonIcon}
@@ -116,10 +217,10 @@ const MenuBar = props => (
                             id="gui.menuBar.seeCommunity"
                         />
                     </Button>
-                </ComingSoonTooltip>
+                </MenuBarItemTooltip>
             </div>
         </div>
-        <div className={classNames(styles.menuItem, styles.feedbackButtonWrapper)}>
+        <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
             <Button
                 className={styles.feedbackButton}
                 iconSrc={feedbackIcon}
@@ -133,24 +234,31 @@ const MenuBar = props => (
             </Button>
         </div>
         <div className={styles.accountInfoWrapper}>
-            <ComingSoonTooltip
-                className={styles.comingSoon}
-                place="bottom"
-                tooltipId="mystuff"
-            >
-                <div className={styles.mystuffButton}>
+            <MenuBarItemTooltip id="mystuff">
+                <div
+                    className={classNames(
+                        styles.menuBarItem,
+                        styles.hoverable,
+                        styles.mystuffButton
+                    )}
+                >
                     <img
                         className={styles.mystuffIcon}
                         src={mystuffIcon}
                     />
                 </div>
-            </ComingSoonTooltip>
-            <ComingSoonTooltip
-                className={styles.comingSoon}
+            </MenuBarItemTooltip>
+            <MenuBarItemTooltip
+                id="account-nav"
                 place="left"
-                tooltipId="account-nav"
             >
-                <div className={styles.accountNavMenu}>
+                <div
+                    className={classNames(
+                        styles.menuBarItem,
+                        styles.hoverable,
+                        styles.accountNavMenu
+                    )}
+                >
                     <img
                         className={styles.profileIcon}
                         src={profileIcon}
@@ -161,21 +269,32 @@ const MenuBar = props => (
                         src={dropdownCaret}
                     />
                 </div>
-            </ComingSoonTooltip>
+            </MenuBarItemTooltip>
         </div>
     </Box>
 );
 
 MenuBar.propTypes = {
-    onGiveFeedback: PropTypes.func.isRequired
+    editMenuOpen: PropTypes.bool,
+    fileMenuOpen: PropTypes.bool,
+    onClickEdit: PropTypes.func,
+    onClickFile: PropTypes.func,
+    onGiveFeedback: PropTypes.func.isRequired,
+    onRequestCloseEdit: PropTypes.func,
+    onRequestCloseFile: PropTypes.func
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    fileMenuOpen: fileMenuOpen(state),
+    editMenuOpen: editMenuOpen(state)
+});
 
 const mapDispatchToProps = dispatch => ({
-    onGiveFeedback: () => {
-        dispatch(openFeedbackForm());
-    }
+    onGiveFeedback: () => dispatch(openFeedbackForm()),
+    onClickFile: () => dispatch(openFileMenu()),
+    onRequestCloseFile: () => dispatch(closeFileMenu()),
+    onClickEdit: () => dispatch(openEditMenu()),
+    onRequestCloseEdit: () => dispatch(closeEditMenu())
 });
 
 export default connect(

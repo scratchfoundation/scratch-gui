@@ -3,17 +3,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import LoadButtonComponent from '../components/load-button/load-button.jsx';
-
 import {
     openLoadingProject,
     closeLoadingProject
 } from '../reducers/modals';
 
-class LoadButton extends React.Component {
+/**
+ * Project loader component passes a file input, load handler and props to its child.
+ * It expects this child to be a function with the signature
+ *     function (renderFileInput, loadProject, props) {}
+ * The component can then be used to attach project loading functionality
+ * to any other component:
+ *
+ * <ProjectLoader>{(renderFileInput, loadProject, props) => (
+ *     <MyCoolComponent
+ *         onClick={loadProject}
+ *         {...props}
+ *     >
+ *         {renderFileInput()}
+ *     </MyCoolComponent>
+ * )}</ProjectLoader>
+ */
+class ProjectLoader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'renderFileInput',
             'setFileInput',
             'handleChange',
             'handleClick'
@@ -49,26 +64,34 @@ class LoadButton extends React.Component {
     setFileInput (input) {
         this.fileInput = input;
     }
-    render () {
-        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
-        const {
-            closeLoadingState, // eslint-disable-line no-unused-vars
-            openLoadingState, // eslint-disable-line no-unused-vars
-            vm, // eslint-disable-line no-unused-vars
-            ...props
-        } = this.props;
+    renderFileInput () {
         return (
-            <LoadButtonComponent
-                inputRef={this.setFileInput}
+            <input
+                accept=".sb2,.sb3"
+                ref={this.setFileInput}
+                style={{display: 'none'}}
+                type="file"
                 onChange={this.handleChange}
-                onClick={this.handleClick}
-                {...props}
             />
         );
     }
+    render () {
+        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
+        const {
+            /* eslint-disable no-unused-vars */
+            children,
+            closeLoadingState,
+            openLoadingState,
+            vm,
+            /* eslint-enable no-unused-vars */
+            ...props
+        } = this.props;
+        return this.props.children(this.renderFileInput, this.handleClick, props);
+    }
 }
 
-LoadButton.propTypes = {
+ProjectLoader.propTypes = {
+    children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
@@ -88,4 +111,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoadButton);
+)(ProjectLoader);

@@ -136,9 +136,11 @@ class ActionMenu extends React.Component {
                 />
                 <div className={styles.moreButtonsOuter}>
                     <div className={styles.moreButtons}>
-                        {(moreButtons || []).map(({img, title, onClick: handleClick}) => {
+                        {(moreButtons || []).map(({img, title, onClick: handleClick,
+                            fileAccept, fileChange, fileInput}) => {
                             const isComingSoon = !handleClick;
-                            const tooltipId = `tooltip-${Math.random()}`;
+                            const hasFileInput = fileInput;
+                            const tooltipId = title;
                             return (
                                 <div key={tooltipId}>
                                     <button
@@ -148,13 +150,21 @@ class ActionMenu extends React.Component {
                                         })}
                                         data-for={tooltipId}
                                         data-tip={title}
-                                        onClick={this.clickDelayer(handleClick)}
+                                        onClick={hasFileInput ? handleClick : this.clickDelayer(handleClick)}
                                     >
                                         <img
                                             className={styles.moreIcon}
                                             draggable={false}
                                             src={img}
                                         />
+                                        {hasFileInput ? (
+                                            <input
+                                                accept={fileAccept}
+                                                className={styles.fileInput}
+                                                ref={fileInput}
+                                                type="file"
+                                                onChange={fileChange}
+                                            />) : null}
                                     </button>
                                     <ReactTooltip
                                         className={classNames(styles.tooltip, {
@@ -180,7 +190,10 @@ ActionMenu.propTypes = {
     moreButtons: PropTypes.arrayOf(PropTypes.shape({
         img: PropTypes.string,
         title: PropTypes.node.isRequired,
-        onClick: PropTypes.func // Optional, "coming soon" if no callback provided
+        onClick: PropTypes.func, // Optional, "coming soon" if no callback provided
+        fileAccept: PropTypes.string, // Optional, only for file upload
+        fileChange: PropTypes.func, // Optional, only for file upload
+        fileInput: PropTypes.func // Optional, only for file upload
     })),
     onClick: PropTypes.func.isRequired,
     title: PropTypes.node.isRequired

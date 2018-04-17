@@ -245,3 +245,12 @@
 .see-all-button img {
     margin-left: 0.5rem;
 }
+
+.video-cover {
+    /* background: green; */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

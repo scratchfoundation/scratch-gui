@@ -1,12 +1,14 @@
 import decks from '../lib/libraries/decks';
 
-const CLOSE_CARDS = 'scratch-gui/navigation/CLOSE_CARDS';
-const VIEW_CARDS = 'scratch-gui/navigation/VIEW_CARDS';
-const ACTIVATE_DECK = 'scratch-gui/navigation/ACTIVATE_DECK';
-const NEXT_STEP = 'scratch-gui/navigation/NEXT_STEP';
-const PREV_STEP = 'scratch-gui/navigation/PREV_STEP';
-const TOGGLE_LIGHTBOX = 'scratch-gui/navigation/TOGGLE_LIGHTBOX';
-const DRAG_CARD = 'scratch-gui/navigation/DRAG_CARD';
+const CLOSE_CARDS = 'scratch-gui/cards/CLOSE_CARDS';
+const VIEW_CARDS = 'scratch-gui/cards/VIEW_CARDS';
+const ACTIVATE_DECK = 'scratch-gui/cards/ACTIVATE_DECK';
+const NEXT_STEP = 'scratch-gui/cards/NEXT_STEP';
+const PREV_STEP = 'scratch-gui/cards/PREV_STEP';
+const TOGGLE_LIGHTBOX = 'scratch-gui/cards/TOGGLE_LIGHTBOX';
+const DRAG_CARD = 'scratch-gui/cards/DRAG_CARD';
+const START_DRAG = 'scratch-gui/cards/START_DRAG';
+const END_DRAG = 'scratch-gui/cards/END_DRAG';
 
 const initialState = {
     visible: true,
@@ -15,7 +17,8 @@ const initialState = {
     step: 0,
     lightboxVisible: false,
     x: 292,
-    y: 365
+    y: 365,
+    dragging: false
 };
 
 const reducer = function (state, action) {
@@ -64,6 +67,14 @@ const reducer = function (state, action) {
             x: action.x,
             y: action.y
         });
+    case START_DRAG:
+        return Object.assign({}, state, {
+            dragging: true
+        });
+    case END_DRAG:
+        return Object.assign({}, state, {
+            dragging: false
+        });
     default:
         return state;
     }
@@ -97,7 +108,15 @@ const toggleLightbox = function () {
 };
 
 const dragCard = function (x, y) {
-    return {type: DRAG_CARD, x, y}
+    return {type: DRAG_CARD, x, y};
+};
+
+const startDrag = function () {
+    return {type: START_DRAG};
+};
+
+const endDrag = function () {
+    return {type: END_DRAG};
 }
 
 export {
@@ -108,5 +127,7 @@ export {
     nextStep,
     prevStep,
     toggleLightbox,
-    dragCard
+    dragCard,
+    startDrag,
+    endDrag
 };

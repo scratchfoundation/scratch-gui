@@ -28,7 +28,10 @@ const Cards = props => {
         lightboxVisible,
         x,
         y,
-        onDrag
+        onDrag,
+        onStartDrag,
+        onEndDrag,
+        dragging
     } = props;
 
     let inner;
@@ -97,6 +100,9 @@ const Cards = props => {
                     >
                         {video ? (
                             <div className={styles.stepVideo}>
+                                {dragging ? (
+                                    <div className={styles.videoCover} />
+                                ) : null}
                                 <iframe
                                     width="600"
                                     height="350"
@@ -219,6 +225,8 @@ const Cards = props => {
             bounds="parent"
             position={{x, y}}
             onDrag={onDrag}
+            onStart={onStartDrag}
+            onStop={onEndDrag}
         >
             <div className={styles.cardContainer}>
                 {inner}

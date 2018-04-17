@@ -7,7 +7,9 @@ import {
     nextStep,
     prevStep,
     toggleLightbox,
-    dragCard
+    dragCard,
+    startDrag,
+    endDrag
 } from '../reducers/cards';
 
 import {
@@ -23,7 +25,8 @@ const mapStateToProps = state => ({
     step: state.cards.step,
     lightboxVisible: state.cards.lightboxVisible,
     x: state.cards.x,
-    y: state.cards.y
+    y: state.cards.y,
+    dragging: state.cards.dragging
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,7 +39,9 @@ const mapDispatchToProps = dispatch => ({
     onNextStep: () => dispatch(nextStep()),
     onPrevStep: () => dispatch(prevStep()),
     onToggleLightbox: () => dispatch(toggleLightbox()),
-    onDrag: (e_, data) => dispatch(dragCard(data.x, data.y))
+    onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),
+    onStartDrag: () => dispatch(startDrag()),
+    onEndDrag: () => dispatch(endDrag())
 });
 
 export default connect(

@@ -13,6 +13,8 @@ import prevIcon from './icon--prev.svg';
 
 import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
+import helpIcon from './icon--help.svg';
+
 const Cards = props => {
     const {
         visible,
@@ -83,7 +85,11 @@ const Cards = props => {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                        <div className={styles.collapseButton}>
+                            <span onClick={onExitDeck}>
+                                <img className={styles.helpIcon} src={helpIcon}/>
+                            </span>
+                        </div>
                         <div className={styles.stepTitle}>
                             {title}
                         </div>

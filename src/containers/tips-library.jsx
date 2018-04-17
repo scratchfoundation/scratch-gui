@@ -44,7 +44,7 @@ class TipsLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={decksLibraryThumbnailData}
-                title="Tips"
+                title="How-Tos"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

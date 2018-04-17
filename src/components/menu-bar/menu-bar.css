@@ -80,12 +80,6 @@
     padding: 0 0.75rem;
 }
 
-.feedback-button {
-    background-color: $ui-white;
-    color: $motion-primary;
-    height: 34px;
-}
-
 .divider {
     border-right: 1px dashed $ui-black-transparent;
     margin: 0 .5rem;

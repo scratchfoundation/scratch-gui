@@ -144,7 +144,7 @@ class SoundTab extends React.Component {
     }
 
     setFileInput (input) {
-        if (input && !this.fileInput) this.fileInput = input;
+        this.fileInput = input;
     }
 
     render () {

@@ -32,6 +32,8 @@ import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
 
+import helpIcon from './icon--help.svg';
+
 const MenuBarItemTooltip = ({
     children,
     className,
@@ -182,12 +184,6 @@ const MenuBar = props => (
                         </MenuSection>
                     </MenuBarMenu>
                 </div>
-                <div
-                    className={classNames(styles.menuBarItem, styles.hoverable)}
-                    onClick={props.onOpenTipLibrary}
-                >
-                    <div className={classNames(styles.tipsMenu)}>Tips</div>
-                </div>
             </div>
             <div className={classNames(styles.divider)} />
             <div className={classNames(styles.menuBarItem)}>
@@ -240,7 +236,16 @@ const MenuBar = props => (
             </Button>
         </div>
         <div className={styles.accountInfoWrapper}>
-            <MenuBarItemTooltip id="mystuff">
+            <div
+            className={classNames(styles.menuBarItem, styles.hoverable)}
+            onClick={props.onOpenTipLibrary}
+            >
+               <img
+                        className={styles.helpIcon}
+                        src={helpIcon}
+                    />
+        </div>
+        <MenuBarItemTooltip id="mystuff">
                 <div
                     className={classNames(
                         styles.menuBarItem,

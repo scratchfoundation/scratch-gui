@@ -32,6 +32,7 @@
 
 // Spin around
 import thumb_spin from './spin/thumb-spin.gif';
+import library_spin from './spin/library-spin.gif';
 import step_dragTurn from './spin/drag-turn.gif';
 import step_clickTurn from './spin/click-turn.gif';
 import step_dragForever from './spin/drag-forever.gif';
@@ -39,6 +40,7 @@ import step_clickForever from './spin/click-forever.gif';
 
 // Say hello
 import thumb_say from './say/thumb-say.gif';
+import library_say from './say/library-say.gif';
 import step_clickLooks from './say/click-looks.gif';
 import step_dragSay from './say/drag-say.gif';
 import step_clickSay from './say/click-say.gif';
@@ -47,7 +49,8 @@ import step_editSay from './say/edit-say.gif';
 import step_clickStack from './say/click-stack.gif';
 
 // Clicker
-import thumb_clicker from './clicker/thumb_clicker.gif';
+import thumb_clicker from './clicker/thumb-clicker.gif';
+import library_clicker from './clicker/library-clicker.gif';
 import step_dragGoTo from './clicker/drag-goto.gif';
 import step_clickGoTo from './clicker/click-goto.gif';
 import step_clickEvents from './clicker/click-events.gif';
@@ -90,7 +93,7 @@ import step_stop from './zoom/stop.gif';
 // import library_game from './clicker/game--library.gif';
 
 // Videos
-import glide_around_thumb from './videos/glide-around.jpg'
+import glide_around_thumb from './videos/glide-around.jpg';
 import change_size_thumb from './videos/change-size.jpg';
 import switch_costume_thumb from './videos/switch-costume.jpg';
 import hide_and_show_thumb from './videos/hide-and-show.jpg';
@@ -102,8 +105,8 @@ import spin_thumb from './videos/spin.jpg';
 export default [
     {
         name: 'Spin around',
-        img: thumb_spin,
-        libraryImg: thumb_spin,
+        img: library_spin,
+        libraryImg: library_spin,
         steps: [
             {
                 title: 'Drag out a “turn” block',
@@ -122,8 +125,8 @@ export default [
     },
     {
         name: 'Say hello',
-        img: thumb_say,
-        libraryImg: thumb_say,
+        img: library_say,
+        libraryImg: library_say,
         steps: [
             {
                 title: 'Click the “Looks” category',
@@ -148,8 +151,8 @@ export default [
     },
     {
         name: 'Clicker game',
-        img: thumb_clicker,
-        libraryImg: thumb_clicker,
+        img: library_clicker,
+        libraryImg: library_clicker,
         steps: [
             {
                 title: 'Drag out a “go to random position” block',

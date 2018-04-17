@@ -3,18 +3,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ButtonComponent from '../components/button/button.jsx';
-import {ComingSoonTooltip} from '../components/coming-soon/coming-soon.jsx';
-
-
-class SaveButton extends React.Component {
+/**
+ * Project saver component passes a saveProject function to its child.
+ * It expects this child to be a function with the signature
+ *     function (saveProject, props) {}
+ * The component can then be used to attach project saving functionality
+ * to any other component:
+ *
+ * <ProjectSaver>{(saveProject, props) => (
+ *     <MyCoolComponent
+ *         onClick={saveProject}
+ *         {...props}
+ *     />
+ * )}</ProjectSaver>
+ */
+class ProjectSaver extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleClick'
+            'saveProject'
         ]);
     }
-    handleClick () {
+    saveProject () {
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
@@ -27,7 +37,6 @@ class SaveButton extends React.Component {
             // File name: project-DATE-TIME
             const date = new Date();
             const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            // TODO change extension to sb3
             saveLink.download = `untitled-project-${timestamp}.sb3`;
             saveLink.click();
             window.URL.revokeObjectURL(url);
@@ -36,27 +45,18 @@ class SaveButton extends React.Component {
     }
     render () {
         const {
-            vm, // eslint-disable-line no-unused-vars
+            /* eslint-disable no-unused-vars */
+            children,
+            vm,
+            /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
-        return (
-            <ComingSoonTooltip
-                place="bottom"
-                tooltipId="save-button"
-            >
-                <ButtonComponent
-                    disabled
-                    onClick={this.handleClick}
-                    {...props}
-                >
-                    Save
-                </ButtonComponent>
-            </ComingSoonTooltip>
-        );
+        return this.props.children(this.saveProject, props);
     }
 }
 
-SaveButton.propTypes = {
+ProjectSaver.propTypes = {
+    children: PropTypes.func,
     vm: PropTypes.shape({
         saveProjectSb3: PropTypes.func
     })
@@ -69,4 +69,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(SaveButton);
+)(ProjectSaver);

@@ -83,7 +83,7 @@ class SoundLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={soundLibraryThumbnailData}
-                title="Sound Library"
+                title="Choose a Sound"
                 onItemMouseEnter={this.handleItemMouseEnter}
                 onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}

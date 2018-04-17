@@ -12,6 +12,7 @@ import styles from './stage.css';
 const StageComponent = props => {
     const {
         canvasRef,
+        dragRef,
         height,
         isColorPicking,
         isFullScreen,
@@ -24,7 +25,7 @@ const StageComponent = props => {
     } = props;
 
     const stageSize = getStageSize(isFullScreen, height, width);
-    
+
     return (
         <div>
             <Box
@@ -71,6 +72,12 @@ const StageComponent = props => {
                         </div>
                     </div>
                 )}
+                <canvas
+                    className={styles.draggingSprite}
+                    height={0}
+                    ref={dragRef}
+                    width={0}
+                />
             </Box>
             {isColorPicking ? (
                 <Box
@@ -84,6 +91,7 @@ const StageComponent = props => {
 StageComponent.propTypes = {
     canvasRef: PropTypes.func,
     colorInfo: Loupe.propTypes.colorInfo,
+    dragRef: PropTypes.func,
     height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
@@ -94,6 +102,7 @@ StageComponent.propTypes = {
 };
 StageComponent.defaultProps = {
     canvasRef: () => {},
+    dragRef: () => {},
     width: 480,
     height: 360
 };

@@ -17,7 +17,7 @@ const messages = defineMessages({
     addBackdropFromLibrary: {
         id: 'gui.spriteSelector.addBackdropFromLibrary',
         description: 'Button to add a stage in the target pane from library',
-        defaultMessage: 'Backdrop Library'
+        defaultMessage: 'Choose a Backdrop'
     },
     addBackdropFromPaint: {
         id: 'gui.stageSelector.addBackdropFromPaint',

@@ -19,7 +19,7 @@ const messages = defineMessages({
     addSpriteFromLibrary: {
         id: 'gui.spriteSelector.addSpriteFromLibrary',
         description: 'Button to add a sprite in the target pane from library',
-        defaultMessage: 'Sprite Library'
+        defaultMessage: 'Choose a Sprite'
     },
     addSpriteFromPaint: {
         id: 'gui.spriteSelector.addSpriteFromPaint',

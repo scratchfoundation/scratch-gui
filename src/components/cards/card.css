@@ -102,8 +102,10 @@
     /* overflow: hidden; */
     position: relative;
     margin: 0 1rem 1rem 1rem;
+
 }
 .step-image img {
+    cursor: zoom-in;
     max-width: 450px;
 }
 
@@ -113,6 +115,7 @@
 } */
 
 .left-button, .right-button {
+    cursor: pointer;
     background: $motion-primary;
     box-shadow: 0 0 0 4px $motion-transparent;
     height: 40px;

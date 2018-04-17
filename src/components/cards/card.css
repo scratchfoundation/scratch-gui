@@ -74,6 +74,7 @@
     padding: 0.8rem;
 }
 .remove-button, .collapse-button {
+    cursor: pointer;
     /* color: #888; */
     /* font-size: 0.75rem; */
 }
@@ -90,10 +91,10 @@
     /* margin: 0 0 1rem; */
 }
 
-.step-image {
+.step-body {
     background: #F9F9F9;
     border: 1px solid #ddd;
-    width: 452px;
+    /* width: 452px; */
     min-height: 160px;
     /* border-radius: 1rem; */
     display: flex;
@@ -102,6 +103,12 @@
     /* overflow: hidden; */
     position: relative;
     margin: 0 1rem 1rem 1rem;
+
+}
+.step-image {
+    /* width: 452px; */
+}
+.step-video {
 
 }
 .step-image img {

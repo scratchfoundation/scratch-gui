@@ -89,6 +89,16 @@ import step_stop from './zoom/stop.gif';
 // import library_story from './story/story--library.gif';
 // import library_game from './clicker/game--library.gif';
 
+// Videos
+import glide_around_thumb from './videos/glide-around.jpg'
+import change_size_thumb from './videos/change-size.jpg';
+import switch_costume_thumb from './videos/switch-costume.jpg';
+import hide_and_show_thumb from './videos/hide-and-show.jpg';
+import add_backdrop_thumb from './videos/add-backdrop.jpg';
+import add_effects_thumb from './videos/add-effects.jpg';
+import move_arrow_keys_thumb from './videos/move-arrow-keys.jpg';
+import spin_thumb from './videos/spin.jpg';
+
 export default [
     {
         name: 'Spin around',
@@ -158,7 +168,7 @@ export default [
                 image: step_clickSprite
             }
         ]
-    }
+    },
     /*
         {
             name: 'Getting started',
@@ -290,4 +300,68 @@ export default [
     //         }
     //     ]
     // },
+    {
+        name: "Glide Around",
+        img: glide_around_thumb,
+        steps: [{
+            title: "Glide Around",
+            video: "https://www.youtube.com/embed/WUcmsMEIbGg"
+        }]
+    },
+    {
+        name: "Change Size",
+        img: change_size_thumb,
+        steps: [{
+            title: "Change Size",
+            video: "https://www.youtube.com/embed/NiK9KcghZ9s"
+        }]
+    },
+    {
+        name: "Switch Costume",
+        img: switch_costume_thumb,
+        steps: [{
+            title: "Switch Costume",
+            video: "https://www.youtube.com/embed/AUBoFxQDPWA"
+        }]
+    },
+    {
+        name: "Hide & Show ",
+        img: hide_and_show_thumb,
+        steps: [{
+            title: "Hide & Show ",
+            video: "https://www.youtube.com/embed/jpvqnlfsDTU"
+        }]
+    },
+    {
+        name: "Add A Backdrop",
+        img: add_backdrop_thumb,
+        steps: [{
+            title: "Add A Backdrop",
+            video: "https://www.youtube.com/embed/WpV05Q7AbPU"
+        }]
+    },
+    {
+        name: "Add Effects",
+        img: add_effects_thumb,
+        steps: [{
+            title: "Add Effects",
+            video: "https://www.youtube.com/embed/ORuohhkx15g"
+        }]
+    },
+    {
+        name: "Move Using Arrow Keys",
+        img: move_arrow_keys_thumb,
+        steps: [{
+            title: "Move Using Arrow Keys",
+            video: "https://www.youtube.com/embed/7DUA_Yl0B_M"
+        }]
+    },
+    {
+        name: "Spin!",
+        img: spin_thumb,
+        steps: [{
+            title: "Spin!",
+            video: "https://www.youtube.com/embed/rHP3aojB_6w"
+        }]
+    }
 ];

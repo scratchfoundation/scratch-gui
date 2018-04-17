@@ -38,7 +38,7 @@ class TipsLibrary extends React.PureComponent {
             index: i,
             featured: true,
             ...deck
-        })).concat(tipsLibraryContent);
+        }));
 
         if (!this.props.visible) return null;
         return (

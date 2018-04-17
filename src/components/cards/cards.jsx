@@ -44,7 +44,7 @@ const Cards = props => {
                 </div>
                 <div className={styles.stepDescription}>
                     <div className={styles.decks}>
-                        {Object.values(content).map((deck, i) => (
+                        {Object.values(content.slice(0,3)).map((deck, i) => (
                             <div
                                 className={styles.deck}
                                 onClick={onActivateDeckFactory(i)}
@@ -71,7 +71,8 @@ const Cards = props => {
                 title,
                 description,
                 image,
-                zoomedImage
+                zoomedImage,
+                video
             } = steps[step];
 
             // const exitDeck = () => onActivateDeck(null);
@@ -91,24 +92,40 @@ const Cards = props => {
                         </div>
                     ) : null}
                     <div
-                        className={styles.stepImage}
+                        className={styles.stepBody}
                         onClick={onToggleLightbox}
                     >
-                        <img
-                            draggable={false}
-                            src={image}
-                        />
-                        <img draggable={false} className={styles.zoomIcon} src={zoomIcon} />
-                        <Lightbox
-                            backdropClosesModal={true}
-                            images={[
-                                { src: zoomedImage || image }
-                            ]}
-                            isOpen={lightboxVisible}
-                            onClose={onToggleLightbox}
-                            onClickImage={onToggleLightbox}
-                            showImageCount={false}
-                        />
+                        {video ? (
+                            <div className={styles.stepVideo}>
+                                <iframe
+                                    width="600"
+                                    height="350"
+                                    src={`${video}?rel=0&amp;showinfo=0`}
+                                    frameBorder="0"
+                                    allow="autoplay; encrypted-media"
+                                    allowFullScreen>
+                                    Video not available.
+                                </iframe>
+                            </div>
+                        ) : (
+                            <div className={styles.stepImage}>
+                                <img
+                                    draggable={false}
+                                    src={image}
+                                />
+                                <img draggable={false} className={styles.zoomIcon} src={zoomIcon} />
+                                <Lightbox
+                                    backdropClosesModal={true}
+                                    images={[
+                                        { src: zoomedImage || image }
+                                    ]}
+                                    isOpen={lightboxVisible}
+                                    onClose={onToggleLightbox}
+                                    onClickImage={onToggleLightbox}
+                                    showImageCount={false}
+                                />
+                            </div>
+                        )}
                     </div>
                     {hasNext ? (
                         <div>
@@ -147,7 +164,7 @@ const Cards = props => {
                     </div>
                     <div className={styles.stepDescription}>
                         <div className={styles.decks}>
-                            {Object.values(content).map((deck, i) => (
+                            {Object.values(content.slice(0,3)).map((deck, i) => (
                                 <div
                                     className={styles.deck}
                                     onClick={onActivateDeckFactory(i)}

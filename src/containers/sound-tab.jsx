@@ -33,7 +33,10 @@ class SoundTab extends React.Component {
             'handleDeleteSound',
             'handleDuplicateSound',
             'handleNewSound',
-            'handleSurpriseSound'
+            'handleSurpriseSound',
+            'handleFileUploadClick',
+            'handleSoundUpload',
+            'setFileInput'
         ]);
         this.state = {selectedSoundIndex: 0};
     }
@@ -98,6 +101,52 @@ class SoundTab extends React.Component {
         });
     }
 
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+
+    handleSoundUpload (e) {
+        const thisFileInput = e.target;
+        let thisFile = null;
+        const reader = new FileReader();
+        reader.onload = () => {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same sound multiple times if
+            // they choose
+            thisFileInput.value = null;
+            // Cache the sound in storage
+            const soundBuffer = reader.result;
+            const storage = this.props.vm.runtime.storage;
+
+            const fileType = thisFile.type; // what file type does the browser think this is
+            const soundFormat = fileType === 'audio/mp3' ? storage.DataFormat.MP3 : storage.DataFormat.WAV;
+            const md5 = storage.builtinHelper.cache(
+                storage.AssetType.Sound,
+                soundFormat,
+                new Uint8Array(soundBuffer),
+            );
+            // Add the sound to vm
+            const newSound = {
+                format: '',
+                name: 'sound1',
+                dataFormat: soundFormat,
+                md5: `${md5}.${soundFormat}`
+            };
+
+            this.props.vm.addSound(newSound).then(() => {
+                this.handleNewSound();
+            });
+        };
+        if (thisFileInput.files) {
+            thisFile = thisFileInput.files[0];
+            reader.readAsArrayBuffer(thisFile);
+        }
+    }
+
+    setFileInput (input) {
+        this.fileInput = input;
+    }
+
     render () {
         const {
             intl,
@@ -122,7 +171,7 @@ class SoundTab extends React.Component {
 
         const messages = defineMessages({
             fileUploadSound: {
-                defaultMessage: 'Coming Soon',
+                defaultMessage: 'Upload Sound',
                 description: 'Button to upload sound from file in the editor tab',
                 id: 'gui.soundTab.fileUploadSound'
             },
@@ -151,7 +200,11 @@ class SoundTab extends React.Component {
                     onClick: onNewSoundFromLibraryClick
                 }, {
                     title: intl.formatMessage(messages.fileUploadSound),
-                    img: fileUploadIcon
+                    img: fileUploadIcon,
+                    onClick: this.handleFileUploadClick,
+                    fileAccept: '.wav, .mp3',
+                    fileChange: this.handleSoundUpload,
+                    fileInput: this.setFileInput
                 }, {
                     title: intl.formatMessage(messages.surpriseSound),
                     img: surpriseIcon,

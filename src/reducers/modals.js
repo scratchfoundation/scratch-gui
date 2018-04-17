@@ -6,7 +6,6 @@ const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
-const MODAL_FEEDBACK_FORM = 'feedbackForm';
 const MODAL_IMPORT_INFO = 'importInfo';
 const MODAL_LOADING_PROJECT = 'loadingProject';
 const MODAL_PREVIEW_INFO = 'previewInfo';
@@ -21,7 +20,6 @@ const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
-    [MODAL_FEEDBACK_FORM]: false,
     [MODAL_IMPORT_INFO]: false,
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_PREVIEW_INFO]: true,
@@ -70,10 +68,6 @@ const openExtensionLibrary = function () {
     analytics.pageview('/libraries/extensions');
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
-const openFeedbackForm = function () {
-    analytics.pageview('/modals/feedback');
-    return openModal(MODAL_FEEDBACK_FORM);
-};
 const openImportInfo = function () {
     analytics.pageview('modals/import');
     return openModal(MODAL_IMPORT_INFO);
@@ -111,9 +105,6 @@ const closeCostumeLibrary = function () {
 const closeExtensionLibrary = function () {
     return closeModal(MODAL_EXTENSION_LIBRARY);
 };
-const closeFeedbackForm = function () {
-    return closeModal(MODAL_FEEDBACK_FORM);
-};
 const closeImportInfo = function () {
     return closeModal(MODAL_IMPORT_INFO);
 };
@@ -140,7 +131,6 @@ export {
     openBackdropLibrary,
     openCostumeLibrary,
     openExtensionLibrary,
-    openFeedbackForm,
     openImportInfo,
     openLoadingProject,
     openPreviewInfo,
@@ -151,7 +141,6 @@ export {
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
-    closeFeedbackForm,
     closeImportInfo,
     closeLoadingProject,
     closePreviewInfo,

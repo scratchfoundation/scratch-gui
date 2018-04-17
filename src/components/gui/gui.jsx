@@ -16,7 +16,6 @@ import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
-import FeedbackForm from '../feedback-form/feedback-form.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
 import PreviewModal from '../../containers/preview-modal.jsx';
@@ -52,7 +51,6 @@ const GUIComponent = props => {
         cardsVisible,
         children,
         costumesTabVisible,
-        feedbackFormVisible,
         importInfoVisible,
         intl,
         loading,
@@ -99,9 +97,6 @@ const GUIComponent = props => {
             ) : null}
             {importInfoVisible ? (
                 <ImportModal />
-            ) : null}
-            {feedbackFormVisible ? (
-                <FeedbackForm />
             ) : null}
             {isRendererSupported ? null : (
                 <WebGlModal />
@@ -233,7 +228,6 @@ GUIComponent.propTypes = {
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
-    feedbackFormVisible: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     loading: PropTypes.bool,

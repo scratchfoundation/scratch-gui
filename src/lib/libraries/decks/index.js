@@ -46,6 +46,14 @@ import step_anotherSay from './say/another-say.gif';
 import step_editSay from './say/edit-say.gif';
 import step_clickStack from './say/click-stack.gif';
 
+// Clicker
+import thumb_clicker from './clicker/thumb_clicker.gif';
+import step_dragGoTo from './clicker/drag-goto.gif';
+import step_clickGoTo from './clicker/click-goto.gif';
+import step_clickEvents from './clicker/click-events.gif';
+import step_addWhenClicked from './clicker/add-whenclicked.gif';
+import step_clickSprite from './clicker/click-sprite.gif';
+
 import step_forever from './zoom/forever.gif';
 import step_foreverZoomed from './zoom/forever--zoomed.gif';
 
@@ -60,41 +68,41 @@ import step_edge from './zoom/edge.gif';
 import step_greenflag from './zoom/green-flag.gif';
 import step_stop from './zoom/stop.gif';
 
-import step_randomPosition from './clicker/random-position.gif';
-import step_randomPositionZoomed from './clicker/random-position--zoomed.gif';
-import step_whenSpriteClicked from './clicker/when-sprite-clicked.gif';
-import step_whenSpriteClickedZoomed from './clicker/when-sprite-clicked--zoomed.gif';
-import step_tryClickingZoomed from './clicker/try-clicking--zoomed.gif';
-import step_tryClicking from './clicker/try-clicking.gif';
-import step_addSound from './clicker/add-sound.gif';
-import step_addSoundZoomed from './clicker/add-sound--zoomed.gif';
-import step_keepScore from './clicker/keep-score.gif';
-import step_keepScoreZoomed from './clicker/keep-score--zoomed.gif';
-import step_resetScore from './clicker/reset-score.gif';
-import step_resetScoreZoomed from './clicker/reset-score--zoomed.gif';
+// import step_randomPosition from './clicker/random-position.gif';
+// import step_randomPositionZoomed from './clicker/random-position--zoomed.gif';
+// import step_whenSpriteClicked from './clicker/when-sprite-clicked.gif';
+// import step_whenSpriteClickedZoomed from './clicker/when-sprite-clicked--zoomed.gif';
+// import step_tryClickingZoomed from './clicker/try-clicking--zoomed.gif';
+// import step_tryClicking from './clicker/try-clicking.gif';
+// import step_addSound from './clicker/add-sound.gif';
+// import step_addSoundZoomed from './clicker/add-sound--zoomed.gif';
+// import step_keepScore from './clicker/keep-score.gif';
+// import step_keepScoreZoomed from './clicker/keep-score--zoomed.gif';
+// import step_resetScore from './clicker/reset-score.gif';
+// import step_resetScoreZoomed from './clicker/reset-score--zoomed.gif';
 
-import clicker_thumb from './clicker/clicker-game.gif';
-import story_thumb from './story/dialog.gif';
-import zoom_thumb from './zoom/zoom-thumb.gif';
+// import clicker_thumb from './clicker/clicker-game.gif';
+// import story_thumb from './story/dialog.gif';
+// import zoom_thumb from './zoom/zoom-thumb.gif';
 
-import library_zoom from './zoom/zoom-around--library.gif';
-import library_story from './story/story--library.gif';
-import library_game from './clicker/game--library.gif';
+// import library_zoom from './zoom/zoom-around--library.gif';
+// import library_story from './story/story--library.gif';
+// import library_game from './clicker/game--library.gif';
 
 export default [
     {
         name: 'Spin around',
         img: thumb_spin,
-        libraryImg: library_zoom,
+        libraryImg: thumb_spin,
         steps: [
             {
-                title: 'Drag out a turn block',
+                title: 'Drag out a “turn” block',
                 image: step_dragTurn
             }, {
                 title: 'Click the block to run it',
                 image: step_clickTurn
             }, {
-                title: 'Drag out a forever block',
+                title: 'Drag out a “forever” block',
                 image: step_dragForever
             }, {
                 title: 'Click the stack to run it',
@@ -105,19 +113,19 @@ export default [
     {
         name: 'Say hello',
         img: thumb_say,
-        libraryImg: library_zoom,
+        libraryImg: thumb_say,
         steps: [
             {
-                title: 'Click the Looks category',
+                title: 'Click the “Looks” category',
                 image: step_clickLooks
             }, {
-                title: 'Drag out a say block',
+                title: 'Drag out a “say” block',
                 image: step_dragSay
             }, {
                 title: 'Click the block to run it',
                 image: step_clickSay
             }, {
-                title: 'Drag out another say block',
+                title: 'Drag out another “say” block',
                 image: step_anotherSay
             }, {
                 title: 'Say something else',
@@ -128,6 +136,29 @@ export default [
             }
         ]
     },
+    {
+        name: 'Clicker game',
+        img: thumb_clicker,
+        libraryImg: thumb_clicker,
+        steps: [
+            {
+                title: 'Drag out a “go to random position” block',
+                image: step_dragGoTo
+            }, {
+                title: 'Click the block to run it',
+                image: step_clickGoTo
+            }, {
+                title: 'Click the “Events” category',
+                image: step_clickEvents
+            }, {
+                title: 'Add a “when this sprite clicked” block',
+                image: step_addWhenClicked
+            }, {
+                title: 'Click the sprite to run it',
+                image: step_clickSprite
+            }
+        ]
+    }
     /*
         {
             name: 'Getting started',
@@ -259,28 +290,4 @@ export default [
     //         }
     //     ]
     // },
-    {
-        name: 'Clicker game',
-        img: clicker_thumb,
-        libraryImg: library_game,
-        steps: [
-            {
-                title: "Go to a random position",
-                image: step_randomPosition,
-                zoomedImage: step_randomPositionZoomed
-            }, {
-                title: "Add a \"when this sprite clicked\" block",
-                image: step_whenSpriteClicked,
-                zoomedImage: step_whenSpriteClickedZoomed
-            }, {
-                title: "Click your sprite to make it go",
-                image: step_tryClicking,
-                zoomedImage: step_tryClickingZoomed
-            }, {
-                title: "Add a sound",
-                image: step_addSound,
-                zoomedImage: step_addSoundZoomed
-            }
-        ]
-    }
 ];

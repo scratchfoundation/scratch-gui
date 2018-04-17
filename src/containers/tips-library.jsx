@@ -34,7 +34,7 @@ class TipsLibrary extends React.PureComponent {
     }
     render () {
         const decksLibraryThumbnailData = decksLibraryContent.map((deck, i) => ({
-            rawURL: deck.libraryImg,
+            rawURL: deck.img,
             index: i,
             featured: true,
             ...deck

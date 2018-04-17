@@ -225,6 +225,12 @@
     pointer-events: none;
 }
 
+.help-icon {
+    height: 2rem;
+    margin-top: 0.5rem;
+    filter: invert(1);
+}
+
 .see-all {
     display: flex;
     flex-direction: row;

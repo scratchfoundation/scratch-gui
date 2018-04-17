@@ -59,13 +59,6 @@ const base = {
                     }
                 }
             }]
-        },
-        {
-            test: /\.(svg|png|wav)$/,
-            loader: 'file-loader',
-            options: {
-                outputPath: 'static/assets/'
-            }
         }]
     },
     plugins: [].concat(process.env.NODE_ENV === 'production' ? [
@@ -91,6 +84,18 @@ module.exports = (
             externals: {
                 React: 'react',
                 ReactDOM: 'react-dom'
+            },
+            module: {
+                rules: base.module.rules.concat([
+                    {
+                        test: /\.(svg|png|wav)$/,
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: 'static/assets/',
+                            publicPath: '/static/assets/'
+                        }
+                    }
+                ])
             },
             plugins: base.plugins.concat([
                 new CopyWebpackPlugin([{
@@ -119,6 +124,17 @@ module.exports = (
             externals: {
                 React: 'react',
                 ReactDOM: 'react-dom'
+            },
+            module: {
+                rules: base.module.rules.concat([
+                    {
+                        test: /\.(svg|png|wav)$/,
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: 'static/assets/'
+                        }
+                    }
+                ])
             },
             plugins: base.plugins.concat([
                 new webpack.DefinePlugin({

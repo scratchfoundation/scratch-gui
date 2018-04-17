@@ -158,6 +158,15 @@ class CostumeTab extends React.Component {
         };
         this.props.vm.addCostume(item.md5, vmCostume);
     }
+    handleCostumeUpload () {
+
+    }
+    handleFileUploadClick () {
+
+    }
+    setFileInput (input) {
+        if (input && !this.fileInput)
+    }
     formatCostumeDetails (size) {
         // Round up width and height for scratch-flash compatibility
         // https://github.com/LLK/scratch-flash/blob/9fbac92ef3d09ceca0c0782f8a08deaa79e4df69/src/ui/media/MediaInfo.as#L224-L237
@@ -209,7 +218,11 @@ class CostumeTab extends React.Component {
                     },
                     {
                         title: intl.formatMessage(messages.addFileCostumeMsg),
-                        img: fileUploadIcon
+                        img: fileUploadIcon,
+                        onClick: this.handleFileUploadClick,
+                        fileAccept: '.svg',
+                        fileChange: this.handleCostumeUpload,
+                        fileInput: this.setFileInput
                     },
                     {
                         title: intl.formatMessage(messages.addSurpriseCostumeMsg),

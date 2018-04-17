@@ -23,11 +23,11 @@ import bothSay from './story/both-say.gif';
 import step_addWait from './story/add-wait.gif';
 import step_addWaitZoomed from './story/add-wait--zoomed.gif';
 
-import step_dragTurn from './zoom/drag-turn.gif';
-import step_dragTurnZoomed from './zoom/drag-turn--zoomed.gif';
+// import step_dragTurn from './zoom/drag-turn.gif';
+// import step_dragTurnZoomed from './zoom/drag-turn--zoomed.gif';
 
-import step_clickTurn from './zoom/click-turn.gif';
-import step_clickTurnZoomed from './zoom/click-turn--zoomed.gif';
+// import step_clickTurn from './zoom/click-turn.gif';
+// import step_clickTurnZoomed from './zoom/click-turn--zoomed.gif';
 
 import step_forever from './zoom/forever.gif';
 import step_foreverZoomed from './zoom/forever--zoomed.gif';
@@ -56,6 +56,11 @@ import step_keepScoreZoomed from './clicker/keep-score--zoomed.gif';
 import step_resetScore from './clicker/reset-score.gif';
 import step_resetScoreZoomed from './clicker/reset-score--zoomed.gif';
 
+import step_dragTurn from './spin/drag-turn.gif';
+import step_clickTurn from './spin/click-turn.gif';
+import step_dragForever from './spin/drag-forever.gif';
+import step_clickForever from './spin/click-forever.gif';
+
 import clicker_thumb from './clicker/clicker-game.gif';
 import story_thumb from './story/dialog.gif';
 import zoom_thumb from './zoom/zoom-thumb.gif';
@@ -65,6 +70,26 @@ import library_story from './story/story--library.gif';
 import library_game from './clicker/game--library.gif';
 
 export default [
+    {
+        name: 'Spin around',
+        img: zoom_thumb,
+        libraryImg: library_zoom,
+        steps: [
+            {
+                title: 'Drag out a turn block',
+                image: step_dragTurn
+            }, {
+                title: 'Click the block to run it',
+                image: step_clickTurn
+            }, {
+                title: 'Drag out a forever block',
+                image: step_dragForever
+            }, {
+                title: 'Click the stack to run it',
+                image: step_clickForever
+            }
+        ]
+    },
     /*
         {
             name: 'Getting started',
@@ -137,34 +162,34 @@ export default [
             ]
         },
         */
-    {
-        name: 'Zoom around',
-        img: zoom_thumb,
-        libraryImg: library_zoom,
-        steps: [
-            {
-                title: 'Get a turn block',
-                image: step_dragTurn,
-                zoomedImage: step_dragTurnZoomed
-            }, {
-                title: 'Click the block to run it',
-                image: step_clickTurn,
-                zoomedImage: step_clickTurnZoomed
-            }, {
-                title: 'Use a forever block to keep it going',
-                image: step_forever,
-                zoomedImage: step_foreverZoomed
-            }, {
-                title: 'Add a move block',
-                image: step_move,
-                zoomedImage: step_moveZoomed
-            }, {
-                title: 'Try the color effect block',
-                image: step_color,
-                zoomedImage: step_colorZoomed
-            }
-        ]
-    },
+    // {
+    //     name: 'Zoom around',
+    //     img: zoom_thumb,
+    //     libraryImg: library_zoom,
+    //     steps: [
+    //         {
+    //             title: 'Get a turn block',
+    //             image: step_dragTurn,
+    //             zoomedImage: step_dragTurnZoomed
+    //         }, {
+    //             title: 'Click the block to run it',
+    //             image: step_clickTurn,
+    //             zoomedImage: step_clickTurnZoomed
+    //         }, {
+    //             title: 'Use a forever block to keep it going',
+    //             image: step_forever,
+    //             zoomedImage: step_foreverZoomed
+    //         }, {
+    //             title: 'Add a move block',
+    //             image: step_move,
+    //             zoomedImage: step_moveZoomed
+    //         }, {
+    //             title: 'Try the color effect block',
+    //             image: step_color,
+    //             zoomedImage: step_colorZoomed
+    //         }
+    //     ]
+    // },
     {
         name: 'Tell a story',
         img: story_thumb,

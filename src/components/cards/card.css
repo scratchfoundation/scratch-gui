@@ -92,7 +92,7 @@
 .step-image {
     background: #F9F9F9;
     border: 1px solid #ddd;
-    width: 380px;
+    width: 452px;
     min-height: 160px;
     /* border-radius: 1rem; */
     display: flex;
@@ -103,7 +103,7 @@
     margin: 0 1rem 1rem 1rem;
 }
 .step-image img {
-    max-width: 378px;
+    max-width: 450px;
 }
 
 /* .step-image img {

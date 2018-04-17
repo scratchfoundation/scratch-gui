@@ -182,8 +182,11 @@ const MenuBar = props => (
                         </MenuSection>
                     </MenuBarMenu>
                 </div>
-                <div className={classNames(styles.menuItem)}>
-                    <div className={classNames(styles.tipsMenu)} onClick={props.onOpenTipLibrary}>Tips</div>
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable)}
+                    onClick={props.onOpenTipLibrary}
+                >
+                    <div className={classNames(styles.tipsMenu)}>Tips</div>
                 </div>
             </div>
             <div className={classNames(styles.divider)} />

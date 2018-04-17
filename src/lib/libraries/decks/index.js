@@ -35,6 +35,7 @@ import thumb_spin from './spin/thumb-spin.gif';
 import library_spin from './spin/library-spin.gif';
 import step_dragTurn from './spin/drag-turn.gif';
 import step_clickTurn from './spin/click-turn.gif';
+import step_clickControl from './spin/click-control.gif';
 import step_dragForever from './spin/drag-forever.gif';
 import step_clickForever from './spin/click-forever.gif';
 
@@ -114,6 +115,9 @@ export default [
             }, {
                 title: 'Click the block to run it',
                 image: step_clickTurn
+            }, {
+                title: 'Click the “Control” category',
+                image: step_clickControl
             }, {
                 title: 'Drag out a “forever” block',
                 image: step_dragForever

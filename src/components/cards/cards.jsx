@@ -36,11 +36,11 @@ const Cards = props => {
         inner = (
             <div className={styles.card}>
                 <div className={styles.headerButtons}>
-                    <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                    <div className={styles.collapseButton}></div>
                     <div className={styles.stepTitle}>
-                        Try one of these
+                        Get started with Scratch!
                     </div>
-                    <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
+                    <div className={styles.removeButton}></div>
                 </div>
                 <div className={styles.stepDescription}>
                     <div className={styles.decks}>
@@ -111,19 +111,26 @@ const Cards = props => {
                         />
                     </div>
                     {hasNext ? (
-                        <div className={styles.rightButton} onClick={onNextStep}>
-                            <img
-                                draggable={false}
-                                src={nextIcon}
-                            />
+                        <div>
+                            <div className={styles.rightCard} />
+                            <div className={styles.rightButton} onClick={onNextStep}>
+                                <img
+                                    draggable={false}
+                                    src={nextIcon}
+                                />
+                            </div>
                         </div>
                     ) : null}
                     {hasPrev ? (
-                        <div className={styles.leftButton} onClick={onPrevStep}>
-                            <img
-                                draggable={false}
-                                src={prevIcon}
-                            />
+                        <div>
+                            <div className={styles.leftCard} />
+
+                            <div className={styles.leftButton} onClick={onPrevStep}>
+                                <img
+                                    draggable={false}
+                                    src={prevIcon}
+                                />
+                            </div>
                         </div>
                     ) : null}
                 </div>
@@ -161,11 +168,15 @@ const Cards = props => {
                             <img draggable={false} src={nextIcon} />
                         </div>
                     </div>
-                    <div className={styles.leftButton} onClick={onPrevStep}>
-                        <img
-                            draggable={false}
-                            src={prevIcon}
-                        />
+                    <div>
+                        <div className={styles.leftCard} />
+
+                        <div className={styles.leftButton} onClick={onPrevStep}>
+                            <img
+                                draggable={false}
+                                src={prevIcon}
+                            />
+                        </div>
                     </div>
                 </div>
             );

@@ -18,7 +18,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactModal = __webpack_require__(16);
+var _reactModal = __webpack_require__(18);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
@@ -38,7 +38,7 @@ var _projectLoaderHoc = __webpack_require__(34);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _index = __webpack_require__(626);
+var _index = __webpack_require__(622);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -131,11 +131,11 @@ module.exports = {
 
 /***/ }),
 
-/***/ 626:
+/***/ 622:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(627);
+var content = __webpack_require__(623);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -182,7 +182,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 627:
+/***/ 623:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);

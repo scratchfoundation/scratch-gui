@@ -100,8 +100,8 @@
 }
 
 .step-title {
-    font-size: 0.95rem;
-    margin: 0.85rem;
+    font-size: 0.9rem;
+    margin: 0.9rem;
     text-align: center;
     font-weight: bold;
     color: $text-primary;
@@ -128,7 +128,8 @@
     /* padding: 0 0.5rem 0.5rem 0.5rem; */
 
 }
-.step-image {
+.step-image-container {
+    position: relative;
     /* background: #F9F9F9;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
@@ -145,7 +146,7 @@ height: 337px;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
     overflow: hidden;
-    margin: 0 0.5rem 0.5rem;
+    margin: 0 0.5rem;
 }
 
 /* .step-image img {
@@ -317,4 +318,26 @@ height: 337px;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0.25rem; */
+}
+
+.active-step-pip, .inactiveStepPip {
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    border-radius: 100%;
+    background: transparent;
+    border: 2px solid $ui-white-transparent;
+    /* border: 1px solid $motion-tertiary; */
+}
+.active-step-pip {
+    background: white;
+    /* background: $motion-primary; */
 }

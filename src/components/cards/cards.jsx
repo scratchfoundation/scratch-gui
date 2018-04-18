@@ -86,6 +86,17 @@ const Cards = props => {
                             <img className={styles.helpIcon} src={helpIcon}/>
                             All How-Tos
                         </div>
+                        {video ? null : (
+                            <div className={styles.stepsList}>
+                                {steps.map((s, i) => (
+                                    i === step ? (
+                                        <div className={styles.activeStepPip}></div>
+                                    ) : (
+                                        <div className={styles.inactiveStepPip}></div>
+                                    )
+                                ))}
+                            </div>
+                        )}
                         <div className={styles.removeButton} onClick={onCloseCards}>
                             Remove
                             <img className={styles.closeIcon} src={closeIcon}/>
@@ -121,6 +132,7 @@ const Cards = props => {
                             </div>
                         ) : (
                             <div
+                                className={styles.stepImageContainer}
                                 onClick={onToggleLightbox}
                             >
                                 <img

@@ -1,23 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.modal-content {
-    position: absolute;
-
-    display: flex;
-    height: 100%;
-    width: 100%;
-
-    overflow-y: auto;
-    -webkit-overflow-scrolling: 'touch';
-    user-select: none;
-
-    /* Default modal resets */
-    margin: 0;
-    border: none;
-    border-radius: 0;
-}
-
 .library-scroll-grid {
     display: flex;
     justify-content: flex-start;
@@ -28,4 +11,29 @@
     overflow-y: auto;
     height: calc(100% - $library-header-height);
     padding: 0.5rem;
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: $motion-transparent;
+    padding: 1rem;
+}
+
+.filter {
+    flex-grow: 0;
+}
+
+.filter-input {
+    width: 6rem;
+    transition: 6s;
+}
+
+.filter-input:focus {
+    width: 13.25rem;
+}
+
+.divider {
+    margin: 0 .75rem;
+    transform: scaleY(1.39);
 }

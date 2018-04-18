@@ -4,6 +4,8 @@ import React from 'react';
 
 import LibraryItem from '../library-item/library-item.jsx';
 import ModalComponent from '../modal/modal.jsx';
+import Divider from '../divider/divider.jsx';
+import Filter from '../filter/filter.jsx';
 
 import styles from './library.css';
 
@@ -53,13 +55,21 @@ class LibraryComponent extends React.Component {
     render () {
         return (
             <ModalComponent
-                className={styles.modalContent}
+                fullScreen
                 contentLabel={this.props.title}
-                filterQuery={this.state.filterQuery}
-                onFilterChange={this.handleFilterChange}
-                onFilterClear={this.handleFilterClear}
                 onRequestClose={this.props.onRequestClose}
             >
+                <div className={styles.filterBar}>
+                    <Filter
+                        className={styles.filter}
+                        filterQuery={this.state.filterQuery}
+                        inputClassName={styles.filterInput}
+                        onChange={this.handleFilterChange}
+                        onClear={this.handleFilterClear}
+                    />
+                    <Divider className={styles.divider} />
+
+                </div>
                 <div className={styles.libraryScrollGrid}>
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?

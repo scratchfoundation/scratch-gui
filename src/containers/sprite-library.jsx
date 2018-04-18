@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -71,7 +72,13 @@ class SpriteLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={this.state.sprites}
-                title="Choose a Sprite"
+                title={
+                    <FormattedMessage
+                        defaultMessage="Sprite Library"
+                        description="Heading for the sprite library"
+                        id="gui.spriteLibrary.spriteLibrary"
+                    />
+                }
                 onItemMouseEnter={this.handleMouseEnter}
                 onItemMouseLeave={this.handleMouseLeave}
                 onItemSelected={this.handleItemSelect}
@@ -86,4 +93,4 @@ SpriteLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default SpriteLibrary;
+export default injectIntl(SpriteLibrary);

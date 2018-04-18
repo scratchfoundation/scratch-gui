@@ -154,7 +154,7 @@ export default [
         ]
     },
     {
-        name: 'Clicker game',
+        name: 'Run away',
         img: library_clicker,
         libraryImg: library_clicker,
         steps: [

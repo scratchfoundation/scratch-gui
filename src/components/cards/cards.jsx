@@ -14,6 +14,7 @@ import prevIcon from './icon--prev.svg';
 import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
 import helpIcon from './icon--help.svg';
+import closeIcon from '../close-button/icon--close.svg';
 
 const Cards = props => {
     const {
@@ -40,14 +41,10 @@ const Cards = props => {
     if (activeDeckIndex === null) {
         inner = (
             <div className={styles.card}>
-                <div className={styles.headerButtons}>
-                    <div className={styles.collapseButton}></div>
+                <div className={styles.stepBody}>
                     <div className={styles.stepTitle}>
                         Get started with Scratch!
                     </div>
-                    <div className={styles.removeButton}></div>
-                </div>
-                <div className={styles.stepDescription}>
                     <div className={styles.decks}>
                         {Object.values(content.slice(0,3)).map((deck, i) => (
                             <div
@@ -85,15 +82,14 @@ const Cards = props => {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.collapseButton}>
-                            <span onClick={onExitDeck}>
-                                <img className={styles.helpIcon} src={helpIcon}/>
-                            </span>
+                        <div className={styles.collapseButton} onClick={onExitDeck}>
+                            <img className={styles.helpIcon} src={helpIcon}/>
+                            All How-Tos
                         </div>
-                        <div className={styles.stepTitle}>
-                            {title}
+                        <div className={styles.removeButton} onClick={onCloseCards}>
+                            Remove
+                            <img className={styles.closeIcon} src={closeIcon}/>
                         </div>
-                        <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
                     </div>
                     {description ? (
                         <div className={styles.stepDescription}>
@@ -102,8 +98,12 @@ const Cards = props => {
                     ) : null}
                     <div
                         className={styles.stepBody}
-                        onClick={onToggleLightbox}
                     >
+                        {video ? null : (
+                            <div className={styles.stepTitle}>
+                                {title}
+                            </div>
+                        )}
                         {video ? (
                             <div className={styles.stepVideo}>
                                 {dragging ? (
@@ -111,7 +111,7 @@ const Cards = props => {
                                 ) : null}
                                 <iframe
                                     width="600"
-                                    height="350"
+                                    height="337"
                                     src={`${video}?rel=0&amp;showinfo=0`}
                                     frameBorder="0"
                                     allow="autoplay; encrypted-media"
@@ -120,10 +120,13 @@ const Cards = props => {
                                 </iframe>
                             </div>
                         ) : (
-                            <div className={styles.stepImage}>
+                            <div
+                                onClick={onToggleLightbox}
+                            >
                                 <img
                                     draggable={false}
                                     src={image}
+                                    className={styles.stepImage}
                                 />
                                 <img draggable={false} className={styles.zoomIcon} src={zoomIcon} />
                                 <Lightbox
@@ -168,33 +171,43 @@ const Cards = props => {
             inner = (
                 <div className={styles.card}>
                     <div className={styles.headerButtons}>
-                        <div className={styles.collapseButton}><span onClick={onExitDeck}>⤴</span></div>
+                        <div className={styles.collapseButton} onClick={onExitDeck}>
+                            <img className={styles.helpIcon} src={helpIcon}/>
+                            All How-Tos
+                        </div>
+                        <div className={styles.removeButton} onClick={onCloseCards}>
+                            Remove
+                            <img className={styles.closeIcon} src={closeIcon}/>
+                        </div>
+                    </div>
+                    <div
+                        className={styles.stepBody}
+                    >
                         <div className={styles.stepTitle}>
-                            How Tos
+                            More things to try!
                         </div>
-                        <div className={styles.removeButton}><span onClick={onCloseCards}>×</span></div>
-                    </div>
-                    <div className={styles.stepDescription}>
-                        <div className={styles.decks}>
-                            {Object.values(content.slice(0,3)).map((deck, i) => (
-                                <div
-                                    className={styles.deck}
-                                    onClick={onActivateDeckFactory(i)}
-                                >
-                                    <img
-                                        className={styles.deckImage}
-                                        src={deck.img}
-                                        draggable={false}
-                                    />
-                                    <div className={styles.deckName}>{deck.name}</div>
-                                </div>
-                            ))}
+                        <div className={styles.stepDescription}>
+                            <div className={styles.decks}>
+                                {Object.values(content.slice(0,3)).map((deck, i) => (
+                                    <div
+                                        className={styles.deck}
+                                        onClick={onActivateDeckFactory(i)}
+                                    >
+                                        <img
+                                            className={styles.deckImage}
+                                            src={deck.img}
+                                            draggable={false}
+                                        />
+                                        <div className={styles.deckName}>{deck.name}</div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.seeAll}>
-                        <div className={styles.seeAllButton} onClick={onExitDeck}>
-                            See all
-                            <img draggable={false} src={nextIcon} />
+                        <div className={styles.seeAll}>
+                            <div className={styles.seeAllButton} onClick={onExitDeck}>
+                                See more
+                                {/* <img draggable={false} src={nextIcon} /> */}
+                            </div>
                         </div>
                     </div>
                     <div>

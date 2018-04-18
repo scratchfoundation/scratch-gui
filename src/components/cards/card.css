@@ -27,30 +27,42 @@
     border-top-left-radius: 0.75rem;
     border-bottom-left-radius: 0.75rem;
     opacity: 0.9;
+    overflow: hidden;
     /* box-shadow: -5px 5px 5px 5px rgba(0,0,0,0.1); */
 
 }
 
 .right-card {
-    filter: brightness(95%);
     height: 90%;
     position: absolute;
     top: 5%;
     right: -10px;
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid $ui-black-transparent;
     border-left: 0;
     width: 10px;
     z-index: 99;
     border-top-right-radius: 0.75rem;
     border-bottom-right-radius: 0.75rem;
+    overflow: hidden;
+    opacity: 0.9;
     /* box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1); */
 
 }
 
+.left-card::after, .right-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.8rem;
+    width: 100%;
+    background: $motion-primary;
+}
+
 .card {
-    background: white;
-    border: 1px solid $ui-black-transparent;
+    /* background: white; */
+    border: 1px solid #ddd;
     border-radius: 0.75rem;
     /* padding: 1rem; */
     display: flex;
@@ -69,21 +81,30 @@
     justify-content: space-between;
     align-items: center;
     /* margin-bottom: 0.5rem; */
-    /* background: $pen-primary; */
+    background: $motion-primary;
+    border-bottom: 1px solid $motion-tertiary;
     /* color: white; */
-    padding: 0.8rem;
+    /* padding: 0.8rem; */
+    padding: 0.5rem;
+    font-size: 0.625rem;
 }
 .remove-button, .collapse-button {
     cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     /* color: #888; */
     /* font-size: 0.75rem; */
 }
 
 .step-title {
-    font-size: 1rem;
-    margin: 0 1rem 0;
+    font-size: 0.95rem;
+    margin: 0.85rem;
     text-align: center;
     font-weight: bold;
+    color: $text-primary;
 }
 
 .step-description {
@@ -92,28 +113,39 @@
 }
 
 .step-body {
-    background: #F9F9F9;
-    border: 1px solid #ddd;
+    background: white;
+    /* background: #F9F9F9; */
+    /* border: 1px solid #ddd; */
     /* width: 452px; */
     min-height: 160px;
     /* border-radius: 1rem; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* overflow: hidden; */
     position: relative;
-    margin: 0 1rem 1rem 1rem;
+    /* padding: 0 0.5rem 0.5rem 0.5rem; */
 
 }
 .step-image {
+    /* background: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden; */
     /* width: 452px; */
 }
 .step-video {
-
+height: 337px;
 }
-.step-image img {
+.step-image {
     cursor: zoom-in;
     max-width: 450px;
+    background: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 0 0.5rem 0.5rem;
 }
 
 /* .step-image img {
@@ -192,61 +224,87 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 1rem;
+    padding: 0 0.5rem 0.5rem;
+    /* padding: 1rem; */
 }
 
 .deck {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    margin: 0 8px 8px;
     cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    overflow: hidden;
 }
 
 .deck-image {
     /* filter: hue-rotate(90deg); */
-    width: 150px;
-    height: 120px;
+    width: 130px;
+    height: 100px;
     object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 0.25rem; */
 }
 
 .deck-name {
     /* color: red; */
     color: $motion-primary;
     font-weight: bold;
-    margin-top: 5px;
+    font-size: 0.85rem;
+    margin: 14px 0px;
+    text-align: center;
+    /* color: #FFFFFF; */
+    font-family: "Helvetica Neue";
+    /* font-size: 12px; */
+    font-weight: bold;
+    /* line-height: 15px; */
+    text-align: center;
 }
 
 .zoom-icon {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    pointer-events: none;
+    bottom: 12px;
+    right: 10px;
+    /* pointer-events: none; */
+    cursor: zoom-in;
 }
 
+.help-icon, .close-icon {
+    height: 0.75rem;
+}
 .help-icon {
-    height: 2rem;
-    margin-top: 0.5rem;
-    filter: invert(1);
+    margin-right: 0.25rem;
+}
+.close-icon {
+    margin-left: 0.25rem;
+    transform: rotate(45deg);
 }
 
 .see-all {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
     padding: 0.5rem;
 }
 .see-all-button {
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     background-color: $motion-primary;
     color: white;
     font-weight: bold;
     border-radius: 0.25rem;
     display: flex;
     align-items: center;
+    	/* height: 15px;
+        width: 55px;	 */
+        color: #FFFFFF;
+        font-family: "Helvetica Neue";
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 15px;
+        text-align: center;
 }
 .see-all-button img {
     margin-left: 0.5rem;

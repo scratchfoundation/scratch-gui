@@ -10,6 +10,7 @@ import LibraryComponent from '../components/library/library.jsx';
 import soundIcon from '../components/asset-panel/icon--sound.svg';
 
 import soundLibraryContent from '../lib/libraries/sounds.json';
+import soundTags from '../lib/libraries/sound-tags';
 
 class SoundLibrary extends React.PureComponent {
     constructor (props) {
@@ -83,6 +84,7 @@ class SoundLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={soundLibraryThumbnailData}
+                tags={soundTags}
                 title="Choose a Sound"
                 onItemMouseEnter={this.handleItemMouseEnter}
                 onItemMouseLeave={this.handleItemMouseLeave}

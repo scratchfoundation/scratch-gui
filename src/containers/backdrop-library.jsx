@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
+import backdropTags from '../lib/libraries/backdrop-tags';
 import LibraryComponent from '../components/library/library.jsx';
 
 
@@ -34,6 +35,7 @@ class BackdropLibrary extends React.Component {
         return (
             <LibraryComponent
                 data={backdropLibraryContent}
+                tags={backdropTags}
                 title="Choose a Backdrop"
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

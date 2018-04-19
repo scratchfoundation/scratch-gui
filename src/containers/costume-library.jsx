@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
+import spriteTags from '../lib/libraries/sprite-tags';
 import LibraryComponent from '../components/library/library.jsx';
 
 
@@ -34,6 +35,7 @@ class CostumeLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={costumeLibraryContent}
+                tags={spriteTags}
                 title="Choose a Costume"
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}

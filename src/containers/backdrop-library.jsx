@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {injectIntl, FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -36,7 +37,13 @@ class BackdropLibrary extends React.Component {
             <LibraryComponent
                 data={backdropLibraryContent}
                 tags={backdropTags}
-                title="Choose a Backdrop"
+                title={
+                    <FormattedMessage
+                        defaultMessage="Choose a Backdrop"
+                        description="Heading for the backdrop library"
+                        id="gui.backdropLibrary.chooseABackdrop"
+                    />
+                }
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
             />
@@ -49,4 +56,4 @@ BackdropLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default BackdropLibrary;
+export default injectIntl(BackdropLibrary);

@@ -76,9 +76,9 @@ class SpriteLibrary extends React.PureComponent {
                 tags={spriteTags}
                 title={
                     <FormattedMessage
-                        defaultMessage="Sprite Library"
+                        defaultMessage="Choose a Sprite"
                         description="Heading for the sprite library"
-                        id="gui.spriteLibrary.spriteLibrary"
+                        id="gui.spriteLibrary.chooseASprite"
                     />
                 }
                 onItemMouseEnter={this.handleMouseEnter}

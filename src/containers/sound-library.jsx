@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {injectIntl, FormattedMessage} from 'react-intl';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
@@ -85,7 +86,13 @@ class SoundLibrary extends React.PureComponent {
             <LibraryComponent
                 data={soundLibraryThumbnailData}
                 tags={soundTags}
-                title="Choose a Sound"
+                title={
+                    <FormattedMessage
+                        defaultMessage="Choose a Sound"
+                        description="Heading for the sound library"
+                        id="gui.soundLibrary.chooseASound"
+                    />
+                }
                 onItemMouseEnter={this.handleItemMouseEnter}
                 onItemMouseLeave={this.handleItemMouseLeave}
                 onItemSelected={this.handleItemSelected}
@@ -101,4 +108,4 @@ SoundLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default SoundLibrary;
+export default injectIntl(SoundLibrary);

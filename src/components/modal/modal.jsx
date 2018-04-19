@@ -7,7 +7,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 
-import placeholderSvg from '../../lib/assets/placeholder.svg';
+import backIcon from '../../lib/assets/icon--back.svg';
 
 import styles from './modal.css';
 
@@ -43,7 +43,7 @@ const ModalComponent = props => (
                     {props.fullScreen ? (
                         <Button
                             className={styles.backButton}
-                            iconSrc={placeholderSvg}
+                            iconSrc={backIcon}
                             onClick={props.onRequestClose}
                         >
                             Back

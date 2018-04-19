@@ -43,6 +43,7 @@ import step_changeColor from './spin/change-color.gif';
 // Say hello
 import thumb_say from './say/thumb-say.gif';
 import library_say from './say/library-say.gif';
+import step_addSprite from './say/add-sprite.gif';
 import step_clickLooks from './say/click-looks.gif';
 import step_dragSay from './say/drag-say.gif';
 import step_clickSay from './say/click-say.gif';
@@ -138,6 +139,9 @@ export default [
         libraryImg: library_say,
         steps: [
             {
+                title: 'Add a new sprite',
+                image: step_addSprite
+            }, {
                 title: 'Click the “Looks” category',
                 image: step_clickLooks
             }, {

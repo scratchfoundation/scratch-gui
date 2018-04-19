@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 628:
+/***/ 631:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -147,5 +147,5 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ })
 
-},[628]);
+},[631]);
 //# sourceMappingURL=compatibilitytesting.js.map

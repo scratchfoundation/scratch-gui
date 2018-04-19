@@ -58,6 +58,7 @@ import step_clickGoTo from './clicker/click-goto.gif';
 import step_clickEvents from './clicker/click-events.gif';
 import step_addWhenClicked from './clicker/add-whenclicked.gif';
 import step_clickSprite from './clicker/click-sprite.gif';
+import step_addSound from './clicker/add-sound.gif';
 
 import step_forever from './zoom/forever.gif';
 import step_foreverZoomed from './zoom/forever--zoomed.gif';
@@ -177,6 +178,9 @@ export default [
             }, {
                 title: 'Click the sprite to run it',
                 image: step_clickSprite
+            }, {
+                title: 'Add a “start sound” block',
+                image: step_addSound
             }
         ]
     },

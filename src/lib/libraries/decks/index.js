@@ -38,6 +38,7 @@ import step_clickTurn from './spin/click-turn.gif';
 import step_clickControl from './spin/click-control.gif';
 import step_dragForever from './spin/drag-forever.gif';
 import step_clickForever from './spin/click-forever.gif';
+import step_changeColor from './spin/change-color.gif';
 
 // Say hello
 import thumb_say from './say/thumb-say.gif';
@@ -124,6 +125,9 @@ export default [
             }, {
                 title: 'Click the stack to run it',
                 image: step_clickForever
+            }, {
+                title: 'Add a “change color effect” block',
+                image: step_changeColor
             }
         ]
     },

@@ -4,8 +4,6 @@ import React from 'react';
 
 import Button from '../button/button.jsx';
 
-import placeholderSvg from '../../lib/assets/placeholder.svg';
-
 import styles from './tag-button.css';
 
 const TagButtonComponent = ({
@@ -42,8 +40,7 @@ TagButtonComponent.propTypes = {
 };
 
 TagButtonComponent.defaultProps = {
-    active: false,
-    iconSrc: placeholderSvg
+    active: false
 };
 
 export default TagButtonComponent;

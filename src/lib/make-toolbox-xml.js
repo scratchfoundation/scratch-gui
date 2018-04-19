@@ -531,6 +531,18 @@ const operators = function () {
             </value>
         </block>
         ${blockSeparator}
+        <block type="operator_gt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">100</field>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_lt">
             <value name="OPERAND1">
                 <shadow type="text">
@@ -539,7 +551,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>
@@ -551,19 +563,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-        </block>
-        <block type="operator_gt">
-            <value name="OPERAND1">
-                <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-            <value name="OPERAND2">
-                <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>

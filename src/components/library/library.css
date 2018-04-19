@@ -17,7 +17,13 @@
     display: flex;
     flex-direction: row;
     background-color: $motion-transparent;
+    justify-content: flex-start;
+    height: 4.5rem;
     padding: 1rem;
+}
+
+.filter-bar-item {
+    margin-right: .75rem;
 }
 
 .filter {
@@ -29,11 +35,11 @@
     transition: 6s;
 }
 
-.filter-input:focus {
+.filter-input:focus,
+.filter-input:not([value=""]) {
     width: 13.25rem;
 }
 
 .divider {
-    margin: 0 .75rem;
     transform: scaleY(1.39);
 }

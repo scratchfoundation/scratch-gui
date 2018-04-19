@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
+import spriteTags from '../lib/libraries/sprite-tags';
 
 import LibraryComponent from '../components/library/library.jsx';
 
@@ -72,6 +73,7 @@ class SpriteLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={this.state.sprites}
+                tags={spriteTags}
                 title={
                     <FormattedMessage
                         defaultMessage="Sprite Library"

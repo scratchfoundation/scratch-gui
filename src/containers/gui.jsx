@@ -89,7 +89,7 @@ GUI.propTypes = {
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.string,
+    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     vm: PropTypes.instanceOf(VM)
 };
 

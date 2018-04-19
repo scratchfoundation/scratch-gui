@@ -25,7 +25,20 @@ const AppStateHOC = function (WrappedComponent) {
     class AppStateWrapper extends React.Component {
         constructor (props) {
             super(props);
-            this.store = createStore(reducer, (props.intl || intlInitialState), enhancer);
+            let intl = {};
+            if (props.intl) {
+                intl = {
+                    intl: {
+                        defaultLocale: 'en',
+                        locale: props.intl.locale,
+                        messages: props.intl.messages
+                    }
+                };
+            } else {
+                intl = intlInitialState;
+            }
+
+            this.store = createStore(reducer, intl, enhancer);
         }
         componentDidUpdate (prevProps) {
             if (prevProps.intl !== this.props.intl) updateIntl(this.props.intl);

@@ -11,7 +11,8 @@ import TagButton from '../../containers/tag-button.jsx';
 
 import styles from './library.css';
 
-const tagListPrefix = [{title: 'All'}];
+const ALL_TAG_TITLE = 'All';
+const tagListPrefix = [{title: ALL_TAG_TITLE}];
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -29,7 +30,7 @@ class LibraryComponent extends React.Component {
         this.state = {
             selectedItem: null,
             filterQuery: '',
-            selectedTag: 'all'
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
         };
     }
     handleBlur (id) {
@@ -55,7 +56,10 @@ class LibraryComponent extends React.Component {
         if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
     }
     handleFilterChange (event) {
-        this.setState({filterQuery: event.target.value});
+        this.setState({
+            filterQuery: event.target.value,
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
+        });
     }
     handleFilterClear () {
         this.setState({filterQuery: ''});

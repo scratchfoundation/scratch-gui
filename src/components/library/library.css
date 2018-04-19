@@ -32,7 +32,7 @@
 
 .filter-input {
     width: 6rem;
-    transition: 6s;
+    transition: .2s;
 }
 
 .filter-input:focus,

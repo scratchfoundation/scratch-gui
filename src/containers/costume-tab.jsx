@@ -49,7 +49,7 @@ const messages = defineMessages({
         id: 'gui.costumeTab.addSurpriseCostume'
     },
     addFileCostumeMsg: {
-        defaultMessage: 'Coming Soon',
+        defaultMessage: 'Upload Costume',
         description: 'Button to add a file upload costume in the editor tab',
         id: 'gui.costumeTab.addFileCostume'
     },
@@ -69,7 +69,10 @@ class CostumeTab extends React.Component {
             'handleDuplicateCostume',
             'handleNewBlankCostume',
             'handleSurpriseCostume',
-            'handleSurpriseBackdrop'
+            'handleSurpriseBackdrop',
+            'handleFileUploadClick',
+            'handleCostumeUpload',
+            'setFileInput'
         ]);
         const {
             editingTarget,
@@ -158,14 +161,61 @@ class CostumeTab extends React.Component {
         };
         this.props.vm.addCostume(item.md5, vmCostume);
     }
-    handleCostumeUpload () {
+    handleCostumeUpload (e) {
+        const thisFileInput = e.target;
+        let thisFile = null;
+        const reader = new FileReader();
+        reader.onload = () => {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same image multiple times
+            // if they choose
+            thisFileInput.value = null;
+            // Cache the image in storage
+            const costumeBuffer = reader.result;
+            const storage = this.props.vm.runtime.storage;
+            const fileType = thisFile.type; // check what the browser thinks this is
+            // Only handling png and svg right now
+            let costumeFormat = null;
+            let assetType = null;
+            if (fileType === 'image/svg+xml') {
+                costumeFormat = storage.DataFormat.SVG;
+                assetType = storage.AssetType.ImageVector;
+            } else if (fileType === 'image/jpeg') {
+                costumeFormat = storage.DataFormat.JPG;
+                assetType = storage.AssetType.ImageBitmap;
+            } else {
+                costumeFormat = storage.DataFormat.PNG;
+                assetType = storage.AssetType.ImageBitmap;
+            }
 
+            const md5 = storage.builtinHelper.cache(
+                assetType, costumeFormat, new Uint8Array(costumeBuffer));
+
+            const md5Ext = `${md5}.${costumeFormat}`;
+
+            // We don't have info about bitmapResolution or rotationCenter...
+            const vmCostume = {
+                name: 'costume1',
+                // rotationCenterX: 0,
+                // rotationCenterY: 0,
+                // bitmapResolution: 1,
+                dataFormat: costumeFormat,
+                md5: `${md5Ext}`
+            };
+
+            this.props.vm.addCostume(md5Ext, vmCostume);
+
+        };
+        if (thisFileInput.files) {
+            thisFile = thisFileInput.files[0];
+            reader.readAsArrayBuffer(thisFile);
+        }
     }
     handleFileUploadClick () {
-
+        this.fileInput.click();
     }
     setFileInput (input) {
-        if (input && !this.fileInput)
+        this.fileInput = input;
     }
     formatCostumeDetails (size) {
         // Round up width and height for scratch-flash compatibility
@@ -220,7 +270,7 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(messages.addFileCostumeMsg),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg',
+                        fileAccept: '.svg,', // .png, .jpg, .jpeg coming soon
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput
                     },

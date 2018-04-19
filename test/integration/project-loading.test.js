@@ -66,6 +66,9 @@ describe('Loading scratch gui', () => {
         });
 
         test('Load a project by ID directly through url', async () => {
+            await driver.quit(); // Reset driver to test hitting # url directly
+            driver = getDriver();
+
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
             await clickXpath('//button[@title="tryit"]');
@@ -78,6 +81,9 @@ describe('Loading scratch gui', () => {
         });
 
         test('Load a project by ID (fullscreen)', async () => {
+            await driver.quit(); // Reset driver to test hitting # url directly
+            driver = getDriver();
+
             const prevSize = driver.manage()
                 .window()
                 .getSize();

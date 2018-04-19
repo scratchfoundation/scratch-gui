@@ -7,22 +7,11 @@ import LibraryItem from '../library-item/library-item.jsx';
 import ModalComponent from '../modal/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
-import TagButton from '../tag-button/tag-button.jsx';
-
-import placeholderSvg from '../../lib/assets/placeholder.svg';
+import TagButton from '../../containers/tag-button.jsx';
 
 import styles from './library.css';
 
-const tagListPrefix = [{
-    active: true,
-    title: 'All',
-    iconSrc: placeholderSvg
-}];
-
-const defaultTagProps = {
-    active: false,
-    iconSrc: placeholderSvg
-};
+const tagListPrefix = [{title: 'All'}];
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -34,11 +23,13 @@ class LibraryComponent extends React.Component {
             'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
-            'handleSelect'
+            'handleSelect',
+            'handleTagClick'
         ]);
         this.state = {
             selectedItem: null,
-            filterQuery: ''
+            filterQuery: '',
+            selectedTag: 'all'
         };
     }
     handleBlur (id) {
@@ -50,6 +41,12 @@ class LibraryComponent extends React.Component {
     handleSelect (id) {
         this.props.onRequestClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
+    }
+    handleTagClick (tag) {
+        this.setState({
+            filterQuery: '',
+            selectedTag: tag.toLowerCase()
+        });
     }
     handleMouseEnter (id) {
         if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
@@ -64,8 +61,25 @@ class LibraryComponent extends React.Component {
         this.setState({filterQuery: ''});
     }
     getFilteredData () {
-        return this.props.data.filter(dataItem =>
-            dataItem.name.toLowerCase().indexOf(this.state.filterQuery.toLowerCase()) !== -1);
+        if (this.state.selectedTag === 'all') {
+            if (!this.state.filterQuery) return this.props.data;
+            return this.props.data.filter(dataItem => (
+                dataItem.name
+                    .toLowerCase()
+                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1 || (
+                    dataItem.tags &&
+                    dataItem.tags
+                        .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                        .indexOf(this.state.filterQuery.toLowerCase()) !== -1
+                )
+            ));
+        }
+        return this.props.data.filter(dataItem => (
+            dataItem.tags &&
+            dataItem.tags
+                .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                .indexOf(this.state.selectedTag) !== -1
+        ));
     }
     render () {
         return (
@@ -94,13 +108,15 @@ class LibraryComponent extends React.Component {
                         {this.props.tags &&
                             (tagListPrefix.concat(this.props.tags)).map((tagProps, id) => (
                                 <TagButton
-                                    {...{...defaultTagProps, ...tagProps}}
+                                    active={this.state.selectedTag === tagProps.title.toLowerCase()}
                                     className={classNames(
                                         styles.filterBarItem,
                                         styles.tagButton,
                                         tagProps.className
                                     )}
                                     key={`tag-button-${id}`}
+                                    onClick={this.handleTagClick}
+                                    {...tagProps}
                                 />
                             ))
                         }

@@ -6,6 +6,8 @@ import webdriver from 'selenium-webdriver';
 
 const {By, until, Button} = webdriver;
 
+const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
+
 class SeleniumHelper {
     constructor () {
         bindAll(this, [
@@ -35,7 +37,11 @@ class SeleniumHelper {
 
     getDriver () {
         const chromeCapabilities = webdriver.Capabilities.chrome();
-        chromeCapabilities.set('chromeOptions', {args: ['--headless']});
+        const args = [];
+        if (USE_HEADLESS) {
+            args.push('--headless');
+        }
+        chromeCapabilities.set('chromeOptions', {args});
         this.driver = new webdriver.Builder()
             .forBrowser('chrome')
             .withCapabilities(chromeCapabilities)

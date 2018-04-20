@@ -111,4 +111,5 @@ $sides: 20rem;
 
 .back-button {
     font-weight: normal;
+    padding-left: 0;
 }

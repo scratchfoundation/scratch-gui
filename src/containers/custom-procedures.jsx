@@ -113,6 +113,7 @@ class CustomProcedures extends React.Component {
                 onAddLabel={this.handleAddLabel}
                 onAddTextNumber={this.handleAddTextNumber}
                 onCancel={this.handleCancel}
+                onKeyPress={this.handleOk}
                 onOk={this.handleOk}
                 onToggleWarp={this.handleToggleWarp}
             />

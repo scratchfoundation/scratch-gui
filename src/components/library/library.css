@@ -2,15 +2,15 @@
 @import "../../css/colors.css";
 
 .library-scroll-grid {
-    display: flex;
-    justify-content: flex-start;
-    align-content: flex-start;
+    display: grid;
+    /* 10rem wide items + .5 * 2 gap = 11rem */
+    grid-template-columns: repeat(auto-fill, 11rem);
+    grid-gap: .5rem;
+    padding: 1rem; /* .5rem gap * 2 */
+    justify-content: center;
     background: $ui-secondary;
-    flex-grow: 1;
-    flex-wrap: wrap;
     overflow-y: auto;
     height: calc(100% - $library-header-height);
-    padding: 0.5rem;
 }
 
 .library-scroll-grid.withFilterBar {

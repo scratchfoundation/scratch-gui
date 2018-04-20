@@ -7,6 +7,7 @@
     align-items: center;
     padding-left: .75rem;
     padding-right: .75rem;
+    user-select: none;
 }
 
 .icon {

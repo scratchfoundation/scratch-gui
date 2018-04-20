@@ -18,7 +18,10 @@ class StageSelector extends React.Component {
             'handleClick',
             'handleSurpriseBackdrop',
             'handleEmptyBackdrop',
-            'addBackdropFromLibraryItem'
+            'addBackdropFromLibraryItem',
+            'handleFileUploadClick',
+            'handleBackdropUpload',
+            'setFileInput'
         ]);
     }
     addBackdropFromLibraryItem (item) {
@@ -32,7 +35,7 @@ class StageSelector extends React.Component {
         return this.props.vm.addBackdrop(item.md5, vmBackdrop);
     }
     handleClick (e) {
-        e.preventDefault();
+        // if (!this.fileInput || e.target !== this.fileInput) e.preventDefault();
         this.props.onSelect(this.props.id);
     }
     handleSurpriseBackdrop () {
@@ -51,6 +54,60 @@ class StageSelector extends React.Component {
             });
         }
     }
+    handleBackdropUpload (e) {
+        const thisFileInput = e.target;
+        let thisFile = null;
+        const reader = new FileReader();
+        reader.onload = () => {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same image multiple times
+            // if they choose
+            thisFileInput.value = null;
+            // Cache the image in storage
+            const backdropBuffer = reader.result;
+            const storage = this.props.vm.runtime.storage;
+            const fileType = thisFile.type; // check what the browser thinks this is
+            // Only handling png and svg right now
+            let backdropFormat = null;
+            let assetType = null;
+            if (fileType === 'image/svg+xml') {
+                backdropFormat = storage.DataFormat.SVG;
+                assetType = storage.AssetType.ImageVector;
+            } else if (fileType === 'image/jpeg') {
+                backdropFormat = storage.DataFormat.JPG;
+                assetType = storage.AssetType.ImageBitmap;
+            } else {
+                backdropFormat = storage.DataFormat.PNG;
+                assetType = storage.AssetType.ImageBitmap;
+            }
+
+            const md5 = storage.builtinHelper.cache(
+                assetType, backdropFormat, new Uint8Array(backdropBuffer));
+
+            const md5Ext = `${md5}.${backdropFormat}`;
+
+            const vmBackdrop = {
+                name: 'backdrop1',
+                dataFormat: backdropFormat,
+                md5: `${md5Ext}`
+            };
+
+            this.props.vm.addBackdrop(md5Ext, vmBackdrop);
+
+            this.props.onActivateTab(COSTUMES_TAB_INDEX);
+
+        };
+        if (thisFileInput.files) {
+            thisFile = thisFileInput.files[0];
+            reader.readAsArrayBuffer(thisFile);
+        }
+    }
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+    setFileInput (input) {
+        this.fileInput = input;
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -63,9 +120,13 @@ class StageSelector extends React.Component {
         } = this.props;
         return (
             <StageSelectorComponent
+                fileInputRef={this.setFileInput}
+                onBackdropFileUpload={this.handleBackdropUpload}
+                onBackdropFileUploadClick={this.handleFileUploadClick}
                 onClick={this.handleClick}
                 onEmptyBackdropClick={this.handleEmptyBackdrop}
                 onSurpriseBackdropClick={this.handleSurpriseBackdrop}
+
                 {...componentProps}
             />
         );

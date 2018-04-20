@@ -193,12 +193,8 @@ class CostumeTab extends React.Component {
 
             const md5Ext = `${md5}.${costumeFormat}`;
 
-            // We don't have info about bitmapResolution or rotationCenter...
             const vmCostume = {
                 name: 'costume1',
-                // rotationCenterX: 0,
-                // rotationCenterY: 0,
-                // bitmapResolution: 1,
                 dataFormat: costumeFormat,
                 md5: `${md5Ext}`
             };

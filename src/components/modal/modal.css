@@ -101,6 +101,7 @@ $sides: 20rem;
 .header-item-close {
     flex-basis: $sides;
     justify-content: flex-end;
+    z-index: 1;
 }
 
 .full-screen .header-item-close {

@@ -74,7 +74,9 @@ class Blocks extends React.Component {
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
         // componentDidUpdate so the toolbox will still correctly be updated
         this.setToolboxRefreshEnabled = this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
-        this.workspace.setToolboxRefreshEnabled = () => this.setToolboxRefreshEnabled(false);
+        this.workspace.setToolboxRefreshEnabled = () => {
+            this.setToolboxRefreshEnabled(false);
+        };
 
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
@@ -107,6 +109,11 @@ class Blocks extends React.Component {
             clearTimeout(this.toolboxUpdateTimeout);
             this.toolboxUpdateTimeout = setTimeout(() => {
                 this.workspace.updateToolbox(this.props.toolboxXML);
+                // In order to catch any changes that mutate the toolbox during "normal runtime"
+                // (variable changes/etc), re-enable toolbox refresh.
+                // Using the setter function will rerender the entire toolbox which we just rendered.
+                this.workspace.toolboxRefreshEnabled_ = true;
+
                 const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
                 this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
             }, 0);

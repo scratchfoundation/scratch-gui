@@ -104,8 +104,8 @@ class Blocks extends React.Component {
             const categoryName = this.workspace.toolbox_.getSelectedCategoryName();
             const offset = this.workspace.toolbox_.getCategoryScrollOffset();
             // rather than update the toolbox "sync" -- update it in the next frame
-            clearTimeout(this.toolboxUpdate);
-            this.toolboxUpdate = setTimeout(() => {
+            clearTimeout(this.toolboxUpdateTimeout);
+            this.toolboxUpdateTimeout = setTimeout(() => {
                 this.workspace.updateToolbox(this.props.toolboxXML);
                 const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
                 const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
@@ -132,7 +132,7 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.workspace.dispose();
-        clearTimeout(this.toolboxUpdate);
+        clearTimeout(this.toolboxUpdateTimeout);
     }
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);

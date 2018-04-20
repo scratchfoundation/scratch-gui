@@ -20,6 +20,8 @@
     align-items: center;
     height: calc($library-filter-bar-height + 2rem); /* padding */
     background-color: $motion-transparent;
+    padding: 0 1rem;
+    font-size: .875rem;
 }
 
 .filter-bar-item {
@@ -42,6 +44,7 @@
 
 .divider {
     transform: scaleY(1.39);
+    height: $library-filter-bar-height;
 }
 
 .tag-wrapper {

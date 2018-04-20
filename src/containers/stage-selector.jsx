@@ -34,8 +34,7 @@ class StageSelector extends React.Component {
         };
         return this.props.vm.addBackdrop(item.md5, vmBackdrop);
     }
-    handleClick (e) {
-        // if (!this.fileInput || e.target !== this.fileInput) e.preventDefault();
+    handleClick () {
         this.props.onSelect(this.props.id);
     }
     handleSurpriseBackdrop () {

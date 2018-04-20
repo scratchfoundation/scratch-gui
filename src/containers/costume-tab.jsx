@@ -48,9 +48,14 @@ const messages = defineMessages({
         description: 'Button to add a surprise costume in the editor tab',
         id: 'gui.costumeTab.addSurpriseCostume'
     },
+    addFileBackdropMsg: {
+        defaultMessage: 'Upload Backdrop',
+        description: 'Button to add a backdrop by uploading a file in the editor tab',
+        id: 'gui.costumeTab.addFileBackdrop'
+    },
     addFileCostumeMsg: {
         defaultMessage: 'Upload Costume',
-        description: 'Button to add a file upload costume in the editor tab',
+        description: 'Button to add a costume by uploading a file in the editor tab',
         id: 'gui.costumeTab.addFileCostume'
     },
     addCameraCostumeMsg: {
@@ -240,6 +245,7 @@ class CostumeTab extends React.Component {
         }
 
         const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
+        const addFileMessage = target.isStage ? messages.addFileBackdropMsg : messages.addFileCostumeMsg;
         const addSurpriseFunc = target.isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
@@ -263,7 +269,7 @@ class CostumeTab extends React.Component {
                         img: cameraIcon
                     },
                     {
-                        title: intl.formatMessage(messages.addFileCostumeMsg),
+                        title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
                         fileAccept: '.svg,', // .png, .jpg, .jpeg coming soon

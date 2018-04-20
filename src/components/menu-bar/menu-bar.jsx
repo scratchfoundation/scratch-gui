@@ -7,13 +7,13 @@ import React from 'react';
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
+import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 
-import {openFeedbackForm} from '../../reducers/modals';
 import {
     openFileMenu,
     closeFileMenu,
@@ -27,7 +27,6 @@ import styles from './menu-bar.css';
 
 import mystuffIcon from './icon--mystuff.png';
 import profileIcon from './icon--profile.png';
-import feedbackIcon from './icon--feedback.svg';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
@@ -183,7 +182,7 @@ const MenuBar = props => (
                     </MenuBarMenu>
                 </div>
             </div>
-            <div className={classNames(styles.divider)} />
+            <Divider className={classNames(styles.divider)} />
             <div className={classNames(styles.menuBarItem)}>
                 <MenuBarItemTooltip id="title-field">
                     <input
@@ -219,19 +218,6 @@ const MenuBar = props => (
                     </Button>
                 </MenuBarItemTooltip>
             </div>
-        </div>
-        <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
-            <Button
-                className={styles.feedbackButton}
-                iconSrc={feedbackIcon}
-                onClick={props.onGiveFeedback}
-            >
-                <FormattedMessage
-                    defaultMessage="Give Feedback"
-                    description="Label for feedback form modal button"
-                    id="gui.menuBar.giveFeedback"
-                />
-            </Button>
         </div>
         <div className={styles.accountInfoWrapper}>
             <MenuBarItemTooltip id="mystuff">
@@ -279,7 +265,6 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
-    onGiveFeedback: PropTypes.func.isRequired,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func
 };
@@ -290,7 +275,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onGiveFeedback: () => dispatch(openFeedbackForm()),
     onClickFile: () => dispatch(openFileMenu()),
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),

@@ -189,7 +189,7 @@ const looks = function (isStage, targetId) {
             </block>
             <block type="looks_nextbackdrop"/>
         ` : `
-            <block type="looks_switchcostumeto">
+            <block id="${targetId}_switchcostumeto" type="looks_switchcostumeto">
                 <value name="COSTUME">
                     <shadow type="looks_costume"/>
                 </value>
@@ -259,15 +259,15 @@ const looks = function (isStage, targetId) {
     `;
 };
 
-const sound = function () {
+const sound = function (isStage, targetId) {
     return `
     <category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
-        <block type="sound_play">
+        <block id="${targetId}_sound_play" type="sound_play">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
         </block>
-        <block type="sound_playuntildone">
+        <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
@@ -531,6 +531,18 @@ const operators = function () {
             </value>
         </block>
         ${blockSeparator}
+        <block type="operator_gt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">100</field>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_lt">
             <value name="OPERAND1">
                 <shadow type="text">
@@ -539,7 +551,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>
@@ -551,19 +563,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-        </block>
-        <block type="operator_gt">
-            <value name="OPERAND1">
-                <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-            <value name="OPERAND2">
-                <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">100</field>
                 </shadow>
             </value>
         </block>
@@ -575,12 +575,12 @@ const operators = function () {
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
-                    <field name="TEXT">hello</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
             <value name="STRING2">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">banana</field>
                 </shadow>
             </value>
         </block>
@@ -592,26 +592,26 @@ const operators = function () {
             </value>
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_length">
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">apple</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_contains" id="operator_contains">
           <value name="STRING1">
             <shadow type="text">
-              <field name="TEXT">hello</field>
+              <field name="TEXT">apple</field>
             </shadow>
           </value>
           <value name="STRING2">
             <shadow type="text">
-              <field name="TEXT">world</field>
+              <field name="TEXT">a</field>
             </shadow>
           </value>
         </block>

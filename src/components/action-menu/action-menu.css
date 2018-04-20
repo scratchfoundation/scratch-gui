@@ -80,6 +80,10 @@ $more-button-size: 2.25rem;
     z-index: 10; /* @todo justify */
 }
 
+.file-input {
+    display: none;
+}
+
 .expanded .more-buttons {
     max-height: 1000px; /* Arbitrary, needs to be a value in order for animation to run */
 }

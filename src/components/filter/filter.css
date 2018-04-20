@@ -11,6 +11,7 @@
     background: $ui-white;
     border-radius: 10rem;
     user-select: none;
+    height: $library-filter-bar-height;
 }
 
 .filter-icon {

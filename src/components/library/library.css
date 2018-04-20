@@ -16,10 +16,10 @@
 .filter-bar {
     display: flex;
     flex-direction: row;
-    background-color: $motion-transparent;
     justify-content: flex-start;
-    height: 4.5rem;
-    padding: 1rem;
+    align-items: center;
+    height: calc($library-filter-bar-height + 2rem); /* padding */
+    background-color: $motion-transparent;
 }
 
 .filter-bar-item {
@@ -42,4 +42,12 @@
 
 .divider {
     transform: scaleY(1.39);
+}
+
+.tag-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: $library-filter-bar-height;
+    overflow: hidden;
 }

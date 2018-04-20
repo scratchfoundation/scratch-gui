@@ -7,6 +7,7 @@ $sprite-info-height: 6rem;
 $stage-menu-height: 2.75rem;
 
 $library-header-height: 3.125rem;
+$library-filter-bar-height: 2.5rem;
 
 $form-radius: calc($space / 2);
 

@@ -110,19 +110,21 @@ class LibraryComponent extends React.Component {
                             <Divider className={classNames(styles.filterBarItem, styles.divider)} />
                         )}
                         {this.props.tags &&
-                            (tagListPrefix.concat(this.props.tags)).map((tagProps, id) => (
-                                <TagButton
-                                    active={this.state.selectedTag === tagProps.title.toLowerCase()}
-                                    className={classNames(
-                                        styles.filterBarItem,
-                                        styles.tagButton,
-                                        tagProps.className
-                                    )}
-                                    key={`tag-button-${id}`}
-                                    onClick={this.handleTagClick}
-                                    {...tagProps}
-                                />
-                            ))
+                            <div className={styles.tagWrapper}>
+                                {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
+                                    <TagButton
+                                        active={this.state.selectedTag === tagProps.title.toLowerCase()}
+                                        className={classNames(
+                                            styles.filterBarItem,
+                                            styles.tagButton,
+                                            tagProps.className
+                                        )}
+                                        key={`tag-button-${id}`}
+                                        onClick={this.handleTagClick}
+                                        {...tagProps}
+                                    />
+                                ))}
+                            </div>
                         }
                     </div>
                 )}

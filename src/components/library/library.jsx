@@ -171,7 +171,7 @@ LibraryComponent.propTypes = {
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
-    tags: PropTypes.arrayOf(TagButton.propTypes),
+    tags: PropTypes.arrayOf(PropTypes.shape(TagButton.propTypes)),
     title: PropTypes.string.isRequired
 };
 

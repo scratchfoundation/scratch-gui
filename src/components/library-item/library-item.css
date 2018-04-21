@@ -6,9 +6,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-basis: 160px;
-    max-width: 160px;
-    height: 160px;
+    flex-basis: $library-item-width;
+    width: $library-item-width;
+    height: $library-item-height;
     margin: $space;
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -69,9 +69,9 @@
 }
 
 .featured-item {
-    flex-basis: 300px;
-    max-width: 300px;
-    height: auto;
+    flex-basis: $library-item-width-large;
+    width: $library-item-width-large;
+    height: $library-item-height-large;
     overflow: hidden;
     padding: 0;
 }

@@ -50,7 +50,7 @@ class LibraryComponent extends React.Component {
     }
     handleSelect (id) {
         this.props.onRequestClose();
-        this.props.onItemSelected(this.getFilteredData()[id]);
+        this.props.onItemSelected(this.props.data[id]);
     }
     handleTagClick (tag) {
         this.setState({
@@ -59,10 +59,10 @@ class LibraryComponent extends React.Component {
         });
     }
     handleMouseEnter (id) {
-        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
+        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.props.data[id]);
     }
     handleMouseLeave (id) {
-        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
+        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.props.data[id]);
     }
     handleFilterChange (event) {
         this.setState({
@@ -75,7 +75,7 @@ class LibraryComponent extends React.Component {
     }
     getFilteredData () {
         // Filters and splits the data based on the `featured` flag
-        return this.props.data.reduce((acc, dataItem) => {
+        return this.props.data.reduce((acc, dataItem, dataId) => {
             const inSet = this.state.selectedTag === 'all' ? (
                 // Filter based on query
                 (dataItem.tags || [])
@@ -97,7 +97,7 @@ class LibraryComponent extends React.Component {
             if (inSet) {
                 // splt by the featured property
                 if (!acc[dataItem.featured]) acc[dataItem.featured] = [];
-                acc[dataItem.featured].push(dataItem);
+                acc[dataItem.featured].push(Object.assign({}, dataItem, {dataId}));
             }
             return acc;
         }, {});
@@ -161,7 +161,7 @@ class LibraryComponent extends React.Component {
                                 })}
                                 key={`grid-featured-${featured}`}
                             >
-                                {filteredData[featured].map((dataItem, index) => {
+                                {filteredData[featured].map(dataItem => {
                                     const scratchURL = dataItem.md5 ?
                                         `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
                                         dataItem.rawURL;
@@ -171,8 +171,8 @@ class LibraryComponent extends React.Component {
                                             disabled={dataItem.disabled}
                                             featured={dataItem.featured}
                                             iconURL={scratchURL}
-                                            id={index}
-                                            key={`item_${index}`}
+                                            id={dataItem.dataId}
+                                            key={`item_${dataItem.dataId}`}
                                             name={dataItem.name}
                                             onBlur={this.handleBlur}
                                             onFocus={this.handleFocus}

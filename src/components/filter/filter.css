@@ -79,7 +79,8 @@
 
 .filter-input {
     flex-grow: 1;
-    line-height: 1.25rem;
+    height: $library-filter-bar-height;
+    line-height: $library-filter-bar-height;
     background-color: transparent;
     -webkit-appearance: none;
     outline: none;

@@ -33,13 +33,13 @@
 }
 
 .filter-input {
-    width: 6rem;
+    width: 11.5rem;
     transition: .2s;
 }
 
 .filter-input:focus,
 .filter-input:not([value=""]) {
-    width: 13.25rem;
+    width: 18.75rem;
 }
 
 .divider {

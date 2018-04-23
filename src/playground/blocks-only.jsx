@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
-import AppStateHOC from '../lib/app-state-hoc.jsx';
 import Controls from '../containers/controls.jsx';
 import Blocks from '../containers/blocks.jsx';
 import GUI from '../containers/gui.jsx';
@@ -27,7 +26,7 @@ const BlocksOnly = props => (
     </GUI>
 );
 
-const App = AppStateHOC(ProjectLoaderHOC(BlocksOnly));
+const App = ProjectLoaderHOC(BlocksOnly);
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

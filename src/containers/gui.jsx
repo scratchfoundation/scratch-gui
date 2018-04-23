@@ -12,6 +12,8 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import AppStateHOC from '../lib/app-state-hoc.jsx';
+import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
@@ -87,7 +89,7 @@ GUI.propTypes = {
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.string,
+    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -115,4 +117,4 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-export default vmListenerHOC(ConnectedGUI);
+export default ProjectLoaderHOC(AppStateHOC(vmListenerHOC(ConnectedGUI)));

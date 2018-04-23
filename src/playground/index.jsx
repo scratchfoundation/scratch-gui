@@ -3,10 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
-import analytics from './lib/analytics';
-import AppStateHOC from './lib/app-state-hoc.jsx';
-import GUI from './containers/gui.jsx';
-import ProjectLoaderHOC from './lib/project-loader-hoc.jsx';
+import analytics from '../lib/analytics';
+import GUI from '../containers/gui.jsx';
+import ErrorBoundaryHOC from './error-boundary-hoc.jsx';
 
 import styles from './index.css';
 
@@ -18,7 +17,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 // Register "base" page view
 analytics.pageview('/');
 
-const App = AppStateHOC(ProjectLoaderHOC(GUI));
+const App = ErrorBoundaryHOC(GUI);
 
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;

@@ -54,7 +54,7 @@ export default [
         disabled: true
     },
     {
-        name: 'LEGO Mindstorms EV3',
+        name: 'LEGO MINDSTORMS EV3',
         extensionURL: '',
         iconURL: ev3Image,
         description: 'Build interactive robots and more.',

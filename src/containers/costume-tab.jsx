@@ -172,7 +172,6 @@ class CostumeTab extends React.Component {
         const thisFileInput = e.target;
         let thisFile = null;
         const reader = new FileReader();
-        const thisThing = this;
         reader.onload = () => {
             // Reset the file input value now that we have everything we need
             // so that the user can upload the same image multiple times
@@ -180,7 +179,7 @@ class CostumeTab extends React.Component {
             thisFileInput.value = null;
 
 
-            const storage = thisThing.props.vm.runtime.storage;
+            const storage = this.props.vm.runtime.storage;
             const fileType = thisFile.type; // check what the browser thinks this is
             // Only handling png and svg right now
             let costumeFormat = null;
@@ -191,12 +190,13 @@ class CostumeTab extends React.Component {
             } else if (fileType === 'image/jpeg') {
                 costumeFormat = storage.DataFormat.JPG;
                 assetType = storage.AssetType.ImageBitmap;
-            } else {
+            } else if (fileType === 'image/png') {
                 costumeFormat = storage.DataFormat.PNG;
                 assetType = storage.AssetType.ImageBitmap;
             }
+            if (!costumeFormat) return;
 
-            const addCostumeFromBuffer = function (error, costumeBuffer) {
+            const addCostumeFromBuffer = (function (error, costumeBuffer) {
                 if (error) {
                     log.warn(`An error occurred while trying to extract image data: ${error}`);
                     return;
@@ -213,12 +213,17 @@ class CostumeTab extends React.Component {
                     md5: `${md5Ext}`
                 };
 
-                thisThing.props.vm.addCostume(md5Ext, vmCostume);
-            };
+                this.props.vm.addCostume(md5Ext, vmCostume);
+            }).bind(this);
 
             if (costumeFormat === storage.DataFormat.SVG) {
-                addCostumeFromBuffer(null, reader.result);
+                // Must pass in file data as a Uint8Array,
+                // passing in an array buffer causes the sprite/costume
+                // thumbnails to not display because the data URI for the costume
+                // is invalid
+                addCostumeFromBuffer(null, new Uint8Array(reader.result));
             } else {
+                // otherwise it's a bitmap
                 importBitmap(reader.result, addCostumeFromBuffer);
             }
         };

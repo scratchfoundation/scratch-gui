@@ -10,8 +10,7 @@ import StageSelectorComponent from '../components/stage-selector/stage-selector.
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
-import {importBitmap} from 'scratch-svg-renderer';
-import log from '../lib/log.js';
+import {handleFileUpload, costumeUpload} from '../lib/fileUploader';
 
 class StageSelector extends React.Component {
     constructor (props) {
@@ -56,68 +55,13 @@ class StageSelector extends React.Component {
         }
     }
     handleBackdropUpload (e) {
-        const thisFileInput = e.target;
-        let thisFile = null;
-        const reader = new FileReader();
-        reader.onload = () => {
-            // Reset the file input value now that we have everything we need
-            // so that the user can upload the same image multiple times
-            // if they choose
-            thisFileInput.value = null;
-            // Cache the image in storage
-            const storage = this.props.vm.runtime.storage;
-            const fileType = thisFile.type; // check what the browser thinks this is
-            // Only handling png and svg right now
-            let backdropFormat = null;
-            let assetType = null;
-            if (fileType === 'image/svg+xml') {
-                backdropFormat = storage.DataFormat.SVG;
-                assetType = storage.AssetType.ImageVector;
-            } else if (fileType === 'image/jpeg') {
-                backdropFormat = storage.DataFormat.JPG;
-                assetType = storage.AssetType.ImageBitmap;
-            } else if (fileType === 'image/png') {
-                backdropFormat = storage.DataFormat.PNG;
-                assetType = storage.AssetType.ImageBitmap;
-            }
-            if (!backdropFormat) return;
-
-            const addBackdropFromBuffer = (function (error, backdropBuffer) {
-                if (error) {
-                    log.warn(`An error occurred while trying to extract image data: ${error}`);
-                    return;
-                }
-
-                const md5 = storage.builtinHelper.cache(
-                    assetType, backdropFormat, backdropBuffer);
-
-                const md5Ext = `${md5}.${backdropFormat}`;
-
-                const vmBackdrop = {
-                    name: 'backdrop1',
-                    dataFormat: backdropFormat,
-                    md5: `${md5Ext}`
-                };
-
-                this.props.vm.addBackdrop(md5Ext, vmBackdrop);
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
-            }).bind(this);
-
-            if (backdropFormat === storage.DataFormat.SVG) {
-                // Must pass in file data as a Uint8Array,
-                // passing in an array buffer causes the sprite/costume
-                // thumbnails to not display because the data URI for the costume
-                // is invalid
-                addBackdropFromBuffer(null, new Uint8Array(reader.result));
-            } else {
-                // otherwise it's a bitmap
-                importBitmap(reader.result, addBackdropFromBuffer);
-            }
-        };
-        if (thisFileInput.files) {
-            thisFile = thisFileInput.files[0];
-            reader.readAsArrayBuffer(thisFile);
-        }
+        const storage = this.props.vm.runtime.storage;
+        const handleNewBackdrop = function (md5Ext, vmBackdrop) {
+            this.props.vm.addBackdrop(md5Ext, vmBackdrop);
+            this.props.onActivateTab(COSTUMES_TAB_INDEX);
+        }.bind(this);
+        const costumeOnload = costumeUpload.bind(this, storage, handleNewBackdrop);
+        handleFileUpload(e.target, costumeOnload);
     }
     handleFileUploadClick () {
         this.fileInput.click();

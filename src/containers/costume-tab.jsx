@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import {defineMessages, intlShape, injectIntl} from 'react-intl';
-import {importBitmap} from 'scratch-svg-renderer';
 import VM from 'scratch-vm';
+
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
 import {connect} from 'react-redux';
-import log from '../lib/log.js';
+import {handleFileUpload, costumeUpload} from '../lib/fileUploader.js';
 
 import {
     closeCostumeLibrary,
@@ -169,68 +169,12 @@ class CostumeTab extends React.Component {
         this.props.vm.addCostume(item.md5, vmCostume);
     }
     handleCostumeUpload (e) {
-        const thisFileInput = e.target;
-        let thisFile = null;
-        const reader = new FileReader();
-        reader.onload = () => {
-            // Reset the file input value now that we have everything we need
-            // so that the user can upload the same image multiple times
-            // if they choose
-            thisFileInput.value = null;
-
-
-            const storage = this.props.vm.runtime.storage;
-            const fileType = thisFile.type; // check what the browser thinks this is
-            // Only handling png and svg right now
-            let costumeFormat = null;
-            let assetType = null;
-            if (fileType === 'image/svg+xml') {
-                costumeFormat = storage.DataFormat.SVG;
-                assetType = storage.AssetType.ImageVector;
-            } else if (fileType === 'image/jpeg') {
-                costumeFormat = storage.DataFormat.JPG;
-                assetType = storage.AssetType.ImageBitmap;
-            } else if (fileType === 'image/png') {
-                costumeFormat = storage.DataFormat.PNG;
-                assetType = storage.AssetType.ImageBitmap;
-            }
-            if (!costumeFormat) return;
-
-            const addCostumeFromBuffer = (function (error, costumeBuffer) {
-                if (error) {
-                    log.warn(`An error occurred while trying to extract image data: ${error}`);
-                    return;
-                }
-
-                const md5 = storage.builtinHelper.cache(
-                    assetType, costumeFormat, costumeBuffer);
-
-                const md5Ext = `${md5}.${costumeFormat}`;
-
-                const vmCostume = {
-                    name: 'costume1',
-                    dataFormat: costumeFormat,
-                    md5: `${md5Ext}`
-                };
-
-                this.props.vm.addCostume(md5Ext, vmCostume);
-            }).bind(this);
-
-            if (costumeFormat === storage.DataFormat.SVG) {
-                // Must pass in file data as a Uint8Array,
-                // passing in an array buffer causes the sprite/costume
-                // thumbnails to not display because the data URI for the costume
-                // is invalid
-                addCostumeFromBuffer(null, new Uint8Array(reader.result));
-            } else {
-                // otherwise it's a bitmap
-                importBitmap(reader.result, addCostumeFromBuffer);
-            }
-        };
-        if (thisFileInput.files) {
-            thisFile = thisFileInput.files[0];
-            reader.readAsArrayBuffer(thisFile);
-        }
+        const storage = this.props.vm.runtime.storage;
+        const handleNewCostume = function (md5Ext, vmCostume) {
+            this.props.vm.addCostume(md5Ext, vmCostume);
+        }.bind(this);
+        const costumeOnload = costumeUpload.bind(this, storage, handleNewCostume);
+        handleFileUpload(e.target, costumeOnload);
     }
     handleFileUploadClick () {
         this.fileInput.click();

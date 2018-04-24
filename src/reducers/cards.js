@@ -105,7 +105,7 @@ const startDrag = function () {
 
 const endDrag = function () {
     return {type: END_DRAG};
-}
+};
 
 export {
     reducer as default,

@@ -21,7 +21,10 @@ const NextPrevButtons = ({onNextStep, onPrevStep}) => (
         {onNextStep ? (
             <div>
                 <div className={styles.rightCard} />
-                <div className={styles.rightButton} onClick={onNextStep}>
+                <div
+                    className={styles.rightButton}
+                    onClick={onNextStep}
+                >
                     <img
                         draggable={false}
                         src={nextIcon}
@@ -32,7 +35,10 @@ const NextPrevButtons = ({onNextStep, onPrevStep}) => (
         {onPrevStep ? (
             <div>
                 <div className={styles.leftCard} />
-                <div className={styles.leftButton} onClick={onPrevStep}>
+                <div
+                    className={styles.leftButton}
+                    onClick={onPrevStep}
+                >
                     <img
                         draggable={false}
                         src={prevIcon}
@@ -49,12 +55,12 @@ const VideoStep = ({video, dragging}) => (
             <div className={styles.videoCover} />
         ) : null}
         <iframe
-            width="600"
-            height="337"
-            src={`${video}?rel=0&amp;showinfo=0`}
-            frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
+            frameBorder="0"
+            height="337"
+            src={`${video}?rel=0&amp;showinfo=0`}
+            width="600"
         />
     </div>
 );
@@ -66,9 +72,9 @@ const ImageStep = ({title, image}) => (
         </div>
         <div className={styles.stepImageContainer}>
             <img
+                className={styles.stepImage}
                 draggable={false}
                 src={image}
-                className={styles.stepImage}
             />
         </div>
     </Fragment>
@@ -76,31 +82,44 @@ const ImageStep = ({title, image}) => (
 
 const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
     <div className={styles.headerButtons}>
-        <div className={styles.collapseButton} onClick={onExitDeck}>
-            <img className={styles.helpIcon} src={helpIcon}/>
+        <div
+            className={styles.collapseButton}
+            onClick={onExitDeck}
+        >
+            <img
+                className={styles.helpIcon}
+                src={helpIcon}
+            />
             <FormattedMessage
                 defaultMessage="All How-Tos"
                 description="Title for button to return to how-to library"
                 id="gui.cards.all-how-tos"
             />
         </div>
-            {steps.length > 1 ? (
-                <div className={styles.stepsList}>
-                    {Array(steps.length).fill(0).map((_, i) => (
+        {steps.length > 1 ? (
+            <div className={styles.stepsList}>
+                {Array(steps.length).fill(0)
+                    .map((_, i) => (
                         <div
-                            key={`pip-step-${i}`}
                             className={i === step ? styles.activeStepPip : styles.inactiveStepPip}
+                            key={`pip-step-${i}`}
                         />
                     ))}
-                </div>
-            ) : null}
-        <div className={styles.removeButton} onClick={onCloseCards}>
+            </div>
+        ) : null}
+        <div
+            className={styles.removeButton}
+            onClick={onCloseCards}
+        >
             <FormattedMessage
                 defaultMessage="Remove"
                 description="Title for button to close how-to card"
                 id="gui.cards.remove"
             />
-            <img className={styles.closeIcon} src={closeIcon}/>
+            <img
+                className={styles.closeIcon}
+                src={closeIcon}
+            />
         </div>
     </div>
 );
@@ -124,8 +143,8 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => 
                     >
                         <img
                             className={styles.deckImage}
-                            src={content[id].img}
                             draggable={false}
+                            src={content[id].img}
                         />
                         <div className={styles.deckName}>{content[id].name}</div>
                     </div>
@@ -133,7 +152,10 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => 
             </div>
         </div>
         <div className={styles.seeAll}>
-            <div className={styles.seeAllButton} onClick={onExitDeck}>
+            <div
+                className={styles.seeAllButton}
+                onClick={onExitDeck}
+            >
                 <FormattedMessage
                     defaultMessage="See more"
                     description="Title for button to see more in how-to library"
@@ -195,11 +217,11 @@ const Cards = props => {
                                 <VideoStep
                                     dragging={dragging}
                                     video={steps[step].video}
-                                 />
+                                />
                             ) : (
                                 <ImageStep
-                                    title={steps[step].title}
                                     image={steps[step].image}
+                                    title={steps[step].title}
                                 />
                             )
                         )}

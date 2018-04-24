@@ -224,15 +224,15 @@ const MenuBar = props => (
         </div>
         <div className={styles.accountInfoWrapper}>
             <div
-            className={classNames(styles.menuBarItem, styles.hoverable)}
-            onClick={props.onOpenTipLibrary}
+                className={classNames(styles.menuBarItem, styles.hoverable)}
+                onClick={props.onOpenTipLibrary}
             >
-               <img
-                        className={styles.helpIcon}
-                        src={helpIcon}
-                    />
-        </div>
-        <MenuBarItemTooltip id="mystuff">
+                <img
+                    className={styles.helpIcon}
+                    src={helpIcon}
+                />
+            </div>
+            <MenuBarItemTooltip id="mystuff">
                 <div
                     className={classNames(
                         styles.menuBarItem,

@@ -295,7 +295,7 @@ export default {
         ),
         img: glide_around_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/WUcmsMEIbGg"
+            video: 'https://www.youtube.com/embed/WUcmsMEIbGg'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -314,8 +314,8 @@ export default {
         ),
         img: change_size_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/NiK9KcghZ9s"
-        },{
+            video: 'https://www.youtube.com/embed/NiK9KcghZ9s'
+        }, {
             deckIds: [
                 'add-a-backdrop',
                 'switch-costume',
@@ -333,7 +333,7 @@ export default {
         ),
         img: switch_costume_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/AUBoFxQDPWA"
+            video: 'https://www.youtube.com/embed/AUBoFxQDPWA'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -352,8 +352,8 @@ export default {
         ),
         img: hide_and_show_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/jpvqnlfsDTU"
-        },{
+            video: 'https://www.youtube.com/embed/jpvqnlfsDTU'
+        }, {
             deckIds: [
                 'add-a-backdrop',
                 'switch-costume',
@@ -371,8 +371,8 @@ export default {
         ),
         img: add_backdrop_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/WpV05Q7AbPU"
-        },{
+            video: 'https://www.youtube.com/embed/WpV05Q7AbPU'
+        }, {
             deckIds: [
                 'add-a-backdrop',
                 'switch-costume',
@@ -390,8 +390,8 @@ export default {
         ),
         img: add_effects_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/ORuohhkx15g"
-        },{
+            video: 'https://www.youtube.com/embed/ORuohhkx15g'
+        }, {
             deckIds: [
                 'add-a-backdrop',
                 'switch-costume',
@@ -400,10 +400,10 @@ export default {
         }]
     },
     'move-around-with-arrow-keys': {
-        name: "Move Using Arrow Keys",
+        name: 'Move Using Arrow Keys',
         img: move_arrow_keys_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/7DUA_Yl0B_M"
+            video: 'https://www.youtube.com/embed/7DUA_Yl0B_M'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -413,10 +413,10 @@ export default {
         }]
     },
     'spin-video': {
-        name: "Spin!",
+        name: 'Spin!',
         img: spin_thumb,
         steps: [{
-            video: "https://www.youtube.com/embed/rHP3aojB_6w"
+            video: 'https://www.youtube.com/embed/rHP3aojB_6w'
         }, {
             deckIds: [
                 'add-a-backdrop',

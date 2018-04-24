@@ -38,7 +38,6 @@ const reducer = function (state, action) {
         });
     case NEXT_STEP:
         if (state.activeDeckId !== null) {
-            const steps = state.content[state.activeDeckId].steps.length;
             return Object.assign({}, state, {
                 step: state.step + 1
             });
@@ -46,7 +45,6 @@ const reducer = function (state, action) {
         return state;
     case PREV_STEP:
         if (state.activeDeckId !== null) {
-            const steps = state.content[state.activeDeckId].steps.length;
             if (state.step > 0) {
                 return Object.assign({}, state, {
                     step: state.step - 1

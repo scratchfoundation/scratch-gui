@@ -1,17 +1,12 @@
-import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
 import {FormattedMessage} from 'react-intl';
-import styles from './card.css';
 import Draggable from 'react-draggable';
 
-import {connect} from 'react-redux';
-import {closeTipsLibrary} from '../../reducers/modals';
+import styles from './card.css';
 
 import nextIcon from './icon--next.svg';
 import prevIcon from './icon--prev.svg';
-
-import zoomIcon from '../stage-header/icon--fullscreen.svg';
 
 import helpIcon from './icon--help.svg';
 import closeIcon from '../close-button/icon--close.svg';
@@ -49,6 +44,11 @@ const NextPrevButtons = ({onNextStep, onPrevStep}) => (
     </Fragment>
 );
 
+NextPrevButtons.propTypes = {
+    onNextStep: PropTypes.func,
+    onPrevStep: PropTypes.func
+};
+
 const VideoStep = ({video, dragging}) => (
     <div className={styles.stepVideo}>
         {dragging ? (
@@ -65,6 +65,11 @@ const VideoStep = ({video, dragging}) => (
     </div>
 );
 
+VideoStep.propTypes = {
+    dragging: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired
+};
+
 const ImageStep = ({title, image}) => (
     <Fragment>
         <div className={styles.stepTitle}>
@@ -80,7 +85,12 @@ const ImageStep = ({title, image}) => (
     </Fragment>
 );
 
-const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
+ImageStep.propTypes = {
+    title: PropTypes.node.isRequired,
+    image: PropTypes.string.isRequired
+};
+
+const CardHeader = ({onCloseCards, onExitDeck, totalSteps, step}) => (
     <div className={styles.headerButtons}>
         <div
             className={styles.collapseButton}
@@ -98,7 +108,7 @@ const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
         </div>
         {steps.length > 1 ? (
             <div className={styles.stepsList}>
-                {Array(steps.length).fill(0)
+                {Array(totalSteps).fill(0)
                     .map((_, i) => (
                         <div
                             className={i === step ? styles.activeStepPip : styles.inactiveStepPip}
@@ -123,6 +133,13 @@ const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
         </div>
     </div>
 );
+
+CardHeader.propTypes = {
+    onCloseCards: PropTypes.func.isRequired,
+    onExitDeck: PropTypes.func.isRequired,
+    totalSteps: PropTypes.number,
+    step: PropTypes.number
+};
 
 const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
     <Fragment>
@@ -166,6 +183,24 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => 
     </Fragment>
 );
 
+PreviewsStep.propTypes = {
+    content: PropTypes.shape({
+        id: PropTypes.shape({
+            name: PropTypes.node.isRequired,
+            img: PropTypes.string.isRequired,
+            steps: PropTypes.arrayOf(PropTypes.shape({
+                title: PropTypes.node,
+                image: PropTypes.string,
+                video: PropTypes.string,
+                deckIds: PropTypes.arrayOf(PropTypes.string)
+            }))
+        })
+    }).isRequired,
+    deckIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onActivateDeckFactory: PropTypes.func.isRequired,
+    onExitDeck: PropTypes.func.isRequired
+};
+
 const Cards = props => {
     const {
         dragging,
@@ -203,7 +238,12 @@ const Cards = props => {
         >
             <div className={styles.cardContainer}>
                 <div className={styles.card}>
-                    <CardHeader {...{onExitDeck, onCloseCards, steps, step}} />
+                    <CardHeader
+                        onCloseCards={onCloseCards}
+                        onExitDeck={onExitDeck}
+                        step={step}
+                        totalSteps={steps.length}
+                    />
                     <div className={styles.stepBody}>
                         {steps[step].deckIds ? (
                             <PreviewsStep
@@ -237,7 +277,13 @@ const Cards = props => {
 };
 
 Cards.propTypes = {
-    visible: PropTypes.bool.isRequired,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    onDrag: PropTypes.func,
+    onStartDrag: PropTypes.func,
+    onEndDrag: PropTypes.func,
+    dragging: PropTypes.bool,
+
     content: PropTypes.shape({
         id: PropTypes.shape({
             name: PropTypes.node.isRequired,

@@ -2,59 +2,42 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 // Spin around
-import thumb_spin from './spin/thumb-spin.gif';
-import library_spin from './spin/library-spin.gif';
-import step_dragTurn from './spin/drag-turn.gif';
-import step_clickTurn from './spin/click-turn.gif';
-import step_clickControl from './spin/click-control.gif';
-import step_dragForever from './spin/drag-forever.gif';
-import step_clickForever from './spin/click-forever.gif';
-import step_changeColor from './spin/change-color.gif';
+import librarySpin from './spin/library-spin.gif';
+import stepDragTurn from './spin/drag-turn.gif';
+import stepClickTurn from './spin/click-turn.gif';
+import stepClickControl from './spin/click-control.gif';
+import stepDragForever from './spin/drag-forever.gif';
+import stepClickForever from './spin/click-forever.gif';
+import stepChangeColor from './spin/change-color.gif';
 
 // Say hello
-import thumb_say from './say/thumb-say.gif';
-import library_say from './say/library-say.gif';
-import step_addSprite from './say/add-sprite.gif';
-import step_clickLooks from './say/click-looks.gif';
-import step_dragSay from './say/drag-say.gif';
-import step_clickSay from './say/click-say.gif';
-import step_anotherSay from './say/another-say.gif';
-import step_editSay from './say/edit-say.gif';
-import step_clickStack from './say/click-stack.gif';
+import librarySay from './say/library-say.gif';
+import stepAddSprite from './say/add-sprite.gif';
+import stepClickLooks from './say/click-looks.gif';
+import stepDragSay from './say/drag-say.gif';
+import stepClickSay from './say/click-say.gif';
+import stepAnotherSay from './say/another-say.gif';
+import stepEditSay from './say/edit-say.gif';
+import stepClickStack from './say/click-stack.gif';
 
 // Clicker
-import thumb_clicker from './clicker/thumb-clicker.gif';
-import library_clicker from './clicker/library-clicker.gif';
-import step_dragGoTo from './clicker/drag-goto.gif';
-import step_clickGoTo from './clicker/click-goto.gif';
-import step_clickEvents from './clicker/click-events.gif';
-import step_addWhenClicked from './clicker/add-whenclicked.gif';
-import step_clickSprite from './clicker/click-sprite.gif';
-import step_addSound from './clicker/add-sound.gif';
-
-import step_forever from './zoom/forever.gif';
-import step_foreverZoomed from './zoom/forever--zoomed.gif';
-
-import step_move from './zoom/move.gif';
-import step_moveZoomed from './zoom/move--zoomed.gif';
-
-import step_color from './zoom/color.gif';
-import step_colorZoomed from './zoom/color--zoomed.gif';
-
-import step_loudness from './zoom/loudness.gif';
-import step_edge from './zoom/edge.gif';
-import step_greenflag from './zoom/green-flag.gif';
-import step_stop from './zoom/stop.gif';
+import libraryClicker from './clicker/library-clicker.gif';
+import stepDragGoTo from './clicker/drag-goto.gif';
+import stepClickGoTo from './clicker/click-goto.gif';
+import stepClickEvents from './clicker/click-events.gif';
+import stepAddWhenClicked from './clicker/add-whenclicked.gif';
+import stepClickSprite from './clicker/click-sprite.gif';
+import stepAddSound from './clicker/add-sound.gif';
 
 // Videos
-import glide_around_thumb from './videos/glide-around.jpg';
-import change_size_thumb from './videos/change-size.jpg';
-import switch_costume_thumb from './videos/switch-costume.jpg';
-import hide_and_show_thumb from './videos/hide-and-show.jpg';
-import add_backdrop_thumb from './videos/add-backdrop.jpg';
-import add_effects_thumb from './videos/add-effects.jpg';
-import move_arrow_keys_thumb from './videos/move-arrow-keys.jpg';
-import spin_thumb from './videos/spin.jpg';
+import glideAroundThumb from './videos/glide-around.jpg';
+import changeSizeThumb from './videos/change-size.jpg';
+import switchCostumeThumb from './videos/switch-costume.jpg';
+import hideAndShowThumb from './videos/hide-and-show.jpg';
+import addBackdropThumb from './videos/add-backdrop.jpg';
+import addEffectsThumb from './videos/add-effects.jpg';
+import moveArrowKeysThumb from './videos/move-arrow-keys.jpg';
+import spinThumb from './videos/spin.jpg';
 
 export default {
     'spin-around': {
@@ -65,7 +48,7 @@ export default {
                 id="gui.howtos.spin-around.name"
             />
         ),
-        img: library_spin,
+        img: librarySpin,
         steps: [
             {
                 title: (
@@ -75,7 +58,7 @@ export default {
                         id="gui.howtos.spin.step_dragTurn"
                     />
                 ),
-                image: step_dragTurn
+                image: stepDragTurn
             }, {
                 title: (
                     <FormattedMessage
@@ -84,7 +67,7 @@ export default {
                         id="gui.howtos.spin.step_clickTurn"
                     />
                 ),
-                image: step_clickTurn
+                image: stepClickTurn
             }, {
                 title: (
                     <FormattedMessage
@@ -93,7 +76,7 @@ export default {
                         id="gui.howtos.spin.step_clickControl"
                     />
                 ),
-                image: step_clickControl
+                image: stepClickControl
             }, {
                 title: (
                     <FormattedMessage
@@ -102,7 +85,7 @@ export default {
                         id="gui.howtos.spin.step_dragForever"
                     />
                 ),
-                image: step_dragForever
+                image: stepDragForever
             }, {
                 title: (
                     <FormattedMessage
@@ -111,7 +94,7 @@ export default {
                         id="gui.howtos.spin.step_clickForever"
                     />
                 ),
-                image: step_clickForever
+                image: stepClickForever
             }, {
                 title: (
                     <FormattedMessage
@@ -120,7 +103,7 @@ export default {
                         id="gui.howtos.spin.step_changeColor"
                     />
                 ),
-                image: step_changeColor
+                image: stepChangeColor
             }, {
                 deckIds: [
                     'add-a-backdrop',
@@ -138,7 +121,7 @@ export default {
                 id="gui.howtos.say-hello.name"
             />
         ),
-        img: library_say,
+        img: librarySay,
         steps: [
             {
                 title: (
@@ -148,7 +131,7 @@ export default {
                         id="gui.howtos.say-hello.step_addSprite"
                     />
                 ),
-                image: step_addSprite
+                image: stepAddSprite
             }, {
                 title: (
                     <FormattedMessage
@@ -157,7 +140,7 @@ export default {
                         id="gui.howtos.say-hello.step_clickLooks"
                     />
                 ),
-                image: step_clickLooks
+                image: stepClickLooks
             }, {
                 title: (
                     <FormattedMessage
@@ -166,7 +149,7 @@ export default {
                         id="gui.howtos.say-hello.step_dragSay"
                     />
                 ),
-                image: step_dragSay
+                image: stepDragSay
             }, {
                 title: (
                     <FormattedMessage
@@ -175,7 +158,7 @@ export default {
                         id="gui.howtos.say-hello.step_clickSay"
                     />
                 ),
-                image: step_clickSay
+                image: stepClickSay
             }, {
                 title: (
                     <FormattedMessage
@@ -184,7 +167,7 @@ export default {
                         id="gui.howtos.say-hello.step_anotherSay"
                     />
                 ),
-                image: step_anotherSay
+                image: stepAnotherSay
             }, {
                 title: (
                     <FormattedMessage
@@ -193,7 +176,7 @@ export default {
                         id="gui.howtos.say-hello.step_editSay"
                     />
                 ),
-                image: step_editSay
+                image: stepEditSay
             }, {
                 title: (
                     <FormattedMessage
@@ -202,7 +185,7 @@ export default {
                         id="gui.howtos.say-hello.step_clickStack"
                     />
                 ),
-                image: step_clickStack
+                image: stepClickStack
             }, {
                 deckIds: [
                     'add-a-backdrop',
@@ -220,7 +203,7 @@ export default {
                 id="gui.howtos.run-away.name"
             />
         ),
-        img: library_clicker,
+        img: libraryClicker,
         steps: [
             {
                 title: (
@@ -230,7 +213,7 @@ export default {
                         id="gui.howtos.run-away.step_dragGoTo"
                     />
                 ),
-                image: step_dragGoTo
+                image: stepDragGoTo
             }, {
                 title: (
                     <FormattedMessage
@@ -239,7 +222,7 @@ export default {
                         id="gui.howtos.run-away.step_clickGoTo"
                     />
                 ),
-                image: step_clickGoTo
+                image: stepClickGoTo
             }, {
                 title: (
                     <FormattedMessage
@@ -248,7 +231,7 @@ export default {
                         id="gui.howtos.run-away.step3"
                     />
                 ),
-                image: step_clickEvents
+                image: stepClickEvents
             }, {
                 title: (
                     <FormattedMessage
@@ -257,7 +240,7 @@ export default {
                         id="gui.howtos.run-away.step_addWhenClicked"
                     />
                 ),
-                image: step_addWhenClicked
+                image: stepAddWhenClicked
             }, {
                 title: (
                     <FormattedMessage
@@ -266,7 +249,7 @@ export default {
                         id="gui.howtos.run-away.step_clickSprite"
                     />
                 ),
-                image: step_clickSprite
+                image: stepClickSprite
             }, {
                 title: (
                     <FormattedMessage
@@ -275,7 +258,7 @@ export default {
                         id="gui.howtos.run-away.step_addSound"
                     />
                 ),
-                image: step_addSound
+                image: stepAddSound
             }, {
                 deckIds: [
                     'add-a-backdrop',
@@ -293,7 +276,7 @@ export default {
                 id="gui.howtos.glide-around.name"
             />
         ),
-        img: glide_around_thumb,
+        img: glideAroundThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/WUcmsMEIbGg'
         }, {
@@ -312,7 +295,7 @@ export default {
                 id="gui.howtos.change-size.name"
             />
         ),
-        img: change_size_thumb,
+        img: changeSizeThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/NiK9KcghZ9s'
         }, {
@@ -331,7 +314,7 @@ export default {
                 id="gui.howtos.switch-costume.name"
             />
         ),
-        img: switch_costume_thumb,
+        img: switchCostumeThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/AUBoFxQDPWA'
         }, {
@@ -350,7 +333,7 @@ export default {
                 id="gui.howtos.hide-and-show.name"
             />
         ),
-        img: hide_and_show_thumb,
+        img: hideAndShowThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/jpvqnlfsDTU'
         }, {
@@ -369,7 +352,7 @@ export default {
                 id="gui.howtos.add-a-backdrop.name"
             />
         ),
-        img: add_backdrop_thumb,
+        img: addBackdropThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/WpV05Q7AbPU'
         }, {
@@ -388,7 +371,7 @@ export default {
                 id="gui.howtos.add-effects.name"
             />
         ),
-        img: add_effects_thumb,
+        img: addEffectsThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/ORuohhkx15g'
         }, {
@@ -401,7 +384,7 @@ export default {
     },
     'move-around-with-arrow-keys': {
         name: 'Move Using Arrow Keys',
-        img: move_arrow_keys_thumb,
+        img: moveArrowKeysThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/7DUA_Yl0B_M'
         }, {
@@ -414,7 +397,7 @@ export default {
     },
     'spin-video': {
         name: 'Spin!',
-        img: spin_thumb,
+        img: spinThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/rHP3aojB_6w'
         }, {

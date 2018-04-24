@@ -1,13 +1,11 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import VM from 'scratch-vm';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
-import tipIcon from '../components/action-menu/icon--sprite.svg';
 
 import {connect} from 'react-redux';
 
@@ -28,6 +26,11 @@ class TipsLibrary extends React.PureComponent {
     }
     handleItemSelect (item) {
         this.props.onActivateDeck(item.id);
+        analytics.event({
+            category: 'library',
+            action: 'Select How-to',
+            label: item.name
+        });
     }
     render () {
         const decksLibraryThumbnailData = Object.keys(decksLibraryContent).map(id => ({
@@ -53,6 +56,7 @@ class TipsLibrary extends React.PureComponent {
 
 TipsLibrary.propTypes = {
     onRequestClose: PropTypes.func,
+    onActivateDeck: PropTypes.func.isRequired,
     visible: PropTypes.bool
 };
 

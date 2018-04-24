@@ -89,9 +89,9 @@ const GUIComponent = props => {
             className={styles.pageWrapper}
             {...componentProps}
         >
-            {/* {previewInfoVisible ? (
+            {previewInfoVisible ? (
                 <PreviewModal />
-            ) : null} */}
+            ) : null}
             {loading ? (
                 <Loader />
             ) : null}
@@ -101,7 +101,9 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
-            {tipsLibraryVisible ? <TipsLibrary /> : null}
+            {tipsLibraryVisible ? (
+                <TipsLibrary />
+            ) : null}
             {cardsVisible ? (
                 <Cards />
             ) : null}
@@ -238,6 +240,7 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

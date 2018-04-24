@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 
 import {
     activateDeck,
-    viewCards,
     closeCards,
     nextStep,
     prevStep,

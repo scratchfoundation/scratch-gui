@@ -68,14 +68,12 @@ class LibraryComponent extends React.Component {
         if (this.state.selectedTag === 'all') {
             if (!this.state.filterQuery) return this.props.data;
             return this.props.data.filter(dataItem => (
-                dataItem.name
-                    .toLowerCase()
-                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1 || (
-                    dataItem.tags &&
-                    dataItem.tags
-                        .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                        .indexOf(this.state.filterQuery.toLowerCase()) !== -1
-                )
+                (dataItem.tags || [])
+                    // Second argument to map sets `this`
+                    .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                    .concat(dataItem.name.toLowerCase())
+                    .join('\n') // unlikely to partially match newlines
+                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1
             ));
         }
         return this.props.data.filter(dataItem => (

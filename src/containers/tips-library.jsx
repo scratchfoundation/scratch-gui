@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
 
-import decksLibraryContent from '../lib/libraries/decks/index';
-import tipsLibraryContent from '../lib/libraries/tips/index';
+import decksLibraryContent from '../lib/libraries/decks/index.jsx';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';

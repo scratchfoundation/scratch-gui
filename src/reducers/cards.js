@@ -1,4 +1,4 @@
-import decks from '../lib/libraries/decks';
+import decks from '../lib/libraries/decks/index.jsx';
 
 const CLOSE_CARDS = 'scratch-gui/cards/CLOSE_CARDS';
 const VIEW_CARDS = 'scratch-gui/cards/VIEW_CARDS';

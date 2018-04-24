@@ -163,7 +163,10 @@ LibraryComponent.propTypes = {
         PropTypes.shape({
             // @todo remove md5/rawURL prop from library, refactor to use storage
             md5: PropTypes.string,
-            name: PropTypes.string.isRequired,
+            name: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ]).isRequired,
             rawURL: PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */

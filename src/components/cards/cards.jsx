@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
+import {FormattedMessage} from 'react-intl';
 import styles from './card.css';
 import Draggable from 'react-draggable';
 
@@ -53,9 +54,8 @@ const VideoStep = ({video, dragging}) => (
             src={`${video}?rel=0&amp;showinfo=0`}
             frameBorder="0"
             allow="autoplay; encrypted-media"
-            allowFullScreen>
-            Video not available.
-        </iframe>
+            allowFullScreen
+        />
     </div>
 );
 
@@ -78,7 +78,11 @@ const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
     <div className={styles.headerButtons}>
         <div className={styles.collapseButton} onClick={onExitDeck}>
             <img className={styles.helpIcon} src={helpIcon}/>
-            All How-Tos
+            <FormattedMessage
+                defaultMessage="All How-Tos"
+                description="Title for button to return to how-to library"
+                id="gui.cards.all-how-tos"
+            />
         </div>
             {steps.length > 1 ? (
                 <div className={styles.stepsList}>
@@ -91,22 +95,31 @@ const CardHeader = ({onCloseCards, onExitDeck, steps, step}) => (
                 </div>
             ) : null}
         <div className={styles.removeButton} onClick={onCloseCards}>
-            Remove
+            <FormattedMessage
+                defaultMessage="Remove"
+                description="Title for button to close how-to card"
+                id="gui.cards.remove"
+            />
             <img className={styles.closeIcon} src={closeIcon}/>
         </div>
     </div>
 );
 
-const Previews = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
+const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
     <Fragment>
         <div className={styles.stepTitle}>
-            More things to try!
+            <FormattedMessage
+                defaultMessage="More things to try!"
+                description="Title card with more things to try"
+                id="gui.cards.more-things-to-try"
+            />
         </div>
         <div className={styles.stepDescription}>
             <div className={styles.decks}>
                 {deckIds.map(id => (
                     <div
                         className={styles.deck}
+                        key={`deck-preview-${id}`}
                         onClick={onActivateDeckFactory(id)}
                     >
                         <img
@@ -121,7 +134,11 @@ const Previews = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
         </div>
         <div className={styles.seeAll}>
             <div className={styles.seeAllButton} onClick={onExitDeck}>
-                See more
+                <FormattedMessage
+                    defaultMessage="See more"
+                    description="Title for button to see more in how-to library"
+                    id="gui.cards.see-more"
+                />
             </div>
         </div>
     </Fragment>
@@ -167,7 +184,7 @@ const Cards = props => {
                     <CardHeader {...{onExitDeck, onCloseCards, steps, step}} />
                     <div className={styles.stepBody}>
                         {steps[step].deckIds ? (
-                            <Previews
+                            <PreviewsStep
                                 content={content}
                                 deckIds={steps[step].deckIds}
                                 onActivateDeckFactory={onActivateDeckFactory}
@@ -199,17 +216,21 @@ const Cards = props => {
 
 Cards.propTypes = {
     visible: PropTypes.bool.isRequired,
-    content: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        steps: PropTypes.arrayOf(PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            image: PropTypes.string.isRequired // TODO normalize img/image names
-        }))
-    })),
-    activeDeckId: PropTypes.number, // TODO Can be null
+    content: PropTypes.shape({
+        id: PropTypes.shape({
+            name: PropTypes.node.isRequired,
+            img: PropTypes.string.isRequired,
+            steps: PropTypes.arrayOf(PropTypes.shape({
+                title: PropTypes.node,
+                image: PropTypes.string,
+                video: PropTypes.string,
+                deckIds: PropTypes.arrayOf(PropTypes.string)
+            }))
+        })
+    }),
+    activeDeckId: PropTypes.string.isRequired,
     step: PropTypes.number.isRequired,
-    onActivateDeck: PropTypes.func.isRequired,
+    onActivateDeckFactory: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onNextStep: PropTypes.func.isRequired,
     onPrevStep: PropTypes.func.isRequired

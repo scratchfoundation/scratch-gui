@@ -10,7 +10,7 @@ import StageSelectorComponent from '../components/stage-selector/stage-selector.
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
-import {handleFileUpload, costumeUpload} from '../lib/fileUploader';
+import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 class StageSelector extends React.Component {
     constructor (props) {

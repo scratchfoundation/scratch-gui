@@ -16,7 +16,7 @@ import SoundEditor from './sound-editor.jsx';
 import SoundLibrary from './sound-library.jsx';
 
 import soundLibraryContent from '../lib/libraries/sounds.json';
-import {handleFileUpload, soundUpload} from '../lib/fileUploader.js';
+import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 
 import {connect} from 'react-redux';
 

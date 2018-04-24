@@ -10,7 +10,7 @@ import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
 import {connect} from 'react-redux';
-import {handleFileUpload, costumeUpload} from '../lib/fileUploader.js';
+import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 import {
     closeCostumeLibrary,

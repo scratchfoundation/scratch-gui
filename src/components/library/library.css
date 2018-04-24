@@ -13,6 +13,10 @@
     padding: 0.5rem;
 }
 
+.library-scroll-grid.withFilterBar {
+    height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
+}
+
 .filter-bar {
     display: flex;
     flex-direction: row;

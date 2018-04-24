@@ -126,7 +126,11 @@ class LibraryComponent extends React.Component {
                         }
                     </div>
                 )}
-                <div className={styles.libraryScrollGrid}>
+                <div
+                    className={classNames(styles.libraryScrollGrid, {
+                        [styles.withFilterBar]: this.props.filterable || this.props.tags
+                    })}
+                >
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :

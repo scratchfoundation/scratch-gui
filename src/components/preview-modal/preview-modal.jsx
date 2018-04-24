@@ -60,8 +60,8 @@ const PreviewModal = ({intl, ...props}) => (
                 <p>
                     <strong>
                         <FormattedMessage
-                            defaultMessage="During the preview your changes to Scratch projects
-                                will not be saved to the Scratch community."
+                            defaultMessage="For now, your changes to Scratch projects
+                                will not be saved to the Scratch community. It's coming soon!"
                             description="Disclaimer for 3.0 preview"
                             id="gui.previewInfo.disclaimer"
                         />

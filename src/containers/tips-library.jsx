@@ -28,22 +28,21 @@ class TipsLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        if (!item.videoURL) {
-            this.props.onActivateDeck(item.index);
-        }
+        this.props.onActivateDeck(item.id);
     }
     render () {
-        const decksLibraryThumbnailData = decksLibraryContent.map((deck, i) => ({
-            rawURL: deck.img,
-            index: i,
-            featured: true,
-            ...deck
+        const decksLibraryThumbnailData = Object.keys(decksLibraryContent).map(id => ({
+            rawURL: decksLibraryContent[id].img,
+            id: id,
+            name: decksLibraryContent[id].name,
+            featured: true
         }));
 
         if (!this.props.visible) return null;
         return (
             <LibraryComponent
                 data={decksLibraryThumbnailData}
+                filterable={false}
                 title="How-Tos"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
@@ -64,7 +63,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onRequestClose: () => dispatch(closeTipsLibrary()),
-    onActivateDeck: (name) => dispatch(activateDeck(name))
+    onActivateDeck: id => dispatch(activateDeck(id))
 });
 
 export default connect(

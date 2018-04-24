@@ -106,8 +106,8 @@ import add_effects_thumb from './videos/add-effects.jpg';
 import move_arrow_keys_thumb from './videos/move-arrow-keys.jpg';
 import spin_thumb from './videos/spin.jpg';
 
-export default [
-    {
+export default {
+    'spin-around': {
         name: 'Spin around',
         img: library_spin,
         libraryImg: library_spin,
@@ -130,10 +130,17 @@ export default [
             }, {
                 title: 'Add a “change color effect” block',
                 image: step_changeColor
+            }, {
+                title: 'More things to try!',
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
             }
         ]
     },
-    {
+    'say-hello': {
         name: 'Say hello',
         img: library_say,
         libraryImg: library_say,
@@ -159,10 +166,17 @@ export default [
             }, {
                 title: 'Click the stack to run it',
                 image: step_clickStack
+            }, {
+                title: 'More things to try!',
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
             }
         ]
     },
-    {
+    'run-away': {
         name: 'Run away',
         img: library_clicker,
         libraryImg: library_clicker,
@@ -185,202 +199,134 @@ export default [
             }, {
                 title: 'Add a “start sound” block',
                 image: step_addSound
+            }, {
+                title: 'More things to try!',
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
             }
         ]
     },
-    /*
-        {
-            name: 'Getting started',
-            img: deck1,
-            steps: [
-                {
-                    title: "Move randomly",
-                    description: (
-                        <span>Drag out and click the <span className={styles.motionBlock} onClick={this.onMotionClick}>glide to random position</span> block</span>
-                    ),
-                    image: dragGlide,
-                },
-                {
-                    title: "Say something",
-                    description: (
-                        <span>Add a <span className={styles.looksBlock} onClick={this.onLooksClick}>say</span> block</span>
-                    ),
-                    image: addSay,
-                },
-                {
-                    title: "Start when you click the sprite",
-                    description: (
-                        <span>Add the <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
-                    ),
-                    image: hatStack,
-                },
-                {
-                    title: "Click the sprite to try it",
-                    description: (''
-                    ),
-                    image: whenClicked,
-                },
-
-            ]
-        },
-        */
-    /*
-        'Getting started' : {
-            name: 'Getting started',
-            img: deck1,
-            steps: [
-                {
-                    title: "Say something",
-                    description: (
-                        <span>Drag out and click the <span className={styles.looksBlock} onClick={this.onLooksClick}>say</span> block</span>
-                    ),
-                    image: dragSay,
-                },
-                {
-                    title: "Move randomly",
-                    description: (
-                        <span>Add the <span className={styles.motionBlock} onClick={this.onMotionClick}>glide to random position</span> block</span>
-                    ),
-                    image: addGlide,
-                },
-                {
-                    title: "Start when you click the sprite",
-                    description: (
-                        <span>Add the <span className={styles.eventsBlock} onClick={this.onEventsClick}>when this sprite clicked</span> block</span>
-                    ),
-                    image: hatStack,
-                },
-                {
-                    title: "Click the sprite to try it",
-                    description: (''
-                    ),
-                    image: whenClicked,
-                },
-
-            ]
-        },
-        */
-    // {
-    //     name: 'Zoom around',
-    //     img: zoom_thumb,
-    //     libraryImg: library_zoom,
-    //     steps: [
-    //         {
-    //             title: 'Get a turn block',
-    //             image: step_dragTurn,
-    //             zoomedImage: step_dragTurnZoomed
-    //         }, {
-    //             title: 'Click the block to run it',
-    //             image: step_clickTurn,
-    //             zoomedImage: step_clickTurnZoomed
-    //         }, {
-    //             title: 'Use a forever block to keep it going',
-    //             image: step_forever,
-    //             zoomedImage: step_foreverZoomed
-    //         }, {
-    //             title: 'Add a move block',
-    //             image: step_move,
-    //             zoomedImage: step_moveZoomed
-    //         }, {
-    //             title: 'Try the color effect block',
-    //             image: step_color,
-    //             zoomedImage: step_colorZoomed
-    //         }
-    //     ]
-    // },
-    // {
-    //     name: 'Tell a story',
-    //     img: story_thumb,
-    //     libraryImg: library_story,
-    //     steps: [
-    //         {
-    //             title: 'Add a say block',
-    //             image: step_addSay,
-    //             zoomedImage: step_addSayZoomed
-    //         }, {
-    //             title: 'Use the green flag block to start',
-    //             image: step_greenFlag,
-    //             zoomedImage: step_greenFlagZoomed
-    //         }, {
-    //             title: 'Add another sprite',
-    //             image: step_addSprite,
-    //             zoomedImage: step_addSpriteZoomed
-    //         }, {
-    //             title: 'What will your new sprite say?',
-    //             image: step_anotherSay,
-    //             zoomedImage: step_anotherSayZoomed
-    //         }, {
-    //             title: 'Start the conversation',
-    //             image: bothSay
-    //         }, {
-    //             title: 'Use a wait block to take turns',
-    //             image: step_addWait,
-    //             zoomedImage: step_addWaitZoomed
-    //         }
-    //     ]
-    // },
-    {
+    'glide-around': {
         name: "Glide Around",
         img: glide_around_thumb,
         steps: [{
             title: "Glide Around",
             video: "https://www.youtube.com/embed/WUcmsMEIbGg"
+        }, {
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'change-size': {
         name: "Change Size",
         img: change_size_thumb,
         steps: [{
             title: "Change Size",
             video: "https://www.youtube.com/embed/NiK9KcghZ9s"
+        },{
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'switch-costume': {
         name: "Switch Costume",
         img: switch_costume_thumb,
         steps: [{
             title: "Switch Costume",
             video: "https://www.youtube.com/embed/AUBoFxQDPWA"
+        }, {
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'hide-and-show': {
         name: "Hide & Show ",
         img: hide_and_show_thumb,
         steps: [{
             title: "Hide & Show ",
             video: "https://www.youtube.com/embed/jpvqnlfsDTU"
+        },{
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'add-a-backdrop': {
         name: "Add A Backdrop",
         img: add_backdrop_thumb,
         steps: [{
             title: "Add A Backdrop",
             video: "https://www.youtube.com/embed/WpV05Q7AbPU"
+        },{
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'add-effects': {
         name: "Add Effects",
         img: add_effects_thumb,
         steps: [{
             title: "Add Effects",
             video: "https://www.youtube.com/embed/ORuohhkx15g"
+        },{
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'move-around-with-arrow-keys': {
         name: "Move Using Arrow Keys",
         img: move_arrow_keys_thumb,
         steps: [{
             title: "Move Using Arrow Keys",
             video: "https://www.youtube.com/embed/7DUA_Yl0B_M"
+        }, {
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     },
-    {
+    'spin-video': {
         name: "Spin!",
         img: spin_thumb,
         steps: [{
             title: "Spin!",
             video: "https://www.youtube.com/embed/rHP3aojB_6w"
+        }, {
+            title: 'More things to try!',
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
         }]
     }
-];
+};

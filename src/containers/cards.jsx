@@ -20,7 +20,7 @@ import CardsComponent from '../components/cards/cards.jsx';
 const mapStateToProps = state => ({
     visible: state.cards.visible,
     content: state.cards.content,
-    activeDeckIndex: state.cards.activeDeckIndex,
+    activeDeckId: state.cards.activeDeckId,
     step: state.cards.step,
     x: state.cards.x,
     y: state.cards.y,
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onActivateDeckFactory: i => () => dispatch(activateDeck(i)),
+    onActivateDeckFactory: id => () => dispatch(activateDeck(id)),
     onExitDeck: () => {
         dispatch(openTipsLibrary());
         dispatch(closeCards());

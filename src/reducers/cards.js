@@ -10,9 +10,9 @@ const START_DRAG = 'scratch-gui/cards/START_DRAG';
 const END_DRAG = 'scratch-gui/cards/END_DRAG';
 
 const initialState = {
-    visible: true,
+    visible: false,
     content: decks,
-    activeDeckIndex: null,
+    activeDeckId: null,
     step: 0,
     x: 292,
     y: 365,
@@ -32,23 +32,21 @@ const reducer = function (state, action) {
         });
     case ACTIVATE_DECK:
         return Object.assign({}, state, {
-            activeDeckIndex: action.activeDeckIndex,
+            activeDeckId: action.activeDeckId,
             step: 0,
             visible: true
         });
     case NEXT_STEP:
-        if (state.activeDeckIndex !== null) {
-            const steps = state.content[state.activeDeckIndex].steps.length;
-            // if (state.step + 1 < steps - 1) {
-                return Object.assign({}, state, {
-                    step: state.step + 1
-                });
-            // }
+        if (state.activeDeckId !== null) {
+            const steps = state.content[state.activeDeckId].steps.length;
+            return Object.assign({}, state, {
+                step: state.step + 1
+            });
         }
         return state;
     case PREV_STEP:
-        if (state.activeDeckIndex !== null) {
-            const steps = state.content[state.activeDeckIndex].steps.length;
+        if (state.activeDeckId !== null) {
+            const steps = state.content[state.activeDeckId].steps.length;
             if (state.step > 0) {
                 return Object.assign({}, state, {
                     step: state.step - 1
@@ -74,10 +72,10 @@ const reducer = function (state, action) {
     }
 };
 
-const activateDeck = function (activeDeckIndex) {
+const activateDeck = function (activeDeckId) {
     return {
         type: ACTIVATE_DECK,
-        activeDeckIndex
+        activeDeckId
     };
 };
 

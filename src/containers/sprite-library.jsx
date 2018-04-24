@@ -81,6 +81,7 @@ class SpriteLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={this.state.sprites}
+                id="spriteLibrary"
                 tags={spriteTags}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemMouseEnter={this.handleMouseEnter}

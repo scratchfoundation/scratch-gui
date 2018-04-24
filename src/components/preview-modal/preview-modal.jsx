@@ -35,7 +35,8 @@ const PreviewModal = ({intl, ...props}) => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We're excited for you to try the next generation of Scratch! To learn more, go to the {previewFaqLink}."
+                    defaultMessage="We're excited for you to try the next generation of Scratch!
+                        To learn more, go to the {previewFaqLink}."
                     description="Invitation to try 3.0 preview"
                     id="gui.previewInfo.previewfaq"
                     values={{
@@ -59,7 +60,8 @@ const PreviewModal = ({intl, ...props}) => (
                 <p>
                     <strong>
                         <FormattedMessage
-                            defaultMessage="During the preview your changes to Scratch projects will not be saved to the Scratch community."
+                            defaultMessage="During the preview your changes to Scratch projects
+                                will not be saved to the Scratch community."
                             description="Disclaimer for 3.0 preview"
                             id="gui.previewInfo.disclaimer"
                         />

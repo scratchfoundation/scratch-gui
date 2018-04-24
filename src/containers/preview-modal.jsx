@@ -8,7 +8,7 @@ import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 
 import {
-    closePreviewInfo,
+    closePreviewInfo
 } from '../reducers/modals';
 
 class PreviewModal extends React.Component {

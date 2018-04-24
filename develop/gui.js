@@ -31,11 +31,11 @@ var _gui = __webpack_require__(23);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _errorBoundaryHoc = __webpack_require__(506);
+var _errorBoundaryHoc = __webpack_require__(507);
 
 var _errorBoundaryHoc2 = _interopRequireDefault(_errorBoundaryHoc);
 
-var _index = __webpack_require__(512);
+var _index = __webpack_require__(513);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -128,7 +128,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 506:
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,7 +142,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _errorBoundary = __webpack_require__(507);
+var _errorBoundary = __webpack_require__(508);
 
 var _errorBoundary2 = _interopRequireDefault(_errorBoundary);
 
@@ -168,7 +168,7 @@ exports.default = ErrorBoundaryHOC;
 
 /***/ }),
 
-/***/ 507:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -196,7 +196,7 @@ var _browserModal = __webpack_require__(131);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _crashMessage = __webpack_require__(508);
+var _crashMessage = __webpack_require__(509);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
@@ -277,7 +277,7 @@ exports.default = ErrorBoundary;
 
 /***/ }),
 
-/***/ 508:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -299,11 +299,11 @@ var _box = __webpack_require__(6);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _crashMessage = __webpack_require__(509);
+var _crashMessage = __webpack_require__(510);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
-var _reload = __webpack_require__(511);
+var _reload = __webpack_require__(512);
 
 var _reload2 = _interopRequireDefault(_reload);
 
@@ -350,11 +350,11 @@ exports.default = CrashMessage;
 
 /***/ }),
 
-/***/ 509:
+/***/ 510:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(510);
+var content = __webpack_require__(511);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -401,7 +401,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 510:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -421,18 +421,18 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 511:
+/***/ 512:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/assets/dd98971c2c185caf86144b6b5234d0fa.svg";
 
 /***/ }),
 
-/***/ 512:
+/***/ 513:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(513);
+var content = __webpack_require__(514);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -479,7 +479,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 513:
+/***/ 514:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);

@@ -48,7 +48,7 @@ ButtonComponent.propTypes = {
     disabled: PropTypes.bool,
     iconClassName: PropTypes.string,
     iconSrc: PropTypes.string,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func
 };
 
 export default ButtonComponent;

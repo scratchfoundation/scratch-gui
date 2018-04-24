@@ -24,6 +24,26 @@
     overflow: hidden;
 }
 
+.modal-content.full-screen {
+    position: absolute;
+
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: 'touch';
+    user-select: none;
+
+    background-color: $ui-secondary;
+
+    /* Default modal resets */
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+
 /*
     Modal header has 3 items:
     |filter     title       x|
@@ -71,9 +91,25 @@ $sides: 20rem;
     user-select: none;
     letter-spacing: 0.4px;
     cursor: default;
+    margin: 0 -$sides 0 0;
+}
+
+.full-screen .header-item-title {
+    margin: 0 0 0 -$sides;
 }
 
 .header-item-close {
     flex-basis: $sides;
     justify-content: flex-end;
+    z-index: 1;
+}
+
+.full-screen .header-item-close {
+    order: -1;
+    justify-content: flex-start;
+}
+
+.back-button {
+    font-weight: normal;
+    padding-left: 0;
 }

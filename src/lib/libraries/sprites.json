@@ -3,7 +3,7 @@
         "name": "Abby",
         "md5": "afab2d2141e9811bd89e385e9628cb5f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["people"],
         "info": [
             0,
             4,
@@ -71,7 +71,7 @@
         "name": "Apple",
         "md5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["food"],
         "info": [
             0,
             1,
@@ -183,7 +183,7 @@
         "name": "Ball",
         "md5": "10117ddaefa98d819f2b1df93805622f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["sports"],
         "info": [
             0,
             5,
@@ -259,7 +259,7 @@
         "name": "Balloon1",
         "md5": "bc96a1fb5fe794377acd44807e421ce2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             3,
@@ -319,7 +319,7 @@
         "name": "Baseball",
         "md5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["sports"],
         "info": [
             0,
             1,
@@ -363,7 +363,7 @@
         "name": "Basketball",
         "md5": "b15c425f3eef68e7d095ee91321cb52a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["sports"],
         "info": [
             0,
             1,
@@ -407,7 +407,7 @@
         "name": "Bat1",
         "md5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals", "fantasy"],
         "info": [
             0,
             2,
@@ -459,7 +459,7 @@
         "name": "Bat2",
         "md5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals", "fantasy"],
         "info": [
             0,
             2,
@@ -511,7 +511,7 @@
         "name": "Beachball",
         "md5": "87d64cab74c64b31498cc85f07510ee4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["sports"],
         "info": [
             0,
             1,
@@ -555,7 +555,7 @@
         "name": "Beetle",
         "md5": "e1ce8f153f011fdd52486c91c6ed594d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals"],
         "info": [
             0,
             1,
@@ -599,7 +599,7 @@
         "name": "Bell",
         "md5": "f35056c772395455d703773657e1da6e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["music"],
         "info": [
             0,
             1,
@@ -767,7 +767,7 @@
         "name": "Butterfly1",
         "md5": "836d4cc7889f4a1cbcb0303934f31f79.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals"],
         "info": [
             0,
             2,
@@ -819,7 +819,7 @@
         "name": "Butterfly2",
         "md5": "a0216895beade6afc6d42bd5bb43faea.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals", "fantasy"],
         "info": [
             0,
             1,
@@ -1871,7 +1871,7 @@
         "name": "Dog1",
         "md5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["animals", "puppy"],
         "info": [
             0,
             2,
@@ -1983,7 +1983,7 @@
         "name": "Donut",
         "md5": "9e7b4d153421dae04a24571d7e079e85.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["food"],
         "info": [
             0,
             1,
@@ -2891,7 +2891,7 @@
         "name": "Ghost1",
         "md5": "c88579c578f2d171de78612f2ff9c9d9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             1,
@@ -2935,7 +2935,7 @@
         "name": "Ghost2",
         "md5": "607be245da950af1a4e4d79acfda46e3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             2,
@@ -3191,7 +3191,7 @@
         "name": "Guitar",
         "md5": "cb8c2a5e69da7538e1dd73cb7ff4a666.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["music"],
         "info": [
             0,
             2,
@@ -3299,7 +3299,7 @@
         "name": "Guitar-electric2",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["music"],
         "info": [
             0,
             2,
@@ -4483,7 +4483,7 @@
         "name": "Milk",
         "md5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["food"],
         "info": [
             0,
             5,
@@ -5343,7 +5343,7 @@
         "name": "Rainbow",
         "md5": "680a806bd87a28c8b25b5f9b6347f022.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             1,
@@ -5615,7 +5615,7 @@
         "name": "Sam",
         "md5": "7f32d8d78ad64f50c018b7b578de2e18.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["people", "sports"],
         "info": [
             0,
             4,
@@ -6623,7 +6623,7 @@
         "name": "Tera",
         "md5": "b54a4a9087435863ab6f6c908f1cac99.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy", "dance"],
         "info": [
             0,
             4,
@@ -7007,7 +7007,7 @@
         "name": "Wizard",
         "md5": "4df1dd733f6ee4a2d8842478ac2c4661.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             1,
@@ -7051,7 +7051,7 @@
         "name": "Wizard1",
         "md5": "e085c97691d16f0cc8a595ce1137e26c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             1,
@@ -7095,7 +7095,7 @@
         "name": "Wizard2",
         "md5": "6db4d9e4229dc50a1b1c91c3c8311d40.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": ["fantasy"],
         "info": [
             0,
             1,

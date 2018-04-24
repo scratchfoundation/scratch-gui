@@ -90,7 +90,6 @@
 }
 
 .divider {
-    border-right: 1px dashed $ui-black-transparent;
     margin: 0 .5rem;
     height: 34px;
 }

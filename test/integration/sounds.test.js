@@ -38,13 +38,13 @@ describe('Working with sounds', () => {
 
         // Add it back
         await clickXpath('//button[@aria-label="Choose a Sound"]');
-        let el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        let el = await findByXpath("//input[@placeholder='Search']");
         await el.sendKeys('meow');
         await clickText('Meow', scope.modal); // Should close the modal
 
         // Add a new sound
         await clickXpath('//button[@aria-label="Choose a Sound"]');
-        el = await findByXpath("//input[@placeholder='what are you looking for?']");
+        el = await findByXpath("//input[@placeholder='Search']");
         await el.sendKeys('chom');
         await clickText('Chomp'); // Should close the modal, then click the sounds in the selector
         await findByXpath("//input[@value='Chomp']"); // Should show editor for new sound

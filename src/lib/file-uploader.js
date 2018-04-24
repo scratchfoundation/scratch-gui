@@ -77,16 +77,15 @@ const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
 
 /**
  * Handles loading a costume or a backdrop using the provided, context-relevant information.
- * @param {ScratchStorage} storage The ScratchStorage instance to cache the costume data
- * @param {Function} then The function to execute on the costume object returned after
- * caching this costume in storage - This function should be responsible for
- * adding the costume to the VM and handling other UI flow that should come after adding the costume
  * @param {ArrayBuffer} fileData The costume data to load
  * @param {string} fileType The MIME type of this file
  * @param {string} costumeName The user-readable name to use for the costume.
+ * @param {ScratchStorage} storage The ScratchStorage instance to cache the costume data
+ * @param {Function} handleCostume The function to execute on the costume object returned after
+ * caching this costume in storage - This function should be responsible for
+ * adding the costume to the VM and handling other UI flow that should come after adding the costume
  */
-const costumeUpload = function (storage, then, fileData, fileType, costumeName) {
-    // Only handling png and svg right now
+const costumeUpload = function (fileData, fileType, costumeName, storage, handleCostume) {
     let costumeFormat = null;
     let assetType = null;
     switch (fileType) {
@@ -109,15 +108,15 @@ const costumeUpload = function (storage, then, fileData, fileType, costumeName) 
         return;
     }
 
-    const addCostumeFromBuffer = (function (error, costumeBuffer) {
+    const addCostumeFromBuffer = function (error, costumeBuffer) {
         if (error) {
             log.warn(`An error occurred while trying to extract image data: ${error}`);
             return;
         }
 
         const vmCostume = cacheAsset(storage, costumeName, assetType, costumeFormat, costumeBuffer);
-        then(vmCostume.md5, vmCostume);
-    });
+        handleCostume(vmCostume);
+    };
 
     if (costumeFormat === storage.DataFormat.SVG) {
         // Must pass in file data as a Uint8Array,
@@ -133,16 +132,16 @@ const costumeUpload = function (storage, then, fileData, fileType, costumeName) 
 
 /**
  * Handles loading a sound using the provided, context-relevant information.
- * @param {ScratchStorage} storage The ScratchStorage instance to cache the sound data
- * @param {Function} then The function to execute on the sound object of type VMAsset
- * This function should be responsible for adding the sound to the VM
- * as well as handling other UI flow that should come after adding the sound
  * @param {ArrayBuffer} fileData The sound data to load
  * @param {string} fileType The MIME type of this file; This function will exit
  * early if the fileType is unexpected.
  * @param {string} soundName The user-readable name to use for the sound.
+  * @param {ScratchStorage} storage The ScratchStorage instance to cache the sound data
+ * @param {Function} handleSound The function to execute on the sound object of type VMAsset
+ * This function should be responsible for adding the sound to the VM
+ * as well as handling other UI flow that should come after adding the sound
  */
-const soundUpload = function (storage, then, fileData, fileType, soundName) {
+const soundUpload = function (fileData, fileType, soundName, storage, handleSound) {
     let soundFormat;
     switch (fileType) {
     case 'audio/mp3': {
@@ -164,7 +163,7 @@ const soundUpload = function (storage, then, fileData, fileType, soundName) {
         soundFormat,
         new Uint8Array(fileData));
 
-    then(vmSound);
+    handleSound(vmSound);
 };
 
 export {

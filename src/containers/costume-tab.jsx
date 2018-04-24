@@ -4,7 +4,6 @@ import bindAll from 'lodash.bindall';
 import {defineMessages, intlShape, injectIntl} from 'react-intl';
 import VM from 'scratch-vm';
 
-
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
@@ -74,6 +73,7 @@ class CostumeTab extends React.Component {
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
+            'handleNewCostume',
             'handleNewBlankCostume',
             'handleSurpriseCostume',
             'handleSurpriseBackdrop',
@@ -131,6 +131,9 @@ class CostumeTab extends React.Component {
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
     }
+    handleNewCostume (costume) {
+        this.props.vm.addCostume(costume.md5, costume);
+    }
     handleNewBlankCostume () {
         const emptyItem = costumeLibraryContent.find(item => (
             item.name === 'Empty'
@@ -138,43 +141,44 @@ class CostumeTab extends React.Component {
         const name = this.props.vm.editingTarget.isStage ? `backdrop1` : `costume1`;
         const vmCostume = {
             name: name,
+            md5: emptyItem.md5,
             rotationCenterX: emptyItem.info[0],
             rotationCenterY: emptyItem.info[1],
             bitmapResolution: emptyItem.info.length > 2 ? emptyItem.info[2] : 1,
             skinId: null
         };
 
-        this.props.vm.addCostume(emptyItem.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
         const vmCostume = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1],
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
     }
     handleSurpriseBackdrop () {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0] && item.info[0] / 2,
             rotationCenterY: item.info[1] && item.info[1] / 2,
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        const handleNewCostume = function (md5Ext, vmCostume) {
-            this.props.vm.addCostume(md5Ext, vmCostume);
-        }.bind(this);
-        const costumeOnload = costumeUpload.bind(this, storage, handleNewCostume);
-        handleFileUpload(e.target, costumeOnload);
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
+        });
     }
     handleFileUploadClick () {
         this.fileInput.click();

@@ -17,6 +17,7 @@ class StageSelector extends React.Component {
         super(props);
         bindAll(this, [
             'handleClick',
+            'handleNewBackdrop',
             'handleSurpriseBackdrop',
             'handleEmptyBackdrop',
             'addBackdropFromLibraryItem',
@@ -28,40 +29,38 @@ class StageSelector extends React.Component {
     addBackdropFromLibraryItem (item) {
         const vmBackdrop = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0] && item.info[0] / 2,
             rotationCenterY: item.info[1] && item.info[1] / 2,
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        return this.props.vm.addBackdrop(item.md5, vmBackdrop);
+        this.handleNewBackdrop(vmBackdrop);
     }
     handleClick () {
         this.props.onSelect(this.props.id);
     }
+    handleNewBackdrop (backdrop) {
+        this.props.vm.addBackdrop(backdrop.md5, backdrop).then(() =>
+            this.props.onActivateTab(COSTUMES_TAB_INDEX));
+    }
     handleSurpriseBackdrop () {
         // @todo should this not add a backdrop you already have?
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
-        this.addBackdropFromLibraryItem(item).then(() => {
-            this.props.onActivateTab(COSTUMES_TAB_INDEX);
-        });
+        this.addBackdropFromLibraryItem(item);
     }
     handleEmptyBackdrop () {
         // @todo this is brittle, will need to be refactored for localized libraries
         const emptyItem = costumeLibraryContent.find(item => item.name === 'Empty');
         if (emptyItem) {
-            this.addBackdropFromLibraryItem(emptyItem).then(() => {
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
-            });
+            this.addBackdropFromLibraryItem(emptyItem);
         }
     }
     handleBackdropUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        const handleNewBackdrop = function (md5Ext, vmBackdrop) {
-            this.props.vm.addBackdrop(md5Ext, vmBackdrop);
-            this.props.onActivateTab(COSTUMES_TAB_INDEX);
-        }.bind(this);
-        const costumeOnload = costumeUpload.bind(this, storage, handleNewBackdrop);
-        handleFileUpload(e.target, costumeOnload);
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            costumeUpload(buffer, fileType, fileName, storage, this.handleNewBackdrop);
+        });
     }
     handleFileUploadClick () {
         this.fileInput.click();

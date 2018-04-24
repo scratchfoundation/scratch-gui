@@ -108,13 +108,12 @@ class SoundTab extends React.Component {
 
     handleSoundUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        const handleSound = function (newSound) {
-            this.props.vm.addSound(newSound).then(() => {
-                this.handleNewSound();
-            });
-        }.bind(this);
-        const soundOnload = soundUpload.bind(this, storage, handleSound);
-        handleFileUpload(e.target, soundOnload);
+        const handleSound = newSound => this.props.vm.addSound(newSound)
+            .then(() => this.handleNewSound());
+
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            soundUpload(buffer, fileType, fileName, storage, handleSound);
+        });
     }
 
     setFileInput (input) {

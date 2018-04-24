@@ -93,6 +93,7 @@ class SoundLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={soundLibraryThumbnailData}
+                id="soundLibrary"
                 tags={soundTags}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemMouseEnter={this.handleItemMouseEnter}

@@ -44,6 +44,7 @@ class CostumeLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={costumeLibraryContent}
+                id="costumeLibrary"
                 tags={spriteTags}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemSelected={this.handleItemSelected}

@@ -35,10 +35,19 @@ const PreviewModal = ({intl, ...props}) => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We're working on the next generation of Scratch. We're excited for you to try it!"
+                    defaultMessage="We're working on the next generation of Scratch and we're excited for you to try it!"
                     description="Invitation to try 3.0 preview"
                     id="gui.previewInfo.invitation"
                 />
+            </p>
+            <p>
+                <strong>
+                    <FormattedMessage
+                        defaultMessage="During the preview your changes to Scratch projects will not be saved to the Scratch community."
+                        description="Disclaimer for 3.0 preview"
+                        id="gui.previewInfo.disclaimer"
+                    />
+                </strong>
             </p>
 
             <Box className={styles.buttonRow}>
@@ -69,17 +78,6 @@ const PreviewModal = ({intl, ...props}) => (
                                 />
                             )
                         }}
-                    />
-                </button>
-                <button
-                    className={styles.viewProjectButton}
-                    title="viewproject"
-                    onClick={props.onViewProject}
-                >
-                    <FormattedMessage
-                        defaultMessage="View 2.0 Project"
-                        description="Label for button to import a 2.0 project"
-                        id="gui.previewModal.viewproject"
                     />
                 </button>
             </Box>

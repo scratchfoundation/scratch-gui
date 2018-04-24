@@ -35,20 +35,37 @@ const PreviewModal = ({intl, ...props}) => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We're working on the next generation of Scratch and we're excited for you to try it!"
+                    defaultMessage="We're excited for you to try the next generation of Scratch! To learn more, go to the {previewFaqLink}."
                     description="Invitation to try 3.0 preview"
-                    id="gui.previewInfo.invitation"
+                    id="gui.previewInfo.previewfaq"
+                    values={{
+                        previewFaqLink: (
+                            <a
+                                className={styles.faqLink}
+                                href="//scratch.mit.edu/preview-faq"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Preview FAQ"
+                                    description="link to Scratch 3.0 preview FAQ page"
+                                    id="gui.previewInfo.previewfaqlink"
+                                />
+                            </a>
+                        )
+                    }}
                 />
             </p>
-            <p>
-                <strong>
-                    <FormattedMessage
-                        defaultMessage="During the preview your changes to Scratch projects will not be saved to the Scratch community."
-                        description="Disclaimer for 3.0 preview"
-                        id="gui.previewInfo.disclaimer"
-                    />
-                </strong>
-            </p>
+
+            <Box className={styles.disclaimer}>
+                <p>
+                    <strong>
+                        <FormattedMessage
+                            defaultMessage="During the preview your changes to Scratch projects will not be saved to the Scratch community."
+                            description="Disclaimer for 3.0 preview"
+                            id="gui.previewInfo.disclaimer"
+                        />
+                    </strong>
+                </p>
+            </Box>
 
             <Box className={styles.buttonRow}>
                 <button
@@ -81,27 +98,6 @@ const PreviewModal = ({intl, ...props}) => (
                     />
                 </button>
             </Box>
-            <Box className={styles.faqLinkText}>
-                <FormattedMessage
-                    defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Invitation to try 3.0 preview"
-                    id="gui.previewInfo.previewfaq"
-                    values={{
-                        previewFaqLink: (
-                            <a
-                                className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.previewInfo.previewfaqlink"
-                                />
-                            </a>
-                        )
-                    }}
-                />
-            </Box>
         </Box>
     </ReactModal>
 );
@@ -109,8 +105,7 @@ const PreviewModal = ({intl, ...props}) => (
 PreviewModal.propTypes = {
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onTryIt: PropTypes.func.isRequired,
-    onViewProject: PropTypes.func.isRequired
+    onTryIt: PropTypes.func.isRequired
 };
 
 export default injectIntl(PreviewModal);

@@ -32,7 +32,6 @@ class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
-        this.ScratchBlocks.STACK_GLOW_RADIUS *= 3;
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -135,9 +134,6 @@ class Blocks extends React.Component {
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
-        this.props.vm.runtime.addListener('CATEGORY', categoryName => {
-            this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
-        });
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);

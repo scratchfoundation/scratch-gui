@@ -6,7 +6,6 @@ import {
     closeCards,
     nextStep,
     prevStep,
-    toggleLightbox,
     dragCard,
     startDrag,
     endDrag
@@ -23,7 +22,6 @@ const mapStateToProps = state => ({
     content: state.cards.content,
     activeDeckIndex: state.cards.activeDeckIndex,
     step: state.cards.step,
-    lightboxVisible: state.cards.lightboxVisible,
     x: state.cards.x,
     y: state.cards.y,
     dragging: state.cards.dragging
@@ -38,7 +36,6 @@ const mapDispatchToProps = dispatch => ({
     onCloseCards: () => dispatch(closeCards()),
     onNextStep: () => dispatch(nextStep()),
     onPrevStep: () => dispatch(prevStep()),
-    onToggleLightbox: () => dispatch(toggleLightbox()),
     onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),
     onStartDrag: () => dispatch(startDrag()),
     onEndDrag: () => dispatch(endDrag())

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './card.css';
 import Draggable from 'react-draggable';
-import Lightbox from 'react-images';
 
 import {connect} from 'react-redux';
 import {closeTipsLibrary} from '../../reducers/modals';
@@ -25,10 +24,8 @@ const Cards = props => {
         onActivateDeckFactory,
         onCloseCards,
         onExitDeck,
-        onToggleLightbox,
         onNextStep,
         onPrevStep,
-        lightboxVisible,
         x,
         y,
         onDrag,
@@ -131,25 +128,11 @@ const Cards = props => {
                                 </iframe>
                             </div>
                         ) : (
-                            <div
-                                className={styles.stepImageContainer}
-                                onClick={onToggleLightbox}
-                            >
+                            <div className={styles.stepImageContainer}>
                                 <img
                                     draggable={false}
                                     src={image}
                                     className={styles.stepImage}
-                                />
-                                <img draggable={false} className={styles.zoomIcon} src={zoomIcon} />
-                                <Lightbox
-                                    backdropClosesModal={true}
-                                    images={[
-                                        { src: zoomedImage || image }
-                                    ]}
-                                    isOpen={lightboxVisible}
-                                    onClose={onToggleLightbox}
-                                    onClickImage={onToggleLightbox}
-                                    showImageCount={false}
                                 />
                             </div>
                         )}
@@ -276,14 +259,12 @@ Cards.propTypes = {
             image: PropTypes.string.isRequired // TODO normalize img/image names
         }))
     })),
-    lightboxVisible: PropTypes.bool.isRequired,
     activeDeckIndex: PropTypes.number, // TODO Can be null
     step: PropTypes.number.isRequired,
     onActivateDeck: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onNextStep: PropTypes.func.isRequired,
-    onPrevStep: PropTypes.func.isRequired,
-    onToggleLightbox: PropTypes.func.isRequired
+    onPrevStep: PropTypes.func.isRequired
 };
 
 export default Cards;

@@ -140,7 +140,6 @@
 height: 337px;
 }
 .step-image {
-    cursor: zoom-in;
     max-width: 450px;
     background: #F9F9F9;
     border: 1px solid #ddd;
@@ -261,14 +260,6 @@ height: 337px;
     font-weight: bold;
     /* line-height: 15px; */
     text-align: center;
-}
-
-.zoom-icon {
-    position: absolute;
-    bottom: 12px;
-    right: 10px;
-    /* pointer-events: none; */
-    cursor: zoom-in;
 }
 
 .help-icon, .close-icon {

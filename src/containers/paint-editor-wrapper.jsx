@@ -12,8 +12,8 @@ class PaintEditorWrapper extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleUpdateName',
-            'handleUpdateSvg'
+            'handleUpdateImage',
+            'handleUpdateName'
         ]);
     }
     componentDidMount () {
@@ -22,28 +22,32 @@ class PaintEditorWrapper extends React.Component {
     handleUpdateName (name) {
         this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);
     }
-    handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
-        this.props.vm.updateSvg(this.props.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
+    handleUpdateImage (isVector, image, rotationCenterX, rotationCenterY) {
+        if (isVector) {
+            this.props.vm.updateSvg(this.props.selectedCostumeIndex, image, rotationCenterX, rotationCenterY);
+        } else {
+            this.props.vm.updateBitmap(this.props.selectedCostumeIndex, image, rotationCenterX, rotationCenterY);
+        }
     }
     render () {
-        if (!this.props.svgId) return null;
+        if (!this.props.imageId) return null;
         return (
             <PaintEditor
                 {...this.props}
-                svg={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
+                image={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
+                onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
-                onUpdateSvg={this.handleUpdateSvg}
             />
         );
     }
 }
 
 PaintEditorWrapper.propTypes = {
+    imageId: PropTypes.string,
     name: PropTypes.string,
     rotationCenterX: PropTypes.number,
     rotationCenterY: PropTypes.number,
     selectedCostumeIndex: PropTypes.number.isRequired,
-    svgId: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -55,11 +59,12 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
     } = state.targets;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
     const costume = target && target.costumes[selectedCostumeIndex];
+    const resolution = costume && costume.dataFormat === 'png' ? costume.bitmapResolution / 2 : 1;
     return {
         name: costume && costume.name,
-        rotationCenterX: costume && costume.rotationCenterX,
-        rotationCenterY: costume && costume.rotationCenterY,
-        svgId: editingTarget && `${editingTarget}${costume.skinId}`,
+        rotationCenterX: costume && costume.rotationCenterX / resolution,
+        rotationCenterY: costume && costume.rotationCenterY / resolution,
+        imageId: editingTarget && `${editingTarget}${costume.skinId}`,
         vm: state.vm
     };
 };

@@ -60,10 +60,15 @@ const PreviewModal = ({intl, ...props}) => (
                 <p>
                     <strong>
                         <FormattedMessage
-                            defaultMessage="Changes to projects will not be saved.
-                                This feature is coming soon!"
+                            defaultMessage="Changes to projects will not be saved."
                             description="Disclaimer for 3.0 preview"
                             id="gui.previewInfo.disclaimer"
+                        />
+                        <br />
+                        <FormattedMessage
+                            defaultMessage="This feature is coming soon!"
+                            description="Notice that a feature is in progress"
+                            id="gui.previewInfo.comingsoon"
                         />
                     </strong>
                 </p>

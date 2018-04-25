@@ -89,9 +89,11 @@ const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired,
-        bitmapResolution: PropTypes.number.isRequired,
-        rotationCenterX: PropTypes.number.isRequired,
-        rotationCenterY: PropTypes.number.isRequired
+        // The following are optional because costumes uploaded from disk
+        // will not have these properties available
+        bitmapResolution: PropTypes.number,
+        rotationCenterX: PropTypes.number,
+        rotationCenterY: PropTypes.number
     }),
     direction: PropTypes.number,
     id: PropTypes.string,

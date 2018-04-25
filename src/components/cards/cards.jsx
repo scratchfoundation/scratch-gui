@@ -11,6 +11,93 @@ import prevIcon from './icon--prev.svg';
 import helpIcon from './icon--help.svg';
 import closeIcon from '../close-button/icon--close.svg';
 
+const CardHeader = ({onCloseCards, onExitDeck, totalSteps, step}) => (
+    <div className={styles.headerButtons}>
+        <div
+            className={styles.collapseButton}
+            onClick={onExitDeck}
+        >
+            <img
+                className={styles.helpIcon}
+                src={helpIcon}
+            />
+            <FormattedMessage
+                defaultMessage="All How-Tos"
+                description="Title for button to return to how-to library"
+                id="gui.cards.all-how-tos"
+            />
+        </div>
+        {totalSteps > 1 ? (
+            <div className={styles.stepsList}>
+                {Array(totalSteps).fill(0)
+                    .map((_, i) => (
+                        <div
+                            className={i === step ? styles.activeStepPip : styles.inactiveStepPip}
+                            key={`pip-step-${i}`}
+                        />
+                    ))}
+            </div>
+        ) : null}
+        <div
+            className={styles.removeButton}
+            onClick={onCloseCards}
+        >
+            <FormattedMessage
+                defaultMessage="Remove"
+                description="Title for button to close how-to card"
+                id="gui.cards.remove"
+            />
+            <img
+                className={styles.closeIcon}
+                src={closeIcon}
+            />
+        </div>
+    </div>
+);
+
+// Video step needs to know if the card is being dragged to cover the video
+// so that the mouseup is not swallowed by the iframe.
+const VideoStep = ({video, dragging}) => (
+    <div className={styles.stepVideo}>
+        {dragging ? (
+            <div className={styles.videoCover} />
+        ) : null}
+        <iframe
+            allowFullScreen
+            allow="autoplay; encrypted-media"
+            frameBorder="0"
+            height="337"
+            src={`${video}?rel=0&amp;showinfo=0`}
+            width="600"
+        />
+    </div>
+);
+
+VideoStep.propTypes = {
+    dragging: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired
+};
+
+const ImageStep = ({title, image}) => (
+    <Fragment>
+        <div className={styles.stepTitle}>
+            {title}
+        </div>
+        <div className={styles.stepImageContainer}>
+            <img
+                className={styles.stepImage}
+                draggable={false}
+                src={image}
+            />
+        </div>
+    </Fragment>
+);
+
+ImageStep.propTypes = {
+    image: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired
+};
+
 const NextPrevButtons = ({onNextStep, onPrevStep}) => (
     <Fragment>
         {onNextStep ? (
@@ -48,97 +135,11 @@ NextPrevButtons.propTypes = {
     onNextStep: PropTypes.func,
     onPrevStep: PropTypes.func
 };
-
-const VideoStep = ({video, dragging}) => (
-    <div className={styles.stepVideo}>
-        {dragging ? (
-            <div className={styles.videoCover} />
-        ) : null}
-        <iframe
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            frameBorder="0"
-            height="337"
-            src={`${video}?rel=0&amp;showinfo=0`}
-            width="600"
-        />
-    </div>
-);
-
-VideoStep.propTypes = {
-    dragging: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired
-};
-
-const ImageStep = ({title, image}) => (
-    <Fragment>
-        <div className={styles.stepTitle}>
-            {title}
-        </div>
-        <div className={styles.stepImageContainer}>
-            <img
-                className={styles.stepImage}
-                draggable={false}
-                src={image}
-            />
-        </div>
-    </Fragment>
-);
-
-ImageStep.propTypes = {
-    title: PropTypes.node.isRequired,
-    image: PropTypes.string.isRequired
-};
-
-const CardHeader = ({onCloseCards, onExitDeck, totalSteps, step}) => (
-    <div className={styles.headerButtons}>
-        <div
-            className={styles.collapseButton}
-            onClick={onExitDeck}
-        >
-            <img
-                className={styles.helpIcon}
-                src={helpIcon}
-            />
-            <FormattedMessage
-                defaultMessage="All How-Tos"
-                description="Title for button to return to how-to library"
-                id="gui.cards.all-how-tos"
-            />
-        </div>
-        {steps.length > 1 ? (
-            <div className={styles.stepsList}>
-                {Array(totalSteps).fill(0)
-                    .map((_, i) => (
-                        <div
-                            className={i === step ? styles.activeStepPip : styles.inactiveStepPip}
-                            key={`pip-step-${i}`}
-                        />
-                    ))}
-            </div>
-        ) : null}
-        <div
-            className={styles.removeButton}
-            onClick={onCloseCards}
-        >
-            <FormattedMessage
-                defaultMessage="Remove"
-                description="Title for button to close how-to card"
-                id="gui.cards.remove"
-            />
-            <img
-                className={styles.closeIcon}
-                src={closeIcon}
-            />
-        </div>
-    </div>
-);
-
 CardHeader.propTypes = {
     onCloseCards: PropTypes.func.isRequired,
     onExitDeck: PropTypes.func.isRequired,
-    totalSteps: PropTypes.number,
-    step: PropTypes.number
+    step: PropTypes.number,
+    totalSteps: PropTypes.number
 };
 
 const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
@@ -202,73 +203,51 @@ PreviewsStep.propTypes = {
 };
 
 const Cards = props => {
-    const {
-        dragging,
-        content,
-        activeDeckId,
-        step,
-        onActivateDeckFactory,
-        onNextStep,
-        onPrevStep,
-        onExitDeck,
-        onCloseCards,
-        x,
-        y,
-        onDrag,
-        onStartDrag,
-        onEndDrag
-    } = props;
+    if (props.activeDeckId === null) return;
 
-    let inner;
-
-    if (activeDeckId === null) return;
-
-    const steps = content[activeDeckId].steps;
-
-    const hasPrev = step > 0;
-    const hasNext = step < steps.length - 1;
+    const steps = props.content[props.activeDeckId].steps;
 
     return (
         <Draggable
             bounds="parent"
-            position={{x, y}}
-            onDrag={onDrag}
-            onStart={onStartDrag}
-            onStop={onEndDrag}
+            position={{x: props.x, y: props.y}}
+            onDrag={props.onDrag}
+            onStart={props.onStartDrag}
+            onStop={props.onEndDrag}
         >
             <div className={styles.cardContainer}>
                 <div className={styles.card}>
                     <CardHeader
-                        onCloseCards={onCloseCards}
-                        onExitDeck={onExitDeck}
-                        step={step}
+                        step={props.step}
                         totalSteps={steps.length}
+                        onCloseCards={props.onCloseCards}
+                        onExitDeck={props.onExitDeck}
                     />
                     <div className={styles.stepBody}>
-                        {steps[step].deckIds ? (
+                        {steps[props.step].deckIds ? (
                             <PreviewsStep
-                                content={content}
-                                deckIds={steps[step].deckIds}
-                                onActivateDeckFactory={onActivateDeckFactory}
-                                onExitDeck={onExitDeck}
+                                content={props.content}
+                                deckIds={steps[props.step].deckIds}
+                                onActivateDeckFactory={props.onActivateDeckFactory}
+                                onExitDeck={props.onExitDeck}
                             />
                         ) : (
-                            steps[step].video ? (
+                            steps[props.step].video ? (
                                 <VideoStep
-                                    dragging={dragging}
-                                    video={steps[step].video}
+                                    dragging={props.dragging}
+                                    video={steps[props.step].video}
                                 />
                             ) : (
                                 <ImageStep
-                                    image={steps[step].image}
-                                    title={steps[step].title}
+                                    image={steps[props.step].image}
+                                    title={steps[props.step].title}
                                 />
                             )
                         )}
                     </div>
                     <NextPrevButtons
-                        onNextStep={hasNext ? onNextStep : null}
-                        onPrevStep={hasPrev ? onPrevStep : null}
+                        onNextStep={props.step < steps.length - 1 ? props.onNextStep : null}
+                        onPrevStep={props.step > 0 ? props.onPrevStep : null}
                     />
                 </div>
             </div>
@@ -277,13 +256,7 @@ const Cards = props => {
 };
 
 Cards.propTypes = {
-    x: PropTypes.number,
-    y: PropTypes.number,
-    onDrag: PropTypes.func,
-    onStartDrag: PropTypes.func,
-    onEndDrag: PropTypes.func,
-    dragging: PropTypes.bool,
-
+    activeDeckId: PropTypes.string.isRequired,
     content: PropTypes.shape({
         id: PropTypes.shape({
             name: PropTypes.node.isRequired,
@@ -296,12 +269,18 @@ Cards.propTypes = {
             }))
         })
     }),
-    activeDeckId: PropTypes.string.isRequired,
-    step: PropTypes.number.isRequired,
+    dragging: PropTypes.bool.isRequired,
     onActivateDeckFactory: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
+    onDrag: PropTypes.func,
+    onEndDrag: PropTypes.func,
+    onExitDeck: PropTypes.func,
     onNextStep: PropTypes.func.isRequired,
-    onPrevStep: PropTypes.func.isRequired
+    onPrevStep: PropTypes.func.isRequired,
+    onStartDrag: PropTypes.func,
+    step: PropTypes.number.isRequired,
+    x: PropTypes.number,
+    y: PropTypes.number
 };
 
 export default Cards;

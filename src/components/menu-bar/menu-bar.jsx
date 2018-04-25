@@ -277,9 +277,9 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
-    onRequestCloseFile: PropTypes.func,
-    onOpenTipLibrary: PropTypes.func
+    onRequestCloseFile: PropTypes.func
 };
 
 const mapStateToProps = state => ({

@@ -29,7 +29,7 @@ class TipsLibrary extends React.PureComponent {
         analytics.event({
             category: 'library',
             action: 'Select How-to',
-            label: item.name
+            label: item.id
         });
     }
     render () {
@@ -55,8 +55,8 @@ class TipsLibrary extends React.PureComponent {
 }
 
 TipsLibrary.propTypes = {
-    onRequestClose: PropTypes.func,
     onActivateDeck: PropTypes.func.isRequired,
+    onRequestClose: PropTypes.func,
     visible: PropTypes.bool
 };
 
@@ -65,8 +65,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onRequestClose: () => dispatch(closeTipsLibrary()),
-    onActivateDeck: id => dispatch(activateDeck(id))
+    onActivateDeck: id => dispatch(activateDeck(id)),
+    onRequestClose: () => dispatch(closeTipsLibrary())
 });
 
 export default connect(

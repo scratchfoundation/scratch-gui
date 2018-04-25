@@ -1,12 +1,22 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {injectIntl, intlShape, defineMessages} from 'react-intl';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
+import spriteTags from '../lib/libraries/sprite-tags';
 
 import LibraryComponent from '../components/library/library.jsx';
+
+const messages = defineMessages({
+    libraryTitle: {
+        defaultMessage: 'Choose a Sprite',
+        description: 'Heading for the sprite library',
+        id: 'gui.spriteLibrary.chooseASprite'
+    }
+});
 
 class SpriteLibrary extends React.PureComponent {
     constructor (props) {
@@ -71,7 +81,9 @@ class SpriteLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={this.state.sprites}
-                title="Choose a Sprite"
+                id="spriteLibrary"
+                tags={spriteTags}
+                title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemMouseEnter={this.handleMouseEnter}
                 onItemMouseLeave={this.handleMouseLeave}
                 onItemSelected={this.handleItemSelect}
@@ -82,8 +94,9 @@ class SpriteLibrary extends React.PureComponent {
 }
 
 SpriteLibrary.propTypes = {
+    intl: intlShape.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default SpriteLibrary;
+export default injectIntl(SpriteLibrary);

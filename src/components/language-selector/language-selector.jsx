@@ -53,7 +53,7 @@ const LanguageSelector = ({
 LanguageSelector.propTypes = {
     currentLocale: PropTypes.string,
     onChange: PropTypes.func,
-    open: PropTypes.boolean
+    open: PropTypes.bool
 };
 
 export default LanguageSelector;

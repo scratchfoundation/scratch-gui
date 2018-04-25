@@ -9,6 +9,7 @@ import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
 import {connect} from 'react-redux';
+import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 import {
     closeCostumeLibrary,
@@ -48,9 +49,14 @@ const messages = defineMessages({
         description: 'Button to add a surprise costume in the editor tab',
         id: 'gui.costumeTab.addSurpriseCostume'
     },
+    addFileBackdropMsg: {
+        defaultMessage: 'Upload Backdrop',
+        description: 'Button to add a backdrop by uploading a file in the editor tab',
+        id: 'gui.costumeTab.addFileBackdrop'
+    },
     addFileCostumeMsg: {
-        defaultMessage: 'Coming Soon',
-        description: 'Button to add a file upload costume in the editor tab',
+        defaultMessage: 'Upload Costume',
+        description: 'Button to add a costume by uploading a file in the editor tab',
         id: 'gui.costumeTab.addFileCostume'
     },
     addCameraCostumeMsg: {
@@ -67,9 +73,13 @@ class CostumeTab extends React.Component {
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
+            'handleNewCostume',
             'handleNewBlankCostume',
             'handleSurpriseCostume',
-            'handleSurpriseBackdrop'
+            'handleSurpriseBackdrop',
+            'handleFileUploadClick',
+            'handleCostumeUpload',
+            'setFileInput'
         ]);
         const {
             editingTarget,
@@ -121,6 +131,9 @@ class CostumeTab extends React.Component {
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
     }
+    handleNewCostume (costume) {
+        this.props.vm.addCostume(costume.md5, costume);
+    }
     handleNewBlankCostume () {
         const emptyItem = costumeLibraryContent.find(item => (
             item.name === 'Empty'
@@ -128,35 +141,50 @@ class CostumeTab extends React.Component {
         const name = this.props.vm.editingTarget.isStage ? `backdrop1` : `costume1`;
         const vmCostume = {
             name: name,
+            md5: emptyItem.md5,
             rotationCenterX: emptyItem.info[0],
             rotationCenterY: emptyItem.info[1],
             bitmapResolution: emptyItem.info.length > 2 ? emptyItem.info[2] : 1,
             skinId: null
         };
 
-        this.props.vm.addCostume(emptyItem.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
         const vmCostume = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0],
             rotationCenterY: item.info[1],
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
     }
     handleSurpriseBackdrop () {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
+            md5: item.md5,
             rotationCenterX: item.info[0] && item.info[0] / 2,
             rotationCenterY: item.info[1] && item.info[1] / 2,
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.handleNewCostume(vmCostume);
+    }
+    handleCostumeUpload (e) {
+        const storage = this.props.vm.runtime.storage;
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
+        });
+    }
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+    setFileInput (input) {
+        this.fileInput = input;
     }
     formatCostumeDetails (size) {
         // Round up width and height for scratch-flash compatibility
@@ -185,6 +213,7 @@ class CostumeTab extends React.Component {
         }
 
         const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
+        const addFileMessage = target.isStage ? messages.addFileBackdropMsg : messages.addFileCostumeMsg;
         const addSurpriseFunc = target.isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
         const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
         const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
@@ -208,8 +237,12 @@ class CostumeTab extends React.Component {
                         img: cameraIcon
                     },
                     {
-                        title: intl.formatMessage(messages.addFileCostumeMsg),
-                        img: fileUploadIcon
+                        title: intl.formatMessage(addFileMessage),
+                        img: fileUploadIcon,
+                        onClick: this.handleFileUploadClick,
+                        fileAccept: '.svg, .png, .jpg, .jpeg', // coming soon
+                        fileChange: this.handleCostumeUpload,
+                        fileInput: this.setFileInput
                     },
                     {
                         title: intl.formatMessage(messages.addSurpriseCostumeMsg),

@@ -7,6 +7,7 @@ import React from 'react';
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
+import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
@@ -181,7 +182,7 @@ const MenuBar = props => (
                     </MenuBarMenu>
                 </div>
             </div>
-            <div className={classNames(styles.divider)} />
+            <Divider className={classNames(styles.divider)} />
             <div className={classNames(styles.menuBarItem)}>
                 <MenuBarItemTooltip id="title-field">
                     <input

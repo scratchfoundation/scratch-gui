@@ -1,23 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.modal-content {
-    position: absolute;
-
-    display: flex;
-    height: 100%;
-    width: 100%;
-
-    overflow-y: auto;
-    -webkit-overflow-scrolling: 'touch';
-    user-select: none;
-
-    /* Default modal resets */
-    margin: 0;
-    border: none;
-    border-radius: 0;
-}
-
 .library-scroll-grid {
     display: flex;
     justify-content: flex-start;
@@ -28,4 +11,50 @@
     overflow-y: auto;
     height: calc(100% - $library-header-height);
     padding: 0.5rem;
+}
+
+.library-scroll-grid.withFilterBar {
+    height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: calc($library-filter-bar-height + 2rem); /* padding */
+    background-color: $motion-transparent;
+    padding: 0 1rem;
+    font-size: .875rem;
+}
+
+.filter-bar-item {
+    margin-right: .75rem;
+}
+
+.filter {
+    flex-grow: 0;
+}
+
+.filter-input {
+    width: 11.5rem;
+    transition: .2s;
+}
+
+.filter-input:focus,
+.filter-input:not([value=""]) {
+    width: 18.75rem;
+}
+
+.divider {
+    transform: scaleY(1.39);
+    height: $library-filter-bar-height;
+}
+
+.tag-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: $library-filter-bar-height;
+    overflow: hidden;
 }

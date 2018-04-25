@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import analytics from './analytics';
 import log from './log';
 import storage from './storage';
 
 /* Higher Order Component to provide behavior for loading projects by id from
- * the window's hash (#this part in the url)
+ * the window's hash (#this part in the url) or by projectId prop passed in from
+ * the parent (i.e. scratch-www)
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
@@ -45,7 +47,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             return window.location.hash.substring(1);
         }
         updateProject () {
-            let projectId = this.fetchProjectId();
+            let projectId = this.props.projectId || this.fetchProjectId();
             if (projectId !== this.state.projectId) {
                 if (projectId.length < 1) projectId = 0;
                 this.setState({projectId: projectId});
@@ -61,20 +63,26 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             }
         }
         render () {
+            const {
+                projectId, // eslint-disable-line no-unused-vars
+                ...componentProps
+            } = this.props;
             if (!this.state.projectData) return null;
             return (
                 <WrappedComponent
                     fetchingProject={this.state.fetchingProject}
                     projectData={this.state.projectData}
-                    {...this.props}
+                    {...componentProps}
                 />
             );
         }
     }
+    ProjectLoaderComponent.propTypes = {
+        projectId: PropTypes.string
+    };
 
     return ProjectLoaderComponent;
 };
-
 
 export {
     ProjectLoaderHOC as default

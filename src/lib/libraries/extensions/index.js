@@ -30,6 +30,13 @@ export default [
         featured: true
     },
     {
+        name: 'Hue',
+        extensionURL: 'hue',
+        iconURL: penImage,
+        description: 'Control lights with your project.',
+        featured: true
+    },
+    {
         name: 'Speech Recognition',
         extensionURL: '',
         iconURL: speechImage,

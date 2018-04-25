@@ -1,6 +1,7 @@
-webpackJsonp([1],{
+var GUI =
+webpackJsonpGUI([1],{
 
-/***/ 632:
+/***/ 569:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,21 +15,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(13);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _appStateHoc = __webpack_require__(24);
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
 var _controls = __webpack_require__(32);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _stage = __webpack_require__(58);
+var _stage = __webpack_require__(53);
 
 var _stage2 = _interopRequireDefault(_stage);
 
@@ -36,15 +33,15 @@ var _box = __webpack_require__(7);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(27);
+var _gui = __webpack_require__(23);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(34);
+var _projectLoaderHoc = __webpack_require__(26);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-__webpack_require__(633);
+__webpack_require__(570);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -135,7 +132,7 @@ var Player = function (_React$Component) {
     return Player;
 }(_react2.default.Component);
 
-var App = (0, _appStateHoc2.default)((0, _projectLoaderHoc2.default)(Player));
+var App = (0, _projectLoaderHoc2.default)(Player);
 
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
@@ -144,11 +141,11 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 633:
+/***/ 570:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(634);
+var content = __webpack_require__(571);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -195,7 +192,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 634:
+/***/ 571:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -210,5 +207,5 @@ exports.push([module.i, "body {\n    padding: 0;\n    margin: 0;\n}\n", ""]);
 
 /***/ })
 
-},[632]);
+},[569]);
 //# sourceMappingURL=player.js.map

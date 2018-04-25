@@ -5,12 +5,14 @@ addons:
     chrome: stable
 node_js:
 - 8
+env:
+  - NODE_ENV=production
 cache:
   directories:
   - node_modules
 install:
-- npm install
-- npm update
+- npm --production=false install
+- npm --production=false update
 before_deploy:
 - npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)

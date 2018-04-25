@@ -1,53 +1,35 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
 .card-container {
     position:absolute;
     z-index: 100;
 }
 
-.left-card {
+.left-card, .right-card {
     height: 90%;
     position: absolute;
     top: 5%;
-    left: -10px;
-    background: white;
-    border: 1px solid #ddd;
-    border-right: 0;
+    background: $ui-white;
+    border: 1px solid $ui-tertiary;
     width: 10px;
     z-index: 99;
-    border-top-left-radius: 0.75rem;
-    border-bottom-left-radius: 0.75rem;
     opacity: 0.9;
     overflow: hidden;
-    /* box-shadow: -5px 5px 5px 5px rgba(0,0,0,0.1); */
+}
 
+.left-card {
+    left: -10px;
+    border-right: 0;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
 }
 
 .right-card {
-    height: 90%;
-    position: absolute;
-    top: 5%;
     right: -10px;
-    background: white;
-    border: 1px solid $ui-black-transparent;
     border-left: 0;
-    width: 10px;
-    z-index: 99;
     border-top-right-radius: 0.75rem;
     border-bottom-right-radius: 0.75rem;
-    overflow: hidden;
-    opacity: 0.9;
-    /* box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1); */
-
 }
 
 .left-card::after, .right-card::after {
@@ -60,100 +42,12 @@
     background: $motion-primary;
 }
 
-.card {
-    /* background: white; */
-    border: 1px solid #ddd;
-    border-radius: 0.75rem;
-    /* padding: 1rem; */
-    display: flex;
-    flex-direction: column;
-    cursor: move;
-    z-index: 101;
-    overflow: hidden;
-    box-shadow: 0px 5px 25px 5px rgba(0,0,0,0.25);
-    align-items: center;
-}
-
-.header-buttons {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    /* margin-bottom: 0.5rem; */
-    background: $motion-primary;
-    border-bottom: 1px solid $motion-tertiary;
-    /* color: white; */
-    /* padding: 0.8rem; */
-    padding: 0.5rem;
-    font-size: 0.625rem;
-}
-.remove-button, .collapse-button {
-    cursor: pointer;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    /* color: #888; */
-    /* font-size: 0.75rem; */
-}
-
-.step-title {
-    font-size: 0.9rem;
-    margin: 0.9rem;
-    text-align: center;
-    font-weight: bold;
-    color: $text-primary;
-}
-
-.step-description {
-    text-align: center;
-    /* margin: 0 0 1rem; */
-}
-
-.step-body {
-    background: white;
-    /* background: #F9F9F9; */
-    /* border: 1px solid #ddd; */
-    /* width: 452px; */
-    min-height: 160px;
-    /* border-radius: 1rem; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* overflow: hidden; */
-    position: relative;
-    /* padding: 0 0.5rem 0.5rem 0.5rem; */
-
-}
-.step-image-container {
-    position: relative;
-    /* background: #F9F9F9;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    overflow: hidden; */
-    /* width: 452px; */
-}
-.step-video {
-height: 337px;
-}
-.step-image {
-    max-width: 450px;
-    background: #F9F9F9;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin: 0 0.5rem 0.5rem;
-}
-
-/* .step-image img {
-    display: block;
-    justify-content: c
-} */
-
 .left-button, .right-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    z-index: 101;
+    user-select: none;
     cursor: pointer;
     background: $motion-primary;
     box-shadow: 0 0 0 4px $motion-transparent;
@@ -163,12 +57,6 @@ height: 337px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    position: absolute;
-    top: 50%;
-    margin-top: -15px;
-    z-index: 101;
-    user-select: none;
 }
 
 .left-button {
@@ -179,45 +67,68 @@ height: 337px;
     right: -27px;
 }
 
-
-.events-block {
-    color: rgb(247,194,81);
-    font-weight: bold;
-    text-decoration: underline;
+.card {
+    border: 1px solid $ui-tertiary;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    cursor: move;
+    z-index: 101;
+    overflow: hidden;
+    box-shadow: 0px 5px 25px 5px $ui-black-transparent;
+    align-items: center;
 }
 
-.sound-block {
-    color: rgb(193,108,202);
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.looks-block {
-    color: rgb(144,110,247);
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.control-block {
-    color: $control-primary;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.motion-block {
-    color: $motion-primary;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.backdrop {
-    position: fixed;
+.header-buttons {
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    top: 0;
-    left: 0;
-    z-index: 95;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: $motion-primary;
+    border-bottom: 1px solid $motion-tertiary;
+    padding: 0.5rem;
+    font-size: 0.625rem;
+}
+
+.remove-button, .all-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-title {
+    font-size: 0.9rem;
+    margin: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.step-body {
+    background: $ui-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+}
+
+.step-video {
+    height: 337px;
+}
+
+.step-image {
+    max-width: 450px;
+    background: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 0 0.5rem 0.5rem;
 }
 
 .decks {
@@ -225,7 +136,6 @@ height: 337px;
     flex-direction: row;
     justify-content: space-around;
     padding: 0 0.5rem 0.5rem;
-    /* padding: 1rem; */
 }
 
 .deck {
@@ -233,41 +143,36 @@ height: 337px;
     flex-direction: column;
     margin: 0 8px 8px;
     cursor: pointer;
-    border: 1px solid #ddd;
+    border: 1px solid $ui-black-transparent;
     border-radius: 0.25rem;
     overflow: hidden;
 }
 
 .deck-image {
-    /* filter: hue-rotate(90deg); */
     width: 130px;
     height: 100px;
     object-fit: cover;
-    /* border: 1px solid #ddd; */
-    /* border-radius: 0.25rem; */
 }
 
 .deck-name {
-    /* color: red; */
     color: $motion-primary;
     font-weight: bold;
     font-size: 0.85rem;
     margin: 14px 0px;
     text-align: center;
-    /* color: #FFFFFF; */
     font-family: "Helvetica Neue";
-    /* font-size: 12px; */
     font-weight: bold;
-    /* line-height: 15px; */
     text-align: center;
 }
 
 .help-icon, .close-icon {
     height: 0.75rem;
 }
+
 .help-icon {
     margin-right: 0.25rem;
 }
+
 .close-icon {
     margin-left: 0.25rem;
     transform: rotate(45deg);
@@ -280,6 +185,7 @@ height: 337px;
     width: 100%;
     padding: 0.5rem;
 }
+
 .see-all-button {
     cursor: pointer;
     padding: 0.5rem 1rem;
@@ -289,21 +195,19 @@ height: 337px;
     border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    	/* height: 15px;
-        width: 55px;	 */
-        color: #FFFFFF;
-        font-family: "Helvetica Neue";
-        font-size: 12px;
-        font-weight: bold;
-        line-height: 15px;
-        text-align: center;
+    color: $ui-white;
+    font-family: "Helvetica Neue";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 15px;
+    text-align: center;
 }
+
 .see-all-button img {
     margin-left: 0.5rem;
 }
 
 .video-cover {
-    /* background: green; */
     width: 100%;
     height: 100%;
     position: absolute;
@@ -316,19 +220,17 @@ height: 337px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* margin: 0.25rem; */
 }
 
 .active-step-pip, .inactiveStepPip {
-    width: 8px;
-    height: 8px;
-    margin: 0 5px;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.25rem;
     border-radius: 100%;
     background: transparent;
     border: 2px solid $ui-white-transparent;
-    /* border: 1px solid $motion-tertiary; */
 }
+
 .active-step-pip {
     background: white;
-    /* background: $motion-primary; */
 }

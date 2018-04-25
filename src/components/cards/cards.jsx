@@ -11,11 +11,11 @@ import prevIcon from './icon--prev.svg';
 import helpIcon from './icon--help.svg';
 import closeIcon from '../close-button/icon--close.svg';
 
-const CardHeader = ({onCloseCards, onExitDeck, totalSteps, step}) => (
+const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
     <div className={styles.headerButtons}>
         <div
-            className={styles.collapseButton}
-            onClick={onExitDeck}
+            className={styles.allButton}
+            onClick={onShowAll}
         >
             <img
                 className={styles.helpIcon}
@@ -137,12 +137,12 @@ NextPrevButtons.propTypes = {
 };
 CardHeader.propTypes = {
     onCloseCards: PropTypes.func.isRequired,
-    onExitDeck: PropTypes.func.isRequired,
+    onShowAll: PropTypes.func.isRequired,
     step: PropTypes.number,
     totalSteps: PropTypes.number
 };
 
-const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => (
+const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onShowAll}) => (
     <Fragment>
         <div className={styles.stepTitle}>
             <FormattedMessage
@@ -151,28 +151,26 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onExitDeck}) => 
                 id="gui.cards.more-things-to-try"
             />
         </div>
-        <div className={styles.stepDescription}>
-            <div className={styles.decks}>
-                {deckIds.map(id => (
-                    <div
-                        className={styles.deck}
-                        key={`deck-preview-${id}`}
-                        onClick={onActivateDeckFactory(id)}
-                    >
-                        <img
-                            className={styles.deckImage}
-                            draggable={false}
-                            src={content[id].img}
-                        />
-                        <div className={styles.deckName}>{content[id].name}</div>
-                    </div>
-                ))}
-            </div>
+        <div className={styles.decks}>
+            {deckIds.map(id => (
+                <div
+                    className={styles.deck}
+                    key={`deck-preview-${id}`}
+                    onClick={onActivateDeckFactory(id)}
+                >
+                    <img
+                        className={styles.deckImage}
+                        draggable={false}
+                        src={content[id].img}
+                    />
+                    <div className={styles.deckName}>{content[id].name}</div>
+                </div>
+            ))}
         </div>
         <div className={styles.seeAll}>
             <div
                 className={styles.seeAllButton}
-                onClick={onExitDeck}
+                onClick={onShowAll}
             >
                 <FormattedMessage
                     defaultMessage="See more"
@@ -199,7 +197,7 @@ PreviewsStep.propTypes = {
     }).isRequired,
     deckIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     onActivateDeckFactory: PropTypes.func.isRequired,
-    onExitDeck: PropTypes.func.isRequired
+    onShowAll: PropTypes.func.isRequired
 };
 
 const Cards = props => {
@@ -221,7 +219,7 @@ const Cards = props => {
                         step={props.step}
                         totalSteps={steps.length}
                         onCloseCards={props.onCloseCards}
-                        onExitDeck={props.onExitDeck}
+                        onShowAll={props.onShowAll}
                     />
                     <div className={styles.stepBody}>
                         {steps[props.step].deckIds ? (
@@ -229,7 +227,7 @@ const Cards = props => {
                                 content={props.content}
                                 deckIds={steps[props.step].deckIds}
                                 onActivateDeckFactory={props.onActivateDeckFactory}
-                                onExitDeck={props.onExitDeck}
+                                onShowAll={props.onShowAll}
                             />
                         ) : (
                             steps[props.step].video ? (
@@ -274,9 +272,9 @@ Cards.propTypes = {
     onCloseCards: PropTypes.func.isRequired,
     onDrag: PropTypes.func,
     onEndDrag: PropTypes.func,
-    onExitDeck: PropTypes.func,
     onNextStep: PropTypes.func.isRequired,
     onPrevStep: PropTypes.func.isRequired,
+    onShowAll: PropTypes.func,
     onStartDrag: PropTypes.func,
     step: PropTypes.number.isRequired,
     x: PropTypes.number,

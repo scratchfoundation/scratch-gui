@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onActivateDeckFactory: id => () => dispatch(activateDeck(id)),
-    onExitDeck: () => {
+    onShowAll: () => {
         dispatch(openTipsLibrary());
         dispatch(closeCards());
     },

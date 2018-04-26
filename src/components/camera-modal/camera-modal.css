@@ -1,0 +1,118 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 600px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.visualization-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.camera-feed-container {
+    background: $ui-primary;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 5px;
+    padding: 3px;
+
+}
+
+.camera-feed-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 480px;
+    height: 360px;
+    position: relative;
+}
+
+.canvas {
+    width: 480px;
+    height: 380px;
+}
+
+.help-text {
+    margin: 10px auto 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(167, 170, 181);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.capture-text {
+    color: $motion-primary;
+}
+
+.main-button-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.main-button-row button {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    background: transparent;
+    border: none;
+}
+
+.main-button-row button:disabled {
+    opacity: 0.25;
+}
+
+.main-button-row button:active, .main-button-row button:focus {
+    outline: none;
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-row button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    background: white;
+    border: 1px solid $ui-black-transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: $motion-primary;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+}
+
+.button-row button + button {
+    margin-left: 0.5rem;
+}
+
+.main-button {
+    text-align: center;
+}
+
+.capture-button {
+    overflow: visible;
+}
+
+.capture-button-circle {
+    fill: $motion-primary;
+    /* opacity: 0.25; */
+    stroke: $motion-tertiary;
+}
+
+.capture-button-circle-outline {
+    fill: $ui-black-transparent;
+    opacity: 0.25;
+    transition: 0.1s;
+}

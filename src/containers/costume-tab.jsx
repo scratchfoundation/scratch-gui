@@ -8,12 +8,15 @@ import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
+import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 import {
+    closeCameraCapture,
     closeCostumeLibrary,
     closeBackdropLibrary,
+    openCameraCapture,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';
@@ -79,6 +82,7 @@ class CostumeTab extends React.Component {
             'handleSurpriseBackdrop',
             'handleFileUploadClick',
             'handleCostumeUpload',
+            'handleCameraBuffer',
             'setFileInput'
         ]);
         const {
@@ -180,6 +184,10 @@ class CostumeTab extends React.Component {
             costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
         });
     }
+    handleCameraBuffer (buffer) {
+        const storage = this.props.vm.runtime.storage;
+        costumeUpload(buffer, 'image/png', 'costume1', storage, this.handleNewCostume);
+    }
     handleFileUploadClick () {
         this.fileInput.click();
     }
@@ -194,11 +202,14 @@ class CostumeTab extends React.Component {
     render () {
         const {
             intl,
+            onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
             backdropLibraryVisible,
+            cameraModalVisible,
             costumeLibraryVisible,
             onRequestCloseBackdropLibrary,
+            onRequestCloseCameraModal,
             onRequestCloseCostumeLibrary,
             editingTarget,
             sprites,
@@ -234,7 +245,8 @@ class CostumeTab extends React.Component {
                     },
                     {
                         title: intl.formatMessage(messages.addCameraCostumeMsg),
-                        img: cameraIcon
+                        img: cameraIcon,
+                        onClick: onNewCostumeFromCameraClick
                     },
                     {
                         title: intl.formatMessage(addFileMessage),
@@ -280,6 +292,13 @@ class CostumeTab extends React.Component {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
+                {cameraModalVisible ? (
+                    <CameraModal
+                        vm={vm}
+                        onClose={onRequestCloseCameraModal}
+                        onNewCostume={this.handleCameraBuffer}
+                    />
+                ) : null}
             </AssetPanel>
         );
     }
@@ -287,12 +306,15 @@ class CostumeTab extends React.Component {
 
 CostumeTab.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
+    cameraModalVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseBackdropLibrary: PropTypes.func.isRequired,
+    onRequestCloseCameraModal: PropTypes.func.isRequired,
     onRequestCloseCostumeLibrary: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
@@ -315,6 +337,7 @@ const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
     stage: state.targets.stage,
+    cameraModalVisible: state.modals.cameraCapture,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });
@@ -328,11 +351,17 @@ const mapDispatchToProps = dispatch => ({
         e.preventDefault();
         dispatch(openCostumeLibrary());
     },
+    onNewCostumeFromCameraClick: () => {
+        dispatch(openCameraCapture());
+    },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());
+    },
+    onRequestCloseCameraModal: () => {
+        dispatch(closeCameraCapture());
     }
 });
 

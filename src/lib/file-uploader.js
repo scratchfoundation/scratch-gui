@@ -77,7 +77,8 @@ const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
 
 /**
  * Handles loading a costume or a backdrop using the provided, context-relevant information.
- * @param {ArrayBuffer} fileData The costume data to load
+ * @param {ArrayBuffer | string} fileData The costume data to load (this can be an image url
+ * iff the image is a bitmap)
  * @param {string} fileType The MIME type of this file
  * @param {string} costumeName The user-readable name to use for the costume.
  * @param {ScratchStorage} storage The ScratchStorage instance to cache the costume data

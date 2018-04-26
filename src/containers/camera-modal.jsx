@@ -1,0 +1,89 @@
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {connect} from 'react-redux';
+
+import CameraModalComponent from '../components/camera-modal/camera-modal.jsx';
+import {ModalVideoProvider} from '../lib/camera.js';
+
+import {
+    closeCameraCapture
+} from '../reducers/modals';
+
+class CameraModal extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'handleCapture',
+            // 'setVideoInput',
+            'handleSubmit',
+            'handleCancel',
+            'setCanvas'
+            // 'enableVideo'
+        ]);
+
+        this.video = null;
+        this.videoDevice = null;
+
+        this.state = {
+            capture: null
+        };
+    }
+    componentWillUnmount () {
+        // const videoDevice = this.props.vm.runtime.ioDevices.video;
+        // videoDevice.disableVideo();
+        this.videoDevice.disableVideo();
+        // this.video = null;
+    }
+    handleCapture () {
+        const capture = this.videoDevice.takeSnapshot();
+        this.setState({capture: capture});
+    }
+    setCanvas (canvas) {
+        this.canvas = canvas;
+        if (this.canvas) {
+            this.videoDevice = new ModalVideoProvider(this.canvas);
+            this.videoDevice.enableVideo();
+        }
+    }
+    handleSubmit () {
+        if (!this.state.capture) return;
+        this.props.onNewCostume(this.state.capture);
+        this.props.onClose();
+    }
+    handleCancel () {
+        this.props.onClose();
+    }
+    render () {
+        return (
+            <CameraModalComponent
+                // vm={this.props.vm}
+                // onBack={this.handleBack}
+                canvasRef={this.setCanvas}
+                capture={this.state.capture}
+                // videoRef={this.setVideoInput}
+                onCancel={this.handleCancel}
+                onCapture={this.handleCapture}
+                onSubmit={this.handleSubmit}
+            />
+        );
+    }
+}
+
+CameraModal.propTypes = {
+    onClose: PropTypes.func,
+    onNewCostume: PropTypes.func
+};
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = dispatch => ({
+    onClose: () => {
+        dispatch(closeCameraCapture());
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CameraModal);

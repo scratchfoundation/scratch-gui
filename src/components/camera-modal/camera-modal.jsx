@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
-import classNames from 'classnames';
 import styles from './camera-modal.css';
 import backIcon from './icon--back.svg';
 import cameraIcon from '../action-menu/icon--camera.svg';

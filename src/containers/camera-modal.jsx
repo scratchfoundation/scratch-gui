@@ -14,10 +14,10 @@ class CameraModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCapture',
-            // 'setVideoInput',
-            'handleSubmit',
+            'handleBack',
             'handleCancel',
+            'handleCapture',
+            'handleSubmit',
             'setCanvas'
             // 'enableVideo'
         ]);
@@ -34,6 +34,10 @@ class CameraModal extends React.Component {
         // videoDevice.disableVideo();
         this.videoDevice.disableVideo();
         // this.video = null;
+    }
+    handleBack () {
+        this.setState({capture: null});
+        this.videoDevice.clearSnapshot();
     }
     handleCapture () {
         const capture = this.videoDevice.takeSnapshot();
@@ -58,10 +62,10 @@ class CameraModal extends React.Component {
         return (
             <CameraModalComponent
                 // vm={this.props.vm}
-                // onBack={this.handleBack}
                 canvasRef={this.setCanvas}
                 capture={this.state.capture}
                 // videoRef={this.setVideoInput}
+                onBack={this.handleBack}
                 onCancel={this.handleCancel}
                 onCapture={this.handleCapture}
                 onSubmit={this.handleSubmit}

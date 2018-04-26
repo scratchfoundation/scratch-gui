@@ -1,6 +1,8 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
+$main-button-size: 2.75rem;
+
 .modal-content {
     width: 600px;
 }
@@ -30,11 +32,12 @@
     width: 480px;
     height: 360px;
     position: relative;
+    border-radius: 1px solid $ui-black-transparent;
 }
 
 .canvas {
     width: 480px;
-    height: 380px;
+    height: 360px;
 }
 
 .help-text {
@@ -43,6 +46,7 @@
     color: rgb(167, 170, 181);
     font-size: 0.95rem;
     font-weight: 500;
+    text-align: center;
 }
 
 .capture-text {
@@ -55,26 +59,65 @@
     margin-top: 15px;
 }
 
-.main-button-row button {
+/* Action Menu */
+.main-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: $motion-primary;
+    outline: none;
+    border: none;
+    transition: background-color 0.2s;
+
+    border-radius: 100%;
+    width: $main-button-size;
+    height: $main-button-size;
+    box-shadow: 0 0 0 4px $motion-transparent;
+    z-index: 20; /* TODO reorder layout to prevent z-index need */
+    transition: transform, box-shadow 0.5s;
+}
+
+.main-button:hover {
+    background: $pen-primary;
+
+    /* transform: scale(1.1); */
+    box-shadow: 0 0 0 6px $motion-transparent;
+}
+
+.main-icon {
+    width: calc($main-button-size - 1rem);
+    height: calc($main-button-size - 1rem);
+}
+
+
+/* Action Menu */
+
+
+
+/* .main-button-row button {
     padding: 0.5rem 0.75rem;
     border-radius: 0.25rem;
     background: transparent;
     border: none;
-}
+} */
 
-.main-button-row button:disabled {
+/* .main-button-row button:disabled {
     opacity: 0.25;
 }
 
 .main-button-row button:active, .main-button-row button:focus {
     outline: none;
-}
+} */
 
 .button-row {
     font-weight: bolder;
     text-align: right;
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .button-row button {
@@ -97,9 +140,9 @@
     margin-left: 0.5rem;
 }
 
-.main-button {
+/* .main-button {
     text-align: center;
-}
+} */
 
 .capture-button {
     overflow: visible;

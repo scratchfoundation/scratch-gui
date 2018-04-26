@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
+import classNames from 'classnames';
 import styles from './camera-modal.css';
 import backIcon from './icon--back.svg';
+import cameraIcon from '../action-menu/icon--camera.svg';
 
 const CameraModal = props => (
     <Modal
@@ -45,30 +47,18 @@ const CameraModal = props => (
                         className={styles.mainButton}
                         onClick={props.onCapture}
                     >
-                        <svg
-                            className={styles.captureButton}
-                            height="52"
-                            width="52"
-                        >
-                            <circle
-                                className={styles.captureButtonCircle}
-                                cx="26"
-                                cy="26"
-                                r="25"
-                            />
-                            <circle
-                                className={styles.captureButtonCircleOutline}
-                                cx="26"
-                                cy="26"
-                                r="27"
-                            />
-                        </svg>
-                        <div className={styles.helpText}>
-                            <span className={styles.captureText}>
-                                {'Take Photo'}
-                            </span>
-                        </div>
+                        <img
+                            className={styles.mainIcon}
+                            draggable={false}
+                            src={cameraIcon}
+                        />
                     </button>
+                    <div className={styles.helpText}>
+                        <span className={styles.captureText}>
+                            {'Take Photo'}
+                        </span>
+                    </div>
+
                 </Box>
             }
         </Box>
@@ -77,7 +67,7 @@ const CameraModal = props => (
 
 CameraModal.propTypes = {
     canvasRef: PropTypes.func.isRequired,
-    capture: PropTypes.instanceOf(ImageData),
+    capture: PropTypes.string,
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onCapture: PropTypes.func.isRequired,

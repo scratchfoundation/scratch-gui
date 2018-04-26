@@ -1,6 +1,29 @@
 import getUserMedia from 'get-user-media-promise';
 import log from './log.js';
 
+const requestStack = [];
+// Single Setup For All Video Streams
+const requestVideoStream = videoDesc => {
+    let streamPromise;
+    if (requestStack.length === 0) {
+        streamPromise = getUserMedia({
+            audio: false,
+            video: videoDesc
+        });
+        requestStack.push(streamPromise);
+    } else if (requestStack.length > 0) {
+        streamPromise = requestStack[0];
+        requestStack.push(true);
+    }
+    return streamPromise;
+};
+
+const requestDisableCheck = () => {
+    requestStack.pop();
+    if (requestStack.length > 0) return false;
+    return true;
+};
+
 class StageVideoProvider {
     constructor (runtime) {
         /**
@@ -122,11 +145,12 @@ class StageVideoProvider {
     _teardown () {
         // we might be asked to re-enable before _teardown is called, just ignore it.
         if (this.enabled === false) {
+            const disableTrack = requestDisableCheck();
             this._disablePreview();
             this._singleSetup = null;
             // by clearing refs to video and track, we should lose our hold over the camera
             this._video = null;
-            if (this._track) {
+            if (this._track && disableTrack) {
                 this._track.stop();
             }
             this._track = null;
@@ -241,12 +265,9 @@ class StageVideoProvider {
             return this._singleSetup;
         }
 
-        this._singleSetup = getUserMedia({ // navigator.mediaDevices.getUserMedia({
-            audio: false,
-            video: {
-                width: {min: 480, ideal: 640},
-                height: {min: 360, ideal: 480}
-            }
+        this._singleSetup = requestVideoStream({ // navigator.mediaDevices.getUserMedia({
+            width: {min: 480, ideal: 640},
+            height: {min: 360, ideal: 480}
         })
             .then(stream => {
                 this._video = document.createElement('video');
@@ -385,7 +406,6 @@ class ModalVideoProvider {
         /**
          * Captured image data
          */
-        this._capture = null;
 
         /**
          * Cache frames for this many ms.
@@ -406,13 +426,6 @@ class ModalVideoProvider {
         this._track = null;
     }
 
-    static get FORMAT_IMAGE_DATA () {
-        return 'image-data';
-    }
-
-    static get FORMAT_CANVAS () {
-        return 'canvas';
-    }
 
     /**
      * Dimensions the video stream is analyzed at after its rendered to the
@@ -427,34 +440,12 @@ class ModalVideoProvider {
         this._video = video;
     }
 
-    get videoReady () {
-        // if (!this.enabled) {
-        //     return false;
-        // }
-        if (!this._video) {
-            return false;
-        }
-        if (!this._track) {
-            return false;
-        }
-        const {videoWidth, videoHeight} = this._video;
-        if (typeof videoWidth !== 'number' || typeof videoHeight !== 'number') {
-            return false;
-        }
-        if (videoWidth === 0 || videoHeight === 0) {
-            return false;
-        }
-        return true;
-    }
 
     enableVideo () {
         const thisContext = this;
         this._video = this._video ? this._video : document.createElement('video');
         // TODO possibly make common function for this
-        getUserMedia({
-            audio: false,
-            video: true
-        })
+        requestVideoStream(true)
             .then(userMediaStream => {
                 try {
                     thisContext._video.srcObject = userMediaStream;
@@ -463,20 +454,15 @@ class ModalVideoProvider {
                 }
                 thisContext._track = userMediaStream.getTracks()[0];
 
-                const width = 960; // abstract this out
-                const height = 720;
+                thisContext._width = 960; // abstract this out
+                thisContext._height = 720;
 
-                const ctx = thisContext._canvas.getContext('2d');
+                const ctx = this._canvas.getContext('2d');
 
                 ctx.scale(-1, 1);
-                ctx.translate(width * -1, 0);
+                ctx.translate(thisContext._width * -1, 0);
 
-                thisContext._videoFeedInterval = setInterval(() => ctx.drawImage(thisContext._video,
-                    // source x, y, width, height
-                    0, 0, thisContext._video.videoWidth, thisContext._video.videoHeight,
-                    // dest x, y, width, height
-                    0, 0, width, height
-                ), thisContext._frameCacheTimeout);
+                thisContext._drawFrames();
 
                 // The following also works...
                 // thisContext._videoFeedInterval = setInterval(
@@ -487,50 +473,27 @@ class ModalVideoProvider {
                 // thisContext._setupPreview();
             })
             .catch(e => {
-                log.warn(e); // TODO make common function for this
+                log.warn(e);
             });
     }
 
-    // _setupPreview () {
-    //
-    //     // if we haven't already created and started a preview frame render loop, do so
-    //     if (!this._renderPreviewFrame) {
-    //
-    //         this._renderPreviewFrame = () => {
-    //             clearTimeout(this._renderPreviewTimeout);
-    //             if (!this._renderPreviewFrame) {
-    //                 return;
-    //             }
-    //
-    //             this._renderPreviewTimeout = setTimeout(this._renderPreviewFrame, this._frameCacheTimeout);
-    //
-    //             const canvas = this.getFrame({format: ModalVideoProvider.FORMAT_CANVAS});
-    //
-    //             if (!canvas) {
-    //                 // this._skin.clear();
-    //                 return;
-    //             }
-    //
-    //             // const xOffset = ModalVideoProvider.DIMENSIONS[0] / -2;
-    //             // const yOffset = ModalVideoProvider.DIMENSIONS[1] / 2;
-    //             // this._skin.drawStamp(canvas, xOffset, yOffset);
-    //             // this.runtime.requestRedraw();
-    //         };
-    //
-    //         this._renderPreviewFrame();
-    //     }
-    // }
+    _drawFrames () {
+        this._videoFeedInterval = setInterval(() =>
+            this._canvas.getContext('2d').drawImage(this._video,
+                // source x, y, width, height
+                0, 0, this._video.videoWidth, this._video.videoHeight,
+                // dest x, y, width, height
+                0, 0, this._width, this._height
+            ), this._frameCacheTimeout);
+    }
 
     takeSnapshot () {
         clearInterval(this._videoFeedInterval);
-
-        // clearTimeout(this._renderPreviewTimeout);
-
         return this._canvas.toDataURL('image/png');
     }
 
-    getSnapshot () {
-        return this._capture;
+    clearSnapshot () {
+        this._drawFrames();
     }
 
     /**
@@ -636,8 +599,12 @@ class ModalVideoProvider {
     // }
 
     disableVideo () {
+        // Don't need to do anything with this check,
+        // but we do want to pop our use of the stream off the stack
+        const disableTrack = requestDisableCheck();
+
         if (this._video) {
-            if (this._track) this._track.stop();
+            if (this._track && disableTrack) this._track.stop();
             this._video.pause();
             this._video.srcObject = null;
         }

@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import CameraModalComponent from '../components/camera-modal/camera-modal.jsx';
-import {ModalVideoProvider} from '../lib/camera.js';
+import {ModalVideoManager} from '../lib/camera.js';
 
 import {
     closeCameraCapture
@@ -46,7 +46,7 @@ class CameraModal extends React.Component {
     setCanvas (canvas) {
         this.canvas = canvas;
         if (this.canvas) {
-            this.videoDevice = new ModalVideoProvider(this.canvas);
+            this.videoDevice = new ModalVideoManager(this.canvas);
             this.videoDevice.enableVideo();
         }
     }

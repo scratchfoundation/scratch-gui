@@ -24,9 +24,21 @@ class PaintEditorWrapper extends React.Component {
     }
     handleUpdateImage (isVector, image, rotationCenterX, rotationCenterY) {
         if (isVector) {
-            this.props.vm.updateSvg(this.props.selectedCostumeIndex, image, rotationCenterX, rotationCenterY);
+            this.props.vm.updateSvg(
+                // Divide by 2 because the VM's definition of the rotation center
+                // is the paint editor's definition of the rotation center
+                // divided by the bitmap resolution
+                this.props.selectedCostumeIndex,
+                image, rotationCenterX / 2,
+                rotationCenterY / 2,
+                2 /* bitmapResolution */);
         } else {
-            this.props.vm.updateBitmap(this.props.selectedCostumeIndex, image, rotationCenterX, rotationCenterY);
+            this.props.vm.updateBitmap(
+                this.props.selectedCostumeIndex,
+                image,
+                rotationCenterX / 2,
+                rotationCenterY / 2,
+                2 /* bitmapResolution */);
         }
     }
     render () {

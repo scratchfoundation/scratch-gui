@@ -46,6 +46,7 @@ class ExtensionLibrary extends React.PureComponent {
             <LibraryComponent
                 data={extensionLibraryThumbnailData}
                 filterable={false}
+                id="extensionLibrary"
                 title="Choose an Extension"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

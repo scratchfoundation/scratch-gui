@@ -32,16 +32,19 @@ const messages = defineMessages({
     addBackdropFromFile: {
         id: 'gui.stageSelector.addBackdropFromFile',
         description: 'Button to add a stage in the target pane from file',
-        defaultMessage: 'Coming Soon'
+        defaultMessage: 'Upload Backdrop'
     }
 });
 
 const StageSelector = props => {
     const {
         backdropCount,
+        fileInputRef,
         intl,
         selected,
         url,
+        onBackdropFileUploadClick,
+        onBackdropFileUpload,
         onClick,
         onNewBackdropClick,
         onSurpriseBackdropClick,
@@ -81,7 +84,11 @@ const StageSelector = props => {
                 moreButtons={[
                     {
                         title: intl.formatMessage(messages.addBackdropFromFile),
-                        img: fileUploadIcon
+                        img: fileUploadIcon,
+                        onClick: onBackdropFileUploadClick,
+                        fileAccept: '.svg, .png, .jpg, .jpeg', // Bitmap coming soon
+                        fileChange: onBackdropFileUpload,
+                        fileInput: fileInputRef
                     }, {
                         title: intl.formatMessage(messages.addBackdropFromSurprise),
                         img: surpriseIcon,
@@ -102,7 +109,10 @@ const StageSelector = props => {
 
 StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
+    fileInputRef: PropTypes.func,
     intl: intlShape.isRequired,
+    onBackdropFileUpload: PropTypes.func,
+    onBackdropFileUploadClick: PropTypes.func,
     onClick: PropTypes.func,
     onEmptyBackdropClick: PropTypes.func,
     onNewBackdropClick: PropTypes.func,

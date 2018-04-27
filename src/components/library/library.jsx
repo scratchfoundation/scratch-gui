@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import LibraryItem from '../library-item/library-item.jsx';
-import ModalComponent from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
@@ -68,14 +68,12 @@ class LibraryComponent extends React.Component {
         if (this.state.selectedTag === 'all') {
             if (!this.state.filterQuery) return this.props.data;
             return this.props.data.filter(dataItem => (
-                dataItem.name
-                    .toLowerCase()
-                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1 || (
-                    dataItem.tags &&
-                    dataItem.tags
-                        .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                        .indexOf(this.state.filterQuery.toLowerCase()) !== -1
-                )
+                (dataItem.tags || [])
+                    // Second argument to map sets `this`
+                    .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                    .concat(dataItem.name.toLowerCase())
+                    .join('\n') // unlikely to partially match newlines
+                    .indexOf(this.state.filterQuery.toLowerCase()) !== -1
             ));
         }
         return this.props.data.filter(dataItem => (
@@ -87,9 +85,10 @@ class LibraryComponent extends React.Component {
     }
     render () {
         return (
-            <ModalComponent
+            <Modal
                 fullScreen
                 contentLabel={this.props.title}
+                id={this.props.id}
                 onRequestClose={this.props.onRequestClose}
             >
                 {(this.props.filterable || this.props.tags) && (
@@ -128,7 +127,11 @@ class LibraryComponent extends React.Component {
                         }
                     </div>
                 )}
-                <div className={styles.libraryScrollGrid}>
+                <div
+                    className={classNames(styles.libraryScrollGrid, {
+                        [styles.withFilterBar]: this.props.filterable || this.props.tags
+                    })}
+                >
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
@@ -151,7 +154,7 @@ class LibraryComponent extends React.Component {
                         );
                     })}
                 </div>
-            </ModalComponent>
+            </Modal>
         );
     }
 }
@@ -172,6 +175,7 @@ LibraryComponent.propTypes = {
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
     filterable: PropTypes.bool,
+    id: PropTypes.string.isRequired,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,

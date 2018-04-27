@@ -69,8 +69,88 @@ const base = {
     ] : [])
 };
 
-module.exports = (
-    process.env.NODE_ENV === 'production' ?
+module.exports = [
+    // to run editor examples
+    defaultsDeep({}, base, {
+        entry: {
+            lib: ['react', 'react-dom'],
+            gui: './src/playground/index.jsx',
+            blocksonly: './src/playground/blocks-only.jsx',
+            compatibilitytesting: './src/playground/compatibility-testing.jsx',
+            player: './src/playground/player.jsx'
+        },
+        output: {
+            path: path.resolve(__dirname, 'build'),
+            filename: '[name].js'
+        },
+        externals: {
+            React: 'react',
+            ReactDOM: 'react-dom'
+        },
+        module: {
+            rules: base.module.rules.concat([
+                {
+                    test: /\.(svg|png|wav)$/,
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'static/assets/'
+                    }
+                }
+            ])
+        },
+        plugins: base.plugins.concat([
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
+                'process.env.DEBUG': Boolean(process.env.DEBUG)
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'lib',
+                filename: 'lib.min.js'
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib', 'gui'],
+                template: 'src/playground/index.ejs',
+                title: 'Scratch 3.0 GUI'
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib', 'blocksonly'],
+                template: 'src/playground/index.ejs',
+                filename: 'blocks-only.html',
+                title: 'Scratch 3.0 GUI: Blocks Only Example'
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib', 'compatibilitytesting'],
+                template: 'src/playground/index.ejs',
+                filename: 'compatibility-testing.html',
+                title: 'Scratch 3.0 GUI: Compatibility Testing'
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib', 'player'],
+                template: 'src/playground/index.ejs',
+                filename: 'player.html',
+                title: 'Scratch 3.0 GUI: Player Example'
+            }),
+            new CopyWebpackPlugin([{
+                from: 'static',
+                to: 'static'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'node_modules/scratch-blocks/media',
+                to: 'static/blocks-media'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'extensions/**',
+                to: 'static',
+                context: 'src/examples'
+            }]),
+            new CopyWebpackPlugin([{
+                from: 'extension-worker.{js,js.map}',
+                context: 'node_modules/scratch-vm/dist/web'
+            }])
+        ])
+    })
+].concat(
+    process.env.NODE_ENV === 'production' ? (
         // export as library
         defaultsDeep({}, base, {
             target: 'web',
@@ -88,7 +168,8 @@ module.exports = (
             module: {
                 rules: base.module.rules.concat([
                     {
-                        test: /\.(svg|png|wav)$/,
+                      
+                        test: /\.(svg|png|wav|gif|jpg)$/,
                         loader: 'file-loader',
                         options: {
                             outputPath: 'static/assets/',
@@ -107,84 +188,5 @@ module.exports = (
                     context: 'node_modules/scratch-vm/dist/web'
                 }])
             ])
-        }) :
-        // to run editor examples
-        defaultsDeep({}, base, {
-            entry: {
-                lib: ['react', 'react-dom'],
-                gui: './src/playground/index.jsx',
-                blocksonly: './src/playground/blocks-only.jsx',
-                compatibilitytesting: './src/playground/compatibility-testing.jsx',
-                player: './src/playground/player.jsx'
-            },
-            output: {
-                path: path.resolve(__dirname, 'build'),
-                filename: '[name].js'
-            },
-            externals: {
-                React: 'react',
-                ReactDOM: 'react-dom'
-            },
-            module: {
-                rules: base.module.rules.concat([
-                    {
-                        test: /\.(svg|png|wav|gif|jpg)$/,
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: 'static/assets/'
-                        }
-                    }
-                ])
-            },
-            plugins: base.plugins.concat([
-                new webpack.DefinePlugin({
-                    'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
-                    'process.env.DEBUG': Boolean(process.env.DEBUG)
-                }),
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: 'lib',
-                    filename: 'lib.min.js'
-                }),
-                new HtmlWebpackPlugin({
-                    chunks: ['lib', 'gui'],
-                    template: 'src/playground/index.ejs',
-                    title: 'Scratch 3.0 GUI'
-                }),
-                new HtmlWebpackPlugin({
-                    chunks: ['lib', 'blocksonly'],
-                    template: 'src/playground/index.ejs',
-                    filename: 'blocks-only.html',
-                    title: 'Scratch 3.0 GUI: Blocks Only Example'
-                }),
-                new HtmlWebpackPlugin({
-                    chunks: ['lib', 'compatibilitytesting'],
-                    template: 'src/playground/index.ejs',
-                    filename: 'compatibility-testing.html',
-                    title: 'Scratch 3.0 GUI: Compatibility Testing'
-                }),
-                new HtmlWebpackPlugin({
-                    chunks: ['lib', 'player'],
-                    template: 'src/playground/index.ejs',
-                    filename: 'player.html',
-                    title: 'Scratch 3.0 GUI: Player Example'
-                }),
-                new CopyWebpackPlugin([{
-                    from: 'static',
-                    to: 'static'
-                }]),
-                new CopyWebpackPlugin([{
-                    from: 'node_modules/scratch-blocks/media',
-                    to: 'static/blocks-media'
-                }]),
-                new CopyWebpackPlugin([{
-                    from: 'extensions/**',
-                    to: 'static',
-                    context: 'src/examples'
-                }]),
-                new CopyWebpackPlugin([{
-                    from: 'extension-worker.{js,js.map}',
-                    context: 'node_modules/scratch-vm/dist/web'
-                }])
-            ])
-        })
+        })) : []
 );

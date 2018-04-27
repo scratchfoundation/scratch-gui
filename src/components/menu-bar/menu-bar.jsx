@@ -224,6 +224,7 @@ const MenuBar = props => (
         </div>
         <div className={styles.accountInfoWrapper}>
             <div
+                aria-label="How-to Library"
                 className={classNames(styles.menuBarItem, styles.hoverable)}
                 onClick={props.onOpenTipLibrary}
             >

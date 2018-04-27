@@ -144,11 +144,15 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
 const soundUpload = function (fileData, fileType, soundName, storage, handleSound) {
     let soundFormat;
     switch (fileType) {
-    case 'audio/mp3': {
+    case 'audio/mp3':
+    case 'audio/mpeg': {
         soundFormat = storage.DataFormat.MP3;
         break;
     }
-    case 'audio/wav': { // TODO support audio/x-wav? Do we see this in the wild?
+    case 'audio/wav':
+    case 'audio/wave':
+    case 'audio/x-wav':
+    case 'audio/x-pn-wav': {
         soundFormat = storage.DataFormat.WAV;
         break;
     }

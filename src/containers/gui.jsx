@@ -86,7 +86,6 @@ class GUI extends React.Component {
 GUI.propTypes = {
     ...GUIComponent.propTypes,
     fetchingProject: PropTypes.bool,
-    importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -100,7 +99,6 @@ const mapStateToProps = state => ({
     blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     cardsVisible: state.cards.visible,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
-    importInfoVisible: state.modals.importInfo,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
     soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,

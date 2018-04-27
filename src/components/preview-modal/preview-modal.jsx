@@ -35,11 +35,44 @@ const PreviewModal = ({intl, ...props}) => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We're working on the next generation of Scratch. We're excited for you to try it!"
+                    defaultMessage="We're excited for you to try the next generation of Scratch!
+                        To learn more, go to the {previewFaqLink}."
                     description="Invitation to try 3.0 preview"
-                    id="gui.previewInfo.invitation"
+                    id="gui.previewInfo.previewfaq"
+                    values={{
+                        previewFaqLink: (
+                            <a
+                                className={styles.faqLink}
+                                href="//scratch.mit.edu/preview-faq"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Preview FAQ"
+                                    description="link to Scratch 3.0 preview FAQ page"
+                                    id="gui.previewInfo.previewfaqlink"
+                                />
+                            </a>
+                        )
+                    }}
                 />
             </p>
+
+            <Box className={styles.disclaimer}>
+                <p>
+                    <strong>
+                        <FormattedMessage
+                            defaultMessage="Changes to projects will not be saved."
+                            description="Disclaimer for 3.0 preview"
+                            id="gui.previewInfo.disclaimer"
+                        />
+                        <br />
+                        <FormattedMessage
+                            defaultMessage="This feature is coming soon!"
+                            description="Notice that a feature is in progress"
+                            id="gui.previewInfo.comingsoon"
+                        />
+                    </strong>
+                </p>
+            </Box>
 
             <Box className={styles.buttonRow}>
                 <button
@@ -71,38 +104,6 @@ const PreviewModal = ({intl, ...props}) => (
                         }}
                     />
                 </button>
-                <button
-                    className={styles.viewProjectButton}
-                    title="viewproject"
-                    onClick={props.onViewProject}
-                >
-                    <FormattedMessage
-                        defaultMessage="View 2.0 Project"
-                        description="Label for button to import a 2.0 project"
-                        id="gui.previewModal.viewproject"
-                    />
-                </button>
-            </Box>
-            <Box className={styles.faqLinkText}>
-                <FormattedMessage
-                    defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Invitation to try 3.0 preview"
-                    id="gui.previewInfo.previewfaq"
-                    values={{
-                        previewFaqLink: (
-                            <a
-                                className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.previewInfo.previewfaqlink"
-                                />
-                            </a>
-                        )
-                    }}
-                />
             </Box>
         </Box>
     </ReactModal>
@@ -111,8 +112,7 @@ const PreviewModal = ({intl, ...props}) => (
 PreviewModal.propTypes = {
     intl: intlShape.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onTryIt: PropTypes.func.isRequired,
-    onViewProject: PropTypes.func.isRequired
+    onTryIt: PropTypes.func.isRequired
 };
 
 export default injectIntl(PreviewModal);

@@ -29,15 +29,21 @@ class ProjectSaver extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.vm.saveProjectSb3().then(content => {
-            const url = window.URL.createObjectURL(content);
-
-            saveLink.href = url;
-
             // TODO user-friendly project name
             // File name: project-DATE-TIME
             const date = new Date();
             const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            saveLink.download = `untitled-project-${timestamp}.sb3`;
+            const filename = `untitled-project-${timestamp}.sb3`;
+
+            // Use special ms version if available to get it working on Edge.
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(content, filename);
+                return;
+            }
+
+            const url = window.URL.createObjectURL(content);
+            saveLink.href = url;
+            saveLink.download = filename;
             saveLink.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(saveLink);

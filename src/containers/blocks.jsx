@@ -99,7 +99,12 @@ class Blocks extends React.Component {
             const offset = this.workspace.toolbox_.getCategoryScrollOffset();
             this.workspace.updateToolbox(this.props.toolboxXML);
             const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
-            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
+            if (offset < currentCategoryLen) {
+                this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            } else {
+                this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
+            }
         }
         if (this.props.isVisible === prevProps.isVisible) {
             return;

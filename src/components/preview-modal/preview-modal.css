@@ -39,6 +39,12 @@
     text-align: center;
 }
 
+.disclaimer {
+    margin-top: 2.0rem;
+    border-top: 1px solid $text-primary;
+    padding-top: 1.0rem;
+}
+
 /* Confirmation buttons at the bottom of the modal */
 .button-row {
     margin: 1.5rem 0;
@@ -65,12 +71,6 @@
 
 .button-row button.no-button {
     color: $motion-primary;
-}
-
-.button-row button.view-project-button {
-    background: $pen-primary;
-    border-color: $pen-primary;
-    color: white;
 }
 
 .button-row button + button {

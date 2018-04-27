@@ -71,7 +71,7 @@
 .featured-item {
     flex-basis: 300px;
     max-width: 300px;
-    height: 320px;
+    height: auto;
     overflow: hidden;
     padding: 0;
 }
@@ -87,11 +87,12 @@
 .featured-text {
     font-weight: bold;
     padding: 10px;
-    height: 140px;
+    /* height: 140px; */
     width: 300px;
 }
 
 .featured-description {
+    display: block;
     font-weight: normal;
     line-height: 2;
 }

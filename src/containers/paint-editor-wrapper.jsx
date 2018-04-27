@@ -30,7 +30,7 @@ class PaintEditorWrapper extends React.Component {
         return (
             <PaintEditor
                 {...this.props}
-                svg={this.props.vm.getCostumeSvg(this.props.selectedCostumeIndex)}
+                svg={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
                 onUpdateName={this.handleUpdateName}
                 onUpdateSvg={this.handleUpdateSvg}
             />

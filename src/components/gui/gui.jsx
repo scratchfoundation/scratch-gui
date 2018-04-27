@@ -17,9 +17,12 @@ import Stage from '../../containers/stage.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import TipsLibrary from '../../containers/tips-library.jsx';
+import Cards from '../../containers/cards.jsx';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
@@ -45,6 +48,7 @@ const GUIComponent = props => {
         activeTabIndex,
         basePath,
         blocksTabVisible,
+        cardsVisible,
         children,
         costumesTabVisible,
         importInfoVisible,
@@ -56,6 +60,7 @@ const GUIComponent = props => {
         onActivateTab,
         previewInfoVisible,
         soundsTabVisible,
+        tipsLibraryVisible,
         vm,
         ...componentProps
     } = props;
@@ -79,7 +84,6 @@ const GUIComponent = props => {
     if (isRendererSupported === null) {
         isRendererSupported = Renderer.isSupported();
     }
-
     return (
         <Box
             className={styles.pageWrapper}
@@ -97,6 +101,12 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
+            {tipsLibraryVisible ? (
+                <TipsLibrary />
+            ) : null}
+            {cardsVisible ? (
+                <Cards />
+            ) : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -217,6 +227,7 @@ GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
@@ -229,6 +240,7 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

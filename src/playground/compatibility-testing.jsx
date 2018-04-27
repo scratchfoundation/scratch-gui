@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
-import AppStateHOC from '../lib/app-state-hoc.jsx';
 import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
 import Box from '../components/box/box.jsx';
@@ -72,7 +71,7 @@ class Player extends React.Component {
     }
 }
 
-const App = AppStateHOC(ProjectLoaderHOC(Player));
+const App = ProjectLoaderHOC(Player);
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

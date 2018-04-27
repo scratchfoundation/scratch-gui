@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import LibraryItem from '../library-item/library-item.jsx';
-import ModalComponent from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
@@ -85,9 +85,10 @@ class LibraryComponent extends React.Component {
     }
     render () {
         return (
-            <ModalComponent
+            <Modal
                 fullScreen
                 contentLabel={this.props.title}
+                id={this.props.id}
                 onRequestClose={this.props.onRequestClose}
             >
                 {(this.props.filterable || this.props.tags) && (
@@ -153,7 +154,7 @@ class LibraryComponent extends React.Component {
                         );
                     })}
                 </div>
-            </ModalComponent>
+            </Modal>
         );
     }
 }
@@ -165,12 +166,16 @@ LibraryComponent.propTypes = {
         PropTypes.shape({
             // @todo remove md5/rawURL prop from library, refactor to use storage
             md5: PropTypes.string,
-            name: PropTypes.string.isRequired,
+            name: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ]).isRequired,
             rawURL: PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
     filterable: PropTypes.bool,
+    id: PropTypes.string.isRequired,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,

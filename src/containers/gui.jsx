@@ -12,6 +12,8 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import AppStateHOC from '../lib/app-state-hoc.jsx';
+import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
@@ -87,7 +89,7 @@ GUI.propTypes = {
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.string,
+    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -96,11 +98,13 @@ GUI.defaultProps = GUIComponent.defaultProps;
 const mapStateToProps = state => ({
     activeTabIndex: state.editorTab.activeTabIndex,
     blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+    cardsVisible: state.cards.visible,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.modals.importInfo,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
-    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
+    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+    tipsLibraryVisible: state.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -115,4 +119,4 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-export default vmListenerHOC(ConnectedGUI);
+export default ProjectLoaderHOC(AppStateHOC(vmListenerHOC(ConnectedGUI)));

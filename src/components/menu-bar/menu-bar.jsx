@@ -14,6 +14,7 @@ import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 
+import {openTipsLibrary} from '../../reducers/modals';
 import {
     openFileMenu,
     closeFileMenu,
@@ -30,6 +31,8 @@ import profileIcon from './icon--profile.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
+
+import helpIcon from './icon--help.svg';
 
 const MenuBarItemTooltip = ({
     children,
@@ -220,6 +223,15 @@ const MenuBar = props => (
             </div>
         </div>
         <div className={styles.accountInfoWrapper}>
+            <div
+                className={classNames(styles.menuBarItem, styles.hoverable)}
+                onClick={props.onOpenTipLibrary}
+            >
+                <img
+                    className={styles.helpIcon}
+                    src={helpIcon}
+                />
+            </div>
             <MenuBarItemTooltip id="mystuff">
                 <div
                     className={classNames(
@@ -265,6 +277,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func
 };
@@ -275,6 +288,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickFile: () => dispatch(openFileMenu()),
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),

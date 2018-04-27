@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {getEventXY} from '../lib/touch-utils';
+import {VideoProvider} from '../lib/camera';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -57,6 +58,7 @@ class Stage extends React.Component {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
+        this.props.vm.setVideoProvider(new VideoProvider());
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.width !== nextProps.width ||

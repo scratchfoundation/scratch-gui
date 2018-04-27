@@ -55,7 +55,8 @@ class PaintEditorWrapper extends React.Component {
 }
 
 PaintEditorWrapper.propTypes = {
-    imageId: PropTypes.string,
+    imageFormat: PropTypes.string.isRequired,
+    imageId: PropTypes.string.isRequired,
     name: PropTypes.string,
     rotationCenterX: PropTypes.number,
     rotationCenterY: PropTypes.number,
@@ -71,11 +72,13 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
     } = state.targets;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
     const costume = target && target.costumes[selectedCostumeIndex];
-    const resolution = costume && costume.dataFormat === 'png' ? costume.bitmapResolution / 2 : 1;
+    const resolution = costume &&
+        (costume.dataFormat === 'png' && costume.dataFormat === 'jpg') ? costume.bitmapResolution / 2 : 1;
     return {
         name: costume && costume.name,
         rotationCenterX: costume && costume.rotationCenterX / resolution,
         rotationCenterY: costume && costume.rotationCenterY / resolution,
+        imageFormat: costume.dataFormat,
         imageId: editingTarget && `${editingTarget}${costume.skinId}`,
         vm: state.vm
     };

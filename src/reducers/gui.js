@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import cardsReducer from './cards';
 import colorPickerReducer from './color-picker';
 import customProceduresReducer from './custom-procedures';
 import blockDragReducer from './block-drag';
@@ -17,6 +18,7 @@ import {ScratchPaintReducer} from 'scratch-paint';
 
 export default combineReducers({
     blockDrag: blockDragReducer,
+    cards: cardsReducer,
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     editorTab: editorTabReducer,

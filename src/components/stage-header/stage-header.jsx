@@ -9,6 +9,7 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Controls from '../../containers/controls.jsx';
 import {getStageSize} from '../../lib/screen-utils.js';
+import {MODES} from '../../reducers/mode';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -48,6 +49,7 @@ const messages = defineMessages({
 const StageHeaderComponent = function (props) {
     const {
         isFullScreen,
+        mode,
         onKeyPress,
         onSetStageLarge,
         onSetStageFull,
@@ -83,51 +85,54 @@ const StageHeaderComponent = function (props) {
             </Box>
         );
     } else {
+        const stageControls =
+            mode === 'editor' ? (
+                <div className={styles.stageSizeToggleGroup}>
+                    <ComingSoonTooltip
+                        place="left"
+                        tooltipId="small-stage-button"
+                    >
+                        <div
+                            disabled
+                            className={classNames(
+                                styles.stageButton,
+                                styles.stageButtonLeft,
+                                styles.stageButtonDisabled
+                            )}
+                            role="button"
+                        >
+                            <img
+                                disabled
+                                alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
+                                className={styles.stageButtonIcon}
+                                draggable={false}
+                                src={smallStageIcon}
+                            />
+                        </div>
+                    </ComingSoonTooltip>
+                    <div>
+                        <Button
+                            className={classNames(styles.stageButton, styles.stageButtonRight)}
+                            onClick={onSetStageLarge}
+                        >
+                            <img
+                                alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
+                                className={styles.stageButtonIcon}
+                                draggable={false}
+                                src={largeStageIcon}
+                            />
+                        </Button>
+                    </div>
+                </div>
+            ) : (
+                []
+            );
         header = (
             <Box className={styles.stageHeaderWrapper}>
                 <Box className={styles.stageMenuWrapper}>
                     <Controls vm={vm} />
                     <div className={styles.stageSizeRow}>
-                        <div className={styles.stageSizeToggleGroup}>
-                            <ComingSoonTooltip
-                                place="left"
-                                tooltipId="small-stage-button"
-                            >
-                                <div
-                                    disabled
-                                    className={classNames(
-                                        styles.stageButton,
-                                        styles.stageButtonLeft,
-                                        styles.stageButtonDisabled
-                                    )}
-                                    role="button"
-                                >
-                                    <img
-                                        disabled
-                                        alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
-                                        className={styles.stageButtonIcon}
-                                        draggable={false}
-                                        src={smallStageIcon}
-                                    />
-                                </div>
-                            </ComingSoonTooltip>
-                            <div>
-                                <Button
-                                    className={classNames(
-                                        styles.stageButton,
-                                        styles.stageButtonRight
-                                    )}
-                                    onClick={onSetStageLarge}
-                                >
-                                    <img
-                                        alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
-                                        className={styles.stageButtonIcon}
-                                        draggable={false}
-                                        src={largeStageIcon}
-                                    />
-                                </Button>
-                            </div>
-                        </div>
+                        {stageControls}
                         <div>
                             <Button
                                 className={styles.stageButton}
@@ -154,6 +159,7 @@ const StageHeaderComponent = function (props) {
 StageHeaderComponent.propTypes = {
     intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
+    mode: PropTypes.oneOf(Object.keys(MODES)),
     onKeyPress: PropTypes.func.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,

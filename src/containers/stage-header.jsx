@@ -3,6 +3,7 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import {setStageSize, setFullScreen, STAGE_SIZES} from '../reducers/stage-size';
+import {MODES} from '../reducers/mode';
 
 import {connect} from 'react-redux';
 
@@ -42,12 +43,14 @@ class StageHeader extends React.Component {
 
 StageHeader.propTypes = {
     isFullScreen: PropTypes.bool.isRequired,
+    mode: PropTypes.oneOf(Object.keys(MODES)),
     onSetStageUnFull: PropTypes.func.isRequired,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_SIZES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
+    mode: state.guiMode.mode,
     stageSize: state.stageSize.stageSize,
     isFullScreen: state.stageSize.isFullScreen
 });

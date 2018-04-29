@@ -31,7 +31,7 @@
 
 .icon-wrapper {
     display: inline-block;
-    box-sizing: content-box;
+    box-sizing: content-box !important;
     width: 1rem;
     height: 1rem;
     padding: 0.5rem;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import throttle from 'redux-throttle';
@@ -6,6 +7,7 @@ import throttle from 'redux-throttle';
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
 import {intlInitialState} from '../reducers/intl.js';
+import {initialState as modeInitialState, MODES} from '../reducers/mode.js';
 import reducer from '../reducers/gui';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,6 +28,7 @@ const AppStateHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             let intl = {};
+            let mode = {};
             if (props.intl) {
                 intl = {
                     intl: {
@@ -37,8 +40,21 @@ const AppStateHOC = function (WrappedComponent) {
             } else {
                 intl = intlInitialState;
             }
+            if (props.mode) {
+                mode = {
+                    mode: props.mode
+                };
+            } else {
+                mode = modeInitialState;
+            }
 
-            this.store = createStore(reducer, intl, enhancer);
+            this.store = createStore(
+                reducer,
+                {
+                    intl: intl,
+                    guiMode: mode
+                },
+                enhancer);
         }
         componentDidUpdate (prevProps) {
             if (prevProps.intl !== this.props.intl) updateIntl(this.props.intl);
@@ -57,7 +73,8 @@ const AppStateHOC = function (WrappedComponent) {
 
     }
     AppStateWrapper.propTypes = {
-        intl: intlShape
+        intl: intlShape,
+        mode: PropTypes.oneOf(Object.keys(MODES))
     };
     return AppStateWrapper;
 };

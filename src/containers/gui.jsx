@@ -101,6 +101,7 @@ const mapStateToProps = state => ({
     cardsVisible: state.cards.visible,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.modals.importInfo,
+    mode: state.guiMode.mode,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
     targetIsStage: state.targets.stage && state.targets.stage.id === state.targets.editingTarget,

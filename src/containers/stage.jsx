@@ -395,8 +395,8 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     isColorPicking: state.colorPicker.active,
     isFullScreen: state.stageSize.isFullScreen,
-    // Do not use editor drag style in fullscreen mode.
-    useEditorDragStyle: !state.stageSize.isFullScreen
+    // Do not use editor drag style in fullscreen or player mode.
+    useEditorDragStyle: !(state.stageSize.isFullScreen || state.guiMode.mode === 'player')
 });
 
 const mapDispatchToProps = dispatch => ({

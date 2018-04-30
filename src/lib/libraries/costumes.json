@@ -223,7 +223,7 @@
         ]
     },
     {
-        "name": "Basketbal",
+        "name": "Basketball",
         "md5": "b15c425f3eef68e7d095ee91321cb52a.svg",
         "type": "costume",
         "tags": [
@@ -1193,7 +1193,55 @@
         ]
     },
     {
-        "name": "Dorian-",
+        "name": "Dorian-a",
+        "md5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dorian-b",
+        "md5": "d0b58b672606601ecfa3a406b537fa10.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dorian-c",
+        "md5": "445e461c73a5920098764a4cbad5bfe0.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Dorian-d",
         "md5": "ba93ede3bbf75c0f707b0fb982bc27e8.svg",
         "type": "costume",
         "tags": [
@@ -2030,7 +2078,55 @@
         ]
     },
     {
-        "name": "Jamie-",
+        "name": "Jamie-a",
+        "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            105,
+            1
+        ]
+    },
+    {
+        "name": "Jamie-b",
+        "md5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            105,
+            1
+        ]
+    },
+    {
+        "name": "Jamie-c",
+        "md5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            105,
+            1
+        ]
+    },
+    {
+        "name": "Jamie-d",
         "md5": "4adb87e6123161fcaf02f7ac022a5757.svg",
         "type": "costume",
         "tags": [
@@ -2354,7 +2450,55 @@
         ]
     },
     {
-        "name": "Max-",
+        "name": "Max-a",
+        "md5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            68,
+            1
+        ]
+    },
+    {
+        "name": "Max-b",
+        "md5": "6d8ee139a741cf945d600a8cef0ea2e6.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            68,
+            1
+        ]
+    },
+    {
+        "name": "Max-c",
+        "md5": "aa66109994d27de02711f6a0ef6de9ec.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            68,
+            1
+        ]
+    },
+    {
+        "name": "Max-d",
         "md5": "a0dbf509d542c7eff6d2ddfc9c9410f1.svg",
         "type": "costume",
         "tags": [

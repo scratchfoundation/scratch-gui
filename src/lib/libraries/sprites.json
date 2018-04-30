@@ -393,7 +393,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "basketball[sports,basketball,alex eben meyer]",
+                    "costumeName": "basketball [sports,basketball,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b15c425f3eef68e7d095ee91321cb52a.svg",
                     "bitmapResolution": 1,
@@ -2139,7 +2139,7 @@
         }
     },
     {
-        "name": "Doria",
+        "name": "Dorian",
         "md5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
         "type": "sprite",
         "tags": [
@@ -2154,7 +2154,7 @@
             1
         ],
         "json": {
-            "objName": "Doria",
+            "objName": "Dorian",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2167,7 +2167,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dorian-a[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-a [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
                     "bitmapResolution": 1,
@@ -2175,7 +2175,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-b[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-b [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d0b58b672606601ecfa3a406b537fa10.svg",
                     "bitmapResolution": 1,
@@ -2183,7 +2183,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-c[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-c [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "445e461c73a5920098764a4cbad5bfe0.svg",
                     "bitmapResolution": 1,
@@ -2191,7 +2191,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-d[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-d [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ba93ede3bbf75c0f707b0fb982bc27e8.svg",
                     "bitmapResolution": 1,
@@ -3862,7 +3862,7 @@
         }
     },
     {
-        "name": "Jami",
+        "name": "Jamie",
         "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
         "type": "sprite",
         "tags": [
@@ -3877,7 +3877,7 @@
             1
         ],
         "json": {
-            "objName": "Jami",
+            "objName": "Jamie",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3890,7 +3890,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jamie-a[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-a [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
                     "bitmapResolution": 1,
@@ -3898,7 +3898,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-b[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-b [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
                     "bitmapResolution": 1,
@@ -3906,7 +3906,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-c[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-c [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
                     "bitmapResolution": 1,
@@ -3914,7 +3914,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-d[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-d [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4adb87e6123161fcaf02f7ac022a5757.svg",
                     "bitmapResolution": 1,
@@ -4479,7 +4479,7 @@
         }
     },
     {
-        "name": "Ma",
+        "name": "Max",
         "md5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
         "type": "sprite",
         "tags": [
@@ -4494,7 +4494,7 @@
             1
         ],
         "json": {
-            "objName": "Ma",
+            "objName": "Max",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4507,7 +4507,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "max-a[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-a [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
                     "bitmapResolution": 1,
@@ -4515,7 +4515,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-b[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-b [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6d8ee139a741cf945d600a8cef0ea2e6.svg",
                     "bitmapResolution": 1,
@@ -4523,7 +4523,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-c[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-c [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "aa66109994d27de02711f6a0ef6de9ec.svg",
                     "bitmapResolution": 1,
@@ -4531,7 +4531,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-d[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-d [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a0dbf509d542c7eff6d2ddfc9c9410f1.svg",
                     "bitmapResolution": 1,

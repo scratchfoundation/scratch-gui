@@ -25,19 +25,16 @@ class PaintEditorWrapper extends React.Component {
     handleUpdateImage (isVector, image, rotationCenterX, rotationCenterY) {
         if (isVector) {
             this.props.vm.updateSvg(
-                // Divide by 2 because the VM's definition of the rotation center
-                // is the paint editor's definition of the rotation center
-                // divided by the bitmap resolution
                 this.props.selectedCostumeIndex,
-                image, rotationCenterX / 2,
-                rotationCenterY / 2,
-                2 /* bitmapResolution */);
+                image,
+                rotationCenterX,
+                rotationCenterY);
         } else {
             this.props.vm.updateBitmap(
                 this.props.selectedCostumeIndex,
                 image,
-                rotationCenterX / 2,
-                rotationCenterY / 2,
+                rotationCenterX,
+                rotationCenterY,
                 2 /* bitmapResolution */);
         }
     }
@@ -72,12 +69,10 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
     } = state.targets;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
     const costume = target && target.costumes[selectedCostumeIndex];
-    const resolution = costume &&
-        (costume.dataFormat === 'png' && costume.dataFormat === 'jpg') ? costume.bitmapResolution / 2 : 1;
     return {
         name: costume && costume.name,
-        rotationCenterX: costume && costume.rotationCenterX / resolution,
-        rotationCenterY: costume && costume.rotationCenterY / resolution,
+        rotationCenterX: costume && costume.rotationCenterX,
+        rotationCenterY: costume && costume.rotationCenterY,
         imageFormat: costume.dataFormat,
         imageId: editingTarget && `${editingTarget}${costume.skinId}`,
         vm: state.vm

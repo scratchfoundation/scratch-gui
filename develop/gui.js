@@ -19,7 +19,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactModal = __webpack_require__(19);
+var _reactModal = __webpack_require__(16);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
@@ -31,11 +31,11 @@ var _gui = __webpack_require__(22);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _errorBoundaryHoc = __webpack_require__(540);
+var _errorBoundaryHoc = __webpack_require__(544);
 
 var _errorBoundaryHoc2 = _interopRequireDefault(_errorBoundaryHoc);
 
-var _index = __webpack_require__(546);
+var _index = __webpack_require__(550);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -128,7 +128,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 540:
+/***/ 544:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,7 +142,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _errorBoundary = __webpack_require__(541);
+var _errorBoundary = __webpack_require__(545);
 
 var _errorBoundary2 = _interopRequireDefault(_errorBoundary);
 
@@ -168,7 +168,7 @@ exports.default = ErrorBoundaryHOC;
 
 /***/ }),
 
-/***/ 541:
+/***/ 545:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -188,7 +188,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _platform = __webpack_require__(50);
+var _platform = __webpack_require__(51);
 
 var _platform2 = _interopRequireDefault(_platform);
 
@@ -196,7 +196,7 @@ var _browserModal = __webpack_require__(132);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _crashMessage = __webpack_require__(542);
+var _crashMessage = __webpack_require__(546);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
@@ -277,7 +277,7 @@ exports.default = ErrorBoundary;
 
 /***/ }),
 
-/***/ 542:
+/***/ 546:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -299,11 +299,11 @@ var _box = __webpack_require__(7);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _crashMessage = __webpack_require__(543);
+var _crashMessage = __webpack_require__(547);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
-var _reload = __webpack_require__(545);
+var _reload = __webpack_require__(549);
 
 var _reload2 = _interopRequireDefault(_reload);
 
@@ -350,11 +350,11 @@ exports.default = CrashMessage;
 
 /***/ }),
 
-/***/ 543:
+/***/ 547:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(544);
+var content = __webpack_require__(548);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -401,7 +401,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 544:
+/***/ 548:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -421,18 +421,18 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 545:
+/***/ 549:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/assets/dd98971c2c185caf86144b6b5234d0fa.svg";
 
 /***/ }),
 
-/***/ 546:
+/***/ 550:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(547);
+var content = __webpack_require__(551);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -479,7 +479,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 547:
+/***/ 551:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);

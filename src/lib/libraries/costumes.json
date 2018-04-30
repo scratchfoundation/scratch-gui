@@ -3,9 +3,7 @@
         "name": "Abby-a",
         "md5": "afab2d2141e9811bd89e385e9628cb5f.svg",
         "type": "costume",
-        "tags": [
-            "people"
-        ],
+        "tags": [],
         "info": [
             31,
             100,
@@ -16,9 +14,7 @@
         "name": "Abby-b",
         "md5": "1e0116c7c2e5e80c679d0b33f1f5cfb7.svg",
         "type": "costume",
-        "tags": [
-            "people"
-        ],
+        "tags": [],
         "info": [
             31,
             100,
@@ -29,9 +25,7 @@
         "name": "Abby-c",
         "md5": "b6e23922f23b49ddc6f62f675e77417c.svg",
         "type": "costume",
-        "tags": [
-            "people"
-        ],
+        "tags": [],
         "info": [
             32,
             100,
@@ -42,9 +36,7 @@
         "name": "Abby-d",
         "md5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
         "type": "costume",
-        "tags": [
-            "people"
-        ],
+        "tags": [],
         "info": [
             31,
             100,
@@ -55,9 +47,7 @@
         "name": "Apple",
         "md5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
         "type": "costume",
-        "tags": [
-            "food"
-        ],
+        "tags": [],
         "info": [
             31,
             31,
@@ -213,9 +203,7 @@
         "name": "Baseball",
         "md5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
         "type": "costume",
-        "tags": [
-            "sports"
-        ],
+        "tags": [],
         "info": [
             34,
             31,
@@ -226,11 +214,7 @@
         "name": "Basketball",
         "md5": "b15c425f3eef68e7d095ee91321cb52a.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             26,
             26,
@@ -241,9 +225,7 @@
         "name": "Bat1-a",
         "md5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -254,9 +236,7 @@
         "name": "Bat1-b",
         "md5": "f127434672b872a902346ef3c1af45f2.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -267,9 +247,7 @@
         "name": "Bat2-a",
         "md5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -280,9 +258,7 @@
         "name": "Bat2-b",
         "md5": "8aa1d20e4f7761becbe9bafa75290465.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -326,13 +302,7 @@
         "name": "Ben-a",
         "md5": "7f32d8d78ad64f50c018b7b578de2e18.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             75,
@@ -343,13 +313,7 @@
         "name": "Ben-b",
         "md5": "fb012e5d1baf80d33ae95fba3511151a.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             75,
@@ -360,13 +324,7 @@
         "name": "Ben-c",
         "md5": "be0b1397965cf8ff2c4cecb84795138a.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             75,
@@ -377,13 +335,7 @@
         "name": "Ben-d",
         "md5": "e2aefdb538ebbb24e1ab1464f75ef134.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             75,
@@ -669,12 +621,7 @@
         "name": "Casey-a",
         "md5": "30a4dafa852311b2a07d72e1bb060326.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -685,12 +632,7 @@
         "name": "Casey-b",
         "md5": "c8c0a25bebac8b35b8eae7ddd716d061.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -701,12 +643,7 @@
         "name": "Casey-c",
         "md5": "104d363c48c373384c6c80abbbbb0ad6.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             61,
             61,
@@ -717,12 +654,7 @@
         "name": "Casey-d",
         "md5": "3d4bddb908bf912b938c111bfa38c28a.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -843,11 +775,7 @@
         "name": "Dinosaur1-a",
         "md5": "75d367961807fff8e81f556da81dec24.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             98,
             92,
@@ -858,11 +786,7 @@
         "name": "Dinosaur1-b",
         "md5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             98,
             47,
@@ -873,11 +797,7 @@
         "name": "Dinosaur1-c",
         "md5": "02078a81abd2e10cb62ebcc853a40c92.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             81,
             91,
@@ -888,11 +808,7 @@
         "name": "Dinosaur1-d",
         "md5": "c9ed031bc9bf11416142880f89436be9.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             98,
             91,
@@ -903,11 +819,7 @@
         "name": "Dinosaur2-a",
         "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -918,11 +830,7 @@
         "name": "Dinosaur2-b",
         "md5": "70bba739b7df0bd08abb31026d078ee7.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             74,
             67,
@@ -933,11 +841,7 @@
         "name": "Dinosaur2-c",
         "md5": "4a51679d86aafcc9cee1c010fc141288.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             62,
             67,
@@ -948,11 +852,7 @@
         "name": "Dinosaur2-d",
         "md5": "47053664449b24749aaf199925b19f8e.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             71,
             66,
@@ -963,11 +863,7 @@
         "name": "Dinosaur3-a",
         "md5": "17636db6f607c14a03a36e18abfea86a.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -978,11 +874,7 @@
         "name": "Dinosaur3-b",
         "md5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -993,11 +885,7 @@
         "name": "Dinosaur3-c",
         "md5": "4700613077afa7c62659b3fd7d7c748e.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -1008,11 +896,7 @@
         "name": "Dinosaur3-d",
         "md5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -1023,11 +907,7 @@
         "name": "Dinosaur3-e",
         "md5": "00e24e40535a1a621fee0f70895b2b61.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             115,
             72,
@@ -1038,11 +918,7 @@
         "name": "Dinosaur4-a",
         "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             59,
             54,
@@ -1053,11 +929,7 @@
         "name": "Dinosaur4-b",
         "md5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             86,
             54,
@@ -1068,11 +940,7 @@
         "name": "Dinosaur4-c",
         "md5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             59,
             54,
@@ -1083,11 +951,7 @@
         "name": "Dinosaur4-d",
         "md5": "45061ff84a25723625d04f0476687633.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "dinosaur",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             89,
             90,
@@ -1120,9 +984,7 @@
         "name": "Dog1-a",
         "md5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             83,
             80,
@@ -1133,9 +995,7 @@
         "name": "Dog1-b",
         "md5": "598f4aa3d8f671375d1d2b3acf753416.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             83,
             80,
@@ -1146,9 +1006,7 @@
         "name": "Dog2-a",
         "md5": "e921f865b19b27cd99e16a341dbf09c2.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -1159,9 +1017,7 @@
         "name": "Dog2-b",
         "md5": "891f2fb7daf79ba8b224a9173eeb0a63.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -1172,9 +1028,7 @@
         "name": "Dog2-c",
         "md5": "cd236d5eef4431dea82983ac9eec406b.svg",
         "type": "costume",
-        "tags": [
-            "animals"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -1196,12 +1050,7 @@
         "name": "Dorian-a",
         "md5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -1212,12 +1061,7 @@
         "name": "Dorian-b",
         "md5": "d0b58b672606601ecfa3a406b537fa10.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -1228,12 +1072,7 @@
         "name": "Dorian-c",
         "md5": "445e461c73a5920098764a4cbad5bfe0.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -1244,12 +1083,7 @@
         "name": "Dorian-d",
         "md5": "ba93ede3bbf75c0f707b0fb982bc27e8.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             72,
@@ -1326,10 +1160,7 @@
         "name": "Drum-a",
         "md5": "dd66742bc2a3cfe5a6f9f540afd2e15c.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             43,
             60,
@@ -1340,10 +1171,7 @@
         "name": "Drum-b",
         "md5": "9c9d371da382c227e43f09b1a748c554.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             43,
             60,
@@ -1354,10 +1182,7 @@
         "name": "Drum-cymbal-a",
         "md5": "d6d41862fda966df1455d2dbff5e1988.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             30,
             74,
@@ -1368,10 +1193,7 @@
         "name": "Drum-cymbal-b",
         "md5": "e6b7d7d8874bc4b7be58afe927157554.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             30,
             74,
@@ -1382,10 +1204,7 @@
         "name": "Drum-highhat-a",
         "md5": "81fb79151a63cb096258607451cc2cf5.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             33,
             73,
@@ -1396,10 +1215,7 @@
         "name": "Drum-highhat-b",
         "md5": "e3c273e4ad1a24583064f9b61fcd753a.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             33,
             73,
@@ -1410,10 +1226,7 @@
         "name": "Drum-kit",
         "md5": "131d040d86ecea62ccd175a8709c7866.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             58,
             78,
@@ -1424,10 +1237,7 @@
         "name": "Drum-kit-b",
         "md5": "ff14be049146cf9ab142e0951cb9b735.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             58,
             78,
@@ -1438,10 +1248,7 @@
         "name": "Drum-snare-a",
         "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             23,
             50,
@@ -1452,10 +1259,7 @@
         "name": "Drum-snare-b",
         "md5": "f6d2f2a6e1055dab6262336625ddf652.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             36,
             66,
@@ -1477,10 +1281,7 @@
         "name": "Egg-a",
         "md5": "bc723738dfe626c5c3bb90970d985961.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             54,
@@ -1491,10 +1292,7 @@
         "name": "Egg-b",
         "md5": "83016b7ff817f99be4a454600b4a78fc.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             54,
@@ -1505,10 +1303,7 @@
         "name": "Egg-c",
         "md5": "d9a44d151fbd909bdbbcf7877055af6d.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             54,
@@ -1519,10 +1314,7 @@
         "name": "Egg-d",
         "md5": "c91c7f72b8523b0910a84bce7d99c37b.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             54,
@@ -1533,10 +1325,7 @@
         "name": "Egg-e",
         "md5": "65c15516e62596e1f72e874359fc7254.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             54,
@@ -1580,11 +1369,7 @@
         "name": "Fish-a",
         "md5": "8598752b1b7b9892c23817c4ed848e7d.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             63,
             45,
@@ -1595,11 +1380,7 @@
         "name": "Fish-b",
         "md5": "52032e4310f9855b89f873b528a5e928.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             63,
             45,
@@ -1610,11 +1391,7 @@
         "name": "Fish-c",
         "md5": "06c139dcfe45bf31ef45e7030b77dc36.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             63,
             45,
@@ -1625,11 +1402,7 @@
         "name": "Fish-d",
         "md5": "6a3a2c97374c157e0dbc0a03c2079284.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             63,
             45,
@@ -1640,10 +1413,7 @@
         "name": "Fox-a",
         "md5": "fab5488e600e81565f0fc285fc7050f8.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             94,
             54,
@@ -1654,10 +1424,7 @@
         "name": "Fox-b",
         "md5": "afb192ae250a74dfac18bfc52d1d6266.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             94,
             54,
@@ -1668,10 +1435,7 @@
         "name": "Fox-c",
         "md5": "29f858d384db7998c0e5183f6a31a3b4.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             94,
             54,
@@ -1770,12 +1534,7 @@
         "name": "Goalie-a",
         "md5": "86b0610ea21fdecb99795c5e6d52768c.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -1786,12 +1545,7 @@
         "name": "Goalie-b",
         "md5": "af3ef5125d187772240a1120e7eb67ac.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -1802,12 +1556,7 @@
         "name": "Goalie-c",
         "md5": "7c9377cedae11a094d2e77bed3edb884.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -1818,12 +1567,7 @@
         "name": "Goalie-d",
         "md5": "bd628034d356d30b0e9b563447471290.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -1834,12 +1578,7 @@
         "name": "Goalie-e",
         "md5": "b3f6c4c0be9a0f71e9486dea51e513c3.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -1883,10 +1622,7 @@
         "name": "Guitar-a",
         "md5": "cb8c2a5e69da7538e1dd73cb7ff4a666.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             47,
             83,
@@ -1897,10 +1633,7 @@
         "name": "Guitar-b",
         "md5": "fed44bd1091628c060f45060a84f2885.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             47,
             83,
@@ -1911,10 +1644,7 @@
         "name": "Guitar-electric1-a",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             42,
             85,
@@ -1925,10 +1655,7 @@
         "name": "Guitar-electric1-b",
         "md5": "3632184c19c66a088a99568570d61b13.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             42,
             85,
@@ -1939,10 +1666,7 @@
         "name": "Guitar-electric2-a",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             38,
             94,
@@ -1953,10 +1677,7 @@
         "name": "Guitar-electric2-b",
         "md5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             38,
             94,
@@ -1967,10 +1688,7 @@
         "name": "Hedgehog-a",
         "md5": "32416e6b2ef8e45fb5fd10778c1b9a9f.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             71,
             56,
@@ -1981,10 +1699,7 @@
         "name": "Hedgehog-b",
         "md5": "4d3ccc06660e07b55bd38246e1f82f7f.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             71,
             56,
@@ -1995,10 +1710,7 @@
         "name": "Hedgehog-c",
         "md5": "2446f79c0f553594cfbcdbe6b1e459a5.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             71,
             56,
@@ -2009,10 +1721,7 @@
         "name": "Hedgehog-d",
         "md5": "bdb7c8e86125092da0c4848d1ffd901c.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             71,
             56,
@@ -2023,10 +1732,7 @@
         "name": "Hedgehog-e",
         "md5": "78a0e3789f6d778e20f9bf3d308a0b19.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             61,
             45,
@@ -2081,12 +1787,7 @@
         "name": "Jamie-a",
         "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             105,
@@ -2097,12 +1798,7 @@
         "name": "Jamie-b",
         "md5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             105,
@@ -2113,12 +1809,7 @@
         "name": "Jamie-c",
         "md5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             105,
@@ -2129,12 +1820,7 @@
         "name": "Jamie-d",
         "md5": "4adb87e6123161fcaf02f7ac022a5757.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             105,
@@ -2145,11 +1831,7 @@
         "name": "Jellyfish-a",
         "md5": "9e6563e417350af3094c2ed02b9b0bbd.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             99,
             86,
@@ -2160,11 +1842,7 @@
         "name": "Jellyfish-b",
         "md5": "31a42fad0891f1298c522a6d5008930a.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             99,
             86,
@@ -2175,11 +1853,7 @@
         "name": "Jellyfish-c",
         "md5": "697262d9ed04467bae52cca786c36bd3.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             99,
             86,
@@ -2190,11 +1864,7 @@
         "name": "Jellyfish-d",
         "md5": "6a949493aaf62954f1c74f8369d494c4.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             99,
             86,
@@ -2205,13 +1875,7 @@
         "name": "Jordyn-a",
         "md5": "8dd2a2abbb8e639da8576b6e72ef9e59.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -2222,13 +1886,7 @@
         "name": "Jordyn-b",
         "md5": "9665f543147961551d8dc6f612d9cc41.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -2239,13 +1897,7 @@
         "name": "Jordyn-c",
         "md5": "ec8c2286070c77ebd9dd40c96eaae3fc.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -2256,13 +1908,7 @@
         "name": "Jordyn-d",
         "md5": "1f9ed7f29800f31ce2ee53196143a3c8.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -2273,10 +1919,7 @@
         "name": "Keyboard-a",
         "md5": "c67d180e964926b6393ac14781541b39.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             72,
             68,
@@ -2287,10 +1930,7 @@
         "name": "Keyboard-b",
         "md5": "dbaf62b33de45093c3c7d13b5d49d637.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             72,
             68,
@@ -2411,10 +2051,7 @@
         "name": "Llama",
         "md5": "07158eb6d62e309bb60a6bc36baf2300.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             100,
             100,
@@ -2425,10 +2062,7 @@
         "name": "Llama-b",
         "md5": "2021eea71514bd2b23e96076750727ae.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             100,
             100,
@@ -2439,10 +2073,7 @@
         "name": "Llama-c",
         "md5": "7837d7247acbc4eebb793452a35aa1f5.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             100,
             100,
@@ -2453,12 +2084,7 @@
         "name": "Max-a",
         "md5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             68,
@@ -2469,12 +2095,7 @@
         "name": "Max-b",
         "md5": "6d8ee139a741cf945d600a8cef0ea2e6.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             68,
@@ -2485,12 +2106,7 @@
         "name": "Max-c",
         "md5": "aa66109994d27de02711f6a0ef6de9ec.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             68,
@@ -2501,12 +2117,7 @@
         "name": "Max-d",
         "md5": "a0dbf509d542c7eff6d2ddfc9c9410f1.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             82,
             68,
@@ -2517,10 +2128,7 @@
         "name": "Microphone-a",
         "md5": "9126b6362313e20578fb88d38902cd4c.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             40,
             88,
@@ -2531,10 +2139,7 @@
         "name": "Microphone-b",
         "md5": "29988ebbde49beaceb06d9eb66138b80.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             40,
             88,
@@ -2545,10 +2150,7 @@
         "name": "Milk-a",
         "md5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             71,
@@ -2559,10 +2161,7 @@
         "name": "Milk-b",
         "md5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             71,
@@ -2573,10 +2172,7 @@
         "name": "Milk-c",
         "md5": "50afc991b6fdad4b6547ba98ecf8a6af.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             47,
             44,
@@ -2587,10 +2183,7 @@
         "name": "Milk-d",
         "md5": "8fc7606a176149d225a541a04fa67473.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             71,
@@ -2601,10 +2194,7 @@
         "name": "Milk-e",
         "md5": "f2373d449b1226c44436dced422c2935.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             68,
             71,
@@ -2747,11 +2337,7 @@
         "name": "Octopus-a",
         "md5": "038df646d2f935d2a5dd601b343fc1d9.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             88,
             86,
@@ -2762,11 +2348,7 @@
         "name": "Octopus-b",
         "md5": "31bdcbdf05688c01aace3fd94c5e82df.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             88,
             86,
@@ -2777,11 +2359,7 @@
         "name": "Octopus-c",
         "md5": "51e80c09323e36489ad452250acd827c.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             88,
             86,
@@ -2792,11 +2370,7 @@
         "name": "Octopus-d",
         "md5": "b4242e6cde0392bb9a5fb43a8f232962.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             88,
             86,
@@ -2807,11 +2381,7 @@
         "name": "Octopus-e",
         "md5": "edfda0a36d9cd8482e3a8dc317107d56.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             88,
             86,
@@ -2822,11 +2392,7 @@
         "name": "Owl-a",
         "md5": "a312273b198fcacf68976e3cc74fadb4.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             113,
             54,
@@ -2837,11 +2403,7 @@
         "name": "Owl-b",
         "md5": "c9916dcfe67302367b05be7f3e5c5ddf.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             113,
             54,
@@ -2852,11 +2414,7 @@
         "name": "Owl-c",
         "md5": "8ec3a2507f1d6dc9b39f7ae5a1ebfdd3.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             113,
             54,
@@ -2867,10 +2425,7 @@
         "name": "Panther-a",
         "md5": "04ca2c122cff11b9bc23834d6f79361e.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             125,
             81,
@@ -2881,10 +2436,7 @@
         "name": "Panther-b",
         "md5": "f8c33765d1105f3bb4cd145fad0f717e.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             125,
             81,
@@ -2895,10 +2447,7 @@
         "name": "Panther-c",
         "md5": "096bf9cad84def12eef2b5d84736b393.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             125,
             81,
@@ -3041,11 +2590,7 @@
         "name": "Pufferfish-a",
         "md5": "81d7db99142a39c9082be2c2183f2175.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             69,
             61,
@@ -3056,11 +2601,7 @@
         "name": "Pufferfish-b",
         "md5": "6ea79950db63f5ac24d6c5091df3836b.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             69,
             61,
@@ -3071,11 +2612,7 @@
         "name": "Pufferfish-c",
         "md5": "4acf5bc398c19d58acf69fce047ee8f6.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             69,
             61,
@@ -3086,11 +2623,7 @@
         "name": "Pufferfish-d",
         "md5": "c214fa8a9ceed06db03664007b8ad5c6.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "ocean",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             69,
             61,
@@ -3101,10 +2634,7 @@
         "name": "Rabbit-a",
         "md5": "2f42891c3f3d63c0e591aeabc5946533.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             84,
             84,
@@ -3115,10 +2645,7 @@
         "name": "Rabbit-b",
         "md5": "80e05ff501040cdc9f52fa6782e06fd2.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             84,
             84,
@@ -3129,10 +2656,7 @@
         "name": "Rabbit-c",
         "md5": "88ed8b7925baa025b6c7fc628a64b9b1.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             84,
             84,
@@ -3143,10 +2667,7 @@
         "name": "Rabbit-d",
         "md5": "5f3b8df4d6ab8a72e887f89f554db0be.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             84,
             84,
@@ -3157,10 +2678,7 @@
         "name": "Rabbit-e",
         "md5": "3003f1135f4aa3b6c361734243621260.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "daria skrybchencko"
-        ],
+        "tags": [],
         "info": [
             84,
             84,
@@ -3182,12 +2700,7 @@
         "name": "Referee-a",
         "md5": "0959403aeb134ed2932a85c77e261122.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -3198,12 +2711,7 @@
         "name": "Referee-b",
         "md5": "866b9e1ad2e0584216dd45fe7d50d6f5.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -3214,12 +2722,7 @@
         "name": "Referee-c",
         "md5": "21a3869435fbd470ef60960a78b06b16.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -3230,12 +2733,7 @@
         "name": "Referee-d",
         "md5": "5e037aca5446a7e57093e45fe6f18c9e.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             76,
             68,
@@ -3356,10 +2854,7 @@
         "name": "Saxophone-a",
         "md5": "e9e4297f5d7e630a384b1dea835ec72d.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             47,
             80,
@@ -3370,10 +2865,7 @@
         "name": "Saxophone-b",
         "md5": "04e5650480bfcf9190aa35bbd8d67b8e.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             47,
             80,
@@ -3417,10 +2909,7 @@
         "name": "Snake-a",
         "md5": "4d06e12d90479461303d828f0970f2d4.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             142,
             68,
@@ -3431,10 +2920,7 @@
         "name": "Snake-b",
         "md5": "a8546a5f9ccaa2bdb678a362c50a17ec.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             142,
             68,
@@ -3445,10 +2931,7 @@
         "name": "Snake-c",
         "md5": "d993a7d70179777c14ac91a07e711d90.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             142,
             68,
@@ -3470,12 +2953,7 @@
         "name": "Soccer Ball",
         "md5": "81ff5ad24454e7a0f1f3ae863bb4dd25.svg",
         "type": "costume",
-        "tags": [
-            "sports",
-            "soccer",
-            "football",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             26,
             26,
@@ -3541,9 +3019,7 @@
         "name": "Speaker",
         "md5": "44dc3a2ec161999545914d1f77332d76.svg",
         "type": "costume",
-        "tags": [
-            "music"
-        ],
+        "tags": [],
         "info": [
             53,
             79,
@@ -3576,10 +3052,7 @@
         "name": "Strawberry-a",
         "md5": "734556fb8e14740f2cbc971238b71d47.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             57,
             58,
@@ -3590,10 +3063,7 @@
         "name": "Strawberry-b",
         "md5": "77dadaa80bc5156f655c2196f57972f7.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             57,
             58,
@@ -3604,10 +3074,7 @@
         "name": "Strawberry-c",
         "md5": "19f933b3cf3e8e150753f8fb9bb7a779.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             57,
             58,
@@ -3618,10 +3085,7 @@
         "name": "Strawberry-d",
         "md5": "8e8057da8457e6167de36b7d3d28b4bb.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             57,
             58,
@@ -3632,10 +3096,7 @@
         "name": "Strawberry-e",
         "md5": "5eb63e64b83f5aa5b75a55329a34efec.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             57,
             58,
@@ -3646,10 +3107,7 @@
         "name": "Takeout-a",
         "md5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             78,
             61,
@@ -3660,10 +3118,7 @@
         "name": "Takeout-b",
         "md5": "48b19c48e32c98a35836ee40e3a7accf.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             78,
             61,
@@ -3674,10 +3129,7 @@
         "name": "Takeout-c",
         "md5": "22d33d87883f8fb26c642eccc9b339f0.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             78,
             61,
@@ -3688,10 +3140,7 @@
         "name": "Takeout-d",
         "md5": "262f1a3730d669dc9d43b3853e397361.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             78,
             61,
@@ -3702,10 +3151,7 @@
         "name": "Takeout-e",
         "md5": "528e9df8c3bd173867be4143f8563e87.svg",
         "type": "costume",
-        "tags": [
-            "food",
-            "alex eben meyer"
-        ],
+        "tags": [],
         "info": [
             78,
             61,
@@ -3760,11 +3206,7 @@
         "name": "Toucan-a",
         "md5": "6c8798e606abd728b112aecedb5dc249.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             80,
             63,
@@ -3775,11 +3217,7 @@
         "name": "Toucan-b",
         "md5": "a3e12be9efa0e7aa83778f6054c9c541.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             80,
             63,
@@ -3790,11 +3228,7 @@
         "name": "Toucan-c",
         "md5": "56522b58a9959fd6152060346129f7cb.svg",
         "type": "costume",
-        "tags": [
-            "animals",
-            "bird",
-            "robert hunter"
-        ],
+        "tags": [],
         "info": [
             80,
             63,
@@ -3805,10 +3239,7 @@
         "name": "Trumpet-a",
         "md5": "8fa7459ed5877bb14c6625e688be70e7.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             37,
             73,
@@ -3819,10 +3250,7 @@
         "name": "Trumpet-b",
         "md5": "7cedda5ec925118f237094cd05381e5d.svg",
         "type": "costume",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
+        "tags": [],
         "info": [
             37,
             73,
@@ -3833,9 +3261,7 @@
         "name": "Unicorn",
         "md5": "a04def38351e7fd805226345cac4fbfe.svg",
         "type": "costume",
-        "tags": [
-            "fantasy"
-        ],
+        "tags": [],
         "info": [
             75,
             75,
@@ -3879,9 +3305,7 @@
         "name": "Witch",
         "md5": "c991196a708294535a1dbdce7189c23c.svg",
         "type": "costume",
-        "tags": [
-            "fantasy"
-        ],
+        "tags": [],
         "info": [
             74,
             59,
@@ -3892,9 +3316,7 @@
         "name": "Wizard",
         "md5": "4df1dd733f6ee4a2d8842478ac2c4661.svg",
         "type": "costume",
-        "tags": [
-            "fantasy"
-        ],
+        "tags": [],
         "info": [
             76,
             86,
@@ -3905,9 +3327,7 @@
         "name": "Wizard1",
         "md5": "e085c97691d16f0cc8a595ce1137e26c.svg",
         "type": "costume",
-        "tags": [
-            "fantasy"
-        ],
+        "tags": [],
         "info": [
             134,
             153,
@@ -3918,9 +3338,7 @@
         "name": "Wizard2",
         "md5": "6db4d9e4229dc50a1b1c91c3c8311d40.svg",
         "type": "costume",
-        "tags": [
-            "fantasy"
-        ],
+        "tags": [],
         "info": [
             69,
             93,

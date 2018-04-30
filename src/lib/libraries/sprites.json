@@ -25,7 +25,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "abby-a [people]",
+                    "costumeName": "abby-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "afab2d2141e9811bd89e385e9628cb5f.svg",
                     "bitmapResolution": 1,
@@ -33,7 +33,7 @@
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-b [people]",
+                    "costumeName": "abby-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1e0116c7c2e5e80c679d0b33f1f5cfb7.svg",
                     "bitmapResolution": 1,
@@ -41,7 +41,7 @@
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-c [people]",
+                    "costumeName": "abby-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b6e23922f23b49ddc6f62f675e77417c.svg",
                     "bitmapResolution": 1,
@@ -49,7 +49,7 @@
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "abby-d [people]",
+                    "costumeName": "abby-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
                     "bitmapResolution": 1,
@@ -95,7 +95,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "apple [food]",
+                    "costumeName": "apple",
                     "baseLayerID": -1,
                     "baseLayerMD5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
                     "bitmapResolution": 1,
@@ -345,7 +345,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "baseball [sports]",
+                    "costumeName": "baseball",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
                     "bitmapResolution": 1,
@@ -393,7 +393,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "basketball [sports,basketball,alex eben meyer]",
+                    "costumeName": "basketball",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b15c425f3eef68e7d095ee91321cb52a.svg",
                     "bitmapResolution": 1,
@@ -439,7 +439,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "bat1-a [animals]",
+                    "costumeName": "bat1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
                     "bitmapResolution": 1,
@@ -447,7 +447,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "bat1-b [animals]",
+                    "costumeName": "bat1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f127434672b872a902346ef3c1af45f2.svg",
                     "bitmapResolution": 1,
@@ -493,7 +493,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "bat2-a [animals]",
+                    "costumeName": "bat2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
                     "bitmapResolution": 1,
@@ -501,7 +501,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "bat2-b [animals]",
+                    "costumeName": "bat2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8aa1d20e4f7761becbe9bafa75290465.svg",
                     "bitmapResolution": 1,
@@ -693,7 +693,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "ben-a [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "ben-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7f32d8d78ad64f50c018b7b578de2e18.svg",
                     "bitmapResolution": 1,
@@ -701,7 +701,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "ben-b [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "ben-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "fb012e5d1baf80d33ae95fba3511151a.svg",
                     "bitmapResolution": 1,
@@ -709,7 +709,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "ben-c [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "ben-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "be0b1397965cf8ff2c4cecb84795138a.svg",
                     "bitmapResolution": 1,
@@ -717,7 +717,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "ben-d [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "ben-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e2aefdb538ebbb24e1ab1464f75ef134.svg",
                     "bitmapResolution": 1,
@@ -1326,7 +1326,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "casey-a [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "30a4dafa852311b2a07d72e1bb060326.svg",
                     "bitmapResolution": 1,
@@ -1334,7 +1334,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "casey-b [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c8c0a25bebac8b35b8eae7ddd716d061.svg",
                     "bitmapResolution": 1,
@@ -1342,7 +1342,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "casey-c [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "104d363c48c373384c6c80abbbbb0ad6.svg",
                     "bitmapResolution": 1,
@@ -1350,7 +1350,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "casey-d [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3d4bddb908bf912b938c111bfa38c28a.svg",
                     "bitmapResolution": 1,
@@ -1358,7 +1358,7 @@
                     "rotationCenterY": 72
                 }
             ],
-            "currentCostumeIndex": 3,
+            "currentCostumeIndex": 0,
             "scratchX": -138,
             "scratchY": 11,
             "scale": 1,
@@ -1622,7 +1622,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur1-a [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "75d367961807fff8e81f556da81dec24.svg",
                     "bitmapResolution": 1,
@@ -1630,7 +1630,7 @@
                     "rotationCenterY": 92
                 },
                 {
-                    "costumeName": "dinosaur1-b [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
                     "bitmapResolution": 1,
@@ -1638,7 +1638,7 @@
                     "rotationCenterY": 47
                 },
                 {
-                    "costumeName": "dinosaur1-c [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur1-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "02078a81abd2e10cb62ebcc853a40c92.svg",
                     "bitmapResolution": 1,
@@ -1646,7 +1646,7 @@
                     "rotationCenterY": 91
                 },
                 {
-                    "costumeName": "dinosaur1-d [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur1-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c9ed031bc9bf11416142880f89436be9.svg",
                     "bitmapResolution": 1,
@@ -1694,7 +1694,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur2-a [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5493f5deffe7aed451cd8b255740de4a.svg",
                     "bitmapResolution": 1,
@@ -1702,7 +1702,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dinosaur2-b [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "70bba739b7df0bd08abb31026d078ee7.svg",
                     "bitmapResolution": 1,
@@ -1710,7 +1710,7 @@
                     "rotationCenterY": 67
                 },
                 {
-                    "costumeName": "dinosaur2-c [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4a51679d86aafcc9cee1c010fc141288.svg",
                     "bitmapResolution": 1,
@@ -1718,7 +1718,7 @@
                     "rotationCenterY": 67
                 },
                 {
-                    "costumeName": "dinosaur2-d [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur2-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "47053664449b24749aaf199925b19f8e.svg",
                     "bitmapResolution": 1,
@@ -1766,7 +1766,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur3-a [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur3-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "17636db6f607c14a03a36e18abfea86a.svg",
                     "bitmapResolution": 1,
@@ -1774,7 +1774,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dinosaur3-b [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur3-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
                     "bitmapResolution": 1,
@@ -1782,7 +1782,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dinosaur3-c [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur3-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4700613077afa7c62659b3fd7d7c748e.svg",
                     "bitmapResolution": 1,
@@ -1790,7 +1790,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dinosaur3-d [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur3-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
                     "bitmapResolution": 1,
@@ -1798,7 +1798,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dinosaur3-e [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur3-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "00e24e40535a1a621fee0f70895b2b61.svg",
                     "bitmapResolution": 1,
@@ -1846,7 +1846,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur4-a [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur4-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9da591f8a6da251c800adb12a02c43cb.svg",
                     "bitmapResolution": 1,
@@ -1854,7 +1854,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "dinosaur4-b [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur4-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
                     "bitmapResolution": 1,
@@ -1862,7 +1862,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "dinosaur4-c [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur4-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
                     "bitmapResolution": 1,
@@ -1870,7 +1870,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "dinosaur4-d [animals,dinosaur,alex eben meyer]",
+                    "costumeName": "dinosaur4-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "45061ff84a25723625d04f0476687633.svg",
                     "bitmapResolution": 1,
@@ -2004,7 +2004,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dog1-a [animals]",
+                    "costumeName": "dog1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
                     "bitmapResolution": 1,
@@ -2012,7 +2012,7 @@
                     "rotationCenterY": 80
                 },
                 {
-                    "costumeName": "dog1-b [animals]",
+                    "costumeName": "dog1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "598f4aa3d8f671375d1d2b3acf753416.svg",
                     "bitmapResolution": 1,
@@ -2058,7 +2058,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dog2-a [animals]",
+                    "costumeName": "dog2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e921f865b19b27cd99e16a341dbf09c2.svg",
                     "bitmapResolution": 1,
@@ -2066,7 +2066,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "dog2-b [animals]",
+                    "costumeName": "dog2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "891f2fb7daf79ba8b224a9173eeb0a63.svg",
                     "bitmapResolution": 1,
@@ -2074,7 +2074,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "dog2-c [animals]",
+                    "costumeName": "dog2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cd236d5eef4431dea82983ac9eec406b.svg",
                     "bitmapResolution": 1,
@@ -2167,7 +2167,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dorian-a [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
                     "bitmapResolution": 1,
@@ -2175,7 +2175,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-b [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d0b58b672606601ecfa3a406b537fa10.svg",
                     "bitmapResolution": 1,
@@ -2183,7 +2183,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-c [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "445e461c73a5920098764a4cbad5bfe0.svg",
                     "bitmapResolution": 1,
@@ -2191,7 +2191,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "dorian-d [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "dorian-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ba93ede3bbf75c0f707b0fb982bc27e8.svg",
                     "bitmapResolution": 1,
@@ -2314,7 +2314,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "drum-a [music,andrew rae]",
+                    "costumeName": "drum-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "dd66742bc2a3cfe5a6f9f540afd2e15c.svg",
                     "bitmapResolution": 1,
@@ -2322,7 +2322,7 @@
                     "rotationCenterY": 60
                 },
                 {
-                    "costumeName": "drum-b [music,andrew rae]",
+                    "costumeName": "drum-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9c9d371da382c227e43f09b1a748c554.svg",
                     "bitmapResolution": 1,
@@ -2401,7 +2401,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "drum-kit [music,andrew rae]",
+                    "costumeName": "drum-kit",
                     "baseLayerID": -1,
                     "baseLayerMD5": "131d040d86ecea62ccd175a8709c7866.svg",
                     "bitmapResolution": 1,
@@ -2409,7 +2409,7 @@
                     "rotationCenterY": 78
                 },
                 {
-                    "costumeName": "drum-kit-b [music,andrew rae]",
+                    "costumeName": "drum-kit-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ff14be049146cf9ab142e0951cb9b735.svg",
                     "bitmapResolution": 1,
@@ -2480,7 +2480,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "drum-cymbal-a [music,andrew rae]",
+                    "costumeName": "drum-cymbal-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d6d41862fda966df1455d2dbff5e1988.svg",
                     "bitmapResolution": 1,
@@ -2488,7 +2488,7 @@
                     "rotationCenterY": 74
                 },
                 {
-                    "costumeName": "drum-cymbal-b [music,andrew rae]",
+                    "costumeName": "drum-cymbal-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e6b7d7d8874bc4b7be58afe927157554.svg",
                     "bitmapResolution": 1,
@@ -2535,7 +2535,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "drum-highhat-a [music,andrew rae]",
+                    "costumeName": "drum-highhat-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "81fb79151a63cb096258607451cc2cf5.svg",
                     "bitmapResolution": 1,
@@ -2543,7 +2543,7 @@
                     "rotationCenterY": 73
                 },
                 {
-                    "costumeName": "drum-highhat-b [music,andrew rae]",
+                    "costumeName": "drum-highhat-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e3c273e4ad1a24583064f9b61fcd753a.svg",
                     "bitmapResolution": 1,
@@ -2606,7 +2606,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "drum-snare-a [music,andrew rae]",
+                    "costumeName": "drum-snare-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
                     "bitmapResolution": 1,
@@ -2614,7 +2614,7 @@
                     "rotationCenterY": 50
                 },
                 {
-                    "costumeName": "drum-snare-b [music,andrew rae]",
+                    "costumeName": "drum-snare-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f6d2f2a6e1055dab6262336625ddf652.svg",
                     "bitmapResolution": 1,
@@ -2705,7 +2705,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "egg-a [food,alex eben meyer]",
+                    "costumeName": "egg-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bc723738dfe626c5c3bb90970d985961.svg",
                     "bitmapResolution": 1,
@@ -2713,7 +2713,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "egg-b [food,alex eben meyer]",
+                    "costumeName": "egg-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "83016b7ff817f99be4a454600b4a78fc.svg",
                     "bitmapResolution": 1,
@@ -2721,7 +2721,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "egg-c [food,alex eben meyer]",
+                    "costumeName": "egg-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d9a44d151fbd909bdbbcf7877055af6d.svg",
                     "bitmapResolution": 1,
@@ -2729,7 +2729,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "egg-d [food,alex eben meyer]",
+                    "costumeName": "egg-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c91c7f72b8523b0910a84bce7d99c37b.svg",
                     "bitmapResolution": 1,
@@ -2737,7 +2737,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "egg-e [food,alex eben meyer]",
+                    "costumeName": "egg-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "65c15516e62596e1f72e874359fc7254.svg",
                     "bitmapResolution": 1,
@@ -2881,7 +2881,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "fish-a [animals,ocean,daria skrybchencko]",
+                    "costumeName": "fish-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8598752b1b7b9892c23817c4ed848e7d.svg",
                     "bitmapResolution": 1,
@@ -2889,7 +2889,7 @@
                     "rotationCenterY": 45
                 },
                 {
-                    "costumeName": "fish-b [animals,ocean,daria skrybchencko]",
+                    "costumeName": "fish-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "52032e4310f9855b89f873b528a5e928.svg",
                     "bitmapResolution": 1,
@@ -2897,7 +2897,7 @@
                     "rotationCenterY": 45
                 },
                 {
-                    "costumeName": "fish-c [animals,ocean,daria skrybchencko]",
+                    "costumeName": "fish-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "06c139dcfe45bf31ef45e7030b77dc36.svg",
                     "bitmapResolution": 1,
@@ -2905,7 +2905,7 @@
                     "rotationCenterY": 45
                 },
                 {
-                    "costumeName": "fish-d [animals,ocean,daria skrybchencko]",
+                    "costumeName": "fish-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6a3a2c97374c157e0dbc0a03c2079284.svg",
                     "bitmapResolution": 1,
@@ -2952,7 +2952,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "fox-a [animals,robert hunter]",
+                    "costumeName": "fox-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "fab5488e600e81565f0fc285fc7050f8.svg",
                     "bitmapResolution": 1,
@@ -2960,7 +2960,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "fox-b [animals,robert hunter]",
+                    "costumeName": "fox-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "afb192ae250a74dfac18bfc52d1d6266.svg",
                     "bitmapResolution": 1,
@@ -2968,7 +2968,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "fox-c [animals,robert hunter]",
+                    "costumeName": "fox-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "29f858d384db7998c0e5183f6a31a3b4.svg",
                     "bitmapResolution": 1,
@@ -3225,7 +3225,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "goalie-a [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "goalie-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "86b0610ea21fdecb99795c5e6d52768c.svg",
                     "bitmapResolution": 1,
@@ -3233,7 +3233,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "goalie-b [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "goalie-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "af3ef5125d187772240a1120e7eb67ac.svg",
                     "bitmapResolution": 1,
@@ -3241,7 +3241,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "goalie-c [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "goalie-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7c9377cedae11a094d2e77bed3edb884.svg",
                     "bitmapResolution": 1,
@@ -3249,7 +3249,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "goalie-d [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "goalie-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bd628034d356d30b0e9b563447471290.svg",
                     "bitmapResolution": 1,
@@ -3257,7 +3257,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "goalie-e [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "goalie-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b3f6c4c0be9a0f71e9486dea51e513c3.svg",
                     "bitmapResolution": 1,
@@ -3420,7 +3420,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "guitar-a [music,andrew rae]",
+                    "costumeName": "guitar-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cb8c2a5e69da7538e1dd73cb7ff4a666.svg",
                     "bitmapResolution": 1,
@@ -3428,7 +3428,7 @@
                     "rotationCenterY": 83
                 },
                 {
-                    "costumeName": "guitar-b [music,andrew rae]",
+                    "costumeName": "guitar-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "fed44bd1091628c060f45060a84f2885.svg",
                     "bitmapResolution": 1,
@@ -3531,7 +3531,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "guitar-electric2-a [music,andrew rae]",
+                    "costumeName": "guitar-electric2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fc433b89038f9e16092c9f4d7514cca.svg",
                     "bitmapResolution": 1,
@@ -3539,7 +3539,7 @@
                     "rotationCenterY": 94
                 },
                 {
-                    "costumeName": "guitar-electric2-b [music,andrew rae]",
+                    "costumeName": "guitar-electric2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
                     "bitmapResolution": 1,
@@ -3642,7 +3642,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "guitar-electric1-a [music,andrew rae]",
+                    "costumeName": "guitar-electric1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
                     "bitmapResolution": 1,
@@ -3650,7 +3650,7 @@
                     "rotationCenterY": 85
                 },
                 {
-                    "costumeName": "guitar-electric1-b [music,andrew rae]",
+                    "costumeName": "guitar-electric1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3632184c19c66a088a99568570d61b13.svg",
                     "bitmapResolution": 1,
@@ -3697,7 +3697,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "hedgehog-a [animals,daria skrybchencko]",
+                    "costumeName": "hedgehog-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "32416e6b2ef8e45fb5fd10778c1b9a9f.svg",
                     "bitmapResolution": 1,
@@ -3705,7 +3705,7 @@
                     "rotationCenterY": 56
                 },
                 {
-                    "costumeName": "hedgehog-b [animals,daria skrybchencko]",
+                    "costumeName": "hedgehog-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4d3ccc06660e07b55bd38246e1f82f7f.svg",
                     "bitmapResolution": 1,
@@ -3713,7 +3713,7 @@
                     "rotationCenterY": 56
                 },
                 {
-                    "costumeName": "hedgehog-c [animals,daria skrybchencko]",
+                    "costumeName": "hedgehog-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "2446f79c0f553594cfbcdbe6b1e459a5.svg",
                     "bitmapResolution": 1,
@@ -3721,7 +3721,7 @@
                     "rotationCenterY": 56
                 },
                 {
-                    "costumeName": "hedgehog-d [animals,daria skrybchencko]",
+                    "costumeName": "hedgehog-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bdb7c8e86125092da0c4848d1ffd901c.svg",
                     "bitmapResolution": 1,
@@ -3729,7 +3729,7 @@
                     "rotationCenterY": 56
                 },
                 {
-                    "costumeName": "hedgehog-e [animals,daria skrybchencko]",
+                    "costumeName": "hedgehog-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "78a0e3789f6d778e20f9bf3d308a0b19.svg",
                     "bitmapResolution": 1,
@@ -3890,7 +3890,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jamie-a [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
                     "bitmapResolution": 1,
@@ -3898,7 +3898,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-b [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
                     "bitmapResolution": 1,
@@ -3906,7 +3906,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-c [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
                     "bitmapResolution": 1,
@@ -3914,7 +3914,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-d [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "jamie-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4adb87e6123161fcaf02f7ac022a5757.svg",
                     "bitmapResolution": 1,
@@ -3962,7 +3962,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jellyfish-a [animals,ocean,daria skrybchencko]",
+                    "costumeName": "jellyfish-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9e6563e417350af3094c2ed02b9b0bbd.svg",
                     "bitmapResolution": 1,
@@ -3970,7 +3970,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "jellyfish-b [animals,ocean,daria skrybchencko]",
+                    "costumeName": "jellyfish-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "31a42fad0891f1298c522a6d5008930a.svg",
                     "bitmapResolution": 1,
@@ -3978,7 +3978,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "jellyfish-c [animals,ocean,daria skrybchencko]",
+                    "costumeName": "jellyfish-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "697262d9ed04467bae52cca786c36bd3.svg",
                     "bitmapResolution": 1,
@@ -3986,7 +3986,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "jellyfish-d [animals,ocean,daria skrybchencko]",
+                    "costumeName": "jellyfish-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6a949493aaf62954f1c74f8369d494c4.svg",
                     "bitmapResolution": 1,
@@ -4036,7 +4036,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jordyn-a [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "jordyn-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8dd2a2abbb8e639da8576b6e72ef9e59.svg",
                     "bitmapResolution": 1,
@@ -4044,7 +4044,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "jordyn-b [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "jordyn-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9665f543147961551d8dc6f612d9cc41.svg",
                     "bitmapResolution": 1,
@@ -4052,7 +4052,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "jordyn-c [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "jordyn-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ec8c2286070c77ebd9dd40c96eaae3fc.svg",
                     "bitmapResolution": 1,
@@ -4060,7 +4060,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "jordyn-d [sports,soccer,football,people,alex eben meyer]",
+                    "costumeName": "jordyn-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1f9ed7f29800f31ce2ee53196143a3c8.svg",
                     "bitmapResolution": 1,
@@ -4163,7 +4163,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "keyboard-a [music,andrew rae]",
+                    "costumeName": "keyboard-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c67d180e964926b6393ac14781541b39.svg",
                     "bitmapResolution": 1,
@@ -4171,7 +4171,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "keyboard-b [music,andrew rae]",
+                    "costumeName": "keyboard-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "dbaf62b33de45093c3c7d13b5d49d637.svg",
                     "bitmapResolution": 1,
@@ -4442,7 +4442,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "llama [animals,robert hunter]",
+                    "costumeName": "llama",
                     "baseLayerID": -1,
                     "baseLayerMD5": "07158eb6d62e309bb60a6bc36baf2300.svg",
                     "bitmapResolution": 1,
@@ -4450,7 +4450,7 @@
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "llama-b [animals,robert hunter]",
+                    "costumeName": "llama-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "2021eea71514bd2b23e96076750727ae.svg",
                     "bitmapResolution": 1,
@@ -4458,7 +4458,7 @@
                     "rotationCenterY": 100
                 },
                 {
-                    "costumeName": "llama-c [animals,robert hunter]",
+                    "costumeName": "llama-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7837d7247acbc4eebb793452a35aa1f5.svg",
                     "bitmapResolution": 1,
@@ -4507,7 +4507,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "max-a [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
                     "bitmapResolution": 1,
@@ -4515,7 +4515,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-b [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6d8ee139a741cf945d600a8cef0ea2e6.svg",
                     "bitmapResolution": 1,
@@ -4523,7 +4523,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-c [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "aa66109994d27de02711f6a0ef6de9ec.svg",
                     "bitmapResolution": 1,
@@ -4531,7 +4531,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "max-d [sports,basketball,people,alex eben meyer]",
+                    "costumeName": "max-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a0dbf509d542c7eff6d2ddfc9c9410f1.svg",
                     "bitmapResolution": 1,
@@ -4642,7 +4642,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "microphone-a [music,andrew rae]",
+                    "costumeName": "microphone-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9126b6362313e20578fb88d38902cd4c.svg",
                     "bitmapResolution": 1,
@@ -4650,7 +4650,7 @@
                     "rotationCenterY": 88
                 },
                 {
-                    "costumeName": "microphone-b [music,andrew rae]",
+                    "costumeName": "microphone-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "29988ebbde49beaceb06d9eb66138b80.svg",
                     "bitmapResolution": 1,
@@ -4697,7 +4697,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "milk-a [food,alex eben meyer]",
+                    "costumeName": "milk-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
                     "bitmapResolution": 1,
@@ -4705,7 +4705,7 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "milk-b [food,alex eben meyer]",
+                    "costumeName": "milk-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
                     "bitmapResolution": 1,
@@ -4713,7 +4713,7 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "milk-c [food,alex eben meyer]",
+                    "costumeName": "milk-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "50afc991b6fdad4b6547ba98ecf8a6af.svg",
                     "bitmapResolution": 1,
@@ -4721,7 +4721,7 @@
                     "rotationCenterY": 44
                 },
                 {
-                    "costumeName": "milk-d [food,alex eben meyer]",
+                    "costumeName": "milk-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8fc7606a176149d225a541a04fa67473.svg",
                     "bitmapResolution": 1,
@@ -4729,7 +4729,7 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "milk-e [food,alex eben meyer]",
+                    "costumeName": "milk-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f2373d449b1226c44436dced422c2935.svg",
                     "bitmapResolution": 1,
@@ -4981,7 +4981,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "octopus-a [animals,ocean,daria skrybchencko]",
+                    "costumeName": "octopus-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "038df646d2f935d2a5dd601b343fc1d9.svg",
                     "bitmapResolution": 1,
@@ -4989,7 +4989,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "octopus-b [animals,ocean,daria skrybchencko]",
+                    "costumeName": "octopus-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "31bdcbdf05688c01aace3fd94c5e82df.svg",
                     "bitmapResolution": 1,
@@ -4997,7 +4997,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "octopus-c [animals,ocean,daria skrybchencko]",
+                    "costumeName": "octopus-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "51e80c09323e36489ad452250acd827c.svg",
                     "bitmapResolution": 1,
@@ -5005,7 +5005,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "octopus-d [animals,ocean,daria skrybchencko]",
+                    "costumeName": "octopus-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b4242e6cde0392bb9a5fb43a8f232962.svg",
                     "bitmapResolution": 1,
@@ -5013,7 +5013,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "octopus-e [animals,ocean,daria skrybchencko]",
+                    "costumeName": "octopus-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "edfda0a36d9cd8482e3a8dc317107d56.svg",
                     "bitmapResolution": 1,
@@ -5061,7 +5061,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "owl-a [animals,bird,robert hunter]",
+                    "costumeName": "owl-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a312273b198fcacf68976e3cc74fadb4.svg",
                     "bitmapResolution": 1,
@@ -5069,7 +5069,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "owl-b [animals,bird,robert hunter]",
+                    "costumeName": "owl-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c9916dcfe67302367b05be7f3e5c5ddf.svg",
                     "bitmapResolution": 1,
@@ -5077,7 +5077,7 @@
                     "rotationCenterY": 54
                 },
                 {
-                    "costumeName": "owl-c [animals,bird,robert hunter]",
+                    "costumeName": "owl-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8ec3a2507f1d6dc9b39f7ae5a1ebfdd3.svg",
                     "bitmapResolution": 1,
@@ -5124,7 +5124,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "panther-a [animals,robert hunter]",
+                    "costumeName": "panther-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "04ca2c122cff11b9bc23834d6f79361e.svg",
                     "bitmapResolution": 1,
@@ -5132,7 +5132,7 @@
                     "rotationCenterY": 81
                 },
                 {
-                    "costumeName": "panther-b [animals,robert hunter]",
+                    "costumeName": "panther-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f8c33765d1105f3bb4cd145fad0f717e.svg",
                     "bitmapResolution": 1,
@@ -5140,7 +5140,7 @@
                     "rotationCenterY": 81
                 },
                 {
-                    "costumeName": "panther-c [animals,robert hunter]",
+                    "costumeName": "panther-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "096bf9cad84def12eef2b5d84736b393.svg",
                     "bitmapResolution": 1,
@@ -5428,7 +5428,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "pufferfish-a [animals,ocean,daria skrybchencko]",
+                    "costumeName": "pufferfish-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "81d7db99142a39c9082be2c2183f2175.svg",
                     "bitmapResolution": 1,
@@ -5436,7 +5436,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "pufferfish-b [animals,ocean,daria skrybchencko]",
+                    "costumeName": "pufferfish-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6ea79950db63f5ac24d6c5091df3836b.svg",
                     "bitmapResolution": 1,
@@ -5444,7 +5444,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "pufferfish-c [animals,ocean,daria skrybchencko]",
+                    "costumeName": "pufferfish-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4acf5bc398c19d58acf69fce047ee8f6.svg",
                     "bitmapResolution": 1,
@@ -5452,7 +5452,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "pufferfish-d [animals,ocean,daria skrybchencko]",
+                    "costumeName": "pufferfish-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c214fa8a9ceed06db03664007b8ad5c6.svg",
                     "bitmapResolution": 1,
@@ -5499,7 +5499,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "rabbit-a [animals,daria skrybchencko]",
+                    "costumeName": "rabbit-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "2f42891c3f3d63c0e591aeabc5946533.svg",
                     "bitmapResolution": 1,
@@ -5507,7 +5507,7 @@
                     "rotationCenterY": 84
                 },
                 {
-                    "costumeName": "rabbit-b [animals,daria skrybchencko]",
+                    "costumeName": "rabbit-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "80e05ff501040cdc9f52fa6782e06fd2.svg",
                     "bitmapResolution": 1,
@@ -5515,7 +5515,7 @@
                     "rotationCenterY": 84
                 },
                 {
-                    "costumeName": "rabbit-c [animals,daria skrybchencko]",
+                    "costumeName": "rabbit-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "88ed8b7925baa025b6c7fc628a64b9b1.svg",
                     "bitmapResolution": 1,
@@ -5523,7 +5523,7 @@
                     "rotationCenterY": 84
                 },
                 {
-                    "costumeName": "rabbit-d [animals,daria skrybchencko]",
+                    "costumeName": "rabbit-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5f3b8df4d6ab8a72e887f89f554db0be.svg",
                     "bitmapResolution": 1,
@@ -5531,7 +5531,7 @@
                     "rotationCenterY": 84
                 },
                 {
-                    "costumeName": "rabbit-e [animals,daria skrybchencko]",
+                    "costumeName": "rabbit-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3003f1135f4aa3b6c361734243621260.svg",
                     "bitmapResolution": 1,
@@ -5624,7 +5624,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "referee-a [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "referee-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "0959403aeb134ed2932a85c77e261122.svg",
                     "bitmapResolution": 1,
@@ -5632,7 +5632,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "referee-b [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "referee-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "866b9e1ad2e0584216dd45fe7d50d6f5.svg",
                     "bitmapResolution": 1,
@@ -5640,7 +5640,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "referee-c [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "referee-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "21a3869435fbd470ef60960a78b06b16.svg",
                     "bitmapResolution": 1,
@@ -5648,7 +5648,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "referee-d [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "referee-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5e037aca5446a7e57093e45fe6f18c9e.svg",
                     "bitmapResolution": 1,
@@ -5911,7 +5911,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "saxophone-a [music,andrew rae]",
+                    "costumeName": "saxophone-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e9e4297f5d7e630a384b1dea835ec72d.svg",
                     "bitmapResolution": 1,
@@ -5919,7 +5919,7 @@
                     "rotationCenterY": 80
                 },
                 {
-                    "costumeName": "saxophone-b [music,andrew rae]",
+                    "costumeName": "saxophone-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "04e5650480bfcf9190aa35bbd8d67b8e.svg",
                     "bitmapResolution": 1,
@@ -6026,7 +6026,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "snake-a [animals,robert hunter]",
+                    "costumeName": "snake-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4d06e12d90479461303d828f0970f2d4.svg",
                     "bitmapResolution": 1,
@@ -6034,7 +6034,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "snake-b [animals,robert hunter]",
+                    "costumeName": "snake-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a8546a5f9ccaa2bdb678a362c50a17ec.svg",
                     "bitmapResolution": 1,
@@ -6042,7 +6042,7 @@
                     "rotationCenterY": 68
                 },
                 {
-                    "costumeName": "snake-c [animals,robert hunter]",
+                    "costumeName": "snake-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d993a7d70179777c14ac91a07e711d90.svg",
                     "bitmapResolution": 1,
@@ -6135,7 +6135,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "soccer ball [sports,soccer,football,alex eben meyer]",
+                    "costumeName": "soccer ball",
                     "baseLayerID": -1,
                     "baseLayerMD5": "81ff5ad24454e7a0f1f3ae863bb4dd25.svg",
                     "bitmapResolution": 1,
@@ -6557,7 +6557,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "speaker [music]",
+                    "costumeName": "speaker",
                     "baseLayerID": -1,
                     "baseLayerMD5": "44dc3a2ec161999545914d1f77332d76.svg",
                     "bitmapResolution": 1,
@@ -6656,7 +6656,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "strawberry-a [food,alex eben meyer]",
+                    "costumeName": "strawberry-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "734556fb8e14740f2cbc971238b71d47.svg",
                     "bitmapResolution": 1,
@@ -6664,7 +6664,7 @@
                     "rotationCenterY": 58
                 },
                 {
-                    "costumeName": "strawberry-b [food,alex eben meyer]",
+                    "costumeName": "strawberry-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "77dadaa80bc5156f655c2196f57972f7.svg",
                     "bitmapResolution": 1,
@@ -6672,7 +6672,7 @@
                     "rotationCenterY": 58
                 },
                 {
-                    "costumeName": "strawberry-c [food,alex eben meyer]",
+                    "costumeName": "strawberry-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "19f933b3cf3e8e150753f8fb9bb7a779.svg",
                     "bitmapResolution": 1,
@@ -6680,7 +6680,7 @@
                     "rotationCenterY": 58
                 },
                 {
-                    "costumeName": "strawberry-d [food,alex eben meyer]",
+                    "costumeName": "strawberry-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8e8057da8457e6167de36b7d3d28b4bb.svg",
                     "bitmapResolution": 1,
@@ -6688,7 +6688,7 @@
                     "rotationCenterY": 58
                 },
                 {
-                    "costumeName": "strawberry-e [food,alex eben meyer]",
+                    "costumeName": "strawberry-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5eb63e64b83f5aa5b75a55329a34efec.svg",
                     "bitmapResolution": 1,
@@ -6735,7 +6735,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "takeout-a [food,alex eben meyer]",
+                    "costumeName": "takeout-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
                     "bitmapResolution": 1,
@@ -6743,7 +6743,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "takeout-b [food,alex eben meyer]",
+                    "costumeName": "takeout-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "48b19c48e32c98a35836ee40e3a7accf.svg",
                     "bitmapResolution": 1,
@@ -6751,7 +6751,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "takeout-c [food,alex eben meyer]",
+                    "costumeName": "takeout-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "22d33d87883f8fb26c642eccc9b339f0.svg",
                     "bitmapResolution": 1,
@@ -6759,7 +6759,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "takeout-d [food,alex eben meyer]",
+                    "costumeName": "takeout-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "262f1a3730d669dc9d43b3853e397361.svg",
                     "bitmapResolution": 1,
@@ -6767,7 +6767,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "takeout-e [food,alex eben meyer]",
+                    "costumeName": "takeout-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "528e9df8c3bd173867be4143f8563e87.svg",
                     "bitmapResolution": 1,
@@ -6883,7 +6883,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "toucan-a [animals,bird,robert hunter]",
+                    "costumeName": "toucan-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6c8798e606abd728b112aecedb5dc249.svg",
                     "bitmapResolution": 1,
@@ -6891,7 +6891,7 @@
                     "rotationCenterY": 63
                 },
                 {
-                    "costumeName": "toucan-b [animals,bird,robert hunter]",
+                    "costumeName": "toucan-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a3e12be9efa0e7aa83778f6054c9c541.svg",
                     "bitmapResolution": 1,
@@ -6899,7 +6899,7 @@
                     "rotationCenterY": 63
                 },
                 {
-                    "costumeName": "toucan-c [animals,bird,robert hunter]",
+                    "costumeName": "toucan-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "56522b58a9959fd6152060346129f7cb.svg",
                     "bitmapResolution": 1,
@@ -7002,7 +7002,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "trumpet-a [music,andrew rae]",
+                    "costumeName": "trumpet-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8fa7459ed5877bb14c6625e688be70e7.svg",
                     "bitmapResolution": 1,
@@ -7010,7 +7010,7 @@
                     "rotationCenterY": 73
                 },
                 {
-                    "costumeName": "trumpet-b [music,andrew rae]",
+                    "costumeName": "trumpet-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7cedda5ec925118f237094cd05381e5d.svg",
                     "bitmapResolution": 1,
@@ -7056,7 +7056,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "unicorn [fantasy]",
+                    "costumeName": "unicorn",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a04def38351e7fd805226345cac4fbfe.svg",
                     "bitmapResolution": 1,
@@ -7162,7 +7162,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "witch [fantasy]",
+                    "costumeName": "witch",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c991196a708294535a1dbdce7189c23c.svg",
                     "bitmapResolution": 1,
@@ -7208,7 +7208,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "wizard [fantasy]",
+                    "costumeName": "wizard",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4df1dd733f6ee4a2d8842478ac2c4661.svg",
                     "bitmapResolution": 1,
@@ -7254,7 +7254,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "wizard1 [fantasy]",
+                    "costumeName": "wizard1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e085c97691d16f0cc8a595ce1137e26c.svg",
                     "bitmapResolution": 1,
@@ -7300,7 +7300,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "wizard2 [fantasy]",
+                    "costumeName": "wizard2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6db4d9e4229dc50a1b1c91c3c8311d40.svg",
                     "bitmapResolution": 1,

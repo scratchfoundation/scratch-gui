@@ -4,40 +4,46 @@
 $main-button-size: 2.75rem;
 
 .modal-content {
-    width: 600px;
+    width: 552px;
 }
 
 .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: $ui-white;
     padding: 1.5rem 2.25rem;
-}
-
-.visualization-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.camera-feed-container {
-    background: $ui-primary;
-    border: 1px solid $ui-black-transparent;
-    border-radius: 5px;
-    padding: 3px;
-
 }
 
 .camera-feed-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    background: $ui-primary;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 4px;
+    padding: 3px;
+
     width: 480px;
     height: 360px;
     position: relative;
-    border-radius: 1px solid $ui-black-transparent;
+    overflow: hidden;
 }
 
 .canvas {
+    position: absolute;
     width: 480px;
     height: 360px;
+}
+
+.loading-text {
+    position: absolute;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary-transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
 }
 
 .help-text {
@@ -53,10 +59,18 @@ $main-button-size: 2.75rem;
     color: $motion-primary;
 }
 
+.disabled-text {
+    color: $text-primary;
+    opacity: 0.25;
+}
+
 .main-button-row {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
     margin-top: 15px;
+    width: 100%;
 }
 
 /* Action Menu */
@@ -76,15 +90,18 @@ $main-button-size: 2.75rem;
     width: $main-button-size;
     height: $main-button-size;
     box-shadow: 0 0 0 4px $motion-transparent;
-    z-index: 20; /* TODO reorder layout to prevent z-index need */
-    transition: transform, box-shadow 0.5s;
 }
 
 .main-button:hover {
     background: $pen-primary;
-
-    /* transform: scale(1.1); */
     box-shadow: 0 0 0 6px $motion-transparent;
+}
+
+.main-button:disabled {
+    background: $text-primary;
+    border-color: $ui-black-transparent;
+    box-shadow: none;
+    opacity: 0.25;
 }
 
 .main-icon {
@@ -92,32 +109,13 @@ $main-button-size: 2.75rem;
     height: calc($main-button-size - 1rem);
 }
 
-
-/* Action Menu */
-
-
-
-/* .main-button-row button {
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.25rem;
-    background: transparent;
-    border: none;
-} */
-
-/* .main-button-row button:disabled {
-    opacity: 0.25;
-}
-
-.main-button-row button:active, .main-button-row button:focus {
-    outline: none;
-} */
-
 .button-row {
     font-weight: bolder;
     text-align: right;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 480px;
 }
 
 .button-row button {
@@ -134,28 +132,4 @@ $main-button-size: 2.75rem;
     background: $motion-primary;
     border: $motion-primary;
     color: white;
-}
-
-.button-row button + button {
-    margin-left: 0.5rem;
-}
-
-/* .main-button {
-    text-align: center;
-} */
-
-.capture-button {
-    overflow: visible;
-}
-
-.capture-button-circle {
-    fill: $motion-primary;
-    /* opacity: 0.25; */
-    stroke: $motion-tertiary;
-}
-
-.capture-button-circle-outline {
-    fill: $ui-black-transparent;
-    opacity: 0.25;
-    transition: 0.1s;
 }

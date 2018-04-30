@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import CameraModalComponent from '../components/camera-modal/camera-modal.jsx';
-import {ModalVideoManager} from '../lib/camera.js';
+import ModalVideoManager from '../lib/video/modal-video-manager.js';
 
 import {
     closeCameraCapture
@@ -14,9 +14,11 @@ class CameraModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleAccess',
             'handleBack',
             'handleCancel',
             'handleCapture',
+            'handleLoaded',
             'handleSubmit',
             'setCanvas'
             // 'enableVideo'
@@ -26,7 +28,9 @@ class CameraModal extends React.Component {
         this.videoDevice = null;
 
         this.state = {
-            capture: null
+            capture: null,
+            access: false,
+            loaded: false
         };
     }
     componentWillUnmount () {
@@ -35,19 +39,27 @@ class CameraModal extends React.Component {
         this.videoDevice.disableVideo();
         // this.video = null;
     }
+    handleAccess () {
+        this.setState({access: true});
+    }
+    handleLoaded () {
+        this.setState({loaded: true});
+    }
     handleBack () {
         this.setState({capture: null});
         this.videoDevice.clearSnapshot();
     }
     handleCapture () {
-        const capture = this.videoDevice.takeSnapshot();
-        this.setState({capture: capture});
+        if (this.state.loaded) {
+            const capture = this.videoDevice.takeSnapshot();
+            this.setState({capture: capture});
+        }
     }
     setCanvas (canvas) {
         this.canvas = canvas;
         if (this.canvas) {
             this.videoDevice = new ModalVideoManager(this.canvas);
-            this.videoDevice.enableVideo();
+            this.videoDevice.enableVideo(this.handleAccess, this.handleLoaded);
         }
     }
     handleSubmit () {
@@ -62,8 +74,10 @@ class CameraModal extends React.Component {
         return (
             <CameraModalComponent
                 // vm={this.props.vm}
+                access={this.state.access}
                 canvasRef={this.setCanvas}
                 capture={this.state.capture}
+                loaded={this.state.loaded}
                 // videoRef={this.setVideoInput}
                 onBack={this.handleBack}
                 onCancel={this.handleCancel}

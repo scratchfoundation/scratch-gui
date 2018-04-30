@@ -13,21 +13,27 @@ const CameraModal = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            <Box className={styles.visualizationContainer}>
-                <Box className={styles.cameraFeedContainer}>
-                    <canvas
-                        className={styles.canvas}
-                        // height and (below) width of the actual image
-                        height="720"
-                        ref={props.canvasRef}
-                        width="960"
-                    />
-                </Box>
+            <Box className={styles.cameraFeedContainer}>
+                <div className={styles.loadingText}>
+                    {props.access ? 'Loading camera...' :
+                        '↖️ \u00A0We need your permission to use your microphone'}
+                </div>
+                <canvas
+                    className={styles.canvas}
+                    // height and (below) width of the actual image
+                    // double stage dimensions to avoid the need for
+                    // resizing the captured image when importing costume
+                    // to accommodate double resolution bitmaps
+                    height="720"
+                    ref={props.canvasRef}
+                    width="960"
+                />
             </Box>
             {props.capture ?
                 <Box className={styles.buttonRow}>
                     <button
                         className={styles.cancelButton}
+                        key="retake-button"
                         onClick={props.onBack}
                     >
                         <img
@@ -44,6 +50,8 @@ const CameraModal = props => (
                 <Box className={styles.mainButtonRow}>
                     <button
                         className={styles.mainButton}
+                        disabled={!props.loaded}
+                        key="capture-button"
                         onClick={props.onCapture}
                     >
                         <img
@@ -53,9 +61,14 @@ const CameraModal = props => (
                         />
                     </button>
                     <div className={styles.helpText}>
-                        <span className={styles.captureText}>
-                            {'Take Photo'}
-                        </span>
+                        {props.access ?
+                            <span className={props.loaded ? styles.captureText : styles.disabledText}>
+                                {props.loaded ? 'Take Photo' : 'Loading...'}
+                            </span> :
+                            <span className={styles.disabledText}>
+                                {'Enable Camera'}
+                            </span>
+                        }
                     </div>
 
                 </Box>
@@ -65,13 +78,14 @@ const CameraModal = props => (
 );
 
 CameraModal.propTypes = {
+    access: PropTypes.bool,
     canvasRef: PropTypes.func.isRequired,
     capture: PropTypes.string,
+    loaded: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onCapture: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
-    // videoRef: PropTypes.func.isRequired
 };
 
 export default CameraModal;

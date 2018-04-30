@@ -50,6 +50,7 @@ const vmListenerHOC = function (WrappedComponent) {
 
             this.props.vm.postIOData('keyboard', {
                 keyCode: e.keyCode,
+                key: e.key,
                 isDown: true
             });
         }
@@ -58,6 +59,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // even those that have switched to other targets.
             this.props.vm.postIOData('keyboard', {
                 keyCode: e.keyCode,
+                key: e.key,
                 isDown: false
             });
 

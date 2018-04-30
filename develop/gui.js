@@ -1,7 +1,7 @@
 var GUI =
 webpackJsonpGUI([0],{
 
-/***/ 145:
+/***/ 146:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,7 +9,7 @@ webpackJsonpGUI([0],{
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(146);
+__webpack_require__(147);
 
 var _react = __webpack_require__(0);
 
@@ -31,11 +31,11 @@ var _gui = __webpack_require__(22);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _errorBoundaryHoc = __webpack_require__(544);
+var _errorBoundaryHoc = __webpack_require__(546);
 
 var _errorBoundaryHoc2 = _interopRequireDefault(_errorBoundaryHoc);
 
-var _index = __webpack_require__(550);
+var _index = __webpack_require__(552);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -63,18 +63,18 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(147).polyfill();
+__webpack_require__(148).polyfill();
 
 
 /***/ }),
 
-/***/ 147:
+/***/ 148:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -128,7 +128,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 544:
+/***/ 546:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,7 +142,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _errorBoundary = __webpack_require__(545);
+var _errorBoundary = __webpack_require__(547);
 
 var _errorBoundary2 = _interopRequireDefault(_errorBoundary);
 
@@ -168,7 +168,7 @@ exports.default = ErrorBoundaryHOC;
 
 /***/ }),
 
-/***/ 545:
+/***/ 547:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -192,15 +192,15 @@ var _platform = __webpack_require__(51);
 
 var _platform2 = _interopRequireDefault(_platform);
 
-var _browserModal = __webpack_require__(132);
+var _browserModal = __webpack_require__(133);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _crashMessage = __webpack_require__(546);
+var _crashMessage = __webpack_require__(548);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
 var _log2 = _interopRequireDefault(_log);
 
@@ -277,7 +277,7 @@ exports.default = ErrorBoundary;
 
 /***/ }),
 
-/***/ 546:
+/***/ 548:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -299,11 +299,11 @@ var _box = __webpack_require__(7);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _crashMessage = __webpack_require__(547);
+var _crashMessage = __webpack_require__(549);
 
 var _crashMessage2 = _interopRequireDefault(_crashMessage);
 
-var _reload = __webpack_require__(549);
+var _reload = __webpack_require__(551);
 
 var _reload2 = _interopRequireDefault(_reload);
 
@@ -350,11 +350,11 @@ exports.default = CrashMessage;
 
 /***/ }),
 
-/***/ 547:
+/***/ 549:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(548);
+var content = __webpack_require__(550);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -401,7 +401,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 548:
+/***/ 550:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -421,18 +421,18 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 549:
+/***/ 551:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/assets/dd98971c2c185caf86144b6b5234d0fa.svg";
 
 /***/ }),
 
-/***/ 550:
+/***/ 552:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(551);
+var content = __webpack_require__(553);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -479,7 +479,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 551:
+/***/ 553:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -496,5 +496,5 @@ exports.locals = {
 
 /***/ })
 
-},[145]);
+},[146]);
 //# sourceMappingURL=gui.js.map

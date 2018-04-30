@@ -22,6 +22,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
+  "dependencies": {
+    "scratch-vm": "github:thisandagain/scratch-vm#feature/hue"
+  },
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -94,7 +97,6 @@
     "scratch-paint": "0.2.0-prerelease.20180423143518",
     "scratch-render": "0.1.0-prerelease.1523453612",
     "scratch-storage": "0.4.0",
-    "scratch-vm": "0.1.0-prerelease.1524254811",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.20.0",

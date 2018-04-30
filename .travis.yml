@@ -11,6 +11,7 @@ cache:
 install:
 - npm install
 - npm update
+- cd node_modules/scratch-vm && npm --production=false install && npm run build && cd -
 before_deploy:
 - npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)

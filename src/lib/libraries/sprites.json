@@ -1326,7 +1326,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "casey-a[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-a [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "30a4dafa852311b2a07d72e1bb060326.svg",
                     "bitmapResolution": 1,
@@ -1334,7 +1334,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "casey-b[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-b [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c8c0a25bebac8b35b8eae7ddd716d061.svg",
                     "bitmapResolution": 1,
@@ -1342,7 +1342,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "casey-c[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-c [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "104d363c48c373384c6c80abbbbb0ad6.svg",
                     "bitmapResolution": 1,
@@ -1350,7 +1350,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "casey-d[sports,basketball,people,alex eben meyer]",
+                    "costumeName": "casey-d [sports,basketball,people,alex eben meyer]",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3d4bddb908bf912b938c111bfa38c28a.svg",
                     "bitmapResolution": 1,
@@ -1358,7 +1358,7 @@
                     "rotationCenterY": 72
                 }
             ],
-            "currentCostumeIndex": 0,
+            "currentCostumeIndex": 3,
             "scratchX": -138,
             "scratchY": 11,
             "scale": 1,

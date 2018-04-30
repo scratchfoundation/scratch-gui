@@ -666,7 +666,55 @@
         ]
     },
     {
-        "name": "Casey-",
+        "name": "Casey-a",
+        "md5": "30a4dafa852311b2a07d72e1bb060326.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Casey-b",
+        "md5": "c8c0a25bebac8b35b8eae7ddd716d061.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            82,
+            72,
+            1
+        ]
+    },
+    {
+        "name": "Casey-c",
+        "md5": "104d363c48c373384c6c80abbbbb0ad6.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "alex eben meyer"
+        ],
+        "info": [
+            61,
+            61,
+            1
+        ]
+    },
+    {
+        "name": "Casey-d",
         "md5": "3d4bddb908bf912b938c111bfa38c28a.svg",
         "type": "costume",
         "tags": [

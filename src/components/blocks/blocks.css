@@ -27,6 +27,10 @@
     box-sizing: content-box;
 }
 
+:global(.blocklyWidgetDiv) {
+    z-index: 50 !important; /* High enough blockly, but below modals */
+}
+
 /*
     Shrink category font to fit "My Blocks" for now.
     Probably will need different solutions for language support later, so

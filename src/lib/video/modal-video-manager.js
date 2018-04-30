@@ -16,17 +16,17 @@ class ModalVideoManager {
 
     }
 
-    enableVideo (onPermissionSuccess, afterFrameDraw) {
+    enableVideo (onPermissionSuccess, onVideoLoaded) {
         const thisContext = this;
-        this._videoProvider.enableVideo(afterFrameDraw).then(() => {
+        this._videoProvider.enableVideo(onVideoLoaded).then(() => {
             if (onPermissionSuccess) onPermissionSuccess();
             const ctx = thisContext._canvas.getContext('2d');
             ctx.scale(-1, 1);
             ctx.translate(thisContext._canvasWidth * -1, 0);
 
-            if (afterFrameDraw) {
+            if (onVideoLoaded) {
                 thisContext._videoProvider.video.onloadeddata = () => {
-                    afterFrameDraw();
+                    onVideoLoaded();
                 };
             }
 

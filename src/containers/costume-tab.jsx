@@ -294,7 +294,6 @@ class CostumeTab extends React.Component {
                 ) : null}
                 {cameraModalVisible ? (
                     <CameraModal
-                        vm={vm}
                         onClose={onRequestCloseCameraModal}
                         onNewCostume={this.handleCameraBuffer}
                     />

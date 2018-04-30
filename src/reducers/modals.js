@@ -6,6 +6,7 @@ const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
+const MODAL_IMPORT_INFO = 'importInfo';
 const MODAL_LOADING_PROJECT = 'loadingProject';
 const MODAL_PREVIEW_INFO = 'previewInfo';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
@@ -19,6 +20,7 @@ const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
+    [MODAL_IMPORT_INFO]: false,
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
@@ -66,6 +68,10 @@ const openExtensionLibrary = function () {
     analytics.pageview('/libraries/extensions');
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
+const openImportInfo = function () {
+    analytics.pageview('modals/import');
+    return openModal(MODAL_IMPORT_INFO);
+};
 const openLoadingProject = function () {
     analytics.pageview('modals/loading');
     return openModal(MODAL_LOADING_PROJECT);
@@ -99,6 +105,9 @@ const closeCostumeLibrary = function () {
 const closeExtensionLibrary = function () {
     return closeModal(MODAL_EXTENSION_LIBRARY);
 };
+const closeImportInfo = function () {
+    return closeModal(MODAL_IMPORT_INFO);
+};
 const closeLoadingProject = function () {
     return closeModal(MODAL_LOADING_PROJECT);
 };
@@ -122,6 +131,7 @@ export {
     openBackdropLibrary,
     openCostumeLibrary,
     openExtensionLibrary,
+    openImportInfo,
     openLoadingProject,
     openPreviewInfo,
     openSoundLibrary,
@@ -131,6 +141,7 @@ export {
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
+    closeImportInfo,
     closeLoadingProject,
     closePreviewInfo,
     closeSpriteLibrary,

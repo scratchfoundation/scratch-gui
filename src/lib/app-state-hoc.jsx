@@ -7,7 +7,7 @@ import throttle from 'redux-throttle';
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
 import {intlInitialState} from '../reducers/intl.js';
-import {initialState as modeInitialState} from '../reducers/mode.js';
+import {initialState as modeInitialState, setPlayer} from '../reducers/mode.js';
 import reducer from '../reducers/gui';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,14 +31,12 @@ const AppStateHOC = function (WrappedComponent) {
             let mode = {};
             if (props.intl) {
                 intl = {
-                    intl: {
-                        defaultLocale: 'en',
-                        locale: props.intl.locale,
-                        messages: props.intl.messages
-                    }
+                    defaultLocale: 'en',
+                    locale: props.intl.locale,
+                    messages: props.intl.messages
                 };
             } else {
-                intl = intlInitialState;
+                intl = intlInitialState.intl;
             }
             if (props.isPlayerOnly || props.isFullScreen) {
                 mode = {
@@ -58,7 +56,12 @@ const AppStateHOC = function (WrappedComponent) {
                 enhancer);
         }
         componentDidUpdate (prevProps) {
-            if (prevProps.intl !== this.props.intl) updateIntl(this.props.intl);
+            if (prevProps.intl !== this.props.intl) {
+                this.store.dispatch(updateIntl(this.props.intl));
+            }
+            if (prevProps.isPlayerOnly !== this.props.isPlayerOnly) {
+                this.store.dispatch(setPlayer(this.props.isPlayerOnly));
+            }
         }
         render () {
             return (
@@ -68,10 +71,7 @@ const AppStateHOC = function (WrappedComponent) {
                     </IntlProvider>
                 </Provider>
             );
-
         }
-
-
     }
     AppStateWrapper.propTypes = {
         intl: intlShape,

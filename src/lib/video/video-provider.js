@@ -1,34 +1,5 @@
-import getUserMedia from 'get-user-media-promise';
-import log from './log.js';
-
-// Single Setup For All Video Streams used by the GUI
-// While VideoProvider uses a private _singleSetup
-// property to ensure that each instance of a VideoProvider
-// use the same setup, this ensures that all instances
-// of VideoProviders use a single stream. This way, closing a camera modal
-// does not affect the video on the stage, and a program running and disabling
-// video on the stage will not affect the camera modal's video.
-const requestStack = [];
-const requestVideoStream = videoDesc => {
-    let streamPromise;
-    if (requestStack.length === 0) {
-        streamPromise = getUserMedia({
-            audio: false,
-            video: videoDesc
-        });
-        requestStack.push(streamPromise);
-    } else if (requestStack.length > 0) {
-        streamPromise = requestStack[0];
-        requestStack.push(true);
-    }
-    return streamPromise;
-};
-
-const requestDisableCheck = () => {
-    requestStack.pop();
-    if (requestStack.length > 0) return false;
-    return true;
-};
+import {requestVideoStream, requestDisableVideo} from './camera.js';
+import log from '../log.js';
 
 /**
  * Video Manager for video extensions.
@@ -129,7 +100,7 @@ class VideoProvider {
     _teardown () {
         // we might be asked to re-enable before _teardown is called, just ignore it.
         if (this.enabled === false) {
-            const disableTrack = requestDisableCheck();
+            const disableTrack = requestDisableVideo();
             this._singleSetup = null;
             // by clearing refs to video and track, we should lose our hold over the camera
             this._video = null;
@@ -183,7 +154,8 @@ class VideoProvider {
                 0, 0, width, height
             );
 
-            context.resetTransform();
+            // context.resetTransform() doesn't work on Edge but the following should
+            context.setTransform(1, 0, 0, 1, 0, 0);
             workspace.lastUpdate = now;
         }
 
@@ -226,7 +198,6 @@ class VideoProvider {
 
     /**
      * Create a video stream.
-     * Should probably be moved to -render or somewhere similar later
      * @private
      * @return {Promise} When video has been received, rejected if video is not received
      */
@@ -243,6 +214,7 @@ class VideoProvider {
         })
             .then(stream => {
                 this._video = document.createElement('video');
+
                 // Use the new srcObject API, falling back to createObjectURL
                 try {
                     this._video.srcObject = stream;
@@ -315,63 +287,4 @@ class VideoProvider {
     }
 }
 
-/**
- * Video Manager for Camera Modal
- */
-class ModalVideoManager {
-    constructor (canvas) {
-        this._videoProvider = new VideoProvider();
-        /**
-         * Frame update interval
-         * @type number
-         */
-        this._frameTimeout = 16;
-
-        this._canvas = canvas;
-        // These values are double the stage dimensions so that the resulting
-        // image does not have to get sized down to accomodate double resolution
-        this._canvasWidth = 960; // Double Stage Width
-        this._canvasHeight = 720; // Double Stage Height
-
-    }
-
-    enableVideo () {
-        this._videoProvider.enableVideo().then(() => {
-
-            const ctx = this._canvas.getContext('2d');
-            ctx.scale(-1, 1);
-            ctx.translate(this._canvasWidth * -1, 0);
-
-            this._drawFrames();
-        });
-    }
-
-    _drawFrames () {
-        const video = this._videoProvider.video;
-        this._videoFeedInterval = setInterval(() =>
-            this._canvas.getContext('2d').drawImage(video,
-                // source x, y, width, height
-                0, 0, video.videoWidth, video.videoHeight,
-                // dest x, y, width, height
-                0, 0, this._canvasWidth, this._canvasHeight
-            ), this._frameTimeout);
-    }
-
-    takeSnapshot () {
-        clearInterval(this._videoFeedInterval);
-        return this._canvas.toDataURL('image/png');
-    }
-
-    clearSnapshot () {
-        this._drawFrames();
-    }
-
-    disableVideo () {
-        this._videoProvider.disableVideo();
-    }
-}
-
-export {
-    VideoProvider,
-    ModalVideoManager
-};
+export default VideoProvider;

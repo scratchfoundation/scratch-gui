@@ -6,7 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {getEventXY} from '../lib/touch-utils';
-import {VideoProvider} from '../lib/camera';
+import VideoProvider from '../lib/video/video-provider';
 
 import StageComponent from '../components/stage/stage.jsx';
 

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import LibraryItem from '../library-item/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
@@ -13,6 +14,14 @@ import styles from './library.css';
 
 const ALL_TAG_TITLE = 'All';
 const tagListPrefix = [{title: ALL_TAG_TITLE}];
+
+const messages = defineMessages({
+    filterPlaceholder: {
+        id: 'gui.library.filterPlaceholder',
+        defaultMessage: 'Search',
+        description: 'Placeholder text for library search field'
+    }
+});
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -101,6 +110,7 @@ class LibraryComponent extends React.Component {
                                 )}
                                 filterQuery={this.state.filterQuery}
                                 inputClassName={styles.filterInput}
+                                placeholderText={this.props.intl.formatMessage(messages.filterPlaceholder)}
                                 onChange={this.handleFilterChange}
                                 onClear={this.handleFilterClear}
                             />
@@ -176,6 +186,7 @@ LibraryComponent.propTypes = {
     ),
     filterable: PropTypes.bool,
     id: PropTypes.string.isRequired,
+    intl: intlShape.isRequired,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
@@ -188,4 +199,4 @@ LibraryComponent.defaultProps = {
     filterable: true
 };
 
-export default LibraryComponent;
+export default injectIntl(LibraryComponent);

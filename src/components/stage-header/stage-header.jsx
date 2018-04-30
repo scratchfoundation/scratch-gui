@@ -19,24 +19,29 @@ import styles from './stage-header.css';
 
 const messages = defineMessages({
     largeStageSizeMessage: {
-        defaultMessage: 'Stage Size Toggle - Large',
+        defaultMessage: 'Switch to large stage',
         description: 'Button to change stage size to large',
-        id: 'gui.gui.stageSizeLarge'
+        id: 'gui.stageHeader.stageSizeLarge'
     },
     smallStageSizeMessage: {
-        defaultMessage: 'Stage Size Toggle - Small',
+        defaultMessage: 'Switch to small stage',
         description: 'Button to change stage size to small',
-        id: 'gui.gui.stageSizeSmall'
+        id: 'gui.stageHeader.stageSizeSmall'
     },
     fullStageSizeMessage: {
-        defaultMessage: 'Stage Size Toggle - Full Screen',
+        defaultMessage: 'Enter full screen mode',
         description: 'Button to change stage size to full screen',
-        id: 'gui.gui.stageSizeFull'
+        id: 'gui.stageHeader.stageSizeFull'
     },
     unFullStageSizeMessage: {
-        defaultMessage: 'Stage Size Toggle - Un-full screen',
+        defaultMessage: 'Exit full screen mode',
         description: 'Button to get out of full screen mode',
-        id: 'gui.gui.stageSizeUnFull'
+        id: 'gui.stageHeader.stageSizeUnFull'
+    },
+    fullscreenControl: {
+        defaultMessage: 'Full Screen Control',
+        description: 'Button to enter/exit full screen mode',
+        id: 'gui.stageHeader.fullscreenControl'
     }
 });
 
@@ -71,7 +76,7 @@ const StageHeaderComponent = function (props) {
                             className={styles.stageButtonIcon}
                             draggable={false}
                             src={unFullScreenIcon}
-                            title="Full Screen Control"
+                            title={props.intl.formatMessage(messages.fullscreenControl)}
                         />
                     </Button>
                 </Box>
@@ -133,7 +138,7 @@ const StageHeaderComponent = function (props) {
                                     className={styles.stageButtonIcon}
                                     draggable={false}
                                     src={fullScreenIcon}
-                                    title="Full Screen Control"
+                                    title={props.intl.formatMessage(messages.fullscreenControl)}
                                 />
                             </Button>
                         </div>

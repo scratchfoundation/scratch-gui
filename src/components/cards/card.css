@@ -1,0 +1,236 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.card-container {
+    position:absolute;
+    z-index: 100;
+}
+
+.left-card, .right-card {
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    background: $ui-white;
+    border: 1px solid $ui-tertiary;
+    width: 10px;
+    z-index: 99;
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+.left-card {
+    left: -10px;
+    border-right: 0;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.right-card {
+    right: -10px;
+    border-left: 0;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+}
+
+.left-card::after, .right-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.8rem;
+    width: 100%;
+    background: $motion-primary;
+}
+
+.left-button, .right-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    z-index: 101;
+    user-select: none;
+    cursor: pointer;
+    background: $motion-primary;
+    box-shadow: 0 0 0 4px $motion-transparent;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-button {
+    left: -27px;
+}
+
+.right-button {
+    right: -27px;
+}
+
+.card {
+    border: 1px solid $ui-tertiary;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    cursor: move;
+    z-index: 101;
+    overflow: hidden;
+    box-shadow: 0px 5px 25px 5px $ui-black-transparent;
+    align-items: center;
+}
+
+.header-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: $motion-primary;
+    border-bottom: 1px solid $motion-tertiary;
+    padding: 0.5rem;
+    font-size: 0.625rem;
+}
+
+.remove-button, .all-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-title {
+    font-size: 0.9rem;
+    margin: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.step-body {
+    background: $ui-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+}
+
+.step-video {
+    height: 337px;
+}
+
+.step-image {
+    max-width: 450px;
+    background: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 0 0.5rem 0.5rem;
+}
+
+.decks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 0.5rem 0.5rem;
+}
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    margin: 0 8px 8px;
+    cursor: pointer;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.deck-image {
+    width: 130px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.deck-name {
+    color: $motion-primary;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin: 14px 0px;
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    text-align: center;
+}
+
+.help-icon, .close-icon {
+    height: 0.75rem;
+}
+
+.help-icon {
+    margin-right: 0.25rem;
+}
+
+.close-icon {
+    margin-left: 0.25rem;
+    transform: rotate(45deg);
+}
+
+.see-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.see-all-button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: $motion-primary;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    color: $ui-white;
+    font-family: "Helvetica Neue";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 15px;
+    text-align: center;
+}
+
+.see-all-button img {
+    margin-left: 0.5rem;
+}
+
+.video-cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.active-step-pip, .inactiveStepPip {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.25rem;
+    border-radius: 100%;
+    background: transparent;
+    border: 2px solid $ui-white-transparent;
+}
+
+.active-step-pip {
+    background: white;
+}

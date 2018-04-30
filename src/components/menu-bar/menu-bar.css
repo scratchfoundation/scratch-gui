@@ -132,6 +132,12 @@
     height: 1rem;
 }
 
+.help-icon {
+    height: 2rem;
+    width: 3rem;
+    margin-top: 0.5rem;
+}
+
 .account-nav-menu, .mystuff-button {
     padding: 0 .25rem;
     display: flex;

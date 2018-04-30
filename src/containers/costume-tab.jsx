@@ -63,7 +63,7 @@ const messages = defineMessages({
         id: 'gui.costumeTab.addFileCostume'
     },
     addCameraCostumeMsg: {
-        defaultMessage: 'Coming Soon',
+        defaultMessage: 'Camera',
         description: 'Button to use the camera to create a costume costume in the editor tab',
         id: 'gui.costumeTab.addCameraCostume'
     }

@@ -57,6 +57,7 @@ const GUIComponent = props => {
         onActivateSoundsTab,
         onActivateTab,
         previewInfoVisible,
+        targetIsStage,
         soundsTabVisible,
         tipsLibraryVisible,
         vm,
@@ -134,11 +135,19 @@ const GUIComponent = props => {
                                         draggable={false}
                                         src={costumesIcon}
                                     />
-                                    <FormattedMessage
-                                        defaultMessage="Costumes"
-                                        description="Button to get to the costumes panel"
-                                        id="gui.gui.costumesTab"
-                                    />
+                                    {targetIsStage ? (
+                                        <FormattedMessage
+                                            defaultMessage="Backdrops"
+                                            description="Button to get to the backdrops panel"
+                                            id="gui.gui.backdropsTab"
+                                        />
+                                    ) : (
+                                        <FormattedMessage
+                                            defaultMessage="Costumes"
+                                            description="Button to get to the costumes panel"
+                                            id="gui.gui.costumesTab"
+                                        />
+                                    )}
                                 </Tab>
                                 <Tab
                                     className={tabClassNames.tab}
@@ -234,6 +243,7 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };

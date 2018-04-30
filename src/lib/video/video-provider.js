@@ -71,9 +71,7 @@ class VideoProvider {
     /**
      * Request video be enabled.  Sets up video, creates video skin and enables preview.
      *
-     * ioDevices.video.requestVideo()
-     *
-     * @return {Promise.<Video>} resolves a promise to this IO device when video is ready.
+     * @return {Promise.<Video>} resolves a promise to this video provider when video is ready.
      */
     enableVideo () {
         this.enabled = true;
@@ -116,8 +114,7 @@ class VideoProvider {
      *
      * @param {object} frameInfo A descriptor of the frame you would like to receive.
      * @param {Array.<number>} frameInfo.dimensions [width, height] array of numbers.  Defaults to [480,360]
-     * @param {boolean} frameInfo.mirror If you specificly want a mirror/non-mirror frame, defaults to the global
-     *                                   mirror state (ioDevices.video.mirror)
+     * @param {boolean} frameInfo.mirror If you specificly want a mirror/non-mirror frame, defaults to true
      * @param {string} frameInfo.format Requested video format, available formats are 'image-data' and 'canvas'.
      * @param {number} frameInfo.cacheTimeout Will reuse previous image data if the time since capture is less than
      *                                        the cacheTimeout.  Defaults to 16ms.

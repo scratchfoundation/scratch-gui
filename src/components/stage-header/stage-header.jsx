@@ -9,7 +9,6 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Controls from '../../containers/controls.jsx';
 import {getStageSize} from '../../lib/screen-utils.js';
-import {MODES} from '../../reducers/mode';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -49,7 +48,7 @@ const messages = defineMessages({
 const StageHeaderComponent = function (props) {
     const {
         isFullScreen,
-        mode,
+        isPlayerOnly,
         onKeyPress,
         onSetStageLarge,
         onSetStageFull,
@@ -86,7 +85,9 @@ const StageHeaderComponent = function (props) {
         );
     } else {
         const stageControls =
-            mode === 'editor' ? (
+            isPlayerOnly ? (
+                []
+            ) : (
                 <div className={styles.stageSizeToggleGroup}>
                     <ComingSoonTooltip
                         place="left"
@@ -124,8 +125,6 @@ const StageHeaderComponent = function (props) {
                         </Button>
                     </div>
                 </div>
-            ) : (
-                []
             );
         header = (
             <Box className={styles.stageHeaderWrapper}>
@@ -159,7 +158,7 @@ const StageHeaderComponent = function (props) {
 StageHeaderComponent.propTypes = {
     intl: intlShape,
     isFullScreen: PropTypes.bool.isRequired,
-    mode: PropTypes.oneOf(Object.keys(MODES)),
+    isPlayerOnly: PropTypes.bool.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
     onSetStageLarge: PropTypes.func.isRequired,

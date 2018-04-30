@@ -14,8 +14,8 @@ import styles from './player.css';
 const Player = () => (
     <Box className={styles.stageOnly}>
         <GUI
+            isPlayerOnly
             isFullScreen={false}
-            mode="player"
         />
     </Box>
 );

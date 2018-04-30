@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
-import {setStageSize, setFullScreen, STAGE_SIZES} from '../reducers/stage-size';
-import {MODES} from '../reducers/mode';
+import {setStageSize, STAGE_SIZES} from '../reducers/stage-size';
+import {setFullScreen} from '../reducers/mode';
 
 import {connect} from 'react-redux';
 
@@ -42,17 +42,17 @@ class StageHeader extends React.Component {
 }
 
 StageHeader.propTypes = {
-    isFullScreen: PropTypes.bool.isRequired,
-    mode: PropTypes.oneOf(Object.keys(MODES)),
+    isFullScreen: PropTypes.bool,
+    isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_SIZES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
-    mode: state.guiMode.mode,
     stageSize: state.stageSize.stageSize,
-    isFullScreen: state.stageSize.isFullScreen
+    isFullScreen: state.mode.isFullScreen,
+    isPlayerOnly: state.mode.isPlayerOnly
 });
 
 const mapDispatchToProps = dispatch => ({

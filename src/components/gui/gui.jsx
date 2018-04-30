@@ -50,8 +50,8 @@ const GUIComponent = props => {
         costumesTabVisible,
         importInfoVisible,
         intl,
+        isPlayerOnly,
         loading,
-        mode,
         onExtensionButtonClick,
         onActivateCostumesTab,
         onActivateSoundsTab,
@@ -80,7 +80,7 @@ const GUIComponent = props => {
         isRendererSupported = Renderer.isSupported();
     }
 
-    return mode === 'player' ? (
+    return isPlayerOnly ? (
         <StageWrapper
             isRendererSupported={isRendererSupported}
             vm={vm}
@@ -226,8 +226,8 @@ GUIComponent.propTypes = {
     costumesTabVisible: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    isPlayerOnly: PropTypes.bool,
     loading: PropTypes.bool,
-    mode: PropTypes.string,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,

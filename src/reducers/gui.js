@@ -23,7 +23,7 @@ export default combineReducers({
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     editorTab: editorTabReducer,
-    guiMode: modeReducer,
+    mode: modeReducer,
     hoveredTarget: hoveredTargetReducer,
     intl: intlReducer,
     stageSize: stageSizeReducer,

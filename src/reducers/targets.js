@@ -1,4 +1,3 @@
-const UPDATE_EDITING_TARGET = 'scratch-gui/targets/UPDATE_EDITING_TARGET';
 const UPDATE_TARGET_LIST = 'scratch-gui/targets/UPDATE_TARGET_LIST';
 
 const initialState = {
@@ -21,27 +20,18 @@ const reducer = function (state, action) {
                     {}
                 ),
             stage: action.targets
-                .filter(target => target.isStage)[0] || {}
+                .filter(target => target.isStage)[0] || {},
+            editingTarget: action.editingTarget
         });
-    case UPDATE_EDITING_TARGET:
-        return Object.assign({}, state, {editingTarget: action.target});
     default:
         return state;
     }
 };
-const updateTargets = function (targetList) {
+const updateTargets = function (targetList, editingTarget) {
     return {
         type: UPDATE_TARGET_LIST,
         targets: targetList,
-        meta: {
-            throttle: 30
-        }
-    };
-};
-const updateEditingTarget = function (editingTarget) {
-    return {
-        type: UPDATE_EDITING_TARGET,
-        target: editingTarget,
+        editingTarget: editingTarget,
         meta: {
             throttle: 30
         }
@@ -49,6 +39,5 @@ const updateEditingTarget = function (editingTarget) {
 };
 export {
     reducer as default,
-    updateTargets,
-    updateEditingTarget
+    updateTargets
 };

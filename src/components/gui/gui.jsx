@@ -19,6 +19,7 @@ import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 
 import PreviewModal from '../../containers/preview-modal.jsx';
+import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
@@ -50,6 +51,7 @@ const GUIComponent = props => {
         cardsVisible,
         children,
         costumesTabVisible,
+        importInfoVisible,
         intl,
         loading,
         onExtensionButtonClick,
@@ -92,6 +94,9 @@ const GUIComponent = props => {
             ) : null}
             {loading ? (
                 <Loader />
+            ) : null}
+            {importInfoVisible ? (
+                <ImportModal />
             ) : null}
             {isRendererSupported ? null : (
                 <WebGlModal />
@@ -225,6 +230,7 @@ GUIComponent.propTypes = {
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
+    importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,

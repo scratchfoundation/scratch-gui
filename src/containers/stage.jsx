@@ -297,6 +297,7 @@ class Stage extends React.Component {
         if (drawableId === null) return;
         const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
+        if (targetId === null) return;
 
         // Only start drags on non-draggable targets in editor drag mode
         if (!this.props.useEditorDragStyle) {
@@ -304,7 +305,6 @@ class Stage extends React.Component {
             if (!target.draggable) return;
         }
 
-        if (targetId === null) return;
         this.props.vm.startDrag(targetId);
         this.setState({
             isDragging: true,

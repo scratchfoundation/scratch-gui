@@ -121,7 +121,7 @@ $main-button-size: 2.75rem;
 .button-row button {
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
-    background: white;
+    background: $ui-white;
     border: 1px solid $ui-black-transparent;
     font-weight: 600;
     font-size: 0.85rem;
@@ -131,5 +131,22 @@ $main-button-size: 2.75rem;
 .button-row button.ok-button {
     background: $motion-primary;
     border: $motion-primary;
-    color: white;
+    color: $ui-white;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $ui-white;
+    animation-name: flash;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
 }

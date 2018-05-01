@@ -72,6 +72,9 @@ const CameraModal = ({intl, ...props}) => (
                     ref={props.canvasRef}
                     width="960"
                 />
+                {props.capture ? (
+                    <div className={styles.flashOverlay} />
+                ) : null}
             </Box>
             {props.capture ?
                 <Box className={styles.buttonRow}>

@@ -1,22 +1,66 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
 import styles from './camera-modal.css';
 import backIcon from './icon--back.svg';
 import cameraIcon from '../action-menu/icon--camera.svg';
 
-const CameraModal = props => (
+const messages = defineMessages({
+    cameraModalTitle: {
+        defaultMessage: 'Take a Photo',
+        description: 'Title for prompt to take a picture (to add as a new costume).',
+        id: 'gui.cameraModal.cameraModalTitle'
+    },
+    loadingCameraMessage: {
+        defaultMessage: 'Loading Camera...',
+        description: 'Notification to the user that the camera is loading',
+        id: 'gui.cameraModal.loadingCameraMessage'
+    },
+    permissionRequest: {
+        defaultMessage: 'We need your permission to use your camera',
+        description: 'Notification to the user that the app needs camera access',
+        id: 'gui.cameraModal.permissionRequest'
+    },
+    retakePhoto: {
+        defaultMessage: 'Retake Photo',
+        description: 'A button that allows the user to take the picture again, replacing the old one',
+        id: 'gui.cameraModal.retakePhoto'
+    },
+    save: {
+        defaultMessage: 'Save',
+        description: 'A button that allows the user to save the photo they took as a costume',
+        id: 'gui.cameraModal.save'
+    },
+    takePhotoButton: {
+        defaultMessage: 'Take Photo',
+        description: 'A button to take a photo',
+        id: 'gui.cameraModal.takePhoto'
+    },
+    loadingCaption: {
+        defaultMessage: 'Loading...',
+        description: 'A caption for a disabled button while the video from the camera is still loading',
+        id: 'gui.cameraModal.loadingCaption'
+    },
+    enableCameraCaption: {
+        defaultMessage: 'Enable Camera',
+        description: 'A caption for a disabled button prompting the user to enable camera access',
+        id: 'gui.cameraModal.enableCameraCaption'
+    }
+});
+
+const CameraModal = ({intl, ...props}) => (
     <Modal
         className={styles.modalContent}
-        contentLabel={'Take a Picture'}
+        contentLabel={intl.formatMessage(messages.cameraModalTitle)}
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
             <Box className={styles.cameraFeedContainer}>
                 <div className={styles.loadingText}>
-                    {props.access ? 'Loading camera...' :
-                        '↖️ \u00A0We need your permission to use your microphone'}
+                    {props.access ? intl.formatMessage(messages.loadingCameraMessage) :
+                        `↖️ \u00A0${intl.formatMessage(messages.permissionRequest)}`}
                 </div>
                 <canvas
                     className={styles.canvas}
@@ -39,12 +83,12 @@ const CameraModal = props => (
                         <img
                             draggable={false}
                             src={backIcon}
-                        /> Re-take
+                        /> {intl.formatMessage(messages.retakePhoto)}
                     </button>
                     <button
                         className={styles.okButton}
                         onClick={props.onSubmit}
-                    > Save
+                    > {intl.formatMessage(messages.save)}
                     </button>
                 </Box> :
                 <Box className={styles.mainButtonRow}>
@@ -63,10 +107,12 @@ const CameraModal = props => (
                     <div className={styles.helpText}>
                         {props.access ?
                             <span className={props.loaded ? styles.captureText : styles.disabledText}>
-                                {props.loaded ? 'Take Photo' : 'Loading...'}
+                                {props.loaded ?
+                                    intl.formatMessage(messages.takePhotoButton) :
+                                    intl.formatMessage(messages.loadingCaption)}
                             </span> :
                             <span className={styles.disabledText}>
-                                {'Enable Camera'}
+                                {intl.formatMessage(messages.enableCameraCaption)}
                             </span>
                         }
                     </div>
@@ -81,6 +127,7 @@ CameraModal.propTypes = {
     access: PropTypes.bool,
     canvasRef: PropTypes.func.isRequired,
     capture: PropTypes.string,
+    intl: intlShape.isRequired,
     loaded: PropTypes.bool,
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
@@ -88,4 +135,4 @@ CameraModal.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-export default CameraModal;
+export default injectIntl(CameraModal);

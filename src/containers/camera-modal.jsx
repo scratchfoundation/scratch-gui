@@ -21,7 +21,6 @@ class CameraModal extends React.Component {
             'handleLoaded',
             'handleSubmit',
             'setCanvas'
-            // 'enableVideo'
         ]);
 
         this.video = null;
@@ -34,10 +33,7 @@ class CameraModal extends React.Component {
         };
     }
     componentWillUnmount () {
-        // const videoDevice = this.props.vm.runtime.ioDevices.video;
-        // videoDevice.disableVideo();
         this.videoDevice.disableVideo();
-        // this.video = null;
     }
     handleAccess () {
         this.setState({access: true});
@@ -73,12 +69,10 @@ class CameraModal extends React.Component {
     render () {
         return (
             <CameraModalComponent
-                // vm={this.props.vm}
                 access={this.state.access}
                 canvasRef={this.setCanvas}
                 capture={this.state.capture}
                 loaded={this.state.loaded}
-                // videoRef={this.setVideoInput}
                 onBack={this.handleBack}
                 onCancel={this.handleCancel}
                 onCapture={this.handleCapture}

@@ -19,7 +19,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(6);
+var _reactRedux = __webpack_require__(7);
 
 var _controls = __webpack_require__(30);
 
@@ -29,7 +29,7 @@ var _stage = __webpack_require__(52);
 
 var _stage2 = _interopRequireDefault(_stage);
 
-var _box = __webpack_require__(7);
+var _box = __webpack_require__(8);
 
 var _box2 = _interopRequireDefault(_box);
 

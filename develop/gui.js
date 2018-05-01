@@ -295,9 +295,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _box = __webpack_require__(7);
+var _box = __webpack_require__(8);
 
 var _box2 = _interopRequireDefault(_box);
+
+var _reactIntl = __webpack_require__(6);
 
 var _crashMessage = __webpack_require__(549);
 
@@ -323,12 +325,20 @@ var CrashMessage = function CrashMessage(props) {
             _react2.default.createElement(
                 'h2',
                 null,
-                'Oops! Something went wrong.'
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    defaultMessage: 'Oops! Something went wrong.',
+
+                    id: 'gui.crashMessage.title'
+                })
             ),
             _react2.default.createElement(
                 'p',
                 null,
-                'We are so sorry, but it looks like Scratch has crashed. This bug has been automatically reported to the Scratch Team. Please refresh your page to try again.'
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    defaultMessage: 'We are so sorry, but it looks like Scratch has crashed. This bug has been automatically reported to the Scratch Team. Please refresh your page to try again.',
+
+                    id: 'gui.crashMessage.description'
+                })
             ),
             _react2.default.createElement(
                 'button',

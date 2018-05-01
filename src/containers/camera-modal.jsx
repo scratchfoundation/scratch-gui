@@ -33,7 +33,9 @@ class CameraModal extends React.Component {
         };
     }
     componentWillUnmount () {
-        this.videoDevice.disableVideo();
+        if (this.videoDevice) {
+            this.videoDevice.disableVideo();
+        }
     }
     handleAccess () {
         this.setState({access: true});

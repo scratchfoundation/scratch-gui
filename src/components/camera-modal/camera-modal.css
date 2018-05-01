@@ -49,7 +49,7 @@ $main-button-size: 2.75rem;
 .help-text {
     margin: 10px auto 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: rgb(167, 170, 181);
+    color: $text-primary-transparent;
     font-size: 0.95rem;
     font-weight: 500;
     text-align: center;
@@ -126,6 +126,7 @@ $main-button-size: 2.75rem;
     font-weight: 600;
     font-size: 0.85rem;
     color: $motion-primary;
+    cursor: pointer;
 }
 
 .button-row button.ok-button {

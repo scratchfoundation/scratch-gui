@@ -7,7 +7,7 @@ import throttle from 'redux-throttle';
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
 import {intlInitialState} from '../reducers/intl.js';
-import {initialState as modeInitialState, setPlayer} from '../reducers/mode.js';
+import {initialState as modeInitialState, setPlayer, setFullScreen} from '../reducers/mode.js';
 import reducer from '../reducers/gui';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -61,6 +61,9 @@ const AppStateHOC = function (WrappedComponent) {
             }
             if (prevProps.isPlayerOnly !== this.props.isPlayerOnly) {
                 this.store.dispatch(setPlayer(this.props.isPlayerOnly));
+            }
+            if (prevProps.isFullScreen !== this.props.isFullScreen) {
+                this.store.dispatch(setFullScreen(this.props.isFullScreen));
             }
         }
         render () {

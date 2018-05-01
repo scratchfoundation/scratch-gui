@@ -7,6 +7,7 @@ import Box from '../box/box.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import {FormattedMessage} from 'react-intl';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './sprite-info.css';
@@ -31,17 +32,52 @@ class SpriteInfo extends React.Component {
         );
     }
     render () {
+        const sprite = (
+            <FormattedMessage
+                defaultMessage="Sprite"
+                description="Sprite info label"
+                id="gui.SpriteInfo.sprite"
+            />
+        );
+        const spritePlaceholder = (
+            <FormattedMessage
+                defaultMessage="Name"
+                description="Placeholder text for sprite name"
+                id="gui.SpriteInfo.spritePlaceholder"
+            />
+        );
+        const showLabel = (
+            <FormattedMessage
+                defaultMessage="Show"
+                description="Sprite info show label"
+                id="gui.SpriteInfo.show"
+            />
+        );
+        const sizeLabel = (
+            <FormattedMessage
+                defaultMessage="Size"
+                description="Sprite info size label"
+                id="gui.SpriteInfo.size"
+            />
+        );
+        const directionLabel = (
+            <FormattedMessage
+                defaultMessage="Direction"
+                description="Sprite info direction label"
+                id="gui.SpriteInfo.direction"
+            />
+        );
         return (
             <Box
                 className={styles.spriteInfo}
             >
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <Label text="Sprite">
+                        <Label text={sprite}>
                             <BufferedInput
                                 className={styles.spriteInput}
                                 disabled={this.props.disabled}
-                                placeholder="Name"
+                                placeholder={spritePlaceholder}
                                 tabIndex="0"
                                 type="text"
                                 value={this.props.disabled ? '' : this.props.name}
@@ -102,7 +138,7 @@ class SpriteInfo extends React.Component {
                         <MediaQuery minWidth={layout.fullSizeMinWidth}>
                             <Label
                                 secondary
-                                text="Show"
+                                text={showLabel}
                             />
                         </MediaQuery>
                         <div>
@@ -149,12 +185,12 @@ class SpriteInfo extends React.Component {
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
-                            text="Size"
+                            text={sizeLabel}
                         >
                             <BufferedInput
                                 small
                                 disabled={this.props.disabled}
-                                label="Size"
+                                label={sizeLabel}
                                 tabIndex="0"
                                 type="text"
                                 value={this.props.disabled ? '' : this.props.size}
@@ -165,12 +201,12 @@ class SpriteInfo extends React.Component {
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
-                            text="Direction"
+                            text={directionLabel}
                         >
                             <BufferedInput
                                 small
                                 disabled={this.props.disabled}
-                                label="Direction"
+                                label={directionLabel}
                                 tabIndex="0"
                                 type="text"
                                 value={this.props.disabled ? '' : this.props.direction}

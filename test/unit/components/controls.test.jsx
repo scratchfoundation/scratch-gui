@@ -1,20 +1,20 @@
 import React from 'react';
-import {shallowWithIntl} from '../../helpers/intl-helpers.jsx';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 import Controls from '../../../src/components/controls/controls';
 import TurboMode from '../../../src/components/turbo-mode/turbo-mode';
+import GreenFlag from '../../../src/components/green-flag/green-flag';
+import StopAll from '../../../src/components/stop-all/stop-all';
 
 describe('Controls component', () => {
     const defaultProps = () => ({
         active: false,
-        greenFlagTitle: 'Go',
         onGreenFlagClick: jest.fn(),
         onStopAllClick: jest.fn(),
-        stopAllTitle: 'Stop',
         turbo: false
     });
 
     test('shows turbo mode when in turbo mode', () => {
-        const component = shallowWithIntl(
+        const component = mountWithIntl(
             <Controls
                 {...defaultProps()}
             />
@@ -26,15 +26,15 @@ describe('Controls component', () => {
 
     test('triggers the right callbacks when clicked', () => {
         const props = defaultProps();
-        const component = shallowWithIntl(
+        const component = mountWithIntl(
             <Controls
                 {...props}
             />
         );
-        component.find('[title="Go"]').simulate('click');
+        component.find(GreenFlag).simulate('click');
         expect(props.onGreenFlagClick).toHaveBeenCalled();
 
-        component.find('[title="Stop"]').simulate('click');
+        component.find(StopAll).simulate('click');
         expect(props.onStopAllClick).toHaveBeenCalled();
     });
 });

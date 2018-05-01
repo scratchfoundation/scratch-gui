@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactModal from 'react-modal';
+import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
@@ -46,7 +47,11 @@ const ModalComponent = props => (
                             iconSrc={backIcon}
                             onClick={props.onRequestClose}
                         >
-                            Back
+                            <FormattedMessage
+                                defaultMessage="Back"
+                                description="Back button in modal"
+                                id="gui.modal.back"
+                            />
                         </Button>
                     ) : (
                         <CloseButton

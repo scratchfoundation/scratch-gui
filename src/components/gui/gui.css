@@ -10,6 +10,10 @@
     background-color: $ui-primary;
 }
 
+.body-wrapper * {
+    box-sizing: border-box;
+}
+
 .flex-wrapper {
     display: flex;
 
@@ -57,6 +61,7 @@
 .tab {
     flex-grow: 1;
     height: 80%;
+    margin-bottom: 0;
     margin-left: -0.5rem;
 
     border-radius: 1rem 1rem 0 0;
@@ -162,14 +167,6 @@
 
     /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
     max-width: calc(480px + calc($space * 2));
-}
-
-.stage-wrapper {
-    padding-left: $space;
-    padding-right: $space;
-
-    /* Hides negative space between edge of rounded corners + container, when selected */
-    user-select: none;
 }
 
 .target-wrapper {

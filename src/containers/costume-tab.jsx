@@ -195,6 +195,7 @@ class CostumeTab extends React.Component {
         this.fileInput = input;
     }
     formatCostumeDetails (size, optResolution) {
+        // If no resolution is given, assume that the costume is an SVG
         const resolution = optResolution ? optResolution : 1;
         // Convert size to stage units by dividing by resolution
         // Round up width and height for scratch-flash compatibility

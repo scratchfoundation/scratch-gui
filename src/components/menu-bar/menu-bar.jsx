@@ -123,20 +123,43 @@ const MenuBar = props => (
                     })}
                     onMouseUp={props.onClickFile}
                 >
-                    <div className={classNames(styles.fileMenu)}>File</div>
+                    <div className={classNames(styles.fileMenu)}>
+                        <FormattedMessage
+                            defaultMessage="File"
+                            description="Text for file dropdown menu"
+                            id="gui.menuBar.file"
+                        />
+                    </div>
                     <MenuBarMenu
                         open={props.fileMenuOpen}
                         onRequestClose={props.onRequestCloseFile}
                     >
                         <MenuItemTooltip id="new">
-                            <MenuItem>New</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="New"
+                                    description="Menu bar item for creating a new project"
+                                    id="gui.menuBar.new"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuSection>
                             <MenuItemTooltip id="save">
-                                <MenuItem>Save now</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Save now"
+                                        description="Menu bar item for saving now"
+                                        id="gui.menuBar.saveNow"
+                                    />
+                                </MenuItem>
                             </MenuItemTooltip>
                             <MenuItemTooltip id="copy">
-                                <MenuItem>Save as a copy</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Save as a copy"
+                                        description="Menu bar item for saving as a copy"
+                                        id="gui.menuBar.saveAsCopy"
+                                    /></MenuItem>
                             </MenuItemTooltip>
                         </MenuSection>
                         <MenuSection>
@@ -145,7 +168,11 @@ const MenuBar = props => (
                                     onClick={loadProject}
                                     {...loadProps}
                                 >
-                                    Upload from your computer
+                                    <FormattedMessage
+                                        defaultMessage="Upload from your computer"
+                                        description="Menu bar item for uploading a project from your computer"
+                                        id="gui.menuBar.uploadFromComputer"
+                                    />
                                     {renderFileInput()}
                                 </MenuItem>
                             )}</ProjectLoader>
@@ -154,7 +181,11 @@ const MenuBar = props => (
                                     onClick={saveProject}
                                     {...saveProps}
                                 >
-                                    Download to your computer
+                                    <FormattedMessage
+                                        defaultMessage="Download to your computer"
+                                        description="Menu bar item for downloading a project"
+                                        id="gui.menuBar.downloadToComputer"
+                                    />
                                 </MenuItem>
                             )}</ProjectSaver>
                         </MenuSection>
@@ -166,20 +197,44 @@ const MenuBar = props => (
                     })}
                     onMouseUp={props.onClickEdit}
                 >
-                    <div className={classNames(styles.editMenu)}>Edit</div>
+                    <div className={classNames(styles.editMenu)}>
+                        <FormattedMessage
+                            defaultMessage="Edit"
+                            description="Text for edit dropdown menu"
+                            id="gui.menuBar.edit"
+                        />
+                    </div>
                     <MenuBarMenu
                         open={props.editMenuOpen}
                         onRequestClose={props.onRequestCloseEdit}
                     >
                         <MenuItemTooltip id="undo">
-                            <MenuItem>Undo</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="Undo"
+                                    description="Menu bar item for undoing"
+                                    id="gui.menuBar.undo"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuItemTooltip id="redo">
-                            <MenuItem>Redo</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="Redo"
+                                    description="Menu bar item for redoing"
+                                    id="gui.menuBar.redo"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuSection>
                             <MenuItemTooltip id="turbo">
-                                <MenuItem>Turbo mode</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Turbo mode"
+                                        description="Menu bar item for toggling turbo mode"
+                                        id="gui.menuBar.turboMode"
+                                    />
+                                </MenuItem>
                             </MenuItemTooltip>
                         </MenuSection>
                     </MenuBarMenu>
@@ -262,7 +317,9 @@ const MenuBar = props => (
                         className={styles.profileIcon}
                         src={profileIcon}
                     />
-                    <span>scratch-cat</span>
+                    <span>
+                        {'scratch-cat' /* @todo username */}
+                    </span>
                     <img
                         className={styles.dropdownCaretIcon}
                         src={dropdownCaret}

@@ -73,7 +73,7 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         name: costume && costume.name,
         rotationCenterX: costume && costume.rotationCenterX,
         rotationCenterY: costume && costume.rotationCenterY,
-        imageFormat: costume.dataFormat,
+        imageFormat: costume && costume.dataFormat,
         imageId: editingTarget && `${editingTarget}${costume.skinId}`,
         vm: state.vm
     };

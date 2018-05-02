@@ -408,7 +408,11 @@ var CrashMessage = function CrashMessage(props) {
             )
         )
     );
-};
+}; /* eslint-disable react/jsx-no-literals */
+/*
+    @todo Rule is disabled because this component is rendered outside the
+    intl provider right now so cannot be translated.
+*/
 
 CrashMessage.propTypes = {
     onReload: _propTypes2.default.func.isRequired

@@ -15,6 +15,11 @@ class ErrorBoundary extends React.Component {
     }
 
     componentDidCatch (error, info) {
+        // Error object may be undefined (IE?)
+        error = error || {
+            stack: 'Unknown stack',
+            message: 'Unknown error'
+        };
         // Display fallback UI
         this.setState({hasError: true});
         log.error(`Unhandled Error: ${error.stack}\nComponent stack: ${info.componentStack}`);

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
-import ErrorBoundaryHOC from './error-boundary-hoc.jsx';
 
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     // Warn before navigating away
@@ -20,9 +19,7 @@ const Player = () => (
     </Box>
 );
 
-const App = ErrorBoundaryHOC(Player);
-
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 
-ReactDOM.render(<App />, appTarget);
+ReactDOM.render(<Player />, appTarget);

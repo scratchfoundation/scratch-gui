@@ -626,7 +626,7 @@
         "type": "sprite",
         "tags": [
             "animals",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -901,7 +901,7 @@
         "type": "sprite",
         "tags": [
             "food",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -948,7 +948,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -1732,8 +1732,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -1924,7 +1924,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -2664,8 +2664,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,
@@ -3258,7 +3258,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -3381,8 +3382,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -3885,7 +3886,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -4016,8 +4017,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,
@@ -4072,8 +4073,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,
@@ -4725,7 +4726,7 @@
         "type": "sprite",
         "tags": [
             "food",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -5397,9 +5398,9 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " underwater",
-            " ipzy"
+            "people",
+            "underwater",
+            "ipzy"
         ],
         "info": [
             0,
@@ -5454,9 +5455,9 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " underwater",
-            " ipzy"
+            "people",
+            "underwater",
+            "ipzy"
         ],
         "info": [
             0,
@@ -6360,7 +6361,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -6423,8 +6424,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -7038,72 +7039,12 @@
     },
     {
         "name": "Shark",
-        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            3,
-            1
-        ],
-        "json": {
-            "objName": "Shark",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "shark-a ",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "7c0a907eae79462f69f8e2af8e7df828.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 75,
-                    "rotationCenterY": 75
-                },
-                {
-                    "costumeName": "shark-b ",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "cff9ae87a93294693a0650b38a7a33d2.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 75,
-                    "rotationCenterY": 75
-                },
-                {
-                    "costumeName": "shark-c ",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "afeae3f998598424f7c50918507f6ce6.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 77,
-                    "rotationCenterY": 37
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": 41,
-            "scratchY": -15,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 62,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Shark-a",
         "md5": "4ca6776e9c021e8b21c3346793c9361d.svg",
         "type": "sprite",
         "tags": [
             "animals",
-            " underwater",
-            " ipzy"
+            "underwater",
+            "ipzy"
         ],
         "info": [
             0,
@@ -7111,7 +7052,7 @@
             1
         ],
         "json": {
-            "objName": "Shark-a",
+            "objName": "Shark",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8189,8 +8130,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,
@@ -8237,8 +8178,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,
@@ -8325,7 +8266,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " ipzy"
+            "ipzy"
         ],
         "info": [
             0,
@@ -8432,8 +8373,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -8504,8 +8445,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " people",
-            " ipzy"
+            "people",
+            "ipzy"
         ],
         "info": [
             0,
@@ -8568,8 +8509,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            " animals",
-            " ipzy"
+            "animals",
+            "ipzy"
         ],
         "info": [
             0,

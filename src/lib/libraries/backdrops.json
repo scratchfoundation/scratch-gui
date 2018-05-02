@@ -121,6 +121,20 @@
         ]
     },
     {
+        "name": "Ocean",
+        "md5": "fb907f72b310acc8b95cbf2d2cccabc9.svg",
+        "type": "backdrop",
+        "tags": [
+            "underwater",
+            "ipzy"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
         "name": "Party",
         "md5": "108160d0e44d1c340182e31c9dc0758a.svg",
         "type": "backdrop",
@@ -230,6 +244,20 @@
         "type": "backdrop",
         "tags": [
             "outdoors"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Witch House",
+        "md5": "597b9a9813fe5d8d387283138a0b8f2b.svg",
+        "type": "backdrop",
+        "tags": [
+            "fantasy",
+            "ipzy"
         ],
         "info": [
             480,

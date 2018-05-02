@@ -31,6 +31,11 @@ const messages = defineMessages({
         defaultMessage: 'Save',
         description: 'Loading/Save button in recording playback',
         id: 'gui.playbackStep.saveMsg'
+    },
+    reRecordMsg: {
+        defaultMessage: 'Re-record',
+        description: 'Button to re-record sound in recording playback',
+        id: 'gui.playbackStep.reRecordMsg'
     }
 });
 
@@ -88,7 +93,8 @@ const PlaybackStep = props => (
                 <img
                     draggable={false}
                     src={backIcon}
-                /> Re-record
+                />
+                {props.intl.formatMessage(messages.reRecordMsg)}
             </button>
             <button
                 className={styles.okButton}

@@ -28,7 +28,7 @@ const QuestionComponent = props => {
                         className={styles.questionSubmitButton}
                         onClick={onClick}
                     >
-                        ✔︎
+                        {'✔︎' /* @todo should this be an image? */}
                     </button>
                 </div>
             </div>

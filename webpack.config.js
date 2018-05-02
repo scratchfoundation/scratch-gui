@@ -101,7 +101,8 @@ module.exports = [
         plugins: base.plugins.concat([
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
-                'process.env.DEBUG': Boolean(process.env.DEBUG)
+                'process.env.DEBUG': Boolean(process.env.DEBUG),
+                'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
             }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'lib',
@@ -110,7 +111,8 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib', 'gui'],
                 template: 'src/playground/index.ejs',
-                title: 'Scratch 3.0 GUI'
+                title: 'Scratch 3.0 GUI',
+                sentryConfig: '"' + process.env.SENTRY_CONFIG + '"'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib', 'blocksonly'],

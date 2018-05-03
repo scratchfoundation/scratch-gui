@@ -71,7 +71,7 @@ const AppStateHOC = function (WrappedComponent) {
             return (
                 <Provider store={this.store}>
                     <IntlProvider>
-                        <ErrorBoundary>
+                        <ErrorBoundary action="Top Level App">
                             <WrappedComponent {...this.props} />
                         </ErrorBoundary>
                     </IntlProvider>

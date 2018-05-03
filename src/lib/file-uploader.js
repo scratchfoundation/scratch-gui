@@ -183,7 +183,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
     }
     case 'image/svg+xml':
     case 'image/png':
-    case 'imag/jpeg': {
+    case 'image/jpeg': {
         // Make a sprite from an image by making it a costume first
 
         // let costume = null;

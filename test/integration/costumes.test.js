@@ -64,4 +64,28 @@ describe('Working with costumes', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Converting bitmap/vector in paint editor', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Costumes');
+
+        // Convert the first costume to bitmap.
+        await clickText('costume1', scope.costumesTab);
+        await clickText('Convert to Bitmap', scope.costumesTab);
+
+        // Make sure mode switches back to vector for vector costume.
+        await clickText('costume2', scope.costumesTab);
+        await clickText('Convert to Bitmap', scope.costumesTab);
+
+        // Make sure bitmap is saved by switching back and converting to vector.
+        await clickText('Sounds');
+        await clickText('Costumes');
+        await clickText('Convert to Vector', scope.costumesTab); // costume2
+        await clickText('costume1', scope.costumesTab);
+        await clickText('Convert to Vector', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

@@ -9,7 +9,7 @@
         <!-- Sentry error logging to help with finding bugs -->
         <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
         <script>
-            Raven.config('<%= htmlWebpackPlugin.options.sentryConfig %>').install();
+            Raven.config(<%= htmlWebpackPlugin.options.sentryConfig %>).install();
         </script>
         <!-- /Sentry -->
     <% } %>

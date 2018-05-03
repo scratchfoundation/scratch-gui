@@ -12,6 +12,7 @@ import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
 import CustomProcedures from './custom-procedures.jsx';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
@@ -415,7 +416,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Blocks);
+export default errorBoundaryHOC('Blocks')(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Blocks)
+);

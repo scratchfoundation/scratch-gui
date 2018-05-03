@@ -11,6 +11,7 @@ import BackdropLibrary from './backdrop-library.jsx';
 import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {
     closeCameraCapture,
@@ -367,7 +368,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CostumeTab));
+export default errorBoundaryHOC('Costume Tab')(
+    injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(CostumeTab))
+);

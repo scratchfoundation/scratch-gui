@@ -112,7 +112,7 @@ module.exports = [
                 chunks: ['lib', 'gui'],
                 template: 'src/playground/index.ejs',
                 title: 'Scratch 3.0 GUI',
-                sentryConfig: '"' + process.env.SENTRY_CONFIG + '"'
+                sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib', 'blocksonly'],

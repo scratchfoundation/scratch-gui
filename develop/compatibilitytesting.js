@@ -1,7 +1,7 @@
 var GUI =
 webpackJsonpGUI([3],{
 
-/***/ 567:
+/***/ 569:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21,11 +21,11 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(8);
 
-var _controls = __webpack_require__(53);
+var _controls = __webpack_require__(54);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _stage = __webpack_require__(134);
+var _stage = __webpack_require__(137);
 
 var _stage2 = _interopRequireDefault(_stage);
 
@@ -144,5 +144,5 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ })
 
-},[567]);
+},[569]);
 //# sourceMappingURL=compatibilitytesting.js.map

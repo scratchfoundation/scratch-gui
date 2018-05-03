@@ -189,24 +189,20 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
         // let costume = null;
         costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
             const newSprite = {
-                targets: [{
-                    name: spriteName,
-                    isStage: false,
-                    x: 0, // what should we put here...
-                    y: 0,
-                    visible: true,
-                    size: 100,
-                    rotationStyle: 'all around',
-                    direction: 90,
-                    draggable: true,
-                    currentCostume: 0,
-                    blocks: {},
-                    variables: {},
-                    lists: {},
-                    broadcasts: {},
-                    costumes: [vmCostume],
-                    sounds: [] // TODO are all of these necessary?
-                }]
+                name: spriteName,
+                isStage: false,
+                x: 0,
+                y: 0,
+                visible: true,
+                size: 100,
+                rotationStyle: 'all around',
+                direction: 90,
+                draggable: true,
+                currentCostume: 0,
+                blocks: {},
+                variables: {},
+                costumes: [vmCostume],
+                sounds: [] // TODO are all of these necessary?
             };
             // TODO probably just want sprite upload to handle this object directly
             handleSprite(JSON.stringify(newSprite));

@@ -47,6 +47,7 @@ const handleFileUpload = function (fileInput, onload) {
  * @property {string} dataFormat The data format of this asset, typically
  * the extension to be used for that particular asset, e.g. 'svg' for vector images
  * @property {string} md5 The md5 hash of the asset data, followed by '.'' and dataFormat
+ * @property {string} The md5 hash of the asset data // TODO remove duplication....
  */
 
 /**
@@ -71,7 +72,8 @@ const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
     return {
         name: fileName,
         dataFormat: dataFormat,
-        md5: `${md5}.${dataFormat}`
+        md5: `${md5}.${dataFormat}`,
+        assetId: md5
     };
 };
 
@@ -171,8 +173,59 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
     handleSound(vmSound);
 };
 
+const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
+    switch (fileType) {
+    case '': { // We think this is a .sprite2 or .sprite3 file
+        handleSprite(new Uint8Array(fileData));
+        // TODO VM addSprite function should handle
+        // buffers directly and get unpacked in scratch-parser
+        return;
+    }
+    case 'image/svg+xml':
+    case 'image/png':
+    case 'imag/jpeg': {
+        // Make a sprite from an image by making it a costume first
+
+        // let costume = null;
+        costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
+            const newSprite = {
+                targets: [{
+                    name: spriteName,
+                    isStage: false,
+                    x: 0, // what should we put here...
+                    y: 0,
+                    visible: true,
+                    size: 100,
+                    rotationStyle: 'all around',
+                    direction: 90,
+                    draggable: true,
+                    currentCostume: 0,
+                    blocks: {},
+                    variables: {},
+                    lists: {},
+                    broadcasts: {},
+                    costumes: [vmCostume],
+                    sounds: [] // TODO are all of these necessary?
+                }]
+            };
+            // TODO probably just want sprite upload to handle this object directly
+            handleSprite(JSON.stringify(newSprite));
+        }));
+        return;
+    }
+    // case 'archive/zip': { // sprite2 / sprite3
+    //     handleSprite(JSON.stringify(fileData.toString('utf-8')));
+    //     return;
+    // }
+    default: {
+        return;
+    }
+    }
+};
+
 export {
     handleFileUpload,
     costumeUpload,
-    soundUpload
+    soundUpload,
+    spriteUpload
 };

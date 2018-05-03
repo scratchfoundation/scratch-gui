@@ -43,7 +43,7 @@ export default {
     'spin-around': {
         name: (
             <FormattedMessage
-                defaultMessage="Spin around"
+                defaultMessage="Spin here and there"
                 description="Name for the 'Spin around' how-to"
                 id="gui.howtos.spin-around.name"
             />

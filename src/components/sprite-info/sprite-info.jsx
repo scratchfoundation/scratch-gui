@@ -7,7 +7,7 @@ import Box from '../box/box.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
-import {FormattedMessage} from 'react-intl';
+import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
 
 import layout from '../../lib/layout-constants.js';
 import styles from './sprite-info.css';
@@ -18,6 +18,14 @@ import showIcon from './icon--show.svg';
 import hideIcon from './icon--hide.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
+
+const messages = defineMessages({
+    spritePlaceholder: {
+        id: 'gui.SpriteInfo.spritePlaceholder',
+        defaultMessage: 'Name',
+        description: 'Placeholder text for sprite name'
+    }
+});
 
 class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
@@ -37,13 +45,6 @@ class SpriteInfo extends React.Component {
                 defaultMessage="Sprite"
                 description="Sprite info label"
                 id="gui.SpriteInfo.sprite"
-            />
-        );
-        const spritePlaceholder = (
-            <FormattedMessage
-                defaultMessage="Name"
-                description="Placeholder text for sprite name"
-                id="gui.SpriteInfo.spritePlaceholder"
             />
         );
         const showLabel = (
@@ -77,7 +78,7 @@ class SpriteInfo extends React.Component {
                             <BufferedInput
                                 className={styles.spriteInput}
                                 disabled={this.props.disabled}
-                                placeholder={spritePlaceholder}
+                                placeholder={this.props.intl.formatMessage(messages.spritePlaceholder)}
                                 tabIndex="0"
                                 type="text"
                                 value={this.props.disabled ? '' : this.props.name}
@@ -226,6 +227,7 @@ SpriteInfo.propTypes = {
         PropTypes.number
     ]),
     disabled: PropTypes.bool,
+    intl: intlShape,
     name: PropTypes.string,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
@@ -251,4 +253,4 @@ SpriteInfo.propTypes = {
     ])
 };
 
-export default SpriteInfo;
+export default injectIntl(SpriteInfo);

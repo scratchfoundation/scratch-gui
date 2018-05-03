@@ -11,6 +11,18 @@ export default function () {
         platform.name === 'Silk') {
         return false;
     }
-    // @todo Should also test for versions of supported browsers
+    // Check for old versions of supported browsers
+    if (platform.name === 'Chrome' &&
+        parseInt(platform.version.split('.')[0], 10) < 55) {
+        return false;
+    }
+    if (platform.name === 'Firefox' &&
+        parseInt(platform.version.split('.')[0], 10) < 53) {
+        return false;
+    }
+    if (platform.name === 'Safari' &&
+        parseInt(platform.version.split('.')[0], 10) < 10) {
+        return false;
+    }
     return true;
 }

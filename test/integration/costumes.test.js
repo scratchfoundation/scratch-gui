@@ -88,4 +88,19 @@ describe('Working with costumes', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Undo/redo in the paint editor', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Costumes');
+        await clickText('costume1', scope.costumesTab);
+        await clickText('Convert to Bitmap', scope.costumesTab);
+        await clickXpath('//img[@alt="Undo"]');
+        await clickText('Convert to Bitmap', scope.costumesTab);
+        await clickXpath('//img[@alt="Undo"]');
+        await clickXpath('//img[@alt="Redo"]');
+        await clickText('Convert to Vector', scope.costumesTab);
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

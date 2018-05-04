@@ -58,6 +58,7 @@ class Blocks extends React.Component {
             prompt: null
         };
         this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
+        this.toolboxUpdateQueue = [];
     }
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
@@ -103,24 +104,10 @@ class Blocks extends React.Component {
         }
 
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
-            const categoryName = this.workspace.toolbox_.getSelectedCategoryName();
-            const offset = this.workspace.toolbox_.getCategoryScrollOffset();
             // rather than update the toolbox "sync" -- update it in the next frame
             clearTimeout(this.toolboxUpdateTimeout);
             this.toolboxUpdateTimeout = setTimeout(() => {
-                this.workspace.updateToolbox(this.props.toolboxXML);
-                // In order to catch any changes that mutate the toolbox during "normal runtime"
-                // (variable changes/etc), re-enable toolbox refresh.
-                // Using the setter function will rerender the entire toolbox which we just rendered.
-                this.workspace.toolboxRefreshEnabled_ = true;
-
-                const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
-                const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
-                if (offset < currentCategoryLen) {
-                    this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
-                } else {
-                    this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
-                }
+                this.updateToolbox();
             }, 0);
         }
         if (this.props.isVisible === prevProps.isVisible) {
@@ -141,6 +128,40 @@ class Blocks extends React.Component {
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
     }
+
+    updateToolbox () {
+        this.toolboxUpdateTimeout = false;
+
+        const categoryName = this.workspace.toolbox_.getSelectedCategoryName();
+        const offset = this.workspace.toolbox_.getCategoryScrollOffset();
+        this.workspace.updateToolbox(this.props.toolboxXML);
+        // In order to catch any changes that mutate the toolbox during "normal runtime"
+        // (variable changes/etc), re-enable toolbox refresh.
+        // Using the setter function will rerender the entire toolbox which we just rendered.
+        this.workspace.toolboxRefreshEnabled_ = true;
+
+        const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
+        const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
+        if (offset < currentCategoryLen) {
+            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+        } else {
+            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
+        }
+
+        const queue = this.toolboxUpdateQueue;
+        this.toolboxUpdateQueue = [];
+        queue.forEach(fn => fn());
+    }
+
+    withToolboxUpdates (fn) {
+        // if there is a queued toolbox update, we need to wait
+        if (this.toolboxUpdateTimeout) {
+            this.toolboxUpdateQueue.push(fn);
+        } else {
+            fn();
+        }
+    }
+
     attachVM () {
         this.workspace.addChangeListener(this.props.vm.blockListener);
         this.flyoutWorkspace = this.workspace
@@ -169,15 +190,19 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.removeListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
     }
+
     updateToolboxBlockValue (id, value) {
-        const block = this.workspace
-            .getFlyout()
-            .getWorkspace()
-            .getBlockById(id);
-        if (block) {
-            block.inputList[0].fieldRow[0].setValue(value);
-        }
+        this.withToolboxUpdates(() => {
+            const block = this.workspace
+                .getFlyout()
+                .getWorkspace()
+                .getBlockById(id);
+            if (block) {
+                block.inputList[0].fieldRow[0].setValue(value);
+            }
+        });
     }
+
     onTargetsUpdate () {
         if (this.props.vm.editingTarget) {
             ['glide', 'move', 'set'].forEach(prefix => {
@@ -260,7 +285,9 @@ class Blocks extends React.Component {
         this.handleExtensionAdded(blocksInfo);
     }
     handleCategorySelected (categoryName) {
-        this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
+        this.withToolboxUpdates(() => {
+            this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
+        });
     }
     setBlocks (blocks) {
         this.blocks = blocks;

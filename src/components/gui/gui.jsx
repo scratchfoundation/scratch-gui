@@ -21,6 +21,7 @@ import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
+import DragLayer from '../../containers/drag-layer.jsx';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -215,6 +216,7 @@ const GUIComponent = props => {
                     </Box>
                 </Box>
             </Box>
+            <DragLayer />
         </Box>
     );
 };

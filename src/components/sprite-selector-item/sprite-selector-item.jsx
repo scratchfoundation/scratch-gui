@@ -20,8 +20,11 @@ const SpriteSelectorItem = props => (
             }),
             onClick: props.onClick,
             onMouseEnter: props.onMouseEnter,
-            onMouseLeave: props.onMouseLeave
+            onMouseLeave: props.onMouseLeave,
+            onMouseDown: props.onMouseDown,
+            onTouchStart: props.onMouseDown
         }}
+        disable={props.dragging}
         id={`${props.name}-${contextMenuId}`}
     >
         {(props.selected && props.onDeleteButtonClick) ? (
@@ -77,11 +80,13 @@ SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
+    dragging: PropTypes.bool,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
+    onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     selected: PropTypes.bool.isRequired

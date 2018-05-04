@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
-
+import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 import styles from './backpack.css';
 
-const Backpack = ({expanded, onToggle}) => (
+// TODO make sprite selector item not require onClick
+const noop = () => {};
+
+const Backpack = ({contents, expanded, loading, onToggle}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -32,25 +35,60 @@ const Backpack = ({expanded, onToggle}) => (
         </div>
         {expanded ? (
             <div className={styles.backpackList}>
-                <div className={styles.emptyMessage}>
-                    <FormattedMessage
-                        defaultMessage="Backpack is empty"
-                        description="Empty backpack message"
-                        id="gui.backpack.emptyBackpack"
-                    />
-                </div>
+                {loading ? (
+                    <div className={styles.statusMessage}>
+                        <FormattedMessage
+                            defaultMessage="Loading..."
+                            description="Loading backpack message"
+                            id="gui.backpack.loadingBackpack"
+                        />
+                    </div>
+                ) : (
+                    contents.length > 0 ? (
+                        <div className={styles.backpackListInner}>
+                            {contents.map(item => (
+                                <SpriteSelectorItem
+                                    className={styles.backpackItem}
+                                    costumeURL={item.thumbnailUrl}
+                                    details={item.name}
+                                    key={item.id}
+                                    name={item.type}
+                                    selected={false}
+                                    onClick={noop}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={styles.statusMessage}>
+                            <FormattedMessage
+                                defaultMessage="Backpack is empty"
+                                description="Empty backpack message"
+                                id="gui.backpack.emptyBackpack"
+                            />
+                        </div>
+                    )
+                )}
             </div>
         ) : null}
     </div>
 );
 
 Backpack.propTypes = {
+    contents: PropTypes.shape({
+        id: PropTypes.string,
+        thumbnailUrl: PropTypes.string,
+        type: PropTypes.string,
+        name: PropTypes.string
+    }),
     expanded: PropTypes.bool,
+    loading: PropTypes.bool,
     onToggle: PropTypes.func
 };
 
 Backpack.defaultProps = {
+    contents: [],
     expanded: false,
+    loading: false,
     onToggle: null
 };
 

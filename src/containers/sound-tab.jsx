@@ -17,6 +17,7 @@ import SoundLibrary from './sound-library.jsx';
 
 import soundLibraryContent from '../lib/libraries/sounds.json';
 import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {connect} from 'react-redux';
 
@@ -260,7 +261,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SoundTab));
+export default errorBoundaryHOC('Sound Tab')(
+    injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(SoundTab))
+);

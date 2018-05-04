@@ -37,9 +37,8 @@
     display: block;
     border: 1px solid $ui-black-transparent;
     border-radius: .25rem;
-    box-sizing: content-box;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: calc(2rem + 2px);
+    height: calc(2rem + 2px);
     background: $ui-white;
     padding: 0.375rem;
     user-select: none;

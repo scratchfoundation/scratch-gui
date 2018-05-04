@@ -4,11 +4,40 @@ import Box from '../box/box.jsx';
 import Waveform from '../waveform/waveform.jsx';
 import Meter from '../meter/meter.jsx';
 import AudioTrimmer from '../../containers/audio-trimmer.jsx';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import styles from './record-modal.css';
 import backIcon from './icon--back.svg';
 import stopIcon from './icon--stop-playback.svg';
 import playIcon from './icon--play.svg';
+
+const messages = defineMessages({
+    stopMsg: {
+        defaultMessage: 'Stop',
+        description: 'Stop/Play button in recording playback',
+        id: 'gui.playbackStep.stopMsg'
+    },
+    playMsg: {
+        defaultMessage: 'Play',
+        description: 'Stop/Play button in recording playback',
+        id: 'gui.playbackStep.playMsg'
+    },
+    loadingMsg: {
+        defaultMessage: 'Loading...',
+        description: 'Loading/Save button in recording playback',
+        id: 'gui.playbackStep.loadingMsg'
+    },
+    saveMsg: {
+        defaultMessage: 'Save',
+        description: 'Loading/Save button in recording playback',
+        id: 'gui.playbackStep.saveMsg'
+    },
+    reRecordMsg: {
+        defaultMessage: 'Re-record',
+        description: 'Button to re-record sound in recording playback',
+        id: 'gui.playbackStep.reRecordMsg'
+    }
+});
 
 const PlaybackStep = props => (
     <Box>
@@ -48,7 +77,10 @@ const PlaybackStep = props => (
                 />
                 <div className={styles.helpText}>
                     <span className={styles.playingText}>
-                        {props.playing ? 'Stop' : 'Play'}
+                        {props.playing ?
+                            props.intl.formatMessage(messages.stopMsg) :
+                            props.intl.formatMessage(messages.playMsg)
+                        }
                     </span>
                 </div>
             </button>
@@ -61,14 +93,18 @@ const PlaybackStep = props => (
                 <img
                     draggable={false}
                     src={backIcon}
-                /> Re-record
+                />
+                {props.intl.formatMessage(messages.reRecordMsg)}
             </button>
             <button
                 className={styles.okButton}
                 disabled={props.encoding}
                 onClick={props.onSubmit}
             >
-                {props.encoding ? 'Loading...' : 'Save'}
+                {props.encoding ?
+                    props.intl.formatMessage(messages.loadingMsg) :
+                    props.intl.formatMessage(messages.saveMsg)
+                }
             </button>
         </Box>
     </Box>
@@ -76,6 +112,7 @@ const PlaybackStep = props => (
 
 PlaybackStep.propTypes = {
     encoding: PropTypes.bool.isRequired,
+    intl: intlShape.isRequired,
     levels: PropTypes.arrayOf(PropTypes.number).isRequired,
     onBack: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
@@ -89,4 +126,4 @@ PlaybackStep.propTypes = {
     trimStart: PropTypes.number.isRequired
 };
 
-export default PlaybackStep;
+export default injectIntl(PlaybackStep);

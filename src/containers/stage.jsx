@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {getEventXY} from '../lib/touch-utils';
+import VideoProvider from '../lib/video/video-provider';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -57,6 +58,7 @@ class Stage extends React.Component {
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
+        this.props.vm.setVideoProvider(new VideoProvider());
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.width !== nextProps.width ||
@@ -295,6 +297,7 @@ class Stage extends React.Component {
         if (drawableId === null) return;
         const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
+        if (targetId === null) return;
 
         // Only start drags on non-draggable targets in editor drag mode
         if (!this.props.useEditorDragStyle) {
@@ -302,7 +305,6 @@ class Stage extends React.Component {
             if (!target.draggable) return;
         }
 
-        if (targetId === null) return;
         this.props.vm.startDrag(targetId);
         this.setState({
             isDragging: true,
@@ -392,9 +394,9 @@ Stage.defaultProps = {
 
 const mapStateToProps = state => ({
     isColorPicking: state.colorPicker.active,
-    isFullScreen: state.stageSize.isFullScreen,
-    // Do not use editor drag style in fullscreen mode.
-    useEditorDragStyle: !state.stageSize.isFullScreen
+    isFullScreen: state.mode.isFullScreen,
+    // Do not use editor drag style in fullscreen or player mode.
+    useEditorDragStyle: !(state.mode.isFullScreen || state.mode.isPlayerOnly)
 });
 
 const mapDispatchToProps = dispatch => ({

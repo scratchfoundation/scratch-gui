@@ -15,7 +15,7 @@ const Label = props => (
 Label.propTypes = {
     children: PropTypes.node,
     secondary: PropTypes.bool,
-    text: PropTypes.string.isRequired
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
 };
 
 Label.defaultProps = {

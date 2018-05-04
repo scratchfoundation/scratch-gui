@@ -1,15 +1,24 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import RecordingStep from '../../containers/recording-step.jsx';
 import PlaybackStep from '../../containers/playback-step.jsx';
 import Modal from '../modal/modal.jsx';
 import styles from './record-modal.css';
 
+const messages = defineMessages({
+    title: {
+        defaultMessage: 'Record Sound',
+        description: 'Recording modal title',
+        id: 'gui.recordModal.title'
+    }
+});
+
 const RecordModal = props => (
     <Modal
         className={styles.modalContent}
-        contentLabel={'Record Sound'}
+        contentLabel={props.intl.formatMessage(messages.title)}
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
@@ -44,6 +53,7 @@ const RecordModal = props => (
 
 RecordModal.propTypes = {
     encoding: PropTypes.bool.isRequired,
+    intl: intlShape.isRequired,
     levels: PropTypes.arrayOf(PropTypes.number),
     onBack: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
@@ -64,4 +74,4 @@ RecordModal.propTypes = {
     trimStart: PropTypes.number.isRequired
 };
 
-export default RecordModal;
+export default injectIntl(RecordModal);

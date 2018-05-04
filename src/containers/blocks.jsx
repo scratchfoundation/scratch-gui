@@ -12,6 +12,7 @@ import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
 import CustomProcedures from './custom-procedures.jsx';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
@@ -99,7 +100,12 @@ class Blocks extends React.Component {
             const offset = this.workspace.toolbox_.getCategoryScrollOffset();
             this.workspace.updateToolbox(this.props.toolboxXML);
             const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
-            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
+            if (offset < currentCategoryLen) {
+                this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+            } else {
+                this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
+            }
         }
         if (this.props.isVisible === prevProps.isVisible) {
             return;
@@ -410,7 +416,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Blocks);
+export default errorBoundaryHOC('Blocks')(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Blocks)
+);

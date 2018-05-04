@@ -1,0 +1,153 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+$main-button-size: 2.75rem;
+
+.modal-content {
+    width: 552px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.camera-feed-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background: $ui-primary;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 4px;
+    padding: 3px;
+
+    width: 480px;
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+}
+
+.canvas {
+    position: absolute;
+    width: 480px;
+    height: 360px;
+}
+
+.loading-text {
+    position: absolute;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary-transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.help-text {
+    margin: 10px auto 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary-transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.capture-text {
+    color: $motion-primary;
+}
+
+.disabled-text {
+    color: $text-primary;
+    opacity: 0.25;
+}
+
+.main-button-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Action Menu */
+.main-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: $motion-primary;
+    outline: none;
+    border: none;
+    transition: background-color 0.2s;
+
+    border-radius: 100%;
+    width: $main-button-size;
+    height: $main-button-size;
+    box-shadow: 0 0 0 4px $motion-transparent;
+}
+
+.main-button:hover {
+    background: $pen-primary;
+    box-shadow: 0 0 0 6px $motion-transparent;
+}
+
+.main-button:disabled {
+    background: $text-primary;
+    border-color: $ui-black-transparent;
+    box-shadow: none;
+    opacity: 0.25;
+}
+
+.main-icon {
+    width: calc($main-button-size - 1rem);
+    height: calc($main-button-size - 1rem);
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 480px;
+}
+
+.button-row button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    background: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: $motion-primary;
+    cursor: pointer;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: $ui-white;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $ui-white;
+    animation-name: flash;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
+}

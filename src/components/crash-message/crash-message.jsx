@@ -1,3 +1,9 @@
+/* eslint-disable react/jsx-no-literals */
+/*
+    @todo Rule is disabled because this component is rendered outside the
+    intl provider right now so cannot be translated.
+*/
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';

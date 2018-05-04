@@ -8,12 +8,16 @@ import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
 import CostumeLibrary from './costume-library.jsx';
 import BackdropLibrary from './backdrop-library.jsx';
+import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {
+    closeCameraCapture,
     closeCostumeLibrary,
     closeBackdropLibrary,
+    openCameraCapture,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';
@@ -60,7 +64,7 @@ const messages = defineMessages({
         id: 'gui.costumeTab.addFileCostume'
     },
     addCameraCostumeMsg: {
-        defaultMessage: 'Coming Soon',
+        defaultMessage: 'Camera',
         description: 'Button to use the camera to create a costume costume in the editor tab',
         id: 'gui.costumeTab.addCameraCostume'
     }
@@ -79,6 +83,7 @@ class CostumeTab extends React.Component {
             'handleSurpriseBackdrop',
             'handleFileUploadClick',
             'handleCostumeUpload',
+            'handleCameraBuffer',
             'setFileInput'
         ]);
         const {
@@ -180,25 +185,35 @@ class CostumeTab extends React.Component {
             costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
         });
     }
+    handleCameraBuffer (buffer) {
+        const storage = this.props.vm.runtime.storage;
+        costumeUpload(buffer, 'image/png', 'costume1', storage, this.handleNewCostume);
+    }
     handleFileUploadClick () {
         this.fileInput.click();
     }
     setFileInput (input) {
         this.fileInput = input;
     }
-    formatCostumeDetails (size) {
+    formatCostumeDetails (size, optResolution) {
+        // If no resolution is given, assume that the costume is an SVG
+        const resolution = optResolution ? optResolution : 1;
+        // Convert size to stage units by dividing by resolution
         // Round up width and height for scratch-flash compatibility
         // https://github.com/LLK/scratch-flash/blob/9fbac92ef3d09ceca0c0782f8a08deaa79e4df69/src/ui/media/MediaInfo.as#L224-L237
-        return `${Math.ceil(size[0])} x ${Math.ceil(size[1])}`;
+        return `${Math.ceil(size[0] / resolution)} x ${Math.ceil(size[1] / resolution)}`;
     }
     render () {
         const {
             intl,
+            onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
             backdropLibraryVisible,
+            cameraModalVisible,
             costumeLibraryVisible,
             onRequestCloseBackdropLibrary,
+            onRequestCloseCameraModal,
             onRequestCloseCostumeLibrary,
             editingTarget,
             sprites,
@@ -221,7 +236,7 @@ class CostumeTab extends React.Component {
         const costumeData = (target.costumes || []).map(costume => ({
             name: costume.name,
             assetId: costume.assetId,
-            details: costume.size ? this.formatCostumeDetails(costume.size) : null
+            details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null
         }));
 
         return (
@@ -234,13 +249,14 @@ class CostumeTab extends React.Component {
                     },
                     {
                         title: intl.formatMessage(messages.addCameraCostumeMsg),
-                        img: cameraIcon
+                        img: cameraIcon,
+                        onClick: onNewCostumeFromCameraClick
                     },
                     {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg', // coming soon
+                        fileAccept: '.svg, .png, .jpg, .jpeg',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput
                     },
@@ -280,6 +296,12 @@ class CostumeTab extends React.Component {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
+                {cameraModalVisible ? (
+                    <CameraModal
+                        onClose={onRequestCloseCameraModal}
+                        onNewCostume={this.handleCameraBuffer}
+                    />
+                ) : null}
             </AssetPanel>
         );
     }
@@ -287,12 +309,15 @@ class CostumeTab extends React.Component {
 
 CostumeTab.propTypes = {
     backdropLibraryVisible: PropTypes.bool,
+    cameraModalVisible: PropTypes.bool,
     costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseBackdropLibrary: PropTypes.func.isRequired,
+    onRequestCloseCameraModal: PropTypes.func.isRequired,
     onRequestCloseCostumeLibrary: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
@@ -315,6 +340,7 @@ const mapStateToProps = state => ({
     editingTarget: state.targets.editingTarget,
     sprites: state.targets.sprites,
     stage: state.targets.stage,
+    cameraModalVisible: state.modals.cameraCapture,
     costumeLibraryVisible: state.modals.costumeLibrary,
     backdropLibraryVisible: state.modals.backdropLibrary
 });
@@ -328,15 +354,23 @@ const mapDispatchToProps = dispatch => ({
         e.preventDefault();
         dispatch(openCostumeLibrary());
     },
+    onNewCostumeFromCameraClick: () => {
+        dispatch(openCameraCapture());
+    },
     onRequestCloseBackdropLibrary: () => {
         dispatch(closeBackdropLibrary());
     },
     onRequestCloseCostumeLibrary: () => {
         dispatch(closeCostumeLibrary());
+    },
+    onRequestCloseCameraModal: () => {
+        dispatch(closeCameraCapture());
     }
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CostumeTab));
+export default errorBoundaryHOC('Costume Tab')(
+    injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(CostumeTab))
+);

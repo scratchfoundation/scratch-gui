@@ -1,4 +1,7 @@
-body {
-    padding: 0;
-    margin: 0;
+.stage-only {
+    width: calc(480px + 1rem);
+}
+
+.stage-only * {
+    box-sizing: border-box;
 }

@@ -60,7 +60,13 @@ const StageSelector = props => {
             {...componentProps}
         >
             <div className={styles.header}>
-                <div className={styles.headerTitle}>Stage</div>
+                <div className={styles.headerTitle}>
+                    <FormattedMessage
+                        defaultMessage="Stage"
+                        description="Label for the stage in the stage selector"
+                        id="gui.stageSelector.stage"
+                    />
+                </div>
             </div>
             {url ? (
                 <CostumeCanvas

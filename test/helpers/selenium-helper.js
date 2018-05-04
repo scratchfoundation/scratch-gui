@@ -87,7 +87,7 @@ class SeleniumHelper {
     }
 
     clickButton (text) {
-        return this.clickXpath(`//button[contains(text(), '${text}')]`);
+        return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
     }
 
     getLogs (whitelist) {

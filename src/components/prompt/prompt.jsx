@@ -59,13 +59,21 @@ const PromptComponent = props => (
                     className={styles.cancelButton}
                     onClick={props.onCancel}
                 >
-                    Cancel
+                    <FormattedMessage
+                        defaultMessage="Cancel"
+                        description="Button in prompt for cancelling the dialog"
+                        id="gui.prompt.cancel"
+                    />
                 </button>
                 <button
                     className={styles.okButton}
                     onClick={props.onOk}
                 >
-                    OK
+                    <FormattedMessage
+                        defaultMessage="OK"
+                        description="Button in prompt for confirming the dialog"
+                        id="gui.prompt.ok"
+                    />
                 </button>
             </Box>
         </Box>

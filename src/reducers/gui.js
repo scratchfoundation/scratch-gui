@@ -8,6 +8,7 @@ import hoveredTargetReducer from './hovered-target';
 import intlReducer from './intl';
 import menuReducer from './menus';
 import modalReducer from './modals';
+import modeReducer from './mode';
 import monitorReducer from './monitors';
 import monitorLayoutReducer from './monitor-layout';
 import targetReducer from './targets';
@@ -22,6 +23,7 @@ export default combineReducers({
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     editorTab: editorTabReducer,
+    mode: modeReducer,
     hoveredTarget: hoveredTargetReducer,
     intl: intlReducer,
     stageSize: stageSizeReducer,

@@ -175,10 +175,9 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
 
 const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
     switch (fileType) {
-    case '': { // We think this is a .sprite2 or .sprite3 file
+    case '':
+    case 'archive/zip': { // We think this is a .sprite2 or .sprite3 file
         handleSprite(new Uint8Array(fileData));
-        // TODO VM addSprite function should handle
-        // buffers directly and get unpacked in scratch-parser
         return;
     }
     case 'image/svg+xml':
@@ -209,10 +208,6 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
         }));
         return;
     }
-    // case 'archive/zip': { // sprite2 / sprite3
-    //     handleSprite(JSON.stringify(fileData.toString('utf-8')));
-    //     return;
-    // }
     default: {
         return;
     }

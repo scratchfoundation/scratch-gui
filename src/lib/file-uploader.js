@@ -178,7 +178,7 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
 const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
     switch (fileType) {
     case '':
-    case 'archive/zip': { // We think this is a .sprite2 or .sprite3 file
+    case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
         handleSprite(new Uint8Array(fileData));
         return;
     }

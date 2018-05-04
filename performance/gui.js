@@ -1,6 +1,7 @@
-webpackJsonp([0],{
+var GUI =
+webpackJsonpGUI([0],{
 
-/***/ 141:
+/***/ 149:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,7 +9,7 @@ webpackJsonp([0],{
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(142);
+__webpack_require__(150);
 
 var _react = __webpack_require__(0);
 
@@ -22,23 +23,15 @@ var _reactModal = __webpack_require__(16);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
-var _analytics = __webpack_require__(10);
+var _analytics = __webpack_require__(11);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _appStateHoc = __webpack_require__(21);
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
-var _gui = __webpack_require__(24);
+var _gui = __webpack_require__(23);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(31);
-
-var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
-
-var _index = __webpack_require__(508);
+var _index = __webpack_require__(562);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -54,30 +47,28 @@ if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined
 // Register "base" page view
 _analytics2.default.pageview('/');
 
-var App = (0, _appStateHoc2.default)((0, _projectLoaderHoc2.default)(_gui2.default));
-
 var appTarget = document.createElement('div');
 appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
 
 _reactModal2.default.setAppElement(appTarget);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
+_reactDom2.default.render(_react2.default.createElement(_gui2.default, null), appTarget);
 
 /***/ }),
 
-/***/ 142:
+/***/ 150:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(143).polyfill();
+__webpack_require__(151).polyfill();
 
 
 /***/ }),
 
-/***/ 143:
+/***/ 151:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -131,11 +122,11 @@ module.exports = {
 
 /***/ }),
 
-/***/ 508:
+/***/ 562:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(509);
+var content = __webpack_require__(563);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -154,8 +145,8 @@ var update = __webpack_require__(3)(content, options);
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/postcss-loader/lib/index.js??postcss!./index.css", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/postcss-loader/lib/index.js??postcss!./index.css");
+	module.hot.accept("!!../../node_modules/css-loader/index.js??ref--1-1!../../node_modules/postcss-loader/lib/index.js??postcss!./index.css", function() {
+		var newContent = require("!!../../node_modules/css-loader/index.js??ref--1-1!../../node_modules/postcss-loader/lib/index.js??postcss!./index.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -182,7 +173,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 509:
+/***/ 563:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -190,14 +181,14 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "html,\nbody,\n.index_app_3cj18 {\n    /* probably unecessary, transitional until layout is refactored */\n    width: 100%; \n    height: 100%;\n    margin: 0;\n}\n\n/* @todo: move globally? Safe / side FX, for blocks particularly? */\n\n* { -webkit-box-sizing: border-box; box-sizing: border-box; }\n", ""]);
+exports.push([module.i, "html,\nbody,\n.index_app_3Qs6X {\n    /* probably unecessary, transitional until layout is refactored */\n    width: 100%; \n    height: 100%;\n    margin: 0;\n}\n\n/* @todo: move globally? Safe / side FX, for blocks particularly? */\n\n* { -webkit-box-sizing: border-box; box-sizing: border-box; }\n", ""]);
 
 // exports
 exports.locals = {
-	"app": "index_app_3cj18"
+	"app": "index_app_3Qs6X"
 };
 
 /***/ })
 
-},[141]);
+},[149]);
 //# sourceMappingURL=gui.js.map

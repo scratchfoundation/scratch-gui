@@ -282,6 +282,8 @@ const MenuBar = props => (
             <a
                 className={styles.feedbackLink}
                 href="https://scratch.mit.edu/discuss/topic/299791/"
+                rel="noopener noreferrer"
+                target="_blank"
             >
                 <Button
                     className={styles.feedbackButton}

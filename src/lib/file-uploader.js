@@ -108,6 +108,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         break;
     }
     default:
+        log.warn(`Encountered unexpected file type: ${fileType}`);
         return;
     }
 
@@ -160,6 +161,7 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
         break;
     }
     default:
+        log.warn(`Encountered unexpected file type: ${fileType}`);
         return;
     }
 
@@ -209,6 +211,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
         return;
     }
     default: {
+        log.warn(`Encountered unexpected file type: ${fileType}`);
         return;
     }
     }

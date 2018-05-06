@@ -1,18 +1,17 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.monitor {
+.monitor-container {
     position: absolute;
-    padding: 3px;
     background: $ui-primary;
     z-index: 100;
     border: 1px solid $ui-black-transparent;
     border-radius: calc($space / 2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.75rem;
-    display: flex;
     transition: box-shadow 0.2s;
     pointer-events: all;
+    overflow: hidden;
 }
 
 .monitor:hover {
@@ -22,6 +21,11 @@
 .dragging {
     z-index: 101;
     box-shadow: 3px 3px 5px #888888;
+}
+
+.default-monitor {
+    display: flex;
+    padding: 3px;
 }
 
 .label {
@@ -37,4 +41,13 @@
     margin: 0 5px;
     border-radius: calc($space / 2);
     padding: 0 2px;
+}
+
+.large-value {
+    min-height: 1.5rem;
+    min-width: 3rem;
+    padding: 0.25rem;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
 }

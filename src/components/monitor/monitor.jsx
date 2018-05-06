@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import Box from '../box/box.jsx';
+import DefaultMonitor from './default-monitor.jsx';
+import LargeMonitor from './large-monitor.jsx';
+
 import styles from './monitor.css';
 
 const categories = {
@@ -13,6 +16,11 @@ const categories = {
     list: '#FC662C'
 };
 
+const types = {
+    default: DefaultMonitor,
+    large: LargeMonitor
+};
+
 const MonitorComponent = props => (
     <Draggable
         bounds="parent"
@@ -20,18 +28,14 @@ const MonitorComponent = props => (
         onStop={props.onDragEnd}
     >
         <Box
-            className={styles.monitor}
+            className={styles.monitorContainer}
             componentRef={props.componentRef}
         >
-            <Box className={styles.label}>
-                {props.label}
-            </Box>
-            <Box
-                className={styles.value}
-                style={{background: categories[props.category]}}
-            >
-                {props.value}
-            </Box>
+            {types[props.type]({
+                categoryColor: categories[props.category],
+                label: props.label,
+                value: props.value
+            })}
         </Box>
     </Draggable>
 );
@@ -43,13 +47,15 @@ MonitorComponent.propTypes = {
     componentRef: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     onDragEnd: PropTypes.func.isRequired,
+    type: PropTypes.oneOf(Object.keys(types)),
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number])
 };
 
 MonitorComponent.defaultProps = {
-    category: 'data'
+    category: 'data',
+    type: 'default'
 };
 
 export default MonitorComponent;

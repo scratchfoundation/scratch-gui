@@ -186,8 +186,6 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
     case 'image/png':
     case 'image/jpeg': {
         // Make a sprite from an image by making it a costume first
-
-        // let costume = null;
         costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
             const newSprite = {
                 name: spriteName,

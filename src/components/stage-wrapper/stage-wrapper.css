@@ -1,0 +1,14 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.stage-wrapper {
+    box-sizing: border-box;
+}
+
+.stage-canvas-wrapper {
+    padding-left: $space;
+    padding-right: $space;
+
+    /* Hides negative space between edge of rounded corners + container, when selected */
+    user-select: none;
+}

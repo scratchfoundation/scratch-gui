@@ -4,6 +4,7 @@ import platform from 'platform';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
 import log from '../lib/log.js';
+import supportedBrowser from '../lib/supported-browser';
 import analytics from '../lib/analytics';
 
 class ErrorBoundary extends React.Component {
@@ -15,14 +16,32 @@ class ErrorBoundary extends React.Component {
     }
 
     componentDidCatch (error, info) {
+        // Error object may be undefined (IE?)
+        error = error || {
+            stack: 'Unknown stack',
+            message: 'Unknown error'
+        };
+
         // Display fallback UI
         this.setState({hasError: true});
+
+        // Log errors to analytics, separating supported browsers from unsupported.
+        if (supportedBrowser()) {
+            analytics.event({
+                category: 'error',
+                action: this.props.action,
+                label: error.message
+            });
+        } else {
+            analytics.event({
+                category: 'Unsupported Browser Error',
+                action: `(Unsupported Browser) ${this.props.action}`,
+                label: `${platform.name} ${error.message}`
+            });
+        }
+
+        // Log error locally for debugging as well.
         log.error(`Unhandled Error: ${error.stack}\nComponent stack: ${info.componentStack}`);
-        analytics.event({
-            category: 'error',
-            action: 'Fatal Error',
-            label: error.message
-        });
     }
 
     handleBack () {
@@ -35,21 +54,17 @@ class ErrorBoundary extends React.Component {
 
     render () {
         if (this.state.hasError) {
-            // don't use array.includes because that's something that causes IE to crash.
-            if (
-                platform.name === 'IE' ||
-                platform.name === 'Opera' ||
-                platform.name === 'Opera Mini' ||
-                platform.name === 'Silk') {
-                return <BrowserModalComponent onBack={this.handleBack} />;
+            if (supportedBrowser()) {
+                return <CrashMessageComponent onReload={this.handleReload} />;
             }
-            return <CrashMessageComponent onReload={this.handleReload} />;
+            return <BrowserModalComponent onBack={this.handleBack} />;
         }
         return this.props.children;
     }
 }
 
 ErrorBoundary.propTypes = {
+    action: PropTypes.string.isRequired, // Used for defining tracking action
     children: PropTypes.node
 };
 

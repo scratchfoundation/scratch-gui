@@ -28,6 +28,25 @@ export default function (vm) {
         };
     };
 
+    const jsonForHatBlockMenu = function (hatName, name, menuOptionsFn, colors, start) {
+        return {
+            message0: hatName,
+            args0: [
+                {
+                    type: 'field_dropdown',
+                    name: name,
+                    options: function () {
+                        return start.concat(menuOptionsFn());
+                    }
+                }
+            ],
+            colour: colors.primary,
+            colourSecondary: colors.secondary,
+            colourTertiary: colors.tertiary,
+            extensions: ['shape_hat']
+        };
+    };
+
     const soundsMenu = function () {
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
             return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
@@ -46,6 +65,14 @@ export default function (vm) {
         if (vm.runtime.targets[0] && vm.runtime.targets[0].getCostumes().length > 0) {
             return vm.runtime.targets[0].getCostumes().map(costume => [costume.name, costume.name])
                 .concat([['next backdrop', 'next backdrop'], ['previous backdrop', 'previous backdrop']]);
+        }
+        return [['', '']];
+    };
+
+    const backdropNamesMenu = function () {
+        const stage = vm.runtime.getTargetForStage();
+        if (stage && stage.getCostumes().length > 0) {
+            return stage.getCostumes().map(costume => [costume.name, costume.name]);
         }
         return [['', '']];
     };
@@ -87,6 +114,8 @@ export default function (vm) {
 
     const controlColors = ScratchBlocks.Colours.control;
 
+    const eventColors = ScratchBlocks.Colours.event;
+
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
         this.jsonInit(json);
@@ -99,6 +128,13 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.looks_backdrops.init = function () {
         const json = jsonForMenuBlock('BACKDROP', backdropsMenu, looksColors, []);
+        this.jsonInit(json);
+    };
+
+    ScratchBlocks.Blocks.event_whenbackdropswitchesto.init = function () {
+        const json = jsonForHatBlockMenu(
+            ScratchBlocks.Msg.EVENT_WHENBACKDROPSWITCHESTO,
+            'BACKDROP', backdropNamesMenu, eventColors, []);
         this.jsonInit(json);
     };
 
@@ -128,13 +164,6 @@ export default function (vm) {
     ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             ['Stage', '_stage_']
-        ]);
-        this.jsonInit(json);
-    };
-
-    ScratchBlocks.Blocks.sensing_videoonmenutwo.init = function () {
-        const json = jsonForMenuBlock('VIDEOONMENU2', spriteMenu, sensingColors, [
-            ['stage', 'STAGE']
         ]);
         this.jsonInit(json);
     };

@@ -4,6 +4,7 @@ const OPEN_MODAL = 'scratch-gui/modals/OPEN_MODAL';
 const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
+const MODAL_CAMERA_CAPTURE = 'cameraCapture';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
 const MODAL_IMPORT_INFO = 'importInfo';
@@ -13,9 +14,12 @@ const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
 
+const MODAL_TIPS_LIBRARY = 'tipsLibrary';
+
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
+    [MODAL_CAMERA_CAPTURE]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
     [MODAL_IMPORT_INFO]: false,
@@ -23,7 +27,8 @@ const initialState = {
     [MODAL_PREVIEW_INFO]: true,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
-    [MODAL_SOUND_RECORDER]: false
+    [MODAL_SOUND_RECORDER]: false,
+    [MODAL_TIPS_LIBRARY]: false
 };
 
 const reducer = function (state, action) {
@@ -57,6 +62,10 @@ const openBackdropLibrary = function () {
     analytics.pageview('/libraries/backdrops');
     return openModal(MODAL_BACKDROP_LIBRARY);
 };
+const openCameraCapture = function () {
+    analytics.pageview('/modals/camera');
+    return openModal(MODAL_CAMERA_CAPTURE);
+};
 const openCostumeLibrary = function () {
     analytics.pageview('/libraries/costumes');
     return openModal(MODAL_COSTUME_LIBRARY);
@@ -89,8 +98,15 @@ const openSoundRecorder = function () {
     analytics.pageview('/modals/microphone');
     return openModal(MODAL_SOUND_RECORDER);
 };
+const openTipsLibrary = function () {
+    analytics.pageview('/modals/tips');
+    return openModal(MODAL_TIPS_LIBRARY);
+};
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
+};
+const closeCameraCapture = function () {
+    return closeModal(MODAL_CAMERA_CAPTURE);
 };
 const closeCostumeLibrary = function () {
     return closeModal(MODAL_COSTUME_LIBRARY);
@@ -116,9 +132,13 @@ const closeSoundLibrary = function () {
 const closeSoundRecorder = function () {
     return closeModal(MODAL_SOUND_RECORDER);
 };
+const closeTipsLibrary = function () {
+    return closeModal(MODAL_TIPS_LIBRARY);
+};
 export {
     reducer as default,
     openBackdropLibrary,
+    openCameraCapture,
     openCostumeLibrary,
     openExtensionLibrary,
     openImportInfo,
@@ -127,7 +147,9 @@ export {
     openSoundLibrary,
     openSpriteLibrary,
     openSoundRecorder,
+    openTipsLibrary,
     closeBackdropLibrary,
+    closeCameraCapture,
     closeCostumeLibrary,
     closeExtensionLibrary,
     closeImportInfo,
@@ -135,5 +157,6 @@ export {
     closePreviewInfo,
     closeSpriteLibrary,
     closeSoundLibrary,
-    closeSoundRecorder
+    closeSoundRecorder,
+    closeTipsLibrary
 };

@@ -13,3 +13,23 @@ _Explain why these changes should be made_
 ### Test Coverage
 
 _Please show how you have added tests to cover your changes_
+
+### Browser Coverage
+Mac
+ * [ ] Chrome 
+ * [ ] Firefox 
+ * [ ] Safari
+ 
+Windows
+ * [ ] Chrome 
+ * [ ] Firefox 
+ * [ ] Edge
+ 
+Chromebook
+ * [ ] Chrome
+ 
+iPad
+* [ ] Safari
+
+Android Tablet
+* [ ] Chrome

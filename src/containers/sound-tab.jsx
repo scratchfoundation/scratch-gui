@@ -16,6 +16,8 @@ import SoundEditor from './sound-editor.jsx';
 import SoundLibrary from './sound-library.jsx';
 
 import soundLibraryContent from '../lib/libraries/sounds.json';
+import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {connect} from 'react-redux';
 
@@ -106,41 +108,13 @@ class SoundTab extends React.Component {
     }
 
     handleSoundUpload (e) {
-        const thisFileInput = e.target;
-        let thisFile = null;
-        const reader = new FileReader();
-        reader.onload = () => {
-            // Reset the file input value now that we have everything we need
-            // so that the user can upload the same sound multiple times if
-            // they choose
-            thisFileInput.value = null;
-            // Cache the sound in storage
-            const soundBuffer = reader.result;
-            const storage = this.props.vm.runtime.storage;
+        const storage = this.props.vm.runtime.storage;
+        const handleSound = newSound => this.props.vm.addSound(newSound)
+            .then(() => this.handleNewSound());
 
-            const fileType = thisFile.type; // what file type does the browser think this is
-            const soundFormat = fileType === 'audio/mp3' ? storage.DataFormat.MP3 : storage.DataFormat.WAV;
-            const md5 = storage.builtinHelper.cache(
-                storage.AssetType.Sound,
-                soundFormat,
-                new Uint8Array(soundBuffer),
-            );
-            // Add the sound to vm
-            const newSound = {
-                format: '',
-                name: 'sound1',
-                dataFormat: soundFormat,
-                md5: `${md5}.${soundFormat}`
-            };
-
-            this.props.vm.addSound(newSound).then(() => {
-                this.handleNewSound();
-            });
-        };
-        if (thisFileInput.files) {
-            thisFile = thisFileInput.files[0];
-            reader.readAsArrayBuffer(thisFile);
-        }
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            soundUpload(buffer, fileType, fileName, storage, handleSound);
+        });
     }
 
     setFileInput (input) {
@@ -287,7 +261,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SoundTab));
+export default errorBoundaryHOC('Sound Tab')(
+    injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(SoundTab))
+);

@@ -1,15 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import Monitor from '../../containers/monitor.jsx';
 import PropTypes from 'prop-types';
 import {OrderedMap} from 'immutable';
 
-
 import styles from './monitor-list.css';
 
 const MonitorList = props => (
     <Box
-        className={styles.monitorList}
+        // Use static `monitor-overlay` class for bounds of draggables
+        className={classNames(styles.monitorList, 'monitor-overlay')}
     >
         {props.monitors.valueSeq().map(monitorData => (
             <Monitor

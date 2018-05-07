@@ -80,6 +80,16 @@
     padding: 0 0.75rem;
 }
 
+.feedback-link {
+    color: $motion-primary;
+    text-decoration: none;
+}
+
+.feedback-button {
+    background-color: $ui-white;
+    height: 34px;
+}
+
 .divider {
     margin: 0 .5rem;
     height: 34px;
@@ -130,6 +140,12 @@
 .mystuff-icon {
     margin: 0 .25rem;
     height: 1rem;
+}
+
+.help-icon {
+    height: 2rem;
+    width: 3rem;
+    margin-top: 0.5rem;
 }
 
 .account-nav-menu, .mystuff-button {

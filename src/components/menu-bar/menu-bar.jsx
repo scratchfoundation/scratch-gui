@@ -14,6 +14,7 @@ import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 
+import {openTipsLibrary} from '../../reducers/modals';
 import {
     openFileMenu,
     closeFileMenu,
@@ -26,10 +27,13 @@ import {
 import styles from './menu-bar.css';
 
 import mystuffIcon from './icon--mystuff.png';
+import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import scratchLogo from './scratch-logo.svg';
+
+import helpIcon from './icon--help.svg';
 
 const MenuBarItemTooltip = ({
     children,
@@ -120,20 +124,43 @@ const MenuBar = props => (
                     })}
                     onMouseUp={props.onClickFile}
                 >
-                    <div className={classNames(styles.fileMenu)}>File</div>
+                    <div className={classNames(styles.fileMenu)}>
+                        <FormattedMessage
+                            defaultMessage="File"
+                            description="Text for file dropdown menu"
+                            id="gui.menuBar.file"
+                        />
+                    </div>
                     <MenuBarMenu
                         open={props.fileMenuOpen}
                         onRequestClose={props.onRequestCloseFile}
                     >
                         <MenuItemTooltip id="new">
-                            <MenuItem>New</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="New"
+                                    description="Menu bar item for creating a new project"
+                                    id="gui.menuBar.new"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuSection>
                             <MenuItemTooltip id="save">
-                                <MenuItem>Save now</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Save now"
+                                        description="Menu bar item for saving now"
+                                        id="gui.menuBar.saveNow"
+                                    />
+                                </MenuItem>
                             </MenuItemTooltip>
                             <MenuItemTooltip id="copy">
-                                <MenuItem>Save as a copy</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Save as a copy"
+                                        description="Menu bar item for saving as a copy"
+                                        id="gui.menuBar.saveAsCopy"
+                                    /></MenuItem>
                             </MenuItemTooltip>
                         </MenuSection>
                         <MenuSection>
@@ -142,7 +169,11 @@ const MenuBar = props => (
                                     onClick={loadProject}
                                     {...loadProps}
                                 >
-                                    Upload from your computer
+                                    <FormattedMessage
+                                        defaultMessage="Upload from your computer"
+                                        description="Menu bar item for uploading a project from your computer"
+                                        id="gui.menuBar.uploadFromComputer"
+                                    />
                                     {renderFileInput()}
                                 </MenuItem>
                             )}</ProjectLoader>
@@ -151,7 +182,11 @@ const MenuBar = props => (
                                     onClick={saveProject}
                                     {...saveProps}
                                 >
-                                    Download to your computer
+                                    <FormattedMessage
+                                        defaultMessage="Download to your computer"
+                                        description="Menu bar item for downloading a project"
+                                        id="gui.menuBar.downloadToComputer"
+                                    />
                                 </MenuItem>
                             )}</ProjectSaver>
                         </MenuSection>
@@ -163,20 +198,44 @@ const MenuBar = props => (
                     })}
                     onMouseUp={props.onClickEdit}
                 >
-                    <div className={classNames(styles.editMenu)}>Edit</div>
+                    <div className={classNames(styles.editMenu)}>
+                        <FormattedMessage
+                            defaultMessage="Edit"
+                            description="Text for edit dropdown menu"
+                            id="gui.menuBar.edit"
+                        />
+                    </div>
                     <MenuBarMenu
                         open={props.editMenuOpen}
                         onRequestClose={props.onRequestCloseEdit}
                     >
                         <MenuItemTooltip id="undo">
-                            <MenuItem>Undo</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="Undo"
+                                    description="Menu bar item for undoing"
+                                    id="gui.menuBar.undo"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuItemTooltip id="redo">
-                            <MenuItem>Redo</MenuItem>
+                            <MenuItem>
+                                <FormattedMessage
+                                    defaultMessage="Redo"
+                                    description="Menu bar item for redoing"
+                                    id="gui.menuBar.redo"
+                                />
+                            </MenuItem>
                         </MenuItemTooltip>
                         <MenuSection>
                             <MenuItemTooltip id="turbo">
-                                <MenuItem>Turbo mode</MenuItem>
+                                <MenuItem>
+                                    <FormattedMessage
+                                        defaultMessage="Turbo mode"
+                                        description="Menu bar item for toggling turbo mode"
+                                        id="gui.menuBar.turboMode"
+                                    />
+                                </MenuItem>
                             </MenuItemTooltip>
                         </MenuSection>
                     </MenuBarMenu>
@@ -219,7 +278,36 @@ const MenuBar = props => (
                 </MenuBarItemTooltip>
             </div>
         </div>
+        <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
+            <a
+                className={styles.feedbackLink}
+                href="https://scratch.mit.edu/discuss/topic/299791/"
+                rel="noopener noreferrer"
+                target="_blank"
+            >
+                <Button
+                    className={styles.feedbackButton}
+                    iconSrc={feedbackIcon}
+                >
+                    <FormattedMessage
+                        defaultMessage="Give Feedback"
+                        description="Label for feedback form modal button"
+                        id="gui.menuBar.giveFeedback"
+                    />
+                </Button>
+            </a>
+        </div>
         <div className={styles.accountInfoWrapper}>
+            <div
+                aria-label="How-to Library"
+                className={classNames(styles.menuBarItem, styles.hoverable)}
+                onClick={props.onOpenTipLibrary}
+            >
+                <img
+                    className={styles.helpIcon}
+                    src={helpIcon}
+                />
+            </div>
             <MenuBarItemTooltip id="mystuff">
                 <div
                     className={classNames(
@@ -249,7 +337,9 @@ const MenuBar = props => (
                         className={styles.profileIcon}
                         src={profileIcon}
                     />
-                    <span>scratch-cat</span>
+                    <span>
+                        {'scratch-cat' /* @todo username */}
+                    </span>
                     <img
                         className={styles.dropdownCaretIcon}
                         src={dropdownCaret}
@@ -265,6 +355,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func
 };
@@ -275,6 +366,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickFile: () => dispatch(openFileMenu()),
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),

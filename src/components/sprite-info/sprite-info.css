@@ -31,9 +31,8 @@
 
 .icon-wrapper {
     display: inline-block;
-    box-sizing: content-box;
-    width: 1rem;
-    height: 1rem;
+    width: calc(2rem + 2px);
+    height: calc(2rem + 2px);
     padding: 0.5rem;
     outline: none;
     user-select: none;

@@ -98,11 +98,14 @@ GUI.defaultProps = GUIComponent.defaultProps;
 const mapStateToProps = state => ({
     activeTabIndex: state.editorTab.activeTabIndex,
     blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+    cardsVisible: state.cards.visible,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.modals.importInfo,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
-    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX
+    targetIsStage: state.targets.stage && state.targets.stage.id === state.targets.editingTarget,
+    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+    tipsLibraryVisible: state.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({

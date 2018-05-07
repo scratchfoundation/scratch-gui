@@ -1,9 +1,8 @@
 @import "../../css/colors.css";
 
 .green-flag {
-    box-sizing: content-box;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 2rem;
+    height: 2rem;
     padding: 0.375rem;
     border-radius: 0.25rem;
     user-select: none;
@@ -13,10 +12,7 @@
 }
 
 .green-flag:hover {
-    /* Scale flag image by 1.2, but keep background static */
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0.25rem;
+    transform: scale(1.2);
 }
 
 .green-flag.is-active {

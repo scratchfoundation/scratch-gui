@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
-import MediaQuery from 'react-responsive';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
@@ -12,16 +11,17 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
-import StageHeader from '../../containers/stage-header.jsx';
-import Stage from '../../containers/stage.jsx';
+import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import TipsLibrary from '../../containers/tips-library.jsx';
+import Cards from '../../containers/cards.jsx';
 
-import layout from '../../lib/layout-constants.js';
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
@@ -45,26 +45,26 @@ const GUIComponent = props => {
         activeTabIndex,
         basePath,
         blocksTabVisible,
+        cardsVisible,
         children,
         costumesTabVisible,
         importInfoVisible,
         intl,
+        isPlayerOnly,
         loading,
         onExtensionButtonClick,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
         previewInfoVisible,
+        targetIsStage,
         soundsTabVisible,
+        tipsLibraryVisible,
         vm,
         ...componentProps
     } = props;
     if (children) {
-        return (
-            <Box {...componentProps}>
-                {children}
-            </Box>
-        );
+        return <Box {...componentProps}>{children}</Box>;
     }
 
     const tabClassNames = {
@@ -80,7 +80,12 @@ const GUIComponent = props => {
         isRendererSupported = Renderer.isSupported();
     }
 
-    return (
+    return isPlayerOnly ? (
+        <StageWrapper
+            isRendererSupported={isRendererSupported}
+            vm={vm}
+        />
+    ) : (
         <Box
             className={styles.pageWrapper}
             {...componentProps}
@@ -97,6 +102,12 @@ const GUIComponent = props => {
             {isRendererSupported ? null : (
                 <WebGlModal />
             )}
+            {tipsLibraryVisible ? (
+                <TipsLibrary />
+            ) : null}
+            {cardsVisible ? (
+                <Cards />
+            ) : null}
             <MenuBar />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
@@ -129,11 +140,19 @@ const GUIComponent = props => {
                                         draggable={false}
                                         src={costumesIcon}
                                     />
-                                    <FormattedMessage
-                                        defaultMessage="Costumes"
-                                        description="Button to get to the costumes panel"
-                                        id="gui.gui.costumesTab"
-                                    />
+                                    {targetIsStage ? (
+                                        <FormattedMessage
+                                            defaultMessage="Backdrops"
+                                            description="Button to get to the backdrops panel"
+                                            id="gui.gui.backdropsTab"
+                                        />
+                                    ) : (
+                                        <FormattedMessage
+                                            defaultMessage="Costumes"
+                                            description="Button to get to the costumes panel"
+                                            id="gui.gui.costumesTab"
+                                        />
+                                    )}
                                 </Tab>
                                 <Tab
                                     className={tabClassNames.tab}
@@ -185,27 +204,12 @@ const GUIComponent = props => {
                     </Box>
 
                     <Box className={styles.stageAndTargetWrapper}>
-                        <Box className={styles.stageMenuWrapper}>
-                            <StageHeader vm={vm} />
-                        </Box>
-                        <Box className={styles.stageWrapper}>
-                            {/* eslint-disable arrow-body-style */}
-                            <MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
-                                return isRendererSupported ? (
-                                    <Stage
-                                        height={isFullSize ? layout.fullStageHeight : layout.smallerStageHeight}
-                                        shrink={0}
-                                        vm={vm}
-                                        width={isFullSize ? layout.fullStageWidth : layout.smallerStageWidth}
-                                    />
-                                ) : null;
-                            }}</MediaQuery>
-                            {/* eslint-enable arrow-body-style */}
-                        </Box>
+                        <StageWrapper
+                            isRendererSupported={isRendererSupported}
+                            vm={vm}
+                        />
                         <Box className={styles.targetWrapper}>
-                            <TargetPane
-                                vm={vm}
-                            />
+                            <TargetPane vm={vm} />
                         </Box>
                     </Box>
                 </Box>
@@ -217,10 +221,12 @@ GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    isPlayerOnly: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
@@ -229,6 +235,8 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    targetIsStage: PropTypes.bool,
+    tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

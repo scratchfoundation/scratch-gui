@@ -25,7 +25,7 @@ describe('Working with sounds', () => {
         await driver.quit();
     });
 
-    test('Adding a sound', async () => {
+    test('Adding a sound through the library', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
         await clickText('Sounds');
@@ -59,6 +59,19 @@ describe('Working with sounds', () => {
         await clickText('Echo');
         await clickText('Reverse');
 
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding a sound by surprise button', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Sounds');
+        const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath('//button[@aria-label="Surprise"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

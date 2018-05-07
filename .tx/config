@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[experimental-scratch.scratch-gui]
+[scratch-editor.interface]
 file_filter = translations/<lang>.json
 source_file = translations/en.json
 source_lang = en

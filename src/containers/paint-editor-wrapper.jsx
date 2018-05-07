@@ -12,8 +12,8 @@ class PaintEditorWrapper extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleUpdateName',
-            'handleUpdateSvg'
+            'handleUpdateImage',
+            'handleUpdateName'
         ]);
     }
     componentDidMount () {
@@ -22,28 +22,42 @@ class PaintEditorWrapper extends React.Component {
     handleUpdateName (name) {
         this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);
     }
-    handleUpdateSvg (svg, rotationCenterX, rotationCenterY) {
-        this.props.vm.updateSvg(this.props.selectedCostumeIndex, svg, rotationCenterX, rotationCenterY);
+    handleUpdateImage (isVector, image, rotationCenterX, rotationCenterY) {
+        if (isVector) {
+            this.props.vm.updateSvg(
+                this.props.selectedCostumeIndex,
+                image,
+                rotationCenterX,
+                rotationCenterY);
+        } else {
+            this.props.vm.updateBitmap(
+                this.props.selectedCostumeIndex,
+                image,
+                rotationCenterX,
+                rotationCenterY,
+                2 /* bitmapResolution */);
+        }
     }
     render () {
-        if (!this.props.svgId) return null;
+        if (!this.props.imageId) return null;
         return (
             <PaintEditor
                 {...this.props}
-                svg={this.props.vm.getCostumeSvg(this.props.selectedCostumeIndex)}
+                image={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
+                onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
-                onUpdateSvg={this.handleUpdateSvg}
             />
         );
     }
 }
 
 PaintEditorWrapper.propTypes = {
+    imageFormat: PropTypes.string.isRequired,
+    imageId: PropTypes.string.isRequired,
     name: PropTypes.string,
     rotationCenterX: PropTypes.number,
     rotationCenterY: PropTypes.number,
     selectedCostumeIndex: PropTypes.number.isRequired,
-    svgId: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
@@ -59,7 +73,8 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         name: costume && costume.name,
         rotationCenterX: costume && costume.rotationCenterX,
         rotationCenterY: costume && costume.rotationCenterY,
-        svgId: editingTarget && `${editingTarget}${costume.skinId}`,
+        imageFormat: costume && costume.dataFormat,
+        imageId: editingTarget && `${editingTarget}${costume.skinId}`,
         vm: state.vm
     };
 };

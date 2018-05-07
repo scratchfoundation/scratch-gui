@@ -39,7 +39,7 @@ class SpriteLibrary extends React.PureComponent {
         clearInterval(this.intervalId);
     }
     handleItemSelect (item) {
-        this.props.vm.addSprite2(JSON.stringify(item.json));
+        this.props.vm.addSprite(JSON.stringify(item.json));
         analytics.event({
             category: 'library',
             action: 'Select Sprite',

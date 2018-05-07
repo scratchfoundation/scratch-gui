@@ -103,4 +103,18 @@ describe('Working with the blocks', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Adding an extension', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Add Extension"]');
+
+        await clickText('Pen');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        // Make sure toolbox has been scrolled to the pen extension
+        await findByText('stamp', scope.blocksTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

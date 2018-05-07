@@ -29,7 +29,7 @@ var _gui = __webpack_require__(23);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(40);
+var _projectLoaderHoc = __webpack_require__(41);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 

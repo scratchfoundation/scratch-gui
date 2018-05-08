@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 516:
+/***/ 517:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(515);
+__webpack_require__(516);
 
 var _react = __webpack_require__(0);
 
@@ -100,5 +100,5 @@ _reactDom2.default.render(_react2.default.createElement(_gui2.default, null), ap
 
 /***/ })
 
-},[[516,0]]]);
+},[[517,0]]]);
 //# sourceMappingURL=gui.js.map

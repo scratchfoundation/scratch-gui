@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 517:
+/***/ 519:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(516);
+__webpack_require__(518);
 
 var _react = __webpack_require__(0);
 
@@ -66,7 +66,7 @@ var _analytics = __webpack_require__(12);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(29);
+var _gui = __webpack_require__(30);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -96,5 +96,5 @@ _reactDom2.default.render(_react2.default.createElement(_gui2.default, null), ap
 
 /***/ })
 
-},[[517,0]]]);
+},[[519,0]]]);
 //# sourceMappingURL=gui.js.map

@@ -21,7 +21,7 @@ class Monitor extends React.Component {
 
         // @todo consume from VM, but need to store until there are APIs to update vm
         this.state = {
-            mode: props.mode
+            mode: props.mode || 'default'
         };
     }
     componentDidMount () {

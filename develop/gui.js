@@ -62,10 +62,6 @@ var _reactDom = __webpack_require__(14);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactModal = __webpack_require__(20);
-
-var _reactModal2 = _interopRequireDefault(_reactModal);
-
 var _analytics = __webpack_require__(12);
 
 var _analytics2 = _interopRequireDefault(_analytics);
@@ -94,7 +90,7 @@ var appTarget = document.createElement('div');
 appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
 
-_reactModal2.default.setAppElement(appTarget);
+_gui2.default.setAppElement(appTarget);
 
 _reactDom2.default.render(_react2.default.createElement(_gui2.default, null), appTarget);
 

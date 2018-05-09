@@ -19,7 +19,7 @@ const categories = {
     list: '#FC662C'
 };
 
-const types = {
+const modes = {
     default: DefaultMonitor,
     large: LargeMonitor
 };
@@ -34,9 +34,9 @@ const MonitorComponent = props => (
             <Box
                 className={styles.monitorContainer}
                 componentRef={props.componentRef}
-                onDoubleClick={props.onNextType}
+                onDoubleClick={props.onNextMode}
             >
-                {types[props.type]({
+                {(modes[props.mode] || modes.default)({ // Use default until other modes arrive
                     categoryColor: categories[props.category],
                     label: props.label,
                     value: props.value
@@ -44,14 +44,14 @@ const MonitorComponent = props => (
             </Box>
         </Draggable>
         <ContextMenu id={`monitor-${props.label}`}>
-            <MenuItem onClick={props.onSetTypeToDefault}>
+            <MenuItem onClick={props.onSetModeToDefault}>
                 <FormattedMessage
                     defaultMessage="normal readout"
                     description="Menu item to switch to the default monitor"
                     id="gui.monitor.contextMenu.default"
                 />
             </MenuItem>
-            <MenuItem onClick={props.onSetTypeToLarge}>
+            <MenuItem onClick={props.onSetModeToLarge}>
                 <FormattedMessage
                     defaultMessage="large readout"
                     description="Menu item to switch to the large monitor"
@@ -65,17 +65,17 @@ const MonitorComponent = props => (
 
 MonitorComponent.categories = categories;
 
-const monitorTypes = Object.keys(types);
+const monitorModes = Object.keys(modes);
 
 MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categories)),
     componentRef: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
+    mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,
-    onNextType: PropTypes.func.isRequired,
-    onSetTypeToDefault: PropTypes.func.isRequired,
-    onSetTypeToLarge: PropTypes.func.isRequired,
-    type: PropTypes.oneOf(monitorTypes),
+    onNextMode: PropTypes.func.isRequired,
+    onSetModeToDefault: PropTypes.func.isRequired,
+    onSetModeToLarge: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number])
@@ -83,10 +83,10 @@ MonitorComponent.propTypes = {
 
 MonitorComponent.defaultProps = {
     category: 'data',
-    type: 'default'
+    mode: 'default'
 };
 
 export {
     MonitorComponent as default,
-    monitorTypes
+    monitorModes
 };

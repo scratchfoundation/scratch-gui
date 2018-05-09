@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import monitorAdapter from '../lib/monitor-adapter.js';
-import MonitorComponent, {monitorTypes} from '../components/monitor/monitor.jsx';
+import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx';
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
 
 import {connect} from 'react-redux';
@@ -13,15 +13,15 @@ class Monitor extends React.Component {
         super(props);
         bindAll(this, [
             'handleDragEnd',
-            'handleNextType',
-            'handleSetTypeToDefault',
-            'handleSetTypeToLarge',
+            'handleNextMode',
+            'handleSetModeToDefault',
+            'handleSetModeToLarge',
             'setElement'
         ]);
 
         // @todo consume from VM, but need to store until there are APIs to update vm
         this.state = {
-            type: props.mode
+            mode: props.mode
         };
     }
     componentDidMount () {
@@ -67,17 +67,17 @@ class Monitor extends React.Component {
             parseInt(this.element.style.top, 10) + y
         );
     }
-    handleNextType () {
-        // @todo the type list needs to be filtered for current available types
-        // i.e. no sliders for read-only monitors, only list type for list vars.
-        const typeIndex = monitorTypes.indexOf(this.state.type);
-        this.setState({type: monitorTypes[(typeIndex + 1) % monitorTypes.length]});
+    handleNextMode () {
+        // @todo the mode list needs to be filtered for current available modes
+        // i.e. no sliders for read-only monitors, only list for list vars.
+        const modeIndex = monitorModes.indexOf(this.state.mode);
+        this.setState({mode: monitorModes[(modeIndex + 1) % monitorModes.length]});
     }
-    handleSetTypeToDefault () {
-        this.setState({type: 'default'});
+    handleSetModeToDefault () {
+        this.setState({mode: 'default'});
     }
-    handleSetTypeToLarge () {
-        this.setState({type: 'large'});
+    handleSetModeToLarge () {
+        this.setState({mode: 'large'});
     }
     setElement (monitorElt) {
         this.element = monitorElt;
@@ -88,11 +88,11 @@ class Monitor extends React.Component {
             <MonitorComponent
                 componentRef={this.setElement}
                 {...monitorProps}
-                type={this.state.type}
+                mode={this.state.mode}
                 onDragEnd={this.handleDragEnd}
-                onNextType={this.handleNextType}
-                onSetTypeToDefault={this.handleSetTypeToDefault}
-                onSetTypeToLarge={this.handleSetTypeToLarge}
+                onNextMode={this.handleNextMode}
+                onSetModeToDefault={this.handleSetModeToDefault}
+                onSetModeToLarge={this.handleSetModeToLarge}
             />
         );
     }

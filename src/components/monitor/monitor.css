@@ -45,9 +45,9 @@
 }
 
 .large-value {
-    min-height: 1.5rem;
+    min-height: 1.4rem;
     min-width: 3rem;
-    padding: 0.25rem;
+    padding: 0.1rem 0.25rem;
     text-align: center;
     color: white;
     font-size: 1rem;

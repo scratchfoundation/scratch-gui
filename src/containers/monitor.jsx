@@ -8,6 +8,17 @@ import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect
 
 import {connect} from 'react-redux';
 
+const availableModes = opcode => (
+    monitorModes.filter(t => {
+        if (opcode === 'data_variable') {
+            return t !== 'list';
+        } else if (opcode === 'data_listcontents') {
+            return t === 'list';
+        }
+        return t !== 'slider' && t !== 'list';
+    })
+);
+
 class Monitor extends React.Component {
     constructor (props) {
         super(props);
@@ -16,6 +27,7 @@ class Monitor extends React.Component {
             'handleNextMode',
             'handleSetModeToDefault',
             'handleSetModeToLarge',
+            'handleSetModeToSlider',
             'setElement'
         ]);
 
@@ -68,10 +80,9 @@ class Monitor extends React.Component {
         );
     }
     handleNextMode () {
-        // @todo the mode list needs to be filtered for current available modes
-        // i.e. no sliders for read-only monitors, only list for list vars.
-        const modeIndex = monitorModes.indexOf(this.state.mode);
-        this.setState({mode: monitorModes[(modeIndex + 1) % monitorModes.length]});
+        const modes = availableModes(this.props.opcode);
+        const modeIndex = modes.indexOf(this.state.mode);
+        this.setState({mode: modes[(modeIndex + 1) % modes.length]});
     }
     handleSetModeToDefault () {
         this.setState({mode: 'default'});
@@ -79,20 +90,29 @@ class Monitor extends React.Component {
     handleSetModeToLarge () {
         this.setState({mode: 'large'});
     }
+    handleSetModeToSlider () {
+        this.setState({mode: 'slider'});
+    }
     setElement (monitorElt) {
         this.element = monitorElt;
     }
     render () {
         const monitorProps = monitorAdapter(this.props);
+        const showSliderOption = availableModes(this.props.opcode).indexOf('slider') !== -1;
         return (
             <MonitorComponent
                 componentRef={this.setElement}
                 {...monitorProps}
+                height={this.props.height}
+                max={this.props.max}
+                min={this.props.min}
                 mode={this.state.mode}
+                width={this.props.width}
                 onDragEnd={this.handleDragEnd}
                 onNextMode={this.handleNextMode}
                 onSetModeToDefault={this.handleSetModeToDefault}
                 onSetModeToLarge={this.handleSetModeToLarge}
+                onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
             />
         );
     }
@@ -100,7 +120,10 @@ class Monitor extends React.Component {
 
 Monitor.propTypes = {
     addMonitorRect: PropTypes.func.isRequired,
+    height: PropTypes.number,
     id: PropTypes.string.isRequired,
+    max: PropTypes.number,
+    min: PropTypes.number,
     mode: PropTypes.oneOf(['default', 'slider', 'large', 'list']),
     monitorLayout: PropTypes.shape({
         monitors: PropTypes.object,
@@ -112,7 +135,15 @@ Monitor.propTypes = {
     removeMonitorRect: PropTypes.func.isRequired,
     resizeMonitorRect: PropTypes.func.isRequired,
     spriteName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-    value: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.arrayOf(PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]))
+    ]), // eslint-disable-line react/no-unused-prop-types
+    width: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number
 };

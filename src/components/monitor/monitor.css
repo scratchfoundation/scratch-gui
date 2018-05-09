@@ -25,6 +25,7 @@
 
 .default-monitor {
     display: flex;
+    flex-direction: column;
     padding: 3px;
 }
 
@@ -52,4 +53,87 @@
     color: white;
     font-size: 1rem;
     transform: translateZ(0); /* Fixes flickering in Safari */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-monitor {
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-header {
+    background: $ui-white;
+    border-bottom: 1px solid $ui-black-transparent;
+    text-align: center;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+    width: 100%;
+}
+
+.list-body {
+    background: $ui-primary;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: calc(100% - 44px);
+}
+
+.list-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.list-index {
+    font-weight: bold;
+    color: $text-primary;
+    margin: 0 3px;
+}
+
+.list-value {
+    min-width: 40px;
+    text-align: left;
+    color: white;
+    margin: 0 3px;
+    border-radius: calc($space / 2);
+    border: 1px solid $ui-black-transparent;
+    flex-grow: 1;
+}
+
+.list-footer {
+    background: $ui-white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.list-empty {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.input-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.value-inner {
+    padding: 3px 5px;
+    min-height: 22px;
 }

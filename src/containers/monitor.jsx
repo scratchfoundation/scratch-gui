@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import monitorAdapter from '../lib/monitor-adapter.js';
-import MonitorComponent from '../components/monitor/monitor.jsx';
+import MonitorComponent, {monitorTypes} from '../components/monitor/monitor.jsx';
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
 
 import {connect} from 'react-redux';
@@ -13,8 +13,16 @@ class Monitor extends React.Component {
         super(props);
         bindAll(this, [
             'handleDragEnd',
+            'handleNextType',
+            'handleSetTypeToDefault',
+            'handleSetTypeToLarge',
             'setElement'
         ]);
+
+        // @todo this eventually will be stored in the VM
+        this.state = {
+            type: 'default'
+        };
     }
     componentDidMount () {
         let rect;
@@ -59,6 +67,18 @@ class Monitor extends React.Component {
             parseInt(this.element.style.top, 10) + y
         );
     }
+    handleNextType () {
+        // @todo the type list needs to be filtered for current available types
+        // i.e. no sliders for read-only monitors, only list type for list vars.
+        const typeIndex = monitorTypes.indexOf(this.state.type);
+        this.setState({type: monitorTypes[(typeIndex + 1) % monitorTypes.length]});
+    }
+    handleSetTypeToDefault () {
+        this.setState({type: 'default'});
+    }
+    handleSetTypeToLarge () {
+        this.setState({type: 'large'});
+    }
     setElement (monitorElt) {
         this.element = monitorElt;
     }
@@ -68,7 +88,11 @@ class Monitor extends React.Component {
             <MonitorComponent
                 componentRef={this.setElement}
                 {...monitorProps}
+                type={this.state.type}
                 onDragEnd={this.handleDragEnd}
+                onNextType={this.handleNextType}
+                onSetTypeToDefault={this.handleSetTypeToDefault}
+                onSetTypeToLarge={this.handleSetTypeToLarge}
             />
         );
     }

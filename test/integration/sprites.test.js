@@ -5,6 +5,7 @@ const {
     clickText,
     clickXpath,
     findByText,
+    findByXpath,
     getDriver,
     getLogs,
     loadUri,
@@ -23,6 +24,29 @@ describe('Working with sprites', () => {
 
     afterAll(async () => {
         await driver.quit();
+    });
+
+    test('Adding a sprite through the library', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        await clickText('Apple', scope.modal); // Closes modal
+        await rightClickText('Apple', scope.spriteTile); // Make sure it is there
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding a sprite by surprise button', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath('//button[@aria-label="Surprise"]');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
     });
 
     test('Deleting only sprite does not crash', async () => {

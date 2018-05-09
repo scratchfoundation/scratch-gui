@@ -19,9 +19,9 @@ class Monitor extends React.Component {
             'setElement'
         ]);
 
-        // @todo this eventually will be stored in the VM
+        // @todo consume from VM, but need to store until there are APIs to update vm
         this.state = {
-            type: 'default'
+            type: props.mode
         };
     }
     componentDidMount () {
@@ -101,6 +101,7 @@ class Monitor extends React.Component {
 Monitor.propTypes = {
     addMonitorRect: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
+    mode: PropTypes.oneOf(['default', 'slider', 'large', 'list']),
     monitorLayout: PropTypes.shape({
         monitors: PropTypes.object,
         savedMonitorPositions: PropTypes.object

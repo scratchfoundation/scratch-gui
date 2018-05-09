@@ -132,3 +132,8 @@
     position: relative;
     overflow: hidden;
 }
+
+.value-inner {
+    padding: 3px 5px;
+    min-height: 22px;
+}

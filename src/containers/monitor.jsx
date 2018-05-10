@@ -107,12 +107,13 @@ class Monitor extends React.Component {
                 max={this.props.max}
                 min={this.props.min}
                 mode={this.state.mode}
-                width={this.props.width}
                 onDragEnd={this.handleDragEnd}
                 onNextMode={this.handleNextMode}
                 onSetModeToDefault={this.handleSetModeToDefault}
                 onSetModeToLarge={this.handleSetModeToLarge}
                 onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
+                targetId={this.props.targetId}
+                width={this.props.width}
             />
         );
     }

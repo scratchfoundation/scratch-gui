@@ -24,6 +24,7 @@ const MonitorList = props => (
                     opcode={monitorData.opcode}
                     params={monitorData.params}
                     spriteName={monitorData.spriteName}
+                    targetId={monitorData.targetId}
                     value={monitorData.value}
                     width={monitorData.width}
                     x={monitorData.x}

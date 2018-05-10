@@ -96,12 +96,13 @@ class ListMonitor extends React.Component {
 
     handleRemove (e) {
         e.preventDefault(); // Default would blur input, prevent that.
+        e.stopPropagation(); // Bubbling would activate, which will be handled here
         const {vm, targetId, id: variableId} = this.props;
         const listValue = getVariableValue(vm, targetId, variableId);
         const newListValue = listValue.slice(0, this.state.activeIndex)
             .concat(listValue.slice(this.state.activeIndex + 1));
         setVariableValue(vm, targetId, variableId, newListValue);
-        // Selecting the next active is handled when event bubbles up to activate
+        this.handleActivate(Math.min(newListValue.length - 1, this.state.activeIndex));
     }
 
     handleAdd () {

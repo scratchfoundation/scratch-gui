@@ -31,17 +31,18 @@ class ExtensionLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
-        let url = item.extensionURL;
-        if (!item.disabled && !item.extensionURL) {
+        const id = item.extensionId;
+        let url = item.extensionURL ? item.extensionURL : id;
+        if (!item.disabled && !id) {
             // eslint-disable-next-line no-alert
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         }
-        if (url && !item.disabled) {
+        if (id && !item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
-                this.props.onCategorySelected(item.name);
+                this.props.onCategorySelected(id);
             } else {
                 this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
-                    this.props.onCategorySelected(item.name);
+                    this.props.onCategorySelected(id);
                 });
             }
         }

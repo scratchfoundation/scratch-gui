@@ -1,7 +1,6 @@
 import 'es6-object-assign/auto';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
 
 import analytics from '../lib/analytics';
 import GUI from '../containers/gui.jsx';
@@ -20,6 +19,6 @@ const appTarget = document.createElement('div');
 appTarget.className = styles.app;
 document.body.appendChild(appTarget);
 
-Modal.setAppElement(appTarget);
+GUI.setAppElement(appTarget);
 
 ReactDOM.render(<GUI />, appTarget);

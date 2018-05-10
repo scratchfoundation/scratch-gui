@@ -12,17 +12,25 @@ const MonitorList = props => (
         // Use static `monitor-overlay` class for bounds of draggables
         className={classNames(styles.monitorList, 'monitor-overlay')}
     >
-        {props.monitors.valueSeq().map(monitorData => (
-            <Monitor
-                id={monitorData.id}
-                key={monitorData.id}
-                opcode={monitorData.opcode}
-                params={monitorData.params}
-                spriteName={monitorData.spriteName}
-                value={monitorData.value}
-                onDragEnd={props.onMonitorChange}
-            />
-        ))}
+        {props.monitors.valueSeq().filter(m => m.visible)
+            .map(monitorData => (
+                <Monitor
+                    height={monitorData.height}
+                    id={monitorData.id}
+                    key={monitorData.id}
+                    max={monitorData.sliderMax}
+                    min={monitorData.sliderMin}
+                    mode={monitorData.mode}
+                    opcode={monitorData.opcode}
+                    params={monitorData.params}
+                    spriteName={monitorData.spriteName}
+                    value={monitorData.value}
+                    width={monitorData.width}
+                    x={monitorData.x}
+                    y={monitorData.y}
+                    onDragEnd={props.onMonitorChange}
+                />
+            ))}
     </Box>
 );
 

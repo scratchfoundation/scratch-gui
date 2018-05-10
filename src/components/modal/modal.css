@@ -11,6 +11,10 @@
     background-color: $ui-modal-overlay;
 }
 
+.modal-content * {
+    box-sizing: border-box;
+}
+
 .modal-content {
     margin: 100px auto;
     outline: none;

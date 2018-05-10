@@ -165,14 +165,14 @@ class ListMonitor extends React.Component {
 }
 
 ListMonitor.propTypes = {
+    height: PropTypes.number,
+    id: PropTypes.string,
+    targetId: PropTypes.string,
     value: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string
     ]),
     vm: PropTypes.instanceOf(VM),
-    targetId: PropTypes.string,
-    id: PropTypes.string,
-    height: PropTypes.number,
     width: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number

@@ -28,6 +28,9 @@ const base = {
         React: 'react',
         ReactDOM: 'react-dom'
     },
+    resolve: {
+        symlinks: false
+    },
     module: {
         rules: [{
             test: /\.jsx?$/,

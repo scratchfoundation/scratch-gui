@@ -1,18 +1,17 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.monitor {
+.monitor-container {
     position: absolute;
-    padding: 3px;
     background: $ui-primary;
     z-index: 100;
     border: 1px solid $ui-black-transparent;
     border-radius: calc($space / 2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.75rem;
-    display: flex;
     transition: box-shadow 0.2s;
     pointer-events: all;
+    overflow: hidden;
 }
 
 .monitor:hover {
@@ -22,6 +21,12 @@
 .dragging {
     z-index: 101;
     box-shadow: 3px 3px 5px #888888;
+}
+
+.default-monitor {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
 }
 
 .label {
@@ -37,4 +42,131 @@
     margin: 0 5px;
     border-radius: calc($space / 2);
     padding: 0 2px;
+    transform: translateZ(0); /* Fixes flickering in Safari */
+}
+
+.large-value {
+    min-height: 1.4rem;
+    min-width: 3rem;
+    padding: 0.1rem 0.25rem;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    transform: translateZ(0); /* Fixes flickering in Safari */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-monitor {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-header {
+    background: $ui-white;
+    border-bottom: 1px solid $ui-black-transparent;
+    text-align: center;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+    width: 100%;
+}
+
+.list-body {
+    background: $ui-primary;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100% - 44px);
+}
+
+.list-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.list-index {
+    font-weight: bold;
+    color: $text-primary;
+    margin: 0 3px;
+}
+
+.list-value {
+    min-width: 40px;
+    text-align: left;
+    color: white;
+    margin: 0 3px;
+    border-radius: calc($space / 2);
+    border: 1px solid $ui-black-transparent;
+    flex-grow: 1;
+    height: 22px;
+}
+
+.list-footer {
+    background: $ui-white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.list-empty {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.input-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.value-inner {
+    padding: 3px 5px;
+    min-height: 22px;
+}
+
+.list-input {
+    padding: 3px 5px;
+    border: 0;
+    background: rgba(0, 0, 0, 0.1);
+    color: $ui-white;
+    outline: none;
+    font-size: 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.remove-button {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    cursor: pointer;
+    color: $ui-white;
+}
+
+.add-button {
+    cursor: pointer;
+    margin-right: 3px;
+}
+
+.resize-handle {
+    cursor: nwse-resize;
+    margin-left: 3px;
+}
+
+.footer-length {
+    text-align: center;
 }

@@ -13,7 +13,7 @@
     box-shadow: 0px 0px 5px 1px $ui-black-transparent;
     pointer-events: none;
     transition: opacity 0.2s ease;
-    z-index: 100;
+    z-index: 200; /* Above the stage */
 }
 
 .menu-item {

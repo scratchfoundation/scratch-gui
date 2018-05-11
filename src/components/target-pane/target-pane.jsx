@@ -17,6 +17,7 @@ import styles from './target-pane.css';
  */
 const TargetPane = ({
     editingTarget,
+    fileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
@@ -27,11 +28,13 @@ const TargetPane = ({
     onChangeSpriteY,
     onDeleteSprite,
     onDuplicateSprite,
+    onFileUploadClick,
     onNewSpriteClick,
-    onSurpriseSpriteClick,
     onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
     onSelectSprite,
+    onSpriteUpload,
+    onSurpriseSpriteClick,
     raiseSprites,
     stage,
     sprites,
@@ -48,6 +51,7 @@ const TargetPane = ({
             hoveredTarget={hoveredTarget}
             raised={raiseSprites}
             selectedId={editingTarget}
+            spriteFileInput={fileInputRef}
             sprites={sprites}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
@@ -57,9 +61,11 @@ const TargetPane = ({
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
             onDuplicateSprite={onDuplicateSprite}
+            onFileUploadClick={onFileUploadClick}
             onNewSpriteClick={onNewSpriteClick}
             onPaintSpriteClick={onPaintSpriteClick}
             onSelectSprite={onSelectSprite}
+            onSpriteUpload={onSpriteUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
@@ -108,6 +114,7 @@ const spriteShape = PropTypes.shape({
 TargetPane.propTypes = {
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
+    fileInputRef: PropTypes.func,
     hoveredTarget: PropTypes.shape({
         hoveredSprite: PropTypes.string,
         receivedBlocks: PropTypes.bool
@@ -120,11 +127,13 @@ TargetPane.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSpriteUpload: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
     raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,

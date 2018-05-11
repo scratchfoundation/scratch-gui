@@ -47,6 +47,7 @@ const handleFileUpload = function (fileInput, onload) {
  * @property {string} dataFormat The data format of this asset, typically
  * the extension to be used for that particular asset, e.g. 'svg' for vector images
  * @property {string} md5 The md5 hash of the asset data, followed by '.'' and dataFormat
+ * @property {string} The md5 hash of the asset data // TODO remove duplication....
  */
 
 /**
@@ -71,7 +72,8 @@ const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
     return {
         name: fileName,
         dataFormat: dataFormat,
-        md5: `${md5}.${dataFormat}`
+        md5: `${md5}.${dataFormat}`,
+        assetId: md5
     };
 };
 
@@ -106,6 +108,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         break;
     }
     default:
+        log.warn(`Encountered unexpected file type: ${fileType}`);
         return;
     }
 
@@ -158,6 +161,7 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
         break;
     }
     default:
+        log.warn(`Encountered unexpected file type: ${fileType}`);
         return;
     }
 
@@ -171,8 +175,49 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
     handleSound(vmSound);
 };
 
+const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
+    switch (fileType) {
+    case '':
+    case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
+        handleSprite(new Uint8Array(fileData));
+        return;
+    }
+    case 'image/svg+xml':
+    case 'image/png':
+    case 'image/jpeg': {
+        // Make a sprite from an image by making it a costume first
+        costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
+            const newSprite = {
+                name: spriteName,
+                isStage: false,
+                x: 0,
+                y: 0,
+                visible: true,
+                size: 100,
+                rotationStyle: 'all around',
+                direction: 90,
+                draggable: true,
+                currentCostume: 0,
+                blocks: {},
+                variables: {},
+                costumes: [vmCostume],
+                sounds: [] // TODO are all of these necessary?
+            };
+            // TODO probably just want sprite upload to handle this object directly
+            handleSprite(JSON.stringify(newSprite));
+        }));
+        return;
+    }
+    default: {
+        log.warn(`Encountered unexpected file type: ${fileType}`);
+        return;
+    }
+    }
+};
+
 export {
     handleFileUpload,
     costumeUpload,
-    soundUpload
+    soundUpload,
+    spriteUpload
 };

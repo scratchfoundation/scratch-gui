@@ -34,7 +34,7 @@ const messages = defineMessages({
     addSpriteFromFile: {
         id: 'gui.spriteSelector.addSpriteFromFile',
         description: 'Button to add a sprite in the target pane from file',
-        defaultMessage: 'Coming Soon'
+        defaultMessage: 'Upload'
     }
 });
 
@@ -51,12 +51,15 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteY,
         onDeleteSprite,
         onDuplicateSprite,
+        onFileUploadClick,
         onNewSpriteClick,
-        onSurpriseSpriteClick,
         onPaintSpriteClick,
         onSelectSprite,
+        onSpriteUpload,
+        onSurpriseSpriteClick,
         raised,
         selectedId,
+        spriteFileInput,
         sprites,
         ...componentProps
     } = props;
@@ -121,7 +124,11 @@ const SpriteSelectorComponent = function (props) {
                 moreButtons={[
                     {
                         title: intl.formatMessage(messages.addSpriteFromFile),
-                        img: fileUploadIcon
+                        img: fileUploadIcon,
+                        onClick: onFileUploadClick,
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2', // TODO add sprite 3
+                        fileChange: onSpriteUpload,
+                        fileInput: spriteFileInput
                     }, {
                         title: intl.formatMessage(messages.addSpriteFromSurprise),
                         img: surpriseIcon,
@@ -154,12 +161,15 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSpriteUpload: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
     raised: PropTypes.bool,
     selectedId: PropTypes.string,
+    spriteFileInput: PropTypes.func,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
             costume: PropTypes.shape({

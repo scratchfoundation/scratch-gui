@@ -64,7 +64,9 @@ export default function (vm) {
     const backdropsMenu = function () {
         if (vm.runtime.targets[0] && vm.runtime.targets[0].getCostumes().length > 0) {
             return vm.runtime.targets[0].getCostumes().map(costume => [costume.name, costume.name])
-                .concat([['next backdrop', 'next backdrop'], ['previous backdrop', 'previous backdrop']]);
+                .concat([['next backdrop', 'next backdrop'],
+                    ['previous backdrop', 'previous backdrop'],
+                    ['random backdrop', 'random backdrop']]);
         }
         return [['', '']];
     };

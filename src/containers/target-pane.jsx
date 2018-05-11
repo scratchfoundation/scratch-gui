@@ -13,6 +13,7 @@ import {setReceivedBlocks} from '../reducers/hovered-target';
 
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
+import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -27,9 +28,13 @@ class TargetPane extends React.Component {
             'handleChangeSpriteY',
             'handleDeleteSprite',
             'handleDuplicateSprite',
+            'handleNewSprite',
             'handleSelectSprite',
             'handleSurpriseSpriteClick',
-            'handlePaintSpriteClick'
+            'handlePaintSpriteClick',
+            'handleFileUploadClick',
+            'handleSpriteUpload',
+            'setFileInput'
         ]);
     }
     componentDidMount () {
@@ -67,18 +72,33 @@ class TargetPane extends React.Component {
     }
     handleSurpriseSpriteClick () {
         const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
-        this.props.vm.addSprite2(JSON.stringify(item.json));
+        this.props.vm.addSprite(JSON.stringify(item.json));
     }
     handlePaintSpriteClick () {
         // @todo this is brittle, will need to be refactored for localized libraries
         const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
         if (emptyItem) {
-            this.props.vm.addSprite2(JSON.stringify(emptyItem.json)).then(() => {
+            this.props.vm.addSprite(JSON.stringify(emptyItem.json)).then(() => {
                 setTimeout(() => { // Wait for targets update to propagate before tab switching
                     this.props.onActivateTab(COSTUMES_TAB_INDEX);
                 });
             });
         }
+    }
+    handleNewSprite (spriteJSONString) {
+        this.props.vm.addSprite(spriteJSONString);
+    }
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+    handleSpriteUpload (e) {
+        const storage = this.props.vm.runtime.storage;
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite);
+        });
+    }
+    setFileInput (input) {
+        this.fileInput = input;
     }
     handleBlockDragEnd (blocks) {
         if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
@@ -95,6 +115,7 @@ class TargetPane extends React.Component {
         return (
             <TargetPaneComponent
                 {...componentProps}
+                fileInputRef={this.setFileInput}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
                 onChangeSpriteSize={this.handleChangeSpriteSize}
@@ -103,8 +124,10 @@ class TargetPane extends React.Component {
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDuplicateSprite={this.handleDuplicateSprite}
+                onFileUploadClick={this.handleFileUploadClick}
                 onPaintSpriteClick={this.handlePaintSpriteClick}
                 onSelectSprite={this.handleSelectSprite}
+                onSpriteUpload={this.handleSpriteUpload}
                 onSurpriseSpriteClick={this.handleSurpriseSpriteClick}
             />
         );

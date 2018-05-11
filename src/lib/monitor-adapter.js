@@ -10,7 +10,7 @@ const isUndefined = a => typeof a === 'undefined';
  *     with given target ID. The name of the target sprite when the monitor was created
  * @param {string} block.opcode - The opcode of the monitor
  * @param {object} block.params - Extra params to the monitor block
- * @param {string} block.value - The monitor value
+ * @param {string|number|Array} block.value - The monitor value
  * @return {object} The adapted monitor with label and category
  */
 export default function ({id, spriteName, opcode, params, value}) {
@@ -25,8 +25,8 @@ export default function ({id, spriteName, opcode, params, value}) {
     }
 
     // If value is a number, round it to six decimal places
-    if (typeof value === 'number' || (typeof value === 'string' && String(parseFloat(value)) === value)) {
-        value = Number(Number(value).toFixed(6));
+    if (typeof value === 'number') {
+        value = Number(value.toFixed(6));
     }
     
     return {id, label, category, value};

@@ -1,10 +1,10 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 137:
+/***/ 206:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 138:
+/***/ 207:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(137);
+var content = __webpack_require__(206);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -36,7 +36,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(2)(content, options);
+var update = __webpack_require__(3)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 519:
+/***/ 643:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,25 +52,25 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(518);
+__webpack_require__(642);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _analytics = __webpack_require__(12);
+var _analytics = __webpack_require__(22);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(30);
+var _gui = __webpack_require__(66);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _index = __webpack_require__(138);
+var _index = __webpack_require__(207);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -96,5 +96,5 @@ _reactDom2.default.render(_react2.default.createElement(_gui2.default, null), ap
 
 /***/ })
 
-},[[519,0]]]);
+},[[643,0]]]);
 //# sourceMappingURL=gui.js.map

@@ -1,10 +1,10 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
-/***/ 134:
+/***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 135:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(134);
+var content = __webpack_require__(203);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -36,7 +36,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(2)(content, options);
+var update = __webpack_require__(3)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 136:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54,29 +54,29 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(8);
+var _reactRedux = __webpack_require__(11);
 
-var _controls = __webpack_require__(34);
+var _controls = __webpack_require__(89);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(95);
+var _blocks = __webpack_require__(161);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(30);
+var _gui = __webpack_require__(66);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(45);
+var _projectLoaderHoc = __webpack_require__(100);
 
 var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
 
-var _blocksOnly = __webpack_require__(135);
+var _blocksOnly = __webpack_require__(204);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -112,5 +112,5 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ })
 
-},[[136,0]]]);
+},[[205,0]]]);
 //# sourceMappingURL=blocksonly.js.map

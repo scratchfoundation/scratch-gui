@@ -1,10 +1,10 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 130:
+/***/ 199:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -19,11 +19,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 131:
+/***/ 200:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(130);
+var content = __webpack_require__(199);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -37,7 +37,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(2)(content, options);
+var update = __webpack_require__(3)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -45,7 +45,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 132:
+/***/ 201:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57,19 +57,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _box = __webpack_require__(7);
+var _box = __webpack_require__(12);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(30);
+var _gui = __webpack_require__(66);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _player = __webpack_require__(131);
+var _player = __webpack_require__(200);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -100,5 +100,5 @@ _reactDom2.default.render(_react2.default.createElement(Player, null), appTarget
 
 /***/ })
 
-},[[132,0]]]);
+},[[201,0]]]);
 //# sourceMappingURL=player.js.map

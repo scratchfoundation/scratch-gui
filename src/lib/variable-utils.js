@@ -1,5 +1,5 @@
 // Utility functions for updating variables in the VM
-// TODO these should be moved to top-level VM API
+// TODO (VM#1145) these should be moved to top-level VM API
 const getVariable = (vm, targetId, variableId) => {
     const target = targetId ?
         vm.runtime.getTargetById(targetId) :

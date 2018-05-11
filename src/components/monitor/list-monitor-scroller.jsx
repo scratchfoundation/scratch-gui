@@ -47,7 +47,7 @@ class ListMonitorScroller extends React.Component {
                                 className={classNames(styles.listInput, 'no-drag')}
                                 spellCheck={false}
                                 type="text"
-                                value={this.props.activeValue} /* eslint-disable-line */
+                                value={this.props.activeValue}
                                 onBlur={this.props.onDeactivate}
                                 onChange={this.props.onInput}
                                 onFocus={this.props.onFocus}

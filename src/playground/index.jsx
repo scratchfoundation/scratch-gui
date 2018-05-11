@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import analytics from '../lib/analytics';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
+import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import styles from './index.css';
 
@@ -21,6 +22,6 @@ appTarget.className = styles.app;
 document.body.appendChild(appTarget);
 
 GUI.setAppElement(appTarget);
-const WrappedGui = HashParserHOC(GUI);
+const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
 ReactDOM.render(<WrappedGui />, appTarget);

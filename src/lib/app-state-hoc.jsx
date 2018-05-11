@@ -9,7 +9,6 @@ import {IntlProvider, updateIntl} from 'react-intl-redux';
 import {intlInitialState} from '../reducers/intl.js';
 import {initialState as modeInitialState, setPlayer, setFullScreen} from '../reducers/mode.js';
 import reducer from '../reducers/gui';
-import ErrorBoundary from '../containers/error-boundary.jsx';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(
@@ -68,12 +67,16 @@ const AppStateHOC = function (WrappedComponent) {
             }
         }
         render () {
+            const {
+                intl, // eslint-disable-line no-unused-vars
+                isFullScreen, // eslint-disable-line no-unused-vars
+                isPlayerOnly, // eslint-disable-line no-unused-vars
+                ...componentProps
+            } = this.props;
             return (
                 <Provider store={this.store}>
                     <IntlProvider>
-                        <ErrorBoundary action="Top Level App">
-                            <WrappedComponent {...this.props} />
-                        </ErrorBoundary>
+                        <WrappedComponent {...componentProps} />
                     </IntlProvider>
                 </Provider>
             );

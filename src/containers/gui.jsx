@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 
+import ErrorBoundary from './error-boundary.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
 import {
     activateTab,
@@ -13,7 +14,6 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
-import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -73,13 +73,15 @@ class GUI extends React.Component {
             ...componentProps
         } = this.props;
         return (
-            <GUIComponent
-                loading={fetchingProject || this.state.loading || loadingStateVisible}
-                vm={vm}
-                {...componentProps}
-            >
-                {children}
-            </GUIComponent>
+            <ErrorBoundary action="Top Level App">
+                <GUIComponent
+                    loading={fetchingProject || this.state.loading || loadingStateVisible}
+                    vm={vm}
+                    {...componentProps}
+                >
+                    {children}
+                </GUIComponent>
+            </ErrorBoundary>
         );
     }
 }
@@ -102,6 +104,7 @@ const mapStateToProps = state => ({
     cardsVisible: state.cards.visible,
     costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.modals.importInfo,
+    isPlayerOnly: state.mode.isPlayerOnly,
     loadingStateVisible: state.modals.loadingProject,
     previewInfoVisible: state.modals.previewInfo,
     targetIsStage: state.targets.stage && state.targets.stage.id === state.targets.editingTarget,
@@ -121,7 +124,7 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-const WrappedGui = ProjectLoaderHOC(AppStateHOC(vmListenerHOC(ConnectedGUI)));
+const WrappedGui = ProjectLoaderHOC(vmListenerHOC(ConnectedGUI));
 
 WrappedGui.setAppElement = ReactModal.setAppElement;
 export default WrappedGui;

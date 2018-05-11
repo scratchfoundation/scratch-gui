@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
+import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -57,6 +58,7 @@ class Stage extends React.Component {
         this.updateRect();
         this.renderer = new Renderer(this.canvas);
         this.props.vm.attachRenderer(this.renderer);
+        this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
         this.props.vm.setVideoProvider(new VideoProvider());
     }

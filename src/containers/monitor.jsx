@@ -107,6 +107,7 @@ class Monitor extends React.Component {
                 max={this.props.max}
                 min={this.props.min}
                 mode={this.state.mode}
+                targetId={this.props.targetId}
                 width={this.props.width}
                 onDragEnd={this.handleDragEnd}
                 onNextMode={this.handleNextMode}
@@ -135,6 +136,7 @@ Monitor.propTypes = {
     removeMonitorRect: PropTypes.func.isRequired,
     resizeMonitorRect: PropTypes.func.isRequired,
     spriteName: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    targetId: PropTypes.string,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,

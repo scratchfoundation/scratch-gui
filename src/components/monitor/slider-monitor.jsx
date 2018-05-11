@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './monitor.css';
 
-const SliderMonitor = ({categoryColor, label, min, max, value}) => (
+const SliderMonitor = ({categoryColor, label, min, max, value, onSliderUpdate}) => (
     <div className={styles.defaultMonitor}>
         <div className={styles.row}>
             <div className={styles.label}>
@@ -22,6 +22,7 @@ const SliderMonitor = ({categoryColor, label, min, max, value}) => (
                 min={min}
                 type="range"
                 value={value}
+                onChange={onSliderUpdate}
                 // @todo onChange callback
             />
         </div>
@@ -34,7 +35,7 @@ SliderMonitor.propTypes = {
     label: PropTypes.string.isRequired,
     max: PropTypes.number,
     min: PropTypes.number,
-    // @todo callback for change events
+    onSliderUpdate: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

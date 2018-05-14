@@ -83,6 +83,7 @@ class Stage extends React.Component {
         this.detachMouseEvents(this.canvas);
         this.detachRectEvents();
         this.stopColorPickingLoop();
+        this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
     }
     questionListener (question) {
         this.setState({question: question});

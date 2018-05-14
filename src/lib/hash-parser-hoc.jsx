@@ -1,4 +1,5 @@
 import React from 'react';
+import bindAll from 'lodash.bindall';
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop
@@ -8,24 +9,22 @@ const HashParserHOC = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
         constructor (props) {
             super(props);
-            this.fetchProjectId = this.fetchProjectId.bind(this);
-            this.updateProject = this.updateProject.bind(this);
+            bindAll(this, [
+                'handleHashChange'
+            ]);
             this.state = {
                 projectId: null
             };
         }
         componentDidMount () {
-            window.addEventListener('hashchange', this.updateProject);
-            this.updateProject();
+            window.addEventListener('hashchange', this.handleHashChange);
+            this.handleHashChange();
         }
         componentWillUnmount () {
-            window.removeEventListener('hashchange', this.updateProject);
+            window.removeEventListener('hashchange', this.handleHashChange);
         }
-        fetchProjectId () {
-            return window.location.hash.substring(1);
-        }
-        updateProject () {
-            let projectId = this.fetchProjectId();
+        handleHashChange () {
+            let projectId = window.location.hash.substring(1);
             if (projectId !== this.state.projectId) {
                 if (projectId.length < 1) projectId = 0;
                 this.setState({projectId: projectId});

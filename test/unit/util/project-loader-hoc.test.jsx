@@ -33,4 +33,15 @@ describe('ProjectLoaderHOC', () => {
         storage.load = originalLoad;
     });
 
+    test('when there is no project data, it renders null', () => {
+        const Component = ({projectData}) => <div>{projectData}</div>;
+        const WrappedComponent = ProjectLoaderHOC(Component);
+        const originalLoad = storage.load;
+        storage.load = jest.fn(() => Promise.resolve(null));
+        const mounted = mount(<WrappedComponent />);
+        storage.load = originalLoad;
+        const mountedDiv = mounted.find('div');
+        expect(mountedDiv.exists()).toEqual(false);
+    });
+
 });

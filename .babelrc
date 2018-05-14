@@ -6,5 +6,5 @@
         ["react-intl", {
             "messagesDir": "./translations/messages/"
         }]],
-    "presets": [["env", {"targets": {browsers: ["last 3 versions", "Safari >= 8", "iOS >= 8"]}}], "react"]
+    "presets": [["env", {"targets": {"browsers": ["last 3 versions", "Safari >= 8", "iOS >= 8"]}}], "react"]
 }

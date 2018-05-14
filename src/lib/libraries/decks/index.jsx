@@ -29,6 +29,18 @@ import stepAddWhenClicked from './clicker/add-whenclicked.gif';
 import stepClickSprite from './clicker/click-sprite.gif';
 import stepAddSound from './clicker/add-sound.gif';
 
+// Animate a name
+import libraryAnimate from './animate/animate-name-change-color.gif';
+import stepAnimateChangeColor from './animate/animate-name-change-color.gif';
+import stepAnimateGrow from './animate/animate-name-grow.gif';
+import stepAnimateSpin from './animate/animate-name-spin.gif';
+
+// Make-Music
+import libraryMakeMusic from './Make-Music/make-music-beatbox.gif';
+import stepMakeSong from './Make-Music/make-music-make-song.gif';
+import stepMakeBeat from './Make-Music/make-music-make-beat.gif';
+import stepMakeBeatbox from './Make-Music/make-music-beatbox.gif';
+
 // Videos
 import glideAroundThumb from './videos/glide-around.jpg';
 import changeSizeThumb from './videos/change-size.jpg';
@@ -260,6 +272,102 @@ export default {
                 ),
                 image: stepAddSound
             }, {
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
+            }
+        ]
+    },
+    'animate-a-name': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Animate a Name"
+                description="Name for the 'Animate a Name' how-to"
+                id="gui.howtos.animate-a-name.name"
+            />
+        ),
+        img: libraryAnimate,
+        steps: [ {
+            video: 'https://www.youtube.com/embed/q3nnXj6wr5k'
+        },
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Change color"
+                        description="Step name for 'Change color' step"
+                        id="gui.howtos.animate-a-name.step_AnimateChangeColor"
+                    />
+                ),
+                image: stepAnimateChangeColor
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose A Letter & Make It Spin"
+                        description="Step name for 'Choose A Letter & Make It Spin' step"
+                        id="gui.howtos.animate-a-name.step_AnimateSpin"
+                    />
+                ),
+                image: stepAnimateSpin
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose A Letter & Make It Grow"
+                        description="Step name for 'Choose A Letter & Make It Grow' step"
+                        id="gui.howtos.animate-a-name.step_AnimateGrow"
+                    />
+                ),
+                image: stepAnimateGrow
+            },   {
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
+            }
+        ]
+    },
+    'Make-Music': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Make Music"
+                description="Name for the 'Make Music' how-to"
+                id="gui.howtos.make-music.name"
+            />
+        ),
+        img: libraryMakeMusic,
+        steps: [{
+            video: 'https://www.youtube.com/embed/o3ih7d_4uv0'
+        },
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Create a Song"
+                        description="Step name for 'Create a Song' step"
+                        id="gui.howtos.Make-Music.step_CreateASong"
+                    />
+                ),
+                image: stepMakeSong
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose a Drum & Make a Beat"
+                        description="Step name for 'Choose a Drum & Make a Beat' step"
+                        id="gui.howtos.make-music.step_MakeBeat"
+                    />
+                ),
+                image: stepMakeBeat
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose the Microphone Sprite & Surprise Beatbox"
+                        description="Step name for 'Choose the Microphone Sprite & Surprise Beatbox' step"
+                        id="gui.howtos.make-music.step_MakeBeatBox"
+                    />
+                ),
+                image: stepMakeBeatbox
+            },  {
                 deckIds: [
                     'add-a-backdrop',
                     'switch-costume',

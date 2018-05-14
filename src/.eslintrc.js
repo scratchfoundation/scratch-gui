@@ -13,5 +13,10 @@ module.exports = {
         'import/no-amd': 'error',
         'import/no-nodejs-modules': 'error',
         'react/jsx-no-literals': 'error'
+    },
+    settings: {
+        react: {
+            version: '16.2' // Prevent 16.3 lifecycle method errors
+        }
     }
 };

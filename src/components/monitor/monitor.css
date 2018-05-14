@@ -61,7 +61,6 @@
 }
 
 .list-monitor {
-    min-width: 80px;
     display: flex;
     flex-direction: column;
 }
@@ -83,6 +82,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: calc(100% - 44px);
 }
 
@@ -109,6 +109,7 @@
     border-radius: calc($space / 2);
     border: 1px solid $ui-black-transparent;
     flex-grow: 1;
+    height: 22px;
 }
 
 .list-footer {
@@ -136,4 +137,36 @@
 .value-inner {
     padding: 3px 5px;
     min-height: 22px;
+}
+
+.list-input {
+    padding: 3px 5px;
+    border: 0;
+    background: rgba(0, 0, 0, 0.1);
+    color: $ui-white;
+    outline: none;
+    font-size: 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.remove-button {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    cursor: pointer;
+    color: $ui-white;
+}
+
+.add-button {
+    cursor: pointer;
+    margin-right: 3px;
+}
+
+.resize-handle {
+    cursor: nwse-resize;
+    margin-left: 3px;
+}
+
+.footer-length {
+    text-align: center;
 }

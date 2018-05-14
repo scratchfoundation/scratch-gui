@@ -19,12 +19,12 @@ export default [{
     id: '83a9787d4cb6f3b7632b4ddfebf74367',
     assetType: 'Sound',
     dataFormat: 'WAV',
-    data: new Uint16Array(popWav)
+    data: new Uint8Array(popWav)
 }, {
     id: '83c36d806dc92327b9e7049a565c6bff',
     assetType: 'Sound',
     dataFormat: 'WAV',
-    data: new Uint16Array(meowWav)
+    data: new Uint8Array(meowWav)
 }, {
     id: '739b5e2a2435f6e1ec2993791b423146',
     assetType: 'ImageBitmap',

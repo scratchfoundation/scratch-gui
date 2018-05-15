@@ -21,7 +21,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(11);
 
-var _controls = __webpack_require__(89);
+var _controls = __webpack_require__(90);
 
 var _controls2 = _interopRequireDefault(_controls);
 
@@ -33,13 +33,13 @@ var _box = __webpack_require__(12);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(66);
+var _gui = __webpack_require__(67);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(100);
+var _hashParserHoc = __webpack_require__(56);
 
-var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
+var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -135,7 +135,7 @@ var Player = function (_React$Component) {
     return Player;
 }(_react2.default.Component);
 
-var App = (0, _projectLoaderHoc2.default)(Player);
+var App = (0, _hashParserHoc2.default)(Player);
 
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

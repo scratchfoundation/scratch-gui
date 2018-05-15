@@ -15,11 +15,10 @@
       "currentCostume": 0,
       "costumes": [
         {
-          "assetId": "739b5e2a2435f6e1ec2993791b423146",
+          "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
           "name": "backdrop1",
-          "bitmapResolution": 1,
-          "md5ext": "739b5e2a2435f6e1ec2993791b423146.png",
-          "dataFormat": "png",
+          "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+          "dataFormat": "svg",
           "rotationCenterX": 240,
           "rotationCenterY": 180
         }

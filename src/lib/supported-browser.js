@@ -5,10 +5,9 @@ import bowser from 'bowser';
  * @returns {boolean} False if the platform is definitely not supported.
  */
 export default function () {
-    if (bowser.name === 'IE' ||
-        bowser.name === 'Opera' ||
-        bowser.name === 'Opera Mini' ||
-        bowser.name === 'Silk') {
+    if (bowser.msie ||
+        bowser.opera ||
+        bowser.silk) {
         return false;
     }
     // @todo Should also test for versions of supported browsers

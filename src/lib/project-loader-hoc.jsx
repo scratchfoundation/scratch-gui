@@ -21,7 +21,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             };
         }
         componentDidMount () {
-            this.updateProject(this.props.projectId);
+            if (this.props.projectId || this.props.projectId === 0) {
+                this.updateProject(this.props.projectId);
+            }
         }
         componentWillUpdate (nextProps) {
             if (this.props.projectId !== nextProps.projectId) {

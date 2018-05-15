@@ -1626,7 +1626,9 @@
         "name": "Cat",
         "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals"
+        ],
         "info": [
             0,
             2,
@@ -1662,7 +1664,7 @@
                     "rotationCenterY": 55
                 }
             ],
-            "currentCostumeIndex": 1,
+            "currentCostumeIndex": 0,
             "scratchX": 0,
             "scratchY": 0,
             "scale": 1,

@@ -139,6 +139,7 @@
     padding: 3px 5px;
     min-height: 22px;
     overflow: hidden; /* Don't let long values escape container */
+    user-select: text; /* Allow selecting list values for 2.0 compatibility, only relevant in player */
 }
 
 .list-input {

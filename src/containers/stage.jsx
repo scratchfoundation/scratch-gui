@@ -363,7 +363,6 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
-            useEditorDragStyle, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (

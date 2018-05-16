@@ -31,6 +31,7 @@ const MonitorList = props => (
             {props.monitors.valueSeq().filter(m => m.visible)
                 .map(monitorData => (
                     <Monitor
+                        draggable={props.draggable}
                         height={monitorData.height}
                         id={monitorData.id}
                         key={monitorData.id}
@@ -53,6 +54,7 @@ const MonitorList = props => (
 );
 
 MonitorList.propTypes = {
+    draggable: PropTypes.bool.isRequired,
     monitors: PropTypes.instanceOf(OrderedMap),
     onMonitorChange: PropTypes.func.isRequired,
     stageSize: PropTypes.shape({

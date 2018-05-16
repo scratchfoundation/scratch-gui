@@ -7,10 +7,19 @@ import {OrderedMap} from 'immutable';
 
 import styles from './monitor-list.css';
 
+const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
+    const scaleX = width / widthDefault;
+    const scaleY = height / heightDefault;
+    return `scale(${scaleX},${scaleY})`;
+};
+
 const MonitorList = props => (
     <Box
         // Use static `monitor-overlay` class for bounds of draggables
         className={classNames(styles.monitorList, 'monitor-overlay')}
+        style={{
+            transform: stageSizeToTransform(props.stageSize)
+        }}
     >
         {props.monitors.valueSeq().filter(m => m.visible)
             .map(monitorData => (
@@ -37,7 +46,13 @@ const MonitorList = props => (
 
 MonitorList.propTypes = {
     monitors: PropTypes.instanceOf(OrderedMap),
-    onMonitorChange: PropTypes.func.isRequired
+    onMonitorChange: PropTypes.func.isRequired,
+    stageSize: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number,
+        widthDefault: PropTypes.number,
+        heightDefault: PropTypes.number
+    }).isRequired
 };
 
 export default MonitorList;

@@ -47,7 +47,7 @@ const StageComponent = props => {
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
-                    <MonitorList />
+                    <MonitorList stageSize={stageSize} />
                 </Box>
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>

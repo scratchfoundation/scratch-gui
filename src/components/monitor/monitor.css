@@ -138,6 +138,7 @@
 .value-inner {
     padding: 3px 5px;
     min-height: 22px;
+    overflow: hidden; /* Don't let long values escape container */
 }
 
 .list-input {

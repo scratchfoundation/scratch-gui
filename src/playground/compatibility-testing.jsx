@@ -6,7 +6,7 @@ import Controls from '../containers/controls.jsx';
 import Stage from '../containers/stage.jsx';
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
-import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
+import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 
 const mapStateToProps = state => ({vm: state.vm});
 
@@ -71,7 +71,7 @@ class Player extends React.Component {
     }
 }
 
-const App = ProjectLoaderHOC(Player);
+const App = HashParserHOC(Player);
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

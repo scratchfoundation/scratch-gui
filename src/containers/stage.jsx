@@ -83,6 +83,7 @@ class Stage extends React.Component {
         this.detachMouseEvents(this.canvas);
         this.detachRectEvents();
         this.stopColorPickingLoop();
+        this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
     }
     questionListener (question) {
         this.setState({question: question});
@@ -362,7 +363,6 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
-            useEditorDragStyle, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (

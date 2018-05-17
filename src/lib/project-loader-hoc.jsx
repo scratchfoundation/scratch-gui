@@ -5,9 +5,8 @@ import analytics from './analytics';
 import log from './log';
 import storage from './storage';
 
-/* Higher Order Component to provide behavior for loading projects by id from
- * the window's hash (#this part in the url) or by projectId prop passed in from
- * the parent (i.e. scratch-www)
+/* Higher Order Component to provide behavior for loading projects by id. If
+ * there's no id, the default project is loaded.
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
@@ -15,52 +14,42 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     class ProjectLoaderComponent extends React.Component {
         constructor (props) {
             super(props);
-            this.fetchProjectId = this.fetchProjectId.bind(this);
             this.updateProject = this.updateProject.bind(this);
             this.state = {
-                projectId: null,
                 projectData: null,
                 fetchingProject: false
             };
         }
         componentDidMount () {
-            window.addEventListener('hashchange', this.updateProject);
-            this.updateProject();
+            if (this.props.projectId || this.props.projectId === 0) {
+                this.updateProject(this.props.projectId);
+            }
         }
-        componentWillUpdate (nextProps, nextState) {
-            if (this.state.projectId !== nextState.projectId) {
+        componentWillUpdate (nextProps) {
+            if (this.props.projectId !== nextProps.projectId) {
                 this.setState({fetchingProject: true}, () => {
-                    storage
-                        .load(storage.AssetType.Project, this.state.projectId, storage.DataFormat.JSON)
-                        .then(projectAsset => projectAsset && this.setState({
-                            projectData: projectAsset.data,
-                            fetchingProject: false
-                        }))
-                        .catch(err => log.error(err));
+                    this.updateProject(nextProps.projectId);
                 });
             }
         }
-        componentWillUnmount () {
-            window.removeEventListener('hashchange', this.updateProject);
-        }
-        fetchProjectId () {
-            return window.location.hash.substring(1);
-        }
-        updateProject () {
-            let projectId = this.props.projectId || this.fetchProjectId();
-            if (projectId !== this.state.projectId) {
-                if (projectId.length < 1) projectId = 0;
-                this.setState({projectId: projectId});
-
-                if (projectId !== 0) {
-                    analytics.event({
-                        category: 'project',
-                        action: 'Load Project',
-                        value: projectId,
-                        nonInteraction: true
-                    });
-                }
-            }
+        updateProject (projectId) {
+            storage
+                .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+                .then(projectAsset => projectAsset && this.setState({
+                    projectData: projectAsset.data,
+                    fetchingProject: false
+                }))
+                .then(() => {
+                    if (projectId !== 0) {
+                        analytics.event({
+                            category: 'project',
+                            action: 'Load Project',
+                            value: projectId,
+                            nonInteraction: true
+                        });
+                    }
+                })
+                .catch(err => log.error(err));
         }
         render () {
             const {
@@ -78,7 +67,10 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         }
     }
     ProjectLoaderComponent.propTypes = {
-        projectId: PropTypes.string
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    };
+    ProjectLoaderComponent.defaultProps = {
+        projectId: 0
     };
 
     return ProjectLoaderComponent;

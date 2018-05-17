@@ -37,6 +37,7 @@ const MonitorComponent = props => (
             bounds=".monitor-overlay" // Class for monitor container
             cancel=".no-drag" // Class used for slider input to prevent drag
             defaultClassNameDragging={styles.dragging}
+            disabled={!props.draggable}
             onStop={props.onDragEnd}
         >
             <Box
@@ -88,6 +89,7 @@ const monitorModes = Object.keys(modes);
 MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categories)),
     componentRef: PropTypes.func.isRequired,
+    draggable: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,

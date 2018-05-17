@@ -21,6 +21,7 @@ const StageComponent = props => {
         onDeactivateColorPicker,
         question,
         onQuestionAnswered,
+        useEditorDragStyle,
         ...boxProps
     } = props;
 
@@ -47,7 +48,10 @@ const StageComponent = props => {
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
-                    <MonitorList />
+                    <MonitorList
+                        draggable={useEditorDragStyle}
+                        stageSize={stageSize}
+                    />
                 </Box>
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>
@@ -98,6 +102,7 @@ StageComponent.propTypes = {
     onDeactivateColorPicker: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
+    useEditorDragStyle: PropTypes.bool,
     width: PropTypes.number
 };
 StageComponent.defaultProps = {

@@ -20,7 +20,7 @@ class ListMonitorScroller extends React.Component {
     }
     noRowsRenderer () {
         return (
-            <div className={styles.listEmpty}>
+            <div className={classNames(styles.listRow, styles.listEmpty)}>
                 {'(empty)' /* TODO waiting for design before translation */}
             </div>
         );
@@ -37,9 +37,9 @@ class ListMonitorScroller extends React.Component {
                     className={styles.listValue}
                     dataIndex={index}
                     style={{background: this.props.categoryColor}}
-                    onClick={this.handleEventFactory(index)}
+                    onClick={this.props.draggable ? this.handleEventFactory(index) : null}
                 >
-                    {this.props.activeIndex === index ? (
+                    {this.props.draggable && this.props.activeIndex === index ? (
                         <div className={styles.inputWrapper}>
                             <input
                                 autoFocus
@@ -93,6 +93,7 @@ ListMonitorScroller.propTypes = {
     activeIndex: PropTypes.number,
     activeValue: PropTypes.string,
     categoryColor: PropTypes.string,
+    draggable: PropTypes.bool,
     height: PropTypes.number,
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,

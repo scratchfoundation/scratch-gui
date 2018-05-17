@@ -93,6 +93,7 @@
     align-items: center;
     padding: 2px;
     flex-shrink: 0;
+    transform: translateZ(0); /* Keep sharp when scaled */
 }
 
 .list-index {
@@ -137,6 +138,8 @@
 .value-inner {
     padding: 3px 5px;
     min-height: 22px;
+    overflow: hidden; /* Don't let long values escape container */
+    user-select: text; /* Allow selecting list values for 2.0 compatibility, only relevant in player */
 }
 
 .list-input {

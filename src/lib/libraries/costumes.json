@@ -957,50 +957,6 @@
         ]
     },
     {
-        "name": "Candle1-a",
-        "md5": "9bb90825b1d7c360aa47ee18883cd3cd.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            12,
-            32,
-            1
-        ]
-    },
-    {
-        "name": "Candle1-b",
-        "md5": "4f2ab7fc559ecbbc61721f76639a4e44.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            12,
-            32,
-            1
-        ]
-    },
-    {
-        "name": "Candles1",
-        "md5": "b8432a2c0d04408b3ba58ec3b01582f0.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            52,
-            37,
-            1
-        ]
-    },
-    {
-        "name": "Candles2",
-        "md5": "76a9de5efb140fe287dc0f197a0e8d4c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            52,
-            79,
-            1
-        ]
-    },
-    {
         "name": "Casey-a",
         "md5": "30a4dafa852311b2a07d72e1bb060326.svg",
         "type": "costume",
@@ -1771,7 +1727,7 @@
         ]
     },
     {
-        "name": "Dove1-a",
+        "name": "Dove-a",
         "md5": "6dde2b880ad6ddeaea2a53821befb86d.svg",
         "type": "costume",
         "tags": [],
@@ -1782,35 +1738,13 @@
         ]
     },
     {
-        "name": "Dove1-b",
+        "name": "Dove-b",
         "md5": "1c0bc118044d7f6033bc9cd1ef555590.svg",
         "type": "costume",
         "tags": [],
         "info": [
             88,
             57,
-            1
-        ]
-    },
-    {
-        "name": "Dove2-a",
-        "md5": "42251c2649a073052eb4261d644281bb.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            99,
-            83,
-            1
-        ]
-    },
-    {
-        "name": "Dove2-b",
-        "md5": "469eb55a437364d831b80937c4ee1ab9.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            100,
-            82,
             1
         ]
     },
@@ -2937,28 +2871,6 @@
         ]
     },
     {
-        "name": "Holly1",
-        "md5": "1d8583ca1b5c687f3de004c27110a130.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            29,
-            44,
-            1
-        ]
-    },
-    {
-        "name": "Holly2",
-        "md5": "4b23f1d694ae8b400f1d7216dd8e49bc.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            27,
-            42,
-            1
-        ]
-    },
-    {
         "name": "Home Button",
         "md5": "1bac530a0701a8fc88bb0802ae6787a3.svg",
         "type": "costume",
@@ -2989,61 +2901,6 @@
             103,
             97,
             1
-        ]
-    },
-    {
-        "name": "Jaime Walking-a",
-        "md5": "d6cc9814f7a6640e4c2b1a4276987dc5.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            212,
-            344,
-            2
-        ]
-    },
-    {
-        "name": "Jaime Walking-b",
-        "md5": "7fb579a98d6db257f1b16109d3c4609a.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            104,
-            352,
-            2
-        ]
-    },
-    {
-        "name": "Jaime Walking-c",
-        "md5": "5883bdefba451aaeac8d77c798d41eb0.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            176,
-            340,
-            2
-        ]
-    },
-    {
-        "name": "Jaime Walking-d",
-        "md5": "4b9d2162e30dbb924840575ed35fddb0.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            92,
-            348,
-            2
-        ]
-    },
-    {
-        "name": "Jaime Walking-e",
-        "md5": "63e56d28cc3e3d9b735e1f1d51248cc0.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            168,
-            344,
-            2
         ]
     },
     {
@@ -3421,17 +3278,6 @@
         ]
     },
     {
-        "name": "Lioness",
-        "md5": "8b5f49d4f91f61fbdcb4abac53ab5c7c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
         "name": "Llama",
         "md5": "07158eb6d62e309bb60a6bc36baf2300.svg",
         "type": "costume",
@@ -3517,17 +3363,6 @@
             82,
             68,
             1
-        ]
-    },
-    {
-        "name": "Maya",
-        "md5": "8b7ff2f1190825367112c2c076e34af3.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            144,
-            276,
-            2
         ]
     },
     {
@@ -3707,29 +3542,7 @@
         ]
     },
     {
-        "name": "Monkey1-a",
-        "md5": "d0819570ed955416190eab2e020071ca.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            44,
-            45,
-            1
-        ]
-    },
-    {
-        "name": "Monkey1-b",
-        "md5": "dc361fc5c8645e68c7bab9db3df6bc9d.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            51,
-            46,
-            1
-        ]
-    },
-    {
-        "name": "Monkey2-a",
+        "name": "Monkey-a",
         "md5": "6e4de762dbd52cd2b6356694a9668211.svg",
         "type": "costume",
         "tags": [],
@@ -3740,7 +3553,7 @@
         ]
     },
     {
-        "name": "Monkey2-b",
+        "name": "Monkey-b",
         "md5": "7662a3a0f4c6fa21fdf2de33bd80fe5f.svg",
         "type": "costume",
         "tags": [],
@@ -3751,7 +3564,7 @@
         ]
     },
     {
-        "name": "Monkey2-c",
+        "name": "Monkey-c",
         "md5": "db8eb50b948047181922310bb94511fb.svg",
         "type": "costume",
         "tags": [],
@@ -4092,28 +3905,6 @@
         ]
     },
     {
-        "name": "Penguin1 Talk-a",
-        "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            48,
-            62,
-            1
-        ]
-    },
-    {
-        "name": "Penguin1 Talk-b",
-        "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            48,
-            61,
-            1
-        ]
-    },
-    {
         "name": "Penguin1-a",
         "md5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
         "type": "costume",
@@ -4147,39 +3938,6 @@
         ]
     },
     {
-        "name": "Penguin2",
-        "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            49,
-            79,
-            1
-        ]
-    },
-    {
-        "name": "Penguin2 Talk-a",
-        "md5": "5a80f4b2fd20d43e4f7cb4189c08d99c.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            45,
-            79,
-            1
-        ]
-    },
-    {
-        "name": "Penguin2 Talk-b",
-        "md5": "394e79f5f9a462064ece2a9a6606a07d.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            50,
-            78,
-            1
-        ]
-    },
-    {
         "name": "Penguin2-a",
         "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
         "type": "costume",
@@ -4209,39 +3967,6 @@
         "info": [
             50,
             78,
-            1
-        ]
-    },
-    {
-        "name": "Penguin3-a",
-        "md5": "3f1173e00f664fca5f493b408e1e6d69.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            98,
-            1
-        ]
-    },
-    {
-        "name": "Penguin3-b",
-        "md5": "814c2ea372e64b98d5de97b75773f54b.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            57,
-            97,
-            1
-        ]
-    },
-    {
-        "name": "Penguin3-c",
-        "md5": "e28cd8b76b23db393d06c3a057e2dc68.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            64,
-            98,
             1
         ]
     },
@@ -4380,17 +4105,6 @@
     {
         "name": "Prince",
         "md5": "a760bed1cfc28a30b2dc7fd045c90792.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Princess",
-        "md5": "75c96829e4b9f89378dfde0dee78db5f.svg",
         "type": "costume",
         "tags": [],
         "info": [
@@ -5093,46 +4807,13 @@
         ]
     },
     {
-        "name": "Star1",
+        "name": "Star",
         "md5": "ab0914e53e360477275e58b83ec4d423.svg",
         "type": "costume",
         "tags": [],
         "info": [
             21,
             19,
-            1
-        ]
-    },
-    {
-        "name": "Star2",
-        "md5": "0a0ef50bb5a59be1785c8bb12cdacae6.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            25,
-            27,
-            1
-        ]
-    },
-    {
-        "name": "Star3-a",
-        "md5": "04da262057dfe130860086031e5018ef.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            54,
-            55,
-            1
-        ]
-    },
-    {
-        "name": "Star3-b",
-        "md5": "a082be13c0e5d17230f448dd55029a7d.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            33,
-            34,
             1
         ]
     },
@@ -5412,28 +5093,6 @@
         ]
     },
     {
-        "name": "Tree-lights-a",
-        "md5": "177682396be2961367a50289a5552314.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            59,
-            77,
-            1
-        ]
-    },
-    {
-        "name": "Tree-lights-b",
-        "md5": "b0282c029046fd1ed0541675911fe8bb.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            58,
-            76,
-            1
-        ]
-    },
-    {
         "name": "Tree1",
         "md5": "8c40e2662c55d17bc384f47165ac43c1.svg",
         "type": "costume",
@@ -5441,17 +5100,6 @@
         "info": [
             77,
             126,
-            1
-        ]
-    },
-    {
-        "name": "Tree2",
-        "md5": "d4cafdb83f5ff518383f7174817243e6.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            82,
-            104,
             1
         ]
     },

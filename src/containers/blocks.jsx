@@ -445,12 +445,12 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    anyModalVisible: Object.keys(state.modals).some(key => state.modals[key]),
-    extensionLibraryVisible: state.modals.extensionLibrary,
+    anyModalVisible: Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]),
+    extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,
-    toolboxXML: state.toolbox.toolboxXML,
-    customProceduresVisible: state.customProcedures.active
+    toolboxXML: state.scratchGui.toolbox.toolboxXML,
+    customProceduresVisible: state.scratchGui.customProcedures.active
 });
 
 const mapDispatchToProps = dispatch => ({

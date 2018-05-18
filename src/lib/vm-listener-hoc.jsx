@@ -96,7 +96,7 @@ const vmListenerHOC = function (WrappedComponent) {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.vm
+        vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

@@ -13,6 +13,7 @@ import {
     COSTUMES_TAB_INDEX,
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
+import {setPlayer} from '../reducers/mode';
 
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
@@ -99,24 +100,26 @@ GUI.propTypes = {
 GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
-    activeTabIndex: state.editorTab.activeTabIndex,
-    blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
-    cardsVisible: state.cards.visible,
-    costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
-    importInfoVisible: state.modals.importInfo,
-    isPlayerOnly: state.mode.isPlayerOnly,
-    loadingStateVisible: state.modals.loadingProject,
-    previewInfoVisible: state.modals.previewInfo,
-    targetIsStage: state.targets.stage && state.targets.stage.id === state.targets.editingTarget,
-    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
-    tipsLibraryVisible: state.modals.tipsLibrary
+    activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+    blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+    cardsVisible: state.scratchGui.cards.visible,
+    costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
+    importInfoVisible: state.scratchGui.modals.importInfo,
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    loadingStateVisible: state.scratchGui.modals.loadingProject,
+    previewInfoVisible: state.scratchGui.modals.previewInfo,
+    targetIsStage: state.scratchGui.targets.stage &&
+    state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget,
+    soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+    tipsLibraryVisible: state.scratchGui.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary()),
     onActivateTab: tab => dispatch(activateTab(tab)),
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
-    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX))
+    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
+    onSetPlayerMode: player => dispatch(setPlayer(player))
 });
 
 const ConnectedGUI = connect(

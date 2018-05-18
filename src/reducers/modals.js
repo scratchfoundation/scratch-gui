@@ -137,6 +137,7 @@ const closeTipsLibrary = function () {
 };
 export {
     reducer as default,
+    initialState as modalsInitialState,
     openBackdropLibrary,
     openCameraCapture,
     openCostumeLibrary,

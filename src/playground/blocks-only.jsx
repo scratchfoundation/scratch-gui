@@ -10,7 +10,7 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import styles from './blocks-only.css';
 
-const mapStateToProps = state => ({vm: state.vm});
+const mapStateToProps = state => ({vm: state.scratchGui.vm});
 
 const VMBlocks = connect(mapStateToProps)(Blocks);
 const VMControls = connect(mapStateToProps)(Controls);

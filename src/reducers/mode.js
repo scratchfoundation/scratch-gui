@@ -39,7 +39,7 @@ const setPlayer = function (isPlayerOnly) {
 
 export {
     reducer as default,
-    initialState,
+    initialState as modeInitialState,
     setFullScreen,
     setPlayer
 };

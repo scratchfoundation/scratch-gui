@@ -61,7 +61,7 @@ TipsLibrary.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    visible: state.modals.tipsLibrary
+    visible: state.scratchGui.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({

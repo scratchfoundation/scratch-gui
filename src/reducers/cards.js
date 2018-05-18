@@ -107,6 +107,7 @@ const endDrag = function () {
 
 export {
     reducer as default,
+    initialState as cardsInitialState,
     activateDeck,
     viewCards,
     closeCards,

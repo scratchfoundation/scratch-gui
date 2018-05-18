@@ -300,7 +300,13 @@
         "name": "Bananas",
         "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "food",
+            "yellow",
+            "mushy",
+            "potassium",
+            "fruit"
+        ],
         "info": [
             36,
             37,
@@ -803,7 +809,7 @@
         ]
     },
     {
-        "name": "Butterfly1-b ",
+        "name": "Butterfly1-b",
         "md5": "55dd0671a359d7c35f7b78f4176660e8.svg",
         "type": "costume",
         "tags": [],
@@ -814,7 +820,7 @@
         ]
     },
     {
-        "name": "Butterfly2 ",
+        "name": "Butterfly2",
         "md5": "a0216895beade6afc6d42bd5bb43faea.svg",
         "type": "costume",
         "tags": [],
@@ -825,7 +831,7 @@
         ]
     },
     {
-        "name": "Butterfly3 ",
+        "name": "Butterfly3",
         "md5": "8907a43cf08b0a9134969023be2074c5.svg",
         "type": "costume",
         "tags": [],
@@ -1785,7 +1791,12 @@
         "name": "Dragon1-a",
         "md5": "ee0082b436d6d5dc3de33047166e7bf2.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "reptile",
+            "flying",
+            "fire"
+        ],
         "info": [
             65,
             60,
@@ -1796,7 +1807,12 @@
         "name": "Dragon1-b",
         "md5": "bb58ce36997fa205a86a085f202837fd.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "reptile",
+            "flying",
+            "fire"
+        ],
         "info": [
             84,
             56,
@@ -1991,7 +2007,7 @@
         ]
     },
     {
-        "name": "Elephant-a ",
+        "name": "Elephant-a",
         "md5": "b3515b3805938b0fae4e527aa0b4524e.svg",
         "type": "costume",
         "tags": [],
@@ -2002,7 +2018,7 @@
         ]
     },
     {
-        "name": "Elephant-b ",
+        "name": "Elephant-b",
         "md5": "bce91fa266220d3679a4c19c4e38b1f7.svg",
         "type": "costume",
         "tags": [],
@@ -2376,7 +2392,7 @@
         ]
     },
     {
-        "name": "Glass Water-a",
+        "name": "Glass Water-a ",
         "md5": "c364b9e1f4bcdc61705032d89eaaa0a1.svg",
         "type": "costume",
         "tags": [],
@@ -2387,7 +2403,7 @@
         ]
     },
     {
-        "name": "Glass Water-b",
+        "name": "Glass Water-b ",
         "md5": "bc07ce6a2004ac91ce704531a1c526e5.svg",
         "type": "costume",
         "tags": [],
@@ -4510,17 +4526,6 @@
         ]
     },
     {
-        "name": "Shark-a ",
-        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
         "name": "Shark-b",
         "md5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
         "type": "costume",
@@ -4532,18 +4537,7 @@
         ]
     },
     {
-        "name": "Shark-b ",
-        "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Shark-c ",
+        "name": "Shark-c",
         "md5": "afeae3f998598424f7c50918507f6ce6.svg",
         "type": "costume",
         "tags": [],
@@ -4609,7 +4603,7 @@
         ]
     },
     {
-        "name": "Shirt2-a",
+        "name": "Shirt2-a ",
         "md5": "5946e7a1e36c6d97ae47d41dd8595a41.svg",
         "type": "costume",
         "tags": [],

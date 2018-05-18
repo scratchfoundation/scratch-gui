@@ -19,7 +19,8 @@
         "md5": "e7c147730f19d284bcd7b3f00af19bb6.svg",
         "type": "backdrop",
         "tags": [
-            "outdoors"
+            "outdoors",
+            "flying"
         ],
         "info": [
             480,
@@ -139,7 +140,8 @@
         "md5": "108160d0e44d1c340182e31c9dc0758a.svg",
         "type": "backdrop",
         "tags": [
-            "indoors"
+            "indoors",
+            "inflatable"
         ],
         "info": [
             480,
@@ -151,7 +153,12 @@
         "name": "Purple",
         "md5": "b16a7870ab4287f0f46816b3c5061c9f.svg",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "perriwinkle",
+            "blue",
+            "pastel",
+            "flying"
+        ],
         "info": [
             480,
             360,
@@ -163,7 +170,8 @@
         "md5": "87e963282db9e020e8c4d075891ea12b.svg",
         "type": "backdrop",
         "tags": [
-            "patterns"
+            "patterns",
+            "raimondious"
         ],
         "info": [
             480,
@@ -191,7 +199,10 @@
         "md5": "b579aeeb143e79c47e2e65cbd3c0fe36.svg",
         "type": "backdrop",
         "tags": [
-            "space"
+            "space",
+            "moon",
+            "saturn",
+            "stars"
         ],
         "info": [
             480,
@@ -230,7 +241,10 @@
         "md5": "5fa9385a60b904672d0e46e9d768bb32.svg",
         "type": "backdrop",
         "tags": [
-            "outdoors"
+            "outdoors",
+            "trees",
+            "forest",
+            "winter"
         ],
         "info": [
             480,
@@ -244,6 +258,7 @@
         "type": "backdrop",
         "tags": [
             "fantasy",
+            "indoors",
             "ipzy"
         ],
         "info": [

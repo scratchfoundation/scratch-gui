@@ -1,5 +1,5 @@
 export default [
-    {title: 'Animal'},
+    {title: 'Animals'},
     {title: 'Effects'},
     {title: 'Loops'},
     {title: 'Notes'},

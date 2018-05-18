@@ -1,19 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
 
-import Controls from '../containers/controls.jsx';
-import Stage from '../containers/stage.jsx';
-import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
-const mapStateToProps = state => ({vm: state.vm});
-
-const VMStage = connect(mapStateToProps)(Stage);
-const VMControls = connect(mapStateToProps)(Controls);
 
 const DEFAULT_PROJECT_ID = '10015059';
 

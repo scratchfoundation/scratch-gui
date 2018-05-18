@@ -24,12 +24,13 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: !props.vm.initialized,
             loadingError: false,
             errorMessage: ''
         };
     }
     componentDidMount () {
+        if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
         this.props.vm.loadProject(this.props.projectData)
@@ -44,6 +45,7 @@ class GUI extends React.Component {
                 // error page gets rendered if project failed to load
                 this.setState({loadingError: true, errorMessage: e});
             });
+        this.props.vm.initialized = true;
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {

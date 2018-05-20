@@ -13,7 +13,6 @@ import {
     COSTUMES_TAB_INDEX,
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
-import {setPlayer} from '../reducers/mode';
 
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
@@ -120,8 +119,7 @@ const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary()),
     onActivateTab: tab => dispatch(activateTab(tab)),
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
-    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
-    onSetPlayerMode: player => dispatch(setPlayer(player))
+    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX))
 });
 
 const ConnectedGUI = connect(

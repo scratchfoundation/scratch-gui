@@ -48,6 +48,7 @@ const GUIComponent = props => {
         cardsVisible,
         children,
         costumesTabVisible,
+        enableCommunity,
         importInfoVisible,
         intl,
         isPlayerOnly,
@@ -108,7 +109,7 @@ const GUIComponent = props => {
             {cardsVisible ? (
                 <Cards />
             ) : null}
-            <MenuBar />
+            <MenuBar enableCommunity={enableCommunity} />
             <Box className={styles.bodyWrapper}>
                 <Box className={styles.flexWrapper}>
                     <Box className={styles.editorWrapper}>
@@ -224,6 +225,7 @@ GUIComponent.propTypes = {
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumesTabVisible: PropTypes.bool,
+    enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,

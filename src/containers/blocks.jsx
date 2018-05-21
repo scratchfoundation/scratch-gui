@@ -96,10 +96,16 @@ class Blocks extends React.Component {
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
-            this.props.locale !== nextProps.locale
+            this.props.locale !== nextProps.locale ||
+            this.props.anyModalVisible !== nextProps.anyModalVisible
         );
     }
     componentDidUpdate (prevProps) {
+        // If any modals are open, call hideChaff to close z-indexed field editors
+        if (this.props.anyModalVisible && !prevProps.anyModalVisible) {
+            this.ScratchBlocks.hideChaff();
+        }
+
         if (prevProps.locale !== this.props.locale) {
             this.props.vm.setLocale(this.props.locale, this.props.messages);
         }
@@ -317,6 +323,7 @@ class Blocks extends React.Component {
     render () {
         /* eslint-disable no-unused-vars */
         const {
+            anyModalVisible,
             customProceduresVisible,
             extensionLibraryVisible,
             options,
@@ -368,6 +375,7 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
+    anyModalVisible: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
@@ -437,6 +445,7 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    anyModalVisible: Object.keys(state.modals).some(key => state.modals[key]),
     extensionLibraryVisible: state.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,

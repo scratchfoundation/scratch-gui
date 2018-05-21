@@ -25,7 +25,6 @@ const SliderMonitor = ({categoryColor, label, min, max, value, onSliderUpdate}) 
                 type="range"
                 value={value}
                 onChange={onSliderUpdate}
-                // @todo onChange callback
             />
         </div>
 

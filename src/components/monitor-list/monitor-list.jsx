@@ -10,7 +10,12 @@ import styles from './monitor-list.css';
 const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
     const scaleX = width / widthDefault;
     const scaleY = height / heightDefault;
-    return `scale(${scaleX},${scaleY})`;
+    if (scaleX === 1 && scaleY === 1) {
+        // Do not set a transform if the scale is 1 because
+        // it messes up `position: fixed` elements like the context menu.
+        return;
+    }
+    return {transform: `scale(${scaleX},${scaleY})`};
 };
 
 const MonitorList = props => (
@@ -24,9 +29,7 @@ const MonitorList = props => (
     >
         <Box
             className={styles.monitorListScaler}
-            style={{
-                transform: stageSizeToTransform(props.stageSize)
-            }}
+            style={stageSizeToTransform(props.stageSize)}
         >
             {props.monitors.valueSeq().filter(m => m.visible)
                 .map(monitorData => (

@@ -60,6 +60,10 @@
     flex-direction: row;
 }
 
+.slider {
+    width: 100%;
+}
+
 .list-monitor {
     display: flex;
     flex-direction: column;

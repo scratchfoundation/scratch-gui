@@ -24,4 +24,4 @@ document.body.appendChild(appTarget);
 GUI.setAppElement(appTarget);
 const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
-ReactDOM.render(<WrappedGui />, appTarget);
+ReactDOM.render(<WrappedGui backpackVisible />, appTarget);

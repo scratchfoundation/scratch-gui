@@ -15,6 +15,7 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import Backpack from '../backpack/backpack.jsx';
 
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
@@ -44,6 +45,7 @@ const GUIComponent = props => {
     const {
         activeTabIndex,
         basePath,
+        backpackVisible,
         blocksTabVisible,
         cardsVisible,
         children,
@@ -202,6 +204,9 @@ const GUIComponent = props => {
                                 {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                             </TabPanel>
                         </Tabs>
+                        {backpackVisible ? (
+                            <Backpack />
+                        ) : null}
                     </Box>
 
                     <Box className={styles.stageAndTargetWrapper}>
@@ -220,6 +225,7 @@ const GUIComponent = props => {
 };
 GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
+    backpackVisible: PropTypes.null,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     cardsVisible: PropTypes.bool,
@@ -242,6 +248,7 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
+    backpackVisible: false,
     basePath: './'
 };
 export default injectIntl(GUIComponent);

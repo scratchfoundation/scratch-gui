@@ -445,7 +445,8 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    anyModalVisible: Object.keys(state.modals).some(key => state.modals[key]),
+    anyModalVisible: Object.keys(state.modals).some(key => state.modals[key]) ||
+            state.mode.isFullScreen,
     extensionLibraryVisible: state.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,

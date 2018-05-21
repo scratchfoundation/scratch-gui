@@ -1,25 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import throttle from 'redux-throttle';
+import {createStore, combineReducers, compose} from 'redux';
 
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
 import intlReducer from '../reducers/intl.js';
 
-import guiReducer, {guiInitialState, initFullScreen, initPlayer} from '../reducers/gui';
+import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initPlayer} from '../reducers/gui';
 
 import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
 import {ScratchPaintReducer} from 'scratch-paint';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(
-    applyMiddleware(
-        throttle(300, {leading: true, trailing: true})
-    )
-);
+const enhancer = composeEnhancers(guiMiddleware);
 
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided

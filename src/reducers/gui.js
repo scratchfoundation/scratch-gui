@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {applyMiddleware, compose, combineReducers} from 'redux';
 import cardsReducer, {cardsInitialState} from './cards';
 import colorPickerReducer, {colorPickerInitialState} from './color-picker';
 import customProceduresReducer, {customProceduresInitialState} from './custom-procedures';
@@ -14,7 +14,9 @@ import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
+import throttle from 'redux-throttle';
 
+const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
     blockDrag: blockDragInitialState,
@@ -75,6 +77,7 @@ const guiReducer = combineReducers({
 export {
     guiReducer as default,
     guiInitialState,
+    guiMiddleware,
     initFullScreen,
     initPlayer
 };

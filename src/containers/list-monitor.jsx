@@ -31,6 +31,11 @@ class ListMonitor extends React.Component {
     }
 
     handleActivate (index) {
+        // Do nothing if activating the currently active item
+        if (this.state.activeIndex === index) {
+            return;
+        }
+
         this.setState({
             activeIndex: index,
             activeValue: this.props.value[index]

@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 643:
+/***/ 644:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(642);
+__webpack_require__(643);
 
 var _react = __webpack_require__(0);
 
@@ -66,9 +66,13 @@ var _analytics = __webpack_require__(22);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(66);
+var _gui = __webpack_require__(67);
 
 var _gui2 = _interopRequireDefault(_gui);
+
+var _hashParserHoc = __webpack_require__(56);
+
+var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
 var _index = __webpack_require__(207);
 
@@ -91,10 +95,11 @@ appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
 
 _gui2.default.setAppElement(appTarget);
+var WrappedGui = (0, _hashParserHoc2.default)(_gui2.default);
 
-_reactDom2.default.render(_react2.default.createElement(_gui2.default, null), appTarget);
+_reactDom2.default.render(_react2.default.createElement(WrappedGui, null), appTarget);
 
 /***/ })
 
-},[[643,0]]]);
+},[[644,0]]]);
 //# sourceMappingURL=gui.js.map

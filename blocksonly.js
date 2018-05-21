@@ -60,7 +60,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(11);
 
-var _controls = __webpack_require__(89);
+var _controls = __webpack_require__(90);
 
 var _controls2 = _interopRequireDefault(_controls);
 
@@ -68,13 +68,13 @@ var _blocks = __webpack_require__(161);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(66);
+var _gui = __webpack_require__(67);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _projectLoaderHoc = __webpack_require__(100);
+var _hashParserHoc = __webpack_require__(56);
 
-var _projectLoaderHoc2 = _interopRequireDefault(_projectLoaderHoc);
+var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
 var _blocksOnly = __webpack_require__(204);
 
@@ -103,7 +103,7 @@ var BlocksOnly = function BlocksOnly(props) {
     );
 };
 
-var App = (0, _projectLoaderHoc2.default)(BlocksOnly);
+var App = (0, _hashParserHoc2.default)(BlocksOnly);
 
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

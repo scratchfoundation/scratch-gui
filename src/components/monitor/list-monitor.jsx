@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import styles from './monitor.css';
 import ListMonitorScroller from './list-monitor-scroller.jsx';
 
-const ListMonitor = ({label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
+const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
         className={styles.listMonitor}
         style={{
@@ -17,6 +17,7 @@ const ListMonitor = ({label, width, height, value, onResizeMouseDown, onAdd, ...
         </div>
         <div className={styles.listBody}>
             <ListMonitorScroller
+                draggable={draggable}
                 height={height}
                 values={value}
                 width={width}
@@ -26,7 +27,7 @@ const ListMonitor = ({label, width, height, value, onResizeMouseDown, onAdd, ...
         <div className={styles.listFooter}>
             <div
                 className={styles.addButton}
-                onClick={onAdd}
+                onClick={draggable ? onAdd : null}
             >
                 {'+' /* TODO waiting on asset */}
             </div>
@@ -35,7 +36,7 @@ const ListMonitor = ({label, width, height, value, onResizeMouseDown, onAdd, ...
             </div>
             <div
                 className={classNames(styles.resizeHandle, 'no-drag')}
-                onMouseDown={onResizeMouseDown}
+                onMouseDown={draggable ? onResizeMouseDown : null}
             >
                 {'=' /* TODO waiting on asset */}
             </div>
@@ -46,6 +47,7 @@ const ListMonitor = ({label, width, height, value, onResizeMouseDown, onAdd, ...
 ListMonitor.propTypes = {
     activeIndex: PropTypes.number,
     categoryColor: PropTypes.string.isRequired,
+    draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
     label: PropTypes.string.isRequired,
     onActivate: PropTypes.func,

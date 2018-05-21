@@ -133,7 +133,7 @@ class Blocks extends React.Component {
     updateToolbox () {
         this.toolboxUpdateTimeout = false;
 
-        const categoryName = this.workspace.toolbox_.getSelectedCategoryName();
+        const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
         this.workspace.updateToolbox(this.props.toolboxXML);
         // In order to catch any changes that mutate the toolbox during "normal runtime"
@@ -141,8 +141,8 @@ class Blocks extends React.Component {
         // Using the setter function will rerender the entire toolbox which we just rendered.
         this.workspace.toolboxRefreshEnabled_ = true;
 
-        const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionByName(categoryName);
-        const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthByName(categoryName);
+        const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionById(categoryId);
+        const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthById(categoryId);
         if (offset < currentCategoryLen) {
             this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
         } else {
@@ -285,9 +285,9 @@ class Blocks extends React.Component {
         // @todo Later we should replace this to avoid all the warnings from redefining blocks.
         this.handleExtensionAdded(blocksInfo);
     }
-    handleCategorySelected (categoryName) {
+    handleCategorySelected (categoryId) {
         this.withToolboxUpdates(() => {
-            this.workspace.toolbox_.setSelectedCategoryByName(categoryName);
+            this.workspace.toolbox_.setSelectedCategoryById(categoryId);
         });
     }
     setBlocks (blocks) {
@@ -312,8 +312,7 @@ class Blocks extends React.Component {
         this.props.onRequestCloseCustomProcedures(data);
         const ws = this.workspace;
         ws.refreshToolboxSelection_();
-        // @todo ensure this does not break on localization
-        ws.toolbox_.scrollToCategoryByName('My Blocks');
+        ws.toolbox_.scrollToCategoryById('myBlocks');
     }
     render () {
         /* eslint-disable no-unused-vars */

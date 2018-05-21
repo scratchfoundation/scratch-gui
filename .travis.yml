@@ -31,7 +31,9 @@ deploy:
   script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: npm
   on:
-    branch: master
+    branch:
+    - master
+    - develop
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN

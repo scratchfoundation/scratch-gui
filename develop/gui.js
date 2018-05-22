@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 206:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 207:
+/***/ 206:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(206);
+var content = __webpack_require__(205);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -66,15 +66,19 @@ var _analytics = __webpack_require__(22);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(68);
+var _gui = __webpack_require__(70);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(56);
+var _hashParserHoc = __webpack_require__(57);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _index = __webpack_require__(207);
+var _appStateHoc = __webpack_require__(56);
+
+var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
+
+var _index = __webpack_require__(206);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -95,7 +99,7 @@ appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
 
 _gui2.default.setAppElement(appTarget);
-var WrappedGui = (0, _hashParserHoc2.default)(_gui2.default);
+var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
 _reactDom2.default.render(_react2.default.createElement(WrappedGui, null), appTarget);
 

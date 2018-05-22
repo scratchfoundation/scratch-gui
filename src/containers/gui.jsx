@@ -109,8 +109,10 @@ const mapStateToProps = state => ({
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     loadingStateVisible: state.scratchGui.modals.loadingProject,
     previewInfoVisible: state.scratchGui.modals.previewInfo,
-    targetIsStage: state.scratchGui.targets.stage &&
-    state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget,
+    targetIsStage: (
+        state.scratchGui.targets.stage &&
+        state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
+    ),
     soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
     tipsLibraryVisible: state.scratchGui.modals.tipsLibrary
 });

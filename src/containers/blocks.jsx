@@ -445,7 +445,10 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    anyModalVisible: Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]),
+    anyModalVisible: (
+        Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]) ||
+        state.scratchGui.mode.isFullScreen
+    ),
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,

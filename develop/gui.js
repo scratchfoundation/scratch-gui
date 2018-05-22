@@ -58,7 +58,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(20);
+var _reactDom = __webpack_require__(21);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -66,7 +66,7 @@ var _analytics = __webpack_require__(22);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(67);
+var _gui = __webpack_require__(68);
 
 var _gui2 = _interopRequireDefault(_gui);
 

@@ -8,7 +8,7 @@ body,
 
     /* Setting min height/width makes the UI scroll below those sizes */
     min-width: 1024px;
-    min-height: 670px; /* Min height to fit sprite/backdrop button */
+    min-height: 640px; /* Min height to fit sprite/backdrop button */
 }
 
 /* @todo: move globally? Safe / side FX, for blocks particularly? */

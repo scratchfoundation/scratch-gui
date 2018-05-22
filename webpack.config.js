@@ -166,7 +166,7 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'scratch-gui': './src/containers/gui.jsx'
+                'scratch-gui': './src/index.js'
             },
             output: {
                 libraryTarget: 'umd',
@@ -179,7 +179,6 @@ module.exports = [
             module: {
                 rules: base.module.rules.concat([
                     {
-                      
                         test: /\.(svg|png|wav|gif|jpg)$/,
                         loader: 'file-loader',
                         options: {

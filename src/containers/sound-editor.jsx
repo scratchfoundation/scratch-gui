@@ -211,17 +211,17 @@ SoundEditor.propTypes = {
 };
 
 const mapStateToProps = (state, {soundIndex}) => {
-    const sprite = state.vm.editingTarget.sprite;
+    const sprite = state.scratchGui.vm.editingTarget.sprite;
     // Make sure the sound index doesn't go out of range.
     const index = soundIndex < sprite.sounds.length ? soundIndex : sprite.sounds.length - 1;
-    const sound = state.vm.editingTarget.sprite.sounds[index];
-    const audioBuffer = state.vm.getSoundBuffer(index);
+    const sound = state.scratchGui.vm.editingTarget.sprite.sounds[index];
+    const audioBuffer = state.scratchGui.vm.getSoundBuffer(index);
     return {
         soundId: sound.soundId,
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
         name: sound.name,
-        vm: state.vm
+        vm: state.scratchGui.vm
     };
 };
 

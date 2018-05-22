@@ -337,12 +337,12 @@ CostumeTab.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    sprites: state.targets.sprites,
-    stage: state.targets.stage,
-    cameraModalVisible: state.modals.cameraCapture,
-    costumeLibraryVisible: state.modals.costumeLibrary,
-    backdropLibraryVisible: state.modals.backdropLibrary
+    editingTarget: state.scratchGui.targets.editingTarget,
+    sprites: state.scratchGui.targets.sprites,
+    stage: state.scratchGui.targets.stage,
+    cameraModalVisible: state.scratchGui.modals.cameraCapture,
+    costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
+    backdropLibraryVisible: state.scratchGui.modals.backdropLibrary
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -241,11 +241,11 @@ SoundTab.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    sprites: state.targets.sprites,
-    stage: state.targets.stage,
-    soundLibraryVisible: state.modals.soundLibrary,
-    soundRecorderVisible: state.modals.soundRecorder
+    editingTarget: state.scratchGui.targets.editingTarget,
+    sprites: state.scratchGui.targets.sprites,
+    stage: state.scratchGui.targets.stage,
+    soundLibraryVisible: state.scratchGui.modals.soundLibrary,
+    soundRecorderVisible: state.scratchGui.modals.soundRecorder
 });
 
 const mapDispatchToProps = dispatch => ({

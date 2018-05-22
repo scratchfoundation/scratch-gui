@@ -31,6 +31,7 @@ const setStageSize = function (stageSize) {
 
 export {
     reducer as default,
+    initialState as stageSizeInitialState,
     setStageSize,
     STAGE_SIZES
 };

@@ -144,10 +144,10 @@ TargetPane.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    hoveredTarget: state.hoveredTarget,
-    sprites: Object.keys(state.targets.sprites).reduce((sprites, k) => {
-        let {direction, size, x, y, ...sprite} = state.targets.sprites[k];
+    editingTarget: state.scratchGui.targets.editingTarget,
+    hoveredTarget: state.scratchGui.hoveredTarget,
+    sprites: Object.keys(state.scratchGui.targets.sprites).reduce((sprites, k) => {
+        let {direction, size, x, y, ...sprite} = state.scratchGui.targets.sprites[k];
         if (typeof direction !== 'undefined') direction = Math.round(direction);
         if (typeof x !== 'undefined') x = Math.round(x);
         if (typeof y !== 'undefined') y = Math.round(y);
@@ -155,9 +155,9 @@ const mapStateToProps = state => ({
         sprites[k] = {...sprite, direction, size, x, y};
         return sprites;
     }, {}),
-    stage: state.targets.stage,
-    raiseSprites: state.blockDrag,
-    spriteLibraryVisible: state.modals.spriteLibrary
+    stage: state.scratchGui.targets.stage,
+    raiseSprites: state.scratchGui.blockDrag,
+    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
 });
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {

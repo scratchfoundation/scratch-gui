@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
-const WrappedGui = HashParserHOC(GUI);
+import AppStateHOC from '../lib/app-state-hoc.jsx';
+const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     // Warn before navigating away

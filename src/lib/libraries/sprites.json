@@ -4,7 +4,9 @@
         "md5": "afab2d2141e9811bd89e385e9628cb5f.svg",
         "type": "sprite",
         "tags": [
-            "people"
+            "people",
+            "person",
+            "drawing"
         ],
         "info": [
             0,
@@ -64,7 +66,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -74,7 +75,10 @@
         "md5": "831ccd4741a7a56d85f6698a21f4ca69.svg",
         "type": "sprite",
         "tags": [
-            "food"
+            "food",
+            "red",
+            "crunchy",
+            "fruit"
         ],
         "info": [
             0,
@@ -110,7 +114,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -119,7 +122,12 @@
         "name": "Arrow1",
         "md5": "62f8794dd120e9b4ead4d098d50fc64b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "symbols",
+            "game",
+            "right"
+        ],
         "info": [
             0,
             4,
@@ -178,7 +186,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -187,7 +194,9 @@
         "name": "Avery",
         "md5": "21393c9114c7d34b1df7ccd12c793672.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             2,
@@ -224,13 +233,12 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -60,
-            "scratchY": 0,
+            "scratchX": -171,
+            "scratchY": -76,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -239,7 +247,10 @@
         "name": "Avery Walking",
         "md5": "ed334e546806dfbf26d2591d7ddb12d0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
             0,
             4,
@@ -292,13 +303,12 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -63,
-            "scratchY": 42,
+            "scratchX": -177,
+            "scratchY": 76,
             "scale": 1,
             "direction": 90,
-            "rotationStyle": "leftRight",
+            "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -307,7 +317,18 @@
         "name": "Ball",
         "md5": "10117ddaefa98d819f2b1df93805622f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "round",
+            "game",
+            "bounce",
+            "circle",
+            "yellow",
+            "blue",
+            "pink",
+            "green",
+            "purple",
+            "things"
+        ],
         "info": [
             0,
             5,
@@ -374,7 +395,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -383,7 +403,10 @@
         "name": "Ballerina",
         "md5": "6051bb7008cf17c8853a6f81f04c8a0f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             0,
             4,
@@ -435,14 +458,13 @@
                     "rotationCenterY": 75
                 }
             ],
-            "currentCostumeIndex": 3,
+            "currentCostumeIndex": 0,
             "scratchX": -19,
             "scratchY": -7,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -451,7 +473,16 @@
         "name": "Balloon1",
         "md5": "bc96a1fb5fe794377acd44807e421ce2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "party",
+            "pop",
+            "flying",
+            "helium",
+            "blue",
+            "yellow",
+            "purple",
+            "things"
+        ],
         "info": [
             0,
             3,
@@ -495,58 +526,13 @@
                     "rotationCenterY": 94
                 }
             ],
-            "currentCostumeIndex": 2,
+            "currentCostumeIndex": 0,
             "scratchX": -69,
             "scratchY": 41,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 7,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Bananas",
-        "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
-        "type": "sprite",
-        "tags": [],
-        "info": [
-            0,
-            1,
-            1
-        ],
-        "json": {
-            "objName": "Bananas",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "bananas",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "40bb8a1afe88cec78254f6fcfee98242.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 36,
-                    "rotationCenterY": 37
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -77,
-            "scratchY": 47,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -556,7 +542,10 @@
         "md5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
         "type": "sprite",
         "tags": [
-            "sports"
+            "sports",
+            "round",
+            "summer",
+            "things"
         ],
         "info": [
             0,
@@ -592,7 +581,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -640,7 +628,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -650,7 +637,11 @@
         "md5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "flying",
+            "holiday",
+            "nature",
+            "castle"
         ],
         "info": [
             0,
@@ -694,7 +685,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 8,
             "visible": true,
             "spriteInfo": {}
         }
@@ -704,7 +694,11 @@
         "md5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "flying",
+            "holiday",
+            "nature",
+            "castle"
         ],
         "info": [
             0,
@@ -748,7 +742,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 9,
             "visible": true,
             "spriteInfo": {}
         }
@@ -757,7 +750,12 @@
         "name": "Beachball",
         "md5": "87d64cab74c64b31498cc85f07510ee4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "round",
+            "sports",
+            "bounce",
+            "inflatable"
+        ],
         "info": [
             0,
             1,
@@ -792,7 +790,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 11,
             "visible": true,
             "spriteInfo": {}
         }
@@ -803,7 +800,8 @@
         "type": "sprite",
         "tags": [
             "animals",
-            " ipzy"
+            "ipzy",
+            "walking"
         ],
         "info": [
             0,
@@ -847,7 +845,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 17,
             "visible": true,
             "spriteInfo": {}
         }
@@ -858,7 +855,8 @@
         "type": "sprite",
         "tags": [
             "animals",
-            "ipzy"
+            "ipzy",
+            "walking"
         ],
         "info": [
             0,
@@ -950,7 +948,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 18,
             "visible": true,
             "spriteInfo": {}
         }
@@ -959,7 +956,10 @@
         "name": "Bear1",
         "md5": "598722f70e86e6f9b23ef97680baaa9c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animal",
+            "mammal"
+        ],
         "info": [
             0,
             2,
@@ -1002,7 +1002,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1011,7 +1010,10 @@
         "name": "Bear2",
         "md5": "3eb8e16a983ff23c418374389c81bd30.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bear"
+        ],
         "info": [
             0,
             2,
@@ -1054,7 +1056,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1064,7 +1065,10 @@
         "md5": "e1ce8f153f011fdd52486c91c6ed594d.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "insect",
+            "bug",
+            "antennae"
         ],
         "info": [
             0,
@@ -1100,7 +1104,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 12,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1109,7 +1112,12 @@
         "name": "Bell",
         "md5": "f35056c772395455d703773657e1da6e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "music",
+            "holiday",
+            "ring",
+            "things"
+        ],
         "info": [
             0,
             1,
@@ -1152,7 +1160,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 13,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1161,7 +1168,11 @@
         "name": "Bells",
         "md5": "1f151bee966df3f0c41138941713280e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "music",
+            "holiday",
+            "instrument"
+        ],
         "info": [
             0,
             2,
@@ -1204,7 +1215,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 7,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1278,7 +1288,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1287,7 +1296,10 @@
         "name": "Bowl",
         "md5": "86f616639846f06fef29931e6b9b59de.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing",
+            "food"
+        ],
         "info": [
             0,
             1,
@@ -1318,11 +1330,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 17,
             "scratchY": 18,
-            "scale": 1.2500000000000002,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 8,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1331,7 +1342,9 @@
         "name": "Bowtie",
         "md5": "534d9924d2f9bfe240f041e3ce55ccf5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             2,
@@ -1370,11 +1383,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -66,
             "scratchY": 0,
-            "scale": 1.6,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 9,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1421,7 +1433,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 19,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1432,7 +1443,9 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "ipzy"
+            "ipzy",
+            "flying",
+            "things"
         ],
         "info": [
             0,
@@ -1468,7 +1481,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 24,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1477,7 +1489,12 @@
         "name": "Buildings",
         "md5": "d713270e235851e5962becd73a951771.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "things",
+            "city",
+            "flying",
+            "architecture"
+        ],
         "info": [
             0,
             10,
@@ -1584,7 +1601,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 59,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1593,7 +1609,14 @@
         "name": "Butterfly1",
         "md5": "836d4cc7889f4a1cbcb0303934f31f79.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "drawing",
+            "happy",
+            "bug",
+            "insect",
+            "antennae"
+        ],
         "info": [
             0,
             2,
@@ -1621,7 +1644,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "butterfly1-b ",
+                    "costumeName": "butterfly1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "55dd0671a359d7c35f7b78f4176660e8.svg",
                     "bitmapResolution": 1,
@@ -1629,14 +1652,13 @@
                     "rotationCenterY": 75
                 }
             ],
-            "currentCostumeIndex": 1,
+            "currentCostumeIndex": 0,
             "scratchX": -98,
             "scratchY": -16,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 14,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1645,7 +1667,14 @@
         "name": "Butterfly2",
         "md5": "a0216895beade6afc6d42bd5bb43faea.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "drawing",
+            "happy",
+            "bug",
+            "insect",
+            "antennae"
+        ],
         "info": [
             0,
             1,
@@ -1665,7 +1694,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "butterfly2 ",
+                    "costumeName": "butterfly2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a0216895beade6afc6d42bd5bb43faea.svg",
                     "bitmapResolution": 1,
@@ -1680,7 +1709,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 15,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1689,7 +1717,14 @@
         "name": "Butterfly3",
         "md5": "8907a43cf08b0a9134969023be2074c5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "drawing",
+            "happy",
+            "bug",
+            "insect",
+            "antennae"
+        ],
         "info": [
             0,
             1,
@@ -1709,7 +1744,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "butterfly3 ",
+                    "costumeName": "butterfly3",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8907a43cf08b0a9134969023be2074c5.svg",
                     "bitmapResolution": 1,
@@ -1724,7 +1759,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 16,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1733,7 +1767,12 @@
         "name": "Button1",
         "md5": "7ef67c5bc8cf7df64fdb3b1d6b250f71.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "round",
+            "green",
+            "games"
+        ],
         "info": [
             0,
             1,
@@ -1768,7 +1807,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 17,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1777,7 +1815,11 @@
         "name": "Button2",
         "md5": "c0051ff23e9aae78295964206793c1e3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "blue",
+            "games"
+        ],
         "info": [
             0,
             2,
@@ -1820,7 +1862,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 18,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1829,7 +1870,12 @@
         "name": "Button3",
         "md5": "ffb2a9c21084c58fdb677c8d12a97519.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "gray",
+            "blue",
+            "games"
+        ],
         "info": [
             0,
             2,
@@ -1872,7 +1918,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 19,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1881,7 +1926,10 @@
         "name": "Button4",
         "md5": "ecfe263bc256349777e571eaf39761d4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "checkmark"
+        ],
         "info": [
             0,
             2,
@@ -1924,7 +1972,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 20,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1933,7 +1980,13 @@
         "name": "Button5",
         "md5": "71e97245b7be4fd6fe3ba8cdeecadaf1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "icons",
+            "symbols",
+            "x",
+            "red",
+            "black"
+        ],
         "info": [
             0,
             2,
@@ -1976,7 +2029,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 21,
             "visible": true,
             "spriteInfo": {}
         }
@@ -1985,7 +2037,16 @@
         "name": "Cake",
         "md5": "97ab3596dc06510e963fa29795e663bf.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "bakery",
+            "baking",
+            "frosting",
+            "sprinkles",
+            "sprankles",
+            "dragable",
+            "lie"
+        ],
         "info": [
             0,
             2,
@@ -2028,7 +2089,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 45,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2101,7 +2161,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2111,7 +2170,13 @@
         "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "cat",
+            "kitten",
+            "kitty",
+            "mammal",
+            "orange",
+            "scratch cat"
         ],
         "info": [
             0,
@@ -2155,7 +2220,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2164,7 +2228,12 @@
         "name": "Cat1 Flying",
         "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "cat",
+            "kitty",
+            "kitten"
+        ],
         "info": [
             0,
             2,
@@ -2207,7 +2276,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 38,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2216,7 +2284,13 @@
         "name": "Cat2",
         "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "cat",
+            "kitty",
+            "kitten",
+            "animal",
+            "mammal"
+        ],
         "info": [
             0,
             1,
@@ -2251,7 +2325,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2263,7 +2336,8 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "emotions"
         ],
         "info": [
             0,
@@ -2323,7 +2397,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 9,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2332,7 +2405,11 @@
         "name": "Cloud",
         "md5": "47005a1f20309f577a03a67abbb6b94e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing",
+            "weather",
+            "whether"
+        ],
         "info": [
             0,
             1,
@@ -2363,11 +2440,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 81,
             "scratchY": -12,
-            "scale": 0.9,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 11,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2376,7 +2452,12 @@
         "name": "Clouds",
         "md5": "c7d7de8e29179407f03b054fa640f4d0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "flying",
+            "weather",
+            "things",
+            "sky"
+        ],
         "info": [
             0,
             4,
@@ -2435,7 +2516,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 60,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2444,7 +2524,10 @@
         "name": "Convertible3",
         "md5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "transportation",
+            "things"
+        ],
         "info": [
             0,
             1,
@@ -2479,7 +2562,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 12,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2488,7 +2570,18 @@
         "name": "Crab",
         "md5": "114249a5660f7948663d95de575cfd8d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "crustacean",
+            "antennae",
+            "baltimore",
+            "maryland",
+            "underwater",
+            "ocean",
+            "sea",
+            "summer",
+            "arthropod"
+        ],
         "info": [
             0,
             2,
@@ -2531,7 +2624,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 22,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2540,7 +2632,13 @@
         "name": "Creature1",
         "md5": "a560c6eab2e1de2462bdaeb1d698736c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "animals",
+            "fantasy",
+            "monsters",
+            "holiday"
+        ],
         "info": [
             0,
             3,
@@ -2585,13 +2683,12 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 90,
-            "scratchY": 39,
+            "scratchX": 153,
+            "scratchY": 35,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 13,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2602,7 +2699,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "ipzy"
+            "ipzy",
+            "things"
         ],
         "info": [
             0,
@@ -2646,7 +2744,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 20,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2655,7 +2752,10 @@
         "name": "Dani",
         "md5": "f3038fb0f4a00806b02081c6789dd8cf.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "fashion"
+        ],
         "info": [
             0,
             3,
@@ -2706,7 +2806,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 14,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2715,7 +2814,9 @@
         "name": "Dee",
         "md5": "aa239b7ccdce6bddf06900c709525764.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             5,
@@ -2782,7 +2883,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 15,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2791,7 +2891,9 @@
         "name": "Devin",
         "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             4,
@@ -2850,7 +2952,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 16,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2922,7 +3023,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -2934,6 +3034,7 @@
         "tags": [
             "animals",
             "dinosaur",
+            "triceratops",
             "alex eben meyer"
         ],
         "info": [
@@ -2994,7 +3095,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3006,6 +3106,8 @@
         "tags": [
             "animals",
             "dinosaur",
+            "pteranodon",
+            "flying",
             "alex eben meyer"
         ],
         "info": [
@@ -3074,7 +3176,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3086,6 +3187,9 @@
         "tags": [
             "animals",
             "dinosaur",
+            "tyrannosaurus",
+            "t-rex",
+            "trex",
             "alex eben meyer"
         ],
         "info": [
@@ -3146,7 +3250,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3155,7 +3258,14 @@
         "name": "Diver1",
         "md5": "853803d5600b66538474909c5438c8ee.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "underwater",
+            "ocean",
+            "sea",
+            "summer",
+            "swimming"
+        ],
         "info": [
             0,
             1,
@@ -3190,7 +3300,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 23,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3199,7 +3308,14 @@
         "name": "Diver2",
         "md5": "248d3e69ada69a64b1077149ef6a931a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "underwater",
+            "ocean",
+            "sea",
+            "summer",
+            "swimming"
+        ],
         "info": [
             0,
             1,
@@ -3234,7 +3350,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 24,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3244,7 +3359,10 @@
         "md5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "puppy",
+            "puppies",
+            "mammals"
         ],
         "info": [
             0,
@@ -3288,7 +3406,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 39,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3298,7 +3415,10 @@
         "md5": "e921f865b19b27cd99e16a341dbf09c2.svg",
         "type": "sprite",
         "tags": [
-            "animals"
+            "animals",
+            "puppy",
+            "puppies",
+            "mammals"
         ],
         "info": [
             0,
@@ -3346,11 +3466,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 99,
             "scratchY": 27,
-            "scale": 0.75,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 40,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3359,7 +3478,16 @@
         "name": "Donut",
         "md5": "9e7b4d153421dae04a24571d7e079e85.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "sweets",
+            "bakery",
+            "baking",
+            "homer",
+            "frosting",
+            "sprinkles",
+            "sprankles"
+        ],
         "info": [
             0,
             1,
@@ -3394,7 +3522,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 25,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3467,7 +3594,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3476,7 +3602,11 @@
         "name": "Dot",
         "md5": "47c975e37f9a89c01d0d4d6fd17ef847.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "dog",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             4,
@@ -3531,11 +3661,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -162,
             "scratchY": -69,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3544,7 +3673,11 @@
         "name": "Dove",
         "md5": "6dde2b880ad6ddeaea2a53821befb86d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bird",
+            "flying"
+        ],
         "info": [
             0,
             2,
@@ -3587,7 +3720,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 17,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3599,7 +3731,8 @@
         "tags": [
             "fantasy",
             "animals",
-            "ipzy"
+            "ipzy",
+            "flying"
         ],
         "info": [
             0,
@@ -3651,7 +3784,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 16,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3714,7 +3846,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3801,7 +3932,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3880,7 +4010,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -3935,7 +4064,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4006,7 +4134,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4015,7 +4142,13 @@
         "name": "Duck",
         "md5": "c3baf7eedfbdac8cd1e4f1f1f779dc0c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "chrisg",
+            "quack",
+            "birds",
+            "birb"
+        ],
         "info": [
             0,
             1,
@@ -4050,7 +4183,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 42,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4059,7 +4191,9 @@
         "name": "Earth",
         "md5": "814197522984a302972998b1a7f92d91.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space"
+        ],
         "info": [
             0,
             1,
@@ -4094,7 +4228,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 18,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4105,6 +4238,7 @@
         "type": "sprite",
         "tags": [
             "food",
+            "breakfast",
             "alex eben meyer"
         ],
         "info": [
@@ -4173,7 +4307,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4182,7 +4315,11 @@
         "name": "Elephant",
         "md5": "b3515b3805938b0fae4e527aa0b4524e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "pachydermata"
+        ],
         "info": [
             0,
             2,
@@ -4202,7 +4339,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "elephant-a ",
+                    "costumeName": "elephant-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b3515b3805938b0fae4e527aa0b4524e.svg",
                     "bitmapResolution": 1,
@@ -4210,7 +4347,7 @@
                     "rotationCenterY": 33
                 },
                 {
-                    "costumeName": "elephant-b ",
+                    "costumeName": "elephant-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bce91fa266220d3679a4c19c4e38b1f7.svg",
                     "bitmapResolution": 1,
@@ -4225,7 +4362,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 43,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4237,7 +4373,8 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "emotions"
         ],
         "info": [
             0,
@@ -4305,7 +4442,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 7,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4349,7 +4485,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 58,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4361,7 +4496,8 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "emotions"
         ],
         "info": [
             0,
@@ -4429,7 +4565,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4441,6 +4576,8 @@
         "tags": [
             "animals",
             "ocean",
+            "sea",
+            "underwater",
             "daria skrybchencko"
         ],
         "info": [
@@ -4501,7 +4638,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4512,6 +4648,7 @@
         "type": "sprite",
         "tags": [
             "animals",
+            "mammal",
             "robert hunter"
         ],
         "info": [
@@ -4564,7 +4701,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4573,7 +4709,14 @@
         "name": "Frog",
         "md5": "285483a688eed2ff8010c65112f99c41.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "amphibian",
+            "nature",
+            "hopping",
+            "green",
+            "wart"
+        ],
         "info": [
             0,
             1,
@@ -4608,7 +4751,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 26,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4617,7 +4759,10 @@
         "name": "Fruit Salad",
         "md5": "dbf8cc34f7ca18b4a008d2890dba56b7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "fruit"
+        ],
         "info": [
             0,
             1,
@@ -4652,7 +4797,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 19,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4661,7 +4805,12 @@
         "name": "Ghost1",
         "md5": "c88579c578f2d171de78612f2ff9c9d9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "castle",
+            "spirit",
+            "spooky"
+        ],
         "info": [
             0,
             1,
@@ -4696,7 +4845,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 27,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4705,7 +4853,12 @@
         "name": "Ghost2",
         "md5": "607be245da950af1a4e4d79acfda46e3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "spooky",
+            "spirit",
+            "castle"
+        ],
         "info": [
             0,
             2,
@@ -4748,7 +4901,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 44,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4757,7 +4909,10 @@
         "name": "Gift",
         "md5": "abeae2217b3ce67b1ff761cd7a89274d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing",
+            "holiday"
+        ],
         "info": [
             0,
             2,
@@ -4800,7 +4955,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 20,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4809,7 +4963,10 @@
         "name": "Giga",
         "md5": "93cb048a1d199f92424b9c097fa5fa38.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing"
+        ],
         "info": [
             0,
             4,
@@ -4868,7 +5025,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 47,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4877,7 +5033,10 @@
         "name": "Giga Walking",
         "md5": "f76bc420011db2cdb2de378c1536f6da.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "walking"
+        ],
         "info": [
             0,
             4,
@@ -4936,7 +5095,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 21,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4945,7 +5103,11 @@
         "name": "Glass Water",
         "md5": "c364b9e1f4bcdc61705032d89eaaa0a1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "things",
+            "underwater"
+        ],
         "info": [
             0,
             2,
@@ -4965,7 +5127,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "glass water-a",
+                    "costumeName": "glass water-a ",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c364b9e1f4bcdc61705032d89eaaa0a1.svg",
                     "bitmapResolution": 1,
@@ -4973,7 +5135,7 @@
                     "rotationCenterY": 48
                 },
                 {
-                    "costumeName": "glass water-b",
+                    "costumeName": "glass water-b ",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bc07ce6a2004ac91ce704531a1c526e5.svg",
                     "bitmapResolution": 1,
@@ -4984,11 +5146,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 43,
             "scratchY": -10,
-            "scale": 0.6,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 22,
             "visible": true,
             "spriteInfo": {}
         }
@@ -4997,7 +5158,10 @@
         "name": "Glasses",
         "md5": "5fcf716b53f223bc86b10ab0eca3e162.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "things",
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -5031,8 +5195,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 23,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5113,7 +5276,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5124,7 +5286,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "ipzy"
+            "ipzy",
+            "emotions"
         ],
         "info": [
             0,
@@ -5184,7 +5347,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 8,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5193,7 +5355,12 @@
         "name": "Gobo",
         "md5": "1f5ea0d12f85aed2e471cdd21b0bd6d7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing",
+            "jenkins",
+            "ganglia"
+        ],
         "info": [
             0,
             3,
@@ -5244,7 +5411,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 46,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5253,7 +5419,9 @@
         "name": "Green Flag",
         "md5": "173e20ac537d2c278ed621be3db3fc87.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing"
+        ],
         "info": [
             0,
             1,
@@ -5288,7 +5456,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 24,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5300,7 +5467,8 @@
         "tags": [
             "fantasy",
             "animals",
-            "ipzy"
+            "ipzy",
+            "flying"
         ],
         "info": [
             0,
@@ -5344,7 +5512,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 14,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5356,7 +5523,8 @@
         "tags": [
             "fantasy",
             "animals",
-            "ipzy"
+            "ipzy",
+            "flying"
         ],
         "info": [
             0,
@@ -5400,7 +5568,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 15,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5511,7 +5678,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 7,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5622,7 +5788,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 8,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5733,7 +5898,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5742,7 +5906,9 @@
         "name": "Hat",
         "md5": "b3beb1f52d371428d70b65a0c4c5c001.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "Fashion"
+        ],
         "info": [
             0,
             1,
@@ -5776,8 +5942,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 25,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5786,7 +5951,9 @@
         "name": "Hat Beanie",
         "md5": "3271da33e4108ed08a303c2244739fbf.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -5820,8 +5987,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 26,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5830,7 +5996,10 @@
         "name": "Hat Party1",
         "md5": "70a7f535d8857cf9175492415361c361.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "holiday"
+        ],
         "info": [
             0,
             1,
@@ -5865,7 +6034,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 27,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5874,7 +6042,10 @@
         "name": "Hat Party2",
         "md5": "9b7a84fe3e50621752917e4e484a1e2f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "holiday"
+        ],
         "info": [
             0,
             1,
@@ -5909,7 +6080,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 28,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5918,7 +6088,10 @@
         "name": "Hat Winter",
         "md5": "6c2ee1b97f6ec2b3457a25a3975a2009.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "winter"
+        ],
         "info": [
             0,
             1,
@@ -5949,11 +6122,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -30,
             "scratchY": -42,
-            "scale": 0.9,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 29,
             "visible": true,
             "spriteInfo": {}
         }
@@ -5962,7 +6134,10 @@
         "name": "Hat Wizard",
         "md5": "581571e8c8f5adeb01565e12b1b77b58.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "fantasy"
+        ],
         "info": [
             0,
             1,
@@ -5997,7 +6172,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 30,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6006,7 +6180,10 @@
         "name": "Headband",
         "md5": "961148d1605a1bd8ce80ed8d39e831c2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "antennae"
+        ],
         "info": [
             0,
             1,
@@ -6040,8 +6217,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 31,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6050,7 +6226,13 @@
         "name": "Heart",
         "md5": "6e79e087c866a016f99ee482e1aeba47.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "holiday",
+            "red",
+            "shape",
+            "love",
+            "emotions"
+        ],
         "info": [
             0,
             2,
@@ -6089,11 +6271,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -31,
             "scratchY": 40,
-            "scale": 0.55,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 32,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6102,7 +6283,9 @@
         "name": "Heart Candy",
         "md5": "d448acd247f10f32bef7823cd433f928.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food.sweethearts"
+        ],
         "info": [
             0,
             4,
@@ -6157,11 +6340,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -24,
             "scratchY": -4,
-            "scale": 0.55,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 33,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6170,7 +6352,9 @@
         "name": "Heart Face",
         "md5": "4ab84263da32069cf97cc0fa52729a0d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "emotions"
+        ],
         "info": [
             0,
             1,
@@ -6201,11 +6385,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 50,
             "scratchY": 39,
-            "scale": 0.55,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 34,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6216,7 +6399,9 @@
         "type": "sprite",
         "tags": [
             "animals",
-            "daria skrybchencko"
+            "daria skrybchencko",
+            "mammals",
+            "spikey"
         ],
         "info": [
             0,
@@ -6284,7 +6469,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6293,7 +6477,15 @@
         "name": "Hippo1",
         "md5": "c1353c4a5eec5e6f32ed053e6f6e8f99.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "flying",
+            "fantasy",
+            "insect",
+            "pachydermata",
+            "snortyboys"
+        ],
         "info": [
             0,
             2,
@@ -6336,7 +6528,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 48,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6345,7 +6536,10 @@
         "name": "Home Button",
         "md5": "1bac530a0701a8fc88bb0802ae6787a3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "ui",
+            "thing"
+        ],
         "info": [
             0,
             1,
@@ -6380,7 +6574,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 35,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6389,7 +6582,14 @@
         "name": "Horse1",
         "md5": "32f4d80477cd070cb0848e555d374060.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "hoof",
+            "hooves",
+            "mammal",
+            "racing",
+            "saddle"
+        ],
         "info": [
             0,
             2,
@@ -6440,7 +6640,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 49,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6513,7 +6712,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6524,7 +6722,8 @@
         "type": "sprite",
         "tags": [
             "food",
-            "ipzy"
+            "ipzy",
+            "things"
         ],
         "info": [
             0,
@@ -6568,7 +6767,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 21,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6577,7 +6775,9 @@
         "name": "Jeans",
         "md5": "4e283da8c59bcbb9803bdc0016b14c21.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             2,
@@ -6619,8 +6819,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 36,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6632,6 +6831,9 @@
         "tags": [
             "animals",
             "ocean",
+            "sea",
+            "underwater",
+            "emotions",
             "daria skrybchencko"
         ],
         "info": [
@@ -6688,11 +6890,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -163,
             "scratchY": 99,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6766,23 +6967,25 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
     },
     {
-        "name": "Key",
+        "name": "Ke",
         "md5": "af35300cef35803e11f4ed744dc5e818.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing",
+            "fantasy"
+        ],
         "info": [
             0,
             1,
             1
         ],
         "json": {
-            "objName": "Key",
+            "objName": "Ke",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6810,7 +7013,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 37,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6921,7 +7123,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 12,
             "visible": true,
             "spriteInfo": {}
         }
@@ -6930,7 +7131,11 @@
         "name": "Kiran",
         "md5": "9de23c4a7a7fbb67136b539241346854.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "people",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             6,
@@ -7001,11 +7206,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 57,
             "scratchY": -42,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7014,7 +7218,11 @@
         "name": "Knight",
         "md5": "f2c5e8bc24d001b81566879dbf2f1a13.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "castle",
+            "armor"
+        ],
         "info": [
             0,
             1,
@@ -7049,7 +7257,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 28,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7058,7 +7265,12 @@
         "name": "Ladybug1",
         "md5": "f16a1ccc69a4a8190a927f1595aa7bfa.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "antennae"
+        ],
         "info": [
             0,
             1,
@@ -7093,7 +7305,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 29,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7102,7 +7313,13 @@
         "name": "Ladybug2",
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animal",
+            "insect",
+            "arthropod",
+            "antennae",
+            "aphids"
+        ],
         "info": [
             0,
             2,
@@ -7145,7 +7362,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 38,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7154,7 +7370,10 @@
         "name": "Laptop",
         "md5": "76f456b30b98eeefd7c942b27b524e31.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "things",
+            "computers"
+        ],
         "info": [
             0,
             1,
@@ -7189,7 +7408,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 39,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7198,7 +7416,13 @@
         "name": "Lightning",
         "md5": "c2d636ab2b491e591536afc3d49cbecd.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "weather",
+            "whether",
+            "fantasy",
+            "storm",
+            "thunder"
+        ],
         "info": [
             0,
             1,
@@ -7233,7 +7457,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 40,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7242,7 +7465,11 @@
         "name": "Line",
         "md5": "1b2cfb4d4746522aeb84e16a62820299.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "lava",
+            "shape",
+            "red"
+        ],
         "info": [
             0,
             1,
@@ -7277,7 +7504,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 41,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7286,7 +7512,15 @@
         "name": "Lion",
         "md5": "692a3c84366bf8ae4d16858e20e792f5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "big cat",
+            "carnivore",
+            "king",
+            "jungle",
+            "roar"
+        ],
         "info": [
             0,
             2,
@@ -7322,14 +7556,13 @@
                     "rotationCenterY": 75
                 }
             ],
-            "currentCostumeIndex": 1,
+            "currentCostumeIndex": 0,
             "scratchX": 8,
             "scratchY": 36,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 50,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7340,6 +7573,7 @@
         "type": "sprite",
         "tags": [
             "animals",
+            "mammal",
             "robert hunter"
         ],
         "info": [
@@ -7392,7 +7626,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7401,7 +7634,11 @@
         "name": "Magic Wand",
         "md5": "3db9bfe57d561557795633c5cda44e8c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "things",
+            "zap"
+        ],
         "info": [
             0,
             1,
@@ -7436,7 +7673,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 42,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7509,7 +7745,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7566,7 +7801,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7623,7 +7857,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7742,7 +7975,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 11,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7753,6 +7985,7 @@
         "type": "sprite",
         "tags": [
             "food",
+            "drink",
             "alex eben meyer"
         ],
         "info": [
@@ -7821,7 +8054,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7830,7 +8062,11 @@
         "name": "Monet",
         "md5": "11c46aaa5e30ad46f5c1883d6feb47b8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "people",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             5,
@@ -7893,11 +8129,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -53,
             "scratchY": -50,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7906,7 +8141,12 @@
         "name": "Monkey",
         "md5": "6e4de762dbd52cd2b6356694a9668211.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "primate",
+            "prehensile tail"
+        ],
         "info": [
             0,
             3,
@@ -7953,11 +8193,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -61,
             "scratchY": 24,
-            "scale": 0.75,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 51,
             "visible": true,
             "spriteInfo": {}
         }
@@ -7966,7 +8205,11 @@
         "name": "Mouse1",
         "md5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "rodents"
+        ],
         "info": [
             0,
             2,
@@ -8009,7 +8252,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 43,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8018,7 +8260,9 @@
         "name": "Muffin",
         "md5": "e00161f08c77d10e72e44b6e01243e63.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food"
+        ],
         "info": [
             0,
             2,
@@ -8061,7 +8305,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 44,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8070,7 +8313,10 @@
         "name": "Nano",
         "md5": "02c5433118f508038484bbc5b111e187.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing"
+        ],
         "info": [
             0,
             4,
@@ -8129,7 +8375,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 52,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8138,7 +8383,10 @@
         "name": "Neigh Pony",
         "md5": "176c4fb4df80df899ca28a48bd1f0edf.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "fantasy"
+        ],
         "info": [
             0,
             1,
@@ -8173,7 +8421,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 45,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8185,6 +8432,8 @@
         "tags": [
             "animals",
             "ocean",
+            "sea",
+            "underwater",
             "daria skrybchencko"
         ],
         "info": [
@@ -8253,7 +8502,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8262,7 +8510,10 @@
         "name": "Orange",
         "md5": "780ee2ef342f79a81b4c353725331138.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "fruit"
+        ],
         "info": [
             0,
             1,
@@ -8297,7 +8548,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 46,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8306,7 +8556,11 @@
         "name": "Orange2",
         "md5": "89b11d2a404c3972b65743f743cc968a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "fruit",
+            "eaten"
+        ],
         "info": [
             0,
             3,
@@ -8357,7 +8611,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 47,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8421,7 +8674,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8430,7 +8682,9 @@
         "name": "Paddle",
         "md5": "8038149bdfe24733ea2144d37d297815.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing"
+        ],
         "info": [
             0,
             1,
@@ -8461,11 +8715,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 47,
             "scratchY": -12,
-            "scale": 0.85000000000001,
-            "direction": -90,
-            "rotationStyle": "none",
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 48,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8476,6 +8729,8 @@
         "type": "sprite",
         "tags": [
             "animals",
+            "tiger",
+            "leopard",
             "robert hunter"
         ],
         "info": [
@@ -8528,7 +8783,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8537,7 +8791,14 @@
         "name": "Parrot",
         "md5": "098570b8e1aa85b32f9b4eb07bea3af2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bird",
+            "birb",
+            "tropical",
+            "color",
+            "flying"
+        ],
         "info": [
             0,
             2,
@@ -8580,7 +8841,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 53,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8589,7 +8849,10 @@
         "name": "Pencil",
         "md5": "4495fcb0443cebc5d43e66243a88f1ac.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "thing",
+            "yellow"
+        ],
         "info": [
             0,
             2,
@@ -8632,7 +8895,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 49,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8641,7 +8903,12 @@
         "name": "Penguin1",
         "md5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bird",
+            "winter",
+            "antarctica"
+        ],
         "info": [
             0,
             3,
@@ -8692,7 +8959,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 30,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8701,7 +8967,12 @@
         "name": "Penguin2",
         "md5": "eaaaa7068e78a51d73ba437f1ec5763e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bird",
+            "winter",
+            "antarctica"
+        ],
         "info": [
             0,
             3,
@@ -8752,7 +9023,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 61,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8761,7 +9031,10 @@
         "name": "Pico",
         "md5": "0579fe60bb3717c49dfd7743caa84ada.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing"
+        ],
         "info": [
             0,
             4,
@@ -8820,7 +9093,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 57,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8829,7 +9101,10 @@
         "name": "Pico Walking",
         "md5": "8eab5fe20dd249bf22964298b1d377eb.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "walking"
+        ],
         "info": [
             0,
             4,
@@ -8888,7 +9163,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 50,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8897,7 +9171,9 @@
         "name": "Planet2",
         "md5": "978784738c1d9dd4b1d397fd18bdf406.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space"
+        ],
         "info": [
             0,
             1,
@@ -8932,7 +9208,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 51,
             "visible": true,
             "spriteInfo": {}
         }
@@ -8943,7 +9218,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "ipzy"
+            "ipzy",
+            "things"
         ],
         "info": [
             0,
@@ -8995,7 +9271,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 22,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9004,7 +9279,11 @@
         "name": "Prince",
         "md5": "a760bed1cfc28a30b2dc7fd045c90792.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "☥",
+            "fantasy"
+        ],
         "info": [
             0,
             1,
@@ -9039,7 +9318,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 52,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9051,7 +9329,9 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "castle",
+            "emotions"
         ],
         "info": [
             0,
@@ -9119,7 +9399,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9131,6 +9410,8 @@
         "tags": [
             "animals",
             "ocean",
+            "sea",
+            "underwater",
             "daria skrybchencko"
         ],
         "info": [
@@ -9191,7 +9472,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9202,7 +9482,11 @@
         "type": "sprite",
         "tags": [
             "animals",
-            "daria skrybchencko"
+            "daria skrybchencko",
+            "mammal",
+            "bunny",
+            "bunnies",
+            "fluffy"
         ],
         "info": [
             0,
@@ -9270,7 +9554,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9279,7 +9562,12 @@
         "name": "Rainbow",
         "md5": "680a806bd87a28c8b25b5f9b6347f022.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "things",
+            "flying",
+            "drawing",
+            "color"
+        ],
         "info": [
             0,
             1,
@@ -9314,7 +9602,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 31,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9387,7 +9674,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9396,7 +9682,11 @@
         "name": "Reindeer",
         "md5": "0fff0b181cc4d9250b5b985cc283b049.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "mammals",
+            "holiday"
+        ],
         "info": [
             0,
             1,
@@ -9431,7 +9721,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 53,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9440,7 +9729,11 @@
         "name": "Ripley",
         "md5": "417ec9f25ad70281564e85e67c97aa08.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "people",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             6,
@@ -9511,11 +9804,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 163,
             "scratchY": -51,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9524,7 +9816,11 @@
         "name": "Robot",
         "md5": "cb3985cd066ccbab11954709b3d54c17.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "robot",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             4,
@@ -9587,11 +9883,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -183,
             "scratchY": 15,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9600,7 +9895,10 @@
         "name": "Rocks",
         "md5": "82c79fdb6a7d9c49ab7f70ee79a3d7f8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "things",
+            "potassium"
+        ],
         "info": [
             0,
             1,
@@ -9635,7 +9933,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 54,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9746,7 +10043,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 9,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9755,7 +10051,10 @@
         "name": "Scarf1",
         "md5": "9db18d2a2b3c9859654fc1b4832e6076.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "red"
+        ],
         "info": [
             0,
             1,
@@ -9786,11 +10085,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 53,
             "scratchY": 10,
-            "scale": 0.9,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 55,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9799,7 +10097,10 @@
         "name": "Scarf2",
         "md5": "ce66662165e2756070f1b12e0a7cb5db.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "purple"
+        ],
         "info": [
             0,
             1,
@@ -9833,8 +10134,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 56,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9846,7 +10146,8 @@
         "tags": [
             "animals",
             "underwater",
-            "ipzy"
+            "ipzy",
+            "fish"
         ],
         "info": [
             0,
@@ -9890,7 +10191,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 13,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9899,7 +10199,9 @@
         "name": "Shirt Blouse",
         "md5": "918a507af6bbae9e7f36f0d949900838.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -9933,8 +10235,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 58,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -9943,7 +10244,9 @@
         "name": "Shirt Collar",
         "md5": "b7ecf6503e27e9ab5c086eaf07d22b94.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             3,
@@ -9993,8 +10296,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 59,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10003,7 +10305,9 @@
         "name": "Shirt-T",
         "md5": "5d7fa4f1788f03d2962f1624d6eac800.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -10037,8 +10341,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 60,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10047,7 +10350,9 @@
         "name": "Shirt2",
         "md5": "5946e7a1e36c6d97ae47d41dd8595a41.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             2,
@@ -10067,7 +10372,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "shirt2-a",
+                    "costumeName": "shirt2-a ",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5946e7a1e36c6d97ae47d41dd8595a41.svg",
                     "bitmapResolution": 1,
@@ -10089,8 +10394,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 57,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10099,7 +10403,9 @@
         "name": "Shoes1",
         "md5": "ffab4cc284070b50ac317e515f59f7d8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -10133,8 +10439,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 62,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10143,7 +10448,9 @@
         "name": "Shoes2",
         "md5": "1dc5d568d98405c370b91a230397a7f9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion"
+        ],
         "info": [
             0,
             1,
@@ -10177,8 +10484,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 61,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10187,7 +10493,10 @@
         "name": "Singer1",
         "md5": "e47ef1af3b925e5ac9e3b3f809d440b3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "music"
+        ],
         "info": [
             0,
             1,
@@ -10222,7 +10531,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 63,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10231,7 +10539,10 @@
         "name": "Skates",
         "md5": "00e5e173400662875a26bb7d6556346a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "winter"
+        ],
         "info": [
             0,
             1,
@@ -10262,11 +10573,10 @@
             "currentCostumeIndex": 0,
             "scratchX": -21,
             "scratchY": 22,
-            "scale": 0.9,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 64,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10277,6 +10587,7 @@
         "type": "sprite",
         "tags": [
             "animals",
+            "reptile",
             "robert hunter"
         ],
         "info": [
@@ -10329,7 +10640,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10338,7 +10648,9 @@
         "name": "Snowflake",
         "md5": "67de2af723246de37d7379b76800ee0b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "winter"
+        ],
         "info": [
             0,
             1,
@@ -10369,11 +10681,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 0,
             "scratchY": -32,
-            "scale": 0.65,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 65,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10382,7 +10693,11 @@
         "name": "Snowman",
         "md5": "56c71c31c17b9bc66a2aab0342cf94b2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing",
+            "winter"
+        ],
         "info": [
             0,
             1,
@@ -10417,7 +10732,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 32,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10466,7 +10780,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10475,7 +10788,10 @@
         "name": "Spaceship",
         "md5": "7d51af7c52e137ef137012595bac928d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "wren mcdonald"
+        ],
         "info": [
             0,
             5,
@@ -10554,11 +10870,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 116,
             "scratchY": 82,
-            "scale": 0.8,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10568,7 +10883,11 @@
         "md5": "44dc3a2ec161999545914d1f77332d76.svg",
         "type": "sprite",
         "tags": [
-            "music"
+            "music",
+            "things",
+            "bass",
+            "treble",
+            "concert"
         ],
         "info": [
             0,
@@ -10674,7 +10993,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 54,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10683,7 +11001,10 @@
         "name": "Star",
         "md5": "ab0914e53e360477275e58b83ec4d423.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "shapes",
+            "space"
+        ],
         "info": [
             0,
             1,
@@ -10714,11 +11035,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 55,
             "scratchY": 44,
-            "scale": 0.9,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 66,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10727,7 +11047,13 @@
         "name": "Starfish",
         "md5": "3d1101bbc24ae292a36356af325f660c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "echinodermata",
+            "underwater",
+            "sea",
+            "ocean"
+        ],
         "info": [
             0,
             2,
@@ -10763,14 +11089,13 @@
                     "rotationCenterY": 60
                 }
             ],
-            "currentCostumeIndex": 1,
+            "currentCostumeIndex": 0,
             "scratchX": -32,
             "scratchY": 5,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 67,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10779,7 +11104,10 @@
         "name": "Stop",
         "md5": "5b9e3e8edffb0bd4914113609eec5e04.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "shapes",
+            "things"
+        ],
         "info": [
             0,
             1,
@@ -10814,7 +11142,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 68,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10825,6 +11152,7 @@
         "type": "sprite",
         "tags": [
             "food",
+            "fruit",
             "alex eben meyer"
         ],
         "info": [
@@ -10893,7 +11221,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10902,7 +11229,14 @@
         "name": "Sun",
         "md5": "55c931c65456822c0c56a2b30e3e550d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "space",
+            "star",
+            "hydrogen",
+            "helium",
+            "fusion",
+            "nuclear"
+        ],
         "info": [
             0,
             1,
@@ -10937,7 +11271,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 69,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10946,7 +11279,10 @@
         "name": "Sunglasses1",
         "md5": "424393e8705aeadcfecb8559ce4dcea2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "cool"
+        ],
         "info": [
             0,
             1,
@@ -10981,7 +11317,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 70,
             "visible": true,
             "spriteInfo": {}
         }
@@ -10990,7 +11325,10 @@
         "name": "Sunglasses2",
         "md5": "3185d2295bbf2c5ebd0688c9e4f13076.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashion",
+            "cool"
+        ],
         "info": [
             0,
             1,
@@ -11025,7 +11363,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 71,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11034,7 +11371,12 @@
         "name": "Taco",
         "md5": "d224b30c54bd4d6000c935938c7f5d7e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "waffle",
+            "yum",
+            "delicious"
+        ],
         "info": [
             0,
             2,
@@ -11077,7 +11419,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 72,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11156,7 +11497,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11165,7 +11505,10 @@
         "name": "Tera",
         "md5": "b54a4a9087435863ab6f6c908f1cac99.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "drawing"
+        ],
         "info": [
             0,
             4,
@@ -11224,7 +11567,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 55,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11288,7 +11630,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11297,7 +11638,11 @@
         "name": "Tree1",
         "md5": "8c40e2662c55d17bc384f47165ac43c1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "plants",
+            "wood",
+            "forest"
+        ],
         "info": [
             0,
             1,
@@ -11328,11 +11673,10 @@
             "currentCostumeIndex": 0,
             "scratchX": 91,
             "scratchY": 18,
-            "scale": 0.95,
+            "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 73,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11341,7 +11685,11 @@
         "name": "Trees",
         "md5": "866ed2c2971bb04157e14e935ac8521c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "plants",
+            "wood",
+            "forest"
+        ],
         "info": [
             0,
             2,
@@ -11384,7 +11732,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 74,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11495,7 +11842,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11543,7 +11889,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11631,7 +11976,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 11,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11640,7 +11984,9 @@
         "name": "Vest",
         "md5": "f8285ca9564451c62a0e3d75b8a714e8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "fashon"
+        ],
         "info": [
             0,
             2,
@@ -11682,8 +12028,7 @@
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
-            "isDraggable": true,
-            "indexInLibrary": 75,
+            "isDraggable": false,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11694,7 +12039,8 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "ipzy"
+            "ipzy",
+            "things"
         ],
         "info": [
             0,
@@ -11730,7 +12076,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 23,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11739,7 +12084,9 @@
         "name": "Wanda",
         "md5": "450bc8fbd5ab6bc2e83576aad58cd07c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             1,
@@ -11774,7 +12121,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 76,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11783,7 +12129,14 @@
         "name": "Watermelon",
         "md5": "26fecef75cf3b6e0d98bff5c06475036.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "food",
+            "fruit",
+            "summer",
+            "seeds",
+            "seedless",
+            "plants"
+        ],
         "info": [
             0,
             3,
@@ -11834,7 +12187,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 56,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11846,7 +12198,10 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "castle",
+            "emotions",
+            "magic"
         ],
         "info": [
             0,
@@ -11906,7 +12261,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11918,7 +12272,10 @@
         "tags": [
             "fantasy",
             "people",
-            "ipzy"
+            "ipzy",
+            "castle",
+            "emotions",
+            "magic"
         ],
         "info": [
             0,
@@ -11970,7 +12327,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -11981,8 +12337,11 @@
         "type": "sprite",
         "tags": [
             "fantasy",
-            "animals",
-            "ipzy"
+            "people",
+            "ipzy",
+            "castle",
+            "amphibians",
+            "magic"
         ],
         "info": [
             0,
@@ -12026,7 +12385,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 12,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12036,7 +12394,9 @@
         "md5": "e085c97691d16f0cc8a595ce1137e26c.svg",
         "type": "sprite",
         "tags": [
-            "fantasy"
+            "fantasy",
+            "magic",
+            "wand"
         ],
         "info": [
             0,
@@ -12072,7 +12432,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 36,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12082,7 +12441,9 @@
         "md5": "6db4d9e4229dc50a1b1c91c3c8311d40.svg",
         "type": "sprite",
         "tags": [
-            "fantasy"
+            "fantasy",
+            "magic",
+            "wand"
         ],
         "info": [
             0,
@@ -12118,7 +12479,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 37,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12127,7 +12487,10 @@
         "name": "Block-A",
         "md5": "602a16930a8050e1298e1a0ae844363e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12162,7 +12525,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 1,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12171,7 +12533,10 @@
         "name": "Block-B",
         "md5": "f8c683cf71660e8ac1f8855599857a25.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12206,7 +12571,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 2,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12215,7 +12579,10 @@
         "name": "Block-C",
         "md5": "f8f4cc686ffc5a4113a99f70b09abd32.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12250,7 +12617,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 3,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12259,7 +12625,10 @@
         "name": "Block-D",
         "md5": "aee2d71ef0293b33479bff9423d16b67.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12294,7 +12663,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 4,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12303,7 +12671,10 @@
         "name": "Block-E",
         "md5": "16c6257316ff94cc7539ccdfc24e5fb8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12338,7 +12709,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 5,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12347,7 +12717,10 @@
         "name": "Block-F",
         "md5": "34c090c1f573c569332ead68cb99b595.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12382,7 +12755,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 7,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12391,7 +12763,10 @@
         "name": "Block-G",
         "md5": "8bb2382627004eb08ff10ea8171cc724.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12426,7 +12801,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 10,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12435,7 +12809,10 @@
         "name": "Block-H",
         "md5": "f1578807d4a124fc02b639a8febeaab3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12470,7 +12847,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 12,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12479,7 +12855,10 @@
         "name": "Block-I",
         "md5": "341bc70442886d6fdf959f2a97a63554.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12514,7 +12893,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 14,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12523,7 +12901,10 @@
         "name": "Block-J",
         "md5": "4b420cce964beedf2c1dc43faa59fdec.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12558,7 +12939,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 16,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12567,7 +12947,10 @@
         "name": "Block-K",
         "md5": "19601cc33449813aa93a47c63167e5c1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12602,7 +12985,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 18,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12611,7 +12993,10 @@
         "name": "Block-L",
         "md5": "87358e3c9b9f5be4376253ce08d0192d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12646,7 +13031,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 20,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12655,7 +13039,10 @@
         "name": "Block-M",
         "md5": "7ba0642be1f0080c0d273ea96e29b1e8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12690,7 +13077,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 22,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12699,7 +13085,10 @@
         "name": "Block-N",
         "md5": "6c1fbc57821744bd9356ce9a21ed70f7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12734,7 +13123,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 24,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12743,7 +13131,10 @@
         "name": "Block-O",
         "md5": "e88638200a73e167d0e266a343019cec.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12778,7 +13169,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 28,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12787,7 +13177,10 @@
         "name": "Block-P",
         "md5": "ad2fc3a1c6538678915633a11ab6ec73.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12822,7 +13215,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 26,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12831,7 +13223,10 @@
         "name": "Block-Q",
         "md5": "64da9da8684c74deb567dbdb661d3a52.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12866,7 +13261,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 36,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12875,7 +13269,10 @@
         "name": "Block-R",
         "md5": "73e8d46f7475476d8cb4cfcfc75ee50d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12910,7 +13307,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 31,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12919,7 +13315,10 @@
         "name": "Block-S",
         "md5": "9feb5593fed51e88dbb3128cfc290d29.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12954,7 +13353,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 33,
             "visible": true,
             "spriteInfo": {}
         }
@@ -12963,7 +13361,10 @@
         "name": "Block-T",
         "md5": "d29c1caf5cf195740c38f279e82a77a4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -12998,7 +13399,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 38,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13007,7 +13407,10 @@
         "name": "Block-U",
         "md5": "faef46b7bf589c36300142f6f03c5d32.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13042,7 +13445,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 40,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13051,7 +13453,10 @@
         "name": "Block-V",
         "md5": "65e2f4821ab084827e22920acb61c92b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13086,7 +13491,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 43,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13095,7 +13499,10 @@
         "name": "Block-W",
         "md5": "5ab197b4f70b2f98a3658c7ccdc3351d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13130,7 +13537,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 45,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13139,7 +13545,10 @@
         "name": "Block-X",
         "md5": "cb9dff35f05e823d954e47e4a717a48c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13174,7 +13583,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 47,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13183,7 +13591,10 @@
         "name": "Block-Y",
         "md5": "4c13c440bcb35c8c3aa6226374fced3f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13218,7 +13629,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 49,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13227,7 +13637,10 @@
         "name": "Block-Z",
         "md5": "0ccff1898f1bf1b25333d581db09fae2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13262,7 +13675,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 51,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13271,7 +13683,10 @@
         "name": "Glow-0",
         "md5": "38b2b342659adc6fa289090975e0e71d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13306,7 +13721,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 53,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13315,7 +13729,10 @@
         "name": "Glow-1",
         "md5": "2c88706210672655401fe09edd8ff6a7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13350,7 +13767,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 54,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13359,7 +13775,10 @@
         "name": "Glow-2",
         "md5": "b9faa5708a799a1607f0325a7af2561c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13394,7 +13813,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 55,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13403,7 +13821,10 @@
         "name": "Glow-3",
         "md5": "cf42a50552ce26032ead712ac4f36c23.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13438,7 +13859,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 56,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13447,7 +13867,10 @@
         "name": "Glow-4",
         "md5": "3ffa6aee373e28fc36b9395ac4d0467e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13482,7 +13905,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 57,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13491,7 +13913,10 @@
         "name": "Glow-5",
         "md5": "85d87d32e7e9e6be122c905b0d2e7e33.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13526,7 +13951,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 58,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13535,7 +13959,10 @@
         "name": "Glow-6",
         "md5": "62cc2a6def27f19d11ed56e86e95aac5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13570,7 +13997,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 59,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13579,7 +14005,10 @@
         "name": "Glow-7",
         "md5": "8887983eb4df2e62a2ed4770a1d98d60.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13614,7 +14043,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 60,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13623,7 +14051,10 @@
         "name": "Glow-8",
         "md5": "4c42c4cb0c1e090d0f9570416d3c80c8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13658,7 +14089,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 61,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13667,7 +14097,10 @@
         "name": "Glow-9",
         "md5": "7bcb7e2e48f5cb770c83d4267922fec0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -13702,7 +14135,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 62,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13711,7 +14143,10 @@
         "name": "Glow-A",
         "md5": "d5aa299350c24c747200a64b63b1aa52.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13746,7 +14181,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 6,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13755,7 +14189,10 @@
         "name": "Glow-B",
         "md5": "a2e95f268a6cab03f3e94b3b0b792d83.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13790,7 +14227,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 8,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13799,7 +14235,10 @@
         "name": "Glow-C",
         "md5": "9779a4a40934f04a4bf84920b258d7c9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13834,7 +14273,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 9,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13843,7 +14281,10 @@
         "name": "Glow-D",
         "md5": "3555b8bbbbcdc00354bf6fa81ac7042f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13878,7 +14319,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 11,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13887,7 +14327,10 @@
         "name": "Glow-E",
         "md5": "44dbc655d5ac9f13618473848e23484e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13922,7 +14365,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 13,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13931,7 +14373,10 @@
         "name": "Glow-F",
         "md5": "dec417e749e43d7de3985155f5f5a7a0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -13966,7 +14411,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 15,
             "visible": true,
             "spriteInfo": {}
         }
@@ -13975,7 +14419,10 @@
         "name": "Glow-G",
         "md5": "cf4aa465cd8fb7049cc571d7546a7eb1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14010,7 +14457,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 17,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14019,7 +14465,10 @@
         "name": "Glow-H",
         "md5": "8d9bd5f00ea1ac6f92d0f97ee491b0f3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14054,7 +14503,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 19,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14063,7 +14511,10 @@
         "name": "Glow-I",
         "md5": "0e86de55840103dcd50199ab2b765de7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14098,7 +14549,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 21,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14107,7 +14557,10 @@
         "name": "Glow-J",
         "md5": "b3832145eacc39f91bd3a9a6673fa05c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14142,7 +14595,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 23,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14151,7 +14603,10 @@
         "name": "Glow-K",
         "md5": "f4e37a7552ba05e995613211a7146de5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14186,7 +14641,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 25,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14195,7 +14649,10 @@
         "name": "Glow-L",
         "md5": "a75e45773ea6afaf8ae44f79f936fc82.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14230,7 +14687,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 27,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14239,7 +14695,10 @@
         "name": "Glow-M",
         "md5": "219b06faa5b816347165450d148213b4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14274,7 +14733,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 29,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14283,7 +14741,10 @@
         "name": "Glow-N",
         "md5": "4b724479fb3b2184fd8be6f83fb20e54.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14318,7 +14779,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 30,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14327,7 +14787,10 @@
         "name": "Glow-O",
         "md5": "38b2b342659adc6fa289090975e0e71d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14362,7 +14825,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 32,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14371,7 +14833,10 @@
         "name": "Glow-P",
         "md5": "1cfa849cc967069730b7e9d0809c9dc1.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14406,7 +14871,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 34,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14415,7 +14879,10 @@
         "name": "Glow-Q",
         "md5": "9d35979e9404ac234301269fcd7de288.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14450,7 +14917,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 35,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14459,7 +14925,10 @@
         "name": "Glow-R",
         "md5": "fc067ee076ecaba8430ccd54d9414c1b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14494,7 +14963,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 37,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14503,7 +14971,10 @@
         "name": "Glow-S",
         "md5": "19a93db8a294ccaec4d6eef4020a446f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14538,7 +15009,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 39,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14547,7 +15017,10 @@
         "name": "Glow-T",
         "md5": "d7bcda522a1e9504dafcf2fa0fcde39b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14582,7 +15055,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 41,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14591,7 +15063,10 @@
         "name": "Glow-U",
         "md5": "790482a3c3691a1e96ef34eee7303872.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14626,7 +15101,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 42,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14635,7 +15109,10 @@
         "name": "Glow-V",
         "md5": "6a00388d8dc6be645b843cef9c22681c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14670,7 +15147,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 44,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14679,7 +15155,10 @@
         "name": "Glow-W",
         "md5": "1a9ea7305a85b271c1de79beafe16cb4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14714,7 +15193,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 46,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14723,7 +15201,10 @@
         "name": "Glow-X",
         "md5": "ec4e65b9ae475a676973128f4205df5f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14758,7 +15239,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 48,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14767,7 +15247,10 @@
         "name": "Glow-Y",
         "md5": "683cd093bb3b254733a15df6f843464c.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14802,7 +15285,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 50,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14811,7 +15293,10 @@
         "name": "Glow-Z",
         "md5": "db89a4c9b123123542e0b7556ed3ff9f.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -14846,7 +15331,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 52,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14855,7 +15339,10 @@
         "name": "Pixel-0",
         "md5": "cd1f984997b44de464bbf86fc073b280.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -14890,7 +15377,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 89,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14899,7 +15385,10 @@
         "name": "Pixel-1",
         "md5": "4ec3d6c4ef14112ed7c6ba6b9549da3b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -14934,7 +15423,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 90,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14943,7 +15431,10 @@
         "name": "Pixel-2",
         "md5": "d0136e77a646a3ad719aaa7f8f95a7ff.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -14978,7 +15469,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 91,
             "visible": true,
             "spriteInfo": {}
         }
@@ -14987,7 +15477,10 @@
         "name": "Pixel-3",
         "md5": "7c1700f0dcfb418662d29ba6faa114e7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15022,7 +15515,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 92,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15031,7 +15523,10 @@
         "name": "Pixel-4",
         "md5": "6238b9b95fad7f7aa9cef9bde5bde474.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15066,7 +15561,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 93,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15075,7 +15569,10 @@
         "name": "Pixel-5",
         "md5": "aef915acf1d49deed46692411e6c6039.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15110,7 +15607,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 94,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15119,7 +15615,10 @@
         "name": "Pixel-6",
         "md5": "e6ad1d1fe44a1c63c8f99c0bbb893a44.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15154,7 +15653,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 95,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15163,7 +15661,10 @@
         "name": "Pixel-7",
         "md5": "469b4fb6f6f8721e2c244ae9c71a7e66.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15198,7 +15699,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 96,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15207,7 +15707,10 @@
         "name": "Pixel-8",
         "md5": "5bfcf2c715b81ae380ae2983bb4c5bb2.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15242,7 +15745,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 97,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15251,7 +15753,10 @@
         "name": "Pixel-9",
         "md5": "8014a66c758f1bc389194c988badb382.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "numbers",
+            "digits"
+        ],
         "info": [
             0,
             1,
@@ -15286,7 +15791,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 98,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15295,7 +15799,10 @@
         "name": "Pixel-A",
         "md5": "a54da6be420c9e8e7cb02e2a568f3442.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15330,7 +15837,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 63,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15339,7 +15845,10 @@
         "name": "Pixel-B",
         "md5": "e47682020873e276f550421f0d854523.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15374,7 +15883,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 64,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15383,7 +15891,10 @@
         "name": "Pixel-C",
         "md5": "ee1958ffbae4e0fd836622ae183b55bd.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15418,7 +15929,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 65,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15427,7 +15937,10 @@
         "name": "Pixel-D",
         "md5": "d759df99f347d9b7d59e1f703e8e1438.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15462,7 +15975,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 66,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15471,7 +15983,10 @@
         "name": "Pixel-E",
         "md5": "059a64a90014dc69c510b562cdf94df7.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15506,7 +16021,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 67,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15515,7 +16029,10 @@
         "name": "Pixel-F",
         "md5": "ebbc6dc0f7d1a89b159aac3f76fe52f4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15550,7 +16067,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 68,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15559,7 +16075,10 @@
         "name": "Pixel-G",
         "md5": "203dfa253635f0e52059e835c51fa6f8.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15594,7 +16113,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 69,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15603,7 +16121,10 @@
         "name": "Pixel-H",
         "md5": "d9a94d9b9abc9e26eb91d22d197a1556.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15638,7 +16159,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 70,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15647,7 +16167,10 @@
         "name": "Pixel-I",
         "md5": "aeb851adc39da9582a379af1ed6d0efe.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15682,7 +16205,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 71,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15691,7 +16213,10 @@
         "name": "Pixel-J",
         "md5": "c18906f764b2889a8fc0b3c16db28bf0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15726,7 +16251,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 72,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15735,7 +16259,10 @@
         "name": "Pixel-K",
         "md5": "4483633d2ae26987d0efe359aaf1357b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15770,7 +16297,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 73,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15779,7 +16305,10 @@
         "name": "Pixel-L",
         "md5": "0625b64705d62748c6105e969859fe0d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15814,7 +16343,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 74,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15823,7 +16351,10 @@
         "name": "Pixel-M",
         "md5": "46ccf731f158b9dda75f4e71a5bcd282.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15858,7 +16389,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 75,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15867,7 +16397,10 @@
         "name": "Pixel-N",
         "md5": "f9d3b49b5962ff4070fae186b8b71e39.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15902,7 +16435,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 77,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15911,7 +16443,10 @@
         "name": "Pixel-O",
         "md5": "668b21968078f3b7b1a9ccd74407fa1e.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15946,7 +16481,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 76,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15955,7 +16489,10 @@
         "name": "Pixel-P",
         "md5": "02011265d2597175c7496da667265f4a.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -15990,7 +16527,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 78,
             "visible": true,
             "spriteInfo": {}
         }
@@ -15999,7 +16535,10 @@
         "name": "Pixel-Q",
         "md5": "8c77c87dd0ed2613873cff0795ffc701.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16034,7 +16573,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 79,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16043,7 +16581,10 @@
         "name": "Pixel-R",
         "md5": "c94daea3bd1e8cec36e1aa4e0b1d3f2b.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16078,7 +16619,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 80,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16087,7 +16627,10 @@
         "name": "Pixel-S",
         "md5": "2fedb1b52f4a4500938a3a52085344e6.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16122,7 +16665,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 81,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16131,7 +16673,10 @@
         "name": "Pixel-T",
         "md5": "3f481b967f82014c7cf6dd14d438c32d.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16166,7 +16711,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 82,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16175,7 +16719,10 @@
         "name": "Pixel-U",
         "md5": "a207644e4adb613f410f80a7e123db60.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16210,7 +16757,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 83,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16219,7 +16765,10 @@
         "name": "Pixel-V",
         "md5": "1bb20febe562fa291bea94be1e2d44ba.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16254,7 +16803,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 84,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16263,7 +16811,10 @@
         "name": "Pixel-W",
         "md5": "34b628e8c84cc551a1fa740b85afb750.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16298,7 +16849,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 85,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16307,7 +16857,10 @@
         "name": "Pixel-X",
         "md5": "4cc2d68ceb08176481e882ed39e4f5d5.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16342,7 +16895,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 86,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16351,7 +16903,10 @@
         "name": "Pixel-Y",
         "md5": "e6c377982c023761796eaed1047169e6.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16386,7 +16941,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 87,
             "visible": true,
             "spriteInfo": {}
         }
@@ -16395,7 +16949,10 @@
         "name": "Pixel-Z",
         "md5": "ecadc3a562c9aa963717fcdf07ec96b4.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "alphabet",
+            "letters"
+        ],
         "info": [
             0,
             1,
@@ -16430,7 +16987,6 @@
             "direction": 90,
             "rotationStyle": "normal",
             "isDraggable": false,
-            "indexInLibrary": 88,
             "visible": true,
             "spriteInfo": {}
         }

@@ -93,7 +93,12 @@
         "sampleCount": 21362,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games",
+            "space"
+        ]
     },
     {
         "name": "Alien Creak1",
@@ -189,7 +194,10 @@
         "sampleCount": 41822,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "sheep"
+        ]
     },
     {
         "name": "Bark",
@@ -205,7 +213,10 @@
         "sampleCount": 8099,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "effects"
+        ]
     },
     {
         "name": "Bass Beatbox",
@@ -253,7 +264,11 @@
         "sampleCount": 18174,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Bird",
@@ -277,7 +292,11 @@
         "sampleCount": 7672,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "human"
+        ]
     },
     {
         "name": "Boing",
@@ -293,7 +312,11 @@
         "sampleCount": 13908,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Boom Cloud",
@@ -301,7 +324,12 @@
         "sampleCount": 88200,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games",
+            "space",
+            "dramatic"
+        ]
     },
     {
         "name": "Boop Bing Bop",
@@ -309,7 +337,11 @@
         "sampleCount": 54957,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Bowling Strike",
@@ -317,7 +349,10 @@
         "sampleCount": 26629,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "effects"
+        ]
     },
     {
         "name": "Bubbles",
@@ -493,7 +528,10 @@
         "sampleCount": 42443,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "Car Passing",
@@ -509,7 +547,10 @@
         "sampleCount": 43358,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "transportation"
+        ]
     },
     {
         "name": "Cave",
@@ -525,7 +566,11 @@
         "sampleCount": 25843,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "squirrel",
+            "chipmunk"
+        ]
     },
     {
         "name": "Chee Chee",
@@ -541,7 +586,11 @@
         "sampleCount": 108864,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Chirp",
@@ -549,7 +598,10 @@
         "sampleCount": 5301,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "bird"
+        ]
     },
     {
         "name": "Chomp",
@@ -573,7 +625,10 @@
         "sampleCount": 26703,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games"
+        ]
     },
     {
         "name": "Clap Beatbox",
@@ -597,7 +652,10 @@
         "sampleCount": 109584,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Clown Honk",
@@ -605,7 +663,10 @@
         "sampleCount": 9009,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "horn"
+        ]
     },
     {
         "name": "Coin",
@@ -613,7 +674,11 @@
         "sampleCount": 3975,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Collect",
@@ -621,7 +686,11 @@
         "sampleCount": 13320,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Computer Beep",
@@ -645,7 +714,11 @@
         "sampleCount": 22623,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Cough1",
@@ -669,7 +742,9 @@
         "sampleCount": 100649,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Crash Beatbox",
@@ -693,7 +768,11 @@
         "sampleCount": 37485,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "cartoon",
+            "voice"
+        ]
     },
     {
         "name": "Cricket",
@@ -717,7 +796,11 @@
         "sampleCount": 6424,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "frog",
+            "toad"
+        ]
     },
     {
         "name": "Crowd Gasp",
@@ -725,7 +808,10 @@
         "sampleCount": 27434,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "voice",
+            "human"
+        ]
     },
     {
         "name": "Crowd Laugh",
@@ -733,7 +819,10 @@
         "sampleCount": 91584,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "voice",
+            "human"
+        ]
     },
     {
         "name": "Crunch",
@@ -741,7 +830,11 @@
         "sampleCount": 4297,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Cymbal",
@@ -917,7 +1010,11 @@
         "sampleCount": 27563,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Dog1",
@@ -941,7 +1038,10 @@
         "sampleCount": 7454,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Door Creak",
@@ -957,7 +1057,10 @@
         "sampleCount": 109662,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Drip Drop",
@@ -1013,7 +1116,12 @@
         "sampleCount": 18640,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "wacky",
+            "cartoon",
+            "percussion"
+        ]
     },
     {
         "name": "Drum Buzz",
@@ -1053,7 +1161,10 @@
         "sampleCount": 37809,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "percussion"
+        ]
     },
     {
         "name": "Drum Satellite",
@@ -1093,7 +1204,12 @@
         "sampleCount": 63729,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "surprise",
+            "wacky",
+            "dramatic"
+        ]
     },
     {
         "name": "E Bass",
@@ -1221,7 +1337,10 @@
         "sampleCount": 172729,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "F Bass",
@@ -1421,7 +1540,10 @@
         "sampleCount": 36209,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "horse"
+        ]
     },
     {
         "name": "Garden",
@@ -1437,7 +1559,9 @@
         "sampleCount": 52237,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Glug",
@@ -1445,7 +1569,12 @@
         "sampleCount": 12100,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "potion",
+            "drink",
+            "water"
+        ]
     },
     {
         "name": "Goal Cheer",
@@ -1453,7 +1582,11 @@
         "sampleCount": 84096,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Gong",
@@ -1477,7 +1610,10 @@
         "sampleCount": 19228,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "dog"
+        ]
     },
     {
         "name": "Grunt",
@@ -1485,7 +1621,10 @@
         "sampleCount": 20551,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "buffalo"
+        ]
     },
     {
         "name": "Guitar Chords1",
@@ -1525,7 +1664,11 @@
         "sampleCount": 20025,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "wacky",
+            "cartoon"
+        ]
     },
     {
         "name": "Hey",
@@ -1589,7 +1732,10 @@
         "sampleCount": 6116,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games"
+        ]
     },
     {
         "name": "Hihat Beatbox",
@@ -1653,7 +1799,11 @@
         "sampleCount": 6867,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Jungle",
@@ -1669,7 +1819,12 @@
         "sampleCount": 291214,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "background",
+            "crickets",
+            "ambience"
+        ]
     },
     {
         "name": "Kick Back",
@@ -1757,7 +1912,11 @@
         "sampleCount": 81379,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Low Boing",
@@ -1765,7 +1924,9 @@
         "sampleCount": 16592,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Low Conga",
@@ -1781,7 +1942,9 @@
         "sampleCount": 16736,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Low Tom",
@@ -1797,7 +1960,10 @@
         "sampleCount": 11220,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games"
+        ]
     },
     {
         "name": "Machine",
@@ -1805,7 +1971,9 @@
         "sampleCount": 10209,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Magic Spell",
@@ -1813,7 +1981,10 @@
         "sampleCount": 43077,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "fantasy"
+        ]
     },
     {
         "name": "Medieval1",
@@ -1853,7 +2024,10 @@
         "sampleCount": 27225,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "cow"
+        ]
     },
     {
         "name": "Motorcycle Passing",
@@ -1877,7 +2051,11 @@
         "sampleCount": 99206,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "water",
+            "underwater"
+        ]
     },
     {
         "name": "Odesong-b",
@@ -1893,7 +2071,11 @@
         "sampleCount": 30514,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Orchestra Tuning",
@@ -1901,7 +2083,12 @@
         "sampleCount": 221837,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "ambience",
+            "background",
+            "music"
+        ]
     },
     {
         "name": "Owl",
@@ -1925,7 +2112,11 @@
         "sampleCount": 5816,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Ping Pong Hit",
@@ -1933,7 +2124,9 @@
         "sampleCount": 11171,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports"
+        ]
     },
     {
         "name": "Pluck",
@@ -1941,7 +2134,11 @@
         "sampleCount": 6537,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "wacky",
+            "cartoon"
+        ]
     },
     {
         "name": "Plunge",
@@ -1957,7 +2154,9 @@
         "sampleCount": 8649,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Pop",
@@ -1981,7 +2180,12 @@
         "sampleCount": 220295,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "ambience",
+            "background",
+            "weather",
+            "water"
+        ]
     },
     {
         "name": "Rattle",
@@ -1997,7 +2201,9 @@
         "sampleCount": 14034,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports"
+        ]
     },
     {
         "name": "Ricochet",
@@ -2005,7 +2211,10 @@
         "sampleCount": 23862,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "wacky"
+        ]
     },
     {
         "name": "Ride Cymbal",
@@ -2021,7 +2230,10 @@
         "sampleCount": 70656,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Rip",
@@ -2029,7 +2241,10 @@
         "sampleCount": 11877,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games"
+        ]
     },
     {
         "name": "Ripples",
@@ -2061,7 +2276,11 @@
         "sampleCount": 35770,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Scratch Beatbox",
@@ -2101,7 +2320,10 @@
         "sampleCount": 12907,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "monkey"
+        ]
     },
     {
         "name": "Seagulls",
@@ -2109,7 +2331,10 @@
         "sampleCount": 64936,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "bird"
+        ]
     },
     {
         "name": "Sewing Machine",
@@ -2117,7 +2342,10 @@
         "sampleCount": 107964,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Shaker",
@@ -2133,7 +2361,10 @@
         "sampleCount": 78597,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "Sidestick Snare",
@@ -2165,7 +2396,10 @@
         "sampleCount": 20821,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects"
+        ]
     },
     {
         "name": "Skid",
@@ -2173,7 +2407,12 @@
         "sampleCount": 23939,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "cartoon",
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "Slide Whistle",
@@ -2181,7 +2420,11 @@
         "sampleCount": 12273,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Small Cowbell",
@@ -2229,7 +2472,10 @@
         "sampleCount": 8370,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "effects"
+        ]
     },
     {
         "name": "Sneeze1",
@@ -2253,7 +2499,12 @@
         "sampleCount": 103974,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "wacky",
+            "voice",
+            "cartoon"
+        ]
     },
     {
         "name": "Snort",
@@ -2261,7 +2512,10 @@
         "sampleCount": 16421,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "horse"
+        ]
     },
     {
         "name": "Space Ambience",
@@ -2269,7 +2523,12 @@
         "sampleCount": 220160,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games",
+            "background",
+            "space"
+        ]
     },
     {
         "name": "Space Flyby",
@@ -2277,7 +2536,12 @@
         "sampleCount": 52770,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "games",
+            "space",
+            "transportation"
+        ]
     },
     {
         "name": "Space Noise",
@@ -2285,7 +2549,12 @@
         "sampleCount": 58212,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games",
+            "space"
+        ]
     },
     {
         "name": "Space Ripple",
@@ -2309,7 +2578,10 @@
         "sampleCount": 46080,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "water"
+        ]
     },
     {
         "name": "Splash Cymbal",
@@ -2341,7 +2613,10 @@
         "sampleCount": 53626,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "guinea pig"
+        ]
     },
     {
         "name": "Squeaky Toy",
@@ -2349,7 +2624,12 @@
         "sampleCount": 9982,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon",
+            "horn"
+        ]
     },
     {
         "name": "Squish Pop",
@@ -2357,7 +2637,11 @@
         "sampleCount": 9355,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "String Accent",
@@ -2381,7 +2665,9 @@
         "sampleCount": 4882,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Suspense",
@@ -2397,7 +2683,12 @@
         "sampleCount": 55125,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "surprise",
+            "wacky",
+            "dramatic"
+        ]
     },
     {
         "name": "Tambura",
@@ -2445,7 +2736,10 @@
         "sampleCount": 74666,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Telephone Ring2",
@@ -2453,7 +2747,10 @@
         "sampleCount": 25373,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Teleport",
@@ -2461,7 +2758,12 @@
         "sampleCount": 110250,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games",
+            "space"
+        ]
     },
     {
         "name": "Teleport2",
@@ -2469,7 +2771,12 @@
         "sampleCount": 15898,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games",
+            "space"
+        ]
     },
     {
         "name": "Teleport3",
@@ -2477,7 +2784,12 @@
         "sampleCount": 95440,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games",
+            "space"
+        ]
     },
     {
         "name": "Tennis Hit",
@@ -2485,7 +2797,10 @@
         "sampleCount": 18176,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "sports",
+            "effects"
+        ]
     },
     {
         "name": "Thunder Storm",
@@ -2493,7 +2808,13 @@
         "sampleCount": 307513,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "weather",
+            "rain",
+            "ambience",
+            "background",
+            "dramatic"
+        ]
     },
     {
         "name": "Tom Drum",
@@ -2509,7 +2830,11 @@
         "sampleCount": 10726,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "Toy Zing",
@@ -2517,7 +2842,9 @@
         "sampleCount": 14103,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Traffic",
@@ -2525,7 +2852,12 @@
         "sampleCount": 141977,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "transportation",
+            "ambience",
+            "background"
+        ]
     },
     {
         "name": "Train Whistle",
@@ -2533,7 +2865,10 @@
         "sampleCount": 47594,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "transportation"
+        ]
     },
     {
         "name": "Triumph",
@@ -2549,7 +2884,11 @@
         "sampleCount": 546917,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "background",
+            "ambience"
+        ]
     },
     {
         "name": "Trumpet1",
@@ -2581,7 +2920,10 @@
         "sampleCount": 47447,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "fantasy"
+        ]
     },
     {
         "name": "Water Drop",
@@ -2589,7 +2931,9 @@
         "sampleCount": 15131,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Whinny",
@@ -2597,7 +2941,10 @@
         "sampleCount": 46108,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "animals",
+            "horse"
+        ]
     },
     {
         "name": "Whistle Thump",
@@ -2605,7 +2952,11 @@
         "sampleCount": 14441,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Whiz",
@@ -2613,7 +2964,11 @@
         "sampleCount": 19243,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Whoop",
@@ -2629,7 +2984,11 @@
         "sampleCount": 44771,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
     },
     {
         "name": "Wobble",
@@ -2637,7 +2996,11 @@
         "sampleCount": 39950,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "effects",
+            "cartoon"
+        ]
     },
     {
         "name": "Wolf Howl",
@@ -2653,7 +3016,9 @@
         "sampleCount": 2729,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Wub Beatbox",
@@ -2709,7 +3074,10 @@
         "sampleCount": 10467,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "wacky",
+            "human"
+        ]
     },
     {
         "name": "Zoop",

@@ -114,6 +114,7 @@ describe('Working with the blocks', () => {
         await clickText('+', scope.monitors);
         el = await findByXpath(`//body//${scope.monitors}//input`);
         await el.sendKeys('thing2');
+        await el.click(); // Regression for "clicking active input erases value" bug.
         await clickText('list1', scope.monitors); // Blur the input to submit
 
         // Check that the list value has been propagated.

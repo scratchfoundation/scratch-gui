@@ -31,7 +31,8 @@ class SeleniumHelper {
             modal: '*[@class="ReactModalPortal"]',
             reportedValue: '*[@class="blocklyDropDownContent"]',
             soundsTab: "*[@id='react-tabs-5']",
-            spriteTile: '*[starts-with(@class,"react-contextmenu-wrapper")]'
+            spriteTile: '*[starts-with(@class,"react-contextmenu-wrapper")]',
+            monitors: '*[starts-with(@class,"stage_monitor-wrapper")]'
         };
     }
 

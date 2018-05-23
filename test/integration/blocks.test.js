@@ -10,6 +10,7 @@ const {
     getDriver,
     getLogs,
     loadUri,
+    rightClickText,
     scope
 } = new SeleniumHelper();
 
@@ -80,6 +81,10 @@ describe('Working with the blocks', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('score', scope.blocksTab);
         await findByText('0', scope.reportedValue); // Tooltip with result
+
+        // And there should be a monitor visible
+        await rightClickText('score', scope.monitors);
+        await clickText('slider');
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

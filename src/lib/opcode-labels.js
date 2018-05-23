@@ -60,6 +60,10 @@ const opcodeMap = {
         category: 'sensing',
         label: 'loudness'
     },
+    sensing_username: {
+        category: 'sensing',
+        label: 'username'
+    },
     sensing_current: {
         category: 'sensing',
         labelFn: params => {

@@ -5,7 +5,11 @@
         "sampleCount": 28160,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Elec Bass",
@@ -13,7 +17,11 @@
         "sampleCount": 5920,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Elec Guitar",
@@ -21,7 +29,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Elec Piano",
@@ -29,7 +41,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Guitar",
@@ -37,7 +53,11 @@
         "sampleCount": 31872,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Minor Ukulele",
@@ -45,7 +65,12 @@
         "sampleCount": 18267,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes",
+            "chords"
+        ]
     },
     {
         "name": "A Piano",
@@ -53,7 +78,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Sax",
@@ -61,7 +90,11 @@
         "sampleCount": 6472,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "A Trombone",
@@ -69,7 +102,11 @@
         "sampleCount": 17227,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "A Trumpet",
@@ -77,7 +114,11 @@
         "sampleCount": 13911,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Afro String",
@@ -85,7 +126,9 @@
         "sampleCount": 9807,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "instruments"
+        ]
     },
     {
         "name": "Alert",
@@ -106,7 +149,10 @@
         "sampleCount": 8045,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "space"
+        ]
     },
     {
         "name": "Alien Creak2",
@@ -114,7 +160,10 @@
         "sampleCount": 8300,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "space"
+        ]
     },
     {
         "name": "B Bass",
@@ -122,7 +171,11 @@
         "sampleCount": 25792,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Elec Bass",
@@ -130,7 +183,11 @@
         "sampleCount": 6208,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Elec Guitar",
@@ -138,7 +195,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Elec Piano",
@@ -146,7 +207,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Guitar",
@@ -154,7 +219,11 @@
         "sampleCount": 29504,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Piano",
@@ -162,7 +231,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Sax",
@@ -170,7 +243,11 @@
         "sampleCount": 9555,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "B Trombone",
@@ -178,7 +255,11 @@
         "sampleCount": 15522,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "B Trumpet",
@@ -186,7 +267,11 @@
         "sampleCount": 14704,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Baa",
@@ -224,7 +309,12 @@
         "sampleCount": 6720,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Beat Box1",
@@ -232,7 +322,12 @@
         "sampleCount": 5729,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "human",
+            "voice",
+            "hiphop"
+        ]
     },
     {
         "name": "Beat Box2",
@@ -240,7 +335,12 @@
         "sampleCount": 5729,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "human",
+            "voice",
+            "hiphop"
+        ]
     },
     {
         "name": "Bell Cymbal",
@@ -248,7 +348,10 @@
         "sampleCount": 19328,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Bell Toll",
@@ -256,7 +359,10 @@
         "sampleCount": 45168,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "dramatic"
+        ]
     },
     {
         "name": "Big Boing",
@@ -276,7 +382,9 @@
         "sampleCount": 3840,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals"
+        ]
     },
     {
         "name": "Birthday",
@@ -304,7 +412,9 @@
         "sampleCount": 6804,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Bonk",
@@ -360,7 +470,10 @@
         "sampleCount": 45056,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "water"
+        ]
     },
     {
         "name": "Buzz Whir",
@@ -368,7 +481,9 @@
         "sampleCount": 9037,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "C Bass",
@@ -376,7 +491,11 @@
         "sampleCount": 44608,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Elec Bass",
@@ -384,7 +503,11 @@
         "sampleCount": 5216,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Elec Guitar",
@@ -392,7 +515,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Elec Piano",
@@ -400,7 +527,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Guitar",
@@ -408,7 +539,11 @@
         "sampleCount": 44864,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Major Ukulele",
@@ -416,7 +551,12 @@
         "sampleCount": 18203,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes",
+            "chords"
+        ]
     },
     {
         "name": "C Piano",
@@ -424,7 +564,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Sax",
@@ -432,7 +576,11 @@
         "sampleCount": 9491,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "C Trombone",
@@ -440,7 +588,11 @@
         "sampleCount": 19053,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C Trumpet",
@@ -448,7 +600,11 @@
         "sampleCount": 13118,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Bass",
@@ -456,7 +612,11 @@
         "sampleCount": 24128,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Elec Bass",
@@ -464,7 +624,11 @@
         "sampleCount": 5792,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Elec Guitar",
@@ -472,7 +636,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Elec Piano",
@@ -480,7 +648,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Guitar",
@@ -488,7 +660,11 @@
         "sampleCount": 27712,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Piano",
@@ -496,7 +672,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Sax",
@@ -504,7 +684,11 @@
         "sampleCount": 7349,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "C2 Trombone",
@@ -512,7 +696,11 @@
         "sampleCount": 13904,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Trumpet",
@@ -520,7 +708,11 @@
         "sampleCount": 15849,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Car Horn",
@@ -539,7 +731,11 @@
         "sampleCount": 84992,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "transportation",
+            "ambience",
+            "background"
+        ]
     },
     {
         "name": "Car Vroom",
@@ -558,7 +754,10 @@
         "sampleCount": 163584,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Chatter",
@@ -578,16 +777,18 @@
         "sampleCount": 34560,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "monkey"
+        ]
     },
     {
         "name": "Cheer",
-        "md5": "170e05c29d50918ae0b482c2955768c0.wav",
-        "sampleCount": 108864,
+        "md5": "4b36eebf22be4667fc2f15b78c805b4c.wav",
+        "sampleCount": 62528,
         "rate": 22050,
-        "format": "adpcm",
+        "format": "",
         "tags": [
-            "sports",
             "human",
             "voice"
         ]
@@ -609,7 +810,10 @@
         "sampleCount": 2912,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "human"
+        ]
     },
     {
         "name": "Chord",
@@ -617,7 +821,10 @@
         "sampleCount": 20608,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic"
+        ]
     },
     {
         "name": "Clang",
@@ -636,7 +843,12 @@
         "sampleCount": 4224,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Clapping",
@@ -644,7 +856,9 @@
         "sampleCount": 84160,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human"
+        ]
     },
     {
         "name": "Clock Ticking",
@@ -698,7 +912,10 @@
         "sampleCount": 9536,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic"
+        ]
     },
     {
         "name": "Computer Beep2",
@@ -706,7 +923,10 @@
         "sampleCount": 19200,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic"
+        ]
     },
     {
         "name": "Connect",
@@ -726,7 +946,9 @@
         "sampleCount": 7516,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human"
+        ]
     },
     {
         "name": "Cough2",
@@ -734,7 +956,9 @@
         "sampleCount": 16612,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human"
+        ]
     },
     {
         "name": "Crank",
@@ -752,7 +976,12 @@
         "sampleCount": 26883,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Crash Cymbal",
@@ -760,7 +989,10 @@
         "sampleCount": 25220,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion"
+        ]
     },
     {
         "name": "Crazy Laugh",
@@ -780,7 +1012,11 @@
         "sampleCount": 3673,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "insects",
+            "bugs"
+        ]
     },
     {
         "name": "Crickets",
@@ -788,7 +1024,13 @@
         "sampleCount": 92160,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "insects",
+            "bugs",
+            "ambience",
+            "background"
+        ]
     },
     {
         "name": "Croak",
@@ -842,7 +1084,11 @@
         "sampleCount": 24118,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "electronic"
+        ]
     },
     {
         "name": "Cymbal Crash",
@@ -850,7 +1096,10 @@
         "sampleCount": 25219,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion"
+        ]
     },
     {
         "name": "Cymbal Echo",
@@ -858,7 +1107,11 @@
         "sampleCount": 44326,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "hiphop"
+        ]
     },
     {
         "name": "D Bass",
@@ -866,7 +1119,11 @@
         "sampleCount": 40192,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Elec Bass",
@@ -874,7 +1131,11 @@
         "sampleCount": 5568,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Elec Guitar",
@@ -882,7 +1143,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Elec Piano",
@@ -890,7 +1155,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Guitar",
@@ -898,7 +1167,11 @@
         "sampleCount": 41120,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Piano",
@@ -906,7 +1179,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Sax",
@@ -914,7 +1191,11 @@
         "sampleCount": 9555,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "D Trombone",
@@ -922,7 +1203,11 @@
         "sampleCount": 17339,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "D Trumpet",
@@ -930,7 +1215,11 @@
         "sampleCount": 12702,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Dance Around",
@@ -938,7 +1227,11 @@
         "sampleCount": 343746,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Celebrate",
@@ -946,7 +1239,11 @@
         "sampleCount": 176401,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "electronic"
+        ]
     },
     {
         "name": "Dance Chill Out",
@@ -954,7 +1251,11 @@
         "sampleCount": 222822,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Funky",
@@ -962,7 +1263,11 @@
         "sampleCount": 111412,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Head Nod",
@@ -970,7 +1275,11 @@
         "sampleCount": 124519,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Magic",
@@ -978,7 +1287,11 @@
         "sampleCount": 187200,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Slow Mo",
@@ -986,7 +1299,11 @@
         "sampleCount": 445643,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Snare Beat",
@@ -994,7 +1311,11 @@
         "sampleCount": 176401,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Dance Space",
@@ -1002,7 +1323,11 @@
         "sampleCount": 88200,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Disconnect",
@@ -1022,7 +1347,9 @@
         "sampleCount": 3672,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals"
+        ]
     },
     {
         "name": "Dog2",
@@ -1030,7 +1357,9 @@
         "sampleCount": 3168,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals"
+        ]
     },
     {
         "name": "Door Closing",
@@ -1049,7 +1378,10 @@
         "sampleCount": 54272,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "home"
+        ]
     },
     {
         "name": "Doorbell",
@@ -1068,7 +1400,11 @@
         "sampleCount": 62680,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Drive Around",
@@ -1076,7 +1412,11 @@
         "sampleCount": 44096,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "electronic"
+        ]
     },
     {
         "name": "Drum",
@@ -1084,7 +1424,13 @@
         "sampleCount": 107136,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "loops",
+            "hiphop",
+            "jazz"
+        ]
     },
     {
         "name": "Drum Bass1",
@@ -1092,7 +1438,12 @@
         "sampleCount": 6528,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "hiphop",
+            "kick"
+        ]
     },
     {
         "name": "Drum Bass2",
@@ -1100,7 +1451,12 @@
         "sampleCount": 3791,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "hiphop",
+            "kick"
+        ]
     },
     {
         "name": "Drum Bass3",
@@ -1108,7 +1464,12 @@
         "sampleCount": 8576,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "hiphop",
+            "kick"
+        ]
     },
     {
         "name": "Drum Boing",
@@ -1129,7 +1490,11 @@
         "sampleCount": 5742,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "percussion"
+        ]
     },
     {
         "name": "Drum Funky",
@@ -1137,7 +1502,11 @@
         "sampleCount": 44748,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "hiphop"
+        ]
     },
     {
         "name": "Drum Jam",
@@ -1145,7 +1514,11 @@
         "sampleCount": 44288,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "percussion"
+        ]
     },
     {
         "name": "Drum Machine",
@@ -1153,7 +1526,11 @@
         "sampleCount": 105984,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Drum Roll",
@@ -1172,7 +1549,11 @@
         "sampleCount": 44096,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "percussion"
+        ]
     },
     {
         "name": "Drum Set1",
@@ -1180,7 +1561,12 @@
         "sampleCount": 46080,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "jazz",
+            "loops"
+        ]
     },
     {
         "name": "Drum Set2",
@@ -1188,7 +1574,12 @@
         "sampleCount": 37440,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "jazz",
+            "loops"
+        ]
     },
     {
         "name": "Duck",
@@ -1196,7 +1587,9 @@
         "sampleCount": 5792,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals"
+        ]
     },
     {
         "name": "Dun Dun Dunnn",
@@ -1217,7 +1610,11 @@
         "sampleCount": 36160,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Elec Bass",
@@ -1225,7 +1622,11 @@
         "sampleCount": 5691,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Elec Guitar",
@@ -1233,7 +1634,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Elec Piano",
@@ -1241,7 +1646,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Guitar",
@@ -1249,7 +1658,11 @@
         "sampleCount": 38400,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Piano",
@@ -1257,7 +1670,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Sax",
@@ -1265,7 +1682,11 @@
         "sampleCount": 7489,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "E Trombone",
@@ -1273,7 +1694,11 @@
         "sampleCount": 16699,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "E Trumpet",
@@ -1281,7 +1706,11 @@
         "sampleCount": 8680,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Eggs",
@@ -1289,7 +1718,10 @@
         "sampleCount": 336480,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Elec Piano A Minor",
@@ -1297,7 +1729,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "Elec Piano C Major",
@@ -1305,7 +1741,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "Elec Piano F Major",
@@ -1313,7 +1753,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "Elec Piano G Major",
@@ -1321,7 +1765,11 @@
         "sampleCount": 43908,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "Elec Piano Loop",
@@ -1329,7 +1777,12 @@
         "sampleCount": 43844,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments",
+            "loops"
+        ]
     },
     {
         "name": "Engine",
@@ -1348,7 +1801,11 @@
         "sampleCount": 34368,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Elec Bass",
@@ -1356,7 +1813,11 @@
         "sampleCount": 5312,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Elec Guitar",
@@ -1364,7 +1825,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Elec Piano",
@@ -1372,7 +1837,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Guitar",
@@ -1380,7 +1849,11 @@
         "sampleCount": 36416,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Major Ukulele",
@@ -1388,7 +1861,12 @@
         "sampleCount": 18235,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes",
+            "chords"
+        ]
     },
     {
         "name": "F Piano",
@@ -1396,7 +1874,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Sax",
@@ -1404,7 +1886,11 @@
         "sampleCount": 7361,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "F Trombone",
@@ -1412,7 +1898,11 @@
         "sampleCount": 19373,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "F Trumpet",
@@ -1420,7 +1910,11 @@
         "sampleCount": 12766,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Fairydust",
@@ -1428,7 +1922,11 @@
         "sampleCount": 11247,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "fantasy",
+            "magic"
+        ]
     },
     {
         "name": "Finger Snap",
@@ -1436,7 +1934,11 @@
         "sampleCount": 1985,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "percussion",
+            "human"
+        ]
     },
     {
         "name": "Flam Snare",
@@ -1444,15 +1946,23 @@
         "sampleCount": 4416,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "percussion",
+            "music",
+            "drums"
+        ]
     },
     {
-        "name": "Footsteps-1",
+        "name": "Footsteps",
         "md5": "c893b0a9b3e2e0594f1f921a12aa66be.wav",
         "sampleCount": 58880,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "human"
+        ]
     },
     {
         "name": "G Bass",
@@ -1460,7 +1970,11 @@
         "sampleCount": 30976,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Elec Bass",
@@ -1468,7 +1982,11 @@
         "sampleCount": 5568,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Elec Guitar",
@@ -1476,7 +1994,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Elec Piano",
@@ -1484,7 +2006,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Guitar",
@@ -1492,7 +2018,11 @@
         "sampleCount": 33600,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Piano",
@@ -1500,7 +2030,11 @@
         "sampleCount": 44100,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Sax",
@@ -1508,7 +2042,11 @@
         "sampleCount": 7349,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "notes",
+            "instruments"
+        ]
     },
     {
         "name": "G Trombone",
@@ -1516,7 +2054,11 @@
         "sampleCount": 17179,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Trumpet",
@@ -1524,7 +2066,11 @@
         "sampleCount": 14640,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Ukulele",
@@ -1532,7 +2078,12 @@
         "sampleCount": 18235,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes",
+            "chords"
+        ]
     },
     {
         "name": "Gallop",
@@ -1551,7 +2102,10 @@
         "sampleCount": 371520,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Glass Breaking",
@@ -1594,7 +2148,10 @@
         "sampleCount": 114432,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion"
+        ]
     },
     {
         "name": "Goose",
@@ -1602,7 +2159,10 @@
         "sampleCount": 8208,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "birds"
+        ]
     },
     {
         "name": "Growl",
@@ -1632,7 +2192,11 @@
         "sampleCount": 123264,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "loops"
+        ]
     },
     {
         "name": "Guitar Chords2",
@@ -1640,7 +2204,11 @@
         "sampleCount": 158976,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "loops"
+        ]
     },
     {
         "name": "Guitar Strum",
@@ -1648,7 +2216,11 @@
         "sampleCount": 25216,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "chords"
+        ]
     },
     {
         "name": "Hand Clap",
@@ -1656,7 +2228,10 @@
         "sampleCount": 2464,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion"
+        ]
     },
     {
         "name": "Head Shake",
@@ -1676,7 +2251,10 @@
         "sampleCount": 5414,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Hi Beatbox",
@@ -1684,7 +2262,12 @@
         "sampleCount": 5856,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Hi Na Tabla",
@@ -1692,7 +2275,11 @@
         "sampleCount": 4096,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Hi Tun Tabla",
@@ -1700,7 +2287,11 @@
         "sampleCount": 18656,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "High Conga",
@@ -1708,7 +2299,11 @@
         "sampleCount": 8192,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "High Hat",
@@ -1716,7 +2311,11 @@
         "sampleCount": 2757,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "High Tom",
@@ -1724,7 +2323,11 @@
         "sampleCount": 12320,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "High Whoosh",
@@ -1743,7 +2346,12 @@
         "sampleCount": 5856,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Hihat Cymbal",
@@ -1751,7 +2359,11 @@
         "sampleCount": 2752,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Hip Hop",
@@ -1759,7 +2371,11 @@
         "sampleCount": 108864,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "hiphop"
+        ]
     },
     {
         "name": "Horse",
@@ -1767,7 +2383,10 @@
         "sampleCount": 14464,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "effects"
+        ]
     },
     {
         "name": "Horse Gallop",
@@ -1775,7 +2394,10 @@
         "sampleCount": 38336,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "effects"
+        ]
     },
     {
         "name": "Human Beatbox1",
@@ -1783,7 +2405,13 @@
         "sampleCount": 103680,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop",
+            "loops"
+        ]
     },
     {
         "name": "Human Beatbox2",
@@ -1791,7 +2419,13 @@
         "sampleCount": 62392,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop",
+            "loops"
+        ]
     },
     {
         "name": "Jump",
@@ -1811,7 +2445,11 @@
         "sampleCount": 76032,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "electronic",
+            "loops"
+        ]
     },
     {
         "name": "Jungle Frogs",
@@ -1832,7 +2470,11 @@
         "sampleCount": 44748,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "hiphop"
+        ]
     },
     {
         "name": "Kick Drum",
@@ -1840,7 +2482,11 @@
         "sampleCount": 3791,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "hiphop"
+        ]
     },
     {
         "name": "Large Cowbell",
@@ -1848,7 +2494,11 @@
         "sampleCount": 20856,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Laser1",
@@ -1856,7 +2506,11 @@
         "sampleCount": 516,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "space",
+            "electronic"
+        ]
     },
     {
         "name": "Laser2",
@@ -1864,7 +2518,11 @@
         "sampleCount": 755,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "space",
+            "electronic"
+        ]
     },
     {
         "name": "Laugh1",
@@ -1872,7 +2530,10 @@
         "sampleCount": 13547,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Laugh2",
@@ -1880,7 +2541,10 @@
         "sampleCount": 14662,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Laugh3",
@@ -1888,7 +2552,10 @@
         "sampleCount": 32065,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Lo Geh Tabla",
@@ -1896,7 +2563,11 @@
         "sampleCount": 30784,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Lo Gliss Tabla",
@@ -1904,7 +2575,11 @@
         "sampleCount": 7008,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Lose",
@@ -1934,7 +2609,11 @@
         "sampleCount": 8384,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Low Squeak",
@@ -1952,7 +2631,11 @@
         "sampleCount": 20000,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Low Whoosh",
@@ -1992,7 +2675,11 @@
         "sampleCount": 213120,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "fantasy"
+        ]
     },
     {
         "name": "Medieval2",
@@ -2000,7 +2687,11 @@
         "sampleCount": 324288,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "fantasy"
+        ]
     },
     {
         "name": "Meow",
@@ -2008,7 +2699,10 @@
         "sampleCount": 18688,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "cat"
+        ]
     },
     {
         "name": "Meow2",
@@ -2016,7 +2710,10 @@
         "sampleCount": 6512,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "cat"
+        ]
     },
     {
         "name": "Moo",
@@ -2035,7 +2732,11 @@
         "sampleCount": 86016,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "transportation",
+            "ambience",
+            "background"
+        ]
     },
     {
         "name": "Muted Conga",
@@ -2043,7 +2744,11 @@
         "sampleCount": 4544,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Ocean Wave",
@@ -2063,7 +2768,11 @@
         "sampleCount": 212553,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "electronic"
+        ]
     },
     {
         "name": "Oops",
@@ -2096,7 +2805,10 @@
         "sampleCount": 8111,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "birds"
+        ]
     },
     {
         "name": "Party Noise",
@@ -2104,7 +2816,12 @@
         "sampleCount": 44672,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice",
+            "ambience",
+            "background"
+        ]
     },
     {
         "name": "Pew",
@@ -2146,7 +2863,11 @@
         "sampleCount": 22400,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "water",
+            "splash"
+        ]
     },
     {
         "name": "Police Siren",
@@ -2172,7 +2893,9 @@
         "sampleCount": 258,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Rain",
@@ -2193,7 +2916,10 @@
         "sampleCount": 13184,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "percussion"
+        ]
     },
     {
         "name": "Referee Whistle",
@@ -2222,7 +2948,11 @@
         "sampleCount": 8144,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Ring Tone",
@@ -2252,7 +2982,10 @@
         "sampleCount": 21504,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "water"
+        ]
     },
     {
         "name": "Roll Cymbal",
@@ -2260,7 +2993,11 @@
         "sampleCount": 26432,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Rooster",
@@ -2268,7 +3005,10 @@
         "sampleCount": 17110,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "birds"
+        ]
     },
     {
         "name": "Scrambling Feet",
@@ -2288,7 +3028,13 @@
         "sampleCount": 11552,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop",
+            "voice"
+        ]
     },
     {
         "name": "Scratchy Beat",
@@ -2296,7 +3042,11 @@
         "sampleCount": 44096,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "loops",
+            "hiphop"
+        ]
     },
     {
         "name": "Scream1",
@@ -2304,7 +3054,10 @@
         "sampleCount": 6628,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Scream2",
@@ -2312,14 +3065,17 @@
         "sampleCount": 17010,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Screech",
-        "md5": "10644c5cc83a9a2dd3ab466deb0eb03d.wav",
-        "sampleCount": 12907,
-        "rate": 22050,
-        "format": "adpcm",
+        "md5": "3676f478e5e3496034cf100d239160df.wav",
+        "sampleCount": 28928,
+        "rate": 11025,
+        "format": "",
         "tags": [
             "animals",
             "monkey"
@@ -2353,7 +3109,10 @@
         "sampleCount": 18560,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion"
+        ]
     },
     {
         "name": "Ship Bell",
@@ -2372,7 +3131,11 @@
         "sampleCount": 2336,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Singer1",
@@ -2380,7 +3143,12 @@
         "sampleCount": 23653,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice",
+            "vocals",
+            "music"
+        ]
     },
     {
         "name": "Singer2",
@@ -2388,7 +3156,12 @@
         "sampleCount": 28636,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice",
+            "vocals",
+            "music"
+        ]
     },
     {
         "name": "Siren Whistle",
@@ -2432,7 +3205,11 @@
         "sampleCount": 9718,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Snap",
@@ -2440,7 +3217,11 @@
         "sampleCount": 15360,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Snare Beatbox",
@@ -2448,7 +3229,12 @@
         "sampleCount": 5630,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Snare Beatbox2",
@@ -2456,7 +3242,12 @@
         "sampleCount": 4960,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Snare Drum",
@@ -2464,7 +3255,11 @@
         "sampleCount": 2757,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "percussion",
+            "drums"
+        ]
     },
     {
         "name": "Sneaker Squeak",
@@ -2483,7 +3278,10 @@
         "sampleCount": 11818,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "voice"
+        ]
     },
     {
         "name": "Sneeze2",
@@ -2491,7 +3289,10 @@
         "sampleCount": 15218,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "voice",
+            "human"
+        ]
     },
     {
         "name": "Snoring",
@@ -2562,7 +3363,11 @@
         "sampleCount": 41149,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "space",
+            "effects",
+            "electronic"
+        ]
     },
     {
         "name": "Spiral",
@@ -2570,7 +3375,11 @@
         "sampleCount": 28672,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "space",
+            "effects",
+            "electronic"
+        ]
     },
     {
         "name": "Splash",
@@ -2589,7 +3398,11 @@
         "sampleCount": 9600,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "percussion",
+            "drums",
+            "music"
+        ]
     },
     {
         "name": "Spooky String",
@@ -2597,7 +3410,10 @@
         "sampleCount": 51376,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "dramatic"
+        ]
     },
     {
         "name": "Squawk",
@@ -2605,7 +3421,10 @@
         "sampleCount": 8208,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "birds"
+        ]
     },
     {
         "name": "Squeaks",
@@ -2649,7 +3468,10 @@
         "sampleCount": 16896,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "music"
+        ]
     },
     {
         "name": "String Pluck",
@@ -2657,7 +3479,11 @@
         "sampleCount": 4976,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "music",
+            "instruments"
+        ]
     },
     {
         "name": "Suction Cup",
@@ -2675,7 +3501,11 @@
         "sampleCount": 16659,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "music",
+            "dramatic"
+        ]
     },
     {
         "name": "Tada",
@@ -2696,7 +3526,11 @@
         "sampleCount": 22261,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "music",
+            "instruments"
+        ]
     },
     {
         "name": "Tap Conga",
@@ -2704,7 +3538,11 @@
         "sampleCount": 6880,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "percussion",
+            "drums",
+            "music"
+        ]
     },
     {
         "name": "Tap Snare",
@@ -2712,7 +3550,11 @@
         "sampleCount": 3296,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "percussion",
+            "drums",
+            "music"
+        ]
     },
     {
         "name": "Techno",
@@ -2720,7 +3562,11 @@
         "sampleCount": 175680,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "loops",
+            "music",
+            "electronic"
+        ]
     },
     {
         "name": "Techno2",
@@ -2728,7 +3574,11 @@
         "sampleCount": 327168,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "loops",
+            "music",
+            "electronic"
+        ]
     },
     {
         "name": "Telephone Ring",
@@ -2822,7 +3672,11 @@
         "sampleCount": 35803,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "percussion",
+            "drums",
+            "music"
+        ]
     },
     {
         "name": "Toy Honk",
@@ -2876,7 +3730,12 @@
         "sampleCount": 89280,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "loops",
+            "music",
+            "dramatic",
+            "win"
+        ]
     },
     {
         "name": "Tropical Birds",
@@ -2896,7 +3755,11 @@
         "sampleCount": 25800,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "notes",
+            "music",
+            "instruments"
+        ]
     },
     {
         "name": "Trumpet2",
@@ -2904,7 +3767,11 @@
         "sampleCount": 23424,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "notes",
+            "music",
+            "instruments"
+        ]
     },
     {
         "name": "Wah Beatbox",
@@ -2912,7 +3779,12 @@
         "sampleCount": 6624,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Wand",
@@ -2927,12 +3799,13 @@
     },
     {
         "name": "Water Drop",
-        "md5": "e133e625fd367d269e76964d4b722fc2.wav",
-        "sampleCount": 15131,
+        "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
+        "sampleCount": 8136,
         "rate": 22050,
         "format": "adpcm",
         "tags": [
-            "effects"
+            "effects",
+            "home"
         ]
     },
     {
@@ -2976,7 +3849,11 @@
         "sampleCount": 54400,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "space"
+        ]
     },
     {
         "name": "Win",
@@ -3008,7 +3885,10 @@
         "sampleCount": 43008,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "animals",
+            "dramatic"
+        ]
     },
     {
         "name": "Wood Tap",
@@ -3026,7 +3906,12 @@
         "sampleCount": 7392,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion",
+            "music",
+            "hiphop"
+        ]
     },
     {
         "name": "Xylo1",
@@ -3034,7 +3919,10 @@
         "sampleCount": 238232,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Xylo2",
@@ -3042,7 +3930,10 @@
         "sampleCount": 246552,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Xylo3",
@@ -3050,7 +3941,10 @@
         "sampleCount": 208832,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Xylo4",
@@ -3058,7 +3952,10 @@
         "sampleCount": 77184,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "loops"
+        ]
     },
     {
         "name": "Ya",
@@ -3066,7 +3963,10 @@
         "sampleCount": 5691,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "voice",
+            "hiphop"
+        ]
     },
     {
         "name": "Zip",
@@ -3085,6 +3985,10 @@
         "sampleCount": 2764,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic",
+            "space"
+        ]
     }
 ]

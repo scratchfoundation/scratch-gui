@@ -2,9 +2,9 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 // Intro
-import libraryIntro from './Intro/intro-move-change-color.gif';
-import stepMoveChangeColor from './Intro/intro-move-change-color.gif';
-
+import libraryIntro from './Intro/lib-getting-started.gif';
+import stepMove from './Intro/IntroSayHello.gif';
+import stepMoveSayHello from './Intro/IntroSayHello-hat.gif';
 
 // Spin around
 import librarySpin from './spin/library-spin.gif';
@@ -16,11 +16,11 @@ import stepClickForever from './spin/click-forever.gif';
 import stepChangeColor from './spin/change-color.gif';
 
 // Say hello
-import librarySay from './say/intro-say-hello.gif';
+import librarySay from './say/cover-say-hello.gif';
 import stepSayHello from './say/intro-say-hello.gif';
 
 // Add sprite
-import libraryAddSprite from './sprite/intro-choose-sprite.gif';
+import libraryAddSprite from './sprite/cover-add-sprite.jpg';
 import stepAddSprite from './sprite/intro-choose-sprite.gif';
 
 // Clicker
@@ -33,16 +33,22 @@ import stepClickSprite from './clicker/click-sprite.gif';
 import stepAddSound from './clicker/add-sound.gif';
 
 // Animate a name
-import libraryAnimate from './animate/animate-name-change-color.gif';
+import libraryAnimate from './animate/cover-color-click.gif';
 import stepAnimateChangeColor from './animate/animate-name-change-color.gif';
 import stepAnimateGrow from './animate/animate-name-grow.gif';
 import stepAnimateSpin from './animate/animate-name-spin.gif';
 
 // Make-Music
-import libraryMakeMusic from './Make-Music/make-music-beatbox.gif';
+import libraryMakeMusic from './Make-Music/cover-mic.jpg';
 import stepMakeSong from './Make-Music/make-music-make-song.gif';
 import stepMakeBeat from './Make-Music/make-music-make-beat.gif';
 import stepMakeBeatbox from './Make-Music/make-music-beatbox.gif';
+
+// Make-A-Game
+import libraryMakeAGame from './Game/popping-library.gif';
+import stepRandom from './Game/game-random-position.gif';
+import stepGameChangeColor from './Game/game-change-color.gif';
+import stepResetScore from './Game/game-reset-score.gif';
 
 // Videos
 import glideAroundThumb from './videos/glide-around.jpg';
@@ -56,12 +62,12 @@ import spinThumb from './videos/spin.jpg';
 
 export default {
 
-  'intro-move-changecolor': {
+  'intro-move-sayhello': {
       name: (
           <FormattedMessage
               defaultMessage="Getting Started"
               description="Name for the 'Getting Started' how-to"
-              id="gui.howtos.intro-move-changecolor.name"
+              id="gui.howtos.intro-move-sayhello-hat.name"
           />
       ),
       img: libraryIntro,
@@ -69,51 +75,36 @@ export default {
           {
               title: (
                   <FormattedMessage
-                      defaultMessage="Getting Started"
-                      description="Step name for 'Getting Started' step"
-                      id="gui.howtos.intro-move-changecolor.step_movechangecolor"
+                      defaultMessage="Add a Move Block and a Say Block"
+                      description="Step name for 'Add a Move Block' step"
+                      id="gui.howtos.intro-move.step_stepMove"
                   />
               ),
-              image: stepMoveChangeColor
+              image: stepMove
           },  {
+              title: (
+                  <FormattedMessage
+                      defaultMessage="Add Green Flag Block, then click the flag"
+                      description="Step name for 'Add A Say Block' step"
+                      id="gui.howtos.add-a-move-block.step_stepMoveSayHello"
+                  />
+              ),
+              image: stepMoveSayHello
+          }, {
+
+
+
+
               deckIds: [
-                  'say-hello',
+                  'add-sprite',
                   'animate-a-name',
-                  'add-sprite'
+                  'Make-A-Game'
               ]
           }
       ]
   },
 
-  'say-hello': {
-      name: (
-          <FormattedMessage
-              defaultMessage="Say hello"
-              description="Name for the 'Say hello' how-to"
-              id="gui.howtos.say-hello.name"
-          />
-      ),
-      img: librarySay,
-      steps: [
-          {
-              title: (
-                  <FormattedMessage
-                      defaultMessage="Say Hello"
-                      description="Step name for 'Add a new sprite' step"
-                      id="gui.howtos.say-hello.step_addSprite"
-                  />
-              ),
-              image: stepSayHello
-          },
-          {
-                       deckIds: [
-                           'add-a-backdrop',
-                           'switch-costume',
-                           'change-size'
-                       ]
-                   }
-               ]
-           },
+
 
      'add-sprite': {
          name: (
@@ -145,154 +136,6 @@ export default {
                   ]
               },
 
-
-    'spin-around': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Spin around"
-                description="Name for the 'Spin around' how-to"
-                id="gui.howtos.spin-around.name"
-            />
-        ),
-        img: librarySpin,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Drag out a “turn” block"
-                        description="Step name for 'Drag out a “turn” block' step"
-                        id="gui.howtos.spin.step_dragTurn"
-                    />
-                ),
-                image: stepDragTurn
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the block to run it"
-                        description="Step name for 'Click the block to run it' step"
-                        id="gui.howtos.spin.step_clickTurn"
-                    />
-                ),
-                image: stepClickTurn
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the “Control” category"
-                        description="Step name for 'Click the “Control” category' step"
-                        id="gui.howtos.spin.step_clickControl"
-                    />
-                ),
-                image: stepClickControl
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Drag out a “forever” block"
-                        description="Step name for 'Drag out a “forever” block' step"
-                        id="gui.howtos.spin.step_dragForever"
-                    />
-                ),
-                image: stepDragForever
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the stack to run it"
-                        description="Step name for 'Click the stack to run it' step"
-                        id="gui.howtos.spin.step_clickForever"
-                    />
-                ),
-                image: stepClickForever
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a “change color effect” block"
-                        description="Step name for 'Add a “change color effect” block' step"
-                        id="gui.howtos.spin.step_changeColor"
-                    />
-                ),
-                image: stepChangeColor
-            }, {
-                deckIds: [
-                    'add-a-backdrop',
-                    'switch-costume',
-                    'change-size'
-                ]
-            }
-        ]
-    },
-
-    'run-away': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Run away"
-                description="Name for the 'Run away' how-to"
-                id="gui.howtos.run-away.name"
-            />
-        ),
-        img: libraryClicker,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Drag out a “go to random position” block"
-                        description="Step name for 'Drag out a “go to random position” block' step"
-                        id="gui.howtos.run-away.step_dragGoTo"
-                    />
-                ),
-                image: stepDragGoTo
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the block to run it"
-                        description="Step name for 'Click the block to run it' step"
-                        id="gui.howtos.run-away.step_clickGoTo"
-                    />
-                ),
-                image: stepClickGoTo
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the “Events” category"
-                        description="Step 3 title"
-                        id="gui.howtos.run-away.step3"
-                    />
-                ),
-                image: stepClickEvents
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a “when this sprite clicked” block"
-                        description="Step name for 'Add a “when this sprite clicked” block' step"
-                        id="gui.howtos.run-away.step_addWhenClicked"
-                    />
-                ),
-                image: stepAddWhenClicked
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the sprite to run it"
-                        description="Step name for 'Click the sprite to run it' step"
-                        id="gui.howtos.run-away.step_clickSprite"
-                    />
-                ),
-                image: stepClickSprite
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a “start sound” block"
-                        description="Step name for 'Add a “start sound” block' step"
-                        id="gui.howtos.run-away.step_addSound"
-                    />
-                ),
-                image: stepAddSound
-            }, {
-                deckIds: [
-                    'add-a-backdrop',
-                    'switch-costume',
-                    'change-size'
-                ]
-            }
-        ]
-    },
     'animate-a-name': {
         name: (
             <FormattedMessage
@@ -389,6 +232,89 @@ export default {
             }
         ]
     },
+
+    'Make-A-Game': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Make A Game"
+                description="Name for the 'Make A Game' how-to"
+                id="gui.howtos.make-a-game.name"
+            />
+        ),
+        img: libraryMakeAGame,
+        steps: [{
+            video: 'https://www.youtube.com/embed/IPCaZ5kmFTA'
+        },
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Go to a random position"
+                        description="Step name for 'Go to a random position' step"
+                        id="gui.howtos.Make-A-Game.step_RandomPosition"
+                    />
+                ),
+                image: stepRandom
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Change Color"
+                        description="Step name for 'Change Color' step"
+                        id="gui.howtos.make-a-game.step_ChangeColor"
+                    />
+                ),
+                image: stepGameChangeColor
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Reset Score"
+                        description="Step name for 'Reset Score' step"
+                        id="gui.howtos.make-music.step_ResetScore"
+                    />
+                ),
+                image: stepResetScore
+            },  {
+                deckIds: [
+                    'add-a-backdrop',
+                    'add-effects',
+                    'move-around-with-arrow-keys'
+                ]
+            }
+        ]
+    },
+
+
+    'say-hello': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Say hello"
+                description="Name for the 'Say hello' how-to"
+                id="gui.howtos.say-hello.name"
+            />
+        ),
+        img: librarySay,
+        steps: [
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Say Hello"
+                        description="Step name for 'Add a new sprite' step"
+                        id="gui.howtos.say-hello.step_addSprite"
+                    />
+                ),
+                image: stepSayHello
+            },
+            {
+                         deckIds: [
+                             'add-a-backdrop',
+                             'switch-costume',
+                             'change-size'
+                         ]
+                     }
+                 ]
+             },
+
+
+
     'glide-around': {
         name: (
             <FormattedMessage
@@ -504,7 +430,7 @@ export default {
         }]
     },
     'move-around-with-arrow-keys': {
-        name: 'Move Using Arrow Keys',
+        name: 'Move With Arrow Keys',
         img: moveArrowKeysThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/7DUA_Yl0B_M'

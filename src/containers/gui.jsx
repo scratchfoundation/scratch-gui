@@ -5,7 +5,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 
-import ErrorBoundary from './error-boundary.jsx';
+import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
 import {
     activateTab,
@@ -75,15 +75,13 @@ class GUI extends React.Component {
             ...componentProps
         } = this.props;
         return (
-            <ErrorBoundary action="Top Level App">
-                <GUIComponent
-                    loading={fetchingProject || this.state.loading || loadingStateVisible}
-                    vm={vm}
-                    {...componentProps}
-                >
-                    {children}
-                </GUIComponent>
-            </ErrorBoundary>
+            <GUIComponent
+                loading={fetchingProject || this.state.loading || loadingStateVisible}
+                vm={vm}
+                {...componentProps}
+            >
+                {children}
+            </GUIComponent>
         );
     }
 }
@@ -129,7 +127,9 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-const WrappedGui = ProjectLoaderHOC(vmListenerHOC(ConnectedGUI));
+const WrappedGui = ErrorBoundaryHOC('Top Level App')(
+    ProjectLoaderHOC(vmListenerHOC(ConnectedGUI))
+);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;
 export default WrappedGui;

@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 205:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 206:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(205);
+var content = __webpack_require__(204);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 649:
+/***/ 650:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(648);
+__webpack_require__(649);
 
 var _react = __webpack_require__(0);
 
@@ -78,7 +78,7 @@ var _appStateHoc = __webpack_require__(57);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(206);
+var _index = __webpack_require__(205);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -105,5 +105,5 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackVi
 
 /***/ })
 
-},[[649,0]]]);
+},[[650,0]]]);
 //# sourceMappingURL=gui.js.map

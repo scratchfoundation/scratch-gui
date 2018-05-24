@@ -2885,7 +2885,9 @@
         "sampleCount": 258,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Pop2",

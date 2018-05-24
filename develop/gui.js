@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 652:
+/***/ 649:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(651);
+__webpack_require__(648);
 
 var _react = __webpack_require__(0);
 
@@ -105,5 +105,5 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackVi
 
 /***/ })
 
-},[[652,0]]]);
+},[[649,0]]]);
 //# sourceMappingURL=gui.js.map

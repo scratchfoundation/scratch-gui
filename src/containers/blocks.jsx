@@ -125,6 +125,8 @@ class Blocks extends React.Component {
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
+            // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
+            this.workspace.toolboxRefreshEnabled_ = true;
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);

@@ -37,8 +37,9 @@ describe('SpriteSelectorItem Container', () => {
 
     beforeEach(() => {
         store = mockStore({scratchGui: {
-            hoveredTarget: {receivedBlocks: false, sprite: null}}
-        });
+            hoveredTarget: {receivedBlocks: false, sprite: null},
+            assetDrag: {dragging: false}
+        }});
         className = 'ponies';
         costumeURL = 'https://scratch.mit.edu/foo/bar/pony';
         id = 1337;

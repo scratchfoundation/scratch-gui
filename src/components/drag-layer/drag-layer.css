@@ -1,0 +1,28 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.drag-layer {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000; /* Above everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.image-wrapper {
+    /* Absolute allows wrapper to snuggly fit image */
+    position: absolute;
+}
+
+.image {
+    max-width: 80px;
+
+    /* Center the dragging image on the given position */
+    margin-left: -50%;
+    margin-top: -50%;
+
+    /* Use the same drop shadow as stage dragging */
+    filter: drop-shadow(5px 5px 5px $ui-black-transparent);
+}

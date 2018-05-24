@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 649:
+/***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(648);
+__webpack_require__(651);
 
 var _react = __webpack_require__(0);
 
@@ -66,7 +66,7 @@ var _analytics = __webpack_require__(22);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(71);
+var _gui = __webpack_require__(72);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -101,9 +101,9 @@ document.body.appendChild(appTarget);
 _gui2.default.setAppElement(appTarget);
 var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
-_reactDom2.default.render(_react2.default.createElement(WrappedGui, null), appTarget);
+_reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackVisible: true }), appTarget);
 
 /***/ })
 
-},[[649,0]]]);
+},[[652,0]]]);
 //# sourceMappingURL=gui.js.map

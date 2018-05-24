@@ -17,7 +17,7 @@ var _reactDom = __webpack_require__(21);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _gui = __webpack_require__(71);
+var _gui = __webpack_require__(72);
 
 var _gui2 = _interopRequireDefault(_gui);
 

@@ -1,13 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[2],{
 
-/***/ 202:
+/***/ 200:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -15,31 +13,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(20);
+var _reactDom = __webpack_require__(21);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(11);
-
-var _controls = __webpack_require__(90);
-
-var _controls2 = _interopRequireDefault(_controls);
-
-var _stage = __webpack_require__(126);
-
-var _stage2 = _interopRequireDefault(_stage);
-
-var _box = __webpack_require__(12);
-
-var _box2 = _interopRequireDefault(_box);
-
-var _gui = __webpack_require__(67);
+var _gui = __webpack_require__(72);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(56);
+var _hashParserHoc = __webpack_require__(58);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
+
+var _appStateHoc = __webpack_require__(57);
+
+var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49,12 +37,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var mapStateToProps = function mapStateToProps(state) {
-    return { vm: state.vm };
-};
-
-var VMStage = (0, _reactRedux.connect)(mapStateToProps)(_stage2.default);
-var VMControls = (0, _reactRedux.connect)(mapStateToProps)(_controls2.default);
+var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
 var DEFAULT_PROJECT_ID = '10015059';
 
@@ -95,31 +78,13 @@ var Player = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var width = 480;
-            var height = 360;
             return _react2.default.createElement(
                 'div',
                 { style: { display: 'flex' } },
-                _react2.default.createElement(
-                    _gui2.default,
-                    _extends({}, this.props, {
-                        width: width
-                    }),
-                    _react2.default.createElement(
-                        _box2.default,
-                        { height: 40 },
-                        _react2.default.createElement(VMControls, {
-                            style: {
-                                marginRight: 10,
-                                height: 40
-                            }
-                        })
-                    ),
-                    _react2.default.createElement(VMStage, {
-                        height: height,
-                        width: width
-                    })
-                ),
+                _react2.default.createElement(WrappedGui, {
+                    isPlayerOnly: true,
+                    isFullScreen: false
+                }),
                 _react2.default.createElement('iframe', {
                     allowFullScreen: true,
                     allowTransparency: true,
@@ -135,14 +100,12 @@ var Player = function (_React$Component) {
     return Player;
 }(_react2.default.Component);
 
-var App = (0, _hashParserHoc2.default)(Player);
-
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
+_reactDom2.default.render(_react2.default.createElement(Player, null), appTarget);
 
 /***/ })
 
-},[[202,0]]]);
+},[[200,0]]]);
 //# sourceMappingURL=compatibilitytesting.js.map

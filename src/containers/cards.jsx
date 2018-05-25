@@ -17,13 +17,13 @@ import {
 import CardsComponent from '../components/cards/cards.jsx';
 
 const mapStateToProps = state => ({
-    visible: state.cards.visible,
-    content: state.cards.content,
-    activeDeckId: state.cards.activeDeckId,
-    step: state.cards.step,
-    x: state.cards.x,
-    y: state.cards.y,
-    dragging: state.cards.dragging
+    visible: state.scratchGui.cards.visible,
+    content: state.scratchGui.cards.content,
+    activeDeckId: state.scratchGui.cards.activeDeckId,
+    step: state.scratchGui.cards.step,
+    x: state.scratchGui.cards.x,
+    y: state.scratchGui.cards.y,
+    dragging: state.scratchGui.cards.dragging
 });
 
 const mapDispatchToProps = dispatch => ({

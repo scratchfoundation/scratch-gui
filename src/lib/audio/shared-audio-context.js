@@ -1,8 +1,8 @@
 import StartAudioContext from 'startaudiocontext';
-import platform from 'platform';
+import bowser from 'bowser';
 
 let AUDIO_CONTEXT;
-if (platform.name !== 'IE') {
+if (!bowser.msie) {
     AUDIO_CONTEXT = new (window.AudioContext || window.webkitAudioContext)();
 
     StartAudioContext(AUDIO_CONTEXT);

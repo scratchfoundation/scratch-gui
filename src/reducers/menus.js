@@ -35,13 +35,14 @@ const closeMenu = menu => ({
 });
 const openFileMenu = () => openMenu(MENU_FILE);
 const closeFileMenu = () => closeMenu(MENU_FILE);
-const fileMenuOpen = state => state.menus[MENU_FILE];
+const fileMenuOpen = state => state.scratchGui.menus[MENU_FILE];
 const openEditMenu = () => openMenu(MENU_EDIT);
 const closeEditMenu = () => closeMenu(MENU_EDIT);
-const editMenuOpen = state => state.menus[MENU_EDIT];
+const editMenuOpen = state => state.scratchGui.menus[MENU_EDIT];
 
 export {
     reducer as default,
+    initialState as menuInitialState,
     openFileMenu,
     closeFileMenu,
     openEditMenu,

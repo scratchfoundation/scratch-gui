@@ -25,5 +25,6 @@ const updateMonitors = function (monitors) {
 
 export {
     reducer as default,
+    initialState as monitorsInitialState,
     updateMonitors
 };

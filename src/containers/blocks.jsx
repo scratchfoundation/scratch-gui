@@ -96,10 +96,16 @@ class Blocks extends React.Component {
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
-            this.props.locale !== nextProps.locale
+            this.props.locale !== nextProps.locale ||
+            this.props.anyModalVisible !== nextProps.anyModalVisible
         );
     }
     componentDidUpdate (prevProps) {
+        // If any modals are open, call hideChaff to close z-indexed field editors
+        if (this.props.anyModalVisible && !prevProps.anyModalVisible) {
+            this.ScratchBlocks.hideChaff();
+        }
+
         if (prevProps.locale !== this.props.locale) {
             this.props.vm.setLocale(this.props.locale, this.props.messages);
         }
@@ -119,6 +125,8 @@ class Blocks extends React.Component {
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
             this.props.vm.refreshWorkspace();
+            // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
+            this.workspace.toolboxRefreshEnabled_ = true;
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);
@@ -317,6 +325,7 @@ class Blocks extends React.Component {
     render () {
         /* eslint-disable no-unused-vars */
         const {
+            anyModalVisible,
             customProceduresVisible,
             extensionLibraryVisible,
             options,
@@ -368,6 +377,7 @@ class Blocks extends React.Component {
 }
 
 Blocks.propTypes = {
+    anyModalVisible: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isVisible: PropTypes.bool,
@@ -437,11 +447,15 @@ Blocks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    extensionLibraryVisible: state.modals.extensionLibrary,
+    anyModalVisible: (
+        Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]) ||
+        state.scratchGui.mode.isFullScreen
+    ),
+    extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     locale: state.intl.locale,
     messages: state.intl.messages,
-    toolboxXML: state.toolbox.toolboxXML,
-    customProceduresVisible: state.customProcedures.active
+    toolboxXML: state.scratchGui.toolbox.toolboxXML,
+    customProceduresVisible: state.scratchGui.customProcedures.active
 });
 
 const mapDispatchToProps = dispatch => ({

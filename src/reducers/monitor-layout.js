@@ -307,6 +307,7 @@ const removeMonitorRect = function (monitorId) {
 
 export {
     reducer as default,
+    initialState as monitorLayoutInitialState,
     addMonitorRect,
     getInitialPosition,
     moveMonitorRect,

@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 
+import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
 import {
     activateTab,
@@ -13,7 +14,6 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
-import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -23,12 +23,13 @@ class GUI extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: !props.vm.initialized,
             loadingError: false,
             errorMessage: ''
         };
     }
     componentDidMount () {
+        if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
         this.props.vm.loadProject(this.props.projectData)
@@ -43,6 +44,7 @@ class GUI extends React.Component {
                 // error page gets rendered if project failed to load
                 this.setState({loadingError: true, errorMessage: e});
             });
+        this.props.vm.initialized = true;
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
@@ -97,16 +99,20 @@ GUI.propTypes = {
 GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
-    activeTabIndex: state.editorTab.activeTabIndex,
-    blocksTabVisible: state.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
-    cardsVisible: state.cards.visible,
-    costumesTabVisible: state.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
-    importInfoVisible: state.modals.importInfo,
-    loadingStateVisible: state.modals.loadingProject,
-    previewInfoVisible: state.modals.previewInfo,
-    targetIsStage: state.targets.stage && state.targets.stage.id === state.targets.editingTarget,
-    soundsTabVisible: state.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
-    tipsLibraryVisible: state.modals.tipsLibrary
+    activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+    blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+    cardsVisible: state.scratchGui.cards.visible,
+    costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
+    importInfoVisible: state.scratchGui.modals.importInfo,
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    loadingStateVisible: state.scratchGui.modals.loadingProject,
+    previewInfoVisible: state.scratchGui.modals.previewInfo,
+    targetIsStage: (
+        state.scratchGui.targets.stage &&
+        state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
+    ),
+    soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+    tipsLibraryVisible: state.scratchGui.modals.tipsLibrary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -121,7 +127,9 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-const WrappedGui = ProjectLoaderHOC(AppStateHOC(vmListenerHOC(ConnectedGUI)));
+const WrappedGui = ErrorBoundaryHOC('Top Level App')(
+    ProjectLoaderHOC(vmListenerHOC(ConnectedGUI))
+);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;
 export default WrappedGui;

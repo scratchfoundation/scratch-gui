@@ -300,7 +300,13 @@
         "name": "Bananas",
         "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "food",
+            "yellow",
+            "mushy",
+            "potassium",
+            "fruit"
+        ],
         "info": [
             36,
             37,
@@ -803,7 +809,7 @@
         ]
     },
     {
-        "name": "Butterfly1-b ",
+        "name": "Butterfly1-b",
         "md5": "55dd0671a359d7c35f7b78f4176660e8.svg",
         "type": "costume",
         "tags": [],
@@ -814,7 +820,7 @@
         ]
     },
     {
-        "name": "Butterfly2 ",
+        "name": "Butterfly2",
         "md5": "a0216895beade6afc6d42bd5bb43faea.svg",
         "type": "costume",
         "tags": [],
@@ -825,7 +831,7 @@
         ]
     },
     {
-        "name": "Butterfly3 ",
+        "name": "Butterfly3",
         "md5": "8907a43cf08b0a9134969023be2074c5.svg",
         "type": "costume",
         "tags": [],
@@ -1035,12 +1041,12 @@
     },
     {
         "name": "Cat2",
-        "md5": "01ae57fd339529445cb890978ef8a054.svg",
+        "md5": "3696356a03a8d938318876a593572843.svg",
         "type": "costume",
         "tags": [],
         "info": [
-            87,
-            39,
+            47,
+            55,
             1
         ]
     },
@@ -1785,7 +1791,12 @@
         "name": "Dragon1-a",
         "md5": "ee0082b436d6d5dc3de33047166e7bf2.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "reptile",
+            "flying",
+            "fire"
+        ],
         "info": [
             65,
             60,
@@ -1796,7 +1807,12 @@
         "name": "Dragon1-b",
         "md5": "bb58ce36997fa205a86a085f202837fd.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "fantasy",
+            "reptile",
+            "flying",
+            "fire"
+        ],
         "info": [
             84,
             56,
@@ -1991,7 +2007,7 @@
         ]
     },
     {
-        "name": "Elephant-a ",
+        "name": "Elephant-a",
         "md5": "b3515b3805938b0fae4e527aa0b4524e.svg",
         "type": "costume",
         "tags": [],
@@ -2002,7 +2018,7 @@
         ]
     },
     {
-        "name": "Elephant-b ",
+        "name": "Elephant-b",
         "md5": "bce91fa266220d3679a4c19c4e38b1f7.svg",
         "type": "costume",
         "tags": [],
@@ -4510,17 +4526,6 @@
         ]
     },
     {
-        "name": "Shark-a ",
-        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
         "name": "Shark-b",
         "md5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
         "type": "costume",
@@ -4532,18 +4537,7 @@
         ]
     },
     {
-        "name": "Shark-b ",
-        "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Shark-c ",
+        "name": "Shark-c",
         "md5": "afeae3f998598424f7c50918507f6ce6.svg",
         "type": "costume",
         "tags": [],
@@ -6519,6 +6513,864 @@
         "info": [
             12,
             18,
+            1
+        ]
+    },
+    {
+        "name": "story-A-1",
+        "md5": "5406b37278d819d4787a588b9c91f68e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            23,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-A-2",
+        "md5": "f277943adf8d79b41b9b568321a786ee.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            23,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-A-3",
+        "md5": "cc0cc7ae3240eab7d040e148cc663325.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-B-1",
+        "md5": "2a8fac3c82d95f13203843a597b5757b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-B-2",
+        "md5": "07fa4ebc421d84743b6ced189dd2f9cf.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            19,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-B-3",
+        "md5": "6c9a9203155f93f24f31b30e3bd76b6d.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            18,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-C-1",
+        "md5": "144845715016910e88e2a223ed4d3df1.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-C-2",
+        "md5": "1045c56c4be3d8d0650579864417fbc7.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-C-3",
+        "md5": "c8fd35294d17a369fecb6d6e4725d04a.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-D-1",
+        "md5": "dfd362f2da975c20aa7849a8fa2fb4df.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-D-2",
+        "md5": "3e4cc4cff08bb42bc690eff66dffbbe9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-D-3",
+        "md5": "bd7f984fe82d9d0fdcff0a87b3c0f9e0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-E-1",
+        "md5": "56473bacbdf6f0dbca1afb04e5aebaf7.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-E-2",
+        "md5": "8bba14966fe35f0dccb66ef06a9843ca.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-E-3",
+        "md5": "e8cfc63375f6d6c2a580823489427f38.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            18,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-F-1",
+        "md5": "5844ff29fc8663c8613f12169d2f07ef.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            18,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-F-2",
+        "md5": "0dbe4a064abea1a9a3bc0d2732643e6b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            18,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-F-3",
+        "md5": "3db373f4482e391e66d1b06335a96144.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            16,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-G-1",
+        "md5": "ee6454d15fbbe93e908a2ebbfad483a0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            23,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-G-2",
+        "md5": "991023d303f79ce092f070392ffbd69f.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            23,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-G-3",
+        "md5": "38f22c0d8dbe541bde409ba1f241d4c1.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            21,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-H-1",
+        "md5": "2a0e1308d6cb806818af696a89b21863.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-H-2",
+        "md5": "ca33be5270308a695c9b88af73f590dc.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-H-3",
+        "md5": "668ba2b891f82ce78d8590f0287632b1.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-I-1",
+        "md5": "705297637ea83af5b94b6fe2e34aeef4.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            9,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-I-2",
+        "md5": "7b3ae96764795727fa1cb0be68a9ca5e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            9,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-I-3",
+        "md5": "3475aa570304accb7e6dbd2516234135.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            7,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-J-1",
+        "md5": "ac2e7eaecb80c5501e5e56802d03af00.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            14,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-J-2",
+        "md5": "0ab9a94fc2e32160efc113a8e5ffb984.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            14,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-J-3",
+        "md5": "c9356a022cfbc25be6c484e9781e4637.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            12,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-K-1",
+        "md5": "62dcc92dc3c6cb0271244190320c4f71.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-K-2",
+        "md5": "ef02339e8a0382367f0b5a414915b885.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-K-3",
+        "md5": "07977708617d12381b22d1ee0f4926a3.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            21,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-L-1",
+        "md5": "7ce306e9c9c0dd0a24279606301f1d05.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            19,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-L-2",
+        "md5": "067c21a9b2f91ed33e07131ce5a59210.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            19,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-L-3",
+        "md5": "488d66f17c0089a7796d44cfc70792e8.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            17,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-M-1",
+        "md5": "b27f166f9ab4a3fb93a50a77c58c3df3.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            30,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-M-2",
+        "md5": "55f00a23d0f5cc57be9533f126a7ac8c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            30,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-M-3",
+        "md5": "613df2bd97784a239ab992f7a95458a0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            27,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-N-1",
+        "md5": "293589fd5bbc358a20c165ab49c19833.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            26,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-N-2",
+        "md5": "5e07ee61cb20bc575720774584dfec53.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            26,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-N-3",
+        "md5": "435697335345f946d943c1d89fdb459a.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-O-1",
+        "md5": "088beed7ce0dff554da06f54d0558bc0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-O-2",
+        "md5": "e8fa671bb1ca53c044bfb27225321c25.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-O-3",
+        "md5": "a132bf3d4084ef8ca9e0797f64c0f082.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-P-1",
+        "md5": "ad4a101b83f28ced16849be3e393caa9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-P-2",
+        "md5": "781c42f9da36bbc0ee3775f18ac98124.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-P-3",
+        "md5": "bcaec7c778920d8d74c275c1aff634fe.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            17,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-Q-1",
+        "md5": "484e44f908e84d795c87cf994364e722.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            30,
+            1
+        ]
+    },
+    {
+        "name": "story-Q-2",
+        "md5": "31f28be74dc7de42a5c4a38504d666ca.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            30,
+            1
+        ]
+    },
+    {
+        "name": "story-Q-3",
+        "md5": "aef19097378515308e934a79f147032e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            29,
+            1
+        ]
+    },
+    {
+        "name": "story-R-1",
+        "md5": "55999cb6783ef8351d841294d75af942.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-R-2",
+        "md5": "926f8ff770cb15b42b12f209fd02d98c.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-R-3",
+        "md5": "a66d8f0ba6d40c624873edc8df58c014.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-S-1",
+        "md5": "fca1555f335392f1c4ef620bf098c0de.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            16,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-S-2",
+        "md5": "c529ed7b40f4a949539f8f454e3fe475.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            16,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-S-3",
+        "md5": "e96388c9197733bdadbad3ce014c0e59.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            14,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-T-1",
+        "md5": "d3b342c795a620b69639c02a419e8535.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            27,
+            1
+        ]
+    },
+    {
+        "name": "story-T-2",
+        "md5": "eeb0fd25c9273747ac38766d1959ba2b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            27,
+            1
+        ]
+    },
+    {
+        "name": "story-T-3",
+        "md5": "a9683d4946b08a76864a51bd21d811cb.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-U-1",
+        "md5": "fcf99b6e8aeb2d504e1e9b2194640916.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-U-2",
+        "md5": "f442802f17225d6506ac9718810f179e.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            24,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-U-3",
+        "md5": "0779f03a6589c60352b1d4806a4a61c0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            21,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-V-1",
+        "md5": "750b47f1de2143f76354239b27e1e5f0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-V-2",
+        "md5": "03de7add77e31799ca568a9c671012b4.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            25,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-V-3",
+        "md5": "29befe20b105b69471f5507d025ec3e0.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "story-W-1",
+        "md5": "7d9d4c0da9bd1a3ddf253d1bea26f4e9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            37,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-W-2",
+        "md5": "c0f48eb69cae4a611d3e7b7e06b0d1c1.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            37,
+            25,
+            1
+        ]
+    },
+    {
+        "name": "story-W-3",
+        "md5": "d1c922c9e9d53d2f6f36ca637e85de6b.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            34,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-X-1",
+        "md5": "92c452555b3d5a4993f107810043ea03.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-X-2",
+        "md5": "f688425da41c2b7f80d4b8752de69bc9.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-X-3",
+        "md5": "ec90479a0ce3c7706f1916daef0f3c67.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-Y-1",
+        "md5": "b3c252450d413fc75be0eafdbe4490dc.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            27,
+            1
+        ]
+    },
+    {
+        "name": "story-Y-2",
+        "md5": "1cfa161ae5d60ea163e4e0aa34d08f02.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            22,
+            27,
+            1
+        ]
+    },
+    {
+        "name": "story-Y-3",
+        "md5": "a1fc3c0fa304255364c0f98547e0e448.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            20,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "story-Z-1",
+        "md5": "86326c9180c485b557a075f4794939d7.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            19,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-Z-2",
+        "md5": "e10b203e47bbb41edab78be59e628449.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            19,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "story-Z-3",
+        "md5": "0788df7b1d9cf02dfdebc021d4f30ce4.svg",
+        "type": "costume",
+        "tags": [],
+        "info": [
+            17,
+            23,
             1
         ]
     }

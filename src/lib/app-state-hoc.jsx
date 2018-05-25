@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, compose} from 'redux';
-import throttle from 'redux-throttle';
+import {createStore, combineReducers, compose} from 'redux';
 
 import {intlShape} from 'react-intl';
 import {IntlProvider, updateIntl} from 'react-intl-redux';
-import {intlInitialState} from '../reducers/intl.js';
-import {initialState as modeInitialState, setPlayer, setFullScreen} from '../reducers/mode.js';
-import reducer from '../reducers/gui';
-import ErrorBoundary from '../containers/error-boundary.jsx';
+import intlReducer from '../reducers/intl.js';
+
+import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initPlayer} from '../reducers/gui';
+
+import {setPlayer, setFullScreen} from '../reducers/mode.js';
+
+import {ScratchPaintReducer} from 'scratch-paint';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(
-    applyMiddleware(
-        throttle(300, {leading: true, trailing: true})
-    )
-);
+const enhancer = composeEnhancers(guiMiddleware);
 
 /*
  * Higher Order Component to provide redux state. If an `intl` prop is provided
@@ -28,32 +26,22 @@ const AppStateHOC = function (WrappedComponent) {
     class AppStateWrapper extends React.Component {
         constructor (props) {
             super(props);
-            let intl = {};
-            let mode = {};
-            if (props.intl) {
-                intl = {
-                    defaultLocale: 'en',
-                    locale: props.intl.locale,
-                    messages: props.intl.messages
-                };
-            } else {
-                intl = intlInitialState.intl;
+            let initializedGui = guiInitialState;
+            if (props.isFullScreen) {
+                initializedGui = initFullScreen(initializedGui);
             }
-            if (props.isPlayerOnly || props.isFullScreen) {
-                mode = {
-                    isFullScreen: props.isFullScreen || false,
-                    isPlayerOnly: props.isPlayerOnly || false
-                };
-            } else {
-                mode = modeInitialState;
+            if (props.isPlayerOnly) {
+                initializedGui = initPlayer(initializedGui);
             }
+            const reducer = combineReducers({
+                intl: intlReducer,
+                scratchGui: guiReducer,
+                scratchPaint: ScratchPaintReducer
+            });
 
             this.store = createStore(
                 reducer,
-                {
-                    intl: intl,
-                    mode: mode
-                },
+                {scratchGui: initializedGui},
                 enhancer);
         }
         componentDidUpdate (prevProps) {
@@ -68,12 +56,16 @@ const AppStateHOC = function (WrappedComponent) {
             }
         }
         render () {
+            const {
+                intl, // eslint-disable-line no-unused-vars
+                isFullScreen, // eslint-disable-line no-unused-vars
+                isPlayerOnly, // eslint-disable-line no-unused-vars
+                ...componentProps
+            } = this.props;
             return (
                 <Provider store={this.store}>
                     <IntlProvider>
-                        <ErrorBoundary action="Top Level App">
-                            <WrappedComponent {...this.props} />
-                        </ErrorBoundary>
+                        <WrappedComponent {...componentProps} />
                     </IntlProvider>
                 </Provider>
             );

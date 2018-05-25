@@ -66,7 +66,7 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         editingTarget,
         sprites,
         stage
-    } = state.targets;
+    } = state.scratchGui.targets;
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
     const costume = target && target.costumes[selectedCostumeIndex];
     return {
@@ -75,7 +75,7 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         rotationCenterY: costume && costume.rotationCenterY,
         imageFormat: costume && costume.dataFormat,
         imageId: editingTarget && `${editingTarget}${costume.skinId}`,
-        vm: state.vm
+        vm: state.scratchGui.vm
     };
 };
 

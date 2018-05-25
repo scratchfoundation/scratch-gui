@@ -43,6 +43,7 @@ const setReceivedBlocks = function (receivedBlocks) {
 
 export {
     reducer as default,
+    initialState as hoveredTargetInitialState,
     setHoveredSprite,
     setReceivedBlocks
 };

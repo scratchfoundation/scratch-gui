@@ -69,7 +69,7 @@ ProjectSaver.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    vm: state.vm
+    vm: state.scratchGui.vm
 });
 
 export default connect(

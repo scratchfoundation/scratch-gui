@@ -10,6 +10,7 @@ const {
     getDriver,
     getLogs,
     loadUri,
+    rightClickText,
     scope
 } = new SeleniumHelper();
 
@@ -80,6 +81,45 @@ describe('Working with the blocks', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('score', scope.blocksTab);
         await findByText('0', scope.reportedValue); // Tooltip with result
+
+        // And there should be a monitor visible
+        await rightClickText('score', scope.monitors);
+        await clickText('slider');
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Creating a list', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="tryit"]');
+        await clickText('Code');
+        await clickText('Variables', scope.blocksTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+
+        await clickText('Make a List');
+        let el = await findByXpath("//input[@placeholder='']");
+        await el.sendKeys('list1');
+        await clickButton('OK');
+
+        // Click the "add <thing> to list" block 3 times
+        await clickText('add', scope.blocksTab);
+        await clickText('add', scope.blocksTab);
+        await clickText('add', scope.blocksTab);
+        await clickText('list1', scope.blocksTab);
+        await findByText('thing thing thing', scope.reportedValue); // Tooltip with result
+
+        // Interact with the monitor, adding an item
+        await findByText('list1', scope.monitors); // Just to be sure it is there
+        await clickText('+', scope.monitors);
+        el = await findByXpath(`//body//${scope.monitors}//input`);
+        await el.sendKeys('thing2');
+        await el.click(); // Regression for "clicking active input erases value" bug.
+        await clickText('list1', scope.monitors); // Blur the input to submit
+
+        // Check that the list value has been propagated.
+        await clickText('list1', scope.blocksTab);
+        await findByText('thing thing thing thing2', scope.reportedValue); // Tooltip with result
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

@@ -42,10 +42,14 @@ const StageSelector = props => {
         fileInputRef,
         intl,
         selected,
+        raised,
+        receivedBlocks,
         url,
         onBackdropFileUploadClick,
         onBackdropFileUpload,
         onClick,
+        onMouseEnter,
+        onMouseLeave,
         onNewBackdropClick,
         onSurpriseBackdropClick,
         onEmptyBackdropClick,
@@ -54,9 +58,13 @@ const StageSelector = props => {
     return (
         <Box
             className={classNames(styles.stageSelector, {
-                [styles.isSelected]: selected
+                [styles.isSelected]: selected,
+                [styles.raised]: raised,
+                [styles.receivedBlocks]: receivedBlocks
             })}
             onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             {...componentProps}
         >
             <div className={styles.header}>
@@ -121,8 +129,12 @@ StageSelector.propTypes = {
     onBackdropFileUploadClick: PropTypes.func,
     onClick: PropTypes.func,
     onEmptyBackdropClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     onNewBackdropClick: PropTypes.func,
     onSurpriseBackdropClick: PropTypes.func,
+    raised: PropTypes.bool.isRequired,
+    receivedBlocks: PropTypes.bool.isRequired,
     selected: PropTypes.bool.isRequired,
     url: PropTypes.string
 };

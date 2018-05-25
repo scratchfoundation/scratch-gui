@@ -30,6 +30,7 @@ const modes = {
 
 const MonitorComponent = props => (
     <ContextMenuTrigger
+        disable={!props.draggable}
         holdToDisplay={props.mode === 'slider' ? -1 : 1000}
         id={`monitor-${props.label}`}
     >
@@ -43,7 +44,7 @@ const MonitorComponent = props => (
             <Box
                 className={styles.monitorContainer}
                 componentRef={props.componentRef}
-                onDoubleClick={props.mode === 'list' ? null : props.onNextMode}
+                onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
             >
                 {React.createElement(modes[props.mode], {
                     categoryColor: categories[props.category],

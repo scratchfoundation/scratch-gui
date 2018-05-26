@@ -31,7 +31,7 @@ const BrowserModal = ({intl, ...props}) => (
             <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
-                    defaultMessage="We're very sorry, but Scratch 3.0 does not support Internet Explorer, Opera or Silk. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
+                    defaultMessage="We're very sorry, but Scratch 3.0 does not support Internet Explorer, Vivaldi, Opera or Silk. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
                     description="Unsupported browser description"
                     id="gui.unsupportedBrowser.description"
                 />

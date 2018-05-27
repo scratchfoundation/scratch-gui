@@ -60,6 +60,7 @@ const deactivateCustomProcedures = mutator => ({
 
 export {
     reducer as default,
+    initialState as customProceduresInitialState,
     activateCustomProcedures,
     deactivateCustomProcedures
 };

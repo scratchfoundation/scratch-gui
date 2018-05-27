@@ -461,6 +461,8 @@ const sensing = function (isStage) {
         ${blockSeparator}
         <block id="current" type="sensing_current"/>
         <block type="sensing_dayssince2000"/>
+        ${blockSeparator}
+        <block type="sensing_username"/>
         ${categorySeparator}
     </category>
     `;

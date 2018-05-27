@@ -1,0 +1,20 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.backpack-container {
+    flex-shrink: 1;
+    position: relative;
+}
+
+.backpack-header {
+    margin-top: 0.5rem;
+    border: 1px solid $ui-black-transparent;
+    border-top-right-radius: $space;
+    background: $ui-white;
+    padding: 0.25rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: $text-primary;
+    transition: 0.2s;
+    cursor: pointer;
+}

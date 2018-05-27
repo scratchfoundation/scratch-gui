@@ -4,8 +4,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {setHoveredSprite} from '../reducers/hovered-target';
+import {updateAssetDrag} from '../reducers/asset-drag';
+import {getEventXY} from '../lib/touch-utils';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
+
+const dragThreshold = 3; // Same as the block drag threshold
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
@@ -15,8 +19,43 @@ class SpriteSelectorItem extends React.Component {
             'handleDelete',
             'handleDuplicate',
             'handleMouseEnter',
-            'handleMouseLeave'
+            'handleMouseLeave',
+            'handleMouseDown',
+            'handleMouseMove',
+            'handleMouseUp'
         ]);
+    }
+    handleMouseUp () {
+        this.initialOffset = null;
+        window.removeEventListener('mouseup', this.handleMouseUp);
+        window.removeEventListener('mousemove', this.handleMouseMove);
+        window.removeEventListener('touchend', this.handleMouseUp);
+        window.removeEventListener('touchmove', this.handleMouseMove);
+        this.props.onDrag({
+            img: null,
+            currentOffset: null,
+            dragging: false
+        });
+    }
+    handleMouseMove (e) {
+        const currentOffset = getEventXY(e);
+        const dx = currentOffset.x - this.initialOffset.x;
+        const dy = currentOffset.y - this.initialOffset.y;
+        if (Math.sqrt((dx * dx) + (dy * dy)) > dragThreshold) {
+            this.props.onDrag({
+                img: this.props.costumeURL,
+                currentOffset: currentOffset,
+                dragging: true
+            });
+        }
+        e.preventDefault();
+    }
+    handleMouseDown (e) {
+        this.initialOffset = getEventXY(e);
+        window.addEventListener('mouseup', this.handleMouseUp);
+        window.addEventListener('mousemove', this.handleMouseMove);
+        window.addEventListener('touchend', this.handleMouseUp);
+        window.addEventListener('touchmove', this.handleMouseMove);
     }
     handleClick (e) {
         e.preventDefault();
@@ -57,6 +96,7 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
+                onMouseDown={this.handleMouseDown}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 {...props}
@@ -73,20 +113,23 @@ SpriteSelectorItem.propTypes = {
     name: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
+    onDrag: PropTypes.func.isRequired,
     onDuplicateButtonClick: PropTypes.func,
     receivedBlocks: PropTypes.bool.isRequired,
     selected: PropTypes.bool
 };
 
 const mapStateToProps = (state, {assetId, costumeURL, id}) => ({
-    costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()),
-    receivedBlocks: state.hoveredTarget.receivedBlocks &&
-            state.hoveredTarget.sprite === id
+    costumeURL: costumeURL || (assetId && state.scratchGui.vm.runtime.storage.get(assetId).encodeDataURI()),
+    dragging: state.scratchGui.assetDrag.dragging,
+    receivedBlocks: state.scratchGui.hoveredTarget.receivedBlocks &&
+            state.scratchGui.hoveredTarget.sprite === id
 });
 const mapDispatchToProps = dispatch => ({
     dispatchSetHoveredSprite: spriteId => {
         dispatch(setHoveredSprite(spriteId));
-    }
+    },
+    onDrag: data => dispatch(updateAssetDrag(data))
 });
 
 export default connect(

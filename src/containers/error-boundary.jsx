@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import platform from 'platform';
+import bowser from 'bowser';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
 import log from '../lib/log.js';
@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
             analytics.event({
                 category: 'Unsupported Browser Error',
                 action: `(Unsupported Browser) ${this.props.action}`,
-                label: `${platform.name} ${error.message}`
+                label: `${bowser.name} ${error.message}`
             });
         }
 

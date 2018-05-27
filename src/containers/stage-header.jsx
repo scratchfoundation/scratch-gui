@@ -50,9 +50,9 @@ StageHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    stageSize: state.stageSize.stageSize,
-    isFullScreen: state.mode.isFullScreen,
-    isPlayerOnly: state.mode.isPlayerOnly
+    stageSize: state.scratchGui.stageSize.stageSize,
+    isFullScreen: state.scratchGui.mode.isFullScreen,
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -103,6 +103,7 @@ class Monitor extends React.Component {
             <MonitorComponent
                 componentRef={this.setElement}
                 {...monitorProps}
+                draggable={this.props.draggable}
                 height={this.props.height}
                 max={this.props.max}
                 min={this.props.min}
@@ -121,6 +122,7 @@ class Monitor extends React.Component {
 
 Monitor.propTypes = {
     addMonitorRect: PropTypes.func.isRequired,
+    draggable: PropTypes.bool,
     height: PropTypes.number,
     id: PropTypes.string.isRequired,
     max: PropTypes.number,
@@ -150,7 +152,7 @@ Monitor.propTypes = {
     y: PropTypes.number
 };
 const mapStateToProps = state => ({
-    monitorLayout: state.monitorLayout
+    monitorLayout: state.scratchGui.monitorLayout
 });
 const mapDispatchToProps = dispatch => ({
     addMonitorRect: (id, rect, savePosition) =>

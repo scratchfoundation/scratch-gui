@@ -5,11 +5,12 @@ import {connect} from 'react-redux';
 import Controls from '../containers/controls.jsx';
 import Blocks from '../containers/blocks.jsx';
 import GUI from '../containers/gui.jsx';
-import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
+import HashParserHOC from '../lib/hash-parser-hoc.jsx';
+import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import styles from './blocks-only.css';
 
-const mapStateToProps = state => ({vm: state.vm});
+const mapStateToProps = state => ({vm: state.scratchGui.vm});
 
 const VMBlocks = connect(mapStateToProps)(Blocks);
 const VMControls = connect(mapStateToProps)(Controls);
@@ -26,7 +27,7 @@ const BlocksOnly = props => (
     </GUI>
 );
 
-const App = ProjectLoaderHOC(BlocksOnly);
+const App = HashParserHOC(AppStateHOC(BlocksOnly));
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

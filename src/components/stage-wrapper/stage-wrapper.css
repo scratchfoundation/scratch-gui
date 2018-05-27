@@ -1,7 +1,7 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.stage-wrapper {
+.stage-wrapper * {
     box-sizing: border-box;
 }
 

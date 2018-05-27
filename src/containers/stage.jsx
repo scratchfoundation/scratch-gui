@@ -363,7 +363,6 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
-            useEditorDragStyle, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -396,10 +395,10 @@ Stage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    isColorPicking: state.colorPicker.active,
-    isFullScreen: state.mode.isFullScreen,
+    isColorPicking: state.scratchGui.colorPicker.active,
+    isFullScreen: state.scratchGui.mode.isFullScreen,
     // Do not use editor drag style in fullscreen or player mode.
-    useEditorDragStyle: !(state.mode.isFullScreen || state.mode.isPlayerOnly)
+    useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
 });
 
 const mapDispatchToProps = dispatch => ({

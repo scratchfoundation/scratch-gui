@@ -158,7 +158,9 @@
     outline: none;
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 100%;
+    /* Workaround for Firefox */
+    width: 0;
+    flex: 1 1 auto;
 }
 
 .remove-button {

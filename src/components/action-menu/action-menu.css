@@ -23,8 +23,16 @@ $more-button-size: 2.25rem;
     transition: background-color 0.2s;
 }
 
+button::-moz-focus-inner {
+    border: 0;
+}
+
 .button:hover {
     background: $pen-primary;
+}
+
+.button:active {
+    padding: inherit;
 }
 
 .button.coming-soon:hover {

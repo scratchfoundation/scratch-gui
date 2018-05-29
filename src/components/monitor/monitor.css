@@ -137,30 +137,36 @@
 .input-wrapper {
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .value-inner {
     padding: 3px 5px;
     min-height: 22px;
     overflow: hidden; /* Don't let long values escape container */
+    text-overflow: ellipsis;
     user-select: text; /* Allow selecting list values for 2.0 compatibility, only relevant in player */
+    white-space: nowrap;
 }
 
 .list-input {
     padding: 3px 5px;
     border: 0;
-    background: rgba(0, 0, 0, 0.1);
+    background: none;
     color: $ui-white;
     outline: none;
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 100%;
+    /* Workaround for Firefox */
+    width: 0;
+    flex: 1 1 auto;
 }
 
 .remove-button {
-    position: absolute;
-    top: 4px;
-    right: 6px;
+    padding: 0;
+    padding-right: 5px;
     cursor: pointer;
     color: $ui-white;
 }

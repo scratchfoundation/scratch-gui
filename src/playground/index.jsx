@@ -24,4 +24,11 @@ document.body.appendChild(appTarget);
 GUI.setAppElement(appTarget);
 const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
-ReactDOM.render(<WrappedGui backpackVisible />, appTarget);
+// TODO a hack for testing the backpack, allow backpack host to be set by url param
+const backpackHostMatches = window.location.href.match(/[?&]backpack_host=(.*)&?/);
+const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
+
+ReactDOM.render(<WrappedGui
+    backpackVisible
+    backpackHost={backpackHost}
+/>, appTarget);

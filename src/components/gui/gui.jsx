@@ -15,8 +15,8 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
-import Backpack from '../backpack/backpack.jsx';
 
+import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
@@ -46,6 +46,7 @@ const GUIComponent = props => {
     const {
         activeTabIndex,
         basePath,
+        backpackHost,
         backpackVisible,
         blocksTabVisible,
         cardsVisible,
@@ -206,7 +207,7 @@ const GUIComponent = props => {
                             </TabPanel>
                         </Tabs>
                         {backpackVisible ? (
-                            <Backpack />
+                            <Backpack host={backpackHost} />
                         ) : null}
                     </Box>
 
@@ -227,6 +228,7 @@ const GUIComponent = props => {
 };
 GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
+    backpackHost: PropTypes.string,
     backpackVisible: PropTypes.null,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
@@ -250,6 +252,7 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
+    backpackHost: null,
     backpackVisible: false,
     basePath: './'
 };

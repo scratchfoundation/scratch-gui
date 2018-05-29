@@ -34,6 +34,10 @@ describe('Working with the how-to library', () => {
     test('Backpack can be expanded with backpack host param', async () => {
         await loadUri(`${uri}?backpack_host=some-value`);
         await clickXpath('//button[@title="tryit"]');
+
+        // Try activating the backpack from the costumes tab to make sure it isn't pushed off
+        await clickText('Costumes');
+
         // Check that the backpack header is visible and wrapped in a coming soon tooltip
         await clickText('Backpack'); // Not wrapped in tooltip
         await clickText('Backpack is empty'); // Make sure it can expand, is empty

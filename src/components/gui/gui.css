@@ -132,7 +132,6 @@
 .tabs {
     position: relative;
     flex-grow: 1;
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
@@ -140,7 +139,6 @@
 .tab-panel {
     position: relative;
     flex-grow: 1;
-    flex-shrink: 0;
     display: none;
 }
 

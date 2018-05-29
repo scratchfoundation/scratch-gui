@@ -43,6 +43,12 @@ class LibraryComponent extends React.Component {
             selectedTag: ALL_TAG_TITLE.toLowerCase()
         };
     }
+    componentDidUpdate (prevProps, prevState) {
+        if (prevState.filterQuery !== this.state.filterQuery ||
+            prevState.selectedTag !== this.state.selectedTag) {
+            this.scrollToTop();
+        }
+    }
     handleBlur (id) {
         this.handleMouseLeave(id);
     }
@@ -58,7 +64,6 @@ class LibraryComponent extends React.Component {
             filterQuery: '',
             selectedTag: tag.toLowerCase()
         });
-        this.scrollToTop();
     }
     handleMouseEnter (id) {
         if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
@@ -71,7 +76,6 @@ class LibraryComponent extends React.Component {
             filterQuery: event.target.value,
             selectedTag: ALL_TAG_TITLE.toLowerCase()
         });
-        this.scrollToTop();
     }
     handleFilterClear () {
         this.setState({filterQuery: ''});

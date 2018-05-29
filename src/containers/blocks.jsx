@@ -438,7 +438,8 @@ Blocks.defaultOptions = {
         dragShadowOpacity: 0.6
     },
     comments: false,
-    collapse: false
+    collapse: false,
+    sounds: false
 };
 
 Blocks.defaultProps = {

@@ -28,7 +28,9 @@ const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 const backpackHostMatches = window.location.href.match(/[?&]backpack_host=(.*)&?/);
 const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
 
-ReactDOM.render(<WrappedGui
-    backpackVisible
-    backpackHost={backpackHost}
-/>, appTarget);
+const backpackOptions = {
+    visible: true,
+    host: backpackHost
+};
+
+ReactDOM.render(<WrappedGui backpackOptions={backpackOptions} />, appTarget);

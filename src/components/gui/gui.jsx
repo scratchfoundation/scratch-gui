@@ -46,8 +46,7 @@ const GUIComponent = props => {
     const {
         activeTabIndex,
         basePath,
-        backpackHost,
-        backpackVisible,
+        backpackOptions,
         blocksTabVisible,
         cardsVisible,
         children,
@@ -206,8 +205,8 @@ const GUIComponent = props => {
                                 {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                             </TabPanel>
                         </Tabs>
-                        {backpackVisible ? (
-                            <Backpack host={backpackHost} />
+                        {backpackOptions.visible ? (
+                            <Backpack host={backpackOptions.host} />
                         ) : null}
                     </Box>
 
@@ -228,8 +227,10 @@ const GUIComponent = props => {
 };
 GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
-    backpackHost: PropTypes.string,
-    backpackVisible: PropTypes.null,
+    backpackOptions: PropTypes.shape({
+        host: PropTypes.string,
+        visible: PropTypes.bool
+    }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     cardsVisible: PropTypes.bool,
@@ -252,8 +253,10 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    backpackHost: null,
-    backpackVisible: false,
+    backpackOptions: {
+        host: null,
+        visible: false
+    },
     basePath: './'
 };
 export default injectIntl(GUIComponent);

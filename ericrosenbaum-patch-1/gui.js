@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 206:
+/***/ 205:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -9,7 +9,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "html,\nbody,\n.index_app_3Qs6X {\n    /* probably unecessary, transitional until layout is refactored */\n    width: 100%; \n    height: 100%;\n    margin: 0;\n}\n\n/* @todo: move globally? Safe / side FX, for blocks particularly? */\n\n* { -webkit-box-sizing: border-box; box-sizing: border-box; }\n", ""]);
+exports.push([module.i, "html,\nbody,\n.index_app_3Qs6X {\n    /* probably unecessary, transitional until layout is refactored */\n    width: 100%; \n    height: 100%;\n    margin: 0;\n\n    /* Setting min height/width makes the UI scroll below those sizes */\n    min-width: 1024px;\n    min-height: 640px; /* Min height to fit sprite/backdrop button */\n}\n\n/* @todo: move globally? Safe / side FX, for blocks particularly? */\n\n* { -webkit-box-sizing: border-box; box-sizing: border-box; }\n", ""]);
 
 // exports
 exports.locals = {
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 207:
+/***/ 206:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(206);
+var content = __webpack_require__(205);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 644:
+/***/ 650:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(643);
+__webpack_require__(649);
 
 var _react = __webpack_require__(0);
 
@@ -62,19 +62,23 @@ var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _analytics = __webpack_require__(22);
+var _analytics = __webpack_require__(21);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(67);
+var _gui = __webpack_require__(72);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(56);
+var _hashParserHoc = __webpack_require__(55);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _index = __webpack_require__(207);
+var _appStateHoc = __webpack_require__(54);
+
+var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
+
+var _index = __webpack_require__(206);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -95,11 +99,11 @@ appTarget.className = _index2.default.app;
 document.body.appendChild(appTarget);
 
 _gui2.default.setAppElement(appTarget);
-var WrappedGui = (0, _hashParserHoc2.default)(_gui2.default);
+var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
-_reactDom2.default.render(_react2.default.createElement(WrappedGui, null), appTarget);
+_reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackVisible: true }), appTarget);
 
 /***/ })
 
-},[[644,0]]]);
+},[[650,0]]]);
 //# sourceMappingURL=gui.js.map

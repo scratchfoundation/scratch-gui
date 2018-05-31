@@ -36,3 +36,8 @@
 .blocks :global(.scratchCategoryMenuItemLabel) {
     font-size: 0.65rem;
 }
+
+.blocks :global(.blocklyMinimalBody) {
+    min-width: auto;
+    min-height: auto;
+}

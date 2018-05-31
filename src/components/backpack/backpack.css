@@ -17,4 +17,21 @@
     color: $text-primary;
     transition: 0.2s;
     cursor: pointer;
+    user-select: none;
+}
+
+.backpack-list {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-right: 1px solid $ui-black-transparent;
+    min-height: 6rem;
+}
+
+.empty-message {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: $text-primary;
 }

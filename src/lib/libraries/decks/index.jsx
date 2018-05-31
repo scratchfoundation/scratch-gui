@@ -26,6 +26,17 @@ import stepMakeSong from './make-music/make-music-make-song.gif';
 import stepMakeBeat from './make-music/make-music-make-beat.gif';
 import stepMakeBeatbox from './make-music/make-music-beatbox.gif';
 
+// Chase-Game
+import libraryChaseGame from './chase-game/lib-chasegame.jpg';
+import stepBG from './chase-game/chase-game-1.gif';
+import stepAddOcto from './chase-game/chase-game-2.gif';
+import stepLeftRight from './chase-game/chase-game-3.gif';
+import stepUpDown from './chase-game/chase-game-4.gif';
+import stepAddStar from './chase-game/chase-game-5.gif';
+import stepMoveRandom from './chase-game/chase-game-6.gif';
+import stepWhenTouch from './chase-game/chase-game-7.gif';
+import stepScore from './chase-game/chase-game-8.gif';
+
 // Make-A-Game
 import libraryMakeAGame from './game/popping-library.gif';
 import stepRandom from './game/game-random-position.gif';
@@ -211,12 +222,105 @@ export default {
         }
         ]
     },
+    'Chase-Game': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Make Chase Game"
+                description="Name for the 'Make A Chase Game' how-to"
+                id="gui.howtos.make-a-chase-game.name"
+            />
+        ),
+        img: libraryChaseGame,
+        steps: [{
+            video: 'https://www.youtube.com/embed/PoQO35QmlVA'
+        },
+        {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add A Backdrop"
+                    description="Step name for 'Add A Backdrop' step"
+                    id="gui.howtos.Chase-Game.step_BG"
+                />
+            ),
+            image: stepBG
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add A Sprite"
+                    description="Step name for 'Add A Sprite' step"
+                    id="gui.howtos.chase-game.step_AddOcto"
+                />
+            ),
+            image: stepAddOcto
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Right & Left With Arrow Keys"
+                    description="Step name for 'Move Right & Left With Arrow Keys' step"
+                    id="gui.howtos.make-music.step_LeftRight"
+                />
+            ),
+            image: stepLeftRight
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Up & Down With Arrow Keys"
+                    description="Step name for 'Move Up & Down With Arrow Keys' step"
+                    id="gui.howtos.Chase-Game.step_UpDown"
+                />
+            ),
+            image: stepUpDown
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Another Sprite"
+                    description="Step name for 'Add Another Sprite' step"
+                    id="gui.howtos.Chase-Game.step_AddStar"
+                />
+            ),
+            image: stepAddStar
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Randomly"
+                    description="Step name for 'Move Randomly' step"
+                    id="gui.howtos.Chase-Game.step_MoveRandom"
+                />
+            ),
+            image: stepMoveRandom
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="In Octopus Sprite, When Touching Play Sound"
+                    description="Step name for 'In Octopus Sprite, When Touching Play Sound' step"
+                    id="gui.howtos.Chase-Game.step_WhenTouch"
+                />
+            ),
+            image: stepWhenTouch
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="In Octopus Sprite, When Touching Add Score"
+                    description="Step name for 'In Octopus Sprite, When Touching Add Score step"
+                    id="gui.howtos.Chase-Game.step_Score"
+                />
+            ),
+            image: stepScore
+        }, {
+            deckIds: [
+                'add-a-backdrop',
+                'add-effects',
+                'move-around-with-arrow-keys'
+            ]
+        }
+        ]
+    },
 
     'Make-A-Game': {
         name: (
             <FormattedMessage
-                defaultMessage="Make A Game"
-                description="Name for the 'Make A Game' how-to"
+                defaultMessage="Make A Clicker Game"
+                description="Name for the 'Make A Clicker Game' how-to"
                 id="gui.howtos.make-a-game.name"
             />
         ),
@@ -260,7 +364,6 @@ export default {
         }
         ]
     },
-
 
     'say-hello': {
         name: (
@@ -345,7 +448,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
+                'add-effects',
                 'change-size'
             ]
         }]

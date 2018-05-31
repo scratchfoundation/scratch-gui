@@ -19,11 +19,19 @@
 
 .image {
     max-width: 80px;
+    max-height: 80px;
+    min-width: 50px;
+    min-height: 50px;
 
     /* Center the dragging image on the given position */
     margin-left: -50%;
     margin-top: -50%;
 
+    padding: 0.25rem;
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+    border-radius: 0.5rem;
+
     /* Use the same drop shadow as stage dragging */
-    filter: drop-shadow(5px 5px 5px $ui-black-transparent);
+    box-shadow: 5px 5px 5px $ui-black-transparent;
 }

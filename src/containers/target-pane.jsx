@@ -10,7 +10,7 @@ import {
 
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
-
+import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
@@ -27,6 +27,7 @@ class TargetPane extends React.Component {
             'handleChangeSpriteX',
             'handleChangeSpriteY',
             'handleDeleteSprite',
+            'handleDrop',
             'handleDuplicateSprite',
             'handleNewSprite',
             'handleSelectSprite',
@@ -106,6 +107,14 @@ class TargetPane extends React.Component {
             this.props.onReceivedBlocks(true);
         }
     }
+
+    handleDrop (dragInfo) {
+        if (dragInfo.dragType === DragConstants.SPRITE) {
+            // Add one to both new and target index because we are not counting/moving the stage
+            this.props.vm.reorderTarget(dragInfo.index + 1, dragInfo.newIndex + 1);
+        }
+    }
+
     render () {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars
@@ -123,6 +132,7 @@ class TargetPane extends React.Component {
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
+                onDrop={this.handleDrop}
                 onDuplicateSprite={this.handleDuplicateSprite}
                 onFileUploadClick={this.handleFileUploadClick}
                 onPaintSpriteClick={this.handlePaintSpriteClick}

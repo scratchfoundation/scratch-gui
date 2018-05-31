@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 650:
+/***/ 651:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(649);
+__webpack_require__(650);
 
 var _react = __webpack_require__(0);
 
@@ -101,9 +101,18 @@ document.body.appendChild(appTarget);
 _gui2.default.setAppElement(appTarget);
 var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
-_reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackVisible: true }), appTarget);
+// TODO a hack for testing the backpack, allow backpack host to be set by url param
+var backpackHostMatches = window.location.href.match(/[?&]backpack_host=(.*)&?/);
+var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
+
+var backpackOptions = {
+    visible: true,
+    host: backpackHost
+};
+
+_reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOptions: backpackOptions }), appTarget);
 
 /***/ })
 
-},[[650,0]]]);
+},[[651,0]]]);
 //# sourceMappingURL=gui.js.map

@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 651:
+/***/ 660:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52,7 +52,7 @@ if(false) {}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(650);
+__webpack_require__(659);
 
 var _react = __webpack_require__(0);
 
@@ -114,5 +114,5 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ })
 
-},[[651,0]]]);
+},[[660,0]]]);
 //# sourceMappingURL=gui.js.map

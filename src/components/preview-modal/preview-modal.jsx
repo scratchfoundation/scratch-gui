@@ -5,13 +5,13 @@ import Box from '../box/box.jsx';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import styles from './preview-modal.css';
-import catIcon from './happy-cat.png';
+import hattiIcon from './hatti.png';
 
 const messages = defineMessages({
     label: {
         id: 'gui.previewInfo.label',
-        defaultMessage: 'Try Scratch 3.0',
-        description: 'Scratch 3.0 modal label - for accessibility'
+        defaultMessage: 'Try Smalruby 3.0',
+        description: 'Smalruby 3.0 modal label - for accessibility'
     }
 });
 
@@ -28,14 +28,14 @@ const PreviewModal = ({intl, ...props}) => (
         <Box className={styles.body}>
             <h2>
                 <FormattedMessage
-                    defaultMessage="Welcome to the Scratch 3.0 Preview"
+                    defaultMessage="Welcome to the Smalruby 3.0 Preview"
                     description="Header for Preview Info Modal"
                     id="gui.previewInfo.welcome"
                 />
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We're working on the next generation of Scratch. We're excited for you to try it!"
+                    defaultMessage="We're working on the next generation of Smalruby. We're excited for you to try it!"
                     description="Invitation to try 3.0 preview"
                     id="gui.previewInfo.invitation"
                 />
@@ -48,7 +48,7 @@ const PreviewModal = ({intl, ...props}) => (
                 >
                     <FormattedMessage
                         defaultMessage="Not Now"
-                        description="Label for button to back out of trying Scratch 3.0 preview"
+                        description="Label for button to back out of trying Smalruby 3.0 preview"
                         id="gui.previewInfo.notnow"
                     />
                 </button>
@@ -59,13 +59,13 @@ const PreviewModal = ({intl, ...props}) => (
                 >
                     <FormattedMessage
                         defaultMessage="Try It! {caticon}"
-                        description="Label for button to try Scratch 3.0 preview"
+                        description="Label for button to try Smalruby 3.0 preview"
                         id="gui.previewModal.tryit"
                         values={{
                             caticon: (
                                 <img
                                     className={styles.catIcon}
-                                    src={catIcon}
+                                    src={hattiIcon}
                                 />
                             )
                         }}

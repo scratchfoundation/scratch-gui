@@ -7,8 +7,8 @@ import ReactTooltip from 'react-tooltip';
 
 import styles from './coming-soon.css';
 
-import awwCatIcon from './aww-cat.png';
-import coolCatIcon from './cool-cat.png';
+import hattiIcon from './icon-hatti.png';
+import hatti2Icon from './icon2-hatti.png';
 
 const messages = defineMessages({
     message1: {
@@ -49,7 +49,7 @@ class ComingSoonContent extends React.Component {
     }
     getRandomMessage () {
         // randomly chooses a messages from `messages` to display in the tooltip.
-        const images = [awwCatIcon, coolCatIcon];
+        const images = [hattiIcon, hatti2Icon];
         const messageNumber = Math.floor(Math.random() * Object.keys(messages).length) + 1;
         const imageNumber = Math.floor(Math.random() * Object.keys(images).length);
         return (

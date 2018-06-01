@@ -150,8 +150,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Choose A Letter & Make It Spin"
-                    description="Step name for 'Choose A Letter & Make It Spin' step"
+                    defaultMessage="Choose a Letter & Make it Spin"
+                    description="Step name for 'Choose a Letter & Make it Spin' step"
                     id="gui.howtos.animate-a-name.step_AnimateSpin"
                 />
             ),
@@ -159,8 +159,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Choose A Letter & Make It Grow"
-                    description="Step name for 'Choose A Letter & Make It Grow' step"
+                    defaultMessage="Choose a Letter & Make It Grow"
+                    description="Step name for 'Choose a Letter & Make it Grow' step"
                     id="gui.howtos.animate-a-name.step_AnimateGrow"
                 />
             ),
@@ -225,8 +225,8 @@ export default {
     'Chase-Game': {
         name: (
             <FormattedMessage
-                defaultMessage="Make Chase Game"
-                description="Name for the 'Make A Chase Game' how-to"
+                defaultMessage="Make a Chase Game"
+                description="Name for the 'Make a Chase Game' how-to"
                 id="gui.howtos.make-a-chase-game.name"
             />
         ),
@@ -237,8 +237,8 @@ export default {
         {
             title: (
                 <FormattedMessage
-                    defaultMessage="Add A Backdrop"
-                    description="Step name for 'Add A Backdrop' step"
+                    defaultMessage="Add a Backdrop"
+                    description="Step name for 'Add a Backdrop' step"
                     id="gui.howtos.Chase-Game.step_BG"
                 />
             ),
@@ -246,8 +246,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Add A Sprite"
-                    description="Step name for 'Add A Sprite' step"
+                    defaultMessage="Add a Sprite"
+                    description="Step name for 'Add a Sprite' step"
                     id="gui.howtos.chase-game.step_AddOcto"
                 />
             ),
@@ -319,8 +319,8 @@ export default {
     'Make-A-Game': {
         name: (
             <FormattedMessage
-                defaultMessage="Make A Clicker Game"
-                description="Name for the 'Make A Clicker Game' how-to"
+                defaultMessage="Make a Clicker Game"
+                description="Name for the 'Make a Clicker Game' how-to"
                 id="gui.howtos.make-a-game.name"
             />
         ),

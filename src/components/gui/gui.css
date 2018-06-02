@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .page-wrapper {
     height: 100%;
@@ -190,7 +191,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
+    z-index: $z-index-extension-button;
     background: $motion-primary;
 
     border: 1px solid $motion-primary;

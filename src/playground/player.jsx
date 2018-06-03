@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -13,14 +14,41 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 }
 
 import styles from './player.css';
-const Player = () => (
-    <Box className={styles.stageOnly}>
-        <WrappedGui
-            isPlayerOnly
-            isFullScreen={false}
-        />
-    </Box>
-);
+
+class Player extends React.Component {
+    constructor (props) {
+        super(props);
+        this.handleSeeInside = this.handleSeeInside.bind(this);
+        this.handleSeeCommunity = this.handleSeeCommunity.bind(this);
+        this.state = {
+            isPlayerOnly: true
+        };
+    }
+    handleSeeInside () {
+        this.setState({isPlayerOnly: false});
+    }
+    handleSeeCommunity () {
+        this.setState({isPlayerOnly: true});
+    }
+    render () {
+        return (
+            <Box
+                className={classNames({
+                    [styles.stageOnly]: this.state.isPlayerOnly
+                })}
+            >
+                {this.state.isPlayerOnly && (
+                    <button onClick={this.handleSeeInside}>{'See inside'}</button>
+                )}
+                <WrappedGui
+                    enableCommunity
+                    isPlayerOnly={this.state.isPlayerOnly}
+                    onSeeCommunity={this.handleSeeCommunity}
+                />
+            </Box>
+        );
+    }
+}
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

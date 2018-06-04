@@ -4,6 +4,7 @@
 .card-container {
     position:absolute;
     z-index: 100;
+    margin: 1rem 3rem;
 }
 
 .left-card, .right-card {

@@ -13,6 +13,7 @@
     "test:integration": "jest --runInBand test[\\\\/]integration",
     "test:lint": "eslint . --ext .js,.jsx",
     "test:unit": "jest test[\\\\/]unit",
+    "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --progress --colors --watch"
   },
   "author": "Massachusetts Institute of Technology",

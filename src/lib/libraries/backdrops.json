@@ -15,6 +15,36 @@
         ]
     },
     {
+        "name": "Bedroom",
+        "md5": "e2f8b0dbd0a65d2ad8bfc21616662a6a.png",
+        "type": "backdrop",
+        "tags": [
+            "indoors",
+            "home",
+            "house"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Bedroom 2",
+        "md5": "8cc0b88d53345b3e337e8f028a32a4e7.png",
+        "type": "backdrop",
+        "tags": [
+            "indoors",
+            "home",
+            "house"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Blue Sky",
         "md5": "e7c147730f19d284bcd7b3f00af19bb6.svg",
         "type": "backdrop",
@@ -55,6 +85,36 @@
         ]
     },
     {
+        "name": "Brick Wall",
+        "md5": "7e5327c68ff6ddabc48dbfe4717a04fe.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "music",
+            "dance"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Brick Wall 2",
+        "md5": "82d867fcd9f1b5f49e29c2f853d55665.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "music",
+            "dance"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Circles",
         "md5": "4e29033ec2b891a8f1ca21242811d403.svg",
         "type": "backdrop",
@@ -65,6 +125,51 @@
             480,
             360,
             1
+        ]
+    },
+    {
+        "name": "Concert",
+        "md5": "c8d90320d2966c08af8cdd1c6a7a93b5.png",
+        "type": "backdrop",
+        "tags": [
+            "indoors",
+            "music",
+            "andrew rae"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Galaxy",
+        "md5": "5fab1922f254ae9fd150162c3e392bef.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "stars",
+            "nasa"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Graffiti",
+        "md5": "4a876066505dc5ea3b72b390ca266769.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "music",
+            "dance"
+        ],
+        "info": [
+            960,
+            720,
+            2
         ]
     },
     {
@@ -91,6 +196,21 @@
             480,
             360,
             1
+        ]
+    },
+    {
+        "name": "Jungle",
+        "md5": "f4f908da19e2753f3ed679d7b37650ca.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "forest",
+            "robert hunter"
+        ],
+        "info": [
+            960,
+            720,
+            2
         ]
     },
     {
@@ -122,6 +242,53 @@
         ]
     },
     {
+        "name": "Moon",
+        "md5": "0b1d2eaf22d62ef88de80ccde5578fba.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "nasa",
+            "apollo"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Mountain",
+        "md5": "f84989feee2cf462a1c597169777ee3c.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "snow",
+            "cave",
+            "robert hunter"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Nebula",
+        "md5": "9b5cdbd596da1b6149f56b794b6394f4.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "nasa",
+            "bubble",
+            "hubble"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Ocean",
         "md5": "fb907f72b310acc8b95cbf2d2cccabc9.svg",
         "type": "backdrop",
@@ -136,6 +303,20 @@
         ]
     },
     {
+        "name": "Ocean 2",
+        "md5": "1517c21786d2d0edc2f3037408d850bd.png",
+        "type": "backdrop",
+        "tags": [
+            "water",
+            "underwater"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Party",
         "md5": "108160d0e44d1c340182e31c9dc0758a.svg",
         "type": "backdrop",
@@ -147,6 +328,22 @@
             480,
             360,
             1
+        ]
+    },
+    {
+        "name": "Party Room",
+        "md5": "9aeff3d99d0a1845ad46955c8820cb5e.png",
+        "type": "backdrop",
+        "tags": [
+            "music",
+            "indoors",
+            "disco",
+            "dance"
+        ],
+        "info": [
+            960,
+            720,
+            2
         ]
     },
     {
@@ -195,32 +392,117 @@
         ]
     },
     {
+        "name": "Soccer",
+        "md5": "04a63154f04b09494354090f7cc2f1b9.png",
+        "type": "backdrop",
+        "tags": [
+            "soccer",
+            "football",
+            "sports",
+            "alex eben meyer"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Soccer 2",
+        "md5": "b0dc1268cb595aaeef405bce40d1639c.png",
+        "type": "backdrop",
+        "tags": [
+            "soccer",
+            "football",
+            "sports",
+            "alex eben meyer"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Space",
-        "md5": "b579aeeb143e79c47e2e65cbd3c0fe36.svg",
+        "md5": "84208d9a3718ec3c9fc5a32a792fa1d0.png",
         "type": "backdrop",
         "tags": [
             "space",
             "moon",
-            "saturn",
-            "stars"
+            "science fiction",
+            "planet",
+            "wren mcdonald"
         ],
         "info": [
-            480,
-            360,
-            1
+            960,
+            720,
+            2
         ]
     },
     {
-        "name": "Spotlight-stage2",
-        "md5": "12288218b23a264c84bd3c22bd03e90a.svg",
+        "name": "Space 2",
+        "md5": "32b2316fd375faa18088f6c57ebb1c8d.png",
         "type": "backdrop",
         "tags": [
-            "music"
+            "space",
+            "moon",
+            "science fiction",
+            "planet",
+            "wren mcdonald"
         ],
         "info": [
-            480,
-            360,
-            1
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Space 3",
+        "md5": "20344b0edcc498281e4cb80242a72667.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "moon",
+            "science fiction",
+            "planet",
+            "wren mcdonald"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Space 4",
+        "md5": "0c450891306fa63ef02aa0fda7fd0ef9.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "moon",
+            "science fiction",
+            "planet",
+            "wren mcdonald"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Stars",
+        "md5": "47282ff0f7047c6fab9c94b531abf721.png",
+        "type": "backdrop",
+        "tags": [
+            "space",
+            "nasa"
+        ],
+        "info": [
+            960,
+            720,
+            2
         ]
     },
     {
@@ -234,6 +516,21 @@
             480,
             360,
             1
+        ]
+    },
+    {
+        "name": "Theatre",
+        "md5": "c2b097bc5cdb6a14ef5485202bc5ee76.png",
+        "type": "backdrop",
+        "tags": [
+            "indoors",
+            "music",
+            "andrew rae"
+        ],
+        "info": [
+            960,
+            720,
+            2
         ]
     },
     {

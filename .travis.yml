@@ -6,7 +6,9 @@ addons:
 node_js:
 - 8
 env:
+  global:
   - NODE_ENV=production
+  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
 cache:
   directories:
   - node_modules
@@ -19,7 +21,7 @@ before_deploy:
 - git config --global user.name $(git log --pretty=format:"%an" -n1)
 script:
 - npm test
-- if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then npm run test:smoke; fi
+- if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ] && [ "$TRAVIS_BRANCH" == "master" ]; then  npm run test:smoke; fi
 deploy:
 - provider: script
   on:

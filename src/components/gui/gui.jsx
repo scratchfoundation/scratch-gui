@@ -11,6 +11,7 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
+import { RubyTab } from '../../containers/ruby-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
@@ -29,6 +30,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import rubyIcon from './icon--ruby.svg';
 
 const messages = defineMessages({
     addExtension: {
@@ -59,10 +61,12 @@ const GUIComponent = props => {
         onExtensionButtonClick,
         onActivateCostumesTab,
         onActivateSoundsTab,
+        onActivateRubyTab,
         onActivateTab,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
+        rubyTabVisible,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -172,6 +176,20 @@ const GUIComponent = props => {
                                         id="gui.gui.soundsTab"
                                     />
                                 </Tab>
+                                <Tab
+                                    className={tabClassNames.tab}
+                                    onClick={onActivateRubyTab}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={rubyIcon} // TODO: 綺麗なアイコンに変更する
+                                    />
+                                    <FormattedMessage
+                                        defaultMessage="Ruby"
+                                        description="Button to get to the Ruby panel"
+                                        id="gui.gui.rubyTab"
+                                    />
+                                </Tab>
                             </TabList>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 <Box className={styles.blocksWrapper}>
@@ -203,6 +221,9 @@ const GUIComponent = props => {
                             </TabPanel>
                             <TabPanel className={tabClassNames.tabPanel}>
                                 {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                            </TabPanel>
+                            <TabPanel className={tabClassNames.tabPanel}>
+                                {rubyTabVisible ? <RubyTab /> : null}
                             </TabPanel>
                         </Tabs>
                         {backpackVisible ? (
@@ -240,11 +261,13 @@ GUIComponent.propTypes = {
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
+    onActivateRubyTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
+    rubyTabVisible: PropTypes.bool,
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired

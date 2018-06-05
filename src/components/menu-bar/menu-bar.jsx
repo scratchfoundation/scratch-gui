@@ -22,7 +22,10 @@ import {
     fileMenuOpen,
     openEditMenu,
     closeEditMenu,
-    editMenuOpen
+    editMenuOpen,
+    openLanguageMenu,
+    closeLanguageMenu,
+    languageMenuOpen
 } from '../../reducers/menus';
 
 import styles from './menu-bar.css';
@@ -32,6 +35,8 @@ import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
+import languageIcon from '../language-selector/language-icon.svg';
+
 import scratchLogo from './scratch-logo.svg';
 
 import helpIcon from './icon--help.svg';
@@ -39,22 +44,34 @@ import helpIcon from './icon--help.svg';
 const MenuBarItemTooltip = ({
     children,
     className,
+    enable,
     id,
     place = 'bottom'
-}) => (
-    <ComingSoonTooltip
-        className={classNames(styles.comingSoon, className)}
-        place={place}
-        tooltipClassName={styles.comingSoonTooltip}
-        tooltipId={id}
-    >
-        {children}
-    </ComingSoonTooltip>
-);
+}) => {
+    if (enable) {
+        return (
+            <React.Fragment>
+                {children}
+            </React.Fragment>
+        );
+    }
+    return (
+        <ComingSoonTooltip
+            className={classNames(styles.comingSoon, className)}
+            place={place}
+            tooltipClassName={styles.comingSoonTooltip}
+            tooltipId={id}
+        >
+            {children}
+        </ComingSoonTooltip>
+    );
+};
+
 
 MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    enable: PropTypes.bool,
     id: PropTypes.string,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
@@ -111,12 +128,31 @@ const MenuBar = props => (
                         src={scratchLogo}
                     />
                 </div>
-                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: props.languageMenuOpen
+                    })}
+                    onMouseUp={props.onClickLanguage}
+                >
                     <MenuBarItemTooltip
+                        enable={window.location.search.indexOf('enable=language') !== -1}
                         id="menubar-selector"
                         place="right"
                     >
-                        <LanguageSelector />
+                        <div className={classNames(styles.languageMenu)}>
+                            <img
+                                className={styles.languageIcon}
+                                src={languageIcon}
+                            />
+                            <img
+                                className={styles.dropdownCaret}
+                                src={dropdownCaret}
+                            />
+                        </div>
+                        <LanguageSelector
+                            open={props.languageMenuOpen}
+                            onRequestClose={props.onRequestCloseLanguage}
+                        />
                     </MenuBarItemTooltip>
                 </div>
                 <div
@@ -369,17 +405,21 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    languageMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onClickLanguage: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
+    onRequestCloseLanguage: PropTypes.func,
     onSeeCommunity: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     fileMenuOpen: fileMenuOpen(state),
-    editMenuOpen: editMenuOpen(state)
+    editMenuOpen: editMenuOpen(state),
+    languageMenuOpen: languageMenuOpen(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -388,6 +428,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
+    onClickLanguage: () => dispatch(openLanguageMenu()),
+    onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

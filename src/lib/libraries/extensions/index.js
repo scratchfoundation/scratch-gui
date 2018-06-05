@@ -31,6 +31,13 @@ export default [
         featured: true
     },
     {
+        name: 'Amazon Polly',
+        extensionId: 'speak',
+        iconURL: speechImage,
+        description: 'Make your projects talk.',
+        featured: true
+    },
+    {
         name: 'Video Motion',
         extensionId: 'videoSensing',
         iconURL: videoImage,

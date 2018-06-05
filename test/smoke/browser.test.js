@@ -8,9 +8,7 @@ const {
 // Make the default timeout longer, Sauce tests take ~30s
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60 * 1000; // eslint-disable-line
 
-// Supported message is never seen because WebGL is not enabled on Sauce
-// const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Preview';
-const WEBGL_MESSAGE = 'Your Browser Does Not Support WebGL';
+const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Preview';
 const UNSUPPORTED_MESSAGE = 'Scratch 3.0 does not support Internet Explorer';
 
 // Driver configs can be generated with the Sauce Platform Configurator
@@ -51,7 +49,7 @@ describe('Smoke tests on older browsers', () => {
             process.env.SAUCE_ACCESS_KEY,
             driverConfig);
         await driver.get(process.env.SMOKE_URL);
-        const el = await findByText(WEBGL_MESSAGE); // b/c WebGL isn't enabled on Sauce
+        const el = await findByText(SUPPORTED_MESSAGE);
         const isDisplayed = await el.isDisplayed();
         return expect(isDisplayed).toEqual(true);
     });
@@ -67,7 +65,7 @@ describe('Smoke tests on older browsers', () => {
             process.env.SAUCE_ACCESS_KEY,
             driverConfig);
         await driver.get(process.env.SMOKE_URL);
-        const el = await findByText(WEBGL_MESSAGE); // b/c WebGL isn't enabled on Sauce
+        const el = await findByText(SUPPORTED_MESSAGE);
         const isDisplayed = await el.isDisplayed();
         return expect(isDisplayed).toEqual(true);
     });

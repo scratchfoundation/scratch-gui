@@ -8,6 +8,11 @@ $stage-menu-height: 2.75rem;
 
 $library-header-height: 3.125rem;
 $library-filter-bar-height: 2.5rem;
+$library-item-width: 10rem;
+$library-item-height: 10rem;
+$library-item-width-large: 18.75rem;
+$library-item-height-large: 20rem;
+$library-grid-gap: .5rem;
 
 $form-radius: calc($space / 2);
 

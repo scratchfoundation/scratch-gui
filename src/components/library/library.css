@@ -1,20 +1,27 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.library-scroll-grid {
-    display: flex;
-    justify-content: flex-start;
-    align-content: flex-start;
+.library-scroll-area {
+    padding: calc($library-grid-gap * 2);
     background: $ui-secondary;
-    flex-grow: 1;
-    flex-wrap: wrap;
     overflow-y: auto;
     height: calc(100% - $library-header-height);
-    padding: 0.5rem;
 }
 
-.library-scroll-grid.withFilterBar {
+.with-filter-bar {
     height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
+}
+
+.library-grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, calc($library-item-height + 2 * $library-grid-gap));
+    grid-template-columns: repeat(auto-fill, calc($library-item-width + 2 * $library-grid-gap));
+    justify-content: center;
+}
+
+.featured {
+    grid-template-rows: repeat(auto-fill, calc($library-item-height-large + 2 * $library-grid-gap));
+    grid-template-columns: repeat(auto-fill, calc($library-item-width-large + 2 * $library-grid-gap));
 }
 
 .filter-bar {

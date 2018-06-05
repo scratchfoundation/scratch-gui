@@ -57,7 +57,7 @@ class LibraryComponent extends React.Component {
     }
     handleSelect (id) {
         this.props.onRequestClose();
-        this.props.onItemSelected(this.getFilteredData()[id]);
+        this.props.onItemSelected(this.props.data[id]);
     }
     handleTagClick (tag) {
         this.setState({
@@ -66,10 +66,10 @@ class LibraryComponent extends React.Component {
         });
     }
     handleMouseEnter (id) {
-        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
+        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.props.data[id]);
     }
     handleMouseLeave (id) {
-        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
+        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.props.data[id]);
     }
     handleFilterChange (event) {
         this.setState({
@@ -81,23 +81,33 @@ class LibraryComponent extends React.Component {
         this.setState({filterQuery: ''});
     }
     getFilteredData () {
-        if (this.state.selectedTag === 'all') {
-            if (!this.state.filterQuery) return this.props.data;
-            return this.props.data.filter(dataItem => (
+        // Filters and splits the data based on the `featured` flag
+        return this.props.data.reduce((acc, dataItem, dataId) => {
+            const inSet = this.state.selectedTag === 'all' ? (
+                // Filter based on query
                 (dataItem.tags || [])
-                    // Second argument to map sets `this`
+                    // Lowercase all tags. Second argument is to define `this`
                     .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                    // Make a list containing all the tags and the item's name
                     .concat(dataItem.name.toLowerCase())
-                    .join('\n') // unlikely to partially match newlines
+                    // The \n delimiter is to not match against regular user input
+                    .join('\n')
+                    // Find within a string representing the title and all the tags for the item
                     .indexOf(this.state.filterQuery.toLowerCase()) !== -1
-            ));
-        }
-        return this.props.data.filter(dataItem => (
-            dataItem.tags &&
-            dataItem.tags
-                .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                .indexOf(this.state.selectedTag) !== -1
-        ));
+            ) : (
+                // A tag is selected, so just filter based on that tag
+                dataItem.tags &&
+                dataItem.tags
+                    .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
+                    .indexOf(this.state.selectedTag) !== -1
+            );
+            if (inSet) {
+                // splt by the featured property
+                if (!acc[dataItem.featured]) acc[dataItem.featured] = [];
+                acc[dataItem.featured].push(Object.assign({}, dataItem, {dataId}));
+            }
+            return acc;
+        }, {});
     }
     scrollToTop () {
         this.filteredDataRef.scrollTop = 0;
@@ -106,6 +116,7 @@ class LibraryComponent extends React.Component {
         this.filteredDataRef = ref;
     }
     render () {
+        const filteredData = this.getFilteredData();
         return (
             <Modal
                 fullScreen
@@ -151,32 +162,43 @@ class LibraryComponent extends React.Component {
                     </div>
                 )}
                 <div
-                    className={classNames(styles.libraryScrollGrid, {
+                    className={classNames(styles.libraryScrollArea, {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => {
-                        const scratchURL = dataItem.md5 ?
-                            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
-                            dataItem.rawURL;
-                        return (
-                            <LibraryItem
-                                description={dataItem.description}
-                                disabled={dataItem.disabled}
-                                featured={dataItem.featured}
-                                iconURL={scratchURL}
-                                id={index}
-                                key={`item_${index}`}
-                                name={dataItem.name}
-                                onBlur={this.handleBlur}
-                                onFocus={this.handleFocus}
-                                onMouseEnter={this.handleMouseEnter}
-                                onMouseLeave={this.handleMouseLeave}
-                                onSelect={this.handleSelect}
-                            />
-                        );
-                    })}
+                    {Object.keys(filteredData).map(featured => (
+                        filteredData[featured].length > 0 && (
+                            <div
+                                className={classNames(styles.libraryGrid, {
+                                    [styles.featured]: featured === 'true'
+                                })}
+                                key={`grid-featured-${featured}`}
+                            >
+                                {filteredData[featured].map(dataItem => {
+                                    const scratchURL = dataItem.md5 ?
+                                        `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
+                                        dataItem.rawURL;
+                                    return (
+                                        <LibraryItem
+                                            description={dataItem.description}
+                                            disabled={dataItem.disabled}
+                                            featured={dataItem.featured}
+                                            iconURL={scratchURL}
+                                            id={dataItem.dataId}
+                                            key={`item_${dataItem.dataId}`}
+                                            name={dataItem.name}
+                                            onBlur={this.handleBlur}
+                                            onFocus={this.handleFocus}
+                                            onMouseEnter={this.handleMouseEnter}
+                                            onMouseLeave={this.handleMouseLeave}
+                                            onSelect={this.handleSelect}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )
+                    ))}
                 </div>
             </Modal>
         );

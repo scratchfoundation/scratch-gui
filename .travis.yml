@@ -17,6 +17,9 @@ before_deploy:
 - npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)
 - git config --global user.name $(git log --pretty=format:"%an" -n1)
+script:
+- npm test
+- if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then npm run test:smoke; fi
 deploy:
 - provider: script
   on:

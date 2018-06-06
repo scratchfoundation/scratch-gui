@@ -44,7 +44,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                         analytics.event({
                             category: 'project',
                             action: 'Load Project',
-                            value: projectId,
+                            label: projectId,
                             nonInteraction: true
                         });
                     }

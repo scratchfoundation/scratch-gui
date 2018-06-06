@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
-import {setStageSize, STAGE_SIZES} from '../reducers/stage-size';
+import {STAGE_SIZES} from '../lib/layout-constants';
+import {setStageSize} from '../reducers/stage-size';
 import {setFullScreen} from '../reducers/mode';
 
 import {connect} from 'react-redux';
@@ -45,7 +46,7 @@ StageHeader.propTypes = {
     isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_SIZES)),
+    stageSize: PropTypes.oneOf(Object.values(STAGE_SIZES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

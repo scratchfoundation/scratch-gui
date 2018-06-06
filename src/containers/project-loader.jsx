@@ -76,7 +76,10 @@ class ProjectLoader extends React.Component {
         );
     }
     render () {
-        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
+        if (this.state.loadingError) {
+            throw new Error(
+                `Failed to load project from file: ${this.state.errorMessage}`);
+        }
         const {
             /* eslint-disable no-unused-vars */
             children,

@@ -79,12 +79,11 @@ class StageSelector extends React.Component {
     }
     render () {
         const {
-            /* eslint-disable no-unused-vars */
-            assetId,
-            id,
-            onActivateTab,
-            onSelect,
-            /* eslint-enable no-unused-vars */
+            assetId: _assetId,
+            dispatchSetHoveredSprite: _dispatchSetHoveredSprite,
+            id: _id,
+            onActivateTab: _onActivateTab,
+            onSelect: _onSelect,
             ...componentProps
         } = this.props;
         return (

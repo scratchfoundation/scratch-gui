@@ -120,6 +120,7 @@
 .list-footer {
     background: $ui-white;
     display: flex;
+    align-items: center;
     flex-direction: row;
     justify-content: space-between;
     padding: 3px;
@@ -173,12 +174,14 @@
 
 .add-button {
     cursor: pointer;
-    margin-right: 3px;
+    background-color: $motion-primary;
+    color: white;
+    border-radius: 50%;
+    padding: 0.25rem;
 }
 
 .resize-handle {
     cursor: nwse-resize;
-    margin-left: 3px;
 }
 
 .footer-length {

@@ -54,13 +54,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(32);
+var _reactDom = __webpack_require__(33);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(7);
 
-var _controls = __webpack_require__(243);
+var _controls = __webpack_require__(244);
 
 var _controls2 = _interopRequireDefault(_controls);
 
@@ -68,7 +68,7 @@ var _blocks = __webpack_require__(310);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(147);
+var _gui = __webpack_require__(149);
 
 var _gui2 = _interopRequireDefault(_gui);
 

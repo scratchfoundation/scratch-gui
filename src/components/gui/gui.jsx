@@ -246,7 +246,10 @@ const GUIComponent = props => {
                                 vm={vm}
                             />
                             <Box className={styles.targetWrapper}>
-                                <TargetPane vm={vm} />
+                                <TargetPane
+                                    stageSize={stageSize}
+                                    vm={vm}
+                                />
                             </Box>
                         </Box>
                     </Box>

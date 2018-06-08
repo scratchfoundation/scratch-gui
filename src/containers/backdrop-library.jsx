@@ -39,8 +39,9 @@ class BackdropLibrary extends React.Component {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addBackdrop(item.md5, vmBackdrop);
+        this.props.vm.setEditingTarget(this.props.stageID);
         this.props.onActivateTab(COSTUMES_TAB_INDEX);
+        this.props.vm.addBackdrop(item.md5, vmBackdrop);
         analytics.event({
             category: 'library',
             action: 'Select Backdrop',
@@ -65,14 +66,19 @@ BackdropLibrary.propTypes = {
     intl: intlShape.isRequired,
     onActivateTab: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
+    stageID: PropTypes.string.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
+
+const mapStateToProps = state => ({
+    stageID: state.scratchGui.targets.stage.id
+});
 
 const mapDispatchToProps = dispatch => ({
     onActivateTab: tab => dispatch(activateTab(tab))
 });
 
 export default injectIntl(connect(
-    null,
-    mapDispatchToProps,
+    mapStateToProps,
+    mapDispatchToProps
 )(BackdropLibrary));

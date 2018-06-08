@@ -119,7 +119,7 @@ const mapStateToProps = (state, {assetId, id}) => ({
 
 const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
-        e.preventDefault();
+        e.stopPropagation();
         dispatch(openBackdropLibrary());
     },
     onActivateTab: tabIndex => {

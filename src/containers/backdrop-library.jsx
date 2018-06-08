@@ -2,7 +2,13 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {connect} from 'react-redux';
 import VM from 'scratch-vm';
+
+import {
+    activateTab,
+    COSTUMES_TAB_INDEX
+} from '../reducers/editor-tab';
 
 import analytics from '../lib/analytics';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
@@ -34,6 +40,7 @@ class BackdropLibrary extends React.Component {
             skinId: null
         };
         this.props.vm.addBackdrop(item.md5, vmBackdrop);
+        this.props.onActivateTab(COSTUMES_TAB_INDEX);
         analytics.event({
             category: 'library',
             action: 'Select Backdrop',
@@ -56,8 +63,16 @@ class BackdropLibrary extends React.Component {
 
 BackdropLibrary.propTypes = {
     intl: intlShape.isRequired,
+    onActivateTab: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default injectIntl(BackdropLibrary);
+const mapDispatchToProps = dispatch => ({
+    onActivateTab: tab => dispatch(activateTab(tab))
+});
+
+export default injectIntl(connect(
+    null,
+    mapDispatchToProps,
+)(BackdropLibrary));

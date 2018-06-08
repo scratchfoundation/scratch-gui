@@ -321,6 +321,13 @@ const events = function (isStage) {
         ` : `
             <block type="event_whenthisspriteclicked"/>
         `}
+        ${isStage ? '' : `
+            <block type="event_whentouchingobject">
+                <value name="TOUCHINGOBJECTMENU">
+                    <shadow type="event_touchingobjectmenu"/>
+                </value>
+            </block>
+        `}
         <block type="event_whenbackdropswitchesto">
         </block>
         ${blockSeparator}

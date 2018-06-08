@@ -65,7 +65,10 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
-        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
+        if (this.state.loadingError) {
+            throw new Error(
+                `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
+        }
         const {
             children,
             fetchingProject,

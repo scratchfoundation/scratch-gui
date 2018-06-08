@@ -6,15 +6,22 @@ addons:
 node_js:
 - 8
 env:
+  global:
   - NODE_ENV=production
+  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
+  - NPM_TAG=latest
 cache:
   directories:
   - node_modules
 install:
 - npm --production=false install
 - npm --production=false update
+script:
+- npm test
+- if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ] && [ "$TRAVIS_BRANCH" == "master" ]; then  npm run test:smoke; fi
 before_deploy:
 - npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
+- if [ "$TRAVIS_BRANCH" == "develop" ]; then export NPM_TAG=develop; fi
 - git config --global user.email $(git log --pretty=format:"%ae" -n1)
 - git config --global user.name $(git log --pretty=format:"%an" -n1)
 deploy:
@@ -34,9 +41,11 @@ deploy:
     branch:
     - master
     - develop
+    - smoke
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
+  tag: $NPM_TAG
 - provider: s3
   on:
     branch:

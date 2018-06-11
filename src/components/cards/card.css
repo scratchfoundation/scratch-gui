@@ -5,6 +5,7 @@
 .card-container {
     position:absolute;
     z-index: $z-index-card;
+    margin: 0.5rem 2rem;
 }
 
 .left-card, .right-card {

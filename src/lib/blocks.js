@@ -185,14 +185,6 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
-    ScratchBlocks.Blocks.event_touchingobjectmenu.init = function () {
-        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, eventColors, [
-            ['mouse-pointer', '_mouse_'],
-            ['edge', '_edge_']
-        ]);
-        this.jsonInit(json);
-    };
-
     ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
         const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
         this.jsonInit(json);

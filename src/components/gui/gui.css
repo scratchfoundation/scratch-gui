@@ -176,6 +176,8 @@
     padding-left: $space;
     padding-right: $space;
 
+    min-height: 0; /* this makes it work in Firefox */
+    
     /*
         For making the sprite-selector a scrollable pane
         @todo: Not working in Safari

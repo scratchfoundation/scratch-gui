@@ -21,11 +21,11 @@ var _gui = __webpack_require__(150);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(111);
+var _hashParserHoc = __webpack_require__(113);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(110);
+var _appStateHoc = __webpack_require__(112);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 

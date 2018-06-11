@@ -5,17 +5,18 @@
  */
 
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .coming-soon {
     background-color: $data-primary !important;
-    border: 1px solid $ui-black-transparent) !important;
+    border: 1px solid $ui-black-transparent !important;
     border-radius: .25rem !important;
     box-shadow: 0 0 .5rem $ui-black-transparent !important;
     padding: .75rem 1rem !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 1rem !important;
     line-height: 1.25rem !important;
-    z-index: 100 !important;
+    z-index: $z-index-coming-soon !important;
 }
 
 .coming-soon:after {

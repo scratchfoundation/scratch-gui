@@ -6,8 +6,6 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
-import CostumeLibrary from './costume-library.jsx';
-import BackdropLibrary from './backdrop-library.jsx';
 import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
@@ -15,8 +13,6 @@ import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 
 import {
     closeCameraCapture,
-    closeCostumeLibrary,
-    closeBackdropLibrary,
     openCameraCapture,
     openCostumeLibrary,
     openBackdropLibrary
@@ -209,16 +205,11 @@ class CostumeTab extends React.Component {
             onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
-            backdropLibraryVisible,
             cameraModalVisible,
-            costumeLibraryVisible,
-            onRequestCloseBackdropLibrary,
             onRequestCloseCameraModal,
-            onRequestCloseCostumeLibrary,
             editingTarget,
             sprites,
-            stage,
-            vm
+            stage
         } = this.props;
 
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
@@ -284,18 +275,6 @@ class CostumeTab extends React.Component {
                     /> :
                     null
                 }
-                {costumeLibraryVisible ? (
-                    <CostumeLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseCostumeLibrary}
-                    />
-                ) : null}
-                {backdropLibraryVisible ? (
-                    <BackdropLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseBackdropLibrary}
-                    />
-                ) : null}
                 {cameraModalVisible ? (
                     <CameraModal
                         onClose={onRequestCloseCameraModal}
@@ -308,17 +287,13 @@ class CostumeTab extends React.Component {
 }
 
 CostumeTab.propTypes = {
-    backdropLibraryVisible: PropTypes.bool,
     cameraModalVisible: PropTypes.bool,
-    costumeLibraryVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     intl: intlShape,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
-    onRequestCloseBackdropLibrary: PropTypes.func.isRequired,
     onRequestCloseCameraModal: PropTypes.func.isRequired,
-    onRequestCloseCostumeLibrary: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
             costumes: PropTypes.arrayOf(PropTypes.shape({
@@ -340,9 +315,7 @@ const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
-    cameraModalVisible: state.scratchGui.modals.cameraCapture,
-    costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
-    backdropLibraryVisible: state.scratchGui.modals.backdropLibrary
+    cameraModalVisible: state.scratchGui.modals.cameraCapture
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -356,12 +329,6 @@ const mapDispatchToProps = dispatch => ({
     },
     onNewCostumeFromCameraClick: () => {
         dispatch(openCameraCapture());
-    },
-    onRequestCloseBackdropLibrary: () => {
-        dispatch(closeBackdropLibrary());
-    },
-    onRequestCloseCostumeLibrary: () => {
-        dispatch(closeCostumeLibrary());
     },
     onRequestCloseCameraModal: () => {
         dispatch(closeCameraCapture());

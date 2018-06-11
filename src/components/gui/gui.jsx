@@ -15,6 +15,8 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import CostumeLibrary from '../../containers/costume-library.jsx';
+import BackdropLibrary from '../../containers/backdrop-library.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
@@ -46,10 +48,12 @@ const GUIComponent = props => {
     const {
         activeTabIndex,
         basePath,
+        backdropLibraryVisible,
         backpackOptions,
         blocksTabVisible,
         cardsVisible,
         children,
+        costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
         importInfoVisible,
@@ -60,6 +64,8 @@ const GUIComponent = props => {
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onRequestCloseBackdropLibrary,
+        onRequestCloseCostumeLibrary,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -111,6 +117,18 @@ const GUIComponent = props => {
             ) : null}
             {cardsVisible ? (
                 <Cards />
+            ) : null}
+            {costumeLibraryVisible ? (
+                <CostumeLibrary
+                    vm={vm}
+                    onRequestClose={onRequestCloseCostumeLibrary}
+                />
+            ) : null}
+            {backdropLibraryVisible ? (
+                <BackdropLibrary
+                    vm={vm}
+                    onRequestClose={onRequestCloseBackdropLibrary}
+                />
             ) : null}
             <MenuBar enableCommunity={enableCommunity} />
             <Box className={styles.bodyWrapper}>
@@ -227,6 +245,7 @@ const GUIComponent = props => {
 };
 GUIComponent.propTypes = {
     activeTabIndex: PropTypes.number,
+    backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
         host: PropTypes.string,
         visible: PropTypes.bool
@@ -235,6 +254,7 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
+    costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
@@ -245,6 +265,8 @@ GUIComponent.propTypes = {
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onRequestCloseBackdropLibrary: PropTypes.func,
+    onRequestCloseCostumeLibrary: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,

@@ -1,39 +1,41 @@
+import keyMirror from 'keymirror';
+
 /**
  * Names for each state of the stage size toggle
  * @enum {string}
  */
-const STAGE_SIZE_MODES = {
+const STAGE_SIZE_MODES = keyMirror({
     /**
      * The "large stage" button is pressed; the user would like a large stage.
      */
-    large: 'large',
+    large: null,
 
     /**
      * The "small stage" button is pressed; the user would like a small stage.
      */
-    small: 'small'
-};
+    small: null
+});
 
 /**
  * Names for each stage render size
  * @enum {string}
  */
-const STAGE_DISPLAY_SIZES = {
+const STAGE_DISPLAY_SIZES = keyMirror({
     /**
      * Large stage with wide browser
      */
-    large: 'large',
+    large: null,
 
     /**
      * Large stage with narrow browser
      */
-    largeConstrained: 'largeConstrained',
+    largeConstrained: null,
 
     /**
      * Small stage (ignores browser width)
      */
-    small: 'small'
-};
+    small: null
+});
 
 const STAGE_DISPLAY_SCALES = {};
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)

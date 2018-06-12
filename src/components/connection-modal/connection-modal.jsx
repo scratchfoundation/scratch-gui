@@ -20,7 +20,7 @@ const ConnectionModalComponent = props => (
                     onClick={props.onCancel}
                 >
                     <FormattedMessage
-                        defaultMessage="💩"
+                        defaultMessage="cancel"
                         description="Button in prompt for cancelling the dialog"
                         id="gui.prompt.cancel"
                     />

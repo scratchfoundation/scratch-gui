@@ -1,5 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
+@import "../../css/z-index.css";
 
 .sprite-selector {
     flex-grow: 1;
@@ -65,7 +66,7 @@
     position: absolute;
     bottom: 0.75rem;
     right: 1rem;
-    z-index: 1; /* TODO overlaps the stage, this doesn't work, fix! */
+    z-index: $z-index-add-button;
 }
 
 .raised {

@@ -79,9 +79,8 @@ class StageSelector extends React.Component {
         this.fileInput = input;
     }
     render () {
-        const {
-            ...componentProps
-        } = omit(this.props, ['assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
+        const componentProps = omit(this.props, [
+            'assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
         return (
             <StageSelectorComponent
                 fileInputRef={this.setFileInput}

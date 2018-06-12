@@ -97,7 +97,7 @@ const StageHeaderComponent = function (props) {
                             className={classNames(
                                 styles.stageButton,
                                 styles.stageButtonLeft,
-                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonDisabled
+                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonToggledOff
                             )}
                             onClick={onSetStageSmall}
                         >
@@ -114,7 +114,7 @@ const StageHeaderComponent = function (props) {
                             className={classNames(
                                 styles.stageButton,
                                 styles.stageButtonRight,
-                                (stageSizeMode === STAGE_SIZE_MODES.large) ? null : styles.stageButtonDisabled
+                                (stageSizeMode === STAGE_SIZE_MODES.large) ? null : styles.stageButtonToggledOff
                             )}
                             onClick={onSetStageLarge}
                         >

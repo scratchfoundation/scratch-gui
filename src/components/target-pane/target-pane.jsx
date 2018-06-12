@@ -6,7 +6,7 @@ import VM from 'scratch-vm';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
-import {STAGE_SIZES} from '../../lib/layout-constants';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
 
 import styles from './target-pane.css';
 
@@ -142,7 +142,7 @@ TargetPane.propTypes = {
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
-    stageSize: PropTypes.oneOf(Object.values(STAGE_SIZES)).isRequired,
+    stageSize: PropTypes.oneOf(Object.values(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM)
 };
 

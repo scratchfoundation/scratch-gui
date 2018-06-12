@@ -9,7 +9,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import Controls from '../../containers/controls.jsx';
 import {getStageDimensions} from '../../lib/screen-utils';
-import {STAGE_SIZES} from '../../lib/layout-constants';
+import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -97,7 +97,7 @@ const StageHeaderComponent = function (props) {
                             className={classNames(
                                 styles.stageButton,
                                 styles.stageButtonLeft,
-                                (stageSizeMode === STAGE_SIZES.small) ? null : styles.stageButtonDisabled
+                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonDisabled
                             )}
                             onClick={onSetStageSmall}
                         >
@@ -114,7 +114,7 @@ const StageHeaderComponent = function (props) {
                             className={classNames(
                                 styles.stageButton,
                                 styles.stageButtonRight,
-                                (stageSizeMode === STAGE_SIZES.large) ? null : styles.stageButtonDisabled
+                                (stageSizeMode === STAGE_SIZE_MODES.large) ? null : styles.stageButtonDisabled
                             )}
                             onClick={onSetStageLarge}
                         >
@@ -171,12 +171,12 @@ StageHeaderComponent.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
-    stageSizeMode: PropTypes.oneOf([STAGE_SIZES.large, STAGE_SIZES.small]),
+    stageSizeMode: PropTypes.oneOf(Object.values(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 StageHeaderComponent.defaultProps = {
-    stageSizeMode: STAGE_SIZES.large
+    stageSizeMode: STAGE_SIZE_MODES.large
 };
 
 export default injectIntl(connect(

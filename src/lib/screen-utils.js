@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-import layout, {STAGE_SIZES, STAGE_SCALES} from '../lib/layout-constants';
+import layout, {STAGE_DISPLAY_SCALES, STAGE_SIZE_MODES, STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 
 /**
  * @typedef {object} StageDimensions
@@ -11,18 +9,6 @@ import layout, {STAGE_SIZES, STAGE_SCALES} from '../lib/layout-constants';
  * @property {int} widthDefault - the width of the stage in its default (large) size.
  */
 
-/**
- * PropTypes.shape(...) argument for `getStageDimensions` return value structure.
- * @type {object.<PropTypes>}
- */
-const StageDimensionsShape = {
-    height: PropTypes.number.isRequired,
-    heightDefault: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-    widthDefault: PropTypes.number.isRequired,
-    scale: PropTypes.number.isRequired
-};
-
 const STAGE_DIMENSION_DEFAULTS = {
     spacingBorderAdjustment: 9,
     menuHeightAdjustment: 40
@@ -30,22 +16,23 @@ const STAGE_DIMENSION_DEFAULTS = {
 
 /**
  * Resolve the current GUI and browser state to an actual stage size enum value.
- * All parameters are optional; if none are provided the result will be `STAGE_SIZES.large`.
- * @param {STAGE_SIZES} stageSizeMode - the state of the stage size toggle button.
- * @param {boolean} mediaQuerySmallSize - true if the window is too small for the large stage at its full size.
- * @return {STAGE_SIZES} - the stage size enum value we should use in this situation.
+ * @param {STAGE_SIZE_MODES} stageSizeMode - the state of the stage size toggle button.
+ * @param {boolean} isFullSize - true if the window is large enough for the large stage at its full size.
+ * @return {STAGE_DISPLAY_SIZES} - the stage size enum value we should use in this situation.
  */
-const resolveStageSize = (stageSizeMode = null, mediaQuerySmallSize = false) => {
-    stageSizeMode = stageSizeMode || STAGE_SIZES.large;
-    if (stageSizeMode === STAGE_SIZES.large && mediaQuerySmallSize) {
-        return STAGE_SIZES.largeConstrained;
+const resolveStageSize = (stageSizeMode, isFullSize) => {
+    if (stageSizeMode === STAGE_SIZE_MODES.small) {
+        return STAGE_DISPLAY_SIZES.small;
     }
-    return stageSizeMode;
+    if (isFullSize) {
+        return STAGE_DISPLAY_SIZES.large;
+    }
+    return STAGE_DISPLAY_SIZES.largeConstrained;
 };
 
 /**
  * Retrieve info used to determine the actual stage size based on the current GUI and browser state.
- * @param {STAGE_SIZES} stageSize - the current fully-resolved stage size.
+ * @param {STAGE_DISPLAY_SIZES} stageSize - the current fully-resolved stage size.
  * @param {boolean} isFullScreen - true if full-screen mode is enabled.
  * @return {StageDimensions} - an object describing the dimensions of the stage.
  */
@@ -72,7 +59,7 @@ const getStageDimensions = (stageSize, isFullScreen) => {
 
         stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;
     } else {
-        stageDimensions.scale = STAGE_SCALES[stageSize];
+        stageDimensions.scale = STAGE_DISPLAY_SCALES[stageSize];
         stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
         stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;
     }
@@ -82,6 +69,5 @@ const getStageDimensions = (stageSize, isFullScreen) => {
 
 export {
     getStageDimensions,
-    resolveStageSize,
-    StageDimensionsShape
+    resolveStageSize
 };

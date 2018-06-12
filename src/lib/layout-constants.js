@@ -1,9 +1,24 @@
-// stage size constants
 /**
- * Names for each stage size mode
+ * Names for each state of the stage size toggle
  * @enum {string}
  */
-const STAGE_SIZES = {
+const STAGE_SIZE_MODES = {
+    /**
+     * The "large stage" button is pressed; the user would like a large stage.
+     */
+    large: 'large',
+
+    /**
+     * The "small stage" button is pressed; the user would like a small stage.
+     */
+    small: 'small'
+};
+
+/**
+ * Names for each stage render size
+ * @enum {string}
+ */
+const STAGE_DISPLAY_SIZES = {
     /**
      * Large stage with wide browser
      */
@@ -20,10 +35,10 @@ const STAGE_SIZES = {
     small: 'small'
 };
 
-const STAGE_SCALES = {};
-STAGE_SCALES[STAGE_SIZES.large] = 1; // large mode, wide browser (standard)
-STAGE_SCALES[STAGE_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
-STAGE_SCALES[STAGE_SIZES.small] = 0.5; // small mode, regardless of browser size
+const STAGE_DISPLAY_SCALES = {};
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size
 
 export default {
     standardStageWidth: 480,
@@ -33,6 +48,7 @@ export default {
 };
 
 export {
-    STAGE_SCALES,
-    STAGE_SIZES
+    STAGE_DISPLAY_SCALES,
+    STAGE_DISPLAY_SIZES,
+    STAGE_SIZE_MODES
 };

@@ -5,7 +5,7 @@ import Renderer from 'scratch-render';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
-import {STAGE_SIZES} from '../lib/layout-constants';
+import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
@@ -384,7 +384,7 @@ Stage.propTypes = {
     isFullScreen: PropTypes.bool.isRequired,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,
-    stageSize: PropTypes.oneOf(Object.values(STAGE_SIZES)).isRequired,
+    stageSize: PropTypes.oneOf(Object.values(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };

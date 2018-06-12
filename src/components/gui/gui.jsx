@@ -28,7 +28,7 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 
-import layout, {STAGE_SIZES} from '../../lib/layout-constants';
+import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
 import styles from './gui.css';
@@ -98,7 +98,7 @@ const GUIComponent = props => {
     }
 
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
-        const stageSize = resolveStageSize(stageSizeMode, !isFullSize);
+        const stageSize = resolveStageSize(stageSizeMode, isFullSize);
 
         return isPlayerOnly ? (
             <StageWrapper
@@ -146,8 +146,8 @@ const GUIComponent = props => {
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
                             <Tabs
+                                forceRenderTabPanel
                                 className={tabClassNames.tabs}
-                                forceRenderTabPanel={true} // eslint-disable-line react/jsx-boolean-value
                                 selectedIndex={activeTabIndex}
                                 selectedTabClassName={tabClassNames.tabSelected}
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
@@ -289,7 +289,7 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
-    stageSizeMode: PropTypes.oneOf([STAGE_SIZES.large, STAGE_SIZES.small]),
+    stageSizeMode: PropTypes.oneOf(Object.values(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
@@ -300,7 +300,7 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
-    stageSizeMode: STAGE_SIZES.large
+    stageSizeMode: STAGE_SIZE_MODES.large
 };
 
 const mapStateToProps = state => ({

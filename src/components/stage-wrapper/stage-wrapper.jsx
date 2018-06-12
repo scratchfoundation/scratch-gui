@@ -3,7 +3,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
-import {STAGE_SIZES} from '../../lib/layout-constants.js';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 
@@ -41,7 +41,7 @@ const StageWrapperComponent = function (props) {
 
 StageWrapperComponent.propTypes = {
     isRendererSupported: PropTypes.bool.isRequired,
-    stageSize: PropTypes.oneOf(Object.values(STAGE_SIZES)).isRequired,
+    stageSize: PropTypes.oneOf(Object.values(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

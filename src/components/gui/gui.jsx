@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
@@ -60,7 +61,6 @@ const GUIComponent = props => {
         children,
         costumeLibraryVisible,
         costumesTabVisible,
-        dispatch: _dispatch,
         enableCommunity,
         importInfoVisible,
         intl,
@@ -79,7 +79,7 @@ const GUIComponent = props => {
         tipsLibraryVisible,
         vm,
         ...componentProps
-    } = props;
+    } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
@@ -274,7 +274,6 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
-    dispatch: PropTypes.func,
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,

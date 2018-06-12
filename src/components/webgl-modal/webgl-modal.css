@@ -1,6 +1,7 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/typography.css";
+@import "../../css/z-index.css";
 
 .modal-overlay {
     position: fixed;
@@ -8,7 +9,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: $z-index-modal;
     background-color: $ui-modal-overlay;
 }
 

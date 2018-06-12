@@ -1,23 +1,18 @@
 #!/bin/bash
 
 # gh-pages cleanup script: Switches to gh-pages branch, and removes all
-# greenkeeper/* directories that aren't listed as remote branches
+# directories that aren't listed as remote branches
 
-# Join list of remote greenkeeper/* branches for GLOBIGNORE
-# Turns origin/greenkeeper/package-x.x.x, ..., into
-# greenkeeper/package-x.x.x:greenkeeper/package:...:
-function join { local IFS=":"; shift; echo "${*#origin/}"; }
 
 current=$(git rev-parse --abbrev-ref HEAD)
 git fetch origin
-greenkeeper=$(git branch -r --list origin/greenkeeper/*)
+branches=$(git branch -r --list origin/*)
 git checkout -f gh-pages
 
-# Remove all greenkeeper/* directories that aren't remote branch names
-GLOBIGNORE=$(join $greenkeeper)
-rm -rf greenkeeper/*
+# Remove all directories that aren't remote branch names
+find * -type d \( -path ./.git $(printf " -o -path ./%s" "${branches[@]//origin\//}") \) -prune -o -type d -exec rm -rfvi "$0" {} \;
 git add -u
-git commit -m "Remove old greenkeeper directories"
+git commit -m "Remove stale directories"
 git push origin
 
 # Return to where we were

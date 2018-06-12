@@ -9,6 +9,7 @@ import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import Prompt from './prompt.jsx';
+import ConnectionModal from './connection-modal.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
 import CustomProcedures from './custom-procedures.jsx';
@@ -365,13 +366,17 @@ class Blocks extends React.Component {
                     {...props}
                 />
                 {this.state.prompt ? (
-                    <Prompt
-                        label={this.state.prompt.message}
-                        placeholder={this.state.prompt.defaultValue}
-                        showMoreOptions={this.state.prompt.showMoreOptions}
-                        title={this.state.prompt.title}
+                    // <Prompt
+                    //     label={this.state.prompt.message}
+                    //     placeholder={this.state.prompt.defaultValue}
+                    //     showMoreOptions={this.state.prompt.showMoreOptions}
+                    //     title={this.state.prompt.title}
+                    //     onCancel={this.handlePromptClose}
+                    //     onOk={this.handlePromptCallback}
+                    // />
+                    <ConnectionModal
+                        title={'OMG a modal 😲 🔥 💯'}
                         onCancel={this.handlePromptClose}
-                        onOk={this.handlePromptCallback}
                     />
                 ) : null}
                 {extensionLibraryVisible ? (

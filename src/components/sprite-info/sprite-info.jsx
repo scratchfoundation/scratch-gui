@@ -276,7 +276,7 @@ SpriteInfo.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]),
-    stageSize: PropTypes.oneOf(Object.values(STAGE_DISPLAY_SIZES)).isRequired,
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     visible: PropTypes.bool,
     x: PropTypes.oneOfType([
         PropTypes.string,

@@ -36,10 +36,10 @@ deploy:
     branch: master
   skip_cleanup: true
   script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-- provider: script
-  on:
-    branch: greenkeeper/*
-  script: ./clean_greenkeeper
+# - provider: script
+#   on:
+#     branch: greenkeeper/*
+#   script: ./clean_greenkeeper
 - provider: npm
   on:
     branch:

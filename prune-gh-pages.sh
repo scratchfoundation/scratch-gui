@@ -14,20 +14,26 @@ function deslash () {
     fi
 }
 
+repository=origin
+
+if [[ $1 != "" ]]
+then
+    repository=$1
+fi
+
 # Cache current branch
 current=$(git rev-parse --abbrev-ref HEAD)
 
 # Checkout most recent gh-pages
-git fetch upstream
 git fetch origin
-git checkout -f gh-pages-empty-history
-git reset --hard origin/gh-pages-empty-history
+git checkout -f gh-pages
+git reset --hard origin/gh-pages
 
 # Make an array of directories to not delete, from the list of remote branches
-branches=$(git branch -r --list upstream/*)
+branches=$(git branch -r --list origin/*)
 
 # Strip off the remote name prefix
-branches="${branches[@]//upstream\//}"
+branches="${branches[@]//origin\//}"
 
 # Add parent directories of branches to the exclusion list (e.g. greenkeeper/)
 for branch in $branches; do
@@ -45,7 +51,7 @@ find . -type d \( -path ./.git $(printf " -o -path ./%s" $branches) \) -prune -o
 # Push
 git add -u
 git commit -m "Remove stale directories"
-# git push origin gh-pages
+git push $repository gh-pages
 
 # Return to where we were
 git checkout -f $current

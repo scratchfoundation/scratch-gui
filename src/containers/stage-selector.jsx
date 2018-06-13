@@ -1,4 +1,5 @@
 import bindAll from 'lodash.bindall';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -78,15 +79,8 @@ class StageSelector extends React.Component {
         this.fileInput = input;
     }
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            assetId,
-            id,
-            onActivateTab,
-            onSelect,
-            /* eslint-enable no-unused-vars */
-            ...componentProps
-        } = this.props;
+        const componentProps = omit(this.props, [
+            'assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
         return (
             <StageSelectorComponent
                 fileInputRef={this.setFileInput}

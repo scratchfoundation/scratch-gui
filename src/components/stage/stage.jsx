@@ -6,26 +6,26 @@ import Box from '../box/box.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
-import {getStageSize} from '../../lib/screen-utils.js';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
+import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
 
 const StageComponent = props => {
     const {
         canvasRef,
         dragRef,
-        height,
         isColorPicking,
         isFullScreen,
-        width,
         colorInfo,
-        onDeactivateColorPicker,
         question,
-        onQuestionAnswered,
+        stageSize,
         useEditorDragStyle,
+        onDeactivateColorPicker,
+        onQuestionAnswered,
         ...boxProps
     } = props;
 
-    const stageSize = getStageSize(isFullScreen, height, width);
+    const stageDimensions = getStageDimensions(stageSize, isFullScreen);
 
     return (
         <div>
@@ -43,14 +43,14 @@ const StageComponent = props => {
                     )}
                     componentRef={canvasRef}
                     element="canvas"
-                    height={stageSize.height}
-                    width={stageSize.width}
+                    height={stageDimensions.height}
+                    width={stageDimensions.width}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
                     <MonitorList
                         draggable={useEditorDragStyle}
-                        stageSize={stageSize}
+                        stageSize={stageDimensions}
                     />
                 </Box>
                 {isColorPicking && colorInfo ? (
@@ -67,7 +67,7 @@ const StageComponent = props => {
                     >
                         <div
                             className={styles.questionWrapper}
-                            style={{width: stageSize.width}}
+                            style={{width: stageDimensions.width}}
                         >
                             <Question
                                 question={question}
@@ -96,19 +96,16 @@ StageComponent.propTypes = {
     canvasRef: PropTypes.func,
     colorInfo: Loupe.propTypes.colorInfo,
     dragRef: PropTypes.func,
-    height: PropTypes.number,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
-    useEditorDragStyle: PropTypes.bool,
-    width: PropTypes.number
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    useEditorDragStyle: PropTypes.bool
 };
 StageComponent.defaultProps = {
     canvasRef: () => {},
-    dragRef: () => {},
-    width: 480,
-    height: 360
+    dragRef: () => {}
 };
 export default StageComponent;

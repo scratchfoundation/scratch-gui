@@ -62,8 +62,6 @@
     border-bottom-right-radius: 0;
 }
 
-.stage-button-disabled {
-    opacity: .5;
-    cursor: auto;
-    background: transparent;
+.stage-button-toggled-off {
+    filter: saturate(0);
 }

@@ -9,6 +9,7 @@ $z-index-menu-bar: 50; /* blocklyToolboxDiv is 40 */
 
 $z-index-monitor: 100;
 $z-index-coming-soon: 110;
+$z-index-add-button: 120;
 
 $z-index-card: 490;
 $z-index-loader: 500;

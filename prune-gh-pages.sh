@@ -43,7 +43,16 @@ done
 branches=$(echo "${branches[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ')
 
 # Remove all directories that don't have corresponding branches
-find . -type d \( -path ./.git $(printf " -o -path ./%s" $branches) \) -prune -o -type d -mindepth 1 -exec rm -rfv {} \;
+# It would be nice if we could exclude everything in .gitignore, but we're
+# not on the branch with the .gitignore anymore... so we can't.
+find . -type d \
+    \( \
+        -path ./.git -o \
+        -path ./node_modules \
+        $(printf " -o -path ./%s" $branches) \
+    \) -prune \
+    -o -mindepth 1 -type d \
+    -exec rm -rfv {} \;
 
 # Push
 git add -u

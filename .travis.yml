@@ -28,14 +28,12 @@ deploy:
 - provider: script
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH != master
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script
   on:
-    branch: master
-  skip_cleanup: true
-  script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+    all_branches: true
+  script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: npm
   on:
     branch:

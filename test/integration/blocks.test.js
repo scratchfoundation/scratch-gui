@@ -56,8 +56,7 @@ describe('Working with the blocks', () => {
         await expect(logs).toEqual([]);
     });
 
-    // TODO: why is this test failing?
-    test.skip('Creating variables', async () => {
+    test('Creating variables', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
         await clickText('Code');

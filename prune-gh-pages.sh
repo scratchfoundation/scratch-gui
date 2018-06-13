@@ -25,15 +25,12 @@ fi
 current=$(git rev-parse --abbrev-ref HEAD)
 
 # Checkout most recent gh-pages
-git fetch origin
-git checkout -f gh-pages
-git reset --hard origin/gh-pages
+git fetch --force $repository gh-pages:gh-pages
+git checkout gh-pages
+git clean -fdx
 
 # Make an array of directories to not delete, from the list of remote branches
-branches=$(git branch -r --list origin/*)
-
-# Strip off the remote name prefix
-branches="${branches[@]//origin\//}"
+branches=$(git ls-remote --refs --quiet $repository | awk '{print $2}' | sed -e 's/refs\/heads\///')
 
 # Add parent directories of branches to the exclusion list (e.g. greenkeeper/)
 for branch in $branches; do
@@ -42,7 +39,7 @@ for branch in $branches; do
     fi
 done
 
-# Dedupe all the greenkeepers
+# Dedupe all the greenkeepers (or other duplicate parent directories)
 branches=$(echo "${branches[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ')
 
 # Remove all directories that don't have corresponding branches

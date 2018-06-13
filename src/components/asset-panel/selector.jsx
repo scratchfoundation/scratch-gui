@@ -13,6 +13,7 @@ import styles from './selector.css';
 const Selector = props => {
     const {
         buttons,
+        containerRef,
         dragType,
         items,
         selectedItemIndex,
@@ -46,7 +47,10 @@ const Selector = props => {
     }
 
     return (
-        <Box className={styles.wrapper}>
+        <Box
+            className={styles.wrapper}
+            componentRef={containerRef}
+        >
             <Box className={styles.listArea}>
                 {items.map((item, index) => (
                     <SortableAsset
@@ -87,6 +91,7 @@ Selector.propTypes = {
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func
     })),
+    containerRef: PropTypes.func,
     dragType: PropTypes.oneOf(Object.keys(DragConstants)),
     draggingIndex: PropTypes.number,
     draggingType: PropTypes.oneOf(Object.keys(DragConstants)),

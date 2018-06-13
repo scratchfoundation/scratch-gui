@@ -13,6 +13,7 @@ import styles from './sprite-selector.css';
 
 const SpriteList = function (props) {
     const {
+        containerRef,
         editingTarget,
         draggingIndex,
         draggingType,
@@ -31,7 +32,10 @@ const SpriteList = function (props) {
     const isSpriteDrag = draggingType === DragConstants.SPRITE;
 
     return (
-        <Box className={styles.itemsWrapper}>
+        <Box
+            className={styles.itemsWrapper}
+            componentRef={containerRef}
+        >
             {items.map((sprite, index) => {
 
                 // If the sprite has just received a block drop, used for green highlight
@@ -77,6 +81,7 @@ const SpriteList = function (props) {
 };
 
 SpriteList.propTypes = {
+    containerRef: PropTypes.func,
     draggingIndex: PropTypes.number,
     draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
     editingTarget: PropTypes.string,

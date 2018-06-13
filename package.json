@@ -74,7 +74,7 @@
     "raw-loader": "^0.5.1",
     "react": "16.4.1",
     "react-contextmenu": "2.9.2",
-    "react-dom": "16.2.0",
+    "react-dom": "16.4.1",
     "react-draggable": "3.0.5",
     "react-ga": "2.5.3",
     "react-intl": "2.4.0",

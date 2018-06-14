@@ -104,3 +104,8 @@
     90% { box-shadow: 0 0 10px #7fff1e; }
     100% { box-shadow: none; }
 }
+
+.placeholder > .sprite {
+    background: black;
+    filter: opacity(15%) brightness(20%);
+}

@@ -47,12 +47,14 @@ $fade-out-distance: 100px;
     height: 0;
     flex-grow: 1;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-item {
     width: 5rem;
     min-height: 5rem;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
 }
 
 @media only screen and (max-width: $full-size-paint) {
@@ -63,4 +65,10 @@ $fade-out-distance: 100px;
     .list-item {
         width: 4rem;
     }
+}
+
+
+.list-item.placeholder {
+    background: black;
+    filter: opacity(15%) brightness(20%);
 }

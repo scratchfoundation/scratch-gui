@@ -19,6 +19,8 @@
     text-align: center;
     cursor: pointer;
     transition: 0.25s ease-out;
+
+    user-select: none;
 }
 
 .sprite-selector-item.is-selected {

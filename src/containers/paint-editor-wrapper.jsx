@@ -43,7 +43,6 @@ class PaintEditorWrapper extends React.Component {
         return (
             <PaintEditor
                 {...this.props}
-                image={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
                 onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
             />
@@ -62,19 +61,19 @@ PaintEditorWrapper.propTypes = {
 };
 
 const mapStateToProps = (state, {selectedCostumeIndex}) => {
-    const {
-        editingTarget,
-        sprites,
-        stage
-    } = state.scratchGui.targets;
-    const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-    const costume = target && target.costumes[selectedCostumeIndex];
+    const targetId = state.scratchGui.vm.editingTarget.id;
+    const sprite = state.scratchGui.vm.editingTarget.sprite;
+    // Make sure the costume index doesn't go out of range.
+    const index = selectedCostumeIndex < sprite.costumes.length ?
+        selectedCostumeIndex : sprite.costumes.length - 1;
+    const costume = state.scratchGui.vm.editingTarget.sprite.costumes[index];
     return {
         name: costume && costume.name,
         rotationCenterX: costume && costume.rotationCenterX,
         rotationCenterY: costume && costume.rotationCenterY,
         imageFormat: costume && costume.dataFormat,
-        imageId: editingTarget && `${editingTarget}${costume.skinId}`,
+        imageId: targetId && `${targetId}${costume.skinId}`,
+        image: state.scratchGui.vm.getCostume(index),
         vm: state.scratchGui.vm
     };
 };

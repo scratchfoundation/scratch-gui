@@ -18,6 +18,7 @@ import SoundLibrary from './sound-library.jsx';
 import soundLibraryContent from '../lib/libraries/sounds.json';
 import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
+import DragConstants from '../lib/drag-constants';
 
 import {connect} from 'react-redux';
 
@@ -38,6 +39,7 @@ class SoundTab extends React.Component {
             'handleSurpriseSound',
             'handleFileUploadClick',
             'handleSoundUpload',
+            'handleDrop',
             'setFileInput'
         ]);
         this.state = {selectedSoundIndex: 0};
@@ -117,6 +119,20 @@ class SoundTab extends React.Component {
         });
     }
 
+    handleDrop (dropInfo) {
+        // Eventually will handle other kinds of drop events, right now just
+        // the reordering events.
+        if (dropInfo.dragType === DragConstants.SOUND) {
+            const sprite = this.props.vm.editingTarget.sprite;
+            const activeSound = sprite.sounds[this.state.selectedSoundIndex];
+
+            this.props.vm.reorderSound(this.props.vm.editingTarget.id,
+                dropInfo.index, dropInfo.newIndex);
+
+            this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
+        }
+    }
+
     setFileInput (input) {
         this.fileInput = input;
     }
@@ -188,12 +204,11 @@ class SoundTab extends React.Component {
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
                 }]}
-                items={sounds.map(sound => ({
-                    url: soundIcon,
-                    ...sound
-                }))}
+                dragType={DragConstants.SOUND}
+                items={sounds}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}
+                onDrop={this.handleDrop}
                 onDuplicateClick={this.handleDuplicateSound}
                 onItemClick={this.handleSelectSound}
             >

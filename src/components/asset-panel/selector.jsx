@@ -6,6 +6,7 @@ import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import SortableAsset from './sortable-asset.jsx';
 import SortableHOC from '../../lib/sortable-hoc.jsx';
+import DragConstants from '../../lib/drag-constants';
 
 import styles from './selector.css';
 
@@ -86,9 +87,9 @@ Selector.propTypes = {
         img: PropTypes.string.isRequired,
         onClick: PropTypes.func
     })),
-    dragType: PropTypes.string,
+    dragType: PropTypes.oneOf(Object.keys(DragConstants)),
     draggingIndex: PropTypes.number,
-    draggingType: PropTypes.string,
+    draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired

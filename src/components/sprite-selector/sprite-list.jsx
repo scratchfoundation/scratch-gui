@@ -78,7 +78,7 @@ const SpriteList = function (props) {
 
 SpriteList.propTypes = {
     draggingIndex: PropTypes.number,
-    draggingType: PropTypes.string,
+    draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
     editingTarget: PropTypes.string,
     hoveredTarget: PropTypes.shape({
         hoveredSprite: PropTypes.string,

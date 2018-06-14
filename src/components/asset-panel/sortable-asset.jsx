@@ -28,7 +28,7 @@ class SortableAsset extends React.Component {
                     order: this.props.index
                 }}
             >
-                {...this.props.children}
+                {this.props.children}
             </div>
         );
     }

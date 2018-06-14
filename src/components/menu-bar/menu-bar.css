@@ -44,6 +44,14 @@
     vertical-align: middle;
 }
 
+.language-icon {
+    height:  1.5rem;
+}
+
+.language-menu {
+    display: inline-flex;
+}
+
 .menu {
     z-index: $z-index-menu-bar;
     top: $menu-bar-height;

@@ -163,9 +163,21 @@
     */
     display: flex;
     flex-direction: column;
+}
 
-    /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
+.stage-and-target-wrapper.large {
+    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
     max-width: calc(480px + calc($space * 2));
+}
+
+.stage-and-target-wrapper.large-constrained {
+    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(408px + calc($space * 2));
+}
+
+.stage-and-target-wrapper.small {
+    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(240px + calc($space * 2));
 }
 
 .target-wrapper {

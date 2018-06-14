@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {connect} from 'react-redux';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -40,6 +40,19 @@ import languageIcon from '../language-selector/language-icon.svg';
 import scratchLogo from './scratch-logo.svg';
 
 import helpIcon from './icon--help.svg';
+
+const ariaMessages = defineMessages({
+    language: {
+        id: 'gui.menuBar.LanguageSelector',
+        defaultMessage: 'language selector',
+        description: 'accessibility text for the language selection menu'
+    },
+    howTo: {
+        id: 'gui.menuBar.howToLibrary',
+        defaultMessage: 'How-to Library',
+        description: 'accessibility text for the how-to library button'
+    }
+});
 
 const MenuBarItemTooltip = ({
     children,
@@ -139,7 +152,10 @@ const MenuBar = props => (
                         id="menubar-selector"
                         place="right"
                     >
-                        <div className={classNames(styles.languageMenu)}>
+                        <div
+                            aria-label={props.intl.formatMessage(ariaMessages.language)}
+                            className={classNames(styles.languageMenu)}
+                        >
                             <img
                                 className={styles.languageIcon}
                                 src={languageIcon}
@@ -149,10 +165,13 @@ const MenuBar = props => (
                                 src={dropdownCaret}
                             />
                         </div>
-                        <LanguageSelector
+                        <MenuBarMenu
                             open={props.languageMenuOpen}
                             onRequestClose={props.onRequestCloseLanguage}
-                        />
+                        >
+                            <LanguageSelector />
+                        </MenuBarMenu>
+
                     </MenuBarItemTooltip>
                 </div>
                 <div
@@ -350,7 +369,7 @@ const MenuBar = props => (
         </div>
         <div className={styles.accountInfoWrapper}>
             <div
-                aria-label="How-to Library"
+                aria-label={props.intl.formatMessage(ariaMessages.howTo)}
                 className={classNames(styles.menuBarItem, styles.hoverable)}
                 onClick={props.onOpenTipLibrary}
             >
@@ -405,6 +424,7 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    intl: intlShape,
     languageMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
@@ -433,7 +453,7 @@ const mapDispatchToProps = dispatch => ({
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(MenuBar);
+)(MenuBar));

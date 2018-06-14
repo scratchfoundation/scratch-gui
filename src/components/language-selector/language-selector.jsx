@@ -22,7 +22,6 @@ class LanguageSelector extends React.Component {
                     ref={componentRef}
                 >
                     <select
-                        aria-label="language selector"
                         className={styles.languageSelect}
                         value={currentLocale}
                         onChange={onChange}

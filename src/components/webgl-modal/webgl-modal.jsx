@@ -31,7 +31,7 @@ const WebGlModal = ({intl, ...props}) => (
             <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
-                    defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for Scratch 3.0 to run."
+                    defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for Smalruby 3.0 to run."
                     description="WebGL missing message"
                     id="gui.webglModal.description"
                     values={{

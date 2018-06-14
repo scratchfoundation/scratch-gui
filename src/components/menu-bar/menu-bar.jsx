@@ -29,10 +29,10 @@ import styles from './menu-bar.css';
 
 import mystuffIcon from './icon--mystuff.png';
 import feedbackIcon from './icon--feedback.svg';
-import profileIcon from './icon--profile.png';
+import profileIcon from './profile-hatti.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
-import scratchLogo from './scratch-logo.svg';
+import smalrubyLogo from './hatti.svg';
 
 import helpIcon from './icon--help.svg';
 
@@ -108,7 +108,7 @@ const MenuBar = props => (
                         alt="Scratch"
                         className={styles.scratchLogo}
                         draggable={false}
-                        src={scratchLogo}
+                        src={smalrubyLogo}
                     />
                 </div>
                 <div className={classNames(styles.menuBarItem, styles.hoverable)}>
@@ -353,7 +353,7 @@ const MenuBar = props => (
                         src={profileIcon}
                     />
                     <span>
-                        {'scratch-cat' /* @todo username */}
+                        {'smalruby-hatti' /* @todo username */}
                     </span>
                     <img
                         className={styles.dropdownCaretIcon}

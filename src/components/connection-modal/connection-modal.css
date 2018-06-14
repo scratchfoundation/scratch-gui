@@ -5,6 +5,10 @@
     width: 360px;
 }
 
+.header {
+    background-color: $pen-primary;
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
@@ -13,17 +17,6 @@
 .label {
     font-weight: 500;
     margin: 0 0 0.75rem;
-}
-
-.input {
-    margin-bottom: 1.5rem;
-    width: 100%;
-    border: 1px solid $ui-black-transparent;
-    border-radius: 5px;
-    padding: 0 1rem;
-    height: 3rem;
-    color: $text-primary-transparent;
-    font-size: .875rem;
 }
 
 .button-row {
@@ -48,34 +41,4 @@
 
 .button-row button + button {
     margin-left: 0.5rem;
-}
-
-.more-options {
-    border-top: 1px dashed hsla(0, 0%, 0%, .25);
-    overflow: visible;
-    padding: 1rem;
-    text-align: center;
-    margin: 0 0 1rem;
-}
-
-.hide-more-options {
-    display: none;
-}
-
-.more-options-accordion {
-    width: 60%;
-    margin: 0 auto;
-}
-
-.more-options-text {
-    opacity: .5;
-}
-
-.more-options-icon {
-    width: .75rem;
-    height: .75rem;
-    margin-left: .5rem;
-    vertical-align: middle;
-    padding-bottom: .2rem;
-    opacity: .5;
 }

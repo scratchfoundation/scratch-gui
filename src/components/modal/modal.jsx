@@ -26,7 +26,7 @@ const ModalComponent = props => (
             direction="column"
             grow={1}
         >
-            <div className={styles.header}>
+            <div className={classNames(styles.header, props.headerClassName)}>
                 <div
                     className={classNames(
                         styles.headerItem,
@@ -74,6 +74,7 @@ ModalComponent.propTypes = {
         PropTypes.object
     ]).isRequired,
     fullScreen: PropTypes.bool,
+    headerClassName: PropTypes.string,
     onRequestClose: PropTypes.func
 };
 

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import ConnectionModalComponent from '../components/connection-modal/connection-modal.jsx';
+import ScanningStepComponent from '../components/connection-modal/scanning-step.jsx';
 
-class ConnectionModal extends React.Component {
+class ScanningStep extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -11,7 +11,8 @@ class ConnectionModal extends React.Component {
             'handleSearch'
         ]);
         this.state = {
-            phase: 'scanning'
+            searching: true,
+            devices: []
         };
     }
     handleCancel () {
@@ -22,7 +23,7 @@ class ConnectionModal extends React.Component {
     }
     render () {
         return (
-            <ConnectionModalComponent
+            <ScanningStepComponent
                 title={this.props.id}
                 onCancel={this.handleCancel}
                 onSearch={this.handleSearch}
@@ -32,10 +33,10 @@ class ConnectionModal extends React.Component {
     }
 }
 
-ConnectionModal.propTypes = {
+ScanningStep.propTypes = {
     id: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSearch: PropTypes.func.isRequired
 };
 
-export default ConnectionModal;
+export default ScanningStep;

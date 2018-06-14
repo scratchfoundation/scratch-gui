@@ -32,35 +32,46 @@ const SpriteList = function (props) {
 
     return (
         <Box className={styles.itemsWrapper}>
-            {items.map((sprite, index) => (
-                <SortableAsset
-                    className={classNames(styles.itemWrapper, {
-                        [styles.placeholder]: isSpriteDrag && index === draggingIndex})}
-                    index={isSpriteDrag ? ordering.indexOf(index) : index}
-                    key={sprite.name}
-                    onAddSortable={onAddSortable}
-                    onRemoveSortable={onRemoveSortable}
-                >
-                    <SpriteSelectorItem
-                        assetId={sprite.costume && sprite.costume.assetId}
-                        className={hoveredTarget.sprite === sprite.id &&
-                                sprite.id !== editingTarget &&
-                                hoveredTarget.receivedBlocks ?
-                            classNames(styles.sprite, styles.receivedBlocks) :
-                            raised && sprite.id !== editingTarget ?
-                                classNames(styles.sprite, styles.raised) : styles.sprite}
-                        dragType={DragConstants.SPRITE}
-                        id={sprite.id}
-                        index={index}
-                        key={sprite.id}
-                        name={sprite.name}
-                        selected={sprite.id === selectedId}
-                        onClick={onSelectSprite}
-                        onDeleteButtonClick={onDeleteSprite}
-                        onDuplicateButtonClick={onDuplicateSprite}
-                    />
-                </SortableAsset>
-            ))}
+            {items.map((sprite, index) => {
+
+                // If the sprite has just received a block drop, used for green highlight
+                const receivedBlocks = (
+                    hoveredTarget.sprite === sprite.id &&
+                    sprite.id !== editingTarget &&
+                    hoveredTarget.receivedBlocks
+                );
+
+                // If the sprite is indicating it can receive block dropping, used for blue highlight
+                const isRaised = !receivedBlocks && raised && sprite.id !== editingTarget;
+
+                return (
+                    <SortableAsset
+                        className={classNames(styles.itemWrapper, {
+                            [styles.placeholder]: isSpriteDrag && index === draggingIndex})}
+                        index={isSpriteDrag ? ordering.indexOf(index) : index}
+                        key={sprite.name}
+                        onAddSortable={onAddSortable}
+                        onRemoveSortable={onRemoveSortable}
+                    >
+                        <SpriteSelectorItem
+                            assetId={sprite.costume && sprite.costume.assetId}
+                            className={classNames(styles.sprite, {
+                                [styles.raised]: isRaised,
+                                [styles.receivedBlocks]: receivedBlocks
+                            })}
+                            dragType={DragConstants.SPRITE}
+                            id={sprite.id}
+                            index={index}
+                            key={sprite.id}
+                            name={sprite.name}
+                            selected={sprite.id === selectedId}
+                            onClick={onSelectSprite}
+                            onDeleteButtonClick={onDeleteSprite}
+                            onDuplicateButtonClick={onDuplicateSprite}
+                        />
+                    </SortableAsset>
+                );
+            })}
         </Box>
     );
 };

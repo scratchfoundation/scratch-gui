@@ -16,4 +16,5 @@
     flex-grow: 1;
     flex-shrink: 1;
     border-left: 1px solid $ui-black-transparent;
+    overflow-y: auto;
 }

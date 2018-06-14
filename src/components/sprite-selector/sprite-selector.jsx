@@ -7,6 +7,7 @@ import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
 
 import styles from './sprite-selector.css';
 
@@ -61,6 +62,7 @@ const SpriteSelectorComponent = function (props) {
         selectedId,
         spriteFileInput,
         sprites,
+        stageSize,
         ...componentProps
     } = props;
     let selectedSprite = sprites[selectedId];
@@ -80,6 +82,7 @@ const SpriteSelectorComponent = function (props) {
                 disabled={spriteInfoDisabled}
                 name={selectedSprite.name}
                 size={selectedSprite.size}
+                stageSize={stageSize}
                 visible={selectedSprite.visible}
                 x={selectedSprite.x}
                 y={selectedSprite.y}
@@ -182,7 +185,8 @@ SpriteSelectorComponent.propTypes = {
             name: PropTypes.string.isRequired,
             order: PropTypes.number.isRequired
         })
-    })
+    }),
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired
 };
 
 export default injectIntl(SpriteSelectorComponent);

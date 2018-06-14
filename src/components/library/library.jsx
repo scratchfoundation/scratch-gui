@@ -34,13 +34,20 @@ class LibraryComponent extends React.Component {
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect',
-            'handleTagClick'
+            'handleTagClick',
+            'setFilteredDataRef'
         ]);
         this.state = {
             selectedItem: null,
             filterQuery: '',
             selectedTag: ALL_TAG_TITLE.toLowerCase()
         };
+    }
+    componentDidUpdate (prevProps, prevState) {
+        if (prevState.filterQuery !== this.state.filterQuery ||
+            prevState.selectedTag !== this.state.selectedTag) {
+            this.scrollToTop();
+        }
     }
     handleBlur (id) {
         this.handleMouseLeave(id);
@@ -92,6 +99,12 @@ class LibraryComponent extends React.Component {
                 .indexOf(this.state.selectedTag) !== -1
         ));
     }
+    scrollToTop () {
+        this.filteredDataRef.scrollTop = 0;
+    }
+    setFilteredDataRef (ref) {
+        this.filteredDataRef = ref;
+    }
     render () {
         return (
             <Modal
@@ -141,6 +154,7 @@ class LibraryComponent extends React.Component {
                     className={classNames(styles.libraryScrollGrid, {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
+                    ref={this.setFilteredDataRef}
                 >
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?

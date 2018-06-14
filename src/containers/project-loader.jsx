@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
+import analytics from '../lib/analytics';
+
 import {
     openLoadingProject,
     closeLoadingProject
@@ -45,6 +47,11 @@ class ProjectLoader extends React.Component {
         const thisFileInput = e.target;
         reader.onload = () => this.props.vm.loadProject(reader.result)
             .then(() => {
+                analytics.event({
+                    category: 'project',
+                    action: 'Import Project File',
+                    nonInteraction: true
+                });
                 this.props.closeLoadingState();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
@@ -76,7 +83,10 @@ class ProjectLoader extends React.Component {
         );
     }
     render () {
-        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
+        if (this.state.loadingError) {
+            throw new Error(
+                `Failed to load project from file: ${this.state.errorMessage}`);
+        }
         const {
             /* eslint-disable no-unused-vars */
             children,

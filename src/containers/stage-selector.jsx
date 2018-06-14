@@ -1,10 +1,12 @@
 import bindAll from 'lodash.bindall';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import {connect} from 'react-redux';
 import {openBackdropLibrary} from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+import {setHoveredSprite} from '../reducers/hovered-target';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
@@ -23,6 +25,8 @@ class StageSelector extends React.Component {
             'addBackdropFromLibraryItem',
             'handleFileUploadClick',
             'handleBackdropUpload',
+            'handleMouseEnter',
+            'handleMouseLeave',
             'setFileInput'
         ]);
     }
@@ -65,19 +69,18 @@ class StageSelector extends React.Component {
     handleFileUploadClick () {
         this.fileInput.click();
     }
+    handleMouseEnter () {
+        this.props.dispatchSetHoveredSprite(this.props.id);
+    }
+    handleMouseLeave () {
+        this.props.dispatchSetHoveredSprite(null);
+    }
     setFileInput (input) {
         this.fileInput = input;
     }
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            assetId,
-            id,
-            onActivateTab,
-            onSelect,
-            /* eslint-enable no-unused-vars */
-            ...componentProps
-        } = this.props;
+        const componentProps = omit(this.props, [
+            'assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
         return (
             <StageSelectorComponent
                 fileInputRef={this.setFileInput}
@@ -85,6 +88,8 @@ class StageSelector extends React.Component {
                 onBackdropFileUploadClick={this.handleFileUploadClick}
                 onClick={this.handleClick}
                 onEmptyBackdropClick={this.handleEmptyBackdrop}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
                 onSurpriseBackdropClick={this.handleSurpriseBackdrop}
 
                 {...componentProps}
@@ -98,19 +103,24 @@ StageSelector.propTypes = {
     onSelect: PropTypes.func
 };
 
-const mapStateToProps = (state, {assetId}) => ({
+const mapStateToProps = (state, {assetId, id}) => ({
     url: assetId && state.scratchGui.vm.runtime.storage.get(assetId).encodeDataURI(),
-    vm: state.scratchGui.vm
+    vm: state.scratchGui.vm,
+    receivedBlocks: state.scratchGui.hoveredTarget.receivedBlocks &&
+            state.scratchGui.hoveredTarget.sprite === id,
+    raised: state.scratchGui.blockDrag
 });
 
 const mapDispatchToProps = dispatch => ({
     onNewBackdropClick: e => {
-        e.preventDefault();
-        dispatch(activateTab(COSTUMES_TAB_INDEX));
+        e.stopPropagation();
         dispatch(openBackdropLibrary());
     },
     onActivateTab: tabIndex => {
         dispatch(activateTab(tabIndex));
+    },
+    dispatchSetHoveredSprite: spriteId => {
+        dispatch(setHoveredSprite(spriteId));
     }
 });
 

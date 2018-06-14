@@ -76,8 +76,8 @@ class ActionMenu extends React.Component {
         // (possibly slow) action is started.
         return event => {
             ReactTooltip.hide();
+            if (fn) fn(event);
             this.setState({forceHide: true, isOpen: false}, () => {
-                if (fn) fn(event);
                 setTimeout(() => this.setState({forceHide: false}));
             });
         };

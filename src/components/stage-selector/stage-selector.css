@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 $header-height: calc($stage-menu-height - 2px);
 
@@ -79,4 +80,24 @@ $header-height: calc($stage-menu-height - 2px);
 .add-button {
     position: absolute;
     bottom: 0.75rem;
+    z-index: $z-index-add-button
+}
+
+.raised, .raised .header {
+    background-color: #8cbcff;
+    transition: all 0.25s ease;
+}
+
+.raised:hover {
+    transform: scale(1.05);
+}
+
+.receivedBlocks {
+    animation: glowing 250ms;
+}
+
+@keyframes glowing {
+    10% { box-shadow: 0 0 10px #7fff1e; }
+    90% { box-shadow: 0 0 10px #7fff1e; }
+    100% { box-shadow: none; }
 }

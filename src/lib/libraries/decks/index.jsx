@@ -2,9 +2,9 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 // Intro
-import libraryIntro from './intro/lib-getting-started.gif';
-import stepMove from './intro/IntroSayHello.gif';
-import stepMoveSayHello from './intro/IntroSayHello-hat.gif';
+import libraryIntro from './intro/lib-getting-started.jpg';
+import stepMove from './intro/intro1.gif';
+import stepMoveSayHello from './intro/intro2.gif';
 
 // Say hello
 import librarySay from './say/cover-say-hello.gif';
@@ -16,34 +16,46 @@ import stepAddSprite from './sprite/intro-choose-sprite.gif';
 
 // Animate a name
 import libraryAnimate from './animate/cover-color-click.gif';
+import stepAnimatePickLetter from'./animate/animate-name-pick-a-letter.gif';
+import stepAnimatePlaySound from'./animate/animate-name-play-sound.gif';
+import stepAnimatePickLetter2 from'./animate/animate-name-pick-a-letter2.gif';
 import stepAnimateChangeColor from './animate/animate-name-change-color.gif';
-import stepAnimateGrow from './animate/animate-name-grow.gif';
 import stepAnimateSpin from './animate/animate-name-spin.gif';
+import stepAnimateGrow from './animate/animate-name-grow.gif';
+
 
 // Make-Music
 import libraryMakeMusic from './make-music/cover-mic.jpg';
+import stepPickInstrument from './make-music/make-music-pick-instrument.gif';
+import stepPlaySoundClick from './make-music/make-music-play-sound.gif';
 import stepMakeSong from './make-music/make-music-make-song.gif';
 import stepMakeBeat from './make-music/make-music-make-beat.gif';
 import stepMakeBeatbox from './make-music/make-music-beatbox.gif';
 
 // Chase-Game
 import libraryChaseGame from './chase-game/lib-chasegame.jpg';
-import stepBG from './chase-game/chase-game-1.gif';
-import stepAddOcto from './chase-game/chase-game-2.gif';
-import stepLeftRight from './chase-game/chase-game-3.gif';
-import stepUpDown from './chase-game/chase-game-4.gif';
-import stepAddStar from './chase-game/chase-game-5.gif';
-import stepMoveRandom from './chase-game/chase-game-6.gif';
-import stepWhenTouch from './chase-game/chase-game-7.gif';
-import stepScore from './chase-game/chase-game-8.gif';
+import stepBG from './chase-game/chase-game-add-backdrop.gif';
+import stepAddOcto from './chase-game/chase-game-add-sprite1.gif';
+import stepLeftRight from './chase-game/chase-game-move-rightleft.gif';
+import stepUpDown from './chase-game/chase-game-move-updown.gif';
+import stepAddStar from './chase-game/chase-game-add-sprite2.gif';
+import stepMoveRandom from './chase-game/chase-game-move-randomly.gif';
+import stepWhenTouch from './chase-game/chase-game-touching.gif';
+import stepScoreVariable from './chase-game/chase-game-add-variable.gif';
+import stepScoreWhenTouch from './chase-game/chase-game-change-score.gif';
 
 // Make-A-Game
-import libraryMakeAGame from './game/popping-library.gif';
+import libraryMakeAGame from './game/lib-pop.jpg';
+import stepGamePickSprite from './game/game-pick-sprite.gif';
+import stepGamePlaySound from './game/game-play-sound.gif';
+import stepGameAddScore from './game/game-add-score.gif';
+import stepGameChangeScore from './game/game-change-score.gif';
 import stepRandom from './game/game-random-position.gif';
 import stepGameChangeColor from './game/game-change-color.gif';
 import stepResetScore from './game/game-reset-score.gif';
 
 // Videos
+import recordASound from './videos/lib-sound.jpg'
 import glideAroundThumb from './videos/glide-around.jpg';
 import changeSizeThumb from './videos/change-size.jpg';
 import switchCostumeThumb from './videos/switch-costume.jpg';
@@ -63,39 +75,37 @@ export default {
                 id="gui.howtos.intro-move-sayhello-hat.name"
             />
         ),
+
         img: libraryIntro,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a Move Block and a Say Block"
-                        description="Step name for 'Add a Move Block' step"
-                        id="gui.howtos.intro-move.step_stepMove"
-                    />
-                ),
-                image: stepMove
+        steps: [{
+              video: 'https://www.youtube.com/embed/4CexmCCREZw'
+          }, {
+                  title: (
+                      <FormattedMessage
+                          defaultMessage="Add a Move Block"
+                          description="Step name for 'Add a Move Block' step"
+                          id="gui.howtos.intro-move.step_stepMove"
+                      />
+                  ),
+                  image: stepMove
             }, {
                 title: (
                     <FormattedMessage
-                        defaultMessage="Add Green Flag Block, then click the flag"
+                        defaultMessage="Click the green flag to start"
                         description="Step name for 'Add A Say Block' step"
                         id="gui.howtos.add-a-move-block.step_stepMoveSayHello"
                     />
                 ),
                 image: stepMoveSayHello
             }, {
-
-
                 deckIds: [
+                    'add-a-backdrop',
                     'add-sprite',
-                    'animate-a-name',
-                    'Make-A-Game'
+                    'glide-around'
                 ]
             }
         ]
     },
-
-
     'add-sprite': {
         name: (
             <FormattedMessage
@@ -137,8 +147,34 @@ export default {
         img: libraryAnimate,
         steps: [{
             video: 'https://www.youtube.com/embed/q3nnXj6wr5k'
-        },
-        {
+        }, {
+          title: (
+              <FormattedMessage
+                  defaultMessage="Pick a Letter Sprite"
+                  description="Step name for 'Pick a Letter Sprite' step"
+                  id="gui.howtos.animate-a-name.step_AnimatePickLetter"
+              />
+          ),
+          image: stepAnimatePickLetter
+        }, {
+          title: (
+              <FormattedMessage
+                  defaultMessage="Play a Sound When Clicked"
+                  description="Step name for 'Play a Sound When Clicked' step"
+                  id="gui.howtos.animate-a-name.step_AnimatePlaySound"
+              />
+          ),
+          image: stepAnimatePlaySound
+      }, {
+        title: (
+            <FormattedMessage
+                defaultMessage="Pick Another Letter Sprite"
+                description="Step name for 'Pick Another Letter Sprite"
+                id="gui.howtos.animate-a-name.step_AnimatePickLetter2"
+            />
+        ),
+        image: stepAnimatePickLetter2
+    }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Change color"
@@ -150,8 +186,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Choose a Letter & Make it Spin"
-                    description="Step name for 'Choose a Letter & Make it Spin' step"
+                    defaultMessage="Pick Another Letter Sprite & Make It Spin"
+                    description="Step name for 'Pick Another Letter Sprite & Make It Spin' step"
                     id="gui.howtos.animate-a-name.step_AnimateSpin"
                 />
             ),
@@ -159,8 +195,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Choose a Letter & Make It Grow"
-                    description="Step name for 'Choose a Letter & Make it Grow' step"
+                    defaultMessage="Pick Another Letter Sprite & Make It Grow"
+                    description="Step name for 'Pick Another Letter Sprite & Make It Grow!' step"
                     id="gui.howtos.animate-a-name.step_AnimateGrow"
                 />
             ),
@@ -168,12 +204,14 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'glide-around',
+                'hide-and-show'
             ]
         }
         ]
     },
+
+
     'Make-Music': {
         name: (
             <FormattedMessage
@@ -185,13 +223,33 @@ export default {
         img: libraryMakeMusic,
         steps: [{
             video: 'https://www.youtube.com/embed/o3ih7d_4uv0'
+          },
+          {
+              title: (
+                  <FormattedMessage
+                      defaultMessage="Pick an Instrument Sprite "
+                      description="Step name for 'Pick an Instrument Sprite' step"
+                      id="gui.howtos.Make-Music.step_PickInstrument"
+                  />
+              ),
+              image: stepPickInstrument
+            },
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Play Sound When Clicked"
+                        description="Step name for 'Play Sound When Clicked' step"
+                        id="gui.howtos.Make-Music.step_PlaySoundClick"
+                    />
+                ),
+                image: stepPlaySoundClick
         },
         {
             title: (
                 <FormattedMessage
                     defaultMessage="Create a Song"
                     description="Step name for 'Create a Song' step"
-                    id="gui.howtos.Make-Music.step_CreateASong"
+                    id="gui.howtos.Make-Music.step_MakeSong"
                 />
             ),
             image: stepMakeSong
@@ -216,8 +274,8 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'add-sprite',
+                'switch-costume'
             ]
         }
         ]
@@ -300,12 +358,21 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="In Octopus Sprite, When Touching Add Score"
-                    description="Step name for 'In Octopus Sprite, When Touching Add Score step"
-                    id="gui.howtos.Chase-Game.step_Score"
+                    defaultMessage="Create Score Variable"
+                    description="Step name for 'Create Score Variable"
+                    id="gui.howtos.Chase-Game.step_ScoreVariable"
                 />
             ),
-            image: stepScore
+            image: stepScoreVariable
+          }, {
+              title: (
+                  <FormattedMessage
+                      defaultMessage="In Octopus Sprite, When Touching Add Score"
+                      description="Step name for 'In Octopus Sprite, When Touching Add Score step"
+                      id="gui.howtos.Chase-Game.ScoreWhenTouch"
+                  />
+              ),
+              image: stepScoreWhenTouch
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -364,6 +431,27 @@ export default {
         }
         ]
     },
+
+      'record-a-sound': {
+          name: (
+              <FormattedMessage
+                  defaultMessage="Record A Sound"
+                  description="Record A Sound' how-to"
+                  id="gui.howtos.record-a-sound.name"
+              />
+          ),
+          img: recordASound,
+          steps: [{
+              video: 'https://www.youtube.com/embed/epZQpVdf884'
+          }, {
+              deckIds: [
+                  'Make-Music',
+                  'switch-costume',
+                  'change-size'
+              ]
+          }]
+
+      },
 
     'say-hello': {
         name: (

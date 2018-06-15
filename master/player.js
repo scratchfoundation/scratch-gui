@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 401:
+/***/ 405:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -19,11 +19,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 402:
+/***/ 406:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(401);
+var content = __webpack_require__(405);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -45,7 +45,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 403:
+/***/ 407:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57,7 +57,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(33);
+var _reactDom = __webpack_require__(31);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -65,19 +65,19 @@ var _box = __webpack_require__(16);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(149);
+var _gui = __webpack_require__(151);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(109);
+var _hashParserHoc = __webpack_require__(117);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(108);
+var _appStateHoc = __webpack_require__(116);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _player = __webpack_require__(402);
+var _player = __webpack_require__(406);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -110,5 +110,5 @@ _reactDom2.default.render(_react2.default.createElement(Player, null), appTarget
 
 /***/ })
 
-},[[403,0]]]);
+},[[407,0]]]);
 //# sourceMappingURL=player.js.map

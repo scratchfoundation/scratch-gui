@@ -445,7 +445,7 @@ Blocks.defaultOptions = {
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     },
-    comments: true,
+    comments: false,
     collapse: false,
     sounds: false
 };

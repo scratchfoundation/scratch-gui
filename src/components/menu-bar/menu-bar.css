@@ -1,5 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
+@import "../../css/z-index.css";
 
 .menu-bar {
     display: flex;
@@ -43,9 +44,16 @@
     vertical-align: middle;
 }
 
+.language-icon {
+    height:  1.5rem;
+}
+
+.language-menu {
+    display: inline-flex;
+}
+
 .menu {
-    /* blocklyToolboxDiv is 40 */
-    z-index: 50;
+    z-index: $z-index-menu-bar;
     top: $menu-bar-height;
 }
 

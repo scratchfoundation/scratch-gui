@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .page-wrapper {
     height: 100%;
@@ -162,9 +163,21 @@
     */
     display: flex;
     flex-direction: column;
+}
 
-    /* Fix the max width to max stage size (defined in layout_constants.js) + gutter size */
+.stage-and-target-wrapper.large {
+    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
     max-width: calc(480px + calc($space * 2));
+}
+
+.stage-and-target-wrapper.large-constrained {
+    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(408px + calc($space * 2));
+}
+
+.stage-and-target-wrapper.small {
+    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
+    max-width: calc(240px + calc($space * 2));
 }
 
 .target-wrapper {
@@ -176,6 +189,8 @@
     padding-left: $space;
     padding-right: $space;
 
+    min-height: 0; /* this makes it work in Firefox */
+    
     /*
         For making the sprite-selector a scrollable pane
         @todo: Not working in Safari
@@ -190,7 +205,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 50; /** Force extension button above the ScratchBlocks flyout. */
+    z-index: $z-index-extension-button;
     background: $motion-primary;
 
     border: 1px solid $motion-primary;

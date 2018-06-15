@@ -1,10 +1,11 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .drag-layer {
     position: fixed;
     pointer-events: none;
-    z-index: 1000; /* Above everything */
+    z-index: $z-index-drag-layer;
     left: 0;
     top: 0;
     width: 100%;
@@ -18,11 +19,19 @@
 
 .image {
     max-width: 80px;
+    max-height: 80px;
+    min-width: 50px;
+    min-height: 50px;
 
     /* Center the dragging image on the given position */
     margin-left: -50%;
     margin-top: -50%;
 
+    padding: 0.25rem;
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+    border-radius: 0.5rem;
+
     /* Use the same drop shadow as stage dragging */
-    filter: drop-shadow(5px 5px 5px $ui-black-transparent);
+    box-shadow: 5px 5px 5px $ui-black-transparent;
 }

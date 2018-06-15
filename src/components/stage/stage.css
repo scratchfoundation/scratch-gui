@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .stage {
     /*
@@ -21,7 +22,7 @@
 
 .with-color-picker {
     cursor: none;
-    z-index: 2001;
+    z-index: $z-index-stage-with-color-picker;
 }
 
 .color-picker-background {
@@ -30,7 +31,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.55);
     display: block;
-    z-index: 2000;
+    z-index: $z-index-stage-color-picker-background;
     top: 0;
     left: 0;
 }
@@ -45,7 +46,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 5000;
+    z-index: $z-index-stage-wrapper-overlay;
     background-color: $ui-white;
 }
 
@@ -86,6 +87,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1000; /* Above everything so it is draggable into other panes */
+    z-index: $z-index-dragging-sprite;
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
  }

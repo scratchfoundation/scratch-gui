@@ -2,6 +2,9 @@
 
 _What Github issue does this resolve (please include link)?_
 
+- resolves #
+- resolves #
+
 ### Proposed Changes
 
 _Describe what this Pull Request does_

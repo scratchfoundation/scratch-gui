@@ -72,7 +72,7 @@ class ListMonitor extends React.Component {
         else if (e.key === 'ArrowDown') navigateDirection = 1;
         if (navigateDirection) {
             this.handleDeactivate(); // Submit in-progress edits
-            const newIndex = (previouslyActiveIndex + navigateDirection) % this.props.value.length;
+            const newIndex = this.wrapListIndex(previouslyActiveIndex + navigateDirection, this.props.value.length);
             this.setState({
                 activeIndex: newIndex,
                 activeValue: this.props.value[newIndex]
@@ -87,7 +87,7 @@ class ListMonitor extends React.Component {
                 .concat([newListItemValue])
                 .concat(listValue.slice(previouslyActiveIndex + newValueOffset));
             setVariableValue(vm, targetId, variableId, newListValue);
-            const newIndex = (previouslyActiveIndex + newValueOffset) % newListValue.length;
+            const newIndex = this.wrapListIndex(previouslyActiveIndex + newValueOffset, newListValue.length);
             this.setState({
                 activeIndex: newIndex,
                 activeValue: newListItemValue
@@ -144,6 +144,11 @@ class ListMonitor extends React.Component {
         window.addEventListener('mouseup', onMouseUp);
 
     }
+
+    wrapListIndex (index, length) {
+        return (index + length) % length;
+    }
+
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars

@@ -1,0 +1,28 @@
+/*
+    Contains constants for the z-index values of elements that are part of the global stack context.
+    In other words, z-index values that are "inside" a component are not added here.
+    This prevents conflicts between identical z-index values in different components.
+*/
+
+$z-index-extension-button: 50; /* Force extension button above the ScratchBlocks flyout */
+$z-index-menu-bar: 50; /* blocklyToolboxDiv is 40 */
+
+$z-index-monitor: 100;
+$z-index-coming-soon: 110;
+$z-index-add-button: 120;
+
+$z-index-card: 490;
+$z-index-loader: 500;
+$z-index-modal: 510;
+
+$z-index-drag-layer: 1000;
+$z-index-monitor-dragging: 1010;
+$z-index-dragging-sprite: 1020; /* so it is draggable into other panes */
+
+$z-index-stage-color-picker-background: 2000;
+$z-index-stage-with-color-picker: 2010;
+$z-index-stage-header: 5000;
+$z-index-stage-wrapper-overlay: 5000;
+
+/* in most interfaces, the context menu is always on top */
+$z-index-context-menu: 10000;

@@ -26,7 +26,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
         </div>
         <div className={styles.listFooter}>
             <div
-                className={styles.addButton}
+                className={classNames(styles.addButton, 'no-drag')}
                 onClick={draggable ? onAdd : null}
             >
                 {'+' /* TODO waiting on asset */}

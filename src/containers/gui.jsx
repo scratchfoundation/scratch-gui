@@ -15,6 +15,11 @@ import {
     RUBY_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import {
+    closeCostumeLibrary,
+    closeBackdropLibrary
+} from '../reducers/modals';
+
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 
@@ -66,7 +71,10 @@ class GUI extends React.Component {
         this.props.vm.stopAll();
     }
     render () {
-        if (this.state.loadingError) throw new Error(`Failed to load project: ${this.state.errorMessage}`);
+        if (this.state.loadingError) {
+            throw new Error(
+                `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
+        }
         const {
             children,
             fetchingProject,
@@ -101,8 +109,10 @@ GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+    backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
     blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     cardsVisible: state.scratchGui.cards.visible,
+    costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
     costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.scratchGui.modals.importInfo,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
@@ -122,7 +132,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateTab: tab => dispatch(activateTab(tab)),
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
-    onActivateRubyTab: () => dispatch(activateTab(RUBY_TAB_INDEX))
+    onActivateRubyTab: () => dispatch(activateTab(RUBY_TAB_INDEX)),
+    onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
+    onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary())
 });
 
 const ConnectedGUI = connect(

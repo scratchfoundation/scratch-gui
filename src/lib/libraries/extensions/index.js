@@ -6,6 +6,7 @@ import microbitImage from './microbit.png';
 import wedoImage from './wedo.png';
 import ev3Image from './ev3.png';
 import boostImage from './boost.png';
+import translateImage from './translate.png';
 
 export default [
     {
@@ -20,6 +21,13 @@ export default [
         extensionId: 'pen',
         iconURL: penImage,
         description: 'Draw with your sprites.',
+        featured: true
+    },
+    {
+        name: 'Google Translate',
+        extensionId: 'translate',
+        iconURL: translateImage,
+        description: 'Translate text into many languages.',
         featured: true
     },
     {

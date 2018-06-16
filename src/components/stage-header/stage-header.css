@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .stage-header-wrapper {
     position: relative;
@@ -11,7 +12,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 5000;
+    z-index: $z-index-stage-header;
 }
 
 .stage-menu-wrapper {
@@ -61,8 +62,6 @@
     border-bottom-right-radius: 0;
 }
 
-.stage-button-disabled {
-    opacity: .5;
-    cursor: auto;
-    background: transparent;
+.stage-button-toggled-off {
+    filter: saturate(0);
 }

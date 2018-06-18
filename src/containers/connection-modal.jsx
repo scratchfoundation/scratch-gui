@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import ConnectionModalComponent from '../components/connection-modal/connection-modal.jsx';
+import VM from 'scratch-vm';
 
 class ConnectionModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCancel',
-            'handleSearch'
+            'handleCancel'
         ]);
         this.state = {
             phase: 'scanning'
@@ -17,16 +17,13 @@ class ConnectionModal extends React.Component {
     handleCancel () {
         this.props.onCancel();
     }
-    handleSearch () {
-        this.props.onSearch();
-    }
     render () {
         return (
             <ConnectionModalComponent
-                title={this.props.id}
-                onCancel={this.handleCancel}
-                onSearch={this.handleSearch}
                 phase={this.state.phase}
+                title={this.props.id}
+                vm={this.props.vm}
+                onCancel={this.handleCancel}
             />
         );
     }
@@ -35,7 +32,7 @@ class ConnectionModal extends React.Component {
 ConnectionModal.propTypes = {
     id: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 export default ConnectionModal;

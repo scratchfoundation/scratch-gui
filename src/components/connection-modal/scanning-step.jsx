@@ -11,14 +11,20 @@ const ScanningStep = props => (
         <Box className={styles.activityArea}>
             {props.searching ? (
                 props.devices.length === 0 ? (
-                    <div>search icon here</div>
+                    <div>{'👀Scanning👀'}</div>
                 ) : (
                     props.devices.map(device => (
                         <div>{device.name}</div>
                     ))
                 )
             ) : (
-                <div>No devices found, click on this hyperlink right now</div>
+                <Box className={styles.instructions}>
+                    <FormattedMessage
+                        defaultMessage="Select your device in the list above."
+                        description=""
+                        id="gui.connection.scanning.instructions"
+                    />
+                </Box>
             )}
         </Box>
         <Box className={styles.instructions}>
@@ -34,7 +40,7 @@ const ScanningStep = props => (
                 onClick={props.onSearch}
             >
                 <FormattedMessage
-                    defaultMessage="scanning"
+                    defaultMessage="refresh"
                     description="Button in prompt for starting a search"
                     id="gui.connection.search"
                 />

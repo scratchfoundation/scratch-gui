@@ -11,13 +11,6 @@ import ErrorStep from './error-step.jsx';
 
 import styles from './connection-modal.css';
 
-const phases = {
-    scanning: ScanningStep,
-    connecting: ConnectingStep,
-    connected: ConnectedStep,
-    error: ErrorStep
-};
-
 const ConnectionModalComponent = props => (
     <Modal
         className={styles.modalContent}
@@ -26,14 +19,16 @@ const ConnectionModalComponent = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            {React.createElement(phases[props.phase], props)}
+            {props.phase === 'scanning' && <ScanningStep {...props} />}
+            {props.phase === 'connecting' && <ConnectingStep {...props} />}
+            {props.phase === 'connected' && <ConnectedStep {...props} />}
+            {props.phase === 'error' && <ErrorStep {...props} />}
         </Box>
     </Modal>
 );
 
 ConnectionModalComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired,
     phase: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
 };

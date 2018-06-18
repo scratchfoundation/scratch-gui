@@ -14,7 +14,7 @@ const ConnectedStep = props => (
                 onClick={props.onSearch}
             >
                 <FormattedMessage
-                    defaultMessage="connected"
+                    defaultMessage="🔥connected🔥"
                     description="Button in prompt for starting a search"
                     id="gui.connection.search"
                 />

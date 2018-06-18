@@ -14,7 +14,7 @@ const ErrorStep = props => (
                 onClick={props.onSearch}
             >
                 <FormattedMessage
-                    defaultMessage="error"
+                    defaultMessage="🤕error🤕"
                     description="Button in prompt for starting a search"
                     id="gui.connection.search"
                 />

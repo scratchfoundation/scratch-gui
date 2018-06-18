@@ -21,6 +21,7 @@
     transition: 0.25s ease-out;
 
     user-select: none;
+    touch-action: none;
 }
 
 .sprite-selector-item.is-selected {

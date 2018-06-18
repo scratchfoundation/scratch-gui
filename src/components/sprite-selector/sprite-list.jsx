@@ -46,7 +46,14 @@ const SpriteList = function (props) {
                 );
 
                 // If the sprite is indicating it can receive block dropping, used for blue highlight
-                const isRaised = !receivedBlocks && raised && sprite.id !== editingTarget;
+                let isRaised = !receivedBlocks && raised && sprite.id !== editingTarget;
+
+                // A sprite is also raised if a costume or sound is being dragged.
+                // Note the absence of the self-sharing check: a sprite can share assets with itself.
+                // This is a quirk of 2.0, but seems worth leaving possible, it
+                // allows quick (albeit unusual) duplication of assets.
+                isRaised = isRaised || draggingType === DragConstants.COSTUME ||
+                    draggingType === DragConstants.SOUND;
 
                 return (
                     <SortableAsset

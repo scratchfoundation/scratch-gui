@@ -6,6 +6,9 @@ import Box from '../box/box.jsx';
 
 import styles from './connection-modal.css';
 
+// todo: update the flyout status button here?
+// this.ScratchBlocks.updateStatusButton('microbit', this.ScratchBlocks.StatusButtonState.READY);
+
 const ConnectedStep = props => (
     <Box className={styles.body}>
         <Box className={styles.buttonRow}>

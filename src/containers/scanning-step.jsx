@@ -11,14 +11,14 @@ class ScanningStep extends React.Component {
             'handleCancel'
         ]);
         this.state = {
-            searching: true,
-            devices: []
+            scanning: true,
+            deviceList: []
         };
     }
     componentDidMount () {
-        this.props.vm.on('peripheral_added', id => {
-            // console.log('gui says peripheral added', id);
-            this.setState({devices:this.state.devices.concat(id)})
+        this.props.vm.startDeviceScan(this.props.extensionId);
+        this.props.vm.on('PERIPHERAL_LIST_UPDATE', newList => {
+            this.setState({deviceList: newList});
         });
     }
     componentWillUnmount () {
@@ -27,24 +27,29 @@ class ScanningStep extends React.Component {
     handleCancel () {
         this.props.onCancel();
     }
-    handleSearch () {
-        this.props.onSearch();
+    handleScan () {
+        this.props.onScan();
     }
     render () {
         return (
             <ScanningStepComponent
+                deviceList={this.state.deviceList}
                 phase={this.state.phase}
-                title={this.props.id}
+                title={this.props.extensionId}
                 onCancel={this.handleCancel}
+                onConnected={this.props.onConnected}
+                onConnecting={this.props.onConnecting}
             />
         );
     }
 }
 
 ScanningStep.propTypes = {
-    id: PropTypes.string.isRequired,
+    extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired,
+    onConnected: PropTypes.func.isRequired,
+    onConnecting: PropTypes.func.isRequired,
+    onScan: PropTypes.func.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

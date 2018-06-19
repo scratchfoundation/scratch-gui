@@ -14,23 +14,44 @@ class ConnectionModal extends React.Component {
             phase: 'scanning'
         };
     }
+    componentDidMount () {
+        this.props.vm.on('PERIPHERAL_CONNECTED', () => {
+            this.setState({
+                phase: 'connected'
+            });
+        });
+    }
+    handleConnecting (peripheralId) {
+        this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
+        this.setState({
+            phase: 'connecting'
+        });
+    }
+    handleConnected () {
+        this.setState({
+            phase: 'connected'
+        });
+    }
     handleCancel () {
         this.props.onCancel();
     }
     render () {
         return (
             <ConnectionModalComponent
+                extensionId={this.props.extensionId}
                 phase={this.state.phase}
-                title={this.props.id}
+                title={this.props.extensionId}
                 vm={this.props.vm}
                 onCancel={this.handleCancel}
+                onConnected={this.handleConnected}
+                onConnecting={this.handleConnecting.bind(this)}
             />
         );
     }
 }
 
 ConnectionModal.propTypes = {
-    id: PropTypes.string.isRequired,
+    extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };

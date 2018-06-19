@@ -3,26 +3,33 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
+import DeviceTile from './device-tile.jsx';
 
 import styles from './connection-modal.css';
 
 const ScanningStep = props => (
     <Box className={styles.body}>
         <Box className={styles.activityArea}>
-            {props.searching ? (
-                props.devices.length === 0 ? (
+            {props.scanning ? (
+                props.deviceList.length === 0 ? (
                     <div>{'👀Scanning👀'}</div>
                 ) : (
-                    props.devices.map(device => (
-                        <div>{device.name}</div>
-                    ))
+                    props.deviceList.map(device =>
+                        (<DeviceTile
+                            RSSI={device.RSSI}
+                            key={device.peripheralId}
+                            name={device.name}
+                            peripheralId={device.peripheralId}
+                            onConnecting={props.onConnecting}
+                        />)
+                    )
                 )
             ) : (
                 <Box className={styles.instructions}>
                     <FormattedMessage
-                        defaultMessage="Select your device in the list above."
+                        defaultMessage="No devices found"
                         description=""
-                        id="gui.connection.scanning.instructions"
+                        id="gui.connection.scanning.noDevicesFound"
                     />
                 </Box>
             )}
@@ -37,7 +44,7 @@ const ScanningStep = props => (
         <Box className={styles.buttonRow}>
             <button
                 className={styles.searchButton}
-                onClick={props.onSearch}
+                onClick={props.onScan}
             >
                 <FormattedMessage
                     defaultMessage="refresh"
@@ -50,15 +57,19 @@ const ScanningStep = props => (
 );
 
 ScanningStep.propTypes = {
-    devices: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string
+    deviceList: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        RSSI: PropTypes.number,
+        peripheralId: PropTypes.string
     })),
-    searching: PropTypes.bool.isRequired
+    onConnecting: PropTypes.function,
+    onScan: PropTypes.function,
+    scanning: PropTypes.bool.isRequired
 };
 
 ScanningStep.defaultProps = {
-    devices: [],
-    searching: true
+    deviceList: [],
+    scanning: true
 };
 
 export default ScanningStep;

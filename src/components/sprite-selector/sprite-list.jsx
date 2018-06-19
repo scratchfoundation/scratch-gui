@@ -13,6 +13,7 @@ import styles from './sprite-selector.css';
 
 const SpriteList = function (props) {
     const {
+        containerRef,
         editingTarget,
         draggingIndex,
         draggingType,
@@ -31,7 +32,10 @@ const SpriteList = function (props) {
     const isSpriteDrag = draggingType === DragConstants.SPRITE;
 
     return (
-        <Box className={styles.itemsWrapper}>
+        <Box
+            className={styles.itemsWrapper}
+            componentRef={containerRef}
+        >
             {items.map((sprite, index) => {
 
                 // If the sprite has just received a block drop, used for green highlight
@@ -42,7 +46,14 @@ const SpriteList = function (props) {
                 );
 
                 // If the sprite is indicating it can receive block dropping, used for blue highlight
-                const isRaised = !receivedBlocks && raised && sprite.id !== editingTarget;
+                let isRaised = !receivedBlocks && raised && sprite.id !== editingTarget;
+
+                // A sprite is also raised if a costume or sound is being dragged.
+                // Note the absence of the self-sharing check: a sprite can share assets with itself.
+                // This is a quirk of 2.0, but seems worth leaving possible, it
+                // allows quick (albeit unusual) duplication of assets.
+                isRaised = isRaised || draggingType === DragConstants.COSTUME ||
+                    draggingType === DragConstants.SOUND;
 
                 return (
                     <SortableAsset
@@ -77,6 +88,7 @@ const SpriteList = function (props) {
 };
 
 SpriteList.propTypes = {
+    containerRef: PropTypes.func,
     draggingIndex: PropTypes.number,
     draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
     editingTarget: PropTypes.string,

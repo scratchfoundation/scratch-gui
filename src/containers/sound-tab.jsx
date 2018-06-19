@@ -168,7 +168,8 @@ class SoundTab extends React.Component {
             {
                 url: soundIcon,
                 name: sound.name,
-                details: (sound.sampleCount / sound.rate).toFixed(2)
+                details: (sound.sampleCount / sound.rate).toFixed(2),
+                dragPayload: sound
             }
         )) : [];
 

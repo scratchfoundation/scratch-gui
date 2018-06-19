@@ -252,7 +252,8 @@ class CostumeTab extends React.Component {
         const costumeData = target.costumes ? target.costumes.map(costume => ({
             name: costume.name,
             assetId: costume.assetId,
-            details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null
+            details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null,
+            dragPayload: costume
         })) : [];
         return (
             <AssetPanel

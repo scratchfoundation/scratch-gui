@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import DragConstants from '../../lib/drag-constants';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
@@ -16,7 +17,7 @@ const dragTypeMap = {
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({contents, error, expanded, loading, onToggle}) => (
+const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, onToggle}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -62,7 +63,12 @@ const Backpack = ({contents, error, expanded, loading, onToggle}) => (
                         </div>
                     ) : (
                         contents.length > 0 ? (
-                            <div className={styles.backpackListInner}>
+                            <div
+                                className={classNames(styles.backpackListInner, {
+                                    [styles.dragOver]: dragOver
+                                })}
+                                ref={dropAreaRef}
+                            >
                                 {contents.map(item => (
                                     <SpriteSelectorItem
                                         className={styles.backpackItem}
@@ -100,6 +106,8 @@ Backpack.propTypes = {
         type: PropTypes.string,
         name: PropTypes.string
     })),
+    dragOver: PropTypes.bool,
+    dropAreaRef: PropTypes.func,
     error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
@@ -108,6 +116,7 @@ Backpack.propTypes = {
 
 Backpack.defaultProps = {
     contents: [],
+    dragOver: false,
     expanded: false,
     loading: false,
     onToggle: null

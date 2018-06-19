@@ -19,6 +19,10 @@ const costumePayload = costume => {
         payload.mime = 'image/svg+xml';
         payload.body = assetDataUrl.replace('data:image/svg+xml;base64,', '');
         break;
+    case 'png':
+        payload.mime = 'image/png';
+        payload.body = assetDataUrl.replace('data:image/png;base64,', '');
+        break;
     default:
         alert(`Cannot serialize for format: ${assetDataFormat}`); // eslint-disable-line
     }

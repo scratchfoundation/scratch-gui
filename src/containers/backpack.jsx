@@ -4,6 +4,7 @@ import bindAll from 'lodash.bindall';
 import BackpackComponent from '../components/backpack/backpack.jsx';
 import {getBackpackContents} from '../lib/backpack-api';
 import {connect} from 'react-redux';
+import storage from '../lib/storage';
 
 class Backpack extends React.Component {
     constructor (props) {
@@ -20,6 +21,16 @@ class Backpack extends React.Component {
             expanded: false,
             contents: []
         };
+
+        // If a host is given, add it as a web source to the storage module
+        // TODO remove the hacky flag that prevents double adding
+        if (props.host && !storage._hasAddedBackpackSource) {
+            storage.addWebSource(
+                [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
+                asset => `${props.host}/${asset.assetId}.${asset.dataFormat}`
+            );
+            storage._hasAddedBackpackSource = true;
+        }
     }
     handleToggle () {
         const newState = !this.state.expanded;

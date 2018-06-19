@@ -19,6 +19,11 @@ import {
     openBackdropLibrary
 } from '../reducers/modals';
 
+import {
+    activateTab,
+    SOUNDS_TAB_INDEX
+} from '../reducers/editor-tab';
+
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
@@ -191,14 +196,22 @@ class CostumeTab extends React.Component {
         this.fileInput.click();
     }
     handleDrop (dropInfo) {
-        // Eventually will handle other kinds of drop events, right now just
-        // the reordering events.
         if (dropInfo.dragType === DragConstants.COSTUME) {
             const sprite = this.props.vm.editingTarget.sprite;
             const activeCostume = sprite.costumes[this.state.selectedCostumeIndex];
             this.props.vm.reorderCostume(this.props.vm.editingTarget.id,
                 dropInfo.index, dropInfo.newIndex);
             this.setState({selectedCostumeIndex: sprite.costumes.indexOf(activeCostume)});
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            this.props.vm.addCostume(dropInfo.payload.body, {
+                name: dropInfo.payload.name
+            });
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            this.props.onActivateSoundsTab();
+            this.props.vm.addSound({
+                md5: dropInfo.payload.body,
+                name: dropInfo.payload.name
+            });
         }
     }
     setFileInput (input) {
@@ -303,6 +316,7 @@ CostumeTab.propTypes = {
     cameraModalVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onActivateSoundsTab: PropTypes.func.isRequired,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
@@ -333,6 +347,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onNewLibraryBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());

@@ -23,11 +23,13 @@ class Backpack extends React.Component {
         };
 
         // If a host is given, add it as a web source to the storage module
-        if (props.host) {
+        // TODO remove the hacky flag that prevents double adding
+        if (props.host && !storage._hasAddedBackpackSource) {
             storage.addWebSource(
                 [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
                 asset => `${props.host}/${asset.assetId}.${asset.dataFormat}`
             );
+            storage._hasAddedBackpackSource = true;
         }
     }
     handleToggle () {

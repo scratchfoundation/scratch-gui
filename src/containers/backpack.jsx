@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import BackpackComponent from '../components/backpack/backpack.jsx';
-import {getBackpackContents, saveBackpackObject, soundPayload, costumePayload} from '../lib/backpack-api';
+import {getBackpackContents, saveBackpackObject, deleteBackpackObject, soundPayload, costumePayload} from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 
 import {connect} from 'react-redux';
@@ -14,6 +14,7 @@ class Backpack extends React.Component {
         bindAll(this, [
             'handleDrop',
             'handleToggle',
+            'handleDelete',
             'refreshContents',
             'setRef'
         ]);
@@ -84,6 +85,14 @@ class Backpack extends React.Component {
             }))
             .then(this.refreshContents);
     }
+    handleDelete (id) {
+        deleteBackpackObject({
+            host: this.props.host,
+            token: this.props.token,
+            username: this.props.username,
+            id: id
+        }).then(this.refreshContents);
+    }
     refreshContents () {
         if (this.props.token && this.props.username) {
             this.setState({loading: true, error: false});
@@ -114,6 +123,7 @@ class Backpack extends React.Component {
                 error={this.state.error}
                 expanded={this.state.expanded}
                 loading={this.state.loading}
+                onDelete={this.handleDelete}
                 onToggle={this.props.host ? this.handleToggle : null}
             />
         );

@@ -17,7 +17,7 @@ const dragTypeMap = {
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, onToggle}) => (
+const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, onToggle, onDelete}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -43,7 +43,10 @@ const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, on
             )}
         </div>
         {expanded ? (
-            <div className={styles.backpackList}>
+            <div
+                className={styles.backpackList}
+                ref={dropAreaRef}
+            >
                 {error ? (
                     <div className={styles.statusMessage}>
                         <FormattedMessage
@@ -67,7 +70,6 @@ const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, on
                                 className={classNames(styles.backpackListInner, {
                                     [styles.dragOver]: dragOver
                                 })}
-                                ref={dropAreaRef}
                             >
                                 {contents.map(item => (
                                     <SpriteSelectorItem
@@ -76,10 +78,12 @@ const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, on
                                         details={item.name}
                                         dragPayload={item}
                                         dragType={dragTypeMap[item.type]}
+                                        id={item.id}
                                         key={item.id}
                                         name={item.type}
                                         selected={false}
                                         onClick={noop}
+                                        onDeleteButtonClick={onDelete}
                                     />
                                 ))}
                             </div>
@@ -111,6 +115,7 @@ Backpack.propTypes = {
     error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
+    onDelete: PropTypes.func,
     onToggle: PropTypes.func
 };
 

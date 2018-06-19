@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1350:
+/***/ 1363:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,7 +9,7 @@ var GUI =
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(1349);
+__webpack_require__(1362);
 
 var _react = __webpack_require__(0);
 
@@ -23,19 +23,19 @@ var _analytics = __webpack_require__(34);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(151);
+var _gui = __webpack_require__(150);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(117);
+var _hashParserHoc = __webpack_require__(116);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(116);
+var _appStateHoc = __webpack_require__(115);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(413);
+var _index = __webpack_require__(420);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -59,7 +59,7 @@ _gui2.default.setAppElement(appTarget);
 var WrappedGui = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(_gui2.default));
 
 // TODO a hack for testing the backpack, allow backpack host to be set by url param
-var backpackHostMatches = window.location.href.match(/[?&]backpack_host=(.*)&?/);
+var backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
 var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
 
 var backpackOptions = {
@@ -71,7 +71,7 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ }),
 
-/***/ 412:
+/***/ 419:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -88,11 +88,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 413:
+/***/ 420:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(412);
+var content = __webpack_require__(419);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -114,5 +114,5 @@ if(false) {}
 
 /***/ })
 
-},[[1350,0]]]);
+},[[1363,0]]]);
 //# sourceMappingURL=gui.js.map

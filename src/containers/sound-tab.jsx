@@ -28,6 +28,11 @@ import {
     openSoundRecorder
 } from '../reducers/modals';
 
+import {
+    activateTab,
+    COSTUMES_TAB_INDEX
+} from '../reducers/editor-tab';
+
 class SoundTab extends React.Component {
     constructor (props) {
         super(props);
@@ -120,8 +125,6 @@ class SoundTab extends React.Component {
     }
 
     handleDrop (dropInfo) {
-        // Eventually will handle other kinds of drop events, right now just
-        // the reordering events.
         if (dropInfo.dragType === DragConstants.SOUND) {
             const sprite = this.props.vm.editingTarget.sprite;
             const activeSound = sprite.sounds[this.state.selectedSoundIndex];
@@ -130,6 +133,16 @@ class SoundTab extends React.Component {
                 dropInfo.index, dropInfo.newIndex);
 
             this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            this.props.onActivateCostumesTab();
+            this.props.vm.addCostume(dropInfo.payload.body, {
+                name: dropInfo.payload.name
+            });
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            this.props.vm.addSound({
+                md5: dropInfo.payload.body,
+                name: dropInfo.payload.name
+            }).then(this.handleNewSound);
         }
     }
 
@@ -235,6 +248,7 @@ class SoundTab extends React.Component {
 SoundTab.propTypes = {
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onActivateCostumesTab: PropTypes.func.isRequired,
     onNewSoundFromLibraryClick: PropTypes.func.isRequired,
     onNewSoundFromRecordingClick: PropTypes.func.isRequired,
     onRequestCloseSoundLibrary: PropTypes.func.isRequired,
@@ -264,6 +278,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onNewSoundFromLibraryClick: e => {
         e.preventDefault();
         dispatch(openSoundLibrary());

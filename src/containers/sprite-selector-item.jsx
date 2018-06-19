@@ -52,7 +52,8 @@ class SpriteSelectorItem extends React.Component {
                 currentOffset: currentOffset,
                 dragging: true,
                 dragType: this.props.dragType,
-                index: this.props.index
+                index: this.props.index,
+                payload: this.props.dragPayload
             });
             this.noClick = true;
         }
@@ -98,6 +99,7 @@ class SpriteSelectorItem extends React.Component {
             onClick,
             onDeleteButtonClick,
             onDuplicateButtonClick,
+            dragPayload,
             receivedBlocks,
             /* eslint-enable no-unused-vars */
             ...props
@@ -120,6 +122,10 @@ SpriteSelectorItem.propTypes = {
     assetId: PropTypes.string,
     costumeURL: PropTypes.string,
     dispatchSetHoveredSprite: PropTypes.func.isRequired,
+    dragPayload: PropTypes.shape({
+        name: PropTypes.string,
+        body: PropTypes.string
+    }),
     dragType: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     index: PropTypes.number,

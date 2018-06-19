@@ -13,6 +13,7 @@ class Backpack extends React.Component {
             'refreshContents'
         ]);
         this.state = {
+            error: false,
             offset: 0,
             itemsPerPage: 20,
             loading: false,
@@ -29,22 +30,27 @@ class Backpack extends React.Component {
     }
     refreshContents () {
         if (this.props.token && this.props.username) {
-            this.setState({loading: true});
+            this.setState({loading: true, error: false});
             getBackpackContents({
                 host: this.props.host,
                 token: this.props.token,
                 username: this.props.username,
                 offset: this.state.offset,
                 limit: this.state.itemsPerPage
-            }).then(contents => {
-                this.setState({contents, loading: false});
-            });
+            })
+                .then(contents => {
+                    this.setState({contents, loading: false});
+                })
+                .catch(() => {
+                    this.setState({error: true, loading: false});
+                });
         }
     }
     render () {
         return (
             <BackpackComponent
                 contents={this.state.contents}
+                error={this.state.error}
                 expanded={this.state.expanded}
                 loading={this.state.loading}
                 onToggle={this.props.host ? this.handleToggle : null}

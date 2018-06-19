@@ -8,7 +8,7 @@ import styles from './backpack.css';
 // TODO make sprite selector item not require onClick
 const noop = () => {};
 
-const Backpack = ({contents, expanded, loading, onToggle}) => (
+const Backpack = ({contents, error, expanded, loading, onToggle}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -35,37 +35,47 @@ const Backpack = ({contents, expanded, loading, onToggle}) => (
         </div>
         {expanded ? (
             <div className={styles.backpackList}>
-                {loading ? (
+                {error ? (
                     <div className={styles.statusMessage}>
                         <FormattedMessage
-                            defaultMessage="Loading..."
-                            description="Loading backpack message"
-                            id="gui.backpack.loadingBackpack"
+                            defaultMessage="Error loading backpack"
+                            description="Error backpack message"
+                            id="gui.backpack.errorBackpack"
                         />
                     </div>
                 ) : (
-                    contents.length > 0 ? (
-                        <div className={styles.backpackListInner}>
-                            {contents.map(item => (
-                                <SpriteSelectorItem
-                                    className={styles.backpackItem}
-                                    costumeURL={item.thumbnailUrl}
-                                    details={item.name}
-                                    key={item.id}
-                                    name={item.type}
-                                    selected={false}
-                                    onClick={noop}
-                                />
-                            ))}
-                        </div>
-                    ) : (
+                    loading ? (
                         <div className={styles.statusMessage}>
                             <FormattedMessage
-                                defaultMessage="Backpack is empty"
-                                description="Empty backpack message"
-                                id="gui.backpack.emptyBackpack"
+                                defaultMessage="Loading..."
+                                description="Loading backpack message"
+                                id="gui.backpack.loadingBackpack"
                             />
                         </div>
+                    ) : (
+                        contents.length > 0 ? (
+                            <div className={styles.backpackListInner}>
+                                {contents.map(item => (
+                                    <SpriteSelectorItem
+                                        className={styles.backpackItem}
+                                        costumeURL={item.thumbnailUrl}
+                                        details={item.name}
+                                        key={item.id}
+                                        name={item.type}
+                                        selected={false}
+                                        onClick={noop}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className={styles.statusMessage}>
+                                <FormattedMessage
+                                    defaultMessage="Backpack is empty"
+                                    description="Empty backpack message"
+                                    id="gui.backpack.emptyBackpack"
+                                />
+                            </div>
+                        )
                     )
                 )}
             </div>
@@ -80,6 +90,7 @@ Backpack.propTypes = {
         type: PropTypes.string,
         name: PropTypes.string
     }),
+    error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
     onToggle: PropTypes.func

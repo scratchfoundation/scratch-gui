@@ -2,8 +2,7 @@
 
 _What Github issue does this resolve (please include link)?_
 
-- resolves #
-- resolves #
+- Resolves #
 
 ### Proposed Changes
 

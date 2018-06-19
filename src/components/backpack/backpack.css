@@ -52,4 +52,5 @@
 .backpack-item {
     min-width: 4rem;
     margin: 0 0.25rem;
+    mix-blend-mode: multiply; /* Make white transparent for thumnbnails */
 }

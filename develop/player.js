@@ -61,7 +61,7 @@ var _reactDom = __webpack_require__(32);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _box = __webpack_require__(16);
+var _box = __webpack_require__(17);
 
 var _box2 = _interopRequireDefault(_box);
 

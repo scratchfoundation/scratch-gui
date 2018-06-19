@@ -84,12 +84,12 @@ const Backpack = ({contents, error, expanded, loading, onToggle}) => (
 );
 
 Backpack.propTypes = {
-    contents: PropTypes.shape({
+    contents: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
         thumbnailUrl: PropTypes.string,
         type: PropTypes.string,
         name: PropTypes.string
-    }),
+    })),
     error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,

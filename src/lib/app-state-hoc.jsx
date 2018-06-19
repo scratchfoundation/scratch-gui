@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers, compose} from 'redux';
+import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
-import {intlShape} from 'react-intl';
-import {IntlProvider, updateIntl} from 'react-intl-redux';
-import intlReducer from '../reducers/intl.js';
-
-import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initPlayer} from '../reducers/gui';
+import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initLocale, initPlayer} from '../reducers/gui';
 
 import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
@@ -34,10 +31,15 @@ const AppStateHOC = function (WrappedComponent) {
                 initializedGui = initPlayer(initializedGui);
             }
             const reducer = combineReducers({
-                intl: intlReducer,
                 scratchGui: guiReducer,
                 scratchPaint: ScratchPaintReducer
             });
+
+            if (window.location.search.indexOf('locale=') !== -1 ||
+                window.location.search.indexOf('lang=') !== -1) {
+                const locale = window.location.search.match(/(?:locale|lang)=([\w]+)/)[1];
+                initializedGui = initLocale(initializedGui, locale);
+            }
 
             this.store = createStore(
                 reducer,
@@ -45,9 +47,6 @@ const AppStateHOC = function (WrappedComponent) {
                 enhancer);
         }
         componentDidUpdate (prevProps) {
-            if (prevProps.intl !== this.props.intl) {
-                this.store.dispatch(updateIntl(this.props.intl));
-            }
             if (prevProps.isPlayerOnly !== this.props.isPlayerOnly) {
                 this.store.dispatch(setPlayer(this.props.isPlayerOnly));
             }
@@ -57,22 +56,20 @@ const AppStateHOC = function (WrappedComponent) {
         }
         render () {
             const {
-                intl, // eslint-disable-line no-unused-vars
                 isFullScreen, // eslint-disable-line no-unused-vars
                 isPlayerOnly, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
             return (
                 <Provider store={this.store}>
-                    <IntlProvider>
+                    <ConnectedIntlProvider>
                         <WrappedComponent {...componentProps} />
-                    </IntlProvider>
+                    </ConnectedIntlProvider>
                 </Provider>
             );
         }
     }
     AppStateWrapper.propTypes = {
-        intl: intlShape,
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool
     };

@@ -13,11 +13,16 @@ class Menu extends React.Component {
             'handleClick',
             'ref'
         ]);
-        if (props.open) this.addListeners();
+    }
+    componentDidMount () {
+        if (this.props.open) this.addListeners();
     }
     componentDidUpdate (prevProps) {
         if (this.props.open && !prevProps.open) this.addListeners();
         if (!this.props.open && prevProps.open) this.removeListeners();
+    }
+    componentWillUnmount () {
+        this.removeListeners();
     }
     addListeners () {
         document.addEventListener('mouseup', this.handleClick);

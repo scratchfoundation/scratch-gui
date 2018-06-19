@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateIntl} from 'react-intl-redux';
+import {selectLocale} from '../reducers/locales';
 import {closeLanguageMenu} from '../reducers/menus';
 
 import LanguageSelectorComponent from '../components/language-selector/language-selector.jsx';
@@ -15,7 +15,10 @@ class LanguageSelector extends React.Component {
         ]);
     }
     handleChange (e) {
-        this.props.onChangeLanguage(e.target.value);
+        const newLocale = e.target.value;
+        if (this.props.locales.hasOwnProperty(newLocale)) {
+            this.props.onChangeLanguage(newLocale);
+        }
     }
     render () {
         const {
@@ -36,16 +39,19 @@ class LanguageSelector extends React.Component {
 
 LanguageSelector.propTypes = {
     children: PropTypes.node,
+    currentLocale: PropTypes.string.isRequired,
+    locales: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
     onChangeLanguage: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    currentLocale: state.intl.locale
+    currentLocale: state.scratchGui.locales.locale,
+    locales: state.scratchGui.locales.messages
 });
 
 const mapDispatchToProps = dispatch => ({
     onChangeLanguage: locale => {
-        dispatch(updateIntl({locale: locale, messages: {}}));
+        dispatch(selectLocale(locale));
         dispatch(closeLanguageMenu());
     }
 });

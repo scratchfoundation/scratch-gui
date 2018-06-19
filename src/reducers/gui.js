@@ -7,6 +7,7 @@ import blockDragReducer, {blockDragInitialState} from './block-drag';
 import editorTabReducer, {editorTabInitialState} from './editor-tab';
 import hoveredTargetReducer, {hoveredTargetInitialState} from './hovered-target';
 import menuReducer, {menuInitialState} from './menus';
+import localesReducer, {localesInitialState} from './locales';
 import modalReducer, {modalsInitialState} from './modals';
 import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
@@ -26,6 +27,7 @@ const guiInitialState = {
     colorPicker: colorPickerInitialState,
     customProcedures: customProceduresInitialState,
     editorTab: editorTabInitialState,
+    locales: localesInitialState,
     mode: modeInitialState,
     hoveredTarget: hoveredTargetInitialState,
     stageSize: stageSizeInitialState,
@@ -58,6 +60,20 @@ const initFullScreen = function (currentState) {
         }}
     );
 };
+const initLocale = function (currentState, locale) {
+    if (currentState.locales.messages.hasOwnProperty(locale)) {
+        return Object.assign(
+            {},
+            currentState,
+            {locales: {
+                locale: locale,
+                messages: currentState.locales.messages
+            }}
+        );
+    }
+    // don't change locale if it's not in the current messages
+    return currentState;
+};
 const guiReducer = combineReducers({
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
@@ -65,6 +81,7 @@ const guiReducer = combineReducers({
     colorPicker: colorPickerReducer,
     customProcedures: customProceduresReducer,
     editorTab: editorTabReducer,
+    locales: localesReducer,
     mode: modeReducer,
     hoveredTarget: hoveredTargetReducer,
     stageSize: stageSizeReducer,
@@ -82,5 +99,6 @@ export {
     guiInitialState,
     guiMiddleware,
     initFullScreen,
+    initLocale,
     initPlayer
 };

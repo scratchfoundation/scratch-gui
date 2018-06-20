@@ -1446,20 +1446,17 @@
     },
     {
         "name": "Cat2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "costume",
         "tags": [
-            "animals",
-            "cat",
-            "kitten",
             "kitty",
-            "mammal",
-            "orange",
-            "scratch cat"
+            "kitten",
+            "animals",
+            "mammal"
         ],
         "info": [
-            47,
-            55,
+            87,
+            39,
             1
         ]
     },
@@ -6229,7 +6226,7 @@
     },
     {
         "name": "Scarf1",
-        "md5": "9db18d2a2b3c9859654fc1b4832e6076.svg",
+        "md5": "0c03668b4e26eba969ad803a4e810c78.svg",
         "type": "costume",
         "tags": [
             "fashion",
@@ -6237,7 +6234,7 @@
         ],
         "info": [
             54,
-            36,
+            23,
             1
         ]
     },
@@ -6439,7 +6436,8 @@
         "type": "costume",
         "tags": [
             "fashion",
-            "winter"
+            "winter",
+            "sports"
         ],
         "info": [
             44,
@@ -6625,15 +6623,15 @@
     },
     {
         "name": "Star",
-        "md5": "ab0914e53e360477275e58b83ec4d423.svg",
+        "md5": "e929c1274c379b6b6fed12e6dec63368.svg",
         "type": "costume",
         "tags": [
             "shapes",
             "space"
         ],
         "info": [
-            21,
-            19,
+            22,
+            23,
             1
         ]
     },

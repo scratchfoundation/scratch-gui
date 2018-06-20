@@ -18,7 +18,11 @@ class ScanningStep extends React.Component {
     componentDidMount () {
         this.props.vm.startDeviceScan(this.props.extensionId);
         this.props.vm.on('PERIPHERAL_LIST_UPDATE', newList => {
-            this.setState({deviceList: newList});
+            // TODO: sort peripherals by signal strength? so they don't jump around
+            const peripheralArray = Object.keys(newList).map(id =>
+                newList[id]
+            );
+            this.setState({deviceList: peripheralArray});
         });
     }
     componentWillUnmount () {

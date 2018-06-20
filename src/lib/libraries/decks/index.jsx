@@ -6,16 +6,12 @@ import libraryIntro from './intro/lib-getting-started.jpg';
 import stepMove from './intro/intro1.gif';
 import stepMoveSayHello from './intro/intro2.gif';
 
-// Say hello
-import librarySay from './say/cover-say-hello.gif';
-import stepSayHello from './say/intro-say-hello.gif';
-
 // Add sprite
 import libraryAddSprite from './sprite/cover-add-sprite.jpg';
 import stepAddSprite from './sprite/intro-choose-sprite.gif';
 
 // Animate a name
-import libraryAnimate from './animate/cover-color-click.gif';
+import libraryAnimate from './animate/lib_animate-a-name.jpg';
 import stepAnimatePickLetter from'./animate/animate-name-pick-a-letter.gif';
 import stepAnimatePlaySound from'./animate/animate-name-play-sound.gif';
 import stepAnimatePickLetter2 from'./animate/animate-name-pick-a-letter2.gif';
@@ -25,7 +21,7 @@ import stepAnimateGrow from './animate/animate-name-grow.gif';
 
 
 // Make-Music
-import libraryMakeMusic from './make-music/cover-mic.jpg';
+import libraryMakeMusic from './make-music/lib-make-music.jpg';
 import stepPickInstrument from './make-music/make-music-pick-instrument.gif';
 import stepPlaySoundClick from './make-music/make-music-play-sound.gif';
 import stepMakeSong from './make-music/make-music-make-song.gif';
@@ -55,10 +51,10 @@ import stepGameChangeColor from './game/game-change-color.gif';
 import stepResetScore from './game/game-reset-score.gif';
 
 // Videos
-import recordASound from './videos/lib-sound.jpg'
+import recordASound from './videos/record-a-sound.jpg'
 import glideAroundThumb from './videos/glide-around.jpg';
 import changeSizeThumb from './videos/change-size.jpg';
-import switchCostumeThumb from './videos/switch-costume.jpg';
+import switchCostumeThumb from './videos/animate-sprite.jpg';
 import hideAndShowThumb from './videos/hide-and-show.jpg';
 import addBackdropThumb from './videos/add-backdrop.jpg';
 import addEffectsThumb from './videos/add-effects.jpg';
@@ -82,8 +78,8 @@ export default {
           }, {
                   title: (
                       <FormattedMessage
-                          defaultMessage="Add a Move Block"
-                          description="Step name for 'Add a Move Block' step"
+                          defaultMessage="Add a move block"
+                          description="Step name for 'Add a move block' step"
                           id="gui.howtos.intro-move.step_stepMove"
                       />
                   ),
@@ -106,36 +102,6 @@ export default {
             }
         ]
     },
-    'add-sprite': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Add a Sprite"
-                description="Name for the 'Add a Sprite' how-to"
-                id="gui.howtos.add-sprite.name"
-            />
-        ),
-        img: libraryAddSprite,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a Sprite"
-                        description="Step name for 'Add a new sprite' step"
-                        id="gui.howtos.add-sprite.step_addSprite"
-                    />
-                ),
-                image: stepAddSprite
-            },
-            {
-                deckIds: [
-                    'add-a-backdrop',
-                    'switch-costume',
-                    'change-size'
-                ]
-            }
-        ]
-    },
-
     'animate-a-name': {
         name: (
             <FormattedMessage
@@ -210,8 +176,6 @@ export default {
         }
         ]
     },
-
-
     'Make-Music': {
         name: (
             <FormattedMessage
@@ -280,6 +244,55 @@ export default {
         }
         ]
     },
+    'Make-A-Game': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Make a Clicker Game"
+                description="Name for the 'Make a Clicker Game' how-to"
+                id="gui.howtos.make-a-game.name"
+            />
+        ),
+        img: libraryMakeAGame,
+        steps: [{
+            video: 'https://www.youtube.com/embed/XIz32K91vAk'
+        },
+        {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Go to a random position"
+                    description="Step name for 'Go to a random position' step"
+                    id="gui.howtos.Make-A-Game.step_RandomPosition"
+                />
+            ),
+            image: stepRandom
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Color"
+                    description="Step name for 'Change Color' step"
+                    id="gui.howtos.make-a-game.step_ChangeColor"
+                />
+            ),
+            image: stepGameChangeColor
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Reset Score"
+                    description="Step name for 'Reset Score' step"
+                    id="gui.howtos.make-music.step_ResetScore"
+                />
+            ),
+            image: stepResetScore
+        }, {
+            deckIds: [
+                'add-a-backdrop',
+                'add-effects',
+                'move-around-with-arrow-keys'
+            ]
+        }
+        ]
+    },
+
     'Chase-Game': {
         name: (
             <FormattedMessage
@@ -382,60 +395,97 @@ export default {
         }
         ]
     },
-
-    'Make-A-Game': {
+    'add-sprite': {
         name: (
             <FormattedMessage
-                defaultMessage="Make a Clicker Game"
-                description="Name for the 'Make a Clicker Game' how-to"
-                id="gui.howtos.make-a-game.name"
+                defaultMessage="Add a Sprite"
+                description="Name for the 'Add a Sprite' how-to"
+                id="gui.howtos.add-sprite.name"
             />
         ),
-        img: libraryMakeAGame,
+        img: libraryAddSprite,
+        steps: [
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Add a Sprite"
+                        description="Step name for 'Add a new sprite' step"
+                        id="gui.howtos.add-sprite.step_addSprite"
+                    />
+                ),
+                image: stepAddSprite
+            },
+            {
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
+            }
+        ]
+    },
+    'add-a-backdrop': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Add a Backdrop"
+                description="Name for the 'Add a Backdrop' how-to"
+                id="gui.howtos.add-a-backdrop.name"
+            />
+        ),
+        img: addBackdropThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/IPCaZ5kmFTA'
-        },
-        {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Go to a random position"
-                    description="Step name for 'Go to a random position' step"
-                    id="gui.howtos.Make-A-Game.step_RandomPosition"
-                />
-            ),
-            image: stepRandom
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Change Color"
-                    description="Step name for 'Change Color' step"
-                    id="gui.howtos.make-a-game.step_ChangeColor"
-                />
-            ),
-            image: stepGameChangeColor
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Reset Score"
-                    description="Step name for 'Reset Score' step"
-                    id="gui.howtos.make-music.step_ResetScore"
-                />
-            ),
-            image: stepResetScore
+            video: 'https://www.youtube.com/embed/WpV05Q7AbPU'
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'add-effects',
-                'move-around-with-arrow-keys'
+                'switch-costume',
+                'change-size'
             ]
-        }
-        ]
+        }]
+    },
+    'change-size': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Change Size"
+                description="Name for the 'Change Size' how-to"
+                id="gui.howtos.change-size.name"
+            />
+        ),
+        img: changeSizeThumb,
+        steps: [{
+            video: 'https://www.youtube.com/embed/NiK9KcghZ9s'
+        }, {
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
+        }]
+    },
+    'glide-around': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Glide Around"
+                description="Name for the 'Glide Around' how-to"
+                id="gui.howtos.glide-around.name"
+            />
+        ),
+        img: glideAroundThumb,
+        steps: [{
+            video: 'https://www.youtube.com/embed/WUcmsMEIbGg'
+        }, {
+            deckIds: [
+                'add-a-backdrop',
+                'switch-costume',
+                'change-size'
+            ]
+        }]
     },
 
       'record-a-sound': {
           name: (
               <FormattedMessage
-                  defaultMessage="Record A Sound"
+                  defaultMessage="Record a Sound"
                   description="Record A Sound' how-to"
                   id="gui.howtos.record-a-sound.name"
               />
@@ -452,81 +502,44 @@ export default {
           }]
 
       },
+      'spin-video': {
+          name: 'Make It Spin',
+          img: spinThumb,
+          steps: [{
+              video: 'https://www.youtube.com/embed/rHP3aojB_6w'
+          }, {
+              deckIds: [
+                  'add-a-backdrop',
+                  'switch-costume',
+                  'change-size'
+              ]
+          }]
+      },
+      'hide-and-show': {
+          name: (
+              <FormattedMessage
+                  defaultMessage="Hide and Show"
+                  description="Name for the 'Hide and Show' how-to"
+                  id="gui.howtos.hide-and-show.name"
+              />
+          ),
+          img: hideAndShowThumb,
+          steps: [{
+              video: 'https://www.youtube.com/embed/jpvqnlfsDTU'
+          }, {
+              deckIds: [
+                  'add-a-backdrop',
+                  'switch-costume',
+                  'change-size'
+              ]
+          }]
+      },
 
-    'say-hello': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Say hello"
-                description="Name for the 'Say hello' how-to"
-                id="gui.howtos.say-hello.name"
-            />
-        ),
-        img: librarySay,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Say Hello"
-                        description="Step name for 'Add a new sprite' step"
-                        id="gui.howtos.say-hello.step_addSprite"
-                    />
-                ),
-                image: stepSayHello
-            },
-            {
-                deckIds: [
-                    'add-a-backdrop',
-                    'switch-costume',
-                    'change-size'
-                ]
-            }
-        ]
-    },
-
-
-    'glide-around': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Glide around"
-                description="Name for the 'Glide around' how-to"
-                id="gui.howtos.glide-around.name"
-            />
-        ),
-        img: glideAroundThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/WUcmsMEIbGg'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    },
-    'change-size': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Change size"
-                description="Name for the 'Change size' how-to"
-                id="gui.howtos.change-size.name"
-            />
-        ),
-        img: changeSizeThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/NiK9KcghZ9s'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    },
     'switch-costume': {
         name: (
             <FormattedMessage
-                defaultMessage="Switch costume"
-                description="Name for the 'Switch costume' how-to"
+                defaultMessage="Animate a Sprite"
+                description="Name for the 'Animate a Sprite' how-to"
                 id="gui.howtos.switch-costume.name"
             />
         ),
@@ -541,65 +554,9 @@ export default {
             ]
         }]
     },
-    'hide-and-show': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Hide & Show"
-                description="Name for the 'Hide & Show' how-to"
-                id="gui.howtos.hide-and-show.name"
-            />
-        ),
-        img: hideAndShowThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/jpvqnlfsDTU'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    },
-    'add-a-backdrop': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Add a backdrop"
-                description="Name for the 'Add a backdrop' how-to"
-                id="gui.howtos.add-a-backdrop.name"
-            />
-        ),
-        img: addBackdropThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/WpV05Q7AbPU'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    },
-    'add-effects': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Add effects"
-                description="Name for the 'Add effects' how-to"
-                id="gui.howtos.add-effects.name"
-            />
-        ),
-        img: addEffectsThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/ORuohhkx15g'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    },
+
     'move-around-with-arrow-keys': {
-        name: 'Move With Arrow Keys',
+        name: 'Use Arrow Keys',
         img: moveArrowKeysThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/7DUA_Yl0B_M'
@@ -611,17 +568,23 @@ export default {
             ]
         }]
     },
-    'spin-video': {
-        name: 'Spin!',
-        img: spinThumb,
-        steps: [{
-            video: 'https://www.youtube.com/embed/rHP3aojB_6w'
-        }, {
-            deckIds: [
-                'add-a-backdrop',
-                'switch-costume',
-                'change-size'
-            ]
-        }]
-    }
+        'add-effects': {
+            name: (
+                <FormattedMessage
+                    defaultMessage="Add Effects"
+                    description="Name for the 'Add Effects' how-to"
+                    id="gui.howtos.add-effects.name"
+                />
+            ),
+            img: addEffectsThumb,
+            steps: [{
+                video: 'https://www.youtube.com/embed/ORuohhkx15g'
+            }, {
+                deckIds: [
+                    'add-a-backdrop',
+                    'switch-costume',
+                    'change-size'
+                ]
+            }]
+        },
 };

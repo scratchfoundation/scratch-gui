@@ -16,7 +16,7 @@ class LanguageSelector extends React.Component {
     }
     handleChange (e) {
         const newLocale = e.target.value;
-        if (this.props.locales.hasOwnProperty(newLocale)) {
+        if (this.props.supportedLocales.includes(newLocale)) {
             this.props.onChangeLanguage(newLocale);
         }
     }
@@ -40,13 +40,13 @@ class LanguageSelector extends React.Component {
 LanguageSelector.propTypes = {
     children: PropTypes.node,
     currentLocale: PropTypes.string.isRequired,
-    locales: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)),
-    onChangeLanguage: PropTypes.func.isRequired
+    onChangeLanguage: PropTypes.func.isRequired,
+    supportedLocales: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string))
 };
 
 const mapStateToProps = state => ({
-    currentLocale: state.scratchGui.locales.locale,
-    locales: state.scratchGui.locales.messages
+    currentLocale: state.locales.locale,
+    supportedLocales: Object.keys(state.locales.messagesByLocale)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -472,8 +472,8 @@ const mapStateToProps = state => ({
         state.scratchGui.mode.isFullScreen
     ),
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
-    locale: state.scratchGui.locales.locale,
-    messages: state.scratchGui.locales.messages[state.scratchGui.locales.locale],
+    locale: state.locales.locale,
+    messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active
 });

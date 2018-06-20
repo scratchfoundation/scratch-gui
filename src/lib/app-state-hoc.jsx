@@ -4,7 +4,8 @@ import {Provider} from 'react-redux';
 import {createStore, combineReducers, compose} from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
-import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initLocale, initPlayer} from '../reducers/gui';
+import guiReducer, {guiInitialState, guiMiddleware, initFullScreen, initPlayer} from '../reducers/gui';
+import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
 
 import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
@@ -30,20 +31,25 @@ const AppStateHOC = function (WrappedComponent) {
             if (props.isPlayerOnly) {
                 initializedGui = initPlayer(initializedGui);
             }
-            const reducer = combineReducers({
-                scratchGui: guiReducer,
-                scratchPaint: ScratchPaintReducer
-            });
 
+            let initializedLocales = localesInitialState;
             if (window.location.search.indexOf('locale=') !== -1 ||
                 window.location.search.indexOf('lang=') !== -1) {
                 const locale = window.location.search.match(/(?:locale|lang)=([\w]+)/)[1];
-                initializedGui = initLocale(initializedGui, locale);
+                initializedLocales = initLocale(initializedLocales, locale);
             }
 
+            const reducer = combineReducers({
+                locales: localesReducer,
+                scratchGui: guiReducer,
+                scratchPaint: ScratchPaintReducer
+            });
             this.store = createStore(
                 reducer,
-                {scratchGui: initializedGui},
+                {
+                    locales: initializedLocales,
+                    scratchGui: initializedGui
+                },
                 enhancer);
         }
         componentDidUpdate (prevProps) {

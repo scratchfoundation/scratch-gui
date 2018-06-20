@@ -10,7 +10,8 @@ const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
 
 const initialState = {
     locale: 'en',
-    messages: editorMessages
+    messagesByLocale: editorMessages,
+    messages: editorMessages.en
 };
 
 const reducer = function (state, action) {
@@ -19,12 +20,14 @@ const reducer = function (state, action) {
     case SELECT_LOCALE:
         return Object.assign({}, state, {
             locale: action.locale,
-            messages: state.messages
+            messagesByLocale: state.messagesByLocale,
+            messages: state.messagesByLocale[action.locale]
         });
     case UPDATE_LOCALES:
         return Object.assign({}, state, {
             locale: state.locale,
-            messages: action.messages
+            messagesByLocale: action.messagesByLocale,
+            messages: action.messagesByLocale[state.locale]
         });
     default:
         return state;
@@ -41,13 +44,28 @@ const selectLocale = function (locale) {
 const setLocales = function (localesMessages) {
     return {
         type: UPDATE_LOCALES,
-        messages: localesMessages
+        messagesByLocale: localesMessages
     };
 };
-
+const initLocale = function (currentState, locale) {
+    if (currentState.messagesByLocale.hasOwnProperty(locale)) {
+        return Object.assign(
+            {},
+            currentState,
+            {
+                locale: locale,
+                messagesByLocale: currentState.messagesByLocale,
+                messages: currentState.messagesByLocale[locale]
+            }
+        );
+    }
+    // don't change locale if it's not in the current messages
+    return currentState;
+};
 export {
     reducer as default,
     initialState as localesInitialState,
+    initLocale,
     selectLocale,
     setLocales
 };

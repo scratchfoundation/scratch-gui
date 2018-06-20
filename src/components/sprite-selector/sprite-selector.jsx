@@ -53,6 +53,7 @@ const SpriteSelectorComponent = function (props) {
         onDrop,
         onDeleteSprite,
         onDuplicateSprite,
+        onExportSprite,
         onFileUploadClick,
         onNewSpriteClick,
         onPaintSpriteClick,
@@ -105,6 +106,7 @@ const SpriteSelectorComponent = function (props) {
                     onDeleteSprite={onDeleteSprite}
                     onDrop={onDrop}
                     onDuplicateSprite={onDuplicateSprite}
+                    onExportSprite={onExportSprite}
                     onSelectSprite={onSelectSprite}
                 />
             </Box>
@@ -116,7 +118,7 @@ const SpriteSelectorComponent = function (props) {
                         title: intl.formatMessage(messages.addSpriteFromFile),
                         img: fileUploadIcon,
                         onClick: onFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2', // TODO add sprite 3
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2, .sprite3',
                         fileChange: onSpriteUpload,
                         fileInput: spriteFileInput
                     }, {
@@ -152,6 +154,7 @@ SpriteSelectorComponent.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,

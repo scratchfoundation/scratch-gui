@@ -42,10 +42,6 @@ import stepScoreWhenTouch from './chase-game/chase-game-change-score.gif';
 
 // Make-A-Game
 import libraryMakeAGame from './game/lib-pop.jpg';
-import stepGamePickSprite from './game/game-pick-sprite.gif';
-import stepGamePlaySound from './game/game-play-sound.gif';
-import stepGameAddScore from './game/game-add-score.gif';
-import stepGameChangeScore from './game/game-change-score.gif';
 import stepRandom from './game/game-random-position.gif';
 import stepGameChangeColor from './game/game-change-color.gif';
 import stepResetScore from './game/game-reset-score.gif';

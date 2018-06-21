@@ -595,5 +595,24 @@
             360,
             1
         ]
+    },
+    {
+        "name": "Woods",
+        "md5": "3f3005b76e278b66dbeb9a982d68c555.svg",
+        "type": "backdrop",
+        "tags": [
+            "fantasy",
+            "spooky",
+            "holloween",
+            "outdoors",
+            "haunted",
+            "forest",
+            "alex eben meyer"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
     }
 ]

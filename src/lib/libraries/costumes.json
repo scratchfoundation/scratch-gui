@@ -432,17 +432,17 @@
     },
     {
         "name": "Baseball",
-        "md5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
+        "md5": "ae05a2a1fc22ce5929b8a67f695bfc9c.svg",
         "type": "costume",
         "tags": [
+            "baseball",
             "sports",
-            "round",
-            "summer",
-            "things"
+            "ball",
+            "alex eben meyer"
         ],
         "info": [
-            34,
-            31,
+            28,
+            28,
             1
         ]
     },
@@ -468,7 +468,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bat",
             "animals",
             "alex eben meyer"
@@ -486,7 +486,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bat",
             "animals",
             "alex eben meyer"
@@ -504,7 +504,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bat",
             "animals",
             "alex eben meyer"
@@ -522,7 +522,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bat",
             "animals",
             "alex eben meyer"
@@ -1514,20 +1514,17 @@
     },
     {
         "name": "Cat2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "costume",
         "tags": [
-            "animals",
-            "cat",
-            "kitten",
             "kitty",
-            "mammal",
-            "orange",
-            "scratch cat"
+            "kitten",
+            "animals",
+            "mammal"
         ],
         "info": [
-            47,
-            55,
+            87,
+            39,
             1
         ]
     },
@@ -3256,7 +3253,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
@@ -3274,7 +3271,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
@@ -3292,7 +3289,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
@@ -3310,7 +3307,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
@@ -3360,7 +3357,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "ghoul",
             "monster",
             "alex eben meyer"
@@ -3378,7 +3375,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "ghoul",
             "monster",
             "alex eben meyer"
@@ -3396,7 +3393,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "ghoul",
             "monster",
             "alex eben meyer"
@@ -3414,7 +3411,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "ghoul",
             "monster",
             "alex eben meyer"
@@ -6613,6 +6610,38 @@
     },
     {
         "name": "Shark-a",
+        "md5": "4ca6776e9c021e8b21c3346793c9361d.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "underwater",
+            "ipzy",
+            "fish"
+        ],
+        "info": [
+            150,
+            60,
+            1
+        ]
+    },
+    {
+        "name": "Shark-b",
+        "md5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "underwater",
+            "ipzy",
+            "fish"
+        ],
+        "info": [
+            150,
+            60,
+            1
+        ]
+    },
+    {
+        "name": "Shark2-a",
         "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
         "type": "costume",
         "tags": [
@@ -6631,7 +6660,7 @@
         ]
     },
     {
-        "name": "Shark-b",
+        "name": "Shark2-b",
         "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
         "type": "costume",
         "tags": [
@@ -6650,7 +6679,7 @@
         ]
     },
     {
-        "name": "Shark-c",
+        "name": "Shark2-c",
         "md5": "afeae3f998598424f7c50918507f6ce6.svg",
         "type": "costume",
         "tags": [
@@ -6817,7 +6846,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"
@@ -6835,7 +6864,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"
@@ -6853,7 +6882,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"
@@ -6871,7 +6900,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"
@@ -6889,7 +6918,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"

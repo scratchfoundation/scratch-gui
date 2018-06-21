@@ -539,13 +539,13 @@
     },
     {
         "name": "Baseball",
-        "md5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
+        "md5": "ae05a2a1fc22ce5929b8a67f695bfc9c.svg",
         "type": "sprite",
         "tags": [
+            "baseball",
             "sports",
-            "round",
-            "summer",
-            "things"
+            "ball",
+            "alex eben meyer"
         ],
         "info": [
             0,
@@ -568,15 +568,15 @@
                 {
                     "costumeName": "baseball",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "6e13ef53885d2cfca9a54cc5c3f6c20f.svg",
+                    "baseLayerMD5": "ae05a2a1fc22ce5929b8a67f695bfc9c.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 34,
-                    "rotationCenterY": 31
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 28
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 49,
-            "scratchY": -23,
+            "scratchX": 173,
+            "scratchY": -89,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -639,7 +639,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bat",
             "animals",
             "alex eben meyer"
@@ -4764,7 +4764,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
@@ -4934,7 +4934,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "ghoul",
             "monster",
             "alex eben meyer"
@@ -10319,20 +10319,17 @@
     },
     {
         "name": "Shark",
-        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
+        "md5": "4ca6776e9c021e8b21c3346793c9361d.svg",
         "type": "sprite",
         "tags": [
             "animals",
-            "ocean",
-            "sea",
-            "fish",
-            "teeth",
-            "carnivore",
-            "chomp"
+            "underwater",
+            "ipzy",
+            "fish"
         ],
         "info": [
             0,
-            3,
+            2,
             1
         ],
         "json": {
@@ -10350,6 +10347,65 @@
             "costumes": [
                 {
                     "costumeName": "shark-a",
+                    "baseLayerID": 8,
+                    "baseLayerMD5": "4ca6776e9c021e8b21c3346793c9361d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 150,
+                    "rotationCenterY": 60
+                },
+                {
+                    "costumeName": "shark-b",
+                    "baseLayerID": 9,
+                    "baseLayerMD5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 150,
+                    "rotationCenterY": 60
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -5,
+            "scratchY": 54,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Shark 2",
+        "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "ocean",
+            "sea",
+            "fish",
+            "teeth",
+            "carnivore",
+            "chomp"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "objName": "Shark 2",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "shark2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7c0a907eae79462f69f8e2af8e7df828.svg",
                     "bitmapResolution": 1,
@@ -10357,7 +10413,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "shark-b",
+                    "costumeName": "shark2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cff9ae87a93294693a0650b38a7a33d2.svg",
                     "bitmapResolution": 1,
@@ -10365,7 +10421,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "shark-c",
+                    "costumeName": "shark2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "afeae3f998598424f7c50918507f6ce6.svg",
                     "bitmapResolution": 1,
@@ -10778,7 +10834,7 @@
         "tags": [
             "fantasy",
             "spooky",
-            "holloween",
+            "halloween",
             "bones",
             "monster",
             "alex eben meyer"
@@ -12513,19 +12569,19 @@
     },
     {
         "name": "Witch",
-        "md5": "c991196a708294535a1dbdce7189c23c.svg",
+        "md5": "cbc54e15cd62f0c16369587377636099.svg",
         "type": "sprite",
         "tags": [
             "fantasy",
-            "broom",
-            "wart",
-            "flying",
-            "hat",
+            "people",
+            "ipzy",
+            "castle",
+            "emotions",
             "magic"
         ],
         "info": [
             0,
-            1,
+            4,
             1
         ],
         "json": {
@@ -12542,17 +12598,41 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "witch",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "c991196a708294535a1dbdce7189c23c.svg",
+                    "costumeName": "witch-a",
+                    "baseLayerID": 36,
+                    "baseLayerMD5": "cbc54e15cd62f0c16369587377636099.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 74,
-                    "rotationCenterY": 59
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 140
+                },
+                {
+                    "costumeName": "witch-b",
+                    "baseLayerID": 37,
+                    "baseLayerMD5": "64d2c4c51e6cb6008cd5e93f77e6f591.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 140
+                },
+                {
+                    "costumeName": "witch-c",
+                    "baseLayerID": 38,
+                    "baseLayerMD5": "00b768c3da5b4ee3efddf05d1eb88de2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 140
+                },
+                {
+                    "costumeName": "witch-d",
+                    "baseLayerID": 39,
+                    "baseLayerMD5": "4fe4c0ee34a9028f2c6988b7294a61c1.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 140
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -86,
-            "scratchY": -49,
+            "scratchX": -47,
+            "scratchY": 33,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

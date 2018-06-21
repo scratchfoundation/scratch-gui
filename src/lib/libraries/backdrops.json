@@ -1,5 +1,37 @@
 [
     {
+        "name": "Baseball",
+        "md5": "5d3a62635eacfbbe264fbba043207afe.svg",
+        "type": "backdrop",
+        "tags": [
+            "baseball",
+            "sports",
+            "outdoors",
+            "alex eben meyer"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Baseball 2",
+        "md5": "069f8901194ff75609689b4a0de10b4e.svg",
+        "type": "backdrop",
+        "tags": [
+            "baseball",
+            "sports",
+            "outdoors",
+            "alex eben meyer"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
         "name": "Basketball",
         "md5": "e494c4f44897d94e0541f7036a302449.svg",
         "type": "backdrop",

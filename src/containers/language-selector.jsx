@@ -23,6 +23,7 @@ class LanguageSelector extends React.Component {
     render () {
         const {
             onChangeLanguage, // eslint-disable-line no-unused-vars
+            supportedLocales, // eslint-disable-line no-unused-vars
             children,
             ...props
         } = this.props;
@@ -41,7 +42,7 @@ LanguageSelector.propTypes = {
     children: PropTypes.node,
     currentLocale: PropTypes.string.isRequired,
     onChangeLanguage: PropTypes.func.isRequired,
-    supportedLocales: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string))
+    supportedLocales: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = state => ({

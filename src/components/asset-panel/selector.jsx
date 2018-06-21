@@ -15,7 +15,6 @@ const Selector = props => {
         buttons,
         containerRef,
         dragType,
-        dragPayload,
         items,
         selectedItemIndex,
         draggingIndex,

@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import BackpackComponent from '../components/backpack/backpack.jsx';
-import {getBackpackContents, saveBackpackObject, deleteBackpackObject, soundPayload, costumePayload} from '../lib/backpack-api';
+import {
+    getBackpackContents,
+    saveBackpackObject,
+    deleteBackpackObject,
+    soundPayload,
+    costumePayload
+} from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 
 import {connect} from 'react-redux';

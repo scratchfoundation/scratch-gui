@@ -37,6 +37,11 @@ class GUI extends React.Component {
         if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
+        // If given an extension callback function (for the project page),
+        // add listener for EXTENSION_ADDED events from the VM
+        if (this.props.extensionCallback) {
+            this.props.vm.addListener('EXTENSION_ADDED', this.props.extensionCallback);
+        }
         this.props.vm.loadProject(this.props.projectData)
             .then(() => {
                 this.setState({loading: false}, () => {
@@ -96,6 +101,7 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     ...GUIComponent.propTypes,
+    extensionCallback: PropTypes.func,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,

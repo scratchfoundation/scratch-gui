@@ -18,6 +18,9 @@
 
     /* Allow custom touch handling to prevent scrolling on Edge */
     touch-action: none;
+
+    /* Make sure border is not included in size calculation */
+    box-sizing: content-box !important;
 }
 
 .with-color-picker {

@@ -15,6 +15,7 @@ import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import spriteIcon from '../action-menu/icon--sprite.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
+import searchIcon from '../action-menu/icon--search.svg';
 
 const messages = defineMessages({
     addSpriteFromLibrary: {
@@ -127,6 +128,10 @@ const SpriteSelectorComponent = function (props) {
                         title: intl.formatMessage(messages.addSpriteFromPaint),
                         img: paintIcon,
                         onClick: onPaintSpriteClick // TODO need real function for this
+                    }, {
+                        title: intl.formatMessage(messages.addSpriteFromLibrary),
+                        img: searchIcon,
+                        onClick: onNewSpriteClick
                     }
                 ]}
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}

@@ -52,7 +52,8 @@ class Blocks extends React.Component {
             'onVisualReport',
             'onWorkspaceUpdate',
             'onWorkspaceMetricsChange',
-            'setBlocks'
+            'setBlocks',
+            'setLocale'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.state = {
@@ -86,7 +87,7 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
-        this.props.vm.setLocale(this.props.locale, this.props.messages);
+        this.setLocale();
 
         analytics.pageview('/editors/blocks');
     }
@@ -109,7 +110,7 @@ class Blocks extends React.Component {
         }
 
         if (prevProps.locale !== this.props.locale) {
-            this.props.vm.setLocale(this.props.locale, this.props.messages);
+            this.setLocale();
         }
 
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
@@ -142,6 +143,16 @@ class Blocks extends React.Component {
         this.detachVM();
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
+    }
+
+    setLocale () {
+        this.workspace.getFlyout().setRecyclingEnabled(false);
+        this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
+        this.props.vm.setLocale(this.props.locale, this.props.messages);
+
+        this.workspace.updateToolbox(this.props.toolboxXML);
+        this.props.vm.refreshWorkspace();
+        this.workspace.getFlyout().setRecyclingEnabled(true);
     }
 
     updateToolbox () {
@@ -445,7 +456,7 @@ Blocks.defaultOptions = {
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     },
-    comments: false,
+    comments: true,
     collapse: false,
     sounds: false
 };
@@ -461,8 +472,8 @@ const mapStateToProps = state => ({
         state.scratchGui.mode.isFullScreen
     ),
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
-    locale: state.intl.locale,
-    messages: state.intl.messages,
+    locale: state.locales.locale,
+    messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active
 });

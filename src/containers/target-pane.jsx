@@ -107,14 +107,25 @@ class TargetPane extends React.Component {
             this.props.onReceivedBlocks(true);
         }
     }
-
     handleDrop (dragInfo) {
+        const {sprite: targetId} = this.props.hoveredTarget;
         if (dragInfo.dragType === DragConstants.SPRITE) {
             // Add one to both new and target index because we are not counting/moving the stage
             this.props.vm.reorderTarget(dragInfo.index + 1, dragInfo.newIndex + 1);
+        } else if (targetId) {
+            // Something is being dragged over one of the sprite tiles or the backdrop.
+            // Dropping assets like sounds and costumes duplicate the asset on the
+            // hovered target. Shared costumes also become the current costume on that target.
+            // However, dropping does not switch the editing target or activate that editor tab.
+            // This is based on 2.0 behavior, but seems like it keeps confusing switching to a minimum.
+            // it allows the user to share multiple things without switching back and forth.
+            if (dragInfo.dragType === DragConstants.COSTUME) {
+                this.props.vm.shareCostumeToTarget(dragInfo.index, targetId);
+            } else if (targetId && dragInfo.dragType === DragConstants.SOUND) {
+                this.props.vm.shareSoundToTarget(dragInfo.index, targetId);
+            }
         }
     }
-
     render () {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars

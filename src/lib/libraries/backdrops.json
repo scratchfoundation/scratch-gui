@@ -1,5 +1,37 @@
 [
     {
+        "name": "Baseball",
+        "md5": "5d3a62635eacfbbe264fbba043207afe.svg",
+        "type": "backdrop",
+        "tags": [
+            "baseball",
+            "sports",
+            "outdoors",
+            "alex eben meyer"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Baseball 2",
+        "md5": "069f8901194ff75609689b4a0de10b4e.svg",
+        "type": "backdrop",
+        "tags": [
+            "baseball",
+            "sports",
+            "outdoors",
+            "alex eben meyer"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
         "name": "Basketball",
         "md5": "e494c4f44897d94e0541f7036a302449.svg",
         "type": "backdrop",
@@ -174,7 +206,7 @@
     },
     {
         "name": "Hearts1",
-        "md5": "4bfd6a761ff985e342acbf2e07f63526.svg",
+        "md5": "26d3418b2fbc1af2c5fea82e1c3df1db.svg",
         "type": "backdrop",
         "tags": [
             "patterns"
@@ -187,7 +219,7 @@
     },
     {
         "name": "Hearts2",
-        "md5": "b6602e32d55ed75eaea1b646f61b6c17.svg",
+        "md5": "83745a26bbe0801312dfb553b422bf69.svg",
         "type": "backdrop",
         "tags": [
             "patterns"
@@ -214,8 +246,8 @@
         ]
     },
     {
-        "name": "Jurassic ",
-        "md5": "73fd0531a1aaca5dff2d1c67202ff5bd.svg",
+        "name": "Jurassic",
+        "md5": "ad5bd6c10d2afb79d298817ec24a47fd.svg",
         "type": "backdrop",
         "tags": [
             "outdoors",
@@ -519,7 +551,7 @@
         ]
     },
     {
-        "name": "Theatre",
+        "name": "Theater",
         "md5": "c2b097bc5cdb6a14ef5485202bc5ee76.png",
         "type": "backdrop",
         "tags": [
@@ -557,6 +589,25 @@
             "fantasy",
             "indoors",
             "ipzy"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Woods",
+        "md5": "3f3005b76e278b66dbeb9a982d68c555.svg",
+        "type": "backdrop",
+        "tags": [
+            "fantasy",
+            "spooky",
+            "halloween",
+            "outdoors",
+            "haunted",
+            "forest",
+            "alex eben meyer"
         ],
         "info": [
             480,

@@ -9,12 +9,15 @@ const SortableHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
+                'setRef',
                 'handleAddSortable',
                 'handleRemoveSortable'
             ]);
 
             this.sortableRefs = [];
             this.boxes = null;
+            this.ref = null;
+            this.containerBox = null;
         }
 
         componentWillReceiveProps (newProps) {
@@ -25,9 +28,15 @@ const SortableHOC = function (WrappedComponent) {
                     if (a.top === b.top) return a.left - b.left;
                     return a.top - b.top;
                 });
+                if (!this.ref) {
+                    throw new Error('The containerRef must be assigned to the sortable area');
+                }
+                this.containerBox = this.ref.getBoundingClientRect();
             } else if (!newProps.dragInfo.dragging && this.props.dragInfo.dragging) {
-                this.props.onDrop(Object.assign({},
-                    this.props.dragInfo, {newIndex: this.getMouseOverIndex()}));
+                const newIndex = this.getMouseOverIndex();
+                if (newIndex !== null) {
+                    this.props.onDrop(Object.assign({}, this.props.dragInfo, {newIndex}));
+                }
             }
         }
 
@@ -64,10 +73,17 @@ const SortableHOC = function (WrappedComponent) {
             // the dragging object. Obviously only exists if there is a drag (i.e. currentOffset).
             let mouseOverIndex = null;
             if (this.props.dragInfo.currentOffset) {
-                mouseOverIndex = indexForPositionOnList(
-                    this.props.dragInfo.currentOffset, this.boxes);
+                const {x, y} = this.props.dragInfo.currentOffset;
+                const {top, left, bottom, right} = this.containerBox;
+                if (x >= left && x <= right && y >= top && y <= bottom) {
+                    mouseOverIndex = indexForPositionOnList(
+                        this.props.dragInfo.currentOffset, this.boxes);
+                }
             }
             return mouseOverIndex;
+        }
+        setRef (el) {
+            this.ref = el;
         }
         render () {
             const {dragInfo: {index: dragIndex, dragType}, items} = this.props;
@@ -75,6 +91,7 @@ const SortableHOC = function (WrappedComponent) {
             const ordering = this.getOrdering(items, dragIndex, mouseOverIndex);
             return (
                 <WrappedComponent
+                    containerRef={this.setRef}
                     draggingIndex={dragIndex}
                     draggingType={dragType}
                     mouseOverIndex={mouseOverIndex}

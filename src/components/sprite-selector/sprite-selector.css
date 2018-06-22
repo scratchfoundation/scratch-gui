@@ -16,8 +16,7 @@
     border-bottom: 0;
 }
 
-/* In prep for renaming sprite-selector-item to sprite */
-.sprite {
+.sprite-wrapper {
     /*
         Our goal is to fit sprites evenly in a row without leftover space.
         Flexbox's `space between` property gets us close, but doesn't flow
@@ -35,6 +34,10 @@
     min-width: 4rem;
     min-height: 4rem; /* @todo: calc height same as width */
     margin: calc($space / 2);
+}
+
+.sprite {
+    height: 100%;
 }
 
 

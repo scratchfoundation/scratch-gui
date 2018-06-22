@@ -60,7 +60,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(7);
 
-var _controls = __webpack_require__(250);
+var _controls = __webpack_require__(251);
 
 var _controls2 = _interopRequireDefault(_controls);
 

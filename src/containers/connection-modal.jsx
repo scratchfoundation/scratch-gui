@@ -20,6 +20,11 @@ class ConnectionModal extends React.Component {
                 phase: 'connected'
             });
         });
+        this.props.vm.on('PERIPHERAL_ERROR', () => {
+            this.setState({
+                phase: 'error'
+            });
+        });
     }
     handleConnecting (peripheralId) {
         this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);

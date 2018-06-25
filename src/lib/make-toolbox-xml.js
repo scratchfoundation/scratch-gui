@@ -1,12 +1,18 @@
+import ScratchBlocks from 'scratch-blocks';
+
 const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = function (isStage, targetId) {
+    const stageSelected = ScratchBlocks.ScratchMsgs.translate(
+        'MOTION_STAGE_SELECTED',
+        'Stage selected: no motion blocks'
+    );
     return `
     <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="#4C97FF" secondaryColour="#3373CC">
         ${isStage ? `
-        <label text="Stage selected: no motion blocks"></label>
+        <label text="${stageSelected}"></label>
         ` : `
         <block type="motion_movesteps">
             <value name="STEPS">
@@ -133,13 +139,15 @@ const motion = function (isStage, targetId) {
 };
 
 const looks = function (isStage, targetId) {
+    const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
+    const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
     <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hello!</field>
+                    <field name="TEXT">${hello}</field>
                 </shadow>
             </value>
             <value name="SECS">
@@ -151,14 +159,14 @@ const looks = function (isStage, targetId) {
         <block type="looks_say">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hello!</field>
+                    <field name="TEXT">${hello}</field>
                 </shadow>
             </value>
         </block>
         <block type="looks_thinkforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hmm...</field>
+                    <field name="TEXT">${hmm}</field>
                 </shadow>
             </value>
             <value name="SECS">
@@ -170,7 +178,7 @@ const looks = function (isStage, targetId) {
         <block type="looks_think">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hmm...</field>
+                    <field name="TEXT">${hmm}</field>
                 </shadow>
             </value>
         </block>
@@ -397,6 +405,7 @@ const control = function (isStage) {
 };
 
 const sensing = function (isStage) {
+    const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
     return `
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
@@ -428,7 +437,7 @@ const sensing = function (isStage) {
         <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
-                    <field name="TEXT">What's your name?</field>
+                    <field name="TEXT">${name}</field>
                 </shadow>
             </value>
         </block>
@@ -469,6 +478,9 @@ const sensing = function (isStage) {
 };
 
 const operators = function () {
+    const apple = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_APPLE', 'apple');
+    const banana = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_BANANA', 'banana');
+    const letter = ScratchBlocks.ScratchMsgs.translate('OPERATORS_LETTEROF_APPLE', 'a');
     return `
     <category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
@@ -577,12 +589,12 @@ const operators = function () {
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
-                    <field name="TEXT">apple</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
             <value name="STRING2">
                 <shadow type="text">
-                    <field name="TEXT">banana</field>
+                    <field name="TEXT">${banana}</field>
                 </shadow>
             </value>
         </block>
@@ -594,26 +606,26 @@ const operators = function () {
             </value>
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">apple</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_length">
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">apple</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_contains" id="operator_contains">
           <value name="STRING1">
             <shadow type="text">
-              <field name="TEXT">apple</field>
+              <field name="TEXT">${apple}</field>
             </shadow>
           </value>
           <value name="STRING2">
             <shadow type="text">
-              <field name="TEXT">a</field>
+              <field name="TEXT">${letter}</field>
             </shadow>
           </value>
         </block>

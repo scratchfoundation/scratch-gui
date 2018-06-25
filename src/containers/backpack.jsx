@@ -46,13 +46,17 @@ class Backpack extends React.Component {
     }
     componentWillReceiveProps (newProps) {
         const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND];
+        // If `dragging` becomes true, record the drop area rectangle
         if (newProps.dragInfo.dragging && !this.props.dragInfo.dragging) {
             this.dropAreaRect = this.ref && this.ref.getBoundingClientRect();
+        // If `dragging` becomes false, call the drop handler
         } else if (!newProps.dragInfo.dragging && this.props.dragInfo.dragging && this.state.dragOver) {
             this.handleDrop(this.props.dragInfo);
             this.setState({dragOver: false});
         }
 
+        // If a drag is in progress (currentOffset) and it matches the relevant drag types,
+        // test if the drag is within the drop area rect and set the state accordingly.
         if (this.dropAreaRect && newProps.dragInfo.currentOffset && dragTypes.includes(newProps.dragInfo.dragType)) {
             const {x, y} = newProps.dragInfo.currentOffset;
             const {top, right, bottom, left} = this.dropAreaRect;

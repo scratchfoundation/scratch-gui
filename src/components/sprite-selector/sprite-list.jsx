@@ -57,7 +57,7 @@ const SpriteList = function (props) {
 
                 return (
                     <SortableAsset
-                        className={classNames(styles.itemWrapper, {
+                        className={classNames(styles.spriteWrapper, {
                             [styles.placeholder]: isSpriteDrag && index === draggingIndex})}
                         index={isSpriteDrag ? ordering.indexOf(index) : index}
                         key={sprite.name}

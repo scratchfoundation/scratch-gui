@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
+import tabletFullScreen from '../lib/tablet-full-screen';
+
 import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import supportedBrowser from '../lib/supported-browser';
@@ -27,6 +29,8 @@ class PreviewModal extends React.Component {
     }
     handleTryIt () {
         this.setState({previewing: true});
+        // try to run in fullscreen mode on tablets.
+        tabletFullScreen();
         this.props.onTryIt();
     }
     handleCancel () {

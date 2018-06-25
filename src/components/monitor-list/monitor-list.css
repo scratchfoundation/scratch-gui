@@ -8,3 +8,5 @@
     /* Scaling for monitors should happen from the top left */
     transform-origin: left top;
 }
+
+::-ms-clear { display: none; }

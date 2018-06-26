@@ -367,7 +367,6 @@ class Stage extends React.Component {
             onActivateColorPicker, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
-        if (!this.canvas) this.canvas = this.setCanvas();
         return (
             <StageComponent
                 canvas={this.canvas}

@@ -10,6 +10,7 @@ import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-l
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
+import searchIcon from '../components/action-menu/icon--search.svg';
 
 import RecordModal from './record-modal.jsx';
 import SoundEditor from './sound-editor.jsx';
@@ -216,6 +217,10 @@ class SoundTab extends React.Component {
                     title: intl.formatMessage(messages.recordSound),
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
+                }, {
+                    title: intl.formatMessage(messages.addSound),
+                    img: searchIcon,
+                    onClick: onNewSoundFromLibraryClick
                 }]}
                 dragType={DragConstants.SOUND}
                 items={sounds}

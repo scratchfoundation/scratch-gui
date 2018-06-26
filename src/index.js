@@ -1,12 +1,12 @@
 import GUI from './containers/gui.jsx';
 import GuiReducer, {guiInitialState, guiMiddleware, initFullScreen, initPlayer} from './reducers/gui';
+import LocalesReducer, {localesInitialState, initLocale} from './reducers/locales';
 import {ScratchPaintReducer} from 'scratch-paint';
-import IntlReducer from './reducers/intl';
 import {setFullScreen, setPlayer} from './reducers/mode';
 import {setAppElement} from 'react-modal';
 
 const guiReducers = {
-    intl: IntlReducer,
+    locales: LocalesReducer,
     scratchGui: GuiReducer,
     scratchPaint: ScratchPaintReducer
 };
@@ -19,6 +19,8 @@ export {
     guiMiddleware,
     initPlayer,
     initFullScreen,
+    initLocale,
+    localesInitialState,
     setFullScreen,
     setPlayer
 };

@@ -15,6 +15,7 @@ import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import spriteIcon from '../action-menu/icon--sprite.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
+import searchIcon from '../action-menu/icon--search.svg';
 
 const messages = defineMessages({
     addSpriteFromLibrary: {
@@ -53,6 +54,7 @@ const SpriteSelectorComponent = function (props) {
         onDrop,
         onDeleteSprite,
         onDuplicateSprite,
+        onExportSprite,
         onFileUploadClick,
         onNewSpriteClick,
         onPaintSpriteClick,
@@ -105,6 +107,7 @@ const SpriteSelectorComponent = function (props) {
                     onDeleteSprite={onDeleteSprite}
                     onDrop={onDrop}
                     onDuplicateSprite={onDuplicateSprite}
+                    onExportSprite={onExportSprite}
                     onSelectSprite={onSelectSprite}
                 />
             </Box>
@@ -116,7 +119,7 @@ const SpriteSelectorComponent = function (props) {
                         title: intl.formatMessage(messages.addSpriteFromFile),
                         img: fileUploadIcon,
                         onClick: onFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2', // TODO add sprite 3
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2, .sprite3',
                         fileChange: onSpriteUpload,
                         fileInput: spriteFileInput
                     }, {
@@ -127,6 +130,10 @@ const SpriteSelectorComponent = function (props) {
                         title: intl.formatMessage(messages.addSpriteFromPaint),
                         img: paintIcon,
                         onClick: onPaintSpriteClick // TODO need real function for this
+                    }, {
+                        title: intl.formatMessage(messages.addSpriteFromLibrary),
+                        img: searchIcon,
+                        onClick: onNewSpriteClick
                     }
                 ]}
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}
@@ -152,6 +159,7 @@ SpriteSelectorComponent.propTypes = {
     onDeleteSprite: PropTypes.func,
     onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,

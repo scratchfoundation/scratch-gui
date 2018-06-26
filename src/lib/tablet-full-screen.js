@@ -5,10 +5,10 @@ import bowser from 'bowser';
  */
 export default function () {
     if (bowser.tablet) {
-        if (bowser.webkit || bowser.blink) {
+        if ((bowser.webkit || bowser.blink) && document.documentElement.webkitRequestFullScreen) {
             document.documentElement.webkitRequestFullScreen();
         }
-        if (bowser.gecko) {
+        if (bowser.gecko && document.documentElement.mozRequestFullScreen) {
             document.documentElement.mozRequestFullScreen();
         }
     }

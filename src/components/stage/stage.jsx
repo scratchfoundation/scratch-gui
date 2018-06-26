@@ -101,6 +101,7 @@ StageComponent.propTypes = {
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
+    onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
+import Dots from './dots.jsx';
 
 import styles from './connection-modal.css';
 
@@ -21,6 +22,10 @@ const ConnectedStep = props => (
                     id="gui.connection.search"
                 />
             </Box>
+            <Dots
+                counter={3}
+                total={3}
+            />
         </Box>
     </Box>
 );

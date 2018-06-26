@@ -84,6 +84,7 @@
 .bottomArea {
     height: 150px;
     background-color: $ui-white;
+    text-align: center;
 }
 
 .instructions {

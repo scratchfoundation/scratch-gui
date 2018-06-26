@@ -4,6 +4,7 @@ import React from 'react';
 
 import Box from '../box/box.jsx';
 import DeviceTile from './device-tile.jsx';
+import Dots from './dots.jsx';
 
 import styles from './connection-modal.css';
 
@@ -50,6 +51,10 @@ const ScanningStep = props => (
                     id="gui.connection.scanning.instructions"
                 />
             </Box>
+            <Dots
+                counter={1}
+                total={3}
+            />
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.blueButton}

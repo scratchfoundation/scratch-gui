@@ -1,8 +1,8 @@
 {
-  "name": "scratch-gui",
+  "name": "smalruby3-gui",
   "version": "0.1.0",
-  "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
-  "main": "./dist/scratch-gui.js",
+  "description": "GraphicaL User Interface for creating and running Smalruby 3.0 projects",
+  "main": "./dist/smalruby3-gui.js",
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
@@ -19,10 +19,10 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": "https://github.com/smalruby/smalruby3-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
+    "url": "git+ssh://git@github.com/smalruby/smalruby3-gui.git"
   },
   "peerDependencies": {
     "react": "^16.0.0",

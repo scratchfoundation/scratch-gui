@@ -11,7 +11,6 @@
 
 .body {
     background: $ui-white;
-    padding: 1.5rem 2.25rem;
 }
 
 .label {
@@ -21,32 +20,36 @@
 
 .button-row {
     font-weight: bolder;
-    text-align: right;
+    text-align: center;
 }
 
-.button-row button {
+.blue-button {
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
-    background: white;
-    border: 1px solid $ui-black-transparent;
+    background: $motion-primary;
+    color: white;
     font-weight: 600;
     font-size: 0.85rem;
+    margin: 0.25rem;
 }
 
-.button-row button.ok-button {
-    background: $motion-primary;
-    border: $motion-primary;
-    color: white;
+.refresh-button {
 }
 
-.button-row button + button {
-    margin-left: 0.5rem;
+.device-tile-pane {
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
 }
 
 .device-tile {
+    background-color: $ui-white;
+    border-radius: 0.25rem;
+    padding: 10px;
     width: 100%;
     height: 55px;
-    margin: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .device-tile button {
@@ -59,6 +62,31 @@
     color: white;
 }
 
+.signal-strength-text {
+    margin: 5px;
+}
+
 .device-tile-widgets {
     float: right;
+}
+
+.activityArea {
+    height: 165px;
+    background-color: $motion-light-transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.activityAreaInfo {
+}
+
+.bottomArea {
+    height: 150px;
+    background-color: $ui-white;
+}
+
+.instructions {
+    text-align: center;
+    padding: 1rem;
 }

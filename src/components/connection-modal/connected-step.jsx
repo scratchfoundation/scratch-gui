@@ -11,17 +11,16 @@ import styles from './connection-modal.css';
 
 const ConnectedStep = props => (
     <Box className={styles.body}>
-        <Box className={styles.buttonRow}>
-            <button
-                className={styles.searchButton}
-                onClick={props.onSearch}
-            >
+        <Box className={styles.activityArea}>
+        </Box>
+        <Box className={styles.bottomArea}>
+            <Box className={styles.instructions}>
                 <FormattedMessage
                     defaultMessage="🔥connected🔥"
                     description="Button in prompt for starting a search"
                     id="gui.connection.search"
                 />
-            </button>
+            </Box>
         </Box>
     </Box>
 );

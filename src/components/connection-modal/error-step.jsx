@@ -8,17 +8,38 @@ import styles from './connection-modal.css';
 
 const ErrorStep = props => (
     <Box className={styles.body}>
-        <Box className={styles.buttonRow}>
-            <button
-                className={styles.searchButton}
-                onClick={props.onSearch}
-            >
+        <Box className={styles.activityArea}>
+        </Box>
+        <Box className={styles.bottomArea}>
+            <div className={styles.instructions}>
                 <FormattedMessage
-                    defaultMessage="🤕error🤕"
-                    description="Button in prompt for starting a search"
-                    id="gui.connection.search"
+                    defaultMessage="Oops, looks like something went wrong."
+                    description="The device connection process has encountered an error."
+                    id="gui.connection.errorMessage"
                 />
-            </button>
+            </div>
+            <Box className={styles.buttonRow}>
+                <button
+                    className={styles.blueButton}
+                    onClick={props.onSearch}
+                >
+                    <FormattedMessage
+                        defaultMessage="Try again"
+                        description="Button to initiate trying the device connection again after an error"
+                        id="gui.connection.tryagainbutton"
+                    />
+                </button>
+                <button
+                    className={styles.blueButton}
+                    onClick={props.onSearch}
+                >
+                    <FormattedMessage
+                        defaultMessage="Help"
+                        description="Button to go to help content"
+                        id="gui.connection.helpbutton"
+                    />
+                </button>
+            </Box>
         </Box>
     </Box>
 );

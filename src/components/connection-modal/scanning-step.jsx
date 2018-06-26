@@ -12,17 +12,25 @@ const ScanningStep = props => (
         <Box className={styles.activityArea}>
             {props.scanning ? (
                 props.deviceList.length === 0 ? (
-                    <div>{'👀Scanning👀'}</div>
+                    <div className={styles.activityAreaInfo}>
+                        <FormattedMessage
+                            defaultMessage="Looking for devices"
+                            description=""
+                            id="gui.connection.scanning.lookingfordevices"
+                        />
+                    </div>
                 ) : (
-                    props.deviceList.map(device =>
-                        (<DeviceTile
-                            RSSI={device.RSSI}
-                            key={device.peripheralId}
-                            name={device.name}
-                            peripheralId={device.peripheralId}
-                            onConnecting={props.onConnecting}
-                        />)
-                    )
+                    <Box className={styles.deviceTilePane}>
+                        {props.deviceList.map(device =>
+                            (<DeviceTile
+                                RSSI={device.RSSI}
+                                key={device.peripheralId}
+                                name={device.name}
+                                peripheralId={device.peripheralId}
+                                onConnecting={props.onConnecting}
+                            />)
+                        )}
+                    </Box>
                 )
             ) : (
                 <Box className={styles.instructions}>
@@ -34,24 +42,26 @@ const ScanningStep = props => (
                 </Box>
             )}
         </Box>
-        <Box className={styles.instructions}>
-            <FormattedMessage
-                defaultMessage="Select your device in the list above."
-                description=""
-                id="gui.connection.scanning.instructions"
-            />
-        </Box>
-        <Box className={styles.buttonRow}>
-            <button
-                className={styles.searchButton}
-                onClick={props.onScan}
-            >
+        <Box className={styles.bottomArea}>
+            <Box className={styles.instructions}>
                 <FormattedMessage
-                    defaultMessage="refresh"
-                    description="Button in prompt for starting a search"
-                    id="gui.connection.search"
+                    defaultMessage="Select your device in the list above."
+                    description=""
+                    id="gui.connection.scanning.instructions"
                 />
-            </button>
+            </Box>
+            <Box className={styles.buttonRow}>
+                <button
+                    className={styles.blueButton}
+                    onClick={props.onConnecting}
+                >
+                    <FormattedMessage
+                        defaultMessage="refresh"
+                        description="Button in prompt for starting a search"
+                        id="gui.connection.search"
+                    />
+                </button>
+            </Box>
         </Box>
     </Box>
 );
@@ -63,7 +73,6 @@ ScanningStep.propTypes = {
         peripheralId: PropTypes.string
     })),
     onConnecting: PropTypes.function,
-    onScan: PropTypes.function,
     scanning: PropTypes.bool.isRequired
 };
 

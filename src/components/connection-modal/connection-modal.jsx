@@ -14,7 +14,7 @@ import styles from './connection-modal.css';
 const ConnectionModalComponent = props => (
     <Modal
         className={styles.modalContent}
-        contentLabel={props.title}
+        contentLabel={''}
         headerClassName={styles.header}
         onRequestClose={props.onCancel}
     >

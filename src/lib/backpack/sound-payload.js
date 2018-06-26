@@ -1,4 +1,5 @@
-import soundThumbnail from './sound-thumbnail';
+// eslint-disable-next-line import/no-unresolved
+import soundThumbnail from '!base64-loader!./sound-thumbnail.jpg';
 import storage from '../storage';
 
 const soundPayload = sound => {
@@ -7,10 +8,10 @@ const soundPayload = sound => {
     const payload = {
         type: 'sound',
         name: sound.name,
+        thumbnail: soundThumbnail,
         // Params to be filled in below
         mime: '',
-        body: '',
-        thumbnail: ''
+        body: ''
     };
 
     switch (assetDataFormat) {
@@ -21,8 +22,6 @@ const soundPayload = sound => {
     default:
         alert(`Cannot serialize for format: ${assetDataFormat}`); // eslint-disable-line
     }
-
-    payload.thumbnail = soundThumbnail;
 
     // Return a promise to make it consistent with other payload constructors like costume-payload
     return new Promise(resolve => resolve(payload));

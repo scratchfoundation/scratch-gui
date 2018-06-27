@@ -18,24 +18,6 @@
     margin: 0 0 0.75rem;
 }
 
-.button-row {
-    font-weight: bolder;
-    text-align: center;
-}
-
-.blue-button {
-    padding: 0.75rem 1rem;
-    border-radius: 0.25rem;
-    background: $motion-primary;
-    color: white;
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin: 0.25rem;
-}
-
-.refresh-button {
-}
-
 .device-tile-pane {
     overflow-y: scroll;
     width: 100%;
@@ -78,10 +60,32 @@
     align-items: center;
 }
 
-.activityAreaInfo {
+.button-row {
+    font-weight: bolder;
+    text-align: center;
 }
 
-.bottomArea {
+.connection-button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: $motion-primary;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0.25rem;
+}
+
+.red-button {
+    background: $red-primary;
+}
+
+.corner-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.bottom-area {
     height: 150px;
     background-color: $ui-white;
     text-align: center;

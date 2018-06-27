@@ -8,8 +8,7 @@ import styles from './connection-modal.css';
 
 const ErrorStep = props => (
     <Box className={styles.body}>
-        <Box className={styles.activityArea}>
-        </Box>
+        <Box className={styles.activityArea} />
         <Box className={styles.bottomArea}>
             <div className={styles.instructions}>
                 <FormattedMessage
@@ -20,7 +19,6 @@ const ErrorStep = props => (
             </div>
             <Box className={styles.buttonRow}>
                 <button
-                    className={styles.blueButton}
                     onClick={props.onSearch}
                 >
                     <FormattedMessage
@@ -30,7 +28,7 @@ const ErrorStep = props => (
                     />
                 </button>
                 <button
-                    className={styles.blueButton}
+                    className={styles.connectionButton}
                     onClick={props.onSearch}
                 >
                     <FormattedMessage

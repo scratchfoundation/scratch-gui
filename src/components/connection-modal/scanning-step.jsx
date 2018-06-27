@@ -55,18 +55,16 @@ const ScanningStep = props => (
                 counter={1}
                 total={3}
             />
-            <Box className={styles.buttonRow}>
-                <button
-                    className={styles.blueButton}
-                    onClick={props.onRefresh}
-                >
-                    <FormattedMessage
-                        defaultMessage="refresh"
-                        description="Button in prompt for starting a search"
-                        id="gui.connection.search"
-                    />
-                </button>
-            </Box>
+            <button
+                className={styles.connectionButton}
+                onClick={props.onRefresh}
+            >
+                <FormattedMessage
+                    defaultMessage="refresh"
+                    description="Button in prompt for starting a search"
+                    id="gui.connection.search"
+                />
+            </button>
         </Box>
     </Box>
 );

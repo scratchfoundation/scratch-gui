@@ -14,7 +14,7 @@ const ConnectingStep = props => (
         <Box className={styles.bottomArea}>
             <Box className={styles.instructions}>
                 <FormattedMessage
-                    defaultMessage="🔌connecting🔌"
+                    defaultMessage="Connecting"
                     description=""
                     id="gui.connection.connecting"
                 />
@@ -24,7 +24,7 @@ const ConnectingStep = props => (
                 total={3}
             />
             <button
-                className={styles.blueButton}
+                className={styles.connectionButton}
                 onClick={props.onAbortConnecting}
             >
                 <FormattedMessage

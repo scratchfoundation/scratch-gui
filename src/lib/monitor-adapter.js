@@ -28,6 +28,16 @@ export default function ({id, spriteName, opcode, params, value}) {
     if (typeof value === 'number') {
         value = Number(value.toFixed(6));
     }
-    
+
+    // Turn the value to a string, for handle boolean values
+    if (typeof value === 'boolean') {
+        value = value.toString();
+    }
+
+    // Lists can contain booleans, which should also be turned to strings
+    if (Array.isArray(value)) {
+        value = value.map(item => item.toString());
+    }
+
     return {id, label, category, value};
 }

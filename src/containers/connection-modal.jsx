@@ -44,6 +44,7 @@ class ConnectionModal extends React.Component {
         });
     }
     handleDisconnect () {
+        this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
         this.props.vm.disconnectExtensionSession(this.props.extensionId);
         this.props.onCancel();
     }
@@ -55,11 +56,13 @@ class ConnectionModal extends React.Component {
         this.props.onCancel();
     }
     handleError () {
+        this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
         this.setState({
             phase: 'error'
         });
     }
     handleConnected () {
+        this.props.onStatusButtonUpdate(this.props.extensionId, 'ready');
         this.setState({
             phase: 'connected'
         });
@@ -88,6 +91,7 @@ class ConnectionModal extends React.Component {
 ConnectionModal.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
+    onStatusButtonUpdate: PropTypes.func.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

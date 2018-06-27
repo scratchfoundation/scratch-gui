@@ -41,6 +41,7 @@ class Blocks extends React.Component {
             'handleCategorySelected',
             'handleConnectionModalStart',
             'handleConnectionModalClose',
+            'handleStatusButtonUpdate',
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
@@ -341,6 +342,9 @@ class Blocks extends React.Component {
     handleConnectionModalClose () {
         this.setState({connectionModal: null});
     }
+    handleStatusButtonUpdate (extensionId, status) {
+        this.ScratchBlocks.updateStatusButton(this.workspace, extensionId, status);
+    }
     handlePromptCallback (data) {
         this.state.prompt.callback(data);
         this.handlePromptClose();
@@ -394,6 +398,7 @@ class Blocks extends React.Component {
                         extensionId={this.state.connectionModal.extensionId}
                         vm={vm}
                         onCancel={this.handleConnectionModalClose}
+                        onStatusButtonUpdate={this.handleStatusButtonUpdate}
                     />
                 ) : null}
                 {extensionLibraryVisible ? (

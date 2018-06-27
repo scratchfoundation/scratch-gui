@@ -9,8 +9,7 @@ import styles from './connection-modal.css';
 
 const ConnectingStep = props => (
     <Box className={styles.body}>
-        <Box className={styles.activityArea}>
-        </Box>
+        <Box className={styles.activityArea} />
         <Box className={styles.bottomArea}>
             <Box className={styles.instructions}>
                 <FormattedMessage

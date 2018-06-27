@@ -8,6 +8,7 @@ class ConnectionModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleScanning',
             'handleConnected',
             'handleConnecting',
             'handleDisconnect',
@@ -30,6 +31,11 @@ class ConnectionModal extends React.Component {
     componentWillUnmount () {
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);
         this.props.vm.removeListener('PERIPHERAL_ERROR', this.handleError);
+    }
+    handleScanning () {
+        this.setState({
+            phase: 'scanning'
+        });
     }
     handleConnecting (peripheralId) {
         this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
@@ -58,6 +64,9 @@ class ConnectionModal extends React.Component {
             phase: 'connected'
         });
     }
+    handleHelp () {
+        // @todo: implement the help button
+    }
     render () {
         return (
             <ConnectionModalComponent
@@ -69,6 +78,8 @@ class ConnectionModal extends React.Component {
                 onConnected={this.handleConnected}
                 onConnecting={this.handleConnecting}
                 onDisconnect={this.handleDisconnect}
+                onHelp={this.handleHelp}
+                onScanning={this.handleScanning}
             />
         );
     }

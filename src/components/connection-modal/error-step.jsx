@@ -20,7 +20,7 @@ const ErrorStep = props => (
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.connectionButton}
-                    onClick={props.onSearch}
+                    onClick={props.onScanning}
                 >
                     <FormattedMessage
                         defaultMessage="Try again"
@@ -30,11 +30,11 @@ const ErrorStep = props => (
                 </button>
                 <button
                     className={styles.connectionButton}
-                    onClick={props.onSearch}
+                    onClick={props.onHelp}
                 >
                     <FormattedMessage
                         defaultMessage="Help"
-                        description="Button to go to help content"
+                        description="Button to view help content"
                         id="gui.connection.helpbutton"
                     />
                 </button>
@@ -44,6 +44,8 @@ const ErrorStep = props => (
 );
 
 ErrorStep.propTypes = {
+    onHelp: PropTypes.func,
+    onScanning: PropTypes.func
 };
 
 export default ErrorStep;

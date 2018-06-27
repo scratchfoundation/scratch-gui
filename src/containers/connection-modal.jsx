@@ -8,9 +8,9 @@ class ConnectionModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleAbortConnecting',
             'handleConnected',
             'handleConnecting',
+            'handleDisconnect',
             'handleError'
         ]);
         this.state = {
@@ -20,6 +20,12 @@ class ConnectionModal extends React.Component {
     componentDidMount () {
         this.props.vm.on('PERIPHERAL_CONNECTED', this.handleConnected);
         this.props.vm.on('PERIPHERAL_ERROR', this.handleError);
+
+        // Check if we're already connected
+        if (this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
+            this.handleConnected();
+        }
+
     }
     componentWillUnmount () {
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);
@@ -31,15 +37,20 @@ class ConnectionModal extends React.Component {
             phase: 'connecting'
         });
     }
+    handleDisconnect () {
+        this.props.vm.disconnectExtensionSession(this.props.extensionId);
+        this.props.onCancel();
+    }
+    handleCancel () {
+        // If we're not connected to a device, close the websocket so we stop scanning.
+        if (!this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
+            this.props.vm.disconnectExtensionSession(this.props.extensionId);
+        }
+        this.props.onCancel();
+    }
     handleError () {
         this.setState({
             phase: 'error'
-        });
-    }
-    handleAbortConnecting () {
-        // @todo: abort the current device connection process in the VM
-        this.setState({
-            phase: 'scanning'
         });
     }
     handleConnected () {
@@ -54,10 +65,10 @@ class ConnectionModal extends React.Component {
                 phase={this.state.phase}
                 title={this.props.extensionId}
                 vm={this.props.vm}
-                onAbortConnecting={this.handleAbortConnecting}
                 onCancel={this.props.onCancel}
                 onConnected={this.handleConnected}
                 onConnecting={this.handleConnecting}
+                onDisconnect={this.handleDisconnect}
             />
         );
     }

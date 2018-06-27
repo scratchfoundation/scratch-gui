@@ -19,6 +19,7 @@ const ErrorStep = props => (
             </div>
             <Box className={styles.buttonRow}>
                 <button
+                    className={styles.connectionButton}
                     onClick={props.onSearch}
                 >
                     <FormattedMessage

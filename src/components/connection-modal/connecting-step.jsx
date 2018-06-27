@@ -25,7 +25,7 @@ const ConnectingStep = props => (
             />
             <button
                 className={styles.connectionButton}
-                onClick={props.onAbortConnecting}
+                onClick={props.onDisconnect}
             >
                 <FormattedMessage
                     defaultMessage="X"
@@ -38,7 +38,7 @@ const ConnectingStep = props => (
 );
 
 ConnectingStep.propTypes = {
-    onAbortConnecting: PropTypes.func
+    onDisconnect: PropTypes.func
 };
 
 export default ConnectingStep;

@@ -33,7 +33,7 @@ const ConnectedStep = props => (
                 >
                     <FormattedMessage
                         defaultMessage="disconnect"
-                        description="Disconnect the "
+                        description="Disconnect the device"
                         id="gui.connection.disconnect"
                     />
                 </button>
@@ -53,6 +53,8 @@ const ConnectedStep = props => (
 );
 
 ConnectedStep.propTypes = {
+    onCancel: PropTypes.func,
+    onDisconnect: PropTypes.func
 };
 
 export default ConnectedStep;

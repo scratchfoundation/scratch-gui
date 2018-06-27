@@ -10,7 +10,8 @@ class ConnectionModal extends React.Component {
         bindAll(this, [
             'handleAbortConnecting',
             'handleConnected',
-            'handleConnecting'
+            'handleConnecting',
+            'handleError'
         ]);
         this.state = {
             phase: 'scanning'
@@ -18,14 +19,21 @@ class ConnectionModal extends React.Component {
     }
     componentDidMount () {
         this.props.vm.on('PERIPHERAL_CONNECTED', this.handleConnected);
+        this.props.vm.on('PERIPHERAL_ERROR', this.handleError);
     }
     componentWillUnmount () {
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);
+        this.props.vm.removeListener('PERIPHERAL_ERROR', this.handleError);
     }
     handleConnecting (peripheralId) {
         this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
         this.setState({
             phase: 'connecting'
+        });
+    }
+    handleError () {
+        this.setState({
+            phase: 'error'
         });
     }
     handleAbortConnecting () {

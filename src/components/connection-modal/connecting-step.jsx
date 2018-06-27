@@ -15,19 +15,30 @@ const ConnectingStep = props => (
             <Box className={styles.instructions}>
                 <FormattedMessage
                     defaultMessage="🔌connecting🔌"
-                    description="Button in prompt for starting a search"
-                    id="gui.connection.search"
+                    description=""
+                    id="gui.connection.connecting"
                 />
             </Box>
             <Dots
                 counter={2}
                 total={3}
             />
+            <button
+                className={styles.blueButton}
+                onClick={props.onAbortConnecting}
+            >
+                <FormattedMessage
+                    defaultMessage="X"
+                    description="Button to cancel connecting"
+                    id="gui.connection.cancelbutton"
+                />
+            </button>
         </Box>
     </Box>
 );
 
 ConnectingStep.propTypes = {
+    onAbortConnecting: PropTypes.func
 };
 
 export default ConnectingStep;

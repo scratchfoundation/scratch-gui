@@ -28,10 +28,7 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
-    extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onConnected: PropTypes.func.isRequired,
-    onConnecting: PropTypes.func.isRequired,
     phase: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
 };

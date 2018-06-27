@@ -8,23 +8,19 @@ class ConnectionModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCancel'
+            'handleAbortConnecting',
+            'handleConnected',
+            'handleConnecting'
         ]);
         this.state = {
             phase: 'scanning'
         };
     }
     componentDidMount () {
-        this.props.vm.on('PERIPHERAL_CONNECTED', () => {
-            this.setState({
-                phase: 'connected'
-            });
-        });
-        this.props.vm.on('PERIPHERAL_ERROR', () => {
-            this.setState({
-                phase: 'error'
-            });
-        });
+        this.props.vm.on('PERIPHERAL_CONNECTED', this.handleConnected);
+    }
+    componentWillUnmount () {
+        this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);
     }
     handleConnecting (peripheralId) {
         this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
@@ -32,13 +28,16 @@ class ConnectionModal extends React.Component {
             phase: 'connecting'
         });
     }
+    handleAbortConnecting () {
+        // @todo: abort the current device connection process in the VM
+        this.setState({
+            phase: 'scanning'
+        });
+    }
     handleConnected () {
         this.setState({
             phase: 'connected'
         });
-    }
-    handleCancel () {
-        this.props.onCancel();
     }
     render () {
         return (
@@ -47,9 +46,10 @@ class ConnectionModal extends React.Component {
                 phase={this.state.phase}
                 title={this.props.extensionId}
                 vm={this.props.vm}
-                onCancel={this.handleCancel}
+                onAbortConnecting={this.handleAbortConnecting}
+                onCancel={this.props.onCancel}
                 onConnected={this.handleConnected}
-                onConnecting={this.handleConnecting.bind(this)}
+                onConnecting={this.handleConnecting}
             />
         );
     }

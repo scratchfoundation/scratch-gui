@@ -58,7 +58,7 @@ const ScanningStep = props => (
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.blueButton}
-                    onClick={props.onConnecting}
+                    onClick={props.onRefresh}
                 >
                     <FormattedMessage
                         defaultMessage="refresh"
@@ -77,7 +77,8 @@ ScanningStep.propTypes = {
         RSSI: PropTypes.number,
         peripheralId: PropTypes.string
     })),
-    onConnecting: PropTypes.function,
+    onConnecting: PropTypes.func,
+    onRefresh: PropTypes.func,
     scanning: PropTypes.bool.isRequired
 };
 

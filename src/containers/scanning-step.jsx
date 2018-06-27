@@ -8,7 +8,8 @@ class ScanningStep extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCancel'
+            'handlePeripheralListUpdate',
+            'handleRefresh'
         ]);
         this.state = {
             scanning: true,
@@ -17,22 +18,26 @@ class ScanningStep extends React.Component {
     }
     componentDidMount () {
         this.props.vm.startDeviceScan(this.props.extensionId);
-        this.props.vm.on('PERIPHERAL_LIST_UPDATE', newList => {
-            // TODO: sort peripherals by signal strength? so they don't jump around
-            const peripheralArray = Object.keys(newList).map(id =>
-                newList[id]
-            );
-            this.setState({deviceList: peripheralArray});
-        });
+        this.props.vm.on(
+            'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
     }
     componentWillUnmount () {
-        // remove the listener
+        // @todo: stop the device scan here
+        this.props.vm.removeListener(
+            'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
     }
-    handleCancel () {
-        this.props.onCancel();
+    handlePeripheralListUpdate (newList) {
+        // TODO: sort peripherals by signal strength? so they don't jump around
+        const peripheralArray = Object.keys(newList).map(id =>
+            newList[id]
+        );
+        this.setState({deviceList: peripheralArray});
     }
-    handleScan () {
-        this.props.onScan();
+    handleRefresh () {
+        this.setState({
+            scanning: true,
+            deviceList: []
+        });
     }
     render () {
         return (
@@ -40,9 +45,9 @@ class ScanningStep extends React.Component {
                 deviceList={this.state.deviceList}
                 phase={this.state.phase}
                 title={this.props.extensionId}
-                onCancel={this.handleCancel}
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
+                onRefresh={this.handleRefresh}
             />
         );
     }
@@ -50,10 +55,8 @@ class ScanningStep extends React.Component {
 
 ScanningStep.propTypes = {
     extensionId: PropTypes.string.isRequired,
-    onCancel: PropTypes.func.isRequired,
     onConnected: PropTypes.func.isRequired,
     onConnecting: PropTypes.func.isRequired,
-    onScan: PropTypes.func.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

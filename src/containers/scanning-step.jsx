@@ -34,6 +34,7 @@ class ScanningStep extends React.Component {
         this.setState({deviceList: peripheralArray});
     }
     handleRefresh () {
+        this.props.vm.startDeviceScan(this.props.extensionId);
         this.setState({
             scanning: true,
             deviceList: []

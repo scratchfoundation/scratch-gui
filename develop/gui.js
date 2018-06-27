@@ -23,7 +23,7 @@ var _analytics = __webpack_require__(35);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(152);
+var _gui = __webpack_require__(153);
 
 var _gui2 = _interopRequireDefault(_gui);
 

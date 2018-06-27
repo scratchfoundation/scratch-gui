@@ -68,7 +68,7 @@ var _blocks = __webpack_require__(317);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(152);
+var _gui = __webpack_require__(153);
 
 var _gui2 = _interopRequireDefault(_gui);
 

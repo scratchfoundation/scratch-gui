@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
+import Dots from './dots.jsx';
 
 import styles from './connection-modal.css';
 
@@ -17,6 +18,10 @@ const ErrorStep = props => (
                     id="gui.connection.errorMessage"
                 />
             </div>
+            <Dots
+                error
+                total={3}
+            />
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.connectionButton}

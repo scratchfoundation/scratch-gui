@@ -20,7 +20,7 @@ const ConnectedStep = props => (
                 />
             </Box>
             <Dots
-                counter={3}
+                success
                 total={3}
             />
             <div className={styles.cornerButtons}>

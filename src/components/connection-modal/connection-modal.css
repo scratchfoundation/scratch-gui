@@ -95,3 +95,49 @@
     text-align: center;
     padding: 1rem;
 }
+
+.dots-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.dots-holder {
+    display: flex;
+    padding: 0.2rem;
+    border-radius: 1rem;
+    background: $motion-light-transparent;
+}
+
+.dots-holder-success {
+    background: $pen-transparent;
+}
+
+.dots-holder-error {
+    background: $error-transparent;
+}
+
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.3rem;
+    border-radius: 100%;
+}
+
+.inactive-step-dot {
+    background: $motion-transparent;
+}
+
+.active-step-dot {
+    background: $motion-primary;
+}
+
+.success-dot {
+    background: $pen-primary;
+}
+
+.error-dot {
+    background: $error-primary;
+}

@@ -19,7 +19,7 @@ const ConnectingStep = props => (
                 />
             </Box>
             <Dots
-                counter={2}
+                counter={1}
                 total={3}
             />
             <button

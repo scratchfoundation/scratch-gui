@@ -52,7 +52,7 @@ const ScanningStep = props => (
                 />
             </Box>
             <Dots
-                counter={1}
+                counter={0}
                 total={3}
             />
             <button

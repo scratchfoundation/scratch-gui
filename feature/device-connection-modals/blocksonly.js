@@ -60,15 +60,15 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(7);
 
-var _controls = __webpack_require__(254);
+var _controls = __webpack_require__(253);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(319);
+var _blocks = __webpack_require__(318);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(155);
+var _gui = __webpack_require__(154);
 
 var _gui2 = _interopRequireDefault(_gui);
 

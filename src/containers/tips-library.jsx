@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
 
@@ -16,6 +17,14 @@ import {
 import {
     activateDeck
 } from '../reducers/cards';
+
+const messages = defineMessages({
+    tipsLibraryTitle: {
+        defaultMessage: 'How-Tos',
+        description: 'Heading for the help/how-tos library',
+        id: 'gui.tipsLibrary.howtos'
+    }
+});
 
 class TipsLibrary extends React.PureComponent {
     constructor (props) {
@@ -45,7 +54,7 @@ class TipsLibrary extends React.PureComponent {
             <LibraryComponent
                 data={decksLibraryThumbnailData}
                 filterable={false}
-                title="How-Tos"
+                title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
@@ -55,6 +64,7 @@ class TipsLibrary extends React.PureComponent {
 }
 
 TipsLibrary.propTypes = {
+    intl: intlShape.isRequired,
     onActivateDeck: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool
@@ -69,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestClose: () => dispatch(closeTipsLibrary())
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(TipsLibrary);
+)(TipsLibrary));

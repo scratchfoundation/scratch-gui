@@ -39,6 +39,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.22.0",
+    "base64-loader": "1.0.0",
     "bowser": "1.9.3",
     "chromedriver": "2.40.0",
     "classnames": "2.2.6",

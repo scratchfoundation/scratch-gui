@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import DragConstants from '../../lib/drag-constants';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
@@ -16,7 +17,7 @@ const dragTypeMap = {
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({contents, error, expanded, loading, onToggle}) => (
+const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, onToggle, onDelete}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -42,7 +43,10 @@ const Backpack = ({contents, error, expanded, loading, onToggle}) => (
             )}
         </div>
         {expanded ? (
-            <div className={styles.backpackList}>
+            <div
+                className={styles.backpackList}
+                ref={dropAreaRef}
+            >
                 {error ? (
                     <div className={styles.statusMessage}>
                         <FormattedMessage
@@ -62,7 +66,11 @@ const Backpack = ({contents, error, expanded, loading, onToggle}) => (
                         </div>
                     ) : (
                         contents.length > 0 ? (
-                            <div className={styles.backpackListInner}>
+                            <div
+                                className={classNames(styles.backpackListInner, {
+                                    [styles.dragOver]: dragOver
+                                })}
+                            >
                                 {contents.map(item => (
                                     <SpriteSelectorItem
                                         className={styles.backpackItem}
@@ -70,10 +78,12 @@ const Backpack = ({contents, error, expanded, loading, onToggle}) => (
                                         details={item.name}
                                         dragPayload={item}
                                         dragType={dragTypeMap[item.type]}
+                                        id={item.id}
                                         key={item.id}
                                         name={item.type}
                                         selected={false}
                                         onClick={noop}
+                                        onDeleteButtonClick={onDelete}
                                     />
                                 ))}
                             </div>
@@ -100,14 +110,18 @@ Backpack.propTypes = {
         type: PropTypes.string,
         name: PropTypes.string
     })),
+    dragOver: PropTypes.bool,
+    dropAreaRef: PropTypes.func,
     error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
+    onDelete: PropTypes.func,
     onToggle: PropTypes.func
 };
 
 Backpack.defaultProps = {
     contents: [],
+    dragOver: false,
     expanded: false,
     loading: false,
     onToggle: null

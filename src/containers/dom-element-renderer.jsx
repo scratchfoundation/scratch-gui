@@ -1,6 +1,8 @@
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Style from 'to-style';
+import stylePropType from 'react-style-proptype';
 
 /*
  * DOMElementRenderer wraps a DOM element, allowing it to be
@@ -31,14 +33,21 @@ class DOMElementRenderer extends React.Component {
         // Look at me, I'm the React now!
         Object.assign(
             this.props.domElement,
-            omit(this.props, ['domElement', 'children'])
+            omit(this.props, ['domElement', 'children', 'style'])
         );
+
+        // Convert react style prop to dom element styling.
+        if (this.props.style) {
+            this.props.domElement.style = Style.string(this.props.style);
+        }
+
         return <div ref={this.setContainer} />;
     }
 }
 
 DOMElementRenderer.propTypes = {
-    domElement: PropTypes.instanceOf(Element).isRequired
+    domElement: PropTypes.instanceOf(Element).isRequired,
+    style: stylePropType
 };
 
 export default DOMElementRenderer;

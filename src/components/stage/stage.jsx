@@ -37,6 +37,10 @@ const StageComponent = props => {
                     [styles.stageWrapperOverlay]: isFullScreen,
                     [styles.withColorPicker]: !isFullScreen && isColorPicking
                 })}
+                style={{
+                    minHeight: stageDimensions.height,
+                    minWidth: stageDimensions.width
+                }}
                 onDoubleClick={onDoubleClick}
             >
                 <DOMElementRenderer
@@ -45,8 +49,10 @@ const StageComponent = props => {
                         {[styles.stageOverlayContent]: isFullScreen}
                     )}
                     domElement={canvas}
-                    height={stageDimensions.height}
-                    width={stageDimensions.width}
+                    style={{
+                        height: stageDimensions.height,
+                        width: stageDimensions.width
+                    }}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>

@@ -10,6 +10,7 @@ import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
+import DragConstants from '../lib/drag-constants';
 
 import {
     closeCameraCapture,
@@ -18,12 +19,18 @@ import {
     openBackdropLibrary
 } from '../reducers/modals';
 
+import {
+    activateTab,
+    SOUNDS_TAB_INDEX
+} from '../reducers/editor-tab';
+
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import paintIcon from '../components/action-menu/icon--paint.svg';
 import cameraIcon from '../components/action-menu/icon--camera.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
+import searchIcon from '../components/action-menu/icon--search.svg';
 
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
@@ -80,6 +87,7 @@ class CostumeTab extends React.Component {
             'handleFileUploadClick',
             'handleCostumeUpload',
             'handleCameraBuffer',
+            'handleDrop',
             'setFileInput'
         ]);
         const {
@@ -188,6 +196,25 @@ class CostumeTab extends React.Component {
     handleFileUploadClick () {
         this.fileInput.click();
     }
+    handleDrop (dropInfo) {
+        if (dropInfo.dragType === DragConstants.COSTUME) {
+            const sprite = this.props.vm.editingTarget.sprite;
+            const activeCostume = sprite.costumes[this.state.selectedCostumeIndex];
+            this.props.vm.reorderCostume(this.props.vm.editingTarget.id,
+                dropInfo.index, dropInfo.newIndex);
+            this.setState({selectedCostumeIndex: sprite.costumes.indexOf(activeCostume)});
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            this.props.vm.addCostume(dropInfo.payload.body, {
+                name: dropInfo.payload.name
+            });
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            this.props.onActivateSoundsTab();
+            this.props.vm.addSound({
+                md5: dropInfo.payload.body,
+                name: dropInfo.payload.name
+            });
+        }
+    }
     setFileInput (input) {
         this.fileInput = input;
     }
@@ -207,29 +234,28 @@ class CostumeTab extends React.Component {
             onNewLibraryCostumeClick,
             cameraModalVisible,
             onRequestCloseCameraModal,
-            editingTarget,
-            sprites,
-            stage
+            vm
         } = this.props;
 
-        const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
-
-        if (!target) {
+        if (!vm.editingTarget) {
             return null;
         }
 
-        const addLibraryMessage = target.isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
-        const addFileMessage = target.isStage ? messages.addFileBackdropMsg : messages.addFileCostumeMsg;
-        const addSurpriseFunc = target.isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
-        const addLibraryFunc = target.isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
-        const addLibraryIcon = target.isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
+        const isStage = vm.editingTarget.isStage;
+        const target = vm.editingTarget.sprite;
 
-        const costumeData = (target.costumes || []).map(costume => ({
+        const addLibraryMessage = isStage ? messages.addLibraryBackdropMsg : messages.addLibraryCostumeMsg;
+        const addFileMessage = isStage ? messages.addFileBackdropMsg : messages.addFileCostumeMsg;
+        const addSurpriseFunc = isStage ? this.handleSurpriseBackdrop : this.handleSurpriseCostume;
+        const addLibraryFunc = isStage ? onNewLibraryBackdropClick : onNewLibraryCostumeClick;
+        const addLibraryIcon = isStage ? addLibraryBackdropIcon : addLibraryCostumeIcon;
+
+        const costumeData = target.costumes ? target.costumes.map(costume => ({
             name: costume.name,
             assetId: costume.assetId,
-            details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null
-        }));
-
+            details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null,
+            dragPayload: costume
+        })) : [];
         return (
             <AssetPanel
                 buttons={[
@@ -260,12 +286,19 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(messages.addBlankCostumeMsg),
                         img: paintIcon,
                         onClick: this.handleNewBlankCostume
+                    },
+                    {
+                        title: intl.formatMessage(addLibraryMessage),
+                        img: searchIcon,
+                        onClick: addLibraryFunc
                     }
                 ]}
+                dragType={DragConstants.COSTUME}
                 items={costumeData}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={target && target.costumes && target.costumes.length > 1 ?
                     this.handleDeleteCostume : null}
+                onDrop={this.handleDrop}
                 onDuplicateClick={this.handleDuplicateCostume}
                 onItemClick={this.handleSelectCostume}
             >
@@ -290,6 +323,7 @@ CostumeTab.propTypes = {
     cameraModalVisible: PropTypes.bool,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onActivateSoundsTab: PropTypes.func.isRequired,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
@@ -315,10 +349,12 @@ const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
+    dragging: state.scratchGui.assetDrag.dragging,
     cameraModalVisible: state.scratchGui.modals.cameraCapture
 });
 
 const mapDispatchToProps = dispatch => ({
+    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onNewLibraryBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());

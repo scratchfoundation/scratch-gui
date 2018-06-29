@@ -1,13 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-.group {
-    display: inline-flex;
-    flex-direction: row; /* makes columns, for each label/form group */
-    align-items: center;
-    vertical-align: middle;
-}
-
 .language-icon {
     height:  1.5rem;
 }
@@ -17,7 +10,7 @@
 }
 
 .language-select {
-    width: 100%;
+    margin: .5rem;
     height: 1.85rem;
     border: 1px solid $motion-primary;
     user-select: none;

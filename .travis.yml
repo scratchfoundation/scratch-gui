@@ -57,7 +57,6 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $AWS_BUCKET_NAME
   acl: public_read
-  detect_encoding: true
   skip_cleanup: true
   local_dir: build
 after_deploy:

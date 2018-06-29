@@ -107,7 +107,11 @@ class ListMonitor extends React.Component {
         const newListValue = listValue.slice(0, this.state.activeIndex)
             .concat(listValue.slice(this.state.activeIndex + 1));
         setVariableValue(vm, targetId, variableId, newListValue);
-        this.handleActivate(Math.min(newListValue.length - 1, this.state.activeIndex));
+        const newActiveIndex = Math.min(newListValue.length - 1, this.state.activeIndex);
+        this.setState({
+            activeIndex: newActiveIndex,
+            activeValue: newListValue[newActiveIndex]
+        });
     }
 
     handleAdd () {

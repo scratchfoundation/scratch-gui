@@ -10,7 +10,7 @@ import {
 
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
-
+import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
@@ -27,7 +27,9 @@ class TargetPane extends React.Component {
             'handleChangeSpriteX',
             'handleChangeSpriteY',
             'handleDeleteSprite',
+            'handleDrop',
             'handleDuplicateSprite',
+            'handleExportSprite',
             'handleNewSprite',
             'handleSelectSprite',
             'handleSurpriseSpriteClick',
@@ -66,6 +68,28 @@ class TargetPane extends React.Component {
     }
     handleDuplicateSprite (id) {
         this.props.vm.duplicateSprite(id);
+    }
+    handleExportSprite (id) {
+        const spriteName = this.props.vm.runtime.getTargetById(id).getName();
+        const saveLink = document.createElement('a');
+        document.body.appendChild(saveLink);
+
+        this.props.vm.exportSprite(id).then(content => {
+            const filename = `${spriteName}.sprite3`;
+
+            // Use special ms version if available to get it working on Edge.
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(content, filename);
+                return;
+            }
+
+            const url = window.URL.createObjectURL(content);
+            saveLink.href = url;
+            saveLink.download = filename;
+            saveLink.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(saveLink);
+        });
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
@@ -106,6 +130,25 @@ class TargetPane extends React.Component {
             this.props.onReceivedBlocks(true);
         }
     }
+    handleDrop (dragInfo) {
+        const {sprite: targetId} = this.props.hoveredTarget;
+        if (dragInfo.dragType === DragConstants.SPRITE) {
+            // Add one to both new and target index because we are not counting/moving the stage
+            this.props.vm.reorderTarget(dragInfo.index + 1, dragInfo.newIndex + 1);
+        } else if (targetId) {
+            // Something is being dragged over one of the sprite tiles or the backdrop.
+            // Dropping assets like sounds and costumes duplicate the asset on the
+            // hovered target. Shared costumes also become the current costume on that target.
+            // However, dropping does not switch the editing target or activate that editor tab.
+            // This is based on 2.0 behavior, but seems like it keeps confusing switching to a minimum.
+            // it allows the user to share multiple things without switching back and forth.
+            if (dragInfo.dragType === DragConstants.COSTUME) {
+                this.props.vm.shareCostumeToTarget(dragInfo.index, targetId);
+            } else if (targetId && dragInfo.dragType === DragConstants.SOUND) {
+                this.props.vm.shareSoundToTarget(dragInfo.index, targetId);
+            }
+        }
+    }
     render () {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars
@@ -123,7 +166,9 @@ class TargetPane extends React.Component {
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
                 onDeleteSprite={this.handleDeleteSprite}
+                onDrop={this.handleDrop}
                 onDuplicateSprite={this.handleDuplicateSprite}
+                onExportSprite={this.handleExportSprite}
                 onFileUploadClick={this.handleFileUploadClick}
                 onPaintSpriteClick={this.handlePaintSpriteClick}
                 onSelectSprite={this.handleSelectSprite}

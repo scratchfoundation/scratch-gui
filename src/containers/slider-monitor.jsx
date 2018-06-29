@@ -15,7 +15,7 @@ class SliderMonitor extends React.Component {
         ]);
 
         this.state = {
-            value: Number(props.value)
+            value: props.value
         };
     }
     componentWillReceiveProps (nextProps) {

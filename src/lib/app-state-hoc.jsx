@@ -9,6 +9,9 @@ import localesReducer, {initLocale, localesInitialState} from '../reducers/local
 
 import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
+import locales from 'scratch-l10n';
+import {detectLocale} from './detect-locale';
+
 import {ScratchPaintReducer} from 'scratch-paint';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -33,9 +36,8 @@ const AppStateHOC = function (WrappedComponent) {
             }
 
             let initializedLocales = localesInitialState;
-            if (window.location.search.indexOf('locale=') !== -1 ||
-                window.location.search.indexOf('lang=') !== -1) {
-                const locale = window.location.search.match(/(?:locale|lang)=([\w]+)/)[1];
+            const locale = detectLocale(Object.keys(locales));
+            if (locale !== 'en') {
                 initializedLocales = initLocale(initializedLocales, locale);
             }
 

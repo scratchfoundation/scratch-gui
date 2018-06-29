@@ -1,4 +1,6 @@
 import xhr from 'xhr';
+import costumePayload from './backpack/costume-payload';
+import soundPayload from './backpack/sound-payload';
 
 const getBackpackContents = ({
     host,
@@ -24,6 +26,51 @@ const getBackpackContents = ({
     });
 });
 
+const saveBackpackObject = ({
+    host,
+    username,
+    token,
+    type, // Type of object being saved to the backpack
+    mime, // Mime-type of the object being saved
+    name, // User-facing name of the object being saved
+    body, // Base64-encoded body of the object being saved
+    thumbnail // Base64-encoded JPEG thumbnail of the object being saved
+}) => new Promise((resolve, reject) => {
+    xhr({
+        method: 'POST',
+        uri: `${host}${username}`,
+        headers: {'x-token': token},
+        json: {type, mime, name, body, thumbnail}
+    }, (error, response) => {
+        if (error || response.statusCode !== 200) {
+            return reject();
+        }
+        return resolve(response.body);
+    });
+});
+
+const deleteBackpackObject = ({
+    host,
+    username,
+    token,
+    id
+}) => new Promise((resolve, reject) => {
+    xhr({
+        method: 'DELETE',
+        uri: `${host}${username}/${id}`,
+        headers: {'x-token': token}
+    }, (error, response) => {
+        if (error || response.statusCode !== 200) {
+            return reject();
+        }
+        return resolve(response.body);
+    });
+});
+
 export {
-    getBackpackContents
+    getBackpackContents,
+    saveBackpackObject,
+    deleteBackpackObject,
+    costumePayload,
+    soundPayload
 };

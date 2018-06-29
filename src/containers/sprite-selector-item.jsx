@@ -18,6 +18,7 @@ class SpriteSelectorItem extends React.Component {
             'handleClick',
             'handleDelete',
             'handleDuplicate',
+            'handleExport',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleMouseDown',
@@ -84,6 +85,10 @@ class SpriteSelectorItem extends React.Component {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDuplicateButtonClick(this.props.id);
     }
+    handleExport (e) {
+        e.stopPropagation();
+        this.props.onExportButtonClick(this.props.id);
+    }
     handleMouseLeave () {
         this.props.dispatchSetHoveredSprite(null);
     }
@@ -99,6 +104,7 @@ class SpriteSelectorItem extends React.Component {
             onClick,
             onDeleteButtonClick,
             onDuplicateButtonClick,
+            onExportButtonClick,
             dragPayload,
             receivedBlocks,
             /* eslint-enable no-unused-vars */
@@ -109,6 +115,7 @@ class SpriteSelectorItem extends React.Component {
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
+                onExportButtonClick={onExportButtonClick ? this.handleExport : null}
                 onMouseDown={this.handleMouseDown}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
@@ -134,6 +141,7 @@ SpriteSelectorItem.propTypes = {
     onDeleteButtonClick: PropTypes.func,
     onDrag: PropTypes.func.isRequired,
     onDuplicateButtonClick: PropTypes.func,
+    onExportButtonClick: PropTypes.func,
     receivedBlocks: PropTypes.bool.isRequired,
     selected: PropTypes.bool
 };

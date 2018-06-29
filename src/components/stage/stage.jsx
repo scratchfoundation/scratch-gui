@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
+import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
@@ -12,7 +13,7 @@ import styles from './stage.css';
 
 const StageComponent = props => {
     const {
-        canvasRef,
+        canvas,
         dragRef,
         isColorPicking,
         isFullScreen,
@@ -21,6 +22,7 @@ const StageComponent = props => {
         stageSize,
         useEditorDragStyle,
         onDeactivateColorPicker,
+        onDoubleClick,
         onQuestionAnswered,
         ...boxProps
     } = props;
@@ -35,16 +37,22 @@ const StageComponent = props => {
                     [styles.stageWrapperOverlay]: isFullScreen,
                     [styles.withColorPicker]: !isFullScreen && isColorPicking
                 })}
+                style={{
+                    minHeight: stageDimensions.height,
+                    minWidth: stageDimensions.width
+                }}
+                onDoubleClick={onDoubleClick}
             >
-                <Box
+                <DOMElementRenderer
                     className={classNames(
                         styles.stage,
                         {[styles.stageOverlayContent]: isFullScreen}
                     )}
-                    componentRef={canvasRef}
-                    element="canvas"
-                    height={stageDimensions.height}
-                    width={stageDimensions.width}
+                    domElement={canvas}
+                    style={{
+                        height: stageDimensions.height,
+                        width: stageDimensions.width
+                    }}
                     {...boxProps}
                 />
                 <Box className={styles.monitorWrapper}>
@@ -93,19 +101,19 @@ const StageComponent = props => {
     );
 };
 StageComponent.propTypes = {
-    canvasRef: PropTypes.func,
+    canvas: PropTypes.instanceOf(Element).isRequired,
     colorInfo: Loupe.propTypes.colorInfo,
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     onDeactivateColorPicker: PropTypes.func,
+    onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool
 };
 StageComponent.defaultProps = {
-    canvasRef: () => {},
     dragRef: () => {}
 };
 export default StageComponent;

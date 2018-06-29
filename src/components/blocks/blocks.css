@@ -21,6 +21,18 @@
     border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
     height: calc(100% - 3.25rem) !important;
+
+    /*
+        For now, the layout cannot support scrollbars in the category menu.
+        The line below works for Edge, the `::-webkit-scrollbar` line
+        below that is for webkit browsers. It isn't possible to do the
+        same for Firefox, so a different solution may be needed for them.
+    */
+    -ms-overflow-style: none;
+}
+
+.blocks :global(.blocklyToolboxDiv::-webkit-scrollbar) {
+    display: none;
 }
 
 .blocks :global(.blocklyFlyout) {

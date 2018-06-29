@@ -24,6 +24,7 @@ const Selector = props => {
         onRemoveSortable,
         onDeleteClick,
         onDuplicateClick,
+        onExportClick,
         onItemClick
     } = props;
 
@@ -67,6 +68,7 @@ const Selector = props => {
                             })}
                             costumeURL={item.url}
                             details={item.details}
+                            dragPayload={item.dragPayload}
                             dragType={dragType}
                             id={index}
                             index={index}
@@ -76,6 +78,7 @@ const Selector = props => {
                             onClick={onItemClick}
                             onDeleteButtonClick={onDeleteClick}
                             onDuplicateButtonClick={onDuplicateClick}
+                            onExportButtonClick={onExportClick}
                         />
                     </SortableAsset>
                 ))}
@@ -102,6 +105,7 @@ Selector.propTypes = {
     onAddSortable: PropTypes.func,
     onDeleteClick: PropTypes.func,
     onDuplicateClick: PropTypes.func,
+    onExportClick: PropTypes.func,
     onItemClick: PropTypes.func.isRequired,
     onRemoveSortable: PropTypes.func,
     ordering: PropTypes.arrayOf(PropTypes.number),

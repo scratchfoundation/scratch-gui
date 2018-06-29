@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {connect} from 'react-redux';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,7 +22,10 @@ import {
     fileMenuOpen,
     openEditMenu,
     closeEditMenu,
-    editMenuOpen
+    editMenuOpen,
+    openLanguageMenu,
+    closeLanguageMenu,
+    languageMenuOpen
 } from '../../reducers/menus';
 
 import styles from './menu-bar.css';
@@ -33,28 +36,53 @@ import profileIcon from './profile-hatti.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
 import smalrubyLogo from './hatti.svg';
-
+import languageIcon from '../language-selector/language-icon.svg';
 import helpIcon from './icon--help.svg';
+
+const ariaMessages = defineMessages({
+    language: {
+        id: 'gui.menuBar.LanguageSelector',
+        defaultMessage: 'language selector',
+        description: 'accessibility text for the language selection menu'
+    },
+    howTo: {
+        id: 'gui.menuBar.howToLibrary',
+        defaultMessage: 'How-to Library',
+        description: 'accessibility text for the how-to library button'
+    }
+});
 
 const MenuBarItemTooltip = ({
     children,
     className,
+    enable,
     id,
     place = 'bottom'
-}) => (
-    <ComingSoonTooltip
-        className={classNames(styles.comingSoon, className)}
-        place={place}
-        tooltipClassName={styles.comingSoonTooltip}
-        tooltipId={id}
-    >
-        {children}
-    </ComingSoonTooltip>
-);
+}) => {
+    if (enable) {
+        return (
+            <React.Fragment>
+                {children}
+            </React.Fragment>
+        );
+    }
+    return (
+        <ComingSoonTooltip
+            className={classNames(styles.comingSoon, className)}
+            place={place}
+            tooltipClassName={styles.comingSoonTooltip}
+            tooltipId={id}
+        >
+            {children}
+        </ComingSoonTooltip>
+    );
+};
+
 
 MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    enable: PropTypes.bool,
     id: PropTypes.string,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
@@ -111,12 +139,37 @@ const MenuBar = props => (
                         src={smalrubyLogo}
                     />
                 </div>
-                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                <div
+                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: props.languageMenuOpen
+                    })}
+                    onMouseUp={props.onClickLanguage}
+                >
                     <MenuBarItemTooltip
+                        enable={window.location.search.indexOf('enable=language') !== -1}
                         id="menubar-selector"
                         place="right"
                     >
-                        <LanguageSelector />
+                        <div
+                            aria-label={props.intl.formatMessage(ariaMessages.language)}
+                            className={classNames(styles.languageMenu)}
+                        >
+                            <img
+                                className={styles.languageIcon}
+                                src={languageIcon}
+                            />
+                            <img
+                                className={styles.dropdownCaret}
+                                src={dropdownCaret}
+                            />
+                        </div>
+                        <MenuBarMenu
+                            open={props.languageMenuOpen}
+                            onRequestClose={props.onRequestCloseLanguage}
+                        >
+                            <LanguageSelector />
+                        </MenuBarMenu>
+
                     </MenuBarItemTooltip>
                 </div>
                 <div
@@ -171,7 +224,7 @@ const MenuBar = props => (
                                     {...loadProps}
                                 >
                                     <FormattedMessage
-                                        defaultMessage="Upload from your computer"
+                                        defaultMessage="Load from your computer"
                                         description="Menu bar item for uploading a project from your computer"
                                         id="gui.menuBar.uploadFromComputer"
                                     />
@@ -184,8 +237,8 @@ const MenuBar = props => (
                                     {...saveProps}
                                 >
                                     <FormattedMessage
-                                        defaultMessage="Download to your computer"
-                                        description="Menu bar item for downloading a project"
+                                        defaultMessage="Save to your computer"
+                                        description="Menu bar item for downloading a project to your computer"
                                         id="gui.menuBar.downloadToComputer"
                                     />
                                 </MenuItem>
@@ -314,7 +367,7 @@ const MenuBar = props => (
         </div>
         <div className={styles.accountInfoWrapper}>
             <div
-                aria-label="How-to Library"
+                aria-label={props.intl.formatMessage(ariaMessages.howTo)}
                 className={classNames(styles.menuBarItem, styles.hoverable)}
                 onClick={props.onOpenTipLibrary}
             >
@@ -369,17 +422,22 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    intl: intlShape,
+    languageMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onClickLanguage: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
+    onRequestCloseLanguage: PropTypes.func,
     onSeeCommunity: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     fileMenuOpen: fileMenuOpen(state),
-    editMenuOpen: editMenuOpen(state)
+    editMenuOpen: editMenuOpen(state),
+    languageMenuOpen: languageMenuOpen(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -388,10 +446,12 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
+    onClickLanguage: () => dispatch(openLanguageMenu()),
+    onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(MenuBar);
+)(MenuBar));

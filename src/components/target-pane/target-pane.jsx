@@ -28,7 +28,9 @@ const TargetPane = ({
     onChangeSpriteX,
     onChangeSpriteY,
     onDeleteSprite,
+    onDrop,
     onDuplicateSprite,
+    onExportSprite,
     onFileUploadClick,
     onNewSpriteClick,
     onPaintSpriteClick,
@@ -63,7 +65,9 @@ const TargetPane = ({
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onDrop={onDrop}
             onDuplicateSprite={onDuplicateSprite}
+            onExportSprite={onExportSprite}
             onFileUploadClick={onFileUploadClick}
             onNewSpriteClick={onNewSpriteClick}
             onPaintSpriteClick={onPaintSpriteClick}
@@ -129,7 +133,9 @@ TargetPane.propTypes = {
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,

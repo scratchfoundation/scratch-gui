@@ -4,7 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import extensionLibraryContent from '../lib/libraries/extensions/index';
+import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';

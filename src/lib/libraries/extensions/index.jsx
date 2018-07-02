@@ -120,7 +120,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: false
+        disabled: true
     },
     {
         name: 'LEGO WeDo 2.0',
@@ -134,7 +134,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: false
+        disabled: true
     },
     {
         name: 'LEGO MINDSTORMS EV3',
@@ -148,7 +148,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: false
+        disabled: true
     },
     {
         name: 'LEGO Boost',

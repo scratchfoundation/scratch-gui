@@ -24,10 +24,10 @@ const ScanningStep = props => (
                     <Box className={styles.deviceTilePane}>
                         {props.deviceList.map(device =>
                             (<DeviceTile
-                                RSSI={device.RSSI}
                                 key={device.peripheralId}
                                 name={device.name}
                                 peripheralId={device.peripheralId}
+                                rssi={device.rssi}
                                 onConnecting={props.onConnecting}
                             />)
                         )}
@@ -72,7 +72,7 @@ const ScanningStep = props => (
 ScanningStep.propTypes = {
     deviceList: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
-        RSSI: PropTypes.number,
+        rssi: PropTypes.number,
         peripheralId: PropTypes.string
     })),
     onConnecting: PropTypes.func,

@@ -22,7 +22,7 @@ class DeviceTile extends React.Component {
                 <Box>
                     <span>{this.props.name}</span>
                     <Box className={styles.deviceTileWidgets}>
-                        <span className={styles.signalStrengthText}>{this.props.RSSI}</span>
+                        <span className={styles.signalStrengthText}>{this.props.rssi}</span>
                         <button
                             onClick={this.handleConnecting}
                         >
@@ -40,10 +40,10 @@ class DeviceTile extends React.Component {
 }
 
 DeviceTile.propTypes = {
-    RSSI: PropTypes.number,
     name: PropTypes.string,
     onConnecting: PropTypes.func,
-    peripheralId: PropTypes.string
+    peripheralId: PropTypes.string,
+    rssi: PropTypes.number
 };
 
 export default DeviceTile;

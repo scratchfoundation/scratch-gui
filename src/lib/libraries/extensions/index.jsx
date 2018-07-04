@@ -15,6 +15,25 @@ export default [
     {
         name: (
             <FormattedMessage
+                defaultMessage="Control Fun"
+                description="Name for the 'Control Fun' extension"
+                id="gui.extension.control_fun.name"
+            />
+        ),
+        extensionId: 'controlFun',
+        iconURL: penImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play with fun Control-like blocks."
+                description="Description for the 'Control Fun' extension"
+                id="gui.extension.control_fun.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
                 defaultMessage="Music"
                 description="Name for the 'Music' extension"
                 id="gui.extension.music.name"

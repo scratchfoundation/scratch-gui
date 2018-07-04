@@ -322,12 +322,16 @@ class Blocks extends React.Component {
         const p = {prompt: {callback, message, defaultValue}};
         p.prompt.title = optTitle ? optTitle :
             this.ScratchBlocks.VARIABLE_MODAL_TITLE;
+        p.prompt.varType = typeof optVarType === 'string' ?
+            optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
         p.prompt.showMoreOptions =
             optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE;
         this.setState(p);
     }
-    handlePromptCallback (data) {
-        this.state.prompt.callback(data);
+    handlePromptCallback (input, optionSelection) {
+        this.state.prompt.callback(input, optionSelection,
+            (optionSelection === 'local') ? [] :
+                this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType));
         this.handlePromptClose();
     }
     handlePromptClose () {
@@ -366,6 +370,7 @@ class Blocks extends React.Component {
                 />
                 {this.state.prompt ? (
                     <Prompt
+                        isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
                         showMoreOptions={this.state.prompt.showMoreOptions}

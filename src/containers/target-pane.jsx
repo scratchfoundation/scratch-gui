@@ -140,7 +140,7 @@ class TargetPane extends React.Component {
             // So for now just grab the zip manually.
             fetch(dragInfo.payload.bodyUrl)
                 .then(response => response.arrayBuffer())
-                .then(zip => this.props.vm.addSprite(zip));
+                .then(sprite3Zip => this.props.vm.addSprite(sprite3Zip));
         } else if (targetId) {
             // Something is being dragged over one of the sprite tiles or the backdrop.
             // Dropping assets like sounds and costumes duplicate the asset on the

@@ -1112,11 +1112,15 @@
         "sampleCount": 176401,
         "rate": 22050,
         "format": "adpcm",
-        "tags": [
-            "music",
-            "loops",
-            "electronic"
-        ]
+        "tags": []
+    },
+    {
+        "name": "Dance Celebrate2",
+        "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
+        "sampleCount": 176401,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": []
     },
     {
         "name": "Dance Chill Out",
@@ -2467,10 +2471,7 @@
         "sampleCount": 18688,
         "rate": 22050,
         "format": "",
-        "tags": [
-            "animals",
-            "cat"
-        ]
+        "tags": []
     },
     {
         "name": "Meow2",
@@ -2536,11 +2537,7 @@
         "sampleCount": 212553,
         "rate": 22050,
         "format": "adpcm",
-        "tags": [
-            "music",
-            "loops",
-            "electronic"
-        ]
+        "tags": []
     },
     {
         "name": "Oops",

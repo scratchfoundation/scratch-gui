@@ -621,68 +621,84 @@
     },
     {
         "name": "Avery Walking-a",
-        "md5": "c35d57b0cffdf812d9b450b435c4394c.png",
+        "md5": "ed334e546806dfbf26d2591d7ddb12d0.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
-            200,
-            380,
-            2
+            50,
+            95,
+            1
         ]
     },
     {
         "name": "Avery Walking-b",
-        "md5": "074b4800549f73bcffefa2658774dd49.png",
+        "md5": "c295731e8666ad2e1575fb4b4f82988d.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
-            198,
-            406,
-            2
+            50,
+            102,
+            1
         ]
     },
     {
         "name": "Avery Walking-c",
-        "md5": "c2ebb7138b9f2f2f45157550a6d27da5.png",
+        "md5": "597a834225c9949e419dff7db1bc2453.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
-            192,
-            378,
-            2
+            48,
+            95,
+            1
         ]
     },
     {
         "name": "Avery Walking-d",
-        "md5": "dbc1d6f606e18884194f4c6f88407e00.png",
+        "md5": "ce9622d11d24607eec7988196b38c3c6.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
-            200,
-            404,
-            2
+            50,
+            101,
+            1
         ]
     },
     {
         "name": "Avery-a",
-        "md5": "48a8377f6b0c5be8f40b16a40e58f16f.png",
+        "md5": "21393c9114c7d34b1df7ccd12c793672.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            154,
-            376,
-            2
+            39,
+            94,
+            1
         ]
     },
     {
         "name": "Avery-b",
-        "md5": "7b4fb35c3518e3e20a90f3e94fe82ab8.png",
+        "md5": "cc55f2f09599edc4ae0876e8b3d187d0.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            156,
-            376,
-            2
+            39,
+            94,
+            1
         ]
     },
     {
@@ -2890,101 +2906,119 @@
     },
     {
         "name": "Dee-a",
-        "md5": "d2804d0ef65a62d5da040665a828ff73.png",
+        "md5": "aa239b7ccdce6bddf06900c709525764.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            208,
-            394,
-            2
+            52,
+            99,
+            1
         ]
     },
     {
         "name": "Dee-b",
-        "md5": "0c9d88fb8c13eb535d5451b7e932b646.png",
+        "md5": "62b4ac1b735599e21af77c390b178095.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            130,
-            394,
-            2
+            33,
+            99,
+            1
         ]
     },
     {
         "name": "Dee-c",
-        "md5": "cbb526208f3253ad1ca84f3240ffe73d.png",
+        "md5": "6aa6196ce3245e93b8d1299f33adffcd.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            142,
-            406,
-            2
+            36,
+            102,
+            1
         ]
     },
     {
         "name": "Dee-d",
-        "md5": "f8daa89926a6b29494d00c8a922f70a2.png",
+        "md5": "2159a6be8f7ff450d0b5e938ca34a3f4.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            132,
-            396,
-            2
+            33,
+            99,
+            1
         ]
     },
     {
         "name": "Dee-e",
-        "md5": "15810d5d8a4c14901e5d1757b44e2f6c.png",
+        "md5": "e358d2a7e3a0a680928657161ce81a0a.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            126,
-            396,
-            2
+            32,
+            99,
+            1
         ]
     },
     {
         "name": "Devin-a",
-        "md5": "b59226656f090124fb4dcbfd8946275b.png",
+        "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            156,
-            380,
-            2
+            39,
+            95,
+            1
         ]
     },
     {
         "name": "Devin-b",
-        "md5": "0116dd2fa16bbce2b4701a2c9b15119e.png",
+        "md5": "873fbd641768c8f753a6568da97633e7.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            160,
-            382,
-            2
+            40,
+            96,
+            1
         ]
     },
     {
         "name": "Devin-c",
-        "md5": "075cf6f2967e71cd09574f961958258a.png",
+        "md5": "eac3c03d86cebb42c8f30e373cb7f623.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            128,
-            380,
-            2
+            32,
+            95,
+            1
         ]
     },
     {
         "name": "Devin-d",
-        "md5": "3892cc13b6abd08f166976c15c4da242.png",
+        "md5": "fa6a75afb0e4b822b91d8bb20d40c68f.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            162,
-            378,
-            2
+            41,
+            95,
+            1
         ]
     },
     {

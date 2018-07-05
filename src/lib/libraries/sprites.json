@@ -769,9 +769,11 @@
     },
     {
         "name": "Avery",
-        "md5": "48a8377f6b0c5be8f40b16a40e58f16f.png",
+        "md5": "21393c9114c7d34b1df7ccd12c793672.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             2,
@@ -793,23 +795,23 @@
                 {
                     "costumeName": "avery-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "48a8377f6b0c5be8f40b16a40e58f16f.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 77,
-                    "rotationCenterY": 188
+                    "baseLayerMD5": "21393c9114c7d34b1df7ccd12c793672.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 94
                 },
                 {
                     "costumeName": "avery-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7b4fb35c3518e3e20a90f3e94fe82ab8.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 78,
-                    "rotationCenterY": 188
+                    "baseLayerMD5": "cc55f2f09599edc4ae0876e8b3d187d0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 94
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 47,
-            "scratchY": -40,
+            "scratchX": -171,
+            "scratchY": -76,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -820,9 +822,12 @@
     },
     {
         "name": "Avery Walking",
-        "md5": "c35d57b0cffdf812d9b450b435c4394c.png",
+        "md5": "ed334e546806dfbf26d2591d7ddb12d0.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people",
+            "walking"
+        ],
         "info": [
             0,
             4,
@@ -844,39 +849,39 @@
                 {
                     "costumeName": "avery walking-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "c35d57b0cffdf812d9b450b435c4394c.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 100,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "ed334e546806dfbf26d2591d7ddb12d0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 50,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "avery walking-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "074b4800549f73bcffefa2658774dd49.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 99,
-                    "rotationCenterY": 203
+                    "baseLayerMD5": "c295731e8666ad2e1575fb4b4f82988d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 50,
+                    "rotationCenterY": 102
                 },
                 {
                     "costumeName": "avery walking-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "c2ebb7138b9f2f2f45157550a6d27da5.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 96,
-                    "rotationCenterY": 189
+                    "baseLayerMD5": "597a834225c9949e419dff7db1bc2453.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 48,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "avery walking-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "dbc1d6f606e18884194f4c6f88407e00.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 100,
-                    "rotationCenterY": 202
+                    "baseLayerMD5": "ce9622d11d24607eec7988196b38c3c6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 50,
+                    "rotationCenterY": 101
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -12,
-            "scratchY": -34,
+            "scratchX": -177,
+            "scratchY": 76,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -4420,9 +4425,11 @@
     },
     {
         "name": "Dee",
-        "md5": "d2804d0ef65a62d5da040665a828ff73.png",
+        "md5": "aa239b7ccdce6bddf06900c709525764.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             5,
@@ -4444,47 +4451,47 @@
                 {
                     "costumeName": "dee-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d2804d0ef65a62d5da040665a828ff73.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 104,
-                    "rotationCenterY": 197
+                    "baseLayerMD5": "aa239b7ccdce6bddf06900c709525764.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 99
                 },
                 {
                     "costumeName": "dee-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0c9d88fb8c13eb535d5451b7e932b646.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 65,
-                    "rotationCenterY": 197
+                    "baseLayerMD5": "62b4ac1b735599e21af77c390b178095.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 99
                 },
                 {
                     "costumeName": "dee-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "cbb526208f3253ad1ca84f3240ffe73d.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 71,
-                    "rotationCenterY": 203
+                    "baseLayerMD5": "6aa6196ce3245e93b8d1299f33adffcd.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 36,
+                    "rotationCenterY": 102
                 },
                 {
                     "costumeName": "dee-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "f8daa89926a6b29494d00c8a922f70a2.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 66,
-                    "rotationCenterY": 198
+                    "baseLayerMD5": "2159a6be8f7ff450d0b5e938ca34a3f4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 33,
+                    "rotationCenterY": 99
                 },
                 {
                     "costumeName": "dee-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "15810d5d8a4c14901e5d1757b44e2f6c.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 63,
-                    "rotationCenterY": 198
+                    "baseLayerMD5": "e358d2a7e3a0a680928657161ce81a0a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 99
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 31,
-            "scratchY": -29,
+            "scratchX": 84,
+            "scratchY": -39,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -4495,9 +4502,11 @@
     },
     {
         "name": "Devin",
-        "md5": "b59226656f090124fb4dcbfd8946275b.png",
+        "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             0,
             4,
@@ -4519,39 +4528,39 @@
                 {
                     "costumeName": "devin-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b59226656f090124fb4dcbfd8946275b.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 78,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "b1897e56265470b55fa65fabe2423c55.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0116dd2fa16bbce2b4701a2c9b15119e.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 80,
-                    "rotationCenterY": 191
+                    "baseLayerMD5": "873fbd641768c8f753a6568da97633e7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 96
                 },
                 {
                     "costumeName": "devin-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "075cf6f2967e71cd09574f961958258a.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 64,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "eac3c03d86cebb42c8f30e373cb7f623.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "3892cc13b6abd08f166976c15c4da242.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 81,
-                    "rotationCenterY": 189
+                    "baseLayerMD5": "fa6a75afb0e4b822b91d8bb20d40c68f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 41,
+                    "rotationCenterY": 95
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 30,
-            "scratchY": 12,
+            "scratchX": 82,
+            "scratchY": -18,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

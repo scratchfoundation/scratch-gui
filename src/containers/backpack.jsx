@@ -7,12 +7,14 @@ import {
     saveBackpackObject,
     deleteBackpackObject,
     soundPayload,
-    costumePayload
+    costumePayload,
+    spritePayload
 } from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 
 import {connect} from 'react-redux';
 import storage from '../lib/storage';
+import VM from 'scratch-vm';
 
 class Backpack extends React.Component {
     constructor (props) {
@@ -45,7 +47,7 @@ class Backpack extends React.Component {
         }
     }
     componentWillReceiveProps (newProps) {
-        const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND];
+        const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND, DragConstants.SPRITE];
         // If `dragging` becomes true, record the drop area rectangle
         if (newProps.dragInfo.dragging && !this.props.dragInfo.dragging) {
             this.dropAreaRect = this.ref && this.ref.getBoundingClientRect();
@@ -83,10 +85,13 @@ class Backpack extends React.Component {
         case DragConstants.SOUND:
             payloader = soundPayload;
             break;
+        case DragConstants.SPRITE:
+            payloader = spritePayload;
+            break;
         }
         if (!payloader) return;
 
-        payloader(dragInfo.payload)
+        payloader(dragInfo.payload, this.props.vm)
             .then(payload => saveBackpackObject({
                 host: this.props.host,
                 token: this.props.token,
@@ -152,7 +157,8 @@ Backpack.propTypes = {
     }),
     host: PropTypes.string,
     token: PropTypes.string,
-    username: PropTypes.string
+    username: PropTypes.string,
+    vm: PropTypes.instanceOf(VM)
 };
 
 const getTokenAndUsername = state => {

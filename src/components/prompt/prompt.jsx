@@ -64,7 +64,7 @@ const PromptComponent = props => (
                         <Box className={styles.optionsRow}>
                             <label>
                                 <input
-                                    checked
+                                    defaultChecked
                                     name="variableScopeOption"
                                     type="radio"
                                     value="global"

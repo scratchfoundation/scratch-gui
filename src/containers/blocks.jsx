@@ -321,11 +321,13 @@ class Blocks extends React.Component {
     handlePromptStart (message, defaultValue, callback, optTitle, optVarType) {
         const p = {prompt: {callback, message, defaultValue}};
         p.prompt.title = optTitle ? optTitle :
-            this.ScratchBlocks.VARIABLE_MODAL_TITLE;
+            this.ScratchBlocks.Msg.VARIABLE_MODAL_TITLE;
         p.prompt.varType = typeof optVarType === 'string' ?
             optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
         p.prompt.showMoreOptions =
-            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE;
+            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
         this.setState(p);
     }
     handlePromptCallback (input, optionSelection) {

@@ -15,7 +15,7 @@ const ConnectedStep = props => (
             <Box className={styles.instructions}>
                 <FormattedMessage
                     defaultMessage="Connected"
-                    description=""
+                    description="Message indicating that a device was connected"
                     id="gui.connection.connected"
                 />
             </Box>
@@ -29,8 +29,8 @@ const ConnectedStep = props => (
                     onClick={props.onDisconnect}
                 >
                     <FormattedMessage
-                        defaultMessage="disconnect"
-                        description="Disconnect the device"
+                        defaultMessage="Disconnect"
+                        description="Button to disconnect the device"
                         id="gui.connection.disconnect"
                     />
                 </button>
@@ -39,9 +39,9 @@ const ConnectedStep = props => (
                     onClick={props.onCancel}
                 >
                     <FormattedMessage
-                        defaultMessage="go to editor"
-                        description=""
-                        id="gui.connection.go to editor"
+                        defaultMessage="Go to Editor"
+                        description="Button to return to the editor"
+                        id="gui.connection.go-to-editor"
                     />
                 </button>
             </div>

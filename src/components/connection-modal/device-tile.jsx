@@ -27,8 +27,8 @@ class DeviceTile extends React.Component {
                             onClick={this.handleConnecting}
                         >
                             <FormattedMessage
-                                defaultMessage="connect"
-                                description=""
+                                defaultMessage="Connect"
+                                description="Button to start connecting to a specific device"
                                 id="gui.connection.connect"
                             />
                         </button>

@@ -35,8 +35,10 @@ import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './profile-hatti.png';
 import communityIcon from './icon--see-community.svg';
 import dropdownCaret from '../language-selector/dropdown-caret.svg';
-import smalrubyLogo from './hatti.svg';
 import languageIcon from '../language-selector/language-icon.svg';
+
+import smalrubyLogo from './hatti.svg';
+
 import helpIcon from './icon--help.svg';
 
 const ariaMessages = defineMessages({

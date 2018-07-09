@@ -38,7 +38,7 @@ class DOMElementRenderer extends React.Component {
 
         // Convert react style prop to dom element styling.
         if (this.props.style) {
-            this.props.domElement.style = Style.string(this.props.style);
+            this.props.domElement.style.cssText = Style.string(this.props.style);
         }
 
         return <div ref={this.setContainer} />;

@@ -553,7 +553,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT">100</field>
+                    <field name="TEXT">50</field>
                 </shadow>
             </value>
         </block>
@@ -565,7 +565,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT">100</field>
+                    <field name="TEXT">50</field>
                 </shadow>
             </value>
         </block>
@@ -577,7 +577,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT">100</field>
+                    <field name="TEXT">50</field>
                 </shadow>
             </value>
         </block>

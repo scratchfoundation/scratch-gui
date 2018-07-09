@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import keyMirror from 'keymirror';
 
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
@@ -11,6 +12,13 @@ import ErrorStep from './error-step.jsx';
 
 import styles from './connection-modal.css';
 
+const PHASES = keyMirror({
+    scanning: null,
+    connecting: null,
+    connected: null,
+    error: null
+});
+
 const ConnectionModalComponent = props => (
     <Modal
         className={styles.modalContent}
@@ -19,18 +27,21 @@ const ConnectionModalComponent = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            {props.phase === 'scanning' && <ScanningStep {...props} />}
-            {props.phase === 'connecting' && <ConnectingStep {...props} />}
-            {props.phase === 'connected' && <ConnectedStep {...props} />}
-            {props.phase === 'error' && <ErrorStep {...props} />}
+            {props.phase === PHASES.scanning && <ScanningStep {...props} />}
+            {props.phase === PHASES.connecting && <ConnectingStep {...props} />}
+            {props.phase === PHASES.connected && <ConnectedStep {...props} />}
+            {props.phase === PHASES.error && <ErrorStep {...props} />}
         </Box>
     </Modal>
 );
 
 ConnectionModalComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    phase: PropTypes.string.isRequired,
+    phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     title: PropTypes.string.isRequired
 };
 
-export default ConnectionModalComponent;
+export {
+    ConnectionModalComponent as default,
+    PHASES
+};

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import ConnectionModalComponent from '../components/connection-modal/connection-modal.jsx';
+import ConnectionModalComponent, {PHASES} from '../components/connection-modal/connection-modal.jsx';
 import VM from 'scratch-vm';
 
 class ConnectionModal extends React.Component {
@@ -15,7 +15,7 @@ class ConnectionModal extends React.Component {
             'handleError'
         ]);
         this.state = {
-            phase: 'scanning'
+            phase: PHASES.scanning
         };
     }
     componentDidMount () {
@@ -34,13 +34,13 @@ class ConnectionModal extends React.Component {
     }
     handleScanning () {
         this.setState({
-            phase: 'scanning'
+            phase: PHASES.scanning
         });
     }
     handleConnecting (peripheralId) {
         this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
         this.setState({
-            phase: 'connecting'
+            phase: PHASES.connecting
         });
     }
     handleDisconnect () {
@@ -58,13 +58,13 @@ class ConnectionModal extends React.Component {
     handleError () {
         this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
         this.setState({
-            phase: 'error'
+            phase: PHASES.error
         });
     }
     handleConnected () {
         this.props.onStatusButtonUpdate(this.props.extensionId, 'ready');
         this.setState({
-            phase: 'connected'
+            phase: PHASES.connected
         });
     }
     handleHelp () {

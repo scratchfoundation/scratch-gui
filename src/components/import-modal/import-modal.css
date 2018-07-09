@@ -45,7 +45,7 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $pen-primary;
+    background-color: $extensions-primary;
 }
 
 .header-item {
@@ -129,12 +129,12 @@ $sides: 20rem;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-    border: 0px solid $pen-primary;
+    border: 0px solid $extensions-primary;
     outline: none;
 }
 
 .input-row button.ok-button {
-    background: $pen-primary;
+    background: $extensions-primary;
     color: white;
 }
 

@@ -41,7 +41,7 @@
     left: 0;
     height: 1.8rem;
     width: 100%;
-    background: $motion-primary;
+    background: $extensions-primary;
 }
 
 .left-button, .right-button {
@@ -51,14 +51,15 @@
     z-index: 20;
     user-select: none;
     cursor: pointer;
-    background: $motion-primary;
-    box-shadow: 0 0 0 4px $motion-transparent;
     height: 40px;
     width: 40px;
+    background: $extensions-primary;
+    box-shadow: 0 0 0 4px $extensions-transparent;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 0 0 6px $extensions-transparent;
 }
 
 .left-button {
@@ -88,9 +89,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: $motion-primary;
-    border-bottom: 1px solid $motion-tertiary;
     padding: 0.5rem;
+    background: $extensions-primary;
+    border-bottom: 1px solid $extensions-tertiary;
     font-size: 0.625rem;
 }
 

@@ -87,7 +87,7 @@ var _appStateHoc = __webpack_require__(119);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(103);
+var _mode = __webpack_require__(104);
 
 var _player = __webpack_require__(429);
 

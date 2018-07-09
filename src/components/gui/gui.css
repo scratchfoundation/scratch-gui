@@ -79,6 +79,7 @@
     align-items: center;
 
     user-select: none;
+    white-space: nowrap;
 }
 
 /* Use z-indices to force left-on-top for tabs */

@@ -12,6 +12,8 @@
     margin-right: .5rem;
     user-select: none;
     cursor: default;
+
+    white-space: nowrap;
 }
 
 .input-label {

@@ -9,6 +9,7 @@ class ScanningStep extends React.Component {
         super(props);
         bindAll(this, [
             'handlePeripheralListUpdate',
+            'handlePeripheralScanTimeout',
             'handleRefresh'
         ]);
         this.state = {
@@ -20,11 +21,18 @@ class ScanningStep extends React.Component {
         this.props.vm.startDeviceScan(this.props.extensionId);
         this.props.vm.on(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
+        this.props.vm.on(
+            'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }
     componentWillUnmount () {
         // @todo: stop the device scan here
         this.props.vm.removeListener(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
+        this.props.vm.removeListener(
+            'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
+    }
+    handlePeripheralScanTimeout () {
+        this.setState({scanning: false});
     }
     handlePeripheralListUpdate (newList) {
         // TODO: sort peripherals by signal strength? so they don't jump around

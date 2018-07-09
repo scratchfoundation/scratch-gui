@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1434:
+/***/ 1435:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,9 +9,9 @@ var GUI =
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-__webpack_require__(1433);
+__webpack_require__(1434);
 
-__webpack_require__(1431);
+__webpack_require__(1432);
 
 var _react = __webpack_require__(0);
 
@@ -116,5 +116,5 @@ if(false) {}
 
 /***/ })
 
-},[[1434,0]]]);
+},[[1435,0]]]);
 //# sourceMappingURL=gui.js.map

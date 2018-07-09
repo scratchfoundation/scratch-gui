@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import keyMirror from 'keymirror';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
@@ -19,10 +20,18 @@ const PHASES = keyMirror({
     error: null
 });
 
+const messages = defineMessages({
+    connectionModalLabel: {
+        defaultMessage: 'Scratch Device Connection Modal',
+        description: 'Title for scratch device connection modal',
+        id: 'gui.connectionModal.modalLabel'
+    }
+});
+
 const ConnectionModalComponent = props => (
     <Modal
         className={styles.modalContent}
-        contentLabel={''}
+        contentLabel={props.intl.formatMessage(messages.connectionModalLabel)}
         headerClassName={styles.header}
         onRequestClose={props.onCancel}
     >
@@ -36,12 +45,15 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
+    intl: intlShape,
     onCancel: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     title: PropTypes.string.isRequired
 };
 
+const IntlModal = injectIntl(ConnectionModalComponent);
+
 export {
-    ConnectionModalComponent as default,
+    IntlModal as default,
     PHASES
 };

@@ -328,9 +328,13 @@ class Blocks extends React.Component {
     handlePromptStart (message, defaultValue, callback, optTitle, optVarType) {
         const p = {prompt: {callback, message, defaultValue}};
         p.prompt.title = optTitle ? optTitle :
-            this.ScratchBlocks.VARIABLE_MODAL_TITLE;
+            this.ScratchBlocks.Msg.VARIABLE_MODAL_TITLE;
+        p.prompt.varType = typeof optVarType === 'string' ?
+            optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
         p.prompt.showMoreOptions =
-            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE;
+            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
@@ -345,8 +349,10 @@ class Blocks extends React.Component {
     handleStatusButtonUpdate (extensionId, status) {
         this.ScratchBlocks.updateStatusButton(this.workspace, extensionId, status);
     }
-    handlePromptCallback (data) {
-        this.state.prompt.callback(data);
+    handlePromptCallback (input, optionSelection) {
+        this.state.prompt.callback(input, optionSelection,
+            (optionSelection === 'local') ? [] :
+                this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType));
         this.handlePromptClose();
     }
     handlePromptClose () {
@@ -385,6 +391,7 @@ class Blocks extends React.Component {
                 />
                 {this.state.prompt ? (
                     <Prompt
+                        isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
                         showMoreOptions={this.state.prompt.showMoreOptions}

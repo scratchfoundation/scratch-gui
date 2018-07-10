@@ -26,4 +26,6 @@ $control-primary: hsla(38, 100%, 55%, 1); /* #FFAB19 */
 
 $data-primary: hsla(30, 100%, 55%, 1); /* #FF8C1A */
 
-$pen-primary: hsla(163, 85%, 40%, 1); /* #0FBD8C */
+$extensions-primary: hsla(163, 85%, 40%, 1); /* #0FBD8C */
+$extensions-tertiary: hsla(163, 85%, 30%, 1); /* #0B8E69 */
+$extensions-transparent: hsla(163, 85%, 40%, 0.35); /* 35% transparent version of extensions-primary */

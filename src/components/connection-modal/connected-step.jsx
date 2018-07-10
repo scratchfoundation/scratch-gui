@@ -4,13 +4,26 @@ import React from 'react';
 
 import Box from '../box/box.jsx';
 import Dots from './dots.jsx';
-
+import bluetoothIcon from './icons/bluetooth-white.svg';
 import styles from './connection-modal.css';
 import classNames from 'classnames';
 
 const ConnectedStep = props => (
     <Box className={styles.body}>
-        <Box className={styles.activityArea} />
+        <Box className={styles.activityArea}>
+            <Box className={styles.centeredRow}>
+                <div className={styles.deviceActivity}>
+                    <img
+                        className={styles.deviceActivityIcon}
+                        src={props.deviceImage}
+                    />
+                    <img
+                        className={styles.bluetoothConnectedIcon}
+                        src={bluetoothIcon}
+                    />
+                </div>
+            </Box>
+        </Box>
         <Box className={styles.bottomArea}>
             <Box className={styles.instructions}>
                 <FormattedMessage
@@ -50,6 +63,7 @@ const ConnectedStep = props => (
 );
 
 ConnectedStep.propTypes = {
+    deviceImage: PropTypes.string.isRequired,
     onCancel: PropTypes.func,
     onDisconnect: PropTypes.func
 };

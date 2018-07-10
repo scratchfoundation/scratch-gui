@@ -20,19 +20,12 @@ const PHASES = keyMirror({
     error: null
 });
 
-const messages = defineMessages({
-    connectionModalLabel: {
-        defaultMessage: 'Scratch Device Connection Modal',
-        description: 'Title for scratch device connection modal',
-        id: 'gui.connectionModal.modalLabel'
-    }
-});
-
 const ConnectionModalComponent = props => (
     <Modal
         className={styles.modalContent}
-        contentLabel={props.intl.formatMessage(messages.connectionModalLabel)}
+        contentLabel={props.name}
         headerClassName={styles.header}
+        headerImage={props.smallDeviceImage}
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
@@ -46,8 +39,10 @@ const ConnectionModalComponent = props => (
 
 ConnectionModalComponent.propTypes = {
     intl: intlShape,
+    name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
+    smallDeviceImage: PropTypes.string,
     title: PropTypes.string.isRequired
 };
 

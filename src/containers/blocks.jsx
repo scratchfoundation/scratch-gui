@@ -12,6 +12,7 @@ import Prompt from './prompt.jsx';
 import ConnectionModal from './connection-modal.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
+import extensionData from '../lib/libraries/extensions/index.jsx';
 import CustomProcedures from './custom-procedures.jsx';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
@@ -318,6 +319,11 @@ class Blocks extends React.Component {
         this.handleExtensionAdded(blocksInfo);
     }
     handleCategorySelected (categoryId) {
+        const extension = extensionData.find(ext => ext.extensionId === categoryId);
+        if (extension && extension.launchDeviceConnectionFlow) {
+            this.handleConnectionModalStart(categoryId);
+        }
+
         this.withToolboxUpdates(() => {
             this.workspace.toolbox_.setSelectedCategoryById(categoryId);
         });
@@ -338,10 +344,15 @@ class Blocks extends React.Component {
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
-        const c = {connectionModal: {
-            extensionId: extensionId
-        }};
-        this.setState(c);
+        const extension = extensionData.find(ext => ext.extensionId === extensionId);
+        if (extension) {
+            this.setState({connectionModal: {
+                extensionId: extensionId,
+                deviceImage: extension.deviceImage,
+                smallDeviceImage: extension.smallDeviceImage,
+                name: extension.name
+            }});
+        }
     }
     handleConnectionModalClose () {
         this.setState({connectionModal: null});
@@ -402,7 +413,10 @@ class Blocks extends React.Component {
                 ) : null}
                 {this.state.connectionModal ? (
                     <ConnectionModal
+                        deviceImage={this.state.connectionModal.deviceImage}
                         extensionId={this.state.connectionModal.extensionId}
+                        name={this.state.connectionModal.name}
+                        smallDeviceImage={this.state.connectionModal.smallDeviceImage}
                         vm={vm}
                         onCancel={this.handleConnectionModalClose}
                         onStatusButtonUpdate={this.handleStatusButtonUpdate}

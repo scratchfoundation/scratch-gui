@@ -11,6 +11,12 @@ import ev3Image from './ev3.png';
 import boostImage from './boost.png';
 import translateImage from './translate.png';
 
+import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
+import ev3MenuImage from './device-connection/ev3/ev3-menu-icon.svg';
+
+import microbitDeviceImage from './device-connection/microbit/microbit-illustration.svg';
+import microbitMenuImage from './device-connection/microbit/microbit-menu-icon.svg';
+
 export default [
     {
         name: (
@@ -121,6 +127,9 @@ export default [
         ),
         featured: true,
         disabled: true
+        launchDeviceConnectionFlow: true,
+        deviceImage: microbitDeviceImage,
+        smallDeviceImage: microbitMenuImage
     },
     {
         name: 'LEGO WeDo 2.0',
@@ -149,6 +158,9 @@ export default [
         ),
         featured: true,
         disabled: true
+        launchDeviceConnectionFlow: true,
+        deviceImage: ev3DeviceImage,
+        smallDeviceImage: ev3MenuImage
     },
     {
         name: 'LEGO Boost',

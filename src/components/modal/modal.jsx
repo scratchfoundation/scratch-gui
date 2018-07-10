@@ -33,6 +33,12 @@ const ModalComponent = props => (
                         styles.headerItemTitle
                     )}
                 >
+                    {props.headerImage ? (
+                        <img
+                            className={styles.headerImage}
+                            src={props.headerImage}
+                        />
+                    ) : null}
                     {props.contentLabel}
                 </div>
                 <div
@@ -75,6 +81,7 @@ ModalComponent.propTypes = {
     ]).isRequired,
     fullScreen: PropTypes.bool,
     headerClassName: PropTypes.string,
+    headerImage: PropTypes.string,
     onRequestClose: PropTypes.func
 };
 

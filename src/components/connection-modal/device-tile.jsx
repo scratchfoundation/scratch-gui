@@ -1,5 +1,6 @@
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import Box from '../box/box.jsx';
@@ -19,20 +20,56 @@ class DeviceTile extends React.Component {
     render () {
         return (
             <Box className={styles.deviceTile}>
-                <Box>
-                    <span>{this.props.name}</span>
-                    <Box className={styles.deviceTileWidgets}>
-                        <span className={styles.signalStrengthText}>{this.props.rssi}</span>
-                        <button
-                            onClick={this.handleConnecting}
-                        >
+                <Box className={styles.deviceTileName}>
+                    <img
+                        className={styles.deviceTileImage}
+                        src={this.props.smallDeviceImage}
+                    />
+                    <Box className={styles.deviceTileNameWrapper}>
+                        <Box className={styles.deviceTileNameLabel}>
                             <FormattedMessage
-                                defaultMessage="Connect"
-                                description="Button to start connecting to a specific device"
-                                id="gui.connection.connect"
+                                defaultMessage="Device name"
+                                description="Label for field showing the device name"
+                                id="gui.connection.device-name-label"
                             />
-                        </button>
+                        </Box>
+                        <Box className={styles.deviceTileNameText}>
+                            {this.props.name}
+                        </Box>
                     </Box>
+                </Box>
+                <Box className={styles.deviceTileWidgets}>
+                    <Box className={styles.signalStrengthMeter}>
+                        <div
+                            className={classNames(styles.signalBar, {
+                                [styles.greenBar]: this.props.rssi > -80
+                            })}
+                        />
+                        <div
+                            className={classNames(styles.signalBar, {
+                                [styles.greenBar]: this.props.rssi > -60
+                            })}
+                        />
+                        <div
+                            className={classNames(styles.signalBar, {
+                                [styles.greenBar]: this.props.rssi > -40
+                            })}
+                        />
+                        <div
+                            className={classNames(styles.signalBar, {
+                                [styles.greenBar]: this.props.rssi > -20
+                            })}
+                        />
+                    </Box>
+                    <button
+                        onClick={this.handleConnecting}
+                    >
+                        <FormattedMessage
+                            defaultMessage="Connect"
+                            description="Button to start connecting to a specific device"
+                            id="gui.connection.connect"
+                        />
+                    </button>
                 </Box>
             </Box>
         );
@@ -43,7 +80,8 @@ DeviceTile.propTypes = {
     name: PropTypes.string,
     onConnecting: PropTypes.func,
     peripheralId: PropTypes.string,
-    rssi: PropTypes.number
+    rssi: PropTypes.number,
+    smallDeviceImage: PropTypes.string
 };
 
 export default DeviceTile;

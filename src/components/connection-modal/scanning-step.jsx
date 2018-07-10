@@ -6,6 +6,9 @@ import Box from '../box/box.jsx';
 import DeviceTile from './device-tile.jsx';
 import Dots from './dots.jsx';
 
+import radarIcon from './icons/searching.png';
+import refreshIcon from './icons/refresh.svg';
+
 import styles from './connection-modal.css';
 
 const ScanningStep = props => (
@@ -14,11 +17,17 @@ const ScanningStep = props => (
             {props.scanning ? (
                 props.deviceList.length === 0 ? (
                     <div className={styles.activityAreaInfo}>
-                        <FormattedMessage
-                            defaultMessage="Looking for devices"
-                            description=""
-                            id="gui.connection.scanning.lookingfordevices"
-                        />
+                        <div className={styles.centeredRow}>
+                            <img
+                                className={styles.radar}
+                                src={radarIcon}
+                            />
+                            <FormattedMessage
+                                defaultMessage="Looking for devices"
+                                description="Text shown while scanning for devices"
+                                id="gui.connection.scanning.lookingfordevices"
+                            />
+                        </div>
                     </div>
                 ) : (
                     <Box className={styles.deviceTilePane}>
@@ -28,6 +37,7 @@ const ScanningStep = props => (
                                 name={device.name}
                                 peripheralId={device.peripheralId}
                                 rssi={device.rssi}
+                                smallDeviceImage={props.smallDeviceImage}
                                 onConnecting={props.onConnecting}
                             />)
                         )}
@@ -37,7 +47,7 @@ const ScanningStep = props => (
                 <Box className={styles.instructions}>
                     <FormattedMessage
                         defaultMessage="No devices found"
-                        description=""
+                        description="Text shown when no devices could be found"
                         id="gui.connection.scanning.noDevicesFound"
                     />
                 </Box>
@@ -47,7 +57,7 @@ const ScanningStep = props => (
             <Box className={styles.instructions}>
                 <FormattedMessage
                     defaultMessage="Select your device in the list above."
-                    description=""
+                    description="Prompt for choosing a device to connect to"
                     id="gui.connection.scanning.instructions"
                 />
             </Box>
@@ -60,9 +70,13 @@ const ScanningStep = props => (
                 onClick={props.onRefresh}
             >
                 <FormattedMessage
-                    defaultMessage="refresh"
+                    defaultMessage="Refresh"
                     description="Button in prompt for starting a search"
                     id="gui.connection.search"
+                />
+                <img
+                    className={styles.buttonIconRight}
+                    src={refreshIcon}
                 />
             </button>
         </Box>
@@ -77,7 +91,8 @@ ScanningStep.propTypes = {
     })),
     onConnecting: PropTypes.func,
     onRefresh: PropTypes.func,
-    scanning: PropTypes.bool.isRequired
+    scanning: PropTypes.bool.isRequired,
+    smallDeviceImage: PropTypes.string
 };
 
 ScanningStep.defaultProps = {

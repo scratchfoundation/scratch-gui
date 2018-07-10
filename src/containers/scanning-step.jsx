@@ -53,6 +53,7 @@ class ScanningStep extends React.Component {
             <ScanningStepComponent
                 deviceList={this.state.deviceList}
                 phase={this.state.phase}
+                smallDeviceImage={this.props.smallDeviceImage}
                 title={this.props.extensionId}
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
@@ -66,6 +67,7 @@ ScanningStep.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onConnected: PropTypes.func.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    smallDeviceImage: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

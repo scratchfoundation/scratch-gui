@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside}) => (
+const Player = ({isPlayerOnly, onSeeInside, ...props}) => (
     <Box
         className={classNames({
             [styles.stageOnly]: isPlayerOnly
@@ -28,6 +28,7 @@ const Player = ({isPlayerOnly, onSeeInside}) => (
         <GUI
             enableCommunity
             isPlayerOnly={isPlayerOnly}
+            {...props}
         />
     </Box>
 );

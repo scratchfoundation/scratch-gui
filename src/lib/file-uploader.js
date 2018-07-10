@@ -1,4 +1,4 @@
-import {importBitmap} from 'scratch-svg-renderer';
+import {BitmapAdapter} from 'scratch-svg-renderer';
 import log from './log.js';
 
 /**
@@ -79,7 +79,7 @@ const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
 
 /**
  * Handles loading a costume or a backdrop using the provided, context-relevant information.
- * @param {ArrayBuffer | string} fileData The costume data to load (this can be an image url
+ * @param {ArrayBuffer | string} fileData The costume data to load (this can be a base64 string
  * iff the image is a bitmap)
  * @param {string} fileType The MIME type of this file
  * @param {string} costumeName The user-readable name to use for the costume.
@@ -112,13 +112,15 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         return;
     }
 
-    const addCostumeFromBuffer = function (error, costumeBuffer) {
-        if (error) {
-            log.warn(`An error occurred while trying to extract image data: ${error}`);
-            return;
-        }
-
-        const vmCostume = cacheAsset(storage, costumeName, assetType, costumeFormat, costumeBuffer);
+    const bitmapAdapter = new BitmapAdapter();
+    const addCostumeFromBuffer = function (dataURI) {
+        const vmCostume = cacheAsset(
+            storage,
+            costumeName,
+            assetType,
+            costumeFormat,
+            bitmapAdapter.convertDataURIToBinary(dataURI)
+        );
         handleCostume(vmCostume);
     };
 
@@ -130,7 +132,12 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         addCostumeFromBuffer(null, new Uint8Array(fileData));
     } else {
         // otherwise it's a bitmap
-        importBitmap(fileData, addCostumeFromBuffer);
+        let dataURI = fileData;
+        if (fileData instanceof ArrayBuffer) {
+            dataURI = bitmapAdapter.convertBinaryToDataURI(fileData, fileType);
+        }
+        // @todo show an error message to user on failure?
+        bitmapAdapter.importBitmap(dataURI).then(value => addCostumeFromBuffer(value));
     }
 };
 

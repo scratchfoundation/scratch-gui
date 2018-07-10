@@ -164,8 +164,8 @@ class CostumeTab extends React.Component {
         const vmCostume = {
             name: item.name,
             md5: item.md5,
-            rotationCenterX: item.info[0],
-            rotationCenterY: item.info[1],
+            rotationCenterX: item.info[0] / 2,
+            rotationCenterY: item.info[1] / 2,
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };

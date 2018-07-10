@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import keyMirror from 'keymirror';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
@@ -38,7 +37,6 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
-    intl: intlShape,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
@@ -46,9 +44,7 @@ ConnectionModalComponent.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-const IntlModal = injectIntl(ConnectionModalComponent);
-
 export {
-    IntlModal as default,
+    ConnectionModalComponent as default,
     PHASES
 };

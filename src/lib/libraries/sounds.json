@@ -1119,6 +1119,14 @@
         ]
     },
     {
+        "name": "Dance Celebrate2",
+        "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
+        "sampleCount": 176401,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": []
+    },
+    {
         "name": "Dance Chill Out",
         "md5": "b235da45581b1f212c9e9cce70d2a2dc.wav",
         "sampleCount": 222822,

@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside, ...props}) => (
+const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box
         className={classNames({
             [styles.stageOnly]: isPlayerOnly
@@ -28,14 +28,15 @@ const Player = ({isPlayerOnly, onSeeInside, ...props}) => (
         <GUI
             enableCommunity
             isPlayerOnly={isPlayerOnly}
-            {...props}
+            projectId={projectId}
         />
     </Box>
 );
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
-    onSeeInside: PropTypes.func
+    onSeeInside: PropTypes.func,
+    projectId: PropTypes.number
 };
 
 const mapStateToProps = state => ({

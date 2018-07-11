@@ -56,13 +56,13 @@ class ConnectionModal extends React.Component {
         this.props.onCancel();
     }
     handleError () {
-        this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
+        this.props.onStatusButtonUpdate();
         this.setState({
             phase: PHASES.error
         });
     }
     handleConnected () {
-        this.props.onStatusButtonUpdate(this.props.extensionId, 'ready');
+        this.props.onStatusButtonUpdate();
         this.setState({
             phase: PHASES.connected
         });

@@ -83,6 +83,10 @@ $sides: 20rem;
     user-select: none;
 }
 
+.header-image {
+    margin-right: 0.5rem;
+}
+
 .header-item-filter {
     display: flex;
     flex-basis: $sides;

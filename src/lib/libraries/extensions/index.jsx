@@ -12,10 +12,10 @@ import boostImage from './boost.png';
 import translateImage from './translate.png';
 
 import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
-import ev3MenuImage from './device-connection/ev3/ev3-menu-icon.svg';
+import ev3MenuImage from './device-connection/ev3/ev3-small.svg';
 
 import microbitDeviceImage from './device-connection/microbit/microbit-illustration.svg';
-import microbitMenuImage from './device-connection/microbit/microbit-menu-icon.svg';
+import microbitMenuImage from './device-connection/microbit/microbit-small.svg';
 
 export default [
     {

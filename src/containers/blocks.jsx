@@ -366,9 +366,10 @@ class Blocks extends React.Component {
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
     }
     handlePromptCallback (input, optionSelection) {
-        this.state.prompt.callback(input, optionSelection,
-            (optionSelection === 'local') ? [] :
-                this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType));
+        this.state.prompt.callback(
+            input,
+            this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType),
+            optionSelection);
         this.handlePromptClose();
     }
     handlePromptClose () {

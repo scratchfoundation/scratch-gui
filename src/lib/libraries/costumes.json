@@ -960,62 +960,6 @@
         ]
     },
     {
-        "name": "Bear1-a",
-        "md5": "598722f70e86e6f9b23ef97680baaa9c.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "mammal"
-        ],
-        "info": [
-            56,
-            93,
-            1
-        ]
-    },
-    {
-        "name": "Bear1-b",
-        "md5": "76ceb0de4409f42713b50cbc1fb45af5.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "mammal"
-        ],
-        "info": [
-            56,
-            93,
-            1
-        ]
-    },
-    {
-        "name": "Bear2-a",
-        "md5": "3eb8e16a983ff23c418374389c81bd30.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "bear"
-        ],
-        "info": [
-            37,
-            42,
-            1
-        ]
-    },
-    {
-        "name": "Bear2-b",
-        "md5": "12bb6960ac01b65ae9b5e5e7f79700ac.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "bear"
-        ],
-        "info": [
-            51,
-            42,
-            1
-        ]
-    },
-    {
         "name": "Beetle",
         "md5": "e1ce8f153f011fdd52486c91c6ed594d.svg",
         "type": "costume",
@@ -1346,7 +1290,7 @@
         ]
     },
     {
-        "name": "Butterfly-a",
+        "name": "Butterfly1-a",
         "md5": "8419d4851defd1e862e4f7c1699d2190.svg",
         "type": "costume",
         "tags": [
@@ -1363,7 +1307,7 @@
         ]
     },
     {
-        "name": "Butterfly-b",
+        "name": "Butterfly1-b",
         "md5": "0873714e8d55d9eeb0bc8e8ab64441cc.svg",
         "type": "costume",
         "tags": [
@@ -1380,7 +1324,7 @@
         ]
     },
     {
-        "name": "Butterfly-c",
+        "name": "Butterfly1-c",
         "md5": "9c422631ca8d46413487f5dd627b65c6.svg",
         "type": "costume",
         "tags": [
@@ -1397,7 +1341,7 @@
         ]
     },
     {
-        "name": "Butterfly1-a",
+        "name": "Butterfly2-a",
         "md5": "836d4cc7889f4a1cbcb0303934f31f79.svg",
         "type": "costume",
         "tags": [
@@ -1415,44 +1359,8 @@
         ]
     },
     {
-        "name": "Butterfly1-b",
+        "name": "Butterfly2-b",
         "md5": "55dd0671a359d7c35f7b78f4176660e8.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "drawing",
-            "happy",
-            "bug",
-            "insect",
-            "antennae"
-        ],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Butterfly2",
-        "md5": "a0216895beade6afc6d42bd5bb43faea.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "drawing",
-            "happy",
-            "bug",
-            "insect",
-            "antennae"
-        ],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Butterfly3",
-        "md5": "8907a43cf08b0a9134969023be2074c5.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1606,7 +1514,7 @@
     },
     {
         "name": "Cake-a",
-        "md5": "97ab3596dc06510e963fa29795e663bf.svg",
+        "md5": "e1e8e8a765b8778d6181035c5c66984d.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -1625,7 +1533,7 @@
     },
     {
         "name": "Cake-b",
-        "md5": "61d5481955a2f42cb843d09506f6744e.svg",
+        "md5": "460268a804e7682c9fabf37e4b70071c.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -1843,17 +1751,20 @@
     },
     {
         "name": "Cat2",
-        "md5": "01ae57fd339529445cb890978ef8a054.svg",
+        "md5": "3696356a03a8d938318876a593572843.svg",
         "type": "costume",
         "tags": [
-            "kitty",
-            "kitten",
             "animals",
-            "mammal"
+            "cat",
+            "kitten",
+            "kitty",
+            "mammal",
+            "orange",
+            "scratch cat"
         ],
         "info": [
-            87,
-            39,
+            47,
+            55,
             1
         ]
     },
@@ -2276,57 +2187,6 @@
         "info": [
             75,
             75,
-            1
-        ]
-    },
-    {
-        "name": "Creature1-a",
-        "md5": "a560c6eab2e1de2462bdaeb1d698736c.svg",
-        "type": "costume",
-        "tags": [
-            "people",
-            "animals",
-            "fantasy",
-            "monsters",
-            "holiday"
-        ],
-        "info": [
-            54,
-            80,
-            1
-        ]
-    },
-    {
-        "name": "Creature1-b",
-        "md5": "8042b71fc2ae322151c0a3a163701333.svg",
-        "type": "costume",
-        "tags": [
-            "people",
-            "animals",
-            "fantasy",
-            "monsters",
-            "holiday"
-        ],
-        "info": [
-            60,
-            78,
-            1
-        ]
-    },
-    {
-        "name": "Creature1-c",
-        "md5": "e12a83c8f1c0545b59fe8673e9fac79c.svg",
-        "type": "costume",
-        "tags": [
-            "people",
-            "animals",
-            "fantasy",
-            "monsters",
-            "holiday"
-        ],
-        "info": [
-            63,
-            164,
             1
         ]
     },
@@ -5267,8 +5127,8 @@
         ]
     },
     {
-        "name": "Horse1-a",
-        "md5": "32f4d80477cd070cb0848e555d374060.svg",
+        "name": "Horse-a",
+        "md5": "83a698304f00242a34ddd63b1525373b.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5285,8 +5145,8 @@
         ]
     },
     {
-        "name": "Horse1-b",
-        "md5": "ffa6431c5ef2a4e975ecffacdb0efea7.svg",
+        "name": "Horse-b",
+        "md5": "2e7d212692b46b049a9ebc1224edd990.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -6770,7 +6630,7 @@
     },
     {
         "name": "Muffin-a",
-        "md5": "e00161f08c77d10e72e44b6e01243e63.svg",
+        "md5": "18da0857a1b7f1c960146d2b85edd10f.svg",
         "type": "costume",
         "tags": [
             "food"
@@ -6783,7 +6643,7 @@
     },
     {
         "name": "Muffin-b",
-        "md5": "fb60c3f8d6a892813299daa33b91df23.svg",
+        "md5": "a89f3b99bf4cccfaeb1b39e25633c53c.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6953,7 +6813,7 @@
     },
     {
         "name": "Orange",
-        "md5": "780ee2ef342f79a81b4c353725331138.svg",
+        "md5": "27d5dfbadceea215e983d2641ce3e51f.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6967,7 +6827,7 @@
     },
     {
         "name": "Orange2-a",
-        "md5": "89b11d2a404c3972b65743f743cc968a.svg",
+        "md5": "8a7d8515df41f83c1326ec3233a3a42a.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6982,7 +6842,7 @@
     },
     {
         "name": "Orange2-b",
-        "md5": "5f7998e007dfa70e70bbd8d43199ebba.svg",
+        "md5": "70c7f1822ffdb37157c304273dae9102.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6992,21 +6852,6 @@
         "info": [
             49,
             27,
-            1
-        ]
-    },
-    {
-        "name": "Orange2-c",
-        "md5": "466e9e2d62ee135a2dabd5593e6f8407.svg",
-        "type": "costume",
-        "tags": [
-            "food",
-            "fruit",
-            "eaten"
-        ],
-        "info": [
-            49,
-            33,
             1
         ]
     },
@@ -9097,7 +8942,7 @@
     },
     {
         "name": "Taco-a",
-        "md5": "d224b30c54bd4d6000c935938c7f5d7e.svg",
+        "md5": "d4a2cea411c6030f017f25184562559d.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9106,14 +8951,14 @@
             "delicious"
         ],
         "info": [
-            20,
+            19,
             15,
             1
         ]
     },
     {
         "name": "Taco-b",
-        "md5": "6dee4f866d79e6475d9824ba11973037.svg",
+        "md5": "cef6f6d7c92fc1f008077319ac12dc5e.svg",
         "type": "costume",
         "tags": [
             "food",

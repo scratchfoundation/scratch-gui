@@ -442,8 +442,8 @@
         ]
     },
     {
-        "name": "Jurassic",
-        "md5": "ad5bd6c10d2afb79d298817ec24a47fd.svg",
+        "name": "Jurrasic",
+        "md5": "64025bdca5db4938f65597e3682fddcf.svg",
         "type": "backdrop",
         "tags": [
             "outdoors",
@@ -593,20 +593,6 @@
             960,
             720,
             2
-        ]
-    },
-    {
-        "name": "Ocean",
-        "md5": "fb907f72b310acc8b95cbf2d2cccabc9.svg",
-        "type": "backdrop",
-        "tags": [
-            "underwater",
-            "ipzy"
-        ],
-        "info": [
-            480,
-            360,
-            1
         ]
     },
     {
@@ -890,11 +876,12 @@
         ]
     },
     {
-        "name": "Spotlight Stage",
+        "name": "Stage",
         "md5": "d26bf4c3980163d9106625cc2ea6c50d.png",
         "type": "backdrop",
         "tags": [
-            "music"
+            "music",
+            "dance"
         ],
         "info": [
             960,
@@ -969,6 +956,22 @@
             960,
             720,
             2
+        ]
+    },
+    {
+        "name": "Underwater 1",
+        "md5": "fb907f72b310acc8b95cbf2d2cccabc9.svg",
+        "type": "backdrop",
+        "tags": [
+            "ocean",
+            "outdoors",
+            "underwater",
+            "ipzy"
+        ],
+        "info": [
+            480,
+            360,
+            1
         ]
     },
     {

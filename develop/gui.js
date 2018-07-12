@@ -1,17 +1,27 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1455:
+/***/ 1429:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 1458:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
+// For Safari 9
 
-__webpack_require__(1454);
+__webpack_require__(1457);
 
-__webpack_require__(1452);
+__webpack_require__(1455);
+
+__webpack_require__(1431);
 
 var _react = __webpack_require__(0);
 
@@ -116,5 +126,5 @@ if(false) {}
 
 /***/ })
 
-},[[1455,0]]]);
+},[[1458,0]]]);
 //# sourceMappingURL=gui.js.map

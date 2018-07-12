@@ -132,7 +132,10 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         addCostumeFromBuffer(new Uint8Array(fileData));
     } else {
         // otherwise it's a bitmap
-        bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer);
+        bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer)
+            .catch(e => {
+                log.error(e);
+            });
     }
 };
 

@@ -129,7 +129,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         // passing in an array buffer causes the sprite/costume
         // thumbnails to not display because the data URI for the costume
         // is invalid
-        addCostumeFromBuffer(null, new Uint8Array(fileData));
+        addCostumeFromBuffer(new Uint8Array(fileData));
     } else {
         // otherwise it's a bitmap
         bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer);

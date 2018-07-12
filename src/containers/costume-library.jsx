@@ -26,7 +26,8 @@ class CostumeLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelected (item) {
-        const type = item.md5.split('.')[1];
+        const split = item.md5.split('.');
+        const type = split.length > 1 ? split[1] : null;
         const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
         const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
         const vmCostume = {

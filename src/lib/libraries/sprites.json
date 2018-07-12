@@ -12022,7 +12022,7 @@
     },
     {
         "name": "Sam",
-        "md5": "34d9a8e7219748da7838a21b3a3a6e82.png",
+        "md5": "8208e99159b36c957fb9fbc187e51bc7.png",
         "type": "sprite",
         "tags": [
             "people"
@@ -12048,10 +12048,10 @@
                 {
                     "costumeName": "sam",
                     "baseLayerID": 0,
-                    "baseLayerMD5": "34d9a8e7219748da7838a21b3a3a6e82.png",
+                    "baseLayerMD5": "8208e99159b36c957fb9fbc187e51bc7.png",
                     "bitmapResolution": 2,
-                    "rotationCenterX": 112,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 117,
+                    "rotationCenterY": 159
                 }
             ],
             "currentCostumeIndex": 0,
@@ -13900,7 +13900,7 @@
             "costumes": [
                 {
                     "costumeName": "tennisball",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "34fa36004be0340ec845ba6bbeb5e5d5.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 30,

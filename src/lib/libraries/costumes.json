@@ -1751,17 +1751,20 @@
     },
     {
         "name": "Cat2",
-        "md5": "01ae57fd339529445cb890978ef8a054.svg",
+        "md5": "3696356a03a8d938318876a593572843.svg",
         "type": "costume",
         "tags": [
-            "kitty",
-            "kitten",
             "animals",
-            "mammal"
+            "cat",
+            "kitten",
+            "kitty",
+            "mammal",
+            "orange",
+            "scratch cat"
         ],
         "info": [
-            87,
-            39,
+            47,
+            55,
             1
         ]
     },
@@ -8246,14 +8249,14 @@
     },
     {
         "name": "Sam",
-        "md5": "34d9a8e7219748da7838a21b3a3a6e82.png",
+        "md5": "8208e99159b36c957fb9fbc187e51bc7.png",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            224,
-            360,
+            234,
+            318,
             2
         ]
     },

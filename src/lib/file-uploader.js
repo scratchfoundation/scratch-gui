@@ -132,12 +132,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         addCostumeFromBuffer(null, new Uint8Array(fileData));
     } else {
         // otherwise it's a bitmap
-        let dataURI = fileData;
-        if (fileData instanceof ArrayBuffer) {
-            dataURI = bitmapAdapter.convertBinaryToDataURI(fileData, fileType);
-        }
-        // @todo show an error message to user on failure?
-        bitmapAdapter.importBitmap(dataURI).then(value => addCostumeFromBuffer(value));
+        bitmapAdapter.importBitmap(fileData, fileType).then(value => addCostumeFromBuffer(value));
     }
 };
 

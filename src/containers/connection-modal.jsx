@@ -57,9 +57,18 @@ class ConnectionModal extends React.Component {
     }
     handleError () {
         this.props.onStatusButtonUpdate();
-        this.setState({
-            phase: PHASES.error
-        });
+        // Assume errors that come in during scanning phase are the result of not
+        // having scratch-link installed.
+        console.log('error', this.state.phase);
+        if (this.state.phase === PHASES.scanning || this.state.phase === PHASES.unavailable) {
+            this.setState({
+                phase: PHASES.unavailable
+            });
+        } else {
+            this.setState({
+                phase: PHASES.error
+            });
+        }
     }
     handleConnected () {
         this.props.onStatusButtonUpdate();

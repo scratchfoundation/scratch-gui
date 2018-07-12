@@ -85,7 +85,9 @@
         "name": "Beach Malibu",
         "md5": "050615fe992a00d6af0e664e497ebf53.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors"
+        ],
         "info": [
             960,
             720,
@@ -96,7 +98,9 @@
         "name": "Beach Rio",
         "md5": "968f0ede6e70e1dbb763d6fd4c5003e0.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors"
+        ],
         "info": [
             960,
             720,
@@ -107,7 +111,9 @@
         "name": "Bedroom 2",
         "md5": "e2f8b0dbd0a65d2ad8bfc21616662a6a.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors"
+        ],
         "info": [
             960,
             720,
@@ -118,7 +124,9 @@
         "name": "Bedroom 3",
         "md5": "8cc0b88d53345b3e337e8f028a32a4e7.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors"
+        ],
         "info": [
             960,
             720,
@@ -129,7 +137,11 @@
         "name": "Bench With View",
         "md5": "962201a2b712a302fb087f8f0dcb2076.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "hill",
+            "view"
+        ],
         "info": [
             960,
             720,
@@ -154,7 +166,10 @@
         "name": "Boardwalk",
         "md5": "de0e54cd11551566f044e7e6bc588b2c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "ocean"
+        ],
         "info": [
             960,
             720,
@@ -165,7 +180,10 @@
         "name": "Canyon",
         "md5": "c7c0b27b959193a0b570a9639cfe8158.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature"
+        ],
         "info": [
             960,
             720,
@@ -176,7 +194,9 @@
         "name": "Castle 1",
         "md5": "e1914ed7917267f1c2ef2b48004cade9.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "fantasy"
+        ],
         "info": [
             960,
             720,
@@ -187,7 +207,9 @@
         "name": "Castle 2",
         "md5": "951765ee7f7370f120c9df20b577c22f.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "fantasy"
+        ],
         "info": [
             960,
             720,
@@ -198,7 +220,9 @@
         "name": "Castle 3",
         "md5": "76fa99f67569fcd39b4be74ed38c33f3.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "fantasy"
+        ],
         "info": [
             960,
             720,
@@ -209,7 +233,9 @@
         "name": "Castle 4",
         "md5": "4f45f79af8e8dac3d41eb5a06ade61d4.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "fantasy"
+        ],
         "info": [
             960,
             720,
@@ -220,7 +246,10 @@
         "name": "Chalkboard",
         "md5": "a8a24b5aa717bbef09dbe31368914427.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors",
+            "school"
+        ],
         "info": [
             960,
             720,
@@ -244,7 +273,10 @@
         "name": "City With Water",
         "md5": "1ef98019fc94ea65a1b55d5521285c7a.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "boston"
+        ],
         "info": [
             960,
             720,
@@ -287,7 +319,10 @@
         "name": "Field At Mit",
         "md5": "5b0a970202b464915915260c03f05455.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "architecture"
+        ],
         "info": [
             960,
             720,
@@ -298,7 +333,10 @@
         "name": "Flowers",
         "md5": "25a6ede51a96d4e55de2ffb81ae96f8c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature"
+        ],
         "info": [
             960,
             720,
@@ -324,7 +362,10 @@
         "name": "Greek Theater",
         "md5": "93d71e8b8a96cc007b8d68f36acd338a.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "theatre"
+        ],
         "info": [
             960,
             720,
@@ -335,7 +376,9 @@
         "name": "Hall",
         "md5": "ea86ca30b346f27ca5faf1254f6a31e3.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors"
+        ],
         "info": [
             960,
             720,
@@ -346,7 +389,10 @@
         "name": "Hay Field",
         "md5": "da102a69d135973e0fc139131dec785a.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "farm"
+        ],
         "info": [
             960,
             720,
@@ -370,7 +416,10 @@
         "name": "Hill",
         "md5": "2129c842f28d6881f622fdc3497ff2da.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature"
+        ],
         "info": [
             960,
             720,
@@ -424,7 +473,11 @@
         "name": "Metro",
         "md5": "0b4a15ba028bf205ec051390d6ac4de7.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "city",
+            "urban"
+        ],
         "info": [
             960,
             720,
@@ -466,7 +519,13 @@
         "name": "Mural",
         "md5": "efb625f7e0b199b15f69e116cd053cea.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "mural",
+            "graffiti",
+            "street",
+            "art"
+        ],
         "info": [
             960,
             720,
@@ -493,7 +552,11 @@
         "name": "Neon Tunnel",
         "md5": "57d2b13b2f73d3d878c72810c137b0d6.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "games",
+            "game",
+            "space"
+        ],
         "info": [
             960,
             720,
@@ -504,7 +567,12 @@
         "name": "Night City",
         "md5": "6fdc795ff487204f72740567be5f64f9.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "urban",
+            "city",
+            "metro"
+        ],
         "info": [
             960,
             720,
@@ -515,7 +583,12 @@
         "name": "Night City With Street",
         "md5": "14443ad7907b6479d7562a12b8ae0efb.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "urban",
+            "city",
+            "metro",
+            "transportation"
+        ],
         "info": [
             960,
             720,
@@ -554,7 +627,10 @@
         "name": "Pathway",
         "md5": "5d747ec036755a4b129f0d5b978bc61c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "garden"
+        ],
         "info": [
             960,
             720,
@@ -565,7 +641,10 @@
         "name": "Playground",
         "md5": "e5f794c8756ca0cead5cb7e7fe354c41.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "play"
+        ],
         "info": [
             960,
             720,
@@ -576,7 +655,10 @@
         "name": "Playing Field",
         "md5": "2de108f3098e92f5c5976cf75d38e99d.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "sports"
+        ],
         "info": [
             960,
             720,
@@ -587,7 +669,12 @@
         "name": "Pool",
         "md5": "6cab934df643d2fc508cfa90c0c4059b.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "sports",
+            "swim",
+            "swimming"
+        ],
         "info": [
             960,
             720,
@@ -627,7 +714,11 @@
         "name": "Room 1",
         "md5": "a81668321aa3dcc0fc185d3e36ae76f6.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors",
+            "books",
+            "library"
+        ],
         "info": [
             960,
             720,
@@ -638,7 +729,9 @@
         "name": "Room 2",
         "md5": "05ae3e3bbea890a6e3552ffe8456775e.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "indoors"
+        ],
         "info": [
             960,
             720,
@@ -666,7 +759,12 @@
         "name": "School",
         "md5": "1dea69ac0f62cf538d368a7bde1372ac.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "building",
+            "education",
+            "learning"
+        ],
         "info": [
             960,
             720,
@@ -677,7 +775,14 @@
         "name": "Slopes",
         "md5": "63b6a69594a0a87888b56244bfa2ac1b.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "winter",
+            "ski",
+            "snowboard",
+            "cold",
+            "snow"
+        ],
         "info": [
             960,
             720,
@@ -788,7 +893,9 @@
         "name": "Spotlight Stage",
         "md5": "d26bf4c3980163d9106625cc2ea6c50d.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "music"
+        ],
         "info": [
             960,
             720,
@@ -841,7 +948,9 @@
         "name": "Theater 2",
         "md5": "061a78ed83495dd0acd6d62e83e1b972.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "music"
+        ],
         "info": [
             960,
             720,
@@ -852,7 +961,10 @@
         "name": "Tree",
         "md5": "a23fbf972001c94637b568992f8fd7bd.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature"
+        ],
         "info": [
             960,
             720,
@@ -863,7 +975,11 @@
         "name": "Underwater 2",
         "md5": "1517c21786d2d0edc2f3037408d850bd.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature",
+            "underwater"
+        ],
         "info": [
             960,
             720,
@@ -874,7 +990,12 @@
         "name": "Urban",
         "md5": "1679049718869e1f548e1e8823e29c1c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "city",
+            "metro",
+            "transportation"
+        ],
         "info": [
             960,
             720,
@@ -885,7 +1006,10 @@
         "name": "Wall 1",
         "md5": "7e5327c68ff6ddabc48dbfe4717a04fe.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "brick"
+        ],
         "info": [
             960,
             720,
@@ -896,7 +1020,10 @@
         "name": "Wall 2",
         "md5": "82d867fcd9f1b5f49e29c2f853d55665.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "brick"
+        ],
         "info": [
             960,
             720,
@@ -907,7 +1034,13 @@
         "name": "Water And Rocks",
         "md5": "0015433a406a53f00b792424b823268c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "nature",
+            "tree",
+            "river",
+            "stream"
+        ],
         "info": [
             960,
             720,
@@ -985,7 +1118,10 @@
         "name": "Woods And Bench",
         "md5": "4fcf7ed0de6c6b6e9b52c511b0650e9c.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "outdoors",
+            "park"
+        ],
         "info": [
             960,
             720,
@@ -996,7 +1132,11 @@
         "name": "Xy-grid",
         "md5": "9838d02002d05f88dc54d96494fbc202.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "grid",
+            "xy",
+            "coordinates"
+        ],
         "info": [
             960,
             720,
@@ -1007,7 +1147,11 @@
         "name": "Xy-grid-20px",
         "md5": "4eec0e1db92b8dea3e5bee25105e8f46.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "grid",
+            "xy",
+            "coordinates"
+        ],
         "info": [
             960,
             720,
@@ -1018,7 +1162,11 @@
         "name": "Xy-grid-30px",
         "md5": "3b8bcabd0ac683b7cb3673208039764b.png",
         "type": "backdrop",
-        "tags": [],
+        "tags": [
+            "grid",
+            "xy",
+            "coordinates"
+        ],
         "info": [
             960,
             720,

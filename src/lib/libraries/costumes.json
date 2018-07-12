@@ -63,7 +63,10 @@
         "name": "Amon",
         "md5": "60f720956ab1840431dcf0616ce98f14.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             348,
             324,
@@ -72,9 +75,12 @@
     },
     {
         "name": "Anina Pop Down",
-        "md5": "e9e54ff1fa61c71507e25540d0326177.png",
+        "md5": "e3698b76cb0864df2fbaba80e6bd8067.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             312,
@@ -83,9 +89,12 @@
     },
     {
         "name": "Anina Pop Front",
-        "md5": "c163f1002f61421816386e52522b9133.png",
+        "md5": "832a3ae650a1f3bede1e0c9f1779e535.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             136,
             540,
@@ -94,9 +103,12 @@
     },
     {
         "name": "Anina Pop L Arm",
-        "md5": "843bff4a5ee3d61fd8cbd419cb2797a3.png",
+        "md5": "62c50c90535b64f2ae130a5c680ddcb4.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             136,
             548,
@@ -105,9 +117,12 @@
     },
     {
         "name": "Anina Pop Left",
-        "md5": "9fda30f66d51b2ad5f6fe11d57e199d6.png",
+        "md5": "d86bb27b4f8d7b70c39c96f29c6943b4.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             476,
             532,
@@ -116,9 +131,12 @@
     },
     {
         "name": "Anina Pop R Arm",
-        "md5": "e7e1a86233b7ad28d6ee9970b152be20.png",
+        "md5": "eac2b5f7db5e81d00c43486179b8dcf8.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             176,
             544,
@@ -127,9 +145,12 @@
     },
     {
         "name": "Anina Pop Right",
-        "md5": "cc2594e9278494e82f725be34369f178.png",
+        "md5": "7bb9c790b02231e1272701167c26b17a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             132,
             536,
@@ -138,9 +159,12 @@
     },
     {
         "name": "Anina Pop Stand",
-        "md5": "de7cab2c8d567d49a5a1f378b5709bb4.png",
+        "md5": "105f4f3d260dcb8bea02ea9ee5d18cf4.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             152,
             552,
@@ -149,9 +173,12 @@
     },
     {
         "name": "Anina R Cross",
-        "md5": "22f3ca23b2f0ac67f8ebc36a8c3116a0.png",
+        "md5": "f0d4dce1006cf447a0a4b53e0a8d0519.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             252,
             536,
@@ -160,9 +187,12 @@
     },
     {
         "name": "Anina Stance",
-        "md5": "95a05adaa91532651a4b79d5ba3ebe49.png",
+        "md5": "9374e067ca4b66427fc64a0822f6e468.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             152,
             504,
@@ -171,9 +201,12 @@
     },
     {
         "name": "Anina Top Freeze",
-        "md5": "dd67565519bdebea1b931deb19621384.png",
+        "md5": "a1c9b65dd07747964cce642f9099921b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             220,
             536,
@@ -182,9 +215,12 @@
     },
     {
         "name": "Anina Top L Step",
-        "md5": "62a89d8c6f7680e342132fcde59b2a5d.png",
+        "md5": "ed90e8b7a05c1552194af597ac0637cd.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             456,
             548,
@@ -193,9 +229,12 @@
     },
     {
         "name": "Anina Top R Step",
-        "md5": "0477f7105d02b9a902382eca080476dc.png",
+        "md5": "2d208a34e74fdce9dab9d4c585dcfa2b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             496,
             544,
@@ -204,9 +243,12 @@
     },
     {
         "name": "Anina Top Stand",
-        "md5": "34d6362cb4030d92be6fec73300f0aec.png",
+        "md5": "db6c03113f71b91f22a9f3351f90e5bf.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             560,
@@ -1605,7 +1647,9 @@
         "name": "Calvrett Jumping",
         "md5": "452683db3ad7a882f5ab9de496441592.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             336,
             432,
@@ -1616,7 +1660,9 @@
         "name": "Calvrett Thinking",
         "md5": "728ec1ebc275b53809023a36c66eeaa3.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             212,
             340,
@@ -1691,7 +1737,10 @@
         "name": "Cassy-a",
         "md5": "6cb3686db1fa658b6541cc9fa3ccfcc7.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             208,
             384,
@@ -1702,7 +1751,10 @@
         "name": "Cassy-b",
         "md5": "f801cec764da5ef6374e1d557296d14e.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             280,
             384,
@@ -1713,7 +1765,10 @@
         "name": "Cassy-c",
         "md5": "63483bbf72fc55719918a335e1a16426.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             376,
@@ -1724,7 +1779,10 @@
         "name": "Cassy-d",
         "md5": "aca39a47cf3affd8a83d3287d2856c29.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             188,
             360,
@@ -1785,20 +1843,17 @@
     },
     {
         "name": "Cat2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "costume",
         "tags": [
-            "animals",
-            "cat",
-            "kitten",
             "kitty",
-            "mammal",
-            "orange",
-            "scratch cat"
+            "kitten",
+            "animals",
+            "mammal"
         ],
         "info": [
-            47,
-            55,
+            87,
+            39,
             1
         ]
     },
@@ -1932,9 +1987,12 @@
     },
     {
         "name": "Champ99-a",
-        "md5": "b940c99d8e677ac5773cb4d592b16734.png",
+        "md5": "9e4e87818854cfc281d8dcc3e21ee672.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             496,
             612,
@@ -1943,9 +2001,12 @@
     },
     {
         "name": "Champ99-b",
-        "md5": "2ebc7632bc9e665d9eeea93190fad7ad.png",
+        "md5": "d6ae13605610aa008d48b0c8b25a57d3.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             328,
             580,
@@ -1954,9 +2015,12 @@
     },
     {
         "name": "Champ99-c",
-        "md5": "bfcff80b0044c644c555ba24f2484106.png",
+        "md5": "26fdff424232926001d20041c3d5673b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             304,
             540,
@@ -1965,9 +2029,12 @@
     },
     {
         "name": "Champ99-d",
-        "md5": "34de53e52a768d60a96e3ae0c030dfc5.png",
+        "md5": "a28ffc2b129fb359ff22c79c48341267.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             376,
             520,
@@ -1976,9 +2043,12 @@
     },
     {
         "name": "Champ99-e",
-        "md5": "0cb685bf8584df9caf124da929ab3453.png",
+        "md5": "56f3220fa82d99dcfc7d27d433ed01e4.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             380,
             496,
@@ -1987,9 +2057,12 @@
     },
     {
         "name": "Champ99-f",
-        "md5": "516d30b29aed8145718db421f4737953.png",
+        "md5": "68453506ae4b6b60a3fc6817ba39d492.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             228,
             500,
@@ -1998,9 +2071,12 @@
     },
     {
         "name": "Champ99-g",
-        "md5": "49e0edcb319527d936981f06b4111d53.png",
+        "md5": "20318b14a332fd618ec91e7c1de8be9a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             264,
             516,
@@ -2008,10 +2084,12 @@
         ]
     },
     {
-        "name": "Cheesy-puffs",
-        "md5": "4c99a77ba72abaf6c961e8684f8a8a9f.png",
+        "name": "Cheesy Puffs",
+        "md5": "82772a61ec74974e84c686c61ea0b7d5.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "food"
+        ],
         "info": [
             174,
             144,
@@ -2133,7 +2211,10 @@
         "name": "Convertible",
         "md5": "5b883f396844ff5cfecd7c95553fa4fb.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "car",
+            "transportation"
+        ],
         "info": [
             360,
             88,
@@ -2281,20 +2362,24 @@
     },
     {
         "name": "Dan-a",
-        "md5": "1baa5b126e0e14d6070a997c0deefab5.png",
+        "md5": "307250744e230fb15e7062238bf2634c.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            36,
-            100,
-            1
+            144,
+            392,
+            2
         ]
     },
     {
         "name": "Dan-b",
         "md5": "89b55d049f4b3811676311df00681385.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             188,
             400,
@@ -2782,9 +2867,12 @@
     },
     {
         "name": "Dm Freeze",
-        "md5": "31e687f186b19ea120cd5cfc9dea2a3f.png",
+        "md5": "a4b5d644d9abdbcab236acf19b2a2e81.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             440,
             468,
@@ -2793,9 +2881,12 @@
     },
     {
         "name": "Dm Pop Down",
-        "md5": "3b65ce3551f9c111794f7f1fb8f325be.png",
+        "md5": "729812366245c0dafd456339c9d94e08.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             128,
             148,
@@ -2804,9 +2895,12 @@
     },
     {
         "name": "Dm Pop Front",
-        "md5": "0b2fb609d6d10decfdd5a1c3b58369b4.png",
+        "md5": "70da166596bb484eae1bfbaad5c03d54.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             184,
             468,
@@ -2815,9 +2909,12 @@
     },
     {
         "name": "Dm Pop L Arm",
-        "md5": "426e1520efc34fef45be0596fd5f7120.png",
+        "md5": "3cdebabdb41f6c3e84561cf3ea87bac3.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             180,
             476,
@@ -2826,9 +2923,12 @@
     },
     {
         "name": "Dm Pop Left",
-        "md5": "f636510e8ef231d7c0e72a572ce91c99.png",
+        "md5": "32ec7b5332cfebd1cfed7f6b79c76e67.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             408,
             500,
@@ -2837,9 +2937,12 @@
     },
     {
         "name": "Dm Pop R Arm",
-        "md5": "56fe91d2cf3ecb9d1b94006aee9eff79.png",
+        "md5": "50faf1630ea383c0b8c77f70a9329797.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             160,
             480,
@@ -2848,9 +2951,12 @@
     },
     {
         "name": "Dm Pop Right",
-        "md5": "36b32430e45e071071052ef33c637f48.png",
+        "md5": "19bd7995d37e3baade673b2fe7cb982b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             156,
             476,
@@ -2859,9 +2965,12 @@
     },
     {
         "name": "Dm Pop Stand",
-        "md5": "370cc57b40f1f1d6e52d6330b73d207f.png",
+        "md5": "05529eb3c09294bd15f57c6f10d5894e.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             200,
             488,
@@ -2872,7 +2981,10 @@
         "name": "Dm Stance",
         "md5": "b30a60d31aebead577b73affd22bf30f.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             55,
             119,
@@ -2881,9 +2993,12 @@
     },
     {
         "name": "Dm Top L Leg",
-        "md5": "fd8bb9665fe078d2d95dbc35bccf4046.png",
+        "md5": "344384a6a3f1bdf494cc7af31e928d36.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             460,
             480,
@@ -2892,9 +3007,12 @@
     },
     {
         "name": "Dm Top R Leg",
-        "md5": "fcb8c2b6cf9b7e6ce9df521b2486deb3.png",
+        "md5": "6cea0c29c460e571226cc4cff5b97c28.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             436,
             464,
@@ -2914,56 +3032,15 @@
     },
     {
         "name": "Dm Top Stand",
-        "md5": "cbf035d39d0a0bb070d2eb998cebd60d.png",
+        "md5": "051c36758b9fd1136b511efc5dd6234a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             164,
             488,
-            2
-        ]
-    },
-    {
-        "name": "Dog Puppy Back",
-        "md5": "88559ad0334a8a51aca31035068682f6.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            468,
-            188,
-            2
-        ]
-    },
-    {
-        "name": "Dog Puppy Right",
-        "md5": "4c608ab4ac1fb0c5d46e71d6f438b821.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            214,
-            206,
-            2
-        ]
-    },
-    {
-        "name": "Dog Puppy Side",
-        "md5": "63c3d6718943ecbf48f94b3b131ae8a4.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            208,
-            228,
-            2
-        ]
-    },
-    {
-        "name": "Dog Puppy Sit",
-        "md5": "00b1589467f939b9c61f666bca2d25d1.png",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            174,
-            224,
             2
         ]
     },
@@ -3817,31 +3894,39 @@
     },
     {
         "name": "Football Running",
-        "md5": "422b34b6e5a2fdb8d0ac00aca91ec714.png",
+        "md5": "7ee31371b2eafba57cc5a78fc1a787fe.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "sports"
+        ],
         "info": [
-            47,
-            100,
-            1
+            184,
+            400,
+            2
         ]
     },
     {
         "name": "Football Standing",
-        "md5": "1f57154842f68aa55577edc90a6f2b32.png",
+        "md5": "c717def72c8bd98749284d31b51d7097.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "sports"
+        ],
         "info": [
-            37,
-            100,
-            1
+            148,
+            400,
+            2
         ]
     },
     {
         "name": "Fortune Cookie",
         "md5": "c56dcaa1fa4e3c9740142b93d5982850.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "food"
+        ],
         "info": [
             120,
             124,
@@ -3987,7 +4072,9 @@
         "name": "Fruit Platter",
         "md5": "6c3252378da3334f63eebddbed3fae91.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "food"
+        ],
         "info": [
             296,
             156,
@@ -4651,7 +4738,13 @@
         "name": "Hannah-a",
         "md5": "b983d99560313e38b4b3cd36cbd5f0d1.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "run",
+            "running",
+            "sprint",
+            "sports"
+        ],
         "info": [
             276,
             252,
@@ -4662,7 +4755,10 @@
         "name": "Hannah-b",
         "md5": "d0c3b4b24fbf1152de3ebb68f6b875ae.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "sports"
+        ],
         "info": [
             96,
             320,
@@ -4673,7 +4769,10 @@
         "name": "Hannah-c",
         "md5": "5fdce07935156bbcf943793fa84e826c.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "sports"
+        ],
         "info": [
             340,
             260,
@@ -5207,7 +5306,9 @@
         "name": "Jaime Walking-a",
         "md5": "d6cc9814f7a6640e4c2b1a4276987dc5.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             212,
             344,
@@ -5218,7 +5319,9 @@
         "name": "Jaime Walking-b",
         "md5": "7fb579a98d6db257f1b16109d3c4609a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             104,
             352,
@@ -5229,7 +5332,9 @@
         "name": "Jaime Walking-c",
         "md5": "5883bdefba451aaeac8d77c798d41eb0.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             176,
             340,
@@ -5240,7 +5345,9 @@
         "name": "Jaime Walking-d",
         "md5": "4b9d2162e30dbb924840575ed35fddb0.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             92,
             348,
@@ -5251,7 +5358,9 @@
         "name": "Jaime Walking-e",
         "md5": "63e56d28cc3e3d9b735e1f1d51248cc0.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             168,
             344,
@@ -5262,7 +5371,9 @@
         "name": "Jaime-a",
         "md5": "3ddc912edef87ae29121f57294fa0cb5.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             152,
             308,
@@ -5273,7 +5384,9 @@
         "name": "Jaime-b",
         "md5": "5a683f4536abca0f83a77bc341df4c9a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             136,
             308,
@@ -5467,9 +5580,12 @@
     },
     {
         "name": "Jo Pop Down",
-        "md5": "95a0f1bb3d8055a283aecc6bcb6303c9.png",
+        "md5": "a55fbb529c10f70bcb374aef8a63571b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             136,
             148,
@@ -5478,9 +5594,12 @@
     },
     {
         "name": "Jo Pop Front",
-        "md5": "0503f4d712bc3184cf1b5f830d0df993.png",
+        "md5": "3d3ea804243800981acabc7caba10939.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             140,
             456,
@@ -5489,9 +5608,12 @@
     },
     {
         "name": "Jo Pop L Arm",
-        "md5": "2a907e6edf8a101addb2c27d0568896a.png",
+        "md5": "a9fbc01a4124d555da12630312e46197.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             216,
             516,
@@ -5500,9 +5622,12 @@
     },
     {
         "name": "Jo Pop Left",
-        "md5": "98e8c2f9869f9356204ed19e43ae01cc.png",
+        "md5": "ea812b4c2b2405aa2b73158023298f71.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             392,
             452,
@@ -5511,9 +5636,12 @@
     },
     {
         "name": "Jo Pop R Arm",
-        "md5": "e633eb002deb20108bb5100d4b3a8fc5.png",
+        "md5": "a35a3bbc4e21ce2f5de940adb7017fa6.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             216,
             520,
@@ -5522,9 +5650,12 @@
     },
     {
         "name": "Jo Pop Right",
-        "md5": "7bf1600ee75facb510c2922f899fb97c.png",
+        "md5": "01dd2f553c7262329ebaba2516e3a2b1.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             132,
             484,
@@ -5533,9 +5664,12 @@
     },
     {
         "name": "Jo Pop Stand",
-        "md5": "361d1884737ef734f6a39fd66fc269ec.png",
+        "md5": "75ee2383fd83992b401c8a0730521d94.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             156,
             524,
@@ -5544,9 +5678,12 @@
     },
     {
         "name": "Jo Stance",
-        "md5": "34336e1105719a933e57c043e0b52998.png",
+        "md5": "e10d129d9be2147bc7d284e281d88e9a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             188,
             480,
@@ -5555,9 +5692,12 @@
     },
     {
         "name": "Jo Top L Cross",
-        "md5": "33660046a3d37fa762f4a634ee3df75d.png",
+        "md5": "2e2a6534d33883fdd2f8471a1adbebb7.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             168,
             536,
@@ -5566,9 +5706,12 @@
     },
     {
         "name": "Jo Top L Leg",
-        "md5": "987a667cd7984d9e5429c26b8a4cab2d.png",
+        "md5": "a12f40b18067bb31746f9cf461de88aa.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             416,
             536,
@@ -5577,9 +5720,12 @@
     },
     {
         "name": "Jo Top R Cross",
-        "md5": "ddbd8751df020cc32231ecb4e7b5388d.png",
+        "md5": "c2d5519e8a0f2214ff757117038c28dc.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             288,
             540,
@@ -5588,9 +5734,12 @@
     },
     {
         "name": "Jo Top R Leg",
-        "md5": "de64c526a57355af5fd6ff28f27b67ea.png",
+        "md5": "efaa8eb6c8cf7dc35d4d37d546ebd333.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             436,
             524,
@@ -5599,9 +5748,12 @@
     },
     {
         "name": "Jo Top Stand",
-        "md5": "a91fe6e180b524d27688aa0cd82cd629.png",
+        "md5": "0ed4a09c41871d150c51119c1bceded2.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             136,
             520,
@@ -5680,7 +5832,9 @@
         "name": "Kai-a",
         "md5": "6e007fde15e49c66ee7996561f80b452.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             136,
             320,
@@ -5691,7 +5845,9 @@
         "name": "Kai-b",
         "md5": "c1e1149f6d7e308e3e4eba14ccc8a751.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             164,
             316,
@@ -5905,9 +6061,12 @@
     },
     {
         "name": "Lb Pop Down",
-        "md5": "8e41de92cb932a6898782a39a0d7d300.png",
+        "md5": "563f86443cb102b9241cebb62eb2d81a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             112,
             180,
@@ -5916,9 +6075,12 @@
     },
     {
         "name": "Lb Pop Front",
-        "md5": "e34a166807a3ffbf8d147b12aa49dd19.png",
+        "md5": "cdd52259075b75628001672d375e4985.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             132,
             544,
@@ -5927,9 +6089,12 @@
     },
     {
         "name": "Lb Pop L Arm",
-        "md5": "c1fd31607619b8c98a286a650f248511.png",
+        "md5": "b508808c087adb55ce156f5cfbdac61b.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             200,
             524,
@@ -5938,9 +6103,12 @@
     },
     {
         "name": "Lb Pop Left",
-        "md5": "ff1b96d1047d4be459a4614ce7c7c94c.png",
+        "md5": "525285312925e1e6b4e237a119b61305.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             396,
             532,
@@ -5949,9 +6117,12 @@
     },
     {
         "name": "Lb Pop R Arm",
-        "md5": "aa57575fde5ff8b13041e3a7b1499fe0.png",
+        "md5": "0725440743391e7c622bb5df6a94e1d4.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             156,
             516,
@@ -5960,9 +6131,12 @@
     },
     {
         "name": "Lb Pop Right",
-        "md5": "d6d5534c628ac5d5fe3cbf1b76b71252.png",
+        "md5": "0a2461b3b9a4b8603e75565d78b1d4d7.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             152,
             528,
@@ -5971,9 +6145,12 @@
     },
     {
         "name": "Lb Pop Stand",
-        "md5": "51fe5962fe4d2af7f6fad7abaa692069.png",
+        "md5": "5f176ef763be18f7c342dc2e2de7bf16.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             132,
             536,
@@ -5982,9 +6159,12 @@
     },
     {
         "name": "Lb Stance",
-        "md5": "008b80a80c4188acc72f7893fb10ac75.png",
+        "md5": "9d64910e84c39660b19ca4ca8b45e2be.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             108,
             488,
@@ -5993,9 +6173,12 @@
     },
     {
         "name": "Lb Top L Cross",
-        "md5": "5a151c4d4e2e2f870d9096d5fce6ed48.png",
+        "md5": "645d6e2674452009df7a9a844a604791.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             296,
             516,
@@ -6004,9 +6187,12 @@
     },
     {
         "name": "Lb Top L Leg",
-        "md5": "350472368e2310efe6fa734b79f0ff41.png",
+        "md5": "63d099e94aa8a973dcfa4c5d8b4a3e7a.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             468,
             572,
@@ -6015,9 +6201,12 @@
     },
     {
         "name": "Lb Top R Cross",
-        "md5": "99acf468000c6fcbaf344e4531725efc.png",
+        "md5": "4423159d81378ada5ffd7f053d7ef471.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             348,
             512,
@@ -6026,9 +6215,12 @@
     },
     {
         "name": "Lb Top R Leg",
-        "md5": "e824768a109691b5a3c577d3506ed70c.png",
+        "md5": "79ca528d13ffb557a236f0a35a0eb486.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             488,
             500,
@@ -6037,9 +6229,12 @@
     },
     {
         "name": "Lb Top Stand",
-        "md5": "dfe3628ddf46a67dcc21c63be65a8e40.png",
+        "md5": "e68d899e178309ff3eae3e1de8a8ec28.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             140,
             496,
@@ -7636,6 +7831,66 @@
         ]
     },
     {
+        "name": "Puppy Back",
+        "md5": "05630bfa94501a3e5d61ce443a0cea70.png",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "dog",
+            "puppy"
+        ],
+        "info": [
+            468,
+            188,
+            2
+        ]
+    },
+    {
+        "name": "Puppy Right",
+        "md5": "2768d9e44a0aab055856d301bbc2b04e.png",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "dog",
+            "puppy"
+        ],
+        "info": [
+            214,
+            206,
+            2
+        ]
+    },
+    {
+        "name": "Puppy Side",
+        "md5": "c4aeb5c39b39ef57a3f18ace54cf7db1.png",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "dog",
+            "puppy"
+        ],
+        "info": [
+            208,
+            228,
+            2
+        ]
+    },
+    {
+        "name": "Puppy Sit",
+        "md5": "c7817052ed9e78057f877d0d56b5c6a6.png",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "dog",
+            "puppy"
+        ],
+        "info": [
+            174,
+            224,
+            2
+        ]
+    },
+    {
         "name": "Rabbit-a",
         "md5": "2f42891c3f3d63c0e591aeabc5946533.svg",
         "type": "costume",
@@ -8111,7 +8366,9 @@
         "name": "Ruby-a",
         "md5": "c30210e8f719c3a4d2c7cc6917a39300.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             108,
             344,
@@ -8122,7 +8379,9 @@
         "name": "Ruby-b",
         "md5": "fc15fdbcc535473f6140cab28197f3be.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
             152,
             284,
@@ -8130,10 +8389,13 @@
         ]
     },
     {
-        "name": "Sail-boat",
+        "name": "Sailboat",
         "md5": "ca241a938a2c44a0de6b91230012ff39.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "boat",
+            "transportation"
+        ],
         "info": [
             448,
             364,
@@ -8142,13 +8404,15 @@
     },
     {
         "name": "Sam",
-        "md5": "1d33952fec0abe4ef6adee9fd065d3a8.gif",
+        "md5": "34d9a8e7219748da7838a21b3a3a6e82.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people"
+        ],
         "info": [
-            58,
-            90,
-            1
+            224,
+            360,
+            2
         ]
     },
     {
@@ -8635,10 +8899,13 @@
         ]
     },
     {
-        "name": "Squirrel1",
+        "name": "Squirrel",
         "md5": "b86efb7f23387300cf9037a61f328ab9.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "animals",
+            "scoob"
+        ],
         "info": [
             316,
             292,
@@ -8932,9 +9199,12 @@
     },
     {
         "name": "Ten80 Pop Down",
-        "md5": "5b207159cca926fa0847e44b12231119.png",
+        "md5": "14685e432d683c918328e7fb070b7029.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             376,
@@ -8943,9 +9213,12 @@
     },
     {
         "name": "Ten80 Pop Front",
-        "md5": "2a591305054fc72a65a20880d27c403d.png",
+        "md5": "86602007ae2952236d47d7fd587a56b6.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             144,
             532,
@@ -8954,9 +9227,12 @@
     },
     {
         "name": "Ten80 Pop L Arm",
-        "md5": "b2c2724462a8f4e1b95b2163deb45380.png",
+        "md5": "ce2141ce97921ddc333bc65ff5bec27d.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             200,
             560,
@@ -8965,9 +9241,12 @@
     },
     {
         "name": "Ten80 Pop Left",
-        "md5": "c0be2b181ca54a5feb3d9773e244bd73.png",
+        "md5": "3c9a7eac1d696ae74ee40c6efa8fa4dd.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             368,
             532,
@@ -8976,9 +9255,12 @@
     },
     {
         "name": "Ten80 Pop R Arm",
-        "md5": "08b47429a2b56095e471569be63a3acd.png",
+        "md5": "279bd5499329f98a68cf92c68014e198.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             556,
@@ -8987,9 +9269,12 @@
     },
     {
         "name": "Ten80 Pop Right",
-        "md5": "be193b26613668f68c98f38397a1aaa6.png",
+        "md5": "548bdf23904e409c1fcc0992f44d0b4c.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             156,
             552,
@@ -8998,9 +9283,12 @@
     },
     {
         "name": "Ten80 Pop Stand",
-        "md5": "86200779d2de598cebb66354939e9a32.png",
+        "md5": "377b8521c436f4f39ed2100fa1cb7c2f.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             184,
             560,
@@ -9009,9 +9297,12 @@
     },
     {
         "name": "Ten80 Stance",
-        "md5": "dc671a181e0f2b5c94823b197d4455b5.png",
+        "md5": "90ca0205c56c6c7f0e8892469de49bda.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             140,
             556,
@@ -9020,9 +9311,12 @@
     },
     {
         "name": "Ten80 Top Freeze",
-        "md5": "332db3c9053d11df327151873be9ba8f.png",
+        "md5": "8313a2229d555bbdb8ce92dffed067ad.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             108,
             516,
@@ -9031,9 +9325,12 @@
     },
     {
         "name": "Ten80 Top L Step",
-        "md5": "4e730a1129334d2c5b3b5bf53a6cf488.png",
+        "md5": "e51942bb4651e616549cfce1ad36ff83.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             288,
             532,
@@ -9042,9 +9339,12 @@
     },
     {
         "name": "Ten80 Top R Cross",
-        "md5": "76945eb412c3dcc12fa4207690edc1ca.png",
+        "md5": "e06ac61e96e3a5abf4ca0863816f5d28.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             412,
             504,
@@ -9053,9 +9353,12 @@
     },
     {
         "name": "Ten80 Top R Step",
-        "md5": "13fbeb74f24efc49f73bf4edfc94fc16.png",
+        "md5": "733d05c17699758e2723599de333fdc0.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             400,
             540,
@@ -9064,9 +9367,12 @@
     },
     {
         "name": "Ten80 Top Stand",
-        "md5": "0f6adf023981ae764ab869a222f453cc.png",
+        "md5": "b2f75ac1cd84615efaea6a7d7a4ee205.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "people",
+            "dance"
+        ],
         "info": [
             148,
             548,
@@ -9075,9 +9381,12 @@
     },
     {
         "name": "Tennisball",
-        "md5": "f70d1414e266df1dfe54afb563c810df.png",
+        "md5": "34fa36004be0340ec845ba6bbeb5e5d5.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "ball",
+            "sports"
+        ],
         "info": [
             60,
             60,
@@ -9192,7 +9501,9 @@
         "name": "Trampoline",
         "md5": "20b16bcb61396df304cad5e8886ceb46.png",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "sports"
+        ],
         "info": [
             100,
             41,

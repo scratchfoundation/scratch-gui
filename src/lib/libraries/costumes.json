@@ -1751,20 +1751,17 @@
     },
     {
         "name": "Cat2",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "costume",
         "tags": [
-            "animals",
-            "cat",
-            "kitten",
             "kitty",
-            "mammal",
-            "orange",
-            "scratch cat"
+            "kitten",
+            "animals",
+            "mammal"
         ],
         "info": [
-            47,
-            55,
+            87,
+            39,
             1
         ]
     },
@@ -4817,7 +4814,7 @@
     },
     {
         "name": "Headband",
-        "md5": "961148d1605a1bd8ce80ed8d39e831c2.svg",
+        "md5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
         "type": "costume",
         "tags": [
             "fashion",
@@ -8534,7 +8531,7 @@
     },
     {
         "name": "Skates",
-        "md5": "00e5e173400662875a26bb7d6556346a.svg",
+        "md5": "97936eccad5c8d86ea9008c5bbb50b63.svg",
         "type": "costume",
         "tags": [
             "fashion",
@@ -8542,8 +8539,8 @@
             "sports"
         ],
         "info": [
-            44,
-            -21,
+            39,
+            19,
             1
         ]
     },

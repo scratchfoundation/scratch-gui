@@ -7213,7 +7213,7 @@
     },
     {
         "name": "Headband",
-        "md5": "961148d1605a1bd8ce80ed8d39e831c2.svg",
+        "md5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
         "type": "sprite",
         "tags": [
             "fashion",
@@ -7239,8 +7239,8 @@
             "costumes": [
                 {
                     "costumeName": "headband",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "961148d1605a1bd8ce80ed8d39e831c2.svg",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 53,
                     "rotationCenterY": 43
@@ -12732,7 +12732,7 @@
     },
     {
         "name": "Skates",
-        "md5": "00e5e173400662875a26bb7d6556346a.svg",
+        "md5": "97936eccad5c8d86ea9008c5bbb50b63.svg",
         "type": "sprite",
         "tags": [
             "fashion",
@@ -12760,10 +12760,10 @@
                 {
                     "costumeName": "skates",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "00e5e173400662875a26bb7d6556346a.svg",
+                    "baseLayerMD5": "97936eccad5c8d86ea9008c5bbb50b63.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 44,
-                    "rotationCenterY": -21
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 19
                 }
             ],
             "currentCostumeIndex": 0,
@@ -13626,7 +13626,7 @@
             "costumes": [
                 {
                     "costumeName": "taco-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "d4a2cea411c6030f017f25184562559d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 19,

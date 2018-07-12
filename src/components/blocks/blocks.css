@@ -40,6 +40,14 @@
     box-sizing: content-box;
 }
 
+.blocks :global(.blocklyBlockDragSurface) {
+    /*
+        Fix an issue where the drag surface was preventing hover events for sharing blocks.
+        This does not prevent user interaction on the blocks themselves.
+    */
+    pointer-events: none;
+}
+
 /*
     Shrink category font to fit "My Blocks" for now.
     Probably will need different solutions for language support later, so

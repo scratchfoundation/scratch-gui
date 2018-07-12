@@ -8,7 +8,7 @@ import styles from './card.css';
 import nextIcon from './icon--next.svg';
 import prevIcon from './icon--prev.svg';
 
-import helpIcon from './icon--help.svg';
+import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import closeIcon from '../close-button/icon--close.svg';
 
 const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
@@ -22,9 +22,9 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
                 src={helpIcon}
             />
             <FormattedMessage
-                defaultMessage="All How-Tos"
-                description="Title for button to return to how-to library"
-                id="gui.cards.all-how-tos"
+                defaultMessage="Tutorials"
+                description="Title for button to return to tutorials library"
+                id="gui.cards.all-tutorials"
             />
         </div>
         {totalSteps > 1 ? (

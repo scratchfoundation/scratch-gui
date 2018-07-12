@@ -26,13 +26,19 @@ const ModalComponent = props => (
             direction="column"
             grow={1}
         >
-            <div className={styles.header}>
+            <div className={classNames(styles.header, props.headerClassName)}>
                 <div
                     className={classNames(
                         styles.headerItem,
                         styles.headerItemTitle
                     )}
                 >
+                    {props.headerImage ? (
+                        <img
+                            className={styles.headerImage}
+                            src={props.headerImage}
+                        />
+                    ) : null}
                     {props.contentLabel}
                 </div>
                 <div
@@ -74,6 +80,8 @@ ModalComponent.propTypes = {
         PropTypes.object
     ]).isRequired,
     fullScreen: PropTypes.bool,
+    headerClassName: PropTypes.string,
+    headerImage: PropTypes.string,
     onRequestClose: PropTypes.func
 };
 

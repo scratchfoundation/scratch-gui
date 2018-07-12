@@ -31,6 +31,7 @@ import {
 
 import styles from './menu-bar.css';
 
+import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
 import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
@@ -40,18 +41,16 @@ import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
-import helpIcon from './icon--help.svg';
-
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
         defaultMessage: 'language selector',
         description: 'accessibility text for the language selection menu'
     },
-    howTo: {
-        id: 'gui.menuBar.howToLibrary',
-        defaultMessage: 'How-to Library',
-        description: 'accessibility text for the how-to library button'
+    tutorials: {
+        id: 'gui.menuBar.tutorialsLibrary',
+        defaultMessage: 'Tutorials',
+        description: 'accessibility text for the tutorials button'
     }
 });
 
@@ -311,6 +310,18 @@ class MenuBar extends React.Component {
                         </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
+                    <div
+                        aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        onClick={this.props.onOpenTipLibrary}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={helpIcon}
+                        />
+                        <FormattedMessage {...ariaMessages.tutorials} />
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
                     <div className={classNames(styles.menuBarItem)}>
                         <MenuBarItemTooltip id="title-field">
                             <input
@@ -381,16 +392,6 @@ class MenuBar extends React.Component {
                     </a>
                 </div>
                 <div className={styles.accountInfoWrapper}>
-                    <div
-                        aria-label={this.props.intl.formatMessage(ariaMessages.howTo)}
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onClick={this.props.onOpenTipLibrary}
-                    >
-                        <img
-                            className={styles.helpIcon}
-                            src={helpIcon}
-                        />
-                    </div>
                     <MenuBarItemTooltip id="mystuff">
                         <div
                             className={classNames(

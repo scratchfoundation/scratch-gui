@@ -72,10 +72,12 @@ class GUI extends React.Component {
                 `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
         }
         const {
+            assetHost, // eslint-disable-line no-unused-vars
             children,
             fetchingProject,
             loadingStateVisible,
             projectData, // eslint-disable-line no-unused-vars
+            projectHost, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
@@ -92,17 +94,22 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    ...GUIComponent.propTypes,
+    assetHost: PropTypes.string,
+    children: PropTypes.node,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    projectHost: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
-GUI.defaultProps = GUIComponent.defaultProps;
+GUI.defaultProps = {
+    assetHost: 'https://assets.scratch.mit.edu',
+    projectHost: 'https://projects.scratch.mit.edu'
+};
 
 const mapStateToProps = state => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,

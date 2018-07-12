@@ -1209,7 +1209,12 @@ var ArgumentType = {
   /**
    * String value with text field
    */
-  STRING: 'string'
+  STRING: 'string',
+
+  /**
+   * String value with matirx field
+   */
+  MATRIX: 'matrix'
 };
 
 module.exports = ArgumentType;

@@ -113,13 +113,13 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
     }
 
     const bitmapAdapter = new BitmapAdapter();
-    const addCostumeFromBuffer = function (dataURI) {
+    const addCostumeFromBuffer = function (dataBuffer) {
         const vmCostume = cacheAsset(
             storage,
             costumeName,
             assetType,
             costumeFormat,
-            bitmapAdapter.convertDataURIToBinary(dataURI)
+            dataBuffer
         );
         handleCostume(vmCostume);
     };
@@ -132,7 +132,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
         addCostumeFromBuffer(null, new Uint8Array(fileData));
     } else {
         // otherwise it's a bitmap
-        bitmapAdapter.importBitmap(fileData, fileType).then(value => addCostumeFromBuffer(value));
+        bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer);
     }
 };
 

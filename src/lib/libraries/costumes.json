@@ -2855,16 +2855,16 @@
     },
     {
         "name": "Dm Stance",
-        "md5": "b30a60d31aebead577b73affd22bf30f.svg",
+        "md5": "09dc9d82f097edfc6b2b6e4b5009c5f6.png",
         "type": "costume",
         "tags": [
             "people",
             "dance"
         ],
         "info": [
-            55,
-            119,
-            1
+            212,
+            476,
+            2
         ]
     },
     {
@@ -2883,7 +2883,7 @@
     },
     {
         "name": "Dm Top R Leg",
-        "md5": "6cea0c29c460e571226cc4cff5b97c28.png",
+        "md5": "12db59633a1709a2c39534d35263791f.png",
         "type": "costume",
         "tags": [
             "people",
@@ -2908,7 +2908,7 @@
     },
     {
         "name": "Dm Top Stand",
-        "md5": "051c36758b9fd1136b511efc5dd6234a.png",
+        "md5": "a22da98e5e63de7b2883355afd0184f0.png",
         "type": "costume",
         "tags": [
             "people",

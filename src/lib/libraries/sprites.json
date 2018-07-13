@@ -117,6 +117,81 @@
         }
     },
     {
+        "name": "Andie",
+        "md5": "936abdaaac3a3f7d27e5f30b3da00e5f.svg",
+        "type": "sprite",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "wheelchair",
+            "handicap",
+            "handicapable",
+            "alex eben meyer"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Andie",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "andie-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "936abdaaac3a3f7d27e5f30b3da00e5f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 77
+                },
+                {
+                    "costumeName": "andie-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cc2953492b40e231fdee3d8c9994a646.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 46,
+                    "rotationCenterY": 77
+                },
+                {
+                    "costumeName": "andie-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "76e26ccb79a94d3e89f67e64b4cb9731.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 36
+                },
+                {
+                    "costumeName": "andie-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9687d895da423e717ae568c483d1c870.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 43
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -129,
+            "scratchY": -73,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Anina Dance",
         "md5": "9374e067ca4b66427fc64a0822f6e468.png",
         "type": "sprite",
@@ -4177,8 +4252,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -108,
-            "scratchY": -61,
+            "scratchX": -24,
+            "scratchY": -57,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

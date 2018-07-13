@@ -810,8 +810,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 77,
-            "scratchY": -115,
+            "scratchX": 202,
+            "scratchY": -108,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -2090,7 +2090,7 @@
             "costumes": [
                 {
                     "costumeName": "cake-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "e1e8e8a765b8778d6181035c5c66984d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 64,
@@ -2098,7 +2098,7 @@
                 },
                 {
                     "costumeName": "cake-b",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "460268a804e7682c9fabf37e4b70071c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 64,
@@ -2456,7 +2456,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "cat2",
+                    "costumeName": "cat 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "01ae57fd339529445cb890978ef8a054.svg",
                     "bitmapResolution": 1,
@@ -7239,7 +7239,7 @@
             "costumes": [
                 {
                     "costumeName": "headband",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 53,
@@ -7846,7 +7846,7 @@
         }
     },
     {
-        "name": "Jamie",
+        "name": "Jamal",
         "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
         "type": "sprite",
         "tags": [
@@ -7861,7 +7861,7 @@
             1
         ],
         "json": {
-            "objName": "Jamie",
+            "objName": "Jamal",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -7874,7 +7874,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jamie-a",
+                    "costumeName": "jamal-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
                     "bitmapResolution": 1,
@@ -7882,7 +7882,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-b",
+                    "costumeName": "jamal-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
                     "bitmapResolution": 1,
@@ -7890,7 +7890,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-c",
+                    "costumeName": "jamal-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
                     "bitmapResolution": 1,
@@ -7898,7 +7898,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-d",
+                    "costumeName": "jamal-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4adb87e6123161fcaf02f7ac022a5757.svg",
                     "bitmapResolution": 1,

@@ -659,7 +659,7 @@
     },
     {
         "name": "Bat-a",
-        "md5": "a68f7a0b2af7514c729bb083d04dbbde.svg",
+        "md5": "3b6274510488d5b26447c1c266475801.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -670,14 +670,14 @@
             "alex eben meyer"
         ],
         "info": [
-            51,
-            47,
+            65,
+            61,
             1
         ]
     },
     {
         "name": "Bat-b",
-        "md5": "4ea5bb61370e189d2eba763312680201.svg",
+        "md5": "8b20987d450379a445cbfc41ff2a3874.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -688,14 +688,14 @@
             "alex eben meyer"
         ],
         "info": [
-            51,
-            47,
+            65,
+            61,
             1
         ]
     },
     {
         "name": "Bat-c",
-        "md5": "9ed4deead22db511202f38abadf508c4.svg",
+        "md5": "c6d6a6892638e489902fbba803050de1.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -706,14 +706,14 @@
             "alex eben meyer"
         ],
         "info": [
-            51,
-            47,
+            65,
+            61,
             1
         ]
     },
     {
         "name": "Bat-d",
-        "md5": "293a7b03badd2f3b49e50acfb9c242ec.svg",
+        "md5": "e3da64838b2c74b6dd9a080b030e327e.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -724,8 +724,8 @@
             "alex eben meyer"
         ],
         "info": [
-            51,
-            47,
+            65,
+            61,
             1
         ]
     },

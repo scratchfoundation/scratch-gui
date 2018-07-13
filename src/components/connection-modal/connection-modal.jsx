@@ -9,6 +9,7 @@ import ScanningStep from '../../containers/scanning-step.jsx';
 import ConnectingStep from './connecting-step.jsx';
 import ConnectedStep from './connected-step.jsx';
 import ErrorStep from './error-step.jsx';
+import UnavailableStep from './unavailable-step.jsx';
 
 import styles from './connection-modal.css';
 
@@ -16,7 +17,8 @@ const PHASES = keyMirror({
     scanning: null,
     connecting: null,
     connected: null,
-    error: null
+    error: null,
+    unavailable: null
 });
 
 const ConnectionModalComponent = props => (
@@ -32,6 +34,7 @@ const ConnectionModalComponent = props => (
             {props.phase === PHASES.connecting && <ConnectingStep {...props} />}
             {props.phase === PHASES.connected && <ConnectedStep {...props} />}
             {props.phase === PHASES.error && <ErrorStep {...props} />}
+            {props.phase === PHASES.unavailable && <UnavailableStep {...props} />}
         </Box>
     </Modal>
 );

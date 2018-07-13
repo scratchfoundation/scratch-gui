@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
-/***/ 442:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -18,11 +18,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 443:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(442);
+var content = __webpack_require__(445);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -44,7 +44,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 444:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64,11 +64,11 @@ var _controls = __webpack_require__(270);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(341);
+var _blocks = __webpack_require__(344);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(156);
+var _gui = __webpack_require__(157);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -80,7 +80,7 @@ var _appStateHoc = __webpack_require__(120);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _blocksOnly = __webpack_require__(443);
+var _blocksOnly = __webpack_require__(446);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -116,5 +116,5 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ })
 
-},[[444,0]]]);
+},[[447,0]]]);
 //# sourceMappingURL=blocksonly.js.map

@@ -822,7 +822,7 @@
     },
     {
         "name": "Bat",
-        "md5": "a68f7a0b2af7514c729bb083d04dbbde.svg",
+        "md5": "3b6274510488d5b26447c1c266475801.svg",
         "type": "sprite",
         "tags": [
             "fantasy",
@@ -853,39 +853,39 @@
                 {
                     "costumeName": "bat-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "a68f7a0b2af7514c729bb083d04dbbde.svg",
+                    "baseLayerMD5": "3b6274510488d5b26447c1c266475801.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "4ea5bb61370e189d2eba763312680201.svg",
+                    "baseLayerMD5": "8b20987d450379a445cbfc41ff2a3874.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "9ed4deead22db511202f38abadf508c4.svg",
+                    "baseLayerMD5": "c6d6a6892638e489902fbba803050de1.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "293a7b03badd2f3b49e50acfb9c242ec.svg",
+                    "baseLayerMD5": "e3da64838b2c74b6dd9a080b030e327e.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -39,
-            "scratchY": 121,
+            "scratchX": -48,
+            "scratchY": 109,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -5457,8 +5457,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -110,
-            "scratchY": -24,
+            "scratchX": -115,
+            "scratchY": -46,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

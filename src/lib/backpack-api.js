@@ -1,6 +1,7 @@
 import xhr from 'xhr';
 import costumePayload from './backpack/costume-payload';
 import soundPayload from './backpack/sound-payload';
+import spritePayload from './backpack/sprite-payload';
 
 const getBackpackContents = ({
     host,
@@ -19,9 +20,13 @@ const getBackpackContents = ({
             return reject();
         }
         // Add a new property for the full thumbnail url, which includes the host.
+        // Also include a full body url for loading sprite zips
         // TODO retreiving the images through storage would allow us to remove this.
         return resolve(response.body.map(item => (
-            Object.assign({}, item, {thumbnailUrl: `${host}/${item.thumbnail}`})
+            Object.assign({}, item, {
+                thumbnailUrl: `${host}/${item.thumbnail}`,
+                bodyUrl: `${host}/${item.body}`
+            })
         )));
     });
 });
@@ -72,5 +77,6 @@ export {
     saveBackpackObject,
     deleteBackpackObject,
     costumePayload,
-    soundPayload
+    soundPayload,
+    spritePayload
 };

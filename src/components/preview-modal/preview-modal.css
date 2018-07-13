@@ -69,8 +69,8 @@
 }
 
 .button-row button.view-project-button {
-    background: $pen-primary;
-    border-color: $pen-primary;
+    background: $extensions-primary;
+    border-color: $extensions-primary;
     color: white;
 }
 

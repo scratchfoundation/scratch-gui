@@ -2343,7 +2343,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "cat1",
+                    "costumeName": "cat-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
                     "bitmapResolution": 1,
@@ -2351,7 +2351,7 @@
                     "rotationCenterY": 55
                 },
                 {
-                    "costumeName": "cat2",
+                    "costumeName": "cat-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
                     "bitmapResolution": 1,
@@ -2371,63 +2371,7 @@
         }
     },
     {
-        "name": "Cat1 Flying",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
-        "type": "sprite",
-        "tags": [
-            "animals",
-            "cat",
-            "kitty",
-            "kitten"
-        ],
-        "info": [
-            0,
-            2,
-            1
-        ],
-        "json": {
-            "objName": "Cat1 Flying",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "cat1 flying-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 67,
-                    "rotationCenterY": 48
-                },
-                {
-                    "costumeName": "cat1 flying-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 42,
-                    "rotationCenterY": 44
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -53,
-            "scratchY": -14,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Cat2",
+        "name": "Cat 2",
         "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "sprite",
         "tags": [
@@ -2443,7 +2387,7 @@
             1
         ],
         "json": {
-            "objName": "Cat2",
+            "objName": "Cat 2",
             "sounds": [
                 {
                     "soundName": "meow2",
@@ -2467,6 +2411,62 @@
             "currentCostumeIndex": 0,
             "scratchX": -71,
             "scratchY": 1,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Cat Flying",
+        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "cat",
+            "kitty",
+            "kitten"
+        ],
+        "info": [
+            0,
+            2,
+            1
+        ],
+        "json": {
+            "objName": "Cat Flying",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "cat flying-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 67,
+                    "rotationCenterY": 48
+                },
+                {
+                    "costumeName": "cat flying-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 42,
+                    "rotationCenterY": 44
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -53,
+            "scratchY": -14,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

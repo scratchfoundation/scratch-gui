@@ -1,14 +1,14 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1432:
+/***/ 1440:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 1461:
+/***/ 1469:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17,11 +17,11 @@ var GUI =
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
 // For Safari 9
 
-__webpack_require__(1460);
+__webpack_require__(1468);
 
-__webpack_require__(1458);
+__webpack_require__(1466);
 
-__webpack_require__(1434);
+__webpack_require__(1442);
 
 var _react = __webpack_require__(0);
 
@@ -39,15 +39,15 @@ var _gui = __webpack_require__(156);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(120);
+var _hashParserHoc = __webpack_require__(121);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(119);
+var _appStateHoc = __webpack_require__(120);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(442);
+var _index = __webpack_require__(446);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -83,7 +83,7 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ }),
 
-/***/ 441:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -100,11 +100,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 442:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(441);
+var content = __webpack_require__(445);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -126,5 +126,5 @@ if(false) {}
 
 /***/ })
 
-},[[1461,0]]]);
+},[[1469,0]]]);
 //# sourceMappingURL=gui.js.map

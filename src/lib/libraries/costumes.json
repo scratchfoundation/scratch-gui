@@ -1698,6 +1698,22 @@
         ]
     },
     {
+        "name": "Cat 2",
+        "md5": "01ae57fd339529445cb890978ef8a054.svg",
+        "type": "costume",
+        "tags": [
+            "kitty",
+            "kitten",
+            "animals",
+            "mammal"
+        ],
+        "info": [
+            87,
+            39,
+            1
+        ]
+    },
+    {
         "name": "Cat1",
         "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
         "type": "costume",
@@ -5254,7 +5270,7 @@
         ]
     },
     {
-        "name": "Jamie-a",
+        "name": "Jamal-a",
         "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
         "type": "costume",
         "tags": [
@@ -5270,7 +5286,7 @@
         ]
     },
     {
-        "name": "Jamie-b",
+        "name": "Jamal-b",
         "md5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
         "type": "costume",
         "tags": [
@@ -5286,7 +5302,7 @@
         ]
     },
     {
-        "name": "Jamie-c",
+        "name": "Jamal-c",
         "md5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
         "type": "costume",
         "tags": [
@@ -5302,7 +5318,7 @@
         ]
     },
     {
-        "name": "Jamie-d",
+        "name": "Jamal-d",
         "md5": "4adb87e6123161fcaf02f7ac022a5757.svg",
         "type": "costume",
         "tags": [

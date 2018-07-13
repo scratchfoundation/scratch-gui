@@ -1714,7 +1714,40 @@
         ]
     },
     {
-        "name": "Cat1",
+        "name": "Cat Flying-a",
+        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "cat",
+            "kitty",
+            "kitten"
+        ],
+        "info": [
+            67,
+            48,
+            1
+        ]
+    },
+    {
+        "name": "Cat Flying-b",
+        "md5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "flying",
+            "cat",
+            "kitty",
+            "kitten"
+        ],
+        "info": [
+            42,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Cat-a",
         "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
         "type": "costume",
         "tags": [
@@ -1733,40 +1766,7 @@
         ]
     },
     {
-        "name": "Cat1 Flying-a",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "cat",
-            "kitty",
-            "kitten"
-        ],
-        "info": [
-            67,
-            48,
-            1
-        ]
-    },
-    {
-        "name": "Cat1 Flying-b",
-        "md5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "flying",
-            "cat",
-            "kitty",
-            "kitten"
-        ],
-        "info": [
-            42,
-            44,
-            1
-        ]
-    },
-    {
-        "name": "Cat2",
+        "name": "Cat-b",
         "md5": "3696356a03a8d938318876a593572843.svg",
         "type": "costume",
         "tags": [

@@ -9,8 +9,10 @@ import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
 import Prompt from './prompt.jsx';
+import ConnectionModal from './connection-modal.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
+import extensionData from '../lib/libraries/extensions/index.jsx';
 import CustomProcedures from './custom-procedures.jsx';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
@@ -38,6 +40,9 @@ class Blocks extends React.Component {
             'attachVM',
             'detachVM',
             'handleCategorySelected',
+            'handleConnectionModalStart',
+            'handleConnectionModalClose',
+            'handleStatusButtonUpdate',
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
@@ -56,9 +61,11 @@ class Blocks extends React.Component {
             'setLocale'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
+        this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.state = {
             workspaceMetrics: {},
-            prompt: null
+            prompt: null,
+            connectionModal: null
         };
         this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
         this.toolboxUpdateQueue = [];
@@ -94,6 +101,7 @@ class Blocks extends React.Component {
     shouldComponentUpdate (nextProps, nextState) {
         return (
             this.state.prompt !== nextState.prompt ||
+            this.state.connectionModal !== nextState.connectionModal ||
             this.props.isVisible !== nextProps.isVisible ||
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
@@ -148,11 +156,12 @@ class Blocks extends React.Component {
     setLocale () {
         this.workspace.getFlyout().setRecyclingEnabled(false);
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
-        this.props.vm.setLocale(this.props.locale, this.props.messages);
-
-        this.workspace.updateToolbox(this.props.toolboxXML);
-        this.props.vm.refreshWorkspace();
-        this.workspace.getFlyout().setRecyclingEnabled(true);
+        this.props.vm.setLocale(this.props.locale, this.props.messages)
+            .then(() => {
+                this.workspace.updateToolbox(this.props.toolboxXML);
+                this.props.vm.refreshWorkspace();
+                this.workspace.getFlyout().setRecyclingEnabled(true);
+            });
     }
 
     updateToolbox () {
@@ -204,6 +213,8 @@ class Blocks extends React.Component {
         this.props.vm.addListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
+        this.props.vm.addListener('PERIPHERAL_CONNECTED', this.handleStatusButtonUpdate);
+        this.props.vm.addListener('PERIPHERAL_ERROR', this.handleStatusButtonUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -215,6 +226,8 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('targetsUpdate', this.onTargetsUpdate);
         this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.removeListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
+        this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleStatusButtonUpdate);
+        this.props.vm.removeListener('PERIPHERAL_ERROR', this.handleStatusButtonUpdate);
     }
 
     updateToolboxBlockValue (id, value) {
@@ -311,6 +324,11 @@ class Blocks extends React.Component {
         this.handleExtensionAdded(blocksInfo);
     }
     handleCategorySelected (categoryId) {
+        const extension = extensionData.find(ext => ext.extensionId === categoryId);
+        if (extension && extension.launchDeviceConnectionFlow) {
+            this.handleConnectionModalStart(categoryId);
+        }
+
         this.withToolboxUpdates(() => {
             this.workspace.toolbox_.setSelectedCategoryById(categoryId);
         });
@@ -321,13 +339,37 @@ class Blocks extends React.Component {
     handlePromptStart (message, defaultValue, callback, optTitle, optVarType) {
         const p = {prompt: {callback, message, defaultValue}};
         p.prompt.title = optTitle ? optTitle :
-            this.ScratchBlocks.VARIABLE_MODAL_TITLE;
+            this.ScratchBlocks.Msg.VARIABLE_MODAL_TITLE;
+        p.prompt.varType = typeof optVarType === 'string' ?
+            optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
         p.prompt.showMoreOptions =
-            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE;
+            optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
+            p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
         this.setState(p);
     }
-    handlePromptCallback (data) {
-        this.state.prompt.callback(data);
+    handleConnectionModalStart (extensionId) {
+        const extension = extensionData.find(ext => ext.extensionId === extensionId);
+        if (extension) {
+            this.setState({connectionModal: {
+                extensionId: extensionId,
+                deviceImage: extension.deviceImage,
+                smallDeviceImage: extension.smallDeviceImage,
+                name: extension.name
+            }});
+        }
+    }
+    handleConnectionModalClose () {
+        this.setState({connectionModal: null});
+    }
+    handleStatusButtonUpdate () {
+        this.ScratchBlocks.refreshStatusButtons(this.workspace);
+    }
+    handlePromptCallback (input, optionSelection) {
+        this.state.prompt.callback(
+            input,
+            this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType),
+            optionSelection);
         this.handlePromptClose();
     }
     handlePromptClose () {
@@ -366,12 +408,24 @@ class Blocks extends React.Component {
                 />
                 {this.state.prompt ? (
                     <Prompt
+                        isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
                         showMoreOptions={this.state.prompt.showMoreOptions}
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
+                    />
+                ) : null}
+                {this.state.connectionModal ? (
+                    <ConnectionModal
+                        deviceImage={this.state.connectionModal.deviceImage}
+                        extensionId={this.state.connectionModal.extensionId}
+                        name={this.state.connectionModal.name}
+                        smallDeviceImage={this.state.connectionModal.smallDeviceImage}
+                        vm={vm}
+                        onCancel={this.handleConnectionModalClose}
+                        onStatusButtonUpdate={this.handleStatusButtonUpdate}
                     />
                 ) : null}
                 {extensionLibraryVisible ? (

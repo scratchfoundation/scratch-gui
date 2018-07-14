@@ -14,21 +14,21 @@
     top: 5%;
     background: $ui-white;
     border: 1px solid $ui-tertiary;
-    width: 10px;
+    width: .75rem;
     z-index: 10;
     opacity: 0.9;
     overflow: hidden;
 }
 
 .left-card {
-    left: -10px;
+    left: -.75rem;
     border-right: 0;
     border-top-left-radius: 0.75rem;
     border-bottom-left-radius: 0.75rem;
 }
 
 .right-card {
-    right: -10px;
+    right: -.75rem;
     border-left: 0;
     border-top-right-radius: 0.75rem;
     border-bottom-right-radius: 0.75rem;
@@ -39,9 +39,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 1.8rem;
+    height: 2.5rem;
     width: 100%;
-    background: $motion-primary;
+    background: $extensions-primary;
 }
 
 .left-button, .right-button {
@@ -51,14 +51,24 @@
     z-index: 20;
     user-select: none;
     cursor: pointer;
-    background: $motion-primary;
-    box-shadow: 0 0 0 4px $motion-transparent;
-    height: 40px;
-    width: 40px;
+    background: $extensions-primary;
+    box-shadow: 0 0 0 4px $extensions-transparent;
+    height: 44px;
+    width: 44px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.25s ease;
+}
+
+.left-button:hover, .right-button:hover {
+    box-shadow: 0 0 0 6px $extensions-transparent;
+    transform: scale(1.125);
+}
+
+.left-button img, .right-button img{
+    width: 1.75rem;
 }
 
 .left-button {
@@ -88,10 +98,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: $motion-primary;
-    border-bottom: 1px solid $motion-tertiary;
-    padding: 0.5rem;
+    background: $extensions-primary;
+    border-bottom: 1px solid $extensions-tertiary;
     font-size: 0.625rem;
+    font-weight: bold;
 }
 
 .remove-button, .all-button {
@@ -101,6 +111,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 0.75rem;
+}
+
+.remove-button:hover, .all-button:hover {
+    background-color: $ui-black-transparent;
 }
 
 .step-title {
@@ -161,14 +176,14 @@
     color: $motion-primary;
     font-weight: bold;
     font-size: 0.85rem;
-    margin: 14px 0px;
+    margin: .625rem 0px;
     text-align: center;
     font-weight: bold;
     text-align: center;
 }
 
 .help-icon, .close-icon {
-    height: 0.75rem;
+    height: 1rem;
 }
 
 .help-icon {
@@ -198,9 +213,9 @@
     display: flex;
     align-items: center;
     color: $ui-white;
-    font-size: 12px;
+    font-size: .75rem;
     font-weight: bold;
-    line-height: 15px;
+    line-height: 1rem;
     text-align: center;
 }
 
@@ -228,10 +243,10 @@
     height: 0.5rem;
     margin: 0 0.25rem;
     border-radius: 100%;
-    background: transparent;
-    border: 2px solid $ui-white-transparent;
+    background: $ui-white-transparent;
 }
 
 .active-step-pip {
-    background: white;
+    background: $ui-white;
+    box-shadow: 0px 0px 0px 2px $ui-black-transparent;
 }

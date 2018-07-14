@@ -1,0 +1,312 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 480px;
+}
+
+.header {
+    background-color: $pen-primary;
+}
+
+.body {
+    background: $ui-white;
+}
+
+.label {
+    font-weight: 500;
+    margin: 0 0 0.75rem;
+}
+
+.centered-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.device-tile-pane {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+.device-tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: $ui-white;
+    border-radius: 0.25rem;
+    padding: 10px;
+    width: 100%;
+    height: 55px;
+    margin-bottom: 0.5rem;
+}
+
+.device-tile-name {
+    display: flex;
+    align-items: center;
+}
+
+.device-tile-image {
+    margin-right: 0.5rem;
+}
+
+.device-tile-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.device-tile-name-label {
+    font-weight: bold;
+    font-size: 0.625rem;
+}
+
+.device-tile-name-text {
+    font-size: 0.875rem;
+}
+
+.device-tile button {
+    padding: 0.6rem 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+    cursor: pointer;
+}
+
+.signal-strength-meter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 22px;
+    height: 16px;
+    margin-right: 1rem;
+}
+
+.signal-bar {
+    width: 4px;
+    border-radius: 4px;
+    background-color: #DBDBDB;
+}
+
+.signal-bar:nth-of-type(1) { height: 25%; }
+.signal-bar:nth-of-type(2) { height: 50%; }
+.signal-bar:nth-of-type(3) { height: 75%; }
+.signal-bar:nth-of-type(4) { height: 100%; }
+
+.green-bar {
+    background-color: $pen-primary;
+}
+
+.radar {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.device-activity {
+    position: relative;
+}
+
+.device-activity-icon {
+    /* width: 80px;
+    height: 80px; */
+}
+
+.bluetooth-connecting-icon {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    padding: 5px 5px;
+    background-color: $motion-primary;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 4px $motion-transparent;
+    /* animation: pulse-blue-ring 1s infinite ease-in-out alternate; */
+    animation: wiggle 0.5s infinite ease-in-out alternate;
+
+}
+
+@keyframes pulse-blue-ring {
+    100% {
+        box-shadow: 0px 0px 0px 8px $motion-light-transparent;
+    }
+}
+
+
+.bluetooth-connected-icon {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    padding: 5px 5px;
+    background-color: $pen-primary;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 4px $pen-transparent;
+}
+
+
+
+@keyframes wiggle {
+    0% {transform: rotate(3deg) scale(1.05);}
+    25% {transform: rotate(-3deg) scale(1.05);}
+    50% {transform: rotate(5deg) scale(1.05);}
+    75% {transform: rotate(-2deg) scale(1.05);}
+    100% {transform: rotate(0deg) scale(1.05);}
+}
+
+.device-tile-widgets {
+    display: flex;
+    align-items: center;
+}
+
+.activityArea {
+    height: 165px;
+    background-color: $motion-light-transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scratch-link-icon {
+    max-width: 150px;
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: center;
+    display: flex;
+}
+
+.abort-connecting-icon {
+    width: 10px;
+    transform: rotate(45deg);
+}
+
+.connection-button {
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    background: $motion-primary;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0.25rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.connection-button:disabled {
+    background: $motion-transparent;
+}
+
+.segmented-button {
+    display: flex;
+}
+
+.segmented-button .connection-button:first-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+}
+
+.segmented-button .connection-button:last-of-type {
+    margin-left: 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.button-icon-right {
+    margin-left: 0.5rem;
+}
+
+.button-icon-left {
+    margin-right: 0.5rem;
+}
+
+.red-button {
+    background: $red-primary;
+}
+
+.corner-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.bottom-area {
+    background-color: $ui-white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 12px;
+}
+
+.instructions {
+    text-align: center;
+    padding: 1rem;
+}
+
+.dots-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.dots-holder {
+    display: flex;
+    padding: 0.25rem 0.1rem;
+    border-radius: 1rem;
+    background: $motion-light-transparent;
+}
+
+.dots-holder-success {
+    background: $pen-transparent;
+}
+
+.dots-holder-error {
+    background: $error-transparent;
+}
+
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.3rem;
+    border-radius: 100%;
+}
+
+.inactive-step-dot {
+    background: $motion-transparent;
+}
+
+.active-step-dot {
+    background: $motion-primary;
+}
+
+.success-dot {
+    background: $pen-primary;
+}
+
+.error-dot {
+    background: $error-primary;
+}

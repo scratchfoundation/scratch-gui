@@ -126,7 +126,7 @@ class TargetPane extends React.Component {
     }
     handleBlockDragEnd (blocks) {
         if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
-            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite);
+            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
             this.props.onReceivedBlocks(true);
         }
     }
@@ -135,6 +135,12 @@ class TargetPane extends React.Component {
         if (dragInfo.dragType === DragConstants.SPRITE) {
             // Add one to both new and target index because we are not counting/moving the stage
             this.props.vm.reorderTarget(dragInfo.index + 1, dragInfo.newIndex + 1);
+        } else if (dragInfo.dragType === DragConstants.BACKPACK_SPRITE) {
+            // TODO storage does not have a way of loading zips right now, and may never need it.
+            // So for now just grab the zip manually.
+            fetch(dragInfo.payload.bodyUrl)
+                .then(response => response.arrayBuffer())
+                .then(sprite3Zip => this.props.vm.addSprite(sprite3Zip));
         } else if (targetId) {
             // Something is being dragged over one of the sprite tiles or the backdrop.
             // Dropping assets like sounds and costumes duplicate the asset on the

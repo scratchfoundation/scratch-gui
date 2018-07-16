@@ -38,8 +38,7 @@ describe('Smoke tests on older browsers', () => {
         return expect(isDisplayed).toEqual(true);
     });
 
-    // Safari 9 has always been blank screened due to lack of Intl polyfill
-    test.skip('Safari 9 should not be unsupported', async () => {
+    test('Safari 9 should be supported', async () => {
         const driverConfig = {
             browserName: 'safari',
             platform: 'OS X 10.11',
@@ -55,7 +54,7 @@ describe('Smoke tests on older browsers', () => {
         return expect(isDisplayed).toEqual(true);
     });
 
-    test('Safari 10 should not be unsupported', async () => {
+    test('Safari 10 should be supported', async () => {
         const driverConfig = {
             browserName: 'safari',
             platform: 'OS X 10.11',

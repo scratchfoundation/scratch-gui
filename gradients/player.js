@@ -31,19 +31,19 @@ var _box = __webpack_require__(16);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(136);
+var _gui = __webpack_require__(137);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(174);
+var _hashParserHoc = __webpack_require__(175);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(175);
+var _appStateHoc = __webpack_require__(176);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(127);
+var _mode = __webpack_require__(128);
 
 var _player = __webpack_require__(1567);
 

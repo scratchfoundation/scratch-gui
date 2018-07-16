@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
-/***/ 1478:
+/***/ 1472:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107,5 +107,5 @@ _reactDom2.default.render(_react2.default.createElement(Player, null), appTarget
 
 /***/ })
 
-},[[1478,0]]]);
+},[[1472,0]]]);
 //# sourceMappingURL=compatibilitytesting.js.map

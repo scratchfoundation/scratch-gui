@@ -56,12 +56,12 @@ class ScanningStep extends React.Component {
             <ScanningStepComponent
                 deviceList={this.state.deviceList}
                 phase={this.state.phase}
+                scanning={this.state.scanning}
                 smallDeviceImage={this.props.smallDeviceImage}
                 title={this.props.extensionId}
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
                 onRefresh={this.handleRefresh}
-                scanning={this.state.scanning}
             />
         );
     }

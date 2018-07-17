@@ -1,11 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1467:
+/***/ 1478:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1468);
+var content = __webpack_require__(1479);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -27,7 +27,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1468:
+/***/ 1479:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -44,7 +44,7 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 447:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53,11 +53,11 @@ exports.locals = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
 // For Safari 9
 
-__webpack_require__(448);
+__webpack_require__(454);
 
-__webpack_require__(450);
+__webpack_require__(456);
 
-__webpack_require__(474);
+__webpack_require__(480);
 
 var _react = __webpack_require__(0);
 
@@ -71,19 +71,19 @@ var _analytics = __webpack_require__(34);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(123);
+var _gui = __webpack_require__(126);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(159);
+var _hashParserHoc = __webpack_require__(164);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(160);
+var _appStateHoc = __webpack_require__(165);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(1467);
+var _index = __webpack_require__(1478);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -119,12 +119,12 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ }),
 
-/***/ 476:
+/***/ 482:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[447,0]]]);
+},[[453,0]]]);
 //# sourceMappingURL=gui.js.map

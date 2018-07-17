@@ -94,7 +94,9 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
-        this.setLocale();
+        if (this.props.isVisible) {
+            this.setLocale();
+        }
 
         analytics.pageview('/editors/blocks');
     }
@@ -117,9 +119,9 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        if (prevProps.locale !== this.props.locale) {
-            this.setLocale();
-        }
+        // if (prevProps.locale !== this.props.locale) {
+        //     this.setLocale();
+        // }
 
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             // rather than update the toolbox "sync" -- update it in the next frame
@@ -138,10 +140,17 @@ class Blocks extends React.Component {
         // @todo hack to resize blockly manually in case resize happened while hidden
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
+
             this.workspace.setVisible(true);
-            this.props.vm.refreshWorkspace();
+            if (prevProps.locale !== this.props.locale || this.props.locale !== this.props.vm.getLocale()) {
+                this.setLocale();
+            } else {
+                this.props.vm.refreshWorkspace();
+            }
+
             // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
             this.workspace.toolboxRefreshEnabled_ = true;
+            // this.workspace.setToolboxRefreshEnabled(true);
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);

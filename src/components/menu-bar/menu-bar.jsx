@@ -159,8 +159,9 @@ class MenuBar extends React.Component {
                             })}
                             onMouseUp={this.handleLanguageMouseUp}
                         >
+                            {/* @TODO: remove coming soon tooltip wrapper */}
                             <MenuBarItemTooltip
-                                enable={window.location.search.indexOf('enable=language') !== -1}
+                                enable
                                 id="menubar-selector"
                                 place="right"
                             >

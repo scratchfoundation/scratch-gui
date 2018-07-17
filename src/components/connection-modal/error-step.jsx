@@ -43,8 +43,6 @@ const ErrorStep = props => (
                         src={backIcon}
                     />
                     <FormattedMessage
-                        defaultMessage="Try again"
-                        description="Button to initiate trying the device connection again after an error"
                         id="gui.connection.tryagainbutton"
                     />
                 </button>
@@ -57,8 +55,6 @@ const ErrorStep = props => (
                         src={helpIcon}
                     />
                     <FormattedMessage
-                        defaultMessage="Help"
-                        description="Button to view help content"
                         id="gui.connection.helpbutton"
                     />
                 </button>

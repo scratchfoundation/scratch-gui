@@ -32,7 +32,10 @@ class ScanningStep extends React.Component {
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }
     handlePeripheralScanTimeout () {
-        this.setState({scanning: false});
+        this.setState({
+            scanning: false,
+            deviceList: []
+        });
     }
     handlePeripheralListUpdate (newList) {
         // TODO: sort peripherals by signal strength? so they don't jump around
@@ -58,6 +61,7 @@ class ScanningStep extends React.Component {
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
                 onRefresh={this.handleRefresh}
+                scanning={this.state.scanning}
             />
         );
     }

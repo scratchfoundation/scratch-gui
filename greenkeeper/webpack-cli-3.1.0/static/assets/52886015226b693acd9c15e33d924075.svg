@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>fill-horz-gradient-enabled</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#4C97FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="fill-horz-gradient-enabled" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.15">
+        <rect id="Horizontal" stroke="#000000" fill="url(#linearGradient-1)" x="0.5" y="0.5" width="19" height="19" rx="4"></rect>
+    </g>
+</svg>

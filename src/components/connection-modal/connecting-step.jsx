@@ -29,7 +29,7 @@ const ConnectingStep = props => (
         <Box className={styles.bottomArea}>
             <Box className={styles.instructions}>
                 <FormattedMessage
-                    defaultMessage="Connecting"
+                    defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
                     description=""
                     id="gui.connection.connecting"
                 />

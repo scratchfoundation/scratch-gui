@@ -92,12 +92,12 @@ const PreviewModal = ({intl, ...props}) => (
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//scratch.mit.edu/3faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.previewInfo.previewfaqlink"
+                                    defaultMessage="FAQ"
+                                    description="link to Scratch 3.0 FAQ page"
+                                    id="gui.previewInfo.previewfaqlinktext"
                                 />
                             </a>
                         )

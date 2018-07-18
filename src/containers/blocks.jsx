@@ -94,6 +94,8 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
+        // Only update blocks/vm locale when visible to avoid sizing issues
+        // If locale changes while not visible it will get handled in didUpdate
         if (this.props.isVisible) {
             this.setLocale();
         }
@@ -119,10 +121,6 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        // if (prevProps.locale !== this.props.locale) {
-        //     this.setLocale();
-        // }
-
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             // rather than update the toolbox "sync" -- update it in the next frame
             clearTimeout(this.toolboxUpdateTimeout);
@@ -140,9 +138,10 @@ class Blocks extends React.Component {
         // @todo hack to resize blockly manually in case resize happened while hidden
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
-
             this.workspace.setVisible(true);
             if (prevProps.locale !== this.props.locale || this.props.locale !== this.props.vm.getLocale()) {
+                // call setLocale if the locale has changed, or changed while the blocks were hidden.
+                // vm.getLocale() will be out of sync if locale was changed while not visible
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
@@ -150,7 +149,6 @@ class Blocks extends React.Component {
 
             // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
             this.workspace.toolboxRefreshEnabled_ = true;
-            // this.workspace.setToolboxRefreshEnabled(true);
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);

@@ -4,18 +4,15 @@ import {FormattedMessage} from 'react-intl';
 import musicImage from './music.png';
 import penImage from './pen.png';
 import videoImage from './video-sensing.png';
-import speechImage from './speech.png';
-import microbitImage from './microbit.png';
-import wedoImage from './wedo.png';
-import ev3Image from './ev3.png';
-import boostImage from './boost.png';
 import translateImage from './translate.png';
-
-import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
-import ev3MenuImage from './device-connection/ev3/ev3-small.svg';
+import microbitImage from './microbit.png';
+import ev3Image from './ev3.png';
+import wedoImage from './wedo.png';
 
 import microbitDeviceImage from './device-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './device-connection/microbit/microbit-small.svg';
+import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
+import ev3MenuImage from './device-connection/ev3/ev3-small.svg';
 
 export default [
     {
@@ -59,6 +56,25 @@ export default [
     {
         name: (
             <FormattedMessage
+                defaultMessage="Video Sensing"
+                description="Name for the 'Video Sensing' extension"
+                id="gui.extension.videosensing.name"
+            />
+        ),
+        extensionId: 'videoSensing',
+        iconURL: videoImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Sense motion with the camera."
+                description="Description for the 'Video Sensing' extension"
+                id="gui.extension.videosensing.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
                 defaultMessage="Google Translate"
                 description="Name for the 'Google Translate' extension"
                 id="gui.extension.googletranslate.name"
@@ -74,45 +90,6 @@ export default [
             />
         ),
         featured: true
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Video Motion"
-                description="Name for the 'Video Motion' extension"
-                id="gui.extension.videomotion.name"
-            />
-        ),
-        extensionId: 'videoSensing',
-        iconURL: videoImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Detect motion with the camera."
-                description="Description for the 'Video Motion' extension"
-                id="gui.extension.videomotion.description"
-            />
-        ),
-        featured: true
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Speech Recognition"
-                description="Name for the 'Speech Recognition' extension"
-                id="gui.extension.speechrecognition.name"
-            />
-        ),
-        extensionId: 'speech',
-        iconURL: speechImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Talk to your projects."
-                description="Description for the 'Speech Recognition' extension"
-                id="gui.extension.speechrecognition.description"
-            />
-        ),
-        featured: true,
-        disabled: true
     },
     {
         name: 'micro:bit',
@@ -132,20 +109,6 @@ export default [
         smallDeviceImage: microbitMenuImage
     },
     {
-        name: 'LEGO WeDo 2.0',
-        extensionId: 'wedo2',
-        iconURL: wedoImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Build with motors and sensors."
-                description="Description for the 'LEGO WeDo 2.0' extension"
-                id="gui.extension.wedo2.description"
-            />
-        ),
-        featured: true,
-        disabled: true
-    },
-    {
         name: 'LEGO MINDSTORMS EV3',
         extensionId: 'ev3',
         iconURL: ev3Image,
@@ -163,14 +126,14 @@ export default [
         smallDeviceImage: ev3MenuImage
     },
     {
-        name: 'LEGO Boost',
-        extensionId: 'boost',
-        iconURL: boostImage,
+        name: 'LEGO WeDo 2.0',
+        extensionId: 'wedo2',
+        iconURL: wedoImage,
         description: (
             <FormattedMessage
                 defaultMessage="Build with motors and sensors."
-                description="Description for the 'LEGO Boost' extension"
-                id="gui.extension.boost.description"
+                description="Description for the 'LEGO WeDo 2.0' extension"
+                id="gui.extension.wedo2.description"
             />
         ),
         featured: true,

@@ -4,11 +4,9 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
-    findByText,
     getDriver,
     getLogs,
-    loadUri,
-    scope
+    loadUri
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -24,24 +22,21 @@ describe('Localization', () => {
         await driver.quit();
     });
 
-    // Skipped temporarily while the language selector is marked as
-    // "Coming Soon"
-    test.skip('Localization', async () => {
+    test('Localization', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="tryit"]');
-        await clickText('Code');
-        await clickXpath('//button[@title="Add Extension"]');
-        await clickText('Pen', scope.modal); // Modal closes
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickXpath('//*[@aria-label="language selector"]');
         await clickText('English');
         await clickText('Deutsch');
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks refresh
-        await clickText('Pen'); // will need to be updated when 'Pen' is translated
 
-        // Make sure "Add Sprite" has changed to "Figur hinzufügen"
-        await findByText('Figur hinzufügen');
-        // Find the stamp block in German
-        await findByText('Abdruck');
+        // Make sure the blocks are translating
+        await clickText('Fühlen'); // Sensing category in German
+        await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks to scroll
+        await clickText('Antwort'); // Find the "answer" block in German
+
+        // Change to the costumes tab to confirm other parts of the GUI are translating
+        await clickText('Kostüme');
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

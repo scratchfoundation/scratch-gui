@@ -136,7 +136,8 @@ export default [
                 description="Message to help people connect to their micro:bit."
                 id="gui.extension.microbit.connectingMessage"
             />
-        )
+        ),
+        helpLink: 'https://scratch.mit.edu/microbit'
     },
     {
         name: 'LEGO WeDo 2.0',
@@ -174,7 +175,8 @@ export default [
                 description="Message to help people connect to their EV3. Must note the PIN should be 1234."
                 id="gui.extension.ev3.connectingMessage"
             />
-        )
+        ),
+        helpLink: 'https://scratch.mit.edu/ev3'
     },
     {
         name: 'LEGO Boost',

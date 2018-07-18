@@ -356,7 +356,8 @@ class Blocks extends React.Component {
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
                 name: extension.name,
-                connectingMessage: extension.connectingMessage
+                connectingMessage: extension.connectingMessage,
+                helpLink: extension.helpLink
             }});
         }
     }
@@ -423,6 +424,7 @@ class Blocks extends React.Component {
                         connectingMessage={this.state.connectionModal.connectingMessage}
                         deviceImage={this.state.connectionModal.deviceImage}
                         extensionId={this.state.connectionModal.extensionId}
+                        helpLink={this.state.connectionModal.helpLink}
                         name={this.state.connectionModal.name}
                         smallDeviceImage={this.state.connectionModal.smallDeviceImage}
                         vm={vm}

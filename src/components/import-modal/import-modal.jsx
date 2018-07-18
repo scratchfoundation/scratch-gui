@@ -17,6 +17,12 @@ const messages = defineMessages({
     },
     formDescription: {
         defaultMessage:
+            'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Beta will not be saved.',
+        description: 'Import project message',
+        id: 'gui.importInfo.betamessage'
+    },
+    previewFormDescription: {
+        defaultMessage:
             'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved.',
         description: 'Import project message',
         id: 'gui.importInfo.message'

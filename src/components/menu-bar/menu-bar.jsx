@@ -159,8 +159,9 @@ class MenuBar extends React.Component {
                             })}
                             onMouseUp={this.handleLanguageMouseUp}
                         >
+                            {/* @TODO: remove coming soon tooltip wrapper  https://github.com/LLK/scratch-gui/issues/2664  */}
                             <MenuBarItemTooltip
-                                enable={window.location.search.indexOf('enable=language') !== -1}
+                                enable
                                 id="menubar-selector"
                                 place="right"
                             >

@@ -183,8 +183,41 @@
     align-items: center;
 }
 
+.scratch-link-help {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 1rem 0;
+}
+
+.scratch-link-help-step {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 3rem;
+}
+
 .scratch-link-icon {
-    max-width: 150px;
+    max-width: 50px;
+}
+
+.help-step-image {
+    margin-right: 0.5rem;
+}
+
+.help-step-number {
+    background: $pen-primary;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $ui-white;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    min-width: 2rem;
+    height: 2rem;
 }
 
 .button-row {
@@ -262,7 +295,7 @@
 
 .instructions {
     text-align: center;
-    padding: 1rem;
+    margin-top: 1rem;
 }
 
 .dots-row {
@@ -270,7 +303,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-bottom: 1rem;
+    margin: 1rem;
 }
 
 .dots-holder {

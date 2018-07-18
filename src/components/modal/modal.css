@@ -122,3 +122,14 @@ $sides: 20rem;
     font-weight: normal;
     padding-left: 0;
 }
+
+.header-item-help {
+    padding: 0;
+    margin-right: -4.75rem;
+}
+
+.help-button {
+    font-weight: normal;
+    padding-right: 0;
+    font-size: 0.75rem;
+}

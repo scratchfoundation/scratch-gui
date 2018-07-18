@@ -355,7 +355,9 @@ class Blocks extends React.Component {
                 extensionId: extensionId,
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
-                name: extension.name
+                name: extension.name,
+                connectingMessage: extension.connectingMessage,
+                helpLink: extension.helpLink
             }});
         }
     }
@@ -419,8 +421,10 @@ class Blocks extends React.Component {
                 ) : null}
                 {this.state.connectionModal ? (
                     <ConnectionModal
+                        connectingMessage={this.state.connectionModal.connectingMessage}
                         deviceImage={this.state.connectionModal.deviceImage}
                         extensionId={this.state.connectionModal.extensionId}
+                        helpLink={this.state.connectionModal.helpLink}
                         name={this.state.connectionModal.name}
                         smallDeviceImage={this.state.connectionModal.smallDeviceImage}
                         vm={vm}

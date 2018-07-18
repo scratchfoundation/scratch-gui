@@ -27,6 +27,7 @@ const ConnectionModalComponent = props => (
         contentLabel={props.name}
         headerClassName={styles.header}
         headerImage={props.smallDeviceImage}
+        onHelp={props.onHelp}
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
@@ -40,8 +41,10 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
+    connectingMessage: PropTypes.node,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
+    onHelp: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     smallDeviceImage: PropTypes.string,
     title: PropTypes.string.isRequired

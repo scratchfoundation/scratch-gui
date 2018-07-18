@@ -106,7 +106,15 @@ export default [
         disabled: true,
         launchDeviceConnectionFlow: true,
         deviceImage: microbitDeviceImage,
-        smallDeviceImage: microbitMenuImage
+        smallDeviceImage: microbitMenuImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their micro:bit."
+                id="gui.extension.microbit.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/microbit'
     },
     {
         name: 'LEGO MINDSTORMS EV3',
@@ -123,7 +131,15 @@ export default [
         disabled: true,
         launchDeviceConnectionFlow: true,
         deviceImage: ev3DeviceImage,
-        smallDeviceImage: ev3MenuImage
+        smallDeviceImage: ev3MenuImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
+                description="Message to help people connect to their EV3. Must note the PIN should be 1234."
+                id="gui.extension.ev3.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/ev3'
     },
     {
         name: 'LEGO WeDo 2.0',

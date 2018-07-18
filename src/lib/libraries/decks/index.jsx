@@ -264,7 +264,7 @@ export default {
                     id="gui.howtos.Make-A-Game.step_GamePickSprite"
                 />
             ),
-            image:  stepGamePickSprite
+            image: stepGamePickSprite
         }, {
             title: (
                 <FormattedMessage
@@ -273,8 +273,8 @@ export default {
                     id="gui.howtos.make-a-game.step_GamePlaySound"
                 />
             ),
-            image:  stepGamePlaySound
-          }, {
+            image: stepGamePlaySound
+        }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Create Score Variable"
@@ -282,8 +282,8 @@ export default {
                     id="gui.howtos.make-a-game.step_GameAddScore"
                 />
             ),
-            image:  stepGameAddScore
-          }, {
+            image: stepGameAddScore
+        }, {
             title: (
                 <FormattedMessage
                     defaultMessage="When Clicked Increase Score"

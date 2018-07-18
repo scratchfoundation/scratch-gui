@@ -12,6 +12,11 @@ const messages = defineMessages({
         id: 'gui.previewInfo.label',
         defaultMessage: 'Try Scratch 3.0',
         description: 'Scratch 3.0 modal label - for accessibility'
+    },
+    previewWelcome: {
+        defaultMessage: 'Welcome to the Scratch 3.0 Preview',
+        description: 'Header for Preview Info Modal',
+        id: 'gui.previewInfo.welcome'
     }
 });
 
@@ -28,9 +33,9 @@ const PreviewModal = ({intl, ...props}) => (
         <Box className={styles.body}>
             <h2>
                 <FormattedMessage
-                    defaultMessage="Welcome to the Scratch 3.0 Preview"
-                    description="Header for Preview Info Modal"
-                    id="gui.previewInfo.welcome"
+                    defaultMessage="Welcome to the Scratch 3.0 Beta"
+                    description="Header for Beta Info Modal"
+                    id="gui.previewInfo.betawelcome"
                 />
             </h2>
             <p>
@@ -92,12 +97,12 @@ const PreviewModal = ({intl, ...props}) => (
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//scratch.mit.edu/3faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.previewInfo.previewfaqlink"
+                                    defaultMessage="FAQ"
+                                    description="link to Scratch 3.0 FAQ page"
+                                    id="gui.previewInfo.previewfaqlinktext"
                                 />
                             </a>
                         )

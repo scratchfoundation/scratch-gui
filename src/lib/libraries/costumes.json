@@ -132,7 +132,7 @@
     },
     {
         "name": "Andie-d",
-        "md5": "9687d895da423e717ae568c483d1c870.svg",
+        "md5": "80fa011244f3e3be56b96ebcb9e40d59.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -9033,34 +9033,33 @@
         ]
     },
     {
-        "name": "Taco-a",
-        "md5": "d4a2cea411c6030f017f25184562559d.svg",
+        "name": "Taco",
+        "md5": "bc78fb90ed373d56c11d5fafa4203ccd.svg",
         "type": "costume",
         "tags": [
             "food",
-            "waffle",
-            "yum",
-            "delicious"
+            "designerd"
         ],
         "info": [
-            19,
-            15,
+            78,
+            48,
             1
         ]
     },
     {
-        "name": "Taco-b",
-        "md5": "cef6f6d7c92fc1f008077319ac12dc5e.svg",
+        "name": "Taco-wizard",
+        "md5": "5e9e65db20d403b590578ed44b1a3792.svg",
         "type": "costume",
         "tags": [
             "food",
-            "waffle",
-            "yum",
-            "delicious"
+            "fantasy",
+            "abrakadabra",
+            "alakazam",
+            "designerd"
         ],
         "info": [
-            56,
-            15,
+            125,
+            82,
             1
         ]
     },

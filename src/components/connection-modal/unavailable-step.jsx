@@ -27,7 +27,7 @@ const UnavailableStep = props => (
                 <FormattedMessage
                     defaultMessage="Please start Scratch Link and turn on Bluetooth."
                     description="Scratch link is not installed message"
-                    id="gui.connection.unavailableMessage"
+                    id="gui.connection.unavailable.unavailableMessage"
                 />
             </div>
             <Dots
@@ -46,7 +46,7 @@ const UnavailableStep = props => (
                     <FormattedMessage
                         defaultMessage="Try again"
                         description="Button to initiate trying the device connection again after an error"
-                        id="gui.connection.tryagainbutton"
+                        id="gui.connection.unavailable.tryagainbutton"
                     />
                 </button>
                 <button
@@ -60,7 +60,7 @@ const UnavailableStep = props => (
                     <FormattedMessage
                         defaultMessage="Help"
                         description="Button to view help content"
-                        id="gui.connection.helpbutton"
+                        id="gui.connection.unavailable.helpbutton"
                     />
                 </button>
             </Box>

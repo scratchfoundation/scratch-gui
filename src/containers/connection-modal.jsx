@@ -81,6 +81,7 @@ class ConnectionModal extends React.Component {
     render () {
         return (
             <ConnectionModalComponent
+                connectingMessage={this.props.connectingMessage}
                 deviceImage={this.props.deviceImage}
                 extensionId={this.props.extensionId}
                 name={this.props.name}
@@ -100,6 +101,7 @@ class ConnectionModal extends React.Component {
 }
 
 ConnectionModal.propTypes = {
+    connectingMessage: PropTypes.node.isRequired,
     deviceImage: PropTypes.string.isRequired,
     extensionId: PropTypes.string.isRequired,
     name: PropTypes.node.isRequired,

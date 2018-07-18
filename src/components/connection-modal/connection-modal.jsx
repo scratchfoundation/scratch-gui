@@ -40,6 +40,7 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
+    connectingMessage: PropTypes.node,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,

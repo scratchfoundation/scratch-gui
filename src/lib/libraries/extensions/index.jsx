@@ -103,7 +103,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: true,
+        disabled: false,
         launchDeviceConnectionFlow: true,
         deviceImage: microbitDeviceImage,
         smallDeviceImage: microbitMenuImage,
@@ -128,7 +128,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: true,
+        disabled: false,
         launchDeviceConnectionFlow: true,
         deviceImage: ev3DeviceImage,
         smallDeviceImage: ev3MenuImage,

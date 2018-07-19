@@ -54,6 +54,7 @@ class TipsLibrary extends React.PureComponent {
             <LibraryComponent
                 data={decksLibraryThumbnailData}
                 filterable={false}
+                id="tipsLibrary"
                 title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

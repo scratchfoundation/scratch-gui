@@ -145,10 +145,9 @@ class Blocks extends React.Component {
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
+                this.updateToolbox();
             }
 
-            // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
-            this.workspace.toolboxRefreshEnabled_ = true;
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);
@@ -165,8 +164,8 @@ class Blocks extends React.Component {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
-                this.workspace.updateToolbox(this.props.toolboxXML);
                 this.props.vm.refreshWorkspace();
+                this.updateToolbox();
                 this.workspace.getFlyout().setRecyclingEnabled(true);
             });
     }

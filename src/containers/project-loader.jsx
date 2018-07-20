@@ -59,12 +59,14 @@ class ProjectLoader extends React.Component {
                     action: 'Import Project File',
                     nonInteraction: true
                 });
+                this.props.closeLoadingState();
+                // Reset the file input after project is loaded
+                // This is necessary in case the user wants to reload a project
+                thisFileInput.value = null;
             })
             .catch(error => {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
-            })
-            .finally(() => {
                 this.props.closeLoadingState();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project

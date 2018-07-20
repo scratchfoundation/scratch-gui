@@ -43,7 +43,7 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
             onClick={onCloseCards}
         >
             <FormattedMessage
-                defaultMessage="Remove"
+                defaultMessage="Close"
                 description="Title for button to close how-to card"
                 id="gui.cards.remove"
             />

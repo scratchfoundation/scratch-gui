@@ -94,7 +94,11 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
-        this.setLocale();
+        // Only update blocks/vm locale when visible to avoid sizing issues
+        // If locale changes while not visible it will get handled in didUpdate
+        if (this.props.isVisible) {
+            this.setLocale();
+        }
 
         analytics.pageview('/editors/blocks');
     }
@@ -117,10 +121,6 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        if (prevProps.locale !== this.props.locale) {
-            this.setLocale();
-        }
-
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             // rather than update the toolbox "sync" -- update it in the next frame
             clearTimeout(this.toolboxUpdateTimeout);
@@ -139,9 +139,15 @@ class Blocks extends React.Component {
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
             this.workspace.setVisible(true);
-            this.props.vm.refreshWorkspace();
-            // Re-enable toolbox refreshes without causing one. See #updateToolbox for more info.
-            this.workspace.toolboxRefreshEnabled_ = true;
+            if (prevProps.locale !== this.props.locale || this.props.locale !== this.props.vm.getLocale()) {
+                // call setLocale if the locale has changed, or changed while the blocks were hidden.
+                // vm.getLocale() will be out of sync if locale was changed while not visible
+                this.setLocale();
+            } else {
+                this.props.vm.refreshWorkspace();
+                this.updateToolbox();
+            }
+
             window.dispatchEvent(new Event('resize'));
         } else {
             this.workspace.setVisible(false);
@@ -158,8 +164,8 @@ class Blocks extends React.Component {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
-                this.workspace.updateToolbox(this.props.toolboxXML);
                 this.props.vm.refreshWorkspace();
+                this.updateToolbox();
                 this.workspace.getFlyout().setRecyclingEnabled(true);
             });
     }
@@ -355,7 +361,9 @@ class Blocks extends React.Component {
                 extensionId: extensionId,
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
-                name: extension.name
+                name: extension.name,
+                connectingMessage: extension.connectingMessage,
+                helpLink: extension.helpLink
             }});
         }
     }
@@ -419,8 +427,10 @@ class Blocks extends React.Component {
                 ) : null}
                 {this.state.connectionModal ? (
                     <ConnectionModal
+                        connectingMessage={this.state.connectionModal.connectingMessage}
                         deviceImage={this.state.connectionModal.deviceImage}
                         extensionId={this.state.connectionModal.extensionId}
+                        helpLink={this.state.connectionModal.helpLink}
                         name={this.state.connectionModal.name}
                         smallDeviceImage={this.state.connectionModal.smallDeviceImage}
                         vm={vm}

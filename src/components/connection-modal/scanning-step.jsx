@@ -30,7 +30,7 @@ const ScanningStep = props => (
                         </div>
                     </div>
                 ) : (
-                    <Box className={styles.deviceTilePane}>
+                    <div className={styles.deviceTilePane}>
                         {props.deviceList.map(device =>
                             (<DeviceTile
                                 key={device.peripheralId}
@@ -41,7 +41,7 @@ const ScanningStep = props => (
                                 onConnecting={props.onConnecting}
                             />)
                         )}
-                    </Box>
+                    </div>
                 )
             ) : (
                 <Box className={styles.instructions}>

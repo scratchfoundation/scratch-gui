@@ -28,11 +28,7 @@ const ConnectingStep = props => (
         </Box>
         <Box className={styles.bottomArea}>
             <Box className={styles.instructions}>
-                <FormattedMessage
-                    defaultMessage="Connecting"
-                    description=""
-                    id="gui.connection.connecting"
-                />
+                {props.connectingMessage}
             </Box>
             <Dots
                 counter={1}
@@ -64,6 +60,7 @@ const ConnectingStep = props => (
 );
 
 ConnectingStep.propTypes = {
+    connectingMessage: PropTypes.node.isRequired,
     deviceImage: PropTypes.string.isRequired,
     onDisconnect: PropTypes.func
 };

@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "arraybuffer-loader": "^1.0.3",
-    "autoprefixer": "^8.1.0",
+    "autoprefixer": "^9.0.1",
     "babel-core": "^6.23.1",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.0",

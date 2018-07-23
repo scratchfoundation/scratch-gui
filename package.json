@@ -29,7 +29,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "arraybuffer-loader": "^1.0.3",
+    "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.23.1",
     "babel-eslint": "^8.0.1",

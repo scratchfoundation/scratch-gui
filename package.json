@@ -40,7 +40,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.22.0",
     "base64-loader": "1.0.0",
-    "bowser": "1.9.3",
+    "bowser": "1.9.4",
     "chromedriver": "2.40.0",
     "classnames": "2.2.6",
     "copy-webpack-plugin": "^4.5.1",

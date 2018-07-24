@@ -309,11 +309,13 @@ class Stage extends React.Component {
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
-        // Only start drags on non-draggable targets in editor drag mode
-        if (!this.props.useEditorDragStyle) {
-            const target = this.props.vm.runtime.getTargetById(targetId);
-            if (!target.draggable) return;
-        }
+        const target = this.props.vm.runtime.getTargetById(targetId);
+
+        // Do not start drag unless in editor drag mode or target is draggable
+        if (!(this.props.useEditorDragStyle || target.draggable)) return;
+
+        // Dragging always brings the target to the front
+        target.goToFront();
 
         this.props.vm.startDrag(targetId);
         this.setState({

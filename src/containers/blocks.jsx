@@ -310,6 +310,11 @@ class Blocks extends React.Component {
             this.workspace.scale = scale;
             this.workspace.resize();
         }
+
+        // Clear the undo state of the workspace since this is a
+        // fresh workspace and we don't want any changes made to another sprites
+        // workspace to be 'undone' here.
+        this.workspace.clearUndo();
     }
     handleExtensionAdded (blocksInfo) {
         // select JSON from each block info object then reject the pseudo-blocks which don't have JSON, like separators

@@ -96,7 +96,7 @@
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20180625202813",
-    "scratch-blocks": "0.1.0-prerelease.1532372094",
+    "scratch-blocks": "0.1.0-prerelease.1532446271",
     "scratch-l10n": "3.0.20180719145856",
     "scratch-paint": "0.2.0-prerelease.20180718183615",
     "scratch-render": "0.1.0-prerelease.20180618173030",

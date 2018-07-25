@@ -152,7 +152,7 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onShowAll}) => (
             />
         </div>
         <div className={styles.decks}>
-            {deckIds.map(id => (
+            {deckIds.slice(0, 2).map(id => (
                 <div
                     className={styles.deck}
                     key={`deck-preview-${id}`}

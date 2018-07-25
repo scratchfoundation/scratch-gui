@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
@@ -38,11 +37,9 @@ const SpriteSelectorItem = props => (
             <div className={styles.number}>{props.number}</div>
         )}
         {props.costumeURL ? (
-            <CostumeCanvas
+            <img
                 className={styles.spriteImage}
-                height={32}
-                url={props.costumeURL}
-                width={32}
+                src={props.costumeURL}
             />
         ) : null}
         <div className={styles.spriteInfo}>

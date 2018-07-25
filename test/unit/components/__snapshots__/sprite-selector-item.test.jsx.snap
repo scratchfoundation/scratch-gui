@@ -30,16 +30,9 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
   >
     5
   </div>
-  <canvas
+  <img
     className={undefined}
-    height={32}
-    style={
-      Object {
-        "height": "32px",
-        "width": "32px",
-      }
-    }
-    width={32}
+    src="https://scratch.mit.edu/foo/bar/pony"
   />
   <div
     className={undefined}
@@ -113,16 +106,9 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
       src="test-file-stub"
     />
   </div>
-  <canvas
+  <img
     className={undefined}
-    height={32}
-    style={
-      Object {
-        "height": "32px",
-        "width": "32px",
-      }
-    }
-    width={32}
+    src="https://scratch.mit.edu/foo/bar/pony"
   />
   <div
     className={undefined}

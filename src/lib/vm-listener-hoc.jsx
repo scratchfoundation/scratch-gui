@@ -37,6 +37,12 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.addEventListener('keydown', this.handleKeyDown);
                 document.addEventListener('keyup', this.handleKeyUp);
             }
+            this.props.vm.postIOData('userData', {username: this.props.username});
+        }
+        componentWillReceiveProps (newProps) {
+            if (newProps.username !== this.props.username) {
+                this.props.vm.postIOData('userData', {username: newProps.username});
+            }
         }
         componentWillUnmount () {
             if (this.props.attachKeyboardEvents) {
@@ -72,6 +78,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                username,
                 onBlockDragUpdate,
                 onKeyDown,
                 onKeyUp,
@@ -90,13 +97,16 @@ const vmListenerHOC = function (WrappedComponent) {
         onKeyUp: PropTypes.func,
         onMonitorsUpdate: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
+        username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     VMListener.defaultProps = {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        username: state.session && state.session.session ?
+            state.session.session.username : ''
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

@@ -126,6 +126,7 @@ $sides: 20rem;
 .header-item-help {
     padding: 0;
     margin-right: -4.75rem;
+    z-index: 1;
 }
 
 .help-button {

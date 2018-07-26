@@ -136,8 +136,8 @@ const getTokenAndUsername = state => {
     // Look for the session state provided by scratch-www
     if (state.session && state.session.session) {
         return {
-            token: state.session.session.token,
-            username: state.session.session.username
+            token: state.session.session.user.token,
+            username: state.session.session.user.username
         };
     }
     // Otherwise try to pull testing params out of the URL, or return nulls

@@ -19,6 +19,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 projectData: null,
                 fetchingProject: false
             };
+            storage.setProjectHost(props.projectHost);
+            storage.setAssetHost(props.assetHost);
+
         }
         componentDidMount () {
             if (this.props.projectId || this.props.projectId === 0) {
@@ -26,6 +29,12 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             }
         }
         componentWillUpdate (nextProps) {
+            if (this.props.projectHost !== nextProps.projectHost) {
+                storage.setProjectHost(nextProps.projectHost);
+            }
+            if (this.props.assetHost !== nextProps.assetHost) {
+                storage.setAssetHost(nextProps.assetHost);
+            }
             if (this.props.projectId !== nextProps.projectId) {
                 this.setState({fetchingProject: true}, () => {
                     this.updateProject(nextProps.projectId);
@@ -67,9 +76,13 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         }
     }
     ProjectLoaderComponent.propTypes = {
+        assetHost: PropTypes.string,
+        projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
     ProjectLoaderComponent.defaultProps = {
+        assetHost: 'https://assets.scratch.mit.edu',
+        projectHost: 'https://projects.scratch.mit.edu',
         projectId: 0
     };
 

@@ -94,7 +94,6 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    assetHost: PropTypes.string,
     children: PropTypes.node,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
@@ -102,13 +101,7 @@ GUI.propTypes = {
     onSeeCommunity: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    projectHost: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
-};
-
-GUI.defaultProps = {
-    assetHost: 'https://assets.scratch.mit.edu',
-    projectHost: 'https://projects.scratch.mit.edu'
 };
 
 const mapStateToProps = state => ({

@@ -96,8 +96,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'add-sprite',
-                'glide-around'
+                'add-sprite'
             ]
         }
         ]
@@ -170,8 +169,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'glide-around',
-                'hide-and-show'
+                'glide-around'
             ]
         }
         ]
@@ -238,8 +236,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'add-sprite',
-                'switch-costume'
+                'add-sprite'
             ]
         }
         ]
@@ -323,8 +320,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'move-around-with-arrow-keys',
-                'add-effects'
+                'move-around-with-arrow-keys'
             ]
         }
         ]
@@ -425,7 +421,6 @@ export default {
             image: stepScoreWhenTouch
         }, {
             deckIds: [
-                'add-a-backdrop',
                 'add-effects',
                 'move-around-with-arrow-keys'
             ]
@@ -455,8 +450,7 @@ export default {
             {
                 deckIds: [
                     'add-a-backdrop',
-                    'switch-costume',
-                    'change-size'
+                    'switch-costume'
                 ]
             }
         ]
@@ -475,8 +469,7 @@ export default {
         }, {
             deckIds: [
                 'change-size',
-                'switch-costume',
-                'spin-video'
+                'switch-costume'
             ]
         }]
     },
@@ -494,8 +487,7 @@ export default {
         }, {
             deckIds: [
                 'glide-around',
-                'spin-video',
-                'switch-costume'
+                'spin-video'
             ]
         }]
     },
@@ -513,8 +505,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
     },
@@ -533,8 +524,7 @@ export default {
         }, {
             deckIds: [
                 'Make-Music',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
 
@@ -547,8 +537,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
     },
@@ -566,8 +555,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
     },
@@ -586,8 +574,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'add-effects',
-                'change-size'
+                'add-effects'
             ]
         }]
     },
@@ -600,8 +587,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
     },
@@ -619,8 +605,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume',
-                'change-size'
+                'switch-costume'
             ]
         }]
     }

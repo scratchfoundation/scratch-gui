@@ -375,7 +375,7 @@ class MenuBar extends React.Component {
                 <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
                     <a
                         className={styles.feedbackLink}
-                        href="https://scratch.mit.edu/discuss/topic/299791/"
+                        href="https://scratch.mit.edu/discuss/57/"
                         rel="noopener noreferrer"
                         target="_blank"
                     >

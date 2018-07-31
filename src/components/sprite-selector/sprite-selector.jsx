@@ -36,7 +36,7 @@ const messages = defineMessages({
     addSpriteFromFile: {
         id: 'gui.spriteSelector.addSpriteFromFile',
         description: 'Button to add a sprite in the target pane from file',
-        defaultMessage: 'Upload'
+        defaultMessage: 'Upload Sprite'
     }
 });
 

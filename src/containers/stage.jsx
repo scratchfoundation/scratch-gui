@@ -9,6 +9,7 @@ import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
+import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -60,6 +61,7 @@ class Stage extends React.Component {
             this.props.vm.attachRenderer(this.renderer);
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
+        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
         this.props.vm.setVideoProvider(new VideoProvider());
     }
     componentDidMount () {
@@ -307,11 +309,13 @@ class Stage extends React.Component {
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
-        // Only start drags on non-draggable targets in editor drag mode
-        if (!this.props.useEditorDragStyle) {
-            const target = this.props.vm.runtime.getTargetById(targetId);
-            if (!target.draggable) return;
-        }
+        const target = this.props.vm.runtime.getTargetById(targetId);
+
+        // Do not start drag unless in editor drag mode or target is draggable
+        if (!(this.props.useEditorDragStyle || target.draggable)) return;
+
+        // Dragging always brings the target to the front
+        target.goToFront();
 
         this.props.vm.startDrag(targetId);
         this.setState({

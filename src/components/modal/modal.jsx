@@ -9,6 +9,7 @@ import Button from '../button/button.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 
 import backIcon from '../../lib/assets/icon--back.svg';
+import helpIcon from '../../lib/assets/icon--help.svg';
 
 import styles from './modal.css';
 
@@ -26,13 +27,39 @@ const ModalComponent = props => (
             direction="column"
             grow={1}
         >
-            <div className={styles.header}>
+            <div className={classNames(styles.header, props.headerClassName)}>
+                {props.onHelp ? (
+                    <div
+                        className={classNames(
+                            styles.headerItem,
+                            styles.headerItemHelp
+                        )}
+                    >
+                        <Button
+                            className={styles.helpButton}
+                            iconSrc={helpIcon}
+                            onClick={props.onHelp}
+                        >
+                            <FormattedMessage
+                                defaultMessage="Help"
+                                description="Help button in modal"
+                                id="gui.modal.help"
+                            />
+                        </Button>
+                    </div>
+                ) : null}
                 <div
                     className={classNames(
                         styles.headerItem,
                         styles.headerItemTitle
                     )}
                 >
+                    {props.headerImage ? (
+                        <img
+                            className={styles.headerImage}
+                            src={props.headerImage}
+                        />
+                    ) : null}
                     {props.contentLabel}
                 </div>
                 <div
@@ -74,6 +101,9 @@ ModalComponent.propTypes = {
         PropTypes.object
     ]).isRequired,
     fullScreen: PropTypes.bool,
+    headerClassName: PropTypes.string,
+    headerImage: PropTypes.string,
+    onHelp: PropTypes.func,
     onRequestClose: PropTypes.func
 };
 

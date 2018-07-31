@@ -110,5 +110,5 @@
 
 .placeholder > .sprite {
     background: black;
-    filter: opacity(15%) brightness(20%);
+    filter: opacity(15%) brightness(0%);
 }

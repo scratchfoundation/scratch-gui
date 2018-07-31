@@ -44,6 +44,10 @@
 }
 
 /* @todo: refactor radio divs to input */
+.radio-wrapper {
+    white-space: nowrap; /* make sure visibilty buttons don't wrap */
+}
+
 .radio {
     filter: saturate(0);
     cursor: pointer;

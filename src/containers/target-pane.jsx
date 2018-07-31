@@ -126,7 +126,7 @@ class TargetPane extends React.Component {
     }
     handleBlockDragEnd (blocks) {
         if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
-            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite);
+            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
             this.props.onReceivedBlocks(true);
         }
     }

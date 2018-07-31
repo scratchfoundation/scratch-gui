@@ -93,7 +93,7 @@ $main-button-size: 2.75rem;
 }
 
 .main-button:hover {
-    background: $pen-primary;
+    background: $extensions-primary;
     box-shadow: 0 0 0 6px $motion-transparent;
 }
 

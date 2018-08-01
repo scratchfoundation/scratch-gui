@@ -45,10 +45,10 @@ const PreviewModal = ({intl, ...props}) => (
                 <button
                     className={styles.noButton}
                     onClick={props.onCancel}
+                    title={intl.formatMessage({defaultMessage: "Not Now", description: "Tooltip for Not Now button", id: "gui.previewModal.notnowtooltip"})}
                 >
                     <FormattedMessage
                         defaultMessage="Not Now"
-                        title={intl.formatMessage({defaultMessage: "Not Now", description: "Tooltip for Not Now button", id: "gui.previewModal.notnowtooltip"})}
                         description="Label for button to back out of trying Scratch 3.0 preview"
                         id="gui.previewInfo.notnow"
                     />

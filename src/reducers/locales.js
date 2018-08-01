@@ -9,22 +9,28 @@ const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';
 const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
 
 const initialState = {
+    isRtl: false,
     locale: 'en',
     messagesByLocale: editorMessages,
     messages: editorMessages.en
 };
+
+// TODO: this probably should be coming from scratch-l10n
+const RtlLangs = ['he'];
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case SELECT_LOCALE:
         return Object.assign({}, state, {
+            isRtl: RtlLangs.indexOf(action.locale) !== -1,
             locale: action.locale,
             messagesByLocale: state.messagesByLocale,
             messages: state.messagesByLocale[action.locale]
         });
     case UPDATE_LOCALES:
         return Object.assign({}, state, {
+            isRtl: state.isRtl,
             locale: state.locale,
             messagesByLocale: action.messagesByLocale,
             messages: action.messagesByLocale[state.locale]
@@ -53,6 +59,7 @@ const initLocale = function (currentState, locale) {
             {},
             currentState,
             {
+                isRtl: RtlLangs.indexOf(locale) !== -1,
                 locale: locale,
                 messagesByLocale: currentState.messagesByLocale,
                 messages: currentState.messagesByLocale[locale]

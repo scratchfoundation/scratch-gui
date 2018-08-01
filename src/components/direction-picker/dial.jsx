@@ -56,11 +56,11 @@ class Dial extends React.Component {
      * @returns {string} Path data string for the gauge.
      */
     gaugePath (radius, direction) {
-        const rads = (direction) * (Math.PI / 180)
+        const rads = (direction) * (Math.PI / 180);
         const path = [];
         path.push(`M ${radius} 0`);
         path.push(`L ${radius} ${radius}`);
-        path.push(`L ${radius + radius * Math.sin(rads)} ${radius - radius * Math.cos(rads)}`);
+        path.push(`L ${radius + (radius * Math.sin(rads))} ${radius - (radius * Math.cos(rads))}`);
         path.push(`A ${radius} ${radius} 0 0 ${direction < 0 ? 1 : 0} ${radius} 0`);
         path.push(`Z`);
         return path.join(' ');
@@ -104,21 +104,21 @@ class Dial extends React.Component {
             <div className={styles.container}>
                 <div
                     className={styles.dialContainer}
+                    ref={this.containerRef}
                     style={{
                         width: `${radius * 2}px`,
-                        height: `${radius * 2}px`,
+                        height: `${radius * 2}px`
                     }}
-                    ref={this.containerRef}
                 >
                     <img
-                        src={dialFace}
                         className={styles.dialFace}
                         draggable={false}
+                        src={dialFace}
                     />
                     <svg
-                        width={radius * 2}
-                        height={radius * 2}
                         className={styles.gauge}
+                        height={radius * 2}
+                        width={radius * 2}
                     >
                         <path
                             className={styles.gaugePath}
@@ -126,15 +126,15 @@ class Dial extends React.Component {
                         />
                     </svg>
                     <img
-                        src={dialHandle}
                         className={styles.dialHandle}
                         draggable={false}
+                        ref={this.handleRef}
+                        src={dialHandle}
                         style={{
-                            top: `${radius - radius * Math.cos(direction * (Math.PI / 180))}px`,
-                            left: `${radius + radius * Math.sin(direction * (Math.PI / 180))}px`,
+                            top: `${radius - (radius * Math.cos(direction * (Math.PI / 180)))}px`,
+                            left: `${radius + (radius * Math.sin(direction * (Math.PI / 180)))}px`,
                             transform: `rotate(${direction}deg)`
                         }}
-                        ref={this.handleRef}
                     />
                 </div>
             </div>
@@ -149,8 +149,8 @@ Dial.propTypes = {
 };
 
 Dial.defaultProps = {
-    radius: 56, // px
-    direction: 90 // degrees
+    direction: 90, // degrees
+    radius: 56 // px
 };
 
 export default Dial;

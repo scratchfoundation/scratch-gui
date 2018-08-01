@@ -334,7 +334,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className={undefined}
+    className=""
   >
     <div
       className={undefined}

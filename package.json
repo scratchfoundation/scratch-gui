@@ -88,7 +88,7 @@
     "react-responsive": "5.0.0",
     "react-style-proptype": "3.2.1",
     "react-tabs": "2.2.2",
-    "react-test-renderer": "16.2.0",
+    "react-test-renderer": "16.4.2",
     "react-tooltip": "3.6.1",
     "react-virtualized": "9.20.1",
     "redux": "3.7.2",

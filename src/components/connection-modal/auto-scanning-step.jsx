@@ -141,8 +141,7 @@ AutoScanningStep.propTypes = {
     deviceButtonImage: PropTypes.string,
     onRefresh: PropTypes.func,
     onStartScan: PropTypes.func,
-    phase: PropTypes.oneOf(Object.keys(PHASES)),
-    smallDeviceImage: PropTypes.string
+    phase: PropTypes.oneOf(Object.keys(PHASES))
 };
 
 AutoScanningStep.defaultProps = {

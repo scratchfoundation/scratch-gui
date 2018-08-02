@@ -78,7 +78,7 @@ describe('Working with sounds', () => {
 
     test('Duplicating a sound', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
 
         await rightClickText('Meow', scope.soundsTab);

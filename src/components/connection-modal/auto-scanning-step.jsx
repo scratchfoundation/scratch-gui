@@ -67,7 +67,7 @@ const AutoScanningStep = props => (
                 {props.phase === PHASES.prescan && (
                     <FormattedMessage
                         defaultMessage="Have your device nearby, then begin searching."
-                        description="Prompt for beginning the searching"
+                        description="Prompt for beginning the search"
                         id="gui.connection.auto-scanning.prescan"
                     />
                 )}
@@ -89,7 +89,7 @@ const AutoScanningStep = props => (
                     onClick={props.onStartScan}
                 >
                     <FormattedMessage
-                        defaultMessage="Start Scanning"
+                        defaultMessage="Start Searching"
                         description="Button in prompt for starting a search"
                         id="gui.connection.auto-scanning.start-search"
                     />
@@ -129,7 +129,7 @@ const AutoScanningStep = props => (
                     />
                     <FormattedMessage
                         defaultMessage="Try again"
-                        description="Button in prompt for starting a search"
+                        description="Button in prompt for trying a device search again"
                         id="gui.connection.auto-scanning.try-again"
                     />
                 </button>

@@ -121,7 +121,7 @@ const DirectionPicker = props => (
 );
 
 DirectionPicker.propTypes = {
-    direction: PropTypes.number.isRequired,
+    direction: PropTypes.number,
     disabled: PropTypes.bool.isRequired,
     intl: intlShape,
     onChangeDirection: PropTypes.func.isRequired,

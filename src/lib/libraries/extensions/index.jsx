@@ -158,7 +158,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: false,
+        disabled: true,
         launchDeviceConnectionFlow: true,
         useDeviceList: false,
         deviceImage: wedoDeviceImage,

@@ -101,6 +101,7 @@ class ActionMenu extends React.Component {
             img: mainImg,
             title: mainTitle,
             moreButtons,
+            tooltipPlace,
             onClick
         } = this.props;
 
@@ -134,7 +135,7 @@ class ActionMenu extends React.Component {
                     className={styles.tooltip}
                     effect="solid"
                     id={mainTooltipId}
-                    place="left"
+                    place={tooltipPlace || 'left'}
                 />
                 <div className={styles.moreButtonsOuter}>
                     <div className={styles.moreButtons}>
@@ -174,7 +175,7 @@ class ActionMenu extends React.Component {
                                         })}
                                         effect="solid"
                                         id={tooltipId}
-                                        place="left"
+                                        place={tooltipPlace || 'left'}
                                     />
                                 </div>
                             );
@@ -198,7 +199,8 @@ ActionMenu.propTypes = {
         fileInput: PropTypes.func // Optional, only for file upload
     })),
     onClick: PropTypes.func.isRequired,
-    title: PropTypes.node.isRequired
+    title: PropTypes.node.isRequired,
+    tooltipPlace: PropTypes.string
 };
 
 export default ActionMenu;

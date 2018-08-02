@@ -122,6 +122,7 @@ const SoundEditor = props => (
                         onClick={props.onUndo}
                     >
                         <img
+                            className={styles.undoIcon}
                             draggable={false}
                             src={undoIcon}
                         />
@@ -133,6 +134,7 @@ const SoundEditor = props => (
                         onClick={props.onRedo}
                     >
                         <img
+                            className={styles.redoIcon}
                             draggable={false}
                             src={redoIcon}
                         />

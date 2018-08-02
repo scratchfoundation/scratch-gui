@@ -59,6 +59,10 @@ button::-moz-focus-inner {
     height: calc($main-button-size - 1rem);
 }
 
+[dir="rtl"] .main-icon {
+    transform: scaleX(-1);
+}
+
 .more-buttons-outer {
     /*
         Need to use two divs to set different overflow x/y

@@ -130,6 +130,7 @@
 
 [dir="rtl"] .tab img {
     margin-left: 0.125rem;
+    transform: scaleX(-1);
 }
 
 .tab.is-selected img {
@@ -260,6 +261,10 @@ $fade-out-distance: 15px;
 .extension-button-icon {
     width: 1.75rem;
     height: 1.75rem;
+}
+
+[dir="rtl"] .extension-button-icon {
+    transform: scaleX(-1);
 }
 
 .extension-button > div {

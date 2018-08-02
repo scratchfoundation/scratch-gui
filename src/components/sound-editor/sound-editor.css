@@ -107,6 +107,10 @@ $border-radius: 0.25rem;
     /*min-width: 1.5rem;*/
 }
 
+[dir="rtl"] .undo-icon, [dir="rtl"] .redo-icon {
+    transform: scaleX(-1);
+}
+
 .trim-button {
     display: flex;
     align-items: center;

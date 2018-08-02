@@ -1,6 +1,5 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
-@import "../../css/z-index.css";
 
 $header-height: calc($stage-menu-height - 2px);
 

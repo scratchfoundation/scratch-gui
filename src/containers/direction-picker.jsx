@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import DirectionComponent, {RotationStyle} from '../components/direction-picker/direction-picker.jsx';
+import DirectionComponent, {RotationStyles} from '../components/direction-picker/direction-picker.jsx';
 
 class DirectionPicker extends React.Component {
     constructor (props) {
@@ -25,13 +25,13 @@ class DirectionPicker extends React.Component {
         this.setState({popoverOpen: false});
     }
     handleClickAllAround () {
-        this.props.onChangeRotationStyle(RotationStyle.ALL_AROUND);
+        this.props.onChangeRotationStyle(RotationStyles.ALL_AROUND);
     }
     handleClickLeftRight () {
-        this.props.onChangeRotationStyle(RotationStyle.LEFT_RIGHT);
+        this.props.onChangeRotationStyle(RotationStyles.LEFT_RIGHT);
     }
     handleClickDontRotate () {
-        this.props.onChangeRotationStyle(RotationStyle.DONT_ROTATE);
+        this.props.onChangeRotationStyle(RotationStyles.DONT_ROTATE);
     }
     render () {
         return (

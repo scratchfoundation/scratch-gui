@@ -107,10 +107,18 @@
     background-color: $pen-primary;
 }
 
-.radar {
+.radar-small {
     width: 40px;
     height: 40px;
     margin-right: 0.5rem;
+}
+
+.radar-big {
+    width: 120px;
+    height: 120px;
+}
+
+.radar-spin {
     animation: spin 4s linear infinite;
 }
 
@@ -118,17 +126,6 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.radar-static {
-    width: 120px;
-    height: 120px;
-}
-
-.radar-big {
-    width: 120px;
-    height: 120px;
-    animation: spin 4s linear infinite;
 }
 
 .device-activity {

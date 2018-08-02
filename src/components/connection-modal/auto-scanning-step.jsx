@@ -2,6 +2,7 @@ import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 import keyMirror from 'keymirror';
+import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
 import Dots from './dots.jsx';
@@ -28,7 +29,7 @@ const AutoScanningStep = props => (
                     {props.phase === PHASES.prescan && (
                         <React.Fragment>
                             <img
-                                className={styles.radarStatic}
+                                className={styles.radarBig}
                                 src={radarIcon}
                             />
                             <img
@@ -40,7 +41,7 @@ const AutoScanningStep = props => (
                     {props.phase === PHASES.pressbutton && (
                         <React.Fragment>
                             <img
-                                className={styles.radarBig}
+                                className={classNames(styles.radarBig, styles.radarSpin)}
                                 src={radarIcon}
                             />
                             <img

@@ -153,6 +153,19 @@ export default [
             />
         ),
         featured: true,
-        disabled: true
+        disabled: false,
+        launchDeviceConnectionFlow: true,
+        startWithPrescanStep: true,
+        deviceImage: ev3DeviceImage,
+        smallDeviceImage: ev3MenuImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their WeDo."
+                id="gui.extension.wedo2.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/wedo'
+
     }
 ];

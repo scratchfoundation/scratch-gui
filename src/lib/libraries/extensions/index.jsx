@@ -13,6 +13,9 @@ import microbitDeviceImage from './device-connection/microbit/microbit-illustrat
 import microbitMenuImage from './device-connection/microbit/microbit-small.svg';
 import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
 import ev3MenuImage from './device-connection/ev3/ev3-small.svg';
+import wedoDeviceImage from './device-connection/wedo/wedo-illustration.svg';
+import wedoMenuImage from './device-connection/wedo/wedo-small.svg';
+import wedoButtonImage from './device-connection/wedo/wedo-button-illustration.svg';
 
 export default [
     {
@@ -105,6 +108,7 @@ export default [
         featured: true,
         disabled: false,
         launchDeviceConnectionFlow: true,
+        useDeviceList: true,
         deviceImage: microbitDeviceImage,
         smallDeviceImage: microbitMenuImage,
         connectingMessage: (
@@ -130,6 +134,7 @@ export default [
         featured: true,
         disabled: false,
         launchDeviceConnectionFlow: true,
+        useDeviceList: true,
         deviceImage: ev3DeviceImage,
         smallDeviceImage: ev3MenuImage,
         connectingMessage: (
@@ -155,9 +160,10 @@ export default [
         featured: true,
         disabled: false,
         launchDeviceConnectionFlow: true,
-        startWithPrescanStep: true,
-        deviceImage: ev3DeviceImage,
-        smallDeviceImage: ev3MenuImage,
+        useDeviceList: false,
+        deviceImage: wedoDeviceImage,
+        smallDeviceImage: wedoMenuImage,
+        deviceButtonImage: wedoButtonImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

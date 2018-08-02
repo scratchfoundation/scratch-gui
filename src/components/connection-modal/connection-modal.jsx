@@ -5,8 +5,8 @@ import keyMirror from 'keymirror';
 import Box from '../box/box.jsx';
 import Modal from '../modal/modal.jsx';
 
-import PrescanStep from './prescan-step.jsx';
 import ScanningStep from '../../containers/scanning-step.jsx';
+import AutoScanningStep from '../../containers/auto-scanning-step.jsx';
 import ConnectingStep from './connecting-step.jsx';
 import ConnectedStep from './connected-step.jsx';
 import ErrorStep from './error-step.jsx';
@@ -15,7 +15,6 @@ import UnavailableStep from './unavailable-step.jsx';
 import styles from './connection-modal.css';
 
 const PHASES = keyMirror({
-    prescan: null,
     scanning: null,
     connecting: null,
     connected: null,
@@ -33,8 +32,8 @@ const ConnectionModalComponent = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            {props.phase === PHASES.prescan && <PrescanStep {...props} />}
-            {props.phase === PHASES.scanning && <ScanningStep {...props} />}
+            {props.phase === PHASES.scanning && props.useDeviceList && <ScanningStep {...props} />}
+            {props.phase === PHASES.scanning && !props.useDeviceList && <AutoScanningStep {...props} />}
             {props.phase === PHASES.connecting && <ConnectingStep {...props} />}
             {props.phase === PHASES.connected && <ConnectedStep {...props} />}
             {props.phase === PHASES.error && <ErrorStep {...props} />}
@@ -45,12 +44,14 @@ const ConnectionModalComponent = props => (
 
 ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node,
+    deviceButtonImage: PropTypes.string,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     smallDeviceImage: PropTypes.string,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    useDeviceList: PropTypes.bool.isRequired
 };
 
 export {

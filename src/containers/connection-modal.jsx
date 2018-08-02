@@ -83,12 +83,14 @@ class ConnectionModal extends React.Component {
         return (
             <ConnectionModalComponent
                 connectingMessage={this.props.connectingMessage}
+                deviceButtonImage={this.props.deviceButtonImage}
                 deviceImage={this.props.deviceImage}
                 extensionId={this.props.extensionId}
                 name={this.props.name}
                 phase={this.state.phase}
                 smallDeviceImage={this.props.smallDeviceImage}
                 title={this.props.extensionId}
+                useDeviceList={this.props.useDeviceList}
                 vm={this.props.vm}
                 onCancel={this.props.onCancel}
                 onConnected={this.handleConnected}
@@ -103,6 +105,7 @@ class ConnectionModal extends React.Component {
 
 ConnectionModal.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
+    deviceButtonImage: PropTypes.string,
     deviceImage: PropTypes.string.isRequired,
     extensionId: PropTypes.string.isRequired,
     helpLink: PropTypes.string.isRequired,
@@ -110,6 +113,7 @@ ConnectionModal.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onStatusButtonUpdate: PropTypes.func.isRequired,
     smallDeviceImage: PropTypes.string.isRequired,
+    useDeviceList: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

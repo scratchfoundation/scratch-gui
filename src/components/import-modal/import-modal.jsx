@@ -51,7 +51,7 @@ const ImportModal = ({intl, ...props}) => (
                     )}
                 >
                     <CloseButton
-                        buttonType='back'
+                        buttonType="back"
                         size={CloseButton.SIZE_LARGE}
                         onClick={props.onGoBack}
                     />
@@ -98,9 +98,9 @@ const ImportModal = ({intl, ...props}) => (
                     onClick={props.onViewProject}
                 >
                     <FormattedMessage
-                        defaultMessage='View'
-                        description='Label for button to load a scratch 2.0 project'
-                        id='gui.importModal.viewproject'
+                        defaultMessage="View"
+                        description="Label for button to load a scratch 2.0 project"
+                        id="gui.importModal.viewproject"
                     />
                 </button>
             </Box>
@@ -118,17 +118,17 @@ const ImportModal = ({intl, ...props}) => (
                     onClick={props.onGoBack}
                 >
                     <FormattedMessage
-                        defaultMessage='Go Back'
-                        description='Label for button to back out of importing a project'
-                        id='gui.importInfo.goback'
+                        defaultMessage="Go Back"
+                        description="Label for button to back out of importing a project"
+                        id="gui.importInfo.goback"
                     />
                 </button>
             </Box>
             <Box className={styles.faqLinkText}>
                 <FormattedMessage
-                    defaultMessage='To learn more, go to the {previewFaqLink}.'
-                    description='Invitation to try 3.0 preview'
-                    id='gui.importInfo.previewfaq'
+                    defaultMessage="To learn more, go to the {previewFaqLink}."
+                    description="Invitation to try 3.0 preview"
+                    id="gui.importInfo.previewfaq"
                     values={{
                         previewFaqLink: (
                             <a

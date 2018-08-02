@@ -20,6 +20,7 @@ class TargetPane extends React.Component {
         super(props);
         bindAll(this, [
             'handleBlockDragEnd',
+            'handleChangeSpriteRotationStyle',
             'handleChangeSpriteDirection',
             'handleChangeSpriteName',
             'handleChangeSpriteSize',
@@ -47,6 +48,9 @@ class TargetPane extends React.Component {
     }
     handleChangeSpriteDirection (direction) {
         this.props.vm.postSpriteInfo({direction});
+    }
+    handleChangeSpriteRotationStyle (rotationStyle) {
+        this.props.vm.postSpriteInfo({rotationStyle});
     }
     handleChangeSpriteName (name) {
         this.props.vm.renameSprite(this.props.editingTarget, name);
@@ -167,6 +171,7 @@ class TargetPane extends React.Component {
                 fileInputRef={this.setFileInput}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
+                onChangeSpriteRotationStyle={this.handleChangeSpriteRotationStyle}
                 onChangeSpriteSize={this.handleChangeSpriteSize}
                 onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}

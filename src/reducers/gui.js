@@ -15,6 +15,7 @@ import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
+import rubyCodeReducer, {rubyCodeInitialState} from './ruby-code';
 import throttle from 'redux-throttle';
 
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
@@ -35,7 +36,8 @@ const guiInitialState = {
     monitorLayout: monitorLayoutInitialState,
     targets: targetsInitialState,
     toolbox: toolboxInitialState,
-    vm: vmInitialState
+    vm: vmInitialState,
+    rubyCode: rubyCodeInitialState
 };
 
 const initPlayer = function (currentState) {
@@ -75,6 +77,7 @@ const guiReducer = combineReducers({
     monitorLayout: monitorLayoutReducer,
     targets: targetReducer,
     toolbox: toolboxReducer,
+    rubyCode: rubyCodeReducer,
     vm: vmReducer
 });
 

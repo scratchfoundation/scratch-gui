@@ -95,9 +95,9 @@ const PreviewModal = ({intl, ...props}) => (
                     onClick={props.onViewProject}
                 >
                     <FormattedMessage
-                        defaultMessage='View 2.0 Project'
-                        description='Label for button to import a 2.0 project'
-                        id='gui.previewModal.viewproject'
+                        defaultMessage="View 2.0 Project"
+                        description="Label for button to import a 2.0 project"
+                        id="gui.previewModal.viewproject"
                     />
                 </button>
             </Box>

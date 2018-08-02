@@ -83,6 +83,10 @@ $sides: 20rem;
     user-select: none;
 }
 
+.header-image {
+    margin-right: 0.5rem;
+}
+
 .header-item-filter {
     display: flex;
     flex-basis: $sides;
@@ -117,4 +121,16 @@ $sides: 20rem;
 .back-button {
     font-weight: normal;
     padding-left: 0;
+}
+
+.header-item-help {
+    padding: 0;
+    margin-right: -4.75rem;
+    z-index: 1;
+}
+
+.help-button {
+    font-weight: normal;
+    padding-right: 0;
+    font-size: 0.75rem;
 }

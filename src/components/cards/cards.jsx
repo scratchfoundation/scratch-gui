@@ -8,7 +8,7 @@ import styles from './card.css';
 import nextIcon from './icon--next.svg';
 import prevIcon from './icon--prev.svg';
 
-import helpIcon from './icon--help.svg';
+import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import closeIcon from '../close-button/icon--close.svg';
 
 const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
@@ -22,9 +22,9 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
                 src={helpIcon}
             />
             <FormattedMessage
-                defaultMessage="All How-Tos"
-                description="Title for button to return to how-to library"
-                id="gui.cards.all-how-tos"
+                defaultMessage="Tutorials"
+                description="Title for button to return to tutorials library"
+                id="gui.cards.all-tutorials"
             />
         </div>
         {totalSteps > 1 ? (
@@ -43,7 +43,7 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
             onClick={onCloseCards}
         >
             <FormattedMessage
-                defaultMessage="Remove"
+                defaultMessage="Close"
                 description="Title for button to close how-to card"
                 id="gui.cards.remove"
             />
@@ -152,7 +152,7 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onShowAll}) => (
             />
         </div>
         <div className={styles.decks}>
-            {deckIds.map(id => (
+            {deckIds.slice(0, 2).map(id => (
                 <div
                     className={styles.deck}
                     key={`deck-preview-${id}`}

@@ -20,9 +20,9 @@ import {
 
 const messages = defineMessages({
     tipsLibraryTitle: {
-        defaultMessage: 'How-Tos',
-        description: 'Heading for the help/how-tos library',
-        id: 'gui.tipsLibrary.howtos'
+        defaultMessage: 'Choose a Tutorial',
+        description: 'Heading for the help/tutorials library',
+        id: 'gui.tipsLibrary.tutorials'
     }
 });
 
@@ -54,6 +54,7 @@ class TipsLibrary extends React.PureComponent {
             <LibraryComponent
                 data={decksLibraryThumbnailData}
                 filterable={false}
+                id="tipsLibrary"
                 title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

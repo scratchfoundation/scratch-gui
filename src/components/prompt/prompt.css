@@ -15,7 +15,7 @@
     margin: 0 0 0.75rem;
 }
 
-.input {
+.variable-name-text-input {
     margin-bottom: 1.5rem;
     width: 100%;
     border: 1px solid $ui-black-transparent;
@@ -24,6 +24,20 @@
     height: 3rem;
     color: $text-primary-transparent;
     font-size: .875rem;
+}
+
+.info-message {
+    font-weight: normal;
+    font-size: .875rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.options-row {
+    display: flex;
+    font-weight: normal;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
 }
 
 .button-row {
@@ -56,10 +70,6 @@
     padding: 1rem;
     text-align: center;
     margin: 0 0 1rem;
-}
-
-.hide-more-options {
-    display: none;
 }
 
 .more-options-accordion {

@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
  * Turbo Mode component passes toggleTurboMode function to its child.
  * It also includes `turboMode` in the props passed to the children.
  * It expects this child to be a function with the signature
- *     function (turboMode, toggleTurboMode, props) {}
+ *     function (toggleTurboMode, {turboMode, ...props}) {}
  * The component can then be used to attach turbo mode setting functionality
  * to any other component:
  *

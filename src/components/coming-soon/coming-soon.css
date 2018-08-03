@@ -16,7 +16,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 1rem !important;
     line-height: 1.25rem !important;
-    z-index: $z-index-coming-soon !important;
+    z-index: $z-index-tooltip !important;
 }
 
 .coming-soon:after {

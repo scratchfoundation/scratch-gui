@@ -11,10 +11,14 @@ import {
     spritePayload
 } from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
+import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 
 import {connect} from 'react-redux';
 import storage from '../lib/storage';
 import VM from 'scratch-vm';
+
+const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND, DragConstants.SPRITE];
+const DroppableBackpack = DropAreaHOC(dragTypes)(BackpackComponent);
 
 class Backpack extends React.Component {
     constructor (props) {
@@ -23,8 +27,7 @@ class Backpack extends React.Component {
             'handleDrop',
             'handleToggle',
             'handleDelete',
-            'refreshContents',
-            'setRef'
+            'refreshContents'
         ]);
         this.state = {
             dragOver: false,
@@ -44,29 +47,6 @@ class Backpack extends React.Component {
                 asset => `${props.host}/${asset.assetId}.${asset.dataFormat}`
             );
             storage._hasAddedBackpackSource = true;
-        }
-    }
-    componentWillReceiveProps (newProps) {
-        const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND, DragConstants.SPRITE];
-        // If `dragging` becomes true, record the drop area rectangle
-        if (newProps.dragInfo.dragging && !this.props.dragInfo.dragging) {
-            this.dropAreaRect = this.ref && this.ref.getBoundingClientRect();
-        // If `dragging` becomes false, call the drop handler
-        } else if (!newProps.dragInfo.dragging && this.props.dragInfo.dragging && this.state.dragOver) {
-            this.handleDrop(this.props.dragInfo);
-            this.setState({dragOver: false});
-        }
-
-        // If a drag is in progress (currentOffset) and it matches the relevant drag types,
-        // test if the drag is within the drop area rect and set the state accordingly.
-        if (this.dropAreaRect && newProps.dragInfo.currentOffset && dragTypes.includes(newProps.dragInfo.dragType)) {
-            const {x, y} = newProps.dragInfo.currentOffset;
-            const {top, right, bottom, left} = this.dropAreaRect;
-            if (x > left && x < right && y > top && y < bottom) {
-                this.setState({dragOver: true});
-            } else {
-                this.setState({dragOver: false});
-            }
         }
     }
     handleToggle () {
@@ -126,19 +106,15 @@ class Backpack extends React.Component {
                 });
         }
     }
-    setRef (ref) {
-        this.ref = ref;
-    }
     render () {
         return (
-            <BackpackComponent
+            <DroppableBackpack
                 contents={this.state.contents}
-                dragOver={this.state.dragOver}
-                dropAreaRef={this.setRef}
                 error={this.state.error}
                 expanded={this.state.expanded}
                 loading={this.state.loading}
                 onDelete={this.handleDelete}
+                onDrop={this.handleDrop}
                 onToggle={this.props.host ? this.handleToggle : null}
             />
         );
@@ -146,15 +122,6 @@ class Backpack extends React.Component {
 }
 
 Backpack.propTypes = {
-    dragInfo: PropTypes.shape({
-        currentOffset: PropTypes.shape({
-            x: PropTypes.number,
-            y: PropTypes.number
-        }),
-        dragType: PropTypes.string,
-        dragging: PropTypes.bool,
-        index: PropTypes.number
-    }),
     host: PropTypes.string,
     token: PropTypes.string,
     username: PropTypes.string,
@@ -181,7 +148,6 @@ const getTokenAndUsername = state => {
 
 const mapStateToProps = state => Object.assign(
     {
-        dragInfo: state.scratchGui.assetDrag,
         vm: state.scratchGui.vm
     },
     getTokenAndUsername(state)

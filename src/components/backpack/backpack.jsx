@@ -17,7 +17,7 @@ const dragTypeMap = {
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, onToggle, onDelete}) => (
+const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, onToggle, onDelete}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -45,7 +45,7 @@ const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, on
         {expanded ? (
             <div
                 className={styles.backpackList}
-                ref={dropAreaRef}
+                ref={containerRef}
             >
                 {error ? (
                     <div className={styles.statusMessage}>
@@ -104,6 +104,7 @@ const Backpack = ({contents, dragOver, dropAreaRef, error, expanded, loading, on
 );
 
 Backpack.propTypes = {
+    containerRef: PropTypes.func,
     contents: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
         thumbnailUrl: PropTypes.string,
@@ -111,7 +112,6 @@ Backpack.propTypes = {
         name: PropTypes.string
     })),
     dragOver: PropTypes.bool,
-    dropAreaRef: PropTypes.func,
     error: PropTypes.bool,
     expanded: PropTypes.bool,
     loading: PropTypes.bool,

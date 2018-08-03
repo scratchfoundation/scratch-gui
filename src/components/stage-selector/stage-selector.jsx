@@ -39,6 +39,8 @@ const messages = defineMessages({
 const StageSelector = props => {
     const {
         backdropCount,
+        containerRef,
+        dragOver,
         fileInputRef,
         intl,
         selected,
@@ -59,9 +61,10 @@ const StageSelector = props => {
         <Box
             className={classNames(styles.stageSelector, {
                 [styles.isSelected]: selected,
-                [styles.raised]: raised,
+                [styles.raised]: raised || dragOver,
                 [styles.receivedBlocks]: receivedBlocks
             })}
+            componentRef={containerRef}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -125,6 +128,8 @@ const StageSelector = props => {
 
 StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
+    containerRef: PropTypes.func,
+    dragOver: PropTypes.bool,
     fileInputRef: PropTypes.func,
     intl: intlShape.isRequired,
     onBackdropFileUpload: PropTypes.func,

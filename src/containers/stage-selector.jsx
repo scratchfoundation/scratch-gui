@@ -7,12 +7,17 @@ import {connect} from 'react-redux';
 import {openBackdropLibrary} from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setHoveredSprite} from '../reducers/hovered-target';
+import DragConstants from '../lib/drag-constants';
+import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
+
+const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND];
+const DroppableStage = DropAreaHOC(dragTypes)(StageSelectorComponent);
 
 class StageSelector extends React.Component {
     constructor (props) {
@@ -27,6 +32,7 @@ class StageSelector extends React.Component {
             'handleBackdropUpload',
             'handleMouseEnter',
             'handleMouseLeave',
+            'handleDrop',
             'setFileInput'
         ]);
     }
@@ -75,6 +81,13 @@ class StageSelector extends React.Component {
     handleMouseLeave () {
         this.props.dispatchSetHoveredSprite(null);
     }
+    handleDrop (dragInfo) {
+        if (dragInfo.dragType === DragConstants.COSTUME) {
+            this.props.vm.shareCostumeToTarget(dragInfo.index, this.props.id);
+        } else if (dragInfo.dragType === DragConstants.SOUND) {
+            this.props.vm.shareSoundToTarget(dragInfo.index, this.props.id);
+        }
+    }
     setFileInput (input) {
         this.fileInput = input;
     }
@@ -82,16 +95,16 @@ class StageSelector extends React.Component {
         const componentProps = omit(this.props, [
             'assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
         return (
-            <StageSelectorComponent
+            <DroppableStage
                 fileInputRef={this.setFileInput}
                 onBackdropFileUpload={this.handleBackdropUpload}
                 onBackdropFileUploadClick={this.handleFileUploadClick}
                 onClick={this.handleClick}
+                onDrop={this.handleDrop}
                 onEmptyBackdropClick={this.handleEmptyBackdrop}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onSurpriseBackdropClick={this.handleSurpriseBackdrop}
-
                 {...componentProps}
             />
         );

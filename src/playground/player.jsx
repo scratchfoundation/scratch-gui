@@ -36,7 +36,7 @@ const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
     onSeeInside: PropTypes.func,
-    projectId: PropTypes.number
+    projectId: PropTypes.string
 };
 
 const mapStateToProps = state => ({

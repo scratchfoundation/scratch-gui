@@ -17,18 +17,13 @@ class ConnectionModal extends React.Component {
             'handleHelp'
         ]);
         this.state = {
-            phase: PHASES.scanning
+            phase: props.vm.getPeripheralIsConnected(props.extensionId) ?
+                PHASES.connected : PHASES.scanning
         };
     }
     componentDidMount () {
         this.props.vm.on('PERIPHERAL_CONNECTED', this.handleConnected);
         this.props.vm.on('PERIPHERAL_ERROR', this.handleError);
-
-        // Check if we're already connected
-        if (this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
-            this.handleConnected();
-        }
-
     }
     componentWillUnmount () {
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);

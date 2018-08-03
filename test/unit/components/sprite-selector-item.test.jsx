@@ -1,7 +1,6 @@
 import React from 'react';
 import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
 import SpriteSelectorItemComponent from '../../../src/components/sprite-selector-item/sprite-selector-item';
-import CostumeCanvas from '../../../src/components/costume-canvas/costume-canvas';
 import CloseButton from '../../../src/components/close-button/close-button';
 
 describe('SpriteSelectorItemComponent', () => {
@@ -71,17 +70,6 @@ describe('SpriteSelectorItemComponent', () => {
         const wrapper = shallowWithIntl(getComponent());
         wrapper.find(CloseButton).simulate('click');
         expect(onDeleteButtonClick).toHaveBeenCalled();
-    });
-
-    test('creates a CostumeCanvas when a costume url is defined', () => {
-        const wrapper = shallowWithIntl(getComponent());
-        expect(wrapper.find(CostumeCanvas).exists()).toBe(true);
-    });
-
-    test('does not create a CostumeCanvas when a costume url is null', () => {
-        costumeURL = null;
-        const wrapper = shallowWithIntl(getComponent());
-        expect(wrapper.find(CostumeCanvas).exists()).toBe(false);
     });
 
     test('it has a context menu with delete menu item and callback', () => {

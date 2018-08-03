@@ -26,7 +26,7 @@ const ErrorStep = props => (
                 <FormattedMessage
                     defaultMessage="Oops, looks like something went wrong."
                     description="The device connection process has encountered an error."
-                    id="gui.connection.errorMessage"
+                    id="gui.connection.error.errorMessage"
                 />
             </div>
             <Dots
@@ -45,7 +45,7 @@ const ErrorStep = props => (
                     <FormattedMessage
                         defaultMessage="Try again"
                         description="Button to initiate trying the device connection again after an error"
-                        id="gui.connection.tryagainbutton"
+                        id="gui.connection.error.tryagainbutton"
                     />
                 </button>
                 <button
@@ -59,7 +59,7 @@ const ErrorStep = props => (
                     <FormattedMessage
                         defaultMessage="Help"
                         description="Button to view help content"
-                        id="gui.connection.helpbutton"
+                        id="gui.connection.error.helpbutton"
                     />
                 </button>
             </Box>

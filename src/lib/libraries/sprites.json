@@ -117,6 +117,81 @@
         }
     },
     {
+        "name": "Andie",
+        "md5": "936abdaaac3a3f7d27e5f30b3da00e5f.svg",
+        "type": "sprite",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "wheelchair",
+            "handicap",
+            "handicapable",
+            "alex eben meyer"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Andie",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "andie-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "936abdaaac3a3f7d27e5f30b3da00e5f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 77
+                },
+                {
+                    "costumeName": "andie-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cc2953492b40e231fdee3d8c9994a646.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 46,
+                    "rotationCenterY": 77
+                },
+                {
+                    "costumeName": "andie-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "76e26ccb79a94d3e89f67e64b4cb9731.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 36
+                },
+                {
+                    "costumeName": "andie-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "80fa011244f3e3be56b96ebcb9e40d59.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 43
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -129,
+            "scratchY": -73,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Anina Dance",
         "md5": "9374e067ca4b66427fc64a0822f6e468.png",
         "type": "sprite",
@@ -810,8 +885,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 77,
-            "scratchY": -115,
+            "scratchX": 202,
+            "scratchY": -108,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -822,7 +897,7 @@
     },
     {
         "name": "Bat",
-        "md5": "a68f7a0b2af7514c729bb083d04dbbde.svg",
+        "md5": "3b6274510488d5b26447c1c266475801.svg",
         "type": "sprite",
         "tags": [
             "fantasy",
@@ -853,39 +928,39 @@
                 {
                     "costumeName": "bat-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "a68f7a0b2af7514c729bb083d04dbbde.svg",
+                    "baseLayerMD5": "3b6274510488d5b26447c1c266475801.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "4ea5bb61370e189d2eba763312680201.svg",
+                    "baseLayerMD5": "8b20987d450379a445cbfc41ff2a3874.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "9ed4deead22db511202f38abadf508c4.svg",
+                    "baseLayerMD5": "c6d6a6892638e489902fbba803050de1.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "bat-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "293a7b03badd2f3b49e50acfb9c242ec.svg",
+                    "baseLayerMD5": "e3da64838b2c74b6dd9a080b030e327e.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 51,
-                    "rotationCenterY": 47
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 61
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -39,
-            "scratchY": 121,
+            "scratchX": -48,
+            "scratchY": 109,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -2090,7 +2165,7 @@
             "costumes": [
                 {
                     "costumeName": "cake-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "e1e8e8a765b8778d6181035c5c66984d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 64,
@@ -2098,7 +2173,7 @@
                 },
                 {
                     "costumeName": "cake-b",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "460268a804e7682c9fabf37e4b70071c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 64,
@@ -2343,7 +2418,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "cat1",
+                    "costumeName": "cat-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
                     "bitmapResolution": 1,
@@ -2351,7 +2426,7 @@
                     "rotationCenterY": 55
                 },
                 {
-                    "costumeName": "cat2",
+                    "costumeName": "cat-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
                     "bitmapResolution": 1,
@@ -2371,63 +2446,7 @@
         }
     },
     {
-        "name": "Cat1 Flying",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
-        "type": "sprite",
-        "tags": [
-            "animals",
-            "cat",
-            "kitty",
-            "kitten"
-        ],
-        "info": [
-            0,
-            2,
-            1
-        ],
-        "json": {
-            "objName": "Cat1 Flying",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "cat1 flying-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 67,
-                    "rotationCenterY": 48
-                },
-                {
-                    "costumeName": "cat1 flying-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 42,
-                    "rotationCenterY": 44
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -53,
-            "scratchY": -14,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Cat2",
+        "name": "Cat 2",
         "md5": "01ae57fd339529445cb890978ef8a054.svg",
         "type": "sprite",
         "tags": [
@@ -2443,7 +2462,7 @@
             1
         ],
         "json": {
-            "objName": "Cat2",
+            "objName": "Cat 2",
             "sounds": [
                 {
                     "soundName": "meow2",
@@ -2456,7 +2475,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "cat2",
+                    "costumeName": "cat 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "01ae57fd339529445cb890978ef8a054.svg",
                     "bitmapResolution": 1,
@@ -2467,6 +2486,62 @@
             "currentCostumeIndex": 0,
             "scratchX": -71,
             "scratchY": 1,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Cat Flying",
+        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "cat",
+            "kitty",
+            "kitten"
+        ],
+        "info": [
+            0,
+            2,
+            1
+        ],
+        "json": {
+            "objName": "Cat Flying",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "cat flying-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 67,
+                    "rotationCenterY": 48
+                },
+                {
+                    "costumeName": "cat flying-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 42,
+                    "rotationCenterY": 44
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -53,
+            "scratchY": -14,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -3144,7 +3219,7 @@
     },
     {
         "name": "D-Money Dance",
-        "md5": "b30a60d31aebead577b73affd22bf30f.svg",
+        "md5": "09dc9d82f097edfc6b2b6e4b5009c5f6.png",
         "type": "sprite",
         "tags": [
             "people",
@@ -3171,23 +3246,23 @@
                 {
                     "costumeName": "dm stance",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b30a60d31aebead577b73affd22bf30f.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 55,
-                    "rotationCenterY": 119
+                    "baseLayerMD5": "09dc9d82f097edfc6b2b6e4b5009c5f6.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 106,
+                    "rotationCenterY": 238
                 },
                 {
                     "costumeName": "dm top stand",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "051c36758b9fd1136b511efc5dd6234a.png",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "a22da98e5e63de7b2883355afd0184f0.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 82,
                     "rotationCenterY": 244
                 },
                 {
                     "costumeName": "dm top R leg",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "6cea0c29c460e571226cc4cff5b97c28.png",
+                    "baseLayerID": 1,
+                    "baseLayerMD5": "12db59633a1709a2c39534d35263791f.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 218,
                     "rotationCenterY": 232
@@ -4177,8 +4252,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -108,
-            "scratchY": -61,
+            "scratchX": -24,
+            "scratchY": -57,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -5457,8 +5532,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": -110,
-            "scratchY": -24,
+            "scratchX": -115,
+            "scratchY": -46,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -7239,7 +7314,7 @@
             "costumes": [
                 {
                     "costumeName": "headband",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 53,
@@ -7458,7 +7533,7 @@
             "costumes": [
                 {
                     "costumeName": "hedgehog-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "32416e6b2ef8e45fb5fd10778c1b9a9f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 71,
@@ -7466,7 +7541,7 @@
                 },
                 {
                     "costumeName": "hedgehog-b",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "4d3ccc06660e07b55bd38246e1f82f7f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 71,
@@ -7474,7 +7549,7 @@
                 },
                 {
                     "costumeName": "hedgehog-c",
-                    "baseLayerID": 2,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "2446f79c0f553594cfbcdbe6b1e459a5.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 71,
@@ -7482,7 +7557,7 @@
                 },
                 {
                     "costumeName": "hedgehog-d",
-                    "baseLayerID": 3,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "bdb7c8e86125092da0c4848d1ffd901c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 71,
@@ -7490,7 +7565,7 @@
                 },
                 {
                     "costumeName": "hedgehog-e",
-                    "baseLayerID": 4,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "78a0e3789f6d778e20f9bf3d308a0b19.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 61,
@@ -7846,7 +7921,7 @@
         }
     },
     {
-        "name": "Jamie",
+        "name": "Jamal",
         "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
         "type": "sprite",
         "tags": [
@@ -7861,7 +7936,7 @@
             1
         ],
         "json": {
-            "objName": "Jamie",
+            "objName": "Jamal",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -7874,7 +7949,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "jamie-a",
+                    "costumeName": "jamal-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
                     "bitmapResolution": 1,
@@ -7882,7 +7957,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-b",
+                    "costumeName": "jamal-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
                     "bitmapResolution": 1,
@@ -7890,7 +7965,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-c",
+                    "costumeName": "jamal-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
                     "bitmapResolution": 1,
@@ -7898,7 +7973,7 @@
                     "rotationCenterY": 105
                 },
                 {
-                    "costumeName": "jamie-d",
+                    "costumeName": "jamal-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4adb87e6123161fcaf02f7ac022a5757.svg",
                     "bitmapResolution": 1,
@@ -8224,7 +8299,7 @@
                 },
                 {
                     "costumeName": "jo top L leg",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a12f40b18067bb31746f9cf461de88aa.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 208,
@@ -8232,7 +8307,7 @@
                 },
                 {
                     "costumeName": "jo top R cross",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "c2d5519e8a0f2214ff757117038c28dc.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 144,
@@ -8240,7 +8315,7 @@
                 },
                 {
                     "costumeName": "jo top L cross",
-                    "baseLayerID": 2,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "2e2a6534d33883fdd2f8471a1adbebb7.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 84,
@@ -8248,7 +8323,7 @@
                 },
                 {
                     "costumeName": "jo pop front",
-                    "baseLayerID": 3,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "3d3ea804243800981acabc7caba10939.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 70,
@@ -8256,7 +8331,7 @@
                 },
                 {
                     "costumeName": "jo pop down",
-                    "baseLayerID": 4,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a55fbb529c10f70bcb374aef8a63571b.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 68,
@@ -8264,7 +8339,7 @@
                 },
                 {
                     "costumeName": "jo pop left",
-                    "baseLayerID": 5,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "ea812b4c2b2405aa2b73158023298f71.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 196,
@@ -8272,7 +8347,7 @@
                 },
                 {
                     "costumeName": "jo pop right",
-                    "baseLayerID": 6,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "01dd2f553c7262329ebaba2516e3a2b1.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 66,
@@ -8280,7 +8355,7 @@
                 },
                 {
                     "costumeName": "jo pop L arm",
-                    "baseLayerID": 7,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a9fbc01a4124d555da12630312e46197.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 108,
@@ -8288,7 +8363,7 @@
                 },
                 {
                     "costumeName": "jo pop stand",
-                    "baseLayerID": 8,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "75ee2383fd83992b401c8a0730521d94.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 78,
@@ -8296,7 +8371,7 @@
                 },
                 {
                     "costumeName": "jo pop R arm",
-                    "baseLayerID": 9,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a35a3bbc4e21ce2f5de940adb7017fa6.png",
                     "bitmapResolution": 2,
                     "rotationCenterX": 108,
@@ -10361,7 +10436,7 @@
             "costumes": [
                 {
                     "costumeName": "panther-a",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "04ca2c122cff11b9bc23834d6f79361e.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 125,
@@ -10369,7 +10444,7 @@
                 },
                 {
                     "costumeName": "panther-b",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "f8c33765d1105f3bb4cd145fad0f717e.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 125,
@@ -10377,7 +10452,7 @@
                 },
                 {
                     "costumeName": "panther-c",
-                    "baseLayerID": 2,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "096bf9cad84def12eef2b5d84736b393.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 125,
@@ -11333,7 +11408,7 @@
             "costumes": [
                 {
                     "costumeName": "rabbit-a",
-                    "baseLayerID": 5,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "2f42891c3f3d63c0e591aeabc5946533.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -11341,7 +11416,7 @@
                 },
                 {
                     "costumeName": "rabbit-b",
-                    "baseLayerID": 6,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "80e05ff501040cdc9f52fa6782e06fd2.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -11349,7 +11424,7 @@
                 },
                 {
                     "costumeName": "rabbit-c",
-                    "baseLayerID": 7,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "88ed8b7925baa025b6c7fc628a64b9b1.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -11357,7 +11432,7 @@
                 },
                 {
                     "costumeName": "rabbit-d",
-                    "baseLayerID": 8,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "5f3b8df4d6ab8a72e887f89f554db0be.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -11365,7 +11440,7 @@
                 },
                 {
                     "costumeName": "rabbit-e",
-                    "baseLayerID": 9,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "3003f1135f4aa3b6c361734243621260.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -12888,7 +12963,7 @@
             "costumes": [
                 {
                     "costumeName": "snake-a",
-                    "baseLayerID": 3,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "4d06e12d90479461303d828f0970f2d4.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 142,
@@ -12896,7 +12971,7 @@
                 },
                 {
                     "costumeName": "snake-b",
-                    "baseLayerID": 4,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a8546a5f9ccaa2bdb678a362c50a17ec.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 142,
@@ -12904,7 +12979,7 @@
                 },
                 {
                     "costumeName": "snake-c",
-                    "baseLayerID": 5,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "d993a7d70179777c14ac91a07e711d90.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 142,
@@ -13598,13 +13673,11 @@
     },
     {
         "name": "Taco",
-        "md5": "d4a2cea411c6030f017f25184562559d.svg",
+        "md5": "bc78fb90ed373d56c11d5fafa4203ccd.svg",
         "type": "sprite",
         "tags": [
             "food",
-            "waffle",
-            "yum",
-            "delicious"
+            "designerd"
         ],
         "info": [
             0,
@@ -13625,25 +13698,25 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "taco-a",
+                    "costumeName": "Taco",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d4a2cea411c6030f017f25184562559d.svg",
+                    "baseLayerMD5": "bc78fb90ed373d56c11d5fafa4203ccd.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 19,
-                    "rotationCenterY": 15
+                    "rotationCenterX": 78,
+                    "rotationCenterY": 48
                 },
                 {
-                    "costumeName": "taco-b",
+                    "costumeName": "Taco-wizard",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "cef6f6d7c92fc1f008077319ac12dc5e.svg",
+                    "baseLayerMD5": "5e9e65db20d403b590578ed44b1a3792.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 56,
-                    "rotationCenterY": 15
+                    "rotationCenterX": 125,
+                    "rotationCenterY": 82
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 7,
-            "scratchY": -45,
+            "scratchX": 0,
+            "scratchY": 0,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -14017,7 +14090,7 @@
             "costumes": [
                 {
                     "costumeName": "toucan-a",
-                    "baseLayerID": 6,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "6c8798e606abd728b112aecedb5dc249.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 80,
@@ -14025,7 +14098,7 @@
                 },
                 {
                     "costumeName": "toucan-b",
-                    "baseLayerID": 7,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "a3e12be9efa0e7aa83778f6054c9c541.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 80,
@@ -14033,7 +14106,7 @@
                 },
                 {
                     "costumeName": "toucan-c",
-                    "baseLayerID": 8,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "56522b58a9959fd6152060346129f7cb.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 80,

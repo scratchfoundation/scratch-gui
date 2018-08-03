@@ -49,6 +49,8 @@ $fade-out-distance: 100px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    /* Make sure there is room to scroll beyond the last tile */
+    padding-bottom: 70px;
 }
 
 .list-item {
@@ -70,5 +72,5 @@ $fade-out-distance: 100px;
 
 .list-item.placeholder {
     background: black;
-    filter: opacity(15%) brightness(20%);
+    filter: opacity(15%) brightness(0%);
 }

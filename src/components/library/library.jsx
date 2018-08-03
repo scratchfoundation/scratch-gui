@@ -9,6 +9,7 @@ import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
+import analytics from '../../lib/analytics';
 
 import styles from './library.css';
 
@@ -28,6 +29,7 @@ class LibraryComponent extends React.Component {
         super(props);
         bindAll(this, [
             'handleBlur',
+            'handleClose',
             'handleFilterChange',
             'handleFilterClear',
             'handleFocus',
@@ -56,8 +58,12 @@ class LibraryComponent extends React.Component {
         this.handleMouseEnter(id);
     }
     handleSelect (id) {
-        this.props.onRequestClose();
+        this.handleClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
+    }
+    handleClose () {
+        this.props.onRequestClose();
+        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
     }
     handleTagClick (tag) {
         this.setState({
@@ -111,7 +117,7 @@ class LibraryComponent extends React.Component {
                 fullScreen
                 contentLabel={this.props.title}
                 id={this.props.id}
-                onRequestClose={this.props.onRequestClose}
+                onRequestClose={this.handleClose}
             >
                 {(this.props.filterable || this.props.tags) && (
                     <div className={styles.filterBar}>

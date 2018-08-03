@@ -62,12 +62,8 @@ class LibraryComponent extends React.Component {
         this.props.onItemSelected(this.getFilteredData()[id]);
     }
     handleClose () {
-        analytics.event({
-            category: 'library',
-            action: `${this.props.id}: close with search`,
-            label: this.state.filterQuery || '(empty)'
-        });
         this.props.onRequestClose();
+        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
     }
     handleTagClick (tag) {
         this.setState({

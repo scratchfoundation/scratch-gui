@@ -43,7 +43,7 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
             onClick={onCloseCards}
         >
             <FormattedMessage
-                defaultMessage="Remove"
+                defaultMessage="Close"
                 description="Title for button to close how-to card"
                 id="gui.cards.remove"
             />
@@ -152,7 +152,7 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onShowAll}) => (
             />
         </div>
         <div className={styles.decks}>
-            {deckIds.map(id => (
+            {deckIds.slice(0, 2).map(id => (
                 <div
                     className={styles.deck}
                     key={`deck-preview-${id}`}

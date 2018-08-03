@@ -42,6 +42,8 @@
 .sprite-image {
     margin: auto;
     user-select: none;
+    max-width: 32px;
+    max-height: 32px;
 }
 
 .sprite-info {

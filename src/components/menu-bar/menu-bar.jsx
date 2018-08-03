@@ -14,6 +14,7 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
+import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -297,15 +298,23 @@ class MenuBar extends React.Component {
                                     </MenuItem>
                                 </MenuItemTooltip>
                                 <MenuSection>
-                                    <MenuItemTooltip id="turbo">
-                                        <MenuItem>
-                                            <FormattedMessage
-                                                defaultMessage="Turbo mode"
-                                                description="Menu bar item for toggling turbo mode"
-                                                id="gui.menuBar.turboMode"
-                                            />
+                                    <TurboMode>{(toggleTurboMode, {turboMode}) => (
+                                        <MenuItem onClick={toggleTurboMode}>
+                                            {turboMode ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off Turbo Mode"
+                                                    description="Menu bar item for turning off turbo mode"
+                                                    id="gui.menuBar.turboModeOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on Turbo Mode"
+                                                    description="Menu bar item for turning on turbo mode"
+                                                    id="gui.menuBar.turboModeOn"
+                                                />
+                                            )}
                                         </MenuItem>
-                                    </MenuItemTooltip>
+                                    )}</TurboMode>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

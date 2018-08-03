@@ -89,6 +89,8 @@ $header-height: calc($stage-menu-height - 2px);
     border: 1px solid $ui-black-transparent;
     border-radius: .25rem;
     box-shadow: inset 0 0 4px $ui-black-transparent;
+    max-width: 64px;
+    max-height: 48px;
 }
 
 .add-button {

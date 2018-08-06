@@ -110,11 +110,11 @@ $sides: 20rem;
     margin: 0 0 0 -$sides;
 }
 
-[dir="ltr"] .full-screen .header-item-title {
+.full-screen [dir="ltr"] .header-item-title {
     margin: 0 0 0 -$sides;
 }
 
-[dir="rtl"] .full-screen .header-item-title {
+.full-screen [dir="rtl"] .header-item-title {
     margin: 0 -$sides 0 0;
 }
 

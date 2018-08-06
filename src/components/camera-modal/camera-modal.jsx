@@ -79,7 +79,7 @@ const CameraModal = ({intl, ...props}) => (
             {props.capture ?
                 <Box className={styles.buttonRow}>
                     <button
-                        className={styles.cancelButton}
+                        className={styles.retakeButton}
                         key="retake-button"
                         onClick={props.onBack}
                     >

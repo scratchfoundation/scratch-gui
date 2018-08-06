@@ -135,6 +135,10 @@ $main-button-size: 2.75rem;
     color: $ui-white;
 }
 
+[dir="rtl"] .retake-button img {
+    transform: scaleX(-1);
+}
+
 @keyframes flash {
     0% { opacity: 1; }
     100% { opacity: 0; }

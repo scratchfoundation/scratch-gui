@@ -32,7 +32,8 @@ class CustomProcedures extends React.Component {
         this.blocks = blocksRef;
         const workspaceConfig = defaultsDeep({},
             CustomProcedures.defaultOptions,
-            this.props.options
+            this.props.options,
+            {rtl: this.props.isRtl}
         );
 
         // @todo This is a hack to make there be no toolbox.
@@ -117,6 +118,7 @@ class CustomProcedures extends React.Component {
 }
 
 CustomProcedures.propTypes = {
+    isRtl: PropTypes.bool,
     mutator: PropTypes.instanceOf(Element),
     onRequestClose: PropTypes.func.isRequired,
     options: PropTypes.shape({
@@ -147,6 +149,7 @@ CustomProcedures.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl,
     mutator: state.scratchGui.customProcedures.mutator
 });
 

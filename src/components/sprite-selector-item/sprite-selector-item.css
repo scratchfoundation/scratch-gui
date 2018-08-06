@@ -80,15 +80,29 @@
 .delete-button {
     position: absolute;
     top: 0.125rem;
-    right: 0.125rem;
     z-index: 1;
+}
+
+[dir="ltr"] .delete-button {
+    right: 0.125rem;
+}
+
+[dir="rtl"] .delete-button {
+    left: 0.125rem;
 }
 
 .number {
     position: absolute;
     top: 0.15rem;
-    left: 0.15rem;
     font-size: 0.625rem;
     font-weight: bold;
     z-index: 2;
+}
+
+[dir="ltr"] .number {
+    left: 0.15rem;
+}
+
+[dir="rtl"] .number {
+    right: 0.15rem;
 }

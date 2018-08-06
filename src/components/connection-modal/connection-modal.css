@@ -51,10 +51,11 @@
     align-items: center;
 }
 
-[dir="ltr"].device-tile-image {
+[dir="ltr"] .device-tile-image {
     margin-right: 0.5rem;
 }
-[dir="rtl"].device-tile-image {
+
+[dir="rtl"] .device-tile-image {
     margin-left: 0.5rem;
 }
 

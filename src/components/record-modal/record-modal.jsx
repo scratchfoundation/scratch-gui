@@ -4,7 +4,7 @@ import Box from '../box/box.jsx';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import RecordingStep from '../../containers/recording-step.jsx';
 import PlaybackStep from '../../containers/playback-step.jsx';
-import Modal from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 import styles from './record-modal.css';
 
 const messages = defineMessages({

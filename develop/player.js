@@ -62,7 +62,8 @@ if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined
 
 var Player = function Player(_ref) {
     var isPlayerOnly = _ref.isPlayerOnly,
-        onSeeInside = _ref.onSeeInside;
+        onSeeInside = _ref.onSeeInside,
+        projectId = _ref.projectId;
     return _react2.default.createElement(
         _box2.default,
         {
@@ -75,14 +76,16 @@ var Player = function Player(_ref) {
         ),
         _react2.default.createElement(_gui2.default, {
             enableCommunity: true,
-            isPlayerOnly: isPlayerOnly
+            isPlayerOnly: isPlayerOnly,
+            projectId: projectId
         })
     );
 };
 
 Player.propTypes = {
     isPlayerOnly: _propTypes2.default.bool,
-    onSeeInside: _propTypes2.default.func
+    onSeeInside: _propTypes2.default.func,
+    projectId: _propTypes2.default.string
 };
 
 var mapStateToProps = function mapStateToProps(state) {

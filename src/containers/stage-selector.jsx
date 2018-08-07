@@ -16,7 +16,13 @@ import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
-const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND];
+const dragTypes = [
+    DragConstants.COSTUME,
+    DragConstants.SOUND,
+    DragConstants.BACKPACK_COSTUME,
+    DragConstants.BACKPACK_SOUND
+];
+
 const DroppableStage = DropAreaHOC(dragTypes)(StageSelectorComponent);
 
 class StageSelector extends React.Component {
@@ -86,6 +92,15 @@ class StageSelector extends React.Component {
             this.props.vm.shareCostumeToTarget(dragInfo.index, this.props.id);
         } else if (dragInfo.dragType === DragConstants.SOUND) {
             this.props.vm.shareSoundToTarget(dragInfo.index, this.props.id);
+        } else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            this.props.vm.addCostume(dragInfo.payload.body, {
+                name: dragInfo.payload.name
+            }, this.props.id);
+        } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            this.props.vm.addSound({
+                md5: dragInfo.payload.body,
+                name: dragInfo.payload.name
+            }, this.props.id);
         }
     }
     setFileInput (input) {

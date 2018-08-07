@@ -172,3 +172,7 @@
     width: 0.5rem;
     height: 0.5rem;
 }
+
+.disabled {
+    opacity: 0.5;
+}

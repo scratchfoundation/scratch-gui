@@ -14,6 +14,7 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
+import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -279,15 +280,25 @@ class MenuBar extends React.Component {
                                 open={this.props.editMenuOpen}
                                 onRequestClose={this.props.onRequestCloseEdit}
                             >
-                                <MenuItemTooltip id="undo">
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="Undo"
-                                            description="Menu bar item for undoing"
-                                            id="gui.menuBar.undo"
-                                        />
+                                <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
+                                    <MenuItem
+                                        className={classNames({[styles.disabled]:!restorable})}
+                                        onClick={handleRestore}
+                                    >
+                                        {deletedItem === 'Sprite' ?
+                                            <FormattedMessage
+                                                defaultMessage="Restore Sprite"
+                                                description="Menu bar item for restoring the last deleted sprite."
+                                                id="gui.menuBar.restoreSprite"
+                                            /> :
+                                            <FormattedMessage
+                                                defaultMessage="Restore"
+                                                description="Menu bar item for restoring the last deleted item in its disabled state."
+                                                id="gui.menuBar.restore"
+                                            />
+                                        }
                                     </MenuItem>
-                                </MenuItemTooltip>
+                                )}</DeletionRestorer>
                                 <MenuItemTooltip id="redo">
                                     <MenuItem>
                                         <FormattedMessage

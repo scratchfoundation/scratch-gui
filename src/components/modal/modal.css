@@ -154,6 +154,13 @@ $sides: 20rem;
 
 .help-button {
     font-weight: normal;
-    padding-right: 0;
     font-size: 0.75rem;
+}
+
+[dir="ltr"] .help-button {
+    padding-right: 0;
+}
+
+[dir="rtl"] .help-button {
+    padding-left: 0;
 }

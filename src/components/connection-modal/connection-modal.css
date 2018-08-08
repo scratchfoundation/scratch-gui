@@ -315,6 +315,10 @@
 
 [dir="rtl"] .button-icon-left {
     margin-left: 0.5rem;
+}
+
+/* reverse back arrow icon for RTL, don't reverse other connection icons */
+[dir="rtl"] .button-icon-back {
     transform: scaleX(-1);
 }
 

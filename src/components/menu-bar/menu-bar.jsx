@@ -282,7 +282,7 @@ class MenuBar extends React.Component {
                             >
                                 <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
                                     <MenuItem
-                                        className={classNames({[styles.disabled]:!restorable})}
+                                        className={classNames({[styles.disabled]: !restorable})}
                                         onClick={handleRestore}
                                     >
                                         {deletedItem === 'Sprite' ?
@@ -293,21 +293,12 @@ class MenuBar extends React.Component {
                                             /> :
                                             <FormattedMessage
                                                 defaultMessage="Restore"
-                                                description="Menu bar item for restoring the last deleted item in its disabled state."
+                                                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
                                                 id="gui.menuBar.restore"
                                             />
                                         }
                                     </MenuItem>
                                 )}</DeletionRestorer>
-                                <MenuItemTooltip id="redo">
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="Redo"
-                                            description="Menu bar item for redoing"
-                                            id="gui.menuBar.redo"
-                                        />
-                                    </MenuItem>
-                                </MenuItemTooltip>
                                 <MenuSection>
                                     <TurboMode>{(toggleTurboMode, {turboMode}) => (
                                         <MenuItem onClick={toggleTurboMode}>

@@ -41,7 +41,7 @@ class PreviewModal extends React.Component {
     }
     render () {
         return (supportedBrowser() ?
-            <PreviewModalComponent
+            !this.props.hideIntro && <PreviewModalComponent
                 previewing={this.state.previewing}
                 onCancel={this.handleCancel}
                 onTryIt={this.handleTryIt}
@@ -55,6 +55,7 @@ class PreviewModal extends React.Component {
 }
 
 PreviewModal.propTypes = {
+    hideIntro: PropTypes.bool,
     onTryIt: PropTypes.func,
     onViewProject: PropTypes.func
 };

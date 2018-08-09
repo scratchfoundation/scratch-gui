@@ -35,6 +35,7 @@ class DeletionRestorer extends React.Component {
         const {
             /* eslint-disable no-unused-vars */
             children,
+            dispatchUpdateRestore,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;

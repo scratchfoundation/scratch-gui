@@ -108,7 +108,7 @@ export default [
         featured: true,
         disabled: false,
         launchDeviceConnectionFlow: true,
-        useDeviceList: true,
+        useAutoScan: false,
         deviceImage: microbitDeviceImage,
         smallDeviceImage: microbitMenuImage,
         connectingMessage: (
@@ -134,7 +134,7 @@ export default [
         featured: true,
         disabled: false,
         launchDeviceConnectionFlow: true,
-        useDeviceList: true,
+        useAutoScan: false,
         deviceImage: ev3DeviceImage,
         smallDeviceImage: ev3MenuImage,
         connectingMessage: (
@@ -160,7 +160,7 @@ export default [
         featured: true,
         disabled: true,
         launchDeviceConnectionFlow: true,
-        useDeviceList: false,
+        useAutoScan: true,
         deviceImage: wedoDeviceImage,
         smallDeviceImage: wedoMenuImage,
         deviceButtonImage: wedoButtonImage,

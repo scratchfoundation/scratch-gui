@@ -90,7 +90,7 @@ class ConnectionModal extends React.Component {
                 phase={this.state.phase}
                 smallDeviceImage={this.props.smallDeviceImage}
                 title={this.props.extensionId}
-                useDeviceList={this.props.useDeviceList}
+                useAutoScan={this.props.useAutoScan}
                 vm={this.props.vm}
                 onCancel={this.props.onCancel}
                 onConnected={this.handleConnected}
@@ -113,7 +113,7 @@ ConnectionModal.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onStatusButtonUpdate: PropTypes.func.isRequired,
     smallDeviceImage: PropTypes.string.isRequired,
-    useDeviceList: PropTypes.bool.isRequired,
+    useAutoScan: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

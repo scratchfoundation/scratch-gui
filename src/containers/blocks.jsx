@@ -364,7 +364,7 @@ class Blocks extends React.Component {
         if (extension) {
             this.setState({connectionModal: {
                 extensionId: extensionId,
-                useDeviceList: extension.useDeviceList,
+                useAutoScan: extension.useAutoScan,
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
                 deviceButtonImage: extension.deviceButtonImage,

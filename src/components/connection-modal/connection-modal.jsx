@@ -32,8 +32,8 @@ const ConnectionModalComponent = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            {props.phase === PHASES.scanning && props.useDeviceList && <ScanningStep {...props} />}
-            {props.phase === PHASES.scanning && !props.useDeviceList && <AutoScanningStep {...props} />}
+            {props.phase === PHASES.scanning && !props.useAutoScan && <ScanningStep {...props} />}
+            {props.phase === PHASES.scanning && props.useAutoScan && <AutoScanningStep {...props} />}
             {props.phase === PHASES.connecting && <ConnectingStep {...props} />}
             {props.phase === PHASES.connected && <ConnectedStep {...props} />}
             {props.phase === PHASES.error && <ErrorStep {...props} />}
@@ -51,7 +51,7 @@ ConnectionModalComponent.propTypes = {
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     smallDeviceImage: PropTypes.string,
     title: PropTypes.string.isRequired,
-    useDeviceList: PropTypes.bool.isRequired
+    useAutoScan: PropTypes.bool.isRequired
 };
 
 export {

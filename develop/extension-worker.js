@@ -617,7 +617,7 @@ var SharedDispatch = function () {
          * List of callback registrations for promises waiting for a response from a call to a service on another
          * worker. A callback registration is an array of [resolve,reject] Promise functions.
          * Calls to local services don't enter this list.
-         * @type {Array.<[Function,Function]>}
+         * @type {Array.<Function[]>}
          */
         this.callbacks = [];
 

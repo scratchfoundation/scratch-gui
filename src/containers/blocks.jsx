@@ -5,6 +5,7 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
+import RubyGenerator from '../lib/ruby-generator';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -36,6 +37,7 @@ class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
+        this.ScratchBlocks = RubyGenerator(this.ScratchBlocks);
         bindAll(this, [
             'attachVM',
             'detachVM',

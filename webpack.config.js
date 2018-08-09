@@ -177,41 +177,42 @@ module.exports = [
         ])
     })
 ].concat(
-    // export as library
-    defaultsDeep({}, base, {
-        target: 'web',
-        entry: {
-            'scratch-gui': './src/index.js'
-        },
-        output: {
-            libraryTarget: 'umd',
-            path: path.resolve('dist')
-        },
-        externals: {
-            React: 'react',
-            ReactDOM: 'react-dom'
-        },
-        module: {
-            rules: base.module.rules.concat([
-                {
-                    test: /\.(svg|png|wav|gif|jpg)$/,
-                    loader: 'file-loader',
-                    options: {
-                        outputPath: 'static/assets/',
-                        publicPath: '/static/assets/'
+    process.env.NODE_ENV === 'production' ? (
+        // export as library
+        defaultsDeep({}, base, {
+            target: 'web',
+            entry: {
+                'scratch-gui': './src/index.js'
+            },
+            output: {
+                libraryTarget: 'umd',
+                path: path.resolve('dist')
+            },
+            externals: {
+                React: 'react',
+                ReactDOM: 'react-dom'
+            },
+            module: {
+                rules: base.module.rules.concat([
+                    {
+                        test: /\.(svg|png|wav|gif|jpg)$/,
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: 'static/assets/',
+                            publicPath: '/static/assets/'
+                        }
                     }
-                }
+                ])
+            },
+            plugins: base.plugins.concat([
+                new CopyWebpackPlugin([{
+                    from: 'node_modules/scratch-blocks/media',
+                    to: 'static/blocks-media'
+                }]),
+                new CopyWebpackPlugin([{
+                    from: 'extension-worker.{js,js.map}',
+                    context: 'node_modules/scratch-vm/dist/web'
+                }])
             ])
-        },
-        plugins: base.plugins.concat([
-            new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-blocks/media',
-                to: 'static/blocks-media'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extension-worker.{js,js.map}',
-                context: 'node_modules/scratch-vm/dist/web'
-            }])
-        ])
-    })
+        })) : []
 );

@@ -31,9 +31,9 @@ const BrowserModal = ({intl, ...props}) => (
             <p>
                 { /* eslint-disable max-len */ }
                 <FormattedMessage
-                    defaultMessage="We're very sorry, but Smalruby 3.0 does not support Internet Explorer, Vivaldi, Opera or Silk. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
+                    defaultMessage="申し訳ありません。スモウルビー3.0はInternet Explorer、Vivaldi、Opera、Silkをサポートしていません。Google Chrome、Mozilla Firefox、Microsoft Edgeのような新しいブラウザの利用をお勧めします。"
                     description="Unsupported browser description"
-                    id="gui.unsupportedBrowser.description"
+                    id="gui.smalruby3.unsupportedBrowser.description"
                 />
                 { /* eslint-enable max-len */ }
             </p>

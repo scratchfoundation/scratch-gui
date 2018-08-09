@@ -1,5 +1,6 @@
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import React from 'react';
 
 import Box from '../box/box.jsx';
@@ -39,7 +40,7 @@ const ErrorStep = props => (
                     onClick={props.onScanning}
                 >
                     <img
-                        className={styles.buttonIconLeft}
+                        className={classNames(styles.buttonIconLeft, styles.buttonIconBack)}
                         src={backIcon}
                     />
                     <FormattedMessage

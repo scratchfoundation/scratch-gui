@@ -6,6 +6,8 @@ import Box from '../box/box.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import DirectionPicker from '../../containers/direction-picker.jsx';
+
 import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
 
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
@@ -29,6 +31,7 @@ const messages = defineMessages({
 class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
         return (
+            this.props.rotationStyle !== nextProps.rotationStyle ||
             this.props.direction !== nextProps.direction ||
             this.props.disabled !== nextProps.disabled ||
             this.props.name !== nextProps.name ||
@@ -63,13 +66,6 @@ class SpriteInfo extends React.Component {
                 defaultMessage="Size"
                 description="Sprite info size label"
                 id="gui.SpriteInfo.size"
-            />
-        );
-        const directionLabel = (
-            <FormattedMessage
-                defaultMessage="Direction"
-                description="Sprite info direction label"
-                id="gui.SpriteInfo.direction"
             />
         );
 
@@ -180,7 +176,7 @@ class SpriteInfo extends React.Component {
                             <div
                                 className={classNames(
                                     styles.radio,
-                                    styles.radioLeft,
+                                    styles.radioFirst,
                                     styles.iconWrapper,
                                     {
                                         [styles.isActive]: this.props.visible && !this.props.disabled,
@@ -199,7 +195,7 @@ class SpriteInfo extends React.Component {
                             <div
                                 className={classNames(
                                     styles.radio,
-                                    styles.radioRight,
+                                    styles.radioLast,
                                     styles.iconWrapper,
                                     {
                                         [styles.isActive]: !this.props.visible && !this.props.disabled,
@@ -234,20 +230,13 @@ class SpriteInfo extends React.Component {
                         </Label>
                     </div>
                     <div className={classNames(styles.group, styles.largerInput)}>
-                        <Label
-                            secondary
-                            text={directionLabel}
-                        >
-                            <BufferedInput
-                                small
-                                disabled={this.props.disabled}
-                                label={directionLabel}
-                                tabIndex="0"
-                                type="text"
-                                value={this.props.disabled ? '' : this.props.direction}
-                                onSubmit={this.props.onChangeDirection}
-                            />
-                        </Label>
+                        <DirectionPicker
+                            direction={this.props.direction}
+                            disabled={this.props.disabled}
+                            rotationStyle={this.props.rotationStyle}
+                            onChangeDirection={this.props.onChangeDirection}
+                            onChangeRotationStyle={this.props.onChangeRotationStyle}
+                        />
                     </div>
                 </div>
             </Box>
@@ -265,6 +254,7 @@ SpriteInfo.propTypes = {
     name: PropTypes.string,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
+    onChangeRotationStyle: PropTypes.func,
     onChangeSize: PropTypes.func,
     onChangeX: PropTypes.func,
     onChangeY: PropTypes.func,
@@ -272,6 +262,7 @@ SpriteInfo.propTypes = {
     onClickVisible: PropTypes.func,
     onPressNotVisible: PropTypes.func,
     onPressVisible: PropTypes.func,
+    rotationStyle: PropTypes.string,
     size: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

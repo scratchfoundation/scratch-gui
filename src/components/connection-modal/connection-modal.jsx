@@ -3,7 +3,7 @@ import React from 'react';
 import keyMirror from 'keymirror';
 
 import Box from '../box/box.jsx';
-import Modal from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 
 import ScanningStep from '../../containers/scanning-step.jsx';
 import AutoScanningStep from '../../containers/auto-scanning-step.jsx';

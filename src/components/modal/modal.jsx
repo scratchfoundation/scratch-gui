@@ -24,6 +24,7 @@ const ModalComponent = props => (
         onRequestClose={props.onRequestClose}
     >
         <Box
+            dir={props.isRtl ? 'rtl' : 'ltr'}
             direction="column"
             grow={1}
         >
@@ -103,6 +104,7 @@ ModalComponent.propTypes = {
     fullScreen: PropTypes.bool,
     headerClassName: PropTypes.string,
     headerImage: PropTypes.string,
+    isRtl: PropTypes.bool,
     onHelp: PropTypes.func,
     onRequestClose: PropTypes.func
 };

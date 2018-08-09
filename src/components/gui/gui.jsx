@@ -65,6 +65,7 @@ const GUIComponent = props => {
         importInfoVisible,
         intl,
         isPlayerOnly,
+        isRtl,
         loading,
         onExtensionButtonClick,
         onActivateCostumesTab,
@@ -110,6 +111,7 @@ const GUIComponent = props => {
         ) : (
             <Box
                 className={styles.pageWrapper}
+                dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
                 {previewInfoVisible ? (
@@ -282,6 +284,7 @@ GUIComponent.propTypes = {
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
+    isRtl: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,

@@ -77,7 +77,7 @@ class Blocks extends React.Component {
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
-            {toolbox: this.props.toolboxXML}
+            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML}
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
@@ -405,6 +405,7 @@ class Blocks extends React.Component {
             options,
             stageSize,
             vm,
+            isRtl,
             isVisible,
             onActivateColorPicker,
             updateToolboxState,
@@ -464,6 +465,7 @@ Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
+    isRtl: PropTypes.bool,
     isVisible: PropTypes.bool,
     locale: PropTypes.string,
     messages: PropTypes.objectOf(PropTypes.string),
@@ -538,6 +540,7 @@ const mapStateToProps = state => ({
         state.scratchGui.mode.isFullScreen
     ),
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
+    isRtl: state.locales.isRtl,
     locale: state.locales.locale,
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,

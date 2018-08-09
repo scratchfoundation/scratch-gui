@@ -32,6 +32,7 @@ $fade-out-distance: 100px;
     position: absolute;
     bottom: 0;
     left: 0;
+    right:0;
     background: linear-gradient(rgba(232,237,241, 0),rgba(232,237,241, 1));
     height: $fade-out-distance;
     width: 100%;

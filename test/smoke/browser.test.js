@@ -8,7 +8,7 @@ const {
 // Make the default timeout longer, Sauce tests take ~30s
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60 * 1000; // eslint-disable-line
 
-const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Preview';
+const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Beta';
 const UNSUPPORTED_MESSAGE = 'Scratch 3.0 does not support Internet Explorer';
 
 // Driver configs can be generated with the Sauce Platform Configurator

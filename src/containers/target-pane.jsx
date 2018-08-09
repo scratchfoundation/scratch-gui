@@ -20,6 +20,7 @@ class TargetPane extends React.Component {
         super(props);
         bindAll(this, [
             'handleBlockDragEnd',
+            'handleChangeSpriteRotationStyle',
             'handleChangeSpriteDirection',
             'handleChangeSpriteName',
             'handleChangeSpriteSize',
@@ -47,6 +48,9 @@ class TargetPane extends React.Component {
     }
     handleChangeSpriteDirection (direction) {
         this.props.vm.postSpriteInfo({direction});
+    }
+    handleChangeSpriteRotationStyle (rotationStyle) {
+        this.props.vm.postSpriteInfo({rotationStyle});
     }
     handleChangeSpriteName (name) {
         this.props.vm.renameSprite(this.props.editingTarget, name);
@@ -152,6 +156,18 @@ class TargetPane extends React.Component {
                 this.props.vm.shareCostumeToTarget(dragInfo.index, targetId);
             } else if (targetId && dragInfo.dragType === DragConstants.SOUND) {
                 this.props.vm.shareSoundToTarget(dragInfo.index, targetId);
+            } else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+                // In scratch 2, this only creates a new sprite from the costume.
+                // We may be able to handle both kinds of drops, depending on where
+                // the drop happens. For now, just add the costume.
+                this.props.vm.addCostume(dragInfo.payload.body, {
+                    name: dragInfo.payload.name
+                }, targetId);
+            } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
+                this.props.vm.addSound({
+                    md5: dragInfo.payload.body,
+                    name: dragInfo.payload.name
+                }, targetId);
             }
         }
     }
@@ -167,6 +183,7 @@ class TargetPane extends React.Component {
                 fileInputRef={this.setFileInput}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
+                onChangeSpriteRotationStyle={this.handleChangeSpriteRotationStyle}
                 onChangeSpriteSize={this.handleChangeSpriteSize}
                 onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}

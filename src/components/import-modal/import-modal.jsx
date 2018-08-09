@@ -17,6 +17,12 @@ const messages = defineMessages({
     },
     formDescription: {
         defaultMessage:
+            'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Beta will not be saved.',
+        description: 'Import project message',
+        id: 'gui.importInfo.betamessage'
+    },
+    previewFormDescription: {
+        defaultMessage:
             'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved.',
         description: 'Import project message',
         id: 'gui.importInfo.message'
@@ -123,12 +129,12 @@ const ImportModal = ({intl, ...props}) => (
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//scratch.mit.edu/3faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.importInfo.previewfaqlink"
+                                    defaultMessage="FAQ"
+                                    description="link to Scratch 3.0 FAQ page"
+                                    id="gui.importInfo.previewfaqlinktext"
                                 />
                             </a>
                         )

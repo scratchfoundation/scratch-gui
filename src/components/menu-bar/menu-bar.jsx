@@ -134,13 +134,20 @@ class MenuBar extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleLanguageMouseUp'
+            'handleLanguageMouseUp',
+            'handleRestoreOption'
         ]);
     }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {
             this.props.onClickLanguage(e);
         }
+    }
+    handleRestoreOption (restoreFun) {
+        return () => {
+            restoreFun();
+            this.props.onRequestCloseEdit();
+        };
     }
     render () {
         return (
@@ -283,7 +290,7 @@ class MenuBar extends React.Component {
                                 <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
                                     <MenuItem
                                         className={classNames({[styles.disabled]: !restorable})}
-                                        onClick={handleRestore}
+                                        onClick={this.handleRestoreOption(handleRestore)}
                                     >
                                         {deletedItem === 'Sprite' ?
                                             <FormattedMessage

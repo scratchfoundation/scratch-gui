@@ -38,9 +38,11 @@ class DeletionRestorer extends React.Component {
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
-        props.restorable = typeof this.props.restore === 'function';
-        props.deletedItem = this.props.deletedItem;
-        return this.props.children(this.restoreDeletion, props);
+        const restorable = typeof this.props.restore === 'function';
+        return this.props.children(this.restoreDeletion, {
+            ...props,
+            restorable
+        });
     }
 }
 

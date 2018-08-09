@@ -82,6 +82,7 @@ const GUIComponent = props => {
         rubyTabVisible,
         stageSizeMode,
         tipsLibraryVisible,
+        rubyCode,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -257,7 +258,7 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
-                                    {rubyTabVisible ? <RubyTab /> : null}
+                                    {rubyTabVisible ? <RubyTab rubyCode={rubyCode}/> : null}
                                 </TabPanel>
                             </Tabs>
                             {backpackOptions.visible ? (
@@ -319,6 +320,7 @@ GUIComponent.propTypes = {
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
+    rubyCode: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

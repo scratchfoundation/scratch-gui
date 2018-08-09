@@ -6,6 +6,10 @@ import 'brace/mode/ruby';
 import 'brace/theme/clouds';
 
 export class RubyTab extends React.Component {
+    constructor (props) {
+        super(props);
+    }
+
     render(){
         return(
             <AceEditor
@@ -15,6 +19,7 @@ export class RubyTab extends React.Component {
                 fontSize={16}
                 width="100%"
                 height="inherit"
+                value={this.props.rubyCode.rubyCode}
                 editorProps={{ $blockScrolling: true }}
                 setOptions={{
                   tabSize: 2,

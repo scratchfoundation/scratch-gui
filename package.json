@@ -98,7 +98,7 @@
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20180625202813",
     "scratch-blocks": "0.1.0-prerelease.1533835159",
-    "scratch-l10n": "3.0.20180803171042",
+    "scratch-l10n": "3.0.20180810134928",
     "scratch-paint": "0.2.0-prerelease.20180809185222",
     "scratch-render": "0.1.0-prerelease.20180808184135",
     "scratch-storage": "0.5.1",

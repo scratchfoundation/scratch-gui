@@ -23,6 +23,7 @@ const TargetPane = ({
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
+    onChangeSpriteRotationStyle,
     onChangeSpriteSize,
     onChangeSpriteVisibility,
     onChangeSpriteX,
@@ -60,6 +61,7 @@ const TargetPane = ({
             stageSize={stageSize}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
+            onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
             onChangeSpriteSize={onChangeSpriteSize}
             onChangeSpriteVisibility={onChangeSpriteVisibility}
             onChangeSpriteX={onChangeSpriteX}
@@ -128,6 +130,7 @@ TargetPane.propTypes = {
     }),
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
+    onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,

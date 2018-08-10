@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteList from './sprite-list.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
+import RtlLocales from '../../lib/rtl-locales';
 
 import styles from './sprite-selector.css';
 
@@ -47,6 +47,7 @@ const SpriteSelectorComponent = function (props) {
         intl,
         onChangeSpriteDirection,
         onChangeSpriteName,
+        onChangeSpriteRotationStyle,
         onChangeSpriteSize,
         onChangeSpriteVisibility,
         onChangeSpriteX,
@@ -84,6 +85,7 @@ const SpriteSelectorComponent = function (props) {
                 direction={selectedSprite.direction}
                 disabled={spriteInfoDisabled}
                 name={selectedSprite.name}
+                rotationStyle={selectedSprite.rotationStyle}
                 size={selectedSprite.size}
                 stageSize={stageSize}
                 visible={selectedSprite.visible}
@@ -91,6 +93,7 @@ const SpriteSelectorComponent = function (props) {
                 y={selectedSprite.y}
                 onChangeDirection={onChangeSpriteDirection}
                 onChangeName={onChangeSpriteName}
+                onChangeRotationStyle={onChangeSpriteRotationStyle}
                 onChangeSize={onChangeSpriteSize}
                 onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
@@ -137,6 +140,7 @@ const SpriteSelectorComponent = function (props) {
                     }
                 ]}
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}
+                tooltipPlace={RtlLocales.indexOf(intl.locale) === -1 ? 'left' : 'right'}
                 onClick={onNewSpriteClick}
             />
         </Box>
@@ -152,6 +156,7 @@ SpriteSelectorComponent.propTypes = {
     intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
+    onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,

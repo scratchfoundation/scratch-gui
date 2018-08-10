@@ -14,6 +14,10 @@
     align-items: center;
 }
 
+[dir="rtl"] .row-reverse {
+    flex-direction: row-reverse;
+}
+
 .row + .row {
     margin-top: calc(2 * $space);
 }
@@ -23,12 +27,28 @@
     flex-direction: row;
 }
 
-.input-group + .input-group {
+[dir="ltr"] .input-group + .input-group {
     margin-left: calc(2 * $space);
 }
 
-.input-group {
+[dir="rtl"] .input-group + .input-group {
+    margin-right: calc(2 * $space);
+}
+
+[dir="ltr"] .input-group {
     padding-right: calc(2 * $space);
+    border-right: 1px dashed $ui-black-transparent;
+}
+
+[dir="rtl"] .input-group {
+    padding-left: calc(2 * $space);
+    border-left: 1px dashed $ui-black-transparent;
+}
+
+[dir="rtl"] .row-reverse > .input-group {
+    padding-left: 0;
+    padding-right: calc(2 * $space);
+    border-left: none;
     border-right: 1px dashed $ui-black-transparent;
 }
 
@@ -87,24 +107,29 @@ $border-radius: 0.25rem;
     /*min-width: 1.5rem;*/
 }
 
+[dir="rtl"] .undo-icon, [dir="rtl"] .redo-icon {
+    transform: scaleX(-1);
+}
+
 .trim-button {
     display: flex;
     align-items: center;
     color: $text-primary;
     font-size: 0.625rem;
-    margin-left: 1rem;
     user-select: none;
+}
+
+[dir="ltr"] .trim-button {
+    margin-left: 1rem;
+}
+
+[dir="rtl"] .trim-button {
+    margin-right: 1rem;
 }
 
 .trim-button > img {
     width: 1.25rem;
     margin-bottom: -0.375rem;
-}
-
-.input-group-right {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .effect-button {
@@ -124,24 +149,45 @@ $border-radius: 0.25rem;
     margin-bottom: -0.375rem;
 }
 
-.button-group {
+[dir="ltr"] .button-group {
     margin-left: 1rem;
+}
+
+[dir="rtl"] .button-group {
+    margin-right: 1rem;
 }
 
 .button-group .button {
     border-radius: 0;
-    border-left: none;
 }
 
-.button-group .button:last-of-type {
+[dir="ltr"] .button-group .button {
+    border-left: none;
+}
+[dir="rtl"] .button-group .button {
+    border-right: none;
+}
+
+[dir="ltr"] .button-group .button:last-of-type {
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
 }
 
-.button-group .button:first-of-type {
+[dir="ltr"] .button-group .button:first-of-type {
     border-left: 1px solid $ui-black-transparent;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
+}
+
+[dir="rtl"] .button-group .button:last-of-type {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+}
+
+[dir="rtl"] .button-group .button:first-of-type {
+    border-right: 1px solid $ui-black-transparent;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
 }
 
 .button:disabled > img {

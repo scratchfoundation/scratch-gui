@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import Box from '../box/box.jsx';
-import Modal from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 import styles from './camera-modal.css';
 import backIcon from './icon--back.svg';
 import cameraIcon from '../action-menu/icon--camera.svg';
@@ -79,7 +79,7 @@ const CameraModal = ({intl, ...props}) => (
             {props.capture ?
                 <Box className={styles.buttonRow}>
                     <button
-                        className={styles.cancelButton}
+                        className={styles.retakeButton}
                         key="retake-button"
                         onClick={props.onBack}
                     >

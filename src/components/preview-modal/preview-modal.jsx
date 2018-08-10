@@ -12,6 +12,11 @@ const messages = defineMessages({
         id: 'gui.smalruby3.previewInfo.label',
         defaultMessage: 'スモウルビー3.0を試してみる"',
         description: 'Smalruby 3.0 modal label - for accessibility'
+    },
+    previewWelcome: {
+        defaultMessage: 'スモウルビー3.0 プレビュー版にようこそ!',
+        description: 'Header for Preview Info Modal',
+        id: 'gui.smalruby3.previewInfo.welcome'
     }
 });
 
@@ -59,7 +64,7 @@ const PreviewModal = ({intl, ...props}) => (
                 >
                     <FormattedMessage
                         defaultMessage="Try It! {caticon}"
-                        description="Label for button to try Smalruby 3.0 preview"
+                        description="Label for button to try Smalruby 3.0 Beta"
                         id="gui.previewModal.tryit"
                         values={{
                             caticon: (
@@ -86,18 +91,18 @@ const PreviewModal = ({intl, ...props}) => (
             <Box className={styles.faqLinkText}>
                 <FormattedMessage
                     defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Invitation to try 3.0 preview"
+                    description="Invitation to try 3.0 Beta"
                     id="gui.previewInfo.previewfaq"
                     values={{
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//scratch.mit.edu/3faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.previewInfo.previewfaqlink"
+                                    defaultMessage="FAQ"
+                                    description="link to Scratch 3.0 FAQ page"
+                                    id="gui.previewInfo.previewfaqlinktext"
                                 />
                             </a>
                         )

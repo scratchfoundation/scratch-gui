@@ -35,6 +35,14 @@ describe('player example', () => {
         await clickXpath('//img[@title="Stop"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
+        const projectRequests = await driver.manage().logs()
+            .get('performance')
+            .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
+                .filter(m => m.method === 'Network.requestWillBeSent')
+                .map(m => m.params.request.url)
+                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+            );
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
     });
 });
 
@@ -58,6 +66,14 @@ describe('blocks example', () => {
         await clickXpath('//img[@title="Stop"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
+        const projectRequests = await driver.manage().logs()
+            .get('performance')
+            .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
+                .filter(m => m.method === 'Network.requestWillBeSent')
+                .map(m => m.params.request.url)
+                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+            );
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
     });
 
     test('Change categories', async () => {

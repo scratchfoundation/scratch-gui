@@ -1,6 +1,5 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
-@import "../../css/z-index.css";
 
 $header-height: calc($stage-menu-height - 2px);
 
@@ -96,7 +95,6 @@ $header-height: calc($stage-menu-height - 2px);
 .add-button {
     position: absolute;
     bottom: 0.75rem;
-    z-index: $z-index-add-button
 }
 
 .raised, .raised .header {

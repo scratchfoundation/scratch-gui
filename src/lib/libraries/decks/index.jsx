@@ -530,7 +530,13 @@ export default {
 
     },
     'spin-video': {
-        name: 'Make It Spin',
+        name: (
+            <FormattedMessage
+                defaultMessage="Make It Spin"
+                description="Name for the 'Make It Spin' how-to"
+                id="gui.howtos.spin-video.name"
+            />
+        ),
         img: spinThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/C76V5cuI9XM'
@@ -580,7 +586,13 @@ export default {
     },
 
     'move-around-with-arrow-keys': {
-        name: 'Use Arrow Keys',
+        name: (
+            <FormattedMessage
+                defaultMessage="Use Arrow Keys"
+                description="Name for the 'Use Arrow Keys' how-to"
+                id="gui.howtos.move-around-with-arrow-keys.name"
+            />
+        ),
         img: moveArrowKeysThumb,
         steps: [{
             video: 'https://www.youtube.com/embed/uf6agkKnXJw'

@@ -77,7 +77,7 @@ class Blocks extends React.Component {
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
-            {toolbox: this.props.toolboxXML}
+            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML}
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
@@ -364,8 +364,10 @@ class Blocks extends React.Component {
         if (extension) {
             this.setState({connectionModal: {
                 extensionId: extensionId,
+                useAutoScan: extension.useAutoScan,
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
+                deviceButtonImage: extension.deviceButtonImage,
                 name: extension.name,
                 connectingMessage: extension.connectingMessage,
                 helpLink: extension.helpLink
@@ -403,6 +405,7 @@ class Blocks extends React.Component {
             options,
             stageSize,
             vm,
+            isRtl,
             isVisible,
             onActivateColorPicker,
             updateToolboxState,
@@ -432,12 +435,7 @@ class Blocks extends React.Component {
                 ) : null}
                 {this.state.connectionModal ? (
                     <ConnectionModal
-                        connectingMessage={this.state.connectionModal.connectingMessage}
-                        deviceImage={this.state.connectionModal.deviceImage}
-                        extensionId={this.state.connectionModal.extensionId}
-                        helpLink={this.state.connectionModal.helpLink}
-                        name={this.state.connectionModal.name}
-                        smallDeviceImage={this.state.connectionModal.smallDeviceImage}
+                        {...this.state.connectionModal}
                         vm={vm}
                         onCancel={this.handleConnectionModalClose}
                         onStatusButtonUpdate={this.handleStatusButtonUpdate}
@@ -467,6 +465,7 @@ Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
+    isRtl: PropTypes.bool,
     isVisible: PropTypes.bool,
     locale: PropTypes.string,
     messages: PropTypes.objectOf(PropTypes.string),
@@ -541,6 +540,7 @@ const mapStateToProps = state => ({
         state.scratchGui.mode.isFullScreen
     ),
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
+    isRtl: state.locales.isRtl,
     locale: state.locales.locale,
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,

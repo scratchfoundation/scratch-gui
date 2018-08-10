@@ -74,12 +74,12 @@ const WebGlModal = ({intl, ...props}) => (
                         previewFaqLink: (
                             <a
                                 className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
+                                href="//scratch.mit.edu/3faq"
                             >
                                 <FormattedMessage
-                                    defaultMessage="preview FAQ"
+                                    defaultMessage="FAQ"
                                     description="link to Scratch 3.0 FAQ page"
-                                    id="gui.webglModal.previewfaqlink"
+                                    id="gui.webglModal.previewfaqlinktext"
                                 />
                             </a>
                         )

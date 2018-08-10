@@ -143,9 +143,9 @@ class MenuBar extends React.Component {
             this.props.onClickLanguage(e);
         }
     }
-    handleRestoreOption (restoreFun) {
+    handleRestoreOption (restoreFun /* eslint-disable-line no-unused-vars */) {
         return () => {
-            restoreFun();
+            // restoreFun(); TODO re-enable this when validation issues are fixed
             this.props.onRequestCloseEdit();
         };
     }
@@ -287,9 +287,9 @@ class MenuBar extends React.Component {
                                 open={this.props.editMenuOpen}
                                 onRequestClose={this.props.onRequestCloseEdit}
                             >
-                                <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
+                                <DeletionRestorer>{(handleRestore, {restorable /* eslint-disable-line no-unused-vars, max-len */, deletedItem}) => (
                                     <MenuItem
-                                        className={classNames({[styles.disabled]: !restorable})}
+                                        className={classNames(styles.disabled)}
                                         onClick={this.handleRestoreOption(handleRestore)}
                                     >
                                         {deletedItem === 'Sprite' ?

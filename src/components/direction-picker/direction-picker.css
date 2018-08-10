@@ -1,0 +1,32 @@
+@import "../../css/colors.css";
+
+.button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.icon-button {
+    margin: 0.25rem;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.icon-button:active > img {
+    width: 20px;
+    height: 20px;
+    transform: scale(1.15);
+}
+
+.icon-button > img {
+    transition: transform 0.1s;
+    filter: grayscale(100%);
+}
+
+.icon-button.active > img {
+    filter: none;
+}

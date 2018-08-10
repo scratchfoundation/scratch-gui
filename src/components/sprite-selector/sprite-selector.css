@@ -68,8 +68,14 @@
 .add-button {
     position: absolute;
     bottom: 0.75rem;
+}
+
+[dir="ltr"] .add-button {
     right: 1rem;
-    z-index: $z-index-add-button;
+}
+
+[dir="rtl"] .add-button {
+    left: 1rem;
 }
 
 .raised {

@@ -44,6 +44,9 @@ class SeleniumHelper {
             args.push('--headless');
         }
         chromeCapabilities.set('chromeOptions', {args});
+        chromeCapabilities.setLoggingPrefs({
+            performance: 'ALL'
+        });
         this.driver = new webdriver.Builder()
             .forBrowser('chrome')
             .withCapabilities(chromeCapabilities)

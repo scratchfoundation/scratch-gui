@@ -221,7 +221,7 @@ const GUIComponent = props => {
                                         <FormattedMessage
                                             defaultMessage="Ruby"
                                             description="Button to get to the Ruby panel"
-                                            id="gui.gui.rubyTab"
+                                            id="gui.smalruby3.gui.rubyTab"
                                         />
                                     </Tab>
                                 </TabList>

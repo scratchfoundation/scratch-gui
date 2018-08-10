@@ -2,7 +2,7 @@ const initialState = {
     rubyCode: `p 'hello World'`
 };
 
-const reducer = function (state, action) {
+const reducer = function (state) {
     if (typeof state === 'undefined') state = initialState;
     return state;
 };

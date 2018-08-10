@@ -14,7 +14,7 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
-import { RubyTab } from '../../containers/ruby-tab.jsx';
+import RubyTab from '../../containers/ruby-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
@@ -258,7 +258,7 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
-                                    {rubyTabVisible ? <RubyTab rubyCode={rubyCode}/> : null}
+                                    {rubyTabVisible ? <RubyTab rubyCode={rubyCode} /> : null}
                                 </TabPanel>
                             </Tabs>
                             {backpackOptions.visible ? (
@@ -306,8 +306,8 @@ GUIComponent.propTypes = {
     isPlayerOnly: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
-    onActivateSoundsTab: PropTypes.func,
     onActivateRubyTab: PropTypes.func,
+    onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
@@ -315,12 +315,12 @@ GUIComponent.propTypes = {
     onSeeCommunity: PropTypes.func,
     onTabSelect: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    soundsTabVisible: PropTypes.bool,
+    rubyCode: PropTypes.string,
     rubyTabVisible: PropTypes.bool,
+    soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
-    rubyCode: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

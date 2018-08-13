@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1518:
+/***/ 1521:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25,27 +25,27 @@ var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(7);
+var _reactRedux = __webpack_require__(6);
 
 var _box = __webpack_require__(14);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(126);
+var _gui = __webpack_require__(129);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(168);
+var _hashParserHoc = __webpack_require__(173);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(169);
+var _appStateHoc = __webpack_require__(174);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(118);
+var _mode = __webpack_require__(121);
 
-var _player = __webpack_require__(1519);
+var _player = __webpack_require__(1522);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -62,7 +62,8 @@ if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined
 
 var Player = function Player(_ref) {
     var isPlayerOnly = _ref.isPlayerOnly,
-        onSeeInside = _ref.onSeeInside;
+        onSeeInside = _ref.onSeeInside,
+        projectId = _ref.projectId;
     return _react2.default.createElement(
         _box2.default,
         {
@@ -75,14 +76,16 @@ var Player = function Player(_ref) {
         ),
         _react2.default.createElement(_gui2.default, {
             enableCommunity: true,
-            isPlayerOnly: isPlayerOnly
+            isPlayerOnly: isPlayerOnly,
+            projectId: projectId
         })
     );
 };
 
 Player.propTypes = {
     isPlayerOnly: _propTypes2.default.bool,
-    onSeeInside: _propTypes2.default.func
+    onSeeInside: _propTypes2.default.func,
+    projectId: _propTypes2.default.string
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -109,11 +112,11 @@ _reactDom2.default.render(_react2.default.createElement(WrappedPlayer, { isPlaye
 
 /***/ }),
 
-/***/ 1519:
+/***/ 1522:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1520);
+var content = __webpack_require__(1523);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -135,7 +138,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1520:
+/***/ 1523:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -153,5 +156,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1518,0]]]);
+},[[1521,0]]]);
 //# sourceMappingURL=player.js.map

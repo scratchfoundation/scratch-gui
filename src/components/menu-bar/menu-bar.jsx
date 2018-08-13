@@ -14,6 +14,7 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
+import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -133,13 +134,20 @@ class MenuBar extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleLanguageMouseUp'
+            'handleLanguageMouseUp',
+            'handleRestoreOption'
         ]);
     }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {
             this.props.onClickLanguage(e);
         }
+    }
+    handleRestoreOption (restoreFun) {
+        return () => {
+            restoreFun();
+            this.props.onRequestCloseEdit();
+        };
     }
     render () {
         return (
@@ -279,24 +287,25 @@ class MenuBar extends React.Component {
                                 open={this.props.editMenuOpen}
                                 onRequestClose={this.props.onRequestCloseEdit}
                             >
-                                <MenuItemTooltip id="undo">
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="Undo"
-                                            description="Menu bar item for undoing"
-                                            id="gui.menuBar.undo"
-                                        />
+                                <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
+                                    <MenuItem
+                                        className={classNames({[styles.disabled]: !restorable})}
+                                        onClick={this.handleRestoreOption(handleRestore)}
+                                    >
+                                        {deletedItem === 'Sprite' ?
+                                            <FormattedMessage
+                                                defaultMessage="Restore Sprite"
+                                                description="Menu bar item for restoring the last deleted sprite."
+                                                id="gui.menuBar.restoreSprite"
+                                            /> :
+                                            <FormattedMessage
+                                                defaultMessage="Restore"
+                                                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+                                                id="gui.menuBar.restore"
+                                            />
+                                        }
                                     </MenuItem>
-                                </MenuItemTooltip>
-                                <MenuItemTooltip id="redo">
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="Redo"
-                                            description="Menu bar item for redoing"
-                                            id="gui.menuBar.redo"
-                                        />
-                                    </MenuItem>
-                                </MenuItemTooltip>
+                                )}</DeletionRestorer>
                                 <MenuSection>
                                     <TurboMode>{(toggleTurboMode, {turboMode}) => (
                                         <MenuItem onClick={toggleTurboMode}>

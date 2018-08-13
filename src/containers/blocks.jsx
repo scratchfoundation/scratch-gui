@@ -364,8 +364,10 @@ class Blocks extends React.Component {
         if (extension) {
             this.setState({connectionModal: {
                 extensionId: extensionId,
+                useAutoScan: extension.useAutoScan,
                 deviceImage: extension.deviceImage,
                 smallDeviceImage: extension.smallDeviceImage,
+                deviceButtonImage: extension.deviceButtonImage,
                 name: extension.name,
                 connectingMessage: extension.connectingMessage,
                 helpLink: extension.helpLink
@@ -433,12 +435,7 @@ class Blocks extends React.Component {
                 ) : null}
                 {this.state.connectionModal ? (
                     <ConnectionModal
-                        connectingMessage={this.state.connectionModal.connectingMessage}
-                        deviceImage={this.state.connectionModal.deviceImage}
-                        extensionId={this.state.connectionModal.extensionId}
-                        helpLink={this.state.connectionModal.helpLink}
-                        name={this.state.connectionModal.name}
-                        smallDeviceImage={this.state.connectionModal.smallDeviceImage}
+                        {...this.state.connectionModal}
                         vm={vm}
                         onCancel={this.handleConnectionModalClose}
                         onStatusButtonUpdate={this.handleStatusButtonUpdate}

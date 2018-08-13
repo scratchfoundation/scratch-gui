@@ -10,6 +10,7 @@ import {
 
 import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
+import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
@@ -68,7 +69,12 @@ class TargetPane extends React.Component {
         this.props.vm.postSpriteInfo({y});
     }
     handleDeleteSprite (id) {
-        this.props.vm.deleteSprite(id);
+        const restoreFun = this.props.vm.deleteSprite(id);
+        this.props.dispatchUpdateRestore({
+            restoreFun: restoreFun,
+            deletedItem: 'Sprite'
+        });
+
     }
     handleDuplicateSprite (id) {
         this.props.vm.duplicateSprite(id);
@@ -175,6 +181,7 @@ class TargetPane extends React.Component {
         const {
             onActivateTab, // eslint-disable-line no-unused-vars
             onReceivedBlocks, // eslint-disable-line no-unused-vars
+            dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -240,6 +247,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onReceivedBlocks: receivedBlocks => {
         dispatch(setReceivedBlocks(receivedBlocks));
+    },
+    dispatchUpdateRestore: restoreState => {
+        dispatch(setRestore(restoreState));
     }
 });
 

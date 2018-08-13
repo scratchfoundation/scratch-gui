@@ -51,8 +51,12 @@
     align-items: center;
 }
 
-.device-tile-image {
+[dir="ltr"] .device-tile-image {
     margin-right: 0.5rem;
+}
+
+[dir="rtl"] .device-tile-image {
+    margin-left: 0.5rem;
 }
 
 .device-tile-name-wrapper {
@@ -89,7 +93,14 @@
     align-items: flex-end;
     width: 22px;
     height: 16px;
+}
+
+[dir="ltr"] .signal-strength-meter {
     margin-right: 1rem;
+}
+
+[dir="rtl"] .signal-strength-meter {
+    margin-left: 1rem;
 }
 
 .signal-bar {
@@ -107,11 +118,27 @@
     background-color: $pen-primary;
 }
 
-.radar {
+.radar-small {
     width: 40px;
     height: 40px;
     margin-right: 0.5rem;
+}
+
+.radar-big {
+    width: 120px;
+    height: 120px;
+}
+
+.radar-spin {
     animation: spin 4s linear infinite;
+}
+
+[dir="ltr"] .radar {
+    margin-right: .5rem;
+}
+
+[dir="rtl"] .radar {
+    margin-left: .5rem;
 }
 
 @keyframes spin {
@@ -119,7 +146,6 @@
         transform: rotate(360deg);
     }
 }
-
 
 .device-activity {
     position: relative;
@@ -130,10 +156,15 @@
     height: 80px; */
 }
 
+.device-button-image {
+    position: absolute;
+}
+
 .bluetooth-connecting-icon {
     position: absolute;
     top: -5px;
     right: -15px;
+    left: -15px;
     padding: 5px 5px;
     background-color: $motion-primary;
     border-radius: 100%;
@@ -149,7 +180,6 @@
     }
 }
 
-
 .bluetooth-connected-icon {
     position: absolute;
     top: -5px;
@@ -160,14 +190,20 @@
     box-shadow: 0px 0px 0px 4px $pen-transparent;
 }
 
-
-
 @keyframes wiggle {
     0% {transform: rotate(3deg) scale(1.05);}
     25% {transform: rotate(-3deg) scale(1.05);}
     50% {transform: rotate(5deg) scale(1.05);}
     75% {transform: rotate(-2deg) scale(1.05);}
     100% {transform: rotate(0deg) scale(1.05);}
+}
+
+.bluetooth-centered-icon {
+    position: absolute;
+    padding: 5px 5px;
+    background-color: $motion-primary;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 2px $motion-transparent;
 }
 
 .device-tile-widgets {
@@ -199,12 +235,24 @@
     margin-left: 3rem;
 }
 
+[dir="ltr"] .scratch-link-help-step {
+    margin-left: 3rem;
+}
+
+[dir="rtl"] .scratch-link-help-step {
+    margin-right: 3rem;
+}
+
 .scratch-link-icon {
     max-width: 50px;
 }
 
-.help-step-image {
+[dir="ltr"] .help-step-image {
     margin-right: 0.5rem;
+}
+
+[dir="rtl"] .help-step-image {
+    margin-left: 0.5rem;
 }
 
 .help-step-number {
@@ -215,9 +263,16 @@
     align-items: center;
     color: $ui-white;
     font-weight: bold;
-    margin-right: 0.5rem;
     min-width: 2rem;
     height: 2rem;
+}
+
+[dir="ltr"] .help-step-number {
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .help-step-number {
+    margin-left: 0.5rem;
 }
 
 .button-row {
@@ -265,12 +320,24 @@
     border-bottom-left-radius: 0;
 }
 
-.button-icon-right {
+[dir="ltr"] .button-icon-right {
+    margin-left: 0.5rem;
+}
+[dir="rtl"] .button-icon-right {
+    margin-right: 0.5rem;
+}
+
+[dir="ltr"] .button-icon-left {
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .button-icon-left {
     margin-left: 0.5rem;
 }
 
-.button-icon-left {
-    margin-right: 0.5rem;
+/* reverse back arrow icon for RTL, don't reverse other connection icons */
+[dir="rtl"] .button-icon-back {
+    transform: scaleX(-1);
 }
 
 .red-button {

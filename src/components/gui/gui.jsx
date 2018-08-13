@@ -62,9 +62,11 @@ const GUIComponent = props => {
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
+        hideIntro,
         importInfoVisible,
         intl,
         isPlayerOnly,
+        isRtl,
         loading,
         onExtensionButtonClick,
         onActivateCostumesTab,
@@ -110,10 +112,11 @@ const GUIComponent = props => {
         ) : (
             <Box
                 className={styles.pageWrapper}
+                dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
                 {previewInfoVisible ? (
-                    <PreviewModal />
+                    <PreviewModal hideIntro={hideIntro} />
                 ) : null}
                 {loading ? (
                     <Loader />
@@ -279,9 +282,11 @@ GUIComponent.propTypes = {
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
+    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
+    isRtl: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,

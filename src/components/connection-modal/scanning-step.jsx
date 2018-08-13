@@ -1,6 +1,7 @@
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
 import DeviceTile from './device-tile.jsx';
@@ -19,7 +20,7 @@ const ScanningStep = props => (
                     <div className={styles.activityAreaInfo}>
                         <div className={styles.centeredRow}>
                             <img
-                                className={styles.radar}
+                                className={classNames(styles.radarSmall, styles.radarSpin)}
                                 src={radarIcon}
                             />
                             <FormattedMessage

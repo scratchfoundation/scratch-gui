@@ -49,6 +49,11 @@ const PreviewModal = ({intl, ...props}) => (
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.noButton}
+                    title={intl.formatMessage({
+                        defaultMessage: 'Not Now',
+                        description: 'Tooltip for Not Now button',
+                        id: 'gui.previewModal.notnowtooltip'
+                    })}
                     onClick={props.onCancel}
                 >
                     <FormattedMessage
@@ -59,7 +64,11 @@ const PreviewModal = ({intl, ...props}) => (
                 </button>
                 <button
                     className={styles.okButton}
-                    title="tryit"
+                    title={intl.formatMessage({
+                        defaultMessage: 'Try It',
+                        description: 'Tooltip for Try It button',
+                        id: 'gui.previewModal.tryittooltip'
+                    })}
                     onClick={props.onTryIt}
                 >
                     <FormattedMessage
@@ -78,7 +87,11 @@ const PreviewModal = ({intl, ...props}) => (
                 </button>
                 <button
                     className={styles.viewProjectButton}
-                    title="viewproject"
+                    title={intl.formatMessage({
+                        defaultMessage: 'View 2.0 Project',
+                        description: 'Tooltip for View 2.0 Project button',
+                        id: 'gui.previewModal.viewprojecttooltip'
+                    })}
                     onClick={props.onViewProject}
                 >
                     <FormattedMessage

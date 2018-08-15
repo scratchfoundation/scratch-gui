@@ -187,13 +187,24 @@
     height: 1rem;
 }
 
-.help-icon {
+[dir="ltr"] .help-icon {
     margin-right: 0.25rem;
 }
 
-.close-icon {
+[dir="rtl"] .help-icon {
     margin-left: 0.25rem;
+}
+
+.close-icon {
     transform: rotate(45deg);
+}
+
+[dir="ltr"] .close-icon {
+    margin-left: 0.25rem;
+}
+
+[dir="rtl"] .close-icon {
+    margin-right: 0.25rem;
 }
 
 .see-all {
@@ -220,8 +231,12 @@
     text-align: center;
 }
 
-.see-all-button img {
+[dir="ltr"] .see-all-button img {
     margin-left: 0.5rem;
+}
+
+[dir="rtl"] .see-all-button img {
+    margin-right: 0.5rem;
 }
 
 .video-cover {

@@ -48,8 +48,13 @@
     height:  1.5rem;
 }
 
+.language-caret {
+    vertical-align: text-top;
+}
+
 .language-menu {
     display: inline-flex;
+    width: 3rem;
 }
 
 .menu {

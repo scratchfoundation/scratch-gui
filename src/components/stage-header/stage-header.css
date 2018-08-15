@@ -22,7 +22,8 @@
     flex-shrink: 0;
     align-items: center;
     height: $stage-menu-height;
-    padding: $space;
+    padding-top: $space;
+    padding-bottom: $space;
 }
 
 .stage-size-row {

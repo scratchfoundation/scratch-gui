@@ -77,4 +77,7 @@ const mapStateToProps = state => ({
     isRtl: state.locales.isRtl
 });
 
-export default connect(mapStateToProps)(ErrorBoundary);
+// no-op function to prevent dispatch prop being passed to component
+const mapDispatchToProps = () => {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);

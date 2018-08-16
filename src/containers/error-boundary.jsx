@@ -77,6 +77,4 @@ const mapStateToProps = state => ({
     isRtl: state.locales.isRtl
 });
 
-export default connect(
-    mapStateToProps
-)(ErrorBoundary);
+export default connect(mapStateToProps)(ErrorBoundary);

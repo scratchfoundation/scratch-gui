@@ -34,6 +34,10 @@
     background-size: cover;
 }
 
+[dir="rtl"] .illustration {
+    transform: scaleX(-1);
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;

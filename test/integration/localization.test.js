@@ -25,8 +25,7 @@ describe('Localization', () => {
     test('Localization', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
-        await clickXpath('//*[@aria-label="language selector"]');
-        await clickText('English');
+        await clickXpath('//*[@aria-label="language selector"]/following-sibling::select');
         await clickText('Deutsch');
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks refresh
 

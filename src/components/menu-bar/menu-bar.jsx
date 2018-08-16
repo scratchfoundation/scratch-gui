@@ -145,9 +145,9 @@ class MenuBar extends React.Component {
             this.props.onClickLanguage(e);
         }
     }
-    handleRestoreOption (restoreFun /* eslint-disable-line no-unused-vars */) {
+    handleRestoreOption (restoreFun) {
         return () => {
-            // restoreFun(); TODO re-enable this when validation issues are fixed
+            restoreFun();
             this.props.onRequestCloseEdit();
         };
     }
@@ -301,30 +301,25 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseEdit}
                             >
-                                <MenuItemTooltip
-                                    id="restore"
-                                    isRtl={this.props.isRtl}
-                                >
-                                    <DeletionRestorer>{(handleRestore, {restorable /* eslint-disable-line no-unused-vars, max-len */, deletedItem}) => (
-                                        <MenuItem
-                                            className={classNames(styles.disabled)}
-                                            onClick={this.handleRestoreOption(handleRestore)}
-                                        >
-                                            {deletedItem === 'Sprite' ?
-                                                <FormattedMessage
-                                                    defaultMessage="Restore Sprite"
-                                                    description="Menu bar item for restoring the last deleted sprite."
-                                                    id="gui.menuBar.restoreSprite"
-                                                /> :
-                                                <FormattedMessage
-                                                    defaultMessage="Restore"
-                                                    description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
-                                                    id="gui.menuBar.restore"
-                                                />
-                                            }
-                                        </MenuItem>
-                                    )}</DeletionRestorer>
-                                </MenuItemTooltip>
+                                <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
+                                    <MenuItem
+                                        className={classNames({[styles.disabled]: !restorable})}
+                                        onClick={this.handleRestoreOption(handleRestore)}
+                                    >
+                                        {deletedItem === 'Sprite' ?
+                                            <FormattedMessage
+                                                defaultMessage="Restore Sprite"
+                                                description="Menu bar item for restoring the last deleted sprite."
+                                                id="gui.menuBar.restoreSprite"
+                                            /> :
+                                            <FormattedMessage
+                                                defaultMessage="Restore"
+                                                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+                                                id="gui.menuBar.restore"
+                                            />
+                                        }
+                                    </MenuItem>
+                                )}</DeletionRestorer>
                                 <MenuSection>
                                     <TurboMode>{(toggleTurboMode, {turboMode}) => (
                                         <MenuItem onClick={toggleTurboMode}>

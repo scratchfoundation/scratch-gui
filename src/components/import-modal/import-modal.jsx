@@ -90,7 +90,11 @@ const ImportModal = ({intl, ...props}) => (
                 />
                 <button
                     className={styles.okButton}
-                    title="viewproject"
+                    title={intl.formatMessage({
+                        defaultMessage: 'View Project',
+                        description: 'Tooltip for View button',
+                        id: 'gui.importModal.viewprojecttooltip'
+                    })}
                     onClick={props.onViewProject}
                 >
                     <FormattedMessage

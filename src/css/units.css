@@ -1,3 +1,6 @@
+/* make sure to keep these in sync with other constants,
+e.g. STAGE_DIMENSION_DEFAULTS in lib/screen-utils.js */
+
 $space: 0.5rem;
 
 $sprites-per-row: 5;
@@ -8,6 +11,10 @@ $stage-menu-height: 2.75rem;
 
 $library-header-height: 3.125rem;
 $library-filter-bar-height: 2.5rem;
+
+$stage-standard-border-width: 0.0625rem;
+$stage-full-screen-border-width: 0.1875rem;
+$stage-full-screen-stage-padding: 0.1875rem;
 
 $form-radius: calc($space / 2);
 

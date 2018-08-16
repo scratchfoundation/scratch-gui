@@ -66,6 +66,7 @@
     align-self: center;
     position: relative;
     align-items: center;
+    white-space: nowrap;
     height: $menu-bar-height;
 }
 

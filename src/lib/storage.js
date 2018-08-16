@@ -32,10 +32,7 @@ class Storage extends ScratchStorage {
         this.projectHost = projectHost;
     }
     getProjectURL (projectAsset) {
-        const [projectId, revision] = projectAsset.assetId.split('.');
-        return revision ?
-            `${this.projectHost}/internalapi/project/${projectId}/get/${revision}` :
-            `${this.projectHost}/internalapi/project/${projectId}/get/`;
+        return `${this.projectHost}/internalapi/project/${projectAsset.assetId}/get/`;
     }
     setAssetHost (assetHost) {
         this.assetHost = assetHost;

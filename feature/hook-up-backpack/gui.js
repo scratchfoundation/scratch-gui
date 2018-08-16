@@ -1,11 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1456:
+/***/ 1515:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1457);
+var content = __webpack_require__(1516);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -19,7 +19,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(4)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -27,10 +27,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1457:
+/***/ 1516:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -44,43 +44,46 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 440:
+/***/ 460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
+// For Safari 9
 
-__webpack_require__(441);
+__webpack_require__(461);
 
-__webpack_require__(443);
+__webpack_require__(463);
+
+__webpack_require__(487);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(33);
+var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _analytics = __webpack_require__(34);
+var _analytics = __webpack_require__(28);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _gui = __webpack_require__(122);
+var _gui = __webpack_require__(129);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(158);
+var _hashParserHoc = __webpack_require__(173);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(159);
+var _appStateHoc = __webpack_require__(174);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(1456);
+var _index = __webpack_require__(1515);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -114,7 +117,14 @@ var backpackOptions = {
 
 _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOptions: backpackOptions }), appTarget);
 
+/***/ }),
+
+/***/ 489:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
 /***/ })
 
-},[[440,0]]]);
+},[[460,0]]]);
 //# sourceMappingURL=gui.js.map

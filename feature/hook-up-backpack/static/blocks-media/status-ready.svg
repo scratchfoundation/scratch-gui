@@ -1,20 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FF8C1A;}
-	.st1{fill:#FFFFFF;}
-	.st2{fill:#0FBD8C;}
-</style>
-<g id="Layer_1">
-	<circle class="st0" cx="10" cy="10" r="8.5"/>
-	<path class="st1" d="M9.1,10.6l-0.3-3C8.7,7,8.6,6.6,8.6,6.4c0-0.3,0.2-0.6,0.5-0.8c0.3-0.2,0.7-0.3,1.2-0.3c0.6,0,1,0.1,1.2,0.4
-		c0.2,0.2,0.3,0.6,0.3,1.1c0,0.3,0,0.6-0.1,0.8l-0.5,3.1c-0.1,0.4-0.2,0.7-0.3,0.8c-0.2,0.2-0.4,0.3-0.8,0.3c-0.4,0-0.7-0.1-0.8-0.3
-		C9.2,11.3,9.1,11,9.1,10.6z M10.3,14.8c-0.4,0-0.8-0.1-1.1-0.2c-0.3-0.2-0.5-0.4-0.5-0.7c0-0.3,0.2-0.5,0.5-0.7
-		c0.3-0.2,0.7-0.3,1.1-0.3s0.8,0.1,1.2,0.3s0.5,0.4,0.5,0.7c0,0.3-0.2,0.5-0.5,0.7C11.1,14.7,10.7,14.8,10.3,14.8z"/>
-</g>
-<g id="Layer_2">
-	<circle class="st2" cx="10" cy="10" r="8.5"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>connected</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="connected" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <circle id="Oval" fill="#0FBD8C" cx="10" cy="10" r="10"></circle>
+            <path d="M8.4575,14.9846429 C8.09178571,14.9846429 7.72607143,14.8446429 7.4475,14.5660714 L4.70464286,11.8232143 C4.14607143,11.2646429 4.14607143,10.3617857 4.70464286,9.80321429 C5.26321429,9.24464286 6.16607143,9.24464286 6.72464286,9.80321429 L8.4575,11.5360714 L13.8617857,6.13321429 C14.4189286,5.57464286 15.3232143,5.57464286 15.8817857,6.13321429 C16.4389286,6.69035714 16.4389286,7.59464286 15.8817857,8.15321429 L9.4675,14.5660714 C9.18892857,14.8446429 8.82321429,14.9846429 8.4575,14.9846429" id="Fill-1" fill="#FFFFFF"></path>
+        </g>
+    </g>
 </svg>

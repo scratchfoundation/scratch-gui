@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1462:
+/***/ 1521:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,7 +9,7 @@ var GUI =
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _classnames = __webpack_require__(5);
+var _classnames = __webpack_require__(3);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -21,31 +21,31 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(33);
+var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(7);
+var _reactRedux = __webpack_require__(6);
 
-var _box = __webpack_require__(15);
+var _box = __webpack_require__(14);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(122);
+var _gui = __webpack_require__(129);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(158);
+var _hashParserHoc = __webpack_require__(173);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(159);
+var _appStateHoc = __webpack_require__(174);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(114);
+var _mode = __webpack_require__(121);
 
-var _player = __webpack_require__(1463);
+var _player = __webpack_require__(1522);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -62,7 +62,8 @@ if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined
 
 var Player = function Player(_ref) {
     var isPlayerOnly = _ref.isPlayerOnly,
-        onSeeInside = _ref.onSeeInside;
+        onSeeInside = _ref.onSeeInside,
+        projectId = _ref.projectId;
     return _react2.default.createElement(
         _box2.default,
         {
@@ -75,14 +76,16 @@ var Player = function Player(_ref) {
         ),
         _react2.default.createElement(_gui2.default, {
             enableCommunity: true,
-            isPlayerOnly: isPlayerOnly
+            isPlayerOnly: isPlayerOnly,
+            projectId: projectId
         })
     );
 };
 
 Player.propTypes = {
     isPlayerOnly: _propTypes2.default.bool,
-    onSeeInside: _propTypes2.default.func
+    onSeeInside: _propTypes2.default.func,
+    projectId: _propTypes2.default.string
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -109,11 +112,11 @@ _reactDom2.default.render(_react2.default.createElement(WrappedPlayer, { isPlaye
 
 /***/ }),
 
-/***/ 1463:
+/***/ 1522:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1464);
+var content = __webpack_require__(1523);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -127,7 +130,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(4)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -135,10 +138,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1464:
+/***/ 1523:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -153,5 +156,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1462,0]]]);
+},[[1521,0]]]);
 //# sourceMappingURL=player.js.map

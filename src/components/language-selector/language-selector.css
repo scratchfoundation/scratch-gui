@@ -7,7 +7,7 @@
 
 /* Position the language select over the language icon, and make it transparent */
 .language-select {
-    position: relative;
+    position: absolute;
     width: 3rem;
     height: 3rem;
     opacity: 0;
@@ -17,11 +17,15 @@
 }
 
 [dir="ltr"] .language-select {
-    right: 40px;
+    right: 0;
 }
 
 [dir="rtl"] .language-select {
-    left: 40px;
+    left: 0;
+}
+
+.language-select option {
+    opacity: 1;
 }
 
 .language-select:focus {

@@ -167,9 +167,7 @@ class MenuBar extends React.Component {
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                         >
-                            <div
-                                aria-label={this.props.intl.formatMessage(ariaMessages.language)}
-                            >
+                            <div>
                                 <img
                                     className={styles.languageIcon}
                                     src={languageIcon}
@@ -179,7 +177,7 @@ class MenuBar extends React.Component {
                                     src={dropdownCaret}
                                 />
                             </div>
-                            <LanguageSelector />
+                            <LanguageSelector aria-label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {

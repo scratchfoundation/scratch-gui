@@ -27,6 +27,7 @@ class Backpack extends React.Component {
             'handleDrop',
             'handleToggle',
             'handleDelete',
+            'getBackpackAssetURL',
             'refreshContents'
         ]);
         this.state = {
@@ -44,10 +45,13 @@ class Backpack extends React.Component {
         if (props.host && !storage._hasAddedBackpackSource) {
             storage.addWebSource(
                 [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
-                asset => `${props.host}/${asset.assetId}.${asset.dataFormat}`
+                this.getBackpackAssetURL
             );
             storage._hasAddedBackpackSource = true;
         }
+    }
+    getBackpackAssetURL (asset) {
+        return `${this.props.host}/${asset.assetId}.${asset.dataFormat}`;
     }
     handleToggle () {
         const newState = !this.state.expanded;
@@ -132,8 +136,8 @@ const getTokenAndUsername = state => {
     // Look for the session state provided by scratch-www
     if (state.session && state.session.session) {
         return {
-            token: state.session.session.token,
-            username: state.session.session.username
+            token: state.session.session.user.token,
+            username: state.session.session.user.username
         };
     }
     // Otherwise try to pull testing params out of the URL, or return nulls

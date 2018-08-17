@@ -177,7 +177,7 @@ class MenuBar extends React.Component {
                                     src={dropdownCaret}
                                 />
                             </div>
-                            <LanguageSelector aria-label={this.props.intl.formatMessage(ariaMessages.language)} />
+                            <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {

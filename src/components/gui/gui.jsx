@@ -125,7 +125,7 @@ const GUIComponent = props => {
                     <ImportModal />
                 ) : null}
                 {isRendererSupported ? null : (
-                    <WebGlModal />
+                    <WebGlModal isRtl={isRtl} />
                 )}
                 {tipsLibraryVisible ? (
                     <TipsLibrary />

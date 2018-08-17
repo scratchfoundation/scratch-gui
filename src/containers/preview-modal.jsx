@@ -39,12 +39,12 @@ class PreviewModal extends React.Component {
 
         // otherwise, show the intro modal
         return (<PreviewModalComponent
+            isRtl={this.props.isRtl}
             previewing={this.state.previewing}
             onCancel={this.handleCancel}
             onTryIt={this.handleTryIt}
             onViewProject={this.handleViewProject}
         />);
-        
     }
     handleTryIt () {
         this.setState({previewing: true});
@@ -62,6 +62,7 @@ class PreviewModal extends React.Component {
         return (supportedBrowser() ?
             this.introIfShown() :
             <BrowserModalComponent
+                isRtl={this.props.isRtl}
                 onBack={this.handleCancel}
             />
         );
@@ -70,11 +71,14 @@ class PreviewModal extends React.Component {
 
 PreviewModal.propTypes = {
     hideIntro: PropTypes.bool,
+    isRtl: PropTypes.bool,
     onTryIt: PropTypes.func,
     onViewProject: PropTypes.func
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl
+});
 
 const mapDispatchToProps = dispatch => ({
     onTryIt: () => {

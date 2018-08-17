@@ -27,7 +27,7 @@ describe('Working with costumes', () => {
 
     test('Adding a costume through the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         const el = await findByXpath("//input[@placeholder='Search']");
@@ -40,7 +40,7 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by surprise button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -53,7 +53,7 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by paint button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -66,7 +66,7 @@ describe('Working with costumes', () => {
 
     test('Duplicating a costume', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         await rightClickText('costume1', scope.costumesTab);
@@ -82,7 +82,7 @@ describe('Working with costumes', () => {
 
     test('Adding a backdrop', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickXpath('//button[@aria-label="Choose a Backdrop"]');
         const el = await findByXpath("//input[@placeholder='Search']");
         await el.sendKeys('blue');
@@ -93,7 +93,7 @@ describe('Working with costumes', () => {
 
     test('Converting bitmap/vector in paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         // Convert the first costume to bitmap.
@@ -117,7 +117,7 @@ describe('Working with costumes', () => {
 
     test('Undo/redo in the paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickText('costume1', scope.costumesTab);
         await clickText('Convert to Bitmap', scope.costumesTab);

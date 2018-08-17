@@ -66,6 +66,7 @@
     align-self: center;
     position: relative;
     align-items: center;
+    white-space: nowrap;
     height: $menu-bar-height;
 }
 
@@ -168,9 +169,16 @@
 }
 
 .dropdown-caret-icon {
-    margin-left: .5rem;
     width: 0.5rem;
     height: 0.5rem;
+}
+
+[dir="ltr"] .dropdown-caret-icon {
+    margin-left: .5rem;
+}
+
+[dir="rtl"] .dropdown-caret-icon {
+    margin-right: .5rem;
 }
 
 .disabled {

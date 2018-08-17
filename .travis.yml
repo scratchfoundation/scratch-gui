@@ -29,15 +29,6 @@ before_deploy:
     export BEFORE_DEPLOY_RAN=true
   fi
 deploy:
-- provider: script
-  on:
-    all_branches: true
-  skip_cleanup: true
-  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-- provider: script
-  on:
-    all_branches: true
-  script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: npm
   on:
     branch:
@@ -59,5 +50,14 @@ deploy:
   acl: public_read
   skip_cleanup: true
   local_dir: build
+- provider: script
+  on:
+    all_branches: true
+  skip_cleanup: true
+  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: script
+  on:
+    all_branches: true
+  script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 after_deploy:
 - 'curl -X POST -H "Fastly-Key: $FASTLY_TOKEN" -H "Accept: application/json" https://api.fastly.com/service/$FASTLY_SERVICE_ID/purge_all'

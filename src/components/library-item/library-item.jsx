@@ -106,12 +106,18 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
-    description: PropTypes.string,
+    description: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
     disabled: PropTypes.bool,
     featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]).isRequired,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func.isRequired,

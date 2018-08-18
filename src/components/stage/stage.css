@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .stage {
     /*
@@ -8,13 +9,23 @@
     */
     display: block;
 
+    /* Attach border radius directly to canvas to prevent needing overflow:hidden; */
+    border-radius: $space;
+    border: $stage-standard-border-width solid $ui-black-transparent;
+
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent;
+
+    /* Allow custom touch handling to prevent scrolling on Edge */
+    touch-action: none;
+
+    /* Make sure border is not included in size calculation */
+    box-sizing: content-box !important;
 }
 
 .with-color-picker {
     cursor: none;
-    z-index: 2001;
+    z-index: $z-index-stage-with-color-picker;
 }
 
 .color-picker-background {
@@ -23,17 +34,13 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.55);
     display: block;
-    z-index: 2000;
+    z-index: $z-index-stage-color-picker-background;
     top: 0;
     left: 0;
 }
 
 .stage-wrapper {
     position: relative;
-    border-radius: $space;
-    border: 1px solid $ui-black-transparent;
-    /* Keep the canvas inside the border radius */
-    overflow: hidden;
 }
 
 .stage-wrapper-overlay {
@@ -42,17 +49,19 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 5000;
+    z-index: $z-index-stage-wrapper-overlay;
     background-color: $ui-white;
+    /* spacing between stage and control bar (on the top), or between
+    stage and window edges (on left/right/bottom) */
+    padding: $stage-full-screen-stage-padding;
 }
 
+/* wraps only main content of overlay player, not monitors */
 .stage-overlay-content {
     outline: none;
     margin: auto;
-    border: 3px solid rgb(126, 133, 151);
+    border: $stage-full-screen-border-width solid rgb(126, 133, 151);
     padding: 0;
-    margin-top: 3px;
-    margin-bottom: 3px;
     border-radius: $space;
 
     overflow: hidden;
@@ -69,6 +78,21 @@
     position: absolute;
 }
 
+/* adjust monitors when stage is standard size:
+shift them down and right to compensate for the stage's border */
+.stage-wrapper .monitor-wrapper {
+    top: $stage-standard-border-width;
+    left: $stage-standard-border-width;
+}
+
+/* adjust monitors when stage is full screen:
+.stage-wrapper-overlay uses position: fixed instead of relative, so we need
+to adjust for the border using a different method */
+.stage-wrapper-overlay .monitor-wrapper {
+    padding-top: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
+    padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
+}
+
 .monitor-wrapper, .color-picker-wrapper, .queston-wrapper {
     position: absolute;
     top: 0;
@@ -78,3 +102,11 @@
     pointer-events: none;
     overflow: hidden;
 }
+
+.dragging-sprite {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: $z-index-dragging-sprite;
+    filter: drop-shadow(5px 5px 5px $ui-black-transparent);
+ }

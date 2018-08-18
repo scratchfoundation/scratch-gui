@@ -1,0 +1,5 @@
+@import "../../css/colors.css";
+
+.divider {
+    border-right: 1px dashed $ui-black-transparent;
+}

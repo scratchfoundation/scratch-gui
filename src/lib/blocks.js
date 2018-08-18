@@ -28,6 +28,25 @@ export default function (vm) {
         };
     };
 
+    const jsonForHatBlockMenu = function (hatName, name, menuOptionsFn, colors, start) {
+        return {
+            message0: hatName,
+            args0: [
+                {
+                    type: 'field_dropdown',
+                    name: name,
+                    options: function () {
+                        return start.concat(menuOptionsFn());
+                    }
+                }
+            ],
+            colour: colors.primary,
+            colourSecondary: colors.secondary,
+            colourTertiary: colors.tertiary,
+            extensions: ['shape_hat']
+        };
+    };
+
     const soundsMenu = function () {
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
             return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
@@ -43,9 +62,22 @@ export default function (vm) {
     };
 
     const backdropsMenu = function () {
+        const next = ScratchBlocks.ScratchMsgs.translate('LOOKS_NEXTBACKDROP', 'next backdrop');
+        const previous = ScratchBlocks.ScratchMsgs.translate('LOOKS_PREVIOUSBACKDROP', 'previous backdrop');
+        const random = ScratchBlocks.ScratchMsgs.translate('LOOKS_RANDOMBACKDROP', 'random backdrop');
         if (vm.runtime.targets[0] && vm.runtime.targets[0].getCostumes().length > 0) {
             return vm.runtime.targets[0].getCostumes().map(costume => [costume.name, costume.name])
-                .concat([['next backdrop', 'next backdrop'], ['previous backdrop', 'previous backdrop']]);
+                .concat([[next, 'next backdrop'],
+                    [previous, 'previous backdrop'],
+                    [random, 'random backdrop']]);
+        }
+        return [['', '']];
+    };
+
+    const backdropNamesMenu = function () {
+        const stage = vm.runtime.getTargetForStage();
+        if (stage && stage.getCostumes().length > 0) {
+            return stage.getCostumes().map(costume => [costume.name, costume.name]);
         }
         return [['', '']];
     };
@@ -74,7 +106,8 @@ export default function (vm) {
             }
             return menu;
         }
-        return [['myself', '_myself_']].concat(spriteMenu());
+        const myself = ScratchBlocks.ScratchMsgs.translate('CONTROL_CREATECLONEOF_MYSELF', 'myself');
+        return [[myself, '_myself_']].concat(spriteMenu());
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
@@ -86,6 +119,8 @@ export default function (vm) {
     const sensingColors = ScratchBlocks.Colours.sensing;
 
     const controlColors = ScratchBlocks.Colours.control;
+
+    const eventColors = ScratchBlocks.Colours.event;
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
@@ -102,54 +137,63 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.Blocks.event_whenbackdropswitchesto.init = function () {
+        const json = jsonForHatBlockMenu(
+            ScratchBlocks.Msg.EVENT_WHENBACKDROPSWITCHESTO,
+            'BACKDROP', backdropNamesMenu, eventColors, []);
+        this.jsonInit(json);
+    };
+
     ScratchBlocks.Blocks.motion_pointtowards_menu.init = function () {
+        const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_POINTTOWARDS_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [
-            ['mouse-pointer', '_mouse_']
+            [mouse, '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.motion_goto_menu.init = function () {
+        const random = ScratchBlocks.ScratchMsgs.translate('MOTION_GOTO_RANDOM', 'random position');
+        const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_GOTO_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
-            ['random position', '_random_'],
-            ['mouse-pointer', '_mouse_']
+            [random, '_random_'],
+            [mouse, '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.motion_glideto_menu.init = function () {
+        const random = ScratchBlocks.ScratchMsgs.translate('MOTION_GLIDETO_RANDOM', 'random position');
+        const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_GLIDETO_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
-            ['random position', '_random_'],
-            ['mouse-pointer', '_mouse_']
+            [random, '_random_'],
+            [mouse, '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
+        const stage = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_STAGE', 'Stage');
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
-            ['Stage', '_stage_']
-        ]);
-        this.jsonInit(json);
-    };
-
-    ScratchBlocks.Blocks.sensing_videoonmenutwo.init = function () {
-        const json = jsonForMenuBlock('VIDEOONMENU2', spriteMenu, sensingColors, [
-            ['stage', 'STAGE']
+            [stage, '_stage_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.sensing_distancetomenu.init = function () {
+        const mouse = ScratchBlocks.ScratchMsgs.translate('SENSING_DISTANCETO_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('DISTANCETOMENU', spriteMenu, sensingColors, [
-            ['mouse-pointer', '_mouse_']
+            [mouse, '_mouse_']
         ]);
         this.jsonInit(json);
     };
 
     ScratchBlocks.Blocks.sensing_touchingobjectmenu.init = function () {
+        const mouse = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_POINTER', 'mouse-pointer');
+        const edge = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_EDGE', 'edge');
         const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, sensingColors, [
-            ['mouse-pointer', '_mouse_'],
-            ['edge', '_edge_']
+            [mouse, '_mouse_'],
+            [edge, '_edge_']
         ]);
         this.jsonInit(json);
     };
@@ -162,6 +206,13 @@ export default function (vm) {
     ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
         const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
         return monitoredBlock ? monitoredBlock.isMonitored : false;
+    };
+
+    ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
+        if (vm.getPeripheralIsConnected(extensionId)) {
+            return ScratchBlocks.StatusButtonState.READY;
+        }
+        return ScratchBlocks.StatusButtonState.NOT_READY;
     };
 
     return ScratchBlocks;

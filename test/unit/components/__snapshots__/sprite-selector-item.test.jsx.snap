@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SpriteSelectorItemComponent matches snapshot when given a number to show 1`] = `
+exports[`SpriteSelectorItemComponent matches snapshot when given a number and details to show 1`] = `
 <div
   className="react-contextmenu-wrapper ponies undefined"
   onClick={[Function]}
@@ -30,21 +30,23 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number to sho
   >
     5
   </div>
-  <canvas
+  <img
     className={undefined}
-    height={32}
-    style={
-      Object {
-        "height": "32px",
-        "width": "32px",
-      }
-    }
-    width={32}
+    src="https://scratch.mit.edu/foo/bar/pony"
   />
   <div
     className={undefined}
   >
-    Pony sprite
+    <div
+      className={undefined}
+    >
+      Pony sprite
+    </div>
+    <div
+      className={undefined}
+    >
+      480 x 360
+    </div>
   </div>
   <nav
     className="react-contextmenu"
@@ -104,21 +106,18 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
       src="test-file-stub"
     />
   </div>
-  <canvas
+  <img
     className={undefined}
-    height={32}
-    style={
-      Object {
-        "height": "32px",
-        "width": "32px",
-      }
-    }
-    width={32}
+    src="https://scratch.mit.edu/foo/bar/pony"
   />
   <div
     className={undefined}
   >
-    Pony sprite
+    <div
+      className={undefined}
+    >
+      Pony sprite
+    </div>
   </div>
   <nav
     className="react-contextmenu"

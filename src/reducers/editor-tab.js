@@ -30,6 +30,7 @@ const activateTab = function (tab) {
 
 export {
     reducer as default,
+    initialState as editorTabInitialState,
     activateTab,
     BLOCKS_TAB_INDEX,
     COSTUMES_TAB_INDEX,

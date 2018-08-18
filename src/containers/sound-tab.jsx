@@ -10,12 +10,16 @@ import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-l
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
+import searchIcon from '../components/action-menu/icon--search.svg';
 
 import RecordModal from './record-modal.jsx';
 import SoundEditor from './sound-editor.jsx';
 import SoundLibrary from './sound-library.jsx';
 
 import soundLibraryContent from '../lib/libraries/sounds.json';
+import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
+import DragConstants from '../lib/drag-constants';
 
 import {connect} from 'react-redux';
 
@@ -25,6 +29,11 @@ import {
     openSoundRecorder
 } from '../reducers/modals';
 
+import {
+    activateTab,
+    COSTUMES_TAB_INDEX
+} from '../reducers/editor-tab';
+
 class SoundTab extends React.Component {
     constructor (props) {
         super(props);
@@ -33,7 +42,11 @@ class SoundTab extends React.Component {
             'handleDeleteSound',
             'handleDuplicateSound',
             'handleNewSound',
-            'handleSurpriseSound'
+            'handleSurpriseSound',
+            'handleFileUploadClick',
+            'handleSoundUpload',
+            'handleDrop',
+            'setFileInput'
         ]);
         this.state = {selectedSoundIndex: 0};
     }
@@ -98,6 +111,46 @@ class SoundTab extends React.Component {
         });
     }
 
+    handleFileUploadClick () {
+        this.fileInput.click();
+    }
+
+    handleSoundUpload (e) {
+        const storage = this.props.vm.runtime.storage;
+        const handleSound = newSound => this.props.vm.addSound(newSound)
+            .then(() => this.handleNewSound());
+
+        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+            soundUpload(buffer, fileType, fileName, storage, handleSound);
+        });
+    }
+
+    handleDrop (dropInfo) {
+        if (dropInfo.dragType === DragConstants.SOUND) {
+            const sprite = this.props.vm.editingTarget.sprite;
+            const activeSound = sprite.sounds[this.state.selectedSoundIndex];
+
+            this.props.vm.reorderSound(this.props.vm.editingTarget.id,
+                dropInfo.index, dropInfo.newIndex);
+
+            this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            this.props.onActivateCostumesTab();
+            this.props.vm.addCostume(dropInfo.payload.body, {
+                name: dropInfo.payload.name
+            });
+        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            this.props.vm.addSound({
+                md5: dropInfo.payload.body,
+                name: dropInfo.payload.name
+            }).then(this.handleNewSound);
+        }
+    }
+
+    setFileInput (input) {
+        this.fileInput = input;
+    }
+
     render () {
         const {
             intl,
@@ -115,13 +168,15 @@ class SoundTab extends React.Component {
         const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {
                 url: soundIcon,
-                name: sound.name
+                name: sound.name,
+                details: (sound.sampleCount / sound.rate).toFixed(2),
+                dragPayload: sound
             }
         )) : [];
 
         const messages = defineMessages({
             fileUploadSound: {
-                defaultMessage: 'Coming Soon',
+                defaultMessage: 'Upload Sound',
                 description: 'Button to upload sound from file in the editor tab',
                 id: 'gui.soundTab.fileUploadSound'
             },
@@ -136,7 +191,7 @@ class SoundTab extends React.Component {
                 id: 'gui.soundTab.recordSound'
             },
             addSound: {
-                defaultMessage: 'Sound Library',
+                defaultMessage: 'Choose a Sound',
                 description: 'Button to add a sound in the editor tab',
                 id: 'gui.soundTab.addSoundFromLibrary'
             }
@@ -150,7 +205,11 @@ class SoundTab extends React.Component {
                     onClick: onNewSoundFromLibraryClick
                 }, {
                     title: intl.formatMessage(messages.fileUploadSound),
-                    img: fileUploadIcon
+                    img: fileUploadIcon,
+                    onClick: this.handleFileUploadClick,
+                    fileAccept: '.wav, .mp3',
+                    fileChange: this.handleSoundUpload,
+                    fileInput: this.setFileInput
                 }, {
                     title: intl.formatMessage(messages.surpriseSound),
                     img: surpriseIcon,
@@ -159,13 +218,16 @@ class SoundTab extends React.Component {
                     title: intl.formatMessage(messages.recordSound),
                     img: addSoundFromRecordingIcon,
                     onClick: onNewSoundFromRecordingClick
+                }, {
+                    title: intl.formatMessage(messages.addSound),
+                    img: searchIcon,
+                    onClick: onNewSoundFromLibraryClick
                 }]}
-                items={sounds.map(sound => ({
-                    url: soundIcon,
-                    ...sound
-                }))}
+                dragType={DragConstants.SOUND}
+                items={sounds}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}
+                onDrop={this.handleDrop}
                 onDuplicateClick={this.handleDuplicateSound}
                 onItemClick={this.handleSelectSound}
             >
@@ -192,6 +254,7 @@ class SoundTab extends React.Component {
 SoundTab.propTypes = {
     editingTarget: PropTypes.string,
     intl: intlShape,
+    onActivateCostumesTab: PropTypes.func.isRequired,
     onNewSoundFromLibraryClick: PropTypes.func.isRequired,
     onNewSoundFromRecordingClick: PropTypes.func.isRequired,
     onRequestCloseSoundLibrary: PropTypes.func.isRequired,
@@ -213,14 +276,15 @@ SoundTab.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    editingTarget: state.targets.editingTarget,
-    sprites: state.targets.sprites,
-    stage: state.targets.stage,
-    soundLibraryVisible: state.modals.soundLibrary,
-    soundRecorderVisible: state.modals.soundRecorder
+    editingTarget: state.scratchGui.targets.editingTarget,
+    sprites: state.scratchGui.targets.sprites,
+    stage: state.scratchGui.targets.stage,
+    soundLibraryVisible: state.scratchGui.modals.soundLibrary,
+    soundRecorderVisible: state.scratchGui.modals.soundRecorder
 });
 
 const mapDispatchToProps = dispatch => ({
+    onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onNewSoundFromLibraryClick: e => {
         e.preventDefault();
         dispatch(openSoundLibrary());
@@ -233,7 +297,9 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SoundTab));
+export default errorBoundaryHOC('Sound Tab')(
+    injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(SoundTab))
+);

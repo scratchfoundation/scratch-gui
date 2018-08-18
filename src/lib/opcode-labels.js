@@ -1,34 +1,62 @@
+import ScratchBlocks from 'scratch-blocks';
+
 const opcodeMap = {
     // Motion
     motion_direction: {
         category: 'motion',
-        label: 'direction'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('MOTION_DIRECTION', 'direction')
     },
     motion_xposition: {
         category: 'motion',
-        label: 'x position'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('MOTION_XPOSITION', 'x postion')
     },
     motion_yposition: {
         category: 'motion',
-        label: 'y position'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('MOTION_YPOSITION', 'y postion')
     },
 
     // Looks
     looks_size: {
         category: 'looks',
-        label: 'size'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('LOOKS_SIZE', 'size')
     },
     looks_costumenumbername: {
         category: 'looks',
-        labelFn: params => `costume ${params.NUMBER_NAME}`
+        labelFn: params => {
+            let label = ScratchBlocks.ScratchMsgs.translate(
+                'LOOKS_COSTUMENUMBERNAME',
+                'costume %1'
+            );
+            if (params.NUMBER_NAME === 'number') {
+                label = label.replace(/%1/, ScratchBlocks.ScratchMsgs.translate(
+                    'LOOKS_NUMBERNAME_NUMBER', 'number'));
+            } else {
+                label = label.replace(/%1/, ScratchBlocks.ScratchMsgs.translate(
+                    'LOOKS_NUMBERNAME_NAME', 'name'));
+            }
+            return label;
+        }
     },
     looks_backdropnumbername: {
         category: 'looks',
-        labelFn: params => `backdrop ${params.NUMBER_NAME}`
+        labelFn: params => {
+            let label = ScratchBlocks.ScratchMsgs.translate(
+                'LOOKS_BACKDROPNUMBERNAME',
+                'costume %1'
+            );
+            if (params.NUMBER_NAME === 'number') {
+                label = label.replace(/%1/, ScratchBlocks.ScratchMsgs.translate(
+                    'LOOKS_NUMBERNAME_NUMBER', 'number'));
+            } else {
+                label = label.replace(/%1/, ScratchBlocks.ScratchMsgs.translate(
+                    'LOOKS_NUMBERNAME_NAME', 'name'));
+            }
+            return label;
+        }
     },
     looks_backdropname: {
         category: 'looks',
-        label: 'backdrop name'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('LOOKS_BACKDROPNAME', 'backdrop name')
     },
 
     // Data
@@ -44,26 +72,34 @@ const opcodeMap = {
     // Sound
     sound_volume: {
         category: 'sound',
-        label: 'volume'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SOUND_VOLUME', 'volume')
     },
     sound_tempo: {
         category: 'sound',
-        label: 'tempo'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SOUND_TEMPO', 'tempo')
     },
 
     // Sensing
     sensing_answer: {
         category: 'sensing',
-        label: 'answer'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SENSING_ANSWER', 'answer')
     },
     sensing_loudness: {
         category: 'sensing',
-        label: 'loudness'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SENSING_LOUDNESS', 'loudness')
+    },
+    sensing_username: {
+        category: 'sensing',
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SENSING_USERNAME', 'username')
     },
     sensing_current: {
         category: 'sensing',
         labelFn: params => {
-            let currentMenu = params.CURRENTMENU.toLowerCase();
+            let currentMenu = params.CURRENTMENU.toUpperCase();
+            currentMenu = ScratchBlocks.ScratchMsgs.translate(
+                `SENSING_CURRENT_${currentMenu}`,
+                currentMenu.toLowerCase()
+            );
             if (currentMenu === 'dayofweek') {
                 currentMenu = 'day of week';
             }
@@ -72,7 +108,7 @@ const opcodeMap = {
     },
     sensing_timer: {
         category: 'sensing',
-        label: 'timer'
+        labelFn: () => ScratchBlocks.ScratchMsgs.translate('SENSING_TIMER', 'timer')
     }
 };
 

@@ -8,15 +8,16 @@ import styles from './filter.css';
 
 const FilterComponent = props => {
     const {
+        className,
         onChange,
         onClear,
         placeholderText,
-        filterQuery
+        filterQuery,
+        inputClassName
     } = props;
     return (
         <div
-            className={classNames({
-                [styles.filter]: true,
+            className={classNames(className, styles.filter, {
                 [styles.isActive]: filterQuery.length > 0
             })}
         >
@@ -25,7 +26,7 @@ const FilterComponent = props => {
                 src={filterIcon}
             />
             <input
-                className={styles.filterInput}
+                className={classNames(styles.filterInput, inputClassName)}
                 placeholder={placeholderText}
                 type="text"
                 value={filterQuery}
@@ -45,12 +46,14 @@ const FilterComponent = props => {
 };
 
 FilterComponent.propTypes = {
+    className: PropTypes.string,
     filterQuery: PropTypes.string,
+    inputClassName: PropTypes.string,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
     placeholderText: PropTypes.string
 };
 FilterComponent.defaultProps = {
-    placeholderText: 'what are you looking for?'
+    placeholderText: 'Search'
 };
 export default FilterComponent;

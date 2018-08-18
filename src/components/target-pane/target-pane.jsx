@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
+import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
 
 import styles from './target-pane.css';
 
@@ -17,23 +18,30 @@ import styles from './target-pane.css';
  */
 const TargetPane = ({
     editingTarget,
+    fileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
     onChangeSpriteDirection,
     onChangeSpriteName,
+    onChangeSpriteRotationStyle,
     onChangeSpriteSize,
     onChangeSpriteVisibility,
     onChangeSpriteX,
     onChangeSpriteY,
     onDeleteSprite,
+    onDrop,
     onDuplicateSprite,
+    onExportSprite,
+    onFileUploadClick,
     onNewSpriteClick,
-    onSurpriseSpriteClick,
     onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
     onSelectSprite,
+    onSpriteUpload,
+    onSurpriseSpriteClick,
     raiseSprites,
     stage,
+    stageSize,
     sprites,
     vm,
     ...componentProps
@@ -48,18 +56,25 @@ const TargetPane = ({
             hoveredTarget={hoveredTarget}
             raised={raiseSprites}
             selectedId={editingTarget}
+            spriteFileInput={fileInputRef}
             sprites={sprites}
+            stageSize={stageSize}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
+            onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
             onChangeSpriteSize={onChangeSpriteSize}
             onChangeSpriteVisibility={onChangeSpriteVisibility}
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
             onDeleteSprite={onDeleteSprite}
+            onDrop={onDrop}
             onDuplicateSprite={onDuplicateSprite}
+            onExportSprite={onExportSprite}
+            onFileUploadClick={onFileUploadClick}
             onNewSpriteClick={onNewSpriteClick}
             onPaintSpriteClick={onPaintSpriteClick}
             onSelectSprite={onSelectSprite}
+            onSpriteUpload={onSpriteUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
@@ -89,9 +104,11 @@ const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired,
-        bitmapResolution: PropTypes.number.isRequired,
-        rotationCenterX: PropTypes.number.isRequired,
-        rotationCenterY: PropTypes.number.isRequired
+        // The following are optional because costumes uploaded from disk
+        // will not have these properties available
+        bitmapResolution: PropTypes.number,
+        rotationCenterX: PropTypes.number,
+        rotationCenterY: PropTypes.number
     }),
     direction: PropTypes.number,
     id: PropTypes.string,
@@ -106,28 +123,35 @@ const spriteShape = PropTypes.shape({
 TargetPane.propTypes = {
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
+    fileInputRef: PropTypes.func,
     hoveredTarget: PropTypes.shape({
         hoveredSprite: PropTypes.string,
         receivedBlocks: PropTypes.bool
     }),
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
+    onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,
+    onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
+    onExportSprite: PropTypes.func,
+    onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onSpriteUpload: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
     raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM)
 };
 

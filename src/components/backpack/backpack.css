@@ -1,0 +1,68 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.backpack-container {
+    flex-shrink: 1;
+    position: relative;
+}
+
+.backpack-header {
+    margin-top: 0.5rem;
+    border: 1px solid $ui-black-transparent;
+    border-top-right-radius: $space;
+    background: $ui-white;
+    padding: 0.25rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: $text-primary;
+    transition: 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.backpack-list {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-right: 1px solid $ui-black-transparent;
+    min-height: 5.5rem;
+}
+
+/* Absolute position the inner list to allow scrolling inside flex sized container */
+.backpack-list-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.drag-over:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    background-color: #8cbcff;
+    transition: all 0.25s ease;
+}
+
+.status-message {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: $text-primary;
+}
+
+.backpack-item {
+    min-width: 4rem;
+    margin: 0 0.25rem;
+    mix-blend-mode: multiply; /* Make white transparent for thumnbnails */
+}

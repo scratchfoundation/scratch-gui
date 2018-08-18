@@ -8,19 +8,21 @@ class Prompt extends React.Component {
         super(props);
         bindAll(this, [
             'handleOk',
+            'handleOptionSelection',
             'handleCancel',
             'handleChange',
             'handleKeyPress'
         ]);
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            optionSelection: null
         };
     }
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
     }
     handleOk () {
-        this.props.onOk(this.state.inputValue);
+        this.props.onOk(this.state.inputValue, this.state.optionSelection);
     }
     handleCancel () {
         this.props.onCancel();
@@ -28,9 +30,13 @@ class Prompt extends React.Component {
     handleChange (e) {
         this.setState({inputValue: e.target.value});
     }
+    handleOptionSelection (e) {
+        this.setState({optionSelection: e.target.value});
+    }
     render () {
         return (
             <PromptComponent
+                isStage={this.props.isStage}
                 label={this.props.label}
                 placeholder={this.props.placeholder}
                 showMoreOptions={this.props.showMoreOptions}
@@ -39,12 +45,14 @@ class Prompt extends React.Component {
                 onChange={this.handleChange}
                 onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
+                onOptionSelection={this.handleOptionSelection}
             />
         );
     }
 }
 
 Prompt.propTypes = {
+    isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,

@@ -1,12 +1,18 @@
+import ScratchBlocks from 'scratch-blocks';
+
 const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 const motion = function (isStage, targetId) {
+    const stageSelected = ScratchBlocks.ScratchMsgs.translate(
+        'MOTION_STAGE_SELECTED',
+        'Stage selected: no motion blocks'
+    );
     return `
-    <category name="Motion" colour="#4C97FF" secondaryColour="#3373CC">
+    <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="#4C97FF" secondaryColour="#3373CC">
         ${isStage ? `
-        <label text="Stage selected: no motion blocks"></label>
+        <label text="${stageSelected}"></label>
         ` : `
         <block type="motion_movesteps">
             <value name="STEPS">
@@ -15,7 +21,27 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+        <block type="motion_turnright">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_turnleft">
+            <value name="DEGREES">
+                <shadow type="math_number">
+                    <field name="NUM">15</field>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
+        <block type="motion_goto">
+            <value name="TO">
+                <shadow type="motion_goto_menu">
+                </shadow>
+            </value>
+        </block>
         <block type="motion_gotoxy">
             <value name="X">
                 <shadow id="movex" type="math_number">
@@ -28,9 +54,14 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_goto">
+        <block type="motion_glideto" id="motion_glideto">
+            <value name="SECS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
             <value name="TO">
-                <shadow type="motion_goto_menu">
+                <shadow type="motion_glideto_menu">
                 </shadow>
             </value>
         </block>
@@ -51,32 +82,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block type="motion_glideto" id="motion_glideto">
-            <value name="SECS">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="motion_glideto_menu">
-                </shadow>
-            </value>
-        </block>
         ${blockSeparator}
-        <block type="motion_turnright">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="motion_turnleft">
-            <value name="DEGREES">
-                <shadow type="math_number">
-                    <field name="NUM">15</field>
-                </shadow>
-            </value>
-        </block>
         <block type="motion_pointindirection">
             <value name="DIRECTION">
                 <shadow type="math_angle">
@@ -133,13 +139,15 @@ const motion = function (isStage, targetId) {
 };
 
 const looks = function (isStage, targetId) {
+    const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
+    const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
-    <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
+    <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hello!</field>
+                    <field name="TEXT">${hello}</field>
                 </shadow>
             </value>
             <value name="SECS">
@@ -151,14 +159,14 @@ const looks = function (isStage, targetId) {
         <block type="looks_say">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hello!</field>
+                    <field name="TEXT">${hello}</field>
                 </shadow>
             </value>
         </block>
         <block type="looks_thinkforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hmm...</field>
+                    <field name="TEXT">${hmm}</field>
                 </shadow>
             </value>
             <value name="SECS">
@@ -170,7 +178,7 @@ const looks = function (isStage, targetId) {
         <block type="looks_think">
             <value name="MESSAGE">
                 <shadow type="text">
-                    <field name="TEXT">Hmm...</field>
+                    <field name="TEXT">${hmm}</field>
                 </shadow>
             </value>
         </block>
@@ -189,7 +197,7 @@ const looks = function (isStage, targetId) {
             </block>
             <block type="looks_nextbackdrop"/>
         ` : `
-            <block type="looks_switchcostumeto">
+            <block id="${targetId}_switchcostumeto" type="looks_switchcostumeto">
                 <value name="COSTUME">
                     <shadow type="looks_costume"/>
                 </value>
@@ -259,15 +267,15 @@ const looks = function (isStage, targetId) {
     `;
 };
 
-const sound = function () {
+const sound = function (isStage, targetId) {
     return `
-    <category name="Sound" colour="#D65CD6" secondaryColour="#BD42BD">
-        <block type="sound_play">
+    <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
+        <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
         </block>
-        <block type="sound_playuntildone">
+        <block id="${targetId}_sound_play" type="sound_play">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu"/>
             </value>
@@ -312,7 +320,7 @@ const sound = function () {
 
 const events = function (isStage) {
     return `
-    <category name="Events" colour="#FFD500" secondaryColour="#CC9900">
+    <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
         </block>
@@ -351,7 +359,7 @@ const events = function (isStage) {
 
 const control = function (isStage) {
     return `
-    <category name="Control" colour="#FFAB19" secondaryColour="#CF8B17">
+    <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -397,8 +405,9 @@ const control = function (isStage) {
 };
 
 const sensing = function (isStage) {
+    const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
     return `
-    <category name="Sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
+    <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
@@ -428,7 +437,7 @@ const sensing = function (isStage) {
         <block id="askandwait" type="sensing_askandwait">
             <value name="QUESTION">
                 <shadow type="text">
-                    <field name="TEXT">What's your name?</field>
+                    <field name="TEXT">${name}</field>
                 </shadow>
             </value>
         </block>
@@ -461,14 +470,19 @@ const sensing = function (isStage) {
         ${blockSeparator}
         <block id="current" type="sensing_current"/>
         <block type="sensing_dayssince2000"/>
+        ${blockSeparator}
+        <block type="sensing_username"/>
         ${categorySeparator}
     </category>
     `;
 };
 
 const operators = function () {
+    const apple = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_APPLE', 'apple');
+    const banana = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_BANANA', 'banana');
+    const letter = ScratchBlocks.ScratchMsgs.translate('OPERATORS_LETTEROF_APPLE', 'a');
     return `
-    <category name="Operators" colour="#40BF4A" secondaryColour="#389438">
+    <category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">
         <block type="operator_add">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -531,6 +545,18 @@ const operators = function () {
             </value>
         </block>
         ${blockSeparator}
+        <block type="operator_gt">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">50</field>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_lt">
             <value name="OPERAND1">
                 <shadow type="text">
@@ -539,7 +565,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">50</field>
                 </shadow>
             </value>
         </block>
@@ -551,19 +577,7 @@ const operators = function () {
             </value>
             <value name="OPERAND2">
                 <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-        </block>
-        <block type="operator_gt">
-            <value name="OPERAND1">
-                <shadow type="text">
-                    <field name="TEXT"/>
-                </shadow>
-            </value>
-            <value name="OPERAND2">
-                <shadow type="text">
-                    <field name="TEXT"/>
+                    <field name="TEXT">50</field>
                 </shadow>
             </value>
         </block>
@@ -575,12 +589,12 @@ const operators = function () {
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
-                    <field name="TEXT">hello</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
             <value name="STRING2">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">${banana}</field>
                 </shadow>
             </value>
         </block>
@@ -592,26 +606,26 @@ const operators = function () {
             </value>
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_length">
             <value name="STRING">
                 <shadow type="text">
-                    <field name="TEXT">world</field>
+                    <field name="TEXT">${apple}</field>
                 </shadow>
             </value>
         </block>
         <block type="operator_contains" id="operator_contains">
           <value name="STRING1">
             <shadow type="text">
-              <field name="TEXT">hello</field>
+              <field name="TEXT">${apple}</field>
             </shadow>
           </value>
           <value name="STRING2">
             <shadow type="text">
-              <field name="TEXT">world</field>
+              <field name="TEXT">${letter}</field>
             </shadow>
           </value>
         </block>
@@ -650,14 +664,24 @@ const operators = function () {
 
 const variables = function () {
     return `
-    <category name="Variables" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">
+    <category
+        name="%{BKY_CATEGORY_VARIABLES}"
+        id="variables"
+        colour="#FF8C1A"
+        secondaryColour="#DB6E00"
+        custom="VARIABLE">
     </category>
     `;
 };
 
 const myBlocks = function () {
     return `
-    <category name="My Blocks" colour="#FF6680" secondaryColour="#FF4D6A" custom="PROCEDURE">
+    <category
+        name="%{BKY_CATEGORY_MYBLOCKS}"
+        id="myBlocks"
+        colour="#FF6680"
+        secondaryColour="#FF4D6A"
+        custom="PROCEDURE">
     </category>
     `;
 };

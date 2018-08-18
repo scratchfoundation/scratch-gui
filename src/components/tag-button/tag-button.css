@@ -1,0 +1,19 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.tag-button {
+    padding: .625rem 1rem;
+    background: $motion-primary;
+    border-radius: 1.375rem;
+    color: $ui-white;
+    height: $library-filter-bar-height;
+}
+
+.tag-button-icon {
+    max-width: 1rem;
+    max-height: 1rem;
+}
+
+.active {
+    background: $data-primary;
+}

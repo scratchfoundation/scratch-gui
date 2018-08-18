@@ -10,6 +10,7 @@ const {
     getDriver,
     getLogs,
     loadUri,
+    rightClickText,
     scope
 } = new SeleniumHelper();
 
@@ -28,19 +29,19 @@ describe('Working with the blocks', () => {
 
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Operators', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('join', scope.blocksTab); // Click "join <hello> <world>" block
-        await findByText('helloworld', scope.reportedValue); // Tooltip with result
+        await findByText('applebanana', scope.reportedValue); // Tooltip with result
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
 
     test('Switching sprites updates the block menus', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Sound', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "Meow" sound block should be visible
@@ -57,7 +58,7 @@ describe('Working with the blocks', () => {
 
     test('Creating variables', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -81,13 +82,52 @@ describe('Working with the blocks', () => {
         await clickText('score', scope.blocksTab);
         await findByText('0', scope.reportedValue); // Tooltip with result
 
+        // And there should be a monitor visible
+        await rightClickText('score', scope.monitors);
+        await clickText('slider');
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Creating a list', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Code');
+        await clickText('Variables', scope.blocksTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+
+        await clickText('Make a List');
+        let el = await findByXpath("//input[@placeholder='']");
+        await el.sendKeys('list1');
+        await clickButton('OK');
+
+        // Click the "add <thing> to list" block 3 times
+        await clickText('add', scope.blocksTab);
+        await clickText('add', scope.blocksTab);
+        await clickText('add', scope.blocksTab);
+        await clickText('list1', scope.blocksTab);
+        await findByText('thing thing thing', scope.reportedValue); // Tooltip with result
+
+        // Interact with the monitor, adding an item
+        await findByText('list1', scope.monitors); // Just to be sure it is there
+        await clickText('+', scope.monitors);
+        el = await findByXpath(`//body//${scope.monitors}//input`);
+        await el.sendKeys('thing2');
+        await el.click(); // Regression for "clicking active input erases value" bug.
+        await clickText('list1', scope.monitors); // Blur the input to submit
+
+        // Check that the list value has been propagated.
+        await clickText('list1', scope.blocksTab);
+        await findByText('thing thing thing thing2', scope.reportedValue); // Tooltip with result
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="tryit"]');
+        await clickXpath('//button[@title="Try It"]');
         await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Make a Block');
@@ -99,6 +139,20 @@ describe('Working with the blocks', () => {
 
         // Make sure a "define" block has been added to the workspace
         await findByText('define', scope.blocksTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding an extension', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickXpath('//button[@title="Add Extension"]');
+
+        await clickText('Pen');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        // Make sure toolbox has been scrolled to the pen extension
+        await findByText('stamp', scope.blocksTab);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

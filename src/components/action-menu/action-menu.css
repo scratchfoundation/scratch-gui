@@ -1,4 +1,5 @@
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 $main-button-size: 2.75rem;
 $more-button-size: 2.25rem;
@@ -23,8 +24,16 @@ $more-button-size: 2.25rem;
     transition: background-color 0.2s;
 }
 
+button::-moz-focus-inner {
+    border: 0;
+}
+
 .button:hover {
-    background: $pen-primary;
+    background: $extensions-primary;
+}
+
+.button:active {
+    padding: inherit;
 }
 
 .button.coming-soon:hover {
@@ -36,7 +45,7 @@ $more-button-size: 2.25rem;
     width: $main-button-size;
     height: $main-button-size;
     box-shadow: 0 0 0 4px $motion-transparent;
-    z-index: 20; /* TODO reorder layout to prevent z-index need */
+    z-index: $z-index-add-button;
     transition: transform, box-shadow 0.5s;
 }
 
@@ -48,6 +57,10 @@ $more-button-size: 2.25rem;
 .main-icon {
     width: calc($main-button-size - 1rem);
     height: calc($main-button-size - 1rem);
+}
+
+[dir="rtl"] .main-icon {
+    transform: scaleX(-1);
 }
 
 .more-buttons-outer {
@@ -63,6 +76,7 @@ $more-button-size: 2.25rem;
     border-top-right-radius: $more-button-size;
     width: $more-button-size;
     margin-left: calc(($main-button-size - $more-button-size) / 2);
+    margin-right: calc(($main-button-size - $more-button-size) / 2);
 
     position: absolute;
     bottom: calc($main-button-size);
@@ -78,6 +92,10 @@ $more-button-size: 2.25rem;
     display: flex;
     flex-direction: column;
     z-index: 10; /* @todo justify */
+}
+
+.file-input {
+    display: none;
 }
 
 .expanded .more-buttons {
@@ -114,7 +132,7 @@ $more-button-size: 2.25rem;
     is not very easy to style.
 */
 .tooltip {
-    background-color: $pen-primary !important;
+    background-color: $extensions-primary !important;
     opacity: 1 !important;
     border: 1px solid hsla(0, 0%, 0%, .1) !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
@@ -122,7 +140,7 @@ $more-button-size: 2.25rem;
 }
 
 .tooltip:after {
-    background-color: $pen-primary;
+    background-color: $extensions-primary;
 }
 
 .coming-soon-tooltip {
@@ -138,7 +156,7 @@ $more-button-size: 2.25rem;
     border-radius: .25rem !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    z-index: 100 !important;
+    z-index: $z-index-tooltip !important;
 }
 
 $arrow-size: 0.5rem;

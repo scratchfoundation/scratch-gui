@@ -9,6 +9,7 @@
     left: 0;
     border: 1px solid $ui-black-transparent;
     border-top-right-radius: $space;
+    border-bottom-right-radius: $space;
 }
 
 .blocks :global(.blocklyMainBackground) {
@@ -20,11 +21,31 @@
     border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
     height: calc(100% - 3.25rem) !important;
+
+    /*
+        For now, the layout cannot support scrollbars in the category menu.
+        The line below works for Edge, the `::-webkit-scrollbar` line
+        below that is for webkit browsers. It isn't possible to do the
+        same for Firefox, so a different solution may be needed for them.
+    */
+    -ms-overflow-style: none;
+}
+
+.blocks :global(.blocklyToolboxDiv::-webkit-scrollbar) {
+    display: none;
 }
 
 .blocks :global(.blocklyFlyout) {
     border-right: 1px solid $ui-black-transparent;
     box-sizing: content-box;
+}
+
+.blocks :global(.blocklyBlockDragSurface) {
+    /*
+        Fix an issue where the drag surface was preventing hover events for sharing blocks.
+        This does not prevent user interaction on the blocks themselves.
+    */
+    pointer-events: none;
 }
 
 /*
@@ -34,4 +55,9 @@
 */
 .blocks :global(.scratchCategoryMenuItemLabel) {
     font-size: 0.65rem;
+}
+
+.blocks :global(.blocklyMinimalBody) {
+    min-width: auto;
+    min-height: auto;
 }

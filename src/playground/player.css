@@ -1,0 +1,7 @@
+.stage-only {
+    width: calc(480px + 1rem);
+}
+
+.stage-only * {
+    box-sizing: border-box;
+}

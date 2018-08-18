@@ -5,34 +5,40 @@ addons:
     chrome: stable
 node_js:
 - 8
+env:
+  global:
+  - NODE_ENV=production
+  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
+  - NPM_TAG=latest
 cache:
   directories:
   - node_modules
 install:
-- npm install
-- npm update
+- npm --production=false install
+- npm --production=false update
+script:
+- npm test
+- if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ] && [ "$TRAVIS_BRANCH" == "master" ]; then  npm run test:smoke; fi
 before_deploy:
-- npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
-- git config --global user.email $(git log --pretty=format:"%ae" -n1)
-- git config --global user.name $(git log --pretty=format:"%an" -n1)
+- >
+  if [ -z "$BEFORE_DEPLOY_RAN" ]; then
+    npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
+    if [ "$TRAVIS_BRANCH" == "develop" ]; then export NPM_TAG=develop; fi
+    git config --global user.email $(git log --pretty=format:"%ae" -n1)
+    git config --global user.name $(git log --pretty=format:"%an" -n1)
+    export BEFORE_DEPLOY_RAN=true
+  fi
 deploy:
-- provider: script
-  on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH != master
-  skip_cleanup: true
-  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-- provider: script
-  on:
-    branch: master
-  skip_cleanup: true
-  script: npm run --silent deploy -- -x -a -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: npm
   on:
-    branch: master
+    branch:
+    - master
+    - develop
+    - smoke
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
+  tag: $NPM_TAG
 - provider: s3
   on:
     branch:
@@ -42,8 +48,16 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $AWS_BUCKET_NAME
   acl: public_read
-  detect_encoding: true
   skip_cleanup: true
   local_dir: build
+- provider: script
+  on:
+    all_branches: true
+  skip_cleanup: true
+  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: script
+  on:
+    all_branches: true
+  script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 after_deploy:
 - 'curl -X POST -H "Fastly-Key: $FASTLY_TOKEN" -H "Accept: application/json" https://api.fastly.com/service/$FASTLY_SERVICE_ID/purge_all'

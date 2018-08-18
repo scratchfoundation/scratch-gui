@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moveMonitorRect} from '../reducers/monitor-layout';
 
+import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
+
 import MonitorListComponent from '../components/monitor-list/monitor-list.jsx';
 
 class MonitorList extends React.Component {
@@ -31,13 +33,15 @@ MonitorList.propTypes = {
     moveMonitorRect: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    monitors: state.monitors
+    monitors: state.scratchGui.monitors
 });
 const mapDispatchToProps = dispatch => ({
     moveMonitorRect: (id, x, y) => dispatch(moveMonitorRect(id, x, y))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MonitorList);
+export default errorBoundaryHOC('Monitors')(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(MonitorList)
+);

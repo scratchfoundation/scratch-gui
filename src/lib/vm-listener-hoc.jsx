@@ -5,9 +5,10 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
-import {updateEditingTarget, updateTargets} from '../reducers/targets';
+import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
+import {setRunningState, setTurboState} from '../reducers/vm-status';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -31,11 +32,21 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('targetsUpdate', this.props.onTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
+            this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
+            this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
+            this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
+            this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
                 document.addEventListener('keydown', this.handleKeyDown);
                 document.addEventListener('keyup', this.handleKeyUp);
+            }
+            this.props.vm.postIOData('userData', {username: this.props.username});
+        }
+        componentWillReceiveProps (newProps) {
+            if (newProps.username !== this.props.username) {
+                this.props.vm.postIOData('userData', {username: newProps.username});
             }
         }
         componentWillUnmount () {
@@ -50,6 +61,7 @@ const vmListenerHOC = function (WrappedComponent) {
 
             this.props.vm.postIOData('keyboard', {
                 keyCode: e.keyCode,
+                key: e.key,
                 isDown: true
             });
         }
@@ -58,6 +70,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // even those that have switched to other targets.
             this.props.vm.postIOData('keyboard', {
                 keyCode: e.keyCode,
+                key: e.key,
                 isDown: false
             });
 
@@ -70,6 +83,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                username,
                 onBlockDragUpdate,
                 onKeyDown,
                 onKeyUp,
@@ -87,26 +101,36 @@ const vmListenerHOC = function (WrappedComponent) {
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
         onMonitorsUpdate: PropTypes.func.isRequired,
+        onProjectRunStart: PropTypes.func.isRequired,
+        onProjectRunStop: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
+        onTurboModeOff: PropTypes.func.isRequired,
+        onTurboModeOn: PropTypes.func.isRequired,
+        username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     VMListener.defaultProps = {
         attachKeyboardEvents: true
     };
     const mapStateToProps = state => ({
-        vm: state.vm
+        vm: state.scratchGui.vm,
+        username: state.session && state.session.session ?
+            state.session.session.username : ''
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
-            dispatch(updateEditingTarget(data.editingTarget));
-            dispatch(updateTargets(data.targetList));
+            dispatch(updateTargets(data.targetList, data.editingTarget));
         },
         onMonitorsUpdate: monitorList => {
             dispatch(updateMonitors(monitorList));
         },
         onBlockDragUpdate: areBlocksOverGui => {
             dispatch(updateBlockDrag(areBlocksOverGui));
-        }
+        },
+        onProjectRunStart: () => dispatch(setRunningState(true)),
+        onProjectRunStop: () => dispatch(setRunningState(false)),
+        onTurboModeOn: () => dispatch(setTurboState(true)),
+        onTurboModeOff: () => dispatch(setTurboState(false))
     });
     return connect(
         mapStateToProps,

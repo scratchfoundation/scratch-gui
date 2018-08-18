@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './close-button.css';
 import closeIcon from './icon--close.svg';
-import backIcon from './icon--back.svg';
+import backIcon from '../../lib/assets/icon--back.svg';
 
 const CloseButton = props => (
     <div

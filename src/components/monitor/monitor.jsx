@@ -1,7 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
+import {FormattedMessage} from 'react-intl';
+import {ContextMenuTrigger} from 'react-contextmenu';
+import {ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import Box from '../box/box.jsx';
+import DefaultMonitor from './default-monitor.jsx';
+import LargeMonitor from './large-monitor.jsx';
+import SliderMonitor from '../../containers/slider-monitor.jsx';
+import ListMonitor from '../../containers/list-monitor.jsx';
+
 import styles from './monitor.css';
 
 const categories = {
@@ -13,43 +22,95 @@ const categories = {
     list: '#FC662C'
 };
 
+const modes = {
+    default: DefaultMonitor,
+    large: LargeMonitor,
+    slider: SliderMonitor,
+    list: ListMonitor
+};
+
 const MonitorComponent = props => (
-    <Draggable
-        bounds="parent"
-        defaultClassNameDragging={styles.dragging}
-        onStop={props.onDragEnd}
+    <ContextMenuTrigger
+        disable={!props.draggable}
+        holdToDisplay={props.mode === 'slider' ? -1 : 1000}
+        id={`monitor-${props.label}`}
     >
-        <Box
-            className={styles.monitor}
-            componentRef={props.componentRef}
+        <Draggable
+            bounds=".monitor-overlay" // Class for monitor container
+            cancel=".no-drag" // Class used for slider input to prevent drag
+            defaultClassNameDragging={styles.dragging}
+            disabled={!props.draggable}
+            onStop={props.onDragEnd}
         >
-            <Box className={styles.label}>
-                {props.label}
-            </Box>
             <Box
-                className={styles.value}
-                style={{background: categories[props.category]}}
+                className={styles.monitorContainer}
+                componentRef={props.componentRef}
+                onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
             >
-                {props.value}
+                {React.createElement(modes[props.mode], {
+                    categoryColor: categories[props.category],
+                    ...props
+                })}
             </Box>
-        </Box>
-    </Draggable>
+        </Draggable>
+        {props.mode === 'list' ? null : ReactDOM.createPortal((
+            // Use a portal to render the context menu outside the flow to avoid
+            // positioning conflicts between the monitors `transform: scale` and
+            // the context menus `position: fixed`. For more details, see
+            // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+            <ContextMenu id={`monitor-${props.label}`}>
+                <MenuItem onClick={props.onSetModeToDefault}>
+                    <FormattedMessage
+                        defaultMessage="normal readout"
+                        description="Menu item to switch to the default monitor"
+                        id="gui.monitor.contextMenu.default"
+                    />
+                </MenuItem>
+                <MenuItem onClick={props.onSetModeToLarge}>
+                    <FormattedMessage
+                        defaultMessage="large readout"
+                        description="Menu item to switch to the large monitor"
+                        id="gui.monitor.contextMenu.large"
+                    />
+                </MenuItem>
+                {props.onSetModeToSlider ? (
+                    <MenuItem onClick={props.onSetModeToSlider}>
+                        <FormattedMessage
+                            defaultMessage="slider"
+                            description="Menu item to switch to the slider monitor"
+                            id="gui.monitor.contextMenu.slider"
+                        />
+                    </MenuItem>
+                ) : null}
+            </ContextMenu>
+        ), document.body)}
+    </ContextMenuTrigger>
+
 );
 
 MonitorComponent.categories = categories;
 
+const monitorModes = Object.keys(modes);
+
 MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categories)),
     componentRef: PropTypes.func.isRequired,
+    draggable: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
+    mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number])
+    onNextMode: PropTypes.func.isRequired,
+    onSetModeToDefault: PropTypes.func.isRequired,
+    onSetModeToLarge: PropTypes.func.isRequired,
+    onSetModeToSlider: PropTypes.func
 };
 
 MonitorComponent.defaultProps = {
-    category: 'data'
+    category: 'data',
+    mode: 'default'
 };
 
-export default MonitorComponent;
+export {
+    MonitorComponent as default,
+    monitorModes
+};

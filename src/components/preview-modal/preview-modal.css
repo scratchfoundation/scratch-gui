@@ -1,6 +1,7 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/typography.css";
+@import "../../css/z-index.css";
 
 .modal-overlay {
     position: fixed;
@@ -8,7 +9,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: $z-index-modal;
     background-color: $ui-modal-overlay;
 }
 
@@ -68,20 +69,31 @@
 }
 
 .button-row button.view-project-button {
-    background: $pen-primary;
-    border-color: $pen-primary;
+    background: $extensions-primary;
+    border-color: $extensions-primary;
     color: white;
 }
 
-.button-row button + button {
+[dir="ltr"] .button-row button + button {
     margin-left: 0.5rem;
 }
 
+[dir="rtl"] .button-row button + button {
+    margin-right: 0.5rem;
+}
+
 .cat-icon {
-    margin-left: .125rem;
     width: 1.5rem;
     height: 1.5rem;
     vertical-align: middle;
+}
+
+[dir="ltr"] .cat-icon {
+    margin-left: .125rem;
+}
+
+[dir="rtl"] .cat-icon {
+    margin-right: .125rem;
 }
 
 .faq-link-text {

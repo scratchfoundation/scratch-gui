@@ -101,7 +101,7 @@ class SpriteInfo extends React.Component {
                         placeholder="x"
                         tabIndex="0"
                         type="text"
-                        value={this.props.disabled ? '' : this.props.x}
+                        value={this.props.disabled ? '' : Math.round(this.props.x)}
                         onSubmit={this.props.onChangeX}
                     />
                 </Label>
@@ -128,7 +128,7 @@ class SpriteInfo extends React.Component {
                         placeholder="y"
                         tabIndex="0"
                         type="text"
-                        value={this.props.disabled ? '' : this.props.y}
+                        value={this.props.disabled ? '' : Math.round(this.props.y)}
                         onSubmit={this.props.onChangeY}
                     />
                 </Label>

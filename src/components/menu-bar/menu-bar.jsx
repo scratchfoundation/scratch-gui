@@ -165,39 +165,19 @@ class MenuBar extends React.Component {
                             />
                         </div>
                         <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.languageMenuOpen
-                            })}
-                            onMouseUp={this.handleLanguageMouseUp}
+                            className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                         >
-                            {/* @TODO: remove coming soon tooltip wrapper  https://github.com/LLK/scratch-gui/issues/2664  */}
-                            <MenuBarItemTooltip
-                                enable
-                                id="menubar-selector"
-                                place="right"
-                            >
-                                <div
-                                    aria-label={this.props.intl.formatMessage(ariaMessages.language)}
-                                    className={classNames(styles.languageMenu)}
-                                >
-                                    <img
-                                        className={styles.languageIcon}
-                                        src={languageIcon}
-                                    />
-                                    <img
-                                        className={styles.dropdownCaret}
-                                        src={dropdownCaret}
-                                    />
-                                </div>
-                                <MenuBarMenu
-                                    open={this.props.languageMenuOpen}
-                                    place={this.props.isRtl ? 'left' : 'right'}
-                                    onRequestClose={this.props.onRequestCloseLanguage}
-                                >
-                                    <LanguageSelector />
-                                </MenuBarMenu>
-
-                            </MenuBarItemTooltip>
+                            <div>
+                                <img
+                                    className={styles.languageIcon}
+                                    src={languageIcon}
+                                />
+                                <img
+                                    className={styles.languageCaret}
+                                    src={dropdownCaret}
+                                />
+                            </div>
+                            <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {

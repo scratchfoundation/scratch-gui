@@ -186,6 +186,9 @@
     */
     display: flex;
     flex-direction: column;
+    /* pad entire wrapper to the left and right; allow children to fill width */
+    padding-left: $space;
+    padding-right: $space;
 }
 
 .stage-and-target-wrapper.large {
@@ -209,9 +212,6 @@
     flex-basis: 0;
 
     padding-top: $space;
-    padding-left: $space;
-    padding-right: $space;
-
     min-height: 0; /* this makes it work in Firefox */
 
     /*

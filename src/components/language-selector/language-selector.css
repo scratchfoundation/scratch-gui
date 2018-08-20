@@ -8,8 +8,8 @@
 /* Position the language select over the language icon, and make it transparent */
 .language-select {
     position: absolute;
-    width: 3rem;
-    height: 3rem;
+    width: $language-selector-width;
+    height: $menu-bar-height;
     opacity: 0;
     user-select: none;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

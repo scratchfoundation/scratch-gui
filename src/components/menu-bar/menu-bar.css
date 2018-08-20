@@ -54,7 +54,7 @@
 
 .language-menu {
     display: inline-flex;
-    width: 3rem;
+    width: $language-selector-width;
 }
 
 .menu {

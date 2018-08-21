@@ -28,6 +28,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
+  "dependencies": {
+    "scratch-vm": "github:kchadha/scratch-vm#restore-costume"
+  },
   "devDependencies": {
     "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^9.0.1",
@@ -102,7 +105,6 @@
     "scratch-render": "0.1.0-prerelease.20180811013828",
     "scratch-storage": "0.5.1",
     "scratch-svg-renderer": "0.2.0-prerelease.20180817005452",
-    "scratch-vm": "0.2.0-prerelease.20180820150913",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.22.1",

@@ -13,7 +13,7 @@ import SpriteSelectorItemComponent from '../components/sprite-selector-item/spri
 
 const dragThreshold = 3; // Same as the block drag threshold
 // Contains 'font-family', but doesn't only contain 'font-family="none"'
-const HAS_FONT_REGEXP = new RegExp('font-family(?!="none")', 'g');
+const HAS_FONT_REGEXP = 'font-family(?!="none")';
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
@@ -137,6 +137,7 @@ class SpriteSelectorItem extends React.Component {
             dragPayload,
             receivedBlocks,
             costumeURL,
+            vm,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
@@ -191,8 +192,12 @@ const mapDispatchToProps = dispatch => ({
     onDrag: data => dispatch(updateAssetDrag(data))
 });
 
-
-export default connect(
+const ConnectedComponent = connect(
     mapStateToProps,
     mapDispatchToProps
 )(SpriteSelectorItem);
+
+export {
+    ConnectedComponent as default,
+    HAS_FONT_REGEXP // Exposed for testing
+};

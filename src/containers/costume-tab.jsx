@@ -140,7 +140,8 @@ class CostumeTab extends React.Component {
         const restoreCostumeFun = this.props.vm.deleteCostume(costumeIndex);
         this.props.dispatchUpdateRestore({
             restoreFun: restoreCostumeFun,
-            deletedItem: 'Costume'});
+            deletedItem: 'Costume'
+        });
     }
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);

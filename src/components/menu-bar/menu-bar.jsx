@@ -167,6 +167,11 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.restoreSound"
             />);
         case 'Costume':
+            return (<FormattedMessage
+                defaultMessage="Restore Costume"
+                description="Menu bar item for restoring the last deleted costume."
+                id="gui.menuBar.restoreCostume"
+            />);
         default: {
             return (<FormattedMessage
                 defaultMessage="Restore"

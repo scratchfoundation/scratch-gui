@@ -137,7 +137,8 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleLanguageMouseUp',
-            'handleRestoreOption'
+            'handleRestoreOption',
+            'restoreOptionMessage'
         ]);
     }
     handleLanguageMouseUp (e) {
@@ -150,6 +151,30 @@ class MenuBar extends React.Component {
             restoreFun();
             this.props.onRequestCloseEdit();
         };
+    }
+    restoreOptionMessage (deletedItem) {
+        switch (deletedItem) {
+        case 'Sprite':
+            return (<FormattedMessage
+                defaultMessage="Restore Sprite"
+                description="Menu bar item for restoring the last deleted sprite."
+                id="gui.menuBar.restoreSprite"
+            />);
+        case 'Sound':
+            return (<FormattedMessage
+                defaultMessage="Restore Sound"
+                description="Menu bar item for restoring the last deleted sound."
+                id="gui.menuBar.restoreSound"
+            />);
+        case 'Costume':
+        default: {
+            return (<FormattedMessage
+                defaultMessage="Restore"
+                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+                id="gui.menuBar.restore"
+            />);
+        }
+        }
     }
     render () {
         return (
@@ -286,18 +311,7 @@ class MenuBar extends React.Component {
                                         className={classNames({[styles.disabled]: !restorable})}
                                         onClick={this.handleRestoreOption(handleRestore)}
                                     >
-                                        {deletedItem === 'Sprite' ?
-                                            <FormattedMessage
-                                                defaultMessage="Restore Sprite"
-                                                description="Menu bar item for restoring the last deleted sprite."
-                                                id="gui.menuBar.restoreSprite"
-                                            /> :
-                                            <FormattedMessage
-                                                defaultMessage="Restore"
-                                                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
-                                                id="gui.menuBar.restore"
-                                            />
-                                        }
+                                        {this.restoreOptionMessage(deletedItem)}
                                     </MenuItem>
                                 )}</DeletionRestorer>
                                 <MenuSection>

@@ -34,6 +34,8 @@ import {
     COSTUMES_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import {setRestore} from '../reducers/restore-deletion';
+
 class SoundTab extends React.Component {
     constructor (props) {
         super(props);
@@ -76,10 +78,11 @@ class SoundTab extends React.Component {
     }
 
     handleDeleteSound (soundIndex) {
-        this.props.vm.deleteSound(soundIndex);
+        const restoreFun = this.props.vm.deleteSound(soundIndex);
         if (soundIndex >= this.state.selectedSoundIndex) {
             this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
         }
+        this.props.dispatchUpdateRestore({restoreFun, deletedItem: 'Sound'});
     }
 
     handleDuplicateSound (soundIndex) {
@@ -153,6 +156,7 @@ class SoundTab extends React.Component {
 
     render () {
         const {
+            dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
             vm,
             onNewSoundFromLibraryClick,
@@ -252,6 +256,7 @@ class SoundTab extends React.Component {
 }
 
 SoundTab.propTypes = {
+    dispatchUpdateRestore: PropTypes.func,
     editingTarget: PropTypes.string,
     intl: intlShape,
     onActivateCostumesTab: PropTypes.func.isRequired,
@@ -294,6 +299,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseSoundLibrary: () => {
         dispatch(closeSoundLibrary());
+    },
+    dispatchUpdateRestore: restoreState => {
+        dispatch(setRestore(restoreState));
     }
 });
 

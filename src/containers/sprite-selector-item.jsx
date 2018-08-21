@@ -12,6 +12,8 @@ import {SVGRenderer} from 'scratch-svg-renderer';
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
 const dragThreshold = 3; // Same as the block drag threshold
+// Contains 'font-family', but doesn't only contain 'font-family="none"'
+const HAS_FONT_REGEXP = new RegExp('font-family(?!="none")', 'g');
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
@@ -42,9 +44,11 @@ class SpriteSelectorItem extends React.Component {
         // Avoid parsing the SVG when possible, since it's expensive.
         if (asset.assetType === storage.AssetType.ImageVector) {
             const svgString = this.props.vm.runtime.storage.get(this.props.assetId).decodeText();
-            if (svgString.indexOf('font-family') !== -1) {
+            if (svgString.match(HAS_FONT_REGEXP)) {
                 // If the asset ID has not changed, no need to re-parse
-                if (this.svgRendererAssetId === this.props.assetId) return this.cachedUrl;
+                if (this.svgRendererAssetId === this.props.assetId) {
+                    return this.cachedUrl;
+                }
 
                 this.svgRendererAssetId = this.props.assetId;
                 this.svgRenderer.loadString(svgString);

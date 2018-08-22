@@ -31,7 +31,7 @@ var _box = __webpack_require__(14);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(128);
+var _gui = __webpack_require__(129);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -43,7 +43,7 @@ var _appStateHoc = __webpack_require__(175);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(120);
+var _mode = __webpack_require__(121);
 
 var _player = __webpack_require__(1538);
 

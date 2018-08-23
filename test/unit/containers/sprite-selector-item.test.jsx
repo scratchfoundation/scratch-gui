@@ -57,14 +57,6 @@ describe('SpriteSelectorItem Container', () => {
         expect(onDeleteButtonClick).toHaveBeenCalledWith(1337);
     });
 
-    test('should not delete the sprite if the user cancels', () => {
-        global.confirm = jest.fn(() => false);
-        const wrapper = mountWithIntl(getContainer());
-        wrapper.find(CloseButton).simulate('click');
-        expect(global.confirm).toHaveBeenCalled();
-        expect(onDeleteButtonClick).not.toHaveBeenCalled();
-    });
-
     test('Has font regexp works', () => {
         expect('font-family="Sans Serif"'.match(HAS_FONT_REGEXP)).toBeTruthy();
         expect('font-family="none" font-family="Sans Serif"'.match(HAS_FONT_REGEXP)).toBeTruthy();

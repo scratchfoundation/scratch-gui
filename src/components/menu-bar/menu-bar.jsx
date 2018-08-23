@@ -14,6 +14,7 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
+import AccountNav from './account-nav.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
@@ -465,44 +466,74 @@ class MenuBar extends React.Component {
                     </a>
                 </div>
                 <div className={styles.accountInfoWrapper}>
-                    <MenuBarItemTooltip id="mystuff">
-                        <div
-                            className={classNames(
-                                styles.menuBarItem,
-                                styles.hoverable,
-                                styles.mystuffButton
-                            )}
-                        >
-                            <img
-                                className={styles.mystuffIcon}
-                                src={mystuffIcon}
+                    {(this.props.username === '') ? (
+                        <React.Fragment>
+                            <MenuBarItemTooltip id="mystuff">
+                                <div
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable,
+                                        styles.mystuffButton
+                                    )}
+                                >
+                                    <img
+                                        className={styles.mystuffIcon}
+                                        src={mystuffIcon}
+                                    />
+                                </div>
+                            </MenuBarItemTooltip>
+                            <MenuBarItemTooltip
+                                id="account-nav"
+                                place={this.props.isRtl ? 'right' : 'left'}
+                            >
+                                <div
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable,
+                                        styles.accountNavMenu
+                                    )}
+                                >
+                                    <img
+                                        className={styles.profileIcon}
+                                        src={profileIcon}
+                                    />
+                                    <span>
+                                        {'scratch-cat' /* @todo username */}
+                                    </span>
+                                    <img
+                                        className={styles.dropdownCaretIcon}
+                                        src={dropdownCaret}
+                                    />
+                                </div>
+                            </MenuBarItemTooltip>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <a href="/mystuff/">
+                                <div
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable,
+                                        styles.mystuffButton
+                                    )}
+                                >
+                                    <img
+                                        className={styles.mystuffIcon}
+                                        src={mystuffIcon}
+                                    />
+                                </div>
+                            </a>
+                            <AccountNav
+                                classroomId={this.props.classroomId}
+                                isEducator={this.props.isEducator}
+                                isStudent={this.props.isStudent}
+                                profileUrl={this.props.profileUrl}
+                                thumbnailUrl={this.props.thumbnailUrl}
+                                username={this.props.username}
+                                onClickLogout={this.props.onClickLogout}
                             />
-                        </div>
-                    </MenuBarItemTooltip>
-                    <MenuBarItemTooltip
-                        id="account-nav"
-                        place={this.props.isRtl ? 'right' : 'left'}
-                    >
-                        <div
-                            className={classNames(
-                                styles.menuBarItem,
-                                styles.hoverable,
-                                styles.accountNavMenu
-                            )}
-                        >
-                            <img
-                                className={styles.profileIcon}
-                                src={profileIcon}
-                            />
-                            <span>
-                                {'scratch-cat' /* @todo username */}
-                            </span>
-                            <img
-                                className={styles.dropdownCaretIcon}
-                                src={dropdownCaret}
-                            />
-                        </div>
-                    </MenuBarItemTooltip>
+                        </React.Fragment>
+                    )}
                 </div>
             </Box>
         );
@@ -511,29 +542,46 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     canUpdateProject: PropTypes.bool,
+    classroomId: PropTypes.string,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
+    isEducator: PropTypes.bool,
     isRtl: PropTypes.bool,
+    isStudent: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
+    onClickLogout: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onSeeCommunity: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func
+    onUpdateProjectTitle: PropTypes.func,
+    profileUrl: PropTypes.string,
+    thumbnailUrl: PropTypes.string,
+    username: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     canUpdateProject: typeof (state.session && state.session.session && state.session.session.user) !== 'undefined',
+    classroomId: state.session && state.session.session && state.session.session.user ?
+        `/users/${state.session.session.user.classroomId}` : '',
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),
+    isEducator: state.session && state.session.permissions && state.session.permissions.educator,
     isRtl: state.locales.isRtl,
-    languageMenuOpen: languageMenuOpen(state)
+    isStudent: state.session && state.session.permissions && state.session.permissions.student,
+    languageMenuOpen: languageMenuOpen(state),
+    profileUrl: state.session && state.session.session && state.session.session.user ?
+        `/users/${state.session.session.user.username}` : '',
+    thumbnailUrl: state.session && state.session.session && state.session.session.user ?
+        state.session.session.user.thumbnailUrl : '',
+    username: state.session && state.session.session && state.session.session.user ?
+        state.session.session.user.username : ''
 });
 
 const mapDispatchToProps = dispatch => ({

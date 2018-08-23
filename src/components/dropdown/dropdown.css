@@ -1,0 +1,82 @@
+@import "../../css/colors";
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 5px 5px;
+  background-color: #4d97ff;
+  padding: 10px;
+  max-width: 260px;
+  overflow: visible;
+  color: white;
+  font-size: .8125rem;
+  font-weight: normal;
+
+  /* added for gui */
+  top: 33px;
+  z-index: 1;
+
+  padding: 0;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.dropdown.staging {
+  background-color: #ffab1a;
+}
+.dropdown.dropdown-open {
+  display: block;
+}
+.dropdown a:link, .dropdown a:visited, .dropdown a:active {
+  background-color: transparent;
+  color: white;
+}
+.dropdown input {
+  margin-bottom: 12px;
+  width: calc(100% - 30px);
+}
+.dropdown label {
+  display: block;
+  margin-bottom: 5px;
+}
+.dropdown > li {
+  display: block;
+  line-height: 30px;
+}
+.dropdown > li.divider {
+  margin-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.dropdown > li a {
+  display: block;
+  padding: 0 25px 0 10px;
+}
+.dropdown > li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+.dropdown.with-arrow {
+  margin-top: 14px;
+  border-radius: 5px;
+  overflow: visible;
+}
+.dropdown.with-arrow:before {
+  display: block;
+  position: absolute;
+  top: -7px;
+  right: 10%;
+  transform: rotate(45deg);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #4d97ff;
+  width: 14px;
+  height: 14px;
+  content: "";
+}
+@media only screen and (max-width: 639) {
+  .dropdown {
+    min-width: 160px;
+  }
+}

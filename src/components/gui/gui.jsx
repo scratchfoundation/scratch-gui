@@ -67,10 +67,11 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         loading,
-        onExtensionButtonClick,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onClickLogout,
+        onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
@@ -147,6 +148,7 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     enableCommunity={enableCommunity}
+                    onClickLogout={onClickLogout}
                     onSeeCommunity={onSeeCommunity}
                     onUpdateProjectTitle={onUpdateProjectTitle}
                 />
@@ -291,6 +293,7 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickLogout: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,

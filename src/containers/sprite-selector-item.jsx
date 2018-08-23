@@ -2,28 +2,24 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
 import {getEventXY} from '../lib/touch-utils';
+import VM from 'scratch-vm';
+import {SVGRenderer} from 'scratch-svg-renderer';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
 const dragThreshold = 3; // Same as the block drag threshold
-
-const messages = defineMessages({
-    deleteSpriteConfirmation: {
-        defaultMessage: 'Are you sure you want to delete this?',
-        description: 'Confirmation for deleting sprites',
-        id: 'gui.spriteSelectorItem.deleteSpriteConfirmation'
-    }
-});
+// Contains 'font-family', but doesn't only contain 'font-family="none"'
+const HAS_FONT_REGEXP = 'font-family(?!="none")';
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'getCostumeUrl',
             'handleClick',
             'handleDelete',
             'handleDuplicate',
@@ -34,6 +30,34 @@ class SpriteSelectorItem extends React.Component {
             'handleMouseMove',
             'handleMouseUp'
         ]);
+        this.svgRenderer = new SVGRenderer();
+        // Asset ID of the SVG currently in SVGRenderer
+        this.svgRendererAssetId = null;
+    }
+    getCostumeUrl () {
+        if (this.props.costumeURL) return this.props.costumeURL;
+        if (!this.props.assetId) return null;
+
+        const storage = this.props.vm.runtime.storage;
+        const asset = storage.get(this.props.assetId);
+        // If the SVG refers to fonts, they must be inlined in order to display correctly in the img tag.
+        // Avoid parsing the SVG when possible, since it's expensive.
+        if (asset.assetType === storage.AssetType.ImageVector) {
+            // If the asset ID has not changed, no need to re-parse
+            if (this.svgRendererAssetId === this.props.assetId) {
+                return this.cachedUrl;
+            }
+
+            const svgString = this.props.vm.runtime.storage.get(this.props.assetId).decodeText();
+            if (svgString.match(HAS_FONT_REGEXP)) {
+                this.svgRendererAssetId = this.props.assetId;
+                this.svgRenderer.loadString(svgString);
+                const svgText = this.svgRenderer.toString(true /* shouldInjectFonts */);
+                this.cachedUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
+                return this.cachedUrl;
+            }
+        }
+        return this.props.vm.runtime.storage.get(this.props.assetId).encodeDataURI();
     }
     handleMouseUp () {
         this.initialOffset = null;
@@ -58,7 +82,7 @@ class SpriteSelectorItem extends React.Component {
         const dy = currentOffset.y - this.initialOffset.y;
         if (Math.sqrt((dx * dx) + (dy * dy)) > dragThreshold) {
             this.props.onDrag({
-                img: this.props.costumeURL,
+                img: this.getCostumeUrl(),
                 currentOffset: currentOffset,
                 dragging: true,
                 dragType: this.props.dragType,
@@ -84,10 +108,7 @@ class SpriteSelectorItem extends React.Component {
     }
     handleDelete (e) {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
-        // eslint-disable-next-line no-alert
-        if (window.confirm(this.props.intl.formatMessage(messages.deleteSpriteConfirmation))) {
-            this.props.onDeleteButtonClick(this.props.id);
-        }
+        this.props.onDeleteButtonClick(this.props.id);
     }
     handleDuplicate (e) {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
@@ -115,11 +136,14 @@ class SpriteSelectorItem extends React.Component {
             onExportButtonClick,
             dragPayload,
             receivedBlocks,
+            costumeURL,
+            vm,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
         return (
             <SpriteSelectorItemComponent
+                costumeURL={this.getCostumeUrl()}
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
@@ -144,7 +168,6 @@ SpriteSelectorItem.propTypes = {
     dragType: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     index: PropTypes.number,
-    intl: intlShape.isRequired,
     name: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
@@ -152,14 +175,15 @@ SpriteSelectorItem.propTypes = {
     onDuplicateButtonClick: PropTypes.func,
     onExportButtonClick: PropTypes.func,
     receivedBlocks: PropTypes.bool.isRequired,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
-const mapStateToProps = (state, {assetId, costumeURL, id}) => ({
-    costumeURL: costumeURL || (assetId && state.scratchGui.vm.runtime.storage.get(assetId).encodeDataURI()),
+const mapStateToProps = (state, {id}) => ({
     dragging: state.scratchGui.assetDrag.dragging,
     receivedBlocks: state.scratchGui.hoveredTarget.receivedBlocks &&
-            state.scratchGui.hoveredTarget.sprite === id
+            state.scratchGui.hoveredTarget.sprite === id,
+    vm: state.scratchGui.vm
 });
 const mapDispatchToProps = dispatch => ({
     dispatchSetHoveredSprite: spriteId => {
@@ -168,8 +192,12 @@ const mapDispatchToProps = dispatch => ({
     onDrag: data => dispatch(updateAssetDrag(data))
 });
 
-
-export default connect(
+const ConnectedComponent = connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(SpriteSelectorItem));
+)(SpriteSelectorItem);
+
+export {
+    ConnectedComponent as default,
+    HAS_FONT_REGEXP // Exposed for testing
+};

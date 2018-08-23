@@ -64,5 +64,7 @@ const mapStateToProps = state => ({
     projectRunning: state.scratchGui.vmStatus.running,
     turbo: state.scratchGui.vmStatus.turbo
 });
+// no-op function to prevent dispatch prop being passed to component
+const mapDispatchToProps = () => ({});
 
-export default connect(mapStateToProps)(Controls);
+export default connect(mapStateToProps, mapDispatchToProps)(Controls);

@@ -59,6 +59,10 @@
     height: 100%;
 }
 
+[dir="rtl"] .stage-button-icon {
+    transform: scaleX(-1);
+}
+
 [dir="ltr"] .stage-button-first {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

@@ -130,6 +130,10 @@
 
 [dir="rtl"] .tab img {
     margin-left: 0.125rem;
+}
+
+/* only mirror blocks tab icon */
+[dir="rtl"] .tab:nth-of-type(1) img {
     transform: scaleX(-1);
 }
 

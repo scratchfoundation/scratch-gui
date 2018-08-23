@@ -43,13 +43,13 @@ class SpriteSelectorItem extends React.Component {
         // If the SVG refers to fonts, they must be inlined in order to display correctly in the img tag.
         // Avoid parsing the SVG when possible, since it's expensive.
         if (asset.assetType === storage.AssetType.ImageVector) {
+            // If the asset ID has not changed, no need to re-parse
+            if (this.svgRendererAssetId === this.props.assetId) {
+                return this.cachedUrl;
+            }
+
             const svgString = this.props.vm.runtime.storage.get(this.props.assetId).decodeText();
             if (svgString.match(HAS_FONT_REGEXP)) {
-                // If the asset ID has not changed, no need to re-parse
-                if (this.svgRendererAssetId === this.props.assetId) {
-                    return this.cachedUrl;
-                }
-
                 this.svgRendererAssetId = this.props.assetId;
                 this.svgRenderer.loadString(svgString);
                 const svgText = this.svgRenderer.toString(true /* shouldInjectFonts */);

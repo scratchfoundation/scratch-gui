@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
@@ -11,14 +10,6 @@ import {getEventXY} from '../lib/touch-utils';
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
 const dragThreshold = 3; // Same as the block drag threshold
-
-const messages = defineMessages({
-    deleteSpriteConfirmation: {
-        defaultMessage: 'Are you sure you want to delete this?',
-        description: 'Confirmation for deleting sprites',
-        id: 'gui.spriteSelectorItem.deleteSpriteConfirmation'
-    }
-});
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
@@ -141,7 +132,6 @@ SpriteSelectorItem.propTypes = {
     dragType: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     index: PropTypes.number,
-    intl: intlShape.isRequired,
     name: PropTypes.string,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
@@ -169,4 +159,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(SpriteSelectorItem));
+)(SpriteSelectorItem);

@@ -78,6 +78,6 @@ const mapStateToProps = state => ({
 });
 
 // no-op function to prevent dispatch prop being passed to component
-const mapDispatchToProps = () => {};
+const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);

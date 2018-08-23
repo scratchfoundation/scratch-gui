@@ -12,10 +12,12 @@
 
 [dir="ltr"] .wrapper {
     border-top-right-radius: $space;
+    border-bottom-right-radius: $space;
 }
 
 [dir="rtl"] .wrapper {
     border-top-left-radius: $space;
+    border-bottom-left-radius: $space;
 }
 
 .detail-area {

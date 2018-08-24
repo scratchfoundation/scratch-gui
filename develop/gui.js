@@ -44,7 +44,7 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 462:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53,11 +53,11 @@ exports.locals = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
 // For Safari 9
 
-__webpack_require__(463);
-
 __webpack_require__(465);
 
-__webpack_require__(489);
+__webpack_require__(467);
+
+__webpack_require__(491);
 
 var _react = __webpack_require__(0);
 
@@ -75,11 +75,11 @@ var _gui = __webpack_require__(130);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(175);
+var _hashParserHoc = __webpack_require__(174);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(176);
+var _appStateHoc = __webpack_require__(175);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
@@ -119,12 +119,12 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ }),
 
-/***/ 491:
+/***/ 493:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[462,0]]]);
+},[[464,0]]]);
 //# sourceMappingURL=gui.js.map

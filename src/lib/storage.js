@@ -15,15 +15,17 @@ class Storage extends ScratchStorage {
             asset.data,
             asset.id
         ));
-        this.addWebSource(
+        this.addWebStore(
             [this.AssetType.Project],
-            this.getProjectURL.bind(this)
+            this.getProjectGetConfig.bind(this),
+            this.getProjectCreateConfig.bind(this),
+            this.getProjectUpdateConfig.bind(this)
         );
-        this.addWebSource(
+        this.addWebStore(
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
-            this.getAssetURL.bind(this)
+            this.getAssetGetConfig.bind(this)
         );
-        this.addWebSource(
+        this.addWebStore(
             [this.AssetType.Sound],
             asset => `static/extension-assets/scratch3_music/${asset.assetId}.${asset.dataFormat}`
         );
@@ -31,13 +33,25 @@ class Storage extends ScratchStorage {
     setProjectHost (projectHost) {
         this.projectHost = projectHost;
     }
-    getProjectURL (projectAsset) {
-        return `${this.projectHost}/internalapi/project/${projectAsset.assetId}/get/`;
+    getProjectGetConfig (projectAsset) {
+        return `${this.projectHost}/${projectAsset.assetId}`;
+    }
+    getProjectCreateConfig () {
+        return {
+            url: `${this.projectHost}/`,
+            withCredentials: true
+        };
+    }
+    getProjectUpdateConfig (projectAsset) {
+        return {
+            url: `${this.projectHost}/${projectAsset.assetId}`,
+            withCredentials: true
+        };
     }
     setAssetHost (assetHost) {
         this.assetHost = assetHost;
     }
-    getAssetURL (asset) {
+    getAssetGetConfig (asset) {
         return `${this.assetHost}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
     }
 }

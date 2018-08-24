@@ -56,6 +56,7 @@ PaintEditorWrapper.propTypes = {
     name: PropTypes.string,
     rotationCenterX: PropTypes.number,
     rotationCenterY: PropTypes.number,
+    rtl: PropTypes.bool,
     selectedCostumeIndex: PropTypes.number.isRequired,
     vm: PropTypes.instanceOf(VM)
 };
@@ -74,6 +75,7 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         imageFormat: costume && costume.dataFormat,
         imageId: targetId && `${targetId}${costume.skinId}`,
         image: state.scratchGui.vm.getCostume(index),
+        rtl: state.locales.isRtl,
         vm: state.scratchGui.vm
     };
 };

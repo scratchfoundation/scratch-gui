@@ -5,19 +5,27 @@
     height:  1.5rem;
 }
 
-.disabled {
-    opacity: .5;
+/* Position the language select over the language icon, and make it transparent */
+.language-select {
+    position: absolute;
+    width: $language-selector-width;
+    height: $menu-bar-height;
+    opacity: 0;
+    user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .875rem;
 }
 
-.language-select {
-    margin: .5rem;
-    height: 1.85rem;
-    border: 1px solid $motion-primary;
-    user-select: none;
-    outline: none;
-    background: rgba(255, 255, 255, 0.5);
-    color: $motion-tertiary;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+[dir="ltr"] .language-select {
+    right: 0;
+}
+
+[dir="rtl"] .language-select {
+    left: 0;
+}
+
+.language-select option {
+    opacity: 1;
 }
 
 .language-select:focus {

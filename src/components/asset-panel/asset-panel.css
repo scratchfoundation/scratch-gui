@@ -5,16 +5,32 @@
     display: flex;
     flex-grow: 1;
     border: 1px solid $ui-black-transparent;
-    border-top-right-radius: $space;
     background: white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.85rem;
+}
+
+[dir="ltr"] .wrapper {
+    border-top-right-radius: $space;
+    border-bottom-right-radius: $space;
+}
+
+[dir="rtl"] .wrapper {
+    border-top-left-radius: $space;
+    border-bottom-left-radius: $space;
 }
 
 .detail-area {
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
-    border-left: 1px solid $ui-black-transparent;
     overflow-y: auto;
+}
+
+[dir="ltr"] .detail-area {
+    border-left: 1px solid $ui-black-transparent;
+}
+
+[dir="rtl"] .detail-area {
+    border-right: 1px solid $ui-black-transparent;
 }

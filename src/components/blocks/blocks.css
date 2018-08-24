@@ -12,6 +12,13 @@
     border-bottom-right-radius: $space;
 }
 
+[dir="rtl"] .blocks :global(.injectionDiv) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: $space;
+    border-bottom-left-radius: $space;
+}
+
 .blocks :global(.blocklyMainBackground) {
     stroke: none;
 }
@@ -31,6 +38,11 @@
     -ms-overflow-style: none;
 }
 
+[dir="rtl"] .blocks :global(.blocklyToolboxDiv) {
+    border-right: none;
+    border-left: 1px solid $ui-black-transparent;
+}
+
 .blocks :global(.blocklyToolboxDiv::-webkit-scrollbar) {
     display: none;
 }
@@ -39,6 +51,12 @@
     border-right: 1px solid $ui-black-transparent;
     box-sizing: content-box;
 }
+
+[dir="rtl"] .blocks :global(.blocklyFlyout) {
+    border-right: none;
+    border-left: 1px solid $ui-black-transparent;
+}
+
 
 .blocks :global(.blocklyBlockDragSurface) {
     /*

@@ -48,8 +48,13 @@
     height:  1.5rem;
 }
 
+.language-caret {
+    margin-bottom: .625rem;
+}
+
 .language-menu {
     display: inline-flex;
+    width: $language-selector-width;
 }
 
 .menu {

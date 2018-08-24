@@ -88,8 +88,15 @@
 .more-options-icon {
     width: .75rem;
     height: .75rem;
-    margin-left: .5rem;
     vertical-align: middle;
     padding-bottom: .2rem;
     opacity: .5;
+}
+
+[dir="ltr"] .more-options-icon {
+    margin-left: .5rem;
+}
+
+[dir="rtl"] .more-options-icon {
+    margin-right: .5rem;
 }

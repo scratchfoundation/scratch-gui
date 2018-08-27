@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
+import bindAll from 'lodash.bindall';
 
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
@@ -18,20 +19,43 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
-    <Box
-        className={classNames({
-            [styles.stageOnly]: isPlayerOnly
-        })}
-    >
-        {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
-        <GUI
-            enableCommunity
-            isPlayerOnly={isPlayerOnly}
-            projectId={projectId}
-        />
-    </Box>
-);
+class Player extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'handleUpdateProjectTitle'
+        ]);
+        this.state = {
+            projectTitle: 'Untitled-1'
+        };
+    }
+    handleUpdateProjectTitle (newTitle) {
+        this.setState({projectTitle: newTitle});
+    }
+    render () {
+        const {
+            isPlayerOnly,
+            onSeeInside,
+            projectId
+        } = this.props;
+        return (
+            <Box
+                className={classNames({
+                    [styles.stageOnly]: isPlayerOnly
+                })}
+            >
+                {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
+                <GUI
+                    enableCommunity
+                    isPlayerOnly={isPlayerOnly}
+                    projectId={projectId}
+                    projectTitle={this.state.projectTitle}
+                    onUpdateProjectTitle={this.handleUpdateProjectTitle}
+                />
+            </Box>
+        );
+    }
+}
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,

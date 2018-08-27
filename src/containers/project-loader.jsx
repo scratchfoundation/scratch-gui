@@ -6,6 +6,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import analytics from '../lib/analytics';
 import log from '../lib/log';
+import {setProjectTitle} from '../reducers/project-title';
 
 import {
     openLoadingProject,
@@ -75,6 +76,12 @@ class ProjectLoader extends React.Component {
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.props.openLoadingState();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
+            if (thisFileInput.files[0].name) {
+                const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
+                if (matches) {
+                    this.props.onSetProjectTitle(matches[1]);
+                }
+            }
         }
     }
     handleClick () {
@@ -112,6 +119,7 @@ ProjectLoader.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
+    onSetProjectTitle: PropTypes.func,
     openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -124,6 +132,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     closeLoadingState: () => dispatch(closeLoadingProject()),
+    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
     openLoadingState: () => dispatch(openLoadingProject())
 });
 

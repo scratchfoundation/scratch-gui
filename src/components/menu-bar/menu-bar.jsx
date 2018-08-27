@@ -137,7 +137,8 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleLanguageMouseUp',
-            'handleRestoreOption'
+            'handleRestoreOption',
+            'restoreOptionMessage'
         ]);
     }
     handleLanguageMouseUp (e) {
@@ -150,6 +151,35 @@ class MenuBar extends React.Component {
             restoreFun();
             this.props.onRequestCloseEdit();
         };
+    }
+    restoreOptionMessage (deletedItem) {
+        switch (deletedItem) {
+        case 'Sprite':
+            return (<FormattedMessage
+                defaultMessage="Restore Sprite"
+                description="Menu bar item for restoring the last deleted sprite."
+                id="gui.menuBar.restoreSprite"
+            />);
+        case 'Sound':
+            return (<FormattedMessage
+                defaultMessage="Restore Sound"
+                description="Menu bar item for restoring the last deleted sound."
+                id="gui.menuBar.restoreSound"
+            />);
+        case 'Costume':
+            return (<FormattedMessage
+                defaultMessage="Restore Costume"
+                description="Menu bar item for restoring the last deleted costume."
+                id="gui.menuBar.restoreCostume"
+            />);
+        default: {
+            return (<FormattedMessage
+                defaultMessage="Restore"
+                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+                id="gui.menuBar.restore"
+            />);
+        }
+        }
     }
     render () {
         return (
@@ -165,39 +195,19 @@ class MenuBar extends React.Component {
                             />
                         </div>
                         <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.languageMenuOpen
-                            })}
-                            onMouseUp={this.handleLanguageMouseUp}
+                            className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                         >
-                            {/* @TODO: remove coming soon tooltip wrapper  https://github.com/LLK/scratch-gui/issues/2664  */}
-                            <MenuBarItemTooltip
-                                enable
-                                id="menubar-selector"
-                                place="right"
-                            >
-                                <div
-                                    aria-label={this.props.intl.formatMessage(ariaMessages.language)}
-                                    className={classNames(styles.languageMenu)}
-                                >
-                                    <img
-                                        className={styles.languageIcon}
-                                        src={languageIcon}
-                                    />
-                                    <img
-                                        className={styles.dropdownCaret}
-                                        src={dropdownCaret}
-                                    />
-                                </div>
-                                <MenuBarMenu
-                                    open={this.props.languageMenuOpen}
-                                    place={this.props.isRtl ? 'left' : 'right'}
-                                    onRequestClose={this.props.onRequestCloseLanguage}
-                                >
-                                    <LanguageSelector />
-                                </MenuBarMenu>
-
-                            </MenuBarItemTooltip>
+                            <div>
+                                <img
+                                    className={styles.languageIcon}
+                                    src={languageIcon}
+                                />
+                                <img
+                                    className={styles.languageCaret}
+                                    src={dropdownCaret}
+                                />
+                            </div>
+                            <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -306,18 +316,7 @@ class MenuBar extends React.Component {
                                         className={classNames({[styles.disabled]: !restorable})}
                                         onClick={this.handleRestoreOption(handleRestore)}
                                     >
-                                        {deletedItem === 'Sprite' ?
-                                            <FormattedMessage
-                                                defaultMessage="Restore Sprite"
-                                                description="Menu bar item for restoring the last deleted sprite."
-                                                id="gui.menuBar.restoreSprite"
-                                            /> :
-                                            <FormattedMessage
-                                                defaultMessage="Restore"
-                                                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
-                                                id="gui.menuBar.restore"
-                                            />
-                                        }
+                                        {this.restoreOptionMessage(deletedItem)}
                                     </MenuItem>
                                 )}</DeletionRestorer>
                                 <MenuSection>

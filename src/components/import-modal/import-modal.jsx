@@ -156,6 +156,7 @@ ImportModal.propTypes = {
     hasValidationError: PropTypes.bool.isRequired,
     inputValue: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
+    isRtl: PropTypes.bool,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onGoBack: PropTypes.func.isRequired,

@@ -33,8 +33,6 @@ describe('Working with sounds', () => {
         // Delete the sound
         await rightClickText('Meow', scope.soundsTab);
         await clickText('delete', scope.soundsTab);
-        await driver.switchTo().alert()
-            .accept();
 
         // Add it back
         await clickXpath('//button[@aria-label="Choose a Sound"]');

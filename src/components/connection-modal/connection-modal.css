@@ -121,7 +121,14 @@
 .radar-small {
     width: 40px;
     height: 40px;
+}
+
+[dir="ltr"] .radar-small {
     margin-right: 0.5rem;
+}
+
+[dir="rtl"] .radar-small {
+    margin-left: 0.5rem;
 }
 
 .radar-big {
@@ -184,6 +191,7 @@
     position: absolute;
     top: -5px;
     right: -15px;
+    left: -15px;
     padding: 5px 5px;
     background-color: $pen-primary;
     border-radius: 100%;
@@ -232,7 +240,6 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 3rem;
 }
 
 [dir="ltr"] .scratch-link-help-step {

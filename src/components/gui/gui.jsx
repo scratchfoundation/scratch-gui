@@ -115,8 +115,8 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
-                {previewInfoVisible ? (
-                    <PreviewModal hideIntro={hideIntro} />
+                {(previewInfoVisible && !hideIntro) ? (
+                    <PreviewModal />
                 ) : null}
                 {loading ? (
                     <Loader />
@@ -282,7 +282,6 @@ GUIComponent.propTypes = {
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,

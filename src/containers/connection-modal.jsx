@@ -17,7 +17,7 @@ class ConnectionModal extends React.Component {
             'handleHelp'
         ]);
         this.state = {
-            phase: props.vm.isConnected(props.extensionId) ?
+            phase: props.vm.getPeripheralIsConnected(props.extensionId) ?
                 PHASES.connected : PHASES.scanning
         };
     }
@@ -35,7 +35,7 @@ class ConnectionModal extends React.Component {
         });
     }
     handleConnecting (peripheralId) {
-        this.props.vm.connectToPeripheral(this.props.extensionId, peripheralId);
+        this.props.vm.connectPeripheral(this.props.extensionId, peripheralId);
         this.setState({
             phase: PHASES.connecting
         });
@@ -47,13 +47,13 @@ class ConnectionModal extends React.Component {
     }
     handleDisconnect () {
         this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
-        this.props.vm.disconnectExtensionSession(this.props.extensionId);
+        this.props.vm.disconnectPeripheral(this.props.extensionId);
         this.props.onCancel();
     }
     handleCancel () {
         // If we're not connected to a device, close the websocket so we stop scanning.
-        if (!this.props.vm.isConnected(this.props.extensionId)) {
-            this.props.vm.disconnectExtensionSession(this.props.extensionId);
+        if (!this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
+            this.props.vm.disconnectPeripheral(this.props.extensionId);
         }
         this.props.onCancel();
     }

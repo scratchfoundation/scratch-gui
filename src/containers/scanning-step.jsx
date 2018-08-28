@@ -18,7 +18,7 @@ class ScanningStep extends React.Component {
         };
     }
     componentDidMount () {
-        this.props.vm.scan(this.props.extensionId);
+        this.props.vm.scanForPeripheral(this.props.extensionId);
         this.props.vm.on(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.on(
@@ -45,7 +45,7 @@ class ScanningStep extends React.Component {
         this.setState({deviceList: peripheralArray});
     }
     handleRefresh () {
-        this.props.vm.scan(this.props.extensionId);
+        this.props.vm.scanForPeripheral(this.props.extensionId);
         this.setState({
             scanning: true,
             deviceList: []

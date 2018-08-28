@@ -78,7 +78,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 projectHost,
                 projectId,
                 reduxProjectId,
-                setProjectId,
+                setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;

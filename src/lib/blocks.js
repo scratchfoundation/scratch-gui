@@ -209,7 +209,7 @@ export default function (vm) {
     };
 
     ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
-        if (vm.getPeripheralIsConnected(extensionId)) {
+        if (vm.isConnected(extensionId)) {
             return ScratchBlocks.StatusButtonState.READY;
         }
         return ScratchBlocks.StatusButtonState.NOT_READY;

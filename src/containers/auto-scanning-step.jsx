@@ -58,7 +58,7 @@ class AutoScanningStep extends React.Component {
     }
     handleStartScan () {
         this.bindPeripheralUpdates();
-        this.props.vm.startDeviceScan(this.props.extensionId);
+        this.props.vm.scan(this.props.extensionId);
         this.setState({
             phase: PHASES.pressbutton
         });

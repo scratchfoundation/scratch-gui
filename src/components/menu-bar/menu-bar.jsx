@@ -138,6 +138,7 @@ class MenuBar extends React.Component {
         bindAll(this, [
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'handleCloseFileMenuAndThen',
             'restoreOptionMessage'
         ]);
         this.state = {projectSaveInProgress: false};
@@ -163,6 +164,12 @@ class MenuBar extends React.Component {
                     });
                 }
             );
+        };
+    }
+    handleCloseFileMenuAndThen (fn) {
+        return () => {
+            this.props.onRequestCloseFile();
+            fn();
         };
     }
     restoreOptionMessage (deletedItem) {
@@ -312,7 +319,7 @@ class MenuBar extends React.Component {
                                     )}</ProjectLoader>
                                     <ProjectSaver>{saveProject => (
                                         <MenuItem
-                                            onClick={saveProject}
+                                            onClick={this.handleCloseFileMenuAndThen(saveProject)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Save to your computer"

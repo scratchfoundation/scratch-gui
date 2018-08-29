@@ -34,7 +34,7 @@ class Storage extends ScratchStorage {
         this.projectHost = projectHost;
     }
     getProjectGetConfig (projectAsset) {
-        return `${this.projectHost}/${projectAsset.assetId}`;
+        return `${this.projectHost}/internalapi/project/${projectAsset.assetId}/get/`;
     }
     getProjectCreateConfig () {
         return {

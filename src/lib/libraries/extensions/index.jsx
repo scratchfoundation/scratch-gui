@@ -9,13 +9,13 @@ import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
 
-import microbitDeviceImage from './device-connection/microbit/microbit-illustration.svg';
-import microbitMenuImage from './device-connection/microbit/microbit-small.svg';
-import ev3DeviceImage from './device-connection/ev3/ev3-hub-illustration.svg';
-import ev3MenuImage from './device-connection/ev3/ev3-small.svg';
-import wedoDeviceImage from './device-connection/wedo/wedo-illustration.svg';
-import wedoMenuImage from './device-connection/wedo/wedo-small.svg';
-import wedoButtonImage from './device-connection/wedo/wedo-button-illustration.svg';
+import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
+import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
+import ev3PeripheralImage from './peripheral-connection/ev3/ev3-hub-illustration.svg';
+import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
+import wedoPeripheralImage from './peripheral-connection/wedo/wedo-illustration.svg';
+import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
+import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
 
 export default [
     {
@@ -107,10 +107,10 @@ export default [
         ),
         featured: true,
         disabled: false,
-        launchDeviceConnectionFlow: true,
+        launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        deviceImage: microbitDeviceImage,
-        smallDeviceImage: microbitMenuImage,
+        peripheralImage: microbitPeripheralImage,
+        smallPeripheralImage: microbitMenuImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -133,10 +133,10 @@ export default [
         ),
         featured: true,
         disabled: false,
-        launchDeviceConnectionFlow: true,
+        launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        deviceImage: ev3DeviceImage,
-        smallDeviceImage: ev3MenuImage,
+        peripheralImage: ev3PeripheralImage,
+        smallPeripheralImage: ev3MenuImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
@@ -159,11 +159,11 @@ export default [
         ),
         featured: true,
         disabled: false,
-        launchDeviceConnectionFlow: true,
+        launchPeripheralConnectionFlow: true,
         useAutoScan: true,
-        deviceImage: wedoDeviceImage,
-        smallDeviceImage: wedoMenuImage,
-        deviceButtonImage: wedoButtonImage,
+        peripheralImage: wedoPeripheralImage,
+        smallPeripheralImage: wedoMenuImage,
+        peripheralButtonImage: wedoButtonImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

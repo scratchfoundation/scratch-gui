@@ -45,8 +45,8 @@ const AutoScanningStep = props => (
                                 src={radarIcon}
                             />
                             <img
-                                className={styles.deviceButtonImage}
-                                src={props.deviceButtonImage}
+                                className={styles.peripheralButtonImage}
+                                src={props.peripheralButtonImage}
                             />
                         </React.Fragment>
                     )}
@@ -55,7 +55,7 @@ const AutoScanningStep = props => (
                             <FormattedMessage
                                 defaultMessage="No devices found"
                                 description="Text shown when no devices could be found"
-                                id="gui.connection.auto-scanning.noDevicesFound"
+                                id="gui.connection.auto-scanning.noPeripheralsFound"
                             />
                         </Box>
                     )}
@@ -139,7 +139,7 @@ const AutoScanningStep = props => (
 );
 
 AutoScanningStep.propTypes = {
-    deviceButtonImage: PropTypes.string,
+    peripheralButtonImage: PropTypes.string,
     onRefresh: PropTypes.func,
     onStartScan: PropTypes.func,
     phase: PropTypes.oneOf(Object.keys(PHASES))

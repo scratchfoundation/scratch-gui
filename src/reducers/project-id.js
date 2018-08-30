@@ -1,6 +1,6 @@
 const SET_PROJECT_ID = 'scratch-gui/project-id/SET_PROJECT_ID';
 
-const initialState = 0;
+const initialState = null;
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;

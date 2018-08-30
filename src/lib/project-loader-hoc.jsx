@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {setProjectId} from '../reducers/project-id';
 
 import analytics from './analytics';
 import log from './log';
@@ -21,12 +24,19 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             };
             storage.setProjectHost(props.projectHost);
             storage.setAssetHost(props.assetHost);
-
-        }
-        componentDidMount () {
-            if (this.props.projectId || this.props.projectId === 0) {
-                this.updateProject(this.props.projectId);
+            if (props.projectId !== props.reduxProjectId) {
+                props.setProjectId(props.projectId);
             }
+            if (
+                props.projectId !== '' &&
+                props.projectId !== null &&
+                typeof props.projectId !== 'undefined'
+            ) {
+                this.updateProject(props.projectId);
+            } else {
+                this.updateProject(props.reduxProjectId);
+            }
+
         }
         componentWillUpdate (nextProps) {
             if (this.props.projectHost !== nextProps.projectHost) {
@@ -36,6 +46,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 storage.setAssetHost(nextProps.assetHost);
             }
             if (this.props.projectId !== nextProps.projectId) {
+                this.props.setProjectId(nextProps.projectId);
                 this.setState({fetchingProject: true}, () => {
                     this.updateProject(nextProps.projectId);
                 });
@@ -62,7 +73,13 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         }
         render () {
             const {
-                projectId, // eslint-disable-line no-unused-vars
+                /* eslint-disable no-unused-vars */
+                assetHost,
+                projectHost,
+                projectId,
+                reduxProjectId,
+                setProjectId: setProjectIdProp,
+                /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
             if (!this.state.projectData) return null;
@@ -78,15 +95,23 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     ProjectLoaderComponent.propTypes = {
         assetHost: PropTypes.string,
         projectHost: PropTypes.string,
-        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        setProjectId: PropTypes.func
     };
     ProjectLoaderComponent.defaultProps = {
         assetHost: 'https://assets.scratch.mit.edu',
-        projectHost: 'https://projects.scratch.mit.edu',
-        projectId: 0
+        projectHost: 'https://projects.scratch.mit.edu'
     };
 
-    return ProjectLoaderComponent;
+    const mapStateToProps = state => ({
+        reduxProjectId: state.scratchGui.projectId
+    });
+
+    const mapDispatchToProps = dispatch => ({
+        setProjectId: id => dispatch(setProjectId(id))
+    });
+
+    return connect(mapStateToProps, mapDispatchToProps)(ProjectLoaderComponent);
 };
 
 export {

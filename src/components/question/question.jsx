@@ -30,6 +30,7 @@ const QuestionComponent = props => {
                         onClick={onClick}
                     >
                         <img
+                            className={styles.questionSubmitButtonIcon}
                             draggable={false}
                             src={enterIcon}
                         />

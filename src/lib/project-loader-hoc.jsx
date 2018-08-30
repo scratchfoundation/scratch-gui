@@ -24,19 +24,14 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             };
             storage.setProjectHost(props.projectHost);
             storage.setAssetHost(props.assetHost);
-            if (props.projectId !== props.reduxProjectId) {
-                props.setProjectId(props.projectId);
-            }
+            props.setProjectId(props.projectId);
             if (
                 props.projectId !== '' &&
                 props.projectId !== null &&
                 typeof props.projectId !== 'undefined'
             ) {
                 this.updateProject(props.projectId);
-            } else {
-                this.updateProject(props.reduxProjectId);
             }
-
         }
         componentWillUpdate (nextProps) {
             if (this.props.projectHost !== nextProps.projectHost) {
@@ -100,12 +95,11 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     };
     ProjectLoaderComponent.defaultProps = {
         assetHost: 'https://assets.scratch.mit.edu',
-        projectHost: 'https://projects.scratch.mit.edu'
+        projectHost: 'https://projects.scratch.mit.edu',
+        projectId: 0
     };
 
-    const mapStateToProps = state => ({
-        reduxProjectId: state.scratchGui.projectId
-    });
+    const mapStateToProps = () => ({});
 
     const mapDispatchToProps = dispatch => ({
         setProjectId: id => dispatch(setProjectId(id))

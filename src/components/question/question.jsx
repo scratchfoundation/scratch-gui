@@ -32,7 +32,7 @@ const QuestionComponent = props => {
                         <img
                             draggable={false}
                             src={enterIcon}
-                        >
+                        />
                     </button>
                 </div>
             </div>

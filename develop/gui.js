@@ -1,11 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1521:
+/***/ 1522:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1522);
+var content = __webpack_require__(1523);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -27,7 +27,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1522:
+/***/ 1523:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -44,7 +44,7 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 465:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53,11 +53,11 @@ exports.locals = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Polyfills
 // For Safari 9
 
-__webpack_require__(466);
+__webpack_require__(467);
 
-__webpack_require__(468);
+__webpack_require__(469);
 
-__webpack_require__(492);
+__webpack_require__(493);
 
 var _react = __webpack_require__(0);
 
@@ -83,7 +83,7 @@ var _appStateHoc = __webpack_require__(176);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _index = __webpack_require__(1521);
+var _index = __webpack_require__(1522);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -119,12 +119,12 @@ _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOp
 
 /***/ }),
 
-/***/ 494:
+/***/ 495:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[465,0]]]);
+},[[466,0]]]);
 //# sourceMappingURL=gui.js.map

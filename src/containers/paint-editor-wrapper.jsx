@@ -76,7 +76,8 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         imageId: targetId && `${targetId}${costume.skinId}`,
         image: state.scratchGui.vm.getCostume(index),
         rtl: state.locales.isRtl,
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        zoomLevelId: targetId
     };
 };
 

@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1530:
+/***/ 1534:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21,7 +21,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(34);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -31,21 +31,21 @@ var _box = __webpack_require__(14);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(131);
+var _gui = __webpack_require__(132);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(175);
+var _hashParserHoc = __webpack_require__(178);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(176);
+var _appStateHoc = __webpack_require__(179);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _mode = __webpack_require__(123);
+var _mode = __webpack_require__(124);
 
-var _player = __webpack_require__(1531);
+var _player = __webpack_require__(1535);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -112,11 +112,11 @@ _reactDom2.default.render(_react2.default.createElement(WrappedPlayer, { isPlaye
 
 /***/ }),
 
-/***/ 1531:
+/***/ 1535:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1532);
+var content = __webpack_require__(1536);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -138,7 +138,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1532:
+/***/ 1536:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -156,5 +156,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1530,0]]]);
+},[[1534,0]]]);
 //# sourceMappingURL=player.js.map

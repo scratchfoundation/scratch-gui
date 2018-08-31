@@ -29,7 +29,6 @@ npm start
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
 
 ## Developing alongside other Scratch repositories
-
 If you wish to develop scratch-gui alongside other scratch repositories that depend on it, you may wish
 to have the other repositories use your local scratch-gui build instead of fetching the current production
 version of the scratch-gui that is found by default using `npm install`.
@@ -76,7 +75,6 @@ npm run integration-test
 You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.
 
 ## Publishing to GitHub Pages
-
 You can publish the GUI to github.io so that others on the Internet can view it.
 [Read the wiki for a step-by-step guide.](https://github.com/LLK/scratch-gui/wiki/Publishing-to-GitHub-Pages)
 

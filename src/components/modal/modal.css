@@ -83,8 +83,12 @@ $sides: 20rem;
     user-select: none;
 }
 
-.header-image {
+[dir="ltr"] .header-image {
     margin-right: 0.5rem;
+}
+
+[dir="rtl"] .header-image {
+    margin-left: 0.5rem;
 }
 
 .header-item-filter {

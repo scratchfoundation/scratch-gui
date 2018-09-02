@@ -48,8 +48,13 @@
     height:  1.5rem;
 }
 
+.language-caret {
+    margin-bottom: .625rem;
+}
+
 .language-menu {
     display: inline-flex;
+    width: $language-selector-width;
 }
 
 .menu {
@@ -169,11 +174,31 @@
 }
 
 .dropdown-caret-icon {
-    margin-left: .5rem;
     width: 0.5rem;
     height: 0.5rem;
 }
 
+[dir="ltr"] .dropdown-caret-icon {
+    margin-left: .5rem;
+}
+
+[dir="rtl"] .dropdown-caret-icon {
+    margin-right: .5rem;
+}
+
 .disabled {
     opacity: 0.5;
+}
+
+.save-in-progress {
+  animation: hue-rotate 3s linear infinite;
+}
+
+@keyframes hue-rotate {
+  from {
+    filter: hue-rotate();
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
 }

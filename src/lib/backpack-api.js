@@ -12,7 +12,7 @@ const getBackpackContents = ({
 }) => new Promise((resolve, reject) => {
     xhr({
         method: 'GET',
-        uri: `${host}${username}?limit=${limit}&offset=${offset}`,
+        uri: `${host}/${username}?limit=${limit}&offset=${offset}`,
         headers: {'x-token': token},
         json: true
     }, (error, response) => {
@@ -43,7 +43,7 @@ const saveBackpackObject = ({
 }) => new Promise((resolve, reject) => {
     xhr({
         method: 'POST',
-        uri: `${host}${username}`,
+        uri: `${host}/${username}`,
         headers: {'x-token': token},
         json: {type, mime, name, body, thumbnail}
     }, (error, response) => {
@@ -62,7 +62,7 @@ const deleteBackpackObject = ({
 }) => new Promise((resolve, reject) => {
     xhr({
         method: 'DELETE',
-        uri: `${host}${username}/${id}`,
+        uri: `${host}/${username}/${id}`,
         headers: {'x-token': token}
     }, (error, response) => {
         if (error || response.statusCode !== 200) {

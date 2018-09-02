@@ -62,12 +62,12 @@ const BrowserModal = ({intl, ...props}) => (
                                 <a
                                     className={styles.faqLink}
                                     href="//scratch.mit.edu/3faq"
-                                          >
+                                >
                                     <FormattedMessage
                                         defaultMessage="FAQ"
                                         description="link to Scratch 3.0 FAQ page"
                                         id="gui.unsupportedBrowser.previewfaqlinktext"
-                                            />
+                                    />
                                 </a>
                             )
                         }}

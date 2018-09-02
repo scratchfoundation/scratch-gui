@@ -16,8 +16,8 @@ const initialState = {
     content: decks,
     activeDeckId: null,
     step: 0,
-    x: 292,
-    y: 365,
+    x: 0,
+    y: 0,
     dragging: false
 };
 

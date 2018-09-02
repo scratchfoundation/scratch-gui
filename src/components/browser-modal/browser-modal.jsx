@@ -22,62 +22,65 @@ const BrowserModal = ({intl, ...props}) => (
         overlayClassName={styles.modalOverlay}
         onRequestClose={props.onBack}
     >
-        <Box className={styles.illustration} />
+        <div dir={props.isRtl ? 'rtl' : 'ltr'} >
+            <Box className={styles.illustration} />
 
-        <Box className={styles.body}>
-            <h2>
-                <FormattedMessage {...messages.label} />
-            </h2>
-            <p>
-                { /* eslint-disable max-len */ }
-                <FormattedMessage
-                    defaultMessage="申し訳ありません。スモウルビー3.0はInternet Explorer、Vivaldi、Opera、Silkをサポートしていません。Google Chrome、Mozilla Firefox、Microsoft Edgeのような新しいブラウザの利用をお勧めします。"
-                    description="Unsupported browser description"
-                    id="gui.smalruby3.unsupportedBrowser.description"
-                />
-                { /* eslint-enable max-len */ }
-            </p>
-
-            <Box className={styles.buttonRow}>
-                <button
-                    className={styles.backButton}
-                    onClick={props.onBack}
-                >
+            <Box className={styles.body}>
+                <h2>
+                    <FormattedMessage {...messages.label} />
+                </h2>
+                <p>
+                    { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="Back"
-                        description="Button to go back in unsupported browser modal"
-                        id="gui.unsupportedBrowser.back"
+                        defaultMessage="申し訳ありません。スモウルビー3.0はInternet Explorer、Vivaldi、Opera、Silkをサポートしていません。Google Chrome、Mozilla Firefox、Microsoft Edgeのような新しいブラウザの利用をお勧めします。"
+                        description="Unsupported browser description"
+                        id="gui.smalruby3.unsupportedBrowser.description"
                     />
-                </button>
+                    { /* eslint-enable max-len */ }
+                </p>
 
+                <Box className={styles.buttonRow}>
+                    <button
+                        className={styles.backButton}
+                        onClick={props.onBack}
+                    >
+                        <FormattedMessage
+                            defaultMessage="Back"
+                            description="Button to go back in unsupported browser modal"
+                            id="gui.unsupportedBrowser.back"
+                        />
+                    </button>
+
+                </Box>
+                <div className={styles.faqLinkText}>
+                    <FormattedMessage
+                        defaultMessage="To learn more, go to the {previewFaqLink}."
+                        description="Invitation to try 3.0 preview"
+                        id="gui.unsupportedBrowser.previewfaq"
+                        values={{
+                            previewFaqLink: (
+                                <a
+                                    className={styles.faqLink}
+                                    href="//scratch.mit.edu/3faq"
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="FAQ"
+                                        description="link to Scratch 3.0 FAQ page"
+                                        id="gui.unsupportedBrowser.previewfaqlinktext"
+                                    />
+                                </a>
+                            )
+                        }}
+                    />
+                </div>
             </Box>
-            <div className={styles.faqLinkText}>
-                <FormattedMessage
-                    defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Invitation to try 3.0 preview"
-                    id="gui.unsupportedBrowser.previewfaq"
-                    values={{
-                        previewFaqLink: (
-                            <a
-                                className={styles.faqLink}
-                                href="//scratch.mit.edu/3faq"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="FAQ"
-                                    description="link to Scratch 3.0 FAQ page"
-                                    id="gui.unsupportedBrowser.previewfaqlinktext"
-                                />
-                            </a>
-                        )
-                    }}
-                />
-            </div>
-        </Box>
+        </div>
     </ReactModal>
 );
 
 BrowserModal.propTypes = {
     intl: intlShape.isRequired,
+    isRtl: PropTypes.bool,
     onBack: PropTypes.func.isRequired
 };
 

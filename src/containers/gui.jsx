@@ -93,7 +93,7 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    ...GUIComponent.propTypes,
+    children: PropTypes.node,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
@@ -102,8 +102,6 @@ GUI.propTypes = {
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     vm: PropTypes.instanceOf(VM)
 };
-
-GUI.defaultProps = GUIComponent.defaultProps;
 
 const mapStateToProps = state => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,

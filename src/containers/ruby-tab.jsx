@@ -25,7 +25,7 @@ const RubyTab = ({rubyCode}) => (
 );
 
 RubyTab.propTypes = {
-    rubyCode: PropTypes.string
+    rubyCode: PropTypes.object
 };
 
 export default RubyTab;

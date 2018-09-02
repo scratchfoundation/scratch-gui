@@ -23,6 +23,7 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
+import {updateRubyCode} from '../reducers/ruby-code.js';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -154,6 +155,8 @@ class Blocks extends React.Component {
         } else {
             this.workspace.setVisible(false);
         }
+
+        this.props.updateRubyCodeState(this.ScratchBlocks.Ruby.workspaceToCode(this.workspace));
     }
     componentWillUnmount () {
         this.detachVM();
@@ -411,6 +414,7 @@ class Blocks extends React.Component {
             isVisible,
             onActivateColorPicker,
             updateToolboxState,
+            updateRubyCodeState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
@@ -560,6 +564,9 @@ const mapDispatchToProps = dispatch => ({
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
+    },
+    updateRubyCodeState: code => {
+        dispatch(updateRubyCode(code));
     }
 });
 

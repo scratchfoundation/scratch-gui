@@ -74,14 +74,14 @@ const PreviewModal = ({intl, ...props}) => (
                         onClick={props.onTryIt}
                     >
                         <FormattedMessage
-                            defaultMessage="Try It! {caticon}"
+                            defaultMessage="Try It! {hattiicon}"
                             description="Label for button to try Scratch 3.0 Beta"
                             id="gui.previewModal.tryit"
                             values={{
                                 caticon: (
                                     <img
                                         className={styles.catIcon}
-                                        src={catIcon}
+                                        src={hattiIcon}
                                     />
                                 )
                             }}

@@ -227,7 +227,7 @@ class MenuBar extends React.Component {
                                     alt="Scratch"
                                     className={styles.scratchLogo}
                                     draggable={false}
-                                    src={smaleubyLogo}
+                                    src={smalrubyLogo}
                                 />
                             </a>
                         </div>
@@ -441,25 +441,6 @@ class MenuBar extends React.Component {
                             </MenuBarItemTooltip>
                         }
                     </div>
-                </div>
-                <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
-                    <a
-                        className={styles.feedbackLink}
-                        href="https://scratch.mit.edu/discuss/topic/312261/"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                    >
-                        <Button
-                            className={styles.feedbackButton}
-                            iconSrc={feedbackIcon}
-                        >
-                            <FormattedMessage
-                                defaultMessage="Give Feedback"
-                                description="Label for feedback form modal button"
-                                id="gui.menuBar.giveFeedback"
-                            />
-                        </Button>
-                    </a>
                 </div>
                 <div className={styles.accountInfoWrapper}>
                     <MenuBarItemTooltip id="mystuff">

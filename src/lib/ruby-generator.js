@@ -3,7 +3,11 @@
  * @param {Blockly} The ScratchBlocks
  * @return {Blockly} ScratchBlocks defined Ruby generator.
  */
+
+import _ from 'lodash';
+
 export default function (Blockly) {
+
     Blockly.Ruby = new Blockly.Generator('Ruby');
 
     Blockly.Ruby.addReservedWords('BEGIN    class    ensure   nil      self     when END      def      false    not      super    while alias    defined? for      or       then     yield and      do       if       redo     true     __LINE__ begin    else     in       rescue   undef    __FILE__ break    elsif    module   retry    unless   __ENCODING__ case     end      next     return   until'.split(/\s+/));
@@ -305,6 +309,26 @@ export default function (Blockly) {
             this.definitions_['prepare__init_hardware'] = 'init_hardware';
         }
         return this.blockToCode_(block);
+    };
+
+   Blockly = setConversionBlock(Blockly);
+
+    return Blockly;
+}
+
+function setConversionBlock(Blockly) {
+
+    Blockly.Ruby['motion_movesteps'] = function(block) {
+        var arg = Blockly.Ruby.valueToCode(this, "STEPS", Blockly.Ruby.ORDER_NONE) || '0';
+        return `move(${arg})\n`;
+    };
+
+    Blockly.Ruby['math_number'] = function(block) {
+        var code = parseFloat(block.getFieldValue('NUM'));
+        var order; if (code == Infinity) { code = 'float("inf")'; order = Blockly.Ruby.ORDER_FUNCTION_CALL; }
+        else if (code == -Infinity) { code = '-float("inf")'; order = Blockly.Ruby.ORDER_UNARY_SIGN; }
+        else { order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC; }
+        return [code, order];
     };
 
     return Blockly;

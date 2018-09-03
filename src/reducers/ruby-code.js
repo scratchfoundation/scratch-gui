@@ -7,12 +7,12 @@ const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-        case UPDATE_RUBYCODE:
-            return {
-                rubyCode: action.rubyCode
-            };
-        default:
-            return state;
+    case UPDATE_RUBYCODE:
+        return {
+            rubyCode: action.rubyCode
+        };
+    default:
+        return state;
     }
 };
 

@@ -6,6 +6,8 @@
 
 import _ from 'lodash';
 
+import RubyGenerator from './ruby-generator/';
+
 export default function (Blockly) {
 
     Blockly.Ruby = new Blockly.Generator('Ruby');
@@ -311,25 +313,7 @@ export default function (Blockly) {
         return this.blockToCode_(block);
     };
 
-   Blockly = setConversionBlock(Blockly);
-
-    return Blockly;
-}
-
-function setConversionBlock(Blockly) {
-
-    Blockly.Ruby['motion_movesteps'] = function(block) {
-        var arg = Blockly.Ruby.valueToCode(this, "STEPS", Blockly.Ruby.ORDER_NONE) || '0';
-        return `move(${arg})\n`;
-    };
-
-    Blockly.Ruby['math_number'] = function(block) {
-        var code = parseFloat(block.getFieldValue('NUM'));
-        var order; if (code == Infinity) { code = 'float("inf")'; order = Blockly.Ruby.ORDER_FUNCTION_CALL; }
-        else if (code == -Infinity) { code = '-float("inf")'; order = Blockly.Ruby.ORDER_UNARY_SIGN; }
-        else { order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC; }
-        return [code, order];
-    };
+    Blockly = RubyGenerator(Blockly);
 
     return Blockly;
 }

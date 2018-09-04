@@ -7,6 +7,7 @@ import 'brace/theme/clouds';
 
 const RubyTab = ({rubyCode}) => (
     <AceEditor
+        readOnly
         editorProps={{$blockScrolling: true}}
         fontSize={16}
         height="inherit"
@@ -20,7 +21,6 @@ const RubyTab = ({rubyCode}) => (
         theme="clouds"
         value={rubyCode.rubyCode}
         width="100%"
-
     />
 );
 

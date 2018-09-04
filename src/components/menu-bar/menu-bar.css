@@ -189,3 +189,16 @@
 .disabled {
     opacity: 0.5;
 }
+
+.save-in-progress {
+  animation: hue-rotate 3s linear infinite;
+}
+
+@keyframes hue-rotate {
+  from {
+    filter: hue-rotate();
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}

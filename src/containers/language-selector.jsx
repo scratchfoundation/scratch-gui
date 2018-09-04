@@ -27,6 +27,7 @@ class LanguageSelector extends React.Component {
             children,
             ...props
         } = this.props;
+        document.documentElement.lang = this.props.currentLocale; //update the lang attribute of the html for screenreaders
         return (
             <LanguageSelectorComponent
                 onChange={this.handleChange}

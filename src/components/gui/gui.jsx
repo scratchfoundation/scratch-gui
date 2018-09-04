@@ -23,7 +23,6 @@ import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
-import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
@@ -64,7 +63,6 @@ const GUIComponent = props => {
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
-        hideIntro,
         importInfoVisible,
         intl,
         isPlayerOnly,
@@ -78,7 +76,6 @@ const GUIComponent = props => {
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
-        previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
         rubyTabVisible,
@@ -120,9 +117,6 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
-                {previewInfoVisible ? (
-                    <PreviewModal hideIntro={hideIntro} />
-                ) : null}
                 {loading ? (
                     <Loader />
                 ) : null}

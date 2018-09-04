@@ -149,6 +149,15 @@ $border-radius: 0.25rem;
     margin-bottom: -0.375rem;
 }
 
+/* mirror the louder/softer speaker icons when rtl */
+[dir="rtl"] .effect-button:nth-of-type(6) img {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .effect-button:nth-of-type(7) img {
+    transform: scaleX(-1);
+}
+
 [dir="ltr"] .button-group {
     margin-left: 1rem;
 }

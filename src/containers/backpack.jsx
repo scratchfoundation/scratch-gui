@@ -134,7 +134,7 @@ Backpack.propTypes = {
 
 const getTokenAndUsername = state => {
     // Look for the session state provided by scratch-www
-    if (state.session && state.session.session) {
+    if (state.session && state.session.session && state.session.session.user) {
         return {
             token: state.session.session.user.token,
             username: state.session.session.user.username

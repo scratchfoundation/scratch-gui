@@ -85,13 +85,13 @@ const ScanningStep = props => (
 );
 
 ScanningStep.propTypes = {
+    onConnecting: PropTypes.func,
+    onRefresh: PropTypes.func,
     peripheralList: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         rssi: PropTypes.number,
         peripheralId: PropTypes.string
     })),
-    onConnecting: PropTypes.func,
-    onRefresh: PropTypes.func,
     scanning: PropTypes.bool.isRequired,
     smallPeripheralImage: PropTypes.string
 };

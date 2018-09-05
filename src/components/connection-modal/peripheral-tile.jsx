@@ -23,7 +23,7 @@ class PeripheralTile extends React.Component {
                 <Box className={styles.peripheralTileName}>
                     <img
                         className={styles.peripheralTileImage}
-                        src={this.props.smallperipheralImage}
+                        src={this.props.smallPeripheralImage}
                     />
                     <Box className={styles.peripheralTileNameWrapper}>
                         <Box className={styles.peripheralTileNameLabel}>

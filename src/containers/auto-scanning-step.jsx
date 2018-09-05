@@ -78,9 +78,9 @@ class AutoScanningStep extends React.Component {
 }
 
 AutoScanningStep.propTypes = {
-    peripheralButtonImage: PropTypes.string,
     extensionId: PropTypes.string.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    peripheralButtonImage: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

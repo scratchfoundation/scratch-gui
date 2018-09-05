@@ -139,9 +139,9 @@ const AutoScanningStep = props => (
 );
 
 AutoScanningStep.propTypes = {
-    peripheralButtonImage: PropTypes.string,
     onRefresh: PropTypes.func,
     onStartScan: PropTypes.func,
+    peripheralButtonImage: PropTypes.string,
     phase: PropTypes.oneOf(Object.keys(PHASES))
 };
 

@@ -99,10 +99,10 @@ class ConnectionModal extends React.Component {
         return (
             <ConnectionModalComponent
                 connectingMessage={this.props.connectingMessage}
-                peripheralButtonImage={this.props.peripheralButtonImage}
-                peripheralImage={this.props.peripheralImage}
                 extensionId={this.props.extensionId}
                 name={this.props.name}
+                peripheralButtonImage={this.props.peripheralButtonImage}
+                peripheralImage={this.props.peripheralImage}
                 phase={this.state.phase}
                 smallPeripheralImage={this.props.smallPeripheralImage}
                 title={this.props.extensionId}
@@ -121,13 +121,13 @@ class ConnectionModal extends React.Component {
 
 ConnectionModal.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
-    peripheralButtonImage: PropTypes.string,
-    peripheralImage: PropTypes.string.isRequired,
     extensionId: PropTypes.string.isRequired,
     helpLink: PropTypes.string.isRequired,
     name: PropTypes.node.isRequired,
     onCancel: PropTypes.func.isRequired,
     onStatusButtonUpdate: PropTypes.func.isRequired,
+    peripheralButtonImage: PropTypes.string,
+    peripheralImage: PropTypes.string.isRequired,
     smallPeripheralImage: PropTypes.string.isRequired,
     useAutoScan: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired

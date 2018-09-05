@@ -69,9 +69,9 @@ const ErrorStep = props => (
 );
 
 ErrorStep.propTypes = {
-    peripheralImage: PropTypes.string.isRequired,
     onHelp: PropTypes.func,
-    onScanning: PropTypes.func
+    onScanning: PropTypes.func,
+    peripheralImage: PropTypes.string.isRequired
 };
 
 export default ErrorStep;

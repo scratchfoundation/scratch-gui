@@ -61,8 +61,8 @@ const ConnectingStep = props => (
 
 ConnectingStep.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
-    peripheralImage: PropTypes.string.isRequired,
-    onDisconnect: PropTypes.func
+    onDisconnect: PropTypes.func,
+    peripheralImage: PropTypes.string.isRequired
 };
 
 export default ConnectingStep;

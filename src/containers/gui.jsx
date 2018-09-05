@@ -72,10 +72,15 @@ class GUI extends React.Component {
                 `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
         }
         const {
+            /* eslint-disable no-unused-vars */
+            assetHost,
+            hideIntro,
+            projectData,
+            projectHost,
+            /* eslint-enable no-unused-vars */
             children,
             fetchingProject,
             loadingStateVisible,
-            projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
@@ -94,6 +99,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     children: PropTypes.node,
     fetchingProject: PropTypes.bool,
+    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
@@ -102,7 +108,7 @@ GUI.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
     backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
     blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
@@ -113,7 +119,7 @@ const mapStateToProps = state => ({
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isRtl: state.locales.isRtl,
     loadingStateVisible: state.scratchGui.modals.loadingProject,
-    previewInfoVisible: state.scratchGui.modals.previewInfo,
+    previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
     targetIsStage: (
         state.scratchGui.targets.stage &&
         state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget

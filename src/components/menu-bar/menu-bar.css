@@ -198,12 +198,6 @@
   }
 }
 
-
-/* NOTE: temporarily including styles for account nav */
-.profile-name {
-
-}
-
 .mystuff > a {
   background-repeat: no-repeat;
   background-position: center center;
@@ -221,43 +215,4 @@
 
 .mystuff > a {
   background-image: url("/images/mystuff.png");
-}
-.account-nav {
-  padding-right: .5rem;
-}
-.account-nav .user-info {
-  padding-top: 14px;
-  max-width: 260px;
-  color: $ui-white;
-
-  height: 2.0625rem;
-}
-.account-nav > a {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: .8125rem;
-  font-weight: normal;
-}
-.account-nav > a .avatar {
-  margin-right: 10px;
-  border-radius: 3px;
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-}
-.account-nav > a.open {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.account-nav > a:after {
-  display: inline-block;
-  margin-left: 8px;
-  background-image: url("/images/dropdown.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50%;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  content: " ";
 }

@@ -1,6 +1,9 @@
 import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
-// NOTE: react-onclickoutside should be removed from package.json when this component is removed or consolidated with www
+/*
+/* NOTE: react-onclickoutside should be removed from package.json
+/* when this component is removed or consolidated with www
+*/
 import onClickOutside from 'react-onclickoutside';
 import PropTypes from 'prop-types';
 import React from 'react';

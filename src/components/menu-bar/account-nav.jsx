@@ -45,18 +45,18 @@ class AccountNav extends React.Component {
             onClickLogout
         } = this.props;
         return (
-            <div id="account-nav">
+            <div className="account-nav">
                 <a
-                    className={classNames({
-                        [styles.userInfo]: true,
-                        [styles.open]: this.state.isOpen
-                    })}
+                    className={classNames(
+                        styles.userInfo,
+                        {[styles.open]: this.state.isOpen}
+                    )}
                     href="#"
                     onClick={this.handleClick}
                 >
                     {/* thumbnail image currently disabled
                         <img
-                            className={styles.profileIcon}
+                            className={styles.avatar}
                             src={thumbnailUrl}
                         />
                     */}

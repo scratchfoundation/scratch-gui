@@ -17,11 +17,17 @@ $title-width: 12rem;
     padding: .5rem;
 }
 
-.title-field,
-.title-field::placeholder {
+.title-field {
     color: $ui-white;
     font-weight: bold;
     font-size: .8rem;
+}
+
+.title-field::placeholder {
+    color: $ui-white;
+    font-weight: normal;
+    font-size: .8rem;
+    font-style: italic;
 }
 
 .title-field:hover {
@@ -30,7 +36,7 @@ $title-width: 12rem;
 
 .title-field:focus {
     outline:none;
-    border: none;
+    border: 1px solid $ui-transparent;
     -webkit-box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
     box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
     background-color: $ui-white;

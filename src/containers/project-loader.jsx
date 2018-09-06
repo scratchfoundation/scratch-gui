@@ -79,7 +79,7 @@ class ProjectLoader extends React.Component {
             if (thisFileInput.files[0].name) {
                 const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
                 if (matches) {
-                    this.props.onSetProjectTitle(matches[1]);
+                    this.props.onSetProjectTitle(matches[1].substring(0, 100));
                 }
             }
         }

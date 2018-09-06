@@ -35,6 +35,10 @@ class GUI extends React.Component {
         };
     }
     componentDidMount () {
+        if (this.props.projectTitle) {
+            this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
+        }
+
         if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
@@ -51,9 +55,6 @@ class GUI extends React.Component {
                 this.setState({loadingError: true, errorMessage: e});
             });
         this.props.vm.initialized = true;
-        if (this.props.projectTitle) {
-            this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
-        }
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {

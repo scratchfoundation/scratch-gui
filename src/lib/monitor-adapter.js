@@ -11,10 +11,11 @@ const isUndefined = a => typeof a === 'undefined';
  * @param {string} block.opcode - The opcode of the monitor
  * @param {object} block.params - Extra params to the monitor block
  * @param {string|number|Array} block.value - The monitor value
+ * @param {VirtualMachine} block.vm - the VM instance which owns the block
  * @return {object} The adapted monitor with label and category
  */
-export default function ({id, spriteName, opcode, params, value}) {
-    let {label, category, labelFn} = OpcodeLabels(opcode);
+export default function ({id, spriteName, opcode, params, value, vm}) {
+    let {label, category, labelFn} = (vm && vm.runtime.getLabelForOpcode(opcode)) || OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
     if (!isUndefined(labelFn)) label = labelFn(params);

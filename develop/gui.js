@@ -1,11 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1104:
+/***/ 1098:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1105);
+var content = __webpack_require__(1099);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -27,7 +27,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1105:
+/***/ 1099:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -44,7 +44,7 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 1106:
+/***/ 1100:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68,11 +68,11 @@ var _appStateHoc = __webpack_require__(112);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(157);
+var _gui = __webpack_require__(158);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(177);
+var _hashParserHoc = __webpack_require__(178);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
@@ -107,17 +107,17 @@ exports.default = function (appTarget) {
 
 /***/ }),
 
-/***/ 474:
+/***/ 471:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(475);
+__webpack_require__(472);
 
-__webpack_require__(477);
+__webpack_require__(474);
 
-__webpack_require__(501);
+__webpack_require__(498);
 
 var _react = __webpack_require__(0);
 
@@ -135,15 +135,15 @@ var _appStateHoc = __webpack_require__(112);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _browserModal = __webpack_require__(378);
+var _browserModal = __webpack_require__(377);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _supportedBrowser = __webpack_require__(382);
+var _supportedBrowser = __webpack_require__(381);
 
 var _supportedBrowser2 = _interopRequireDefault(_supportedBrowser);
 
-var _index = __webpack_require__(1104);
+var _index = __webpack_require__(1098);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -160,7 +160,7 @@ document.body.appendChild(appTarget);
 if ((0, _supportedBrowser2.default)()) {
     // require needed here to avoid importing unsupported browser-crashing code
     // at the top level
-    __webpack_require__(1106).default(appTarget);
+    __webpack_require__(1100).default(appTarget);
 } else {
     _browserModal2.default.setAppElement(appTarget);
     var WrappedBrowserModalComponent = (0, _appStateHoc2.default)(_browserModal2.default, true /* localesOnly */);
@@ -171,12 +171,12 @@ if ((0, _supportedBrowser2.default)()) {
 
 /***/ }),
 
-/***/ 503:
+/***/ 500:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[474,0]]]);
+},[[471,0]]]);
 //# sourceMappingURL=gui.js.map

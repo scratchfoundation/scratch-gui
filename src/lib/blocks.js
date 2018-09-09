@@ -111,6 +111,25 @@ export default function (vm) {
     };
 
     const variablePropertyMenu = function (thisValue) {
+        // Fill the output array with sprite properties by default. This will be changed to stage properties if the
+        // stage is selected.
+        const xPosition = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_XPOSITION', 'x position');
+        const yPosition = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_YPOSITION', 'y position');
+        const direction = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_DIRECTION', 'direction');
+        const costumeNumber = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_COSTUMENUMBER', 'costume #');
+        const costumeName = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_COSTUMENAME', 'costume name');
+        const size = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_SIZE', 'size');
+        const volume = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_VOLUME', 'volume');
+        let output = [
+            [xPosition, 'x position'],
+            [yPosition, 'y position'],
+            [direction, 'direction'],
+            [costumeNumber, 'costume #'],
+            [costumeName, 'costume name'],
+            [size, 'size'],
+            [volume, 'volume']
+        ];
+
         const sourceBlock = thisValue.sourceBlock_; // This is the <shadow>.
         if (sourceBlock) {
             const ofBlock = sourceBlock.parentBlock_; // This is the "of" block.
@@ -140,13 +159,21 @@ export default function (vm) {
                     if (target) {
                         // Pass true to skip the stage: we only want the sprite's own local variables.
                         const variableNames = target.getAllVariableNamesInScopeByType('', true);
-                        return variableNames.map(name => [name, name]);
+                        output = output.concat(variableNames.map(name => [name, name]));
                     }
+                } else {
+                    // If the stage is the selected object (of the dropdown), only return properties relevant to it.
+                    const backdropNumber = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_BACKDROPNUMBER', 'backdrop #');
+                    const backdropName = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_BACKDROPNAME', 'backdrop name');
+                    output = [
+                        [backdropNumber, 'backdrop #'],
+                        [backdropName, 'backdrop name'],
+                        [volume, 'volume']
+                    ];
                 }
-                return [];
             }
         }
-        return [];
+        return output;
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;

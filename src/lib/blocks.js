@@ -133,7 +133,8 @@ export default function (vm) {
         const sourceBlock = thisValue.sourceBlock_; // This is the <shadow>.
         const ofBlock = sourceBlock && sourceBlock.parentBlock_; // This is the "of" block.
         if (ofBlock) {
-            let block, blocks;
+            let block;
+            let blocks;
             if (vm.editingTarget) {
                 blocks = vm.editingTarget.blocks;
                 block = blocks.getBlock(ofBlock.id);
@@ -152,24 +153,26 @@ export default function (vm) {
                 const valueField = blocks.getFields(objectInputBlock).OBJECT;
                 const objectName = valueField.value;
 
-                // Don't return options for local variables of the stage, since the stage's local variables are really
+                // Only return options for local variables of sprites, since the stage's local variables are really
                 // the project's global variables.
-                if (objectName !== '_stage_') {
+                if (objectName === '_stage_') {
+                    // If the stage is the selected object (of the dropdown), only return properties relevant to it.
+                    const backdropNumber = ScratchBlocks.ScratchMsgs.translate(
+                        'SENSING_OF_BACKDROPNUMBER', 'backdrop #');
+                    const backdropName = ScratchBlocks.ScratchMsgs.translate(
+                        'SENSING_OF_BACKDROPNAME', 'backdrop name');
+                    output = [
+                        [backdropNumber, 'backdrop #'],
+                        [backdropName, 'backdrop name'],
+                        [volume, 'volume']
+                    ];
+                } else {
                     const target = vm.runtime.getSpriteTargetByName(objectName);
                     if (target) {
                         // Pass true to skip the stage: we only want the sprite's own local variables.
                         const variableNames = target.getAllVariableNamesInScopeByType('', true);
                         output = output.concat(variableNames.map(name => [name, name]));
                     }
-                } else {
-                    // If the stage is the selected object (of the dropdown), only return properties relevant to it.
-                    const backdropNumber = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_BACKDROPNUMBER', 'backdrop #');
-                    const backdropName = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_BACKDROPNAME', 'backdrop name');
-                    output = [
-                        [backdropNumber, 'backdrop #'],
-                        [backdropName, 'backdrop name'],
-                        [volume, 'volume']
-                    ];
                 }
             }
         }

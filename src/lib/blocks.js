@@ -247,9 +247,7 @@ export default function (vm) {
     };
 
     ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
-        const json = jsonForMenuBlock('PROPERTY', variablePropertyMenu, sensingColors, [
-            ['Top value, hard-coded', 'TODO...']
-        ]);
+        const json = jsonForMenuBlock('PROPERTY', variablePropertyMenu, sensingColors, []);
         this.jsonInit(json);
     };
 

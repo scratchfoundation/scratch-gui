@@ -463,6 +463,9 @@ const sensing = function (isStage) {
         <block type="sensing_resettimer"/>
         ${blockSeparator}
         <block id="of" type="sensing_of">
+            <value name="PROPERTY">
+                <shadow id="sensing_of_property_menu" type="sensing_of_property_menu"/>
+            </value>
             <value name="OBJECT">
                 <shadow id="sensing_of_object_menu" type="sensing_of_object_menu"/>
             </value>

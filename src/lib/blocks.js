@@ -15,7 +15,7 @@ export default function (vm) {
                     type: 'field_dropdown',
                     name: name,
                     options: function () {
-                        return start.concat(menuOptionsFn());
+                        return start.concat(menuOptionsFn(this));
                     }
                 }
             ],
@@ -110,6 +110,45 @@ export default function (vm) {
         return [[myself, '_myself_']].concat(spriteMenu());
     };
 
+    const variablePropertyMenu = function (thisValue) {
+        const sourceBlock = thisValue.sourceBlock_; // This is the <shadow>.
+        if (sourceBlock) {
+            const ofBlock = sourceBlock.parentBlock_; // This is the "of" block.
+            let block, blocks;
+            if (vm.editingTarget) {
+                blocks = vm.editingTarget.blocks;
+                block = blocks.getBlock(ofBlock.id);
+            }
+            if (!block) {
+                // The block may be in the flyout.
+                blocks = vm.runtime.flyoutBlocks;
+                block = blocks.getBlock(ofBlock.id);
+            }
+            if (block) {
+                // Get the name of the sprite which is selected. This is based on the OBJECT dropdown's selected value,
+                // which may be different from the value returned by a block placed within that input, if present.
+                // TODO: Variables should probably not be fetched at all if the OBJECT dropdown contains a block.
+                const objectInput = blocks.getInputs(block).OBJECT;
+                const objectInputBlock = blocks.getBlock(objectInput.block);
+                const valueField = blocks.getFields(objectInputBlock).OBJECT;
+                const objectName = valueField.value;
+
+                // Don't return options for local variables of the stage, since the stage's local variables are really
+                // the project's global variables.
+                if (objectName !== '_stage_') {
+                    const target = vm.runtime.getSpriteTargetByName(objectName);
+                    if (target) {
+                        // Pass true to skip the stage: we only want the sprite's own local variables.
+                        const variableNames = target.getAllVariableNamesInScopeByType('', true);
+                        return variableNames.map(name => [name, name]);
+                    }
+                }
+                return [];
+            }
+        }
+        return [];
+    };
+
     const soundColors = ScratchBlocks.Colours.sounds;
 
     const looksColors = ScratchBlocks.Colours.looks;
@@ -176,6 +215,13 @@ export default function (vm) {
         const stage = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_STAGE', 'Stage');
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             [stage, '_stage_']
+        ]);
+        this.jsonInit(json);
+    };
+
+    ScratchBlocks.Blocks.sensing_of_property_menu.init = function () {
+        const json = jsonForMenuBlock('PROPERTY', variablePropertyMenu, sensingColors, [
+            ['Top value, hard-coded', 'TODO...']
         ]);
         this.jsonInit(json);
     };

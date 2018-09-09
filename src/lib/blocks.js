@@ -153,10 +153,10 @@ export default function (vm) {
                 const valueField = blocks.getFields(objectInputBlock).OBJECT;
                 const objectName = valueField.value;
 
-                // Only return options for local variables of sprites, since the stage's local variables are really
-                // the project's global variables.
+                let target;
+
+                // If the stage is the selected object (of the dropdown), return properties relevant to it.
                 if (objectName === '_stage_') {
-                    // If the stage is the selected object (of the dropdown), only return properties relevant to it.
                     const backdropNumber = ScratchBlocks.ScratchMsgs.translate(
                         'SENSING_OF_BACKDROPNUMBER', 'backdrop #');
                     const backdropName = ScratchBlocks.ScratchMsgs.translate(
@@ -166,13 +166,17 @@ export default function (vm) {
                         [backdropName, 'backdrop name'],
                         [volume, 'volume']
                     ];
+                    target = vm.runtime.getTargetForStage();
                 } else {
-                    const target = vm.runtime.getSpriteTargetByName(objectName);
-                    if (target) {
-                        // Pass true to skip the stage: we only want the sprite's own local variables.
-                        const variableNames = target.getAllVariableNamesInScopeByType('', true);
-                        output = output.concat(variableNames.map(name => [name, name]));
-                    }
+                    target = vm.runtime.getSpriteTargetByName(objectName);
+                }
+
+                // Also return the object's local variables. In the case of the stage, these are the project's global
+                // variables.
+                if (target) {
+                    // Pass true to skip the stage: we only want the sprite's own local variables.
+                    const variableNames = target.getAllVariableNamesInScopeByType('', true);
+                    output = output.concat(variableNames.map(name => [name, name]));
                 }
             }
         }

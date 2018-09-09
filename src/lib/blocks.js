@@ -131,8 +131,8 @@ export default function (vm) {
         ];
 
         const sourceBlock = thisValue.sourceBlock_; // This is the <shadow>.
-        if (sourceBlock) {
-            const ofBlock = sourceBlock.parentBlock_; // This is the "of" block.
+        const ofBlock = sourceBlock && sourceBlock.parentBlock_; // This is the "of" block.
+        if (ofBlock) {
             let block, blocks;
             if (vm.editingTarget) {
                 blocks = vm.editingTarget.blocks;

@@ -145,38 +145,41 @@ export default function (vm) {
                 block = blocks.getBlock(ofBlock.id);
             }
             if (block) {
-                // Get the name of the sprite which is selected. This is based on the OBJECT dropdown's selected value,
-                // which may be different from the value returned by a block placed within that input, if present.
-                // TODO: Variables should probably not be fetched at all if the OBJECT dropdown contains a block.
+                // Get the shadow block of the OBJECT dropdown. If the block in the OBJECT slot is not a shadow block,
+                // the slot must be occupied by an actual block; in this case, do nothing, and leave the default list
+                // of sprite properties remaining.
                 const objectInput = blocks.getInputs(block).OBJECT;
                 const objectInputBlock = blocks.getBlock(objectInput.block);
-                const valueField = blocks.getFields(objectInputBlock).OBJECT;
-                const objectName = valueField.value;
+                if (objectInputBlock.shadow) {
+                    // Get the name of the object from the dropdown shadow block.
+                    const valueField = blocks.getFields(objectInputBlock).OBJECT;
+                    const objectName = valueField.value;
 
-                let target;
+                    let target;
 
-                // If the stage is the selected object (of the dropdown), return properties relevant to it.
-                if (objectName === '_stage_') {
-                    const backdropNumber = ScratchBlocks.ScratchMsgs.translate(
-                        'SENSING_OF_BACKDROPNUMBER', 'backdrop #');
-                    const backdropName = ScratchBlocks.ScratchMsgs.translate(
-                        'SENSING_OF_BACKDROPNAME', 'backdrop name');
-                    output = [
-                        [backdropNumber, 'backdrop #'],
-                        [backdropName, 'backdrop name'],
-                        [volume, 'volume']
-                    ];
-                    target = vm.runtime.getTargetForStage();
-                } else {
-                    target = vm.runtime.getSpriteTargetByName(objectName);
-                }
+                    // If the stage is the selected object (of the dropdown), return properties relevant to it.
+                    if (objectName === '_stage_') {
+                        const backdropNumber = ScratchBlocks.ScratchMsgs.translate(
+                            'SENSING_OF_BACKDROPNUMBER', 'backdrop #');
+                        const backdropName = ScratchBlocks.ScratchMsgs.translate(
+                            'SENSING_OF_BACKDROPNAME', 'backdrop name');
+                        output = [
+                            [backdropNumber, 'backdrop #'],
+                            [backdropName, 'backdrop name'],
+                            [volume, 'volume']
+                        ];
+                        target = vm.runtime.getTargetForStage();
+                    } else {
+                        target = vm.runtime.getSpriteTargetByName(objectName);
+                    }
 
-                // Also return the object's local variables. In the case of the stage, these are the project's global
-                // variables.
-                if (target) {
-                    // Pass true to skip the stage: we only want the sprite's own local variables.
-                    const variableNames = target.getAllVariableNamesInScopeByType('', true);
-                    output = output.concat(variableNames.map(name => [name, name]));
+                    // Also return the object's local variables. In the case of the stage, these are the project's global
+                    // variables.
+                    if (target) {
+                        // Pass true to skip the stage: we only want the sprite's own local variables.
+                        const variableNames = target.getAllVariableNamesInScopeByType('', true);
+                        output = output.concat(variableNames.map(name => [name, name]));
+                    }
                 }
             }
         }

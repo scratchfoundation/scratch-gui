@@ -2,8 +2,6 @@
 @import "../../css/units.css";
 @import "../../css/z-index.css";
 
-$title-width: 12rem;
-
 .title-field {
     border: 1px dashed $ui-black-transparent;
     border-radius: $form-radius;
@@ -12,11 +10,8 @@ $title-width: 12rem;
     background-color: $ui-white-transparent;
     background-clip: padding-box;
     -webkit-background-clip: padding-box;
-    width: $title-width;
     height: auto;
     padding: .5rem;
-    flex-grow: 1;
-    width: 2rem;
 }
 
 .title-field {

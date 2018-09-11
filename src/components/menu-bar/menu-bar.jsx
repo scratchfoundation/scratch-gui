@@ -399,6 +399,7 @@ class MenuBar extends React.Component {
                             id="title-field"
                         >
                             <ProjectTitleInput
+                                className={classNames(styles.titleFieldGrowable)}
                                 onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                             />
                         </MenuBarItemTooltip>

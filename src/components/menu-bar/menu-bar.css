@@ -90,6 +90,11 @@
     flex: 1;
 }
 
+.title-field-growable {
+    flex-grow: 1;
+    width: 2rem;
+}
+
 .file-group {
     display: flex;
     flex-direction: row;

@@ -15,6 +15,8 @@ const isUndefined = a => typeof a === 'undefined';
  * @return {object} The adapted monitor with label and category
  */
 export default function ({id, spriteName, opcode, params, value, vm}) {
+    // Extension monitors get their labels from the Runtime through `getLabelForOpcode`.
+    // Other monitors' labels are hard-coded in `OpcodeLabels`.
     let {label, category, labelFn} = (vm && vm.runtime.getLabelForOpcode(opcode)) || OpcodeLabels(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)

@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[2],{
 
-/***/ 1532:
+/***/ 1534:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17,19 +17,19 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _controls = __webpack_require__(420);
+var _controls = __webpack_require__(422);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(388);
+var _blocks = __webpack_require__(390);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(158);
+var _gui = __webpack_require__(160);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(178);
+var _hashParserHoc = __webpack_require__(180);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
@@ -37,7 +37,7 @@ var _appStateHoc = __webpack_require__(113);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _blocksOnly = __webpack_require__(1533);
+var _blocksOnly = __webpack_require__(1535);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -73,11 +73,11 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 1533:
+/***/ 1535:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1534);
+var content = __webpack_require__(1536);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -99,7 +99,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1534:
+/***/ 1536:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -116,5 +116,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1532,0]]]);
+},[[1534,0]]]);
 //# sourceMappingURL=blocksonly.js.map

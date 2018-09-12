@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[4],{
 
-/***/ 1538:
+/***/ 1539:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ var _titledHoc2 = _interopRequireDefault(_titledHoc);
 
 var _mode = __webpack_require__(114);
 
-var _player = __webpack_require__(1539);
+var _player = __webpack_require__(1540);
 
 var _player2 = _interopRequireDefault(_player);
 
@@ -116,11 +116,11 @@ _reactDom2.default.render(_react2.default.createElement(WrappedPlayer, { isPlaye
 
 /***/ }),
 
-/***/ 1539:
+/***/ 1540:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1540);
+var content = __webpack_require__(1541);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -142,7 +142,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1540:
+/***/ 1541:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -160,5 +160,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1538,0]]]);
+},[[1539,0]]]);
 //# sourceMappingURL=player.js.map

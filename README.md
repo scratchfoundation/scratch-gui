@@ -47,32 +47,69 @@ Instead of `BUILD_MODE=dist npm run build` you can also use `BUILD_MODE=dist npm
 * Follow the recipe above step by step and don't change the order. It is especially important to run npm first because installing after the linking will reset the linking.
 * Make sure the repositories are siblings on your machine's file tree.
 * If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.
-* In the worst case unlink the repositories with `npm unlink` and start over.
+* In the worst case unlink the repositories by running `npm unlink` in both, and start over.
 
 ## Testing
-NOTE: If you're a windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.
 
-Run linter, unit tests, build, and integration tests.
+### Documentation
+
+You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.
+
+See [jest cli docs](https://facebook.github.io/jest/docs/en/cli.html#content) for more options.
+
+### Running tests
+
+*NOTE: If you're a windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.*
+
+Before running any test, make sure you have run `npm install` from this (scratch-gui) repository's top level.
+
+#### Main testing command
+
+To run linter, unit tests, build, and integration tests, all at once:
 ```bash
 npm test
 ```
 
-Run unit tests in isolation.
+#### Running unit tests
+
+To run unit tests in isolation:
 ```bash
-npm run unit-test
+npm run test:unit
 ```
 
-Run unit tests in watch mode (watches for code changes and continuously runs tests). See [jest cli docs](https://facebook.github.io/jest/docs/en/cli.html#content) for more options.
+To run unit tests in watch mode (watches for code changes and continuously runs tests):
 ```bash
-npm run unit-test -- --watch
+npm run test:unit -- --watch
 ```
 
-Run integration tests in isolation.
+#### Running integration tests
+
+Integration tests use a headless browser to manipulate the actual html and javascript that the repo
+produces. You will not see this activity (though you can hear it when sounds are played!).
+
+Note that integration tests require you to first create a build that can be loaded in a browser:
+
 ```bash
-npm run integration-test
+npm run build
 ```
 
-You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.
+Then, you can run all integration tests:
+
+```bash
+npm run test:integration
+```
+
+Or, you can run a single file of integration tests (in this example, the `backpack` tests):
+
+```bash
+$(npm bin)/jest --runInBand test/integration/backpack.test.js
+```
+
+If you want to watch the browser as it runs the test, rather than running headless, use:
+
+```bash
+USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
+```
 
 ## Publishing to GitHub Pages
 You can publish the GUI to github.io so that others on the Internet can view it.

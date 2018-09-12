@@ -146,6 +146,10 @@
     align-items: center;
 }
 
+.account-info-wrapper .menu-bar-item {
+    padding: 0 0.75rem;
+}
+
 .mystuff-icon {
     margin: 0 .25rem;
     height: 1rem;

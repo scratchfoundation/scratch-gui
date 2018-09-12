@@ -67,15 +67,24 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         loading,
+        onOpenAccountNav,
+        onCloseAccountNav,
+        onCloseCanceledDeletion,
+        onCloseLogin,
+        onCloseRegistration,
+        onCompleteRegistration,
+        onLogIn,
+        onLogOut,
+        onOpenRegistration,
+        onToggleLoginOpen,
+        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
-        onClickLogout,
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
-        onUpdateProjectTitle,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -148,8 +157,18 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     enableCommunity={enableCommunity}
-                    onClickLogout={onClickLogout}
+                    onClickLogout={onLogOut}
+                    onCloseAccountNav={onCloseAccountNav}
+                    onCloseCanceledDeletion={onCloseCanceledDeletion}
+                    onCloseLogin={onCloseLogin}
+                    onCloseRegistration={onCloseRegistration}
+                    onCompleteRegistration={onCompleteRegistration}
+                    onLogIn={onLogIn}
+                    onLogOut={onLogOut}
+                    onOpenAccountNav={onOpenAccountNav}
+                    onOpenRegistration={onOpenRegistration}
                     onSeeCommunity={onSeeCommunity}
+                    onToggleLoginOpen={onToggleLoginOpen}
                     onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
@@ -293,12 +312,21 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
-    onClickLogout: PropTypes.func,
+    onCloseAccountNav: PropTypes.func,
+    onCloseCanceledDeletion: PropTypes.func,
+    onCloseLogin: PropTypes.func,
+    onCloseRegistration: PropTypes.func,
+    onCompleteRegistration: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onLogIn: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenAccountNav: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,

@@ -466,7 +466,64 @@ class MenuBar extends React.Component {
                     </a>
                 </div>
                 <div className={styles.accountInfoWrapper}>
-                    {(this.props.username === '') ? (
+                    {this.props.sessionExists ? (
+                        this.props.username ? (
+                            <React.Fragment>
+                                <a href="/mystuff/">
+                                    <div
+                                        className={classNames(
+                                            styles.menuBarItem,
+                                            styles.hoverable,
+                                            styles.mystuffButton
+                                        )}
+                                    >
+                                        <img
+                                            className={styles.mystuffIcon}
+                                            src={mystuffIcon}
+                                        />
+                                    </div>
+                                </a>
+                                <AccountNav
+                                    onCloseAccountNav={this.props.onCloseAccountNav}
+                                    onLogOut={this.props.onLogOut}
+                                    onOpenAccountNav={this.props.onOpenAccountNav}
+                                />
+                                {/* onClickLogout={this.props.onClickLogout} */}
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <div
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable
+                                    )}
+                                    key="join"
+                                    onMouseUp={this.props.onOpenRegistration}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="Join Scratch"
+                                        description="Link for creating a Scratch account"
+                                        id="gui.menuBar.joinScratch"
+                                    />
+                                </div>
+                                <div
+                                    className={classNames(
+                                        'ignore-react-onclickoutside',
+                                        styles.menuBarItem,
+                                        styles.hoverable
+                                    )}
+                                    key="login"
+                                    onMouseUp={this.props.onToggleLoginOpen}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="Sign in"
+                                        description="Link for signing in to your Scratch account"
+                                        id="gui.menuBar.signIn"
+                                    />
+                                </div>
+                            </React.Fragment>
+                        )
+                    ) : (
                         <React.Fragment>
                             <MenuBarItemTooltip id="mystuff">
                                 <div
@@ -507,32 +564,6 @@ class MenuBar extends React.Component {
                                 </div>
                             </MenuBarItemTooltip>
                         </React.Fragment>
-                    ) : (
-                        <React.Fragment>
-                            <a href="/mystuff/">
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.mystuffButton
-                                    )}
-                                >
-                                    <img
-                                        className={styles.mystuffIcon}
-                                        src={mystuffIcon}
-                                    />
-                                </div>
-                            </a>
-                            <AccountNav
-                                classroomId={this.props.classroomId}
-                                isEducator={this.props.isEducator}
-                                isStudent={this.props.isStudent}
-                                profileUrl={this.props.profileUrl}
-                                thumbnailUrl={this.props.thumbnailUrl}
-                                username={this.props.username}
-                                onClickLogout={this.props.onClickLogout}
-                            />
-                        </React.Fragment>
                     )}
                 </div>
             </Box>
@@ -542,46 +573,49 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     canUpdateProject: PropTypes.bool,
-    classroomId: PropTypes.string,
+    canceledDeletionOpen: PropTypes.bool,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
-    isEducator: PropTypes.bool,
     isRtl: PropTypes.bool,
-    isStudent: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogout: PropTypes.func,
+    onCloseAccountNav: PropTypes.func,
+    onCloseCanceledDeletion: PropTypes.func,
+    onCloseLogin: PropTypes.func,
+    onCloseRegistration: PropTypes.func,
+    onCompleteRegistration: PropTypes.func,
+    onLogIn: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenAccountNav: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onSeeCommunity: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    profileUrl: PropTypes.string,
-    thumbnailUrl: PropTypes.string,
+    registrationOpen: PropTypes.bool,
+    sessionExists: PropTypes.bool,
     username: PropTypes.string
 };
 
 const mapStateToProps = state => ({
+    canceledDeletionOpen: state.session && state.session.canceledDeletionOpen,
+    registrationOpen: state.session && state.session.registrationOpen,
     canUpdateProject: typeof (state.session && state.session.session && state.session.session.user) !== 'undefined',
-    classroomId: state.session && state.session.session && state.session.session.user ?
-        `/users/${state.session.session.user.classroomId}` : '',
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),
-    isEducator: state.session && state.session.permissions && state.session.permissions.educator,
     isRtl: state.locales.isRtl,
-    isStudent: state.session && state.session.permissions && state.session.permissions.student,
     languageMenuOpen: languageMenuOpen(state),
-    profileUrl: state.session && state.session.session && state.session.session.user ?
-        `/users/${state.session.session.user.username}` : '',
-    thumbnailUrl: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.thumbnailUrl : '',
+    sessionExists: state.session && typeof state.session.session !== 'undefined',
     username: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.username : ''
+        state.session.session.user.username : null
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -78,9 +78,9 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="Google Translate"
-                description="Name for the 'Google Translate' extension. Do not translate 'Google'."
-                id="gui.extension.googletranslate.name"
+                defaultMessage="Translate"
+                description="Name for the Translate extension"
+                id="gui.extension.translate.name"
             />
         ),
         extensionId: 'translate',
@@ -88,8 +88,8 @@ export default [
         description: (
             <FormattedMessage
                 defaultMessage="Translate text into many languages."
-                description="Description for the 'Google Translate' extension"
-                id="gui.extension.googletranslate.description"
+                description="Description for the Translate extension"
+                id="gui.extension.translate.description"
             />
         ),
         featured: true

@@ -336,7 +336,7 @@ class Blocks extends React.Component {
     }
     handleCategorySelected (categoryId) {
         const extension = extensionData.find(ext => ext.extensionId === categoryId);
-        if (extension && extension.launchDeviceConnectionFlow) {
+        if (extension && extension.launchPeripheralConnectionFlow) {
             this.handleConnectionModalStart(categoryId);
         }
 
@@ -365,9 +365,9 @@ class Blocks extends React.Component {
             this.setState({connectionModal: {
                 extensionId: extensionId,
                 useAutoScan: extension.useAutoScan,
-                deviceImage: extension.deviceImage,
-                smallDeviceImage: extension.smallDeviceImage,
-                deviceButtonImage: extension.deviceButtonImage,
+                peripheralImage: extension.peripheralImage,
+                smallPeripheralImage: extension.smallPeripheralImage,
+                peripheralButtonImage: extension.peripheralButtonImage,
                 name: extension.name,
                 connectingMessage: extension.connectingMessage,
                 helpLink: extension.helpLink

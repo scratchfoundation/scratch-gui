@@ -109,22 +109,6 @@
     height: 34px;
 }
 
-.title-field {
-    border: 1px dashed $ui-black-transparent;
-    border-radius: .25rem;
-    width: 12rem;
-    height: 34px;
-    background-color: transparent;
-    padding: .5rem;
-}
-
-.title-field,
-.title-field::placeholder {
-    color: $ui-white;
-    font-weight: bold;
-    font-size: .8rem;
-}
-
 .share-button {
     background: $data-primary;
     height: 32px;

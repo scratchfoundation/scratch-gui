@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
-import DeviceTile from './device-tile.jsx';
+import PeripheralTile from './peripheral-tile.jsx';
 import Dots from './dots.jsx';
 
 import radarIcon from './icons/searching.png';
@@ -16,7 +16,7 @@ const ScanningStep = props => (
     <Box className={styles.body}>
         <Box className={styles.activityArea}>
             {props.scanning ? (
-                props.deviceList.length === 0 ? (
+                props.peripheralList.length === 0 ? (
                     <div className={styles.activityAreaInfo}>
                         <div className={styles.centeredRow}>
                             <img
@@ -26,19 +26,19 @@ const ScanningStep = props => (
                             <FormattedMessage
                                 defaultMessage="Looking for devices"
                                 description="Text shown while scanning for devices"
-                                id="gui.connection.scanning.lookingfordevices"
+                                id="gui.connection.scanning.lookingforperipherals"
                             />
                         </div>
                     </div>
                 ) : (
-                    <div className={styles.deviceTilePane}>
-                        {props.deviceList.map(device =>
-                            (<DeviceTile
-                                key={device.peripheralId}
-                                name={device.name}
-                                peripheralId={device.peripheralId}
-                                rssi={device.rssi}
-                                smallDeviceImage={props.smallDeviceImage}
+                    <div className={styles.peripheralTilePane}>
+                        {props.peripheralList.map(peripheral =>
+                            (<PeripheralTile
+                                key={peripheral.peripheralId}
+                                name={peripheral.name}
+                                peripheralId={peripheral.peripheralId}
+                                rssi={peripheral.rssi}
+                                smallPeripheralImage={props.smallPeripheralImage}
                                 onConnecting={props.onConnecting}
                             />)
                         )}
@@ -49,7 +49,7 @@ const ScanningStep = props => (
                     <FormattedMessage
                         defaultMessage="No devices found"
                         description="Text shown when no devices could be found"
-                        id="gui.connection.scanning.noDevicesFound"
+                        id="gui.connection.scanning.noPeripheralsFound"
                     />
                 </Box>
             )}
@@ -85,19 +85,19 @@ const ScanningStep = props => (
 );
 
 ScanningStep.propTypes = {
-    deviceList: PropTypes.arrayOf(PropTypes.shape({
+    onConnecting: PropTypes.func,
+    onRefresh: PropTypes.func,
+    peripheralList: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         rssi: PropTypes.number,
         peripheralId: PropTypes.string
     })),
-    onConnecting: PropTypes.func,
-    onRefresh: PropTypes.func,
     scanning: PropTypes.bool.isRequired,
-    smallDeviceImage: PropTypes.string
+    smallPeripheralImage: PropTypes.string
 };
 
 ScanningStep.defaultProps = {
-    deviceList: [],
+    peripheralList: [],
     scanning: true
 };
 

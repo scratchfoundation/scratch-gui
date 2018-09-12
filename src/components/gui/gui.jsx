@@ -62,7 +62,6 @@ const GUIComponent = props => {
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
-        hideIntro,
         importInfoVisible,
         intl,
         isPlayerOnly,
@@ -75,6 +74,7 @@ const GUIComponent = props => {
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
+        onUpdateProjectTitle,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -116,7 +116,7 @@ const GUIComponent = props => {
                 {...componentProps}
             >
                 {previewInfoVisible ? (
-                    <PreviewModal hideIntro={hideIntro} />
+                    <PreviewModal />
                 ) : null}
                 {loading ? (
                     <Loader />
@@ -148,6 +148,7 @@ const GUIComponent = props => {
                 <MenuBar
                     enableCommunity={enableCommunity}
                     onSeeCommunity={onSeeCommunity}
+                    onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
@@ -282,7 +283,6 @@ GUIComponent.propTypes = {
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
@@ -296,6 +296,7 @@ GUIComponent.propTypes = {
     onRequestCloseCostumeLibrary: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),

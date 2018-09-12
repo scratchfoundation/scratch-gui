@@ -2,6 +2,11 @@
 @import "../../css/units.css";
 @import "../../css/z-index.css";
 
+/*
+If project-title-input.jsx is part of a menu bar say menu-bar.jsx, it can have additional css classes that
+can set a width for example or what it should do in a flex box (eg. grow).
+*/
+
 .title-field {
     border: 1px dashed $ui-black-transparent;
     border-radius: $form-radius;

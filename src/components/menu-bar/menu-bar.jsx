@@ -393,7 +393,7 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    <div className={classNames(styles.menuBarItem, styles.growableMenuBarItem)}>
+                    <div className={classNames(styles.menuBarItem, styles.growable)}>
                         <MenuBarItemTooltip
                             enable
                             id="title-field"

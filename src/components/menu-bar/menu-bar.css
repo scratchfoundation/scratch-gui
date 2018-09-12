@@ -85,7 +85,7 @@
     background-color: $ui-black-transparent;
 }
 
-.growableMenuBarItem {
+.menu-bar-itam.growable {
     max-width: 12rem;
     flex: 1;
 }

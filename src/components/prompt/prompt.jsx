@@ -48,6 +48,7 @@ const PromptComponent = props => (
                 <input
                     autoFocus
                     className={styles.variableNameTextInput}
+                    name={props.label}
                     placeholder={props.placeholder}
                     onChange={props.onChange}
                     onKeyPress={props.onKeyPress}

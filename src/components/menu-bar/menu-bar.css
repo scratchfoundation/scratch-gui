@@ -37,6 +37,7 @@
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: center;
+    flex-grow: 1;
 }
 
 .scratch-logo {
@@ -84,6 +85,16 @@
     background-color: $ui-black-transparent;
 }
 
+.menu-bar-item.growable {
+    max-width: 12rem;
+    flex: 1;
+}
+
+.title-field-growable {
+    flex-grow: 1;
+    width: 2rem;
+}
+
 .file-group {
     display: flex;
     flex-direction: row;
@@ -107,22 +118,6 @@
 .divider {
     margin: 0 .5rem;
     height: 34px;
-}
-
-.title-field {
-    border: 1px dashed $ui-black-transparent;
-    border-radius: .25rem;
-    width: 12rem;
-    height: 34px;
-    background-color: transparent;
-    padding: .5rem;
-}
-
-.title-field,
-.title-field::placeholder {
-    color: $ui-white;
-    font-weight: bold;
-    font-size: .8rem;
 }
 
 .share-button {

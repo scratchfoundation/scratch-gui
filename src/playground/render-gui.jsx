@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
+import TitledHOC from '../lib/titled-hoc.jsx';
 
 /*
  * Render the GUI playground. This is a separate function because importing anything
@@ -12,7 +13,7 @@ import HashParserHOC from '../lib/hash-parser-hoc.jsx';
  */
 export default appTarget => {
     GUI.setAppElement(appTarget);
-    const WrappedGui = HashParserHOC(AppStateHOC(GUI));
+    const WrappedGui = HashParserHOC(AppStateHOC(TitledHOC(GUI)));
 
     // TODO a hack for testing the backpack, allow backpack host to be set by url param
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);

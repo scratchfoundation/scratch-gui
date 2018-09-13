@@ -13,6 +13,7 @@ import LanguageSelector from '../../containers/language-selector.jsx';
 import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import ProjectTitleInput from './project-title-input.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
@@ -392,12 +393,14 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    <div className={classNames(styles.menuBarItem)}>
-                        <MenuBarItemTooltip id="title-field">
-                            <input
-                                disabled
-                                className={classNames(styles.titleField)}
-                                placeholder="Untitled-1"
+                    <div className={classNames(styles.menuBarItem, styles.growable)}>
+                        <MenuBarItemTooltip
+                            enable
+                            id="title-field"
+                        >
+                            <ProjectTitleInput
+                                className={classNames(styles.titleFieldGrowable)}
+                                onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                             />
                         </MenuBarItemTooltip>
                     </div>
@@ -521,7 +524,8 @@ MenuBar.propTypes = {
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
-    onSeeCommunity: PropTypes.func
+    onSeeCommunity: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func
 };
 
 const mapStateToProps = state => ({

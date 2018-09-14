@@ -37,6 +37,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
+            this.props.vm.on('PERIPHERAL_CONNECTED', this.props.onViewAlert);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -94,6 +95,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onProjectRunStop,
                 onTurboModeOff,
                 onTurboModeOn,
+                onViewAlert,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -111,6 +113,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
+        onViewAlert: PropTypes.func.isRequired,
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
@@ -135,7 +138,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
-        onTurboModeOff: () => dispatch(setTurboState(false))
+        onTurboModeOff: () => dispatch(setTurboState(false)),
+        onViewAlert: () => dispatch(viewAlert())
     });
     return connect(
         mapStateToProps,

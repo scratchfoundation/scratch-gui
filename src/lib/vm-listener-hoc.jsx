@@ -9,6 +9,7 @@ import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 import {setRunningState, setTurboState} from '../reducers/vm-status';
+import {viewAlert} from '../reducers/alerts';
 
 /*
  * Higher Order Component to manage events emitted by the VM

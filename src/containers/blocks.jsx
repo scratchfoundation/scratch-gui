@@ -22,7 +22,6 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {viewAlert} from '../reducers/alerts';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -379,7 +378,6 @@ class Blocks extends React.Component {
         this.setState({connectionModal: null});
     }
     handleStatusButtonUpdate () {
-        this.props.onViewAlert();
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
     }
     handlePromptCallback (input, optionSelection) {
@@ -414,7 +412,6 @@ class Blocks extends React.Component {
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
-            onViewAlert,
             toolboxXML,
             ...props
         } = this.props;
@@ -476,7 +473,6 @@ Blocks.propTypes = {
     onActivateCustomProcedures: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
-    onViewAlert: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -560,7 +556,6 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseCustomProcedures: data => {
         dispatch(deactivateCustomProcedures(data));
     },
-    onViewAlert: () => dispatch(viewAlert()),
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     }

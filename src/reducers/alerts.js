@@ -2,7 +2,7 @@ const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 
 const initialState = {
-    message: 'testing alerts!!',
+    message: 'Peripheral error',
     visible: false
 };
 
@@ -15,7 +15,7 @@ const reducer = function (state, action) {
         });
     case CLOSE_ALERT:
         return Object.assign({}, state, {
-            message: 'closing alert!'
+            message: 'Closing alert!'
         });
     default:
         return state;

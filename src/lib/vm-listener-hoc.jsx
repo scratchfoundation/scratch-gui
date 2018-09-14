@@ -37,7 +37,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
-            this.props.vm.on('PERIPHERAL_CONNECTED', this.props.onShowAlert);
+            this.props.vm.on('PERIPHERAL_ERROR', this.props.onShowAlert);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -110,10 +110,10 @@ const vmListenerHOC = function (WrappedComponent) {
         onMonitorsUpdate: PropTypes.func.isRequired,
         onProjectRunStart: PropTypes.func.isRequired,
         onProjectRunStop: PropTypes.func.isRequired,
+        onShowAlert: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
-        onViewAlert: PropTypes.func.isRequired,
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };

@@ -27,6 +27,7 @@ import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
+import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -53,6 +54,7 @@ let isRendererSupported = null;
 const GUIComponent = props => {
     const {
         activeTabIndex,
+        alertsVisible,
         basePath,
         backdropLibraryVisible,
         backpackOptions,
@@ -132,6 +134,9 @@ const GUIComponent = props => {
                 ) : null}
                 {cardsVisible ? (
                     <Cards />
+                ) : null}
+                {alertsVisible ? (
+                    <Alerts />
                 ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary

@@ -1,4 +1,5 @@
 import {applyMiddleware, compose, combineReducers} from 'redux';
+import alertsReducer, {alertsInitialState} from './alerts';
 import assetDragReducer, {assetDragInitialState} from './asset-drag';
 import cardsReducer, {cardsInitialState} from './cards';
 import colorPickerReducer, {colorPickerInitialState} from './color-picker';
@@ -24,6 +25,7 @@ import throttle from 'redux-throttle';
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
+    alerts: alertsInitialState,
     assetDrag: assetDragInitialState,
     blockDrag: blockDragInitialState,
     cards: cardsInitialState,
@@ -68,6 +70,7 @@ const initFullScreen = function (currentState) {
 };
 
 const guiReducer = combineReducers({
+    alerts: alertsReducer,
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
     cards: cardsReducer,

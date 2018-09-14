@@ -8,6 +8,7 @@ import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
+import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
 import ConnectionModal from './connection-modal.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
@@ -300,7 +301,21 @@ class Blocks extends React.Component {
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
-        this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
+        try {
+            this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
+        } catch (error) {
+            // The workspace is likely incomplete. What did update should be
+            // functional.
+            //
+            // Instead of throwing the error, by logging it and continuing as
+            // normal lets the other workspace update processes complete in the
+            // gui and vm, which lets the vm run even if the workspace is
+            // incomplete. Throwing the error would keep things like setting the
+            // correct editing target from happening which can interfere with
+            // some blocks and processes in the vm.
+            error.message = `Workspace Update Error: ${error.message}`;
+            log.error(error);
+        }
         this.workspace.addChangeListener(this.props.vm.blockListener);
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {

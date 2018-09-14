@@ -1,5 +1,9 @@
 import {connect} from 'react-redux';
 
+import {
+    viewAlert
+} from '../reducers/alerts';
+
 import AlertsComponent from '../components/alerts/alerts.jsx';
 
 const mapStateToProps = state => ({
@@ -7,20 +11,11 @@ const mapStateToProps = state => ({
     message: state.scratchGui.alerts.message
 });
 
-/* const mapDispatchToProps = dispatch => ({
-    onActivateDeckFactory: id => () => dispatch(activateDeck(id)),
-    onShowAll: () => {
-        dispatch(openTipsLibrary());
-        dispatch(closeCards());
-    },
-    onCloseCards: () => dispatch(closeCards()),
-    onNextStep: () => dispatch(nextStep()),
-    onPrevStep: () => dispatch(prevStep()),
-    onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),
-    onStartDrag: () => dispatch(startDrag()),
-    onEndDrag: () => dispatch(endDrag())
-}); */
+const mapDispatchToProps = dispatch => ({
+    onViewAlert: () => dispatch(viewAlert())
+});
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AlertsComponent);

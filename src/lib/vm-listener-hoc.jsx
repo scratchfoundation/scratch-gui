@@ -139,7 +139,9 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onShowAlert: () => dispatch(showAlert())
+        onShowAlert: data => {
+            dispatch(showAlert(data.message));
+        }
     });
     return connect(
         mapStateToProps,

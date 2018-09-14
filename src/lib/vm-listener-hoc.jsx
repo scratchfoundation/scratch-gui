@@ -9,7 +9,7 @@ import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 import {setRunningState, setTurboState} from '../reducers/vm-status';
-import {viewAlert} from '../reducers/alerts';
+import {showAlert} from '../reducers/alerts';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -37,7 +37,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
-            this.props.vm.on('PERIPHERAL_CONNECTED', this.props.onViewAlert);
+            this.props.vm.on('PERIPHERAL_CONNECTED', this.props.onShowAlert);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -95,7 +95,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onProjectRunStop,
                 onTurboModeOff,
                 onTurboModeOn,
-                onViewAlert,
+                onShowAlert,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -139,7 +139,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onViewAlert: () => dispatch(viewAlert())
+        onShowAlert: () => dispatch(showAlert())
     });
     return connect(
         mapStateToProps,

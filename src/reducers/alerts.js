@@ -1,5 +1,5 @@
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
-const VIEW_ALERT = 'scratch-gui/alerts/VIEW_ALERT';
+const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 
 const initialState = {
     message: 'testing alerts!!',
@@ -9,7 +9,7 @@ const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case VIEW_ALERT:
+    case SHOW_ALERT:
         return Object.assign({}, state, {
             visible: true
         });
@@ -26,13 +26,13 @@ const closeAlert = function () {
     return {type: CLOSE_ALERT};
 };
 
-const viewAlert = function () {
-    return {type: VIEW_ALERT};
+const showAlert = function () {
+    return {type: SHOW_ALERT};
 };
 
 export {
     reducer as default,
     initialState as alertsInitialState,
     closeAlert,
-    viewAlert
+    showAlert
 };

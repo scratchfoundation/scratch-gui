@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 import {
-    viewAlert
+    showAlert
 } from '../reducers/alerts';
 
 import AlertsComponent from '../components/alerts/alerts.jsx';
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onViewAlert: () => dispatch(viewAlert())
+    onShowAlert: () => dispatch(showAlert())
 });
 
 export default connect(

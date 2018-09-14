@@ -8,7 +8,7 @@ import styles from './alert.css';
 const Alerts = props => (
     <Draggable
         bounds="parent"
-        position={{x: 550, y: 0}}
+        position={{x: 500, y: 0}}
     >
         <div className={styles.alertContainer}>
             <div className={styles.alert}>

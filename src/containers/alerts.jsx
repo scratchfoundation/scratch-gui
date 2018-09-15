@@ -2,7 +2,8 @@ import {connect} from 'react-redux';
 
 import {
     showAlert,
-    closeAlert
+    closeAlert,
+    onReconnect
 } from '../reducers/alerts';
 
 import AlertsComponent from '../components/alerts/alerts.jsx';
@@ -14,7 +15,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onShowAlert: () => dispatch(showAlert()),
-    onCloseAlert: () => dispatch(closeAlert())
+    onCloseAlert: () => dispatch(closeAlert()),
+    onReconnect: () => dispatch(onReconnect())
 });
 
 export default connect(

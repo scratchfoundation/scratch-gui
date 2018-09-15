@@ -8,18 +8,25 @@ import styles from './alert.css';
 const Alerts = props => (
     <Draggable
         bounds="parent"
-        position={{x: 500, y: 0}}
+        position={{x: 500, y: 50}}
     >
         <div className={styles.alertContainer}>
             <div className={styles.alert}>
                 {props.message}
+            </div>
+            <div
+                className={styles.removeButton}
+                onClick={props.onCloseAlert}
+            >
+                x
             </div>
         </div>
     </Draggable>
 );
 
 Alerts.propTypes = {
-    message: PropTypes.string.isRequired
+    message: PropTypes.string.isRequired,
+    onCloseAlert: PropTypes.func.isRequired
 };
 
 export default Alerts;

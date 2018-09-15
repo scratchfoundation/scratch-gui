@@ -6,22 +6,30 @@
     position:absolute;
     z-index: $z-index-card;
     margin: 0.5rem 2rem;
+    border: 1px solid #FF8C1A;
+    border-radius: 8px;
+    cursor: move;
+    background: #FFF0DF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 448px;
+    padding: 16px;
+    font-size: 10pt;
+    box-shadow: 2px 2px 2px 2px rgba(255, 140, 26, 0.25);
 }
 
 .alert {
-    border: 1px solid #FF8C1A;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    cursor: move;
-    background: #FFF0DF;
-    width: 448px;
     color: #000;
     z-index: 20;
     overflow: hidden;
-    padding: 16px;
-    font-size: 10pt;
-    box-shadow: 2px 2px 2px 2px rgba(255, 140, 26, 0.25);;
     align-items: left;
+    width: 100%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.remove-button {
+    cursor: pointer;
+    color: #000;
+    align-items: center;
 }

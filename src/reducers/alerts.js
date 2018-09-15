@@ -16,7 +16,7 @@ const reducer = function (state, action) {
         });
     case CLOSE_ALERT:
         return Object.assign({}, state, {
-            message: 'Closing alert!'
+            visible: false
         });
     default:
         return state;

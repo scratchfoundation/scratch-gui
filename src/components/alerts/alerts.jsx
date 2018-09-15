@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Draggable from 'react-draggable';
+import Box from '../box/box.jsx';
 
 import styles from './alert.css';
 
 // this is a functional component, declared with arrow syntax
 const Alerts = props => (
-    <Draggable
+    <Box
         bounds="parent"
     >
         <div className={styles.alertContainer}>
@@ -26,7 +26,7 @@ const Alerts = props => (
                 x
             </div>
         </div>
-    </Draggable>
+    </Box>
 );
 
 Alerts.propTypes = {

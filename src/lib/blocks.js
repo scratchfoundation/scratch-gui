@@ -178,6 +178,7 @@ export default function (vm) {
                     if (target) {
                         // Pass true to skip the stage: we only want the sprite's own local variables.
                         const variableNames = target.getAllVariableNamesInScopeByType('', true);
+                        variableNames.sort(ScratchBlocks.scratchBlocksUtils.compareStrings);
                         output = output.concat(variableNames.map(name => [name, name]));
                     }
                 }

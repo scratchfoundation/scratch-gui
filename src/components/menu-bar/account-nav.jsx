@@ -1,6 +1,7 @@
 /*
 NOTE: this file only temporarily resides in scratch-gui.
-Nearly identical code appears in scratch-www, and the two should be consolidated.
+Nearly identical code appears in scratch-www, and the two should
+eventually be consolidated.
 */
 
 import classNames from 'classnames';
@@ -9,8 +10,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Dropdown from '../dropdown/dropdown.jsx';
-import dropdownStyles from '../dropdown/dropdown.css';
+import MenuBarMenu from './menu-bar-menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
 
 import styles from './account-nav.css';
 
@@ -18,6 +19,7 @@ const AccountNav = ({
     accountNavOpen,
     classroomId,
     isEducator,
+    isRtl,
     isStudent,
     onOpenAccountNav,
     onCloseAccountNav,
@@ -32,8 +34,7 @@ const AccountNav = ({
                 styles.userInfo,
                 {[styles.open]: accountNavOpen}
             )}
-            href="#"
-            onClick={onOpenAccountNav}
+            onClick={accountNavOpen ? onCloseAccountNav : onOpenAccountNav}
         >
             {/* thumbnail image currently disabled
                 <img
@@ -45,50 +46,38 @@ const AccountNav = ({
                 {username}
             </span>
         </a>
-        <Dropdown
-            as="ul"
-            className={process.env.SCRATCH_ENV}
-            isOpen={accountNavOpen}
+        <MenuBarMenu
+            open={accountNavOpen}
+            // note: the Rtl styles are switched here, because this menu is justified
+            // opposite all the others
+            place={isRtl ? 'right' : 'left'}
             onRequestClose={onCloseAccountNav}
         >
-            <li>
-                <a href={profileUrl}>
-                    <FormattedMessage id="general.profile" />
-                </a>
-            </li>
-            <li>
-                <a href="/mystuff/">
-                    <FormattedMessage id="general.myStuff" />
-                </a>
-            </li>
-            {isEducator ? [
-                <li key="my-classes-li">
-                    <a href="/educators/classes/">
-                        <FormattedMessage id="general.myClasses" />
-                    </a>
-                </li>
-            ] : []}
-            {isStudent ? [
-                <li key="my-class-li">
-                    <a href={`/classes/${classroomId}/`}>
-                        <FormattedMessage id="general.myClass" />
-                    </a>
-                </li>
-            ] : []}
-            <li>
-                <a href="/accounts/settings/">
-                    <FormattedMessage id="general.accountSettings" />
-                </a>
-            </li>
-            <li className={dropdownStyles.divider}>
-                <a
-                    href="#"
-                    onClick={onLogOut}
-                >
+            <MenuItem href={profileUrl}>
+                <FormattedMessage id="general.profile" />
+            </MenuItem>
+            <MenuItem href="/mystuff/">
+                <FormattedMessage id="general.myStuff" />
+            </MenuItem>
+            {isEducator ? (
+                <MenuItem href="/educators/classes/">
+                    <FormattedMessage id="general.myClasses" />
+                </MenuItem>
+            ) : []}
+            {isStudent ? (
+                <MenuItem href={`/classes/${classroomId}/`}>
+                    <FormattedMessage id="general.myClass" />
+                </MenuItem>
+            ) : []}
+            <MenuItem href="/accounts/settings/">
+                <FormattedMessage id="general.accountSettings" />
+            </MenuItem>
+            <MenuSection>
+                <MenuItem onClick={onLogOut}>
                     <FormattedMessage id="navigation.signOut" />
-                </a>
-            </li>
-        </Dropdown>
+                </MenuItem>
+            </MenuSection>
+        </MenuBarMenu>
     </div>
 );
 
@@ -96,6 +85,7 @@ AccountNav.propTypes = {
     accountNavOpen: PropTypes.bool,
     classroomId: PropTypes.string,
     isEducator: PropTypes.bool,
+    isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
     onCloseAccountNav: PropTypes.func,
     onLogOut: PropTypes.func,
@@ -108,7 +98,7 @@ AccountNav.propTypes = {
 const mapStateToProps = state => ({
     accountNavOpen: state.session && state.session.accountNavOpen,
     classroomId: state.session && state.session.session && state.session.session.user ?
-        `/users/${state.session.session.user.classroomId}` : '',
+        state.session.session.user.classroomId : '',
     isEducator: state.session && state.session.permissions && state.session.permissions.educator,
     isStudent: state.session && state.session.permissions && state.session.permissions.student,
     profileUrl: state.session && state.session.session && state.session.session.user ?

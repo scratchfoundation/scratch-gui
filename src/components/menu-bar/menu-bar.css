@@ -58,11 +58,6 @@
     width: $language-selector-width;
 }
 
-.menu {
-    z-index: $z-index-menu-bar;
-    top: $menu-bar-height;
-}
-
 .menu-bar-item {
     display: flex;
     padding: 0 0.25rem;

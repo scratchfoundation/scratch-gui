@@ -11,7 +11,7 @@ import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import ProjectLoader from '../../containers/project-loader.jsx';
-import Menu from '../../containers/menu.jsx';
+import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from './account-nav.jsx';
@@ -112,28 +112,6 @@ MenuItemTooltip.propTypes = {
     isRtl: PropTypes.bool
 };
 
-const MenuBarMenu = ({
-    children,
-    onRequestClose,
-    open,
-    place = 'right'
-}) => (
-    <Menu
-        className={styles.menu}
-        open={open}
-        place={place}
-        onRequestClose={onRequestClose}
-    >
-        {children}
-    </Menu>
-);
-
-MenuBarMenu.propTypes = {
-    children: PropTypes.node,
-    onRequestClose: PropTypes.func,
-    open: PropTypes.bool,
-    place: PropTypes.oneOf(['left', 'right'])
-};
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
@@ -302,7 +280,8 @@ class MenuBar extends React.Component {
                                                 defaultMessage="Save as a copy"
                                                 description="Menu bar item for saving as a copy"
                                                 id="gui.menuBar.saveAsCopy"
-                                            /></MenuItem>
+                                            />
+                                        </MenuItem>
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
@@ -465,9 +444,13 @@ class MenuBar extends React.Component {
                         </Button>
                     </a>
                 </div>
+
+                {/* show the proper UI in the account menu, given whether the user is
+                logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoWrapper}>
                     {this.props.sessionExists ? (
                         this.props.username ? (
+                            // ************ user is logged in ************
                             <React.Fragment>
                                 <a href="/mystuff/">
                                     <div
@@ -483,14 +466,18 @@ class MenuBar extends React.Component {
                                         />
                                     </div>
                                 </a>
-                                <AccountNav
-                                    onCloseAccountNav={this.props.onCloseAccountNav}
-                                    onLogOut={this.props.onLogOut}
-                                    onOpenAccountNav={this.props.onOpenAccountNav}
-                                />
-                                {/* onClickLogout={this.props.onClickLogout} */}
+                                <div className={classNames(styles.menuBarItem)}>
+                                    <AccountNav
+                                        isRtl={this.props.isRtl}
+                                        onCloseAccountNav={this.props.onCloseAccountNav}
+                                        onLogOut={this.props.onLogOut}
+                                        onOpenAccountNav={this.props.onOpenAccountNav}
+                                    />
+                                </div>
                             </React.Fragment>
                         ) : (
+                            // ********* user not logged in, but a session exists
+                            // ********* so they can choose to log in
                             <React.Fragment>
                                 <div
                                     className={classNames(
@@ -524,6 +511,7 @@ class MenuBar extends React.Component {
                             </React.Fragment>
                         )
                     ) : (
+                        // ******** no login session is available, so don't show login stuff
                         <React.Fragment>
                             <MenuBarItemTooltip id="mystuff">
                                 <div
@@ -555,7 +543,7 @@ class MenuBar extends React.Component {
                                         src={profileIcon}
                                     />
                                     <span>
-                                        {'scratch-cat' /* @todo username */}
+                                        {'scratch-cat'}
                                     </span>
                                     <img
                                         className={styles.dropdownCaretIcon}
@@ -573,7 +561,6 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     canUpdateProject: PropTypes.bool,
-    canceledDeletionOpen: PropTypes.bool,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
@@ -606,8 +593,6 @@ MenuBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    canceledDeletionOpen: state.session && state.session.canceledDeletionOpen,
-    registrationOpen: state.session && state.session.registrationOpen,
     canUpdateProject: typeof (state.session && state.session.session && state.session.session.user) !== 'undefined',
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),

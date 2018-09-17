@@ -1,3 +1,4 @@
+import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -32,22 +33,40 @@ MenuComponent.propTypes = {
     place: PropTypes.oneOf(['left', 'right'])
 };
 
-const MenuItem = ({
-    children,
-    className,
-    onClick
-}) => (
-    <li
-        className={classNames(styles.menuItem, className)}
-        onClick={onClick}
-    >
-        {children}
-    </li>
-);
+// you can pass MenuItem an onClick function. If none is found, when clicked it
+// looks for an href and navigates the web page to that.
+class MenuItem extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'navigateToHref'
+        ]);
+    }
+    navigateToHref () {
+        if (this.props.href) window.location.href = this.props.href;
+    }
+    render () {
+        const {
+            children,
+            className,
+            onClick
+        } = this.props;
+        const clickAction = onClick ? onClick : this.navigateToHref;
+        return (
+            <li
+                className={classNames(styles.menuItem, className)}
+                onClick={clickAction}
+            >
+                {children}
+            </li>
+        );
+    }
+}
 
 MenuItem.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    href: PropTypes.string,
     onClick: PropTypes.func
 };
 

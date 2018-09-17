@@ -27,6 +27,12 @@
     line-height: 34px;
     white-space: nowrap;
     padding: 0 10px;
+
+    /* these are needed to reset styles that are inherited from frameless.scss
+    when embedded in scratch-www */
+    font-size: .75rem;
+    font-weight: bold;
+    margin: 0;
 }
 
 .menu-item.active,

@@ -20,10 +20,9 @@ import {
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <ProjectLoader>{(renderFileInput, loadProject, props) => (
+ * <ProjectLoader>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
- *         {...props}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
@@ -76,6 +75,7 @@ class ProjectLoader extends React.Component {
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.props.openLoadingState();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
+            // extract the title from the file and set it as current project title
             if (thisFileInput.files[0].name) {
                 const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
                 if (matches) {
@@ -102,16 +102,7 @@ class ProjectLoader extends React.Component {
         );
     }
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            children,
-            closeLoadingState,
-            openLoadingState,
-            vm,
-            /* eslint-enable no-unused-vars */
-            ...props
-        } = this.props;
-        return this.props.children(this.renderFileInput, this.handleClick, props);
+        return this.props.children(this.renderFileInput, this.handleClick);
     }
 }
 

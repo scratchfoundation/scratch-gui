@@ -22,6 +22,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
+import {setNewDefaultProject} from '../../reducers/project-id';
 import {
     openAccountMenu,
     closeAccountMenu,
@@ -262,18 +263,16 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <MenuItemTooltip
-                                    id="new"
+                                <MenuItem
                                     isRtl={this.props.isRtl}
+                                    onClick={this.props.handleClickLoadNewProject}
                                 >
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="New"
-                                            description="Menu bar item for creating a new project"
-                                            id="gui.menuBar.new"
-                                        />
-                                    </MenuItem>
-                                </MenuItemTooltip>
+                                    <FormattedMessage
+                                        defaultMessage="New"
+                                        description="Menu bar item for creating a new project"
+                                        id="gui.menuBar.new"
+                                    />
+                                </MenuItem>
                                 <MenuSection>
                                     <ProjectSaver>{(saveProject, updateProject) => (
                                         this.props.canUpdateProject ? (
@@ -303,10 +302,9 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <ProjectLoader>{(renderFileInput, loadProject, loadProps) => (
+                                    <ProjectLoader>{(renderFileInput, loadProject) => (
                                         <MenuItem
                                             onClick={loadProject}
-                                            {...loadProps}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Load from your computer"
@@ -591,6 +589,7 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    handleClickLoadNewProject: PropTypes.func,
     intl: intlShape,
     isRtl: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
@@ -630,6 +629,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    handleClickLoadNewProject: event => {
+        event.preventDefault();
+        dispatch(setNewDefaultProject());
+    },
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

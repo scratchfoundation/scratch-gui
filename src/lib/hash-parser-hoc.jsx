@@ -1,6 +1,8 @@
 import React from 'react';
 import bindAll from 'lodash.bindall';
 
+import {newDefaultProjectId} from '../reducers/project-id';
+
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
@@ -25,7 +27,7 @@ const HashParserHOC = function (WrappedComponent) {
         }
         handleHashChange () {
             const hashMatch = window.location.hash.match(/#(\d+)/);
-            const projectId = hashMatch === null ? 0 : hashMatch[1];
+            const projectId = hashMatch === null ? newDefaultProjectId : hashMatch[1];
             if (projectId !== this.state.projectId) {
                 this.setState({projectId: projectId});
             }

@@ -21,6 +21,8 @@ import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
 import throttle from 'redux-throttle';
 
+import decks from '../lib/libraries/decks/index.jsx';
+
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
@@ -67,6 +69,27 @@ const initFullScreen = function (currentState) {
     );
 };
 
+const initTutorialCard = function (currentState, deckId) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                previewInfo: false
+            },
+            cards: {
+                visible: true,
+                content: decks,
+                activeDeckId: deckId,
+                step: 0,
+                x: 0,
+                y: 0,
+                dragging: false
+            }
+        }
+    );
+};
+
 const guiReducer = combineReducers({
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
@@ -95,5 +118,6 @@ export {
     guiInitialState,
     guiMiddleware,
     initFullScreen,
-    initPlayer
+    initPlayer,
+    initTutorialCard
 };

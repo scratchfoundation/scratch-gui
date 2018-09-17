@@ -8,6 +8,7 @@ import translateImage from './translate.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
+import martyImage from './marty.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -173,5 +174,25 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
 
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Marty the Robot"
+                description="Name for the 'Marty the Robot' extension"
+                id="gui.extension.marty.name"
+            />
+        ),
+        extensionId: 'martyScratch',
+        iconURL: martyImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Dance, play & program Marty."
+                description="Description for the 'Marty the Robot' extension"
+                id="gui.extension.marty.description"
+            />
+        ),
+        featured: true,
+        helpLink: 'https://robotical.io/support'
     }
 ];

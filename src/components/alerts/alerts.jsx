@@ -14,15 +14,10 @@ const Alerts = props => (
                 {props.message}
             </div>
             <div
-                className={styles.button}
-                onClick={props.onReconnect}
-            >
-                Reconnect
-            </div>
-            <div
                 className={styles.removeButton}
                 onClick={props.onCloseAlert}
             >
+                { /* eslint-disable react/jsx-no-literals */ }
                 x
             </div>
         </div>
@@ -31,8 +26,7 @@ const Alerts = props => (
 
 Alerts.propTypes = {
     message: PropTypes.string.isRequired,
-    onCloseAlert: PropTypes.func.isRequired,
-    onReconnect: PropTypes.func.isRequired
+    onCloseAlert: PropTypes.func.isRequired
 };
 
 export default Alerts;

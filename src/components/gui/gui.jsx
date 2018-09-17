@@ -110,7 +110,11 @@ const GUIComponent = props => {
                 isRendererSupported={isRendererSupported}
                 stageSize={stageSize}
                 vm={vm}
-            />
+            >
+                {alertsVisible ? (
+                    <Alerts />
+                ) : null}
+            </StageWrapper>
         ) : (
             <Box
                 className={styles.pageWrapper}

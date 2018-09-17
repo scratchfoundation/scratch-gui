@@ -139,8 +139,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onShowAlert: data => {
-            dispatch(showAlert(data.message));
+        onShowAlert: () => {
+            dispatch(showAlert('Scratch has lost connection to peripheral.'));
         }
     });
     return connect(

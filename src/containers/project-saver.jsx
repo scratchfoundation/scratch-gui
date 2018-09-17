@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import storage from '../lib/storage';
+import {projectTitleInitialState} from '../reducers/project-title';
+
 
 /**
  * Project saver component passes a saveProject function to its child.
@@ -33,21 +35,15 @@ class ProjectSaver extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.saveProjectSb3().then(content => {
-            // TODO user-friendly project name
-            // File name: project-DATE-TIME
-            const date = new Date();
-            const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            const filename = `untitled-project-${timestamp}.sb3`;
-
             // Use special ms version if available to get it working on Edge.
             if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(content, filename);
+                navigator.msSaveOrOpenBlob(content, this.props.projectFilename);
                 return;
             }
 
             const url = window.URL.createObjectURL(content);
             saveLink.href = url;
-            saveLink.download = filename;
+            saveLink.download = this.props.projectFilename;
             saveLink.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(saveLink);
@@ -86,14 +82,24 @@ class ProjectSaver extends React.Component {
     }
 }
 
+const getProjectFilename = (curTitle, defaultTitle) => {
+    let filenameTitle = curTitle;
+    if (!filenameTitle || filenameTitle.length === 0) {
+        filenameTitle = defaultTitle;
+    }
+    return `${filenameTitle.substring(0, 100)}.sb3`;
+};
+
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    projectFilename: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     saveProjectSb3: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
+    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
     projectId: state.scratchGui.projectId
 });
 

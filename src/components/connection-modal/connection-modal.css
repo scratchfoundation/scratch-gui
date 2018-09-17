@@ -25,14 +25,14 @@
     align-items: center;
 }
 
-.device-tile-pane {
+.peripheral-tile-pane {
     overflow-y: auto;
     width: 100%;
     height: 100%;
     padding: 0.5rem;
 }
 
-.device-tile {
+.peripheral-tile {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -46,36 +46,36 @@
     margin-bottom: 0.5rem;
 }
 
-.device-tile-name {
+.peripheral-tile-name {
     display: flex;
     align-items: center;
 }
 
-[dir="ltr"] .device-tile-image {
+[dir="ltr"] .peripheral-tile-image {
     margin-right: 0.5rem;
 }
 
-[dir="rtl"] .device-tile-image {
+[dir="rtl"] .peripheral-tile-image {
     margin-left: 0.5rem;
 }
 
-.device-tile-name-wrapper {
+.peripheral-tile-name-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
-.device-tile-name-label {
+.peripheral-tile-name-label {
     font-weight: bold;
     font-size: 0.625rem;
 }
 
-.device-tile-name-text {
+.peripheral-tile-name-text {
     font-size: 0.875rem;
 }
 
-.device-tile button {
+.peripheral-tile button {
     padding: 0.6rem 0.75rem;
     border: none;
     border-radius: 0.25rem;
@@ -154,16 +154,16 @@
     }
 }
 
-.device-activity {
+.peripheral-activity {
     position: relative;
 }
 
-.device-activity-icon {
+.peripheral-activity-icon {
     /* width: 80px;
     height: 80px; */
 }
 
-.device-button-image {
+.peripheral-button-image {
     position: absolute;
 }
 
@@ -214,7 +214,7 @@
     box-shadow: 0px 0px 0px 2px $motion-transparent;
 }
 
-.device-tile-widgets {
+.peripheral-tile-widgets {
     display: flex;
     align-items: center;
 }

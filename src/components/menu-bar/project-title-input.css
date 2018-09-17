@@ -2,7 +2,10 @@
 @import "../../css/units.css";
 @import "../../css/z-index.css";
 
-$title-width: 12rem;
+/*
+If project-title-input.jsx is part of a menu bar say menu-bar.jsx, it can have additional css classes that
+can set a width for example or what it should do in a flex box (eg. grow).
+*/
 
 .title-field {
     border: 1px dashed $ui-black-transparent;
@@ -12,7 +15,6 @@ $title-width: 12rem;
     background-color: $ui-white-transparent;
     background-clip: padding-box;
     -webkit-background-clip: padding-box;
-    width: $title-width;
     height: auto;
     padding: .5rem;
 }

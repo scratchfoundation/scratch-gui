@@ -9,6 +9,7 @@ import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
 import martyImage from './marty.png';
+import martyExtImage from './marty_extended.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -19,6 +20,44 @@ import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
 
 export default [
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Marty the Robot"
+                description="Name for the 'Marty the Robot' extension"
+                id="gui.extension.marty.name"
+            />
+        ),
+        extensionId: 'marty',
+        iconURL: martyImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play and program with Marty."
+                description="Description for the 'Marty the Robot' extension"
+                id="gui.extension.marty.description"
+            />
+        ),
+        featured: true,
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Marty the Robot (Extended)"
+                description="Name for the 'Marty the Robot (Extended)' extension"
+                id="gui.extension.martyExt.name"
+            />
+        ),
+        extensionId: 'martyExt',
+        iconURL: martyExtImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play and program with Marty."
+                description="Description for the 'Marty the Robot (Extended)' extension"
+                id="gui.extension.martyExt.description"
+            />
+        ),
+        featured: true,
+    },
     {
         name: (
             <FormattedMessage
@@ -174,25 +213,5 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
 
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Marty the Robot"
-                description="Name for the 'Marty the Robot' extension"
-                id="gui.extension.marty.name"
-            />
-        ),
-        extensionId: 'martyScratch',
-        iconURL: martyImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Dance, play & program Marty."
-                description="Description for the 'Marty the Robot' extension"
-                id="gui.extension.marty.description"
-            />
-        ),
-        featured: true,
-        helpLink: 'https://robotical.io/support'
     }
 ];

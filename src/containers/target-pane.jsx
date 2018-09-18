@@ -114,9 +114,9 @@ class TargetPane extends React.Component {
     handlePaintSpriteClick () {
         const formatMessage = this.props.intl.formatMessage;
         const emptyItem = emptySprite(
-            formatMessage(sharedMessages.sprite),
-            formatMessage(sharedMessages.sound),
-            formatMessage(sharedMessages.costume)
+            formatMessage(sharedMessages.sprite, {index: 1}),
+            formatMessage(sharedMessages.pop),
+            formatMessage(sharedMessages.costume, {index: 1})
         );
         this.props.vm.addSprite(JSON.stringify(emptyItem)).then(() => {
             setTimeout(() => { // Wait for targets update to propagate before tab switching

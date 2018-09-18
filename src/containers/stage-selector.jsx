@@ -68,7 +68,7 @@ class StageSelector extends React.Component {
         this.addBackdropFromLibraryItem(item);
     }
     handleEmptyBackdrop () {
-        this.handleNewBackdrop(emptyCostume(this.props.intl.formatMessage(sharedMessages.backdrop)));
+        this.handleNewBackdrop(emptyCostume(this.props.intl.formatMessage(sharedMessages.backdrop, {index: 1})));
     }
     handleBackdropUpload (e) {
         const storage = this.props.vm.runtime.storage;

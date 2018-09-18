@@ -1,31 +1,7 @@
 import {defineMessages} from 'react-intl';
+import sharedMessages from '../shared-messages';
 
-const messages = defineMessages({
-    backdrop: {
-        defaultMessage: 'backdrop1',
-        description: 'Default name for the first backdrop',
-        id: 'gui.defaultProject.backdrop'
-    },
-    pop: {
-        defaultMessage: 'pop',
-        description: 'Default name for the pop sound',
-        id: 'gui.defaultProject.pop'
-    },
-    sprite: {
-        defaultMessage: 'Sprite1',
-        description: 'Name for the default sprite',
-        id: 'gui.defaultProject.sprite'
-    },
-    costume1: {
-        defaultMessage: 'costume1',
-        description: 'Name for the first default costume',
-        id: 'gui.defaultProject.costume1'
-    },
-    costume2: {
-        defaultMessage: 'costume2',
-        description: 'Name for the second default costume',
-        id: 'gui.defaultProject.costume2'
-    },
+let messages = defineMessages({
     meow: {
         defaultMessage: 'Meow',
         description: 'Name for the meow sound',
@@ -37,6 +13,8 @@ const messages = defineMessages({
         id: 'gui.defaultProject.variable'
     }
 });
+
+messages = {...messages, ...sharedMessages};
 
 // use the default message if a translation function is not passed
 const defaultTranslator = msgObj => msgObj.defaultMessage;
@@ -66,7 +44,7 @@ const projectData = translateFunction => {
                 costumes: [
                     {
                         assetId: 'cd21514d0531fdffb22204e0ec5ed84a',
-                        name: translator(messages.backdrop),
+                        name: translator(messages.backdrop, {index: 1}),
                         md5ext: 'cd21514d0531fdffb22204e0ec5ed84a.svg',
                         dataFormat: 'svg',
                         rotationCenterX: 240,
@@ -91,7 +69,7 @@ const projectData = translateFunction => {
             },
             {
                 isStage: false,
-                name: translator(messages.sprite),
+                name: translator(messages.sprite, {index: 1}),
                 variables: {},
                 lists: {},
                 broadcasts: {},
@@ -100,7 +78,7 @@ const projectData = translateFunction => {
                 costumes: [
                     {
                         assetId: '09dc888b0b7df19f70d81588ae73420e',
-                        name: translator(messages.costume1),
+                        name: translator(messages.costume, {index: 1}),
                         bitmapResolution: 1,
                         md5ext: '09dc888b0b7df19f70d81588ae73420e.svg',
                         dataFormat: 'svg',
@@ -109,7 +87,7 @@ const projectData = translateFunction => {
                     },
                     {
                         assetId: '3696356a03a8d938318876a593572843',
-                        name: translator(messages.costume2),
+                        name: translator(messages.costume, {index: 2}),
                         bitmapResolution: 1,
                         md5ext: '3696356a03a8d938318876a593572843.svg',
                         dataFormat: 'svg',

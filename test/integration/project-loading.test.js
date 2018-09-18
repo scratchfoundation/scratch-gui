@@ -72,7 +72,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
             await clickXpath('//button[@title="Try It"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 3000));
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');

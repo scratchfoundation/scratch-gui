@@ -8,8 +8,11 @@ import translateImage from './translate.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
+
 import martyImage from './marty.png';
 import martyExtImage from './marty_extended.png';
+import martyPeripheralImage from './peripheral-connection/marty/marty-illustration.svg';
+import martyMenuImage from './peripheral-connection/marty/marty-small.svg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -38,6 +41,19 @@ export default [
             />
         ),
         featured: true,
+        disabled: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        peripheralImage: martyPeripheralImage,
+        smallPeripheralImage: martyMenuImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting... Make sure your Marty is on and connected to the same network as your computer."
+                description="Message to help people connect to their Marty."
+                id="gui.extension.marty.connectingMessage"
+            />
+        ),
+        helpLink: 'https://robotical.io/support'
     },
     {
         name: (

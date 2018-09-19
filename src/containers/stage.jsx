@@ -41,7 +41,8 @@ class Stage extends React.Component {
             'setDragCanvas',
             'clearDragCanvas',
             'drawDragCanvas',
-            'positionDragCanvas'
+            'positionDragCanvas',
+            'updateMicIndicator'
         ]);
         this.state = {
             mouseDownTimeoutId: null,
@@ -50,7 +51,8 @@ class Stage extends React.Component {
             dragOffset: null,
             dragId: null,
             colorInfo: null,
-            question: null
+            question: null,
+            micIndicator: false
         };
         if (this.props.vm.renderer) {
             this.renderer = this.props.vm.renderer;
@@ -69,13 +71,15 @@ class Stage extends React.Component {
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
+        this.props.vm.runtime.addListener('UPDATE_MIC_INDICATOR', this.updateMicIndicator);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
-            this.state.question !== nextState.question;
+            this.state.question !== nextState.question ||
+            this.state.micIndicator !== nextState.micIndicator;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -91,6 +95,7 @@ class Stage extends React.Component {
         this.detachRectEvents();
         this.stopColorPickingLoop();
         this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
+        this.props.vm.runtime.removeListener('UPDATE_MIC_INDICATOR', this.updateMicIndicator);
     }
     questionListener (question) {
         this.setState({question: question});
@@ -107,6 +112,9 @@ class Stage extends React.Component {
     }
     stopColorPickingLoop () {
         clearInterval(this.intervalId);
+    }
+    updateMicIndicator (micIndicatorVisible) {
+        this.setState({micIndicator: micIndicatorVisible});
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -376,6 +384,7 @@ class Stage extends React.Component {
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
                 dragRef={this.setDragCanvas}
+                micIndicator={this.state.micIndicator}
                 question={this.state.question}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}

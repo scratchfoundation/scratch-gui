@@ -7,6 +7,7 @@ import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
+import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
@@ -18,6 +19,7 @@ const StageComponent = props => {
         isColorPicking,
         isFullScreen,
         colorInfo,
+        micIndicator,
         question,
         stageSize,
         useEditorDragStyle,
@@ -84,6 +86,23 @@ const StageComponent = props => {
                         </div>
                     </div>
                 )}
+                {micIndicator || true ? (
+                    <div
+                        className={styles.micIndicatorWrapper}
+                        style={{
+                            width: stageDimensions.width,
+                            marginLeft: stageDimensions.width * -0.5
+                        }}
+                    >
+                        <MicIndicator
+                            className={classNames(
+                                styles.micIndicator,
+                                {[styles.offsetForQuestion]: question !== null}
+                            )}
+                            stageSize={stageDimensions}
+                        />
+                    </div>
+                ) : null}
                 <canvas
                     className={styles.draggingSprite}
                     height={0}

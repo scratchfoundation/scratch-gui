@@ -26,7 +26,7 @@ export default [
                 id="gui.extension.music.name"
             />
         ),
-        extensionId: 'music',
+        extensionId: 'speech2text',
         iconURL: musicImage,
         description: (
             <FormattedMessage

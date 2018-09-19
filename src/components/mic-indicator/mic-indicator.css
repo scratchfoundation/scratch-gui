@@ -1,0 +1,9 @@
+@keyframes popIn {
+    from {transform: scale(0.5)}
+    to {transform: scale(1)}
+}
+
+.mic-animation {
+    transform-origin: center;
+    animation: popIn 0.1s ease-in-out;
+}

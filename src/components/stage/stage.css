@@ -93,7 +93,7 @@ to adjust for the border using a different method */
     padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
 }
 
-.monitor-wrapper, .color-picker-wrapper, .queston-wrapper {
+.monitor-wrapper, .color-picker-wrapper, .queston-wrapper, .mic-indicator-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -110,3 +110,23 @@ to adjust for the border using a different method */
     z-index: $z-index-dragging-sprite;
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
  }
+
+.mic-indicator-wrapper {
+    left: 50%;
+}
+
+.mic-indicator {
+    position: absolute;
+    width: 82px;
+    bottom: 0;
+    right: 0;
+    transform-origin: bottom right;
+    z-index: $z-index-stage-indicator;
+    pointer-events: none;
+}
+
+/* offset for the mic indicator when a question is showing */
+/* todo: not use a magic number here */
+.offset-for-question {
+    bottom: 4.5rem;
+}

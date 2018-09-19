@@ -15,6 +15,7 @@ import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from './account-nav.jsx';
+import LoginDropdown from './login-dropdown.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
@@ -30,7 +31,10 @@ import {
     editMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
-    languageMenuOpen
+    languageMenuOpen,
+    openLoginMenu,
+    closeLoginMenu,
+    loginMenuOpen
 } from '../../reducers/menus';
 
 import styles from './menu-bar.css';
@@ -468,10 +472,11 @@ class MenuBar extends React.Component {
                                 </a>
                                 <div className={classNames(styles.menuBarItem)}>
                                     <AccountNav
+                                        isOpen={this.props.accountNavOpen}
                                         isRtl={this.props.isRtl}
+                                        onClickAccountNav={this.props.onClickAccountNav}
                                         onCloseAccountNav={this.props.onCloseAccountNav}
                                         onLogOut={this.props.onLogOut}
-                                        onOpenAccountNav={this.props.onOpenAccountNav}
                                     />
                                 </div>
                             </React.Fragment>
@@ -495,17 +500,22 @@ class MenuBar extends React.Component {
                                 </div>
                                 <div
                                     className={classNames(
-                                        'ignore-react-onclickoutside',
                                         styles.menuBarItem,
                                         styles.hoverable
                                     )}
                                     key="login"
-                                    onMouseUp={this.props.onToggleLoginOpen}
+                                    onMouseUp={this.props.onClickLogin}
                                 >
                                     <FormattedMessage
                                         defaultMessage="Sign in"
                                         description="Link for signing in to your Scratch account"
                                         id="gui.menuBar.signIn"
+                                    />
+                                    <LoginDropdown
+                                        isOpen={this.props.loginMenuOpen}
+                                        isRtl={this.props.isRtl}
+                                        renderLogin={this.props.renderLogin}
+                                        onClose={this.props.onRequestCloseLogin}
                                     />
                                 </div>
                             </React.Fragment>
@@ -560,6 +570,7 @@ class MenuBar extends React.Component {
 }
 
 MenuBar.propTypes = {
+    accountNavOpen: PropTypes.bool,
     canUpdateProject: PropTypes.bool,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
@@ -567,27 +578,24 @@ MenuBar.propTypes = {
     intl: intlShape,
     isRtl: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
+    loginMenuOpen: PropTypes.bool,
+    onClickAccountNav: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
-    onClickLogout: PropTypes.func,
+    onClickLogin: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
-    onCloseCanceledDeletion: PropTypes.func,
-    onCloseLogin: PropTypes.func,
-    onCloseRegistration: PropTypes.func,
-    onCompleteRegistration: PropTypes.func,
-    onLogIn: PropTypes.func,
     onLogOut: PropTypes.func,
-    onOpenAccountNav: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
+    onRequestCloseLogin: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    registrationOpen: PropTypes.bool,
+    renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     username: PropTypes.string
 };
@@ -598,6 +606,7 @@ const mapStateToProps = state => ({
     editMenuOpen: editMenuOpen(state),
     isRtl: state.locales.isRtl,
     languageMenuOpen: languageMenuOpen(state),
+    loginMenuOpen: loginMenuOpen(state),
     sessionExists: state.session && typeof state.session.session !== 'undefined',
     username: state.session && state.session.session && state.session.session.user ?
         state.session.session.user.username : null
@@ -611,6 +620,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
     onClickLanguage: () => dispatch(openLanguageMenu()),
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
+    onClickLogin: () => dispatch(openLoginMenu()),
+    onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

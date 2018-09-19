@@ -16,38 +16,38 @@ import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import styles from './account-nav.css';
 
 const AccountNav = ({
-    accountNavOpen,
     classroomId,
     isEducator,
+    isOpen,
     isRtl,
     isStudent,
-    onOpenAccountNav,
+    onClickAccountNav,
     onCloseAccountNav,
     onLogOut,
     profileUrl,
-    // thumbnailUrl, // not currently needed
+    thumbnailUrl, // not currently needed
     username
 }) => (
     <div className="account-nav">
         <a
             className={classNames(
                 styles.userInfo,
-                {[styles.open]: accountNavOpen}
+                {[styles.open]: isOpen}
             )}
-            onClick={accountNavOpen ? onCloseAccountNav : onOpenAccountNav}
+            onClick={onClickAccountNav}
         >
-            {/* thumbnail image currently disabled
+            {thumbnailUrl ? (
                 <img
                     className={styles.avatar}
                     src={thumbnailUrl}
                 />
-            */}
+            ) : []}
             <span className="profile-name">
                 {username}
             </span>
         </a>
         <MenuBarMenu
-            open={accountNavOpen}
+            open={isOpen}
             // note: the Rtl styles are switched here, because this menu is justified
             // opposite all the others
             place={isRtl ? 'right' : 'left'}
@@ -82,27 +82,28 @@ const AccountNav = ({
 );
 
 AccountNav.propTypes = {
-    accountNavOpen: PropTypes.bool,
     classroomId: PropTypes.string,
     isEducator: PropTypes.bool,
+    isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
+    onClickAccountNav: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
     onLogOut: PropTypes.func,
-    onOpenAccountNav: PropTypes.func,
     profileUrl: PropTypes.string,
-    // thumbnailUrl: PropTypes.string, // not currently needed
+    thumbnailUrl: PropTypes.string, // not currently needed
     username: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-    accountNavOpen: state.session && state.session.accountNavOpen,
     classroomId: state.session && state.session.session && state.session.session.user ?
         state.session.session.user.classroomId : '',
     isEducator: state.session && state.session.permissions && state.session.permissions.educator,
     isStudent: state.session && state.session.permissions && state.session.permissions.student,
     profileUrl: state.session && state.session.session && state.session.session.user ?
         `/users/${state.session.session.user.username}` : '',
+    thumbnailUrl: state.session && state.session.session && state.session.session.user ?
+        state.session.session.user.thumbnailUrl : null,
     username: state.session && state.session.session && state.session.session.user ?
         state.session.session.user.username : ''
 });

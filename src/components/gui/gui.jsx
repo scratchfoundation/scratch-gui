@@ -52,6 +52,7 @@ let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        accountNavOpen,
         activeTabIndex,
         basePath,
         backdropLibraryVisible,
@@ -67,13 +68,9 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         loading,
-        onOpenAccountNav,
+        renderLogin,
+        onClickAccountNav,
         onCloseAccountNav,
-        onCloseCanceledDeletion,
-        onCloseLogin,
-        onCloseRegistration,
-        onCompleteRegistration,
-        onLogIn,
         onLogOut,
         onOpenRegistration,
         onToggleLoginOpen,
@@ -156,16 +153,12 @@ const GUIComponent = props => {
                     />
                 ) : null}
                 <MenuBar
+                    accountNavOpen={accountNavOpen}
                     enableCommunity={enableCommunity}
-                    onClickLogout={onLogOut}
+                    renderLogin={renderLogin}
+                    onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
-                    onCloseCanceledDeletion={onCloseCanceledDeletion}
-                    onCloseLogin={onCloseLogin}
-                    onCloseRegistration={onCloseRegistration}
-                    onCompleteRegistration={onCompleteRegistration}
-                    onLogIn={onLogIn}
                     onLogOut={onLogOut}
-                    onOpenAccountNav={onOpenAccountNav}
                     onOpenRegistration={onOpenRegistration}
                     onSeeCommunity={onSeeCommunity}
                     onToggleLoginOpen={onToggleLoginOpen}
@@ -291,6 +284,7 @@ const GUIComponent = props => {
 };
 
 GUIComponent.propTypes = {
+    accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
@@ -312,15 +306,10 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickAccountNav: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
-    onCloseCanceledDeletion: PropTypes.func,
-    onCloseLogin: PropTypes.func,
-    onCloseRegistration: PropTypes.func,
-    onCompleteRegistration: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
-    onLogIn: PropTypes.func,
     onLogOut: PropTypes.func,
-    onOpenAccountNav: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
@@ -329,6 +318,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
+    renderLogin: PropTypes.func,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,

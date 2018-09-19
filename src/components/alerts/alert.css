@@ -1,54 +1,29 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
+@import "../gui/gui.css";
 
-.alert-container {
-    position:absolute;
-    z-index: $z-index-alert;
-    top: 53px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: 1px solid #FF8C1A;
-    border-radius: 8px;
+.alert {
+    width: 100%;
     background: #FFF0DF;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 448px;
+    overflow: hidden;
+    align-items: left;
+    border: 1px solid #FF8C1A;
+    border-radius: 8px;
     padding: 12px;
-    font-size: 10pt;
     box-shadow: 2px 2px 2px 2px rgba(255, 140, 26, 0.25);
 }
 
-.alert {
+.alert-message {
     color: #555;
-    z-index: 20;
-    overflow: hidden;
-    align-items: left;
-    width: 100%;
     font-weight: bold;
     font-size: 12px;
     line-height: 22pt;
+    width: 100%;
 }
 
-.button {
-    cursor: pointer;
-    background-color: #FF8C1A;
-    color: white;
-    border-radius: 5px;
-    line-height: 14pt;
-    padding: 5px 15px;
-    margin-right: 16px;
-    letter-spacing: 1px;
-    font-size: 11px;
-}
-
-.remove-button {
-    cursor: pointer;
+.alert-remove-button {
     color: #FF8C1A;
-    align-items: center;
-    font-weight: bold;
-    line-height: 22pt;
 }

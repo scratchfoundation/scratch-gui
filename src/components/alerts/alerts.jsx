@@ -1,26 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '../box/box.jsx';
+import Button from '../button/button.jsx';
 
 import styles from './alert.css';
 
-// this is a functional component, declared with arrow syntax
 const Alerts = props => (
     <Box
         bounds="parent"
+        className={styles.alertsContainer}
     >
-        <div className={styles.alertContainer}>
-            <div className={styles.alert}>
+        <Box
+            className={styles.alert}
+        >
+            <div className={styles.alertMessage}>
                 {props.message}
             </div>
-            <div
-                className={styles.removeButton}
+            <Button
+                className={styles.alertRemoveButton}
                 onClick={props.onCloseAlert}
             >
                 { /* eslint-disable react/jsx-no-literals */ }
                 x
-            </div>
-        </div>
+            </Button>
+        </Box>
     </Box>
 );
 

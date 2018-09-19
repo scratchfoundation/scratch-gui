@@ -1,9 +1,8 @@
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
-const ON_RECONNECT = 'scratch-gui/alerts/ON_RECONNECT';
 
 const initialState = {
-    message: 'Alert',
+    message: '',
     visible: false
 };
 
@@ -16,10 +15,6 @@ const reducer = function (state, action) {
             message: action.message
         });
     case CLOSE_ALERT:
-        return Object.assign({}, state, {
-            visible: false
-        });
-    case ON_RECONNECT:
         return Object.assign({}, state, {
             visible: false
         });
@@ -39,14 +34,9 @@ const showAlert = function (message) {
     };
 };
 
-const onReconnect = function () {
-    return {type: ON_RECONNECT};
-};
-
 export {
     reducer as default,
     initialState as alertsInitialState,
     closeAlert,
-    showAlert,
-    onReconnect
+    showAlert
 };

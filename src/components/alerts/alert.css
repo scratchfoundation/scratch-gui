@@ -1,7 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
-@import "../gui/gui.css";
 
 .alert {
     width: 100%;

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '../box/box.jsx';
@@ -5,20 +6,24 @@ import Button from '../button/button.jsx';
 
 import styles from './alert.css';
 
-const Alerts = props => (
+const Alerts = ({
+    className,
+    message,
+    onCloseAlert
+}) => (
     <Box
         bounds="parent"
-        className={styles.alertsContainer}
+        className={classNames(styles.alertsContainer, className)}
     >
         <Box
             className={styles.alert}
         >
             <div className={styles.alertMessage}>
-                {props.message}
+                {message}
             </div>
             <Button
                 className={styles.alertRemoveButton}
-                onClick={props.onCloseAlert}
+                onClick={onCloseAlert}
             >
                 { /* eslint-disable react/jsx-no-literals */ }
                 x
@@ -28,6 +33,7 @@ const Alerts = props => (
 );
 
 Alerts.propTypes = {
+    className: PropTypes.string,
     message: PropTypes.string.isRequired,
     onCloseAlert: PropTypes.func.isRequired
 };

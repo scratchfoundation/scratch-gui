@@ -52,9 +52,9 @@ class Stage extends React.Component {
             colorInfo: null,
             question: null
         };
-        if (this.props.vm.runtime.renderer) {
-            this.renderer = this.props.vm.runtime.renderer;
-            this.canvas = this.props.vm.runtime.renderer._gl.canvas;
+        if (this.props.vm.renderer) {
+            this.renderer = this.props.vm.renderer;
+            this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);

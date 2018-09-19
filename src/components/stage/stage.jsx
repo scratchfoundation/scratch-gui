@@ -86,7 +86,7 @@ const StageComponent = props => {
                         </div>
                     </div>
                 )}
-                {micIndicator || true ? (
+                {micIndicator ? (
                     <div
                         className={styles.micIndicatorWrapper}
                         style={{

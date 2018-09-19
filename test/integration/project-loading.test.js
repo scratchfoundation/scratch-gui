@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    clickVisibleByXpath,
     findByXpath,
     getDriver,
     getLogs,
@@ -73,7 +74,7 @@ describe('Loading scratch gui', () => {
             await loadUri(`${uri}#${projectId}`);
             await clickXpath('//button[@title="Try It"]');
             await new Promise(resolve => setTimeout(resolve, 3000));
-            await clickXpath('//img[@title="Go"]');
+            await clickVisibleByXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');
             const logs = await getLogs();

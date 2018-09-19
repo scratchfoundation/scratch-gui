@@ -14,6 +14,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'clickVisibleByXpath',
             'findByText',
             'findByXpath',
             'getDriver',
@@ -94,6 +95,10 @@ class SeleniumHelper {
 
     clickXpath (xpath) {
         return this.findByXpath(xpath).then(el => el.click());
+    }
+
+    clickVisibleByXpath (xpath) {
+        return this.driver.wait(until.elementIsVisible(this.findByXpath(xpath))).then(el => el.click());
     }
 
     clickText (text, scope) {

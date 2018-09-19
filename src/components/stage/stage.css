@@ -117,7 +117,6 @@ to adjust for the border using a different method */
 
 .mic-indicator {
     position: absolute;
-    width: 82px;
     bottom: 0;
     right: 0;
     transform-origin: bottom right;

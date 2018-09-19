@@ -21,7 +21,7 @@ const MicIndicatorComponent = props => (
         style={stageSizeToTransform(props.stageSize)}
     >
         <img
-            className={styles.micAnimation}
+            className={styles.micImg}
             src={micIcon}
         />
     </div>

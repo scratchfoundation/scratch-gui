@@ -3,7 +3,8 @@
     to {transform: scale(1)}
 }
 
-.mic-animation {
+.mic-img {
+    margin: 10px;
     transform-origin: center;
     animation: popIn 0.1s ease-in-out;
 }

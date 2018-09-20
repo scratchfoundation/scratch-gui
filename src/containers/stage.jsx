@@ -71,7 +71,7 @@ class Stage extends React.Component {
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
-        this.props.vm.runtime.addListener('UPDATE_MIC_INDICATOR', this.updateMicIndicator);
+        this.props.vm.runtime.addListener('MIC_LISTENING', this.updateMicIndicator);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
@@ -95,7 +95,7 @@ class Stage extends React.Component {
         this.detachRectEvents();
         this.stopColorPickingLoop();
         this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
-        this.props.vm.runtime.removeListener('UPDATE_MIC_INDICATOR', this.updateMicIndicator);
+        this.props.vm.runtime.removeListener('MIC_LISTENING', this.updateMicIndicator);
     }
     questionListener (question) {
         this.setState({question: question});

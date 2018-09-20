@@ -2,29 +2,37 @@ const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 
 const initialState = {
-    message: '',
-    visible: false
+    visible: true,
+    alertsList: []
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SHOW_ALERT:
+    case SHOW_ALERT: {
+        const newList = state.alertsList.slice();
+        newList.push({message: action.message});
         return Object.assign({}, state, {
-            visible: true,
-            message: action.message
+            alertsList: newList
         });
-    case CLOSE_ALERT:
+    }
+    case CLOSE_ALERT: {
+        const newList = state.alertsList.slice();
+        newList.splice(action.index, 1);
         return Object.assign({}, state, {
-            visible: false
+            alertsList: newList
         });
+    }
     default:
         return state;
     }
 };
 
-const closeAlert = function () {
-    return {type: CLOSE_ALERT};
+const closeAlert = function (index) {
+    return {
+        type: CLOSE_ALERT,
+        index
+    };
 };
 
 const showAlert = function (message) {

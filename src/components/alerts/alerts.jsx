@@ -8,33 +8,36 @@ import styles from './alert.css';
 
 const Alerts = ({
     className,
-    message,
+    alertsList,
     onCloseAlert
 }) => (
     <Box
         bounds="parent"
         className={classNames(className)}
     >
-        <Box
-            className={styles.alert}
-        >
-            <div className={styles.alertMessage}>
-                {message}
-            </div>
-            <Button
-                className={styles.alertRemoveButton}
-                onClick={onCloseAlert}
+        {alertsList.map((a, index) => (
+            <Box
+                className={styles.alert}
+                key={index}
             >
-                { /* eslint-disable react/jsx-no-literals */ }
-                x
-            </Button>
-        </Box>
+                <div className={styles.alertMessage}>
+                    {a.message}
+                </div>
+                <Button
+                    className={styles.alertRemoveButton}
+                    onClick={() => onCloseAlert(index)}
+                >
+                    { /* eslint-disable react/jsx-no-literals */ }
+                    x
+                </Button>
+            </Box>
+        ))}
     </Box>
 );
 
 Alerts.propTypes = {
+    alertsList: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
-    message: PropTypes.string.isRequired,
     onCloseAlert: PropTypes.func.isRequired
 };
 

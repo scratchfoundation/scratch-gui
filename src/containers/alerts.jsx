@@ -9,12 +9,13 @@ import AlertsComponent from '../components/alerts/alerts.jsx';
 
 const mapStateToProps = state => ({
     visible: state.scratchGui.alerts.visible,
-    message: state.scratchGui.alerts.message
+    message: state.scratchGui.alerts.message,
+    alertsList: state.scratchGui.alerts.alertsList
 });
 
 const mapDispatchToProps = dispatch => ({
     onShowAlert: () => dispatch(showAlert()),
-    onCloseAlert: () => dispatch(closeAlert())
+    onCloseAlert: index => dispatch(closeAlert(index))
 });
 
 export default connect(

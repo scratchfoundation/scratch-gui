@@ -41,8 +41,7 @@ class Stage extends React.Component {
             'setDragCanvas',
             'clearDragCanvas',
             'drawDragCanvas',
-            'positionDragCanvas',
-            'updateMicIndicator'
+            'positionDragCanvas'
         ]);
         this.state = {
             mouseDownTimeoutId: null,
@@ -51,8 +50,7 @@ class Stage extends React.Component {
             dragOffset: null,
             dragId: null,
             colorInfo: null,
-            question: null,
-            micIndicator: false
+            question: null
         };
         if (this.props.vm.renderer) {
             this.renderer = this.props.vm.renderer;
@@ -71,7 +69,6 @@ class Stage extends React.Component {
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
-        this.props.vm.runtime.addListener('MIC_LISTENING', this.updateMicIndicator);
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
@@ -79,7 +76,7 @@ class Stage extends React.Component {
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
-            this.state.micIndicator !== nextState.micIndicator;
+            this.props.micIndicator !== nextProps.micIndicator;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -95,7 +92,6 @@ class Stage extends React.Component {
         this.detachRectEvents();
         this.stopColorPickingLoop();
         this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
-        this.props.vm.runtime.removeListener('MIC_LISTENING', this.updateMicIndicator);
     }
     questionListener (question) {
         this.setState({question: question});
@@ -112,9 +108,6 @@ class Stage extends React.Component {
     }
     stopColorPickingLoop () {
         clearInterval(this.intervalId);
-    }
-    updateMicIndicator (micIndicatorVisible) {
-        this.setState({micIndicator: micIndicatorVisible});
     }
     attachMouseEvents (canvas) {
         document.addEventListener('mousemove', this.onMouseMove);
@@ -377,6 +370,7 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
+            micIndicator,
             ...props
         } = this.props;
         return (
@@ -384,7 +378,7 @@ class Stage extends React.Component {
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
                 dragRef={this.setDragCanvas}
-                micIndicator={this.state.micIndicator}
+                micIndicator={micIndicator}
                 question={this.state.question}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}
@@ -411,6 +405,7 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     isFullScreen: state.scratchGui.mode.isFullScreen,
+    micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
 });

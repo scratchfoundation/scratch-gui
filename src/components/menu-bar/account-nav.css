@@ -1,46 +1,61 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-a.user-info {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  padding: 0 0.95rem;
-  max-width: 260px;
-  height: $menu-bar-height;
-  overflow: hidden;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: $ui-white;
-  font-size: .8125rem;
-  font-weight: normal;
+.user-info {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 0 0.95rem;
+    max-width: 260px;
+    height: $menu-bar-height;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $ui-white;
+    font-size: .75rem;
+    font-weight: normal;
 }
 
-a.open, a:hover {
-  background-color: $ui-black-transparent;
+[dir="ltr"] .user-info .avatar {
+    margin-right: calc($space * .8125);
 }
 
-a.user-info .avatar {
-  margin: 0 calc($space * .5);
-  width: 2rem;
-  border-radius: $form-radius;
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
+[dir="rtl"] .user-info .avatar {
+    margin-left: calc($space * .8125);
 }
 
-a.user-info::after {
+.user-info .avatar {
+    margin-right: calc($space * .8125);
+    border-radius: $form-radius;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+}
+
+[dir="ltr"] .user-info .dropdown-caret-position {
+  margin-left: calc($space * .8125);
+}
+
+[dir="rtl"] .user-info .dropdown-caret-position {
+  margin-right: calc($space * .8125);
+}
+
+.user-info .dropdown-caret-position {
   display: inline-block;
-  margin-left: 8px;
-  background-image: url("/images/dropdown.png");
-  background-repeat: no-repeat;
+  padding-bottom: .125rem;
+  /* background-image: url("/images/dropdown.png"); */
+  /* background-repeat: no-repeat;
   background-position: center center;
-  background-size: 50%;
-  width: 20px;
-  height: 20px;
+  background-size: 50%; */
+  /* width: 1.125rem;
+  height: 1.125rem; */
   vertical-align: middle;
-  content: " ";
+}
+
+.user-info .dropdown-caret-icon {
+    /* width: 0.5rem;
+    height: 0.5rem; */
 }

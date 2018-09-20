@@ -139,14 +139,13 @@
     opacity: 0.5;
 }
 
-.account-info-wrapper {
+.account-info-group {
     display: flex;
     flex-direction: row;
-    padding: 0 0 0 .5rem;
     align-items: center;
 }
 
-.account-info-wrapper .menu-bar-item {
+.account-info-group .menu-bar-item {
     padding: 0 0.75rem;
 }
 

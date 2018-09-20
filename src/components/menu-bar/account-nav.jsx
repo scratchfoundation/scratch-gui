@@ -5,56 +5,64 @@ eventually be consolidated.
 */
 
 import classNames from 'classnames';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
 
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuSection} from '../menu/menu.jsx';
 import MenuItemContainer from '../../containers/menu-item.jsx';
+import dropdownCaret from './dropdown-caret.svg';
 
 import styles from './account-nav.css';
 
-const AccountNav = ({
+const AccountNavComponent = ({
+    className,
     classroomId,
     isEducator,
     isOpen,
     isRtl,
     isStudent,
     menuBarMenuClassName,
-    onClickAccountNav,
-    onCloseAccountNav,
+    onClick,
+    onClose,
     onLogOut,
     profileUrl,
-    thumbnailUrl, // not currently needed
+    thumbnailUrl,
     username
 }) => (
-    <div className="account-nav">
-        <a
+    <React.Fragment>
+        <div
             className={classNames(
                 styles.userInfo,
-                {[styles.open]: isOpen}
+                className
             )}
-            onClick={onClickAccountNav}
+            // className={className}
+            onMouseUp={onClick}
         >
             {thumbnailUrl ? (
                 <img
                     className={styles.avatar}
                     src={thumbnailUrl}
                 />
-            ) : []}
-            <span className="profile-name">
+            ) : null}
+            <span className={styles.profileName}>
                 {username}
             </span>
-        </a>
+            <div className={styles.dropdownCaretPosition}>
+                <img
+                    className={styles.dropdownCaretIcon}
+                    src={dropdownCaret}
+                />
+            </div>
+        </div>
         <MenuBarMenu
             className={menuBarMenuClassName}
             open={isOpen}
             // note: the Rtl styles are switched here, because this menu is justified
             // opposite all the others
             place={isRtl ? 'right' : 'left'}
-            onRequestClose={onCloseAccountNav}
+            onRequestClose={onClose}
         >
             <MenuItemContainer href={profileUrl}>
                 <FormattedMessage id="general.profile" />
@@ -81,40 +89,23 @@ const AccountNav = ({
                 </MenuItemContainer>
             </MenuSection>
         </MenuBarMenu>
-    </div>
+    </React.Fragment>
 );
 
-AccountNav.propTypes = {
+AccountNavComponent.propTypes = {
+    className: PropTypes.string,
     classroomId: PropTypes.string,
     isEducator: PropTypes.bool,
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
     menuBarMenuClassName: PropTypes.string,
-    onClickAccountNav: PropTypes.func,
-    onCloseAccountNav: PropTypes.func,
+    onClick: PropTypes.func,
+    onClose: PropTypes.func,
     onLogOut: PropTypes.func,
     profileUrl: PropTypes.string,
-    thumbnailUrl: PropTypes.string, // not currently needed
+    thumbnailUrl: PropTypes.string,
     username: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    classroomId: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.classroomId : '',
-    isEducator: state.session && state.session.permissions && state.session.permissions.educator,
-    isStudent: state.session && state.session.permissions && state.session.permissions.student,
-    profileUrl: state.session && state.session.session && state.session.session.user ?
-        `/users/${state.session.session.user.username}` : '',
-    thumbnailUrl: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.thumbnailUrl : null,
-    username: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.username : ''
-});
-
-const mapDispatchToProps = () => ({});
-
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AccountNav));
+export default AccountNavComponent;

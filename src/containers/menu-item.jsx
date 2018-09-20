@@ -2,9 +2,9 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {MenuItem} from '../components/menu/menu.jsx';
+import {MenuItem as MenuItemComponent} from '../components/menu/menu.jsx';
 
-class MenuItemContainer extends React.Component {
+class MenuItem extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -22,17 +22,17 @@ class MenuItemContainer extends React.Component {
         } = this.props;
         const clickAction = onClick ? onClick : this.navigateToHref;
         return (
-            <MenuItem
+            <MenuItemComponent
                 className={className}
                 onClick={clickAction}
             >
                 {children}
-            </MenuItem>
+            </MenuItemComponent>
         );
     }
 }
 
-MenuItemContainer.propTypes = {
+MenuItem.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     // can take an onClick prop, or take an href and build an onClick handler
@@ -40,4 +40,4 @@ MenuItemContainer.propTypes = {
     onClick: PropTypes.func
 };
 
-export default MenuItemContainer;
+export default MenuItem;

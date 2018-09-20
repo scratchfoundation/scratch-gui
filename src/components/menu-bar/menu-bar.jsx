@@ -14,7 +14,7 @@ import ProjectLoader from '../../containers/project-loader.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
-import AccountNav from './account-nav.jsx';
+import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
@@ -23,6 +23,9 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
+    openAccountMenu,
+    closeAccountMenu,
+    accountMenuOpen,
     openFileMenu,
     closeFileMenu,
     fileMenuOpen,
@@ -44,7 +47,7 @@ import mystuffIcon from './icon--mystuff.png';
 import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
 import communityIcon from './icon--see-community.svg';
-import dropdownCaret from '../language-selector/dropdown-caret.svg';
+import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
@@ -451,7 +454,7 @@ class MenuBar extends React.Component {
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
-                <div className={styles.accountInfoWrapper}>
+                <div className={styles.accountInfoGroup}>
                     {this.props.sessionExists ? (
                         this.props.username ? (
                             // ************ user is logged in ************
@@ -470,16 +473,19 @@ class MenuBar extends React.Component {
                                         />
                                     </div>
                                 </a>
-                                <div className={classNames(styles.menuBarItem)}>
-                                    <AccountNav
-                                        isOpen={this.props.accountNavOpen}
-                                        isRtl={this.props.isRtl}
-                                        menuBarMenuClassName={classNames(styles.menuBarMenu)}
-                                        onClickAccountNav={this.props.onClickAccountNav}
-                                        onCloseAccountNav={this.props.onCloseAccountNav}
-                                        onLogOut={this.props.onLogOut}
-                                    />
-                                </div>
+                                <AccountNav
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable,
+                                        {[styles.active]: this.props.accountMenuOpen}
+                                    )}
+                                    isOpen={this.props.accountMenuOpen}
+                                    isRtl={this.props.isRtl}
+                                    menuBarMenuClassName={classNames(styles.menuBarMenu)}
+                                    onClick={this.props.onClickAccount}
+                                    onClose={this.props.onRequestCloseAccount}
+                                    onLogOut={this.props.onLogOut}
+                                />
                             </React.Fragment>
                         ) : (
                             // ********* user not logged in, but a session exists
@@ -572,7 +578,7 @@ class MenuBar extends React.Component {
 }
 
 MenuBar.propTypes = {
-    accountNavOpen: PropTypes.bool,
+    accountMenuOpen: PropTypes.bool,
     canUpdateProject: PropTypes.bool,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
@@ -581,15 +587,15 @@ MenuBar.propTypes = {
     isRtl: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
-    onClickAccountNav: PropTypes.func,
+    onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
-    onCloseAccountNav: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
+    onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
@@ -604,6 +610,7 @@ MenuBar.propTypes = {
 
 const mapStateToProps = state => ({
     canUpdateProject: typeof (state.session && state.session.session && state.session.session.user) !== 'undefined',
+    accountMenuOpen: accountMenuOpen(state),
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),
     isRtl: state.locales.isRtl,
@@ -616,6 +623,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
+    onClickAccount: () => dispatch(openAccountMenu()),
+    onRequestCloseAccount: () => dispatch(closeAccountMenu()),
     onClickFile: () => dispatch(openFileMenu()),
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),

@@ -11,7 +11,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import MenuBarMenu from './menu-bar-menu.jsx';
-import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import {MenuSection} from '../menu/menu.jsx';
+import MenuItemContainer from '../../containers/menu-item.jsx';
 
 import styles from './account-nav.css';
 
@@ -21,7 +22,7 @@ const AccountNav = ({
     isOpen,
     isRtl,
     isStudent,
-    menuBarMenuclassName,
+    menuBarMenuClassName,
     onClickAccountNav,
     onCloseAccountNav,
     onLogOut,
@@ -48,36 +49,36 @@ const AccountNav = ({
             </span>
         </a>
         <MenuBarMenu
-            className={menuBarMenuclassName}
+            className={menuBarMenuClassName}
             open={isOpen}
             // note: the Rtl styles are switched here, because this menu is justified
             // opposite all the others
             place={isRtl ? 'right' : 'left'}
             onRequestClose={onCloseAccountNav}
         >
-            <MenuItem href={profileUrl}>
+            <MenuItemContainer href={profileUrl}>
                 <FormattedMessage id="general.profile" />
-            </MenuItem>
-            <MenuItem href="/mystuff/">
+            </MenuItemContainer>
+            <MenuItemContainer href="/mystuff/">
                 <FormattedMessage id="general.myStuff" />
-            </MenuItem>
+            </MenuItemContainer>
             {isEducator ? (
-                <MenuItem href="/educators/classes/">
+                <MenuItemContainer href="/educators/classes/">
                     <FormattedMessage id="general.myClasses" />
-                </MenuItem>
+                </MenuItemContainer>
             ) : null}
             {isStudent ? (
-                <MenuItem href={`/classes/${classroomId}/`}>
+                <MenuItemContainer href={`/classes/${classroomId}/`}>
                     <FormattedMessage id="general.myClass" />
-                </MenuItem>
+                </MenuItemContainer>
             ) : null}
-            <MenuItem href="/accounts/settings/">
+            <MenuItemContainer href="/accounts/settings/">
                 <FormattedMessage id="general.accountSettings" />
-            </MenuItem>
+            </MenuItemContainer>
             <MenuSection>
-                <MenuItem onClick={onLogOut}>
+                <MenuItemContainer onClick={onLogOut}>
                     <FormattedMessage id="navigation.signOut" />
-                </MenuItem>
+                </MenuItemContainer>
             </MenuSection>
         </MenuBarMenu>
     </div>
@@ -89,7 +90,7 @@ AccountNav.propTypes = {
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
-    menuBarMenuclassName: PropTypes.string,
+    menuBarMenuClassName: PropTypes.string,
     onClickAccountNav: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
     onLogOut: PropTypes.func,

@@ -13,7 +13,7 @@ const Alerts = ({
 }) => (
     <Box
         bounds="parent"
-        className={classNames(styles.alertsContainer, className)}
+        className={classNames(className)}
     >
         <Box
             className={styles.alert}

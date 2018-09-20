@@ -118,10 +118,18 @@ to adjust for the border using a different method */
 .mic-indicator {
     position: absolute;
     bottom: 0;
-    right: 0;
-    transform-origin: bottom right;
     z-index: $z-index-stage-indicator;
     pointer-events: none;
+}
+
+[dir="ltr"] .mic-indicator {
+    transform-origin: bottom right;
+    right: 0;
+}
+
+[dir="rtl"] .mic-indicator {
+    transform-origin: bottom left;
+    left: 0;
 }
 
 /* offset for the mic indicator when a question is showing */

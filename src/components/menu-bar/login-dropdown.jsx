@@ -13,12 +13,14 @@ import MenuBarMenu from './menu-bar-menu.jsx';
 import styles from './login-dropdown.css';
 
 const LoginDropdown = ({
+    className,
     isOpen,
     isRtl,
     onClose,
     renderLogin
 }) => (
     <MenuBarMenu
+        className={className}
         open={isOpen}
         // note: the Rtl styles are switched here, because this menu is justified
         // opposite all the others
@@ -38,6 +40,7 @@ const LoginDropdown = ({
 );
 
 LoginDropdown.propTypes = {
+    className: PropTypes.string,
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     onClose: PropTypes.func,

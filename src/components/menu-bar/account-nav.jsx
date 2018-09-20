@@ -21,6 +21,7 @@ const AccountNav = ({
     isOpen,
     isRtl,
     isStudent,
+    menuBarMenuclassName,
     onClickAccountNav,
     onCloseAccountNav,
     onLogOut,
@@ -47,6 +48,7 @@ const AccountNav = ({
             </span>
         </a>
         <MenuBarMenu
+            className={menuBarMenuclassName}
             open={isOpen}
             // note: the Rtl styles are switched here, because this menu is justified
             // opposite all the others
@@ -63,12 +65,12 @@ const AccountNav = ({
                 <MenuItem href="/educators/classes/">
                     <FormattedMessage id="general.myClasses" />
                 </MenuItem>
-            ) : []}
+            ) : null}
             {isStudent ? (
                 <MenuItem href={`/classes/${classroomId}/`}>
                     <FormattedMessage id="general.myClass" />
                 </MenuItem>
-            ) : []}
+            ) : null}
             <MenuItem href="/accounts/settings/">
                 <FormattedMessage id="general.accountSettings" />
             </MenuItem>
@@ -87,6 +89,7 @@ AccountNav.propTypes = {
     isOpen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isStudent: PropTypes.bool,
+    menuBarMenuclassName: PropTypes.string,
     onClickAccountNav: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
     onLogOut: PropTypes.func,

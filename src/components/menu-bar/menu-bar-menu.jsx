@@ -2,26 +2,29 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Menu from '../../containers/menu.jsx';
 
-import styles from './menu-bar-menu.css';
+// import styles from './menu-bar-menu.css';
 
 const MenuBarMenu = ({
     children,
+    className,
     onRequestClose,
     open,
     place = 'right'
 }) => (
-    <Menu
-        className={styles.menuBarMenu}
-        open={open}
-        place={place}
-        onRequestClose={onRequestClose}
-    >
-        {children}
-    </Menu>
+    <div className={className}>
+        <Menu
+            open={open}
+            place={place}
+            onRequestClose={onRequestClose}
+        >
+            {children}
+        </Menu>
+    </div>
 );
 
 MenuBarMenu.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     onRequestClose: PropTypes.func,
     open: PropTypes.bool,
     place: PropTypes.oneOf(['left', 'right'])

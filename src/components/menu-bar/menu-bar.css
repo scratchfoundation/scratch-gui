@@ -100,6 +100,11 @@
     padding: 0 0.75rem;
 }
 
+.menu-bar-menu {
+    margin-top: $menu-bar-height;
+    z-index: $z-index-menu-bar;
+}
+
 .feedback-link {
     color: $motion-primary;
     text-decoration: none;

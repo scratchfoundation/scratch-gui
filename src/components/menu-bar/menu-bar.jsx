@@ -236,14 +236,13 @@ class MenuBar extends React.Component {
                             })}
                             onMouseUp={this.props.onClickFile}
                         >
-                            <div className={classNames(styles.fileMenu)}>
-                                <FormattedMessage
-                                    defaultMessage="File"
-                                    description="Text for file dropdown menu"
-                                    id="gui.menuBar.file"
-                                />
-                            </div>
+                            <FormattedMessage
+                                defaultMessage="File"
+                                description="Text for file dropdown menu"
+                                id="gui.menuBar.file"
+                            />
                             <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
                                 open={this.props.fileMenuOpen}
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
@@ -330,6 +329,7 @@ class MenuBar extends React.Component {
                                 />
                             </div>
                             <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
                                 open={this.props.editMenuOpen}
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseEdit}
@@ -474,6 +474,7 @@ class MenuBar extends React.Component {
                                     <AccountNav
                                         isOpen={this.props.accountNavOpen}
                                         isRtl={this.props.isRtl}
+                                        menuBarMenuClassName={classNames(styles.menuBarMenu)}
                                         onClickAccountNav={this.props.onClickAccountNav}
                                         onCloseAccountNav={this.props.onCloseAccountNav}
                                         onLogOut={this.props.onLogOut}
@@ -512,6 +513,7 @@ class MenuBar extends React.Component {
                                         id="gui.menuBar.signIn"
                                     />
                                     <LoginDropdown
+                                        className={classNames(styles.menuBarMenu)}
                                         isOpen={this.props.loginMenuOpen}
                                         isRtl={this.props.isRtl}
                                         renderLogin={this.props.renderLogin}

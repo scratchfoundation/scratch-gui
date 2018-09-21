@@ -9,7 +9,6 @@ import AlertsComponent from '../components/alerts/alerts.jsx';
 
 const mapStateToProps = state => ({
     visible: state.scratchGui.alerts.visible,
-    message: state.scratchGui.alerts.message,
     alertsList: state.scratchGui.alerts.alertsList
 });
 

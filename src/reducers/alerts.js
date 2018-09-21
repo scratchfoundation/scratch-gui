@@ -1,3 +1,5 @@
+import extensionData from '../lib/libraries/extensions/index.jsx';
+
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 
@@ -11,7 +13,14 @@ const reducer = function (state, action) {
     switch (action.type) {
     case SHOW_ALERT: {
         const newList = state.alertsList.slice();
-        newList.push({message: action.message});
+        const newAlert = {message: action.data.message};
+        if (action.data.extensionId) {
+            const extension = extensionData.find(ext => ext.extensionId === action.data.extensionId);
+            if (extension && extension.smallPeripheralImage) {
+                newAlert.iconURL = extension.smallPeripheralImage;
+            }
+        }
+        newList.push(newAlert);
         return Object.assign({}, state, {
             alertsList: newList
         });
@@ -35,10 +44,10 @@ const closeAlert = function (index) {
     };
 };
 
-const showAlert = function (message) {
+const showAlert = function (data) {
     return {
         type: SHOW_ALERT,
-        message
+        data
     };
 };
 

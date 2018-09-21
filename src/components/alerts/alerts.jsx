@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 
@@ -21,6 +22,9 @@ const Alerts = ({
                 key={index}
             >
                 <div className={styles.alertMessage}>
+                    <img
+                        src={a.iconURL}
+                    />
                     {a.message}
                 </div>
                 <Button

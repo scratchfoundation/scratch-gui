@@ -22,10 +22,7 @@ const Alerts = ({
                 key={index}
             >
                 <div className={styles.alertMessage}>
-                    <img
-                        src={a.iconURL}
-                    />
-                    {a.message}
+                    <img className={styles.alertIcon} src={a.iconURL} /> {a.message} {a.name}.
                 </div>
                 <Button
                     className={styles.alertRemoveButton}

@@ -16,6 +16,9 @@ const reducer = function (state, action) {
         const newAlert = {message: action.data.message};
         if (action.data.extensionId) {
             const extension = extensionData.find(ext => ext.extensionId === action.data.extensionId);
+            if (extension && extension.name) {
+                newAlert.name = extension.name;
+            }
             if (extension && extension.smallPeripheralImage) {
                 newAlert.iconURL = extension.smallPeripheralImage;
             }

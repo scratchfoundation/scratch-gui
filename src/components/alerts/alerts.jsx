@@ -8,8 +8,8 @@ import Button from '../button/button.jsx';
 import styles from './alert.css';
 
 const Alerts = ({
-    className,
     alertsList,
+    className,
     onCloseAlert
 }) => (
     <Box
@@ -22,14 +22,17 @@ const Alerts = ({
                 key={index}
             >
                 <div className={styles.alertMessage}>
-                    <img className={styles.alertIcon} src={a.iconURL} /> {a.message} {a.name}.
+                    <img
+                        className={styles.alertIcon}
+                        src={a.iconURL}
+                    /> {a.message} {a.name} {'.'}
                 </div>
                 <Button
                     className={styles.alertRemoveButton}
-                    onClick={() => onCloseAlert(index)}
+                    key={index}
+                    onClick={onCloseAlert}
                 >
-                    { /* eslint-disable react/jsx-no-literals */ }
-                    x
+                    {'x'}
                 </Button>
             </Box>
         ))}

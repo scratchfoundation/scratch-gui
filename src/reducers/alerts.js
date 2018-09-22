@@ -14,7 +14,7 @@ const reducer = function (state, action) {
     case SHOW_ALERT: {
         const newList = state.alertsList.slice();
         const newAlert = {message: action.data.message};
-        if (action.data.extensionId) {
+        if (action.data.extensionId) { // if it's an extension
             const extension = extensionData.find(ext => ext.extensionId === action.data.extensionId);
             if (extension && extension.name) {
                 newAlert.name = extension.name;
@@ -23,6 +23,7 @@ const reducer = function (state, action) {
                 newAlert.iconURL = extension.smallPeripheralImage;
             }
         }
+        // TODO: add cases for other kinds of alerts?
         newList.push(newAlert);
         return Object.assign({}, state, {
             alertsList: newList

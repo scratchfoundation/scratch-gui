@@ -1,5 +1,5 @@
+import classNames from 'classnames';
 import React from 'react';
-import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -7,28 +7,29 @@ import {
     closeAlert
 } from '../reducers/alerts';
 
-import AlertsComponent from '../components/alerts/alerts.jsx';
+import Box from '../components/box/box.jsx';
+import AlertComponent from '../components/alerts/alert.jsx';
 
-class Alerts extends React.Component {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleOnCloseAlert'
-        ]);
-    }
-    handleOnCloseAlert (e) {
-        this.props.onCloseAlert(e.target.key);
-    }
-    render () {
-        return (
-            <AlertsComponent
-                alertsList={this.props.alertsList}
-                className={this.props.className}
-                onCloseAlert={this.handleOnCloseAlert}
+const Alerts = ({
+    alertsList,
+    className,
+    onCloseAlert
+}) => (
+    <Box
+        bounds="parent"
+        className={classNames(className)}
+    >
+        {alertsList.map((a, index) => (
+            <AlertComponent
+                iconURL={a.iconURL}
+                index={index}
+                key={index}
+                message={a.message}
+                onCloseAlert={onCloseAlert}
             />
-        );
-    }
-}
+        ))}
+    </Box>
+);
 
 Alerts.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),

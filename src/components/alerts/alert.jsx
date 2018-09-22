@@ -1,51 +1,52 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import bindAll from 'lodash.bindall';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 
 import styles from './alert.css';
 
-const Alerts = ({
-    alertsList,
-    className,
-    onCloseAlert
-}) => (
-    <Box
-        bounds="parent"
-        className={classNames(className)}
-    >
-        {alertsList.map((a, index) => (
+class AlertComponent extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'handleOnCloseAlert'
+        ]);
+    }
+    handleOnCloseAlert () {
+        this.props.onCloseAlert(this.props.index);
+    }
+    render () {
+        return (
             <Box
                 className={styles.alert}
-                key={index}
             >
                 <div className={styles.alertMessage}>
-                    {a.iconURL ? (
+                    {this.props.iconURL ? (
                         <img
                             className={styles.alertIcon}
-                            src={a.iconURL}
+                            src={this.props.iconURL}
                         />
                     ) : null}
-                    {a.message}
+                    {this.props.message}
                 </div>
                 <Button
                     className={styles.alertRemoveButton}
-                    key={index}
-                    onClick={onCloseAlert}
+                    onClick={this.handleOnCloseAlert}
                 >
                     {'x'}
                 </Button>
             </Box>
-        ))}
-    </Box>
-);
+        );
+    }
+}
 
-Alerts.propTypes = {
-    alertsList: PropTypes.arrayOf(PropTypes.object),
-    className: PropTypes.string,
+AlertComponent.propTypes = {
+    iconURL: PropTypes.string,
+    index: PropTypes.number,
+    message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired
 };
 
-export default Alerts;
+export default AlertComponent;

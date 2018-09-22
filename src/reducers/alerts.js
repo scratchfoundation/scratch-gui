@@ -14,16 +14,18 @@ const reducer = function (state, action) {
     case SHOW_ALERT: {
         const newList = state.alertsList.slice();
         const newAlert = {message: action.data.message};
-        if (action.data.extensionId) { // if it's an extension
-            const extension = extensionData.find(ext => ext.extensionId === action.data.extensionId);
+        const extensionId = action.data.extensionId;
+        if (extensionId) { // if it's an extension
+            const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension && extension.name) {
-                newAlert.name = extension.name;
+                // TODO: is this the right place to assemble this message?
+                newAlert.message = `${newAlert.message} ${extension.name}.`;
             }
             if (extension && extension.smallPeripheralImage) {
                 newAlert.iconURL = extension.smallPeripheralImage;
             }
         }
-        // TODO: add cases for other kinds of alerts?
+        // TODO: add cases for other kinds of alerts here?
         newList.push(newAlert);
         return Object.assign({}, state, {
             alertsList: newList

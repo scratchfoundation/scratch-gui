@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
-    showAlert,
     closeAlert
 } from '../reducers/alerts';
 
@@ -38,12 +37,10 @@ Alerts.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    visible: state.scratchGui.alerts.visible,
     alertsList: state.scratchGui.alerts.alertsList
 });
 
 const mapDispatchToProps = dispatch => ({
-    onShowAlert: () => dispatch(showAlert()),
     onCloseAlert: index => dispatch(closeAlert(index))
 });
 

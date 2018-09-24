@@ -122,8 +122,8 @@ const vmListenerHOC = function (WrappedComponent) {
     };
     const mapStateToProps = state => ({
         vm: state.scratchGui.vm,
-        username: state.session && state.session.session ?
-            state.session.session.username : ''
+        username: state.session && state.session.session && state.session.session.user ?
+            state.session.session.user.username : ''
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

@@ -83,7 +83,7 @@
     "react-ga": "2.5.3",
     "react-intl": "2.4.0",
     "react-modal": "3.5.1",
-    "react-popover": "0.5.7",
+    "react-popover": "0.5.10",
     "react-redux": "5.0.7",
     "react-responsive": "5.0.0",
     "react-style-proptype": "3.2.2",

@@ -37,7 +37,6 @@ const AccountNavComponent = ({
                 styles.userInfo,
                 className
             )}
-            // className={className}
             onMouseUp={onClick}
         >
             {thumbnailUrl ? (

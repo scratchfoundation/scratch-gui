@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Menu from '../../containers/menu.jsx';
 
-// import styles from './menu-bar-menu.css';
-
 const MenuBarMenu = ({
     children,
     className,

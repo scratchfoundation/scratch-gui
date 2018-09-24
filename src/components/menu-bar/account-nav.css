@@ -46,16 +46,5 @@
 .user-info .dropdown-caret-position {
   display: inline-block;
   padding-bottom: .125rem;
-  /* background-image: url("/images/dropdown.png"); */
-  /* background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50%; */
-  /* width: 1.125rem;
-  height: 1.125rem; */
   vertical-align: middle;
-}
-
-.user-info .dropdown-caret-icon {
-    /* width: 0.5rem;
-    height: 0.5rem; */
 }

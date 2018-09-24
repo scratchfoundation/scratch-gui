@@ -1,4 +1,5 @@
 import {applyMiddleware, compose, combineReducers} from 'redux';
+import alertsReducer, {alertsInitialState} from './alerts';
 import assetDragReducer, {assetDragInitialState} from './asset-drag';
 import cardsReducer, {cardsInitialState} from './cards';
 import colorPickerReducer, {colorPickerInitialState} from './color-picker';
@@ -21,9 +22,12 @@ import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
 import throttle from 'redux-throttle';
 
+import decks from '../lib/libraries/decks/index.jsx';
+
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
+    alerts: alertsInitialState,
     assetDrag: assetDragInitialState,
     blockDrag: blockDragInitialState,
     cards: cardsInitialState,
@@ -67,7 +71,29 @@ const initFullScreen = function (currentState) {
     );
 };
 
+const initTutorialCard = function (currentState, deckId) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                previewInfo: false
+            },
+            cards: {
+                visible: true,
+                content: decks,
+                activeDeckId: deckId,
+                step: 0,
+                x: 0,
+                y: 0,
+                dragging: false
+            }
+        }
+    );
+};
+
 const guiReducer = combineReducers({
+    alerts: alertsReducer,
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
     cards: cardsReducer,
@@ -95,5 +121,6 @@ export {
     guiInitialState,
     guiMiddleware,
     initFullScreen,
-    initPlayer
+    initPlayer,
+    initTutorialCard
 };

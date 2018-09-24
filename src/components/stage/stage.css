@@ -114,6 +114,7 @@ to adjust for the border using a different method */
     justify-content: flex-end;
     top: 0;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .mic-indicator {
@@ -124,4 +125,5 @@ to adjust for the border using a different method */
 }
 
 .question-wrapper {
+    pointer-events: auto;
 }

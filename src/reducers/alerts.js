@@ -43,6 +43,12 @@ const reducer = function (state, action) {
     }
 };
 
+/**
+ * Function to close an alert with the given index.
+ *
+ * @param {object} index - the index of the alert to close.
+ * @return {object} - an object to be passed to the reducer.
+ */
 const closeAlert = function (index) {
     return {
         type: CLOSE_ALERT,
@@ -50,6 +56,12 @@ const closeAlert = function (index) {
     };
 };
 
+/**
+ * Function to show an alert with the given input data.
+ *
+ * @param {object} data - data with the following props: {message, extensionId=null}
+ * @return {object} - an object to be passed to the reducer.
+ */
 const showAlert = function (data) {
     return {
         type: SHOW_ALERT,

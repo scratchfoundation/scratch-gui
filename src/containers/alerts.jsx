@@ -8,7 +8,7 @@ import {
 } from '../reducers/alerts';
 
 import Box from '../components/box/box.jsx';
-import AlertComponent from '../components/alerts/alert.jsx';
+import Alert from '../containers/alert.jsx';
 
 const Alerts = ({
     alertsList,
@@ -20,7 +20,7 @@ const Alerts = ({
         className={classNames(className)}
     >
         {alertsList.map((a, index) => (
-            <AlertComponent
+            <Alert
                 iconURL={a.iconURL}
                 index={index}
                 key={index}

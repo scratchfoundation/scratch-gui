@@ -68,13 +68,22 @@ const StageComponent = props => {
                         <Loupe colorInfo={colorInfo} />
                     </Box>
                 ) : null}
-                {question === null ? null : (
-                    <div
-                        className={classNames(
-                            styles.stageOverlayContent,
-                            styles.stageOverlayContentBorderOverride
-                        )}
-                    >
+                <div
+                    className={styles.stageBottomWrapper}
+                    style={{
+                        width: stageDimensions.width,
+                        height: stageDimensions.height,
+                        left: '50%',
+                        marginLeft: stageDimensions.width * -0.5
+                    }}
+                >
+                    {micIndicator ? (
+                        <MicIndicator
+                            className={styles.micIndicator}
+                            stageSize={stageDimensions}
+                        />
+                    ) : null}
+                    {question === null ? null : (
                         <div
                             className={styles.questionWrapper}
                             style={{width: stageDimensions.width}}
@@ -84,25 +93,8 @@ const StageComponent = props => {
                                 onQuestionAnswered={onQuestionAnswered}
                             />
                         </div>
-                    </div>
-                )}
-                {micIndicator ? (
-                    <div
-                        className={styles.micIndicatorWrapper}
-                        style={{
-                            width: stageDimensions.width,
-                            marginLeft: stageDimensions.width * -0.5
-                        }}
-                    >
-                        <MicIndicator
-                            className={classNames(
-                                styles.micIndicator,
-                                {[styles.offsetForQuestion]: question !== null}
-                            )}
-                            stageSize={stageDimensions}
-                        />
-                    </div>
-                ) : null}
+                    )}
+                </div>
                 <canvas
                     className={styles.draggingSprite}
                     height={0}

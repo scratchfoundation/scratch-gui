@@ -1,4 +1,5 @@
 import {applyMiddleware, compose, combineReducers} from 'redux';
+import alertsReducer, {alertsInitialState} from './alerts';
 import assetDragReducer, {assetDragInitialState} from './asset-drag';
 import cardsReducer, {cardsInitialState} from './cards';
 import colorPickerReducer, {colorPickerInitialState} from './color-picker';
@@ -12,6 +13,7 @@ import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
 import projectIdReducer, {projectIdInitialState} from './project-id';
+import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
@@ -21,9 +23,12 @@ import vmStatusReducer, {vmStatusInitialState} from './vm-status';
 import rubyCodeReducer, {rubyCodeInitialState} from './ruby-code';
 import throttle from 'redux-throttle';
 
+import decks from '../lib/libraries/decks/index.jsx';
+
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
+    alerts: alertsInitialState,
     assetDrag: assetDragInitialState,
     blockDrag: blockDragInitialState,
     cards: cardsInitialState,
@@ -38,6 +43,7 @@ const guiInitialState = {
     monitors: monitorsInitialState,
     monitorLayout: monitorLayoutInitialState,
     projectId: projectIdInitialState,
+    projectTitle: projectTitleInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
     toolbox: toolboxInitialState,
@@ -67,7 +73,29 @@ const initFullScreen = function (currentState) {
     );
 };
 
+const initTutorialCard = function (currentState, deckId) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                previewInfo: false
+            },
+            cards: {
+                visible: true,
+                content: decks,
+                activeDeckId: deckId,
+                step: 0,
+                x: 0,
+                y: 0,
+                dragging: false
+            }
+        }
+    );
+};
+
 const guiReducer = combineReducers({
+    alerts: alertsReducer,
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,
     cards: cardsReducer,
@@ -82,6 +110,7 @@ const guiReducer = combineReducers({
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,
     projectId: projectIdReducer,
+    projectTitle: projectTitleReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
     toolbox: toolboxReducer,
@@ -95,5 +124,6 @@ export {
     guiInitialState,
     guiMiddleware,
     initFullScreen,
-    initPlayer
+    initPlayer,
+    initTutorialCard
 };

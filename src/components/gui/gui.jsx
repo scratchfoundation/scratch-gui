@@ -53,6 +53,7 @@ let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        accountNavOpen,
         activeTabIndex,
         alertsVisible,
         basePath,
@@ -69,14 +70,20 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         loading,
-        onExtensionButtonClick,
+        renderLogin,
+        onClickAccountNav,
+        onCloseAccountNav,
+        onLogOut,
+        onOpenRegistration,
+        onToggleLoginOpen,
+        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
-        onUpdateProjectTitle,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -155,8 +162,15 @@ const GUIComponent = props => {
                     />
                 ) : null}
                 <MenuBar
+                    accountNavOpen={accountNavOpen}
                     enableCommunity={enableCommunity}
+                    renderLogin={renderLogin}
+                    onClickAccountNav={onClickAccountNav}
+                    onCloseAccountNav={onCloseAccountNav}
+                    onLogOut={onLogOut}
+                    onOpenRegistration={onOpenRegistration}
                     onSeeCommunity={onSeeCommunity}
+                    onToggleLoginOpen={onToggleLoginOpen}
                     onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
@@ -279,6 +293,7 @@ const GUIComponent = props => {
 };
 
 GUIComponent.propTypes = {
+    accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
@@ -300,13 +315,19 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickAccountNav: PropTypes.func,
+    onCloseAccountNav: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
+    renderLogin: PropTypes.func,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,

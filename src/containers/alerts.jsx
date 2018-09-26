@@ -1,23 +1,51 @@
+import classNames from 'classnames';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
-    showAlert,
     closeAlert
 } from '../reducers/alerts';
 
-import AlertsComponent from '../components/alerts/alerts.jsx';
+import Box from '../components/box/box.jsx';
+import Alert from '../containers/alert.jsx';
+
+const Alerts = ({
+    alertsList,
+    className,
+    onCloseAlert
+}) => (
+    <Box
+        bounds="parent"
+        className={classNames(className)}
+    >
+        {alertsList.map((a, index) => (
+            <Alert
+                iconURL={a.iconURL}
+                index={index}
+                key={index}
+                message={a.message}
+                onCloseAlert={onCloseAlert}
+            />
+        ))}
+    </Box>
+);
+
+Alerts.propTypes = {
+    alertsList: PropTypes.arrayOf(PropTypes.object),
+    className: PropTypes.string,
+    onCloseAlert: PropTypes.func
+};
 
 const mapStateToProps = state => ({
-    visible: state.scratchGui.alerts.visible,
-    message: state.scratchGui.alerts.message
+    alertsList: state.scratchGui.alerts.alertsList
 });
 
 const mapDispatchToProps = dispatch => ({
-    onShowAlert: () => dispatch(showAlert()),
-    onCloseAlert: () => dispatch(closeAlert())
+    onCloseAlert: index => dispatch(closeAlert(index))
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AlertsComponent);
+)(Alerts);

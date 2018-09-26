@@ -127,8 +127,8 @@ const vmListenerHOC = function (WrappedComponent) {
     };
     const mapStateToProps = state => ({
         vm: state.scratchGui.vm,
-        username: state.session && state.session.session ?
-            state.session.session.username : ''
+        username: state.session && state.session.session && state.session.session.user ?
+            state.session.session.user.username : ''
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
@@ -144,8 +144,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onShowAlert: () => {
-            dispatch(showAlert('Scratch has lost connection to peripheral.'));
+        onShowAlert: data => {
+            dispatch(showAlert(data));
         },
         onMicListeningUpdate: listening => {
             dispatch(updateMicIndicator(listening));

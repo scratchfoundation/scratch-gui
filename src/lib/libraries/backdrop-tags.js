@@ -1,10 +1,11 @@
+import messages from './tag-messages.js';
 export default [
-    {title: 'Fantasy'},
-    {title: 'Music'},
-    {title: 'Sports'},
-    {title: 'Outdoors'},
-    {title: 'Indoors'},
-    {title: 'Space'},
-    {title: 'Underwater'},
-    {title: 'Patterns'}
+    {tag: 'fantasy', intlLabel: messages.fantasy},
+    {tag: 'music', intlLabel: messages.music},
+    {tag: 'sports', intlLabel: messages.sports},
+    {tag: 'outdoors', intlLabel: messages.outdoors},
+    {tag: 'indoors', intlLabel: messages.indoors},
+    {tag: 'space', intlLabel: messages.space},
+    {tag: 'underwater', intlLabel: messages.underwater},
+    {tag: 'patterns', intlLabel: messages.patterns}
 ];

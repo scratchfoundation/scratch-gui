@@ -13,6 +13,12 @@
     border-radius: 8px;
     padding: 12px;
     box-shadow: 2px 2px 2px 2px rgba(255, 140, 26, 0.25);
+    margin-bottom: 7px;
+}
+
+.alert-icon {
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 .alert-message {

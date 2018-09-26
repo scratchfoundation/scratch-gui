@@ -13,11 +13,13 @@ class LanguageSelector extends React.Component {
         bindAll(this, [
             'handleChange'
         ]);
+        document.documentElement.lang = props.currentLocale;
     }
     handleChange (e) {
         const newLocale = e.target.value;
         if (this.props.supportedLocales.includes(newLocale)) {
             this.props.onChangeLanguage(newLocale);
+            document.documentElement.lang = newLocale;
         }
     }
     render () {

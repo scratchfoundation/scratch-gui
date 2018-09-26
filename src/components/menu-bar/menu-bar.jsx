@@ -196,6 +196,18 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.saveNow"
             />
         );
+        const shareButton = (
+            <Button
+                className={classNames(styles.shareButton)}
+                onClick={this.props.onShare}
+            >
+                <FormattedMessage
+                    defaultMessage="Share"
+                    description="Label for project share button"
+                    id="gui.menuBar.share"
+                />
+            </Button>
+        );
         return (
             <Box
                 className={classNames(styles.menuBar, {
@@ -392,15 +404,11 @@ class MenuBar extends React.Component {
                         </MenuBarItemTooltip>
                     </div>
                     <div className={classNames(styles.menuBarItem)}>
-                        <MenuBarItemTooltip id="share-button">
-                            <Button className={classNames(styles.shareButton)}>
-                                <FormattedMessage
-                                    defaultMessage="Share"
-                                    description="Label for project share button"
-                                    id="gui.menuBar.share"
-                                />
-                            </Button>
-                        </MenuBarItemTooltip>
+                        {this.props.onShare ? shareButton : (
+                            <MenuBarItemTooltip id="share-button">
+                                {shareButton}
+                            </MenuBarItemTooltip>
+                        )}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ?

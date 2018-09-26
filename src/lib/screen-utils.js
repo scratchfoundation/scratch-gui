@@ -72,6 +72,16 @@ const getStageDimensions = (stageSize, isFullScreen) => {
     return stageDimensions;
 };
 
+/**
+ * Take a pair of sizes for the stage (a target height and width and a default height and width),
+ * calculate the ratio between them, and return a CSS transform to scale to that ratio.
+ * @param {object} sizeInfo An object containing dimensions of the target and default stage sizes.
+ * @param {number} sizeInfo.width The target width
+ * @param {number} sizeInfo.height The target height
+ * @param {number} sizeInfo.widthDefault The default width
+ * @param {number} sizeInfo.heightDefault The default height
+ * @returns {object} the CSS transform
+ */
 const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
     const scaleX = width / widthDefault;
     const scaleY = height / heightDefault;

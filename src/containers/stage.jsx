@@ -370,7 +370,6 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
-            micIndicator,
             ...props
         } = this.props;
         return (
@@ -378,7 +377,6 @@ class Stage extends React.Component {
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
                 dragRef={this.setDragCanvas}
-                micIndicator={micIndicator}
                 question={this.state.question}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}

@@ -84,6 +84,7 @@ const GUIComponent = props => {
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
+        onShare,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -170,6 +171,7 @@ const GUIComponent = props => {
                     onLogOut={onLogOut}
                     onOpenRegistration={onOpenRegistration}
                     onSeeCommunity={onSeeCommunity}
+                    onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
                     onUpdateProjectTitle={onUpdateProjectTitle}
                 />
@@ -323,6 +325,7 @@ GUIComponent.propTypes = {
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
     onSeeCommunity: PropTypes.func,
+    onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,

@@ -125,6 +125,7 @@ GUI.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+    alertsVisible: state.scratchGui.alerts.visible,
     backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
     blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     cardsVisible: state.scratchGui.cards.visible,

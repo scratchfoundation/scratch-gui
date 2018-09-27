@@ -18,7 +18,7 @@ class AutoScanningStep extends React.Component {
         };
     }
     componentWillUnmount () {
-        // @todo: stop the device scan here
+        // @todo: stop the peripheral scan here
         this.unbindPeripheralUpdates();
     }
     handlePeripheralScanTimeout () {
@@ -49,7 +49,7 @@ class AutoScanningStep extends React.Component {
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }
     handleRefresh () {
-        // @todo: stop the device scan here, it is more important for auto scan
+        // @todo: stop the peripheral scan here, it is more important for auto scan
         // due to timeout and cancellation
         this.setState({
             phase: PHASES.prescan
@@ -58,7 +58,7 @@ class AutoScanningStep extends React.Component {
     }
     handleStartScan () {
         this.bindPeripheralUpdates();
-        this.props.vm.startDeviceScan(this.props.extensionId);
+        this.props.vm.scanForPeripheral(this.props.extensionId);
         this.setState({
             phase: PHASES.pressbutton
         });
@@ -67,7 +67,7 @@ class AutoScanningStep extends React.Component {
     render () {
         return (
             <ScanningStepComponent
-                deviceButtonImage={this.props.deviceButtonImage}
+                peripheralButtonImage={this.props.peripheralButtonImage}
                 phase={this.state.phase}
                 title={this.props.extensionId}
                 onRefresh={this.handleRefresh}
@@ -78,9 +78,9 @@ class AutoScanningStep extends React.Component {
 }
 
 AutoScanningStep.propTypes = {
-    deviceButtonImage: PropTypes.string,
     extensionId: PropTypes.string.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    peripheralButtonImage: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

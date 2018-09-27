@@ -5,7 +5,7 @@ import locales from 'scratch-l10n';
 import styles from './language-selector.css';
 
 // supported languages to exclude from the menu, but allow as a URL option
-const ignore = ['he'];
+const ignore = [];
 
 const LanguageSelector = ({currentLocale, label, onChange}) => (
     <select

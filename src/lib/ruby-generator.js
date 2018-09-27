@@ -43,13 +43,14 @@ export default function (Blockly) {
 
     Blockly.Ruby.init = function() {
         this.definitions_ = Object.create(null);
+        this.targetEvent_ = null;
         if (Blockly.Variables) {
             if (!this.variableDB_) {
                 this.variableDB_ = new Blockly.Names(Blockly.Ruby.RESERVED_WORDS_);
             } else {
                 this.variableDB_.reset();
             }
-            this.definitions_['require__smalruby'] = 'require "smalruby"';
+            //this.definitions_['require__smalruby'] = 'require "smalruby"';
             this.definitions_['receiver_stack'] = ['main'];
             return this.definitions_['character_stack'] = [];
         }
@@ -301,7 +302,12 @@ export default function (Blockly) {
         }
         nextBlock = block.nextConnection && block.nextConnection.targetBlock();
         nextCode = this.blockToCode(nextBlock);
-        return commentCode + code + nextCode;
+        let eventEndCode = '';
+        if (!nextBlock && this.targetEvent) {
+            eventEndCode = 'end\n';
+            this.targetEvent = null;
+        }
+        return commentCode + code + nextCode + eventEndCode;
     };
 
     Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;

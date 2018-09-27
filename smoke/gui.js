@@ -1,11 +1,11 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1098:
+/***/ 1117:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1099);
+var content = __webpack_require__(1118);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -27,7 +27,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1099:
+/***/ 1118:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -44,7 +44,7 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 1100:
+/***/ 1119:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60,23 +60,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(33);
+var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _appStateHoc = __webpack_require__(113);
+var _appStateHoc = __webpack_require__(114);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _gui = __webpack_require__(162);
+var _gui = __webpack_require__(164);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(182);
+var _hashParserHoc = __webpack_require__(184);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _titledHoc = __webpack_require__(455);
+var _titledHoc = __webpack_require__(460);
 
 var _titledHoc2 = _interopRequireDefault(_titledHoc);
 
@@ -111,23 +111,23 @@ exports.default = function (appTarget) {
 
 /***/ }),
 
-/***/ 473:
+/***/ 478:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(474);
+__webpack_require__(479);
 
-__webpack_require__(476);
+__webpack_require__(481);
 
-__webpack_require__(500);
+__webpack_require__(505);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(33);
+var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -135,19 +135,19 @@ var _analytics = __webpack_require__(28);
 
 var _analytics2 = _interopRequireDefault(_analytics);
 
-var _appStateHoc = __webpack_require__(113);
+var _appStateHoc = __webpack_require__(114);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _browserModal = __webpack_require__(380);
+var _browserModal = __webpack_require__(386);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _supportedBrowser = __webpack_require__(384);
+var _supportedBrowser = __webpack_require__(390);
 
 var _supportedBrowser2 = _interopRequireDefault(_supportedBrowser);
 
-var _index = __webpack_require__(1098);
+var _index = __webpack_require__(1117);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -164,7 +164,7 @@ document.body.appendChild(appTarget);
 if ((0, _supportedBrowser2.default)()) {
     // require needed here to avoid importing unsupported browser-crashing code
     // at the top level
-    __webpack_require__(1100).default(appTarget);
+    __webpack_require__(1119).default(appTarget);
 } else {
     _browserModal2.default.setAppElement(appTarget);
     var WrappedBrowserModalComponent = (0, _appStateHoc2.default)(_browserModal2.default, true /* localesOnly */);
@@ -175,12 +175,12 @@ if ((0, _supportedBrowser2.default)()) {
 
 /***/ }),
 
-/***/ 502:
+/***/ 507:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[473,0]]]);
+},[[478,0]]]);
 //# sourceMappingURL=gui.js.map

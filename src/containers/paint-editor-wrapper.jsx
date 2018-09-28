@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
+import omit from 'lodash.omit';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
 
@@ -18,6 +19,11 @@ class PaintEditorWrapper extends React.Component {
     }
     componentDidMount () {
         analytics.pageview('/editors/paint');
+    }
+    shouldComponentUpdate (nextProps) {
+        return this.props.imageId !== nextProps.imageId ||
+            this.props.rtl !== nextProps.rtl ||
+            this.props.name !== nextProps.name;
     }
     handleUpdateName (name) {
         this.props.vm.renameCostume(this.props.selectedCostumeIndex, name);
@@ -40,9 +46,12 @@ class PaintEditorWrapper extends React.Component {
     }
     render () {
         if (!this.props.imageId) return null;
+        const componentProps = omit(this.props, ['selectedCostumeIndex', 'vm']);
+
         return (
             <PaintEditor
-                {...this.props}
+                {...componentProps}
+                image={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
                 onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
             />
@@ -74,8 +83,8 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         rotationCenterY: costume && costume.rotationCenterY,
         imageFormat: costume && costume.dataFormat,
         imageId: targetId && `${targetId}${costume.skinId}`,
-        image: state.scratchGui.vm.getCostume(index),
         rtl: state.locales.isRtl,
+        selectedCostumeIndex: index,
         vm: state.scratchGui.vm,
         zoomLevelId: targetId
     };

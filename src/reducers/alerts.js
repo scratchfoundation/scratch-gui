@@ -59,7 +59,9 @@ const closeAlert = function (index) {
 /**
  * Function to show an alert with the given input data.
  *
- * @param {object} data - data with the following props: {message, extensionId=null}
+ * @param {object} data - data for the alert
+ * @param {string} data.message - message for the alert
+ * @param {string} data.extensionId - extension ID for the alert
  * @return {object} - an object to be passed to the reducer.
  */
 const showAlert = function (data) {

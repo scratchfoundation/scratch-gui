@@ -58,17 +58,18 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         handleRequestNewProject (callback) {
             // pass the request up the chain
             this.props.onRequestNewProject(newProjectId => {
-                // not that parents have had chance to act and change the projectId,
+                // now that parents have had chance to act and change the projectId,
                 // update the metadata using the projectId -- even if it is the
                 // same projectId as before.
-                this.updateProject(this.props.projectId);
-                if (callback) callback(newProjectId); // pass the callback down the chain
+                this.updateProject(newProjectId).then(() => {
+                    if (callback) callback(newProjectId); // pass the callback down the chain
+                });
             });
         }
         // NOTE: should we instesad have updateProject return a promise, and resolve those
         // in the functions that call updatePromise to improve the execution sequence?
         updateProject (projectId) {
-            storage
+            return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {

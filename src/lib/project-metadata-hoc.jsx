@@ -15,6 +15,11 @@ const api = (options, token, callback) => {
         headers: {},
         responseType: 'json'
     });
+    defaultsdeep(options, {
+        uri: options.host + options.path,
+        headers: {},
+        responseType: 'json'
+    });
     if (token) {
         options.headers['X-Token'] = token;
     }
@@ -77,7 +82,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             } else {
                 // not using default project, so fetch from api
                 api({
-                    uri: `/projects/${projectId}`
+                    path: `/projects/${projectId}`
                 },
                 null,
                 // this.props.token,

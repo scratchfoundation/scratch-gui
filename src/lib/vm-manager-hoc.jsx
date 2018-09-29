@@ -29,8 +29,9 @@ const vmManagerHOC = function (WrappedComponent) {
             if (this.props.vm.initialized) return;
             this.audioEngine = new AudioEngine();
             this.props.vm.attachAudioEngine(this.audioEngine);
-            this.loadProject(true);
-            this.props.vm.initialized = true;
+            this.loadProject(true).then(() => {
+                this.props.vm.initialized = true;
+            });
         }
         componentWillReceiveProps (nextProps) {
             if (this.props.projectData !== nextProps.projectData) {
@@ -39,8 +40,10 @@ const vmManagerHOC = function (WrappedComponent) {
                 });
             }
         }
+        // NOTE: keep working here. problem is that we ONLY want to load the project
+        // here when the old project id was aolso default... otherwise, we load twice!!!
         loadProject (isInitial) {
-            this.props.vm.loadProject(this.props.projectData)
+            return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.setState({isLoading: false}, () => {
                         if (isInitial) {
@@ -60,8 +63,9 @@ const vmManagerHOC = function (WrappedComponent) {
             this.props.onRequestNewProject(newProjectId => {
                 // now that parents have had chance to act and change the projectId,
                 this.setState({isLoading: true}, () => {
-                    this.loadProject(false);
-                    if (callback) callback(newProjectId); // pass the callback down the chain
+                    this.loadProject(false).then(() => {
+                        if (callback) callback(newProjectId); // pass the callback down the chain
+                    });
                 });
             });
         }

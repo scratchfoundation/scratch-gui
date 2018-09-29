@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
+import ProjectMetaDataHOC from '../lib/project-metadata-hoc.jsx';
 
 import {setPlayer} from '../reducers/mode';
 
@@ -49,7 +51,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ConnectedPlayer = connect(mapStateToProps, mapDispatchToProps)(Player);
-const WrappedPlayer = HashParserHOC(AppStateHOC(TitledHOC(ConnectedPlayer)));
+const WrappedPlayer = compose(
+    HashParserHOC,
+    AppStateHOC,
+    TitledHOC,
+    ProjectMetaDataHOC
+)(ConnectedPlayer);
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

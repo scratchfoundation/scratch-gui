@@ -22,7 +22,6 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
-import {setNewDefaultProject} from '../../reducers/project-id';
 import {
     openAccountMenu,
     closeAccountMenu,
@@ -126,6 +125,7 @@ class MenuBar extends React.Component {
         bindAll(this, [
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'handleProjectLoadFinished',
             'handleCloseFileMenuAndThen',
             'restoreOptionMessage'
         ]);
@@ -142,6 +142,24 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
+    handleNewProject (updateFun) {
+        return () => {
+            this.props.onRequestCloseFile();
+            if (this.props.userOwnsProject) {
+                this.setState({projectSaveInProgress: true},
+                    () => {
+                        updateFun().then(() => {
+                            this.props.onRequestNewProject(() => {
+                                this.setState({projectSaveInProgress: false});
+                            });
+                        });
+                    }
+                );
+            } else {
+                this.props.onRequestNewProject();
+            }
+        };
+    }
     handleUpdateProject (updateFun) {
         return () => {
             this.props.onRequestCloseFile();
@@ -153,6 +171,9 @@ class MenuBar extends React.Component {
                 }
             );
         };
+    }
+    handleProjectLoadFinished () {
+        this.props.onRequestCloseFile();
     }
     handleCloseFileMenuAndThen (fn) {
         return () => {
@@ -263,19 +284,23 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <MenuItem
-                                    isRtl={this.props.isRtl}
-                                    onClick={this.props.handleClickLoadNewProject}
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="New"
-                                        description="Menu bar item for creating a new project"
-                                        id="gui.menuBar.new"
-                                    />
-                                </MenuItem>
+                                <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
+                                    {(saveProject, updateProject, createProject) => (
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleNewProject(createProject)}
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="New"
+                                                description="Menu bar item for creating a new project"
+                                                id="gui.menuBar.new"
+                                            />
+                                        </MenuItem>
+                                    )}
+                                </ProjectSaver>
                                 <MenuSection>
                                     <ProjectSaver>{(saveProject, updateProject) => (
-                                        this.props.canUpdateProject ? (
+                                        this.props.canUpdateProject && this.props.userOwnsProject ? (
                                             <MenuItem onClick={this.handleUpdateProject(updateProject)}>
                                                 {saveNowMessage}
                                             </MenuItem>
@@ -302,18 +327,24 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <ProjectLoader>{(renderFileInput, loadProject) => (
-                                        <MenuItem
-                                            onClick={loadProject}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="Load from your computer"
-                                                description="Menu bar item for uploading a project from your computer"
-                                                id="gui.menuBar.uploadFromComputer"
-                                            />
-                                            {renderFileInput()}
-                                        </MenuItem>
-                                    )}</ProjectLoader>
+                                    <ProjectLoader
+                                        onLoadFinished={this.handleProjectLoadFinished}
+                                        onUpdateProjectTitle={this.props.onUpdateProjectTitle}
+                                    >
+                                        {(renderFileInput, loadProject) => (
+                                            <MenuItem
+                                                onClick={loadProject}
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="Load from your computer"
+                                                    description={'Menu bar item for uploading a ' +
+                                                        'project from your computer'}
+                                                    id="gui.menuBar.uploadFromComputer"
+                                                />
+                                                {renderFileInput()}
+                                            </MenuItem>
+                                        )}
+                                    </ProjectLoader>
                                     <ProjectSaver>{saveProject => (
                                         <MenuItem
                                             onClick={this.handleCloseFileMenuAndThen(saveProject)}
@@ -589,7 +620,6 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
-    handleClickLoadNewProject: PropTypes.func,
     intl: intlShape,
     isRtl: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
@@ -607,11 +637,13 @@ MenuBar.propTypes = {
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onRequestCloseLogin: PropTypes.func,
+    onRequestNewProject: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    userOwnsProject: PropTypes.bool,
     username: PropTypes.string
 };
 
@@ -629,10 +661,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleClickLoadNewProject: event => {
-        event.preventDefault();
-        dispatch(setNewDefaultProject());
-    },
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

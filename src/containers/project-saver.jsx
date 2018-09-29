@@ -35,6 +35,9 @@ class ProjectSaver extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.saveProjectSb3().then(content => {
+            if (this.props.onSaveFinished) {
+                this.props.onSaveFinished();
+            }
             // Use special ms version if available to get it working on Edge.
             if (navigator.msSaveOrOpenBlob) {
                 navigator.msSaveOrOpenBlob(content, this.props.projectFilename);
@@ -52,6 +55,9 @@ class ProjectSaver extends React.Component {
     doStoreProject (id) {
         return this.props.saveProjectSb3()
             .then(content => {
+                if (this.props.onSaveFinished) {
+                    this.props.onSaveFinished();
+                }
                 const assetType = storage.AssetType.Project;
                 const dataFormat = storage.DataFormat.SB3;
                 const body = new FormData();
@@ -92,6 +98,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     saveProjectSb3: PropTypes.func

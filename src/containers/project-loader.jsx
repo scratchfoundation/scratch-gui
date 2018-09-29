@@ -60,6 +60,9 @@ class ProjectLoader extends React.Component {
                     nonInteraction: true
                 });
                 this.props.closeLoadingState();
+                if (this.props.onLoadFinished) {
+                    this.props.onLoadFinished();
+                }
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -68,6 +71,9 @@ class ProjectLoader extends React.Component {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
                 this.props.closeLoadingState();
+                if (this.props.onLoadFinished) {
+                    this.props.onLoadFinished();
+                }
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -79,7 +85,11 @@ class ProjectLoader extends React.Component {
             if (thisFileInput.files[0].name) {
                 const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
                 if (matches) {
-                    this.props.onSetProjectTitle(matches[1].substring(0, 100));
+                    const truncatedProjectTitle = matches[1].substring(0, 100);
+                    this.props.onSetReduxProjectTitle(truncatedProjectTitle);
+                    if (this.props.onUpdateProjectTitle) {
+                        this.props.onUpdateProjectTitle(truncatedProjectTitle);
+                    }
                 }
             }
         }
@@ -110,7 +120,9 @@ ProjectLoader.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
-    onSetProjectTitle: PropTypes.func,
+    onLoadFinished: PropTypes.func,
+    onSetReduxProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -123,7 +135,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     closeLoadingState: () => dispatch(closeLoadingProject()),
-    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
+    onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
     openLoadingState: () => dispatch(openLoadingProject())
 });
 

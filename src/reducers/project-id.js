@@ -2,7 +2,7 @@ const SET_PROJECT_ID = 'scratch-gui/project-id/SET_PROJECT_ID';
 
 const initialState = null;
 
-const newDefaultProjectId = 0; // hardcoded id of default project
+const defaultProjectId = 0; // hardcoded id of default project
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
@@ -23,17 +23,9 @@ const setProjectId = function (id) {
     };
 };
 
-const setNewDefaultProject = function () {
-    return {
-        type: SET_PROJECT_ID,
-        id: newDefaultProjectId
-    };
-};
-
 export {
     reducer as default,
     initialState as projectIdInitialState,
-    newDefaultProjectId,
-    setProjectId,
-    setNewDefaultProject
+    defaultProjectId,
+    setProjectId
 };

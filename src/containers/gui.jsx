@@ -1,7 +1,6 @@
-import AudioEngine from 'scratch-audio';
 import PropTypes from 'prop-types';
 import React from 'react';
-import VM from 'scratch-vm';
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 
@@ -22,66 +21,33 @@ import {
 
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
+import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {
-            loading: !props.vm.initialized,
-            loadingError: false,
-            errorMessage: ''
-        };
     }
     componentDidMount () {
         if (this.props.projectTitle) {
             this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
         }
-
-        if (this.props.vm.initialized) return;
-        this.audioEngine = new AudioEngine();
-        this.props.vm.attachAudioEngine(this.audioEngine);
-        this.props.vm.loadProject(this.props.projectData)
-            .then(() => {
-                this.setState({loading: false}, () => {
-                    this.props.vm.setCompatibilityMode(true);
-                    this.props.vm.start();
-                });
-            })
-            .catch(e => {
-                // Need to catch this error and update component state so that
-                // error page gets rendered if project failed to load
-                this.setState({loadingError: true, errorMessage: e});
-            });
-        this.props.vm.initialized = true;
     }
     componentWillReceiveProps (nextProps) {
-        if (this.props.projectData !== nextProps.projectData) {
-            this.setState({loading: true}, () => {
-                this.props.vm.loadProject(nextProps.projectData)
-                    .then(() => {
-                        this.setState({loading: false});
-                    })
-                    .catch(e => {
-                        // Need to catch this error and update component state so that
-                        // error page gets rendered if project failed to load
-                        this.setState({loadingError: true, errorMessage: e});
-                    });
-            });
-        }
         if (this.props.projectTitle !== nextProps.projectTitle) {
             this.props.onUpdateReduxProjectTitle(nextProps.projectTitle);
         }
     }
     render () {
-        if (this.state.loadingError) {
+        if (this.props.loadingError) {
             throw new Error(
-                `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
+                `Failed to load project from server [id=${window.location.hash}]: ${this.props.errorMessage}`);
         }
         const {
             /* eslint-disable no-unused-vars */
             assetHost,
+            errorMessage,
             hideIntro,
             onUpdateReduxProjectTitle,
             projectData,
@@ -90,14 +56,14 @@ class GUI extends React.Component {
             /* eslint-enable no-unused-vars */
             children,
             fetchingProject,
+            isLoading,
+            loadingError,
             loadingStateVisible,
-            vm,
             ...componentProps
         } = this.props;
         return (
             <GUIComponent
-                loading={fetchingProject || this.state.loading || loadingStateVisible}
-                vm={vm}
+                loading={fetchingProject || isLoading || loadingStateVisible}
                 {...componentProps}
             >
                 {children}
@@ -109,18 +75,19 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
+    errorMessage: PropTypes.string,
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    loadingError: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     projectHost: PropTypes.string,
-    projectTitle: PropTypes.string,
-    vm: PropTypes.instanceOf(VM)
+    projectTitle: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -159,9 +126,12 @@ const ConnectedGUI = connect(
     mapDispatchToProps,
 )(GUI);
 
-const WrappedGui = ErrorBoundaryHOC('Top Level App')(
-    ProjectLoaderHOC(vmListenerHOC(ConnectedGUI))
-);
+const WrappedGui = compose(
+    ErrorBoundaryHOC('Top Level App'),
+    ProjectLoaderHOC,
+    vmListenerHOC,
+    vmManagerHOC
+)(ConnectedGUI);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;
 export default WrappedGui;

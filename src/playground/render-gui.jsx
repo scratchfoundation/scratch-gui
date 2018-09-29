@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {compose} from 'redux';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
+import ProjectMetaDataHOC from '../lib/project-metadata-hoc.jsx';
 
 /*
  * Render the GUI playground. This is a separate function because importing anything
@@ -13,7 +15,12 @@ import TitledHOC from '../lib/titled-hoc.jsx';
  */
 export default appTarget => {
     GUI.setAppElement(appTarget);
-    const WrappedGui = HashParserHOC(AppStateHOC(TitledHOC(GUI)));
+    const WrappedGui = compose(
+        HashParserHOC,
+        AppStateHOC,
+        TitledHOC,
+        ProjectMetaDataHOC
+    )(GUI);
 
     // TODO a hack for testing the backpack, allow backpack host to be set by url param
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);

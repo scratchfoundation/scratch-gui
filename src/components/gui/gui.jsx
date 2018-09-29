@@ -83,6 +83,7 @@ const GUIComponent = props => {
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestNewProject,
         onSeeCommunity,
         onShare,
         previewInfoVisible,
@@ -90,6 +91,7 @@ const GUIComponent = props => {
         soundsTabVisible,
         stageSizeMode,
         tipsLibraryVisible,
+        userOwnsProject,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -166,10 +168,12 @@ const GUIComponent = props => {
                     accountNavOpen={accountNavOpen}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
+                    userOwnsProject={userOwnsProject}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
                     onOpenRegistration={onOpenRegistration}
+                    onRequestNewProject={onRequestNewProject}
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
@@ -324,6 +328,7 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestNewProject: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
@@ -335,6 +340,7 @@ GUIComponent.propTypes = {
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
+    userOwnsProject: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

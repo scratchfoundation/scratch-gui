@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
+import bindAll from 'lodash.bindall';
 
-import {setProjectId, newDefaultProjectId} from '../reducers/project-id';
-import {defaultProjectTitleMessages, setProjectTitle} from '../reducers/project-title';
+import {defaultProjectId} from '../reducers/project-id';
 
 import analytics from './analytics';
 import log from './log';
@@ -19,7 +18,10 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     class ProjectLoaderComponent extends React.Component {
         constructor (props) {
             super(props);
-            this.updateProject = this.updateProject.bind(this);
+            bindAll(this, [
+                'handleRequestNewProject',
+                'updateProject'
+            ]);
             this.state = {
                 projectData: null,
                 fetchingProject: false
@@ -32,7 +34,6 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             // Either way, we now know what the initial projectId should be, so
             // set it in the redux store.
             // debugger;
-            props.setReduxProjectId(props.projectId);
             if (
                 props.projectId !== '' &&
                 props.projectId !== null &&
@@ -48,50 +49,37 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             if (this.props.assetHost !== nextProps.assetHost) {
                 storage.setAssetHost(nextProps.assetHost);
             }
-            // debugger;
-            // updating the projectId after initial mount depends on four values:
-            // 1. existing projectId property passed in from higher
-            // 2. existing redux projectId maintained in store
-            // 3. new projectId property passed in from higher
-            // 4. new redux projectId from store
-            //
-            // the update logic is to update which project we display, iff:
-            // a. new redux projectId is different from existing redux projectId
-            // AND existing projectId prop (#2 !== #4 && #1 !== #4)
-            // b. redux projectId has NOT been changed, but projectId passed in
-            // has (#1 !== #3)
-            if (this.props.reduxProjectId !== nextProps.reduxProjectId &&
-                this.props.projectId !== nextProps.reduxProjectId) {
-                this.setState({fetchingProject: true}, () => {
-                    this.updateProject(nextProps.reduxProjectId);
-                });
-            } else if (this.props.projectId !== nextProps.projectId) {
-                this.props.setReduxProjectId(nextProps.projectId);
+            if (this.props.projectId !== nextProps.projectId) {
                 this.setState({fetchingProject: true}, () => {
                     this.updateProject(nextProps.projectId);
                 });
             }
         }
+        handleRequestNewProject (callback) {
+            // pass the request up the chain
+            this.props.onRequestNewProject(newProjectId => {
+                // not that parents have had chance to act and change the projectId,
+                // update the metadata using the projectId -- even if it is the
+                // same projectId as before.
+                this.updateProject(this.props.projectId);
+                if (callback) callback(newProjectId); // pass the callback down the chain
+            });
+        }
+        // NOTE: should we instesad have updateProject return a promise, and resolve those
+        // in the functions that call updatePromise to improve the execution sequence?
         updateProject (projectId) {
-            // debugger;
             storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
-                .then(projectAsset => projectAsset && this.setState({
-                    projectData: projectAsset.data,
-                    fetchingProject: false
-                }))
+                .then(projectAsset => {
+                    if (projectAsset) {
+                        this.setState({
+                            projectData: projectAsset.data,
+                            fetchingProject: false
+                        });
+                    }
+                })
                 .then(() => {
-                    if (projectId === newDefaultProjectId) {
-                        // if default project, set title to localized default
-                        this.props.setReduxProjectTitle(
-                            this.props.intl.formatMessage(defaultProjectTitleMessages.defaultProjectTitle)
-                        );
-                        history.pushState(
-                            null,
-                            this.props.intl.formatMessage(defaultProjectTitleMessages.defaultProjectTitle),
-                            '/newprojecturlhere'
-                        );
-                    } else {
+                    if (projectId !== defaultProjectId) {
                         // if not default project, register a project load event
                         analytics.event({
                             category: 'project',
@@ -107,10 +95,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
+                onRequestNewProject,
                 projectHost,
                 projectId,
-                reduxProjectId,
-                setReduxProjectId: setReduxProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -119,6 +106,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 <WrappedComponent
                     fetchingProject={this.state.fetchingProject}
                     projectData={this.state.projectData}
+                    onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -127,30 +115,17 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     ProjectLoaderComponent.propTypes = {
         assetHost: PropTypes.string,
         intl: intlShape.isRequired,
+        onRequestNewProject: PropTypes.func,
         projectHost: PropTypes.string,
-        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        setReduxProjectId: PropTypes.func,
-        setReduxProjectTitle: PropTypes.func
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
     ProjectLoaderComponent.defaultProps = {
         assetHost: 'https://assets.scratch.mit.edu',
         projectHost: 'https://projects.scratch.mit.edu',
-        projectId: newDefaultProjectId
+        projectId: defaultProjectId
     };
 
-    const mapStateToProps = state => {
-        return {
-            reduxProjectId: state.scratchGui.projectId
-        };
-    };
-
-    const mapDispatchToProps = dispatch => ({
-        setReduxProjectId: id => dispatch(setProjectId(id)),
-        setReduxProjectTitle: title => dispatch(setProjectTitle(title))
-    });
-
-    return injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProjectLoaderComponent));
+    return injectIntl(ProjectLoaderComponent);
 };
 
 export {

@@ -3,6 +3,7 @@
 @import "../../css/z-index.css";
 
 .menu-bar {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -29,6 +30,7 @@
     font-weight: bold;
     background-color: $motion-primary;
     color: $ui-white;
+    z-index: $z-index-menu-bar;
 }
 
 .main-menu {

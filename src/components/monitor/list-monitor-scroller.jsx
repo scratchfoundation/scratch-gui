@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
+import {FormattedMessage} from 'react-intl';
 
 import styles from './monitor.css';
 import {List} from 'react-virtualized';
@@ -21,7 +22,11 @@ class ListMonitorScroller extends React.Component {
     noRowsRenderer () {
         return (
             <div className={classNames(styles.listRow, styles.listEmpty)}>
-                {'(empty)' /* TODO waiting for design before translation */}
+                <FormattedMessage
+                    defaultMessage="(empty)"
+                    description="Text shown on a list monitor when a list is empty"
+                    id="gui.monitor.listMonitor.empty"
+                />
             </div>
         );
     }

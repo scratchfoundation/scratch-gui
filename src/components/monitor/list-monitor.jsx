@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {defineMessages, formatMessage} from 'react-intl';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import styles from './monitor.css';
 import ListMonitorScroller from './list-monitor-scroller.jsx';
 
@@ -13,7 +13,7 @@ const messages = defineMessages({
     }
 });
 
-const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
+const ListMonitor = ({draggable, intl, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
         className={styles.listMonitor}
         style={{
@@ -41,7 +41,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
                 {'+' /* TODO waiting on asset */}
             </div>
             <div className={styles.footerLength}>
-                {formatMessage(messages.listLength, {length: value.length})}
+                {intl.formatMessage(messages.listLength, {length: value.length})}
             </div>
             <div
                 className={classNames(draggable ? styles.resizeHandle : null, 'no-drag')}
@@ -59,6 +59,7 @@ ListMonitor.propTypes = {
     draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
     label: PropTypes.string.isRequired,
+    intl: intlShape.isRequired,
     onActivate: PropTypes.func,
     onAdd: PropTypes.func,
     onResizeMouseDown: PropTypes.func,
@@ -78,4 +79,4 @@ ListMonitor.defaultProps = {
     height: 200
 };
 
-export default ListMonitor;
+export default injectIntl(ListMonitor);

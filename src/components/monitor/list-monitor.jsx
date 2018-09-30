@@ -9,7 +9,7 @@ const messages = defineMessages({
     listLength: {
         defaultMessage: 'length {length}',
         description: 'Length label on list monitors. DO NOT translate {length} (with brackets).',
-        id: 'gui.monitor.listLength'
+        id: 'gui.monitor.listMonitor.listLength'
     }
 });
 
@@ -58,8 +58,8 @@ ListMonitor.propTypes = {
     categoryColor: PropTypes.string.isRequired,
     draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
-    label: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
+    label: PropTypes.string.isRequired,
     onActivate: PropTypes.func,
     onAdd: PropTypes.func,
     onResizeMouseDown: PropTypes.func,

@@ -41,7 +41,7 @@ const vmManagerHOC = function (WrappedComponent) {
             }
         }
         // NOTE: keep working here. problem is that we ONLY want to load the project
-        // here when the old project id was aolso default... otherwise, we load twice!!!
+        // here when the old project id was also default... otherwise, we load twice!!!
         loadProject (isInitial) {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {

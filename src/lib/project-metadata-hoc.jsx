@@ -54,12 +54,12 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             // if projectId has changed, and not just from one default value to
             // another equivalent value, look up project metadata
             if (this.props.projectId !== nextProps.projectId &&
-                (this.props.projectId !== defaultProjectId ||
-                this.props.projectId === null ||
-                typeof this.props.projectId === 'undefined' ||
-                nextProps.projectId !== defaultProjectId ||
-                nextProps.projectId === null ||
-                typeof nextProps.projectId === 'undefined')) {
+                ((this.props.projectId !== defaultProjectId &&
+                this.props.projectId !== null &&
+                typeof this.props.projectId !== 'undefined') ||
+                (nextProps.projectId !== defaultProjectId &&
+                nextProps.projectId !== null &&
+                typeof nextProps.projectId !== 'undefined'))) {
                 this.updateProjectMetaData(nextProps.projectId);
             }
         }

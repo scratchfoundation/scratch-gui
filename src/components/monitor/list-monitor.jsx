@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {defineMessages, formatMessage} from 'react-intl';
 import styles from './monitor.css';
 import ListMonitorScroller from './list-monitor-scroller.jsx';
+
+const messages = defineMessages({
+    listLength: {
+        defaultMessage: 'length {length}',
+        description: 'Length label on list monitors. DO NOT translate {length} (with brackets).',
+        id: 'gui.monitor.listLength'
+    }
+});
 
 const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
@@ -32,7 +41,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
                 {'+' /* TODO waiting on asset */}
             </div>
             <div className={styles.footerLength}>
-                {`length ${value.length}`}
+                {formatMessage(messages.listLength, {length: value.length})}
             </div>
             <div
                 className={classNames(draggable ? styles.resizeHandle : null, 'no-drag')}

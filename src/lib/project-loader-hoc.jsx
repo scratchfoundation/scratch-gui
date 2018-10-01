@@ -4,7 +4,7 @@ import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 
-import {ProjectState, defaultProjectId, setInitialProjectId} from '../reducers/project-id';
+import {ProjectState, defaultProjectId, fetchedProjectData, setInitialProjectId} from '../reducers/project-id';
 
 import analytics from './analytics';
 import log from './log';
@@ -15,16 +15,16 @@ import storage from './storage';
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
+// NOTE: rename to project fetcher ?
 const ProjectLoaderHOC = function (WrappedComponent) {
     class ProjectLoaderComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleRequestNewProject',
-                'updateProject'
+                'fetchProject'
             ]);
             this.state = {
-                projectData: null,
+                // projectData: null,
                 fetchingProject: false
             };
             storage.setProjectHost(props.projectHost);
@@ -53,8 +53,8 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             if (this.props.assetHost !== nextProps.assetHost) {
                 storage.setAssetHost(nextProps.assetHost);
             }
-            if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
-                this.updateProject(nextProps.reduxProjectId);
+            if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
+                this.fetchProject(nextProps.reduxProjectId);
             }
             // if (this.props.projectId !== nextProps.projectId) {
             //     this.setState({fetchingProject: true}, () => {
@@ -75,14 +75,16 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         // }
         // NOTE: should we instesad have updateProject return a promise, and resolve those
         // in the functions that call updatePromise to improve the execution sequence?
-        updateProject (projectId) {
+        fetchProject (projectId) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {
                         this.setState({
-                            projectData: projectAsset.data,
+                            // projectData: projectAsset.data,
                             fetchingProject: false
+                        }, () => {
+                            this.props.fetchedProjectData(projectAsset.data);
                         });
                     }
                 })
@@ -103,18 +105,22 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
-                onRequestNewProject,
+                fetchedProjectData: fetchedProjectDataProp,
+                intl,
+                isFetchingProjectWithId,
+                // onRequestNewProject,
                 projectHost,
                 projectId,
+                reduxProjectId,
+                setInitialProjectId: setInitialProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
-            if (!this.state.projectData) return null;
             return (
                 <WrappedComponent
                     fetchingProject={this.state.fetchingProject}
-                    projectData={this.state.projectData}
-                    onRequestNewProject={this.handleRequestNewProject}
+                    // projectData={this.state.projectData}
+                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -122,9 +128,10 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     }
     ProjectLoaderComponent.propTypes = {
         assetHost: PropTypes.string,
+        fetchedProjectData: PropTypes.func,
         intl: intlShape.isRequired,
-        isLoadingProjectWithId: PropTypes.bool,
-        onRequestNewProject: PropTypes.func,
+        isFetchingProjectWithId: PropTypes.bool,
+        // onRequestNewProject: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -141,12 +148,14 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isLoadingProjectWithId: projectState === ProjectState.LOADING_WITH_ID ||
-                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            isFetchingProjectWithId: projectState === ProjectState.FETCHING_WITH_ID ||
+                projectState === ProjectState.FETCHING_NEW_DEFAULT,
             reduxProjectId: state.scratchGui.projectId.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
+        // NOTE: should I rename props like this so there's no name conflict? Like 'handle...'
+        fetchedProjectData: data => dispatch(fetchedProjectData(data)),
         setInitialProjectId: projectId => dispatch(setInitialProjectId(projectId))
     });
     return injectIntl(connect(

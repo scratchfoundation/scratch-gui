@@ -8,9 +8,13 @@ const defaultProjectId = 0; // hardcoded id of default project
 const ProjectState = keyMirror({
     NOT_LOADED: null,
     ERROR: null,
-    LOADING_WITH_ID: null,
-    LOADING_FILE_UPLOAD: null,
-    LOADING_NEW_DEFAULT: null,
+    ANY: null,
+    FETCHING_WITH_ID: null,
+    FETCHING_FILE_UPLOAD: null,
+    FETCHING_NEW_DEFAULT: null,
+    LOADING_VM_WITH_ID: null,
+    LOADING_VM_FILE_UPLOAD: null,
+    LOADING_VM_NEW_DEFAULT: null,
     SHOWING_WITH_ID: null,
     SHOWING_FILE_UPLOAD: null,
     SHOWING_NEW_DEFAULT: null,
@@ -19,6 +23,7 @@ const ProjectState = keyMirror({
 });
 
 const initialState = {
+    projectData: null,
     projectId: null,
     projectState: ProjectState.NOT_LOADED
 };
@@ -33,26 +38,45 @@ const reducer = function (state, action) {
     case TRANSITION_STATE:
         // "from" state must be either an array that includes current project state,
         // or null/undefined
-        if (state.projectState in action.transitions) {
-            const resultState = action.transitions[state.projectState];
-            switch (resultState) {
-            case ProjectState.LOADING_WITH_ID:
+        if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
+//            const resultState = action.transitions[state.projectState];
+            switch (action.transitions[state.projectState] ?
+                action.transitions[state.projectState] : action.transitions[ProjectState.ANY]) {
+            case ProjectState.FETCHING_WITH_ID:
                 return Object.assign({}, state, {
                     projectId: action.id,
-                    projectState: resultState
+                    projectState: ProjectState.FETCHING_WITH_ID
                 });
-            case ProjectState.LOADING_FILE_UPLOAD:
+            case ProjectState.FETCHING_FILE_UPLOAD:
+                // goes straight to LOADING_VM_FILE_UPLOAD
                 return Object.assign({}, state, {
                     projectId: null,
-                    projectState: resultState
+                    projectState: ProjectState.LOADING_VM_FILE_UPLOAD
                 });
-            case ProjectState.LOADING_NEW_DEFAULT:
+            case ProjectState.FETCHING_NEW_DEFAULT:
                 return Object.assign({}, state, {
                     projectId: defaultProjectId,
-                    projectState: resultState
+                    projectState: ProjectState.FETCHING_NEW_DEFAULT
+                });
+            case ProjectState.LOADING_VM_WITH_ID:
+                return Object.assign({}, state, {
+                    projectData: action.data,
+                    projectState: ProjectState.LOADING_VM_WITH_ID
+                });
+            case ProjectState.LOADING_VM_FILE_UPLOAD:
+                // goes straight to LOADING_VM_FILE_UPLOAD
+                return Object.assign({}, state, {
+                    projectData: action.data,
+                    projectState: ProjectState.LOADING_VM_FILE_UPLOAD
+                });
+            case ProjectState.LOADING_VM_NEW_DEFAULT:
+                return Object.assign({}, state, {
+                    projectData: action.data,
+                    projectState: ProjectState.LOADING_VM_NEW_DEFAULT
                 });
             default:
-                return Object.assign({}, state, {projectState: resultState});
+                return Object.assign({}, state, {projectState: (action.transitions[state.projectState] ?
+                    action.transitions[state.projectState] : action.transitions[ProjectState.ANY])});
             }
         }
         // default to requiring transitions to successfully match current state
@@ -78,7 +102,7 @@ const setProjectId = function (id) {
 const setInitialProjectId = id => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.NOT_LOADED]: ProjectState.LOADING_WITH_ID
+        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_WITH_ID
     },
     id: id
 });
@@ -90,7 +114,9 @@ const setHashProjectId = id => {
         return {
             type: TRANSITION_STATE,
             transitions: {
-                [ProjectState.NOT_LOADED]: ProjectState.LOADING_NEW_DEFAULT
+                // NOTE: add other states like show -> loading_new, check that they work and
+                // hash reaction to new or upload doesn't cause this to fire
+                [ProjectState.NOT_LOADED]: ProjectState.FETCHING_NEW_DEFAULT
             },
             require: false
         };
@@ -98,26 +124,46 @@ const setHashProjectId = id => {
     return {
         type: TRANSITION_STATE,
         transitions: {
-            [ProjectState.NOT_LOADED]: ProjectState.LOADING_WITH_ID
+            [ProjectState.ANY]: ProjectState.FETCHING_WITH_ID
         },
         id: id
     };
 };
 
-const startLoadingFileUpload = () => ({
+const fetchedProjectData = data => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.NOT_LOADED]: ProjectState.LOADING_FILE_UPLOAD,
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.LOADING_FILE_UPLOAD,
-        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.LOADING_FILE_UPLOAD,
-        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.LOADING_FILE_UPLOAD
+        [ProjectState.FETCHING_WITH_ID]: ProjectState.LOADING_VM_WITH_ID,
+        [ProjectState.FETCHING_FILE_UPLOAD]: ProjectState.LOADING_VM_FILE_UPLOAD,
+        [ProjectState.FETCHING_NEW_DEFAULT]: ProjectState.LOADING_VM_NEW_DEFAULT
+    },
+    data: data
+});
+
+
+const startFetchingFileUpload = () => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_FILE_UPLOAD,
+        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCHING_FILE_UPLOAD,
+        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_FILE_UPLOAD,
+        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_FILE_UPLOAD
     }
 });
 
 const doneLoadingFileUpload = () => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.LOADING_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD
+        [ProjectState.LOADING_VM_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD
+    }
+});
+
+const doneLoading = () => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        [ProjectState.LOADING_VM_WITH_ID]: ProjectState.SHOWING_WITH_ID,
+        [ProjectState.LOADING_VM_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD,
+        [ProjectState.LOADING_VM_NEW_DEFAULT]: ProjectState.SHOWING_NEW_DEFAULT
     }
 });
 
@@ -125,8 +171,8 @@ const stepTowardsNewProject = () => ({
     type: TRANSITION_STATE,
     transitions: {
         [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID_BEFORE_NEW,
-        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.LOADING_NEW_DEFAULT,
-        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.LOADING_NEW_DEFAULT
+        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_NEW_DEFAULT,
+        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_NEW_DEFAULT
     }
 });
 
@@ -134,7 +180,7 @@ const doneSavingWithId = () => ({
     type: TRANSITION_STATE,
     transitions: {
         [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-        [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.LOADING_NEW_DEFAULT
+        [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT
     }
 });
 
@@ -143,11 +189,13 @@ export {
     initialState as projectIdInitialState,
     ProjectState,
     defaultProjectId,
+    fetchedProjectData,
+    doneLoading,
     doneLoadingFileUpload,
     doneSavingWithId,
     setHashProjectId,
     setInitialProjectId,
     setProjectId,
-    startLoadingFileUpload,
+    startFetchingFileUpload,
     stepTowardsNewProject
 };

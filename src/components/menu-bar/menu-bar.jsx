@@ -125,6 +125,7 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleLanguageMouseUp',
+            'handleNewProject',
             'handleRestoreOption',
             'handleProjectLoadFinished',
             'handleCloseFileMenuAndThen',
@@ -320,7 +321,9 @@ class MenuBar extends React.Component {
                                     {/* )}
                                 </ProjectSaver> */}
                                 <MenuSection>
-                                    <ProjectSaver>{(downloadProject, updateProject) => (
+                                    <ProjectSaver
+                                        doStoreProject={this.props.doStoreProject}
+                                        >{(downloadProject, updateProject) => (
                                         this.props.canUpdateProject && this.props.userOwnsProject ? (
                                             <MenuItem onClick={this.handleUpdateProject(updateProject)}>
                                                 {saveNowMessage}
@@ -638,6 +641,7 @@ class MenuBar extends React.Component {
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
     canUpdateProject: PropTypes.bool,
+    doStoreProject: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
@@ -660,7 +664,7 @@ MenuBar.propTypes = {
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onRequestCloseLogin: PropTypes.func,
-    onRequestNewProject: PropTypes.func,
+    // onRequestNewProject: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,

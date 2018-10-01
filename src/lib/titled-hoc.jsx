@@ -19,14 +19,22 @@ const TitledHOC = function (WrappedComponent) {
             };
         }
         handleUpdateProjectTitle (newTitle) {
+            // NOTE: this seems to be called twice each time you change the title, resulting from
+            // two handleKeyPress calls in BufferedInput. Might want to investigate why.
             this.setState({projectTitle: newTitle});
         }
         render () {
+            const {
+                /* eslint-disable no-unused-vars */
+                intl,
+                /* eslint-enable no-unused-vars */
+                ...componentProps
+            } = this.props;
             return (
                 <WrappedComponent
                     projectTitle={this.state.projectTitle}
                     onUpdateProjectTitle={this.handleUpdateProjectTitle}
-                    {...this.props}
+                    {...componentProps}
                 />
             );
         }

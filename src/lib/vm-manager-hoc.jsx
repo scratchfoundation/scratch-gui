@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
-import {ProjectState} from '../reducers/project-id';
+import {ProjectState, doneLoading} from '../reducers/project-id';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -18,7 +18,6 @@ const vmManagerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleRequestNewProject',
                 'loadProject'
             ]);
             this.state = {
@@ -31,13 +30,10 @@ const vmManagerHOC = function (WrappedComponent) {
             if (this.props.vm.initialized) return;
             this.audioEngine = new AudioEngine();
             this.props.vm.attachAudioEngine(this.audioEngine);
-            this.loadProject(true).then(() => {
-                this.props.vm.initialized = true;
-            });
         }
         componentWillReceiveProps (nextProps) {
             if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
-                this.loadProject(false);
+                this.loadProject(nextProps.projectData);
             }
             // if (this.props.projectData !== nextProps.projectData) {
             //     this.setState({isLoading: true}, () => {
@@ -47,14 +43,22 @@ const vmManagerHOC = function (WrappedComponent) {
         }
         // NOTE: keep working here. problem is that we ONLY want to load the project
         // here when the old project id was also default... otherwise, we load twice!!!
-        loadProject (isInitial) {
-            return this.props.vm.loadProject(this.props.projectData)
+        loadProject (projectData) {
+            return this.props.vm.loadProject(projectData)
                 .then(() => {
                     this.setState({isLoading: false}, () => {
-                        if (isInitial) {
+                        if (!this.props.vm.initialized) {
                             this.props.vm.setCompatibilityMode(true);
                             this.props.vm.start();
+                            // NOTE: this logic is slightly different from previous
+                            // https://github.com/LLK/scratch-gui/blob/develop/src/containers/gui.jsx
+                            // Here, we wait until this point to set initialized to true;
+                            // previously, we set it to true immediately on initiating vm.loadProject,
+                            // and we relied on an explicit initial call in componentDidMount
+                            // to setCompatibilityMode and start().
+                            this.props.vm.initialized = true;
                         }
+                        this.props.doneLoading();
                     });
                 })
                 .catch(e => {
@@ -77,19 +81,24 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                doneLoading,
+                isLoadingProjectWithId,
                 projectData,
-                onRequestNewProject, // must remove parent's onRequestNewProject to use our own
+                projectId,
+                // onRequestNewProject, // must remove parent's onRequestNewProject to use our own
                 /* eslint-enable no-unused-vars */
                 vm,
                 ...componentProps
             } = this.props;
+            // don't display anything until we have data loaded
+            if (!this.props.projectData) return null;
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
                     isLoading={this.state.isLoading}
                     loadingError={this.state.loadingError}
                     vm={vm}
-                    onRequestNewProject={this.handleRequestNewProject}
+                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -97,8 +106,8 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        doneLoading: PropTypes.func,
         isLoadingProjectWithId: PropTypes.bool,
-        onRequestNewProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         vm: PropTypes.instanceOf(VM).isRequired
@@ -107,14 +116,17 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isLoadingProjectWithId: projectState === ProjectState.LOADING_WITH_ID ||
-                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            isLoadingProjectWithId: projectState === ProjectState.LOADING_VM_WITH_ID ||
+                projectState === ProjectState.LOADING_VM_NEW_DEFAULT,
+            projectData: state.scratchGui.projectId.projectData,
             projectId: state.scratchGui.projectId.projectId,
             vm: state.scratchGui.vm
         };
     };
 
-    const mapDispatchToProps = () => ({});
+    const mapDispatchToProps = dispatch => ({
+        doneLoading: () => dispatch(doneLoading())
+    });
 
     return connect(
         mapStateToProps,

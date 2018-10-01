@@ -7,15 +7,14 @@ import {ProjectState, defaultProjectId, setHashProjectId} from '../reducers/proj
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop
- * @returns {React.Component} component with project loading behavior
+ * @returns {React.Component} component with project fetching behavior
  */
 const HashParserHOC = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleHashChange',
-                'handleRequestNewProject'
+                'handleHashChange'
             ]);
         }
         componentDidMount () {
@@ -23,8 +22,8 @@ const HashParserHOC = function (WrappedComponent) {
             this.handleHashChange();
         }
         componentWillReceiveProps (nextProps) {
-            // if we are newly loading a non-hash project...
-            if (nextProps.isLoadingNonHashProject && !this.props.isLoadingNonHashProject) {
+            // if we are newly fetching a non-hash project...
+            if (nextProps.isFetchingNonHashProject && !this.props.isFetchingNonHashProject) {
                 // ...clear the hash from the url
                 history.pushState('new-project', 'new-project',
                     window.location.pathname + window.location.search);
@@ -50,32 +49,41 @@ const HashParserHOC = function (WrappedComponent) {
         //     });
         // }
         render () {
+            const {
+                /* eslint-disable no-unused-vars */
+                isFetchingNonHashProject,
+                reduxProjectId,
+                setHashProjectId: setHashProjectIdProp,
+                /* eslint-enable no-unused-vars */
+                ...componentProps
+            } = this.props;
             return (
                 <WrappedComponent
                     hideIntro={this.state.projectId && this.state.projectId !== 0}
                     // projectId={this.state.projectId}
-                    onRequestNewProject={this.handleRequestNewProject}
-                    {...this.props}
+                    // onRequestNewProject={this.handleRequestNewProject}
+                    {...componentProps}
                 />
             );
         }
     }
     HashParserComponent.propTypes = {
-        isLoadingNonHashProject: PropTypes.bool,
+        isFetchingNonHashProject: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setHashProjectId: PropTypes.func
     };
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isLoadingNonHashProject: projectState === ProjectState.LOADING_FILE_UPLOAD ||
-                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            isFetchingNonHashProject: projectState === ProjectState.FETCHING_FILE_UPLOAD ||
+                projectState === ProjectState.FETCHING_NEW_DEFAULT,
             reduxProjectId: state.scratchGui.projectId.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
         setHashProjectId: projectId => dispatch(setHashProjectId(projectId))
     });
+    // return HashParserComponent;
     return connect(
         mapStateToProps,
         mapDispatchToProps

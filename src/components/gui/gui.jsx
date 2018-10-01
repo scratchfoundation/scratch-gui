@@ -64,6 +64,7 @@ const GUIComponent = props => {
         children,
         costumeLibraryVisible,
         costumesTabVisible,
+        doStoreProject,
         enableCommunity,
         importInfoVisible,
         intl,
@@ -83,7 +84,7 @@ const GUIComponent = props => {
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
-        onRequestNewProject,
+        // onRequestNewProject,
         onSeeCommunity,
         onShare,
         previewInfoVisible,
@@ -166,6 +167,7 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    doStoreProject={doStoreProject}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
                     userOwnsProject={userOwnsProject}
@@ -173,7 +175,7 @@ const GUIComponent = props => {
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
                     onOpenRegistration={onOpenRegistration}
-                    onRequestNewProject={onRequestNewProject}
+                    // onRequestNewProject={onRequestNewProject}
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
@@ -312,6 +314,7 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
+    doStoreProject: PropTypes.func,
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
@@ -328,7 +331,7 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
-    onRequestNewProject: PropTypes.func,
+    // onRequestNewProject: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onTabSelect: PropTypes.func,

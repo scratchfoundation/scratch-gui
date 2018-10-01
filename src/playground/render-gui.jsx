@@ -16,8 +16,8 @@ import ProjectMetaDataHOC from '../lib/project-metadata-hoc.jsx';
 export default appTarget => {
     GUI.setAppElement(appTarget);
     const WrappedGui = compose(
-        HashParserHOC,
         AppStateHOC,
+        HashParserHOC, // NOTE: IMPORTANT: ok that i've reordered this?
         TitledHOC,
         ProjectMetaDataHOC
     )(GUI);

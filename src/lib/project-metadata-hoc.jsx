@@ -45,13 +45,12 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleRequestNewProject',
                 'updateProjectMetaData'
             ]);
             this.updateProjectMetaData(props.projectId);
         }
         componentWillReceiveProps (nextProps) {
-            if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
+            if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
                 this.updateProjectMetaData(nextProps.projectId);
             }
             // // if projectId has changed, and not just from one default value to
@@ -96,13 +95,16 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
         }
         render () {
             const {
-                // don't pass down parent's onRequestNewProject
-                onRequestNewProject, // eslint-disable-line no-unused-vars
+                /* eslint-disable no-unused-vars */
+                intl,
+                isFetchingProjectWithId,
+                projectId,
+                /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
             return (
                 <WrappedComponent
-                    onRequestNewProject={this.handleRequestNewProject}
+                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -111,8 +113,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
 
     ProjectMetaDataComponent.propTypes = {
         intl: intlShape.isRequired,
-        isLoadingProjectWithId: PropTypes.bool,
-        onRequestNewProject: PropTypes.func,
+        isFetchingProjectWithId: PropTypes.bool,
         onUpdateProjectTitle: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
         // token: PropTypes.string
@@ -121,8 +122,8 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isLoadingProjectWithId: projectState === ProjectState.LOADING_WITH_ID ||
-                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            isFetchingProjectWithId: projectState === ProjectState.FETCHING_WITH_ID ||
+                projectState === ProjectState.FETCHING_NEW_DEFAULT,
             projectId: state.scratchGui.projectId.projectId
             // token: state.session.session && state.session.session.user && state.session.session.user.token
         };

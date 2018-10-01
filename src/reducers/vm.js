@@ -22,29 +22,8 @@ const setVM = function (vm) {
     };
 };
 
-const doStoreProject = (id, onSaveFinished) => (
-    reducer.saveProjectSb3()
-        .then(content => {
-            if (onSaveFinished) {
-                onSaveFinished();
-            }
-            const assetType = storage.AssetType.Project;
-            const dataFormat = storage.DataFormat.SB3;
-            const body = new FormData();
-            body.append('sb3_file', content, 'sb3_file');
-            return storage.store(
-                assetType,
-                dataFormat,
-                body,
-                id
-            );
-        })
-);
-
-
 export {
     reducer as default,
     initialState as vmInitialState,
-    doStoreProject,
     setVM
 };

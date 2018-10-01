@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 // import storage from '../lib/storage';
 import {projectTitleInitialState} from '../reducers/project-title';
 import {ProjectState} from '../reducers/project-id';
-import {doStoreProject} from '../reducers/vm';
+// import {doStoreProject} from '../reducers/vm';
 
 
 /**
@@ -73,13 +73,13 @@ class ProjectSaver extends React.Component {
     // }
     createProject () {
         if (this.props.isShowingWithId) {
-            return doStoreProject(null, this.props.onSaveFinished);
+            return this.props.doStoreProject(null, this.props.onSaveFinished);
         }
         return Promise.reject();
     }
     updateProject () {
         if (this.props.isShowingWithId) {
-            return doStoreProject(this.props.projectId, this.props.onSaveFinished);
+            return this.props.doStoreProject(this.props.projectId, this.props.onSaveFinished);
         }
         return Promise.reject();
     }
@@ -105,6 +105,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    doStoreProject: PropTypes.func,
     isShowingWithId: PropTypes.bool,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,

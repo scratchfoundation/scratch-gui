@@ -27,9 +27,9 @@ import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
-    // constructor (props) {
-    //     super(props);
-    // }
+    constructor (props) {
+        super(props);
+    }
     componentDidMount () {
         if (this.props.projectTitle) {
             this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
@@ -50,15 +50,15 @@ class GUI extends React.Component {
             assetHost,
             errorMessage,
             hideIntro,
+            loadingError,
             onUpdateReduxProjectTitle,
-            projectData,
+            // projectData,
             projectHost,
             projectTitle,
             /* eslint-enable no-unused-vars */
             children,
             fetchingProject,
             isLoading,
-            loadingError,
             loadingStateVisible,
             ...componentProps
         } = this.props;
@@ -87,7 +87,7 @@ GUI.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    // projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     projectHost: PropTypes.string,
     projectTitle: PropTypes.string
 };

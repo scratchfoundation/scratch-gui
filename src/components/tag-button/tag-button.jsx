@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import Button from '../button/button.jsx';
 
@@ -10,7 +11,8 @@ const TagButtonComponent = ({
     active,
     iconClassName,
     className,
-    title,
+    tag, // eslint-disable-line no-unused-vars
+    intlLabel,
     ...props
 }) => (
     <Button
@@ -26,17 +28,19 @@ const TagButtonComponent = ({
         )}
         {...props}
     >
-        {title}
+        <FormattedMessage {...intlLabel} />
     </Button>
 );
 
 TagButtonComponent.propTypes = {
     ...Button.propTypes,
     active: PropTypes.bool,
-    title: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object // FormattedMessage
-    ]).isRequired
+    intlLabel: PropTypes.shape({
+        defaultMessage: PropTypes.string,
+        description: PropTypes.string,
+        id: PropTypes.string
+    }).isRequired,
+    tag: PropTypes.string.isRequired
 };
 
 TagButtonComponent.defaultProps = {

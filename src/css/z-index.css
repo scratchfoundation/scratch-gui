@@ -8,6 +8,7 @@ $z-index-extension-button: 50; /* Force extension button above the ScratchBlocks
 $z-index-menu-bar: 50; /* blocklyToolboxDiv is 40 */
 
 $z-index-monitor: 100;
+$z-index-stage-indicator: 110;
 $z-index-add-button: 120;
 $z-index-tooltip: 130; /* tooltips should go over add buttons if they overlap */
 
@@ -23,6 +24,7 @@ $z-index-stage-color-picker-background: 2000;
 $z-index-stage-with-color-picker: 2010;
 $z-index-stage-header: 5000;
 $z-index-stage-wrapper-overlay: 5000;
+$z-index-alerts: 5010;
 
 /* in most interfaces, the context menu is always on top */
 $z-index-context-menu: 10000;

@@ -50,7 +50,6 @@ Instead of `BUILD_MODE=dist npm run build` you can also use `BUILD_MODE=dist npm
 * In the worst case unlink the repositories by running `npm unlink` in both, and start over.
 
 ## Testing
-
 ### Documentation
 
 You may want to review the documentation for [Jest](https://facebook.github.io/jest/docs/en/api.html) and [Enzyme](http://airbnb.io/enzyme/docs/api/) as you write your tests.

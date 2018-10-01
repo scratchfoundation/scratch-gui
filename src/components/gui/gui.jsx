@@ -27,6 +27,7 @@ import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
+import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -52,7 +53,9 @@ let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        accountNavOpen,
         activeTabIndex,
+        alertsVisible,
         basePath,
         backdropLibraryVisible,
         backpackOptions,
@@ -67,14 +70,21 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         loading,
-        onExtensionButtonClick,
+        renderLogin,
+        onClickAccountNav,
+        onCloseAccountNav,
+        onLogOut,
+        onOpenRegistration,
+        onToggleLoginOpen,
+        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onSeeCommunity,
-        onUpdateProjectTitle,
+        onShare,
         previewInfoVisible,
         targetIsStage,
         soundsTabVisible,
@@ -108,7 +118,11 @@ const GUIComponent = props => {
                 isRendererSupported={isRendererSupported}
                 stageSize={stageSize}
                 vm={vm}
-            />
+            >
+                {alertsVisible ? (
+                    <Alerts className={styles.alertsContainer} />
+                ) : null}
+            </StageWrapper>
         ) : (
             <Box
                 className={styles.pageWrapper}
@@ -133,6 +147,9 @@ const GUIComponent = props => {
                 {cardsVisible ? (
                     <Cards />
                 ) : null}
+                {alertsVisible ? (
+                    <Alerts className={styles.alertsContainer} />
+                ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary
                         vm={vm}
@@ -146,8 +163,16 @@ const GUIComponent = props => {
                     />
                 ) : null}
                 <MenuBar
+                    accountNavOpen={accountNavOpen}
                     enableCommunity={enableCommunity}
+                    renderLogin={renderLogin}
+                    onClickAccountNav={onClickAccountNav}
+                    onCloseAccountNav={onCloseAccountNav}
+                    onLogOut={onLogOut}
+                    onOpenRegistration={onOpenRegistration}
                     onSeeCommunity={onSeeCommunity}
+                    onShare={onShare}
+                    onToggleLoginOpen={onToggleLoginOpen}
                     onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
@@ -270,6 +295,7 @@ const GUIComponent = props => {
 };
 
 GUIComponent.propTypes = {
+    accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
@@ -291,13 +317,20 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickAccountNav: PropTypes.func,
+    onCloseAccountNav: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
+    onLogOut: PropTypes.func,
+    onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
     onSeeCommunity: PropTypes.func,
+    onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
+    renderLogin: PropTypes.func,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,

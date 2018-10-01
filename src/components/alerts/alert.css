@@ -1,0 +1,34 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.alert {
+    width: 100%;
+    background: #FFF0DF;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    align-items: left;
+    border: 1px solid #FF8C1A;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 2px 2px 2px 2px rgba(255, 140, 26, 0.25);
+    margin-bottom: 7px;
+}
+
+.alert-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.alert-message {
+    color: #555;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 22pt;
+    width: 100%;
+}
+
+.alert-remove-button {
+    color: #FF8C1A;
+}

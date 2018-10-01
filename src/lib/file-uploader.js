@@ -180,7 +180,8 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
     handleSound(vmSound);
 };
 
-const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
+const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite, costumeSuffix) {
+    const costumeName = costumeSuffix || 'costume1';
     switch (fileType) {
     case '':
     case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
@@ -191,7 +192,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
     case 'image/png':
     case 'image/jpeg': {
         // Make a sprite from an image by making it a costume first
-        costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
+        costumeUpload(fileData, fileType, `${spriteName}-${costumeName}`, storage, (vmCostume => {
             const newSprite = {
                 name: spriteName,
                 isStage: false,

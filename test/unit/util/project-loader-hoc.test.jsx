@@ -2,7 +2,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import ProjectLoaderHOC from '../../../src/lib/project-loader-hoc.jsx';
 import storage from '../../../src/lib/storage';
-import {mount} from 'enzyme';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 
 jest.mock('react-ga');
 
@@ -19,7 +19,7 @@ describe('ProjectLoaderHOC', () => {
         const WrappedComponent = ProjectLoaderHOC(Component);
         const originalLoad = storage.load;
         storage.load = jest.fn((type, id) => Promise.resolve({data: id}));
-        const mounted = mount(
+        const mounted = mountWithIntl(
             <WrappedComponent
                 projectId="100"
                 store={store}
@@ -37,7 +37,7 @@ describe('ProjectLoaderHOC', () => {
         const WrappedComponent = ProjectLoaderHOC(Component);
         const originalLoad = storage.load;
         storage.load = jest.fn(() => Promise.resolve(null));
-        const mounted = mount(<WrappedComponent store={store} />);
+        const mounted = mountWithIntl(<WrappedComponent store={store} />);
         storage.load = originalLoad;
         const mountedDiv = mounted.find('div');
         expect(mountedDiv.exists()).toEqual(false);

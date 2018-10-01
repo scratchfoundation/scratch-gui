@@ -1,0 +1,50 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.user-info {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 0 0.95rem;
+    max-width: 260px;
+    height: $menu-bar-height;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $ui-white;
+    font-size: .75rem;
+    font-weight: normal;
+}
+
+[dir="ltr"] .user-info .avatar {
+    margin-right: calc($space * .8125);
+}
+
+[dir="rtl"] .user-info .avatar {
+    margin-left: calc($space * .8125);
+}
+
+.user-info .avatar {
+    margin-right: calc($space * .8125);
+    border-radius: $form-radius;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+}
+
+[dir="ltr"] .user-info .dropdown-caret-position {
+  margin-left: calc($space * .8125);
+}
+
+[dir="rtl"] .user-info .dropdown-caret-position {
+  margin-right: calc($space * .8125);
+}
+
+.user-info .dropdown-caret-position {
+  display: inline-block;
+  padding-bottom: .125rem;
+  vertical-align: middle;
+}

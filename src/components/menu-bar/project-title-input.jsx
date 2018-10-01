@@ -36,7 +36,7 @@ class ProjectTitleInput extends React.Component {
     render () {
         return (
             <BufferedInput
-                className={classNames(styles.titleField)}
+                className={classNames(styles.titleField, this.props.className)}
                 maxLength="100"
                 placeholder={this.props.intl.formatMessage(messages.projectTitlePlaceholder)}
                 tabIndex="0"
@@ -49,6 +49,7 @@ class ProjectTitleInput extends React.Component {
 }
 
 ProjectTitleInput.propTypes = {
+    className: PropTypes.string,
     intl: intlShape.isRequired,
     onUpdateProjectTitle: PropTypes.func,
     projectTitle: PropTypes.string

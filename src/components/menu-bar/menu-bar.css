@@ -37,6 +37,7 @@
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: center;
+    flex-grow: 1;
 }
 
 .scratch-logo {
@@ -55,11 +56,6 @@
 .language-menu {
     display: inline-flex;
     width: $language-selector-width;
-}
-
-.menu {
-    z-index: $z-index-menu-bar;
-    top: $menu-bar-height;
 }
 
 .menu-bar-item {
@@ -84,6 +80,16 @@
     background-color: $ui-black-transparent;
 }
 
+.menu-bar-item.growable {
+    max-width: 12rem;
+    flex: 1;
+}
+
+.title-field-growable {
+    flex-grow: 1;
+    width: 2rem;
+}
+
 .file-group {
     display: flex;
     flex-direction: row;
@@ -92,6 +98,11 @@
 
 .file-group .menu-bar-item {
     padding: 0 0.75rem;
+}
+
+.menu-bar-menu {
+    margin-top: $menu-bar-height;
+    z-index: $z-index-menu-bar;
 }
 
 .feedback-link {
@@ -128,11 +139,14 @@
     opacity: 0.5;
 }
 
-.account-info-wrapper {
+.account-info-group {
     display: flex;
     flex-direction: row;
-    padding: 0 .5rem;
     align-items: center;
+}
+
+.account-info-group .menu-bar-item {
+    padding: 0 0.75rem;
 }
 
 .mystuff-icon {
@@ -185,4 +199,23 @@
   to {
     filter: hue-rotate(360deg);
   }
+}
+
+.mystuff > a {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 45%;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 30px;
+  overflow: hidden;
+  text-indent: 50px;
+  white-space: nowrap;
+}
+.mystuff > a:hover {
+  background-size: 50%;
+}
+
+.mystuff > a {
+  background-image: url("/images/mystuff.png");
 }

@@ -11,6 +11,8 @@ import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
+import {emptyCostume} from '../lib/empty-assets';
+import sharedMessages from '../lib/shared-messages';
 
 import {
     closeCameraCapture,
@@ -37,7 +39,7 @@ import searchIcon from '../components/action-menu/icon--search.svg';
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 
-const messages = defineMessages({
+let messages = defineMessages({
     addLibraryBackdropMsg: {
         defaultMessage: 'Choose a Backdrop',
         description: 'Button to add a backdrop in the editor tab',
@@ -74,6 +76,8 @@ const messages = defineMessages({
         id: 'gui.costumeTab.addCameraCostume'
     }
 });
+
+messages = {...messages, ...sharedMessages};
 
 class CostumeTab extends React.Component {
     constructor (props) {
@@ -150,20 +154,10 @@ class CostumeTab extends React.Component {
         this.props.vm.addCostume(costume.md5, costume);
     }
     handleNewBlankCostume () {
-        const emptyItem = costumeLibraryContent.find(item => (
-            item.name === 'Empty'
-        ));
-        const name = this.props.vm.editingTarget.isStage ? `backdrop1` : `costume1`;
-        const vmCostume = {
-            name: name,
-            md5: emptyItem.md5,
-            rotationCenterX: emptyItem.info[0],
-            rotationCenterY: emptyItem.info[1],
-            bitmapResolution: emptyItem.info.length > 2 ? emptyItem.info[2] : 1,
-            skinId: null
-        };
-
-        this.handleNewCostume(vmCostume);
+        const name = this.props.vm.editingTarget.isStage ?
+            this.props.intl.formatMessage(messages.backdrop, {index: 1}) :
+            this.props.intl.formatMessage(messages.costume, {index: 1});
+        this.handleNewCostume(emptyCostume(name));
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
@@ -201,7 +195,8 @@ class CostumeTab extends React.Component {
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
-        costumeUpload(buffer, 'image/png', 'costume1', storage, this.handleNewCostume);
+        const name = this.props.intl.formatMessage(messages.costume, {index: 1});
+        costumeUpload(buffer, 'image/png', name, storage, this.handleNewCostume);
     }
     handleFileUploadClick () {
         this.fileInput.click();

@@ -52,9 +52,9 @@ class Stage extends React.Component {
             colorInfo: null,
             question: null
         };
-        if (this.props.vm.runtime.renderer) {
-            this.renderer = this.props.vm.runtime.renderer;
-            this.canvas = this.props.vm.runtime.renderer._gl.canvas;
+        if (this.props.vm.renderer) {
+            this.renderer = this.props.vm.renderer;
+            this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);
@@ -75,7 +75,8 @@ class Stage extends React.Component {
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
-            this.state.question !== nextState.question;
+            this.state.question !== nextState.question ||
+            this.props.micIndicator !== nextProps.micIndicator;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -402,6 +403,7 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     isFullScreen: state.scratchGui.mode.isFullScreen,
+    micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
 });

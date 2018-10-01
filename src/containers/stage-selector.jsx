@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {intlShape, injectIntl} from 'react-intl';
 
 import {connect} from 'react-redux';
 import {openBackdropLibrary} from '../reducers/modals';
@@ -9,11 +10,12 @@ import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setHoveredSprite} from '../reducers/hovered-target';
 import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
+import {emptyCostume} from '../lib/empty-assets';
+import sharedMessages from '../lib/shared-messages';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
-import costumeLibraryContent from '../lib/libraries/costumes.json';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 const dragTypes = [
@@ -66,11 +68,7 @@ class StageSelector extends React.Component {
         this.addBackdropFromLibraryItem(item);
     }
     handleEmptyBackdrop () {
-        // @todo this is brittle, will need to be refactored for localized libraries
-        const emptyItem = costumeLibraryContent.find(item => item.name === 'Empty');
-        if (emptyItem) {
-            this.addBackdropFromLibraryItem(emptyItem);
-        }
+        this.handleNewBackdrop(emptyCostume(this.props.intl.formatMessage(sharedMessages.backdrop, {index: 1})));
     }
     handleBackdropUpload (e) {
         const storage = this.props.vm.runtime.storage;
@@ -108,7 +106,7 @@ class StageSelector extends React.Component {
     }
     render () {
         const componentProps = omit(this.props, [
-            'assetId', 'dispatchSetHoveredSprite', 'id', 'onActivateTab', 'onSelect']);
+            'assetId', 'dispatchSetHoveredSprite', 'id', 'intl', 'onActivateTab', 'onSelect']);
         return (
             <DroppableStage
                 fileInputRef={this.setFileInput}
@@ -128,6 +126,7 @@ class StageSelector extends React.Component {
 StageSelector.propTypes = {
     ...StageSelectorComponent.propTypes,
     id: PropTypes.string,
+    intl: intlShape.isRequired,
     onSelect: PropTypes.func
 };
 
@@ -152,7 +151,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(StageSelector);
+)(StageSelector));

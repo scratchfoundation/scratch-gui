@@ -1,8 +1,9 @@
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 
 import Box from '../box/box.jsx';
-import Button from '../button/button.jsx';
+import CloseButton from '../close-button/close-button.jsx';
 
 import styles from './alert.css';
 
@@ -22,13 +23,16 @@ const AlertComponent = ({
                 />
             ) : null}
             {message}
+            <FormattedMessage
+                defaultMessage="Tutorials"
+                description="Title for button to return to tutorials library"
+                id="gui.cards.all-tutorials"
+            />
         </div>
-        <Button
-            className={styles.alertRemoveButton}
+        <CloseButton
+            size={CloseButton.SIZE_SMALL}
             onClick={onCloseAlert}
-        >
-            {'x'}
-        </Button>
+        />
     </Box>
 );
 

@@ -1,3 +1,5 @@
+// NOTE: rename this or project-loader-hoc to make clear they describe mutually exclusive functionality and states?
+
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -7,6 +9,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import analytics from '../lib/analytics';
 import log from '../lib/log';
 import {setProjectTitle} from '../reducers/project-title';
+import {startLoadingFileUpload, doneLoadingFileUpload} from '../reducers/project-id';
 
 import {
     openLoadingProject,
@@ -134,9 +137,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeLoadingState: () => dispatch(closeLoadingProject()),
+    closeLoadingState: () => {
+        dispatch(doneLoadingFileUpload());
+        dispatch(closeLoadingProject());
+    },
     onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
-    openLoadingState: () => dispatch(openLoadingProject())
+    openLoadingState: () => {
+        dispatch(openLoadingProject());
+        dispatch(startLoadingFileUpload());
+    }
 });
 
 export default connect(

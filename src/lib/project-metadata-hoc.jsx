@@ -2,11 +2,11 @@ import React from 'react';
 import defaultsdeep from 'lodash.defaultsdeep';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
 import xhr from 'xhr';
 
-import {defaultProjectId} from '../reducers/project-id';
+import {ProjectState, defaultProjectId} from '../reducers/project-id';
 import {defaultProjectTitleMessages} from '../reducers/project-title';
 
 const api = (options, token, callback) => {
@@ -50,29 +50,32 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             ]);
             this.updateProjectMetaData(props.projectId);
         }
-        componentWillUpdate (nextProps) {
-            // if projectId has changed, and not just from one default value to
-            // another equivalent value, look up project metadata
-            if (this.props.projectId !== nextProps.projectId &&
-                ((this.props.projectId !== defaultProjectId &&
-                this.props.projectId !== null &&
-                typeof this.props.projectId !== 'undefined') ||
-                (nextProps.projectId !== defaultProjectId &&
-                nextProps.projectId !== null &&
-                typeof nextProps.projectId !== 'undefined'))) {
+        componentWillReceiveProps (nextProps) {
+            if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
                 this.updateProjectMetaData(nextProps.projectId);
             }
+            // // if projectId has changed, and not just from one default value to
+            // // another equivalent value, look up project metadata
+            // if (this.props.projectId !== nextProps.projectId &&
+            //     ((this.props.projectId !== defaultProjectId &&
+            //     this.props.projectId !== null &&
+            //     typeof this.props.projectId !== 'undefined') ||
+            //     (nextProps.projectId !== defaultProjectId &&
+            //     nextProps.projectId !== null &&
+            //     typeof nextProps.projectId !== 'undefined'))) {
+            //     this.updateProjectMetaData(nextProps.projectId);
+            // }
         }
-        handleRequestNewProject (callback) {
-            // pass the request up the chain
-            this.props.onRequestNewProject(newProjectId => {
-                // now that parents have had chance to act and change the projectId,
-                // update the metadata using the projectId -- even if it is the
-                // same projectId as before.
-                this.updateProjectMetaData(newProjectId);
-                if (callback) callback(newProjectId); // pass the callback down the chain
-            });
-        }
+        // handleRequestNewProject (callback) {
+        //     // pass the request up the chain
+        //     this.props.onRequestNewProject(newProjectId => {
+        //         // now that parents have had chance to act and change the projectId,
+        //         // update the metadata using the projectId -- even if it is the
+        //         // same projectId as before.
+        //         // this.updateProjectMetaData(newProjectId);
+        //         if (callback) callback(newProjectId); // pass the callback down the chain
+        //     });
+        // }
         updateProjectMetaData (projectId) {
             if (projectId === defaultProjectId || projectId === null || typeof projectId === 'undefined') {
                 // if project is default, use static data
@@ -108,20 +111,26 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
 
     ProjectMetaDataComponent.propTypes = {
         intl: intlShape.isRequired,
+        isLoadingProjectWithId: PropTypes.bool,
         onRequestNewProject: PropTypes.func,
         onUpdateProjectTitle: PropTypes.func,
-        projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        token: PropTypes.string
+        projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        // token: PropTypes.string
     };
 
-    // const mapStateToProps = state => ({
-    //     token: state.session.session && state.session.session.user && state.session.session.user.token
-    // });
-    //
-    // const mapDispatchToProps = () => ({});
-    //
-    // return injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProjectMetaDataComponent));
-    return injectIntl(ProjectMetaDataComponent);
+    const mapStateToProps = state => {
+        const projectState = state.scratchGui.projectId.projectState;
+        return {
+            isLoadingProjectWithId: projectState === ProjectState.LOADING_WITH_ID ||
+                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            projectId: state.scratchGui.projectId.projectId
+            // token: state.session.session && state.session.session.user && state.session.session.user.token
+        };
+    };
+
+    const mapDispatchToProps = () => ({});
+
+    return injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProjectMetaDataComponent));
 };
 
 export {

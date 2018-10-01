@@ -1,10 +1,12 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {connect} from 'react-redux';
+
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
-import {connect} from 'react-redux';
+import {ProjectState} from '../reducers/project-id';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -34,11 +36,14 @@ const vmManagerHOC = function (WrappedComponent) {
             });
         }
         componentWillReceiveProps (nextProps) {
-            if (this.props.projectData !== nextProps.projectData) {
-                this.setState({isLoading: true}, () => {
-                    this.loadProject(false);
-                });
+            if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
+                this.loadProject(false);
             }
+            // if (this.props.projectData !== nextProps.projectData) {
+            //     this.setState({isLoading: true}, () => {
+            //         this.loadProject(false);
+            //     });
+            // }
         }
         // NOTE: keep working here. problem is that we ONLY want to load the project
         // here when the old project id was also default... otherwise, we load twice!!!
@@ -58,17 +63,17 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.setState({loadingError: true, errorMessage: e});
                 });
         }
-        handleRequestNewProject (callback) {
-            // pass the request up the chain
-            this.props.onRequestNewProject(newProjectId => {
-                // now that parents have had chance to act and change the projectId,
-                this.setState({isLoading: true}, () => {
-                    this.loadProject(false).then(() => {
-                        if (callback) callback(newProjectId); // pass the callback down the chain
-                    });
-                });
-            });
-        }
+        // handleRequestNewProject (callback) {
+        //     // pass the request up the chain
+        //     this.props.onRequestNewProject(newProjectId => {
+        //         // now that parents have had chance to act and change the projectId,
+        //         this.setState({isLoading: true}, () => {
+        //             // this.loadProject(false).then(() => {
+        //                 if (callback) callback(newProjectId); // pass the callback down the chain
+        //             // });
+        //         });
+        //     });
+        // }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -92,17 +97,24 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        isLoadingProjectWithId: PropTypes.bool,
         onRequestNewProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
-    const mapStateToProps = state => ({
-        vm: state.scratchGui.vm
-    });
+    const mapStateToProps = state => {
+        const projectState = state.scratchGui.projectId.projectState;
+        return {
+            isLoadingProjectWithId: projectState === ProjectState.LOADING_WITH_ID ||
+                projectState === ProjectState.LOADING_NEW_DEFAULT,
+            projectId: state.scratchGui.projectId.projectId,
+            vm: state.scratchGui.vm
+        };
+    };
 
-    const mapDispatchToProps = dispatch => ({
-    });
+    const mapDispatchToProps = () => ({});
 
     return connect(
         mapStateToProps,

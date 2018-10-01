@@ -2,20 +2,22 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import storage from '../lib/storage';
+// import storage from '../lib/storage';
 import {projectTitleInitialState} from '../reducers/project-title';
+import {ProjectState} from '../reducers/project-id';
+import {doStoreProject} from '../reducers/vm';
 
 
 /**
- * Project saver component passes a saveProject function to its child.
+ * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
- *     function (saveProject, props) {}
+ *     function (downloadProject, props) {}
  * The component can then be used to attach project saving functionality
  * to any other component:
  *
- * <ProjectSaver>{(saveProject, props) => (
+ * <ProjectSaver>{(downloadProject, props) => (
  *     <MyCoolComponent
- *         onClick={saveProject}
+ *         onClick={downloadProject}
  *         {...props}
  *     />
  * )}</ProjectSaver>
@@ -26,13 +28,12 @@ class ProjectSaver extends React.Component {
         bindAll(this, [
             'createProject',
             'updateProject',
-            'saveProject',
-            'doStoreProject'
+            'downloadProject'
         ]);
     }
-    saveProject () {
-        const saveLink = document.createElement('a');
-        document.body.appendChild(saveLink);
+    downloadProject () {
+        const downloadLink = document.createElement('a');
+        document.body.appendChild(downloadLink);
 
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
@@ -45,43 +46,49 @@ class ProjectSaver extends React.Component {
             }
 
             const url = window.URL.createObjectURL(content);
-            saveLink.href = url;
-            saveLink.download = this.props.projectFilename;
-            saveLink.click();
+            downloadLink.href = url;
+            downloadLink.download = this.props.projectFilename;
+            downloadLink.click();
             window.URL.revokeObjectURL(url);
-            document.body.removeChild(saveLink);
+            document.body.removeChild(downloadLink);
         });
     }
-    doStoreProject (id) {
-        return this.props.saveProjectSb3()
-            .then(content => {
-                if (this.props.onSaveFinished) {
-                    this.props.onSaveFinished();
-                }
-                const assetType = storage.AssetType.Project;
-                const dataFormat = storage.DataFormat.SB3;
-                const body = new FormData();
-                body.append('sb3_file', content, 'sb3_file');
-                return storage.store(
-                    assetType,
-                    dataFormat,
-                    body,
-                    id
-                );
-            });
-    }
+    // doStoreProject (id) {
+    //     return this.props.saveProjectSb3()
+    //         .then(content => {
+    //             if (this.props.onSaveFinished) {
+    //                 this.props.onSaveFinished();
+    //             }
+    //             const assetType = storage.AssetType.Project;
+    //             const dataFormat = storage.DataFormat.SB3;
+    //             const body = new FormData();
+    //             body.append('sb3_file', content, 'sb3_file');
+    //             return storage.store(
+    //                 assetType,
+    //                 dataFormat,
+    //                 body,
+    //                 id
+    //             );
+    //         });
+    // }
     createProject () {
-        return this.doStoreProject();
+        if (this.props.isShowingWithId) {
+            return doStoreProject(null, this.props.onSaveFinished);
+        }
+        return Promise.reject();
     }
     updateProject () {
-        return this.doStoreProject(this.props.projectId);
+        if (this.props.isShowingWithId) {
+            return doStoreProject(this.props.projectId, this.props.onSaveFinished);
+        }
+        return Promise.reject();
     }
     render () {
         const {
             children
         } = this.props;
         return children(
-            this.saveProject,
+            this.downloadProject,
             this.updateProject,
             this.createProject
         );
@@ -98,17 +105,22 @@ const getProjectFilename = (curTitle, defaultTitle) => {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    isShowingWithId: PropTypes.bool,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     saveProjectSb3: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-    saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
-    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    projectId: state.scratchGui.projectId
-});
+const mapStateToProps = state => {
+    const projectState = state.scratchGui.projectId.projectState;
+    return {
+        isShowingWithId: projectState === ProjectState.SHOWING_WITH_ID,
+        saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
+        projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
+        projectId: state.scratchGui.projectId.projectId
+    };
+};
 
 export default connect(
     mapStateToProps,

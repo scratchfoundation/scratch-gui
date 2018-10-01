@@ -20,15 +20,16 @@ import {
 } from '../reducers/modals';
 
 import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
+import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
-    constructor (props) {
-        super(props);
-    }
+    // constructor (props) {
+    //     super(props);
+    // }
     componentDidMount () {
         if (this.props.projectTitle) {
             this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
@@ -86,6 +87,7 @@ GUI.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
+    projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     projectHost: PropTypes.string,
     projectTitle: PropTypes.string
 };
@@ -129,6 +131,7 @@ const ConnectedGUI = connect(
 const WrappedGui = compose(
     ErrorBoundaryHOC('Top Level App'),
     ProjectLoaderHOC,
+    ProjectSaverHOC,
     vmListenerHOC,
     vmManagerHOC
 )(ConnectedGUI);

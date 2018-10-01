@@ -21,6 +21,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
+import {ProjectState, stepTowardsNewProject} from '../../reducers/project-id';
 import {setPlayer} from '../../reducers/mode';
 import {
     openAccountMenu,
@@ -131,6 +132,21 @@ class MenuBar extends React.Component {
         ]);
         this.state = {projectSaveInProgress: false};
     }
+    componentWillReceiveProps (newProps) {
+        // if we're no longer showing the project (loading, or whatever), close menus
+        if (!newProps.isShowingProject && this.props.isShowingProject) {
+            this.props.onRequestCloseFile();
+            this.props.onRequestCloseEdit();
+        }
+        // if we're now saving, show save in progress
+        if (newProps.isSavingWithId && !this.props.isSavingWithId) {
+            this.setState({projectSaveInProgress: true});
+        }
+        // if we're no longer saving, don't show save in progress
+        if (!newProps.isSavingWithId && this.props.isSavingWithId) {
+            this.setState({projectSaveInProgress: false});
+        }
+    }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {
             this.props.onClickLanguage(e);
@@ -142,23 +158,27 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
+    // NOTE: not using updateFun currently
+    // NOTE: need some sort of reducer or some place to do saves, besides a component.
+    // then it can listen for state changes into saving, and do them.
     handleNewProject (updateFun) {
         return () => {
-            this.props.onRequestCloseFile();
-            if (this.props.userOwnsProject) {
-                this.setState({projectSaveInProgress: true},
-                    () => {
-                        updateFun().then(() => {
-                            this.props.onRequestNewProject(() => {
-                                this.setState({projectSaveInProgress: false});
-                            });
-                        });
-                    }
-                );
-            } else {
-                this.props.onRequestNewProject();
-            }
+            this.props.stepTowardsNewProject();
         };
+        //     if (this.props.userOwnsProject) {
+        //         this.setState({projectSaveInProgress: true},
+        //             () => {
+        //                 updateFun().then(() => {
+        //                     this.props.onRequestNewProject(() => {
+        //                         this.setState({projectSaveInProgress: false});
+        //                     });
+        //                 });
+        //             }
+        //         );
+        //     } else {
+        //         this.props.onRequestNewProject();
+        //     }
+        // };
     }
     handleUpdateProject (updateFun) {
         return () => {
@@ -284,11 +304,12 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
-                                    {(saveProject, updateProject, createProject) => (
+                                {/* <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
+                                    {(downloadProject, updateProject, createProject) => ( */}
                                         <MenuItem
                                             isRtl={this.props.isRtl}
-                                            onClick={this.handleNewProject(createProject)}
+                                            onClick={this.handleNewProject()}
+                                            // onClick={this.handleNewProject(createProject)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="New"
@@ -296,10 +317,10 @@ class MenuBar extends React.Component {
                                                 id="gui.menuBar.new"
                                             />
                                         </MenuItem>
-                                    )}
-                                </ProjectSaver>
+                                    {/* )}
+                                </ProjectSaver> */}
                                 <MenuSection>
-                                    <ProjectSaver>{(saveProject, updateProject) => (
+                                    <ProjectSaver>{(downloadProject, updateProject) => (
                                         this.props.canUpdateProject && this.props.userOwnsProject ? (
                                             <MenuItem onClick={this.handleUpdateProject(updateProject)}>
                                                 {saveNowMessage}
@@ -345,9 +366,9 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}
                                     </ProjectLoader>
-                                    <ProjectSaver>{saveProject => (
+                                    <ProjectSaver>{downloadProject => (
                                         <MenuItem
-                                            onClick={this.handleCloseFileMenuAndThen(saveProject)}
+                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Save to your computer"
@@ -622,6 +643,8 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
     isRtl: PropTypes.bool,
+    isSavingWithId: PropTypes.bool,
+    isShowingProject: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
     onClickAccount: PropTypes.func,
@@ -643,22 +666,31 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    stepTowardsNewProject: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    canUpdateProject: typeof (state.session && state.session.session && state.session.session.user) !== 'undefined',
-    accountMenuOpen: accountMenuOpen(state),
-    fileMenuOpen: fileMenuOpen(state),
-    editMenuOpen: editMenuOpen(state),
-    isRtl: state.locales.isRtl,
-    languageMenuOpen: languageMenuOpen(state),
-    loginMenuOpen: loginMenuOpen(state),
-    sessionExists: state.session && typeof state.session.session !== 'undefined',
-    username: state.session && state.session.session && state.session.session.user ?
-        state.session.session.user.username : null
-});
+const mapStateToProps = state => {
+    const projectState = state.scratchGui.projectId.projectState;
+    const user = state.session && state.session.session && state.session.session.user;
+    return {
+        canUpdateProject: typeof user !== 'undefined', // NOTE: this is wrong, correct??
+        accountMenuOpen: accountMenuOpen(state),
+        fileMenuOpen: fileMenuOpen(state),
+        editMenuOpen: editMenuOpen(state),
+        isRtl: state.locales.isRtl,
+        isSavingWithId: projectState === ProjectState.SAVING_WITH_ID ||
+            projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW,
+        isShowingProject: projectState === ProjectState.SHOWING_WITH_ID ||
+            projectState === ProjectState.SHOWING_FILE_UPLOAD ||
+            projectState === ProjectState.SHOWING_NEW_DEFAULT,
+        languageMenuOpen: languageMenuOpen(state),
+        loginMenuOpen: loginMenuOpen(state),
+        sessionExists: state.session && typeof state.session.session !== 'undefined',
+        username: user ? user.username : null
+    };
+};
 
 const mapDispatchToProps = dispatch => ({
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
@@ -672,7 +704,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    stepTowardsNewProject: () => dispatch(stepTowardsNewProject())
 });
 
 export default injectIntl(connect(

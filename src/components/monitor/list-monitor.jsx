@@ -34,9 +34,9 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             </div>
             <div className={styles.footerLength}>
                 <FormattedMessage
-                    defaultMessage='length {length}'
-                    description='Length label on list monitors. DO NOT translate {length} (with brackets).'
-                    id='gui.monitor.listMonitor.listLength'
+                    defaultMessage="length {length}"
+                    description="Length label on list monitors. DO NOT translate {length} (with brackets)."
+                    id="gui.monitor.listMonitor.listLength"
                     values={{
                         length: value.length
                     }}

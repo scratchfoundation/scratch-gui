@@ -38,11 +38,24 @@ const reducer = function (state, action) {
     case TRANSITION_STATE:
         // "from" state must be either an array that includes current project state,
         // or null/undefined
+        debugger;
         if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
 //            const resultState = action.transitions[state.projectState];
             switch (action.transitions[state.projectState] ?
                 action.transitions[state.projectState] : action.transitions[ProjectState.ANY]) {
             case ProjectState.FETCHING_WITH_ID:
+                return Object.assign({}, state, {
+                    projectId: action.id,
+                    projectState: ProjectState.FETCHING_WITH_ID
+                });
+            case ProjectState.FETCH_WITH_ID_IF_DIFFERENT:
+                if (state.projectId === action.id) { // don't re-fetch and reload same data
+                    return Object.assign({}, state, {
+                        projectId: action.id,
+                        projectState: ProjectState.SHOWING_WITH_ID
+                    });
+                }
+                // else, it's a new project id, so do fetch it
                 return Object.assign({}, state, {
                     projectId: action.id,
                     projectState: ProjectState.FETCHING_WITH_ID
@@ -102,7 +115,10 @@ const setProjectId = function (id) {
 const setInitialProjectId = id => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_WITH_ID
+        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_WITH_ID,
+        // if alreadin in the middle of fetching, just start fetching over
+        [ProjectState.FETCHING_WITH_ID]: ProjectState.FETCHING_WITH_ID,
+        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCH_WITH_ID_IF_DIFFERENT
     },
     id: id
 });

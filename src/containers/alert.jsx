@@ -12,6 +12,8 @@ class Alert extends React.Component {
         ]);
     }
     handleOnCloseAlert () {
+        console.log('prop to close: ');
+        console.log(this.props.index);
         this.props.onCloseAlert(this.props.index);
     }
     render () {
@@ -25,7 +27,7 @@ class Alert extends React.Component {
             <AlertComponent
                 iconURL={iconURL}
                 message={message}
-                onCloseAlert={onCloseAlert}
+                onCloseAlert={this.handleOnCloseAlert}
             />
         );
     }

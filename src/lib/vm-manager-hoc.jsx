@@ -22,6 +22,7 @@ const vmManagerHOC = function (WrappedComponent) {
             ]);
             this.state = {
                 isLoading: !props.vm.initialized,
+                isStarted: false,
                 loadingError: false,
                 errorMessage: ''
             };
@@ -34,6 +35,13 @@ const vmManagerHOC = function (WrappedComponent) {
         componentWillReceiveProps (nextProps) {
             if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
                 this.loadProject(nextProps.projectData);
+                if (!this.props.vm.initialized) {
+                    this.props.vm.initialized = true;
+                }
+            }
+            // if we went from loading to showing, we're done starting the vm
+            if (nextProps.isShowingProjectWithId && this.props.isLoadingProjectWithId) {
+                this.setState({isStarted: true});
             }
             // if (this.props.projectData !== nextProps.projectData) {
             //     this.setState({isLoading: true}, () => {
@@ -47,16 +55,13 @@ const vmManagerHOC = function (WrappedComponent) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
                     this.setState({isLoading: false}, () => {
-                        if (!this.props.vm.initialized) {
+                        if (!this.state.isStarted) {
                             this.props.vm.setCompatibilityMode(true);
                             this.props.vm.start();
                             // NOTE: this logic is slightly different from previous
                             // https://github.com/LLK/scratch-gui/blob/develop/src/containers/gui.jsx
-                            // Here, we wait until this point to set initialized to true;
-                            // previously, we set it to true immediately on initiating vm.loadProject,
-                            // and we relied on an explicit initial call in componentDidMount
+                            // Here, we relied on an explicit initial call in componentDidMount
                             // to setCompatibilityMode and start().
-                            this.props.vm.initialized = true;
                         }
                         this.props.doneLoading();
                     });
@@ -81,7 +86,7 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                doneLoading,
+                doneLoading: doneLoadingProp,
                 isLoadingProjectWithId,
                 projectData,
                 projectId,
@@ -91,7 +96,9 @@ const vmManagerHOC = function (WrappedComponent) {
                 ...componentProps
             } = this.props;
             // don't display anything until we have data loaded
-            if (!this.props.projectData) return null;
+            if (!this.props.projectData) {
+                return null;
+            }
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
@@ -118,9 +125,11 @@ const vmManagerHOC = function (WrappedComponent) {
         return {
             isLoadingProjectWithId: projectState === ProjectState.LOADING_VM_WITH_ID ||
                 projectState === ProjectState.LOADING_VM_NEW_DEFAULT,
+            isShowingProjectWithId: projectState === ProjectState.SHOWING_WITH_ID ||
+                projectState === ProjectState.SHOWING_NEW_DEFAULT,
             projectData: state.scratchGui.projectId.projectData,
-            projectId: state.scratchGui.projectId.projectId,
-            vm: state.scratchGui.vm
+            projectId: state.scratchGui.projectId.projectId
+            // vm: state.scratchGui.vm
         };
     };
 

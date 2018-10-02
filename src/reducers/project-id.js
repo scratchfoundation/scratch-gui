@@ -10,6 +10,7 @@ const ProjectState = keyMirror({
     ERROR: null,
     ANY: null,
     FETCHING_WITH_ID: null,
+    FETCH_WITH_ID_IF_DIFFERENT: null,
     FETCHING_FILE_UPLOAD: null,
     FETCHING_NEW_DEFAULT: null,
     LOADING_VM_WITH_ID: null,
@@ -38,7 +39,6 @@ const reducer = function (state, action) {
     case TRANSITION_STATE:
         // "from" state must be either an array that includes current project state,
         // or null/undefined
-        debugger;
         if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
 //            const resultState = action.transitions[state.projectState];
             switch (action.transitions[state.projectState] ?

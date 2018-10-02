@@ -100,10 +100,16 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTurboModeOff,
                 onTurboModeOn,
                 onShowAlert,
+                vm,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
-            return <WrappedComponent {...componentProps} />;
+            return (
+                <WrappedComponent
+                    vm={vm}
+                    {...componentProps}
+                />
+            );
         }
     }
     VMListener.propTypes = {

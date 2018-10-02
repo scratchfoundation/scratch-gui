@@ -303,9 +303,8 @@ export default function (Blockly) {
         nextBlock = block.nextConnection && block.nextConnection.targetBlock();
         nextCode = this.blockToCode(nextBlock);
         let eventEndCode = '';
-        if (!nextBlock && this.targetEvent) {
+        if (block.category_ === 'events') {
             eventEndCode = 'end\n';
-            this.targetEvent = null;
         }
         return commentCode + code + nextCode + eventEndCode;
     };
@@ -316,6 +315,7 @@ export default function (Blockly) {
         if (block && !block.disabled && block.type.match(/^hardware_/)) {
             this.definitions_['prepare__init_hardware'] = 'init_hardware';
         }
+        if(block) block.spriteName = this.editingTarget.sprite.name;
         return this.blockToCode_(block);
     };
 

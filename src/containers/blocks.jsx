@@ -259,7 +259,9 @@ class Blocks extends React.Component {
                 this.updateToolboxBlockValue(`${prefix}x`, Math.round(this.props.vm.editingTarget.x).toString());
                 this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
+            this.ScratchBlocks.Ruby.editingTarget = this.props.vm.editingTarget;
         }
+        this.props.updateRubyCodeState(this.ScratchBlocks.Ruby.workspaceToCode(this.workspace));
     }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;

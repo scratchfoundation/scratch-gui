@@ -32,4 +32,5 @@
 .alert-close-button {
     margin-top: 7px;
     margin-right: 4px;
+    outline-style:none;
 }

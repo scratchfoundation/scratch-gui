@@ -30,7 +30,7 @@ const AlertComponent = ({
         </div>
         <CloseButton
             className={styles.alertCloseButton}
-            color={'orange'}
+            color={CloseButton.COLOR_ORANGE}
             size={CloseButton.SIZE_LARGE}
             onClick={onCloseAlert}
         />

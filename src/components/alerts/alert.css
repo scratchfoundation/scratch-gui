@@ -11,14 +11,14 @@
     align-items: left;
     border: 1px solid #FF8C1A;
     border-radius: 8px;
-    padding: 12px;
+    padding: 8px;
     box-shadow: 0px 0px 0px 2px rgba(255, 140, 26, 0.25);
     margin-bottom: 7px;
 }
 
 .alert-icon {
-    vertical-align: middle;
     margin-right: 5px;
+    vertical-align: middle;
 }
 
 .alert-message {
@@ -30,5 +30,6 @@
 }
 
 .alert-close-button {
-    color: #FF8C1A;
+    margin-top: 7px;
+    margin-right: 4px;
 }

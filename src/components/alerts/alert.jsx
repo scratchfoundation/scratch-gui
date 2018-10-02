@@ -22,15 +22,16 @@ const AlertComponent = ({
                     src={iconURL}
                 />
             ) : null}
-            {message}
             <FormattedMessage
-                defaultMessage="Tutorials"
+                defaultMessage="Disconnect message to go here"
                 description="Title for button to return to tutorials library"
                 id="gui.cards.all-tutorials"
             />
         </div>
         <CloseButton
-            size={CloseButton.SIZE_SMALL}
+            className={styles.alertCloseButton}
+            color={'orange'}
+            size={CloseButton.SIZE_LARGE}
             onClick={onCloseAlert}
         />
     </Box>

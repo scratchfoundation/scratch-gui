@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import styles from './monitor.css';
 import ListMonitorScroller from './list-monitor-scroller.jsx';
 
-const messages = defineMessages({
-    listLength: {
-        defaultMessage: 'length {length}',
-        description: 'Length label on list monitors. DO NOT translate {length} (with brackets).',
-        id: 'gui.monitor.listMonitor.listLength'
-    }
-});
-
-const ListMonitor = ({draggable, intl, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
+const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
         className={styles.listMonitor}
         style={{
@@ -41,7 +33,14 @@ const ListMonitor = ({draggable, intl, label, width, height, value, onResizeMous
                 {'+' /* TODO waiting on asset */}
             </div>
             <div className={styles.footerLength}>
-                {intl.formatMessage(messages.listLength, {length: value.length})}
+                <FormattedMessage
+                    defaultMessage='length {length}'
+                    description='Length label on list monitors. DO NOT translate {length} (with brackets).'
+                    id='gui.monitor.listMonitor.listLength'
+                    values={{
+                        length: value.length
+                    }}
+                />
             </div>
             <div
                 className={classNames(draggable ? styles.resizeHandle : null, 'no-drag')}
@@ -58,7 +57,6 @@ ListMonitor.propTypes = {
     categoryColor: PropTypes.string.isRequired,
     draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
-    intl: intlShape.isRequired,
     label: PropTypes.string.isRequired,
     onActivate: PropTypes.func,
     onAdd: PropTypes.func,
@@ -79,4 +77,4 @@ ListMonitor.defaultProps = {
     height: 200
 };
 
-export default injectIntl(ListMonitor);
+export default ListMonitor;

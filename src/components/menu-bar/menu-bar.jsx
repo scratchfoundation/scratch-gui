@@ -21,8 +21,12 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
-import {ProjectState, stepTowardsNewProject} from '../../reducers/project-id';
 import {setPlayer} from '../../reducers/mode';
+import {
+    isSavingWithId,
+    isShowingProject,
+    stepTowardsNewProject
+} from '../../reducers/project-id';
 import {
     openAccountMenu,
     closeAccountMenu,
@@ -159,27 +163,10 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    // NOTE: not using updateFun currently
-    // NOTE: need some sort of reducer or some place to do saves, besides a component.
-    // then it can listen for state changes into saving, and do them.
-    handleNewProject (updateFun) {
+    handleNewProject () {
         return () => {
             this.props.stepTowardsNewProject();
         };
-        //     if (this.props.userOwnsProject) {
-        //         this.setState({projectSaveInProgress: true},
-        //             () => {
-        //                 updateFun().then(() => {
-        //                     this.props.onRequestNewProject(() => {
-        //                         this.setState({projectSaveInProgress: false});
-        //                     });
-        //                 });
-        //             }
-        //         );
-        //     } else {
-        //         this.props.onRequestNewProject();
-        //     }
-        // };
     }
     handleUpdateProject (updateFun) {
         return () => {
@@ -305,21 +292,33 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                {/* <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
-                                    {(downloadProject, updateProject, createProject) => ( */}
-                                        <MenuItem
-                                            isRtl={this.props.isRtl}
-                                            onClick={this.handleNewProject()}
-                                            // onClick={this.handleNewProject(createProject)}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="New"
-                                                description="Menu bar item for creating a new project"
-                                                id="gui.menuBar.new"
-                                            />
-                                        </MenuItem>
-                                    {/* )}
-                                </ProjectSaver> */}
+                                <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
+                                    {(downloadProject, updateProject, createProject) => (
+                                        this.props.sessionExists && this.props.username ? ( // user is logged in
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={this.handleNewProject()}
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="New"
+                                                    description="Menu bar item for creating a new project"
+                                                    id="gui.menuBar.new"
+                                                />
+                                            </MenuItem>
+                                        ) : ( // login available, but not logged in
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={this.handleNewProject()}
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="New"
+                                                    description="Menu bar item for creating a new project"
+                                                    id="gui.menuBar.new"
+                                                />
+                                            </MenuItem>
+                                        )
+                                    )}
+                                </ProjectSaver>
                                 <MenuSection>
                                     <ProjectSaver
                                         doStoreProject={this.props.doStoreProject}
@@ -666,6 +665,7 @@ MenuBar.propTypes = {
     onRequestCloseLogin: PropTypes.func,
     // onRequestNewProject: PropTypes.func,
     onSeeCommunity: PropTypes.func,
+    onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
@@ -684,11 +684,8 @@ const mapStateToProps = state => {
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,
-        isSavingWithId: projectState === ProjectState.SAVING_WITH_ID ||
-            projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW,
-        isShowingProject: projectState === ProjectState.SHOWING_WITH_ID ||
-            projectState === ProjectState.SHOWING_FILE_UPLOAD ||
-            projectState === ProjectState.SHOWING_NEW_DEFAULT,
+        isSavingWithId: isSavingWithId(projectState),
+        isShowingProject: isShowingProject(projectState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
         sessionExists: state.session && typeof state.session.session !== 'undefined',
@@ -709,6 +706,7 @@ const mapDispatchToProps = dispatch => ({
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
+    onShare: () => {}, // NOTE: implement this
     stepTowardsNewProject: () => dispatch(stepTowardsNewProject())
 });
 

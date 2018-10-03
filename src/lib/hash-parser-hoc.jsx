@@ -3,7 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ProjectState, defaultProjectId, setHashProjectId} from '../reducers/project-id';
+import {
+    defaultProjectId,
+    isFetchingProjectWithNoURLId,
+    setHashProjectId
+} from '../reducers/project-id';
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop
@@ -23,7 +27,7 @@ const HashParserHOC = function (WrappedComponent) {
         }
         componentWillReceiveProps (nextProps) {
             // if we are newly fetching a non-hash project...
-            if (nextProps.isFetchingNonHashProject && !this.props.isFetchingNonHashProject) {
+            if (nextProps.isFetchingProjectWithNoURLId && !this.props.isFetchingProjectWithNoURLId) {
                 // ...clear the hash from the url
                 history.pushState('new-project', 'new-project',
                     window.location.pathname + window.location.search);
@@ -51,7 +55,7 @@ const HashParserHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                isFetchingNonHashProject,
+                isFetchingProjectWithNoURLId: isFetchingProjectWithNoURLIdProp,
                 reduxProjectId,
                 setHashProjectId: setHashProjectIdProp,
                 /* eslint-enable no-unused-vars */
@@ -68,15 +72,14 @@ const HashParserHOC = function (WrappedComponent) {
         }
     }
     HashParserComponent.propTypes = {
-        isFetchingNonHashProject: PropTypes.bool,
+        isFetchingProjectWithNoURLId: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setHashProjectId: PropTypes.func
     };
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isFetchingNonHashProject: projectState === ProjectState.FETCHING_FILE_UPLOAD ||
-                projectState === ProjectState.FETCHING_NEW_DEFAULT,
+            isFetchingProjectWithNoURLId: isFetchingProjectWithNoURLId(projectState),
             reduxProjectId: state.scratchGui.projectId.projectId
         };
     };

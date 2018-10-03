@@ -27,9 +27,6 @@ import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
-    constructor (props) {
-        super(props);
-    }
     componentDidMount () {
         if (this.props.projectTitle) {
             this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
@@ -83,6 +80,7 @@ GUI.propTypes = {
     isLoading: PropTypes.bool,
     loadingError: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
+    onChangeProjectInfo: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,

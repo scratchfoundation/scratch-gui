@@ -4,7 +4,12 @@ import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 
-import {ProjectState, defaultProjectId, fetchedProjectData, setInitialProjectId} from '../reducers/project-id';
+import {
+    defaultProjectId,
+    fetchedProjectData,
+    isFetchingProjectWithId,
+    setInitialProjectId
+} from '../reducers/project-id';
 
 import analytics from './analytics';
 import log from './log';
@@ -107,7 +112,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 assetHost,
                 fetchedProjectData: fetchedProjectDataProp,
                 intl,
-                isFetchingProjectWithId,
+                isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 // onRequestNewProject,
                 projectHost,
                 projectId,
@@ -148,8 +153,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isFetchingProjectWithId: projectState === ProjectState.FETCHING_WITH_ID ||
-                projectState === ProjectState.FETCHING_NEW_DEFAULT,
+            isFetchingProjectWithId: isFetchingProjectWithId(projectState),
             reduxProjectId: state.scratchGui.projectId.projectId
         };
     };

@@ -1,6 +1,5 @@
 import keyMirror from 'keymirror';
 
-const SET_PROJECT_ID = 'scratch-gui/project-id/SET_PROJECT_ID';
 const TRANSITION_STATE = 'scratch-gui/project-id/TRANSITION_STATE';
 
 const defaultProjectId = 0; // hardcoded id of default project
@@ -10,20 +9,54 @@ const ProjectState = keyMirror({
     ERROR: null,
     ANY: null,
     FETCHING_WITH_ID: null,
-    FETCH_WITH_ID_IF_DIFFERENT: null,
+    FETCH_WITH_ID_IF_DIFFERENT: null, // NOTE: revisit this. is it doing anything?
     FETCHING_FILE_UPLOAD: null,
     FETCHING_NEW_DEFAULT: null,
+    FETCHING_NEW_DEFAULT_TO_SAVE: null,
     LOADING_VM_WITH_ID: null,
     LOADING_VM_FILE_UPLOAD: null,
     LOADING_VM_NEW_DEFAULT: null,
+    LOADING_VM_NEW_DEFAULT_TO_SAVE: null,
     SHOWING_WITH_ID: null,
     SHOWING_FILE_UPLOAD: null,
     SHOWING_NEW_DEFAULT: null,
     SAVING_WITH_ID: null,
-    SAVING_WITH_ID_BEFORE_NEW: null
+    SAVING_WITH_ID_BEFORE_NEW: null,
+    CREATING_NEW: null
 });
 
+// Note that FETCHING_NEW_DEFAULT has an id (0), but that id should not show in
+// any URL.
+const isFetchingProjectWithNoURLId = projectState => (
+    projectState === ProjectState.FETCHING_FILE_UPLOAD ||
+        projectState === ProjectState.FETCHING_NEW_DEFAULT ||
+        projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+);
+const isFetchingProjectWithId = projectState => (
+    projectState === ProjectState.FETCHING_WITH_ID ||
+        projectState === ProjectState.FETCHING_NEW_DEFAULT
+);
+const isLoadingProjectWithId = projectState => (
+    projectState === ProjectState.LOADING_VM_WITH_ID ||
+        projectState === ProjectState.LOADING_VM_NEW_DEFAULT ||
+        projectState === ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE
+);
+const isSavingWithId = projectState => (
+    projectState === ProjectState.SAVING_WITH_ID ||
+        projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW
+);
+const isShowingProject = projectState => (
+    projectState === ProjectState.SHOWING_WITH_ID ||
+        projectState === ProjectState.SHOWING_FILE_UPLOAD ||
+        projectState === ProjectState.SHOWING_NEW_DEFAULT
+);
+const isShowingProjectWithId = projectState => (
+    projectState === ProjectState.SHOWING_WITH_ID ||
+        projectState === ProjectState.SHOWING_NEW_DEFAULT
+);
+
 const initialState = {
+    errStr: null,
     projectData: null,
     projectId: null,
     projectState: ProjectState.NOT_LOADED
@@ -33,16 +66,19 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
 
     switch (action.type) {
-    // NOTE: delete this action entirely?
-    case SET_PROJECT_ID:
-        return Object.assign({}, state, {projectId: action.id});
     case TRANSITION_STATE:
         // "from" state must be either an array that includes current project state,
         // or null/undefined
         if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
-//            const resultState = action.transitions[state.projectState];
+            // const resultState = action.transitions[state.projectState];
             switch (action.transitions[state.projectState] ?
                 action.transitions[state.projectState] : action.transitions[ProjectState.ANY]) {
+            // NOTE: have folks listen for error
+            case ProjectState.ERROR:
+                return Object.assign({}, state, {
+                    errStr: action.errStr,
+                    projectState: ProjectState.ERROR
+                });
             case ProjectState.FETCHING_WITH_ID:
                 return Object.assign({}, state, {
                     projectId: action.id,
@@ -87,6 +123,17 @@ const reducer = function (state, action) {
                     projectData: action.data,
                     projectState: ProjectState.LOADING_VM_NEW_DEFAULT
                 });
+            case ProjectState.SHOWING_WITH_ID:
+                // we may need to set project id, e.g. if we just created new project
+                if (typeof action.id !== 'undefined') {
+                    return Object.assign({}, state, {
+                        projectId: action.id,
+                        projectState: ProjectState.SHOWING_WITH_ID
+                    });
+                }
+                return Object.assign({}, state, {
+                    projectState: ProjectState.SHOWING_WITH_ID
+                });
             default:
                 return Object.assign({}, state, {projectState: (action.transitions[state.projectState] ?
                     action.transitions[state.projectState] : action.transitions[ProjectState.ANY])});
@@ -94,9 +141,10 @@ const reducer = function (state, action) {
         }
         // default to requiring transitions to successfully match current state
         if (action.require || typeof action.require === 'undefined') {
-            // NOTE: how to throw error right here?
-            console.log(`Error: tried to transition from state ${state.projectState} to states...`);
-            console.log(action.transitions);
+            return Object.assign({}, state, {
+                errStr: `transition called from state ${state.projectState} with transions ${action.transitions}`,
+                projectState: ProjectState.ERROR
+            });
         }
         break;
     default:
@@ -104,12 +152,13 @@ const reducer = function (state, action) {
     }
 };
 
-const setProjectId = function (id) {
-    return {
-        type: SET_PROJECT_ID,
-        id: id
-    };
-};
+const goToErrorState = errStr => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        [ProjectState.ANY]: ProjectState.ERROR
+    },
+    errStr: errStr
+});
 
 // "initial" here refers to being invoked, usually embedded in another app, with a projectId property
 const setInitialProjectId = id => ({
@@ -151,7 +200,8 @@ const fetchedProjectData = data => ({
     transitions: {
         [ProjectState.FETCHING_WITH_ID]: ProjectState.LOADING_VM_WITH_ID,
         [ProjectState.FETCHING_FILE_UPLOAD]: ProjectState.LOADING_VM_FILE_UPLOAD,
-        [ProjectState.FETCHING_NEW_DEFAULT]: ProjectState.LOADING_VM_NEW_DEFAULT
+        [ProjectState.FETCHING_NEW_DEFAULT]: ProjectState.LOADING_VM_NEW_DEFAULT,
+        [ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE]: ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE
     },
     data: data
 });
@@ -179,7 +229,8 @@ const doneLoading = () => ({
     transitions: {
         [ProjectState.LOADING_VM_WITH_ID]: ProjectState.SHOWING_WITH_ID,
         [ProjectState.LOADING_VM_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD,
-        [ProjectState.LOADING_VM_NEW_DEFAULT]: ProjectState.SHOWING_NEW_DEFAULT
+        [ProjectState.LOADING_VM_NEW_DEFAULT]: ProjectState.SHOWING_NEW_DEFAULT,
+        [ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE]: ProjectState.CREATING_NEW
     }
 });
 
@@ -196,8 +247,17 @@ const doneSavingWithId = () => ({
     type: TRANSITION_STATE,
     transitions: {
         [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-        [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT
+        [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
     }
+});
+
+const doneCreatingNew = id => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        // no need to load, we should always have data already in vm
+        [ProjectState.CREATING_NEW]: ProjectState.SHOWING_WITH_ID
+    },
+    id: id
 });
 
 export {
@@ -205,13 +265,20 @@ export {
     initialState as projectIdInitialState,
     ProjectState,
     defaultProjectId,
-    fetchedProjectData,
+    doneCreatingNew,
     doneLoading,
     doneLoadingFileUpload,
     doneSavingWithId,
+    fetchedProjectData,
+    goToErrorState,
+    isFetchingProjectWithNoURLId,
+    isFetchingProjectWithId,
+    isLoadingProjectWithId,
+    isSavingWithId,
+    isShowingProject,
+    isShowingProjectWithId,
     setHashProjectId,
     setInitialProjectId,
-    setProjectId,
     startFetchingFileUpload,
     stepTowardsNewProject
 };

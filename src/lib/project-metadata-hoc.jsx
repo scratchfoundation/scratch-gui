@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
 import xhr from 'xhr';
 
-import {ProjectState, defaultProjectId} from '../reducers/project-id';
+import {defaultProjectId, goToErrorState, isFetchingProjectWithId} from '../reducers/project-id';
 import {defaultProjectTitleMessages} from '../reducers/project-title';
 
 const api = (options, token, callback) => {
@@ -26,12 +26,11 @@ const api = (options, token, callback) => {
 
     xhr(options, (err, res, body) => {
         if (err) {
-            console.log('err!');
+            callback({
+                isError: true,
+                error: err
+            });
         }
-        console.log('response:');
-        console.log(res);
-        console.log('response body:');
-        console.log(body);
         callback(body);
     });
 };
@@ -88,8 +87,12 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
                 },
                 null,
                 // this.props.token,
-                data => {
-                    this.props.onUpdateProjectTitle(data.title);
+                response => {
+                    if (response.isError) {
+                        this.props.goToErrorState(`Error fetching project metadata: ${response.error}`);
+                    } else { // success
+                        this.props.onUpdateProjectTitle(response.title);
+                    }
                 });
             }
         }
@@ -97,7 +100,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 intl,
-                isFetchingProjectWithId,
+                isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 projectId,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
@@ -112,6 +115,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
     }
 
     ProjectMetaDataComponent.propTypes = {
+        goToErrorState: PropTypes.func,
         intl: intlShape.isRequired,
         isFetchingProjectWithId: PropTypes.bool,
         onUpdateProjectTitle: PropTypes.func,
@@ -122,14 +126,15 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isFetchingProjectWithId: projectState === ProjectState.FETCHING_WITH_ID ||
-                projectState === ProjectState.FETCHING_NEW_DEFAULT,
+            isFetchingProjectWithId: isFetchingProjectWithId(projectState),
             projectId: state.scratchGui.projectId.projectId
             // token: state.session.session && state.session.session.user && state.session.session.user.token
         };
     };
 
-    const mapDispatchToProps = () => ({});
+    const mapDispatchToProps = dispatch => ({
+        goToErrorState: errStr => dispatch(goToErrorState(errStr))
+    });
 
     return injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProjectMetaDataComponent));
 };

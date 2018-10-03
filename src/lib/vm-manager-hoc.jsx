@@ -6,7 +6,11 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
-import {ProjectState, doneLoading} from '../reducers/project-id';
+import {
+    doneLoading,
+    isLoadingProjectWithId,
+    isShowingProjectWithId
+} from '../reducers/project-id';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -87,7 +91,7 @@ const vmManagerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 doneLoading: doneLoadingProp,
-                isLoadingProjectWithId,
+                isLoadingProjectWithId: isLoadingProjectWithIdProp,
                 projectData,
                 projectId,
                 // onRequestNewProject, // must remove parent's onRequestNewProject to use our own
@@ -115,6 +119,7 @@ const vmManagerHOC = function (WrappedComponent) {
     VMManager.propTypes = {
         doneLoading: PropTypes.func,
         isLoadingProjectWithId: PropTypes.bool,
+        isShowingProjectWithId: PropTypes.bool,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         vm: PropTypes.instanceOf(VM).isRequired
@@ -123,10 +128,8 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isLoadingProjectWithId: projectState === ProjectState.LOADING_VM_WITH_ID ||
-                projectState === ProjectState.LOADING_VM_NEW_DEFAULT,
-            isShowingProjectWithId: projectState === ProjectState.SHOWING_WITH_ID ||
-                projectState === ProjectState.SHOWING_NEW_DEFAULT,
+            isLoadingProjectWithId: isLoadingProjectWithId(projectState),
+            isShowingProjectWithId: isShowingProjectWithId(projectState),
             projectData: state.scratchGui.projectId.projectData,
             projectId: state.scratchGui.projectId.projectId
             // vm: state.scratchGui.vm

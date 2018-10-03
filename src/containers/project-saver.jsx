@@ -71,6 +71,7 @@ class ProjectSaver extends React.Component {
     //             );
     //         });
     // }
+    // NOTE: remove these
     createProject () {
         if (this.props.isShowingWithId) {
             return this.props.doStoreProject(null, this.props.onSaveFinished);

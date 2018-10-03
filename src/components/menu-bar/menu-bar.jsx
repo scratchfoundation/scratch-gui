@@ -10,13 +10,14 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import ProjectLoader from '../../containers/project-loader.jsx';
+import ProjectLoaderFromPC from '../../containers/project-loader-from-pc.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
-import ProjectSaver from '../../containers/project-saver.jsx';
+// NOTE: get rid of this component
+import ProjectSaverToPC from '../../containers/project-saver-to-pc.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
@@ -25,6 +26,7 @@ import {setPlayer} from '../../reducers/mode';
 import {
     isSavingWithId,
     isShowingProject,
+    startSaving,
     stepTowardsNewProject
 } from '../../reducers/project-id';
 import {
@@ -129,7 +131,8 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleLanguageMouseUp',
-            'handleNewProject',
+            'handleClickNew',
+            'handleClickSave',
             'handleRestoreOption',
             'handleProjectLoadFinished',
             'handleCloseFileMenuAndThen',
@@ -163,11 +166,13 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    handleNewProject () {
-        return () => {
-            this.props.stepTowardsNewProject();
-        };
+    handleClickNew () {
+        this.props.stepTowardsNewProject();
     }
+    handleClickSave () {
+        this.props.startSaving();
+    }
+    // NOTE: get rig of this?
     handleUpdateProject (updateFun) {
         return () => {
             this.props.onRequestCloseFile();
@@ -180,9 +185,7 @@ class MenuBar extends React.Component {
             );
         };
     }
-    handleProjectLoadFinished () {
-        this.props.onRequestCloseFile();
-    }
+    // NOTE: get rid of this?
     handleCloseFileMenuAndThen (fn) {
         return () => {
             this.props.onRequestCloseFile();
@@ -292,41 +295,31 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
-                                    {() => (
-                                        // note that it does not matter whether user is logged in or not, or
-                                        // gui player is embedded or standalone
-                                        <MenuItem
-                                            isRtl={this.props.isRtl}
-                                            onClick={this.handleNewProject()}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="New"
-                                                description="Menu bar item for creating a new project"
-                                                id="gui.menuBar.new"
-                                            />
-                                        </MenuItem>
-                                    )}
-                                </ProjectSaver>
+                                {/* note that it does not matter whether user is logged in or not, or
+                                gui player is embedded or standalone */}
+                                <MenuItem
+                                    isRtl={this.props.isRtl}
+                                    onClick={this.handleClickNew}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="New"
+                                        description="Menu bar item for creating a new project"
+                                        id="gui.menuBar.new"
+                                    />
+                                </MenuItem>
                                 <MenuSection>
-                                    <ProjectSaver
-                                        doStoreProject={this.props.doStoreProject}
-                                    >{(downloadProject, updateProject) => (
-                                            this.props.canUpdateProject && this.props.userOwnsProject ? (
-                                                <MenuItem onClick={this.handleUpdateProject(updateProject)}>
-                                                    {saveNowMessage}
-                                                </MenuItem>
-                                            ) : (
-                                                <MenuItemTooltip
-                                                    id="save"
-                                                    isRtl={this.props.isRtl}
-                                                >
-                                                    <MenuItem>{saveNowMessage}</MenuItem>
-                                                </MenuItemTooltip>
-                                            )
-                                        )
-                                        }
-                                    </ProjectSaver>
+                                    {this.props.canUpdateProject && this.props.userOwnsProject ? (
+                                        <MenuItem onClick={this.props.handleClickSave}>
+                                            {saveNowMessage}
+                                        </MenuItem>
+                                    ) : (
+                                        <MenuItemTooltip
+                                            id="save"
+                                            isRtl={this.props.isRtl}
+                                        >
+                                            <MenuItem>{saveNowMessage}</MenuItem>
+                                        </MenuItemTooltip>
+                                    )}
                                     <MenuItemTooltip
                                         id="copy"
                                         isRtl={this.props.isRtl}
@@ -341,7 +334,7 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <ProjectLoader
+                                    <ProjectLoaderFromPC
                                         onLoadFinished={this.handleProjectLoadFinished}
                                         onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                     >
@@ -358,8 +351,8 @@ class MenuBar extends React.Component {
                                                 {renderFileInput()}
                                             </MenuItem>
                                         )}
-                                    </ProjectLoader>
-                                    <ProjectSaver>{downloadProject => (
+                                    </ProjectLoaderFromPC>
+                                    <ProjectSaverToPC>{downloadProject => (
                                         <MenuItem
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
@@ -369,7 +362,7 @@ class MenuBar extends React.Component {
                                                 id="gui.menuBar.downloadToComputer"
                                             />
                                         </MenuItem>
-                                    )}</ProjectSaver>
+                                    )}</ProjectSaverToPC>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -661,6 +654,7 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    startSaving: PropTypes.func,
     stepTowardsNewProject: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string
@@ -698,6 +692,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onShare: () => {}, // NOTE: implement this
+    startSaving: () => dispatch(startSaving()),
     stepTowardsNewProject: () => dispatch(stepTowardsNewProject())
 });
 

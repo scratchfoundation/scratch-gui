@@ -272,6 +272,13 @@ const stepTowardsNewProject = () => ({
     }
 });
 
+const startSaving = () => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID
+    }
+});
+
 const doneSavingWithId = () => ({
     type: TRANSITION_STATE,
     transitions: {
@@ -309,5 +316,6 @@ export {
     setHashProjectId,
     setInitialProjectId,
     startFetchingFileUpload,
+    startSaving,
     stepTowardsNewProject
 };

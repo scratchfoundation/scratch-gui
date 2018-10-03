@@ -15,14 +15,14 @@ import {ProjectState} from '../reducers/project-id';
  * The component can then be used to attach project saving functionality
  * to any other component:
  *
- * <ProjectSaver>{(downloadProject, props) => (
+ * <ProjectSaverToPC>{(downloadProject, props) => (
  *     <MyCoolComponent
  *         onClick={downloadProject}
  *         {...props}
  *     />
- * )}</ProjectSaver>
+ * )}</ProjectSaverToPC>
  */
-class ProjectSaver extends React.Component {
+class ProjectSaverToPC extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -104,7 +104,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
     return `${filenameTitle.substring(0, 100)}.sb3`;
 };
 
-ProjectSaver.propTypes = {
+ProjectSaverToPC.propTypes = {
     children: PropTypes.func,
     doStoreProject: PropTypes.func,
     isShowingWithId: PropTypes.bool,
@@ -127,4 +127,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(ProjectSaver);
+)(ProjectSaverToPC);

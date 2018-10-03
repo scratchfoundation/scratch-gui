@@ -19,7 +19,7 @@ import {
     closeBackdropLibrary
 } from '../reducers/modals';
 
-import ProjectLoaderHOC from '../lib/project-loader-hoc.jsx';
+import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
@@ -128,7 +128,7 @@ const ConnectedGUI = connect(
 
 const WrappedGui = compose(
     ErrorBoundaryHOC('Top Level App'),
-    ProjectLoaderHOC,
+    ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,
     vmManagerHOC

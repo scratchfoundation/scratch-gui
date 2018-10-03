@@ -20,7 +20,7 @@ import {
 /* Higher Order Component to provide behavior for saving projects.
  */
 const ProjectSaverHOC = function (WrappedComponent) {
-    class ProjectSaverComponent extends React.Component {
+    class ProjectSaverToPCComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
@@ -101,7 +101,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             );
         }
     }
-    ProjectSaverComponent.propTypes = {
+    ProjectSaverToPCComponent.propTypes = {
         doneCreatingNew: PropTypes.func,
         doneSavingWithId: PropTypes.func,
         goToErrorState: PropTypes.func,
@@ -127,7 +127,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
     return connect(
         mapStateToProps,
         mapDispatchToProps
-    )(ProjectSaverComponent);
+    )(ProjectSaverToPCComponent);
 };
 
 export {

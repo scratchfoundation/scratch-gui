@@ -21,8 +21,8 @@ import storage from './storage';
  * @returns {React.Component} component with project loading behavior
  */
 // NOTE: rename to project fetcher ?
-const ProjectLoaderHOC = function (WrappedComponent) {
-    class ProjectLoaderComponent extends React.Component {
+const ProjectFetcherHOC = function (WrappedComponent) {
+    class ProjectFetcherComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
@@ -131,7 +131,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             );
         }
     }
-    ProjectLoaderComponent.propTypes = {
+    ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
         fetchedProjectData: PropTypes.func,
         intl: intlShape.isRequired,
@@ -142,7 +142,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setInitialProjectId: PropTypes.func
     };
-    ProjectLoaderComponent.defaultProps = {
+    ProjectFetcherComponent.defaultProps = {
         // NOTE: shouldn't these settings be moved into webpack, like API_HOST?
         assetHost: 'https://assets.scratch.mit.edu',
         projectHost: 'https://projects.scratch.mit.edu'
@@ -165,9 +165,9 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps
-    )(ProjectLoaderComponent));
+    )(ProjectFetcherComponent));
 };
 
 export {
-    ProjectLoaderHOC as default
+    ProjectFetcherHOC as default
 };

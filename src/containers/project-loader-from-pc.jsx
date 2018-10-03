@@ -1,4 +1,4 @@
-// NOTE: rename this or project-loader-hoc to make clear they describe mutually exclusive functionality and states?
+// NOTE: rename this or project-fetcher-hoc to make clear they describe mutually exclusive functionality and states?
 
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
@@ -23,24 +23,24 @@ import {
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <ProjectLoader>{(renderFileInput, loadProject) => (
+ * <ProjectLoaderFromPC>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
- * )}</ProjectLoader>
+ * )}</ProjectLoaderFromPC>
  */
 
 const messages = defineMessages({
     loadError: {
-        id: 'gui.projectLoader.loadError',
+        id: 'gui.ProjectLoaderFromPC.loadError',
         defaultMessage: 'The project file that was selected failed to load.',
         description: 'An error that displays when a local project file fails to load.'
     }
 });
 
-class ProjectLoader extends React.Component {
+class ProjectLoaderFromPC extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -119,7 +119,7 @@ class ProjectLoader extends React.Component {
     }
 }
 
-ProjectLoader.propTypes = {
+ProjectLoaderFromPC.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
@@ -151,4 +151,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(ProjectLoader));
+)(injectIntl(ProjectLoaderFromPC));

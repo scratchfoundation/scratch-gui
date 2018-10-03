@@ -48,10 +48,12 @@ export default function (vm) {
     };
 
     const soundsMenu = function () {
+        let menu = [['', '']];
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
-            return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
+            menu = vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
         }
-        return [['', '']];
+        menu.push(['record...', '_record_']);
+        return menu;
     };
 
     const costumesMenu = function () {

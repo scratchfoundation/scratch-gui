@@ -31,12 +31,18 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillReceiveProps (nextProps) {
             if (nextProps.isSavingWithId && !this.props.isSavingWithId) {
-                this.doStoreProject(nextProps.reduxProjectId).then(() => {
-                    this.props.doneSavingWithId();
-                });
+                this.doStoreProject({
+                    action: 'update',
+                    id: nextProps.reduxProjectId
+                })
+                    .then(() => {
+                        this.props.doneSavingWithId();
+                    });
             }
             if (nextProps.isCreatingNew && !this.props.isCreatingNew) {
-                this.doStoreProject()
+                this.doStoreProject({
+                    action: 'create'
+                })
                     .then(projectBody => {
                         this.props.doneCreatingNew(projectBody.id);
                     })
@@ -45,11 +51,17 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
         }
-        doStoreProject (id, onSaveFinished) {
-            // NOTE: temporarily just pretend saving worked
-            // if (1===1) {
-            //     return Promise.resolve();
-            // }
+        doStoreProject (opts, onSaveFinished) {
+            let storageProjectId = null;
+            switch (opts.action) {
+            case 'update':
+                storageProjectId = opts.id;
+                break;
+            case 'create':
+            default:
+                storageProjectId = null;
+            }
+
             return this.props.vm.saveProjectSb3()
                 .then(content => {
                     if (onSaveFinished) {
@@ -59,19 +71,23 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     const dataFormat = storage.DataFormat.SB3;
                     const body = new FormData();
                     body.append('sb3_file', content, 'sb3_file');
+                    // when id is undefined or null, storage.store as we have
+                    // configured it will create a new project with id
                     return storage.store(
                         assetType,
                         dataFormat,
                         body,
-                        id
+                        storageProjectId
                     );
                 });
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                // doStoreProject: doStoreProjectProp,
+                doneCreatingNew: doneCreatingNewProp,
                 doneSavingWithId: doneSavingWithIdProp,
+                goToErrorState: goToErrorStateProp,
+                isCreatingNew: isCreatingNewProp,
                 isSavingWithId: isSavingWithIdProp,
                 reduxProjectId,
                 /* eslint-enable no-unused-vars */
@@ -86,7 +102,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
     }
     ProjectSaverComponent.propTypes = {
-        doStoreProject: PropTypes.func,
         doneCreatingNew: PropTypes.func,
         doneSavingWithId: PropTypes.func,
         goToErrorState: PropTypes.func,
@@ -105,7 +120,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
-        // doStoreProject: projectId => doStoreProject(projectId),
         doneCreatingNew: projectId => dispatch(doneCreatingNew(projectId)),
         doneSavingWithId: projectId => dispatch(doneSavingWithId(projectId)),
         goToErrorState: errStr => dispatch(goToErrorState(errStr))

@@ -92,6 +92,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 doneLoading: doneLoadingProp,
                 isLoadingProjectWithId: isLoadingProjectWithIdProp,
+                isShowingProjectWithId: isShowingProjectWithIdProp,
                 projectData,
                 projectId,
                 // onRequestNewProject, // must remove parent's onRequestNewProject to use our own

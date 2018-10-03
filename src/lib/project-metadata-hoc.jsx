@@ -99,6 +99,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                goToErrorState: goToErrorStateProp,
                 intl,
                 isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 projectId,

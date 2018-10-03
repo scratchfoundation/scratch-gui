@@ -293,49 +293,40 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
                                 <ProjectSaver onSaveProject={this.handleProjectLoadFinished}>
-                                    {(downloadProject, updateProject, createProject) => (
-                                        this.props.sessionExists && this.props.username ? ( // user is logged in
-                                            <MenuItem
-                                                isRtl={this.props.isRtl}
-                                                onClick={this.handleNewProject()}
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="New"
-                                                    description="Menu bar item for creating a new project"
-                                                    id="gui.menuBar.new"
-                                                />
-                                            </MenuItem>
-                                        ) : ( // login available, but not logged in
-                                            <MenuItem
-                                                isRtl={this.props.isRtl}
-                                                onClick={this.handleNewProject()}
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="New"
-                                                    description="Menu bar item for creating a new project"
-                                                    id="gui.menuBar.new"
-                                                />
-                                            </MenuItem>
-                                        )
+                                    {() => (
+                                        // note that it does not matter whether user is logged in or not, or
+                                        // gui player is embedded or standalone
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleNewProject()}
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="New"
+                                                description="Menu bar item for creating a new project"
+                                                id="gui.menuBar.new"
+                                            />
+                                        </MenuItem>
                                     )}
                                 </ProjectSaver>
                                 <MenuSection>
                                     <ProjectSaver
                                         doStoreProject={this.props.doStoreProject}
-                                        >{(downloadProject, updateProject) => (
-                                        this.props.canUpdateProject && this.props.userOwnsProject ? (
-                                            <MenuItem onClick={this.handleUpdateProject(updateProject)}>
-                                                {saveNowMessage}
-                                            </MenuItem>
-                                        ) : (
-                                            <MenuItemTooltip
-                                                id="save"
-                                                isRtl={this.props.isRtl}
-                                            >
-                                                <MenuItem>{saveNowMessage}</MenuItem>
-                                            </MenuItemTooltip>
+                                    >{(downloadProject, updateProject) => (
+                                            this.props.canUpdateProject && this.props.userOwnsProject ? (
+                                                <MenuItem onClick={this.handleUpdateProject(updateProject)}>
+                                                    {saveNowMessage}
+                                                </MenuItem>
+                                            ) : (
+                                                <MenuItemTooltip
+                                                    id="save"
+                                                    isRtl={this.props.isRtl}
+                                                >
+                                                    <MenuItem>{saveNowMessage}</MenuItem>
+                                                </MenuItemTooltip>
+                                            )
                                         )
-                                    )}</ProjectSaver>
+                                        }
+                                    </ProjectSaver>
                                     <MenuItemTooltip
                                         id="copy"
                                         isRtl={this.props.isRtl}

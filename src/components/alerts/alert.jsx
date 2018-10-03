@@ -1,5 +1,4 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 
 import Box from '../box/box.jsx';
@@ -22,11 +21,7 @@ const AlertComponent = ({
                     src={iconURL}
                 />
             ) : null}
-            <FormattedMessage
-                defaultMessage="Disconnect message to go here"
-                description="Title for button to return to tutorials library"
-                id="gui.cards.all-tutorials"
-            />
+            {message}
         </div>
         <CloseButton
             className={styles.alertCloseButton}

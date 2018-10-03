@@ -7,12 +7,12 @@ import ScratchBlocks from 'scratch-blocks';
  */
 export default function (vm) {
 
-    const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
+    const jsonForMenuBlock = function (name, menuOptionsFn, colors, start, fieldType = 'field_dropdown') {
         return {
             message0: '%1',
             args0: [
                 {
-                    type: 'field_dropdown',
+                    type: fieldType,
                     name: name,
                     options: function () {
                         return start.concat(menuOptionsFn());
@@ -123,7 +123,7 @@ export default function (vm) {
     const eventColors = ScratchBlocks.Colours.event;
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
-        const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
+        const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, [], 'field_sounddropdown');
         this.jsonInit(json);
     };
 

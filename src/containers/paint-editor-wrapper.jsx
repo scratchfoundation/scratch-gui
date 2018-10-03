@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import omit from 'lodash.omit';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
 
@@ -46,12 +45,16 @@ class PaintEditorWrapper extends React.Component {
     }
     render () {
         if (!this.props.imageId) return null;
-        const componentProps = omit(this.props, ['selectedCostumeIndex', 'vm']);
+        const {
+            selectedCostumeIndex,
+            vm,
+            ...componentProps
+        } = this.props;
 
         return (
             <PaintEditor
                 {...componentProps}
-                image={this.props.vm.getCostume(this.props.selectedCostumeIndex)}
+                image={vm.getCostume(selectedCostumeIndex)}
                 onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
             />

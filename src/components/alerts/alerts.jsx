@@ -12,7 +12,7 @@ const AlertsComponent = ({
 }) => (
     <Box
         bounds="parent"
-        className={classNames(className)}
+        className={className}
     >
         {alertsList.map((a, index) => (
             <Alert

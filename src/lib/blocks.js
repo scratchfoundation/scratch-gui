@@ -52,7 +52,10 @@ export default function (vm) {
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
             menu = vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
         }
-        menu.push(['record...', '_record_']);
+        menu.push([
+            ScratchBlocks.ScratchMsgs.translate('SOUND_RECORD', 'record...'),
+            ScratchBlocks.SOUND_RECORD_ID
+        ]);
         return menu;
     };
 

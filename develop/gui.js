@@ -76,7 +76,7 @@ var _hashParserHoc = __webpack_require__(184);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _titledHoc = __webpack_require__(459);
+var _titledHoc = __webpack_require__(458);
 
 var _titledHoc2 = _interopRequireDefault(_titledHoc);
 
@@ -111,17 +111,17 @@ exports.default = function (appTarget) {
 
 /***/ }),
 
-/***/ 477:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(478);
+__webpack_require__(477);
 
-__webpack_require__(480);
+__webpack_require__(479);
 
-__webpack_require__(504);
+__webpack_require__(503);
 
 var _react = __webpack_require__(0);
 
@@ -139,11 +139,11 @@ var _appStateHoc = __webpack_require__(114);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _browserModal = __webpack_require__(385);
+var _browserModal = __webpack_require__(384);
 
 var _browserModal2 = _interopRequireDefault(_browserModal);
 
-var _supportedBrowser = __webpack_require__(389);
+var _supportedBrowser = __webpack_require__(388);
 
 var _supportedBrowser2 = _interopRequireDefault(_supportedBrowser);
 
@@ -175,12 +175,12 @@ if ((0, _supportedBrowser2.default)()) {
 
 /***/ }),
 
-/***/ 506:
+/***/ 505:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[477,0]]]);
+},[[476,0]]]);
 //# sourceMappingURL=gui.js.map

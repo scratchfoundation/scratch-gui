@@ -43,7 +43,7 @@ var _appStateHoc = __webpack_require__(114);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _titledHoc = __webpack_require__(459);
+var _titledHoc = __webpack_require__(458);
 
 var _titledHoc2 = _interopRequireDefault(_titledHoc);
 

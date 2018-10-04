@@ -5,8 +5,8 @@
  */
 export default function (Blockly) {
     Blockly.Ruby.event_whenflagclicked = function (block) {
-        // TODO: インデントを上げること
-        return `${this.spriteName}.when(:flag_clicked) do\n`;
+        Blockly.Ruby.targetEventBlock = block;
+        return `${Blockly.Ruby.spriteName()}.when(:flag_clicked) do\n`;
     };
 
     return Blockly;

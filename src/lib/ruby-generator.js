@@ -43,7 +43,7 @@ export default function (Blockly) {
 
     Blockly.Ruby.init = function() {
         this.definitions_ = Object.create(null);
-        this.targetEvent_ = null;
+        this.targetEventBlock = null;
         if (Blockly.Variables) {
             if (!this.variableDB_) {
                 this.variableDB_ = new Blockly.Names(Blockly.Ruby.RESERVED_WORDS_);
@@ -303,10 +303,16 @@ export default function (Blockly) {
         nextBlock = block.nextConnection && block.nextConnection.targetBlock();
         nextCode = this.blockToCode(nextBlock);
         let eventEndCode = '';
-        if (block.category_ === 'events') {
+        if (block === this.targetEventBlock) {
+            nextCode = this.prefixLines(/** @type {string} */ (nextCode), this.INDENT);
             eventEndCode = 'end\n';
+            this.targetEventBlock = null;
         }
         return commentCode + code + nextCode + eventEndCode;
+    };
+
+    Blockly.Ruby.spriteName = function() {
+        return this.editingTarget.sprite.name;
     };
 
     Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;

@@ -9,9 +9,9 @@ export default function (Blockly) {
         let code = parseFloat(block.getFieldValue('NUM'));
         let order;
         if (code === Infinity) {
-            code = 'float("inf")'; order = Blockly.Ruby.ORDER_FUNCTION_CALL;
+            code = 'Float::INFINITY'; order = Blockly.Ruby.ORDER_FUNCTION_CALL;
         } else if (code === -Infinity) {
-            code = '-float("inf")'; order = Blockly.Ruby.ORDER_UNARY_SIGN;
+            code = '-Float::INFINITY'; order = Blockly.Ruby.ORDER_UNARY_SIGN;
         } else {
             order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
         }

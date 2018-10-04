@@ -315,13 +315,21 @@ export default function (Blockly) {
         return this.editingTarget.sprite.name;
     };
 
+    Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;
+
+    Blockly.Ruby.workspaceToCode = function(block, target) {
+        if (target) {
+            this.editingTarget = target;
+        }
+        return this.workspaceToCode_(block);
+    };
+
     Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;
 
     Blockly.Ruby.blockToCode = function(block) {
         if (block && !block.disabled && block.type.match(/^hardware_/)) {
             this.definitions_['prepare__init_hardware'] = 'init_hardware';
         }
-        if(block) block.spriteName = this.editingTarget.sprite.name;
         return this.blockToCode_(block);
     };
 

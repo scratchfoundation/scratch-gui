@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
-/***/ 1560:
+/***/ 1567:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17,7 +17,7 @@ var _reactDom = __webpack_require__(34);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _gui = __webpack_require__(164);
+var _gui = __webpack_require__(162);
 
 var _gui2 = _interopRequireDefault(_gui);
 
@@ -107,5 +107,5 @@ _reactDom2.default.render(_react2.default.createElement(Player, null), appTarget
 
 /***/ })
 
-},[[1560,0]]]);
+},[[1567,0]]]);
 //# sourceMappingURL=compatibilitytesting.js.map

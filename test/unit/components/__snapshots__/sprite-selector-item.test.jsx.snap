@@ -21,7 +21,7 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
     tabIndex="0"
   >
     <img
-      className={undefined}
+      className=""
       src="test-file-stub"
     />
   </div>
@@ -102,7 +102,7 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
     tabIndex="0"
   >
     <img
-      className={undefined}
+      className=""
       src="test-file-stub"
     />
   </div>

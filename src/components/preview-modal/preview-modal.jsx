@@ -17,6 +17,21 @@ const messages = defineMessages({
         defaultMessage: 'Welcome to the Scratch 3.0 Beta',
         description: 'Header for Preview Info Modal',
         id: 'gui.previewInfo.welcome'
+    },
+    notNowTooltip: {
+        defaultMessage: 'Not Now',
+        description: 'Tooltip for Not Now button',
+        id: 'gui.previewModal.notnowtooltip'
+    },
+    tryItTooltip: {
+        defaultMessage: 'Try It',
+        description: 'Tooltip for Try It button',
+        id: 'gui.previewModal.tryittooltip'
+    },
+    viewProjectTooltip: {
+        defaultMessage: 'View 2.0 Project',
+        description: 'Tooltip for View 2.0 Project button',
+        id: 'gui.previewModal.viewprojecttooltip'
     }
 });
 
@@ -52,11 +67,7 @@ const PreviewModal = ({intl, ...props}) => (
                 <Box className={styles.buttonRow}>
                     <button
                         className={styles.noButton}
-                        title={intl.formatMessage({
-                            defaultMessage: 'Not Now',
-                            description: 'Tooltip for Not Now button',
-                            id: 'gui.previewModal.notnowtooltip'
-                        })}
+                        title={intl.formatMessage(messages.notNowTooltip)}
                         onClick={props.onCancel}
                     >
                         <FormattedMessage
@@ -67,11 +78,7 @@ const PreviewModal = ({intl, ...props}) => (
                     </button>
                     <button
                         className={styles.okButton}
-                        title={intl.formatMessage({
-                            defaultMessage: 'Try It',
-                            description: 'Tooltip for Try It button',
-                            id: 'gui.previewModal.tryittooltip'
-                        })}
+                        title={intl.formatMessage(messages.tryItTooltip)}
                         onClick={props.onTryIt}
                     >
                         <FormattedMessage
@@ -90,11 +97,7 @@ const PreviewModal = ({intl, ...props}) => (
                     </button>
                     <button
                         className={styles.viewProjectButton}
-                        title={intl.formatMessage({
-                            defaultMessage: 'View 2.0 Project',
-                            description: 'Tooltip for View 2.0 Project button',
-                            id: 'gui.previewModal.viewprojecttooltip'
-                        })}
+                        title={intl.formatMessage(messages.viewProjectTooltip)}
                         onClick={props.onViewProject}
                     >
                         <FormattedMessage

@@ -1,13 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.question-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
 .question-container {
     margin: $space;
     border: 1px solid $ui-black-transparent;

@@ -165,7 +165,7 @@
     },
     {
         "name": "Anina Pop Front",
-        "md5": "832a3ae650a1f3bede1e0c9f1779e535.png",
+        "md5": "4931a363e3e4efa20230f6ff2991c6b4.png",
         "type": "costume",
         "tags": [
             "people",
@@ -207,7 +207,7 @@
     },
     {
         "name": "Anina Pop R Arm",
-        "md5": "eac2b5f7db5e81d00c43486179b8dcf8.png",
+        "md5": "ca27e001a263ee6b5852508f39d021db.png",
         "type": "costume",
         "tags": [
             "people",
@@ -249,7 +249,7 @@
     },
     {
         "name": "Anina R Cross",
-        "md5": "f0d4dce1006cf447a0a4b53e0a8d0519.png",
+        "md5": "3948aad16f8169c013c956dd152a09a6.png",
         "type": "costume",
         "tags": [
             "people",
@@ -263,7 +263,7 @@
     },
     {
         "name": "Anina Stance",
-        "md5": "9374e067ca4b66427fc64a0822f6e468.png",
+        "md5": "b66762519d9542c0ab4fe754b47fe593.png",
         "type": "costume",
         "tags": [
             "people",
@@ -277,7 +277,7 @@
     },
     {
         "name": "Anina Top Freeze",
-        "md5": "a1c9b65dd07747964cce642f9099921b.png",
+        "md5": "b7693bd6250d4411ee622b67f8025924.png",
         "type": "costume",
         "tags": [
             "people",
@@ -1150,6 +1150,19 @@
         ]
     },
     {
+        "name": "Bowtie-01",
+        "md5": "aebd82272a5f4a1dd3c23d6e98537017.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            13,
+            7,
+            1
+        ]
+    },
+    {
         "name": "Bowtie-a",
         "md5": "534d9924d2f9bfe240f041e3ce55ccf5.svg",
         "type": "costume",
@@ -1990,7 +2003,7 @@
     },
     {
         "name": "Champ99-a",
-        "md5": "9e4e87818854cfc281d8dcc3e21ee672.png",
+        "md5": "1cb9d1a98cebc8a1d83af7633fdb9cd0.png",
         "type": "costume",
         "tags": [
             "people",
@@ -2931,7 +2944,7 @@
     },
     {
         "name": "Dm Stance",
-        "md5": "09dc9d82f097edfc6b2b6e4b5009c5f6.png",
+        "md5": "dafbdfe454c5ec7029b5c1e07fcabc90.png",
         "type": "costume",
         "tags": [
             "people",
@@ -3327,6 +3340,45 @@
         "info": [
             84,
             56,
+            1
+        ]
+    },
+    {
+        "name": "Dress-01",
+        "md5": "308b6ad8e6cfe5c2b2c1e3a1eb9cc404.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            58,
+            83,
+            1
+        ]
+    },
+    {
+        "name": "Dress-02",
+        "md5": "1f7a725ba285dc97cb142d4b812db624.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            49,
+            83,
+            1
+        ]
+    },
+    {
+        "name": "Dress-03",
+        "md5": "fa7e0b37a324c212d0f1ce0f701a1ae0.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            57,
+            83,
             1
         ]
     },
@@ -4354,6 +4406,62 @@
         ]
     },
     {
+        "name": "Glasses-a",
+        "md5": "f42180039c37c3b221e1e426b92e5092.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "glasses"
+        ],
+        "info": [
+            33,
+            13,
+            1
+        ]
+    },
+    {
+        "name": "Glasses-b",
+        "md5": "58b728ee8c1f739e2de13800dee562de.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "glasses"
+        ],
+        "info": [
+            35,
+            14,
+            1
+        ]
+    },
+    {
+        "name": "Glasses-c",
+        "md5": "d8bf373e1fcbb46f6eb8d225ba01613e.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "glasses"
+        ],
+        "info": [
+            34,
+            12,
+            1
+        ]
+    },
+    {
+        "name": "Glasses-e",
+        "md5": "6b706718a8c350522c3f29fb82b40327.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "glasses"
+        ],
+        "info": [
+            39,
+            53,
+            1
+        ]
+    },
+    {
         "name": "Goalie-a",
         "md5": "86b0610ea21fdecb99795c5e6d52768c.svg",
         "type": "costume",
@@ -4795,6 +4903,48 @@
         ]
     },
     {
+        "name": "Harper-a",
+        "md5": "919eb332bf73df227ec5f214be952a21.svg",
+        "type": "costume",
+        "tags": [
+            "people",
+            "fashion"
+        ],
+        "info": [
+            54,
+            135,
+            1
+        ]
+    },
+    {
+        "name": "Harper-b",
+        "md5": "0d5979db40b0a4dcaa601fb7679ef71c.svg",
+        "type": "costume",
+        "tags": [
+            "people",
+            "fashion"
+        ],
+        "info": [
+            54,
+            143,
+            1
+        ]
+    },
+    {
+        "name": "Harper-c",
+        "md5": "9c35763ec87604ff1b4848ff18e0b040.svg",
+        "type": "costume",
+        "tags": [
+            "people",
+            "fashion"
+        ],
+        "info": [
+            56,
+            138,
+            1
+        ]
+    },
+    {
         "name": "Hat",
         "md5": "b3beb1f52d371428d70b65a0c4c5c001.svg",
         "type": "costume",
@@ -4856,6 +5006,62 @@
         "info": [
             76,
             69,
+            1
+        ]
+    },
+    {
+        "name": "Hat-a",
+        "md5": "874462b3e079308d775629c235940d8f.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "hat"
+        ],
+        "info": [
+            39,
+            22,
+            1
+        ]
+    },
+    {
+        "name": "Hat-b",
+        "md5": "a8ef874bd7542fec62785eac80019417.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "hat"
+        ],
+        "info": [
+            45,
+            30,
+            1
+        ]
+    },
+    {
+        "name": "Hat-c",
+        "md5": "52540f9dba4537f79f1ad3067d44e3f6.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "hat"
+        ],
+        "info": [
+            37,
+            30,
+            1
+        ]
+    },
+    {
+        "name": "Hat-d",
+        "md5": "b40accecd4bd57fed8bdb96ee15e5c05.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "hat"
+        ],
+        "info": [
+            40,
+            27,
             1
         ]
     },
@@ -5588,7 +5794,7 @@
     },
     {
         "name": "Jo Pop R Arm",
-        "md5": "a35a3bbc4e21ce2f5de940adb7017fa6.png",
+        "md5": "aabfedff0d11243386b6b0941e0f72e9.png",
         "type": "costume",
         "tags": [
             "people",
@@ -5630,7 +5836,7 @@
     },
     {
         "name": "Jo Stance",
-        "md5": "e10d129d9be2147bc7d284e281d88e9a.png",
+        "md5": "6f68790ee3eb9bdccf8749305186b0dd.png",
         "type": "costume",
         "tags": [
             "people",
@@ -6111,7 +6317,7 @@
     },
     {
         "name": "Lb Stance",
-        "md5": "9d64910e84c39660b19ca4ca8b45e2be.png",
+        "md5": "71dde8c43985815bffb5a5ed5632af58.png",
         "type": "costume",
         "tags": [
             "people",
@@ -7118,6 +7324,34 @@
         ]
     },
     {
+        "name": "Pants-a",
+        "md5": "f7a0584eca14eaa0e29662e5c24fb62d.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "pants"
+        ],
+        "info": [
+            34,
+            66,
+            1
+        ]
+    },
+    {
+        "name": "Pants-b",
+        "md5": "22ea0cf68b885817a5b6a01194c6f5d3.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "pants"
+        ],
+        "info": [
+            35,
+            66,
+            1
+        ]
+    },
+    {
         "name": "Parrot-a",
         "md5": "098570b8e1aa85b32f9b4eb07bea3af2.svg",
         "type": "costume",
@@ -7764,6 +7998,32 @@
         "info": [
             69,
             61,
+            1
+        ]
+    },
+    {
+        "name": "Pumpkin-costume",
+        "md5": "6f7a5a88e6201082913a099438d626ef.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            39,
+            63,
+            1
+        ]
+    },
+    {
+        "name": "Pumpkin-hat",
+        "md5": "22bdeaf0d8421ffb70775ed77070bee7.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            28,
+            24,
             1
         ]
     },
@@ -8546,6 +8806,20 @@
         ]
     },
     {
+        "name": "Shirt-a",
+        "md5": "659465944053fe6fb6aa1ed0e11be9aa.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "shirt"
+        ],
+        "info": [
+            46,
+            40,
+            1
+        ]
+    },
+    {
         "name": "Shirt-t",
         "md5": "5d7fa4f1788f03d2962f1624d6eac800.svg",
         "type": "costume",
@@ -8585,6 +8859,62 @@
         ]
     },
     {
+        "name": "Shoes-a",
+        "md5": "4639a1af5bc91f1a6f14e822cd46972f.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "shoes"
+        ],
+        "info": [
+            40,
+            13,
+            1
+        ]
+    },
+    {
+        "name": "Shoes-b",
+        "md5": "6ba2a692c17f47170d611578a5620ae5.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "shoes"
+        ],
+        "info": [
+            40,
+            31,
+            1
+        ]
+    },
+    {
+        "name": "Shoes-c",
+        "md5": "14c6843195bd13824d253cb3fdb9e6de.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "shoes"
+        ],
+        "info": [
+            45,
+            33,
+            1
+        ]
+    },
+    {
+        "name": "Shoes-d",
+        "md5": "1130f7ca93716bac6afa31af86329e92.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "shoes"
+        ],
+        "info": [
+            44,
+            32,
+            1
+        ]
+    },
+    {
         "name": "Shoes1",
         "md5": "ffab4cc284070b50ac317e515f59f7d8.svg",
         "type": "costume",
@@ -8607,6 +8937,54 @@
         "info": [
             40,
             8,
+            1
+        ]
+    },
+    {
+        "name": "Shorts-a",
+        "md5": "d9b580c913c0d1d1a996dd733af91e68.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "pants",
+            "shorts",
+            "clothing"
+        ],
+        "info": [
+            35,
+            37,
+            1
+        ]
+    },
+    {
+        "name": "Shorts-b",
+        "md5": "1e07ab2763e5e0f5557f97c0e2c89020.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "pants",
+            "shorts",
+            "clothing"
+        ],
+        "info": [
+            43,
+            36,
+            1
+        ]
+    },
+    {
+        "name": "Shorts-c",
+        "md5": "dc9e0a1c2489ec0bf59a937b6c8ae85b.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            " pants",
+            "shorts",
+            "clothing"
+        ],
+        "info": [
+            35,
+            29,
             1
         ]
     },
@@ -9135,7 +9513,7 @@
     },
     {
         "name": "Ten80 Pop Down",
-        "md5": "14685e432d683c918328e7fb070b7029.png",
+        "md5": "fea7045c09073700b88fae8d4d257cd1.png",
         "type": "costume",
         "tags": [
             "people",
@@ -9289,7 +9667,7 @@
     },
     {
         "name": "Ten80 Top R Step",
-        "md5": "733d05c17699758e2723599de333fdc0.png",
+        "md5": "580fba92f23d5592200eb5a9079dc38f.png",
         "type": "costume",
         "tags": [
             "people",

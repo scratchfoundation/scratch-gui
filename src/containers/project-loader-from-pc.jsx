@@ -1,5 +1,3 @@
-// NOTE: rename this or project-fetcher-hoc to make clear they describe mutually exclusive functionality and states?
-
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';

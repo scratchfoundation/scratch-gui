@@ -1,5 +1,3 @@
-// NOTE: maybe this whole HOC can be moved inside project-id reducer?
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
@@ -14,8 +12,6 @@ import {
     goToErrorState,
     isSavingWithId
 } from '../reducers/project-id';
-// import {doStoreProject} from '../reducers/vm';
-// import storage from './storage';
 
 /* Higher Order Component to provide behavior for saving projects.
  */
@@ -35,23 +31,29 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     action: 'update',
                     id: nextProps.reduxProjectId
                 })
-                    .then(() => {
+                    .then(response => { // eslint-disable-line no-unused-vars
+                        // NOTE: should we check/handle response value here?
                         this.props.doneSavingWithId();
+                    })
+                    .catch(err => {
+                        // NOTE: should throw up a notice for user
+                        this.props.goToErrorState(`Saving the project failed with error: ${err}`);
                     });
             }
             if (nextProps.isCreatingNew && !this.props.isCreatingNew) {
                 this.doStoreProject({
                     action: 'create'
                 })
-                    .then(projectBody => {
-                        this.props.doneCreatingNew(projectBody.id);
+                    .then(response => {
+                        this.props.doneCreatingNew(response.id);
                     })
                     .catch(err => {
+                        // NOTE: should throw up a notice for user
                         this.props.goToErrorState(`Creating a new project failed with error: ${err}`);
                     });
             }
         }
-        doStoreProject (opts, onSaveFinished) {
+        doStoreProject (opts) {
             let storageProjectId = null;
             switch (opts.action) {
             case 'update':
@@ -64,9 +66,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
 
             return this.props.vm.saveProjectSb3()
                 .then(content => {
-                    if (onSaveFinished) {
-                        onSaveFinished();
-                    }
                     const assetType = storage.AssetType.Project;
                     const dataFormat = storage.DataFormat.SB3;
                     const body = new FormData();

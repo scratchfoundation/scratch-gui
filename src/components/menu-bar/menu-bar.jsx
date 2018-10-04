@@ -16,7 +16,6 @@ import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
-// NOTE: get rid of this component
 import ProjectSaverToPC from '../../containers/project-saver-to-pc.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
@@ -27,7 +26,8 @@ import {
     isSavingWithId,
     isShowingProject,
     startSaving,
-    stepTowardsNewProject
+    stepTowardsCreatingNewProject,
+    stepTowardsNewProjectWithoutSaving
 } from '../../reducers/project-id';
 import {
     openAccountMenu,
@@ -130,12 +130,11 @@ class MenuBar extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleLanguageMouseUp',
             'handleClickNew',
             'handleClickSave',
-            'handleRestoreOption',
-            'handleProjectLoadFinished',
             'handleCloseFileMenuAndThen',
+            'handleLanguageMouseUp',
+            'handleRestoreOption',
             'restoreOptionMessage'
         ]);
         this.state = {projectSaveInProgress: false};
@@ -155,10 +154,19 @@ class MenuBar extends React.Component {
             this.setState({projectSaveInProgress: false});
         }
     }
-    handleLanguageMouseUp (e) {
-        if (!this.props.languageMenuOpen) {
-            this.props.onClickLanguage(e);
+    handleClickNew () {
+        if (this.props.sessionExists && this.props.username) { // logged in
+            // safe to replace current project, since we will auto-save first
+            this.props.stepTowardsCreatingNewProject();
+        } else {
+            const response = confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+            if (response) {
+                this.props.stepTowardsNewProjectWithoutSaving();
+            }
         }
+    }
+    handleClickSave () {
+        this.props.startSaving();
     }
     handleRestoreOption (restoreFun) {
         return () => {
@@ -166,31 +174,16 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    handleClickNew () {
-        this.props.stepTowardsNewProject();
-    }
-    handleClickSave () {
-        this.props.startSaving();
-    }
-    // NOTE: get rig of this?
-    handleUpdateProject (updateFun) {
-        return () => {
-            this.props.onRequestCloseFile();
-            this.setState({projectSaveInProgress: true},
-                () => {
-                    updateFun().then(() => {
-                        this.setState({projectSaveInProgress: false});
-                    });
-                }
-            );
-        };
-    }
-    // NOTE: get rid of this?
     handleCloseFileMenuAndThen (fn) {
         return () => {
             this.props.onRequestCloseFile();
             fn();
         };
+    }
+    handleLanguageMouseUp (e) {
+        if (!this.props.languageMenuOpen) {
+            this.props.onClickLanguage(e);
+        }
     }
     restoreOptionMessage (deletedItem) {
         switch (deletedItem) {
@@ -308,8 +301,8 @@ class MenuBar extends React.Component {
                                     />
                                 </MenuItem>
                                 <MenuSection>
-                                    {this.props.canUpdateProject && this.props.userOwnsProject ? (
-                                        <MenuItem onClick={this.props.handleClickSave}>
+                                    {this.props.username && this.props.userOwnsProject ? (
+                                        <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
                                     ) : (
@@ -623,7 +616,6 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
-    canUpdateProject: PropTypes.bool,
     doStoreProject: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
@@ -655,7 +647,8 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     startSaving: PropTypes.func,
-    stepTowardsNewProject: PropTypes.func,
+    stepTowardsCreatingNewProject: PropTypes.func,
+    stepTowardsNewProjectWithoutSaving: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string
 };
@@ -664,7 +657,6 @@ const mapStateToProps = state => {
     const projectState = state.scratchGui.projectId.projectState;
     const user = state.session && state.session.session && state.session.session.user;
     return {
-        canUpdateProject: typeof user !== 'undefined', // NOTE: this is wrong, correct??
         accountMenuOpen: accountMenuOpen(state),
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
@@ -693,7 +685,8 @@ const mapDispatchToProps = dispatch => ({
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onShare: () => {}, // NOTE: implement this
     startSaving: () => dispatch(startSaving()),
-    stepTowardsNewProject: () => dispatch(stepTowardsNewProject())
+    stepTowardsCreatingNewProject: () => dispatch(stepTowardsCreatingNewProject()),
+    stepTowardsNewProjectWithoutSaving: () => dispatch(stepTowardsNewProjectWithoutSaving())
 });
 
 export default injectIntl(connect(

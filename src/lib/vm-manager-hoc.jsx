@@ -47,14 +47,7 @@ const vmManagerHOC = function (WrappedComponent) {
             if (nextProps.isShowingProjectWithId && this.props.isLoadingProjectWithId) {
                 this.setState({isStarted: true});
             }
-            // if (this.props.projectData !== nextProps.projectData) {
-            //     this.setState({isLoading: true}, () => {
-            //         this.loadProject(false);
-            //     });
-            // }
         }
-        // NOTE: keep working here. problem is that we ONLY want to load the project
-        // here when the old project id was also default... otherwise, we load twice!!!
         loadProject (projectData) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
@@ -76,17 +69,6 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.setState({loadingError: true, errorMessage: e});
                 });
         }
-        // handleRequestNewProject (callback) {
-        //     // pass the request up the chain
-        //     this.props.onRequestNewProject(newProjectId => {
-        //         // now that parents have had chance to act and change the projectId,
-        //         this.setState({isLoading: true}, () => {
-        //             // this.loadProject(false).then(() => {
-        //                 if (callback) callback(newProjectId); // pass the callback down the chain
-        //             // });
-        //         });
-        //     });
-        // }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -95,7 +77,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 isShowingProjectWithId: isShowingProjectWithIdProp,
                 projectData,
                 projectId,
-                // onRequestNewProject, // must remove parent's onRequestNewProject to use our own
                 /* eslint-enable no-unused-vars */
                 vm,
                 ...componentProps
@@ -110,7 +91,6 @@ const vmManagerHOC = function (WrappedComponent) {
                     isLoading={this.state.isLoading}
                     loadingError={this.state.loadingError}
                     vm={vm}
-                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -133,7 +113,6 @@ const vmManagerHOC = function (WrappedComponent) {
             isShowingProjectWithId: isShowingProjectWithId(projectState),
             projectData: state.scratchGui.projectId.projectData,
             projectId: state.scratchGui.projectId.projectId
-            // vm: state.scratchGui.vm
         };
     };
 

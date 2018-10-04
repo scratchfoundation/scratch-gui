@@ -9,7 +9,7 @@ const ProjectState = keyMirror({
     ERROR: null,
     ANY: null,
     FETCHING_WITH_ID: null,
-    FETCH_WITH_ID_IF_DIFFERENT: null, // NOTE: revisit this. is it doing anything?
+    FETCH_WITH_ID_IF_DIFFERENT: null,
     FETCHING_FILE_UPLOAD: null,
     FETCHING_NEW_DEFAULT: null,
     FETCHING_NEW_DEFAULT_TO_SAVE: null,
@@ -25,8 +25,6 @@ const ProjectState = keyMirror({
     CREATING_NEW: null
 });
 
-// Note that FETCHING_NEW_DEFAULT has an id (0), but that id should not show in
-// any URL.
 const isFetchingProjectWithNoURLId = projectState => (
     projectState === ProjectState.FETCHING_FILE_UPLOAD ||
         projectState === ProjectState.FETCHING_NEW_DEFAULT ||
@@ -34,7 +32,8 @@ const isFetchingProjectWithNoURLId = projectState => (
 );
 const isFetchingProjectWithId = projectState => (
     projectState === ProjectState.FETCHING_WITH_ID ||
-        projectState === ProjectState.FETCHING_NEW_DEFAULT
+        projectState === ProjectState.FETCHING_NEW_DEFAULT ||
+        projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
 );
 const isLoadingProjectWithId = projectState => (
     projectState === ProjectState.LOADING_VM_WITH_ID ||
@@ -101,7 +100,7 @@ const reducer = function (state, action) {
         if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
             switch (action.transitions[state.projectState] ?
                 action.transitions[state.projectState] : action.transitions[ProjectState.ANY]) {
-            // NOTE: have folks listen for error
+            // NOTE: we should introduce handling in components for showing ERROR state
             case ProjectState.ERROR:
                 return Object.assign({}, state, {
                     errStr: action.errStr,
@@ -136,6 +135,11 @@ const reducer = function (state, action) {
                     projectId: defaultProjectId,
                     projectState: ProjectState.FETCHING_NEW_DEFAULT
                 });
+            case ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE:
+                return Object.assign({}, state, {
+                    projectId: defaultProjectId,
+                    projectState: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+                });
             case ProjectState.LOADING_VM_WITH_ID:
                 return Object.assign({}, state, {
                     projectData: action.data,
@@ -151,6 +155,11 @@ const reducer = function (state, action) {
                 return Object.assign({}, state, {
                     projectData: action.data,
                     projectState: ProjectState.LOADING_VM_NEW_DEFAULT
+                });
+            case ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE:
+                return Object.assign({}, state, {
+                    projectData: action.data,
+                    projectState: ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE
                 });
             case ProjectState.SHOWING_WITH_ID:
                 // we may need to set project id, e.g. if we just created new project
@@ -193,26 +202,22 @@ const goToErrorState = errStr => ({
 const setInitialProjectId = id => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_WITH_ID,
-        // if alreadin in the middle of fetching, just start fetching over
-        [ProjectState.FETCHING_WITH_ID]: ProjectState.FETCHING_WITH_ID,
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCH_WITH_ID_IF_DIFFERENT
+        [ProjectState.ANY]: ProjectState.FETCH_WITH_ID_IF_DIFFERENT
     },
     id: id
 });
 
 const setHashProjectId = id => {
     if (id === defaultProjectId || id === null || typeof id === 'undefined') {
-        // it's ok if nothing matches, we may have just stripped the hash.
+        // if we just stripped the hash, that may have been done automatically
+        // as part of changing to a new project.
         // only transition based on seeing no hash if this is the initial load.
         return {
             type: TRANSITION_STATE,
             transitions: {
-                // NOTE: add other states like show -> loading_new, check that they work and
-                // hash reaction to new or upload doesn't cause this to fire
                 [ProjectState.NOT_LOADED]: ProjectState.FETCHING_NEW_DEFAULT
             },
-            require: false
+            require: false // ok if nothing matches
         };
     }
     return {
@@ -263,12 +268,19 @@ const doneLoading = () => ({
     }
 });
 
-const stepTowardsNewProject = () => ({
+const stepTowardsNewProjectWithoutSaving = () => ({
     type: TRANSITION_STATE,
     transitions: {
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID_BEFORE_NEW,
+        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCHING_NEW_DEFAULT,
         [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_NEW_DEFAULT,
         [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_NEW_DEFAULT
+    }
+});
+
+const stepTowardsCreatingNewProject = () => ({
+    type: TRANSITION_STATE,
+    transitions: {
+        [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID_BEFORE_NEW
     }
 });
 
@@ -279,10 +291,17 @@ const startSaving = () => ({
     }
 });
 
+// const doneSavingWithId_transitions = {
+//     [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
+//     [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+// };
 const doneSavingWithId = () => ({
     type: TRANSITION_STATE,
     transitions: {
         [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
+        // [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT
+        // NOTE: once we get new project creation working, we should reenable this transition
+        // and disable the transition above:
         [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
     }
 });
@@ -317,5 +336,6 @@ export {
     setInitialProjectId,
     startFetchingFileUpload,
     startSaving,
-    stepTowardsNewProject
+    stepTowardsCreatingNewProject,
+    stepTowardsNewProjectWithoutSaving
 };

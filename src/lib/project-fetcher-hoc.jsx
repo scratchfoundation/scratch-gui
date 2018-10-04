@@ -20,7 +20,6 @@ import storage from './storage';
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
-// NOTE: rename to project fetcher ?
 const ProjectFetcherHOC = function (WrappedComponent) {
     class ProjectFetcherComponent extends React.Component {
         constructor (props) {
@@ -29,7 +28,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 'fetchProject'
             ]);
             this.state = {
-                // projectData: null,
                 fetchingProject: false
             };
             storage.setProjectHost(props.projectHost);
@@ -46,11 +44,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 typeof props.projectId !== 'undefined'
             ) {
                 this.props.setInitialProjectId(props.projectId);
-                // NOTE: may need to reenable this
-                // this.updateProject(props.projectId);
             }
         }
-        // NOTE: try componentWillReceiveProps instead?
+        // NOTE: should this be componentWillUpdate or componentWillReceiveProps?
         componentWillUpdate (nextProps) {
             if (this.props.projectHost !== nextProps.projectHost) {
                 storage.setProjectHost(nextProps.projectHost);
@@ -61,32 +57,13 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
                 this.fetchProject(nextProps.reduxProjectId);
             }
-            // if (this.props.projectId !== nextProps.projectId) {
-            //     this.setState({fetchingProject: true}, () => {
-            //         this.updateProject(nextProps.projectId);
-            //     });
-            // }
         }
-        // handleRequestNewProject (callback) {
-        //     // pass the request up the chain
-        //     this.props.onRequestNewProject(newProjectId => {
-        //         // now that parents have had chance to act and change the projectId,
-        //         // update the metadata using the projectId -- even if it is the
-        //         // same projectId as before.
-        //         // this.updateProject(newProjectId).then(() => {
-        //             if (callback) callback(newProjectId); // pass the callback down the chain
-        //         // });
-        //     });
-        // }
-        // NOTE: should we instesad have updateProject return a promise, and resolve those
-        // in the functions that call updatePromise to improve the execution sequence?
         fetchProject (projectId) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {
                         this.setState({
-                            // projectData: projectAsset.data,
                             fetchingProject: false
                         }, () => {
                             this.props.fetchedProjectData(projectAsset.data);
@@ -113,7 +90,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 fetchedProjectData: fetchedProjectDataProp,
                 intl,
                 isFetchingProjectWithId: isFetchingProjectWithIdProp,
-                // onRequestNewProject,
                 projectHost,
                 projectId,
                 reduxProjectId,
@@ -124,8 +100,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             return (
                 <WrappedComponent
                     fetchingProject={this.state.fetchingProject}
-                    // projectData={this.state.projectData}
-                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -136,7 +110,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         fetchedProjectData: PropTypes.func,
         intl: intlShape.isRequired,
         isFetchingProjectWithId: PropTypes.bool,
-        // onRequestNewProject: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -146,8 +119,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         // NOTE: shouldn't these settings be moved into webpack, like API_HOST?
         assetHost: 'https://assets.scratch.mit.edu',
         projectHost: 'https://projects.scratch.mit.edu'
-        // NOTE: disabled because either embed or hash parser should provide val
-        // projectId: defaultProjectId
     };
 
     const mapStateToProps = state => {
@@ -158,7 +129,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
-        // NOTE: should I rename props like this so there's no name conflict? Like 'handle...'
         fetchedProjectData: data => dispatch(fetchedProjectData(data)),
         setInitialProjectId: projectId => dispatch(setInitialProjectId(projectId))
     });

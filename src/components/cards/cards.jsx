@@ -63,12 +63,22 @@ const VideoStep = ({video, dragging}) => (
             <div className={styles.videoCover} />
         ) : null}
         <iframe
-            allowFullScreen
-            allow="autoplay; encrypted-media"
-            frameBorder="0"
-            height="337"
-            src={`${video}?rel=0&amp;showinfo=0`}
+            allowfullscreen
+            allowtransparency="true"
+            frameborder="0"
+            height="338"
+            mozallowfullscreen
+            msallowfullscreen
+            oallowfullscreen
+            scrolling="no"
+            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            title="Video Player"
+            webkitallowfullscreen
             width="600"
+        />
+        <script
+            async
+            src="https://fast.wistia.net/assets/external/E-v1.js"
         />
     </div>
 );

@@ -1,7 +1,8 @@
 import GeneratedBlocks from './generated.js';
 import MotionBlocks from './motion.js';
-import MathBlocks from './math.js';
 import EventBlocks from './event.js';
+import ControlBlocks from './control.js';
+import MathBlocks from './math.js';
 
 /**
  * Define Ruby
@@ -10,8 +11,11 @@ import EventBlocks from './event.js';
  */
 export default function (Blockly) {
     Blockly = GeneratedBlocks(Blockly);
+
     Blockly = MotionBlocks(Blockly);
-    Blockly = MathBlocks(Blockly);
     Blockly = EventBlocks(Blockly);
+    Blockly = ControlBlocks(Blockly);
+    Blockly = MathBlocks(Blockly);
+
     return Blockly;
 }

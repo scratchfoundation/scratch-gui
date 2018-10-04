@@ -18,5 +18,12 @@ export default function (Blockly) {
         return [code, order];
     };
 
+    // TODO: math_whole_numberとmath_numberの違いはなにか?
+    Blockly.Ruby.math_whole_number = function (block) {
+        const code = parseFloat(block.getFieldValue('NUM'));
+        const order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
+        return [code, order];
+    };
+
     return Blockly;
 }

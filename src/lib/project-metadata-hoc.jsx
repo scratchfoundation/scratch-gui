@@ -52,28 +52,7 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
                 this.updateProjectMetaData(nextProps.projectId);
             }
-            // // if projectId has changed, and not just from one default value to
-            // // another equivalent value, look up project metadata
-            // if (this.props.projectId !== nextProps.projectId &&
-            //     ((this.props.projectId !== defaultProjectId &&
-            //     this.props.projectId !== null &&
-            //     typeof this.props.projectId !== 'undefined') ||
-            //     (nextProps.projectId !== defaultProjectId &&
-            //     nextProps.projectId !== null &&
-            //     typeof nextProps.projectId !== 'undefined'))) {
-            //     this.updateProjectMetaData(nextProps.projectId);
-            // }
         }
-        // handleRequestNewProject (callback) {
-        //     // pass the request up the chain
-        //     this.props.onRequestNewProject(newProjectId => {
-        //         // now that parents have had chance to act and change the projectId,
-        //         // update the metadata using the projectId -- even if it is the
-        //         // same projectId as before.
-        //         // this.updateProjectMetaData(newProjectId);
-        //         if (callback) callback(newProjectId); // pass the callback down the chain
-        //     });
-        // }
         updateProjectMetaData (projectId) {
             if (projectId === defaultProjectId || projectId === null || typeof projectId === 'undefined') {
                 // if project is default, use static data
@@ -108,7 +87,6 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );

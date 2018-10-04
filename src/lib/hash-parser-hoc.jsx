@@ -43,15 +43,6 @@ const HashParserHOC = function (WrappedComponent) {
                 this.props.setHashProjectId(hashProjectId);
             }
         }
-        // handleRequestNewProject (callback) {
-        //     // unset the projectId
-        //     this.setState({projectId: defaultProjectId}, () => {
-        //         // strip the hash tag from the url
-        //         // history.pushState('new-project', 'new-project',
-        //         //     window.location.pathname + window.location.search);
-        //         if (callback) callback(defaultProjectId);
-        //     });
-        // }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -64,8 +55,6 @@ const HashParserHOC = function (WrappedComponent) {
             return (
                 <WrappedComponent
                     hideIntro={this.state.projectId && this.state.projectId !== 0}
-                    // projectId={this.state.projectId}
-                    // onRequestNewProject={this.handleRequestNewProject}
                     {...componentProps}
                 />
             );
@@ -86,7 +75,6 @@ const HashParserHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         setHashProjectId: projectId => dispatch(setHashProjectId(projectId))
     });
-    // return HashParserComponent;
     return connect(
         mapStateToProps,
         mapDispatchToProps

@@ -65,35 +65,6 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
 
     switch (action.type) {
-    // Why can't this state machine be handled by separate actions?
-    // e.g., couldn't we do something like:
-    //
-    // case DONE_CREATING_NEW:
-    //     return Object.assign({}, state, {
-    //         projectId: action.id,
-    //         projectState: state.projectState in [ProjectState.CREATING_NEW] ?
-    //             ProjectState.SHOWING_WITH_ID : ProjectState.ERROR
-    //     });
-    // ???
-    //
-    // Yes, we could. But for more complex transitions, we'd have to do something ugly and repetitive like:
-    // case STEP_TOWARDS_NEW_PROJECT:
-    //     return Object.assign({}, state, {
-    //         projectId: state.projectState in [ProjectState.SHOWING_FILE_UPLOAD, ProjectState.SHOWING_NEW_DEFAULT]
-    //            ? action.id : state.projectId,
-    //         projectState: state.projectState in
-    //             {
-    //                 [
-    //                  ProjectState.SHOWING_WITH_ID,
-    //                  ProjectState.SHOWING_FILE_UPLOAD,
-    //                  ProjectState.SHOWING_NEW_DEFAULT
-    //                 ]
-    //             } ? {
-    //                 [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID_BEFORE_NEW,
-    //                 [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_NEW_DEFAULT,
-    //                 [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_NEW_DEFAULT
-    //             }[state.projectState] : ProjectState.ERROR
-    //     });
     case TRANSITION_STATE:
         // projectState must match a "from" state in the set of transitions, or there
         // can be an "ANY" state that will always match
@@ -291,17 +262,10 @@ const startSaving = () => ({
     }
 });
 
-// const doneSavingWithId_transitions = {
-//     [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-//     [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
-// };
 const doneSavingWithId = () => ({
     type: TRANSITION_STATE,
     transitions: {
         [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-        // [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT
-        // NOTE: once we get new project creation working, we should reenable this transition
-        // and disable the transition above:
         [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
     }
 });

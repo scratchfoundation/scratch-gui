@@ -49,7 +49,6 @@ class GUI extends React.Component {
             hideIntro,
             loadingError,
             onUpdateReduxProjectTitle,
-            // projectData,
             projectHost,
             projectTitle,
             /* eslint-enable no-unused-vars */
@@ -85,7 +84,6 @@ GUI.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
-    // projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     projectHost: PropTypes.string,
     projectTitle: PropTypes.string
 };

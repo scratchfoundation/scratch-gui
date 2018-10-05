@@ -1,16 +1,32 @@
 import keyMirror from 'keymirror';
 
-const TRANSITION_STATE = 'scratch-gui/project-id/TRANSITION_STATE';
+const DONE_CREATING_NEW = 'scratch-gui/project-id/DONE_CREATING_NEW';
+const DONE_FETCHING_DEFAULT_PROJECT_DATA = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA';
+const DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE';
+const DONE_FETCHING_PROJECT_DATA_WITH_ID = 'scratch-gui/project-id/DONE_FETCHING_PROJECT_DATA_WITH_ID';
+const DONE_LOADING_FILE_UPLOAD = 'scratch-gui/project-id/DONE_LOADING_FILE_UPLOAD';
+const DONE_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/DONE_LOADING_VM_FILE_UPLOAD';
+const DONE_LOADING_VM_NEW_DEFAULT = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT';
+const DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE';
+const DONE_LOADING_VM_WITH_ID = 'scratch-gui/project-id/DONE_LOADING_VM_WITH_ID';
+const DONE_SAVING_WITH_ID = 'scratch-gui/project-id/DONE_SAVING_WITH_ID';
+const DONE_SAVING_WITH_ID_BEFORE_NEW = 'scratch-gui/project-id/DONE_SAVING_WITH_ID_BEFORE_NEW';
+const GO_TO_ERROR_STATE = 'scratch-gui/project-id/GO_TO_ERROR_STATE';
+const SET_HASH_PROJECT_ID = 'scratch-gui/project-id/SET_HASH_PROJECT_ID';
+const SET_INITIAL_PROJECT_ID = 'scratch-gui/project-id/SET_INITIAL_PROJECT_ID';
+const START_FETCHING_NEW_WITHOUT_SAVING = 'scratch-gui/project-id/START_FETCHING_NEW_WITHOUT_SAVING';
+const START_LOADING_FILE_UPLOAD = 'scratch-gui/project-id/START_LOADING_FILE_UPLOAD';
+const START_SAVING = 'scratch-gui/project-id/START_SAVING';
+const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-id/START_SAVING_BEFORE_CREATING_NEW';
 
 const defaultProjectId = 0; // hardcoded id of default project
 
 const ProjectState = keyMirror({
     NOT_LOADED: null,
     ERROR: null,
-    ANY: null,
     FETCHING_WITH_ID: null,
     FETCH_WITH_ID_IF_DIFFERENT: null,
-    FETCHING_FILE_UPLOAD: null,
+    LOADING_FILE_UPLOAD: null,
     FETCHING_NEW_DEFAULT: null,
     FETCHING_NEW_DEFAULT_TO_SAVE: null,
     LOADING_VM_WITH_ID: null,
@@ -26,7 +42,8 @@ const ProjectState = keyMirror({
 });
 
 const isFetchingProjectWithNoURLId = projectState => (
-    projectState === ProjectState.FETCHING_FILE_UPLOAD ||
+    // LOADING_FILE_UPLOAD is an honorary fetch, since there is no fetching step for file uploads
+    projectState === ProjectState.LOADING_FILE_UPLOAD ||
         projectState === ProjectState.FETCHING_NEW_DEFAULT ||
         projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
 );
@@ -65,94 +82,168 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
 
     switch (action.type) {
-    case TRANSITION_STATE:
-        // projectState must match a "from" state in the set of transitions, or there
-        // can be an "ANY" state that will always match
-        if (state.projectState in action.transitions || ProjectState.ANY in action.transitions) {
-            switch (action.transitions[state.projectState] ?
-                action.transitions[state.projectState] : action.transitions[ProjectState.ANY]) {
-            // NOTE: we should introduce handling in components for showing ERROR state
-            case ProjectState.ERROR:
-                return Object.assign({}, state, {
-                    errStr: action.errStr,
-                    projectState: ProjectState.ERROR
-                });
-            case ProjectState.FETCHING_WITH_ID:
-                return Object.assign({}, state, {
-                    projectId: action.id,
-                    projectState: ProjectState.FETCHING_WITH_ID
-                });
-            case ProjectState.FETCH_WITH_ID_IF_DIFFERENT:
-                // don't re-fetch and reload same data
-                if (state.projectId === action.id) {
-                    return Object.assign({}, state, {
-                        projectId: action.id,
-                        projectState: ProjectState.SHOWING_WITH_ID
-                    });
-                }
-                // else, it's a new project id, so do fetch it
-                return Object.assign({}, state, {
-                    projectId: action.id,
-                    projectState: ProjectState.FETCHING_WITH_ID
-                });
-            case ProjectState.FETCHING_FILE_UPLOAD:
-                // goes straight to LOADING_VM_FILE_UPLOAD
-                return Object.assign({}, state, {
-                    projectId: null,
-                    projectState: ProjectState.LOADING_VM_FILE_UPLOAD
-                });
-            case ProjectState.FETCHING_NEW_DEFAULT:
-                return Object.assign({}, state, {
-                    projectId: defaultProjectId,
-                    projectState: ProjectState.FETCHING_NEW_DEFAULT
-                });
-            case ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE:
-                return Object.assign({}, state, {
-                    projectId: defaultProjectId,
-                    projectState: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
-                });
-            case ProjectState.LOADING_VM_WITH_ID:
-                return Object.assign({}, state, {
-                    projectData: action.data,
-                    projectState: ProjectState.LOADING_VM_WITH_ID
-                });
-            case ProjectState.LOADING_VM_FILE_UPLOAD:
-                // goes straight to LOADING_VM_FILE_UPLOAD
-                return Object.assign({}, state, {
-                    projectData: action.data,
-                    projectState: ProjectState.LOADING_VM_FILE_UPLOAD
-                });
-            case ProjectState.LOADING_VM_NEW_DEFAULT:
-                return Object.assign({}, state, {
-                    projectData: action.data,
-                    projectState: ProjectState.LOADING_VM_NEW_DEFAULT
-                });
-            case ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE:
-                return Object.assign({}, state, {
-                    projectData: action.data,
-                    projectState: ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE
-                });
-            case ProjectState.SHOWING_WITH_ID:
-                // we may need to set project id, e.g. if we just created new project
-                if (typeof action.id !== 'undefined') {
-                    return Object.assign({}, state, {
-                        projectId: action.id,
-                        projectState: ProjectState.SHOWING_WITH_ID
-                    });
-                }
+    case DONE_CREATING_NEW:
+        // We need to set project id since we just created new project on the server.
+        // No need to load, we should have data already in vm.
+        if (state.projectState === ProjectState.CREATING_NEW) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_WITH_ID,
+                id: action.id
+            });
+        }
+        break;
+    case DONE_FETCHING_PROJECT_DATA_WITH_ID:
+        if (state.projectState === ProjectState.FETCHING_WITH_ID) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.LOADING_VM_WITH_ID,
+                projectData: action.projectData
+            });
+        }
+        break;
+    case DONE_FETCHING_DEFAULT_PROJECT_DATA:
+        if (state.projectState === ProjectState.FETCHING_NEW_DEFAULT) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.LOADING_VM_NEW_DEFAULT,
+                projectData: action.projectData
+            });
+        }
+        break;
+    case DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE:
+        if (state.projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE,
+                projectData: action.projectData
+            });
+        }
+        break;
+    case DONE_LOADING_FILE_UPLOAD:
+        if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_FILE_UPLOAD
+            });
+        }
+        break;
+    case DONE_LOADING_VM_WITH_ID:
+        if (state.projectState === ProjectState.LOADING_VM_WITH_ID) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_WITH_ID
+            });
+        }
+        break;
+    case DONE_LOADING_VM_FILE_UPLOAD:
+        if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_FILE_UPLOAD
+            });
+        }
+        break;
+    case DONE_LOADING_VM_NEW_DEFAULT:
+        if (state.projectState === ProjectState.LOADING_VM_NEW_DEFAULT) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_NEW_DEFAULT
+            });
+        }
+        break;
+    case DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE:
+        if (state.projectState === ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.CREATING_NEW
+            });
+        }
+        break;
+    case DONE_SAVING_WITH_ID:
+        if (state.projectState === ProjectState.SAVING_WITH_ID) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SHOWING_WITH_ID
+            });
+        }
+        break;
+    case DONE_SAVING_WITH_ID_BEFORE_NEW:
+        if (state.projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+            });
+        }
+        break;
+    case SET_HASH_PROJECT_ID:
+        // We purposely do not transition if we are currently in a fetching or loading state,
+        // which may have changed the hash automatically, e.g. if we have moved from a hash url
+        // to loading a project from local.
+        if (state.projectState in [
+            ProjectState.NOT_LOADED,
+            ProjectState.SHOWING_WITH_ID
+        ]) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.FETCHING_WITH_ID,
+                projectId: action.id
+            });
+        }
+        break;
+    case SET_INITIAL_PROJECT_ID:
+        // NOTE: test this to see if it works when switching between project page and editor.
+        if (state.projectState === ProjectState.NOT_LOADED) {
+            // don't re-fetch and reload same projectData
+            if (state.projectId === action.id) {
                 return Object.assign({}, state, {
                     projectState: ProjectState.SHOWING_WITH_ID
                 });
-            default:
-                return Object.assign({}, state, {projectState: (action.transitions[state.projectState] ?
-                    action.transitions[state.projectState] : action.transitions[ProjectState.ANY])});
             }
-        }
-        // default to requiring transitions to successfully match current state
-        if (action.require || typeof action.require === 'undefined') {
+            // else, it's a new project id, so DO fetch it
             return Object.assign({}, state, {
-                errStr: `transition called from state ${state.projectState} with transions ${action.transitions}`,
-                projectState: ProjectState.ERROR
+                projectId: action.id,
+                projectState: ProjectState.FETCHING_WITH_ID
+            });
+        }
+        break;
+    case START_FETCHING_NEW_WITHOUT_SAVING:
+        if (state.projectState in [
+            ProjectState.SHOWING_WITH_ID,
+            ProjectState.SHOWING_FILE_UPLOAD,
+            ProjectState.SHOWING_NEW_DEFAULT
+        ]) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.FETCHING_NEW_DEFAULT,
+                projectId: null
+            });
+        }
+        break;
+    case START_LOADING_FILE_UPLOAD:
+        if (state.projectState in [
+            ProjectState.NOT_LOADED,
+            ProjectState.SHOWING_WITH_ID,
+            ProjectState.SHOWING_FILE_UPLOAD,
+            ProjectState.SHOWING_NEW_DEFAULT
+        ]) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.LOADING_FILE_UPLOAD
+            });
+        }
+        break;
+    case START_SAVING:
+        if (state.projectState === ProjectState.SHOWING_WITH_ID) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SAVING_WITH_ID
+            });
+        }
+        break;
+    case START_SAVING_BEFORE_CREATING_NEW:
+        if (state.projectState === ProjectState.SHOWING_WITH_ID) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.SAVING_WITH_ID_BEFORE_NEW
+            });
+        }
+        break;
+    case GO_TO_ERROR_STATE:
+    // NOTE: we should introduce handling in components for showing ERROR state
+        if (state.projectState in [
+            ProjectState.NOT_LOADED,
+            ProjectState.FETCHING_WITH_ID,
+            ProjectState.FETCHING_NEW_DEFAULT,
+            ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+        ]) {
+            return Object.assign({}, state, {
+                projectState: ProjectState.ERROR,
+                errStr: action.errStr
             });
         }
         break;
@@ -161,122 +252,104 @@ const reducer = function (state, action) {
     }
 };
 
+const doneCreatingNew = id => ({
+    type: DONE_CREATING_NEW,
+    id: id
+});
+
+const doneFetchingProjectData = (projectData, projectState) => {
+    switch (projectState) {
+    case ProjectState.FETCHING_WITH_ID:
+        return {
+            type: DONE_FETCHING_PROJECT_DATA_WITH_ID,
+            projectData: projectData
+        };
+    case ProjectState.FETCHING_NEW_DEFAULT:
+        return {
+            type: DONE_FETCHING_DEFAULT_PROJECT_DATA,
+            projectData: projectData
+        };
+    case ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE:
+        return {
+            type: DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE,
+            projectData: projectData
+        };
+    default:
+        break;
+    }
+};
+
+const doneLoadingFileUpload = () => ({
+    type: DONE_LOADING_FILE_UPLOAD
+});
+
+const doneLoading = projectState => {
+    switch (projectState) {
+    case ProjectState.LOADING_VM_WITH_ID:
+        return {
+            type: DONE_LOADING_VM_WITH_ID
+        };
+    case ProjectState.LOADING_VM_FILE_UPLOAD:
+        return {
+            type: DONE_LOADING_VM_FILE_UPLOAD
+        };
+    case ProjectState.LOADING_VM_NEW_DEFAULT:
+        return {
+            type: DONE_LOADING_VM_NEW_DEFAULT
+        };
+    case ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE:
+        return {
+            type: DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE
+        };
+    default:
+        break;
+    }
+};
+
+const doneSavingWithId = projectState => {
+    switch (projectState) {
+    case ProjectState.SAVING_WITH_ID:
+        return {
+            type: DONE_SAVING_WITH_ID
+        };
+    case ProjectState.SAVING_WITH_ID_BEFORE_NEW:
+        return {
+            type: DONE_SAVING_WITH_ID_BEFORE_NEW
+        };
+    default:
+        break;
+    }
+};
+
 const goToErrorState = errStr => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.ANY]: ProjectState.ERROR
-    },
+    type: GO_TO_ERROR_STATE,
     errStr: errStr
 });
 
-// "initial" here refers to being invoked, usually embedded in another app, with a projectId property
-const setInitialProjectId = id => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.ANY]: ProjectState.FETCH_WITH_ID_IF_DIFFERENT
-    },
+const setHashProjectId = id => ({
+    type: SET_HASH_PROJECT_ID,
     id: id
 });
 
-const setHashProjectId = id => {
-    if (id === defaultProjectId || id === null || typeof id === 'undefined') {
-        // if we just stripped the hash, that may have been done automatically
-        // as part of changing to a new project.
-        // only transition based on seeing no hash if this is the initial load.
-        return {
-            type: TRANSITION_STATE,
-            transitions: {
-                [ProjectState.NOT_LOADED]: ProjectState.FETCHING_NEW_DEFAULT
-            },
-            require: false // ok if nothing matches
-        };
-    }
-    return {
-        type: TRANSITION_STATE,
-        transitions: {
-            [ProjectState.ANY]: ProjectState.FETCHING_WITH_ID
-        },
-        id: id
-    };
-};
-
-const fetchedProjectData = data => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.FETCHING_WITH_ID]: ProjectState.LOADING_VM_WITH_ID,
-        [ProjectState.FETCHING_FILE_UPLOAD]: ProjectState.LOADING_VM_FILE_UPLOAD,
-        [ProjectState.FETCHING_NEW_DEFAULT]: ProjectState.LOADING_VM_NEW_DEFAULT,
-        [ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE]: ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE
-    },
-    data: data
-});
-
-
-const startFetchingFileUpload = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.NOT_LOADED]: ProjectState.FETCHING_FILE_UPLOAD,
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCHING_FILE_UPLOAD,
-        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_FILE_UPLOAD,
-        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_FILE_UPLOAD
-    }
-});
-
-const doneLoadingFileUpload = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.LOADING_VM_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD
-    }
-});
-
-const doneLoading = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.LOADING_VM_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-        [ProjectState.LOADING_VM_FILE_UPLOAD]: ProjectState.SHOWING_FILE_UPLOAD,
-        [ProjectState.LOADING_VM_NEW_DEFAULT]: ProjectState.SHOWING_NEW_DEFAULT,
-        [ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE]: ProjectState.CREATING_NEW
-    }
-});
-
-const stepTowardsNewProjectWithoutSaving = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.FETCHING_NEW_DEFAULT,
-        [ProjectState.SHOWING_FILE_UPLOAD]: ProjectState.FETCHING_NEW_DEFAULT,
-        [ProjectState.SHOWING_NEW_DEFAULT]: ProjectState.FETCHING_NEW_DEFAULT
-    }
+const setInitialProjectId = id => ({
+    type: SET_INITIAL_PROJECT_ID,
+    id: id
 });
 
 const stepTowardsCreatingNewProject = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID_BEFORE_NEW
-    }
+    type: START_SAVING_BEFORE_CREATING_NEW
+});
+
+const stepTowardsNewProjectWithoutSaving = () => ({
+    type: START_FETCHING_NEW_WITHOUT_SAVING
+});
+
+const startLoadingFileUpload = () => ({
+    type: START_LOADING_FILE_UPLOAD
 });
 
 const startSaving = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.SHOWING_WITH_ID]: ProjectState.SAVING_WITH_ID
-    }
-});
-
-const doneSavingWithId = () => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        [ProjectState.SAVING_WITH_ID]: ProjectState.SHOWING_WITH_ID,
-        [ProjectState.SAVING_WITH_ID_BEFORE_NEW]: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
-    }
-});
-
-const doneCreatingNew = id => ({
-    type: TRANSITION_STATE,
-    transitions: {
-        // no need to load, we should always have data already in vm
-        [ProjectState.CREATING_NEW]: ProjectState.SHOWING_WITH_ID
-    },
-    id: id
+    type: START_SAVING
 });
 
 export {
@@ -288,7 +361,7 @@ export {
     doneLoading,
     doneLoadingFileUpload,
     doneSavingWithId,
-    fetchedProjectData,
+    doneFetchingProjectData,
     goToErrorState,
     isFetchingProjectWithNoURLId,
     isFetchingProjectWithId,
@@ -298,7 +371,7 @@ export {
     isShowingProjectWithId,
     setHashProjectId,
     setInitialProjectId,
-    startFetchingFileUpload,
+    startLoadingFileUpload,
     startSaving,
     stepTowardsCreatingNewProject,
     stepTowardsNewProjectWithoutSaving

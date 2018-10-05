@@ -7,7 +7,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import analytics from '../lib/analytics';
 import log from '../lib/log';
 import {setProjectTitle} from '../reducers/project-title';
-import {startFetchingFileUpload, doneLoadingFileUpload} from '../reducers/project-id';
+import {startLoadingFileUpload, doneLoadingFileUpload} from '../reducers/project-id';
 
 import {
     openLoadingProject,
@@ -142,7 +142,7 @@ const mapDispatchToProps = dispatch => ({
     onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
     openLoadingState: () => {
         dispatch(openLoadingProject());
-        dispatch(startFetchingFileUpload());
+        dispatch(startLoadingFileUpload());
     }
 });
 

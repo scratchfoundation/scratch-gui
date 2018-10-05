@@ -33,7 +33,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 })
                     .then(response => { // eslint-disable-line no-unused-vars
                         // NOTE: should we check/handle response value here?
-                        this.props.doneSavingWithId();
+                        this.props.doneSavingWithId(nextProps.projectState);
                     })
                     .catch(err => {
                         // NOTE: should throw up a notice for user
@@ -88,6 +88,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 goToErrorState: goToErrorStateProp,
                 isCreatingNew: isCreatingNewProp,
                 isSavingWithId: isSavingWithIdProp,
+                projectState,
                 reduxProjectId,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
@@ -106,6 +107,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         goToErrorState: PropTypes.func,
         isCreatingNew: PropTypes.bool,
         isSavingWithId: PropTypes.bool,
+        projectState: PropTypes.string,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         vm: PropTypes.instanceOf(VM).isRequired
     };
@@ -114,13 +116,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
         return {
             isCreatingNew: projectState === ProjectState.CREATING_NEW,
             isSavingWithId: isSavingWithId(projectState),
+            projectState: projectState,
             reduxProjectId: state.scratchGui.projectId.projectId,
             vm: state.scratchGui.vm
         };
     };
     const mapDispatchToProps = dispatch => ({
         doneCreatingNew: projectId => dispatch(doneCreatingNew(projectId)),
-        doneSavingWithId: projectId => dispatch(doneSavingWithId(projectId)),
+        doneSavingWithId: (projectId, projectState) => dispatch(doneSavingWithId(projectId, projectState)),
         goToErrorState: errStr => dispatch(goToErrorState(errStr))
     });
     return connect(

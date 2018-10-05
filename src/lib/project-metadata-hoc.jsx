@@ -1,39 +1,12 @@
 import React from 'react';
-import defaultsdeep from 'lodash.defaultsdeep';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
-import xhr from 'xhr';
 
+import api from './api';
 import {defaultProjectId, goToErrorState, isFetchingProjectWithId} from '../reducers/project-id';
 import {defaultProjectTitleMessages} from '../reducers/project-title';
-
-const api = (options, token, callback) => {
-    defaultsdeep(options, {
-        host: process.env.API_HOST,
-        headers: {},
-        responseType: 'json'
-    });
-    defaultsdeep(options, {
-        uri: options.host + options.path,
-        headers: {},
-        responseType: 'json'
-    });
-    if (token) {
-        options.headers['X-Token'] = token;
-    }
-
-    xhr(options, (err, res, body) => {
-        if (err) {
-            callback({
-                isError: true,
-                error: err
-            });
-        }
-        callback(body);
-    });
-};
 
 /* Higher Order Component to get and set project metadata; currently only uses title.
  * @param {React.Component} WrappedComponent component to receive project title related props

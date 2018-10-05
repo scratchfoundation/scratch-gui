@@ -34,13 +34,6 @@ Then go to [http://localhost:8601/](http://localhost:8601/) - the playground out
 
 #### Configuration
 
-`npm start` can be configured with the following environment variables
-
-| Variable        | Default                            | Description                                    |
-| --------------- | ---------------------------------- | ---------------------------------------------- |
-| `API_HOST`      | `https://api.scratch.mit.edu`      | Hostname for API requests                      |
-
-
 If you wish to develop scratch-gui alongside other scratch repositories that depend on it, you may wish
 to have the other repositories use your local scratch-gui build instead of fetching the current production
 version of the scratch-gui that is found by default using `npm install`.

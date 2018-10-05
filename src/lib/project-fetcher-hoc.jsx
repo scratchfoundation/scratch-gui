@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import {
     defaultProjectId,
-    fetchedProjectData,
+    doneFetchingProjectData,
     isFetchingProjectWithId,
     setInitialProjectId
 } from '../reducers/project-id';
@@ -55,10 +55,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 storage.setAssetHost(nextProps.assetHost);
             }
             if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
-                this.fetchProject(nextProps.reduxProjectId);
+                this.fetchProject(nextProps.reduxProjectId, nextProps.projectState);
             }
         }
-        fetchProject (projectId) {
+        fetchProject (projectId, projectState) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
@@ -66,7 +66,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         this.setState({
                             fetchingProject: false
                         }, () => {
-                            this.props.fetchedProjectData(projectAsset.data);
+                            this.props.doneFetchingProjectData(projectAsset.data, projectState);
                         });
                     }
                 })
@@ -87,11 +87,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
-                fetchedProjectData: fetchedProjectDataProp,
+                doneFetchingProjectData: doneFetchingProjectDataProp,
                 intl,
                 isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 projectHost,
                 projectId,
+                projectState,
                 reduxProjectId,
                 setInitialProjectId: setInitialProjectIdProp,
                 /* eslint-enable no-unused-vars */
@@ -107,11 +108,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     }
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
-        fetchedProjectData: PropTypes.func,
+        doneFetchingProjectData: PropTypes.func,
         intl: intlShape.isRequired,
         isFetchingProjectWithId: PropTypes.bool,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        projectState: PropTypes.string,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setInitialProjectId: PropTypes.func
     };
@@ -121,15 +123,14 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         projectHost: 'https://projects.scratch.mit.edu'
     };
 
-    const mapStateToProps = state => {
-        const projectState = state.scratchGui.projectId.projectState;
-        return {
-            isFetchingProjectWithId: isFetchingProjectWithId(projectState),
-            reduxProjectId: state.scratchGui.projectId.projectId
-        };
-    };
+    const mapStateToProps = state => ({
+        isFetchingProjectWithId: isFetchingProjectWithId(state.scratchGui.projectId.projectState),
+        projectState: state.scratchGui.projectId.projectState,
+        reduxProjectId: state.scratchGui.projectId.projectId
+    });
     const mapDispatchToProps = dispatch => ({
-        fetchedProjectData: data => dispatch(fetchedProjectData(data)),
+        doneFetchingProjectData: (projectData, projectState) =>
+            dispatch(doneFetchingProjectData(projectData, projectState)),
         setInitialProjectId: projectId => dispatch(setInitialProjectId(projectId))
     });
     return injectIntl(connect(

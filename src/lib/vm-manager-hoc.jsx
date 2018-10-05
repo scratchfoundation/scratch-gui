@@ -38,7 +38,7 @@ const vmManagerHOC = function (WrappedComponent) {
         }
         componentWillReceiveProps (nextProps) {
             if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
-                this.loadProject(nextProps.projectData);
+                this.loadProject(nextProps.projectData, nextProps.projectState);
                 if (!this.props.vm.initialized) {
                     this.props.vm.initialized = true;
                 }
@@ -48,7 +48,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.setState({isStarted: true});
             }
         }
-        loadProject (projectData) {
+        loadProject (projectData, projectState) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
                     this.setState({isLoading: false}, () => {
@@ -60,7 +60,7 @@ const vmManagerHOC = function (WrappedComponent) {
                             // Here, we relied on an explicit initial call in componentDidMount
                             // to setCompatibilityMode and start().
                         }
-                        this.props.doneLoading();
+                        this.props.doneLoading(projectState);
                     });
                 })
                 .catch(e => {
@@ -77,6 +77,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 isShowingProjectWithId: isShowingProjectWithIdProp,
                 projectData,
                 projectId,
+                projectState,
                 /* eslint-enable no-unused-vars */
                 vm,
                 ...componentProps
@@ -103,6 +104,7 @@ const vmManagerHOC = function (WrappedComponent) {
         isShowingProjectWithId: PropTypes.bool,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        projectState: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
@@ -112,12 +114,13 @@ const vmManagerHOC = function (WrappedComponent) {
             isLoadingProjectWithId: isLoadingProjectWithId(projectState),
             isShowingProjectWithId: isShowingProjectWithId(projectState),
             projectData: state.scratchGui.projectId.projectData,
-            projectId: state.scratchGui.projectId.projectId
+            projectId: state.scratchGui.projectId.projectId,
+            projectState: projectState
         };
     };
 
     const mapDispatchToProps = dispatch => ({
-        doneLoading: () => dispatch(doneLoading())
+        doneLoading: projectState => dispatch(doneLoading(projectState))
     });
 
     return connect(

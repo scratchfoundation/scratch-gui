@@ -34,14 +34,22 @@ class Storage extends ScratchStorage {
     getProjectCreateConfig () {
         return {
             url: `${this.projectHost}/`,
-            json: true,
+            headers: {
+                Accept: 'application/json'
+            },
+            // NOTE: using json: true here unexpectedly breaks saving
+            // json: true,
             withCredentials: true
         };
     }
     getProjectUpdateConfig (projectAsset) {
         return {
             url: `${this.projectHost}/${projectAsset.assetId}`,
-            json: true,
+            headers: {
+                Accept: 'application/json'
+            },
+            // NOTE: using json: true here unexpectedly breaks saving
+            // json: true,
             withCredentials: true
         };
     }

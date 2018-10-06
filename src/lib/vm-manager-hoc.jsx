@@ -25,7 +25,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 'loadProject'
             ]);
             this.state = {
-                isLoading: !props.vm.initialized,
                 isStarted: false,
                 loadingError: false,
                 errorMessage: ''
@@ -35,33 +34,22 @@ const vmManagerHOC = function (WrappedComponent) {
             if (this.props.vm.initialized) return;
             this.audioEngine = new AudioEngine();
             this.props.vm.attachAudioEngine(this.audioEngine);
+            this.props.vm.initialized = true;
         }
-        componentWillReceiveProps (nextProps) {
-            if (nextProps.isLoadingProjectWithId && !this.props.isLoadingProjectWithId) {
-                this.loadProject(nextProps.projectData, nextProps.projectState);
-                if (!this.props.vm.initialized) {
-                    this.props.vm.initialized = true;
-                }
-            }
-            // if we went from loading to showing, we're done starting the vm
-            if (nextProps.isShowingProjectWithId && this.props.isLoadingProjectWithId) {
-                this.setState({isStarted: true});
+        componentDidUpdate (prevProps) {
+            if (this.props.isLoadingProjectWithId && !prevProps.isLoadingProjectWithId) {
+                this.loadProject(this.props.projectData, this.props.projectState);
             }
         }
         loadProject (projectData, projectState) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
-                    this.setState({isLoading: false}, () => {
-                        if (!this.state.isStarted) {
-                            this.props.vm.setCompatibilityMode(true);
-                            this.props.vm.start();
-                            // NOTE: this logic is slightly different from previous
-                            // https://github.com/LLK/scratch-gui/blob/develop/src/containers/gui.jsx
-                            // Here, we relied on an explicit initial call in componentDidMount
-                            // to setCompatibilityMode and start().
-                        }
-                        this.props.doneLoading(projectState);
-                    });
+                    if (!this.state.isStarted) {
+                        this.props.vm.setCompatibilityMode(true);
+                        this.props.vm.start();
+                        this.setState({isStarted: true});
+                    }
+                    this.props.doneLoading(projectState);
                 })
                 .catch(e => {
                     // Need to catch this error and update component state so that
@@ -73,12 +61,12 @@ const vmManagerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 doneLoading: doneLoadingProp,
-                isLoadingProjectWithId: isLoadingProjectWithIdProp,
                 isShowingProjectWithId: isShowingProjectWithIdProp,
                 projectData,
                 projectId,
                 projectState,
                 /* eslint-enable no-unused-vars */
+                isLoadingProjectWithId: isLoadingProjectWithIdProp,
                 vm,
                 ...componentProps
             } = this.props;
@@ -89,7 +77,7 @@ const vmManagerHOC = function (WrappedComponent) {
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
-                    isLoading={this.state.isLoading}
+                    isLoading={isLoadingProjectWithIdProp}
                     loadingError={this.state.loadingError}
                     vm={vm}
                     {...componentProps}

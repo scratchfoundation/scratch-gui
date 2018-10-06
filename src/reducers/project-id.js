@@ -161,7 +161,8 @@ const reducer = function (state, action) {
     case DONE_SAVING_WITH_ID_BEFORE_NEW:
         if (state.projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW) {
             return Object.assign({}, state, {
-                projectState: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
+                projectState: ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE,
+                projectId: defaultProjectId
             });
         }
         break;
@@ -203,7 +204,7 @@ const reducer = function (state, action) {
         ]) {
             return Object.assign({}, state, {
                 projectState: ProjectState.FETCHING_NEW_DEFAULT,
-                projectId: null
+                projectId: defaultProjectId
             });
         }
         break;
@@ -215,7 +216,8 @@ const reducer = function (state, action) {
             ProjectState.SHOWING_NEW_DEFAULT
         ]) {
             return Object.assign({}, state, {
-                projectState: ProjectState.LOADING_FILE_UPLOAD
+                projectState: ProjectState.LOADING_FILE_UPLOAD,
+                projectId: null // clear any current projectId
             });
         }
         break;

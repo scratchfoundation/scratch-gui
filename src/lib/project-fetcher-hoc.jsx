@@ -27,9 +27,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             bindAll(this, [
                 'fetchProject'
             ]);
-            this.state = {
-                fetchingProject: false
-            };
             storage.setProjectHost(props.projectHost);
             storage.setAssetHost(props.assetHost);
             storage.setTranslatorFunction(props.intl.formatMessage);
@@ -63,11 +60,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {
-                        this.setState({
-                            fetchingProject: false
-                        }, () => {
-                            this.props.doneFetchingProjectData(projectAsset.data, projectState);
-                        });
+                        this.props.doneFetchingProjectData(projectAsset.data, projectState);
                     }
                 })
                 .then(() => {
@@ -81,7 +74,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         });
                     }
                 })
-                .catch(err => log.error(err));
+                .catch(err => {
+                    log.error(err);
+                });
         }
         render () {
             const {
@@ -89,18 +84,18 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 assetHost,
                 doneFetchingProjectData: doneFetchingProjectDataProp,
                 intl,
-                isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 projectHost,
                 projectId,
                 projectState,
                 reduxProjectId,
                 setInitialProjectId: setInitialProjectIdProp,
                 /* eslint-enable no-unused-vars */
+                isFetchingProjectWithId: isFetchingProjectWithIdProp,
                 ...componentProps
             } = this.props;
             return (
                 <WrappedComponent
-                    fetchingProject={this.state.fetchingProject}
+                    fetchingProject={isFetchingProjectWithIdProp}
                     {...componentProps}
                 />
             );

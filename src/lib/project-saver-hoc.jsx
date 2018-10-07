@@ -54,16 +54,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         doStoreProject (opts) {
-            let storageProjectId = null;
-            switch (opts.action) {
-            case 'update':
-                storageProjectId = opts.id;
-                break;
-            case 'create':
-            default:
-                storageProjectId = null;
-            }
-
             return this.props.vm.saveProjectSb3()
                 .then(content => {
                     const assetType = storage.AssetType.Project;
@@ -76,7 +66,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         assetType,
                         dataFormat,
                         body,
-                        storageProjectId
+                        opts.id // undefined value will cause POST/create; defined id will cause PUT/update
                     );
                 });
         }

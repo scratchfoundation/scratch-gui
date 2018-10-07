@@ -147,7 +147,10 @@ const reducer = function (state, action) {
     case DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE:
         if (state.projectState === ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE) {
             return Object.assign({}, state, {
-                projectState: ProjectState.CREATING_NEW
+                // NOTE: this is set to skip over sending a POST to create the new project
+                // on the server, until we can get that working on the backend.
+                // projectState: ProjectState.CREATING_NEW
+                projectState: ProjectState.SHOWING_WITH_ID
             });
         }
         break;

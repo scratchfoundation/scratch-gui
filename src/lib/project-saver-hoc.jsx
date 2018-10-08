@@ -20,14 +20,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'doStoreProject'
+                'storeProject' // NOTE: do i need to bind this?
             ]);
             this.state = {
             };
         }
         componentWillReceiveProps (nextProps) {
             if (nextProps.isSavingWithId && !this.props.isSavingWithId) {
-                this.doStoreProject({
+                this.storeProject({
                     action: 'update',
                     id: nextProps.reduxProjectId
                 })
@@ -41,7 +41,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
             if (nextProps.isCreatingNew && !this.props.isCreatingNew) {
-                this.doStoreProject({
+                this.storeProject({
                     action: 'create'
                 })
                     .then(response => {
@@ -53,7 +53,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
         }
-        doStoreProject (opts) {
+        storeProject (opts) {
             return this.props.vm.saveProjectSb3()
                 .then(content => {
                     const assetType = storage.AssetType.Project;
@@ -85,7 +85,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    doStoreProject={this.doStoreProject}
                     {...componentProps}
                 />
             );

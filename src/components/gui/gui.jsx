@@ -64,7 +64,6 @@ const GUIComponent = props => {
         children,
         costumeLibraryVisible,
         costumesTabVisible,
-        doStoreProject,
         enableCommunity,
         importInfoVisible,
         intl,
@@ -166,7 +165,7 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
-                    doStoreProject={doStoreProject}
+                    className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
                     userOwnsProject={userOwnsProject}
@@ -312,7 +311,6 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
-    doStoreProject: PropTypes.func,
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,

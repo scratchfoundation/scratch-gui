@@ -236,9 +236,11 @@ class MenuBar extends React.Component {
         );
         return (
             <Box
-                className={classNames(styles.menuBar, {
-                    [styles.saveInProgress]: this.state.projectSaveInProgress
-                })}
+                className={classNames(
+                    this.props.className,
+                    styles.menuBar,
+                    {[styles.saveInProgress]: this.state.projectSaveInProgress}
+                )}
             >
                 <div className={styles.mainMenu}>
                     <div className={styles.fileGroup}>
@@ -288,8 +290,6 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                {/* note that it does not matter whether user is logged in or not, or
-                                gui player is embedded or standalone */}
                                 <MenuItem
                                     isRtl={this.props.isRtl}
                                     onClick={this.handleClickNew}
@@ -617,7 +617,7 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
-    doStoreProject: PropTypes.func,
+    className: PropTypes.string,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,

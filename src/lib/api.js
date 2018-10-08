@@ -3,9 +3,7 @@ import xhr from 'xhr';
 
 const api = (options, token, callback) => {
     defaultsdeep(options, {
-        host: 'https://api.scratch.mit.edu',
-        headers: {},
-        responseType: 'json'
+        host: 'https://api.scratch.mit.edu'
     });
     defaultsdeep(options, {
         uri: options.host + options.path,

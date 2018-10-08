@@ -22,25 +22,23 @@ const ProjectSaverHOC = function (WrappedComponent) {
             bindAll(this, [
                 'storeProject' // NOTE: do i need to bind this?
             ]);
-            this.state = {
-            };
         }
-        componentWillReceiveProps (nextProps) {
-            if (nextProps.isSavingWithId && !this.props.isSavingWithId) {
+        componentDidUpdate (prevProps) {
+            if (this.props.isSavingWithId && !prevProps.isSavingWithId) {
                 this.storeProject({
                     action: 'update',
-                    id: nextProps.reduxProjectId
+                    id: this.props.reduxProjectId
                 })
                     .then(response => { // eslint-disable-line no-unused-vars
                         // NOTE: should we check/handle response value here?
-                        this.props.doneSavingWithId(nextProps.projectState);
+                        this.props.doneSavingWithId(this.props.projectState);
                     })
                     .catch(err => {
                         // NOTE: should throw up a notice for user
                         this.props.goToErrorState(`Saving the project failed with error: ${err}`);
                     });
             }
-            if (nextProps.isCreatingNew && !this.props.isCreatingNew) {
+            if (this.props.isCreatingNew && !prevProps.isCreatingNew) {
                 this.storeProject({
                     action: 'create'
                 })

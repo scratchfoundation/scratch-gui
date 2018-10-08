@@ -100,7 +100,7 @@
   }
 }
 
-@keyframes top-slide-in {
+@keyframes top-slide-in-rtl {
   0% {
     transform: translateY(50px) rotateY(180deg);
     opacity: 0;
@@ -112,7 +112,7 @@
   }
 }
 
-@keyframes middle-slide-in {
+@keyframes middle-slide-in-rtl {
   0% {
     transform: translateY(50px) rotateY(180deg);
     opacity: 0;
@@ -129,7 +129,7 @@
   }
 }
 
-@keyframes bottom-slide-in {
+@keyframes bottom-slide-in-rtl {
   0% {
     transform: translateY(50px) rotateY(180deg);
     opacity: 0;

@@ -188,7 +188,6 @@ const reducer = function (state, action) {
         }
         // if we were already showing something, only fetch project if the
         // project id has changed
-        // NOTE: test this to see if it works when switching between project page and editor.
         if (state.projectState === ProjectState.SHOWING_WITH_ID && state.projectId !== action.id) {
             return Object.assign({}, state, {
                 projectId: action.id,

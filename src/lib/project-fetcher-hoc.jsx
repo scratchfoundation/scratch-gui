@@ -112,7 +112,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         setInitialProjectId: PropTypes.func
     };
     ProjectFetcherComponent.defaultProps = {
-        // NOTE: shouldn't these settings be moved into webpack, like API_HOST?
         assetHost: 'https://assets.scratch.mit.edu',
         projectHost: 'https://projects.scratch.mit.edu'
     };

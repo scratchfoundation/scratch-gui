@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
@@ -17,12 +16,6 @@ import {
  */
 const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
-        constructor (props) {
-            super(props);
-            bindAll(this, [
-                'storeProject' // NOTE: do i need to bind this?
-            ]);
-        }
         componentDidUpdate (prevProps) {
             if (this.props.isSavingWithId && !prevProps.isSavingWithId) {
                 this.storeProject({

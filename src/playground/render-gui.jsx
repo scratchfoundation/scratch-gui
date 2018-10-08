@@ -21,7 +21,7 @@ export default appTarget => {
     // ability to compose reducers.
     const WrappedGui = compose(
         AppStateHOC,
-        HashParserHOC, // NOTE: IMPORTANT: ok that i've reordered this?
+        HashParserHOC,
         TitledHOC,
         ProjectMetaDataHOC
     )(GUI);

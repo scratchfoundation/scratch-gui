@@ -5,6 +5,7 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
+import RubyGenerator from '../lib/ruby-generator';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -22,6 +23,7 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
+import {updateRubyCode} from '../reducers/ruby-code.js';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -36,6 +38,7 @@ class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
+        this.ScratchBlocks = RubyGenerator(this.ScratchBlocks);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -152,6 +155,10 @@ class Blocks extends React.Component {
         } else {
             this.workspace.setVisible(false);
         }
+
+        this.props.updateRubyCodeState(
+            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+        );
     }
     componentWillUnmount () {
         this.detachVM();
@@ -255,6 +262,9 @@ class Blocks extends React.Component {
                 this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
+        this.props.updateRubyCodeState(
+            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+        );
     }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;
@@ -409,6 +419,7 @@ class Blocks extends React.Component {
             isVisible,
             onActivateColorPicker,
             updateToolboxState,
+            updateRubyCodeState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
@@ -497,6 +508,7 @@ Blocks.propTypes = {
     }),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
+    updateRubyCodeState: PropTypes.func,
     updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
@@ -558,6 +570,9 @@ const mapDispatchToProps = dispatch => ({
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
+    },
+    updateRubyCodeState: code => {
+        dispatch(updateRubyCode(code));
     }
 });
 

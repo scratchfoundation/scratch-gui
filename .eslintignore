@@ -1,3 +1,6 @@
 node_modules/*
 build/*
 dist/*
+
+src/lib/ruby-generator/*
+src/lib/ruby-generator.js

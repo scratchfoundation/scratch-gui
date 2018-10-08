@@ -25,7 +25,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 'loadProject'
             ]);
             this.state = {
-                isStarted: false,
                 loadingError: false,
                 errorMessage: ''
             };
@@ -34,6 +33,8 @@ const vmManagerHOC = function (WrappedComponent) {
             if (this.props.vm.initialized) return;
             this.audioEngine = new AudioEngine();
             this.props.vm.attachAudioEngine(this.audioEngine);
+            this.props.vm.setCompatibilityMode(true);
+            this.props.vm.start();
             this.props.vm.initialized = true;
         }
         componentDidUpdate (prevProps) {
@@ -44,11 +45,6 @@ const vmManagerHOC = function (WrappedComponent) {
         loadProject (projectData, projectState) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
-                    if (!this.state.isStarted) {
-                        this.props.vm.setCompatibilityMode(true);
-                        this.props.vm.start();
-                        this.setState({isStarted: true});
-                    }
                     this.props.doneLoading(projectState);
                 })
                 .catch(e => {

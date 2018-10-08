@@ -166,10 +166,12 @@ const reducer = function (state, action) {
         // We purposely do not transition if we are currently in a fetching or loading state,
         // which may have changed the hash automatically, e.g. if we have moved from a hash url
         // to loading a project from local.
-        if (state.projectState in [
+        if ([
             ProjectState.NOT_LOADED,
-            ProjectState.SHOWING_WITH_ID
-        ]) {
+            ProjectState.SHOWING_WITH_ID,
+            ProjectState.SHOWING_FILE_UPLOAD,
+            ProjectState.SHOWING_NEW_DEFAULT
+        ].includes(state.projectState)) {
             return Object.assign({}, state, {
                 projectState: ProjectState.FETCHING_WITH_ID,
                 projectId: action.id
@@ -177,7 +179,6 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_INITIAL_PROJECT_ID:
-        // NOTE: test this to see if it works when switching between project page and editor.
         // if we havnen't loaded anything, fetch the project
         if (state.projectState === ProjectState.NOT_LOADED) {
             return Object.assign({}, state, {
@@ -187,6 +188,7 @@ const reducer = function (state, action) {
         }
         // if we were already showing something, only fetch project if the
         // project id has changed
+        // NOTE: test this to see if it works when switching between project page and editor.
         if (state.projectState === ProjectState.SHOWING_WITH_ID && state.projectId !== action.id) {
             return Object.assign({}, state, {
                 projectId: action.id,
@@ -196,11 +198,11 @@ const reducer = function (state, action) {
         // if neither of the cases above applies, don't change the state
         return state;
     case START_FETCHING_NEW_WITHOUT_SAVING:
-        if (state.projectState in [
+        if ([
             ProjectState.SHOWING_WITH_ID,
             ProjectState.SHOWING_FILE_UPLOAD,
             ProjectState.SHOWING_NEW_DEFAULT
-        ]) {
+        ].includes(state.projectState)) {
             return Object.assign({}, state, {
                 projectState: ProjectState.FETCHING_NEW_DEFAULT,
                 projectId: defaultProjectId
@@ -208,12 +210,12 @@ const reducer = function (state, action) {
         }
         return state;
     case START_LOADING_VM_FILE_UPLOAD:
-        if (state.projectState in [
+        if ([
             ProjectState.NOT_LOADED,
             ProjectState.SHOWING_WITH_ID,
             ProjectState.SHOWING_FILE_UPLOAD,
             ProjectState.SHOWING_NEW_DEFAULT
-        ]) {
+        ].includes(state.projectState)) {
             return Object.assign({}, state, {
                 projectState: ProjectState.LOADING_VM_FILE_UPLOAD,
                 projectId: null // clear any current projectId
@@ -236,12 +238,12 @@ const reducer = function (state, action) {
         return state;
     case GO_TO_ERROR_STATE:
     // NOTE: we should introduce handling in components for showing ERROR state
-        if (state.projectState in [
+        if ([
             ProjectState.NOT_LOADED,
             ProjectState.FETCHING_WITH_ID,
             ProjectState.FETCHING_NEW_DEFAULT,
             ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
-        ]) {
+        ].includes(state.projectState)) {
             return Object.assign({}, state, {
                 projectState: ProjectState.ERROR,
                 errStr: action.errStr

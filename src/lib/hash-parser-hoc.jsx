@@ -20,6 +20,9 @@ const HashParserHOC = function (WrappedComponent) {
             bindAll(this, [
                 'handleHashChange'
             ]);
+            this.state = {
+                hideIntro: false
+            };
         }
         componentDidMount () {
             window.addEventListener('hashchange', this.handleHashChange);
@@ -42,6 +45,9 @@ const HashParserHOC = function (WrappedComponent) {
             if (hashProjectId !== this.props.reduxProjectId) {
                 this.props.setHashProjectId(hashProjectId);
             }
+            if (hashProjectId !== defaultProjectId) {
+                this.setState({hideIntro: true});
+            }
         }
         render () {
             const {
@@ -54,7 +60,7 @@ const HashParserHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    hideIntro={this.state.projectId && this.state.projectId !== 0}
+                    hideIntro={this.state.hideIntro}
                     {...componentProps}
                 />
             );

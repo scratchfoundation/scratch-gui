@@ -21,9 +21,9 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
             ]);
             this.updateProjectMetaData(props.projectId);
         }
-        componentWillReceiveProps (nextProps) {
-            if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
-                this.updateProjectMetaData(nextProps.projectId);
+        componentDidUpdate (prevProps) {
+            if (this.props.isFetchingProjectWithId && !prevProps.isFetchingProjectWithId) {
+                this.updateProjectMetaData(this.props.projectId);
             }
         }
         updateProjectMetaData (projectId) {
@@ -80,7 +80,6 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
         return {
             isFetchingProjectWithId: isFetchingProjectWithId(projectState),
             projectId: state.scratchGui.projectId.projectId
-            // token: state.session.session && state.session.session.user && state.session.session.user.token
         };
     };
 

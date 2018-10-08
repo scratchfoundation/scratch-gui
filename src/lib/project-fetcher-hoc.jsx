@@ -43,16 +43,15 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 this.props.setInitialProjectId(props.projectId);
             }
         }
-        // NOTE: should this be componentWillUpdate or componentWillReceiveProps?
-        componentWillUpdate (nextProps) {
-            if (this.props.projectHost !== nextProps.projectHost) {
-                storage.setProjectHost(nextProps.projectHost);
+        componentDidUpdate (prevProps) {
+            if (prevProps.projectHost !== this.props.projectHost) {
+                storage.setProjectHost(this.props.projectHost);
             }
-            if (this.props.assetHost !== nextProps.assetHost) {
-                storage.setAssetHost(nextProps.assetHost);
+            if (prevProps.assetHost !== this.props.assetHost) {
+                storage.setAssetHost(this.props.assetHost);
             }
-            if (nextProps.isFetchingProjectWithId && !this.props.isFetchingProjectWithId) {
-                this.fetchProject(nextProps.reduxProjectId, nextProps.projectState);
+            if (this.props.isFetchingProjectWithId && !prevProps.isFetchingProjectWithId) {
+                this.fetchProject(this.props.reduxProjectId, this.props.projectState);
             }
         }
         fetchProject (projectId, projectState) {

@@ -15,30 +15,30 @@ import {
 } from '../reducers/modals';
 
 /**
- * Project loader component passes a file input, load handler and props to its child.
+ * SB3LoaderFromLocal component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
- *     function (renderFileInput, loadProject, props) {}
+ *     function (renderFileInput, loadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <ProjectLoaderFromPC>{(renderFileInput, loadProject) => (
+ * <SB3LoaderFromLocal>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
- * )}</ProjectLoaderFromPC>
+ * )}</SB3LoaderFromLocal>
  */
 
 const messages = defineMessages({
     loadError: {
-        id: 'gui.ProjectLoaderFromPC.loadError',
+        id: 'gui.SB3LoaderFromLocal.loadError',
         defaultMessage: 'The project file that was selected failed to load.',
         description: 'An error that displays when a local project file fails to load.'
     }
 });
 
-class ProjectLoaderFromPC extends React.Component {
+class SB3LoaderFromLocal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -61,9 +61,7 @@ class ProjectLoaderFromPC extends React.Component {
                     nonInteraction: true
                 });
                 this.props.closeLoadingState();
-                if (this.props.onLoadFinished) {
-                    this.props.onLoadFinished();
-                }
+                this.props.onLoadFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -72,9 +70,7 @@ class ProjectLoaderFromPC extends React.Component {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
                 this.props.closeLoadingState();
-                if (this.props.onLoadFinished) {
-                    this.props.onLoadFinished();
-                }
+                this.props.onLoadFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -117,7 +113,7 @@ class ProjectLoaderFromPC extends React.Component {
     }
 }
 
-ProjectLoaderFromPC.propTypes = {
+SB3LoaderFromLocal.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
@@ -129,7 +125,9 @@ ProjectLoaderFromPC.propTypes = {
         loadProject: PropTypes.func
     })
 };
-
+SB3LoaderFromLocal.defaultProps = {
+    onLoadFinished: () => {}
+};
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm
 });
@@ -149,4 +147,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(ProjectLoaderFromPC));
+)(injectIntl(SB3LoaderFromLocal));

@@ -10,13 +10,13 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import ProjectLoaderFromPC from '../../containers/project-loader-from-pc.jsx';
+import SB3LoaderFromLocal from '../../containers/sb3-loader-from-local.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
-import ProjectSaverToPC from '../../containers/project-saver-to-pc.jsx';
+import SB3SaverToLocal from '../../containers/sb3-saver-to-local.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
@@ -327,7 +327,7 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <ProjectLoaderFromPC
+                                    <SB3LoaderFromLocal
                                         onLoadFinished={this.handleProjectLoadFinished}
                                         onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                     >
@@ -337,15 +337,16 @@ class MenuBar extends React.Component {
                                             >
                                                 <FormattedMessage
                                                     defaultMessage="Load from your computer"
-                                                    description={'Menu bar item for uploading a ' +
-                                                        'project from your computer'}
+                                                    description={
+                                                        'Menu bar item for uploading a project from your computer'
+                                                    }
                                                     id="gui.menuBar.uploadFromComputer"
                                                 />
                                                 {renderFileInput()}
                                             </MenuItem>
                                         )}
-                                    </ProjectLoaderFromPC>
-                                    <ProjectSaverToPC>{downloadProject => (
+                                    </SB3LoaderFromLocal>
+                                    <SB3SaverToLocal>{downloadProject => (
                                         <MenuItem
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
@@ -355,7 +356,7 @@ class MenuBar extends React.Component {
                                                 id="gui.menuBar.downloadToComputer"
                                             />
                                         </MenuItem>
-                                    )}</ProjectSaverToPC>
+                                    )}</SB3SaverToLocal>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

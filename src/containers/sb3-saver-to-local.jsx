@@ -11,14 +11,14 @@ import {projectTitleInitialState} from '../reducers/project-title';
  * The component can then be used to attach project saving functionality
  * to any other component:
  *
- * <ProjectSaverToPC>{(downloadProject, props) => (
+ * <SB3SaverToLocal>{(downloadProject, props) => (
  *     <MyCoolComponent
  *         onClick={downloadProject}
  *         {...props}
  *     />
- * )}</ProjectSaverToPC>
+ * )}</SB3SaverToLocal>
  */
-class ProjectSaverToPC extends React.Component {
+class SB3SaverToLocal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -65,7 +65,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
     return `${filenameTitle.substring(0, 100)}.sb3`;
 };
 
-ProjectSaverToPC.propTypes = {
+SB3SaverToLocal.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
@@ -80,4 +80,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(ProjectSaverToPC);
+)(SB3SaverToLocal);

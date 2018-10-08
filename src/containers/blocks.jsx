@@ -156,7 +156,9 @@ class Blocks extends React.Component {
             this.workspace.setVisible(false);
         }
 
-        this.props.updateRubyCodeState(this.ScratchBlocks.Ruby.workspaceToCode(this.workspace));
+        this.props.updateRubyCodeState(
+            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+        );
     }
     componentWillUnmount () {
         this.detachVM();
@@ -260,7 +262,9 @@ class Blocks extends React.Component {
                 this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
-        this.props.updateRubyCodeState(this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget));
+        this.props.updateRubyCodeState(
+            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+        );
     }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;

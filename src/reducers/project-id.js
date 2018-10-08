@@ -4,7 +4,6 @@ const DONE_CREATING_NEW = 'scratch-gui/project-id/DONE_CREATING_NEW';
 const DONE_FETCHING_DEFAULT_PROJECT_DATA = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA';
 const DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE';
 const DONE_FETCHING_PROJECT_DATA_WITH_ID = 'scratch-gui/project-id/DONE_FETCHING_PROJECT_DATA_WITH_ID';
-const DONE_LOADING_FILE_UPLOAD = 'scratch-gui/project-id/DONE_LOADING_FILE_UPLOAD';
 const DONE_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/DONE_LOADING_VM_FILE_UPLOAD';
 const DONE_LOADING_VM_NEW_DEFAULT = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT';
 const DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE';
@@ -15,7 +14,7 @@ const GO_TO_ERROR_STATE = 'scratch-gui/project-id/GO_TO_ERROR_STATE';
 const SET_HASH_PROJECT_ID = 'scratch-gui/project-id/SET_HASH_PROJECT_ID';
 const SET_INITIAL_PROJECT_ID = 'scratch-gui/project-id/SET_INITIAL_PROJECT_ID';
 const START_FETCHING_NEW_WITHOUT_SAVING = 'scratch-gui/project-id/START_FETCHING_NEW_WITHOUT_SAVING';
-const START_LOADING_FILE_UPLOAD = 'scratch-gui/project-id/START_LOADING_FILE_UPLOAD';
+const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/START_LOADING_FILE_UPLOAD';
 const START_SAVING = 'scratch-gui/project-id/START_SAVING';
 const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-id/START_SAVING_BEFORE_CREATING_NEW';
 
@@ -26,7 +25,6 @@ const ProjectState = keyMirror({
     ERROR: null,
     FETCHING_WITH_ID: null,
     FETCH_WITH_ID_IF_DIFFERENT: null,
-    LOADING_FILE_UPLOAD: null,
     FETCHING_NEW_DEFAULT: null,
     FETCHING_NEW_DEFAULT_TO_SAVE: null,
     LOADING_VM_WITH_ID: null,
@@ -43,7 +41,7 @@ const ProjectState = keyMirror({
 
 const isFetchingProjectWithNoURLId = projectState => (
     // LOADING_FILE_UPLOAD is an honorary fetch, since there is no fetching step for file uploads
-    projectState === ProjectState.LOADING_FILE_UPLOAD ||
+    projectState === ProjectState.LOADING_VM_FILE_UPLOAD ||
         projectState === ProjectState.FETCHING_NEW_DEFAULT ||
         projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE
 );
@@ -116,7 +114,9 @@ const reducer = function (state, action) {
             });
         }
         return state;
-    case DONE_LOADING_FILE_UPLOAD:
+    case DONE_LOADING_VM_FILE_UPLOAD:
+        // note that we don't need to explicitly set projectData, because it is loaded
+        // into the vm directly in sb3-loader-from-local
         if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_FILE_UPLOAD
@@ -127,13 +127,6 @@ const reducer = function (state, action) {
         if (state.projectState === ProjectState.LOADING_VM_WITH_ID) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_WITH_ID
-            });
-        }
-        return state;
-    case DONE_LOADING_VM_FILE_UPLOAD:
-        if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
-            return Object.assign({}, state, {
-                projectState: ProjectState.SHOWING_FILE_UPLOAD
             });
         }
         return state;
@@ -214,7 +207,7 @@ const reducer = function (state, action) {
             });
         }
         return state;
-    case START_LOADING_FILE_UPLOAD:
+    case START_LOADING_VM_FILE_UPLOAD:
         if (state.projectState in [
             ProjectState.NOT_LOADED,
             ProjectState.SHOWING_WITH_ID,
@@ -222,7 +215,7 @@ const reducer = function (state, action) {
             ProjectState.SHOWING_NEW_DEFAULT
         ]) {
             return Object.assign({}, state, {
-                projectState: ProjectState.LOADING_FILE_UPLOAD,
+                projectState: ProjectState.LOADING_VM_FILE_UPLOAD,
                 projectId: null // clear any current projectId
             });
         }
@@ -288,7 +281,7 @@ const doneFetchingProjectData = (projectData, projectState) => {
 };
 
 const doneLoadingFileUpload = () => ({
-    type: DONE_LOADING_FILE_UPLOAD
+    type: DONE_LOADING_VM_FILE_UPLOAD
 });
 
 const doneLoading = projectState => {
@@ -353,7 +346,7 @@ const stepTowardsNewProjectWithoutSaving = () => ({
 });
 
 const startLoadingFileUpload = () => ({
-    type: START_LOADING_FILE_UPLOAD
+    type: START_LOADING_VM_FILE_UPLOAD
 });
 
 const startSaving = () => ({

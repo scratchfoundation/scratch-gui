@@ -48,6 +48,7 @@ class SB3LoaderFromLocal extends React.Component {
             'handleClick'
         ]);
     }
+    // called when user has finished selecting a file to upload
     handleChange (e) {
         // Remove the hash if any (without triggering a hash change event or a reload)
         history.replaceState({}, document.title, '.');
@@ -61,7 +62,6 @@ class SB3LoaderFromLocal extends React.Component {
                     nonInteraction: true
                 });
                 this.props.closeLoadingState();
-                this.props.onLoadFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -70,7 +70,6 @@ class SB3LoaderFromLocal extends React.Component {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
                 this.props.closeLoadingState();
-                this.props.onLoadFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -92,6 +91,7 @@ class SB3LoaderFromLocal extends React.Component {
         }
     }
     handleClick () {
+        // open filesystem browsing window
         this.fileInput.click();
     }
     setFileInput (input) {
@@ -117,16 +117,12 @@ SB3LoaderFromLocal.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
-    onLoadFinished: PropTypes.func,
     onSetReduxProjectTitle: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
-};
-SB3LoaderFromLocal.defaultProps = {
-    onLoadFinished: () => {}
 };
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm

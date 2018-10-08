@@ -23,6 +23,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
+    doneLoadingFileUpload,
     isSavingWithId,
     isShowingProject,
     startSaving,
@@ -141,7 +142,7 @@ class MenuBar extends React.Component {
     }
     componentWillReceiveProps (newProps) {
         // if we're no longer showing the project (loading, or whatever), close menus
-        if (!newProps.isShowingProject && this.props.isShowingProject) {
+        if (newProps.isShowingProject && !this.props.isShowingProject) {
             this.props.onRequestCloseFile();
             this.props.onRequestCloseEdit();
         }
@@ -328,7 +329,6 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                                 <MenuSection>
                                     <SB3LoaderFromLocal
-                                        onLoadFinished={this.handleProjectLoadFinished}
                                         onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                     >
                                         {(renderFileInput, loadProject) => (
@@ -618,6 +618,7 @@ class MenuBar extends React.Component {
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
     className: PropTypes.string,
+    doneLoadingFileUpload: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
@@ -671,6 +672,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    doneLoadingFileUpload: () => dispatch(doneLoadingFileUpload()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

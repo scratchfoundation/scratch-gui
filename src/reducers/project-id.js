@@ -91,7 +91,7 @@ const reducer = function (state, action) {
                 id: action.id
             });
         }
-        break;
+        return state;
     case DONE_FETCHING_PROJECT_DATA_WITH_ID:
         if (state.projectState === ProjectState.FETCHING_WITH_ID) {
             return Object.assign({}, state, {
@@ -99,7 +99,7 @@ const reducer = function (state, action) {
                 projectData: action.projectData
             });
         }
-        break;
+        return state;
     case DONE_FETCHING_DEFAULT_PROJECT_DATA:
         if (state.projectState === ProjectState.FETCHING_NEW_DEFAULT) {
             return Object.assign({}, state, {
@@ -107,7 +107,7 @@ const reducer = function (state, action) {
                 projectData: action.projectData
             });
         }
-        break;
+        return state;
     case DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE:
         if (state.projectState === ProjectState.FETCHING_NEW_DEFAULT_TO_SAVE) {
             return Object.assign({}, state, {
@@ -115,35 +115,35 @@ const reducer = function (state, action) {
                 projectData: action.projectData
             });
         }
-        break;
+        return state;
     case DONE_LOADING_FILE_UPLOAD:
         if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_FILE_UPLOAD
             });
         }
-        break;
+        return state;
     case DONE_LOADING_VM_WITH_ID:
         if (state.projectState === ProjectState.LOADING_VM_WITH_ID) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_WITH_ID
             });
         }
-        break;
+        return state;
     case DONE_LOADING_VM_FILE_UPLOAD:
         if (state.projectState === ProjectState.LOADING_VM_FILE_UPLOAD) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_FILE_UPLOAD
             });
         }
-        break;
+        return state;
     case DONE_LOADING_VM_NEW_DEFAULT:
         if (state.projectState === ProjectState.LOADING_VM_NEW_DEFAULT) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_NEW_DEFAULT
             });
         }
-        break;
+        return state;
     case DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE:
         if (state.projectState === ProjectState.LOADING_VM_NEW_DEFAULT_TO_SAVE) {
             return Object.assign({}, state, {
@@ -153,14 +153,14 @@ const reducer = function (state, action) {
                 projectState: ProjectState.SHOWING_WITH_ID
             });
         }
-        break;
+        return state;
     case DONE_SAVING_WITH_ID:
         if (state.projectState === ProjectState.SAVING_WITH_ID) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SHOWING_WITH_ID
             });
         }
-        break;
+        return state;
     case DONE_SAVING_WITH_ID_BEFORE_NEW:
         if (state.projectState === ProjectState.SAVING_WITH_ID_BEFORE_NEW) {
             return Object.assign({}, state, {
@@ -168,7 +168,7 @@ const reducer = function (state, action) {
                 projectId: defaultProjectId
             });
         }
-        break;
+        return state;
     case SET_HASH_PROJECT_ID:
         // We purposely do not transition if we are currently in a fetching or loading state,
         // which may have changed the hash automatically, e.g. if we have moved from a hash url
@@ -182,23 +182,26 @@ const reducer = function (state, action) {
                 projectId: action.id
             });
         }
-        break;
+        return state;
     case SET_INITIAL_PROJECT_ID:
         // NOTE: test this to see if it works when switching between project page and editor.
+        // if we havnen't loaded anything, fetch the project
         if (state.projectState === ProjectState.NOT_LOADED) {
-            // don't re-fetch and reload same projectData
-            if (state.projectId === action.id) {
-                return Object.assign({}, state, {
-                    projectState: ProjectState.SHOWING_WITH_ID
-                });
-            }
-            // else, it's a new project id, so DO fetch it
             return Object.assign({}, state, {
                 projectId: action.id,
                 projectState: ProjectState.FETCHING_WITH_ID
             });
         }
-        break;
+        // if we were already showing something, only fetch project if the
+        // project id has changed
+        if (state.projectState === ProjectState.SHOWING_WITH_ID && state.projectId !== action.id) {
+            return Object.assign({}, state, {
+                projectId: action.id,
+                projectState: ProjectState.FETCHING_WITH_ID
+            });
+        }
+        // if neither of the cases above applies, don't change the state
+        return state;
     case START_FETCHING_NEW_WITHOUT_SAVING:
         if (state.projectState in [
             ProjectState.SHOWING_WITH_ID,
@@ -210,7 +213,7 @@ const reducer = function (state, action) {
                 projectId: defaultProjectId
             });
         }
-        break;
+        return state;
     case START_LOADING_FILE_UPLOAD:
         if (state.projectState in [
             ProjectState.NOT_LOADED,
@@ -223,21 +226,21 @@ const reducer = function (state, action) {
                 projectId: null // clear any current projectId
             });
         }
-        break;
+        return state;
     case START_SAVING:
         if (state.projectState === ProjectState.SHOWING_WITH_ID) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SAVING_WITH_ID
             });
         }
-        break;
+        return state;
     case START_SAVING_BEFORE_CREATING_NEW:
         if (state.projectState === ProjectState.SHOWING_WITH_ID) {
             return Object.assign({}, state, {
                 projectState: ProjectState.SAVING_WITH_ID_BEFORE_NEW
             });
         }
-        break;
+        return state;
     case GO_TO_ERROR_STATE:
     // NOTE: we should introduce handling in components for showing ERROR state
         if (state.projectState in [
@@ -251,7 +254,7 @@ const reducer = function (state, action) {
                 errStr: action.errStr
             });
         }
-        break;
+        return state;
     default:
         return state;
     }

@@ -138,21 +138,12 @@ class MenuBar extends React.Component {
             'handleRestoreOption',
             'restoreOptionMessage'
         ]);
-        this.state = {projectSaveInProgress: false};
     }
-    componentWillReceiveProps (newProps) {
+    componentDidUpdate (prevProps) {
         // if we're no longer showing the project (loading, or whatever), close menus
-        if (newProps.isShowingProject && !this.props.isShowingProject) {
+        if (this.props.isShowingProject && !prevProps.isShowingProject) {
             this.props.onRequestCloseFile();
             this.props.onRequestCloseEdit();
-        }
-        // if we're now saving, show save in progress
-        if (newProps.isSavingWithId && !this.props.isSavingWithId) {
-            this.setState({projectSaveInProgress: true});
-        }
-        // if we're no longer saving, don't show save in progress
-        if (!newProps.isSavingWithId && this.props.isSavingWithId) {
-            this.setState({projectSaveInProgress: false});
         }
     }
     handleClickNew () {
@@ -240,7 +231,7 @@ class MenuBar extends React.Component {
                 className={classNames(
                     this.props.className,
                     styles.menuBar,
-                    {[styles.saveInProgress]: this.state.projectSaveInProgress}
+                    {[styles.saveInProgress]: this.props.isSavingWithId}
                 )}
             >
                 <div className={styles.mainMenu}>

@@ -28,9 +28,9 @@ const HashParserHOC = function (WrappedComponent) {
             window.addEventListener('hashchange', this.handleHashChange);
             this.handleHashChange();
         }
-        componentWillReceiveProps (nextProps) {
+        componentDidUpdate (prevProps) {
             // if we are newly fetching a non-hash project...
-            if (nextProps.isFetchingProjectWithNoURLId && !this.props.isFetchingProjectWithNoURLId) {
+            if (this.props.isFetchingProjectWithNoURLId && !prevProps.isFetchingProjectWithNoURLId) {
                 // ...clear the hash from the url
                 history.pushState('new-project', 'new-project',
                     window.location.pathname + window.location.search);

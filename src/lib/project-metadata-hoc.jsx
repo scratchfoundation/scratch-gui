@@ -40,9 +40,9 @@ const ProjectMetaDataHOC = function (WrappedComponent) {
                 null,
                 // this.props.token,
                 response => {
-                    if (response.isError) {
+                    if (typeof response === 'undefined' || response.isError) {
                         this.props.goToErrorState(`Error fetching project metadata: ${response.error}`);
-                    } else { // success
+                    } else if (response.title) { // success
                         this.props.onUpdateProjectTitle(response.title);
                     }
                 });

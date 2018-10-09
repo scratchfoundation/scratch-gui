@@ -54,7 +54,7 @@ export default function (vm) {
         }
         menu.push([
             ScratchBlocks.ScratchMsgs.translate('SOUND_RECORD', 'record...'),
-            ScratchBlocks.SOUND_RECORD_ID
+            ScratchBlocks.recordSoundCallback
         ]);
         return menu;
     };

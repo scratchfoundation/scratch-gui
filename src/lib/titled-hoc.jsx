@@ -4,9 +4,9 @@ import {defineMessages, intlShape, injectIntl} from 'react-intl';
 
 const messages = defineMessages({
     defaultProjectTitle: {
-        id: 'gui.gui.defaultProjectTitle',
+        id: 'gui.smalruby3.gui.defaultProjectTitle',
         description: 'Default title for project',
-        defaultMessage: 'Scratch Project'
+        defaultMessage: 'Smalruby Project'
     }
 });
 

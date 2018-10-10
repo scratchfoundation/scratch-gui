@@ -7,7 +7,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import analytics from '../lib/analytics';
 import log from '../lib/log';
 import {setProjectTitle} from '../reducers/project-title';
-import {startLoadingFileUpload, doneLoadingFileUpload} from '../reducers/project-state';
+import {onLoadedProject, onProjectUploadStarted} from '../reducers/project-state';
 
 import {
     openLoadingProject,
@@ -15,19 +15,19 @@ import {
 } from '../reducers/modals';
 
 /**
- * FileLoaderFromLocal component passes a file input, load handler and props to its child.
+ * SBFileUploader component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
  *     function (renderFileInput, loadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <FileLoaderFromLocal>{(renderFileInput, loadProject) => (
+ * <SBFileUploader>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
- * )}</FileLoaderFromLocal>
+ * )}</SBFileUploader>
  */
 
 const messages = defineMessages({
@@ -38,7 +38,7 @@ const messages = defineMessages({
     }
 });
 
-class FileLoaderFromLocal extends React.Component {
+class SBFileUploader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -61,7 +61,7 @@ class FileLoaderFromLocal extends React.Component {
                     action: 'Import Project File',
                     nonInteraction: true
                 });
-                this.props.closeLoadingState();
+                this.props.onLoadingFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -69,13 +69,13 @@ class FileLoaderFromLocal extends React.Component {
             .catch(error => {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
-                this.props.closeLoadingState();
+                this.props.onLoadingFinished();
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
             });
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
-            this.props.openLoadingState();
+            this.props.onLoadingStarted();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
             // extract the title from the file and set it as current project title
             if (thisFileInput.files[0].name) {
@@ -113,13 +113,13 @@ class FileLoaderFromLocal extends React.Component {
     }
 }
 
-FileLoaderFromLocal.propTypes = {
+SBFileUploader.propTypes = {
     children: PropTypes.func,
-    closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
+    onLoadingFinished: PropTypes.func,
+    onLoadingStarted: PropTypes.func,
     onSetReduxProjectTitle: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
@@ -129,18 +129,18 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeLoadingState: () => {
-        dispatch(doneLoadingFileUpload());
+    onLoadingFinished: () => {
+        dispatch(onLoadedProject());
         dispatch(closeLoadingProject());
     },
     onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
-    openLoadingState: () => {
+    onLoadingStarted: () => {
         dispatch(openLoadingProject());
-        dispatch(startLoadingFileUpload());
+        dispatch(onProjectUploadStarted());
     }
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(FileLoaderFromLocal));
+)(injectIntl(SBFileUploader));

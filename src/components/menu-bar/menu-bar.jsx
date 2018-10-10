@@ -10,7 +10,7 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import FileLoaderFromLocal from '../../containers/file-loader-from-local.jsx';
+import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
@@ -23,9 +23,8 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
-    doneLoadingFileUpload,
-    isUpdating,
-    isShowingProject,
+    getIsUpdating,
+    getIsShowingProject,
     newProjectRequested,
     saveRequested
 } from '../../reducers/project-state';
@@ -329,7 +328,7 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <FileLoaderFromLocal
+                                    <SBFileUploader
                                         onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                     >
                                         {(renderFileInput, loadProject) => (
@@ -346,7 +345,7 @@ class MenuBar extends React.Component {
                                                 {renderFileInput()}
                                             </MenuItem>
                                         )}
-                                    </FileLoaderFromLocal>
+                                    </SBFileUploader>
                                     <SB3Downloader>{downloadProject => (
                                         <MenuItem
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
@@ -620,14 +619,13 @@ MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
     canUpdateProject: PropTypes.bool,
     className: PropTypes.string,
-    doneLoadingFileUpload: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
     isRtl: PropTypes.bool,
-    isUpdating: PropTypes.bool,
     isShowingProject: PropTypes.bool,
+    isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
     onClickAccount: PropTypes.func,
@@ -636,6 +634,7 @@ MenuBar.propTypes = {
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickNew: PropTypes.func,
+    onClickSave: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -655,7 +654,7 @@ MenuBar.propTypes = {
 };
 
 const mapStateToProps = state => {
-    const projectState = state.scratchGui.projectId.projectState;
+    const loadingState = state.scratchGui.projectId.loadingState;
     const user = state.session && state.session.session && state.session.session.user;
     return {
         accountMenuOpen: accountMenuOpen(state),
@@ -663,8 +662,8 @@ const mapStateToProps = state => {
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,
-        isUpdating: isUpdating(projectState),
-        isShowingProject: isShowingProject(projectState),
+        isUpdating: getIsUpdating(loadingState),
+        isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
         sessionExists: state.session && typeof state.session.session !== 'undefined',
@@ -673,7 +672,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    doneLoadingFileUpload: () => dispatch(doneLoadingFileUpload()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

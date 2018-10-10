@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {
     defaultProjectId,
-    isFetchingProjectWithNoURLId,
+    getIsFetchingWithoutId,
     setProjectId
 } from '../reducers/project-state';
 
@@ -31,7 +31,7 @@ const HashParserHOC = function (WrappedComponent) {
         }
         componentDidUpdate (prevProps) {
             // if we are newly fetching a non-hash project...
-            if (this.props.isFetchingProjectWithNoURLId && !prevProps.isFetchingProjectWithNoURLId) {
+            if (this.props.isFetchingWithoutId && !prevProps.isFetchingWithoutId) {
                 // ...clear the hash from the url
                 history.pushState('new-project', 'new-project',
                     window.location.pathname + window.location.search);
@@ -44,7 +44,7 @@ const HashParserHOC = function (WrappedComponent) {
             const hashMatch = window.location.hash.match(/#(\d+)/);
             const hashProjectId = hashMatch === null ? defaultProjectId : hashMatch[1];
             if (hashProjectId !== this.props.reduxProjectId) {
-                this.props.setHashProjectId(hashProjectId);
+                this.props.setProjectId(hashProjectId);
             }
             if (hashProjectId !== defaultProjectId) {
                 this.setState({hideIntro: true});
@@ -53,9 +53,9 @@ const HashParserHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                isFetchingProjectWithNoURLId: isFetchingProjectWithNoURLIdProp,
+                isFetchingWithoutId: isFetchingWithoutIdProp,
                 reduxProjectId,
-                setHashProjectId: setHashProjectIdProp,
+                setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -68,19 +68,19 @@ const HashParserHOC = function (WrappedComponent) {
         }
     }
     HashParserComponent.propTypes = {
-        isFetchingProjectWithNoURLId: PropTypes.bool,
+        isFetchingWithoutId: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        setHashProjectId: PropTypes.func
+        setProjectId: PropTypes.func
     };
     const mapStateToProps = state => {
-        const projectState = state.scratchGui.projectId.projectState;
+        const loadingState = state.scratchGui.projectId.loadingState;
         return {
-            isFetchingProjectWithNoURLId: isFetchingProjectWithNoURLId(projectState),
+            isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
             reduxProjectId: state.scratchGui.projectId.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
-        setHashProjectId: projectId => dispatch(setProjectId(projectId))
+        setProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return connect(
         mapStateToProps,

@@ -3,6 +3,7 @@ import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
+import VM from 'scratch-vm';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
@@ -85,7 +86,8 @@ GUI.propTypes = {
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectHost: PropTypes.string,
-    projectTitle: PropTypes.string
+    projectTitle: PropTypes.string,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -106,7 +108,8 @@ const mapStateToProps = (state, ownProps) => ({
         state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
     ),
     soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
-    tipsLibraryVisible: state.scratchGui.modals.tipsLibrary
+    tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
+    vm: state.scratchGui.vm
 });
 
 const mapDispatchToProps = dispatch => ({

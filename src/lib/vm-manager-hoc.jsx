@@ -7,10 +7,9 @@ import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
 import {
-    ProjectStates,
-    doneLoading,
-    isLoadingProjectWithId,
-    isShowingProjectWithId
+    LoadingStates,
+    onLoadedProject,
+    getIsLoadingWithId
 } from '../reducers/project-state';
 
 /*
@@ -39,14 +38,14 @@ const vmManagerHOC = function (WrappedComponent) {
             this.props.vm.initialized = true;
         }
         componentDidUpdate (prevProps) {
-            if (this.props.isLoadingProjectWithId && !prevProps.isLoadingProjectWithId) {
-                this.loadProject(this.props.projectData, this.props.projectState);
+            if (this.props.isLoadingWithId && !prevProps.isLoadingWithId) {
+                this.loadProject(this.props.projectData, this.props.loadingState);
             }
         }
-        loadProject (projectData, projectState) {
+        loadProject (projectData, loadingState) {
             return this.props.vm.loadProject(projectData)
                 .then(() => {
-                    this.props.doneLoading(projectState);
+                    this.props.onLoadedProject(loadingState);
                 })
                 .catch(e => {
                     // Need to catch this error and update component state so that
@@ -57,13 +56,12 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                doneLoading: doneLoadingProp,
-                isShowingProjectWithId: isShowingProjectWithIdProp,
+                onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
-                projectState,
+                loadingState,
                 /* eslint-enable no-unused-vars */
-                isLoadingProjectWithId: isLoadingProjectWithIdProp,
+                isLoadingWithId: isLoadingWithIdProp,
                 vm,
                 ...componentProps
             } = this.props;
@@ -74,7 +72,7 @@ const vmManagerHOC = function (WrappedComponent) {
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
-                    isLoading={isLoadingProjectWithIdProp}
+                    isLoading={isLoadingWithIdProp}
                     loadingError={this.state.loadingError}
                     vm={vm}
                     {...componentProps}
@@ -84,28 +82,26 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
-        doneLoading: PropTypes.func,
-        isLoadingProjectWithId: PropTypes.bool,
-        isShowingProjectWithId: PropTypes.bool,
+        isLoadingWithId: PropTypes.bool,
+        onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        projectState: PropTypes.oneOf(ProjectStates),
+        loadingState: PropTypes.oneOf(LoadingStates),
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
     const mapStateToProps = state => {
-        const projectState = state.scratchGui.projectId.projectState;
+        const loadingState = state.scratchGui.projectId.loadingState;
         return {
-            isLoadingProjectWithId: isLoadingProjectWithId(projectState),
-            isShowingProjectWithId: isShowingProjectWithId(projectState),
+            isLoadingWithId: getIsLoadingWithId(loadingState),
             projectData: state.scratchGui.projectId.projectData,
             projectId: state.scratchGui.projectId.projectId,
-            projectState: projectState
+            loadingState: loadingState
         };
     };
 
     const mapDispatchToProps = dispatch => ({
-        doneLoading: projectState => dispatch(doneLoading(projectState))
+        onLoadedProject: loadingState => dispatch(onLoadedProject(loadingState))
     });
 
     return connect(

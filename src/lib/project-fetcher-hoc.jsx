@@ -5,10 +5,10 @@ import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 
 import {
-    ProjectStates,
+    LoadingStates,
     defaultProjectId,
     onFetchedProjectData,
-    isFetchingProjectWithId,
+    getIsFetchingWithId,
     setProjectId
 } from '../reducers/project-state';
 
@@ -50,16 +50,16 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             if (prevProps.assetHost !== this.props.assetHost) {
                 storage.setAssetHost(this.props.assetHost);
             }
-            if (this.props.isFetchingProjectWithId && !prevProps.isFetchingProjectWithId) {
-                this.fetchProject(this.props.reduxProjectId, this.props.projectState);
+            if (this.props.isFetchingWithId && !prevProps.isFetchingWithId) {
+                this.fetchProject(this.props.reduxProjectId, this.props.loadingState);
             }
         }
-        fetchProject (projectId, projectState) {
+        fetchProject (projectId, loadingState) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {
-                        this.props.onFetchedProjectData(projectAsset.data, projectState);
+                        this.props.onFetchedProjectData(projectAsset.data, loadingState);
                     }
                 })
                 .then(() => {
@@ -85,16 +85,16 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 intl,
                 projectHost,
                 projectId,
-                projectState,
+                loadingState,
                 reduxProjectId,
                 setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
-                isFetchingProjectWithId: isFetchingProjectWithIdProp,
+                isFetchingWithId: isFetchingWithIdProp,
                 ...componentProps
             } = this.props;
             return (
                 <WrappedComponent
-                    fetchingProject={isFetchingProjectWithIdProp}
+                    fetchingProject={isFetchingWithIdProp}
                     {...componentProps}
                 />
             );
@@ -103,11 +103,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
         intl: intlShape.isRequired,
-        isFetchingProjectWithId: PropTypes.bool,
+        isFetchingWithId: PropTypes.bool,
+        loadingState: PropTypes.oneOf(LoadingStates),
         onFetchedProjectData: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        projectState: PropTypes.oneOf(ProjectStates),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
     };
@@ -117,13 +117,13 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     };
 
     const mapStateToProps = state => ({
-        isFetchingProjectWithId: isFetchingProjectWithId(state.scratchGui.projectId.projectState),
-        projectState: state.scratchGui.projectId.projectState,
+        isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectId.loadingState),
+        loadingState: state.scratchGui.projectId.loadingState,
         reduxProjectId: state.scratchGui.projectId.projectId
     });
     const mapDispatchToProps = dispatch => ({
-        onFetchedProjectData: (projectData, projectState) =>
-            dispatch(onFetchedProjectData(projectData, projectState)),
+        onFetchedProjectData: (projectData, loadingState) =>
+            dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return injectIntl(connect(

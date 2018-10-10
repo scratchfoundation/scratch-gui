@@ -1,0 +1,15 @@
+LEGAL NOTICE INFORMATION
+------------------------
+
+All the files in this distribution are covered under either the Scratch's
+license (see the file scratch-gui_LICENSE) except some files mentioned below.
+
+README.md
+Dockerfile
+src/components/gui/icon--ruby.svg
+src/containers/ruby-tab.jsx
+src/lib/ruby-generator.js
+src/lib/ruby-generator/*.js
+src/reducers/ruby-code.js
+
+  These files are licensed under the MIT License (see the file LICENSE).

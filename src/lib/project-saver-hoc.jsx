@@ -10,7 +10,7 @@ import {
     doneSavingWithId,
     goToErrorState,
     isSavingWithId
-} from '../reducers/project-id';
+} from '../reducers/project-state';
 
 /* Higher Order Component to provide behavior for saving projects.
  */

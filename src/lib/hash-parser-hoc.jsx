@@ -7,7 +7,7 @@ import {
     defaultProjectId,
     isFetchingProjectWithNoURLId,
     setProjectId
-} from '../reducers/project-id';
+} from '../reducers/project-state';
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop

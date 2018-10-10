@@ -13,7 +13,7 @@ import modalReducer, {modalsInitialState} from './modals';
 import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
-import projectIdReducer, {projectIdInitialState} from './project-id';
+import projectIdReducer, {projectIdInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';

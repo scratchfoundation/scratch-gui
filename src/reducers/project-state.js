@@ -1,21 +1,21 @@
 import keyMirror from 'keymirror';
 
-const DONE_CREATING_NEW = 'scratch-gui/project-id/DONE_CREATING_NEW';
-const DONE_FETCHING_DEFAULT_PROJECT_DATA = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA';
-const DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE = 'scratch-gui/project-id/DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE';
-const DONE_FETCHING_PROJECT_DATA_WITH_ID = 'scratch-gui/project-id/DONE_FETCHING_PROJECT_DATA_WITH_ID';
-const DONE_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/DONE_LOADING_VM_FILE_UPLOAD';
-const DONE_LOADING_VM_NEW_DEFAULT = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT';
-const DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE = 'scratch-gui/project-id/DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE';
-const DONE_LOADING_VM_WITH_ID = 'scratch-gui/project-id/DONE_LOADING_VM_WITH_ID';
-const DONE_SAVING_WITH_ID = 'scratch-gui/project-id/DONE_SAVING_WITH_ID';
-const DONE_SAVING_WITH_ID_BEFORE_NEW = 'scratch-gui/project-id/DONE_SAVING_WITH_ID_BEFORE_NEW';
-const GO_TO_ERROR_STATE = 'scratch-gui/project-id/GO_TO_ERROR_STATE';
-const SET_PROJECT_ID = 'scratch-gui/project-id/SET_PROJECT_ID';
-const START_FETCHING_NEW_WITHOUT_SAVING = 'scratch-gui/project-id/START_FETCHING_NEW_WITHOUT_SAVING';
-const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/START_LOADING_FILE_UPLOAD';
-const START_SAVING = 'scratch-gui/project-id/START_SAVING';
-const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-id/START_SAVING_BEFORE_CREATING_NEW';
+const DONE_CREATING_NEW = 'scratch-gui/project-state/DONE_CREATING_NEW';
+const DONE_FETCHING_DEFAULT_PROJECT_DATA = 'scratch-gui/project-state/DONE_FETCHING_DEFAULT_PROJECT_DATA';
+const DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE = 'scratch-gui/project-state/DONE_FETCHING_DEFAULT_PROJECT_DATA_TO_SAVE';
+const DONE_FETCHING_PROJECT_DATA_WITH_ID = 'scratch-gui/project-state/DONE_FETCHING_PROJECT_DATA_WITH_ID';
+const DONE_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/DONE_LOADING_VM_FILE_UPLOAD';
+const DONE_LOADING_VM_NEW_DEFAULT = 'scratch-gui/project-state/DONE_LOADING_VM_NEW_DEFAULT';
+const DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE = 'scratch-gui/project-state/DONE_LOADING_VM_NEW_DEFAULT_TO_SAVE';
+const DONE_LOADING_VM_WITH_ID = 'scratch-gui/project-state/DONE_LOADING_VM_WITH_ID';
+const DONE_SAVING_WITH_ID = 'scratch-gui/project-state/DONE_SAVING_WITH_ID';
+const DONE_SAVING_WITH_ID_BEFORE_NEW = 'scratch-gui/project-state/DONE_SAVING_WITH_ID_BEFORE_NEW';
+const GO_TO_ERROR_STATE = 'scratch-gui/project-state/GO_TO_ERROR_STATE';
+const SET_PROJECT_ID = 'scratch-gui/project-state/SET_PROJECT_ID';
+const START_FETCHING_NEW_WITHOUT_SAVING = 'scratch-gui/project-state/START_FETCHING_NEW_WITHOUT_SAVING';
+const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/START_LOADING_FILE_UPLOAD';
+const START_SAVING = 'scratch-gui/project-state/START_SAVING';
+const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_SAVING_BEFORE_CREATING_NEW';
 
 const defaultProjectId = 0; // hardcoded id of default project
 

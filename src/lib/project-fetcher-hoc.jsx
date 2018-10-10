@@ -9,7 +9,7 @@ import {
     doneFetchingProjectData,
     isFetchingProjectWithId,
     setProjectId
-} from '../reducers/project-id';
+} from '../reducers/project-state';
 
 import analytics from './analytics';
 import log from './log';

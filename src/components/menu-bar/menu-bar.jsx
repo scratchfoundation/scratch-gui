@@ -28,7 +28,7 @@ import {
     isShowingProject,
     newProjectRequested,
     saveRequested
-} from '../../reducers/project-id';
+} from '../../reducers/project-state';
 import {
     openAccountMenu,
     closeAccountMenu,

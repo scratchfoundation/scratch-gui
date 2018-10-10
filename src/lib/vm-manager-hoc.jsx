@@ -10,7 +10,7 @@ import {
     doneLoading,
     isLoadingProjectWithId,
     isShowingProjectWithId
-} from '../reducers/project-id';
+} from '../reducers/project-state';
 
 /*
  * Higher Order Component to manage events emitted by the VM

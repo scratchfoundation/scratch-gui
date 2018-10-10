@@ -25,4 +25,7 @@ const getCostumeUrl = function (assetId, vm) {
     return vm.runtime.storage.get(assetId).encodeDataURI();
 };
 
-export default getCostumeUrl;
+export {
+    getCostumeUrl as default,
+    HAS_FONT_REGEXP
+};

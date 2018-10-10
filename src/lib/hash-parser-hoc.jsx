@@ -10,10 +10,9 @@ import {
 } from '../reducers/project-state';
 
 /* Higher Order Component to get the project id from location.hash
- * @param {React.Component} WrappedComponent component to receive projectData prop
- * @returns {React.Component} component with project fetching behavior
+ * @param {React.Component} WrappedComponent: component to render
+ * @returns {React.Component} component with hash parsing behavior
  */
-// NOTE: have HashParserHOC track its own projectid; only sethash
 const HashParserHOC = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
         constructor (props) {
@@ -43,9 +42,7 @@ const HashParserHOC = function (WrappedComponent) {
         handleHashChange () {
             const hashMatch = window.location.hash.match(/#(\d+)/);
             const hashProjectId = hashMatch === null ? defaultProjectId : hashMatch[1];
-            if (hashProjectId !== this.props.reduxProjectId) {
-                this.props.setProjectId(hashProjectId);
-            }
+            this.props.setProjectId(hashProjectId);
             if (hashProjectId !== defaultProjectId) {
                 this.setState({hideIntro: true});
             }
@@ -73,10 +70,10 @@ const HashParserHOC = function (WrappedComponent) {
         setProjectId: PropTypes.func
     };
     const mapStateToProps = state => {
-        const loadingState = state.scratchGui.projectId.loadingState;
+        const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
-            reduxProjectId: state.scratchGui.projectId.projectId
+            reduxProjectId: state.scratchGui.projectState.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({

@@ -117,9 +117,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     };
 
     const mapStateToProps = state => ({
-        isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectId.loadingState),
-        loadingState: state.scratchGui.projectId.loadingState,
-        reduxProjectId: state.scratchGui.projectId.projectId
+        isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectState.loadingState),
+        loadingState: state.scratchGui.projectState.loadingState,
+        reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
         onFetchedProjectData: (projectData, loadingState) =>

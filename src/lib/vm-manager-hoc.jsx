@@ -83,19 +83,19 @@ const vmManagerHOC = function (WrappedComponent) {
 
     VMManager.propTypes = {
         isLoadingWithId: PropTypes.bool,
+        loadingState: PropTypes.oneOf(LoadingStates),
         onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        loadingState: PropTypes.oneOf(LoadingStates),
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
     const mapStateToProps = state => {
-        const loadingState = state.scratchGui.projectId.loadingState;
+        const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isLoadingWithId: getIsLoadingWithId(loadingState),
-            projectData: state.scratchGui.projectId.projectData,
-            projectId: state.scratchGui.projectId.projectId,
+            projectData: state.scratchGui.projectState.projectData,
+            projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState
         };
     };

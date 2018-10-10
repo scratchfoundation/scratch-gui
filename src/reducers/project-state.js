@@ -38,7 +38,6 @@ const LoadingState = keyMirror({
 
 const LoadingStates = Object.keys(LoadingState);
 
-// NOTE: rename
 const getIsFetchingWithoutId = loadingState => (
     // LOADING_VM_FILE_UPLOAD is an honorary fetch, since there is no fetching step for file uploads
     loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
@@ -323,7 +322,7 @@ const saveRequested = () => ({
 
 export {
     reducer as default,
-    initialState as projectIdInitialState,
+    initialState as projectStateInitialState,
     LoadingState,
     LoadingStates,
     defaultProjectId,

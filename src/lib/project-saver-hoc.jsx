@@ -21,8 +21,6 @@ import {
  * <ProjectSaverHOC>
  *     <WrappedComponent />
  * </ProjectSaverHOC>
- *
- * storeProject(projectId): undefined value will cause POST/create; defined id will cause PUT/update
  */
 const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
@@ -49,6 +47,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
         }
+        /**
+         * storeProject:
+         * @param  {number|string|undefined} projectId defined value causes PUT/update; undefined causes POST/create
+         * @return {Promise} resolves with json object containing project's existing or new id
+         */
         storeProject (projectId) {
             return this.props.vm.saveProjectSb3()
                 .then(content => {
@@ -62,7 +65,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         assetType,
                         dataFormat,
                         body,
-                        projectId // undefined value will cause POST/create; defined id will cause PUT/update
+                        projectId
                     );
                 });
         }
@@ -97,12 +100,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
     const mapStateToProps = state => {
-        const loadingState = state.scratchGui.projectId.loadingState;
+        const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isCreating: getIsCreating(loadingState),
             isUpdating: getIsUpdating(loadingState),
             loadingState: loadingState,
-            reduxProjectId: state.scratchGui.projectId.projectId,
+            reduxProjectId: state.scratchGui.projectState.projectId,
             vm: state.scratchGui.vm
         };
     };

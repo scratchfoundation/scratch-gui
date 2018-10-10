@@ -328,9 +328,7 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <SBFileUploader
-                                        onUpdateProjectTitle={this.props.onUpdateProjectTitle}
-                                    >
+                                    <SBFileUploader>
                                         {(renderFileInput, loadProject) => (
                                             <MenuItem
                                                 onClick={loadProject}
@@ -654,7 +652,7 @@ MenuBar.propTypes = {
 };
 
 const mapStateToProps = state => {
-    const loadingState = state.scratchGui.projectId.loadingState;
+    const loadingState = state.scratchGui.projectState.loadingState;
     const user = state.session && state.session.session && state.session.session.user;
     return {
         accountMenuOpen: accountMenuOpen(state),

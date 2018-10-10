@@ -7,7 +7,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import analytics from '../lib/analytics';
 import log from '../lib/log';
 import {setProjectTitle} from '../reducers/project-title';
-import {onLoadedProject, onProjectUploadStarted} from '../reducers/project-state';
+import {LoadingStates, onLoadedProject, onProjectUploadStarted} from '../reducers/project-state';
 
 import {
     openLoadingProject,
@@ -61,7 +61,7 @@ class SBFileUploader extends React.Component {
                     action: 'Import Project File',
                     nonInteraction: true
                 });
-                this.props.onLoadingFinished();
+                this.props.onLoadingFinished(this.props.loadingState);
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -69,7 +69,7 @@ class SBFileUploader extends React.Component {
             .catch(error => {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
-                this.props.onLoadingFinished();
+                this.props.onLoadingFinished(this.props.loadingState);
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -82,10 +82,7 @@ class SBFileUploader extends React.Component {
                 const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
                 if (matches) {
                     const truncatedProjectTitle = matches[1].substring(0, 100);
-                    this.props.onSetReduxProjectTitle(truncatedProjectTitle);
-                    if (this.props.onUpdateProjectTitle) {
-                        this.props.onUpdateProjectTitle(truncatedProjectTitle);
-                    }
+                    this.props.onSetProjectTitle(truncatedProjectTitle);
                 }
             }
         }
@@ -116,24 +113,25 @@ class SBFileUploader extends React.Component {
 SBFileUploader.propTypes = {
     children: PropTypes.func,
     intl: intlShape.isRequired,
+    loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    onSetReduxProjectTitle: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
+    onSetProjectTitle: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
 };
 const mapStateToProps = state => ({
+    loadingState: state.scratchGui.projectState.loadingState,
     vm: state.scratchGui.vm
 });
 
 const mapDispatchToProps = dispatch => ({
-    onLoadingFinished: () => {
-        dispatch(onLoadedProject());
+    onLoadingFinished: loadingState => {
+        dispatch(onLoadedProject(loadingState));
         dispatch(closeLoadingProject());
     },
-    onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
+    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
     onLoadingStarted: () => {
         dispatch(openLoadingProject());
         dispatch(onProjectUploadStarted());

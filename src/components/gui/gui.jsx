@@ -20,6 +20,7 @@ import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
@@ -260,6 +261,9 @@ const GUIComponent = props => {
                                                 src={addExtensionIcon}
                                             />
                                         </button>
+                                    </Box>
+                                    <Box className={styles.watermark}>
+                                        <Watermark />
                                     </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>

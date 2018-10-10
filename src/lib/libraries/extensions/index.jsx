@@ -1,6 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import arImage from './ar.png';
 import musicImage from './music.png';
 import penImage from './pen.png';
 import videoImage from './video-sensing.png';
@@ -19,6 +20,25 @@ import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
 
 export default [
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Augmented Reality"
+                description="Name for the 'Augmented Reality' extension"
+                id="gui.extension.ar.name"
+            />
+        ),
+        extensionId: 'ar',
+        iconURL: arImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="See your project in the world."
+                description="Description for the 'Augmented Reality' extension"
+                id="gui.extension.ar.description"
+            />
+        ),
+        featured: true
+    },
     {
         name: (
             <FormattedMessage

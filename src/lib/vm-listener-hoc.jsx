@@ -49,8 +49,6 @@ const vmListenerHOC = function (WrappedComponent) {
             }
             this.props.vm.postIOData('userData', {username: this.props.username});
         }
-        // NOTE: should consider changing this to another lifecycle method, e.g. componentDidUpdate,
-        // because componentWillReceiveProps is deprecated
         componentWillReceiveProps (newProps) {
             if (newProps.username !== this.props.username) {
                 this.props.vm.postIOData('userData', {username: newProps.username});
@@ -103,15 +101,9 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTurboModeOn,
                 onShowAlert,
                 /* eslint-enable no-unused-vars */
-                vm,
-                ...componentProps
+                ...props
             } = this.props;
-            return (
-                <WrappedComponent
-                    vm={vm}
-                    {...componentProps}
-                />
-            );
+            return <WrappedComponent {...props} />;
         }
     }
     VMListener.propTypes = {

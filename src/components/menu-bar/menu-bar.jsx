@@ -10,13 +10,13 @@ import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import SB3LoaderFromLocal from '../../containers/sb3-loader-from-local.jsx';
+import FileLoaderFromLocal from '../../containers/file-loader-from-local.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
-import SB3SaverToLocal from '../../containers/sb3-saver-to-local.jsx';
+import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
@@ -24,7 +24,7 @@ import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
     doneLoadingFileUpload,
-    isSavingWithId,
+    isUpdating,
     isShowingProject,
     newProjectRequested,
     saveRequested
@@ -235,7 +235,7 @@ class MenuBar extends React.Component {
                 className={classNames(
                     this.props.className,
                     styles.menuBar,
-                    {[styles.saveInProgress]: this.props.isSavingWithId}
+                    {[styles.saveInProgress]: this.props.isUpdating}
                 )}
             >
                 <div className={styles.mainMenu}>
@@ -329,7 +329,7 @@ class MenuBar extends React.Component {
                                     </MenuItemTooltip>
                                 </MenuSection>
                                 <MenuSection>
-                                    <SB3LoaderFromLocal
+                                    <FileLoaderFromLocal
                                         onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                     >
                                         {(renderFileInput, loadProject) => (
@@ -346,8 +346,8 @@ class MenuBar extends React.Component {
                                                 {renderFileInput()}
                                             </MenuItem>
                                         )}
-                                    </SB3LoaderFromLocal>
-                                    <SB3SaverToLocal>{downloadProject => (
+                                    </FileLoaderFromLocal>
+                                    <SB3Downloader>{downloadProject => (
                                         <MenuItem
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
@@ -357,7 +357,7 @@ class MenuBar extends React.Component {
                                                 id="gui.menuBar.downloadToComputer"
                                             />
                                         </MenuItem>
-                                    )}</SB3SaverToLocal>
+                                    )}</SB3Downloader>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -626,7 +626,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
     isRtl: PropTypes.bool,
-    isSavingWithId: PropTypes.bool,
+    isUpdating: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
@@ -663,7 +663,7 @@ const mapStateToProps = state => {
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,
-        isSavingWithId: isSavingWithId(projectState),
+        isUpdating: isUpdating(projectState),
         isShowingProject: isShowingProject(projectState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),

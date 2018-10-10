@@ -6,10 +6,12 @@ import VM from 'scratch-vm';
 import storage from '../lib/storage';
 import {
     ProjectState,
-    doneCreatingNew,
-    doneSavingWithId,
-    goToErrorState,
-    isSavingWithId
+    ProjectStates,
+    isCreating,
+    isUpdating,
+    onCreated,
+    onUpdated,
+    onError
 } from '../reducers/project-state';
 
 /* Higher Order Component to provide behavior for saving projects.
@@ -17,30 +19,30 @@ import {
 const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
         componentDidUpdate (prevProps) {
-            if (this.props.isSavingWithId && !prevProps.isSavingWithId) {
+            if (this.props.isUpdating && !prevProps.isUpdating) {
                 this.storeProject({
                     action: 'update',
                     id: this.props.reduxProjectId
                 })
-                    .then(response => { // eslint-disable-line no-unused-vars
-                        // NOTE: should we check/handle response value here?
-                        this.props.doneSavingWithId(this.props.projectState);
+                    .then(() => { // eslint-disable-line no-unused-vars
+                        // there is nothing we expect to find in response that we need to check here
+                        this.props.onUpdated(this.props.projectState);
                     })
                     .catch(err => {
                         // NOTE: should throw up a notice for user
-                        this.props.goToErrorState(`Saving the project failed with error: ${err}`);
+                        this.props.onError(`Saving the project failed with error: ${err}`);
                     });
             }
-            if (this.props.isCreatingNew && !prevProps.isCreatingNew) {
+            if (this.props.isCreating && !prevProps.isCreating) {
                 this.storeProject({
                     action: 'create'
                 })
                     .then(response => {
-                        this.props.doneCreatingNew(response.id);
+                        this.props.onCreated(response.id);
                     })
                     .catch(err => {
                         // NOTE: should throw up a notice for user
-                        this.props.goToErrorState(`Creating a new project failed with error: ${err}`);
+                        this.props.onError(`Creating a new project failed with error: ${err}`);
                     });
             }
         }
@@ -64,11 +66,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                doneCreatingNew: doneCreatingNewProp,
-                doneSavingWithId: doneSavingWithIdProp,
-                goToErrorState: goToErrorStateProp,
-                isCreatingNew: isCreatingNewProp,
-                isSavingWithId: isSavingWithIdProp,
+                onCreated: onCreatedProp,
+                onUpdated: onUpdatedProp,
+                onError: onErrorProp,
+                isCreating: isCreatingProp,
+                isUpdating: isUpdatingProp,
                 projectState,
                 reduxProjectId,
                 /* eslint-enable no-unused-vars */
@@ -82,29 +84,29 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
     }
     ProjectSaverComponent.propTypes = {
-        doneCreatingNew: PropTypes.func,
-        doneSavingWithId: PropTypes.func,
-        goToErrorState: PropTypes.func,
-        isCreatingNew: PropTypes.bool,
-        isSavingWithId: PropTypes.bool,
-        projectState: PropTypes.string,
+        isCreating: PropTypes.bool,
+        isUpdating: PropTypes.bool,
+        onCreated: PropTypes.func,
+        onError: PropTypes.func,
+        onUpdated: PropTypes.func,
+        projectState: PropTypes.oneOf(ProjectStates),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         vm: PropTypes.instanceOf(VM).isRequired
     };
     const mapStateToProps = state => {
         const projectState = state.scratchGui.projectId.projectState;
         return {
-            isCreatingNew: projectState === ProjectState.CREATING_NEW,
-            isSavingWithId: isSavingWithId(projectState),
+            isCreating: isCreating(projectState),
+            isUpdating: isUpdating(projectState),
             projectState: projectState,
             reduxProjectId: state.scratchGui.projectId.projectId,
             vm: state.scratchGui.vm
         };
     };
     const mapDispatchToProps = dispatch => ({
-        doneCreatingNew: projectId => dispatch(doneCreatingNew(projectId)),
-        doneSavingWithId: (projectId, projectState) => dispatch(doneSavingWithId(projectId, projectState)),
-        goToErrorState: errStr => dispatch(goToErrorState(errStr))
+        onCreated: projectId => dispatch(onCreated(projectId)),
+        onUpdated: (projectId, projectState) => dispatch(onUpdated(projectId, projectState)),
+        onError: errStr => dispatch(onError(errStr))
     });
     return connect(
         mapStateToProps,

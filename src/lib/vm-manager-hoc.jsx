@@ -7,6 +7,7 @@ import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
 import {
+    ProjectStates,
     doneLoading,
     isLoadingProjectWithId,
     isShowingProjectWithId
@@ -88,7 +89,7 @@ const vmManagerHOC = function (WrappedComponent) {
         isShowingProjectWithId: PropTypes.bool,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        projectState: PropTypes.string,
+        projectState: PropTypes.oneOf(ProjectStates),
         vm: PropTypes.instanceOf(VM).isRequired
     };
 

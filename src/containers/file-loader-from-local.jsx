@@ -15,30 +15,30 @@ import {
 } from '../reducers/modals';
 
 /**
- * SB3LoaderFromLocal component passes a file input, load handler and props to its child.
+ * FileLoaderFromLocal component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
  *     function (renderFileInput, loadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <SB3LoaderFromLocal>{(renderFileInput, loadProject) => (
+ * <FileLoaderFromLocal>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
- * )}</SB3LoaderFromLocal>
+ * )}</FileLoaderFromLocal>
  */
 
 const messages = defineMessages({
     loadError: {
-        id: 'gui.SB3LoaderFromLocal.loadError',
+        id: 'gui.projectLoader.loadError',
         defaultMessage: 'The project file that was selected failed to load.',
         description: 'An error that displays when a local project file fails to load.'
     }
 });
 
-class SB3LoaderFromLocal extends React.Component {
+class FileLoaderFromLocal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -113,7 +113,7 @@ class SB3LoaderFromLocal extends React.Component {
     }
 }
 
-SB3LoaderFromLocal.propTypes = {
+FileLoaderFromLocal.propTypes = {
     children: PropTypes.func,
     closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
@@ -143,4 +143,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(SB3LoaderFromLocal));
+)(injectIntl(FileLoaderFromLocal));

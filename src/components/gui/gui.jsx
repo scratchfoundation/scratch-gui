@@ -90,7 +90,6 @@ const GUIComponent = props => {
         soundsTabVisible,
         stageSizeMode,
         tipsLibraryVisible,
-        userOwnsProject,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -168,7 +167,6 @@ const GUIComponent = props => {
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
-                    userOwnsProject={userOwnsProject}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -338,7 +336,6 @@ GUIComponent.propTypes = {
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
-    userOwnsProject: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

@@ -11,8 +11,7 @@ const DONE_LOADING_VM_WITH_ID = 'scratch-gui/project-id/DONE_LOADING_VM_WITH_ID'
 const DONE_SAVING_WITH_ID = 'scratch-gui/project-id/DONE_SAVING_WITH_ID';
 const DONE_SAVING_WITH_ID_BEFORE_NEW = 'scratch-gui/project-id/DONE_SAVING_WITH_ID_BEFORE_NEW';
 const GO_TO_ERROR_STATE = 'scratch-gui/project-id/GO_TO_ERROR_STATE';
-const SET_HASH_PROJECT_ID = 'scratch-gui/project-id/SET_HASH_PROJECT_ID';
-const SET_INITIAL_PROJECT_ID = 'scratch-gui/project-id/SET_INITIAL_PROJECT_ID';
+const SET_PROJECT_ID = 'scratch-gui/project-id/SET_PROJECT_ID';
 const START_FETCHING_NEW_WITHOUT_SAVING = 'scratch-gui/project-id/START_FETCHING_NEW_WITHOUT_SAVING';
 const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-id/START_LOADING_FILE_UPLOAD';
 const START_SAVING = 'scratch-gui/project-id/START_SAVING';
@@ -39,6 +38,7 @@ const ProjectState = keyMirror({
     CREATING_NEW: null
 });
 
+// NOTE: rename
 const isFetchingProjectWithNoURLId = projectState => (
     // LOADING_FILE_UPLOAD is an honorary fetch, since there is no fetching step for file uploads
     projectState === ProjectState.LOADING_VM_FILE_UPLOAD ||
@@ -162,39 +162,22 @@ const reducer = function (state, action) {
             });
         }
         return state;
-    case SET_HASH_PROJECT_ID:
-        // We purposely do not transition if we are currently in a fetching or loading state,
-        // which may have changed the hash automatically, e.g. if we have moved from a hash url
-        // to loading a project from local.
-        if ([
-            ProjectState.NOT_LOADED,
-            ProjectState.SHOWING_WITH_ID,
-            ProjectState.SHOWING_FILE_UPLOAD,
-            ProjectState.SHOWING_NEW_DEFAULT
-        ].includes(state.projectState)) {
+    case SET_PROJECT_ID:
+        // if we were already showing something, only fetch project if the
+        // project id has changed. This prevents re-fetching projects unnecessarily.
+        if (state.projectState === ProjectState.SHOWING_WITH_ID) {
+            if (state.projectId !== action.id) {
+                return Object.assign({}, state, {
+                    projectState: ProjectState.FETCHING_WITH_ID,
+                    projectId: action.id
+                });
+            }
+        } else { // allow any other states to transition to fetching project
             return Object.assign({}, state, {
                 projectState: ProjectState.FETCHING_WITH_ID,
                 projectId: action.id
             });
         }
-        return state;
-    case SET_INITIAL_PROJECT_ID:
-        // if we havnen't loaded anything, fetch the project
-        if (state.projectState === ProjectState.NOT_LOADED) {
-            return Object.assign({}, state, {
-                projectId: action.id,
-                projectState: ProjectState.FETCHING_WITH_ID
-            });
-        }
-        // if we were already showing something, only fetch project if the
-        // project id has changed
-        if (state.projectState === ProjectState.SHOWING_WITH_ID && state.projectId !== action.id) {
-            return Object.assign({}, state, {
-                projectId: action.id,
-                projectState: ProjectState.FETCHING_WITH_ID
-            });
-        }
-        // if neither of the cases above applies, don't change the state
         return state;
     case START_FETCHING_NEW_WITHOUT_SAVING:
         if ([
@@ -328,29 +311,21 @@ const goToErrorState = errStr => ({
     errStr: errStr
 });
 
-const setHashProjectId = id => ({
-    type: SET_HASH_PROJECT_ID,
+const setProjectId = id => ({
+    type: SET_PROJECT_ID,
     id: id
 });
 
-const setInitialProjectId = id => ({
-    type: SET_INITIAL_PROJECT_ID,
-    id: id
-});
-
-const stepTowardsCreatingNewProject = () => ({
-    type: START_SAVING_BEFORE_CREATING_NEW
-});
-
-const stepTowardsNewProjectWithoutSaving = () => ({
-    type: START_FETCHING_NEW_WITHOUT_SAVING
-});
+const newProjectRequested = canSave => {
+    if (canSave) return {type: START_SAVING_BEFORE_CREATING_NEW};
+    return {type: START_FETCHING_NEW_WITHOUT_SAVING};
+};
 
 const startLoadingFileUpload = () => ({
     type: START_LOADING_VM_FILE_UPLOAD
 });
 
-const startSaving = () => ({
+const saveRequested = () => ({
     type: START_SAVING
 });
 
@@ -371,10 +346,8 @@ export {
     isSavingWithId,
     isShowingProject,
     isShowingProjectWithId,
-    setHashProjectId,
-    setInitialProjectId,
+    newProjectRequested,
+    setProjectId,
     startLoadingFileUpload,
-    startSaving,
-    stepTowardsCreatingNewProject,
-    stepTowardsNewProjectWithoutSaving
+    saveRequested
 };

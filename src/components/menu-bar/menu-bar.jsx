@@ -26,9 +26,8 @@ import {
     doneLoadingFileUpload,
     isSavingWithId,
     isShowingProject,
-    startSaving,
-    stepTowardsCreatingNewProject,
-    stepTowardsNewProjectWithoutSaving
+    newProjectRequested,
+    saveRequested
 } from '../../reducers/project-id';
 import {
     openAccountMenu,
@@ -147,18 +146,16 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        if (this.props.sessionExists && this.props.username) { // logged in
-            // safe to replace current project, since we will auto-save first
-            this.props.stepTowardsCreatingNewProject();
-        } else {
-            const response = confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
-            if (response) {
-                this.props.stepTowardsNewProjectWithoutSaving();
-            }
+        const canSave = this.props.canUpdateProject; // logged in
+        // if canSave===true, it's safe to replace current project, since we will auto-save first
+        const readyToReplaceProject =
+            canSave || confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+        if (readyToReplaceProject) {
+            this.props.onClickNew(canSave);
         }
     }
     handleClickSave () {
-        this.props.startSaving();
+        this.props.onClickSave();
     }
     handleRestoreOption (restoreFun) {
         return () => {
@@ -212,6 +209,13 @@ class MenuBar extends React.Component {
                 defaultMessage="Save now"
                 description="Menu bar item for saving now"
                 id="gui.menuBar.saveNow"
+            />
+        );
+        const newProjectMessage = (
+            <FormattedMessage
+                defaultMessage="New"
+                description="Menu bar item for creating a new project"
+                id="gui.menuBar.new"
             />
         );
         const shareButton = (
@@ -282,18 +286,24 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <MenuItem
-                                    isRtl={this.props.isRtl}
-                                    onClick={this.handleClickNew}
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="New"
-                                        description="Menu bar item for creating a new project"
-                                        id="gui.menuBar.new"
-                                    />
-                                </MenuItem>
+                                {/* for now, only enable New when there is no session */}
+                                {this.props.sessionExists ? (
+                                    <MenuItemTooltip
+                                        id="new"
+                                        isRtl={this.props.isRtl}
+                                    >
+                                        <MenuItem>{newProjectMessage}</MenuItem>
+                                    </MenuItemTooltip>
+                                ) : (
+                                    <MenuItem
+                                        isRtl={this.props.isRtl}
+                                        onClick={this.handleClickNew}
+                                    >
+                                        {newProjectMessage}
+                                    </MenuItem>
+                                )}
                                 <MenuSection>
-                                    {this.props.username && this.props.userOwnsProject ? (
+                                    {this.props.canUpdateProject ? (
                                         <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
@@ -608,6 +618,7 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
+    canUpdateProject: PropTypes.bool,
     className: PropTypes.string,
     doneLoadingFileUpload: PropTypes.func,
     editMenuOpen: PropTypes.bool,
@@ -624,6 +635,7 @@ MenuBar.propTypes = {
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
+    onClickNew: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -639,9 +651,6 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     startSaving: PropTypes.func,
-    stepTowardsCreatingNewProject: PropTypes.func,
-    stepTowardsNewProjectWithoutSaving: PropTypes.func,
-    userOwnsProject: PropTypes.bool,
     username: PropTypes.string
 };
 
@@ -650,6 +659,7 @@ const mapStateToProps = state => {
     const user = state.session && state.session.session && state.session.session.user;
     return {
         accountMenuOpen: accountMenuOpen(state),
+        canUpdateProject: typeof user !== 'undefined',
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,
@@ -675,11 +685,10 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
+    onClickNew: canSave => dispatch(newProjectRequested(canSave)),
+    onClickSave: () => dispatch(saveRequested()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onShare: () => {}, // NOTE: implement this
-    startSaving: () => dispatch(startSaving()),
-    stepTowardsCreatingNewProject: () => dispatch(stepTowardsCreatingNewProject()),
-    stepTowardsNewProjectWithoutSaving: () => dispatch(stepTowardsNewProjectWithoutSaving())
+    onShare: () => {} // NOTE: implement this
 });
 
 export default injectIntl(connect(

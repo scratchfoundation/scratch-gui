@@ -6,13 +6,14 @@ import {connect} from 'react-redux';
 import {
     defaultProjectId,
     isFetchingProjectWithNoURLId,
-    setHashProjectId
+    setProjectId
 } from '../reducers/project-id';
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project fetching behavior
  */
+// NOTE: have HashParserHOC track its own projectid; only sethash
 const HashParserHOC = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
         constructor (props) {
@@ -79,7 +80,7 @@ const HashParserHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
-        setHashProjectId: projectId => dispatch(setHashProjectId(projectId))
+        setHashProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return connect(
         mapStateToProps,

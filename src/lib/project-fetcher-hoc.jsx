@@ -8,7 +8,7 @@ import {
     defaultProjectId,
     doneFetchingProjectData,
     isFetchingProjectWithId,
-    setInitialProjectId
+    setProjectId
 } from '../reducers/project-id';
 
 import analytics from './analytics';
@@ -124,7 +124,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         doneFetchingProjectData: (projectData, projectState) =>
             dispatch(doneFetchingProjectData(projectData, projectState)),
-        setInitialProjectId: projectId => dispatch(setInitialProjectId(projectId))
+        setInitialProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return injectIntl(connect(
         mapStateToProps,

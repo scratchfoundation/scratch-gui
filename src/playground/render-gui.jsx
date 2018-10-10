@@ -6,7 +6,6 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
-import ProjectMetaDataHOC from '../lib/project-metadata-hoc.jsx';
 
 /*
  * Render the GUI playground. This is a separate function because importing anything
@@ -22,8 +21,7 @@ export default appTarget => {
     const WrappedGui = compose(
         AppStateHOC,
         HashParserHOC,
-        TitledHOC,
-        ProjectMetaDataHOC
+        TitledHOC
     )(GUI);
 
     // TODO a hack for testing the backpack, allow backpack host to be set by url param

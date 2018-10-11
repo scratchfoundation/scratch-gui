@@ -3,6 +3,8 @@
  * Utility function to detect locale from the browser setting or paramenter on the URL.
  */
 
+import queryString from 'query-string';
+
 /**
  * look for language setting in the browser. Check against supported locales.
  * If there's a parameter in the URL, override the browser setting
@@ -23,13 +25,18 @@ const detectLocale = supportedLocales => {
         }
     }
 
-    if (window.location.search.indexOf('locale=') !== -1 ||
-        window.location.search.indexOf('lang=') !== -1) {
-        const urlLocale = window.location.search.match(/(?:locale|lang)=([\w-]+)/)[1].toLowerCase();
-        if (supportedLocales.includes(urlLocale)) {
-            locale = urlLocale;
-        }
+    const queryParams = queryString.parse(location.search);
+    // Flatten potential arrays and remove falsy values
+    const potentialLocales = [].concat(queryParams.locale, queryParams.lang).filter(l => l);
+    if (!potentialLocales.length) {
+        return locale;
     }
+
+    const urlLocale = potentialLocales[0].toLowerCase();
+    if (supportedLocales.includes(urlLocale)) {
+        return urlLocale;
+    }
+
     return locale;
 };
 

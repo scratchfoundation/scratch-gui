@@ -101,6 +101,10 @@
     padding: 0 0.75rem;
 }
 
+.menu-bar-item.language-menu {
+    padding: 0 0.5rem;
+}
+
 .menu-bar-menu {
     margin-top: $menu-bar-height;
     z-index: $z-index-menu-bar;

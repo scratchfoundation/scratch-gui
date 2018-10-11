@@ -72,7 +72,10 @@ describe('HashParserHOC', () => {
             />
         );
         window.location.hash = '#1234567';
-        mounted.childAt(0).instance().handleHashChange();
+        mounted
+            .childAt(0)
+            .instance()
+            .handleHashChange();
         expect(mockSetProjectIdFunc.mock.calls.length).toBe(2);
     });
 });

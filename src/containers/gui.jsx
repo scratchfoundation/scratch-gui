@@ -4,6 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
+import bindAll from 'lodash.bindall';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
@@ -28,6 +29,9 @@ import GUIComponent from '../components/gui/gui.jsx';
 class GUI extends React.Component {
     constructor (props) {
         super(props);
+        bindAll(this, [
+            'loadProject'
+        ]);
         this.state = {
             loading: !props.vm.initialized,
             loadingError: false,
@@ -42,19 +46,24 @@ class GUI extends React.Component {
         if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
-        this.props.vm.loadProject(this.props.projectData)
-            .then(() => {
-                this.setState({loading: false}, () => {
-                    this.props.vm.setCompatibilityMode(true);
-                    this.props.vm.start();
-                });
-            })
-            .catch(e => {
-                // Need to catch this error and update component state so that
-                // error page gets rendered if project failed to load
-                this.setState({loadingError: true, errorMessage: e});
-            });
         this.props.vm.initialized = true;
+        const fontPromises = [];
+        if (document.fonts && document.fonts.values.length) {
+            for (const fontFace of document.fonts.values()) {
+                fontPromises.push(fontFace.loaded);
+                fontFace.load();
+            }
+        }
+
+        if (document.readyState === 'complete') {
+            Promise.all(fontPromises).then(this.loadProject);
+        } else {
+            document.onreadystatechange = () => {
+                if (document.readyState !== 'complete') return;
+                document.onreadystatechange = null;
+                Promise.all(fontPromises).then(this.loadProject);
+            };
+        }
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
@@ -73,6 +82,20 @@ class GUI extends React.Component {
         if (this.props.projectTitle !== nextProps.projectTitle) {
             this.props.onUpdateReduxProjectTitle(nextProps.projectTitle);
         }
+    }
+    loadProject () {
+        return this.props.vm.loadProject(this.props.projectData)
+            .then(() => {
+                this.setState({loading: false}, () => {
+                    this.props.vm.setCompatibilityMode(true);
+                    this.props.vm.start();
+                });
+            })
+            .catch(e => {
+                // Need to catch this error and update component state so that
+                // error page gets rendered if project failed to load
+                this.setState({loadingError: true, errorMessage: e});
+            });
     }
     render () {
         if (this.state.loadingError) {

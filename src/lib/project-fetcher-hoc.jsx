@@ -126,9 +126,13 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
     return injectIntl(connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
+        mergeProps
     )(ProjectFetcherComponent));
 };
 

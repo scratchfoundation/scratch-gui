@@ -45,7 +45,6 @@ describe('ProjectFetcherHOC', () => {
             isFetchingWithId: true,
             loadingState: LoadingState.FETCHING_WITH_ID
         });
-        mounted.update();
         expect(storage.load).toHaveBeenLastCalledWith(
             storage.AssetType.Project, '100', storage.DataFormat.JSON
         );

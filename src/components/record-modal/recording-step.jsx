@@ -53,8 +53,8 @@ const RecordingStep = props => (
                     <span className={styles.helpText}>
                         {props.listening ? props.intl.formatMessage(messages.beginRecord) :
                             props.intl.formatMessage(messages.permission,
-                                                     {arrow: props.isRtl ? '↗️ \u00A0' : '↖️ \u00A0'}
-                                                    )
+                                {arrow: props.isRtl ? '↗️ \u00A0' : '↖️ \u00A0'}
+                            )
                         }
                     </span>
                 )}

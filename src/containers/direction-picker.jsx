@@ -38,6 +38,7 @@ class DirectionPicker extends React.Component {
             <DirectionComponent
                 direction={this.props.direction}
                 disabled={this.props.disabled}
+                labelAbove={this.props.labelAbove}
                 popoverOpen={this.state.popoverOpen && !this.props.disabled}
                 rotationStyle={this.props.rotationStyle}
                 onChangeDirection={this.props.onChangeDirection}
@@ -54,6 +55,7 @@ class DirectionPicker extends React.Component {
 DirectionPicker.propTypes = {
     direction: PropTypes.number,
     disabled: PropTypes.bool,
+    labelAbove: PropTypes.bool,
     onChangeDirection: PropTypes.func,
     onChangeRotationStyle: PropTypes.func,
     rotationStyle: PropTypes.string

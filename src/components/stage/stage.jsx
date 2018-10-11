@@ -117,6 +117,7 @@ StageComponent.propTypes = {
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    micIndicator: PropTypes.bool,
     onDeactivateColorPicker: PropTypes.func,
     onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,

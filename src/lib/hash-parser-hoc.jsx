@@ -79,9 +79,13 @@ const HashParserHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
     return connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
+        mergeProps
     )(HashParserComponent);
 };
 

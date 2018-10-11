@@ -58,8 +58,8 @@ const ConnectedPlayer = connect(
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
 const WrappedPlayer = compose(
-    HashParserHOC,
     AppStateHOC,
+    HashParserHOC,
     TitledHOC
 )(ConnectedPlayer);
 

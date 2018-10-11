@@ -27,7 +27,7 @@ const BlocksOnly = props => (
     </GUI>
 );
 
-const App = HashParserHOC(AppStateHOC(BlocksOnly));
+const App = AppStateHOC(HashParserHOC(BlocksOnly));
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

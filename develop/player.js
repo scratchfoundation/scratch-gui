@@ -33,11 +33,11 @@ var _box = __webpack_require__(14);
 
 var _box2 = _interopRequireDefault(_box);
 
-var _gui = __webpack_require__(162);
+var _gui = __webpack_require__(163);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(184);
+var _hashParserHoc = __webpack_require__(185);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
@@ -45,7 +45,7 @@ var _appStateHoc = __webpack_require__(115);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _titledHoc = __webpack_require__(460);
+var _titledHoc = __webpack_require__(459);
 
 var _titledHoc2 = _interopRequireDefault(_titledHoc);
 

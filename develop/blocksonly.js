@@ -17,19 +17,19 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _controls = __webpack_require__(428);
+var _controls = __webpack_require__(427);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(396);
+var _blocks = __webpack_require__(395);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
-var _gui = __webpack_require__(162);
+var _gui = __webpack_require__(163);
 
 var _gui2 = _interopRequireDefault(_gui);
 
-var _hashParserHoc = __webpack_require__(184);
+var _hashParserHoc = __webpack_require__(185);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 

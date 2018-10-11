@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[2],{
 
-/***/ 1564:
+/***/ 1572:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17,11 +17,11 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(6);
 
-var _controls = __webpack_require__(428);
+var _controls = __webpack_require__(427);
 
 var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(396);
+var _blocks = __webpack_require__(395);
 
 var _blocks2 = _interopRequireDefault(_blocks);
 
@@ -33,11 +33,11 @@ var _hashParserHoc = __webpack_require__(184);
 
 var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
 
-var _appStateHoc = __webpack_require__(114);
+var _appStateHoc = __webpack_require__(115);
 
 var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
 
-var _blocksOnly = __webpack_require__(1565);
+var _blocksOnly = __webpack_require__(1573);
 
 var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
 
@@ -64,7 +64,7 @@ var BlocksOnly = function BlocksOnly(props) {
     );
 };
 
-var App = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(BlocksOnly));
+var App = (0, _appStateHoc2.default)((0, _hashParserHoc2.default)(BlocksOnly));
 
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
@@ -73,11 +73,11 @@ _reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 1565:
+/***/ 1573:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1566);
+var content = __webpack_require__(1574);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -99,7 +99,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 1566:
+/***/ 1574:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -116,5 +116,5 @@ exports.locals = {
 
 /***/ })
 
-},[[1564,0]]]);
+},[[1572,0]]]);
 //# sourceMappingURL=blocksonly.js.map

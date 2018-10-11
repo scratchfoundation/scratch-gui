@@ -102,46 +102,54 @@
 
 @keyframes top-slide-in-rtl {
   0% {
-    transform: translateY(50px) rotateY(180deg);
+    transform: translateY(50px) scaleX(-1);
     opacity: 0;
   }
 
   33% {
-    transform: translateY(0px) rotateY(180deg);
+    transform: translateY(0px) scaleX(-1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px) scaleX(-1);
     opacity: 1;
   }
 }
 
 @keyframes middle-slide-in-rtl {
   0% {
-    transform: translateY(50px) rotateY(180deg);
+    transform: translateY(50px) scaleX(-1);
     opacity: 0;
   }
 
   33% {
-    transform: translateY(50px) rotateY(180deg);
+    transform: translateY(50px) scaleX(-1);
     opacity: 0;
   }
 
   66% {
-    transform: translateY(0px) rotateY(180deg);
+    transform: translateY(0px) scaleX(-1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px) scaleX(-1);
     opacity: 1;
   }
 }
 
 @keyframes bottom-slide-in-rtl {
   0% {
-    transform: translateY(50px) rotateY(180deg);
+    transform: translateY(50px) scaleX(-1);
     opacity: 0;
   }
 
   66% {
-    transform: translateY(50px) rotateY(180deg);
+    transform: translateY(50px) scaleX(-1);
     opacity: 0;
   }
 
   100% {
-    transform: translateY(0px) rotateY(180deg);
+    transform: translateY(0px) scaleX(-1);
     opacity: 1;
   }
 }

@@ -683,8 +683,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onClickNew: canSave => dispatch(requestNewProject(canSave)),
     onClickSave: () => dispatch(saveProject()),
-    onSeeCommunity: () => dispatch(setPlayer(true)),
-    onShare: () => {} // NOTE: implement this
+    onSeeCommunity: () => dispatch(setPlayer(true))
 });
 
 export default injectIntl(connect(

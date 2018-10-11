@@ -25,8 +25,8 @@ import {setPlayer} from '../../reducers/mode';
 import {
     getIsUpdating,
     getIsShowingProject,
-    newProjectRequested,
-    saveRequested
+    requestNewProject,
+    saveProject
 } from '../../reducers/project-state';
 import {
     openAccountMenu,
@@ -681,8 +681,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickNew: canSave => dispatch(newProjectRequested(canSave)),
-    onClickSave: () => dispatch(saveRequested()),
+    onClickNew: canSave => dispatch(requestNewProject(canSave)),
+    onClickSave: () => dispatch(saveProject()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onShare: () => {} // NOTE: implement this
 });

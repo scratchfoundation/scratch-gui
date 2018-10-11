@@ -307,7 +307,7 @@ const setProjectId = id => ({
     id: id
 });
 
-const newProjectRequested = canSave => {
+const requestNewProject = canSave => {
     if (canSave) return {type: START_SAVING_BEFORE_CREATING_NEW};
     return {type: START_FETCHING_NEW_WITHOUT_SAVING};
 };
@@ -316,7 +316,7 @@ const onProjectUploadStarted = () => ({
     type: START_LOADING_VM_FILE_UPLOAD
 });
 
-const saveRequested = () => ({
+const saveProject = () => ({
     type: START_SAVING
 });
 
@@ -332,13 +332,13 @@ export {
     getIsLoadingWithId,
     getIsUpdating,
     getIsShowingProject,
-    newProjectRequested,
     onCreated,
     onError,
     onFetchedProjectData,
     onLoadedProject,
     onProjectUploadStarted,
     onUpdated,
-    setProjectId,
-    saveRequested
+    requestNewProject,
+    saveProject,
+    setProjectId
 };

@@ -104,9 +104,14 @@ const vmManagerHOC = function (WrappedComponent) {
         onLoadedProject: loadingState => dispatch(onLoadedProject(loadingState))
     });
 
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
+
     return connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
+        mergeProps
     )(VMManager);
 };
 

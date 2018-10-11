@@ -52,7 +52,10 @@ const RecordingStep = props => (
                 ) : (
                     <span className={styles.helpText}>
                         {props.listening ? props.intl.formatMessage(messages.beginRecord) :
-                            props.intl.formatMessage(messages.permission, {arrow: '↖️ \u00A0'})}
+                            props.intl.formatMessage(messages.permission,
+                                                     {arrow: props.isRtl ? '↗️ \u00A0' : '↖️ \u00A0'}
+                                                    )
+                        }
                     </span>
                 )}
             </Box>
@@ -104,6 +107,7 @@ const RecordingStep = props => (
 
 RecordingStep.propTypes = {
     intl: intlShape.isRequired,
+    isRtl: PropTypes.bool,
     level: PropTypes.number,
     levels: PropTypes.arrayOf(PropTypes.number),
     listening: PropTypes.bool,

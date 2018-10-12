@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import 'aframe';
+import 'arjs';
+import {Sphere, Cylinder, Plane, Sky, Text, Scene} from 'react-aframe-ar';
 
 import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
@@ -12,6 +15,7 @@ import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
+
 
 const StageComponent = props => {
     const {
@@ -47,12 +51,46 @@ const StageComponent = props => {
                 onDoubleClick={onDoubleClick}
             >
                 {true ? (
-                    <a-scene ar>
-                        <a-sphere
-                            position="0 0.005 -0.5"
-                            radius="0.01"
+                    <Scene
+                        embedded
+                    >
+                        <Box
+                            shadow
+                            color="#4CC3D9"
+                            position="-1 0.5 -3"
+                            rotation="0 45 0"
                         />
-                    </a-scene>
+                        <Sphere
+                            shadow
+                            color="#EF2D5E"
+                            position="0 1.25 -5"
+                            radius="1.25"
+                        />
+                        <Cylinder
+                            shadow
+                            color="#FFC65D"
+                            height="1.5"
+                            position="1 0.75 -3"
+                            radius="0.5"
+                        />
+                        <Plane
+                            shadow
+                            color="#7BC8A4"
+                            height="4"
+                            position="0 0 -4"
+                            rotation="-90 0 0"
+                            width="4"
+                        />
+                        <Sky
+                            color="#ECECEC"
+                        />
+                        <Text
+                            align="center"
+                            color="#7BC8A4"
+                            position="0 2.3 -1.5"
+                            value="Hello world, react-aframe-ar!"
+                        />
+                    </Scene>
                 ) : (
                     <DOMElementRenderer
                         className={classNames(

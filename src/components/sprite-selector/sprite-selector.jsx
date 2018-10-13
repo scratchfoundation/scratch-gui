@@ -7,7 +7,7 @@ import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteList from './sprite-list.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
-import RtlLocales from '../../lib/rtl-locales';
+import {isRtl} from 'scratch-l10n';
 
 import styles from './sprite-selector.css';
 
@@ -140,7 +140,7 @@ const SpriteSelectorComponent = function (props) {
                     }
                 ]}
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}
-                tooltipPlace={RtlLocales.indexOf(intl.locale) === -1 ? 'left' : 'right'}
+                tooltipPlace={isRtl(intl.locale) ? 'left' : 'right'}
                 onClick={onNewSpriteClick}
             />
         </Box>

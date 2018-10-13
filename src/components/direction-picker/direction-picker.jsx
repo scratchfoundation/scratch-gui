@@ -52,6 +52,7 @@ const messages = defineMessages({
 const DirectionPicker = props => (
     <Label
         secondary
+        above={props.labelAbove}
         text={directionLabel}
     >
         <Popover
@@ -124,6 +125,7 @@ DirectionPicker.propTypes = {
     direction: PropTypes.number,
     disabled: PropTypes.bool.isRequired,
     intl: intlShape,
+    labelAbove: PropTypes.bool,
     onChangeDirection: PropTypes.func.isRequired,
     onClickAllAround: PropTypes.func.isRequired,
     onClickDontRotate: PropTypes.func.isRequired,
@@ -132,6 +134,10 @@ DirectionPicker.propTypes = {
     onOpenPopover: PropTypes.func.isRequired,
     popoverOpen: PropTypes.bool.isRequired,
     rotationStyle: PropTypes.string
+};
+
+DirectionPicker.defaultProps = {
+    labelAbove: false
 };
 
 const WrappedDirectionPicker = injectIntl(DirectionPicker);

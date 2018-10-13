@@ -11,6 +11,8 @@ import DirectionPicker from '../../containers/direction-picker.jsx';
 import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
 
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
+import {isWideLocale} from '../../lib/locale-utils.js';
+
 import styles from './sprite-info.css';
 
 import xIcon from './icon--x.svg';
@@ -69,9 +71,16 @@ class SpriteInfo extends React.Component {
             />
         );
 
+        const labelAbove = isWideLocale(this.props.intl.locale);
+
         const spriteNameInput = (
             <BufferedInput
-                className={styles.spriteInput}
+                className={classNames(
+                    styles.spriteInput,
+                    {
+                        [styles.columnInput]: labelAbove
+                    }
+                )}
                 disabled={this.props.disabled}
                 placeholder={this.props.intl.formatMessage(messages.spritePlaceholder)}
                 tabIndex="0"
@@ -155,7 +164,10 @@ class SpriteInfo extends React.Component {
             <Box className={styles.spriteInfo}>
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <Label text={sprite}>
+                        <Label
+                            above={labelAbove}
+                            text={sprite}
+                        >
                             {spriteNameInput}
                         </Label>
                     </div>
@@ -163,7 +175,7 @@ class SpriteInfo extends React.Component {
                     {yPosition}
                 </div>
                 <div className={classNames(styles.row, styles.rowSecondary)}>
-                    <div className={styles.group}>
+                    <div className={labelAbove ? styles.column : styles.group}>
                         {
                             stageSize === STAGE_DISPLAY_SIZES.large ?
                                 <Label
@@ -216,6 +228,7 @@ class SpriteInfo extends React.Component {
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
+                            above={labelAbove}
                             text={sizeLabel}
                         >
                             <BufferedInput
@@ -233,6 +246,7 @@ class SpriteInfo extends React.Component {
                         <DirectionPicker
                             direction={this.props.direction}
                             disabled={this.props.disabled}
+                            labelAbove={labelAbove}
                             rotationStyle={this.props.rotationStyle}
                             onChangeDirection={this.props.onChangeDirection}
                             onChangeRotationStyle={this.props.onChangeRotationStyle}

@@ -74,10 +74,6 @@
     border: none;
 }
 
-.question-wrapper {
-    position: absolute;
-}
-
 /* adjust monitors when stage is standard size:
 shift them down and right to compensate for the stage's border */
 .stage-wrapper .monitor-wrapper {
@@ -93,7 +89,7 @@ to adjust for the border using a different method */
     padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
 }
 
-.monitor-wrapper, .color-picker-wrapper, .queston-wrapper {
+.monitor-wrapper, .color-picker-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -110,3 +106,24 @@ to adjust for the border using a different method */
     z-index: $z-index-dragging-sprite;
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
  }
+
+.stage-bottom-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.mic-indicator {
+    transform-origin: bottom right;
+    z-index: $z-index-stage-indicator;
+    pointer-events: none;
+    align-self: flex-end;
+}
+
+.question-wrapper {
+    pointer-events: auto;
+}

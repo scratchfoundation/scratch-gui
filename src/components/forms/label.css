@@ -7,6 +7,16 @@
     align-items: center;
 }
 
+.input-group-column {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-group-column span {
+    margin-bottom: .25rem;
+}
+
 .input-label, .input-label-secondary {
     font-size: 0.625rem;
     user-select: none;
@@ -15,11 +25,11 @@
     white-space: nowrap;
 }
 
-[dir="ltr"] .input-label, .input-label-secondary {
+[dir="ltr"] .input-label, [dir="ltr"] .input-label-secondary {
     margin-right: .5rem;
 }
 
-[dir="rtl"] .input-label, .input-label-secondary {
+[dir="rtl"] .input-label, [dir="rtl"] .input-label-secondary {
     margin-left: .5rem;
 }
 

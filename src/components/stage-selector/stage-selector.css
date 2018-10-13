@@ -4,6 +4,7 @@
 $header-height: calc($stage-menu-height - 2px);
 
 .stage-selector {
+    background-clip: padding-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,6 +79,7 @@ $header-height: calc($stage-menu-height - 2px);
     font-size: 0.6rem;
     color: $text-primary;
     user-select: none;
+    text-align: center;
 }
 
 .costume-canvas {

@@ -17,17 +17,9 @@ export default function (Blockly) {
         return [code, order];
     };
 
-    Blockly.Ruby.math_angle = function (block) {
-        const code = parseFloat(block.getFieldValue('NUM'));
-        const order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
-        return [code, order];
-    };
-
-    Blockly.Ruby.math_whole_number = function (block) {
-        const code = parseFloat(block.getFieldValue('NUM'));
-        const order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
-        return [code, order];
-    };
+    ['math_integer', 'math_whole_number', 'math_positive_number', 'math_angle'].forEach(function(name) {
+        Blockly.Ruby[name] = Blockly.Ruby.math_number;
+    });
 
     return Blockly;
 }

@@ -45,7 +45,12 @@ const SpriteSelectorItem = props => (
         <div className={styles.spriteInfo}>
             <div className={styles.spriteName}>{props.name}</div>
             {props.details ? (
-                <div className={styles.spriteDetails}>{props.details}</div>
+                <div
+                    className={styles.spriteDetails}
+                    dir="ltr"
+                >
+                    {props.details}
+                </div>
             ) : null}
         </div>
         {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (

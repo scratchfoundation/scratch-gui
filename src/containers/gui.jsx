@@ -47,23 +47,27 @@ class GUI extends React.Component {
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
         this.props.vm.initialized = true;
-        const fontPromises = [];
-        if (document.fonts &&
-            typeof document.fonts.values === 'function' &&
-            typeof document.fonts.values()[Symbol.iterator] === 'function') {
-            for (const fontFace of document.fonts.values()) {
-                fontPromises.push(fontFace.loaded);
-                fontFace.load();
+
+        const getFontPromises = () => {
+            const fontPromises = [];
+            if (document.fonts &&
+                typeof document.fonts.values === 'function' &&
+                typeof document.fonts.values()[Symbol.iterator] === 'function') {
+                for (const fontFace of document.fonts.values()) {
+                    fontPromises.push(fontFace.loaded);
+                    fontFace.load();
+                }
             }
-        }
+            return fontPromises;
+        };
 
         if (document.readyState === 'complete') {
-            Promise.all(fontPromises).then(this.loadProject);
+            Promise.all(getFontPromises()).then(this.loadProject);
         } else {
             document.onreadystatechange = () => {
                 if (document.readyState !== 'complete') return;
                 document.onreadystatechange = null;
-                Promise.all(fontPromises).then(this.loadProject);
+                Promise.all(getFontPromises()).then(this.loadProject);
             };
         }
     }

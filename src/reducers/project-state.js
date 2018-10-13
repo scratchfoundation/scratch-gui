@@ -83,7 +83,7 @@ const reducer = function (state, action) {
         if (state.loadingState === LoadingState.CREATING_NEW) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.SHOWING_WITH_ID,
-                id: action.id
+                projectId: action.id
             });
         }
         return state;
@@ -160,10 +160,15 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_PROJECT_ID:
-        // if we were already showing something, only fetch project if the
-        // project id has changed. This prevents re-fetching projects unnecessarily.
+        // if we were already showing a project, and a different projectId is set, only fetch that project if:
+        // * new projectId can be parsed into a valid number; and
+        // * the project id has changed.
+        // This prevents re-fetching projects unnecessarily.
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
-            if (state.projectId !== action.id) {
+            // use parseInt to compare because parseInt(null) !== parseInt(0),
+            // and parseInt(1) === parseInt('1').
+            if (!isNaN(parseInt(action.id, 10)) &&
+                (parseInt(state.projectId, 10) !== parseInt(action.id, 10))) {
                 return Object.assign({}, state, {
                     loadingState: LoadingState.FETCHING_WITH_ID,
                     projectId: action.id

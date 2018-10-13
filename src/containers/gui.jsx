@@ -48,7 +48,7 @@ class GUI extends React.Component {
         this.props.vm.attachAudioEngine(this.audioEngine);
         this.props.vm.initialized = true;
         const fontPromises = [];
-        if (document.fonts && document.fonts.values.length) {
+        if (document.fonts && document.fonts.values() && document.fonts.values().next) {
             for (const fontFace of document.fonts.values()) {
                 fontPromises.push(fontFace.loaded);
                 fontFace.load();

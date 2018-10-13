@@ -6,7 +6,7 @@
 export default function (Blockly) {
     Blockly.Ruby.control_repeat = function (block) {
         const times = Blockly.Ruby.valueToCode(block, 'TIMES', Blockly.Ruby.ORDER_NONE) || '0';
-        const branch = Blockly.Ruby.statementToCode(block, 'SUBSTACK') || '\n'
+        const branch = Blockly.Ruby.statementToCode(block, 'SUBSTACK') || '\n';
 
         return `${times}.times do\n${branch}end\n`;
     };

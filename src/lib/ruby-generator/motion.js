@@ -88,7 +88,7 @@ export default function (Blockly) {
         return `set_y(${y})\n`;
     };
 
-    Blockly.Ruby.motion_ifonedgebounce = function (block) {
+    Blockly.Ruby.motion_ifonedgebounce = function () {
         return 'if_on_edge_bounce()\n';
     };
 
@@ -97,15 +97,15 @@ export default function (Blockly) {
         return `set_rotation_style("${style}")\n`;
     };
 
-    Blockly.Ruby.motion_xposition = function (block) {
+    Blockly.Ruby.motion_xposition = function () {
         return ['x', Blockly.Ruby.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.motion_yposition = function (block) {
+    Blockly.Ruby.motion_yposition = function () {
         return ['y', Blockly.Ruby.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.motion_direction = function (block) {
+    Blockly.Ruby.motion_direction = function () {
         return ['direction', Blockly.Ruby.ORDER_ATOMIC];
     };
 

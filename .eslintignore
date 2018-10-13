@@ -2,5 +2,5 @@ node_modules/*
 build/*
 dist/*
 
-src/lib/ruby-generator/*
-src/lib/ruby-generator.js
+src/lib/ruby-generator/index.js
+src/lib/ruby-generator/generated.js

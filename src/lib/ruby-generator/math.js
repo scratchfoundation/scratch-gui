@@ -4,7 +4,6 @@
  * @return {Blockly} Blockly defined Ruby generator.
  */
 export default function (Blockly) {
-
     Blockly.Ruby.math_number = function (block) {
         let code = parseFloat(block.getFieldValue('NUM'));
         let order;
@@ -15,6 +14,12 @@ export default function (Blockly) {
         } else {
             order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
         }
+        return [code, order];
+    };
+
+    Blockly.Ruby.math_angle = function (block) {
+        const code = parseFloat(block.getFieldValue('NUM'));
+        const order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
         return [code, order];
     };
 

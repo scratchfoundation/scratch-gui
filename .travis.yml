@@ -17,7 +17,7 @@ install:
 - npm --production=false install
 - npm --production=false update
 script:
-- npm run build
+- npm run clean && $(npm bin)/webpack --colors --bail
 deploy:
 - provider: script
   on:

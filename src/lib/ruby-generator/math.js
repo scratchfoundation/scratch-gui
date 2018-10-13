@@ -17,7 +17,7 @@ export default function (Blockly) {
         return [code, order];
     };
 
-    ['math_integer', 'math_whole_number', 'math_positive_number', 'math_angle'].forEach(function(name) {
+    ['math_integer', 'math_whole_number', 'math_positive_number', 'math_angle'].forEach(name => {
         Blockly.Ruby[name] = Blockly.Ruby.math_number;
     });
 

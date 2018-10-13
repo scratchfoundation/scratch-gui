@@ -21,36 +21,33 @@ export default function (Blockly) {
 
     Blockly.Ruby.motion_goto = function (block) {
         const place = Blockly.Ruby.valueToCode(block, 'TO', Blockly.Ruby.ORDER_NONE) || '0';
-        return `go("${place}")\n`;
+        return `go_to(${place})\n`;
     };
 
     Blockly.Ruby.motion_goto_menu = function (block) {
         const place = block.getFieldValue('TO') || null;
-        return [place, Blockly.Ruby.ORDER_ATOMIC];
+        return [Blockly.Ruby.specialSymbolToCode(place), Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.motion_gotoxy = function (block) {
         const x = Blockly.Ruby.valueToCode(block, 'X', Blockly.Ruby.ORDER_NONE) || '0';
         const y = Blockly.Ruby.valueToCode(block, 'Y', Blockly.Ruby.ORDER_NONE) || '0';
-        return `go_to_xy(${x}, ${y})\n`;
+        return `go_to([${x}, ${y}])\n`;
     };
 
     Blockly.Ruby.motion_glideto = function (block) {
         const secs = Blockly.Ruby.valueToCode(block, 'SECS', Blockly.Ruby.ORDER_NONE) || '0';
         const place = Blockly.Ruby.valueToCode(block, 'TO', Blockly.Ruby.ORDER_NONE) || '0';
-        return `glide(${secs}, "${place}")\n`;
+        return `glide(${place}, secs: ${secs})\n`;
     };
 
-    Blockly.Ruby.motion_glideto_menu = function (block) {
-        const place = block.getFieldValue('TO') || null;
-        return [place, Blockly.Ruby.ORDER_ATOMIC];
-    };
+    Blockly.Ruby.motion_glideto_menu = Blockly.Ruby.motion_goto_menu;
 
     Blockly.Ruby.motion_glidesecstoxy = function (block) {
         const secs = Blockly.Ruby.valueToCode(block, 'SECS', Blockly.Ruby.ORDER_NONE) || '0';
         const x = Blockly.Ruby.valueToCode(block, 'X', Blockly.Ruby.ORDER_NONE) || '0';
         const y = Blockly.Ruby.valueToCode(block, 'Y', Blockly.Ruby.ORDER_NONE) || '0';
-        return `glidesecs_to_xy(${secs}, ${x}, ${y})\n`;
+        return `glide([${x}, ${y}], secs: ${secs})\n`;
     };
 
     Blockly.Ruby.motion_pointindirection = function (block) {
@@ -70,26 +67,26 @@ export default function (Blockly) {
 
     Blockly.Ruby.motion_changexby = function (block) {
         const dx = Blockly.Ruby.valueToCode(block, 'DX', Blockly.Ruby.ORDER_NONE) || '0';
-        return `change_x_by(${dx})\n`;
+        return `self.x += ${dx}\n`;
     };
 
     Blockly.Ruby.motion_setx = function (block) {
         const x = Blockly.Ruby.valueToCode(block, 'X', Blockly.Ruby.ORDER_NONE) || '0';
-        return `set_x(${x})\n`;
+        return `self.x = ${x}\n`;
     };
 
     Blockly.Ruby.motion_changeyby = function (block) {
         const dy = Blockly.Ruby.valueToCode(block, 'DY', Blockly.Ruby.ORDER_NONE) || '0';
-        return `change_y_by(${dy})\n`;
+        return `self.y += ${dy}\n`;
     };
 
     Blockly.Ruby.motion_sety = function (block) {
         const y = Blockly.Ruby.valueToCode(block, 'Y', Blockly.Ruby.ORDER_NONE) || '0';
-        return `set_y(${y})\n`;
+        return `self.y = ${y}\n`;
     };
 
     Blockly.Ruby.motion_ifonedgebounce = function () {
-        return 'if_on_edge_bounce()\n';
+        return 'if_on_edge_bounce\n';
     };
 
     Blockly.Ruby.motion_setrotationstyle = function (block) {

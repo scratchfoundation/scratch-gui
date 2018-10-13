@@ -335,6 +335,27 @@ export default function (Blockly) {
         return this.blockToCode_(block);
     };
 
+    Blockly.Ruby.SpecialSymbols = [
+        '_myself_',
+        '_mouse_',
+        '_edge_',
+        '_random_',
+        '_stage_',
+    ];
+
+    Blockly.Ruby.isSpecialSymbol = function(name) {
+        return this.SpecialSymbols.includes(name);
+    };
+
+    Blockly.Ruby.specialSymbolToCode = function(name) {
+        if (this.isSpecialSymbol(name)) {
+            return `:${name}`;
+        }
+        else {
+            return name;
+        }
+    };
+
     Blockly = GeneratedBlocks(Blockly);
 
     Blockly = MotionBlocks(Blockly);

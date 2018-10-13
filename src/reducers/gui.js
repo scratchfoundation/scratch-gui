@@ -8,11 +8,12 @@ import blockDragReducer, {blockDragInitialState} from './block-drag';
 import editorTabReducer, {editorTabInitialState} from './editor-tab';
 import hoveredTargetReducer, {hoveredTargetInitialState} from './hovered-target';
 import menuReducer, {menuInitialState} from './menus';
+import micIndicatorReducer, {micIndicatorInitialState} from './mic-indicator';
 import modalReducer, {modalsInitialState} from './modals';
 import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
-import projectIdReducer, {projectIdInitialState} from './project-id';
+import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
@@ -39,10 +40,11 @@ const guiInitialState = {
     hoveredTarget: hoveredTargetInitialState,
     stageSize: stageSizeInitialState,
     menus: menuInitialState,
+    micIndicator: micIndicatorInitialState,
     modals: modalsInitialState,
     monitors: monitorsInitialState,
     monitorLayout: monitorLayoutInitialState,
-    projectId: projectIdInitialState,
+    projectState: projectStateInitialState,
     projectTitle: projectTitleInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
@@ -106,10 +108,11 @@ const guiReducer = combineReducers({
     hoveredTarget: hoveredTargetReducer,
     stageSize: stageSizeReducer,
     menus: menuReducer,
+    micIndicator: micIndicatorReducer,
     modals: modalReducer,
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,
-    projectId: projectIdReducer,
+    projectState: projectStateReducer,
     projectTitle: projectTitleReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,

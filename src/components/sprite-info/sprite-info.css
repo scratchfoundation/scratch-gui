@@ -2,7 +2,6 @@
 @import "../../css/colors.css";
 
 .sprite-info {
-    height: $sprite-info-height;
     padding: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
@@ -27,6 +26,16 @@
     display: inline-flex;
     flex-direction: row; /* makes columns, for each label/form group */
     align-items: center;
+}
+
+.column {
+    display: inline-flex;
+    flex-direction: column; /* put label above input */
+    align-items: flex-start;
+}
+
+.column span {
+    margin-bottom: .25rem;
 }
 
 .icon-wrapper {

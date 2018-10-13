@@ -7,6 +7,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import analytics from '../lib/analytics';
 import log from '../lib/log';
 import {setProjectTitle} from '../reducers/project-title';
+import {LoadingStates, onLoadedProject, onProjectUploadStarted} from '../reducers/project-state';
 
 import {
     openLoadingProject,
@@ -14,20 +15,19 @@ import {
 } from '../reducers/modals';
 
 /**
- * Project loader component passes a file input, load handler and props to its child.
+ * SBFileUploader component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
- *     function (renderFileInput, loadProject, props) {}
+ *     function (renderFileInput, loadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <ProjectLoader>{(renderFileInput, loadProject, props) => (
+ * <SBFileUploader>{(renderFileInput, loadProject) => (
  *     <MyCoolComponent
  *         onClick={loadProject}
- *         {...props}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
- * )}</ProjectLoader>
+ * )}</SBFileUploader>
  */
 
 const messages = defineMessages({
@@ -38,7 +38,7 @@ const messages = defineMessages({
     }
 });
 
-class ProjectLoader extends React.Component {
+class SBFileUploader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -48,6 +48,7 @@ class ProjectLoader extends React.Component {
             'handleClick'
         ]);
     }
+    // called when user has finished selecting a file to upload
     handleChange (e) {
         // Remove the hash if any (without triggering a hash change event or a reload)
         history.replaceState({}, document.title, '.');
@@ -60,7 +61,7 @@ class ProjectLoader extends React.Component {
                     action: 'Import Project File',
                     nonInteraction: true
                 });
-                this.props.closeLoadingState();
+                this.props.onLoadingFinished(this.props.loadingState);
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
@@ -68,23 +69,26 @@ class ProjectLoader extends React.Component {
             .catch(error => {
                 log.warn(error);
                 alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
-                this.props.closeLoadingState();
+                this.props.onLoadingFinished(this.props.loadingState);
                 // Reset the file input after project is loaded
                 // This is necessary in case the user wants to reload a project
                 thisFileInput.value = null;
             });
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
-            this.props.openLoadingState();
+            this.props.onLoadingStarted();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
+            // extract the title from the file and set it as current project title
             if (thisFileInput.files[0].name) {
                 const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
                 if (matches) {
-                    this.props.onSetProjectTitle(matches[1].substring(0, 100));
+                    const truncatedProjectTitle = matches[1].substring(0, 100);
+                    this.props.onSetProjectTitle(truncatedProjectTitle);
                 }
             }
         }
     }
     handleClick () {
+        // open filesystem browsing window
         this.fileInput.click();
     }
     setFileInput (input) {
@@ -102,41 +106,39 @@ class ProjectLoader extends React.Component {
         );
     }
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            children,
-            closeLoadingState,
-            openLoadingState,
-            vm,
-            /* eslint-enable no-unused-vars */
-            ...props
-        } = this.props;
-        return this.props.children(this.renderFileInput, this.handleClick, props);
+        return this.props.children(this.renderFileInput, this.handleClick);
     }
 }
 
-ProjectLoader.propTypes = {
+SBFileUploader.propTypes = {
     children: PropTypes.func,
-    closeLoadingState: PropTypes.func,
     intl: intlShape.isRequired,
+    loadingState: PropTypes.oneOf(LoadingStates),
+    onLoadingFinished: PropTypes.func,
+    onLoadingStarted: PropTypes.func,
     onSetProjectTitle: PropTypes.func,
-    openLoadingState: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
 };
-
 const mapStateToProps = state => ({
+    loadingState: state.scratchGui.projectState.loadingState,
     vm: state.scratchGui.vm
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeLoadingState: () => dispatch(closeLoadingProject()),
+    onLoadingFinished: loadingState => {
+        dispatch(onLoadedProject(loadingState));
+        dispatch(closeLoadingProject());
+    },
     onSetProjectTitle: title => dispatch(setProjectTitle(title)),
-    openLoadingState: () => dispatch(openLoadingProject())
+    onLoadingStarted: () => {
+        dispatch(openLoadingProject());
+        dispatch(onProjectUploadStarted());
+    }
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(ProjectLoader));
+)(injectIntl(SBFileUploader));

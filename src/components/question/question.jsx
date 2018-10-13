@@ -7,13 +7,14 @@ import enterIcon from './icon--enter.svg';
 const QuestionComponent = props => {
     const {
         answer,
+        className,
         question,
         onChange,
         onClick,
         onKeyPress
     } = props;
     return (
-        <div className={styles.questionWrapper}>
+        <div className={className}>
             <div className={styles.questionContainer}>
                 {question ? (
                     <div className={styles.questionLabel}>{question}</div>
@@ -43,6 +44,7 @@ const QuestionComponent = props => {
 
 QuestionComponent.propTypes = {
     answer: PropTypes.string,
+    className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,

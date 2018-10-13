@@ -1,41 +1,34 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Box from '../box/box.jsx';
-import Button from '../button/button.jsx';
+import Alert from '../../containers/alert.jsx';
 
-import styles from './alert.css';
-
-const Alerts = ({
+const AlertsComponent = ({
+    alertsList,
     className,
-    message,
     onCloseAlert
 }) => (
     <Box
         bounds="parent"
-        className={classNames(className)}
+        className={className}
     >
-        <Box
-            className={styles.alert}
-        >
-            <div className={styles.alertMessage}>
-                {message}
-            </div>
-            <Button
-                className={styles.alertRemoveButton}
-                onClick={onCloseAlert}
-            >
-                { /* eslint-disable react/jsx-no-literals */ }
-                x
-            </Button>
-        </Box>
+        {alertsList.map((a, index) => (
+            <Alert
+                iconURL={a.iconURL}
+                index={index}
+                key={index}
+                message={a.message}
+                onCloseAlert={onCloseAlert}
+            />
+        ))}
     </Box>
 );
 
-Alerts.propTypes = {
+AlertsComponent.propTypes = {
+    alertsList: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
-    message: PropTypes.string.isRequired,
-    onCloseAlert: PropTypes.func.isRequired
+    onCloseAlert: PropTypes.func
 };
 
-export default Alerts;
+export default AlertsComponent;

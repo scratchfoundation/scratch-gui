@@ -37,5 +37,14 @@ export default appTarget => {
         window.onbeforeunload = () => true;
     }
 
-    ReactDOM.render(<WrappedGui backpackOptions={backpackOptions} />, appTarget);
+    ReactDOM.render(
+        <WrappedGui
+            canCreateNew
+            backpackOptions={backpackOptions}
+            canRemix={false}
+            canSave={false}
+            canSaveAsCopy={false}
+            canShare={false}
+        />,
+        appTarget);
 };

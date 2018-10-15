@@ -5,5 +5,11 @@ module.exports = {
     },
     globals: {
         Scratch: true
+    },
+    rules: {
+        'no-warning-comments': [0, {
+            terms: ['todo'],
+            location: 'start'
+        }]
     }
 };

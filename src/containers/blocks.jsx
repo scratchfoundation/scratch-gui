@@ -21,8 +21,13 @@ import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
-import {closeExtensionLibrary} from '../reducers/modals';
+import {closeExtensionLibrary, openSoundRecorder} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
+
+import {
+    activateTab,
+    SOUNDS_TAB_INDEX
+} from '../reducers/editor-tab';
 
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
@@ -44,6 +49,7 @@ class Blocks extends React.Component {
             'handleConnectionModalStart',
             'handleConnectionModalClose',
             'handleStatusButtonUpdate',
+            'handleOpenSoundRecorder',
             'handlePromptStart',
             'handlePromptCallback',
             'handlePromptClose',
@@ -63,6 +69,8 @@ class Blocks extends React.Component {
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
+        this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
+
         this.state = {
             workspaceMetrics: {},
             prompt: null,
@@ -395,6 +403,9 @@ class Blocks extends React.Component {
     handleStatusButtonUpdate () {
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
     }
+    handleOpenSoundRecorder () {
+        this.props.onOpenSoundRecorder();
+    }
     handlePromptCallback (input, optionSelection) {
         this.state.prompt.callback(
             input,
@@ -423,6 +434,7 @@ class Blocks extends React.Component {
             isRtl,
             isVisible,
             onActivateColorPicker,
+            onOpenSoundRecorder,
             updateToolboxState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
@@ -486,6 +498,7 @@ Blocks.propTypes = {
     messages: PropTypes.objectOf(PropTypes.string),
     onActivateColorPicker: PropTypes.func,
     onActivateCustomProcedures: PropTypes.func,
+    onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
@@ -565,6 +578,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
+    onOpenSoundRecorder: () => {
+        dispatch(activateTab(SOUNDS_TAB_INDEX));
+        dispatch(openSoundRecorder());
+    },
     onRequestCloseExtensionLibrary: () => {
         dispatch(closeExtensionLibrary());
     },

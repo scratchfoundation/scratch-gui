@@ -15,10 +15,15 @@ class Alert extends React.Component {
         this.props.onCloseAlert(this.props.index);
     }
     render () {
+        const {
+            index, // eslint-disable-line no-unused-vars
+            iconURL,
+            message
+        } = this.props;
         return (
             <AlertComponent
-                iconURL={this.props.iconURL}
-                message={this.props.message}
+                iconURL={iconURL}
+                message={message}
                 onCloseAlert={this.handleOnCloseAlert}
             />
         );

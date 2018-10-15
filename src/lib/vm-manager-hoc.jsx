@@ -104,6 +104,7 @@ const vmManagerHOC = function (WrappedComponent) {
         onLoadedProject: loadingState => dispatch(onLoadedProject(loadingState))
     });
 
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
         {}, stateProps, dispatchProps, ownProps
     );

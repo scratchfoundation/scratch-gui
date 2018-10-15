@@ -109,7 +109,7 @@ const mapStateToProps = state => ({
     soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
     tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
     rubyTabVisible: state.scratchGui.editorTab.activeTabIndex === RUBY_TAB_INDEX,
-    rubyCode: state.scratchGui.rubyCode,
+    rubyCode: state.scratchGui.rubyCode.code,
     vm: state.scratchGui.vm
 });
 

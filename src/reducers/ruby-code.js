@@ -1,7 +1,7 @@
 const UPDATE_RUBYCODE = 'smalruby3-gui/navigation/UPDATE_RUBYCODE';
 
 const initialState = {
-    rubyCode: ''
+    code: ''
 };
 
 const reducer = function (state, action) {
@@ -9,7 +9,7 @@ const reducer = function (state, action) {
     switch (action.type) {
     case UPDATE_RUBYCODE:
         return {
-            rubyCode: action.rubyCode
+            code: action.code
         };
     default:
         return state;
@@ -19,7 +19,7 @@ const reducer = function (state, action) {
 const updateRubyCode = function (code) {
     return {
         type: UPDATE_RUBYCODE,
-        rubyCode: code
+        code: code
     };
 };
 

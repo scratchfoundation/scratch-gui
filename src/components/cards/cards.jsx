@@ -69,7 +69,7 @@ const VideoStep = ({video, dragging}) => (
             height="338"
             scrolling="no"
             src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
-            title="Video Player"
+            title="📹"
             width="600"
         />
         <script

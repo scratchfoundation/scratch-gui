@@ -349,9 +349,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
-    rubyCode: PropTypes.shape({
-        rubyCode: PropTypes.string
-    }),
+    rubyCode: PropTypes.string,
     rubyTabVisible: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),

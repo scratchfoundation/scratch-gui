@@ -19,15 +19,13 @@ const RubyTab = ({rubyCode}) => (
             showInvisibles: true
         }}
         theme="clouds"
-        value={rubyCode.rubyCode}
+        value={rubyCode}
         width="100%"
     />
 );
 
 RubyTab.propTypes = {
-    rubyCode: PropTypes.shape({
-        rubyCode: PropTypes.string
-    })
+    rubyCode: PropTypes.string
 };
 
 export default RubyTab;

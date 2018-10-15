@@ -109,6 +109,19 @@
         "tags": []
     },
     {
+        "name": "Air Hockey Saloon",
+        "md5": "c4e9e84fd9244ca43986c2bdb6669ae8.wav",
+        "sampleCount": 176400,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "chill"
+        ]
+    },
+    {
         "name": "Alert",
         "md5": "f62e3bfccab9c23eee781473c94a009c.wav",
         "sampleCount": 21362,
@@ -401,6 +414,18 @@
             "wacky",
             "effects",
             "cartoon"
+        ]
+    },
+    {
+        "name": "Bossa Bossa",
+        "md5": "04ccc72f32e909292adcaf40348be5f3.wav",
+        "sampleCount": 136645,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "latin"
         ]
     },
     {
@@ -1175,6 +1200,19 @@
         ]
     },
     {
+        "name": "Dance Sitar",
+        "md5": "c4e893b927524ffd669898f69d096fd8.wav",
+        "sampleCount": 110505,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "india",
+            "tabla"
+        ]
+    },
+    {
         "name": "Dance Slow Mo",
         "md5": "329ee6f3418c0a569418e102e620edf0.wav",
         "sampleCount": 445643,
@@ -1208,6 +1246,18 @@
             "music",
             "electronic",
             "loops"
+        ]
+    },
+    {
+        "name": "Darkling",
+        "md5": "77ea2403120936066eb6280a47b063fd.wav",
+        "sampleCount": 151201,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
         ]
     },
     {
@@ -1628,6 +1678,19 @@
             "notes",
             "instruments",
             "loops"
+        ]
+    },
+    {
+        "name": "Energetic Dance",
+        "md5": "e213e09ed852c621ba87cde7f95eec79.wav",
+        "sampleCount": 176400,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
         ]
     },
     {
@@ -2216,6 +2279,20 @@
         ]
     },
     {
+        "name": "Inhale",
+        "md5": "c587075453ace1584cf155d6a8de604d.wav",
+        "sampleCount": 165090,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "piano",
+            "chill",
+            "emotional"
+        ]
+    },
+    {
         "name": "Jump",
         "md5": "6fcd64d6357e4ea03704e5f96bfd35ba.wav",
         "sampleCount": 6867,
@@ -2470,6 +2547,19 @@
         ]
     },
     {
+        "name": "Melodic Dubstep",
+        "md5": "906af1e30f19a919d203b2eb307e04ac.wav",
+        "sampleCount": 151216,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
+        ]
+    },
+    {
         "name": "Meow",
         "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
         "sampleCount": 18688,
@@ -2524,6 +2614,31 @@
             "music",
             "percussion",
             "drums"
+        ]
+    },
+    {
+        "name": "Mystery",
+        "md5": "a822b56063729f4f42f9a62e6010768b.wav",
+        "sampleCount": 94315,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
+        ]
+    },
+    {
+        "name": "Nephilim",
+        "md5": "287c477da485506c5b4ce37c57a64b5f.wav",
+        "sampleCount": 150479,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "games",
+            "electronic"
         ]
     },
     {
@@ -2656,6 +2771,21 @@
         ]
     },
     {
+        "name": "Pookatori And Friends",
+        "md5": "fc6e9cc9ba13c7e4ebb1af6cd7c90c49.wav",
+        "sampleCount": 171419,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "8bit",
+            "8-bit",
+            "games",
+            "electronic"
+        ]
+    },
+    {
         "name": "Pop",
         "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
         "sampleCount": 258,
@@ -2705,6 +2835,17 @@
         "format": "adpcm",
         "tags": [
             "sports"
+        ]
+    },
+    {
+        "name": "Reggae Nine Miles",
+        "md5": "19211d5ecd34214b6aba947790e63bb0.wav",
+        "sampleCount": 173023,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music"
         ]
     },
     {
@@ -2856,6 +2997,18 @@
         "tags": [
             "animals",
             "bird"
+        ]
+    },
+    {
+        "name": "Send For The Horses",
+        "md5": "84f7b490f0f536cc1337ab7948aa3aa7.wav",
+        "sampleCount": 220500,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
         ]
     },
     {
@@ -3465,6 +3618,19 @@
         ]
     },
     {
+        "name": "Trapped",
+        "md5": "8c2ae70ee6a15c8d58004df7c4718de1.wav",
+        "sampleCount": 147326,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
+        ]
+    },
+    {
         "name": "Triumph",
         "md5": "072f4d9a3dfd2a082d50ff90ac7dc8f2.wav",
         "sampleCount": 89280,
@@ -3511,6 +3677,20 @@
             "notes",
             "music",
             "instruments"
+        ]
+    },
+    {
+        "name": "Variations 1",
+        "md5": "646ea2f42ab04b54f1359ccfac958561.wav",
+        "sampleCount": 152874,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "piano",
+            "classical",
+            "bach"
         ]
     },
     {

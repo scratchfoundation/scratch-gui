@@ -23,7 +23,7 @@ test('initialState', () => {
     expect(projectStateReducer(defaultState, {type: 'anything'}).loadingState).toBe(LoadingState.NOT_LOADED);
 });
 
-test('onCreated with projectId type string', () => {
+test('onCreated with projectId type string shows project with that id', () => {
     const initialState = {
         projectId: null,
         loadingState: LoadingState.CREATING_NEW
@@ -34,7 +34,7 @@ test('onCreated with projectId type string', () => {
     expect(resultState.projectId).toBe('100');
 });
 
-test('onCreated with projectId type number', () => {
+test('onCreated with projectId type number shows project with that id', () => {
     const initialState = {
         projectId: null,
         loadingState: LoadingState.CREATING_NEW
@@ -45,7 +45,7 @@ test('onCreated with projectId type number', () => {
     expect(resultState.projectId).toBe(100);
 });
 
-test('onFetchedProjectData with id', () => {
+test('onFetchedProjectData with id loads project data into vm', () => {
     const initialState = {
         projectData: null,
         loadingState: LoadingState.FETCHING_WITH_ID
@@ -56,7 +56,7 @@ test('onFetchedProjectData with id', () => {
     expect(resultState.projectData).toBe('1010101');
 });
 
-test('onFetchedProjectData new', () => {
+test('onFetchedProjectData new loads project data into vm', () => {
     const initialState = {
         projectData: null,
         loadingState: LoadingState.FETCHING_NEW_DEFAULT
@@ -67,7 +67,7 @@ test('onFetchedProjectData new', () => {
     expect(resultState.projectData).toBe('1010101');
 });
 
-test('onFetchedProjectData new, to save', () => {
+test('onFetchedProjectData new, to save loads project data into vm, prepares to save next', () => {
     const initialState = {
         projectData: null,
         loadingState: LoadingState.FETCHING_NEW_DEFAULT_TO_SAVE
@@ -78,7 +78,7 @@ test('onFetchedProjectData new, to save', () => {
     expect(resultState.projectData).toBe('1010101');
 });
 
-test('onLoadedProject upload', () => {
+test('onLoadedProject upload shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
@@ -87,7 +87,7 @@ test('onLoadedProject upload', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject with id', () => {
+test('onLoadedProject with id shows with id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_WITH_ID
     };
@@ -96,7 +96,7 @@ test('onLoadedProject with id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
-test('onLoadedProject new', () => {
+test('onLoadedProject new shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
@@ -105,7 +105,7 @@ test('onLoadedProject new', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject new, to save', () => {
+test('onLoadedProject new, to save shows with id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_NEW_DEFAULT_TO_SAVE
     };
@@ -114,7 +114,7 @@ test('onLoadedProject new, to save', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
-test('onUpdated with id', () => {
+test('onUpdated with id shows with id', () => {
     const initialState = {
         loadingState: LoadingState.SAVING_WITH_ID
     };
@@ -123,7 +123,7 @@ test('onUpdated with id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
-test('onUpdated with id, before new', () => {
+test('onUpdated with id, before new fetches default project', () => {
     const initialState = {
         loadingState: LoadingState.SAVING_WITH_ID_BEFORE_NEW
     };
@@ -132,7 +132,7 @@ test('onUpdated with id, before new', () => {
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT_TO_SAVE);
 });
 
-test('setProjectId with same id as before, should not fetch', () => {
+test('setProjectId with same id as before, should show with id, not fetch', () => {
     const initialState = {
         projectId: 100,
         loadingState: LoadingState.SHOWING_WITH_ID
@@ -143,7 +143,7 @@ test('setProjectId with same id as before, should not fetch', () => {
     expect(resultState.projectId).toBe(100);
 });
 
-test('setProjectId with different id as before, should fetch', () => {
+test('setProjectId with different id as before, should fetch with id, not show with id', () => {
     const initialState = {
         projectId: 99,
         loadingState: LoadingState.SHOWING_WITH_ID
@@ -154,7 +154,7 @@ test('setProjectId with different id as before, should fetch', () => {
     expect(resultState.projectId).toBe(100);
 });
 
-test('setProjectId with same id as before, but not same type, should not fetch', () => {
+test('setProjectId with same id as before, but not same type, should show with id, not fetch', () => {
     const initialState = {
         projectId: '100',
         loadingState: LoadingState.SHOWING_WITH_ID
@@ -165,7 +165,7 @@ test('setProjectId with same id as before, but not same type, should not fetch',
     expect(resultState.projectId).toBe('100');
 });
 
-test('setProjectId provided a null id should not fetch', () => {
+test('setProjectId provided a null id should show with id, not fetch', () => {
     const initialState = {
         projectId: '100',
         loadingState: LoadingState.SHOWING_WITH_ID
@@ -176,7 +176,7 @@ test('setProjectId provided a null id should not fetch', () => {
     expect(resultState.projectId).toBe('100');
 });
 
-test('requestNewProject when can\'t save', () => {
+test('requestNewProject when can\'t save should fetch default project without id', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID
     };
@@ -185,7 +185,7 @@ test('requestNewProject when can\'t save', () => {
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT);
 });
 
-test('requestNewProject when can save', () => {
+test('requestNewProject when can save, should save and prepare to fetch default project', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
@@ -194,7 +194,7 @@ test('requestNewProject when can save', () => {
     expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID_BEFORE_NEW);
 });
 
-test('onProjectUploadStarted initial load', () => {
+test('onProjectUploadStarted when project not loaded should load', () => {
     const initialState = {
         loadingState: LoadingState.NOT_LOADED
     };
@@ -203,7 +203,7 @@ test('onProjectUploadStarted initial load', () => {
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('onProjectUploadStarted when showing project with id', () => {
+test('onProjectUploadStarted when showing project with id should load', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
@@ -212,7 +212,7 @@ test('onProjectUploadStarted when showing project with id', () => {
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('onProjectUploadStarted when showing project without id', () => {
+test('onProjectUploadStarted when showing project without id should load', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID
     };
@@ -221,7 +221,7 @@ test('onProjectUploadStarted when showing project without id', () => {
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('saveProject', () => {
+test('saveProject should prepare to save', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
@@ -230,7 +230,7 @@ test('saveProject', () => {
     expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID);
 });
 
-test('onError from unloaded state', () => {
+test('onError from unloaded state should show error', () => {
     const initialState = {
         errStr: null,
         loadingState: LoadingState.NOT_LOADED
@@ -241,7 +241,7 @@ test('onError from unloaded state', () => {
     expect(resultState.errStr).toBe('Error string');
 });
 
-test('onError from showing project', () => {
+test('onError from showing project should show error', () => {
     const initialState = {
         errStr: null,
         loadingState: LoadingState.FETCHING_WITH_ID

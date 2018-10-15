@@ -41,10 +41,6 @@ export default appTarget => {
         <WrappedGui
             canCreateNew
             backpackOptions={backpackOptions}
-            canRemix={false}
-            canSave={false}
-            canSaveAsCopy={false}
-            canShare={false}
         />,
         appTarget);
 };

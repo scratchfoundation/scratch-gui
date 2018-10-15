@@ -50,6 +50,9 @@ class GUI extends React.Component {
 
         const getFontPromises = () => {
             const fontPromises = [];
+            // Browsers that support the font loader interface have an iterable document.fonts.values()
+            // Firefox has a mocked out object that doesn't actually implement iterable, which is why
+            // the deep safety check is necessary.
             if (document.fonts &&
                 typeof document.fonts.values === 'function' &&
                 typeof document.fonts.values()[Symbol.iterator] === 'function') {
@@ -61,6 +64,8 @@ class GUI extends React.Component {
             return fontPromises;
         };
 
+        // Font promises must be gathered after the document is loaded, because on Mac Chrome, the promise
+        // objects get replaced and the old ones never resolve.
         if (document.readyState === 'complete') {
             Promise.all(getFontPromises()).then(this.loadProject);
         } else {

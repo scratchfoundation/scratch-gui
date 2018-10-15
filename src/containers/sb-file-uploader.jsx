@@ -79,10 +79,13 @@ class SBFileUploader extends React.Component {
             reader.readAsArrayBuffer(thisFileInput.files[0]);
             // extract the title from the file and set it as current project title
             if (thisFileInput.files[0].name) {
-                const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
+                const matches = thisFileInput.files[0].name.match(/^(.*?)(\.sb[23]?)?$/);
                 if (matches) {
                     const truncatedProjectTitle = matches[1].substring(0, 100);
-                    this.props.onSetProjectTitle(truncatedProjectTitle);
+                    this.props.onSetReduxProjectTitle(truncatedProjectTitle);
+                    if (this.props.onUpdateProjectTitle) {
+                        this.props.onUpdateProjectTitle(truncatedProjectTitle);
+                    }
                 }
             }
         }
@@ -116,7 +119,8 @@ SBFileUploader.propTypes = {
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    onSetProjectTitle: PropTypes.func,
+    onSetReduxProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
@@ -131,7 +135,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(onLoadedProject(loadingState));
         dispatch(closeLoadingProject());
     },
-    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
+    onSetReduxProjectTitle: title => dispatch(setProjectTitle(title)),
     onLoadingStarted: () => {
         dispatch(openLoadingProject());
         dispatch(onProjectUploadStarted());

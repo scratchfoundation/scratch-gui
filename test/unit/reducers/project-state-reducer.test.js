@@ -34,7 +34,7 @@ test('onCreated with projectId type string shows project with that id', () => {
     expect(resultState.projectId).toBe('100');
 });
 
-test('onCreated with projectId type number shows project with that id', () => {
+test('onCreated with projectId type number shows project with id of type number', () => {
     const initialState = {
         projectId: null,
         loadingState: LoadingState.CREATING_NEW
@@ -123,7 +123,7 @@ test('onUpdated with id shows with id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
-test('onUpdated with id, before new fetches default project', () => {
+test('onUpdated with id, before new, fetches default project', () => {
     const initialState = {
         loadingState: LoadingState.SAVING_WITH_ID_BEFORE_NEW
     };
@@ -132,20 +132,31 @@ test('onUpdated with id, before new fetches default project', () => {
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT_TO_SAVE);
 });
 
-test('setProjectId with same id as before, should show with id, not fetch', () => {
+test('setProjectId, with same id as before, should show with id, not fetch', () => {
     const initialState = {
-        projectId: 100,
+        projectId: '100',
         loadingState: LoadingState.SHOWING_WITH_ID
     };
-    const action = setProjectId(100);
+    const action = setProjectId('100');
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-    expect(resultState.projectId).toBe(100);
+    expect(resultState.projectId).toBe('100');
 });
 
-test('setProjectId with different id as before, should fetch with id, not show with id', () => {
+test('setProjectId, with different id as before, should fetch with id, not show with id', () => {
     const initialState = {
         projectId: 99,
+        loadingState: LoadingState.SHOWING_WITH_ID
+    };
+    const action = setProjectId('100');
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.FETCHING_WITH_ID);
+    expect(resultState.projectId).toBe('100');
+});
+
+test('setProjectId, with same id as before, but not same type, should fetch because not ===', () => {
+    const initialState = {
+        projectId: '100',
         loadingState: LoadingState.SHOWING_WITH_ID
     };
     const action = setProjectId(100);
@@ -154,18 +165,7 @@ test('setProjectId with different id as before, should fetch with id, not show w
     expect(resultState.projectId).toBe(100);
 });
 
-test('setProjectId with same id as before, but not same type, should show with id, not fetch', () => {
-    const initialState = {
-        projectId: '100',
-        loadingState: LoadingState.SHOWING_WITH_ID
-    };
-    const action = setProjectId(100);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-    expect(resultState.projectId).toBe('100');
-});
-
-test('setProjectId provided a null id should show with id, not fetch', () => {
+test('setProjectId, provided a null id, should not change state', () => {
     const initialState = {
         projectId: '100',
         loadingState: LoadingState.SHOWING_WITH_ID
@@ -176,7 +176,7 @@ test('setProjectId provided a null id should show with id, not fetch', () => {
     expect(resultState.projectId).toBe('100');
 });
 
-test('requestNewProject when can\'t save should fetch default project without id', () => {
+test('requestNewProject, when can\'t save, should fetch default project without id', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID
     };
@@ -185,7 +185,7 @@ test('requestNewProject when can\'t save should fetch default project without id
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT);
 });
 
-test('requestNewProject when can save, should save and prepare to fetch default project', () => {
+test('requestNewProject, when can save, should save and prepare to fetch default project', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };

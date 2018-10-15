@@ -40,7 +40,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 props.projectId !== null &&
                 typeof props.projectId !== 'undefined'
             ) {
-                this.props.setProjectId(props.projectId);
+                this.props.setProjectId(props.projectId.toString());
             }
         }
         componentDidUpdate (prevProps) {

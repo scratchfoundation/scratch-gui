@@ -17,7 +17,7 @@ const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/START_LOADING_FI
 const START_SAVING = 'scratch-gui/project-state/START_SAVING';
 const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_SAVING_BEFORE_CREATING_NEW';
 
-const defaultProjectId = 0; // hardcoded id of default project
+const defaultProjectId = '0'; // hardcoded id of default project
 
 const LoadingState = keyMirror({
     NOT_LOADED: null,
@@ -160,25 +160,22 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_PROJECT_ID:
-        // if we were already showing a project, and a different projectId is set, only fetch that project if:
-        // * new projectId can be parsed into a valid number; and
-        // * the project id has changed.
-        // This prevents re-fetching projects unnecessarily.
-        if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
-            // use parseInt to compare because parseInt(null) !== parseInt(0),
-            // and parseInt(1) === parseInt('1').
-            if (!isNaN(parseInt(action.id, 10)) &&
-                (parseInt(state.projectId, 10) !== parseInt(action.id, 10))) {
+        // if we were already showing a project, and a different projectId is set, only fetch that project if
+        // projectId is a valid id, and projectId has changed. This prevents re-fetching projects unnecessarily.
+        if (action.id !== null && action.id !== '' && typeof action.id !== 'undefined') {
+            if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
+                if (state.projectId !== action.id) {
+                    return Object.assign({}, state, {
+                        loadingState: LoadingState.FETCHING_WITH_ID,
+                        projectId: action.id
+                    });
+                }
+            } else { // allow any other states to transition to fetching project
                 return Object.assign({}, state, {
                     loadingState: LoadingState.FETCHING_WITH_ID,
                     projectId: action.id
                 });
             }
-        } else { // allow any other states to transition to fetching project
-            return Object.assign({}, state, {
-                loadingState: LoadingState.FETCHING_WITH_ID,
-                projectId: action.id
-            });
         }
         return state;
     case START_FETCHING_NEW_WITHOUT_SAVING:

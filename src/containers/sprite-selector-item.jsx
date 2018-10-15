@@ -46,15 +46,7 @@ class SpriteSelectorItem extends React.Component {
         if (this.props.costumeURL) return this.props.costumeURL;
         if (!this.props.assetId) return null;
 
-        if (this.decodedAssetId === this.props.assetId) {
-            // @todo consider caching more than one URL.
-            return this.cachedUrl;
-        }
-
-        this.decodedAssetId = this.props.assetId;
-        this.cachedUrl = getCostumeUrl(this.props.assetId, this.props.vm);
-
-        return this.cachedUrl;
+        return getCostumeUrl(this.props.assetId, this.props.vm);
     }
     handleMouseUp () {
         this.initialOffset = null;

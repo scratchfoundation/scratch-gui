@@ -1,4 +1,5 @@
 import bindAll from 'lodash.bindall';
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
@@ -21,28 +22,15 @@ class Watermark extends React.Component {
     getCostumeData () {
         if (!this.props.assetId) return null;
 
-        if (this.decodedAssetId === this.props.assetId) {
-            return this.cachedUrl;
-        }
-
-        this.decodedAssetId = this.props.assetId;
-        this.cachedUrl = getCostumeUrl(this.props.assetId, this.props.vm);
-
-        return this.cachedUrl;
+        return getCostumeUrl(this.props.assetId, this.props.vm);
     }
 
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            assetId,
-            vm,
-            /* eslint-enable no-unused-vars */
-            ...props
-        } = this.props;
+        const componentProps = omit(this.props, ['assetId', 'vm']);
         return (
             <WatermarkComponent
                 costumeURL={this.getCostumeData()}
-                {...props}
+                {...componentProps}
             />
         );
     }
@@ -73,11 +61,8 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = () => ({});
-
 const ConnectedComponent = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Watermark);
 
 export default ConnectedComponent;

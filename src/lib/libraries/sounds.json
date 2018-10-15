@@ -855,18 +855,6 @@
         ]
     },
     {
-        "name": "Connect",
-        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
-        "sampleCount": 22623,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
-        ]
-    },
-    {
         "name": "Cough1",
         "md5": "98ec3e1eeb7893fca519aa52cc1ef3c1.wav",
         "sampleCount": 7516,
@@ -1258,18 +1246,6 @@
             "loops",
             "music",
             "cinematic"
-        ]
-    },
-    {
-        "name": "Disconnect",
-        "md5": "56df0714ed1ed455a2befd787a077214.wav",
-        "sampleCount": 27563,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
         ]
     },
     {
@@ -1827,6 +1803,18 @@
             "effects",
             "percussion",
             "human"
+        ]
+    },
+    {
+        "name": "Finish",
+        "md5": "56df0714ed1ed455a2befd787a077214.wav",
+        "sampleCount": 27563,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
         ]
     },
     {
@@ -3357,6 +3345,18 @@
             "wacky",
             "effects",
             "cartoon"
+        ]
+    },
+    {
+        "name": "Start",
+        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
+        "sampleCount": 22623,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
         ]
     },
     {

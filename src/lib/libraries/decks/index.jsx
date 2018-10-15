@@ -455,7 +455,7 @@ export default {
         ),
         img: libraryStory,
         steps: [{
-            video: 'https://www.youtube.com/embed/4p8MegCCBMY'
+            video: 'stah7jjorp'
         },
         {
             title: (
@@ -529,7 +529,7 @@ export default {
                 />
             ),
             image: stepStorySwitchBackdrop
-        },  {
+        }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Hide the Wizard"
@@ -538,7 +538,7 @@ export default {
                 />
             ),
             image: stepStoryHide
-        },{
+        }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Show the Wizard"

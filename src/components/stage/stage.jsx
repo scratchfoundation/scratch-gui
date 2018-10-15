@@ -1,9 +1,22 @@
+/* const script3 = document.createElement('script');
+script3.src = 'https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.js';
+document.head.appendChild(script3);
+
+const script = document.createElement('script');
+script.src = 'https://aframe.io/releases/0.6.1/aframe.min.js';
+document.head.appendChild(script);
+
+const script2 = document.createElement('script');
+script2.src = 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js';
+document.head.appendChild(script2); */
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+
+import 'three';
 import 'aframe';
-import 'arjs';
-import {Sphere, Cylinder, Plane, Sky, Text, Scene} from 'react-aframe-ar';
+import 'ar.js/aframe/build/aframe-ar.js';
 
 import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
@@ -51,46 +64,24 @@ const StageComponent = props => {
                 onDoubleClick={onDoubleClick}
             >
                 {true ? (
-                    <Scene
+                    <a-scene
                         embedded
+                        arjs="sourceType: webcam; debugUIEnabled: false;"
                     >
-                        <Box
-                            shadow
-                            color="#4CC3D9"
-                            position="-1 0.5 -3"
-                            rotation="0 45 0"
-                        />
-                        <Sphere
-                            shadow
+                        <a-sphere
                             color="#EF2D5E"
-                            position="0 1.25 -5"
-                            radius="1.25"
-                        />
-                        <Cylinder
-                            shadow
-                            color="#FFC65D"
-                            height="1.5"
-                            position="1 0.75 -3"
+                            position="0 0.5 0"
                             radius="0.5"
                         />
-                        <Plane
-                            shadow
+                        <a-plane
                             color="#7BC8A4"
-                            height="4"
-                            position="0 0 -4"
+                            height="1"
+                            position="0 0 0"
                             rotation="-90 0 0"
-                            width="4"
+                            width="1"
                         />
-                        <Sky
-                            color="#ECECEC"
-                        />
-                        <Text
-                            align="center"
-                            color="#7BC8A4"
-                            position="0 2.3 -1.5"
-                            value="Hello world, react-aframe-ar!"
-                        />
-                    </Scene>
+                        <a-marker-camera preset="hiro" />
+                    </a-scene>
                 ) : (
                     <DOMElementRenderer
                         className={classNames(

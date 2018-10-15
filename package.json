@@ -41,7 +41,7 @@
     "babel-preset-react": "^6.22.0",
     "base64-loader": "1.0.0",
     "bowser": "1.9.4",
-    "chromedriver": "2.42.0",
+    "chromedriver": "2.42.1",
     "classnames": "2.2.6",
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "2.5.7",

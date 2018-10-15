@@ -50,6 +50,19 @@ import stepRandom from './game/game-random-position.gif';
 import stepGameChangeColor from './game/game-change-color.gif';
 import stepResetScore from './game/game-reset-score.gif';
 
+// Tell A Story
+import libraryStory from './story/story-thumbnail.jpg';
+import stepStoryPickBackdrop from './story/story-pick-backdrop.gif';
+import stepStoryPickSprite from './story/story-pick-sprite.gif';
+import stepStoryCharSaySomething from './story/story-say-something.gif';
+import stepStoryCharAddAnotherSprite from './story/story-pick-another-sprite.gif';
+import stepStoryFlip from './story/story-flip.gif';
+import stepStoryConversation from './story/story-conversation.gif';
+import stepStoryAddAnotherBackdrop from './story/story-add-background-2.gif';
+import stepStorySwitchBackdrop from './story/story-switch-background.gif';
+import stepStoryHide from './story/story-hide-chararcter.gif';
+import stepStoryShow from './story/story-show-chararcter.gif';
+
 // Videos
 import recordASound from './videos/record-a-sound.jpg';
 import glideAroundThumb from './videos/glide-around.jpg';
@@ -432,6 +445,118 @@ export default {
         ],
         urlId: 5
     },
+    'Tell-A-Story': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Tell A Story"
+                description="Name for the 'Tell A Story' how-to"
+                id="gui.howtos.story.name"
+            />
+        ),
+        img: libraryStory,
+        steps: [{
+            video: 'https://www.youtube.com/embed/4p8MegCCBMY'
+        },
+        {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Backdrop"
+                    description="Step name for 'Add a Backdrop' step"
+                    id="gui.howtos.story.step_addbg"
+                />
+            ),
+            image: stepStoryPickBackdrop
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Character"
+                    description="Step name for 'Add a Character' step"
+                    id="gui.howtos.story.step_addsprite"
+                />
+            ),
+            image: stepStoryPickSprite
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.story.step_saysomething"
+                />
+            ),
+            image: stepStoryCharSaySomething
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Another Character"
+                    description="Step name for 'Add Another Character' step"
+                    id="gui.howtos.story.step_addanothersprite"
+                />
+            ),
+            image: stepStoryCharAddAnotherSprite
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Flip Direction"
+                    description="Flip Direction' step"
+                    id="gui.howtos.story.step_flip"
+                />
+            ),
+            image: stepStoryFlip
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Have A Conversation"
+                    description="Step name for 'Have A Conversation' step"
+                    id="gui.howtos.story.step_conversation"
+                />
+            ),
+            image: stepStoryConversation
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Another Backdrop"
+                    description="Step name for 'Add Another Backdrop' step"
+                    id="gui.howtos.story.addanotherbg"
+                />
+            ),
+            image: stepStoryAddAnotherBackdrop
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Switch Backdrops"
+                    description="Step name for 'Switch Backdrops' step"
+                    id="gui.howtos.story.step_swithbg"
+                />
+            ),
+            image: stepStorySwitchBackdrop
+        },  {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Hide the Wizard"
+                    description="Step name for 'Hide the Wizard' step"
+                    id="gui.howtos.story.step_hidewizard"
+                />
+            ),
+            image: stepStoryHide
+        },{
+            title: (
+                <FormattedMessage
+                    defaultMessage="Show the Wizard"
+                    description="Step name for 'Show the Wizard' step"
+                    id="gui.howtos.story.step_showwizard"
+                />
+            ),
+            image: stepStoryShow
+        },
+        {
+            deckIds: [
+                'add-effects',
+                'move-around-with-arrow-keys'
+            ]
+        }
+        ],
+        urlId: 6
+    },
     'add-sprite': {
         name: (
             <FormattedMessage
@@ -459,7 +584,7 @@ export default {
                 ]
             }
         ],
-        urlId: 6
+        urlId: 7
     },
     'add-a-backdrop': {
         name: (
@@ -478,7 +603,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 7
+        urlId: 8
     },
     'change-size': {
         name: (
@@ -497,7 +622,7 @@ export default {
                 'spin-video'
             ]
         }],
-        urlId: 8
+        urlId: 9
     },
     'glide-around': {
         name: (
@@ -516,7 +641,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 9
+        urlId: 10
     },
 
     'record-a-sound': {
@@ -536,7 +661,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 10
+        urlId: 11
     },
     'spin-video': {
         name: (
@@ -555,7 +680,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 11
+        urlId: 12
     },
     'hide-and-show': {
         name: (
@@ -574,7 +699,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 12
+        urlId: 13
     },
 
     'switch-costume': {
@@ -594,7 +719,7 @@ export default {
                 'add-effects'
             ]
         }],
-        urlId: 13
+        urlId: 14
     },
 
     'move-around-with-arrow-keys': {
@@ -614,7 +739,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 14
+        urlId: 15
     },
     'add-effects': {
         name: (
@@ -633,6 +758,6 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 15
+        urlId: 16
     }
 };

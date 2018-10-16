@@ -5,10 +5,6 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
-import Renderer from 'scratch-render';
-import VideoProvider from '../lib/video/video-provider';
-import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
-import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 
 import {
     LoadingStates,
@@ -42,8 +38,8 @@ const vmManagerHOC = function (WrappedComponent) {
             this.props.vm.initialized = true;
         }
         componentDidUpdate (prevProps) {
-            // if project state is LOADING variation, and fonts are loaded,
-            // and that wasn't true until now, load project
+            // if project is in loading state, AND fonts are loaded,
+            // and they weren't both that way until now... load project!
             if (this.props.isLoadingWithId && this.props.fontsLoaded &&
                 (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
                 this.loadProject(this.props.projectData, this.props.loadingState);

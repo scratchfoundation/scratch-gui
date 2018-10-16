@@ -45,15 +45,10 @@ const FontLoaderHOC = function (WrappedComponent) {
             }
         }
         render () {
-            const {
-                /* eslint-disable no-unused-vars */
-                /* eslint-enable no-unused-vars */
-                ...componentProps
-            } = this.props;
             return (
                 <WrappedComponent
                     fontsLoaded={this.state.fontsLoaded}
-                    {...componentProps}
+                    {...this.props}
                 />
             );
         }

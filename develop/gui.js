@@ -112,7 +112,9 @@ exports.default = function (appTarget) {
         };
     }
 
-    _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOptions: backpackOptions }), appTarget);
+    _reactDom2.default.render(_react2.default.createElement(WrappedGui, {
+        backpackOptions: backpackOptions
+    }), appTarget);
 };
 
 /***/ }),

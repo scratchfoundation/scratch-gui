@@ -368,6 +368,7 @@ GUIComponent.defaultProps = {
     canSave: false,
     canSaveAsCopy: false,
     canShare: false,
+    onUpdateProjectTitle: () => {},
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

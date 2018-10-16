@@ -29,6 +29,11 @@ npm start
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
 
 ## Developing alongside other Scratch repositories
+
+### Linking this code to another project's `node_modules/scratch-gui`
+
+#### Configuration
+
 If you wish to develop scratch-gui alongside other scratch repositories that depend on it, you may wish
 to have the other repositories use your local scratch-gui build instead of fetching the current production
 version of the scratch-gui that is found by default using `npm install`.
@@ -43,7 +48,7 @@ To do this:
 
 Instead of `BUILD_MODE=dist npm run build` you can also use `BUILD_MODE=dist npm run watch`, however this may be unreliable.
 
-### Oh no! It didn't work!
+#### Oh no! It didn't work!
 * Follow the recipe above step by step and don't change the order. It is especially important to run npm first because installing after the linking will reset the linking.
 * Make sure the repositories are siblings on your machine's file tree.
 * If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.

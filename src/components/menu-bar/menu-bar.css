@@ -47,10 +47,11 @@
 
 .language-icon {
     height:  1.5rem;
+    vertical-align: middle;
 }
 
 .language-caret {
-    margin-bottom: .625rem;
+    margin: 0 .125rem;
 }
 
 .language-menu {
@@ -98,6 +99,10 @@
 
 .file-group .menu-bar-item {
     padding: 0 0.75rem;
+}
+
+.menu-bar-item.language-menu {
+    padding: 0 0.5rem;
 }
 
 .menu-bar-menu {

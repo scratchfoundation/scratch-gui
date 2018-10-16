@@ -1,10 +1,12 @@
 import _ from 'lodash';
 
 import GeneratedBlocks from './generated.js';
+import MathBlocks from './math.js';
+import TextBlocks from './text.js';
 import MotionBlocks from './motion.js';
+import LooksBlocks from './looks.js';
 import EventBlocks from './event.js';
 import ControlBlocks from './control.js';
-import MathBlocks from './math.js';
 
 /**
  * Define Ruby
@@ -358,10 +360,13 @@ export default function (Blockly) {
 
     Blockly = GeneratedBlocks(Blockly);
 
+    Blockly = MathBlocks(Blockly);
+    Blockly = TextBlocks(Blockly);
+
     Blockly = MotionBlocks(Blockly);
+    Blockly = LooksBlocks(Blockly);
     Blockly = EventBlocks(Blockly);
     Blockly = ControlBlocks(Blockly);
-    Blockly = MathBlocks(Blockly);
 
     return Blockly;
 }

@@ -47,6 +47,13 @@ class SBFileUploader extends React.Component {
             'handleClick'
         ]);
     }
+    getProjectTitleFromFilename (fileInputFilename) {
+        if (!fileInputFilename) return '';
+        // only parse title from files like "filename.sb2" or "filename.sb3"
+        const matches = fileInputFilename.match(/^(.*)\.sb[23]$/);
+        if (!matches) return '';
+        return matches[1].substring(0, 100); // truncate project title to max 100 chars
+    }
     // called when user has finished selecting a file to upload
     handleChange (e) {
         // Remove the hash if any (without triggering a hash change event or a reload)
@@ -76,15 +83,8 @@ class SBFileUploader extends React.Component {
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.props.onLoadingStarted();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
-            // extract the title from the file and set it as current project title
-            if (thisFileInput.files[0].name) {
-                // only parse title from files like "filename.sb2" or "filename.sb3"
-                const matches = thisFileInput.files[0].name.match(/^(.*)\.sb[23]$/);
-                if (matches) {
-                    const truncatedProjectTitle = matches[1].substring(0, 100);
-                    this.props.onUpdateProjectTitle(truncatedProjectTitle);
-                }
-            }
+            const uploadedProjectTitle = this.getProjectTitleFromFilename(thisFileInput.files[0].name);
+            this.props.onUpdateProjectTitle(uploadedProjectTitle);
         }
     }
     handleClick () {
@@ -137,7 +137,13 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
+// Allow incoming props to override redux-provided props. Used to mock in tests.
+const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+    {}, stateProps, dispatchProps, ownProps
+);
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
 )(injectIntl(SBFileUploader));

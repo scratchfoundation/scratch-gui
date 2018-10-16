@@ -161,21 +161,19 @@ const reducer = function (state, action) {
         return state;
     case SET_PROJECT_ID:
         // if we were already showing a project, and a different projectId is set, only fetch that project if
-        // projectId is a valid id, and projectId has changed. This prevents re-fetching projects unnecessarily.
-        if (action.id !== null && action.id !== '' && typeof action.id !== 'undefined') {
-            if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
-                if (state.projectId !== action.id) {
-                    return Object.assign({}, state, {
-                        loadingState: LoadingState.FETCHING_WITH_ID,
-                        projectId: action.id
-                    });
-                }
-            } else { // allow any other states to transition to fetching project
+        // projectId has changed. This prevents re-fetching projects unnecessarily.
+        if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
+            if (state.projectId !== action.id) {
                 return Object.assign({}, state, {
                     loadingState: LoadingState.FETCHING_WITH_ID,
                     projectId: action.id
                 });
             }
+        } else { // allow any other states to transition to fetching project
+            return Object.assign({}, state, {
+                loadingState: LoadingState.FETCHING_WITH_ID,
+                projectId: action.id
+            });
         }
         return state;
     case START_FETCHING_NEW_WITHOUT_SAVING:

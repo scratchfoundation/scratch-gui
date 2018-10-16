@@ -41,6 +41,7 @@ class SBFileUploader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'getProjectTitleFromFilename',
             'renderFileInput',
             'setFileInput',
             'handleChange',

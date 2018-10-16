@@ -51,7 +51,7 @@ class Stage extends React.Component {
             dragId: null,
             colorInfo: null,
             question: null,
-            costume1URL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI(),
+            costume1URL: null,
             costume2URL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI(),
             // costume2URL: this.props.vm.runtime.storage.get('6d5cb1fc136a88a1a7a8e3eb466bdc63').encodeDataURI(),
             // stageURL: this.props.vm.runtime.storage.get('f84989feee2cf462a1c597169777ee3c').encodeDataURI()
@@ -74,6 +74,16 @@ class Stage extends React.Component {
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
+        // ******************** AR *************************
+        // Hack to load targets into A-FRAME after some time
+        setTimeout(() => {
+            this.state.costume1URL = this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI();
+            console.log(this.state.costume1URL);
+            console.log('all targets:');
+            console.log(this.props.vm.runtime.targets);
+            this.forceUpdate(); // force a refresh to show loaded sprites
+        }, 3000);
+        // *************************************************
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||

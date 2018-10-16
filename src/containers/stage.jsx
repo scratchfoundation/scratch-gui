@@ -50,7 +50,12 @@ class Stage extends React.Component {
             dragOffset: null,
             dragId: null,
             colorInfo: null,
-            question: null
+            question: null,
+            costume1URL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI(),
+            costume2URL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI(),
+            // costume2URL: this.props.vm.runtime.storage.get('6d5cb1fc136a88a1a7a8e3eb466bdc63').encodeDataURI(),
+            // stageURL: this.props.vm.runtime.storage.get('f84989feee2cf462a1c597169777ee3c').encodeDataURI()
+            stageURL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI()
         };
         if (this.props.vm.renderer) {
             this.renderer = this.props.vm.renderer;
@@ -376,8 +381,11 @@ class Stage extends React.Component {
             <StageComponent
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
+                costume1URL={this.state.costume1URL}
+                costume2URL={this.state.costume2URL}
                 dragRef={this.setDragCanvas}
                 question={this.state.question}
+                stageURL={this.state.stageURL}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}
                 {...props}

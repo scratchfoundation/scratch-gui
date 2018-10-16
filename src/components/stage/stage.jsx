@@ -16,7 +16,6 @@ import classNames from 'classnames';
 
 import 'three';
 import 'aframe';
-import 'ar.js/aframe/build/aframe-ar.js';
 
 import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
@@ -37,9 +36,12 @@ const StageComponent = props => {
         isColorPicking,
         isFullScreen,
         colorInfo,
+        costume1URL,
+        costume2URL,
         micIndicator,
         question,
         stageSize,
+        stageURL,
         useEditorDragStyle,
         onDeactivateColorPicker,
         onDoubleClick,
@@ -64,23 +66,36 @@ const StageComponent = props => {
                 onDoubleClick={onDoubleClick}
             >
                 {true ? (
-                    <a-scene
-                        embedded
-                        arjs="sourceType: webcam; debugUIEnabled: false;"
-                    >
+                    // 09dc888b0b7df19f70d81588ae73420e
+                    <a-scene embedded>
+                        <a-box
+                            color="#4CC3D9"
+                            position="-1 0.5 -3"
+                            rotation="0 45 0"
+                        />
                         <a-sphere
                             color="#EF2D5E"
-                            position="0 0.5 0"
+                            position="0 1.25 -5"
+                            radius="1.25"
+                        />
+                        <a-cylinder
+                            color="#FFC65D"
+                            height="1.5"
+                            position="1 0.75 -3"
                             radius="0.5"
+                        />
+                        <a-image
+                            position="2.5 0.5 -3"
+                            src={costume1URL}
                         />
                         <a-plane
                             color="#7BC8A4"
-                            height="1"
-                            position="0 0 0"
+                            height="10"
+                            position="1 0 -3"
                             rotation="-90 0 0"
-                            width="1"
+                            width="10"
                         />
-                        <a-marker-camera preset="hiro" />
+                        <a-sky color="#ECECEC" />
                     </a-scene>
                 ) : (
                     <DOMElementRenderer
@@ -160,6 +175,8 @@ const StageComponent = props => {
 StageComponent.propTypes = {
     canvas: PropTypes.instanceOf(Element).isRequired,
     colorInfo: Loupe.propTypes.colorInfo,
+    costume1URL: PropTypes.string,
+    costume2URL: PropTypes.string,
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
@@ -169,6 +186,7 @@ StageComponent.propTypes = {
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    stageURL: PropTypes.string,
     useEditorDragStyle: PropTypes.bool
 };
 StageComponent.defaultProps = {

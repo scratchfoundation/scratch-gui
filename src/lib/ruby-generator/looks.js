@@ -96,7 +96,7 @@ export default function (Blockly) {
     Blockly.Ruby.looks_goforwardbackwardlayers = function (block) {
         const layer = Blockly.Ruby.valueToCode(block, 'NUM', Blockly.Ruby.ORDER_NONE) || '0';
         const forwardBackward = block.getFieldValue('FORWARD_BACKWARD') || null;
-        return `go_layer(${layer}, :${forwardBackward})\n`;
+        return `go_layers(${layer}, :${forwardBackward})\n`;
     };
 
     Blockly.Ruby.looks_costumenumbername = function (block) {

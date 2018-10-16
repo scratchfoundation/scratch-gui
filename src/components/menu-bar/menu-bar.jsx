@@ -622,7 +622,6 @@ MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
-    canReport: PropTypes.bool,
     canSave: PropTypes.bool,
     canSaveAsCopy: PropTypes.bool,
     canShare: PropTypes.bool,

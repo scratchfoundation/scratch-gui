@@ -63,7 +63,6 @@ const GUIComponent = props => {
         cardsVisible,
         canCreateNew,
         canRemix,
-        canReport,
         canSave,
         canSaveAsCopy,
         canShare,
@@ -172,7 +171,6 @@ const GUIComponent = props => {
                     accountNavOpen={accountNavOpen}
                     canCreateNew={canCreateNew}
                     canRemix={canRemix}
-                    canReport={canReport}
                     canSave={canSave}
                     canSaveAsCopy={canSaveAsCopy}
                     canShare={canShare}
@@ -319,7 +317,6 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
-    canReport: PropTypes.bool,
     canSave: PropTypes.bool,
     canSaveAsCopy: PropTypes.bool,
     canShare: PropTypes.bool,
@@ -362,9 +359,8 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
-    canCreateNew: false,
+    canCreateNew: true,
     canRemix: false,
-    canReport: false,
     canSave: false,
     canSaveAsCopy: false,
     canShare: false,

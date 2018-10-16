@@ -165,17 +165,6 @@ test('setProjectId, with same id as before, but not same type, should fetch beca
     expect(resultState.projectId).toBe(100);
 });
 
-test('setProjectId, provided a null id, should not change state', () => {
-    const initialState = {
-        projectId: '100',
-        loadingState: LoadingState.SHOWING_WITH_ID
-    };
-    const action = setProjectId(null);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-    expect(resultState.projectId).toBe('100');
-});
-
 test('requestNewProject, when can\'t save, should fetch default project without id', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID

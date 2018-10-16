@@ -5,6 +5,7 @@ import MathBlocks from './math.js';
 import TextBlocks from './text.js';
 import MotionBlocks from './motion.js';
 import LooksBlocks from './looks.js';
+import SoundBlocks from './sound.js';
 import EventBlocks from './event.js';
 import ControlBlocks from './control.js';
 
@@ -365,6 +366,7 @@ export default function (Blockly) {
 
     Blockly = MotionBlocks(Blockly);
     Blockly = LooksBlocks(Blockly);
+    Blockly = SoundBlocks(Blockly);
     Blockly = EventBlocks(Blockly);
     Blockly = ControlBlocks(Blockly);
 

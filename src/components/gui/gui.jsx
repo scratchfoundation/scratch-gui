@@ -61,6 +61,11 @@ const GUIComponent = props => {
         backpackOptions,
         blocksTabVisible,
         cardsVisible,
+        canCreateNew,
+        canRemix,
+        canSave,
+        canSaveAsCopy,
+        canShare,
         children,
         costumeLibraryVisible,
         costumesTabVisible,
@@ -164,6 +169,11 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    canCreateNew={canCreateNew}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canSaveAsCopy={canSaveAsCopy}
+                    canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
@@ -305,6 +315,11 @@ GUIComponent.propTypes = {
     }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canSaveAsCopy: PropTypes.bool,
+    canShare: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -344,6 +359,11 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
+    canCreateNew: true,
+    canRemix: false,
+    canSave: false,
+    canSaveAsCopy: false,
+    canShare: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

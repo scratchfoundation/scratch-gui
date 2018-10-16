@@ -5,6 +5,10 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
+import Renderer from 'scratch-render';
+import VideoProvider from '../lib/video/video-provider';
+import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
+import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 
 import {
     LoadingStates,
@@ -38,7 +42,10 @@ const vmManagerHOC = function (WrappedComponent) {
             this.props.vm.initialized = true;
         }
         componentDidUpdate (prevProps) {
-            if (this.props.isLoadingWithId && !prevProps.isLoadingWithId) {
+            // if project state is LOADING variation, and fonts are loaded,
+            // and that wasn't true until now, load project
+            if (this.props.isLoadingWithId && this.props.fontsLoaded &&
+                (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
                 this.loadProject(this.props.projectData, this.props.loadingState);
             }
         }
@@ -56,6 +63,7 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                fontsLoaded,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
@@ -65,10 +73,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 vm,
                 ...componentProps
             } = this.props;
-            // don't display anything until we have data loaded
-            if (!this.props.projectData) {
-                return null;
-            }
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
@@ -82,6 +86,7 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onLoadedProject: PropTypes.func,

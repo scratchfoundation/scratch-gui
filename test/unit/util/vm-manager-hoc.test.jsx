@@ -60,6 +60,7 @@ describe('VMManagerHOC', () => {
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                fontsLoaded
                 isLoadingWithId={false}
                 store={store}
                 vm={vm}
@@ -68,6 +69,28 @@ describe('VMManagerHOC', () => {
         );
         mounted.setProps({
             isLoadingWithId: true,
+            loadingState: LoadingState.LOADING_VM_WITH_ID,
+            projectData: '100'
+        });
+        expect(vm.loadProject).toHaveBeenLastCalledWith('100');
+        // nextTick needed since vm.loadProject is async, and we have to wait for it :/
+        process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID));
+    });
+    test('if the fontsLoaded prop becomes true, it loads project data into the vm', () => {
+        vm.loadProject = jest.fn(() => Promise.resolve());
+        const mockedOnLoadedProject = jest.fn();
+        const Component = () => <div />;
+        const WrappedComponent = vmManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                isLoadingWithId
+                store={store}
+                vm={vm}
+                onLoadedProject={mockedOnLoadedProject}
+            />
+        );
+        mounted.setProps({
+            fontsLoaded: true,
             loadingState: LoadingState.LOADING_VM_WITH_ID,
             projectData: '100'
         });
@@ -86,16 +109,5 @@ describe('VMManagerHOC', () => {
             />
         );
         expect(mounted.find('div').length).toBe(1);
-    });
-    test('if there is no projectData, nothing is rendered', () => {
-        const Component = () => <div />;
-        const WrappedComponent = vmManagerHOC(Component);
-        const mounted = mount(
-            <WrappedComponent
-                store={store}
-                vm={vm}
-            />
-        );
-        expect(mounted.find('div').length).toBe(0);
     });
 });

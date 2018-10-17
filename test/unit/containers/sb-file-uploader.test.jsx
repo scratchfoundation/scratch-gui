@@ -1,8 +1,6 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import {mount, shallow} from 'enzyme';
 
-import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
+import {shallowWithIntl} from '../../helpers/intl-helpers.jsx';
 import configureStore from 'redux-mock-store';
 import SBFileUploader from '../../../src/containers/sb-file-uploader';
 import {LoadingState} from '../../../src/reducers/project-state';

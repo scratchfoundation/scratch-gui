@@ -1,83 +1,82 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[2],{
 
-/***/ 1575:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 1255:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+/* harmony import */ var _containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(197);
+/* harmony import */ var _containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(256);
+/* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(102);
+/* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(122);
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(95);
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(668);
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_blocks_only_css__WEBPACK_IMPORTED_MODULE_8__);
 
 
-var _react = __webpack_require__(0);
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(35);
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(6);
 
-var _controls = __webpack_require__(427);
 
-var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(395);
-
-var _blocks2 = _interopRequireDefault(_blocks);
-
-var _gui = __webpack_require__(163);
-
-var _gui2 = _interopRequireDefault(_gui);
-
-var _hashParserHoc = __webpack_require__(185);
-
-var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
-
-var _appStateHoc = __webpack_require__(115);
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
-var _blocksOnly = __webpack_require__(1576);
-
-var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    return { vm: state.scratchGui.vm };
+  return {
+    vm: state.scratchGui.vm
+  };
 };
 
-var VMBlocks = (0, _reactRedux.connect)(mapStateToProps)(_blocks2.default);
-var VMControls = (0, _reactRedux.connect)(mapStateToProps)(_controls2.default);
+var VMBlocks = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"])(mapStateToProps)(_containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]);
+var VMControls = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"])(mapStateToProps)(_containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
 
 var BlocksOnly = function BlocksOnly(props) {
-    return _react2.default.createElement(
-        _gui2.default,
-        props,
-        _react2.default.createElement(VMBlocks, {
-            grow: 1,
-            options: {
-                media: 'static/blocks-media/'
-            }
-        }),
-        _react2.default.createElement(VMControls, { className: _blocksOnly2.default.controls })
-    );
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"], props, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMBlocks, {
+    grow: 1,
+    options: {
+      media: "static/blocks-media/"
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMControls, {
+    className: _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default.a.controls
+  }));
 };
 
-var App = (0, _appStateHoc2.default)((0, _hashParserHoc2.default)(BlocksOnly));
-
+var App = Object(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(Object(_lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(BlocksOnly));
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-
-_reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 1576:
+/***/ 1256:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".blocks-only_controls_2GEvs {\n    position: absolute;\n    z-index: 2;\n    top: 10px;\n    right: 15px;\n}\n", ""]);
+
+// exports
+exports.locals = {
+	"controls": "blocks-only_controls_2GEvs"
+};
+
+/***/ }),
+
+/***/ 668:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1577);
+var content = __webpack_require__(1256);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -91,30 +90,13 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(5)(content, options);
+var update = __webpack_require__(10)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
-/***/ }),
-
-/***/ 1577:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".blocks-only_controls_2GEvs {\n    position: absolute;\n    z-index: 2;\n    top: 10px;\n    right: 15px;\n}\n", ""]);
-
-// exports
-exports.locals = {
-	"controls": "blocks-only_controls_2GEvs"
-};
-
 /***/ })
 
-},[[1575,0]]]);
+},[[1255,0]]]);
 //# sourceMappingURL=blocksonly.js.map

@@ -11,12 +11,12 @@ export default function (Blockly){
 
     Blockly.Ruby.sound_playuntildone = function (block) {
         const sound = Blockly.Ruby.valueToCode(block, 'SOUND_MENU', Blockly.Ruby.ORDER_NONE) || null;
-        return `play_sound(name: "${sound}")\n`;
+        return `Sound.play_until_done(name: "${sound}")\n`;
     };
 
     Blockly.Ruby.sound_play = function (block) {
         const sound = Blockly.Ruby.valueToCode(block, 'SOUND_MENU', Blockly.Ruby.ORDER_NONE) || null;
-        return `play_start(name: "${sound}")\n`;
+        return `Sound.play(name: "${sound}")\n`;
     };
 
     Blockly.Ruby.sound_stopallsounds = function () {
@@ -41,16 +41,16 @@ export default function (Blockly){
 
     Blockly.Ruby.sound_changevolumeby = function (block) {
         const volume = Blockly.Ruby.valueToCode(block, 'VOLUME', Blockly.Ruby.ORDER_NONE) || '0';
-        return `change_volume_by(${volume})\n`;
+        return `Sound.volume += ${volume}\n`;
     };
 
     Blockly.Ruby.sound_setvolumeto = function (block) {
         const volume = Blockly.Ruby.valueToCode(block, 'VOLUME', Blockly.Ruby.ORDER_NONE) || '0';
-        return `set_volume(${volume})\n`;
+        return `Sound.volume = ${volume}\n`;
     };
 
     Blockly.Ruby.sound_volume = function () {
-        return ['sound', Blockly.Ruby.ORDER_ATOMIC];
+        return ['Sound.volume', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     return Blockly;

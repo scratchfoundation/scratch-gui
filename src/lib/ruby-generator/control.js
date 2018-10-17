@@ -13,7 +13,7 @@ export default function (Blockly) {
         const times = Blockly.Ruby.valueToCode(block, 'TIMES', Blockly.Ruby.ORDER_NONE) || '0';
         const branch = Blockly.Ruby.statementToCode(block, 'SUBSTACK') || '\n';
 
-        return `${times}.times do\n${branch}end\n`;
+        return `repeat(${times}) do\n${branch}end\n`;
     };
 
     Blockly.Ruby.control_forever = function (block) {
@@ -45,14 +45,14 @@ export default function (Blockly) {
         return `until ${operator}\n${branch}end\n`;
     };
 
-    // TODO 値を取得方法がわからない
-    Blockly.Ruby.control_stop = function () {
-        return '# wip: control_stop\n';
+    Blockly.Ruby.control_stop = function (block) {
+        const target = block.getFieldValue('STOP_OPTION') || null;
+        return `stop("${target}")\n`;
     };
 
     Blockly.Ruby.control_start_as_clone = function (block) {
         Blockly.Ruby.targetEventBlock = block;
-        return `${Blockly.Ruby.spriteName()}.when(:cloned) do\n`;
+        return `${Blockly.Ruby.spriteName()}.when(:start_as_a_clone) do\n`;
     };
 
     Blockly.Ruby.control_create_clone_of = function (block) {

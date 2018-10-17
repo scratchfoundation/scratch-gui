@@ -33,20 +33,17 @@ export default function (Blockly) {
         return `${Blockly.Ruby.spriteName()}.when(:greater_than, "${lh}", ${rh})  do\n`;
     };
 
-    // TODO messageが文字化けするのを修正する
     Blockly.Ruby.event_whenbroadcastreceived = function (block) {
         Blockly.Ruby.targetEventBlock = block;
         const message = block.getFieldValue('BROADCAST_OPTION') || null;
         return `${Blockly.Ruby.spriteName()}.when(receive:, "${message}") do\n`;
     };
 
-    // TODO messageが文字化けするのを修正する
     Blockly.Ruby.event_broadcast = function (block) {
         const message = Blockly.Ruby.valueToCode(block, 'BROADCAST_INPUT', Blockly.Ruby.ORDER_NONE) || null;
         return `broadcast("${message}")\n`;
     };
 
-    // TODO messageが文字化けするのを修正する
     Blockly.Ruby.event_broadcastandwait = function (block) {
         const message = Blockly.Ruby.valueToCode(block, 'BROADCAST_INPUT', Blockly.Ruby.ORDER_NONE) || null;
         return `broadcast_and_wait("${message}")\n`;
@@ -61,7 +58,6 @@ export default function (Blockly) {
         Blockly.Ruby.targetEventBlock = block;
         return `Stage.when(:stage_clicked) do\n`;
     };
-
 
     return Blockly;
 }

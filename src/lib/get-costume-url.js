@@ -26,10 +26,12 @@ const getCostumeUrl = (function () {
                 svgRenderer.loadString(svgString);
                 const svgText = svgRenderer.toString(true /* shouldInjectFonts */);
                 cachedUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
+            } else {
+                cachedUrl = vm.runtime.storage.get(assetId).encodeDataURI();
             }
+        } else {
             cachedUrl = vm.runtime.storage.get(assetId).encodeDataURI();
         }
-        cachedUrl = vm.runtime.storage.get(assetId).encodeDataURI();
 
         return cachedUrl;
     };

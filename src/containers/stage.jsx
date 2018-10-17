@@ -51,11 +51,8 @@ class Stage extends React.Component {
             dragId: null,
             colorInfo: null,
             question: null,
-            costume1URL: null,
-            costume2URL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI(),
-            // costume2URL: this.props.vm.runtime.storage.get('6d5cb1fc136a88a1a7a8e3eb466bdc63').encodeDataURI(),
-            // stageURL: this.props.vm.runtime.storage.get('f84989feee2cf462a1c597169777ee3c').encodeDataURI()
-            stageURL: this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI()
+            sprites: null,
+            stageURL: null
         };
         if (this.props.vm.renderer) {
             this.renderer = this.props.vm.renderer;
@@ -76,12 +73,31 @@ class Stage extends React.Component {
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
         // ******************** AR *************************
         // Hack to load targets into A-FRAME after some time
+        // PROJECT TO TEST: #239076044
         setTimeout(() => {
-            this.state.costume1URL = this.props.vm.runtime.storage.get('09dc888b0b7df19f70d81588ae73420e').encodeDataURI();
-            console.log(this.state.costume1URL);
-            console.log('all targets:');
-            console.log(this.props.vm.runtime.targets);
-            this.forceUpdate(); // force a refresh to show loaded sprites
+            // console.log(this.state.costume1URL);
+            // console.log('all targets:');
+            // console.log(this.props.vm.runtime.targets);
+            // Get stage asset id
+            const id = this.props.vm.runtime.targets[0].getCostumes()[0].assetId;
+            // Get stage URL from asset id
+            this.setState({stageURL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
+
+            // Get sprite 1 asset id
+            // id = this.props.vm.runtime.targets[1].getCostumes()[0].assetId;
+            // Get sprite 1 costume 1 URL from asset id
+            // this.setState({costume1URL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
+            // console.log(this.props.vm.runtime.targets[1]);
+            const spritesList = [];
+            for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
+                const target = this.props.vm.runtime.targets[i];
+                const costumeID = target.getCostumes()[0].assetId;
+                const spriteURL = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
+                spritesList.push(spriteURL);
+            }
+            this.setState({sprites: spritesList});
+            // Force a refresh to show loaded sprites
+            this.forceUpdate();
         }, 3000);
         // *************************************************
     }
@@ -391,11 +407,11 @@ class Stage extends React.Component {
             <StageComponent
                 canvas={this.canvas}
                 colorInfo={this.state.colorInfo}
-                costume1URL={this.state.costume1URL}
-                costume2URL={this.state.costume2URL}
                 dragRef={this.setDragCanvas}
                 question={this.state.question}
+                sprites={this.state.sprites}
                 stageURL={this.state.stageURL}
+                vm={this.props.vm}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}
                 {...props}

@@ -24,10 +24,10 @@ import MonitorList from '../../containers/monitor-list.jsx';
 import TargetHighlight from '../../containers/target-highlight.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
+import StageAFrameSprites from './stage-aframe-sprites.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
-
 
 const StageComponent = props => {
     const {
@@ -36,10 +36,9 @@ const StageComponent = props => {
         isColorPicking,
         isFullScreen,
         colorInfo,
-        costume1URL,
-        costume2URL,
         micIndicator,
         question,
+        sprites,
         stageSize,
         stageURL,
         useEditorDragStyle,
@@ -66,34 +65,26 @@ const StageComponent = props => {
                 onDoubleClick={onDoubleClick}
             >
                 {true ? (
-                    // 09dc888b0b7df19f70d81588ae73420e
                     <a-scene embedded>
-                        <a-box
-                            color="#4CC3D9"
-                            position="-1 0.5 -3"
-                            rotation="0 45 0"
-                        />
-                        <a-sphere
-                            color="#EF2D5E"
-                            position="0 1.25 -5"
-                            radius="1.25"
-                        />
-                        <a-cylinder
-                            color="#FFC65D"
-                            height="1.5"
-                            position="1 0.75 -3"
-                            radius="0.5"
-                        />
+                        {sprites ? (
+                            <StageAFrameSprites
+                                sprites={sprites}
+                            />
+                        ) : (
+                            ''
+                        )}
                         <a-image
-                            position="2.5 0.5 -3"
-                            src={costume1URL}
+                            height="3.6"
+                            position="0 1.8 -6"
+                            src={stageURL}
+                            width="4.8"
                         />
                         <a-plane
                             color="#7BC8A4"
-                            height="10"
-                            position="1 0 -3"
+                            height="4"
+                            position="0 0 -4"
                             rotation="-90 0 0"
-                            width="10"
+                            width="4.8"
                         />
                         <a-sky color="#ECECEC" />
                     </a-scene>
@@ -175,8 +166,6 @@ const StageComponent = props => {
 StageComponent.propTypes = {
     canvas: PropTypes.instanceOf(Element).isRequired,
     colorInfo: Loupe.propTypes.colorInfo,
-    costume1URL: PropTypes.string,
-    costume2URL: PropTypes.string,
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
@@ -185,6 +174,7 @@ StageComponent.propTypes = {
     onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
+    sprites: PropTypes.arrayOf(PropTypes.string),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     stageURL: PropTypes.string,
     useEditorDragStyle: PropTypes.bool

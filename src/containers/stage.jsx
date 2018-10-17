@@ -92,8 +92,21 @@ class Stage extends React.Component {
             for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
                 const target = this.props.vm.runtime.targets[i];
                 const costumeID = target.getCostumes()[0].assetId;
-                const spriteURL = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
-                spritesList.push(spriteURL);
+                const url = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
+                const width = target.getCostumes()[0].size[0];
+                const height = target.getCostumes()[0].size[1];
+                const visible = target.visible;
+                const x = target.x;
+                const y = target.y;
+                console.log(target);
+                spritesList.push({
+                    url: url,
+                    width: width,
+                    height: height,
+                    visible: visible,
+                    x: x,
+                    y: y
+                });
             }
             this.setState({sprites: spritesList});
             // Force a refresh to show loaded sprites

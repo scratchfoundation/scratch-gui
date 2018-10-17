@@ -41,9 +41,9 @@ const base = {
                 // in much lower dependencies.
                 babelrc: false,
                 plugins: [
-                    'syntax-dynamic-import',
-                    'transform-async-to-generator',
-                    'transform-object-rest-spread',
+                    '@babel/plugin-syntax-dynamic-import',
+                    '@babel/plugin-transform-async-to-generator',
+                    '@babel/plugin-proposal-object-rest-spread',
                     ['react-intl', {
                         messagesDir: './translations/messages/'
                     }]],

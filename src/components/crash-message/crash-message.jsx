@@ -22,7 +22,7 @@ const CrashMessage = props => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="申し訳ありません。Smalrubyがクラッシュしたようです。ページを再読み込みしてください。"
+                    defaultMessage="申し訳ありません。スモウルビーがクラッシュしたようです。ページを再読み込みしてください。"
                     description="Message to inform the user that page has crashed."
                     id="gui.smalruby3.crashMessage.description"
                 />

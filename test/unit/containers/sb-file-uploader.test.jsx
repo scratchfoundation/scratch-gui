@@ -1,5 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
+import {mount, shallow} from 'enzyme';
+
 import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
 import configureStore from 'redux-mock-store';
 import SBFileUploader from '../../../src/containers/sb-file-uploader';
@@ -17,19 +19,17 @@ describe('SBFileUploader Container', () => {
     // Wrap this in a function so it gets test specific states and can be reused.
     const getContainer = function () {
         return (
-            <Provider store={store}>
-                <SBFileUploader
-                    onLoadingFinished={onLoadingFinished}
-                    onLoadingStarted={onLoadingStarted}
-                    onUpdateProjectTitle={onUpdateProjectTitle}
-                >
-                    {(renderFileInput, loadProject) => (
-                        <div
-                            onClick={loadProject}
-                        />
-                    )}
-                </SBFileUploader>
-            </Provider>
+            <SBFileUploader
+                onLoadingFinished={onLoadingFinished}
+                onLoadingStarted={onLoadingStarted}
+                onUpdateProjectTitle={onUpdateProjectTitle}
+            >
+                {(renderFileInput, loadProject) => (
+                    <div
+                        onClick={loadProject}
+                    />
+                )}
+            </SBFileUploader>
         );
     };
 
@@ -48,28 +48,42 @@ describe('SBFileUploader Container', () => {
     });
 
     test('correctly sets title with .sb3 filename', () => {
-        const wrapper = mountWithIntl(getContainer());
-        const instance = wrapper.find(SBFileUploader).component();
-        expect(instance).toBe(true);
+        const wrapper = shallowWithIntl(getContainer(), {context: {store}});
+        const instance = wrapper
+            .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
+            .dive() // unwrap InjectIntl(SBFileUploader)
+            .instance(); // SBFileUploader
         const projectName = instance.getProjectTitleFromFilename('my project is great.sb3');
         expect(projectName).toBe('my project is great');
     });
 
-    // test('correctly sets title with .sb3 filename', () => {
-    //     const component = componentWithIntl(getContainer());
-    //     const projectName = component.getProjectTitleFromFilename('my project is great.sb3');
-    //     expect(projectName).toBe('my project is great');
-    // });
-    //
-    // test('sets blank title with .sb filename', () => {
-    //     const component = componentWithIntl(getContainer());
-    //     const projectName = component.getProjectTitleFromFilename('my project is great.sb');
-    //     expect(projectName).toBe('');
-    // });
-    //
-    // test('sets blank title with filename with no extension', () => {
-    //     const component = componentWithIntl(getContainer());
-    //     const projectName = component.getProjectTitleFromFilename('my project is great');
-    //     expect(projectName).toBe('');
-    // });
+    test('correctly sets title with .sb2 filename', () => {
+        const wrapper = shallowWithIntl(getContainer(), {context: {store}});
+        const instance = wrapper
+            .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
+            .dive() // unwrap InjectIntl(SBFileUploader)
+            .instance(); // SBFileUploader
+        const projectName = instance.getProjectTitleFromFilename('my project is great.sb2');
+        expect(projectName).toBe('my project is great');
+    });
+
+    test('sets blank title with .sb filename', () => {
+        const wrapper = shallowWithIntl(getContainer(), {context: {store}});
+        const instance = wrapper
+            .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
+            .dive() // unwrap InjectIntl(SBFileUploader)
+            .instance(); // SBFileUploader
+        const projectName = instance.getProjectTitleFromFilename('my project is great.sb');
+        expect(projectName).toBe('');
+    });
+
+    test('sets blank title with filename with no extension', () => {
+        const wrapper = shallowWithIntl(getContainer(), {context: {store}});
+        const instance = wrapper
+            .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
+            .dive() // unwrap InjectIntl(SBFileUploader)
+            .instance(); // SBFileUploader
+        const projectName = instance.getProjectTitleFromFilename('my project is great');
+        expect(projectName).toBe('');
+    });
 });

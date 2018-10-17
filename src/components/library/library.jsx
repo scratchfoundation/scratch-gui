@@ -10,6 +10,7 @@ import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
 import analytics from '../../lib/analytics';
+import storage from '../../lib/storage';
 
 import styles from './library.css';
 
@@ -28,6 +29,23 @@ const messages = defineMessages({
 
 const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
 const tagListPrefix = [ALL_TAG];
+
+/**
+ * @param {string} extension - the extension to look up.
+ * @returns {AssetType} - the AssetType corresponding to the extension, if any.
+ */
+const getAssetTypeForExtension = function (extension) {
+    const compareOptions = {
+        sensitivity: 'accent',
+        usage: 'search'
+    };
+    for (const assetTypeId of Object.keys(storage.AssetType)) {
+        const assetType = storage.AssetType[assetTypeId];
+        if (extension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
+            return assetType;
+        }
+    }
+};
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -173,9 +191,17 @@ class LibraryComponent extends React.Component {
                     ref={this.setFilteredDataRef}
                 >
                     {this.getFilteredData().map((dataItem, index) => {
-                        const scratchURL = dataItem.md5 ?
-                            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
-                            dataItem.rawURL;
+                        let iconURL;
+                        if (dataItem.md5) {
+                            // TODO: adjust libraries to be more storage-friendly; don't use split() here.
+                            const [md5, ext] = dataItem.md5.split('.');
+                            const assetType = getAssetTypeForExtension(ext);
+                            iconURL = storage.load(assetType, md5)
+                                .then(asset => asset.encodeDataURI());
+                        } else {
+                            iconURL = dataItem.rawURL;
+                        }
+
                         return (
                             <LibraryItem
                                 bluetoothRequired={dataItem.bluetoothRequired}
@@ -185,7 +211,7 @@ class LibraryComponent extends React.Component {
                                 extensionId={dataItem.extensionId}
                                 featured={dataItem.featured}
                                 hidden={dataItem.hidden}
-                                iconURL={scratchURL}
+                                iconURL={iconURL}
                                 id={index}
                                 insetIconURL={dataItem.insetIconURL}
                                 internetConnectionRequired={dataItem.internetConnectionRequired}

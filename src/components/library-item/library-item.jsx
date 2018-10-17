@@ -13,6 +13,13 @@ import internetConnectionIconURL from './internet-connection.svg';
 class LibraryItem extends React.PureComponent {
     constructor (props) {
         super(props);
+        this.state = {
+            iconURL: null
+        };
+        Promise.resolve(props.iconURL)
+            .then(url => this.setState({
+                iconURL: url
+            }));
         bindAll(this, [
             'handleBlur',
             'handleClick',
@@ -72,7 +79,7 @@ class LibraryItem extends React.PureComponent {
                     ) : null}
                     <img
                         className={styles.featuredImage}
-                        src={this.props.iconURL}
+                        src={this.state.iconURL}
                     />
                 </div>
                 {this.props.insetIconURL ? (
@@ -158,7 +165,7 @@ class LibraryItem extends React.PureComponent {
                     <Box className={styles.libraryItemImageContainer}>
                         <img
                             className={styles.libraryItemImage}
-                            src={this.props.iconURL}
+                            src={this.state.iconURL}
                         />
                     </Box>
                 </Box>
@@ -179,7 +186,10 @@ LibraryItem.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconURL: PropTypes.string,
+    iconURL: PropTypes.oneOfType([
+        PropTypes.string, // URL
+        PropTypes.instanceOf(Promise) // Promise for URL
+    ]),
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,

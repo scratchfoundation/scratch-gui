@@ -5,8 +5,8 @@
  */
 export default function (Blockly) {
     Blockly.Ruby.text = function (block) {
-        const code = Blockly.Ruby.quote_(block.getFieldValue('TEXT'));
-        return [code, Blockly.Ruby.ORDER_ATOMIC];
+        const text = Blockly.Ruby.quote_(block.getFieldValue('TEXT'));
+        return [text, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     return Blockly;

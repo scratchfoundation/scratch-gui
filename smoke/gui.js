@@ -1,36 +1,10 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
 
-/***/ 1131:
+/***/ 1077:
 /***/ (function(module, exports, __webpack_require__) {
 
-
-var content = __webpack_require__(1132);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(5)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ 1132:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(9)(false);
 // imports
 
 
@@ -44,149 +18,154 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 1133:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 1078:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(39);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(40);
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(94);
+/* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(102);
+/* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(122);
+/* harmony import */ var _lib_titled_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(255);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _react = __webpack_require__(0);
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(35);
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _redux = __webpack_require__(58);
-
-var _appStateHoc = __webpack_require__(115);
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
-var _gui = __webpack_require__(163);
-
-var _gui2 = _interopRequireDefault(_gui);
-
-var _hashParserHoc = __webpack_require__(185);
-
-var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
-
-var _titledHoc = __webpack_require__(459);
-
-var _titledHoc2 = _interopRequireDefault(_titledHoc);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash
  * {object} appTarget - the DOM element to render to
  */
-exports.default = function (appTarget) {
-    _gui2.default.setAppElement(appTarget);
 
-    // note that redux's 'compose' function is just being used as a general utility to make
-    // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
-    // ability to compose reducers.
-    var WrappedGui = (0, _redux.compose)(_appStateHoc2.default, _hashParserHoc2.default, _titledHoc2.default)(_gui2.default);
+/* harmony default export */ __webpack_exports__["default"] = (function (appTarget) {
+  _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"].setAppElement(appTarget); // note that redux's 'compose' function is just being used as a general utility to make
+  // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
+  // ability to compose reducers.
 
-    // TODO a hack for testing the backpack, allow backpack host to be set by url param
-    var backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
-    var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
+  var WrappedGui = Object(redux__WEBPACK_IMPORTED_MODULE_2__[/* compose */ "d"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"], _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"], _lib_titled_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]); // TODO a hack for testing the backpack, allow backpack host to be set by url param
 
-    var backpackOptions = {
-        visible: true,
-        host: backpackHost
+  var backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
+  var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
+  var backpackOptions = {
+    visible: true,
+    host: backpackHost
+  };
+
+  if ("production" === 'production' && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
+    // Warn before navigating away
+    window.onbeforeunload = function () {
+      return true;
     };
-    if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
-        // Warn before navigating away
-        window.onbeforeunload = function () {
-            return true;
-        };
-    }
+  }
 
-    _reactDom2.default.render(_react2.default.createElement(WrappedGui, { backpackOptions: backpackOptions }), appTarget);
-};
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+    backpackOptions: backpackOptions
+  }), appTarget);
+});
 
 /***/ }),
 
-/***/ 477:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
+
+var content = __webpack_require__(1077);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(10)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ 681:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
 "use strict";
-
-
-__webpack_require__(478);
-
-__webpack_require__(480);
-
-__webpack_require__(504);
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(35);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _analytics = __webpack_require__(28);
-
-var _analytics2 = _interopRequireDefault(_analytics);
-
-var _appStateHoc = __webpack_require__(115);
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
-var _browserModal = __webpack_require__(384);
-
-var _browserModal2 = _interopRequireDefault(_browserModal);
-
-var _supportedBrowser = __webpack_require__(388);
-
-var _supportedBrowser2 = _interopRequireDefault(_supportedBrowser);
-
-var _index = __webpack_require__(1131);
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Register "base" page view
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var es6_object_assign_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(682);
+/* harmony import */ var es6_object_assign_auto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(es6_object_assign_auto__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_fn_array_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(684);
+/* harmony import */ var core_js_fn_array_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_fn_array_includes__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var intl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(708);
+/* harmony import */ var intl__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(intl__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _lib_analytics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(16);
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(94);
+/* harmony import */ var _components_browser_modal_browser_modal_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(188);
+/* harmony import */ var _lib_supported_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(189);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(591);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_9__);
 // Polyfills
-_analytics2.default.pageview('/'); // For Safari 9
 
+
+ // For Safari 9
+
+
+
+
+
+
+
+ // Register "base" page view
+
+_lib_analytics__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"].pageview('/');
 var appTarget = document.createElement('div');
-appTarget.className = _index2.default.app;
+appTarget.className = _index_css__WEBPACK_IMPORTED_MODULE_9___default.a.app;
 document.body.appendChild(appTarget);
 
-if ((0, _supportedBrowser2.default)()) {
-    // require needed here to avoid importing unsupported browser-crashing code
-    // at the top level
-    __webpack_require__(1133).default(appTarget);
+if (Object(_lib_supported_browser__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])()) {
+  // require needed here to avoid importing unsupported browser-crashing code
+  // at the top level
+  __webpack_require__(1078).default(appTarget);
 } else {
-    _browserModal2.default.setAppElement(appTarget);
-    var WrappedBrowserModalComponent = (0, _appStateHoc2.default)(_browserModal2.default, true /* localesOnly */);
-    var handleBack = function handleBack() {};
-    // eslint-disable-next-line react/jsx-no-bind
-    _reactDom2.default.render(_react2.default.createElement(WrappedBrowserModalComponent, { onBack: handleBack }), appTarget);
+  _components_browser_modal_browser_modal_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].setAppElement(appTarget);
+  var WrappedBrowserModalComponent = Object(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(_components_browser_modal_browser_modal_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"], true
+  /* localesOnly */
+  );
+
+  var handleBack = function handleBack() {}; // eslint-disable-next-line react/jsx-no-bind
+
+
+  react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.render(react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(WrappedBrowserModalComponent, {
+    onBack: handleBack
+  }), appTarget);
 }
 
 /***/ }),
 
-/***/ 506:
+/***/ 710:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[[477,0]]]);
+},[[681,0]]]);
 //# sourceMappingURL=gui.js.map

@@ -166,12 +166,9 @@ module.exports = Transform;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
 var minilog = __webpack_require__(9);
-minilog.enable();
 
+minilog.enable();
 module.exports = minilog('vm');
 
 /***/ }),
@@ -204,88 +201,94 @@ module.exports = color;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+/* WEBPACK VAR INJECTION */(function(global) {function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* eslint-env worker */
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/* eslint-env worker */
 var ArgumentType = __webpack_require__(5);
+
 var BlockType = __webpack_require__(6);
+
 var dispatch = __webpack_require__(7);
+
 var TargetType = __webpack_require__(19);
 
-var ExtensionWorker = function () {
-    function ExtensionWorker() {
-        var _this = this;
+var ExtensionWorker =
+/*#__PURE__*/
+function () {
+  function ExtensionWorker() {
+    var _this = this;
 
-        _classCallCheck(this, ExtensionWorker);
+    _classCallCheck(this, ExtensionWorker);
 
-        this.nextExtensionId = 0;
+    this.nextExtensionId = 0;
+    this.initialRegistrations = [];
+    dispatch.waitForConnection.then(function () {
+      dispatch.call('extensions', 'allocateWorker').then(function (x) {
+        var _x = _slicedToArray(x, 2),
+            id = _x[0],
+            extension = _x[1];
 
-        this.initialRegistrations = [];
+        _this.workerId = id;
 
-        dispatch.waitForConnection.then(function () {
-            dispatch.call('extensions', 'allocateWorker').then(function (x) {
-                var _x = _slicedToArray(x, 2),
-                    id = _x[0],
-                    extension = _x[1];
-
-                _this.workerId = id;
-
-                try {
-                    importScripts(extension);
-
-                    var initialRegistrations = _this.initialRegistrations;
-                    _this.initialRegistrations = null;
-
-                    Promise.all(initialRegistrations).then(function () {
-                        return dispatch.call('extensions', 'onWorkerInit', id);
-                    });
-                } catch (e) {
-                    dispatch.call('extensions', 'onWorkerInit', id, e);
-                }
-            });
-        });
-
-        this.extensions = [];
-    }
-
-    _createClass(ExtensionWorker, [{
-        key: 'register',
-        value: function register(extensionObject) {
-            var extensionId = this.nextExtensionId++;
-            this.extensions.push(extensionObject);
-            var serviceName = 'extension.' + this.workerId + '.' + extensionId;
-            var promise = dispatch.setService(serviceName, extensionObject).then(function () {
-                return dispatch.call('extensions', 'registerExtensionService', serviceName);
-            });
-            if (this.initialRegistrations) {
-                this.initialRegistrations.push(promise);
-            }
-            return promise;
+        try {
+          importScripts(extension);
+          var initialRegistrations = _this.initialRegistrations;
+          _this.initialRegistrations = null;
+          Promise.all(initialRegistrations).then(function () {
+            return dispatch.call('extensions', 'onWorkerInit', id);
+          });
+        } catch (e) {
+          dispatch.call('extensions', 'onWorkerInit', id, e);
         }
-    }]);
+      });
+    });
+    this.extensions = [];
+  }
 
-    return ExtensionWorker;
+  _createClass(ExtensionWorker, [{
+    key: "register",
+    value: function register(extensionObject) {
+      var extensionId = this.nextExtensionId++;
+      this.extensions.push(extensionObject);
+      var serviceName = "extension.".concat(this.workerId, ".").concat(extensionId);
+      var promise = dispatch.setService(serviceName, extensionObject).then(function () {
+        return dispatch.call('extensions', 'registerExtensionService', serviceName);
+      });
+
+      if (this.initialRegistrations) {
+        this.initialRegistrations.push(promise);
+      }
+
+      return promise;
+    }
+  }]);
+
+  return ExtensionWorker;
 }();
 
 global.Scratch = global.Scratch || {};
 global.Scratch.ArgumentType = ArgumentType;
 global.Scratch.BlockType = BlockType;
 global.Scratch.TargetType = TargetType;
-
 /**
  * Expose only specific parts of the worker to extensions.
  */
+
 var extensionWorker = new ExtensionWorker();
 global.Scratch.extensions = {
-    register: extensionWorker.register.bind(extensionWorker)
+  register: extensionWorker.register.bind(extensionWorker)
 };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
@@ -317,10 +320,7 @@ module.exports = g;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 /**
  * Block argument types
@@ -357,15 +357,11 @@ var ArgumentType = {
    */
   MATRIX: 'matrix'
 };
-
 module.exports = ArgumentType;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 /**
  * Types of block
@@ -410,28 +406,33 @@ var BlockType = {
    */
   REPORTER: 'reporter'
 };
-
 module.exports = BlockType;
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var SharedDispatch = __webpack_require__(8);
 
 var log = __webpack_require__(1);
-
 /**
  * This class provides a Worker with the means to participate in the message dispatch system managed by CentralDispatch.
  * From any context in the messaging system, the dispatcher's "call" method can call any method on any "service"
@@ -440,129 +441,136 @@ var log = __webpack_require__(1);
  * @see {CentralDispatch}
  */
 
-var WorkerDispatch = function (_SharedDispatch) {
-    _inherits(WorkerDispatch, _SharedDispatch);
 
-    function WorkerDispatch() {
-        _classCallCheck(this, WorkerDispatch);
+var WorkerDispatch =
+/*#__PURE__*/
+function (_SharedDispatch) {
+  _inherits(WorkerDispatch, _SharedDispatch);
 
-        /**
-         * This promise will be resolved when we have successfully connected to central dispatch.
-         * @type {Promise}
-         * @see {waitForConnection}
-         * @private
-         */
-        var _this = _possibleConstructorReturn(this, (WorkerDispatch.__proto__ || Object.getPrototypeOf(WorkerDispatch)).call(this));
+  function WorkerDispatch() {
+    var _this;
 
-        _this._connectionPromise = new Promise(function (resolve) {
-            _this._onConnect = resolve;
-        });
+    _classCallCheck(this, WorkerDispatch);
 
-        /**
-         * Map of service name to local service provider.
-         * If a service is not listed here, it is assumed to be provided by another context (another Worker or the main
-         * thread).
-         * @see {setService}
-         * @type {object}
-         */
-        _this.services = {};
-
-        _this._onMessage = _this._onMessage.bind(_this, self);
-        if (typeof self !== 'undefined') {
-            self.onmessage = _this._onMessage;
-        }
-        return _this;
-    }
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkerDispatch).call(this));
     /**
-     * @returns {Promise} a promise which will resolve upon connection to central dispatch. If you need to make a call
-     * immediately on "startup" you can attach a 'then' to this promise.
-     * @example
-     *      dispatch.waitForConnection.then(() => {
-     *          dispatch.call('myService', 'hello');
-     *      })
+     * This promise will be resolved when we have successfully connected to central dispatch.
+     * @type {Promise}
+     * @see {waitForConnection}
+     * @private
      */
 
+    _this._connectionPromise = new Promise(function (resolve) {
+      _this._onConnect = resolve;
+    });
+    /**
+     * Map of service name to local service provider.
+     * If a service is not listed here, it is assumed to be provided by another context (another Worker or the main
+     * thread).
+     * @see {setService}
+     * @type {object}
+     */
 
-    _createClass(WorkerDispatch, [{
-        key: 'setService',
+    _this.services = {};
+    _this._onMessage = _this._onMessage.bind(_assertThisInitialized(_assertThisInitialized(_this)), self);
+
+    if (typeof self !== 'undefined') {
+      self.onmessage = _this._onMessage;
+    }
+
+    return _this;
+  }
+  /**
+   * @returns {Promise} a promise which will resolve upon connection to central dispatch. If you need to make a call
+   * immediately on "startup" you can attach a 'then' to this promise.
+   * @example
+   *      dispatch.waitForConnection.then(() => {
+   *          dispatch.call('myService', 'hello');
+   *      })
+   */
 
 
-        /**
-         * Set a local object as the global provider of the specified service.
-         * WARNING: Any method on the provider can be called from any worker within the dispatch system.
-         * @param {string} service - a globally unique string identifying this service. Examples: 'vm', 'gui', 'extension9'.
-         * @param {object} provider - a local object which provides this service.
-         * @returns {Promise} - a promise which will resolve once the service is registered.
-         */
-        value: function setService(service, provider) {
-            var _this2 = this;
+  _createClass(WorkerDispatch, [{
+    key: "setService",
 
-            if (this.services.hasOwnProperty(service)) {
-                log.warn('Worker dispatch replacing existing service provider for ' + service);
-            }
-            this.services[service] = provider;
-            return this.waitForConnection.then(function () {
-                return _this2._remoteCall(self, 'dispatch', 'setService', service);
-            });
-        }
+    /**
+     * Set a local object as the global provider of the specified service.
+     * WARNING: Any method on the provider can be called from any worker within the dispatch system.
+     * @param {string} service - a globally unique string identifying this service. Examples: 'vm', 'gui', 'extension9'.
+     * @param {object} provider - a local object which provides this service.
+     * @returns {Promise} - a promise which will resolve once the service is registered.
+     */
+    value: function setService(service, provider) {
+      var _this2 = this;
 
-        /**
-         * Fetch the service provider object for a particular service name.
-         * @override
-         * @param {string} service - the name of the service to look up
-         * @returns {{provider:(object|Worker), isRemote:boolean}} - the means to contact the service, if found
-         * @protected
-         */
+      if (this.services.hasOwnProperty(service)) {
+        log.warn("Worker dispatch replacing existing service provider for ".concat(service));
+      }
 
-    }, {
-        key: '_getServiceProvider',
-        value: function _getServiceProvider(service) {
-            // if we don't have a local service by this name, contact central dispatch by calling `postMessage` on self
-            var provider = this.services[service];
-            return {
-                provider: provider || self,
-                isRemote: !provider
-            };
-        }
+      this.services[service] = provider;
+      return this.waitForConnection.then(function () {
+        return _this2._remoteCall(self, 'dispatch', 'setService', service);
+      });
+    }
+    /**
+     * Fetch the service provider object for a particular service name.
+     * @override
+     * @param {string} service - the name of the service to look up
+     * @returns {{provider:(object|Worker), isRemote:boolean}} - the means to contact the service, if found
+     * @protected
+     */
 
-        /**
-         * Handle a call message sent to the dispatch service itself
-         * @override
-         * @param {Worker} worker - the worker which sent the message.
-         * @param {DispatchCallMessage} message - the message to be handled.
-         * @returns {Promise|undefined} - a promise for the results of this operation, if appropriate
-         * @protected
-         */
+  }, {
+    key: "_getServiceProvider",
+    value: function _getServiceProvider(service) {
+      // if we don't have a local service by this name, contact central dispatch by calling `postMessage` on self
+      var provider = this.services[service];
+      return {
+        provider: provider || self,
+        isRemote: !provider
+      };
+    }
+    /**
+     * Handle a call message sent to the dispatch service itself
+     * @override
+     * @param {Worker} worker - the worker which sent the message.
+     * @param {DispatchCallMessage} message - the message to be handled.
+     * @returns {Promise|undefined} - a promise for the results of this operation, if appropriate
+     * @protected
+     */
 
-    }, {
-        key: '_onDispatchMessage',
-        value: function _onDispatchMessage(worker, message) {
-            var promise = void 0;
-            switch (message.method) {
-                case 'handshake':
-                    promise = this._onConnect();
-                    break;
-                case 'terminate':
-                    // Don't close until next tick, after sending confirmation back
-                    setTimeout(function () {
-                        return self.close();
-                    }, 0);
-                    promise = Promise.resolve();
-                    break;
-                default:
-                    log.error('Worker dispatch received message for unknown method: ' + message.method);
-            }
-            return promise;
-        }
-    }, {
-        key: 'waitForConnection',
-        get: function get() {
-            return this._connectionPromise;
-        }
-    }]);
+  }, {
+    key: "_onDispatchMessage",
+    value: function _onDispatchMessage(worker, message) {
+      var promise;
 
-    return WorkerDispatch;
+      switch (message.method) {
+        case 'handshake':
+          promise = this._onConnect();
+          break;
+
+        case 'terminate':
+          // Don't close until next tick, after sending confirmation back
+          setTimeout(function () {
+            return self.close();
+          }, 0);
+          promise = Promise.resolve();
+          break;
+
+        default:
+          log.error("Worker dispatch received message for unknown method: ".concat(message.method));
+      }
+
+      return promise;
+    }
+  }, {
+    key: "waitForConnection",
+    get: function get() {
+      return this._connectionPromise;
+    }
+  }]);
+
+  return WorkerDispatch;
 }(SharedDispatch);
 
 module.exports = new WorkerDispatch();
@@ -571,19 +579,29 @@ module.exports = new WorkerDispatch();
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var log = __webpack_require__(1);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var log = __webpack_require__(1);
 /**
  * @typedef {object} DispatchCallMessage - a message to the dispatch system representing a service method call
  * @property {*} responseId - send a response message with this response ID. See {@link DispatchResponseMessage}
@@ -609,271 +627,285 @@ var log = __webpack_require__(1);
  * {@link CentralDispatch} and {@link WorkerDispatch}.
  */
 
-var SharedDispatch = function () {
-    function SharedDispatch() {
-        _classCallCheck(this, SharedDispatch);
 
-        /**
-         * List of callback registrations for promises waiting for a response from a call to a service on another
-         * worker. A callback registration is an array of [resolve,reject] Promise functions.
-         * Calls to local services don't enter this list.
-         * @type {Array.<Function[]>}
-         */
-        this.callbacks = [];
+var SharedDispatch =
+/*#__PURE__*/
+function () {
+  function SharedDispatch() {
+    _classCallCheck(this, SharedDispatch);
 
-        /**
-         * The next response ID to be used.
-         * @type {int}
-         */
-        this.nextResponseId = 0;
+    /**
+     * List of callback registrations for promises waiting for a response from a call to a service on another
+     * worker. A callback registration is an array of [resolve,reject] Promise functions.
+     * Calls to local services don't enter this list.
+     * @type {Array.<Function[]>}
+     */
+    this.callbacks = [];
+    /**
+     * The next response ID to be used.
+     * @type {int}
+     */
+
+    this.nextResponseId = 0;
+  }
+  /**
+   * Call a particular method on a particular service, regardless of whether that service is provided locally or on
+   * a worker. If the service is provided by a worker, the `args` will be copied using the Structured Clone
+   * algorithm, except for any items which are also in the `transfer` list. Ownership of those items will be
+   * transferred to the worker, and they should not be used after this call.
+   * @example
+   *      dispatcher.call('vm', 'setData', 'cat', 42);
+   *      // this finds the worker for the 'vm' service, then on that worker calls:
+   *      vm.setData('cat', 42);
+   * @param {string} service - the name of the service.
+   * @param {string} method - the name of the method.
+   * @param {*} [args] - the arguments to be copied to the method, if any.
+   * @returns {Promise} - a promise for the return value of the service method.
+   */
+
+
+  _createClass(SharedDispatch, [{
+    key: "call",
+    value: function call(service, method) {
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        args[_key - 2] = arguments[_key];
+      }
+
+      return this.transferCall.apply(this, [service, method, null].concat(args));
     }
-
     /**
      * Call a particular method on a particular service, regardless of whether that service is provided locally or on
      * a worker. If the service is provided by a worker, the `args` will be copied using the Structured Clone
      * algorithm, except for any items which are also in the `transfer` list. Ownership of those items will be
      * transferred to the worker, and they should not be used after this call.
      * @example
-     *      dispatcher.call('vm', 'setData', 'cat', 42);
-     *      // this finds the worker for the 'vm' service, then on that worker calls:
-     *      vm.setData('cat', 42);
+     *      dispatcher.transferCall('vm', 'setData', [myArrayBuffer], 'cat', myArrayBuffer);
+     *      // this finds the worker for the 'vm' service, transfers `myArrayBuffer` to it, then on that worker calls:
+     *      vm.setData('cat', myArrayBuffer);
+     * @param {string} service - the name of the service.
+     * @param {string} method - the name of the method.
+     * @param {Array} [transfer] - objects to be transferred instead of copied. Must be present in `args` to be useful.
+     * @param {*} [args] - the arguments to be copied to the method, if any.
+     * @returns {Promise} - a promise for the return value of the service method.
+     */
+
+  }, {
+    key: "transferCall",
+    value: function transferCall(service, method, transfer) {
+      try {
+        var _this$_getServiceProv = this._getServiceProvider(service),
+            provider = _this$_getServiceProv.provider,
+            isRemote = _this$_getServiceProv.isRemote;
+
+        if (provider) {
+          for (var _len2 = arguments.length, args = new Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+            args[_key2 - 3] = arguments[_key2];
+          }
+
+          if (isRemote) {
+            return this._remoteTransferCall.apply(this, [provider, service, method, transfer].concat(args));
+          }
+
+          var result = provider[method].apply(provider, args);
+          return Promise.resolve(result);
+        }
+
+        return Promise.reject(new Error("Service not found: ".concat(service)));
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+    /**
+     * Check if a particular service lives on another worker.
+     * @param {string} service - the service to check.
+     * @returns {boolean} - true if the service is remote (calls must cross a Worker boundary), false otherwise.
+     * @private
+     */
+
+  }, {
+    key: "_isRemoteService",
+    value: function _isRemoteService(service) {
+      return this._getServiceProvider(service).isRemote;
+    }
+    /**
+     * Like {@link call}, but force the call to be posted through a particular communication channel.
+     * @param {object} provider - send the call through this object's `postMessage` function.
      * @param {string} service - the name of the service.
      * @param {string} method - the name of the method.
      * @param {*} [args] - the arguments to be copied to the method, if any.
      * @returns {Promise} - a promise for the return value of the service method.
      */
 
+  }, {
+    key: "_remoteCall",
+    value: function _remoteCall(provider, service, method) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 3 ? _len3 - 3 : 0), _key3 = 3; _key3 < _len3; _key3++) {
+        args[_key3 - 3] = arguments[_key3];
+      }
 
-    _createClass(SharedDispatch, [{
-        key: 'call',
-        value: function call(service, method) {
-            for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                args[_key - 2] = arguments[_key];
-            }
+      return this._remoteTransferCall.apply(this, [provider, service, method, null].concat(args));
+    }
+    /**
+     * Like {@link transferCall}, but force the call to be posted through a particular communication channel.
+     * @param {object} provider - send the call through this object's `postMessage` function.
+     * @param {string} service - the name of the service.
+     * @param {string} method - the name of the method.
+     * @param {Array} [transfer] - objects to be transferred instead of copied. Must be present in `args` to be useful.
+     * @param {*} [args] - the arguments to be copied to the method, if any.
+     * @returns {Promise} - a promise for the return value of the service method.
+     */
 
-            return this.transferCall.apply(this, [service, method, null].concat(args));
+  }, {
+    key: "_remoteTransferCall",
+    value: function _remoteTransferCall(provider, service, method, transfer) {
+      var _this = this;
+
+      for (var _len4 = arguments.length, args = new Array(_len4 > 4 ? _len4 - 4 : 0), _key4 = 4; _key4 < _len4; _key4++) {
+        args[_key4 - 4] = arguments[_key4];
+      }
+
+      return new Promise(function (resolve, reject) {
+        var responseId = _this._storeCallbacks(resolve, reject);
+        /** @TODO: remove this hack! this is just here so we don't try to send `util` to a worker */
+
+
+        if (args.length > 0 && typeof args[args.length - 1].yield === 'function') {
+          args.pop();
         }
 
-        /**
-         * Call a particular method on a particular service, regardless of whether that service is provided locally or on
-         * a worker. If the service is provided by a worker, the `args` will be copied using the Structured Clone
-         * algorithm, except for any items which are also in the `transfer` list. Ownership of those items will be
-         * transferred to the worker, and they should not be used after this call.
-         * @example
-         *      dispatcher.transferCall('vm', 'setData', [myArrayBuffer], 'cat', myArrayBuffer);
-         *      // this finds the worker for the 'vm' service, transfers `myArrayBuffer` to it, then on that worker calls:
-         *      vm.setData('cat', myArrayBuffer);
-         * @param {string} service - the name of the service.
-         * @param {string} method - the name of the method.
-         * @param {Array} [transfer] - objects to be transferred instead of copied. Must be present in `args` to be useful.
-         * @param {*} [args] - the arguments to be copied to the method, if any.
-         * @returns {Promise} - a promise for the return value of the service method.
-         */
-
-    }, {
-        key: 'transferCall',
-        value: function transferCall(service, method, transfer) {
-            try {
-                var _getServiceProvider2 = this._getServiceProvider(service),
-                    provider = _getServiceProvider2.provider,
-                    isRemote = _getServiceProvider2.isRemote;
-
-                if (provider) {
-                    for (var _len2 = arguments.length, args = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
-                        args[_key2 - 3] = arguments[_key2];
-                    }
-
-                    if (isRemote) {
-                        return this._remoteTransferCall.apply(this, [provider, service, method, transfer].concat(args));
-                    }
-
-                    var result = provider[method].apply(provider, args);
-                    return Promise.resolve(result);
-                }
-                return Promise.reject(new Error('Service not found: ' + service));
-            } catch (e) {
-                return Promise.reject(e);
-            }
+        if (transfer) {
+          provider.postMessage({
+            service: service,
+            method: method,
+            responseId: responseId,
+            args: args
+          }, transfer);
+        } else {
+          provider.postMessage({
+            service: service,
+            method: method,
+            responseId: responseId,
+            args: args
+          });
         }
+      });
+    }
+    /**
+     * Store callback functions pending a response message.
+     * @param {Function} resolve - function to call if the service method returns.
+     * @param {Function} reject - function to call if the service method throws.
+     * @returns {*} - a unique response ID for this set of callbacks. See {@link _deliverResponse}.
+     * @protected
+     */
 
-        /**
-         * Check if a particular service lives on another worker.
-         * @param {string} service - the service to check.
-         * @returns {boolean} - true if the service is remote (calls must cross a Worker boundary), false otherwise.
-         * @private
-         */
+  }, {
+    key: "_storeCallbacks",
+    value: function _storeCallbacks(resolve, reject) {
+      var responseId = this.nextResponseId++;
+      this.callbacks[responseId] = [resolve, reject];
+      return responseId;
+    }
+    /**
+     * Deliver call response from a worker. This should only be called as the result of a message from a worker.
+     * @param {int} responseId - the response ID of the callback set to call.
+     * @param {DispatchResponseMessage} message - the message containing the response value(s).
+     * @protected
+     */
 
-    }, {
-        key: '_isRemoteService',
-        value: function _isRemoteService(service) {
-            return this._getServiceProvider(service).isRemote;
+  }, {
+    key: "_deliverResponse",
+    value: function _deliverResponse(responseId, message) {
+      try {
+        var _this$callbacks$respo = _slicedToArray(this.callbacks[responseId], 2),
+            resolve = _this$callbacks$respo[0],
+            reject = _this$callbacks$respo[1];
+
+        delete this.callbacks[responseId];
+
+        if (message.error) {
+          reject(message.error);
+        } else {
+          resolve(message.result);
         }
+      } catch (e) {
+        log.error("Dispatch callback failed: ".concat(JSON.stringify(e)));
+      }
+    }
+    /**
+     * Handle a message event received from a connected worker.
+     * @param {Worker} worker - the worker which sent the message, or the global object if running in a worker.
+     * @param {MessageEvent} event - the message event to be handled.
+     * @protected
+     */
 
-        /**
-         * Like {@link call}, but force the call to be posted through a particular communication channel.
-         * @param {object} provider - send the call through this object's `postMessage` function.
-         * @param {string} service - the name of the service.
-         * @param {string} method - the name of the method.
-         * @param {*} [args] - the arguments to be copied to the method, if any.
-         * @returns {Promise} - a promise for the return value of the service method.
-         */
+  }, {
+    key: "_onMessage",
+    value: function _onMessage(worker, event) {
+      /** @type {DispatchMessage} */
+      var message = event.data;
+      message.args = message.args || [];
+      var promise;
 
-    }, {
-        key: '_remoteCall',
-        value: function _remoteCall(provider, service, method) {
-            for (var _len3 = arguments.length, args = Array(_len3 > 3 ? _len3 - 3 : 0), _key3 = 3; _key3 < _len3; _key3++) {
-                args[_key3 - 3] = arguments[_key3];
-            }
-
-            return this._remoteTransferCall.apply(this, [provider, service, method, null].concat(args));
+      if (message.service) {
+        if (message.service === 'dispatch') {
+          promise = this._onDispatchMessage(worker, message);
+        } else {
+          promise = this.call.apply(this, [message.service, message.method].concat(_toConsumableArray(message.args)));
         }
+      } else if (typeof message.responseId === 'undefined') {
+        log.error("Dispatch caught malformed message from a worker: ".concat(JSON.stringify(event)));
+      } else {
+        this._deliverResponse(message.responseId, message);
+      }
 
-        /**
-         * Like {@link transferCall}, but force the call to be posted through a particular communication channel.
-         * @param {object} provider - send the call through this object's `postMessage` function.
-         * @param {string} service - the name of the service.
-         * @param {string} method - the name of the method.
-         * @param {Array} [transfer] - objects to be transferred instead of copied. Must be present in `args` to be useful.
-         * @param {*} [args] - the arguments to be copied to the method, if any.
-         * @returns {Promise} - a promise for the return value of the service method.
-         */
-
-    }, {
-        key: '_remoteTransferCall',
-        value: function _remoteTransferCall(provider, service, method, transfer) {
-            for (var _len4 = arguments.length, args = Array(_len4 > 4 ? _len4 - 4 : 0), _key4 = 4; _key4 < _len4; _key4++) {
-                args[_key4 - 4] = arguments[_key4];
-            }
-
-            var _this = this;
-
-            return new Promise(function (resolve, reject) {
-                var responseId = _this._storeCallbacks(resolve, reject);
-
-                /** @TODO: remove this hack! this is just here so we don't try to send `util` to a worker */
-                if (args.length > 0 && typeof args[args.length - 1].yield === 'function') {
-                    args.pop();
-                }
-
-                if (transfer) {
-                    provider.postMessage({ service: service, method: method, responseId: responseId, args: args }, transfer);
-                } else {
-                    provider.postMessage({ service: service, method: method, responseId: responseId, args: args });
-                }
+      if (promise) {
+        if (typeof message.responseId === 'undefined') {
+          log.error("Dispatch message missing required response ID: ".concat(JSON.stringify(event)));
+        } else {
+          promise.then(function (result) {
+            return worker.postMessage({
+              responseId: message.responseId,
+              result: result
             });
+          }, function (error) {
+            return worker.postMessage({
+              responseId: message.responseId,
+              error: error
+            });
+          });
         }
+      }
+    }
+    /**
+     * Fetch the service provider object for a particular service name.
+     * @abstract
+     * @param {string} service - the name of the service to look up
+     * @returns {{provider:(object|Worker), isRemote:boolean}} - the means to contact the service, if found
+     * @protected
+     */
 
-        /**
-         * Store callback functions pending a response message.
-         * @param {Function} resolve - function to call if the service method returns.
-         * @param {Function} reject - function to call if the service method throws.
-         * @returns {*} - a unique response ID for this set of callbacks. See {@link _deliverResponse}.
-         * @protected
-         */
+  }, {
+    key: "_getServiceProvider",
+    value: function _getServiceProvider(service) {
+      throw new Error("Could not get provider for ".concat(service, ": _getServiceProvider not implemented"));
+    }
+    /**
+     * Handle a call message sent to the dispatch service itself
+     * @abstract
+     * @param {Worker} worker - the worker which sent the message.
+     * @param {DispatchCallMessage} message - the message to be handled.
+     * @returns {Promise|undefined} - a promise for the results of this operation, if appropriate
+     * @private
+     */
 
-    }, {
-        key: '_storeCallbacks',
-        value: function _storeCallbacks(resolve, reject) {
-            var responseId = this.nextResponseId++;
-            this.callbacks[responseId] = [resolve, reject];
-            return responseId;
-        }
+  }, {
+    key: "_onDispatchMessage",
+    value: function _onDispatchMessage(worker, message) {
+      throw new Error("Unimplemented dispatch message handler cannot handle ".concat(message.method, " method"));
+    }
+  }]);
 
-        /**
-         * Deliver call response from a worker. This should only be called as the result of a message from a worker.
-         * @param {int} responseId - the response ID of the callback set to call.
-         * @param {DispatchResponseMessage} message - the message containing the response value(s).
-         * @protected
-         */
-
-    }, {
-        key: '_deliverResponse',
-        value: function _deliverResponse(responseId, message) {
-            try {
-                var _callbacks$responseId = _slicedToArray(this.callbacks[responseId], 2),
-                    resolve = _callbacks$responseId[0],
-                    reject = _callbacks$responseId[1];
-
-                delete this.callbacks[responseId];
-                if (message.error) {
-                    reject(message.error);
-                } else {
-                    resolve(message.result);
-                }
-            } catch (e) {
-                log.error('Dispatch callback failed: ' + JSON.stringify(e));
-            }
-        }
-
-        /**
-         * Handle a message event received from a connected worker.
-         * @param {Worker} worker - the worker which sent the message, or the global object if running in a worker.
-         * @param {MessageEvent} event - the message event to be handled.
-         * @protected
-         */
-
-    }, {
-        key: '_onMessage',
-        value: function _onMessage(worker, event) {
-            /** @type {DispatchMessage} */
-            var message = event.data;
-            message.args = message.args || [];
-            var promise = void 0;
-            if (message.service) {
-                if (message.service === 'dispatch') {
-                    promise = this._onDispatchMessage(worker, message);
-                } else {
-                    promise = this.call.apply(this, [message.service, message.method].concat(_toConsumableArray(message.args)));
-                }
-            } else if (typeof message.responseId === 'undefined') {
-                log.error('Dispatch caught malformed message from a worker: ' + JSON.stringify(event));
-            } else {
-                this._deliverResponse(message.responseId, message);
-            }
-            if (promise) {
-                if (typeof message.responseId === 'undefined') {
-                    log.error('Dispatch message missing required response ID: ' + JSON.stringify(event));
-                } else {
-                    promise.then(function (result) {
-                        return worker.postMessage({ responseId: message.responseId, result: result });
-                    }, function (error) {
-                        return worker.postMessage({ responseId: message.responseId, error: error });
-                    });
-                }
-            }
-        }
-
-        /**
-         * Fetch the service provider object for a particular service name.
-         * @abstract
-         * @param {string} service - the name of the service to look up
-         * @returns {{provider:(object|Worker), isRemote:boolean}} - the means to contact the service, if found
-         * @protected
-         */
-
-    }, {
-        key: '_getServiceProvider',
-        value: function _getServiceProvider(service) {
-            throw new Error('Could not get provider for ' + service + ': _getServiceProvider not implemented');
-        }
-
-        /**
-         * Handle a call message sent to the dispatch service itself
-         * @abstract
-         * @param {Worker} worker - the worker which sent the message.
-         * @param {DispatchCallMessage} message - the message to be handled.
-         * @returns {Promise|undefined} - a promise for the results of this operation, if appropriate
-         * @private
-         */
-
-    }, {
-        key: '_onDispatchMessage',
-        value: function _onDispatchMessage(worker, message) {
-            throw new Error('Unimplemented dispatch message handler cannot handle ' + message.method + ' method');
-        }
-    }]);
-
-    return SharedDispatch;
+  return SharedDispatch;
 }();
 
 module.exports = SharedDispatch;
@@ -1311,10 +1343,7 @@ module.exports = AjaxLogger;
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 /**
  * Default types of Target supported by the VM
@@ -1331,7 +1360,6 @@ var TargetType = {
    */
   STAGE: 'stage'
 };
-
 module.exports = TargetType;
 
 /***/ })

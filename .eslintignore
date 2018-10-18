@@ -2,5 +2,4 @@ node_modules/*
 build/*
 dist/*
 
-src/lib/ruby-generator/index.js
 src/lib/ruby-generator/generated.js

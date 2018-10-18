@@ -46,7 +46,7 @@ export default function (Blockly) {
     Blockly.Ruby.ORDER_NONE = 99;
     Blockly.Ruby.INFINITE_LOOP_TRAP = null;
 
-    Blockly.Ruby.init = function() {
+    Blockly.Ruby.init = function () {
         this.definitions_ = Object.create(null);
         this.targetEventBlock = null;
         if (Blockly.Variables) {
@@ -55,30 +55,30 @@ export default function (Blockly) {
             } else {
                 this.variableDB_.reset();
             }
-            //this.definitions_['require__smalruby'] = 'require "smalruby"';
-            this.definitions_['receiver_stack'] = ['main'];
-            return this.definitions_['character_stack'] = [];
+            // this.definitions_['require__smalruby'] = 'require "smalruby"';
+            this.definitions_.receiver_stack = ['main'];
+            return this.definitions_.character_stack = [];
         }
     };
 
-    Blockly.Ruby.defineCharacter = function(c) {
-        var blockName, costume, costumeIndex, costumeParam, costumes, name, rotationStyle;
+    Blockly.Ruby.defineCharacter = function (c) {
+        let blockName; let costume; let costumeIndex; let costumeParam; let costumes; let name; let rotationStyle;
         name = c.get('name');
-        blockName = "character_" + name;
+        blockName = `character_${name}`;
         if (!Blockly.Ruby.definitions_[blockName]) {
             switch (c.get('rotationStyle')) {
-                case 'left_right':
-                    rotationStyle = ', rotation_style: :left_right';
-                    break;
-                case 'none':
-                    rotationStyle = ', rotation_style: :none';
-                    break;
-                default:
-                    rotationStyle = '';
+            case 'left_right':
+                rotationStyle = ', rotation_style: :left_right';
+                break;
+            case 'none':
+                rotationStyle = ', rotation_style: :none';
+                break;
+            default:
+                rotationStyle = '';
             }
             costumeParam = ['costume: '];
-            costumes = (function() {
-                var _i, _len, _ref, _results;
+            costumes = (function () {
+                let _i; let _len; let _ref; let _results;
                 _ref = c.costumesWithName();
                 _results = [];
                 for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -86,38 +86,38 @@ export default function (Blockly) {
                     _results.push(Blockly.Ruby.quote_(costume));
                 }
                 return _results;
-            })();
+            }());
             if (costumes.length > 1) {
-                costumeParam.push("[" + (costumes.join(', ')) + "]");
+                costumeParam.push(`[${costumes.join(', ')}]`);
             } else {
                 costumeParam.push(costumes[0]);
             }
             costumeIndex = c.get('costumeIndex');
             if (costumeIndex > 0) {
-                costumeParam.push(", costume_index: " + costumeIndex);
+                costumeParam.push(`, costume_index: ${costumeIndex}`);
             }
-            return Blockly.Ruby.definitions_[blockName] = name + " = Character.new(" + (costumeParam.join('')) + ", x: " + (c.get('x')) + ", y: " + (c.get('y')) + ", angle: " + (c.get('angle')) + rotationStyle + ")";
+            return Blockly.Ruby.definitions_[blockName] = `${name} = Character.new(${costumeParam.join('')}, x: ${c.get('x')}, y: ${c.get('y')}, angle: ${c.get('angle')}${rotationStyle})`;
         }
     };
 
-    Blockly.Ruby.characterStack = function() {
-        return this.definitions_['character_stack'];
+    Blockly.Ruby.characterStack = function () {
+        return this.definitions_.character_stack;
     };
 
-    Blockly.Ruby.character = function() {
+    Blockly.Ruby.character = function () {
         return _.last(this.characterStack());
     };
 
-    Blockly.Ruby.receiverStack = function() {
-        return this.definitions_['receiver_stack'];
+    Blockly.Ruby.receiverStack = function () {
+        return this.definitions_.receiver_stack;
     };
 
-    Blockly.Ruby.receiver = function() {
+    Blockly.Ruby.receiver = function () {
         return _.last(this.receiverStack());
     };
 
-    Blockly.Ruby.receiverName = function(options) {
-        var opts, r;
+    Blockly.Ruby.receiverName = function (options) {
+        let opts; let r;
         if (options == null) {
             options = {};
         }
@@ -130,12 +130,10 @@ export default function (Blockly) {
         if (r === opts.object) {
             if (opts.dropSelf) {
                 return '';
-            } else {
-                return 'self.';
             }
-        } else {
-            return (opts.object.get('name')) + ".";
+            return 'self.';
         }
+        return `${opts.object.get('name')}.`;
     };
 
     Blockly.Ruby.cs = Blockly.Ruby.characterStack;
@@ -158,43 +156,41 @@ export default function (Blockly) {
 
     Blockly.Ruby.rn_ = Blockly.Ruby.receiverName;
 
-    Blockly.Ruby.characterMethodCall_ = function(method, args, options) {
-        var res;
+    Blockly.Ruby.characterMethodCall_ = function (method, args, options) {
+        let res;
         if (options == null) {
             options = {};
         }
         res = this.characterMethodCallInput_(method, args, options);
         if (res[0]) {
-            return res[0] + "\n";
-        } else {
-            return '';
+            return `${res[0]}\n`;
         }
+        return '';
     };
 
-    Blockly.Ruby.characterMethodCallInput_ = function(method, args, options) {
-        var code;
+    Blockly.Ruby.characterMethodCallInput_ = function (method, args, options) {
+        let code;
         if (options == null) {
             options = {};
         }
-        code = this.c_() ? args && args.length > 0 ? "" + (this.rn_(options)) + method + "(" + args + ")" : "" + (this.rn_(options)) + method : null;
+        code = this.c_() ? args && args.length > 0 ? `${this.rn_(options)}${method}(${args})` : `${this.rn_(options)}${method}` : null;
         return [code, this.ORDER_FUNCTION_CALL];
     };
 
-    Blockly.Ruby.characterSetVariable_ = function(name, val, operator) {
+    Blockly.Ruby.characterSetVariable_ = function (name, val, operator) {
         if (operator == null) {
             operator = '=';
         }
         if (this.c_()) {
-            return "" + (this.rn_({
+            return `${this.rn_({
                 dropSelf: false
-            })) + name + " " + operator + " " + val + "\n";
-        } else {
-            return '';
+            })}${name} ${operator} ${val}\n`;
         }
+        return '';
     };
 
-    Blockly.Ruby.characterEvent_ = function(block, bodyName, name, arg) {
-        var body, c;
+    Blockly.Ruby.characterEvent_ = function (block, bodyName, name, arg) {
+        let body; let c;
         if (arg == null) {
             arg = null;
         }
@@ -206,32 +202,30 @@ export default function (Blockly) {
                 this.rs_().pop();
             }
             if (arg) {
-                arg = ", " + arg;
+                arg = `, ${arg}`;
             } else {
                 arg = '';
             }
-            return "\n\n" + (this.rn_()) + "on(:" + name + arg + ") do\n" + body + "end\n";
-        } else {
-            return '';
+            return `\n\n${this.rn_()}on(:${name}${arg}) do\n${body}end\n`;
         }
+        return '';
     };
 
-    Blockly.Ruby.finish = function(code) {
-        var allDefs, definitions, name, prepares, requires, _fn;
+    Blockly.Ruby.finish = function (code) {
+        let allDefs; let definitions; let name; let prepares; let requires; let _fn;
         requires = [];
         prepares = [];
         definitions = [];
-        _fn = function(name) {
-            var def;
+        _fn = function (name) {
+            let def;
             def = Blockly.Ruby.definitions_[name];
             if (_.isString(def)) {
                 if (name.match(/^require__/)) {
                     return requires.push(def);
                 } else if (name.match(/^prepare__/)) {
                     return prepares.push(def);
-                } else {
-                    return definitions.push(def);
                 }
+                return definitions.push(def);
             }
         };
         for (name in Blockly.Ruby.definitions_) {
@@ -240,42 +234,43 @@ export default function (Blockly) {
         if (prepares.length === 0 && definitions.length === 0 && code.length === 0) {
             return '';
         }
-        allDefs = requires.join('\n') + '\n\n';
+        allDefs = `${requires.join('\n')}\n\n`;
         if (prepares.length > 0) {
-            allDefs += prepares.join('\n') + '\n\n';
+            allDefs += `${prepares.join('\n')}\n\n`;
         }
         if (definitions.length > 0) {
-            allDefs += definitions.join('\n').replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n');
+            allDefs += definitions.join('\n').replace(/\n\n+/g, '\n\n')
+                .replace(/\n*$/, '\n');
         }
         return allDefs + code;
     };
 
-    Blockly.Ruby.scrubNakedValue = function(line) {
-        return line + '\n';
+    Blockly.Ruby.scrubNakedValue = function (line) {
+        return `${line}\n`;
     };
 
     Blockly.Ruby.escapeChars_ = {
         '"': '\\"'
     };
 
-    Blockly.Ruby.quote_ = function(string) {
-        var i, s, sb, _fn, _i, _ref;
+    Blockly.Ruby.quote_ = function (string) {
+        let i; let s; let sb; let _fn; let _i; let _ref;
         s = String(string);
         sb = ['"'];
-        _fn = function(i) {
-            var ch;
+        _fn = function (i) {
+            let ch;
             ch = s.charAt(i);
             return sb[i + 1] = Blockly.Ruby.escapeChars_[ch] || ch;
         };
-        for (i = _i = 0, _ref = s.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        for (i = _i = 0, _ref = s.length; _ref >= 0 ? _i < _ref : _i > _ref; i = _ref >= 0 ? ++_i : --_i) {
             _fn(i);
         }
         sb.push('"');
         return sb.join('');
     };
 
-    Blockly.Ruby.scrub_ = function(block, code) {
-        var comment, commentCode, input, nextBlock, nextCode, _fn, _i, _len, _ref;
+    Blockly.Ruby.scrub_ = function (block, code) {
+        let comment; let commentCode; let input; let nextBlock; let nextCode; let _fn; let _i; let _len; let _ref;
         if (code === null) {
             return '';
         }
@@ -283,12 +278,12 @@ export default function (Blockly) {
         if (!block.outputConnection || !block.outputConnection.targetConnection) {
             comment = block.getCommentText();
             if (comment) {
-                commentCode += this.prefixLines(comment, '# ') + '\n';
+                commentCode += `${this.prefixLines(comment, '# ')}\n`;
             }
             _ref = block.inputList;
-            _fn = (function(_this) {
-                return function(input) {
-                    var childBlock;
+            _fn = (function (_this) {
+                return function (input) {
+                    let childBlock;
                     if (input.type === Blockly.INPUT_VALUE) {
                         childBlock = input.connection.targetBlock();
                         if (childBlock) {
@@ -299,7 +294,7 @@ export default function (Blockly) {
                         }
                     }
                 };
-            })(this);
+            }(this));
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                 input = _ref[_i];
                 _fn(input);
@@ -318,24 +313,22 @@ export default function (Blockly) {
         return commentCode + code + nextCode + eventEndCode;
     };
 
-    Blockly.Ruby.spriteName = function() {
+    Blockly.Ruby.spriteName = function () {
         return this.editingTarget.sprite.name;
     };
 
     Blockly.Ruby.broadcastMessageName = function (name) {
         const bm = this.editingTarget.lookupBroadcastMsg(name);
-        let message = null;
+        const message = null;
         if (bm) {
             return Blockly.Ruby.quote_(bm.name);
         }
-        else {
-            return null;
-        }
+        return null;
     };
 
     Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;
 
-    Blockly.Ruby.workspaceToCode = function(block, target) {
+    Blockly.Ruby.workspaceToCode = function (block, target) {
         if (target) {
             this.editingTarget = target;
         }
@@ -344,9 +337,9 @@ export default function (Blockly) {
 
     Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;
 
-    Blockly.Ruby.blockToCode = function(block) {
+    Blockly.Ruby.blockToCode = function (block) {
         if (block && !block.disabled && block.type.match(/^hardware_/)) {
-            this.definitions_['prepare__init_hardware'] = 'init_hardware';
+            this.definitions_.prepare__init_hardware = 'init_hardware';
         }
         return this.blockToCode_(block);
     };
@@ -356,20 +349,18 @@ export default function (Blockly) {
         '_mouse_',
         '_edge_',
         '_random_',
-        '_stage_',
+        '_stage_'
     ];
 
-    Blockly.Ruby.isSpecialSymbol = function(name) {
+    Blockly.Ruby.isSpecialSymbol = function (name) {
         return this.SpecialSymbols.includes(name);
     };
 
-    Blockly.Ruby.specialSymbolToCode = function(name) {
+    Blockly.Ruby.specialSymbolToCode = function (name) {
         if (this.isSpecialSymbol(name)) {
             return `:${name}`;
         }
-        else {
-            return name;
-        }
+        return name;
     };
 
     Blockly = GeneratedBlocks(Blockly);

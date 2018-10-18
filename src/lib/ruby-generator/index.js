@@ -309,7 +309,9 @@ export default function (Blockly) {
         nextCode = this.blockToCode(nextBlock);
         let eventEndCode = '';
         if (block === this.targetEventBlock) {
-            nextCode = this.prefixLines(/** @type {string} */ (nextCode), this.INDENT);
+            if (nextCode != '') {
+                nextCode = this.prefixLines(/** @type {string} */ (nextCode), this.INDENT);
+            }
             eventEndCode = 'end\n';
             this.targetEventBlock = null;
         }

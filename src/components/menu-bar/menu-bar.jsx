@@ -333,7 +333,7 @@ class MenuBar extends React.Component {
                                     )}
                                 </MenuSection>
                                 <MenuSection>
-                                    <SBFileUploader>
+                                    <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
                                         {(renderFileInput, loadProject) => (
                                             <MenuItem
                                                 onClick={loadProject}

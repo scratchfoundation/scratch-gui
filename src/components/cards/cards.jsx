@@ -11,6 +11,8 @@ import leftArrow from './icon--prev.svg';
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import closeIcon from '../close-button/icon--close.svg';
 
+import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
+
 const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
     <div className={styles.headerButtons}>
         <div
@@ -213,6 +215,7 @@ const Cards = props => {
         content,
         dragging,
         isRtl,
+        locale,
         onActivateDeckFactory,
         onCloseCards,
         onDrag,
@@ -264,7 +267,7 @@ const Cards = props => {
                             steps[step].video ? (
                                 <VideoStep
                                     dragging={dragging}
-                                    video={steps[step].video}
+                                    video={translateVideo(steps[step].video, locale)}
                                 />
                             ) : (
                                 <ImageStep
@@ -300,7 +303,8 @@ Cards.propTypes = {
         })
     }),
     dragging: PropTypes.bool.isRequired,
-    isRtl: PropTypes.bool,
+    isRtl: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
     onActivateDeckFactory: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onDrag: PropTypes.func,

@@ -74,7 +74,7 @@ export default {
 
         img: libraryIntro,
         steps: [{
-            video: 'rpjvs3v9gj'
+            video: 'intro-move-sayhello'
         }, {
             title: (
                 <FormattedMessage
@@ -112,7 +112,7 @@ export default {
         ),
         img: libraryAnimate,
         steps: [{
-            video: 'pyur30ho05'
+            video: 'animate-a-name'
         }, {
             title: (
                 <FormattedMessage
@@ -186,7 +186,7 @@ export default {
         ),
         img: libraryMakeMusic,
         steps: [{
-            video: 'ir0j8ljsgm'
+            video: 'Make-Music'
         },
         {
             title: (
@@ -254,7 +254,7 @@ export default {
         ),
         img: libraryMakeAGame,
         steps: [{
-            video: '5rp47ys13g'
+            video: 'Make-A-Game'
         },
         {
             title: (
@@ -340,7 +340,7 @@ export default {
         ),
         img: libraryChaseGame,
         steps: [{
-            video: 'kusyx9thl5'
+            video: 'Chase-Game'
         },
         {
             title: (
@@ -471,7 +471,7 @@ export default {
         ),
         img: addBackdropThumb,
         steps: [{
-            video: 'nict6zdzlx'
+            video: 'add-a-backdrop'
         }, {
             deckIds: [
                 'change-size',
@@ -490,7 +490,7 @@ export default {
         ),
         img: changeSizeThumb,
         steps: [{
-            video: 'p8va85hh61'
+            video: 'change-size'
         }, {
             deckIds: [
                 'glide-around',
@@ -509,7 +509,7 @@ export default {
         ),
         img: glideAroundThumb,
         steps: [{
-            video: 'sh9j978rg8'
+            video: 'glide-around'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -529,7 +529,7 @@ export default {
         ),
         img: recordASound,
         steps: [{
-            video: 'ulzl1fbzny'
+            video: 'record-a-sound'
         }, {
             deckIds: [
                 'Make-Music',
@@ -548,7 +548,7 @@ export default {
         ),
         img: spinThumb,
         steps: [{
-            video: '07fed5hhpv'
+            video: 'spin-video'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -567,7 +567,7 @@ export default {
         ),
         img: hideAndShowThumb,
         steps: [{
-            video: 'g479ahobo9'
+            video: 'hide-and-show'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -587,7 +587,7 @@ export default {
         ),
         img: switchCostumeThumb,
         steps: [{
-            video: '1ocp6a1ejn'
+            video: 'switch-costume'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -607,7 +607,7 @@ export default {
         ),
         img: moveArrowKeysThumb,
         steps: [{
-            video: 'yetrmk4iuu'
+            video: 'move-around-with-arrow-keys'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -626,7 +626,7 @@ export default {
         ),
         img: addEffectsThumb,
         steps: [{
-            video: '3jvl8zgjo2'
+            video: 'add-effects'
         }, {
             deckIds: [
                 'add-a-backdrop',

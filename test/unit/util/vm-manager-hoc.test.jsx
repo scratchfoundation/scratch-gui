@@ -60,6 +60,7 @@ describe('VMManagerHOC', () => {
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                fontsLoaded
                 isLoadingWithId={false}
                 store={store}
                 vm={vm}
@@ -75,27 +76,46 @@ describe('VMManagerHOC', () => {
         // nextTick needed since vm.loadProject is async, and we have to wait for it :/
         process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID));
     });
-    test('if there is projectData, the child is rendered', () => {
+    test('if the fontsLoaded prop becomes true, it loads project data into the vm', () => {
+        vm.loadProject = jest.fn(() => Promise.resolve());
+        const mockedOnLoadedProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
-                projectData="100"
+                isLoadingWithId
                 store={store}
                 vm={vm}
+                onLoadedProject={mockedOnLoadedProject}
             />
         );
-        expect(mounted.find('div').length).toBe(1);
+        mounted.setProps({
+            fontsLoaded: true,
+            loadingState: LoadingState.LOADING_VM_WITH_ID,
+            projectData: '100'
+        });
+        expect(vm.loadProject).toHaveBeenLastCalledWith('100');
+        // nextTick needed since vm.loadProject is async, and we have to wait for it :/
+        process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID));
     });
-    test('if there is no projectData, nothing is rendered', () => {
+    test('if the fontsLoaded prop is false, project data is never loaded', () => {
+        vm.loadProject = jest.fn(() => Promise.resolve());
+        const mockedOnLoadedProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                isLoadingWithId
                 store={store}
                 vm={vm}
+                onLoadedProject={mockedOnLoadedProject}
             />
         );
-        expect(mounted.find('div').length).toBe(0);
+        mounted.setProps({
+            loadingState: LoadingState.LOADING_VM_WITH_ID,
+            projectData: '100'
+        });
+        expect(vm.loadProject).toHaveBeenCalledTimes(0);
+        process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenCalledTimes(0));
     });
 });

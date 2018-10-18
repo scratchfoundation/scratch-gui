@@ -20,6 +20,9 @@ const base = {
         host: '0.0.0.0',
         port: process.env.PORT || 8601
     },
+    node: {
+        fs: 'empty'
+    },
     output: {
         library: 'GUI',
         filename: '[name].js'

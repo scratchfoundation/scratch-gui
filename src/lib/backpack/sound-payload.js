@@ -3,7 +3,7 @@ import soundThumbnail from '!base64-loader!./sound-thumbnail.jpg';
 import storage from '../storage';
 
 const soundPayload = sound => {
-    const assetDataUrl = storage.get(sound.assetId).encodeDataURI();
+    const assetDataUrl = sound.asset.encodeDataURI();
     const assetDataFormat = sound.dataFormat;
     const payload = {
         type: 'sound',

@@ -64,7 +64,7 @@ const Selector = props => {
                         onRemoveSortable={onRemoveSortable}
                     >
                         <SpriteSelectorItem
-                            assetId={item.assetId}
+                            asset={item.asset}
                             className={classNames(styles.listItem, {
                                 [styles.placeholder]: isRelevantDrag && index === draggingIndex
                             })}

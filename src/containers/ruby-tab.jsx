@@ -18,6 +18,9 @@ const RubyTab = ({rubyCode}) => (
             useSoftTabs: true,
             showInvisibles: true
         }}
+        style={{
+            fontFamily: ['Monaco', 'Menlo', 'Consolas', 'source-code-pro', 'monospace']
+        }}
         theme="clouds"
         value={rubyCode}
         width="100%"

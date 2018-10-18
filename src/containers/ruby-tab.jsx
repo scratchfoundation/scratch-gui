@@ -19,7 +19,7 @@ const RubyTab = ({rubyCode}) => (
             showInvisibles: true
         }}
         style={{
-            fontFamily: 'monaco'
+            fontFamily: ['Monaco', 'Menlo', 'Consolas', 'source-code-pro', 'monospace']
         }}
         theme="clouds"
         value={rubyCode}

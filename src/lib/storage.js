@@ -55,7 +55,7 @@ class Storage extends ScratchStorage {
     }
     cacheDefaultProject () {
         const defaultProjectAssets = defaultProject(this.translator);
-        defaultProjectAssets.forEach(asset => this.cache(
+        defaultProjectAssets.forEach(asset => this.builtinHelper._store(
             this.AssetType[asset.assetType],
             this.DataFormat[asset.dataFormat],
             asset.data,

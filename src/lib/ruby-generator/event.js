@@ -35,22 +35,22 @@ export default function (Blockly) {
 
     Blockly.Ruby.event_whenbroadcastreceived = function (block) {
         Blockly.Ruby.targetEventBlock = block;
-        const message = block.getFieldValue('BROADCAST_OPTION') || null;
-        return `${Blockly.Ruby.spriteName()}.when(receive:, "${message}") do\n`;
+        const message = Blockly.Ruby.broadcastMessageName(block.getFieldValue('BROADCAST_OPTION'));
+        return `${Blockly.Ruby.spriteName()}.when(receive:, ${message}) do\n`;
     };
 
     Blockly.Ruby.event_broadcast = function (block) {
         const message = Blockly.Ruby.valueToCode(block, 'BROADCAST_INPUT', Blockly.Ruby.ORDER_NONE) || null;
-        return `broadcast("${message}")\n`;
+        return `broadcast(${message})\n`;
     };
 
     Blockly.Ruby.event_broadcastandwait = function (block) {
         const message = Blockly.Ruby.valueToCode(block, 'BROADCAST_INPUT', Blockly.Ruby.ORDER_NONE) || null;
-        return `broadcast_and_wait("${message}")\n`;
+        return `broadcast_and_wait(${message})\n`;
     };
 
     Blockly.Ruby.event_broadcast_menu = function (block) {
-        const message = block.getFieldValue('BROADCAST_OPTION') || null;
+        const message = Blockly.Ruby.broadcastMessageName(block.getFieldValue('BROADCAST_OPTION'));
         return [message, Blockly.Ruby.ORDER_ATOMIC];
     };
 

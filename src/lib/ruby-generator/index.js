@@ -322,6 +322,17 @@ export default function (Blockly) {
         return this.editingTarget.sprite.name;
     };
 
+    Blockly.Ruby.broadcastMessageName = function (name) {
+        const bm = this.editingTarget.lookupBroadcastMsg(name);
+        let message = null;
+        if (bm) {
+            return Blockly.Ruby.quote_(bm.name);
+        }
+        else {
+            return null;
+        }
+    };
+
     Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;
 
     Blockly.Ruby.workspaceToCode = function(block, target) {

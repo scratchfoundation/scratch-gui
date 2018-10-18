@@ -455,7 +455,6 @@ class Blocks extends React.Component {
                         {...this.state.connectionModal}
                         vm={vm}
                         onCancel={this.handleConnectionModalClose}
-                        onStatusButtonUpdate={this.handleStatusButtonUpdate}
                     />
                 ) : null}
                 {extensionLibraryVisible ? (

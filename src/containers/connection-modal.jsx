@@ -48,7 +48,6 @@ class ConnectionModal extends React.Component {
         });
     }
     handleDisconnect () {
-        this.props.onStatusButtonUpdate(this.props.extensionId, 'not ready');
         this.props.vm.disconnectPeripheral(this.props.extensionId);
         this.props.onCancel();
     }
@@ -60,7 +59,6 @@ class ConnectionModal extends React.Component {
         this.props.onCancel();
     }
     handleError () {
-        this.props.onStatusButtonUpdate();
         // Assume errors that come in during scanning phase are the result of not
         // having scratch-link installed.
         if (this.state.phase === PHASES.scanning || this.state.phase === PHASES.unavailable) {
@@ -79,7 +77,6 @@ class ConnectionModal extends React.Component {
         }
     }
     handleConnected () {
-        this.props.onStatusButtonUpdate();
         this.setState({
             phase: PHASES.connected
         });
@@ -124,7 +121,6 @@ class ConnectionModal extends React.Component {
 ConnectionModal.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onStatusButtonUpdate: PropTypes.func.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

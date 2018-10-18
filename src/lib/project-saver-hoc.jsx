@@ -39,7 +39,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (this.props.isCreating && !prevProps.isCreating) {
                 this.storeProject()
                     .then(response => {
-                        this.props.onCreated(response.id);
+                        this.props.onCreated(response.id.toString());
                     })
                     .catch(err => {
                         // NOTE: should throw up a notice for user

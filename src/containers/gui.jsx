@@ -20,6 +20,7 @@ import {
     closeBackdropLibrary
 } from '../reducers/modals';
 
+import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
@@ -132,6 +133,7 @@ const ConnectedGUI = connect(
 // ability to compose reducers.
 const WrappedGui = compose(
     ErrorBoundaryHOC('Top Level App'),
+    FontLoaderHOC,
     ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,

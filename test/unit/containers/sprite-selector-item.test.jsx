@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 
 import SpriteSelectorItem from '../../../src/containers/sprite-selector-item';
-import {HAS_FONT_REGEXP} from '../../../src/containers/sprite-selector-item';
 import CloseButton from '../../../src/components/close-button/close-button';
 
 describe('SpriteSelectorItem Container', () => {
@@ -55,13 +54,5 @@ describe('SpriteSelectorItem Container', () => {
         const wrapper = mountWithIntl(getContainer());
         wrapper.find(CloseButton).simulate('click');
         expect(onDeleteButtonClick).toHaveBeenCalledWith(1337);
-    });
-
-    test('Has font regexp works', () => {
-        expect('font-family="Sans Serif"'.match(HAS_FONT_REGEXP)).toBeTruthy();
-        expect('font-family="none" font-family="Sans Serif"'.match(HAS_FONT_REGEXP)).toBeTruthy();
-        expect('font-family = "Sans Serif"'.match(HAS_FONT_REGEXP)).toBeTruthy();
-
-        expect('font-family="none"'.match(HAS_FONT_REGEXP)).toBeFalsy();
     });
 });

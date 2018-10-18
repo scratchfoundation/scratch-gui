@@ -17,7 +17,7 @@ const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/START_LOADING_FI
 const START_SAVING = 'scratch-gui/project-state/START_SAVING';
 const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_SAVING_BEFORE_CREATING_NEW';
 
-const defaultProjectId = 0; // hardcoded id of default project
+const defaultProjectId = '0'; // hardcoded id of default project
 
 const LoadingState = keyMirror({
     NOT_LOADED: null,
@@ -83,7 +83,7 @@ const reducer = function (state, action) {
         if (state.loadingState === LoadingState.CREATING_NEW) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.SHOWING_WITH_ID,
-                id: action.id
+                projectId: action.id
             });
         }
         return state;
@@ -160,8 +160,8 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_PROJECT_ID:
-        // if we were already showing something, only fetch project if the
-        // project id has changed. This prevents re-fetching projects unnecessarily.
+        // if we were already showing a project, and a different projectId is set, only fetch that project if
+        // projectId has changed. This prevents re-fetching projects unnecessarily.
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
             if (state.projectId !== action.id) {
                 return Object.assign({}, state, {

@@ -74,7 +74,7 @@ export default {
 
         img: libraryIntro,
         steps: [{
-            video: 'https://www.youtube.com/embed/h9x8IPGN3SI'
+            video: 'intro-move-sayhello'
         }, {
             title: (
                 <FormattedMessage
@@ -112,7 +112,7 @@ export default {
         ),
         img: libraryAnimate,
         steps: [{
-            video: 'https://www.youtube.com/embed/RUih6RnEdPg'
+            video: 'animate-a-name'
         }, {
             title: (
                 <FormattedMessage
@@ -186,7 +186,7 @@ export default {
         ),
         img: libraryMakeMusic,
         steps: [{
-            video: 'https://www.youtube.com/embed/UQHHAQGuhl8'
+            video: 'Make-Music'
         },
         {
             title: (
@@ -254,7 +254,7 @@ export default {
         ),
         img: libraryMakeAGame,
         steps: [{
-            video: 'https://www.youtube.com/embed/3G2miGV4TbQ'
+            video: 'Make-A-Game'
         },
         {
             title: (
@@ -340,7 +340,7 @@ export default {
         ),
         img: libraryChaseGame,
         steps: [{
-            video: 'https://www.youtube.com/embed/IRf9-P8PiZo'
+            video: 'Chase-Game'
         },
         {
             title: (
@@ -471,7 +471,7 @@ export default {
         ),
         img: addBackdropThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/Xv3Z80yy2l0'
+            video: 'add-a-backdrop'
         }, {
             deckIds: [
                 'change-size',
@@ -490,7 +490,7 @@ export default {
         ),
         img: changeSizeThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/PJijGbhcT3E'
+            video: 'change-size'
         }, {
             deckIds: [
                 'glide-around',
@@ -509,7 +509,7 @@ export default {
         ),
         img: glideAroundThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/KYmbgLX1xDs'
+            video: 'glide-around'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -529,7 +529,7 @@ export default {
         ),
         img: recordASound,
         steps: [{
-            video: 'https://www.youtube.com/embed/1WaU6e70Zig'
+            video: 'record-a-sound'
         }, {
             deckIds: [
                 'Make-Music',
@@ -548,7 +548,7 @@ export default {
         ),
         img: spinThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/C76V5cuI9XM'
+            video: 'spin-video'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -567,7 +567,7 @@ export default {
         ),
         img: hideAndShowThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/6yWUvRU19ms'
+            video: 'hide-and-show'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -587,7 +587,7 @@ export default {
         ),
         img: switchCostumeThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/vppgw1Xiegw'
+            video: 'switch-costume'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -607,7 +607,7 @@ export default {
         ),
         img: moveArrowKeysThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/uf6agkKnXJw'
+            video: 'move-around-with-arrow-keys'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -626,7 +626,7 @@ export default {
         ),
         img: addEffectsThumb,
         steps: [{
-            video: 'https://www.youtube.com/embed/w3kGWEzRtxY'
+            video: 'add-effects'
         }, {
             deckIds: [
                 'add-a-backdrop',

@@ -23,11 +23,11 @@ class ConnectionModal extends React.Component {
     }
     componentDidMount () {
         this.props.vm.on('PERIPHERAL_CONNECTED', this.handleConnected);
-        this.props.vm.on('PERIPHERAL_ERROR', this.handleError);
+        this.props.vm.on('PERIPHERAL_REQUEST_ERROR', this.handleError);
     }
     componentWillUnmount () {
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleConnected);
-        this.props.vm.removeListener('PERIPHERAL_ERROR', this.handleError);
+        this.props.vm.removeListener('PERIPHERAL_REQUEST_ERROR', this.handleError);
     }
     handleScanning () {
         this.setState({

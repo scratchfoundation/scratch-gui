@@ -229,7 +229,7 @@ class Blocks extends React.Component {
         this.props.vm.addListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.addListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
         this.props.vm.addListener('PERIPHERAL_CONNECTED', this.handleStatusButtonUpdate);
-        this.props.vm.addListener('PERIPHERAL_ERROR', this.handleStatusButtonUpdate);
+        this.props.vm.addListener('PERIPHERAL_DISCONNECT_ERROR', this.handleStatusButtonUpdate);
     }
     detachVM () {
         this.props.vm.removeListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
@@ -242,7 +242,7 @@ class Blocks extends React.Component {
         this.props.vm.removeListener('EXTENSION_ADDED', this.handleExtensionAdded);
         this.props.vm.removeListener('BLOCKSINFO_UPDATE', this.handleBlocksInfoUpdate);
         this.props.vm.removeListener('PERIPHERAL_CONNECTED', this.handleStatusButtonUpdate);
-        this.props.vm.removeListener('PERIPHERAL_ERROR', this.handleStatusButtonUpdate);
+        this.props.vm.removeListener('PERIPHERAL_DISCONNECT_ERROR', this.handleStatusButtonUpdate);
     }
 
     updateToolboxBlockValue (id, value) {

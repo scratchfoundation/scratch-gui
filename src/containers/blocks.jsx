@@ -383,19 +383,9 @@ class Blocks extends React.Component {
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
-        const extension = extensionData.find(ext => ext.extensionId === extensionId);
-        if (extension) {
-            this.setState({connectionModal: {
-                extensionId: extensionId,
-                useAutoScan: extension.useAutoScan,
-                peripheralImage: extension.peripheralImage,
-                smallPeripheralImage: extension.smallPeripheralImage,
-                peripheralButtonImage: extension.peripheralButtonImage,
-                name: extension.name,
-                connectingMessage: extension.connectingMessage,
-                helpLink: extension.helpLink
-            }});
-        }
+        this.setState({connectionModal: {
+            extensionId: extensionId
+        }});
     }
     handleConnectionModalClose () {
         this.setState({connectionModal: null});

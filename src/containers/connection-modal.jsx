@@ -4,6 +4,7 @@ import bindAll from 'lodash.bindall';
 import ConnectionModalComponent, {PHASES} from '../components/connection-modal/connection-modal.jsx';
 import VM from 'scratch-vm';
 import analytics from '../lib/analytics';
+import extensionData from '../lib/libraries/extensions/index.jsx';
 
 class ConnectionModal extends React.Component {
     constructor (props) {
@@ -17,6 +18,7 @@ class ConnectionModal extends React.Component {
             'handleHelp'
         ]);
         this.state = {
+            extension: extensionData.find(ext => ext.extensionId === props.extensionId),
             phase: props.vm.getPeripheralIsConnected(props.extensionId) ?
                 PHASES.connected : PHASES.scanning
         };
@@ -88,7 +90,7 @@ class ConnectionModal extends React.Component {
         });
     }
     handleHelp () {
-        window.open(this.props.helpLink, '_blank');
+        window.open(this.state.extension.helpLink, '_blank');
         analytics.event({
             category: 'extensions',
             action: 'help',
@@ -98,15 +100,15 @@ class ConnectionModal extends React.Component {
     render () {
         return (
             <ConnectionModalComponent
-                connectingMessage={this.props.connectingMessage}
+                connectingMessage={this.state.extension.connectingMessage}
                 extensionId={this.props.extensionId}
-                name={this.props.name}
-                peripheralButtonImage={this.props.peripheralButtonImage}
-                peripheralImage={this.props.peripheralImage}
+                name={this.state.extension.name}
+                peripheralButtonImage={this.state.extension.peripheralButtonImage}
+                peripheralImage={this.state.extension.peripheralImage}
                 phase={this.state.phase}
-                smallPeripheralImage={this.props.smallPeripheralImage}
+                smallPeripheralImage={this.state.extension.smallPeripheralImage}
                 title={this.props.extensionId}
-                useAutoScan={this.props.useAutoScan}
+                useAutoScan={this.state.extension.useAutoScan}
                 vm={this.props.vm}
                 onCancel={this.props.onCancel}
                 onConnected={this.handleConnected}
@@ -120,16 +122,9 @@ class ConnectionModal extends React.Component {
 }
 
 ConnectionModal.propTypes = {
-    connectingMessage: PropTypes.node.isRequired,
     extensionId: PropTypes.string.isRequired,
-    helpLink: PropTypes.string.isRequired,
-    name: PropTypes.node.isRequired,
     onCancel: PropTypes.func.isRequired,
     onStatusButtonUpdate: PropTypes.func.isRequired,
-    peripheralButtonImage: PropTypes.string,
-    peripheralImage: PropTypes.string.isRequired,
-    smallPeripheralImage: PropTypes.string.isRequired,
-    useAutoScan: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

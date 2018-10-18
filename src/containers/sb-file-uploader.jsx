@@ -112,6 +112,7 @@ class SBFileUploader extends React.Component {
 }
 
 SBFileUploader.propTypes = {
+    canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
     intl: intlShape.isRequired,
     loadingState: PropTypes.oneOf(LoadingStates),
@@ -127,9 +128,9 @@ const mapStateToProps = state => ({
     vm: state.scratchGui.vm
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     onLoadingFinished: loadingState => {
-        dispatch(onLoadedProject(loadingState));
+        dispatch(onLoadedProject(loadingState, ownProps.canSave));
         dispatch(closeLoadingProject());
     },
     onLoadingStarted: () => {

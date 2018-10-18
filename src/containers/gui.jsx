@@ -4,9 +4,13 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import VM from 'scratch-vm';
+import {injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
+import {
+    getIsShowingProject
+} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 import {
     activateTab,
@@ -25,18 +29,29 @@ import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
+import {defaultProjectTitleMessages} from '../reducers/project-title';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
 class GUI extends React.Component {
     componentDidMount () {
-        if (this.props.projectTitle) {
-            this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
+        this.setReduxTitle(this.props.projectTitle);
+    }
+    componentDidUpdate (prevProps) {
+        if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
+            this.props.onUpdateProjectId(this.props.projectId);
+        }
+        if (this.props.projectTitle !== prevProps.projectTitle) {
+            this.setReduxTitle(this.props.projectTitle);
         }
     }
-    componentWillReceiveProps (nextProps) {
-        if (this.props.projectTitle !== nextProps.projectTitle) {
-            this.props.onUpdateReduxProjectTitle(nextProps.projectTitle);
+    setReduxTitle (newTitle) {
+        if (newTitle === null || typeof newTitle === 'undefined') {
+            this.props.onUpdateReduxProjectTitle(
+                this.props.intl.formatMessage(defaultProjectTitleMessages.defaultProjectTitle)
+            );
+        } else {
+            this.props.onUpdateReduxProjectTitle(newTitle);
         }
     }
     render () {
@@ -50,8 +65,11 @@ class GUI extends React.Component {
             errorMessage,
             hideIntro,
             loadingError,
+            isShowingProject,
+            onUpdateProjectId,
             onUpdateReduxProjectTitle,
             projectHost,
+            projectId,
             projectTitle,
             /* eslint-enable no-unused-vars */
             children,
@@ -78,40 +96,53 @@ GUI.propTypes = {
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
+    intl: intlShape,
     isLoading: PropTypes.bool,
+    isShowingProject: PropTypes.bool,
     loadingError: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onChangeProjectInfo: PropTypes.func,
     onSeeCommunity: PropTypes.func,
+    onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectHost: PropTypes.string,
+    projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     projectTitle: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-    activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
-    alertsVisible: state.scratchGui.alerts.visible,
-    backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
-    blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
-    cardsVisible: state.scratchGui.cards.visible,
-    costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
-    costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
-    importInfoVisible: state.scratchGui.modals.importInfo,
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-    isRtl: state.locales.isRtl,
-    loadingStateVisible: state.scratchGui.modals.loadingProject,
-    previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
-    targetIsStage: (
-        state.scratchGui.targets.stage &&
-        state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
-    ),
-    soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
-    tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
-    vm: state.scratchGui.vm
-});
+GUI.defaultProps = {
+    onUpdateProjectId: () => {}
+};
+
+const mapStateToProps = (state, ownProps) => {
+    const loadingState = state.scratchGui.projectState.loadingState;
+    return {
+        activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+        alertsVisible: state.scratchGui.alerts.visible,
+        backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
+        blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+        cardsVisible: state.scratchGui.cards.visible,
+        costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
+        costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
+        importInfoVisible: state.scratchGui.modals.importInfo,
+        isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+        isRtl: state.locales.isRtl,
+        isShowingProject: getIsShowingProject(loadingState),
+        loadingStateVisible: state.scratchGui.modals.loadingProject,
+        previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
+        projectId: state.scratchGui.projectState.projectId,
+        targetIsStage: (
+            state.scratchGui.targets.stage &&
+            state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
+        ),
+        soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+        tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
+        vm: state.scratchGui.vm
+    };
+};
 
 const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary()),
@@ -123,10 +154,10 @@ const mapDispatchToProps = dispatch => ({
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
-const ConnectedGUI = connect(
+const ConnectedGUI = injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps,
-)(GUI);
+)(GUI));
 
 // note that redux's 'compose' function is just being used as a general utility to make
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's

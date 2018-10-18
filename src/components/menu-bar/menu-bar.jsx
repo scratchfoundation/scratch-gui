@@ -656,7 +656,6 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
-    startSaving: PropTypes.func,
     username: PropTypes.string
 };
 

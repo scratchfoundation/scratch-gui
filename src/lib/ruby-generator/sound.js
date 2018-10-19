@@ -5,18 +5,18 @@
  */
 export default function (Blockly){
     Blockly.Ruby.sound_sounds_menu = function (block) {
-        const sound = block.getFieldValue('SOUND_MENU') || null;
+        const sound = Blockly.Ruby.quote_(block.getFieldValue('SOUND_MENU')) || null;
         return [sound, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sound_playuntildone = function (block) {
         const sound = Blockly.Ruby.valueToCode(block, 'SOUND_MENU', Blockly.Ruby.ORDER_NONE) || null;
-        return `Sound.play_until_done(name: "${sound}")\n`;
+        return `Sound.play_until_done(name: ${sound})\n`;
     };
 
     Blockly.Ruby.sound_play = function (block) {
         const sound = Blockly.Ruby.valueToCode(block, 'SOUND_MENU', Blockly.Ruby.ORDER_NONE) || null;
-        return `Sound.play(name: "${sound}")\n`;
+        return `Sound.play(name: ${sound})\n`;
     };
 
     Blockly.Ruby.sound_stopallsounds = function () {
@@ -24,15 +24,15 @@ export default function (Blockly){
     };
 
     Blockly.Ruby.sound_changeeffectby = function (block) {
-        const effect = block.getFieldValue('EFFECT') || null;
+        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT')) || null;
         const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
-        return `change_effect_by(effect: "${effect}", value: ${value})\n`;
+        return `change_effect_by(effect: ${effect}, value: ${value})\n`;
     };
 
     Blockly.Ruby.sound_seteffectto = function (block) {
-        const effect = block.getFieldValue('EFFECT') || null;
+        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT')) || null;
         const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
-        return `set_effect(effect: "${effect}",value: ${value})\n`;
+        return `set_effect(effect: ${effect}, value: ${value})\n`;
     };
 
     Blockly.Ruby.sound_cleareffects = function () {

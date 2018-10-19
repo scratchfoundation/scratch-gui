@@ -19,7 +19,10 @@ const RubyTab = ({rubyCode}) => (
             showInvisibles: true
         }}
         style={{
-            fontFamily: ['Monaco', 'Menlo', 'Consolas', 'source-code-pro', 'monospace']
+            fontFamily: ['Monaco', 'Menlo', 'Consolas', 'source-code-pro', 'monospace'],
+            borderTopRightRadius: '0.5rem',
+            borderBottomRightRadius: '0.5rem',
+            border: '1px solid hsla(0, 0%, 0%, 0.15)'
         }}
         theme="clouds"
         value={rubyCode}

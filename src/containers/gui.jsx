@@ -25,6 +25,7 @@ import {
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
+import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
@@ -163,6 +164,7 @@ const ConnectedGUI = injectIntl(connect(
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
 const WrappedGui = compose(
+    LocalizationHOC,
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
     ProjectFetcherHOC,

@@ -16,6 +16,11 @@ const messages = defineMessages({
         id: 'gui.gui.projectTitlePlaceholder',
         description: 'Placeholder for project title when blank',
         defaultMessage: 'Project title here'
+    },
+    defaultProjectTitle: {
+        id: 'gui.gui.defaultProjectTitle',
+        description: 'Default title for project',
+        defaultMessage: 'Scratch Project'
     }
 });
 
@@ -41,7 +46,10 @@ class ProjectTitleInput extends React.Component {
                 placeholder={this.props.intl.formatMessage(messages.projectTitlePlaceholder)}
                 tabIndex="0"
                 type="text"
-                value={this.props.projectTitle}
+                value={this.props.projectTitle ?
+                    this.props.projectTitle :
+                    this.props.intl.formatMessage(messages.defaultProjectTitle)
+                }
                 onSubmit={this.handleUpdateProjectTitle}
             />
         );

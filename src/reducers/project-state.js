@@ -65,6 +65,9 @@ const getIsShowingWithId = loadingState => (
 const getIsShowingWithoutId = loadingState => (
     loadingState === LoadingState.SHOWING_WITHOUT_ID
 );
+const getIsError = loadingState => (
+    loadingState === LoadingState.ERROR
+);
 
 const initialState = {
     errStr: null,
@@ -326,6 +329,7 @@ export {
     createProject,
     defaultProjectId,
     getIsCreating,
+    getIsError,
     getIsFetchingWithoutId,
     getIsFetchingWithId,
     getIsLoadingWithId,

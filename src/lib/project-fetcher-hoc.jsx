@@ -8,6 +8,7 @@ import {
     LoadingStates,
     defaultProjectId,
     getIsFetchingWithId,
+    onError,
     onFetchedProjectData,
     setProjectId
 } from '../reducers/project-state';
@@ -74,6 +75,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     }
                 })
                 .catch(err => {
+                    this.props.onError(`Saving the project failed with error: ${err}`);
                     log.error(err);
                 });
         }
@@ -106,6 +108,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -123,6 +126,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
+        onError: errStr => dispatch(onError(errStr)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))

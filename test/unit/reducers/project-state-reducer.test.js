@@ -67,24 +67,22 @@ test('onFetchedProjectData new loads project data into vm', () => {
     expect(resultState.projectData).toBe('1010101');
 });
 
-test('onFetchedProjectData new, to save loads project data into vm, prepares to save next', () => {
-    const initialState = {
-        projectData: null,
-        loadingState: LoadingState.FETCHING_NEW_DEFAULT_TO_SAVE
-    };
-    const action = onFetchedProjectData('1010101', initialState.loadingState);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_NEW_DEFAULT_TO_SAVE);
-    expect(resultState.projectData).toBe('1010101');
-});
-
-test('onLoadedProject upload shows without id', () => {
+test('onLoadedProject upload, with canSave false, shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
-    const action = onLoadedProject(initialState.loadingState);
+    const action = onLoadedProject(initialState.loadingState, false);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
+});
+
+test('onLoadedProject upload, with canSave true, prepares to save', () => {
+    const initialState = {
+        loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
+    };
+    const action = onLoadedProject(initialState.loadingState, true);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID);
 });
 
 test('onLoadedProject with id shows with id', () => {
@@ -105,13 +103,13 @@ test('onLoadedProject new shows without id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject new, to save shows with id', () => {
+test('onLoadedProject new, to save shows without id', () => {
     const initialState = {
-        loadingState: LoadingState.LOADING_VM_NEW_DEFAULT_TO_SAVE
+        loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
     const action = onLoadedProject(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
 test('onUpdated with id shows with id', () => {
@@ -129,7 +127,7 @@ test('onUpdated with id, before new, fetches default project', () => {
     };
     const action = onUpdated(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT_TO_SAVE);
+    expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT);
 });
 
 test('setProjectId, with same id as before, should show with id, not fetch', () => {
@@ -219,15 +217,26 @@ test('saveProject should prepare to save', () => {
     expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID);
 });
 
-test('onError from unloaded state should show error', () => {
-    const initialState = {
-        errStr: null,
-        loadingState: LoadingState.NOT_LOADED
-    };
-    const action = onError('Error string');
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.ERROR);
-    expect(resultState.errStr).toBe('Error string');
+test('onError from various states should show error', () => {
+    const startStates = [
+        LoadingState.LOADING_VM_NEW_DEFAULT,
+        LoadingState.LOADING_VM_WITH_ID,
+        LoadingState.FETCHING_WITH_ID,
+        LoadingState.FETCHING_NEW_DEFAULT,
+        LoadingState.SAVING_WITH_ID,
+        LoadingState.SAVING_WITH_ID_BEFORE_NEW,
+        LoadingState.CREATING_NEW
+    ];
+    for (const startState of startStates) {
+        const initialState = {
+            errStr: null,
+            loadingState: startState
+        };
+        const action = onError('Error string');
+        const resultState = projectStateReducer(initialState, action);
+        expect(resultState.loadingState).toBe(LoadingState.ERROR);
+        expect(resultState.errStr).toBe('Error string');
+    }
 });
 
 test('onError from showing project should show error', () => {

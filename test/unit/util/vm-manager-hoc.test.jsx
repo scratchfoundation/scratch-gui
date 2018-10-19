@@ -68,13 +68,16 @@ describe('VMManagerHOC', () => {
             />
         );
         mounted.setProps({
+            canSave: true,
             isLoadingWithId: true,
             loadingState: LoadingState.LOADING_VM_WITH_ID,
             projectData: '100'
         });
         expect(vm.loadProject).toHaveBeenLastCalledWith('100');
         // nextTick needed since vm.loadProject is async, and we have to wait for it :/
-        process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID));
+        process.nextTick(() => (
+            expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, true)
+        ));
     });
     test('if the fontsLoaded prop becomes true, it loads project data into the vm', () => {
         vm.loadProject = jest.fn(() => Promise.resolve());
@@ -90,13 +93,16 @@ describe('VMManagerHOC', () => {
             />
         );
         mounted.setProps({
+            canSave: false,
             fontsLoaded: true,
             loadingState: LoadingState.LOADING_VM_WITH_ID,
             projectData: '100'
         });
         expect(vm.loadProject).toHaveBeenLastCalledWith('100');
         // nextTick needed since vm.loadProject is async, and we have to wait for it :/
-        process.nextTick(() => expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID));
+        process.nextTick(() => (
+            expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, false)
+        ));
     });
     test('if the fontsLoaded prop is false, project data is never loaded', () => {
         vm.loadProject = jest.fn(() => Promise.resolve());

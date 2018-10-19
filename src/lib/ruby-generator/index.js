@@ -8,6 +8,7 @@ import LooksBlocks from './looks.js';
 import SoundBlocks from './sound.js';
 import EventBlocks from './event.js';
 import ControlBlocks from './control.js';
+import OperatorsBlocks from './operators.js';
 
 /**
  * Define Ruby
@@ -390,6 +391,7 @@ export default function (Blockly) {
     Blockly = SoundBlocks(Blockly);
     Blockly = EventBlocks(Blockly);
     Blockly = ControlBlocks(Blockly);
+    Blockly = OperatorsBlocks(Blockly);
 
     return Blockly;
 }

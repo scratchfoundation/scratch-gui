@@ -30,7 +30,7 @@ import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
-import {defaultProjectTitleMessages} from '../reducers/project-title';
+import sharedMessages from '../lib/shared-messages';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
@@ -49,7 +49,7 @@ class GUI extends React.Component {
     setReduxTitle (newTitle) {
         if (newTitle === null || typeof newTitle === 'undefined') {
             this.props.onUpdateReduxProjectTitle(
-                this.props.intl.formatMessage(defaultProjectTitleMessages.defaultProjectTitle)
+                this.props.intl.formatMessage(sharedMessages.defaultProjectTitle)
             );
         } else {
             this.props.onUpdateReduxProjectTitle(newTitle);

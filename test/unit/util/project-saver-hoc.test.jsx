@@ -213,45 +213,4 @@ describe('projectSaverHOC', () => {
         });
         expect(vm.saveProjectSb3).not.toHaveBeenCalled();
     });
-
-    // test('template', () => {
-    //     vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
-    //     const mockedCreateProject = jest.fn();
-    //     const mockedOnCreated = jest.fn();
-    //     const mockedOnError = jest.fn();
-    //     const mockedOnUpdated = jest.fn();
-    //     const mockedSaveProject = jest.fn();
-    //
-    //     const Component = () => <div />;
-    //     const WrappedComponent = projectSaverHOC(Component);
-    //     const mounted = mount(
-    //         <WrappedComponent
-    //             canSave={false}
-    //             createProject={mockedCreateProject}
-    //             isCreating={false}
-    //             isShowingWithId={false}
-    //             isShowingWithoutId={false}
-    //             isUpdating={false}
-    //             loadingState={LoadingState.NOT_LOADED}
-    //             reduxProjectId={'100'}
-    //             saveProject={mockedSaveProject}
-    //             store={store}
-    //             vm={vm}
-    //             onCreated={mockedOnCreated}
-    //             onError={mockedOnError}
-    //             onUpdated={mockedOnUpdated}
-    //         />
-    //     );
-    //     mounted.setProps({
-    //         canSave: true,
-    //         isShowingWithId: true,
-    //         loadingState: LoadingState.SHOWING_WITH_ID,
-    //         projectData: '100'
-    //     });
-    //     expect(vm.loadProject).toHaveBeenLastCalledWith('100');
-    //     // nextTick needed since vm.loadProject is async, and we have to wait for it :/
-    //     process.nextTick(() => (
-    //         expect(mockedCreateProject).toHaveBeenCalled()
-    //     ));
-    // });
 });

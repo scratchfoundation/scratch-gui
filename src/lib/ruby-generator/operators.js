@@ -89,7 +89,7 @@ export default function (Blockly) {
     Blockly.Ruby.operator_letter_of = function (block) {
         const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
         const str = Blockly.Ruby.valueToCode(block, 'STRING', order) || Blockly.Ruby.quote_('');
-        const letter = Blockly.Ruby.valueToCode(block, 'LETTER', Blockly.Ruby.ORDER_INDEX) || '0';
+        const letter = Blockly.Ruby.valueToCode(block, 'LETTER', Blockly.Ruby.ORDER_INDEX) - 1 || '0';
         return [`${str}[${letter}]`, order];
     };
 

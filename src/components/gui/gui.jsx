@@ -241,7 +241,7 @@ const GUIComponent = props => {
                                     >
                                         <img
                                             draggable={false}
-                                            src={rubyIcon} // TODO: 綺麗なアイコンに変更する
+                                            src={rubyIcon}
                                         />
                                         <FormattedMessage
                                             defaultMessage="Ruby"

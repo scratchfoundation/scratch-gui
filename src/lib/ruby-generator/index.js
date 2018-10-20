@@ -346,7 +346,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.variableName = function (name) {
-        let variable = this.editingTarget.lookupOrCreateVariable(name);
+        const variable = this.editingTarget.lookupOrCreateVariable(name);
         if (variable) {
             return variable.name;
         }
@@ -354,7 +354,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.listName = function (name) {
-        let list = this.editingTarget.lookupOrCreateList(name);
+        const list = this.editingTarget.lookupOrCreateList(name);
         if (list) {
             return list.name;
         }

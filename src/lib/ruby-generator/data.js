@@ -70,13 +70,13 @@ export default function (Blockly) {
     Blockly.Ruby.data_itemoflist = function (block) {
         const index = Blockly.Ruby.valueToCode(block, 'INDEX', Blockly.Ruby.ORDER_INDEX) - 1 || 0;
         const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}[${index}]\n`;
+        return [`${list}[${index}]`, Blockly.Ruby.ORDER_FUNCTION_CAL];
     };
 
     Blockly.Ruby.data_itemnumoflist = function (block) {
         const item = Blockly.Ruby.valueToCode(block, 'ITEM', Blockly.Ruby.ORDER_NONE) || '0';
         const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}.index(${item})`;
+        return [`${list}.index(${item})`, Blockly.Ruby.ORDER_FUNCTION_CAL];
     };
 
     Blockly.Ruby.data_lengthoflist = function (block) {

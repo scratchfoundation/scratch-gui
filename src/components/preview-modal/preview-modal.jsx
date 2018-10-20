@@ -10,11 +10,11 @@ import hattiIcon from './hatti.png';
 const messages = defineMessages({
     label: {
         id: 'gui.smalruby3.previewInfo.label',
-        defaultMessage: 'スモウルビー3.0を試してみる"',
+        defaultMessage: 'Try Smalruby 3.0',
         description: 'Smalruby 3.0 modal label - for accessibility'
     },
     previewWelcome: {
-        defaultMessage: 'スモウルビー3.0 プレビュー版にようこそ!',
+        defaultMessage: 'Welcome to the Smalruby 3.0 Preview',
         description: 'Header for Preview Info Modal',
         id: 'gui.smalruby3.previewInfo.welcome'
     },
@@ -48,7 +48,7 @@ const PreviewModal = ({intl, ...props}) => (
             <Box className={styles.body}>
                 <h2>
                     <FormattedMessage
-                        defaultMessage="スモウルビー3.0 ベータ版にようこそ!"
+                        defaultMessage="Welcome to the Smalruby 3.0 Beta"
                         description="Header for Beta Info Modal"
                         id="gui.smalruby3.previewInfo.betawelcome"
                     />
@@ -56,7 +56,7 @@ const PreviewModal = ({intl, ...props}) => (
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="私たちは次世代のスモウルビーを開発中です。お試しください!"
+                        defaultMessage="We're working on the next generation of Smalruby. We're excited for you to try it!"
                         description="Invitation to try 3.0 Beta"
                         id="gui.smalruby3.previewInfo.invitation"
                     />

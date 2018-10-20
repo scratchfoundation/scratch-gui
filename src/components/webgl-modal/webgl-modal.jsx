@@ -31,7 +31,7 @@ const WebGlModal = ({intl, ...props}) => (
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="残念ながら、ブラウザーやコンピューターが{webGlLink}ようです。この技術はスモウルビー3.0の実行に必須です。"
+                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for Smalruby 3.0 to run."
                         description="WebGL missing message"
                         id="gui.smalruby3.webglModal.description"
                         values={{

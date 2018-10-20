@@ -61,7 +61,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.motion_pointtowards_menu = function (block) {
-        const towards = Blockly.Ruby.quote_(block.getFieldValue('TOWARDS')) || null;
+        const towards = Blockly.Ruby.quote_(block.getFieldValue('TOWARDS') || null);
         return [towards, Blockly.Ruby.ORDER_ATOMIC];
     };
 
@@ -90,7 +90,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.motion_setrotationstyle = function (block) {
-        const style = Blockly.Ruby.quote_(block.getFieldValue('STYLE')) || null;
+        const style = Blockly.Ruby.quote_(block.getFieldValue('STYLE') || null);
         return `set_rotation_style(${style})\n`;
     };
 

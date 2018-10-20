@@ -46,7 +46,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.control_stop = function (block) {
-        const target = Blockly.Ruby.quote_(block.getFieldValue('STOP_OPTION')) || null;
+        const target = Blockly.Ruby.quote_(block.getFieldValue('STOP_OPTION') || null);
         return `stop(${target})\n`;
     };
 
@@ -61,7 +61,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.control_create_clone_of_menu = function (block) {
-        const target = Blockly.Ruby.quote_(block.getFieldValue('CLONE_OPTION')) || null;
+        const target = Blockly.Ruby.quote_(block.getFieldValue('CLONE_OPTION') || null);
         return [target, Blockly.Ruby.ORDER_ATOMIC];
     };
 

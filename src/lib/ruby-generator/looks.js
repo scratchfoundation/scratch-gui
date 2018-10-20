@@ -32,7 +32,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.looks_costume = function (block) {
-        const costume = Blockly.Ruby.quote_(block.getFieldValue('COSTUME')) || null;
+        const costume = Blockly.Ruby.quote_(block.getFieldValue('COSTUME') || null);
         return [costume, Blockly.Ruby.ORDER_ATOMIC];
     };
 
@@ -46,7 +46,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.looks_backdrops = function (block) {
-        const backdrop = Blockly.Ruby.quote_(block.getFieldValue('BACKDROP')) || null;
+        const backdrop = Blockly.Ruby.quote_(block.getFieldValue('BACKDROP') || null);
         return [backdrop, Blockly.Ruby.ORDER_ATOMIC];
     };
 
@@ -65,13 +65,13 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.looks_changeeffectby = function (block) {
-        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT')) || null;
+        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT') || null);
         const change = Blockly.Ruby.valueToCode(block, 'CHANGE', Blockly.Ruby.ORDER_NONE) || '0';
         return `change_effect_by(${effect}, ${change})\n`;
     };
 
     Blockly.Ruby.looks_seteffectto = function (block) {
-        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT')) || null;
+        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT') || null);
         const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
         return `set_effect(${effect}, ${value})\n`;
     };

@@ -16,21 +16,21 @@ export default function (Blockly) {
 
     Blockly.Ruby.event_whenkeypressed = function (block) {
         Blockly.Ruby.targetEventBlock = block;
-        const key = block.getFieldValue('KEY_OPTION') || null;
-        return `${Blockly.Ruby.spriteName()}.when(:key_pressed, "${key}") do\n`;
+        const key = Blockly.Ruby.quote_(block.getFieldValue('KEY_OPTION') || null);
+        return `${Blockly.Ruby.spriteName()}.when(:key_pressed, ${key}) do\n`;
     };
 
     Blockly.Ruby.event_whenbackdropswitchesto = function (block) {
         Blockly.Ruby.targetEventBlock = block;
-        const backdrop = block.getFieldValue('BACKDROP') || null;
-        return `${Blockly.Ruby.spriteName()}.when(:backdrop_switches, "${backdrop}") do\n`;
+        const backdrop = Blockly.Ruby.quote_(block.getFieldValue('BACKDROP') || null);
+        return `${Blockly.Ruby.spriteName()}.when(:backdrop_switches, ${backdrop}) do\n`;
     };
 
     Blockly.Ruby.event_whengreaterthan = function (block) {
         Blockly.Ruby.targetEventBlock = block;
-        const lh = block.getFieldValue('WHENGREATERTHANMENU') || null;
+        const lh = Blockly.Ruby.quote_(block.getFieldValue('WHENGREATERTHANMENU') || null);
         const rh = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
-        return `${Blockly.Ruby.spriteName()}.when(:greater_than, "${lh}", ${rh})  do\n`;
+        return `${Blockly.Ruby.spriteName()}.when(:greater_than, ${lh}, ${rh})  do\n`;
     };
 
     Blockly.Ruby.event_whenbroadcastreceived = function (block) {

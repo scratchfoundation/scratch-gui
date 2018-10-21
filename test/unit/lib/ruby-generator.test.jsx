@@ -23,4 +23,28 @@ describe('RubyGenerator', () => {
             expect(Blockly.Ruby.quote_(arg)).toEqual(actual);
         });
     });
+
+    describe('spriteName', () => {
+        afterEach(() => {
+            Blockly.Ruby.editingTarget = null;
+        });
+
+        test('return sprite("name of sprite")', () => {
+            Blockly.Ruby.editingTarget = {
+                sprite: {
+                    name: 'Sprite1'
+                }
+            };
+            expect(Blockly.Ruby.spriteName()).toEqual('sprite("Sprite1")');
+        });
+
+        test('"name of sprite" is escaped', () => {
+            Blockly.Ruby.editingTarget = {
+                sprite: {
+                    name: '"Sprite1"'
+                }
+            };
+            expect(Blockly.Ruby.spriteName()).toEqual('sprite("\\"Sprite1\\"")');
+        });
+    });
 });

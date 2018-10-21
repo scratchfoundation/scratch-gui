@@ -9,6 +9,7 @@ import SoundBlocks from './sound.js';
 import EventBlocks from './event.js';
 import ControlBlocks from './control.js';
 import OperatorsBlocks from './operators.js';
+import DataBlocks from './data.js';
 
 /**
  * Define Ruby
@@ -344,6 +345,22 @@ export default function (Blockly) {
         return null;
     };
 
+    Blockly.Ruby.variableName = function (name) {
+        const variable = this.editingTarget.lookupOrCreateVariable(name);
+        if (variable) {
+            return variable.name;
+        }
+        return null;
+    };
+
+    Blockly.Ruby.listName = function (name) {
+        const list = this.editingTarget.lookupOrCreateList(name);
+        if (list) {
+            return list.name;
+        }
+        return null;
+    };
+
     Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;
 
     Blockly.Ruby.workspaceToCode = function (block, target) {
@@ -392,6 +409,7 @@ export default function (Blockly) {
     Blockly = EventBlocks(Blockly);
     Blockly = ControlBlocks(Blockly);
     Blockly = OperatorsBlocks(Blockly);
+    Blockly = DataBlocks(Blockly);
 
     return Blockly;
 }

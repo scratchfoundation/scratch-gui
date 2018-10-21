@@ -122,7 +122,7 @@ describe('RubyGenerator', () => {
                rotation_center_y: 61
              }
            ],
-           rotation_style: :left_right)\n`;
+           rotation_style: :left_right)`;
             expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
         });
 
@@ -142,7 +142,7 @@ describe('RubyGenerator', () => {
                 rotationStyle: 'all around'
             });
             renderedTarget.sprite.costumes = [];
-            const expected = `Sprite.new(${Ruby.quote_(spriteName)})\n`;
+            const expected = `Sprite.new(${Ruby.quote_(spriteName)})`;
             expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
         });
 

@@ -98,13 +98,14 @@ export default function (Blockly) {
             } else {
                 this.variableDB_ = new Blockly.Names(Blockly.Ruby.RESERVED_WORDS_);
             }
-            // this.definitions_['require__smalruby'] = 'require "smalruby"';
-            this.definitions_.receiver_stack = ['main'];
-            this.definitions_.character_stack = [];
         }
+        this.defineSprite(this.editingTarget);
     };
 
     Blockly.Ruby.defineSprite = function (renderedTarget) {
+        if (!renderedTarget) {
+            return null;
+        }
         const RenderedTarget = renderedTarget.constructor;
         const name = renderedTarget.sprite.name;
         const definitionsId = `sprite_${name}`;
@@ -156,7 +157,7 @@ export default function (Blockly) {
             }
 
             this.definitions_[definitionsId] =
-                `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})\n`;
+                `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
         }
         return Blockly.Ruby.definitions_[definitionsId];
     };
@@ -261,34 +262,35 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.finish = function (code) {
-        let allDefs; let n;
         const requires = [];
         const prepares = [];
-        const definitions = [];
-        const _fn = function (name) {
-            const def = Blockly.Ruby.definitions_[name];
-            if (_.isString(def)) {
+        const defs = [];
+        let name;
+
+        for (name in Blockly.Ruby.definitions_) {
+            const def = this.definitions_[name];
+            if (typeof def === 'string' || def instanceof String) {
                 if (name.match(/^require__/)) {
-                    return requires.push(def);
+                    requires.push(def);
                 } else if (name.match(/^prepare__/)) {
-                    return prepares.push(def);
+                    prepares.push(def);
+                } else {
+                    defs.push(def);
                 }
-                return definitions.push(def);
             }
-        };
-        for (n in Blockly.Ruby.definitions_) {
-            _fn(n);
         }
-        if (prepares.length === 0 && definitions.length === 0 && code.length === 0) {
+        if (requires.length === 0 && prepares.length === 0 && defs.length === 0 && code.length === 0) {
             return '';
         }
-        allDefs = `${requires.join('\n')}\n\n`;
+        let allDefs = '';
+        if (requires.length > 0) {
+            allDefs += `${requires.join('\n')}\n\n`;
+        }
         if (prepares.length > 0) {
             allDefs += `${prepares.join('\n')}\n\n`;
         }
-        if (definitions.length > 0) {
-            allDefs += definitions.join('\n').replace(/\n\n+/g, '\n\n')
-                .replace(/\n*$/, '\n');
+        if (defs.length > 0) {
+            allDefs += `${defs.join('\n')}\n\n`;
         }
         return allDefs + code;
     };

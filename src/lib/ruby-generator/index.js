@@ -90,7 +90,7 @@ export default function (Blockly) {
     Blockly.Ruby.INFINITE_LOOP_TRAP = null;
 
     Blockly.Ruby.init = function () {
-        this.definitions_ = Object.create(null);
+        this.definitions_ = {};
         this.targetEventBlock = null;
         if (Blockly.Variables) {
             if (this.variableDB_) {
@@ -98,51 +98,68 @@ export default function (Blockly) {
             } else {
                 this.variableDB_ = new Blockly.Names(Blockly.Ruby.RESERVED_WORDS_);
             }
-            // this.definitions_['require__smalruby'] = 'require "smalruby"';
-            this.definitions_.receiver_stack = ['main'];
-            this.definitions_.character_stack = [];
         }
+        this.defineSprite(this.editingTarget);
     };
 
-    Blockly.Ruby.defineCharacter = function (c) {
-        let costume; let costumeIndex; let costumeParam; let costumes; let rotationStyle;
-        const name = c.get('name');
-        const blockName = `character_${name}`;
-        if (!Blockly.Ruby.definitions_[blockName]) {
-            switch (c.get('rotationStyle')) {
-            case 'left_right':
-                rotationStyle = ', rotation_style: :left_right';
-                break;
-            case 'none':
-                rotationStyle = ', rotation_style: :none';
-                break;
-            default:
-                rotationStyle = '';
-            }
-            costumeParam = ['costume: '];
-            costumes = (function () {
-                let _i; let _len;
-                const _ref = c.costumesWithName();
-                const _results = [];
-                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                    costume = _ref[_i];
-                    _results.push(Blockly.Ruby.quote_(costume));
-                }
-                return _results;
-            }());
-            if (costumes.length > 1) {
-                costumeParam.push(`[${costumes.join(', ')}]`);
-            } else {
-                costumeParam.push(costumes[0]);
-            }
-            costumeIndex = c.get('costumeIndex');
-            if (costumeIndex > 0) {
-                costumeParam.push(`, costume_index: ${costumeIndex}`);
-            }
-            Blockly.Ruby.definitions_[blockName] =
-                `${name} = Character.new(${costumeParam.join('')}, ` +
-                `x: ${c.get('x')}, y: ${c.get('y')}, angle: ${c.get('angle')}${rotationStyle})`;
+    Blockly.Ruby.defineSprite = function (renderedTarget) {
+        if (!renderedTarget) {
+            return null;
         }
+        const RenderedTarget = renderedTarget.constructor;
+        const name = renderedTarget.sprite.name;
+        const definitionsId = `sprite_${name}`;
+
+        if (!this.definitions_.hasOwnProperty(definitionsId)) {
+            const attributes = [''];
+
+            if (renderedTarget.x !== 0) {
+                attributes.push(`x: ${renderedTarget.x}`);
+            }
+            if (renderedTarget.y !== 0) {
+                attributes.push(`y: ${renderedTarget.y}`);
+            }
+            if (renderedTarget.direction !== 90) {
+                attributes.push(`direction: ${renderedTarget.direction}`);
+            }
+            if (!renderedTarget.visible) {
+                attributes.push(`visible: ${!!renderedTarget.visible}`);
+            }
+            if (renderedTarget.size !== 100) {
+                attributes.push(`size: ${renderedTarget.size}`);
+            }
+            if (renderedTarget.currentCostume > 1) {
+                attributes.push(`current_costume: ${renderedTarget.currentCostume - 1}`);
+            }
+            if (renderedTarget.sprite.costumes.length > 0) {
+                const costumesParams = ['costumes: ['];
+                costumesParams.push(
+                    renderedTarget.sprite.costumes.map(costume => `             {
+               asset_id: ${this.quote_(costume.assetId)},
+               name: ${this.quote_(costume.name)},
+               bitmap_resolution: ${costume.bitmapResolution},
+               md5: ${this.quote_(costume.md5)},
+               data_format: ${this.quote_(costume.dataFormat)},
+               rotation_center_x: ${costume.rotationCenterX},
+               rotation_center_y: ${costume.rotationCenterY}
+             }`).join(',\n')
+                );
+                costumesParams.push('           ]');
+                attributes.push(costumesParams.join('\n'));
+            }
+            switch (renderedTarget.rotationStyle) {
+            case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
+                attributes.push('rotation_style: :left_right');
+                break;
+            case RenderedTarget.ROTATION_STYLE_NONE:
+                attributes.push('rotation_style: :none');
+                break;
+            }
+
+            this.definitions_[definitionsId] =
+                `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
+        }
+        return Blockly.Ruby.definitions_[definitionsId];
     };
 
     Blockly.Ruby.characterStack = function () {
@@ -245,34 +262,35 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.finish = function (code) {
-        let allDefs; let n;
         const requires = [];
         const prepares = [];
-        const definitions = [];
-        const _fn = function (name) {
-            const def = Blockly.Ruby.definitions_[name];
-            if (_.isString(def)) {
+        const defs = [];
+        let name;
+
+        for (name in Blockly.Ruby.definitions_) {
+            const def = this.definitions_[name];
+            if (typeof def === 'string' || def instanceof String) {
                 if (name.match(/^require__/)) {
-                    return requires.push(def);
+                    requires.push(def);
                 } else if (name.match(/^prepare__/)) {
-                    return prepares.push(def);
+                    prepares.push(def);
+                } else {
+                    defs.push(def);
                 }
-                return definitions.push(def);
             }
-        };
-        for (n in Blockly.Ruby.definitions_) {
-            _fn(n);
         }
-        if (prepares.length === 0 && definitions.length === 0 && code.length === 0) {
+        if (requires.length === 0 && prepares.length === 0 && defs.length === 0 && code.length === 0) {
             return '';
         }
-        allDefs = `${requires.join('\n')}\n\n`;
+        let allDefs = '';
+        if (requires.length > 0) {
+            allDefs += `${requires.join('\n')}\n\n`;
+        }
         if (prepares.length > 0) {
             allDefs += `${prepares.join('\n')}\n\n`;
         }
-        if (definitions.length > 0) {
-            allDefs += definitions.join('\n').replace(/\n\n+/g, '\n\n')
-                .replace(/\n*$/, '\n');
+        if (defs.length > 0) {
+            allDefs += `${defs.join('\n')}\n\n`;
         }
         return allDefs + code;
     };

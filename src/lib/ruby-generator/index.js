@@ -334,7 +334,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.spriteName = function () {
-        return this.editingTarget.sprite.name;
+        return `sprite(${this.quote_(this.editingTarget.sprite.name)})`;
     };
 
     Blockly.Ruby.broadcastMessageName = function (name) {

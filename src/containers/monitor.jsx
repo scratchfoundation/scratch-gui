@@ -102,16 +102,33 @@ class Monitor extends React.Component {
     handleNextMode () {
         const modes = availableModes(this.props.opcode);
         const modeIndex = modes.indexOf(this.state.mode);
-        this.setState({mode: modes[(modeIndex + 1) % modes.length]});
+        const newMode = modes[(modeIndex + 1) % modes.length];
+        this.setState({mode: newMode});
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            mode: newMode
+        }));
     }
     handleSetModeToDefault () {
         this.setState({mode: 'default'});
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            mode: 'default'
+        }));
     }
     handleSetModeToLarge () {
         this.setState({mode: 'large'});
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            mode: 'large'
+        }));
     }
     handleSetModeToSlider () {
         this.setState({mode: 'slider'});
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            mode: 'slider'
+        }));
     }
     setElement (monitorElt) {
         this.element = monitorElt;

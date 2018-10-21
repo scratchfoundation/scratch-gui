@@ -6,7 +6,7 @@
 export default function (Blockly) {
     Blockly.Ruby.data_variable = function (block) {
         const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return [`${variable}`, Blockly.Ruby.ORDER_ATOMIC];
+        return [variable, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.data_setvariableto = function (block) {
@@ -23,17 +23,17 @@ export default function (Blockly) {
 
     Blockly.Ruby.data_showvariable = function (block) {
         const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return `show_variable(${variable})\n`;
+        return `show_variable(${Blockly.Ruby.quote_(variable)})\n`;
     };
 
     Blockly.Ruby.data_hidevariable = function (block) {
         const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return `hide_variable(${variable})\n`;
+        return `hide_variable(${Blockly.Ruby.quote_(variable)})\n`;
     };
 
     Blockly.Ruby.data_listcontents = function (block) {
         const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [`${list}`, Blockly.Ruby.ORDER_ATOMIC];
+        return [list, Blockly.Ruby.ORDER_COLLECTION];
     };
 
     Blockly.Ruby.data_addtolist = function (block) {
@@ -93,12 +93,12 @@ export default function (Blockly) {
 
     Blockly.Ruby.data_showlist = function (block) {
         const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `show_list(${list})\n`;
+        return `show_list(${Blockly.Ruby.quote_(list)})\n`;
     };
 
     Blockly.Ruby.data_hidelist = function (block) {
         const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `hide_list(${list})\n`;
+        return `hide_list(${Blockly.Ruby.quote_(list)})\n`;
     };
 
     return Blockly;

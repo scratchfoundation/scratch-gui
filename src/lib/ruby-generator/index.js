@@ -100,6 +100,7 @@ export default function (Blockly) {
             }
         }
         this.defineSprite(this.editingTarget);
+        this.defineVariables(this.editingTarget);
     };
 
     Blockly.Ruby.defineSprite = function (renderedTarget) {
@@ -160,6 +161,36 @@ export default function (Blockly) {
                 `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
         }
         return Blockly.Ruby.definitions_[definitionsId];
+    };
+
+    Blockly.Ruby.defineVariables = function (renderedTarget) {
+        if (!renderedTarget) {
+            return null;
+        }
+
+        const variables = [];
+        const lists = [];
+        const SCALAR_TYPE = '';
+        const LIST_TYPE = 'list';
+        for (const varId in renderedTarget.variables) {
+            const currVar = renderedTarget.variables[varId];
+            switch (currVar.type) {
+            case SCALAR_TYPE:
+                variables.push(currVar);
+                break;
+            case LIST_TYPE:
+                lists.push(currVar);
+                break;
+            }
+        }
+        variables.forEach(currVar => {
+            this.definitions_[`variable_${currVar.name}`] =
+                `${this.spriteName(renderedTarget)}.make_variable(${this.quote_(currVar.name)})`;
+        });
+        lists.forEach(currVar => {
+            this.definitions_[`list_${currVar.name}`] =
+                `${this.spriteName(renderedTarget)}.make_list(${this.quote_(currVar.name)})`;
+        });
     };
 
     Blockly.Ruby.characterStack = function () {
@@ -351,8 +382,11 @@ export default function (Blockly) {
         return commentCode + code + nextCode + eventEndCode;
     };
 
-    Blockly.Ruby.spriteName = function () {
-        return `sprite(${this.quote_(this.editingTarget.sprite.name)})`;
+    Blockly.Ruby.spriteName = function (renderedTarget) {
+        if (!renderedTarget) {
+            renderedTarget = this.editingTarget;
+        }
+        return `sprite(${this.quote_(renderedTarget.sprite.name)})`;
     };
 
     Blockly.Ruby.broadcastMessageName = function (name) {

@@ -298,39 +298,39 @@ class MenuBar extends React.Component {
                                     >
                                         {newProjectMessage}
                                     </MenuItem>
-                                ) : (
+                                ) : (this.props.showComingSoon ? (
                                     <MenuItemTooltip
                                         id="new"
                                         isRtl={this.props.isRtl}
                                     >
                                         <MenuItem>{newProjectMessage}</MenuItem>
                                     </MenuItemTooltip>
-                                )}
+                                ) : [])}
                                 <MenuSection>
                                     {this.props.canSave ? (
                                         <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
-                                    ) : (
+                                    ) : (this.props.showComingSoon ? (
                                         <MenuItemTooltip
                                             id="save"
                                             isRtl={this.props.isRtl}
                                         >
                                             <MenuItem>{saveNowMessage}</MenuItem>
                                         </MenuItemTooltip>
-                                    )}
+                                    ) : [])}
                                     {this.props.canSaveAsCopy ? (
                                         <MenuItem onClick={this.handleClickSaveAsCopy}>
                                             {saveAsCopyMessage}
                                         </MenuItem>
-                                    ) : (
+                                    ) : (this.props.showComingSoon ? (
                                         <MenuItemTooltip
                                             id="copy"
                                             isRtl={this.props.isRtl}
                                         >
                                             <MenuItem>{saveAsCopyMessage}</MenuItem>
                                         </MenuItemTooltip>
-                                    )}
+                                    ) : [])}
                                 </MenuSection>
                                 <MenuSection>
                                     <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
@@ -438,13 +438,15 @@ class MenuBar extends React.Component {
                     </div>
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? shareButton : (
-                            <MenuBarItemTooltip id="share-button">
-                                {shareButton}
-                            </MenuBarItemTooltip>
+                            this.props.showComingSoon ? (
+                                <MenuBarItemTooltip id="share-button">
+                                    {shareButton}
+                                </MenuBarItemTooltip>
+                            ) : []
                         )}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ?
+                        {this.props.enableCommunity ? (
                             <Button
                                 className={classNames(styles.communityButton)}
                                 iconClassName={styles.communityButtonIcon}
@@ -456,7 +458,8 @@ class MenuBar extends React.Component {
                                     description="Label for see community button"
                                     id="gui.menuBar.seeCommunity"
                                 />
-                            </Button> :
+                            </Button>
+                        ) : (this.props.showComingSoon ? (
                             <MenuBarItemTooltip id="community-button">
                                 <Button
                                     className={classNames(styles.communityButton)}
@@ -470,7 +473,7 @@ class MenuBar extends React.Component {
                                     />
                                 </Button>
                             </MenuBarItemTooltip>
-                        }
+                        ) : [])}
                     </div>
                 </div>
 
@@ -572,44 +575,48 @@ class MenuBar extends React.Component {
                                     </Button>
                                 </a>
                             </div>
-                            <MenuBarItemTooltip id="mystuff">
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.mystuffButton
-                                    )}
-                                >
-                                    <img
-                                        className={styles.mystuffIcon}
-                                        src={mystuffIcon}
-                                    />
-                                </div>
-                            </MenuBarItemTooltip>
-                            <MenuBarItemTooltip
-                                id="account-nav"
-                                place={this.props.isRtl ? 'right' : 'left'}
-                            >
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.accountNavMenu
-                                    )}
-                                >
-                                    <img
-                                        className={styles.profileIcon}
-                                        src={profileIcon}
-                                    />
-                                    <span>
-                                        {'scratch-cat'}
-                                    </span>
-                                    <img
-                                        className={styles.dropdownCaretIcon}
-                                        src={dropdownCaret}
-                                    />
-                                </div>
-                            </MenuBarItemTooltip>
+                            {this.props.showComingSoon ? (
+                                <React.Fragment>
+                                    <MenuBarItemTooltip id="mystuff">
+                                        <div
+                                            className={classNames(
+                                                styles.menuBarItem,
+                                                styles.hoverable,
+                                                styles.mystuffButton
+                                            )}
+                                        >
+                                            <img
+                                                className={styles.mystuffIcon}
+                                                src={mystuffIcon}
+                                            />
+                                        </div>
+                                    </MenuBarItemTooltip>
+                                    <MenuBarItemTooltip
+                                        id="account-nav"
+                                        place={this.props.isRtl ? 'right' : 'left'}
+                                    >
+                                        <div
+                                            className={classNames(
+                                                styles.menuBarItem,
+                                                styles.hoverable,
+                                                styles.accountNavMenu
+                                            )}
+                                        >
+                                            <img
+                                                className={styles.profileIcon}
+                                                src={profileIcon}
+                                            />
+                                            <span>
+                                                {'scratch-cat'}
+                                            </span>
+                                            <img
+                                                className={styles.dropdownCaretIcon}
+                                                src={dropdownCaret}
+                                            />
+                                        </div>
+                                    </MenuBarItemTooltip>
+                                </React.Fragment>
+                            ) : []}
                         </React.Fragment>
                     )}
                 </div>
@@ -656,6 +663,7 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    showComingSoon: PropTypes.bool,
     username: PropTypes.string
 };
 

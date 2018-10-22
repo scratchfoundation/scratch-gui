@@ -109,7 +109,6 @@ GUI.propTypes = {
     isShowingProject: PropTypes.bool,
     loadingError: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
-    onChangeProjectInfo: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,

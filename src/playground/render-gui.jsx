@@ -39,6 +39,7 @@ export default appTarget => {
 
     ReactDOM.render(
         <WrappedGui
+            showComingSoon
             backpackOptions={backpackOptions}
         />,
         appTarget);

@@ -89,23 +89,23 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.looks_gotofrontback = function (block) {
-        const frontBack = block.getFieldValue('FRONT_BACK') || null;
+        const frontBack = block.getFieldValue('FRONT_BACK') || 'front';
         return `go_to_layer(:${frontBack})\n`;
     };
 
     Blockly.Ruby.looks_goforwardbackwardlayers = function (block) {
-        const layer = Blockly.Ruby.valueToCode(block, 'NUM', Blockly.Ruby.ORDER_NONE) || '0';
-        const forwardBackward = block.getFieldValue('FORWARD_BACKWARD') || null;
+        const layer = Blockly.Ruby.valueToCode(block, 'NUM', Blockly.Ruby.ORDER_NONE) || 0;
+        const forwardBackward = block.getFieldValue('FORWARD_BACKWARD') || 'forward';
         return `go_layers(${layer}, :${forwardBackward})\n`;
     };
 
     Blockly.Ruby.looks_costumenumbername = function (block) {
-        const numberName = block.getFieldValue('NUMBER_NAME') || null;
+        const numberName = block.getFieldValue('NUMBER_NAME') || 'number';
         return [`costume_${numberName}`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.looks_backdropnumbername = function (block) {
-        const numberName = block.getFieldValue('NUMBER_NAME') || null;
+        const numberName = block.getFieldValue('NUMBER_NAME') || 'number';
         return [`backdrop_${numberName}`, Blockly.Ruby.ORDER_ATOMIC];
     };
 

@@ -201,13 +201,13 @@ describe('RubyGenerator', () => {
                     id5: {
                         name: 'Variable3',
                         type: SCALAR_TYPE,
-                        value: "abc"
+                        value: 'abc'
                     },
                     id6: {
                         name: 'List3',
                         type: LIST_TYPE,
                         value: ['a', 'b', 'c']
-                    },
+                    }
                 }
             };
         });

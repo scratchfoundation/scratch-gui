@@ -3,11 +3,13 @@ import _ from 'lodash';
 import GeneratedBlocks from './generated.js';
 import MathBlocks from './math.js';
 import TextBlocks from './text.js';
+import ColourBlocks from './colour.js';
 import MotionBlocks from './motion.js';
 import LooksBlocks from './looks.js';
 import SoundBlocks from './sound.js';
 import EventBlocks from './event.js';
 import ControlBlocks from './control.js';
+import SensingBlocks from './sensing.js';
 import OperatorsBlocks from './operators.js';
 import DataBlocks from './data.js';
 
@@ -499,12 +501,14 @@ export default function (Blockly) {
 
     Blockly = MathBlocks(Blockly);
     Blockly = TextBlocks(Blockly);
+    Blockly = ColourBlocks(Blockly);
 
     Blockly = MotionBlocks(Blockly);
     Blockly = LooksBlocks(Blockly);
     Blockly = SoundBlocks(Blockly);
     Blockly = EventBlocks(Blockly);
     Blockly = ControlBlocks(Blockly);
+    Blockly = SensingBlocks(Blockly);
     Blockly = OperatorsBlocks(Blockly);
     Blockly = DataBlocks(Blockly);
 

@@ -28,6 +28,7 @@ import {updateRubyCode} from '../reducers/ruby-code.js';
 
 import {
     activateTab,
+    BLOCKS_TAB_INDEX,
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
@@ -164,10 +165,11 @@ class Blocks extends React.Component {
         } else {
             this.workspace.setVisible(false);
         }
-
-        this.props.updateRubyCodeState(
-            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
-        );
+        if (!this.props.blocksTabVisible) {
+            this.props.updateRubyCodeState(
+                this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+            );
+        }
     }
     componentWillUnmount () {
         this.detachVM();
@@ -271,9 +273,11 @@ class Blocks extends React.Component {
                 this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
-        this.props.updateRubyCodeState(
-            this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
-        );
+        if (!this.props.blocksTabVisible) {
+            this.props.updateRubyCodeState(
+                this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+            );
+        }
     }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;
@@ -436,6 +440,7 @@ class Blocks extends React.Component {
         /* eslint-disable no-unused-vars */
         const {
             anyModalVisible,
+            blocksTabVisible,
             customProceduresVisible,
             extensionLibraryVisible,
             options,
@@ -501,6 +506,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
+    blocksTabVisible: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isRtl: PropTypes.bool,
@@ -579,6 +585,7 @@ const mapStateToProps = state => ({
         Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]) ||
         state.scratchGui.mode.isFullScreen
     ),
+    blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     isRtl: state.locales.isRtl,
     locale: state.locales.locale,

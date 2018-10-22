@@ -103,7 +103,27 @@ export default function (Blockly) {
             }
         }
         this.defineSprite(this.editingTarget);
-        this.defineVariables(this.editingTarget);
+    };
+
+    Blockly.Ruby.isString = function (s) {
+        return (typeof s === 'string' || s instanceof String);
+    };
+
+    Blockly.Ruby.scalarToCode = function (scalar) {
+        if (this.isString(scalar)) {
+            return this.quote_(scalar);
+        }
+        return scalar;
+    };
+
+    Blockly.Ruby.listToCode = function (list) {
+        const values = list.map(i => {
+            if (this.isString(i)) {
+                return this.quote_(i);
+            }
+            return i;
+        }).join(', ');
+        return `[${values}]`;
     };
 
     Blockly.Ruby.defineSprite = function (renderedTarget) {
@@ -159,39 +179,52 @@ export default function (Blockly) {
                 attributes.push('rotation_style: :none');
                 break;
             }
+            const variables = [];
+            const lists = [];
+            for (const id in renderedTarget.variables) {
+                const v = renderedTarget.variables[id];
+                switch (v.type) {
+                case SCALAR_TYPE:
+                    variables.push(v);
+                    break;
+                case LIST_TYPE:
+                    lists.push(v);
+                    break;
+                }
+            }
+            if (variables.length > 0) {
+                const variablesParams = ['variables: ['];
+                variablesParams.push(
+                    variables.map(v => {
+                        const vParams = [`               name: ${this.quote_(v.name)}`];
+                        if (v.value !== 0) {
+                            vParams.push(`               value: ${this.scalarToCode(v.value)}`);
+                        }
+                        return `             {\n${vParams.join(',\n')}\n             }`;
+                    }).join(',\n')
+                );
+                variablesParams.push('           ]');
+                attributes.push(variablesParams.join('\n'));
+            }
+            if (lists.length > 0) {
+                const listsParams = ['lists: ['];
+                listsParams.push(
+                    lists.map(l => {
+                        const lParams = [`               name: ${this.quote_(l.name)}`];
+                        if (l.value.length !== 0) {
+                            lParams.push(`               value: ${this.listToCode(l.value)}`);
+                        }
+                        return `             {\n${lParams.join(',\n')}\n             }`;
+                    }).join(',\n')
+                );
+                listsParams.push('           ]');
+                attributes.push(listsParams.join('\n'));
+            }
 
             this.definitions_[definitionsId] =
                 `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
         }
         return Blockly.Ruby.definitions_[definitionsId];
-    };
-
-    Blockly.Ruby.defineVariables = function (renderedTarget) {
-        if (!renderedTarget) {
-            return null;
-        }
-
-        const variables = [];
-        const lists = [];
-        for (const varId in renderedTarget.variables) {
-            const currVar = renderedTarget.variables[varId];
-            switch (currVar.type) {
-            case SCALAR_TYPE:
-                variables.push(currVar);
-                break;
-            case LIST_TYPE:
-                lists.push(currVar);
-                break;
-            }
-        }
-        variables.forEach(currVar => {
-            this.definitions_[`variable_${currVar.name}`] =
-                `${this.spriteName(renderedTarget)}.make_variable(${this.quote_(currVar.name)})`;
-        });
-        lists.forEach(currVar => {
-            this.definitions_[`list_${currVar.name}`] =
-                `${this.spriteName(renderedTarget)}.make_list(${this.quote_(currVar.name)})`;
-        });
     };
 
     Blockly.Ruby.characterStack = function () {
@@ -301,7 +334,7 @@ export default function (Blockly) {
 
         for (name in Blockly.Ruby.definitions_) {
             const def = this.definitions_[name];
-            if (typeof def === 'string' || def instanceof String) {
+            if (this.isString(def)) {
                 if (name.match(/^require__/)) {
                     requires.push(def);
                 } else if (name.match(/^prepare__/)) {

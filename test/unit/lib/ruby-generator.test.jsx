@@ -7,6 +7,9 @@ describe('RubyGenerator', () => {
     let Blockly;
     let Ruby;
 
+    const SCALAR_TYPE = '';
+    const LIST_TYPE = 'list';
+
     beforeEach(() => {
         vm = new VM();
         Blockly = VMScratchBlocks(vm);
@@ -55,9 +58,6 @@ describe('RubyGenerator', () => {
         let renderedTarget;
 
         beforeEach(() => {
-            const SCALAR_TYPE = '';
-            const LIST_TYPE = 'list';
-
             renderedTarget = {
                 sprite: {
                     name: 'Sprite1'
@@ -176,7 +176,39 @@ describe('RubyGenerator', () => {
                 visible: false,
                 size: 44,
                 currentCostume: 2,
-                rotationStyle: 'left-right'
+                rotationStyle: 'left-right',
+                variables: {
+                    id1: {
+                        name: 'Variable1',
+                        type: SCALAR_TYPE,
+                        value: 10
+                    },
+                    id2: {
+                        name: 'List1',
+                        type: LIST_TYPE,
+                        value: [1, 2, 3]
+                    },
+                    id3: {
+                        name: 'Variable2',
+                        type: SCALAR_TYPE,
+                        value: 0
+                    },
+                    id4: {
+                        name: 'List2',
+                        type: LIST_TYPE,
+                        value: []
+                    },
+                    id5: {
+                        name: 'Variable3',
+                        type: SCALAR_TYPE,
+                        value: "abc"
+                    },
+                    id6: {
+                        name: 'List3',
+                        type: LIST_TYPE,
+                        value: ['a', 'b', 'c']
+                    },
+                }
             };
         });
 
@@ -208,7 +240,33 @@ describe('RubyGenerator', () => {
                rotation_center_y: 61
              }
            ],
-           rotation_style: :left_right)`;
+           rotation_style: :left_right,
+           variables: [
+             {
+               name: "Variable1",
+               value: 10
+             },
+             {
+               name: "Variable2"
+             },
+             {
+               name: "Variable3",
+               value: "abc"
+             }
+           ],
+           lists: [
+             {
+               name: "List1",
+               value: [1, 2, 3]
+             },
+             {
+               name: "List2"
+             },
+             {
+               name: "List3",
+               value: ["a", "b", "c"]
+             }
+           ])`;
             expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
         });
 
@@ -225,58 +283,12 @@ describe('RubyGenerator', () => {
                 visible: true,
                 size: 100,
                 currentCostume: 1,
-                rotationStyle: 'all around'
+                rotationStyle: 'all around',
+                variables: {}
             });
             renderedTarget.sprite.costumes = [];
             const expected = `Sprite.new(${Ruby.quote_(spriteName)})`;
             expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
-        });
-    });
-
-    describe('defineVariables', () => {
-        let renderedTarget;
-
-        beforeEach(() => {
-            const SCALAR_TYPE = '';
-            const LIST_TYPE = 'list';
-
-            renderedTarget = {
-                sprite: {
-                    name: 'Sprite1'
-                },
-                variables: {
-                    id1: {
-                        name: 'Variable1',
-                        type: SCALAR_TYPE
-                    },
-                    id2: {
-                        name: 'List1',
-                        type: LIST_TYPE
-                    },
-                    id3: {
-                        name: 'Variable2',
-                        type: SCALAR_TYPE
-                    },
-                    id4: {
-                        name: 'List2',
-                        type: LIST_TYPE
-                    }
-                }
-            };
-        });
-
-        test('add definitions_ the make_variable and make_list codes', () => {
-            Ruby.defineVariables(renderedTarget);
-            const spriteName = Ruby.spriteName(renderedTarget);
-            const expecteds = {
-                variable_Variable1: `${spriteName}.make_variable(${Ruby.quote_('Variable1')})`,
-                variable_Variable2: `${spriteName}.make_variable(${Ruby.quote_('Variable2')})`,
-                list_List1: `${spriteName}.make_list(${Ruby.quote_('List1')})`,
-                list_List2: `${spriteName}.make_list(${Ruby.quote_('List2')})`
-            };
-            for (const name in expecteds) {
-                expect(Ruby.definitions_[name]).toEqual(expecteds[name]);
-            }
         });
     });
 });

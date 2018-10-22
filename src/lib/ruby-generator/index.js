@@ -108,6 +108,10 @@ export default function (Blockly) {
         return (typeof s === 'string' || s instanceof String);
     };
 
+    Blockly.Ruby.isWhiteSpace = function (s) {
+        return s === null || (typeof s === 'string' && s.trim().length === 0);
+    };
+
     Blockly.Ruby.scalarToCode = function (scalar) {
         if (this.isString(scalar)) {
             return this.quote_(scalar);

@@ -98,7 +98,7 @@ class Stage extends React.Component {
                 const visible = target.visible;
                 const x = target.x;
                 const y = target.y;
-                console.log(target);
+                // console.log(target);
                 spritesList.push({
                     url: url,
                     width: width,

@@ -168,21 +168,23 @@ export default function (Blockly) {
             if (renderedTarget.currentCostume > 1) {
                 attributes.push(`current_costume: ${renderedTarget.currentCostume - 1}`);
             }
-            if (renderedTarget.sprite.costumes.length > 0) {
-                const costumesParams = ['costumes: ['];
-                costumesParams.push(
-                    renderedTarget.sprite.costumes.map(costume => `             {
-               asset_id: ${this.quote_(costume.assetId)},
-               name: ${this.quote_(costume.name)},
-               bitmap_resolution: ${costume.bitmapResolution},
-               md5: ${this.quote_(costume.md5)},
-               data_format: ${this.quote_(costume.dataFormat)},
-               rotation_center_x: ${costume.rotationCenterX},
-               rotation_center_y: ${costume.rotationCenterY}
-             }`).join(',\n')
-                );
-                costumesParams.push('           ]');
-                attributes.push(costumesParams.join('\n'));
+            const costumes = renderedTarget.sprite.costumes;
+            if (costumes.length > 0) {
+                const s = costumes.map(i => {
+                    const h = {
+                        asset_id: this.quote_(i.assetId),
+                        name: this.quote_(i.name),
+                        bitmap_resolution: i.bitmapResolution,
+                        md5: this.quote_(i.md5),
+                        data_format: this.quote_(i.dataFormat),
+                        rotation_center_x: i.rotationCenterX,
+                        rotation_center_y: i.rotationCenterY
+                    };
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.push(['costumes: [',
+                                 this.prefixLines(s, '             '),
+                                 '           ]'].join('\n'));
             }
             switch (renderedTarget.rotationStyle) {
             case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:

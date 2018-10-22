@@ -369,7 +369,8 @@ export default function (Blockly) {
         }
 
         if (this.editingTarget) {
-            code = `${this.spriteNew(this.editingTarget)} do\n${this.prefixLines(code, this.INDENT)}end`;
+            const body = code ? this.prefixLines(code, this.INDENT) : '';
+            code = `${this.spriteNew(this.editingTarget)} do\n${body}end`;
         }
 
         return allDefs + code;

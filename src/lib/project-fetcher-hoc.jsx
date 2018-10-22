@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import {
     LoadingStates,
     defaultProjectId,
-    onFetchedProjectData,
     getIsFetchingWithId,
+    onFetchedProjectData,
     setProjectId
 } from '../reducers/project-state';
 
@@ -102,6 +102,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     }
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
+        canSave: PropTypes.bool,
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),

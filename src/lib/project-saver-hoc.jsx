@@ -6,11 +6,15 @@ import VM from 'scratch-vm';
 import storage from '../lib/storage';
 import {
     LoadingStates,
+    createProject,
     getIsCreating,
+    getIsShowingProject,
+    getIsShowingWithoutId,
     getIsUpdating,
     onCreated,
     onUpdated,
-    onError
+    onError,
+    saveProject
 } from '../reducers/project-state';
 
 /**
@@ -27,7 +31,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         componentDidUpdate (prevProps) {
             if (this.props.isUpdating && !prevProps.isUpdating) {
                 this.storeProject(this.props.reduxProjectId)
-                    .then(() => { // eslint-disable-line no-unused-vars
+                    .then(() => {
                         // there is nothing we expect to find in response that we need to check here
                         this.props.onUpdated(this.props.loadingState);
                     })
@@ -45,6 +49,19 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         // NOTE: should throw up a notice for user
                         this.props.onError(`Creating a new project failed with error: ${err}`);
                     });
+            }
+            // if this is the first time we're able to create this project on the server, create it!
+            const showingCreateable = this.props.canSave && this.props.isShowingWithoutId;
+            const prevShowingCreateable = prevProps.canSave && prevProps.isShowingWithoutId;
+            if (showingCreateable && !prevShowingCreateable) {
+                this.props.createProject();
+            } else {
+                // if we're newly *able* to save this project, save it!
+                const showingSaveable = this.props.canSave && this.props.isShowingWithId;
+                const becameAbleToSave = this.props.canSave && !prevProps.canSave;
+                if (showingSaveable && becameAbleToSave) {
+                    this.props.saveProject();
+                }
             }
         }
         /**
@@ -72,13 +89,17 @@ const ProjectSaverHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                createProject: createProjectProp,
                 onCreated: onCreatedProp,
                 onUpdated: onUpdatedProp,
                 onError: onErrorProp,
                 isCreating: isCreatingProp,
+                isShowingWithId: isShowingWithIdProp,
+                isShowingWithoutId: isShowingWithoutIdProp,
                 isUpdating: isUpdatingProp,
                 loadingState,
                 reduxProjectId,
+                saveProject: saveProjectProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -90,19 +111,26 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
     }
     ProjectSaverComponent.propTypes = {
+        canSave: PropTypes.bool,
+        createProject: PropTypes.func,
         isCreating: PropTypes.bool,
+        isShowingWithId: PropTypes.bool,
+        isShowingWithoutId: PropTypes.bool,
         isUpdating: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onCreated: PropTypes.func,
         onError: PropTypes.func,
         onUpdated: PropTypes.func,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        saveProject: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isCreating: getIsCreating(loadingState),
+            isShowingWithId: getIsShowingProject(loadingState),
+            isShowingWithoutId: getIsShowingWithoutId(loadingState),
             isUpdating: getIsUpdating(loadingState),
             loadingState: loadingState,
             reduxProjectId: state.scratchGui.projectState.projectId,
@@ -110,13 +138,20 @@ const ProjectSaverHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
+        createProject: () => dispatch(createProject()),
         onCreated: projectId => dispatch(onCreated(projectId)),
         onUpdated: (projectId, loadingState) => dispatch(onUpdated(projectId, loadingState)),
-        onError: errStr => dispatch(onError(errStr))
+        onError: errStr => dispatch(onError(errStr)),
+        saveProject: () => dispatch(saveProject())
     });
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
     return connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
+        mergeProps
     )(ProjectSaverComponent);
 };
 

@@ -35,22 +35,13 @@ describe('RubyGenerator', () => {
     });
 
     describe('spriteName', () => {
-        test('return sprite("name of sprite")', () => {
+        test('return self', () => {
             Ruby.editingTarget = {
                 sprite: {
                     name: 'Sprite1'
                 }
             };
-            expect(Ruby.spriteName()).toEqual('sprite("Sprite1")');
-        });
-
-        test('"name of sprite" is escaped', () => {
-            Ruby.editingTarget = {
-                sprite: {
-                    name: '"Sprite1"'
-                }
-            };
-            expect(Ruby.spriteName()).toEqual('sprite("\\"Sprite1\\"")');
+            expect(Ruby.spriteName()).toEqual('self');
         });
     });
 

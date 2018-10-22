@@ -83,11 +83,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
-                onFetchedProjectData: onFetchedProjectDataProp,
                 intl,
+                loadingState,
+                onError: onErrorProp,
+                onFetchedProjectData: onFetchedProjectDataProp,
                 projectHost,
                 projectId,
-                loadingState,
                 reduxProjectId,
                 setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */

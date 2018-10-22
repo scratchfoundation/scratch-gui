@@ -48,17 +48,18 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                 })
                 .catch(e => {
-                    this.props.onError(e);
+                    this.props.onError(`vm-manager-hoc error: ${e}`);
                 });
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
+                loadingState,
+                onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
-                loadingState,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,

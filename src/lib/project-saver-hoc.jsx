@@ -90,14 +90,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 createProject: createProjectProp,
-                onCreated: onCreatedProp,
-                onUpdated: onUpdatedProp,
-                onError: onErrorProp,
                 isCreating: isCreatingProp,
                 isShowingWithId: isShowingWithIdProp,
                 isShowingWithoutId: isShowingWithoutIdProp,
                 isUpdating: isUpdatingProp,
                 loadingState,
+                onCreated: onCreatedProp,
+                onError: onErrorProp,
+                onUpdated: onUpdatedProp,
                 reduxProjectId,
                 saveProject: saveProjectProp,
                 /* eslint-enable no-unused-vars */

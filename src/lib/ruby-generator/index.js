@@ -148,25 +148,25 @@ export default function (Blockly) {
         const definitionsId = `sprite_${name}`;
 
         if (!this.definitions_.hasOwnProperty(definitionsId)) {
-            const attributes = [''];
+            const attributes = {};
 
             if (renderedTarget.x !== 0) {
-                attributes.push(`x: ${renderedTarget.x}`);
+                attributes.x = renderedTarget.x;
             }
             if (renderedTarget.y !== 0) {
-                attributes.push(`y: ${renderedTarget.y}`);
+                attributes.y = renderedTarget.y;
             }
             if (renderedTarget.direction !== 90) {
-                attributes.push(`direction: ${renderedTarget.direction}`);
+                attributes.direction = renderedTarget.direction;
             }
             if (!renderedTarget.visible) {
-                attributes.push(`visible: ${!!renderedTarget.visible}`);
+                attributes.visible = !!renderedTarget.visible;
             }
             if (renderedTarget.size !== 100) {
-                attributes.push(`size: ${renderedTarget.size}`);
+                attributes.size = renderedTarget.size;
             }
             if (renderedTarget.currentCostume > 1) {
-                attributes.push(`current_costume: ${renderedTarget.currentCostume - 1}`);
+                attributes.current_costume = renderedTarget.currentCostume - 1;
             }
             const costumes = renderedTarget.sprite.costumes;
             if (costumes.length > 0) {
@@ -182,18 +182,17 @@ export default function (Blockly) {
                     };
                     return this.hashToCode(h);
                 }).join(',\n');
-                attributes.push(['costumes: [',
-                                 this.prefixLines(s, '             '),
-                                 '           ]'].join('\n'));
+                attributes.costumes = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
             }
             switch (renderedTarget.rotationStyle) {
             case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
-                attributes.push('rotation_style: :left_right');
+                attributes.rotation_style = ':left_right';
                 break;
             case RenderedTarget.ROTATION_STYLE_NONE:
-                attributes.push('rotation_style: :none');
+                attributes.rotation_style = ':none';
                 break;
             }
+
             const variables = [];
             const lists = [];
             for (const id in renderedTarget.variables) {
@@ -217,9 +216,7 @@ export default function (Blockly) {
                     }
                     return this.hashToCode(h);
                 }).join(',\n');
-                attributes.push(['variables: [',
-                                 this.prefixLines(s, '             '),
-                                 '           ]'].join('\n'));
+                attributes.variables = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
             }
             if (lists.length > 0) {
                 const s = lists.map(i => {
@@ -231,13 +228,15 @@ export default function (Blockly) {
                     }
                     return this.hashToCode(h);
                 }).join(',\n');
-                attributes.push(['lists: [',
-                                 this.prefixLines(s, '             '),
-                                 '           ]'].join('\n'));
+                attributes.lists = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
             }
 
+            let code = this.hashToCode(attributes, ': ', false);
+            if (code.length > 0) {
+                code = `,\n${this.prefixLines(code, '           ')}`;
+            }
             this.definitions_[definitionsId] =
-                `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
+                `Sprite.new(${this.quote_(name)}${code})`;
         }
         return Blockly.Ruby.definitions_[definitionsId];
     };

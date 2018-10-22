@@ -70,7 +70,6 @@ const GUIComponent = props => {
         canShare,
         children,
         connectionModalVisible,
-        connectionModalExtensionId,
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,

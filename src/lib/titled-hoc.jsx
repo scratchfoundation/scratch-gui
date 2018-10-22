@@ -13,7 +13,7 @@ const TitledHOC = function (WrappedComponent) {
                 'handleUpdateProjectTitle'
             ]);
             this.state = {
-                projectTitle: ''
+                projectTitle: null
             };
         }
         handleUpdateProjectTitle (newTitle) {

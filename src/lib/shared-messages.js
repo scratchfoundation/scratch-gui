@@ -20,10 +20,5 @@ export default defineMessages({
         defaultMessage: 'pop',
         description: 'Name of the pop sound, the default sound added to a sprite',
         id: 'gui.sharedMessages.pop'
-    },
-    defaultProjectTitle: {
-        id: 'gui.gui.defaultProjectTitle',
-        description: 'Default title for project',
-        defaultMessage: 'Scratch Project'
     }
 });

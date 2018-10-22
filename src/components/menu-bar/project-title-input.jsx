@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import {defineMessages, intlShape, injectIntl} from 'react-intl';
-import sharedMessages from '../../lib/shared-messages';
 
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import Input from '../forms/input.jsx';
@@ -42,10 +41,7 @@ class ProjectTitleInput extends React.Component {
                 placeholder={this.props.intl.formatMessage(messages.projectTitlePlaceholder)}
                 tabIndex="0"
                 type="text"
-                value={this.props.projectTitle ?
-                    this.props.projectTitle :
-                    this.props.intl.formatMessage(sharedMessages.defaultProjectTitle)
-                }
+                value={this.props.projectTitle}
                 onSubmit={this.handleUpdateProjectTitle}
             />
         );

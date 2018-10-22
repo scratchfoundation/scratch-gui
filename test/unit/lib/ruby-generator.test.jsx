@@ -51,6 +51,92 @@ describe('RubyGenerator', () => {
         });
     });
 
+    describe('variableName, listName', () => {
+        let renderedTarget;
+
+        beforeEach(() => {
+            const SCALAR_TYPE = '';
+            const LIST_TYPE = 'list';
+
+            renderedTarget = {
+                sprite: {
+                    name: 'Sprite1'
+                },
+                variables: {
+                    id1: {
+                        name: 'Variable1',
+                        type: SCALAR_TYPE
+                    },
+                    id2: {
+                        name: 'List1',
+                        type: LIST_TYPE
+                    },
+                    id3: {
+                        name: 'Variable2',
+                        type: SCALAR_TYPE
+                    },
+                    id4: {
+                        name: 'List2',
+                        type: LIST_TYPE
+                    }
+                },
+                runtime: {
+                    getTargetForStage: function () {
+                        return {
+                            variables: {
+                                id5: {
+                                    name: 'Variable3',
+                                    type: SCALAR_TYPE
+                                },
+                                id6: {
+                                    name: 'List3',
+                                    type: LIST_TYPE
+                                }
+                            }
+                        };
+                    }
+                }
+            };
+            Ruby.editingTarget = renderedTarget;
+        });
+
+        test('return @name if local variable', () => {
+            expect(Ruby.variableName('id1')).toEqual('@Variable1');
+            expect(Ruby.listName('id2')).toEqual('@List1');
+            expect(Ruby.variableName('id3')).toEqual('@Variable2');
+            expect(Ruby.listName('id4')).toEqual('@List2');
+        });
+
+        test('return $name if global variable', () => {
+            expect(Ruby.variableName('id5')).toEqual('$Variable3');
+            expect(Ruby.listName('id6')).toEqual('$List3');
+        });
+
+        test('return null if missmatch type', () => {
+            expect(Ruby.listName('id1')).toEqual(null);
+            expect(Ruby.variableName('id2')).toEqual(null);
+        });
+
+        test('return null if not found', () => {
+            expect(Ruby.variableName('unknown_id1')).toEqual(null);
+            expect(Ruby.listName('unknown_id2')).toEqual(null);
+        });
+
+        test('return $name if stage\'s local variable', () => {
+            renderedTarget.isStage = true;
+            expect(Ruby.variableName('id1')).toEqual('$Variable1');
+            expect(Ruby.listName('id2')).toEqual('$List1');
+            expect(Ruby.variableName('id3')).toEqual('$Variable2');
+            expect(Ruby.listName('id4')).toEqual('$List2');
+        });
+
+        test('return null if stage and not exist local variable', () => {
+            renderedTarget.isStage = true;
+            expect(Ruby.variableName('id5')).toEqual(null);
+            expect(Ruby.listName('id6')).toEqual(null);
+        });
+    });
+
     describe('defineSprite', () => {
         const spriteName = 'Sprite1';
         let renderedTarget;

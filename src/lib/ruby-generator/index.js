@@ -17,6 +17,9 @@ import DataBlocks from './data.js';
  * @return {Blockly} Blockly defined Ruby generator.
  */
 export default function (Blockly) {
+    const SCALAR_TYPE = '';
+    const LIST_TYPE = 'list';
+
     Blockly.Ruby = new Blockly.Generator('Ruby');
 
     Blockly.Ruby.addReservedWords(
@@ -170,8 +173,6 @@ export default function (Blockly) {
 
         const variables = [];
         const lists = [];
-        const SCALAR_TYPE = '';
-        const LIST_TYPE = 'list';
         for (const varId in renderedTarget.variables) {
             const currVar = renderedTarget.variables[varId];
             switch (currVar.type) {
@@ -397,20 +398,33 @@ export default function (Blockly) {
         return null;
     };
 
-    Blockly.Ruby.variableName = function (name) {
-        const variable = this.editingTarget.lookupOrCreateVariable(name);
-        if (variable) {
-            return variable.name;
+    Blockly.Ruby.variableName = function (id, type = SCALAR_TYPE) {
+        let currVar;
+        let prefix;
+        const target = this.editingTarget;
+        const variables = target.variables;
+        if (variables.hasOwnProperty(id)) {
+            currVar = variables[id];
+            if (target.isStage) {
+                prefix = '$';
+            } else {
+                prefix = '@';
+            }
+        } else if (target.runtime && !target.isStage) {
+            const stage = target.runtime.getTargetForStage();
+            if (stage && stage.variables.hasOwnProperty(id)) {
+                currVar = stage.variables[id];
+                prefix = '$';
+            }
+        }
+        if (currVar && currVar.type === type) {
+            return `${prefix}${currVar.name}`;
         }
         return null;
     };
 
-    Blockly.Ruby.listName = function (name) {
-        const list = this.editingTarget.lookupOrCreateList(name);
-        if (list) {
-            return list.name;
-        }
-        return null;
+    Blockly.Ruby.listName = function (id) {
+        return this.variableName(id, LIST_TYPE);
     };
 
     Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;

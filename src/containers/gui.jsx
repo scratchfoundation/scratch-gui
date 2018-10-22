@@ -66,12 +66,12 @@ class GUI extends React.Component {
     render () {
         if (this.props.isError) {
             throw new Error(
-                `Failed to load project from server [id=${window.location.hash}]: ${this.props.errStr}`);
+                `Failed to load project from server [id=${window.location.hash}]: ${this.props.errorMessage}`);
         }
         const {
             /* eslint-disable no-unused-vars */
             assetHost,
-            errStr,
+            errorMessage,
             hideIntro,
             isError,
             isShowingProject,
@@ -101,12 +101,12 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
-    errStr: PropTypes.string,
+    errorMessage: PropTypes.string,
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
-    isError: PropTypes.bool,
     intl: intlShape,
+    isError: PropTypes.bool,
     isLoading: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
@@ -136,7 +136,7 @@ const mapStateToProps = (state, ownProps) => {
         cardsVisible: state.scratchGui.cards.visible,
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
         costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
-        errStr: state.scratchGui.projectState.errStr,
+        errorMessage: state.scratchGui.projectState.errorMessage,
         importInfoVisible: state.scratchGui.modals.importInfo,
         isError: getIsError(loadingState),
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,

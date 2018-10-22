@@ -141,7 +141,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         createProject: () => dispatch(createProject()),
         onCreated: projectId => dispatch(onCreated(projectId)),
         onUpdated: (projectId, loadingState) => dispatch(onUpdated(projectId, loadingState)),
-        onError: errStr => dispatch(onError(errStr)),
+        onError: errorMessage => dispatch(onError(errorMessage)),
         saveProject: () => dispatch(saveProject())
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

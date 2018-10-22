@@ -97,7 +97,7 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onError: errStr => dispatch(onError(errStr)),
+        onError: errorMessage => dispatch(onError(errorMessage)),
         onLoadedProject: (loadingState, canSave) =>
             dispatch(onLoadedProject(loadingState, canSave))
     });

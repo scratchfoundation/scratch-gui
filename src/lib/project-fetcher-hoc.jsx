@@ -126,7 +126,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
-        onError: errStr => dispatch(onError(errStr)),
+        onError: errorMessage => dispatch(onError(errorMessage)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))

@@ -431,7 +431,7 @@ export default function (Blockly) {
         return commentCode + code + nextCode + eventEndCode;
     };
 
-    Blockly.Ruby.spriteName = function (renderedTarget) {
+    Blockly.Ruby.spriteName = function () {
         return 'self';
     };
 

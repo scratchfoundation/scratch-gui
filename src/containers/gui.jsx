@@ -4,7 +4,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import VM from 'scratch-vm';
-import {injectIntl, intlShape} from 'react-intl';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
@@ -25,13 +25,21 @@ import {
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
+import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
-import {defaultProjectTitleMessages} from '../reducers/project-title';
 
 import GUIComponent from '../components/gui/gui.jsx';
+
+const messages = defineMessages({
+    defaultProjectTitle: {
+        id: 'gui.gui.defaultProjectTitle',
+        description: 'Default title for project',
+        defaultMessage: 'Scratch Project'
+    }
+});
 
 class GUI extends React.Component {
     componentDidMount () {
@@ -48,7 +56,7 @@ class GUI extends React.Component {
     setReduxTitle (newTitle) {
         if (newTitle === null || typeof newTitle === 'undefined') {
             this.props.onUpdateReduxProjectTitle(
-                this.props.intl.formatMessage(defaultProjectTitleMessages.defaultProjectTitle)
+                this.props.intl.formatMessage(messages.defaultProjectTitle)
             );
         } else {
             this.props.onUpdateReduxProjectTitle(newTitle);
@@ -163,6 +171,7 @@ const ConnectedGUI = injectIntl(connect(
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
 const WrappedGui = compose(
+    LocalizationHOC,
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
     ProjectFetcherHOC,

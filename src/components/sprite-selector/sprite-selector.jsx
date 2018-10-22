@@ -140,7 +140,7 @@ const SpriteSelectorComponent = function (props) {
                     }
                 ]}
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}
-                tooltipPlace={isRtl(intl.locale) ? 'left' : 'right'}
+                tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewSpriteClick}
             />
         </Box>

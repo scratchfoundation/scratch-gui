@@ -6,6 +6,7 @@ import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-int
 import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import styles from './stage-selector.css';
+import {isRtl} from 'scratch-l10n';
 
 import backdropIcon from '../action-menu/icon--backdrop.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
@@ -120,6 +121,7 @@ const StageSelector = props => {
                     }
                 ]}
                 title={intl.formatMessage(messages.addBackdropFromLibrary)}
+                tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewBackdropClick}
             />
         </Box>

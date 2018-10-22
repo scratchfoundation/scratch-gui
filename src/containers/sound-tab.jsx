@@ -230,6 +230,7 @@ class SoundTab extends React.Component {
                     onClick: onNewSoundFromLibraryClick
                 }]}
                 dragType={DragConstants.SOUND}
+                isRtl={isRtl}
                 items={sounds}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}

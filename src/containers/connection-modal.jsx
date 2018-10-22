@@ -5,12 +5,15 @@ import ConnectionModalComponent, {PHASES} from '../components/connection-modal/c
 import VM from 'scratch-vm';
 import analytics from '../lib/analytics';
 import extensionData from '../lib/libraries/extensions/index.jsx';
+import {connect} from 'react-redux';
+import {closeConnectionModal} from '../reducers/modals';
 
 class ConnectionModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleScanning',
+            'handleCancel',
             'handleConnected',
             'handleConnecting',
             'handleDisconnect',
@@ -56,6 +59,7 @@ class ConnectionModal extends React.Component {
         if (!this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
             this.props.vm.disconnectPeripheral(this.props.extensionId);
         }
+        // Close the modal.
         this.props.onCancel();
     }
     handleError () {
@@ -107,7 +111,7 @@ class ConnectionModal extends React.Component {
                 title={this.props.extensionId}
                 useAutoScan={this.state.extension.useAutoScan}
                 vm={this.props.vm}
-                onCancel={this.props.onCancel}
+                onCancel={this.handleCancel}
                 onConnected={this.handleConnected}
                 onConnecting={this.handleConnecting}
                 onDisconnect={this.handleDisconnect}
@@ -124,4 +128,17 @@ ConnectionModal.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-export default ConnectionModal;
+const mapStateToProps = state => ({
+    extensionId: state.scratchGui.connectionModal.extensionId
+});
+
+const mapDispatchToProps = dispatch => ({
+    onCancel: () => {
+        dispatch(closeConnectionModal());
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ConnectionModal);

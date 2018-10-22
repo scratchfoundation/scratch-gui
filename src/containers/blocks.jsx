@@ -10,7 +10,6 @@ import VM from 'scratch-vm';
 import analytics from '../lib/analytics';
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
-import ConnectionModal from './connection-modal.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
 import extensionData from '../lib/libraries/extensions/index.jsx';
@@ -21,8 +20,9 @@ import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
-import {closeExtensionLibrary, openSoundRecorder} from '../reducers/modals';
+import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
+import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
 import {
     activateTab,
@@ -47,7 +47,6 @@ class Blocks extends React.Component {
             'detachVM',
             'handleCategorySelected',
             'handleConnectionModalStart',
-            'handleConnectionModalClose',
             'handleStatusButtonUpdate',
             'handleOpenSoundRecorder',
             'handlePromptStart',
@@ -73,8 +72,7 @@ class Blocks extends React.Component {
 
         this.state = {
             workspaceMetrics: {},
-            prompt: null,
-            connectionModal: null
+            prompt: null
         };
         this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
         this.toolboxUpdateQueue = [];
@@ -114,7 +112,6 @@ class Blocks extends React.Component {
     shouldComponentUpdate (nextProps, nextState) {
         return (
             this.state.prompt !== nextState.prompt ||
-            this.state.connectionModal !== nextState.connectionModal ||
             this.props.isVisible !== nextProps.isVisible ||
             this.props.toolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
@@ -383,12 +380,7 @@ class Blocks extends React.Component {
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
-        this.setState({connectionModal: {
-            extensionId: extensionId
-        }});
-    }
-    handleConnectionModalClose () {
-        this.setState({connectionModal: null});
+        this.props.onOpenConnectionModal(extensionId);
     }
     handleStatusButtonUpdate () {
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
@@ -424,6 +416,7 @@ class Blocks extends React.Component {
             isRtl,
             isVisible,
             onActivateColorPicker,
+            onOpenConnectionModal,
             onOpenSoundRecorder,
             updateToolboxState,
             onActivateCustomProcedures,
@@ -448,13 +441,6 @@ class Blocks extends React.Component {
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
-                    />
-                ) : null}
-                {this.state.connectionModal ? (
-                    <ConnectionModal
-                        {...this.state.connectionModal}
-                        vm={vm}
-                        onCancel={this.handleConnectionModalClose}
                     />
                 ) : null}
                 {extensionLibraryVisible ? (
@@ -567,6 +553,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
+    onOpenConnectionModal: id => {
+        dispatch(setConnectionModalExtensionId(id));
+        dispatch(openConnectionModal());
+    },
     onOpenSoundRecorder: () => {
         dispatch(activateTab(SOUNDS_TAB_INDEX));
         dispatch(openSoundRecorder());

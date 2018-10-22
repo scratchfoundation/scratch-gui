@@ -97,6 +97,8 @@ const mapStateToProps = (state, ownProps) => ({
     backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
     blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     cardsVisible: state.scratchGui.cards.visible,
+    connectionModalVisible: state.scratchGui.modals.connectionModal,
+    connectionModalExtensionId: state.scratchGui.connectionModal.extensionId,
     costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
     costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
     importInfoVisible: state.scratchGui.modals.importInfo,

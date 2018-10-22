@@ -30,6 +30,7 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
+import ConnectionModal from '../../containers/connection-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -68,6 +69,8 @@ const GUIComponent = props => {
         canSaveAsCopy,
         canShare,
         children,
+        connectionModalVisible,
+        connectionModalExtensionId,
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
@@ -155,6 +158,11 @@ const GUIComponent = props => {
                 ) : null}
                 {alertsVisible ? (
                     <Alerts className={styles.alertsContainer} />
+                ) : null}
+                {connectionModalVisible ? (
+                    <ConnectionModal
+                        vm={vm}
+                    />
                 ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary

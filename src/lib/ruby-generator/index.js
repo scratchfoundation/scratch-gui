@@ -103,7 +103,40 @@ export default function (Blockly) {
             }
         }
         this.defineSprite(this.editingTarget);
-        this.defineVariables(this.editingTarget);
+    };
+
+    Blockly.Ruby.isString = function (s) {
+        return (typeof s === 'string' || s instanceof String);
+    };
+
+    Blockly.Ruby.scalarToCode = function (scalar) {
+        if (this.isString(scalar)) {
+            return this.quote_(scalar);
+        }
+        return scalar;
+    };
+
+    Blockly.Ruby.listToCode = function (list) {
+        const values = list.map(i => {
+            if (this.isString(i)) {
+                return this.quote_(i);
+            }
+            return i;
+        }).join(', ');
+        return `[${values}]`;
+    };
+
+    Blockly.Ruby.hashToCode = function (hash, separator = ': ', brace = true) {
+        const lines = [];
+        for (const key in hash) {
+            const value = hash[key];
+            lines.push(`${key}${separator}${value}`);
+        }
+        let code = lines.join(',\n');
+        if (brace) {
+            code = ['{', this.prefixLines(code, this.INDENT), '}'].join('\n');
+        }
+        return code;
     };
 
     Blockly.Ruby.defineSprite = function (renderedTarget) {
@@ -115,83 +148,97 @@ export default function (Blockly) {
         const definitionsId = `sprite_${name}`;
 
         if (!this.definitions_.hasOwnProperty(definitionsId)) {
-            const attributes = [''];
+            const attributes = {};
 
             if (renderedTarget.x !== 0) {
-                attributes.push(`x: ${renderedTarget.x}`);
+                attributes.x = renderedTarget.x;
             }
             if (renderedTarget.y !== 0) {
-                attributes.push(`y: ${renderedTarget.y}`);
+                attributes.y = renderedTarget.y;
             }
             if (renderedTarget.direction !== 90) {
-                attributes.push(`direction: ${renderedTarget.direction}`);
+                attributes.direction = renderedTarget.direction;
             }
             if (!renderedTarget.visible) {
-                attributes.push(`visible: ${!!renderedTarget.visible}`);
+                attributes.visible = !!renderedTarget.visible;
             }
             if (renderedTarget.size !== 100) {
-                attributes.push(`size: ${renderedTarget.size}`);
+                attributes.size = renderedTarget.size;
             }
             if (renderedTarget.currentCostume > 1) {
-                attributes.push(`current_costume: ${renderedTarget.currentCostume - 1}`);
+                attributes.current_costume = renderedTarget.currentCostume - 1;
             }
-            if (renderedTarget.sprite.costumes.length > 0) {
-                const costumesParams = ['costumes: ['];
-                costumesParams.push(
-                    renderedTarget.sprite.costumes.map(costume => `             {
-               asset_id: ${this.quote_(costume.assetId)},
-               name: ${this.quote_(costume.name)},
-               bitmap_resolution: ${costume.bitmapResolution},
-               md5: ${this.quote_(costume.md5)},
-               data_format: ${this.quote_(costume.dataFormat)},
-               rotation_center_x: ${costume.rotationCenterX},
-               rotation_center_y: ${costume.rotationCenterY}
-             }`).join(',\n')
-                );
-                costumesParams.push('           ]');
-                attributes.push(costumesParams.join('\n'));
+            const costumes = renderedTarget.sprite.costumes;
+            if (costumes.length > 0) {
+                const s = costumes.map(i => {
+                    const h = {
+                        asset_id: this.quote_(i.assetId),
+                        name: this.quote_(i.name),
+                        bitmap_resolution: i.bitmapResolution,
+                        md5: this.quote_(i.md5),
+                        data_format: this.quote_(i.dataFormat),
+                        rotation_center_x: i.rotationCenterX,
+                        rotation_center_y: i.rotationCenterY
+                    };
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.costumes = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
             }
             switch (renderedTarget.rotationStyle) {
             case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
-                attributes.push('rotation_style: :left_right');
+                attributes.rotation_style = ':left_right';
                 break;
             case RenderedTarget.ROTATION_STYLE_NONE:
-                attributes.push('rotation_style: :none');
+                attributes.rotation_style = ':none';
                 break;
             }
 
+            const variables = [];
+            const lists = [];
+            for (const id in renderedTarget.variables) {
+                const v = renderedTarget.variables[id];
+                switch (v.type) {
+                case SCALAR_TYPE:
+                    variables.push(v);
+                    break;
+                case LIST_TYPE:
+                    lists.push(v);
+                    break;
+                }
+            }
+            if (variables.length > 0) {
+                const s = variables.map(i => {
+                    const h = {
+                        name: this.quote_(i.name)
+                    };
+                    if (i.value !== 0) {
+                        h.value = this.scalarToCode(i.value);
+                    }
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.variables = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
+            }
+            if (lists.length > 0) {
+                const s = lists.map(i => {
+                    const h = {
+                        name: this.quote_(i.name)
+                    };
+                    if (i.value.length > 0) {
+                        h.value = this.listToCode(i.value);
+                    }
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.lists = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
+            }
+
+            let code = this.hashToCode(attributes, ': ', false);
+            if (code.length > 0) {
+                code = `,\n${this.prefixLines(code, '           ')}`;
+            }
             this.definitions_[definitionsId] =
-                `Sprite.new(${this.quote_(name)}${attributes.join(',\n           ')})`;
+                `Sprite.new(${this.quote_(name)}${code})`;
         }
         return Blockly.Ruby.definitions_[definitionsId];
-    };
-
-    Blockly.Ruby.defineVariables = function (renderedTarget) {
-        if (!renderedTarget) {
-            return null;
-        }
-
-        const variables = [];
-        const lists = [];
-        for (const varId in renderedTarget.variables) {
-            const currVar = renderedTarget.variables[varId];
-            switch (currVar.type) {
-            case SCALAR_TYPE:
-                variables.push(currVar);
-                break;
-            case LIST_TYPE:
-                lists.push(currVar);
-                break;
-            }
-        }
-        variables.forEach(currVar => {
-            this.definitions_[`variable_${currVar.name}`] =
-                `${this.spriteName(renderedTarget)}.make_variable(${this.quote_(currVar.name)})`;
-        });
-        lists.forEach(currVar => {
-            this.definitions_[`list_${currVar.name}`] =
-                `${this.spriteName(renderedTarget)}.make_list(${this.quote_(currVar.name)})`;
-        });
     };
 
     Blockly.Ruby.characterStack = function () {
@@ -301,7 +348,7 @@ export default function (Blockly) {
 
         for (name in Blockly.Ruby.definitions_) {
             const def = this.definitions_[name];
-            if (typeof def === 'string' || def instanceof String) {
+            if (this.isString(def)) {
                 if (name.match(/^require__/)) {
                     requires.push(def);
                 } else if (name.match(/^prepare__/)) {

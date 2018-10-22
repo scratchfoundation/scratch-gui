@@ -27,8 +27,12 @@ export default function (Blockly) {
 
     Blockly.Ruby.operator_divide = function (block) {
         const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0.0;
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0.0;
+        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
+        let num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0.0;
+        // guard 0 deviding.
+        if (Number(num2) === 0) {
+            num2 = '0.0';
+        }
         return [`${num1} / ${num2}`, order];
     };
 

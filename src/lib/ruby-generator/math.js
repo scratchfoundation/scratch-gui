@@ -5,16 +5,12 @@
  */
 export default function (Blockly) {
     Blockly.Ruby.math_number = function (block) {
-        let code = parseFloat(block.getFieldValue('NUM'));
-        let order;
-        if (code === Infinity) {
-            code = 'Float::INFINITY'; order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        } else if (code === -Infinity) {
-            code = '-Float::INFINITY'; order = Blockly.Ruby.ORDER_UNARY_SIGN;
-        } else {
-            order = code < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
+        let n = Number(block.getFieldValue('NUM'));
+        if (isNaN(n)) {
+            n = 0;
         }
-        return [code, order];
+        const order = n < 0 ? Blockly.Ruby.ORDER_UNARY_SIGN : Blockly.Ruby.ORDER_ATOMIC;
+        return [n, order];
     };
 
     ['math_integer', 'math_whole_number', 'math_positive_number', 'math_angle'].forEach(name => {

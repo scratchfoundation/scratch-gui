@@ -1,20 +1,24 @@
 import keyMirror from 'keymirror';
 
-const START_CREATING_NEW = 'scratch-gui/project-state/START_CREATING_NEW';
+const DONE_CREATING_COPY = 'scratch-gui/project-state/DONE_CREATING_COPY';
 const DONE_CREATING_NEW = 'scratch-gui/project-state/DONE_CREATING_NEW';
-const DONE_FETCHING_WITH_ID = 'scratch-gui/project-state/DONE_FETCHING_WITH_ID';
 const DONE_FETCHING_DEFAULT = 'scratch-gui/project-state/DONE_FETCHING_DEFAULT';
+const DONE_FETCHING_WITH_ID = 'scratch-gui/project-state/DONE_FETCHING_WITH_ID';
+const DONE_LOADING_VM_TO_SAVE = 'scratch-gui/project-state/DONE_LOADING_VM_TO_SAVE';
 const DONE_LOADING_VM_WITH_ID = 'scratch-gui/project-state/DONE_LOADING_VM_WITH_ID';
 const DONE_LOADING_VM_WITHOUT_ID = 'scratch-gui/project-state/DONE_LOADING_VM_WITHOUT_ID';
-const DONE_LOADING_VM_TO_SAVE = 'scratch-gui/project-state/DONE_LOADING_VM_TO_SAVE';
-const DONE_SAVING_WITH_ID = 'scratch-gui/project-state/DONE_SAVING_WITH_ID';
-const DONE_SAVING_WITH_ID_BEFORE_NEW = 'scratch-gui/project-state/DONE_SAVING_WITH_ID_BEFORE_NEW';
-const GO_TO_ERROR_STATE = 'scratch-gui/project-state/GO_TO_ERROR_STATE';
+const DONE_REMIXING = 'scratch-gui/project-state/DONE_REMIXING';
+const DONE_UPDATING = 'scratch-gui/project-state/DONE_UPDATING';
+const DONE_UPDATING_BEFORE_NEW = 'scratch-gui/project-state/DONE_UPDATING_BEFORE_NEW';
 const SET_PROJECT_ID = 'scratch-gui/project-state/SET_PROJECT_ID';
+const START_CREATING_COPY = 'scratch-gui/project-state/START_CREATING_COPY';
+const START_CREATING_NEW = 'scratch-gui/project-state/START_CREATING_NEW';
+const START_ERROR = 'scratch-gui/project-state/START_ERROR';
 const START_FETCHING_NEW = 'scratch-gui/project-state/START_FETCHING_NEW';
 const START_LOADING_VM_FILE_UPLOAD = 'scratch-gui/project-state/START_LOADING_FILE_UPLOAD';
-const START_SAVING = 'scratch-gui/project-state/START_SAVING';
-const START_SAVING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_SAVING_BEFORE_CREATING_NEW';
+const START_REMIXING = 'scratch-gui/project-state/START_REMIXING';
+const START_UPDATING = 'scratch-gui/project-state/START_UPDATING';
+const START_UPDATING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_UPDATING_BEFORE_CREATING_NEW';
 
 const defaultProjectId = '0'; // hardcoded id of default project
 
@@ -26,10 +30,12 @@ const LoadingState = keyMirror({
     LOADING_VM_WITH_ID: null,
     LOADING_VM_FILE_UPLOAD: null,
     LOADING_VM_NEW_DEFAULT: null,
+    REMIXING: null,
     SHOWING_WITH_ID: null,
     SHOWING_WITHOUT_ID: null,
-    SAVING_WITH_ID: null,
-    SAVING_WITH_ID_BEFORE_NEW: null,
+    CREATING_COPY: null,
+    UPDATING: null,
+    UPDATING_BEFORE_NEW: null,
     CREATING_NEW: null
 });
 
@@ -49,11 +55,13 @@ const getIsLoadingWithId = loadingState => (
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
 );
 const getIsCreating = loadingState => (
-    loadingState === LoadingState.CREATING_NEW
+    loadingState === LoadingState.CREATING_NEW ||
+    loadingState === LoadingState.REMIXING ||
+    loadingState === LoadingState.CREATING_COPY
 );
 const getIsUpdating = loadingState => (
-    loadingState === LoadingState.SAVING_WITH_ID ||
-    loadingState === LoadingState.SAVING_WITH_ID_BEFORE_NEW
+    loadingState === LoadingState.UPDATING ||
+    loadingState === LoadingState.UPDATING_BEFORE_NEW
 );
 const getIsShowingProject = loadingState => (
     loadingState === LoadingState.SHOWING_WITH_ID ||
@@ -86,7 +94,7 @@ const reducer = function (state, action) {
         if (state.loadingState === LoadingState.CREATING_NEW) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.SHOWING_WITH_ID,
-                projectId: action.id
+                projectId: action.projectId
             });
         }
         return state;
@@ -124,19 +132,39 @@ const reducer = function (state, action) {
     case DONE_LOADING_VM_TO_SAVE:
         if (state.loadingState === LoadingState.LOADING_VM_FILE_UPLOAD) {
             return Object.assign({}, state, {
-                loadingState: LoadingState.SAVING_WITH_ID
+                loadingState: LoadingState.UPDATING
             });
         }
         return state;
-    case DONE_SAVING_WITH_ID:
-        if (state.loadingState === LoadingState.SAVING_WITH_ID) {
+    case DONE_REMIXING:
+        // We need to set project id since we just created new project on the server.
+        // No need to load, we should have data already in vm.
+        if (state.loadingState === LoadingState.REMIXING) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.SHOWING_WITH_ID,
+                projectId: action.projectId
+            });
+        }
+        return state;
+    case DONE_CREATING_COPY:
+        // We need to set project id since we just created new project on the server.
+        // No need to load, we should have data already in vm.
+        if (state.loadingState === LoadingState.CREATING_COPY) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.SHOWING_WITH_ID,
+                projectId: action.projectId
+            });
+        }
+        return state;
+    case DONE_UPDATING:
+        if (state.loadingState === LoadingState.UPDATING) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.SHOWING_WITH_ID
             });
         }
         return state;
-    case DONE_SAVING_WITH_ID_BEFORE_NEW:
-        if (state.loadingState === LoadingState.SAVING_WITH_ID_BEFORE_NEW) {
+    case DONE_UPDATING_BEFORE_NEW:
+        if (state.loadingState === LoadingState.UPDATING_BEFORE_NEW) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.FETCHING_NEW_DEFAULT,
                 projectId: defaultProjectId
@@ -145,7 +173,7 @@ const reducer = function (state, action) {
         return state;
     case SET_PROJECT_ID:
         // if setting the default project id, specifically fetch that project
-        if (action.id === defaultProjectId) {
+        if (action.projectId === defaultProjectId) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.FETCHING_NEW_DEFAULT,
                 projectId: defaultProjectId
@@ -154,16 +182,16 @@ const reducer = function (state, action) {
         // if we were already showing a project, and a different projectId is set, only fetch that project if
         // projectId has changed. This prevents re-fetching projects unnecessarily.
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
-            if (state.projectId !== action.id) {
+            if (state.projectId !== action.projectId) {
                 return Object.assign({}, state, {
                     loadingState: LoadingState.FETCHING_WITH_ID,
-                    projectId: action.id
+                    projectId: action.projectId
                 });
             }
         } else { // allow any other states to transition to fetching project
             return Object.assign({}, state, {
                 loadingState: LoadingState.FETCHING_WITH_ID,
-                projectId: action.id
+                projectId: action.projectId
             });
         }
         return state;
@@ -197,30 +225,48 @@ const reducer = function (state, action) {
             });
         }
         return state;
-    case START_SAVING:
+    case START_REMIXING:
+        // do not set projectId to null, because we nay reference it in creating project
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
             return Object.assign({}, state, {
-                loadingState: LoadingState.SAVING_WITH_ID
+                loadingState: LoadingState.REMIXING
             });
         }
         return state;
-    case START_SAVING_BEFORE_CREATING_NEW:
+    case START_UPDATING:
         if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
             return Object.assign({}, state, {
-                loadingState: LoadingState.SAVING_WITH_ID_BEFORE_NEW
+                loadingState: LoadingState.UPDATING
             });
         }
         return state;
-    case GO_TO_ERROR_STATE:
+    case START_CREATING_COPY:
+        // do not set projectId to null, because we nay reference it in creating project
+        if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.CREATING_COPY
+            });
+        }
+        return state;
+    case START_UPDATING_BEFORE_CREATING_NEW:
+        if (state.loadingState === LoadingState.SHOWING_WITH_ID) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.UPDATING_BEFORE_NEW
+            });
+        }
+        return state;
+    case START_ERROR:
     // NOTE: we should introduce handling in components for showing ERROR state
         if ([
+            LoadingState.CREATING_NEW,
+            LoadingState.FETCHING_NEW_DEFAULT,
+            LoadingState.FETCHING_WITH_ID,
             LoadingState.LOADING_VM_NEW_DEFAULT,
             LoadingState.LOADING_VM_WITH_ID,
-            LoadingState.FETCHING_WITH_ID,
-            LoadingState.FETCHING_NEW_DEFAULT,
-            LoadingState.SAVING_WITH_ID,
-            LoadingState.SAVING_WITH_ID_BEFORE_NEW,
-            LoadingState.CREATING_NEW
+            LoadingState.REMIXING,
+            LoadingState.CREATING_COPY,
+            LoadingState.UPDATING_BEFORE_NEW,
+            LoadingState.UPDATING
         ].includes(state.loadingState)) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.ERROR,
@@ -237,10 +283,27 @@ const createProject = () => ({
     type: START_CREATING_NEW
 });
 
-const onCreated = id => ({
-    type: DONE_CREATING_NEW,
-    id: id
-});
+const doneCreatingProject = (id, loadingState) => {
+    switch (loadingState) {
+    case LoadingState.CREATING_NEW:
+        return {
+            type: DONE_CREATING_NEW,
+            projectId: id
+        };
+    case LoadingState.CREATING_COPY:
+        return {
+            type: DONE_CREATING_COPY,
+            projectId: id
+        };
+    case LoadingState.REMIXING:
+        return {
+            type: DONE_REMIXING,
+            projectId: id
+        };
+    default:
+        break;
+    }
+};
 
 const onFetchedProjectData = (projectData, loadingState) => {
     switch (loadingState) {
@@ -283,15 +346,15 @@ const onLoadedProject = (loadingState, canSave) => {
     }
 };
 
-const onUpdated = loadingState => {
+const doneUpdatingProject = loadingState => {
     switch (loadingState) {
-    case LoadingState.SAVING_WITH_ID:
+    case LoadingState.UPDATING:
         return {
-            type: DONE_SAVING_WITH_ID
+            type: DONE_UPDATING
         };
-    case LoadingState.SAVING_WITH_ID_BEFORE_NEW:
+    case LoadingState.UPDATING_BEFORE_NEW:
         return {
-            type: DONE_SAVING_WITH_ID_BEFORE_NEW
+            type: DONE_UPDATING_BEFORE_NEW
         };
     default:
         break;
@@ -299,17 +362,17 @@ const onUpdated = loadingState => {
 };
 
 const onError = error => ({
-    type: GO_TO_ERROR_STATE,
+    type: START_ERROR,
     error: error
 });
 
 const setProjectId = id => ({
     type: SET_PROJECT_ID,
-    id: id
+    projectId: id
 });
 
-const requestNewProject = canSave => {
-    if (canSave) return {type: START_SAVING_BEFORE_CREATING_NEW};
+const requestNewProject = canCreateNew => {
+    if (canCreateNew) return {type: START_UPDATING_BEFORE_CREATING_NEW};
     return {type: START_FETCHING_NEW};
 };
 
@@ -317,8 +380,16 @@ const onProjectUploadStarted = () => ({
     type: START_LOADING_VM_FILE_UPLOAD
 });
 
-const saveProject = () => ({
-    type: START_SAVING
+const updateProject = () => ({
+    type: START_UPDATING
+});
+
+const saveProjectAsCopy = () => ({
+    type: START_CREATING_COPY
+});
+
+const remixProject = () => ({
+    type: START_REMIXING
 });
 
 export {
@@ -337,13 +408,15 @@ export {
     getIsShowingProject,
     getIsShowingWithId,
     getIsShowingWithoutId,
-    onCreated,
-    onError,
+    doneCreatingProject,
+    projectError,
     onFetchedProjectData,
     onLoadedProject,
     onProjectUploadStarted,
-    onUpdated,
+    doneUpdatingProject,
     requestNewProject,
-    saveProject,
+    remixProject,
+    updateProject,
+    saveProjectAsCopy,
     setProjectId
 };

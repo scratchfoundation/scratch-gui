@@ -2,15 +2,17 @@
 import projectStateReducer from '../../../src/reducers/project-state';
 import {
     LoadingState,
-    onCreated,
-    onError,
+    doneCreatingProject,
+    doneUpdatingProject,
     onFetchedProjectData,
     onLoadedProject,
     onProjectUploadStarted,
-    onUpdated,
+    projectError,
+    remixProject,
     requestNewProject,
-    saveProject,
-    setProjectId
+    saveProjectAsCopy,
+    setProjectId,
+    updateProject
 } from '../../../src/reducers/project-state';
 
 test('initialState', () => {
@@ -23,26 +25,48 @@ test('initialState', () => {
     expect(projectStateReducer(defaultState, {type: 'anything'}).loadingState).toBe(LoadingState.NOT_LOADED);
 });
 
-test('onCreated with projectId type string shows project with that id', () => {
+test('doneCreatingProject for new project with projectId type string shows project with that id', () => {
     const initialState = {
         projectId: null,
         loadingState: LoadingState.CREATING_NEW
     };
-    const action = onCreated('100');
+    const action = doneCreatingProject('100', initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
     expect(resultState.projectId).toBe('100');
 });
 
-test('onCreated with projectId type number shows project with id of type number', () => {
+test('doneCreatingProject for new project with projectId type number shows project with id of type number', () => {
     const initialState = {
         projectId: null,
         loadingState: LoadingState.CREATING_NEW
     };
-    const action = onCreated(100);
+    const action = doneCreatingProject(100, initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
     expect(resultState.projectId).toBe(100);
+});
+
+test('doneCreatingProject for remix shows project with that id', () => {
+    const initialState = {
+        projectId: null,
+        loadingState: LoadingState.REMIXING
+    };
+    const action = doneCreatingProject('100', initialState.loadingState);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+    expect(resultState.projectId).toBe('100');
+});
+
+test('doneCreatingProject for save as copy shows project with that id', () => {
+    const initialState = {
+        projectId: null,
+        loadingState: LoadingState.CREATING_COPY
+    };
+    const action = doneCreatingProject('100', initialState.loadingState);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+    expect(resultState.projectId).toBe('100');
 });
 
 test('onFetchedProjectData with id loads project data into vm', () => {
@@ -82,7 +106,7 @@ test('onLoadedProject upload, with canSave true, prepares to save', () => {
     };
     const action = onLoadedProject(initialState.loadingState, true);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID);
+    expect(resultState.loadingState).toBe(LoadingState.UPDATING);
 });
 
 test('onLoadedProject with id shows with id', () => {
@@ -112,20 +136,20 @@ test('onLoadedProject new, to save shows without id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onUpdated with id shows with id', () => {
+test('doneUpdatingProject with id shows with id', () => {
     const initialState = {
-        loadingState: LoadingState.SAVING_WITH_ID
+        loadingState: LoadingState.UPDATING
     };
-    const action = onUpdated(initialState.loadingState);
+    const action = doneUpdatingProject(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
-test('onUpdated with id, before new, fetches default project', () => {
+test('doneUpdatingProject with id, before new, fetches default project', () => {
     const initialState = {
-        loadingState: LoadingState.SAVING_WITH_ID_BEFORE_NEW
+        loadingState: LoadingState.UPDATING_BEFORE_NEW
     };
-    const action = onUpdated(initialState.loadingState);
+    const action = doneUpdatingProject(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT);
 });
@@ -163,7 +187,7 @@ test('setProjectId, with same id as before, but not same type, should fetch beca
     expect(resultState.projectId).toBe(100);
 });
 
-test('requestNewProject, when can\'t save, should fetch default project without id', () => {
+test('requestNewProject, when can\'t create new, should fetch default project without id', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID
     };
@@ -172,13 +196,13 @@ test('requestNewProject, when can\'t save, should fetch default project without 
     expect(resultState.loadingState).toBe(LoadingState.FETCHING_NEW_DEFAULT);
 });
 
-test('requestNewProject, when can save, should save and prepare to fetch default project', () => {
+test('requestNewProject, when can create new, should save and prepare to fetch default project', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
     const action = requestNewProject(true);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID_BEFORE_NEW);
+    expect(resultState.loadingState).toBe(LoadingState.UPDATING_BEFORE_NEW);
 });
 
 test('onProjectUploadStarted when project not loaded should load', () => {
@@ -208,24 +232,44 @@ test('onProjectUploadStarted when showing project without id should load', () =>
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('saveProject should prepare to save', () => {
+test('updateProject should prepare to update', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
-    const action = saveProject();
+    const action = updateProject();
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SAVING_WITH_ID);
+    expect(resultState.loadingState).toBe(LoadingState.UPDATING);
 });
 
-test('onError from various states should show error', () => {
+test('saveProjectAsCopy should prepare to save as a copy', () => {
+    const initialState = {
+        loadingState: LoadingState.SHOWING_WITH_ID
+    };
+    const action = saveProjectAsCopy();
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.CREATING_COPY);
+});
+
+test('remixProject should prepare to remix', () => {
+    const initialState = {
+        loadingState: LoadingState.SHOWING_WITH_ID
+    };
+    const action = remixProject();
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.REMIXING);
+});
+
+test('projectError from various states should show error', () => {
     const startStates = [
+        LoadingState.CREATING_NEW,
+        LoadingState.FETCHING_NEW_DEFAULT,
+        LoadingState.FETCHING_WITH_ID,
         LoadingState.LOADING_VM_NEW_DEFAULT,
         LoadingState.LOADING_VM_WITH_ID,
-        LoadingState.FETCHING_WITH_ID,
-        LoadingState.FETCHING_NEW_DEFAULT,
-        LoadingState.SAVING_WITH_ID,
-        LoadingState.SAVING_WITH_ID_BEFORE_NEW,
-        LoadingState.CREATING_NEW
+        LoadingState.REMIXING,
+        LoadingState.CREATING_COPY,
+        LoadingState.UPDATING_BEFORE_NEW,
+        LoadingState.UPDATING
     ];
     for (const startState of startStates) {
         const initialState = {
@@ -239,7 +283,7 @@ test('onError from various states should show error', () => {
     }
 });
 
-test('onError from showing project should show error', () => {
+test('projectError from showing project should show error', () => {
     const initialState = {
         error: null,
         loadingState: LoadingState.FETCHING_WITH_ID

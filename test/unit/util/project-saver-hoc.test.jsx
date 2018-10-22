@@ -23,7 +23,7 @@ describe('projectSaverHOC', () => {
     });
 
     test('if canSave becomes true when showing a project with an id, project will be saved', () => {
-        const mockedSaveProject = jest.fn();
+        const mockedUpdateProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mounted = mount(
@@ -34,15 +34,15 @@ describe('projectSaverHOC', () => {
                 isShowingWithoutId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITH_ID}
-                saveProject={mockedSaveProject}
                 store={store}
                 vm={vm}
+                onUpdateProject={mockedUpdateProject}
             />
         );
         mounted.setProps({
             canSave: true
         });
-        expect(mockedSaveProject).toHaveBeenCalled();
+        expect(mockedUpdateProject).toHaveBeenCalled();
     });
 
     test('if canSave is alreatdy true and we show a project with an id, project will NOT be saved', () => {
@@ -57,9 +57,9 @@ describe('projectSaverHOC', () => {
                 isShowingWithoutId={false}
                 isUpdating={false}
                 loadingState={LoadingState.LOADING_VM_WITH_ID}
-                saveProject={mockedSaveProject}
                 store={store}
                 vm={vm}
+                onUpdateProject={mockedSaveProject}
             />
         );
         mounted.setProps({
@@ -78,13 +78,13 @@ describe('projectSaverHOC', () => {
             <WrappedComponent
                 isShowingWithoutId
                 canSave={false}
-                createProject={mockedCreateProject}
                 isCreating={false}
                 isShowingWithId={false}
                 isUpdating={false}
                 loadingState={LoadingState.LOADING_VM_NEW_DEFAULT}
                 store={store}
                 vm={vm}
+                onCreateProject={mockedCreateProject}
             />
         );
         mounted.setProps({
@@ -94,37 +94,36 @@ describe('projectSaverHOC', () => {
         expect(mockedCreateProject).not.toHaveBeenCalled();
     });
 
-    test('if canSave becomes true when showing a project without an id, project will be created', () => {
+    test('if canCreateNew becomes true when showing a project without an id, project will be created', () => {
         const mockedCreateProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mounted = mount(
             <WrappedComponent
                 isShowingWithoutId
-                canSave={false}
-                createProject={mockedCreateProject}
+                canCreateNew={false}
                 isCreating={false}
                 isShowingWithId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITHOUT_ID}
                 store={store}
                 vm={vm}
+                onCreateProject={mockedCreateProject}
             />
         );
         mounted.setProps({
-            canSave: true
+            canCreateNew: true
         });
         expect(mockedCreateProject).toHaveBeenCalled();
     });
 
-    test('if canSave is true and we transition to showing new project, project will be created', () => {
+    test('if canCreateNew is true and we transition to showing new project, project will be created', () => {
         const mockedCreateProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mounted = mount(
             <WrappedComponent
-                canSave
-                createProject={mockedCreateProject}
+                canCreateNew
                 isCreating={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
@@ -132,6 +131,7 @@ describe('projectSaverHOC', () => {
                 loadingState={LoadingState.LOADING_VM_NEW_DEFAULT}
                 store={store}
                 vm={vm}
+                onCreateProject={mockedCreateProject}
             />
         );
         mounted.setProps({
@@ -184,7 +184,7 @@ describe('projectSaverHOC', () => {
         );
         mounted.setProps({
             isUpdating: true,
-            loadingState: LoadingState.SAVING_WITH_ID
+            loadingState: LoadingState.UPDATING
         });
         expect(vm.saveProjectSb3).toHaveBeenCalled();
     });
@@ -200,7 +200,7 @@ describe('projectSaverHOC', () => {
                 isCreating={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
-                loadingState={LoadingState.SAVING_WITH_ID}
+                loadingState={LoadingState.UPDATING}
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
@@ -208,7 +208,7 @@ describe('projectSaverHOC', () => {
         );
         mounted.setProps({
             isUpdating: true,
-            loadingState: LoadingState.SAVING_WITH_ID,
+            loadingState: LoadingState.UPDATING,
             reduxProjectId: '99' // random change to force a re-render and componentDidUpdate
         });
         expect(vm.saveProjectSb3).not.toHaveBeenCalled();

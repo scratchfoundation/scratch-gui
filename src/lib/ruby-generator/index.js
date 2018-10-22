@@ -108,6 +108,10 @@ export default function (Blockly) {
         return (typeof s === 'string' || s instanceof String);
     };
 
+    Blockly.Ruby.isWhiteSpace = function (s) {
+        return s === null || (typeof s === 'string' && s.trim().length === 0);
+    };
+
     Blockly.Ruby.scalarToCode = function (scalar) {
         if (this.isString(scalar)) {
             return this.quote_(scalar);
@@ -489,25 +493,6 @@ export default function (Blockly) {
             this.definitions_.prepare__init_hardware = 'init_hardware';
         }
         return this.blockToCode_(block);
-    };
-
-    Blockly.Ruby.SpecialSymbols = [
-        '_myself_',
-        '_mouse_',
-        '_edge_',
-        '_random_',
-        '_stage_'
-    ];
-
-    Blockly.Ruby.isSpecialSymbol = function (name) {
-        return this.SpecialSymbols.includes(name);
-    };
-
-    Blockly.Ruby.specialSymbolToCode = function (name) {
-        if (this.isSpecialSymbol(name)) {
-            return `:${name}`;
-        }
-        return name;
     };
 
     Blockly = GeneratedBlocks(Blockly);

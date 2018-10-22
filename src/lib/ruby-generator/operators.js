@@ -6,57 +6,70 @@
 export default function (Blockly) {
     Blockly.Ruby.operator_add = function (block) {
         const order = Blockly.Ruby.ORDER_ADDITIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || '0';
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || '0';
+        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
         return [`${num1} + ${num2}`, order];
     };
 
     Blockly.Ruby.operator_subtract = function (block) {
         const order = Blockly.Ruby.ORDER_ADDITIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || '0';
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || '0';
+        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
         return [`${num1} - ${num2}`, Blockly.Ruby.ORDER_ADDITIVE];
     };
 
     Blockly.Ruby.operator_multiply = function (block) {
         const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || '0';
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || '0';
+        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
         return [`${num1} * ${num2}`, order];
     };
 
     Blockly.Ruby.operator_divide = function (block) {
         const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || '0';
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || '1';
+        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0.0;
+        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0.0;
         return [`${num1} / ${num2}`, order];
     };
 
     Blockly.Ruby.operator_random = function (block) {
-        const fromNum = Blockly.Ruby.valueToCode(block, 'FROM', Blockly.Ruby.ORDER_RANGE) || '0';
-        const toNum = Blockly.Ruby.valueToCode(block, 'TO', Blockly.Ruby.ORDER_RANGE) || '0';
+        const fromNum = Blockly.Ruby.valueToCode(block, 'FROM', Blockly.Ruby.ORDER_RANGE) || 1;
+        const toNum = Blockly.Ruby.valueToCode(block, 'TO', Blockly.Ruby.ORDER_RANGE) || 10;
         return [`rand(${fromNum}..${toNum})`, Blockly.Ruby.ORDER_FUNCTION_CALL];
+    };
+
+    const stringOperandToCode = function (operand) {
+        if (Blockly.Ruby.isString(operand) &&
+            operand[0] === '"' &&
+            operand[operand.length - 1] === '"') {
+            const s = operand.slice(1, operand.length - 1);
+            const n = Number(s);
+            if (n !== 0 || !Blockly.Ruby.isWhiteSpace(s)) {
+                return n;
+            }
+        }
+        return operand;
     };
 
     Blockly.Ruby.operator_gt = function (block) {
         const order = Blockly.Ruby.ORDER_RELATIONAL;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || '0';
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || '0';
-        return [`Cast.compare(${operand1}, ${operand2}) > 0`, order];
+        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${stringOperandToCode(operand1)} > ${stringOperandToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_lt = function (block) {
         const order = Blockly.Ruby.ORDER_RELATIONAL;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || '0';
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || '0';
-        return [`Cast.compare(${operand1}, ${operand2}) < 0`, order];
+        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${stringOperandToCode(operand1)} < ${stringOperandToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_equals = function (block) {
         const order = Blockly.Ruby.ORDER_EQUALS;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || '0';
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || '0';
-        return [`Cast.compare(${operand1}, ${operand2}) == 0`, order];
+        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${stringOperandToCode(operand1)} == ${stringOperandToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_and = function (block) {

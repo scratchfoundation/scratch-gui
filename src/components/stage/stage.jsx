@@ -1,22 +1,3 @@
-/* const script3 = document.createElement('script');
-script3.src = 'https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.js';
-document.head.appendChild(script3);
-
-const script = document.createElement('script');
-script.src = 'https://aframe.io/releases/0.8.2/aframe.js';
-document.head.appendChild(script);
-
-const script2 = document.createElement('script');
-// script2.src = 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js';
-script2.src = 'https://cdn.jsdelivr.net/gh/RSpace/AR.js/aframe/build/aframe-ar.js';
-document.head.appendChild(script2); */
-
-
-// import 'aframe';
-// import 'ar.js/aframe/build/aframe-ar.js';
-// import 'node-ar.js';
-// import {Sphere, Cylinder, Plane, Sky, Text, Scene} from 'react-aframe-ar';
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
@@ -28,7 +9,6 @@ import MonitorList from '../../containers/monitor-list.jsx';
 import TargetHighlight from '../../containers/target-highlight.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
-import StageAFrameSprites from './stage-aframe-sprites.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
@@ -57,25 +37,29 @@ const StageComponent = props => {
     // *************************************************************************
 
     const timeoutID = setTimeout(() => {
-        console.log('testing');
-        console.log(window.frames['output']);
-        console.log('stageURL passed to createARFrame:');
-        console.log(stageURL);
-        console.log('spritesList passed to createARFrame:');
-        console.log(sprites);
+        // console.log('testing');
+        // console.log(window.frames['output']);
+        // console.log('stageURL passed to createARFrame:');
+        // console.log(stageURL);
+        // console.log('spritesList passed to createARFrame:');
+        // console.log(sprites);
         clearTimeout(timeoutID);
-        let sprites_string = '';
-        sprites.forEach(function (sprite, index) {
+        let spritesString = '';
+        sprites.forEach((sprite, index) => {
             if (sprite.visible) {
-                sprites_string = sprites_string + '<a-image height="'+sprite.height / 100+'" material="alphaTest: 0.5" position="'+sprite.x / 100 + ' ' + ((sprite.y + 180) / 100)  + ' ' + (-0.3 * index)+'" src="'+sprite.url+'" width="'+sprite.width / 100+'"></a-image>';
+                /* eslint-disable max-len */
+                /* eslint-disable prefer-template */
+                spritesString = spritesString + '<a-image height="' + (sprite.height / 100) + '" material="alphaTest: 0.5" position="' + (sprite.x / 100) + ' ' + ((sprite.y + 180) / 100) + ' ' + (-0.3 * index) + '" src="' + sprite.url + '" width="' + (sprite.width / 100) + '"></a-image>';
             }
         });
-        const marker_string = '<a-image height="3.6" position="0 1.8 -2" src="'+stageURL+'" width="4.8"></a-image><a-plane color="#7BC8A4" height="4" position="0 0 0" rotation="-90 0 0" width="4.8"></a-plane>';
-        const entities_string = marker_string + sprites_string;
-        window.frames['output'].contentWindow.document.getElementById('marker').innerHTML = entities_string;
+        const markerString = '<a-image height="3.6" position="0 1.8 -2" src="' + stageURL + '" width="4.8"></a-image><a-plane color="#7BC8A4" height="4" position="0 0 0" rotation="-90 0 0" width="4.8"></a-plane>';
+        const entitiesString = markerString + spritesString;
+        window.frames.output.contentWindow.document.getElementById('marker').innerHTML = entitiesString;
     }, 5000);
 
-    function createARFrame() {
+    /* eslint-disable func-style */
+    /* eslint-disable require-jsdoc */
+    function createARFrame () {
         return {__html: '<iframe src="static/ar.html" id="output" width="480px" height="360px"></iframe>'};
     }
 
@@ -93,7 +77,9 @@ const StageComponent = props => {
                 }}
                 onDoubleClick={onDoubleClick}
             >
+                { /* eslint-disable no-constant-condition */ }
                 {true ? (
+                    /* eslint-disable react/no-danger */
                     <div dangerouslySetInnerHTML={createARFrame()} />
                 ) : (
                     <DOMElementRenderer

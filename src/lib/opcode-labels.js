@@ -7,12 +7,12 @@ const messages = defineMessages({
         id: 'gui.opcodeLabels.direction'
     },
     motion_xposition: {
-        defaultMessage: 'x postion',
+        defaultMessage: 'x position',
         description: 'Label for the x position monitor when shown on the stage',
         id: 'gui.opcodeLabels.xposition'
     },
     motion_yposition: {
-        defaultMessage: 'y postion',
+        defaultMessage: 'y position',
         description: 'Label for the y position monitor when shown on the stage',
         id: 'gui.opcodeLabels.yposition'
     },

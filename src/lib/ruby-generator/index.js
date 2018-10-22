@@ -102,7 +102,6 @@ export default function (Blockly) {
                 this.variableDB_ = new Blockly.Names(Blockly.Ruby.RESERVED_WORDS_);
             }
         }
-        this.defineSprite(this.editingTarget);
     };
 
     Blockly.Ruby.isString = function (s) {
@@ -139,106 +138,100 @@ export default function (Blockly) {
         return code;
     };
 
-    Blockly.Ruby.defineSprite = function (renderedTarget) {
+    Blockly.Ruby.spriteNew = function (renderedTarget) {
         if (!renderedTarget) {
             return null;
         }
-        const RenderedTarget = renderedTarget.constructor;
-        const name = renderedTarget.sprite.name;
-        const definitionsId = `sprite_${name}`;
 
-        if (!this.definitions_.hasOwnProperty(definitionsId)) {
-            const attributes = {};
-
-            if (renderedTarget.x !== 0) {
-                attributes.x = renderedTarget.x;
-            }
-            if (renderedTarget.y !== 0) {
-                attributes.y = renderedTarget.y;
-            }
-            if (renderedTarget.direction !== 90) {
-                attributes.direction = renderedTarget.direction;
-            }
-            if (!renderedTarget.visible) {
-                attributes.visible = !!renderedTarget.visible;
-            }
-            if (renderedTarget.size !== 100) {
-                attributes.size = renderedTarget.size;
-            }
-            if (renderedTarget.currentCostume > 1) {
-                attributes.current_costume = renderedTarget.currentCostume - 1;
-            }
-            const costumes = renderedTarget.sprite.costumes;
-            if (costumes.length > 0) {
-                const s = costumes.map(i => {
-                    const h = {
-                        asset_id: this.quote_(i.assetId),
-                        name: this.quote_(i.name),
-                        bitmap_resolution: i.bitmapResolution,
-                        md5: this.quote_(i.md5),
-                        data_format: this.quote_(i.dataFormat),
-                        rotation_center_x: i.rotationCenterX,
-                        rotation_center_y: i.rotationCenterY
-                    };
-                    return this.hashToCode(h);
-                }).join(',\n');
-                attributes.costumes = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
-            }
-            switch (renderedTarget.rotationStyle) {
-            case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
-                attributes.rotation_style = ':left_right';
-                break;
-            case RenderedTarget.ROTATION_STYLE_NONE:
-                attributes.rotation_style = ':none';
-                break;
-            }
-
-            const variables = [];
-            const lists = [];
-            for (const id in renderedTarget.variables) {
-                const v = renderedTarget.variables[id];
-                switch (v.type) {
-                case SCALAR_TYPE:
-                    variables.push(v);
-                    break;
-                case LIST_TYPE:
-                    lists.push(v);
-                    break;
-                }
-            }
-            if (variables.length > 0) {
-                const s = variables.map(i => {
-                    const h = {
-                        name: this.quote_(i.name)
-                    };
-                    if (i.value !== 0) {
-                        h.value = this.scalarToCode(i.value);
-                    }
-                    return this.hashToCode(h);
-                }).join(',\n');
-                attributes.variables = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
-            }
-            if (lists.length > 0) {
-                const s = lists.map(i => {
-                    const h = {
-                        name: this.quote_(i.name)
-                    };
-                    if (i.value.length > 0) {
-                        h.value = this.listToCode(i.value);
-                    }
-                    return this.hashToCode(h);
-                }).join(',\n');
-                attributes.lists = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
-            }
-
-            let code = this.hashToCode(attributes, ': ', false);
-            if (code.length > 0) {
-                code = `,\n${this.prefixLines(code, '           ')}`;
-            }
-            this.definitions_[definitionsId] =
-                `Sprite.new(${this.quote_(name)}${code})`;
+        const attributes = {};
+        if (renderedTarget.x !== 0) {
+            attributes.x = renderedTarget.x;
         }
-        return Blockly.Ruby.definitions_[definitionsId];
+        if (renderedTarget.y !== 0) {
+            attributes.y = renderedTarget.y;
+        }
+        if (renderedTarget.direction !== 90) {
+            attributes.direction = renderedTarget.direction;
+        }
+        if (!renderedTarget.visible) {
+            attributes.visible = !!renderedTarget.visible;
+        }
+        if (renderedTarget.size !== 100) {
+            attributes.size = renderedTarget.size;
+        }
+        if (renderedTarget.currentCostume > 1) {
+            attributes.current_costume = renderedTarget.currentCostume - 1;
+        }
+        const costumes = renderedTarget.sprite.costumes;
+        if (costumes.length > 0) {
+            const s = costumes.map(i => {
+                const h = {
+                    asset_id: this.quote_(i.assetId),
+                    name: this.quote_(i.name),
+                    bitmap_resolution: i.bitmapResolution,
+                    md5: this.quote_(i.md5),
+                    data_format: this.quote_(i.dataFormat),
+                    rotation_center_x: i.rotationCenterX,
+                    rotation_center_y: i.rotationCenterY
+                };
+                return this.hashToCode(h);
+            }).join(',\n');
+            attributes.costumes = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
+        }
+        const RenderedTarget = renderedTarget.constructor;
+        switch (renderedTarget.rotationStyle) {
+        case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
+            attributes.rotation_style = ':left_right';
+            break;
+        case RenderedTarget.ROTATION_STYLE_NONE:
+            attributes.rotation_style = ':none';
+            break;
+        }
+
+        const variables = [];
+        const lists = [];
+        for (const id in renderedTarget.variables) {
+            const v = renderedTarget.variables[id];
+            switch (v.type) {
+            case SCALAR_TYPE:
+                variables.push(v);
+                break;
+            case LIST_TYPE:
+                lists.push(v);
+                break;
+            }
+        }
+        if (variables.length > 0) {
+            const s = variables.map(i => {
+                const h = {
+                    name: this.quote_(i.name)
+                };
+                if (i.value !== 0) {
+                    h.value = this.scalarToCode(i.value);
+                }
+                return this.hashToCode(h);
+            }).join(',\n');
+            attributes.variables = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
+        }
+        if (lists.length > 0) {
+            const s = lists.map(i => {
+                const h = {
+                    name: this.quote_(i.name)
+                };
+                if (i.value.length > 0) {
+                    h.value = this.listToCode(i.value);
+                }
+                return this.hashToCode(h);
+            }).join(',\n');
+            attributes.lists = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
+        }
+
+        let code = this.hashToCode(attributes, ': ', false);
+        if (code.length > 0) {
+            code = `,\n${this.prefixLines(code, '           ')}`;
+        }
+        const name = renderedTarget.sprite.name;
+        return `Sprite.new(${this.quote_(name)}${code})`;
     };
 
     Blockly.Ruby.characterStack = function () {
@@ -344,9 +337,8 @@ export default function (Blockly) {
         const requires = [];
         const prepares = [];
         const defs = [];
-        let name;
 
-        for (name in Blockly.Ruby.definitions_) {
+        for (const name in Blockly.Ruby.definitions_) {
             const def = this.definitions_[name];
             if (this.isString(def)) {
                 if (name.match(/^require__/)) {
@@ -358,7 +350,11 @@ export default function (Blockly) {
                 }
             }
         }
-        if (requires.length === 0 && prepares.length === 0 && defs.length === 0 && code.length === 0) {
+        if (!this.editingTarget &&
+            requires.length === 0 &&
+            prepares.length === 0 &&
+            defs.length === 0 &&
+            code.length === 0) {
             return '';
         }
         let allDefs = '';
@@ -371,6 +367,11 @@ export default function (Blockly) {
         if (defs.length > 0) {
             allDefs += `${defs.join('\n')}\n\n`;
         }
+
+        if (this.editingTarget) {
+            code = `${this.spriteNew(this.editingTarget)} do\n${this.prefixLines(code, this.INDENT)}end`;
+        }
+
         return allDefs + code;
     };
 

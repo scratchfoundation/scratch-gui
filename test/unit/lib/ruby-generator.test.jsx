@@ -137,7 +137,7 @@ describe('RubyGenerator', () => {
         });
     });
 
-    describe('defineSprite', () => {
+    describe('spriteNew', () => {
         const spriteName = 'Sprite1';
         let renderedTarget;
 
@@ -267,12 +267,7 @@ describe('RubyGenerator', () => {
                value: ["a", "b", "c"]
              }
            ])`;
-            expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
-        });
-
-        test('add definitions_ the Sprite.new code', () => {
-            const code = Ruby.defineSprite(renderedTarget);
-            expect(Ruby.definitions_[`sprite_${spriteName}`]).toEqual(code);
+            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
         });
 
         test('suppress default attributes', () => {
@@ -288,7 +283,7 @@ describe('RubyGenerator', () => {
             });
             renderedTarget.sprite.costumes = [];
             const expected = `Sprite.new(${Ruby.quote_(spriteName)})`;
-            expect(Ruby.defineSprite(renderedTarget)).toEqual(expected);
+            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
         });
     });
 });

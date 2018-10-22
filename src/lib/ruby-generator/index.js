@@ -126,6 +126,19 @@ export default function (Blockly) {
         return `[${values}]`;
     };
 
+    Blockly.Ruby.hashToCode = function (hash, separator = ': ', brace = true) {
+        const lines = [];
+        for (const key in hash) {
+            const value = hash[key];
+            lines.push(`${key}${separator}${value}`);
+        }
+        let code = lines.join(',\n');
+        if (brace) {
+            code = ['{', this.prefixLines(code, this.INDENT), '}'].join('\n');
+        }
+        return code;
+    };
+
     Blockly.Ruby.defineSprite = function (renderedTarget) {
         if (!renderedTarget) {
             return null;
@@ -193,32 +206,32 @@ export default function (Blockly) {
                 }
             }
             if (variables.length > 0) {
-                const variablesParams = ['variables: ['];
-                variablesParams.push(
-                    variables.map(v => {
-                        const vParams = [`               name: ${this.quote_(v.name)}`];
-                        if (v.value !== 0) {
-                            vParams.push(`               value: ${this.scalarToCode(v.value)}`);
-                        }
-                        return `             {\n${vParams.join(',\n')}\n             }`;
-                    }).join(',\n')
-                );
-                variablesParams.push('           ]');
-                attributes.push(variablesParams.join('\n'));
+                const s = variables.map(i => {
+                    const h = {
+                        name: this.quote_(i.name)
+                    };
+                    if (i.value !== 0) {
+                        h.value = this.scalarToCode(i.value);
+                    }
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.push(['variables: [',
+                                 this.prefixLines(s, '             '),
+                                 '           ]'].join('\n'));
             }
             if (lists.length > 0) {
-                const listsParams = ['lists: ['];
-                listsParams.push(
-                    lists.map(l => {
-                        const lParams = [`               name: ${this.quote_(l.name)}`];
-                        if (l.value.length !== 0) {
-                            lParams.push(`               value: ${this.listToCode(l.value)}`);
-                        }
-                        return `             {\n${lParams.join(',\n')}\n             }`;
-                    }).join(',\n')
-                );
-                listsParams.push('           ]');
-                attributes.push(listsParams.join('\n'));
+                const s = lists.map(i => {
+                    const h = {
+                        name: this.quote_(i.name)
+                    };
+                    if (i.value.length > 0) {
+                        h.value = this.listToCode(i.value);
+                    }
+                    return this.hashToCode(h);
+                }).join(',\n');
+                attributes.push(['lists: [',
+                                 this.prefixLines(s, '             '),
+                                 '           ]'].join('\n'));
             }
 
             this.definitions_[definitionsId] =

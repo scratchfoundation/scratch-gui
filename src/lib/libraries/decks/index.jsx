@@ -71,7 +71,7 @@ export default {
                 id="gui.howtos.intro-move-sayhello-hat.name"
             />
         ),
-
+        tags: ['help', 'stuck', 'how', 'can', 'say'],
         img: libraryIntro,
         steps: [{
             video: 'intro-move-sayhello'
@@ -111,6 +111,7 @@ export default {
             />
         ),
         img: libraryAnimate,
+        tags: ['animation', 'art', 'spin', 'grow'],
         steps: [{
             video: 'animate-a-name'
         }, {
@@ -185,6 +186,7 @@ export default {
             />
         ),
         img: libraryMakeMusic,
+        tags: ['music', 'sound', 'instrument', 'play', 'song', 'band'],
         steps: [{
             video: 'Make-Music'
         },
@@ -253,6 +255,7 @@ export default {
             />
         ),
         img: libraryMakeAGame,
+        tags: ['games', 'click', 'clicked', 'score'],
         steps: [{
             video: 'Make-A-Game'
         },
@@ -339,6 +342,7 @@ export default {
             />
         ),
         img: libraryChaseGame,
+        tags: ['games', 'arrow', 'keyboard', 'score'],
         steps: [{
             video: 'Chase-Game'
         },
@@ -441,6 +445,7 @@ export default {
             />
         ),
         img: libraryAddSprite,
+        tags: ['art', 'games', 'stories', 'character'],
         steps: [
             {
                 title: (
@@ -470,6 +475,7 @@ export default {
             />
         ),
         img: addBackdropThumb,
+        tags: ['art', 'games', 'stories', 'background'],
         steps: [{
             video: 'add-a-backdrop'
         }, {
@@ -489,6 +495,7 @@ export default {
             />
         ),
         img: changeSizeThumb,
+        scale: ['art', 'animation', 'scale'],
         steps: [{
             video: 'change-size'
         }, {
@@ -508,6 +515,7 @@ export default {
             />
         ),
         img: glideAroundThumb,
+        tags: ['animation', 'stories', 'music', 'instrument', 'play', 'song', 'band'],
         steps: [{
             video: 'glide-around'
         }, {
@@ -527,6 +535,7 @@ export default {
                 id="gui.howtos.record-a-sound.name"
             />
         ),
+        tags: ['music', 'games', 'stories'],
         img: recordASound,
         steps: [{
             video: 'record-a-sound'
@@ -547,6 +556,7 @@ export default {
             />
         ),
         img: spinThumb,
+        tags: ['animation', 'rotate', 'rotation'],
         steps: [{
             video: 'spin-video'
         }, {
@@ -566,6 +576,7 @@ export default {
             />
         ),
         img: hideAndShowThumb,
+        tags: ['stories', 'appear', 'disappear'],
         steps: [{
             video: 'hide-and-show'
         }, {
@@ -586,6 +597,7 @@ export default {
             />
         ),
         img: switchCostumeThumb,
+        tags: ['animation', 'art', 'games', 'stories', 'paint', 'edit', 'change', 'character', 'sprite'],
         steps: [{
             video: 'switch-costume'
         }, {
@@ -606,6 +618,7 @@ export default {
             />
         ),
         img: moveArrowKeysThumb,
+        tags: ['games', 'keyboard'],
         steps: [{
             video: 'move-around-with-arrow-keys'
         }, {
@@ -624,6 +637,8 @@ export default {
                 id="gui.howtos.add-effects.name"
             />
         ),
+        tags: ['animation', 'art', 'games', 'stories', '8-bit', 'brightness', 'ghost', 'transparency', 'opacity',
+            'fx', 'color', 'fisheye', 'whirl', 'twist', 'pixelate', 'mosaic', '8bit'],
         img: addEffectsThumb,
         steps: [{
             video: 'add-effects'

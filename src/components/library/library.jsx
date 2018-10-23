@@ -98,7 +98,10 @@ class LibraryComponent extends React.Component {
                 (dataItem.tags || [])
                     // Second argument to map sets `this`
                     .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                    .concat(dataItem.name.toLowerCase())
+                    .concat((typeof dataItem.name === 'string' ?
+                        // Use the name if it is a string, else use formatMessage to get the translated name
+                        dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
+                    ).toLowerCase())
                     .join('\n') // unlikely to partially match newlines
                     .indexOf(this.state.filterQuery.toLowerCase()) !== -1
             ));

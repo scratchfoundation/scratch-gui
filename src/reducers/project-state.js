@@ -70,7 +70,7 @@ const getIsError = loadingState => (
 );
 
 const initialState = {
-    errorMessage: null,
+    error: null,
     projectData: null,
     projectId: null,
     loadingState: LoadingState.NOT_LOADED
@@ -224,7 +224,7 @@ const reducer = function (state, action) {
         ].includes(state.loadingState)) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.ERROR,
-                errorMessage: action.errorMessage
+                error: action.error
             });
         }
         return state;
@@ -298,9 +298,9 @@ const onUpdated = loadingState => {
     }
 };
 
-const onError = errorMessage => ({
+const onError = error => ({
     type: GO_TO_ERROR_STATE,
-    errorMessage: errorMessage
+    error: error
 });
 
 const setProjectId = id => ({

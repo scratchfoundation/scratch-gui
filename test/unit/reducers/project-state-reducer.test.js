@@ -17,7 +17,7 @@ test('initialState', () => {
     let defaultState;
     /* projectStateReducer(state, action) */
     expect(projectStateReducer(defaultState, {type: 'anything'})).toBeDefined();
-    expect(projectStateReducer(defaultState, {type: 'anything'}).errorMessage).toBe(null);
+    expect(projectStateReducer(defaultState, {type: 'anything'}).error).toBe(null);
     expect(projectStateReducer(defaultState, {type: 'anything'}).projectData).toBe(null);
     expect(projectStateReducer(defaultState, {type: 'anything'}).projectId).toBe(null);
     expect(projectStateReducer(defaultState, {type: 'anything'}).loadingState).toBe(LoadingState.NOT_LOADED);
@@ -229,23 +229,23 @@ test('onError from various states should show error', () => {
     ];
     for (const startState of startStates) {
         const initialState = {
-            errorMessage: null,
+            error: null,
             loadingState: startState
         };
-        const action = onError('Error string');
+        const action = onError({message: 'Error string'});
         const resultState = projectStateReducer(initialState, action);
         expect(resultState.loadingState).toBe(LoadingState.ERROR);
-        expect(resultState.errorMessage).toBe('Error string');
+        expect(resultState.error).toEqual({message: 'Error string'});
     }
 });
 
 test('onError from showing project should show error', () => {
     const initialState = {
-        errorMessage: null,
+        error: null,
         loadingState: LoadingState.FETCHING_WITH_ID
     };
-    const action = onError('Error string');
+    const action = onError({message: 'Error string'});
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.ERROR);
-    expect(resultState.errorMessage).toBe('Error string');
+    expect(resultState.error).toEqual({message: 'Error string'});
 });

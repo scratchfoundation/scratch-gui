@@ -48,7 +48,7 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                 })
                 .catch(e => {
-                    this.props.onError(`vm-manager-hoc error: ${e}`);
+                    this.props.onError(e);
                 });
         }
         render () {
@@ -98,7 +98,7 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onError: errorMessage => dispatch(onError(errorMessage)),
+        onError: error => dispatch(onError(error)),
         onLoadedProject: (loadingState, canSave) =>
             dispatch(onLoadedProject(loadingState, canSave))
     });

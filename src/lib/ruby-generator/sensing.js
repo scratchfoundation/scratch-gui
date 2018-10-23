@@ -51,7 +51,7 @@ export default function (Blockly) {
     Blockly.Ruby.sensing_keypressed = function (block) {
         const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
         const key = Blockly.Ruby.valueToCode(block, 'KEY_OPTION', order) || null;
-        return [`Key.pressed?(${key})`, order];
+        return [`Keyboard.pressed?(${key})`, order];
     };
 
     Blockly.Ruby.sensing_keyoptions = function (block) {

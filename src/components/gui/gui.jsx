@@ -92,9 +92,10 @@ const GUIComponent = props => {
         onSeeCommunity,
         onShare,
         previewInfoVisible,
-        targetIsStage,
+        showComingSoon,
         soundsTabVisible,
         stageSizeMode,
+        targetIsStage,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -178,6 +179,7 @@ const GUIComponent = props => {
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -351,6 +353,7 @@ GUIComponent.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
+    showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -369,6 +372,7 @@ GUIComponent.defaultProps = {
     canSaveAsCopy: false,
     canShare: false,
     onUpdateProjectTitle: () => {},
+    showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

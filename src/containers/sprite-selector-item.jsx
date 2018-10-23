@@ -71,7 +71,7 @@ class SpriteSelectorItem extends React.Component {
         const dy = currentOffset.y - this.initialOffset.y;
         if (Math.sqrt((dx * dx) + (dy * dy)) > dragThreshold) {
             this.props.onDrag({
-                img: this.getCostumeUrl(),
+                img: this.getCostumeData(),
                 currentOffset: currentOffset,
                 dragging: true,
                 dragType: this.props.dragType,

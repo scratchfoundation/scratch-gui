@@ -6,7 +6,6 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import analytics from '../lib/analytics';
 import log from '../lib/log';
-import {setProjectTitle} from '../reducers/project-title';
 import {LoadingStates, onLoadedProject, onProjectUploadStarted} from '../reducers/project-state';
 
 import {
@@ -42,11 +41,19 @@ class SBFileUploader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'getProjectTitleFromFilename',
             'renderFileInput',
             'setFileInput',
             'handleChange',
             'handleClick'
         ]);
+    }
+    getProjectTitleFromFilename (fileInputFilename) {
+        if (!fileInputFilename) return '';
+        // only parse title from files like "filename.sb2" or "filename.sb3"
+        const matches = fileInputFilename.match(/^(.*)\.sb[23]$/);
+        if (!matches) return '';
+        return matches[1].substring(0, 100); // truncate project title to max 100 chars
     }
     // called when user has finished selecting a file to upload
     handleChange (e) {
@@ -77,14 +84,8 @@ class SBFileUploader extends React.Component {
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.props.onLoadingStarted();
             reader.readAsArrayBuffer(thisFileInput.files[0]);
-            // extract the title from the file and set it as current project title
-            if (thisFileInput.files[0].name) {
-                const matches = thisFileInput.files[0].name.match(/^(.*)\.sb3$/);
-                if (matches) {
-                    const truncatedProjectTitle = matches[1].substring(0, 100);
-                    this.props.onSetProjectTitle(truncatedProjectTitle);
-                }
-            }
+            const uploadedProjectTitle = this.getProjectTitleFromFilename(thisFileInput.files[0].name);
+            this.props.onUpdateProjectTitle(uploadedProjectTitle);
         }
     }
     handleClick () {
@@ -111,12 +112,13 @@ class SBFileUploader extends React.Component {
 }
 
 SBFileUploader.propTypes = {
+    canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
     intl: intlShape.isRequired,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    onSetProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
@@ -126,19 +128,24 @@ const mapStateToProps = state => ({
     vm: state.scratchGui.vm
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     onLoadingFinished: loadingState => {
-        dispatch(onLoadedProject(loadingState));
+        dispatch(onLoadedProject(loadingState, ownProps.canSave));
         dispatch(closeLoadingProject());
     },
-    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
     onLoadingStarted: () => {
         dispatch(openLoadingProject());
         dispatch(onProjectUploadStarted());
     }
 });
 
+// Allow incoming props to override redux-provided props. Used to mock in tests.
+const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+    {}, stateProps, dispatchProps, ownProps
+);
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
 )(injectIntl(SBFileUploader));

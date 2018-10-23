@@ -43,7 +43,7 @@ describe('HashParserHOC', () => {
                 store={store}
             />
         );
-        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe(0);
+        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('0');
     });
 
     test('when the hash is not a number, it passes 0 as projectId', () => {
@@ -57,7 +57,7 @@ describe('HashParserHOC', () => {
                 store={store}
             />
         );
-        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe(0);
+        expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('0');
     });
 
     test('when hash change happens, the projectId state is changed', () => {

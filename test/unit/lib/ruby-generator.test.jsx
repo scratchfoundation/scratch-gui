@@ -69,7 +69,16 @@ describe('RubyGenerator', () => {
                     id4: {
                         name: 'List2',
                         type: LIST_TYPE
-                    }
+                    },
+                    id2_1: {
+                        name: 'Avg(Total / Count)',
+                        type: SCALAR_TYPE
+                    },
+                    id2_2: {
+                        name: 'List of Symbols.',
+                        type: LIST_TYPE
+                    },
+
                 },
                 runtime: {
                     getTargetForStage: function () {
@@ -125,6 +134,14 @@ describe('RubyGenerator', () => {
             renderedTarget.isStage = true;
             expect(Ruby.variableName('id5')).toEqual(null);
             expect(Ruby.listName('id6')).toEqual(null);
+        });
+
+        test('escape except alphabet, number and _ to _', () => {
+            expect(Ruby.variableName('id2_1')).toEqual('@Avg_Total___Count_');
+            expect(Ruby.listName('id2_2')).toEqual('@List_of_Symbols_');
+            renderedTarget.isStage = true;
+            expect(Ruby.variableName('id2_1')).toEqual('$Avg_Total___Count_');
+            expect(Ruby.listName('id2_2')).toEqual('$List_of_Symbols_');
         });
     });
 

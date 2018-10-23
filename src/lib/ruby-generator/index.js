@@ -470,7 +470,7 @@ export default function (Blockly) {
             }
         }
         if (currVar && currVar.type === type) {
-            return `${prefix}${currVar.name}`;
+            return `${prefix}${currVar.name.replace(/[^a-zA-Z0-9_]/g, '_')}`;
         }
         return null;
     };

@@ -25,7 +25,7 @@ export default function (Blockly) {
         const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
         const color = Blockly.Ruby.valueToCode(block, 'COLOR', order) || null;
         const color2 = Blockly.Ruby.valueToCode(block, 'COLOR2', order) || null;
-        return [`color_is_touching_color(${color}, ${color2})`, order];
+        return [`color_is_touching_color?(${color}, ${color2})`, order];
     };
 
     Blockly.Ruby.sensing_distanceto = function (block) {
@@ -51,7 +51,7 @@ export default function (Blockly) {
     Blockly.Ruby.sensing_keypressed = function (block) {
         const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
         const key = Blockly.Ruby.valueToCode(block, 'KEY_OPTION', order) || null;
-        return [`Input.key_push?(${key})`, order];
+        return [`Key.pressed?(${key})`, order];
     };
 
     Blockly.Ruby.sensing_keyoptions = function (block) {
@@ -60,15 +60,15 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.sensing_mousedown = function () {
-        return ['mouse_down', Blockly.Ruby.ORDER_ATOMIC];
+        return ['Mouse.down?', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_mousex = function () {
-        return ['mouse_x', Blockly.Ruby.ORDER_ATOMIC];
+        return ['Mouse.x', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_mousey = function () {
-        return ['mouse_y', Blockly.Ruby.ORDER_ATOMIC];
+        return ['Mouse.y', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_setdragmode = function (block) {
@@ -77,35 +77,34 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.sensing_loudness = function () {
-        return ['Sound.volume', Blockly.Ruby.ORDER_ATOMIC];
-    };
-
-    Blockly.Ruby.sensing_loud = function () {
-        return ['"wip: sensing_loud"', Blockly.Ruby.ORDER_ATOMIC];
+        return ['loudness', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_timer = function () {
-        return ['timer', Blockly.Ruby.ORDER_ATOMIC];
+        return ['Timer.value', Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_resettimer = function () {
-        return 'reset_timer\n';
+        return 'Timer.reset\n';
     };
 
     Blockly.Ruby.sensing_of_object_menu = function (block) {
         const object = Blockly.Ruby.quote_(block.getFieldValue('OBJECT') || null);
-        return [object, Blockly.Ruby.ORDER_ATOMIC];
+        if (object === Blockly.Ruby.quote_('_stage_')) {
+            return ['stage', Blockly.Ruby.ORDER_ATOMIC];
+        }
+        return [`sprite(${object})`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_of = function (block) {
         const property = Blockly.Ruby.quote_(block.getFieldValue('PROPERTY') || null);
         const object = Blockly.Ruby.valueToCode(block, 'OBJECT', Blockly.Ruby.ORDER_NONE) || null;
-        return [`sensing(property: ${property}, object: ${object})`, Blockly.Ruby.ORDER_ATOMIC];
+        return [`${object}.${property}`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_current = function (block) {
         const menu = Blockly.Ruby.quote_(block.getFieldValue('CURRENTMENU') || null);
-        return [`current(${menu})`, Blockly.Ruby.ORDER_ATOMIC];
+        return [`Time.now(${menu})`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_dayssince2000 = function () {

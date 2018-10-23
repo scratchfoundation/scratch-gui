@@ -139,7 +139,7 @@ export default {
         ),
         img: libraryTXTSpeech,
         steps: [{
-            video: 'k54n8uwcty'
+            video: 'uz5oz5h9yg'
         }, {
             title: (
                 <FormattedMessage
@@ -250,7 +250,7 @@ export default {
         ),
         img: libraryCartoonNetwork,
         steps: [{
-            video: 'uz5oz5h9yg'
+            video: 'k54n8uwcty'
         }, {
             title: (
                 <FormattedMessage

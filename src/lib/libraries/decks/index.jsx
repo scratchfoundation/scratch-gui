@@ -6,6 +6,32 @@ import libraryIntro from './intro/lib-getting-started.jpg';
 import stepMove from './intro/intro1.gif';
 import stepMoveSayHello from './intro/intro2.gif';
 
+// Text to Speech
+import libraryTXTSpeech from './txt/lib_txt-to-speech.jpg';
+import stepAddTXTextension from './txt/01_hoc-add-extensions.gif';
+import stepTXTSpeech from './txt/02_hoc-say-something.gif';
+import stepTXTSetVoice from './txt/03_hoc-set-voice.gif';
+import stepTXTMove from './txt/04_hoc-move-around.gif';
+import stepTXTBackdrop from './txt/05_hoc-add-backdrop.gif';
+import stepTXTAddSprite from './txt/06_hoc-add-character.gif';
+import stepTXTSong from './txt/07_hoc-perform-song.gif';
+import stepTXTColor from './txt/08_hoc-color-click.gif';
+import stepTXTSpin from './txt/09_hoc-spin.gif';
+import stepTXTGrow from './txt/10_hoc-grow-shrink.gif';
+
+// Cartoon Network
+import libraryCartoonNetwork from './cartoonnetwork/lib_CartoonNetwork.jpg';
+import stepCNcharacter from './cartoonnetwork/01_cn-pick-character.gif';
+import stepCNsay from './cartoonnetwork/02_cn-say-something.gif';
+import stepCNglide from './cartoonnetwork/03_cn-glide-around.gif';
+import stepCNcollect from './cartoonnetwork/04_cn-collect.gif';
+import stepCNanimate from './cartoonnetwork/05_cn-add-score.gif';
+import stepCNscore from './cartoonnetwork/06_cn-keep-score.gif';
+import stepCNkeepscore from './cartoonnetwork/07_cn-level-up.gif';
+import stepCNlevel from './cartoonnetwork/08_cn-pick-another-character.gif';
+import stepCNcharacter2 from './cartoonnetwork/09_cn-level-up-say-something.gif';
+import stepCNlevelup from './cartoonnetwork/10_cn-animate-run.gif';
+
 // Add sprite
 import libraryAddSprite from './sprite/cover-add-sprite.jpg';
 import stepAddSprite from './sprite/intro-choose-sprite.gif';
@@ -101,6 +127,228 @@ export default {
         }
         ],
         urlId: 1
+    },
+
+    'say-it-out-loud': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Create Animations That Talk"
+                description="Name for the 'Create Animations That Talk' how-to"
+                id="gui.howtos.say-it-out-loud"
+            />
+        ),
+        img: libraryTXTSpeech,
+        steps: [{
+            video: 'k54n8uwcty'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add the Text to Speech blocks"
+                    description="Step name for 'Add the Text to Speech blocks' step"
+                    id="gui.howtos.say-it-out-loud.step_AddTXTextension"
+                />
+            ),
+            image: stepAddTXTextension
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos. say-it-out-loud.step_TXTSpeech"
+                />
+            ),
+            image: stepTXTSpeech
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Set a Voice"
+                    description="Step name for 'Set a Voice"
+                    id="gui.howtos.say-it-out-loud_TXTSetVoice"
+                />
+            ),
+            image: stepTXTSetVoice
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Around"
+                    description="Step name for 'Move Around' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTMove"
+                />
+            ),
+            image: stepTXTMove
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Backdrop "
+                    description="Step name for 'Add a Backdrop' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTBackdrop"
+                />
+            ),
+            image: stepTXTBackdrop
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Another Character"
+                    description="Step name for 'Add Another Character' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTAddSprite"
+                />
+            ),
+            image: stepTXTAddSprite
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Perform a Song"
+                    description="Step name for 'Perform a Song' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTSong"
+                />
+            ),
+            image: stepTXTSong
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Color"
+                    description="Step name for 'Change Color' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTColor"
+                />
+            ),
+            image: stepTXTColor
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Spin Around"
+                    description="Step name for 'Spin Around"
+                    id="gui.howtos.say-it-out-loud.step_TXTSpin"
+                />
+            ),
+            image: stepTXTSpin
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Grow and Shrink"
+                    description="Step name for 'Grow and Shrink' step"
+                    id="gui.howtos.say-it-out-loud.step_TXTGrow"
+                />
+            ),
+            image: stepTXTGrow
+        }, {
+            deckIds: [
+                'animate-a-name',
+                'Make-Music'
+            ]
+        }
+        ],
+        urlId: 2
+    },
+
+    'cartoon-network': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Animate an Adventure Game"
+                description="Animate an Adventure Game' how-to"
+                id="gui.howtos.cartoon-network"
+            />
+        ),
+        img: libraryCartoonNetwork,
+        steps: [{
+            video: 'uz5oz5h9yg'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Which Character to Show"
+                    description="Step name for 'Choose Which Character to Show' step"
+                    id="gui.howtos.cartoon-network.step_CNcharacter"
+                />
+            ),
+            image: stepCNcharacter
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.cartoon-network.step_CNsay"
+                />
+            ),
+            image: stepCNsay
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for ' Glide Around' step"
+                    id="gui.howtos.cartoon-network.step_CNglide"
+                />
+            ),
+            image: stepCNglide
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage=" Collect Objects (In Gem Sprite) "
+                    description="Step name for ' Collect Objects (In Gem Sprite)' step"
+                    id="gui.howtos.cartoon-network.step_CNcollect"
+                />
+            ),
+            image: stepCNcollect
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Score"
+                    description="Step name for 'Add Score' step"
+                    id="gui.howtos.cartoon-network.step_CNanimate"
+                />
+            ),
+            image: stepCNanimate
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Keep Score"
+                    description="Step name for 'Keep Score' step"
+                    id="gui.howtos.cartoon-network.step_CNscore"
+                />
+            ),
+            image: stepCNscore
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Level Up: Change Background"
+                    description="Step name for 'Level Up: Change Background' step"
+                    id="gui.howtos.cartoon-network.step_CNkeepscore"
+                />
+            ),
+            image: stepCNkeepscore
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Show A New Character"
+                    description="Step name for 'Show A New Character' step"
+                    id="gui.howtos.cartoon-network.step_CNlevel"
+                />
+            ),
+            image: stepCNlevel
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Level Up: Say Something"
+                    description="Step name for 'Level Up: Say Something' step"
+                    id="gui.howtos.cartoon-network.step_CNcharacter2"
+                />
+            ),
+            image: stepCNcharacter2
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate A Run"
+                    description="Step name for 'Animate A Run' step"
+                    id="gui.howtos.cartoon-network.step_CNlevelup"
+                />
+            ),
+            image: stepCNlevelup
+        }, {
+            deckIds: [
+                'Chase-Game',
+                'record-a-sound'
+            ]
+        }
+        ],
+        urlId: 3
     },
     'animate-a-name': {
         name: (

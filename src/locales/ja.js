@@ -6,6 +6,7 @@ export default {
     'gui.smalruby3.previewInfo.label': 'スモウルビー3.0を試してみる',
     'gui.smalruby3.previewInfo.invitation': '私たちは次世代のスモウルビーを開発中です。お試しください!',
     'gui.smalruby3.previewInfo.welcome': 'スモウルビー3.0 プレビュー版にようこそ!',
+    'gui.smalruby3.menuBar.downloadRubyCodeToComputer': 'コンピュータにルビーのコードを保存する',
     'gui.smalruby3.unsupportedBrowser.description': '申し訳ありません。スモウルビー3.0はInternet Explorer、Vivaldi、Opera、Silkをサポートしていません。Google Chrome、Mozilla Firefox、Microsoft Edgeのような新しいブラウザの利用をお勧めします。',
     'gui.smalruby3.webglModal.description': '残念ながら、ブラウザーやコンピューターが{webGlLink}ようです。この技術はスモウルビー3.0の実行に必須です。'
 };

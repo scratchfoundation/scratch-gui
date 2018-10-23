@@ -66,7 +66,7 @@ class GUI extends React.Component {
     render () {
         if (this.props.isError) {
             throw new Error(
-                `Failed to load project from server [id=${window.location.hash}]: ${this.props.error}`);
+                `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
         }
         const {
             /* eslint-disable no-unused-vars */
@@ -101,7 +101,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
-    error: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,

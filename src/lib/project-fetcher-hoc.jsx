@@ -75,7 +75,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     }
                 })
                 .catch(err => {
-                    this.props.onError(`Saving the project failed with error: ${err}`);
+                    this.props.onError(err);
                     log.error(err);
                 });
         }

@@ -234,10 +234,12 @@ export default function (Blockly) {
 
         let code = this.hashToCode(attributes, ': ', false);
         if (code.length > 0) {
-            code = `,\n${this.prefixLines(code, '           ')}`;
+            const indent = renderedTarget.isStage ? '          ' : '           ';
+            code = `,\n${this.prefixLines(code, indent)}`;
         }
+        const klass = renderedTarget.isStage ? 'Stage' : 'Sprite';
         const name = renderedTarget.sprite.name;
-        return `Sprite.new(${this.quote_(name)}${code})`;
+        return `${klass}.new(${this.quote_(name)}${code})`;
     };
 
     Blockly.Ruby.characterStack = function () {

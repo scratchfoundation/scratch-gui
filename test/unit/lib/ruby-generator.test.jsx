@@ -276,5 +276,66 @@ describe('RubyGenerator', () => {
             const expected = `Sprite.new(${Ruby.quote_(spriteName)})`;
             expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
         });
+
+        test('the Stage.new instead of the Sprite.new if stage', () => {
+            Object.assign(renderedTarget, {
+                isStage: true
+            });
+            const expected = `Stage.new(${Ruby.quote_(spriteName)},
+          x: ${renderedTarget.x},
+          y: ${renderedTarget.y},
+          direction: ${renderedTarget.direction},
+          visible: ${!!renderedTarget.visible},
+          size: ${renderedTarget.size},
+          current_costume: ${renderedTarget.currentCostume - 1},
+          costumes: [
+            {
+              asset_id: "01ae57fd339529445cb890978ef8a054",
+              name: "Costume1",
+              bitmap_resolution: 1,
+              md5: "01ae57fd339529445cb890978ef8a054.svg",
+              data_format: "svg",
+              rotation_center_x: 47,
+              rotation_center_y: 55
+            },
+            {
+              asset_id: "3b6274510488d5b26447c1c266475801",
+              name: "Costume2",
+              bitmap_resolution: 1,
+              md5: "3b6274510488d5b26447c1c266475801.svg",
+              data_format: "svg",
+              rotation_center_x: 65,
+              rotation_center_y: 61
+            }
+          ],
+          rotation_style: :left_right,
+          variables: [
+            {
+              name: "Variable1",
+              value: 10
+            },
+            {
+              name: "Variable2"
+            },
+            {
+              name: "Variable3",
+              value: "abc"
+            }
+          ],
+          lists: [
+            {
+              name: "List1",
+              value: [1, 2, 3]
+            },
+            {
+              name: "List2"
+            },
+            {
+              name: "List3",
+              value: ["a", "b", "c"]
+            }
+          ])`;
+            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
+        });
     });
 });

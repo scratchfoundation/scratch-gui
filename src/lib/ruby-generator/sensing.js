@@ -89,17 +89,28 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.sensing_of_object_menu = function (block) {
-        const object = Blockly.Ruby.quote_(block.getFieldValue('OBJECT') || null);
-        if (object === Blockly.Ruby.quote_('_stage_')) {
-            return ['stage', Blockly.Ruby.ORDER_ATOMIC];
+        const object = block.getFieldValue('OBJECT') || null;
+        if (object === '_stage_') {
+            return [Blockly.Ruby.quote_(object), Blockly.Ruby.ORDER_ATOMIC];
         }
-        return [`sprite(${object})`, Blockly.Ruby.ORDER_ATOMIC];
+        return [`sprite(${Blockly.Ruby.quote_(object)})`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_of = function (block) {
-        const property = Blockly.Ruby.quote_(block.getFieldValue('PROPERTY') || null);
+        const property = block.getFieldValue('PROPERTY') || null;
         const object = Blockly.Ruby.valueToCode(block, 'OBJECT', Blockly.Ruby.ORDER_NONE) || null;
-        return [`${object}.${property}`, Blockly.Ruby.ORDER_ATOMIC];
+        const propertyToMethod = {
+            'x position': 'x',
+            'y position': 'y',
+            'direction': 'direction',
+            'costume #': 'costume_number',
+            'costume name': 'costume_name',
+            'size': 'size',
+            'volume': 'volume',
+            'backdrop #': 'backdrop_number',
+            'backdrop name': 'backdrop_name'
+        };
+        return [`${object}.${propertyToMethod[property]}`, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_current = function (block) {

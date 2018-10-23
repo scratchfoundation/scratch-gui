@@ -51,16 +51,22 @@ class ConnectionModal extends React.Component {
         });
     }
     handleDisconnect () {
-        this.props.vm.disconnectPeripheral(this.props.extensionId);
-        this.props.onCancel();
+        try {
+            this.props.vm.disconnectPeripheral(this.props.extensionId);
+        } finally {
+            this.props.onCancel();
+        }
     }
     handleCancel () {
-        // If we're not connected to a peripheral, close the websocket so we stop scanning.
-        if (!this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
-            this.props.vm.disconnectPeripheral(this.props.extensionId);
+        try {
+            // If we're not connected to a peripheral, close the websocket so we stop scanning.
+            if (!this.props.vm.getPeripheralIsConnected(this.props.extensionId)) {
+                this.props.vm.disconnectPeripheral(this.props.extensionId);
+            }
+        } finally {
+            // Close the modal.
+            this.props.onCancel();
         }
-        // Close the modal.
-        this.props.onCancel();
     }
     handleError () {
         // Assume errors that come in during scanning phase are the result of not

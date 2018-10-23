@@ -144,12 +144,11 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        const canSave = this.props.canUpdateProject; // logged in
         // if canSave===true, it's safe to replace current project, since we will auto-save first
         const readyToReplaceProject =
-            canSave || confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+            this.props.canSave || confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
         if (readyToReplaceProject) {
-            this.props.onClickNew(canSave);
+            this.props.onClickNew(this.props.canSave);
         }
     }
     handleClickSave () {
@@ -207,6 +206,13 @@ class MenuBar extends React.Component {
                 defaultMessage="Save now"
                 description="Menu bar item for saving now"
                 id="gui.menuBar.saveNow"
+            />
+        );
+        const saveAsCopyMessage = (
+            <FormattedMessage
+                defaultMessage="Save as a copy"
+                description="Menu bar item for saving as a copy"
+                id="gui.menuBar.saveAsCopy"
             />
         );
         const newProjectMessage = (
@@ -284,24 +290,23 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                {/* for now, only enable New when there is no session */}
-                                {this.props.sessionExists ? (
-                                    <MenuItemTooltip
-                                        id="new"
-                                        isRtl={this.props.isRtl}
-                                    >
-                                        <MenuItem>{newProjectMessage}</MenuItem>
-                                    </MenuItemTooltip>
-                                ) : (
+                                {this.props.canCreateNew ? (
                                     <MenuItem
                                         isRtl={this.props.isRtl}
                                         onClick={this.handleClickNew}
                                     >
                                         {newProjectMessage}
                                     </MenuItem>
+                                ) : (
+                                    <MenuItemTooltip
+                                        id="new"
+                                        isRtl={this.props.isRtl}
+                                    >
+                                        <MenuItem>{newProjectMessage}</MenuItem>
+                                    </MenuItemTooltip>
                                 )}
                                 <MenuSection>
-                                    {this.props.canUpdateProject ? (
+                                    {this.props.canSave ? (
                                         <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
@@ -313,21 +318,21 @@ class MenuBar extends React.Component {
                                             <MenuItem>{saveNowMessage}</MenuItem>
                                         </MenuItemTooltip>
                                     )}
-                                    <MenuItemTooltip
-                                        id="copy"
-                                        isRtl={this.props.isRtl}
-                                    >
-                                        <MenuItem>
-                                            <FormattedMessage
-                                                defaultMessage="Save as a copy"
-                                                description="Menu bar item for saving as a copy"
-                                                id="gui.menuBar.saveAsCopy"
-                                            />
+                                    {this.props.canSaveAsCopy ? (
+                                        <MenuItem onClick={this.handleClickSaveAsCopy}>
+                                            {saveAsCopyMessage}
                                         </MenuItem>
-                                    </MenuItemTooltip>
+                                    ) : (
+                                        <MenuItemTooltip
+                                            id="copy"
+                                            isRtl={this.props.isRtl}
+                                        >
+                                            <MenuItem>{saveAsCopyMessage}</MenuItem>
+                                        </MenuItemTooltip>
+                                    )}
                                 </MenuSection>
                                 <MenuSection>
-                                    <SBFileUploader>
+                                    <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
                                         {(renderFileInput, loadProject) => (
                                             <MenuItem
                                                 onClick={loadProject}
@@ -431,7 +436,7 @@ class MenuBar extends React.Component {
                         </MenuBarItemTooltip>
                     </div>
                     <div className={classNames(styles.menuBarItem)}>
-                        {this.props.onShare ? shareButton : (
+                        {this.props.canShare ? shareButton : (
                             <MenuBarItemTooltip id="share-button">
                                 {shareButton}
                             </MenuBarItemTooltip>
@@ -595,7 +600,11 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
-    canUpdateProject: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canSaveAsCopy: PropTypes.bool,
+    canShare: PropTypes.bool,
     className: PropTypes.string,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
@@ -627,8 +636,11 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
-    startSaving: PropTypes.func,
     username: PropTypes.string
+};
+
+MenuBar.defaultProps = {
+    onShare: () => {}
 };
 
 const mapStateToProps = state => {
@@ -636,7 +648,6 @@ const mapStateToProps = state => {
     const user = state.session && state.session.session && state.session.session.user;
     return {
         accountMenuOpen: accountMenuOpen(state),
-        canUpdateProject: typeof user !== 'undefined',
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,

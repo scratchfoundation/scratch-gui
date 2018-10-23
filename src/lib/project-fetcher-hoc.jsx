@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import {
     LoadingStates,
     defaultProjectId,
-    onFetchedProjectData,
     getIsFetchingWithId,
+    onFetchedProjectData,
     setProjectId
 } from '../reducers/project-state';
 
@@ -40,7 +40,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 props.projectId !== null &&
                 typeof props.projectId !== 'undefined'
             ) {
-                this.props.setProjectId(props.projectId);
+                this.props.setProjectId(props.projectId.toString());
             }
         }
         componentDidUpdate (prevProps) {
@@ -102,6 +102,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     }
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
+        canSave: PropTypes.bool,
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
@@ -126,6 +127,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
         {}, stateProps, dispatchProps, ownProps
     );

@@ -38,14 +38,17 @@ const vmManagerHOC = function (WrappedComponent) {
             this.props.vm.initialized = true;
         }
         componentDidUpdate (prevProps) {
-            if (this.props.isLoadingWithId && !prevProps.isLoadingWithId) {
-                this.loadProject(this.props.projectData, this.props.loadingState);
+            // if project is in loading state, AND fonts are loaded,
+            // and they weren't both that way until now... load project!
+            if (this.props.isLoadingWithId && this.props.fontsLoaded &&
+                (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
+                this.loadProject();
             }
         }
-        loadProject (projectData, loadingState) {
-            return this.props.vm.loadProject(projectData)
+        loadProject () {
+            return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
-                    this.props.onLoadedProject(loadingState);
+                    this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                 })
                 .catch(e => {
                     // Need to catch this error and update component state so that
@@ -56,6 +59,7 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                fontsLoaded,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
@@ -65,10 +69,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 vm,
                 ...componentProps
             } = this.props;
-            // don't display anything until we have data loaded
-            if (!this.props.projectData) {
-                return null;
-            }
             return (
                 <WrappedComponent
                     errorMessage={this.state.errorMessage}
@@ -82,6 +82,8 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        canSave: PropTypes.bool,
+        fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onLoadedProject: PropTypes.func,
@@ -101,12 +103,19 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onLoadedProject: loadingState => dispatch(onLoadedProject(loadingState))
+        onLoadedProject: (loadingState, canSave) =>
+            dispatch(onLoadedProject(loadingState, canSave))
     });
+
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
 
     return connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
+        mergeProps
     )(VMManager);
 };
 

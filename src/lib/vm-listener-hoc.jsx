@@ -38,7 +38,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
-            this.props.vm.on('PERIPHERAL_ERROR', this.props.onShowAlert);
+            this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
         }
@@ -55,6 +55,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
+            this.props.vm.removeListener('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowAlert);
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);

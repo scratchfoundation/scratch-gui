@@ -21,6 +21,7 @@ import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
@@ -62,6 +63,11 @@ const GUIComponent = props => {
         backpackOptions,
         blocksTabVisible,
         cardsVisible,
+        canCreateNew,
+        canRemix,
+        canSave,
+        canSaveAsCopy,
+        canShare,
         children,
         costumeLibraryVisible,
         costumesTabVisible,
@@ -164,6 +170,11 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    canCreateNew={canCreateNew}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canSaveAsCopy={canSaveAsCopy}
+                    canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
@@ -275,6 +286,9 @@ const GUIComponent = props => {
                                             />
                                         </button>
                                     </Box>
+                                    <Box className={styles.watermark}>
+                                        <Watermark />
+                                    </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
@@ -322,6 +336,11 @@ GUIComponent.propTypes = {
     }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canSaveAsCopy: PropTypes.bool,
+    canShare: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -363,6 +382,12 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
+    canCreateNew: true,
+    canRemix: false,
+    canSave: false,
+    canSaveAsCopy: false,
+    canShare: false,
+    onUpdateProjectTitle: () => {},
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

@@ -36,6 +36,7 @@ class Stage extends React.Component {
             'onStartDrag',
             'onStopDrag',
             'onWheel',
+            'step',
             'updateRect',
             'questionListener',
             'setDragCanvas',
@@ -72,46 +73,11 @@ class Stage extends React.Component {
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
         // ******************** AR *************************
-        // Hack to load targets into A-FRAME after some time
+        // Hack to render targets into A-FRAME after some time
         // PROJECT TO TEST: #239076044
         setTimeout(() => {
-            // console.log(this.state.costume1URL);
-            // console.log('all targets:');
-            // console.log(this.props.vm.runtime.targets);
-            // Get stage asset id
-            const id = this.props.vm.runtime.targets[0].getCostumes()[0].assetId;
-            // Get stage URL from asset id
-            this.setState({stageURL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
-
-            // Get sprite 1 asset id
-            // id = this.props.vm.runtime.targets[1].getCostumes()[0].assetId;
-            // Get sprite 1 costume 1 URL from asset id
-            // this.setState({costume1URL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
-            // console.log(this.props.vm.runtime.targets[1]);
-            const spritesList = [];
-            for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
-                const target = this.props.vm.runtime.targets[i];
-                const costumeID = target.getCostumes()[0].assetId;
-                const url = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
-                const width = target.getCostumes()[0].size[0];
-                const height = target.getCostumes()[0].size[1];
-                const visible = target.visible;
-                const x = target.x;
-                const y = target.y;
-                // console.log(target);
-                spritesList.push({
-                    url: url,
-                    width: width,
-                    height: height,
-                    visible: visible,
-                    x: x,
-                    y: y
-                });
-            }
-            this.setState({sprites: spritesList});
-            // Force a refresh to show loaded sprites
-            this.forceUpdate();
-        }, 3000);
+            requestAnimationFrame(this.step.bind(this));
+        }, 5000);
         // *************************************************
     }
     shouldComponentUpdate (nextProps, nextState) {
@@ -120,7 +86,9 @@ class Stage extends React.Component {
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
-            this.props.micIndicator !== nextProps.micIndicator;
+            this.props.micIndicator !== nextProps.micIndicator ||
+            JSON.stringify(this.state.sprites) !== JSON.stringify(nextState.sprites) ||
+            JSON.stringify(this.state.stageURL) !== JSON.stringify(nextState.stageURL);
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -136,6 +104,46 @@ class Stage extends React.Component {
         this.detachRectEvents();
         this.stopColorPickingLoop();
         this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
+    }
+    step () {
+        // console.log('raf');
+        // console.log(this.state.costume1URL);
+        // console.log('all targets:');
+        // console.log(this.props.vm.runtime.targets);
+        // Get stage asset id
+        /* eslint-disable max-len */
+        const id = this.props.vm.runtime.targets[0].getCostumes()[this.props.vm.runtime.targets[0].currentCostume].assetId;
+        // Get stage URL from asset id
+        this.setState({stageURL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
+
+        // Get sprite 1 asset id
+        // id = this.props.vm.runtime.targets[1].getCostumes()[0].assetId;
+        // Get sprite 1 costume 1 URL from asset id
+        // this.setState({costume1URL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
+        // console.log(this.props.vm.runtime.targets[1]);
+        const spritesList = [];
+        for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
+            const target = this.props.vm.runtime.targets[i];
+            const costumeID = target.getCostumes()[target.currentCostume].assetId;
+            const url = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
+            const width = target.getCostumes()[target.currentCostume].size[0];
+            const height = target.getCostumes()[target.currentCostume].size[1];
+            const visible = target.visible;
+            const x = target.x;
+            const y = target.y;
+            // console.log(target);
+            spritesList.push({
+                url: url,
+                width: width,
+                height: height,
+                visible: visible,
+                x: x,
+                y: y
+            });
+        }
+        // console.log('set sprite state', spritesList);
+        this.setState({sprites: spritesList});
+        requestAnimationFrame(this.step.bind(this));
     }
     questionListener (question) {
         this.setState({question: question});
@@ -409,6 +417,38 @@ class Stage extends React.Component {
     }
     setDragCanvas (canvas) {
         this.dragCanvas = canvas;
+    }
+    _isEquivalent (a, b) {
+        if (!a || !b) {
+            return false;
+        }
+
+        // Create arrays of property names
+        const aProps = Object.getOwnPropertyNames(a);
+        const bProps = Object.getOwnPropertyNames(b);
+
+        // If number of properties is different,
+        // objects are not equivalent
+        if (aProps.length !== bProps.length) {
+            console.log('not equivalent 1');
+            return false;
+        }
+
+        for (let i = 0; i < aProps.length; i++) {
+            const propName = aProps[i];
+
+            // If values of same property are not equal,
+            // objects are not equivalent
+            if (a[propName] !== b[propName]) {
+                console.log([propName]);
+                console.log('not equivalent 2');
+                return false;
+            }
+        }
+
+        // If we made it this far, objects
+        // are considered equivalent
+        return true;
     }
     render () {
         const {

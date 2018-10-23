@@ -45,17 +45,19 @@ const StageComponent = props => {
         // console.log(sprites);
         clearTimeout(timeoutID);
         let spritesString = '';
-        sprites.forEach((sprite, index) => {
-            if (sprite.visible) {
-                /* eslint-disable max-len */
-                /* eslint-disable prefer-template */
-                spritesString = spritesString + '<a-image height="' + (sprite.height / 100) + '" material="alphaTest: 0.5" position="' + (sprite.x / 100) + ' ' + ((sprite.y + 180) / 100) + ' ' + (-0.3 * index) + '" src="' + sprite.url + '" width="' + (sprite.width / 100) + '"></a-image>';
-            }
-        });
-        const markerString = '<a-image height="3.6" position="0 1.8 -2" src="' + stageURL + '" width="4.8"></a-image><a-plane color="#7BC8A4" height="4" position="0 0 0" rotation="-90 0 0" width="4.8"></a-plane>';
-        const entitiesString = markerString + spritesString;
-        window.frames.output.contentWindow.document.getElementById('marker').innerHTML = entitiesString;
-    }, 5000);
+        if (sprites) {
+            sprites.forEach((sprite, index) => {
+                if (sprite.visible) {
+                    /* eslint-disable max-len */
+                    /* eslint-disable prefer-template */
+                    spritesString = spritesString + '<a-image height="' + (sprite.height / 100) + '" material="alphaTest: 0.5;" position="' + (sprite.x / 100) + ' ' + ((sprite.y + 180) / 100) + ' ' + (-0.3 * index) + '" src="' + sprite.url + '" width="' + (sprite.width / 100) + '"></a-image>';
+                }
+            });
+            const markerString = '<a-image height="3.6" position="0 1.8 -2" src="' + stageURL + '" width="4.8" material="alphaTest: 0.5;"></a-image><a-plane color="#7BC8A4" height="4" position="0 0 0" rotation="-90 0 0" width="4.8" material="alphaTest: 0.5;"></a-plane>';
+            const entitiesString = markerString + spritesString;
+            window.frames.output.contentWindow.document.getElementById('marker').innerHTML = entitiesString;
+        }
+    }, 10000);
 
     /* eslint-disable func-style */
     /* eslint-disable require-jsdoc */

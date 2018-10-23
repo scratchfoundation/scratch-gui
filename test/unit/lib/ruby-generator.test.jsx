@@ -77,8 +77,7 @@ describe('RubyGenerator', () => {
                     id2_2: {
                         name: 'List of Symbols.',
                         type: LIST_TYPE
-                    },
-
+                    }
                 },
                 runtime: {
                     getTargetForStage: function () {

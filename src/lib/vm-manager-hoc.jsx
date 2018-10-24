@@ -8,9 +8,9 @@ import AudioEngine from 'scratch-audio';
 
 import {
     LoadingStates,
-    onError,
+    getIsLoadingWithId,
     onLoadedProject,
-    getIsLoadingWithId
+    projectError
 } from '../reducers/project-state';
 
 /*
@@ -98,7 +98,7 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onError: error => dispatch(onError(error)),
+        onError: error => dispatch(projectError(error)),
         onLoadedProject: (loadingState, canSave) =>
             dispatch(onLoadedProject(loadingState, canSave))
     });

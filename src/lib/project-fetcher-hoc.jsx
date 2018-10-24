@@ -8,8 +8,8 @@ import {
     LoadingStates,
     defaultProjectId,
     getIsFetchingWithId,
-    onError,
     onFetchedProjectData,
+    projectError,
     setProjectId
 } from '../reducers/project-state';
 
@@ -127,7 +127,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
-        onError: error => dispatch(onError(error)),
+        onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))

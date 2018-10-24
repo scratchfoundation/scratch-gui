@@ -66,7 +66,7 @@ const GUIComponent = props => {
         canCreateNew,
         canRemix,
         canSave,
-        canSaveAsCopy,
+        canCreateCopy,
         canShare,
         children,
         connectionModalVisible,
@@ -178,10 +178,10 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canRemix={canRemix}
                     canSave={canSave}
-                    canSaveAsCopy={canSaveAsCopy}
                     canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
@@ -328,10 +328,10 @@ GUIComponent.propTypes = {
     }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
-    canSaveAsCopy: PropTypes.bool,
     canShare: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
@@ -373,10 +373,10 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
-    canCreateNew: true,
+    canCreateNew: false,
     canRemix: false,
     canSave: false,
-    canSaveAsCopy: false,
+    canCreateCopy: false,
     canShare: false,
     onUpdateProjectTitle: () => {},
     showComingSoon: false,

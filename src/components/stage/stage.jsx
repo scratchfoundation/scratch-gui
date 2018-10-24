@@ -57,8 +57,8 @@ const StageComponent = props => {
                         <a-image
                             src="#sprite${index}"
                             height="${sprite.height / 100}"
-                            material="alphaTest: 0.1; transparent: false; flatShading: true;"
-                            position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * index}"
+                            material="alphaTest: 0.1; transparent: false; flatShading: true; npot: true;"
+                            position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * sprite.layerOrder}"
                             width="${sprite.width / 100}"
                         >
                         </a-image>
@@ -76,7 +76,9 @@ const StageComponent = props => {
                     src="#stage"
                     height="3.6"
                     position="0 1.8 -2"
-                    width="4.8">
+                    width="4.8"
+                    material="alphaTest: 0.1; transparent: false; flatShading: true; npot: true;"
+                >
                 </a-image>
                 <a-plane
                     color="#7BC8A4"

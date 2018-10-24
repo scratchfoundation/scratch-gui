@@ -66,19 +66,16 @@ class Stage extends React.Component {
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
         this.props.vm.setVideoProvider(new VideoProvider());
+        this.props.vm.on('LOADED_PROJECT', () => {
+            console.log('LOADED PROJECT');
+            requestAnimationFrame(this.step.bind(this));
+        });
     }
     componentDidMount () {
         this.attachRectEvents();
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
-        // ******************** AR *************************
-        // Hack to render targets into A-FRAME after some time
-        // PROJECT TO TEST: #239076044
-        setTimeout(() => {
-            requestAnimationFrame(this.step.bind(this));
-        }, 10000);
-        // *************************************************
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
@@ -131,12 +128,14 @@ class Stage extends React.Component {
             const visible = target.visible;
             const x = target.x;
             const y = target.y;
-            // console.log(target);
+            // console.log(target.getLayerOrder());
+            const layerOrder = target.getLayerOrder();
             spritesList.push({
                 url: url,
                 width: width,
                 height: height,
                 visible: visible,
+                layerOrder: layerOrder,
                 x: x,
                 y: y
             });
@@ -417,38 +416,6 @@ class Stage extends React.Component {
     }
     setDragCanvas (canvas) {
         this.dragCanvas = canvas;
-    }
-    _isEquivalent (a, b) {
-        if (!a || !b) {
-            return false;
-        }
-
-        // Create arrays of property names
-        const aProps = Object.getOwnPropertyNames(a);
-        const bProps = Object.getOwnPropertyNames(b);
-
-        // If number of properties is different,
-        // objects are not equivalent
-        if (aProps.length !== bProps.length) {
-            console.log('not equivalent 1');
-            return false;
-        }
-
-        for (let i = 0; i < aProps.length; i++) {
-            const propName = aProps[i];
-
-            // If values of same property are not equal,
-            // objects are not equivalent
-            if (a[propName] !== b[propName]) {
-                console.log([propName]);
-                console.log('not equivalent 2');
-                return false;
-            }
-        }
-
-        // If we made it this far, objects
-        // are considered equivalent
-        return true;
     }
     render () {
         const {

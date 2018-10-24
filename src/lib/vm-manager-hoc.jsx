@@ -46,6 +46,9 @@ const vmManagerHOC = function (WrappedComponent) {
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
+                    // console.log('LOADED PROJECT');
+                    // console.log(state.scratchGui.targets.stage);
+                    this.props.vm.emit('LOADED_PROJECT');
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                     // If the cloud host exists, open a cloud connection and
                     // set the vm's cloud provider.

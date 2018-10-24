@@ -65,9 +65,12 @@ const getIsShowingWithId = loadingState => (
 const getIsShowingWithoutId = loadingState => (
     loadingState === LoadingState.SHOWING_WITHOUT_ID
 );
+const getIsError = loadingState => (
+    loadingState === LoadingState.ERROR
+);
 
 const initialState = {
-    errStr: null,
+    error: null,
     projectData: null,
     projectId: null,
     loadingState: LoadingState.NOT_LOADED
@@ -221,7 +224,7 @@ const reducer = function (state, action) {
         ].includes(state.loadingState)) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.ERROR,
-                errStr: action.errStr
+                error: action.error
             });
         }
         return state;
@@ -295,9 +298,9 @@ const onUpdated = loadingState => {
     }
 };
 
-const onError = errStr => ({
+const onError = error => ({
     type: GO_TO_ERROR_STATE,
-    errStr: errStr
+    error: error
 });
 
 const setProjectId = id => ({
@@ -326,6 +329,7 @@ export {
     createProject,
     defaultProjectId,
     getIsCreating,
+    getIsError,
     getIsFetchingWithoutId,
     getIsFetchingWithId,
     getIsLoadingWithId,

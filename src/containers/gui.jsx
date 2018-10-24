@@ -9,6 +9,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
 import {
+    getIsError,
     getIsShowingProject
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
@@ -63,16 +64,16 @@ class GUI extends React.Component {
         }
     }
     render () {
-        if (this.props.loadingError) {
+        if (this.props.isError) {
             throw new Error(
-                `Failed to load project from server [id=${window.location.hash}]: ${this.props.errorMessage}`);
+                `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
         }
         const {
             /* eslint-disable no-unused-vars */
             assetHost,
-            errorMessage,
+            error,
             hideIntro,
-            loadingError,
+            isError,
             isShowingProject,
             onUpdateProjectId,
             onUpdateReduxProjectTitle,
@@ -100,14 +101,14 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
-    errorMessage: PropTypes.string,
+    error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape,
+    isError: PropTypes.bool,
     isLoading: PropTypes.bool,
     isShowingProject: PropTypes.bool,
-    loadingError: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
@@ -135,7 +136,9 @@ const mapStateToProps = (state, ownProps) => {
         connectionModalVisible: state.scratchGui.modals.connectionModal,
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
         costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
+        error: state.scratchGui.projectState.error,
         importInfoVisible: state.scratchGui.modals.importInfo,
+        isError: getIsError(loadingState),
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),

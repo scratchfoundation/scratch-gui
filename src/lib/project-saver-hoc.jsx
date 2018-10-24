@@ -90,14 +90,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 createProject: createProjectProp,
-                onCreated: onCreatedProp,
-                onUpdated: onUpdatedProp,
-                onError: onErrorProp,
                 isCreating: isCreatingProp,
                 isShowingWithId: isShowingWithIdProp,
                 isShowingWithoutId: isShowingWithoutIdProp,
                 isUpdating: isUpdatingProp,
                 loadingState,
+                onCreated: onCreatedProp,
+                onError: onErrorProp,
+                onUpdated: onUpdatedProp,
                 reduxProjectId,
                 saveProject: saveProjectProp,
                 /* eslint-enable no-unused-vars */
@@ -141,7 +141,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         createProject: () => dispatch(createProject()),
         onCreated: projectId => dispatch(onCreated(projectId)),
         onUpdated: (projectId, loadingState) => dispatch(onUpdated(projectId, loadingState)),
-        onError: errStr => dispatch(onError(errStr)),
+        onError: error => dispatch(onError(error)),
         saveProject: () => dispatch(saveProject())
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

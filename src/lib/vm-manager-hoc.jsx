@@ -8,6 +8,7 @@ import AudioEngine from 'scratch-audio';
 
 import {
     LoadingStates,
+    onError,
     onLoadedProject,
     getIsLoadingWithId
 } from '../reducers/project-state';
@@ -24,10 +25,6 @@ const vmManagerHOC = function (WrappedComponent) {
             bindAll(this, [
                 'loadProject'
             ]);
-            this.state = {
-                loadingError: false,
-                errorMessage: ''
-            };
         }
         componentDidMount () {
             if (this.props.vm.initialized) return;
@@ -51,19 +48,18 @@ const vmManagerHOC = function (WrappedComponent) {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                 })
                 .catch(e => {
-                    // Need to catch this error and update component state so that
-                    // error page gets rendered if project failed to load
-                    this.setState({loadingError: true, errorMessage: e});
+                    this.props.onError(e);
                 });
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
+                loadingState,
+                onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
-                loadingState,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -71,9 +67,7 @@ const vmManagerHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    errorMessage={this.state.errorMessage}
                     isLoading={isLoadingWithIdProp}
-                    loadingError={this.state.loadingError}
                     vm={vm}
                     {...componentProps}
                 />
@@ -86,6 +80,7 @@ const vmManagerHOC = function (WrappedComponent) {
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onError: PropTypes.func,
         onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -103,6 +98,7 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
+        onError: error => dispatch(onError(error)),
         onLoadedProject: (loadingState, canSave) =>
             dispatch(onLoadedProject(loadingState, canSave))
     });

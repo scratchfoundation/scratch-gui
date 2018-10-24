@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import minilog from 'minilog';
 
 import GeneratedBlocks from './generated.js';
 import MathBlocks from './math.js';
@@ -495,11 +496,18 @@ export default function (Blockly) {
 
     Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;
 
+    minilog.enable();
+    const log = minilog('ruby-generator');
     Blockly.Ruby.blockToCode = function (block) {
         if (block && !block.disabled && block.type.match(/^hardware_/)) {
             this.definitions_.prepare__init_hardware = 'init_hardware';
         }
-        return this.blockToCode_(block);
+        try {
+            return this.blockToCode_(block);
+        } catch (error) {
+            log.error(`'${block.type}' block is not unsupported to generate Ruby code. Please implement it.`);
+            return null;
+        }
     };
 
     Blockly = GeneratedBlocks(Blockly);

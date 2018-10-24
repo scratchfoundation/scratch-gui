@@ -499,7 +499,11 @@ export default function (Blockly) {
         if (block && !block.disabled && block.type.match(/^hardware_/)) {
             this.definitions_.prepare__init_hardware = 'init_hardware';
         }
-        return this.blockToCode_(block);
+        try {
+            return this.blockToCode_(block);
+        } catch (error) {
+            return null;
+        }
     };
 
     Blockly = GeneratedBlocks(Blockly);

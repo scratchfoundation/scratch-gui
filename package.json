@@ -102,7 +102,7 @@
     "scratch-l10n": "3.0.20181010220115",
     "scratch-paint": "0.2.0-prerelease.20181017200201",
     "scratch-render": "0.1.0-prerelease.20181023192935",
-    "scratch-storage": "1.0.5",
+    "scratch-storage": "1.1.0",
     "scratch-svg-renderer": "0.2.0-prerelease.20181017193458",
     "scratch-vm": "0.2.0-prerelease.20181023192708",
     "selenium-webdriver": "3.6.0",

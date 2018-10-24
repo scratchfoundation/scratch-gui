@@ -51,7 +51,7 @@ const handleFileUpload = function (fileInput, onload) {
  */
 
 /**
- * Cache an asset (costume, sound) in storage and return an object representation
+ * Create an asset (costume, sound) with storage and return an object representation
  * of the asset to track in the VM.
  * @param {ScratchStorage} storage The storage to cache the asset in
  * @param {string} fileName The name of the asset
@@ -62,7 +62,7 @@ const handleFileUpload = function (fileInput, onload) {
  * @return {VMAsset} An object representing this asset and relevant information
  * which can be used to look up the data in storage
  */
-const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
+const createVMAsset = function (storage, fileName, assetType, dataFormat, data) {
     const asset = storage.createAsset(
         assetType,
         dataFormat,
@@ -117,7 +117,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
 
     const bitmapAdapter = new BitmapAdapter();
     const addCostumeFromBuffer = function (dataBuffer) {
-        const vmCostume = cacheAsset(
+        const vmCostume = createVMAsset(
             storage,
             costumeName,
             assetType,
@@ -173,7 +173,7 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
         return;
     }
 
-    const vmSound = cacheAsset(
+    const vmSound = createVMAsset(
         storage,
         soundName,
         storage.AssetType.Sound,

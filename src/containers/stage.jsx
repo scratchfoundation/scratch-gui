@@ -77,7 +77,7 @@ class Stage extends React.Component {
         // PROJECT TO TEST: #239076044
         setTimeout(() => {
             requestAnimationFrame(this.step.bind(this));
-        }, 5000);
+        }, 10000);
         // *************************************************
     }
     shouldComponentUpdate (nextProps, nextState) {

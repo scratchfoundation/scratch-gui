@@ -361,7 +361,7 @@ const doneUpdatingProject = loadingState => {
     }
 };
 
-const onError = error => ({
+const projectError = error => ({
     type: START_ERROR,
     error: error
 });
@@ -399,24 +399,24 @@ export {
     LoadingStates,
     createProject,
     defaultProjectId,
+    doneCreatingProject,
+    doneUpdatingProject,
     getIsCreating,
     getIsError,
-    getIsFetchingWithoutId,
     getIsFetchingWithId,
+    getIsFetchingWithoutId,
     getIsLoadingWithId,
-    getIsUpdating,
     getIsShowingProject,
     getIsShowingWithId,
     getIsShowingWithoutId,
-    doneCreatingProject,
-    projectError,
+    getIsUpdating,
     onFetchedProjectData,
     onLoadedProject,
     onProjectUploadStarted,
-    doneUpdatingProject,
-    requestNewProject,
+    projectError,
     remixProject,
-    updateProject,
+    requestNewProject,
     saveProjectAsCopy,
-    setProjectId
+    setProjectId,
+    updateProject
 };

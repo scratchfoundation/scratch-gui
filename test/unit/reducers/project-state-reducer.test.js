@@ -276,7 +276,7 @@ test('projectError from various states should show error', () => {
             error: null,
             loadingState: startState
         };
-        const action = onError({message: 'Error string'});
+        const action = projectError({message: 'Error string'});
         const resultState = projectStateReducer(initialState, action);
         expect(resultState.loadingState).toBe(LoadingState.ERROR);
         expect(resultState.error).toEqual({message: 'Error string'});
@@ -288,7 +288,7 @@ test('projectError from showing project should show error', () => {
         error: null,
         loadingState: LoadingState.FETCHING_WITH_ID
     };
-    const action = onError({message: 'Error string'});
+    const action = projectError({message: 'Error string'});
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.ERROR);
     expect(resultState.error).toEqual({message: 'Error string'});

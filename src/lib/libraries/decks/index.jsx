@@ -237,7 +237,7 @@ export default {
             ]
         }
         ],
-        urlId: 2
+        urlId: 16
     },
 
     'cartoon-network': {
@@ -348,7 +348,7 @@ export default {
             ]
         }
         ],
-        urlId: 3
+        urlId: 17
     },
     'animate-a-name': {
         name: (

@@ -50,7 +50,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.control_start_as_clone = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         return `${Blockly.Ruby.spriteName()}.when(:start_as_a_clone) do\n`;
     };
 

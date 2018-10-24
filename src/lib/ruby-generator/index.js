@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import minilog from 'minilog';
+import log from '../log';
 
-import GeneratedBlocks from './generated.js';
 import MathBlocks from './math.js';
 import TextBlocks from './text.js';
 import ColourBlocks from './colour.js';
@@ -13,6 +12,7 @@ import ControlBlocks from './control.js';
 import SensingBlocks from './sensing.js';
 import OperatorsBlocks from './operators.js';
 import DataBlocks from './data.js';
+import ProcedureBlocks from './procedure.js';
 
 /**
  * Define Ruby
@@ -97,7 +97,6 @@ export default function (Blockly) {
 
     Blockly.Ruby.init = function () {
         this.definitions_ = {};
-        this.targetEventBlock = null;
         if (Blockly.Variables) {
             if (this.variableDB_) {
                 this.variableDB_.reset();
@@ -144,6 +143,20 @@ export default function (Blockly) {
         }
         return code;
     };
+
+    Blockly.Ruby.numberOrStringToCode = function (value) {
+        if (Blockly.Ruby.isString(value) &&
+            value[0] === '"' &&
+            value[value.length - 1] === '"') {
+            const s = value.slice(1, value.length - 1);
+            const n = Number(s);
+            if (!isNaN(n) && !(n === 0 && Blockly.Ruby.isWhiteSpace(s))) {
+                return n;
+            }
+        }
+        return value;
+    };
+    Blockly.Ruby.nosToCode = Blockly.Ruby.numberOrStringToCode;
 
     Blockly.Ruby.spriteNew = function (renderedTarget) {
         if (!renderedTarget) {
@@ -431,12 +444,11 @@ export default function (Blockly) {
         const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
         nextCode = this.blockToCode(nextBlock);
         let eventEndCode = '';
-        if (block === this.targetEventBlock) {
+        if (block.isStatement) {
             if (nextCode !== '') {
                 nextCode = this.prefixLines(/** @type {string} */ (nextCode), this.INDENT);
             }
             eventEndCode = 'end\n';
-            this.targetEventBlock = null;
         }
         return commentCode + code + nextCode + eventEndCode;
     };
@@ -454,7 +466,13 @@ export default function (Blockly) {
     };
 
     const escapeIdentityRegexp =
-        /[\x00-\x1f\x7f-\x9f !"#$%&'()*+,-./:;<=>?@[\\\]^`{|}~]/g; // eslint-disable-line no-control-regex
+          /[\x00-\x1f\x7f-\x9f !"#$%&'()*+,-./:;<=>?@[\\\]^`{|}~]/g; // eslint-disable-line no-control-regex
+
+    Blockly.Ruby.escapeVariableName = function (s) {
+        return s.replace(escapeIdentityRegexp, '_');
+    };
+
+    Blockly.Ruby.escapeMethodName = Blockly.Ruby.escapeVariableName;
 
     Blockly.Ruby.variableName = function (id, type = SCALAR_TYPE) {
         let currVar;
@@ -485,32 +503,37 @@ export default function (Blockly) {
         return this.variableName(id, LIST_TYPE);
     };
 
-    Blockly.Ruby.workspaceToCode_ = Blockly.Ruby.workspaceToCode;
-
-    Blockly.Ruby.workspaceToCode = function (block, target) {
-        if (target) {
-            this.editingTarget = target;
+    Blockly.Ruby.workspaceToCode = function (workspace, target) {
+        this.editingTarget = target;
+        const getTopBlocks = workspace.getTopBlocks;
+        let code = null;
+        try {
+            workspace.getTopBlocks = function (ordered) {
+                const blocks = getTopBlocks.call(workspace, ordered);
+                if (ordered) {
+                    return blocks.sort((a, b) => {
+                        const aType = (a.type === 'procedures_definition' ? 1 : -1);
+                        const bType = (b.type === 'procedures_definition' ? 1 : -1);
+                        return bType - aType;
+                    });
+                }
+                return blocks;
+            };
+            code = Blockly.Generator.prototype.workspaceToCode.call(this, workspace);
+        } finally {
+            workspace.getTopBlocks = getTopBlocks;
         }
-        return this.workspaceToCode_(block);
+        return code;
     };
 
-    Blockly.Ruby.blockToCode_ = Blockly.Ruby.blockToCode;
-
-    minilog.enable();
-    const log = minilog('ruby-generator');
     Blockly.Ruby.blockToCode = function (block) {
-        if (block && !block.disabled && block.type.match(/^hardware_/)) {
-            this.definitions_.prepare__init_hardware = 'init_hardware';
-        }
         try {
-            return this.blockToCode_(block);
+            return Blockly.Generator.prototype.blockToCode.call(this, block);
         } catch (error) {
             log.error(`'${block.type}' block is not unsupported to generate Ruby code. Please implement it.`);
             return null;
         }
     };
-
-    Blockly = GeneratedBlocks(Blockly);
 
     Blockly = MathBlocks(Blockly);
     Blockly = TextBlocks(Blockly);
@@ -524,6 +547,7 @@ export default function (Blockly) {
     Blockly = SensingBlocks(Blockly);
     Blockly = OperatorsBlocks(Blockly);
     Blockly = DataBlocks(Blockly);
+    Blockly = ProcedureBlocks(Blockly);
 
     return Blockly;
 }

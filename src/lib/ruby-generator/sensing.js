@@ -12,7 +12,7 @@ export default function (Blockly) {
 
     Blockly.Ruby.sensing_touchingobjectmenu = function (block) {
         const object = Blockly.Ruby.quote_(block.getFieldValue('TOUCHINGOBJECTMENU') || null);
-        return [object, Blockly.Ruby.ORDER_FUNCTION_CALL];
+        return [object, Blockly.Ruby.ORDER_ATOMIC];
     };
 
     Blockly.Ruby.sensing_touchingcolor = function (block) {

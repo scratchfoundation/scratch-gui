@@ -174,10 +174,6 @@ describe('RubyGenerator', () => {
 
         beforeEach(() => {
             renderedTarget = {
-                constructor: {
-                    ROTATION_STYLE_LEFT_RIGHT: 'left-right',
-                    ROTATION_STYLE_NONE: 'don\'t rotate'
-                },
                 sprite: {
                     name: spriteName,
                     costumes: [
@@ -271,7 +267,7 @@ describe('RubyGenerator', () => {
                rotation_center_y: 61
              }
            ],
-           rotation_style: :left_right,
+           rotation_style: "left-right",
            variables: [
              {
                name: "Variable1",
@@ -348,7 +344,7 @@ describe('RubyGenerator', () => {
               rotation_center_y: 61
             }
           ],
-          rotation_style: :left_right,
+          rotation_style: "left-right",
           variables: [
             {
               name: "Variable1",

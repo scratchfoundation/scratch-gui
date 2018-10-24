@@ -1,5 +1,4 @@
 import jpegThumbnail from './jpeg-thumbnail';
-import storage from '../storage';
 
 const spritePayload = (sprite, vm) => vm.exportSprite(
     sprite.id,

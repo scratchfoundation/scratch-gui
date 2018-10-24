@@ -1,5 +1,3 @@
 node_modules/*
 build/*
 dist/*
-
-src/lib/ruby-generator/generated.js

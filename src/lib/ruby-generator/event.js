@@ -5,36 +5,36 @@
  */
 export default function (Blockly) {
     Blockly.Ruby.event_whenflagclicked = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         return `${Blockly.Ruby.spriteName()}.when(:flag_clicked) do\n`;
     };
 
     Blockly.Ruby.event_whenthisspriteclicked = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         return `${Blockly.Ruby.spriteName()}.when(:click) do\n`;
     };
 
     Blockly.Ruby.event_whenkeypressed = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         const key = Blockly.Ruby.quote_(block.getFieldValue('KEY_OPTION') || null);
         return `${Blockly.Ruby.spriteName()}.when(:key_pressed, ${key}) do\n`;
     };
 
     Blockly.Ruby.event_whenbackdropswitchesto = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         const backdrop = Blockly.Ruby.quote_(block.getFieldValue('BACKDROP') || null);
         return `${Blockly.Ruby.spriteName()}.when(:backdrop_switches, ${backdrop}) do\n`;
     };
 
     Blockly.Ruby.event_whengreaterthan = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         const lh = Blockly.Ruby.quote_(block.getFieldValue('WHENGREATERTHANMENU') || null);
         const rh = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
         return `${Blockly.Ruby.spriteName()}.when(:greater_than, ${lh}, ${rh})  do\n`;
     };
 
     Blockly.Ruby.event_whenbroadcastreceived = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         const message = Blockly.Ruby.broadcastMessageName(block.getFieldValue('BROADCAST_OPTION'));
         return `${Blockly.Ruby.spriteName()}.when(receive:, ${message}) do\n`;
     };
@@ -55,7 +55,7 @@ export default function (Blockly) {
     };
 
     Blockly.Ruby.event_whenstageclicked = function (block) {
-        Blockly.Ruby.targetEventBlock = block;
+        block.isStatement = true;
         return `Stage.when(:stage_clicked) do\n`;
     };
 

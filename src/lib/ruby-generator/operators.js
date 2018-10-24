@@ -42,38 +42,25 @@ export default function (Blockly) {
         return [`rand(${fromNum}..${toNum})`, Blockly.Ruby.ORDER_FUNCTION_CALL];
     };
 
-    const stringOperandToCode = function (operand) {
-        if (Blockly.Ruby.isString(operand) &&
-            operand[0] === '"' &&
-            operand[operand.length - 1] === '"') {
-            const s = operand.slice(1, operand.length - 1);
-            const n = Number(s);
-            if (n !== 0 || !Blockly.Ruby.isWhiteSpace(s)) {
-                return n;
-            }
-        }
-        return operand;
-    };
-
     Blockly.Ruby.operator_gt = function (block) {
         const order = Blockly.Ruby.ORDER_RELATIONAL;
         const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
         const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${stringOperandToCode(operand1)} > ${stringOperandToCode(operand2)}`, order];
+        return [`${Blockly.Ruby.nosToCode(operand1)} > ${Blockly.Ruby.nosToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_lt = function (block) {
         const order = Blockly.Ruby.ORDER_RELATIONAL;
         const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
         const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${stringOperandToCode(operand1)} < ${stringOperandToCode(operand2)}`, order];
+        return [`${Blockly.Ruby.nosToCode(operand1)} < ${Blockly.Ruby.nosToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_equals = function (block) {
         const order = Blockly.Ruby.ORDER_EQUALS;
         const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
         const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${stringOperandToCode(operand1)} == ${stringOperandToCode(operand2)}`, order];
+        return [`${Blockly.Ruby.nosToCode(operand1)} == ${Blockly.Ruby.nosToCode(operand2)}`, order];
     };
 
     Blockly.Ruby.operator_and = function (block) {

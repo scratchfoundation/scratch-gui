@@ -69,6 +69,26 @@ describe('RubyGenerator', () => {
                     id4: {
                         name: 'List2',
                         type: LIST_TYPE
+                    },
+                    id2_1: {
+                        name: 'Avg(Total / Count)',
+                        type: SCALAR_TYPE
+                    },
+                    id2_2: {
+                        name: 'List of Symbols.',
+                        type: LIST_TYPE
+                    },
+                    id2_3: {
+                        name: ' !"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~]',
+                        type: SCALAR_TYPE
+                    },
+                    id2_4: {
+                        name: '平均(合計 / 件数)',
+                        type: SCALAR_TYPE
+                    },
+                    id2_5: {
+                        name: 'シンボル　配列。',
+                        type: LIST_TYPE
                     }
                 },
                 runtime: {
@@ -125,6 +145,26 @@ describe('RubyGenerator', () => {
             renderedTarget.isStage = true;
             expect(Ruby.variableName('id5')).toEqual(null);
             expect(Ruby.listName('id6')).toEqual(null);
+        });
+
+        test('escape except alphabet, number and _ to _', () => {
+            expect(Ruby.variableName('id2_1')).toEqual('@Avg_Total___Count_');
+            expect(Ruby.listName('id2_2')).toEqual('@List_of_Symbols_');
+            expect(Ruby.variableName('id2_3')).toEqual('@_________________________________');
+
+            renderedTarget.isStage = true;
+            expect(Ruby.variableName('id2_1')).toEqual('$Avg_Total___Count_');
+            expect(Ruby.listName('id2_2')).toEqual('$List_of_Symbols_');
+            expect(Ruby.variableName('id2_3')).toEqual('$_________________________________');
+        });
+
+        test('do not escape multibyte character like Japanese', () => {
+            expect(Ruby.variableName('id2_4')).toEqual('@平均_合計___件数_');
+            expect(Ruby.listName('id2_5')).toEqual('@シンボル　配列。');
+
+            renderedTarget.isStage = true;
+            expect(Ruby.variableName('id2_4')).toEqual('$平均_合計___件数_');
+            expect(Ruby.listName('id2_5')).toEqual('$シンボル　配列。');
         });
     });
 

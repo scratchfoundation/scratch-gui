@@ -452,6 +452,9 @@ export default function (Blockly) {
         return null;
     };
 
+    const escapeIdentityRegexp =
+        /[\x00-\x1f\x7f-\x9f !"#$%&'()*+,-./:;<=>?@[\\\]^`{|}~]/g; // eslint-disable-line no-control-regex
+
     Blockly.Ruby.variableName = function (id, type = SCALAR_TYPE) {
         let currVar;
         let prefix;
@@ -472,7 +475,7 @@ export default function (Blockly) {
             }
         }
         if (currVar && currVar.type === type) {
-            return `${prefix}${currVar.name}`;
+            return `${prefix}${currVar.name.replace(escapeIdentityRegexp, '_')}`;
         }
         return null;
     };

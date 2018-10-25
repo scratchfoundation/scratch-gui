@@ -39,6 +39,7 @@ const detectTutorialId = () => {
     const tutorialID = Array.isArray(queryParams.tutorial) ?
         queryParams.tutorial[0] :
         queryParams.tutorial;
+    if (typeof tutorialID === 'undefined') return null;
     return getDeckIdFromUrlId(tutorialID);
 };
 

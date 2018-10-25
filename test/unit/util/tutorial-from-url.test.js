@@ -3,7 +3,9 @@ jest.mock('../../../src/lib/analytics.js', () => ({
 }));
 
 jest.mock('../../../src/lib/libraries/decks/index.jsx', () => ({
-    foo: {urlId: 'one'}
+    noUrlId: {},
+    foo: {urlId: 'one'},
+    noUrlIdSandwich: {}
 }));
 
 import {detectTutorialId} from '../../../src/lib/tutorial-from-url.js';
@@ -26,6 +28,11 @@ test('returns null if no matching urlId', () => {
 
 test('returns null if empty template', () => {
     window.location.search = '?tutorial=';
+    expect(detectTutorialId()).toBe(null);
+});
+
+test('returns null if no query param', () => {
+    window.location.search = '';
     expect(detectTutorialId()).toBe(null);
 });
 

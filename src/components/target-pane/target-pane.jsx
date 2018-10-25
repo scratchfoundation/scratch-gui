@@ -79,9 +79,9 @@ const TargetPane = ({
         />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
-                assetId={
+                asset={
                     stage.costume &&
-                    stage.costume.assetId
+                    stage.costume.asset
                 }
                 backdropCount={stage.costumeCount}
                 id={stage.id}

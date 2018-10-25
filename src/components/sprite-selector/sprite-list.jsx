@@ -69,7 +69,7 @@ const SpriteList = function (props) {
                         onRemoveSortable={onRemoveSortable}
                     >
                         <SpriteSelectorItem
-                            assetId={sprite.costume && sprite.costume.assetId}
+                            asset={sprite.costume && sprite.costume.asset}
                             className={classNames(styles.sprite, {
                                 [styles.raised]: isRaised,
                                 [styles.receivedBlocks]: receivedBlocks

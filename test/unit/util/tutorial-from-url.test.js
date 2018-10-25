@@ -3,7 +3,7 @@ jest.mock('../../../src/lib/analytics.js', () => ({
 }));
 
 jest.mock('../../../src/lib/libraries/decks/index.jsx', () => ({
-    foo: {urlId: 1}
+    foo: {urlId: 'one'}
 }));
 
 import {detectTutorialId} from '../../../src/lib/tutorial-from-url.js';
@@ -15,7 +15,7 @@ Object.defineProperty(
 );
 
 test('returns the tutorial ID if the urlId matches', () => {
-    window.location.search = '?tutorial=1';
+    window.location.search = '?tutorial=one';
     expect(detectTutorialId()).toBe('foo');
 });
 
@@ -35,6 +35,6 @@ test('returns null if non-numeric template', () => {
 });
 
 test('takes the first of multiple', () => {
-    window.location.search = '?tutorial=1&tutorial=2';
+    window.location.search = '?tutorial=one&tutorial=two';
     expect(detectTutorialId()).toBe('foo');
 });

@@ -106,7 +106,7 @@ class StageSelector extends React.Component {
     }
     render () {
         const componentProps = omit(this.props, [
-            'assetId', 'dispatchSetHoveredSprite', 'id', 'intl', 'onActivateTab', 'onSelect']);
+            'asset', 'dispatchSetHoveredSprite', 'id', 'intl', 'onActivateTab', 'onSelect']);
         return (
             <DroppableStage
                 fileInputRef={this.setFileInput}
@@ -130,8 +130,8 @@ StageSelector.propTypes = {
     onSelect: PropTypes.func
 };
 
-const mapStateToProps = (state, {assetId, id}) => ({
-    url: assetId && state.scratchGui.vm.runtime.storage.get(assetId).encodeDataURI(),
+const mapStateToProps = (state, {asset, id}) => ({
+    url: asset && asset.encodeDataURI(),
     vm: state.scratchGui.vm,
     receivedBlocks: state.scratchGui.hoveredTarget.receivedBlocks &&
             state.scratchGui.hoveredTarget.sprite === id,

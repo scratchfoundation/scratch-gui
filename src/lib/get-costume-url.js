@@ -28,7 +28,6 @@ const getCostumeUrl = (function () {
             } else {
                 cachedUrl = asset.encodeDataURI();
             }
-            cachedUrl = asset.encodeDataURI();
         } else {
             cachedUrl = asset.encodeDataURI();
         }

@@ -126,7 +126,7 @@ export default {
             ]
         }
         ],
-        urlId: 1
+        urlId: 'getStarted'
     },
 
     'say-it-out-loud': {
@@ -237,7 +237,7 @@ export default {
             ]
         }
         ],
-        urlId: 16
+        urlId: 'animations-that-talk'
     },
 
     'cartoon-network': {
@@ -348,7 +348,7 @@ export default {
             ]
         }
         ],
-        urlId: 17
+        urlId: 'animate-an-adventure-game'
     },
     'animate-a-name': {
         name: (
@@ -423,7 +423,7 @@ export default {
             ]
         }
         ],
-        urlId: 2
+        urlId: 'name'
     },
     'Make-Music': {
         name: (
@@ -492,7 +492,7 @@ export default {
             ]
         }
         ],
-        urlId: 3
+        urlId: 'music'
     },
     'Make-A-Game': {
         name: (
@@ -578,7 +578,7 @@ export default {
             ]
         }
         ],
-        urlId: 4
+        urlId: 'clicker-game'
     },
 
     'Chase-Game': {
@@ -682,7 +682,7 @@ export default {
             ]
         }
         ],
-        urlId: 5
+        urlId: 'chase-game'
     },
     'add-sprite': {
         name: (
@@ -712,7 +712,7 @@ export default {
                 ]
             }
         ],
-        urlId: 6
+        urlId: 'add-a-sprite'
     },
     'add-a-backdrop': {
         name: (
@@ -732,7 +732,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 7
+        urlId: 'add-a-backdrop'
     },
     'change-size': {
         name: (
@@ -752,7 +752,7 @@ export default {
                 'spin-video'
             ]
         }],
-        urlId: 8
+        urlId: 'change-size'
     },
     'glide-around': {
         name: (
@@ -772,7 +772,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 9
+        urlId: 'glide-around'
     },
 
     'record-a-sound': {
@@ -793,7 +793,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 10
+        urlId: 'record-a-sound'
     },
     'spin-video': {
         name: (
@@ -813,7 +813,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 11
+        urlId: 'make-it-spin'
     },
     'hide-and-show': {
         name: (
@@ -833,7 +833,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 12
+        urlId: 'hide'
     },
 
     'switch-costume': {
@@ -854,7 +854,7 @@ export default {
                 'add-effects'
             ]
         }],
-        urlId: 13
+        urlId: 'animate-a-sprite'
     },
 
     'move-around-with-arrow-keys': {
@@ -875,7 +875,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 14
+        urlId: 'arrow-keys'
     },
     'add-effects': {
         name: (
@@ -896,6 +896,6 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 15
+        urlId: 'add-effects'
     }
 };

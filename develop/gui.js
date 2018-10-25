@@ -61,7 +61,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     host: backpackHost
   };
 
-  if (true && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
+  if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
     // Warn before navigating away
     window.onbeforeunload = function () {
       return true;

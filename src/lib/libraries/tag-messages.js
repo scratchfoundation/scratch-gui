@@ -100,5 +100,25 @@ export default defineMessages({
         defaultMessage: 'Wacky',
         description: 'Tag for filtering a library for wacky',
         id: 'gui.libraryTags.wacky'
+    },
+    animation: {
+        defaultMessage: 'Animation',
+        description: 'Tag for filtering a library for animation',
+        id: 'gui.libraryTags.animation'
+    },
+    art: {
+        defaultMessage: 'Art',
+        description: 'Tag for filtering a library for art',
+        id: 'gui.libraryTags.art'
+    },
+    games: {
+        defaultMessage: 'Games',
+        description: 'Tag for filtering a library for games',
+        id: 'gui.libraryTags.games'
+    },
+    stories: {
+        defaultMessage: 'Stories',
+        description: 'Tag for filtering a library for stories',
+        id: 'gui.libraryTags.stories'
     }
 });

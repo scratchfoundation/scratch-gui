@@ -4,6 +4,7 @@ import React from 'react';
 import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
+import tutorialTags from '../lib/libraries/tutorial-tags';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
@@ -46,15 +47,17 @@ class TipsLibrary extends React.PureComponent {
             rawURL: decksLibraryContent[id].img,
             id: id,
             name: decksLibraryContent[id].name,
-            featured: true
+            featured: true,
+            tags: decksLibraryContent[id].tags
         }));
 
         if (!this.props.visible) return null;
         return (
             <LibraryComponent
+                filterable
                 data={decksLibraryThumbnailData}
-                filterable={false}
                 id="tipsLibrary"
+                tags={tutorialTags}
                 title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

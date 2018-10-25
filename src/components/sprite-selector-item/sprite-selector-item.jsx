@@ -39,6 +39,7 @@ const SpriteSelectorItem = props => (
         {props.costumeURL ? (
             <img
                 className={styles.spriteImage}
+                draggable={false}
                 src={props.costumeURL}
             />
         ) : null}

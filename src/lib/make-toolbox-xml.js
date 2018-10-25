@@ -589,7 +589,7 @@ const operators = function () {
         <block type="operator_join">
             <value name="STRING1">
                 <shadow type="text">
-                    <field name="TEXT">${apple}</field>
+                    <field name="TEXT">${apple} </field>
                 </shadow>
             </value>
             <value name="STRING2">

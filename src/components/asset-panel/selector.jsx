@@ -15,6 +15,7 @@ const Selector = props => {
         buttons,
         containerRef,
         dragType,
+        isRtl,
         items,
         selectedItemIndex,
         draggingIndex,
@@ -41,6 +42,7 @@ const Selector = props => {
                     img={img}
                     moreButtons={moreButtons}
                     title={title}
+                    tooltipPlace={isRtl ? 'left' : 'right'}
                     onClick={onClick}
                 />
             </Box>
@@ -62,7 +64,7 @@ const Selector = props => {
                         onRemoveSortable={onRemoveSortable}
                     >
                         <SpriteSelectorItem
-                            assetId={item.assetId}
+                            asset={item.asset}
                             className={classNames(styles.listItem, {
                                 [styles.placeholder]: isRelevantDrag && index === draggingIndex
                             })}
@@ -98,6 +100,7 @@ Selector.propTypes = {
     dragType: PropTypes.oneOf(Object.keys(DragConstants)),
     draggingIndex: PropTypes.number,
     draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
+    isRtl: PropTypes.bool,
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired

@@ -183,8 +183,13 @@
     max-width: 200px;
 }
 
-.help-icon, .close-icon {
+.help-icon {
+    height: 1.25rem;
+}
+
+.close-icon {
     height: 1rem;
+    margin: .125rem 0; /* To offset the .25rem difference in icon size */
 }
 
 [dir="ltr"] .help-icon {
@@ -193,10 +198,6 @@
 
 [dir="rtl"] .help-icon {
     margin-left: 0.25rem;
-}
-
-.close-icon {
-    transform: rotate(45deg);
 }
 
 [dir="ltr"] .close-icon {

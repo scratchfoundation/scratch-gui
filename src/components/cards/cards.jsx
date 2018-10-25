@@ -9,7 +9,7 @@ import rightArrow from './icon--next.svg';
 import leftArrow from './icon--prev.svg';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
-import closeIcon from '../close-button/icon--close.svg';
+import closeIcon from './icon--close.svg';
 
 import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 

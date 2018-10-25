@@ -26,7 +26,9 @@ import {
     getIsUpdating,
     getIsShowingProject,
     requestNewProject,
-    saveProject
+    remixProject,
+    updateProject,
+    saveProjectAsCopy
 } from '../../reducers/project-state';
 import {
     openAccountMenu,
@@ -130,7 +132,9 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleClickNew',
+            'handleClickRemix',
             'handleClickSave',
+            'handleClickSaveAsCopy',
             'handleCloseFileMenuAndThen',
             'handleLanguageMouseUp',
             'handleRestoreOption',
@@ -145,15 +149,22 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        // if canSave===true, it's safe to replace current project, since we will auto-save first
-        const readyToReplaceProject =
-            this.props.canSave || confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+        // if canCreateNew===true, it's safe to replace current project, since we will auto-save first.
+        // else confirm first.
+        const readyToReplaceProject = this.props.canCreateNew ||
+            confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
         if (readyToReplaceProject) {
-            this.props.onClickNew(this.props.canSave);
+            this.props.onClickNew(this.props.canCreateNew);
         }
+    }
+    handleClickRemix () {
+        this.props.onClickRemix();
     }
     handleClickSave () {
         this.props.onClickSave();
+    }
+    handleClickSaveAsCopy () {
+        this.props.onClickSaveAsCopy();
     }
     handleRestoreOption (restoreFun) {
         return () => {
@@ -209,11 +220,18 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.saveNow"
             />
         );
-        const saveAsCopyMessage = (
+        const createCopyMessage = (
             <FormattedMessage
                 defaultMessage="Save as a copy"
                 description="Menu bar item for saving as a copy"
                 id="gui.menuBar.saveAsCopy"
+            />
+        );
+        const remixMessage = (
+            <FormattedMessage
+                defaultMessage="Remix"
+                description="Menu bar item for remixing"
+                id="gui.menuBar.remix"
             />
         );
         const newProjectMessage = (
@@ -291,46 +309,42 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                {this.props.canCreateNew ? (
-                                    <MenuItem
-                                        isRtl={this.props.isRtl}
-                                        onClick={this.handleClickNew}
-                                    >
-                                        {newProjectMessage}
-                                    </MenuItem>
-                                ) : (
-                                    <MenuItemTooltip
-                                        id="new"
-                                        isRtl={this.props.isRtl}
-                                    >
-                                        <MenuItem>{newProjectMessage}</MenuItem>
-                                    </MenuItemTooltip>
-                                )}
+                                <MenuItem
+                                    isRtl={this.props.isRtl}
+                                    onClick={this.handleClickNew}
+                                >
+                                    {newProjectMessage}
+                                </MenuItem>
                                 <MenuSection>
                                     {this.props.canSave ? (
                                         <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
-                                    ) : (
+                                    ) : (this.props.showComingSoon ? (
                                         <MenuItemTooltip
                                             id="save"
                                             isRtl={this.props.isRtl}
                                         >
                                             <MenuItem>{saveNowMessage}</MenuItem>
                                         </MenuItemTooltip>
-                                    )}
-                                    {this.props.canSaveAsCopy ? (
+                                    ) : [])}
+                                    {this.props.canCreateCopy ? (
                                         <MenuItem onClick={this.handleClickSaveAsCopy}>
-                                            {saveAsCopyMessage}
+                                            {createCopyMessage}
                                         </MenuItem>
-                                    ) : (
+                                    ) : (this.props.showComingSoon ? (
                                         <MenuItemTooltip
                                             id="copy"
                                             isRtl={this.props.isRtl}
                                         >
-                                            <MenuItem>{saveAsCopyMessage}</MenuItem>
+                                            <MenuItem>{createCopyMessage}</MenuItem>
                                         </MenuItemTooltip>
-                                    )}
+                                    ) : [])}
+                                    {this.props.canRemix ? (
+                                        <MenuItem onClick={this.handleClickRemix}>
+                                            {remixMessage}
+                                        </MenuItem>
+                                    ) : []}
                                 </MenuSection>
                                 <MenuSection>
                                     <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
@@ -438,13 +452,15 @@ class MenuBar extends React.Component {
                     </div>
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? shareButton : (
-                            <MenuBarItemTooltip id="share-button">
-                                {shareButton}
-                            </MenuBarItemTooltip>
+                            this.props.showComingSoon ? (
+                                <MenuBarItemTooltip id="share-button">
+                                    {shareButton}
+                                </MenuBarItemTooltip>
+                            ) : []
                         )}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ?
+                        {this.props.enableCommunity ? (
                             <Button
                                 className={classNames(styles.communityButton)}
                                 iconClassName={styles.communityButtonIcon}
@@ -456,7 +472,8 @@ class MenuBar extends React.Component {
                                     description="Label for see community button"
                                     id="gui.menuBar.seeCommunity"
                                 />
-                            </Button> :
+                            </Button>
+                        ) : (this.props.showComingSoon ? (
                             <MenuBarItemTooltip id="community-button">
                                 <Button
                                     className={classNames(styles.communityButton)}
@@ -470,7 +487,7 @@ class MenuBar extends React.Component {
                                     />
                                 </Button>
                             </MenuBarItemTooltip>
-                        }
+                        ) : [])}
                     </div>
                 </div>
 
@@ -572,44 +589,48 @@ class MenuBar extends React.Component {
                                     </Button>
                                 </a>
                             </div>
-                            <MenuBarItemTooltip id="mystuff">
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.mystuffButton
-                                    )}
-                                >
-                                    <img
-                                        className={styles.mystuffIcon}
-                                        src={mystuffIcon}
-                                    />
-                                </div>
-                            </MenuBarItemTooltip>
-                            <MenuBarItemTooltip
-                                id="account-nav"
-                                place={this.props.isRtl ? 'right' : 'left'}
-                            >
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.accountNavMenu
-                                    )}
-                                >
-                                    <img
-                                        className={styles.profileIcon}
-                                        src={profileIcon}
-                                    />
-                                    <span>
-                                        {'scratch-cat'}
-                                    </span>
-                                    <img
-                                        className={styles.dropdownCaretIcon}
-                                        src={dropdownCaret}
-                                    />
-                                </div>
-                            </MenuBarItemTooltip>
+                            {this.props.showComingSoon ? (
+                                <React.Fragment>
+                                    <MenuBarItemTooltip id="mystuff">
+                                        <div
+                                            className={classNames(
+                                                styles.menuBarItem,
+                                                styles.hoverable,
+                                                styles.mystuffButton
+                                            )}
+                                        >
+                                            <img
+                                                className={styles.mystuffIcon}
+                                                src={mystuffIcon}
+                                            />
+                                        </div>
+                                    </MenuBarItemTooltip>
+                                    <MenuBarItemTooltip
+                                        id="account-nav"
+                                        place={this.props.isRtl ? 'right' : 'left'}
+                                    >
+                                        <div
+                                            className={classNames(
+                                                styles.menuBarItem,
+                                                styles.hoverable,
+                                                styles.accountNavMenu
+                                            )}
+                                        >
+                                            <img
+                                                className={styles.profileIcon}
+                                                src={profileIcon}
+                                            />
+                                            <span>
+                                                {'scratch-cat'}
+                                            </span>
+                                            <img
+                                                className={styles.dropdownCaretIcon}
+                                                src={dropdownCaret}
+                                            />
+                                        </div>
+                                    </MenuBarItemTooltip>
+                                </React.Fragment>
+                            ) : []}
                         </React.Fragment>
                     )}
                 </div>
@@ -620,10 +641,10 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
+    canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
-    canSaveAsCopy: PropTypes.bool,
     canShare: PropTypes.bool,
     className: PropTypes.string,
     editMenuOpen: PropTypes.bool,
@@ -641,7 +662,9 @@ MenuBar.propTypes = {
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickNew: PropTypes.func,
+    onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
+    onClickSaveAsCopy: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -656,7 +679,7 @@ MenuBar.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
-    startSaving: PropTypes.func,
+    showComingSoon: PropTypes.bool,
     username: PropTypes.string
 };
 
@@ -693,8 +716,10 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickNew: canSave => dispatch(requestNewProject(canSave)),
-    onClickSave: () => dispatch(saveProject()),
+    onClickNew: canCreateNew => dispatch(requestNewProject(canCreateNew)),
+    onClickRemix: () => dispatch(remixProject()),
+    onClickSave: () => dispatch(updateProject()),
+    onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

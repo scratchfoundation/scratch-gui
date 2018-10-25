@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
+import storage from '../lib/storage';
 import {getEventXY} from '../lib/touch-utils';
 import VM from 'scratch-vm';
 import getCostumeUrl from '../lib/get-costume-url';
@@ -44,9 +45,9 @@ class SpriteSelectorItem extends React.Component {
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;
-        if (!this.props.assetId) return null;
+        if (!this.props.asset) return null;
 
-        return getCostumeUrl(this.props.assetId, this.props.vm);
+        return getCostumeUrl(this.props.asset);
     }
     handleMouseUp () {
         this.initialOffset = null;
@@ -71,7 +72,7 @@ class SpriteSelectorItem extends React.Component {
         const dy = currentOffset.y - this.initialOffset.y;
         if (Math.sqrt((dx * dx) + (dy * dy)) > dragThreshold) {
             this.props.onDrag({
-                img: this.getCostumeUrl(),
+                img: this.getCostumeData(),
                 currentOffset: currentOffset,
                 dragging: true,
                 dragType: this.props.dragType,
@@ -147,7 +148,7 @@ class SpriteSelectorItem extends React.Component {
 }
 
 SpriteSelectorItem.propTypes = {
-    assetId: PropTypes.string,
+    asset: PropTypes.instanceOf(storage.Asset),
     costumeURL: PropTypes.string,
     dispatchSetHoveredSprite: PropTypes.func.isRequired,
     dragPayload: PropTypes.shape({

@@ -8,8 +8,9 @@ import AudioEngine from 'scratch-audio';
 
 import {
     LoadingStates,
+    getIsLoadingWithId,
     onLoadedProject,
-    getIsLoadingWithId
+    projectError
 } from '../reducers/project-state';
 
 /*
@@ -24,10 +25,6 @@ const vmManagerHOC = function (WrappedComponent) {
             bindAll(this, [
                 'loadProject'
             ]);
-            this.state = {
-                loadingError: false,
-                errorMessage: ''
-            };
         }
         componentDidMount () {
             if (this.props.vm.initialized) return;
@@ -42,28 +39,27 @@ const vmManagerHOC = function (WrappedComponent) {
             // and they weren't both that way until now... load project!
             if (this.props.isLoadingWithId && this.props.fontsLoaded &&
                 (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
-                this.loadProject(this.props.projectData, this.props.loadingState);
+                this.loadProject();
             }
         }
-        loadProject (projectData, loadingState) {
-            return this.props.vm.loadProject(projectData)
+        loadProject () {
+            return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
-                    this.props.onLoadedProject(loadingState);
+                    this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                 })
                 .catch(e => {
-                    // Need to catch this error and update component state so that
-                    // error page gets rendered if project failed to load
-                    this.setState({loadingError: true, errorMessage: e});
+                    this.props.onError(e);
                 });
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
+                loadingState,
+                onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
-                loadingState,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -71,9 +67,7 @@ const vmManagerHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    errorMessage={this.state.errorMessage}
                     isLoading={isLoadingWithIdProp}
-                    loadingError={this.state.loadingError}
                     vm={vm}
                     {...componentProps}
                 />
@@ -82,9 +76,11 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        canSave: PropTypes.bool,
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onError: PropTypes.func,
         onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -102,7 +98,9 @@ const vmManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onLoadedProject: loadingState => dispatch(onLoadedProject(loadingState))
+        onError: error => dispatch(projectError(error)),
+        onLoadedProject: (loadingState, canSave) =>
+            dispatch(onLoadedProject(loadingState, canSave))
     });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.

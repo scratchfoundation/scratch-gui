@@ -55,6 +55,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
+            this.props.vm.removeListener('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowAlert);
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);

@@ -30,6 +30,7 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
+import ConnectionModal from '../../containers/connection-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -65,9 +66,10 @@ const GUIComponent = props => {
         canCreateNew,
         canRemix,
         canSave,
-        canSaveAsCopy,
+        canCreateCopy,
         canShare,
         children,
+        connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
@@ -92,9 +94,10 @@ const GUIComponent = props => {
         onSeeCommunity,
         onShare,
         previewInfoVisible,
-        targetIsStage,
+        showComingSoon,
         soundsTabVisible,
         stageSizeMode,
+        targetIsStage,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -156,6 +159,11 @@ const GUIComponent = props => {
                 {alertsVisible ? (
                     <Alerts className={styles.alertsContainer} />
                 ) : null}
+                {connectionModalVisible ? (
+                    <ConnectionModal
+                        vm={vm}
+                    />
+                ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary
                         vm={vm}
@@ -170,14 +178,15 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canRemix={canRemix}
                     canSave={canSave}
-                    canSaveAsCopy={canSaveAsCopy}
                     canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -319,10 +328,10 @@ GUIComponent.propTypes = {
     }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
-    canSaveAsCopy: PropTypes.bool,
     canShare: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
@@ -351,6 +360,7 @@ GUIComponent.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
+    showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -363,12 +373,13 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
-    canCreateNew: true,
+    canCreateNew: false,
     canRemix: false,
     canSave: false,
-    canSaveAsCopy: false,
+    canCreateCopy: false,
     canShare: false,
     onUpdateProjectTitle: () => {},
+    showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

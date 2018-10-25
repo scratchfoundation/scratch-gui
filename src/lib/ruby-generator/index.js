@@ -198,14 +198,8 @@ export default function (Blockly) {
             }).join(',\n');
             attributes.costumes = `[\n${this.prefixLines(s, this.INDENT)}\n]`;
         }
-        const RenderedTarget = renderedTarget.constructor;
-        switch (renderedTarget.rotationStyle) {
-        case RenderedTarget.ROTATION_STYLE_LEFT_RIGHT:
-            attributes.rotation_style = ':left_right';
-            break;
-        case RenderedTarget.ROTATION_STYLE_NONE:
-            attributes.rotation_style = ':none';
-            break;
+        if (renderedTarget.rotationStyle !== 'all around') {
+            attributes.rotation_style = this.quote_(renderedTarget.rotationStyle);
         }
 
         const variables = [];

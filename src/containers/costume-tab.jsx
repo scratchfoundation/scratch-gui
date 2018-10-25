@@ -235,6 +235,7 @@ class CostumeTab extends React.Component {
         const {
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
+            isRtl,
             onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
@@ -300,6 +301,7 @@ class CostumeTab extends React.Component {
                     }
                 ]}
                 dragType={DragConstants.COSTUME}
+                isRtl={isRtl}
                 items={costumeData}
                 selectedItemIndex={this.state.selectedCostumeIndex}
                 onDeleteClick={target && target.costumes && target.costumes.length > 1 ?
@@ -330,6 +332,7 @@ CostumeTab.propTypes = {
     dispatchUpdateRestore: PropTypes.func,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    isRtl: PropTypes.bool,
     onActivateSoundsTab: PropTypes.func.isRequired,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
@@ -354,6 +357,7 @@ CostumeTab.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
+    isRtl: state.locales.isRtl,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     dragging: state.scratchGui.assetDrag.dragging,

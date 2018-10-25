@@ -126,7 +126,7 @@ export default {
             ]
         }
         ],
-        urlId: 'getting-started'
+        urlId: 'getStarted'
     },
 
     'say-it-out-loud': {
@@ -423,7 +423,7 @@ export default {
             ]
         }
         ],
-        urlId: 'animate-a-name'
+        urlId: 'name'
     },
     'Make-Music': {
         name: (
@@ -492,7 +492,7 @@ export default {
             ]
         }
         ],
-        urlId: 'make-music'
+        urlId: 'music'
     },
     'Make-A-Game': {
         name: (
@@ -833,7 +833,7 @@ export default {
                 'switch-costume'
             ]
         }],
-        urlId: 'hide-and-show'
+        urlId: 'hide'
     },
 
     'switch-costume': {

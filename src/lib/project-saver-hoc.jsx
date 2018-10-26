@@ -55,7 +55,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (this.props.isCreatingCopy && !prevProps.isCreatingCopy) {
                 this.storeProject(null, {
                     original_id: this.props.reduxProjectId,
-                    is_copy: 1
+                    is_copy: 1,
+                    title: this.props.reduxProjectTitle
                 })
                     .then(response => {
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
@@ -67,7 +68,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (this.props.isRemixing && !prevProps.isRemixing) {
                 this.storeProject(null, {
                     original_id: this.props.reduxProjectId,
-                    is_remix: 1
+                    is_remix: 1,
+                    title: this.props.reduxProjectTitle
                 })
                     .then(response => {
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
@@ -98,23 +100,27 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * storeProject:
          * @param  {number|string|undefined} projectId - defined value will PUT/update; undefined/null will POST/create
          * @return {Promise} - resolves with json object containing project's existing or new id
-         * @param {?object} urlParams - object of params to add to querystring
+         * @param {?object} requestParams - object of params to add to request body
          */
-        storeProject (projectId, urlParams) {
+        storeProject (projectId, requestParams) {
             return this.props.vm.saveProjectSb3()
                 .then(content => {
                     const assetType = storage.AssetType.Project;
                     const dataFormat = storage.DataFormat.SB3;
                     const body = new FormData();
                     body.append('sb3_file', content, 'sb3_file');
+                    if (requestParams) {
+                        for (const key in requestParams) {
+                            body.append(key, requestParams[key]);
+                        }
+                    }
                     // when id is undefined or null, storage.store as we have
                     // configured it will create a new project with id
                     return storage.store(
                         assetType,
                         dataFormat,
                         body,
-                        projectId,
-                        urlParams
+                        projectId
                     );
                 });
         }
@@ -134,6 +140,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onUpdatedProject: onUpdatedProjectProp,
                 onUpdateProject: onUpdateProjectProp,
                 reduxProjectId,
+                reduxProjectTitle,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -160,6 +167,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onUpdateProject: PropTypes.func,
         onUpdatedProject: PropTypes.func,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        reduxProjectTitle: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     const mapStateToProps = state => {
@@ -173,6 +181,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isUpdating: getIsUpdating(loadingState),
             loadingState: loadingState,
             reduxProjectId: state.scratchGui.projectState.projectId,
+            reduxProjectTitle: state.scratchGui.projectTitle,
             vm: state.scratchGui.vm
         };
     };

@@ -15,6 +15,7 @@ const AlertsComponent = ({
     >
         {alertsList.map((a, index) => (
             <Alert
+                extensionId={a.extensionId}
                 iconURL={a.iconURL}
                 index={index}
                 key={index}

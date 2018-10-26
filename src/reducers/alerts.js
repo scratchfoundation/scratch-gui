@@ -19,6 +19,7 @@ const reducer = function (state, action) {
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension && extension.name) {
                 // TODO: is this the right place to assemble this message?
+                newAlert.extensionId = extensionId;
                 newAlert.message = `${newAlert.message} ${extension.name}.`;
             }
             if (extension && extension.smallPeripheralImage) {

@@ -19,8 +19,8 @@ class Alert extends React.Component {
         this.props.onCloseAlert(this.props.index);
     }
     handleOnReconnect () {
-        this.props.onOpenConnectionModal('ev3')
-        console.log('handleOnReconnect');
+        this.props.onOpenConnectionModal(this.props.extensionId);
+        this.handleOnCloseAlert();
     }
     render () {
         const {
@@ -51,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Alert.propTypes = {
+    extensionId: PropTypes.string,
     iconURL: PropTypes.string,
     index: PropTypes.number,
     message: PropTypes.string,

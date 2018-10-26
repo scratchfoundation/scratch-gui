@@ -130,7 +130,10 @@ const GUIComponent = props => {
                 vm={vm}
             >
                 {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
+                    <Alerts
+                        className={styles.alertsContainer}
+                        vm={vm}
+                    />
                 ) : null}
             </StageWrapper>
         ) : (
@@ -158,7 +161,10 @@ const GUIComponent = props => {
                     <Cards />
                 ) : null}
                 {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
+                    <Alerts
+                        className={styles.alertsContainer}
+                        vm={vm}
+                    />
                 ) : null}
                 {connectionModalVisible ? (
                     <ConnectionModal

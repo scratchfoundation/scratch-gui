@@ -81,7 +81,7 @@ class RecordModal extends React.Component {
                 };
 
                 // Create an asset from the encoded .wav and get resulting md5
-                const storage = this.props.vm.storage;
+                const storage = this.props.vm.runtime.storage;
                 vmSound.asset = storage.createAsset(
                     storage.AssetType.Sound,
                     storage.DataFormat.WAV,

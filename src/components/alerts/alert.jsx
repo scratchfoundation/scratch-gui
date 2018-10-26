@@ -31,8 +31,8 @@ const AlertComponent = ({
         >
             <FormattedMessage
                 defaultMessage="Reconnect"
-                description="Button to disconnect the device"
-                id="gui.connection.disconnect"
+                description="Button to reconnect the device"
+                id="gui.connection.reconnect"
             />
         </button>
         <Box

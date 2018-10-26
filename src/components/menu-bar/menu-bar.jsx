@@ -272,7 +272,7 @@ class MenuBar extends React.Component {
             <Button
                 className={classNames(
                     styles.menuBarButton,
-                    styles.remixButto
+                    styles.remixButton
                 )}
                 iconClassName={styles.remixButtonIcon}
                 iconSrc={remixIcon}

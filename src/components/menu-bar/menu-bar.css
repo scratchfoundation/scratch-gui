@@ -125,18 +125,31 @@
     height: 34px;
 }
 
+.menu-bar-button {
+    height: 2rem;
+}
+
 .share-button {
     background: $data-primary;
-    height: 32px;
-    box-shadow: 0 0 0 1px $ui-black-transparent;
+}
+
+.share-button-is-shared {
+    background: $ui-black-transparent;
 }
 
 .community-button {
-    height: 32px;
     box-shadow: 0 0 0 1px $ui-black-transparent;
 }
 
 .community-button-icon {
+    height: 1.25rem;
+}
+
+.remix-button {
+    background-color: $pen-primary
+}
+
+.remix-button-icon {
     height: 1.25rem;
 }
 

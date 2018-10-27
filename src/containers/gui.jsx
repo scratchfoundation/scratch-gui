@@ -71,6 +71,7 @@ class GUI extends React.Component {
         const {
             /* eslint-disable no-unused-vars */
             assetHost,
+            cloudHost,
             error,
             hideIntro,
             isError,
@@ -101,6 +102,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
+    cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,

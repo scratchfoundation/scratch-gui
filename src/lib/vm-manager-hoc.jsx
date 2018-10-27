@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
+import CloudProvider from '../lib/cloud-provider';
 
 import {
     LoadingStates,
@@ -46,6 +47,18 @@ const vmManagerHOC = function (WrappedComponent) {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
+                    // If the cloud host exists, open a cloud connection and
+                    // set the vm's cloud provider.
+                    if (this.props.cloudHost) {
+                        // TODO check if we should actually
+                        // connect to cloud data based on info from the loaded project and
+                        // info about the user (e.g. scratcher status)
+                        this.props.vm.setCloudProvider(new CloudProvider(
+                            this.props.cloudHost,
+                            this.props.vm,
+                            this.props.username,
+                            this.props.projectId));
+                    }
                 })
                 .catch(e => {
                     this.props.onError(e);
@@ -54,12 +67,14 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                cloudHost,
                 fontsLoaded,
                 loadingState,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
+                userName,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -77,6 +92,7 @@ const vmManagerHOC = function (WrappedComponent) {
 
     VMManager.propTypes = {
         canSave: PropTypes.bool,
+        cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
@@ -84,6 +100,7 @@ const vmManagerHOC = function (WrappedComponent) {
         onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        userName: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
 

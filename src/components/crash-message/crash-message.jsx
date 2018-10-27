@@ -22,9 +22,9 @@ const CrashMessage = props => (
             </h2>
             <p>
                 <FormattedMessage
-                    defaultMessage="We are so sorry, but it looks like Scratch has crashed. This bug has been
-                        automatically reported to the Scratch Team. Please refresh your page to try
-                        again."
+                    defaultMessage={"We are so sorry, but it looks like Scratch has crashed. This bug has been" +
+                        "automatically reported to the Scratch Team. Please refresh your page to try" +
+                        "again."}
                     description="Message to inform the user that page has crashed."
                     id="gui.crashMessage.description"
                 />

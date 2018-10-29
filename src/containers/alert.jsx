@@ -24,14 +24,18 @@ class Alert extends React.Component {
     }
     render () {
         const {
+            content,
             index, // eslint-disable-line no-unused-vars
+            level,
             iconURL,
             message,
             showReconnect
         } = this.props;
         return (
             <AlertComponent
+                content={content}
                 iconURL={iconURL}
+                level={level}
                 message={message}
                 showReconnect={showReconnect}
                 onCloseAlert={this.handleOnCloseAlert}
@@ -53,9 +57,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Alert.propTypes = {
+    content: PropTypes.element,
     extensionId: PropTypes.string,
     iconURL: PropTypes.string,
     index: PropTypes.number,
+    level: PropTypes.string.isRequired,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onOpenConnectionModal: PropTypes.func,

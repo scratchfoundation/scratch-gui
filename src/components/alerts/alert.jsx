@@ -1,21 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import CloseButton from '../close-button/close-button.jsx';
+import {AlertLevels} from '../../lib/alerts/index.jsx';
 
 import styles from './alert.css';
 
+const closeButtonColors = {
+    [AlertLevels.SUCCESS]: CloseButton.COLOR_GREEN,
+    [AlertLevels.WARN]: CloseButton.COLOR_ORANGE
+};
+
 const AlertComponent = ({
+    content,
     iconURL,
+    level,
     message,
     onCloseAlert,
     onReconnect,
     showReconnect
 }) => (
     <Box
-        className={styles.alert}
+        className={classNames(styles.alert, styles[level])}
     >
         <div className={styles.alertMessage}>
             {iconURL ? (
@@ -25,6 +34,7 @@ const AlertComponent = ({
                 />
             ) : null}
             {message}
+            {content}
         </div>
         {showReconnect ? (
             <button
@@ -42,8 +52,8 @@ const AlertComponent = ({
             className={styles.alertCloseButtonContainer}
         >
             <CloseButton
-                className={styles.alertCloseButton}
-                color={CloseButton.COLOR_ORANGE}
+                className={classNames(styles.alertCloseButton)}
+                color={closeButtonColors[level]}
                 size={CloseButton.SIZE_LARGE}
                 onClick={onCloseAlert}
             />
@@ -52,11 +62,17 @@ const AlertComponent = ({
 );
 
 AlertComponent.propTypes = {
+    content: PropTypes.element,
     iconURL: PropTypes.string,
+    level: PropTypes.string,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onReconnect: PropTypes.func,
     showReconnect: PropTypes.bool.isRequired
+};
+
+AlertComponent.defaultProps = {
+    level: AlertLevels.WARN
 };
 
 export default AlertComponent;

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
 import storage from '../lib/storage';
+import {showStandardAlert} from '../reducers/alerts';
 import {
     LoadingStates,
     createProject,
@@ -32,9 +33,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
         componentDidUpdate (prevProps) {
             if (this.props.isUpdating && !prevProps.isUpdating) {
+                this.props.onShowSavingAlert();
                 this.storeProject(this.props.reduxProjectId)
                     .then(() => {
                         // there is nothing we expect to find in response that we need to check here
+                        this.props.onShowSaveSuccessAlert();
                         this.props.onUpdatedProject(this.props.loadingState);
                     })
                     .catch(err => {
@@ -44,8 +47,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
             // TODO: distinguish between creating new, remixing, and saving as a copy
             if (this.props.isCreatingNew && !prevProps.isCreatingNew) {
-                this.storeProject(null)
+                this.props.onShowCreatingAlert();
+                this.storeProject()
                     .then(response => {
+                        this.props.onShowCreateSuccessAlert();
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                     })
                     .catch(err => {
@@ -137,6 +142,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreatedProject: onCreatedProjectProp,
                 onCreateProject: onCreateProjectProp,
                 onProjectError: onProjectErrorProp,
+                onShowCreateSuccessAlert,
+                onShowCreatingAlert,
+                onShowSaveSuccessAlert,
+                onShowSavingAlert,
                 onUpdatedProject: onUpdatedProjectProp,
                 onUpdateProject: onUpdateProjectProp,
                 reduxProjectId,
@@ -164,6 +173,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onShowCreateSuccessAlert: PropTypes.func,
+        onShowCreatingAlert: PropTypes.func,
+        onShowSaveSuccessAlert: PropTypes.func,
+        onShowSavingAlert: PropTypes.func,
         onUpdateProject: PropTypes.func,
         onUpdatedProject: PropTypes.func,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -189,6 +202,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreatedProject: (projectId, loadingState) => dispatch(doneCreatingProject(projectId, loadingState)),
         onCreateProject: () => dispatch(createProject()),
         onProjectError: error => dispatch(projectError(error)),
+        onShowCreateSuccessAlert: () => dispatch(showStandardAlert('createSuccess')),
+        onShowCreatingAlert: () => dispatch(showStandardAlert('creating')),
+        onShowSaveSuccessAlert: () => dispatch(showStandardAlert('saveSuccess')),
+        onShowSavingAlert: () => dispatch(showStandardAlert('saving')),
         onUpdateProject: () => dispatch(updateProject()),
         onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState))
     });

@@ -379,7 +379,7 @@ class MenuBar extends React.Component {
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
                                             <FormattedMessage
-                                                defaultMessage="Download Ruby code to your compute"
+                                                defaultMessage="Save Ruby code to your computer"
                                                 description="Menu bar item for downloading Ruby code to your computer"
                                                 id="gui.smalruby3.menuBar.downloadRubyCodeToComputer"
                                             />

@@ -74,7 +74,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
                 projectId,
-                userName,
+                username,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -100,7 +100,7 @@ const vmManagerHOC = function (WrappedComponent) {
         onLoadedProject: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        userName: PropTypes.string,
+        username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
 

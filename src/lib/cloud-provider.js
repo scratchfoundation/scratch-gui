@@ -99,6 +99,26 @@ class CloudProvider {
         this.writeToServer('set', name, value);
     }
 
+    /**
+     * Closes the connection to the web socket and clears the cloud
+     * provider of references related to the cloud data project.
+     */
+    requestCloseConnection () {
+        this.connection.close();
+        this.clear();
+    }
+
+    /**
+     * Clear this provider of references related to the project
+     * and current state.
+     */
+    clear () {
+        this.connection = null;
+        this.vm = null;
+        this.username = null;
+        this.projectId = null;
+    }
+
 }
 
 export default CloudProvider;

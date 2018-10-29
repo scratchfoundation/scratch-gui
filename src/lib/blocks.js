@@ -220,5 +220,9 @@ export default function (vm) {
         return ScratchBlocks.StatusButtonState.NOT_READY;
     };
 
+    ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
+        vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
+    };
+
     return ScratchBlocks;
 }

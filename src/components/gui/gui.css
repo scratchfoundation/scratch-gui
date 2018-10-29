@@ -279,6 +279,21 @@ $fade-out-distance: 15px;
     margin-top: 0;
 }
 
+/* Sprite Selection Watermark */
+.watermark {
+    position: absolute;
+    top: 1.25rem;
+    pointer-events: none;
+}
+
+[dir="ltr"] .watermark {
+    right: 1.25rem;
+}
+
+[dir="rtl"] .watermark {
+    left: 1.25rem;
+}
+
 /* Menu */
 
 .menu-bar-position {

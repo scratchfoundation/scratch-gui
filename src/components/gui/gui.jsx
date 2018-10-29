@@ -20,6 +20,7 @@ import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
@@ -29,6 +30,7 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
+import ConnectionModal from '../../containers/connection-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -61,7 +63,13 @@ const GUIComponent = props => {
         backpackOptions,
         blocksTabVisible,
         cardsVisible,
+        canCreateNew,
+        canRemix,
+        canSave,
+        canCreateCopy,
+        canShare,
         children,
+        connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
@@ -86,9 +94,10 @@ const GUIComponent = props => {
         onSeeCommunity,
         onShare,
         previewInfoVisible,
-        targetIsStage,
+        showComingSoon,
         soundsTabVisible,
         stageSizeMode,
+        targetIsStage,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -150,6 +159,11 @@ const GUIComponent = props => {
                 {alertsVisible ? (
                     <Alerts className={styles.alertsContainer} />
                 ) : null}
+                {connectionModalVisible ? (
+                    <ConnectionModal
+                        vm={vm}
+                    />
+                ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary
                         vm={vm}
@@ -164,9 +178,15 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    canCreateCopy={canCreateCopy}
+                    canCreateNew={canCreateNew}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -261,6 +281,9 @@ const GUIComponent = props => {
                                             />
                                         </button>
                                     </Box>
+                                    <Box className={styles.watermark}>
+                                        <Watermark />
+                                    </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
@@ -305,6 +328,11 @@ GUIComponent.propTypes = {
     }),
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateCopy: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canShare: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -332,6 +360,7 @@ GUIComponent.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
+    showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -344,6 +373,13 @@ GUIComponent.defaultProps = {
         visible: false
     },
     basePath: './',
+    canCreateNew: false,
+    canRemix: false,
+    canSave: false,
+    canCreateCopy: false,
+    canShare: false,
+    onUpdateProjectTitle: () => {},
+    showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

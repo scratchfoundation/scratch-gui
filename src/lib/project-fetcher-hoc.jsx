@@ -7,8 +7,9 @@ import {connect} from 'react-redux';
 import {
     LoadingStates,
     defaultProjectId,
-    onFetchedProjectData,
     getIsFetchingWithId,
+    onFetchedProjectData,
+    projectError,
     setProjectId
 } from '../reducers/project-state';
 
@@ -40,7 +41,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 props.projectId !== null &&
                 typeof props.projectId !== 'undefined'
             ) {
-                this.props.setProjectId(props.projectId);
+                this.props.setProjectId(props.projectId.toString());
             }
         }
         componentDidUpdate (prevProps) {
@@ -74,6 +75,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     }
                 })
                 .catch(err => {
+                    this.props.onError(err);
                     log.error(err);
                 });
         }
@@ -81,11 +83,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
-                onFetchedProjectData: onFetchedProjectDataProp,
                 intl,
+                loadingState,
+                onError: onErrorProp,
+                onFetchedProjectData: onFetchedProjectDataProp,
                 projectHost,
                 projectId,
-                loadingState,
                 reduxProjectId,
                 setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
@@ -102,9 +105,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     }
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
+        canSave: PropTypes.bool,
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -122,10 +127,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
+        onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
         {}, stateProps, dispatchProps, ownProps
     );

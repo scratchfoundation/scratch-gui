@@ -9,7 +9,7 @@ import {
     closeSpriteLibrary
 } from '../reducers/modals';
 
-import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
+import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
@@ -23,6 +23,7 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleActivateBlocksTab',
             'handleBlockDragEnd',
             'handleChangeSpriteRotationStyle',
             'handleChangeSpriteDirection',
@@ -72,7 +73,9 @@ class TargetPane extends React.Component {
         this.props.vm.postSpriteInfo({y});
     }
     handleDeleteSprite (id) {
-        const restoreFun = this.props.vm.deleteSprite(id);
+        const restoreSprite = this.props.vm.deleteSprite(id);
+        const restoreFun = () => restoreSprite().then(this.handleActivateBlocksTab);
+
         this.props.dispatchUpdateRestore({
             restoreFun: restoreFun,
             deletedItem: 'Sprite'
@@ -109,7 +112,8 @@ class TargetPane extends React.Component {
     }
     handleSurpriseSpriteClick () {
         const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
-        this.props.vm.addSprite(JSON.stringify(item.json));
+        this.props.vm.addSprite(JSON.stringify(item.json))
+            .then(this.handleActivateBlocksTab);
     }
     handlePaintSpriteClick () {
         const formatMessage = this.props.intl.formatMessage;
@@ -124,8 +128,12 @@ class TargetPane extends React.Component {
             });
         });
     }
+    handleActivateBlocksTab () {
+        this.props.onActivateTab(BLOCKS_TAB_INDEX);
+    }
     handleNewSprite (spriteJSONString) {
-        this.props.vm.addSprite(spriteJSONString);
+        this.props.vm.addSprite(spriteJSONString)
+            .then(this.handleActivateBlocksTab);
     }
     handleFileUploadClick () {
         this.fileInput.click();

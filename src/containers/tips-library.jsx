@@ -4,6 +4,7 @@ import React from 'react';
 import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
+import tutorialTags from '../lib/libraries/tutorial-tags';
 
 import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
@@ -34,6 +35,19 @@ class TipsLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
+        /*
+            Support tutorials that require specific starter projects.
+            If a tutorial declares "requiredProjectId", check that the URL contains
+            it. If it is not, open a new page with this tutorial and project id.
+
+            TODO remove this at first opportunity. If this is still here after HOC2018,
+                 blame Eric R. Andrew is also on record saying "this is temporary".
+        */
+        if (item.requiredProjectId && window.location.href.indexOf(item.requiredProjectId) === -1) {
+            const urlParams = `?tutorial=${item.urlId}#${item.requiredProjectId}`;
+            return window.open(window.location.pathname + urlParams, '_blank');
+        }
+
         this.props.onActivateDeck(item.id);
         analytics.event({
             category: 'library',
@@ -46,15 +60,19 @@ class TipsLibrary extends React.PureComponent {
             rawURL: decksLibraryContent[id].img,
             id: id,
             name: decksLibraryContent[id].name,
-            featured: true
+            featured: true,
+            tags: decksLibraryContent[id].tags,
+            urlId: decksLibraryContent[id].urlId,
+            requiredProjectId: decksLibraryContent[id].requiredProjectId
         }));
 
         if (!this.props.visible) return null;
         return (
             <LibraryComponent
+                filterable
                 data={decksLibraryThumbnailData}
-                filterable={false}
                 id="tipsLibrary"
+                tags={tutorialTags}
                 title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}

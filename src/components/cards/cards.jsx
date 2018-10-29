@@ -9,7 +9,9 @@ import rightArrow from './icon--next.svg';
 import leftArrow from './icon--prev.svg';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
-import closeIcon from '../close-button/icon--close.svg';
+import closeIcon from './icon--close.svg';
+
+import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 
 const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
     <div className={styles.headerButtons}>
@@ -64,11 +66,17 @@ const VideoStep = ({video, dragging}) => (
         ) : null}
         <iframe
             allowFullScreen
-            allow="autoplay; encrypted-media"
+            allowTransparency="true"
             frameBorder="0"
-            height="337"
-            src={`${video}?rel=0&amp;showinfo=0`}
+            height="338"
+            scrolling="no"
+            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            title="📹"
             width="600"
+        />
+        <script
+            async
+            src="https://fast.wistia.net/assets/external/E-v1.js"
         />
     </div>
 );
@@ -207,6 +215,7 @@ const Cards = props => {
         content,
         dragging,
         isRtl,
+        locale,
         onActivateDeckFactory,
         onCloseCards,
         onDrag,
@@ -258,7 +267,7 @@ const Cards = props => {
                             steps[step].video ? (
                                 <VideoStep
                                     dragging={dragging}
-                                    video={steps[step].video}
+                                    video={translateVideo(steps[step].video, locale)}
                                 />
                             ) : (
                                 <ImageStep
@@ -294,7 +303,8 @@ Cards.propTypes = {
         })
     }),
     dragging: PropTypes.bool.isRequired,
-    isRtl: PropTypes.bool,
+    isRtl: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
     onActivateDeckFactory: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onDrag: PropTypes.func,

@@ -28,6 +28,7 @@ const ConnectionModalComponent = props => (
         contentLabel={props.name}
         headerClassName={styles.header}
         headerImage={props.smallPeripheralImage}
+        id="connectionModal"
         onHelp={props.onHelp}
         onRequestClose={props.onCancel}
     >

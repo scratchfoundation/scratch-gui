@@ -36,15 +36,11 @@ const getDeckIdFromUrlId = urlId => {
  */
 const detectTutorialId = () => {
     const queryParams = queryString.parse(location.search);
-    const tutorialID = Number(
-        Array.isArray(queryParams.tutorial) ?
-            queryParams.tutorial[0] :
-            queryParams.tutorial
-    );
-    if (!isNaN(tutorialID)) {
-        return getDeckIdFromUrlId(tutorialID);
-    }
-    return null;
+    const tutorialID = Array.isArray(queryParams.tutorial) ?
+        queryParams.tutorial[0] :
+        queryParams.tutorial;
+    if (typeof tutorialID === 'undefined') return null;
+    return getDeckIdFromUrlId(tutorialID);
 };
 
 export {

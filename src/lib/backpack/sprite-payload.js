@@ -1,5 +1,4 @@
 import jpegThumbnail from './jpeg-thumbnail';
-import storage from '../storage';
 
 const spritePayload = (sprite, vm) => vm.exportSprite(
     sprite.id,
@@ -14,7 +13,7 @@ const spritePayload = (sprite, vm) => vm.exportSprite(
         thumbnail: ''
     };
 
-    const costumeDataUrl = storage.get(sprite.costume.assetId).encodeDataURI();
+    const costumeDataUrl = sprite.costume.asset.encodeDataURI();
     return jpegThumbnail(costumeDataUrl).then(thumbnail => {
         payload.thumbnail = thumbnail.replace('data:image/jpeg;base64,', '');
         return payload;

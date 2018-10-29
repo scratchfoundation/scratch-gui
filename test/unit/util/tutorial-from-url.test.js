@@ -3,7 +3,9 @@ jest.mock('../../../src/lib/analytics.js', () => ({
 }));
 
 jest.mock('../../../src/lib/libraries/decks/index.jsx', () => ({
-    foo: {urlId: 1}
+    noUrlId: {},
+    foo: {urlId: 'one'},
+    noUrlIdSandwich: {}
 }));
 
 import {detectTutorialId} from '../../../src/lib/tutorial-from-url.js';
@@ -15,7 +17,7 @@ Object.defineProperty(
 );
 
 test('returns the tutorial ID if the urlId matches', () => {
-    window.location.search = '?tutorial=1';
+    window.location.search = '?tutorial=one';
     expect(detectTutorialId()).toBe('foo');
 });
 
@@ -29,12 +31,17 @@ test('returns null if empty template', () => {
     expect(detectTutorialId()).toBe(null);
 });
 
+test('returns null if no query param', () => {
+    window.location.search = '';
+    expect(detectTutorialId()).toBe(null);
+});
+
 test('returns null if non-numeric template', () => {
     window.location.search = '?tutorial=asdf';
     expect(detectTutorialId()).toBe(null);
 });
 
 test('takes the first of multiple', () => {
-    window.location.search = '?tutorial=1&tutorial=2';
+    window.location.search = '?tutorial=one&tutorial=two';
     expect(detectTutorialId()).toBe('foo');
 });

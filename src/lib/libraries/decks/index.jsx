@@ -248,6 +248,7 @@ export default {
                 id="gui.howtos.cartoon-network"
             />
         ),
+        requiredProjectId: '249143200',
         img: libraryCartoonNetwork,
         steps: [{
             video: 'uz5oz5h9yg'

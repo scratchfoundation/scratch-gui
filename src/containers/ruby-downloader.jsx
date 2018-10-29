@@ -12,8 +12,10 @@ class RubyDownloader extends React.Component {
         ]);
     }
     saveRuby () {
-        const projectRuby = `require "smalruby3"\n\n${this.props.rubyCode}`;
-        return new Blob([projectRuby], {type: 'text/plain'});
+        const code = `require "smalruby3"\n\n${this.props.rubyCode}`;
+        return new Blob([code], {
+            type: "text/x-ruby-script"
+        });
     }
     downloadProject () {
         const downloadLink = document.createElement('a');

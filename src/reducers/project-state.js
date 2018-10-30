@@ -172,6 +172,10 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_PROJECT_ID:
+        // if the projectId hasn't actually changed do nothing
+        if (state.projectId === action.projectId) {
+            return state;
+        }
         // if setting the default project id, specifically fetch that project
         if (action.projectId === defaultProjectId) {
             return Object.assign({}, state, {

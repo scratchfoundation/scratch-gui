@@ -128,6 +128,7 @@ class Stage extends React.Component {
             const visible = target.visible;
             const x = target.x;
             const y = target.y;
+            const direction = target.direction - 90;
             // console.log(target.getLayerOrder());
             const layerOrder = target.getLayerOrder();
             spritesList.push({
@@ -137,7 +138,8 @@ class Stage extends React.Component {
                 visible: visible,
                 layerOrder: layerOrder,
                 x: x,
-                y: y
+                y: y,
+                direction: direction
             });
         }
         // console.log('set sprite state', spritesList);

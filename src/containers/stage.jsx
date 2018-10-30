@@ -103,47 +103,44 @@ class Stage extends React.Component {
         this.props.vm.runtime.removeListener('QUESTION', this.questionListener);
     }
     step () {
-        // console.log('raf');
-        // console.log(this.state.costume1URL);
-        // console.log('all targets:');
-        // console.log(this.props.vm.runtime.targets);
-        // Get stage asset id
         /* eslint-disable max-len */
-        const id = this.props.vm.runtime.targets[0].getCostumes()[this.props.vm.runtime.targets[0].currentCostume].assetId;
-        // Get stage URL from asset id
-        this.setState({stageURL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
+        const stage = this.props.vm.runtime.targets[0];
+        if (stage) {
+            const stageAsset = stage.getCostumes()[stage.currentCostume].asset;
+            if (stageAsset) {
+                // Get stage URL from asset
+                this.setState({stageURL: stageAsset.encodeDataURI()});
 
-        // Get sprite 1 asset id
-        // id = this.props.vm.runtime.targets[1].getCostumes()[0].assetId;
-        // Get sprite 1 costume 1 URL from asset id
-        // this.setState({costume1URL: this.props.vm.runtime.storage.get(id).encodeDataURI()});
-        // console.log(this.props.vm.runtime.targets[1]);
-        const spritesList = [];
-        for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
-            const target = this.props.vm.runtime.targets[i];
-            const costumeID = target.getCostumes()[target.currentCostume].assetId;
-            const url = this.props.vm.runtime.storage.get(costumeID).encodeDataURI();
-            const width = target.getCostumes()[target.currentCostume].size[0];
-            const height = target.getCostumes()[target.currentCostume].size[1];
-            const visible = target.visible;
-            const x = target.x;
-            const y = target.y;
-            const direction = target.direction - 90;
-            // console.log(target.getLayerOrder());
-            const layerOrder = target.getLayerOrder();
-            spritesList.push({
-                url: url,
-                width: width,
-                height: height,
-                visible: visible,
-                layerOrder: layerOrder,
-                x: x,
-                y: y,
-                direction: direction
-            });
+                // Get sprite URLs from sprite assets
+                // Get sprite metadata from sprites
+                const spritesList = [];
+                for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
+                    const target = this.props.vm.runtime.targets[i];
+                    const costume = target.getCostumes()[target.currentCostume].asset;
+                    const url = costume.encodeDataURI();
+                    const width = target.getCostumes()[target.currentCostume].size[0];
+                    const height = target.getCostumes()[target.currentCostume].size[1];
+                    const visible = target.visible;
+                    const x = target.x;
+                    const y = target.y;
+                    const direction = target.direction - 90;
+                    // console.log(target.getLayerOrder());
+                    const layerOrder = target.getLayerOrder();
+                    spritesList.push({
+                        url: url,
+                        width: width,
+                        height: height,
+                        visible: visible,
+                        layerOrder: layerOrder,
+                        x: x,
+                        y: y,
+                        direction: direction
+                    });
+                }
+                // console.log('set sprite state', spritesList);
+                this.setState({sprites: spritesList});
+            }
         }
-        // console.log('set sprite state', spritesList);
-        this.setState({sprites: spritesList});
         requestAnimationFrame(this.step.bind(this));
     }
     questionListener (question) {

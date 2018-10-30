@@ -55,7 +55,7 @@ const StageComponent = props => {
                     <a-image
                         src="#sprite${index}"
                         height="${sprite.height / 100}"
-                        material="alphaTest: 0.1; transparent: false; flatShading: true;"
+                        material="alphaTest: 0.1;"
                         position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * sprite.layerOrder}"
                         rotation="0 0 ${sprite.direction * -1}"
                         width="${sprite.width / 100}"

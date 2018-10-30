@@ -188,8 +188,7 @@ export default function (Blockly) {
                 const h = {
                     asset_id: this.quote_(i.assetId),
                     name: this.quote_(i.name),
-                    bitmap_resolution: i.bitmapResolution,
-                    md5: this.quote_(i.md5),
+                    bitmap_resolution: i.bitmapResolution ? i.bitmapResolution : 1,
                     data_format: this.quote_(i.dataFormat),
                     rotation_center_x: i.rotationCenterX,
                     rotation_center_y: i.rotationCenterY

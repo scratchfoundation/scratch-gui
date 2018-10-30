@@ -180,7 +180,7 @@ describe('RubyGenerator', () => {
                         {
                             assetId: '01ae57fd339529445cb890978ef8a054',
                             name: 'Costume1',
-                            bitmapResolution: 1,
+                            bitmapResolution: 2,
                             md5: '01ae57fd339529445cb890978ef8a054.svg',
                             dataFormat: 'svg',
                             rotationCenterX: 47,
@@ -189,9 +189,7 @@ describe('RubyGenerator', () => {
                         {
                             assetId: '3b6274510488d5b26447c1c266475801',
                             name: 'Costume2',
-                            bitmapResolution: 1,
-                            md5: '3b6274510488d5b26447c1c266475801.svg',
-                            dataFormat: 'svg',
+                            dataFormat: 'png',
                             rotationCenterX: 65,
                             rotationCenterY: 61
                         }
@@ -251,8 +249,7 @@ describe('RubyGenerator', () => {
              {
                asset_id: "01ae57fd339529445cb890978ef8a054",
                name: "Costume1",
-               bitmap_resolution: 1,
-               md5: "01ae57fd339529445cb890978ef8a054.svg",
+               bitmap_resolution: 2,
                data_format: "svg",
                rotation_center_x: 47,
                rotation_center_y: 55
@@ -261,8 +258,7 @@ describe('RubyGenerator', () => {
                asset_id: "3b6274510488d5b26447c1c266475801",
                name: "Costume2",
                bitmap_resolution: 1,
-               md5: "3b6274510488d5b26447c1c266475801.svg",
-               data_format: "svg",
+               data_format: "png",
                rotation_center_x: 65,
                rotation_center_y: 61
              }
@@ -328,8 +324,7 @@ describe('RubyGenerator', () => {
             {
               asset_id: "01ae57fd339529445cb890978ef8a054",
               name: "Costume1",
-              bitmap_resolution: 1,
-              md5: "01ae57fd339529445cb890978ef8a054.svg",
+              bitmap_resolution: 2,
               data_format: "svg",
               rotation_center_x: 47,
               rotation_center_y: 55
@@ -338,8 +333,7 @@ describe('RubyGenerator', () => {
               asset_id: "3b6274510488d5b26447c1c266475801",
               name: "Costume2",
               bitmap_resolution: 1,
-              md5: "3b6274510488d5b26447c1c266475801.svg",
-              data_format: "svg",
+              data_format: "png",
               rotation_center_x: 65,
               rotation_center_y: 61
             }

@@ -109,10 +109,12 @@ class Stage extends React.Component {
             const stageAsset = stage.getCostumes()[stage.currentCostume].asset;
             if (stageAsset) {
                 // Get stage URL from asset
+                // TODO: stage graphic effects?
                 this.setState({stageURL: stageAsset.encodeDataURI()});
 
                 // Get sprite URLs from sprite assets
                 // Get sprite metadata from sprites
+                // TODO: sprite graphic effects
                 const spritesList = [];
                 for (let i = 1; i < this.props.vm.runtime.targets.length; i++) {
                     const target = this.props.vm.runtime.targets[i];

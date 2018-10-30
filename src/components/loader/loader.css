@@ -154,6 +154,12 @@
   }
 }
 
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.75rem 0;
+}
+
 .message-container-outer {
     height: 30px;
     overflow: hidden;

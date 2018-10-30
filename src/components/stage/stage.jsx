@@ -35,65 +35,62 @@ const StageComponent = props => {
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
 
     // *************************************************************************
-    const timeoutID = setTimeout(() => {
-        // console.log('testing');
-        // console.log(window.frames['output']);
-        // console.log('stageURL passed to createARFrame:');
-        // console.log(stageURL);
-        // console.log('spritesList passed to createARFrame:');
-        // console.log(sprites);
-        clearTimeout(timeoutID);
-        let spritesString = '';
-        let assetString = '';
-        if (sprites) {
-            sprites.forEach((sprite, index) => {
-                if (sprite.visible) {
-                    assetString = `
-                        ${assetString}
-                        <img id="sprite${index}" src="${sprite.url}">
-                    `;
-                    spritesString = `
-                        ${spritesString}
-                        <a-image
-                            src="#sprite${index}"
-                            height="${sprite.height / 100}"
-                            material="alphaTest: 0.1; transparent: false; flatShading: true; npot: true;"
-                            position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * sprite.layerOrder}"
-                            width="${sprite.width / 100}"
-                        >
-                        </a-image>
-                    `;
-                }
-            });
+    // console.log('testing');
+    // console.log(window.frames['output']);
+    // console.log('stageURL passed to createARFrame:');
+    // console.log(stageURL);
+    // console.log('spritesList passed to createARFrame:');
+    // console.log(sprites);
+    let spritesString = '';
+    let assetString = '';
+    if (sprites) {
+        sprites.forEach((sprite, index) => {
+            if (sprite.visible) {
+                assetString = `
+                    ${assetString}
+                    <img id="sprite${index}" src="${sprite.url}">
+                `;
+                spritesString = `
+                    ${spritesString}
+                    <a-image
+                        src="#sprite${index}"
+                        height="${sprite.height / 100}"
+                        material="alphaTest: 0.1; transparent: false; flatShading: true;"
+                        position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * sprite.layerOrder}"
+                        width="${sprite.width / 100}"
+                    >
+                    </a-image>
+                `;
+            }
+        });
 
-            assetString = `
-                ${assetString}
-                <img id="stage" src="${stageURL}">
-            `;
+        assetString = `
+            ${assetString}
+            <img id="stage" src="${stageURL}">
+        `;
 
-            const markerString = `
-                <a-image
-                    src="#stage"
-                    height="3.6"
-                    position="0 1.8 -2"
-                    width="4.8"
-                    material="alphaTest: 0.1; transparent: false; flatShading: true; npot: true;"
-                >
-                </a-image>
-                <a-plane
-                    color="#7BC8A4"
-                    height="4"
-                    position="0 0 0"
-                    rotation="-90 0 0"
-                    width="4.8"
-                >
-                </a-plane>
-            `;
-            const entitiesString = markerString + spritesString;
-            window.frames.output.contentWindow.document.getElementById('assets').innerHTML = assetString;
-            window.frames.output.contentWindow.document.getElementById('marker').innerHTML = entitiesString;
-        }
-    }, 10000);
+        const markerString = `
+            <a-image
+                src="#stage"
+                height="3.6"
+                position="0 1.8 -2"
+                width="4.8"
+                material="alphaTest: 0.1; transparent: false; flatShading: true;"
+            >
+            </a-image>
+            <a-plane
+                color="#7BC8A4"
+                height="4"
+                position="0 0 0"
+                rotation="-90 0 0"
+                width="4.8"
+            >
+            </a-plane>
+        `;
+        const entitiesString = markerString + spritesString;
+        window.frames.output.contentWindow.document.getElementById('assets').innerHTML = assetString;
+        window.frames.output.contentWindow.document.getElementById('marker').innerHTML = entitiesString;
+    }
 
     /* eslint-disable func-style */
     /* eslint-disable require-jsdoc */

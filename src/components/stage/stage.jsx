@@ -56,7 +56,7 @@ const StageComponent = props => {
                         src="#sprite${index}"
                         height="${sprite.height / 100}"
                         material="alphaTest: 0.1;"
-                        position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${-0.3 * sprite.layerOrder}"
+                        position="${sprite.x / 100} ${(sprite.y + 180) / 100} ${(sprite.layerOrder - 2) / 3}"
                         rotation="0 0 ${sprite.direction * -1}"
                         width="${sprite.width / 100}"
                     >

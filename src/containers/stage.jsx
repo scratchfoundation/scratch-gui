@@ -123,6 +123,7 @@ class Stage extends React.Component {
                     const width = target.getCostumes()[target.currentCostume].size[0];
                     const height = target.getCostumes()[target.currentCostume].size[1];
                     const visible = target.visible;
+                    // TODO: if ghost effect = 100 then visible = false
                     const x = target.x;
                     const y = target.y;
                     const direction = target.direction - 90;

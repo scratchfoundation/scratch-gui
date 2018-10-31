@@ -17,7 +17,19 @@ const dragTypeMap = { // Keys correspond with the backpack-server item types
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, onToggle, onDelete}) => (
+const Backpack = ({
+    blockDragOver,
+    containerRef,
+    contents,
+    dragOver,
+    error,
+    expanded,
+    loading,
+    onToggle,
+    onDelete,
+    onMouseEnter,
+    onMouseLeave
+}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -44,8 +56,12 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
         </div>
         {expanded ? (
             <div
-                className={styles.backpackList}
+                className={classNames(styles.backpackList, {
+                    [styles.dragOver]: dragOver || blockDragOver
+                })}
                 ref={containerRef}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
             >
                 {error ? (
                     <div className={styles.statusMessage}>
@@ -66,11 +82,7 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
                         </div>
                     ) : (
                         contents.length > 0 ? (
-                            <div
-                                className={classNames(styles.backpackListInner, {
-                                    [styles.dragOver]: dragOver
-                                })}
-                            >
+                            <div className={styles.backpackListInner}>
                                 {contents.map(item => (
                                     <SpriteSelectorItem
                                         className={styles.backpackItem}
@@ -104,6 +116,7 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
 );
 
 Backpack.propTypes = {
+    blockDragOver: PropTypes.bool,
     containerRef: PropTypes.func,
     contents: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
@@ -116,10 +129,13 @@ Backpack.propTypes = {
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
     onDelete: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
     onToggle: PropTypes.func
 };
 
 Backpack.defaultProps = {
+    blockDragOver: false,
     contents: [],
     dragOver: false,
     expanded: false,

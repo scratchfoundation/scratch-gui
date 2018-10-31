@@ -8,7 +8,8 @@ import {
     deleteBackpackObject,
     soundPayload,
     costumePayload,
-    spritePayload
+    spritePayload,
+    codePayload
 } from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
@@ -28,10 +29,18 @@ class Backpack extends React.Component {
             'handleToggle',
             'handleDelete',
             'getBackpackAssetURL',
-            'refreshContents'
+            'refreshContents',
+            'handleMouseEnter',
+            'handleMouseLeave',
+            'handleBlockDragEnd',
+            'handleBlockDragUpdate'
         ]);
         this.state = {
-            dragOver: false,
+            // While the DroppableHOC manages drop interactions for asset tiles,
+            // we still need to micromanage drops coming from the block workspace.
+            // TODO this may be refactorable with the share-the-love logic in SpriteSelectorItem
+            blockDragOutsideWorkspace: false,
+            blockDragOverBackpack: false,
             error: false,
             offset: 0,
             itemsPerPage: 20,
@@ -50,12 +59,23 @@ class Backpack extends React.Component {
             storage._hasAddedBackpackSource = true;
         }
     }
+    componentDidMount () {
+        this.props.vm.addListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+        this.props.vm.addListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
+    }
+    componentWillUnmount () {
+        this.props.vm.removeListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+        this.props.vm.removeListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
+    }
     getBackpackAssetURL (asset) {
         return `${this.props.host}/${asset.assetId}.${asset.dataFormat}`;
     }
     handleToggle () {
         const newState = !this.state.expanded;
-        this.setState({expanded: newState, offset: 0});
+        this.setState({expanded: newState, offset: 0}, () => {
+            // Emit resize on window to get blocks to resize
+            window.dispatchEvent(new Event('resize'));
+        });
         if (newState) {
             this.refreshContents();
         }
@@ -71,6 +91,9 @@ class Backpack extends React.Component {
             break;
         case DragConstants.SPRITE:
             payloader = spritePayload;
+            break;
+        case DragConstants.CODE:
+            payloader = codePayload;
             break;
         }
         if (!payloader) return;
@@ -110,15 +133,47 @@ class Backpack extends React.Component {
                 });
         }
     }
+    handleBlockDragUpdate (isOutsideWorkspace) {
+        this.setState({
+            blockDragOutsideWorkspace: isOutsideWorkspace
+        });
+    }
+    handleMouseEnter () {
+        if (this.state.blockDragOutsideWorkspace) {
+            this.setState({
+                blockDragOverBackpack: true
+            });
+        }
+    }
+    handleMouseLeave () {
+        this.setState({
+            blockDragOverBackpack: false
+        });
+    }
+    handleBlockDragEnd (blocks) {
+        if (this.state.blockDragOverBackpack) {
+            this.handleDrop({
+                dragType: DragConstants.CODE,
+                payload: blocks
+            });
+        }
+        this.setState({
+            blockDragOverBackpack: false,
+            blockDragOutsideWorkspace: false
+        });
+    }
     render () {
         return (
             <DroppableBackpack
+                blockDragOver={this.state.blockDragOverBackpack}
                 contents={this.state.contents}
                 error={this.state.error}
                 expanded={this.state.expanded}
                 loading={this.state.loading}
                 onDelete={this.handleDelete}
                 onDrop={this.handleDrop}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
                 onToggle={this.props.host ? this.handleToggle : null}
             />
         );
@@ -152,9 +207,17 @@ const getTokenAndUsername = state => {
 
 const mapStateToProps = state => Object.assign(
     {
-        vm: state.scratchGui.vm
+        dragInfo: state.scratchGui.assetDrag,
+        vm: state.scratchGui.vm,
+        blockDrag: state.scratchGui.blockDrag
     },
     getTokenAndUsername(state)
 );
 
-export default connect(mapStateToProps)(Backpack);
+const mapDispatchToProps = dispatch => ({
+    dispatchSetHoveredSprite: spriteId => {
+        dispatch(setHoveredSprite(spriteId));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Backpack);

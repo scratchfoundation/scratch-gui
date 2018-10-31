@@ -139,7 +139,10 @@ export default {
         ),
         img: libraryTXTSpeech,
         steps: [{
-            video: 'k54n8uwcty'
+            video: 'k54n8uwcty',
+            trackingPixel: (
+                <img src="http://code.org/api/hour/scratch_talk.png" />
+            )
         }, {
             title: (
                 <FormattedMessage
@@ -251,7 +254,10 @@ export default {
         requiredProjectId: '249143200',
         img: libraryCartoonNetwork,
         steps: [{
-            video: 'uz5oz5h9yg'
+            video: 'uz5oz5h9yg',
+            trackingPixel: (
+                <img src="http://code.org/api/hour/scratch_adventure.png" />
+            )
         }, {
             title: (
                 <FormattedMessage

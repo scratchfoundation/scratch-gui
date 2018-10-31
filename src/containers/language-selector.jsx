@@ -11,9 +11,30 @@ class LanguageSelector extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleChange'
+            'handleChange',
+            'handleMouseLeave',
+            'ref'
         ]);
         document.documentElement.lang = props.currentLocale;
+    }
+    componentDidMount () {
+        this.addListeners();
+    }
+
+    componentWillUnmount () {
+        this.removeListeners();
+    }
+    addListeners () {
+        this.select.addEventListener('mouseleave', this.handleMouseLeave);
+    }
+    removeListeners () {
+        this.select.removeEventListener('mouseleave', this.handleMouseLeave);
+    }
+    handleMouseLeave () {
+        this.select.blur();
+    }
+    ref (c) {
+        this.select = c;
     }
     handleChange (e) {
         const newLocale = e.target.value;
@@ -31,6 +52,7 @@ class LanguageSelector extends React.Component {
         } = this.props;
         return (
             <LanguageSelectorComponent
+                componentRef={this.ref}
                 onChange={this.handleChange}
                 {...props}
             >

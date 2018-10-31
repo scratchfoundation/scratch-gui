@@ -10,10 +10,10 @@ import styles from './backpack.css';
 // TODO make sprite selector item not require onClick
 const noop = () => {};
 
-const dragTypeMap = {
+const dragTypeMap = { // Keys correspond with the backpack-server item types
     costume: DragConstants.BACKPACK_COSTUME,
     sound: DragConstants.BACKPACK_SOUND,
-    code: DragConstants.BACKPACK_CODE,
+    script: DragConstants.BACKPACK_CODE,
     sprite: DragConstants.BACKPACK_SPRITE
 };
 

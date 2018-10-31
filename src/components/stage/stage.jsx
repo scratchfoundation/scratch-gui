@@ -96,7 +96,9 @@ const StageComponent = props => {
     /* eslint-disable func-style */
     /* eslint-disable require-jsdoc */
     function createARFrame () {
-        return {__html: '<iframe src="static/ar.html" id="output" width="480px" height="360px"></iframe>'};
+        console.log('create AR Frame');
+        console.log(`${stageDimensions.width}`);
+        return {__html: `<iframe src="static/ar.html" id="output" style="width: ${stageDimensions.width}px; height: ${stageDimensions.height}px;"></iframe>`};
     }
 
     return (

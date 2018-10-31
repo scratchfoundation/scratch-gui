@@ -214,10 +214,6 @@ const mapStateToProps = state => Object.assign(
     getTokenAndUsername(state)
 );
 
-const mapDispatchToProps = dispatch => ({
-    dispatchSetHoveredSprite: spriteId => {
-        dispatch(setHoveredSprite(spriteId));
-    }
-});
+const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Backpack);

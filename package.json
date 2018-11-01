@@ -104,14 +104,14 @@
     "redux-mock-store": "^1.2.3",
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
-    "scratch-audio": "0.1.0-prerelease.20190114210212",
-    "scratch-blocks": "0.1.0-prerelease.1549990124",
-    "scratch-l10n": "3.1.20190213193054",
-    "scratch-paint": "0.2.0-prerelease.20190114205252",
-    "scratch-render": "0.1.0-prerelease.20190213183713",
-    "scratch-storage": "1.2.2",
-    "scratch-svg-renderer": "0.2.0-prerelease.20190125192231",
-    "scratch-vm": "0.2.0-prerelease.20190213210403",
+    "scratch-audio": "0.1.0-prerelease.20181023202904",
+    "scratch-blocks": "0.1.0-prerelease.1541019511",
+    "scratch-l10n": "3.0.20181031234255",
+    "scratch-paint": "0.2.0-prerelease.20181029151725",
+    "scratch-render": "0.1.0-prerelease.20181029125804",
+    "scratch-storage": "1.1.0",
+    "scratch-svg-renderer": "0.2.0-prerelease.20181024192149",
+    "scratch-vm": "0.2.0-prerelease.20181101222423",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
@@ -124,7 +124,8 @@
     "webpack": "^4.6.0",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.3",
-    "xhr": "2.5.0"
+    "xhr": "2.5.0",
+    "xml2js": "^0.4.19"
   },
   "jest": {
     "setupFiles": [

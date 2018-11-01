@@ -15,6 +15,7 @@ import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
+import TextTab from '../../containers/text-tab.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
@@ -94,6 +95,7 @@ const GUIComponent = props => {
         onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
+        onActivateTextTab,
         onActivateTab,
         onClickLogo,
         onExtensionButtonClick,
@@ -117,6 +119,11 @@ const GUIComponent = props => {
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
+
+    const handleTextTabActivate = function () {
+        onActivateTextTab();
+        vm.refreshWorkspace();
+    };
 
     const tabClassNames = {
         tabs: styles.tabs,
@@ -281,6 +288,16 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
+                                    <Tab
+                                        className={tabClassNames.tab}
+                                        onClick={() => handleTextTabActivate()}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Text"
+                                            description="Button to get to text version of project"
+                                            id="gui.gui.textTab"
+                                        />
+                                    </Tab>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -317,6 +334,9 @@ const GUIComponent = props => {
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    <TextTab vm={vm} />
                                 </TabPanel>
                             </Tabs>
                             {backpackVisible ? (
@@ -379,6 +399,7 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onActivateTextTab: PropTypes.func,
     onClickAccountNav: PropTypes.func,
     onClickLogo: PropTypes.func,
     onCloseAccountNav: PropTypes.func,

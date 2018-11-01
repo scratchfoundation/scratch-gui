@@ -16,7 +16,8 @@ import {
     activateTab,
     BLOCKS_TAB_INDEX,
     COSTUMES_TAB_INDEX,
-    SOUNDS_TAB_INDEX
+    SOUNDS_TAB_INDEX,
+    TEXT_TAB_INDEX
 } from '../reducers/editor-tab';
 
 import {
@@ -180,7 +181,8 @@ const mapDispatchToProps = dispatch => ({
     onActivateTab: tab => dispatch(activateTab(tab)),
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
-    onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
+    onActivateTextTab: () => dispatch(activateTab(TEXT_TAB_INDEX)),
+    onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary(closeBackdropLibrary())),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
     onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))

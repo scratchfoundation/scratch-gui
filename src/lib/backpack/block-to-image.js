@@ -37,7 +37,12 @@ export default function (blockId) {
             // not all the styles are set directly on the SVG. This makes the
             // image styled the same way the block actually appears.
             // TODO this doesn't handle images that are xlink:href in the SVG
-            computedStyleToInlineStyle(svg, {recursive: true});
+            computedStyleToInlineStyle(svg, {
+                recursive: true,
+                // Enumerate the specific properties we need to inline.
+                // Specifically properties that are set from CSS in scratch-blocks
+                properties: ['fill', 'font-family', 'font-size', 'font-weight']
+            });
 
             const svgString = (new XMLSerializer()).serializeToString(svg);
 

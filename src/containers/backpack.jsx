@@ -98,14 +98,17 @@ class Backpack extends React.Component {
         }
         if (!payloader) return;
 
-        payloader(dragInfo.payload, this.props.vm)
-            .then(payload => saveBackpackObject({
-                host: this.props.host,
-                token: this.props.token,
-                username: this.props.username,
-                ...payload
-            }))
-            .then(this.refreshContents);
+        // Creating the payload is async, so set loading before starting
+        this.setState({loading: true}, () => {
+            payloader(dragInfo.payload, this.props.vm)
+                .then(payload => saveBackpackObject({
+                    host: this.props.host,
+                    token: this.props.token,
+                    username: this.props.username,
+                    ...payload
+                }))
+                .then(this.refreshContents);
+        });
     }
     handleDelete (id) {
         deleteBackpackObject({
@@ -150,11 +153,14 @@ class Backpack extends React.Component {
             blockDragOverBackpack: false
         });
     }
-    handleBlockDragEnd (blocks) {
+    handleBlockDragEnd (blocks, topBlockId) {
         if (this.state.blockDragOverBackpack) {
             this.handleDrop({
                 dragType: DragConstants.CODE,
-                payload: blocks
+                payload: {
+                    blockObjects: blocks,
+                    topBlockId: topBlockId
+                }
             });
         }
         this.setState({

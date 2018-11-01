@@ -12,7 +12,7 @@ class LanguageSelector extends React.Component {
         super(props);
         bindAll(this, [
             'handleChange',
-            'handleMouseLeave',
+            'handleMouseOut',
             'ref'
         ]);
         document.documentElement.lang = props.currentLocale;
@@ -25,12 +25,12 @@ class LanguageSelector extends React.Component {
         this.removeListeners();
     }
     addListeners () {
-        this.select.addEventListener('mouseleave', this.handleMouseLeave);
+        this.select.addEventListener('mouseout', this.handleMouseOut);
     }
     removeListeners () {
-        this.select.removeEventListener('mouseleave', this.handleMouseLeave);
+        this.select.removeEventListener('mouseout', this.handleMouseOut);
     }
-    handleMouseLeave () {
+    handleMouseOut () {
         this.select.blur();
     }
     ref (c) {

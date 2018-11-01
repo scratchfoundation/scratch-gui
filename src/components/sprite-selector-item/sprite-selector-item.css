@@ -80,7 +80,7 @@
 .delete-button {
     position: absolute;
     top: 0.125rem;
-    z-index: 1;
+    z-index: auto;
 }
 
 [dir="ltr"] .delete-button {

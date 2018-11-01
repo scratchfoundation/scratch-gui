@@ -45,6 +45,7 @@
     "bowser": "1.9.4",
     "chromedriver": "2.43.1",
     "classnames": "2.2.6",
+    "computed-style-to-inline-style": "3.0.0",
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "2.5.7",
     "css-loader": "^1.0.0",

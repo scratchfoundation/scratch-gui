@@ -271,8 +271,8 @@ const mapDispatchToProps = dispatch => ({
     dispatchUpdateRestore: restoreState => {
         dispatch(setRestore(restoreState));
     },
-    onHighlightTarget: (id, time) => {
-        dispatch(highlightTarget(id, time));
+    onHighlightTarget: id => {
+        dispatch(highlightTarget(id));
     }
 });
 

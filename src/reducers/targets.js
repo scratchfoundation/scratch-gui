@@ -45,11 +45,11 @@ const updateTargets = function (targetList, editingTarget) {
         }
     };
 };
-const highlightTarget = function (targetId, updateTime) {
+const highlightTarget = function (targetId) {
     return {
         type: HIGHLIGHT_TARGET,
         targetId: targetId,
-        updateTime: updateTime
+        updateTime: Date.now()
     };
 };
 export {

@@ -110,7 +110,9 @@ class TargetPane extends React.Component {
     }
     handleSelectSprite (id) {
         this.props.vm.setEditingTarget(id);
-        this.props.onHighlightTarget(id, Date.now());
+        if (this.props.stage && id !== this.props.stage.id) {
+            this.props.onHighlightTarget(id);
+        }
     }
     handleSurpriseSpriteClick () {
         const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];

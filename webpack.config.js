@@ -208,7 +208,7 @@ module.exports = [
                         loader: 'file-loader',
                         options: {
                             outputPath: 'static/assets/',
-                            publicPath: '/static/assets/'
+                            publicPath: 'static/assets/'
                         }
                     }
                 ])

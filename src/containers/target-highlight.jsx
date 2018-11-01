@@ -15,11 +15,12 @@ class TargetHighlight extends React.Component {
 
     // Transform scratch coordinates into page coordinates
     getPageCoords (x, y) {
-        const nativeSize = this.props.vm.renderer.getNativeSize();
-        const rect = this.props.vm.renderer.canvas.getBoundingClientRect();
+        const {stageWidth, stageHeight, vm} = this.props;
+        // The renderers "nativeSize" is the [width, height] of the stage in scratch-units
+        const nativeSize = vm.renderer.getNativeSize();
         return [
-            ((rect.width / nativeSize[0]) * x) + (rect.width / 2),
-            -((rect.height / nativeSize[1]) * y) + (rect.height / 2)
+            ((stageWidth / nativeSize[0]) * x) + (stageWidth / 2),
+            -((stageHeight / nativeSize[1]) * y) + (stageHeight / 2)
         ];
     }
 
@@ -61,6 +62,8 @@ TargetHighlight.propTypes = {
     className: PropTypes.string,
     highlightedTargetId: PropTypes.string,
     highlightedTargetTime: PropTypes.number,
+    stageHeight: PropTypes.number,
+    stageWidth: PropTypes.number,
     vm: PropTypes.instanceOf(VM)
 };
 

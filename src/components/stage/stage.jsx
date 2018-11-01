@@ -65,7 +65,11 @@ const StageComponent = props => {
                     />
                 </Box>
                 <Box className={styles.frameWrapper}>
-                    <TargetHighlight className={styles.frame} />
+                    <TargetHighlight
+                        className={styles.frame}
+                        stageHeight={stageDimensions.height}
+                        stageWidth={stageDimensions.width}
+                    />
                 </Box>
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>

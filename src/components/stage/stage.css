@@ -89,7 +89,7 @@ to adjust for the border using a different method */
     padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
 }
 
-.monitor-wrapper, .color-picker-wrapper {
+.monitor-wrapper, .color-picker-wrapper, .frame-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -126,4 +126,19 @@ to adjust for the border using a different method */
 
 .question-wrapper {
     pointer-events: auto;
+}
+
+.frame {
+    box-sizing: content-box !important;
+    background: $motion-transparent;
+    border: 2px solid $motion-primary;
+    border-radius: 0.5rem;
+    animation-name: flash;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }

@@ -55,6 +55,7 @@ import mystuffIcon from './icon--mystuff.png';
 import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
 import communityIcon from './icon--see-community.svg';
+import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 
@@ -241,16 +242,43 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.new"
             />
         );
+        const shareMessage = (
+            <FormattedMessage
+                defaultMessage="Share"
+                description="Label for project share button"
+                id="gui.menuBar.share"
+            />
+        );
+        const isSharedMessage = (
+            <FormattedMessage
+                defaultMessage="Shared"
+                description="Label for shared project"
+                id="gui.menuBar.isShared"
+            />
+        );
         const shareButton = (
             <Button
-                className={classNames(styles.shareButton)}
+                className={classNames(
+                    styles.menuBarButton,
+                    styles.shareButton,
+                    {[styles.shareButtonIsShared]: this.props.isShared}
+                )}
                 onClick={this.props.onShare}
             >
-                <FormattedMessage
-                    defaultMessage="Share"
-                    description="Label for project share button"
-                    id="gui.menuBar.share"
-                />
+                {this.props.isShared ? isSharedMessage : shareMessage}
+            </Button>
+        );
+        const remixButton = (
+            <Button
+                className={classNames(
+                    styles.menuBarButton,
+                    styles.remixButton
+                )}
+                iconClassName={styles.remixButtonIcon}
+                iconSrc={remixIcon}
+                onClick={this.handleClickRemix}
+            >
+                {remixMessage}
             </Button>
         );
         return (
@@ -458,11 +486,15 @@ class MenuBar extends React.Component {
                                 </MenuBarItemTooltip>
                             ) : []
                         )}
+                        {this.props.canRemix ? remixButton : []}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             <Button
-                                className={classNames(styles.communityButton)}
+                                className={classNames(
+                                    styles.menuBarButton,
+                                    styles.communityButton
+                                )}
                                 iconClassName={styles.communityButtonIcon}
                                 iconSrc={communityIcon}
                                 onClick={this.props.onSeeCommunity}
@@ -476,7 +508,10 @@ class MenuBar extends React.Component {
                         ) : (this.props.showComingSoon ? (
                             <MenuBarItemTooltip id="community-button">
                                 <Button
-                                    className={classNames(styles.communityButton)}
+                                    className={classNames(
+                                        styles.menuBarButton,
+                                        styles.communityButton
+                                    )}
                                     iconClassName={styles.communityButtonIcon}
                                     iconSrc={communityIcon}
                                 >
@@ -652,6 +687,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
     isRtl: PropTypes.bool,
+    isShared: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,

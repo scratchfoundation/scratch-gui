@@ -10,6 +10,8 @@ class Storage extends ScratchStorage {
     constructor () {
         super();
         this.cacheDefaultProject();
+    }
+    addOfficialScratchWebStores () {
         this.addWebStore(
             [this.AssetType.Project],
             this.getProjectGetConfig.bind(this),

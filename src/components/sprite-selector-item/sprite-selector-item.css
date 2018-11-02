@@ -42,6 +42,7 @@
 .sprite-image {
     margin: auto;
     user-select: none;
+    pointer-events: none;
     max-width: 32px;
     max-height: 32px;
 }

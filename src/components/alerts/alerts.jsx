@@ -20,6 +20,7 @@ const AlertsComponent = ({
                 index={index}
                 key={index}
                 message={a.message}
+                showReconnect={a.showReconnect}
                 onCloseAlert={onCloseAlert}
             />
         ))}

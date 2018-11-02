@@ -26,12 +26,14 @@ class Alert extends React.Component {
         const {
             index, // eslint-disable-line no-unused-vars
             iconURL,
-            message
+            message,
+            showReconnect
         } = this.props;
         return (
             <AlertComponent
                 iconURL={iconURL}
                 message={message}
+                showReconnect={showReconnect}
                 onCloseAlert={this.handleOnCloseAlert}
                 onReconnect={this.handleOnReconnect}
             />
@@ -56,7 +58,8 @@ Alert.propTypes = {
     index: PropTypes.number,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
-    onOpenConnectionModal: PropTypes.func
+    onOpenConnectionModal: PropTypes.func,
+    showReconnect: PropTypes.bool.isRequired
 };
 
 export default connect(

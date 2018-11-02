@@ -114,8 +114,9 @@ class Backpack extends React.Component {
                         contents: [item].concat(this.state.contents)
                     });
                 })
-                .catch(() => {
+                .catch(error => {
                     this.setState({error: true, loading: false});
+                    throw error;
                 });
         });
     }
@@ -133,8 +134,9 @@ class Backpack extends React.Component {
                         contents: this.state.contents.filter(o => o.id !== id)
                     });
                 })
-                .catch(() => {
+                .catch(error => {
                     this.setState({error: true, loading: false});
+                    throw error;
                 });
         });
     }
@@ -155,8 +157,9 @@ class Backpack extends React.Component {
                             loading: false
                         });
                     })
-                    .catch(() => {
+                    .catch(error => {
                         this.setState({error: true, loading: false});
+                        throw error;
                     });
             });
         }

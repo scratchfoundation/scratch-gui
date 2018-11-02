@@ -276,7 +276,11 @@ const Cards = props => {
                                 />
                             )
                         )}
-                        {steps[step].trackingPixel && steps[step].trackingPixel}
+                        {steps[step].trackingPixel ? (
+                            <div className={styles.trackingPixel}>
+                                {steps[step].trackingPixel}
+                            </div>
+                        ) : null}
                     </div>
                     <NextPrevButtons
                         isRtl={isRtl}

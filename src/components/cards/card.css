@@ -267,3 +267,6 @@
     background: $ui-white;
     box-shadow: 0px 0px 0px 2px $ui-black-transparent;
 }
+.tracking-pixel {
+    display: none;
+}

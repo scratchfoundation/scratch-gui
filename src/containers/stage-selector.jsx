@@ -12,6 +12,7 @@ import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
+import {fetchCode} from '../lib/backpack-api';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
@@ -101,8 +102,7 @@ class StageSelector extends React.Component {
                 name: dragInfo.payload.name
             }, this.props.id);
         } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
-            fetch(dragInfo.payload.bodyUrl)
-                .then(response => response.json())
+            fetchCode(dragInfo.payload.bodyUrl)
                 .then(blocks => {
                     this.props.vm.shareBlocksToTarget(blocks, this.props.id);
                     this.props.vm.refreshWorkspace();

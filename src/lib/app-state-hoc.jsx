@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers, compose} from 'redux';
+import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
 
@@ -107,7 +108,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             } = this.props;
             return (
                 <Provider store={this.store}>
-                    <WrappedComponent {...componentProps} />
+                    <ConnectedIntlProvider>
+                        <WrappedComponent {...componentProps} />
+                    </ConnectedIntlProvider>
                 </Provider>
             );
         }

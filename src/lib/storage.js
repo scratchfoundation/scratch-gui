@@ -10,6 +10,8 @@ class Storage extends ScratchStorage {
     constructor () {
         super();
         this.cacheDefaultProject();
+    }
+    addOfficialScratchWebStores () {
         this.addWebStore(
             [this.AssetType.Project],
             this.getProjectGetConfig.bind(this),
@@ -55,7 +57,7 @@ class Storage extends ScratchStorage {
     }
     cacheDefaultProject () {
         const defaultProjectAssets = defaultProject(this.translator);
-        defaultProjectAssets.forEach(asset => this.cache(
+        defaultProjectAssets.forEach(asset => this.builtinHelper._store(
             this.AssetType[asset.assetType],
             this.DataFormat[asset.dataFormat],
             asset.data,

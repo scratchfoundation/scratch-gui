@@ -54,10 +54,14 @@ const getIsLoadingWithId = loadingState => (
     loadingState === LoadingState.LOADING_VM_WITH_ID ||
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
 );
-const getIsCreating = loadingState => (
-    loadingState === LoadingState.CREATING_NEW ||
-    loadingState === LoadingState.REMIXING ||
+const getIsCreatingNew = loadingState => (
+    loadingState === LoadingState.CREATING_NEW
+);
+const getIsCreatingCopy = loadingState => (
     loadingState === LoadingState.CREATING_COPY
+);
+const getIsRemixing = loadingState => (
+    loadingState === LoadingState.REMIXING
 );
 const getIsUpdating = loadingState => (
     loadingState === LoadingState.UPDATING ||
@@ -172,6 +176,10 @@ const reducer = function (state, action) {
         }
         return state;
     case SET_PROJECT_ID:
+        // if the projectId hasn't actually changed do nothing
+        if (state.projectId === action.projectId) {
+            return state;
+        }
         // if setting the default project id, specifically fetch that project
         if (action.projectId === defaultProjectId) {
             return Object.assign({}, state, {
@@ -401,11 +409,13 @@ export {
     defaultProjectId,
     doneCreatingProject,
     doneUpdatingProject,
-    getIsCreating,
+    getIsCreatingCopy,
+    getIsCreatingNew,
     getIsError,
     getIsFetchingWithId,
     getIsFetchingWithoutId,
     getIsLoadingWithId,
+    getIsRemixing,
     getIsShowingProject,
     getIsShowingWithId,
     getIsShowingWithoutId,

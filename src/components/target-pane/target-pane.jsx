@@ -21,6 +21,7 @@ const TargetPane = ({
     fileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
+    onActivateBlocksTab,
     onChangeSpriteDirection,
     onChangeSpriteName,
     onChangeSpriteRotationStyle,
@@ -79,9 +80,9 @@ const TargetPane = ({
         />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
-                assetId={
+                asset={
                     stage.costume &&
-                    stage.costume.assetId
+                    stage.costume.asset
                 }
                 backdropCount={stage.costumeCount}
                 id={stage.id}
@@ -92,6 +93,7 @@ const TargetPane = ({
                 {spriteLibraryVisible ? (
                     <SpriteLibrary
                         vm={vm}
+                        onActivateBlocksTab={onActivateBlocksTab}
                         onRequestClose={onRequestCloseSpriteLibrary}
                     />
                 ) : null}
@@ -128,6 +130,7 @@ TargetPane.propTypes = {
         hoveredSprite: PropTypes.string,
         receivedBlocks: PropTypes.bool
     }),
+    onActivateBlocksTab: PropTypes.func.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,

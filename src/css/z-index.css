@@ -3,11 +3,12 @@
     In other words, z-index values that are "inside" a component are not added here.
     This prevents conflicts between identical z-index values in different components.
 */
+$z-index-toolbox: 40;
+$z-index-extension-button: 45;
+$z-index-monitor: 45; /* Below block drags, confined to stage, never meets extension button */
+$z-index-block-drag: 50;
 
-$z-index-extension-button: 50; /* Force extension button above the ScratchBlocks flyout */
-$z-index-menu-bar: 50; /* blocklyToolboxDiv is 40 */
-
-$z-index-monitor: 100;
+$z-index-menu-bar: 60;
 $z-index-stage-indicator: 110;
 $z-index-add-button: 120;
 $z-index-tooltip: 130; /* tooltips should go over add buttons if they overlap */

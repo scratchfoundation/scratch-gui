@@ -30,6 +30,7 @@ import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
+import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 
@@ -46,6 +47,7 @@ const messages = defineMessages({
 class GUI extends React.Component {
     componentDidMount () {
         this.setReduxTitle(this.props.projectTitle);
+        this.props.onStorageInit(storage);
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -72,10 +74,12 @@ class GUI extends React.Component {
         const {
             /* eslint-disable no-unused-vars */
             assetHost,
+            cloudHost,
             error,
             hideIntro,
             isError,
             isShowingProject,
+            onStorageInit,
             onUpdateProjectId,
             onUpdateReduxProjectTitle,
             projectHost,
@@ -102,6 +106,7 @@ class GUI extends React.Component {
 GUI.propTypes = {
     assetHost: PropTypes.string,
     children: PropTypes.node,
+    cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
     hideIntro: PropTypes.bool,
@@ -112,6 +117,7 @@ GUI.propTypes = {
     isShowingProject: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
+    onStorageInit: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
@@ -122,6 +128,7 @@ GUI.propTypes = {
 };
 
 GUI.defaultProps = {
+    onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onUpdateProjectId: () => {}
 };
 

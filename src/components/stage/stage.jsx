@@ -6,6 +6,7 @@ import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
+import TargetHighlight from '../../containers/target-highlight.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
@@ -61,6 +62,13 @@ const StageComponent = props => {
                     <MonitorList
                         draggable={useEditorDragStyle}
                         stageSize={stageDimensions}
+                    />
+                </Box>
+                <Box className={styles.frameWrapper}>
+                    <TargetHighlight
+                        className={styles.frame}
+                        stageHeight={stageDimensions.height}
+                        stageWidth={stageDimensions.width}
                     />
                 </Box>
                 {isColorPicking && colorInfo ? (

@@ -2,6 +2,7 @@ import xhr from 'xhr';
 import costumePayload from './backpack/costume-payload';
 import soundPayload from './backpack/sound-payload';
 import spritePayload from './backpack/sprite-payload';
+import codePayload from './backpack/code-payload';
 
 const getBackpackContents = ({
     host,
@@ -78,5 +79,6 @@ export {
     deleteBackpackObject,
     costumePayload,
     soundPayload,
-    spritePayload
+    spritePayload,
+    codePayload
 };

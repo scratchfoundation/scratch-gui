@@ -30,7 +30,7 @@ describe('projectSaverHOC', () => {
             <WrappedComponent
                 isShowingWithId
                 canSave={false}
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithoutId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITH_ID}
@@ -52,7 +52,7 @@ describe('projectSaverHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
                 isUpdating={false}
@@ -78,7 +78,7 @@ describe('projectSaverHOC', () => {
             <WrappedComponent
                 isShowingWithoutId
                 canSave={false}
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isUpdating={false}
                 loadingState={LoadingState.LOADING_VM_NEW_DEFAULT}
@@ -102,7 +102,7 @@ describe('projectSaverHOC', () => {
             <WrappedComponent
                 isShowingWithoutId
                 canCreateNew={false}
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITHOUT_ID}
@@ -124,7 +124,7 @@ describe('projectSaverHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canCreateNew
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
                 isUpdating={false}
@@ -141,14 +141,16 @@ describe('projectSaverHOC', () => {
         expect(mockedCreateProject).toHaveBeenCalled();
     });
 
-    test('if we enter creating state, vm project should be requested', () => {
+    test('if we enter creating new state, vm project should be requested', () => {
         vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mounted = mount(
             <WrappedComponent
                 canSave
-                isCreating={false}
+                isCreatingCopy={false}
+                isCreatingNew={false}
+                isRemixing={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
                 isUpdating={false}
@@ -159,8 +161,61 @@ describe('projectSaverHOC', () => {
             />
         );
         mounted.setProps({
-            isCreating: true,
+            isCreatingNew: true,
             loadingState: LoadingState.CREATING_NEW
+        });
+        expect(vm.saveProjectSb3).toHaveBeenCalled();
+    });
+
+    test('if we enter remixing state, vm project should be requested', () => {
+        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isCreatingCopy={false}
+                isCreatingNew={false}
+                isRemixing={false}
+                isShowingWithId={false}
+                isShowingWithoutId={false}
+                isUpdating={false}
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                reduxProjectId={'100'}
+                store={store}
+                vm={vm}
+            />
+        );
+        mounted.setProps({
+            isRemixing: true,
+            loadingState: LoadingState.REMIXING
+        });
+        expect(vm.saveProjectSb3).toHaveBeenCalled();
+    });
+
+
+    test('if we enter creating copy state, vm project should be requested', () => {
+        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isCreatingCopy={false}
+                isCreatingNew={false}
+                isRemixing={false}
+                isShowingWithId={false}
+                isShowingWithoutId={false}
+                isUpdating={false}
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                reduxProjectId={'100'}
+                store={store}
+                vm={vm}
+            />
+        );
+        mounted.setProps({
+            isCreatingCopy: true,
+            loadingState: LoadingState.CREATING_COPY
         });
         expect(vm.saveProjectSb3).toHaveBeenCalled();
     });
@@ -172,7 +227,7 @@ describe('projectSaverHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
                 isUpdating={false}
@@ -197,7 +252,7 @@ describe('projectSaverHOC', () => {
             <WrappedComponent
                 canSave
                 isUpdating
-                isCreating={false}
+                isCreatingNew={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
                 loadingState={LoadingState.UPDATING}

@@ -5,6 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
+import storage from '../lib/storage';
 import getCostumeUrl from '../lib/get-costume-url';
 
 import WatermarkComponent from '../components/watermark/watermark.jsx';
@@ -20,13 +21,13 @@ class Watermark extends React.Component {
     }
 
     getCostumeData () {
-        if (!this.props.assetId) return null;
+        if (!this.props.asset) return null;
 
-        return getCostumeUrl(this.props.assetId, this.props.vm);
+        return getCostumeUrl(this.props.asset);
     }
 
     render () {
-        const componentProps = omit(this.props, ['assetId', 'vm']);
+        const componentProps = omit(this.props, ['asset', 'vm']);
         return (
             <WatermarkComponent
                 costumeURL={this.getCostumeData()}
@@ -37,7 +38,7 @@ class Watermark extends React.Component {
 }
 
 Watermark.propTypes = {
-    assetId: PropTypes.string,
+    asset: PropTypes.instanceOf(storage.Asset),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -45,19 +46,19 @@ const mapStateToProps = state => {
     const targets = state.scratchGui.targets;
     const currentTargetId = targets.editingTarget;
 
-    let assetId;
+    let asset;
     if (currentTargetId) {
         if (targets.stage.id === currentTargetId) {
-            assetId = targets.stage.costume.assetId;
+            asset = targets.stage.costume.asset;
         } else if (targets.sprites.hasOwnProperty(currentTargetId)) {
             const currentSprite = targets.sprites[currentTargetId];
-            assetId = currentSprite.costume.assetId;
+            asset = currentSprite.costume.asset;
         }
     }
 
     return {
         vm: state.scratchGui.vm,
-        assetId: assetId
+        asset: asset
     };
 };
 

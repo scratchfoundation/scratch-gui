@@ -14,7 +14,7 @@ class RubyDownloader extends React.Component {
     saveRuby () {
         const code = `require "smalruby3"\n\n${this.props.rubyCode}`;
         return new Blob([code], {
-            type: "text/x-ruby-script"
+            type: 'text/x-ruby-script'
         });
     }
     downloadProject () {

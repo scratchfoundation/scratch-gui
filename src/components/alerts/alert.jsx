@@ -68,7 +68,7 @@ AlertComponent.propTypes = {
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onReconnect: PropTypes.func,
-    showReconnect: PropTypes.bool.isRequired
+    showReconnect: PropTypes.bool
 };
 
 AlertComponent.defaultProps = {

@@ -65,7 +65,7 @@ Alert.propTypes = {
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onOpenConnectionModal: PropTypes.func,
-    showReconnect: PropTypes.bool.isRequired
+    showReconnect: PropTypes.bool
 };
 
 export default connect(

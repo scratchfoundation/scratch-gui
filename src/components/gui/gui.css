@@ -172,6 +172,7 @@
     position: relative;
     flex-grow: 1;
     display: none;
+    overflow: hidden;
 }
 
 .tab-panel.is-selected {

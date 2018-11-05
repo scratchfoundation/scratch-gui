@@ -142,13 +142,6 @@ class MenuBar extends React.Component {
             'restoreOptionMessage'
         ]);
     }
-    componentDidUpdate (prevProps) {
-        // if we're no longer showing the project (loading, or whatever), close menus
-        if (this.props.isShowingProject && !prevProps.isShowingProject) {
-            this.props.onRequestCloseFile();
-            this.props.onRequestCloseEdit();
-        }
-    }
     handleClickNew () {
         // if canSave===true and canCreateNew===true, it's safe to replace current project,
         // since we will auto-save first. Else, confirm first.
@@ -158,15 +151,19 @@ class MenuBar extends React.Component {
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }
+        this.props.onRequestCloseFile();
     }
     handleClickRemix () {
         this.props.onClickRemix();
+        this.props.onRequestCloseFile();
     }
     handleClickSave () {
         this.props.onClickSave();
+        this.props.onRequestCloseFile();
     }
     handleClickSaveAsCopy () {
         this.props.onClickSaveAsCopy();
+        this.props.onRequestCloseFile();
     }
     handleRestoreOption (restoreFun) {
         return () => {

@@ -25,10 +25,12 @@ const Backpack = ({
     error,
     expanded,
     loading,
+    showMore,
     onToggle,
     onDelete,
     onMouseEnter,
-    onMouseLeave
+    onMouseLeave,
+    onMore
 }) => (
     <div className={styles.backpackContainer}>
         <div
@@ -98,6 +100,18 @@ const Backpack = ({
                                         onDeleteButtonClick={onDelete}
                                     />
                                 ))}
+                                {showMore && (
+                                    <button
+                                        className={styles.more}
+                                        onClick={onMore}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="More"
+                                            description="Load more from backpack"
+                                            id="gui.backpack.more"
+                                        />
+                                    </button>
+                                )}
                             </div>
                         ) : (
                             <div className={styles.statusMessage}>
@@ -129,6 +143,7 @@ Backpack.propTypes = {
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
     onDelete: PropTypes.func,
+    onMore: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onToggle: PropTypes.func
@@ -140,6 +155,8 @@ Backpack.defaultProps = {
     dragOver: false,
     expanded: false,
     loading: false,
+    showMore: false,
+    onMore: null,
     onToggle: null
 };
 

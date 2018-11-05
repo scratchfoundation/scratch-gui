@@ -8,21 +8,24 @@ class Prompt extends React.Component {
         super(props);
         bindAll(this, [
             'handleOk',
-            'handleOptionSelection',
+            'handleScopeOptionSelection',
             'handleCancel',
             'handleChange',
-            'handleKeyPress'
+            'handleKeyPress',
+            'handleCloudVariableOptionChange'
         ]);
         this.state = {
             inputValue: '',
-            optionSelection: null
+            globalSelected: true,
+            cloudSelected: false
         };
     }
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
     }
     handleOk () {
-        this.props.onOk(this.state.inputValue, this.state.optionSelection);
+        // TODO CLOUD add cloud variable option info
+        this.props.onOk(this.state.inputValue, (this.state.globalSelected ? 'global' : 'local'));
     }
     handleCancel () {
         this.props.onCancel();
@@ -30,22 +33,32 @@ class Prompt extends React.Component {
     handleChange (e) {
         this.setState({inputValue: e.target.value});
     }
-    handleOptionSelection (e) {
-        this.setState({optionSelection: e.target.value});
+    handleScopeOptionSelection (e) {
+        this.setState({globalSelected: (e.target.value === 'global')});
+    }
+    handleCloudVariableOptionChange (e) {
+        const checked = e.target.checked;
+        this.setState({cloudSelected: checked});
+        if (checked) {
+            this.setState({globalSelected: true});
+        }
     }
     render () {
         return (
             <PromptComponent
+                cloudSelected={this.state.cloudSelected}
+                globalSelected={this.state.globalSelected}
                 isStage={this.props.isStage}
                 label={this.props.label}
                 placeholder={this.props.placeholder}
-                showMoreOptions={this.props.showMoreOptions}
+                showVariableOptions={this.props.showVariableOptions}
                 title={this.props.title}
                 onCancel={this.handleCancel}
                 onChange={this.handleChange}
+                onCloudVarOptionChange={this.handleCloudVariableOptionChange}
                 onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
-                onOptionSelection={this.handleOptionSelection}
+                onScopeOptionSelection={this.handleScopeOptionSelection}
             />
         );
     }
@@ -57,7 +70,7 @@ Prompt.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
-    showMoreOptions: PropTypes.bool.isRequired,
+    showVariableOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };
 

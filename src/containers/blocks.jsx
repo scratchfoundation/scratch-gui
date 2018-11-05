@@ -380,10 +380,12 @@ class Blocks extends React.Component {
             this.ScratchBlocks.Msg.VARIABLE_MODAL_TITLE;
         p.prompt.varType = typeof optVarType === 'string' ?
             optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
-        p.prompt.showMoreOptions =
+        p.prompt.showVariableOptions = // This flag means that we should show variable/list options about scope
             optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
+        // TODO CLOUD add flag about showing the cloud variable option, which will necessitate
+        // that the flag above is true, e.g. p.prompt.showVariableOptions && canUseCloudData
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
@@ -449,11 +451,13 @@ class Blocks extends React.Component {
                     {...props}
                 />
                 {this.state.prompt ? (
+                    /* TODO add the following in the props below:
+                    showCloudOption={this.state.canUseCloudData */
                     <Prompt
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
-                        showMoreOptions={this.state.prompt.showMoreOptions}
+                        showVariableOptions={this.state.prompt.showVariableOptions}
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}

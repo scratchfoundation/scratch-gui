@@ -11,8 +11,6 @@ const AlertLevels = {
 const alerts = [
     {
         alertId: 'createSuccess',
-        iconURL: successImage,
-        level: 'success',
         clearList: ['creating'],
         content: (
             <FormattedMessage
@@ -20,23 +18,23 @@ const alerts = [
                 description="Message indicating that project was successfully created"
                 id="gui.alerts.createsuccess"
             />
-        )
+        ),
+        iconURL: successImage,
+        level: 'success'
     },
     {
         alertId: 'creating',
-        level: 'warn',
         content: (
             <FormattedMessage
                 defaultMessage="Creating..."
                 description="Message indicating that project is in process of creating"
                 id="gui.alerts.creating"
             />
-        )
+        ),
+        level: 'success'
     },
     {
         alertId: 'saveSuccess',
-        iconURL: successImage,
-        level: 'success',
         clearList: ['saving'],
         content: (
             <FormattedMessage
@@ -44,18 +42,20 @@ const alerts = [
                 description="Message indicating that project was successfully saved"
                 id="gui.alerts.savesuccess"
             />
-        )
+        ),
+        iconURL: successImage,
+        level: 'success'
     },
     {
         alertId: 'saving',
-        level: 'warn',
         content: (
             <FormattedMessage
                 defaultMessage="Saving..."
                 description="Message indicating that project is in process of saving"
                 id="gui.alerts.saving"
             />
-        )
+        ),
+        level: 'success'
     }
 ];
 

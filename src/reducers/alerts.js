@@ -24,6 +24,7 @@ const reducer = function (state, action) {
         const alertId = action.alertId;
         if (alertId) {
             const newAlert = {
+                alertId: alertId,
                 level: AlertLevels.WARN // default level
             };
             const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);

@@ -146,7 +146,8 @@ Backpack.propTypes = {
     onMore: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
+    showMore: PropTypes.bool
 };
 
 Backpack.defaultProps = {

@@ -7,17 +7,19 @@ import storage from '../lib/storage';
 import {showStandardAlert} from '../reducers/alerts';
 import {
     LoadingStates,
+    autoUpdateProject,
     createProject,
     doneCreatingProject,
     doneUpdatingProject,
     getIsCreatingCopy,
     getIsCreatingNew,
+    getIsManualUpdating,
     getIsRemixing,
     getIsShowingProject,
     getIsShowingWithoutId,
     getIsUpdating,
-    projectError,
-    updateProject
+    manualUpdateProject,
+    projectError
 } from '../reducers/project-state';
 
 /**
@@ -33,7 +35,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
         componentDidUpdate (prevProps) {
             if (this.props.isUpdating && !prevProps.isUpdating) {
-                this.props.onShowSavingAlert();
+                if (this.props.isManualUpdating) {
+                    this.props.onShowSavingAlert();
+                }
                 this.storeProject(this.props.reduxProjectId)
                     .then(() => {
                         // there is nothing we expect to find in response that we need to check here
@@ -97,7 +101,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 const showingSaveable = this.props.canSave && this.props.isShowingWithId;
                 const becameAbleToSave = this.props.canSave && !prevProps.canSave;
                 if (showingSaveable && becameAbleToSave) {
-                    this.props.onUpdateProject();
+                    this.props.onAutoUpdateProject();
                 }
             }
         }
@@ -139,15 +143,16 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 isShowingWithoutId: isShowingWithoutIdProp,
                 isUpdating: isUpdatingProp,
                 loadingState,
+                onAutoUpdateProject: onAutoUpdateProjectProp,
                 onCreatedProject: onCreatedProjectProp,
                 onCreateProject: onCreateProjectProp,
+                onManualUpdateProject: onManualUpdateProjectProp,
                 onProjectError: onProjectErrorProp,
                 onShowCreateSuccessAlert,
                 onShowCreatingAlert,
                 onShowSaveSuccessAlert,
                 onShowSavingAlert,
                 onUpdatedProject: onUpdatedProjectProp,
-                onUpdateProject: onUpdateProjectProp,
                 reduxProjectId,
                 reduxProjectTitle,
                 /* eslint-enable no-unused-vars */
@@ -165,19 +170,21 @@ const ProjectSaverHOC = function (WrappedComponent) {
         canSave: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
         isCreatingNew: PropTypes.bool,
+        isManualUpdating: PropTypes.bool,
         isRemixing: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         isShowingWithoutId: PropTypes.bool,
         isUpdating: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onAutoUpdateProject: PropTypes.func,
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
+        onManualUpdateProject: PropTypes.func,
         onProjectError: PropTypes.func,
         onShowCreateSuccessAlert: PropTypes.func,
         onShowCreatingAlert: PropTypes.func,
         onShowSaveSuccessAlert: PropTypes.func,
         onShowSavingAlert: PropTypes.func,
-        onUpdateProject: PropTypes.func,
         onUpdatedProject: PropTypes.func,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectTitle: PropTypes.string,
@@ -192,6 +199,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isShowingWithId: getIsShowingProject(loadingState),
             isShowingWithoutId: getIsShowingWithoutId(loadingState),
             isUpdating: getIsUpdating(loadingState),
+            isManualUpdating: getIsManualUpdating(loadingState),
             loadingState: loadingState,
             reduxProjectId: state.scratchGui.projectState.projectId,
             reduxProjectTitle: state.scratchGui.projectTitle,
@@ -199,14 +207,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
+        onAutoUpdateProject: () => dispatch(autoUpdateProject()),
         onCreatedProject: (projectId, loadingState) => dispatch(doneCreatingProject(projectId, loadingState)),
         onCreateProject: () => dispatch(createProject()),
+        onManualUpdateProject: () => dispatch(manualUpdateProject()),
         onProjectError: error => dispatch(projectError(error)),
         onShowCreateSuccessAlert: () => dispatch(showStandardAlert('createSuccess')),
         onShowCreatingAlert: () => dispatch(showStandardAlert('creating')),
         onShowSaveSuccessAlert: () => dispatch(showStandardAlert('saveSuccess')),
         onShowSavingAlert: () => dispatch(showStandardAlert('saving')),
-        onUpdateProject: () => dispatch(updateProject()),
         onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState))
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

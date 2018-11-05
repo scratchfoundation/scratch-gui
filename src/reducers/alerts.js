@@ -21,22 +21,23 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case SHOW_STANDARD_ALERT: {
-        const newList = state.alertsList.slice();
         const alertId = action.alertId;
         if (alertId) {
             const newAlert = {
-                level: AlertLevels.WARN
+                level: AlertLevels.WARN // default level
             };
             const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);
-            if (alertData && alertData.content) {
+            if (alertData) {
+                let newList = state.alertsList.slice();
+                newList = newList.filter(curAlert => (
+                    !alertData.clearList || alertData.clearList.indexOf(curAlert.alertId)
+                ));
+
                 newAlert.content = alertData.content;
-                if (alertData.iconURL) {
-                    newAlert.iconURL = alertData.iconURL;
-                }
-                if (alertData.level) {
-                    newAlert.level = alertData.level;
-                }
+                newAlert.iconURL = alertData.iconURL;
+                newAlert.level = alertData.level;
                 newList.push(newAlert);
+
                 return Object.assign({}, state, {
                     alertsList: newList
                 });

@@ -25,9 +25,9 @@ import {setPlayer} from '../../reducers/mode';
 import {
     getIsUpdating,
     getIsShowingProject,
+    manualUpdateProject,
     requestNewProject,
     remixProject,
-    updateProject,
     saveProjectAsCopy
 } from '../../reducers/project-state';
 import {
@@ -745,7 +745,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
-    onClickSave: () => dispatch(updateProject()),
+    onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });

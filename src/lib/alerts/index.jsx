@@ -13,6 +13,7 @@ const alerts = [
         alertId: 'createSuccess',
         iconURL: successImage,
         level: 'success',
+        clearList: ['creating'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully created."
@@ -36,6 +37,7 @@ const alerts = [
         alertId: 'saveSuccess',
         iconURL: successImage,
         level: 'success',
+        clearList: ['saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully saved."

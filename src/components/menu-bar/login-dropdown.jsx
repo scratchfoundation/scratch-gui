@@ -16,22 +16,22 @@ import styles from './login-dropdown.css';
 // these are here as a hack to get them translated, so that equivalent messages will be translated
 // when passed in from www via gui's renderLogin() function
 const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-vars
-    backdrop: {
+    username: {
         defaultMessage: 'Username',
         description: 'Label for login username input',
         id: 'general.username'
     },
-    costume: {
+    password: {
         defaultMessage: 'Password',
         description: 'Label for login password input',
         id: 'general.password'
     },
-    sprite: {
+    signin: {
         defaultMessage: 'Sign in',
         description: 'Button text for user to sign in',
         id: 'general.signIn'
     },
-    pop: {
+    needhelp: {
         defaultMessage: 'Need Help?',
         description: 'Button text for user to indicate that they need help',
         id: 'login.needHelp'

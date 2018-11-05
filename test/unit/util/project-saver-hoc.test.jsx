@@ -36,7 +36,7 @@ describe('projectSaverHOC', () => {
                 loadingState={LoadingState.SHOWING_WITH_ID}
                 store={store}
                 vm={vm}
-                onUpdateProject={mockedUpdateProject}
+                onAutoUpdateProject={mockedUpdateProject}
             />
         );
         mounted.setProps({
@@ -59,7 +59,7 @@ describe('projectSaverHOC', () => {
                 loadingState={LoadingState.LOADING_VM_WITH_ID}
                 store={store}
                 vm={vm}
-                onUpdateProject={mockedSaveProject}
+                onAutoUpdateProject={mockedSaveProject}
             />
         );
         mounted.setProps({

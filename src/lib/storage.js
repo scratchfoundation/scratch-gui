@@ -20,7 +20,9 @@ class Storage extends ScratchStorage {
         );
         this.addWebStore(
             [this.AssetType.ImageVector, this.AssetType.ImageBitmap, this.AssetType.Sound],
-            this.getAssetGetConfig.bind(this)
+            this.getAssetGetConfig.bind(this),
+            this.getAssetCreateConfig.bind(this),
+            this.getAssetCreateConfig.bind(this)
         );
         this.addWebStore(
             [this.AssetType.Sound],
@@ -50,6 +52,13 @@ class Storage extends ScratchStorage {
     }
     getAssetGetConfig (asset) {
         return `${this.assetHost}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
+    }
+    getAssetCreateConfig (asset) {
+        return {
+            method: 'post',
+            url: `${this.assetHost}/${asset.assetId}.${asset.dataFormat}`,
+            withCredentials: true
+        };
     }
     setTranslatorFunction (translator) {
         this.translator = translator;

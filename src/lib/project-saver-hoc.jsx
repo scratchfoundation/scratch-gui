@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
+import log from '../lib/log';
 import storage from '../lib/storage';
 import {showStandardAlert} from '../reducers/alerts';
 import {
@@ -136,25 +137,36 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * @param {?object} requestParams - object of params to add to request body
          */
         storeProject (projectId, requestParams) {
-            return this.props.vm.saveProjectSb3()
-                .then(content => {
-                    const assetType = storage.AssetType.Project;
-                    const dataFormat = storage.DataFormat.SB3;
-                    const body = new FormData();
-                    body.append('sb3_file', content, 'sb3_file');
-                    if (requestParams) {
-                        for (const key in requestParams) {
-                            body.append(key, requestParams[key]);
-                        }
-                    }
-                    // when id is undefined or null, storage.store as we have
-                    // configured it will create a new project with id
-                    return storage.store(
-                        assetType,
-                        dataFormat,
-                        body,
-                        projectId
-                    );
+            requestParams = requestParams || {};
+            return Promise.all(this.props.vm.assets
+                .filter(asset => !asset.clean)
+                .map(
+                    asset => storage.store(
+                        asset.assetType,
+                        asset.dataFormat,
+                        asset.data,
+                        asset.assetId
+                    ).then(
+                        () => (asset.clean = true)
+                    )
+                )
+            ).then(() => {
+                const body = new FormData();
+                const sb3Json = new Blob([this.props.vm.toJSON()], {type: 'application/json'});
+                body.append('sb3_file', sb3Json, 'sb3_file');
+                for (const key in requestParams) {
+                    if (requestParams.hasOwnProperty(key)) body.append(key, requestParams[key]);
+                }
+                return storage.store(
+                    storage.AssetType.Project,
+                    storage.DataFormat.JSON,
+                    body,
+                    projectId
+                );
+            })
+                .catch(err => {
+                    // @todo do something here
+                    log.error(err);
                 });
         }
         render () {

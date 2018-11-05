@@ -41,7 +41,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.storeProject(this.props.reduxProjectId)
                     .then(() => {
                         // there is nothing we expect to find in response that we need to check here
-                        this.props.onShowSaveSuccessAlert();
+                        if (this.props.isManualUpdating) {
+                            this.props.onShowSaveSuccessAlert();
+                        }
                         this.props.onUpdatedProject(this.props.loadingState);
                     })
                     .catch(err => {
@@ -62,12 +64,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
             if (this.props.isCreatingCopy && !prevProps.isCreatingCopy) {
+                this.props.onShowCreatingAlert();
                 this.storeProject(null, {
                     original_id: this.props.reduxProjectId,
                     is_copy: 1,
                     title: this.props.reduxProjectTitle
                 })
                     .then(response => {
+                        this.props.onShowCreateSuccessAlert();
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                     })
                     .catch(err => {
@@ -75,12 +79,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
             }
             if (this.props.isRemixing && !prevProps.isRemixing) {
+                this.props.onShowCreatingAlert();
                 this.storeProject(null, {
                     original_id: this.props.reduxProjectId,
                     is_remix: 1,
                     title: this.props.reduxProjectTitle
                 })
                     .then(response => {
+                        this.props.onShowCreateSuccessAlert();
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                     })
                     .catch(err => {

@@ -4,7 +4,6 @@ import React from 'react';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
-import {getVariableValue, setVariableValue} from '../lib/variable-utils';
 import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
 
 class ListMonitor extends React.Component {
@@ -46,9 +45,9 @@ class ListMonitor extends React.Component {
         // Submit any in-progress value edits on blur
         if (this.state.activeIndex !== null) {
             const {vm, targetId, id: variableId} = this.props;
-            const newListValue = getVariableValue(vm, targetId, variableId);
+            const newListValue = vm.getVariableValue(targetId, variableId);
             newListValue[this.state.activeIndex] = this.state.activeValue;
-            setVariableValue(vm, targetId, variableId, newListValue);
+            vm.setVariableValue(targetId, variableId, newListValue);
             this.setState({activeIndex: null, activeValue: null});
         }
     }
@@ -82,11 +81,11 @@ class ListMonitor extends React.Component {
             this.handleDeactivate(); // Submit in-progress edits
             const newListItemValue = ''; // Enter adds a blank item
             const newValueOffset = e.shiftKey ? 0 : 1; // Shift-enter inserts above
-            const listValue = getVariableValue(vm, targetId, variableId);
+            const listValue = vm.getVariableValue(targetId, variableId);
             const newListValue = listValue.slice(0, previouslyActiveIndex + newValueOffset)
                 .concat([newListItemValue])
                 .concat(listValue.slice(previouslyActiveIndex + newValueOffset));
-            setVariableValue(vm, targetId, variableId, newListValue);
+            vm.setVariableValue(targetId, variableId, newListValue);
             const newIndex = this.wrapListIndex(previouslyActiveIndex + newValueOffset, newListValue.length);
             this.setState({
                 activeIndex: newIndex,
@@ -103,10 +102,10 @@ class ListMonitor extends React.Component {
         e.preventDefault(); // Default would blur input, prevent that.
         e.stopPropagation(); // Bubbling would activate, which will be handled here
         const {vm, targetId, id: variableId} = this.props;
-        const listValue = getVariableValue(vm, targetId, variableId);
+        const listValue = vm.getVariableValue(targetId, variableId);
         const newListValue = listValue.slice(0, this.state.activeIndex)
             .concat(listValue.slice(this.state.activeIndex + 1));
-        setVariableValue(vm, targetId, variableId, newListValue);
+        vm.setVariableValue(targetId, variableId, newListValue);
         const newActiveIndex = Math.min(newListValue.length - 1, this.state.activeIndex);
         this.setState({
             activeIndex: newActiveIndex,
@@ -117,8 +116,8 @@ class ListMonitor extends React.Component {
     handleAdd () {
         // Add button appends a blank value and switches to it
         const {vm, targetId, id: variableId} = this.props;
-        const newListValue = getVariableValue(vm, targetId, variableId).concat(['']);
-        setVariableValue(vm, targetId, variableId, newListValue);
+        const newListValue = vm.getVariableValue(targetId, variableId).concat(['']);
+        vm.setVariableValue(targetId, variableId, newListValue);
         this.setState({activeIndex: newListValue.length - 1, activeValue: ''});
     }
 

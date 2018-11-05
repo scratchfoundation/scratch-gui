@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
-import {setVariableValue} from '../lib/variable-utils';
 import {connect} from 'react-redux';
 
 import SliderMonitorComponent from '../components/monitor/slider-monitor.jsx';
@@ -26,7 +25,7 @@ class SliderMonitor extends React.Component {
     handleSliderUpdate (e) {
         this.setState({value: Number(e.target.value)});
         const {vm, targetId, id: variableId} = this.props;
-        setVariableValue(vm, targetId, variableId, Number(e.target.value));
+        vm.setVariableValue(targetId, variableId, Number(e.target.value));
     }
     render () {
         const {

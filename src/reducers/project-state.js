@@ -379,8 +379,8 @@ const setProjectId = id => ({
     projectId: id
 });
 
-const requestNewProject = canCreateNew => {
-    if (canCreateNew) return {type: START_UPDATING_BEFORE_CREATING_NEW};
+const requestNewProject = needSave => {
+    if (needSave) return {type: START_UPDATING_BEFORE_CREATING_NEW};
     return {type: START_FETCHING_NEW};
 };
 

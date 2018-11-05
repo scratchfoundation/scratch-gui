@@ -150,12 +150,13 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        // if canCreateNew===true, it's safe to replace current project, since we will auto-save first.
+        // if canSave===true, it's safe to replace current project, since we will auto-save first.
         // else confirm first.
-        const readyToReplaceProject = this.props.canCreateNew ||
+        const readyToReplaceProject = this.props.canSave ||
             confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+        this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
-            this.props.onClickNew(this.props.canCreateNew);
+            this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }
     }
     handleClickRemix () {
@@ -752,7 +753,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickNew: canCreateNew => dispatch(requestNewProject(canCreateNew)),
+    onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(updateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),

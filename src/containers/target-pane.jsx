@@ -231,6 +231,7 @@ class TargetPane extends React.Component {
 
 const {
     onSelectSprite, // eslint-disable-line no-unused-vars
+    onActivateBlocksTab, // eslint-disable-line no-unused-vars
     ...targetPaneProps
 } = TargetPaneComponent.propTypes;
 

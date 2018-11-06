@@ -141,7 +141,7 @@ export default {
         steps: [{
             video: 'k54n8uwcty',
             trackingPixel: (
-                <img src="http://code.org/api/hour/scratch_talk.png" />
+                <img src="https://code.org/api/hour/scratch_talk.png" />
             )
         }, {
             title: (
@@ -256,7 +256,7 @@ export default {
         steps: [{
             video: 'uz5oz5h9yg',
             trackingPixel: (
-                <img src="http://code.org/api/hour/scratch_adventure.png" />
+                <img src="https://code.org/api/hour/scratch_adventure.png" />
             )
         }, {
             title: (

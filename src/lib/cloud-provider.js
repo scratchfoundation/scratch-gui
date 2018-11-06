@@ -79,10 +79,13 @@ class CloudProvider {
         msg.user = this.username;
         msg.project_id = this.projectId;
 
+        // Optional string params can use simple falsey undefined check
         if (dataName) msg.name = dataName;
-        if (dataValue) msg.value = dataValue;
-        if (dataIndex) msg.index = dataIndex;
         if (dataNewName) msg.new_name = dataNewName;
+
+        // Optional number params need different undefined check
+        if (typeof dataValue !== 'undefined') msg.value = dataValue;
+        if (typeof dataValue !== 'undefined') msg.index = dataIndex;
 
         const dataToWrite = JSON.stringify(msg);
         this.sendCloudData(dataToWrite);

@@ -312,7 +312,7 @@ const sound = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
-        <block id="volume" type="sound_volume"/>
+        <block id="${targetId}_volume" type="sound_volume"/>
         ${categorySeparator}
     </category>
     `;

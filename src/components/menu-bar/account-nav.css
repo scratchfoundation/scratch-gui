@@ -28,11 +28,8 @@
 }
 
 .user-info .avatar {
-    margin-right: calc($space * .8125);
-    border-radius: $form-radius;
     width: 2rem;
     height: 2rem;
-    vertical-align: middle;
 }
 
 [dir="ltr"] .user-info .dropdown-caret-position {
@@ -45,6 +42,12 @@
 
 .user-info .dropdown-caret-position {
   display: inline-block;
-  padding-bottom: .125rem;
+  padding-bottom: .0625rem;
   vertical-align: middle;
+}
+
+.user-info .profile-name {
+    font-size: .75rem;
+    line-height: .9375rem;
+    font-weight: bold;
 }

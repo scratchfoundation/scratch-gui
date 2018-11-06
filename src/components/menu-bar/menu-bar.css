@@ -126,6 +126,11 @@
     height: 34px;
 }
 
+.author-info {
+    margin-left: .25rem;
+    margin-right: .6875rem;
+}
+
 .menu-bar-button {
     height: 2rem;
 }

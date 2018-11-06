@@ -14,6 +14,7 @@ import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
+import AuthorInfo from './author-info.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
@@ -468,17 +469,26 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    <div className={classNames(styles.menuBarItem, styles.growable)}>
-                        <MenuBarItemTooltip
-                            enable
-                            id="title-field"
-                        >
-                            <ProjectTitleInput
-                                className={classNames(styles.titleFieldGrowable)}
-                                onUpdateProjectTitle={this.props.onUpdateProjectTitle}
-                            />
-                        </MenuBarItemTooltip>
-                    </div>
+                    {(this.props.authorUsername && this.props.authorUsername !== this.props.username) ? (
+                        <AuthorInfo
+                            className={styles.authorInfo}
+                            projectTitle={this.props.projectTitle}
+                            userId={this.props.authorId}
+                            username={this.props.authorUsername}
+                        />
+                    ) : (
+                        <div className={classNames(styles.menuBarItem, styles.growable)}>
+                            <MenuBarItemTooltip
+                                enable
+                                id="title-field"
+                            >
+                                <ProjectTitleInput
+                                    className={classNames(styles.titleFieldGrowable)}
+                                    onUpdateProjectTitle={this.props.onUpdateProjectTitle}
+                                />
+                            </MenuBarItemTooltip>
+                        </div>
+                    )}
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? shareButton : (
                             this.props.showComingSoon ? (
@@ -677,6 +687,8 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     accountMenuOpen: PropTypes.bool,
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canRemix: PropTypes.bool,
@@ -714,6 +726,7 @@ MenuBar.propTypes = {
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     showComingSoon: PropTypes.bool,
@@ -736,6 +749,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
+        projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null
     };

@@ -58,6 +58,8 @@ const GUIComponent = props => {
         accountNavOpen,
         activeTabIndex,
         alertsVisible,
+        authorId,
+        authorUsername,
         basePath,
         backdropLibraryVisible,
         backpackOptions,
@@ -179,6 +181,8 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    authorId={authorId}
+                    authorUsername={authorUsername}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canRemix={canRemix}
@@ -323,6 +327,8 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
         host: PropTypes.string,

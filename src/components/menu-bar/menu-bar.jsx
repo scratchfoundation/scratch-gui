@@ -150,9 +150,9 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        // if canSave===true, it's safe to replace current project, since we will auto-save first.
-        // else confirm first.
-        const readyToReplaceProject = this.props.canSave ||
+        // if canSave===true and canCreateNew===true, it's safe to replace current project,
+        // since we will auto-save first. Else, confirm first.
+        const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
             confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
         this.props.onRequestCloseFile();
         if (readyToReplaceProject) {

@@ -17,6 +17,7 @@ import ProjectTitleInput from './project-title-input.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
+import RubyDownloader from '../../containers/ruby-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
@@ -401,18 +402,17 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}</SB3Downloader>
-                                    <MenuItemTooltip
-                                        id="download_ruby_code"
-                                        isRtl={this.props.isRtl}
-                                    >
-                                        <MenuItem>
+                                    <RubyDownloader>{downloadProject => (
+                                        <MenuItem
+                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
+                                        >
                                             <FormattedMessage
-                                                defaultMessage="Download Ruby code to your computer"
+                                                defaultMessage="Save Ruby code to your computer"
                                                 description="Menu bar item for downloading Ruby code to your computer"
                                                 id="gui.smalruby3.menuBar.downloadRubyCodeToComputer"
                                             />
                                         </MenuItem>
-                                    </MenuItemTooltip>
+                                    )}</RubyDownloader>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

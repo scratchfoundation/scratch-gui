@@ -72,7 +72,7 @@ class LibraryItem extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
-                {true ? (
+                {true ? ( /* TODO: make extension-only */
                     <div className={styles.libraryItemInsetImageContainer}>
                         <img
                             className={styles.libraryItemInsetImage}

@@ -4,7 +4,7 @@
 .library-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: flex-start;
     flex-basis: 160px;
     max-width: 160px;
@@ -52,20 +52,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -41px; /* TODO: better way? */
-    margin-left: 15px; /* TODO: better way? */
+    margin-top: -2.5rem;
+    margin-left: 1rem;
     align-self: flex-start;
     background-color: rgb(35, 188, 141);
-    width: 55px;
-    height: 55px;
+    width: 3.5rem;
+    height: 3.5rem;
     z-index: 10;
-    border-radius: 8px;
-    border: 4px solid $ui-white;
+    border-radius: 0.5rem;
+    border: 0.25rem solid $ui-white;
 }
 
 .library-item-image {
     max-width: 100%;
     max-height: 100%;
+}
+
+.library-item-inset-image {
+    width: 2.5rem;
 }
 
 .library-item-name {

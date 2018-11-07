@@ -1,4 +1,4 @@
-const jpegThumbnail = dataUrl => new Promise(resolve => {
+const jpegThumbnail = dataUrl => new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {
         const canvas = document.createElement('canvas');
@@ -13,6 +13,9 @@ const jpegThumbnail = dataUrl => new Promise(resolve => {
         ctx.drawImage(image, 0, 0);
         // TODO we can play with the `quality` option here to optimize file size
         resolve(canvas.toDataURL('image/jpeg', 0.92 /* quality */)); // Default quality is 0.92
+    };
+    image.onerror = err => {
+        reject(err);
     };
     image.src = dataUrl;
 });

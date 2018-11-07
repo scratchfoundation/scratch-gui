@@ -150,12 +150,13 @@ class MenuBar extends React.Component {
         }
     }
     handleClickNew () {
-        // if canCreateNew===true, it's safe to replace current project, since we will auto-save first.
-        // else confirm first.
-        const readyToReplaceProject = this.props.canCreateNew ||
+        // if canSave===true and canCreateNew===true, it's safe to replace current project,
+        // since we will auto-save first. Else, confirm first.
+        const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
             confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+        this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
-            this.props.onClickNew(this.props.canCreateNew);
+            this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }
     }
     handleClickRemix () {
@@ -337,37 +338,25 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseFile}
                             >
-                                <MenuItem
-                                    isRtl={this.props.isRtl}
-                                    onClick={this.handleClickNew}
-                                >
-                                    {newProjectMessage}
-                                </MenuItem>
+                                <MenuSection>
+                                    <MenuItem
+                                        isRtl={this.props.isRtl}
+                                        onClick={this.handleClickNew}
+                                    >
+                                        {newProjectMessage}
+                                    </MenuItem>
+                                </MenuSection>
                                 <MenuSection>
                                     {this.props.canSave ? (
                                         <MenuItem onClick={this.handleClickSave}>
                                             {saveNowMessage}
                                         </MenuItem>
-                                    ) : (this.props.showComingSoon ? (
-                                        <MenuItemTooltip
-                                            id="save"
-                                            isRtl={this.props.isRtl}
-                                        >
-                                            <MenuItem>{saveNowMessage}</MenuItem>
-                                        </MenuItemTooltip>
-                                    ) : [])}
+                                    ) : []}
                                     {this.props.canCreateCopy ? (
                                         <MenuItem onClick={this.handleClickSaveAsCopy}>
                                             {createCopyMessage}
                                         </MenuItem>
-                                    ) : (this.props.showComingSoon ? (
-                                        <MenuItemTooltip
-                                            id="copy"
-                                            isRtl={this.props.isRtl}
-                                        >
-                                            <MenuItem>{createCopyMessage}</MenuItem>
-                                        </MenuItemTooltip>
-                                    ) : [])}
+                                    ) : []}
                                     {this.props.canRemix ? (
                                         <MenuItem onClick={this.handleClickRemix}>
                                             {remixMessage}
@@ -376,8 +365,9 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                                 <MenuSection>
                                     <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
-                                        {(renderFileInput, loadProject) => (
+                                        {(className, renderFileInput, loadProject) => (
                                             <MenuItem
+                                                className={className}
                                                 onClick={loadProject}
                                             >
                                                 <FormattedMessage
@@ -391,8 +381,9 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}
                                     </SBFileUploader>
-                                    <SB3Downloader>{downloadProject => (
+                                    <SB3Downloader>{(className, downloadProject) => (
                                         <MenuItem
+                                            className={className}
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
                                             <FormattedMessage
@@ -752,7 +743,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickNew: canCreateNew => dispatch(requestNewProject(canCreateNew)),
+    onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(updateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),

@@ -27,6 +27,9 @@
     line-height: 34px;
     white-space: nowrap;
     padding: 0 10px;
+    font-size: .75rem;
+    margin: 0;
+    font-weight: bold;
 }
 
 .menu-item.active,

@@ -1,11 +1,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import Box from '../box/box.jsx';
 import Meter from '../meter/meter.jsx';
 import Waveform from '../waveform/waveform.jsx';
 
 import styles from './record-modal.css';
 import stopIcon from './icon--stop-recording.svg';
+
+const messages = defineMessages({
+    beginRecord: {
+        defaultMessage: 'Begin recording by clicking the button below',
+        description: 'Message for recording sound modal',
+        id: 'gui.recordingStep.beginRecord'
+    },
+    permission: {
+        defaultMessage: '{arrow}We need your permission to use your microphone',
+        description: 'Permission required notice in recording sound modal. Do not translate {arrow}',
+        id: 'gui.recordingStep.permission'
+    },
+    stop: {
+        defaultMessage: 'Stop recording',
+        description: 'Stop recording button label',
+        id: 'gui.recordingStep.stop'
+    },
+    record: {
+        defaultMessage: 'Record',
+        description: 'Record button label',
+        id: 'gui.recordingStep.record'
+    }
+});
 
 const RecordingStep = props => (
     <Box>
@@ -27,8 +51,11 @@ const RecordingStep = props => (
                     />
                 ) : (
                     <span className={styles.helpText}>
-                        {props.listening ? 'Begin recording by clicking the button below' :
-                            '↖️ \u00A0We need your permission to use your microphone'}
+                        {props.listening ? props.intl.formatMessage(messages.beginRecord) :
+                            props.intl.formatMessage(messages.permission,
+                                {arrow: props.isRtl ? '↗️ \u00A0' : '↖️ \u00A0'}
+                            )
+                        }
                     </span>
                 )}
             </Box>
@@ -66,7 +93,11 @@ const RecordingStep = props => (
                 )}
                 <div className={styles.helpText}>
                     <span className={styles.recordingText}>
-                        {props.recording ? 'Stop recording' : 'Record'}
+                        {
+                            props.recording ?
+                                props.intl.formatMessage(messages.stop) :
+                                props.intl.formatMessage(messages.record)
+                        }
                     </span>
                 </div>
             </button>
@@ -75,6 +106,8 @@ const RecordingStep = props => (
 );
 
 RecordingStep.propTypes = {
+    intl: intlShape.isRequired,
+    isRtl: PropTypes.bool,
     level: PropTypes.number,
     levels: PropTypes.arrayOf(PropTypes.number),
     listening: PropTypes.bool,
@@ -83,4 +116,4 @@ RecordingStep.propTypes = {
     recording: PropTypes.bool
 };
 
-export default RecordingStep;
+export default injectIntl(RecordingStep);

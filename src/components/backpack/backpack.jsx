@@ -10,14 +10,28 @@ import styles from './backpack.css';
 // TODO make sprite selector item not require onClick
 const noop = () => {};
 
-const dragTypeMap = {
+const dragTypeMap = { // Keys correspond with the backpack-server item types
     costume: DragConstants.BACKPACK_COSTUME,
     sound: DragConstants.BACKPACK_SOUND,
-    code: DragConstants.BACKPACK_CODE,
+    script: DragConstants.BACKPACK_CODE,
     sprite: DragConstants.BACKPACK_SPRITE
 };
 
-const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, onToggle, onDelete}) => (
+const Backpack = ({
+    blockDragOver,
+    containerRef,
+    contents,
+    dragOver,
+    error,
+    expanded,
+    loading,
+    showMore,
+    onToggle,
+    onDelete,
+    onMouseEnter,
+    onMouseLeave,
+    onMore
+}) => (
     <div className={styles.backpackContainer}>
         <div
             className={styles.backpackHeader}
@@ -44,8 +58,12 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
         </div>
         {expanded ? (
             <div
-                className={styles.backpackList}
+                className={classNames(styles.backpackList, {
+                    [styles.dragOver]: dragOver || blockDragOver
+                })}
                 ref={containerRef}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
             >
                 {error ? (
                     <div className={styles.statusMessage}>
@@ -66,11 +84,7 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
                         </div>
                     ) : (
                         contents.length > 0 ? (
-                            <div
-                                className={classNames(styles.backpackListInner, {
-                                    [styles.dragOver]: dragOver
-                                })}
-                            >
+                            <div className={styles.backpackListInner}>
                                 {contents.map(item => (
                                     <SpriteSelectorItem
                                         className={styles.backpackItem}
@@ -86,6 +100,18 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
                                         onDeleteButtonClick={onDelete}
                                     />
                                 ))}
+                                {showMore && (
+                                    <button
+                                        className={styles.more}
+                                        onClick={onMore}
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="More"
+                                            description="Load more from backpack"
+                                            id="gui.backpack.more"
+                                        />
+                                    </button>
+                                )}
                             </div>
                         ) : (
                             <div className={styles.statusMessage}>
@@ -104,6 +130,7 @@ const Backpack = ({containerRef, contents, dragOver, error, expanded, loading, o
 );
 
 Backpack.propTypes = {
+    blockDragOver: PropTypes.bool,
     containerRef: PropTypes.func,
     contents: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
@@ -116,14 +143,21 @@ Backpack.propTypes = {
     expanded: PropTypes.bool,
     loading: PropTypes.bool,
     onDelete: PropTypes.func,
-    onToggle: PropTypes.func
+    onMore: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onToggle: PropTypes.func,
+    showMore: PropTypes.bool
 };
 
 Backpack.defaultProps = {
+    blockDragOver: false,
     contents: [],
     dragOver: false,
     expanded: false,
     loading: false,
+    showMore: false,
+    onMore: null,
     onToggle: null
 };
 

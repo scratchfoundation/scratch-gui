@@ -189,7 +189,7 @@ class TargetPane extends React.Component {
                 }, targetId);
             } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
                 this.props.vm.addSound({
-                    md5: dragInfo.payload.bodiy,
+                    md5: dragInfo.payload.body,
                     name: dragInfo.payload.name
                 }, targetId);
             } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {

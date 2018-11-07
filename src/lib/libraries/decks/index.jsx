@@ -323,9 +323,9 @@ export default {
             ),
             image: stepCNbackdrop
         },
-          {
+        {
             video: '6o76f5ivo1'
-          },
+        },
         {
             deckIds: [
                 'switch-costume',

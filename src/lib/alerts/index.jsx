@@ -20,7 +20,7 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: 'success'
+        level: AlertLevels.SUCCESS
     },
     {
         alertId: 'creating',
@@ -31,7 +31,7 @@ const alerts = [
                 id="gui.alerts.creating"
             />
         ),
-        level: 'success'
+        level: AlertLevels.SUCCESS
     },
     {
         alertId: 'saveSuccess',
@@ -44,7 +44,7 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: 'success'
+        level: AlertLevels.SUCCESS
     },
     {
         alertId: 'saving',
@@ -55,7 +55,7 @@ const alerts = [
                 id="gui.alerts.saving"
             />
         ),
-        level: 'success'
+        level: AlertLevels.SUCCESS
     }
 ];
 

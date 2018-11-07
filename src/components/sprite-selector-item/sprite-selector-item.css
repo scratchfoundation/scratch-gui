@@ -42,6 +42,7 @@
 .sprite-image {
     margin: auto;
     user-select: none;
+    pointer-events: none;
     max-width: 32px;
     max-height: 32px;
 }
@@ -80,7 +81,7 @@
 .delete-button {
     position: absolute;
     top: 0.125rem;
-    z-index: 1;
+    z-index: auto;
 }
 
 [dir="ltr"] .delete-button {

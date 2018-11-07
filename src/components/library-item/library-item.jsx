@@ -7,6 +7,8 @@ import Box from '../box/box.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';
 
+import insetImageURL from '../../lib/libraries/extensions/peripheral-connection/ev3/ev3-small.svg';
+
 class LibraryItem extends React.PureComponent {
     constructor (props) {
         super(props);
@@ -70,6 +72,14 @@ class LibraryItem extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
+                {true ? (
+                    <div className={styles.libraryItemInsetImageContainer}>
+                        <img
+                            className={styles.libraryItemInsetImage}
+                            src={insetImageURL}
+                        />
+                    </div>
+                ) : null}
                 <div
                     className={styles.featuredText}
                 >
@@ -114,6 +124,7 @@ LibraryItem.propTypes = {
     featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
+    insetIconURL: PropTypes.string,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node

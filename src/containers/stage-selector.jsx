@@ -12,6 +12,7 @@ import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
+import {fetchCode} from '../lib/backpack-api';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
@@ -22,7 +23,8 @@ const dragTypes = [
     DragConstants.COSTUME,
     DragConstants.SOUND,
     DragConstants.BACKPACK_COSTUME,
-    DragConstants.BACKPACK_SOUND
+    DragConstants.BACKPACK_SOUND,
+    DragConstants.BACKPACK_CODE
 ];
 
 const DroppableStage = DropAreaHOC(dragTypes)(StageSelectorComponent);
@@ -99,6 +101,12 @@ class StageSelector extends React.Component {
                 md5: dragInfo.payload.body,
                 name: dragInfo.payload.name
             }, this.props.id);
+        } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
+            fetchCode(dragInfo.payload.bodyUrl)
+                .then(blocks => {
+                    this.props.vm.shareBlocksToTarget(blocks, this.props.id);
+                    this.props.vm.refreshWorkspace();
+                });
         }
     }
     setFileInput (input) {

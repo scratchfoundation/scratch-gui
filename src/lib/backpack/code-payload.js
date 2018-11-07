@@ -1,16 +1,20 @@
-import codeThumbnail from './code-thumbnail';
+import blockToImage from './block-to-image';
+import jpegThumbnail from './jpeg-thumbnail';
 
-const codePayload = code => {
+const codePayload = ({blockObjects, topBlockId}) => {
     const payload = {
         type: 'script', // Needs to match backpack-server type name
         name: 'code', // All code currently gets the same name
         mime: 'application/json',
-        body: btoa(JSON.stringify(code)), // Base64 encode the json
-        thumbnail: codeThumbnail // TODO make code thumbnail dynamic
+        body: btoa(JSON.stringify(blockObjects)) // Base64 encode the json
     };
 
-    // Return a promise to make it consistent with other payload constructors like costume-payload
-    return new Promise(resolve => resolve(payload));
+    return blockToImage(topBlockId)
+        .then(jpegThumbnail)
+        .then(thumbnail => {
+            payload.thumbnail = thumbnail.replace('data:image/jpeg;base64,', '');
+            return payload;
+        });
 };
 
 export default codePayload;

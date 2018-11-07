@@ -27,6 +27,7 @@ const AlertComponent = ({
         className={classNames(styles.alert, styles[level])}
     >
         <div className={styles.alertMessage}>
+            {/* TODO: implement Rtl handling */}
             {iconURL ? (
                 <img
                     className={styles.alertIcon}
@@ -34,6 +35,7 @@ const AlertComponent = ({
                 />
             ) : null}
             {message}
+            &nbsp;
             {content}
         </div>
         {showReconnect ? (

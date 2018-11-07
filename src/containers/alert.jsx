@@ -45,9 +45,7 @@ class Alert extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    state: state
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     onOpenConnectionModal: id => {

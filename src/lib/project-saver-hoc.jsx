@@ -54,7 +54,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // TODO: distinguish between creating new, remixing, and saving as a copy
             if (this.props.isCreatingNew && !prevProps.isCreatingNew) {
                 this.props.onShowCreatingAlert();
-                this.storeProject()
+                this.storeProject(null)
                     .then(response => {
                         this.props.onShowCreateSuccessAlert();
                         this.props.onCreatedProject(response.id.toString(), this.props.loadingState);

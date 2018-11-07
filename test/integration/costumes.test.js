@@ -139,7 +139,7 @@ describe('Working with costumes', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.join(process.cwd(), 'test', 'integration', 'fixtures', '100-100.svg'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/100-100.svg'));
         await clickText('100-100', scope.costumesTab); // Name from filename
         await clickText('100 x 100', scope.costumesTab); // Size is right
         const logs = await getLogs();
@@ -155,7 +155,7 @@ describe('Working with costumes', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.join(process.cwd(), 'test', 'integration', 'fixtures', 'gh-3582-png.png'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/gh-3582-png.png'));
         await clickText('gh-3582-png', scope.costumesTab);
         const logs = await getLogs();
         await expect(logs).toEqual([]);

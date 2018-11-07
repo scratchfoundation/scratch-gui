@@ -83,7 +83,7 @@ describe('Working with sprites', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.join(process.cwd(), 'test', 'fixtures', 'gh-3582-png.png'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/gh-3582-png.png'));
         await clickText('gh-3582-png', scope.spriteTile);
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -99,7 +99,7 @@ describe('Working with sprites', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.join(process.cwd(), 'test', 'fixtures', '100-100.svg'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/100-100.svg'));
         await clickText('100-100', scope.spriteTile); // Sprite is named for costume filename
 
         // Check to make sure the size is right

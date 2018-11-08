@@ -10,16 +10,9 @@ import classNames from 'classnames';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
-class LibraryItem extends React.PureComponent {
+class LibraryItemComponent extends React.PureComponent {
     constructor (props) {
         super(props);
-        this.state = {
-            iconURL: null
-        };
-        Promise.resolve(props.iconURL)
-            .then(url => this.setState({
-                iconURL: url
-            }));
         bindAll(this, [
             'handleBlur',
             'handleClick',
@@ -79,7 +72,7 @@ class LibraryItem extends React.PureComponent {
                     ) : null}
                     <img
                         className={styles.featuredImage}
-                        src={this.state.iconURL}
+                        src={this.props.iconURI}
                     />
                 </div>
                 {this.props.insetIconURL ? (
@@ -165,7 +158,7 @@ class LibraryItem extends React.PureComponent {
                     <Box className={styles.libraryItemImageContainer}>
                         <img
                             className={styles.libraryItemImage}
-                            src={this.state.iconURL}
+                            src={this.props.iconURI}
                         />
                     </Box>
                 </Box>
@@ -175,7 +168,7 @@ class LibraryItem extends React.PureComponent {
     }
 }
 
-LibraryItem.propTypes = {
+LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
@@ -186,10 +179,7 @@ LibraryItem.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconURL: PropTypes.oneOfType([
-        PropTypes.string, // URL
-        PropTypes.instanceOf(Promise) // Promise for URL
-    ]),
+    iconURI: PropTypes.string,
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
@@ -204,8 +194,8 @@ LibraryItem.propTypes = {
     onSelect: PropTypes.func.isRequired
 };
 
-LibraryItem.defaultProps = {
+LibraryItemComponent.defaultProps = {
     disabled: false
 };
 
-export default LibraryItem;
+export default LibraryItemComponent;

@@ -72,7 +72,7 @@ class LibraryItem extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
-                {true ? ( /* TODO: make extension-only */
+                {true ? ( /* TODO: add insetIconURL prop */
                     <div className={styles.libraryItemInsetImageContainer}>
                         <img
                             className={styles.libraryItemInsetImage}
@@ -106,7 +106,7 @@ class LibraryItem extends React.PureComponent {
                             <div
                                 className={styles.featuredExtensionMetadataDetail}
                             >
-                                <img src={`#` /* TODO: add require icon prop */} /> 
+                                <img src={`#` /* TODO: add requirementIconURL prop */} />
                             </div>
                         </div>
                         <div className={styles.featuredExtensionCollaboration}>
@@ -120,7 +120,7 @@ class LibraryItem extends React.PureComponent {
                             <div
                                 className={styles.featuredExtensionMetadataDetail}
                             >
-                                {`Amazon Web Services` /* TODO: add collab prop */}
+                                {`Amazon Web Services` /* TODO: add collaborator prop */}
                             </div>
                         </div>
                     </div>
@@ -154,6 +154,7 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
+    collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -171,7 +172,8 @@ LibraryItem.propTypes = {
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    requirementIconURL: PropTypes.string
 };
 
 LibraryItem.defaultProps = {

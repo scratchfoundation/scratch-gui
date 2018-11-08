@@ -24,14 +24,20 @@ class Alert extends React.Component {
     }
     render () {
         const {
+            content,
             index, // eslint-disable-line no-unused-vars
+            level,
+            iconSpinner,
             iconURL,
             message,
             showReconnect
         } = this.props;
         return (
             <AlertComponent
+                content={content}
+                iconSpinner={iconSpinner}
                 iconURL={iconURL}
+                level={level}
                 message={message}
                 showReconnect={showReconnect}
                 onCloseAlert={this.handleOnCloseAlert}
@@ -41,9 +47,7 @@ class Alert extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    state: state
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     onOpenConnectionModal: id => {
@@ -53,13 +57,16 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Alert.propTypes = {
+    content: PropTypes.element,
     extensionId: PropTypes.string,
+    iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     index: PropTypes.number,
+    level: PropTypes.string.isRequired,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onOpenConnectionModal: PropTypes.func,
-    showReconnect: PropTypes.bool.isRequired
+    showReconnect: PropTypes.bool
 };
 
 export default connect(

@@ -12,8 +12,8 @@
 }
 
 .spinner::after, .spinner::before {
-    width: .625rem;
-    height: .625rem;
+    width: 1rem;
+    height: 1rem;
     content: '';
     border-radius: 50%;
     display: block;

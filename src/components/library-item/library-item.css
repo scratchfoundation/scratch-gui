@@ -123,13 +123,14 @@
 
 .featured-extension-metadata {
     width: 100%;
-    padding: 0rem 10px 1rem 1.25rem;
+    padding: 0rem 1.25rem 1rem 1.25rem;
     text-align: left;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 12px;
-    color: rgb(130, 135, 151);
+    color: $text-primary;
+    opacity: 0.75;
 }
 
 .featured-extension-requirement {

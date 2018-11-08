@@ -8,6 +8,8 @@ import styles from './library-item.css';
 import classNames from 'classnames';
 
 import insetImageURL from '../../lib/libraries/extensions/peripheral-connection/ev3/ev3-small.svg';
+import bluetoothIconURL from './bluetooth.svg';
+import internetConnectionIconURL from './internet-connection.svg';
 
 class LibraryItem extends React.PureComponent {
     constructor (props) {
@@ -106,7 +108,7 @@ class LibraryItem extends React.PureComponent {
                             <div
                                 className={styles.featuredExtensionMetadataDetail}
                             >
-                                <img src={`#` /* TODO: add requirementIconURL prop */} />
+                                <img src={bluetoothIconURL /* TODO: add requirementIconURL prop */} />
                             </div>
                         </div>
                         <div className={styles.featuredExtensionCollaboration}>

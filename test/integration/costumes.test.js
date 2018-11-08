@@ -129,4 +129,35 @@ describe('Working with costumes', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Adding an svg from file', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/100-100.svg'));
+        await clickText('100-100', scope.costumesTab); // Name from filename
+        await clickText('100 x 100', scope.costumesTab); // Size is right
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding a png from file (gh-3582)', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/gh-3582-png.png'));
+        await clickText('gh-3582-png', scope.costumesTab);
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

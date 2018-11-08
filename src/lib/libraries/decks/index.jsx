@@ -21,16 +21,14 @@ import stepTXTGrow from './txt/10_hoc-grow-shrink.gif';
 
 // Cartoon Network
 import libraryCartoonNetwork from './cartoonnetwork/lib_CartoonNetwork.jpg';
-import stepCNcharacter from './cartoonnetwork/01_cn-pick-character.gif';
-import stepCNsay from './cartoonnetwork/02_cn-say-something.gif';
-import stepCNglide from './cartoonnetwork/03_cn-glide-around.gif';
-import stepCNcollect from './cartoonnetwork/04_cn-collect.gif';
-import stepCNanimate from './cartoonnetwork/05_cn-add-score.gif';
-import stepCNscore from './cartoonnetwork/06_cn-keep-score.gif';
-import stepCNkeepscore from './cartoonnetwork/07_cn-level-up.gif';
-import stepCNlevel from './cartoonnetwork/08_cn-pick-another-character.gif';
-import stepCNcharacter2 from './cartoonnetwork/09_cn-level-up-say-something.gif';
-import stepCNlevelup from './cartoonnetwork/10_cn-animate-run.gif';
+import stepCNcharacter from './cartoonnetwork/1-cn-hideshow.gif';
+import stepCNsay from './cartoonnetwork/2-cn-say.gif';
+import stepCNglide from './cartoonnetwork/3-cn-glide.gif';
+import stepCNpicksprite from './cartoonnetwork/4-cn-pick-gem.gif';
+import stepCNcollect from './cartoonnetwork/5-cn-collect.gif';
+import stepCNvariable from './cartoonnetwork/6-cn-variable.gif';
+import stepCNscore from './cartoonnetwork/7-cn-score.gif';
+import stepCNbackdrop from './cartoonnetwork/8-cn-change-backdrop.gif';
 
 // Add sprite
 import libraryAddSprite from './sprite/cover-add-sprite.jpg';
@@ -255,8 +253,8 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Choose Which Character to Show"
-                    description="Step name for 'Choose Which Character to Show' step"
+                    defaultMessage="Choose a Character to Show"
+                    description="Step name for 'Choose a Character to Show' step"
                     id="gui.howtos.cartoon-network.step_CNcharacter"
                 />
             ),
@@ -274,7 +272,7 @@ export default {
             title: (
                 <FormattedMessage
                     defaultMessage="Glide Around"
-                    description="Step name for ' Glide Around' step"
+                    description="Step name for 'Glide Around' step"
                     id="gui.howtos.cartoon-network.step_CNglide"
                 />
             ),
@@ -282,8 +280,17 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage=" Collect Objects (In Gem Sprite) "
-                    description="Step name for ' Collect Objects (In Gem Sprite)' step"
+                    defaultMessage=" Choose an Object to Chase "
+                    description="Step name for 'Choose an Object to Chase' step"
+                    id="gui.howtos.cartoon-network.step_CNpicksprite"
+                />
+            ),
+            image: stepCNpicksprite
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Collect Objects"
+                    description="Step name for 'Collect Objects' step"
                     id="gui.howtos.cartoon-network.step_CNcollect"
                 />
             ),
@@ -291,12 +298,12 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Add Score"
-                    description="Step name for 'Add Score' step"
-                    id="gui.howtos.cartoon-network.step_CNanimate"
+                    defaultMessage="Make a Score Variable"
+                    description="Step name for 'Make a Score Variable' step"
+                    id="gui.howtos.cartoon-network.step_CNvariable"
                 />
             ),
-            image: stepCNanimate
+            image: stepCNvariable
         }, {
             title: (
                 <FormattedMessage
@@ -309,43 +316,20 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Level Up: Change Background"
-                    description="Step name for 'Level Up: Change Background' step"
-                    id="gui.howtos.cartoon-network.step_CNkeepscore"
+                    defaultMessage="Level Up: Change Backdrop"
+                    description="Step name for 'Level Up: Change Backdrop' step"
+                    id="gui.howtos.cartoon-network.step_CNbackdrop"
                 />
             ),
-            image: stepCNkeepscore
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Show A New Character"
-                    description="Step name for 'Show A New Character' step"
-                    id="gui.howtos.cartoon-network.step_CNlevel"
-                />
-            ),
-            image: stepCNlevel
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Level Up: Say Something"
-                    description="Step name for 'Level Up: Say Something' step"
-                    id="gui.howtos.cartoon-network.step_CNcharacter2"
-                />
-            ),
-            image: stepCNcharacter2
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Animate A Run"
-                    description="Step name for 'Animate A Run' step"
-                    id="gui.howtos.cartoon-network.step_CNlevelup"
-                />
-            ),
-            image: stepCNlevelup
-        }, {
+            image: stepCNbackdrop
+        },
+        {
+            video: '6o76f5ivo1'
+        },
+        {
             deckIds: [
-                'Chase-Game',
-                'record-a-sound'
+                'switch-costume',
+                'add-effects'
             ]
         }
         ],

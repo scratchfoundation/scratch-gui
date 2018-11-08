@@ -15,6 +15,9 @@ export default function (blockId) {
     // blocking the drag end from finishing promptly.
     return new Promise(resolve => {
         setTimeout(() => {
+            // Strip &nbsp; entities that cannot be inlined
+            blockSvg.innerHTML = blockSvg.innerHTML.replace(/&nbsp;/g, ' ');
+
             // Create an <svg> element to put the cloned blockSvg inside
             const NS = 'http://www.w3.org/2000/svg';
             const svg = document.createElementNS(NS, 'svg');

@@ -30,7 +30,29 @@
 }
 
 .alert-close-button {
+    outline-style:none;
+}
+
+.alert-close-button-container {
     margin-top: 7px;
     margin-right: 4px;
+    outline-style:none;
+    width: 30px;
+    height: 30px;
+}
+
+.connection-button {
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.35rem;
+    background: #FF8C1A;
+    color: white;
+    font-weight: 700;
+    font-size: 0.77rem;
+    margin: 0.25rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 13px;
     outline-style:none;
 }

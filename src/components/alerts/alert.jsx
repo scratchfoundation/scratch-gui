@@ -5,6 +5,7 @@ import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
 import CloseButton from '../close-button/close-button.jsx';
+import Spinner from '../spinner/spinner.jsx';
 import {AlertLevels} from '../../lib/alerts/index.jsx';
 
 import styles from './alert.css';
@@ -16,6 +17,7 @@ const closeButtonColors = {
 
 const AlertComponent = ({
     content,
+    iconSpinner,
     iconURL,
     level,
     message,
@@ -28,12 +30,15 @@ const AlertComponent = ({
     >
         <div className={styles.alertMessage}>
             {/* TODO: implement Rtl handling */}
-            {iconURL ? (
+            {iconSpinner && (
+                <Spinner />
+            )}
+            {iconURL && (
                 <img
                     className={styles.alertIcon}
                     src={iconURL}
                 />
-            ) : null}
+            )}
             {message}
             &nbsp;
             {content}
@@ -65,6 +70,7 @@ const AlertComponent = ({
 
 AlertComponent.propTypes = {
     content: PropTypes.element,
+    iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     level: PropTypes.string,
     message: PropTypes.string,

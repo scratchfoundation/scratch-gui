@@ -31,6 +31,7 @@ const alerts = [
                 id="gui.alerts.creating"
             />
         ),
+        iconSpinner: true,
         level: AlertLevels.SUCCESS
     },
     {
@@ -55,6 +56,7 @@ const alerts = [
                 id="gui.alerts.saving"
             />
         ),
+        iconSpinner: true,
         level: AlertLevels.SUCCESS
     }
 ];

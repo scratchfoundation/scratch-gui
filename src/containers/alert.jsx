@@ -27,6 +27,7 @@ class Alert extends React.Component {
             content,
             index, // eslint-disable-line no-unused-vars
             level,
+            iconSpinner,
             iconURL,
             message,
             showReconnect
@@ -34,6 +35,7 @@ class Alert extends React.Component {
         return (
             <AlertComponent
                 content={content}
+                iconSpinner={iconSpinner}
                 iconURL={iconURL}
                 level={level}
                 message={message}
@@ -57,6 +59,7 @@ const mapDispatchToProps = dispatch => ({
 Alert.propTypes = {
     content: PropTypes.element,
     extensionId: PropTypes.string,
+    iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     index: PropTypes.number,
     level: PropTypes.string.isRequired,

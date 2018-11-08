@@ -81,12 +81,30 @@ class LibraryItem extends React.PureComponent {
                     </div>
                 ) : null}
                 <div
-                    className={styles.featuredText}
+                    className={true ? /* TODO: make extension-only */
+                        classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
+                    }
                 >
-                    <span className={styles.libraryItemName}>{this.props.name}</span>
+                    <span className={styles.libraryItemName}>
+                        {this.props.name}
+                    </span>
                     <br />
-                    <span className={styles.featuredDescription}>{this.props.description}</span>
+                    <span className={styles.featuredDescription}>
+                        {this.props.description}
+                    </span>
                 </div>
+                {true ? ( /* TODO: make extension-only and requirements-only */
+                    <div className={styles.featuredExtensionMetadata}>
+                        <div className={styles.featuredExtensionRequirement}>
+                            <div>Requires</div>
+                            <div className={styles.featuredExtensionMetadataDetail}>[icon]</div>
+                        </div>
+                        <div className={styles.featuredExtensionCollaboration}>
+                            <div>Collaboration with</div>
+                            <div className={styles.featuredExtensionMetadataDetail}>Amazon Web Services</div>
+                        </div>
+                    </div>
+                ) : null}
             </div>
         ) : (
             <Box

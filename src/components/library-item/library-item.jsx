@@ -96,12 +96,32 @@ class LibraryItem extends React.PureComponent {
                 {true ? ( /* TODO: make extension-only and requirements-only */
                     <div className={styles.featuredExtensionMetadata}>
                         <div className={styles.featuredExtensionRequirement}>
-                            <div>Requires</div>
-                            <div className={styles.featuredExtensionMetadataDetail}>[icon]</div>
+                            <div>
+                                <FormattedMessage
+                                    defaultMessage="Requires"
+                                    description="Label for extension hardware requirements"
+                                    id="gui.extensionLibrary.requires"
+                                />
+                            </div>
+                            <div
+                                className={styles.featuredExtensionMetadataDetail}
+                            >
+                                <img src={`#` /* TODO: add require icon prop */} /> 
+                            </div>
                         </div>
                         <div className={styles.featuredExtensionCollaboration}>
-                            <div>Collaboration with</div>
-                            <div className={styles.featuredExtensionMetadataDetail}>Amazon Web Services</div>
+                            <div>
+                                <FormattedMessage
+                                    defaultMessage="Collaboration with"
+                                    description="Label for extension collaboration"
+                                    id="gui.extensionLibrary.collaboration"
+                                />
+                            </div>
+                            <div
+                                className={styles.featuredExtensionMetadataDetail}
+                            >
+                                {`Amazon Web Services` /* TODO: add collab prop */}
+                            </div>
                         </div>
                     </div>
                 ) : null}

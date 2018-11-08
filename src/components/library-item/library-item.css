@@ -139,6 +139,12 @@
     align-items: left;
 }
 
+.featured-extension-requirement-img {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
 .featured-extension-collaboration {
     width: 100%;
     display: flex;

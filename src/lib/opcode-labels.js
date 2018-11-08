@@ -210,7 +210,7 @@ class OpcodeLabels {
         this._opcodeMap.sensing_loudness.labelFn = () => this._translator(messages.sensing_loudness);
         this._opcodeMap.sensing_username.labelFn = () => this._translator(messages.sensing_username);
         this._opcodeMap.sensing_current.labelFn = params => {
-            switch (params.CURRENTMENU) {
+            switch (params.CURRENTMENU.toLowerCase()) {
             case 'year':
                 return this._translator(messages.sensing_current_year);
             case 'month':

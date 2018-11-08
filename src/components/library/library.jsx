@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import LibraryItem from '../library-item/library-item.jsx';
+import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
 import analytics from '../../lib/analytics';
-import storage from '../../lib/storage';
 
 import styles from './library.css';
 
@@ -29,23 +28,6 @@ const messages = defineMessages({
 
 const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
 const tagListPrefix = [ALL_TAG];
-
-/**
- * @param {string} extension - the extension to look up.
- * @returns {AssetType} - the AssetType corresponding to the extension, if any.
- */
-const getAssetTypeForExtension = function (extension) {
-    const compareOptions = {
-        sensitivity: 'accent',
-        usage: 'search'
-    };
-    for (const assetTypeId of Object.keys(storage.AssetType)) {
-        const assetType = storage.AssetType[assetTypeId];
-        if (extension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
-            return assetType;
-        }
-    }
-};
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -190,41 +172,29 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => {
-                        let iconURL;
-                        if (dataItem.md5) {
-                            // TODO: adjust libraries to be more storage-friendly; don't use split() here.
-                            const [md5, ext] = dataItem.md5.split('.');
-                            const assetType = getAssetTypeForExtension(ext);
-                            iconURL = storage.load(assetType, md5)
-                                .then(asset => asset.encodeDataURI());
-                        } else {
-                            iconURL = dataItem.rawURL;
-                        }
-
-                        return (
-                            <LibraryItem
-                                bluetoothRequired={dataItem.bluetoothRequired}
-                                collaborator={dataItem.collaborator}
-                                description={dataItem.description}
-                                disabled={dataItem.disabled}
-                                extensionId={dataItem.extensionId}
-                                featured={dataItem.featured}
-                                hidden={dataItem.hidden}
-                                iconURL={iconURL}
-                                id={index}
-                                insetIconURL={dataItem.insetIconURL}
-                                internetConnectionRequired={dataItem.internetConnectionRequired}
-                                key={`item_${index}`}
-                                name={dataItem.name}
-                                onBlur={this.handleBlur}
-                                onFocus={this.handleFocus}
-                                onMouseEnter={this.handleMouseEnter}
-                                onMouseLeave={this.handleMouseLeave}
-                                onSelect={this.handleSelect}
-                            />
-                        );
-                    })}
+                    {this.getFilteredData().map((dataItem, index) => (
+                        <LibraryItem
+                            bluetoothRequired={dataItem.bluetoothRequired}
+                            collaborator={dataItem.collaborator}
+                            description={dataItem.description}
+                            disabled={dataItem.disabled}
+                            extensionId={dataItem.extensionId}
+                            featured={dataItem.featured}
+                            hidden={dataItem.hidden}
+                            iconMD5={dataItem.md5} // either this or iconURL must be defined
+                            iconURL={dataItem.rawURL} // either this or iconMD5 must be defined
+                            id={index}
+                            insetIconURL={dataItem.insetIconURL}
+                            internetConnectionRequired={dataItem.internetConnectionRequired}
+                            key={`item_${index}`}
+                            name={dataItem.name}
+                            onBlur={this.handleBlur}
+                            onFocus={this.handleFocus}
+                            onMouseEnter={this.handleMouseEnter}
+                            onMouseLeave={this.handleMouseLeave}
+                            onSelect={this.handleSelect}
+                        />
+                    ))}
                 </div>
             </Modal>
         );

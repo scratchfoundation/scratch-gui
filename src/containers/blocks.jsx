@@ -414,8 +414,8 @@ class Blocks extends React.Component {
     handleDrop (dragInfo) {
         fetch(dragInfo.payload.bodyUrl)
             .then(response => response.json())
-            .then(blocks => {
-                this.props.vm.shareBlocksToTarget(blocks, this.props.vm.editingTarget.id);
+            .then(blocks => this.props.vm.shareBlocksToTarget(blocks, this.props.vm.editingTarget.id))
+            .then(() => {
                 this.props.vm.refreshWorkspace();
             });
     }

@@ -12,12 +12,12 @@ export default function (Blockly) {
     Blockly.Ruby.control_repeat = function (block) {
         const times = Blockly.Ruby.valueToCode(block, 'TIMES', Blockly.Ruby.ORDER_NONE) || 0;
         const branch = Blockly.Ruby.statementToCode(block, 'SUBSTACK') || '';
-        return `repeat(${times}) do\n${branch}end\n`;
+        return `${times}.times do\n${branch}${Blockly.Ruby.INDENT}wait\nend\n`;
     };
 
     Blockly.Ruby.control_forever = function (block) {
         const branch = Blockly.Ruby.statementToCode(block, 'SUBSTACK') || '';
-        return `forever do\n${branch}end\n`;
+        return `loop do\n${branch}${Blockly.Ruby.INDENT}wait\nend\n`;
     };
 
     Blockly.Ruby.control_if = function (block) {

@@ -28,6 +28,7 @@ export default [
             />
         ),
         extensionId: 'music',
+        internetConnectionRequired: true,
         iconURL: musicImage,
         description: (
             <FormattedMessage
@@ -47,6 +48,7 @@ export default [
             />
         ),
         extensionId: 'pen',
+        collaborator: 'Scratch Team',
         iconURL: penImage,
         description: (
             <FormattedMessage

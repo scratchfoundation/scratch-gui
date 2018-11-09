@@ -59,7 +59,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZE_MODES.large)),
     onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZE_MODES.small)),
-    onSetStageFull: () => dispatch(setFullScreen(true)),
+    onSetStageFull: () => {
+        window.open('external-stage', '_blank');
+    },
     onSetStageUnFull: () => dispatch(setFullScreen(false))
 });
 

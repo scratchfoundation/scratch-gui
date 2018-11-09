@@ -33,7 +33,6 @@ export default [
             />
         ),
         extensionId: 'music',
-        internetConnectionRequired: true,
         iconURL: musicImage,
         insetIconURL: musicInsetImage,
         description: (
@@ -54,7 +53,6 @@ export default [
             />
         ),
         extensionId: 'pen',
-        collaborator: 'Scratch Team',
         iconURL: penImage,
         insetIconURL: penInsetImage,
         description: (

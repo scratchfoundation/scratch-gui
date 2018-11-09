@@ -94,46 +94,50 @@ class LibraryItem extends React.PureComponent {
                         {this.props.description}
                     </span>
                 </div>
-                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? ( /* TODO: make extension-only and requirements-only */
+                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? (
                     <div className={styles.featuredExtensionMetadata}>
-                        {this.props.bluetoothRequired || this.props.internetConnectionRequired ? (
-                            <div className={styles.featuredExtensionRequirement}>
+                        <div className={styles.featuredExtensionRequirement}>
+                            {this.props.bluetoothRequired || this.props.internetConnectionRequired ? (
                                 <div>
-                                    <FormattedMessage
-                                        defaultMessage="Requires"
-                                        description="Label for extension hardware requirements"
-                                        id="gui.extensionLibrary.requires"
-                                    />
+                                    <div>
+                                        <FormattedMessage
+                                            defaultMessage="Requires"
+                                            description="Label for extension hardware requirements"
+                                            id="gui.extensionLibrary.requires"
+                                        />
+                                    </div>
+                                    <div
+                                        className={styles.featuredExtensionMetadataDetail}
+                                    >
+                                        <img
+                                            src={
+                                                this.props.bluetoothRequired ?
+                                                    bluetoothIconURL :
+                                                    internetConnectionIconURL
+                                            }
+                                        />
+                                    </div>
                                 </div>
-                                <div
-                                    className={styles.featuredExtensionMetadataDetail}
-                                >
-                                    <img
-                                        src={this.props.bluetoothRequired ? (
-                                            bluetoothIconURL
-                                        ) : (this.props.internetConnectionRequired ? (
-                                            internetConnectionIconURL
-                                        ) : null)}
-                                    />
-                                </div>
-                            </div>
-                        ) : null}
-                        {this.props.collaborator ? (
-                            <div className={styles.featuredExtensionCollaboration}>
+                            ) : null}
+                        </div>
+                        <div className={styles.featuredExtensionCollaboration}>
+                            {this.props.collaborator ? (
                                 <div>
-                                    <FormattedMessage
-                                        defaultMessage="Collaboration with"
-                                        description="Label for extension collaboration"
-                                        id="gui.extensionLibrary.collaboration"
-                                    />
+                                    <div>
+                                        <FormattedMessage
+                                            defaultMessage="Collaboration with"
+                                            description="Label for extension collaboration"
+                                            id="gui.extensionLibrary.collaboration"
+                                        />
+                                    </div>
+                                    <div
+                                        className={styles.featuredExtensionMetadataDetail}
+                                    >
+                                        {this.props.collaborator}
+                                    </div>
                                 </div>
-                                <div
-                                    className={styles.featuredExtensionMetadataDetail}
-                                >
-                                    {this.props.collaborator}
-                                </div>
-                            </div>
-                        ) : null }
+                            ) : null}
+                        </div>
                     </div>
                 ) : null}
             </div>

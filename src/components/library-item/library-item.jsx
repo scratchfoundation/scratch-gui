@@ -82,7 +82,7 @@ class LibraryItem extends React.PureComponent {
                     </div>
                 ) : null}
                 <div
-                    className={true ? /* TODO: make extension-only */
+                    className={this.props.extensionId ? /* TODO: make extension-only */
                         classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
                     }
                 >
@@ -176,6 +176,7 @@ LibraryItem.propTypes = {
         PropTypes.node
     ]),
     disabled: PropTypes.bool,
+    extensionId: PropTypes.string,
     featured: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,

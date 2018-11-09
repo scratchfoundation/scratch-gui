@@ -106,10 +106,9 @@ class LibraryItem extends React.PureComponent {
                                         className={styles.featuredExtensionMetadataDetail}
                                     >
                                         <img
-                                            src={
-                                                this.props.bluetoothRequired ?
-                                                    bluetoothIconURL :
-                                                    internetConnectionIconURL
+                                            src={this.props.bluetoothRequired ?
+                                                bluetoothIconURL :
+                                                internetConnectionIconURL
                                             }
                                         />
                                     </div>

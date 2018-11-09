@@ -60,7 +60,8 @@ const GUIComponent = props => {
         alertsVisible,
         basePath,
         backdropLibraryVisible,
-        backpackOptions,
+        backpackHost,
+        backpackVisible,
         blocksTabVisible,
         cardsVisible,
         canCreateNew,
@@ -294,8 +295,8 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {backpackOptions.visible ? (
-                                <Backpack host={backpackOptions.host} />
+                            {backpackVisible ? (
+                                <Backpack host={backpackHost} />
                             ) : null}
                         </Box>
 
@@ -324,10 +325,8 @@ GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     backdropLibraryVisible: PropTypes.bool,
-    backpackOptions: PropTypes.shape({
-        host: PropTypes.string,
-        visible: PropTypes.bool
-    }),
+    backpackHost: PropTypes.string,
+    backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
@@ -371,10 +370,8 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    backpackOptions: {
-        host: null,
-        visible: false
-    },
+    backpackHost: null,
+    backpackVisible: false,
     basePath: './',
     canCreateNew: false,
     canRemix: false,

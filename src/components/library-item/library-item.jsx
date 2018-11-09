@@ -86,13 +86,9 @@ class LibraryItem extends React.PureComponent {
                         classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
                     }
                 >
-                    <span className={styles.libraryItemName}>
-                        {this.props.name}
-                    </span>
+                    <span className={styles.libraryItemName}>{this.props.name}</span>
                     <br />
-                    <span className={styles.featuredDescription}>
-                        {this.props.description}
-                    </span>
+                    <span className={styles.featuredDescription}>{this.props.description}</span>
                 </div>
                 {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? (
                     <div className={styles.featuredExtensionMetadata}>

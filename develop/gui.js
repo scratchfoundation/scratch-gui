@@ -56,10 +56,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   var backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
   var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
-  var backpackOptions = {
-    visible: true,
-    host: backpackHost
-  };
 
   if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
     // Warn before navigating away
@@ -69,8 +65,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   }
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+    backpackVisible: true,
     showComingSoon: true,
-    backpackOptions: backpackOptions
+    backpackHost: backpackHost
   }), appTarget);
 });
 

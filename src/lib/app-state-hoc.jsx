@@ -70,7 +70,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     if (tutorialId !== null) {
                         // When loading a tutorial from the URL,
                         // load w/o preview modal
-                        // open requested tutorial card or tutorials mocal for 'all'
+                        // open requested tutorial card or tutorials library modal for 'all'
                         if (tutorialId === 'all') {
                             initializedGui = initTutorialLibrary(initializedGui);
                         } else {

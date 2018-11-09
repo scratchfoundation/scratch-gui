@@ -82,7 +82,7 @@ class LibraryItem extends React.PureComponent {
                     </div>
                 ) : null}
                 <div
-                    className={this.props.extensionId ? /* TODO: make extension-only */
+                    className={this.props.extensionId ?
                         classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
                     }
                 >

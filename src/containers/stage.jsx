@@ -72,16 +72,6 @@ class Stage extends React.Component {
             console.log('LOADED PROJECT');
             requestAnimationFrame(this.step.bind(this));
         });
-
-        /* Full Screen */
-        var channel = new BroadcastChannel('stage-image');
-        this.renderer.on('RENDERER_WILL_DRAW', () => {
-            this.renderer.requestSnapshot((imgData) => {
-                channel.postMessage({
-                    dataURI: imgData
-                });
-            });
-        });
     }
     componentDidMount () {
         this.attachRectEvents();

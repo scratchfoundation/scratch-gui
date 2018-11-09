@@ -60,7 +60,14 @@ const mapDispatchToProps = dispatch => ({
     onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZE_MODES.large)),
     onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZE_MODES.small)),
     onSetStageFull: () => {
-        window.open('external-stage', '_blank');
+        // window.open('external-stage', '_blank');
+        // Supports most browsers and their versions.
+        const element = document.getElementById('output')
+        const requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+        if (requestMethod) { // Native full screen.
+            requestMethod.call(element);
+        }
     },
     onSetStageUnFull: () => dispatch(setFullScreen(false))
 });

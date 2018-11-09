@@ -3,6 +3,7 @@
 
 .library-item {
     display: flex;
+    align-self: stretch;
     flex-direction: column;
     align-items: left;
     justify-content: flex-start;

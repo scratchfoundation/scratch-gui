@@ -2,13 +2,18 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import musicImage from './music.png';
+import musicInsetImage from './music-small.svg';
 import penImage from './pen.png';
+import penInsetImage from './pen-small.svg';
 import videoImage from './video-sensing.png';
+import videoInsetImage from './video-sensing-small.svg';
 import translateImage from './translate.png';
+import translateInsetImage from './translate-small.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
 import text2speechImage from './text2speech.png';
+import text2speechInsetImage from './text2speech-small.svg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -30,6 +35,7 @@ export default [
         extensionId: 'music',
         internetConnectionRequired: true,
         iconURL: musicImage,
+        insetIconURL: musicInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Play instruments and drums."
@@ -50,6 +56,7 @@ export default [
         extensionId: 'pen',
         collaborator: 'Scratch Team',
         iconURL: penImage,
+        insetIconURL: penInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Draw with your sprites."
@@ -69,6 +76,7 @@ export default [
         ),
         extensionId: 'videoSensing',
         iconURL: videoImage,
+        insetIconURL: videoInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Sense motion with the camera."
@@ -89,6 +97,7 @@ export default [
         extensionId: 'text2speech',
         collaborator: 'Amazon Web Services',
         iconURL: text2speechImage,
+        insetIconURL: text2speechInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Make your projects talk."
@@ -110,6 +119,7 @@ export default [
         extensionId: 'translate',
         collaborator: 'Google',
         iconURL: translateImage,
+        insetIconURL: translateInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Translate text into many languages."

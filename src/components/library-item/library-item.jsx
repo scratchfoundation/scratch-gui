@@ -7,7 +7,6 @@ import Box from '../box/box.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';
 
-import insetImageURL from '../../lib/libraries/extensions/peripheral-connection/ev3/ev3-small.svg';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
@@ -74,11 +73,11 @@ class LibraryItem extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
-                {true ? ( /* TODO: add insetIconURL prop */
+                {this.props.insetIconURL ? (
                     <div className={styles.libraryItemInsetImageContainer}>
                         <img
                             className={styles.libraryItemInsetImage}
-                            src={insetImageURL}
+                            src={this.props.insetIconURL}
                         />
                     </div>
                 ) : null}
@@ -95,36 +94,46 @@ class LibraryItem extends React.PureComponent {
                         {this.props.description}
                     </span>
                 </div>
-                {true ? ( /* TODO: make extension-only and requirements-only */
+                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? ( /* TODO: make extension-only and requirements-only */
                     <div className={styles.featuredExtensionMetadata}>
-                        <div className={styles.featuredExtensionRequirement}>
-                            <div>
-                                <FormattedMessage
-                                    defaultMessage="Requires"
-                                    description="Label for extension hardware requirements"
-                                    id="gui.extensionLibrary.requires"
-                                />
+                        {this.props.bluetoothRequired || this.props.internetConnectionRequired ? (
+                            <div className={styles.featuredExtensionRequirement}>
+                                <div>
+                                    <FormattedMessage
+                                        defaultMessage="Requires"
+                                        description="Label for extension hardware requirements"
+                                        id="gui.extensionLibrary.requires"
+                                    />
+                                </div>
+                                <div
+                                    className={styles.featuredExtensionMetadataDetail}
+                                >
+                                    <img
+                                        src={this.props.bluetoothRequired ? (
+                                            bluetoothIconURL
+                                        ) : (this.props.internetConnectionRequired ? (
+                                            internetConnectionIconURL
+                                        ) : null)}
+                                    />
+                                </div>
                             </div>
-                            <div
-                                className={styles.featuredExtensionMetadataDetail}
-                            >
-                                <img src={bluetoothIconURL /* TODO: add requirementIconURL prop */} />
+                        ) : null}
+                        {this.props.collaborator ? (
+                            <div className={styles.featuredExtensionCollaboration}>
+                                <div>
+                                    <FormattedMessage
+                                        defaultMessage="Collaboration with"
+                                        description="Label for extension collaboration"
+                                        id="gui.extensionLibrary.collaboration"
+                                    />
+                                </div>
+                                <div
+                                    className={styles.featuredExtensionMetadataDetail}
+                                >
+                                    {this.props.collaborator}
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.featuredExtensionCollaboration}>
-                            <div>
-                                <FormattedMessage
-                                    defaultMessage="Collaboration with"
-                                    description="Label for extension collaboration"
-                                    id="gui.extensionLibrary.collaboration"
-                                />
-                            </div>
-                            <div
-                                className={styles.featuredExtensionMetadataDetail}
-                            >
-                                {`Amazon Web Services` /* TODO: add collaborator prop */}
-                            </div>
-                        </div>
+                        ) : null }
                     </div>
                 ) : null}
             </div>
@@ -156,6 +165,7 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
+    bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
         PropTypes.string,
@@ -166,6 +176,7 @@ LibraryItem.propTypes = {
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
+    internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -174,8 +185,7 @@ LibraryItem.propTypes = {
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    requirementIconURL: PropTypes.string
+    onSelect: PropTypes.func.isRequired
 };
 
 LibraryItem.defaultProps = {

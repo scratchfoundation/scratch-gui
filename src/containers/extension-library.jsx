@@ -64,6 +64,7 @@ class ExtensionLibrary extends React.PureComponent {
             rawURL: extension.iconURL || extensionIcon,
             ...extension
         }));
+        console.log(extensionLibraryThumbnailData);
         return (
             <LibraryComponent
                 data={extensionLibraryThumbnailData}

@@ -176,11 +176,15 @@ class LibraryComponent extends React.Component {
                             dataItem.rawURL;
                         return (
                             <LibraryItem
+                                bluetoothRequired={dataItem.bluetoothRequired}
+                                collaborator={dataItem.collaborator}
                                 description={dataItem.description}
                                 disabled={dataItem.disabled}
                                 featured={dataItem.featured}
                                 iconURL={scratchURL}
                                 id={index}
+                                insetIconURL={dataItem.insetIconURL}
+                                internetConnectionRequired={dataItem.internetConnectionRequired}
                                 key={`item_${index}`}
                                 name={dataItem.name}
                                 onBlur={this.handleBlur}

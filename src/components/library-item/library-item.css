@@ -127,7 +127,7 @@
     text-align: left;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     font-size: 12px;
     color: $text-primary;
     opacity: 0.75;
@@ -140,12 +140,6 @@
     align-items: left;
 }
 
-.featured-extension-requirement-img {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-}
-
 .featured-extension-collaboration {
     width: 100%;
     display: flex;
@@ -154,6 +148,7 @@
 }
 
 .featured-extension-metadata-detail {
+    height: 100%;
     padding-top: 0.4rem;
     font-weight: bold;
 }

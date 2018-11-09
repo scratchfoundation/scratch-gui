@@ -85,6 +85,7 @@ export default [
             />
         ),
         extensionId: 'text2speech',
+        collaborator: 'Amazon Web Services',
         iconURL: text2speechImage,
         description: (
             <FormattedMessage
@@ -93,7 +94,8 @@ export default [
                 id="gui.extension.text2speech.description"
             />
         ),
-        featured: true
+        featured: true,
+        internetConnectionRequired: true
     },
     {
         name: (
@@ -104,6 +106,7 @@ export default [
             />
         ),
         extensionId: 'translate',
+        collaborator: 'Google',
         iconURL: translateImage,
         description: (
             <FormattedMessage
@@ -112,12 +115,15 @@ export default [
                 id="gui.extension.translate.description"
             />
         ),
-        featured: true
+        featured: true,
+        internetConnectionRequired: true
     },
     {
         name: 'micro:bit',
         extensionId: 'microbit',
+        collaborator: 'micro:bit',
         iconURL: microbitImage,
+        insetIconURL: microbitMenuImage,
         description: (
             <FormattedMessage
                 defaultMessage="Connect your projects with the world."
@@ -127,6 +133,7 @@ export default [
         ),
         featured: true,
         disabled: false,
+        bluetoothRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: microbitPeripheralImage,
@@ -143,7 +150,9 @@ export default [
     {
         name: 'LEGO MINDSTORMS EV3',
         extensionId: 'ev3',
+        collaborator: 'LEGO',
         iconURL: ev3Image,
+        insetIconURL: ev3MenuImage,
         description: (
             <FormattedMessage
                 defaultMessage="Build interactive robots and more."
@@ -153,6 +162,7 @@ export default [
         ),
         featured: true,
         disabled: false,
+        bluetoothRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: ev3PeripheralImage,
@@ -169,7 +179,9 @@ export default [
     {
         name: 'LEGO WeDo 2.0',
         extensionId: 'wedo2',
+        collaborator: 'LEGO',
         iconURL: wedoImage,
+        insetIconURL: wedoMenuImage,
         description: (
             <FormattedMessage
                 defaultMessage="Build with motors and sensors."
@@ -179,6 +191,7 @@ export default [
         ),
         featured: true,
         disabled: false,
+        bluetoothRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
         peripheralImage: wedoPeripheralImage,

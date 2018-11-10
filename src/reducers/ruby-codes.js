@@ -20,8 +20,7 @@ const reducer = function (state, action) {
         newRubyCode = Object.assign({}, state.rubyCode);
         newRubyCode[action.target.id] = {
             target: action.target,
-            spriteNewCode: state.generator.spriteNew(action.target),
-            bodyCode: state.generator.workspaceToCode(action.workspace, action.target)
+            code: state.generator.workspaceToCode(action.workspace, action.target)
         };
         return {
             generator: state.generator,

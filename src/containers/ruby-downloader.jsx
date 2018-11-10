@@ -12,13 +12,21 @@ class RubyDownloader extends React.Component {
         ]);
     }
     saveRuby () {
-        let code = 'require "smalruby3"\n\n';
+        let code = 'require "smalruby3"\n';
         const generator = this.props.rubyCodes.generator;
-        for(let id in this.props.rubyCodes.rubyCode) {
-            const rubyCode = this.props.rubyCodes.rubyCode[id];
-            const bodyCode = generator.prefixLines(rubyCode.bodyCode, generator.INDENT);
-            code += `${rubyCode.spriteNewCode} do\n${bodyCode}end\n\n`;
+        const sprites = [this.props.stage];
+        for(let id in this.props.sprites) {
+            const sprite = this.props.sprites[id]
+            sprites[sprite.order + 1] = sprite;
         }
+        sprites.forEach(sprite => {
+            const rubyCode = this.props.rubyCodes.rubyCode[sprite.id];
+            if (rubyCode) {
+                const spriteNewCode = generator.spriteNew(rubyCode.target);
+                const bodyCode = rubyCode.code ? generator.prefixLines(rubyCode.code, generator.INDENT) : '';
+                code += `\n${spriteNewCode} do\n${bodyCode}end\n`;
+            }
+        });
         return new Blob([code], {
             type: 'text/x-ruby-script'
         });
@@ -66,13 +74,20 @@ RubyDownloader.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
+    stage: PropTypes.shape({
+        id: PropTypes.string
+    }),
+    sprites: PropTypes.object,
     rubyCodes: PropTypes.shape({
+        generator: PropTypes.object,
         rubyCode: PropTypes.object
     })
 };
 
 const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
+    stage: state.scratchGui.targets.stage,
+    sprites: state.scratchGui.targets.sprites,
     rubyCodes: state.scratchGui.rubyCodes
 });
 

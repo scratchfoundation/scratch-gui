@@ -11,7 +11,7 @@ class RubyTab extends React.Component {
         const vm = this.props.vm;
         const rubyCodes = this.props.rubyCodes;
         const rubyCode = rubyCodes.rubyCode[vm.editingTarget.id];
-        const code = rubyCode ? rubyCode.bodyCode : '';
+        const code = rubyCode ? rubyCode.code : '';
         return (
             <AceEditor
                 readOnly

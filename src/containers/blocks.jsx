@@ -25,7 +25,7 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {updateRubyCode} from '../reducers/ruby-code.js';
+import {setGenerator, updateRubyCode, removeRubyCode} from '../reducers/ruby-codes.js';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
 import {
@@ -52,6 +52,7 @@ class Blocks extends React.Component {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
         this.ScratchBlocks = RubyGenerator(this.ScratchBlocks);
+        this.props.setGeneratorState(this.ScratchBlocks.Ruby);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -171,7 +172,8 @@ class Blocks extends React.Component {
         }
         if (!this.props.blocksTabVisible) {
             this.props.updateRubyCodeState(
-                this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+                this.props.vm.editingTarget,
+                this.workspace
             );
         }
     }
@@ -279,7 +281,8 @@ class Blocks extends React.Component {
         }
         if (!this.props.blocksTabVisible) {
             this.props.updateRubyCodeState(
-                this.ScratchBlocks.Ruby.workspaceToCode(this.workspace, this.props.vm.editingTarget)
+                this.props.vm.editingTarget,
+                this.workspace
             );
         }
     }
@@ -449,6 +452,7 @@ class Blocks extends React.Component {
             onOpenConnectionModal,
             onOpenSoundRecorder,
             updateToolboxState,
+            setGeneratorState,
             updateRubyCodeState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
@@ -534,6 +538,7 @@ Blocks.propTypes = {
     }),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
+    setGeneratorState: PropTypes.func,
     updateRubyCodeState: PropTypes.func,
     updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
@@ -606,8 +611,11 @@ const mapDispatchToProps = dispatch => ({
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     },
-    updateRubyCodeState: code => {
-        dispatch(updateRubyCode(code));
+    setGeneratorState: generator => {
+        dispatch(setGenerator(generator));
+    },
+    updateRubyCodeState: (target, workspace) => {
+        dispatch(updateRubyCode(target, workspace));
     }
 });
 

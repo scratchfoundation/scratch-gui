@@ -12,7 +12,13 @@ class RubyDownloader extends React.Component {
         ]);
     }
     saveRuby () {
-        const code = `require "smalruby3"\n\n${this.props.rubyCode}`;
+        let code = 'require "smalruby3"\n\n';
+        const generator = this.props.rubyCodes.generator;
+        for(let id in this.props.rubyCodes.rubyCode) {
+            const rubyCode = this.props.rubyCodes.rubyCode[id];
+            const bodyCode = generator.prefixLines(rubyCode.bodyCode, generator.INDENT);
+            code += `${rubyCode.spriteNewCode} do\n${bodyCode}end\n\n`;
+        }
         return new Blob([code], {
             type: 'text/x-ruby-script'
         });
@@ -60,12 +66,14 @@ RubyDownloader.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    rubyCode: PropTypes.string
+    rubyCodes: PropTypes.shape({
+        rubyCode: PropTypes.object
+    })
 };
 
 const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    rubyCode: state.scratchGui.rubyCode.code
+    rubyCodes: state.scratchGui.rubyCodes
 });
 
 export default connect(

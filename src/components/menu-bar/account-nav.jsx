@@ -43,7 +43,7 @@ const AccountNavComponent = ({
             {thumbnailUrl ? (
                 <UserAvatar
                     className={styles.avatar}
-                    src={thumbnailUrl}
+                    imageUrl={thumbnailUrl}
                 />
             ) : null}
             <span className={styles.profileName}>

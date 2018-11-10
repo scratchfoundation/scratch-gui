@@ -25,7 +25,7 @@
         width: 100%;
     */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: .75rem;
+    font-size: $menu-bar-standard-font-size;
     font-weight: bold;
     background-color: $motion-primary;
     color: $ui-white;
@@ -83,7 +83,7 @@
 }
 
 .menu-bar-item.growable {
-    max-width: 12rem;
+    max-width: $menu-bar-item-max-width;
     flex: 1;
 }
 

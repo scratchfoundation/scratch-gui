@@ -59,6 +59,7 @@ const GUIComponent = props => {
         activeTabIndex,
         alertsVisible,
         authorId,
+        authorThumbnailUrl,
         authorUsername,
         basePath,
         backdropLibraryVisible,
@@ -66,6 +67,7 @@ const GUIComponent = props => {
         blocksTabVisible,
         cardsVisible,
         canCreateNew,
+        canEditTitle,
         canRemix,
         canSave,
         canCreateCopy,
@@ -182,9 +184,11 @@ const GUIComponent = props => {
                 <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
+                    authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
+                    canEditTitle={canEditTitle}
                     canRemix={canRemix}
                     canSave={canSave}
                     canShare={canShare}
@@ -328,6 +332,7 @@ GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
@@ -338,6 +343,7 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
+    canEditTitle: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
@@ -383,6 +389,7 @@ GUIComponent.defaultProps = {
     },
     basePath: './',
     canCreateNew: false,
+    canEditTitle: false,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,

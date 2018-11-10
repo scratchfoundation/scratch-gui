@@ -8,43 +8,37 @@ import styles from './author-info.css';
 
 const AuthorInfo = ({
     className,
+    imageUrl,
     projectTitle,
-    userId,
+    // TODO: use userId to link to user's profile
+    userId, // eslint-disable-line no-unused-vars
     username
 }) => (
     <div
         className={classNames(
-            className
+            className,
+            styles.authorInfo
         )}
     >
-        <div
-            className={classNames(
-                styles.authorInfo
-            )}
-        >
-            <UserAvatar
-                className={styles.avatar}
-                userId={userId}
-            />
-            <div className={styles.titleAuthor}>
-                <span className={styles.projectTitle}>
-                    {projectTitle}
+        <UserAvatar
+            className={styles.avatar}
+            imageUrl={imageUrl}
+        />
+        <div className={styles.titleAuthor}>
+            <span className={styles.projectTitle}>
+                {projectTitle}
+            </span>
+            <div>
+                <span className={styles.usernameLine}>
+                    <FormattedMessage
+                        defaultMessage="by {username}"
+                        description="Shows that a project was created by this user"
+                        id="gui.authorInfo.byUser"
+                        values={{
+                            username: <span className={styles.username}>{username}</span>
+                        }}
+                    />
                 </span>
-                <div>
-                    <span className={styles.usernameLine}>
-                        <span className={styles.unimportantText}>
-                            <FormattedMessage
-                                defaultMessage="by"
-                                description="Shows that a project was created by this user"
-                                id="gui.authorInfo.by"
-                            />
-                            &nbsp;
-                        </span>
-                        <span className={styles.username}>
-                            {username}
-                        </span>
-                    </span>
-                </div>
             </div>
         </div>
     </div>
@@ -52,6 +46,7 @@ const AuthorInfo = ({
 
 AuthorInfo.propTypes = {
     className: PropTypes.string,
+    imageUrl: PropTypes.string,
     projectTitle: PropTypes.string,
     userId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     username: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])

@@ -4,6 +4,5 @@
 .user-thumbnail {
     border-radius: $form-radius;
     vertical-align: middle;
-    border-radius: .25rem;
     box-shadow: 0 0 0 1px $ui-black-transparent;
 }

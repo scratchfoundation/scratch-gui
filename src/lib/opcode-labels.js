@@ -238,7 +238,7 @@ class OpcodeLabels {
     getLabel (opcode) {
         if (opcode in this._opcodeMap) return this._opcodeMap[opcode];
         return {
-            category: 'data',
+            category: 'extension',
             label: opcode
         };
     }

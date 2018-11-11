@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
+import {rubyCodesShape} from '../reducers/ruby-codes';
 
 class RubyDownloader extends React.Component {
     constructor (props) {
@@ -12,7 +13,21 @@ class RubyDownloader extends React.Component {
         ]);
     }
     saveRuby () {
-        const code = `require "smalruby3"\n\n${this.props.rubyCode}`;
+        let code = 'require "smalruby3"\n';
+        const generator = this.props.rubyCodes.generator;
+        const sprites = [this.props.stage];
+        for (const id in this.props.sprites) {
+            const sprite = this.props.sprites[id];
+            sprites[sprite.order + 1] = sprite;
+        }
+        sprites.forEach(sprite => {
+            const rubyCode = this.props.rubyCodes.rubyCode[sprite.id];
+            if (rubyCode) {
+                const spriteNewCode = generator.spriteNew(rubyCode.target);
+                const bodyCode = rubyCode.code ? generator.prefixLines(rubyCode.code, generator.INDENT) : '';
+                code += `\n${spriteNewCode} do\n${bodyCode}end\n`;
+            }
+        });
         return new Blob([code], {
             type: 'text/x-ruby-script'
         });
@@ -60,12 +75,21 @@ RubyDownloader.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    rubyCode: PropTypes.string
+    rubyCodes: rubyCodesShape,
+    sprites: PropTypes.objectOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        order: PropTypes.number.isRequired
+    })),
+    stage: PropTypes.shape({
+        id: PropTypes.string
+    })
 };
 
 const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    rubyCode: state.scratchGui.rubyCode.code
+    rubyCodes: state.scratchGui.rubyCodes,
+    sprites: state.scratchGui.targets.sprites,
+    stage: state.scratchGui.targets.stage
 });
 
 export default connect(

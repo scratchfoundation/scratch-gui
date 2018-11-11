@@ -266,8 +266,7 @@ export default function (Blockly) {
                 }
             }
         }
-        if (!this.editingTarget &&
-            requires.length === 0 &&
+        if (requires.length === 0 &&
             prepares.length === 0 &&
             defs.length === 0 &&
             code.length === 0) {
@@ -282,11 +281,6 @@ export default function (Blockly) {
         }
         if (defs.length > 0) {
             allDefs += `${defs.join('\n')}\n\n`;
-        }
-
-        if (this.editingTarget) {
-            const body = code ? this.prefixLines(code, this.INDENT) : '';
-            code = `${this.spriteNew(this.editingTarget)} do\n${body}end`;
         }
 
         return allDefs + code;

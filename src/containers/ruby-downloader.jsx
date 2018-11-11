@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
+import {rubyCodesShape} from '../reducers/ruby-codes';
 
 class RubyDownloader extends React.Component {
     constructor (props) {
@@ -15,8 +16,8 @@ class RubyDownloader extends React.Component {
         let code = 'require "smalruby3"\n';
         const generator = this.props.rubyCodes.generator;
         const sprites = [this.props.stage];
-        for(let id in this.props.sprites) {
-            const sprite = this.props.sprites[id]
+        for (const id in this.props.sprites) {
+            const sprite = this.props.sprites[id];
             sprites[sprite.order + 1] = sprite;
         }
         sprites.forEach(sprite => {
@@ -74,21 +75,21 @@ RubyDownloader.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
+    rubyCodes: rubyCodesShape,
+    sprites: PropTypes.objectOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        order: PropTypes.number.isRequired
+    })),
     stage: PropTypes.shape({
         id: PropTypes.string
-    }),
-    sprites: PropTypes.object,
-    rubyCodes: PropTypes.shape({
-        generator: PropTypes.object,
-        rubyCode: PropTypes.object
     })
 };
 
 const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    stage: state.scratchGui.targets.stage,
+    rubyCodes: state.scratchGui.rubyCodes,
     sprites: state.scratchGui.targets.sprites,
-    rubyCodes: state.scratchGui.rubyCodes
+    stage: state.scratchGui.targets.stage
 });
 
 export default connect(

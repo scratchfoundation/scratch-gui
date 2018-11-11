@@ -25,7 +25,7 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {setGenerator, updateRubyCode, removeRubyCode} from '../reducers/ruby-codes.js';
+import {setGenerator, updateRubyCode} from '../reducers/ruby-codes.js';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
 import {
@@ -536,9 +536,9 @@ Blocks.propTypes = {
         comments: PropTypes.bool,
         collapse: PropTypes.bool
     }),
+    setGeneratorState: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
-    setGeneratorState: PropTypes.func,
     updateRubyCodeState: PropTypes.func,
     updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired

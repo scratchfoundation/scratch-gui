@@ -6,8 +6,6 @@ import {connect} from 'react-redux';
 import tabletFullScreen from '../lib/tablet-full-screen';
 
 import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx';
-import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
-import supportedBrowser from '../lib/supported-browser';
 
 import {
     closePreviewInfo,
@@ -40,26 +38,27 @@ class PreviewModal extends React.Component {
         this.props.onViewProject();
     }
     render () {
-        return (supportedBrowser() ?
+        return (
             <PreviewModalComponent
+                isRtl={this.props.isRtl}
                 previewing={this.state.previewing}
                 onCancel={this.handleCancel}
                 onTryIt={this.handleTryIt}
                 onViewProject={this.handleViewProject}
-            /> :
-            <BrowserModalComponent
-                onBack={this.handleCancel}
             />
         );
     }
 }
 
 PreviewModal.propTypes = {
+    isRtl: PropTypes.bool,
     onTryIt: PropTypes.func,
     onViewProject: PropTypes.func
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl
+});
 
 const mapDispatchToProps = dispatch => ({
     onTryIt: () => {

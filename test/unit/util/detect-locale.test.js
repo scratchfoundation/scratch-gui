@@ -67,4 +67,20 @@ describe('detectLocale', () => {
         );
         expect(detectLocale(supportedLocales)).toEqual('en');
     });
+
+    test('works with an empty locale', () => {
+        Object.defineProperty(window.location,
+            'search',
+            {value: '?locale='}
+        );
+        expect(detectLocale(supportedLocales)).toEqual('en');
+    });
+
+    test('if multiple, uses the first locale', () => {
+        Object.defineProperty(window.location,
+            'search',
+            {value: '?locale=de&locale=en'}
+        );
+        expect(detectLocale(supportedLocales)).toEqual('de');
+    });
 });

@@ -5,11 +5,13 @@ import Draggable from 'react-draggable';
 
 import styles from './card.css';
 
-import nextIcon from './icon--next.svg';
-import prevIcon from './icon--prev.svg';
+import rightArrow from './icon--next.svg';
+import leftArrow from './icon--prev.svg';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
-import closeIcon from '../close-button/icon--close.svg';
+import closeIcon from './icon--close.svg';
+
+import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 
 const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
     <div className={styles.headerButtons}>
@@ -43,9 +45,9 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
             onClick={onCloseCards}
         >
             <FormattedMessage
-                defaultMessage="Remove"
+                defaultMessage="Close"
                 description="Title for button to close how-to card"
-                id="gui.cards.remove"
+                id="gui.cards.close"
             />
             <img
                 className={styles.closeIcon}
@@ -64,11 +66,17 @@ const VideoStep = ({video, dragging}) => (
         ) : null}
         <iframe
             allowFullScreen
-            allow="autoplay; encrypted-media"
+            allowTransparency="true"
             frameBorder="0"
-            height="337"
-            src={`${video}?rel=0&amp;showinfo=0`}
+            height="338"
+            scrolling="no"
+            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            title="📹"
             width="600"
+        />
+        <script
+            async
+            src="https://fast.wistia.net/assets/external/E-v1.js"
         />
     </div>
 );
@@ -98,32 +106,32 @@ ImageStep.propTypes = {
     title: PropTypes.node.isRequired
 };
 
-const NextPrevButtons = ({onNextStep, onPrevStep}) => (
+const NextPrevButtons = ({isRtl, onNextStep, onPrevStep}) => (
     <Fragment>
         {onNextStep ? (
             <div>
-                <div className={styles.rightCard} />
+                <div className={isRtl ? styles.leftCard : styles.rightCard} />
                 <div
-                    className={styles.rightButton}
+                    className={isRtl ? styles.leftButton : styles.rightButton}
                     onClick={onNextStep}
                 >
                     <img
                         draggable={false}
-                        src={nextIcon}
+                        src={isRtl ? leftArrow : rightArrow}
                     />
                 </div>
             </div>
         ) : null}
         {onPrevStep ? (
             <div>
-                <div className={styles.leftCard} />
+                <div className={isRtl ? styles.rightCard : styles.leftCard} />
                 <div
-                    className={styles.leftButton}
+                    className={isRtl ? styles.rightButton : styles.leftButton}
                     onClick={onPrevStep}
                 >
                     <img
                         draggable={false}
-                        src={prevIcon}
+                        src={isRtl ? rightArrow : leftArrow}
                     />
                 </div>
             </div>
@@ -132,6 +140,7 @@ const NextPrevButtons = ({onNextStep, onPrevStep}) => (
 );
 
 NextPrevButtons.propTypes = {
+    isRtl: PropTypes.bool,
     onNextStep: PropTypes.func,
     onPrevStep: PropTypes.func
 };
@@ -152,7 +161,7 @@ const PreviewsStep = ({deckIds, content, onActivateDeckFactory, onShowAll}) => (
             />
         </div>
         <div className={styles.decks}>
-            {deckIds.map(id => (
+            {deckIds.slice(0, 2).map(id => (
                 <div
                     className={styles.deck}
                     key={`deck-preview-${id}`}
@@ -201,51 +210,77 @@ PreviewsStep.propTypes = {
 };
 
 const Cards = props => {
-    if (props.activeDeckId === null) return;
+    const {
+        activeDeckId,
+        content,
+        dragging,
+        isRtl,
+        locale,
+        onActivateDeckFactory,
+        onCloseCards,
+        onDrag,
+        onStartDrag,
+        onEndDrag,
+        onShowAll,
+        onNextStep,
+        onPrevStep,
+        step,
+        ...posProps
+    } = props;
+    let {x, y} = posProps;
 
-    const steps = props.content[props.activeDeckId].steps;
+    if (activeDeckId === null) return;
+
+    if (x === 0 && y === 0) {
+        // initialize positions
+        x = isRtl ? -292 : 292;
+        y = 365;
+    }
+
+    const steps = content[activeDeckId].steps;
 
     return (
         <Draggable
             bounds="parent"
-            position={{x: props.x, y: props.y}}
-            onDrag={props.onDrag}
-            onStart={props.onStartDrag}
-            onStop={props.onEndDrag}
+            position={{x: x, y: y}}
+            onDrag={onDrag}
+            onStart={onStartDrag}
+            onStop={onEndDrag}
         >
             <div className={styles.cardContainer}>
                 <div className={styles.card}>
                     <CardHeader
-                        step={props.step}
+                        step={step}
                         totalSteps={steps.length}
-                        onCloseCards={props.onCloseCards}
-                        onShowAll={props.onShowAll}
+                        onCloseCards={onCloseCards}
+                        onShowAll={onShowAll}
                     />
                     <div className={styles.stepBody}>
-                        {steps[props.step].deckIds ? (
+                        {steps[step].deckIds ? (
                             <PreviewsStep
-                                content={props.content}
-                                deckIds={steps[props.step].deckIds}
-                                onActivateDeckFactory={props.onActivateDeckFactory}
-                                onShowAll={props.onShowAll}
+                                content={content}
+                                deckIds={steps[step].deckIds}
+                                onActivateDeckFactory={onActivateDeckFactory}
+                                onShowAll={onShowAll}
                             />
                         ) : (
-                            steps[props.step].video ? (
+                            steps[step].video ? (
                                 <VideoStep
-                                    dragging={props.dragging}
-                                    video={steps[props.step].video}
+                                    dragging={dragging}
+                                    video={translateVideo(steps[step].video, locale)}
                                 />
                             ) : (
                                 <ImageStep
-                                    image={steps[props.step].image}
-                                    title={steps[props.step].title}
+                                    image={steps[step].image}
+                                    title={steps[step].title}
                                 />
                             )
                         )}
                     </div>
                     <NextPrevButtons
-                        onNextStep={props.step < steps.length - 1 ? props.onNextStep : null}
-                        onPrevStep={props.step > 0 ? props.onPrevStep : null}
+                        isRtl={isRtl}
+                        onNextStep={step < steps.length - 1 ? onNextStep : null}
+                        onPrevStep={step > 0 ? onPrevStep : null}
                     />
                 </div>
             </div>
@@ -268,6 +303,8 @@ Cards.propTypes = {
         })
     }),
     dragging: PropTypes.bool.isRequired,
+    isRtl: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
     onActivateDeckFactory: PropTypes.func.isRequired,
     onCloseCards: PropTypes.func.isRequired,
     onDrag: PropTypes.func,

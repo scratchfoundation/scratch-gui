@@ -82,6 +82,10 @@ $sides: 20rem;
     justify-content: flex-start;
 }
 
+[dir="rtl"] .header-item-close img {
+    transform: scaleX(-1);
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;

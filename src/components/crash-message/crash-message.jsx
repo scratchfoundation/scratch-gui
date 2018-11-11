@@ -1,12 +1,7 @@
-/* eslint-disable react/jsx-no-literals */
-/*
-    @todo Rule is disabled because this component is rendered outside the
-    intl provider right now so cannot be translated.
-*/
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
+import {FormattedMessage} from 'react-intl';
 
 import styles from './crash-message.css';
 import reloadIcon from './reload.svg';
@@ -19,19 +14,30 @@ const CrashMessage = props => (
                 src={reloadIcon}
             />
             <h2>
-                Oops! Something went wrong.
+                <FormattedMessage
+                    defaultMessage="Oops! Something went wrong."
+                    description="Crash Message title"
+                    id="gui.crashMessage.label"
+                />
             </h2>
             <p>
-                We are so sorry, but it looks like Scratch has crashed. This bug has been
-                automatically reported to the Scratch Team. Please refresh your page to try
-                again.
-
+                <FormattedMessage
+                    defaultMessage={'We are so sorry, but it looks like Scratch has crashed. This bug has been' +
+                        ' automatically reported to the Scratch Team. Please refresh your page to try' +
+                        ' again.'}
+                    description="Message to inform the user that page has crashed."
+                    id="gui.crashMessage.description"
+                />
             </p>
             <button
                 className={styles.reloadButton}
                 onClick={props.onReload}
             >
-                Reload
+                <FormattedMessage
+                    defaultMessage="Reload"
+                    description="Button to reload the page when page crashes"
+                    id="gui.crashMessage.reload"
+                />
             </button>
         </Box>
     </div>

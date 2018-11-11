@@ -20,6 +20,11 @@
     box-shadow: 0 0 0 4px $ui-black-transparent;
 }
 
+.close-button.large.orange:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0px 0px 0px 4px hsla(29, 100%, 54%, 0.2);
+}
+
 .small {
     width: 0.825rem;
     height: 0.825rem;
@@ -33,12 +38,22 @@
     box-shadow: 0 0 0 2px $ui-black-transparent;
 }
 
+.large.orange {
+    background-color: hsla(29, 100%, 54%, 0.2);
+    box-shadow: 0px 0px 0px 2px hsla(29, 100%, 54%, 0.2);
+}
+
 .close-icon {
     position: relative;
     margin: 0.25rem;
     user-select: none;
     transform-origin: 50%;
     transform: rotate(45deg);
+}
+
+.close-icon.orange {
+    transform: rotate(45deg);
+    transform: scale(1.4);
 }
 
 .small .close-icon {

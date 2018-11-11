@@ -3,6 +3,7 @@
 
 .modal-content {
     width: 700px;
+    margin: 50px auto; /* This modal is taller than most, reduce top margin */
 }
 
 .body {
@@ -91,6 +92,10 @@
     color: white;
 }
 
-.button-row button + button {
+[dir="ltr"] .button-row button + button {
     margin-left: 0.5rem;
+}
+
+[dir="rtl"] .button-row button + button {
+    margin-right: 0.5rem;
 }

@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import soundIcon from '../components/asset-panel/icon--sound.svg';
+import soundIconRtl from '../components/asset-panel/icon--sound-rtl.svg';
 import addSoundFromLibraryIcon from '../components/asset-panel/icon--add-sound-lib.svg';
 import addSoundFromRecordingIcon from '../components/asset-panel/icon--add-sound-record.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
@@ -33,6 +34,8 @@ import {
     activateTab,
     COSTUMES_TAB_INDEX
 } from '../reducers/editor-tab';
+
+import {setRestore} from '../reducers/restore-deletion';
 
 class SoundTab extends React.Component {
     constructor (props) {
@@ -76,10 +79,11 @@ class SoundTab extends React.Component {
     }
 
     handleDeleteSound (soundIndex) {
-        this.props.vm.deleteSound(soundIndex);
+        const restoreFun = this.props.vm.deleteSound(soundIndex);
         if (soundIndex >= this.state.selectedSoundIndex) {
             this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
         }
+        this.props.dispatchUpdateRestore({restoreFun, deletedItem: 'Sound'});
     }
 
     handleDuplicateSound (soundIndex) {
@@ -153,7 +157,9 @@ class SoundTab extends React.Component {
 
     render () {
         const {
+            dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
+            isRtl,
             vm,
             onNewSoundFromLibraryClick,
             onNewSoundFromRecordingClick
@@ -167,7 +173,7 @@ class SoundTab extends React.Component {
 
         const sounds = sprite.sounds ? sprite.sounds.map(sound => (
             {
-                url: soundIcon,
+                url: isRtl ? soundIconRtl : soundIcon,
                 name: sound.name,
                 details: (sound.sampleCount / sound.rate).toFixed(2),
                 dragPayload: sound
@@ -224,6 +230,7 @@ class SoundTab extends React.Component {
                     onClick: onNewSoundFromLibraryClick
                 }]}
                 dragType={DragConstants.SOUND}
+                isRtl={isRtl}
                 items={sounds}
                 selectedItemIndex={this.state.selectedSoundIndex}
                 onDeleteClick={this.handleDeleteSound}
@@ -252,8 +259,10 @@ class SoundTab extends React.Component {
 }
 
 SoundTab.propTypes = {
+    dispatchUpdateRestore: PropTypes.func,
     editingTarget: PropTypes.string,
     intl: intlShape,
+    isRtl: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func.isRequired,
     onNewSoundFromLibraryClick: PropTypes.func.isRequired,
     onNewSoundFromRecordingClick: PropTypes.func.isRequired,
@@ -277,6 +286,7 @@ SoundTab.propTypes = {
 
 const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
+    isRtl: state.locales.isRtl,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     soundLibraryVisible: state.scratchGui.modals.soundLibrary,
@@ -294,6 +304,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseSoundLibrary: () => {
         dispatch(closeSoundLibrary());
+    },
+    dispatchUpdateRestore: restoreState => {
+        dispatch(setRestore(restoreState));
     }
 });
 

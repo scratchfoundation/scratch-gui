@@ -1,5 +1,6 @@
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import React from 'react';
 
 import Box from '../box/box.jsx';
@@ -13,10 +14,10 @@ const ErrorStep = props => (
     <Box className={styles.body}>
         <Box className={styles.activityArea}>
             <Box className={styles.centeredRow}>
-                <div className={styles.deviceActivity}>
+                <div className={styles.peripheralActivity}>
                     <img
-                        className={styles.deviceActivityIcon}
-                        src={props.deviceImage}
+                        className={styles.peripheralActivityIcon}
+                        src={props.peripheralImage}
                     />
                 </div>
             </Box>
@@ -26,7 +27,7 @@ const ErrorStep = props => (
                 <FormattedMessage
                     defaultMessage="Oops, looks like something went wrong."
                     description="The device connection process has encountered an error."
-                    id="gui.connection.errorMessage"
+                    id="gui.connection.error.errorMessage"
                 />
             </div>
             <Dots
@@ -39,13 +40,13 @@ const ErrorStep = props => (
                     onClick={props.onScanning}
                 >
                     <img
-                        className={styles.buttonIconLeft}
+                        className={classNames(styles.buttonIconLeft, styles.buttonIconBack)}
                         src={backIcon}
                     />
                     <FormattedMessage
                         defaultMessage="Try again"
                         description="Button to initiate trying the device connection again after an error"
-                        id="gui.connection.tryagainbutton"
+                        id="gui.connection.error.tryagainbutton"
                     />
                 </button>
                 <button
@@ -59,7 +60,7 @@ const ErrorStep = props => (
                     <FormattedMessage
                         defaultMessage="Help"
                         description="Button to view help content"
-                        id="gui.connection.helpbutton"
+                        id="gui.connection.error.helpbutton"
                     />
                 </button>
             </Box>
@@ -68,9 +69,9 @@ const ErrorStep = props => (
 );
 
 ErrorStep.propTypes = {
-    deviceImage: PropTypes.string.isRequired,
     onHelp: PropTypes.func,
-    onScanning: PropTypes.func
+    onScanning: PropTypes.func,
+    peripheralImage: PropTypes.string.isRequired
 };
 
 export default ErrorStep;

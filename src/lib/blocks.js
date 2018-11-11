@@ -48,10 +48,15 @@ export default function (vm) {
     };
 
     const soundsMenu = function () {
+        let menu = [['', '']];
         if (vm.editingTarget && vm.editingTarget.sprite.sounds.length > 0) {
-            return vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
+            menu = vm.editingTarget.sprite.sounds.map(sound => [sound.name, sound.name]);
         }
-        return [['', '']];
+        menu.push([
+            ScratchBlocks.ScratchMsgs.translate('SOUND_RECORD', 'record...'),
+            ScratchBlocks.recordSoundCallback
+        ]);
+        return menu;
     };
 
     const costumesMenu = function () {
@@ -213,6 +218,10 @@ export default function (vm) {
             return ScratchBlocks.StatusButtonState.READY;
         }
         return ScratchBlocks.StatusButtonState.NOT_READY;
+    };
+
+    ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
+        vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
     };
 
     return ScratchBlocks;

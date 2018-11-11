@@ -8,7 +8,7 @@ const {
 // Make the default timeout longer, Sauce tests take ~30s
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60 * 1000; // eslint-disable-line
 
-const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Preview';
+const SUPPORTED_MESSAGE = 'Welcome to the Scratch 3.0 Beta';
 const UNSUPPORTED_MESSAGE = 'Scratch 3.0 does not support Internet Explorer';
 
 // Driver configs can be generated with the Sauce Platform Configurator
@@ -38,8 +38,7 @@ describe('Smoke tests on older browsers', () => {
         return expect(isDisplayed).toEqual(true);
     });
 
-    // Safari 9 has always been blank screened due to lack of Intl polyfill
-    test.skip('Safari 9 should not be unsupported', async () => {
+    test('Safari 9 should be supported', async () => {
         const driverConfig = {
             browserName: 'safari',
             platform: 'OS X 10.11',
@@ -55,7 +54,7 @@ describe('Smoke tests on older browsers', () => {
         return expect(isDisplayed).toEqual(true);
     });
 
-    test('Safari 10 should not be unsupported', async () => {
+    test('Safari 10 should be supported', async () => {
         const driverConfig = {
             browserName: 'safari',
             platform: 'OS X 10.11',

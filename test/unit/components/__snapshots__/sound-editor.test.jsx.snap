@@ -39,6 +39,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           title="Undo"
         >
           <img
+            className={undefined}
             draggable={false}
             src="test-file-stub"
           />
@@ -50,6 +51,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           title="Redo"
         >
           <img
+            className={undefined}
             draggable={false}
             src="test-file-stub"
           />
@@ -334,7 +336,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className={undefined}
+    className=""
   >
     <div
       className={undefined}

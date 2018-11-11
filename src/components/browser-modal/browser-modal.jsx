@@ -22,63 +22,70 @@ const BrowserModal = ({intl, ...props}) => (
         overlayClassName={styles.modalOverlay}
         onRequestClose={props.onBack}
     >
-        <Box className={styles.illustration} />
+        <div dir={props.isRtl ? 'rtl' : 'ltr'} >
+            <Box className={styles.illustration} />
 
-        <Box className={styles.body}>
-            <h2>
-                <FormattedMessage {...messages.label} />
-            </h2>
-            <p>
-                { /* eslint-disable max-len */ }
-                <FormattedMessage
-                    defaultMessage="We're very sorry, but Scratch 3.0 does not support Internet Explorer, Vivaldi, Opera or Silk. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
-                    description="Unsupported browser description"
-                    id="gui.unsupportedBrowser.description"
-                />
-                { /* eslint-enable max-len */ }
-            </p>
-
-            <Box className={styles.buttonRow}>
-                <button
-                    className={styles.backButton}
-                    onClick={props.onBack}
-                >
+            <Box className={styles.body}>
+                <h2>
+                    <FormattedMessage {...messages.label} />
+                </h2>
+                <p>
+                    { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="Back"
-                        description="Button to go back in unsupported browser modal"
-                        id="gui.unsupportedBrowser.back"
+                        defaultMessage="We're very sorry, but Scratch 3.0 does not support Internet Explorer, Vivaldi, Opera or Silk. We recommend trying a newer browser such as Google Chrome, Mozilla Firefox, or Microsoft Edge."
+                        description="Unsupported browser description"
+                        id="gui.unsupportedBrowser.description"
                     />
-                </button>
+                    { /* eslint-enable max-len */ }
+                </p>
 
+                <Box className={styles.buttonRow}>
+                    <button
+                        className={styles.backButton}
+                        onClick={props.onBack}
+                    >
+                        <FormattedMessage
+                            defaultMessage="Back"
+                            description="Button to go back in unsupported browser modal"
+                            id="gui.unsupportedBrowser.back"
+                        />
+                    </button>
+
+                </Box>
+                <div className={styles.faqLinkText}>
+                    <FormattedMessage
+                        defaultMessage="To learn more, go to the {previewFaqLink}."
+                        description="Invitation to try 3.0 preview"
+                        id="gui.unsupportedBrowser.previewfaq"
+                        values={{
+                            previewFaqLink: (
+                                <a
+                                    className={styles.faqLink}
+                                    href="//scratch.mit.edu/3faq"
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="FAQ"
+                                        description="link to Scratch 3.0 FAQ page"
+                                        id="gui.unsupportedBrowser.previewfaqlinktext"
+                                    />
+                                </a>
+                            )
+                        }}
+                    />
+                </div>
             </Box>
-            <div className={styles.faqLinkText}>
-                <FormattedMessage
-                    defaultMessage="To learn more, go to the {previewFaqLink}."
-                    description="Invitation to try 3.0 preview"
-                    id="gui.unsupportedBrowser.previewfaq"
-                    values={{
-                        previewFaqLink: (
-                            <a
-                                className={styles.faqLink}
-                                href="//scratch.mit.edu/preview-faq"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="Preview FAQ"
-                                    description="link to Scratch 3.0 preview FAQ page"
-                                    id="gui.unsupportedBrowser.previewfaqlink"
-                                />
-                            </a>
-                        )
-                    }}
-                />
-            </div>
-        </Box>
+        </div>
     </ReactModal>
 );
 
 BrowserModal.propTypes = {
     intl: intlShape.isRequired,
+    isRtl: PropTypes.bool,
     onBack: PropTypes.func.isRequired
 };
 
-export default injectIntl(BrowserModal);
+const WrappedBrowserModal = injectIntl(BrowserModal);
+
+WrappedBrowserModal.setAppElement = ReactModal.setAppElement;
+
+export default WrappedBrowserModal;

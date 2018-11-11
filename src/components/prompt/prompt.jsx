@@ -4,7 +4,7 @@ import React from 'react';
 
 import Box from '../box/box.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
-import Modal from '../modal/modal.jsx';
+import Modal from '../../containers/modal.jsx';
 
 import styles from './prompt.css';
 
@@ -48,6 +48,7 @@ const PromptComponent = props => (
                 <input
                     autoFocus
                     className={styles.variableNameTextInput}
+                    name={props.label}
                     placeholder={props.placeholder}
                     onChange={props.onChange}
                     onKeyPress={props.onKeyPress}

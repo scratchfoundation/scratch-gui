@@ -16,7 +16,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 1rem !important;
     line-height: 1.25rem !important;
-    z-index: $z-index-coming-soon !important;
+    z-index: $z-index-tooltip !important;
 }
 
 .coming-soon:after {
@@ -62,8 +62,15 @@
 }
 
 .coming-soon-image {
-    margin-left: .125rem;
     width: 1.25rem;
     height: 1.25rem;
     vertical-align: middle;
+}
+
+[dir="ltr"] .coming-soon-image {
+    margin-left: .125rem;
+}
+
+[dir="rtl"] .coming-soon-image {
+    margin-right: .125rem;
 }

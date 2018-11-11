@@ -118,3 +118,7 @@
     opacity: 0.2;
     transition: 0.1s;
 }
+
+[dir="rtl"] .rerecord-button img {
+    transform: scaleX(-1);
+}

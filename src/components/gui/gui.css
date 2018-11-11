@@ -63,7 +63,6 @@
     flex-grow: 1;
     height: 80%;
     margin-bottom: 0;
-    margin-left: -0.5rem;
 
     border-radius: 1rem 1rem 0 0;
     border: 1px solid $ui-black-transparent;
@@ -82,9 +81,24 @@
     white-space: nowrap;
 }
 
+[dir="ltr"] .tab {
+    margin-left: -0.5rem;
+}
+
+[dir="rtl"] .tab {
+    margin-right: -0.5rem;
+}
+
+[dir="ltr"] .tab:nth-of-type(1) {
+    margin-left: 0;
+}
+
+[dir="rtl"] .tab:nth-of-type(1) {
+    margin-right: 0;
+}
+
 /* Use z-indices to force left-on-top for tabs */
 .tab:nth-of-type(1) {
-    margin-left: 0;
     z-index: 3;
 }
 .tab:nth-of-type(2) {
@@ -106,9 +120,25 @@
 }
 
 .tab img {
-    margin-right: 0.125rem;
     width: 1.375rem;
     filter: grayscale(100%);
+}
+
+[dir="ltr"] .tab img {
+    margin-right: 0.125rem;
+}
+
+[dir="rtl"] .tab img {
+    margin-left: 0.125rem;
+}
+
+/* mirror blocks and sound tab icons */
+[dir="rtl"] .tab:nth-of-type(1) img {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .tab:nth-of-type(3) img {
+    transform: scaleX(-1);
 }
 
 .tab.is-selected img {
@@ -164,6 +194,9 @@
     */
     display: flex;
     flex-direction: column;
+    /* pad entire wrapper to the left and right; allow children to fill width */
+    padding-left: $space;
+    padding-right: $space;
 }
 
 .stage-and-target-wrapper.large {
@@ -187,11 +220,8 @@
     flex-basis: 0;
 
     padding-top: $space;
-    padding-left: $space;
-    padding-right: $space;
-
     min-height: 0; /* this makes it work in Firefox */
-    
+
     /*
         For making the sprite-selector a scrollable pane
         @todo: Not working in Safari
@@ -201,11 +231,12 @@
 }
 
 .extension-button-container {
-    width: 3.25rem;
+    width: 3.75rem;
     height: 3.25rem;
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     z-index: $z-index-extension-button;
     background: $motion-primary;
 
@@ -240,6 +271,51 @@ $fade-out-distance: 15px;
     height: 1.75rem;
 }
 
+[dir="rtl"] .extension-button-icon {
+    transform: scaleX(-1);
+}
+
 .extension-button > div {
     margin-top: 0;
+}
+
+/* Sprite Selection Watermark */
+.watermark {
+    position: absolute;
+    top: 1.25rem;
+    pointer-events: none;
+}
+
+[dir="ltr"] .watermark {
+    right: 1.25rem;
+}
+
+[dir="rtl"] .watermark {
+    left: 1.25rem;
+}
+
+/* Menu */
+
+.menu-bar-position {
+    position: relative;
+    z-index: $z-index-menu-bar;
+}
+/* Alerts */
+
+.alerts-container {
+    width: 520px;
+    z-index: $z-index-alerts;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    margin-top: 53px;
+}
+
+/*
+    Make the (background) page not scrollable when modals are open
+    This CSS class is automatically added to the body when react-modal is open
+*/
+:global(.ReactModal__Body--open) {
+    overflow: hidden;
 }

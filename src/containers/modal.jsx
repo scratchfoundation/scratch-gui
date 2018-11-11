@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {connect} from 'react-redux';
 
 import ModalComponent from '../components/modal/modal.jsx';
 
@@ -47,8 +48,15 @@ class Modal extends React.Component {
 
 Modal.propTypes = {
     id: PropTypes.string.isRequired,
+    isRtl: PropTypes.bool,
     onRequestClose: PropTypes.func,
     onRequestOpen: PropTypes.func
 };
 
-export default Modal;
+const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl
+});
+
+export default connect(
+    mapStateToProps
+)(Modal);

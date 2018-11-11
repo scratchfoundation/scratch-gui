@@ -1,13 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-.question-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
 .question-container {
     margin: $space;
     border: 1px solid $ui-black-transparent;
@@ -33,7 +26,6 @@
 .question-submit-button {
     position: absolute;
     top: calc($space / 2);
-    right: calc($space / 2);
 
     width: calc(2rem - $space);
     height: calc(2rem - $space);
@@ -45,13 +37,36 @@
     background: $motion-primary;
 }
 
+[dir="ltr"] .question-submit-button {
+    right: calc($space / 2);
+}
+
+[dir="rtl"] .question-submit-button {
+    left: calc($space / 2);
+}
+
 /* Input overrides: width, font-weight, focus outline and padding */
 .question-input > input {
     width: 100%;
-    padding: 0 2rem 0 0.75rem; /* To make room for the submit button */
     font-weight: normal;
+}
+
+[dir="ltr"] .question-input > input {
+    padding: 0 2rem 0 .75rem; /* To make room for the submit button */
+}
+
+[dir="rtl"] .question-input > input {
+    padding: 0 .75rem 0 2rem; /* To make room for the submit button */
 }
 
 .question-input > input:focus {
     box-shadow: 0px 0px 0px 3px $motion-transparent;
+}
+
+.question-submit-button-icon {
+    width: calc(2rem - $space);
+    height: calc(2rem - $space);
+    position: relative;
+    right: -7px;
+    left: -7px;
 }

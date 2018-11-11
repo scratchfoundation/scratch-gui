@@ -51,7 +51,7 @@ const handleFileUpload = function (fileInput, onload) {
  */
 
 /**
- * Cache an asset (costume, sound) in storage and return an object representation
+ * Create an asset (costume, sound) with storage and return an object representation
  * of the asset to track in the VM.
  * @param {ScratchStorage} storage The storage to cache the asset in
  * @param {string} fileName The name of the asset
@@ -62,18 +62,21 @@ const handleFileUpload = function (fileInput, onload) {
  * @return {VMAsset} An object representing this asset and relevant information
  * which can be used to look up the data in storage
  */
-const cacheAsset = function (storage, fileName, assetType, dataFormat, data) {
-    const md5 = storage.builtinHelper.cache(
+const createVMAsset = function (storage, fileName, assetType, dataFormat, data) {
+    const asset = storage.createAsset(
         assetType,
         dataFormat,
-        data
+        data,
+        null,
+        true // generate md5
     );
 
     return {
         name: fileName,
         dataFormat: dataFormat,
-        md5: `${md5}.${dataFormat}`,
-        assetId: md5
+        asset: asset,
+        md5: `${asset.assetId}.${dataFormat}`,
+        assetId: asset.assetId
     };
 };
 
@@ -114,7 +117,7 @@ const costumeUpload = function (fileData, fileType, costumeName, storage, handle
 
     const bitmapAdapter = new BitmapAdapter();
     const addCostumeFromBuffer = function (dataBuffer) {
-        const vmCostume = cacheAsset(
+        const vmCostume = createVMAsset(
             storage,
             costumeName,
             assetType,
@@ -170,7 +173,7 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
         return;
     }
 
-    const vmSound = cacheAsset(
+    const vmSound = createVMAsset(
         storage,
         soundName,
         storage.AssetType.Sound,
@@ -180,7 +183,8 @@ const soundUpload = function (fileData, fileType, soundName, storage, handleSoun
     handleSound(vmSound);
 };
 
-const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
+const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite, costumeSuffix) {
+    const costumeName = costumeSuffix || 'costume1';
     switch (fileType) {
     case '':
     case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
@@ -191,7 +195,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
     case 'image/png':
     case 'image/jpeg': {
         // Make a sprite from an image by making it a costume first
-        costumeUpload(fileData, fileType, `${spriteName}-costume1`, storage, (vmCostume => {
+        costumeUpload(fileData, fileType, `${spriteName}-${costumeName}`, storage, (vmCostume => {
             const newSprite = {
                 name: spriteName,
                 isStage: false,

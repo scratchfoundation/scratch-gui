@@ -5,8 +5,8 @@ import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-int
 
 import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
-import CostumeCanvas from '../costume-canvas/costume-canvas.jsx';
 import styles from './stage-selector.css';
+import {isRtl} from 'scratch-l10n';
 
 import backdropIcon from '../action-menu/icon--backdrop.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
@@ -40,6 +40,8 @@ const messages = defineMessages({
 const StageSelector = props => {
     const {
         backdropCount,
+        containerRef,
+        dragOver,
         fileInputRef,
         intl,
         selected,
@@ -60,9 +62,10 @@ const StageSelector = props => {
         <Box
             className={classNames(styles.stageSelector, {
                 [styles.isSelected]: selected,
-                [styles.raised]: raised,
+                [styles.raised]: raised || dragOver,
                 [styles.receivedBlocks]: receivedBlocks
             })}
+            componentRef={containerRef}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -78,11 +81,9 @@ const StageSelector = props => {
                 </div>
             </div>
             {url ? (
-                <CostumeCanvas
+                <img
                     className={styles.costumeCanvas}
-                    height={48}
-                    url={url}
-                    width={64}
+                    src={url}
                 />
             ) : null}
             <div className={styles.label}>
@@ -120,6 +121,7 @@ const StageSelector = props => {
                     }
                 ]}
                 title={intl.formatMessage(messages.addBackdropFromLibrary)}
+                tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewBackdropClick}
             />
         </Box>
@@ -128,6 +130,8 @@ const StageSelector = props => {
 
 StageSelector.propTypes = {
     backdropCount: PropTypes.number.isRequired,
+    containerRef: PropTypes.func,
+    dragOver: PropTypes.bool,
     fileInputRef: PropTypes.func,
     intl: intlShape.isRequired,
     onBackdropFileUpload: PropTypes.func,

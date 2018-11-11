@@ -13,17 +13,19 @@ class LanguageSelector extends React.Component {
         bindAll(this, [
             'handleChange'
         ]);
+        document.documentElement.lang = props.currentLocale;
     }
     handleChange (e) {
         const newLocale = e.target.value;
-        if (this.props.supportedLocales.includes(newLocale)) {
+        if (this.props.messagesByLocale[newLocale]) {
             this.props.onChangeLanguage(newLocale);
+            document.documentElement.lang = newLocale;
         }
     }
     render () {
         const {
             onChangeLanguage, // eslint-disable-line no-unused-vars
-            supportedLocales, // eslint-disable-line no-unused-vars
+            messagesByLocale, // eslint-disable-line no-unused-vars
             children,
             ...props
         } = this.props;
@@ -41,13 +43,14 @@ class LanguageSelector extends React.Component {
 LanguageSelector.propTypes = {
     children: PropTypes.node,
     currentLocale: PropTypes.string.isRequired,
-    onChangeLanguage: PropTypes.func.isRequired,
-    supportedLocales: PropTypes.arrayOf(PropTypes.string)
+    // Only checking key presence for messagesByLocale, no need to be more specific than object
+    messagesByLocale: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    onChangeLanguage: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     currentLocale: state.locales.locale,
-    supportedLocales: Object.keys(state.locales.messagesByLocale)
+    messagesByLocale: state.locales.messagesByLocale
 });
 
 const mapDispatchToProps = dispatch => ({

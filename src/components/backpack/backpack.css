@@ -9,7 +9,6 @@
 .backpack-header {
     margin-top: 0.5rem;
     border: 1px solid $ui-black-transparent;
-    border-top-right-radius: $space;
     background: $ui-white;
     padding: 0.25rem;
     text-align: center;
@@ -18,6 +17,14 @@
     transition: 0.2s;
     cursor: pointer;
     user-select: none;
+}
+
+[dir="ltr"] .backpack-header {
+    border-top-right-radius: $space;
+}
+
+[dir="rtl"] .backpack-header {
+    border-top-left-radius: $space;
 }
 
 .backpack-list {
@@ -64,5 +71,21 @@
 .backpack-item {
     min-width: 4rem;
     margin: 0 0.25rem;
+}
+
+.backpack-item img {
     mix-blend-mode: multiply; /* Make white transparent for thumnbnails */
+}
+
+.more {
+    background: $motion-primary;
+    color: $ui-white;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
 }

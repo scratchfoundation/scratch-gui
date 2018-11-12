@@ -397,11 +397,17 @@ class Blocks extends React.Component {
     handleOpenSoundRecorder () {
         this.props.onOpenSoundRecorder();
     }
-    handlePromptCallback (input, optionSelection) {
+
+    /*
+     * Pass along information about proposed name and variable options (scope and isCloud)
+     * and additional potentially conflicting variable names from the VM
+     * to the variable validation prompt callback used in scratch-blocks.
+     */
+    handlePromptCallback (input, variableOptions) {
         this.state.prompt.callback(
             input,
             this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType),
-            optionSelection);
+            variableOptions);
         this.handlePromptClose();
     }
     handlePromptClose () {

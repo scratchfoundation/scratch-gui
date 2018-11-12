@@ -44,15 +44,7 @@ class CloudProvider {
             const messageString = event.data;
             log.info(`Received websocket message: ${messageString}`);
             const message = JSON.parse(messageString);
-            if (message.method === 'set') {
-                const varData = {
-                    varUpdate: {
-                        name: message.name,
-                        value: message.value
-                    }
-                };
-                this.vm.postIOData('cloud', varData);
-            }
+            this.parseMessage(message);
         };
 
         this.connection.onopen = () => {
@@ -63,6 +55,26 @@ class CloudProvider {
         this.connection.onclose = () => {
             log.info(`Closed connection to websocket`);
         };
+    }
+
+    parseMessage (message) {
+        const varData = {};
+        switch (message.method) {
+        case 'ack': {
+            varData.varCreate = {
+                name: message.name
+            };
+            break;
+        }
+        case 'set': {
+            varData.varUpdate = {
+                name: message.name,
+                value: message.value
+            };
+            break;
+        }
+        }
+        this.vm.postIOData('cloud', varData);
     }
 
     /**
@@ -98,6 +110,16 @@ class CloudProvider {
     sendCloudData (data) {
         this.connection.send(`${data}\n`);
         log.info(`Sent message to clouddata server: ${data}`);
+    }
+
+    /**
+     * Provides an API for the VM's cloud IO device to create
+     * a new cloud variable on the server.
+     * @param {string} name The name of the variable to create
+     * @param {string | number} value The value of the new cloud variable.
+     */
+    createVariable (name, value) {
+        this.writeToServer('create', name, value);
     }
 
     /**

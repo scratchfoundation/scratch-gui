@@ -24,8 +24,10 @@ class Prompt extends React.Component {
         if (event.key === 'Enter') this.handleOk();
     }
     handleOk () {
-        // TODO CLOUD add cloud variable option info
-        this.props.onOk(this.state.inputValue, (this.state.globalSelected ? 'global' : 'local'));
+        this.props.onOk(this.state.inputValue, {
+            scope: this.state.globalSelected ? 'global' : 'local',
+            isCloud: this.state.cloudSelected
+        });
     }
     handleCancel () {
         this.props.onCancel();

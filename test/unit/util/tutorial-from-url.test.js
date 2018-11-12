@@ -36,7 +36,7 @@ test('returns null if no query param', () => {
     expect(detectTutorialId()).toBe(null);
 });
 
-test('returns null if non-numeric template', () => {
+test('returns null if unrecognized template', () => {
     window.location.search = '?tutorial=asdf';
     expect(detectTutorialId()).toBe(null);
 });
@@ -44,4 +44,9 @@ test('returns null if non-numeric template', () => {
 test('takes the first of multiple', () => {
     window.location.search = '?tutorial=one&tutorial=two';
     expect(detectTutorialId()).toBe('foo');
+});
+
+test('returns all for the tutorial library shortcut', () => {
+    window.location.search = '?tutorial=all';
+    expect(detectTutorialId()).toBe('all');
 });

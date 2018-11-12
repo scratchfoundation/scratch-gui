@@ -52,7 +52,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
-                    initTutorialCard,
                     initTutorialLibrary
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
@@ -67,16 +66,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else {
                     const tutorialId = detectTutorialId();
-                    if (tutorialId !== null) {
-                        // When loading a tutorial from the URL,
-                        // load w/o preview modal
-                        // open requested tutorial card or tutorials library modal for 'all'
-                        if (tutorialId === 'all') {
-                            initializedGui = initTutorialLibrary(initializedGui);
-                        } else {
-                            initializedGui = initTutorialCard(initializedGui, tutorialId);
-                        }
-                    }
+                    // handle ?tutorial=all for beta
+                    // if we decide to keep this for www, functionality should move to
+                    // setActiveCards in the GUI container
+                    if (tutorialId === 'all') initializedGui = initTutorialLibrary(initializedGui);
                 }
                 reducers = {
                     locales: localesReducer,

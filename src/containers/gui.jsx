@@ -13,6 +13,8 @@ import {
     getIsShowingProject
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
+import {detectTutorialId} from '../lib/tutorial-from-url';
+import {activateDeck} from '../reducers/cards';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -47,6 +49,7 @@ class GUI extends React.Component {
     componentDidMount () {
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
+        this.setActiveCards(detectTutorialId());
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -63,6 +66,11 @@ class GUI extends React.Component {
             );
         } else {
             this.props.onUpdateReduxProjectTitle(newTitle);
+        }
+    }
+    setActiveCards (tutorialId) {
+        if (tutorialId && tutorialId !== 'all') {
+            this.props.onUpdateReduxDeck(tutorialId);
         }
     }
     render () {
@@ -119,6 +127,7 @@ GUI.propTypes = {
     onStorageInit: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    onUpdateReduxDeck: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectHost: PropTypes.string,
@@ -169,6 +178,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
+    onUpdateReduxDeck: tutorialId => dispatch(activateDeck(tutorialId)),
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 

@@ -50,16 +50,16 @@
 }
 
 .library-item-inset-image-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: -2.5rem;
     margin-left: 1rem;
     align-self: flex-start;
-    background-color: rgb(35, 188, 141);
+    background-color: $pen-primary;
     width: 3.5rem;
     height: 3.5rem;
-    z-index: 10;
     border-radius: 0.5rem;
     border: 0.25rem solid $ui-white;
 }

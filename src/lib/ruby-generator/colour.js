@@ -1,13 +1,13 @@
 /**
- * Define Ruby with Colour Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Colour Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.colour_picker = function (block) {
-        const c = Blockly.Ruby.quote_(block.getFieldValue('COLOUR') || null);
-        return [c, Blockly.Ruby.ORDER_ATOMIC];
+export default function (Generator) {
+    Generator.colour_picker = function (block) {
+        const c = Generator.quote_(Generator.getFieldValue(block, 'COLOUR') || null);
+        return [c, Generator.ORDER_ATOMIC];
     };
 
-    return Blockly;
+    return Generator;
 }

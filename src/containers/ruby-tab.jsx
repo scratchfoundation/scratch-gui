@@ -1,14 +1,11 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import AceEditor from 'react-ace';
-import VM from 'scratch-vm';
-import {rubyCodesShape} from '../reducers/ruby-codes.js';
+import {rubyCodeShape} from '../reducers/ruby-code';
 
 import 'brace/mode/ruby';
 import 'brace/theme/clouds';
 
 const RubyTab = function (props) {
-    const rubyCode = props.rubyCodes.rubyCode[props.vm.editingTarget.id];
     return (
         <AceEditor
             readOnly
@@ -29,15 +26,14 @@ const RubyTab = function (props) {
                 border: '1px solid hsla(0, 0%, 0%, 0.15)'
             }}
             theme="clouds"
-            value={rubyCode ? rubyCode.code : ''}
+            value={props.rubyCode ? props.rubyCode.code : ''}
             width="100%"
         />
     );
 };
 
 RubyTab.propTypes = {
-    rubyCodes: rubyCodesShape,
-    vm: PropTypes.instanceOf(VM).isRequired
+    rubyCode: rubyCodeShape
 };
 
 export default RubyTab;

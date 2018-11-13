@@ -5,7 +5,6 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
-import RubyGenerator from '../lib/ruby-generator';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -25,7 +24,7 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {setGenerator, updateRubyCode} from '../reducers/ruby-codes.js';
+import {updateRubyCode} from '../reducers/ruby-code';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
 import {
@@ -51,8 +50,6 @@ class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
-        this.ScratchBlocks = RubyGenerator(this.ScratchBlocks);
-        this.props.setGeneratorState(this.ScratchBlocks.Ruby);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -171,10 +168,7 @@ class Blocks extends React.Component {
             this.workspace.setVisible(false);
         }
         if (!this.props.blocksTabVisible) {
-            this.props.updateRubyCodeState(
-                this.props.vm.editingTarget,
-                this.workspace
-            );
+            this.props.updateRubyCodeState(this.props.vm.editingTarget);
         }
     }
     componentWillUnmount () {
@@ -280,10 +274,7 @@ class Blocks extends React.Component {
             });
         }
         if (!this.props.blocksTabVisible) {
-            this.props.updateRubyCodeState(
-                this.props.vm.editingTarget,
-                this.workspace
-            );
+            this.props.updateRubyCodeState(this.props.vm.editingTarget);
         }
     }
     onWorkspaceMetricsChange () {
@@ -452,7 +443,6 @@ class Blocks extends React.Component {
             onOpenConnectionModal,
             onOpenSoundRecorder,
             updateToolboxState,
-            setGeneratorState,
             updateRubyCodeState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
@@ -536,7 +526,6 @@ Blocks.propTypes = {
         comments: PropTypes.bool,
         collapse: PropTypes.bool
     }),
-    setGeneratorState: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
     updateRubyCodeState: PropTypes.func,
@@ -611,11 +600,8 @@ const mapDispatchToProps = dispatch => ({
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
     },
-    setGeneratorState: generator => {
-        dispatch(setGenerator(generator));
-    },
-    updateRubyCodeState: (target, workspace) => {
-        dispatch(updateRubyCode(target, workspace));
+    updateRubyCodeState: target => {
+        dispatch(updateRubyCode(target));
     }
 });
 

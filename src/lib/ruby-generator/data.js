@@ -1,105 +1,105 @@
 /**
- * Define Ruby with Data Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Variables Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.data_variable = function (block) {
-        const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return [variable, Blockly.Ruby.ORDER_ATOMIC];
+export default function (Generator) {
+    Generator.data_variable = function (block) {
+        const variable = Generator.variableName(Generator.getFieldId(block, 'VARIABLE'));
+        return [variable, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.data_setvariableto = function (block) {
-        const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
-        return `${variable} = ${value}\n`;
+    Generator.data_setvariableto = function (block) {
+        const variable = Generator.variableName(Generator.getFieldId(block, 'VARIABLE'));
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
+        return `${variable} = ${Generator.nosToCode(value)}\n`;
     };
 
-    Blockly.Ruby.data_changevariableby = function (block) {
-        const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || 0;
-        return `${variable} += ${value}\n`;
+    Generator.data_changevariableby = function (block) {
+        const variable = Generator.variableName(Generator.getFieldId(block, 'VARIABLE'));
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || 0;
+        return `${variable} += ${Generator.nosToCode(value)}\n`;
     };
 
-    Blockly.Ruby.data_showvariable = function (block) {
-        const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return `show_variable(${Blockly.Ruby.quote_(variable)})\n`;
+    Generator.data_showvariable = function (block) {
+        const variable = Generator.variableName(Generator.getFieldId(block, 'VARIABLE'));
+        return `show_variable(${Generator.quote_(variable)})\n`;
     };
 
-    Blockly.Ruby.data_hidevariable = function (block) {
-        const variable = Blockly.Ruby.variableName(block.getFieldValue('VARIABLE'));
-        return `hide_variable(${Blockly.Ruby.quote_(variable)})\n`;
+    Generator.data_hidevariable = function (block) {
+        const variable = Generator.variableName(Generator.getFieldId(block, 'VARIABLE'));
+        return `hide_variable(${Generator.quote_(variable)})\n`;
     };
 
-    Blockly.Ruby.data_listcontents = function (block) {
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [list, Blockly.Ruby.ORDER_COLLECTION];
+    Generator.data_listcontents = function (block) {
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return [list, Generator.ORDER_COLLECTION];
     };
 
-    Blockly.Ruby.data_addtolist = function (block) {
-        const item = Blockly.Ruby.valueToCode(block, 'ITEM', Blockly.Ruby.ORDER_NONE) || '0';
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}.push(${item})\n`;
+    Generator.data_addtolist = function (block) {
+        const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `${list}.push(${Generator.nosToCode(item)})\n`;
     };
 
-    Blockly.Ruby.data_deleteoflist = function (block) {
-        const index = Blockly.Ruby.valueToCode(block, 'INDEX', Blockly.Ruby.ORDER_NONE) - 1 || 0;
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}.delete_at(${index})\n`;
+    Generator.data_deleteoflist = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) - 1 || 0;
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `${list}.delete_at(${Generator.nosToCode(index)})\n`;
     };
 
-    Blockly.Ruby.data_deletealloflist = function (block) {
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
+    Generator.data_deletealloflist = function (block) {
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
         return `${list}.clear\n`;
     };
 
-    Blockly.Ruby.data_insertatlist = function (block) {
-        const index = Blockly.Ruby.valueToCode(block, 'INDEX', Blockly.Ruby.ORDER_NONE) - 1 || 0;
-        const item = Blockly.Ruby.valueToCode(block, 'ITEM', Blockly.Ruby.ORDER_NONE) || '0';
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}.insert(${index}, ${item})\n`;
+    Generator.data_insertatlist = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) - 1 || 0;
+        const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `${list}.insert(${index}, ${Generator.nosToCode(item)})\n`;
     };
 
-    Blockly.Ruby.data_replaceitemoflist = function (block) {
-        const index = Blockly.Ruby.valueToCode(block, 'INDEX', Blockly.Ruby.ORDER_INDEX) - 1 || 0;
-        const item = Blockly.Ruby.valueToCode(block, 'ITEM', Blockly.Ruby.ORDER_NONE) || '0';
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `${list}[${index}] = ${item}\n`;
+    Generator.data_replaceitemoflist = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_INDEX) - 1 || 0;
+        const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `${list}[${index}] = ${Generator.nosToCode(item)}\n`;
     };
 
-    Blockly.Ruby.data_itemoflist = function (block) {
-        const index = Blockly.Ruby.valueToCode(block, 'INDEX', Blockly.Ruby.ORDER_INDEX) - 1 || 0;
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [`${list}[${index}]`, Blockly.Ruby.ORDER_FUNCTION_CAL];
+    Generator.data_itemoflist = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_INDEX) - 1 || 0;
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return [`${list}[${index}]`, Generator.ORDER_FUNCTION_CAL];
     };
 
-    Blockly.Ruby.data_itemnumoflist = function (block) {
-        const item = Blockly.Ruby.valueToCode(block, 'ITEM', Blockly.Ruby.ORDER_NONE) || '0';
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [`${list}.index(${item})`, Blockly.Ruby.ORDER_FUNCTION_CAL];
+    Generator.data_itemnumoflist = function (block) {
+        const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return [`${list}.index(${Generator.nosToCode(item)})`, Generator.ORDER_FUNCTION_CAL];
     };
 
-    Blockly.Ruby.data_lengthoflist = function (block) {
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [`${list}.length`, Blockly.Ruby.ORDER_FUNCTION_CAL];
+    Generator.data_lengthoflist = function (block) {
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return [`${list}.length`, Generator.ORDER_FUNCTION_CAL];
     };
 
-    Blockly.Ruby.data_listcontainsitem = function (block) {
-        const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        const item = Blockly.Ruby.valueToCode(block, 'ITEM', order) || '0';
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return [`${list}.include?(${item})`, order];
+    Generator.data_listcontainsitem = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const item = Generator.valueToCode(block, 'ITEM', order) || '0';
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return [`${list}.include?(${Generator.nosToCode(item)})`, order];
     };
 
-    Blockly.Ruby.data_showlist = function (block) {
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `show_list(${Blockly.Ruby.quote_(list)})\n`;
+    Generator.data_showlist = function (block) {
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `show_list(${Generator.quote_(list)})\n`;
     };
 
-    Blockly.Ruby.data_hidelist = function (block) {
-        const list = Blockly.Ruby.listName(block.getFieldValue('LIST'));
-        return `hide_list(${Blockly.Ruby.quote_(list)})\n`;
+    Generator.data_hidelist = function (block) {
+        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `hide_list(${Generator.quote_(list)})\n`;
     };
 
-    return Blockly;
+    return Generator;
 }

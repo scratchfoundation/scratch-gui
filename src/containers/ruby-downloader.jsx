@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
-import {rubyCodesShape} from '../reducers/ruby-codes';
+import RubyGenerator from '../lib/ruby-generator';
+import VM from 'scratch-vm';
 
 class RubyDownloader extends React.Component {
     constructor (props) {
@@ -14,20 +15,26 @@ class RubyDownloader extends React.Component {
     }
     saveRuby () {
         let code = 'require "smalruby3"\n';
-        const generator = this.props.rubyCodes.generator;
-        const sprites = [this.props.stage];
+
+        const targets = {};
+        this.props.vm.runtime.targets.forEach(target => {
+            targets[target.id] = target;
+        });
+        const sprites = [targets[this.props.stage.id]];
         for (const id in this.props.sprites) {
             const sprite = this.props.sprites[id];
-            sprites[sprite.order + 1] = sprite;
+            sprites[sprite.order + 1] = targets[id];
         }
+
         sprites.forEach(sprite => {
-            const rubyCode = this.props.rubyCodes.rubyCode[sprite.id];
-            if (rubyCode) {
-                const spriteNewCode = generator.spriteNew(rubyCode.target);
-                const bodyCode = rubyCode.code ? generator.prefixLines(rubyCode.code, generator.INDENT) : '';
-                code += `\n${spriteNewCode} do\n${bodyCode}end\n`;
+            const spriteNewCode = RubyGenerator.spriteNew(sprite);
+            let bodyCode = RubyGenerator.targetToCode(sprite);
+            if (bodyCode.length > 0) {
+                bodyCode = RubyGenerator.prefixLines(bodyCode, RubyGenerator.INDENT);
             }
+            code += `\n${spriteNewCode} do\n${bodyCode}end\n`;
         });
+
         return new Blob([code], {
             type: 'text/x-ruby-script'
         });
@@ -75,21 +82,21 @@ RubyDownloader.propTypes = {
     children: PropTypes.func,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    rubyCodes: rubyCodesShape,
     sprites: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         order: PropTypes.number.isRequired
     })),
     stage: PropTypes.shape({
         id: PropTypes.string
-    })
+    }),
+    vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    rubyCodes: state.scratchGui.rubyCodes,
     sprites: state.scratchGui.targets.sprites,
-    stage: state.scratchGui.targets.stage
+    stage: state.scratchGui.targets.stage,
+    vm: state.scratchGui.vm
 });
 
 export default connect(

@@ -1,122 +1,122 @@
 /**
- * Define Ruby with Looks Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Looks Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.looks_sayforsecs = function (block) {
-        const message = Blockly.Ruby.valueToCode(block, 'MESSAGE', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
-        const secs = Blockly.Ruby.valueToCode(block, 'SECS', Blockly.Ruby.ORDER_NONE) || '0';
+export default function (Generator) {
+    Generator.looks_sayforsecs = function (block) {
+        const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
+        const secs = Generator.valueToCode(block, 'SECS', Generator.ORDER_NONE) || '0';
         return `say(message: ${message}, second: ${secs})\n`;
     };
 
-    Blockly.Ruby.looks_say = function (block) {
-        const message = Blockly.Ruby.valueToCode(block, 'MESSAGE', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
+    Generator.looks_say = function (block) {
+        const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
         return `say(message: ${message})\n`;
     };
 
-    Blockly.Ruby.looks_thinkforsecs = function (block) {
-        const message = Blockly.Ruby.valueToCode(block, 'MESSAGE', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
-        const secs = Blockly.Ruby.valueToCode(block, 'SECS', Blockly.Ruby.ORDER_NONE) || '0';
+    Generator.looks_thinkforsecs = function (block) {
+        const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
+        const secs = Generator.valueToCode(block, 'SECS', Generator.ORDER_NONE) || '0';
         return `think(message: ${message}, second: ${secs})\n`;
     };
 
-    Blockly.Ruby.looks_think = function (block) {
-        const message = Blockly.Ruby.valueToCode(block, 'MESSAGE', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
+    Generator.looks_think = function (block) {
+        const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
         return `think(message: ${message})\n`;
     };
 
-    Blockly.Ruby.looks_switchcostumeto = function (block) {
-        const costume = Blockly.Ruby.valueToCode(block, 'COSTUME', Blockly.Ruby.ORDER_NONE) || null;
+    Generator.looks_switchcostumeto = function (block) {
+        const costume = Generator.valueToCode(block, 'COSTUME', Generator.ORDER_NONE) || null;
         return `switch_costume(${costume})\n`;
     };
 
-    Blockly.Ruby.looks_costume = function (block) {
-        const costume = Blockly.Ruby.quote_(block.getFieldValue('COSTUME') || null);
-        return [costume, Blockly.Ruby.ORDER_ATOMIC];
+    Generator.looks_costume = function (block) {
+        const costume = Generator.quote_(Generator.getFieldValue(block, 'COSTUME') || null);
+        return [costume, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.looks_nextcostume = function () {
+    Generator.looks_nextcostume = function () {
         return 'next_costume\n';
     };
 
-    Blockly.Ruby.looks_switchbackdropto = function (block) {
-        const backdrop = Blockly.Ruby.valueToCode(block, 'BACKDROP', Blockly.Ruby.ORDER_NONE) || null;
+    Generator.looks_switchbackdropto = function (block) {
+        const backdrop = Generator.valueToCode(block, 'BACKDROP', Generator.ORDER_NONE) || null;
         return `switch_backdrop(${backdrop})\n`;
     };
 
-    Blockly.Ruby.looks_backdrops = function (block) {
-        const backdrop = Blockly.Ruby.quote_(block.getFieldValue('BACKDROP') || null);
-        return [backdrop, Blockly.Ruby.ORDER_ATOMIC];
+    Generator.looks_backdrops = function (block) {
+        const backdrop = Generator.quote_(Generator.getFieldValue(block, 'BACKDROP') || null);
+        return [backdrop, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.looks_nextbackdrop = function () {
+    Generator.looks_nextbackdrop = function () {
         return 'next_backdrop\n';
     };
 
-    Blockly.Ruby.looks_changesizeby = function (block) {
-        const change = Blockly.Ruby.valueToCode(block, 'CHANGE', Blockly.Ruby.ORDER_NONE) || '0';
+    Generator.looks_changesizeby = function (block) {
+        const change = Generator.valueToCode(block, 'CHANGE', Generator.ORDER_NONE) || '0';
         return `self.size += ${change}\n`;
     };
 
-    Blockly.Ruby.looks_setsizeto = function (block) {
-        const size = Blockly.Ruby.valueToCode(block, 'SIZE', Blockly.Ruby.ORDER_NONE) || '0';
+    Generator.looks_setsizeto = function (block) {
+        const size = Generator.valueToCode(block, 'SIZE', Generator.ORDER_NONE) || '0';
         return `self.size = ${size}\n`;
     };
 
-    Blockly.Ruby.looks_changeeffectby = function (block) {
-        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT') || null);
-        const change = Blockly.Ruby.valueToCode(block, 'CHANGE', Blockly.Ruby.ORDER_NONE) || '0';
+    Generator.looks_changeeffectby = function (block) {
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const change = Generator.valueToCode(block, 'CHANGE', Generator.ORDER_NONE) || '0';
         return `change_effect_by(${effect}, ${change})\n`;
     };
 
-    Blockly.Ruby.looks_seteffectto = function (block) {
-        const effect = Blockly.Ruby.quote_(block.getFieldValue('EFFECT') || null);
-        const value = Blockly.Ruby.valueToCode(block, 'VALUE', Blockly.Ruby.ORDER_NONE) || '0';
+    Generator.looks_seteffectto = function (block) {
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
         return `set_effect(${effect}, ${value})\n`;
     };
 
-    Blockly.Ruby.looks_cleargraphiceffects = function () {
+    Generator.looks_cleargraphiceffects = function () {
         return 'clear_graphic_effects\n';
     };
 
-    Blockly.Ruby.looks_show = function () {
+    Generator.looks_show = function () {
         return 'show\n';
     };
 
-    Blockly.Ruby.looks_hide = function () {
+    Generator.looks_hide = function () {
         return 'hide\n';
     };
 
-    Blockly.Ruby.looks_gotofrontback = function (block) {
-        const frontBack = block.getFieldValue('FRONT_BACK') || 'front';
+    Generator.looks_gotofrontback = function (block) {
+        const frontBack = Generator.getFieldValue(block, 'FRONT_BACK') || 'front';
         return `go_to_layer(:${frontBack})\n`;
     };
 
-    Blockly.Ruby.looks_goforwardbackwardlayers = function (block) {
-        const layer = Blockly.Ruby.valueToCode(block, 'NUM', Blockly.Ruby.ORDER_NONE) || 0;
-        const forwardBackward = block.getFieldValue('FORWARD_BACKWARD') || 'forward';
+    Generator.looks_goforwardbackwardlayers = function (block) {
+        const layer = Generator.valueToCode(block, 'NUM', Generator.ORDER_NONE) || 0;
+        const forwardBackward = Generator.getFieldValue(block, 'FORWARD_BACKWARD') || 'forward';
         return `go_layers(${layer}, :${forwardBackward})\n`;
     };
 
-    Blockly.Ruby.looks_costumenumbername = function (block) {
-        const numberName = block.getFieldValue('NUMBER_NAME') || 'number';
-        return [`costume_${numberName}`, Blockly.Ruby.ORDER_ATOMIC];
+    Generator.looks_costumenumbername = function (block) {
+        const numberName = Generator.getFieldValue(block, 'NUMBER_NAME') || 'number';
+        return [`costume_${numberName}`, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.looks_backdropnumbername = function (block) {
-        const numberName = block.getFieldValue('NUMBER_NAME') || 'number';
-        return [`backdrop_${numberName}`, Blockly.Ruby.ORDER_ATOMIC];
+    Generator.looks_backdropnumbername = function (block) {
+        const numberName = Generator.getFieldValue(block, 'NUMBER_NAME') || 'number';
+        return [`backdrop_${numberName}`, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.looks_size = function () {
-        return ['size', Blockly.Ruby.ORDER_ATOMIC];
+    Generator.looks_size = function () {
+        return ['size', Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.looks_switchbackdroptoandwait = function (block) {
-        const backdrop = Blockly.Ruby.valueToCode(block, 'BACKDROP', Blockly.Ruby.ORDER_NONE) || null;
+    Generator.looks_switchbackdroptoandwait = function (block) {
+        const backdrop = Generator.valueToCode(block, 'BACKDROP', Generator.ORDER_NONE) || null;
         return `switch_backdrop_to_and_wait(${backdrop})\n`;
     };
 
-    return Blockly;
+    return Generator;
 }

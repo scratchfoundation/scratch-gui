@@ -22,7 +22,7 @@ import targetReducer, {targetsInitialState} from './targets';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
-import rubyCodesReducer, {rubyCodesInitialState} from './ruby-codes';
+import rubyCodeReducer, {rubyCodeInitialState} from './ruby-code';
 import throttle from 'redux-throttle';
 
 import decks from '../lib/libraries/decks/index.jsx';
@@ -53,7 +53,7 @@ const guiInitialState = {
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
-    rubyCodes: rubyCodesInitialState
+    rubyCode: rubyCodeInitialState
 };
 
 const initPlayer = function (currentState) {
@@ -122,7 +122,7 @@ const guiReducer = combineReducers({
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,
-    rubyCodes: rubyCodesReducer
+    rubyCode: rubyCodeReducer
 });
 
 export {

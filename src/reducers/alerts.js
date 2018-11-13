@@ -15,11 +15,14 @@ const reducer = function (state, action) {
         const newList = state.alertsList.slice();
         const newAlert = {message: action.data.message};
         const extensionId = action.data.extensionId;
+        newAlert.showReconnect = false;
         if (extensionId) { // if it's an extension
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension && extension.name) {
                 // TODO: is this the right place to assemble this message?
+                newAlert.extensionId = extensionId;
                 newAlert.message = `${newAlert.message} ${extension.name}.`;
+                newAlert.showReconnect = true;
             }
             if (extension && extension.smallPeripheralImage) {
                 newAlert.iconURL = extension.smallPeripheralImage;

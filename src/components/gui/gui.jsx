@@ -77,6 +77,7 @@ const GUIComponent = props => {
         intl,
         isPlayerOnly,
         isRtl,
+        isShared,
         loading,
         renderLogin,
         onClickAccountNav,
@@ -185,6 +186,7 @@ const GUIComponent = props => {
                     canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
+                    isShared={isShared}
                     renderLogin={renderLogin}
                     showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
@@ -342,6 +344,7 @@ GUIComponent.propTypes = {
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
+    isShared: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
@@ -378,6 +381,8 @@ GUIComponent.defaultProps = {
     canSave: false,
     canCreateCopy: false,
     canShare: false,
+    enableCommunity: false,
+    isShared: false,
     onUpdateProjectTitle: () => {},
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large

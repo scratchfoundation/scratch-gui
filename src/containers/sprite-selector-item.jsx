@@ -55,13 +55,15 @@ class SpriteSelectorItem extends React.Component {
         window.removeEventListener('mousemove', this.handleMouseMove);
         window.removeEventListener('touchend', this.handleMouseUp);
         window.removeEventListener('touchmove', this.handleMouseMove);
-        this.props.onDrag({
-            img: null,
-            currentOffset: null,
-            dragging: false,
-            dragType: null,
-            index: null
-        });
+        if (this.props.dragging) {
+            this.props.onDrag({
+                img: null,
+                currentOffset: null,
+                dragging: false,
+                dragType: null,
+                index: null
+            });
+        }
         setTimeout(() => {
             this.noClick = false;
         });
@@ -117,7 +119,7 @@ class SpriteSelectorItem extends React.Component {
     render () {
         const {
             /* eslint-disable no-unused-vars */
-            assetId,
+            asset,
             id,
             index,
             onClick,
@@ -156,6 +158,7 @@ SpriteSelectorItem.propTypes = {
         body: PropTypes.string
     }),
     dragType: PropTypes.string,
+    dragging: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     index: PropTypes.number,
     name: PropTypes.string,

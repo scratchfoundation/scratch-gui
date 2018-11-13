@@ -54,10 +54,14 @@ const getIsLoadingWithId = loadingState => (
     loadingState === LoadingState.LOADING_VM_WITH_ID ||
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
 );
-const getIsCreating = loadingState => (
-    loadingState === LoadingState.CREATING_NEW ||
-    loadingState === LoadingState.REMIXING ||
+const getIsCreatingNew = loadingState => (
+    loadingState === LoadingState.CREATING_NEW
+);
+const getIsCreatingCopy = loadingState => (
     loadingState === LoadingState.CREATING_COPY
+);
+const getIsRemixing = loadingState => (
+    loadingState === LoadingState.REMIXING
 );
 const getIsUpdating = loadingState => (
     loadingState === LoadingState.UPDATING ||
@@ -375,8 +379,8 @@ const setProjectId = id => ({
     projectId: id
 });
 
-const requestNewProject = canCreateNew => {
-    if (canCreateNew) return {type: START_UPDATING_BEFORE_CREATING_NEW};
+const requestNewProject = needSave => {
+    if (needSave) return {type: START_UPDATING_BEFORE_CREATING_NEW};
     return {type: START_FETCHING_NEW};
 };
 
@@ -405,11 +409,13 @@ export {
     defaultProjectId,
     doneCreatingProject,
     doneUpdatingProject,
-    getIsCreating,
+    getIsCreatingCopy,
+    getIsCreatingNew,
     getIsError,
     getIsFetchingWithId,
     getIsFetchingWithoutId,
     getIsLoadingWithId,
+    getIsRemixing,
     getIsShowingProject,
     getIsShowingWithId,
     getIsShowingWithoutId,

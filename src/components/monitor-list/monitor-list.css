@@ -2,6 +2,7 @@
     /* Width/height are set by the component, margin: auto centers in fullscreen */
     margin: auto;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .monitor-list-scaler {

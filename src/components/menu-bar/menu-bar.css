@@ -130,22 +130,6 @@
     height: 2rem;
 }
 
-.share-button {
-    background: $data-primary;
-}
-
-.share-button-is-shared {
-    background: $ui-black-transparent;
-}
-
-.community-button {
-    box-shadow: 0 0 0 1px $ui-black-transparent;
-}
-
-.community-button-icon {
-    height: 1.25rem;
-}
-
 .remix-button {
     background-color: $pen-primary
 }

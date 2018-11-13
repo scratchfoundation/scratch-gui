@@ -147,13 +147,13 @@ class LoaderComponent extends React.Component {
                             src={bottomBlock}
                         />
                     </div>
-                    <h1 className={styles.title}>
+                    <div className={styles.title}>
                         <FormattedMessage
                             defaultMessage="Loading Project"
                             description="Main loading message"
                             id="gui.loader.headline"
                         />
-                    </h1>
+                    </div>
                     <div className={styles.messageContainerOuter}>
                         <div
                             className={styles.messageContainerInner}

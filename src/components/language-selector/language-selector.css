@@ -10,6 +10,8 @@
     user-select: none;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: .875rem;
+    color: $text-primary;
+    background: $ui-white;
 }
 
 [dir="ltr"] .language-select {

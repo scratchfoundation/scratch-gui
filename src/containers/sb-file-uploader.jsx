@@ -107,13 +107,14 @@ class SBFileUploader extends React.Component {
         );
     }
     render () {
-        return this.props.children(this.renderFileInput, this.handleClick);
+        return this.props.children(this.props.className, this.renderFileInput, this.handleClick);
     }
 }
 
 SBFileUploader.propTypes = {
     canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
+    className: PropTypes.string,
     intl: intlShape.isRequired,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
@@ -122,6 +123,9 @@ SBFileUploader.propTypes = {
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
+};
+SBFileUploader.defaultProps = {
+    className: ''
 };
 const mapStateToProps = state => ({
     loadingState: state.scratchGui.projectState.loadingState,

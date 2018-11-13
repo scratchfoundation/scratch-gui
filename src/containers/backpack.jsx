@@ -8,7 +8,8 @@ import {
     deleteBackpackObject,
     soundPayload,
     costumePayload,
-    spritePayload
+    spritePayload,
+    codePayload
 } from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
@@ -28,13 +29,22 @@ class Backpack extends React.Component {
             'handleToggle',
             'handleDelete',
             'getBackpackAssetURL',
-            'refreshContents'
+            'getContents',
+            'handleMouseEnter',
+            'handleMouseLeave',
+            'handleBlockDragEnd',
+            'handleBlockDragUpdate',
+            'handleMore'
         ]);
         this.state = {
-            dragOver: false,
+            // While the DroppableHOC manages drop interactions for asset tiles,
+            // we still need to micromanage drops coming from the block workspace.
+            // TODO this may be refactorable with the share-the-love logic in SpriteSelectorItem
+            blockDragOutsideWorkspace: false,
+            blockDragOverBackpack: false,
             error: false,
-            offset: 0,
             itemsPerPage: 20,
+            moreToLoad: false,
             loading: false,
             expanded: false,
             contents: []
@@ -50,14 +60,25 @@ class Backpack extends React.Component {
             storage._hasAddedBackpackSource = true;
         }
     }
+    componentDidMount () {
+        this.props.vm.addListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+        this.props.vm.addListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
+    }
+    componentWillUnmount () {
+        this.props.vm.removeListener('BLOCK_DRAG_END', this.handleBlockDragEnd);
+        this.props.vm.removeListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
+    }
     getBackpackAssetURL (asset) {
         return `${this.props.host}/${asset.assetId}.${asset.dataFormat}`;
     }
     handleToggle () {
         const newState = !this.state.expanded;
-        this.setState({expanded: newState, offset: 0});
+        this.setState({expanded: newState, contents: []}, () => {
+            // Emit resize on window to get blocks to resize
+            window.dispatchEvent(new Event('resize'));
+        });
         if (newState) {
-            this.refreshContents();
+            this.getContents();
         }
     }
     handleDrop (dragInfo) {
@@ -72,53 +93,126 @@ class Backpack extends React.Component {
         case DragConstants.SPRITE:
             payloader = spritePayload;
             break;
+        case DragConstants.CODE:
+            payloader = codePayload;
+            break;
         }
         if (!payloader) return;
 
-        payloader(dragInfo.payload, this.props.vm)
-            .then(payload => saveBackpackObject({
-                host: this.props.host,
-                token: this.props.token,
-                username: this.props.username,
-                ...payload
-            }))
-            .then(this.refreshContents);
+        // Creating the payload is async, so set loading before starting
+        this.setState({loading: true}, () => {
+            payloader(dragInfo.payload, this.props.vm)
+                .then(payload => saveBackpackObject({
+                    host: this.props.host,
+                    token: this.props.token,
+                    username: this.props.username,
+                    ...payload
+                }))
+                .then(item => {
+                    this.setState({
+                        loading: false,
+                        contents: [item].concat(this.state.contents)
+                    });
+                })
+                .catch(error => {
+                    this.setState({error: true, loading: false});
+                    throw error;
+                });
+        });
     }
     handleDelete (id) {
-        deleteBackpackObject({
-            host: this.props.host,
-            token: this.props.token,
-            username: this.props.username,
-            id: id
-        }).then(this.refreshContents);
-    }
-    refreshContents () {
-        if (this.props.token && this.props.username) {
-            this.setState({loading: true, error: false});
-            getBackpackContents({
+        this.setState({loading: true}, () => {
+            deleteBackpackObject({
                 host: this.props.host,
                 token: this.props.token,
                 username: this.props.username,
-                offset: this.state.offset,
-                limit: this.state.itemsPerPage
+                id: id
             })
-                .then(contents => {
-                    this.setState({contents, loading: false});
+                .then(() => {
+                    this.setState({
+                        loading: false,
+                        contents: this.state.contents.filter(o => o.id !== id)
+                    });
                 })
-                .catch(() => {
+                .catch(error => {
                     this.setState({error: true, loading: false});
+                    throw error;
                 });
+        });
+    }
+    getContents () {
+        if (this.props.token && this.props.username) {
+            this.setState({loading: true, error: false}, () => {
+                getBackpackContents({
+                    host: this.props.host,
+                    token: this.props.token,
+                    username: this.props.username,
+                    offset: this.state.contents.length,
+                    limit: this.state.itemsPerPage
+                })
+                    .then(contents => {
+                        this.setState({
+                            contents: this.state.contents.concat(contents),
+                            moreToLoad: contents.length === this.state.itemsPerPage,
+                            loading: false
+                        });
+                    })
+                    .catch(error => {
+                        this.setState({error: true, loading: false});
+                        throw error;
+                    });
+            });
         }
+    }
+    handleBlockDragUpdate (isOutsideWorkspace) {
+        this.setState({
+            blockDragOutsideWorkspace: isOutsideWorkspace
+        });
+    }
+    handleMouseEnter () {
+        if (this.state.blockDragOutsideWorkspace) {
+            this.setState({
+                blockDragOverBackpack: true
+            });
+        }
+    }
+    handleMouseLeave () {
+        this.setState({
+            blockDragOverBackpack: false
+        });
+    }
+    handleBlockDragEnd (blocks, topBlockId) {
+        if (this.state.blockDragOverBackpack) {
+            this.handleDrop({
+                dragType: DragConstants.CODE,
+                payload: {
+                    blockObjects: blocks,
+                    topBlockId: topBlockId
+                }
+            });
+        }
+        this.setState({
+            blockDragOverBackpack: false,
+            blockDragOutsideWorkspace: false
+        });
+    }
+    handleMore () {
+        this.getContents();
     }
     render () {
         return (
             <DroppableBackpack
+                blockDragOver={this.state.blockDragOverBackpack}
                 contents={this.state.contents}
                 error={this.state.error}
                 expanded={this.state.expanded}
                 loading={this.state.loading}
+                showMore={this.state.moreToLoad}
                 onDelete={this.handleDelete}
                 onDrop={this.handleDrop}
+                onMore={this.handleMore}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
                 onToggle={this.props.host ? this.handleToggle : null}
             />
         );
@@ -152,9 +246,13 @@ const getTokenAndUsername = state => {
 
 const mapStateToProps = state => Object.assign(
     {
-        vm: state.scratchGui.vm
+        dragInfo: state.scratchGui.assetDrag,
+        vm: state.scratchGui.vm,
+        blockDrag: state.scratchGui.blockDrag
     },
     getTokenAndUsername(state)
 );
 
-export default connect(mapStateToProps)(Backpack);
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Backpack);

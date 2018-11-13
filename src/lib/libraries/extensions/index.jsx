@@ -35,7 +35,6 @@ export default [
         extensionId: 'music',
         iconURL: musicImage,
         insetIconURL: musicInsetImage,
-        bluetoothRequired: true,
         description: (
             <FormattedMessage
                 defaultMessage="Play instruments and drums."
@@ -56,7 +55,6 @@ export default [
         extensionId: 'pen',
         iconURL: penImage,
         insetIconURL: penInsetImage,
-        collaborator: 'Scratch Team',
         description: (
             <FormattedMessage
                 defaultMessage="Draw with your sprites."

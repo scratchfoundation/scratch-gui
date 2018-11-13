@@ -39,6 +39,8 @@ class Prompt extends React.Component {
         this.setState({globalSelected: (e.target.value === 'global')});
     }
     handleCloudVariableOptionChange (e) {
+        if (!this.props.canUseCloud) return;
+
         const checked = e.target.checked;
         this.setState({cloudSelected: checked});
         if (checked) {
@@ -48,6 +50,7 @@ class Prompt extends React.Component {
     render () {
         return (
             <PromptComponent
+                canUseCloud={this.props.canUseCloud}
                 cloudSelected={this.state.cloudSelected}
                 globalSelected={this.state.globalSelected}
                 isStage={this.props.isStage}
@@ -67,6 +70,7 @@ class Prompt extends React.Component {
 }
 
 Prompt.propTypes = {
+    canUseCloud: PropTypes.bool.isRequired,
     isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,

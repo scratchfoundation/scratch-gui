@@ -69,6 +69,7 @@ const GUIComponent = props => {
         canSave,
         canCreateCopy,
         canShare,
+        canUseCloud,
         children,
         connectionModalVisible,
         costumeLibraryVisible,
@@ -262,6 +263,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
+                                            canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
                                             options={{
@@ -334,6 +336,7 @@ GUIComponent.propTypes = {
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
+    canUseCloud: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -378,6 +381,7 @@ GUIComponent.defaultProps = {
     canSave: false,
     canCreateCopy: false,
     canShare: false,
+    canUseCloud: false,
     enableCommunity: false,
     isShared: false,
     onUpdateProjectTitle: () => {},

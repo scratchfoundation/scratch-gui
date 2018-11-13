@@ -38,6 +38,7 @@ class CloudProvider {
             log.error(`Websocket connection error: ${JSON.stringify(e)}`);
 
             // TODO Add re-connection attempt logic here
+            this.clear();
         };
 
         this.connection.onmessage = event => {

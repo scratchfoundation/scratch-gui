@@ -431,6 +431,7 @@ class Blocks extends React.Component {
         /* eslint-disable no-unused-vars */
         const {
             anyModalVisible,
+            canUseCloud,
             customProceduresVisible,
             extensionLibraryVisible,
             options,
@@ -460,6 +461,7 @@ class Blocks extends React.Component {
                     /* TODO add the following in the props below:
                     showCloudOption={this.state.canUseCloudData */
                     <Prompt
+                        canUseCloud={canUseCloud}
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
@@ -491,6 +493,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
+    canUseCloud: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isRtl: PropTypes.bool,

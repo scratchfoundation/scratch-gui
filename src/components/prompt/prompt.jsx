@@ -90,18 +90,19 @@ const PromptComponent = props => (
                                 />
                             </label>
                         </Box>}
-                    <Box className={classNames(styles.cloudOption)}>
-                        <label>
-                            <input
-                                checked={props.cloudSelected}
-                                type="checkbox"
-                                onChange={props.onCloudVarOptionChange}
-                            />
-                            <FormattedMessage
-                                {...messages.cloudVarOptionMessage}
-                            />
-                        </label>
-                    </Box>
+                    {props.canUseCloud ?
+                        <Box className={classNames(styles.cloudOption)}>
+                            <label>
+                                <input
+                                    checked={props.cloudSelected}
+                                    type="checkbox"
+                                    onChange={props.onCloudVarOptionChange}
+                                />
+                                <FormattedMessage
+                                    {...messages.cloudVarOptionMessage}
+                                />
+                            </label>
+                        </Box> : null}
                 </div> : null}
 
             <Box className={styles.buttonRow}>

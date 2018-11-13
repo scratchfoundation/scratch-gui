@@ -32,6 +32,7 @@ import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
+import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
@@ -85,6 +86,7 @@ class GUI extends React.Component {
             projectId,
             projectTitle,
             /* eslint-enable no-unused-vars */
+            canUseCloud,
             children,
             fetchingProject,
             isLoading,
@@ -93,6 +95,7 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
+                canUseCloud={canUseCloud}
                 loading={fetchingProject || isLoading || loadingStateVisible}
                 {...componentProps}
             >
@@ -187,7 +190,8 @@ const WrappedGui = compose(
     ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,
-    vmManagerHOC
+    vmManagerHOC,
+    cloudManagerHOC
 )(ConnectedGUI);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;

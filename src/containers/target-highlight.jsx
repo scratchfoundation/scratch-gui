@@ -32,7 +32,8 @@ class TargetHighlight extends React.Component {
             vm
         } = this.props;
 
-        if (!(highlightedTargetId && vm && vm.renderer)) return null;
+        if (!(highlightedTargetId && vm && vm.renderer &&
+            vm.runtime.getTargetById(highlightedTargetId))) return null;
 
         const target = vm.runtime.getTargetById(highlightedTargetId);
         const bounds = vm.renderer.getBounds(target.drawableID);

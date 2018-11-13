@@ -132,7 +132,7 @@
 }
 
 .menu-bar-button {
-    height: 2rem;
+    height: $menu-bar-button-size;
 }
 
 .share-button {
@@ -191,8 +191,8 @@
 
 .profile-icon {
     margin: 0 .25rem;
-    width: 2rem;
-    border-radius: 0.25rem;
+    width: $menu-bar-button-size;
+    border-radius: $form-radius;
 }
 
 .dropdown-caret-icon {

@@ -458,15 +458,14 @@ class Blocks extends React.Component {
                     {...props}
                 />
                 {this.state.prompt ? (
-                    /* TODO add the following in the props below:
-                    showCloudOption={this.state.canUseCloudData */
                     <Prompt
-                        canUseCloud={canUseCloud}
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
+                        showCloudOption={canUseCloud}
                         showVariableOptions={this.state.prompt.showVariableOptions}
                         title={this.state.prompt.title}
+                        vm={vm}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />

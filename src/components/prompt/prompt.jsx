@@ -90,11 +90,14 @@ const PromptComponent = props => (
                                 />
                             </label>
                         </Box>}
-                    {props.canUseCloud ?
+                    {props.showCloudOption ?
                         <Box className={classNames(styles.cloudOption)}>
-                            <label>
+                            <label
+                                className={props.canAddCloudVariable ? '' : styles.disabledLabel}
+                            >
                                 <input
-                                    checked={props.cloudSelected}
+                                    checked={props.cloudSelected && props.canAddCloudVariable}
+                                    disabled={!props.canAddCloudVariable}
                                     type="checkbox"
                                     onChange={props.onCloudVarOptionChange}
                                 />
@@ -132,6 +135,7 @@ const PromptComponent = props => (
 );
 
 PromptComponent.propTypes = {
+    canAddCloudVariable: PropTypes.bool.isRequired,
     cloudSelected: PropTypes.bool.isRequired,
     globalSelected: PropTypes.bool.isRequired,
     isStage: PropTypes.bool.isRequired,
@@ -143,6 +147,7 @@ PromptComponent.propTypes = {
     onOk: PropTypes.func.isRequired,
     onScopeOptionSelection: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    showCloudOption: PropTypes.bool.isRequired,
     showVariableOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };

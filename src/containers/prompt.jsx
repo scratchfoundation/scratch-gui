@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import PromptComponent from '../components/prompt/prompt.jsx';
+import VM from 'scratch-vm';
 
 class Prompt extends React.Component {
     constructor (props) {
@@ -17,7 +18,8 @@ class Prompt extends React.Component {
         this.state = {
             inputValue: '',
             globalSelected: true,
-            cloudSelected: false
+            cloudSelected: false,
+            canAddCloudVariable: (props.vm && props.vm.runtime.canAddCloudVariable()) || false
         };
     }
     handleKeyPress (event) {
@@ -39,7 +41,7 @@ class Prompt extends React.Component {
         this.setState({globalSelected: (e.target.value === 'global')});
     }
     handleCloudVariableOptionChange (e) {
-        if (!this.props.canUseCloud) return;
+        if (!this.props.showCloudOption) return;
 
         const checked = e.target.checked;
         this.setState({cloudSelected: checked});
@@ -50,12 +52,13 @@ class Prompt extends React.Component {
     render () {
         return (
             <PromptComponent
-                canUseCloud={this.props.canUseCloud}
+                canAddCloudVariable={this.state.canAddCloudVariable}
                 cloudSelected={this.state.cloudSelected}
                 globalSelected={this.state.globalSelected}
                 isStage={this.props.isStage}
                 label={this.props.label}
                 placeholder={this.props.placeholder}
+                showCloudOption={this.props.showCloudOption}
                 showVariableOptions={this.props.showVariableOptions}
                 title={this.props.title}
                 onCancel={this.handleCancel}
@@ -70,14 +73,15 @@ class Prompt extends React.Component {
 }
 
 Prompt.propTypes = {
-    canUseCloud: PropTypes.bool.isRequired,
     isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    showCloudOption: PropTypes.bool.isRequired,
     showVariableOptions: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    vm: PropTypes.instanceOf(VM)
 };
 
 export default Prompt;

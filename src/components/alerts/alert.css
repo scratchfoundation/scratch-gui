@@ -4,8 +4,10 @@
 
 .alert {
     width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     overflow: hidden;
     align-items: left;
     border-radius: $space;
@@ -25,12 +27,17 @@
     box-shadow: 0px 0px 0px 2px $extensions-light;
 }
 
+.alert-spinner {
+    align-self: center;
+}
+
 .alert-icon {
     margin: $space;
     vertical-align: middle;
 }
 
 .alert-message {
+    align-self: center;
     color: #555;
     font-weight: bold;
     font-size: .75rem;
@@ -52,6 +59,7 @@
 }
 
 .connection-button {
+    height: 31px;
     padding: 0.55rem 0.9rem;
     border-radius: 0.35rem;
     background: #FF8C1A;
@@ -63,6 +71,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    align-self: center;
     margin-right: 13px;
     outline-style:none;
 }

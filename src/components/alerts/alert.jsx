@@ -29,21 +29,24 @@ const AlertComponent = ({
     <Box
         className={classNames(styles.alert, styles[level])}
     >
+        {/* TODO: implement Rtl handling */}
+        <div className={styles.alertSpinner}>
+            {iconSpinner && (
+                <Spinner />
+            )}
+        </div>
+        <div className={styles.alertIcon}>
+            {iconURL && (
+                <img
+                    className={styles.alertIcon}
+                    src={iconURL}
+                />
+            )}
+        </div>
         <div className={styles.alertMessage}>
-            {/* TODO: implement Rtl handling */}
-            <div className={styles.alertIcon}>
-                {iconSpinner && (
-                    <Spinner />
-                )}
-                {iconURL && (
-                    <img src={iconURL} />
-                )}
-            </div>
-            <div>
-                {message}
-                &nbsp;
-                {content}
-            </div>
+            {message}
+            &nbsp;
+            {content}
         </div>
         {showReconnect && (
             <button

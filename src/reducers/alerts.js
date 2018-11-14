@@ -70,11 +70,12 @@ const reducer = function (state, action) {
                 extensionId: extensionId,
                 showReconnect: true
             };
+            newAlert.extensionId = extensionId;
+            newAlert.showReconnect = true;
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension) {
                 if (extension.name) {
-                    // TODO: make translate-friendly
-                    newAlert.content = `${action.data.message} ${extension.name}`;
+                    newAlert.extensionName = extension.name;
                 }
                 if (extension.smallPeripheralImage) {
                     newAlert.iconURL = extension.smallPeripheralImage;
@@ -82,11 +83,12 @@ const reducer = function (state, action) {
                 newAlert.closeButton = true;
             }
             newList.push(newAlert);
+
             return Object.assign({}, state, {
                 alertsList: newList
             });
         }
-        return state; // if extension not found, show nothing
+        return state; // if alert not found, show nothing
     }
     case CLOSE_ALERT: {
         const newList = state.alertsList.slice();

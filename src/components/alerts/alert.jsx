@@ -18,6 +18,7 @@ const closeButtonColors = {
 const AlertComponent = ({
     content,
     closeButton,
+    extensionName,
     iconSpinner,
     iconURL,
     level,
@@ -39,7 +40,18 @@ const AlertComponent = ({
             />
         )}
         <div className={styles.alertMessage}>
-            {content}
+            {extensionName ? (
+                <FormattedMessage
+                    defaultMessage="Scratch lost connection to {extensionName}"
+                    description="Message indicating that an extension peripheral has been disconnected"
+                    id="gui.alerts.peripheraldisconnect"
+                    values={{
+                        extensionName: (
+                            `${extensionName}`
+                        )
+                    }}
+                />
+            ) : content}
         </div>
         {showReconnect && (
             <button
@@ -70,7 +82,8 @@ const AlertComponent = ({
 
 AlertComponent.propTypes = {
     closeButton: PropTypes.bool,
-    content: PropTypes.element,
+    content: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    extensionName: PropTypes.string,
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     level: PropTypes.string,

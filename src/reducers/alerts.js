@@ -56,37 +56,26 @@ const reducer = function (state, action) {
         return state; // if alert not found, show nothing
     }
     case SHOW_EXTENSION_ALERT: {
-        const newList = state.alertsList.slice();
-        const newAlert = {
-            alertType: AlertTypes.EXTENSION,
-            message: action.data.message,
-            level: AlertLevels.WARN
-        };
         const extensionId = action.data.extensionId;
         if (extensionId) {
-            const newList = state.alertsList.slice();
-            const newAlert = {
-                level: AlertLevels.WARN,
-                extensionId: extensionId,
-                showReconnect: true
-            };
-            newAlert.extensionId = extensionId;
-            newAlert.showReconnect = true;
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension) {
-                if (extension.name) {
-                    newAlert.extensionName = extension.name;
-                }
-                if (extension.smallPeripheralImage) {
-                    newAlert.iconURL = extension.smallPeripheralImage;
-                }
-                newAlert.closeButton = true;
-            }
-            newList.push(newAlert);
+                const newList = state.alertsList.slice();
+                const newAlert = {
+                    alertType: AlertTypes.EXTENSION,
+                    closeButton: true,
+                    extensionId: extensionId,
+                    extensionName: extension.name,
+                    iconURL: extension.smallPeripheralImage,
+                    level: AlertLevels.WARN,
+                    showReconnect: true
+                };
+                newList.push(newAlert);
 
-            return Object.assign({}, state, {
-                alertsList: newList
-            });
+                return Object.assign({}, state, {
+                    alertsList: newList
+                });
+            }
         }
         return state; // if alert not found, show nothing
     }

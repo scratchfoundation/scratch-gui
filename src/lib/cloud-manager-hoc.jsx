@@ -19,30 +19,50 @@ const cloudManagerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.cloudProvider = null;
-            this.canUseCloud = false;
+        }
+        componentDidMount () {
+            if (this.canUseCloud(this.props)) {
+                this.connectToCloud();
+            }
         }
         componentDidUpdate (prevProps) {
-            // If any of the following are not true, do not open a cloud connection
-            const canUseCloud = this.props.cloudHost && this.props.username && this.props.isShowingWithId;
-
-            if (!canUseCloud) return;
+            // If we couldn't use cloud data before, but now we can, try opening a cloud connection
+            if (this.canUseCloud(this.props) && !this.canUseCloud(prevProps)) {
+                this.connectToCloud();
+                return;
+            }
 
             // TODO add scratcher check
-            this.canUseCloud = canUseCloud;
 
             if ((this.props.username !== prevProps.username) ||
-                (this.props.projectId !== prevProps.projectId) ||
-                (!this.cloudProvider) ||
-                (this.cloudProvider && !this.cloudProvider.connection)) {
-                // TODO need to add provisions for viewing someone
-                // else's project in editor mode
-                this.cloudProvider = new CloudProvider(
-                    this.props.cloudHost,
-                    this.props.vm,
-                    this.props.username,
-                    this.props.projectId);
-                this.props.vm.setCloudProvider(this.cloudProvider);
+                (this.props.projectId !== prevProps.projectId)) {
+                this.connectToCloud();
             }
+        }
+        componentWillUnmount () {
+            if (this.cloudProvider) {
+                this.cloudProvider.requestCloseConnection();
+                this.cloudProvider = null;
+            }
+        }
+        canUseCloud (props) {
+            return props.cloudHost && props.username && props.isShowingWithId &&
+                props.vm && props.username && props.projectId;
+        }
+        connectToCloud () {
+            if (this.cloudProvider && this.cloudProvider.connection) {
+                // Already connected
+                return;
+            }
+
+            // TODO need to add provisions for viewing someone
+            // else's project in editor mode
+            this.cloudProvider = new CloudProvider(
+                this.props.cloudHost,
+                this.props.vm,
+                this.props.username,
+                this.props.projectId);
+            this.props.vm.setCloudProvider(this.cloudProvider);
         }
         render () {
             const {
@@ -57,7 +77,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    canUseCloud={this.canUseCloud}
+                    canUseCloud={this.canUseCloud(this.props)}
                     vm={vm}
                     {...componentProps}
                 />

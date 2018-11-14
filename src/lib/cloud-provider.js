@@ -139,7 +139,12 @@ class CloudProvider {
      * provider of references related to the cloud data project.
      */
     requestCloseConnection () {
-        this.connection.close();
+        if (this.connection &&
+            this.connection.readyState !== WebSocket.CLOSING &&
+            this.connection.readyState !== WebSocket.CLOSED) {
+
+            this.connection.close();
+        }
         this.clear();
     }
 

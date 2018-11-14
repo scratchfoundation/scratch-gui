@@ -31,10 +31,6 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             let reducers = {};
             let enhancer;
 
-            this.state = {
-                tutorial: false
-            };
-
             let initializedLocales = localesInitialState;
             const locale = detectLocale(Object.keys(locales));
             if (locale !== 'en') {
@@ -56,6 +52,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
+                    initPreviewInfo,
                     initTutorialLibrary
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
@@ -70,11 +67,17 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else {
                     const tutorialId = detectTutorialId();
-                    // handle ?tutorial=all for beta
-                    // if we decide to keep this for www, functionality should move to
-                    // setActiveCards in the GUI container
-                    if (tutorialId === 'all') initializedGui = initTutorialLibrary(initializedGui);
-                    if (tutorialId) this.state.tutorial = true;
+                    if (tutorialId === null) {
+                        if (props.showPreviewInfo) {
+                            // Show preview info if requested and no tutorial ID found
+                            initializedGui = initPreviewInfo(initializedGui);
+                        }
+                    } else if (tutorialId === 'all') {
+                        // Specific tutorials are set in setActiveCards in the GUI container.
+                        // Handle ?tutorial=all here for beta, if we decide to keep this for the
+                        // project page, this functionality should move to GUI container also.
+                        initializedGui = initTutorialLibrary(initializedGui);
+                    }
                 }
                 reducers = {
                     locales: localesReducer,
@@ -107,9 +110,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             const {
                 isFullScreen, // eslint-disable-line no-unused-vars
                 isPlayerOnly, // eslint-disable-line no-unused-vars
+                showPreviewInfo, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
-            if (this.state.tutorial) componentProps.hideIntro = true;
             return (
                 <Provider store={this.store}>
                     <ConnectedIntlProvider>
@@ -123,7 +126,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     }
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
-        isPlayerOnly: PropTypes.bool
+        isPlayerOnly: PropTypes.bool,
+        showPreviewInfo: PropTypes.bool
     };
     return AppStateWrapper;
 };

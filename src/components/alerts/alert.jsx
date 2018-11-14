@@ -30,19 +30,15 @@ const AlertComponent = ({
         className={classNames(styles.alert, styles[level])}
     >
         {/* TODO: implement Rtl handling */}
-        <div className={styles.alertSpinner}>
-            {iconSpinner && (
-                <Spinner />
-            )}
-        </div>
-        <div className={styles.alertIcon}>
-            {iconURL && (
-                <img
-                    className={styles.alertIcon}
-                    src={iconURL}
-                />
-            )}
-        </div>
+        {iconSpinner && (
+            <Spinner className={styles.alertSpinner} />
+        )}
+        {iconURL && (
+            <img
+                className={styles.alertIcon}
+                src={iconURL}
+            />
+        )}
         <div className={styles.alertMessage}>
             {message}
             &nbsp;

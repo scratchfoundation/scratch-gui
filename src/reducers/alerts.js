@@ -16,11 +16,8 @@ const initialState = {
     // * extentionId (optional): id string that identifies the extension
     // * iconURL (optional): string
     // * level (required): string, one of AlertLevels
-<<<<<<< HEAD
     // * message (optional): string
     // * showReconnect (optional): bool
-=======
->>>>>>> Removing extraneous message prop from alerts.
     alertsList: []
 };
 

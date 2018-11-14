@@ -331,9 +331,9 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
-    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     authorThumbnailUrl: PropTypes.string,
-    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
     backpackOptions: PropTypes.shape({
         host: PropTypes.string,

@@ -75,7 +75,7 @@ const PromptComponent = props => (
                                 />
                             </label>
                             <label
-                                className={props.cloudSelected ? styles.disabledLabel : ''}
+                                className={classNames({[styles.disabledLabel]: props.cloudSelected})}
                             >
                                 <input
                                     checked={!props.globalSelected}
@@ -93,7 +93,7 @@ const PromptComponent = props => (
                     {props.showCloudOption ?
                         <Box className={classNames(styles.cloudOption)}>
                             <label
-                                className={props.canAddCloudVariable ? '' : styles.disabledLabel}
+                                className={classNames({[styles.disabledLabel]: !props.canAddCloudVariable})}
                             >
                                 <input
                                     checked={props.cloudSelected && props.canAddCloudVariable}

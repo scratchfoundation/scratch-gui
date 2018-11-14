@@ -384,8 +384,6 @@ class Blocks extends React.Component {
             optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
-        // TODO CLOUD add flag about showing the cloud variable option, which will necessitate
-        // that the flag above is true, e.g. p.prompt.showVariableOptions && canUseCloudData
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {

@@ -45,7 +45,8 @@ class CloudProvider {
             const messageString = event.data;
             log.info(`Received websocket message: ${messageString}`);
             const message = JSON.parse(messageString);
-            this.parseMessage(message);
+            const parsedData = this.parseMessage(message);
+            this.vm.postIOData('cloud', parsedData);
         };
 
         this.connection.onopen = () => {
@@ -75,7 +76,7 @@ class CloudProvider {
             break;
         }
         }
-        this.vm.postIOData('cloud', varData);
+        return varData;
     }
 
     /**

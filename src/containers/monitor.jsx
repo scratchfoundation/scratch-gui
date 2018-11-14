@@ -32,11 +32,6 @@ class Monitor extends React.Component {
             'handleSetModeToSlider',
             'setElement'
         ]);
-
-        // @todo consume from VM, but need to store until there are APIs to update vm
-        this.state = {
-            mode: props.mode || 'default'
-        };
     }
     componentDidMount () {
         let rect;
@@ -101,30 +96,26 @@ class Monitor extends React.Component {
     }
     handleNextMode () {
         const modes = availableModes(this.props.opcode);
-        const modeIndex = modes.indexOf(this.state.mode);
+        const modeIndex = modes.indexOf(this.props.mode);
         const newMode = modes[(modeIndex + 1) % modes.length];
-        this.setState({mode: newMode});
         this.props.vm.runtime.requestUpdateMonitor(Map({
             id: this.props.id,
             mode: newMode
         }));
     }
     handleSetModeToDefault () {
-        this.setState({mode: 'default'});
         this.props.vm.runtime.requestUpdateMonitor(Map({
             id: this.props.id,
             mode: 'default'
         }));
     }
     handleSetModeToLarge () {
-        this.setState({mode: 'large'});
         this.props.vm.runtime.requestUpdateMonitor(Map({
             id: this.props.id,
             mode: 'large'
         }));
     }
     handleSetModeToSlider () {
-        this.setState({mode: 'slider'});
         this.props.vm.runtime.requestUpdateMonitor(Map({
             id: this.props.id,
             mode: 'slider'
@@ -144,7 +135,7 @@ class Monitor extends React.Component {
                 height={this.props.height}
                 max={this.props.max}
                 min={this.props.min}
-                mode={this.state.mode}
+                mode={this.props.mode}
                 targetId={this.props.targetId}
                 width={this.props.width}
                 onDragEnd={this.handleDragEnd}

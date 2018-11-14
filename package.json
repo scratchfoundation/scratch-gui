@@ -97,6 +97,7 @@
     "react-tooltip": "3.8.0",
     "react-virtualized": "9.20.1",
     "redux": "3.7.2",
+    "redux-thunk": "2.0.1",
     "redux-mock-store": "^1.2.3",
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",

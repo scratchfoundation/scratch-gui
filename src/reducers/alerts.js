@@ -1,26 +1,30 @@
 import alertsData from '../lib/alerts/index.jsx';
-import {AlertLevels} from '../lib/alerts/index.jsx';
+import {AlertTypes, AlertLevels} from '../lib/alerts/index.jsx';
 import extensionData from '../lib/libraries/extensions/index.jsx';
 
 const SHOW_STANDARD_ALERT = 'scratch-gui/alerts/SHOW_STANDARD_ALERT';
 const SHOW_EXTENSION_ALERT = 'scratch-gui/alerts/SHOW_EXTENSION_ALERT';
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
+const CLOSE_ALERTS_WITH_ID = 'scratch-gui/alerts/CLOSE_ALERTS_WITH_ID';
 
 const initialState = {
     visible: true,
     // list of alerts, each with properties:
+    // * alert type (required): one of AlertTypes
+    // * closeButton (optional): bool indicating that we should show close button
     // * content (optional): react element (a <FormattedMessage />)
     // * extentionId (optional): id string that identifies the extension
     // * iconURL (optional): string
     // * level (required): string, one of AlertLevels
     // * message (optional): string
+    // * showReconnect (optional): bool
     alertsList: []
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SHOW_STANDARD_ALERT: {
+    case SHOW_STANDARD_ALERT: { // also will show inline alerts
         const alertId = action.alertId;
         if (alertId) {
             const newAlert = {
@@ -29,20 +33,21 @@ const reducer = function (state, action) {
             };
             const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);
             if (alertData) {
-                let newList = state.alertsList.slice();
-                newList = newList.filter(curAlert => (
+                const newList = state.alertsList.filter(curAlert => (
                     !alertData.clearList || alertData.clearList.indexOf(curAlert.alertId)
                 ));
                 if (action.data && action.data.message) {
                     newAlert.message = action.data.message;
                 }
 
+                newAlert.alertType = alertData.alertType || AlertTypes.STANDARD;
+                newAlert.closeButton = alertData.closeButton;
                 newAlert.content = alertData.content;
                 newAlert.iconURL = alertData.iconURL;
                 newAlert.iconSpinner = alertData.iconSpinner;
                 newAlert.level = alertData.level;
-                newList.push(newAlert);
 
+                newList.push(newAlert);
                 return Object.assign({}, state, {
                     alertsList: newList
                 });
@@ -53,6 +58,7 @@ const reducer = function (state, action) {
     case SHOW_EXTENSION_ALERT: {
         const newList = state.alertsList.slice();
         const newAlert = {
+            alertType: AlertTypes.EXTENSION,
             message: action.data.message,
             level: AlertLevels.WARN
         };
@@ -69,6 +75,7 @@ const reducer = function (state, action) {
                 if (extension.smallPeripheralImage) {
                     newAlert.iconURL = extension.smallPeripheralImage;
                 }
+                newAlert.closeButton = true;
             }
         }
         newList.push(newAlert);
@@ -83,13 +90,20 @@ const reducer = function (state, action) {
             alertsList: newList
         });
     }
+    case CLOSE_ALERTS_WITH_ID: {
+        return Object.assign({}, state, {
+            alertsList: state.alertsList.filter(curAlert => (
+                curAlert.alertId !== action.alertId
+            ))
+        });
+    }
     default:
         return state;
     }
 };
 
 /**
- * Function to close an alert with the given index.
+ * Action creator to close an alert with the given index.
  *
  * @param {object} index - the index of the alert to close.
  * @return {object} - an object to be passed to the reducer.
@@ -102,7 +116,20 @@ const closeAlert = function (index) {
 };
 
 /**
- * Function to show an alert with the given alertId.
+ * Action creator to close all alerts with a given ID.
+ *
+ * @param {string} alertId - id string of the alert to close
+ * @return {object} - an object to be passed to the reducer.
+ */
+const closeAlertsWithId = function (alertId) {
+    return {
+        type: CLOSE_ALERTS_WITH_ID,
+        alertId
+    };
+};
+
+/**
+ * Action creator to show an alert with the given alertId.
  *
  * @param {string} alertId - id string of the alert to show
  * @return {object} - an object to be passed to the reducer.
@@ -115,7 +142,7 @@ const showStandardAlert = function (alertId) {
 };
 
 /**
- * Function to show an alert with the given input data.
+ * Action creator to show an alert with the given input data.
  *
  * @param {object} data - data for the alert
  * @param {string} data.message - message for the alert
@@ -129,10 +156,30 @@ const showExtensionAlert = function (data) {
     };
 };
 
+/**
+ * Function to dispatch showing an alert, with optional
+ * timeout to make it close/go away.
+ *
+ * @param {object} alertId - the ID of the alert
+ * @return {null} - do not return a value
+ */
+const showAlertWithTimeout = alertId => (dispatch => {
+    const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);
+    if (alertData) {
+        dispatch(showStandardAlert(alertId));
+        if (alertData.maxDisplaySecs) {
+            setTimeout(() => {
+                dispatch(closeAlertsWithId(alertId));
+            }, alertData.maxDisplaySecs * 1000);
+        }
+    }
+});
+
 export {
     reducer as default,
     initialState as alertsInitialState,
     closeAlert,
+    showAlertWithTimeout,
     showExtensionAlert,
     showStandardAlert
 };

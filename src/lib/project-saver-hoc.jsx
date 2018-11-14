@@ -5,7 +5,10 @@ import VM from 'scratch-vm';
 
 import log from '../lib/log';
 import storage from '../lib/storage';
-import {showStandardAlert} from '../reducers/alerts';
+import {
+    showAlertWithTimeout,
+    showStandardAlert
+} from '../reducers/alerts';
 import {
     LoadingStates,
     autoUpdateProject,
@@ -73,14 +76,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         updateProjectToStorage () {
-            if (this.props.isManualUpdating) {
-                this.props.onShowSavingAlert();
-            }
+            this.props.onShowSavingAlert();
             return this.storeProject(this.props.reduxProjectId)
                 .then(() => {
-                    if (this.props.isManualUpdating) {
-                        this.props.onShowSaveSuccessAlert();
-                    }
+                    this.props.onShowSaveSuccessAlert();
                     // there is nothing we expect to find in response that we need to check here
                     this.props.onUpdatedProject(this.props.loadingState);
                 })
@@ -260,10 +259,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onManualUpdateProject: () => dispatch(manualUpdateProject()),
         onProjectError: error => dispatch(projectError(error)),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
-        onShowCreateSuccessAlert: () => dispatch(showStandardAlert('createSuccess')),
-        onShowCreatingAlert: () => dispatch(showStandardAlert('creating')),
-        onShowSaveSuccessAlert: () => dispatch(showStandardAlert('saveSuccess')),
-        onShowSavingAlert: () => dispatch(showStandardAlert('saving')),
+        onShowCreateSuccessAlert: () => dispatch(showAlertWithTimeout('createSuccess')),
+        onShowCreatingAlert: () => dispatch(showAlertWithTimeout('creating')),
+        onShowSaveSuccessAlert: () => dispatch(showAlertWithTimeout('saveSuccess')),
+        onShowSavingAlert: () => dispatch(showAlertWithTimeout('saving')),
         onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState))
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

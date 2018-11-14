@@ -15,6 +15,7 @@ const AlertsComponent = ({
     >
         {alertsList.map((a, index) => (
             <Alert
+                closeButton={a.closeButton}
                 content={a.content}
                 extensionId={a.extensionId}
                 iconSpinner={a.iconSpinner}

@@ -17,6 +17,7 @@ const closeButtonColors = {
 
 const AlertComponent = ({
     content,
+    closeButton,
     iconSpinner,
     iconURL,
     level,
@@ -44,7 +45,7 @@ const AlertComponent = ({
                 {content}
             </div>
         </div>
-        {showReconnect ? (
+        {showReconnect && (
             <button
                 className={styles.connectionButton}
                 onClick={onReconnect}
@@ -55,21 +56,24 @@ const AlertComponent = ({
                     id="gui.connection.reconnect"
                 />
             </button>
-        ) : null}
-        <Box
-            className={styles.alertCloseButtonContainer}
-        >
-            <CloseButton
-                className={classNames(styles.alertCloseButton)}
-                color={closeButtonColors[level]}
-                size={CloseButton.SIZE_LARGE}
-                onClick={onCloseAlert}
-            />
-        </Box>
+        )}
+        {closeButton && (
+            <Box
+                className={styles.alertCloseButtonContainer}
+            >
+                <CloseButton
+                    className={classNames(styles.alertCloseButton)}
+                    color={closeButtonColors[level]}
+                    size={CloseButton.SIZE_LARGE}
+                    onClick={onCloseAlert}
+                />
+            </Box>
+        )}
     </Box>
 );
 
 AlertComponent.propTypes = {
+    closeButton: PropTypes.bool,
     content: PropTypes.element,
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,

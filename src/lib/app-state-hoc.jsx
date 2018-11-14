@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import {createStore, combineReducers, compose} from 'redux';
+import {applyMiddleware, createStore, combineReducers, compose} from 'redux';
+import thunk from 'redux-thunk';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
@@ -45,7 +46,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 // browser modal
                 reducers = {locales: localesReducer};
                 initialState = {locales: initializedLocales};
-                enhancer = composeEnhancers();
+                enhancer = composeEnhancers(
+                    applyMiddleware(thunk)
+                );
             } else {
                 // You are right, this is gross. But it's necessary to avoid
                 // importing unneeded code that will crash unsupported browsers.
@@ -85,7 +88,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     locales: initializedLocales,
                     scratchGui: initializedGui
                 };
-                enhancer = composeEnhancers(guiMiddleware);
+                enhancer = composeEnhancers(
+                    guiMiddleware,
+                    applyMiddleware(thunk)
+                );
             }
             const reducer = combineReducers(reducers);
             this.store = createStore(

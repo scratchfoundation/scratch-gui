@@ -1,3 +1,5 @@
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import LibraryItemComponent from '../components/library-item/library-item.jsx';
@@ -23,6 +25,14 @@ const getAssetTypeForExtension = function (extension) {
 class LibraryItem extends React.PureComponent {
     constructor (props) {
         super(props);
+        bindAll(this, [
+            'handleBlur',
+            'handleClick',
+            'handleFocus',
+            'handleKeyPress',
+            'handleMouseEnter',
+            'handleMouseLeave'
+        ]);
         this.state = Object.assign(this.state || {}, {
             iconURI: props.iconURL // may be undefined if we're using iconMD5 instead
         });
@@ -40,10 +50,50 @@ class LibraryItem extends React.PureComponent {
                 });
         }
     }
+    handleBlur () {
+        this.props.onBlur(this.props.id);
+    }
+    handleFocus () {
+        this.props.onFocus(this.props.id);
+    }
+    handleClick (e) {
+        if (!this.props.disabled) {
+            this.props.onSelect(this.props.id);
+        }
+        e.preventDefault();
+    }
+    handleKeyPress (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.props.onSelect(this.props.id);
+        }
+    }
+    handleMouseEnter () {
+        this.props.onMouseEnter(this.props.id);
+    }
+    handleMouseLeave () {
+        this.props.onMouseLeave(this.props.id);
+    }
     render () {
-        const {iconMD5: _iconMD5, iconURL: _iconURL, ...childProps} = this.props;
+        const {
+            iconMD5: _iconMD5,
+            iconURL: _iconURL,
+            id: _id,
+            onBlur: _onBlur,
+            onFocus: _onFocus,
+            onMouseEnter: _onMouseEnter,
+            onMouseLeave: _onMouseLeave,
+            onSelect: _onSelect,
+            ...childProps
+        } = this.props;
         return (<LibraryItemComponent
             iconURI={this.state.iconURI}
+            onBlur={this.props.onBlur && this.handleBlur}
+            onClick={this.handleClick}
+            onFocus={this.props.onFocus && this.handleFocus}
+            onKeyPress={this.handleKeyPress}
+            onMouseEnter={this.props.onMouseEnter && this.handleMouseEnter}
+            onMouseLeave={this.props.onMouseLeave && this.handleMouseLeave}
             {...childProps}
         />);
     }
@@ -61,13 +111,20 @@ LibraryItem.requireUrlOrMD5 = function (props) {
 
 LibraryItem.propTypes = Object.assign({},
     (() => {
-        // copy all props EXCEPT iconURI from LibraryItemComponent
-        const {iconURI: _iconURI, ...otherProps} = LibraryItemComponent.propTypes;
-        return otherProps;
+        // copy all prop types EXCEPT these from LibraryItemComponent
+        const {
+            iconURI: _iconURI,
+            onClick: _onClick,
+            onKeyPress: _onKeyPress,
+            ...otherPropTypes
+        } = LibraryItemComponent.propTypes;
+        return otherPropTypes;
     })(),
     {
+        id: PropTypes.number.isRequired,
         iconMD5: LibraryItem.requireUrlOrMD5,
-        iconURL: LibraryItem.requireUrlOrMD5
+        iconURL: LibraryItem.requireUrlOrMD5,
+        onSelect: PropTypes.func.isRequired
     }
 );
 

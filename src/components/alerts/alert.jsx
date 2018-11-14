@@ -21,7 +21,6 @@ const AlertComponent = ({
     iconSpinner,
     iconURL,
     level,
-    message,
     onCloseAlert,
     onReconnect,
     showReconnect
@@ -40,8 +39,6 @@ const AlertComponent = ({
             />
         )}
         <div className={styles.alertMessage}>
-            {message}
-            &nbsp;
             {content}
         </div>
         {showReconnect && (
@@ -77,7 +74,6 @@ AlertComponent.propTypes = {
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     level: PropTypes.string,
-    message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onReconnect: PropTypes.func,
     showReconnect: PropTypes.bool

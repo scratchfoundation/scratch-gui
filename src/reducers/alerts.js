@@ -16,8 +16,11 @@ const initialState = {
     // * extentionId (optional): id string that identifies the extension
     // * iconURL (optional): string
     // * level (required): string, one of AlertLevels
+<<<<<<< HEAD
     // * message (optional): string
     // * showReconnect (optional): bool
+=======
+>>>>>>> Removing extraneous message prop from alerts.
     alertsList: []
 };
 
@@ -70,7 +73,8 @@ const reducer = function (state, action) {
             if (extension) {
                 newAlert.showReconnect = true;
                 if (extension.name) {
-                    newAlert.content = extension.name;
+                    // TODO: make translate-friendly
+                    newAlert.content = `${action.data.message} ${extension.name}`;
                 }
                 if (extension.smallPeripheralImage) {
                     newAlert.iconURL = extension.smallPeripheralImage;

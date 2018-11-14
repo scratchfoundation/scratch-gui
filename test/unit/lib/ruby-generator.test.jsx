@@ -1,47 +1,34 @@
-import VM from 'scratch-vm';
-import VMScratchBlocks from '../../../src/lib/blocks';
 import RubyGenerator from '../../../src/lib/ruby-generator';
 
 describe('RubyGenerator', () => {
-    let vm;
-    let Blockly;
-    let Ruby;
-
     const SCALAR_TYPE = '';
     const LIST_TYPE = 'list';
 
     beforeEach(() => {
-        vm = new VM();
-        Blockly = VMScratchBlocks(vm);
-        Blockly = RubyGenerator(Blockly);
-        Ruby = Blockly.Ruby;
-        Ruby.init();
-    });
+        RubyGenerator.cache_ = {};
+        RubyGenerator.definitions_ = {};
+        RubyGenerator.functionNames_ = {};
 
-    afterEach(() => {
-        Ruby.editingTarget = null;
-    });
-
-    test('defined Ruby', () => {
-        expect(Ruby).toBeInstanceOf(Blockly.Generator);
+        RubyGenerator.currentTarget = null;
     });
 
     describe('quote_', () => {
         test('escape only " to \\"', () => {
             const arg = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'; // eslint-disable-line
             const expected = '"!\\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"'; // eslint-disable-line
-            expect(Ruby.quote_(arg)).toEqual(expected);
+            expect(RubyGenerator.quote_(arg)).toEqual(expected);
         });
     });
 
     describe('spriteName', () => {
         test('return self', () => {
-            Ruby.editingTarget = {
+            RubyGenerator.currentTarget = {
                 sprite: {
                     name: 'Sprite1'
-                }
+                },
+                comments: {}
             };
-            expect(Ruby.spriteName()).toEqual('self');
+            expect(RubyGenerator.spriteName()).toEqual('self');
         });
     });
 
@@ -53,6 +40,7 @@ describe('RubyGenerator', () => {
                 sprite: {
                     name: 'Sprite1'
                 },
+                comments: {},
                 variables: {
                     id1: {
                         name: 'Variable1',
@@ -108,63 +96,63 @@ describe('RubyGenerator', () => {
                     }
                 }
             };
-            Ruby.editingTarget = renderedTarget;
+            RubyGenerator.currentTarget = renderedTarget;
         });
 
         test('return @name if local variable', () => {
-            expect(Ruby.variableName('id1')).toEqual('@Variable1');
-            expect(Ruby.listName('id2')).toEqual('@List1');
-            expect(Ruby.variableName('id3')).toEqual('@Variable2');
-            expect(Ruby.listName('id4')).toEqual('@List2');
+            expect(RubyGenerator.variableName('id1')).toEqual('@Variable1');
+            expect(RubyGenerator.listName('id2')).toEqual('@List1');
+            expect(RubyGenerator.variableName('id3')).toEqual('@Variable2');
+            expect(RubyGenerator.listName('id4')).toEqual('@List2');
         });
 
         test('return $name if global variable', () => {
-            expect(Ruby.variableName('id5')).toEqual('$Variable3');
-            expect(Ruby.listName('id6')).toEqual('$List3');
+            expect(RubyGenerator.variableName('id5')).toEqual('$Variable3');
+            expect(RubyGenerator.listName('id6')).toEqual('$List3');
         });
 
         test('return null if missmatch type', () => {
-            expect(Ruby.listName('id1')).toEqual(null);
-            expect(Ruby.variableName('id2')).toEqual(null);
+            expect(RubyGenerator.listName('id1')).toEqual(null);
+            expect(RubyGenerator.variableName('id2')).toEqual(null);
         });
 
         test('return null if not found', () => {
-            expect(Ruby.variableName('unknown_id1')).toEqual(null);
-            expect(Ruby.listName('unknown_id2')).toEqual(null);
+            expect(RubyGenerator.variableName('unknown_id1')).toEqual(null);
+            expect(RubyGenerator.listName('unknown_id2')).toEqual(null);
         });
 
         test('return $name if stage\'s local variable', () => {
             renderedTarget.isStage = true;
-            expect(Ruby.variableName('id1')).toEqual('$Variable1');
-            expect(Ruby.listName('id2')).toEqual('$List1');
-            expect(Ruby.variableName('id3')).toEqual('$Variable2');
-            expect(Ruby.listName('id4')).toEqual('$List2');
+            expect(RubyGenerator.variableName('id1')).toEqual('$Variable1');
+            expect(RubyGenerator.listName('id2')).toEqual('$List1');
+            expect(RubyGenerator.variableName('id3')).toEqual('$Variable2');
+            expect(RubyGenerator.listName('id4')).toEqual('$List2');
         });
 
         test('return null if stage and not exist local variable', () => {
             renderedTarget.isStage = true;
-            expect(Ruby.variableName('id5')).toEqual(null);
-            expect(Ruby.listName('id6')).toEqual(null);
+            expect(RubyGenerator.variableName('id5')).toEqual(null);
+            expect(RubyGenerator.listName('id6')).toEqual(null);
         });
 
         test('escape except alphabet, number and _ to _', () => {
-            expect(Ruby.variableName('id2_1')).toEqual('@Avg_Total___Count_');
-            expect(Ruby.listName('id2_2')).toEqual('@List_of_Symbols_');
-            expect(Ruby.variableName('id2_3')).toEqual('@_________________________________');
+            expect(RubyGenerator.variableName('id2_1')).toEqual('@Avg_Total___Count_');
+            expect(RubyGenerator.listName('id2_2')).toEqual('@List_of_Symbols_');
+            expect(RubyGenerator.variableName('id2_3')).toEqual('@_________________________________');
 
             renderedTarget.isStage = true;
-            expect(Ruby.variableName('id2_1')).toEqual('$Avg_Total___Count_');
-            expect(Ruby.listName('id2_2')).toEqual('$List_of_Symbols_');
-            expect(Ruby.variableName('id2_3')).toEqual('$_________________________________');
+            expect(RubyGenerator.variableName('id2_1')).toEqual('$Avg_Total___Count_');
+            expect(RubyGenerator.listName('id2_2')).toEqual('$List_of_Symbols_');
+            expect(RubyGenerator.variableName('id2_3')).toEqual('$_________________________________');
         });
 
         test('do not escape multibyte character like Japanese', () => {
-            expect(Ruby.variableName('id2_4')).toEqual('@平均_合計___件数_');
-            expect(Ruby.listName('id2_5')).toEqual('@シンボル　配列。');
+            expect(RubyGenerator.variableName('id2_4')).toEqual('@平均_合計___件数_');
+            expect(RubyGenerator.listName('id2_5')).toEqual('@シンボル　配列。');
 
             renderedTarget.isStage = true;
-            expect(Ruby.variableName('id2_4')).toEqual('$平均_合計___件数_');
-            expect(Ruby.listName('id2_5')).toEqual('$シンボル　配列。');
+            expect(RubyGenerator.variableName('id2_4')).toEqual('$平均_合計___件数_');
+            expect(RubyGenerator.listName('id2_5')).toEqual('$シンボル　配列。');
         });
     });
 
@@ -238,7 +226,7 @@ describe('RubyGenerator', () => {
         });
 
         test('return the Sprite.new code', () => {
-            const expected = `Sprite.new(${Ruby.quote_(spriteName)},
+            const expected = `Sprite.new(${RubyGenerator.quote_(spriteName)},
            x: ${renderedTarget.x},
            y: ${renderedTarget.y},
            direction: ${renderedTarget.direction},
@@ -290,7 +278,7 @@ describe('RubyGenerator', () => {
                value: ["a", "b", "c"]
              }
            ])`;
-            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
+            expect(RubyGenerator.spriteNew(renderedTarget)).toEqual(expected);
         });
 
         test('suppress default attributes', () => {
@@ -305,15 +293,15 @@ describe('RubyGenerator', () => {
                 variables: {}
             });
             renderedTarget.sprite.costumes = [];
-            const expected = `Sprite.new(${Ruby.quote_(spriteName)})`;
-            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
+            const expected = `Sprite.new(${RubyGenerator.quote_(spriteName)})`;
+            expect(RubyGenerator.spriteNew(renderedTarget)).toEqual(expected);
         });
 
         test('the Stage.new instead of the Sprite.new if stage', () => {
             Object.assign(renderedTarget, {
                 isStage: true
             });
-            const expected = `Stage.new(${Ruby.quote_(spriteName)},
+            const expected = `Stage.new(${RubyGenerator.quote_(spriteName)},
           x: ${renderedTarget.x},
           y: ${renderedTarget.y},
           direction: ${renderedTarget.direction},
@@ -365,7 +353,7 @@ describe('RubyGenerator', () => {
               value: ["a", "b", "c"]
             }
           ])`;
-            expect(Ruby.spriteNew(renderedTarget)).toEqual(expected);
+            expect(RubyGenerator.spriteNew(renderedTarget)).toEqual(expected);
         });
     });
 });

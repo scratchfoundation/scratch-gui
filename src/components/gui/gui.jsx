@@ -32,7 +32,7 @@ import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 
-import {rubyCodesShape} from '../../reducers/ruby-codes.js';
+import {rubyCodeShape} from '../../reducers/ruby-code';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -104,7 +104,7 @@ const GUIComponent = props => {
         stageSizeMode,
         targetIsStage,
         tipsLibraryVisible,
-        rubyCodes,
+        rubyCode,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -312,7 +312,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {rubyTabVisible ? (
                                         <RubyTab
-                                            rubyCodes={rubyCodes}
+                                            rubyCode={rubyCode}
                                             vm={vm}
                                         />
                                     ) : null}
@@ -387,7 +387,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
-    rubyCodes: rubyCodesShape,
+    rubyCode: rubyCodeShape,
     rubyTabVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,

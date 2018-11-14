@@ -1,13 +1,13 @@
 /**
- * Define Ruby with Text Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Text Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.text = function (block) {
-        const text = Blockly.Ruby.quote_(block.getFieldValue('TEXT'));
-        return [text, Blockly.Ruby.ORDER_ATOMIC];
+export default function (Generator) {
+    Generator.text = function (block) {
+        const text = Generator.quote_(Generator.getFieldValue(block, 'TEXT'));
+        return [text, Generator.ORDER_ATOMIC];
     };
 
-    return Blockly;
+    return Generator;
 }

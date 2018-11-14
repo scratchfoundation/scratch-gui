@@ -1,34 +1,34 @@
 /**
- * Define Ruby with Operators Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Operators Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.operator_add = function (block) {
-        const order = Blockly.Ruby.ORDER_ADDITIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
+export default function (Generator) {
+    Generator.operator_add = function (block) {
+        const order = Generator.ORDER_ADDITIVE;
+        const num1 = Generator.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Generator.valueToCode(block, 'NUM2', order) || 0;
         return [`${num1} + ${num2}`, order];
     };
 
-    Blockly.Ruby.operator_subtract = function (block) {
-        const order = Blockly.Ruby.ORDER_ADDITIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
-        return [`${num1} - ${num2}`, Blockly.Ruby.ORDER_ADDITIVE];
+    Generator.operator_subtract = function (block) {
+        const order = Generator.ORDER_ADDITIVE;
+        const num1 = Generator.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Generator.valueToCode(block, 'NUM2', order) || 0;
+        return [`${num1} - ${num2}`, Generator.ORDER_ADDITIVE];
     };
 
-    Blockly.Ruby.operator_multiply = function (block) {
-        const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0;
+    Generator.operator_multiply = function (block) {
+        const order = Generator.ORDER_MULTIPLICATIVE;
+        const num1 = Generator.valueToCode(block, 'NUM1', order) || 0;
+        const num2 = Generator.valueToCode(block, 'NUM2', order) || 0;
         return [`${num1} * ${num2}`, order];
     };
 
-    Blockly.Ruby.operator_divide = function (block) {
-        const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || 0;
-        let num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || 0.0;
+    Generator.operator_divide = function (block) {
+        const order = Generator.ORDER_MULTIPLICATIVE;
+        const num1 = Generator.valueToCode(block, 'NUM1', order) || 0;
+        let num2 = Generator.valueToCode(block, 'NUM2', order) || 0.0;
         // guard 0 deviding.
         if (Number(num2) === 0) {
             num2 = '0.0';
@@ -36,96 +36,96 @@ export default function (Blockly) {
         return [`${num1} / ${num2}`, order];
     };
 
-    Blockly.Ruby.operator_random = function (block) {
-        const fromNum = Blockly.Ruby.valueToCode(block, 'FROM', Blockly.Ruby.ORDER_RANGE) || 1;
-        const toNum = Blockly.Ruby.valueToCode(block, 'TO', Blockly.Ruby.ORDER_RANGE) || 10;
-        return [`rand(${fromNum}..${toNum})`, Blockly.Ruby.ORDER_FUNCTION_CALL];
+    Generator.operator_random = function (block) {
+        const fromNum = Generator.valueToCode(block, 'FROM', Generator.ORDER_RANGE) || 1;
+        const toNum = Generator.valueToCode(block, 'TO', Generator.ORDER_RANGE) || 10;
+        return [`rand(${fromNum}..${toNum})`, Generator.ORDER_FUNCTION_CALL];
     };
 
-    Blockly.Ruby.operator_gt = function (block) {
-        const order = Blockly.Ruby.ORDER_RELATIONAL;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${Blockly.Ruby.nosToCode(operand1)} > ${Blockly.Ruby.nosToCode(operand2)}`, order];
+    Generator.operator_gt = function (block) {
+        const order = Generator.ORDER_RELATIONAL;
+        const operand1 = Generator.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Generator.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${Generator.nosToCode(operand1)} > ${Generator.nosToCode(operand2)}`, order];
     };
 
-    Blockly.Ruby.operator_lt = function (block) {
-        const order = Blockly.Ruby.ORDER_RELATIONAL;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${Blockly.Ruby.nosToCode(operand1)} < ${Blockly.Ruby.nosToCode(operand2)}`, order];
+    Generator.operator_lt = function (block) {
+        const order = Generator.ORDER_RELATIONAL;
+        const operand1 = Generator.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Generator.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${Generator.nosToCode(operand1)} < ${Generator.nosToCode(operand2)}`, order];
     };
 
-    Blockly.Ruby.operator_equals = function (block) {
-        const order = Blockly.Ruby.ORDER_EQUALS;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 0;
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 0;
-        return [`${Blockly.Ruby.nosToCode(operand1)} == ${Blockly.Ruby.nosToCode(operand2)}`, order];
+    Generator.operator_equals = function (block) {
+        const order = Generator.ORDER_EQUALS;
+        const operand1 = Generator.valueToCode(block, 'OPERAND1', order) || 0;
+        const operand2 = Generator.valueToCode(block, 'OPERAND2', order) || 0;
+        return [`${Generator.nosToCode(operand1)} == ${Generator.nosToCode(operand2)}`, order];
     };
 
-    Blockly.Ruby.operator_and = function (block) {
-        const order = Blockly.Ruby.ORDER_LOGICAL_AND;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 'false';
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 'false';
+    Generator.operator_and = function (block) {
+        const order = Generator.ORDER_LOGICAL_AND;
+        const operand1 = Generator.valueToCode(block, 'OPERAND1', order) || 'false';
+        const operand2 = Generator.valueToCode(block, 'OPERAND2', order) || 'false';
         return [`${operand1} && ${operand2}`, order];
     };
 
-    Blockly.Ruby.operator_or = function (block) {
-        const order = Blockly.Ruby.ORDER_LOGICAL_OR;
-        const operand1 = Blockly.Ruby.valueToCode(block, 'OPERAND1', order) || 'false';
-        const operand2 = Blockly.Ruby.valueToCode(block, 'OPERAND2', order) || 'false';
+    Generator.operator_or = function (block) {
+        const order = Generator.ORDER_LOGICAL_OR;
+        const operand1 = Generator.valueToCode(block, 'OPERAND1', order) || 'false';
+        const operand2 = Generator.valueToCode(block, 'OPERAND2', order) || 'false';
         return [`${operand1} || ${operand2}`, order];
     };
 
-    Blockly.Ruby.operator_not = function (block) {
-        const order = Blockly.Ruby.ORDER_UNARY_SIGN;
-        const operand = Blockly.Ruby.valueToCode(block, 'OPERAND', order) || 'false';
+    Generator.operator_not = function (block) {
+        const order = Generator.ORDER_UNARY_SIGN;
+        const operand = Generator.valueToCode(block, 'OPERAND', order) || 'false';
         return [`!${operand}`, order];
     };
 
-    Blockly.Ruby.operator_join = function (block) {
-        const order = Blockly.Ruby.ORDER_ADDITIVE;
-        const rightStr = Blockly.Ruby.valueToCode(block, 'STRING1', order) || Blockly.Ruby.quote_('');
-        const leftStr = Blockly.Ruby.valueToCode(block, 'STRING2', order) || Blockly.Ruby.quote_('');
+    Generator.operator_join = function (block) {
+        const order = Generator.ORDER_ADDITIVE;
+        const rightStr = Generator.valueToCode(block, 'STRING1', order) || Generator.quote_('');
+        const leftStr = Generator.valueToCode(block, 'STRING2', order) || Generator.quote_('');
         return [`${rightStr} + ${leftStr}`, order];
     };
 
-    Blockly.Ruby.operator_letter_of = function (block) {
-        const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        const str = Blockly.Ruby.valueToCode(block, 'STRING', order) || Blockly.Ruby.quote_('');
-        const letter = Blockly.Ruby.valueToCode(block, 'LETTER', Blockly.Ruby.ORDER_INDEX) - 1 || '0';
+    Generator.operator_letter_of = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const str = Generator.valueToCode(block, 'STRING', order) || Generator.quote_('');
+        const letter = Generator.valueToCode(block, 'LETTER', Generator.ORDER_INDEX) - 1 || '0';
         return [`${str}[${letter}]`, order];
     };
 
-    Blockly.Ruby.operator_length = function (block) {
-        const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        const str = Blockly.Ruby.valueToCode(block, 'STRING', order) || Blockly.Ruby.quote_('');
+    Generator.operator_length = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const str = Generator.valueToCode(block, 'STRING', order) || Generator.quote_('');
         return [`${str}.length`, order];
     };
 
-    Blockly.Ruby.operator_contains = function (block) {
-        const str1 = Blockly.Ruby.valueToCode(block, 'STRING1', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
-        const str2 = Blockly.Ruby.valueToCode(block, 'STRING2', Blockly.Ruby.ORDER_NONE) || Blockly.Ruby.quote_('');
-        return [`${str1}.include?(${str2})`, Blockly.Ruby.ORDER_ATOMIC];
+    Generator.operator_contains = function (block) {
+        const str1 = Generator.valueToCode(block, 'STRING1', Generator.ORDER_NONE) || Generator.quote_('');
+        const str2 = Generator.valueToCode(block, 'STRING2', Generator.ORDER_NONE) || Generator.quote_('');
+        return [`${str1}.include?(${str2})`, Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.operator_mod = function (block) {
-        const order = Blockly.Ruby.ORDER_MULTIPLICATIVE;
-        const num1 = Blockly.Ruby.valueToCode(block, 'NUM1', order) || '0';
-        const num2 = Blockly.Ruby.valueToCode(block, 'NUM2', order) || '0';
+    Generator.operator_mod = function (block) {
+        const order = Generator.ORDER_MULTIPLICATIVE;
+        const num1 = Generator.valueToCode(block, 'NUM1', order) || '0';
+        const num2 = Generator.valueToCode(block, 'NUM2', order) || '0';
         return [`${num1} % ${num2}`, order];
     };
 
-    Blockly.Ruby.operator_round = function (block) {
-        const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        const num = Blockly.Ruby.valueToCode(block, 'NUM', order) || '0';
+    Generator.operator_round = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const num = Generator.valueToCode(block, 'NUM', order) || '0';
         return [`${num}.round`, order];
     };
 
-    Blockly.Ruby.operator_mathop = function (block) {
-        const order = Blockly.Ruby.ORDER_FUNCTION_CALL;
-        const num = Blockly.Ruby.valueToCode(block, 'NUM', Blockly.Ruby.ORDER_NONE) || '0';
-        const operator = block.getFieldValue('OPERATOR') || null;
+    Generator.operator_mathop = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const num = Generator.valueToCode(block, 'NUM', Generator.ORDER_NONE) || '0';
+        const operator = Generator.getFieldValue(block, 'OPERATOR') || null;
         switch (operator) {
         case 'abs':
             return [`${num}.abs`, order];
@@ -160,5 +160,5 @@ export default function (Blockly) {
         }
     };
 
-    return Blockly;
+    return Generator;
 }

@@ -1,61 +1,59 @@
 /**
- * Define Ruby with Procedure Blocks
- * @param {Blockly} Blockly The ScratchBlocks
- * @return {Blockly} Blockly defined Ruby generator.
+ * Define Ruby code generator for Procedures Blocks
+ * @param {RubyGenerator} Generator The RubyGenerator
+ * @return {RubyGenerator} same as param.
  */
-export default function (Blockly) {
-    Blockly.Ruby.procedures_definition = function (block) {
+export default function (Generator) {
+    Generator.procedures_definition = function (block) {
         block.isStatement = true;
-        const customBlock = block.getInputTargetBlock('custom_block');
-        return Blockly.Ruby.blockToCode(customBlock);
+        const customBlock = Generator.getInputTargetBlock(block, 'custom_block');
+        return Generator.blockToCode(customBlock);
     };
 
     const blockToMethod = function (block, isCall) {
-        const labels = [];
-        const args = [];
-        block.inputList.forEach(input => {
-            switch (input.type) {
-            case Blockly.DUMMY_INPUT:
-                if (input.fieldRow[0]) {
-                    labels.push(Blockly.Ruby.escapeMethodName(input.fieldRow[0].getValue()));
-                }
-                break;
-            case Blockly.INPUT_VALUE:
-                if (isCall) {
-                    // if argument is boolean and does not specify, valueToCode return null.
-                    // so, default value is false.
-                    const value = Blockly.Ruby.valueToCode(block, input.name, Blockly.Ruby.ORDER_NONE) || false;
-                    args.push(Blockly.Ruby.nosToCode(value));
-                } else {
-                    const b = input.connection.targetBlock();
-                    args.push(Blockly.Ruby.escapeVariableName(b.getFieldValue('VALUE')));
-                }
-                break;
-            }
-        });
-        let methodName = labels.join('_');
+        let methodName = block.mutation.proccode.split(' ')
+            .filter(i => !/^%[sb]$/.test(i))
+            .join('_');
         if (methodName.length === 0) {
             methodName = 'procedure';
+        }
+        let args = [];
+        const paramNamesIdsAndDefaults =
+              Generator.currentTarget.blocks.getProcedureParamNamesIdsAndDefaults(block.mutation.proccode);
+        if (isCall) {
+            const ids = paramNamesIdsAndDefaults[1];
+            const defaults = paramNamesIdsAndDefaults[2];
+            for (let i = 0; i < ids.length; i++) {
+                let value;
+                if (block.inputs[ids[i]]) {
+                    value = Generator.valueToCode(block, ids[i], Generator.ORDER_NONE);
+                } else {
+                    value = defaults[i];
+                }
+                args.push(Generator.nosToCode(value));
+            }
+        } else {
+            args = paramNamesIdsAndDefaults[0];
         }
         const argsString = args.length > 0 ? `(${args.join(', ')})` : '';
         return `${isCall ? '' : 'def self.'}${methodName}${argsString}\n`;
     };
 
-    Blockly.Ruby.procedures_call = function (block) {
+    Generator.procedures_call = function (block) {
         return blockToMethod(block, true);
     };
 
-    Blockly.Ruby.procedures_prototype = function (block) {
+    Generator.procedures_prototype = function (block) {
         return blockToMethod(block, false);
     };
 
-    Blockly.Ruby.argument_reporter_boolean = function (block) {
-        return [Blockly.Ruby.escapeVariableName(block.getFieldValue('VALUE')), Blockly.Ruby.ORDER_ATOMIC];
+    Generator.argument_reporter_boolean = function (block) {
+        return [Generator.escapeVariableName(Generator.getFieldValue(block, 'VALUE')), Generator.ORDER_ATOMIC];
     };
 
-    Blockly.Ruby.argument_reporter_string_number = function (block) {
-        return [Blockly.Ruby.escapeVariableName(block.getFieldValue('VALUE')), Blockly.Ruby.ORDER_ATOMIC];
+    Generator.argument_reporter_string_number = function (block) {
+        return [Generator.escapeVariableName(Generator.getFieldValue(block, 'VALUE')), Generator.ORDER_ATOMIC];
     };
 
-    return Blockly;
+    return Generator;
 }

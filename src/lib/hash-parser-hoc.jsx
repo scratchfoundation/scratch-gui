@@ -9,9 +9,7 @@ import {
     setProjectId
 } from '../reducers/project-state';
 
-import {
-    closePreviewInfo
-} from '../reducers/modals';
+import {closePreviewInfo} from '../reducers/modals';
 
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent: component to render

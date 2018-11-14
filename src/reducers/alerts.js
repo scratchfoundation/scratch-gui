@@ -66,12 +66,15 @@ const reducer = function (state, action) {
             level: AlertLevels.WARN
         };
         const extensionId = action.data.extensionId;
-        newAlert.showReconnect = false;
-        newAlert.extensionId = extensionId;
-        if (extensionId) { // if it's an extension
+        if (extensionId) {
+            const newList = state.alertsList.slice();
+            const newAlert = {
+                level: AlertLevels.WARN,
+                extensionId: extensionId,
+                showReconnect: true
+            };
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension) {
-                newAlert.showReconnect = true;
                 if (extension.name) {
                     // TODO: make translate-friendly
                     newAlert.content = `${action.data.message} ${extension.name}`;
@@ -81,11 +84,12 @@ const reducer = function (state, action) {
                 }
                 newAlert.closeButton = true;
             }
+            newList.push(newAlert);
+            return Object.assign({}, state, {
+                alertsList: newList
+            });
         }
-        newList.push(newAlert);
-        return Object.assign({}, state, {
-            alertsList: newList
-        });
+        return state; // if extension not found, show nothing
     }
     case CLOSE_ALERT: {
         const newList = state.alertsList.slice();

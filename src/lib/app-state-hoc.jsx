@@ -31,6 +31,10 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             let reducers = {};
             let enhancer;
 
+            this.state = {
+                tutorial: false
+            };
+
             let initializedLocales = localesInitialState;
             const locale = detectLocale(Object.keys(locales));
             if (locale !== 'en') {
@@ -70,6 +74,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     // if we decide to keep this for www, functionality should move to
                     // setActiveCards in the GUI container
                     if (tutorialId === 'all') initializedGui = initTutorialLibrary(initializedGui);
+                    if (tutorialId) this.state.tutorial = true;
                 }
                 reducers = {
                     locales: localesReducer,
@@ -104,10 +109,13 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 isPlayerOnly, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
+            if (this.state.tutorial) componentProps.hideIntro = true;
             return (
                 <Provider store={this.store}>
                     <ConnectedIntlProvider>
-                        <WrappedComponent {...componentProps} />
+                        <WrappedComponent
+                            {...componentProps}
+                        />
                     </ConnectedIntlProvider>
                 </Provider>
             );

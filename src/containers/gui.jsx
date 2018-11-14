@@ -88,6 +88,7 @@ class GUI extends React.Component {
             isShowingProject,
             onStorageInit,
             onUpdateProjectId,
+            onUpdateReduxDeck,
             onUpdateReduxProjectTitle,
             projectHost,
             projectId,

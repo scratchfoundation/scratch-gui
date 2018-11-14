@@ -181,6 +181,32 @@ class Generator {
         return prefix + text.replace(/(?!\n$)\n/g, `\n${prefix}`);
     }
 
+    getChildren (block) {
+        const blocks = [];
+        for (const inputName in block.inputs) {
+            const input = block.inputs[inputName];
+            const child = this.getBlock(input.block);
+            if (child) {
+                blocks.push(child);
+            }
+        }
+        if (block.next) {
+            blocks.push(this.getBlock(block.next));
+        }
+        return blocks;
+    }
+
+    getDescendants (block, opt_ignoreShadows) {
+        const blocks = [block];
+        const childBlocks = this.getChildren(block);
+        for (let child, i = 0; child = childBlocks[i]; i++) {
+            if (!opt_ignoreShadows || !child.shadow) {
+                blocks.push.apply(blocks, this.getDescendants(child, opt_ignoreShadows));
+            }
+        }
+        return blocks;
+    }
+
     /**
      * Recursively spider a tree of blocks, returning all their comments.
      * @param {!object} block The block from which to start spidering.
@@ -188,17 +214,13 @@ class Generator {
      */
     allNestedComments (block) {
         const comments = [];
-        const blocks = this.currentTarget.blocks;
-        const inputs = blocks.getInputs(block);
-        Object.keys(inputs)
-            .map(input => blocks.getBlock(inputs[input].block))
-            .forEach(b => {
-                const comment = this.getCommentText(b);
-                if (comment) {
-                    comments.push(comment);
-                }
-            });
-
+        const blocks = this.getDescendants(block);
+        for (let i = 0; i < blocks.length; i++) {
+            const comment = this.getCommentText(blocks[i]);
+            if (comment) {
+                comments.push(comment);
+            }
+        }
         // Append an empty string to create a trailing line break when joined.
         if (comments.length) {
             comments.push('');
@@ -502,8 +524,13 @@ class Generator {
 
     isConnectedValue (block) {
         const parent = this.getBlock(block.parent);
-        if (parent && this.getInputs(parent)[block.id]) {
-            return true;
+        if (parent) {
+            const inputs = this.getInputs(parent);
+            for (let name in inputs) {
+                if (block.id == inputs[name].block) {
+                    return true;
+                }
+            }
         }
         return false;
     }

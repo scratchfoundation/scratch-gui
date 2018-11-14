@@ -58,6 +58,9 @@ const GUIComponent = props => {
         accountNavOpen,
         activeTabIndex,
         alertsVisible,
+        authorId,
+        authorThumbnailUrl,
+        authorUsername,
         basePath,
         backdropLibraryVisible,
         backpackHost,
@@ -65,6 +68,7 @@ const GUIComponent = props => {
         blocksTabVisible,
         cardsVisible,
         canCreateNew,
+        canEditTitle,
         canRemix,
         canSave,
         canCreateCopy,
@@ -180,8 +184,12 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    authorId={authorId}
+                    authorThumbnailUrl={authorThumbnailUrl}
+                    authorUsername={authorUsername}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
+                    canEditTitle={canEditTitle}
                     canRemix={canRemix}
                     canSave={canSave}
                     canShare={canShare}
@@ -324,6 +332,9 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
+    authorThumbnailUrl: PropTypes.string,
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
     backpackHost: PropTypes.string,
     backpackVisible: PropTypes.bool,
@@ -331,6 +342,7 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
+    canEditTitle: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
@@ -374,6 +386,7 @@ GUIComponent.defaultProps = {
     backpackVisible: false,
     basePath: './',
     canCreateNew: false,
+    canEditTitle: false,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,

@@ -28,10 +28,6 @@ export default appTarget => {
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
     const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
 
-    const backpackOptions = {
-        visible: true,
-        host: backpackHost
-    };
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
         window.onbeforeunload = () => true;
@@ -39,8 +35,9 @@ export default appTarget => {
 
     ReactDOM.render(
         <WrappedGui
+            backpackVisible
             showComingSoon
-            backpackOptions={backpackOptions}
+            backpackHost={backpackHost}
         />,
         appTarget);
 };

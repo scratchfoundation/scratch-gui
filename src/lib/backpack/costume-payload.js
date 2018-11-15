@@ -1,4 +1,5 @@
 import jpegThumbnail from './jpeg-thumbnail';
+import getCostumeUrl from '../get-costume-url';
 
 const costumePayload = costume => {
     // TODO is it ok to base64 encode SVGs? What about unicode text inside them?
@@ -26,8 +27,10 @@ const costumePayload = costume => {
         alert(`Cannot serialize for format: ${assetDataFormat}`); // eslint-disable-line
     }
 
-    // TODO we may be able to optimize by not actually generating thumbnails...
-    return jpegThumbnail(assetDataUrl).then(thumbnail => {
+    // Do not generate the thumbnail from the raw asset. Instead use the getCostumeUrl
+    // utility which inlines the fonts to make the thumbnail show the right fonts.
+    const inlinedFontDataUrl = getCostumeUrl(costume.asset);
+    return jpegThumbnail(inlinedFontDataUrl).then(thumbnail => {
         payload.thumbnail = thumbnail.replace('data:image/jpeg;base64,', '');
         return payload;
     });

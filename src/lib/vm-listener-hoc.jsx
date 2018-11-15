@@ -9,7 +9,7 @@ import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 import {setRunningState, setTurboState} from '../reducers/vm-status';
-import {showAlert} from '../reducers/alerts';
+import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
 
 /*
@@ -39,7 +39,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
-            this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowAlert);
+            this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
         }
@@ -62,7 +62,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
-            this.props.vm.removeListener('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowAlert);
+            this.props.vm.removeListener('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
@@ -112,7 +112,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onProjectRunStop,
                 onTurboModeOff,
                 onTurboModeOn,
-                onShowAlert,
+                onShowExtensionAlert,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -128,7 +128,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onMonitorsUpdate: PropTypes.func.isRequired,
         onProjectRunStart: PropTypes.func.isRequired,
         onProjectRunStop: PropTypes.func.isRequired,
-        onShowAlert: PropTypes.func.isRequired,
+        onShowExtensionAlert: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
@@ -160,8 +160,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onShowAlert: data => {
-            dispatch(showAlert(data));
+        onShowExtensionAlert: data => {
+            dispatch(showExtensionAlert(data));
         },
         onMicListeningUpdate: listening => {
             dispatch(updateMicIndicator(listening));

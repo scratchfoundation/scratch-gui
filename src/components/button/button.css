@@ -1,6 +1,8 @@
+@import "../../css/units.css";
+
 .outlined-button {
     cursor: pointer;
-    border-radius: .25rem;
+    border-radius: $form-radius;
     font-weight: bold;
     display: flex;
     flex-direction: row;

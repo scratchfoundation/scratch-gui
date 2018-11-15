@@ -1,0 +1,9 @@
+@import "../../css/colors.css";
+
+.community-button {
+    box-shadow: 0 0 0 1px $ui-black-transparent;
+}
+
+.community-button-icon {
+    height: 1.25rem;
+}

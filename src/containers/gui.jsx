@@ -86,7 +86,6 @@ class GUI extends React.Component {
             projectId,
             projectTitle,
             /* eslint-enable no-unused-vars */
-            canUseCloud,
             children,
             fetchingProject,
             isLoading,
@@ -95,7 +94,6 @@ class GUI extends React.Component {
         } = this.props;
         return (
             <GUIComponent
-                canUseCloud={canUseCloud}
                 loading={fetchingProject || isLoading || loadingStateVisible}
                 {...componentProps}
             >

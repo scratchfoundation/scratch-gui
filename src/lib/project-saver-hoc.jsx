@@ -85,7 +85,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 })
                 .catch(err => {
                     // NOTE: should throw up a notice for user
-                    this.props.onProjectError(`Saving the project failed with error: ${err}`);
+                    if (this.props.isManualUpdating) {
+                        this.props.onShowAlert('savingError');
+                    }
+                    this.props.onProjectError(err);
                 });
         }
         createNewProjectToStorage () {
@@ -96,7 +99,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                 })
                 .catch(err => {
-                    this.props.onProjectError(`Creating a new project failed with error: ${err}`);
+                    this.props.onShowAlert('savingError');
+                    this.props.onProjectError(err);
                 });
         }
         createCopyToStorage () {
@@ -111,7 +115,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                 })
                 .catch(err => {
-                    this.props.onProjectError(`Creating a project copy failed with error: ${err}`);
+                    this.props.onShowAlert('savingError');
+                    this.props.onProjectError(err);
                 });
         }
         createRemixToStorage () {
@@ -126,7 +131,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
                 })
                 .catch(err => {
-                    this.props.onProjectError(`Remixing a project failed with error: ${err}`);
+                    this.props.onShowAlert('savingError');
+                    this.props.onProjectError(err);
                 });
         }
         /**
@@ -173,6 +179,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreateProject,
                 onManualUpdateProject,
                 onProjectError,
+                onShowAlert,
                 onShowCreateSuccessAlert,
                 onShowCreatingAlert,
                 onShowSaveSuccessAlert,
@@ -208,6 +215,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreatedProject: PropTypes.func,
         onManualUpdateProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onShowAlert: PropTypes.func,
         onShowCreateSuccessAlert: PropTypes.func,
         onShowCreatingAlert: PropTypes.func,
         onShowSaveSuccessAlert: PropTypes.func,
@@ -239,6 +247,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: () => dispatch(createProject()),
         onManualUpdateProject: () => dispatch(manualUpdateProject()),
         onProjectError: error => dispatch(projectError(error)),
+        onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
         onShowCreateSuccessAlert: () => dispatch(showStandardAlert('createSuccess')),
         onShowCreatingAlert: () => dispatch(showStandardAlert('creating')),
         onShowSaveSuccessAlert: () => dispatch(showStandardAlert('saveSuccess')),

@@ -35,6 +35,28 @@ const alerts = [
         level: AlertLevels.SUCCESS
     },
     {
+        alertId: 'creatingError',
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not create the project. Please try again!"
+                description="Message indicating that project could not be created"
+                id="gui.alerts.creatingError"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingError',
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not save the project. Please try again!"
+                description="Message indicating that project could not be saved"
+                id="gui.alerts.savingError"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
         alertId: 'saveSuccess',
         clearList: ['saving'],
         content: (

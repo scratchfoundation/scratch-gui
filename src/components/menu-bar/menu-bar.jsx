@@ -27,6 +27,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
+    autoUpdateProject,
     getIsUpdating,
     getIsShowingProject,
     manualUpdateProject,
@@ -172,17 +173,23 @@ class MenuBar extends React.Component {
     }
     handleClickSeeCommunity (requestSeeCommunity) {
         if (this.props.canSave) { // save before transitioning to project page
-            this.props.onClickSave();
+            this.props.autoSave();
+            requestSeeCommunity(true); // queue the transition to project page
+        } else {
+            requestSeeCommunity(false); // immediately transition to project page
         }
-        requestSeeCommunity(); // queue the transition to project page
     }
     handleClickShare (requestSeeCommunity) {
-        if (this.props.canSave && !this.props.isShared) { // save before transitioning to project page
-            this.props.onClickSave();
-        }
-        if (this.props.canShare && !this.props.isShared) { // save before transitioning to project page
-            this.props.onShare();
-            requestSeeCommunity(); // queue the transition to project page
+        if (!this.props.isShared) {
+            if (this.props.canShare) { // save before transitioning to project page
+                this.props.onShare();
+            }
+            if (this.props.canSave) { // save before transitioning to project page
+                this.props.autoSave();
+                requestSeeCommunity(true); // queue the transition to project page
+            } else {
+                requestSeeCommunity(false); // immediately transition to project page
+            }
         }
     }
     handleRestoreOption (restoreFun) {
@@ -681,6 +688,7 @@ MenuBar.propTypes = {
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    autoUpdateProject: PropTypes.func,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
@@ -749,6 +757,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    autoSave: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

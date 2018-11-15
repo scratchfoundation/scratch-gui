@@ -20,17 +20,23 @@ class ProjectWatcher extends React.Component {
     }
     componentDidUpdate (prevProps) {
         if (this.state.requesting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
-            this.props.onShowingWithId();
-            this.setState({ // eslint-disable-line react/no-did-update-set-state
-                requesting: false
-            });
+            this.fulfillRequest();
         }
-
     }
-    setRequesting () {
-        this.setState({
-            requesting: true
+    fulfillRequest () {
+        this.props.onShowingWithId();
+        this.setState({ // eslint-disable-line react/no-did-update-set-state
+            requesting: false
         });
+    }
+    setRequesting (waitForRequest) {
+        if (waitForRequest) {
+            this.setState({
+                requesting: true
+            });
+        } else { // fulfill immediately
+            this.fulfillRequest();
+        }
     }
     render () {
         return this.props.children(

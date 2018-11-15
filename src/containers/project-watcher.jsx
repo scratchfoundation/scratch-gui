@@ -7,6 +7,14 @@ import {
     getIsShowingWithId
 } from '../reducers/project-state';
 
+/**
+ * Watches for project to finish updating before taking some action.
+ *
+ * To use ProjectWatcher, pass it a callback function using the onDoneUpdating prop.
+ * ProjectWatcher passes a waitForUpdate function to its children, which they can call
+ * to set ProjectWatcher to request that it call the onDoneUpdating callback when
+ * project is no longer updating.
+ */
 class ProjectWatcher extends React.Component {
     constructor (props) {
         super(props);
@@ -29,8 +37,8 @@ class ProjectWatcher extends React.Component {
             waiting: false
         });
     }
-    waitForSaving (isSaving) {
-        if (isSaving) {
+    waitForUpdate (isUpdating) {
+        if (isUpdating) {
             this.setState({
                 waiting: true
             });
@@ -40,7 +48,7 @@ class ProjectWatcher extends React.Component {
     }
     render () {
         return this.props.children(
-            this.waitForSaving
+            this.waitForUpdate
         );
     }
 }

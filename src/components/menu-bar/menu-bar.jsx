@@ -173,7 +173,7 @@ class MenuBar extends React.Component {
     }
     handleClickSeeCommunity (waitForUpdate) {
         if (this.props.canSave) { // save before transitioning to project page
-            this.props.autoSave();
+            this.props.autoUpdateProject();
             waitForUpdate(true); // queue the transition to project page
         } else {
             waitForUpdate(false); // immediately transition to project page
@@ -185,7 +185,7 @@ class MenuBar extends React.Component {
                 this.props.onShare();
             }
             if (this.props.canSave) { // save before transitioning to project page
-                this.props.autoSave();
+                this.props.autoUpdateProject();
                 waitForUpdate(true); // queue the transition to project page
             } else {
                 waitForUpdate(false); // immediately transition to project page
@@ -753,7 +753,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    autoSave: () => dispatch(autoUpdateProject()),
+    autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),

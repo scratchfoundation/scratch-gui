@@ -26,6 +26,12 @@ const cloudManagerHOC = function (WrappedComponent) {
             }
         }
         componentDidUpdate (prevProps) {
+            // TODO add disconnection logic when loading a new project
+            // (and eventually move it out of the vm.clear function)
+            // e.g. was previously showingWithId but no longer, but we need
+            // to check that we don't disconnect when saving a project to the
+            // server.
+
             // If we couldn't use cloud data before, but now we can, try opening a cloud connection
             if (this.canUseCloud(this.props) && !this.canUseCloud(prevProps)) {
                 this.connectToCloud();

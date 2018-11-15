@@ -34,29 +34,35 @@ class CloudProvider {
 
         this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + cloudHost);
 
-        this.connection.onerror = e => {
-            log.error(`Websocket connection error: ${JSON.stringify(e)}`);
+        this.connection.onerror = this.onError.bind(this);
+        this.connection.onmessage = this.onMessage.bind(this);
+        this.connection.onopen = this.onOpen.bind(this);
+        this.connection.onclose = this.onClose.bind(this);
+    }
 
-            // TODO Add re-connection attempt logic here
-            this.clear();
-        };
+    onError (event) {
+        log.error(`Websocket connection error: ${JSON.stringify(event)}`);
+        // TODO Add re-connection attempt logic here
+        this.clear();
+    }
 
-        this.connection.onmessage = event => {
-            const messageString = event.data;
-            log.info(`Received websocket message: ${messageString}`);
-            const message = JSON.parse(messageString);
-            const parsedData = this.parseMessage(message);
+    onMessage (event) {
+        const messageString = event.data;
+        log.info(`Received websocket message: ${messageString}`);
+        // Multiple commands can be received, newline separated
+        messageString.split('\n').forEach(message => {
+            const parsedData = this.parseMessage(JSON.parse(message));
             this.vm.postIOData('cloud', parsedData);
-        };
+        });
+    }
 
-        this.connection.onopen = () => {
-            this.writeToServer('handshake');
-            log.info(`Successfully connected to clouddata server.`);
-        };
+    onOpen () {
+        this.writeToServer('handshake');
+        log.info(`Successfully connected to clouddata server.`);
+    }
 
-        this.connection.onclose = () => {
-            log.info(`Closed connection to websocket`);
-        };
+    onClose () {
+        log.info(`Closed connection to websocket`);
     }
 
     parseMessage (message) {

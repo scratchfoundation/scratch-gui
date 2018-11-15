@@ -30,18 +30,19 @@ const AlertComponent = ({
     >
         <div className={styles.alertMessage}>
             {/* TODO: implement Rtl handling */}
-            {iconSpinner && (
-                <Spinner />
-            )}
-            {iconURL && (
-                <img
-                    className={styles.alertIcon}
-                    src={iconURL}
-                />
-            )}
-            {message}
-            &nbsp;
-            {content}
+            <div className={styles.alertIcon}>
+                {iconSpinner && (
+                    <Spinner />
+                )}
+                {iconURL && (
+                    <img src={iconURL} />
+                )}
+            </div>
+            <div>
+                {message}
+                &nbsp;
+                {content}
+            </div>
         </div>
         {showReconnect ? (
             <button

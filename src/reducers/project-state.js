@@ -188,7 +188,7 @@ const reducer = function (state, action) {
             return state;
         }
         // if setting the default project id, specifically fetch that project
-        if (action.projectId === defaultProjectId) {
+        if (action.projectId === defaultProjectId || action.projectId === null) {
             return Object.assign({}, state, {
                 loadingState: LoadingState.FETCHING_NEW_DEFAULT,
                 projectId: defaultProjectId
@@ -278,21 +278,42 @@ const reducer = function (state, action) {
         }
         return state;
     case START_ERROR:
-    // NOTE: we should introduce handling in components for showing ERROR state
+        // fatal errors: there's no correct editor state for us to show
         if ([
-            LoadingState.AUTO_UPDATING,
-            LoadingState.CREATING_COPY,
-            LoadingState.CREATING_NEW,
             LoadingState.FETCHING_NEW_DEFAULT,
             LoadingState.FETCHING_WITH_ID,
             LoadingState.LOADING_VM_NEW_DEFAULT,
-            LoadingState.LOADING_VM_WITH_ID,
+            LoadingState.LOADING_VM_WITH_ID
+        ].includes(state.loadingState)) {
+            return Object.assign({}, state, {
+                loadingState: LoadingState.ERROR,
+                error: action.error
+            });
+        }
+        // non-fatal errors: can keep showing editor state fine
+        if ([
+            LoadingState.AUTO_UPDATING,
+            LoadingState.CREATING_COPY,
             LoadingState.MANUAL_UPDATING,
             LoadingState.REMIXING,
             LoadingState.UPDATING_BEFORE_NEW
         ].includes(state.loadingState)) {
             return Object.assign({}, state, {
-                loadingState: LoadingState.ERROR,
+                loadingState: LoadingState.SHOWING_WITH_ID,
+                error: action.error
+            });
+        }
+        // non-fatal error; state to show depends on whether project we're showing
+        // has an id or not
+        if (state.loadingState === LoadingState.CREATING_NEW) {
+            if (state.projectId === defaultProjectId || state.projectId === null) {
+                return Object.assign({}, state, {
+                    loadingState: LoadingState.SHOWING_WITHOUT_ID,
+                    error: action.error
+                });
+            }
+            return Object.assign({}, state, {
+                loadingState: LoadingState.SHOWING_WITH_ID,
                 error: action.error
             });
         }

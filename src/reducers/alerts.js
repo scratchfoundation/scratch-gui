@@ -33,6 +33,9 @@ const reducer = function (state, action) {
                 newList = newList.filter(curAlert => (
                     !alertData.clearList || alertData.clearList.indexOf(curAlert.alertId)
                 ));
+                if (action.data && action.data.message) {
+                    newAlert.message = action.data.message;
+                }
 
                 newAlert.content = alertData.content;
                 newAlert.iconURL = alertData.iconURL;

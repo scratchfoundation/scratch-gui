@@ -290,7 +290,7 @@ const reducer = function (state, action) {
                 error: action.error
             });
         }
-        // non-fatal errors: there's no correct editor state for us to show
+        // non-fatal errors: can keep showing editor state fine
         if ([
             LoadingState.AUTO_UPDATING,
             LoadingState.CREATING_COPY,

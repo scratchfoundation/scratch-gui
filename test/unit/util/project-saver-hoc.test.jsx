@@ -142,9 +142,11 @@ describe('projectSaverHOC', () => {
     });
 
     test('if we enter creating new state, vm project should be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -164,14 +166,16 @@ describe('projectSaverHOC', () => {
             isCreatingNew: true,
             loadingState: LoadingState.CREATING_NEW
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
     });
 
     test('if we enter remixing state, vm project should be requested, and alert should show', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -192,15 +196,17 @@ describe('projectSaverHOC', () => {
             isRemixing: true,
             loadingState: LoadingState.REMIXING
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
         expect(mockedShowCreatingAlert).toHaveBeenCalled();
     });
 
     test('if we enter creating copy state, vm project should be requested, and alert should show', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -221,14 +227,16 @@ describe('projectSaverHOC', () => {
             isCreatingCopy: true,
             loadingState: LoadingState.CREATING_COPY
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
         expect(mockedShowCreatingAlert).toHaveBeenCalled();
     });
 
     test('if we enter updating/saving state, vm project should be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -246,15 +254,17 @@ describe('projectSaverHOC', () => {
             isUpdating: true,
             loadingState: LoadingState.MANUAL_UPDATING
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
     });
 
     test('if we are already in updating/saving state, vm project ' +
             'should NOT requested, alert should NOT show', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -274,7 +284,7 @@ describe('projectSaverHOC', () => {
             loadingState: LoadingState.AUTO_UPDATING,
             reduxProjectId: '99' // random change to force a re-render and componentDidUpdate
         });
-        expect(vm.saveProjectSb3).not.toHaveBeenCalled();
+        expect(mockedStoreProject).not.toHaveBeenCalled();
         expect(mockedShowCreatingAlert).not.toHaveBeenCalled();
     });
 

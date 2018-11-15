@@ -38,21 +38,15 @@ class CloudProvider {
             log.error(`Websocket connection error: ${JSON.stringify(e)}`);
 
             // TODO Add re-connection attempt logic here
+            this.clear();
         };
 
         this.connection.onmessage = event => {
             const messageString = event.data;
             log.info(`Received websocket message: ${messageString}`);
             const message = JSON.parse(messageString);
-            if (message.method === 'set') {
-                const varData = {
-                    varUpdate: {
-                        name: message.name,
-                        value: message.value
-                    }
-                };
-                this.vm.postIOData('cloud', varData);
-            }
+            const parsedData = this.parseMessage(message);
+            this.vm.postIOData('cloud', parsedData);
         };
 
         this.connection.onopen = () => {
@@ -63,6 +57,26 @@ class CloudProvider {
         this.connection.onclose = () => {
             log.info(`Closed connection to websocket`);
         };
+    }
+
+    parseMessage (message) {
+        const varData = {};
+        switch (message.method) {
+        case 'ack': {
+            varData.varCreate = {
+                name: message.name
+            };
+            break;
+        }
+        case 'set': {
+            varData.varUpdate = {
+                name: message.name,
+                value: message.value
+            };
+            break;
+        }
+        }
+        return varData;
     }
 
     /**
@@ -101,6 +115,16 @@ class CloudProvider {
     }
 
     /**
+     * Provides an API for the VM's cloud IO device to create
+     * a new cloud variable on the server.
+     * @param {string} name The name of the variable to create
+     * @param {string | number} value The value of the new cloud variable.
+     */
+    createVariable (name, value) {
+        this.writeToServer('create', name, value);
+    }
+
+    /**
      * Provides an API for the VM's cloud IO device to update
      * a cloud variable on the server.
      * @param {string} name The name of the variable to update
@@ -115,7 +139,12 @@ class CloudProvider {
      * provider of references related to the cloud data project.
      */
     requestCloseConnection () {
-        this.connection.close();
+        if (this.connection &&
+            this.connection.readyState !== WebSocket.CLOSING &&
+            this.connection.readyState !== WebSocket.CLOSED) {
+
+            this.connection.close();
+        }
         this.clear();
     }
 

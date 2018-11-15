@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
-import CloudProvider from '../lib/cloud-provider';
 
 import {
     LoadingStates,
@@ -47,18 +46,6 @@ const vmManagerHOC = function (WrappedComponent) {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
-                    // If the cloud host exists, open a cloud connection and
-                    // set the vm's cloud provider.
-                    if (this.props.cloudHost) {
-                        // TODO check if we should actually
-                        // connect to cloud data based on info from the loaded project and
-                        // info about the user (e.g. scratcher status)
-                        this.props.vm.setCloudProvider(new CloudProvider(
-                            this.props.cloudHost,
-                            this.props.vm,
-                            this.props.username,
-                            this.props.projectId));
-                    }
                 })
                 .catch(e => {
                     this.props.onError(e);
@@ -67,14 +54,11 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                cloudHost,
                 fontsLoaded,
                 loadingState,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
-                projectId,
-                username,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,

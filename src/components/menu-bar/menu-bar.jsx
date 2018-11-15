@@ -171,24 +171,24 @@ class MenuBar extends React.Component {
         this.props.onClickSaveAsCopy();
         this.props.onRequestCloseFile();
     }
-    handleClickSeeCommunity (requestSeeCommunity) {
+    handleClickSeeCommunity (waitForUpdate) {
         if (this.props.canSave) { // save before transitioning to project page
             this.props.autoSave();
-            requestSeeCommunity(true); // queue the transition to project page
+            waitForUpdate(true); // queue the transition to project page
         } else {
-            requestSeeCommunity(false); // immediately transition to project page
+            waitForUpdate(false); // immediately transition to project page
         }
     }
-    handleClickShare (requestSeeCommunity) {
+    handleClickShare (waitForUpdate) {
         if (!this.props.isShared) {
             if (this.props.canShare) { // save before transitioning to project page
                 this.props.onShare();
             }
             if (this.props.canSave) { // save before transitioning to project page
                 this.props.autoSave();
-                requestSeeCommunity(true); // queue the transition to project page
+                waitForUpdate(true); // queue the transition to project page
             } else {
-                requestSeeCommunity(false); // immediately transition to project page
+                waitForUpdate(false); // immediately transition to project page
             }
         }
     }
@@ -480,17 +480,15 @@ class MenuBar extends React.Component {
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher
-                                    onShowingWithId={this.props.onSeeCommunity}
-                                >
+                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
                                     {
-                                        setRequesting => (
+                                        waitForUpdate => (
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
                                                 /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
-                                                    this.handleClickShare(setRequesting);
+                                                    this.handleClickShare(waitForUpdate);
                                                 }}
                                                 /* eslint-enable react/jsx-no-bind */
                                             />
@@ -510,16 +508,14 @@ class MenuBar extends React.Component {
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher
-                                    onShowingWithId={this.props.onSeeCommunity}
-                                >
+                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
                                     {
-                                        setRequesting => (
+                                        waitForUpdate => (
                                             <CommunityButton
                                                 className={styles.menuBarButton}
                                                 /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
-                                                    this.handleClickSeeCommunity(setRequesting);
+                                                    this.handleClickSeeCommunity(waitForUpdate);
                                                 }}
                                                 /* eslint-enable react/jsx-no-bind */
                                             />

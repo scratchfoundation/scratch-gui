@@ -11,28 +11,28 @@ class ProjectWatcher extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'setRequesting'
+            'waitForSaving'
         ]);
 
         this.state = {
-            requesting: false
+            waiting: false
         };
     }
     componentDidUpdate (prevProps) {
-        if (this.state.requesting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
+        if (this.state.waiting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
             this.fulfillRequest();
         }
     }
     fulfillRequest () {
-        this.props.onShowingWithId();
+        this.props.onDoneUpdating();
         this.setState({ // eslint-disable-line react/no-did-update-set-state
-            requesting: false
+            waiting: false
         });
     }
-    setRequesting (waitForRequest) {
-        if (waitForRequest) {
+    waitForSaving (isSaving) {
+        if (isSaving) {
             this.setState({
-                requesting: true
+                waiting: true
             });
         } else { // fulfill immediately
             this.fulfillRequest();
@@ -40,7 +40,7 @@ class ProjectWatcher extends React.Component {
     }
     render () {
         return this.props.children(
-            this.setRequesting
+            this.waitForSaving
         );
     }
 }
@@ -48,11 +48,11 @@ class ProjectWatcher extends React.Component {
 ProjectWatcher.propTypes = {
     children: PropTypes.func,
     isShowingWithId: PropTypes.bool,
-    onShowingWithId: PropTypes.func
+    onDoneUpdating: PropTypes.func
 };
 
 ProjectWatcher.defaultProps = {
-    onShowingWithId: () => {}
+    onDoneUpdating: () => {}
 };
 
 const mapStateToProps = state => {

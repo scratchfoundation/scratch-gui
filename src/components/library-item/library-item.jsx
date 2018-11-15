@@ -54,7 +54,8 @@ class LibraryItem extends React.PureComponent {
                     styles.featuredItem,
                     {
                         [styles.disabled]: this.props.disabled
-                    }
+                    },
+                    this.props.extensionId ? styles.libraryItemExtension : null
                 )}
                 onClick={this.handleClick}
             >

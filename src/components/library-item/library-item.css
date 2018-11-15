@@ -3,12 +3,10 @@
 
 .library-item {
     display: flex;
-    align-self: stretch;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     flex-basis: 160px;
-    max-width: 160px;
     height: 160px;
     margin: $space;
     padding: 1rem 1rem 0 1rem;
@@ -21,6 +19,10 @@
     border-radius: $space;
     text-align: center;
     cursor: pointer;
+}
+
+.library-item-extension {
+    align-self: stretch;
 }
 
 .library-item:hover {

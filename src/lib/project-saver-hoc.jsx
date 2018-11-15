@@ -259,10 +259,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onManualUpdateProject: () => dispatch(manualUpdateProject()),
         onProjectError: error => dispatch(projectError(error)),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
-        onShowCreateSuccessAlert: () => dispatch(showAlertWithTimeout('createSuccess')),
-        onShowCreatingAlert: () => dispatch(showAlertWithTimeout('creating')),
-        onShowSaveSuccessAlert: () => dispatch(showAlertWithTimeout('saveSuccess')),
-        onShowSavingAlert: () => dispatch(showAlertWithTimeout('saving')),
+        onShowCreateSuccessAlert: () => showAlertWithTimeout(dispatch, 'createSuccess'),
+        onShowCreatingAlert: () => showAlertWithTimeout(dispatch, 'creating'),
+        onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'saveSuccess'),
+        onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
         onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState))
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

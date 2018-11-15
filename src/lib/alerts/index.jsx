@@ -20,7 +20,7 @@ const alerts = [
     {
         alertId: 'createSuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess, creating, saveSuccess, saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully created."
@@ -35,7 +35,7 @@ const alerts = [
     {
         alertId: 'creating',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess, creating, saveSuccess, saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Creating..."
@@ -71,7 +71,7 @@ const alerts = [
     {
         alertId: 'saveSuccess',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess, creating, saveSuccess, saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully saved."
@@ -86,7 +86,7 @@ const alerts = [
     {
         alertId: 'saving',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess, creating, saveSuccess, saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Saving..."

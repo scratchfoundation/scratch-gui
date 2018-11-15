@@ -34,7 +34,7 @@ const reducer = function (state, action) {
             const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);
             if (alertData) {
                 const newList = state.alertsList.filter(curAlert => (
-                    !alertData.clearList || alertData.clearList.indexOf(curAlert.alertId)
+                    !alertData.clearList || alertData.clearList.indexOf(curAlert.alertId) === -1
                 ));
                 if (action.data && action.data.message) {
                     newAlert.message = action.data.message;
@@ -160,10 +160,10 @@ const showExtensionAlert = function (data) {
  * Function to dispatch showing an alert, with optional
  * timeout to make it close/go away.
  *
- * @param {object} alertId - the ID of the alert
- * @return {null} - do not return a value
+ * @param {object} dispatch - dispatch function
+ * @param {string} alertId - the ID of the alert
  */
-const showAlertWithTimeout = alertId => (dispatch => {
+const showAlertWithTimeout = function (dispatch, alertId) {
     const alertData = alertsData.find(thisAlertData => thisAlertData.alertId === alertId);
     if (alertData) {
         dispatch(showStandardAlert(alertId));
@@ -173,7 +173,7 @@ const showAlertWithTimeout = alertId => (dispatch => {
             }, alertData.maxDisplaySecs * 1000);
         }
     }
-});
+};
 
 export {
     reducer as default,

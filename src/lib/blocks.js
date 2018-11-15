@@ -48,13 +48,13 @@ export default function (vm) {
     };
 
 
-    const jsonForSensingMenus = function (blockMsg, name, menuOptionsFn, colors) {
+    const jsonForSensingMenus = function (menuOptionsFn) {
         return {
-            message0: blockMsg,
+            message0: ScratchBlocks.Msg.SENSING_OF,
             args0: [
                 {
                     type: 'field_dropdown',
-                    name: name,
+                    name: 'PROPERTY',
                     options: function () {
                         return menuOptionsFn();
                     }
@@ -66,9 +66,9 @@ export default function (vm) {
                 }
             ],
             output: true,
-            colour: colors.primary,
-            colourSecondary: colors.secondary,
-            colourTertiary: colors.tertiary,
+            colour: ScratchBlocks.Colours.sensing.primary,
+            colourSecondary: ScratchBlocks.Colours.sensing.secondary,
+            colourTertiary: ScratchBlocks.Colours.sensing.tertiary,
             outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
         };
     };
@@ -245,10 +245,10 @@ export default function (vm) {
                     // The block was in the flyout so look up future block info there.
                     lookupBlocks = vm.runtime.flyoutBlocks;
                 }
-                // There's a block dropped on top of the menu. It'd be nice to evaluate it and
-                // return the correct list, but that is tricky. Scratch2 just returns stage options
-                // so just do that here too.
                 if (sensingOfBlock.inputs.OBJECT.shadow !== sensingOfBlock.inputs.OBJECT.block) {
+                    // There's a block dropped on top of the menu. It'd be nice to evaluate it and
+                    // return the correct list, but that is tricky. Scratch2 just returns stage options
+                    // so just do that here too.
                     return stageOptions;
                 }
                 const menuBlock = lookupBlocks.getBlock(sensingOfBlock.inputs.OBJECT.shadow);
@@ -261,8 +261,7 @@ export default function (vm) {
             return [['', '']];
         };
 
-        const json = jsonForSensingMenus(ScratchBlocks.Msg.SENSING_OF,
-            'PROPERTY', menuFn, sensingColors);
+        const json = jsonForSensingMenus(menuFn);
         this.jsonInit(json);
     };
 

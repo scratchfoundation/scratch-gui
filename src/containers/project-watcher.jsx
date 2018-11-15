@@ -19,7 +19,7 @@ class ProjectWatcher extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'waitForSaving'
+            'waitForUpdate'
         ]);
 
         this.state = {
@@ -28,10 +28,10 @@ class ProjectWatcher extends React.Component {
     }
     componentDidUpdate (prevProps) {
         if (this.state.waiting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
-            this.fulfillRequest();
+            this.fulfill();
         }
     }
-    fulfillRequest () {
+    fulfill () {
         this.props.onDoneUpdating();
         this.setState({ // eslint-disable-line react/no-did-update-set-state
             waiting: false
@@ -43,7 +43,7 @@ class ProjectWatcher extends React.Component {
                 waiting: true
             });
         } else { // fulfill immediately
-            this.fulfillRequest();
+            this.fulfill();
         }
     }
     render () {

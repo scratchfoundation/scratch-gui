@@ -187,6 +187,7 @@ class CloudProvider {
             clearTimeout(this._connectionTimeout);
             this._connectionTimeout = null;
         }
+        this.connectionAttempts = 0;
     }
 
 }

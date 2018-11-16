@@ -96,7 +96,7 @@ class Generator {
         this.currentTarget_ = target;
 
         const comments = this.cache_.comments = {};
-        const workspaceComments = this.cache_.workspaceComments = {};
+        const workspaceComments = this.cache_.workspaceComments = [];
         if (target) {
             Object.keys(target.comments).forEach(commentId => {
                 const comment = target.comments[commentId];

@@ -37,6 +37,7 @@ export default appTarget => {
         <WrappedGui
             backpackVisible
             showComingSoon
+            showPreviewInfo
             backpackHost={backpackHost}
         />,
         appTarget);

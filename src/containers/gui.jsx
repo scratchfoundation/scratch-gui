@@ -84,7 +84,6 @@ class GUI extends React.Component {
             assetHost,
             cloudHost,
             error,
-            hideIntro,
             isError,
             isShowingProject,
             onStorageInit,
@@ -118,7 +117,6 @@ GUI.propTypes = {
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
@@ -143,7 +141,7 @@ GUI.defaultProps = {
     onUpdateProjectId: () => {}
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
@@ -161,7 +159,7 @@ const mapStateToProps = (state, ownProps) => {
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
-        previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
+        previewInfoVisible: state.scratchGui.modals.previewInfo,
         projectId: state.scratchGui.projectState.projectId,
         targetIsStage: (
             state.scratchGui.targets.stage &&

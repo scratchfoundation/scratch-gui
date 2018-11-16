@@ -70,6 +70,16 @@ describe('CloudProvider', () => {
         expect(vmIOData[0].varUpdate.value).toEqual('value');
     });
 
+    test('onMessage with newline at the end', () => {
+        const msg1 = JSON.stringify({
+            method: 'set',
+            name: 'name1',
+            value: 'value'
+        });
+        cloudProvider.onMessage({data: `${msg1}\n`});
+        expect(vmIOData[0].varUpdate.name).toEqual('name1');
+    });
+
     test('onMessage with multiple commands', () => {
         const msg1 = JSON.stringify({
             method: 'set',

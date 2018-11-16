@@ -96,14 +96,14 @@ class Generator {
         this.currentTarget_ = target;
 
         const comments = this.cache_.comments = {};
-        const workspaceComments = this.cache_.workspaceComments = [];
+        const targetCommentTexts = this.cache_.targetCommentTexts = [];
         if (target) {
             Object.keys(target.comments).forEach(commentId => {
                 const comment = target.comments[commentId];
                 if (comment.blockId) {
                     comments[comment.blockId] = comment;
                 } else {
-                    workspaceComments.push(comment.text);
+                    targetCommentTexts.push(comment.text);
                 }
             });
         }
@@ -544,8 +544,8 @@ class Generator {
         return this.functionNames_[desiredName];
     }
 
-    getWorkspaceComments_ () {
-        return this.cache_.workspaceComments;
+    getTargetCommentTexts () {
+        return this.cache_.targetCommentTexts;
     }
 
     getCommentText (block) {

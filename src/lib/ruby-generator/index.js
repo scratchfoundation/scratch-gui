@@ -116,6 +116,12 @@ RubyGenerator.finish = function (code, options) {
         }
     }
 
+    const comments = RubyGenerator.getTargetCommentTexts();
+    if (comments.length > 0) {
+        const commentCodes = comments.map(comment => `${this.prefixLines(comment, '# ')}\n`);
+        code = `${commentCodes.join('\n')}\n${code}`;
+    }
+
     if (options && options.withSpriteNew) {
         const spriteNewCode = this.spriteNew(this.currentTarget);
         if (code.length > 0) {

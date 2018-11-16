@@ -67,6 +67,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     backpackVisible: true,
     showComingSoon: true,
+    showPreviewInfo: true,
     backpackHost: backpackHost
   }), appTarget);
 });

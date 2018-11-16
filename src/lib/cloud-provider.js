@@ -16,23 +16,25 @@ class CloudProvider {
         this.vm = vm;
         this.username = username;
         this.projectId = projectId;
+        this.cloudHost = cloudHost;
 
-        // Open a websocket connection to the clouddata server
-        this.openConnection(cloudHost);
+        this.connectionAttempts = 0;
+
+        this.openConnection();
     }
 
     /**
      * Open a new websocket connection to the clouddata server.
      * @param {string} cloudHost The cloud data server to connect to.
      */
-    openConnection (cloudHost) {
-        if (window.WebSocket === null) {
-            log.warn('Websocket support is not available in this browser');
+    openConnection () {
+        try {
+            this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost);
+        } catch (e) {
+            log.warn('Websocket support is not available in this browser', e);
             this.connection = null;
             return;
         }
-
-        this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + cloudHost);
 
         this.connection.onerror = this.onError.bind(this);
         this.connection.onmessage = this.onMessage.bind(this);
@@ -42,8 +44,7 @@ class CloudProvider {
 
     onError (event) {
         log.error(`Websocket connection error: ${JSON.stringify(event)}`);
-        // TODO Add re-connection attempt logic here
-        this.clear();
+        // Error is always followed by close, which handles reconnect logic.
     }
 
     onMessage (event) {
@@ -57,12 +58,31 @@ class CloudProvider {
     }
 
     onOpen () {
+        this.connectionAttempts = 1; // Reset because we successfully connected
         this.writeToServer('handshake');
         log.info(`Successfully connected to clouddata server.`);
     }
 
     onClose () {
         log.info(`Closed connection to websocket`);
+        const exponentialTimeout = (Math.pow(2, this.connectionAttempts) - 1) * 1000;
+        const randomizedTimeout = this.randomizeDuration(exponentialTimeout);
+        this.setTimeout(this.reconnectNow.bind(this), randomizedTimeout);
+    }
+
+    reconnectNow () {
+        // Max connection attempts at 5, so timeout will max out in range [0, 31s]
+        this.connectionAttempts = Math.min(this.connectionAttempts + 1, 5);
+        this.openConnection();
+    }
+
+    randomizeDuration (t) {
+        return Math.random() * t;
+    }
+
+    setTimeout (fn, time) {
+        log.info(`Reconnecting in ${time}ms, attempt ${this.connectionAttempts}`);
+        this._connectionTimeout = window.setTimeout(fn, time);
     }
 
     parseMessage (message) {
@@ -148,7 +168,7 @@ class CloudProvider {
         if (this.connection &&
             this.connection.readyState !== WebSocket.CLOSING &&
             this.connection.readyState !== WebSocket.CLOSED) {
-
+            this.connection.onclose = () => {}; // Remove close listener to prevent reconnect
             this.connection.close();
         }
         this.clear();
@@ -163,6 +183,10 @@ class CloudProvider {
         this.vm = null;
         this.username = null;
         this.projectId = null;
+        if (this._connectionTimeout) {
+            clearTimeout(this._connectionTimeout);
+            this._connectionTimeout = null;
+        }
     }
 
 }

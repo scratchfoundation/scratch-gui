@@ -6,17 +6,18 @@ import LibraryItemComponent from '../components/library-item/library-item.jsx';
 import storage from '../lib/storage';
 
 /**
- * @param {string} extension - the extension to look up.
+ * Find the AssetType which corresponds to a particular file extension. For example, 'png' => AssetType.ImageBitmap.
+ * @param {string} fileExtension - the file extension to look up.
  * @returns {AssetType} - the AssetType corresponding to the extension, if any.
  */
-const getAssetTypeForExtension = function (extension) {
+const getAssetTypeForFileExtension = function (fileExtension) {
     const compareOptions = {
         sensitivity: 'accent',
         usage: 'search'
     };
     for (const assetTypeId of Object.keys(storage.AssetType)) {
         const assetType = storage.AssetType[assetTypeId];
-        if (extension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
+        if (fileExtension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
             return assetType;
         }
     }
@@ -58,7 +59,7 @@ class LibraryItem extends React.PureComponent {
         if (this.state.lastRequestedMD5 !== props.iconMD5) {
             // TODO: adjust libraries to be more storage-friendly; don't use split() here.
             const [md5, ext] = props.iconMD5.split('.');
-            const assetType = getAssetTypeForExtension(ext);
+            const assetType = getAssetTypeForFileExtension(ext);
             storage.load(assetType, md5)
                 .then(asset => {
                     this.setState({

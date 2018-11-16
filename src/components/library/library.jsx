@@ -13,6 +13,11 @@ import analytics from '../../lib/analytics';
 
 import styles from './library.css';
 
+import {
+    AutoSizer,
+    Grid
+} from 'react-virtualized';
+
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'gui.library.filterPlaceholder',
@@ -42,13 +47,22 @@ class LibraryComponent extends React.Component {
             'handleMouseLeave',
             'handleSelect',
             'handleTagClick',
-            'setFilteredDataRef'
+            'setFilteredDataRef',
+            'cellRenderer',
+            'handleResize',
+            'setMasonryRef',
+            '_renderMasonry'
         ]);
+
         this.state = {
             selectedItem: null,
             filterQuery: '',
             selectedTag: ALL_TAG.tag
         };
+
+        this._columnWidth = this.props.data[0].featured ? 300 : 160;
+        this._columnHeight = this.props.data[0].featured ? 340 : 180;
+        this._columnCount = 0;
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -121,6 +135,75 @@ class LibraryComponent extends React.Component {
     setFilteredDataRef (ref) {
         this.filteredDataRef = ref;
     }
+    cellRenderer ({rowIndex, columnIndex, key, style}) {
+        const index = (this._columnCount * rowIndex) + columnIndex;
+        const dataItem = this.getFilteredData()[index];
+        if (!dataItem) return null;
+
+        return (
+            <div
+                key={key}
+                style={{...style, width: this._columnWidth, height: this._columnWidth}}
+            >
+                <LibraryItem
+                    bluetoothRequired={dataItem.bluetoothRequired}
+                    collaborator={dataItem.collaborator}
+                    description={dataItem.description}
+                    disabled={dataItem.disabled}
+                    extensionId={dataItem.extensionId}
+                    featured={dataItem.featured}
+                    hidden={dataItem.hidden}
+                    iconMD5={dataItem.md5} // either this or iconURL must be defined
+                    iconURL={dataItem.rawURL} // either this or iconMD5 must be defined
+                    id={index}
+                    insetIconURL={dataItem.insetIconURL}
+                    internetConnectionRequired={dataItem.internetConnectionRequired}
+                    key={`item_${index}`}
+                    name={dataItem.name}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    onMouseEnter={this.handleMouseEnter}
+                    onMouseLeave={this.handleMouseLeave}
+                    onSelect={this.handleSelect}
+                />
+            </div>
+        );
+    }
+
+    handleResize ({width}) {
+        this._width = width;
+        this._calculateColumnCount();
+    }
+
+    setMasonryRef (ref) {
+        this._masonry = ref;
+    }
+
+
+    _calculateColumnCount () {
+        this._columnCount = Math.floor(this._width / this._columnWidth);
+    }
+
+    _renderMasonry ({width, height}) {
+        this._width = width;
+
+        this._calculateColumnCount();
+
+        return (
+            <Grid
+                cellRenderer={this.cellRenderer}
+                columnCount={this._columnCount}
+                columnWidth={this._columnWidth}
+                data={this.getFilteredData()}
+                height={height}
+                ref={this.setMasonryRef}
+                rowCount={Math.floor(this.getFilteredData().length / this._columnCount)}
+                rowHeight={this._columnHeight}
+                width={width}
+            />
+        );
+    }
+
     render () {
         return (
             <Modal
@@ -172,29 +255,12 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => (
-                        <LibraryItem
-                            bluetoothRequired={dataItem.bluetoothRequired}
-                            collaborator={dataItem.collaborator}
-                            description={dataItem.description}
-                            disabled={dataItem.disabled}
-                            extensionId={dataItem.extensionId}
-                            featured={dataItem.featured}
-                            hidden={dataItem.hidden}
-                            iconMD5={dataItem.md5} // either this or iconURL must be defined
-                            iconURL={dataItem.rawURL} // either this or iconMD5 must be defined
-                            id={index}
-                            insetIconURL={dataItem.insetIconURL}
-                            internetConnectionRequired={dataItem.internetConnectionRequired}
-                            key={`item_${index}`}
-                            name={dataItem.name}
-                            onBlur={this.handleBlur}
-                            onFocus={this.handleFocus}
-                            onMouseEnter={this.handleMouseEnter}
-                            onMouseLeave={this.handleMouseLeave}
-                            onSelect={this.handleSelect}
-                        />
-                    ))}
+                    <AutoSizer
+                        data={this.getFilteredData()}
+                        onResize={this.handleResize}
+                    >
+                        {this._renderMasonry}
+                    </AutoSizer>
                 </div>
             </Modal>
         );

@@ -13,8 +13,6 @@ import {
     getIsShowingProject
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
-import {detectTutorialId} from '../lib/tutorial-from-url';
-import {activateDeck} from '../reducers/cards';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -31,6 +29,7 @@ import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
+import QueryParserHOC from '../lib/query-parser-hoc.jsx';
 import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
@@ -50,7 +49,6 @@ class GUI extends React.Component {
     componentDidMount () {
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
-        this.setActiveCards(detectTutorialId());
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -69,11 +67,6 @@ class GUI extends React.Component {
             this.props.onUpdateReduxProjectTitle(newTitle);
         }
     }
-    setActiveCards (tutorialId) {
-        if (tutorialId && tutorialId !== 'all') {
-            this.props.onUpdateReduxDeck(tutorialId);
-        }
-    }
     render () {
         if (this.props.isError) {
             throw new Error(
@@ -88,7 +81,6 @@ class GUI extends React.Component {
             isShowingProject,
             onStorageInit,
             onUpdateProjectId,
-            onUpdateReduxDeck,
             onUpdateReduxProjectTitle,
             projectHost,
             projectId,
@@ -127,7 +119,6 @@ GUI.propTypes = {
     onStorageInit: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    onUpdateReduxDeck: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectHost: PropTypes.string,
@@ -178,7 +169,6 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onUpdateReduxDeck: tutorialId => dispatch(activateDeck(tutorialId)),
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
@@ -194,6 +184,7 @@ const WrappedGui = compose(
     LocalizationHOC,
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
+    QueryParserHOC,
     ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,

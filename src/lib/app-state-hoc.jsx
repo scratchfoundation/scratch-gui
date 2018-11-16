@@ -52,8 +52,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
-                    initPreviewInfo,
-                    initTutorialLibrary
+                    initPreviewInfo
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
 
@@ -67,16 +66,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else {
                     const tutorialId = detectTutorialId();
-                    if (tutorialId === null) {
-                        if (props.showPreviewInfo) {
-                            // Show preview info if requested and no tutorial ID found
-                            initializedGui = initPreviewInfo(initializedGui);
-                        }
-                    } else if (tutorialId === 'all') {
-                        // Specific tutorials are set in setActiveCards in the GUI container.
-                        // Handle ?tutorial=all here for beta, if we decide to keep this for the
-                        // project page, this functionality should move to GUI container also.
-                        initializedGui = initTutorialLibrary(initializedGui);
+                    if (tutorialId === null && props.showPreviewInfo) {
+                        // Show preview info if requested and no tutorial ID found
+                        initializedGui = initPreviewInfo(initializedGui);
                     }
                 }
                 reducers = {

@@ -93,18 +93,6 @@ const initTutorialCard = function (currentState, deckId) {
     );
 };
 
-const initTutorialLibrary = function (currentState) {
-    return Object.assign(
-        {},
-        currentState,
-        {
-            modals: {
-                tipsLibrary: true
-            }
-        }
-    );
-};
-
 const initPreviewInfo = function (currentState) {
     return Object.assign(
         {},
@@ -150,6 +138,5 @@ export {
     initFullScreen,
     initPlayer,
     initPreviewInfo,
-    initTutorialCard,
-    initTutorialLibrary
+    initTutorialCard
 };

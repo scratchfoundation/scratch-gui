@@ -33,22 +33,44 @@ class LibraryItem extends React.PureComponent {
             'handleMouseEnter',
             'handleMouseLeave'
         ]);
-        this.state = Object.assign(this.state || {}, {
-            iconURI: props.iconURL // may be undefined if we're using iconMD5 instead
-        });
+        this.state = {};
+        Object.assign(this.state, this._loadIconFromProps(props));
     }
     componentWillReceiveProps (nextProps) {
-        if (nextProps.iconURL) {
-            this.setState({iconURI: nextProps.iconURL});
-        } else if ((!this.state.iconURI) || nextProps.iconMD5 !== this.props.iconMD5) {
+        const newState = this._loadIconFromProps(nextProps);
+        this.setState(newState);
+    }
+    /**
+     * Calculate the state changes necessary to load the icon specified in the provided properties. If the component is
+     * mounted, call setState() with the return value of this function. If the component has not yet mounted, use the
+     * return value of this function as initial state for the component.
+     *
+     * @param {object} props - the new properties for this component, including either iconMD5 or iconURL
+     * @returns {object} - the new state values, if any.
+     */
+    _loadIconFromProps (props) {
+        if (props.iconURL) {
+            return {
+                iconURI: props.iconURL,
+                lastRequestedMD5: null
+            };
+        }
+        if (this.state.lastRequestedMD5 !== props.iconMD5) {
             // TODO: adjust libraries to be more storage-friendly; don't use split() here.
-            const [md5, ext] = nextProps.iconMD5.split('.');
+            const [md5, ext] = props.iconMD5.split('.');
             const assetType = getAssetTypeForExtension(ext);
             storage.load(assetType, md5)
                 .then(asset => {
-                    this.setState({iconURI: asset.encodeDataURI()});
+                    this.setState({
+                        iconURI: asset.encodeDataURI()
+                    });
                 });
+            return {
+                lastRequestedMD5: props.iconMD5
+            };
         }
+        // Nothing to do - don't change any state.
+        return {};
     }
     handleBlur () {
         this.props.onBlur(this.props.id);

@@ -7,34 +7,48 @@ import {
     getIsShowingWithId
 } from '../reducers/project-state';
 
+/**
+ * Watches for project to finish updating before taking some action.
+ *
+ * To use ProjectWatcher, pass it a callback function using the onDoneUpdating prop.
+ * ProjectWatcher passes a waitForUpdate function to its children, which they can call
+ * to set ProjectWatcher to request that it call the onDoneUpdating callback when
+ * project is no longer updating.
+ */
 class ProjectWatcher extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'setRequesting'
+            'waitForUpdate'
         ]);
 
         this.state = {
-            requesting: false
+            waiting: false
         };
     }
     componentDidUpdate (prevProps) {
-        if (this.state.requesting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
-            this.props.onShowingWithId();
-            this.setState({ // eslint-disable-line react/no-did-update-set-state
-                requesting: false
-            });
+        if (this.state.waiting && this.props.isShowingWithId && !prevProps.isShowingWithId) {
+            this.fulfill();
         }
-
     }
-    setRequesting () {
-        this.setState({
-            requesting: true
+    fulfill () {
+        this.props.onDoneUpdating();
+        this.setState({ // eslint-disable-line react/no-did-update-set-state
+            waiting: false
         });
+    }
+    waitForUpdate (isUpdating) {
+        if (isUpdating) {
+            this.setState({
+                waiting: true
+            });
+        } else { // fulfill immediately
+            this.fulfill();
+        }
     }
     render () {
         return this.props.children(
-            this.setRequesting
+            this.waitForUpdate
         );
     }
 }
@@ -42,11 +56,11 @@ class ProjectWatcher extends React.Component {
 ProjectWatcher.propTypes = {
     children: PropTypes.func,
     isShowingWithId: PropTypes.bool,
-    onShowingWithId: PropTypes.func
+    onDoneUpdating: PropTypes.func
 };
 
 ProjectWatcher.defaultProps = {
-    onShowingWithId: () => {}
+    onDoneUpdating: () => {}
 };
 
 const mapStateToProps = state => {

@@ -62,10 +62,7 @@ const projectData = translateFunction => {
                         md5ext: '83a9787d4cb6f3b7632b4ddfebf74367.wav'
                     }
                 ],
-                volume: 100,
-                tempo: 60,
-                videoTransparency: 50,
-                videoState: 'off'
+                volume: 100
             },
             {
                 isStage: false,

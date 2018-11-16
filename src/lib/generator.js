@@ -114,7 +114,7 @@ class Generator {
     }
 
     getScripts () {
-        return this.currentTarget.blocks.getScripts();
+        return this.currentTarget.blocks.getScripts().filter(blockId => !this.getBlock(blockId).shadow);
     }
 
     /**

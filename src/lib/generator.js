@@ -120,12 +120,13 @@ class Generator {
     /**
      * Generate code for RenderedTarget's all blocks to the specified language.
      * @param {RenderedTarget} target RenderedTarget to generate code from.
+     * @param {object} options Options to generate code.
      * @return {string} Generated code.
      */
-    targetToCode (target) {
+    targetToCode_ (target, options) {
         this.currentTarget = target;
 
-        this.init();
+        this.init(options);
 
         const codes = [];
         const proceduresCodes = [];
@@ -158,7 +159,7 @@ class Generator {
         }
         code += codes.join('\n');
 
-        code = this.finish(code);
+        code = this.finish(code, options);
 
         // Final scrubbing of whitespace.
         code = code.replace(/^\s+\n/, '');
@@ -166,6 +167,39 @@ class Generator {
         code = code.replace(/[ \t]+\n/g, '\n');
 
         return code;
+    }
+
+    /**
+     * Generate code for RenderedTarget's all blocks to the specified language.
+     * @param {RenderedTarget} target RenderedTarget to generate code from.
+     * @param {object} options Options to generate code.
+     * @return {string} Generated code.
+     */
+    targetToCode (target, options) {
+        this.initTargets(options);
+        const code = this.targetToCode_(target, options);
+        return this.finishTargets(code, options);
+    }
+
+    /**
+     * Generate code for array of RenderedTarget's all blocks to the specified language.
+     * @param {Array} targets Array of RenderedTarget to generate code from.
+     * @param {object} options Options to generate code.
+     * @return {string} Generated code.
+     */
+    targetsToCode (targets, options) {
+        this.initTargets(options);
+
+        const codes = [];
+        targets.forEach(target => {
+            const code = this.targetToCode_(target, options);
+            if (code.length > 0) {
+                codes.push(code);
+            }
+        });
+        const code = codes.join('\n');
+
+        return this.finishTargets(code, options);
     }
 
     // The following are some helpful functions which can be used by multiple
@@ -196,14 +230,14 @@ class Generator {
         return blocks;
     }
 
-    getDescendants (block, opt_ignoreShadows) {
+    getDescendants (block, ignoreShadows) {
         const blocks = [block];
         const childBlocks = this.getChildren(block);
-        for (let child, i = 0; child = childBlocks[i]; i++) {
-            if (!opt_ignoreShadows || !child.shadow) {
-                blocks.push.apply(blocks, this.getDescendants(child, opt_ignoreShadows));
+        childBlocks.forEach(child => {
+            if (!ignoreShadows || !child.shadow) {
+                blocks.push.apply(blocks, this.getDescendants(child, ignoreShadows));
             }
-        }
+        });
         return blocks;
     }
 
@@ -399,22 +433,47 @@ class Generator {
     }
 
     /**
-     * Hook for code to run before code generation starts.
+     * Hook for code to run before a target code generation starts.
      * Subclasses may override this, e.g. to initialise the database of variable
      * names.
+     * @param {!object} options Options to generate code.
      */
-    init () {
+    init (options) { // eslint-disable-line no-unused-vars
         // Optionally override
     }
 
     /**
-     * Hook for code to run at end of code generation.
+     * Hook for code to run at end of a target code generation.
      * Subclasses may override this, e.g. to prepend the generated code with the
      * variable definitions.
      * @param {string} code Generated code.
+     * @param {!object} options Options to generate code.
      * @return {string} Completed code.
      */
-    finish (code) {
+    finish (code, options) { // eslint-disable-line no-unused-vars
+        // Optionally override
+        return code;
+    }
+
+    /**
+     * Hook for code to run before all targets code generation starts.
+     * Subclasses may override this, e.g. to initialise the database of variable
+     * names.
+     * @param {!object} options Options to generate code.
+     */
+    initTargets (options) { // eslint-disable-line no-unused-vars
+        // Optionally override
+    }
+
+    /**
+     * Hook for code to run at end of all targets code generation.
+     * Subclasses may override this, e.g. to prepend the generated code with the
+     * variable definitions.
+     * @param {string} code Generated code.
+     * @param {!object} options Options to generate code.
+     * @return {string} Completed code.
+     */
+    finishTargets (code, options) { // eslint-disable-line no-unused-vars
         // Optionally override
         return code;
     }
@@ -526,8 +585,8 @@ class Generator {
         const parent = this.getBlock(block.parent);
         if (parent) {
             const inputs = this.getInputs(parent);
-            for (let name in inputs) {
-                if (block.id == inputs[name].block) {
+            for (const name in inputs) {
+                if (block.id === inputs[name].block) {
                     return true;
                 }
             }

@@ -116,4 +116,28 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
     });
+
+    test('projectId change should not trigger cloudProvider connection unless isShowingWithId becomes true', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={stillLoadingStore}
+                username="user"
+                vm={vm}
+            />
+        );
+        mounted.setProps({
+            projectId: 'a different id'
+        });
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+        mounted.setProps({
+            isShowingWithId: true,
+            loadingState: LoadingState.SHOWING_WITH_ID
+        });
+        expect(vm.setCloudProvider.mock.calls.length).toBe(1);
+        expect(CloudProvider).toHaveBeenCalledTimes(1);
+    });
 });

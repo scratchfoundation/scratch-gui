@@ -146,6 +146,15 @@ test('doneUpdatingProject with id shows with id', () => {
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
+test('doneUpdatingProject with id, before copy, creates copy', () => {
+    const initialState = {
+        loadingState: LoadingState.UPDATING_BEFORE_COPY
+    };
+    const action = doneUpdatingProject(initialState.loadingState);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.CREATING_COPY);
+});
+
 test('doneUpdatingProject with id, before new, fetches default project', () => {
     const initialState = {
         loadingState: LoadingState.UPDATING_BEFORE_NEW
@@ -251,13 +260,13 @@ test('autoUpdateProject should prepare to update', () => {
     expect(resultState.loadingState).toBe(LoadingState.AUTO_UPDATING);
 });
 
-test('saveProjectAsCopy should prepare to save as a copy', () => {
+test('saveProjectAsCopy should save, before preparing to save as a copy', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
     const action = saveProjectAsCopy();
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.CREATING_COPY);
+    expect(resultState.loadingState).toBe(LoadingState.UPDATING_BEFORE_COPY);
 });
 
 test('remixProject should prepare to remix', () => {

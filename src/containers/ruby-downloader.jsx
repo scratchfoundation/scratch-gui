@@ -14,25 +14,18 @@ class RubyDownloader extends React.Component {
         ]);
     }
     saveRuby () {
-        let code = 'require "smalruby3"\n';
-
-        const targets = {};
+        const idToTarget = {};
         this.props.vm.runtime.targets.forEach(target => {
-            targets[target.id] = target;
+            idToTarget[target.id] = target;
         });
-        const sprites = [targets[this.props.stage.id]];
+        const targets = [idToTarget[this.props.stage.id]];
         for (const id in this.props.sprites) {
             const sprite = this.props.sprites[id];
-            sprites[sprite.order + 1] = targets[id];
+            targets[sprite.order + 1] = idToTarget[id];
         }
-
-        sprites.forEach(sprite => {
-            const spriteNewCode = RubyGenerator.spriteNew(sprite);
-            let bodyCode = RubyGenerator.targetToCode(sprite);
-            if (bodyCode.length > 0) {
-                bodyCode = RubyGenerator.prefixLines(bodyCode, RubyGenerator.INDENT);
-            }
-            code += `\n${spriteNewCode} do\n${bodyCode}end\n`;
+        const code = RubyGenerator.targetsToCode(targets, {
+            requires: ['smalruby3'],
+            withSpriteNew: true
         });
 
         return new Blob([code], {

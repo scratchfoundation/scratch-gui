@@ -92,13 +92,80 @@ RubyGenerator.ORDER_AND_OR = 21;           // and or
 RubyGenerator.ORDER_NONE = 99;             // (...)
 /* eslint-enable no-multi-spaces */
 
-RubyGenerator.init = function () {
+RubyGenerator.init = function (options) { // eslint-disable-line no-unused-vars
     this.definitions_ = {};
     if (this.variableDB_) {
         this.variableDB_.reset();
     } else {
         this.variableDB_ = new Blockly.Names(RubyGenerator.RESERVED_WORDS_);
     }
+};
+
+RubyGenerator.finish = function (code, options) {
+    const defs = [];
+    for (const name in this.definitions_) {
+        const def = this.definitions_[name];
+        if (this.isString(def)) {
+            if (name.match(/^require__/)) {
+                this.requires_[name] = def;
+            } else if (name.match(/^prepare__/)) {
+                this.prepares_[name] = def;
+            } else {
+                defs.push(def);
+            }
+        }
+    }
+
+    const comments = RubyGenerator.getTargetCommentTexts();
+    if (comments.length > 0) {
+        const commentCodes = comments.map(comment => `${this.prefixLines(comment, '# ')}\n`);
+        code = `${commentCodes.join('\n')}\n${code}`;
+    }
+
+    if (options && options.withSpriteNew) {
+        const spriteNewCode = this.spriteNew(this.currentTarget);
+        if (code.length > 0) {
+            code = this.prefixLines(code, this.INDENT);
+        }
+        code = `${spriteNewCode} do\n${code}end\n`;
+    }
+
+    if (defs.length === 0 && code.length === 0) {
+        return '';
+    }
+
+    let s = '';
+    if (defs.length > 0) {
+        s += `${defs.join('\n')}\n\n`;
+    }
+
+    return s + code;
+};
+
+RubyGenerator.initTargets = function (options) {
+    this.requires_ = {};
+    this.prepares_ = {};
+
+    if (options && options.hasOwnProperty('requires')) {
+        options.requires.forEach(name => {
+            this.requires_[`require__${name}`] = `require "${name}"`;
+        });
+    }
+};
+
+RubyGenerator.finishTargets = function (code, options) { // eslint-disable-line no-unused-vars
+    let s = '';
+    const requires = Object.keys(this.requires_).map(name => this.requires_[name]);
+    if (requires.length > 0) {
+        s += `${requires.join('\n')}\n\n`;
+    }
+
+    const prepares = Object.keys(this.prepares_).map(name => this.prepares_[name]);
+    if (prepares.length > 0) {
+        s += `${prepares.join('\n')}\n\n`;
+    }
+
+    return s + code;
 };
 
 RubyGenerator.isString = function (s) {
@@ -242,43 +309,6 @@ RubyGenerator.spriteNew = function (renderedTarget) {
     const klass = renderedTarget.isStage ? 'Stage' : 'Sprite';
     const name = renderedTarget.sprite.name;
     return `${klass}.new(${this.quote_(name)}${code})`;
-};
-
-RubyGenerator.finish = function (code) {
-    const requires = [];
-    const prepares = [];
-    const defs = [];
-
-    for (const name in RubyGenerator.definitions_) {
-        const def = this.definitions_[name];
-        if (this.isString(def)) {
-            if (name.match(/^require__/)) {
-                requires.push(def);
-            } else if (name.match(/^prepare__/)) {
-                prepares.push(def);
-            } else {
-                defs.push(def);
-            }
-        }
-    }
-    if (requires.length === 0 &&
-        prepares.length === 0 &&
-        defs.length === 0 &&
-        code.length === 0) {
-        return '';
-    }
-    let allDefs = '';
-    if (requires.length > 0) {
-        allDefs += `${requires.join('\n')}\n\n`;
-    }
-    if (prepares.length > 0) {
-        allDefs += `${prepares.join('\n')}\n\n`;
-    }
-    if (defs.length > 0) {
-        allDefs += `${defs.join('\n')}\n\n`;
-    }
-
-    return allDefs + code;
 };
 
 RubyGenerator.scrubNakedValue = function (line) {

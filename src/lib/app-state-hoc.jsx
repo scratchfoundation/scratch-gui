@@ -52,7 +52,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
-                    initTutorialCard
+                    initPreviewInfo,
+                    initTutorialLibrary
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
 
@@ -66,11 +67,16 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else {
                     const tutorialId = detectTutorialId();
-                    if (tutorialId !== null) {
-                        // When loading a tutorial from the URL,
-                        // load w/o preview modal
-                        // open requested tutorial card
-                        initializedGui = initTutorialCard(initializedGui, tutorialId);
+                    if (tutorialId === null) {
+                        if (props.showPreviewInfo) {
+                            // Show preview info if requested and no tutorial ID found
+                            initializedGui = initPreviewInfo(initializedGui);
+                        }
+                    } else if (tutorialId === 'all') {
+                        // Specific tutorials are set in setActiveCards in the GUI container.
+                        // Handle ?tutorial=all here for beta, if we decide to keep this for the
+                        // project page, this functionality should move to GUI container also.
+                        initializedGui = initTutorialLibrary(initializedGui);
                     }
                 }
                 reducers = {
@@ -104,12 +110,15 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             const {
                 isFullScreen, // eslint-disable-line no-unused-vars
                 isPlayerOnly, // eslint-disable-line no-unused-vars
+                showPreviewInfo, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
             return (
                 <Provider store={this.store}>
                     <ConnectedIntlProvider>
-                        <WrappedComponent {...componentProps} />
+                        <WrappedComponent
+                            {...componentProps}
+                        />
                     </ConnectedIntlProvider>
                 </Provider>
             );
@@ -117,7 +126,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     }
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
-        isPlayerOnly: PropTypes.bool
+        isPlayerOnly: PropTypes.bool,
+        showPreviewInfo: PropTypes.bool
     };
     return AppStateWrapper;
 };

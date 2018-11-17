@@ -36,7 +36,7 @@ describe('projectSaverHOC', () => {
                 loadingState={LoadingState.SHOWING_WITH_ID}
                 store={store}
                 vm={vm}
-                onUpdateProject={mockedUpdateProject}
+                onAutoUpdateProject={mockedUpdateProject}
             />
         );
         mounted.setProps({
@@ -59,7 +59,7 @@ describe('projectSaverHOC', () => {
                 loadingState={LoadingState.LOADING_VM_WITH_ID}
                 store={store}
                 vm={vm}
-                onUpdateProject={mockedSaveProject}
+                onAutoUpdateProject={mockedSaveProject}
             />
         );
         mounted.setProps({
@@ -142,9 +142,11 @@ describe('projectSaverHOC', () => {
     });
 
     test('if we enter creating new state, vm project should be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -164,13 +166,16 @@ describe('projectSaverHOC', () => {
             isCreatingNew: true,
             loadingState: LoadingState.CREATING_NEW
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
     });
 
-    test('if we enter remixing state, vm project should be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+    test('if we enter remixing state, vm project should be requested, and alert should show', () => {
+        const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -184,20 +189,24 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
+                onShowCreatingAlert={mockedShowCreatingAlert}
             />
         );
         mounted.setProps({
             isRemixing: true,
             loadingState: LoadingState.REMIXING
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
+        expect(mockedShowCreatingAlert).toHaveBeenCalled();
     });
 
-
-    test('if we enter creating copy state, vm project should be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+    test('if we enter creating copy state, vm project should be requested, and alert should show', () => {
+        const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -211,19 +220,23 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
+                onShowCreatingAlert={mockedShowCreatingAlert}
             />
         );
         mounted.setProps({
             isCreatingCopy: true,
             loadingState: LoadingState.CREATING_COPY
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
+        expect(mockedShowCreatingAlert).toHaveBeenCalled();
     });
 
-    test('if we enter updating/saving state, vm project shold be requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+    test('if we enter updating/saving state, vm project should be requested', () => {
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -239,15 +252,19 @@ describe('projectSaverHOC', () => {
         );
         mounted.setProps({
             isUpdating: true,
-            loadingState: LoadingState.UPDATING
+            loadingState: LoadingState.MANUAL_UPDATING
         });
-        expect(vm.saveProjectSb3).toHaveBeenCalled();
+        expect(mockedStoreProject).toHaveBeenCalled();
     });
 
-    test('if we are already in updating/saving state, vm project shold be NOT requested', () => {
-        vm.saveProjectSb3 = jest.fn(() => Promise.resolve());
+    test('if we are already in updating/saving state, vm project ' +
+            'should NOT requested, alert should NOT show', () => {
+        const mockedShowCreatingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        // The first wrapper is redux's Connect HOC
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -255,17 +272,70 @@ describe('projectSaverHOC', () => {
                 isCreatingNew={false}
                 isShowingWithId={false}
                 isShowingWithoutId={false}
-                loadingState={LoadingState.UPDATING}
+                loadingState={LoadingState.MANUAL_UPDATING}
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
+                onShowCreatingAlert={mockedShowCreatingAlert}
             />
         );
         mounted.setProps({
             isUpdating: true,
-            loadingState: LoadingState.UPDATING,
+            loadingState: LoadingState.AUTO_UPDATING,
             reduxProjectId: '99' // random change to force a re-render and componentDidUpdate
         });
-        expect(vm.saveProjectSb3).not.toHaveBeenCalled();
+        expect(mockedStoreProject).not.toHaveBeenCalled();
+        expect(mockedShowCreatingAlert).not.toHaveBeenCalled();
+    });
+
+    test('if user manually saves, saving alert should show', () => {
+        const mockedShowSavingAlert = jest.fn();
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isShowingWithoutId
+                canCreateNew={false}
+                isCreatingNew={false}
+                isManualUpdating={false}
+                isShowingWithId={false}
+                isUpdating={false}
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                store={store}
+                vm={vm}
+                onShowSavingAlert={mockedShowSavingAlert}
+            />
+        );
+        mounted.setProps({
+            isManualUpdating: true,
+            isUpdating: true
+        });
+        expect(mockedShowSavingAlert).toHaveBeenCalled();
+    });
+
+    test('if autosaving, saving alert should NOT show', () => {
+        const mockedShowSavingAlert = jest.fn();
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isShowingWithoutId
+                canCreateNew={false}
+                isCreatingNew={false}
+                isManualUpdating={false}
+                isShowingWithId={false}
+                isUpdating={false}
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                store={store}
+                vm={vm}
+                onShowSavingAlert={mockedShowSavingAlert}
+            />
+        );
+        mounted.setProps({
+            isUpdating: true
+        });
+        expect(mockedShowSavingAlert).not.toHaveBeenCalled();
     });
 });

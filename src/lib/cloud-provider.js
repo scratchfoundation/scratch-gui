@@ -34,35 +34,55 @@ class CloudProvider {
 
         this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + cloudHost);
 
-        this.connection.onerror = e => {
-            log.error(`Websocket connection error: ${JSON.stringify(e)}`);
+        this.connection.onerror = this.onError.bind(this);
+        this.connection.onmessage = this.onMessage.bind(this);
+        this.connection.onopen = this.onOpen.bind(this);
+        this.connection.onclose = this.onClose.bind(this);
+    }
 
-            // TODO Add re-connection attempt logic here
-        };
+    onError (event) {
+        log.error(`Websocket connection error: ${JSON.stringify(event)}`);
+        // TODO Add re-connection attempt logic here
+        this.clear();
+    }
 
-        this.connection.onmessage = event => {
-            const messageString = event.data;
-            log.info(`Received websocket message: ${messageString}`);
-            const message = JSON.parse(messageString);
-            if (message.method === 'set') {
-                const varData = {
-                    varUpdate: {
-                        name: message.name,
-                        value: message.value
-                    }
-                };
-                this.vm.postIOData('cloud', varData);
-            }
-        };
+    onMessage (event) {
+        const messageString = event.data;
+        log.info(`Received websocket message: ${messageString}`);
+        // Multiple commands can be received, newline separated
+        messageString.split('\n').forEach(message => {
+            const parsedData = this.parseMessage(JSON.parse(message));
+            this.vm.postIOData('cloud', parsedData);
+        });
+    }
 
-        this.connection.onopen = () => {
-            this.writeToServer('handshake');
-            log.info(`Successfully connected to clouddata server.`);
-        };
+    onOpen () {
+        this.writeToServer('handshake');
+        log.info(`Successfully connected to clouddata server.`);
+    }
 
-        this.connection.onclose = () => {
-            log.info(`Closed connection to websocket`);
-        };
+    onClose () {
+        log.info(`Closed connection to websocket`);
+    }
+
+    parseMessage (message) {
+        const varData = {};
+        switch (message.method) {
+        case 'ack': {
+            varData.varCreate = {
+                name: message.name
+            };
+            break;
+        }
+        case 'set': {
+            varData.varUpdate = {
+                name: message.name,
+                value: message.value
+            };
+            break;
+        }
+        }
+        return varData;
     }
 
     /**
@@ -79,10 +99,13 @@ class CloudProvider {
         msg.user = this.username;
         msg.project_id = this.projectId;
 
+        // Optional string params can use simple falsey undefined check
         if (dataName) msg.name = dataName;
-        if (dataValue) msg.value = dataValue;
-        if (dataIndex) msg.index = dataIndex;
         if (dataNewName) msg.new_name = dataNewName;
+
+        // Optional number params need different undefined check
+        if (typeof dataValue !== 'undefined') msg.value = dataValue;
+        if (typeof dataValue !== 'undefined') msg.index = dataIndex;
 
         const dataToWrite = JSON.stringify(msg);
         this.sendCloudData(dataToWrite);
@@ -95,6 +118,16 @@ class CloudProvider {
     sendCloudData (data) {
         this.connection.send(`${data}\n`);
         log.info(`Sent message to clouddata server: ${data}`);
+    }
+
+    /**
+     * Provides an API for the VM's cloud IO device to create
+     * a new cloud variable on the server.
+     * @param {string} name The name of the variable to create
+     * @param {string | number} value The value of the new cloud variable.
+     */
+    createVariable (name, value) {
+        this.writeToServer('create', name, value);
     }
 
     /**
@@ -112,7 +145,12 @@ class CloudProvider {
      * provider of references related to the cloud data project.
      */
     requestCloseConnection () {
-        this.connection.close();
+        if (this.connection &&
+            this.connection.readyState !== WebSocket.CLOSING &&
+            this.connection.readyState !== WebSocket.CLOSED) {
+
+            this.connection.close();
+        }
         this.clear();
     }
 

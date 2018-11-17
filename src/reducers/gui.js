@@ -82,9 +82,6 @@ const initTutorialCard = function (currentState, deckId) {
         {},
         currentState,
         {
-            modals: {
-                previewInfo: false
-            },
             cards: {
                 visible: true,
                 content: decks,
@@ -93,6 +90,30 @@ const initTutorialCard = function (currentState, deckId) {
                 x: 0,
                 y: 0,
                 dragging: false
+            }
+        }
+    );
+};
+
+const initTutorialLibrary = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                tipsLibrary: true
+            }
+        }
+    );
+};
+
+const initPreviewInfo = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                previewInfo: true
             }
         }
     );
@@ -131,5 +152,7 @@ export {
     guiMiddleware,
     initFullScreen,
     initPlayer,
-    initTutorialCard
+    initPreviewInfo,
+    initTutorialCard,
+    initTutorialLibrary
 };

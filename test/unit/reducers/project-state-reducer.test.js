@@ -2,8 +2,10 @@
 import projectStateReducer from '../../../src/reducers/project-state';
 import {
     LoadingState,
+    autoUpdateProject,
     doneCreatingProject,
     doneUpdatingProject,
+    manualUpdateProject,
     onFetchedProjectData,
     onLoadedProject,
     onProjectUploadStarted,
@@ -11,8 +13,7 @@ import {
     remixProject,
     requestNewProject,
     saveProjectAsCopy,
-    setProjectId,
-    updateProject
+    setProjectId
 } from '../../../src/reducers/project-state';
 
 test('initialState', () => {
@@ -106,7 +107,7 @@ test('onLoadedProject upload, with canSave true, prepares to save', () => {
     };
     const action = onLoadedProject(initialState.loadingState, true);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.UPDATING);
+    expect(resultState.loadingState).toBe(LoadingState.AUTO_UPDATING);
 });
 
 test('onLoadedProject with id shows with id', () => {
@@ -138,7 +139,7 @@ test('onLoadedProject new, to save shows without id', () => {
 
 test('doneUpdatingProject with id shows with id', () => {
     const initialState = {
-        loadingState: LoadingState.UPDATING
+        loadingState: LoadingState.MANUAL_UPDATING
     };
     const action = doneUpdatingProject(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
@@ -232,13 +233,22 @@ test('onProjectUploadStarted when showing project without id should load', () =>
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('updateProject should prepare to update', () => {
+test('manualUpdateProject should prepare to update', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
-    const action = updateProject();
+    const action = manualUpdateProject();
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.UPDATING);
+    expect(resultState.loadingState).toBe(LoadingState.MANUAL_UPDATING);
+});
+
+test('autoUpdateProject should prepare to update', () => {
+    const initialState = {
+        loadingState: LoadingState.SHOWING_WITH_ID
+    };
+    const action = autoUpdateProject();
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.AUTO_UPDATING);
 });
 
 test('saveProjectAsCopy should prepare to save as a copy', () => {
@@ -261,26 +271,85 @@ test('remixProject should prepare to remix', () => {
 
 test('projectError from various states should show error', () => {
     const startStates = [
+        LoadingState.AUTO_UPDATING,
         LoadingState.CREATING_NEW,
         LoadingState.FETCHING_NEW_DEFAULT,
         LoadingState.FETCHING_WITH_ID,
         LoadingState.LOADING_VM_NEW_DEFAULT,
         LoadingState.LOADING_VM_WITH_ID,
+        LoadingState.MANUAL_UPDATING,
         LoadingState.REMIXING,
         LoadingState.CREATING_COPY,
-        LoadingState.UPDATING_BEFORE_NEW,
-        LoadingState.UPDATING
+        LoadingState.UPDATING_BEFORE_NEW
     ];
     for (const startState of startStates) {
         const initialState = {
             error: null,
             loadingState: startState
         };
-        const action = projectError({message: 'Error string'});
+        const action = projectError('Error string');
+        const resultState = projectStateReducer(initialState, action);
+        expect(resultState.error).toEqual('Error string');
+    }
+});
+
+test('fatal projectError should show error state', () => {
+    const startStates = [
+        LoadingState.FETCHING_NEW_DEFAULT,
+        LoadingState.FETCHING_WITH_ID,
+        LoadingState.LOADING_VM_NEW_DEFAULT,
+        LoadingState.LOADING_VM_WITH_ID
+    ];
+    for (const startState of startStates) {
+        const initialState = {
+            error: null,
+            loadingState: startState
+        };
+        const action = projectError('Error string');
         const resultState = projectStateReducer(initialState, action);
         expect(resultState.loadingState).toBe(LoadingState.ERROR);
-        expect(resultState.error).toEqual({message: 'Error string'});
     }
+});
+
+test('non-fatal projectError should show normal state', () => {
+    const startStates = [
+        LoadingState.AUTO_UPDATING,
+        LoadingState.CREATING_COPY,
+        LoadingState.MANUAL_UPDATING,
+        LoadingState.REMIXING,
+        LoadingState.UPDATING_BEFORE_NEW
+    ];
+    for (const startState of startStates) {
+        const initialState = {
+            error: null,
+            loadingState: startState
+        };
+        const action = projectError('Error string');
+        const resultState = projectStateReducer(initialState, action);
+        expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+    }
+});
+
+test('projectError when creating new while viewing project with id should show project with id', () => {
+    const initialState = {
+        error: null,
+        loadingState: LoadingState.CREATING_NEW,
+        projectId: '12345'
+    };
+    const action = projectError('Error string');
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+});
+
+test('projectError when creating new while logged out, looking at default project should show default project', () => {
+    const initialState = {
+        error: null,
+        loadingState: LoadingState.CREATING_NEW,
+        projectId: '0'
+    };
+    const action = projectError('Error string');
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
 test('projectError from showing project should show error', () => {
@@ -288,8 +357,8 @@ test('projectError from showing project should show error', () => {
         error: null,
         loadingState: LoadingState.FETCHING_WITH_ID
     };
-    const action = projectError({message: 'Error string'});
+    const action = projectError('Error string');
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.ERROR);
-    expect(resultState.error).toEqual({message: 'Error string'});
+    expect(resultState.error).toEqual('Error string');
 });

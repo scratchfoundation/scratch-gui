@@ -12,6 +12,7 @@ import React from 'react';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuSection} from '../menu/menu.jsx';
 import MenuItemContainer from '../../containers/menu-item.jsx';
+import UserAvatar from './user-avatar.jsx';
 import dropdownCaret from './dropdown-caret.svg';
 
 import styles from './account-nav.css';
@@ -40,9 +41,9 @@ const AccountNavComponent = ({
             onMouseUp={onClick}
         >
             {thumbnailUrl ? (
-                <img
+                <UserAvatar
                     className={styles.avatar}
-                    src={thumbnailUrl}
+                    imageUrl={thumbnailUrl}
                 />
             ) : null}
             <span className={styles.profileName}>

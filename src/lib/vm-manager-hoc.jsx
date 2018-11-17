@@ -73,8 +73,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
-                projectId,
-                username,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,

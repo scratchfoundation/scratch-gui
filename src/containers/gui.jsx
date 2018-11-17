@@ -13,6 +13,8 @@ import {
     getIsShowingProject
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
+import {detectTutorialId} from '../lib/tutorial-from-url';
+import {activateDeck} from '../reducers/cards';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -33,6 +35,7 @@ import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
+import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
@@ -48,6 +51,7 @@ class GUI extends React.Component {
     componentDidMount () {
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
+        this.setActiveCards(detectTutorialId());
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -66,6 +70,11 @@ class GUI extends React.Component {
             this.props.onUpdateReduxProjectTitle(newTitle);
         }
     }
+    setActiveCards (tutorialId) {
+        if (tutorialId && tutorialId !== 'all') {
+            this.props.onUpdateReduxDeck(tutorialId);
+        }
+    }
     render () {
         if (this.props.isError) {
             throw new Error(
@@ -76,11 +85,11 @@ class GUI extends React.Component {
             assetHost,
             cloudHost,
             error,
-            hideIntro,
             isError,
             isShowingProject,
             onStorageInit,
             onUpdateProjectId,
+            onUpdateReduxDeck,
             onUpdateReduxProjectTitle,
             projectHost,
             projectId,
@@ -109,7 +118,6 @@ GUI.propTypes = {
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
@@ -120,6 +128,7 @@ GUI.propTypes = {
     onStorageInit: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    onUpdateReduxDeck: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -150,6 +159,7 @@ const mapStateToProps = state => {
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
+        previewInfoVisible: state.scratchGui.modals.previewInfo,
         projectId: state.scratchGui.projectState.projectId,
         targetIsStage: (
             state.scratchGui.targets.stage &&
@@ -171,6 +181,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateRubyTab: () => dispatch(activateTab(RUBY_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
+    onUpdateReduxDeck: tutorialId => dispatch(activateDeck(tutorialId)),
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
@@ -189,7 +200,8 @@ const WrappedGui = compose(
     ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,
-    vmManagerHOC
+    vmManagerHOC,
+    cloudManagerHOC
 )(ConnectedGUI);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;

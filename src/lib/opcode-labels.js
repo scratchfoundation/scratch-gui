@@ -89,8 +89,8 @@ const messages = defineMessages({
         id: 'gui.opcodeLabels.date'
     },
     sensing_current_dayofweek: {
-        defaultMessage: 'dayofweek',
-        description: 'Label for the current dayofweek monitor when shown on the stage',
+        defaultMessage: 'day of week',
+        description: 'Label for the current day of week monitor when shown on the stage',
         id: 'gui.opcodeLabels.dayofweek'
     },
     sensing_current_hour: {

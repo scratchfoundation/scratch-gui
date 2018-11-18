@@ -13,7 +13,8 @@ $z-index-tooltip: 47; /* tooltips should go over add buttons if they overlap */
 $z-index-monitor: 48; /* monitors go over add buttons */
 /* Block drag z-index: 50; set in scratch-blocks */
 
-$z-index-card: 490;
+$z-index-card: 480;
+$z-index-alerts: 490;
 $z-index-loader: 500;
 $z-index-modal: 510;
 
@@ -25,7 +26,6 @@ $z-index-stage-color-picker-background: 2000;
 $z-index-stage-with-color-picker: 2010;
 $z-index-stage-header: 5000;
 $z-index-stage-wrapper-overlay: 5000;
-$z-index-alerts: 5010;
 
 /* in most interfaces, the context menu is always on top */
 $z-index-context-menu: 10000;

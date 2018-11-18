@@ -6,7 +6,12 @@ import Box from '../box/box.jsx';
 import styles from './connection-modal.css';
 
 const Dots = props => (
-    <Box className={styles.dotsRow}>
+    <Box
+        className={classNames(
+            props.className,
+            styles.dotsRow
+        )}
+    >
         <div
             className={classNames(
                 styles.dotsHolder,
@@ -32,6 +37,7 @@ const Dots = props => (
 );
 
 Dots.propTypes = {
+    className: PropTypes.string,
     counter: PropTypes.number,
     error: PropTypes.bool,
     success: PropTypes.bool,

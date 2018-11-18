@@ -1,6 +1,7 @@
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 
 import Box from '../box/box.jsx';
 import Dots from './dots.jsx';
@@ -27,14 +28,15 @@ const ConnectingStep = props => (
             </Box>
         </Box>
         <Box className={styles.bottomArea}>
-            <Box className={styles.instructions}>
+            <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
                 {props.connectingMessage}
             </Box>
             <Dots
+                className={styles.bottomAreaItem}
                 counter={1}
                 total={3}
             />
-            <div className={styles.segmentedButton}>
+            <div className={classNames(styles.bottomAreaItem, styles.segmentedButton)}>
                 <button
                     disabled
                     className={styles.connectionButton}

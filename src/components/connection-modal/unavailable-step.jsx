@@ -57,9 +57,10 @@ const UnavailableStep = props => (
         <Box className={styles.bottomArea}>
             <Dots
                 error
+                className={styles.bottomAreaItem}
                 total={3}
             />
-            <Box className={styles.buttonRow}>
+            <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
                 <button
                     className={styles.connectionButton}
                     onClick={props.onScanning}

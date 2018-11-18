@@ -63,7 +63,7 @@ const AutoScanningStep = props => (
             </div>
         </Box>
         <Box className={styles.bottomArea}>
-            <Box className={styles.instructions}>
+            <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
                 {props.phase === PHASES.prescan && (
                     <FormattedMessage
                         defaultMessage="Have your device nearby, then begin searching."
@@ -80,60 +80,63 @@ const AutoScanningStep = props => (
                 )}
             </Box>
             <Dots
+                className={styles.bottomAreaItem}
                 counter={0}
                 total={3}
             />
-            {props.phase === PHASES.prescan && (
-                <button
-                    className={styles.connectionButton}
-                    onClick={props.onStartScan}
-                >
-                    <FormattedMessage
-                        defaultMessage="Start Searching"
-                        description="Button in prompt for starting a search"
-                        id="gui.connection.auto-scanning.start-search"
-                    />
-                </button>
-            )}
-            {props.phase === PHASES.pressbutton && (
-                <div className={styles.segmentedButton}>
+            <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
+                {props.phase === PHASES.prescan && (
                     <button
-                        disabled
                         className={styles.connectionButton}
+                        onClick={props.onStartScan}
                     >
                         <FormattedMessage
-                            defaultMessage="Searching..."
-                            description="Label indicating that search is in progress"
-                            id="gui.connection.connecting-searchbutton"
+                            defaultMessage="Start Searching"
+                            description="Button in prompt for starting a search"
+                            id="gui.connection.auto-scanning.start-search"
                         />
                     </button>
+                )}
+                {props.phase === PHASES.pressbutton && (
+                    <div className={styles.segmentedButton}>
+                        <button
+                            disabled
+                            className={styles.connectionButton}
+                        >
+                            <FormattedMessage
+                                defaultMessage="Searching..."
+                                description="Label indicating that search is in progress"
+                                id="gui.connection.connecting-searchbutton"
+                            />
+                        </button>
+                        <button
+                            className={styles.connectionButton}
+                            onClick={props.onRefresh}
+                        >
+                            <img
+                                className={styles.abortConnectingIcon}
+                                src={closeIcon}
+                            />
+                        </button>
+                    </div>
+                )}
+                {props.phase === PHASES.notfound && (
                     <button
                         className={styles.connectionButton}
                         onClick={props.onRefresh}
                     >
                         <img
-                            className={styles.abortConnectingIcon}
-                            src={closeIcon}
+                            className={styles.buttonIconLeft}
+                            src={backIcon}
+                        />
+                        <FormattedMessage
+                            defaultMessage="Try again"
+                            description="Button in prompt for trying a device search again"
+                            id="gui.connection.auto-scanning.try-again"
                         />
                     </button>
-                </div>
-            )}
-            {props.phase === PHASES.notfound && (
-                <button
-                    className={styles.connectionButton}
-                    onClick={props.onRefresh}
-                >
-                    <img
-                        className={styles.buttonIconLeft}
-                        src={backIcon}
-                    />
-                    <FormattedMessage
-                        defaultMessage="Try again"
-                        description="Button in prompt for trying a device search again"
-                        id="gui.connection.auto-scanning.try-again"
-                    />
-                </button>
-            )}
+                )}
+            </Box>
         </Box>
     </Box>
 );

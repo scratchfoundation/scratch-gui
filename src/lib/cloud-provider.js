@@ -79,7 +79,7 @@ class CloudProvider {
     }
 
     setTimeout (fn, time) {
-        log.info(`Reconnecting in ${time}ms, attempt ${this.connectionAttempts}`);
+        log.info(`Reconnecting in ${Math.floor(time / 1000)}s, attempt ${this.connectionAttempts}`);
         this._connectionTimeout = window.setTimeout(fn, time);
     }
 

@@ -391,8 +391,11 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}</SB3Downloader>
-                                    <RubyDownloader>{downloadProject => (
+                                </MenuSection>
+                                <MenuSection>
+                                    <RubyDownloader>{(className, downloadProject) => (
                                         <MenuItem
+                                            className={className}
                                             onClick={this.handleCloseFileMenuAndThen(downloadProject)}
                                         >
                                             <FormattedMessage

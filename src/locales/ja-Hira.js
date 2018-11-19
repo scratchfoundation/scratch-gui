@@ -6,7 +6,7 @@ export default {
     'gui.smalruby3.previewInfo.label': 'スモウルビー3.0をためしてみる',
     'gui.smalruby3.previewInfo.invitation': 'わたしたちはじせだいのスモウルビーをかいはつちゅうです。おためしください!',
     'gui.smalruby3.previewInfo.welcome': 'スモウルビー3.0 プレビューばんにようこそ!',
-    'gui.smalruby3.menuBar.downloadRubyCodeToComputer': 'コンピュータにルビーのコードをほぞんする',
+    'gui.smalruby3.menuBar.downloadRubyCodeToComputer': 'コンピュータにルビーをほぞんする',
     'gui.smalruby3.unsupportedBrowser.description': 'もうしわけありません。スモウルビー3.0はインターネットエクスプローラ、ビヴァルディ、オペラ、シルクをサポートしていません。グーグル クローム、モジラ ファイアーフォックス、マイクロソフト エッジのようなあたらしいブラウザのりようをおすすめします。',
     'gui.smalruby3.webglModal.description': 'ざんねんながら、ブラウザーやコンピューターが{webGlLink}ようです。このぎじゅつはスモウルビー3.0のじっこうにひっすです。'
 };

@@ -31,11 +31,6 @@ export default appTarget => {
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
         window.onbeforeunload = () => true;
-    } else {
-        window.onerror = e => {
-            alert('Uncaught error occurred–check the console'); // eslint-disable-line
-            throw e;
-        };
     }
 
     ReactDOM.render(

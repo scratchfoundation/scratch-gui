@@ -65,15 +65,17 @@ class CloudProvider {
 
     onClose () {
         log.info(`Closed connection to websocket`);
-        const exponentialTimeout = (Math.pow(2, this.connectionAttempts) - 1) * 1000;
-        const randomizedTimeout = this.randomizeDuration(exponentialTimeout);
+        const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
         this.setTimeout(this.reconnectNow.bind(this), randomizedTimeout);
     }
 
     reconnectNow () {
-        // Max connection attempts at 5, so timeout will max out in range [0, 31s]
-        this.connectionAttempts = Math.min(this.connectionAttempts + 1, 5);
+        this.connectionAttempts = this.connectionAttempts + 1;
         this.openConnection();
+    }
+
+    exponentialTimeout () {
+        return (Math.pow(2, Math.min(this.connectionAttempts, 5)) - 1) * 1000;
     }
 
     randomizeDuration (t) {
@@ -168,6 +170,7 @@ class CloudProvider {
         if (this.connection &&
             this.connection.readyState !== WebSocket.CLOSING &&
             this.connection.readyState !== WebSocket.CLOSED) {
+            log.info('Request close cloud connection without reconnecting');
             this.connection.onclose = () => {}; // Remove close listener to prevent reconnect
             this.connection.close();
         }

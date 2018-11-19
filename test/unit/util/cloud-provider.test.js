@@ -141,12 +141,17 @@ describe('CloudProvider', () => {
         cloudProvider.connection.close();
         expect(timeout).toEqual(31 * 1000); // 2^5 - 1
         expect(websocketConstructorCount).toBe(6);
-        expect(cloudProvider.connectionAttempts).toBe(5); // Maxed at 5
+        expect(cloudProvider.connectionAttempts).toBe(6);
 
         cloudProvider.connection.close();
         expect(timeout).toEqual(31 * 1000); // maxed out at 2^5 - 1
         expect(websocketConstructorCount).toBe(7);
-        expect(cloudProvider.connectionAttempts).toBe(5); // Maxed at 5
+        expect(cloudProvider.connectionAttempts).toBe(7);
+    });
+
+    test('exponentialTimeout caps connection attempt number', () => {
+        cloudProvider.connectionAttempts = 1000;
+        expect(cloudProvider.exponentialTimeout()).toEqual(31 * 1000);
     });
 
     test('requestCloseConnection does not try to reconnect', () => {

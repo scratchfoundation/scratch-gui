@@ -28,6 +28,8 @@ class CloudProvider {
      * @param {string} cloudHost The cloud data server to connect to.
      */
     openConnection () {
+        this.connectionAttempts += 1;
+
         try {
             this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost);
         } catch (e) {
@@ -58,14 +60,15 @@ class CloudProvider {
     }
 
     onOpen () {
-        this.connectionAttempts = 0; // Reset because we successfully connected
+        // Reset connection attempts to 1 to make sure any subsequent reconnects
+        // use connectionAttempts=1 to calculate timeout
+        this.connectionAttempts = 1;
         this.writeToServer('handshake');
         log.info(`Successfully connected to clouddata server.`);
     }
 
     onClose () {
         log.info(`Closed connection to websocket`);
-        this.connectionAttempts += 1;
         const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
         this.setTimeout(this.openConnection.bind(this), randomizedTimeout);
     }
@@ -79,7 +82,7 @@ class CloudProvider {
     }
 
     setTimeout (fn, time) {
-        log.info(`Reconnecting in ${Math.floor(time / 1000)}s, attempt ${this.connectionAttempts}`);
+        log.info(`Reconnecting in ${(time / 1000).toFixed(1)}s, attempt ${this.connectionAttempts}`);
         this._connectionTimeout = window.setTimeout(fn, time);
     }
 
@@ -167,7 +170,9 @@ class CloudProvider {
             this.connection.readyState !== WebSocket.CLOSING &&
             this.connection.readyState !== WebSocket.CLOSED) {
             log.info('Request close cloud connection without reconnecting');
-            this.connection.onclose = () => {}; // Remove close listener to prevent reconnect
+            // Remove listeners, after this point we do not want to react to connection updates
+            this.connection.onclose = () => {};
+            this.connection.onerror = () => {};
             this.connection.close();
         }
         this.clear();

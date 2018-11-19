@@ -103,45 +103,60 @@ describe('CloudProvider', () => {
         expect(vmIOData[1].varCreate.name).toEqual('name2');
     });
 
-    test('connecting sets connnection attempts back to 0', () => {
-        expect(cloudProvider.connectionAttempts).toBe(0);
-        cloudProvider.connectionAttempts = 10;
+    test('connnection attempts set back to 1 when socket is opened', () => {
+        cloudProvider.connectionAttempts = 100;
         cloudProvider.connection._open();
-        expect(cloudProvider.connectionAttempts).toBe(0);
+        expect(cloudProvider.connectionAttempts).toBe(1);
     });
 
     test('disconnect waits for a period equal to 2^k-1 before trying again', () => {
-        websocketConstructorCount = 0; // This is global, so set it back to 0 to start
-
-        cloudProvider.connection.close();
-        expect(timeout).toEqual(1 * 1000); // 2^1 - 1
-        expect(websocketConstructorCount).toBe(1);
+        websocketConstructorCount = 1; // This is global, so set it back to 1 to start
+        // Constructor attempts to open connection, so attempts is initially 1
         expect(cloudProvider.connectionAttempts).toBe(1);
 
+        // Make sure a close without a previous OPEN still waits 1s before reconnecting
         cloudProvider.connection.close();
-        expect(timeout).toEqual(3 * 1000); // 2^2 - 1
+        expect(timeout).toEqual(1 * 1000); // 2^1 - 1
         expect(websocketConstructorCount).toBe(2);
         expect(cloudProvider.connectionAttempts).toBe(2);
 
         cloudProvider.connection.close();
-        expect(timeout).toEqual(7 * 1000); // 2^3 - 1
+        expect(timeout).toEqual(3 * 1000); // 2^2 - 1
         expect(websocketConstructorCount).toBe(3);
         expect(cloudProvider.connectionAttempts).toBe(3);
 
         cloudProvider.connection.close();
-        expect(timeout).toEqual(15 * 1000); // 2^4 - 1
+        expect(timeout).toEqual(7 * 1000); // 2^3 - 1
         expect(websocketConstructorCount).toBe(4);
         expect(cloudProvider.connectionAttempts).toBe(4);
 
         cloudProvider.connection.close();
-        expect(timeout).toEqual(31 * 1000); // 2^5 - 1
+        expect(timeout).toEqual(15 * 1000); // 2^4 - 1
         expect(websocketConstructorCount).toBe(5);
         expect(cloudProvider.connectionAttempts).toBe(5);
 
         cloudProvider.connection.close();
-        expect(timeout).toEqual(31 * 1000); // maxed out at 2^5 - 1
+        expect(timeout).toEqual(31 * 1000); // 2^5 - 1
         expect(websocketConstructorCount).toBe(6);
         expect(cloudProvider.connectionAttempts).toBe(6);
+
+        cloudProvider.connection.close();
+        expect(timeout).toEqual(31 * 1000); // maxed out at 2^5 - 1
+        expect(websocketConstructorCount).toBe(7);
+        expect(cloudProvider.connectionAttempts).toBe(7);
+    });
+
+    test('close after connection is opened waits 1s before reconnecting', () => {
+        // This test is basically to check that opening the connection does not impact
+        // the time until reconnection for the first reconnect.
+        // It is easy to introduce a bug that causes reconnection time to be different
+        // based on whether an initial connection was made.
+        websocketConstructorCount = 1;
+        cloudProvider.connection._open();
+        cloudProvider.connection.close();
+        expect(timeout).toEqual(1 * 1000); // 2^1 - 1
+        expect(websocketConstructorCount).toBe(2);
+        expect(cloudProvider.connectionAttempts).toBe(2);
     });
 
     test('exponentialTimeout caps connection attempt number', () => {

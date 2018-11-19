@@ -58,6 +58,7 @@ class RubyDownloader extends React.Component {
             children
         } = this.props;
         return children(
+            this.props.className,
             this.downloadProject
         );
     }
@@ -73,6 +74,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
 
 RubyDownloader.propTypes = {
     children: PropTypes.func,
+    className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     sprites: PropTypes.objectOf(PropTypes.shape({
@@ -83,6 +85,9 @@ RubyDownloader.propTypes = {
         id: PropTypes.string
     }),
     vm: PropTypes.instanceOf(VM)
+};
+RubyDownloader.defaultProps = {
+    className: ''
 };
 
 const mapStateToProps = state => ({

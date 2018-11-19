@@ -58,20 +58,16 @@ class CloudProvider {
     }
 
     onOpen () {
-        this.connectionAttempts = 1; // Reset because we successfully connected
+        this.connectionAttempts = 0; // Reset because we successfully connected
         this.writeToServer('handshake');
         log.info(`Successfully connected to clouddata server.`);
     }
 
     onClose () {
         log.info(`Closed connection to websocket`);
+        this.connectionAttempts += 1;
         const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
-        this.setTimeout(this.reconnectNow.bind(this), randomizedTimeout);
-    }
-
-    reconnectNow () {
-        this.connectionAttempts = this.connectionAttempts + 1;
-        this.openConnection();
+        this.setTimeout(this.openConnection.bind(this), randomizedTimeout);
     }
 
     exponentialTimeout () {

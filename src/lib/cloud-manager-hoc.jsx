@@ -74,6 +74,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             if (this.cloudProvider) {
                 this.cloudProvider.requestCloseConnection();
                 this.cloudProvider = null;
+                this.props.vm.setCloudProvider(null);
             }
         }
         render () {

@@ -50,6 +50,8 @@ describe('CloudManagerHOC', () => {
         );
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
+        const cloudProviderInstance = CloudProvider.mock.instances[0];
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(cloudProviderInstance);
     });
 
     test('when cloudHost is missing, the cloud provider is not set on the vm', () => {
@@ -115,6 +117,8 @@ describe('CloudManagerHOC', () => {
         });
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
+        const cloudProviderInstance = CloudProvider.mock.instances[0];
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(cloudProviderInstance);
     });
 
     test('projectId change should not trigger cloudProvider connection unless isShowingWithId becomes true', () => {
@@ -139,5 +143,32 @@ describe('CloudManagerHOC', () => {
         });
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
+        const cloudProviderInstance = CloudProvider.mock.instances[0];
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(cloudProviderInstance);
+    });
+
+    test('when it unmounts, the cloud provider is set on the vm', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalledTimes(1);
+        const cloudProviderInstance = CloudProvider.mock.instances[0];
+        const requestCloseConnection = cloudProviderInstance.requestCloseConnection;
+
+        mounted.unmount();
+
+        // vm.setCloudProvider is called twice,
+        // once during mount and once during unmount
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
     });
 });

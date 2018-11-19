@@ -10,6 +10,11 @@
     background: $ui-tertiary;
 }
 
+.wrapper::after {
+    flex: 0 0 70px;
+    content: '';
+}
+
 .new-buttons {
     position: absolute;
     bottom: 0;
@@ -47,11 +52,11 @@ $fade-out-distance: 100px;
     /* Must have some height (recalculated by flex-grow) in order to scroll */
     height: 0;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     /* Make sure there is room to scroll beyond the last tile */
-    padding-bottom: 70px;
+    /* padding-bottom: 70px; */
 }
 
 .list-item {

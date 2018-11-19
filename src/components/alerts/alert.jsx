@@ -30,10 +30,10 @@ const AlertComponent = ({
         className={classNames(styles.alert, styles[level])}
     >
         {/* TODO: implement Rtl handling */}
-        {iconSpinner && (
+        {true && (
             <Spinner className={styles.alertSpinner} />
         )}
-        {iconURL && (
+        {false && (
             <img
                 className={styles.alertIcon}
                 src={iconURL}

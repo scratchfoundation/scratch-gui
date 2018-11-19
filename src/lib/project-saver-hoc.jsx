@@ -22,7 +22,6 @@ import {
     getIsShowingWithId,
     getIsShowingWithoutId,
     getIsUpdating,
-    manualUpdateProject,
     projectError
 } from '../reducers/project-state';
 
@@ -51,24 +50,25 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.createRemixToStorage();
             }
 
-            // check if the project state, and user capabilities, have changed so as to indicate
-            // that we should create or update project
+            // see if we should "create" the current project on the server
             //
-            // if we're newly able to create this project on the server, create it!
-            const showingCreateable = this.props.canCreateNew && this.props.isShowingWithoutId;
-            const prevShowingCreateable = prevProps.canCreateNew && prevProps.isShowingWithoutId;
-            const justTriedCreatingNew = prevProps.isCreatingNew; // don't immediately keep trying
-            if (showingCreateable && !prevShowingCreateable && !justTriedCreatingNew) {
+            // don't try to create or save immediately after trying to create
+            if (prevProps.isCreatingNew) return;
+            // if we're newly able to create this project, create it!
+            if (this.isShowingCreatable(this.props) && !this.isShowingCreatable(prevProps)) {
                 this.props.onCreateProject();
-            } else {
-                // if we're newly able to save this project, save it!
-                const showingSaveable = this.props.canSave && this.props.isShowingWithId;
-                const becameAbleToSave = this.props.canSave && !prevProps.canSave;
-                const becameShared = this.props.isShared && !prevProps.isShared;
-                const justTriedUpdating = prevProps.isUpdating; // don't immediately keep trying
-                if (showingSaveable && !justTriedUpdating && (becameAbleToSave || becameShared)) {
-                    this.props.onAutoUpdateProject();
-                }
+            }
+
+            // see if we should save/update the current project on the server
+            //
+            // don't try to save immediately after trying to save
+            if (prevProps.isUpdating) return;
+            // if we're newly able to save this project, save it!
+            const showingSaveable = this.props.canSave && this.props.isShowingWithId;
+            const becameAbleToSave = this.props.canSave && !prevProps.canSave;
+            const becameShared = this.props.isShared && !prevProps.isShared;
+            if (showingSaveable && (becameAbleToSave || becameShared)) {
+                this.props.onAutoUpdateProject();
             }
         }
         componentWillUnmount () {
@@ -77,11 +77,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.updateProjectToStorage();
             }
         }
+        isShowingCreatable (props) {
+            return props.canCreateNew && props.isShowingWithoutId;
+        }
         updateProjectToStorage () {
             this.props.onShowSavingAlert();
             return this.storeProject(this.props.reduxProjectId)
                 .then(() => {
-                    // there is nothing we expect to find in response that we need to check here
+                    // there's an http response object available here, but we don't need to examine
+                    // it, because there are no values contained in it that we care about
                     this.props.onUpdatedProject(this.props.loadingState);
                     this.props.onShowSaveSuccessAlert();
                 })
@@ -190,7 +194,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onAutoUpdateProject,
                 onCreatedProject,
                 onCreateProject,
-                onManualUpdateProject,
                 onProjectError,
                 onShowAlert,
                 onShowCreateSuccessAlert,
@@ -226,7 +229,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onAutoUpdateProject: PropTypes.func,
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
-        onManualUpdateProject: PropTypes.func,
         onProjectError: PropTypes.func,
         onShowAlert: PropTypes.func,
         onShowCreateSuccessAlert: PropTypes.func,
@@ -258,7 +260,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onAutoUpdateProject: () => dispatch(autoUpdateProject()),
         onCreatedProject: (projectId, loadingState) => dispatch(doneCreatingProject(projectId, loadingState)),
         onCreateProject: () => dispatch(createProject()),
-        onManualUpdateProject: () => dispatch(manualUpdateProject()),
         onProjectError: error => dispatch(projectError(error)),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
         onShowCreateSuccessAlert: () => showAlertWithTimeout(dispatch, 'createSuccess'),

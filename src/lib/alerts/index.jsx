@@ -48,6 +48,7 @@ const alerts = [
     },
     {
         alertId: 'creatingError',
+        clearList: ['creating', 'createSuccess'],
         content: (
             <FormattedMessage
                 defaultMessage="Could not create the project. Please try again!"
@@ -59,6 +60,7 @@ const alerts = [
     },
     {
         alertId: 'savingError',
+        clearList: ['saving', 'saveSuccess'],
         content: (
             <FormattedMessage
                 defaultMessage="Could not save the project. Please try again!"

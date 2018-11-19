@@ -10,7 +10,6 @@ import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
 import locales from 'scratch-l10n';
 import {detectLocale} from './detect-locale';
-import {detectTutorialId} from './tutorial-from-url';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -65,11 +64,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                         initializedGui = initPlayer(initializedGui);
                     }
                 } else {
-                    const tutorialId = detectTutorialId();
-                    if (tutorialId === null && props.showPreviewInfo) {
-                        // Show preview info if requested and no tutorial ID found
-                        initializedGui = initPreviewInfo(initializedGui);
-                    }
+                    initializedGui = initPreviewInfo(initializedGui);
                 }
                 reducers = {
                     locales: localesReducer,

@@ -5,7 +5,6 @@
 
 import tutorials from './libraries/decks/index.jsx';
 import analytics from './analytics';
-import queryString from 'query-string';
 
 /**
  * Get the tutorial id from the given numerical id (representing the
@@ -31,11 +30,11 @@ const getDeckIdFromUrlId = urlId => {
 /**
  * Check if there's a tutorial id provided as a query parameter in the URL.
  * Return the corresponding tutorial id or null if not found.
+ * @param {object} queryParams the results of parsing the query string
  * @return {string} The ID of the requested tutorial or null if no tutorial was
  * requested or found.
  */
-const detectTutorialId = () => {
-    const queryParams = queryString.parse(location.search);
+const detectTutorialId = queryParams => {
     const tutorialID = Array.isArray(queryParams.tutorial) ?
         queryParams.tutorial[0] :
         queryParams.tutorial;

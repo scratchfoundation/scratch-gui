@@ -10,7 +10,6 @@ import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
 import locales from 'scratch-l10n';
 import {detectLocale} from './detect-locale';
-import {detectTutorialId} from './tutorial-from-url';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -52,8 +51,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
-                    initPreviewInfo,
-                    initTutorialLibrary
+                    initPreviewInfo
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
 
@@ -66,18 +64,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                         initializedGui = initPlayer(initializedGui);
                     }
                 } else {
-                    const tutorialId = detectTutorialId();
-                    if (tutorialId === null) {
-                        if (props.showPreviewInfo) {
-                            // Show preview info if requested and no tutorial ID found
-                            initializedGui = initPreviewInfo(initializedGui);
-                        }
-                    } else if (tutorialId === 'all') {
-                        // Specific tutorials are set in setActiveCards in the GUI container.
-                        // Handle ?tutorial=all here for beta, if we decide to keep this for the
-                        // project page, this functionality should move to GUI container also.
-                        initializedGui = initTutorialLibrary(initializedGui);
-                    }
+                    initializedGui = initPreviewInfo(initializedGui);
                 }
                 reducers = {
                     locales: localesReducer,

@@ -288,7 +288,7 @@ describe('projectSaverHOC', () => {
         expect(mockedShowCreatingAlert).not.toHaveBeenCalled();
     });
 
-    test('if user manually saves, saving alert should show', () => {
+    test('if user saves, inline saving alert should show', () => {
         const mockedShowSavingAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
@@ -312,30 +312,5 @@ describe('projectSaverHOC', () => {
             isUpdating: true
         });
         expect(mockedShowSavingAlert).toHaveBeenCalled();
-    });
-
-    test('if autosaving, saving alert should NOT show', () => {
-        const mockedShowSavingAlert = jest.fn();
-        const Component = () => <div />;
-        const WrappedComponent = projectSaverHOC(Component);
-        const mounted = mount(
-            <WrappedComponent
-                canSave
-                isShowingWithoutId
-                canCreateNew={false}
-                isCreatingNew={false}
-                isManualUpdating={false}
-                isShowingWithId={false}
-                isUpdating={false}
-                loadingState={LoadingState.SHOWING_WITH_ID}
-                store={store}
-                vm={vm}
-                onShowSavingAlert={mockedShowSavingAlert}
-            />
-        );
-        mounted.setProps({
-            isUpdating: true
-        });
-        expect(mockedShowSavingAlert).not.toHaveBeenCalled();
     });
 });

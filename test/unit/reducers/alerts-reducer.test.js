@@ -1,7 +1,7 @@
 // TODO: add tests of extension alerts
 
 /* eslint-env jest */
-import {AlertLevels} from '../../../src/lib/alerts/index.jsx';
+import {AlertTypes, AlertLevels} from '../../../src/lib/alerts/index.jsx';
 import alertsReducer from '../../../src/reducers/alerts';
 import {
     closeAlert,
@@ -18,10 +18,11 @@ test('initialState', () => {
 
 test('create one standard alert', () => {
     let defaultState;
-    const action = showStandardAlert('saving');
+    const action = showStandardAlert('creating');
     const resultState = alertsReducer(defaultState, action);
     expect(resultState.alertsList.length).toBe(1);
-    expect(resultState.alertsList[0].alertId).toBe('saving');
+    expect(resultState.alertsList[0].alertId).toBe('creating');
+    expect(resultState.alertsList[0].alertType).toBe(AlertTypes.STANDARD);
     expect(resultState.alertsList[0].level).toBe(AlertLevels.SUCCESS);
 });
 
@@ -31,6 +32,7 @@ test('add several standard alerts', () => {
         alertsList: [
             {
                 alertId: 'saving',
+                alertType: AlertTypes.INLINE,
                 level: AlertLevels.SUCCESS,
                 content: null,
                 iconURL: '/no_image_here.jpg'
@@ -41,11 +43,20 @@ test('add several standard alerts', () => {
     let resultState = alertsReducer(initialState, action);
     resultState = alertsReducer(resultState, action);
     resultState = alertsReducer(resultState, action);
-    expect(resultState.alertsList.length).toBe(4);
-    expect(resultState.alertsList[0].iconURL).toBe('/no_image_here.jpg');
-    expect(resultState.alertsList[1].alertId).toBe('creating');
-    expect(resultState.alertsList[2].alertId).toBe('creating');
-    expect(resultState.alertsList[3].alertId).toBe('creating');
+    expect(resultState.alertsList.length).toBe(1);
+    expect(resultState.alertsList[0].alertType).toBe(AlertTypes.STANDARD);
+    expect(resultState.alertsList[0].iconURL).not.toBe('/no_image_here.jpg');
+    expect(resultState.alertsList[0].alertId).toBe('creating');
+});
+
+test('create one inline alert message', () => {
+    let defaultState;
+    const action = showStandardAlert('saving');
+    const resultState = alertsReducer(defaultState, action);
+    expect(resultState.alertsList.length).toBe(1);
+    expect(resultState.alertsList[0].alertId).toBe('saving');
+    expect(resultState.alertsList[0].alertType).toBe(AlertTypes.INLINE);
+    expect(resultState.alertsList[0].level).toBe(AlertLevels.INFO);
 });
 
 test('can close alerts by index', () => {
@@ -54,22 +65,22 @@ test('can close alerts by index', () => {
         alertsList: [
             {
                 alertId: 'saving',
+                alertType: AlertTypes.INLINE,
                 level: AlertLevels.SUCCESS,
                 content: null,
                 iconURL: '/no_image_here.jpg'
             }
         ]
     };
+    const closeAction = closeAlert(0);
+    let resultState = alertsReducer(initialState, closeAction);
+    expect(resultState.alertsList.length).toBe(0);
     const createAction = showStandardAlert('creating');
-    let resultState = alertsReducer(initialState, createAction);
     resultState = alertsReducer(resultState, createAction);
+    expect(resultState.alertsList.length).toBe(1);
+    resultState = alertsReducer(initialState, closeAction);
+    expect(resultState.alertsList.length).toBe(0);
     resultState = alertsReducer(resultState, createAction);
-    const closeAction = closeAlert(1);
-    resultState = alertsReducer(resultState, closeAction);
-    resultState = alertsReducer(resultState, closeAction);
-    expect(resultState.alertsList.length).toBe(2);
-    expect(resultState.alertsList[0].alertId).toBe('saving');
-    expect(resultState.alertsList[1].alertId).toBe('creating');
 });
 
 test('related alerts can clear each other', () => {
@@ -78,12 +89,14 @@ test('related alerts can clear each other', () => {
         alertsList: [
             {
                 alertId: 'saving',
+                alertType: AlertTypes.INLINE,
                 level: AlertLevels.SUCCESS,
                 content: null,
                 iconURL: '/no_image_here.jpg'
             },
             {
                 alertId: 'creating',
+                alertType: AlertTypes.STANDARD,
                 level: AlertLevels.SUCCESS,
                 content: null,
                 iconURL: '/no_image_here.jpg'
@@ -92,9 +105,8 @@ test('related alerts can clear each other', () => {
     };
     const action = showStandardAlert('saveSuccess');
     const resultState = alertsReducer(initialState, action);
-    expect(resultState.alertsList.length).toBe(2);
-    expect(resultState.alertsList[0].alertId).toBe('creating');
-    expect(resultState.alertsList[1].alertId).toBe('saveSuccess');
+    expect(resultState.alertsList.length).toBe(1);
+    expect(resultState.alertsList[0].alertId).toBe('saveSuccess');
 });
 
 test('several related alerts can be cleared at once', () => {

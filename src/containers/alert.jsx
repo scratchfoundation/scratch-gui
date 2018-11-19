@@ -24,6 +24,7 @@ class Alert extends React.Component {
     }
     render () {
         const {
+            closeButton,
             content,
             index, // eslint-disable-line no-unused-vars
             level,
@@ -34,6 +35,7 @@ class Alert extends React.Component {
         } = this.props;
         return (
             <AlertComponent
+                closeButton={closeButton}
                 content={content}
                 iconSpinner={iconSpinner}
                 iconURL={iconURL}
@@ -57,6 +59,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Alert.propTypes = {
+    closeButton: PropTypes.bool,
     content: PropTypes.element,
     extensionId: PropTypes.string,
     iconSpinner: PropTypes.bool,

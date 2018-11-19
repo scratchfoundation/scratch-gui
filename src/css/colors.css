@@ -5,6 +5,7 @@ $ui-tertiary: hsla(215, 50%, 90%, 1); /* #D9E3F2 */
 $ui-modal-overlay: hsla(215, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
 
 $ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
+$ui-white-dim: hsla(0, 100%, 100%, 0.75); /* 25% transparent version of ui-white */
 $ui-white-transparent: hsla(0, 100%, 100%, 0.25); /* 25% transparent version of ui-white */
 $ui-transparent: hsla(0, 100%, 100%, 0); /* 25% transparent version of ui-white */
 
@@ -32,6 +33,7 @@ $pen-primary: hsla(163, 85%, 40%, 1); /* #0FBD8C */
 $pen-transparent: hsla(163, 85%, 40%, 0.25); /* #0FBD8C */
 
 $error-primary: hsla(30, 100%, 55%, 1); /* #FF8C1A */
+$error-light: hsla(30, 100%, 70%, 1); /* #FFB366 */
 $error-transparent: hsla(30, 100%, 55%, 0.25); /* #FF8C1A */
 
 $extensions-primary: hsla(163, 85%, 40%, 1); /* #0FBD8C */

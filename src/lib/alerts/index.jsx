@@ -1,17 +1,26 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import keyMirror from 'keymirror';
 
 import successImage from '../assets/icon--success.svg';
 
+const AlertTypes = keyMirror({
+    STANDARD: null,
+    EXTENSION: null,
+    INLINE: null
+});
+
 const AlertLevels = {
     SUCCESS: 'success',
+    INFO: 'info',
     WARN: 'warn'
 };
 
 const alerts = [
     {
         alertId: 'createSuccess',
-        clearList: ['creating'],
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully created."
@@ -20,10 +29,13 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 5
     },
     {
         alertId: 'creating',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Creating..."
@@ -58,7 +70,8 @@ const alerts = [
     },
     {
         alertId: 'saveSuccess',
-        clearList: ['saving'],
+        alertType: AlertTypes.INLINE,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully saved."
@@ -67,10 +80,13 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 5
     },
     {
         alertId: 'saving',
+        alertType: AlertTypes.INLINE,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Saving..."
@@ -79,11 +95,12 @@ const alerts = [
             />
         ),
         iconSpinner: true,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.INFO
     }
 ];
 
 export {
     alerts as default,
-    AlertLevels
+    AlertLevels,
+    AlertTypes
 };

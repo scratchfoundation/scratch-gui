@@ -245,18 +245,25 @@ export default function (vm) {
                     // The block was in the flyout so look up future block info there.
                     lookupBlocks = vm.runtime.flyoutBlocks;
                 }
+                // Get all the stage variables (no lists) so we can add them to menu when the stage is selected.
+                const stageVariableOptions = vm.runtime.getTargetForStage().getAllVariableNamesInScopeByType('');
+                const stageVariableMenuItems = stageVariableOptions.map(variable => [variable, variable]);
                 if (sensingOfBlock.inputs.OBJECT.shadow !== sensingOfBlock.inputs.OBJECT.block) {
                     // There's a block dropped on top of the menu. It'd be nice to evaluate it and
                     // return the correct list, but that is tricky. Scratch2 just returns stage options
                     // so just do that here too.
-                    return stageOptions;
+                    return stageOptions.concat(stageVariableMenuItems);
                 }
                 const menuBlock = lookupBlocks.getBlock(sensingOfBlock.inputs.OBJECT.shadow);
                 const selectedItem = menuBlock.fields.OBJECT.value;
                 if (selectedItem === '_stage_') {
-                    return stageOptions;
+                    return stageOptions.concat(stageVariableMenuItems);
                 }
-                return spriteOptions;
+                // Get all the local variables (no lists) and add them to the menu.
+                const spriteVariableOptions =
+                    vm.runtime.getSpriteTargetByName(selectedItem).getAllVariableNamesInScopeByType('', true);
+                const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable, variable]);
+                return spriteOptions.concat(spriteVariableMenuItems);
             }
             return [['', '']];
         };

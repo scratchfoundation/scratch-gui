@@ -43,6 +43,14 @@ describe('CloudProvider', () => {
         cloudProvider.randomizeDuration = t => t;
     });
 
+    test('createVariable', () => {
+        cloudProvider.createVariable('hello', 1);
+        const obj = JSON.parse(cloudProvider.connection._sentMessages[0]);
+        expect(obj.method).toEqual('create');
+        expect(obj.name).toEqual('hello');
+        expect(obj.value).toEqual(1);
+    });
+
     test('updateVariable', () => {
         cloudProvider.updateVariable('hello', 1);
         const obj = JSON.parse(cloudProvider.connection._sentMessages[0]);
@@ -59,13 +67,21 @@ describe('CloudProvider', () => {
         expect(obj.value).toEqual(0);
     });
 
-    test('writeToServer with falsey index value', () => {
-        cloudProvider.writeToServer('method', 'name', 5, 0);
+    test('renameVariable', () => {
+        cloudProvider.renameVariable('oldName', 'newName');
         const obj = JSON.parse(cloudProvider.connection._sentMessages[0]);
-        expect(obj.method).toEqual('method');
-        expect(obj.name).toEqual('name');
-        expect(obj.value).toEqual(5);
-        expect(obj.index).toEqual(0);
+        expect(obj.method).toEqual('rename');
+        expect(obj.name).toEqual('oldName');
+        expect(typeof obj.value).toEqual('undefined');
+        expect(obj.new_name).toEqual('newName');
+    });
+
+    test('deleteVariable', () => {
+        cloudProvider.deleteVariable('hello');
+        const obj = JSON.parse(cloudProvider.connection._sentMessages[0]);
+        expect(obj.method).toEqual('delete');
+        expect(obj.name).toEqual('hello');
+        expect(typeof obj.value).toEqual('undefined');
     });
 
     test('onMessage ack', () => {

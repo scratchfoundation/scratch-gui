@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>straight-point</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="straight-point" fill="#4C97FF">
+            <polyline id="Path-2" stroke="#4C97FF" stroke-width="0.75" fill-opacity="0.25" stroke-linecap="round" stroke-linejoin="round" points="2 15 10 7 18 15"></polyline>
+            <circle id="Oval-4" fill-opacity="0.25" cx="10" cy="7" r="3"></circle>
+            <circle id="Oval-4" cx="10" cy="7" r="2"></circle>
+        </g>
+    </g>
+</svg>

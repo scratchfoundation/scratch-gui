@@ -34,7 +34,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.connectToCloud();
             }
 
-            if (this.shouldDisconnect(this.props) && !this.shouldDisconnect(prevProps)) {
+            if (this.shouldDisconnect(this.props, prevProps)) {
                 this.disconnectFromCloud();
             }
         }
@@ -49,12 +49,12 @@ const cloudManagerHOC = function (WrappedComponent) {
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) && props.isShowingWithId;
         }
-        shouldDisconnect (props) {
+        shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
                 ( // Can no longer use cloud or cloud provider info is now stale
                     !this.canUseCloud(this.props) ||
-                    (this.cloudProvider.projectId !== props.projectId) ||
-                    (this.cloudProvider.username !== props.username)
+                    (props.projectId !== prevProps.projectId) ||
+                    (props.username !== prevProps.username)
                 );
             // TODO need to add provisions for viewing someone
             // else's project in editor mode

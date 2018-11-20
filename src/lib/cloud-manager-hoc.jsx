@@ -21,54 +21,61 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.cloudProvider = null;
         }
         componentDidMount () {
-            if (this.canUseCloud(this.props)) {
+            if (this.shouldConnect(this.props)) {
                 this.connectToCloud();
             }
         }
         componentDidUpdate (prevProps) {
-            // TODO add disconnection logic when loading a new project
+            // TODO need to add cloud provider disconnection logic and cloud data clearing logic
+            // when loading a new project e.g. via file upload
             // (and eventually move it out of the vm.clear function)
-            // e.g. was previously showingWithId but no longer, but we need
-            // to check that we don't disconnect when saving a project to the
-            // server.
 
-            // If we couldn't use cloud data before, but now we can, try opening a cloud connection
-            if (this.canUseCloud(this.props) && !this.canUseCloud(prevProps)) {
+            if (this.shouldConnect(this.props) && !this.shouldConnect(prevProps)) {
                 this.connectToCloud();
-                return;
             }
 
-            // TODO add scratcher check
-
-            if ((this.props.username !== prevProps.username) ||
-                (this.props.projectId !== prevProps.projectId)) {
-                this.connectToCloud();
+            if (this.shouldDisconnect(this.props, prevProps)) {
+                this.disconnectFromCloud();
             }
         }
         componentWillUnmount () {
-            if (this.cloudProvider) {
-                this.cloudProvider.requestCloseConnection();
-                this.cloudProvider = null;
-            }
+            this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            return props.cloudHost && props.username && props.isShowingWithId &&
-                props.vm && props.username && props.projectId;
+            // TODO add a canUseCloud to pass down to this HOC (e.g. from www) and also check that here.
+            // This should cover info about the website specifically, like scrather status
+            return !!(props.cloudHost && props.username && props.vm && props.projectId);
         }
-        connectToCloud () {
-            if (this.cloudProvider && this.cloudProvider.connection) {
-                // Already connected
-                return;
-            }
-
+        shouldConnect (props) {
+            return !this.isConnected() && this.canUseCloud(props) && props.isShowingWithId;
+        }
+        shouldDisconnect (props, prevProps) {
+            return this.isConnected() &&
+                ( // Can no longer use cloud or cloud provider info is now stale
+                    !this.canUseCloud(this.props) ||
+                    (props.projectId !== prevProps.projectId) ||
+                    (props.username !== prevProps.username)
+                );
             // TODO need to add provisions for viewing someone
             // else's project in editor mode
+        }
+        isConnected () {
+            return this.cloudProvider && !!this.cloudProvider.connection;
+        }
+        connectToCloud () {
             this.cloudProvider = new CloudProvider(
                 this.props.cloudHost,
                 this.props.vm,
                 this.props.username,
                 this.props.projectId);
             this.props.vm.setCloudProvider(this.cloudProvider);
+        }
+        disconnectFromCloud () {
+            if (this.cloudProvider) {
+                this.cloudProvider.requestCloseConnection();
+                this.cloudProvider = null;
+                this.props.vm.setCloudProvider(null);
+            }
         }
         render () {
             const {

@@ -54,8 +54,10 @@ class CloudProvider {
         log.info(`Received websocket message: ${messageString}`);
         // Multiple commands can be received, newline separated
         messageString.split('\n').forEach(message => {
-            const parsedData = this.parseMessage(JSON.parse(message));
-            this.vm.postIOData('cloud', parsedData);
+            if (message) { // .split can also contain '' in the array it returns
+                const parsedData = this.parseMessage(JSON.parse(message));
+                this.vm.postIOData('cloud', parsedData);
+            }
         });
     }
 

@@ -39,6 +39,7 @@ export default [
         ),
         extensionId: 'marty',
         iconURL: martyImage,
+        insetIconURL: martyMenuImage,
         description: (
             <FormattedMessage
                 defaultMessage="Play and program with Marty."
@@ -49,6 +50,8 @@ export default [
         featured: true,
         disabled: false,
         launchPeripheralConnectionFlow: true,
+        internetConnectionRequired: true,
+        collaborator: "Robotical",
         useAutoScan: false,
         peripheralImage: martyPeripheralImage,
         smallPeripheralImage: martyMenuImage,

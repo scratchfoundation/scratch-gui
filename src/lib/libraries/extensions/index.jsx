@@ -50,7 +50,7 @@ export default [
         featured: true,
         disabled: false,
         launchPeripheralConnectionFlow: true,
-        internetConnectionRequired: true,
+        wifiConnectionRequired: true,
         collaborator: "Robotical",
         useAutoScan: false,
         peripheralImage: martyPeripheralImage,

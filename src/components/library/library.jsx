@@ -186,6 +186,7 @@ class LibraryComponent extends React.Component {
                                 id={index}
                                 insetIconURL={dataItem.insetIconURL}
                                 internetConnectionRequired={dataItem.internetConnectionRequired}
+                                wifiConnectionRequired={dataItem.wifiConnectionRequired}
                                 key={`item_${index}`}
                                 name={dataItem.name}
                                 onBlur={this.handleBlur}

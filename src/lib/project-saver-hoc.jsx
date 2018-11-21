@@ -26,6 +26,12 @@ import {
     projectError
 } from '../reducers/project-state';
 
+// wait MAX_AUTOSAVE_WAIT_SECS between checking if we need to autosave
+// if an autosave is done, try again in MIN_AUTOSAVE_WAIT_SECS. The idea
+// is to check more frequently while changes are being made frequently.
+const MAX_AUTOSAVE_WAIT_SECS = 60;
+const MIN_AUTOSAVE_WAIT_SECS = 15;
+
 /**
  * Higher Order Component to provide behavior for saving projects.
  * @param {React.Component} WrappedComponent the component to add project saving functionality to
@@ -37,6 +43,16 @@ import {
  */
 const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
+        constructor (props) {
+            super(props);
+            this.state = {
+                autoSaveActive: false
+            };
+        }
+        componentDidMount () {
+            // regularly check if we should save, whether project belongs to the user or not.
+            this.startAutoSaveCheckin();
+        }
         componentDidUpdate (prevProps) {
             if (this.props.isUpdating && !prevProps.isUpdating) {
                 this.updateProjectToStorage();
@@ -65,11 +81,48 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // don't try to save immediately after trying to save
             if (prevProps.isUpdating) return;
             // if we're newly able to save this project, save it!
-            const showingSaveable = this.props.canSave && this.props.isShowingWithId;
             const becameAbleToSave = this.props.canSave && !prevProps.canSave;
             const becameShared = this.props.isShared && !prevProps.isShared;
-            if (showingSaveable && (becameAbleToSave || becameShared)) {
+            if (this.showingSaveable() && (becameAbleToSave || becameShared)) {
                 this.props.onAutoUpdateProject();
+            }
+        }
+        componentWillUnmount () {
+            const showingSaveable = this.props.canSave && this.props.isShowingWithId;
+            if (showingSaveable) {
+                this.updateProjectToStorage();
+            }
+            this.stopAutoSaveCheckin();
+        }
+        showingSaveable () {
+            return this.props.canSave && this.props.isShowingWithId;
+        }
+        startAutoSaveCheckin () {
+            if (!this.state.autoSaveActive) {
+                this.setState({
+                    autoSaveActive: true
+                });
+                this.autoSaveCheckin(MIN_AUTOSAVE_WAIT_SECS);
+            }
+        }
+        stopAutoSaveCheckin () {
+            this.setState({
+                autoSaveActive: false
+            });
+        }
+        autoSaveCheckin (waitSecs) {
+            setTimeout(() => {
+                this.tryToAutoSave();
+            }, waitSecs * 1000);
+        }
+        tryToAutoSave () {
+            if (this.state.autoSaveActive) {
+                let nextWaitSecs = MAX_AUTOSAVE_WAIT_SECS;
+                if (this.showingSaveable() && this.props.isDirtyProject) {
+                    this.props.onAutoUpdateProject();
+                    nextWaitSecs = MIN_AUTOSAVE_WAIT_SECS;
+                }
+                this.autoSaveCheckin(nextWaitSecs);
             }
         }
         isShowingCreatable (props) {
@@ -242,6 +295,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         return {
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
+            isDirtyProject: true,
             isRemixing: getIsRemixing(loadingState),
             isShowingWithId: getIsShowingWithId(loadingState),
             isShowingWithoutId: getIsShowingWithoutId(loadingState),

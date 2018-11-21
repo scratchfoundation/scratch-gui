@@ -404,6 +404,18 @@
         ]
     },
     {
+        "name": "Bossa Nova",
+        "md5": "04ccc72f32e909292adcaf40348be5f3.wav",
+        "sampleCount": 136645,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "latin"
+        ]
+    },
+    {
         "name": "Bowling Strike",
         "md5": "32f3af03ddfbd9cc89c8565678a26813.wav",
         "sampleCount": 26629,
@@ -703,6 +715,19 @@
         ]
     },
     {
+        "name": "Chill",
+        "md5": "c4e9e84fd9244ca43986c2bdb6669ae8.wav",
+        "sampleCount": 176400,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "chill"
+        ]
+    },
+    {
         "name": "Chirp",
         "md5": "3b8236bbb288019d93ae38362e865972.wav",
         "sampleCount": 5301,
@@ -762,6 +787,19 @@
         "format": "",
         "tags": [
             "human"
+        ]
+    },
+    {
+        "name": "Classical Piano",
+        "md5": "646ea2f42ab04b54f1359ccfac958561.wav",
+        "sampleCount": 152874,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "classical",
+            "bach"
         ]
     },
     {
@@ -827,18 +865,6 @@
         "tags": [
             "effects",
             "electronic"
-        ]
-    },
-    {
-        "name": "Connect",
-        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
-        "sampleCount": 22623,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
         ]
     },
     {
@@ -1139,6 +1165,19 @@
         ]
     },
     {
+        "name": "Dance Energetic",
+        "md5": "e213e09ed852c621ba87cde7f95eec79.wav",
+        "sampleCount": 176400,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
+        ]
+    },
+    {
         "name": "Dance Funky",
         "md5": "a8383eaddc02d33714dc5832c02ccf13.wav",
         "sampleCount": 111412,
@@ -1175,6 +1214,19 @@
         ]
     },
     {
+        "name": "Dance Sitar",
+        "md5": "c4e893b927524ffd669898f69d096fd8.wav",
+        "sampleCount": 110505,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "india",
+            "tabla"
+        ]
+    },
+    {
         "name": "Dance Slow Mo",
         "md5": "329ee6f3418c0a569418e102e620edf0.wav",
         "sampleCount": 445643,
@@ -1208,18 +1260,6 @@
             "music",
             "electronic",
             "loops"
-        ]
-    },
-    {
-        "name": "Disconnect",
-        "md5": "56df0714ed1ed455a2befd787a077214.wav",
-        "sampleCount": 27563,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
         ]
     },
     {
@@ -1448,6 +1488,19 @@
         ]
     },
     {
+        "name": "Dubstep",
+        "md5": "906af1e30f19a919d203b2eb307e04ac.wav",
+        "sampleCount": 151216,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
+        ]
+    },
+    {
         "name": "Duck",
         "md5": "af5b039e1b05e0ccb12944f648a8884e.wav",
         "sampleCount": 5792,
@@ -1631,6 +1684,19 @@
         ]
     },
     {
+        "name": "Emotional Piano",
+        "md5": "c587075453ace1584cf155d6a8de604d.wav",
+        "sampleCount": 165090,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "chill",
+            "calm"
+        ]
+    },
+    {
         "name": "Engine",
         "md5": "f5c4e2311024f18c989e53f9b3448db8.wav",
         "sampleCount": 172729,
@@ -1764,6 +1830,18 @@
             "effects",
             "percussion",
             "human"
+        ]
+    },
+    {
+        "name": "Finish",
+        "md5": "56df0714ed1ed455a2befd787a077214.wav",
+        "sampleCount": 27563,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
         ]
     },
     {
@@ -2515,6 +2593,30 @@
         ]
     },
     {
+        "name": "Movie 1",
+        "md5": "84f7b490f0f536cc1337ab7948aa3aa7.wav",
+        "sampleCount": 220500,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
+        ]
+    },
+    {
+        "name": "Movie 2",
+        "md5": "77ea2403120936066eb6280a47b063fd.wav",
+        "sampleCount": 151201,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
+        ]
+    },
+    {
         "name": "Muted Conga",
         "md5": "1d4abbe3c9bfe198a88badb10762de75.wav",
         "sampleCount": 4544,
@@ -2524,6 +2626,18 @@
             "music",
             "percussion",
             "drums"
+        ]
+    },
+    {
+        "name": "Mystery",
+        "md5": "a822b56063729f4f42f9a62e6010768b.wav",
+        "sampleCount": 94315,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "cinematic"
         ]
     },
     {
@@ -2539,7 +2653,7 @@
         ]
     },
     {
-        "name": "Odesong-b",
+        "name": "Odesong",
         "md5": "2c41921491b1da2bfa1ebcaba34265ca.wav",
         "sampleCount": 212553,
         "rate": 22050,
@@ -2705,6 +2819,17 @@
         "format": "adpcm",
         "tags": [
             "sports"
+        ]
+    },
+    {
+        "name": "Reggae",
+        "md5": "19211d5ecd34214b6aba947790e63bb0.wav",
+        "sampleCount": 173023,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music"
         ]
     },
     {
@@ -3207,6 +3332,18 @@
         ]
     },
     {
+        "name": "Start",
+        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
+        "sampleCount": 22623,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
+        ]
+    },
+    {
         "name": "String Accent",
         "md5": "c1b5c86a10f43f87746b1c305d4fd8df.wav",
         "sampleCount": 16896,
@@ -3465,6 +3602,19 @@
         ]
     },
     {
+        "name": "Trap Beat",
+        "md5": "8c2ae70ee6a15c8d58004df7c4718de1.wav",
+        "sampleCount": 147326,
+        "rate": 22050,
+        "format": "",
+        "tags": [
+            "loops",
+            "music",
+            "electronic",
+            "EDM"
+        ]
+    },
+    {
         "name": "Triumph",
         "md5": "072f4d9a3dfd2a082d50ff90ac7dc8f2.wav",
         "sampleCount": 89280,
@@ -3511,6 +3661,33 @@
             "notes",
             "music",
             "instruments"
+        ]
+    },
+    {
+        "name": "Video Game 1",
+        "md5": "fc6e9cc9ba13c7e4ebb1af6cd7c90c49.wav",
+        "sampleCount": 171419,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "8bit",
+            "8-bit",
+            "electronic"
+        ]
+    },
+    {
+        "name": "Video Game 2",
+        "md5": "287c477da485506c5b4ce37c57a64b5f.wav",
+        "sampleCount": 150479,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "loops",
+            "music",
+            "games",
+            "electronic"
         ]
     },
     {

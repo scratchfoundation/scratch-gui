@@ -39,7 +39,9 @@ class SpriteLibrary extends React.PureComponent {
         clearInterval(this.intervalId);
     }
     handleItemSelect (item) {
-        this.props.vm.addSprite(JSON.stringify(item.json));
+        this.props.vm.addSprite(JSON.stringify(item.json)).then(() => {
+            this.props.onActivateBlocksTab();
+        });
         analytics.event({
             category: 'library',
             action: 'Select Sprite',
@@ -95,6 +97,7 @@ class SpriteLibrary extends React.PureComponent {
 
 SpriteLibrary.propTypes = {
     intl: intlShape.isRequired,
+    onActivateBlocksTab: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

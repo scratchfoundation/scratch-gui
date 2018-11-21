@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
     x: state.scratchGui.cards.x,
     y: state.scratchGui.cards.y,
     isRtl: state.locales.isRtl,
+    locale: state.locales.locale,
     dragging: state.scratchGui.cards.dragging
 });
 

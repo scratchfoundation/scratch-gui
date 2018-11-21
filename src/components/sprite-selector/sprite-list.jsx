@@ -57,7 +57,8 @@ const SpriteList = function (props) {
                     DragConstants.COSTUME,
                     DragConstants.SOUND,
                     DragConstants.BACKPACK_COSTUME,
-                    DragConstants.BACKPACK_SOUND].includes(draggingType);
+                    DragConstants.BACKPACK_SOUND,
+                    DragConstants.BACKPACK_CODE].includes(draggingType);
 
                 return (
                     <SortableAsset
@@ -69,7 +70,7 @@ const SpriteList = function (props) {
                         onRemoveSortable={onRemoveSortable}
                     >
                         <SpriteSelectorItem
-                            assetId={sprite.costume && sprite.costume.assetId}
+                            asset={sprite.costume && sprite.costume.asset}
                             className={classNames(styles.sprite, {
                                 [styles.raised]: isRaised,
                                 [styles.receivedBlocks]: receivedBlocks

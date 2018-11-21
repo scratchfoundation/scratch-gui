@@ -30,17 +30,17 @@ const getDeckIdFromUrlId = urlId => {
 /**
  * Check if there's a tutorial id provided as a query parameter in the URL.
  * Return the corresponding tutorial id or null if not found.
+ * @param {object} queryParams the results of parsing the query string
  * @return {string} The ID of the requested tutorial or null if no tutorial was
  * requested or found.
  */
-const detectTutorialId = () => {
-    if (window.location.search.indexOf('tutorial=') !== -1) {
-        const urlTutorialId = window.location.search.match(/(?:tutorial)=(\d+)/)[1];
-        if (urlTutorialId) {
-            return getDeckIdFromUrlId(Number(urlTutorialId));
-        }
-    }
-    return null;
+const detectTutorialId = queryParams => {
+    const tutorialID = Array.isArray(queryParams.tutorial) ?
+        queryParams.tutorial[0] :
+        queryParams.tutorial;
+    if (typeof tutorialID === 'undefined') return null;
+    if (tutorialID === 'all') return tutorialID;
+    return getDeckIdFromUrlId(tutorialID);
 };
 
 export {

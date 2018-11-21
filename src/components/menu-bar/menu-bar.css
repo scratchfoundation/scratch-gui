@@ -25,7 +25,7 @@
         width: 100%;
     */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: .75rem;
+    font-size: $menu-bar-standard-font-size;
     font-weight: bold;
     background-color: $motion-primary;
     color: $ui-white;
@@ -47,13 +47,15 @@
 
 .language-icon {
     height:  1.5rem;
+    vertical-align: middle;
 }
 
 .language-caret {
-    margin-bottom: .625rem;
+    margin: 0 .125rem;
 }
 
 .language-menu {
+    box-sizing: border-box;
     display: inline-flex;
     width: $language-selector-width;
 }
@@ -81,7 +83,7 @@
 }
 
 .menu-bar-item.growable {
-    max-width: 12rem;
+    max-width: $menu-bar-item-max-width;
     flex: 1;
 }
 
@@ -98,6 +100,10 @@
 
 .file-group .menu-bar-item {
     padding: 0 0.75rem;
+}
+
+.menu-bar-item.language-menu {
+    padding: 0 0.5rem;
 }
 
 .menu-bar-menu {
@@ -120,18 +126,20 @@
     height: 34px;
 }
 
-.share-button {
-    background: $data-primary;
-    height: 32px;
-    box-shadow: 0 0 0 1px $ui-black-transparent;
+.author-info {
+    margin-left: .25rem;
+    margin-right: .6875rem;
 }
 
-.community-button {
-    height: 32px;
-    box-shadow: 0 0 0 1px $ui-black-transparent;
+.menu-bar-button {
+    height: $menu-bar-button-size;
 }
 
-.community-button-icon {
+.remix-button {
+    background-color: $pen-primary
+}
+
+.remix-button-icon {
     height: 1.25rem;
 }
 
@@ -167,8 +175,8 @@
 
 .profile-icon {
     margin: 0 .25rem;
-    width: 2rem;
-    border-radius: 0.25rem;
+    width: $menu-bar-button-size;
+    border-radius: $form-radius;
 }
 
 .dropdown-caret-icon {

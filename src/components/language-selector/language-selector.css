@@ -1,10 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-.language-icon {
-    height:  1.5rem;
-}
-
 /* Position the language select over the language icon, and make it transparent */
 .language-select {
     position: absolute;
@@ -14,6 +10,8 @@
     user-select: none;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: .875rem;
+    color: $text-primary;
+    background: $ui-white;
 }
 
 [dir="ltr"] .language-select {

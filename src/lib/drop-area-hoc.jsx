@@ -4,7 +4,34 @@ import React from 'react';
 import omit from 'lodash.omit';
 import {connect} from 'react-redux';
 
+/**
+ * Higher Order Component to give components the ability to react to drag overs
+ * and drops of objects stored in the assetDrag redux state.
+ *
+ * Example: You want to enable MyComponent to receive drops from a drag type
+ *    Wrapped = DropAreaHOC([...dragTypes])(
+ *      <MyComponent />
+ *    )
+ *
+ * MyComponent now receives 2 new props
+ *      containerRef: a ref that must be set on the container element
+ *      dragOver: boolean if an asset is being dragged above the component
+ *
+ * Use the wrapped component:
+ *    <Wrapped onDrop={yourDropHandler} />
+ *
+ * NB: This HOC _only_ works with objects that drag using the assetDrag reducer.
+ *     This _does not_ handle drags for blocks coming from the workspace.
+ *
+ * @param {Array.<string>} dragTypes Types to respond to, from DragConstants
+ * @returns {function} The HOC, specialized for those drag types
+ */
 const DropAreaHOC = function (dragTypes) {
+    /**
+     * Return the HOC, specialized for the dragTypes
+     * @param {React.Component} WrappedComponent component to receive drop behaviors
+     * @returns {React.Component} component with drag over/drop behavior
+     */
     return function (WrappedComponent) {
         class DropAreaWrapper extends React.Component {
             constructor (props) {
@@ -46,6 +73,9 @@ const DropAreaHOC = function (dragTypes) {
             }
             setRef (el) {
                 this.ref = el;
+                if (this.props.componentRef) {
+                    this.props.componentRef(this.ref);
+                }
             }
             render () {
                 const componentProps = omit(this.props, ['onDrop', 'dragInfo']);
@@ -60,6 +90,7 @@ const DropAreaHOC = function (dragTypes) {
         }
 
         DropAreaWrapper.propTypes = {
+            componentRef: PropTypes.func,
             dragInfo: PropTypes.shape({
                 currentOffset: PropTypes.shape({
                     x: PropTypes.number,

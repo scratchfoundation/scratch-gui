@@ -15,10 +15,16 @@ const AlertsComponent = ({
     >
         {alertsList.map((a, index) => (
             <Alert
+                closeButton={a.closeButton}
+                content={a.content}
+                extensionId={a.extensionId}
+                iconSpinner={a.iconSpinner}
                 iconURL={a.iconURL}
                 index={index}
                 key={index}
+                level={a.level}
                 message={a.message}
+                showReconnect={a.showReconnect}
                 onCloseAlert={onCloseAlert}
             />
         ))}

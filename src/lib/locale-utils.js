@@ -1,6 +1,7 @@
-// TODO: this probably should be coming from scratch-l10n
-// Tracking in https://github.com/LLK/scratch-l10n/issues/32
-const rtlLocales = ['he'];
+/**
+ * @fileoverview
+ * Utility functions related to localization specific to the GUI
+ */
 
 const wideLocales = [
     'ab',
@@ -16,12 +17,17 @@ const wideLocales = [
     'vi'
 ];
 
+/**
+ * Identify the languages where translations are too long to fit in fixed width parts of the gui.
+ * @param {string} locale The current locale.
+ * @return {bool} true if translations in this language are too long
+ */
+
 const isWideLocale = locale => (
     wideLocales.indexOf(locale) !== -1
 );
 
 export {
-    rtlLocales,
     wideLocales,
     isWideLocale
 };

@@ -34,7 +34,7 @@ describe('Working with the blocks', () => {
         await clickText('Operators', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('join', scope.blocksTab); // Click "join <hello> <world>" block
-        await findByText('applebanana', scope.reportedValue); // Tooltip with result
+        await findByText('apple banana', scope.reportedValue); // Tooltip with result
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
@@ -154,6 +154,19 @@ describe('Working with the blocks', () => {
         // Make sure toolbox has been scrolled to the pen extension
         await findByText('stamp', scope.blocksTab);
 
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Record option from sound block menu opens sound recorder', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Code');
+        await clickText('Sound', scope.blocksTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickText('Meow', scope.blocksTab); // Click "play sound <Meow> until done" block
+        await clickText('record'); // Click "record..." option in the block's sound menu
+        await findByText('Record Sound'); // Sound recorder is open
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

@@ -1,14 +1,5 @@
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages, intlShape, injectIntl} from 'react-intl';
-
-const messages = defineMessages({
-    defaultProjectTitle: {
-        id: 'gui.gui.defaultProjectTitle',
-        description: 'Default title for project',
-        defaultMessage: 'Scratch Project'
-    }
-});
 
 /* Higher Order Component to get and set the project title
  * @param {React.Component} WrappedComponent component to receive project title related props
@@ -22,7 +13,7 @@ const TitledHOC = function (WrappedComponent) {
                 'handleUpdateProjectTitle'
             ]);
             this.state = {
-                projectTitle: this.props.intl.formatMessage(messages.defaultProjectTitle)
+                projectTitle: null
             };
         }
         handleUpdateProjectTitle (newTitle) {
@@ -31,6 +22,7 @@ const TitledHOC = function (WrappedComponent) {
         render () {
             return (
                 <WrappedComponent
+                    canEditTitle
                     projectTitle={this.state.projectTitle}
                     onUpdateProjectTitle={this.handleUpdateProjectTitle}
                     {...this.props}
@@ -39,14 +31,7 @@ const TitledHOC = function (WrappedComponent) {
         }
     }
 
-    TitledComponent.propTypes = {
-        intl: intlShape.isRequired
-    };
-
-    // return TitledComponent;
-    const IntlTitledComponent = injectIntl(TitledComponent);
-    return IntlTitledComponent;
-
+    return TitledComponent;
 };
 
 export {

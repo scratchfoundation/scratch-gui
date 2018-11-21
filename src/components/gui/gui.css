@@ -279,14 +279,43 @@ $fade-out-distance: 15px;
     margin-top: 0;
 }
 
+/* Sprite Selection Watermark */
+.watermark {
+    position: absolute;
+    top: 1.25rem;
+    pointer-events: none;
+}
+
+[dir="ltr"] .watermark {
+    right: 1.25rem;
+}
+
+[dir="rtl"] .watermark {
+    left: 1.25rem;
+}
+
+/* Menu */
+
+.menu-bar-position {
+    position: relative;
+    z-index: $z-index-menu-bar;
+}
 /* Alerts */
 
 .alerts-container {
-    width: 448px;
+    width: 520px;
     z-index: $z-index-alerts;
     left: 0;
     right: 0;
     margin: auto;
     position: absolute;
     margin-top: 53px;
+}
+
+/*
+    Make the (background) page not scrollable when modals are open
+    This CSS class is automatically added to the body when react-modal is open
+*/
+:global(.ReactModal__Body--open) {
+    overflow: hidden;
 }

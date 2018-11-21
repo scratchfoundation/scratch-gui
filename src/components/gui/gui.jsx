@@ -20,6 +20,7 @@ import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import PreviewModal from '../../containers/preview-modal.jsx';
@@ -29,6 +30,7 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
+import ConnectionModal from '../../containers/connection-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -56,12 +58,24 @@ const GUIComponent = props => {
         accountNavOpen,
         activeTabIndex,
         alertsVisible,
+        authorId,
+        authorThumbnailUrl,
+        authorUsername,
         basePath,
         backdropLibraryVisible,
-        backpackOptions,
+        backpackHost,
+        backpackVisible,
         blocksTabVisible,
         cardsVisible,
+        canCreateNew,
+        canEditTitle,
+        canRemix,
+        canSave,
+        canCreateCopy,
+        canShare,
+        canUseCloud,
         children,
+        connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
@@ -69,6 +83,7 @@ const GUIComponent = props => {
         intl,
         isPlayerOnly,
         isRtl,
+        isShared,
         loading,
         renderLogin,
         onClickAccountNav,
@@ -86,9 +101,10 @@ const GUIComponent = props => {
         onSeeCommunity,
         onShare,
         previewInfoVisible,
-        targetIsStage,
+        showComingSoon,
         soundsTabVisible,
         stageSizeMode,
+        targetIsStage,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -150,6 +166,11 @@ const GUIComponent = props => {
                 {alertsVisible ? (
                     <Alerts className={styles.alertsContainer} />
                 ) : null}
+                {connectionModalVisible ? (
+                    <ConnectionModal
+                        vm={vm}
+                    />
+                ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary
                         vm={vm}
@@ -164,8 +185,20 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    authorId={authorId}
+                    authorThumbnailUrl={authorThumbnailUrl}
+                    authorUsername={authorUsername}
+                    canCreateCopy={canCreateCopy}
+                    canCreateNew={canCreateNew}
+                    canEditTitle={canEditTitle}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canShare={canShare}
+                    className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
+                    isShared={isShared}
                     renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
@@ -238,6 +271,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
+                                            canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
                                             options={{
@@ -260,6 +294,9 @@ const GUIComponent = props => {
                                             />
                                         </button>
                                     </Box>
+                                    <Box className={styles.watermark}>
+                                        <Watermark />
+                                    </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
@@ -268,8 +305,8 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {backpackOptions.visible ? (
-                                <Backpack host={backpackOptions.host} />
+                            {backpackVisible ? (
+                                <Backpack host={backpackHost} />
                             ) : null}
                         </Box>
 
@@ -297,13 +334,21 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
+    authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
+    authorThumbnailUrl: PropTypes.string,
+    authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
-    backpackOptions: PropTypes.shape({
-        host: PropTypes.string,
-        visible: PropTypes.bool
-    }),
+    backpackHost: PropTypes.string,
+    backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canCreateCopy: PropTypes.bool,
+    canCreateNew: PropTypes.bool,
+    canEditTitle: PropTypes.bool,
+    canRemix: PropTypes.bool,
+    canSave: PropTypes.bool,
+    canShare: PropTypes.bool,
+    canUseCloud: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -313,6 +358,7 @@ GUIComponent.propTypes = {
     intl: intlShape.isRequired,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
+    isShared: PropTypes.bool,
     loading: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
@@ -331,6 +377,7 @@ GUIComponent.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
+    showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -338,11 +385,20 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    backpackOptions: {
-        host: null,
-        visible: false
-    },
+    backpackHost: null,
+    backpackVisible: false,
     basePath: './',
+    canCreateNew: false,
+    canEditTitle: false,
+    canRemix: false,
+    canSave: false,
+    canCreateCopy: false,
+    canShare: false,
+    canUseCloud: false,
+    enableCommunity: false,
+    isShared: false,
+    onUpdateProjectTitle: () => {},
+    showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

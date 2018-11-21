@@ -58,25 +58,6 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="Marty the Robot (Extended)"
-                description="Name for the 'Marty the Robot (Extended)' extension"
-                id="gui.extension.martyExt.name"
-            />
-        ),
-        extensionId: 'martyExt',
-        iconURL: martyExtImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Play and program with Marty."
-                description="Description for the 'Marty the Robot (Extended)' extension"
-                id="gui.extension.martyExt.description"
-            />
-        ),
-        featured: true,
-    },
-    {
-        name: (
-            <FormattedMessage
                 defaultMessage="Music"
                 description="Name for the 'Music' extension"
                 id="gui.extension.music.name"

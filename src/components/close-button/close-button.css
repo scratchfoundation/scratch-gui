@@ -37,6 +37,7 @@
     height: 1.75rem;
     box-shadow: 0 0 0 2px $ui-black-transparent;
 }
+
  .large.orange {
     background-color: hsla(29, 100%, 54%, 0.2);
     box-shadow: 0px 0px 0px 2px hsla(29, 100%, 54%, 0.2);

@@ -21,6 +21,19 @@ const initialState = {
     alertsList: []
 };
 
+const filterPopupAlerts = alertsList => (
+    alertsList.filter(curAlert => (
+        curAlert.alertType === AlertTypes.STANDARD ||
+        curAlert.alertType === AlertTypes.EXTENSION
+    ))
+);
+
+const filterInlineAlerts = alertsList => (
+    alertsList.filter(curAlert => (
+        curAlert.alertType === AlertTypes.INLINE
+    ))
+);
+
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
@@ -177,6 +190,8 @@ export {
     reducer as default,
     initialState as alertsInitialState,
     closeAlert,
+    filterInlineAlerts,
+    filterPopupAlerts,
     showAlertWithTimeout,
     showExtensionAlert,
     showStandardAlert

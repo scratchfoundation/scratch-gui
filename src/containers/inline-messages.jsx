@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AlertTypes} from '../lib/alerts/index.jsx';
 
+import {
+    filterInlineAlerts
+} from '../reducers/alerts';
+
 import InlineMessageComponent from '../components/alerts/inline-message.jsx';
 
 const InlineMessages = ({
@@ -13,9 +17,7 @@ const InlineMessages = ({
         return null;
     }
     // only display inline alerts here
-    const inlineAlerts = alertsList.filter(curAlert => (
-        curAlert.alertType === AlertTypes.INLINE
-    ));
+    const inlineAlerts = filterInlineAlerts(alertsList);
     if (!inlineAlerts || !inlineAlerts.length) {
         return null;
     }

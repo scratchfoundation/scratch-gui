@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {AlertTypes} from '../lib/alerts/index.jsx';
 
 import {
-    closeAlert
+    closeAlert,
+    filterPopupAlerts
 } from '../reducers/alerts';
 
 import AlertsComponent from '../components/alerts/alerts.jsx';
@@ -16,10 +17,7 @@ const Alerts = ({
 }) => (
     <AlertsComponent
         // only display standard and extension alerts here
-        alertsList={alertsList.filter(curAlert => (
-            curAlert.alertType === AlertTypes.STANDARD ||
-            curAlert.alertType === AlertTypes.EXTENSION
-        ))}
+        alertsList={filterPopupAlerts(alertsList)}
         className={className}
         onCloseAlert={onCloseAlert}
     />

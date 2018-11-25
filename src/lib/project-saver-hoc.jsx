@@ -26,11 +26,7 @@ import {
     projectError
 } from '../reducers/project-state';
 
-// wait MAX_AUTOSAVE_WAIT_SECS between checking if we need to autosave
-// if an autosave is done, try again in MIN_AUTOSAVE_WAIT_SECS. The idea
-// is to check more frequently while changes are being made frequently.
-const MAX_AUTOSAVE_WAIT_SECS = 60;
-const MIN_AUTOSAVE_WAIT_SECS = 15;
+const AUTOSAVE_WAIT_SECS = 120;
 
 /**
  * Higher Order Component to provide behavior for saving projects.
@@ -46,14 +42,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.state = {
-                autoSaveActive: false
+                autoSaveActive: false,
+                autoSaveTimeoutId: null
             };
         }
-        componentDidMount () {
-            // regularly check if we should save, whether project belongs to the user or not.
-            this.startAutoSaveCheckin();
-        }
         componentDidUpdate (prevProps) {
+            if (this.props.isDirtyProject && !prevProps.isDirtyProject) {
+                this.checkShouldAutoSave();
+            }
             if (this.props.isUpdating && !prevProps.isUpdating) {
                 this.updateProjectToStorage();
             }
@@ -88,41 +84,34 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
-            const showingSaveable = this.props.canSave && this.props.isShowingWithId;
-            if (showingSaveable) {
+            this.clearAutoSaveTimeout();
+            if (this.showingSaveable()) {
                 this.updateProjectToStorage();
             }
-            this.stopAutoSaveCheckin();
         }
         showingSaveable () {
             return this.props.canSave && this.props.isShowingWithId;
         }
-        startAutoSaveCheckin () {
-            if (!this.state.autoSaveActive) {
-                this.setState({
-                    autoSaveActive: true
-                });
-                this.autoSaveCheckin(MIN_AUTOSAVE_WAIT_SECS);
+        checkShouldAutoSave () {
+            if (this.state.autoSaveTimeoutId === null && this.showingSaveable()) {
+                this.scheduleAutoSave();
             }
         }
-        stopAutoSaveCheckin () {
-            this.setState({
-                autoSaveActive: false
-            });
+        clearAutoSaveTimeout () {
+            if (this.state.autoSaveTimeoutId !== null) {
+                clearTimeout(this.state.autoSaveTimeoutId);
+                this.setState({autoSaveTimeoutId: null});
+            }
         }
-        autoSaveCheckin (waitSecs) {
-            setTimeout(() => {
+        scheduleAutoSave () {
+            const timeoutId = setTimeout(() => {
                 this.tryToAutoSave();
-            }, waitSecs * 1000);
+            }, AUTOSAVE_WAIT_SECS * 1000);
+            this.setState({autoSaveTimeoutId: timeoutId});
         }
         tryToAutoSave () {
-            if (this.state.autoSaveActive) {
-                let nextWaitSecs = MAX_AUTOSAVE_WAIT_SECS;
-                if (this.showingSaveable() && this.props.isDirtyProject) {
-                    this.props.onAutoUpdateProject();
-                    nextWaitSecs = MIN_AUTOSAVE_WAIT_SECS;
-                }
-                this.autoSaveCheckin(nextWaitSecs);
+            if (this.props.isDirtyProject && this.showingSaveable()) {
+                this.props.onAutoUpdateProject();
             }
         }
         isShowingCreatable (props) {
@@ -136,6 +125,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     // it, because there are no values contained in it that we care about
                     this.props.onUpdatedProject(this.props.loadingState);
                     this.props.onShowSaveSuccessAlert();
+                    this.clearAutoSaveTimeout();
                 })
                 .catch(err => {
                     // Always show the savingError alert because it gives the

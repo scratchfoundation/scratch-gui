@@ -157,10 +157,15 @@ class MenuBar extends React.Component {
         ]);
     }
     handleClickNew () {
-        // if canSave===true and canCreateNew===true, it's safe to replace current project,
-        // since we will auto-save first. Else, confirm first.
-        const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
-            confirm(this.props.intl.formatMessage(messages.confirmNav)); // eslint-disable-line no-alert
+        let readyToReplaceProject = true;
+        // if the project is dirty, and user owns the project, we will autosave.
+        // but if they don't own this project, user should consider downloading first.
+        if (this.props.projectChanged && !this.props.canCreateNew) {
+            readyToReplaceProject = confirm( // eslint-disable-line no-alert
+                this.props.intl.formatMessage(messages.confirmNav)
+            );
+        }
+        this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }
@@ -734,6 +739,7 @@ MenuBar.propTypes = {
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -757,6 +763,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
+        projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null

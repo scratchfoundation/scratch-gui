@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {AlertTypes} from '../lib/alerts/index.jsx';
 
 import {
     filterInlineAlerts

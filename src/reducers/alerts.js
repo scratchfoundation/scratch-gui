@@ -2,22 +2,27 @@ import alertsData from '../lib/alerts/index.jsx';
 import {AlertTypes, AlertLevels} from '../lib/alerts/index.jsx';
 import extensionData from '../lib/libraries/extensions/index.jsx';
 
-const SHOW_STANDARD_ALERT = 'scratch-gui/alerts/SHOW_STANDARD_ALERT';
+const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 const SHOW_EXTENSION_ALERT = 'scratch-gui/alerts/SHOW_EXTENSION_ALERT';
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const CLOSE_ALERTS_WITH_ID = 'scratch-gui/alerts/CLOSE_ALERTS_WITH_ID';
 
+/**
+ * Initial state of alerts reducer
+ *
+ * {bool} visible - whether the alerts are visible
+ * {array} alertsList - list of alerts, each with properties:
+ *  * alert type (required): one of AlertTypes
+ *  * closeButton (optional): bool indicating that we should show close button
+ *  * content (optional): react element (a <FormattedMessage />)
+ *  * extentionId (optional): id string that identifies the extension
+ *  * iconURL (optional): string
+ *  * level (required): string, one of AlertLevels
+ *  * message (optional): string
+ *  * showReconnect (optional): bool
+ */
 const initialState = {
     visible: true,
-    // list of alerts, each with properties:
-    // * alert type (required): one of AlertTypes
-    // * closeButton (optional): bool indicating that we should show close button
-    // * content (optional): react element (a <FormattedMessage />)
-    // * extentionId (optional): id string that identifies the extension
-    // * iconURL (optional): string
-    // * level (required): string, one of AlertLevels
-    // * message (optional): string
-    // * showReconnect (optional): bool
     alertsList: []
 };
 
@@ -37,7 +42,7 @@ const filterInlineAlerts = alertsList => (
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SHOW_STANDARD_ALERT: { // also will show inline alerts
+    case SHOW_ALERT: { // shows standard and inline alerts
         const alertId = action.alertId;
         if (alertId) {
             const newAlert = {
@@ -147,7 +152,7 @@ const closeAlertsWithId = function (alertId) {
  */
 const showStandardAlert = function (alertId) {
     return {
-        type: SHOW_STANDARD_ALERT,
+        type: SHOW_ALERT,
         alertId
     };
 };

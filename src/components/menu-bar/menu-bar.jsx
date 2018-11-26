@@ -4,6 +4,7 @@ import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-int
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import React from 'react';
+import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
@@ -64,6 +65,8 @@ import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 
 import smalrubyLogo from './hatti.svg';
+
+import {updateRubyCodeTarget} from '../../reducers/ruby-code';
 
 const ariaMessages = defineMessages({
     language: {
@@ -140,6 +143,7 @@ class MenuBar extends React.Component {
             'handleClickRemix',
             'handleClickSave',
             'handleClickSaveAsCopy',
+            'handleClickGenerateRubyFromCode',
             'handleClickSeeCommunity',
             'handleClickShare',
             'handleCloseFileMenuAndThen',
@@ -170,6 +174,10 @@ class MenuBar extends React.Component {
     handleClickSaveAsCopy () {
         this.props.onClickSaveAsCopy();
         this.props.onRequestCloseFile();
+    }
+    handleClickGenerateRubyFromCode () {
+        this.props.updateRubyCodeTargetState(this.props.vm.editingTarget);
+        this.props.onRequestCloseEdit();
     }
     handleClickSeeCommunity (waitForUpdate) {
         if (this.props.canSave) { // save before transitioning to project page
@@ -265,6 +273,13 @@ class MenuBar extends React.Component {
                 defaultMessage="New"
                 description="Menu bar item for creating a new project"
                 id="gui.menuBar.new"
+            />
+        );
+        const generateRubyFromCodeMessage = (
+            <FormattedMessage
+                defaultMessage="Generate Ruby from Code"
+                description="Menu bar item for generating ruby from code"
+                id="gui.smalruby3.menuBar.generateRubyFromCode"
             />
         );
         const remixButton = (
@@ -453,6 +468,14 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
+                                </MenuSection>
+                                <MenuSection>
+                                    <MenuItem
+                                        isRtl={this.props.isRtl}
+                                        onClick={this.handleClickGenerateRubyFromCode}
+                                    >
+                                        {generateRubyFromCodeMessage}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -722,7 +745,9 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     showComingSoon: PropTypes.bool,
-    username: PropTypes.string
+    updateRubyCodeTargetState: PropTypes.func,
+    username: PropTypes.string,
+    vm: PropTypes.instanceOf(VM)
 };
 
 MenuBar.defaultProps = {
@@ -743,7 +768,8 @@ const mapStateToProps = state => {
         loginMenuOpen: loginMenuOpen(state),
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
-        username: user ? user.username : null
+        username: user ? user.username : null,
+        vm: state.scratchGui.vm
     };
 };
 
@@ -764,7 +790,8 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    updateRubyCodeTargetState: target => dispatch(updateRubyCodeTarget(target))
 });
 
 export default injectIntl(connect(

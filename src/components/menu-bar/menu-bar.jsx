@@ -750,7 +750,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
-        projectTitle: state.scratchGui.projectTitle,
+        projectTitle: state.scratchGui.projectInfo.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null
     };

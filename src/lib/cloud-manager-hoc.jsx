@@ -47,7 +47,8 @@ const cloudManagerHOC = function (WrappedComponent) {
             return !!(props.cloudHost && props.username && props.vm && props.projectId);
         }
         shouldConnect (props) {
-            return !this.isConnected() && this.canUseCloud(props) && props.isShowingWithId;
+            return !this.isConnected() && this.canUseCloud(props) &&
+                props.isShowingWithId && props.projectHasCloudData;
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
@@ -81,6 +82,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 cloudHost,
+                projectHasCloudData,
                 projectId,
                 username,
                 isShowingWithId,
@@ -101,6 +103,7 @@ const cloudManagerHOC = function (WrappedComponent) {
     CloudManager.propTypes = {
         cloudHost: PropTypes.string,
         isShowingWithId: PropTypes.bool,
+        projectHasCloudData: PropTypes.bool,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
@@ -110,7 +113,8 @@ const cloudManagerHOC = function (WrappedComponent) {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isShowingWithId: getIsShowingWithId(loadingState),
-            projectId: state.scratchGui.projectState.projectId
+            projectId: state.scratchGui.projectState.projectId,
+            projectHasCloudData: state.scratchGui.projectInfo.projectHasCloudData
         };
     };
 

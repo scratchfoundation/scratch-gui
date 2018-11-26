@@ -56,7 +56,7 @@ ProjectTitleInput.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    projectTitle: state.scratchGui.projectTitle
+    projectTitle: state.scratchGui.projectInfo.projectTitle
 });
 
 const mapDispatchToProps = () => ({});

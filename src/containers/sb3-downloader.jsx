@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {projectTitleInitialState} from '../reducers/project-title';
+import {projectInfoInitialState} from '../reducers/project-info';
 
 /**
  * Project saver component passes a downloadProject function to its child.
@@ -79,7 +79,7 @@ SB3Downloader.defaultProps = {
 
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
-    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
+    projectFilename: getProjectFilename(state.scratchGui.projectInfo.projectTitle, projectInfoInitialState.projectTitle)
 });
 
 export default connect(

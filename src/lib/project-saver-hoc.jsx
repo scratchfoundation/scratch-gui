@@ -252,7 +252,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isManualUpdating: getIsManualUpdating(loadingState),
             loadingState: loadingState,
             reduxProjectId: state.scratchGui.projectState.projectId,
-            reduxProjectTitle: state.scratchGui.projectTitle,
+            reduxProjectTitle: state.scratchGui.projectInfo.projectTitle,
             vm: state.scratchGui.vm
         };
     };

@@ -12,7 +12,7 @@ import {
     getIsError,
     getIsShowingProject
 } from '../reducers/project-state';
-import {setProjectTitle} from '../reducers/project-title';
+import {setProjectTitle} from '../reducers/project-info';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,

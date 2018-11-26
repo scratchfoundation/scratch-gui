@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
+import {setProjectHasCloudData} from '../reducers/project-info';
 import {setRunningState, setTurboState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
@@ -41,7 +42,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
             this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-
+            this.props.vm.on('HAS_CLOUD_DATA_UPDATE', this.props.onHasCloudDataUpdate);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -103,6 +104,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 attachKeyboardEvents,
                 shouldEmitTargetsUpdate,
                 onBlockDragUpdate,
+                onHasCloudDataUpdate,
                 onKeyDown,
                 onKeyUp,
                 onMicListeningUpdate,
@@ -122,6 +124,7 @@ const vmListenerHOC = function (WrappedComponent) {
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
         onBlockDragUpdate: PropTypes.func.isRequired,
+        onHasCloudDataUpdate: PropTypes.func.isRequired,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
         onMicListeningUpdate: PropTypes.func.isRequired,
@@ -155,6 +158,9 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onBlockDragUpdate: areBlocksOverGui => {
             dispatch(updateBlockDrag(areBlocksOverGui));
+        },
+        onHasCloudDataUpdate: hasCloudData => {
+            dispatch(setProjectHasCloudData(hasCloudData));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

@@ -56,32 +56,28 @@ const reducer = function (state, action) {
         return state; // if alert not found, show nothing
     }
     case SHOW_EXTENSION_ALERT: {
-        const newList = state.alertsList.slice();
-        const newAlert = {
-            alertType: AlertTypes.EXTENSION,
-            message: action.data.message,
-            level: AlertLevels.WARN
-        };
         const extensionId = action.data.extensionId;
-        newAlert.showReconnect = false;
-        newAlert.extensionId = extensionId;
-        if (extensionId) { // if it's an extension
+        if (extensionId) {
             const extension = extensionData.find(ext => ext.extensionId === extensionId);
             if (extension) {
-                newAlert.showReconnect = true;
-                if (extension.name) {
-                    newAlert.content = extension.name;
-                }
-                if (extension.smallPeripheralImage) {
-                    newAlert.iconURL = extension.smallPeripheralImage;
-                }
-                newAlert.closeButton = true;
+                const newList = state.alertsList.slice();
+                const newAlert = {
+                    alertType: AlertTypes.EXTENSION,
+                    closeButton: true,
+                    extensionId: extensionId,
+                    extensionName: extension.name,
+                    iconURL: extension.smallPeripheralImage,
+                    level: AlertLevels.WARN,
+                    showReconnect: true
+                };
+                newList.push(newAlert);
+
+                return Object.assign({}, state, {
+                    alertsList: newList
+                });
             }
         }
-        newList.push(newAlert);
-        return Object.assign({}, state, {
-            alertsList: newList
-        });
+        return state; // if alert not found, show nothing
     }
     case CLOSE_ALERT: {
         const newList = state.alertsList.slice();

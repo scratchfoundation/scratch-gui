@@ -18,6 +18,7 @@ const AlertsComponent = ({
                 closeButton={a.closeButton}
                 content={a.content}
                 extensionId={a.extensionId}
+                extensionName={a.extensionName}
                 iconSpinner={a.iconSpinner}
                 iconURL={a.iconURL}
                 index={index}

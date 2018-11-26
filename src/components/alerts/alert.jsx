@@ -18,10 +18,10 @@ const closeButtonColors = {
 const AlertComponent = ({
     content,
     closeButton,
+    extensionName,
     iconSpinner,
     iconURL,
     level,
-    message,
     onCloseAlert,
     onReconnect,
     showReconnect
@@ -29,21 +29,29 @@ const AlertComponent = ({
     <Box
         className={classNames(styles.alert, styles[level])}
     >
+        {/* TODO: implement Rtl handling */}
+        {iconSpinner && (
+            <Spinner className={styles.alertSpinner} />
+        )}
+        {iconURL && (
+            <img
+                className={styles.alertIcon}
+                src={iconURL}
+            />
+        )}
         <div className={styles.alertMessage}>
-            {/* TODO: implement Rtl handling */}
-            <div className={styles.alertIcon}>
-                {iconSpinner && (
-                    <Spinner />
-                )}
-                {iconURL && (
-                    <img src={iconURL} />
-                )}
-            </div>
-            <div>
-                {message}
-                &nbsp;
-                {content}
-            </div>
+            {extensionName ? (
+                <FormattedMessage
+                    defaultMessage="Scratch lost connection to {extensionName}"
+                    description="Message indicating that an extension peripheral has been disconnected"
+                    id="gui.alerts.lostPeripheralConnection"
+                    values={{
+                        extensionName: (
+                            `${extensionName}`
+                        )
+                    }}
+                />
+            ) : content}
         </div>
         {showReconnect && (
             <button
@@ -74,11 +82,11 @@ const AlertComponent = ({
 
 AlertComponent.propTypes = {
     closeButton: PropTypes.bool,
-    content: PropTypes.element,
+    content: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    extensionName: PropTypes.string,
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     level: PropTypes.string,
-    message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onReconnect: PropTypes.func,
     showReconnect: PropTypes.bool

@@ -84,14 +84,6 @@ describe('CloudProvider', () => {
         expect(typeof obj.value).toEqual('undefined');
     });
 
-    test('onMessage ack', () => {
-        const msg = JSON.stringify({
-            method: 'ack',
-            name: 'name'
-        });
-        cloudProvider.connection._receive({data: msg});
-        expect(vmIOData[0].varCreate.name).toEqual('name');
-    });
 
     test('onMessage set', () => {
         const msg = JSON.stringify({
@@ -121,12 +113,13 @@ describe('CloudProvider', () => {
             value: 'value'
         });
         const msg2 = JSON.stringify({
-            method: 'ack',
-            name: 'name2'
+            method: 'set',
+            name: 'name2',
+            value: 'value2'
         });
         cloudProvider.connection._receive({data: `${msg1}\n${msg2}`});
         expect(vmIOData[0].varUpdate.name).toEqual('name1');
-        expect(vmIOData[1].varCreate.name).toEqual('name2');
+        expect(vmIOData[1].varUpdate.name).toEqual('name2');
     });
 
     test('connnection attempts set back to 1 when socket is opened', () => {

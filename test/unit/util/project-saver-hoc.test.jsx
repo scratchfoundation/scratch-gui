@@ -16,6 +16,9 @@ describe('projectSaverHOC', () => {
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
+                projectInfo: {
+                    projectTitle: ''
+                },
                 projectState: {}
             }
         });

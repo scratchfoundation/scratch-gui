@@ -36,7 +36,7 @@ export default function (Generator) {
     Generator.event_whenbroadcastreceived = function (block) {
         block.isStatement = true;
         const message = Generator.getFieldValue(block, 'BROADCAST_OPTION');
-        return `${Generator.spriteName()}.when(receive:, ${Generator.quote_(message)}) do\n`;
+        return `${Generator.spriteName()}.when(:receive, ${Generator.quote_(message)}) do\n`;
     };
 
     Generator.event_broadcast = function (block) {

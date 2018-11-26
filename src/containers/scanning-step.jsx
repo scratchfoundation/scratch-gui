@@ -71,6 +71,7 @@ class ScanningStep extends React.Component {
                 onConnecting={this.props.onConnecting}
                 onRefresh={this.handleRefresh}
                 onManual={this.handleManual}
+                useManual={this.props.useManual}
             />
         );
     }

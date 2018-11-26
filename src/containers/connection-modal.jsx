@@ -116,6 +116,7 @@ class ConnectionModal extends React.Component {
                 smallPeripheralImage={this.state.extension.smallPeripheralImage}
                 title={this.props.extensionId}
                 useAutoScan={this.state.extension.useAutoScan}
+                useManual={this.state.extension.useManual}
                 vm={this.props.vm}
                 onCancel={this.handleCancel}
                 onConnected={this.handleConnected}

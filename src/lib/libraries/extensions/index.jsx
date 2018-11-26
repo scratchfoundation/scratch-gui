@@ -53,6 +53,7 @@ export default [
         wifiConnectionRequired: true,
         collaborator: "Robotical",
         useAutoScan: false,
+        useManual: true,
         peripheralImage: martyPeripheralImage,
         smallPeripheralImage: martyMenuImage,
         connectingMessage: (

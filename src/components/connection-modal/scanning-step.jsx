@@ -67,36 +67,54 @@ const ScanningStep = props => (
                 counter={0}
                 total={3}
             />
-            <div class={styles.buttonRow}>
-                <button
-                    className={styles.manualButton}
-                    onClick={props.onManual}
-                >
-                    <FormattedMessage
-                        defaultMessage="Connect Manually"
-                        description="Button in prompt for starting a manual connection"
-                        id="gui.connection.manual"
-                    />
-                    <img
-                        className={styles.buttonIconRight}
-                        src={manualIcon}
-                    />
-                </button>
-                <button
-                    className={styles.connectionButton}
-                    onClick={props.onRefresh}
-                >
-                    <FormattedMessage
-                        defaultMessage="Refresh"
-                        description="Button in prompt for starting a search"
-                        id="gui.connection.search"
-                    />
-                    <img
-                        className={styles.buttonIconRight}
-                        src={refreshIcon}
-                    />
-                </button>
-            </div>
+            {props.useManual ? (
+                 <div className={styles.buttonRow}>
+                     <button
+                         className={styles.manualButton}
+                         onClick={props.onManual}
+                     >
+                         <FormattedMessage
+                             defaultMessage="Connect Manually"
+                             description="Button in prompt for starting a manual connection"
+                             id="gui.connection.manual"
+                         />
+                         <img
+                             className={styles.buttonIconRight}
+                             src={manualIcon}
+                         />
+                     </button>
+                     <button
+                         className={styles.connectionButton}
+                         onClick={props.onRefresh}
+                     >
+                         <FormattedMessage
+                             defaultMessage="Refresh"
+                             description="Button in prompt for starting a search"
+                             id="gui.connection.search"
+                         />
+                         <img
+                             className={styles.buttonIconRight}
+                             src={refreshIcon}
+                         />
+                     </button>
+                 </div>
+            ) : (
+
+                 <button
+                     className={styles.connectionButton}
+                     onClick={props.onRefresh}
+                     >
+                     <FormattedMessage
+                         defaultMessage="Refresh"
+                         description="Button in prompt for starting a search"
+                         id="gui.connection.search"
+                     />
+                     <img
+                         className={styles.buttonIconRight}
+                         src={refreshIcon}
+                     />
+                 </button>
+            )}
         </Box>
     </Box>
 );
@@ -105,6 +123,7 @@ ScanningStep.propTypes = {
     onConnecting: PropTypes.func,
     onRefresh: PropTypes.func,
     onManual: PropTypes.func,
+    useManual: PropTypes.bool,
     peripheralList: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         rssi: PropTypes.number,

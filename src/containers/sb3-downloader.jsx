@@ -4,6 +4,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 
+import RubyToBlocksConverterHOC from '../lib/ruby-to-blocks-converter-hoc.jsx';
+
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -26,6 +28,10 @@ class SB3Downloader extends React.Component {
         ]);
     }
     downloadProject () {
+        if (!this.props.targetCodeToBlocks()) {
+            return;
+        }
+
         const downloadLink = document.createElement('a');
         document.body.appendChild(downloadLink);
 
@@ -71,7 +77,8 @@ SB3Downloader.propTypes = {
     className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    saveProjectSb3: PropTypes.func
+    saveProjectSb3: PropTypes.func,
+    targetCodeToBlocks: PropTypes.func
 };
 SB3Downloader.defaultProps = {
     className: ''
@@ -82,7 +89,7 @@ const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
 });
 
-export default connect(
+export default RubyToBlocksConverterHOC(connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(SB3Downloader);
+)(SB3Downloader));

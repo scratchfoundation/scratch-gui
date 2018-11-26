@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import RubyGenerator from '../lib/ruby-generator';
 import VM from 'scratch-vm';
+import {rubyCodeShape} from '../reducers/ruby-code';
 
 class RubyDownloader extends React.Component {
     constructor (props) {
@@ -23,10 +24,16 @@ class RubyDownloader extends React.Component {
             const sprite = this.props.sprites[id];
             targets[sprite.order + 1] = idToTarget[id];
         }
-        const code = RubyGenerator.targetsToCode(targets, {
+        const options = {
             requires: ['smalruby3'],
             withSpriteNew: true
-        });
+        };
+        if (this.props.rubyCode.modified) {
+            options.targetsCode = {
+                [this.props.rubyCode.target.id]: this.props.rubyCode.code
+            };
+        }
+        const code = RubyGenerator.targetsToCode(targets, options);
 
         return new Blob([code], {
             type: 'text/x-ruby-script'
@@ -77,6 +84,7 @@ RubyDownloader.propTypes = {
     className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
+    rubyCode: rubyCodeShape,
     sprites: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         order: PropTypes.number.isRequired
@@ -94,7 +102,8 @@ const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
-    vm: state.scratchGui.vm
+    vm: state.scratchGui.vm,
+    rubyCode: state.scratchGui.rubyCode
 });
 
 export default connect(

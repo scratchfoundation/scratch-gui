@@ -21,10 +21,14 @@ describe('CloudManagerHOC', () => {
     let store;
     let vm;
     let stillLoadingStore;
+    let projectDoesNotHaveCloudDataStore;
 
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
+                projectInfo: {
+                    projectHasCloudData: true
+                },
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.SHOWING_WITH_ID
@@ -33,9 +37,23 @@ describe('CloudManagerHOC', () => {
         });
         stillLoadingStore = mockStore({
             scratchGui: {
+                projectInfo: {
+                    projectHasCloudData: true
+                },
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.LOADING_WITH_ID
+                }
+            }
+        });
+        projectDoesNotHaveCloudDataStore = mockStore({
+            scratchGui: {
+                projectInfo: {
+                    projectHasCloudData: false
+                },
+                projectState: {
+                    projectId: '1234',
+                    loadingState: LoadingState.SHOWING_WITH_ID
                 }
             }
         });
@@ -151,7 +169,30 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
     });
 
-    test('when it unmounts, the cloud provider is set on the vm', () => {
+    test('projectHasCloudData becoming true should trigger a cloud connection', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={projectDoesNotHaveCloudDataStore}
+                username="user"
+                vm={vm}
+            />
+        );
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+
+        mounted.setProps({
+            projectHasCloudData: true
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(1);
+        expect(CloudProvider).toHaveBeenCalledTimes(1);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+    });
+
+    test('when it unmounts, the cloud provider is reset to null on the vm', () => {
         const Component = () => (<div />);
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
@@ -217,6 +258,31 @@ describe('CloudManagerHOC', () => {
 
         mounted.setProps({
             username: 'a different user'
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+
+    });
+
+    test('projectHasCloudDataUpdate becoming false should trigger cloudProvider disconnection', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        mounted.setProps({
+            projectHasCloudData: false
         });
 
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);

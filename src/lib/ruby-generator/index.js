@@ -15,6 +15,7 @@ import SensingBlocks from './sensing.js';
 import OperatorsBlocks from './operators.js';
 import DataBlocks from './data.js';
 import ProcedureBlocks from './procedure.js';
+import RubyBlocks from './ruby.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -431,5 +432,6 @@ SensingBlocks(RubyGenerator);
 OperatorsBlocks(RubyGenerator);
 DataBlocks(RubyGenerator);
 ProcedureBlocks(RubyGenerator);
+RubyBlocks(RubyGenerator);
 
 export default RubyGenerator;

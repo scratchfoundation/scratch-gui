@@ -32,6 +32,7 @@ class GreenFlag extends React.Component {
     }
     handleClick (e) {
         e.preventDefault();
+
         if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.vm.runtime.turboMode);
         } else {

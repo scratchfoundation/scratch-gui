@@ -128,36 +128,41 @@ class Generator {
 
         this.init(options);
 
-        const codes = [];
-        const proceduresCodes = [];
-        const scripts = this.getScripts();
-        scripts.forEach(topBlockId => {
-            const block = this.getBlock(topBlockId);
-            let line = this.blockToCode(block);
-            if (_.isArray(line)) {
-                // Value blocks return tuples of code and operator order.
-                // Top-level blocks don't care about operator order.
-                //
-                // This block is a naked value.  Ask the language's code generator if
-                // it wants to append a semicolon, or something.
-                if (this.scrubNakedValue) {
-                    line = this.scrubNakedValue(line[0]);
+        let code;
+        if (options && options.hasOwnProperty('targetsCode') && options.targetsCode.hasOwnProperty(target.id)) {
+            code = `${options.targetsCode[target.id]}\n`.replace(/\n\s+$/, '\n');
+        } else {
+            const codes = [];
+            const proceduresCodes = [];
+            const scripts = this.getScripts();
+            scripts.forEach(topBlockId => {
+                const block = this.getBlock(topBlockId);
+                let line = this.blockToCode(block);
+                if (_.isArray(line)) {
+                    // Value blocks return tuples of code and operator order.
+                    // Top-level blocks don't care about operator order.
+                    //
+                    // This block is a naked value.  Ask the language's code generator if
+                    // it wants to append a semicolon, or something.
+                    if (this.scrubNakedValue) {
+                        line = this.scrubNakedValue(line[0]);
+                    }
                 }
-            }
-            if (line) {
-                if (block.opcode === 'procedures_definition') {
-                    proceduresCodes.push(line);
-                } else {
-                    codes.push(line);
+                if (line) {
+                    if (block.opcode === 'procedures_definition') {
+                        proceduresCodes.push(line);
+                    } else {
+                        codes.push(line);
+                    }
                 }
+            });
+            // Blank line between each section.
+            code = proceduresCodes.join('\n');
+            if (proceduresCodes.length > 0) {
+                code += '\n';
             }
-        });
-        // Blank line between each section.
-        let code = proceduresCodes.join('\n');
-        if (proceduresCodes.length > 0) {
-            code += '\n';
+            code += codes.join('\n');
         }
-        code += codes.join('\n');
 
         code = this.finish(code, options);
 

@@ -5,6 +5,7 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
+import defineRubyBlocks from '../lib/define-ruby-blocks';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -24,12 +25,10 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {updateRubyCode} from '../reducers/ruby-code';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
 import {
     activateTab,
-    BLOCKS_TAB_INDEX,
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
@@ -49,7 +48,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
-        this.ScratchBlocks = VMScratchBlocks(props.vm);
+        this.ScratchBlocks = defineRubyBlocks(VMScratchBlocks(props.vm));
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -167,9 +166,6 @@ class Blocks extends React.Component {
         } else {
             this.workspace.setVisible(false);
         }
-        if (!this.props.blocksTabVisible) {
-            this.props.updateRubyCodeState(this.props.vm.editingTarget);
-        }
     }
     componentWillUnmount () {
         this.detachVM();
@@ -273,9 +269,6 @@ class Blocks extends React.Component {
                 this.updateToolboxBlockValue(`${prefix}y`, Math.round(this.props.vm.editingTarget.y).toString());
             });
         }
-        if (!this.props.blocksTabVisible) {
-            this.props.updateRubyCodeState(this.props.vm.editingTarget);
-        }
     }
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;
@@ -323,6 +316,33 @@ class Blocks extends React.Component {
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
         try {
             this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
+
+            // When we converted blocks from Ruby, update top block positions.
+            if (this.props.vm.editingTarget) {
+                const blocks = this.props.vm.editingTarget.blocks;
+                const scripts = blocks.getScripts();
+                let fromRuby = false;
+                for (let i = 0; i < scripts.length; i++) {
+                    const topBlockId = scripts[i];
+                    const topBlock = blocks.getBlock(topBlockId);
+                    if (typeof topBlock.x === 'undefined' || typeof topBlock.y === 'undefined') {
+                        fromRuby = true;
+                        break;
+                    }
+                }
+                if (fromRuby) {
+                    this.workspace.cleanUp();
+
+                    this.workspace.getTopBlocks(false).forEach(wsTopBlock => {
+                        const topBlock = blocks.getBlock(wsTopBlock.id);
+                        if (topBlock) {
+                            const xy = wsTopBlock.getRelativeToSurfaceXY();
+                            topBlock.x = xy.x;
+                            topBlock.y = xy.y;
+                        }
+                    });
+                }
+            }
         } catch (error) {
             // The workspace is likely incomplete. What did update should be
             // functional.
@@ -437,7 +457,6 @@ class Blocks extends React.Component {
         /* eslint-disable no-unused-vars */
         const {
             anyModalVisible,
-            blocksTabVisible,
             canUseCloud,
             customProceduresVisible,
             extensionLibraryVisible,
@@ -450,7 +469,6 @@ class Blocks extends React.Component {
             onOpenConnectionModal,
             onOpenSoundRecorder,
             updateToolboxState,
-            updateRubyCodeState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
@@ -500,7 +518,6 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
-    blocksTabVisible: PropTypes.bool,
     canUseCloud: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
@@ -538,7 +555,6 @@ Blocks.propTypes = {
     }),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
-    updateRubyCodeState: PropTypes.func,
     updateToolboxState: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
@@ -581,7 +597,6 @@ const mapStateToProps = state => ({
         Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]) ||
         state.scratchGui.mode.isFullScreen
     ),
-    blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     isRtl: state.locales.isRtl,
     locale: state.locales.locale,
@@ -609,9 +624,6 @@ const mapDispatchToProps = dispatch => ({
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));
-    },
-    updateRubyCodeState: target => {
-        dispatch(updateRubyCode(target));
     }
 });
 

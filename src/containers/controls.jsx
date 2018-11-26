@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import analytics from '../lib/analytics';
 import ControlsComponent from '../components/controls/controls.jsx';
 
+import RubyToBlocksConverterHOC from '../lib/ruby-to-blocks-converter-hoc.jsx';
+
 class Controls extends React.Component {
     constructor (props) {
         super(props);
@@ -17,6 +19,11 @@ class Controls extends React.Component {
     }
     handleGreenFlagClick (e) {
         e.preventDefault();
+
+        if (!this.props.targetCodeToBlocks()) {
+            return;
+        }
+
         if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.turbo);
         } else {
@@ -38,6 +45,7 @@ class Controls extends React.Component {
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
+            targetCodeToBlocks, // eslint-disable-line no-unused-vars
             projectRunning,
             turbo,
             ...props
@@ -56,6 +64,7 @@ class Controls extends React.Component {
 
 Controls.propTypes = {
     projectRunning: PropTypes.bool.isRequired,
+    targetCodeToBlocks: PropTypes.func,
     turbo: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM)
 };
@@ -67,4 +76,4 @@ const mapStateToProps = state => ({
 // no-op function to prevent dispatch prop being passed to component
 const mapDispatchToProps = () => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Controls);
+export default RubyToBlocksConverterHOC(connect(mapStateToProps, mapDispatchToProps)(Controls));

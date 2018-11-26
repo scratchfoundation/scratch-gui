@@ -80,6 +80,17 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.SUCCESS
+    },
+    {
+        alertId: 'convertRubyToBlocksError',
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not convert Ruby to Code. Please fix Ruby!"
+                description="Message indicating that project could not be converted Ruby to Blocks"
+                id="gui.smalruby3.alerts.convertRubyToBlocksError"
+            />
+        ),
+        level: AlertLevels.WARN
     }
 ];
 

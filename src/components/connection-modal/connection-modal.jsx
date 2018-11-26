@@ -48,6 +48,7 @@ ConnectionModalComponent.propTypes = {
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,
+    onManual: PropTypes.func,
     peripheralButtonImage: PropTypes.string,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     smallPeripheralImage: PropTypes.string,

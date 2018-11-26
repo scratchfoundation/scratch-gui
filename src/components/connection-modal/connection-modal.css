@@ -307,6 +307,21 @@
     align-items: center;
 }
 
+
+.manual-button {
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    background: white;
+    color: $motion-primary;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0.25rem;
+    border: 1px solid $motion-primary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
 .connection-button:disabled {
     background: $motion-transparent;
 }

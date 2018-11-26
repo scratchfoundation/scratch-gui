@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="20px"
+   height="20px"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg11">
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>close</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">close</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs6" />
+  <g
+     id="close"
+     transform="matrix(0.59089262,-0.59089262,0.59089262,0.59089262,-1.8185447,9.9997188)"
+     style="opacity:1;vector-effect:none;fill:#4c97ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+    <path
+       d="m 15.464935,15.467297 c -0.700529,0.710473 -1.846347,0.710473 -2.556821,0 L 9.998819,12.558002 7.0884188,15.467297 c -0.7060537,0.706054 -1.8507669,0.706054 -2.5568207,0 -0.3524745,-0.352474 -0.531474,-0.818757 -0.531474,-1.27841 0,-0.460758 0.1789995,-0.925936 0.531474,-1.278411 L 7.4408933,10.001181 4.5271783,7.0863611 C 4.173599,6.7327818 3.9945994,6.2676039 4.0001241,5.8024261 c 0,-0.4607582 0.1734749,-0.9204113 0.5270542,-1.2728858 0.7049489,-0.7060537 1.8496621,-0.7060537 2.5568208,0 l 2.9148199,2.913715 2.913715,-2.913715 c 0.706054,-0.7060537 1.851872,-0.7060537 2.557926,0 0.706053,0.7049489 0.706053,1.850767 0,2.5568208 l -2.915925,2.9148199 2.915925,2.913715 c 0.706053,0.706054 0.706053,1.840823 -0.0055,2.552401"
+       id="path8"
+       style="vector-effect:none;fill:#4c97ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+</svg>

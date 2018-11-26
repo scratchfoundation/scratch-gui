@@ -10,6 +10,7 @@ class ScanningStep extends React.Component {
         bindAll(this, [
             'handlePeripheralListUpdate',
             'handlePeripheralScanTimeout',
+            'handleManual',
             'handleRefresh'
         ]);
         this.state = {
@@ -51,6 +52,13 @@ class ScanningStep extends React.Component {
             peripheralList: []
         });
     }
+    handleManual () {
+        this.props.vm.manualAddPeripheral(this.props.extensionId);
+        this.setState({
+            scanning: true,
+            peripheralList: []
+        });
+    }
     render () {
         return (
             <ScanningStepComponent
@@ -62,6 +70,7 @@ class ScanningStep extends React.Component {
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
                 onRefresh={this.handleRefresh}
+                onManual={this.handleManual}
             />
         );
     }

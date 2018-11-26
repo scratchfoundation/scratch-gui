@@ -26,6 +26,7 @@ class Alert extends React.Component {
         const {
             closeButton,
             content,
+            extensionName,
             index, // eslint-disable-line no-unused-vars
             level,
             iconSpinner,
@@ -37,6 +38,7 @@ class Alert extends React.Component {
             <AlertComponent
                 closeButton={closeButton}
                 content={content}
+                extensionName={extensionName}
                 iconSpinner={iconSpinner}
                 iconURL={iconURL}
                 level={level}
@@ -62,6 +64,7 @@ Alert.propTypes = {
     closeButton: PropTypes.bool,
     content: PropTypes.element,
     extensionId: PropTypes.string,
+    extensionName: PropTypes.string,
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     index: PropTypes.number,

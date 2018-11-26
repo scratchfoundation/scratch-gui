@@ -113,10 +113,9 @@ class CloudProvider {
      * @param {string} methodName The message method, indicating the action to perform.
      * @param {string} dataName The name of the cloud variable this message pertains to
      * @param {string | number} dataValue The value to set the cloud variable to
-     * @param {number} dataIndex The index of the item to update (for cloud lists)
      * @param {string} dataNewName The new name for the cloud variable (if renaming)
      */
-    writeToServer (methodName, dataName, dataValue, dataIndex, dataNewName) {
+    writeToServer (methodName, dataName, dataValue, dataNewName) {
         const msg = {};
         msg.method = methodName;
         msg.user = this.username;
@@ -127,8 +126,7 @@ class CloudProvider {
         if (dataNewName) msg.new_name = dataNewName;
 
         // Optional number params need different undefined check
-        if (typeof dataValue !== 'undefined') msg.value = dataValue;
-        if (typeof dataValue !== 'undefined') msg.index = dataIndex;
+        if (typeof dataValue !== 'undefined' && dataValue !== null) msg.value = dataValue;
 
         const dataToWrite = JSON.stringify(msg);
         this.sendCloudData(dataToWrite);
@@ -161,6 +159,25 @@ class CloudProvider {
      */
     updateVariable (name, value) {
         this.writeToServer('set', name, value);
+    }
+
+    /**
+     * Provides an API for the VM's cloud IO device to rename
+     * a cloud variable on the server.
+     * @param {string} oldName The old name of the variable to rename
+     * @param {string} newName The new name for the cloud variable.
+     */
+    renameVariable (oldName, newName) {
+        this.writeToServer('rename', oldName, null, newName);
+    }
+
+    /**
+     * Provides an API for the VM's cloud IO device to delete
+     * a cloud variable on the server.
+     * @param {string} name The name of the variable to delete
+     */
+    deleteVariable (name) {
+        this.writeToServer('delete', name);
     }
 
     /**

@@ -53,7 +53,8 @@ const cloudManagerHOC = function (WrappedComponent) {
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
                 ( // Can no longer use cloud or cloud provider info is now stale
-                    !this.canUseCloud(this.props) ||
+                    !this.canUseCloud(props) ||
+                    !props.projectHasCloudData ||
                     (props.projectId !== prevProps.projectId) ||
                     (props.username !== prevProps.username)
                 );

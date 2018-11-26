@@ -686,6 +686,41 @@ const myBlocks = function () {
     `;
 };
 
+ScratchBlocks.Msg.CATEGORY_RUBY = 'Ruby';
+ScratchBlocks.ScratchMsgs.locales.en.CATEGORY_RUBY = 'Ruby';
+ScratchBlocks.ScratchMsgs.locales.ja.CATEGORY_RUBY = 'ルビー';
+ScratchBlocks.ScratchMsgs.locales['ja-Hira'].CATEGORY_RUBY = 'ルビー';
+
+const ruby = function () {
+    return `
+    <category
+        name="%{BKY_CATEGORY_RUBY}"
+        id="ruby"
+        colour="#CC0043"
+        secondaryColour="#FF4D6A">
+        <block type="ruby_statement">
+            <value name="STATEMENT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+        <block type="ruby_statement_with_block">
+            <value name="STATEMENT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="ARGS">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+};
+
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -708,7 +743,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML) {
         sensing(isStage, targetId), gap,
         operators(isStage, targetId), gap,
         variables(isStage, targetId), gap,
-        myBlocks(isStage, targetId)
+        myBlocks(isStage, targetId), gap,
+        ruby(isStage, targetId)
     ];
 
     if (categoriesXML) {

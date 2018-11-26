@@ -5,6 +5,7 @@ import makeToolboxXML from '../lib/make-toolbox-xml';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
+import defineRubyBlocks from '../lib/define-ruby-blocks';
 import VM from 'scratch-vm';
 
 import analytics from '../lib/analytics';
@@ -49,7 +50,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
-        this.ScratchBlocks = VMScratchBlocks(props.vm);
+        this.ScratchBlocks = defineRubyBlocks(VMScratchBlocks(props.vm));
         bindAll(this, [
             'attachVM',
             'detachVM',

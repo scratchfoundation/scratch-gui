@@ -46,18 +46,22 @@ const cloudManagerHOC = function (WrappedComponent) {
             // This should cover info about the website specifically, like scrather status
             return !!(props.cloudHost && props.username && props.vm && props.projectId);
         }
+        shouldNotModifyCloudData (props) {
+            return (props.hasEverEnteredEditor && !props.canSave);
+        }
         shouldConnect (props) {
-            return !this.isConnected() && this.canUseCloud(props) && props.isShowingWithId;
+            return !this.isConnected() && this.canUseCloud(props) &&
+                props.isShowingWithId && !this.shouldNotModifyCloudData(props);
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
                 ( // Can no longer use cloud or cloud provider info is now stale
                     !this.canUseCloud(this.props) ||
                     (props.projectId !== prevProps.projectId) ||
-                    (props.username !== prevProps.username)
+                    (props.username !== prevProps.username) ||
+                    // Editing someone else's project
+                    this.shouldNotModifyCloudData(props)
                 );
-            // TODO need to add provisions for viewing someone
-            // else's project in editor mode
         }
         isConnected () {
             return this.cloudProvider && !!this.cloudProvider.connection;
@@ -83,6 +87,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                 cloudHost,
                 projectId,
                 username,
+                hasEverEnteredEditor,
                 isShowingWithId,
                 /* eslint-enable no-unused-vars */
                 vm,
@@ -99,7 +104,9 @@ const cloudManagerHOC = function (WrappedComponent) {
     }
 
     CloudManager.propTypes = {
+        canSave: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
+        hasEverEnteredEditor: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
@@ -109,6 +116,7 @@ const cloudManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            hasEverEnteredEditor: state.scratchGui.mode.hasEverEnteredEditor,
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId
         };

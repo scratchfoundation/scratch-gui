@@ -7,6 +7,7 @@ import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import TargetHighlight from '../../containers/target-highlight.jsx';
+import GreenFlagOverlay from '../../containers/green-flag-overlay.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
@@ -69,6 +70,11 @@ const StageComponent = props => {
                         className={styles.frame}
                         stageHeight={stageDimensions.height}
                         stageWidth={stageDimensions.width}
+                    />
+                </Box>
+                <Box className={styles.greenFlagOverlayWrapper}>
+                    <GreenFlagOverlay
+                        className={styles.greenFlagOverlay}
                     />
                 </Box>
                 {isColorPicking && colorInfo ? (

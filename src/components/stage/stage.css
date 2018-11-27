@@ -89,7 +89,10 @@ to adjust for the border using a different method */
     padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
 }
 
-.monitor-wrapper, .color-picker-wrapper, .frame-wrapper {
+.monitor-wrapper,
+.color-picker-wrapper,
+.frame-wrapper,
+.green-flag-overlay-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -137,6 +140,36 @@ to adjust for the border using a different method */
     animation-duration: 0.75s;
     animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
 }
+
+.green-flag-overlay-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    border-radius: 0.5rem;
+}
+
+.green-flag-overlay {
+    padding: 1rem;
+    border-radius: 100%;
+    background: rgba(255,255,255,0.75);
+    border: 3px solid $ui-white;
+    pointer-events: all;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 5rem;
+    height: 5rem;
+}
+
+.green-flag-overlay > img {
+    width: 100%;
+    object-fit: contain;
+}
+
+
 
 @keyframes flash {
     0% { opacity: 1; }

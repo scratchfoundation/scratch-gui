@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
-import {setRunningState, setTurboState} from '../reducers/vm-status';
+import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
 
@@ -39,6 +39,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
+            this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
             this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
@@ -110,6 +111,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTargetsUpdate,
                 onProjectRunStart,
                 onProjectRunStop,
+                onRuntimeStarted,
                 onTurboModeOff,
                 onTurboModeOn,
                 onShowExtensionAlert,
@@ -128,6 +130,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onMonitorsUpdate: PropTypes.func.isRequired,
         onProjectRunStart: PropTypes.func.isRequired,
         onProjectRunStop: PropTypes.func.isRequired,
+        onRuntimeStarted: PropTypes.func.isRequired,
         onShowExtensionAlert: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
@@ -158,6 +161,7 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),
+        onRuntimeStarted: () => dispatch(setStartedState(true)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onShowExtensionAlert: data => {

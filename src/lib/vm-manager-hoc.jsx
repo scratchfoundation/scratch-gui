@@ -33,9 +33,8 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.props.vm.setCompatibilityMode(true);
                 this.props.vm.initialized = true;
             }
-            if (!this.props.isPlayerOnly && !this.props.vm.started) {
+            if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
-                this.props.vm.started = true;
             }
         }
         componentDidUpdate (prevProps) {
@@ -46,9 +45,8 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.loadProject();
             }
             // Start the VM if entering editor mode with an unstarted vm
-            if (!this.props.isPlayerOnly && !this.props.vm.started) {
+            if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
-                this.props.vm.started = true;
             }
         }
         loadProject () {
@@ -65,6 +63,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
                 loadingState,
+                isStarted,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
                 projectData,
@@ -105,7 +104,8 @@ const vmManagerHOC = function (WrappedComponent) {
             projectData: state.scratchGui.projectState.projectData,
             projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState,
-            isPlayerOnly: state.scratchGui.mode.isPlayerOnly
+            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+            isStarted: state.scratchGui.vmStatus.started
         };
     };
 

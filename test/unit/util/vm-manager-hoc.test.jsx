@@ -17,7 +17,8 @@ describe('VMManagerHOC', () => {
         store = mockStore({
             scratchGui: {
                 projectState: {},
-                mode: {} // Mocked by using override props in tests when needed
+                mode: {},
+                vmStatus: {}
             }
         });
         vm = new VM();
@@ -31,6 +32,7 @@ describe('VMManagerHOC', () => {
         mount(
             <WrappedComponent
                 isPlayerOnly
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
@@ -40,8 +42,7 @@ describe('VMManagerHOC', () => {
         expect(vm.initialized).toBe(true);
 
         // But vm should not be started automatically
-        expect(vm.start.mock.calls.length).toBe(0);
-        expect(vm.started).not.toBe(true);
+        expect(vm.start).not.toHaveBeenCalled();
     });
     test('when it mounts in editor mode, the vm is initialized and started', () => {
         const Component = () => (<div />);
@@ -49,6 +50,7 @@ describe('VMManagerHOC', () => {
         mount(
             <WrappedComponent
                 isPlayerOnly={false}
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
@@ -57,17 +59,16 @@ describe('VMManagerHOC', () => {
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
 
-        expect(vm.start.mock.calls.length).toBe(1);
-        expect(vm.started).toBe(true);
+        expect(vm.start).toHaveBeenCalled();
     });
     test('if it mounts with an initialized vm, it does not reinitialize the vm but will start it', () => {
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         vm.initialized = true;
-        vm.started = false;
         mount(
             <WrappedComponent
                 isPlayerOnly={false}
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
@@ -76,28 +77,44 @@ describe('VMManagerHOC', () => {
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(0);
         expect(vm.initialized).toBe(true);
 
-        expect(vm.start.mock.calls.length).toBe(1);
-        expect(vm.started).toBe(true);
+        expect(vm.start).toHaveBeenCalled();
     });
 
     test('if it mounts without starting the VM, it can be started by switching to editor mode', () => {
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         vm.initialized = true;
-        vm.started = false;
         const mounted = mount(
             <WrappedComponent
                 isPlayerOnly
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
         );
-        expect(vm.start.mock.calls.length).toBe(0);
+        expect(vm.start).not.toHaveBeenCalled();
         mounted.setProps({
             isPlayerOnly: false
         });
-        expect(vm.start.mock.calls.length).toBe(1);
-        expect(vm.started).toBe(true);
+        expect(vm.start).toHaveBeenCalled();
+    });
+    test('if it mounts with an initialized and started VM, it does not start again', () => {
+        const Component = () => <div />;
+        const WrappedComponent = vmManagerHOC(Component);
+        vm.initialized = true;
+        const mounted = mount(
+            <WrappedComponent
+                isPlayerOnly
+                isStarted
+                store={store}
+                vm={vm}
+            />
+        );
+        expect(vm.start).not.toHaveBeenCalled();
+        mounted.setProps({
+            isPlayerOnly: false
+        });
+        expect(vm.start).not.toHaveBeenCalled();
     });
     test('if the isLoadingWithId prop becomes true, it loads project data into the vm', () => {
         vm.loadProject = jest.fn(() => Promise.resolve());

@@ -89,6 +89,16 @@ class RubyToBlocksConverter {
         }
     }
 
+    applyTargetBlocks (target, blocks) {
+        Object.keys(target.blocks._blocks).forEach(blockId => {
+            target.blocks.deleteBlock(blockId);
+        });
+        Object.keys(blocks).forEach(blockId => {
+            target.blocks.createBlock(blocks[blockId]);
+        });
+        this.vm.emitWorkspaceUpdate();
+    }
+
     _toErrorAnnotation (row, column, message) {
         if (row === Opal.nil) {
             row = 0;
@@ -107,16 +117,6 @@ class RubyToBlocksConverter {
             type: 'error',
             text: `${columnText}${message}`
         };
-    }
-
-    applyTargetBlocks (target, blocks) {
-        Object.keys(target.blocks._blocks).forEach(blockId => {
-            target.blocks.deleteBlock(blockId);
-        });
-        Object.keys(blocks).forEach(blockId => {
-            target.blocks.createBlock(blocks[blockId]);
-        });
-        this.vm.emitWorkspaceUpdate();
     }
 
     _checkNumChildren (node, length) {
@@ -283,7 +283,6 @@ class RubyToBlocksConverter {
                 terminated = true;
                 break;
             }
-            return block;
         });
         return blocks;
     }

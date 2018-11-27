@@ -89,7 +89,10 @@ to adjust for the border using a different method */
     padding-bottom: calc($stage-full-screen-stage-padding + $stage-full-screen-border-width);
 }
 
-.monitor-wrapper, .color-picker-wrapper, .frame-wrapper {
+.monitor-wrapper,
+.color-picker-wrapper,
+.frame-wrapper,
+.green-flag-overlay-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -136,6 +139,16 @@ to adjust for the border using a different method */
     animation-name: flash;
     animation-duration: 0.75s;
     animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
+}
+
+.green-flag-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    cursor: pointer;
 }
 
 @keyframes flash {

@@ -141,15 +141,35 @@ to adjust for the border using a different method */
     animation-fill-mode: forwards; /* Leave at 0 opacity after animation */
 }
 
-.green-flag-overlay {
-    width: 100%;
-    height: 100%;
+.green-flag-overlay-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(0,0,0,0.25);
+    border-radius: 0.5rem;
+}
+
+.green-flag-overlay {
+    padding: 1rem;
+    border-radius: 100%;
+    background: rgba(255,255,255,0.75);
+    border: 3px solid $ui-white;
     pointer-events: all;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 5rem;
+    height: 5rem;
 }
+
+.green-flag-overlay > img {
+    width: 100%;
+    object-fit: contain;
+}
+
+
 
 @keyframes flash {
     0% { opacity: 1; }

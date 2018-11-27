@@ -20,6 +20,7 @@ const StageComponent = props => {
         dragRef,
         isColorPicking,
         isFullScreen,
+        isStarted,
         colorInfo,
         micIndicator,
         question,
@@ -72,11 +73,13 @@ const StageComponent = props => {
                         stageWidth={stageDimensions.width}
                     />
                 </Box>
-                <Box className={styles.greenFlagOverlayWrapper}>
-                    <GreenFlagOverlay
-                        className={styles.greenFlagOverlay}
-                    />
-                </Box>
+                {isStarted ? null : (
+                    <Box className={styles.greenFlagOverlayWrapper}>
+                        <GreenFlagOverlay
+                            className={styles.greenFlagOverlay}
+                        />
+                    </Box>
+                )}
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>
                         <Loupe colorInfo={colorInfo} />
@@ -131,6 +134,7 @@ StageComponent.propTypes = {
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onDeactivateColorPicker: PropTypes.func,
     onDoubleClick: PropTypes.func,

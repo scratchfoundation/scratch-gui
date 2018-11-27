@@ -28,6 +28,9 @@ describe('CloudManagerHOC', () => {
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.SHOWING_WITH_ID
+                },
+                mode: {
+                    hasEverEnteredEditor: false
                 }
             }
         });
@@ -36,6 +39,9 @@ describe('CloudManagerHOC', () => {
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.LOADING_WITH_ID
+                },
+                mode: {
+                    hasEverEnteredEditor: false
                 }
             }
         });
@@ -49,6 +55,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -65,6 +72,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
                 store={store}
                 username="user"
                 vm={vm}
@@ -81,6 +89,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={store}
                 vm={vm}
@@ -96,6 +105,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -111,6 +121,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -131,6 +142,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -156,6 +168,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -180,6 +193,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -205,6 +219,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -217,6 +232,61 @@ describe('CloudManagerHOC', () => {
 
         mounted.setProps({
             username: 'a different user'
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+
+    });
+
+    // Editor Mode Connection/Disconnection Tests
+    test('Entering editor mode and can\'t save project should disconnect cloud provider # 1', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        mounted.setProps({
+            canSave: false,
+            hasEverEnteredEditor: true
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+
+    });
+
+    // Editor Mode Connection/Disconnection Tests
+    test('Entering editor mode and can\'t save project should disconnect cloud provider # 2', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave={false}
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        mounted.setProps({
+            hasEverEnteredEditor: true
         });
 
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);

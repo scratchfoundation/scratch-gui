@@ -71,12 +71,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.props.onAutoUpdateProject();
             }
         }
-        componentWillUnmount () {
-            const showingSaveable = this.props.canSave && this.props.isShowingWithId;
-            if (showingSaveable) {
-                this.updateProjectToStorage();
-            }
-        }
         isShowingCreatable (props) {
             return props.canCreateNew && props.isShowingWithoutId;
         }

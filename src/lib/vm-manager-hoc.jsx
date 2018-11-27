@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
+import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
     getIsLoadingWithId,
@@ -53,6 +54,7 @@ const vmManagerHOC = function (WrappedComponent) {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
+                    this.props.onSetProjectUnchanged();
 
                     // If the vm is not running, call draw on the renderer manually
                     // This draws the state of the loaded project with no blocks running
@@ -123,7 +125,8 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         onError: error => dispatch(projectError(error)),
         onLoadedProject: (loadingState, canSave) =>
-            dispatch(onLoadedProject(loadingState, canSave))
+            dispatch(onLoadedProject(loadingState, canSave)),
+        onSetProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.

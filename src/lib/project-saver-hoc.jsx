@@ -9,6 +9,7 @@ import {
     showAlertWithTimeout,
     showStandardAlert
 } from '../reducers/alerts';
+import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
     autoUpdateProject,
@@ -167,7 +168,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     storage.DataFormat.JSON,
                     body,
                     projectId
-                );
+                ).then(response => {
+                    this.props.onSetProjectUnchanged();
+                    return response;
+                });
             })
                 .catch(err => {
                     log.error(err);
@@ -255,6 +259,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreatedProject: (projectId, loadingState) => dispatch(doneCreatingProject(projectId, loadingState)),
         onCreateProject: () => dispatch(createProject()),
         onProjectError: error => dispatch(projectError(error)),
+        onSetProjectUnchanged: () => dispatch(setProjectUnchanged()),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
         onShowCreateSuccessAlert: () => showAlertWithTimeout(dispatch, 'createSuccess'),
         onShowCreatingAlert: () => showAlertWithTimeout(dispatch, 'creating'),

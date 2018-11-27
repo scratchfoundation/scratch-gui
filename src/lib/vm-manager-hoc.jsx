@@ -27,12 +27,16 @@ const vmManagerHOC = function (WrappedComponent) {
             ]);
         }
         componentDidMount () {
-            if (this.props.vm.initialized) return;
-            this.audioEngine = new AudioEngine();
-            this.props.vm.attachAudioEngine(this.audioEngine);
-            this.props.vm.setCompatibilityMode(true);
-            this.props.vm.start();
-            this.props.vm.initialized = true;
+            if (!this.props.vm.initialized) {
+                this.audioEngine = new AudioEngine();
+                this.props.vm.attachAudioEngine(this.audioEngine);
+                this.props.vm.setCompatibilityMode(true);
+                this.props.vm.initialized = true;
+            }
+            if (!this.props.isPlayerOnly && !this.props.vm.started) {
+                this.props.vm.start();
+                this.props.vm.started = true;
+            }
         }
         componentDidUpdate (prevProps) {
             // if project is in loading state, AND fonts are loaded,
@@ -40,6 +44,11 @@ const vmManagerHOC = function (WrappedComponent) {
             if (this.props.isLoadingWithId && this.props.fontsLoaded &&
                 (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
                 this.loadProject();
+            }
+            // Start the VM if entering editor mode with an unstarted vm
+            if (!this.props.isPlayerOnly && !this.props.vm.started) {
+                this.props.vm.start();
+                this.props.vm.started = true;
             }
         }
         loadProject () {
@@ -79,6 +88,7 @@ const vmManagerHOC = function (WrappedComponent) {
         cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
+        isPlayerOnly: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onError: PropTypes.func,
         onLoadedProject: PropTypes.func,
@@ -94,7 +104,8 @@ const vmManagerHOC = function (WrappedComponent) {
             isLoadingWithId: getIsLoadingWithId(loadingState),
             projectData: state.scratchGui.projectState.projectData,
             projectId: state.scratchGui.projectState.projectId,
-            loadingState: loadingState
+            loadingState: loadingState,
+            isPlayerOnly: state.scratchGui.mode.isPlayerOnly
         };
     };
 

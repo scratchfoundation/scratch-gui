@@ -20,6 +20,9 @@ class Controls extends React.Component {
         if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.turbo);
         } else {
+            if (!this.props.vm.started) {
+                this.props.vm.start();
+            }
             this.props.vm.greenFlag();
             analytics.event({
                 category: 'general',

@@ -55,7 +55,7 @@ const ScanningStep = props => (
             )}
         </Box>
         <Box className={styles.bottomArea}>
-            <Box className={styles.instructions}>
+            <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
                 <FormattedMessage
                     defaultMessage="Select your device in the list above."
                     description="Prompt for choosing a device to connect to"
@@ -63,11 +63,12 @@ const ScanningStep = props => (
                 />
             </Box>
             <Dots
+                className={styles.bottomAreaItem}
                 counter={0}
                 total={3}
             />
             <button
-                className={styles.connectionButton}
+                className={classNames(styles.bottomAreaItem, styles.connectionButton)}
                 onClick={props.onRefresh}
             >
                 <FormattedMessage

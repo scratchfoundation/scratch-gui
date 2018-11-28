@@ -23,7 +23,7 @@ const ErrorStep = props => (
             </Box>
         </Box>
         <Box className={styles.bottomArea}>
-            <div className={styles.instructions}>
+            <div className={classNames(styles.bottomAreaItem, styles.instructions)}>
                 <FormattedMessage
                     defaultMessage="Oops, looks like something went wrong."
                     description="The device connection process has encountered an error."
@@ -32,9 +32,10 @@ const ErrorStep = props => (
             </div>
             <Dots
                 error
+                className={styles.bottomAreaItem}
                 total={3}
             />
-            <Box className={styles.buttonRow}>
+            <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
                 <button
                     className={styles.connectionButton}
                     onClick={props.onScanning}

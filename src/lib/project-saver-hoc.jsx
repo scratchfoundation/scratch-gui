@@ -26,8 +26,6 @@ import {
     projectError
 } from '../reducers/project-state';
 
-const AUTOSAVE_WAIT_SECS = 120;
-
 /**
  * Higher Order Component to provide behavior for saving projects.
  * @param {React.Component} WrappedComponent the component to add project saving functionality to
@@ -42,13 +40,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.state = {
-                autoSaveActive: false,
                 autoSaveTimeoutId: null
             };
         }
         componentDidUpdate (prevProps) {
             if (this.props.isDirtyProject && !prevProps.isDirtyProject) {
-                this.checkShouldAutoSave();
+                this.scheduleAutoSave();
             }
             if (this.props.isUpdating && !prevProps.isUpdating) {
                 this.updateProjectToStorage();
@@ -79,23 +76,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // if we're newly able to save this project, save it!
             const becameAbleToSave = this.props.canSave && !prevProps.canSave;
             const becameShared = this.props.isShared && !prevProps.isShared;
-            if (this.showingSaveable() && (becameAbleToSave || becameShared)) {
+            if (this.props.isShowingSaveable && (becameAbleToSave || becameShared)) {
                 this.props.onAutoUpdateProject();
             }
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
-            if (this.showingSaveable()) {
-                this.updateProjectToStorage();
-            }
-        }
-        showingSaveable () {
-            return this.props.canSave && this.props.isShowingWithId;
-        }
-        checkShouldAutoSave () {
-            if (this.state.autoSaveTimeoutId === null && this.showingSaveable()) {
-                this.scheduleAutoSave();
-            }
         }
         clearAutoSaveTimeout () {
             if (this.state.autoSaveTimeoutId !== null) {
@@ -104,13 +90,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         scheduleAutoSave () {
-            const timeoutId = setTimeout(() => {
-                this.tryToAutoSave();
-            }, AUTOSAVE_WAIT_SECS * 1000);
-            this.setState({autoSaveTimeoutId: timeoutId});
+            if (this.props.isShowingSaveable && this.state.autoSaveTimeoutId === null) {
+                const timeoutId = setTimeout(() => {
+                    this.tryToAutoSave();
+                }, this.props.autosaveIntervalSecs * 1000);
+                this.setState({autoSaveTimeoutId: timeoutId});
+            }
         }
         tryToAutoSave () {
-            if (this.props.isDirtyProject && this.showingSaveable()) {
+            if (this.props.isDirtyProject && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
             }
         }
@@ -125,7 +113,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     // it, because there are no values contained in it that we care about
                     this.props.onUpdatedProject(this.props.loadingState);
                     this.props.onShowSaveSuccessAlert();
-                    this.clearAutoSaveTimeout();
                 })
                 .catch(err => {
                     // Always show the savingError alert because it gives the
@@ -186,6 +173,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
          */
         storeProject (projectId, requestParams) {
             requestParams = requestParams || {};
+            this.clearAutoSaveTimeout();
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -223,10 +211,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                autosaveIntervalSecs,
                 isCreatingCopy,
                 isCreatingNew,
+                isDirtyProject,
                 isManualUpdating,
                 isRemixing,
+                isShowingSaveable,
                 isShowingWithId,
                 isShowingWithoutId,
                 isUpdating,
@@ -259,9 +250,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
         canSave: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
         isCreatingNew: PropTypes.bool,
+        isDirtyProject: PropTypes.bool,
         isManualUpdating: PropTypes.bool,
         isRemixing: PropTypes.bool,
         isShared: PropTypes.bool,
+        isShowingSaveable: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         isShowingWithoutId: PropTypes.bool,
         isUpdating: PropTypes.bool,
@@ -280,14 +273,19 @@ const ProjectSaverHOC = function (WrappedComponent) {
         reduxProjectTitle: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
-    const mapStateToProps = state => {
+    ProjectSaverComponent.defaultProps = {
+        autosaveIntervalSecs: 120
+    };
+    const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;
+        const isShowingWithId = getIsShowingWithId(loadingState);
         return {
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
             isDirtyProject: true,
             isRemixing: getIsRemixing(loadingState),
-            isShowingWithId: getIsShowingWithId(loadingState),
+            isShowingSaveable: ownProps.canSave && isShowingWithId,
+            isShowingWithId: isShowingWithId,
             isShowingWithoutId: getIsShowingWithoutId(loadingState),
             isUpdating: getIsUpdating(loadingState),
             isManualUpdating: getIsManualUpdating(loadingState),

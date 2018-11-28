@@ -20,7 +20,8 @@ class SeleniumHelper {
             'getSauceDriver',
             'getLogs',
             'loadUri',
-            'rightClickText'
+            'rightClickText',
+            'takeScreenshot'
         ]);
     }
 
@@ -141,6 +142,12 @@ class SeleniumHelper {
                 }
                 return true;
             }));
+    }
+
+    takeScreenshot (path) {
+        return this.driver.takeScreenshot().then(image => {
+            require('fs').writeFileSync(path, image, 'base64');
+        });
     }
 }
 

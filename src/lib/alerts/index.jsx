@@ -61,11 +61,13 @@ const alerts = [
     },
     {
         alertId: 'savingError',
-        clearList: ['saving', 'saveSuccess'],
-        closeButton: true,
+        clearList: ['saving', 'saveSuccess', 'savingError'],
+        showDownload: true,
+        showSaveNow: true,
+        closeButton: false,
         content: (
             <FormattedMessage
-                defaultMessage="Could not save the project. Please try again!"
+                defaultMessage="Project could not save."
                 description="Message indicating that project could not be saved"
                 id="gui.alerts.savingError"
             />
@@ -75,7 +77,7 @@ const alerts = [
     {
         alertId: 'saveSuccess',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully saved."
@@ -90,7 +92,7 @@ const alerts = [
     {
         alertId: 'saving',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
                 defaultMessage="Saving..."

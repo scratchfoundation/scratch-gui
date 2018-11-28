@@ -24,7 +24,7 @@ describe('Working with shortcut to Tutorials library', () => {
     test('opens with the Tutorial Library showing', async () => {
         await loadUri(uri);
         // make sure there is a tutorial visible that doesn't have a shortcut
-        await clickText('Switch costume');
+        await clickText('Make It Spin');
         await findByXpath('//div[contains(@class, "step-video")]');
     });
 

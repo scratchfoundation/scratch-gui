@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
+import {setProjectChanged, setProjectUnchanged} from '../reducers/project-changed';
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
@@ -24,6 +25,7 @@ const vmListenerHOC = function (WrappedComponent) {
             bindAll(this, [
                 'handleKeyDown',
                 'handleKeyUp',
+                'handleProjectChanged',
                 'handleTargetsUpdate'
             ]);
             // We have to start listening to the vm here rather than in
@@ -39,6 +41,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
+            this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
             this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
@@ -68,6 +71,9 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
             }
+        }
+        handleProjectChanged () {
+            this.props.onProjectChanged();
         }
         handleTargetsUpdate (data) {
             if (this.props.shouldEmitTargetsUpdate) {
@@ -167,6 +173,8 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),
+        onProjectChanged: () => dispatch(setProjectChanged()),
+        onProjectSaved: () => dispatch(setProjectUnchanged()),
         onRuntimeStarted: () => dispatch(setStartedState(true)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),

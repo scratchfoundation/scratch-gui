@@ -31,24 +31,24 @@ describe('Menu bar settings', () => {
         await findByXpath('//*[li[span[text()="New"]] and not(@data-tip="tooltip")]');
     });
 
-    test('File->Upload should be enabled', async () => {
+    test('File->Load should be enabled', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await clickXpath(
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
         );
-        await findByXpath('//*[li[span[text()="Upload from your computer"]] and not(@data-tip="tooltip")]');
+        await findByXpath('//*[li[span[text()="Load from your computer"]] and not(@data-tip="tooltip")]');
     });
 
-    test('File->Download should be enabled', async () => {
+    test('File->Save should be enabled', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await clickXpath(
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
         );
-        await findByXpath('//*[li[span[text()="Download to your computer"]] and not(@data-tip="tooltip")]');
+        await findByXpath('//*[li[span[text()="Save to your computer"]] and not(@data-tip="tooltip")]');
     });
 
     test('Share button should NOT be enabled', async () => {

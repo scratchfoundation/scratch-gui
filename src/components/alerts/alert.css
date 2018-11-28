@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    align-items: left;
+    justify-content: space-between;
     border-radius: $space;
     padding: $space;
     margin-bottom: 7px;
@@ -37,11 +37,15 @@
     font-weight: bold;
     font-size: .75rem;
     line-height: 14px;
-    width: 100%;
     display: flex;
     align-items: center;
     padding-left: .5rem;
     padding-right: .5rem;
+}
+
+.alert-buttons {
+    display: flex;
+    flex-direction: row;
 }
 
 .alert-close-button {

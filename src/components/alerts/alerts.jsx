@@ -25,7 +25,9 @@ const AlertsComponent = ({
                 key={index}
                 level={a.level}
                 message={a.message}
+                showDownload={a.showDownload}
                 showReconnect={a.showReconnect}
+                showSaveNow={a.showSaveNow}
                 onCloseAlert={onCloseAlert}
             />
         ))}

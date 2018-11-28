@@ -22,7 +22,11 @@ const AlertComponent = ({
     iconSpinner,
     iconURL,
     level,
+    showDownload,
+    showSaveNow,
     onCloseAlert,
+    onDownload,
+    onSaveNow,
     onReconnect,
     showReconnect
 }) => (
@@ -53,30 +57,56 @@ const AlertComponent = ({
                 />
             ) : content}
         </div>
-        {showReconnect && (
-            <button
-                className={styles.alertConnectionButton}
-                onClick={onReconnect}
-            >
-                <FormattedMessage
-                    defaultMessage="Reconnect"
-                    description="Button to reconnect the device"
-                    id="gui.connection.reconnect"
-                />
-            </button>
-        )}
-        {closeButton && (
-            <Box
-                className={styles.alertCloseButtonContainer}
-            >
-                <CloseButton
-                    className={classNames(styles.alertCloseButton)}
-                    color={closeButtonColors[level]}
-                    size={CloseButton.SIZE_LARGE}
-                    onClick={onCloseAlert}
-                />
-            </Box>
-        )}
+        <div className={styles.alertButtons}>
+            {showSaveNow && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onSaveNow}
+                >
+                    <FormattedMessage
+                        defaultMessage="Try Again"
+                        description="Button to try saving again"
+                        id="gui.alerts.tryAgain"
+                    />
+                </button>
+            )}
+            {showDownload && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onDownload}
+                >
+                    <FormattedMessage
+                        defaultMessage="Download"
+                        description="Button to download project locally"
+                        id="gui.alerts.download"
+                    />
+                </button>
+            )}
+            {showReconnect && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onReconnect}
+                >
+                    <FormattedMessage
+                        defaultMessage="Reconnect"
+                        description="Button to reconnect the device"
+                        id="gui.connection.reconnect"
+                    />
+                </button>
+            )}
+            {closeButton && (
+                <Box
+                    className={styles.alertCloseButtonContainer}
+                >
+                    <CloseButton
+                        className={classNames(styles.alertCloseButton)}
+                        color={closeButtonColors[level]}
+                        size={CloseButton.SIZE_LARGE}
+                        onClick={onCloseAlert}
+                    />
+                </Box>
+            )}
+        </div>
     </Box>
 );
 
@@ -88,8 +118,12 @@ AlertComponent.propTypes = {
     iconURL: PropTypes.string,
     level: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
+    onDownload: PropTypes.func,
     onReconnect: PropTypes.func,
-    showReconnect: PropTypes.bool
+    onSaveNow: PropTypes.func,
+    showDownload: PropTypes.func,
+    showReconnect: PropTypes.bool,
+    showSaveNow: PropTypes.bool
 };
 
 AlertComponent.defaultProps = {

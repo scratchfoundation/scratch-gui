@@ -14,7 +14,7 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
-describe('Loading scratch gui', () => {
+describe.skip('Loading scratch gui', () => {
     beforeAll(() => {
         driver = getDriver();
     });

@@ -16,7 +16,9 @@ describe('projectSaverHOC', () => {
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
-                projectState: {}
+                projectChanged: false,
+                projectState: {},
+                projectTitle: 'Scratch Project'
             }
         });
         vm = new VM();
@@ -31,6 +33,7 @@ describe('projectSaverHOC', () => {
                 isShowingWithId
                 canSave={false}
                 isCreatingNew={false}
+                isShowingSaveable={false} // set explicitly because it relies on ownProps.canSave
                 isShowingWithoutId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITH_ID}
@@ -40,7 +43,8 @@ describe('projectSaverHOC', () => {
             />
         );
         mounted.setProps({
-            canSave: true
+            canSave: true,
+            isShowingSaveable: true
         });
         expect(mockedUpdateProject).toHaveBeenCalled();
     });

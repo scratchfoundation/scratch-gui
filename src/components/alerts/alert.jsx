@@ -22,7 +22,11 @@ const AlertComponent = ({
     iconSpinner,
     iconURL,
     level,
+    showDownload,
+    showSaveNow,
     onCloseAlert,
+    onDownload,
+    onSaveNow,
     onReconnect,
     showReconnect
 }) => (
@@ -53,6 +57,30 @@ const AlertComponent = ({
                 />
             ) : content}
         </div>
+        {showSaveNow && (
+            <button
+                className={styles.alertConnectionButton}
+                onClick={onSaveNow}
+            >
+                <FormattedMessage
+                    defaultMessage="Try&nbsp;Again" // TODO control wrapping in css
+                    description="Button to try saving again"
+                    id="gui.alerts.tryAgain"
+                />
+            </button>
+        )}
+        {showDownload && (
+            <button
+                className={styles.alertConnectionButton}
+                onClick={onDownload}
+            >
+                <FormattedMessage
+                    defaultMessage="Download"
+                    description="Button to download project locally"
+                    id="gui.alerts.download"
+                />
+            </button>
+        )}
         {showReconnect && (
             <button
                 className={styles.alertConnectionButton}
@@ -88,8 +116,12 @@ AlertComponent.propTypes = {
     iconURL: PropTypes.string,
     level: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
+    onDownload: PropTypes.func,
     onReconnect: PropTypes.func,
-    showReconnect: PropTypes.bool
+    onSaveNow: PropTypes.func,
+    showDownload: PropTypes.func,
+    showReconnect: PropTypes.bool,
+    showSaveNow: PropTypes.bool
 };
 
 AlertComponent.defaultProps = {

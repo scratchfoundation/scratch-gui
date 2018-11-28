@@ -57,54 +57,56 @@ const AlertComponent = ({
                 />
             ) : content}
         </div>
-        {showSaveNow && (
-            <button
-                className={styles.alertConnectionButton}
-                onClick={onSaveNow}
-            >
-                <FormattedMessage
-                    defaultMessage="Try&nbsp;Again" // TODO control wrapping in css
-                    description="Button to try saving again"
-                    id="gui.alerts.tryAgain"
-                />
-            </button>
-        )}
-        {showDownload && (
-            <button
-                className={styles.alertConnectionButton}
-                onClick={onDownload}
-            >
-                <FormattedMessage
-                    defaultMessage="Download"
-                    description="Button to download project locally"
-                    id="gui.alerts.download"
-                />
-            </button>
-        )}
-        {showReconnect && (
-            <button
-                className={styles.alertConnectionButton}
-                onClick={onReconnect}
-            >
-                <FormattedMessage
-                    defaultMessage="Reconnect"
-                    description="Button to reconnect the device"
-                    id="gui.connection.reconnect"
-                />
-            </button>
-        )}
-        {closeButton && (
-            <Box
-                className={styles.alertCloseButtonContainer}
-            >
-                <CloseButton
-                    className={classNames(styles.alertCloseButton)}
-                    color={closeButtonColors[level]}
-                    size={CloseButton.SIZE_LARGE}
-                    onClick={onCloseAlert}
-                />
-            </Box>
-        )}
+        <div className={styles.alertButtons}>
+            {showSaveNow && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onSaveNow}
+                >
+                    <FormattedMessage
+                        defaultMessage="Try Again"
+                        description="Button to try saving again"
+                        id="gui.alerts.tryAgain"
+                    />
+                </button>
+            )}
+            {showDownload && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onDownload}
+                >
+                    <FormattedMessage
+                        defaultMessage="Download"
+                        description="Button to download project locally"
+                        id="gui.alerts.download"
+                    />
+                </button>
+            )}
+            {showReconnect && (
+                <button
+                    className={styles.alertConnectionButton}
+                    onClick={onReconnect}
+                >
+                    <FormattedMessage
+                        defaultMessage="Reconnect"
+                        description="Button to reconnect the device"
+                        id="gui.connection.reconnect"
+                    />
+                </button>
+            )}
+            {closeButton && (
+                <Box
+                    className={styles.alertCloseButtonContainer}
+                >
+                    <CloseButton
+                        className={classNames(styles.alertCloseButton)}
+                        color={closeButtonColors[level]}
+                        size={CloseButton.SIZE_LARGE}
+                        onClick={onCloseAlert}
+                    />
+                </Box>
+            )}
+        </div>
     </Box>
 );
 

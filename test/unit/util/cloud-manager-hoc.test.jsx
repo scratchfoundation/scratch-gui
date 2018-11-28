@@ -242,7 +242,7 @@ describe('CloudManagerHOC', () => {
         expect(requestCloseConnection).toHaveBeenCalledTimes(1);
 
     });
-  
+
     test('project without cloud data should not trigger cloud connection', () => {
         // Mock the vm runtime function so that has cloud data is not
         // initially true
@@ -303,14 +303,16 @@ describe('CloudManagerHOC', () => {
                 vm={vm}
             />
         );
-      
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
         vm.runtime.hasCloudData = jest.fn(() => false);
         vm.emit('HAS_CLOUD_DATA_UPDATE', false);
-      
+
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
         expect(requestCloseConnection).toHaveBeenCalledTimes(1);
-
     });
 
     // Editor Mode Connection/Disconnection Tests
@@ -338,7 +340,6 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
         expect(requestCloseConnection).toHaveBeenCalledTimes(1);
-
     });
 
     test('Entering editor mode and can\'t save project should disconnect cloud provider # 2', () => {
@@ -364,6 +365,5 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
         expect(requestCloseConnection).toHaveBeenCalledTimes(1);
-
     });
 });

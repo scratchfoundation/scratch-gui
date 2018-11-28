@@ -80,6 +80,16 @@ class SeleniumHelper {
     loadUri (uri) {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
+
+        const locale = 'locale=en';
+        if (uri.indexOf('?') >= 0) {
+            uri = uri.replace('?', `?${locale}&`);
+        } else if (uri.indexOf('#') >= 0) {
+            uri = uri.replace('#', `?${locale}#`);
+        } else {
+            uri = `${uri}?${locale}`;
+        }
+
         return this.driver
             .get(`file://${uri}`)
             .then(() => (

@@ -9,6 +9,7 @@ import {
     showAlertWithTimeout,
     showStandardAlert
 } from '../reducers/alerts';
+import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
     autoUpdateProject,
@@ -84,10 +85,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onShowSaveSuccessAlert();
                 })
                 .catch(err => {
-                    // NOTE: should throw up a notice for user
-                    if (this.props.isManualUpdating) {
-                        this.props.onShowAlert('savingError');
-                    }
+                    // Always show the savingError alert because it gives the
+                    // user the chance to download or retry the save manually.
+                    this.props.onShowAlert('savingError');
                     this.props.onProjectError(err);
                 });
         }
@@ -167,7 +167,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     storage.DataFormat.JSON,
                     body,
                     projectId
-                );
+                ).then(response => {
+                    this.props.onSetProjectUnchanged();
+                    return response;
+                });
             })
                 .catch(err => {
                     log.error(err);
@@ -255,6 +258,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreatedProject: (projectId, loadingState) => dispatch(doneCreatingProject(projectId, loadingState)),
         onCreateProject: () => dispatch(createProject()),
         onProjectError: error => dispatch(projectError(error)),
+        onSetProjectUnchanged: () => dispatch(setProjectUnchanged()),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
         onShowCreateSuccessAlert: () => showAlertWithTimeout(dispatch, 'createSuccess'),
         onShowCreatingAlert: () => showAlertWithTimeout(dispatch, 'creating'),

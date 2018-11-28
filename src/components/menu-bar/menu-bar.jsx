@@ -285,8 +285,7 @@ class MenuBar extends React.Component {
             <Box
                 className={classNames(
                     this.props.className,
-                    styles.menuBar,
-                    {[styles.saveInProgress]: this.props.isUpdating}
+                    styles.menuBar
                 )}
             >
                 <div className={styles.mainMenu}>

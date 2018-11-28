@@ -328,7 +328,10 @@ class Blocks extends React.Component {
             error.message = `Workspace Update Error: ${error.message}`;
             log.error(error);
         }
-        this.workspace.addChangeListener(this.props.vm.blockListener);
+        // All of the changes that happened during the load above are queued with
+        // timeouts, so re-enable the listener in the next tick, so it happens after
+        // the events are already fired.
+        setTimeout(() => this.workspace.addChangeListener(this.props.vm.blockListener));
 
         if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
             const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];

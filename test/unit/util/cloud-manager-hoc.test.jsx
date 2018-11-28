@@ -41,6 +41,9 @@ describe('CloudManagerHOC', () => {
         });
         vm = new VM();
         vm.setCloudProvider = jest.fn();
+        vm.runtime = {
+            hasCloudData: jest.fn(() => true)
+        };
         CloudProvider.mockClear();
         mockCloudProviderInstance.requestCloseConnection.mockClear();
     });
@@ -151,7 +154,7 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
     });
 
-    test('when it unmounts, the cloud provider is set on the vm', () => {
+    test('when it unmounts, the cloud provider is reset to null on the vm', () => {
         const Component = () => (<div />);
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
@@ -218,6 +221,76 @@ describe('CloudManagerHOC', () => {
         mounted.setProps({
             username: 'a different user'
         });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+
+    });
+
+    test('project without cloud data should not trigger cloud connection', () => {
+        // Mock the vm runtime function so that has cloud data is not
+        // initially true
+        vm.runtime.hasCloudData = jest.fn(() => false);
+
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+    });
+
+    test('projectHasCloudData becoming true should trigger a cloud connection', () => {
+        // Mock the vm runtime function so that has cloud data is not
+        // initially true
+        vm.runtime.hasCloudData = jest.fn(() => false);
+
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+
+        // Mock VM hasCloudData becoming true and emitting an update
+        vm.runtime.hasCloudData = jest.fn(() => true);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', true);
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(1);
+        expect(CloudProvider).toHaveBeenCalledTimes(1);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+    });
+
+    test('projectHasCloudDataUpdate becoming false should trigger cloudProvider disconnection', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        vm.runtime.hasCloudData = jest.fn(() => false);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', false);
 
         expect(vm.setCloudProvider.mock.calls.length).toBe(2);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(null);

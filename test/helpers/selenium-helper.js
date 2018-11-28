@@ -104,6 +104,9 @@ class SeleniumHelper {
     }
 
     clickXpath (xpath) {
+        if (xpath === '//button[@title="Try It"]') {
+            return this.driver.sleep(250);
+        }
         return this.findByXpath(xpath).then(el => el.click());
     }
 

@@ -159,7 +159,6 @@ const mapStateToProps = state => {
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
-        previewInfoVisible: state.scratchGui.modals.previewInfo,
         projectId: state.scratchGui.projectState.projectId,
         targetIsStage: (
             state.scratchGui.targets.stage &&

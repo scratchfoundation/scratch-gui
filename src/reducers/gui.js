@@ -96,6 +96,19 @@ const initTutorialCard = function (currentState, deckId) {
     );
 };
 
+const initTutorialLibrary = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                previewInfo: false,
+                tipsLibrary: true
+            }
+        }
+    );
+};
+
 const guiReducer = combineReducers({
     alerts: alertsReducer,
     assetDrag: assetDragReducer,
@@ -128,5 +141,6 @@ export {
     guiMiddleware,
     initFullScreen,
     initPlayer,
-    initTutorialCard
+    initTutorialCard,
+    initTutorialLibrary
 };

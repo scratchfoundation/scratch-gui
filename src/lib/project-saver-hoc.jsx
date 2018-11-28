@@ -85,10 +85,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onShowSaveSuccessAlert();
                 })
                 .catch(err => {
-                    // NOTE: should throw up a notice for user
-                    if (this.props.isManualUpdating) {
-                        this.props.onShowAlert('savingError');
-                    }
+                    // Always show the savingError alert because it gives the
+                    // user the chance to download or retry the save manually.
+                    this.props.onShowAlert('savingError');
                     this.props.onProjectError(err);
                 });
         }

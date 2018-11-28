@@ -46,6 +46,8 @@ const reducer = function (state, action) {
                 newAlert.iconURL = alertData.iconURL;
                 newAlert.iconSpinner = alertData.iconSpinner;
                 newAlert.level = alertData.level;
+                newAlert.showDownload = alertData.showDownload;
+                newAlert.showSaveNow = alertData.showSaveNow;
 
                 newList.push(newAlert);
                 return Object.assign({}, state, {

@@ -74,7 +74,7 @@ describe('Working with costumes', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for duplication to finish
 
         // Make sure the duplicated costume is named correctly.
-        await clickText('costume3', scope.costumesTab);
+        await clickText('costume2', scope.costumesTab);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -95,6 +95,10 @@ describe('Working with costumes', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
+
+        await rightClickText('costume1', scope.costumesTab);
+        await clickText('duplicate', scope.costumesTab);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for duplication to finish
 
         // Convert the first costume to bitmap.
         await clickText('costume1', scope.costumesTab);

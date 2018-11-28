@@ -44,7 +44,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             };
         }
         componentDidUpdate (prevProps) {
-            if (this.props.isDirtyProject && !prevProps.isDirtyProject) {
+            if (this.props.projectChanged && !prevProps.projectChanged) {
                 this.scheduleAutoSave();
             }
             if (this.props.isUpdating && !prevProps.isUpdating) {
@@ -98,7 +98,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         tryToAutoSave () {
-            if (this.props.isDirtyProject && this.props.isShowingSaveable) {
+            if (this.props.projectChanged && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
             }
         }
@@ -214,7 +214,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 autosaveIntervalSecs,
                 isCreatingCopy,
                 isCreatingNew,
-                isDirtyProject,
+                projectChanged,
                 isManualUpdating,
                 isRemixing,
                 isShowingSaveable,
@@ -250,7 +250,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         canSave: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
         isCreatingNew: PropTypes.bool,
-        isDirtyProject: PropTypes.bool,
         isManualUpdating: PropTypes.bool,
         isRemixing: PropTypes.bool,
         isShared: PropTypes.bool,
@@ -269,6 +268,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onShowSaveSuccessAlert: PropTypes.func,
         onShowSavingAlert: PropTypes.func,
         onUpdatedProject: PropTypes.func,
+        projectChanged: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectTitle: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
@@ -282,7 +282,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
         return {
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
-            isDirtyProject: true,
             isRemixing: getIsRemixing(loadingState),
             isShowingSaveable: ownProps.canSave && isShowingWithId,
             isShowingWithId: isShowingWithId,
@@ -290,6 +289,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isUpdating: getIsUpdating(loadingState),
             isManualUpdating: getIsManualUpdating(loadingState),
             loadingState: loadingState,
+            projectChanged: state.scratchGui.projectChanged,
             reduxProjectId: state.scratchGui.projectState.projectId,
             reduxProjectTitle: state.scratchGui.projectTitle,
             vm: state.scratchGui.vm

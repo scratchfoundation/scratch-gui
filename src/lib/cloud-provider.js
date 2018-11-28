@@ -20,6 +20,10 @@ class CloudProvider {
 
         this.connectionAttempts = 0;
 
+        // A queue of messages to send which were received before the
+        // connection was ready
+        this.queuedData = [];
+
         this.openConnection();
     }
 
@@ -67,6 +71,14 @@ class CloudProvider {
         this.connectionAttempts = 1;
         this.writeToServer('handshake');
         log.info(`Successfully connected to clouddata server.`);
+
+        // Go through the queued data and send off messages that we weren't
+        // ready to send before
+        this.queuedData.forEach(data => {
+            this.sendCloudData(data);
+        });
+        // Reset the queue
+        this.queuedData = [];
     }
 
     onClose () {
@@ -91,12 +103,6 @@ class CloudProvider {
     parseMessage (message) {
         const varData = {};
         switch (message.method) {
-        case 'ack': {
-            varData.varCreate = {
-                name: message.name
-            };
-            break;
-        }
         case 'set': {
             varData.varUpdate = {
                 name: message.name,
@@ -129,7 +135,14 @@ class CloudProvider {
         if (typeof dataValue !== 'undefined' && dataValue !== null) msg.value = dataValue;
 
         const dataToWrite = JSON.stringify(msg);
-        this.sendCloudData(dataToWrite);
+        if (this.connection && this.connection.readyState === WebSocket.OPEN) {
+            this.sendCloudData(dataToWrite);
+        } else if (msg.method === 'create' || msg.method === 'delete' || msg.method === 'rename') {
+            // Save data for sending when connection is open, iff the data
+            // is a create, rename, or  delete
+            this.queuedData.push(dataToWrite);
+        }
+
     }
 
     /**

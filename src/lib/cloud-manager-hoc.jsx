@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import bindAll from 'lodash.bindall';
 
 import VM from 'scratch-vm';
 import CloudProvider from '../lib/cloud-provider';
@@ -19,6 +20,11 @@ const cloudManagerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.cloudProvider = null;
+            bindAll(this, [
+                'handleCloudDataUpdate'
+            ]);
+
+            this.props.vm.on('HAS_CLOUD_DATA_UPDATE', this.handleCloudDataUpdate);
         }
         componentDidMount () {
             if (this.shouldConnect(this.props)) {
@@ -47,12 +53,14 @@ const cloudManagerHOC = function (WrappedComponent) {
             return !!(props.cloudHost && props.username && props.vm && props.projectId);
         }
         shouldConnect (props) {
-            return !this.isConnected() && this.canUseCloud(props) && props.isShowingWithId;
+            return !this.isConnected() && this.canUseCloud(props) &&
+                props.isShowingWithId && props.vm.runtime.hasCloudData();
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
                 ( // Can no longer use cloud or cloud provider info is now stale
-                    !this.canUseCloud(this.props) ||
+                    !this.canUseCloud(props) ||
+                    !props.vm.runtime.hasCloudData() ||
                     (props.projectId !== prevProps.projectId) ||
                     (props.username !== prevProps.username)
                 );
@@ -75,6 +83,13 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.cloudProvider.requestCloseConnection();
                 this.cloudProvider = null;
                 this.props.vm.setCloudProvider(null);
+            }
+        }
+        handleCloudDataUpdate (projectHasCloudData) {
+            if (this.isConnected() && !projectHasCloudData) {
+                this.disconnectFromCloud();
+            } else if (!this.isConnected() && projectHasCloudData) {
+                this.connectToCloud();
             }
         }
         render () {

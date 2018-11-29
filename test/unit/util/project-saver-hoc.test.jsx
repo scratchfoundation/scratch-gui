@@ -16,10 +16,16 @@ describe('projectSaverHOC', () => {
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
-                projectState: {}
+                projectChanged: false,
+                projectState: {},
+                projectTitle: 'Scratch Project',
+                timeout: {
+                    autoSaveTimeoutId: null
+                }
             }
         });
         vm = new VM();
+        jest.useFakeTimers();
     });
 
     test('if canSave becomes true when showing a project with an id, project will be saved', () => {
@@ -31,6 +37,7 @@ describe('projectSaverHOC', () => {
                 isShowingWithId
                 canSave={false}
                 isCreatingNew={false}
+                isShowingSaveable={false} // set explicitly because it relies on ownProps.canSave
                 isShowingWithoutId={false}
                 isUpdating={false}
                 loadingState={LoadingState.SHOWING_WITH_ID}
@@ -40,7 +47,8 @@ describe('projectSaverHOC', () => {
             />
         );
         mounted.setProps({
-            canSave: true
+            canSave: true,
+            isShowingSaveable: true
         });
         expect(mockedUpdateProject).toHaveBeenCalled();
     });
@@ -312,5 +320,83 @@ describe('projectSaverHOC', () => {
             isUpdating: true
         });
         expect(mockedShowSavingAlert).toHaveBeenCalled();
+    });
+
+    test('if project is changed, it should autosave after interval', () => {
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mockedAutoUpdate = jest.fn(() => Promise.resolve());
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isShowingSaveable
+                isShowingWithId
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                store={store}
+                vm={vm}
+                onAutoUpdateProject={mockedAutoUpdate}
+            />
+        );
+        mounted.setProps({
+            projectChanged: true
+        });
+        // Fast-forward until all timers have been executed
+        jest.runAllTimers();
+        expect(mockedAutoUpdate).toHaveBeenCalled();
+    });
+
+    test('if project is changed several times in a row, it should only autosave once', () => {
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mockedAutoUpdate = jest.fn(() => Promise.resolve());
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isShowingSaveable
+                isShowingWithId
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                store={store}
+                vm={vm}
+                onAutoUpdateProject={mockedAutoUpdate}
+            />
+        );
+        mounted.setProps({
+            projectChanged: true,
+            reduxProjectTitle: 'a'
+        });
+        mounted.setProps({
+            projectChanged: true,
+            reduxProjectTitle: 'b'
+        });
+        mounted.setProps({
+            projectChanged: true,
+            reduxProjectTitle: 'c'
+        });
+        // Fast-forward until all timers have been executed
+        jest.runAllTimers();
+        expect(mockedAutoUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    test('if project is not changed, it should not autosave after interval', () => {
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const mockedAutoUpdate = jest.fn(() => Promise.resolve());
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                isShowingSaveable
+                isShowingWithId
+                loadingState={LoadingState.SHOWING_WITH_ID}
+                store={store}
+                vm={vm}
+                onAutoUpdateProject={mockedAutoUpdate}
+            />
+        );
+        mounted.setProps({
+            projectChanged: false
+        });
+        // Fast-forward until all timers have been executed
+        jest.runAllTimers();
+        expect(mockedAutoUpdate).not.toHaveBeenCalled();
     });
 });

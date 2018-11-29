@@ -320,14 +320,14 @@ class RubyToBlocksConverter {
         if (receiver === Self || receiver == Opal.nil) {
             switch (name) {
             case 'move':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock('motion_movesteps', 'statement');
                     this._addInput(block, 'STEPS', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'turn_right':
             case 'turn_left':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock(
                         name === 'turn_right' ? 'motion_turnright' : 'motion_turnleft', 'statement'
                     );
@@ -343,7 +343,8 @@ class RubyToBlocksConverter {
                             'TO',
                             this._createFieldBlock('motion_goto_menu', 'TO', args[0], block.id)
                         );
-                    } else if (_.isArray(args[0]) && args[0].length == 2) {
+                    } else if (_.isArray(args[0]) && args[0].length == 2 &&
+                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
                         block = this._createBlock('motion_gotoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
@@ -359,34 +360,35 @@ class RubyToBlocksConverter {
                             'TO',
                             this._createFieldBlock('motion_glideto_menu', 'TO', args[0], block.id)
                         );
-                    } else if (_.isArray(args[0]) && args[0].length == 2) {
+                    } else if (_.isArray(args[0]) && args[0].length == 2 &&
+                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
                         block = this._createBlock('motion_glidesecstoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
                     }
-                    this._addInput(
-                        block,
-                        'SECS',
-                        this._createNumberBlock('math_number', args[1].get('secs'), block.id)
-                    );
+                    if (block) {
+                        this._addInput(
+                            block,
+                            'SECS',
+                            this._createNumberBlock('math_number', args[1].get('secs'), block.id)
+                        );
+                    }
                 }
                 break;
             case 'direction=':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock('motion_pointindirection', 'statement');
                     this._addInput(block, 'DIRECTION', this._createNumberBlock('math_angle', args[0], block.id));
                 }
                 break;
             case 'point_towards':
-                if (args.length == 1) {
-                    if (_.isString(args[0])) {
-                        block = this._createBlock('motion_pointtowards', 'statement');
-                        this._addInput(
-                            block,
-                            'TOWARDS',
-                            this._createFieldBlock('motion_pointtowards_menu', 'TOWARDS', args[0], block.id)
-                        );
-                    }
+                if (args.length == 1 && _.isString(args[0])) {
+                    block = this._createBlock('motion_pointtowards', 'statement');
+                    this._addInput(
+                        block,
+                        'TOWARDS',
+                        this._createFieldBlock('motion_pointtowards_menu', 'TOWARDS', args[0], block.id)
+                    );
                 }
                 break;
             case 'bounce_if_on_edge':
@@ -394,8 +396,13 @@ class RubyToBlocksConverter {
                     block = this._createBlock('motion_ifonedgebounce', 'statement');
                 }
                 break;
-            case 'rotation_style=':
-                if (args.length == 1 && _.isString(args[0])) {
+            case 'rotation_style=': {
+                const ROTATION_STYLE = [
+                    'left-right',
+                    'don\'t rotate',
+                    'all around'
+                ];
+                if (args.length == 1 && _.isString(args[0]) && ROTATION_STYLE.indexOf(args[0]) >= 0) {
                     block = this._createBlock('motion_setrotationstyle', 'statement', {
                         fields: {
                             STYLE: {
@@ -407,9 +414,10 @@ class RubyToBlocksConverter {
                     });
                 }
                 break;
+            }
             case 'x=':
             case 'y=':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     let xy;
                     if (name === 'x=') {
                         xy = 'x';

@@ -79,10 +79,35 @@ const expectToEqualBlocks = function (actualBlocks, expectedBlocksInfo) {
     });
 };
 
+const expectToEqualRubyStatement = function (actualBlocks, expectedStatement) {
+    const expected = [
+        {
+            opcode: 'ruby_statement',
+            inputs: [
+                {
+                    name: 'STATEMENT',
+                    block: {
+                        opcode: 'text',
+                        fields: [
+                            {
+                                name: 'TEXT',
+                                value: expectedStatement
+                            }
+                        ],
+                        shadow: true
+                    }
+                }
+            ]
+        }
+    ];
+    expectToEqualBlocks(actualBlocks, expected);
+};
+
 export {
     expectToEqualBlocks as default,
     expectToEqualBlock,
     expectToEqualInputs,
     expectToEqualBranches,
-    expectToEqualFields
+    expectToEqualFields,
+    expectToEqualRubyStatement
 };

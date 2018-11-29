@@ -33,7 +33,7 @@ describe('Working with sprites', () => {
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         await clickText('Apple', scope.modal); // Closes modal
         await rightClickText('Apple', scope.spriteTile); // Make sure it is there
-        await clickText('Motion'); // Make sure we are back to the code tab
+        await findByText('Convert to Bitmap'); // Make sure we are on the paint editor
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
@@ -50,7 +50,7 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Adding a sprite by paint button', async () => {
+    test.skip('Adding a sprite by paint button', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');

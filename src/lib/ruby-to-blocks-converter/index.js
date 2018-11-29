@@ -89,6 +89,16 @@ class RubyToBlocksConverter {
         }
     }
 
+    applyTargetBlocks (target, blocks) {
+        Object.keys(target.blocks._blocks).forEach(blockId => {
+            target.blocks.deleteBlock(blockId);
+        });
+        Object.keys(blocks).forEach(blockId => {
+            target.blocks.createBlock(blocks[blockId]);
+        });
+        this.vm.emitWorkspaceUpdate();
+    }
+
     _toErrorAnnotation (row, column, message) {
         if (row === Opal.nil) {
             row = 0;
@@ -107,16 +117,6 @@ class RubyToBlocksConverter {
             type: 'error',
             text: `${columnText}${message}`
         };
-    }
-
-    applyTargetBlocks (target, blocks) {
-        Object.keys(target.blocks._blocks).forEach(blockId => {
-            target.blocks.deleteBlock(blockId);
-        });
-        Object.keys(blocks).forEach(blockId => {
-            target.blocks.createBlock(blocks[blockId]);
-        });
-        this.vm.emitWorkspaceUpdate();
     }
 
     _checkNumChildren (node, length) {
@@ -268,6 +268,7 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'value':
+            case 'value_boolean':
                 block.topLevel = true;
                 break;
             case 'hat':
@@ -283,7 +284,6 @@ class RubyToBlocksConverter {
                 terminated = true;
                 break;
             }
-            return block;
         });
         return blocks;
     }
@@ -321,14 +321,14 @@ class RubyToBlocksConverter {
         if (receiver === Self || receiver == Opal.nil) {
             switch (name) {
             case 'move':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock('motion_movesteps', 'statement');
                     this._addInput(block, 'STEPS', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'turn_right':
             case 'turn_left':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock(
                         name === 'turn_right' ? 'motion_turnright' : 'motion_turnleft', 'statement'
                     );
@@ -344,7 +344,8 @@ class RubyToBlocksConverter {
                             'TO',
                             this._createFieldBlock('motion_goto_menu', 'TO', args[0], block.id)
                         );
-                    } else if (_.isArray(args[0]) && args[0].length == 2) {
+                    } else if (_.isArray(args[0]) && args[0].length == 2 &&
+                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
                         block = this._createBlock('motion_gotoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
@@ -360,34 +361,35 @@ class RubyToBlocksConverter {
                             'TO',
                             this._createFieldBlock('motion_glideto_menu', 'TO', args[0], block.id)
                         );
-                    } else if (_.isArray(args[0]) && args[0].length == 2) {
+                    } else if (_.isArray(args[0]) && args[0].length == 2 &&
+                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
                         block = this._createBlock('motion_glidesecstoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
                     }
-                    this._addInput(
-                        block,
-                        'SECS',
-                        this._createNumberBlock('math_number', args[1].get('secs'), block.id)
-                    );
+                    if (block) {
+                        this._addInput(
+                            block,
+                            'SECS',
+                            this._createNumberBlock('math_number', args[1].get('secs'), block.id)
+                        );
+                    }
                 }
                 break;
             case 'direction=':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     block = this._createBlock('motion_pointindirection', 'statement');
                     this._addInput(block, 'DIRECTION', this._createNumberBlock('math_angle', args[0], block.id));
                 }
                 break;
             case 'point_towards':
-                if (args.length == 1) {
-                    if (_.isString(args[0])) {
-                        block = this._createBlock('motion_pointtowards', 'statement');
-                        this._addInput(
-                            block,
-                            'TOWARDS',
-                            this._createFieldBlock('motion_pointtowards_menu', 'TOWARDS', args[0], block.id)
-                        );
-                    }
+                if (args.length == 1 && _.isString(args[0])) {
+                    block = this._createBlock('motion_pointtowards', 'statement');
+                    this._addInput(
+                        block,
+                        'TOWARDS',
+                        this._createFieldBlock('motion_pointtowards_menu', 'TOWARDS', args[0], block.id)
+                    );
                 }
                 break;
             case 'bounce_if_on_edge':
@@ -395,8 +397,13 @@ class RubyToBlocksConverter {
                     block = this._createBlock('motion_ifonedgebounce', 'statement');
                 }
                 break;
-            case 'rotation_style=':
-                if (args.length == 1 && _.isString(args[0])) {
+            case 'rotation_style=': {
+                const ROTATION_STYLE = [
+                    'left-right',
+                    'don\'t rotate',
+                    'all around'
+                ];
+                if (args.length == 1 && _.isString(args[0]) && ROTATION_STYLE.indexOf(args[0]) >= 0) {
                     block = this._createBlock('motion_setrotationstyle', 'statement', {
                         fields: {
                             STYLE: {
@@ -408,9 +415,10 @@ class RubyToBlocksConverter {
                     });
                 }
                 break;
+            }
             case 'x=':
             case 'y=':
-                if (args.length == 1) {
+                if (args.length == 1 && _.isNumber(args[0])) {
                     let xy;
                     if (name === 'x=') {
                         xy = 'x';
@@ -425,7 +433,7 @@ class RubyToBlocksConverter {
             case 'y':
                 if (args.length == 0) {
                     let xy;
-                    if (name === 'x=') {
+                    if (name === 'x') {
                         xy = 'x';
                     } else {
                         xy = 'y';
@@ -466,7 +474,7 @@ class RubyToBlocksConverter {
                 break;
             case 'touching?':
                 if (args.length == 1 && _.isString(args[0])) {
-                    block = this._createBlock('sensing_touchingobject', 'value');
+                    block = this._createBlock('sensing_touchingobject', 'value_boolean');
                     this._addInput(
                         block,
                         'TOUCHINGOBJECTMENU',
@@ -524,7 +532,16 @@ class RubyToBlocksConverter {
     _onIf (node) {
         this._checkNumChildren(node, 3);
 
-        const cond = this._process(node.children[0]);
+        const savedBlockIds = Object.keys(this._context.blocks);
+        let cond = this._process(node.children[0]);
+        if (cond !== false && this._blockType(cond) !== 'value_boolean') {
+            Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
+                .forEach(blockId => {
+                    delete this._context.blocks[blockId];
+                });
+            cond = this._createBlock('ruby_expression', 'value_boolean');
+            this._addInput(cond, 'EXPRESSION', this._createTextBlock(this._getSource(node.children[0]), cond.id));
+        }
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];
@@ -534,44 +551,34 @@ class RubyToBlocksConverter {
             elseStatement = [elseStatement];
         }
 
-        let block;
-        if (elseStatement[0] === Opal.nil) {
-            block = this._createBlock('control_if', 'statement', {
-                inputs: {
-                    CONDITION: {
-                        name: 'CONDITION',
-                        block: cond.id,
-                        shadow: null
-                    },
-                    SUBSTACK: {
-                        name: 'SUBSTACK',
-                        block: statement[0] === Opal.nil ? null : statement[0].id,
-                        shadow: null
-                    }
-                }
-            });
-        } else {
-            block = this._createBlock('control_if_else', 'statement', {
-                inputs: {
-                    CONDITION: {
-                        name: 'CONDITION',
-                        block: cond.id,
-                        shadow: null
-                    },
-                    SUBSTACK: {
-                        name: 'SUBSTACK',
-                        block: statement[0] === Opal.nil ? null : statement[0].id,
-                        shadow: null
-                    },
-                    SUBSTACK2: {
-                        name: 'SUBSTACK2',
-                        block: elseStatement[0].id,
-                        shadow: null
-                    }
-                }
-            });
+        const inputs = {};
+        if (cond !== false) {
+            inputs.CONDITION = {
+                name: 'CONDITION',
+                block: cond.id,
+                shadow: null
+            };
         }
-        cond.parent = block.id;
+        inputs.SUBSTACK = {
+            name: 'SUBSTACK',
+            block: statement[0] === Opal.nil ? null : statement[0].id,
+            shadow: null
+        };
+        let opcode;
+        if (elseStatement[0] === Opal.nil) {
+            opcode = 'control_if';
+        } else {
+            opcode = 'control_if_else';
+            inputs.SUBSTACK2 = {
+                name: 'SUBSTACK2',
+                block: elseStatement[0].id,
+                shadow: null
+            };
+        }
+        const block = this._createBlock(opcode, 'statement', {inputs: inputs});
+        if (cond !== false) {
+            cond.parent = block.id;
+        }
         statement.forEach(b => {
             if (b && b !== Opal.nil) {
                 b.parent = block.id;

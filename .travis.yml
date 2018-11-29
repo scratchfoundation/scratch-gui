@@ -20,6 +20,7 @@ script:
 - npm run test:lint
 - npm run test:unit
 - npm run clean && $(npm bin)/webpack --colors --bail
+- npm run test:integration
 deploy:
 - provider: script
   on:

@@ -74,6 +74,8 @@
     "lodash.pick": "4.4.0",
     "minilog": "3.1.0",
     "mkdirp": "^0.5.1",
+    "opal-runtime": "^1.0.11",
+    "opal-compiler": "^1.0.11",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
     "postcss-simple-vars": "^5.0.1",
@@ -126,7 +128,8 @@
   "jest": {
     "setupFiles": [
       "raf/polyfill",
-      "<rootDir>/test/helpers/enzyme-setup.js"
+      "<rootDir>/test/helpers/enzyme-setup.js",
+      "<rootDir>/test/helpers/opal-setup.js"
     ],
     "testPathIgnorePatterns": [
       "src/test.js"

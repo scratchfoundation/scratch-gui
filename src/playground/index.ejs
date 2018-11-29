@@ -14,8 +14,11 @@
         </script>
         <!-- /Sentry -->
     <% } %>
-    <script src="//cdn.opalrb.com/opal/current/opal.min.js"></script>
-    <script src="//cdn.opalrb.com/opal/current/opal-parser.min.js"></script>
+    <script src="static/javascripts/opal.min.js" onload="Opal.load('opal')"></script>
+    <script src="static/javascripts/opal-parser.min.js"
+            onload="Opal.load('opal-parser'); Opal.load('parser'); Opal.load('parser/ruby23');
+                    Opal.Parser.CurrentRuby = Opal.Parser.Ruby23;">
+    </script>
   </head>
   <body>
   </body>

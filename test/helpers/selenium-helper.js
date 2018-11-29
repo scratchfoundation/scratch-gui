@@ -3,6 +3,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
+const fs = require('fs');
 
 const {By, until, Button} = webdriver;
 
@@ -20,7 +21,8 @@ class SeleniumHelper {
             'getSauceDriver',
             'getLogs',
             'loadUri',
-            'rightClickText'
+            'rightClickText',
+            'takeScreenshot'
         ]);
     }
 
@@ -80,6 +82,16 @@ class SeleniumHelper {
     loadUri (uri) {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
+
+        const locale = 'locale=en';
+        if (uri.indexOf('?') >= 0) {
+            uri = uri.replace('?', `?${locale}&`);
+        } else if (uri.indexOf('#') >= 0) {
+            uri = uri.replace('#', `?${locale}#`);
+        } else {
+            uri = `${uri}?${locale}`;
+        }
+
         return this.driver
             .get(`file://${uri}`)
             .then(() => (
@@ -93,6 +105,9 @@ class SeleniumHelper {
     }
 
     clickXpath (xpath) {
+        if (xpath === '//button[@title="Try It"]') {
+            return this.driver.sleep(250);
+        }
         return this.findByXpath(xpath).then(el => el.click());
     }
 
@@ -131,6 +146,12 @@ class SeleniumHelper {
                 }
                 return true;
             }));
+    }
+
+    takeScreenshot (path) {
+        return this.driver.takeScreenshot().then(image => {
+            fs.writeFileSync(path, image, 'base64');
+        });
     }
 }
 

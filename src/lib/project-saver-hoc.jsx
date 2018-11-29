@@ -201,16 +201,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     storage.DataFormat.JSON,
                     body,
                     projectId
-                ).then(response => {
-                    this.props.onSetProjectUnchanged();
-                    return response;
-                });
+                );
             })
                 .then(response => {
+                    this.props.onSetProjectUnchanged();
                     const id = response.id.toString();
                     if (id && this.props.onUpdateProjectThumbnail) {
                         this.storeProjectThumbnail(id);
                     }
+                    return response;
                 })
                 .catch(err => {
                     log.error(err);

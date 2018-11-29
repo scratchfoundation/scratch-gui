@@ -42,7 +42,7 @@ const filterInlineAlerts = alertsList => (
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SHOW_ALERT: { // shows standard and inline alerts
+    case SHOW_ALERT: { // intended to show standard and inline alerts, but not extensions
         const alertId = action.alertId;
         if (alertId) {
             const newAlert = {

@@ -18,7 +18,10 @@ describe('projectSaverHOC', () => {
             scratchGui: {
                 projectChanged: false,
                 projectState: {},
-                projectTitle: 'Scratch Project'
+                projectTitle: 'Scratch Project',
+                timeout: {
+                    autoSaveTimeoutId: null
+                }
             }
         });
         vm = new VM();
@@ -358,19 +361,16 @@ describe('projectSaverHOC', () => {
             />
         );
         mounted.setProps({
-            projectChanged: true
+            projectChanged: true,
+            reduxProjectTitle: 'a'
         });
         mounted.setProps({
-            projectChanged: false
+            projectChanged: true,
+            reduxProjectTitle: 'b'
         });
         mounted.setProps({
-            projectChanged: true
-        });
-        mounted.setProps({
-            projectChanged: false
-        });
-        mounted.setProps({
-            projectChanged: true
+            projectChanged: true,
+            reduxProjectTitle: 'c'
         });
         // Fast-forward until all timers have been executed
         jest.runAllTimers();

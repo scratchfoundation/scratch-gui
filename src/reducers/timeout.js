@@ -1,4 +1,4 @@
-const SET_AUTOSAVE_TIMEOUT_ID = 'projectTitle/SET_AUTOSAVE_TIMEOUT_ID';
+const SET_AUTOSAVE_TIMEOUT_ID = 'timeout/SET_AUTOSAVE_TIMEOUT_ID';
 
 const initialState = {
     autoSaveTimeoutId: null

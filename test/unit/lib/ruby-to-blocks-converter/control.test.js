@@ -37,4 +37,103 @@ describe('RubyToBlocksConverter/Control', () => {
             expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
         });
     });
+
+    test('control_if', () => {
+        expect(converter.targetCodeToBlocks(null, 'if touching?("_edge_"); bounce_if_on_edge; end')).toBeTruthy();
+        expect(converter.errors.length).toEqual(0);
+
+        const expected = [
+            {
+                opcode: 'control_if',
+                inputs: [
+                    {
+                        name: 'CONDITION',
+                        block: {
+                            opcode: 'sensing_touchingobject',
+                            inputs: [
+                                {
+                                    name: 'TOUCHINGOBJECTMENU',
+                                    block: {
+                                        opcode: 'sensing_touchingobjectmenu',
+                                        fields: [
+                                            {
+                                                name: 'TOUCHINGOBJECTMENU',
+                                                value: '_edge_'
+                                            }
+                                        ],
+                                        shadow: true
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                branches: [
+                    {
+                        opcode: 'motion_ifonedgebounce'
+                    }
+                ]
+            }
+        ];
+        expectToEqualBlocks(converter.blocks, expected);
+    });
+
+    test('control_if_else', () => {
+        const code = 'if touching?("_edge_"); bounce_if_on_edge; else; move(10); end';
+        expect(converter.targetCodeToBlocks(null, code)).toBeTruthy();
+        expect(converter.errors.length).toEqual(0);
+
+        const expected = [
+            {
+                opcode: 'control_if_else',
+                inputs: [
+                    {
+                        name: 'CONDITION',
+                        block: {
+                            opcode: 'sensing_touchingobject',
+                            inputs: [
+                                {
+                                    name: 'TOUCHINGOBJECTMENU',
+                                    block: {
+                                        opcode: 'sensing_touchingobjectmenu',
+                                        fields: [
+                                            {
+                                                name: 'TOUCHINGOBJECTMENU',
+                                                value: '_edge_'
+                                            }
+                                        ],
+                                        shadow: true
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                branches: [
+                    {
+                        opcode: 'motion_ifonedgebounce'
+                    },
+                    {
+                        opcode: 'motion_movesteps',
+                        inputs: [
+                            {
+                                name: 'STEPS',
+                                block: {
+                                    opcode: 'math_number',
+                                    fields: [
+                                        {
+                                            name: 'NUM',
+                                            value: 10
+                                        }
+                                    ],
+                                    shadow: true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+        expectToEqualBlocks(converter.blocks, expected);
+    });
 });

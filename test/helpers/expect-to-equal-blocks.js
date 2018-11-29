@@ -19,9 +19,11 @@ const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
         expect(blocks.getBranch(block.id)).toEqual(null);
     } else {
         expectedBranchesInfo.forEach((expectedBranch, j) => {
-            const branch = blocks.getBranch(block.id, j);
+            const branch = blocks.getBranch(block.id, j + 1);
             expect(branch).not.toEqual(null);
+            /* eslint-disable no-use-before-define */
             expectToEqualBlock(blocks, block.id, blocks.getBlock(branch), expectedBranch);
+            /* eslint-enable no-use-before-define */
         });
     }
 };

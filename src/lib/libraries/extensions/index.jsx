@@ -14,6 +14,8 @@ import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
 import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
+import makeymakeyImage from './makeymakey.png';
+import makeymakeyInsetImage from './makeymakey-small.svg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -127,6 +129,21 @@ export default [
         ),
         featured: true,
         internetConnectionRequired: true
+    },
+    {
+        name: 'Makey Makey',
+        extensionId: 'makeymakey',
+        collaborator: 'JoyLabz',
+        iconURL: makeymakeyImage,
+        insetIconURL: makeymakeyInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Make anything into a key."
+                description="Description for the 'Makey Makey' extension"
+                id="gui.extension.makeymakey.description"
+            />
+        ),
+        featured: true
     },
     {
         name: 'micro:bit',

@@ -1,11 +1,7 @@
 /* global Opal */
-Opal.load('opal');
-Opal.load('opal-parser');
-Opal.load('parser');
-Opal.load('parser/ruby23');
 
 // HACK: monkey patch to get Parser::SyntaxError exception
-Opal.eval(`
+const patch = Opal.String.$new(`
 module Parser
   module Source
     class Buffer
@@ -63,5 +59,6 @@ module Parser
   end
 end
 `);
+eval(Opal.Opal.$compile(patch));
 
-export default Opal.Parser.Ruby23;
+export default Opal.Parser.CurrentRuby;

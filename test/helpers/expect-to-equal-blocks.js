@@ -60,7 +60,7 @@ const expectToEqualBlock = function (blocks, parent, actualBlock, expectedBlockI
     expectToEqualBranches(blocks, block, expected.branches);
 
     if (expected.next) {
-        expectToEqualBlock(blocks, parent, blocks.getBlock(expected.next), expected.next);
+        expectToEqualBlock(blocks, block.id, blocks.getBlock(blocks.getNextBlock(block.id)), expected.next);
     } else {
         expect(blocks.getNextBlock(block.id)).toEqual(null);
     }

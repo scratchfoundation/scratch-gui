@@ -72,6 +72,7 @@
     "lodash.isequal": "4.5.0",
     "lodash.omit": "4.5.0",
     "lodash.pick": "4.4.0",
+    "lodash.throttle": "4.0.1",
     "minilog": "3.1.0",
     "mkdirp": "^0.5.1",
     "postcss-import": "^12.0.0",

@@ -59,6 +59,6 @@ module Parser
   end
 end
 `);
-eval(Opal.Opal.$compile(patch));
+eval(Opal.Opal.$compile(patch)); // eslint-disable-line no-eval
 
 export default Opal.Parser.CurrentRuby;

@@ -20,6 +20,7 @@ import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
+import timeoutReducer, {timeoutInitialState} from './timeout';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
@@ -51,6 +52,7 @@ const guiInitialState = {
     projectTitle: projectTitleInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
+    timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState
@@ -129,6 +131,7 @@ const guiReducer = combineReducers({
     projectTitle: projectTitleReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
+    timeout: timeoutReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer

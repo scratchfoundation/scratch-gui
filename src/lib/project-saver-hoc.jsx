@@ -10,6 +10,7 @@ import {
     showAlertWithTimeout,
     showStandardAlert
 } from '../reducers/alerts';
+import {setAutoSaveTimeoutId} from '../reducers/timeout';
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
@@ -43,9 +44,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
             bindAll(this, [
                 'tryToAutoSave'
             ]);
-            this.state = {
-                autoSaveTimeoutId: null
-            };
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectChanged && !prevProps.projectChanged) {
@@ -88,16 +86,16 @@ const ProjectSaverHOC = function (WrappedComponent) {
             this.clearAutoSaveTimeout();
         }
         clearAutoSaveTimeout () {
-            if (this.state.autoSaveTimeoutId !== null) {
-                clearTimeout(this.state.autoSaveTimeoutId);
-                this.setState({autoSaveTimeoutId: null});
+            if (this.props.autoSaveTimeoutId !== null) {
+                clearTimeout(this.props.autoSaveTimeoutId);
+                this.props.setAutoSaveTimeoutId(null);
             }
         }
         scheduleAutoSave () {
-            if (this.props.isShowingSaveable && this.state.autoSaveTimeoutId === null) {
+            if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
                 const timeoutId = setTimeout(this.tryToAutoSave,
                     this.props.autosaveIntervalSecs * 1000);
-                this.setState({autoSaveTimeoutId: timeoutId});
+                this.props.setAutoSaveTimeoutId(timeoutId);
             }
         }
         tryToAutoSave () {
@@ -237,6 +235,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onUpdatedProject,
                 reduxProjectId,
                 reduxProjectTitle,
+                setAutoSaveTimeoutId: setAutoSaveTimeoutIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -249,6 +248,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
     }
 
     ProjectSaverComponent.propTypes = {
+        autoSaveTimeoutId: PropTypes.number,
         canCreateNew: PropTypes.bool,
         canSave: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
@@ -283,6 +283,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         const loadingState = state.scratchGui.projectState.loadingState;
         const isShowingWithId = getIsShowingWithId(loadingState);
         return {
+            autoSaveTimeoutId: state.scratchGui.timeout.autoSaveTimeoutId,
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
             isRemixing: getIsRemixing(loadingState),
@@ -309,7 +310,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onShowCreatingAlert: () => showAlertWithTimeout(dispatch, 'creating'),
         onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'saveSuccess'),
         onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
-        onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState))
+        onUpdatedProject: (projectId, loadingState) => dispatch(doneUpdatingProject(projectId, loadingState)),
+        setAutoSaveTimeoutId: id => dispatch(setAutoSaveTimeoutId(id))
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

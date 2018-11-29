@@ -8,7 +8,7 @@
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
     "prune": "./prune-gh-pages.sh",
-    "i18n:src": "babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
+    "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
     "start": "webpack-dev-server",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --runInBand test[\\\\/]integration",

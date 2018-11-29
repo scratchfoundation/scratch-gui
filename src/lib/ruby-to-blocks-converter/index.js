@@ -424,7 +424,7 @@ class RubyToBlocksConverter {
             case 'y':
                 if (args.length == 0) {
                     let xy;
-                    if (name === 'x=') {
+                    if (name === 'x') {
                         xy = 'x';
                     } else {
                         xy = 'y';

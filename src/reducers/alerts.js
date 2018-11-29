@@ -12,7 +12,7 @@ const CLOSE_ALERTS_WITH_ID = 'scratch-gui/alerts/CLOSE_ALERTS_WITH_ID';
  *
  * {bool} visible - whether the alerts are visible
  * {array} alertsList - list of alerts, each with properties:
- *  * alert type (required): one of AlertTypes
+ *  * alertType (required): one of AlertTypes
  *  * closeButton (optional): bool indicating that we should show close button
  *  * content (optional): react element (a <FormattedMessage />)
  *  * extentionId (optional): id string that identifies the extension

@@ -30,5 +30,10 @@ export default function (Generator) {
         return `${statement} do${args}\n${branch}end\n`;
     };
 
+    Generator.ruby_expression = function (block) {
+        const expression = getUnquoteText(block, 'EXPRESSION', Generator.ORDER_NONE);
+        return [expression, Generator.ORDER_ATOMIC];
+    };
+
     return Generator;
 }

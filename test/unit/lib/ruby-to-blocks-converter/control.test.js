@@ -42,7 +42,7 @@ describe('RubyToBlocksConverter/Control', () => {
         expect(converter.targetCodeToBlocks(null, 'if touching?("_edge_"); bounce_if_on_edge; end')).toBeTruthy();
         expect(converter.errors.length).toEqual(0);
 
-        const expected = [
+        let expected = [
             {
                 opcode: 'control_if',
                 inputs: [
@@ -71,6 +71,39 @@ describe('RubyToBlocksConverter/Control', () => {
                 branches: [
                     {
                         opcode: 'motion_ifonedgebounce'
+                    }
+                ]
+            }
+        ];
+        expectToEqualBlocks(converter.blocks, expected);
+
+        expect(converter.targetCodeToBlocks(null, 'if move(10); end')).toBeTruthy();
+        expect(converter.errors.length).toEqual(0);
+
+        expected = [
+            {
+                opcode: 'control_if',
+                inputs: [
+                    {
+                        name: 'CONDITION',
+                        block: {
+                            opcode: 'ruby_expression',
+                            inputs: [
+                                {
+                                    name: 'EXPRESSION',
+                                    block: {
+                                        opcode: 'text',
+                                        fields: [
+                                            {
+                                                name: 'TEXT',
+                                                value: 'move(10)'
+                                            }
+                                        ],
+                                        shadow: true
+                                    }
+                                }
+                            ]
+                        }
                     }
                 ]
             }

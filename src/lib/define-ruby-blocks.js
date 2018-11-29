@@ -22,6 +22,7 @@ export default function (ScratchBlocks) {
     ScratchBlocks.Blocks.ruby_statement = {
         init: function () {
             this.jsonInit({
+                type: 'ruby_statement',
                 message0: '%1',
                 args0: [
                     {
@@ -38,6 +39,7 @@ export default function (ScratchBlocks) {
     ScratchBlocks.Blocks.ruby_statement_with_block = {
         init: function () {
             this.jsonInit({
+                type: 'ruby_statement_with_block',
                 message0: '%1 do %2',
                 message1: '%1',
                 message2: 'end',
@@ -59,6 +61,23 @@ export default function (ScratchBlocks) {
                 ],
                 category: ScratchBlocks.Categories.ruby,
                 extensions: ['colours_ruby', 'shape_statement']
+            });
+        }
+    };
+
+    ScratchBlocks.Blocks.ruby_expression = {
+        init: function () {
+            this.jsonInit({
+                type: 'ruby_expression',
+                message0: '%1',
+                args0: [
+                    {
+                        type: 'input_value',
+                        name: 'EXPRESSION'
+                    }
+                ],
+                category: ScratchBlocks.Categories.ruby,
+                extensions: ['colours_ruby', 'output_boolean']
             });
         }
     };

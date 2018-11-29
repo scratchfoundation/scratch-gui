@@ -268,6 +268,7 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'value':
+            case 'value_boolean':
                 block.topLevel = true;
                 break;
             case 'hat':
@@ -473,7 +474,7 @@ class RubyToBlocksConverter {
                 break;
             case 'touching?':
                 if (args.length == 1 && _.isString(args[0])) {
-                    block = this._createBlock('sensing_touchingobject', 'value');
+                    block = this._createBlock('sensing_touchingobject', 'value_boolean');
                     this._addInput(
                         block,
                         'TOUCHINGOBJECTMENU',
@@ -531,7 +532,16 @@ class RubyToBlocksConverter {
     _onIf (node) {
         this._checkNumChildren(node, 3);
 
-        const cond = this._process(node.children[0]);
+        const savedBlockIds = Object.keys(this._context.blocks);
+        let cond = this._process(node.children[0]);
+        if (this._blockType(cond) !== 'value_boolean') {
+            Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
+                .forEach(blockId => {
+                    delete this._context.blocks[blockId];
+                });
+            cond = this._createBlock('ruby_expression', 'value_boolean');
+            this._addInput(cond, 'EXPRESSION', this._createTextBlock(this._getSource(node.children[0]), cond.id));
+        }
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];

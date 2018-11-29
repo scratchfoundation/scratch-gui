@@ -3,6 +3,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
+const fs = require('fs');
 
 const {By, until, Button} = webdriver;
 
@@ -149,7 +150,7 @@ class SeleniumHelper {
 
     takeScreenshot (path) {
         return this.driver.takeScreenshot().then(image => {
-            require('fs').writeFileSync(path, image, 'base64');
+            fs.writeFileSync(path, image, 'base64');
         });
     }
 }

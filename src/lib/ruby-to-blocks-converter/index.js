@@ -551,8 +551,7 @@ class RubyToBlocksConverter {
             elseStatement = [elseStatement];
         }
 
-        let block;
-        let inputs = {};
+        const inputs = {};
         if (cond !== false) {
             inputs.CONDITION = {
                 name: 'CONDITION',
@@ -576,7 +575,7 @@ class RubyToBlocksConverter {
                 shadow: null
             };
         }
-        block = this._createBlock(opcode, 'statement', {inputs: inputs});
+        const block = this._createBlock(opcode, 'statement', {inputs: inputs});
         if (cond !== false) {
             cond.parent = block.id;
         }

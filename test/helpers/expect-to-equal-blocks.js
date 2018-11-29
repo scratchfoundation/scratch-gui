@@ -23,9 +23,8 @@ const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
             if (expectedBranch === null) {
                 expect(branch).toEqual(null);
                 return;
-            } else {
-                expect(branch).not.toEqual(null);
             }
+            expect(branch).not.toEqual(null);
             /* eslint-disable no-use-before-define */
             expectToEqualBlock(blocks, block.id, blocks.getBlock(branch), expectedBranch);
             /* eslint-enable no-use-before-define */

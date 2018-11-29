@@ -534,7 +534,7 @@ class RubyToBlocksConverter {
 
         const savedBlockIds = Object.keys(this._context.blocks);
         let cond = this._process(node.children[0]);
-        if (this._blockType(cond) !== 'value_boolean') {
+        if (cond !== false && this._blockType(cond) !== 'value_boolean') {
             Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
                 .forEach(blockId => {
                     delete this._context.blocks[blockId];
@@ -552,43 +552,34 @@ class RubyToBlocksConverter {
         }
 
         let block;
-        if (elseStatement[0] === Opal.nil) {
-            block = this._createBlock('control_if', 'statement', {
-                inputs: {
-                    CONDITION: {
-                        name: 'CONDITION',
-                        block: cond.id,
-                        shadow: null
-                    },
-                    SUBSTACK: {
-                        name: 'SUBSTACK',
-                        block: statement[0] === Opal.nil ? null : statement[0].id,
-                        shadow: null
-                    }
-                }
-            });
-        } else {
-            block = this._createBlock('control_if_else', 'statement', {
-                inputs: {
-                    CONDITION: {
-                        name: 'CONDITION',
-                        block: cond.id,
-                        shadow: null
-                    },
-                    SUBSTACK: {
-                        name: 'SUBSTACK',
-                        block: statement[0] === Opal.nil ? null : statement[0].id,
-                        shadow: null
-                    },
-                    SUBSTACK2: {
-                        name: 'SUBSTACK2',
-                        block: elseStatement[0].id,
-                        shadow: null
-                    }
-                }
-            });
+        let inputs = {};
+        if (cond !== false) {
+            inputs.CONDITION = {
+                name: 'CONDITION',
+                block: cond.id,
+                shadow: null
+            };
         }
-        cond.parent = block.id;
+        inputs.SUBSTACK = {
+            name: 'SUBSTACK',
+            block: statement[0] === Opal.nil ? null : statement[0].id,
+            shadow: null
+        };
+        let opcode;
+        if (elseStatement[0] === Opal.nil) {
+            opcode = 'control_if';
+        } else {
+            opcode = 'control_if_else';
+            inputs.SUBSTACK2 = {
+                name: 'SUBSTACK2',
+                block: elseStatement[0].id,
+                shadow: null
+            };
+        }
+        block = this._createBlock(opcode, 'statement', {inputs: inputs});
+        if (cond !== false) {
+            cond.parent = block.id;
+        }
         statement.forEach(b => {
             if (b && b !== Opal.nil) {
                 b.parent = block.id;

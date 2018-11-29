@@ -20,7 +20,12 @@ const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
     } else {
         expectedBranchesInfo.forEach((expectedBranch, j) => {
             const branch = blocks.getBranch(block.id, j + 1);
-            expect(branch).not.toEqual(null);
+            if (expectedBranch === null) {
+                expect(branch).toEqual(null);
+                return;
+            } else {
+                expect(branch).not.toEqual(null);
+            }
             /* eslint-disable no-use-before-define */
             expectToEqualBlock(blocks, block.id, blocks.getBlock(branch), expectedBranch);
             /* eslint-enable no-use-before-define */

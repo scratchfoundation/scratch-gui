@@ -109,6 +109,19 @@ describe('RubyToBlocksConverter/Control', () => {
             }
         ];
         expectToEqualBlocks(converter.blocks, expected);
+
+        expect(converter.targetCodeToBlocks(null, 'if false; end')).toBeTruthy();
+        expect(converter.errors.length).toEqual(0);
+
+        expected = [
+            {
+                opcode: 'control_if',
+                branches: [
+                    null
+                ]
+            }
+        ];
+        expectToEqualBlocks(converter.blocks, expected);
     });
 
     test('control_if_else', () => {

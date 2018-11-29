@@ -20,7 +20,8 @@ const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
     } else {
         expectedBranchesInfo.forEach((expectedBranch, j) => {
             const branch = blocks.getBranch(block.id, j);
-            // TODO: ブランチを含むときに修正する
+            expect(branch).not.toEqual(null);
+            expectToEqualBlock(blocks, block.id, blocks.getBlock(branch), expectedBranch);
         });
     }
 };

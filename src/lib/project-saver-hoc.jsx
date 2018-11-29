@@ -6,6 +6,8 @@ import VM from 'scratch-vm';
 
 import log from '../lib/log';
 import storage from '../lib/storage';
+import dataURItoBlob from '../lib/data-uri-to-blob';
+
 import {
     showAlertWithTimeout,
     showStandardAlert
@@ -199,16 +201,40 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     storage.DataFormat.JSON,
                     body,
                     projectId
-                ).then(response => {
-                    this.props.onSetProjectUnchanged();
-                    return response;
-                });
+                );
             })
+                .then(response => {
+                    this.props.onSetProjectUnchanged();
+                    const id = response.id.toString();
+                    if (id && this.props.onUpdateProjectThumbnail) {
+                        this.storeProjectThumbnail(id);
+                    }
+                    return response;
+                })
                 .catch(err => {
                     log.error(err);
                     throw err; // pass the error up the chain
                 });
         }
+
+        /**
+         * Store a snapshot of the project once it has been saved/created.
+         * Needs to happen _after_ save because the project must have an ID.
+         * @param {!string} projectId - id of the project, must be defined.
+         */
+        storeProjectThumbnail (projectId) {
+            try {
+                this.props.vm.renderer.requestSnapshot(dataURI => {
+                    this.props.onUpdateProjectThumbnail(
+                        projectId, dataURItoBlob(dataURI));
+                });
+            } catch (e) {
+                log.error('Project thumbnail save error', e);
+                // This is intentionally fire/forget because a failure
+                // to save the thumbnail is not vitally important to the user.
+            }
+        }
+
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -233,6 +259,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onShowSaveSuccessAlert,
                 onShowSavingAlert,
                 onUpdatedProject,
+                onUpdateProjectThumbnail,
                 reduxProjectId,
                 reduxProjectTitle,
                 setAutoSaveTimeoutId: setAutoSaveTimeoutIdProp,
@@ -270,6 +297,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onShowCreatingAlert: PropTypes.func,
         onShowSaveSuccessAlert: PropTypes.func,
         onShowSavingAlert: PropTypes.func,
+        onUpdateProjectThumbnail: PropTypes.func,
         onUpdatedProject: PropTypes.func,
         projectChanged: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

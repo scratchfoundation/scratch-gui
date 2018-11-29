@@ -62,7 +62,10 @@ const initPlayer = function (currentState) {
         currentState,
         {mode: {
             isFullScreen: currentState.mode.isFullScreen,
-            isPlayerOnly: true
+            isPlayerOnly: true,
+            // When initializing in player mode, make sure to reset
+            // hasEverEnteredEditorMode
+            hasEverEnteredEditor: false
         }}
     );
 };
@@ -72,7 +75,8 @@ const initFullScreen = function (currentState) {
         currentState,
         {mode: {
             isFullScreen: true,
-            isPlayerOnly: currentState.mode.isPlayerOnly
+            isPlayerOnly: currentState.mode.isPlayerOnly,
+            hasEverEnteredEditor: currentState.mode.hasEverEnteredEditor
         }}
     );
 };

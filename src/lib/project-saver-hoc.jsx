@@ -1,3 +1,4 @@
+import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -39,6 +40,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
     class ProjectSaverComponent extends React.Component {
         constructor (props) {
             super(props);
+            bindAll(this, [
+                'tryToAutoSave'
+            ]);
             this.state = {
                 autoSaveTimeoutId: null
             };
@@ -91,9 +95,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         scheduleAutoSave () {
             if (this.props.isShowingSaveable && this.state.autoSaveTimeoutId === null) {
-                const timeoutId = setTimeout(() => {
-                    this.tryToAutoSave();
-                }, this.props.autosaveIntervalSecs * 1000);
+                const timeoutId = setTimeout(this.tryToAutoSave,
+                    this.props.autosaveIntervalSecs * 1000);
                 this.setState({autoSaveTimeoutId: timeoutId});
             }
         }

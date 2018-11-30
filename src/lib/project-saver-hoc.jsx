@@ -44,8 +44,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
+                'leavePageConfirm',
                 'tryToAutoSave'
             ]);
+        }
+        componentWillMount () {
+            if (typeof window === 'object') {
+                window.addEventListener('beforeunload', this.leavePageConfirm);
+            }
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectChanged && !prevProps.projectChanged) {
@@ -86,6 +92,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
+            window.removeEventListener('beforeunload', this.leavePageConfirm);
+        }
+        leavePageConfirm (e) {
+            if (this.props.projectChanged) {
+                // both methods of returning a value may be necessary for browser compatibility
+                (e || window.event).returnValue = true;
+                return true;
+            }
+            return false; // do not prompt
         }
         clearAutoSaveTimeout () {
             if (this.props.autoSaveTimeoutId !== null) {

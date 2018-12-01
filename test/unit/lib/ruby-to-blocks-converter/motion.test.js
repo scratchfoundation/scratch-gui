@@ -1,6 +1,5 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
     rubyToExpected
@@ -157,11 +156,8 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_goto', () => {
-        let code;
-        let expected;
-
-        code = 'go_to("_mouse_")';
-        expected = [
+        const code = 'go_to("_mouse_")';
+        const expected = [
             {
                 opcode: 'motion_goto',
                 inputs: [
@@ -458,11 +454,8 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_pointtowards', () => {
-        let code;
-        let expected;
-
-        code = 'point_towards("_mouse_")';
-        expected = [
+        const code = 'point_towards("_mouse_")';
+        const expected = [
             {
                 opcode: 'motion_pointtowards',
                 inputs: [
@@ -491,10 +484,7 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_ifonedgebounce', () => {
-        let code;
-        let expected;
-
-        expected = [
+        const expected = [
             {
                 opcode: 'motion_ifonedgebounce'
             }
@@ -511,16 +501,13 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_setrotationstyle', () => {
-        let code;
-        let expected;
-
         [
             'left-right',
             "don't rotate",
             'all around'
         ].forEach(style => {
-            code = `self.rotation_style = "${style}"`;
-            expected = [
+            const code = `self.rotation_style = "${style}"`;
+            const expected = [
                 {
                     opcode: 'motion_setrotationstyle',
                     fields: [
@@ -531,8 +518,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                     ]
                 }
             ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['self.rotation_style = 1', 'self.rotation_style = "invalid"'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -636,14 +623,11 @@ describe('RubyToBlocksConverter/Motion', () => {
 
     [
         'x',
-        'y',
+        'y'
     ].forEach(xy => {
         test(`motion_${xy}position`, () => {
-            let code;
-            let expected;
-
-            code = xy;
-            expected = [
+            const code = xy;
+            const expected = [
                 {
                     opcode: `motion_${xy}position`
                 }
@@ -653,11 +637,8 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_direction', () => {
-        let code;
-        let expected;
-
-        code = 'direction';
-        expected = [
+        const code = 'direction';
+        const expected = [
             {
                 opcode: 'motion_direction'
             }

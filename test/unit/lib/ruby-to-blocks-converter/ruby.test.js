@@ -96,7 +96,7 @@ describe('RubyToBlocksConverter/Ruby', () => {
             'wait',
             'wait()',
             'wait(  )',
-            'wait(\n)',
+            'wait(\n)'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
             expect(converter.errors.length).toEqual(0);

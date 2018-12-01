@@ -1,6 +1,5 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
     rubyToExpected
@@ -54,7 +53,7 @@ describe('RubyToBlocksConverter/Operators', () => {
 
         [
             '1 + "2"',
-            '1 + :symbol',
+            '1 + :symbol'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -101,7 +100,7 @@ describe('RubyToBlocksConverter/Operators', () => {
         [
             '"2" - "1"',
             '2 - "1"',
-            '"2" - 1',
+            '"2" - 1'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -148,7 +147,7 @@ describe('RubyToBlocksConverter/Operators', () => {
         [
             '"1" * "2"',
             '1 * "2"',
-            '"1" * 2',
+            '"1" * 2'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -195,7 +194,7 @@ describe('RubyToBlocksConverter/Operators', () => {
         [
             '"2" / "1"',
             '2 / "1"',
-            '"2" / 1',
+            '"2" / 1'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -245,7 +244,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             'random(1)',
             'random(10)',
             'random(1..10, 23)',
-            'random("1..10")',
+            'random("1..10")'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -634,7 +633,7 @@ describe('RubyToBlocksConverter/Operators', () => {
         [
             '"1" % "2"',
             '1 % "2"',
-            '"1" % 2',
+            '"1" % 2'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             expectToEqualRubyStatement(converter.blocks, s);
@@ -680,18 +679,18 @@ describe('RubyToBlocksConverter/Operators', () => {
         let operatorCodes;
 
         operatorCodes = {
-            abs: '3.abs',
-            floor: '3.floor',
-            ceiling: '3.ceil',
-            sqrt: 'Math.sqrt(3)',
-            sin: 'Math.sin(3)',
-            cos: 'Math.cos(3)',
-            tan: 'Math.tan(3)',
-            asin: 'Math.asin(3)',
-            acos: 'Math.acos(3)',
-            atan: 'Math.atan(3)',
-            ln: 'Math.log(3)',
-            log: 'Math.log10(3)',
+            'abs': '3.abs',
+            'floor': '3.floor',
+            'ceiling': '3.ceil',
+            'sqrt': 'Math.sqrt(3)',
+            'sin': 'Math.sin(3)',
+            'cos': 'Math.cos(3)',
+            'tan': 'Math.tan(3)',
+            'asin': 'Math.asin(3)',
+            'acos': 'Math.acos(3)',
+            'atan': 'Math.atan(3)',
+            'ln': 'Math.log(3)',
+            'log': 'Math.log10(3)',
             'e ^': 'Math::E ** 3',
             '10 ^': '10 ** 3'
         };
@@ -727,18 +726,18 @@ describe('RubyToBlocksConverter/Operators', () => {
         });
 
         operatorCodes = {
-            abs: 'x.abs',
-            floor: 'x.floor',
-            ceiling: 'x.ceil',
-            sqrt: 'Math.sqrt(x)',
-            sin: 'Math.sin(x)',
-            cos: 'Math.cos(x)',
-            tan: 'Math.tan(x)',
-            asin: 'Math.asin(x)',
-            acos: 'Math.acos(x)',
-            atan: 'Math.atan(x)',
-            ln: 'Math.log(x)',
-            log: 'Math.log10(x)',
+            'abs': 'x.abs',
+            'floor': 'x.floor',
+            'ceiling': 'x.ceil',
+            'sqrt': 'Math.sqrt(x)',
+            'sin': 'Math.sin(x)',
+            'cos': 'Math.cos(x)',
+            'tan': 'Math.tan(x)',
+            'asin': 'Math.asin(x)',
+            'acos': 'Math.acos(x)',
+            'atan': 'Math.atan(x)',
+            'ln': 'Math.log(x)',
+            'log': 'Math.log10(x)',
             'e ^': 'Math::E ** x',
             '10 ^': '10 ** x'
         };

@@ -160,7 +160,7 @@ const branchesToExpected = function (blocks, block) {
             branches[i - 1] = blockToExpected(blocks, branch);
             /* eslint-enable no-use-before-define */
         }
-    };
+    }
     if (branches.length === 0) {
         return null;
     }
@@ -210,9 +210,7 @@ const rubyToExpected = function (converter, target, code) {
     });
 
     const scripts = blocks.getScripts();
-    return scripts.map(scriptId => {
-        return blockToExpected(blocks, scriptId);
-    });
+    return scripts.map(scriptId => blockToExpected(blocks, scriptId));
 };
 
 export {

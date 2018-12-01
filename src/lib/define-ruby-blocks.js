@@ -82,5 +82,47 @@ export default function (ScratchBlocks) {
         }
     };
 
+    ScratchBlocks.Blocks.ruby_range = {
+        init: function () {
+            this.jsonInit({
+                type: 'ruby_range',
+                message0: '%1..%2',
+                args0: [
+                    {
+                        type: 'input_value',
+                        name: 'FROM'
+                    },
+                    {
+                        type: 'input_value',
+                        name: 'TO'
+                    }
+                ],
+                category: ScratchBlocks.Categories.ruby,
+                extensions: ['colours_ruby', 'output_boolean']
+            });
+        }
+    };
+
+    ScratchBlocks.Blocks.ruby_exclude_range = {
+        init: function () {
+            this.jsonInit({
+                type: 'ruby_exclude_range',
+                message0: '%1...%2',
+                args0: [
+                    {
+                        type: 'input_value',
+                        name: 'FROM'
+                    },
+                    {
+                        type: 'input_value',
+                        name: 'TO'
+                    }
+                ],
+                category: ScratchBlocks.Categories.ruby,
+                extensions: ['colours_ruby', 'output_boolean']
+            });
+        }
+    };
+
     return ScratchBlocks;
 }

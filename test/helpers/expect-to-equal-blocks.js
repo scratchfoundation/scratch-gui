@@ -86,6 +86,13 @@ const expectToEqualBlocks = function (actualBlocks, expectedBlocksInfo) {
     });
 };
 
+const convertAndExpectToEqualBlocks = function (converter, target, code, expectedBlocksInfo) {
+    const res = converter.targetCodeToBlocks(target, code);
+    expect(converter.errors).toHaveLength(0);
+    expectToEqualBlocks(converter.blocks, expectedBlocksInfo);
+    expect(res).toBeTruthy();
+};
+
 const expectToEqualRubyStatement = function (actualBlocks, expectedStatement) {
     const expected = [
         {
@@ -110,11 +117,105 @@ const expectToEqualRubyStatement = function (actualBlocks, expectedStatement) {
     expectToEqualBlocks(actualBlocks, expected);
 };
 
+const fieldsToExpected = function (fields) {
+    if (!fields) {
+        return null;
+    }
+
+    return Object.keys(fields).map(name => {
+        const field = fields[name];
+        return {
+            name: field.name,
+            value: field.value
+        };
+    });
+};
+
+const inputsToExpected = function (blocks, inputs) {
+    if (!inputs) {
+        return null;
+    }
+
+    return Object.keys(inputs).map(name => {
+        const input = inputs[name];
+        const expected = {
+            name: input.name,
+            /* eslint-disable no-use-before-define */
+            block: blockToExpected(blocks, input.block)
+            /* eslint-enable no-use-before-define */
+        };
+        if (input.shadow) {
+            expected.shadow = true;
+        }
+        return expected;
+    });
+};
+
+const branchesToExpected = function (blocks, block) {
+    const branches = [];
+    for (let i = 1; i <= 2; i++) {
+        const branch = blocks.getBranch(block.id, i);
+        if (branch !== null) {
+            /* eslint-disable no-use-before-define */
+            branches[i - 1] = blockToExpected(blocks, branch);
+            /* eslint-enable no-use-before-define */
+        }
+    }
+    if (branches.length === 0) {
+        return null;
+    }
+
+    return branches;
+};
+
+const blockToExpected = function (blocks, blockId) {
+    if (!blockId) {
+        return null;
+    }
+
+    const block = blocks.getBlock(blockId);
+    const expected = {
+        opcode: blocks.getOpcode(block)
+    };
+    if (block.shadow) {
+        expected.shadow = true;
+    }
+    const fields = fieldsToExpected(blocks.getFields(block));
+    if (fields) {
+        expected.fields = fields;
+    }
+    const inputs = inputsToExpected(blocks, blocks.getInputs(block));
+    if (inputs) {
+        expected.inputs = inputs;
+    }
+    const branches = branchesToExpected(blocks, block);
+    if (branches) {
+        expected.branches = branches;
+    }
+    const next = blockToExpected(blocks, blocks.getNextBlock(block));
+    if (next) {
+        expected.next = next;
+    }
+
+    return expected;
+};
+
+const rubyToExpected = function (converter, target, code) {
+    converter.targetCodeToBlocks(target, code);
+    expect(converter.errors).toHaveLength(0);
+
+    const blocks = new Blocks();
+    Object.keys(converter.blocks).forEach(blockId => {
+        blocks.createBlock(converter.blocks[blockId]);
+    });
+
+    const scripts = blocks.getScripts();
+    return scripts.map(scriptId => blockToExpected(blocks, scriptId));
+};
+
 export {
-    expectToEqualBlocks as default,
-    expectToEqualBlock,
-    expectToEqualInputs,
-    expectToEqualBranches,
-    expectToEqualFields,
-    expectToEqualRubyStatement
+    expectToEqualBlocks,
+    convertAndExpectToEqualBlocks,
+    expectToEqualRubyStatement,
+    rubyToExpected
 };

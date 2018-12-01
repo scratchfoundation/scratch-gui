@@ -642,33 +642,93 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_mathop', () => {
-        const code = '3.abs';
-        const expected = [
-            {
-                opcode: 'operator_mathop',
-                fields: [
-                    {
-                        name: 'OPERATOR',
-                        value: 'abs'
-                    }
-                ],
-                inputs: [
-                    {
-                        name: 'NUM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 3
-                                }
-                            ],
-                            shadow: true
+        let code;
+        let expected;
+        let operatorCodes;
+
+        operatorCodes = {
+            abs: '3.abs',
+            floor: '3.floor',
+            ceiling: '3.ceil',
+            sqrt: 'Math.sqrt(3)',
+            sin: 'Math.sin(3)',
+            cos: 'Math.cos(3)',
+            tan: 'Math.tan(3)',
+            asin: 'Math.asin(3)',
+            acos: 'Math.acos(3)',
+            atan: 'Math.atan(3)',
+            ln: 'Math.log(3)',
+            log: 'Math.log10(3)',
+            'e ^': 'Math::E ** 3',
+            '10 ^': '10 ** 3'
+        };
+        Object.keys(operatorCodes).forEach(operator => {
+            code = operatorCodes[operator];
+            expected = [
+                {
+                    opcode: 'operator_mathop',
+                    fields: [
+                        {
+                            name: 'OPERATOR',
+                            value: operator
                         }
-                    }
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+                    ],
+                    inputs: [
+                        {
+                            name: 'NUM',
+                            block: {
+                                opcode: 'math_number',
+                                fields: [
+                                    {
+                                        name: 'NUM',
+                                        value: 3
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        operatorCodes = {
+            abs: 'x.abs',
+            floor: 'x.floor',
+            ceiling: 'x.ceil',
+            sqrt: 'Math.sqrt(x)',
+            sin: 'Math.sin(x)',
+            cos: 'Math.cos(x)',
+            tan: 'Math.tan(x)',
+            asin: 'Math.asin(x)',
+            acos: 'Math.acos(x)',
+            atan: 'Math.atan(x)',
+            ln: 'Math.log(x)',
+            log: 'Math.log10(x)',
+            'e ^': 'Math::E ** x',
+            '10 ^': '10 ** x'
+        };
+        Object.keys(operatorCodes).forEach(operator => {
+            code = operatorCodes[operator];
+            expected = [
+                {
+                    opcode: 'operator_mathop',
+                    fields: [
+                        {
+                            name: 'OPERATOR',
+                            value: operator
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'NUM',
+                            block: rubyToExpected(converter, target, 'x')[0]
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
     });
 });

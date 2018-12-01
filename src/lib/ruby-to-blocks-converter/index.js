@@ -175,6 +175,12 @@ class RubyToBlocksConverter {
         return value;
     }
 
+    _createRubyExpressionBlock (expression) {
+        const block = this._createBlock('ruby_expression', 'value_boolean');
+        this._addInput(block, 'EXPRESSION', this._createTextBlock(expression, block.id));
+        return block;
+    }
+
     _addInput (block, name, inputBlock) {
         inputBlock.parent = block.id;
         block.inputs[name] = {
@@ -251,6 +257,14 @@ class RubyToBlocksConverter {
 
     _isStringOrBlock (stringOrBlock) {
         return _.isString(stringOrBlock) || this._isBlock(stringOrBlock);
+    }
+
+    _matchRubyExpression (block, regexp) {
+        if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
+            return false;
+        }
+        const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+        return regexp.test(textBlock.fields.TEXT.value);
     }
 
     _process (node) {
@@ -615,19 +629,94 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'abs':
+            case 'floor':
+            case 'ceil': {
+                let operator;
+                switch (name) {
+                case 'ceil':
+                    operator = 'ceiling';
+                    break;
+                default:
+                    operator = name;
+                }
                 if (args.length === 0 && this._isNumberOrBlock(receiver)) {
                     block = this._createBlock('operator_mathop', 'value', {
                         fields: {
                             OPERATOR: {
                                 name: 'OPERATOR',
                                 id: void 0,
-                                value: 'abs'
+                                value: operator
                             }
                         }
                     });
                     this._addInput(block, 'NUM', this._createNumberBlock('math_number', receiver, block.id));
                 }
                 break;
+            }
+            case 'sqrt':
+            case 'sin':
+            case 'cos':
+            case 'tan':
+            case 'asin':
+            case 'acos':
+            case 'atan':
+            case 'log':
+            case 'log10': {
+                let operator;
+                switch (name) {
+                case 'log':
+                    operator = 'ln';
+                    break;
+                case 'log10':
+                    operator = 'log';
+                    break;
+                default:
+                    operator = name;
+                }
+                if (args.length === 1 &&
+                    this._matchRubyExpression(receiver, /^(::)?Math$/) &&
+                    this._isNumberOrBlock(args[0])) {
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete this._context.blocks[receiver.id];
+
+                    block = this._createBlock('operator_mathop', 'value', {
+                        fields: {
+                            OPERATOR: {
+                                name: 'OPERATOR',
+                                id: void 0,
+                                value: operator
+                            }
+                        }
+                    });
+                    this._addInput(block, 'NUM', this._createNumberBlock('math_number', args[0], block.id));
+                }
+                break;
+            }
+            case '**': {
+                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
+                    let operator;
+                    if (this._matchRubyExpression(receiver, /^(::)?Math::E$/)) {
+                        operator = 'e ^';
+                        delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                        delete this._context.blocks[receiver.id];
+                    } else if (receiver === 10) {
+                        operator = '10 ^';
+                    }
+                    if (operator) {
+                        block = this._createBlock('operator_mathop', 'value', {
+                            fields: {
+                                OPERATOR: {
+                                    name: 'OPERATOR',
+                                    id: void 0,
+                                    value: operator
+                                }
+                            }
+                        });
+                        this._addInput(block, 'NUM', this._createNumberBlock('math_number', args[0], block.id));
+                    }
+                }
+                break;
+            }
             }
         }
         if (!block) {
@@ -684,8 +773,7 @@ class RubyToBlocksConverter {
                 .forEach(blockId => {
                     delete this._context.blocks[blockId];
                 });
-            cond = this._createBlock('ruby_expression', 'value_boolean');
-            this._addInput(cond, 'EXPRESSION', this._createTextBlock(this._getSource(node.children[0]), cond.id));
+            cond = this._createRubyExpressionBlock(this._getSource(node.children[0]));
         }
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
@@ -851,6 +939,12 @@ class RubyToBlocksConverter {
         this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
         this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
         return block;
+    }
+
+    _onConst (node) {
+        this._checkNumChildren(node, 2);
+
+        return this._createRubyExpressionBlock(this._getSource(node));
     }
 }
 

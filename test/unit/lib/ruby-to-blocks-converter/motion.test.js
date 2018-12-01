@@ -1,21 +1,26 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     expectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualBlocks,
+    expectToEqualRubyStatement,
+    rubyToExpected
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Motion', () => {
     let converter;
+    let target;
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
+        target = null;
     });
 
     test('motion_movesteps', () => {
-        expect(converter.targetCodeToBlocks(null, 'move(10)')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'move(10)';
+        expected = [
             {
                 opcode: 'motion_movesteps',
                 inputs: [
@@ -35,7 +40,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'move(x)';
+        expected = [
+            {
+                opcode: 'motion_movesteps',
+                inputs: [
+                    {
+                        name: 'STEPS',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['move()', 'move(10, 10)', 'move("10")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -44,10 +63,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_turn_right', () => {
-        expect(converter.targetCodeToBlocks(null, 'turn_right(180)')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'turn_right(180)';
+        expected = [
             {
                 opcode: 'motion_turnright',
                 inputs: [
@@ -67,7 +87,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'turn_right(x)';
+        expected = [
+            {
+                opcode: 'motion_turnright',
+                inputs: [
+                    {
+                        name: 'DEGREES',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['turn_right()', 'turn_right(180, 0)', 'turn_right("180")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -76,10 +110,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_turn_left', () => {
-        expect(converter.targetCodeToBlocks(null, 'turn_left(180)')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'turn_left(180)';
+        expected = [
             {
                 opcode: 'motion_turnleft',
                 inputs: [
@@ -99,7 +134,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'turn_left(x)';
+        expected = [
+            {
+                opcode: 'motion_turnleft',
+                inputs: [
+                    {
+                        name: 'DEGREES',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['turn_left()', 'turn_left(180, 0)', 'turn_left("180")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -108,10 +157,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_goto', () => {
-        expect(converter.targetCodeToBlocks(null, 'go_to("_mouse_")')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'go_to("_mouse_")';
+        expected = [
             {
                 opcode: 'motion_goto',
                 inputs: [
@@ -131,7 +181,7 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['go_to(10)', 'go_to()', 'go_to("_mouse_", secs: 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -140,10 +190,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_gotoxy', () => {
-        expect(converter.targetCodeToBlocks(null, 'go_to([12, 34])')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'go_to([12, 34])';
+        expected = [
             {
                 opcode: 'motion_gotoxy',
                 inputs: [
@@ -176,7 +227,25 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'go_to([x, y])';
+        expected = [
+            {
+                opcode: 'motion_gotoxy',
+                inputs: [
+                    {
+                        name: 'X',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    },
+                    {
+                        name: 'Y',
+                        block: rubyToExpected(converter, target, 'y')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         [
             'go_to([])', 'go_to([12])', 'go_to([12, 34, 56])', 'go_to([12, 34], secs: 5)',
@@ -188,10 +257,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_glideto', () => {
-        expect(converter.targetCodeToBlocks(null, 'glide("_mouse_", secs: 5)')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'glide("_mouse_", secs: 5)';
+        expected = [
             {
                 opcode: 'motion_glideto',
                 inputs: [
@@ -224,7 +294,34 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'glide("_mouse_", secs: x)';
+        expected = [
+            {
+                opcode: 'motion_glideto',
+                inputs: [
+                    {
+                        name: 'TO',
+                        block: {
+                            opcode: 'motion_glideto_menu',
+                            fields: [
+                                {
+                                    name: 'TO',
+                                    value: '_mouse_'
+                                }
+                            ],
+                            shadow: true
+                        }
+                    },
+                    {
+                        name: 'SECS',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['glide()', 'glide(10, secs: 5)', 'glide("_mouse_")', 'glide("_mouse_", 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -233,10 +330,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_glidesecstoxy', () => {
-        expect(converter.targetCodeToBlocks(null, 'glide([12, 34], secs: 5)')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'glide([12, 34], secs: 5)';
+        expected = [
             {
                 opcode: 'motion_glidesecstoxy',
                 inputs: [
@@ -282,7 +380,29 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'glide([x, y], secs: x)';
+        expected = [
+            {
+                opcode: 'motion_glidesecstoxy',
+                inputs: [
+                    {
+                        name: 'X',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    },
+                    {
+                        name: 'Y',
+                        block: rubyToExpected(converter, target, 'y')[0]
+                    },
+                    {
+                        name: 'SECS',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['glide([], secs: 5)', 'glide([12, 34])', 'glide([12, 34], 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -291,10 +411,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_pointindirection', () => {
-        expect(converter.targetCodeToBlocks(null, 'self.direction = 90')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'self.direction = 90';
+        expected = [
             {
                 opcode: 'motion_pointindirection',
                 inputs: [
@@ -314,7 +435,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'self.direction = x';
+        expected = [
+            {
+                opcode: 'motion_pointindirection',
+                inputs: [
+                    {
+                        name: 'DIRECTION',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['self.direction = "90"', 'self.direction = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -323,10 +458,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_pointtowards', () => {
-        expect(converter.targetCodeToBlocks(null, 'point_towards("_mouse_")')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'point_towards("_mouse_")';
+        expected = [
             {
                 opcode: 'motion_pointtowards',
                 inputs: [
@@ -346,7 +482,7 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['point_towards()', 'point_towards(1)', 'point_towards("_mouse_", secs: 1)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -355,15 +491,18 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_ifonedgebounce', () => {
-        expect(converter.targetCodeToBlocks(null, 'bounce_if_on_edge')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        expected = [
             {
                 opcode: 'motion_ifonedgebounce'
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        [
+            'bounce_if_on_edge',
+            'bounce_if_on_edge()'
+        ].forEach(code => convertAndExpectToEqualBlocks(converter, target, code, expected));
 
         ['bounce_if_on_edge(1)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -372,21 +511,28 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_setrotationstyle', () => {
-        expect(converter.targetCodeToBlocks(null, 'self.rotation_style = "left-right"')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
-            {
-                opcode: 'motion_setrotationstyle',
-                fields: [
-                    {
-                        name: 'STYLE',
-                        value: 'left-right'
-                    }
-                ]
-            }
-        ];
-        expectToEqualBlocks(converter.blocks, expected);
+        [
+            'left-right',
+            "don't rotate",
+            'all around'
+        ].forEach(style => {
+            code = `self.rotation_style = "${style}"`;
+            expected = [
+                {
+                    opcode: 'motion_setrotationstyle',
+                    fields: [
+                        {
+                            name: 'STYLE',
+                            value: style
+                        }
+                    ]
+                }
+            ];
+        });
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['self.rotation_style = 1', 'self.rotation_style = "invalid"'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -395,10 +541,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_setx', () => {
-        expect(converter.targetCodeToBlocks(null, 'self.x = 10')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'self.x = 10';
+        expected = [
             {
                 opcode: 'motion_setx',
                 inputs: [
@@ -418,7 +565,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'self.x = y';
+        expected = [
+            {
+                opcode: 'motion_setx',
+                inputs: [
+                    {
+                        name: 'X',
+                        block: rubyToExpected(converter, target, 'y')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['self.x = "10"', 'self.x = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -427,10 +588,11 @@ describe('RubyToBlocksConverter/Motion', () => {
     });
 
     test('motion_sety', () => {
-        expect(converter.targetCodeToBlocks(null, 'self.y = 10')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'self.y = 10';
+        expected = [
             {
                 opcode: 'motion_sety',
                 inputs: [
@@ -450,7 +612,21 @@ describe('RubyToBlocksConverter/Motion', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'self.y = x';
+        expected = [
+            {
+                opcode: 'motion_sety',
+                inputs: [
+                    {
+                        name: 'Y',
+                        block: rubyToExpected(converter, target, 'x')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['self.y = "10"', 'self.y = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
@@ -458,39 +634,34 @@ describe('RubyToBlocksConverter/Motion', () => {
         });
     });
 
-    test('motion_xposition', () => {
-        expect(converter.targetCodeToBlocks(null, 'x')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+    [
+        'x',
+        'y',
+    ].forEach(xy => {
+        test(`motion_${xy}position`, () => {
+            let code;
+            let expected;
 
-        const expected = [
-            {
-                opcode: 'motion_xposition'
-            }
-        ];
-        expectToEqualBlocks(converter.blocks, expected);
-    });
-
-    test('motion_yposition', () => {
-        expect(converter.targetCodeToBlocks(null, 'y')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
-        const expected = [
-            {
-                opcode: 'motion_yposition'
-            }
-        ];
-        expectToEqualBlocks(converter.blocks, expected);
+            code = xy;
+            expected = [
+                {
+                    opcode: `motion_${xy}position`
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
     });
 
     test('motion_direction', () => {
-        expect(converter.targetCodeToBlocks(null, 'direction')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        const expected = [
+        code = 'direction';
+        expected = [
             {
                 opcode: 'motion_direction'
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 });

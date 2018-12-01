@@ -237,6 +237,22 @@ class RubyToBlocksConverter {
         this._context.blockTypes[block.id] = type;
     }
 
+    _isBlock (block) {
+        try {
+            return block.hasOwnProperty('opcode');
+        } catch (e) {
+            return false;
+        }
+    }
+
+    _isNumberOrBlock (numberOrBlock) {
+        return _.isNumber(numberOrBlock) || this._isBlock(numberOrBlock);
+    }
+
+    _isStringOrBlock (stringOrBlock) {
+        return _.isString(stringOrBlock) || this._isBlock(stringOrBlock);
+    }
+
     _process (node) {
         if (!node) {
             return null;
@@ -326,14 +342,14 @@ class RubyToBlocksConverter {
         if (receiver === Self || receiver == Opal.nil) {
             switch (name) {
             case 'move':
-                if (args.length == 1 && _.isNumber(args[0])) {
+                if (args.length == 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('motion_movesteps', 'statement');
                     this._addInput(block, 'STEPS', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'turn_right':
             case 'turn_left':
-                if (args.length == 1 && _.isNumber(args[0])) {
+                if (args.length == 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock(
                         name === 'turn_right' ? 'motion_turnright' : 'motion_turnleft', 'statement'
                     );
@@ -350,7 +366,7 @@ class RubyToBlocksConverter {
                             this._createFieldBlock('motion_goto_menu', 'TO', args[0], block.id)
                         );
                     } else if (_.isArray(args[0]) && args[0].length == 2 &&
-                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
+                               this._isNumberOrBlock(args[0][0]) && this._isNumberOrBlock(args[0][1])) {
                         block = this._createBlock('motion_gotoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
@@ -367,7 +383,7 @@ class RubyToBlocksConverter {
                             this._createFieldBlock('motion_glideto_menu', 'TO', args[0], block.id)
                         );
                     } else if (_.isArray(args[0]) && args[0].length == 2 &&
-                               _.isNumber(args[0][0]) && _.isNumber(args[0][1])) {
+                               this._isNumberOrBlock(args[0][0]) && this._isNumberOrBlock(args[0][1])) {
                         block = this._createBlock('motion_glidesecstoxy', 'statement');
                         this._addInput(block, 'X', this._createNumberBlock('math_number', args[0][0], block.id));
                         this._addInput(block, 'Y', this._createNumberBlock('math_number', args[0][1], block.id));
@@ -382,7 +398,7 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'direction=':
-                if (args.length == 1 && _.isNumber(args[0])) {
+                if (args.length == 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('motion_pointindirection', 'statement');
                     this._addInput(block, 'DIRECTION', this._createNumberBlock('math_angle', args[0], block.id));
                 }
@@ -423,7 +439,7 @@ class RubyToBlocksConverter {
             }
             case 'x=':
             case 'y=':
-                if (args.length == 1 && _.isNumber(args[0])) {
+                if (args.length == 1 && this._isNumberOrBlock(args[0])) {
                     let xy;
                     if (name === 'x=') {
                         xy = 'x';

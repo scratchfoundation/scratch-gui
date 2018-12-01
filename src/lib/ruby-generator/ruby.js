@@ -35,5 +35,17 @@ export default function (Generator) {
         return [expression, Generator.ORDER_ATOMIC];
     };
 
+    Generator.ruby_range = function (block) {
+        const fromNum = Generator.valueToCode(block, 'FROM', Generator.ORDER_RANGE) || 1;
+        const toNum = Generator.valueToCode(block, 'TO', Generator.ORDER_RANGE) || 10;
+        return [`${fromNum}..${toNum}`, Generator.ORDER_FUNCTION_CALL];
+    };
+
+    Generator.ruby_exclude_range = function (block) {
+        const fromNum = Generator.valueToCode(block, 'FROM', Generator.ORDER_RANGE) || 1;
+        const toNum = Generator.valueToCode(block, 'TO', Generator.ORDER_RANGE) || 10;
+        return [`${fromNum}...${toNum}`, Generator.ORDER_FUNCTION_CALL];
+    };
+
     return Generator;
 }

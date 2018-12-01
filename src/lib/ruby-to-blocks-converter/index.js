@@ -176,6 +176,7 @@ class RubyToBlocksConverter {
     }
 
     _addInput (block, name, inputBlock) {
+        inputBlock.parent = block.id;
         block.inputs[name] = {
             name: name,
             block: inputBlock.id,
@@ -230,6 +231,10 @@ class RubyToBlocksConverter {
 
     _blockType (block) {
         return this._context.blockTypes[block.id];
+    }
+
+    _setBlockType (block, type) {
+        this._context.blockTypes[block.id] = type;
     }
 
     _process (node) {
@@ -482,7 +487,137 @@ class RubyToBlocksConverter {
                     );
                 }
                 break;
-
+            case 'rand':
+                if (args.length === 1 && args[0].hasOwnProperty('opcode') && args[0].opcode === 'ruby_range') {
+                    block = args[0];
+                    block.opcode = 'operator_random';
+                    this._setBlockType(block, 'value');
+                }
+                break;
+            case 'wait':
+                if (args.length === 0) {
+                    block = this._createBlock('ruby_statement', 'statement');
+                    this._addInput(block, 'STATEMENT', this._createTextBlock('wait', block.id));
+                }
+            }
+        } else {
+            switch (name) {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '%':
+                if (args.length === 1) {
+                    if ((_.isNumber(receiver) || receiver.hasOwnProperty('opcode')) &&
+                        (_.isNumber(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                        let opcode;
+                        if (name === '+') {
+                            opcode = 'operator_add';
+                        } else if (name === '-') {
+                            opcode = 'operator_subtract';
+                        } else if (name === '*') {
+                            opcode = 'operator_multiply';
+                        } else if (name === '/') {
+                            opcode = 'operator_divide';
+                        } else {
+                            opcode = 'operator_mod';
+                        }
+                        block = this._createBlock(opcode, 'value');
+                        this._addInput(block, 'NUM1', this._createNumberBlock('math_number', receiver, block.id));
+                        this._addInput(block, 'NUM2', this._createNumberBlock('math_number', args[0], block.id));
+                    } else if (_.isString(receiver) && name === '+') {
+                        block = this._createBlock('operator_join', 'value');
+                        this._addInput(block, 'STRING1', this._createTextBlock(receiver, block.id));
+                        this._addInput(
+                            block,
+                            'STRING2',
+                            this._createTextBlock(_.isNumber(args[0]) ? args[0].toString() : args[0], block.id)
+                        );
+                    }
+                }
+                break;
+            case '>':
+            case '<':
+            case '==':
+                if (args.length === 1) {
+                    let opcode;
+                    if (name === '>') {
+                        opcode = 'operator_gt';
+                    } else if (name === '<') {
+                        opcode = 'operator_lt';
+                    } else {
+                        opcode = 'operator_equals';
+                    }
+                    block = this._createBlock(opcode, 'value_boolean');
+                    this._addInput(
+                        block,
+                        'OPERAND1',
+                        this._createTextBlock(_.isNumber(receiver) ? receiver.toString() : receiver, block.id)
+                    );
+                    this._addInput(
+                        block,
+                        'OPERAND2',
+                        this._createTextBlock(_.isNumber(args[0]) ? args[0].toString() : args[0], block.id)
+                    );
+                }
+                break;
+            case '!':
+                if (args.length === 0) {
+                    block = this._createBlock('operator_not', 'value_boolean');
+                    this._addInput(
+                        block,
+                        'OPERAND',
+                        this._createTextBlock(_.isNumber(receiver) ? receiver.toString() : receiver, block.id)
+                    );
+                }
+                break;
+            case '[]':
+                if (args.length === 1 &&
+                    (_.isString(receiver) || receiver.hasOwnProperty('opcode')) &&
+                    (_.isNumber(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                    block = this._createBlock('operator_letter_of', 'value');
+                    this._addInput(block, 'STRING', this._createTextBlock(receiver, block.id));
+                    this._addInput(block, 'LETTER', this._createNumberBlock('math_number', args[0], block.id));
+                }
+                break;
+            case 'length':
+                if (args.length === 0 &&
+                    (_.isString(receiver) || receiver.hasOwnProperty('opcode'))) {
+                    block = this._createBlock('operator_length', 'value');
+                    this._addInput(block, 'STRING', this._createTextBlock(receiver, block.id));
+                }
+                break;
+            case 'include?':
+                if (args.length === 1 &&
+                    (_.isString(receiver) || receiver.hasOwnProperty('opcode')) &&
+                    (_.isString(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                    block = this._createBlock('operator_contains', 'value');
+                    this._addInput(block, 'STRING1', this._createTextBlock(receiver, block.id));
+                    this._addInput(block, 'STRING2', this._createTextBlock(args[0], block.id));
+                }
+                break;
+            case 'round':
+                if (args.length === 0 &&
+                    (_.isNumber(receiver) || receiver.hasOwnProperty('opcode'))) {
+                    block = this._createBlock('operator_round', 'value');
+                    this._addInput(block, 'NUM', this._createNumberBlock('math_number', receiver, block.id));
+                }
+                break;
+            case 'abs':
+                if (args.length === 0 &&
+                    (_.isNumber(receiver) || receiver.hasOwnProperty('opcode'))) {
+                    block = this._createBlock('operator_mathop', 'value', {
+                        fields: {
+                            OPERATOR: {
+                                name: 'OPERATOR',
+                                id: void 0,
+                                value: 'abs'
+                            }
+                        }
+                    });
+                    this._addInput(block, 'NUM', this._createNumberBlock('math_number', receiver, block.id));
+                }
+                break;
             }
         }
         if (!block) {
@@ -664,6 +799,48 @@ class RubyToBlocksConverter {
         this._checkNumChildren(node, 1);
 
         return node.children[0].toString();
+    }
+
+    _onIrange (node) {
+        this._checkNumChildren(node, 2);
+
+        const args = node.children.map(childNode => this._process(childNode));
+        const block = this._createBlock('ruby_range', 'value_boolean');
+        this._addInput(block, 'FROM', this._createNumberBlock('math_number', args[0], block.id));
+        this._addInput(block, 'TO', this._createNumberBlock('math_number', args[1], block.id));
+        return block;
+    }
+
+    _onErange (node) {
+        this._checkNumChildren(node, 2);
+
+        const args = node.children.map(childNode => this._process(childNode));
+        const block = this._createBlock('ruby_exclude_range', 'value_boolean');
+        this._addInput(block, 'FROM', this._createNumberBlock('math_number', args[0], block.id));
+        this._addInput(block, 'TO', this._createNumberBlock('math_number', args[1], block.id));
+        return block;
+    }
+
+    _onAnd (node) {
+        this._checkNumChildren(node, 2);
+
+        const operands = node.children.map(childNode => this._process(childNode));
+        const block = this._createBlock('operator_and', 'value_boolean');
+        operands.forEach(o => o.parent = block.id);
+        this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
+        this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        return block;
+    }
+
+    _onOr (node) {
+        this._checkNumChildren(node, 2);
+
+        const operands = node.children.map(childNode => this._process(childNode));
+        const block = this._createBlock('operator_or', 'value_boolean');
+        operands.forEach(o => o.parent = block.id);
+        this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
+        this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        return block;
     }
 }
 

@@ -367,8 +367,11 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_and', () => {
-        const code = '1 < x && x < 10';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 < x && x < 10';
+        expected = [
             {
                 opcode: 'operator_and',
                 inputs: [
@@ -384,11 +387,22 @@ describe('RubyToBlocksConverter/Operators', () => {
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'false && false';
+        expected = [
+            {
+                opcode: 'operator_and'
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_or', () => {
-        const code = 'x == 2 || y == 3';
-        const expected = [
+        let code;
+        let expected;
+
+        code = 'x == 2 || y == 3';
+        expected = [
             {
                 opcode: 'operator_or',
                 inputs: [
@@ -404,11 +418,22 @@ describe('RubyToBlocksConverter/Operators', () => {
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'false || false';
+        expected = [
+            {
+                opcode: 'operator_or'
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_not', () => {
-        const code = '!x';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '!x';
+        expected = [
             {
                 opcode: 'operator_not',
                 inputs: [
@@ -417,6 +442,14 @@ describe('RubyToBlocksConverter/Operators', () => {
                         block: rubyToExpected(converter, target, 'x')[0]
                     }
                 ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '!false';
+        expected = [
+            {
+                opcode: 'operator_not'
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);

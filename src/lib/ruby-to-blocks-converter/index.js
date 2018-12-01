@@ -353,7 +353,7 @@ class RubyToBlocksConverter {
         }
 
         let block;
-        if (receiver === Self || receiver == Opal.nil) {
+        if (receiver === Self || receiver === Opal.nil) {
             switch (name) {
             case 'move':
                 if (args.length == 1 && this._isNumberOrBlock(args[0])) {
@@ -593,11 +593,13 @@ class RubyToBlocksConverter {
             case '!':
                 if (args.length === 0) {
                     block = this._createBlock('operator_not', 'value_boolean');
-                    this._addInput(
-                        block,
-                        'OPERAND',
-                        this._createTextBlock(_.isNumber(receiver) ? receiver.toString() : receiver, block.id)
-                    );
+                    if (receiver) {
+                        this._addInput(
+                            block,
+                            'OPERAND',
+                            this._createTextBlock(_.isNumber(receiver) ? receiver.toString() : receiver, block.id)
+                        );
+                    }
                 }
                 break;
             case '[]':
@@ -924,9 +926,17 @@ class RubyToBlocksConverter {
 
         const operands = node.children.map(childNode => this._process(childNode));
         const block = this._createBlock('operator_and', 'value_boolean');
-        operands.forEach(o => o.parent = block.id);
-        this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
-        this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        operands.forEach(o => {
+            if (o) {
+                o.parent = block.id;
+            }
+        });
+        if (operands[0]) {
+            this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
+        }
+        if (operands[1]) {
+            this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        }
         return block;
     }
 
@@ -935,9 +945,17 @@ class RubyToBlocksConverter {
 
         const operands = node.children.map(childNode => this._process(childNode));
         const block = this._createBlock('operator_or', 'value_boolean');
-        operands.forEach(o => o.parent = block.id);
-        this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
-        this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        operands.forEach(o => {
+            if (o) {
+                o.parent = block.id;
+            }
+        });
+        if (operands[0]) {
+            this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0], block.id));
+        }
+        if (operands[1]) {
+            this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1], block.id));
+        }
         return block;
     }
 

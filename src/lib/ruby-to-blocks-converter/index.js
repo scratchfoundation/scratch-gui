@@ -504,7 +504,7 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'rand':
-                if (args.length === 1 && args[0].hasOwnProperty('opcode') && args[0].opcode === 'ruby_range') {
+                if (args.length === 1 && this._isBlock(args[0]) && args[0].opcode === 'ruby_range') {
                     block = args[0];
                     block.opcode = 'operator_random';
                     this._setBlockType(block, 'value');
@@ -524,8 +524,7 @@ class RubyToBlocksConverter {
             case '/':
             case '%':
                 if (args.length === 1) {
-                    if ((_.isNumber(receiver) || receiver.hasOwnProperty('opcode')) &&
-                        (_.isNumber(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                    if (this._isNumberOrBlock(receiver) && this._isNumberOrBlock(args[0])) {
                         let opcode;
                         if (name === '+') {
                             opcode = 'operator_add';
@@ -541,7 +540,7 @@ class RubyToBlocksConverter {
                         block = this._createBlock(opcode, 'value');
                         this._addInput(block, 'NUM1', this._createNumberBlock('math_number', receiver, block.id));
                         this._addInput(block, 'NUM2', this._createNumberBlock('math_number', args[0], block.id));
-                    } else if (_.isString(receiver) && name === '+') {
+                    } else if (this._isStringOrBlock(receiver) && name === '+') {
                         block = this._createBlock('operator_join', 'value');
                         this._addInput(block, 'STRING1', this._createTextBlock(receiver, block.id));
                         this._addInput(
@@ -589,39 +588,34 @@ class RubyToBlocksConverter {
                 break;
             case '[]':
                 if (args.length === 1 &&
-                    (_.isString(receiver) || receiver.hasOwnProperty('opcode')) &&
-                    (_.isNumber(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                    this._isStringOrBlock(receiver) && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('operator_letter_of', 'value');
                     this._addInput(block, 'STRING', this._createTextBlock(receiver, block.id));
                     this._addInput(block, 'LETTER', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'length':
-                if (args.length === 0 &&
-                    (_.isString(receiver) || receiver.hasOwnProperty('opcode'))) {
+                if (args.length === 0 && this._isStringOrBlock(receiver)) {
                     block = this._createBlock('operator_length', 'value');
                     this._addInput(block, 'STRING', this._createTextBlock(receiver, block.id));
                 }
                 break;
             case 'include?':
                 if (args.length === 1 &&
-                    (_.isString(receiver) || receiver.hasOwnProperty('opcode')) &&
-                    (_.isString(args[0]) || args[0].hasOwnProperty('opcode'))) {
+                    this._isStringOrBlock(receiver) && this._isStringOrBlock(args[0])) {
                     block = this._createBlock('operator_contains', 'value');
                     this._addInput(block, 'STRING1', this._createTextBlock(receiver, block.id));
                     this._addInput(block, 'STRING2', this._createTextBlock(args[0], block.id));
                 }
                 break;
             case 'round':
-                if (args.length === 0 &&
-                    (_.isNumber(receiver) || receiver.hasOwnProperty('opcode'))) {
+                if (args.length === 0 && this._isNumberOrBlock(receiver)) {
                     block = this._createBlock('operator_round', 'value');
                     this._addInput(block, 'NUM', this._createNumberBlock('math_number', receiver, block.id));
                 }
                 break;
             case 'abs':
-                if (args.length === 0 &&
-                    (_.isNumber(receiver) || receiver.hasOwnProperty('opcode'))) {
+                if (args.length === 0 && this._isNumberOrBlock(receiver)) {
                     block = this._createBlock('operator_mathop', 'value', {
                         fields: {
                             OPERATOR: {
@@ -780,7 +774,7 @@ class RubyToBlocksConverter {
         const rh = this._process(node.children[2]);
 
         let block;
-        if (lh.hasOwnProperty('opcode')) {
+        if (this._isBlock(lh)) {
             switch (lh.opcode) {
             case 'motion_xposition':
             case 'motion_yposition':

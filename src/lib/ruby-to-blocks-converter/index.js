@@ -3,6 +3,7 @@ import _ from 'lodash';
 import log from '../log';
 import Blockly from 'scratch-blocks';
 import RubyParser from '../ruby-parser';
+import Variable from 'scratch-vm/src/engine/variable';
 
 /**
  * Class for Ruby's self for detecting self.
@@ -36,17 +37,36 @@ class RubyToBlocksConverter {
         return this._context.blocks;
     }
 
+    get localVariables () {
+        return this._context.localVariables;
+    }
+
+    get instanceVariables () {
+        return this._context.instanceVariables;
+    }
+
+    get globalVariables () {
+        return this._context.globalVariables;
+    }
+
     reset () {
         this._context = {
             blocks: {},
             blockTypes: {},
             currentNode: null,
-            errors: []
+            errors: [],
+            localVariables: {},
+            instanceVariables: {},
+            globalVariables: {}
         };
+        if (this.vm && this.vm.runtime && this.vm.runtime.getTargetForStage) {
+            this._loadVariables(this.vm.runtime.getTargetForStage());
+        }
     }
 
     targetCodeToBlocks (target, code) {
         this.reset();
+        this._loadVariables(target);
         try {
             const root = RubyParser.$parse(code);
             let blocks = this._process(root);
@@ -89,14 +109,52 @@ class RubyToBlocksConverter {
         }
     }
 
-    applyTargetBlocks (target, blocks) {
+    applyTargetBlocks (target) {
+        let stage;
+        if (target.isStage) {
+            stage = target;
+        } else {
+            Object.keys(this._context.instanceVariables).forEach(name => {
+                const variable = this._context.instanceVariables[name];
+                if (!target.lookupVariableById(variable.id)) {
+                    target.createVariable(variable.id, variable.name, variable.type);
+                }
+            });
+            stage = this.vm.runtime.getTargetForStage();
+        }
+        if (stage) {
+            Object.keys(this._context.globalVariables).forEach(name => {
+                const variable = this._context.globalVariables[name];
+                if (!stage.lookupVariableById(variable.id)) {
+                    stage.createVariable(variable.id, variable.name, variable.type);
+                }
+            });
+        }
+
         Object.keys(target.blocks._blocks).forEach(blockId => {
             target.blocks.deleteBlock(blockId);
         });
-        Object.keys(blocks).forEach(blockId => {
-            target.blocks.createBlock(blocks[blockId]);
+        Object.keys(this._context.blocks).forEach(blockId => {
+            target.blocks.createBlock(this._context.blocks[blockId]);
         });
+
         this.vm.emitWorkspaceUpdate();
+    }
+
+    _loadVariables (target) {
+        if (!target || !target.variables) {
+            return;
+        }
+        let store;
+        if (target.isStage) {
+            store = this._context.globalVariables;
+        } else {
+            store = this._context.instanceVariables;
+        }
+        Object.keys(target.variables).forEach(blockId => {
+            const variable = target.variables[blockId];
+            store[variable.name] = variable;
+        });
     }
 
     _toErrorAnnotation (row, column, message) {
@@ -203,6 +261,30 @@ class RubyToBlocksConverter {
         substackBlocks.forEach(b => {
             b.parent = block.id;
         });
+    }
+
+    _findOrCreateVariable (name, type = Variable.SCALAR_TYPE) {
+        let store;
+        if (name[0] === '$') {
+            name = name.slice(1);
+            store = this._context.globalVariables;
+        } else if (name[0] === '@') {
+            name = name.slice(1);
+            store = this._context.instanceVariables;
+        } else {
+            store = this._context.localVariables;
+        }
+        if (store.hasOwnProperty(name)) {
+            return store[name];
+        }
+
+        const variable = {
+            id: Blockly.utils.genUid(),
+            name: name,
+            type: type
+        };
+        store[variable.name] = variable;
+        return variable;
     }
 
     _getSource (node) {
@@ -964,12 +1046,27 @@ class RubyToBlocksConverter {
 
         return this._createRubyExpressionBlock(this._getSource(node));
     }
+
+    _onIvar (node) {
+        this._checkNumChildren(node, 1);
+
+        const variable = this._findOrCreateVariable(node.children[0]);
+        return this._createBlock('data_variable', 'value', {
+            fields: {
+                VARIABLE: {
+                    name: 'VARIABLE',
+                    id: variable.id,
+                    value: variable.name
+                }
+            }
+        });
+    }
 }
 
 const targetCodeToBlocks = function (vm, target, code, errors = []) {
     const converter = new RubyToBlocksConverter(vm);
     if (converter.targetCodeToBlocks(target, code)) {
-        converter.applyTargetBlocks(target, converter.blocks);
+        converter.applyTargetBlocks(target);
         return true;
     }
     converter.errors.forEach(e => errors.push(e));

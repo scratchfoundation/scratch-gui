@@ -57,7 +57,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['move()', 'move(10, 10)', 'move("10")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -104,7 +104,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['turn_right()', 'turn_right(180, 0)', 'turn_right("180")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -151,7 +151,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['turn_left()', 'turn_left(180, 0)', 'turn_left("180")'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -181,7 +181,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['go_to(10)', 'go_to()', 'go_to("_mouse_", secs: 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -248,7 +248,7 @@ describe('RubyToBlocksConverter/Motion', () => {
             'go_to(["12", "34"])'
         ].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -321,7 +321,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['glide()', 'glide(10, secs: 5)', 'glide("_mouse_")', 'glide("_mouse_", 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -402,7 +402,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['glide([], secs: 5)', 'glide([12, 34])', 'glide([12, 34], 5)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -449,7 +449,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['self.direction = "90"', 'self.direction = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -479,7 +479,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['point_towards()', 'point_towards(1)', 'point_towards("_mouse_", secs: 1)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -496,7 +496,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['bounce_if_on_edge(1)'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -523,7 +523,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['self.rotation_style = 1', 'self.rotation_style = "invalid"'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -570,7 +570,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['self.x = "10"', 'self.x = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 
@@ -617,7 +617,7 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         ['self.y = "10"', 'self.y = :symbol'].forEach(s => {
             expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expectToEqualRubyStatement(converter, s);
         });
     });
 

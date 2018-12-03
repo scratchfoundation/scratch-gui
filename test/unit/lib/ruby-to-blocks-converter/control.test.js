@@ -1,20 +1,20 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    expectToEqualBlocks,
+    convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Control', () => {
     let converter;
+    let target;
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
+        target = null;
     });
 
     test('control_forever', () => {
-        expect(converter.targetCodeToBlocks(null, 'loop { bounce_if_on_edge; wait }')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        const code = 'loop { bounce_if_on_edge; wait }';
         const expected = [
             {
                 opcode: 'control_forever',
@@ -25,25 +25,26 @@ describe('RubyToBlocksConverter/Control', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         ['loop()', 'loop(1)'].forEach(s => {
-            expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
+            expectToEqualRubyStatement(converter, s);
         });
 
         ['loop { bounce_if_on_edge }'].forEach(s => {
-            expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
+            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
             expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
         });
     });
 
     test('control_if', () => {
-        expect(converter.targetCodeToBlocks(null, 'if touching?("_edge_"); bounce_if_on_edge; end')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
+        let code;
+        let expected;
 
-        let expected = [
+        code = 'if touching?("_edge_"); bounce_if_on_edge; end';
+        expected = [
             {
                 opcode: 'control_if',
                 inputs: [
@@ -76,11 +77,9 @@ describe('RubyToBlocksConverter/Control', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        expect(converter.targetCodeToBlocks(null, 'if move(10); end')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        code = 'if move(10); end';
         expected = [
             {
                 opcode: 'control_if',
@@ -109,11 +108,9 @@ describe('RubyToBlocksConverter/Control', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        expect(converter.targetCodeToBlocks(null, 'if false; end')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        code = 'if false; end';
         expected = [
             {
                 opcode: 'control_if',
@@ -122,14 +119,11 @@ describe('RubyToBlocksConverter/Control', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('control_if_else', () => {
         const code = 'if touching?("_edge_"); bounce_if_on_edge; else; move(10); end';
-        expect(converter.targetCodeToBlocks(null, code)).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
         const expected = [
             {
                 opcode: 'control_if_else',
@@ -181,6 +175,6 @@ describe('RubyToBlocksConverter/Control', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 });

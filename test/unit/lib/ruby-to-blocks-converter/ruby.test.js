@@ -1,20 +1,20 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    expectToEqualBlocks,
+    convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Ruby', () => {
     let converter;
+    let target;
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
+        target = null;
     });
 
     test('ruby_range', () => {
-        expect(converter.targetCodeToBlocks(null, '1..10')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        const code = '1..10';
         const expected = [
             {
                 opcode: 'ruby_range',
@@ -48,13 +48,11 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('ruby_exclude_range', () => {
-        expect(converter.targetCodeToBlocks(null, '1...10')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        const code = '1...10';
         const expected = [
             {
                 opcode: 'ruby_exclude_range',
@@ -88,7 +86,7 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('ruby_statement(wait)', () => {
@@ -98,9 +96,9 @@ describe('RubyToBlocksConverter/Ruby', () => {
             'wait(  )',
             'wait(\n)'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expect(converter.errors.length).toEqual(0);
-            expectToEqualRubyStatement(converter.blocks, 'wait');
+            converter.targetCodeToBlocks(target, s);
+            expect(converter.errors).toHaveLength(0);
+            expectToEqualRubyStatement(converter, 'wait');
         });
     });
 });

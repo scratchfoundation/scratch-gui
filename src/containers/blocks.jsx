@@ -341,6 +341,8 @@ class Blocks extends React.Component {
                             topBlock.y = xy.y;
                         }
                     });
+
+                    this.updateToolbox();
                 }
             }
         } catch (error) {

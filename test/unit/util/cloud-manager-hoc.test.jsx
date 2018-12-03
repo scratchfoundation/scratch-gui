@@ -59,6 +59,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -76,6 +77,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 store={store}
                 username="user"
                 vm={vm}
@@ -93,6 +95,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 vm={vm}
@@ -109,6 +112,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -119,12 +123,31 @@ describe('CloudManagerHOC', () => {
         expect(CloudProvider).not.toHaveBeenCalled();
     });
 
+    test('when hasCloudPermission is false, the cloud provider is not set on the vm', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                canSave
+                cloudHost="nonEmpty"
+                hasCloudPermission={false}
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+    });
+
     test('if the isShowingWithId prop becomes true, it sets the cloud provider on the vm', () => {
         const Component = () => <div />;
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -146,6 +169,7 @@ describe('CloudManagerHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -172,6 +196,7 @@ describe('CloudManagerHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -197,6 +222,7 @@ describe('CloudManagerHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -223,6 +249,7 @@ describe('CloudManagerHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -253,6 +280,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -273,6 +301,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -297,6 +326,7 @@ describe('CloudManagerHOC', () => {
         mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -322,6 +352,7 @@ describe('CloudManagerHOC', () => {
         const mounted = mount(
             <WrappedComponent
                 canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -347,6 +378,7 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                hasCloudPermission
                 canSave={false}
                 cloudHost="nonEmpty"
                 store={store}

@@ -48,9 +48,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            // TODO add a canUseCloud to pass down to this HOC (e.g. from www) and also check that here.
-            // This should cover info about the website specifically, like scrather status
-            return !!(props.cloudHost && props.username && props.vm && props.projectId);
+            return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
         }
         shouldNotModifyCloudData (props) {
             return (props.hasEverEnteredEditor && !props.canSave);
@@ -92,7 +90,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         handleCloudDataUpdate (projectHasCloudData) {
             if (this.isConnected() && !projectHasCloudData) {
                 this.disconnectFromCloud();
-            } else if (!this.isConnected() && projectHasCloudData) {
+            } else if (!this.isConnected() && this.canUseCloud(this.props) && projectHasCloudData) {
                 this.connectToCloud();
             }
         }
@@ -102,6 +100,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                 cloudHost,
                 projectId,
                 username,
+                hasCloudPermission,
                 hasEverEnteredEditor,
                 isShowingWithId,
                 /* eslint-enable no-unused-vars */
@@ -121,6 +120,7 @@ const cloudManagerHOC = function (WrappedComponent) {
     CloudManager.propTypes = {
         canSave: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
+        hasCloudPermission: PropTypes.bool,
         hasEverEnteredEditor: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

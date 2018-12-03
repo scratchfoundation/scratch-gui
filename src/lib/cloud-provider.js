@@ -1,4 +1,5 @@
 import log from './log.js';
+import throttle from 'lodash.throttle';
 
 
 class CloudProvider {
@@ -25,6 +26,10 @@ class CloudProvider {
         this.queuedData = [];
 
         this.openConnection();
+
+        // Send a message to the cloud server at a rate of no more
+        // than 10 messages/sec.
+        this.sendCloudData = throttle(this._sendCloudData, 100);
     }
 
     /**
@@ -149,7 +154,7 @@ class CloudProvider {
      * Send a formatted message to the cloud data server.
      * @param {string} data The formatted message to send.
      */
-    sendCloudData (data) {
+    _sendCloudData (data) {
         this.connection.send(`${data}\n`);
         log.info(`Sent message to clouddata server: ${data}`);
     }

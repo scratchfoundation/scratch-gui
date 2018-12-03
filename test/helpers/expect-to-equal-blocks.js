@@ -251,9 +251,23 @@ const rubyToExpected = function (converter, target, code) {
     return scripts.map(scriptId => blockToExpected(blocks, scriptId));
 };
 
+const expectedInfo = {
+    makeText: (text) => ({
+        opcode: 'text',
+        fields: [
+            {
+                name: 'TEXT',
+                value: text
+            }
+        ],
+        shadow: true
+    })
+};
+
 export {
     expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
-    rubyToExpected
+    rubyToExpected,
+    expectedInfo
 };

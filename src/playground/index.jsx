@@ -1,6 +1,7 @@
 // Polyfills
 import 'es6-object-assign/auto';
 import 'core-js/fn/array/includes';
+import 'core-js/fn/promise/finally';
 import 'intl'; // For Safari 9
 
 import React from 'react';

@@ -135,39 +135,39 @@ describe('RubyToBlocksConverter/Variables', () => {
         });
     });
 
-    test('data_listcontents', () => {
+    test.skip('data_listcontents', () => {
     });
 
-    test('data_addtolist', () => {
+    test.skip('data_addtolist', () => {
     });
 
-    test('data_deleteoflist', () => {
+    test.skip('data_deleteoflist', () => {
     });
 
-    test('data_deletealloflist', () => {
+    test.skip('data_deletealloflist', () => {
     });
 
-    test('data_insertatlist', () => {
+    test.skip('data_insertatlist', () => {
     });
 
-    test('data_replaceitemoflist', () => {
+    test.skip('data_replaceitemoflist', () => {
     });
 
-    test('data_itemoflist', () => {
+    test.skip('data_itemoflist', () => {
     });
 
-    test('data_itemnumoflist', () => {
+    test.skip('data_itemnumoflist', () => {
     });
 
-    test('data_lengthoflist', () => {
+    test.skip('data_lengthoflist', () => {
     });
 
-    test('data_listcontainsitem', () => {
+    test.skip('data_listcontainsitem', () => {
     });
 
-    test('data_showlist', () => {
+    test.skip('data_showlist', () => {
     });
 
-    test('data_hidelist', () => {
+    test.skip('data_hidelist', () => {
     });
 });

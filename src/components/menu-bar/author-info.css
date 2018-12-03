@@ -3,7 +3,7 @@
 
 .author-info {
     color: $ui-white;
-    font-family: "Helvetica Neue";
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     justify-content: start;
     align-items: center;

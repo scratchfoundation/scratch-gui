@@ -78,6 +78,9 @@ class ActionMenu extends React.Component {
         return event => {
             ReactTooltip.hide();
             if (fn) fn(event);
+            // Blur the button so it does not keep focus after being clicked
+            // This prevents keyboard events from triggering the button
+            this.buttonRef.blur();
             this.setState({forceHide: true, isOpen: false}, () => {
                 setTimeout(() => this.setState({forceHide: false}));
             });

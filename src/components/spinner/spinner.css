@@ -11,7 +11,7 @@
     border-color: $ui-white-transparent;
 }
 
-.spinner::after, .spinner::before {
+.spinner::before, .spinner::after {
     width: 1rem;
     height: 1rem;
     content: '';
@@ -26,6 +26,16 @@
     border: .1875rem solid transparent;
     border-top-color: $ui-white;
     animation: spin 1.5s cubic-bezier(0.4, 0.1, 0.4, 1) infinite;
+}
+
+.small {
+    width: .5rem;
+    height: .5rem;
+}
+
+.small::before, .small::after {
+    width: .5rem;
+    height: .5rem;
 }
 
 @keyframes spin {

@@ -132,6 +132,7 @@ const GUIComponent = props => {
         return isPlayerOnly ? (
             <StageWrapper
                 isRendererSupported={isRendererSupported}
+                isRtl={isRtl}
                 stageSize={stageSize}
                 vm={vm}
             >

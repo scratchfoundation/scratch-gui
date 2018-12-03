@@ -2,7 +2,6 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
-    rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 

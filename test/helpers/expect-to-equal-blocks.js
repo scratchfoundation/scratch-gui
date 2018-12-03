@@ -252,7 +252,7 @@ const rubyToExpected = function (converter, target, code) {
 };
 
 const expectedInfo = {
-    makeText: (text) => ({
+    makeText: text => ({
         opcode: 'text',
         fields: [
             {

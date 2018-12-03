@@ -270,14 +270,18 @@ class RubyToBlocksConverter {
     }
 
     _findOrCreateVariable (name, type = Variable.SCALAR_TYPE) {
+        let scope;
         let store;
         if (name[0] === '$') {
             name = name.slice(1);
+            scope = 'global';
             store = this._context.globalVariables;
         } else if (name[0] === '@') {
             name = name.slice(1);
+            scope = 'instance';
             store = this._context.instanceVariables;
         } else {
+            scope = 'local';
             store = this._context.localVariables;
         }
         if (store.hasOwnProperty(name)) {
@@ -287,6 +291,7 @@ class RubyToBlocksConverter {
         const variable = {
             id: Blockly.utils.genUid(),
             name: name,
+            scope: scope,
             type: type
         };
         store[variable.name] = variable;
@@ -614,8 +619,7 @@ class RubyToBlocksConverter {
                 break;
             case 'show_variable':
             case 'hide_variable':
-                if (args.length === 1 && _.isString(args[0]) &&
-                    (['$', '@'].indexOf(args[0][0]) >= 0)) {
+                if (args.length === 1 && _.isString(args[0])) {
                     let opcode;
                     switch (name) {
                     case 'show_variable':
@@ -626,15 +630,17 @@ class RubyToBlocksConverter {
                         break;
                     }
                     const variable = this._findOrCreateVariable(args[0]);
-                    block = this._createBlock(opcode, 'statement', {
-                        fields: {
-                            VARIABLE: {
-                                name: 'VARIABLE',
-                                id: variable.id,
-                                value: variable.name
+                    if (variable.scope !== 'local') {
+                        block = this._createBlock(opcode, 'statement', {
+                            fields: {
+                                VARIABLE: {
+                                    name: 'VARIABLE',
+                                    id: variable.id,
+                                    value: variable.name
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
                 break;
             case 'wait':
@@ -973,15 +979,15 @@ class RubyToBlocksConverter {
 
         const savedBlockIds = Object.keys(this._context.blocks);
         const lh = this._process(node.children[0]);
-        const operand = node.children[1].toString();
+        const operator = node.children[1].toString();
         const rh = this._process(node.children[2]);
 
         let block;
-        if (this._isBlock(lh)) {
-            switch (lh.opcode) {
-            case 'motion_xposition':
-            case 'motion_yposition':
-                if (operand === '+') {
+        if (operator === '+') {
+            if (this._isBlock(lh)) {
+                switch (lh.opcode) {
+                case 'motion_xposition':
+                case 'motion_yposition': {
                     delete this._context.blocks[lh.id];
 
                     let xy;
@@ -993,25 +999,38 @@ class RubyToBlocksConverter {
 
                     block = this._createBlock(`motion_change${xy}by`, 'statement');
                     this._addInput(block, `D${_.toUpper(xy)}`, this._createNumberBlock('math_number', rh, block.id));
+                    break;
                 }
-                break;
+                }
+            } else if (_.isString(lh)) {
+                const variable = this._findOrCreateVariable(lh);
+                if (variable.scope !== 'local') {
+                    block = this._createBlock('data_changevariableby', 'statement', {
+                        fields: {
+                            VARIABLE: {
+                                name: 'VARIABLE',
+                                id: variable.id,
+                                value: variable.name
+                            }
+                        }
+                    });
+                    this._addInput(
+                        block,
+                        'VALUE',
+                        this._createTextBlock(_.isNumber(rh) ? rh.toString() : rh, block.id)
+                    );
+                }
             }
         }
+
         if (!block) {
             Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
                 .forEach(blockId => {
                     delete this._context.blocks[blockId];
                 });
-            block = this._createBlock('ruby_statement', 'statement');
-            this._addInput(block, 'STATEMENT', this._createTextBlock(this._getSource(node), block.id));
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
         return block;
-    }
-
-    _onLvar (node) {
-        this._checkNumChildren(node, 1);
-
-        return node.children[0].toString();
     }
 
     _onIrange (node) {
@@ -1082,47 +1101,40 @@ class RubyToBlocksConverter {
         this._checkNumChildren(node, 1);
 
         const variable = this._findOrCreateVariable(node.children[0]);
-        return this._createBlock('data_variable', 'value', {
-            fields: {
-                VARIABLE: {
-                    name: 'VARIABLE',
-                    id: variable.id,
-                    value: variable.name
+        if (variable.scope !== 'local') {
+            return this._createBlock('data_variable', 'value', {
+                fields: {
+                    VARIABLE: {
+                        name: 'VARIABLE',
+                        id: variable.id,
+                        value: variable.name
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        return node.children[0].toString();
+    }
+
+    _onLvar (node) {
+        return this._onIvar(node);
+    }
+
+    _onGvar (node) {
+        return this._onIvar(node);
     }
 
     _onIvasgn (node) {
-        this._checkNumChildren(node, 2);
+        this._checkNumChildren(node, [1, 2]);
+
+        if (node.children.length === 1) {
+            return node.children[0].toString();
+        }
 
         const variable = this._findOrCreateVariable(node.children[0]);
-        const rh = this._process(node.children[1]);
-        const block = this._createBlock('data_setvariableto', 'statement', {
-            fields: {
-                VARIABLE: {
-                    name: 'VARIABLE',
-                    id: variable.id,
-                    value: variable.name
-                }
-            }
-        });
-        this._addInput(
-            block,
-            'VALUE',
-            this._createTextBlock(_.isNumber(rh) ? rh.toString() : rh, block.id)
-        );
-        return block;
-    }
-
-    _onOpAsgn (node) {
-        this._checkNumChildren(node, 3);
-
-        const operator = node.children[1].toString();
-        if (operator === '+') {
-            const variable = this._findOrCreateVariable(node.children[0].children[0]);
-            const rh = this._process(node.children[2]);
-            const block = this._createBlock('data_changevariableby', 'statement', {
+        if (variable.scope !== 'local') {
+            const rh = this._process(node.children[1]);
+            const block = this._createBlock('data_setvariableto', 'statement', {
                 fields: {
                     VARIABLE: {
                         name: 'VARIABLE',
@@ -1138,7 +1150,16 @@ class RubyToBlocksConverter {
             );
             return block;
         }
+
         return this._createRubyStatementBlock(this._getSource(node));
+    }
+
+    _onLvasgn (node) {
+        return this._onIvasgn(node);
+    }
+
+    _onGvasgn (node) {
+        return this._onIvasgn(node);
     }
 }
 

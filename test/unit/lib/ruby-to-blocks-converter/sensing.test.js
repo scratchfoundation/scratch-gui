@@ -14,7 +14,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
     });
 
     test('sensing_touchingobject', () => {
-        const code  = 'touching?("_edge_")';
+        const code = 'touching?("_edge_")';
         const expected = [
             {
                 opcode: 'sensing_touchingobject',

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import bindAll from 'lodash.bindall';
 
 import VM from 'scratch-vm';
 import CloudProvider from '../lib/cloud-provider';
@@ -19,50 +20,61 @@ const cloudManagerHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.cloudProvider = null;
+            bindAll(this, [
+                'handleCloudDataUpdate'
+            ]);
+
+            this.props.vm.on('HAS_CLOUD_DATA_UPDATE', this.handleCloudDataUpdate);
         }
         componentDidMount () {
-            if (this.canUseCloud(this.props)) {
+            if (this.shouldConnect(this.props)) {
                 this.connectToCloud();
             }
         }
         componentDidUpdate (prevProps) {
-            // TODO add disconnection logic when loading a new project
+            // TODO need to add cloud provider disconnection logic and cloud data clearing logic
+            // when loading a new project e.g. via file upload
             // (and eventually move it out of the vm.clear function)
-            // e.g. was previously showingWithId but no longer, but we need
-            // to check that we don't disconnect when saving a project to the
-            // server.
 
-            // If we couldn't use cloud data before, but now we can, try opening a cloud connection
-            if (this.canUseCloud(this.props) && !this.canUseCloud(prevProps)) {
+            if (this.shouldConnect(this.props) && !this.shouldConnect(prevProps)) {
                 this.connectToCloud();
-                return;
             }
 
-            // TODO add scratcher check
-
-            if ((this.props.username !== prevProps.username) ||
-                (this.props.projectId !== prevProps.projectId)) {
-                this.connectToCloud();
+            if (this.shouldDisconnect(this.props, prevProps)) {
+                this.disconnectFromCloud();
             }
         }
         componentWillUnmount () {
-            if (this.cloudProvider) {
-                this.cloudProvider.requestCloseConnection();
-                this.cloudProvider = null;
-            }
+            this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            return props.cloudHost && props.username && props.isShowingWithId &&
-                props.vm && props.username && props.projectId;
+            // TODO add a canUseCloud to pass down to this HOC (e.g. from www) and also check that here.
+            // This should cover info about the website specifically, like scrather status
+            return !!(props.cloudHost && props.username && props.vm && props.projectId);
+        }
+        shouldNotModifyCloudData (props) {
+            return (props.hasEverEnteredEditor && !props.canSave);
+        }
+        shouldConnect (props) {
+            return !this.isConnected() && this.canUseCloud(props) &&
+                props.isShowingWithId && props.vm.runtime.hasCloudData() &&
+                !this.shouldNotModifyCloudData(props);
+        }
+        shouldDisconnect (props, prevProps) {
+            return this.isConnected() &&
+                ( // Can no longer use cloud or cloud provider info is now stale
+                    !this.canUseCloud(props) ||
+                    !props.vm.runtime.hasCloudData() ||
+                    (props.projectId !== prevProps.projectId) ||
+                    (props.username !== prevProps.username) ||
+                    // Editing someone else's project
+                    this.shouldNotModifyCloudData(props)
+                );
+        }
+        isConnected () {
+            return this.cloudProvider && !!this.cloudProvider.connection;
         }
         connectToCloud () {
-            if (this.cloudProvider && this.cloudProvider.connection) {
-                // Already connected
-                return;
-            }
-
-            // TODO need to add provisions for viewing someone
-            // else's project in editor mode
             this.cloudProvider = new CloudProvider(
                 this.props.cloudHost,
                 this.props.vm,
@@ -70,12 +82,27 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.props.projectId);
             this.props.vm.setCloudProvider(this.cloudProvider);
         }
+        disconnectFromCloud () {
+            if (this.cloudProvider) {
+                this.cloudProvider.requestCloseConnection();
+                this.cloudProvider = null;
+                this.props.vm.setCloudProvider(null);
+            }
+        }
+        handleCloudDataUpdate (projectHasCloudData) {
+            if (this.isConnected() && !projectHasCloudData) {
+                this.disconnectFromCloud();
+            } else if (!this.isConnected() && projectHasCloudData) {
+                this.connectToCloud();
+            }
+        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 cloudHost,
                 projectId,
                 username,
+                hasEverEnteredEditor,
                 isShowingWithId,
                 /* eslint-enable no-unused-vars */
                 vm,
@@ -92,7 +119,9 @@ const cloudManagerHOC = function (WrappedComponent) {
     }
 
     CloudManager.propTypes = {
+        canSave: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
+        hasEverEnteredEditor: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
@@ -102,6 +131,7 @@ const cloudManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            hasEverEnteredEditor: state.scratchGui.mode.hasEverEnteredEditor,
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId
         };

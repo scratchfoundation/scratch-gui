@@ -74,7 +74,7 @@ describe('convert Code from Ruby', () => {
             await findByXpath('//li[contains(@id, "react-tabs-") and @aria-selected="false"]/span[text()="Code"]');
             await findByXpath('//li[contains(@id, "react-tabs-") and @aria-selected="true"]/span[text()="Ruby"]');
             await findByXpath(
-                '//*[contains(@class, "alert_alert-message")]/*/' +
+                '//*[contains(@class, "alert_alert-message")]/' +
                     'span[text()="Could not convert Ruby to Code. Please fix Ruby!"]'
             );
             await findByXpath(
@@ -86,7 +86,7 @@ describe('convert Code from Ruby', () => {
             await clickXpath('//img[@title="Go"]');
 
             await findByXpath(
-                '//*[contains(@class, "alert_alert-message")]/*/' +
+                '//*[contains(@class, "alert_alert-message")]/' +
                     'span[text()="Could not convert Ruby to Code. Please fix Ruby!"]'
             );
             await findByXpath(
@@ -99,10 +99,10 @@ describe('convert Code from Ruby', () => {
                 '//div[contains(@class, "menu-bar_menu-bar-item") and contains(@class, "menu-bar_hoverable")]' +
                     '/span[text()="File"]'
             );
-            await clickText('Download to your computer');
+            await clickText('Save to your computer');
 
             await findByXpath(
-                '//*[contains(@class, "alert_alert-message")]/*/' +
+                '//*[contains(@class, "alert_alert-message")]/' +
                     'span[text()="Could not convert Ruby to Code. Please fix Ruby!"]'
             );
             await findByXpath(
@@ -125,7 +125,7 @@ describe('convert Code from Ruby', () => {
                     '*[contains(@class, "sprite-selector-item_sprite-name") and text()="Apple"]'
             );
             await findByXpath(
-                '//*[contains(@class, "alert_alert-message")]/*/' +
+                '//*[contains(@class, "alert_alert-message")]/' +
                     'span[text()="Could not convert Ruby to Code. Please fix Ruby!"]'
             );
             await findByXpath(
@@ -137,7 +137,7 @@ describe('convert Code from Ruby', () => {
             await clickText('Code', '*[@role="tab"]');
 
             await findByXpath(
-                '//*[contains(@class, "alert_alert-message")]/*/' +
+                '//*[contains(@class, "alert_alert-message")]/' +
                     'span[text()="Could not convert Ruby to Code. Please fix Ruby!"]'
             );
             await clickXpath('//div[contains(@class, "alert_alert-close-button")]');

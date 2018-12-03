@@ -143,14 +143,6 @@
     height: 1.25rem;
 }
 
-.remix-button {
-    background-color: $pen-primary
-}
-
-.remix-button-icon {
-    height: 1.25rem;
-}
-
 .coming-soon >:not(.coming-soon-tooltip) {
     opacity: 0.5;
 }
@@ -202,19 +194,6 @@
 
 .disabled {
     opacity: 0.5;
-}
-
-.save-in-progress {
-  animation: hue-rotate 3s linear infinite;
-}
-
-@keyframes hue-rotate {
-  from {
-    filter: hue-rotate();
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
 }
 
 .mystuff > a {

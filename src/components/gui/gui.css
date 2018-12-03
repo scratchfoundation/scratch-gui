@@ -303,7 +303,8 @@ $fade-out-distance: 15px;
 /* Alerts */
 
 .alerts-container {
-    width: 520px;
+    width: 448px;
+    min-width: 448px;
     z-index: $z-index-alerts;
     left: 0;
     right: 0;

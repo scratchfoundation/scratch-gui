@@ -80,17 +80,6 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Adding a backdrop', async () => {
-        await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
-        await clickXpath('//button[@aria-label="Choose a Backdrop"]');
-        const el = await findByXpath("//input[@placeholder='Search']");
-        await el.sendKeys('blue');
-        await clickText('Blue Sky'); // Should close the modal
-        const logs = await getLogs();
-        await expect(logs).toEqual([]);
-    });
-
     test('Converting bitmap/vector in paint editor', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');

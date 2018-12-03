@@ -25,7 +25,7 @@ const ConnectedStep = props => (
             </Box>
         </Box>
         <Box className={styles.bottomArea}>
-            <Box className={styles.instructions}>
+            <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
                 <FormattedMessage
                     defaultMessage="Connected"
                     description="Message indicating that a device was connected"
@@ -34,9 +34,10 @@ const ConnectedStep = props => (
             </Box>
             <Dots
                 success
+                className={styles.bottomAreaItem}
                 total={3}
             />
-            <div className={styles.cornerButtons}>
+            <div className={classNames(styles.bottomAreaItem, styles.cornerButtons)}>
                 <button
                     className={classNames(styles.redButton, styles.connectionButton)}
                     onClick={props.onDisconnect}

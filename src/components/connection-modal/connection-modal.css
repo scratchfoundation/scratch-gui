@@ -29,7 +29,6 @@
     overflow-y: auto;
     width: 100%;
     height: 100%;
-    padding: 0.5rem;
 }
 
 .peripheral-tile {
@@ -225,6 +224,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: .5rem;
 }
 
 .scratch-link-help {
@@ -232,7 +232,8 @@
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
-    padding: 1rem 0;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 }
 
 .scratch-link-help-step {
@@ -243,11 +244,11 @@
 }
 
 [dir="ltr"] .scratch-link-help-step {
-    margin-left: 3rem;
+    margin-left: 2.5rem;
 }
 
 [dir="rtl"] .scratch-link-help-step {
-    margin-right: 3rem;
+    margin-right: 2.5rem;
 }
 
 .scratch-link-icon {
@@ -364,12 +365,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 12px;
+    padding-top: 1rem;
+    padding-bottom: .75rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.bottom-area .bottom-area-item+.bottom-area-item {
+    margin-top: 1rem;
 }
 
 .instructions {
     text-align: center;
-    margin-top: 1rem;
 }
 
 .dots-row {
@@ -377,7 +384,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 1rem;
 }
 
 .dots-holder {

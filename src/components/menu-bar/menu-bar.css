@@ -143,14 +143,6 @@
     height: 1.25rem;
 }
 
-.remix-button {
-    background-color: $pen-primary
-}
-
-.remix-button-icon {
-    height: 1.25rem;
-}
-
 .coming-soon >:not(.coming-soon-tooltip) {
     opacity: 0.5;
 }

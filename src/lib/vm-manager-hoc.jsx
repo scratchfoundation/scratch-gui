@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
-import CloudProvider from '../lib/cloud-provider';
 
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
@@ -77,7 +76,6 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                cloudHost,
                 fontsLoaded,
                 loadingState,
                 isStarted,

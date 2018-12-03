@@ -307,7 +307,7 @@ class MenuBar extends React.Component {
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
                             <a
-                                href="http://smalruby.jp"
+                                href="https://smalruby.jp"
                                 rel="noopener noreferrer"
                                 target="_blank"
                             >

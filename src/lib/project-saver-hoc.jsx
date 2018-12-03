@@ -63,32 +63,6 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (this.props.isRemixing && !prevProps.isRemixing) {
                 this.createRemixToStorage();
             }
-            if (this.props.isCreatingCopy && !prevProps.isCreatingCopy) {
-                this.storeProject(null, {
-                    original_id: this.props.reduxProjectId,
-                    is_copy: 1,
-                    title: this.props.reduxProjectTitle
-                })
-                    .then(response => {
-                        this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
-                    })
-                    .catch(err => {
-                        this.props.onProjectError(`Creating a project copy failed with error: ${err}`);
-                    });
-            }
-            if (this.props.isRemixing && !prevProps.isRemixing) {
-                this.storeProject(null, {
-                    original_id: this.props.reduxProjectId,
-                    is_remix: 1,
-                    title: this.props.reduxProjectTitle
-                })
-                    .then(response => {
-                        this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
-                    })
-                    .catch(err => {
-                        this.props.onProjectError(`Remixing a project failed with error: ${err}`);
-                    });
-            }
 
             // see if we should "create" the current project on the server
             //

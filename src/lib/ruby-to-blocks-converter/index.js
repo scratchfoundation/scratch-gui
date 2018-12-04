@@ -999,7 +999,11 @@ class RubyToBlocksConverter {
                         }
 
                         block = this._createBlock(`motion_change${xy}by`, 'statement');
-                        this._addInput(block, `D${_.toUpper(xy)}`, this._createNumberBlock('math_number', rh, block.id));
+                        this._addInput(
+                            block,
+                            `D${_.toUpper(xy)}`,
+                            this._createNumberBlock('math_number', rh, block.id)
+                        );
                     }
                     break;
                 }

@@ -61,6 +61,11 @@ const getIsLoadingWithId = loadingState => (
 const getIsCreatingNew = loadingState => (
     loadingState === LoadingState.CREATING_NEW
 );
+const getIsAnyCreatingNewState = loadingState => (
+    loadingState === LoadingState.FETCHING_NEW_DEFAULT ||
+    loadingState === LoadingState.LOADING_VM_NEW_DEFAULT ||
+    loadingState === LoadingState.CREATING_NEW
+);
 const getIsCreatingCopy = loadingState => (
     loadingState === LoadingState.CREATING_COPY
 );
@@ -464,6 +469,7 @@ export {
     defaultProjectId,
     doneCreatingProject,
     doneUpdatingProject,
+    getIsAnyCreatingNewState,
     getIsCreatingCopy,
     getIsCreatingNew,
     getIsError,

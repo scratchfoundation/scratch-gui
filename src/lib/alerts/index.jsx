@@ -20,10 +20,11 @@ const alerts = [
     {
         alertId: 'createSuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
-                defaultMessage="Successfully created."
+                defaultMessage="New project created."
                 description="Message indicating that project was successfully created"
                 id="gui.alerts.createsuccess"
             />
@@ -33,12 +34,45 @@ const alerts = [
         maxDisplaySecs: 5
     },
     {
-        alertId: 'creating',
+        alertId: 'createCopySuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
-                defaultMessage="Creating..."
+                defaultMessage="Project saved as a copy."
+                description="Message indicating that project was successfully created"
+                id="gui.alerts.createcopysuccess"
+            />
+        ),
+        iconURL: successImage,
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 5
+    },
+    {
+        alertId: 'createRemixSuccess',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Project saved as a remix."
+                description="Message indicating that project was successfully created"
+                id="gui.alerts.createremixsuccess"
+            />
+        ),
+        iconURL: successImage,
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 5
+    },
+    {
+        alertId: 'creating',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Creating new…"
                 description="Message indicating that project is in process of creating"
                 id="gui.alerts.creating"
             />
@@ -47,8 +81,39 @@ const alerts = [
         level: AlertLevels.SUCCESS
     },
     {
+        alertId: 'creatingCopy',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Copying project…"
+                description="Message indicating that project is in process of copying"
+                id="gui.alerts.creatingCopy"
+            />
+        ),
+        iconSpinner: true,
+        level: AlertLevels.SUCCESS
+    },
+    {
+        alertId: 'creatingRemix',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Remixing project…"
+                description="Message indicating that project is in process of remixing"
+                id="gui.alerts.creatingRemix"
+            />
+        ),
+        iconSpinner: true,
+        level: AlertLevels.SUCCESS
+    },
+    {
         alertId: 'creatingError',
-        clearList: ['creating', 'createSuccess'],
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         closeButton: true,
         content: (
             <FormattedMessage
@@ -61,7 +126,8 @@ const alerts = [
     },
     {
         alertId: 'savingError',
-        clearList: ['saving', 'saveSuccess', 'savingError'],
+        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
+            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         showDownload: true,
         showSaveNow: true,
         closeButton: false,
@@ -77,10 +143,10 @@ const alerts = [
     {
         alertId: 'saveSuccess',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
+        clearList: ['saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
-                defaultMessage="Successfully saved."
+                defaultMessage="Project saved."
                 description="Message indicating that project was successfully saved"
                 id="gui.alerts.savesuccess"
             />
@@ -92,10 +158,10 @@ const alerts = [
     {
         alertId: 'saving',
         alertType: AlertTypes.INLINE,
-        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
+        clearList: ['saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
-                defaultMessage="Saving..."
+                defaultMessage="Saving project…"
                 description="Message indicating that project is in process of saving"
                 id="gui.alerts.saving"
             />

@@ -712,27 +712,35 @@ class RubyToBlocksConverter {
             case 'push':
                 if (args.length === 1 &&
                     this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(receiver, 'data_addtolist', 'statement', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_addtolist', 'statement', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;
             case 'delete_at':
                 if (args.length === 1 &&
                     this._isNumberOrBlock(args[0])) {
-                    block = this._changeVariableBlock(receiver, 'data_deleteoflist', 'statement', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_deleteoflist', 'statement', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'clear':
                 if (args.length === 0) {
-                    block = this._changeVariableBlock(receiver, 'data_deletealloflist', 'statement', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_deletealloflist', 'statement', Variable.LIST_TYPE
+                    );
                 }
                 break;
             case 'insert':
                 if (args.length === 2 &&
                     this._isNumberOrBlock(args[0]) &&
                     this._isStringOrBlock(args[1])) {
-                    block = this._changeVariableBlock(receiver, 'data_insertatlist', 'statement', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_insertatlist', 'statement', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
                     this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
                 }
@@ -741,7 +749,9 @@ class RubyToBlocksConverter {
                 if (args.length === 2 &&
                     this._isNumberOrBlock(args[0]) &&
                     this._isStringOrBlock(args[1])) {
-                    block = this._changeVariableBlock(receiver, 'data_replaceitemoflist', 'statement', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_replaceitemoflist', 'statement', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
                     this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
                 }
@@ -749,26 +759,34 @@ class RubyToBlocksConverter {
             case '[]':
                 if (args.length === 1 &&
                     this._isNumberOrBlock(args[0])) {
-                    block = this._changeVariableBlock(receiver, 'data_itemoflist', 'value', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_itemoflist', 'value', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
                 }
                 break;
             case 'index':
                 if (args.length === 1 &&
                     this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(receiver, 'data_itemnumoflist', 'value', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_itemnumoflist', 'value', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;
             case 'length':
                 if (args.length === 0) {
-                    block = this._changeVariableBlock(receiver, 'data_lengthoflist', 'value', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_lengthoflist', 'value', Variable.LIST_TYPE
+                    );
                 }
                 break;
             case 'include?':
                 if (args.length === 1 &&
                     this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(receiver, 'data_listcontainsitem', 'value', Variable.LIST_TYPE);
+                    block = this._changeVariableBlock(
+                        receiver, 'data_listcontainsitem', 'value', Variable.LIST_TYPE
+                    );
                     this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;

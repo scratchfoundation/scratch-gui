@@ -11,7 +11,7 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
             expect(field.name).toEqual(expectedField.name);
             if (expectedField.hasOwnProperty('variable') ||
                 expectedField.hasOwnProperty('list')) {
-                let data = expectedField.variable || expectedField.list;
+                const data = expectedField.variable || expectedField.list;
                 let varName;
                 let store;
                 if (data[0] === '$') {

@@ -152,6 +152,13 @@ const expectToEqualRubyStatement = function (converter, expectedStatement) {
     expectToEqualBlocks(converter, expected);
 };
 
+const convertAndExpectToEqualRubyStatement = function (converter, target, code, expectedStatement) {
+    const res = converter.targetCodeToBlocks(target, code);
+    expect(converter.errors).toHaveLength(0);
+    expectToEqualRubyStatement(converter, expectedStatement);
+    expect(res).toBeTruthy();
+};
+
 const fieldsToExpected = function (fields) {
     if (!fields) {
         return null;
@@ -261,6 +268,16 @@ const expectedInfo = {
             }
         ],
         shadow: true
+    }),
+    makeNumber: (num, opcode = 'math_number') => ({
+        opcode: opcode,
+        fields: [
+            {
+                name: 'NUM',
+                value: num
+            }
+        ],
+        shadow: true
     })
 };
 
@@ -268,6 +285,7 @@ export {
     expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
+    convertAndExpectToEqualRubyStatement,
     rubyToExpected,
     expectedInfo
 };

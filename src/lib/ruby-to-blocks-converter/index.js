@@ -987,20 +987,21 @@ class RubyToBlocksConverter {
             if (this._isBlock(lh)) {
                 switch (lh.opcode) {
                 case 'motion_xposition':
-                case 'motion_yposition': {
-                    delete this._context.blocks[lh.id];
+                case 'motion_yposition':
+                    if (this._isNumberOrBlock(rh)) {
+                        delete this._context.blocks[lh.id];
 
-                    let xy;
-                    if (lh.opcode === 'motion_xposition') {
-                        xy = 'x';
-                    } else {
-                        xy = 'y';
+                        let xy;
+                        if (lh.opcode === 'motion_xposition') {
+                            xy = 'x';
+                        } else {
+                            xy = 'y';
+                        }
+
+                        block = this._createBlock(`motion_change${xy}by`, 'statement');
+                        this._addInput(block, `D${_.toUpper(xy)}`, this._createNumberBlock('math_number', rh, block.id));
                     }
-
-                    block = this._createBlock(`motion_change${xy}by`, 'statement');
-                    this._addInput(block, `D${_.toUpper(xy)}`, this._createNumberBlock('math_number', rh, block.id));
                     break;
-                }
                 }
             } else if (_.isString(lh)) {
                 const variable = this._findOrCreateVariable(lh);

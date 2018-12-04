@@ -6,6 +6,8 @@ if (typeof (window) !== 'undefined') {
     globalObject = window;
 }
 globalObject.Opal = require('opal-runtime').Opal;
+globalObject.Opal.config.unsupported_features_severity = 'ignore';
+
 require('opal-compiler');
 globalObject.Opal.load('parser');
 globalObject.Opal.load('parser/ruby25');

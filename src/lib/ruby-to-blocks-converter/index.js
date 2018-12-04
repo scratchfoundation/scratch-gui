@@ -269,7 +269,7 @@ class RubyToBlocksConverter {
         });
     }
 
-    _findOrCreateVariable (name, type = Variable.SCALAR_TYPE) {
+    _findOrCreateVariable (name, type) {
         let scope;
         let store;
         if (name[0] === '$') {
@@ -285,6 +285,9 @@ class RubyToBlocksConverter {
             store = this._context.localVariables;
         }
         if (store.hasOwnProperty(name)) {
+            if (type) {
+                store[name].type = type;
+            }
             return store[name];
         }
 
@@ -292,10 +295,35 @@ class RubyToBlocksConverter {
             id: Blockly.utils.genUid(),
             name: name,
             scope: scope,
-            type: type
+            type: type ? type : Variable.SCALAR_TYPE
         };
         store[variable.name] = variable;
         return variable;
+    }
+
+    _changeVariableBlock (block, opcode, blockType, varType) {
+        block.opcode = opcode;
+        this._setBlockType(block, blockType);
+
+        let before;
+        let after;
+        if (varType === Variable.SCALAR_TYPE) {
+            before = 'LIST';
+            after = 'VARIABLE';
+        } else {
+            before = 'VARIABLE';
+            after = 'LIST';
+        }
+        if (block.fields[before]) {
+            block.fields[after] = block.fields[before];
+            block.fields[after].name = after;
+            delete block.fields[before];
+
+            const varName = block.fields[after].value;
+            const variable = this.instanceVariables[varName] || this.globalVariables[varName];
+            variable.type = varType;
+        }
+        return block;
     }
 
     _getSource (node) {
@@ -350,6 +378,10 @@ class RubyToBlocksConverter {
 
     _isStringOrBlock (stringOrBlock) {
         return _.isString(stringOrBlock) || this._isBlock(stringOrBlock);
+    }
+
+    _isVariableBlock (block) {
+        return this._isBlock(block) && ['data_variable', 'data_listcontents'].indexOf(block.opcode) >= 0;
     }
 
     _matchRubyExpression (block, regexp) {
@@ -629,7 +661,7 @@ class RubyToBlocksConverter {
                         opcode = 'data_hidevariable';
                         break;
                     }
-                    const variable = this._findOrCreateVariable(args[0]);
+                    const variable = this._findOrCreateVariable(args[0], Variable.SCALAR_TYPE);
                     if (variable.scope !== 'local') {
                         block = this._createBlock(opcode, 'statement', {
                             fields: {
@@ -643,11 +675,103 @@ class RubyToBlocksConverter {
                     }
                 }
                 break;
+            case 'show_list':
+            case 'hide_list':
+                if (args.length === 1 && _.isString(args[0])) {
+                    let opcode;
+                    switch (name) {
+                    case 'show_list':
+                        opcode = 'data_showlist';
+                        break;
+                    case 'hide_list':
+                        opcode = 'data_hidelist';
+                        break;
+                    }
+                    const variable = this._findOrCreateVariable(args[0], Variable.LIST_TYPE);
+                    if (variable.scope !== 'local') {
+                        block = this._createBlock(opcode, 'statement', {
+                            fields: {
+                                LIST: {
+                                    name: 'LIST',
+                                    id: variable.id,
+                                    value: variable.name
+                                }
+                            }
+                        });
+                    }
+                }
+                break;
             case 'wait':
                 if (args.length === 0) {
                     block = this._createBlock('ruby_statement', 'statement');
                     this._addInput(block, 'STATEMENT', this._createTextBlock('wait', block.id));
                 }
+            }
+        } else if (this._isVariableBlock(receiver)) {
+            switch (name) {
+            case 'push':
+                if (args.length === 1 &&
+                    this._isStringOrBlock(args[0])) {
+                    block = this._changeVariableBlock(receiver, 'data_addtolist', 'statement', Variable.LIST_TYPE);
+                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
+                }
+                break;
+            case 'delete_at':
+                if (args.length === 1 &&
+                    this._isNumberOrBlock(args[0])) {
+                    block = this._changeVariableBlock(receiver, 'data_deleteoflist', 'statement', Variable.LIST_TYPE);
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                }
+                break;
+            case 'clear':
+                if (args.length === 0) {
+                    block = this._changeVariableBlock(receiver, 'data_deletealloflist', 'statement', Variable.LIST_TYPE);
+                }
+                break;
+            case 'insert':
+                if (args.length === 2 &&
+                    this._isNumberOrBlock(args[0]) &&
+                    this._isStringOrBlock(args[1])) {
+                    block = this._changeVariableBlock(receiver, 'data_insertatlist', 'statement', Variable.LIST_TYPE);
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                    this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
+                }
+                break;
+            case '[]=':
+                if (args.length === 2 &&
+                    this._isNumberOrBlock(args[0]) &&
+                    this._isStringOrBlock(args[1])) {
+                    block = this._changeVariableBlock(receiver, 'data_replaceitemoflist', 'statement', Variable.LIST_TYPE);
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                    this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
+                }
+                break;
+            case '[]':
+                if (args.length === 1 &&
+                    this._isNumberOrBlock(args[0])) {
+                    block = this._changeVariableBlock(receiver, 'data_itemoflist', 'value', Variable.LIST_TYPE);
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                }
+                break;
+            case 'index':
+                if (args.length === 1 &&
+                    this._isStringOrBlock(args[0])) {
+                    block = this._changeVariableBlock(receiver, 'data_itemnumoflist', 'value', Variable.LIST_TYPE);
+                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
+                }
+                break;
+            case 'length':
+                if (args.length === 0) {
+                    block = this._changeVariableBlock(receiver, 'data_lengthoflist', 'value', Variable.LIST_TYPE);
+                }
+                break;
+            case 'include?':
+                if (args.length === 1 &&
+                    this._isStringOrBlock(args[0])) {
+                    block = this._changeVariableBlock(receiver, 'data_listcontainsitem', 'value', Variable.LIST_TYPE);
+                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
+                }
+                break;
             }
         } else {
             switch (name) {
@@ -722,8 +846,8 @@ class RubyToBlocksConverter {
                 }
                 break;
             case '[]':
-                if (args.length === 1 &&
-                    this._isStringOrBlock(receiver) && this._isNumberOrBlock(args[0])) {
+                if (this._isStringOrBlock(receiver) &&
+                    args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('operator_letter_of', 'value');
                     this._addInput(block, 'STRING', this._createTextBlock(receiver, block.id));
                     this._addInput(block, 'LETTER', this._createNumberBlock('math_number', args[0], block.id));
@@ -813,7 +937,7 @@ class RubyToBlocksConverter {
                 }
                 break;
             }
-            case '**': {
+            case '**':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     let operator;
                     if (this._matchRubyExpression(receiver, /^(::)?Math::E$/)) {
@@ -837,7 +961,6 @@ class RubyToBlocksConverter {
                     }
                 }
                 break;
-            }
             }
         }
         if (!block) {
@@ -1008,7 +1131,7 @@ class RubyToBlocksConverter {
                     break;
                 }
             } else if (_.isString(lh)) {
-                const variable = this._findOrCreateVariable(lh);
+                const variable = this._findOrCreateVariable(lh, Variable.SCALAR_TYPE);
                 if (variable.scope !== 'local') {
                     block = this._createBlock('data_changevariableby', 'statement', {
                         fields: {
@@ -1107,10 +1230,19 @@ class RubyToBlocksConverter {
 
         const variable = this._findOrCreateVariable(node.children[0]);
         if (variable.scope !== 'local') {
-            return this._createBlock('data_variable', 'value', {
+            let opcode;
+            let name;
+            if (variable.type === Variable.SCALAR_TYPE) {
+                opcode = 'data_variable';
+                name = 'VARIABLE';
+            } else {
+                opcode = 'data_listcontents';
+                name = 'LIST';
+            }
+            return this._createBlock(opcode, 'value', {
                 fields: {
-                    VARIABLE: {
-                        name: 'VARIABLE',
+                    [name]: {
+                        name: name,
                         id: variable.id,
                         value: variable.name
                     }
@@ -1136,7 +1268,7 @@ class RubyToBlocksConverter {
             return node.children[0].toString();
         }
 
-        const variable = this._findOrCreateVariable(node.children[0]);
+        const variable = this._findOrCreateVariable(node.children[0], Variable.SCALAR_TYPE);
         if (variable.scope !== 'local') {
             const rh = this._process(node.children[1]);
             const block = this._createBlock('data_setvariableto', 'statement', {

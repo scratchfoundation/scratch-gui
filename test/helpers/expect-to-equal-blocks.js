@@ -9,25 +9,30 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
             const field = actualFields[expectedField.name];
 
             expect(field.name).toEqual(expectedField.name);
-            if (expectedField.hasOwnProperty('variable')) {
+            if (expectedField.hasOwnProperty('variable') ||
+                expectedField.hasOwnProperty('list')) {
+                let data = expectedField.variable || expectedField.list;
                 let varName;
                 let store;
-                if (expectedField.variable[0] === '$') {
-                    varName = expectedField.variable.slice(1);
+                if (data[0] === '$') {
+                    varName = data.slice(1);
                     store = context.globalVariables;
-                } else if (expectedField.variable[0] === '@') {
-                    varName = expectedField.variable.slice(1);
+                } else if (data[0] === '@') {
+                    varName = data.slice(1);
                     store = context.instanceVariables;
                 } else {
-                    varName = expectedField.variable;
+                    varName = data;
                     store = context.localVariables;
                 }
                 expect(store).toHaveProperty(varName);
                 const variable = store[varName];
                 expect(variable.name).toEqual(varName);
-                let expectedType = Variable.SCALAR_TYPE;
-                if (expectedField.hasOwnProperty('type')) {
-                    expectedType = Variable[expectedField.type];
+
+                let expectedType;
+                if (expectedField.hasOwnProperty('variable')) {
+                    expectedType = Variable.SCALAR_TYPE;
+                } else {
+                    expectedType = Variable.LIST_TYPE;
                 }
                 expect(variable.type).toEqual(expectedType);
             } else {
@@ -159,15 +164,37 @@ const convertAndExpectToEqualRubyStatement = function (converter, target, code, 
     expect(res).toBeTruthy();
 };
 
-const fieldsToExpected = function (fields) {
+const fieldsToExpected = function (context, fields) {
     if (!fields) {
         return null;
     }
 
     return Object.keys(fields).map(name => {
         const field = fields[name];
-        if (fields.id) {
-            // TODO: 変数への参照を解決する
+        if (field.id) {
+            const varName = field.value;
+            const variable =
+                  context.globalVariables[varName] ||
+                  context.instanceVariables[varName] ||
+                  context.localVariables[varName];
+            let scope;
+            if (variable.scope === 'global') {
+                scope = '$';
+            } else if (variable.scope === 'instance') {
+                scope = '@';
+            } else {
+                scope = '';
+            }
+            if (variable.type === Variable.SCALAR_TYPE) {
+                return {
+                    name: 'VARIABLE',
+                    variable: `${scope}${varName}` // TODO: @か$を切り分ける
+                };
+            }
+            return {
+                name: 'LIST',
+                list: `${scope}${varName}`
+            };
         }
         return {
             name: field.name,
@@ -176,7 +203,7 @@ const fieldsToExpected = function (fields) {
     });
 };
 
-const inputsToExpected = function (blocks, inputs) {
+const inputsToExpected = function (context, blocks, inputs) {
     if (!inputs) {
         return null;
     }
@@ -186,7 +213,7 @@ const inputsToExpected = function (blocks, inputs) {
         const expected = {
             name: input.name,
             /* eslint-disable no-use-before-define */
-            block: blockToExpected(blocks, input.block)
+            block: blockToExpected(context, blocks, input.block)
             /* eslint-enable no-use-before-define */
         };
         if (input.shadow) {
@@ -196,13 +223,13 @@ const inputsToExpected = function (blocks, inputs) {
     });
 };
 
-const branchesToExpected = function (blocks, block) {
+const branchesToExpected = function (context, blocks, block) {
     const branches = [];
     for (let i = 1; i <= 2; i++) {
         const branch = blocks.getBranch(block.id, i);
         if (branch !== null) {
             /* eslint-disable no-use-before-define */
-            branches[i - 1] = blockToExpected(blocks, branch);
+            branches[i - 1] = blockToExpected(context, blocks, branch);
             /* eslint-enable no-use-before-define */
         }
     }
@@ -213,7 +240,7 @@ const branchesToExpected = function (blocks, block) {
     return branches;
 };
 
-const blockToExpected = function (blocks, blockId) {
+const blockToExpected = function (context, blocks, blockId) {
     if (!blockId) {
         return null;
     }
@@ -225,19 +252,19 @@ const blockToExpected = function (blocks, blockId) {
     if (block.shadow) {
         expected.shadow = true;
     }
-    const fields = fieldsToExpected(blocks.getFields(block));
+    const fields = fieldsToExpected(context, blocks.getFields(block));
     if (fields) {
         expected.fields = fields;
     }
-    const inputs = inputsToExpected(blocks, blocks.getInputs(block));
+    const inputs = inputsToExpected(context, blocks, blocks.getInputs(block));
     if (inputs) {
         expected.inputs = inputs;
     }
-    const branches = branchesToExpected(blocks, block);
+    const branches = branchesToExpected(context, blocks, block);
     if (branches) {
         expected.branches = branches;
     }
-    const next = blockToExpected(blocks, blocks.getNextBlock(block));
+    const next = blockToExpected(context, blocks, blocks.getNextBlock(block));
     if (next) {
         expected.next = next;
     }
@@ -254,8 +281,16 @@ const rubyToExpected = function (converter, target, code) {
         blocks.createBlock(converter.blocks[blockId]);
     });
 
+    const context = {
+        converter: converter,
+        blocks: blocks,
+        localVariables: converter.localVariables,
+        instanceVariables: converter.instanceVariables,
+        globalVariables: converter.globalVariables
+    };
+
     const scripts = blocks.getScripts();
-    return scripts.map(scriptId => blockToExpected(blocks, scriptId));
+    return scripts.map(scriptId => blockToExpected(context, blocks, scriptId));
 };
 
 const expectedInfo = {

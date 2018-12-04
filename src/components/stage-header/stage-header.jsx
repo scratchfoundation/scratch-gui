@@ -16,6 +16,7 @@ import largeStageIcon from './icon--large-stage.svg';
 import smallStageIcon from './icon--small-stage.svg';
 import unFullScreenIcon from './icon--unfullscreen.svg';
 
+import scratchLogo from '../menu-bar/scratch-logo.svg';
 import styles from './stage-header.css';
 
 const messages = defineMessages({
@@ -48,6 +49,7 @@ const messages = defineMessages({
 
 const StageHeaderComponent = function (props) {
     const {
+        isEmbedded,
         isFullScreen,
         isPlayerOnly,
         onKeyPress,
@@ -63,6 +65,34 @@ const StageHeaderComponent = function (props) {
 
     if (isFullScreen) {
         const stageDimensions = getStageDimensions(null, true);
+        const stageButton = isEmbedded ? (
+            <div className={styles.embedScratchLogo}>
+                <a
+                    href="https://scratch.mit.edu"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                >
+                    <img
+                        alt="Scratch"
+                        src={scratchLogo}
+                    />
+                </a>
+            </div>
+        ) : (
+            <Button
+                className={styles.stageButton}
+                onClick={onSetStageUnFull}
+                onKeyPress={onKeyPress}
+            >
+                <img
+                    alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
+                    className={styles.stageButtonIcon}
+                    draggable={false}
+                    src={unFullScreenIcon}
+                    title={props.intl.formatMessage(messages.fullscreenControl)}
+                />
+            </Button>
+        );
         header = (
             <Box className={styles.stageHeaderWrapperOverlay}>
                 <Box
@@ -70,19 +100,7 @@ const StageHeaderComponent = function (props) {
                     style={{width: stageDimensions.width}}
                 >
                     <Controls vm={vm} />
-                    <Button
-                        className={styles.stageButton}
-                        onClick={onSetStageUnFull}
-                        onKeyPress={onKeyPress}
-                    >
-                        <img
-                            alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
-                            className={styles.stageButtonIcon}
-                            draggable={false}
-                            src={unFullScreenIcon}
-                            title={props.intl.formatMessage(messages.fullscreenControl)}
-                        />
-                    </Button>
+                    {stageButton}
                 </Box>
             </Box>
         );
@@ -164,6 +182,7 @@ const mapStateToProps = state => ({
 
 StageHeaderComponent.propTypes = {
     intl: intlShape,
+    isEmbedded: PropTypes.bool.isRequired,
     isFullScreen: PropTypes.bool.isRequired,
     isPlayerOnly: PropTypes.bool.isRequired,
     onKeyPress: PropTypes.func.isRequired,

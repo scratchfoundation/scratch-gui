@@ -133,7 +133,7 @@ const GUIComponent = props => {
             <StageWrapper
                 isRendererSupported={isRendererSupported}
                 isRtl={isRtl}
-                stageSize={stageSize}
+                stageSize={STAGE_SIZE_MODES.large}
                 vm={vm}
             >
                 {alertsVisible ? (

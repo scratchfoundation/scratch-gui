@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Ruby', () => {
@@ -96,9 +96,7 @@ describe('RubyToBlocksConverter/Ruby', () => {
             'wait(  )',
             'wait(\n)'
         ].forEach(s => {
-            converter.targetCodeToBlocks(target, s);
-            expect(converter.errors).toHaveLength(0);
-            expectToEqualRubyStatement(converter, 'wait');
+            convertAndExpectToEqualRubyStatement(converter, target, s, 'wait');
         });
     });
 });

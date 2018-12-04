@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Event', () => {
@@ -25,9 +25,10 @@ describe('RubyToBlocksConverter/Event', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        ['self.when(:flag_clicked)'].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+        [
+            'self.when(:flag_clicked)'
+        ].forEach(s => {
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
 
         [

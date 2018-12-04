@@ -1,7 +1,8 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement,
+    rubyToExpected
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Control', () => {
@@ -27,12 +28,16 @@ describe('RubyToBlocksConverter/Control', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        ['loop()', 'loop(1)'].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+        [
+            'loop()',
+            'loop(1)'
+        ].forEach(s => {
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
 
-        ['loop { bounce_if_on_edge }'].forEach(s => {
+        [
+            'loop { bounce_if_on_edge }'
+        ].forEach(s => {
             expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
             const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
             expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
@@ -50,30 +55,11 @@ describe('RubyToBlocksConverter/Control', () => {
                 inputs: [
                     {
                         name: 'CONDITION',
-                        block: {
-                            opcode: 'sensing_touchingobject',
-                            inputs: [
-                                {
-                                    name: 'TOUCHINGOBJECTMENU',
-                                    block: {
-                                        opcode: 'sensing_touchingobjectmenu',
-                                        fields: [
-                                            {
-                                                name: 'TOUCHINGOBJECTMENU',
-                                                value: '_edge_'
-                                            }
-                                        ],
-                                        shadow: true
-                                    }
-                                }
-                            ]
-                        }
+                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
                     }
                 ],
                 branches: [
-                    {
-                        opcode: 'motion_ifonedgebounce'
-                    }
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
                 ]
             }
         ];
@@ -130,48 +116,12 @@ describe('RubyToBlocksConverter/Control', () => {
                 inputs: [
                     {
                         name: 'CONDITION',
-                        block: {
-                            opcode: 'sensing_touchingobject',
-                            inputs: [
-                                {
-                                    name: 'TOUCHINGOBJECTMENU',
-                                    block: {
-                                        opcode: 'sensing_touchingobjectmenu',
-                                        fields: [
-                                            {
-                                                name: 'TOUCHINGOBJECTMENU',
-                                                value: '_edge_'
-                                            }
-                                        ],
-                                        shadow: true
-                                    }
-                                }
-                            ]
-                        }
+                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
                     }
                 ],
                 branches: [
-                    {
-                        opcode: 'motion_ifonedgebounce'
-                    },
-                    {
-                        opcode: 'motion_movesteps',
-                        inputs: [
-                            {
-                                name: 'STEPS',
-                                block: {
-                                    opcode: 'math_number',
-                                    fields: [
-                                        {
-                                            name: 'NUM',
-                                            value: 10
-                                        }
-                                    ],
-                                    shadow: true
-                                }
-                            }
-                        ]
-                    }
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                    rubyToExpected(converter, target, 'move(10)')[0]
                 ]
             }
         ];

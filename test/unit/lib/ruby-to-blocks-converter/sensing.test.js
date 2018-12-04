@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Sensing', () => {
@@ -42,8 +42,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
             'touching?(1)',
             'touching?("_edge_", 1)'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 });

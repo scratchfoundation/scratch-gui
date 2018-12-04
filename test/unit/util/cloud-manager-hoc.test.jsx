@@ -56,6 +56,8 @@ describe('CloudManagerHOC', () => {
     test('when it mounts, the cloud provider is set on the vm', () => {
         const Component = () => (<div />);
         const WrappedComponent = cloudManagerHOC(Component);
+        const onShowCloudInfo = jest.fn();
+
         mount(
             <WrappedComponent
                 canSave
@@ -64,11 +66,13 @@ describe('CloudManagerHOC', () => {
                 store={store}
                 username="user"
                 vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
             />
         );
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
     });
 
     test('when cloudHost is missing, the cloud provider is not set on the vm', () => {
@@ -144,6 +148,9 @@ describe('CloudManagerHOC', () => {
     test('if the isShowingWithId prop becomes true, it sets the cloud provider on the vm', () => {
         const Component = () => <div />;
         const WrappedComponent = cloudManagerHOC(Component);
+        const onShowCloudInfo = jest.fn();
+        vm.runtime.hasCloudData = jest.fn(() => false);
+
         const mounted = mount(
             <WrappedComponent
                 canSave
@@ -152,8 +159,14 @@ describe('CloudManagerHOC', () => {
                 store={stillLoadingStore}
                 username="user"
                 vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
             />
         );
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
+
+        vm.runtime.hasCloudData = jest.fn(() => true);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', true);
+
         mounted.setProps({
             isShowingWithId: true,
             loadingState: LoadingState.SHOWING_WITH_ID
@@ -161,6 +174,7 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
     });
 
     test('projectId change should not trigger cloudProvider connection unless isShowingWithId becomes true', () => {
@@ -295,6 +309,7 @@ describe('CloudManagerHOC', () => {
         // Mock the vm runtime function so that has cloud data is not
         // initially true
         vm.runtime.hasCloudData = jest.fn(() => false);
+        const onShowCloudInfo = jest.fn();
 
         const Component = () => <div />;
         const WrappedComponent = cloudManagerHOC(Component);
@@ -306,10 +321,12 @@ describe('CloudManagerHOC', () => {
                 store={store}
                 username="user"
                 vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
             />
         );
         expect(vm.setCloudProvider.mock.calls.length).toBe(0);
         expect(CloudProvider).not.toHaveBeenCalled();
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
 
         // Mock VM hasCloudData becoming true and emitting an update
         vm.runtime.hasCloudData = jest.fn(() => true);
@@ -318,6 +335,7 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).toHaveBeenCalled();
     });
 
     test('projectHasCloudDataUpdate becoming false should trigger cloudProvider disconnection', () => {

@@ -24,9 +24,9 @@ describe('RubyToBlocksConverter/Variables', () => {
         {
             scope: '$',
             name: 'a'
-        },
+        }
     ].forEach(variable => {
-        let varName = `${variable.scope}${variable.name}`;
+        const varName = `${variable.scope}${variable.name}`;
         describe(varName, () => {
             test('data_variable', () => {
                 const code = varName;

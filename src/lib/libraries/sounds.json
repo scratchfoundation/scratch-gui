@@ -98,7 +98,11 @@
         "sampleCount": 13911,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Afro String",
@@ -229,7 +233,11 @@
         "sampleCount": 14704,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Baa",
@@ -544,7 +552,11 @@
         "sampleCount": 13118,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "C2 Bass",
@@ -632,7 +644,11 @@
         "sampleCount": 15849,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Car Horn",
@@ -865,6 +881,18 @@
         "tags": [
             "effects",
             "electronic"
+        ]
+    },
+    {
+        "name": "Connect",
+        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
+        "sampleCount": 22623,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
         ]
     },
     {
@@ -1118,7 +1146,11 @@
         "sampleCount": 12702,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Dance Around",
@@ -1260,6 +1292,18 @@
             "music",
             "electronic",
             "loops"
+        ]
+    },
+    {
+        "name": "Disconnect",
+        "md5": "56df0714ed1ed455a2befd787a077214.wav",
+        "sampleCount": 27563,
+        "rate": 22050,
+        "format": "adpcm",
+        "tags": [
+            "effects",
+            "electronic",
+            "games"
         ]
     },
     {
@@ -1609,7 +1653,11 @@
         "sampleCount": 8680,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Eggs",
@@ -1806,7 +1854,11 @@
         "sampleCount": 12766,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "Fairydust",
@@ -1830,18 +1882,6 @@
             "effects",
             "percussion",
             "human"
-        ]
-    },
-    {
-        "name": "Finish",
-        "md5": "56df0714ed1ed455a2befd787a077214.wav",
-        "sampleCount": 27563,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
         ]
     },
     {
@@ -1949,7 +1989,11 @@
         "sampleCount": 14640,
         "rate": 22050,
         "format": "",
-        "tags": []
+        "tags": [
+            "music",
+            "instruments",
+            "notes"
+        ]
     },
     {
         "name": "G Ukulele",
@@ -3329,18 +3373,6 @@
             "wacky",
             "effects",
             "cartoon"
-        ]
-    },
-    {
-        "name": "Start",
-        "md5": "9aad12085708ccd279297d4bea9c5ae0.wav",
-        "sampleCount": 22623,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "effects",
-            "electronic",
-            "games"
         ]
     },
     {

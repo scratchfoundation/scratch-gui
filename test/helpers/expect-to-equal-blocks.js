@@ -1,6 +1,7 @@
-import Blocks from '../../node_modules/scratch-vm/src/engine/blocks';
+import Blocks from 'scratch-vm/src/engine/blocks';
+import Variable from 'scratch-vm/src/engine/variable';
 
-const expectToEqualFields = function (actualFields, expectedFieldsInfo) {
+const expectToEqualFields = function (context, actualFields, expectedFieldsInfo) {
     expect(Object.keys(actualFields)).toHaveLength(expectedFieldsInfo ? expectedFieldsInfo.length : 0);
     if (expectedFieldsInfo) {
         expectedFieldsInfo.forEach(expectedField => {
@@ -8,13 +9,37 @@ const expectToEqualFields = function (actualFields, expectedFieldsInfo) {
             const field = actualFields[expectedField.name];
 
             expect(field.name).toEqual(expectedField.name);
-            expect(field.id).toEqual(void 0);
-            expect(field.value).toEqual(expectedField.value);
+            if (expectedField.hasOwnProperty('variable')) {
+                let varName;
+                let store;
+                if (expectedField.variable[0] === '$') {
+                    varName = expectedField.variable.slice(1);
+                    store = context.globalVariables;
+                } else if (expectedField.variable[0] === '@') {
+                    varName = expectedField.variable.slice(1);
+                    store = context.instanceVariables;
+                } else {
+                    varName = expectedField.variable;
+                    store = context.localVariables;
+                }
+                expect(store).toHaveProperty(varName);
+                const variable = store[varName];
+                expect(variable.name).toEqual(varName);
+                let expectedType = Variable.SCALAR_TYPE;
+                if (expectedField.hasOwnProperty('type')) {
+                    expectedType = Variable[expectedField.type];
+                }
+                expect(variable.type).toEqual(expectedType);
+            } else {
+                expect(field.id).toEqual(void 0);
+                expect(field.value).toEqual(expectedField.value);
+            }
         });
     }
 };
 
-const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
+const expectToEqualBranches = function (context, block, expectedBranchesInfo) {
+    const blocks = context.blocks;
     if (!expectedBranchesInfo || expectedBranchesInfo.length === 0) {
         expect(blocks.getBranch(block.id)).toEqual(null);
     } else {
@@ -26,13 +51,14 @@ const expectToEqualBranches = function (blocks, block, expectedBranchesInfo) {
             }
             expect(branch).not.toEqual(null);
             /* eslint-disable no-use-before-define */
-            expectToEqualBlock(blocks, block.id, blocks.getBlock(branch), expectedBranch);
+            expectToEqualBlock(context, block.id, blocks.getBlock(branch), expectedBranch);
             /* eslint-enable no-use-before-define */
         });
     }
 };
 
-const expectToEqualInputs = function (blocks, parent, actualInputs, expectedInputsInfo) {
+const expectToEqualInputs = function (context, parent, actualInputs, expectedInputsInfo) {
+    const blocks = context.blocks;
     expect(Object.keys(actualInputs)).toHaveLength(expectedInputsInfo ? expectedInputsInfo.length : 0);
     if (expectedInputsInfo) {
         expectedInputsInfo.forEach(expectedInput => {
@@ -43,13 +69,14 @@ const expectToEqualInputs = function (blocks, parent, actualInputs, expectedInpu
             expect(input.shadow).toEqual(expectedInput.block.shadow ? input.block : null);
 
             /* eslint-disable no-use-before-define */
-            expectToEqualBlock(blocks, parent, blocks.getBlock(input.block), expectedInput.block);
+            expectToEqualBlock(context, parent, blocks.getBlock(input.block), expectedInput.block);
             /* eslint-enable no-use-before-define */
         });
     }
 };
 
-const expectToEqualBlock = function (blocks, parent, actualBlock, expectedBlockInfo) {
+const expectToEqualBlock = function (context, parent, actualBlock, expectedBlockInfo) {
+    const blocks = context.blocks;
     const block = actualBlock;
 
     const expected = expectedBlockInfo;
@@ -60,40 +87,48 @@ const expectToEqualBlock = function (blocks, parent, actualBlock, expectedBlockI
     expect(block.x).toEqual(void 0);
     expect(block.y).toEqual(void 0);
 
-    expectToEqualFields(blocks.getFields(block), expected.fields);
+    expectToEqualFields(context, blocks.getFields(block), expected.fields);
 
-    expectToEqualInputs(blocks, block.id, blocks.getInputs(block), expected.inputs);
+    expectToEqualInputs(context, block.id, blocks.getInputs(block), expected.inputs);
 
-    expectToEqualBranches(blocks, block, expected.branches);
+    expectToEqualBranches(context, block, expected.branches);
 
     if (expected.next) {
-        expectToEqualBlock(blocks, block.id, blocks.getBlock(blocks.getNextBlock(block.id)), expected.next);
+        expectToEqualBlock(context, block.id, blocks.getBlock(blocks.getNextBlock(block.id)), expected.next);
     } else {
         expect(blocks.getNextBlock(block.id)).toEqual(null);
     }
 };
 
-const expectToEqualBlocks = function (actualBlocks, expectedBlocksInfo) {
+const expectToEqualBlocks = function (converter, expectedBlocksInfo) {
     const blocks = new Blocks();
-    Object.keys(actualBlocks).forEach(blockId => {
-        blocks.createBlock(actualBlocks[blockId]);
+    Object.keys(converter.blocks).forEach(blockId => {
+        blocks.createBlock(converter.blocks[blockId]);
     });
+
+    const context = {
+        converter: converter,
+        blocks: blocks,
+        localVariables: converter.localVariables,
+        instanceVariables: converter.instanceVariables,
+        globalVariables: converter.globalVariables
+    };
 
     const scripts = blocks.getScripts();
     expect(scripts).toHaveLength(expectedBlocksInfo.length);
     scripts.forEach((scriptId, i) => {
-        expectToEqualBlock(blocks, null, blocks.getBlock(scriptId), expectedBlocksInfo[i]);
+        expectToEqualBlock(context, null, blocks.getBlock(scriptId), expectedBlocksInfo[i]);
     });
 };
 
 const convertAndExpectToEqualBlocks = function (converter, target, code, expectedBlocksInfo) {
     const res = converter.targetCodeToBlocks(target, code);
     expect(converter.errors).toHaveLength(0);
-    expectToEqualBlocks(converter.blocks, expectedBlocksInfo);
+    expectToEqualBlocks(converter, expectedBlocksInfo);
     expect(res).toBeTruthy();
 };
 
-const expectToEqualRubyStatement = function (actualBlocks, expectedStatement) {
+const expectToEqualRubyStatement = function (converter, expectedStatement) {
     const expected = [
         {
             opcode: 'ruby_statement',
@@ -114,7 +149,14 @@ const expectToEqualRubyStatement = function (actualBlocks, expectedStatement) {
             ]
         }
     ];
-    expectToEqualBlocks(actualBlocks, expected);
+    expectToEqualBlocks(converter, expected);
+};
+
+const convertAndExpectToEqualRubyStatement = function (converter, target, code, expectedStatement) {
+    const res = converter.targetCodeToBlocks(target, code);
+    expect(converter.errors).toHaveLength(0);
+    expectToEqualRubyStatement(converter, expectedStatement);
+    expect(res).toBeTruthy();
 };
 
 const fieldsToExpected = function (fields) {
@@ -124,6 +166,9 @@ const fieldsToExpected = function (fields) {
 
     return Object.keys(fields).map(name => {
         const field = fields[name];
+        if (fields.id) {
+            // TODO: 変数への参照を解決する
+        }
         return {
             name: field.name,
             value: field.value
@@ -213,9 +258,34 @@ const rubyToExpected = function (converter, target, code) {
     return scripts.map(scriptId => blockToExpected(blocks, scriptId));
 };
 
+const expectedInfo = {
+    makeText: text => ({
+        opcode: 'text',
+        fields: [
+            {
+                name: 'TEXT',
+                value: text
+            }
+        ],
+        shadow: true
+    }),
+    makeNumber: (num, opcode = 'math_number') => ({
+        opcode: opcode,
+        fields: [
+            {
+                name: 'NUM',
+                value: num
+            }
+        ],
+        shadow: true
+    })
+};
+
 export {
     expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,
-    rubyToExpected
+    convertAndExpectToEqualRubyStatement,
+    rubyToExpected,
+    expectedInfo
 };

@@ -1,20 +1,20 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    expectToEqualBlocks,
+    convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Sensing', () => {
     let converter;
+    let target;
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
+        target = null;
     });
 
     test('sensing_touchingobject', () => {
-        expect(converter.targetCodeToBlocks(null, 'touching?("_edge_")')).toBeTruthy();
-        expect(converter.errors.length).toEqual(0);
-
+        const code = 'touching?("_edge_")';
         const expected = [
             {
                 opcode: 'sensing_touchingobject',
@@ -35,15 +35,15 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 ]
             }
         ];
-        expectToEqualBlocks(converter.blocks, expected);
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
 
         [
             'touching?()',
             'touching?(1)',
             'touching?("_edge_", 1)'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(null, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter.blocks, s);
+            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
+            expectToEqualRubyStatement(converter, s);
         });
     });
 });

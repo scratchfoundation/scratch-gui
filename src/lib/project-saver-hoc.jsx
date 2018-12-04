@@ -224,7 +224,9 @@ const ProjectSaverHOC = function (WrappedComponent) {
          */
         storeProjectThumbnail (projectId) {
             try {
+                this.props.vm.postIOData('video', {forceTransparentPreview: true});
                 this.props.vm.renderer.requestSnapshot(dataURI => {
+                    this.props.vm.postIOData('video', {forceTransparentPreview: false});
                     this.props.onUpdateProjectThumbnail(
                         projectId, dataURItoBlob(dataURI));
                 });

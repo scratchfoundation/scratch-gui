@@ -83,6 +83,19 @@ const initFullScreen = function (currentState) {
     );
 };
 
+const initEmbedded = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {mode: {
+            showBranding: true,
+            isFullScreen: true,
+            isPlayerOnly: true,
+            hasEverEnteredEditor: false
+        }}
+    );
+};
+
 const initTutorialCard = function (currentState, deckId) {
     return Object.assign(
         {},
@@ -145,6 +158,7 @@ export {
     guiReducer as default,
     guiInitialState,
     guiMiddleware,
+    initEmbedded,
     initFullScreen,
     initPlayer,
     initPreviewInfo,

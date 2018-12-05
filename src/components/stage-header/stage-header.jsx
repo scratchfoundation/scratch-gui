@@ -49,7 +49,6 @@ const messages = defineMessages({
 
 const StageHeaderComponent = function (props) {
     const {
-        isEmbedded,
         isFullScreen,
         isPlayerOnly,
         onKeyPress,
@@ -57,6 +56,7 @@ const StageHeaderComponent = function (props) {
         onSetStageSmall,
         onSetStageFull,
         onSetStageUnFull,
+        showBranding,
         stageSizeMode,
         vm
     } = props;
@@ -65,7 +65,7 @@ const StageHeaderComponent = function (props) {
 
     if (isFullScreen) {
         const stageDimensions = getStageDimensions(null, true);
-        const stageButton = isEmbedded ? (
+        const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
                 <a
                     href="https://scratch.mit.edu"
@@ -182,7 +182,6 @@ const mapStateToProps = state => ({
 
 StageHeaderComponent.propTypes = {
     intl: intlShape,
-    isEmbedded: PropTypes.bool.isRequired,
     isFullScreen: PropTypes.bool.isRequired,
     isPlayerOnly: PropTypes.bool.isRequired,
     onKeyPress: PropTypes.func.isRequired,
@@ -190,6 +189,7 @@ StageHeaderComponent.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
+    showBranding: PropTypes.bool.isRequired,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };

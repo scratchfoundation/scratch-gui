@@ -88,7 +88,7 @@ const initEmbedded = function (currentState) {
         {},
         currentState,
         {mode: {
-            isEmbedded: true,
+            showBranding: true,
             isFullScreen: true,
             isPlayerOnly: true,
             hasEverEnteredEditor: false

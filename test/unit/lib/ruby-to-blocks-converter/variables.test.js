@@ -2,6 +2,7 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
+    rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
@@ -11,8 +12,6 @@ describe('RubyToBlocksConverter/Variables', () => {
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
-        // TODO: 正しいtargetを用意して、定義済みの各種変数はそれを参照しているかチェックする。
-        // 無駄に新しい変数を作らせないこと。
         target = null;
     });
 
@@ -145,40 +144,247 @@ describe('RubyToBlocksConverter/Variables', () => {
                 });
             });
 
-            test.skip('data_listcontents', () => {
+            test('data_listcontents', () => {
+                const code = `${varName}[1]; ${varName}`;
+                const expected = [
+                    rubyToExpected(converter, target, `${varName}[1]`)[0],
+                    {
+                        opcode: 'data_listcontents',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_addtolist', () => {
+            test('data_addtolist', () => {
+                const code = `${varName}.push("thing")`;
+                const expected = [
+                    {
+                        opcode: 'data_addtolist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_deleteoflist', () => {
+            test('data_deleteoflist', () => {
+                const code = `${varName}.delete_at(1)`;
+                const expected = [
+                    {
+                        opcode: 'data_deleteoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1)
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_deletealloflist', () => {
+            test('data_deletealloflist', () => {
+                const code = `${varName}.clear`;
+                const expected = [
+                    {
+                        opcode: 'data_deletealloflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_insertatlist', () => {
+            test('data_insertatlist', () => {
+                const code = `${varName}.insert(1, "thing")`;
+                const expected = [
+                    {
+                        opcode: 'data_insertatlist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1)
+                            },
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_replaceitemoflist', () => {
+            test('data_replaceitemoflist', () => {
+                const code = `${varName}[1] = "thing"`;
+                const expected = [
+                    {
+                        opcode: 'data_replaceitemoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1)
+                            },
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_itemoflist', () => {
+            test('data_itemoflist', () => {
+                const code = `${varName}[1]`;
+                const expected = [
+                    {
+                        opcode: 'data_itemoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1)
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_itemnumoflist', () => {
+            test('data_itemnumoflist', () => {
+                const code = `${varName}.index("thing")`;
+                const expected = [
+                    {
+                        opcode: 'data_itemnumoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_lengthoflist', () => {
+            test('data_lengthoflist', () => {
+                const code = `${varName}.length`;
+                const expected = [
+                    {
+                        opcode: 'data_lengthoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_listcontainsitem', () => {
+            test('data_listcontainsitem', () => {
+                const code = `${varName}.include?("thing")`;
+                const expected = [
+                    {
+                        opcode: 'data_listcontainsitem',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_showlist', () => {
+            test('data_showlist', () => {
+                const code = `show_list("${varName}")`;
+                const expected = [
+                    {
+                        opcode: 'data_showlist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            test.skip('data_hidelist', () => {
+            test('data_hidelist', () => {
+                const code = `hide_list("${varName}")`;
+                const expected = [
+                    {
+                        opcode: 'data_hidelist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
         });
     });

@@ -12,7 +12,7 @@ import ShareButton from './share-button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import InlineMessages from '../../containers/inline-messages.jsx';
+import SaveStatus from './save-status.jsx';
 import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
@@ -535,7 +535,7 @@ class MenuBar extends React.Component {
                 logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
-                        <InlineMessages />
+                        <SaveStatus />
                     </div>
                     {this.props.sessionExists ? (
                         this.props.username ? (

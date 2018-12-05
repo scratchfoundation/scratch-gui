@@ -50,7 +50,8 @@ describe('RubyToBlocksConverter/Motion', () => {
         [
             'move()',
             'move(10, 10)',
-            'move("10")'
+            'move("10")',
+            'move(abc)'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -91,7 +92,8 @@ describe('RubyToBlocksConverter/Motion', () => {
         [
             'turn_right()',
             'turn_right(180, 0)',
-            'turn_right("180")'
+            'turn_right("180")',
+            'turn_right(abc)'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -132,7 +134,8 @@ describe('RubyToBlocksConverter/Motion', () => {
         [
             'turn_left()',
             'turn_left(180, 0)',
-            'turn_left("180")'
+            'turn_left("180")',
+            'turn_left(abc)'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -216,7 +219,8 @@ describe('RubyToBlocksConverter/Motion', () => {
             'go_to([12])',
             'go_to([12, 34, 56])',
             'go_to([12, 34], secs: 5)',
-            'go_to(["12", "34"])'
+            'go_to(["12", "34"])',
+            'go_to([abc, abc])'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -284,7 +288,8 @@ describe('RubyToBlocksConverter/Motion', () => {
             'glide()',
             'glide(10, secs: 5)',
             'glide("_mouse_")',
-            'glide("_mouse_", 5)'
+            'glide("_mouse_", 5)',
+            'glide("_mouse_", secs: abc)'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -341,7 +346,8 @@ describe('RubyToBlocksConverter/Motion', () => {
         [
             'glide([], secs: 5)',
             'glide([12, 34])',
-            'glide([12, 34], 5)'
+            'glide([12, 34], 5)',
+            'glide([abc, abc], secs: abc)'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -381,7 +387,8 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         [
             'self.direction = "90"',
-            'self.direction = :symbol'
+            'self.direction = :symbol',
+            'self.direction = abc'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -501,7 +508,8 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         [
             'self.x += "10"',
-            'self.x += :symbol'
+            'self.x += :symbol',
+            'self.x += abc'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -541,7 +549,8 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         [
             'self.x = "10"',
-            'self.x = :symbol'
+            'self.x = :symbol',
+            'self.x = abc'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -581,7 +590,8 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         [
             'self.y += "10"',
-            'self.y += :symbol'
+            'self.y += :symbol',
+            'self.y += abc'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
@@ -621,7 +631,8 @@ describe('RubyToBlocksConverter/Motion', () => {
 
         [
             'self.y = "10"',
-            'self.y = :symbol'
+            'self.y = :symbol',
+            'self.y = abc'
         ].forEach(s => {
             convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });

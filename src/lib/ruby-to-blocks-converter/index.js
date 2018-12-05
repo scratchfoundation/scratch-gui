@@ -373,12 +373,19 @@ class RubyToBlocksConverter {
         }
     }
 
+    _isValueBlock (block) {
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        return /^value/.test(this._blockType(block));
+    }
+
     _isNumberOrBlock (numberOrBlock) {
-        return _.isNumber(numberOrBlock) || this._isBlock(numberOrBlock);
+        return _.isNumber(numberOrBlock) || this._isValueBlock(numberOrBlock);
     }
 
     _isStringOrBlock (stringOrBlock) {
-        return _.isString(stringOrBlock) || this._isBlock(stringOrBlock);
+        return _.isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
     }
 
     _isVariableBlock (block) {
@@ -514,7 +521,8 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'glide':
-                if (args.length === 2 && args[1] instanceof Map && args[1].size === 1 && args[1].get('secs')) {
+                if (args.length === 2 &&
+                    args[1] instanceof Map && args[1].size === 1 && this._isNumberOrBlock(args[1].get('secs'))) {
                     if (_.isString(args[0])) {
                         block = this._createBlock('motion_glideto', 'statement');
                         this._addInput(

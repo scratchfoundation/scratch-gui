@@ -87,7 +87,7 @@ const alerts = [
         ),
         iconURL: successImage,
         level: AlertLevels.SUCCESS,
-        maxDisplaySecs: 5
+        maxDisplaySecs: 3
     },
     {
         alertId: 'saving',

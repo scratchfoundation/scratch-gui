@@ -317,6 +317,7 @@ class RubyToBlocksConverter {
         if (block.fields[before]) {
             block.fields[after] = block.fields[before];
             block.fields[after].name = after;
+            block.fields[after].variableType = varType;
             delete block.fields[before];
 
             const varName = block.fields[after].value;
@@ -668,7 +669,8 @@ class RubyToBlocksConverter {
                                 VARIABLE: {
                                     name: 'VARIABLE',
                                     id: variable.id,
-                                    value: variable.name
+                                    value: variable.name,
+                                    variableType: Variable.SCALAR_TYPE
                                 }
                             }
                         });
@@ -694,7 +696,8 @@ class RubyToBlocksConverter {
                                 LIST: {
                                     name: 'LIST',
                                     id: variable.id,
-                                    value: variable.name
+                                    value: variable.name,
+                                    variableType: Variable.LIST_TYPE
                                 }
                             }
                         });
@@ -1156,7 +1159,8 @@ class RubyToBlocksConverter {
                             VARIABLE: {
                                 name: 'VARIABLE',
                                 id: variable.id,
-                                value: variable.name
+                                value: variable.name,
+                                variableType: Variable.SCALAR_TYPE
                             }
                         }
                     });
@@ -1262,7 +1266,8 @@ class RubyToBlocksConverter {
                     [name]: {
                         name: name,
                         id: variable.id,
-                        value: variable.name
+                        value: variable.name,
+                        variableType: variable.type
                     }
                 }
             });
@@ -1294,7 +1299,8 @@ class RubyToBlocksConverter {
                     VARIABLE: {
                         name: 'VARIABLE',
                         id: variable.id,
-                        value: variable.name
+                        value: variable.name,
+                        variableType: Variable.SCALAR_TYPE
                     }
                 }
             });

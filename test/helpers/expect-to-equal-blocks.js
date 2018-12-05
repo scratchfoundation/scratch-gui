@@ -35,6 +35,7 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
                     expectedType = Variable.LIST_TYPE;
                 }
                 expect(variable.type).toEqual(expectedType);
+                expect(field).toHaveProperty('variableType', expectedType);
             } else {
                 expect(field.id).toEqual(void 0);
                 expect(field.value).toEqual(expectedField.value);

@@ -2,7 +2,6 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
-    rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
@@ -79,7 +78,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                         inputs: [
                             {
                                 name: 'VALUE',
-                                block: expectedInfo.makeText('1')
+                                block: expectedInfo.makeNumber(1)
                             }
                         ]
                     }
@@ -145,9 +144,8 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_listcontents', () => {
-                const code = `${varName}[1]; ${varName}`;
+                const code = `list("${varName}")`;
                 const expected = [
-                    rubyToExpected(converter, target, `${varName}[1]`)[0],
                     {
                         opcode: 'data_listcontents',
                         fields: [
@@ -162,8 +160,11 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_addtolist', () => {
-                const code = `${varName}.push("thing")`;
-                const expected = [
+                let code;
+                let expected;
+
+                code = `list("${varName}").push("thing")`;
+                expected = [
                     {
                         opcode: 'data_addtolist',
                         fields: [
@@ -181,10 +182,30 @@ describe('RubyToBlocksConverter/Variables', () => {
                     }
                 ];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `list("${varName}").push(1)`;
+                expected = [
+                    {
+                        opcode: 'data_addtolist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('1')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
             test('data_deleteoflist', () => {
-                const code = `${varName}.delete_at(1)`;
+                const code = `list("${varName}").delete_at(1)`;
                 const expected = [
                     {
                         opcode: 'data_deleteoflist',
@@ -197,7 +218,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                         inputs: [
                             {
                                 name: 'INDEX',
-                                block: expectedInfo.makeNumber(1)
+                                block: expectedInfo.makeNumber(1, 'math_integer')
                             }
                         ]
                     }
@@ -206,7 +227,7 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_deletealloflist', () => {
-                const code = `${varName}.clear`;
+                const code = `list("${varName}").clear`;
                 const expected = [
                     {
                         opcode: 'data_deletealloflist',
@@ -222,8 +243,11 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_insertatlist', () => {
-                const code = `${varName}.insert(1, "thing")`;
-                const expected = [
+                let code;
+                let expected;
+
+                code = `list("${varName}").insert(1, "thing")`;
+                expected = [
                     {
                         opcode: 'data_insertatlist',
                         fields: [
@@ -235,7 +259,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                         inputs: [
                             {
                                 name: 'INDEX',
-                                block: expectedInfo.makeNumber(1)
+                                block: expectedInfo.makeNumber(1, 'math_integer')
                             },
                             {
                                 name: 'ITEM',
@@ -245,11 +269,38 @@ describe('RubyToBlocksConverter/Variables', () => {
                     }
                 ];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `list("${varName}").insert(1, 2)`;
+                expected = [
+                    {
+                        opcode: 'data_insertatlist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1, 'math_integer')
+                            },
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('2')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
             test('data_replaceitemoflist', () => {
-                const code = `${varName}[1] = "thing"`;
-                const expected = [
+                let code;
+                let expected;
+
+                code = `list("${varName}")[1] = "thing"`;
+                expected = [
                     {
                         opcode: 'data_replaceitemoflist',
                         fields: [
@@ -261,7 +312,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                         inputs: [
                             {
                                 name: 'INDEX',
-                                block: expectedInfo.makeNumber(1)
+                                block: expectedInfo.makeNumber(1, 'math_integer')
                             },
                             {
                                 name: 'ITEM',
@@ -271,10 +322,34 @@ describe('RubyToBlocksConverter/Variables', () => {
                     }
                 ];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `list("${varName}")[1] = 2`;
+                expected = [
+                    {
+                        opcode: 'data_replaceitemoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'INDEX',
+                                block: expectedInfo.makeNumber(1, 'math_integer')
+                            },
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('2')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
             test('data_itemoflist', () => {
-                const code = `${varName}[1]`;
+                const code = `list("${varName}")[1]`;
                 const expected = [
                     {
                         opcode: 'data_itemoflist',
@@ -287,7 +362,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                         inputs: [
                             {
                                 name: 'INDEX',
-                                block: expectedInfo.makeNumber(1)
+                                block: expectedInfo.makeNumber(1, 'math_integer')
                             }
                         ]
                     }
@@ -296,8 +371,11 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_itemnumoflist', () => {
-                const code = `${varName}.index("thing")`;
-                const expected = [
+                let code;
+                let expected;
+
+                code = `list("${varName}").index("thing")`;
+                expected = [
                     {
                         opcode: 'data_itemnumoflist',
                         fields: [
@@ -315,10 +393,30 @@ describe('RubyToBlocksConverter/Variables', () => {
                     }
                 ];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `list("${varName}").index(1)`;
+                expected = [
+                    {
+                        opcode: 'data_itemnumoflist',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('1')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
             test('data_lengthoflist', () => {
-                const code = `${varName}.length`;
+                const code = `list("${varName}").length`;
                 const expected = [
                     {
                         opcode: 'data_lengthoflist',
@@ -334,8 +432,11 @@ describe('RubyToBlocksConverter/Variables', () => {
             });
 
             test('data_listcontainsitem', () => {
-                const code = `${varName}.include?("thing")`;
-                const expected = [
+                let code;
+                let expected;
+
+                code = `list("${varName}").include?("thing")`;
+                expected = [
                     {
                         opcode: 'data_listcontainsitem',
                         fields: [
@@ -348,6 +449,26 @@ describe('RubyToBlocksConverter/Variables', () => {
                             {
                                 name: 'ITEM',
                                 block: expectedInfo.makeText('thing')
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `list("${varName}").include?(1)`;
+                expected = [
+                    {
+                        opcode: 'data_listcontainsitem',
+                        fields: [
+                            {
+                                name: 'LIST',
+                                list: varName
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'ITEM',
+                                block: expectedInfo.makeText('1')
                             }
                         ]
                     }

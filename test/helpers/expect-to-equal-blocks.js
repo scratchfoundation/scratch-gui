@@ -11,22 +11,29 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
             expect(field.name).toEqual(expectedField.name);
             if (expectedField.hasOwnProperty('variable') ||
                 expectedField.hasOwnProperty('list')) {
-                const data = expectedField.variable || expectedField.list;
+                const s = expectedField.variable || expectedField.list;
                 let varName;
-                let store;
-                if (data[0] === '$') {
-                    varName = data.slice(1);
-                    store = context.globalVariables;
-                } else if (data[0] === '@') {
-                    varName = data.slice(1);
-                    store = context.instanceVariables;
+                let scope;
+                if (s[0] === '$') {
+                    varName = s.slice(1);
+                    scope = 'global';
+                } else if (s[0] === '@') {
+                    varName = s.slice(1);
+                    scope = 'instance';
                 } else {
-                    varName = data;
-                    store = context.localVariables;
+                    varName = s;
+                    scope = 'local';
                 }
-                expect(store).toHaveProperty(varName);
-                const variable = store[varName];
+                let storeName;
+                if (expectedField.hasOwnProperty('variable')) {
+                    storeName = 'variables';
+                } else {
+                    storeName = 'lists';
+                }
+                expect(context[storeName]).toHaveProperty(varName);
+                const variable = context[storeName][varName];
                 expect(variable.name).toEqual(varName);
+                expect(variable.scope).toEqual(scope);
 
                 let expectedType;
                 if (expectedField.hasOwnProperty('variable')) {
@@ -34,7 +41,6 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
                 } else {
                     expectedType = Variable.LIST_TYPE;
                 }
-                expect(variable.type).toEqual(expectedType);
                 expect(field).toHaveProperty('variableType', expectedType);
             } else {
                 expect(field.id).toEqual(void 0);
@@ -115,9 +121,8 @@ const expectToEqualBlocks = function (converter, expectedBlocksInfo) {
     const context = {
         converter: converter,
         blocks: blocks,
-        localVariables: converter.localVariables,
-        instanceVariables: converter.instanceVariables,
-        globalVariables: converter.globalVariables
+        variables: converter.variables,
+        lists: converter.lists
     };
 
     const scripts = blocks.getScripts();
@@ -174,10 +179,13 @@ const fieldsToExpected = function (context, fields) {
         const field = fields[name];
         if (field.id) {
             const varName = field.value;
-            const variable =
-                  context.globalVariables[varName] ||
-                  context.instanceVariables[varName] ||
-                  context.localVariables[varName];
+            let storeName;
+            if (field.variableType === Variable.SCALAR_TYPE) {
+                storeName = 'variables';
+            } else {
+                storeName = 'lists';
+            }
+            const variable = context[storeName][varName];
             let scope;
             if (variable.scope === 'global') {
                 scope = '$';
@@ -189,7 +197,7 @@ const fieldsToExpected = function (context, fields) {
             if (variable.type === Variable.SCALAR_TYPE) {
                 return {
                     name: 'VARIABLE',
-                    variable: `${scope}${varName}` // TODO: @か$を切り分ける
+                    variable: `${scope}${varName}`
                 };
             }
             return {
@@ -285,9 +293,8 @@ const rubyToExpected = function (converter, target, code) {
     const context = {
         converter: converter,
         blocks: blocks,
-        localVariables: converter.localVariables,
-        instanceVariables: converter.instanceVariables,
-        globalVariables: converter.globalVariables
+        variables: converter.variables,
+        lists: converter.lists
     };
 
     const scripts = blocks.getScripts();

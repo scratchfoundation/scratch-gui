@@ -31,63 +31,68 @@ export default function (Generator) {
         return `hide_variable(${Generator.quote_(variable)})\n`;
     };
 
-    Generator.data_listcontents = function (block) {
+    const getListName = function (block) {
         const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        return `list(${Generator.quote_(list)})`;
+    };
+
+    Generator.data_listcontents = function (block) {
+        const list = getListName(block);
         return [list, Generator.ORDER_COLLECTION];
     };
 
     Generator.data_addtolist = function (block) {
         const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return `${list}.push(${Generator.nosToCode(item)})\n`;
     };
 
     Generator.data_deleteoflist = function (block) {
         const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) - 1 || 0;
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return `${list}.delete_at(${Generator.nosToCode(index)})\n`;
     };
 
     Generator.data_deletealloflist = function (block) {
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return `${list}.clear\n`;
     };
 
     Generator.data_insertatlist = function (block) {
         const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) - 1 || 0;
         const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return `${list}.insert(${index}, ${Generator.nosToCode(item)})\n`;
     };
 
     Generator.data_replaceitemoflist = function (block) {
         const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_INDEX) - 1 || 0;
         const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return `${list}[${index}] = ${Generator.nosToCode(item)}\n`;
     };
 
     Generator.data_itemoflist = function (block) {
         const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_INDEX) - 1 || 0;
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return [`${list}[${index}]`, Generator.ORDER_FUNCTION_CAL];
     };
 
     Generator.data_itemnumoflist = function (block) {
         const item = Generator.valueToCode(block, 'ITEM', Generator.ORDER_NONE) || '0';
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return [`${list}.index(${Generator.nosToCode(item)})`, Generator.ORDER_FUNCTION_CAL];
     };
 
     Generator.data_lengthoflist = function (block) {
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return [`${list}.length`, Generator.ORDER_FUNCTION_CAL];
     };
 
     Generator.data_listcontainsitem = function (block) {
         const order = Generator.ORDER_FUNCTION_CALL;
         const item = Generator.valueToCode(block, 'ITEM', order) || '0';
-        const list = Generator.listName(Generator.getFieldId(block, 'LIST'));
+        const list = getListName(block);
         return [`${list}.include?(${Generator.nosToCode(item)})`, order];
     };
 

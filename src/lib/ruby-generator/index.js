@@ -18,6 +18,7 @@ import ProcedureBlocks from './procedure.js';
 import RubyBlocks from './ruby.js';
 import MusicBlocks from './music.js';
 import PenBlocks from './pen.js';
+import VideoBlocks from './video.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -437,5 +438,6 @@ ProcedureBlocks(RubyGenerator);
 RubyBlocks(RubyGenerator);
 MusicBlocks(RubyGenerator);
 PenBlocks(RubyGenerator);
+VideoBlocks(RubyGenerator);
 
 export default RubyGenerator;

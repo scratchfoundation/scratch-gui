@@ -37,16 +37,12 @@ class RubyToBlocksConverter {
         return this._context.blocks;
     }
 
-    get localVariables () {
-        return this._context.localVariables;
+    get variables () {
+        return this._context.variables;
     }
 
-    get instanceVariables () {
-        return this._context.instanceVariables;
-    }
-
-    get globalVariables () {
-        return this._context.globalVariables;
+    get lists () {
+        return this._context.lists;
     }
 
     reset () {
@@ -55,9 +51,8 @@ class RubyToBlocksConverter {
             blockTypes: {},
             currentNode: null,
             errors: [],
-            localVariables: {},
-            instanceVariables: {},
-            globalVariables: {}
+            variables: {},
+            lists: {}
         };
         if (this.vm && this.vm.runtime && this.vm.runtime.getTargetForStage) {
             this._loadVariables(this.vm.runtime.getTargetForStage());
@@ -114,22 +109,22 @@ class RubyToBlocksConverter {
         if (target.isStage) {
             stage = target;
         } else {
-            Object.keys(this._context.instanceVariables).forEach(name => {
-                const variable = this._context.instanceVariables[name];
-                if (!target.lookupVariableById(variable.id)) {
-                    target.createVariable(variable.id, variable.name, variable.type);
-                }
-            });
             stage = this.vm.runtime.getTargetForStage();
         }
-        if (stage) {
-            Object.keys(this._context.globalVariables).forEach(name => {
-                const variable = this._context.globalVariables[name];
-                if (!stage.lookupVariableById(variable.id)) {
-                    stage.createVariable(variable.id, variable.name, variable.type);
+        ['variables', 'lists'].forEach(storeName => {
+            Object.keys(this._context[storeName]).forEach(name => {
+                const variable = this._context[storeName][name];
+                if (variable.scope === 'global') {
+                    if (!stage.variables.hasOwnProperty(variable.id)) {
+                        stage.createVariable(variable.id, variable.name, variable.type);
+                    }
+                } else if (!target.isStage && variable.scope === 'instance') {
+                    if (!target.variables.hasOwnProperty(variable.id)) {
+                        target.createVariable(variable.id, variable.name, variable.type);
+                    }
                 }
             });
-        }
+        });
 
         Object.keys(target.blocks._blocks).forEach(blockId => {
             target.blocks.deleteBlock(blockId);
@@ -145,15 +140,23 @@ class RubyToBlocksConverter {
         if (!target || !target.variables) {
             return;
         }
-        let store;
+        let scope;
         if (target.isStage) {
-            store = this._context.globalVariables;
+            scope = 'global';
         } else {
-            store = this._context.instanceVariables;
+            scope = 'instance';
         }
         Object.keys(target.variables).forEach(blockId => {
             const variable = target.variables[blockId];
-            store[variable.name] = variable;
+            let storeName;
+            if (variable.type === Variable.SCALAR_TYPE) {
+                storeName = 'variables';
+            } else {
+                storeName = 'lists';
+            }
+            this._context[storeName][variable.name] = Object.assign({}, variable, {
+                scope: scope
+            });
         });
     }
 
@@ -269,62 +272,44 @@ class RubyToBlocksConverter {
         });
     }
 
-    _findOrCreateVariable (name, type) {
+    _findOrCreateVariableOrList (name, type) {
         let scope;
-        let store;
+        let varName;
         if (name[0] === '$') {
-            name = name.slice(1);
+            varName = name.slice(1);
             scope = 'global';
-            store = this._context.globalVariables;
         } else if (name[0] === '@') {
-            name = name.slice(1);
+            varName = name.slice(1);
             scope = 'instance';
-            store = this._context.instanceVariables;
         } else {
+            varName = name;
             scope = 'local';
-            store = this._context.localVariables;
         }
-        if (store.hasOwnProperty(name)) {
-            if (type) {
-                store[name].type = type;
-            }
-            return store[name];
+        let storeName;
+        if (type === Variable.SCALAR_TYPE) {
+            storeName = 'variables';
+        } else {
+            storeName = 'lists';
         }
-
-        const variable = {
-            id: Blockly.utils.genUid(),
-            name: name,
-            scope: scope,
-            type: type ? type : Variable.SCALAR_TYPE
-        };
-        store[variable.name] = variable;
+        let variable = this._context[storeName][varName];
+        if (!variable) {
+            variable = {
+                id: Blockly.utils.genUid(),
+                name: varName,
+                scope: scope,
+                type: type
+            };
+            this._context[storeName][varName] = variable;
+        }
         return variable;
     }
 
-    _changeVariableBlock (block, opcode, blockType, varType) {
-        block.opcode = opcode;
-        this._setBlockType(block, blockType);
+    _findOrCreateVariable (name) {
+        return this._findOrCreateVariableOrList(name, Variable.SCALAR_TYPE);
+    }
 
-        let before;
-        let after;
-        if (varType === Variable.SCALAR_TYPE) {
-            before = 'LIST';
-            after = 'VARIABLE';
-        } else {
-            before = 'VARIABLE';
-            after = 'LIST';
-        }
-        if (block.fields[before]) {
-            block.fields[after] = block.fields[before];
-            block.fields[after].name = after;
-            block.fields[after].variableType = varType;
-            delete block.fields[before];
-
-            const varName = block.fields[after].value;
-            const variable = this.instanceVariables[varName] || this.globalVariables[varName];
-            variable.type = varType;
-        }
-        return block;
+    _findOrCreateList (name) {
+        return this._findOrCreateVariableOrList(name, Variable.LIST_TYPE);
     }
 
     _getSource (node) {
@@ -357,12 +342,18 @@ class RubyToBlocksConverter {
         return null;
     }
 
-    _blockType (block) {
+    _getBlockType (block) {
         return this._context.blockTypes[block.id];
     }
 
     _setBlockType (block, type) {
         this._context.blockTypes[block.id] = type;
+    }
+
+    _changeBlock (block, opcode, blockType) {
+        block.opcode = opcode;
+        this._setBlockType(block, blockType);
+        return block;
     }
 
     _isBlock (block) {
@@ -373,12 +364,19 @@ class RubyToBlocksConverter {
         }
     }
 
+    _isValueBlock (block) {
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        return /^value/.test(this._getBlockType(block));
+    }
+
     _isNumberOrBlock (numberOrBlock) {
-        return _.isNumber(numberOrBlock) || this._isBlock(numberOrBlock);
+        return _.isNumber(numberOrBlock) || this._isValueBlock(numberOrBlock);
     }
 
     _isStringOrBlock (stringOrBlock) {
-        return _.isString(stringOrBlock) || this._isBlock(stringOrBlock);
+        return _.isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
     }
 
     _isVariableBlock (block) {
@@ -418,7 +416,7 @@ class RubyToBlocksConverter {
             if (!block) {
                 return;
             }
-            switch (this._blockType(block)) {
+            switch (this._getBlockType(block)) {
             case 'statement':
                 if (prevBlock) {
                     prevBlock.next = block.id;
@@ -514,7 +512,8 @@ class RubyToBlocksConverter {
                 }
                 break;
             case 'glide':
-                if (args.length === 2 && args[1] instanceof Map && args[1].size === 1 && args[1].get('secs')) {
+                if (args.length === 2 &&
+                    args[1] instanceof Map && args[1].size === 1 && this._isNumberOrBlock(args[1].get('secs'))) {
                     if (_.isString(args[0])) {
                         block = this._createBlock('motion_glideto', 'statement');
                         this._addInput(
@@ -662,7 +661,7 @@ class RubyToBlocksConverter {
                         opcode = 'data_hidevariable';
                         break;
                     }
-                    const variable = this._findOrCreateVariable(args[0], Variable.SCALAR_TYPE);
+                    const variable = this._findOrCreateVariable(args[0]);
                     if (variable.scope !== 'local') {
                         block = this._createBlock(opcode, 'statement', {
                             fields: {
@@ -670,34 +669,42 @@ class RubyToBlocksConverter {
                                     name: 'VARIABLE',
                                     id: variable.id,
                                     value: variable.name,
-                                    variableType: Variable.SCALAR_TYPE
+                                    variableType: variable.type
                                 }
                             }
                         });
                     }
                 }
                 break;
+            case 'list':
             case 'show_list':
             case 'hide_list':
                 if (args.length === 1 && _.isString(args[0])) {
                     let opcode;
+                    let blockType;
                     switch (name) {
+                    case 'list':
+                        opcode = 'data_listcontents';
+                        blockType = 'value';
+                        break;
                     case 'show_list':
                         opcode = 'data_showlist';
+                        blockType = 'statement';
                         break;
                     case 'hide_list':
                         opcode = 'data_hidelist';
+                        blockType = 'statement';
                         break;
                     }
-                    const variable = this._findOrCreateVariable(args[0], Variable.LIST_TYPE);
+                    const variable = this._findOrCreateList(args[0]);
                     if (variable.scope !== 'local') {
-                        block = this._createBlock(opcode, 'statement', {
+                        block = this._createBlock(opcode, blockType, {
                             fields: {
                                 LIST: {
                                     name: 'LIST',
                                     id: variable.id,
                                     value: variable.name,
-                                    variableType: Variable.LIST_TYPE
+                                    variableType: variable.type
                                 }
                             }
                         });
@@ -714,83 +721,85 @@ class RubyToBlocksConverter {
             switch (name) {
             case 'push':
                 if (args.length === 1 &&
-                    this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_addtolist', 'statement', Variable.LIST_TYPE
+                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
+                    block = this._changeBlock(receiver, 'data_addtolist', 'statement');
+                    this._addInput(
+                        block,
+                        'ITEM',
+                        this._createTextBlock(_.isNumber(args[0]) ? args[0].toString() : args[0], block.id)
                     );
-                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;
             case 'delete_at':
                 if (args.length === 1 &&
                     this._isNumberOrBlock(args[0])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_deleteoflist', 'statement', Variable.LIST_TYPE
-                    );
-                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                    block = this._changeBlock(receiver, 'data_deleteoflist', 'statement');
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_integer', args[0], block.id));
                 }
                 break;
             case 'clear':
                 if (args.length === 0) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_deletealloflist', 'statement', Variable.LIST_TYPE
-                    );
+                    block = this._changeBlock(receiver, 'data_deletealloflist', 'statement');
                 }
                 break;
             case 'insert':
                 if (args.length === 2 &&
                     this._isNumberOrBlock(args[0]) &&
-                    this._isStringOrBlock(args[1])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_insertatlist', 'statement', Variable.LIST_TYPE
+                    (this._isStringOrBlock(args[1]) || this._isNumberOrBlock(args[1]))) {
+                    block = this._changeBlock(receiver, 'data_insertatlist', 'statement');
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_integer', args[0], block.id));
+                    this._addInput(
+                        block,
+                        'ITEM',
+                        this._createTextBlock(_.isNumber(args[1]) ? args[1].toString() : args[1], block.id)
                     );
-                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
-                    this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
                 }
                 break;
             case '[]=':
                 if (args.length === 2 &&
                     this._isNumberOrBlock(args[0]) &&
-                    this._isStringOrBlock(args[1])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_replaceitemoflist', 'statement', Variable.LIST_TYPE
+                    (this._isStringOrBlock(args[1]) || this._isNumberOrBlock(args[1]))) {
+                    block = this._changeBlock(receiver, 'data_replaceitemoflist', 'statement');
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_integer', args[0], block.id));
+                    this._addInput(
+                        block,
+                        'ITEM',
+                        this._createTextBlock(_.isNumber(args[1]) ? args[1].toString() : args[1], block.id)
                     );
-                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
-                    this._addInput(block, 'ITEM', this._createTextBlock(args[1], block.id));
                 }
                 break;
             case '[]':
                 if (args.length === 1 &&
                     this._isNumberOrBlock(args[0])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_itemoflist', 'value', Variable.LIST_TYPE
-                    );
-                    this._addInput(block, 'INDEX', this._createNumberBlock('math_number', args[0], block.id));
+                    block = this._changeBlock(receiver, 'data_itemoflist', 'value');
+                    this._addInput(block, 'INDEX', this._createNumberBlock('math_integer', args[0], block.id));
                 }
                 break;
             case 'index':
                 if (args.length === 1 &&
-                    this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_itemnumoflist', 'value', Variable.LIST_TYPE
+                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
+                    block = this._changeBlock(receiver, 'data_itemnumoflist', 'value');
+                    this._addInput(
+                        block,
+                        'ITEM',
+                        this._createTextBlock(_.isNumber(args[0]) ? args[0].toString() : args[0], block.id)
                     );
-                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;
             case 'length':
                 if (args.length === 0) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_lengthoflist', 'value', Variable.LIST_TYPE
-                    );
+                    block = this._changeBlock(receiver, 'data_lengthoflist', 'value');
                 }
                 break;
             case 'include?':
                 if (args.length === 1 &&
-                    this._isStringOrBlock(args[0])) {
-                    block = this._changeVariableBlock(
-                        receiver, 'data_listcontainsitem', 'value', Variable.LIST_TYPE
+                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
+                    block = this._changeBlock(receiver, 'data_listcontainsitem', 'value');
+                    this._addInput(
+                        block,
+                        'ITEM',
+                        this._createTextBlock(_.isNumber(args[0]) ? args[0].toString() : args[0], block.id)
                     );
-                    this._addInput(block, 'ITEM', this._createTextBlock(args[0], block.id));
                 }
                 break;
             }
@@ -1033,7 +1042,7 @@ class RubyToBlocksConverter {
 
         const savedBlockIds = Object.keys(this._context.blocks);
         let cond = this._process(node.children[0]);
-        if (cond !== false && this._blockType(cond) !== 'value_boolean') {
+        if (cond !== false && this._getBlockType(cond) !== 'value_boolean') {
             Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
                 .forEach(blockId => {
                     delete this._context.blocks[blockId];
@@ -1152,22 +1161,22 @@ class RubyToBlocksConverter {
                     break;
                 }
             } else if (_.isString(lh)) {
-                const variable = this._findOrCreateVariable(lh, Variable.SCALAR_TYPE);
-                if (variable.scope !== 'local') {
+                const variable = this._findOrCreateVariable(lh);
+                if (variable.scope !== 'local' && this._isNumberOrBlock(rh)) {
                     block = this._createBlock('data_changevariableby', 'statement', {
                         fields: {
                             VARIABLE: {
                                 name: 'VARIABLE',
                                 id: variable.id,
                                 value: variable.name,
-                                variableType: Variable.SCALAR_TYPE
+                                variableType: variable.type
                             }
                         }
                     });
                     this._addInput(
                         block,
                         'VALUE',
-                        this._createTextBlock(_.isNumber(rh) ? rh.toString() : rh, block.id)
+                        this._createNumberBlock('math_number', rh, block.id)
                     );
                 }
             }
@@ -1252,19 +1261,10 @@ class RubyToBlocksConverter {
 
         const variable = this._findOrCreateVariable(node.children[0]);
         if (variable.scope !== 'local') {
-            let opcode;
-            let name;
-            if (variable.type === Variable.SCALAR_TYPE) {
-                opcode = 'data_variable';
-                name = 'VARIABLE';
-            } else {
-                opcode = 'data_listcontents';
-                name = 'LIST';
-            }
-            return this._createBlock(opcode, 'value', {
+            return this._createBlock('data_variable', 'value', {
                 fields: {
-                    [name]: {
-                        name: name,
+                    VARIABLE: {
+                        name: 'VARIABLE',
                         id: variable.id,
                         value: variable.name,
                         variableType: variable.type
@@ -1291,28 +1291,61 @@ class RubyToBlocksConverter {
             return node.children[0].toString();
         }
 
-        const variable = this._findOrCreateVariable(node.children[0], Variable.SCALAR_TYPE);
+        this._saveContext();
+
+        const variable = this._findOrCreateVariable(node.children[0]);
         if (variable.scope !== 'local') {
             const rh = this._process(node.children[1]);
-            const block = this._createBlock('data_setvariableto', 'statement', {
-                fields: {
-                    VARIABLE: {
-                        name: 'VARIABLE',
-                        id: variable.id,
-                        value: variable.name,
-                        variableType: Variable.SCALAR_TYPE
+            if (this._isNumberOrBlock(rh) || this._isStringOrBlock(rh)) {
+                const block = this._createBlock('data_setvariableto', 'statement', {
+                    fields: {
+                        VARIABLE: {
+                            name: 'VARIABLE',
+                            id: variable.id,
+                            value: variable.name,
+                            variableType: variable.type
+                        }
                     }
-                }
-            });
-            this._addInput(
-                block,
-                'VALUE',
-                this._createTextBlock(_.isNumber(rh) ? rh.toString() : rh, block.id)
-            );
-            return block;
+                });
+                this._addInput(
+                    block,
+                    'VALUE',
+                    this._createTextBlock(_.isNumber(rh) ? rh.toString() : rh, block.id)
+                );
+                return block;
+            }
         }
 
+        this._restoreContext();
+
         return this._createRubyStatementBlock(this._getSource(node));
+    }
+
+    _saveContext () {
+        this._context.saved = {
+            blockIds: Object.keys(this._context.blocks),
+            variableNames: Object.keys(this._context.variables),
+            listNames: Object.keys(this._context.lists)
+        };
+    }
+
+    _restoreContext () {
+        if (this._context.saved) {
+            const saved = this._context.saved;
+            Object.keys(this._context.blocks).filter(i => saved.blockIds.indexOf(i) < 0)
+                .forEach(id => {
+                    delete this._context.blocks[id];
+                });
+            Object.keys(this._context.variables).filter(i => saved.variableNames.indexOf(i) < 0)
+                .forEach(name => {
+                    delete this._context.variables[name];
+                });
+            Object.keys(this._context.lists).filter(i => saved.listNames.indexOf(i) < 0)
+                .forEach(name => {
+                    delete this._context.lists[name];
+                });
+            delete this._context.saved;
+        }
     }
 
     _onLvasgn (node) {

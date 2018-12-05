@@ -102,6 +102,36 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.INFO
+    },
+    {
+        alertId: 'cloudInfo',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['cloudInfo'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Please note, cloud variables only support numbers, not letters or symbols. {learnMoreLink}" // eslint-disable-line max-len
+                description="Info about cloud variable limitations"
+                id="gui.alerts.cloudInfo"
+                values={{
+                    learnMoreLink: (
+                        <a
+                            href="https://scratch.mit.edu/info/faq/#clouddata"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Learn more."
+                                description="Link text to cloud var faq"
+                                id="gui.alerts.cloudInfoLearnMore"
+                            />
+                        </a>
+                    )
+                }}
+            />
+        ),
+        closeButton: true,
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 15
     }
 ];
 

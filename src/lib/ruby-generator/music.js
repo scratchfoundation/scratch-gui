@@ -39,7 +39,7 @@ export default function (Generator) {
 
     Generator.music_setInstrument = function (block) {
         const instrument = Generator.valueToCode(block, 'INSTRUMENT', Generator.ORDER_NONE) || null;
-        return `set_instrument(${instrument})\n`;
+        return `self.instrument = ${instrument}\n`;
     };
 
     Generator.music_menu_INSTRUMENT = function (block) {

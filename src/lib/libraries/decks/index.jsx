@@ -1182,18 +1182,16 @@ export default {
         }],
         urlId: 'add-effects'
     },
-    'wedo2': {
-        img: addEffectsThumb, // placeholder
+    'wedo2-getting-started': {
         steps: [{
-            video: 'add-effects'
+            video: 'dsiz0qumyl'
         }],
-        urlId: 'wedo2',
+        urlId: 'wedo',
         hidden: true
     },
-    'ev3': {
-        img: addEffectsThumb, // placeholder
+    'ev3-getting-started': {
         steps: [{
-            video: 'add-effects'
+            video: 'qgu78c5y7d'
         }],
         urlId: 'ev3',
         hidden: true

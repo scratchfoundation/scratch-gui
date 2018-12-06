@@ -179,7 +179,7 @@ LibraryItem.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconURL: PropTypes.string.isRequired,
+    iconURL: PropTypes.string,
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,

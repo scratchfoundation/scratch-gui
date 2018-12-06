@@ -258,6 +258,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreatedProject,
                 onCreateProject,
                 onProjectError,
+                onRemixing,
                 onShowAlert,
                 onShowCreateSuccessAlert,
                 onShowCreatingAlert,

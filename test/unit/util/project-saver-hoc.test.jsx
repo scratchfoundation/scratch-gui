@@ -178,7 +178,7 @@ describe('projectSaverHOC', () => {
     });
 
     test('if we enter remixing state, vm project should be requested, and alert should show', () => {
-        const mockedShowCreatingAlert = jest.fn();
+        const mockedShowCreatingRemixAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mockedStoreProject = jest.fn(() => Promise.resolve());
@@ -197,7 +197,7 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
-                onShowCreatingAlert={mockedShowCreatingAlert}
+                onShowCreatingRemixAlert={mockedShowCreatingRemixAlert}
             />
         );
         mounted.setProps({
@@ -205,11 +205,11 @@ describe('projectSaverHOC', () => {
             loadingState: LoadingState.REMIXING
         });
         expect(mockedStoreProject).toHaveBeenCalled();
-        expect(mockedShowCreatingAlert).toHaveBeenCalled();
+        expect(mockedShowCreatingRemixAlert).toHaveBeenCalled();
     });
 
     test('if we enter creating copy state, vm project should be requested, and alert should show', () => {
-        const mockedShowCreatingAlert = jest.fn();
+        const mockedShowCreatingCopyAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mockedStoreProject = jest.fn(() => Promise.resolve());
@@ -228,7 +228,7 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
-                onShowCreatingAlert={mockedShowCreatingAlert}
+                onShowCreatingCopyAlert={mockedShowCreatingCopyAlert}
             />
         );
         mounted.setProps({
@@ -236,7 +236,7 @@ describe('projectSaverHOC', () => {
             loadingState: LoadingState.CREATING_COPY
         });
         expect(mockedStoreProject).toHaveBeenCalled();
-        expect(mockedShowCreatingAlert).toHaveBeenCalled();
+        expect(mockedShowCreatingCopyAlert).toHaveBeenCalled();
     });
 
     test('if we enter updating/saving state, vm project should be requested', () => {

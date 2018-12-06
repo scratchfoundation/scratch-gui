@@ -29,9 +29,11 @@ import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
 import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
+import QueryParserHOC from '../lib/query-parser-hoc.jsx';
 import storage from '../lib/storage';
 import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
 import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
+import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 
@@ -75,7 +77,6 @@ class GUI extends React.Component {
             assetHost,
             cloudHost,
             error,
-            hideIntro,
             isError,
             isShowingProject,
             onStorageInit,
@@ -108,7 +109,6 @@ GUI.propTypes = {
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
@@ -132,7 +132,7 @@ GUI.defaultProps = {
     onUpdateProjectId: () => {}
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
@@ -150,7 +150,7 @@ const mapStateToProps = (state, ownProps) => {
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
-        previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
+        previewInfoVisible: state.scratchGui.modals.previewInfo,
         projectId: state.scratchGui.projectState.projectId,
         targetIsStage: (
             state.scratchGui.targets.stage &&
@@ -184,10 +184,12 @@ const WrappedGui = compose(
     LocalizationHOC,
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
+    QueryParserHOC,
     ProjectFetcherHOC,
     ProjectSaverHOC,
     vmListenerHOC,
-    vmManagerHOC
+    vmManagerHOC,
+    cloudManagerHOC
 )(ConnectedGUI);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;

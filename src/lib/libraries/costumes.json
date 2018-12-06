@@ -1837,7 +1837,7 @@
     },
     {
         "name": "Cat-a",
-        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
+        "md5": "b7853f557e4426412e64bb3da6531a99.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1849,14 +1849,14 @@
             "scratch cat"
         ],
         "info": [
-            47,
-            55,
+            48,
+            50,
             1
         ]
     },
     {
         "name": "Cat-b",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1868,8 +1868,8 @@
             "scratch cat"
         ],
         "info": [
-            47,
-            55,
+            46,
+            53,
             1
         ]
     },

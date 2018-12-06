@@ -59,6 +59,12 @@ class Stage extends React.Component {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);
             this.props.vm.attachRenderer(this.renderer);
+
+            // Calling draw a single time before any project is loaded just makes
+            // the canvas white instead of solid black–needed because it is not
+            // possible to use CSS to style the canvas to have a different
+            // default color
+            this.props.vm.renderer.draw();
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
@@ -76,7 +82,8 @@ class Stage extends React.Component {
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
-            this.props.micIndicator !== nextProps.micIndicator;
+            this.props.micIndicator !== nextProps.micIndicator ||
+            this.props.isStarted !== nextProps.isStarted;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -404,6 +411,7 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     isFullScreen: state.scratchGui.mode.isFullScreen,
+    isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)

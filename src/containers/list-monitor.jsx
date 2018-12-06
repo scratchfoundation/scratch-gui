@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
 import {getVariableValue, setVariableValue} from '../lib/variable-utils';
 import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
+import {Map} from 'immutable';
 
 class ListMonitor extends React.Component {
     constructor (props) {
@@ -24,7 +25,6 @@ class ListMonitor extends React.Component {
         this.state = {
             activeIndex: null,
             activeValue: null,
-            // TODO These will need to be sent back to the VM for saving
             width: props.width || 100,
             height: props.height || 200
         };
@@ -139,9 +139,13 @@ class ListMonitor extends React.Component {
 
         const onMouseUp = ev => {
             onMouseMove(ev); // Make sure width/height are up-to-date
-            // TODO send these new sizes to the VM for saving
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('mouseup', onMouseUp);
+            this.props.vm.runtime.requestUpdateMonitor(Map({
+                id: this.props.id,
+                height: this.state.height,
+                width: this.state.width
+            }));
         };
 
         window.addEventListener('mousemove', onMouseMove);

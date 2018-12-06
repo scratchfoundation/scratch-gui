@@ -7,5 +7,6 @@ export default [
     {tag: 'music', intlLabel: messages.music},
     {tag: 'sports', intlLabel: messages.sports},
     {tag: 'food', intlLabel: messages.food},
-    {tag: 'fashion', intlLabel: messages.fashion}
+    {tag: 'fashion', intlLabel: messages.fashion},
+    {tag: 'letters', intlLabel: messages.letters}
 ];

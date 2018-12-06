@@ -22,6 +22,7 @@ const TitledHOC = function (WrappedComponent) {
         render () {
             return (
                 <WrappedComponent
+                    canEditTitle
                     projectTitle={this.state.projectTitle}
                     onUpdateProjectTitle={this.handleUpdateProjectTitle}
                     {...this.props}

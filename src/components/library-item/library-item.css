@@ -30,6 +30,10 @@
     border-color: $motion-primary;
 }
 
+.hidden {
+    display: none;
+}
+
 .disabled {
     opacity: .5;
     cursor: auto;

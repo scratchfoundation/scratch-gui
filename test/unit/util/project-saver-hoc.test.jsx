@@ -399,4 +399,44 @@ describe('projectSaverHOC', () => {
         jest.runAllTimers();
         expect(mockedAutoUpdate).not.toHaveBeenCalled();
     });
+
+    test('when starting to remix, onRemixing should be called with param true', () => {
+        const mockedOnRemixing = jest.fn();
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
+        const mounted = mount(
+            <WrappedComponent
+                isRemixing={false}
+                store={store}
+                vm={vm}
+                onRemixing={mockedOnRemixing}
+            />
+        );
+        mounted.setProps({
+            isRemixing: true
+        });
+        expect(mockedOnRemixing).toHaveBeenCalledWith(true);
+    });
+
+    test('when starting to remix, onRemixing should be called with param true', () => {
+        const mockedOnRemixing = jest.fn();
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
+        const mounted = mount(
+            <WrappedComponent
+                isRemixing
+                store={store}
+                vm={vm}
+                onRemixing={mockedOnRemixing}
+            />
+        );
+        mounted.setProps({
+            isRemixing: false
+        });
+        expect(mockedOnRemixing).toHaveBeenCalledWith(false);
+    });
 });

@@ -61,7 +61,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.createCopyToStorage();
             }
             if (this.props.isRemixing && !prevProps.isRemixing) {
+                this.props.onRemixing(true);
                 this.createRemixToStorage();
+            } else if (!this.props.isRemixing && prevProps.isRemixing) {
+                this.props.onRemixing(false);
             }
 
             // see if we should "create" the current project on the server
@@ -255,6 +258,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreatedProject,
                 onCreateProject,
                 onProjectError,
+                onRemixing,
                 onShowAlert,
                 onShowCreateSuccessAlert,
                 onShowCreatingAlert,
@@ -294,6 +298,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onRemixing: PropTypes.func,
         onShowAlert: PropTypes.func,
         onShowCreateSuccessAlert: PropTypes.func,
         onShowCreatingAlert: PropTypes.func,
@@ -307,7 +312,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
     ProjectSaverComponent.defaultProps = {
-        autosaveIntervalSecs: 120
+        autosaveIntervalSecs: 120,
+        onRemixing: () => {}
     };
     const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;

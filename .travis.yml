@@ -35,6 +35,7 @@ deploy:
     - master
     - develop
     - smoke
+    condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
@@ -44,6 +45,7 @@ deploy:
     branch:
     - master
     - $PREVIEW_BRANCH
+    condition: $TRAVIS_EVENT_TYPE != cron
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $AWS_BUCKET_NAME
@@ -53,11 +55,19 @@ deploy:
 - provider: script
   on:
     all_branches: true
+    condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script
   on:
     all_branches: true
+    condition: $TRAVIS_EVENT_TYPE != cron
   script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+- provider: script
+  on:
+    branch: develop
+    condition: $TRAVIS_EVENT_TYPE == cron
+  skip_cleanup: true
+  script: npm run i18n:src && npm run i18n:push
 after_deploy:
 - 'curl -X POST -H "Fastly-Key: $FASTLY_TOKEN" -H "Accept: application/json" https://api.fastly.com/service/$FASTLY_SERVICE_ID/purge_all'

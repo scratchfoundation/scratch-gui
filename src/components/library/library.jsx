@@ -182,6 +182,7 @@ class LibraryComponent extends React.Component {
                                 disabled={dataItem.disabled}
                                 extensionId={dataItem.extensionId}
                                 featured={dataItem.featured}
+                                hidden={dataItem.hidden}
                                 iconURL={scratchURL}
                                 id={index}
                                 insetIconURL={dataItem.insetIconURL}
@@ -212,7 +213,7 @@ LibraryComponent.propTypes = {
             name: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.node
-            ]).isRequired,
+            ]),
             rawURL: PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */

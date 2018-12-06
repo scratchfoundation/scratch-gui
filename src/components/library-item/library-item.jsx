@@ -55,7 +55,8 @@ class LibraryItem extends React.PureComponent {
                     {
                         [styles.disabled]: this.props.disabled
                     },
-                    this.props.extensionId ? styles.libraryItemExtension : null
+                    this.props.extensionId ? styles.libraryItemExtension : null,
+                    this.props.hidden ? styles.hidden : null
                 )}
                 onClick={this.handleClick}
             >
@@ -139,7 +140,10 @@ class LibraryItem extends React.PureComponent {
             </div>
         ) : (
             <Box
-                className={styles.libraryItem}
+                className={classNames(
+                    styles.libraryItem,
+                    this.props.hidden ? styles.hidden : null
+                )}
                 role="button"
                 tabIndex="0"
                 onBlur={this.handleBlur}
@@ -174,6 +178,7 @@ LibraryItem.propTypes = {
     disabled: PropTypes.bool,
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
+    hidden: PropTypes.bool,
     iconURL: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
@@ -181,7 +186,7 @@ LibraryItem.propTypes = {
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
-    ]).isRequired,
+    ]),
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func.isRequired,

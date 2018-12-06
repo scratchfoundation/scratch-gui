@@ -1181,5 +1181,21 @@ export default {
             ]
         }],
         urlId: 'add-effects'
+    },
+    'wedo2': {
+        img: addEffectsThumb, // placeholder
+        steps: [{
+            video: 'add-effects'
+        }],
+        urlId: 'wedo2',
+        hidden: true
+    },
+    'ev3': {
+        img: addEffectsThumb, // placeholder
+        steps: [{
+            video: 'add-effects'
+        }],
+        urlId: 'ev3',
+        hidden: true
     }
 };

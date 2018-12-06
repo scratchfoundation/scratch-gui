@@ -2465,23 +2465,23 @@
                 {
                     "costumeName": "cat-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
+                    "baseLayerMD5": "b7853f557e4426412e64bb3da6531a99.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 47,
-                    "rotationCenterY": 55
+                    "rotationCenterX": 48,
+                    "rotationCenterY": 50
                 },
                 {
                     "costumeName": "cat-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
+                    "baseLayerMD5": "e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 47,
-                    "rotationCenterY": 55
+                    "rotationCenterX": 46,
+                    "rotationCenterY": 53
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 0,
-            "scratchY": 0,
+            "scratchX": 24,
+            "scratchY": 16,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

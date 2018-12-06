@@ -92,6 +92,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 loadingState,
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
+                onProjectLoaded,
                 projectHost,
                 projectId,
                 reduxProjectId,

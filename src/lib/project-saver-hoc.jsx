@@ -117,7 +117,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         scheduleAutoSave () {
             if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
                 const timeoutId = setTimeout(this.tryToAutoSave,
-                    this.props.autosaveIntervalSecs * 1000);
+                    this.props.autoSaveIntervalSecs * 1000);
                 this.props.setAutoSaveTimeoutId(timeoutId);
             }
         }
@@ -259,7 +259,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                autosaveIntervalSecs,
+                autoSaveTimeoutId,
+                autoSaveIntervalSecs,
                 isCreatingCopy,
                 isCreatingNew,
                 projectChanged,
@@ -276,6 +277,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreateProject,
                 onProjectError,
                 onRemixing,
+                onSetProjectUnchanged,
                 onShowAlert,
                 onShowCopySuccessAlert,
                 onShowRemixSuccessAlert,
@@ -335,7 +337,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
     ProjectSaverComponent.defaultProps = {
-        autosaveIntervalSecs: 120,
+        autoSaveIntervalSecs: 120,
         onRemixing: () => {}
     };
     const mapStateToProps = (state, ownProps) => {

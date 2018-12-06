@@ -39,6 +39,7 @@ export default appTarget => {
             showComingSoon
             showPreviewInfo
             backpackHost={backpackHost}
+            canSave={false}
         />,
         appTarget);
 };

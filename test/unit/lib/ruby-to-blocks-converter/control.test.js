@@ -182,6 +182,105 @@ describe('RubyToBlocksConverter/Control', () => {
                 expect(res).toBeTruthy();
             });
         });
+
+        describe('repeat', () => {
+            test('number', () => {
+                code = 'repeat(10) { move(10) }';
+                expected = [
+                    {
+                        opcode: 'control_repeat',
+                        inputs: [
+                            {
+                                name: 'TIMES',
+                                block: expectedInfo.makeNumber(10, 'math_whole_number')
+                            }
+                        ],
+                        branches: [
+                            rubyToExpected(converter, target, 'move(10)')[0]
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = 'repeat(10) { move(10); bounce_if_on_edge }';
+                expected = [
+                    {
+                        opcode: 'control_repeat',
+                        inputs: [
+                            {
+                                name: 'TIMES',
+                                block: expectedInfo.makeNumber(10, 'math_whole_number')
+                            }
+                        ],
+                        branches: [
+                            rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('value block', () => {
+                code = 'repeat(x) { move(10) }';
+                expected = [
+                    {
+                        opcode: 'control_repeat',
+                        inputs: [
+                            {
+                                name: 'TIMES',
+                                block: rubyToExpected(converter, target, 'x')[0],
+                                shadow: expectedInfo.makeNumber(10, 'math_whole_number')
+                            }
+                        ],
+                        branches: [
+                            rubyToExpected(converter, target, 'move(10)')[0]
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('boolean block', () => {
+                code = 'repeat(touching?("_edge_")) { move(10) }';
+                expected = [
+                    {
+                        opcode: 'control_repeat',
+                        inputs: [
+                            {
+                                name: 'TIMES',
+                                block: rubyToExpected(converter, target, 'touching?("_edge_")')[0],
+                                shadow: expectedInfo.makeNumber(10, 'math_whole_number')
+                            }
+                        ],
+                        branches: [
+                            rubyToExpected(converter, target, 'move(10)')[0]
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('invalid', () => {
+                [
+                    'repeat(10)',
+                    'repeat(10, 1)'
+                ].forEach(c => {
+                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                });
+
+                [
+                    'repeat(10) { |i| }',
+                    'repeat("10") { }'
+                ].forEach(c => {
+                    const res = converter.targetCodeToBlocks(target, c);
+                    expect(converter.errors).toHaveLength(0);
+                    const scriptIds = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel);
+                    expect(scriptIds).toHaveLength(1);
+                    expect(converter.blocks[scriptIds[0]]).toHaveProperty('opcode', 'ruby_statement_with_block');
+                    expect(res).toBeTruthy();
+                });
+            });
+        });
     });
 
     test('control_forever', () => {

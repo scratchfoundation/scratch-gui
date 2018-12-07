@@ -1,5 +1,14 @@
 /* global Opal */
 
+/* eslint-disable no-invalid-this */
+const createControlRepeatBlock = function (times, body) {
+    const block = this._createBlock('control_repeat', 'statement');
+    this._addNumberInput(block, 'TIMES', 'math_whole_number', times, 10);
+    this._addSubstack(block, body);
+    return block;
+};
+/* eslint-enable no-invalid-this */
+
 /**
  * Control converter
  */
@@ -15,6 +24,12 @@ const ControlConverter = {
                     this._addNumberInput(block, 'DURATION', 'math_positive_number', args[0], 1);
                 }
                 break;
+            case 'repeat':
+                if (args.length === 1 && this._isNumberOrBlock(args[0]) &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0) {
+                    block = createControlRepeatBlock.call(this, args[0], rubyBlock);
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {
@@ -24,9 +39,7 @@ const ControlConverter = {
                     rubyBlock && rubyBlock.length >= 1) {
                     const waitBlock = this._popWaitBlock(rubyBlock);
                     if (waitBlock) {
-                        block = this._createBlock('control_repeat', 'statement');
-                        this._addNumberInput(block, 'TIMES', 'math_whole_number', receiver, 10);
-                        this._addSubstack(block, rubyBlock);
+                        block = createControlRepeatBlock.call(this, receiver, rubyBlock);
                     }
                 }
                 break;

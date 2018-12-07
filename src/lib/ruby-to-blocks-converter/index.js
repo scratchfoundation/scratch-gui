@@ -581,10 +581,14 @@ class RubyToBlocksConverter {
         let prevBlock = null;
         const blocks = [];
         let terminated = false;
+        let firstBlock;
         node.children.forEach(childNode => {
             const block = this._process(childNode);
             if (!block) {
                 return;
+            }
+            if (!firstBlock) {
+                firstBlock = block;
             }
             switch (this._getBlockType(block)) {
             case 'statement':
@@ -616,6 +620,12 @@ class RubyToBlocksConverter {
                 break;
             }
         });
+        if (blocks.length === 0 && firstBlock) {
+            if (/^value/.test(this._getBlockType(firstBlock))) {
+                firstBlock.topLevel = false;
+            }
+            blocks.push(firstBlock);
+        }
         return blocks;
     }
 
@@ -628,7 +638,10 @@ class RubyToBlocksConverter {
     _onSend (node, rubyBlockArgsNode, rubyBlockNode) {
         const saved = this._saveContext();
 
-        const receiver = this._process(node.children[0]);
+        let receiver = this._process(node.children[0]);
+        if (_.isArray(receiver) && receiver.length === 1) {
+            receiver = receiver[0];
+        }
         const name = node.children[1].toString();
         const args = node.children.slice(2).map(childNode => this._process(childNode));
 

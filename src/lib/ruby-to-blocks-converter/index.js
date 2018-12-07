@@ -407,7 +407,14 @@ class RubyToBlocksConverter {
             );
         }
         procedure = {
-            id: Blockly.utils.genUid()
+            id: Blockly.utils.genUid(),
+            name: name,
+            procCode: [name],
+            argumentNames: [],
+            argumentDefaults: [],
+            argumentIds: [],
+            argumentVariables: [],
+            argumentBlocks: []
         };
         this._context.procedures[name] = procedure;
         return procedure;
@@ -859,12 +866,16 @@ class RubyToBlocksConverter {
                         args.forEach((arg, i) => {
                             const argumentId = procedure.argumentIds[i];
                             if (this._isFalseOrBooleanBlock(arg)) {
-                                if (arg !== false) {
-                                    this._addInput(block, argumentId, arg, null);
+                                if (procedure.argumentVariables[i].isBoolean ||
+                                    this._changeToBooleanArgument(procedure.argumentNames[i])) {
+                                    if (arg !== false) {
+                                        this._addInput(block, argumentId, arg, null);
+                                    }
+                                    return;
                                 }
-                                this._changeToBooleanArgument(procedure.argumentNames[i]);
-                                return;
-                            } else if (this._isNumberOrBlock(arg) || this._isStringOrBlock(arg)) {
+                            }
+                            if (!procedure.argumentVariables[i].isBoolean &&
+                                (this._isNumberOrBlock(arg) || this._isStringOrBlock(arg))) {
                                 this._addTextInput(block, argumentId, _.isNumber(arg) ? arg.toString() : arg, '');
                                 return;
                             }
@@ -1463,20 +1474,16 @@ class RubyToBlocksConverter {
                 topLevel: true
             });
             const procedure = this._createProcedure(procedureName);
-            procedure.procCode = [procedureName];
 
             const customBlock = this._createBlock('procedures_prototype', 'statement', {
                 shadow: true
             });
             this._addInput(block, 'custom_block', customBlock);
 
-            procedure.argumentNames = this._process(node.children[2]);
-            procedure.argumentDefaults = [];
-            procedure.argumentIds = [];
-            procedure.argumentVariables = [];
-            procedure.argumentBlocks = [];
             this._context.localVariables = {};
-            procedure.argumentNames.forEach(n => {
+            this._process(node.children[2]).forEach(n => {
+                n = n.toString();
+                procedure.argumentNames.push(n);
                 procedure.argumentVariables.push(this._findOrCreateVariable(n));
                 procedure.procCode.push('%s');
                 procedure.argumentDefaults.push('');

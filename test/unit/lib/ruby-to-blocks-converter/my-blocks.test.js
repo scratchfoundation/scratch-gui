@@ -14,6 +14,32 @@ describe('RubyToBlocksConverter/My Blocks', () => {
         target = null;
     });
 
+    test('procedures_definition,procedures_prototype no arguments', () => {
+        const code = `
+            def self.made_block
+            end
+        `;
+        const expected = [
+            {
+                opcode: 'procedures_definition',
+                inputs: [
+                    {
+                        name: 'custom_block',
+                        block: {
+                            opcode: 'procedures_prototype',
+                            mutation: {
+                                proccode: 'made_block',
+                                arguments: []
+                            },
+                            shadow: true
+                        }
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+    });
+
     test('procedures_definition,procedures_prototype', () => {
         const code = `
             def self.made_block(arg1, arg2)
@@ -577,17 +603,33 @@ describe('RubyToBlocksConverter/My Blocks', () => {
         convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
-    test.only('error if argument type miss match', () => {
-        const code = `
-            def self.made_block(arg1)
-              if arg1
-              end
-            end
+    describe('error if argument type miss match', () => {
+        test('defined string_number, call boolean', () => {
+            const code = `
+                def self.made_block(arg1, arg2)
+                  if arg2
+                  end
+                end
 
-            made_block(12)
-        `;
-        const res = converter.targetCodeToBlocks(target, code);
-        expect(converter.errors).toHaveLength(1);
-        expect(res).toBeFalsy();
+                made_block(12, 34)
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/invalid type of My Block "made_block" argument #2/);
+            expect(res).toBeFalsy();
+        });
+
+        test('defined boolean, call string_number', () => {
+            const code = `
+                def self.made_block(arg1, arg2)
+                end
+
+                made_block(false, 1)
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/invalid type of My Block "made_block" argument #1/);
+            expect(res).toBeFalsy();
+        });
     });
 });

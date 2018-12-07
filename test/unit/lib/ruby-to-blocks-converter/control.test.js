@@ -83,6 +83,107 @@ describe('RubyToBlocksConverter/Control', () => {
         });
     });
 
+    describe('control_repeat', () => {
+        test('number', () => {
+            code = '10.times { move(10); wait }';
+            expected = [
+                {
+                    opcode: 'control_repeat',
+                    inputs: [
+                        {
+                            name: 'TIMES',
+                            block: expectedInfo.makeNumber(10, 'math_whole_number')
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = '10.times { move(10); bounce_if_on_edge; wait }';
+            expected = [
+                {
+                    opcode: 'control_repeat',
+                    inputs: [
+                        {
+                            name: 'TIMES',
+                            block: expectedInfo.makeNumber(10, 'math_whole_number')
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value block', () => {
+            code = 'x.times { move(10); wait }';
+            expected = [
+                {
+                    opcode: 'control_repeat',
+                    inputs: [
+                        {
+                            name: 'TIMES',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(10, 'math_whole_number')
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('boolean block', () => {
+            code = '(touching?("_edge_")).times { move(10); wait }';
+            expected = [
+                {
+                    opcode: 'control_repeat',
+                    inputs: [
+                        {
+                            name: 'TIMES',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0],
+                            shadow: expectedInfo.makeNumber(10, 'math_whole_number')
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                '10.times',
+                '10.times(1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+
+            [
+                '10.times {}',
+                '10.times { wait; move(10) }',
+                '10.times { |i| wait }',
+                '"10".times { wait }'
+            ].forEach(c => {
+                const res = converter.targetCodeToBlocks(target, c);
+                expect(converter.errors).toHaveLength(0);
+                const scriptIds = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel);
+                expect(scriptIds).toHaveLength(1);
+                expect(converter.blocks[scriptIds[0]]).toHaveProperty('opcode', 'ruby_statement_with_block');
+                expect(res).toBeTruthy();
+            });
+        });
+    });
+
     test('control_forever', () => {
         code = 'loop { bounce_if_on_edge; wait }';
         expected = [

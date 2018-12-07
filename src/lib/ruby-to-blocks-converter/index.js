@@ -529,7 +529,13 @@ class RubyToBlocksConverter {
     }
 
     _isFalseOrBooleanBlock (block) {
-        if (block === false || this._getBlockType(block) === 'value_boolean') {
+        if (block === false) {
+            return true;
+        }
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        if (this._getBlockType(block) === 'value_boolean') {
             return true;
         }
         if (block.opcode === 'argument_reporter_string_number') {

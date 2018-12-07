@@ -10,7 +10,7 @@ export default function (Generator) {
     };
 
     Generator.control_repeat = function (block) {
-        const times = Generator.valueToCode(block, 'TIMES', Generator.ORDER_NONE) || 0;
+        const times = Generator.valueToCode(block, 'TIMES', Generator.ORDER_ATOMIC) || 0;
         const branch = Generator.statementToCode(block, 'SUBSTACK') || '';
         return `${times}.times do\n${branch}${Generator.INDENT}wait\nend\n`;
     };

@@ -47,13 +47,17 @@ class RubyToBlocksConverter {
 
     reset () {
         this._context = {
-            blocks: {},
-            blockTypes: {},
             currentNode: null,
             errors: [],
+            argumentBlocks: {},
+            procedureCallBlocks: {},
+
+            blocks: {},
+            blockTypes: {},
             localVariables: {},
             variables: {},
-            lists: {}
+            lists: {},
+            procedures: {}
         };
         if (this.vm && this.vm.runtime && this.vm.runtime.getTargetForStage) {
             this._loadVariables(this.vm.runtime.getTargetForStage());
@@ -138,12 +142,21 @@ class RubyToBlocksConverter {
     }
 
     _saveContext () {
-        return {
-            blocks: Object.assign({}, this._context.blocks),
-            localVariables: Object.assign({}, this._context.localVariables),
-            variables: Object.assign({}, this._context.variables),
-            lists: Object.assign({}, this._context.lists)
-        };
+        const includes = [
+            'blocks',
+            'blockTypes',
+            'localVariables',
+            'variables',
+            'lists',
+            'procedures'
+        ];
+
+        const saved = {};
+        Object.keys(this._context).filter(k => includes.indexOf(k) >= 0)
+            .forEach(k => {
+                saved[k] = Object.assign({}, this._context[k]);
+            });
+        return saved;
     }
 
     // could not restore attributes.
@@ -379,6 +392,25 @@ class RubyToBlocksConverter {
         return this._findOrCreateVariableOrList(name, Variable.LIST_TYPE);
     }
 
+    _findProcedure (name) {
+        name = name.toString();
+        return this._context.procedures[name];
+    }
+
+    _createProcedure (name) {
+        name = name.toString();
+        let procedure = this._context.procedures[name];
+        if (procedure) {
+            throw new RubyToBlocksConverterError(
+                this._context.currentNode,
+                `already defined My Block "${name}".`
+            );
+        }
+        procedure = {};
+        this._context.procedures[name] = procedure;
+        return procedure;
+    }
+
     _getSource (node) {
         const expression = node.$loc().$expression();
         if (expression === Opal.nil) {
@@ -458,14 +490,13 @@ class RubyToBlocksConverter {
                 this._setBlockType(block, 'value_boolean');
                 variable.isBoolean = true;
 
-                Object.keys(this._context.blocks)
-                    .filter(id => this._context.blocks[id].opcode === 'argument_reporter_string_number')
-                    .forEach(id => {
+                if (this._context.argumentBlocks.hasOwnProperty(variable.id)) {
+                    this._context.argumentBlocks[variable.id].forEach(id => {
                         const b = this._context.blocks[id];
-                        if (b.fields.VALUE.variableId === variable.id) {
-                            b.opcode = 'argument_reporter_boolean';
-                        }
+                        b.opcode = 'argument_reporter_boolean';
+                        this._setBlockType(b, 'value_boolean');
                     });
+                }
 
                 return true;
             }
@@ -793,6 +824,42 @@ class RubyToBlocksConverter {
             case 'wait':
                 if (args.length === 0) {
                     block = this._createRubyStatementBlock('wait');
+                }
+                break;
+            default:
+                if (this._findProcedure(name)) {
+                    const procedure = this._findProcedure(name);
+                    if (procedure.argTypes.length === args.length) {
+                        block = this._createBlock('procedures_call', 'statement', {
+                            mutation: {
+                                tagName: 'mutation',
+                                children: [],
+                                proccode: procedure.procCode,
+                                warp: 'false'
+                            }
+                        });
+
+                        procedure.argTypes.forEach((argType, i) => {
+                            const arg = args[i];
+                            const argumentId = procedure.argumentIds[i];
+                            if (argType === 'boolean') {
+                                if (this._isFalseOrBooleanBlock(arg)) {
+                                    if (arg !== false) {
+                                        this._addInput(block, argumentId, arg, null);
+                                    }
+                                    return;
+                                }
+                            } else if (this._isNumberOrBlock(arg) || this._isStringOrBlock(arg)) {
+                                this._addTextInput(block, argumentId, _.isNumber(arg) ? arg.toString() : arg, '');
+                                return;
+                            }
+                            throw new RubyToBlocksConverterError(
+                                this._context.currentNode,
+                                `invalid type of My Block "${name}" argument #${i + 1}`
+                            );
+                        });
+                        block.mutation.argumentids = JSON.stringify(procedure.argumentIds);
+                    }
                 }
                 break;
             }
@@ -1286,15 +1353,20 @@ class RubyToBlocksConverter {
                 opcode = 'argument_reporter_string_number';
                 blockType = 'value';
             }
-            return this._createBlock(opcode, blockType, {
+            const block = this._createBlock(opcode, blockType, {
                 fields: {
                     VALUE: {
                         name: 'VALUE',
-                        value: variable.name,
-                        variableId: variable.id
+                        value: variable.name
                     }
                 }
             });
+            if (this._context.argumentBlocks.hasOwnProperty(variable.id)) {
+                this._context.argumentBlocks[variable.id].push(block.id);
+            } else {
+                this._context.argumentBlocks[variable.id] = [block.id];
+            }
+            return block;
         }
 
         return varName;
@@ -1363,6 +1435,97 @@ class RubyToBlocksConverter {
 
     _onGvasgn (node) {
         return this._onIvasgn(node);
+    }
+
+    _onDefs (node) {
+        this._checkNumChildren(node, 4);
+
+        const saved = this._saveContext();
+
+        const receiver = this._process(node.children[0]);
+        if (receiver === Self) {
+            const procedureName = node.children[1].toString();
+            const block = this._createBlock('procedures_definition', 'hat', {
+                topLevel: true
+            });
+            const procedure = this._createProcedure(procedureName);
+
+            const customBlock = this._createBlock('procedures_prototype', 'statement', {
+                shadow: true
+            });
+            this._addInput(block, 'custom_block', customBlock);
+
+            const args = this._process(node.children[2]);
+
+            // define as local variable for guessing argument type is bool or not.
+            args.forEach(argName => {
+                this._findOrCreateVariable(argName);
+            });
+            let body = this._process(node.children[3]);
+            if (!_.isArray(body)) {
+                body = [body];
+            }
+            if (this._isBlock(body[0])) {
+                block.next = body[0].id;
+                body[0].parent = block.id;
+            }
+
+            const procCode = [procedureName];
+            const argDefaults = [];
+            const argTypes = [];
+            const argBlocks = args.map(argName => {
+                const variable = this._findOrCreateVariable(argName);
+                let opcode;
+                if (variable.isBoolean) {
+                    opcode = 'argument_reporter_boolean';
+                    procCode.push('%b');
+                    argDefaults.push('false');
+                    argTypes.push('boolean');
+                } else {
+                    opcode = 'argument_reporter_string_number';
+                    procCode.push('%s');
+                    argDefaults.push('');
+                    argTypes.push('string_number');
+                }
+                return this._createBlock(opcode, 'value', {
+                    fields: {
+                        VALUE: {
+                            name: 'VALUE',
+                            value: argName
+                        }
+                    },
+                    shadow: true
+                });
+            });
+
+            procedure.procCode = procCode.join(' ');
+            procedure.argDefaults = argDefaults;
+            procedure.argNames = args;
+            procedure.argTypes = argTypes;
+            procedure.argumentIds = argBlocks.map(argBlock => {
+                const id = Blockly.utils.genUid();
+                this._addInput(customBlock, id, argBlock);
+                return id;
+            });
+
+            customBlock.mutation = {
+                argumentdefaults: JSON.stringify(procedure.argDefaults),
+                argumentids: JSON.stringify(procedure.argumentIds),
+                argumentnames: JSON.stringify(procedure.argNames),
+                children: [],
+                proccode: procedure.procCode,
+                tagName: 'mutation',
+                warp: 'false'
+            };
+
+            this._restoreContext({localVariables: saved.localVariables});
+
+            return block;
+        }
+
+        this._restoreContext(saved);
+
+        return this._createRubyStatementBlock(this._getSource(node));
     }
 }
 

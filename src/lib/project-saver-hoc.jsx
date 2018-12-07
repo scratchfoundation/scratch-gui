@@ -276,6 +276,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
 
     ProjectSaverComponent.propTypes = {
         autoSaveTimeoutId: PropTypes.number,
+        autosaveIntervalSecs: PropTypes.number,
         canCreateNew: PropTypes.bool,
         canSave: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
@@ -292,6 +293,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onSetProjectUnchanged: PropTypes.func,
         onShowAlert: PropTypes.func,
         onShowCreateSuccessAlert: PropTypes.func,
         onShowCreatingAlert: PropTypes.func,
@@ -302,6 +304,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         projectChanged: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectTitle: PropTypes.string,
+        setAutoSaveTimeoutId: PropTypes.func,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     ProjectSaverComponent.defaultProps = {

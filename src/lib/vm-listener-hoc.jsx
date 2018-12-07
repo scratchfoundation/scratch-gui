@@ -63,7 +63,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // Re-request a targets update when the shouldEmitTargetsUpdate state changes to true
             // i.e. when the editor transitions out of fullscreen/player only modes
             if (this.props.shouldEmitTargetsUpdate && !prevProps.shouldEmitTargetsUpdate) {
-                this.props.vm.emitTargetsUpdate();
+                this.props.vm.emitTargetsUpdate(false /* Emit the event, but do not trigger project change */);
             }
         }
         componentWillUnmount () {

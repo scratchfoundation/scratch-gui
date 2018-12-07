@@ -25,6 +25,23 @@ export default function (Generator) {
         return `self.pen_color = ${color}\n`;
     };
 
+    Generator.pen_changePenColorParamBy = function (block) {
+        const color_param = Generator.valueToCode(block, 'COLOR_PARAM', Generator.ORDER_NONE) || null;
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || 0;
+        return `self.${color_param} += ${value}\n`;
+    };
+
+    Generator.pen_setPenColorParamTo = function (block) {
+        const color_param = Generator.valueToCode(block, 'COLOR_PARAM', Generator.ORDER_NONE) || null;
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || 0;
+        return `self.${color_param} = ${value}\n`;
+    };
+
+    Generator.pen_menu_colorParam = function (block) {
+        const color_param = Generator.getFieldValue(block, 'colorParam') || 'color';
+        return [color_param, Generator.ORDER_ATOMIC];
+    };
+
     Generator.pen_changePenSizeBy = function (block) {
         const size = Generator.valueToCode(block, 'SIZE', Generator.ORDER_NONE) || 0;
         return `self.pen_size += ${size}\n`;

@@ -7,12 +7,12 @@ export default function (Generator) {
     Generator.videoSensing_whenMotionGreaterThan = function (block) {
         block.isStatement = true;
         const rh = Generator.valueToCode(block, 'REFERENCE', Generator.ORDER_NONE) || 0;
-        return `${Generator.spriteName()}.when(:greater_than, self.video_motion, ${rh}) do\n`;
+        return `${Generator.spriteName()}.when(:video_motion_greater_than, ${rh}) do\n`;
     };
 
     Generator.videoSensing_videoToggle = function (block) {
         const video_state = Generator.valueToCode(block, 'VIDEO_STATE', Generator.ORDER_NONE);
-        return `turn_video(${video_state})\n`;
+        return `video_turn(${video_state})\n`;
     };
 
     Generator.videoSensing_menu_VIDEO_STATE = function (block) {
@@ -28,7 +28,7 @@ export default function (Generator) {
     Generator.videoSensing_videoOn = function (block) {
         const attribute = Generator.valueToCode(block, 'ATTRIBUTE', Generator.ORDER_NONE);
         const subject = Generator.valueToCode(block, 'SUBJECT', Generator.ORDER_NONE);
-        return [`${subject}.video_${attribute}`,  Generator.ORDER_ATOMIC];
+        return [`${subject}video_${attribute}`,  Generator.ORDER_ATOMIC];
     };
 
     Generator.videoSensing_menu_ATTRIBUTE = function (block) {
@@ -37,13 +37,13 @@ export default function (Generator) {
     };
 
     Generator.videoSensing_menu_SUBJECT = function (block) {
-        const subject = Generator.getFieldValue(block, 'SUBJECT') || 'wwww';
+        const subject = Generator.getFieldValue(block, 'SUBJECT') || 'this sprite';
         if (subject === 'Stage') {
-            return ['stage', Generator.ORDER_ATOMIC];
-        } else if(subject === 'this sprite') {
-            return ['self', Generator.ORDER_ATOMIC];
+            return ['stage.', Generator.ORDER_ATOMIC];
+        } else if (subject === 'this sprite') {
+            return ['', Generator.ORDER_ATOMIC];
         }
-        return [subject, Generator.ORDER_ATOMIC];
+        return [`${subject}.`, Generator.ORDER_ATOMIC];
     };
 
     return Generator;

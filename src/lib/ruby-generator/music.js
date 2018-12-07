@@ -43,7 +43,7 @@ export default function (Generator) {
     };
 
     Generator.music_menu_INSTRUMENT = function (block) {
-        const instrument = Generator.quote_(Generator.getFieldValue(block, 'INSTRUMENT') || '1');
+        const instrument = Generator.getFieldValue(block, 'INSTRUMENT') || 1;
         return [instrument, Generator.ORDER_ATOMIC];
     };
 

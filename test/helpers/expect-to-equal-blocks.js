@@ -151,11 +151,6 @@ const expectToEqualMutation = function (context, block, actualMutation, expected
                     const actualArgBlock = blocks.getBlock(actualArgInput.block);
                     // eslint-disable-next-line no-use-before-define
                     expectToEqualBlock(context, block.id, actualArgBlock, expectedArgBlock);
-                    if (actualArgBlock.shadow) {
-                        expect(actualArgInput).toHaveProperty('shadow', actualArgBlock.id);
-                    } else {
-                        expect(actualArgInput).toHaveProperty('shadow', null);
-                    }
                 }
             });
             expect(actualArgInputIds).toHaveLength(expectedMutationInfo[key].length);

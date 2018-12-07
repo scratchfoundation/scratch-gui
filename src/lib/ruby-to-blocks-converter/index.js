@@ -406,7 +406,9 @@ class RubyToBlocksConverter {
                 `already defined My Block "${name}".`
             );
         }
-        procedure = {};
+        procedure = {
+            id: Blockly.utils.genUid()
+        };
         this._context.procedures[name] = procedure;
         return procedure;
     }
@@ -478,26 +480,34 @@ class RubyToBlocksConverter {
         return _.isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
     }
 
+    _changeToBooleanArgument (varName) {
+        varName = varName.toString();
+        const variable = this._context.localVariables[varName];
+        if (!variable) {
+            return false;
+        }
+
+        variable.isBoolean = true;
+
+        if (this._context.argumentBlocks.hasOwnProperty(variable.id)) {
+            this._context.argumentBlocks[variable.id].forEach(id => {
+                const b = this._context.blocks[id];
+                b.opcode = 'argument_reporter_boolean';
+                this._setBlockType(b, 'value_boolean');
+            });
+        }
+        return true;
+    }
+
     _isFalseOrBooleanBlock (block) {
         if (block === false || this._getBlockType(block) === 'value_boolean') {
             return true;
         }
         if (block.opcode === 'argument_reporter_string_number') {
             const varName = block.fields.VALUE.value;
-            const variable = this._context.localVariables[varName];
-            if (variable) {
+            if (this._changeToBooleanArgument(varName)) {
                 block.opcode = 'argument_reporter_boolean';
                 this._setBlockType(block, 'value_boolean');
-                variable.isBoolean = true;
-
-                if (this._context.argumentBlocks.hasOwnProperty(variable.id)) {
-                    this._context.argumentBlocks[variable.id].forEach(id => {
-                        const b = this._context.blocks[id];
-                        b.opcode = 'argument_reporter_boolean';
-                        this._setBlockType(b, 'value_boolean');
-                    });
-                }
-
                 return true;
             }
         }
@@ -829,26 +839,31 @@ class RubyToBlocksConverter {
             default:
                 if (this._findProcedure(name)) {
                     const procedure = this._findProcedure(name);
-                    if (procedure.argTypes.length === args.length) {
+                    if (procedure.argumentIds.length === args.length) {
                         block = this._createBlock('procedures_call', 'statement', {
                             mutation: {
-                                tagName: 'mutation',
+                                argumentids: JSON.stringify(procedure.argumentIds),
                                 children: [],
-                                proccode: procedure.procCode,
+                                proccode: procedure.procCode.join(' '),
+                                tagName: 'mutation',
                                 warp: 'false'
                             }
                         });
 
-                        procedure.argTypes.forEach((argType, i) => {
-                            const arg = args[i];
+                        if (this._context.procedureCallBlocks.hasOwnProperty(procedure.id)) {
+                            this._context.procedureCallBlocks[procedure.id].push(block.id);
+                        } else {
+                            this._context.procedureCallBlocks[procedure.id] = [block.id];
+                        }
+
+                        args.forEach((arg, i) => {
                             const argumentId = procedure.argumentIds[i];
-                            if (argType === 'boolean') {
-                                if (this._isFalseOrBooleanBlock(arg)) {
-                                    if (arg !== false) {
-                                        this._addInput(block, argumentId, arg, null);
-                                    }
-                                    return;
+                            if (this._isFalseOrBooleanBlock(arg)) {
+                                if (arg !== false) {
+                                    this._addInput(block, argumentId, arg, null);
                                 }
+                                this._changeToBooleanArgument(procedure.argumentNames[i]);
+                                return;
                             } else if (this._isNumberOrBlock(arg) || this._isStringOrBlock(arg)) {
                                 this._addTextInput(block, argumentId, _.isNumber(arg) ? arg.toString() : arg, '');
                                 return;
@@ -858,7 +873,6 @@ class RubyToBlocksConverter {
                                 `invalid type of My Block "${name}" argument #${i + 1}`
                             );
                         });
-                        block.mutation.argumentids = JSON.stringify(procedure.argumentIds);
                     }
                 }
                 break;
@@ -1449,18 +1463,38 @@ class RubyToBlocksConverter {
                 topLevel: true
             });
             const procedure = this._createProcedure(procedureName);
+            procedure.procCode = [procedureName];
 
             const customBlock = this._createBlock('procedures_prototype', 'statement', {
                 shadow: true
             });
             this._addInput(block, 'custom_block', customBlock);
 
-            const args = this._process(node.children[2]);
-
-            // define as local variable for guessing argument type is bool or not.
-            args.forEach(argName => {
-                this._findOrCreateVariable(argName);
+            procedure.argumentNames = this._process(node.children[2]);
+            procedure.argumentDefaults = [];
+            procedure.argumentIds = [];
+            procedure.argumentVariables = [];
+            procedure.argumentBlocks = [];
+            this._context.localVariables = {};
+            procedure.argumentNames.forEach(n => {
+                procedure.argumentVariables.push(this._findOrCreateVariable(n));
+                procedure.procCode.push('%s');
+                procedure.argumentDefaults.push('');
+                const inputId = Blockly.utils.genUid();
+                procedure.argumentIds.push(inputId);
+                const inputBlock = this._createBlock('argument_reporter_string_number', 'value', {
+                    fields: {
+                        VALUE: {
+                            name: 'VALUE',
+                            value: n
+                        }
+                    },
+                    shadow: true
+                });
+                this._addInput(customBlock, inputId, inputBlock);
+                procedure.argumentBlocks.push(inputBlock);
             });
+
             let body = this._process(node.children[3]);
             if (!_.isArray(body)) {
                 body = [body];
@@ -1470,50 +1504,41 @@ class RubyToBlocksConverter {
                 body[0].parent = block.id;
             }
 
-            const procCode = [procedureName];
-            const argDefaults = [];
-            const argTypes = [];
-            const argBlocks = args.map(argName => {
-                const variable = this._findOrCreateVariable(argName);
-                let opcode;
-                if (variable.isBoolean) {
-                    opcode = 'argument_reporter_boolean';
-                    procCode.push('%b');
-                    argDefaults.push('false');
-                    argTypes.push('boolean');
-                } else {
-                    opcode = 'argument_reporter_string_number';
-                    procCode.push('%s');
-                    argDefaults.push('');
-                    argTypes.push('string_number');
+            const booleanIndexes = [];
+            procedure.argumentVariables.forEach((v, i) => {
+                if (v.isBoolean) {
+                    booleanIndexes.push(i);
+                    procedure.procCode[i + 1] = '%b';
+                    procedure.argumentDefaults[i] = 'false';
+                    procedure.argumentBlocks[i].opcode = 'argument_reporter_boolean';
+                    this._setBlockType(procedure.argumentBlocks[i], 'value_boolean');
                 }
-                return this._createBlock(opcode, 'value', {
-                    fields: {
-                        VALUE: {
-                            name: 'VALUE',
-                            value: argName
-                        }
-                    },
-                    shadow: true
-                });
             });
 
-            procedure.procCode = procCode.join(' ');
-            procedure.argDefaults = argDefaults;
-            procedure.argNames = args;
-            procedure.argTypes = argTypes;
-            procedure.argumentIds = argBlocks.map(argBlock => {
-                const id = Blockly.utils.genUid();
-                this._addInput(customBlock, id, argBlock);
-                return id;
-            });
+            if (booleanIndexes.length > 0 &&
+                this._context.procedureCallBlocks.hasOwnProperty(procedure.id)) {
+                this._context.procedureCallBlocks[procedure.id].forEach(id => {
+                    const b = this._context.blocks[id];
+                    b.mutation.proccode = procedure.procCode.join(' ');
+                    booleanIndexes.forEach(booleanIndex => {
+                        const input = b.inputs[procedure.argumentIds[booleanIndex]];
+                        const inputBlock = this._context.blocks[input.block];
+                        if (inputBlock) {
+                            if (!inputBlock.shadow && input.shadow) {
+                                delete this._context.blocks[input.shadow];
+                                input.shadow = null;
+                            }
+                        }
+                    });
+                });
+            }
 
             customBlock.mutation = {
-                argumentdefaults: JSON.stringify(procedure.argDefaults),
+                argumentdefaults: JSON.stringify(procedure.argumentDefaults),
                 argumentids: JSON.stringify(procedure.argumentIds),
-                argumentnames: JSON.stringify(procedure.argNames),
+                argumentnames: JSON.stringify(procedure.argumentNames),
                 children: [],
-                proccode: procedure.procCode,
+                proccode: procedure.procCode.join(' '),
                 tagName: 'mutation',
                 warp: 'false'
             };

@@ -503,4 +503,91 @@ describe('RubyToBlocksConverter/My Blocks', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
+
+    test('procedures_call recursive', () => {
+        const code = `
+            def self.made_block(arg1)
+              made_block(arg1 - 1)
+            end
+
+            made_block(12)
+        `;
+        const expected = [
+            {
+                opcode: 'procedures_definition',
+                inputs: [
+                    {
+                        name: 'custom_block',
+                        block: {
+                            opcode: 'procedures_prototype',
+                            mutation: {
+                                proccode: 'made_block %s',
+                                arguments: [
+                                    {
+                                        name: 'arg1',
+                                        type: 'string_number'
+                                    }
+                                ]
+                            },
+                            shadow: true
+                        }
+                    }
+                ],
+                next: {
+                    opcode: 'procedures_call',
+                    mutation: {
+                        proccode: 'made_block %s',
+                        argument_blocks: [
+                            {
+                                opcode: 'operator_subtract',
+                                inputs: [
+                                    {
+                                        name: 'NUM1',
+                                        block: {
+                                            opcode: 'argument_reporter_string_number',
+                                            fields: [
+                                                {
+                                                    name: 'VALUE',
+                                                    value: 'arg1'
+                                                }
+                                            ]
+                                        },
+                                        shadow: expectedInfo.makeNumber('')
+                                    },
+                                    {
+                                        name: 'NUM2',
+                                        block: expectedInfo.makeNumber(1)
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                opcode: 'procedures_call',
+                mutation: {
+                    proccode: 'made_block %s',
+                    argument_blocks: [
+                        expectedInfo.makeText('12')
+                    ]
+                }
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+    });
+
+    test.only('error if argument type miss match', () => {
+        const code = `
+            def self.made_block(arg1)
+              if arg1
+              end
+            end
+
+            made_block(12)
+        `;
+        const res = converter.targetCodeToBlocks(target, code);
+        expect(converter.errors).toHaveLength(1);
+        expect(res).toBeFalsy();
+    });
 });

@@ -542,7 +542,9 @@ class MenuBar extends React.Component {
                 logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
-                        <SaveStatus />
+                        {this.props.canSave && (
+                            <SaveStatus />
+                        )}
                     </div>
                     {this.props.sessionExists ? (
                         this.props.username ? (

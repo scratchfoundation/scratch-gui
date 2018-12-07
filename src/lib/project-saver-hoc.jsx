@@ -52,7 +52,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (typeof window === 'object') {
                 // Note: it might be better to use a listener instead of assigning onbeforeunload;
                 // but then it'd be hard to turn this listening off in our tests
-                window.onbeforeunload = () => this.leavePageConfirm;
+                window.onbeforeunload = (e) => this.leavePageConfirm(e);
             }
         }
         componentDidUpdate (prevProps) {
@@ -102,7 +102,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 (e || window.event).returnValue = true;
                 return true;
             }
-            return false; // do not prompt
+            return; // Returning undefined prevents the prompt from coming up
         }
         clearAutoSaveTimeout () {
             if (this.props.autoSaveTimeoutId !== null) {

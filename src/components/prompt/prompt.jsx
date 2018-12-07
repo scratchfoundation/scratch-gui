@@ -48,9 +48,10 @@ const PromptComponent = props => (
                 <input
                     autoFocus
                     className={styles.variableNameTextInput}
+                    defaultValue={props.defaultValue}
                     name={props.label}
-                    placeholder={props.placeholder}
                     onChange={props.onChange}
+                    onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
                 />
             </Box>
@@ -133,14 +134,15 @@ const PromptComponent = props => (
 );
 
 PromptComponent.propTypes = {
+    defaultValue: PropTypes.string,
     isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     onOptionSelection: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
     showMoreOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };

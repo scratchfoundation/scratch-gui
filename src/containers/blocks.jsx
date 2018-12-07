@@ -450,9 +450,9 @@ class Blocks extends React.Component {
                 />
                 {this.state.prompt ? (
                     <Prompt
+                        defaultValue={this.state.prompt.defaultValue}
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
-                        placeholder={this.state.prompt.defaultValue}
                         showMoreOptions={this.state.prompt.showMoreOptions}
                         title={this.state.prompt.title}
                         onCancel={this.handlePromptClose}

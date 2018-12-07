@@ -66,6 +66,13 @@ import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
+const messages = defineMessages({
+    confirmNav: {
+        id: 'gui.menuBar.confirmNewWithoutSaving',
+        defaultMessage: 'Replace contents of the current project?',
+        description: 'message for prompting user to confirm that they want to create new project without saving'
+    }
+});
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -153,7 +160,7 @@ class MenuBar extends React.Component {
         // if canSave===true and canCreateNew===true, it's safe to replace current project,
         // since we will auto-save first. Else, confirm first.
         const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
-            confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+            confirm(this.props.intl.formatMessage(messages.confirmNav)); // eslint-disable-line no-alert
         this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);

@@ -40,7 +40,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'STEPS',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -82,7 +83,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'DEGREES',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(15)
                     }
                 ]
             }
@@ -124,7 +126,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'DEGREES',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(15)
                     }
                 ]
             }
@@ -203,11 +206,13 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'X',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     },
                     {
                         name: 'Y',
-                        block: rubyToExpected(converter, target, 'y')[0]
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     }
                 ]
             }
@@ -277,7 +282,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                     },
                     {
                         name: 'SECS',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(1)
                     }
                 ]
             }
@@ -328,15 +334,18 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'X',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     },
                     {
                         name: 'Y',
-                        block: rubyToExpected(converter, target, 'y')[0]
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     },
                     {
                         name: 'SECS',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(1)
                     }
                 ]
             }
@@ -378,7 +387,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'DIRECTION',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(90, 'math_angle')
                     }
                 ]
             }
@@ -499,7 +509,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'DX',
-                        block: rubyToExpected(converter, target, 'y')[0]
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -540,7 +551,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'X',
-                        block: rubyToExpected(converter, target, 'y')[0]
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     }
                 ]
             }
@@ -581,7 +593,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'DY',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -622,7 +635,8 @@ describe('RubyToBlocksConverter/Motion', () => {
                 inputs: [
                     {
                         name: 'Y',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(0)
                     }
                 ]
             }

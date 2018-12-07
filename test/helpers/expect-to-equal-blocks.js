@@ -1,6 +1,11 @@
 import Blocks from 'scratch-vm/src/engine/blocks';
 import Variable from 'scratch-vm/src/engine/variable';
 
+// for debug
+const toJson = function (o) {
+    return JSON.stringify(o, undefined, 2); // eslint-disable-line no-undefined
+};
+
 const expectToEqualFields = function (context, actualFields, expectedFieldsInfo) {
     expect(Object.keys(actualFields)).toHaveLength(expectedFieldsInfo ? expectedFieldsInfo.length : 0);
     if (expectedFieldsInfo) {
@@ -62,9 +67,8 @@ const expectToEqualBranches = function (context, block, expectedBranchesInfo) {
                 return;
             }
             expect(branch).not.toEqual(null);
-            /* eslint-disable no-use-before-define */
+            // eslint-disable-next-line no-use-before-define
             expectToEqualBlock(context, block.id, blocks.getBlock(branch), expectedBranch);
-            /* eslint-enable no-use-before-define */
         });
     }
 };
@@ -78,13 +82,92 @@ const expectToEqualInputs = function (context, parent, actualInputs, expectedInp
             const input = actualInputs[expectedInput.name];
 
             expect(input.name).toEqual(expectedInput.name);
-            expect(input.shadow).toEqual(expectedInput.block.shadow ? input.block : null);
+            if (expectedInput.shadow) {
+                // eslint-disable-next-line no-use-before-define
+                expectToEqualBlock(context, parent, blocks.getBlock(input.shadow), expectedInput.shadow);
+            } else {
+                expect(input.shadow).toEqual(expectedInput.block.shadow ? input.block : null);
+            }
 
-            /* eslint-disable no-use-before-define */
+            // eslint-disable-next-line no-use-before-define
             expectToEqualBlock(context, parent, blocks.getBlock(input.block), expectedInput.block);
-            /* eslint-enable no-use-before-define */
         });
     }
+};
+
+const expectToEqualMutation = function (context, block, actualMutation, expectedMutationInfo) {
+    if (!actualMutation && !expectedMutationInfo) {
+        return;
+    }
+
+    const blocks = context.blocks;
+    Object.keys(expectedMutationInfo).forEach(key => {
+        switch (key) {
+        case 'arguments': {
+            const expectedArguments = expectedMutationInfo[key];
+
+            const argumentNames = expectedArguments.map(a => a.name);
+            expect(actualMutation).toHaveProperty('argumentnames', JSON.stringify(argumentNames));
+
+            const actualArgInputIds = JSON.parse(actualMutation.argumentids);
+            expect(actualArgInputIds).toHaveLength(expectedArguments.length);
+
+            const expectedArgDefaults = [];
+            actualArgInputIds.forEach((actualArgInputId, i) => {
+                const actualArgInput = block.inputs[actualArgInputId];
+                const expectedArgBlock = {
+                    opcode: `argument_reporter_${expectedArguments[i].type}`,
+                    fields: [
+                        {
+                            name: 'VALUE',
+                            value: expectedArguments[i].name
+                        }
+                    ],
+                    shadow: true
+                };
+                if (expectedArguments[i].type === 'string_number') {
+                    expectedArgDefaults.push('');
+                } else {
+                    expectedArgDefaults.push('false');
+                }
+                // eslint-disable-next-line no-use-before-define
+                expectToEqualBlock(context, block.id, blocks.getBlock(actualArgInput.block), expectedArgBlock);
+            });
+
+            expect(actualMutation).toHaveProperty('argumentdefaults', JSON.stringify(expectedArgDefaults));
+            break;
+        }
+        case 'argument_blocks': {
+            const actualArgInputIds = JSON.parse(actualMutation.argumentids);
+            actualArgInputIds.forEach((actualArgInputId, i) => {
+                const actualArgInput = block.inputs[actualArgInputId];
+                const expectedArgBlock = expectedMutationInfo[key][i];
+
+                expect(actualArgInput).toHaveProperty('name', actualArgInputId);
+                if (expectedArgBlock === false) {
+                    expect(actualArgInput.block).toEqual(null);
+                    expect(actualArgInput.shadow).toEqual(null);
+                } else {
+                    const actualArgBlock = blocks.getBlock(actualArgInput.block);
+                    // eslint-disable-next-line no-use-before-define
+                    expectToEqualBlock(context, block.id, actualArgBlock, expectedArgBlock);
+                    if (actualArgBlock.shadow) {
+                        expect(actualArgInput).toHaveProperty('shadow', actualArgBlock.id);
+                    } else {
+                        expect(actualArgInput).toHaveProperty('shadow', null);
+                    }
+                }
+            });
+            expect(actualArgInputIds).toHaveLength(expectedMutationInfo[key].length);
+            break;
+        }
+        default:
+            expect(actualMutation).toHaveProperty(key, expectedMutationInfo[key]);
+        }
+    });
+    expect(actualMutation).toHaveProperty('tagName', 'mutation');
+    expect(actualMutation).toHaveProperty('warp', 'false');
+    expect(actualMutation.children).toHaveLength(0);
 };
 
 const expectToEqualBlock = function (context, parent, actualBlock, expectedBlockInfo) {
@@ -101,7 +184,11 @@ const expectToEqualBlock = function (context, parent, actualBlock, expectedBlock
 
     expectToEqualFields(context, blocks.getFields(block), expected.fields);
 
-    expectToEqualInputs(context, block.id, blocks.getInputs(block), expected.inputs);
+    if (!expected.hasOwnProperty('mutation')) {
+        expectToEqualInputs(context, block.id, blocks.getInputs(block), expected.inputs);
+    }
+
+    expectToEqualMutation(context, block, blocks.getMutation(block), expected.mutation);
 
     expectToEqualBranches(context, block, expected.branches);
 
@@ -212,7 +299,7 @@ const fieldsToExpected = function (context, fields) {
     });
 };
 
-const inputsToExpected = function (context, blocks, inputs) {
+const inputsToExpected = function (context, inputs) {
     if (!inputs) {
         return null;
     }
@@ -221,25 +308,22 @@ const inputsToExpected = function (context, blocks, inputs) {
         const input = inputs[name];
         const expected = {
             name: input.name,
-            /* eslint-disable no-use-before-define */
-            block: blockToExpected(context, blocks, input.block)
-            /* eslint-enable no-use-before-define */
+            block: blockToExpected(context, input.block) // eslint-disable-line no-use-before-define
         };
-        if (input.shadow) {
-            expected.shadow = true;
+        if (input.shadow !== null && input.shadow !== input.block) {
+            expected.shadow = blockToExpected(context, input.shadow); // eslint-disable-line no-use-before-define
         }
         return expected;
     });
 };
 
-const branchesToExpected = function (context, blocks, block) {
+const branchesToExpected = function (context, block) {
+    const blocks = context.blocks;
     const branches = [];
     for (let i = 1; i <= 2; i++) {
         const branch = blocks.getBranch(block.id, i);
         if (branch !== null) {
-            /* eslint-disable no-use-before-define */
-            branches[i - 1] = blockToExpected(context, blocks, branch);
-            /* eslint-enable no-use-before-define */
+            branches[i - 1] = blockToExpected(context, branch); // eslint-disable-line no-use-before-define
         }
     }
     if (branches.length === 0) {
@@ -249,11 +333,12 @@ const branchesToExpected = function (context, blocks, block) {
     return branches;
 };
 
-const blockToExpected = function (context, blocks, blockId) {
+const blockToExpected = function (context, blockId) {
     if (!blockId) {
         return null;
     }
 
+    const blocks = context.blocks;
     const block = blocks.getBlock(blockId);
     const expected = {
         opcode: blocks.getOpcode(block)
@@ -265,15 +350,15 @@ const blockToExpected = function (context, blocks, blockId) {
     if (fields) {
         expected.fields = fields;
     }
-    const inputs = inputsToExpected(context, blocks, blocks.getInputs(block));
+    const inputs = inputsToExpected(context, blocks.getInputs(block));
     if (inputs) {
         expected.inputs = inputs;
     }
-    const branches = branchesToExpected(context, blocks, block);
+    const branches = branchesToExpected(context, block);
     if (branches) {
         expected.branches = branches;
     }
-    const next = blockToExpected(context, blocks, blocks.getNextBlock(block));
+    const next = blockToExpected(context, blocks.getNextBlock(block.id));
     if (next) {
         expected.next = next;
     }
@@ -298,7 +383,7 @@ const rubyToExpected = function (converter, target, code) {
     };
 
     const scripts = blocks.getScripts();
-    return scripts.map(scriptId => blockToExpected(context, blocks, scriptId));
+    return scripts.map(scriptId => blockToExpected(context, scriptId));
 };
 
 const expectedInfo = {
@@ -307,7 +392,7 @@ const expectedInfo = {
         fields: [
             {
                 name: 'TEXT',
-                value: text
+                value: text.toString()
             }
         ],
         shadow: true
@@ -317,7 +402,7 @@ const expectedInfo = {
         fields: [
             {
                 name: 'NUM',
-                value: num
+                value: num.toString()
             }
         ],
         shadow: true
@@ -325,6 +410,7 @@ const expectedInfo = {
 };
 
 export {
+    toJson,
     expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
     expectToEqualRubyStatement,

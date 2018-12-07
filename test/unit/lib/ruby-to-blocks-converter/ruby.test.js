@@ -1,7 +1,8 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Ruby', () => {
@@ -21,29 +22,11 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 inputs: [
                     {
                         name: 'FROM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'TO',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 10
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -59,29 +42,11 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 inputs: [
                     {
                         name: 'FROM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'TO',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 10
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(10)
                     }
                 ]
             }

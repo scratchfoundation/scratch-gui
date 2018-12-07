@@ -1,7 +1,8 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement,
+    rubyToExpected
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Event', () => {
@@ -14,13 +15,25 @@ describe('RubyToBlocksConverter/Event', () => {
     });
 
     test('event_whenflagclicked', () => {
-        const code = 'self.when(:flag_clicked) { bounce_if_on_edge }';
-        const expected = [
+        let code;
+        let expected;
+
+        code = 'self.when(:flag_clicked) { bounce_if_on_edge }';
+        expected = [
             {
                 opcode: 'event_whenflagclicked',
                 next: {
                     opcode: 'motion_ifonedgebounce'
                 }
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'self.when(:flag_clicked) { bounce_if_on_edge; move(10) }';
+        expected = [
+            {
+                opcode: 'event_whenflagclicked',
+                next: rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);

@@ -11,7 +11,7 @@ export default function (Generator) {
     };
 
     Generator.music_menu_DRUM = function (block) {
-        const drum = Generator.quote_(Generator.getFieldValue(block, 'DRUM') || '1');
+        const drum = Generator.getFieldValue(block, 'DRUM') || 1;
         return [drum, Generator.ORDER_ATOMIC];
     };
 

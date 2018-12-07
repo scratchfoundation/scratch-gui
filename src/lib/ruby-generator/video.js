@@ -11,13 +11,13 @@ export default function (Generator) {
     };
 
     Generator.videoSensing_videoToggle = function (block) {
-        const video_state = Generator.valueToCode(block, 'VIDEO_STATE', Generator.ORDER_NONE);
-        return `video_turn(${video_state})\n`;
+        const videoState = Generator.valueToCode(block, 'VIDEO_STATE', Generator.ORDER_NONE);
+        return `video_turn(${videoState})\n`;
     };
 
     Generator.videoSensing_menu_VIDEO_STATE = function (block) {
-        const video_state = Generator.quote_(Generator.getFieldValue(block, 'VIDEO_STATE') || 'on');
-        return [video_state, Generator.ORDER_ATOMIC];
+        const videoState = Generator.quote_(Generator.getFieldValue(block, 'VIDEO_STATE') || 'on');
+        return [videoState, Generator.ORDER_ATOMIC];
     };
 
     Generator.videoSensing_setVideoTransparency = function (block) {
@@ -28,7 +28,7 @@ export default function (Generator) {
     Generator.videoSensing_videoOn = function (block) {
         const attribute = Generator.valueToCode(block, 'ATTRIBUTE', Generator.ORDER_NONE);
         const subject = Generator.valueToCode(block, 'SUBJECT', Generator.ORDER_NONE);
-        return [`${subject}video_${attribute}`,  Generator.ORDER_ATOMIC];
+        return [`${subject}video_${attribute}`, Generator.ORDER_ATOMIC];
     };
 
     Generator.videoSensing_menu_ATTRIBUTE = function (block) {

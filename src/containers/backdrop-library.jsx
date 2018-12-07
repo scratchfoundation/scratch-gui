@@ -5,11 +5,6 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
-import {
-    activateTab,
-    COSTUMES_TAB_INDEX
-} from '../reducers/editor-tab';
-
 import analytics from '../lib/analytics';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import backdropTags from '../lib/libraries/backdrop-tags';
@@ -40,7 +35,6 @@ class BackdropLibrary extends React.Component {
             skinId: null
         };
         this.props.vm.setEditingTarget(this.props.stageID);
-        this.props.onActivateTab(COSTUMES_TAB_INDEX);
         this.props.vm.addBackdrop(item.md5, vmBackdrop);
         analytics.event({
             category: 'library',
@@ -64,7 +58,6 @@ class BackdropLibrary extends React.Component {
 
 BackdropLibrary.propTypes = {
     intl: intlShape.isRequired,
-    onActivateTab: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     stageID: PropTypes.string.isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
@@ -74,9 +67,7 @@ const mapStateToProps = state => ({
     stageID: state.scratchGui.targets.stage.id
 });
 
-const mapDispatchToProps = dispatch => ({
-    onActivateTab: tab => dispatch(activateTab(tab))
-});
+const mapDispatchToProps = () => ({});
 
 export default injectIntl(connect(
     mapStateToProps,

@@ -11,13 +11,17 @@ import styles from './stage-wrapper.css';
 
 const StageWrapperComponent = function (props) {
     const {
+        isRtl,
         isRendererSupported,
         stageSize,
         vm
     } = props;
 
     return (
-        <Box className={styles.stageWrapper}>
+        <Box
+            className={styles.stageWrapper}
+            dir={isRtl ? 'rtl' : 'ltr'}
+        >
             <Box className={styles.stageMenuWrapper}>
                 <StageHeader
                     stageSize={stageSize}
@@ -40,6 +44,7 @@ const StageWrapperComponent = function (props) {
 
 StageWrapperComponent.propTypes = {
     isRendererSupported: PropTypes.bool.isRequired,
+    isRtl: PropTypes.bool,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };

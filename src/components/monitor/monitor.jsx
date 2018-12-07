@@ -19,7 +19,8 @@ const categories = {
     sound: '#CF63CF',
     looks: '#9966FF',
     motion: '#4C97FF',
-    list: '#FC662C'
+    list: '#FC662C',
+    extension: '#0FBD8C'
 };
 
 const modes = {
@@ -106,7 +107,7 @@ MonitorComponent.propTypes = {
 };
 
 MonitorComponent.defaultProps = {
-    category: 'data',
+    category: 'extension',
     mode: 'default'
 };
 

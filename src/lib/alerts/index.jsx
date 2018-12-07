@@ -1,17 +1,26 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import keyMirror from 'keymirror';
 
 import successImage from '../assets/icon--success.svg';
 
+const AlertTypes = keyMirror({
+    STANDARD: null,
+    EXTENSION: null,
+    INLINE: null
+});
+
 const AlertLevels = {
     SUCCESS: 'success',
+    INFO: 'info',
     WARN: 'warn'
 };
 
 const alerts = [
     {
         alertId: 'createSuccess',
-        clearList: ['creating'],
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully created."
@@ -20,10 +29,13 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 5
     },
     {
         alertId: 'creating',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving'],
         content: (
             <FormattedMessage
                 defaultMessage="Creating..."
@@ -35,8 +47,37 @@ const alerts = [
         level: AlertLevels.SUCCESS
     },
     {
+        alertId: 'creatingError',
+        clearList: ['creating', 'createSuccess'],
+        closeButton: true,
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not create the project. Please try again!"
+                description="Message indicating that project could not be created"
+                id="gui.alerts.creatingError"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingError',
+        clearList: ['saving', 'saveSuccess', 'savingError'],
+        showDownload: true,
+        showSaveNow: true,
+        closeButton: false,
+        content: (
+            <FormattedMessage
+                defaultMessage="Project could not save."
+                description="Message indicating that project could not be saved"
+                id="gui.alerts.savingError"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
         alertId: 'saveSuccess',
-        clearList: ['saving'],
+        alertType: AlertTypes.INLINE,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
                 defaultMessage="Successfully saved."
@@ -45,10 +86,13 @@ const alerts = [
             />
         ),
         iconURL: successImage,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 3
     },
     {
         alertId: 'saving',
+        alertType: AlertTypes.INLINE,
+        clearList: ['createSuccess', 'creating', 'saveSuccess', 'saving', 'savingError'],
         content: (
             <FormattedMessage
                 defaultMessage="Saving..."
@@ -57,11 +101,42 @@ const alerts = [
             />
         ),
         iconSpinner: true,
-        level: AlertLevels.SUCCESS
+        level: AlertLevels.INFO
+    },
+    {
+        alertId: 'cloudInfo',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['cloudInfo'],
+        content: (
+            <FormattedMessage
+                defaultMessage="Please note, cloud variables only support numbers, not letters or symbols. {learnMoreLink}" // eslint-disable-line max-len
+                description="Info about cloud variable limitations"
+                id="gui.alerts.cloudInfo"
+                values={{
+                    learnMoreLink: (
+                        <a
+                            href="https://scratch.mit.edu/info/faq/#clouddata"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Learn more."
+                                description="Link text to cloud var faq"
+                                id="gui.alerts.cloudInfoLearnMore"
+                            />
+                        </a>
+                    )
+                }}
+            />
+        ),
+        closeButton: true,
+        level: AlertLevels.SUCCESS,
+        maxDisplaySecs: 15
     }
 ];
 
 export {
     alerts as default,
-    AlertLevels
+    AlertLevels,
+    AlertTypes
 };

@@ -325,7 +325,9 @@ class Blocks extends React.Component {
             // incomplete. Throwing the error would keep things like setting the
             // correct editing target from happening which can interfere with
             // some blocks and processes in the vm.
-            error.message = `Workspace Update Error: ${error.message}`;
+            if (error.message) {
+                error.message = `Workspace Update Error: ${error.message}`;
+            }
             log.error(error);
         }
         this.workspace.addChangeListener(this.props.vm.blockListener);
@@ -380,10 +382,11 @@ class Blocks extends React.Component {
             this.ScratchBlocks.Msg.VARIABLE_MODAL_TITLE;
         p.prompt.varType = typeof optVarType === 'string' ?
             optVarType : this.ScratchBlocks.SCALAR_VARIABLE_TYPE;
-        p.prompt.showMoreOptions =
+        p.prompt.showVariableOptions = // This flag means that we should show variable/list options about scope
             optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
+        p.prompt.showCloudOption = (optVarType === this.ScratchBlocks.SCALAR_VARIABLE_TYPE) && this.props.canUseCloud;
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
@@ -395,11 +398,17 @@ class Blocks extends React.Component {
     handleOpenSoundRecorder () {
         this.props.onOpenSoundRecorder();
     }
-    handlePromptCallback (input, optionSelection) {
+
+    /*
+     * Pass along information about proposed name and variable options (scope and isCloud)
+     * and additional potentially conflicting variable names from the VM
+     * to the variable validation prompt callback used in scratch-blocks.
+     */
+    handlePromptCallback (input, variableOptions) {
         this.state.prompt.callback(
             input,
             this.props.vm.runtime.getAllVarNamesOfType(this.state.prompt.varType),
-            optionSelection);
+            variableOptions);
         this.handlePromptClose();
     }
     handlePromptClose () {
@@ -423,6 +432,7 @@ class Blocks extends React.Component {
         /* eslint-disable no-unused-vars */
         const {
             anyModalVisible,
+            canUseCloud,
             customProceduresVisible,
             extensionLibraryVisible,
             options,
@@ -453,8 +463,11 @@ class Blocks extends React.Component {
                         defaultValue={this.state.prompt.defaultValue}
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
+                        showCloudOption={this.state.prompt.showCloudOption}
                         showMoreOptions={this.state.prompt.showMoreOptions}
+                        showVariableOptions={this.state.prompt.showVariableOptions}
                         title={this.state.prompt.title}
+                        vm={vm}
                         onCancel={this.handlePromptClose}
                         onOk={this.handlePromptCallback}
                     />
@@ -481,6 +494,7 @@ class Blocks extends React.Component {
 
 Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
+    canUseCloud: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
     isRtl: PropTypes.bool,

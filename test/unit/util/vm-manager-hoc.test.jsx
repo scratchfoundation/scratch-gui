@@ -16,7 +16,9 @@ describe('VMManagerHOC', () => {
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
-                projectState: {}
+                projectState: {},
+                mode: {},
+                vmStatus: {}
             }
         });
         vm = new VM();
@@ -24,34 +26,95 @@ describe('VMManagerHOC', () => {
         vm.setCompatibilityMode = jest.fn();
         vm.start = jest.fn();
     });
-    test('when it mounts, the vm is initialized', () => {
+    test('when it mounts in player mode, the vm is initialized but not started', () => {
         const Component = () => (<div />);
         const WrappedComponent = vmManagerHOC(Component);
         mount(
             <WrappedComponent
+                isPlayerOnly
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
-        expect(vm.start.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
+
+        // But vm should not be started automatically
+        expect(vm.start).not.toHaveBeenCalled();
     });
-    test('if it mounts with an initialized vm, it does not reinitialize the vm', () => {
+    test('when it mounts in editor mode, the vm is initialized and started', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = vmManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                isPlayerOnly={false}
+                isStarted={false}
+                store={store}
+                vm={vm}
+            />
+        );
+        expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
+        expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
+        expect(vm.initialized).toBe(true);
+
+        expect(vm.start).toHaveBeenCalled();
+    });
+    test('if it mounts with an initialized vm, it does not reinitialize the vm but will start it', () => {
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         vm.initialized = true;
         mount(
             <WrappedComponent
+                isPlayerOnly={false}
+                isStarted={false}
                 store={store}
                 vm={vm}
             />
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(0);
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(0);
-        expect(vm.start.mock.calls.length).toBe(0);
         expect(vm.initialized).toBe(true);
+
+        expect(vm.start).toHaveBeenCalled();
+    });
+
+    test('if it mounts without starting the VM, it can be started by switching to editor mode', () => {
+        const Component = () => <div />;
+        const WrappedComponent = vmManagerHOC(Component);
+        vm.initialized = true;
+        const mounted = mount(
+            <WrappedComponent
+                isPlayerOnly
+                isStarted={false}
+                store={store}
+                vm={vm}
+            />
+        );
+        expect(vm.start).not.toHaveBeenCalled();
+        mounted.setProps({
+            isPlayerOnly: false
+        });
+        expect(vm.start).toHaveBeenCalled();
+    });
+    test('if it mounts with an initialized and started VM, it does not start again', () => {
+        const Component = () => <div />;
+        const WrappedComponent = vmManagerHOC(Component);
+        vm.initialized = true;
+        const mounted = mount(
+            <WrappedComponent
+                isPlayerOnly
+                isStarted
+                store={store}
+                vm={vm}
+            />
+        );
+        expect(vm.start).not.toHaveBeenCalled();
+        mounted.setProps({
+            isPlayerOnly: false
+        });
+        expect(vm.start).not.toHaveBeenCalled();
     });
     test('if the isLoadingWithId prop becomes true, it loads project data into the vm', () => {
         vm.loadProject = jest.fn(() => Promise.resolve());

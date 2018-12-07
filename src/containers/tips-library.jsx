@@ -63,7 +63,8 @@ class TipsLibrary extends React.PureComponent {
             featured: true,
             tags: decksLibraryContent[id].tags,
             urlId: decksLibraryContent[id].urlId,
-            requiredProjectId: decksLibraryContent[id].requiredProjectId
+            requiredProjectId: decksLibraryContent[id].requiredProjectId,
+            hidden: decksLibraryContent[id].hidden || false
         }));
 
         if (!this.props.visible) return null;

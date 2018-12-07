@@ -7,6 +7,9 @@ import Box from '../box/box.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';
 
+import bluetoothIconURL from './bluetooth.svg';
+import internetConnectionIconURL from './internet-connection.svg';
+
 class LibraryItem extends React.PureComponent {
     constructor (props) {
         super(props);
@@ -51,7 +54,9 @@ class LibraryItem extends React.PureComponent {
                     styles.featuredItem,
                     {
                         [styles.disabled]: this.props.disabled
-                    }
+                    },
+                    this.props.extensionId ? styles.libraryItemExtension : null,
+                    this.props.hidden ? styles.hidden : null
                 )}
                 onClick={this.handleClick}
             >
@@ -70,17 +75,75 @@ class LibraryItem extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
+                {this.props.insetIconURL ? (
+                    <div className={styles.libraryItemInsetImageContainer}>
+                        <img
+                            className={styles.libraryItemInsetImage}
+                            src={this.props.insetIconURL}
+                        />
+                    </div>
+                ) : null}
                 <div
-                    className={styles.featuredText}
+                    className={this.props.extensionId ?
+                        classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
+                    }
                 >
                     <span className={styles.libraryItemName}>{this.props.name}</span>
                     <br />
                     <span className={styles.featuredDescription}>{this.props.description}</span>
                 </div>
+                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? (
+                    <div className={styles.featuredExtensionMetadata}>
+                        <div className={styles.featuredExtensionRequirement}>
+                            {this.props.bluetoothRequired || this.props.internetConnectionRequired ? (
+                                <div>
+                                    <div>
+                                        <FormattedMessage
+                                            defaultMessage="Requires"
+                                            description="Label for extension hardware requirements"
+                                            id="gui.extensionLibrary.requires"
+                                        />
+                                    </div>
+                                    <div
+                                        className={styles.featuredExtensionMetadataDetail}
+                                    >
+                                        <img
+                                            src={this.props.bluetoothRequired ?
+                                                bluetoothIconURL :
+                                                internetConnectionIconURL
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                            ) : null}
+                        </div>
+                        <div className={styles.featuredExtensionCollaboration}>
+                            {this.props.collaborator ? (
+                                <div>
+                                    <div>
+                                        <FormattedMessage
+                                            defaultMessage="Collaboration with"
+                                            description="Label for extension collaboration"
+                                            id="gui.extensionLibrary.collaboration"
+                                        />
+                                    </div>
+                                    <div
+                                        className={styles.featuredExtensionMetadataDetail}
+                                    >
+                                        {this.props.collaborator}
+                                    </div>
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+                ) : null}
             </div>
         ) : (
             <Box
-                className={styles.libraryItem}
+                className={classNames(
+                    styles.libraryItem,
+                    this.props.hidden ? styles.hidden : null
+                )}
                 role="button"
                 tabIndex="0"
                 onBlur={this.handleBlur}
@@ -106,18 +169,24 @@ class LibraryItem extends React.PureComponent {
 }
 
 LibraryItem.propTypes = {
+    bluetoothRequired: PropTypes.bool,
+    collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
     ]),
     disabled: PropTypes.bool,
+    extensionId: PropTypes.string,
     featured: PropTypes.bool,
-    iconURL: PropTypes.string.isRequired,
+    hidden: PropTypes.bool,
+    iconURL: PropTypes.string,
     id: PropTypes.number.isRequired,
+    insetIconURL: PropTypes.string,
+    internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
-    ]).isRequired,
+    ]),
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func.isRequired,

@@ -120,5 +120,10 @@ export default defineMessages({
         defaultMessage: 'Stories',
         description: 'Tag for filtering a library for stories',
         id: 'gui.libraryTags.stories'
+    },
+    letters: {
+        defaultMessage: 'Letters',
+        description: 'Tag for filtering a library for letters',
+        id: 'gui.libraryTags.letters'
     }
 });

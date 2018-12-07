@@ -109,4 +109,19 @@ describe('Working with sprites', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Adding a letter sprite through the Letters filter in the library', async () => {
+        await loadUri(uri);
+        await driver.manage()
+            .window()
+            .setSize(1244, 768); // Letters filter not visible at 1024 width
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        await clickText('Letters');
+        await clickText('Block-B', scope.modal); // Closes modal
+        await rightClickText('Block-B', scope.spriteTile); // Make sure it is there
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

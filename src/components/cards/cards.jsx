@@ -276,6 +276,7 @@ const Cards = props => {
                                 />
                             )
                         )}
+                        {steps[step].trackingPixel && steps[step].trackingPixel}
                     </div>
                     <NextPrevButtons
                         isRtl={isRtl}

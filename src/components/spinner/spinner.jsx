@@ -6,19 +6,22 @@ import styles from './spinner.css';
 
 const SpinnerComponent = function (props) {
     const {
-        className
+        className,
+        small
     } = props;
     return (
         <div
             className={classNames(
+                className,
                 styles.spinner,
-                className
+                {[styles.small]: small}
             )}
         />
     );
 };
 SpinnerComponent.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    small: PropTypes.bool
 };
 SpinnerComponent.defaultProps = {
     className: ''

@@ -2,8 +2,10 @@ const SET_FULL_SCREEN = 'scratch-gui/mode/SET_FULL_SCREEN';
 const SET_PLAYER = 'scratch-gui/mode/SET_PLAYER';
 
 const initialState = {
+    showBranding: false,
     isFullScreen: false,
-    isPlayerOnly: false
+    isPlayerOnly: false,
+    hasEverEnteredEditor: true
 };
 
 const reducer = function (state, action) {
@@ -17,7 +19,8 @@ const reducer = function (state, action) {
     case SET_PLAYER:
         return {
             isFullScreen: state.isFullScreen,
-            isPlayerOnly: action.isPlayerOnly
+            isPlayerOnly: action.isPlayerOnly,
+            hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly
         };
     default:
         return state;

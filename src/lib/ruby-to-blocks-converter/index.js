@@ -139,13 +139,14 @@ class RubyToBlocksConverter {
 
     _saveContext () {
         return {
-            blocks: JSON.stringify(this._context.blocks),
-            localVariables: JSON.stringify(this._context.localVariables),
-            variables: JSON.stringify(this._context.variables),
-            lists: JSON.stringify(this._context.lists)
+            blocks: Object.assign({}, this._context.blocks),
+            localVariables: Object.assign({}, this._context.localVariables),
+            variables: Object.assign({}, this._context.variables),
+            lists: Object.assign({}, this._context.lists)
         };
     }
 
+    // could not restore attributes.
     _restoreContext (saved) {
         if (!saved) {
             return;
@@ -153,7 +154,16 @@ class RubyToBlocksConverter {
 
         Object.keys(saved).forEach(key => {
             if (this._context.hasOwnProperty(key)) {
-                this._context[key] = JSON.parse(saved[key]);
+                Object.keys(this._context[key]).forEach(id => {
+                    if (!saved[key].hasOwnProperty(id)) {
+                        delete this._context[key][id];
+                    }
+                });
+                Object.keys(saved[key]).forEach(id => {
+                    if (!this._context[key].hasOwnProperty(id)) {
+                        this._context[key][id] = saved[key][id];
+                    }
+                });
             }
         });
     }
@@ -1046,8 +1056,8 @@ class RubyToBlocksConverter {
 
             if (rubyBlockNode) {
                 block = this._createBlock('ruby_statement_with_block', 'statement');
-                this._addInput(block, 'STATEMENT', this._createTextBlock(this._getSource(node)));
-                this._addInput(block, 'ARGS', this._createTextBlock(this._getSource(rubyBlockArgsNode)));
+                this._addTextInput(block, 'STATEMENT', this._getSource(node));
+                this._addTextInput(block, 'ARGS', this._getSource(rubyBlockArgsNode));
                 this._addSubstack(block, this._process(rubyBlockNode));
             } else {
                 block = this._createRubyStatementBlock(this._getSource(node));

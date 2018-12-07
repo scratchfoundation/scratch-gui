@@ -1,7 +1,9 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement
+    convertAndExpectToEqualRubyStatement,
+    rubyToExpected,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Ruby', () => {
@@ -21,29 +23,11 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 inputs: [
                     {
                         name: 'FROM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'TO',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 10
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -59,29 +43,11 @@ describe('RubyToBlocksConverter/Ruby', () => {
                 inputs: [
                     {
                         name: 'FROM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'TO',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 10
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -96,9 +62,54 @@ describe('RubyToBlocksConverter/Ruby', () => {
             'wait(  )',
             'wait(\n)'
         ].forEach(s => {
-            converter.targetCodeToBlocks(target, s);
-            expect(converter.errors).toHaveLength(0);
-            expectToEqualRubyStatement(converter, 'wait');
+            convertAndExpectToEqualRubyStatement(converter, target, s, 'wait');
         });
+    });
+
+    test('ruby_statement_with_block', () => {
+        const code = `
+            method_call(1) do |arg1, arg2|
+              move(arg1)
+              move(arg2)
+              move(10)
+            end
+        `;
+        const expected = [
+            {
+                opcode: 'ruby_statement_with_block',
+                inputs: [
+                    {
+                        name: 'STATEMENT',
+                        block: expectedInfo.makeText('method_call(1)')
+                    },
+                    {
+                        name: 'ARGS',
+                        block: expectedInfo.makeText('|arg1, arg2|')
+                    }
+                ],
+                branches: [
+                    {
+                        opcode: 'ruby_statement',
+                        inputs: [
+                            {
+                                name: 'STATEMENT',
+                                block: expectedInfo.makeText('move(arg1)')
+                            }
+                        ],
+                        next: {
+                            opcode: 'ruby_statement',
+                            inputs: [
+                                {
+                                    name: 'STATEMENT',
+                                    block: expectedInfo.makeText('move(arg2)')
+                                }
+                            ],
+                            next: rubyToExpected(converter, target, 'move(10)')[0]
+                        }
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 });

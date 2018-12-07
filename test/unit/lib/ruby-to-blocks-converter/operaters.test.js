@@ -1,8 +1,9 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    expectToEqualRubyStatement,
-    rubyToExpected
+    convertAndExpectToEqualRubyStatement,
+    rubyToExpected,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Operators', () => {
@@ -15,82 +16,84 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_add', () => {
-        const code = '1 + 2';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 + 2';
+        expected = [
             {
                 opcode: 'operator_add',
                 inputs: [
                     {
                         name: 'NUM1',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'NUM2',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
                     }
                 ]
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        [
-            '1 + "2"',
-            '1 + :symbol'
-        ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
-        });
+        code = 'x + y';
+        expected = [
+            {
+                opcode: 'operator_add',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_subtract', () => {
-        const code = '2 - 1';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '2 - 1';
+        expected = [
             {
                 opcode: 'operator_subtract',
                 inputs: [
                     {
                         name: 'NUM1',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
                     },
                     {
                         name: 'NUM2',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x - y';
+        expected = [
+            {
+                opcode: 'operator_subtract',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
                     }
                 ]
             }
@@ -102,42 +105,46 @@ describe('RubyToBlocksConverter/Operators', () => {
             '2 - "1"',
             '"2" - 1'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
     test('operator_multiply', () => {
-        const code = '1 * 2';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 * 2';
+        expected = [
             {
                 opcode: 'operator_multiply',
                 inputs: [
                     {
                         name: 'NUM1',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'NUM2',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x * y';
+        expected = [
+            {
+                opcode: 'operator_multiply',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
                     }
                 ]
             }
@@ -149,42 +156,46 @@ describe('RubyToBlocksConverter/Operators', () => {
             '1 * "2"',
             '"1" * 2'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
     test('operator_divide', () => {
-        const code = '2 / 1';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '2 / 1';
+        expected = [
             {
                 opcode: 'operator_divide',
                 inputs: [
                     {
                         name: 'NUM1',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
                     },
                     {
                         name: 'NUM2',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x / y';
+        expected = [
+            {
+                opcode: 'operator_divide',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
                     }
                 ]
             }
@@ -196,42 +207,46 @@ describe('RubyToBlocksConverter/Operators', () => {
             '2 / "1"',
             '"2" / 1'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
     test('operator_random', () => {
-        const code = 'rand(1..10)';
-        const expected = [
+        let code;
+        let expected;
+
+        code = 'rand(1..10)';
+        expected = [
             {
                 opcode: 'operator_random',
                 inputs: [
                     {
                         name: 'FROM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'TO',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 10
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(10)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'rand(x..y)';
+        expected = [
+            {
+                opcode: 'operator_random',
+                inputs: [
+                    {
+                        name: 'FROM',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(1)
+                    },
+                    {
+                        name: 'TO',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(10)
                     }
                 ]
             }
@@ -246,42 +261,46 @@ describe('RubyToBlocksConverter/Operators', () => {
             'random(1..10, 23)',
             'random("1..10")'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
     test('operator_gt', () => {
-        const code = '1 > 50';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 > 50';
+        expected = [
             {
                 opcode: 'operator_gt',
                 inputs: [
                     {
                         name: 'OPERAND1',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '1'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('1')
                     },
                     {
                         name: 'OPERAND2',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '50'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('50')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x > y';
+        expected = [
+            {
+                opcode: 'operator_gt',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('50')
                     }
                 ]
             }
@@ -290,36 +309,41 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_lt', () => {
-        const code = '1 < 50';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 < 50';
+        expected = [
             {
                 opcode: 'operator_lt',
                 inputs: [
                     {
                         name: 'OPERAND1',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '1'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('1')
                     },
                     {
                         name: 'OPERAND2',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '50'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('50')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x < y';
+        expected = [
+            {
+                opcode: 'operator_lt',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('50')
                     }
                 ]
             }
@@ -328,36 +352,41 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_equals', () => {
-        const code = '1 == 50';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 == 50';
+        expected = [
             {
                 opcode: 'operator_equals',
                 inputs: [
                     {
                         name: 'OPERAND1',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '1'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('1')
                     },
                     {
                         name: 'OPERAND2',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: '50'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('50')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x == y';
+        expected = [
+            {
+                opcode: 'operator_equals',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('50')
                     }
                 ]
             }
@@ -455,36 +484,59 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_join', () => {
-        const code = '"apple" + "banana"';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '"apple" + "banana"';
+        expected = [
             {
                 opcode: 'operator_join',
                 inputs: [
                     {
                         name: 'STRING1',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'apple'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('apple')
                     },
                     {
                         name: 'STRING2',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'banana'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('banana')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '"apple" + x';
+        expected = [
+            {
+                opcode: 'operator_join',
+                inputs: [
+                    {
+                        name: 'STRING1',
+                        block: expectedInfo.makeText('apple')
+                    },
+                    {
+                        name: 'STRING2',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('banana')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x + "banana"';
+        expected = [
+            {
+                opcode: 'operator_join',
+                inputs: [
+                    {
+                        name: 'STRING1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('apple')
+                    },
+                    {
+                        name: 'STRING2',
+                        block: expectedInfo.makeText('banana')
                     }
                 ]
             }
@@ -493,36 +545,41 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_letter_of', () => {
-        const code = '"apple"[0]';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '"apple"[0]';
+        expected = [
             {
                 opcode: 'operator_letter_of',
                 inputs: [
                     {
                         name: 'STRING',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'apple'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('apple')
                     },
                     {
                         name: 'LETTER',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 0
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(0)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x[y]';
+        expected = [
+            {
+                opcode: 'operator_letter_of',
+                inputs: [
+                    {
+                        name: 'STRING',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('apple')
+                    },
+                    {
+                        name: 'LETTER',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(1)
                     }
                 ]
             }
@@ -531,23 +588,32 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_length', () => {
-        const code = '"apple".length';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '"apple".length';
+        expected = [
             {
                 opcode: 'operator_length',
                 inputs: [
                     {
                         name: 'STRING',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'apple'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('apple')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x.length';
+        expected = [
+            {
+                opcode: 'operator_length',
+                inputs: [
+                    {
+                        name: 'STRING',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('apple')
                     }
                 ]
             }
@@ -556,36 +622,41 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_contains', () => {
-        const code = '"apple".include?("a")';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '"apple".include?("a")';
+        expected = [
             {
                 opcode: 'operator_contains',
                 inputs: [
                     {
                         name: 'STRING1',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'apple'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('apple')
                     },
                     {
                         name: 'STRING2',
-                        block: {
-                            opcode: 'text',
-                            fields: [
-                                {
-                                    name: 'TEXT',
-                                    value: 'a'
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeText('a')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x.include?(y)';
+        expected = [
+            {
+                opcode: 'operator_contains',
+                inputs: [
+                    {
+                        name: 'STRING1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('apple')
+                    },
+                    {
+                        name: 'STRING2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('a')
                     }
                 ]
             }
@@ -594,36 +665,41 @@ describe('RubyToBlocksConverter/Operators', () => {
     });
 
     test('operator_mod', () => {
-        const code = '1 % 2';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '1 % 2';
+        expected = [
             {
                 opcode: 'operator_mod',
                 inputs: [
                     {
                         name: 'NUM1',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 1
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(1)
                     },
                     {
                         name: 'NUM2',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x % y';
+        expected = [
+            {
+                opcode: 'operator_mod',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
                     }
                 ]
             }
@@ -635,29 +711,37 @@ describe('RubyToBlocksConverter/Operators', () => {
             '1 % "2"',
             '"1" % 2'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
     test('operator_round', () => {
-        const code = '2.round';
-        const expected = [
+        let code;
+        let expected;
+
+        code = '2.round';
+        expected = [
             {
                 opcode: 'operator_round',
                 inputs: [
                     {
                         name: 'NUM',
-                        block: {
-                            opcode: 'math_number',
-                            fields: [
-                                {
-                                    name: 'NUM',
-                                    value: 2
-                                }
-                            ],
-                            shadow: true
-                        }
+                        block: expectedInfo.makeNumber(2)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'x.round';
+        expected = [
+            {
+                opcode: 'operator_round',
+                inputs: [
+                    {
+                        name: 'NUM',
+                        block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
                     }
                 ]
             }
@@ -668,8 +752,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '"2".round',
             '"2".round(1)'
         ].forEach(s => {
-            expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-            expectToEqualRubyStatement(converter, s);
+            convertAndExpectToEqualRubyStatement(converter, target, s, s);
         });
     });
 
@@ -708,16 +791,7 @@ describe('RubyToBlocksConverter/Operators', () => {
                     inputs: [
                         {
                             name: 'NUM',
-                            block: {
-                                opcode: 'math_number',
-                                fields: [
-                                    {
-                                        name: 'NUM',
-                                        value: 3
-                                    }
-                                ],
-                                shadow: true
-                            }
+                            block: expectedInfo.makeNumber(3)
                         }
                     ]
                 }
@@ -755,7 +829,8 @@ describe('RubyToBlocksConverter/Operators', () => {
                     inputs: [
                         {
                             name: 'NUM',
-                            block: rubyToExpected(converter, target, 'x')[0]
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber('')
                         }
                     ]
                 }

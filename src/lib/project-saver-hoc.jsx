@@ -45,8 +45,16 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
+                'leavePageConfirm',
                 'tryToAutoSave'
             ]);
+        }
+        componentWillMount () {
+            if (typeof window === 'object') {
+                // Note: it might be better to use a listener instead of assigning onbeforeunload;
+                // but then it'd be hard to turn this listening off in our tests
+                window.onbeforeunload = (e) => this.leavePageConfirm(e);
+            }
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectChanged && !prevProps.projectChanged) {
@@ -90,6 +98,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
+            window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+        }
+        leavePageConfirm (e) {
+            if (this.props.projectChanged) {
+                // both methods of returning a value may be necessary for browser compatibility
+                (e || window.event).returnValue = true;
+                return true;
+            }
+            return; // Returning undefined prevents the prompt from coming up
         }
         clearAutoSaveTimeout () {
             if (this.props.autoSaveTimeoutId !== null) {

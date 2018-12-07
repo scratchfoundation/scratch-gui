@@ -16,6 +16,9 @@ import OperatorsBlocks from './operators.js';
 import DataBlocks from './data.js';
 import ProcedureBlocks from './procedure.js';
 import RubyBlocks from './ruby.js';
+import MusicBlocks from './music.js';
+import PenBlocks from './pen.js';
+import VideoBlocks from './video.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -433,5 +436,8 @@ OperatorsBlocks(RubyGenerator);
 DataBlocks(RubyGenerator);
 ProcedureBlocks(RubyGenerator);
 RubyBlocks(RubyGenerator);
+MusicBlocks(RubyGenerator);
+PenBlocks(RubyGenerator);
+VideoBlocks(RubyGenerator);
 
 export default RubyGenerator;

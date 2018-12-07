@@ -2,22 +2,88 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
-    rubyToExpected
+    rubyToExpected,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Control', () => {
     let converter;
     let target;
+    let code;
+    let expected;
 
     beforeEach(() => {
         converter = new RubyToBlocksConverter(null);
         target = null;
+        code = null;
+        expected = null;
+    });
+
+    describe('control_wait', () => {
+        test('number', () => {
+            code = 'sleep(10)';
+            expected = [
+                {
+                    opcode: 'control_wait',
+                    inputs: [
+                        {
+                            name: 'DURATION',
+                            block: expectedInfo.makeNumber(10, 'math_positive_number')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value block', () => {
+            code = 'sleep(x)';
+            expected = [
+                {
+                    opcode: 'control_wait',
+                    inputs: [
+                        {
+                            name: 'DURATION',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(1, 'math_positive_number')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('boolean block', () => {
+            code = 'sleep(touching?("_edge_"))';
+            expected = [
+                {
+                    opcode: 'control_wait',
+                    inputs: [
+                        {
+                            name: 'DURATION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0],
+                            shadow: expectedInfo.makeNumber(1, 'math_positive_number')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'sleep',
+                'sleep()',
+                'sleep(abc)',
+                'sleep("abc")',
+                'sleep(1, 2)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
     });
 
     test('control_forever', () => {
-        let code;
-        let expected;
-
         code = 'loop { bounce_if_on_edge; wait }';
         expected = [
             {
@@ -59,9 +125,6 @@ describe('RubyToBlocksConverter/Control', () => {
     });
 
     test('control_if', () => {
-        let code;
-        let expected;
-
         code = 'if touching?("_edge_"); bounce_if_on_edge; end';
         expected = [
             {
@@ -155,9 +218,6 @@ describe('RubyToBlocksConverter/Control', () => {
     });
 
     test('control_if_else', () => {
-        let code;
-        let expected;
-
         code = 'if touching?("_edge_"); bounce_if_on_edge; else; move(10); end';
         expected = [
             {

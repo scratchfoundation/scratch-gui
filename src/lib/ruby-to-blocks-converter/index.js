@@ -5,6 +5,8 @@ import Blockly from 'scratch-blocks';
 import RubyParser from '../ruby-parser';
 import Variable from 'scratch-vm/src/engine/variable';
 
+import ControlConverter from './control';
+
 /**
  * Class for Ruby's self for detecting self.
  */
@@ -26,6 +28,9 @@ class RubyToBlocksConverterError {
 class RubyToBlocksConverter {
     constructor (vm) {
         this.vm = vm;
+        this._converters = [
+            ControlConverter
+        ];
         this.reset();
     }
 
@@ -139,6 +144,19 @@ class RubyToBlocksConverter {
         });
 
         this.vm.emitWorkspaceUpdate();
+    }
+
+    _callConvertersHandler (handlerName) {
+        for (let i = 0; i < this._converters.length; i++) {
+            const converter = this._converters[i];
+            if (converter.hasOwnProperty(handlerName)) {
+                const block = converter[handlerName].apply(this, Array.prototype.slice.call(arguments, 1));
+                if (block) {
+                    return block;
+                }
+            }
+        }
+        return null;
     }
 
     _saveContext () {
@@ -462,6 +480,10 @@ class RubyToBlocksConverter {
         block.opcode = opcode;
         this._setBlockType(block, blockType);
         return block;
+    }
+
+    _isSelf (block) {
+        return block === Self;
     }
 
     _isBlock (block) {
@@ -1143,6 +1165,11 @@ class RubyToBlocksConverter {
                 break;
             }
         }
+
+        if (!block) {
+            block = this._callConvertersHandler('onSend', receiver, name, args, rubyBlockArgs, rubyBlock);
+        }
+
         if (!block) {
             this._restoreContext(saved);
 

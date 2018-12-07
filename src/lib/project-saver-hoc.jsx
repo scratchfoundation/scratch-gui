@@ -53,7 +53,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (typeof window === 'object') {
                 // Note: it might be better to use a listener instead of assigning onbeforeunload;
                 // but then it'd be hard to turn this listening off in our tests
-                window.onbeforeunload = (e) => this.leavePageConfirm(e);
+                window.onbeforeunload = e => this.leavePageConfirm(e);
             }
         }
         componentDidUpdate (prevProps) {

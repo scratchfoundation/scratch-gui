@@ -5,6 +5,8 @@ import {AlertTypes, AlertLevels} from '../../../src/lib/alerts/index.jsx';
 import alertsReducer from '../../../src/reducers/alerts';
 import {
     closeAlert,
+    filterInlineAlerts,
+    filterPopupAlerts,
     showStandardAlert
 } from '../../../src/reducers/alerts';
 
@@ -105,8 +107,9 @@ test('related alerts can clear each other', () => {
     };
     const action = showStandardAlert('saveSuccess');
     const resultState = alertsReducer(initialState, action);
-    expect(resultState.alertsList.length).toBe(1);
-    expect(resultState.alertsList[0].alertId).toBe('saveSuccess');
+    expect(resultState.alertsList.length).toBe(2);
+    expect(resultState.alertsList[0].alertId).toBe('creating');
+    expect(resultState.alertsList[1].alertId).toBe('saveSuccess');
 });
 
 test('several related alerts can be cleared at once', () => {
@@ -122,4 +125,55 @@ test('several related alerts can be cleared at once', () => {
     resultState = alertsReducer(resultState, createSuccessAction);
     expect(resultState.alertsList.length).toBe(1);
     expect(resultState.alertsList[0].alertId).toBe('createSuccess');
+});
+
+test('filterInlineAlerts only returns inline type alerts', () => {
+    const alerts = [
+        {
+            alertId: 'extension',
+            alertType: AlertTypes.EXTENSION
+        },
+        {
+            alertId: 'inline',
+            alertType: AlertTypes.INLINE
+        },
+        {
+            alertId: 'standard',
+            alertType: AlertTypes.STANDARD
+        },
+        {
+            alertId: 'non-existent type',
+            alertType: 'wirly-burly'
+        }
+    ];
+
+    const filtered = filterInlineAlerts(alerts);
+    expect(filtered.length).toEqual(1);
+    expect(filtered[0].alertId).toEqual('inline');
+});
+
+test('filterPopupAlerts returns standard and extension type alerts', () => {
+    const alerts = [
+        {
+            alertId: 'extension',
+            alertType: AlertTypes.EXTENSION
+        },
+        {
+            alertId: 'inline',
+            alertType: AlertTypes.INLINE
+        },
+        {
+            alertId: 'standard',
+            alertType: AlertTypes.STANDARD
+        },
+        {
+            alertId: 'non-existent type',
+            alertType: 'wirly-burly'
+        }
+    ];
+
+    const filtered = filterPopupAlerts(alerts);
+    expect(filtered.length).toEqual(2);
+    expect(filtered[0].alertId).toEqual('extension');
+    expect(filtered[1].alertId).toEqual('standard');
 });

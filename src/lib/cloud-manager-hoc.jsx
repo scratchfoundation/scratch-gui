@@ -10,6 +10,10 @@ import {
     getIsShowingWithId
 } from '../reducers/project-state';
 
+import {
+    showAlertWithTimeout
+} from '../reducers/alerts';
+
 /*
  * Higher Order Component to manage the connection to the cloud dserver.
  * @param {React.Component} WrappedComponent component to manage VM events for
@@ -48,9 +52,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            // TODO add a canUseCloud to pass down to this HOC (e.g. from www) and also check that here.
-            // This should cover info about the website specifically, like scrather status
-            return !!(props.cloudHost && props.username && props.vm && props.projectId);
+            return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
         }
         shouldNotModifyCloudData (props) {
             return (props.hasEverEnteredEditor && !props.canSave);
@@ -92,7 +94,8 @@ const cloudManagerHOC = function (WrappedComponent) {
         handleCloudDataUpdate (projectHasCloudData) {
             if (this.isConnected() && !projectHasCloudData) {
                 this.disconnectFromCloud();
-            } else if (!this.isConnected() && projectHasCloudData) {
+            } else if (this.shouldConnect(this.props)) {
+                this.props.onShowCloudInfo();
                 this.connectToCloud();
             }
         }
@@ -102,8 +105,10 @@ const cloudManagerHOC = function (WrappedComponent) {
                 cloudHost,
                 projectId,
                 username,
+                hasCloudPermission,
                 hasEverEnteredEditor,
                 isShowingWithId,
+                onShowCloudInfo,
                 /* eslint-enable no-unused-vars */
                 vm,
                 ...componentProps
@@ -121,8 +126,10 @@ const cloudManagerHOC = function (WrappedComponent) {
     CloudManager.propTypes = {
         canSave: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
+        hasCloudPermission: PropTypes.bool,
         hasEverEnteredEditor: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
+        onShowCloudInfo: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
@@ -137,7 +144,9 @@ const cloudManagerHOC = function (WrappedComponent) {
         };
     };
 
-    const mapDispatchToProps = () => ({});
+    const mapDispatchToProps = dispatch => ({
+        onShowCloudInfo: () => showAlertWithTimeout(dispatch, 'cloudInfo')
+    });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

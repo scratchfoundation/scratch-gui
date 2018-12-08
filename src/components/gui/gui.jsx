@@ -81,6 +81,7 @@ const GUIComponent = props => {
         enableCommunity,
         importInfoVisible,
         intl,
+        isCreating,
         isPlayerOnly,
         isRtl,
         isShared,
@@ -151,6 +152,9 @@ const GUIComponent = props => {
                 ) : null}
                 {loading ? (
                     <Loader />
+                ) : null}
+                {isCreating ? (
+                    <Loader messageId="gui.loader.creating" />
                 ) : null}
                 {importInfoVisible ? (
                     <ImportModal />
@@ -357,6 +361,7 @@ GUIComponent.propTypes = {
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    isCreating: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -397,7 +402,9 @@ GUIComponent.defaultProps = {
     canShare: false,
     canUseCloud: false,
     enableCommunity: false,
+    isCreating: false,
     isShared: false,
+    loading: false,
     onUpdateProjectTitle: () => {},
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large

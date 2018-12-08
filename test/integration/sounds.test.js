@@ -32,6 +32,7 @@ describe('Working with sounds', () => {
 
         // Delete the sound
         await rightClickText('Meow', scope.soundsTab);
+        await driver.sleep(500); // Wait a moment for context menu; only needed for local testing
         await clickText('delete', scope.soundsTab);
 
         // Add it back

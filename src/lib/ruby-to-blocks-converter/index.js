@@ -468,6 +468,20 @@ class RubyToBlocksConverter {
         return null;
     }
 
+    _processCondition (node) {
+        let cond = this._process(node.children[0]);
+        if (_.isArray(cond) && cond.length === 1) {
+            cond = cond[0];
+        }
+        if (!this._isFalseOrBooleanBlock(cond)) {
+            throw new RubyToBlocksConverterError(
+                node,
+                `condition is not boolean: ${this._getSource(node.children[0])}`
+            );
+        }
+        return cond;
+    }
+
     _getBlockType (block) {
         return this._context.blockTypes[block.id];
     }
@@ -1226,13 +1240,7 @@ class RubyToBlocksConverter {
 
         const saved = this._saveContext();
 
-        const cond = this._process(node.children[0]);
-        if (!this._isFalseOrBooleanBlock(cond)) {
-            throw new RubyToBlocksConverterError(
-                node,
-                `condition is not boolean: ${this._getSource(node.children[0])}`
-            );
-        }
+        const cond = this._processCondition(node);
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];
@@ -1259,16 +1267,7 @@ class RubyToBlocksConverter {
 
         const saved = this._saveContext();
 
-        let cond = this._process(node.children[0]);
-        if (_.isArray(cond) && cond.length === 1) {
-            cond = cond[0];
-        }
-        if (!this._isFalseOrBooleanBlock(cond)) {
-            throw new RubyToBlocksConverterError(
-                node,
-                `condition is not boolean: ${this._getSource(node.children[0])}`
-            );
-        }
+        const cond = this._processCondition(node);
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];

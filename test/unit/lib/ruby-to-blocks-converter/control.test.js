@@ -413,6 +413,27 @@ describe('RubyToBlocksConverter/Control', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
             code = `
+                if (touching?("_edge_"))
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
                 if touching?("_edge_")
                   bounce_if_on_edge
                   move(10)

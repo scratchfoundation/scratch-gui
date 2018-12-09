@@ -1254,6 +1254,35 @@ class RubyToBlocksConverter {
         return block;
     }
 
+    _onUntil (node) {
+        this._checkNumChildren(node, 2);
+
+        const saved = this._saveContext();
+
+        let cond = this._process(node.children[0]);
+        if (_.isArray(cond) && cond.length === 1) {
+            cond = cond[0];
+        }
+        if (!this._isFalseOrBooleanBlock(cond)) {
+            throw new RubyToBlocksConverterError(
+                node,
+                `condition is not boolean: ${this._getSource(node.children[0])}`
+            );
+        }
+        let statement = this._process(node.children[1]);
+        if (!_.isArray(statement)) {
+            statement = [statement];
+        }
+
+        let block = this._callConvertersHandler('onUntil', cond, statement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
+        }
+        return block;
+    }
+
     _onStr (node) {
         this._checkNumChildren(node, 1);
 

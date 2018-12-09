@@ -13,7 +13,7 @@ import ShareButton from './share-button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import InlineMessages from '../../containers/inline-messages.jsx';
+import SaveStatus from './save-status.jsx';
 import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
@@ -69,6 +69,13 @@ import smalrubyLogo from './hatti.svg';
 
 import {updateRubyCodeTarget} from '../../reducers/ruby-code';
 
+const messages = defineMessages({
+    confirmNav: {
+        id: 'gui.menuBar.confirmNewWithoutSaving',
+        defaultMessage: 'Replace contents of the current project?',
+        description: 'message for prompting user to confirm that they want to create new project without saving'
+    }
+});
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -157,7 +164,7 @@ class MenuBar extends React.Component {
         // if canSave===true and canCreateNew===true, it's safe to replace current project,
         // since we will auto-save first. Else, confirm first.
         const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
-            confirm('Replace contents of the current project?'); // eslint-disable-line no-alert
+            confirm(this.props.intl.formatMessage(messages.confirmNav)); // eslint-disable-line no-alert
         this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
@@ -572,7 +579,9 @@ class MenuBar extends React.Component {
                 logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
-                        <InlineMessages />
+                        {this.props.canSave && (
+                            <SaveStatus />
+                        )}
                     </div>
                     {this.props.sessionExists ? (
                         this.props.username ? (

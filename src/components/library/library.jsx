@@ -98,10 +98,12 @@ class LibraryComponent extends React.Component {
                 (dataItem.tags || [])
                     // Second argument to map sets `this`
                     .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                    .concat((typeof dataItem.name === 'string' ?
+                    .concat(dataItem.name ?
+                        (typeof dataItem.name === 'string' ?
                         // Use the name if it is a string, else use formatMessage to get the translated name
-                        dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
-                    ).toLowerCase())
+                            dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
+                        ).toLowerCase() :
+                        null)
                     .join('\n') // unlikely to partially match newlines
                     .indexOf(this.state.filterQuery.toLowerCase()) !== -1
             ));
@@ -182,6 +184,7 @@ class LibraryComponent extends React.Component {
                                 disabled={dataItem.disabled}
                                 extensionId={dataItem.extensionId}
                                 featured={dataItem.featured}
+                                hidden={dataItem.hidden}
                                 iconURL={scratchURL}
                                 id={index}
                                 insetIconURL={dataItem.insetIconURL}
@@ -212,7 +215,7 @@ LibraryComponent.propTypes = {
             name: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.node
-            ]).isRequired,
+            ]),
             rawURL: PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */

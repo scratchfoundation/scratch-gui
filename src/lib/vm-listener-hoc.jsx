@@ -43,6 +43,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
             this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
+            this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_DISCONNECT_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
@@ -62,7 +63,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // Re-request a targets update when the shouldEmitTargetsUpdate state changes to true
             // i.e. when the editor transitions out of fullscreen/player only modes
             if (this.props.shouldEmitTargetsUpdate && !prevProps.shouldEmitTargetsUpdate) {
-                this.props.vm.emitTargetsUpdate();
+                this.props.vm.emitTargetsUpdate(false /* Emit the event, but do not trigger project change */);
             }
         }
         componentWillUnmount () {
@@ -116,6 +117,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 attachKeyboardEvents,
                 shouldEmitTargetsUpdate,
                 onBlockDragUpdate,
+                onGreenFlag,
                 onKeyDown,
                 onKeyUp,
                 onMicListeningUpdate,
@@ -136,6 +138,7 @@ const vmListenerHOC = function (WrappedComponent) {
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
         onBlockDragUpdate: PropTypes.func.isRequired,
+        onGreenFlag: PropTypes.func,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
         onMicListeningUpdate: PropTypes.func.isRequired,
@@ -153,7 +156,8 @@ const vmListenerHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
     VMListener.defaultProps = {
-        attachKeyboardEvents: true
+        attachKeyboardEvents: true,
+        onGreenFlag: () => ({})
     };
     const mapStateToProps = state => ({
         // Do not emit target updates in fullscreen or player only mode

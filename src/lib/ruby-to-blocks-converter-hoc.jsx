@@ -9,7 +9,7 @@ import {
     activateTab,
     RUBY_TAB_INDEX
 } from '../reducers/editor-tab';
-import {showStandardAlert} from '../reducers/alerts';
+import {showAlertWithTimeout} from '../reducers/alerts';
 import {highlightTarget} from '../reducers/targets';
 import {
     rubyCodeShape,
@@ -101,7 +101,7 @@ const RubyToBlocksConverterHOC = function (WrappedComponent) {
         convertedRubyCodeState: () => dispatch(convertedRubyCode()),
         onActivateRubyTab: () => dispatch(activateTab(RUBY_TAB_INDEX)),
         onHighlightTarget: id => dispatch(highlightTarget(id)),
-        onShowConvertRubyToBlocksErrorAlert: () => dispatch(showStandardAlert('convertRubyToBlocksError')),
+        onShowConvertRubyToBlocksErrorAlert: () => showAlertWithTimeout(dispatch, 'convertRubyToBlocksError'),
         updateRubyCodeErrorsState: errors => dispatch(updateRubyCodeErrors(errors))
     });
 

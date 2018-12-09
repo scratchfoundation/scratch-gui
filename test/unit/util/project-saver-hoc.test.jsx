@@ -178,7 +178,7 @@ describe('projectSaverHOC', () => {
     });
 
     test('if we enter remixing state, vm project should be requested, and alert should show', () => {
-        const mockedShowCreatingAlert = jest.fn();
+        const mockedShowCreatingRemixAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mockedStoreProject = jest.fn(() => Promise.resolve());
@@ -197,7 +197,7 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
-                onShowCreatingAlert={mockedShowCreatingAlert}
+                onShowCreatingRemixAlert={mockedShowCreatingRemixAlert}
             />
         );
         mounted.setProps({
@@ -205,11 +205,11 @@ describe('projectSaverHOC', () => {
             loadingState: LoadingState.REMIXING
         });
         expect(mockedStoreProject).toHaveBeenCalled();
-        expect(mockedShowCreatingAlert).toHaveBeenCalled();
+        expect(mockedShowCreatingRemixAlert).toHaveBeenCalled();
     });
 
     test('if we enter creating copy state, vm project should be requested, and alert should show', () => {
-        const mockedShowCreatingAlert = jest.fn();
+        const mockedShowCreatingCopyAlert = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);
         const mockedStoreProject = jest.fn(() => Promise.resolve());
@@ -228,7 +228,7 @@ describe('projectSaverHOC', () => {
                 reduxProjectId={'100'}
                 store={store}
                 vm={vm}
-                onShowCreatingAlert={mockedShowCreatingAlert}
+                onShowCreatingCopyAlert={mockedShowCreatingCopyAlert}
             />
         );
         mounted.setProps({
@@ -236,7 +236,7 @@ describe('projectSaverHOC', () => {
             loadingState: LoadingState.CREATING_COPY
         });
         expect(mockedStoreProject).toHaveBeenCalled();
-        expect(mockedShowCreatingAlert).toHaveBeenCalled();
+        expect(mockedShowCreatingCopyAlert).toHaveBeenCalled();
     });
 
     test('if we enter updating/saving state, vm project should be requested', () => {
@@ -398,5 +398,45 @@ describe('projectSaverHOC', () => {
         // Fast-forward until all timers have been executed
         jest.runAllTimers();
         expect(mockedAutoUpdate).not.toHaveBeenCalled();
+    });
+
+    test('when starting to remix, onRemixing should be called with param true', () => {
+        const mockedOnRemixing = jest.fn();
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
+        const mounted = mount(
+            <WrappedComponent
+                isRemixing={false}
+                store={store}
+                vm={vm}
+                onRemixing={mockedOnRemixing}
+            />
+        );
+        mounted.setProps({
+            isRemixing: true
+        });
+        expect(mockedOnRemixing).toHaveBeenCalledWith(true);
+    });
+
+    test('when starting to remix, onRemixing should be called with param true', () => {
+        const mockedOnRemixing = jest.fn();
+        const mockedStoreProject = jest.fn(() => Promise.resolve());
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        WrappedComponent.WrappedComponent.prototype.storeProject = mockedStoreProject;
+        const mounted = mount(
+            <WrappedComponent
+                isRemixing
+                store={store}
+                vm={vm}
+                onRemixing={mockedOnRemixing}
+            />
+        );
+        mounted.setProps({
+            isRemixing: false
+        });
+        expect(mockedOnRemixing).toHaveBeenCalledWith(false);
     });
 });

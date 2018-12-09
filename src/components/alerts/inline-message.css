@@ -3,7 +3,7 @@
 
 .inline-message {
     color: $ui-white;
-    font-family: "Helvetica Neue";
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     justify-content: end;
     align-items: center;

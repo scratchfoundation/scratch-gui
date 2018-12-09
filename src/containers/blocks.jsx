@@ -355,7 +355,9 @@ class Blocks extends React.Component {
             // incomplete. Throwing the error would keep things like setting the
             // correct editing target from happening which can interfere with
             // some blocks and processes in the vm.
-            error.message = `Workspace Update Error: ${error.message}`;
+            if (error.message) {
+                error.message = `Workspace Update Error: ${error.message}`;
+            }
             log.error(error);
         }
         this.workspace.addChangeListener(this.props.vm.blockListener);
@@ -414,6 +416,7 @@ class Blocks extends React.Component {
             optVarType !== this.ScratchBlocks.BROADCAST_MESSAGE_VARIABLE_TYPE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_VARIABLE_MODAL_TITLE &&
             p.prompt.title !== this.ScratchBlocks.Msg.RENAME_LIST_MODAL_TITLE;
+        p.prompt.showCloudOption = (optVarType === this.ScratchBlocks.SCALAR_VARIABLE_TYPE) && this.props.canUseCloud;
         this.setState(p);
     }
     handleConnectionModalStart (extensionId) {
@@ -490,7 +493,7 @@ class Blocks extends React.Component {
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         placeholder={this.state.prompt.defaultValue}
-                        showCloudOption={canUseCloud}
+                        showCloudOption={this.state.prompt.showCloudOption}
                         showVariableOptions={this.state.prompt.showVariableOptions}
                         title={this.state.prompt.title}
                         vm={vm}

@@ -5,6 +5,8 @@ import Blockly from 'scratch-blocks';
 import RubyParser from '../ruby-parser';
 import Variable from 'scratch-vm/src/engine/variable';
 
+import ControlConverter from './control';
+
 /**
  * Class for Ruby's self for detecting self.
  */
@@ -26,6 +28,9 @@ class RubyToBlocksConverterError {
 class RubyToBlocksConverter {
     constructor (vm) {
         this.vm = vm;
+        this._converters = [
+            ControlConverter
+        ];
         this.reset();
     }
 
@@ -139,6 +144,19 @@ class RubyToBlocksConverter {
         });
 
         this.vm.emitWorkspaceUpdate();
+    }
+
+    _callConvertersHandler (handlerName) {
+        for (let i = 0; i < this._converters.length; i++) {
+            const converter = this._converters[i];
+            if (converter.hasOwnProperty(handlerName)) {
+                const block = converter[handlerName].apply(this, Array.prototype.slice.call(arguments, 1));
+                if (block) {
+                    return block;
+                }
+            }
+        }
+        return null;
     }
 
     _saveContext () {
@@ -464,6 +482,10 @@ class RubyToBlocksConverter {
         return block;
     }
 
+    _isSelf (block) {
+        return block === Self;
+    }
+
     _isBlock (block) {
         try {
             return block.hasOwnProperty('opcode');
@@ -507,7 +529,13 @@ class RubyToBlocksConverter {
     }
 
     _isFalseOrBooleanBlock (block) {
-        if (block === false || this._getBlockType(block) === 'value_boolean') {
+        if (block === false) {
+            return true;
+        }
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        if (this._getBlockType(block) === 'value_boolean') {
             return true;
         }
         if (block.opcode === 'argument_reporter_string_number') {
@@ -553,10 +581,14 @@ class RubyToBlocksConverter {
         let prevBlock = null;
         const blocks = [];
         let terminated = false;
+        let firstBlock;
         node.children.forEach(childNode => {
             const block = this._process(childNode);
             if (!block) {
                 return;
+            }
+            if (!firstBlock) {
+                firstBlock = block;
             }
             switch (this._getBlockType(block)) {
             case 'statement':
@@ -588,6 +620,12 @@ class RubyToBlocksConverter {
                 break;
             }
         });
+        if (blocks.length === 0 && firstBlock) {
+            if (/^value/.test(this._getBlockType(firstBlock))) {
+                firstBlock.topLevel = false;
+            }
+            blocks.push(firstBlock);
+        }
         return blocks;
     }
 
@@ -600,7 +638,10 @@ class RubyToBlocksConverter {
     _onSend (node, rubyBlockArgsNode, rubyBlockNode) {
         const saved = this._saveContext();
 
-        const receiver = this._process(node.children[0]);
+        let receiver = this._process(node.children[0]);
+        if (_.isArray(receiver) && receiver.length === 1) {
+            receiver = receiver[0];
+        }
         const name = node.children[1].toString();
         const args = node.children.slice(2).map(childNode => this._process(childNode));
 
@@ -747,15 +788,6 @@ class RubyToBlocksConverter {
                             rubyBlock[0].parent = block.id;
                             block.next = rubyBlock[0].id;
                         }
-                    }
-                }
-                break;
-            case 'loop':
-                if (args.length === 0) {
-                    const waitBlock = this._popWaitBlock(rubyBlock);
-                    if (waitBlock) {
-                        block = this._createBlock('control_forever', 'statement');
-                        this._addSubstack(block, rubyBlock);
                     }
                 }
                 break;
@@ -1143,6 +1175,11 @@ class RubyToBlocksConverter {
                 break;
             }
         }
+
+        if (!block) {
+            block = this._callConvertersHandler('onSend', receiver, name, args, rubyBlockArgs, rubyBlock);
+        }
+
         if (!block) {
             this._restoreContext(saved);
 

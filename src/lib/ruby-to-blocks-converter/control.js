@@ -55,6 +55,19 @@ const ControlConverter = {
             }
         }
         return block;
+    },
+    // eslint-disable-next-line no-unused-vars
+    onIf: function (cond, statement, elseStatement) {
+        const block = this._createBlock('control_if', 'statement');
+        if (cond !== false) {
+            this._addInput(block, 'CONDITION', cond);
+        }
+        this._addSubstack(block, statement);
+        if (elseStatement) {
+            block.opcode = 'control_if_else';
+            this._addSubstack(block, elseStatement, 2);
+        }
+        return block;
     }
 };
 

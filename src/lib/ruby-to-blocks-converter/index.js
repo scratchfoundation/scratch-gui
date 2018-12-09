@@ -1225,28 +1225,31 @@ class RubyToBlocksConverter {
         this._checkNumChildren(node, 3);
 
         const saved = this._saveContext();
-        let cond = this._process(node.children[0]);
+
+        const cond = this._process(node.children[0]);
         if (!this._isFalseOrBooleanBlock(cond)) {
-            this._restoreContext(saved);
-            cond = this._createRubyExpressionBlock(this._getSource(node.children[0]));
+            throw new RubyToBlocksConverterError(
+                node,
+                `condition is not boolean: ${this._getSource(node.children[0])}`
+            );
         }
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];
         }
-        let elseStatement = this._process(node.children[2]);
-        if (!_.isArray(elseStatement)) {
-            elseStatement = [elseStatement];
+        let elseStatement;
+        if (node.$loc().$else() !== Opal.nil) {
+            elseStatement = this._process(node.children[2]);
+            if (!_.isArray(elseStatement)) {
+                elseStatement = [elseStatement];
+            }
         }
 
-        const block = this._createBlock('control_if', 'statement');
-        if (cond !== false) {
-            this._addInput(block, 'CONDITION', cond);
-        }
-        this._addSubstack(block, statement);
-        if (this._isBlock(elseStatement[0])) {
-            block.opcode = 'control_if_else';
-            this._addSubstack(block, elseStatement, 2);
+        let block = this._callConvertersHandler('onIf', cond, statement, elseStatement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
         return block;
     }

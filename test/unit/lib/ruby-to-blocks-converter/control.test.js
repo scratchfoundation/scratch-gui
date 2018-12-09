@@ -814,4 +814,40 @@ describe('RubyToBlocksConverter/Control', () => {
             expect(res).toBeFalsy();
         });
     });
+
+    describe('control_stop', () => {
+        test('normal', () => {
+            [
+                'all',
+                'this script',
+                'other scripts in sprite'
+            ].forEach(option => {
+                code = `stop("${option}")`;
+                expected = [
+                    {
+                        opcode: 'control_stop',
+                        fields: [
+                            {
+                                name: 'STOP_OPTION',
+                                value: option
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+        });
+
+        test('invalid', () => {
+            [
+                'stop',
+                'stop()',
+                'stop(1)',
+                'stop("invalid option")',
+                'stop("all", 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
 });

@@ -1,4 +1,5 @@
 /* global Opal */
+import _ from 'lodash';
 
 /* eslint-disable no-invalid-this */
 const createControlRepeatBlock = function (times, body) {
@@ -37,6 +38,13 @@ const ControlConverter = {
                     rubyBlock && (name !== 'loop' || this._popWaitBlock(rubyBlock))) {
                     block = this._createBlock('control_forever', 'statement');
                     this._addSubstack(block, rubyBlock);
+                }
+                break;
+            case 'stop':
+                if (args.length === 1 &&
+                    _.isString(args[0]) && ['all', 'this script', 'other scripts in sprite'].indexOf(args[0]) >= 0) {
+                    block = this._createBlock('control_stop', 'statement');
+                    this._addField(block, 'STOP_OPTION', args[0]);
                 }
                 break;
             }

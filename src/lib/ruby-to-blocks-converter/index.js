@@ -310,6 +310,17 @@ class RubyToBlocksConverter {
         return block;
     }
 
+    _addField (block, name, value) {
+        if (!this._isBlock(block)) {
+            return;
+        }
+        block.fields[name] = {
+            name: name,
+            value: value
+        };
+        return block.fields[name];
+    }
+
     _addInput (block, name, inputBlock, shadowBlock) {
         if (!name) {
             name = inputBlock.id;

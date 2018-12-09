@@ -889,4 +889,34 @@ describe('RubyToBlocksConverter/Control', () => {
             });
         });
     });
+
+    describe('control_delete_this_clone', () => {
+        test('normal', () => {
+            code = 'delete_this_clone';
+            expected = [
+                {
+                    opcode: 'control_delete_this_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'delete_this_clone()';
+            expected = [
+                {
+                    opcode: 'control_delete_this_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        });
+
+        test('invalid', () => {
+            [
+                '12.delete_this_clone',
+                'delete_this_clone(1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
 });

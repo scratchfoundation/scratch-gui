@@ -57,6 +57,11 @@ const ControlConverter = {
                     this._addInput(block, 'CLONE_OPTION', optionBlock, optionBlock);
                 }
                 break;
+            case 'delete_this_clone':
+                if (args.length === 0) {
+                    block = this._createBlock('control_delete_this_clone', 'statement');
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {

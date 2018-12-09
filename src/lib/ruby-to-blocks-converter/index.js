@@ -791,15 +791,6 @@ class RubyToBlocksConverter {
                     }
                 }
                 break;
-            case 'loop':
-                if (args.length === 0) {
-                    const waitBlock = this._popWaitBlock(rubyBlock);
-                    if (waitBlock) {
-                        block = this._createBlock('control_forever', 'statement');
-                        this._addSubstack(block, rubyBlock);
-                    }
-                }
-                break;
             case 'touching?':
                 if (args.length === 1 && _.isString(args[0])) {
                     block = this._createBlock('sensing_touchingobject', 'value_boolean');

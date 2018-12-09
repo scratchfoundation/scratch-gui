@@ -30,6 +30,15 @@ const ControlConverter = {
                     block = createControlRepeatBlock.call(this, args[0], rubyBlock);
                 }
                 break;
+            case 'loop':
+            case 'forever':
+                if (args.length === 0 &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
+                    rubyBlock && (name !== 'loop' || this._popWaitBlock(rubyBlock))) {
+                    block = this._createBlock('control_forever', 'statement');
+                    this._addSubstack(block, rubyBlock);
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {

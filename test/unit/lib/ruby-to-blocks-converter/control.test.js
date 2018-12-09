@@ -659,6 +659,18 @@ describe('RubyToBlocksConverter/Control', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
+            code = `
+                until false
+                  wait
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_wait_until'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
             code = 'wait until touching?("_edge_")';
             expected = [
                 {
@@ -690,6 +702,112 @@ describe('RubyToBlocksConverter/Control', () => {
 
         test('error', () => {
             code = 'wait until move(10)';
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);
+            expect(res).toBeFalsy();
+        });
+    });
+
+    describe('control_repeat_until', () => {
+        test('normal', () => {
+            code = `
+                until false
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until false
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until touching?("_edge_")
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until (touching?("_edge_"))
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until touching?("_edge_")
+                  move(10)
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('error', () => {
+            code = `
+                until move(10)
+                end
+            `;
             const res = converter.targetCodeToBlocks(target, code);
             expect(converter.errors).toHaveLength(1);
             expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);

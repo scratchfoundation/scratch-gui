@@ -310,6 +310,17 @@ class RubyToBlocksConverter {
         return block;
     }
 
+    _addField (block, name, value) {
+        if (!this._isBlock(block)) {
+            return;
+        }
+        block.fields[name] = {
+            name: name,
+            value: value
+        };
+        return block.fields[name];
+    }
+
     _addInput (block, name, inputBlock, shadowBlock) {
         if (!name) {
             name = inputBlock.id;
@@ -466,6 +477,20 @@ class RubyToBlocksConverter {
             }
         }
         return null;
+    }
+
+    _processCondition (node) {
+        let cond = this._process(node.children[0]);
+        if (_.isArray(cond) && cond.length === 1) {
+            cond = cond[0];
+        }
+        if (!this._isFalseOrBooleanBlock(cond)) {
+            throw new RubyToBlocksConverterError(
+                node,
+                `condition is not boolean: ${this._getSource(node.children[0])}`
+            );
+        }
+        return cond;
     }
 
     _getBlockType (block) {
@@ -1225,28 +1250,45 @@ class RubyToBlocksConverter {
         this._checkNumChildren(node, 3);
 
         const saved = this._saveContext();
-        let cond = this._process(node.children[0]);
-        if (!this._isFalseOrBooleanBlock(cond)) {
-            this._restoreContext(saved);
-            cond = this._createRubyExpressionBlock(this._getSource(node.children[0]));
-        }
+
+        const cond = this._processCondition(node);
         let statement = this._process(node.children[1]);
         if (!_.isArray(statement)) {
             statement = [statement];
         }
-        let elseStatement = this._process(node.children[2]);
-        if (!_.isArray(elseStatement)) {
-            elseStatement = [elseStatement];
+        let elseStatement;
+        if (node.$loc().$else() !== Opal.nil) {
+            elseStatement = this._process(node.children[2]);
+            if (!_.isArray(elseStatement)) {
+                elseStatement = [elseStatement];
+            }
         }
 
-        const block = this._createBlock('control_if', 'statement');
-        if (cond !== false) {
-            this._addInput(block, 'CONDITION', cond);
+        let block = this._callConvertersHandler('onIf', cond, statement, elseStatement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
-        this._addSubstack(block, statement);
-        if (this._isBlock(elseStatement[0])) {
-            block.opcode = 'control_if_else';
-            this._addSubstack(block, elseStatement, 2);
+        return block;
+    }
+
+    _onUntil (node) {
+        this._checkNumChildren(node, 2);
+
+        const saved = this._saveContext();
+
+        const cond = this._processCondition(node);
+        let statement = this._process(node.children[1]);
+        if (!_.isArray(statement)) {
+            statement = [statement];
+        }
+
+        let block = this._callConvertersHandler('onUntil', cond, statement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
         return block;
     }

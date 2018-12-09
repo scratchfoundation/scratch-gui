@@ -1,4 +1,5 @@
 /* global Opal */
+import _ from 'lodash';
 
 /* eslint-disable no-invalid-this */
 const createControlRepeatBlock = function (times, body) {
@@ -39,6 +40,43 @@ const ControlConverter = {
                     this._addSubstack(block, rubyBlock);
                 }
                 break;
+            case 'stop':
+                if (args.length === 1 &&
+                    _.isString(args[0]) && ['all', 'this script', 'other scripts in sprite'].indexOf(args[0]) >= 0) {
+                    block = this._createBlock('control_stop', 'statement');
+                    this._addField(block, 'STOP_OPTION', args[0]);
+                }
+                break;
+            case 'create_clone':
+                if (args.length === 1 && _.isString(args[0])) {
+                    block = this._createBlock('control_create_clone_of', 'statement');
+                    const optionBlock = this._createBlock('control_create_clone_of_menu', 'value', {
+                        shadow: true
+                    });
+                    this._addField(optionBlock, 'CLONE_OPTION', args[0]);
+                    this._addInput(block, 'CLONE_OPTION', optionBlock, optionBlock);
+                }
+                break;
+            case 'delete_this_clone':
+                if (args.length === 0) {
+                    block = this._createBlock('control_delete_this_clone', 'statement');
+                }
+                break;
+            case 'when':
+                if (args.length === 1 &&
+                    _.isString(args[0]) && args[0] === 'start_as_a_clone' &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
+                    rubyBlock) {
+                    block = this._createBlock('control_start_as_clone', 'hat', {
+                        topLevel: true
+                    });
+
+                    if (this._isBlock(rubyBlock[0])) {
+                        rubyBlock[0].parent = block.id;
+                        block.next = rubyBlock[0].id;
+                    }
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {
@@ -53,6 +91,32 @@ const ControlConverter = {
                 }
                 break;
             }
+        }
+        return block;
+    },
+
+    onIf: function (cond, statement, elseStatement) {
+        const block = this._createBlock('control_if', 'statement');
+        if (cond !== false) {
+            this._addInput(block, 'CONDITION', cond);
+        }
+        this._addSubstack(block, statement);
+        if (elseStatement) {
+            block.opcode = 'control_if_else';
+            this._addSubstack(block, elseStatement, 2);
+        }
+        return block;
+    },
+
+    onUntil: function (cond, statement) {
+        const block = this._createBlock('control_repeat_until', 'statement');
+        if (cond !== false) {
+            this._addInput(block, 'CONDITION', cond);
+        }
+        if (statement.length === 1 && this._popWaitBlock(statement)) {
+            block.opcode = 'control_wait_until';
+        } else {
+            this._addSubstack(block, statement);
         }
         return block;
     }

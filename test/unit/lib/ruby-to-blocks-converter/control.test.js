@@ -389,134 +389,592 @@ describe('RubyToBlocksConverter/Control', () => {
         });
     });
 
-    test('control_if', () => {
-        code = 'if touching?("_edge_"); bounce_if_on_edge; end';
-        expected = [
-            {
-                opcode: 'control_if',
-                inputs: [
-                    {
-                        name: 'CONDITION',
-                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
-                    }
-                ],
-                branches: [
-                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-        code = 'if touching?("_edge_"); bounce_if_on_edge; move(10); end';
-        expected = [
-            {
-                opcode: 'control_if',
-                inputs: [
-                    {
-                        name: 'CONDITION',
-                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
-                    }
-                ],
-                branches: [
-                    rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-        code = 'if move(10); end';
-        expected = [
-            {
-                opcode: 'control_if',
-                inputs: [
-                    {
-                        name: 'CONDITION',
-                        block: {
-                            opcode: 'ruby_expression',
-                            inputs: [
-                                {
-                                    name: 'EXPRESSION',
-                                    block: {
-                                        opcode: 'text',
-                                        fields: [
-                                            {
-                                                name: 'TEXT',
-                                                value: 'move(10)'
-                                            }
-                                        ],
-                                        shadow: true
-                                    }
-                                }
-                            ]
+    describe('control_if', () => {
+        test('normal', () => {
+            code = `
+                if touching?("_edge_")
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
                         }
-                    }
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        code = 'if false; end';
-        expected = [
-            {
-                opcode: 'control_if',
-                branches: [
-                    null
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+            code = `
+                if (touching?("_edge_"))
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        code = 'if touching?("_edge_"); else; end';
-        expected = [
-            {
-                opcode: 'control_if',
-                inputs: [
-                    {
-                        name: 'CONDITION',
-                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
-                    }
-                ],
-                branches: []
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+            code = `
+                if touching?("_edge_")
+                  bounce_if_on_edge
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('false', () => {
+            code = `
+                if false
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if',
+                    inputs: [],
+                    branches: [
+                        null
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('error', () => {
+            code = `
+                if move(10)
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);
+            expect(res).toBeFalsy();
+        });
     });
 
-    test('control_if_else', () => {
-        code = 'if touching?("_edge_"); bounce_if_on_edge; else; move(10); end';
-        expected = [
-            {
-                opcode: 'control_if_else',
-                inputs: [
-                    {
-                        name: 'CONDITION',
-                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
-                    }
-                ],
-                branches: [
-                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
-                    rubyToExpected(converter, target, 'move(10)')[0]
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+    describe('control_if_else', () => {
+        test('normal', () => {
+            code = `
+                if touching?("_edge_")
+                  bounce_if_on_edge
+                else
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        code = 'if touching?("_edge_"); bounce_if_on_edge; bounce_if_on_edge; else; move(10); move(10); end';
-        expected = [
-            {
-                opcode: 'control_if_else',
-                inputs: [
+            code = `
+                if touching?("_edge_")
+                  bounce_if_on_edge
+                  bounce_if_on_edge
+                else
+                  move(10)
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge; bounce_if_on_edge')[0],
+                        rubyToExpected(converter, target, 'move(10); move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                if touching?("_edge_")
+                else
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        null,
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                if touching?("_edge_")
+                  bounce_if_on_edge
+                else
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                if touching?("_edge_")
+                else
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('false', () => {
+            code = `
+                if false
+                  bounce_if_on_edge
+                else
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [],
+                    branches: [
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                if false
+                else
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('error', () => {
+            code = `
+                if move(10)
+                else
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);
+            expect(res).toBeFalsy();
+        });
+    });
+
+    describe('control_wait_until', () => {
+        test('normal', () => {
+            code = 'wait until false';
+            expected = [
+                {
+                    opcode: 'control_wait_until'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until false
+                  wait
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_wait_until'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'wait until touching?("_edge_")';
+            expected = [
+                {
+                    opcode: 'control_wait_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'wait until (touching?("_edge_"))';
+            expected = [
+                {
+                    opcode: 'control_wait_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('error', () => {
+            code = 'wait until move(10)';
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);
+            expect(res).toBeFalsy();
+        });
+    });
+
+    describe('control_repeat_until', () => {
+        test('normal', () => {
+            code = `
+                until false
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until false
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until touching?("_edge_")
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until (touching?("_edge_"))
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until touching?("_edge_")
+                  move(10)
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('error', () => {
+            code = `
+                until move(10)
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].text).toMatch(/condition is not boolean: move\(10\)/);
+            expect(res).toBeFalsy();
+        });
+    });
+
+    describe('control_stop', () => {
+        test('normal', () => {
+            [
+                'all',
+                'this script',
+                'other scripts in sprite'
+            ].forEach(option => {
+                code = `stop("${option}")`;
+                expected = [
                     {
-                        name: 'CONDITION',
-                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        opcode: 'control_stop',
+                        fields: [
+                            {
+                                name: 'STOP_OPTION',
+                                value: option
+                            }
+                        ]
                     }
-                ],
-                branches: [
-                    rubyToExpected(converter, target, 'bounce_if_on_edge; bounce_if_on_edge')[0],
-                    rubyToExpected(converter, target, 'move(10); move(10)')[0]
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+        });
+
+        test('invalid', () => {
+            [
+                'stop',
+                'stop()',
+                'stop(1)',
+                'stop("invalid option")',
+                'stop("all", 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
+
+    describe('control_create_clone_of', () => {
+        test('normal', () => {
+            code = 'create_clone("_myself_")';
+            expected = [
+                {
+                    opcode: 'control_create_clone_of',
+                    inputs: [
+                        {
+                            name: 'CLONE_OPTION',
+                            block: {
+                                opcode: 'control_create_clone_of_menu',
+                                fields: [
+                                    {
+                                        name: 'CLONE_OPTION',
+                                        value: '_myself_'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'create_clone',
+                'create_clone()',
+                'create_clone(1)',
+                'create_clone(move(10))',
+                'create_clone("_myself_", 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
+
+    describe('control_delete_this_clone', () => {
+        test('normal', () => {
+            code = 'delete_this_clone';
+            expected = [
+                {
+                    opcode: 'control_delete_this_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'delete_this_clone()';
+            expected = [
+                {
+                    opcode: 'control_delete_this_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                '12.delete_this_clone',
+                'delete_this_clone(1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
+
+    describe('control_start_as_clone', () => {
+        test('normal', () => {
+            code = `
+                self.when(:start_as_a_clone) do
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                self.when(:start_as_a_clone) do
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone',
+                    next: rubyToExpected(converter, target, 'move(10)')[0]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                self.when(:start_as_a_clone) do
+                  move(10)
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone',
+                    next: rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.when(:start_as_a_clone)',
+                'self.when(:start_as_a_clone, 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+
+            [
+                '12.when(:start_as_a_clone) {}'
+            ].forEach(s => {
+                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
+                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
+                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+            });
+        });
     });
 });

@@ -62,6 +62,21 @@ const ControlConverter = {
                     block = this._createBlock('control_delete_this_clone', 'statement');
                 }
                 break;
+            case 'when':
+                if (args.length === 1 &&
+                    _.isString(args[0]) && args[0] === 'start_as_a_clone' &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
+                    rubyBlock) {
+                    block = this._createBlock('control_start_as_clone', 'hat', {
+                        topLevel: true
+                    });
+
+                    if (this._isBlock(rubyBlock[0])) {
+                        rubyBlock[0].parent = block.id;
+                        block.next = rubyBlock[0].id;
+                    }
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {

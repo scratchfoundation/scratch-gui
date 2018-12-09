@@ -907,7 +907,6 @@ describe('RubyToBlocksConverter/Control', () => {
                 }
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
-
         });
 
         test('invalid', () => {
@@ -916,6 +915,65 @@ describe('RubyToBlocksConverter/Control', () => {
                 'delete_this_clone(1)'
             ].forEach(s => {
                 convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
+
+    describe('control_start_as_clone', () => {
+        test('normal', () => {
+            code = `
+                self.when(:start_as_a_clone) do
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                self.when(:start_as_a_clone) do
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone',
+                    next: rubyToExpected(converter, target, 'move(10)')[0]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                self.when(:start_as_a_clone) do
+                  move(10)
+                  bounce_if_on_edge
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_start_as_clone',
+                    next: rubyToExpected(converter, target, 'move(10); bounce_if_on_edge')[0]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.when(:start_as_a_clone)',
+                'self.when(:start_as_a_clone, 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+
+            [
+                '12.when(:start_as_a_clone) {}'
+            ].forEach(s => {
+                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
+                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
+                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
             });
         });
     });

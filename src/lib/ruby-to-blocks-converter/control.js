@@ -47,6 +47,16 @@ const ControlConverter = {
                     this._addField(block, 'STOP_OPTION', args[0]);
                 }
                 break;
+            case 'create_clone':
+                if (args.length === 1 && _.isString(args[0])) {
+                    block = this._createBlock('control_create_clone_of', 'statement');
+                    const optionBlock = this._createBlock('control_create_clone_of_menu', 'value', {
+                        shadow: true
+                    });
+                    this._addField(optionBlock, 'CLONE_OPTION', args[0]);
+                    this._addInput(block, 'CLONE_OPTION', optionBlock, optionBlock);
+                }
+                break;
             }
         } else if (this._isNumberOrBlock(receiver)) {
             switch (name) {

@@ -850,4 +850,43 @@ describe('RubyToBlocksConverter/Control', () => {
             });
         });
     });
+
+    describe('control_create_clone_of', () => {
+        test('normal', () => {
+            code = 'create_clone("_myself_")';
+            expected = [
+                {
+                    opcode: 'control_create_clone_of',
+                    inputs: [
+                        {
+                            name: 'CLONE_OPTION',
+                            block: {
+                                opcode: 'control_create_clone_of_menu',
+                                fields: [
+                                    {
+                                        name: 'CLONE_OPTION',
+                                        value: '_myself_'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'create_clone',
+                'create_clone()',
+                'create_clone(1)',
+                'create_clone(move(10))',
+                'create_clone("_myself_", 1)'
+            ].forEach(s => {
+                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            });
+        });
+    });
 });

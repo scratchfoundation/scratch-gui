@@ -536,10 +536,16 @@ Blocks.propTypes = {
         comments: PropTypes.bool,
         collapse: PropTypes.bool
     }),
+    setWorkspaceMetrics: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
     updateToolboxState: PropTypes.func,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    workspaceMetrics: PropTypes.objectOf({
+        scrollX: PropTypes.number,
+        scrollY: PropTypes.number,
+        scale: PropTypes.number
+    })
 };
 
 Blocks.defaultOptions = {

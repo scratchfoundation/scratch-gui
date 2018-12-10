@@ -22,6 +22,7 @@ import DragConstants from '../lib/drag-constants';
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
+import {setWorkspaceMetrics} from '../reducers/workspace-metrics';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
@@ -91,8 +92,16 @@ class Blocks extends React.Component {
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
-            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML}
+            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML},
         );
+
+        // Retrieve zoom from redux state, if the language is changed and the component needs to remount.
+        if (this.props.vm.editingTarget && this.props.vm.editingTarget.id) {
+            const metrics = this.props.workspaceMetrics[this.props.vm.editingTarget.id];
+            if (metrics && metrics.scale) {
+                workspaceConfig.zoom.startScale = metrics.scale;
+            }
+        }
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
         // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
@@ -272,14 +281,14 @@ class Blocks extends React.Component {
     onWorkspaceMetricsChange () {
         const target = this.props.vm.editingTarget;
         if (target && target.id) {
-            const workspaceMetrics = Object.assign({}, this.state.workspaceMetrics, {
-                [target.id]: {
+            this.props.setWorkspaceMetrics(
+                target.id,
+                {
                     scrollX: this.workspace.scrollX,
                     scrollY: this.workspace.scrollY,
                     scale: this.workspace.scale
                 }
-            });
-            this.setState({workspaceMetrics});
+            );
         }
     }
     onScriptGlowOn (data) {
@@ -305,8 +314,7 @@ class Blocks extends React.Component {
             const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
             this.props.updateToolboxState(toolboxXML);
         }
-
-        if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
+        if (this.props.vm.editingTarget && !this.props.workspaceMetrics[this.props.vm.editingTarget.id]) {
             this.onWorkspaceMetricsChange();
         }
 
@@ -332,8 +340,8 @@ class Blocks extends React.Component {
         }
         this.workspace.addChangeListener(this.props.vm.blockListener);
 
-        if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
-            const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
+        if (this.props.vm.editingTarget && this.props.workspaceMetrics[this.props.vm.editingTarget.id]) {
+            const {scrollX, scrollY, scale} = this.props.workspaceMetrics[this.props.vm.editingTarget.id];
             this.workspace.scrollX = scrollX;
             this.workspace.scrollY = scrollY;
             this.workspace.scale = scale;
@@ -577,7 +585,8 @@ const mapStateToProps = state => ({
     locale: state.locales.locale,
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
-    customProceduresVisible: state.scratchGui.customProcedures.active
+    customProceduresVisible: state.scratchGui.customProcedures.active,
+    workspaceMetrics: state.scratchGui.workspaceMetrics
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -591,15 +600,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch(activateTab(SOUNDS_TAB_INDEX));
         dispatch(openSoundRecorder());
     },
-    onRequestCloseExtensionLibrary: () => {
-        dispatch(closeExtensionLibrary());
-    },
-    onRequestCloseCustomProcedures: data => {
-        dispatch(deactivateCustomProcedures(data));
-    },
-    updateToolboxState: toolboxXML => {
-        dispatch(updateToolbox(toolboxXML));
-    }
+    onRequestCloseExtensionLibrary: () => dispatch(closeExtensionLibrary()),
+    onRequestCloseCustomProcedures: data => dispatch(deactivateCustomProcedures(data)),
+    updateToolboxState: toolboxXML => dispatch(updateToolbox(toolboxXML)),
+    setWorkspaceMetrics: (targetId, metrics) => dispatch(setWorkspaceMetrics(targetId, metrics))
 });
 
 export default errorBoundaryHOC('Blocks')(

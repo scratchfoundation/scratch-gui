@@ -21,7 +21,7 @@ export default function (Generator) {
 
     Generator.text2speech_setLanguage = function (block) {
         const language = Generator.valueToCode(block, 'LANGUAGE', Generator.ORDER_NONE);
-        return `self.language = ${language}\n`;
+        return `self.text2speech_language = ${language}\n`;
     };
 
     Generator.text2speech_menu_languages = function (block) {

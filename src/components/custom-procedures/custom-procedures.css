@@ -11,6 +11,11 @@
     padding: 1.5rem 2.25rem;
 }
 
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
 /* Blocks workspace for custom procedure declaration editor */
 .workspace {
     min-height: 200px;

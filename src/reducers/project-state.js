@@ -58,6 +58,11 @@ const getIsLoadingWithId = loadingState => (
     loadingState === LoadingState.LOADING_VM_WITH_ID ||
     loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
 );
+const getIsLoading = loadingState => (
+    loadingState === LoadingState.LOADING_VM_FILE_UPLOAD ||
+    loadingState === LoadingState.LOADING_VM_WITH_ID ||
+    loadingState === LoadingState.LOADING_VM_NEW_DEFAULT
+);
 const getIsCreatingNew = loadingState => (
     loadingState === LoadingState.CREATING_NEW
 );
@@ -488,6 +493,7 @@ export {
     getIsError,
     getIsFetchingWithId,
     getIsFetchingWithoutId,
+    getIsLoading,
     getIsLoadingWithId,
     getIsManualUpdating,
     getIsRemixing,

@@ -10,6 +10,7 @@ import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
 import analytics from '../../lib/analytics';
+import storage from '../../lib/storage';
 
 import styles from './library.css';
 
@@ -28,6 +29,24 @@ const messages = defineMessages({
 
 const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
 const tagListPrefix = [ALL_TAG];
+
+/**
+ * Find the AssetType which corresponds to a particular file extension. For example, 'png' => AssetType.ImageBitmap.
+ * @param {string} fileExtension - the file extension to look up.
+ * @returns {AssetType} - the AssetType corresponding to the extension, if any.
+ */
+const getAssetTypeForFileExtension = function (fileExtension) {
+    const compareOptions = {
+        sensitivity: 'accent',
+        usage: 'search'
+    };
+    for (const assetTypeId of Object.keys(storage.AssetType)) {
+        const assetType = storage.AssetType[assetTypeId];
+        if (fileExtension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
+            return assetType;
+        }
+    }
+};
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -172,8 +191,17 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => (
-                        <LibraryItem
+                    {this.getFilteredData().map((dataItem, index) => {
+                        const iconSource = {};
+                        if (dataItem.rawURL) {
+                            iconSource.uri = dataItem.rawURL;
+                        } else {
+                            // TODO: adjust libraries to be more storage-friendly; don't use split() here.
+                            const [assetId, fileExtension] = dataItem.md5.split('.');
+                            iconSource.assetId = assetId;
+                            iconSource.assetType = getAssetTypeForFileExtension(fileExtension);
+                        }
+                        return (<LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
                             description={dataItem.description}
@@ -181,8 +209,7 @@ class LibraryComponent extends React.Component {
                             extensionId={dataItem.extensionId}
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
-                            iconMD5={dataItem.md5} // either this or iconURL must be defined
-                            iconURL={dataItem.rawURL} // either this or iconMD5 must be defined
+                            iconSource={iconSource}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}
@@ -193,8 +220,8 @@ class LibraryComponent extends React.Component {
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
-                        />
-                    ))}
+                        />);
+                    })}
                 </div>
             </Modal>
         );

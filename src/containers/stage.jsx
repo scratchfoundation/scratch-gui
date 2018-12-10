@@ -60,6 +60,9 @@ class Stage extends React.Component {
             this.renderer = new Renderer(this.canvas);
             this.props.vm.attachRenderer(this.renderer);
 
+            // Only attach a video provider once because it is stateful
+            this.props.vm.setVideoProvider(new VideoProvider());
+
             // Calling draw a single time before any project is loaded just makes
             // the canvas white instead of solid black–needed because it is not
             // possible to use CSS to style the canvas to have a different
@@ -68,7 +71,6 @@ class Stage extends React.Component {
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
-        this.props.vm.setVideoProvider(new VideoProvider());
     }
     componentDidMount () {
         this.attachRectEvents();

@@ -298,11 +298,7 @@ class MenuBar extends React.Component {
                 <div className={styles.mainMenu}>
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
-                            <a
-                                href="https://scratch.mit.edu"
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
+                            <a href="https://scratch.mit.edu">
                                 <img
                                     alt="Scratch"
                                     className={styles.scratchLogo}

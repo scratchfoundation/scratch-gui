@@ -40,6 +40,12 @@ const LooksConverter = {
                     }
                 }
                 break;
+            case 'switch_costume':
+                if (args.length === 1 && _.isString(args[0])) {
+                    block = this._createBlock('looks_switchcostumeto', 'statement');
+                    this._addInput(block, 'COSTUME', this._createFieldBlock('looks_costume', 'COSTUME', args[0]));
+                }
+                break;
             }
         }
         return block;

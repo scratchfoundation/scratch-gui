@@ -314,4 +314,44 @@ describe('RubyToBlocksConverter/Looks', () => {
             });
         });
     });
+
+    describe('looks_switchcostumeto', () => {
+        test('normal', () => {
+            code = 'switch_costume("costume2")';
+            expected = [
+                {
+                    opcode: 'looks_switchcostumeto',
+                    inputs: [
+                        {
+                            name: 'COSTUME',
+                            block: {
+                                opcode: 'looks_costume',
+                                fields: [
+                                    {
+                                        name: 'COSTUME',
+                                        value: 'costume2'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'switch_costume',
+                'switch_costume(false)',
+                'switch_costume(true)',
+                'switch_costume(1)',
+                'switch_costume(x)',
+                'switch_costume("costume2", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

@@ -72,6 +72,12 @@ const LooksConverter = {
                     this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
                 }
                 break;
+            case 'switch_backdrop_and_wait':
+                if (args.length === 1 && _.isString(args[0])) {
+                    block = this._createBlock('looks_switchbackdroptoandwait', 'statement');
+                    this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
+                }
+                break;
             case 'size=':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('looks_setsizeto', 'statement');

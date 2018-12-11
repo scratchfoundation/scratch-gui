@@ -815,4 +815,44 @@ describe('RubyToBlocksConverter/Looks', () => {
             });
         });
     });
+
+    describe('looks_switchbackdroptoandwait', () => {
+        test('normal', () => {
+            code = 'switch_backdrop_and_wait("backdrop2")';
+            expected = [
+                {
+                    opcode: 'looks_switchbackdroptoandwait',
+                    inputs: [
+                        {
+                            name: 'BACKDROP',
+                            block: {
+                                opcode: 'looks_backdrops',
+                                fields: [
+                                    {
+                                        name: 'BACKDROP',
+                                        value: 'backdrop2'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'switch_backdrop_and_wait',
+                'switch_backdrop_and_wait(false)',
+                'switch_backdrop_and_wait(true)',
+                'switch_backdrop_and_wait(1)',
+                'switch_backdrop_and_wait(x)',
+                'switch_backdrop_and_wait("backdrop2", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

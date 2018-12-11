@@ -16,7 +16,7 @@ const LooksConverter = {
     // eslint-disable-next-line no-unused-vars
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
-        if (this._isSelf(receiver) || receiver === Opal.nil) {
+        if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
             case 'say':
             case 'think':
@@ -44,6 +44,22 @@ const LooksConverter = {
                 if (args.length === 1 && _.isString(args[0])) {
                     block = this._createBlock('looks_switchcostumeto', 'statement');
                     this._addInput(block, 'COSTUME', this._createFieldBlock('looks_costume', 'COSTUME', args[0]));
+                }
+                break;
+            case 'next_costume':
+                if (args.length === 0) {
+                    block = this._createBlock('looks_nextcostume', 'statement');
+                }
+                break;
+            case 'switch_backdrop':
+                if (args.length === 1 && _.isString(args[0])) {
+                    block = this._createBlock('looks_switchbackdropto', 'statement');
+                    this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
+                }
+                break;
+            case 'next_backdrop':
+                if (args.length === 0) {
+                    block = this._createBlock('looks_nextbackdrop', 'statement');
                 }
                 break;
             }

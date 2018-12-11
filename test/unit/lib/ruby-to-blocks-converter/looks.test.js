@@ -354,4 +354,108 @@ describe('RubyToBlocksConverter/Looks', () => {
             });
         });
     });
+
+    describe('looks_nextcostume', () => {
+        test('normal', () => {
+            code = 'next_costume';
+            expected = [
+                {
+                    opcode: 'looks_nextcostume'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'next_costume()';
+            expected = [
+                {
+                    opcode: 'looks_nextcostume'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'next_costume(false)',
+                'next_costume(true)',
+                'next_costume(1)',
+                'next_costume("costume2")',
+                'next_costume(x)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('looks_switchbackdropto', () => {
+        test('normal', () => {
+            code = 'switch_backdrop("backdrop2")';
+            expected = [
+                {
+                    opcode: 'looks_switchbackdropto',
+                    inputs: [
+                        {
+                            name: 'BACKDROP',
+                            block: {
+                                opcode: 'looks_backdrops',
+                                fields: [
+                                    {
+                                        name: 'BACKDROP',
+                                        value: 'backdrop2'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'switch_backdrop',
+                'switch_backdrop(false)',
+                'switch_backdrop(true)',
+                'switch_backdrop(1)',
+                'switch_backdrop(x)',
+                'switch_backdrop("backdrop2", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('looks_nextbackdrop', () => {
+        test('normal', () => {
+            code = 'next_backdrop';
+            expected = [
+                {
+                    opcode: 'looks_nextbackdrop'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'next_backdrop()';
+            expected = [
+                {
+                    opcode: 'looks_nextbackdrop'
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'next_backdrop(false)',
+                'next_backdrop(true)',
+                'next_backdrop(1)',
+                'next_backdrop("backdrop2")',
+                'next_backdrop(x)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

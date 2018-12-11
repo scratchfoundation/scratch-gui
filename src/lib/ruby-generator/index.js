@@ -19,6 +19,8 @@ import RubyBlocks from './ruby.js';
 import MusicBlocks from './music.js';
 import PenBlocks from './pen.js';
 import VideoBlocks from './video.js';
+import Text2SpeechBlocks from './text2speech.js';
+import TranslateBlocks from './translate.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -439,5 +441,7 @@ RubyBlocks(RubyGenerator);
 MusicBlocks(RubyGenerator);
 PenBlocks(RubyGenerator);
 VideoBlocks(RubyGenerator);
+Text2SpeechBlocks(RubyGenerator);
+TranslateBlocks(RubyGenerator);
 
 export default RubyGenerator;

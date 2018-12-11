@@ -608,4 +608,48 @@ describe('RubyToBlocksConverter/Looks', () => {
     expectNoArgsMethod('looks_show', 'show');
     expectNoArgsMethod('looks_hide', 'hide');
     expectNoArgsMethod('looks_size', 'size');
+
+    describe('looks_gotofrontback', () => {
+        test('normal', () => {
+            code = 'go_to_layer("front")';
+            expected = [
+                {
+                    opcode: 'looks_gotofrontback',
+                    fields: [
+                        {
+                            name: 'FRONT_BACK',
+                            value: 'front'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'go_to_layer("back")';
+            expected = [
+                {
+                    opcode: 'looks_gotofrontback',
+                    fields: [
+                        {
+                            name: 'FRONT_BACK',
+                            value: 'back'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'go_to_layer',
+                'go_to_layer()',
+                'go_to_layer("invalid")',
+                'go_to_layer(25)',
+                'go_to_layer(x)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

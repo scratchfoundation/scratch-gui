@@ -17,6 +17,12 @@ const Effects = [
     'BRIGHTNESS',
     'GHOST'
 ];
+
+const FrontBack = [
+    'front',
+    'back'
+];
+
 /* eslint-enable no-invalid-this */
 
 /**
@@ -86,37 +92,38 @@ const LooksConverter = {
                     this._addNumberInput(block, inputName, 'math_number', args[1], 25);
                 }
                 break;
-            case 'next_costume':
-            case 'next_backdrop':
-            case 'clear_graphic_effects':
-            case 'show':
-            case 'hide':
-            case 'size':
-                if (args.length === 0) {
-                    let opcode;
-                    switch (name) {
-                    case 'next_costume':
-                        opcode = 'looks_nextcostume';
-                        break;
-                    case 'next_backdrop':
-                        opcode = 'looks_nextbackdrop';
-                        break;
-                    case 'clear_graphic_effects':
-                        opcode = 'looks_cleargraphiceffects';
-                        break;
-                    case 'show':
-                        opcode = 'looks_show';
-                        break;
-                    case 'hide':
-                        opcode = 'looks_hide';
-                        break;
-                    case 'size':
-                        opcode = 'looks_size';
-                        break;
-                    }
-                    block = this._createBlock(opcode, 'statement');
+            case 'go_to_layer':
+                if (args.length === 1 && _.isString(args[0]) && FrontBack.indexOf(args[0]) >= 0) {
+                    block = this._createBlock('looks_gotofrontback', 'statement');
+                    this._addField(block, 'FRONT_BACK', args[0]);
                 }
                 break;
+            }
+            if (!block && args.length === 0) {
+                let opcode;
+                switch (name) {
+                case 'next_costume':
+                    opcode = 'looks_nextcostume';
+                    break;
+                case 'next_backdrop':
+                    opcode = 'looks_nextbackdrop';
+                    break;
+                case 'clear_graphic_effects':
+                    opcode = 'looks_cleargraphiceffects';
+                    break;
+                case 'show':
+                    opcode = 'looks_show';
+                    break;
+                case 'hide':
+                    opcode = 'looks_hide';
+                    break;
+                case 'size':
+                    opcode = 'looks_size';
+                    break;
+                }
+                if (opcode) {
+                    block = this._createBlock(opcode, 'statement');
+                }
             }
         }
         return block;

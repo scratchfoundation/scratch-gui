@@ -62,6 +62,12 @@ const LooksConverter = {
                     block = this._createBlock('looks_nextbackdrop', 'statement');
                 }
                 break;
+            case 'size=':
+                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
+                    block = this._createBlock('looks_setsizeto', 'statement');
+                    this._addNumberInput(block, 'SIZE', 'math_number', args[0], 100);
+                }
+                break;
             case 'size':
                 if (args.length === 0) {
                     block = this._createBlock('looks_size', 'value');

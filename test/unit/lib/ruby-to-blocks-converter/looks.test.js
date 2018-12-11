@@ -502,6 +502,49 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
+    describe('looks_setsizeto', () => {
+        test('normal', () => {
+            code = 'self.size = 10';
+            expected = [
+                {
+                    opcode: 'looks_setsizeto',
+                    inputs: [
+                        {
+                            name: 'SIZE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.size = x';
+            expected = [
+                {
+                    opcode: 'looks_setsizeto',
+                    inputs: [
+                        {
+                            name: 'SIZE',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(100)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.size = "10"',
+                'self.size = :symbol',
+                'self.size = abc'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     describe('looks_size', () => {
         test('normal', () => {
             code = 'size';

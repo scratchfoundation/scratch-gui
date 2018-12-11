@@ -19,6 +19,40 @@ describe('RubyToBlocksConverter/Looks', () => {
         expected = null;
     });
 
+    const expectNoArgsMethod = function (opcode, methodName) {
+        describe(opcode, () => {
+            test('normal', () => {
+                code = methodName;
+                expected = [
+                    {
+                        opcode: opcode
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `${methodName}()`;
+                expected = [
+                    {
+                        opcode: opcode
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('invalid', () => {
+                [
+                    `${methodName}(false)`,
+                    `${methodName}(true)`,
+                    `${methodName}(1)`,
+                    `${methodName}("backdrop2")`,
+                    `${methodName}(x)`
+                ].forEach(c => {
+                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                });
+            });
+        });
+    };
+
     describe('looks_sayforsecs', () => {
         test('normal', () => {
             code = 'say("Hello!", 2)';
@@ -355,37 +389,7 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
-    describe('looks_nextcostume', () => {
-        test('normal', () => {
-            code = 'next_costume';
-            expected = [
-                {
-                    opcode: 'looks_nextcostume'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = 'next_costume()';
-            expected = [
-                {
-                    opcode: 'looks_nextcostume'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-        });
-
-        test('invalid', () => {
-            [
-                'next_costume(false)',
-                'next_costume(true)',
-                'next_costume(1)',
-                'next_costume("costume2")',
-                'next_costume(x)'
-            ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
-            });
-        });
-    });
+    expectNoArgsMethod('looks_nextcostume', 'next_costume');
 
     describe('looks_switchbackdropto', () => {
         test('normal', () => {
@@ -427,37 +431,7 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
-    describe('looks_nextbackdrop', () => {
-        test('normal', () => {
-            code = 'next_backdrop';
-            expected = [
-                {
-                    opcode: 'looks_nextbackdrop'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = 'next_backdrop()';
-            expected = [
-                {
-                    opcode: 'looks_nextbackdrop'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-        });
-
-        test('invalid', () => {
-            [
-                'next_backdrop(false)',
-                'next_backdrop(true)',
-                'next_backdrop(1)',
-                'next_backdrop("backdrop2")',
-                'next_backdrop(x)'
-            ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
-            });
-        });
-    });
+    expectNoArgsMethod('looks_nextbackdrop', 'next_backdrop');
 
     describe('looks_changesizeby', () => {
         test('normal', () => {
@@ -663,31 +637,22 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
-    describe('looks_size', () => {
-        test('normal', () => {
-            code = 'size';
-            expected = [
-                {
-                    opcode: 'looks_size'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = 'size()';
-            expected = [
-                {
-                    opcode: 'looks_size'
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-        });
-
-        test('invalid', () => {
-            [
-                'size(1)'
-            ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
-            });
-        });
+    [
+        {
+            opcode: 'looks_cleargraphiceffects',
+            methodName: 'clear_graphic_effects'
+        },
+        {
+            opcode: 'looks_show',
+            methodName: 'show'
+        },
+        {
+            opcode: 'looks_hide',
+            methodName: 'hide'
+        }
+    ].forEach(info => {
+        expectNoArgsMethod(info.opcode, info.methodName);
     });
+
+    expectNoArgsMethod('looks_size', 'size');
 });

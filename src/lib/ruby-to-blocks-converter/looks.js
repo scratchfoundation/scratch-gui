@@ -56,20 +56,10 @@ const LooksConverter = {
                     this._addInput(block, 'COSTUME', this._createFieldBlock('looks_costume', 'COSTUME', args[0]));
                 }
                 break;
-            case 'next_costume':
-                if (args.length === 0) {
-                    block = this._createBlock('looks_nextcostume', 'statement');
-                }
-                break;
             case 'switch_backdrop':
                 if (args.length === 1 && _.isString(args[0])) {
                     block = this._createBlock('looks_switchbackdropto', 'statement');
                     this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
-                }
-                break;
-            case 'next_backdrop':
-                if (args.length === 0) {
-                    block = this._createBlock('looks_nextbackdrop', 'statement');
                 }
                 break;
             case 'size=':
@@ -96,9 +86,35 @@ const LooksConverter = {
                     this._addNumberInput(block, inputName, 'math_number', args[1], 25);
                 }
                 break;
+            case 'next_costume':
+            case 'next_backdrop':
+            case 'clear_graphic_effects':
+            case 'show':
+            case 'hide':
             case 'size':
                 if (args.length === 0) {
-                    block = this._createBlock('looks_size', 'value');
+                    let opcode;
+                    switch (name) {
+                    case 'next_costume':
+                        opcode = 'looks_nextcostume';
+                        break;
+                    case 'next_backdrop':
+                        opcode = 'looks_nextbackdrop';
+                        break;
+                    case 'clear_graphic_effects':
+                        opcode = 'looks_cleargraphiceffects';
+                        break;
+                    case 'show':
+                        opcode = 'looks_show';
+                        break;
+                    case 'hide':
+                        opcode = 'looks_hide';
+                        break;
+                    case 'size':
+                        opcode = 'looks_size';
+                        break;
+                    }
+                    block = this._createBlock(opcode, 'statement');
                 }
                 break;
             }

@@ -1330,7 +1330,8 @@ class RubyToBlocksConverter {
     _onOpAsgn (node) {
         this._checkNumChildren(node, 3);
 
-        const savedBlockIds = Object.keys(this._context.blocks);
+        const saved = this._saveContext();
+
         const lh = this._process(node.children[0]);
         const operator = node.children[1].toString();
         const rh = this._process(node.children[2]);
@@ -1373,12 +1374,13 @@ class RubyToBlocksConverter {
                 }
             }
         }
+        if (!block) {
+            block = this._callConvertersHandler('onOpAsgn', lh, operator, rh);
+        }
 
         if (!block) {
-            Object.keys(this._context.blocks).filter(i => savedBlockIds.indexOf(i) < 0)
-                .forEach(blockId => {
-                    delete this._context.blocks[blockId];
-                });
+            this._restoreContext(saved);
+
             block = this._createRubyStatementBlock(this._getSource(node));
         }
         return block;

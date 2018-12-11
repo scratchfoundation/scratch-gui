@@ -89,14 +89,14 @@ export default function (Generator) {
     };
 
     Generator.looks_gotofrontback = function (block) {
-        const frontBack = Generator.getFieldValue(block, 'FRONT_BACK') || 'front';
-        return `go_to_layer(:${frontBack})\n`;
+        const frontBack = Generator.quote_(Generator.getFieldValue(block, 'FRONT_BACK') || 'front');
+        return `go_to_layer(${frontBack})\n`;
     };
 
     Generator.looks_goforwardbackwardlayers = function (block) {
         const layer = Generator.valueToCode(block, 'NUM', Generator.ORDER_NONE) || 0;
-        const forwardBackward = Generator.getFieldValue(block, 'FORWARD_BACKWARD') || 'forward';
-        return `go_layers(${layer}, :${forwardBackward})\n`;
+        const forwardBackward = Generator.quote_(Generator.getFieldValue(block, 'FORWARD_BACKWARD') || 'forward');
+        return `go_layers(${layer}, ${forwardBackward})\n`;
     };
 
     Generator.looks_costumenumbername = function (block) {
@@ -115,7 +115,7 @@ export default function (Generator) {
 
     Generator.looks_switchbackdroptoandwait = function (block) {
         const backdrop = Generator.valueToCode(block, 'BACKDROP', Generator.ORDER_NONE) || null;
-        return `switch_backdrop_to_and_wait(${backdrop})\n`;
+        return `switch_backdrop_and_wait(${backdrop})\n`;
     };
 
     return Generator;

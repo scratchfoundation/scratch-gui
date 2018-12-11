@@ -604,6 +604,65 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
+    describe('looks_seteffectto', () => {
+        test('normal', () => {
+            code = 'set_effect("COLOR", 25)';
+            expected = [
+                {
+                    opcode: 'looks_seteffectto',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'set_effect("COLOR", x)';
+            expected = [
+                {
+                    opcode: 'looks_seteffectto',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'set_effect',
+                'set_effect()',
+                'set_effect("COLOR")',
+                'set_effect(25)',
+                'set_effect("invalid effect", 25)',
+                'set_effect(1, 25)',
+                'set_effect("COLOR", 25, 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     describe('looks_size', () => {
         test('normal', () => {
             code = 'size';

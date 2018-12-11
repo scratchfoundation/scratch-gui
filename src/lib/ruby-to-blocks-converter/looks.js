@@ -79,11 +79,21 @@ const LooksConverter = {
                 }
                 break;
             case 'change_effect_by':
+            case 'set_effect':
                 if (args.length === 2 && _.isString(args[0]) && Effects.indexOf(args[0]) >= 0 &&
                     this._isNumberOrBlock(args[1])) {
-                    block = this._createBlock('looks_changeeffectby', 'statement');
+                    let opcode;
+                    let inputName;
+                    if (name === 'change_effect_by') {
+                        opcode = 'looks_changeeffectby';
+                        inputName = 'CHANGE';
+                    } else {
+                        opcode = 'looks_seteffectto';
+                        inputName = 'VALUE';
+                    }
+                    block = this._createBlock(opcode, 'statement');
                     this._addField(block, 'EFFECT', args[0]);
-                    this._addNumberInput(block, 'CHANGE', 'math_number', args[1], 25);
+                    this._addNumberInput(block, inputName, 'math_number', args[1], 25);
                 }
                 break;
             case 'size':

@@ -6,12 +6,12 @@
 export default function (Generator) {
     Generator.text2speech_speakAndWait = function (block) {
         const words = Generator.valueToCode(block, 'WORDS', Generator.ORDER_NONE) || null;
-        return `speak(words: ${words})\n`;
+        return `text2speech_speak(${words})\n`;
     };
 
     Generator.text2speech_setVoice = function (block) {
         const voice = Generator.valueToCode(block, 'VOICE', Generator.ORDER_NONE);
-        return `self.voice = ${voice}\n`;
+        return `self.text2speech_voice = ${voice}\n`;
     };
 
     Generator.text2speech_menu_voices = function (block) {

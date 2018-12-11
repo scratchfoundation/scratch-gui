@@ -652,4 +652,85 @@ describe('RubyToBlocksConverter/Looks', () => {
             });
         });
     });
+
+    describe('looks_goforwardbackwardlayers', () => {
+        test('normal', () => {
+            code = 'go_layers(1, "forward")';
+            expected = [
+                {
+                    opcode: 'looks_goforwardbackwardlayers',
+                    fields: [
+                        {
+                            name: 'FORWARD_BACKWARD',
+                            value: 'forward'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'NUM',
+                            block: expectedInfo.makeNumber(1, 'math_integer')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'go_layers(1, "backward")';
+            expected = [
+                {
+                    opcode: 'looks_goforwardbackwardlayers',
+                    fields: [
+                        {
+                            name: 'FORWARD_BACKWARD',
+                            value: 'backward'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'NUM',
+                            block: expectedInfo.makeNumber(1, 'math_integer')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'go_layers(x, "forward")';
+            expected = [
+                {
+                    opcode: 'looks_goforwardbackwardlayers',
+                    fields: [
+                        {
+                            name: 'FORWARD_BACKWARD',
+                            value: 'forward'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'NUM',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(1, 'math_integer')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'go_layers',
+                'go_layers()',
+                'go_layers("invalid")',
+                'go_layers(25)',
+                'go_layers(x)',
+                'go_layers(1, "invalid")',
+                'go_layers("1", "forward")',
+                'go_layers(false, "forward")',
+                'go_layers(true, "forward")'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

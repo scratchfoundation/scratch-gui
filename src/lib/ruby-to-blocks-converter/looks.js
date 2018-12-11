@@ -23,6 +23,10 @@ const FrontBack = [
     'back'
 ];
 
+const ForwardBackward = [
+    'forward',
+    'backward'
+];
 /* eslint-enable no-invalid-this */
 
 /**
@@ -96,6 +100,13 @@ const LooksConverter = {
                 if (args.length === 1 && _.isString(args[0]) && FrontBack.indexOf(args[0]) >= 0) {
                     block = this._createBlock('looks_gotofrontback', 'statement');
                     this._addField(block, 'FRONT_BACK', args[0]);
+                }
+                break;
+            case 'go_layers':
+                if (args.length === 2 && this._isNumberOrBlock(args[0]) && ForwardBackward.indexOf(args[1]) >= 0) {
+                    block = this._createBlock('looks_goforwardbackwardlayers', 'statement');
+                    this._addNumberInput(block, 'NUM', 'math_integer', args[0], 1);
+                    this._addField(block, 'FORWARD_BACKWARD', args[1]);
                 }
                 break;
             }

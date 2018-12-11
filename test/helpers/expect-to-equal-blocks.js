@@ -1,5 +1,6 @@
 import Blocks from 'scratch-vm/src/engine/blocks';
 import Variable from 'scratch-vm/src/engine/variable';
+import RubyToBlocksConverter from '../../src/lib/ruby-to-blocks-converter';
 
 // for debug
 const toJson = function (o) {
@@ -404,6 +405,52 @@ const expectedInfo = {
     })
 };
 
+const expectNoArgsMethod = function (opcode, methodName) {
+    let converter;
+    let target;
+    let code;
+    let expected;
+
+    beforeEach(() => {
+        converter = new RubyToBlocksConverter(null);
+        target = null;
+        code = null;
+        expected = null;
+    });
+
+    describe(opcode, () => {
+        test('normal', () => {
+            code = methodName;
+            expected = [
+                {
+                    opcode: opcode
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `${methodName}()`;
+            expected = [
+                {
+                    opcode: opcode
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                `${methodName}(false)`,
+                `${methodName}(true)`,
+                `${methodName}(1)`,
+                `${methodName}("backdrop2")`,
+                `${methodName}(x)`
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+};
+
 export {
     toJson,
     expectToEqualBlocks,
@@ -411,5 +458,6 @@ export {
     expectToEqualRubyStatement,
     convertAndExpectToEqualRubyStatement,
     rubyToExpected,
-    expectedInfo
+    expectedInfo,
+    expectNoArgsMethod
 };

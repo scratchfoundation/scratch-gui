@@ -3,7 +3,8 @@ import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
     rubyToExpected,
-    expectedInfo
+    expectedInfo,
+    expectNoArgsMethod
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Looks', () => {
@@ -18,40 +19,6 @@ describe('RubyToBlocksConverter/Looks', () => {
         code = null;
         expected = null;
     });
-
-    const expectNoArgsMethod = function (opcode, methodName) {
-        describe(opcode, () => {
-            test('normal', () => {
-                code = methodName;
-                expected = [
-                    {
-                        opcode: opcode
-                    }
-                ];
-                convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-                code = `${methodName}()`;
-                expected = [
-                    {
-                        opcode: opcode
-                    }
-                ];
-                convertAndExpectToEqualBlocks(converter, target, code, expected);
-            });
-
-            test('invalid', () => {
-                [
-                    `${methodName}(false)`,
-                    `${methodName}(true)`,
-                    `${methodName}(1)`,
-                    `${methodName}("backdrop2")`,
-                    `${methodName}(x)`
-                ].forEach(c => {
-                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
-                });
-            });
-        });
-    };
 
     describe('looks_sayforsecs', () => {
         test('normal', () => {
@@ -637,22 +604,8 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
-    [
-        {
-            opcode: 'looks_cleargraphiceffects',
-            methodName: 'clear_graphic_effects'
-        },
-        {
-            opcode: 'looks_show',
-            methodName: 'show'
-        },
-        {
-            opcode: 'looks_hide',
-            methodName: 'hide'
-        }
-    ].forEach(info => {
-        expectNoArgsMethod(info.opcode, info.methodName);
-    });
-
+    expectNoArgsMethod('looks_cleargraphiceffects', 'clear_graphic_effects');
+    expectNoArgsMethod('looks_show', 'show');
+    expectNoArgsMethod('looks_hide', 'hide');
     expectNoArgsMethod('looks_size', 'size');
 });

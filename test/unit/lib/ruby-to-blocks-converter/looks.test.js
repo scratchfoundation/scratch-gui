@@ -733,4 +733,86 @@ describe('RubyToBlocksConverter/Looks', () => {
             });
         });
     });
+
+    describe('looks_costumenumbername', () => {
+        test('normal', () => {
+            code = 'costume_number';
+            expected = [
+                {
+                    opcode: 'looks_costumenumbername',
+                    fields: [
+                        {
+                            name: 'NUMBER_NAME',
+                            value: 'number'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'costume_name';
+            expected = [
+                {
+                    opcode: 'looks_costumenumbername',
+                    fields: [
+                        {
+                            name: 'NUMBER_NAME',
+                            value: 'name'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'costume_number(1)',
+                'costume_name(1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('looks_backdropnumbername', () => {
+        test('normal', () => {
+            code = 'backdrop_number';
+            expected = [
+                {
+                    opcode: 'looks_backdropnumbername',
+                    fields: [
+                        {
+                            name: 'NUMBER_NAME',
+                            value: 'number'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'backdrop_name';
+            expected = [
+                {
+                    opcode: 'looks_backdropnumbername',
+                    fields: [
+                        {
+                            name: 'NUMBER_NAME',
+                            value: 'name'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'backdrop_number(1)',
+                'backdrop_name(1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
 });

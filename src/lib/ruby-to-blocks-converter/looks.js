@@ -109,6 +109,16 @@ const LooksConverter = {
                     this._addField(block, 'FORWARD_BACKWARD', args[1]);
                 }
                 break;
+            case 'costume_number':
+            case 'costume_name':
+            case 'backdrop_number':
+            case 'backdrop_name':
+                if (args.length === 0) {
+                    const a = name.split('_');
+                    block = this._createBlock(`looks_${a[0]}numbername`, 'value');
+                    this._addField(block, 'NUMBER_NAME', a[1]);
+                }
+                break;
             }
             if (!block && args.length === 0) {
                 let opcode;

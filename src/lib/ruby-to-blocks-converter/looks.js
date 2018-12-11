@@ -1,6 +1,14 @@
 /* global Opal */
 import _ from 'lodash';
 
+/* eslint-disable no-invalid-this */
+const createBlockWithMessage = function (opcode, message) {
+    const block = this._createBlock(opcode, 'statement');
+    this._addTextInput(block, 'MESSAGE', _.isNumber(message) ? message.toString() : message, 'Hello!');
+    return block;
+};
+/* eslint-enable no-invalid-this */
+
 /**
  * Looks converter
  */
@@ -12,8 +20,12 @@ const LooksConverter = {
             switch (name) {
             case 'say':
                 if (args.length === 1 && this._isNumberOrStringOrBlock(args[0])) {
-                    block = this._createBlock('looks_say', 'statement');
-                    this._addTextInput(block, 'MESSAGE', _.isNumber(args[0]) ? args[0].toString() : args[0], 'Hello!');
+                    block = createBlockWithMessage.call(this, 'looks_say', args[0]);
+                } else if (args.length === 2 &&
+                           this._isNumberOrStringOrBlock(args[0]) &&
+                           this._isNumberOrBlock(args[1])) {
+                    block = createBlockWithMessage.call(this, 'looks_sayforsecs', args[0]);
+                    this._addNumberInput(block, 'SECS', 'math_number', args[1], 2);
                 }
                 break;
             }

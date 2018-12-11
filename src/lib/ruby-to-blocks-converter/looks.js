@@ -7,6 +7,16 @@ const createBlockWithMessage = function (opcode, message, defaultMessage) {
     this._addTextInput(block, 'MESSAGE', _.isNumber(message) ? message.toString() : message, defaultMessage);
     return block;
 };
+
+const Effects = [
+    'COLOR',
+    'FISHEYE',
+    'WHIRL',
+    'PIXELATE',
+    'MOSAIC',
+    'BRIGHTNESS',
+    'GHOST'
+];
 /* eslint-enable no-invalid-this */
 
 /**
@@ -66,6 +76,14 @@ const LooksConverter = {
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('looks_setsizeto', 'statement');
                     this._addNumberInput(block, 'SIZE', 'math_number', args[0], 100);
+                }
+                break;
+            case 'change_effect_by':
+                if (args.length === 2 && _.isString(args[0]) && Effects.indexOf(args[0]) >= 0 &&
+                    this._isNumberOrBlock(args[1])) {
+                    block = this._createBlock('looks_changeeffectby', 'statement');
+                    this._addField(block, 'EFFECT', args[0]);
+                    this._addNumberInput(block, 'CHANGE', 'math_number', args[1], 25);
                 }
                 break;
             case 'size':

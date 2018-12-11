@@ -545,6 +545,65 @@ describe('RubyToBlocksConverter/Looks', () => {
         });
     });
 
+    describe('looks_changeeffectby', () => {
+        test('normal', () => {
+            code = 'change_effect_by("COLOR", 25)';
+            expected = [
+                {
+                    opcode: 'looks_changeeffectby',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'CHANGE',
+                            block: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'change_effect_by("COLOR", x)';
+            expected = [
+                {
+                    opcode: 'looks_changeeffectby',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'CHANGE',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'change_effect_by',
+                'change_effect_by()',
+                'change_effect_by("COLOR")',
+                'change_effect_by(25)',
+                'change_effect_by("invalid effect", 25)',
+                'change_effect_by(1, 25)',
+                'change_effect_by("COLOR", 25, 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     describe('looks_size', () => {
         test('normal', () => {
             code = 'size';

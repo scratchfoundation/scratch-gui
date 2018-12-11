@@ -5,6 +5,7 @@ import Blockly from 'scratch-blocks';
 import RubyParser from '../ruby-parser';
 import Variable from 'scratch-vm/src/engine/variable';
 
+import LooksConverter from './looks';
 import ControlConverter from './control';
 
 /**
@@ -29,6 +30,7 @@ class RubyToBlocksConverter {
     constructor (vm) {
         this.vm = vm;
         this._converters = [
+            LooksConverter,
             ControlConverter
         ];
         this.reset();
@@ -532,6 +534,10 @@ class RubyToBlocksConverter {
 
     _isStringOrBlock (stringOrBlock) {
         return _.isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
+    }
+
+    _isNumberOrStringOrBlock (block) {
+        return _.isNumber(block) || _.isString(block) || this._isValueBlock(block);
     }
 
     _changeToBooleanArgument (varName) {

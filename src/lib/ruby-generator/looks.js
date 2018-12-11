@@ -7,23 +7,23 @@ export default function (Generator) {
     Generator.looks_sayforsecs = function (block) {
         const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
         const secs = Generator.valueToCode(block, 'SECS', Generator.ORDER_NONE) || '0';
-        return `say(message: ${message}, second: ${secs})\n`;
+        return `say(${message}, ${secs})\n`;
     };
 
     Generator.looks_say = function (block) {
         const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
-        return `say(message: ${message})\n`;
+        return `say(${message})\n`;
     };
 
     Generator.looks_thinkforsecs = function (block) {
         const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
         const secs = Generator.valueToCode(block, 'SECS', Generator.ORDER_NONE) || '0';
-        return `think(message: ${message}, second: ${secs})\n`;
+        return `think(${message}, ${secs})\n`;
     };
 
     Generator.looks_think = function (block) {
         const message = Generator.valueToCode(block, 'MESSAGE', Generator.ORDER_NONE) || Generator.quote_('');
-        return `think(message: ${message})\n`;
+        return `think(${message})\n`;
     };
 
     Generator.looks_switchcostumeto = function (block) {

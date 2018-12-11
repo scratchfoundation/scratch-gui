@@ -1,12 +1,57 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
 
 import storage from '../../lib/storage';
 
 class ScratchImage extends React.PureComponent {
+    static get pendingImages () {
+        return this._pendingImages || (this._pendingImages = new Set());
+    }
+    static get maxParallelism () {
+        return this._maxParallelism > 0 ? this._maxParallelism : (this._maxParallelism = 6);
+    }
+
+    static loadPendingImages () {
+        if (this._currentJobs >= this.maxParallelism) {
+            // already busy
+            return;
+        }
+
+        // Find the first visible image. If there aren't any, find the first non-visible image.
+        let nextImage;
+        for (const image of this.pendingImages) {
+            if (image.isVisible) {
+                nextImage = image;
+                break;
+            } else {
+                nextImage = nextImage || image;
+            }
+        }
+
+        // If we found an image to load:
+        // 1) Remove it from the queue
+        // 2) Load the image
+        // 3) Pump the queue again
+        if (nextImage) {
+            this.pendingImages.delete(nextImage);
+            const imageSource = nextImage.props.imageSource;
+            ++this._currentJobs;
+            storage
+                .load(imageSource.assetType, imageSource.assetId)
+                .then(asset => {
+                    const dataURI = asset.encodeDataURI();
+                    nextImage.setState({
+                        imageURI: dataURI
+                    });
+                    --this._currentJobs;
+                    this.loadPendingImages();
+                });
+        }
+    }
+
     constructor (props) {
         super(props);
-
         this.state = {};
         Object.assign(this.state, this._loadImageSource(props.imageSource));
     }
@@ -24,18 +69,14 @@ class ScratchImage extends React.PureComponent {
      */
     _loadImageSource (imageSource) {
         if (imageSource.uri) {
+            ScratchImage.pendingImages.delete(this);
             return {
                 imageURI: imageSource.uri,
                 lastRequestedAsset: null
             };
         }
         if (this.state.lastRequestedAsset !== imageSource.assetId) {
-            storage.load(imageSource.assetType, imageSource.assetId)
-                .then(asset => {
-                    this.setState({
-                        imageURI: asset.encodeDataURI()
-                    });
-                });
+            ScratchImage.pendingImages.add(this);
             return {
                 lastRequestedAsset: imageSource.assetId
             };
@@ -49,10 +90,29 @@ class ScratchImage extends React.PureComponent {
             imageSource: _imageSource,
             ...imgProps
         } = this.props;
-        return (<img
-            src={this.state.imageURI}
-            {...imgProps}
-        />);
+        return (
+            <VisibilitySensor
+                intervalCheck
+                scrollCheck
+            >
+                {
+                    ({isVisible}) => {
+                        this.isVisible = isVisible;
+                        if (isVisible) {
+                            ScratchImage.loadPendingImages();
+                        }
+                        return (
+                            <img
+                                src={this.state.imageURI}
+                                // the element must have non-zero size for VisibilitySensor to work before image load
+                                style={{minWidth: '1px', minHeight: '1px'}}
+                                {...imgProps}
+                            />
+                        );
+                    }
+                }
+            </VisibilitySensor>
+        );
     }
 }
 

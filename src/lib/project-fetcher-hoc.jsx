@@ -75,6 +75,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .then(projectAsset => {
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
+                    } else {
+                        // Treat failure to load as an error
+                        // Throw to be caught by catch later on
+                        throw new Error('Could not find project');
                     }
                 })
                 .then(() => {

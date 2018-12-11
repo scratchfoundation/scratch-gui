@@ -48,6 +48,11 @@ describe('Loading scratch gui', () => {
             await expect(logs).toEqual([]);
         });
 
+        test('Nonexistent projects show error screen', async () => {
+            await loadUri(`${uri}#999999999999999999999`);
+            await clickText('Oops! Something went wrong.');
+        });
+
         test('Invalid url when loading project through modal lets you try again', async () => {
             await loadUri(uri);
             await clickText('View 2.0 Project');

@@ -62,7 +62,22 @@ const LooksConverter = {
                     block = this._createBlock('looks_nextbackdrop', 'statement');
                 }
                 break;
+            case 'size':
+                if (args.length === 0) {
+                    block = this._createBlock('looks_size', 'value');
+                }
+                break;
             }
+        }
+        return block;
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    onOpAsgn: function (lh, operator, rh) {
+        let block;
+        if (this._isBlock(lh) && lh.opcode === 'looks_size' && operator === '+' && this._isNumberOrBlock(rh)) {
+            block = this._changeBlock(lh, 'looks_changesizeby', 'statement');
+            this._addNumberInput(block, 'CHANGE', 'math_number', rh, 10);
         }
         return block;
     }

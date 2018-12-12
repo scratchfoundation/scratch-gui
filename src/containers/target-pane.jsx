@@ -20,6 +20,7 @@ import sharedMessages from '../lib/shared-messages';
 import {emptySprite} from '../lib/empty-assets';
 import {highlightTarget} from '../reducers/targets';
 import {fetchSprite, fetchCode} from '../lib/backpack-api';
+import randomizeSpritePosition from '../lib/randomize-sprite-position';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -117,6 +118,7 @@ class TargetPane extends React.Component {
     }
     handleSurpriseSpriteClick () {
         const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
+        randomizeSpritePosition(item);
         this.props.vm.addSprite(JSON.stringify(item.json))
             .then(this.handleActivateBlocksTab);
     }

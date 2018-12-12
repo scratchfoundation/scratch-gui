@@ -56,4 +56,12 @@ describe('Menu bar settings', () => {
         await clickXpath('//button[@title="Try It"]');
         await findByXpath('//div[span[div[span[text()="Share"]]] and @data-tip="tooltip"]');
     });
+
+    test('Logo should be clickable', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickXpath('//img[@alt="Scratch"]');
+        const currentUrl = await driver.getCurrentUrl();
+        await expect(currentUrl).toEqual('https://scratch.mit.edu/');
+    });
 });

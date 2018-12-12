@@ -1184,7 +1184,7 @@ export default {
     },
     'wedo2-getting-started': {
         steps: [{
-            video: 'dsiz0qumyl'
+            video: '4im7iizv47'
         }],
         urlId: 'wedo',
         hidden: true

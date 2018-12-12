@@ -3964,6 +3964,117 @@
         }
     },
     {
+        "name": "Dinosaur5",
+        "md5": "42e3bf118c775ba54239af4276800a0a.png",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "dinosaur",
+            "leigh mcg"
+        ],
+        "info": [
+            0,
+            8,
+            2
+        ],
+        "json": {
+            "objName": "Dinosaur5",
+            "sounds": [
+                {
+                    "soundName": "dance funky",
+                    "soundID": -1,
+                    "md5": "51c00a150d33c4639203184bb24c637b.wav",
+                    "sampleCount": 111870,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "bite",
+                    "soundID": -1,
+                    "md5": "6759a83e9b92cd6082b68611e858fd23.wav",
+                    "sampleCount": 8136,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Dinosaur5-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "42e3bf118c775ba54239af4276800a0a.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 104,
+                    "rotationCenterY": 150
+                },
+                {
+                    "costumeName": "Dinosaur5-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5a0832162a0cfa7adab6090c42e89714.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 112,
+                    "rotationCenterY": 166
+                },
+                {
+                    "costumeName": "Dinosaur5-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "26fca11e4251d60ed7aa5d08f4ae2a69.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 112,
+                    "rotationCenterY": 150
+                },
+                {
+                    "costumeName": "Dinosaur5-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c4044a3badea77ced4f2db69aff866ed.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 90,
+                    "rotationCenterY": 134
+                },
+                {
+                    "costumeName": "Dinosaur5-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f49b3b098a24474f20c8f4686681c611.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 88,
+                    "rotationCenterY": 150
+                },
+                {
+                    "costumeName": "Dinosaur5-f",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9d200a7c2e93eac8cf52ede3a87d7969.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 94,
+                    "rotationCenterY": 166
+                },
+                {
+                    "costumeName": "Dinosaur5-g",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5882227a9e2f0f3b2014c49328969762.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 102,
+                    "rotationCenterY": 150
+                },
+                {
+                    "costumeName": "Dinosaur5-h",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3b2cf97b1cc7fc535162ba5849a0e29c.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 108,
+                    "rotationCenterY": 134
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 0,
+            "scratchY": 0,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Diver1",
         "md5": "853803d5600b66538474909c5438c8ee.svg",
         "type": "sprite",

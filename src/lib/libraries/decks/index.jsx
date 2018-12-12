@@ -1195,5 +1195,12 @@ export default {
         }],
         urlId: 'ev3',
         hidden: true
+    },
+    'whats-new': {
+        steps: [{
+            video: 'mtqymxg0qq'
+        }],
+        urlId: 'whatsnew',
+        hidden: true
     }
 };

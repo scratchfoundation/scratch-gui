@@ -107,6 +107,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 onActivateTab,
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
+                onProjectLoaded,
                 projectHost,
                 projectId,
                 reduxProjectId,

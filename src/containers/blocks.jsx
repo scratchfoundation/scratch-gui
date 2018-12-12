@@ -464,7 +464,6 @@ class Blocks extends React.Component {
                         isStage={vm.runtime.getEditingTarget().isStage}
                         label={this.state.prompt.message}
                         showCloudOption={this.state.prompt.showCloudOption}
-                        showMoreOptions={this.state.prompt.showMoreOptions}
                         showVariableOptions={this.state.prompt.showVariableOptions}
                         title={this.state.prompt.title}
                         vm={vm}

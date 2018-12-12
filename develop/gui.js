@@ -68,7 +68,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     backpackVisible: true,
     showComingSoon: true,
     showPreviewInfo: true,
-    backpackHost: backpackHost
+    backpackHost: backpackHost,
+    canSave: false
   }), appTarget);
 });
 

@@ -161,7 +161,6 @@ class MenuBar extends React.Component {
         // since we will auto-save first. Else, confirm first.
         const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
             confirm(this.props.intl.formatMessage(messages.confirmNav)); // eslint-disable-line no-alert
-        this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }

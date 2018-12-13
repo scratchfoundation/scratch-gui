@@ -9,6 +9,7 @@
     border-width: .1875rem;
     border-style: solid;
     border-color: $ui-white-transparent;
+    box-sizing: content-box;
 }
 
 .spinner::before, .spinner::after {

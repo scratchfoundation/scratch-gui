@@ -72,6 +72,7 @@
 
 .alert-connection-button {
     min-height: 2rem;
+    width: 6.5rem;
     padding: 0.55rem 0.9rem;
     border-radius: 0.35rem;
     background: #FF8C1A;
@@ -81,8 +82,9 @@
     border: none;
     cursor: pointer;
     display: flex;
+    justify-content: center;
     align-items: center;
-    align-self: center;
+    align-self: stretch;
     outline-style:none;
 }
 
@@ -92,4 +94,10 @@
 
 [dir="rtl"] .alert-connection-button {
     margin-left: 13px;
+}
+
+/* prevent last button in list from too much margin to edge of alert */
+.alert-buttons > :last-child {
+    margin-left: 0;
+    margin-right: 0;
 }

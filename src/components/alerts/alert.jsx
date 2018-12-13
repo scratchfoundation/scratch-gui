@@ -9,7 +9,6 @@ import Spinner from '../spinner/spinner.jsx';
 import {AlertLevels} from '../../lib/alerts/index.jsx';
 
 import styles from './alert.css';
-import spinnerStyles from '../spinner/spinner.css';
 
 const closeButtonColors = {
     [AlertLevels.SUCCESS]: CloseButton.COLOR_GREEN,
@@ -35,20 +34,22 @@ const AlertComponent = ({
         className={classNames(styles.alert, styles[level])}
     >
         {/* TODO: implement Rtl handling */}
-        <div className={styles.iconSection}>
-            {iconSpinner && (
-                <Spinner
-                    className={styles.alertSpinner}
-                    level={level}
-                />
-            )}
-            {iconURL && (
-                <img
-                    className={styles.alertIcon}
-                    src={iconURL}
-                />
-            )}
-        </div>
+        {(iconSpinner || iconURL) && (
+            <div className={styles.iconSection}>
+                {iconSpinner && (
+                    <Spinner
+                        className={styles.alertSpinner}
+                        level={level}
+                    />
+                )}
+                {iconURL && (
+                    <img
+                        className={styles.alertIcon}
+                        src={iconURL}
+                    />
+                )}
+            </div>
+        )}
         <div className={styles.alertMessage}>
             {extensionName ? (
                 <FormattedMessage

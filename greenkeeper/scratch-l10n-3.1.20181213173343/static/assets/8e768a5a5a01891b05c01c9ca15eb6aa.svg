@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g>
+  <rect fill="#CCC" height="128" width="128"/>
+  <text fill="black" y="107" x="35.5" font-size="128">?</text>
+ </g>
+</svg>

@@ -41,11 +41,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
 
+
+var onClickLogo = function onClickLogo() {
+  window.location = 'https://scratch.mit.edu';
+};
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash
  * {object} appTarget - the DOM element to render to
  */
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (appTarget) {
   _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"].setAppElement(appTarget); // note that redux's 'compose' function is just being used as a general utility to make
@@ -69,7 +74,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     showComingSoon: true,
     showPreviewInfo: true,
     backpackHost: backpackHost,
-    canSave: false
+    canSave: false,
+    onClickLogo: onClickLogo
   }), appTarget);
 });
 

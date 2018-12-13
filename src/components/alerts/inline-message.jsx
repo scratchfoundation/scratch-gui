@@ -20,6 +20,7 @@ const InlineMessageComponent = ({
             <Spinner
                 small
                 className={styles.spinner}
+                level={'info'}
             />
         )}
         {content}

@@ -348,23 +348,25 @@ class MenuBar extends React.Component {
                                         {newProjectMessage}
                                     </MenuItem>
                                 </MenuSection>
-                                <MenuSection>
-                                    {this.props.canSave ? (
-                                        <MenuItem onClick={this.handleClickSave}>
-                                            {saveNowMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                    {this.props.canCreateCopy ? (
-                                        <MenuItem onClick={this.handleClickSaveAsCopy}>
-                                            {createCopyMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                    {this.props.canRemix ? (
-                                        <MenuItem onClick={this.handleClickRemix}>
-                                            {remixMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                </MenuSection>
+                                {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+                                    <MenuSection>
+                                        {this.props.canSave ? (
+                                            <MenuItem onClick={this.handleClickSave}>
+                                                {saveNowMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                        {this.props.canCreateCopy ? (
+                                            <MenuItem onClick={this.handleClickSaveAsCopy}>
+                                                {createCopyMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                        {this.props.canRemix ? (
+                                            <MenuItem onClick={this.handleClickRemix}>
+                                                {remixMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                    </MenuSection>
+                                )}
                                 <MenuSection>
                                     <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
                                         {(className, renderFileInput, loadProject) => (

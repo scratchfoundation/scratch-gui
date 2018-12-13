@@ -234,7 +234,11 @@ const Cards = props => {
     if (x === 0 && y === 0) {
         // initialize positions
         x = isRtl ? -292 : 292;
-        y = 365;
+        // The tallest cards are about 385px high, and the default position is pinned
+        // to near the bottom of the blocks palette to allow room to work above.
+        const tallCardHeight = 385;
+        const bottomMargin = 60; // To avoid overlapping the backpack region
+        y = window.innerHeight - tallCardHeight - bottomMargin;
     }
 
     const steps = content[activeDeckId].steps;

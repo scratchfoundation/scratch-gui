@@ -31,6 +31,7 @@
     */
     box-sizing: border-box;
     width: calc((100% / $sprites-per-row ) - $space);
+    max-width: 6rem;
     min-width: 4rem;
     min-height: 4rem; /* @todo: calc height same as width */
     margin: calc($space / 2);

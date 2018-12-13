@@ -6891,6 +6891,95 @@
         }
     },
     {
+        "name": "Grasshopper",
+        "md5": "fcddf46c04479b07b2944ee36d0b7635.svg",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            0,
+            6,
+            1
+        ],
+        "json": {
+            "objName": "Grasshopper",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Grasshopper-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "fcddf46c04479b07b2944ee36d0b7635.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 103,
+                    "rotationCenterY": 43
+                },
+                {
+                    "costumeName": "Grasshopper-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "40b48bcb95f06a2281ba1cad60c8c504.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 114,
+                    "rotationCenterY": 118
+                },
+                {
+                    "costumeName": "Grasshopper-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "fa9a02a4a6df86612365dc65c065d2cb.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 34,
+                    "rotationCenterY": 170
+                },
+                {
+                    "costumeName": "Grasshopper-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f80ba703a7fb17a870ec0818add2f3b8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 70,
+                    "rotationCenterY": 100
+                },
+                {
+                    "costumeName": "Grasshopper-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6519eeaa65eac086198d6901cf0a5b9e.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 56,
+                    "rotationCenterY": 86
+                },
+                {
+                    "costumeName": "Grasshopper-f",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "8d865e6bbea03cda509d766085b883f4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 22,
+                    "rotationCenterY": 54
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -7,
+            "scratchY": -115,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Green Flag",
         "md5": "173e20ac537d2c278ed621be3db3fc87.svg",
         "type": "sprite",
@@ -6937,7 +7026,7 @@
     },
     {
         "name": "Griffin",
-        "md5": "d2ddc25b224ad72240f92e632afc7c69.svg",
+        "md5": "1ceea469ec409d0a3a13bd04ea1e756c.svg",
         "type": "sprite",
         "tags": [
             "fantasy",
@@ -6947,98 +7036,58 @@
         ],
         "info": [
             0,
-            2,
+            4,
             1
         ],
         "json": {
             "objName": "Griffin",
             "sounds": [
                 {
-                    "soundName": "pop",
+                    "soundName": "Magic Spell",
                     "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
+                    "md5": "1cb60ecdb1075c8769cb346d5c2a22c7.wav",
+                    "sampleCount": 43077,
+                    "rate": 22050,
+                    "format": "adpcm"
                 }
             ],
             "costumes": [
                 {
-                    "costumeName": "griffin-a",
+                    "costumeName": "Griffin-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d2ddc25b224ad72240f92e632afc7c69.svg",
+                    "baseLayerMD5": "1ceea469ec409d0a3a13bd04ea1e756c.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 150,
-                    "rotationCenterY": 110
+                    "rotationCenterX": 127,
+                    "rotationCenterY": 109
                 },
                 {
-                    "costumeName": "griffin-fly-b",
+                    "costumeName": "Griffin-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "ff0795d15b6f3990345f72bc483a3353.svg",
+                    "baseLayerMD5": "1dd10e8e53c048ad6f95c82501801f48.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 150,
-                    "rotationCenterY": 110
+                    "rotationCenterX": 127,
+                    "rotationCenterY": 76
+                },
+                {
+                    "costumeName": "Griffin-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e4d7c3c18463f15083683ce0826adcee.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 127,
+                    "rotationCenterY": 109
+                },
+                {
+                    "costumeName": "Griffin-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "54504b1d8dedf816b0bd599e768f191d.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 144,
+                    "rotationCenterY": 69
                 }
             ],
             "currentCostumeIndex": 0,
             "scratchX": -18,
             "scratchY": -4,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Griffin-flying",
-        "md5": "03d75e0c7c34e8618545a5f4913db4ea.svg",
-        "type": "sprite",
-        "tags": [
-            "fantasy",
-            "animals",
-            "ipzy",
-            "flying"
-        ],
-        "info": [
-            0,
-            2,
-            1
-        ],
-        "json": {
-            "objName": "Griffin-flying",
-            "sounds": [
-                {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "griffin-fly-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "03d75e0c7c34e8618545a5f4913db4ea.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 150,
-                    "rotationCenterY": 110
-                },
-                {
-                    "costumeName": "griffin-fly-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "ff0795d15b6f3990345f72bc483a3353.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 150,
-                    "rotationCenterY": 110
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -13,
-            "scratchY": 1,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -7064,7 +7113,7 @@
             "objName": "Guitar",
             "sounds": [
                 {
-                    "soundName": "C guitar",
+                    "soundName": "C Guitar",
                     "soundID": -1,
                     "md5": "22baa07795a9a524614075cdea543793.wav",
                     "sampleCount": 44864,
@@ -7072,7 +7121,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "D guitar",
+                    "soundName": "D Guitar",
                     "soundID": -1,
                     "md5": "2dbcfae6a55738f94bbb40aa5fcbf7ce.wav",
                     "sampleCount": 41120,
@@ -7080,7 +7129,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "E guitar",
+                    "soundName": "E Guitar",
                     "soundID": -1,
                     "md5": "4b5d1da83e59bf35578324573c991666.wav",
                     "sampleCount": 38400,
@@ -7088,7 +7137,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "F guitar",
+                    "soundName": "F Guitar",
                     "soundID": -1,
                     "md5": "b51d086aeb1921ec405561df52ecbc50.wav",
                     "sampleCount": 36416,
@@ -7096,7 +7145,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "G guitar",
+                    "soundName": "G Guitar",
                     "soundID": -1,
                     "md5": "98a835713ecea2f3ef9f4f442d52ad20.wav",
                     "sampleCount": 33600,
@@ -7104,7 +7153,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "A guitar",
+                    "soundName": "A Guitar",
                     "soundID": -1,
                     "md5": "ee753e87d212d4b2fb650ca660f1e839.wav",
                     "sampleCount": 31872,
@@ -7112,7 +7161,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "B guitar",
+                    "soundName": "B Guitar",
                     "soundID": -1,
                     "md5": "2ae2d67de62df8ca54d638b4ad2466c3.wav",
                     "sampleCount": 29504,
@@ -7158,117 +7207,7 @@
         }
     },
     {
-        "name": "Guitar-electric2",
-        "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
-        "type": "sprite",
-        "tags": [
-            "music",
-            "andrew rae"
-        ],
-        "info": [
-            0,
-            2,
-            8
-        ],
-        "json": {
-            "objName": "Guitar-electric2",
-            "sounds": [
-                {
-                    "soundName": "C elec guitar",
-                    "soundID": -1,
-                    "md5": "0d340de02e14bebaf8dfa0e43eb3f1f9.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "D elec guitar",
-                    "soundID": -1,
-                    "md5": "1b5de9866801eb2f9d4f57c7c3b473f5.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "E elec guitar",
-                    "soundID": -1,
-                    "md5": "2e6a6ae3e0f72bf78c74def8130f459a.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "F elec guitar",
-                    "soundID": -1,
-                    "md5": "5eb00f15f21f734986aa45156d44478d.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "G elec guitar",
-                    "soundID": -1,
-                    "md5": "cd0d0e7dad415b2ffa2ba7a61860eaf8.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "A elec guitar",
-                    "soundID": -1,
-                    "md5": "fa5f7fea601e9368dd68449d9a54c995.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "B elec guitar",
-                    "soundID": -1,
-                    "md5": "81f142d0b00189703d7fe9b1f13f6f87.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                },
-                {
-                    "soundName": "C2 elec guitar",
-                    "soundID": -1,
-                    "md5": "3a8ed3129f22cba5b0810bc030d16b5f.wav",
-                    "sampleCount": 44100,
-                    "rate": 22050,
-                    "format": ""
-                }
-            ],
-            "costumes": [
-                {
-                    "costumeName": "guitar-electric2-a",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "1fc433b89038f9e16092c9f4d7514cca.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 38,
-                    "rotationCenterY": 94
-                },
-                {
-                    "costumeName": "guitar-electric2-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 38,
-                    "rotationCenterY": 94
-                }
-            ],
-            "currentCostumeIndex": 0,
-            "scratchX": -99,
-            "scratchY": 17,
-            "scale": 1,
-            "direction": 90,
-            "rotationStyle": "normal",
-            "isDraggable": false,
-            "visible": true,
-            "spriteInfo": {}
-        }
-    },
-    {
-        "name": "Gutar-electric1",
+        "name": "Guitar-electric1",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "sprite",
         "tags": [
@@ -7281,10 +7220,10 @@
             8
         ],
         "json": {
-            "objName": "Gutar-electric1",
+            "objName": "Guitar-electric1",
             "sounds": [
                 {
-                    "soundName": "C elec guitar",
+                    "soundName": "C Elec Guitar",
                     "soundID": -1,
                     "md5": "0d340de02e14bebaf8dfa0e43eb3f1f9.wav",
                     "sampleCount": 44100,
@@ -7292,7 +7231,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "D elec guitar",
+                    "soundName": "D Elec Guitar",
                     "soundID": -1,
                     "md5": "1b5de9866801eb2f9d4f57c7c3b473f5.wav",
                     "sampleCount": 44100,
@@ -7300,7 +7239,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "E elec guitar",
+                    "soundName": "E Elec Guitar",
                     "soundID": -1,
                     "md5": "2e6a6ae3e0f72bf78c74def8130f459a.wav",
                     "sampleCount": 44100,
@@ -7308,7 +7247,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "F elec guitar",
+                    "soundName": "F Elec Guitar",
                     "soundID": -1,
                     "md5": "5eb00f15f21f734986aa45156d44478d.wav",
                     "sampleCount": 44100,
@@ -7316,7 +7255,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "G elec guitar",
+                    "soundName": "G Elec Guitar",
                     "soundID": -1,
                     "md5": "cd0d0e7dad415b2ffa2ba7a61860eaf8.wav",
                     "sampleCount": 44100,
@@ -7324,7 +7263,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "A elec guitar",
+                    "soundName": "A Elec Guitar",
                     "soundID": -1,
                     "md5": "fa5f7fea601e9368dd68449d9a54c995.wav",
                     "sampleCount": 44100,
@@ -7332,7 +7271,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "B elec guitar",
+                    "soundName": "B Elec Guitar",
                     "soundID": -1,
                     "md5": "81f142d0b00189703d7fe9b1f13f6f87.wav",
                     "sampleCount": 44100,
@@ -7340,7 +7279,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "C2 elec guitar",
+                    "soundName": "C2 Elec Guitar",
                     "soundID": -1,
                     "md5": "3a8ed3129f22cba5b0810bc030d16b5f.wav",
                     "sampleCount": 44100,
@@ -7369,6 +7308,116 @@
             "currentCostumeIndex": 0,
             "scratchX": -122,
             "scratchY": -19,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Guitar-electric2",
+        "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
+        "type": "sprite",
+        "tags": [
+            "music",
+            "andrew rae"
+        ],
+        "info": [
+            0,
+            2,
+            8
+        ],
+        "json": {
+            "objName": "Guitar-electric2",
+            "sounds": [
+                {
+                    "soundName": "C Elec Guitar",
+                    "soundID": -1,
+                    "md5": "0d340de02e14bebaf8dfa0e43eb3f1f9.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "D Elec Guitar",
+                    "soundID": -1,
+                    "md5": "1b5de9866801eb2f9d4f57c7c3b473f5.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "E Elec Guitar",
+                    "soundID": -1,
+                    "md5": "2e6a6ae3e0f72bf78c74def8130f459a.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "F Elec Guitar",
+                    "soundID": -1,
+                    "md5": "5eb00f15f21f734986aa45156d44478d.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "G Elec Guitar",
+                    "soundID": -1,
+                    "md5": "cd0d0e7dad415b2ffa2ba7a61860eaf8.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "A Elec Guitar",
+                    "soundID": -1,
+                    "md5": "fa5f7fea601e9368dd68449d9a54c995.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "B Elec Guitar",
+                    "soundID": -1,
+                    "md5": "81f142d0b00189703d7fe9b1f13f6f87.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "C2 Elec Guitar",
+                    "soundID": -1,
+                    "md5": "3a8ed3129f22cba5b0810bc030d16b5f.wav",
+                    "sampleCount": 44100,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "guitar-electric2-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1fc433b89038f9e16092c9f4d7514cca.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 38,
+                    "rotationCenterY": 94
+                },
+                {
+                    "costumeName": "guitar-electric2-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 38,
+                    "rotationCenterY": 94
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -99,
+            "scratchY": 17,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

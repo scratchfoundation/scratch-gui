@@ -3667,7 +3667,7 @@
     },
     {
         "name": "Devin",
-        "md5": "b59226656f090124fb4dcbfd8946275b.png",
+        "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "sprite",
         "tags": [
             "people"
@@ -3693,39 +3693,39 @@
                 {
                     "costumeName": "devin-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b59226656f090124fb4dcbfd8946275b.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 78,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "b1897e56265470b55fa65fabe2423c55.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0116dd2fa16bbce2b4701a2c9b15119e.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 80,
-                    "rotationCenterY": 191
+                    "baseLayerMD5": "873fbd641768c8f753a6568da97633e7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 96
                 },
                 {
                     "costumeName": "devin-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "075cf6f2967e71cd09574f961958258a.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 64,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "eac3c03d86cebb42c8f30e373cb7f623.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "3892cc13b6abd08f166976c15c4da242.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 81,
-                    "rotationCenterY": 189
+                    "baseLayerMD5": "fa6a75afb0e4b822b91d8bb20d40c68f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 41,
+                    "rotationCenterY": 95
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 30,
-            "scratchY": 12,
+            "scratchX": 82,
+            "scratchY": -18,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -6694,54 +6694,54 @@
             "objName": "Goalie",
             "sounds": [
                 {
-                    "soundName": "pop",
+                    "soundName": "cheer",
                     "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
-                    "format": ""
+                    "md5": "170e05c29d50918ae0b482c2955768c0.wav",
+                    "sampleCount": 108864,
+                    "rate": 22050,
+                    "format": "adpcm"
                 }
             ],
             "costumes": [
                 {
                     "costumeName": "goalie-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "86b0610ea21fdecb99795c5e6d52768c.svg",
+                    "baseLayerMD5": "dbf6a1b0402377be2cd8c75a3b4fdf53.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 68
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 63
                 },
                 {
                     "costumeName": "goalie-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "af3ef5125d187772240a1120e7eb67ac.svg",
+                    "baseLayerMD5": "987d8c2bb6c26cad265a3aa339fe432e.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 68
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 63
                 },
                 {
                     "costumeName": "goalie-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7c9377cedae11a094d2e77bed3edb884.svg",
+                    "baseLayerMD5": "52609ef559a29052e72efe08d1384980.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 68
+                    "rotationCenterX": 62,
+                    "rotationCenterY": 61
                 },
                 {
                     "costumeName": "goalie-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "bd628034d356d30b0e9b563447471290.svg",
+                    "baseLayerMD5": "a4de535b4c4a7c6a65e6736491e01497.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 68
+                    "rotationCenterX": 63,
+                    "rotationCenterY": 62
                 },
                 {
                     "costumeName": "goalie-e",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b3f6c4c0be9a0f71e9486dea51e513c3.svg",
+                    "baseLayerMD5": "ca55a23f3172e9fff061484e00493d2c.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 76,
-                    "rotationCenterY": 68
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 69
                 }
             ],
             "currentCostumeIndex": 0,
@@ -6773,11 +6773,11 @@
             "objName": "Goblin",
             "sounds": [
                 {
-                    "soundName": "pop",
-                    "soundID": -1,
-                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-                    "sampleCount": 258,
-                    "rate": 11025,
+                    "soundName": "fairydust",
+                    "soundID": 0,
+                    "md5": "b92de59d992a655c1b542223a784cda6.wav",
+                    "sampleCount": 11247,
+                    "rate": 22050,
                     "format": ""
                 }
             ],

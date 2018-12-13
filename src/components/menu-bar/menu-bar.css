@@ -45,6 +45,10 @@
     vertical-align: middle;
 }
 
+.scratch-logo.clickable {
+    cursor: pointer;
+}
+
 .language-icon {
     height:  1.5rem;
     vertical-align: middle;

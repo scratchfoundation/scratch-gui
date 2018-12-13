@@ -298,14 +298,15 @@ class MenuBar extends React.Component {
                 <div className={styles.mainMenu}>
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
-                            <a href="https://scratch.mit.edu">
-                                <img
-                                    alt="Scratch"
-                                    className={styles.scratchLogo}
-                                    draggable={false}
-                                    src={scratchLogo}
-                                />
-                            </a>
+                            <img
+                                alt="Scratch"
+                                className={classNames(styles.scratchLogo, {
+                                    [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
+                                })}
+                                draggable={false}
+                                src={scratchLogo}
+                                onClick={this.props.onClickLogo}
+                            />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
@@ -715,6 +716,7 @@ MenuBar.propTypes = {
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
+    onClickLogo: PropTypes.func,
     onClickNew: PropTypes.func,
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,

@@ -7,6 +7,10 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
 
+const onClickLogo = () => {
+    window.location = 'https://scratch.mit.edu';
+};
+
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash
@@ -40,6 +44,7 @@ export default appTarget => {
             showPreviewInfo
             backpackHost={backpackHost}
             canSave={false}
+            onClickLogo={onClickLogo}
         />,
         appTarget);
 };

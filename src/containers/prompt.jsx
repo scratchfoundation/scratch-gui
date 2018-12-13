@@ -25,6 +25,9 @@ class Prompt extends React.Component {
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
     }
+    handleFocus (event) {
+        event.target.select();
+    }
     handleOk () {
         this.props.onOk(this.state.inputValue, {
             scope: this.state.globalSelected ? 'global' : 'local',
@@ -54,16 +57,17 @@ class Prompt extends React.Component {
             <PromptComponent
                 canAddCloudVariable={this.state.canAddCloudVariable}
                 cloudSelected={this.state.cloudSelected}
+                defaultValue={this.props.defaultValue}
                 globalSelected={this.state.globalSelected}
                 isStage={this.props.isStage}
                 label={this.props.label}
-                placeholder={this.props.placeholder}
                 showCloudOption={this.props.showCloudOption}
                 showVariableOptions={this.props.showVariableOptions}
                 title={this.props.title}
                 onCancel={this.handleCancel}
                 onChange={this.handleChange}
                 onCloudVarOptionChange={this.handleCloudVariableOptionChange}
+                onFocus={this.handleFocus}
                 onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
                 onScopeOptionSelection={this.handleScopeOptionSelection}
@@ -73,11 +77,11 @@ class Prompt extends React.Component {
 }
 
 Prompt.propTypes = {
+    defaultValue: PropTypes.string,
     isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
     showCloudOption: PropTypes.bool.isRequired,
     showVariableOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,

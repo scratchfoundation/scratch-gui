@@ -7490,7 +7490,7 @@
     },
     {
         "name": "Hare",
-        "md5": "75c2e6085d0eae076ff357b56d5ed5cd.svg",
+        "md5": "8209c43050785e3c4276f84abb52c245.svg",
         "type": "sprite",
         "tags": [
             "animals",
@@ -7524,26 +7524,26 @@
                 {
                     "costumeName": "hare-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "75c2e6085d0eae076ff357b56d5ed5cd.svg",
+                    "baseLayerMD5": "8209c43050785e3c4276f84abb52c245.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 57,
-                    "rotationCenterY": 49
+                    "rotationCenterX": 29,
+                    "rotationCenterY": 50
                 },
                 {
                     "costumeName": "hare-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fb56d1bef942196c710612906142451b.svg",
+                    "baseLayerMD5": "62796e48dc8e540398e0575d79f562fe.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 57,
-                    "rotationCenterY": 49
+                    "rotationCenterY": 35
                 },
                 {
                     "costumeName": "hare-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "8de391ae70e54656f777c0ed53a91e1a.svg",
+                    "baseLayerMD5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 57,
-                    "rotationCenterY": 49
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 40
                 }
             ],
             "currentCostumeIndex": 0,
@@ -7559,11 +7559,12 @@
     },
     {
         "name": "Harper",
-        "md5": "919eb332bf73df227ec5f214be952a21.svg",
+        "md5": "0d5979db40b0a4dcaa601fb7679ef71c.svg",
         "type": "sprite",
         "tags": [
             "people",
-            "fashion"
+            "fashion",
+            "clothing"
         ],
         "info": [
             0,
@@ -7586,18 +7587,18 @@
                 {
                     "costumeName": "harper-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "919eb332bf73df227ec5f214be952a21.svg",
-                    "bitmapResolution": 1,
-                    "rotationCenterX": 54,
-                    "rotationCenterY": 135
-                },
-                {
-                    "costumeName": "harper-b",
-                    "baseLayerID": -1,
                     "baseLayerMD5": "0d5979db40b0a4dcaa601fb7679ef71c.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 54,
                     "rotationCenterY": 143
+                },
+                {
+                    "costumeName": "harper-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c435a1fcdf5f60a29f620fa800e391e0.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 54,
+                    "rotationCenterY": 134
                 },
                 {
                     "costumeName": "harper-c",

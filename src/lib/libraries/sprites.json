@@ -4686,17 +4686,22 @@
         }
     },
     {
-        "name": "Dragonfly ",
-        "md5": "5720d6b0483fcdcbcd434e205b8fd9c5.svg",
+        "name": "Dragonfly",
+        "md5": "87aaecd2fb73580e6f1f38c5a2e579a9.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "insect",
+            "dragonfly",
+            "wetland",
+            "owen davey"
+        ],
         "info": [
             0,
             2,
             1
         ],
         "json": {
-            "objName": "Dragonfly ",
+            "objName": "Dragonfly",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4711,18 +4716,18 @@
                 {
                     "costumeName": "Dragonfly-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5720d6b0483fcdcbcd434e205b8fd9c5.svg",
+                    "baseLayerMD5": "87aaecd2fb73580e6f1f38c5a2e579a9.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 105,
-                    "rotationCenterY": 75
+                    "rotationCenterX": 108,
+                    "rotationCenterY": 52
                 },
                 {
-                    "costumeName": "Dragonfly-b ",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "d56ed84397ae4dfe51a94209d63fc543.svg",
+                    "costumeName": "Dragonfly-b",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "4e775a49bd5a7a6d38392731924f72e0.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 106,
-                    "rotationCenterY": 69
+                    "rotationCenterX": 108,
+                    "rotationCenterY": 46
                 }
             ],
             "currentCostumeIndex": 0,

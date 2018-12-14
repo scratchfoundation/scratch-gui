@@ -26,6 +26,15 @@ describe('RubyToBlocksConverter', () => {
             expect(Object.keys(converter.lists)).toHaveLength(0);
         });
 
+        test('empty', () => {
+            expect(converter.targetCodeToBlocks(target, '')).toBeTruthy();
+            expect(Object.keys(converter.blocks)).toHaveLength(0);
+            expect(converter.errors).toHaveLength(0);
+            expect(Object.keys(converter.variables)).toHaveLength(0);
+            expect(Object.keys(converter.lists)).toHaveLength(0);
+        });
+
+
         describe('top level blocks', () => {
             test('statements', () => {
                 expected = [

@@ -77,6 +77,9 @@ class RubyToBlocksConverter {
         try {
             const root = RubyParser.$parse(code);
             let blocks = this._process(root);
+            if (blocks === null || blocks === Opal.nil) {
+                return true;
+            }
             if (!_.isArray(blocks)) {
                 blocks = [blocks];
             }

@@ -4,7 +4,7 @@ import _ from 'lodash';
 /* eslint-disable no-invalid-this */
 const createBlockWithMessage = function (opcode, message, defaultMessage) {
     const block = this._createBlock(opcode, 'statement');
-    this._addTextInput(block, 'MESSAGE', _.isNumber(message) ? message.toString() : message, defaultMessage);
+    this._addTextInput(block, 'MESSAGE', this._isNumber(message) ? message.toString() : message, defaultMessage);
     return block;
 };
 
@@ -61,19 +61,19 @@ const LooksConverter = {
                 }
                 break;
             case 'switch_costume':
-                if (args.length === 1 && _.isString(args[0])) {
+                if (args.length === 1 && this._isString(args[0])) {
                     block = this._createBlock('looks_switchcostumeto', 'statement');
                     this._addInput(block, 'COSTUME', this._createFieldBlock('looks_costume', 'COSTUME', args[0]));
                 }
                 break;
             case 'switch_backdrop':
-                if (args.length === 1 && _.isString(args[0])) {
+                if (args.length === 1 && this._isString(args[0])) {
                     block = this._createBlock('looks_switchbackdropto', 'statement');
                     this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
                 }
                 break;
             case 'switch_backdrop_and_wait':
-                if (args.length === 1 && _.isString(args[0])) {
+                if (args.length === 1 && this._isString(args[0])) {
                     block = this._createBlock('looks_switchbackdroptoandwait', 'statement');
                     this._addInput(block, 'BACKDROP', this._createFieldBlock('looks_backdrops', 'BACKDROP', args[0]));
                 }
@@ -86,7 +86,7 @@ const LooksConverter = {
                 break;
             case 'change_effect_by':
             case 'set_effect':
-                if (args.length === 2 && _.isString(args[0]) && Effects.indexOf(args[0]) >= 0 &&
+                if (args.length === 2 && this._isString(args[0]) && Effects.indexOf(args[0].toString()) >= 0 &&
                     this._isNumberOrBlock(args[1])) {
                     let opcode;
                     let inputName;
@@ -103,13 +103,15 @@ const LooksConverter = {
                 }
                 break;
             case 'go_to_layer':
-                if (args.length === 1 && _.isString(args[0]) && FrontBack.indexOf(args[0]) >= 0) {
+                if (args.length === 1 &&
+                    this._isString(args[0]) && FrontBack.indexOf(args[0].toString()) >= 0) {
                     block = this._createBlock('looks_gotofrontback', 'statement');
                     this._addField(block, 'FRONT_BACK', args[0]);
                 }
                 break;
             case 'go_layers':
-                if (args.length === 2 && this._isNumberOrBlock(args[0]) && ForwardBackward.indexOf(args[1]) >= 0) {
+                if (args.length === 2 &&
+                    this._isNumberOrBlock(args[0]) && ForwardBackward.indexOf(args[1].toString()) >= 0) {
                     block = this._createBlock('looks_goforwardbackwardlayers', 'statement');
                     this._addNumberInput(block, 'NUM', 'math_integer', args[0], 1);
                     this._addField(block, 'FORWARD_BACKWARD', args[1]);
@@ -128,6 +130,7 @@ const LooksConverter = {
             }
             if (!block && args.length === 0) {
                 let opcode;
+                let blockType = 'statement';
                 switch (name) {
                 case 'next_costume':
                     opcode = 'looks_nextcostume';
@@ -146,10 +149,11 @@ const LooksConverter = {
                     break;
                 case 'size':
                     opcode = 'looks_size';
+                    blockType = 'value';
                     break;
                 }
                 if (opcode) {
-                    block = this._createBlock(opcode, 'statement');
+                    block = this._createBlock(opcode, blockType);
                 }
             }
         }

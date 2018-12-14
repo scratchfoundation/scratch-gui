@@ -8,6 +8,12 @@ const createControlRepeatBlock = function (times, body) {
     this._addSubstack(block, body);
     return block;
 };
+
+const StopOptions = [
+    'all',
+    'this script',
+    'other scripts in sprite'
+];
 /* eslint-enable no-invalid-this */
 
 /**
@@ -33,22 +39,34 @@ const ControlConverter = {
                 break;
             case 'loop':
             case 'forever':
-                if (args.length === 0 &&
-                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
-                    rubyBlock && (name !== 'loop' || this._popWaitBlock(rubyBlock))) {
-                    block = this._createBlock('control_forever', 'statement');
-                    this._addSubstack(block, rubyBlock);
+                if (args.length === 0 && rubyBlockArgs && rubyBlockArgs.length === 0 && rubyBlock) {
+                    let found;
+                    if (name === 'loop') {
+                        const b = this._popWaitBlock(rubyBlock);
+                        if (b) {
+                            if (b.id === rubyBlock.id) {
+                                rubyBlock = null;
+                            }
+                            found = true;
+                        }
+                    } else {
+                        found = true;
+                    }
+                    if (found) {
+                        block = this._createBlock('control_forever', 'terminate');
+                        this._addSubstack(block, rubyBlock);
+                    }
                 }
                 break;
             case 'stop':
                 if (args.length === 1 &&
-                    _.isString(args[0]) && ['all', 'this script', 'other scripts in sprite'].indexOf(args[0]) >= 0) {
-                    block = this._createBlock('control_stop', 'statement');
+                    this._isString(args[0]) && StopOptions.indexOf(args[0].toString()) >= 0) {
+                    block = this._createBlock('control_stop', 'terminate');
                     this._addField(block, 'STOP_OPTION', args[0]);
                 }
                 break;
             case 'create_clone':
-                if (args.length === 1 && _.isString(args[0])) {
+                if (args.length === 1 && this._isString(args[0])) {
                     block = this._createBlock('control_create_clone_of', 'statement');
                     const optionBlock = this._createBlock('control_create_clone_of_menu', 'value', {
                         shadow: true
@@ -64,16 +82,12 @@ const ControlConverter = {
                 break;
             case 'when':
                 if (args.length === 1 &&
-                    _.isString(args[0]) && args[0] === 'start_as_a_clone' &&
-                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
-                    rubyBlock) {
-                    block = this._createBlock('control_start_as_clone', 'hat', {
-                        topLevel: true
-                    });
-
-                    if (this._isBlock(rubyBlock[0])) {
-                        rubyBlock[0].parent = block.id;
-                        block.next = rubyBlock[0].id;
+                    args[0].type === 'sym' && args[0].value === 'start_as_a_clone' &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0) {
+                    block = this._createBlock('control_start_as_clone', 'hat');
+                    if (this._isBlock(rubyBlock)) {
+                        rubyBlock.parent = block.id;
+                        block.next = rubyBlock.id;
                     }
                 }
                 break;
@@ -82,10 +96,12 @@ const ControlConverter = {
             switch (name) {
             case 'times':
                 if (args.length === 0 &&
-                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
-                    rubyBlock && rubyBlock.length >= 1) {
-                    const waitBlock = this._popWaitBlock(rubyBlock);
-                    if (waitBlock) {
+                    rubyBlockArgs && rubyBlockArgs.length === 0 && rubyBlock) {
+                    const b = this._popWaitBlock(rubyBlock);
+                    if (b) {
+                        if (b.id === rubyBlock.id) {
+                            rubyBlock = null;
+                        }
                         block = createControlRepeatBlock.call(this, receiver, rubyBlock);
                     }
                 }
@@ -97,7 +113,7 @@ const ControlConverter = {
 
     onIf: function (cond, statement, elseStatement) {
         const block = this._createBlock('control_if', 'statement');
-        if (cond !== false) {
+        if (!this._isFalse(cond)) {
             this._addInput(block, 'CONDITION', cond);
         }
         this._addSubstack(block, statement);
@@ -110,14 +126,19 @@ const ControlConverter = {
 
     onUntil: function (cond, statement) {
         const block = this._createBlock('control_repeat_until', 'statement');
-        if (cond !== false) {
+        if (!this._isFalse(cond)) {
             this._addInput(block, 'CONDITION', cond);
         }
-        if (statement.length === 1 && this._popWaitBlock(statement)) {
-            block.opcode = 'control_wait_until';
-        } else {
-            this._addSubstack(block, statement);
+        if (this._isBlock(statement) && statement.next === null) {
+            const b = this._popWaitBlock(statement);
+            if (b) {
+                if (b.id === statement.id) {
+                    statement = null;
+                }
+                block.opcode = 'control_wait_until';
+            }
         }
+        this._addSubstack(block, statement);
         return block;
     }
 };

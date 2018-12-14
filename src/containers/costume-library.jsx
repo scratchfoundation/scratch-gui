@@ -37,7 +37,7 @@ class CostumeLibrary extends React.PureComponent {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.props.vm.addCostumeFromLibrary(item.md5, vmCostume);
         analytics.event({
             category: 'library',
             action: 'Select Costume',

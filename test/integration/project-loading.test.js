@@ -115,13 +115,48 @@ describe('Loading scratch gui', () => {
         test('Creating new project resets active tab to Code tab', async () => {
             await loadUri(uri);
             await clickText('View 2.0 Project');
-            const el = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
+            const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             const projectId = '96708228';
-            await el.sendKeys(`scratch.mit.edu/projects/${projectId}`);
+            await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await findByXpath('//*[span[text()="Costumes"]]');
             await clickText('Costumes');
+            await clickXpath(
+                '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
+                'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
+            );
+            await clickXpath('//li[span[text()="New"]]');
+            await findByXpath('//*[div[@class="scratchCategoryMenu"]]');
+            await clickText('Operators', scope.blocksTab);
+        });
+
+        test('Not logged in->made no changes to project->create new project should not show alert', async () => {
+            await loadUri(uri);
+            await clickText('View 2.0 Project');
+            const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
+            const projectId = '96708228';
+            await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
+            await clickXpath('//button[@title="View Project"]');
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            await clickXpath(
+                '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
+                'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
+            );
+            await clickXpath('//li[span[text()="New"]]');
+            await findByXpath('//*[div[@class="scratchCategoryMenu"]]');
+            await clickText('Operators', scope.blocksTab);
+        });
+
+        test('Not logged in->made a change to project->create new project should show alert', async () => {
+            await loadUri(uri);
+            await clickText('View 2.0 Project');
+            const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
+            const projectId = '96708228';
+            await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
+            await clickXpath('//button[@title="View Project"]');
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            await clickText('move');
             await clickXpath(
                 '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'

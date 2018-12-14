@@ -193,7 +193,7 @@ class LibraryComponent extends React.Component {
                 >
                     {this.getFilteredData().map((dataItem, index) => {
                         const iconSource = {};
-                        if (dataItem.rawURL) {
+                        if (dataItem.hasOwnProperty('rawURL')) {
                             iconSource.uri = dataItem.rawURL;
                         } else {
                             // TODO: adjust libraries to be more storage-friendly; don't use split() here.

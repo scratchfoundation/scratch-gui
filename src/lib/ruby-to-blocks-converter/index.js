@@ -603,6 +603,13 @@ class RubyToBlocksConverter {
         return true;
     }
 
+    _setParent (block, parent) {
+        if (this._isBlock(block)) {
+            block.parent = parent.id;
+            parent.next = block.id;
+        }
+    }
+
     _matchRubyExpression (block, regexp) {
         if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
             return false;

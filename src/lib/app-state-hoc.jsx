@@ -63,7 +63,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     if (props.isPlayerOnly) {
                         initializedGui = initPlayer(initializedGui);
                     }
-                } else {
+                } else if (props.showPreviewInfo) {
                     initializedGui = initPreviewInfo(initializedGui);
                 }
                 reducers = {

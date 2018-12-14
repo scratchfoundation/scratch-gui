@@ -30,7 +30,7 @@ export default function (Generator) {
         block.isStatement = true;
         const lh = Generator.quote_(Generator.getFieldValue(block, 'WHENGREATERTHANMENU') || null);
         const rh = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
-        return `${Generator.spriteName()}.when(:greater_than, ${lh}, ${rh})  do\n`;
+        return `${Generator.spriteName()}.when(:greater_than, ${lh}, ${rh}) do\n`;
     };
 
     Generator.event_whenbroadcastreceived = function (block) {

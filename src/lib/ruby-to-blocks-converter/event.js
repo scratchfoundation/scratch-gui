@@ -60,8 +60,18 @@ const EventConverter = {
             rubyBlock) {
             switch (args[0].value) {
             case 'flag_clicked':
+            case 'clicked':
                 if (args.length === 1) {
-                    block = this._createBlock('event_whenflagclicked', 'hat');
+                    let opcode;
+                    switch (args[0].value) {
+                    case 'flag_clicked':
+                        opcode = 'event_whenflagclicked';
+                        break;
+                    case 'clicked':
+                        opcode = 'event_whenthisspriteclicked';
+                        break;
+                    }
+                    block = this._createBlock(opcode, 'hat');
                     this._setParent(rubyBlock, block);
                 }
                 break;

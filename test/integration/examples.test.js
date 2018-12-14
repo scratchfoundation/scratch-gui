@@ -40,9 +40,9 @@ describe('player example', () => {
             .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
                 .filter(m => m.method === 'Network.requestWillBeSent')
                 .map(m => m.params.request.url)
-                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+                .filter(url => url === 'https://projects.scratch.mit.edu/96708228')
             );
-        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/96708228']);
     });
 });
 
@@ -71,9 +71,9 @@ describe('blocks example', () => {
             .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
                 .filter(m => m.method === 'Network.requestWillBeSent')
                 .map(m => m.params.request.url)
-                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+                .filter(url => url === 'https://projects.scratch.mit.edu/96708228')
             );
-        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/96708228']);
     });
 
     test('Change categories', async () => {

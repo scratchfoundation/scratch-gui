@@ -9,15 +9,15 @@ export default function (Generator) {
         return `${Generator.spriteName()}.when(:flag_clicked) do\n`;
     };
 
-    Generator.event_whenthisspriteclicked = function (block) {
-        block.isStatement = true;
-        return `${Generator.spriteName()}.when(:click) do\n`;
-    };
-
     Generator.event_whenkeypressed = function (block) {
         block.isStatement = true;
         const key = Generator.quote_(Generator.getFieldValue(block, 'KEY_OPTION') || null);
         return `${Generator.spriteName()}.when(:key_pressed, ${key}) do\n`;
+    };
+
+    Generator.event_whenthisspriteclicked = function (block) {
+        block.isStatement = true;
+        return `${Generator.spriteName()}.when(:clicked) do\n`;
     };
 
     Generator.event_whenbackdropswitchesto = function (block) {
@@ -30,7 +30,7 @@ export default function (Generator) {
         block.isStatement = true;
         const lh = Generator.quote_(Generator.getFieldValue(block, 'WHENGREATERTHANMENU') || null);
         const rh = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
-        return `${Generator.spriteName()}.when(:greater_than, ${lh}, ${rh})  do\n`;
+        return `${Generator.spriteName()}.when(:greater_than, ${lh}, ${rh}) do\n`;
     };
 
     Generator.event_whenbroadcastreceived = function (block) {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import LibraryItem from '../library-item/library-item.jsx';
+import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
@@ -33,11 +33,9 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleBlur',
             'handleClose',
             'handleFilterChange',
             'handleFilterClear',
-            'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect',
@@ -56,12 +54,6 @@ class LibraryComponent extends React.Component {
             this.scrollToTop();
         }
     }
-    handleBlur (id) {
-        this.handleMouseLeave(id);
-    }
-    handleFocus (id) {
-        this.handleMouseEnter(id);
-    }
     handleSelect (id) {
         this.handleClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
@@ -76,10 +68,10 @@ class LibraryComponent extends React.Component {
             selectedTag: tag.toLowerCase()
         });
     }
-    handleMouseEnter (id) {
+    handleMouseEnter (id) { // no longer used for sprite costume switching, only for other libraries
         if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
     }
-    handleMouseLeave (id) {
+    handleMouseLeave (id) { // no longer used for sprite costume switching, only for other libraries
         if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
     }
     handleFilterChange (event) {
@@ -172,33 +164,28 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => {
-                        const scratchURL = dataItem.md5 ?
-                            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
-                            dataItem.rawURL;
-                        return (
-                            <LibraryItem
-                                bluetoothRequired={dataItem.bluetoothRequired}
-                                collaborator={dataItem.collaborator}
-                                description={dataItem.description}
-                                disabled={dataItem.disabled}
-                                extensionId={dataItem.extensionId}
-                                featured={dataItem.featured}
-                                hidden={dataItem.hidden}
-                                iconURL={scratchURL}
-                                id={index}
-                                insetIconURL={dataItem.insetIconURL}
-                                internetConnectionRequired={dataItem.internetConnectionRequired}
-                                key={`item_${index}`}
-                                name={dataItem.name}
-                                onBlur={this.handleBlur}
-                                onFocus={this.handleFocus}
-                                onMouseEnter={this.handleMouseEnter}
-                                onMouseLeave={this.handleMouseLeave}
-                                onSelect={this.handleSelect}
-                            />
-                        );
-                    })}
+                    {this.getFilteredData().map((dataItem, index) => (
+                        <LibraryItem
+                            bluetoothRequired={dataItem.bluetoothRequired}
+                            collaborator={dataItem.collaborator}
+                            description={dataItem.description}
+                            disabled={dataItem.disabled}
+                            extensionId={dataItem.extensionId}
+                            featured={dataItem.featured}
+                            hidden={dataItem.hidden}
+                            iconMd5={dataItem.md5}
+                            iconRawURL={dataItem.rawURL}
+                            icons={dataItem.json && dataItem.json.costumes}
+                            id={index}
+                            insetIconURL={dataItem.insetIconURL}
+                            internetConnectionRequired={dataItem.internetConnectionRequired}
+                            key={`item_${index}`}
+                            name={dataItem.name}
+                            onMouseEnter={this.handleMouseEnter}
+                            onMouseLeave={this.handleMouseLeave}
+                            onSelect={this.handleSelect}
+                        />
+                    ))}
                 </div>
             </Modal>
         );

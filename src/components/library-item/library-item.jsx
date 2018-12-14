@@ -10,23 +10,13 @@ import classNames from 'classnames';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
-class LibraryItem extends React.PureComponent {
+class LibraryItemComponent extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleBlur',
             'handleClick',
-            'handleFocus',
-            'handleKeyPress',
-            'handleMouseEnter',
-            'handleMouseLeave'
+            'handleKeyPress'
         ]);
-    }
-    handleBlur () {
-        this.props.onBlur(this.props.id);
-    }
-    handleFocus () {
-        this.props.onFocus(this.props.id);
     }
     handleClick (e) {
         if (!this.props.disabled) {
@@ -39,12 +29,6 @@ class LibraryItem extends React.PureComponent {
             e.preventDefault();
             this.props.onSelect(this.props.id);
         }
-    }
-    handleMouseEnter () {
-        this.props.onMouseEnter(this.props.id);
-    }
-    handleMouseLeave () {
-        this.props.onMouseLeave(this.props.id);
     }
     render () {
         return this.props.featured ? (
@@ -146,12 +130,12 @@ class LibraryItem extends React.PureComponent {
                 )}
                 role="button"
                 tabIndex="0"
-                onBlur={this.handleBlur}
+                onBlur={this.props.onBlur}
                 onClick={this.handleClick}
-                onFocus={this.handleFocus}
+                onFocus={this.props.onFocus}
                 onKeyPress={this.handleKeyPress}
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
+                onMouseEnter={this.props.onMouseEnter}
+                onMouseLeave={this.props.onMouseLeave}
             >
                 {/* Layers of wrapping is to prevent layout thrashing on animation */}
                 <Box className={styles.libraryItemImageContainerWrapper}>
@@ -168,7 +152,7 @@ class LibraryItem extends React.PureComponent {
     }
 }
 
-LibraryItem.propTypes = {
+LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
@@ -194,8 +178,8 @@ LibraryItem.propTypes = {
     onSelect: PropTypes.func.isRequired
 };
 
-LibraryItem.defaultProps = {
+LibraryItemComponent.defaultProps = {
     disabled: false
 };
 
-export default LibraryItem;
+export default LibraryItemComponent;

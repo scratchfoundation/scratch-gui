@@ -317,6 +317,19 @@ describe('RubyToBlocksConverter/Control', () => {
                 }
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'loop { wait }; loop { wait }';
+            expected = [
+                {
+                    opcode: 'control_forever',
+                    branches: []
+                },
+                {
+                    opcode: 'control_forever',
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
         test('forever', () => {
@@ -712,33 +725,6 @@ describe('RubyToBlocksConverter/Control', () => {
     describe('control_repeat_until', () => {
         test('normal', () => {
             code = `
-                until false
-                end
-            `;
-            expected = [
-                {
-                    opcode: 'control_repeat_until',
-                    branches: []
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = `
-                until false
-                  move(10)
-                end
-            `;
-            expected = [
-                {
-                    opcode: 'control_repeat_until',
-                    branches: [
-                        rubyToExpected(converter, target, 'move(10)')[0]
-                    ]
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = `
                 until touching?("_edge_")
                   move(10)
                 end
@@ -803,6 +789,35 @@ describe('RubyToBlocksConverter/Control', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
+        test('condition is false', () => {
+            code = `
+                until false
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                until false
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_repeat_until',
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
         test('error', () => {
             code = `
                 until move(10)
@@ -836,6 +851,29 @@ describe('RubyToBlocksConverter/Control', () => {
                 ];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
+
+            code = 'stop("all"); stop("all")';
+            expected = [
+                {
+                    opcode: 'control_stop',
+                    fields: [
+                        {
+                            name: 'STOP_OPTION',
+                            value: 'all'
+                        }
+                    ]
+                },
+                {
+                    opcode: 'control_stop',
+                    fields: [
+                        {
+                            name: 'STOP_OPTION',
+                            value: 'all'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
         test('invalid', () => {

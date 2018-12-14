@@ -460,14 +460,14 @@ describe('RubyToBlocksConverter/Operators', () => {
         let code;
         let expected;
 
-        code = '!x';
+        code = '!touching?("_edge_")';
         expected = [
             {
                 opcode: 'operator_not',
                 inputs: [
                     {
                         name: 'OPERAND',
-                        block: rubyToExpected(converter, target, 'x')[0]
+                        block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
                     }
                 ]
             }

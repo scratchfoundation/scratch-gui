@@ -5,23 +5,17 @@ import Blockly from 'scratch-blocks';
 import RubyParser from '../ruby-parser';
 import Variable from 'scratch-vm/src/engine/variable';
 
+import Primitive from './primitive';
+import {RubyToBlocksConverterError} from './errors';
+
+import MotionConverter from './motion';
 import LooksConverter from './looks';
+import EventConverter from './event';
 import ControlConverter from './control';
-
-/**
- * Class for Ruby's self for detecting self.
- */
-class Self {}
-
-/**
- * Exception class for RubyToBlocksConverter
- */
-class RubyToBlocksConverterError {
-    constructor (node, message) {
-        this.node = node;
-        this.message = message;
-    }
-}
+import SensingConverter from './sensing';
+import OperatorsConverter from './operators';
+import VariablesConverter from './variables';
+import MyBlocksConverter from './my-blocks';
 
 /**
  * Class for a block converter that translates ruby code into the blocks.
@@ -30,8 +24,14 @@ class RubyToBlocksConverter {
     constructor (vm) {
         this.vm = vm;
         this._converters = [
+            MotionConverter,
             LooksConverter,
-            ControlConverter
+            EventConverter,
+            ControlConverter,
+            SensingConverter,
+            OperatorsConverter,
+            VariablesConverter,
+            MyBlocksConverter
         ];
         this.reset();
     }
@@ -80,18 +80,16 @@ class RubyToBlocksConverter {
             if (!_.isArray(blocks)) {
                 blocks = [blocks];
             }
-            let prevBlock;
             blocks.forEach(block => {
-                if (!block) {
-                    return;
-                }
-                if (!prevBlock) {
+                if (this._isBlock(block)) {
                     block.topLevel = true;
-                }
-                if (block.next) {
-                    prevBlock = block;
+                } else if (block instanceof Primitive) {
+                    throw new RubyToBlocksConverterError(
+                        block.node,
+                        `could not convert primitive: ${this._getSource(block.node)}`
+                    );
                 } else {
-                    prevBlock = null;
+                    throw new Error(`invalid block: ${block}`);
                 }
             });
             return true;
@@ -255,6 +253,87 @@ class RubyToBlocksConverter {
         }
     }
 
+    _isSelf (block) {
+        return block instanceof Primitive && block.type === 'self';
+    }
+
+    _isString (value) {
+        return _.isString(value) || (value && value.type === 'str');
+    }
+
+    _isNumber (value) {
+        return _.isNumber(value) || (value && (value.type === 'int' || value.type === 'float'));
+    }
+
+    _isFalse (value) {
+        return value === false || (value && value.type === 'false');
+    }
+
+    _isArray (value) {
+        return _.isArray(value) || (value && value.type === 'array');
+    }
+
+    _isHash (value) {
+        return value && value.type === 'hash';
+    }
+
+    _isBlock (block) {
+        try {
+            return block.hasOwnProperty('opcode');
+        } catch (e) {
+            return false;
+        }
+    }
+
+    _isStatementBlock (block) {
+        const blockType = this._getBlockType(block);
+        return blockType === 'statement' || blockType === 'terminate';
+    }
+
+    _isValueBlock (block) {
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        return /^value/.test(this._getBlockType(block));
+    }
+
+    _isNumberOrBlock (numberOrBlock) {
+        return this._isNumber(numberOrBlock) || this._isValueBlock(numberOrBlock);
+    }
+
+    _isStringOrBlock (stringOrBlock) {
+        return this._isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
+    }
+
+    _isNumberOrStringOrBlock (block) {
+        return this._isNumber(block) || this._isString(block) || this._isValueBlock(block);
+    }
+
+    _isFalseOrBooleanBlock (block) {
+        if (this._isFalse(block)) {
+            return true;
+        }
+        if (!this._isBlock(block)) {
+            return false;
+        }
+        if (this._getBlockType(block) === 'value_boolean') {
+            return true;
+        }
+        if (block.opcode === 'argument_reporter_string_number') {
+            const varName = block.fields.VALUE.value;
+            if (this._changeToBooleanArgument(varName)) {
+                block.opcode = 'argument_reporter_boolean';
+                this._setBlockType(block, 'value_boolean');
+                return true;
+            }
+        }
+        return false;
+    }
+
+    _isVariableBlock (block) {
+        return /_variable$/.test(this._getBlockType(block));
+    }
+
     _createBlock (opcode, type, attributes = {}) {
         const block = Object.assign({
             id: Blockly.utils.genUid(),
@@ -279,7 +358,7 @@ class RubyToBlocksConverter {
                 [fieldName]: {
                     name: fieldName,
                     id: void 0,
-                    value: value
+                    value: value.toString()
                 }
             },
             shadow: true
@@ -287,14 +366,14 @@ class RubyToBlocksConverter {
     }
 
     _createTextBlock (value) {
-        if (_.isString(value)) {
-            return this._createFieldBlock('text', 'TEXT', value);
+        if (this._isString(value)) {
+            return this._createFieldBlock('text', 'TEXT', value.toString());
         }
         return value;
     }
 
     _createNumberBlock (opcode, value) {
-        if (_.isNumber(value) || value === '') {
+        if (this._isNumber(value) || value === '') {
             return this._createFieldBlock(opcode, 'NUM', value.toString());
         }
         return value;
@@ -318,9 +397,8 @@ class RubyToBlocksConverter {
         }
         block.fields[name] = {
             name: name,
-            value: value
+            value: value.toString()
         };
-        return block.fields[name];
     }
 
     _addInput (block, name, inputBlock, shadowBlock) {
@@ -344,7 +422,7 @@ class RubyToBlocksConverter {
 
     _addNumberInput (block, name, opcode, inputValue, shadowValue) {
         let shadowBlock;
-        if (!_.isNumber(inputValue)) {
+        if (!this._isNumber(inputValue)) {
             shadowBlock = this._createNumberBlock(opcode, shadowValue);
         }
         this._addInput(block, name, this._createNumberBlock(opcode, inputValue), shadowBlock);
@@ -352,24 +430,21 @@ class RubyToBlocksConverter {
 
     _addTextInput (block, name, inputValue, shadowValue) {
         let shadowBlock;
-        if (!_.isString(inputValue)) {
+        if (!this._isString(inputValue)) {
             shadowBlock = this._createTextBlock(shadowValue);
         }
         this._addInput(block, name, this._createTextBlock(inputValue), shadowBlock);
     }
 
-    _addSubstack (block, substackBlocks, num = 1) {
-        if (!_.isArray(substackBlocks)) {
-            substackBlocks = [substackBlocks];
-        }
+    _addSubstack (block, substackBlock, num = 1) {
         let name = 'SUBSTACK';
         if (num > 1) {
             name = `${name}${num}`;
         }
         let substackBlockId = null;
-        if (this._isBlock(substackBlocks[0])) {
-            substackBlocks[0].parent = block.id;
-            substackBlockId = substackBlocks[0].id;
+        if (this._isBlock(substackBlock)) {
+            substackBlock.parent = block.id;
+            substackBlockId = substackBlock.id;
         }
         block.inputs[name] = {
             name: name,
@@ -459,44 +534,41 @@ class RubyToBlocksConverter {
         return expression.$source().toString();
     }
 
-    _popWaitBlock (blocks) {
-        if (!blocks || !_.isArray(blocks)) {
+    _lastBlock (block) {
+        let b = block;
+        while (b.next) {
+            b = this._context.blocks[b.next];
+        }
+        return b;
+    }
+
+    _popWaitBlock (block) {
+        if (!block) {
             return null;
         }
 
-        const block = _.last(blocks);
-        if (block.opcode === 'ruby_statement') {
-            const textBlock = this._context.blocks[block.inputs.STATEMENT.block];
+        const b = this._lastBlock(block);
+        if (b.opcode === 'ruby_statement') {
+            const textBlock = this._context.blocks[b.inputs.STATEMENT.block];
             if (textBlock.fields.TEXT.value === 'wait') {
-                blocks.pop();
-                if (blocks.length > 0) {
-                    _.last(blocks).next = null;
+                if (b.parent) {
+                    const parent = this._context.blocks[b.parent];
+                    if (parent.next === b.id) {
+                        parent.next = null;
+                    }
                 }
-                delete this._context.blocks[block.id];
-                delete this._context.blocks[block.id];
-
-                return block;
+                delete this._context.blocks[b.id];
+                return b;
             }
         }
         return null;
     }
 
-    _processCondition (node) {
-        let cond = this._process(node.children[0]);
-        if (_.isArray(cond) && cond.length === 1) {
-            cond = cond[0];
-        }
-        if (!this._isFalseOrBooleanBlock(cond)) {
-            throw new RubyToBlocksConverterError(
-                node,
-                `condition is not boolean: ${this._getSource(node.children[0])}`
-            );
-        }
-        return cond;
-    }
-
     _getBlockType (block) {
-        return this._context.blockTypes[block.id];
+        if (this._isBlock(block)) {
+            return this._context.blockTypes[block.id];
+        }
+        return 'primitive';
     }
 
     _setBlockType (block, type) {
@@ -507,37 +579,6 @@ class RubyToBlocksConverter {
         block.opcode = opcode;
         this._setBlockType(block, blockType);
         return block;
-    }
-
-    _isSelf (block) {
-        return block === Self;
-    }
-
-    _isBlock (block) {
-        try {
-            return block.hasOwnProperty('opcode');
-        } catch (e) {
-            return false;
-        }
-    }
-
-    _isValueBlock (block) {
-        if (!this._isBlock(block)) {
-            return false;
-        }
-        return /^value/.test(this._getBlockType(block));
-    }
-
-    _isNumberOrBlock (numberOrBlock) {
-        return _.isNumber(numberOrBlock) || this._isValueBlock(numberOrBlock);
-    }
-
-    _isStringOrBlock (stringOrBlock) {
-        return _.isString(stringOrBlock) || this._isValueBlock(stringOrBlock);
-    }
-
-    _isNumberOrStringOrBlock (block) {
-        return _.isNumber(block) || _.isString(block) || this._isValueBlock(block);
     }
 
     _changeToBooleanArgument (varName) {
@@ -557,31 +598,6 @@ class RubyToBlocksConverter {
             });
         }
         return true;
-    }
-
-    _isFalseOrBooleanBlock (block) {
-        if (block === false) {
-            return true;
-        }
-        if (!this._isBlock(block)) {
-            return false;
-        }
-        if (this._getBlockType(block) === 'value_boolean') {
-            return true;
-        }
-        if (block.opcode === 'argument_reporter_string_number') {
-            const varName = block.fields.VALUE.value;
-            if (this._changeToBooleanArgument(varName)) {
-                block.opcode = 'argument_reporter_boolean';
-                this._setBlockType(block, 'value_boolean');
-                return true;
-            }
-        }
-        return false;
-    }
-
-    _isVariableBlock (block) {
-        return this._isBlock(block) && ['data_variable', 'data_listcontents'].indexOf(block.opcode) >= 0;
     }
 
     _matchRubyExpression (block, regexp) {
@@ -608,56 +624,87 @@ class RubyToBlocksConverter {
         throw new RubyToBlocksConverterError(node, `not supported node type: ${node.type}`);
     }
 
+    _processStatement (node) {
+        let blocks = this._process(node);
+        if (!_.isArray(blocks)) {
+            blocks = [blocks];
+        }
+        const block = blocks[0];
+        if (blocks.length >= 2 || (block !== Opal.nil && !this._isStatementBlock(block))) {
+            throw new RubyToBlocksConverterError(node, 'include not statement blocks');
+        }
+        return block;
+    }
+
+    _processCondition (node) {
+        let cond = this._process(node);
+        if (_.isArray(cond) && cond.length === 1) {
+            cond = cond[0];
+        }
+        if (!this._isFalseOrBooleanBlock(cond)) {
+            throw new RubyToBlocksConverterError(
+                node,
+                `condition is not boolean: ${this._getSource(node)}`
+            );
+        }
+        return cond;
+    }
+
     _onBegin (node) {
-        let prevBlock = null;
         const blocks = [];
-        let terminated = false;
-        let firstBlock;
         node.children.forEach(childNode => {
             const block = this._process(childNode);
-            if (!block) {
-                return;
+            if (_.isArray(block)) {
+                block.forEach(b => {
+                    blocks.push(b);
+                });
+            } else {
+                blocks.push(block);
             }
-            if (!firstBlock) {
-                firstBlock = block;
-            }
+        });
+
+        let prevBlock = null;
+        const result = [];
+        blocks.forEach(block => {
             switch (this._getBlockType(block)) {
             case 'statement':
                 if (prevBlock) {
                     prevBlock.next = block.id;
                     block.parent = prevBlock.id;
+                } else {
+                    result.push(block);
                 }
-                prevBlock = block;
-                if (!terminated) {
-                    blocks.push(block);
+                if (block.next) {
+                    const b = this._lastBlock(block);
+                    if (this._getBlockType(b) === 'statement') {
+                        prevBlock = b;
+                    } else {
+                        prevBlock = null;
+                    }
+                } else {
+                    prevBlock = block;
                 }
-                break;
-            case 'value':
-            case 'value_boolean':
-                block.topLevel = true;
-                break;
-            case 'hat':
                 break;
             case 'terminate':
                 if (prevBlock) {
                     prevBlock.next = block.id;
                     block.parent = prevBlock.id;
+                } else {
+                    result.push(block);
                 }
                 prevBlock = null;
-                if (!terminated) {
-                    blocks.push(block);
-                }
-                terminated = true;
                 break;
+            case 'value':
+            case 'value_boolean':
+            case 'value_variable':
+            case 'value_boolean_variable':
+            case 'hat':
+            case 'primitive':
+                result.push(block);
+                prevBlock = null;
             }
         });
-        if (blocks.length === 0 && firstBlock) {
-            if (/^value/.test(this._getBlockType(firstBlock))) {
-                firstBlock.topLevel = false;
-            }
-            blocks.push(firstBlock);
-        }
-        return blocks;
+        return result;
     }
 
     _onBlock (node) {
@@ -683,532 +730,20 @@ class RubyToBlocksConverter {
 
         let rubyBlock;
         if (rubyBlockNode) {
-            rubyBlock = this._process(rubyBlockNode);
-            if (!_.isArray(rubyBlock)) {
-                rubyBlock = [rubyBlock];
-            }
+            rubyBlock = this._processStatement(rubyBlockNode);
         }
 
-        let block;
-        if (receiver === Self || receiver === Opal.nil) {
-            switch (name) {
-            case 'move':
-                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    block = this._createBlock('motion_movesteps', 'statement');
-                    this._addNumberInput(block, 'STEPS', 'math_number', args[0], 10);
-                }
-                break;
-            case 'turn_right':
-            case 'turn_left':
-                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    block = this._createBlock(
-                        name === 'turn_right' ? 'motion_turnright' : 'motion_turnleft', 'statement'
-                    );
-                    this._addNumberInput(block, 'DEGREES', 'math_number', args[0], 15);
-                }
-                break;
-            case 'go_to':
-                if (args.length === 1) {
-                    if (_.isString(args[0])) {
-                        block = this._createBlock('motion_goto', 'statement');
-                        this._addInput(block, 'TO', this._createFieldBlock('motion_goto_menu', 'TO', args[0]));
-                    } else if (_.isArray(args[0]) && args[0].length === 2 &&
-                               this._isNumberOrBlock(args[0][0]) && this._isNumberOrBlock(args[0][1])) {
-                        block = this._createBlock('motion_gotoxy', 'statement');
-                        this._addNumberInput(block, 'X', 'math_number', args[0][0], 0);
-                        this._addNumberInput(block, 'Y', 'math_number', args[0][1], 0);
-                    }
-                }
-                break;
-            case 'glide':
-                if (args.length === 2 &&
-                    args[1] instanceof Map && args[1].size === 1 && this._isNumberOrBlock(args[1].get('secs'))) {
-                    if (_.isString(args[0])) {
-                        block = this._createBlock('motion_glideto', 'statement');
-                        this._addInput(block, 'TO', this._createFieldBlock('motion_glideto_menu', 'TO', args[0]));
-                    } else if (_.isArray(args[0]) && args[0].length === 2 &&
-                               this._isNumberOrBlock(args[0][0]) && this._isNumberOrBlock(args[0][1])) {
-                        block = this._createBlock('motion_glidesecstoxy', 'statement');
-                        this._addNumberInput(block, 'X', 'math_number', args[0][0], 0);
-                        this._addNumberInput(block, 'Y', 'math_number', args[0][1], 0);
-                    }
-                    if (block) {
-                        this._addNumberInput(block, 'SECS', 'math_number', args[1].get('secs'), 1);
-                    }
-                }
-                break;
-            case 'direction=':
-                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    block = this._createBlock('motion_pointindirection', 'statement');
-                    this._addNumberInput(block, 'DIRECTION', 'math_angle', args[0], 90);
-                }
-                break;
-            case 'point_towards':
-                if (args.length === 1 && _.isString(args[0])) {
-                    block = this._createBlock('motion_pointtowards', 'statement');
-                    this._addInput(
-                        block,
-                        'TOWARDS',
-                        this._createFieldBlock('motion_pointtowards_menu', 'TOWARDS', args[0])
-                    );
-                }
-                break;
-            case 'bounce_if_on_edge':
-                if (args.length === 0) {
-                    block = this._createBlock('motion_ifonedgebounce', 'statement');
-                }
-                break;
-            case 'rotation_style=': {
-                const ROTATION_STYLE = [
-                    'left-right',
-                    'don\'t rotate',
-                    'all around'
-                ];
-                if (args.length === 1 && _.isString(args[0]) && ROTATION_STYLE.indexOf(args[0]) >= 0) {
-                    block = this._createBlock('motion_setrotationstyle', 'statement', {
-                        fields: {
-                            STYLE: {
-                                name: 'STYLE',
-                                id: void 0,
-                                value: args[0]
-                            }
-                        }
-                    });
-                }
-                break;
-            }
-            case 'x=':
-            case 'y=':
-                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    let xy;
-                    if (name === 'x=') {
-                        xy = 'x';
-                    } else {
-                        xy = 'y';
-                    }
-                    block = this._createBlock(`motion_set${xy}`, 'statement');
-                    this._addNumberInput(block, _.toUpper(xy), 'math_number', args[0], 0);
-                }
-                break;
-            case 'x':
-            case 'y':
-                if (args.length === 0) {
-                    let xy;
-                    if (name === 'x') {
-                        xy = 'x';
-                    } else {
-                        xy = 'y';
-                    }
-                    block = this._createBlock(`motion_${xy}position`, 'value');
-                }
-                break;
-            case 'direction':
-                if (args.length === 0) {
-                    block = this._createBlock('motion_direction', 'value');
-                }
-                break;
-            case 'when':
-                if (args.length === 1) {
-                    if (args[0] === 'flag_clicked' &&
-                        rubyBlockArgs && rubyBlockArgs.length === 0 && rubyBlock.length > 0) {
-                        block = this._createBlock('event_whenflagclicked', 'hat', {
-                            topLevel: true
-                        });
-
-                        if (this._isBlock(rubyBlock[0])) {
-                            rubyBlock[0].parent = block.id;
-                            block.next = rubyBlock[0].id;
-                        }
-                    }
-                }
-                break;
-            case 'touching?':
-                if (args.length === 1 && _.isString(args[0])) {
-                    block = this._createBlock('sensing_touchingobject', 'value_boolean');
-                    this._addInput(
-                        block,
-                        'TOUCHINGOBJECTMENU',
-                        this._createFieldBlock('sensing_touchingobjectmenu', 'TOUCHINGOBJECTMENU', args[0])
-                    );
-                }
-                break;
-            case 'rand':
-                if (args.length === 1 && this._isBlock(args[0]) && args[0].opcode === 'ruby_range') {
-                    block = args[0];
-                    block.opcode = 'operator_random';
-                    this._setBlockType(block, 'value');
-                }
-                break;
-            case 'show_variable':
-            case 'hide_variable':
-                if (args.length === 1 && _.isString(args[0])) {
-                    let opcode;
-                    switch (name) {
-                    case 'show_variable':
-                        opcode = 'data_showvariable';
-                        break;
-                    case 'hide_variable':
-                        opcode = 'data_hidevariable';
-                        break;
-                    }
-                    const variable = this._findOrCreateVariable(args[0]);
-                    if (variable.scope !== 'local') {
-                        block = this._createBlock(opcode, 'statement', {
-                            fields: {
-                                VARIABLE: {
-                                    name: 'VARIABLE',
-                                    id: variable.id,
-                                    value: variable.name,
-                                    variableType: variable.type
-                                }
-                            }
-                        });
-                    }
-                }
-                break;
-            case 'list':
-            case 'show_list':
-            case 'hide_list':
-                if (args.length === 1 && _.isString(args[0])) {
-                    let opcode;
-                    let blockType;
-                    switch (name) {
-                    case 'list':
-                        opcode = 'data_listcontents';
-                        blockType = 'value';
-                        break;
-                    case 'show_list':
-                        opcode = 'data_showlist';
-                        blockType = 'statement';
-                        break;
-                    case 'hide_list':
-                        opcode = 'data_hidelist';
-                        blockType = 'statement';
-                        break;
-                    }
-                    const variable = this._findOrCreateList(args[0]);
-                    if (variable.scope !== 'local') {
-                        block = this._createBlock(opcode, blockType, {
-                            fields: {
-                                LIST: {
-                                    name: 'LIST',
-                                    id: variable.id,
-                                    value: variable.name,
-                                    variableType: variable.type
-                                }
-                            }
-                        });
-                    }
-                }
-                break;
-            case 'wait':
-                if (args.length === 0) {
-                    block = this._createRubyStatementBlock('wait');
-                }
-                break;
-            default:
-                if (this._findProcedure(name)) {
-                    const procedure = this._findProcedure(name);
-                    if (procedure.argumentIds.length === args.length) {
-                        block = this._createBlock('procedures_call', 'statement', {
-                            mutation: {
-                                argumentids: JSON.stringify(procedure.argumentIds),
-                                children: [],
-                                proccode: procedure.procCode.join(' '),
-                                tagName: 'mutation',
-                                warp: 'false'
-                            }
-                        });
-
-                        if (this._context.procedureCallBlocks.hasOwnProperty(procedure.id)) {
-                            this._context.procedureCallBlocks[procedure.id].push(block.id);
-                        } else {
-                            this._context.procedureCallBlocks[procedure.id] = [block.id];
-                        }
-
-                        args.forEach((arg, i) => {
-                            const argumentId = procedure.argumentIds[i];
-                            if (this._isFalseOrBooleanBlock(arg)) {
-                                if (procedure.argumentVariables[i].isBoolean ||
-                                    this._changeToBooleanArgument(procedure.argumentNames[i])) {
-                                    if (arg !== false) {
-                                        this._addInput(block, argumentId, arg, null);
-                                    }
-                                    return;
-                                }
-                            }
-                            if (!procedure.argumentVariables[i].isBoolean &&
-                                (this._isNumberOrBlock(arg) || this._isStringOrBlock(arg))) {
-                                this._addTextInput(block, argumentId, _.isNumber(arg) ? arg.toString() : arg, '');
-                                return;
-                            }
-                            throw new RubyToBlocksConverterError(
-                                this._context.currentNode,
-                                `invalid type of My Block "${name}" argument #${i + 1}`
-                            );
-                        });
-                    }
-                }
-                break;
-            }
-        } else if (this._isVariableBlock(receiver)) {
-            switch (name) {
-            case 'push':
-                if (args.length === 1 &&
-                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
-                    block = this._changeBlock(receiver, 'data_addtolist', 'statement');
-                    this._addTextInput(block, 'ITEM', _.isNumber(args[0]) ? args[0].toString() : args[0], 'thing');
-                }
-                break;
-            case 'delete_at':
-                if (args.length === 1 &&
-                    this._isNumberOrBlock(args[0])) {
-                    block = this._changeBlock(receiver, 'data_deleteoflist', 'statement');
-                    this._addNumberInput(block, 'INDEX', 'math_integer', args[0], 1);
-                }
-                break;
-            case 'clear':
-                if (args.length === 0) {
-                    block = this._changeBlock(receiver, 'data_deletealloflist', 'statement');
-                }
-                break;
-            case 'insert':
-                if (args.length === 2 &&
-                    this._isNumberOrBlock(args[0]) &&
-                    (this._isStringOrBlock(args[1]) || this._isNumberOrBlock(args[1]))) {
-                    block = this._changeBlock(receiver, 'data_insertatlist', 'statement');
-                    this._addNumberInput(block, 'INDEX', 'math_integer', args[0], 1);
-                    this._addTextInput(block, 'ITEM', _.isNumber(args[1]) ? args[1].toString() : args[1], 'thing');
-                }
-                break;
-            case '[]=':
-                if (args.length === 2 &&
-                    this._isNumberOrBlock(args[0]) &&
-                    (this._isStringOrBlock(args[1]) || this._isNumberOrBlock(args[1]))) {
-                    block = this._changeBlock(receiver, 'data_replaceitemoflist', 'statement');
-                    this._addNumberInput(block, 'INDEX', 'math_integer', args[0], 1);
-                    this._addTextInput(block, 'ITEM', _.isNumber(args[1]) ? args[1].toString() : args[1], 'thing');
-                }
-                break;
-            case '[]':
-                if (args.length === 1 &&
-                    this._isNumberOrBlock(args[0])) {
-                    block = this._changeBlock(receiver, 'data_itemoflist', 'value');
-                    this._addNumberInput(block, 'INDEX', 'math_integer', args[0], 1);
-                }
-                break;
-            case 'index':
-                if (args.length === 1 &&
-                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
-                    block = this._changeBlock(receiver, 'data_itemnumoflist', 'value');
-                    this._addTextInput(block, 'ITEM', _.isNumber(args[0]) ? args[0].toString() : args[0], 'thing');
-                }
-                break;
-            case 'length':
-                if (args.length === 0) {
-                    block = this._changeBlock(receiver, 'data_lengthoflist', 'value');
-                }
-                break;
-            case 'include?':
-                if (args.length === 1 &&
-                    (this._isStringOrBlock(args[0]) || this._isNumberOrBlock(args[0]))) {
-                    block = this._changeBlock(receiver, 'data_listcontainsitem', 'value');
-                    this._addTextInput(block, 'ITEM', _.isNumber(args[0]) ? args[0].toString() : args[0], 'thing');
-                }
-                break;
-            }
-        } else {
-            switch (name) {
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-            case '%':
-                if (args.length === 1) {
-                    if (this._isNumberOrBlock(receiver) && this._isNumberOrBlock(args[0])) {
-                        let opcode;
-                        if (name === '+') {
-                            opcode = 'operator_add';
-                        } else if (name === '-') {
-                            opcode = 'operator_subtract';
-                        } else if (name === '*') {
-                            opcode = 'operator_multiply';
-                        } else if (name === '/') {
-                            opcode = 'operator_divide';
-                        } else {
-                            opcode = 'operator_mod';
-                        }
-                        block = this._createBlock(opcode, 'value');
-                        this._addNumberInput(block, 'NUM1', 'math_number', receiver, '');
-                        this._addNumberInput(block, 'NUM2', 'math_number', args[0], '');
-                    } else if (name === '+' &&
-                               (this._isStringOrBlock(receiver) || this._isStringOrBlock(args[0]))) {
-                        block = this._createBlock('operator_join', 'value');
-                        this._addTextInput(
-                            block,
-                            'STRING1',
-                            _.isNumber(receiver) ? receiver.toString() : receiver,
-                            'apple'
-                        );
-                        this._addTextInput(
-                            block,
-                            'STRING2',
-                            _.isNumber(args[0]) ? args[0].toString() : args[0],
-                            'banana'
-                        );
-                    }
-                }
-                break;
-            case '>':
-            case '<':
-            case '==':
-                if (args.length === 1) {
-                    let opcode;
-                    if (name === '>') {
-                        opcode = 'operator_gt';
-                    } else if (name === '<') {
-                        opcode = 'operator_lt';
-                    } else {
-                        opcode = 'operator_equals';
-                    }
-                    block = this._createBlock(opcode, 'value_boolean');
-                    this._addTextInput(block, 'OPERAND1', _.isNumber(receiver) ? receiver.toString() : receiver, '');
-                    this._addTextInput(block, 'OPERAND2', _.isNumber(args[0]) ? args[0].toString() : args[0], '50');
-                }
-                break;
-            case '!':
-                if (args.length === 0) {
-                    block = this._createBlock('operator_not', 'value_boolean');
-                    if (receiver) {
-                        this._addInput(
-                            block,
-                            'OPERAND',
-                            this._createTextBlock(_.isNumber(receiver) ? receiver.toString() : receiver)
-                        );
-                    }
-                }
-                break;
-            case '[]':
-                if (this._isStringOrBlock(receiver) &&
-                    args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    block = this._createBlock('operator_letter_of', 'value');
-                    this._addTextInput(block, 'STRING', receiver, 'apple');
-                    this._addNumberInput(block, 'LETTER', 'math_number', args[0], 1);
-                }
-                break;
-            case 'length':
-                if (args.length === 0 && this._isStringOrBlock(receiver)) {
-                    block = this._createBlock('operator_length', 'value');
-                    this._addTextInput(block, 'STRING', receiver, 'apple');
-                }
-                break;
-            case 'include?':
-                if (args.length === 1 &&
-                    this._isStringOrBlock(receiver) && this._isStringOrBlock(args[0])) {
-                    block = this._createBlock('operator_contains', 'value');
-                    this._addTextInput(block, 'STRING1', receiver, 'apple');
-                    this._addTextInput(block, 'STRING2', args[0], 'a');
-                }
-                break;
-            case 'round':
-                if (args.length === 0 && this._isNumberOrBlock(receiver)) {
-                    block = this._createBlock('operator_round', 'value');
-                    this._addNumberInput(block, 'NUM', 'math_number', receiver, '');
-                }
-                break;
-            case 'abs':
-            case 'floor':
-            case 'ceil': {
-                let operator;
-                switch (name) {
-                case 'ceil':
-                    operator = 'ceiling';
-                    break;
-                default:
-                    operator = name;
-                }
-                if (args.length === 0 && this._isNumberOrBlock(receiver)) {
-                    block = this._createBlock('operator_mathop', 'value', {
-                        fields: {
-                            OPERATOR: {
-                                name: 'OPERATOR',
-                                id: void 0,
-                                value: operator
-                            }
-                        }
-                    });
-                    this._addNumberInput(block, 'NUM', 'math_number', receiver, '');
-                }
-                break;
-            }
-            case 'sqrt':
-            case 'sin':
-            case 'cos':
-            case 'tan':
-            case 'asin':
-            case 'acos':
-            case 'atan':
-            case 'log':
-            case 'log10': {
-                let operator;
-                switch (name) {
-                case 'log':
-                    operator = 'ln';
-                    break;
-                case 'log10':
-                    operator = 'log';
-                    break;
-                default:
-                    operator = name;
-                }
-                if (args.length === 1 &&
-                    this._matchRubyExpression(receiver, /^(::)?Math$/) &&
-                    this._isNumberOrBlock(args[0])) {
-                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
-                    delete this._context.blocks[receiver.id];
-
-                    block = this._createBlock('operator_mathop', 'value', {
-                        fields: {
-                            OPERATOR: {
-                                name: 'OPERATOR',
-                                id: void 0,
-                                value: operator
-                            }
-                        }
-                    });
-                    this._addNumberInput(block, 'NUM', 'math_number', args[0], '');
-                }
-                break;
-            }
-            case '**':
-                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
-                    let operator;
-                    if (this._matchRubyExpression(receiver, /^(::)?Math::E$/)) {
-                        operator = 'e ^';
-                        delete this._context.blocks[receiver.inputs.EXPRESSION.block];
-                        delete this._context.blocks[receiver.id];
-                    } else if (receiver === 10) {
-                        operator = '10 ^';
-                    }
-                    if (operator) {
-                        block = this._createBlock('operator_mathop', 'value', {
-                            fields: {
-                                OPERATOR: {
-                                    name: 'OPERATOR',
-                                    id: void 0,
-                                    value: operator
-                                }
-                            }
-                        });
-                        this._addNumberInput(block, 'NUM', 'math_number', args[0], '');
-                    }
-                }
-                break;
-            }
-        }
-
+        let block = this._callConvertersHandler('onSend', receiver, name, args, rubyBlockArgs, rubyBlock);
         if (!block) {
-            block = this._callConvertersHandler('onSend', receiver, name, args, rubyBlockArgs, rubyBlock);
+            if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
+                switch (name) {
+                case 'wait':
+                    if (args.length === 0) {
+                        block = this._createRubyStatementBlock('wait');
+                    }
+                    break;
+                }
+            }
         }
 
         if (!block) {
@@ -1218,7 +753,7 @@ class RubyToBlocksConverter {
                 block = this._createBlock('ruby_statement_with_block', 'statement');
                 this._addTextInput(block, 'STATEMENT', this._getSource(node));
                 this._addTextInput(block, 'ARGS', this._getSource(rubyBlockArgsNode));
-                this._addSubstack(block, this._process(rubyBlockNode));
+                this._addSubstack(block, this._processStatement(rubyBlockNode));
             } else {
                 block = this._createRubyStatementBlock(this._getSource(node));
             }
@@ -1226,164 +761,54 @@ class RubyToBlocksConverter {
         return block;
     }
 
-    _onSelf (node) { // eslint-disable-line no-unused-vars
-        return Self;
+    _onSelf (node) {
+        return new Primitive('self', 'self', node);
     }
 
     _onSym (node) {
         this._checkNumChildren(node, 1);
 
-        return node.children[0].toString();
-    }
-
-    _onArgs (node) {
-        return node.children.map(childNode => this._process(childNode));
-    }
-
-    _onArg (node) {
-        this._checkNumChildren(node, 1);
-
-        return node.children[0];
-    }
-
-    _onInt (node) {
-        this._checkNumChildren(node, 1);
-
-        return node.children[0];
-    }
-
-    _onIf (node) {
-        this._checkNumChildren(node, 3);
-
-        const saved = this._saveContext();
-
-        const cond = this._processCondition(node);
-        let statement = this._process(node.children[1]);
-        if (!_.isArray(statement)) {
-            statement = [statement];
-        }
-        let elseStatement;
-        if (node.$loc().$else() !== Opal.nil) {
-            elseStatement = this._process(node.children[2]);
-            if (!_.isArray(elseStatement)) {
-                elseStatement = [elseStatement];
-            }
-        }
-
-        let block = this._callConvertersHandler('onIf', cond, statement, elseStatement);
-        if (!block) {
-            this._restoreContext(saved);
-
-            block = this._createRubyStatementBlock(this._getSource(node));
-        }
-        return block;
-    }
-
-    _onUntil (node) {
-        this._checkNumChildren(node, 2);
-
-        const saved = this._saveContext();
-
-        const cond = this._processCondition(node);
-        let statement = this._process(node.children[1]);
-        if (!_.isArray(statement)) {
-            statement = [statement];
-        }
-
-        let block = this._callConvertersHandler('onUntil', cond, statement);
-        if (!block) {
-            this._restoreContext(saved);
-
-            block = this._createRubyStatementBlock(this._getSource(node));
-        }
-        return block;
+        return new Primitive('sym', node.children[0].toString(), node);
     }
 
     _onStr (node) {
         this._checkNumChildren(node, 1);
 
-        return node.children[0].toString();
+        return new Primitive('str', node.children[0].toString(), node);
+    }
+
+    _onInt (node) {
+        this._checkNumChildren(node, 1);
+
+        return new Primitive('int', node.children[0], node);
+    }
+
+    _onFloat (node) {
+        this._checkNumChildren(node, 1);
+
+        return new Primitive('float', node.children[0], node);
+    }
+
+    _onTrue (node) {
+        return new Primitive('true', true, node);
+    }
+
+    _onFalse (node) {
+        return new Primitive('false', true, node);
     }
 
     _onArray (node) {
-        return node.children.map(childNode => this._process(childNode));
+        return new Primitive('array', node.children.map(childNode => this._process(childNode)), node);
     }
 
     _onHash (node) {
-        return new Map(node.children.map(childNode => this._process(childNode)));
+        return new Primitive('hash', new Map(node.children.map(childNode => this._process(childNode))), node);
     }
 
     _onPair (node) {
         this._checkNumChildren(node, 2);
 
         return node.children.map(childNode => this._process(childNode));
-    }
-
-    _onTrue (node) { // eslint-disable-line no-unused-vars
-        return true;
-    }
-
-    _onFalse (node) { // eslint-disable-line no-unused-vars
-        return false;
-    }
-
-    _onOpAsgn (node) {
-        this._checkNumChildren(node, 3);
-
-        const saved = this._saveContext();
-
-        const lh = this._process(node.children[0]);
-        const operator = node.children[1].toString();
-        const rh = this._process(node.children[2]);
-
-        let block;
-        if (operator === '+') {
-            if (this._isBlock(lh)) {
-                switch (lh.opcode) {
-                case 'motion_xposition':
-                case 'motion_yposition':
-                    if (this._isNumberOrBlock(rh)) {
-                        delete this._context.blocks[lh.id];
-
-                        let xy;
-                        if (lh.opcode === 'motion_xposition') {
-                            xy = 'x';
-                        } else {
-                            xy = 'y';
-                        }
-
-                        block = this._createBlock(`motion_change${xy}by`, 'statement');
-                        this._addNumberInput(block, `D${_.toUpper(xy)}`, 'math_number', rh, 10);
-                    }
-                    break;
-                }
-            } else if (_.isString(lh)) {
-                const variable = this._findOrCreateVariable(lh);
-                if (variable.scope !== 'local' && this._isNumberOrBlock(rh)) {
-                    block = this._createBlock('data_changevariableby', 'statement', {
-                        fields: {
-                            VARIABLE: {
-                                name: 'VARIABLE',
-                                id: variable.id,
-                                value: variable.name,
-                                variableType: variable.type
-                            }
-                        }
-                    });
-                    this._addNumberInput(block, 'VALUE', 'math_number', rh, 1);
-                }
-            }
-        }
-        if (!block) {
-            block = this._callConvertersHandler('onOpAsgn', lh, operator, rh);
-        }
-
-        if (!block) {
-            this._restoreContext(saved);
-
-            block = this._createRubyStatementBlock(this._getSource(node));
-        }
-        return block;
     }
 
     _onIrange (node) {
@@ -1406,48 +831,111 @@ class RubyToBlocksConverter {
         return block;
     }
 
+    _onConst (node) {
+        this._checkNumChildren(node, 2);
+
+        return this._createRubyExpressionBlock(this._getSource(node));
+    }
+
+    _onArgs (node) {
+        return node.children.map(childNode => this._process(childNode));
+    }
+
+    _onArg (node) {
+        this._checkNumChildren(node, 1);
+
+        return node.children[0];
+    }
+
+    _onIf (node) {
+        this._checkNumChildren(node, 3);
+
+        const saved = this._saveContext();
+
+        const cond = this._processCondition(node.children[0]);
+        const statement = this._processStatement(node.children[1]);
+        let elseStatement;
+        if (node.$loc().$else() !== Opal.nil) {
+            elseStatement = this._processStatement(node.children[2]);
+        }
+
+        let block = this._callConvertersHandler('onIf', cond, statement, elseStatement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
+        }
+        return block;
+    }
+
+    _onUntil (node) {
+        this._checkNumChildren(node, 2);
+
+        const saved = this._saveContext();
+
+        const cond = this._processCondition(node.children[0]);
+        const statement = this._processStatement(node.children[1]);
+
+        let block = this._callConvertersHandler('onUntil', cond, statement);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
+        }
+        return block;
+    }
+
+    _onOpAsgn (node) {
+        this._checkNumChildren(node, 3);
+
+        const saved = this._saveContext();
+
+        const lh = this._process(node.children[0]);
+        const operator = node.children[1].toString();
+        const rh = this._process(node.children[2]);
+
+        let block = this._callConvertersHandler('onOpAsgn', lh, operator, rh);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
+        }
+
+        return block;
+    }
+
     _onAnd (node) {
         this._checkNumChildren(node, 2);
 
-        const operands = node.children.map(childNode => this._process(childNode));
-        const block = this._createBlock('operator_and', 'value_boolean');
-        operands.forEach(o => {
-            if (o) {
-                o.parent = block.id;
-            }
-        });
-        if (operands[0]) {
-            this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0]));
-        }
-        if (operands[1]) {
-            this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1]));
-        }
-        return block;
+        const operands = node.children.map(childNode => this._processCondition(childNode));
+        return this._callConvertersHandler('onAnd', operands);
     }
 
     _onOr (node) {
         this._checkNumChildren(node, 2);
 
-        const operands = node.children.map(childNode => this._process(childNode));
-        const block = this._createBlock('operator_or', 'value_boolean');
-        operands.forEach(o => {
-            if (o) {
-                o.parent = block.id;
-            }
-        });
-        if (operands[0]) {
-            this._addInput(block, 'OPERAND1', this._createTextBlock(operands[0]));
-        }
-        if (operands[1]) {
-            this._addInput(block, 'OPERAND2', this._createTextBlock(operands[1]));
-        }
-        return block;
+        const operands = node.children.map(childNode => this._processCondition(childNode));
+        return this._callConvertersHandler('onOr', operands);
     }
 
-    _onConst (node) {
-        this._checkNumChildren(node, 2);
+    _onVar (node, scope) {
+        this._checkNumChildren(node, 1);
 
-        return this._createRubyExpressionBlock(this._getSource(node));
+        const variable = this._findOrCreateVariable(node.children[0]);
+        const block = this._callConvertersHandler('onVar', scope, variable);
+        if (block) {
+            return block;
+        }
+
+        return node.children[0].toString();
+    }
+
+    _onGvar (node) {
+        return this._onVar(node, 'global');
+    }
+
+    _onIvar (node) {
+        return this._onVar(node, 'instance');
     }
 
     _onLvar (node) {
@@ -1456,59 +944,16 @@ class RubyToBlocksConverter {
         const varName = node.children[0].toString();
         if (this._context.localVariables.hasOwnProperty(varName)) {
             const variable = this._context.localVariables[varName];
-            let opcode;
-            let blockType;
-            if (variable.isBoolean) {
-                opcode = 'argument_reporter_boolean';
-                blockType = 'value_boolean';
-            } else {
-                opcode = 'argument_reporter_string_number';
-                blockType = 'value';
+            const block = this._callConvertersHandler('onVar', 'local', variable);
+            if (block) {
+                return block;
             }
-            const block = this._createBlock(opcode, blockType, {
-                fields: {
-                    VALUE: {
-                        name: 'VALUE',
-                        value: variable.name
-                    }
-                }
-            });
-            if (this._context.argumentBlocks.hasOwnProperty(variable.id)) {
-                this._context.argumentBlocks[variable.id].push(block.id);
-            } else {
-                this._context.argumentBlocks[variable.id] = [block.id];
-            }
-            return block;
         }
 
         return varName;
     }
 
-    _onIvar (node) {
-        this._checkNumChildren(node, 1);
-
-        const variable = this._findOrCreateVariable(node.children[0]);
-        if (variable.scope !== 'local') {
-            return this._createBlock('data_variable', 'value', {
-                fields: {
-                    VARIABLE: {
-                        name: 'VARIABLE',
-                        id: variable.id,
-                        value: variable.name,
-                        variableType: variable.type
-                    }
-                }
-            });
-        }
-
-        return node.children[0].toString();
-    }
-
-    _onGvar (node) {
-        return this._onIvar(node);
-    }
-
-    _onIvasgn (node) {
+    _onVasgn (node, scope) {
         this._checkNumChildren(node, [1, 2]);
 
         if (node.children.length === 1) {
@@ -1518,35 +963,27 @@ class RubyToBlocksConverter {
         const saved = this._saveContext();
 
         const variable = this._findOrCreateVariable(node.children[0]);
-        if (variable.scope !== 'local') {
-            const rh = this._process(node.children[1]);
-            if (this._isNumberOrBlock(rh) || this._isStringOrBlock(rh)) {
-                const block = this._createBlock('data_setvariableto', 'statement', {
-                    fields: {
-                        VARIABLE: {
-                            name: 'VARIABLE',
-                            id: variable.id,
-                            value: variable.name,
-                            variableType: variable.type
-                        }
-                    }
-                });
-                this._addTextInput(block, 'VALUE', _.isNumber(rh) ? rh.toString() : rh, '0');
-                return block;
-            }
+        const rh = this._process(node.children[1]);
+        let block = this._callConvertersHandler('onVasgn', scope, variable, rh);
+        if (!block) {
+            this._restoreContext(saved);
+
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
 
-        this._restoreContext(saved);
-
-        return this._createRubyStatementBlock(this._getSource(node));
-    }
-
-    _onLvasgn (node) {
-        return this._onIvasgn(node);
+        return block;
     }
 
     _onGvasgn (node) {
-        return this._onIvasgn(node);
+        return this._onVasgn(node, 'global');
+    }
+
+    _onIvasgn (node) {
+        return this._onVasgn(node, 'instance');
+    }
+
+    _onLvasgn (node) {
+        return this._onVasgn(node, 'local');
     }
 
     _onDefs (node) {
@@ -1554,97 +991,14 @@ class RubyToBlocksConverter {
 
         const saved = this._saveContext();
 
-        const receiver = this._process(node.children[0]);
-        if (receiver === Self) {
-            const procedureName = node.children[1].toString();
-            const block = this._createBlock('procedures_definition', 'hat', {
-                topLevel: true
-            });
-            const procedure = this._createProcedure(procedureName);
+        let block = this._callConvertersHandler('onDefs', node, saved);
+        if (!block) {
+            this._restoreContext(saved);
 
-            const customBlock = this._createBlock('procedures_prototype', 'statement', {
-                shadow: true
-            });
-            this._addInput(block, 'custom_block', customBlock);
-
-            this._context.localVariables = {};
-            this._process(node.children[2]).forEach(n => {
-                n = n.toString();
-                procedure.argumentNames.push(n);
-                procedure.argumentVariables.push(this._findOrCreateVariable(n));
-                procedure.procCode.push('%s');
-                procedure.argumentDefaults.push('');
-                const inputId = Blockly.utils.genUid();
-                procedure.argumentIds.push(inputId);
-                const inputBlock = this._createBlock('argument_reporter_string_number', 'value', {
-                    fields: {
-                        VALUE: {
-                            name: 'VALUE',
-                            value: n
-                        }
-                    },
-                    shadow: true
-                });
-                this._addInput(customBlock, inputId, inputBlock);
-                procedure.argumentBlocks.push(inputBlock);
-            });
-
-            let body = this._process(node.children[3]);
-            if (!_.isArray(body)) {
-                body = [body];
-            }
-            if (this._isBlock(body[0])) {
-                block.next = body[0].id;
-                body[0].parent = block.id;
-            }
-
-            const booleanIndexes = [];
-            procedure.argumentVariables.forEach((v, i) => {
-                if (v.isBoolean) {
-                    booleanIndexes.push(i);
-                    procedure.procCode[i + 1] = '%b';
-                    procedure.argumentDefaults[i] = 'false';
-                    procedure.argumentBlocks[i].opcode = 'argument_reporter_boolean';
-                    this._setBlockType(procedure.argumentBlocks[i], 'value_boolean');
-                }
-            });
-
-            if (booleanIndexes.length > 0 &&
-                this._context.procedureCallBlocks.hasOwnProperty(procedure.id)) {
-                this._context.procedureCallBlocks[procedure.id].forEach(id => {
-                    const b = this._context.blocks[id];
-                    b.mutation.proccode = procedure.procCode.join(' ');
-                    booleanIndexes.forEach(booleanIndex => {
-                        const input = b.inputs[procedure.argumentIds[booleanIndex]];
-                        const inputBlock = this._context.blocks[input.block];
-                        if (inputBlock) {
-                            if (!inputBlock.shadow && input.shadow) {
-                                delete this._context.blocks[input.shadow];
-                                input.shadow = null;
-                            }
-                        }
-                    });
-                });
-            }
-
-            customBlock.mutation = {
-                argumentdefaults: JSON.stringify(procedure.argumentDefaults),
-                argumentids: JSON.stringify(procedure.argumentIds),
-                argumentnames: JSON.stringify(procedure.argumentNames),
-                children: [],
-                proccode: procedure.procCode.join(' '),
-                tagName: 'mutation',
-                warp: 'false'
-            };
-
-            this._restoreContext({localVariables: saved.localVariables});
-
-            return block;
+            block = this._createRubyStatementBlock(this._getSource(node));
         }
 
-        this._restoreContext(saved);
-
-        return this._createRubyStatementBlock(this._getSource(node));
+        return block;
     }
 }
 

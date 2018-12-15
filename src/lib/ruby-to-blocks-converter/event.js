@@ -117,7 +117,44 @@ const EventConverter = {
                 }
                 break;
             }
+        } else if (this._isSelf(receiver) || receiver === Opal.nil) {
+            switch (name) {
+            case 'broadcast':
+            case 'broadcast_and_wait':
+                if (args.length === 1 && this._isStringOrBlock(args[0]) && !rubyBlock) {
+                    let opcode;
+                    if (name === 'broadcast') {
+                        opcode = 'event_broadcast';
+                    } else {
+                        opcode = 'event_broadcastandwait';
+                    }
+                    const menuBlock = this._createBlock('event_broadcast_menu', 'value', {
+                        shadow: true
+                    });
+                    let broadcastMsg;
+                    let inputBlock;
+                    let shadowBlock;
+                    if (this._isString(args[0])) {
+                        broadcastMsg = this._lookupOrCreateBroadcastMsg(args[0]);
+                        inputBlock = menuBlock;
+                        shadowBlock = menuBlock;
+                    } else {
+                        broadcastMsg = this._defaultBroadcastMsg();
+                        inputBlock = args[0];
+                        shadowBlock = menuBlock;
+                    }
+                    this._addField(menuBlock, 'BROADCAST_OPTION', broadcastMsg.name, {
+                        id: broadcastMsg.id,
+                        variableType: Variable.BROADCAST_MESSAGE_TYPE
+                    });
+
+                    block = this._createBlock(opcode, 'statement');
+                    this._addInput(block, 'BROADCAST_INPUT', inputBlock, shadowBlock);
+                }
+                break;
+            }
         }
+
         return block;
     }
 };

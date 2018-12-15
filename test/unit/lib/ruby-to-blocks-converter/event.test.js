@@ -622,4 +622,91 @@ describe('RubyToBlocksConverter/Event', () => {
             expect(res).toBeFalsy();
         });
     });
+
+    [
+        {
+            opcode: 'event_broadcast',
+            methodName: 'broadcast'
+        },
+        {
+            opcode: 'event_broadcastandwait',
+            methodName: 'broadcast_and_wait'
+        }
+    ].forEach(info => {
+        describe(info.opcode, () => {
+            test('normal', () => {
+                code = `${info.methodName}("message1")`;
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        inputs: [
+                            {
+                                name: 'BROADCAST_INPUT',
+                                block: {
+                                    opcode: 'event_broadcast_menu',
+                                    fields: [
+                                        {
+                                            name: 'BROADCAST_OPTION',
+                                            broadcastMsg: 'message1'
+                                        }
+                                    ],
+                                    shadow: true
+                                }
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `${info.methodName}(x)`;
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        inputs: [
+                            {
+                                name: 'BROADCAST_INPUT',
+                                block: rubyToExpected(converter, target, 'x')[0],
+                                shadow: {
+                                    opcode: 'event_broadcast_menu',
+                                    fields: [
+                                        {
+                                            name: 'BROADCAST_OPTION',
+                                            broadcastMsg: 'message1'
+                                        }
+                                    ],
+                                    shadow: true
+                                }
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('statement', () => {
+                code = `
+                  bounce_if_on_edge
+                  ${info.methodName}("message1")
+                  bounce_if_on_edge
+                `;
+                expected = [
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                ];
+                expected[0].next = rubyToExpected(converter, target, `${info.methodName}("message1")`)[0];
+                expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('invalid', () => {
+                [
+                    `${info.methodName}`,
+                    `${info.methodName}()`,
+                    `${info.methodName}(1)`,
+                    `${info.methodName}("message1", 1)`
+                ].forEach(c => {
+                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                });
+            });
+        });
+    });
 });

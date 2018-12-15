@@ -531,6 +531,18 @@ class RubyToBlocksConverter {
         return broadcastMsg;
     }
 
+    _defaultBroadcastMsg () {
+        const defaultName = 'message1';
+        const keys = Object.keys(this._context.broadcastMsgs);
+        if (keys.length === 0) {
+            return this._lookupOrCreateBroadcastMsg(defaultName);
+        }
+        if (this._context.broadcastMsgs.hasOwnProperty(defaultName)) {
+            return this._context.broadcastMsgs[defaultName];
+        }
+        return this._context.broadcastMsgs[keys[0]];
+    }
+
     _lookupProcedure (name) {
         name = name.toString();
         return this._context.procedures[name];

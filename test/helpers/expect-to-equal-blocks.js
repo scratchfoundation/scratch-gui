@@ -269,14 +269,23 @@ const fieldsToExpected = function (context, fields) {
     return Object.keys(fields).map(name => {
         const field = fields[name];
         if (field.id) {
-            const varName = field.value;
+            let varName = field.value;
             let storeName;
             if (field.variableType === Variable.SCALAR_TYPE) {
                 storeName = 'variables';
+            } else if (field.variableType === Variable.BROADCAST_MESSAGE_TYPE) {
+                storeName = 'broadcastMsgs';
+                varName = varName.toLowerCase();
             } else {
                 storeName = 'lists';
             }
             const variable = context[storeName][varName];
+            if (field.variableType === Variable.BROADCAST_MESSAGE_TYPE) {
+                return {
+                    name: field.name,
+                    broadcastMsg: field.value
+                };
+            }
             let scope;
             if (variable.scope === 'global') {
                 scope = '$';
@@ -285,14 +294,14 @@ const fieldsToExpected = function (context, fields) {
             } else {
                 scope = '';
             }
-            if (variable.type === Variable.SCALAR_TYPE) {
+            if (field.variableType === Variable.SCALAR_TYPE) {
                 return {
-                    name: 'VARIABLE',
+                    name: field.name,
                     variable: `${scope}${varName}`
                 };
             }
             return {
-                name: 'LIST',
+                name: field.name,
                 list: `${scope}${varName}`
             };
         }

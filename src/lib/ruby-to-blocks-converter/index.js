@@ -52,6 +52,10 @@ class RubyToBlocksConverter {
         return this._context.lists;
     }
 
+    get broadcastMsgs () {
+        return this._context.broadcastMsgs;
+    }
+
     reset () {
         this._context = {
             currentNode: null,
@@ -64,6 +68,7 @@ class RubyToBlocksConverter {
             localVariables: {},
             variables: {},
             lists: {},
+            broadcastMsgs: {},
             procedures: {}
         };
         if (this.vm && this.vm.runtime && this.vm.runtime.getTargetForStage) {
@@ -139,6 +144,13 @@ class RubyToBlocksConverter {
             });
         });
 
+        Object.keys(this._context.broadcastMsgs).forEach(name => {
+            const broadcastMsg = this._context.broadcastMsgs[name];
+            if (!stage.variables.hasOwnProperty(broadcastMsg.id)) {
+                stage.createVariable(broadcastMsg.id, broadcastMsg.name, Variable.BROADCAST_MESSAGE_TYPE);
+            }
+        });
+
         Object.keys(target.blocks._blocks).forEach(blockId => {
             target.blocks.deleteBlock(blockId);
         });
@@ -169,6 +181,7 @@ class RubyToBlocksConverter {
             'localVariables',
             'variables',
             'lists',
+            'broadcastMsgs',
             'procedures'
         ];
 
@@ -217,6 +230,8 @@ class RubyToBlocksConverter {
             let storeName;
             if (variable.type === Variable.SCALAR_TYPE) {
                 storeName = 'variables';
+            } else if (variable.type === Variable.BROADCAST_MESSAGE_TYPE) {
+                storeName = 'broadcastMsgs';
             } else {
                 storeName = 'lists';
             }
@@ -394,14 +409,14 @@ class RubyToBlocksConverter {
         return block;
     }
 
-    _addField (block, name, value) {
+    _addField (block, name, value, attributes = {}) {
         if (!this._isBlock(block)) {
             return;
         }
-        block.fields[name] = {
+        block.fields[name] = Object.assign({
             name: name,
             value: value.toString()
-        };
+        }, attributes);
     }
 
     _addInput (block, name, inputBlock, shadowBlock) {
@@ -456,7 +471,7 @@ class RubyToBlocksConverter {
         };
     }
 
-    _findOrCreateVariableOrList (name, type) {
+    _lookupOrCreateVariableOrList (name, type) {
         name = name.toString();
         let scope;
         let varName;
@@ -493,15 +508,30 @@ class RubyToBlocksConverter {
         return variable;
     }
 
-    _findOrCreateVariable (name) {
-        return this._findOrCreateVariableOrList(name, Variable.SCALAR_TYPE);
+    _lookupOrCreateVariable (name) {
+        return this._lookupOrCreateVariableOrList(name, Variable.SCALAR_TYPE);
     }
 
-    _findOrCreateList (name) {
-        return this._findOrCreateVariableOrList(name, Variable.LIST_TYPE);
+    _lookupOrCreateList (name) {
+        return this._lookupOrCreateVariableOrList(name, Variable.LIST_TYPE);
     }
 
-    _findProcedure (name) {
+    _lookupOrCreateBroadcastMsg (name) {
+        name = name.toString();
+        const key = name.toLowerCase();
+        let broadcastMsg = this._context.broadcastMsgs[key];
+        if (!broadcastMsg) {
+            broadcastMsg = {
+                id: Blockly.utils.genUid(),
+                name: name,
+                scope: 'global'
+            };
+            this._context.broadcastMsgs[key] = broadcastMsg;
+        }
+        return broadcastMsg;
+    }
+
+    _lookupProcedure (name) {
         name = name.toString();
         return this._context.procedures[name];
     }
@@ -931,7 +961,7 @@ class RubyToBlocksConverter {
     _onVar (node, scope) {
         this._checkNumChildren(node, 1);
 
-        const variable = this._findOrCreateVariable(node.children[0]);
+        const variable = this._lookupOrCreateVariable(node.children[0]);
         const block = this._callConvertersHandler('onVar', scope, variable);
         if (block) {
             return block;
@@ -972,7 +1002,7 @@ class RubyToBlocksConverter {
 
         const saved = this._saveContext();
 
-        const variable = this._findOrCreateVariable(node.children[0]);
+        const variable = this._lookupOrCreateVariable(node.children[0]);
         const rh = this._process(node.children[1]);
         let block = this._callConvertersHandler('onVasgn', scope, variable, rh);
         if (!block) {

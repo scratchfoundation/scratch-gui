@@ -48,6 +48,13 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
                     expectedType = Variable.LIST_TYPE;
                 }
                 expect(field).toHaveProperty('variableType', expectedType);
+                expect(field).toHaveProperty('id', variable.id);
+            } else if (expectedField.hasOwnProperty('broadcastMsg')) {
+                expect(context.broadcastMsgs).toHaveProperty(expectedField.broadcastMsg);
+                const broadcastMsg = context.broadcastMsgs[expectedField.broadcastMsg];
+                expect(broadcastMsg.name).toEqual(expectedField.broadcastMsg);
+                expect(field).toHaveProperty('id', broadcastMsg.id);
+                expect(field).toHaveProperty('variableType', 'broadcast_msg');
             } else {
                 expect(field.id).toEqual(void 0);
                 expect(field.value).toEqual(expectedField.value);
@@ -205,7 +212,8 @@ const expectToEqualBlocks = function (converter, expectedBlocksInfo) {
         converter: converter,
         blocks: blocks,
         variables: converter.variables,
-        lists: converter.lists
+        lists: converter.lists,
+        broadcastMsgs: converter.broadcastMsgs
     };
 
     const scripts = blocks.getScripts();
@@ -375,7 +383,8 @@ const rubyToExpected = function (converter, target, code) {
         converter: converter,
         blocks: blocks,
         variables: converter.variables,
-        lists: converter.lists
+        lists: converter.lists,
+        broadcastMsgs: converter.broadcastMsgs
     };
 
     const scripts = blocks.getScripts();

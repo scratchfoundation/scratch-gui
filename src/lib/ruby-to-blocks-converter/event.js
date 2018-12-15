@@ -1,5 +1,6 @@
 /* global Opal */
 import _ from 'lodash';
+import Variable from 'scratch-vm/src/engine/variable';
 
 const KeyOptions = [
     'space',
@@ -88,19 +89,9 @@ const EventConverter = {
                 }
                 break;
             case 'backdrop_switches':
-            case 'receive':
                 if (args.length === 2 && this._isString(args[1])) {
-                    let opcode;
-                    let fieldName;
-                    if (args[0].value === 'backdrop_switches') {
-                        opcode = 'event_whenbackdropswitchesto';
-                        fieldName = 'BACKDROP';
-                    } else {
-                        opcode = 'event_whenbroadcastreceived';
-                        fieldName = 'BROADCAST_OPTION';
-                    }
-                    block = this._createBlock(opcode, 'hat');
-                    this._addField(block, fieldName, args[1]);
+                    block = this._createBlock('event_whenbackdropswitchesto', 'hat');
+                    this._addField(block, 'BACKDROP', args[1]);
                     this._setParent(rubyBlock, block);
                 }
                 break;
@@ -111,6 +102,17 @@ const EventConverter = {
                     block = this._createBlock('event_whengreaterthan', 'hat');
                     this._addField(block, 'WHENGREATERTHANMENU', args[1]);
                     this._addNumberInput(block, 'VALUE', 'math_number', args[2], 10);
+                    this._setParent(rubyBlock, block);
+                }
+                break;
+            case 'receive':
+                if (args.length === 2 && this._isString(args[1])) {
+                    const broadcastMsg = this._lookupOrCreateBroadcastMsg(args[1]);
+                    block = this._createBlock('event_whenbroadcastreceived', 'hat');
+                    this._addField(block, 'BROADCAST_OPTION', broadcastMsg.name, {
+                        id: broadcastMsg.id,
+                        variableType: Variable.BROADCAST_MESSAGE_TYPE
+                    });
                     this._setParent(rubyBlock, block);
                 }
                 break;

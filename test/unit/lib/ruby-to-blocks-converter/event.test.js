@@ -527,7 +527,7 @@ describe('RubyToBlocksConverter/Event', () => {
                     fields: [
                         {
                             name: 'BROADCAST_OPTION',
-                            value: 'message1'
+                            broadcastMsg: 'message1'
                         }
                     ]
                 }
@@ -541,7 +541,7 @@ describe('RubyToBlocksConverter/Event', () => {
                     fields: [
                         {
                             name: 'BROADCAST_OPTION',
-                            value: 'message1'
+                            broadcastMsg: 'message1'
                         }
                     ],
                     next: {
@@ -558,7 +558,7 @@ describe('RubyToBlocksConverter/Event', () => {
                     fields: [
                         {
                             name: 'BROADCAST_OPTION',
-                            value: 'message1'
+                            broadcastMsg: 'message1'
                         }
                     ],
                     next: rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
@@ -581,7 +581,7 @@ describe('RubyToBlocksConverter/Event', () => {
                     fields: [
                         {
                             name: 'BROADCAST_OPTION',
-                            value: 'message1'
+                            broadcastMsg: 'message1'
                         }
                     ]
                 },

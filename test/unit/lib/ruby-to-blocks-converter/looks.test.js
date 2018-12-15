@@ -607,7 +607,7 @@ describe('RubyToBlocksConverter/Looks', () => {
     expectNoArgsMethod('looks_cleargraphiceffects', 'clear_graphic_effects');
     expectNoArgsMethod('looks_show', 'show');
     expectNoArgsMethod('looks_hide', 'hide');
-    expectNoArgsMethod('looks_size', 'size');
+    expectNoArgsMethod('looks_size', 'size', 'value');
 
     describe('looks_gotofrontback', () => {
         test('normal', () => {

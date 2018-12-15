@@ -82,6 +82,13 @@ const EventConverter = {
                     this._setParent(rubyBlock, block);
                 }
                 break;
+            case 'backdrop_switches':
+                if (args.length === 2 && this._isString(args[1])) {
+                    block = this._createBlock('event_whenbackdropswitchesto', 'hat');
+                    this._addField(block, 'BACKDROP', args[1]);
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         }
         return block;

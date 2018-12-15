@@ -423,7 +423,7 @@ const expectedInfo = {
     })
 };
 
-const expectNoArgsMethod = function (opcode, methodName) {
+const expectNoArgsMethod = function (opcode, methodName, blockType = 'statement') {
     let converter;
     let target;
     let code;
@@ -454,6 +454,36 @@ const expectNoArgsMethod = function (opcode, methodName) {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
+
+        if (blockType === 'statement') {
+            test('statement', () => {
+                code = `
+                    bounce_if_on_edge
+                    ${methodName}
+                    bounce_if_on_edge
+                `;
+                expected = [
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                ];
+                expected[0].next = rubyToExpected(converter, target, `${methodName}`)[0];
+                expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+        } else if (blockType === 'value') {
+            test('value', () => {
+                code = `
+                    bounce_if_on_edge
+                    ${methodName}
+                    bounce_if_on_edge
+                `;
+                expected = [
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                    rubyToExpected(converter, target, `${methodName}`)[0],
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+        }
 
         test('invalid', () => {
             [

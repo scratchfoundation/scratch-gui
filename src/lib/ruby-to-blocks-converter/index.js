@@ -10,6 +10,7 @@ import {RubyToBlocksConverterError} from './errors';
 
 import MotionConverter from './motion';
 import LooksConverter from './looks';
+import SoundConverter from './sound';
 import EventConverter from './event';
 import ControlConverter from './control';
 import SensingConverter from './sensing';
@@ -26,6 +27,7 @@ class RubyToBlocksConverter {
         this._converters = [
             MotionConverter,
             LooksConverter,
+            SoundConverter,
             EventConverter,
             ControlConverter,
             SensingConverter,

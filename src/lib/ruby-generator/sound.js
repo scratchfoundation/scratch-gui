@@ -5,18 +5,18 @@
  */
 export default function (Generator){
     Generator.sound_sounds_menu = function (block) {
-        const sound = Generator.quote_(Generator.getFieldValue(block, 'SOUND_MENU') || null);
+        const sound = Generator.quote_(Generator.getFieldValue(block, 'SOUND_MENU') || '');
         return [sound, Generator.ORDER_ATOMIC];
     };
 
     Generator.sound_playuntildone = function (block) {
         const sound = Generator.valueToCode(block, 'SOUND_MENU', Generator.ORDER_NONE) || null;
-        return `play_until_done(name: ${sound})\n`;
+        return `play_until_done(${sound})\n`;
     };
 
     Generator.sound_play = function (block) {
         const sound = Generator.valueToCode(block, 'SOUND_MENU', Generator.ORDER_NONE) || null;
-        return `play(name: ${sound})\n`;
+        return `play(${sound})\n`;
     };
 
     Generator.sound_stopallsounds = function () {

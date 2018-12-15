@@ -3,6 +3,7 @@ import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
     rubyToExpected,
+    expectedInfo,
     expectNoArgsMethod
 } from '../../../helpers/expect-to-equal-blocks';
 
@@ -107,4 +108,89 @@ describe('RubyToBlocksConverter/Sound', () => {
     });
 
     expectNoArgsMethod('sound_stopallsounds', 'stop_all_sounds');
+
+    [
+        {
+            opcode: 'sound_changeeffectby',
+            methodName: 'change_sound_effect_by',
+            value: 10
+        },
+        {
+            opcode: 'sound_seteffectto',
+            methodName: 'set_sound_effect',
+            value: 100
+        }
+    ].forEach(info => {
+        describe(info.opcode, () => {
+            test('normal', () => {
+                code = `${info.methodName}("PITCH", ${info.value})`;
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        fields: [
+                            {
+                                name: 'EFFECT',
+                                value: 'PITCH'
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'VALUE',
+                                block: expectedInfo.makeNumber(info.value)
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+                code = `${info.methodName}("PITCH", x)`;
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        fields: [
+                            {
+                                name: 'EFFECT',
+                                value: 'PITCH'
+                            }
+                        ],
+                        inputs: [
+                            {
+                                name: 'VALUE',
+                                block: rubyToExpected(converter, target, 'x')[0],
+                                shadow: expectedInfo.makeNumber(info.value)
+                            }
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('statement', () => {
+                code = `
+                  bounce_if_on_edge
+                  ${info.methodName}("PITCH", ${info.value})
+                  bounce_if_on_edge
+                `;
+                expected = [
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                ];
+                expected[0].next = rubyToExpected(converter, target, `${info.methodName}("PITCH", ${info.value})`)[0];
+                expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
+            });
+
+            test('invalid', () => {
+                [
+                    `${info.methodName}`,
+                    `${info.methodName}()`,
+                    `${info.methodName}("PITCH")`,
+                    `${info.methodName}(${info.value}, "PITCH")`,
+                    `${info.methodName}("invalid", ${info.value})`,
+                    `${info.methodName}("PITCH", ${info.value}, 1)`
+                ].forEach(c => {
+                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                });
+            });
+        });
+    });
 });

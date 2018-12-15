@@ -1,6 +1,11 @@
 /* global Opal */
 import _ from 'lodash';
 
+const Effect = [
+    'PITCH',
+    'PAN'
+];
+
 /**
  * Sound converter
  */
@@ -42,6 +47,25 @@ const SoundConverter = {
                     block = this._createBlock('sound_stopallsounds', 'statement');
                 }
                 break;
+            case 'change_sound_effect_by':
+            case 'set_sound_effect':
+                if (args.length === 2 && this._isString(args[0]) && Effect.indexOf(args[0].toString()) >= 0 &&
+                    this._isNumberOrBlock(args[1])) {
+                    let opcode;
+                    let value;
+                    if (name === 'change_sound_effect_by') {
+                        opcode = 'sound_changeeffectby';
+                        value = 10;
+                    } else {
+                        opcode = 'sound_seteffectto';
+                        value = 100;
+                    }
+                    block = this._createBlock(opcode, 'statement');
+                    this._addField(block, 'EFFECT', args[0]);
+                    this._addNumberInput(block, 'VALUE', 'math_number', args[1], value);
+                }
+                break;
+
             }
         }
         return block;

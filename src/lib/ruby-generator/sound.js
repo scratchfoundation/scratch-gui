@@ -24,15 +24,15 @@ export default function (Generator){
     };
 
     Generator.sound_changeeffectby = function (block) {
-        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || '');
         const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
-        return `change_sound_effect_by(effect: ${effect}, value: ${value})\n`;
+        return `change_sound_effect_by(${effect}, ${value})\n`;
     };
 
     Generator.sound_seteffectto = function (block) {
-        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || '');
         const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
-        return `set_sound_effect(effect: ${effect}, value: ${value})\n`;
+        return `set_sound_effect(${effect}, ${value})\n`;
     };
 
     Generator.sound_cleareffects = function () {

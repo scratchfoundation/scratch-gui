@@ -2,7 +2,8 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
-    rubyToExpected
+    rubyToExpected,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Event', () => {
@@ -334,6 +335,179 @@ describe('RubyToBlocksConverter/Event', () => {
             code = `
                 forever do
                   self.when(:backdrop_switches, "backdrop1") do
+                  end
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
+    });
+
+    describe('event_whengreaterthan', () => {
+        test('normal', () => {
+            code = 'self.when(:greater_than, "LOUDNESS", 10) { }';
+            expected = [
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'LOUDNESS'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.when(:greater_than, "TIMER", 10) { }';
+            expected = [
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'TIMER'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.when(:greater_than, "LOUDNESS", x) { }';
+            expected = [
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'LOUDNESS'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.when(:greater_than, "LOUDNESS", 10) { bounce_if_on_edge }';
+            expected = [
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'LOUDNESS'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ],
+                    next: {
+                        opcode: 'motion_ifonedgebounce'
+                    }
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.when(:greater_than, "LOUDNESS", 10) { bounce_if_on_edge; move(10) }';
+            expected = [
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'LOUDNESS'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ],
+                    next: rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('hat', () => {
+            code = `
+                bounce_if_on_edge
+                self.when(:greater_than, "LOUDNESS", 10) do
+                end
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                {
+                    opcode: 'event_whengreaterthan',
+                    fields: [
+                        {
+                            name: 'WHENGREATERTHANMENU',
+                            value: 'LOUDNESS'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(10)
+                        }
+                    ]
+                },
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.when(:greater_than)',
+                'self.when("LOUDNESS")',
+                'self.when(:greater_than, "LOUDNESS")',
+                'self.when(:greater_than, "LOUDNESS", 10, 11)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+
+            [
+                'self.when(:greater_than) { bounce_if_on_edge }',
+                'self.when(:greater_than, "LOUDNESS") { bounce_if_on_edge }',
+                'self.when(:greater_than, "invalid", 10) { bounce_if_on_edge }',
+                'self.when(:greater_than, "LOUDNESS", 10, 11) { bounce_if_on_edge }'
+            ].forEach(c => {
+                expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
+                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
+                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+            });
+        });
+
+        test('error', () => {
+            code = `
+                forever do
+                  self.when(:greater_than, "LOUDNESS", 10) do
                   end
                 end
             `;

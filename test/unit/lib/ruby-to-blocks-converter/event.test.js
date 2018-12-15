@@ -183,74 +183,99 @@ describe('RubyToBlocksConverter/Event', () => {
         });
     });
 
-    describe('event_whenthisspriteclicked', () => {
-        test('normal', () => {
-            code = 'self.when(:clicked) { bounce_if_on_edge }';
-            expected = [
-                {
-                    opcode: 'event_whenthisspriteclicked',
-                    next: {
-                        opcode: 'motion_ifonedgebounce'
+    [
+        {
+            opcode: 'event_whenthisspriteclicked',
+            isStage: false
+        },
+        {
+            opcode: 'event_whenstageclicked',
+            isStage: true
+        }
+    ].forEach(info => {
+        describe(info.opcode, () => {
+            beforeEach(() => {
+                target = {
+                    isStage: info.isStage
+                };
+            });
+
+            test('normal', () => {
+                code = 'self.when(:clicked) { }';
+                expected = [
+                    {
+                        opcode: info.opcode
                     }
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'self.when(:clicked) { bounce_if_on_edge; move(10) }';
-            expected = [
-                {
-                    opcode: 'event_whenthisspriteclicked',
-                    next: rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-        });
+                code = 'self.when(:clicked) { bounce_if_on_edge }';
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        next: {
+                            opcode: 'motion_ifonedgebounce'
+                        }
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-        test('hat', () => {
-            code = `
-                bounce_if_on_edge
-                self.when(:clicked) do
-                end
-                bounce_if_on_edge
-            `;
-            expected = [
-                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
-                {
-                    opcode: 'event_whenthisspriteclicked'
-                },
-                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-        });
-
-        test('invalid', () => {
-            [
-                'self.when(:clicked)'
-            ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                code = 'self.when(:clicked) { bounce_if_on_edge; move(10) }';
+                expected = [
+                    {
+                        opcode: info.opcode,
+                        next: rubyToExpected(converter, target, 'bounce_if_on_edge; move(10)')[0]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
 
-            [
-                'self.when(:clicked, 1) { bounce_if_on_edge }',
-                'self.when(:click) { bounce_if_on_edge }'
-            ].forEach(s => {
-                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+            test('hat', () => {
+                code = `
+                    bounce_if_on_edge
+                    self.when(:clicked) do
+                    end
+                    bounce_if_on_edge
+                `;
+                expected = [
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                    {
+                        opcode: info.opcode
+                    },
+                    rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
-        });
 
-        test('error', () => {
-            code = `
-                forever do
-                  self.when(:clicked) do
-                  end
-                end
-            `;
-            const res = converter.targetCodeToBlocks(target, code);
-            expect(converter.errors).toHaveLength(1);
-            expect(converter.errors[0].row).toEqual(2);
-            expect(res).toBeFalsy();
+            test('invalid', () => {
+                [
+                    'self.when(:clicked)'
+                ].forEach(s => {
+                    convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                });
+
+                [
+                    'self.when(:clicked, 1) { bounce_if_on_edge }',
+                    'self.when(:click) { bounce_if_on_edge }'
+                ].forEach(s => {
+                    expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
+                    const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
+                    expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                });
+            });
+
+            test('error', () => {
+                code = `
+                    forever do
+                      self.when(:clicked) do
+                      end
+                    end
+                `;
+                const res = converter.targetCodeToBlocks(target, code);
+                expect(converter.errors).toHaveLength(1);
+                expect(converter.errors[0].row).toEqual(2);
+                expect(res).toBeFalsy();
+            });
         });
     });
 

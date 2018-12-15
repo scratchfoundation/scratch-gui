@@ -74,7 +74,11 @@ const EventConverter = {
                         opcode = 'event_whenflagclicked';
                         break;
                     case 'clicked':
-                        opcode = 'event_whenthisspriteclicked';
+                        if (this._context.target && this._context.target.isStage) {
+                            opcode = 'event_whenstageclicked';
+                        } else {
+                            opcode = 'event_whenthisspriteclicked';
+                        }
                         break;
                     }
                     block = this._createBlock(opcode, 'hat');

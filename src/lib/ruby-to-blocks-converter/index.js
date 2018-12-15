@@ -78,6 +78,7 @@ class RubyToBlocksConverter {
 
     targetCodeToBlocks (target, code) {
         this.reset();
+        this._setTarget(target);
         this._loadVariables(target);
         try {
             const root = RubyParser.$parse(code);
@@ -213,6 +214,10 @@ class RubyToBlocksConverter {
                 });
             }
         });
+    }
+
+    _setTarget (target) {
+        this._context.target = target;
     }
 
     _loadVariables (target) {

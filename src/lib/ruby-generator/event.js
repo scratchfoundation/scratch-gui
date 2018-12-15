@@ -56,7 +56,7 @@ export default function (Generator) {
 
     Generator.event_whenstageclicked = function (block) {
         block.isStatement = true;
-        return `Stage.when(:stage_clicked) do\n`;
+        return `Stage.when(:clicked) do\n`;
     };
 
     return Generator;

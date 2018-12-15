@@ -66,7 +66,7 @@ describe('RubyToBlocksConverter/Ruby', () => {
         });
     });
 
-    test.only('ruby_statement_with_block', () => {
+    test('ruby_statement_with_block', () => {
         const code = `
             method_call(1) do |arg1, arg2|
               move(arg1)

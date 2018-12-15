@@ -94,6 +94,31 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 }
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'touching_color?(x)';
+            expected = [
+                {
+                    opcode: 'sensing_touchingcolor',
+                    inputs: [
+                        {
+                            name: 'COLOR',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#43066f'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
         });
 
         test('value_boolean', () => {
@@ -119,6 +144,116 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'touching_color?("43066f")',
                 'touching_color?("#43066f0")',
                 'touching_color?("#43066f", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('sensing_coloristouchingcolor', () => {
+        test('normal', () => {
+            code = 'color_is_touching_color?("#aad315", "#fca3bf")';
+            expected = [
+                {
+                    opcode: 'sensing_coloristouchingcolor',
+                    inputs: [
+                        {
+                            name: 'COLOR',
+                            block: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#aad315'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        },
+                        {
+                            name: 'COLOR2',
+                            block: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#fca3bf'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'color_is_touching_color?(x, y)';
+            expected = [
+                {
+                    opcode: 'sensing_coloristouchingcolor',
+                    inputs: [
+                        {
+                            name: 'COLOR',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#aad315'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        },
+                        {
+                            name: 'COLOR2',
+                            block: rubyToExpected(converter, target, 'y')[0],
+                            shadow: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#fca3bf'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value_boolean', () => {
+            code = `
+                bounce_if_on_edge
+                color_is_touching_color?("#aad315", "#fca3bf")
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                rubyToExpected(converter, target, 'color_is_touching_color?("#aad315", "#fca3bf")')[0],
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'color_is_touching_color?()',
+                'color_is_touching_color?(1)',
+                'color_is_touching_color?("#0", "#fca3bf")',
+                'color_is_touching_color?("aad315", "#fca3bf")',
+                'color_is_touching_color?("#aad3150", "#fca3bf")',
+                'color_is_touching_color?("#aad315", "#0")',
+                'color_is_touching_color?("#aad315", "fca3bf")',
+                'color_is_touching_color?("#aad315", "#fca3bf0")',
+                'color_is_touching_color?("#aad315", "#fca3bf", 1)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });

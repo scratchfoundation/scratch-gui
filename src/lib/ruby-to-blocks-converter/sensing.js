@@ -1,6 +1,8 @@
 /* global Opal */
 import _ from 'lodash';
 
+const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
+
 /**
  * Sensing converter
  */
@@ -21,9 +23,61 @@ const SensingConverter = {
                 }
                 break;
             case 'touching_color?':
-                if (args.length === 1 && this._isString(args[0]) && /^#[0-9a-fA-F]{6}$/.test(args[0].toString())) {
+                if (args.length === 1 &&
+                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString())))) {
                     block = this._createBlock('sensing_touchingcolor', 'value_boolean');
-                    this._addInput(block, 'COLOR', this._createFieldBlock('colour_picker', 'COLOUR', args[0]));
+                    const colorBlock = this._createBlock('colour_picker', 'value', {
+                        shadow: true
+                    });
+                    let color;
+                    let inputBlock;
+                    let shadowBlock;
+                    if (this._isString(args[0])) {
+                        color = args[0];
+                        inputBlock = colorBlock;
+                        shadowBlock = colorBlock;
+                    } else {
+                        color = '#43066f';
+                        inputBlock = args[0];
+                        shadowBlock = colorBlock;
+                    }
+                    this._addField(colorBlock, 'COLOUR', color);
+                    this._addInput(block, 'COLOR', inputBlock, shadowBlock);
+                }
+                break;
+            case 'color_is_touching_color?':
+                if (args.length === 2 &&
+                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString()))) &&
+                    (this._isBlock(args[1]) || (this._isString(args[1]) && ColorRegexp.test(args[1].toString())))) {
+                    block = this._createBlock('sensing_coloristouchingcolor', 'value_boolean');
+                    [
+                        {
+                            inputName: 'COLOR',
+                            color: '#aad315'
+                        },
+                        {
+                            inputName: 'COLOR2',
+                            color: '#fca3bf'
+                        }
+                    ].forEach((info, i) => {
+                        const colorBlock = this._createBlock('colour_picker', 'value', {
+                            shadow: true
+                        });
+                        let color;
+                        let inputBlock;
+                        let shadowBlock;
+                        if (this._isString(args[i])) {
+                            color = args[i];
+                            inputBlock = colorBlock;
+                            shadowBlock = colorBlock;
+                        } else {
+                            color = info.color;
+                            inputBlock = args[i];
+                            shadowBlock = colorBlock;
+                        }
+                        this._addField(colorBlock, 'COLOUR', color);
+                        this._addInput(block, info.inputName, inputBlock, shadowBlock);
+                    });
                 }
                 break;
             case 'answer':

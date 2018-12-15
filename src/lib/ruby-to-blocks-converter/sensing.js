@@ -13,12 +13,11 @@ const SensingConverter = {
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
             case 'touching?':
-                if (args.length === 1 && this._isString(args[0])) {
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
                     block = this._createBlock('sensing_touchingobject', 'value_boolean');
-                    this._addInput(
-                        block,
-                        'TOUCHINGOBJECTMENU',
-                        this._createFieldBlock('sensing_touchingobjectmenu', 'TOUCHINGOBJECTMENU', args[0])
+                    this._addFieldInput(
+                        block, 'TOUCHINGOBJECTMENU', 'sensing_touchingobjectmenu', 'TOUCHINGOBJECTMENU',
+                        args[0], '_mouse_'
                     );
                 }
                 break;
@@ -26,23 +25,7 @@ const SensingConverter = {
                 if (args.length === 1 &&
                     (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString())))) {
                     block = this._createBlock('sensing_touchingcolor', 'value_boolean');
-                    const colorBlock = this._createBlock('colour_picker', 'value', {
-                        shadow: true
-                    });
-                    let color;
-                    let inputBlock;
-                    let shadowBlock;
-                    if (this._isString(args[0])) {
-                        color = args[0];
-                        inputBlock = colorBlock;
-                        shadowBlock = colorBlock;
-                    } else {
-                        color = '#43066f';
-                        inputBlock = args[0];
-                        shadowBlock = colorBlock;
-                    }
-                    this._addField(colorBlock, 'COLOUR', color);
-                    this._addInput(block, 'COLOR', inputBlock, shadowBlock);
+                    this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#43066f');
                 }
                 break;
             case 'color_is_touching_color?':
@@ -50,34 +33,16 @@ const SensingConverter = {
                     (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString()))) &&
                     (this._isBlock(args[1]) || (this._isString(args[1]) && ColorRegexp.test(args[1].toString())))) {
                     block = this._createBlock('sensing_coloristouchingcolor', 'value_boolean');
-                    [
-                        {
-                            inputName: 'COLOR',
-                            color: '#aad315'
-                        },
-                        {
-                            inputName: 'COLOR2',
-                            color: '#fca3bf'
-                        }
-                    ].forEach((info, i) => {
-                        const colorBlock = this._createBlock('colour_picker', 'value', {
-                            shadow: true
-                        });
-                        let color;
-                        let inputBlock;
-                        let shadowBlock;
-                        if (this._isString(args[i])) {
-                            color = args[i];
-                            inputBlock = colorBlock;
-                            shadowBlock = colorBlock;
-                        } else {
-                            color = info.color;
-                            inputBlock = args[i];
-                            shadowBlock = colorBlock;
-                        }
-                        this._addField(colorBlock, 'COLOUR', color);
-                        this._addInput(block, info.inputName, inputBlock, shadowBlock);
-                    });
+                    this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#aad315');
+                    this._addFieldInput(block, 'COLOR2', 'colour_picker', 'COLOUR', args[1], '#fca3bf');
+                }
+                break;
+            case 'distance':
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
+                    block = this._createBlock('sensing_distanceto', 'value');
+                    this._addFieldInput(
+                        block, 'DISTANCETOMENU', 'sensing_distancetomenu', 'DISTANCETOMENU', args[0], '_mouse_'
+                    );
                 }
                 break;
             case 'answer':

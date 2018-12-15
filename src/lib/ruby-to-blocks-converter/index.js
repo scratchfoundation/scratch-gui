@@ -382,6 +382,9 @@ class RubyToBlocksConverter {
     }
 
     _createFieldBlock (opcode, fieldName, value) {
+        if (this._isBlock(value)) {
+            return value;
+        }
         return this._createBlock(opcode, 'value', {
             fields: {
                 [fieldName]: {
@@ -463,6 +466,14 @@ class RubyToBlocksConverter {
             shadowBlock = this._createTextBlock(shadowValue);
         }
         this._addInput(block, name, this._createTextBlock(inputValue), shadowBlock);
+    }
+
+    _addFieldInput (block, name, opcode, fieldName, inputValue, shadowValue) {
+        let shadowBlock;
+        if (!this._isString(inputValue)) {
+            shadowBlock = this._createFieldBlock(opcode, fieldName, shadowValue);
+        }
+        this._addInput(block, name, this._createFieldBlock(opcode, fieldName, inputValue), shadowBlock);
     }
 
     _addSubstack (block, substackBlock, num = 1) {

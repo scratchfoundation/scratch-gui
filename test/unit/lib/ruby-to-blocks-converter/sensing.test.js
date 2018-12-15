@@ -43,6 +43,30 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 }
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'touching?(x)';
+            expected = [
+                {
+                    opcode: 'sensing_touchingobject',
+                    inputs: [
+                        {
+                            name: 'TOUCHINGOBJECTMENU',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: {
+                                opcode: 'sensing_touchingobjectmenu',
+                                fields: [
+                                    {
+                                        name: 'TOUCHINGOBJECTMENU',
+                                        value: '_mouse_'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
         test('value_boolean', () => {
@@ -254,6 +278,81 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'color_is_touching_color?("#aad315", "fca3bf")',
                 'color_is_touching_color?("#aad315", "#fca3bf0")',
                 'color_is_touching_color?("#aad315", "#fca3bf", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('sensing_distanceto', () => {
+        test('normal', () => {
+            code = 'distance("_mouse_")';
+            expected = [
+                {
+                    opcode: 'sensing_distanceto',
+                    inputs: [
+                        {
+                            name: 'DISTANCETOMENU',
+                            block: {
+                                opcode: 'sensing_distancetomenu',
+                                fields: [
+                                    {
+                                        name: 'DISTANCETOMENU',
+                                        value: '_mouse_'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'distance(x)';
+            expected = [
+                {
+                    opcode: 'sensing_distanceto',
+                    inputs: [
+                        {
+                            name: 'DISTANCETOMENU',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: {
+                                opcode: 'sensing_distancetomenu',
+                                fields: [
+                                    {
+                                        name: 'DISTANCETOMENU',
+                                        value: '_mouse_'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value', () => {
+            code = `
+                bounce_if_on_edge
+                distance("_mouse_")
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                rubyToExpected(converter, target, 'distance("_mouse_")')[0],
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'distance()',
+                'distance(1)',
+                'distance("_mouse_", 1)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });

@@ -24,22 +24,8 @@ const SoundConverter = {
                     } else {
                         opcode = 'sound_play';
                     }
-                    const menuBlock = this._createBlock('sound_sounds_menu', 'value', {
-                        shadow: true
-                    });
-                    let inputBlock;
-                    let shadowBlock;
-                    if (this._isString(args[0])) {
-                        this._addField(menuBlock, 'SOUND_MENU', args[0]);
-                        inputBlock = menuBlock;
-                        shadowBlock = menuBlock;
-                    } else {
-                        this._addField(menuBlock, 'SOUND_MENU', '');
-                        inputBlock = args[0];
-                        shadowBlock = menuBlock;
-                    }
                     block = this._createBlock(opcode, 'statement');
-                    this._addInput(block, 'SOUND_MENU', inputBlock, shadowBlock);
+                    this._addFieldInput(block, 'SOUND_MENU', 'sound_sounds_menu', 'SOUND_MENU', args[0], '');
                 }
                 break;
             case 'stop_all_sounds':

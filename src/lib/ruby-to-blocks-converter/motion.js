@@ -1,6 +1,12 @@
 /* global Opal */
 import _ from 'lodash';
 
+const RotationStyle = [
+    'left-right',
+    'don\'t rotate',
+    'all around'
+];
+
 /**
  * Motion converter
  */
@@ -79,12 +85,7 @@ const MotionConverter = {
                 }
                 break;
             case 'rotation_style=': {
-                const ROTATION_STYLE = [
-                    'left-right',
-                    'don\'t rotate',
-                    'all around'
-                ];
-                if (args.length === 1 && this._isString(args[0]) && ROTATION_STYLE.indexOf(args[0].toString()) >= 0) {
+                if (args.length === 1 && this._isString(args[0]) && RotationStyle.indexOf(args[0].toString()) >= 0) {
                     block = this._createBlock('motion_setrotationstyle', 'statement');
                     this._addField(block, 'STYLE', args[0]);
                 }

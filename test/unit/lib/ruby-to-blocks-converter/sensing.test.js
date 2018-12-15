@@ -3,6 +3,7 @@ import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
     rubyToExpected,
+    expectedInfo,
     expectNoArgsMethod
 } from '../../../helpers/expect-to-equal-blocks';
 
@@ -353,6 +354,63 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'distance()',
                 'distance(1)',
                 'distance("_mouse_", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
+    describe('sensing_askandwait', () => {
+        test('normal', () => {
+            code = 'ask("What\'s your name?")';
+            expected = [
+                {
+                    opcode: 'sensing_askandwait',
+                    inputs: [
+                        {
+                            name: 'QUESTION',
+                            block: expectedInfo.makeText('What\'s your name?')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'ask(x)';
+            expected = [
+                {
+                    opcode: 'sensing_askandwait',
+                    inputs: [
+                        {
+                            name: 'QUESTION',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeText('What\'s your name?')
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('statement', () => {
+            code = `
+                bounce_if_on_edge
+                ask("What's your name?")
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            expected[0].next = rubyToExpected(converter, target, 'ask("What\'s your name?")')[0];
+            expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'ask()',
+                'ask(1)',
+                'ask("What\'s your name?", 1)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });

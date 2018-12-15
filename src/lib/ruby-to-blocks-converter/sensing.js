@@ -45,6 +45,12 @@ const SensingConverter = {
                     );
                 }
                 break;
+            case 'ask':
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
+                    block = this._createBlock('sensing_askandwait', 'statement');
+                    this._addTextInput(block, 'QUESTION', args[0], 'What\'s your name?');
+                }
+                break;
             case 'answer':
             case 'loudness':
             case 'days_since_2000':

@@ -41,7 +41,7 @@ export default function (Generator) {
 
     Generator.sensing_askandwait = function (block) {
         const question = Generator.valueToCode(block, 'QUESTION', Generator.ORDER_NONE) || null;
-        return `ask_and_wait(${question})\n`;
+        return `ask(${question})\n`;
     };
 
     Generator.sensing_answer = function () {

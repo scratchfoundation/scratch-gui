@@ -195,4 +195,6 @@ describe('RubyToBlocksConverter/Sound', () => {
     });
 
     expectNoArgsMethod('sound_cleareffects', 'clear_sound_effects');
+
+    expectNoArgsMethod('sound_volume', 'volume', 'value');
 });

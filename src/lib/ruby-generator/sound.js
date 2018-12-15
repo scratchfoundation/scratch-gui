@@ -50,7 +50,7 @@ export default function (Generator){
     };
 
     Generator.sound_volume = function () {
-        return ['self.volume', Generator.ORDER_ATOMIC];
+        return ['volume', Generator.ORDER_ATOMIC];
     };
 
     return Generator;

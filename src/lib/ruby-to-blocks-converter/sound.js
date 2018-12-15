@@ -44,14 +44,25 @@ const SoundConverter = {
                 break;
             case 'stop_all_sounds':
             case 'clear_sound_effects':
+            case 'volume':
                 if (args.length === 0) {
                     let opcode;
-                    if (name === 'stop_all_sounds') {
+                    let blockType;
+                    switch (name) {
+                    case 'stop_all_sounds':
                         opcode = 'sound_stopallsounds';
-                    } else {
+                        blockType = 'statement';
+                        break;
+                    case 'clear_sound_effects':
                         opcode = 'sound_cleareffects';
+                        blockType = 'statement';
+                        break;
+                    case 'volume':
+                        opcode = 'sound_volume';
+                        blockType = 'value';
+                        break;
                     }
-                    block = this._createBlock(opcode, 'statement');
+                    block = this._createBlock(opcode, blockType);
                 }
                 break;
             case 'change_sound_effect_by':

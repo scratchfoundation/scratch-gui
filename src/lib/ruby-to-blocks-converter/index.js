@@ -302,6 +302,10 @@ class RubyToBlocksConverter {
         return value && value.type === 'hash';
     }
 
+    _isConst (value) {
+        return value && value.type === 'const';
+    }
+
     _isBlock (block) {
         try {
             return block.hasOwnProperty('opcode');
@@ -893,7 +897,11 @@ class RubyToBlocksConverter {
     _onConst (node) {
         this._checkNumChildren(node, 2);
 
-        return this._createRubyExpressionBlock(this._getSource(node));
+        const value = {
+            scope: this._process(node.children[0]),
+            name: node.children[1].toString()
+        };
+        return new Primitive('const', value, node);
     }
 
     _onArgs (node) {

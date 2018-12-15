@@ -1,3 +1,5 @@
+/* global Opal */
+
 /**
  * Primitive class for RubyToBlocksConverter
  */
@@ -34,6 +36,9 @@ class Primitive {
     }
 
     toString () {
+        if (this._type === 'const') {
+            return `${this._value.scope === Opal.nil ? '' : this._value.scope.toString()}::${this._value.name}`;
+        }
         return this._value.toString();
     }
 

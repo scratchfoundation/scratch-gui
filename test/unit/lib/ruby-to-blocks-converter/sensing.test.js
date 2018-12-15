@@ -2,7 +2,8 @@ import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter'
 import {
     convertAndExpectToEqualBlocks,
     convertAndExpectToEqualRubyStatement,
-    rubyToExpected
+    rubyToExpected,
+    expectNoArgsMethod
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Sensing', () => {
@@ -68,4 +69,14 @@ describe('RubyToBlocksConverter/Sensing', () => {
             });
         });
     });
+
+    expectNoArgsMethod('sensing_answer', 'answer', 'value');
+    expectNoArgsMethod('sensing_mousedown', 'Mouse.down?', 'value');
+    expectNoArgsMethod('sensing_mousex', 'Mouse.x', 'value');
+    expectNoArgsMethod('sensing_mousey', 'Mouse.y', 'value');
+    expectNoArgsMethod('sensing_loudness', 'loudness', 'value');
+    expectNoArgsMethod('sensing_timer', 'Timer.value', 'value');
+    expectNoArgsMethod('sensing_resettimer', 'Timer.reset');
+    expectNoArgsMethod('sensing_dayssince2000', 'days_since_2000', 'value');
+    expectNoArgsMethod('sensing_username', 'user_name', 'value');
 });

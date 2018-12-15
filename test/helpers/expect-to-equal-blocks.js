@@ -48,6 +48,13 @@ const expectToEqualFields = function (context, actualFields, expectedFieldsInfo)
                     expectedType = Variable.LIST_TYPE;
                 }
                 expect(field).toHaveProperty('variableType', expectedType);
+                expect(field).toHaveProperty('id', variable.id);
+            } else if (expectedField.hasOwnProperty('broadcastMsg')) {
+                expect(context.broadcastMsgs).toHaveProperty(expectedField.broadcastMsg);
+                const broadcastMsg = context.broadcastMsgs[expectedField.broadcastMsg];
+                expect(broadcastMsg.name).toEqual(expectedField.broadcastMsg);
+                expect(field).toHaveProperty('id', broadcastMsg.id);
+                expect(field).toHaveProperty('variableType', 'broadcast_msg');
             } else {
                 expect(field.id).toEqual(void 0);
                 expect(field.value).toEqual(expectedField.value);
@@ -205,7 +212,8 @@ const expectToEqualBlocks = function (converter, expectedBlocksInfo) {
         converter: converter,
         blocks: blocks,
         variables: converter.variables,
-        lists: converter.lists
+        lists: converter.lists,
+        broadcastMsgs: converter.broadcastMsgs
     };
 
     const scripts = blocks.getScripts();
@@ -261,14 +269,23 @@ const fieldsToExpected = function (context, fields) {
     return Object.keys(fields).map(name => {
         const field = fields[name];
         if (field.id) {
-            const varName = field.value;
+            let varName = field.value;
             let storeName;
             if (field.variableType === Variable.SCALAR_TYPE) {
                 storeName = 'variables';
+            } else if (field.variableType === Variable.BROADCAST_MESSAGE_TYPE) {
+                storeName = 'broadcastMsgs';
+                varName = varName.toLowerCase();
             } else {
                 storeName = 'lists';
             }
             const variable = context[storeName][varName];
+            if (field.variableType === Variable.BROADCAST_MESSAGE_TYPE) {
+                return {
+                    name: field.name,
+                    broadcastMsg: field.value
+                };
+            }
             let scope;
             if (variable.scope === 'global') {
                 scope = '$';
@@ -277,14 +294,14 @@ const fieldsToExpected = function (context, fields) {
             } else {
                 scope = '';
             }
-            if (variable.type === Variable.SCALAR_TYPE) {
+            if (field.variableType === Variable.SCALAR_TYPE) {
                 return {
-                    name: 'VARIABLE',
+                    name: field.name,
                     variable: `${scope}${varName}`
                 };
             }
             return {
-                name: 'LIST',
+                name: field.name,
                 list: `${scope}${varName}`
             };
         }
@@ -375,7 +392,8 @@ const rubyToExpected = function (converter, target, code) {
         converter: converter,
         blocks: blocks,
         variables: converter.variables,
-        lists: converter.lists
+        lists: converter.lists,
+        broadcastMsgs: converter.broadcastMsgs
     };
 
     const scripts = blocks.getScripts();

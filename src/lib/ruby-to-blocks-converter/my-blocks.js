@@ -11,7 +11,7 @@ const MyBlocksConverter = {
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
         if (this._isSelf(receiver) || receiver === Opal.nil) {
-            const procedure = this._findProcedure(name);
+            const procedure = this._lookupProcedure(name);
             if (procedure) {
                 if (procedure.argumentIds.length === args.length) {
                     block = this._createBlock('procedures_call', 'statement', {
@@ -109,7 +109,7 @@ const MyBlocksConverter = {
         this._process(node.children[2]).forEach(n => {
             n = n.toString();
             procedure.argumentNames.push(n);
-            procedure.argumentVariables.push(this._findOrCreateVariable(n));
+            procedure.argumentVariables.push(this._lookupOrCreateVariable(n));
             procedure.procCode.push('%s');
             procedure.argumentDefaults.push('');
             const inputId = Blockly.utils.genUid();

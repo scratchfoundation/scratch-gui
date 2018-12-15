@@ -22,7 +22,7 @@ const VariablesConverter = {
                         opcode = 'data_hidevariable';
                         break;
                     }
-                    const variable = this._findOrCreateVariable(args[0]);
+                    const variable = this._lookupOrCreateVariable(args[0]);
                     if (variable.scope !== 'local') {
                         block = this._createBlock(opcode, 'statement', {
                             fields: {
@@ -57,7 +57,7 @@ const VariablesConverter = {
                         blockType = 'statement';
                         break;
                     }
-                    const variable = this._findOrCreateList(args[0]);
+                    const variable = this._lookupOrCreateList(args[0]);
                     if (variable.scope !== 'local') {
                         block = this._createBlock(opcode, blockType, {
                             fields: {
@@ -147,7 +147,7 @@ const VariablesConverter = {
     onOpAsgn: function (lh, operator, rh) {
         let block;
         if (operator === '+' && this._isString(lh) && this._isNumberOrBlock(rh)) {
-            const variable = this._findOrCreateVariable(lh);
+            const variable = this._lookupOrCreateVariable(lh);
             if (variable.scope !== 'local') {
                 block = this._createBlock('data_changevariableby', 'statement', {
                     fields: {

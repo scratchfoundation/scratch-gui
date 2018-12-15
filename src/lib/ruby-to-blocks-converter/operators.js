@@ -158,11 +158,8 @@ const OperatorsConverter = {
                     operator = name;
                 }
                 if (args.length === 1 &&
-                    this._matchRubyExpression(receiver, /^(::)?Math$/) &&
+                    this._isConst(receiver) && receiver.toString() === '::Math' &&
                     this._isNumberOrBlock(args[0])) {
-                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
-                    delete this._context.blocks[receiver.id];
-
                     block = this._createBlock('operator_mathop', 'value');
                     this._addField(block, 'OPERATOR', operator);
                     this._addNumberInput(block, 'NUM', 'math_number', args[0], '');
@@ -172,10 +169,8 @@ const OperatorsConverter = {
             case '**':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     let operator;
-                    if (this._matchRubyExpression(receiver, /^(::)?Math::E$/)) {
+                    if (this._isConst(receiver) && receiver.toString() === '::Math::E') {
                         operator = 'e ^';
-                        delete this._context.blocks[receiver.inputs.EXPRESSION.block];
-                        delete this._context.blocks[receiver.id];
                     } else if (receiver.type === 'int' && receiver.value === 10) {
                         operator = '10 ^';
                     }

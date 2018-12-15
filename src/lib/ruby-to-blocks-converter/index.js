@@ -302,6 +302,10 @@ class RubyToBlocksConverter {
         return value && value.type === 'hash';
     }
 
+    _isConst (value) {
+        return value && value.type === 'const';
+    }
+
     _isBlock (block) {
         try {
             return block.hasOwnProperty('opcode');
@@ -378,6 +382,9 @@ class RubyToBlocksConverter {
     }
 
     _createFieldBlock (opcode, fieldName, value) {
+        if (this._isBlock(value)) {
+            return value;
+        }
         return this._createBlock(opcode, 'value', {
             fields: {
                 [fieldName]: {
@@ -459,6 +466,14 @@ class RubyToBlocksConverter {
             shadowBlock = this._createTextBlock(shadowValue);
         }
         this._addInput(block, name, this._createTextBlock(inputValue), shadowBlock);
+    }
+
+    _addFieldInput (block, name, opcode, fieldName, inputValue, shadowValue) {
+        let shadowBlock;
+        if (!this._isString(inputValue)) {
+            shadowBlock = this._createFieldBlock(opcode, fieldName, shadowValue);
+        }
+        this._addInput(block, name, this._createFieldBlock(opcode, fieldName, inputValue), shadowBlock);
     }
 
     _addSubstack (block, substackBlock, num = 1) {
@@ -893,7 +908,11 @@ class RubyToBlocksConverter {
     _onConst (node) {
         this._checkNumChildren(node, 2);
 
-        return this._createRubyExpressionBlock(this._getSource(node));
+        const value = {
+            scope: this._process(node.children[0]),
+            name: node.children[1].toString()
+        };
+        return new Primitive('const', value, node);
     }
 
     _onArgs (node) {

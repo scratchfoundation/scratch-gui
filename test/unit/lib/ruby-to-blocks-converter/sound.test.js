@@ -193,4 +193,6 @@ describe('RubyToBlocksConverter/Sound', () => {
             });
         });
     });
+
+    expectNoArgsMethod('sound_cleareffects', 'clear_sound_effects');
 });

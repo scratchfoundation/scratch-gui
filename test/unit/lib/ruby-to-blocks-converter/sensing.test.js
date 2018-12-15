@@ -45,7 +45,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
-        test('statement', () => {
+        test('value_boolean', () => {
             code = `
                 bounce_if_on_edge
                 touching?("_edge_")
@@ -70,8 +70,63 @@ describe('RubyToBlocksConverter/Sensing', () => {
         });
     });
 
+    describe('sensing_touchingcolor', () => {
+        test('normal', () => {
+            code = 'touching_color?("#43066f")';
+            expected = [
+                {
+                    opcode: 'sensing_touchingcolor',
+                    inputs: [
+                        {
+                            name: 'COLOR',
+                            block: {
+                                opcode: 'colour_picker',
+                                fields: [
+                                    {
+                                        name: 'COLOUR',
+                                        value: '#43066f'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value_boolean', () => {
+            code = `
+                bounce_if_on_edge
+                touching_color?("#43066f")
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                rubyToExpected(converter, target, 'touching_color?("#43066f")')[0],
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'touching_color?()',
+                'touching_color?(1)',
+                'touching_color?("#0f0")',
+                'touching_color?("#0")',
+                'touching_color?("43066f")',
+                'touching_color?("#43066f0")',
+                'touching_color?("#43066f", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     expectNoArgsMethod('sensing_answer', 'answer', 'value');
-    expectNoArgsMethod('sensing_mousedown', 'Mouse.down?', 'value');
+    expectNoArgsMethod('sensing_mousedown', 'Mouse.down?', 'value_boolean');
     expectNoArgsMethod('sensing_mousex', 'Mouse.x', 'value');
     expectNoArgsMethod('sensing_mousey', 'Mouse.y', 'value');
     expectNoArgsMethod('sensing_loudness', 'loudness', 'value');

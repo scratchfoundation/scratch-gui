@@ -456,7 +456,7 @@ const expectNoArgsMethod = function (opcode, methodName, blockType = 'statement'
         });
 
         if (blockType === 'statement') {
-            test('statement', () => {
+            test(blockType, () => {
                 code = `
                     bounce_if_on_edge
                     ${methodName}
@@ -469,8 +469,8 @@ const expectNoArgsMethod = function (opcode, methodName, blockType = 'statement'
                 expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
                 convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
-        } else if (blockType === 'value') {
-            test('value', () => {
+        } else if (blockType === 'value' || blockType === 'value_boolean') {
+            test(blockType, () => {
                 code = `
                     bounce_if_on_edge
                     ${methodName}

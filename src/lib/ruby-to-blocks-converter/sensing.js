@@ -20,6 +20,12 @@ const SensingConverter = {
                     );
                 }
                 break;
+            case 'touching_color?':
+                if (args.length === 1 && this._isString(args[0]) && /^#[0-9a-fA-F]{6}$/.test(args[0].toString())) {
+                    block = this._createBlock('sensing_touchingcolor', 'value_boolean');
+                    this._addInput(block, 'COLOR', this._createFieldBlock('colour_picker', 'COLOUR', args[0]));
+                }
+                break;
             case 'answer':
             case 'loudness':
             case 'days_since_2000':

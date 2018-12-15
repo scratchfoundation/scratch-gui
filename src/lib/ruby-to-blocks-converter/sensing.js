@@ -4,6 +4,11 @@ import {KeyOptions} from './constants';
 
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
 
+const DragMode = [
+    'draggable',
+    'not draggable'
+];
+
 /**
  * Sensing converter
  */
@@ -75,6 +80,21 @@ const SensingConverter = {
                     block = this._createBlock(opcode, 'value');
                     break;
                 }
+                break;
+            case 'drag_mode=':
+                if (args.length === 1 &&
+                    ((this._isString(args[0]) && DragMode.indexOf(args[0].toString()) >= 0) ||
+                     (args[0] && (args[0].type === 'true' || args[0].type === 'false')))) {
+                    block = this._createBlock('sensing_setdragmode', 'statement');
+                    let dragMode = args[0];
+                    if (dragMode.type === 'true') {
+                        dragMode = 'draggable';
+                    } else if (dragMode.type === 'false') {
+                        dragMode = 'not draggable';
+                    }
+                    this._addField(block, 'DRAG_MODE', dragMode);
+                }
+                break;
             }
         } else if (this._isConst(receiver)) {
             switch (receiver.toString()) {

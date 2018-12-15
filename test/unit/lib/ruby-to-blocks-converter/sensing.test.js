@@ -559,6 +559,94 @@ describe('RubyToBlocksConverter/Sensing', () => {
     expectNoArgsMethod('sensing_mousedown', 'Mouse.down?', 'value_boolean');
     expectNoArgsMethod('sensing_mousex', 'Mouse.x', 'value');
     expectNoArgsMethod('sensing_mousey', 'Mouse.y', 'value');
+
+    describe('sensing_setdragmode', () => {
+        test('normal', () => {
+            code = 'self.drag_mode = "draggable"';
+            expected = [
+                {
+                    opcode: 'sensing_setdragmode',
+                    fields: [
+                        {
+                            name: 'DRAG_MODE',
+                            value: 'draggable'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.drag_mode = "not draggable"';
+            expected = [
+                {
+                    opcode: 'sensing_setdragmode',
+                    fields: [
+                        {
+                            name: 'DRAG_MODE',
+                            value: 'not draggable'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('true/false', () => {
+            code = 'self.drag_mode = true';
+            expected = [
+                {
+                    opcode: 'sensing_setdragmode',
+                    fields: [
+                        {
+                            name: 'DRAG_MODE',
+                            value: 'draggable'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.drag_mode = false';
+            expected = [
+                {
+                    opcode: 'sensing_setdragmode',
+                    fields: [
+                        {
+                            name: 'DRAG_MODE',
+                            value: 'not draggable'
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('statement', () => {
+            code = `
+                bounce_if_on_edge
+                self.drag_mode = "draggable"
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            expected[0].next = rubyToExpected(converter, target, 'self.drag_mode = "draggable"')[0];
+            expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.drag_mode',
+                'self.drag_mode()',
+                'self.drag_mode = "invalid"',
+                'self.drag_mode = 1'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     expectNoArgsMethod('sensing_loudness', 'loudness', 'value');
     expectNoArgsMethod('sensing_timer', 'Timer.value', 'value');
     expectNoArgsMethod('sensing_resettimer', 'Timer.reset');

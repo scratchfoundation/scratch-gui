@@ -55,7 +55,7 @@ export default function (Generator) {
     };
 
     Generator.sensing_keyoptions = function (block) {
-        const key = Generator.quote_(Generator.getFieldValue(block, 'KEY_OPTION') || null);
+        const key = Generator.quote_(Generator.getFieldValue(block, 'KEY_OPTION') || '');
         return [key, Generator.ORDER_ATOMIC];
     };
 
@@ -72,8 +72,8 @@ export default function (Generator) {
     };
 
     Generator.sensing_setdragmode = function (block) {
-        const mode = Generator.quote_(Generator.getFieldValue(block, 'DRAG_MODE') || null);
-        return `set_drag_mode(${mode})\n`;
+        const mode = Generator.quote_(Generator.getFieldValue(block, 'DRAG_MODE') || '');
+        return `self.drag_mode = ${mode}\n`;
     };
 
     Generator.sensing_loudness = function () {

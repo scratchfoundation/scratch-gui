@@ -1,5 +1,6 @@
 /* global Opal */
 import _ from 'lodash';
+import {KeyOptions} from './constants';
 
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
 
@@ -77,6 +78,14 @@ const SensingConverter = {
             }
         } else if (this._isConst(receiver)) {
             switch (receiver.toString()) {
+            case '::Keyboard':
+                if (name === 'pressed?' && args.length === 1 &&
+                    (this._isBlock(args[0]) ||
+                     (this._isString(args[0]) && KeyOptions.indexOf(args[0].toString()) >= 0))) {
+                    block = this._createBlock('sensing_keypressed', 'value_boolean');
+                    this._addFieldInput(block, 'KEY_OPTION', 'sensing_keyoptions', 'KEY_OPTION', args[0], 'space');
+                }
+                break;
             case '::Mouse':
                 if (args.length === 0) {
                     let opcode;

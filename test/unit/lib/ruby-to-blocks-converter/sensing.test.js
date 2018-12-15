@@ -93,6 +93,18 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
         });
+
+        test('error', () => {
+            code = `
+                forever do
+                  touching?("_edge_")
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
     });
 
     describe('sensing_touchingcolor', () => {
@@ -172,6 +184,18 @@ describe('RubyToBlocksConverter/Sensing', () => {
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
+        });
+
+        test('error', () => {
+            code = `
+                forever do
+                  touching_color?("#43066f")
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
         });
     });
 
@@ -283,6 +307,18 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
         });
+
+        test('error', () => {
+            code = `
+                forever do
+                  color_is_touching_color?("#aad315", "#fca3bf")
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
     });
 
     describe('sensing_distanceto', () => {
@@ -358,6 +394,18 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
         });
+
+        test('error', () => {
+            code = `
+                forever do
+                  distance("_mouse_")
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
     });
 
     describe('sensing_askandwait', () => {
@@ -418,6 +466,96 @@ describe('RubyToBlocksConverter/Sensing', () => {
     });
 
     expectNoArgsMethod('sensing_answer', 'answer', 'value');
+
+    describe('sensing_keypressed', () => {
+        test('normal', () => {
+            code = 'Keyboard.pressed?("space")';
+            expected = [
+                {
+                    opcode: 'sensing_keypressed',
+                    inputs: [
+                        {
+                            name: 'KEY_OPTION',
+                            block: {
+                                opcode: 'sensing_keyoptions',
+                                fields: [
+                                    {
+                                        name: 'KEY_OPTION',
+                                        value: 'space'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'Keyboard.pressed?(x)';
+            expected = [
+                {
+                    opcode: 'sensing_keypressed',
+                    inputs: [
+                        {
+                            name: 'KEY_OPTION',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: {
+                                opcode: 'sensing_keyoptions',
+                                fields: [
+                                    {
+                                        name: 'KEY_OPTION',
+                                        value: 'space'
+                                    }
+                                ],
+                                shadow: true
+                            }
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('value_boolean', () => {
+            code = `
+                bounce_if_on_edge
+                Keyboard.pressed?("space")
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                rubyToExpected(converter, target, 'Keyboard.pressed?("space")')[0],
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'Keyboard.pressed?',
+                'Keyboard.pressed?()',
+                'Keyboard.pressed?(1)',
+                'Keyboard.pressed?("invalid")',
+                'Keyboard.pressed?("space", 1)'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+
+        test('error', () => {
+            code = `
+                forever do
+                  Keyboard.pressed?("space")
+                end
+            `;
+            const res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
+    });
+
     expectNoArgsMethod('sensing_mousedown', 'Mouse.down?', 'value_boolean');
     expectNoArgsMethod('sensing_mousex', 'Mouse.x', 'value');
     expectNoArgsMethod('sensing_mousey', 'Mouse.y', 'value');

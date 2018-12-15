@@ -253,5 +253,62 @@ describe('RubyToBlocksConverter/Sound', () => {
         });
     });
 
+    describe('sound_setvolumeto', () => {
+        test('normal', () => {
+            code = 'self.volume = 100';
+            expected = [
+                {
+                    opcode: 'sound_setvolumeto',
+                    inputs: [
+                        {
+                            name: 'VOLUME',
+                            block: expectedInfo.makeNumber(100)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.volume = x';
+            expected = [
+                {
+                    opcode: 'sound_setvolumeto',
+                    inputs: [
+                        {
+                            name: 'VOLUME',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(100)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('statement', () => {
+            code = `
+                bounce_if_on_edge
+                self.volume = 100
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            expected[0].next = rubyToExpected(converter, target, 'self.volume = 100')[0];
+            expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.volume = "100"',
+                'self.volume = :symbol',
+                'self.volume = abc'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     expectNoArgsMethod('sound_volume', 'volume', 'value');
 });

@@ -83,7 +83,12 @@ const SoundConverter = {
                     this._addNumberInput(block, 'VALUE', 'math_number', args[1], value);
                 }
                 break;
-
+            case 'volume=':
+                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
+                    block = this._createBlock('sound_setvolumeto', 'statement');
+                    this._addNumberInput(block, 'VOLUME', 'math_number', args[0], 100);
+                }
+                break;
             }
         }
         return block;

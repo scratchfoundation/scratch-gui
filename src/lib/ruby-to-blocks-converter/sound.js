@@ -92,20 +92,9 @@ const SoundConverter = {
     // eslint-disable-next-line no-unused-vars
     onOpAsgn: function (lh, operator, rh) {
         let block;
-        if (this._isBlock(lh) && operator === '+' && this._isNumberOrBlock(rh)) {
-            let xy;
-            switch (lh.opcode) {
-            case 'motion_xposition':
-            case 'motion_yposition':
-                if (lh.opcode === 'motion_xposition') {
-                    xy = 'x';
-                } else {
-                    xy = 'y';
-                }
-                block = this._changeBlock(lh, `motion_change${xy}by`, 'statement');
-                this._addNumberInput(block, `D${_.toUpper(xy)}`, 'math_number', rh, 10);
-                break;
-            }
+        if (this._isBlock(lh) && lh.opcode === 'sound_volume' && operator === '+' && this._isNumberOrBlock(rh)) {
+            block = this._changeBlock(lh, 'sound_changevolumeby', 'statement');
+            this._addNumberInput(block, 'VOLUME', 'math_number', rh, -10);
         }
         return block;
     }

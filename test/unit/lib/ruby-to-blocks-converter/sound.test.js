@@ -196,5 +196,62 @@ describe('RubyToBlocksConverter/Sound', () => {
 
     expectNoArgsMethod('sound_cleareffects', 'clear_sound_effects');
 
+    describe('sound_changevolumeby', () => {
+        test('normal', () => {
+            code = 'self.volume += -10';
+            expected = [
+                {
+                    opcode: 'sound_changevolumeby',
+                    inputs: [
+                        {
+                            name: 'VOLUME',
+                            block: expectedInfo.makeNumber(-10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.volume += x';
+            expected = [
+                {
+                    opcode: 'sound_changevolumeby',
+                    inputs: [
+                        {
+                            name: 'VOLUME',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(-10)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('statement', () => {
+            code = `
+                bounce_if_on_edge
+                self.volume += -10
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            expected[0].next = rubyToExpected(converter, target, 'self.volume += -10')[0];
+            expected[0].next.next = rubyToExpected(converter, target, 'bounce_if_on_edge')[0];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'self.volume += "10"',
+                'self.volume += :symbol',
+                'self.volume += abc'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+    });
+
     expectNoArgsMethod('sound_volume', 'volume', 'value');
 });

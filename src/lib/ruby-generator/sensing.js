@@ -113,9 +113,18 @@ export default function (Generator) {
         return [`${object}.${propertyToMethod[property]}`, Generator.ORDER_ATOMIC];
     };
 
+    const currentMenuToMethod = {
+        YEAR: 'year',
+        MONTH: 'month',
+        DATE: 'day',
+        DAYOFWEEK: 'wday + 1',
+        HOUR: 'hour',
+        MINUTE: 'min',
+        SECOND: 'sec'
+    };
     Generator.sensing_current = function (block) {
-        const menu = Generator.quote_(Generator.getFieldValue(block, 'CURRENTMENU') || null);
-        return [`Time.now(${menu})`, Generator.ORDER_ATOMIC];
+        const menu = Generator.getFieldValue(block, 'CURRENTMENU');
+        return [`Time.now.${currentMenuToMethod[menu]}`, Generator.ORDER_FUNCTION_CALL];
     };
 
     Generator.sensing_dayssince2000 = function () {

@@ -9,6 +9,10 @@ const DragMode = [
     'not draggable'
 ];
 
+const TimeNow = 'Time.now';
+const TimeNowRe = new RegExp(`^Time\\.now$`);
+const TimeNowWdayRe = new RegExp(`^Time\\.now\\.wday$`);
+
 /**
  * Sensing converter
  */
@@ -144,7 +148,52 @@ const SensingConverter = {
                     block = this._createBlock(opcode, blockType);
                 }
                 break;
+            case '::Time':
+                if (name === 'now' && args.length === 0) {
+                    block = this._createRubyExpressionBlock(TimeNow);
+                }
+                break;
             }
+        } else if (args.length === 0 && this._matchRubyExpression(receiver, TimeNowRe)) {
+            let currentMenu;
+            switch (name) {
+            case 'year':
+                currentMenu = 'YEAR';
+                break;
+            case 'month':
+                currentMenu = 'MONTH';
+                break;
+            case 'day':
+                currentMenu = 'DATE';
+                break;
+            case 'wday': {
+                block = receiver;
+                const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+                textBlock.fields.TEXT.value = 'Time.now.wday';
+                break;
+            }
+            case 'hour':
+                currentMenu = 'HOUR';
+                break;
+            case 'min':
+                currentMenu = 'MINUTE';
+                break;
+            case 'sec':
+                currentMenu = 'SECOND';
+                break;
+            }
+            if (currentMenu) {
+                delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                delete receiver.inputs.EXPRESSION;
+                block = this._changeBlock(receiver, 'sensing_current', 'value');
+                this._addField(block, 'CURRENTMENU', currentMenu);
+            }
+        } else if (name === '+' && args.length === 1 && this._isNumber(args[0]) && args[0].toString() === '1' &&
+                   this._matchRubyExpression(receiver, TimeNowWdayRe)) {
+            delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+            delete receiver.inputs.EXPRESSION;
+            block = this._changeBlock(receiver, 'sensing_current', 'value');
+            this._addField(block, 'CURRENTMENU', 'DAYOFWEEK');
         }
 
         return block;

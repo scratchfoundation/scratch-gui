@@ -650,6 +650,85 @@ describe('RubyToBlocksConverter/Sensing', () => {
     expectNoArgsMethod('sensing_loudness', 'loudness', 'value');
     expectNoArgsMethod('sensing_timer', 'Timer.value', 'value');
     expectNoArgsMethod('sensing_resettimer', 'Timer.reset');
+
+    describe('sensing_current', () => {
+        describe('normal', () => {
+            const currentMenuToMethod = {
+                YEAR: 'year',
+                MONTH: 'month',
+                DATE: 'day',
+                DAYOFWEEK: 'wday + 1',
+                HOUR: 'hour',
+                MINUTE: 'min',
+                SECOND: 'sec'
+            };
+            Object.keys(currentMenuToMethod).forEach(fieldValue => {
+                const method = currentMenuToMethod[fieldValue];
+                test(method, () => {
+                    code = `Time.now.${method}`;
+                    expected = [
+                        {
+                            opcode: 'sensing_current',
+                            fields: [
+                                {
+                                    name: 'CURRENTMENU',
+                                    value: fieldValue
+                                }
+                            ]
+                        }
+                    ];
+                    convertAndExpectToEqualBlocks(converter, target, code, expected);
+                });
+            });
+        });
+
+        test('value', () => {
+            code = `
+                bounce_if_on_edge
+                Time.now.year
+                bounce_if_on_edge
+            `;
+            expected = [
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0],
+                rubyToExpected(converter, target, 'Time.now.year')[0],
+                rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('invalid', () => {
+            [
+                'Time.now(1)',
+                'Time.now.year(1)',
+                'Time.now.invalid'
+            ].forEach(c => {
+                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+            });
+        });
+
+        test('error', () => {
+            code = `
+                forever do
+                  Time.now
+                end
+            `;
+            let res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+
+            code = `
+                forever do
+                  Time.now.year
+                end
+            `;
+            res = converter.targetCodeToBlocks(target, code);
+            expect(converter.errors).toHaveLength(1);
+            expect(converter.errors[0].row).toEqual(2);
+            expect(res).toBeFalsy();
+        });
+    });
+
     expectNoArgsMethod('sensing_dayssince2000', 'days_since_2000', 'value');
     expectNoArgsMethod('sensing_username', 'user_name', 'value');
 });

@@ -34,14 +34,21 @@ const AlertComponent = ({
         className={classNames(styles.alert, styles[level])}
     >
         {/* TODO: implement Rtl handling */}
-        {iconSpinner && (
-            <Spinner className={styles.alertSpinner} />
-        )}
-        {iconURL && (
-            <img
-                className={styles.alertIcon}
-                src={iconURL}
-            />
+        {(iconSpinner || iconURL) && (
+            <div className={styles.iconSection}>
+                {iconSpinner && (
+                    <Spinner
+                        className={styles.alertSpinner}
+                        level={level}
+                    />
+                )}
+                {iconURL && (
+                    <img
+                        className={styles.alertIcon}
+                        src={iconURL}
+                    />
+                )}
+            </div>
         )}
         <div className={styles.alertMessage}>
             {extensionName ? (

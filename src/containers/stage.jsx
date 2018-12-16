@@ -255,7 +255,12 @@ class Stage extends React.Component {
         };
         this.props.vm.postIOData('mouse', data);
         if (e.preventDefault) {
+            // Prevent default to prevent touch from dragging page
             e.preventDefault();
+            // But we do want any active input to be blurred
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
         }
         if (this.props.isColorPicking) {
             const {r, g, b} = this.state.colorInfo.color;

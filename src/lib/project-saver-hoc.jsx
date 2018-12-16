@@ -1,8 +1,10 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
+import xhr from 'xhr';
 
 import log from '../lib/log';
 import storage from '../lib/storage';
@@ -117,7 +119,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         scheduleAutoSave () {
             if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
                 const timeoutId = setTimeout(this.tryToAutoSave,
-                    this.props.autosaveIntervalSecs * 1000);
+                    this.props.autoSaveIntervalSecs * 1000);
                 this.props.setAutoSaveTimeoutId(timeoutId);
             }
         }
@@ -209,18 +211,45 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     )
                 )
             ).then(() => {
-                const body = new FormData();
-                const sb3Json = new Blob([this.props.vm.toJSON()], {type: 'application/json'});
-                body.append('sb3_file', sb3Json, 'sb3_file');
-                for (const key in requestParams) {
-                    if (requestParams.hasOwnProperty(key)) body.append(key, requestParams[key]);
+                const opts = {
+                    body: this.props.vm.toJSON(),
+                    // If we set json:true then the body is double-stringified, so don't
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+                const creatingProject = projectId === null || typeof projectId === 'undefined';
+                let qs = queryString.stringify(requestParams);
+                if (qs) qs = `?${qs}`;
+                if (creatingProject) {
+                    Object.assign(opts, {
+                        method: 'post',
+                        url: `${storage.projectHost}/${qs}`
+                    });
+                } else {
+                    Object.assign(opts, {
+                        method: 'put',
+                        url: `${storage.projectHost}/${projectId}${qs}`
+                    });
                 }
-                return storage.store(
-                    storage.AssetType.Project,
-                    storage.DataFormat.JSON,
-                    body,
-                    projectId
-                );
+                return new Promise((resolve, reject) => {
+                    xhr(opts, (err, response) => {
+                        if (err) return reject(err);
+                        let body;
+                        try {
+                            // Since we didn't set json: true, we have to parse manually
+                            body = JSON.parse(response.body);
+                        } catch (e) {
+                            return reject(e);
+                        }
+                        body.id = projectId;
+                        if (creatingProject) {
+                            body.id = body['content-name'];
+                        }
+                        resolve(body);
+                    });
+                });
             })
                 .then(response => {
                     this.props.onSetProjectUnchanged();
@@ -259,7 +288,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                autosaveIntervalSecs,
+                autoSaveTimeoutId,
+                autoSaveIntervalSecs,
                 isCreatingCopy,
                 isCreatingNew,
                 projectChanged,
@@ -276,6 +306,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onCreateProject,
                 onProjectError,
                 onRemixing,
+                onSetProjectUnchanged,
                 onShowAlert,
                 onShowCopySuccessAlert,
                 onShowRemixSuccessAlert,
@@ -338,7 +369,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM).isRequired
     };
     ProjectSaverComponent.defaultProps = {
-        autosaveIntervalSecs: 120,
+        autoSaveIntervalSecs: 120,
         onRemixing: () => {}
     };
     const mapStateToProps = (state, ownProps) => {

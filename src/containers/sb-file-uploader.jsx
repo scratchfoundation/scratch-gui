@@ -12,6 +12,9 @@ import {
     openLoadingProject,
     closeLoadingProject
 } from '../reducers/modals';
+import {
+    closeFileMenu
+} from '../reducers/menus';
 
 /**
  * SBFileUploader component passes a file input, load handler and props to its child.
@@ -136,6 +139,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLoadingFinished: loadingState => {
         dispatch(onLoadedProject(loadingState, ownProps.canSave));
         dispatch(closeLoadingProject());
+        dispatch(closeFileMenu());
     },
     onLoadingStarted: () => {
         dispatch(openLoadingProject());

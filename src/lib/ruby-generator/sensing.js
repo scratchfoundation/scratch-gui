@@ -110,7 +110,11 @@ export default function (Generator) {
     Generator.sensing_of = function (block) {
         const property = Generator.getFieldValue(block, 'PROPERTY') || null;
         const object = Generator.valueToCode(block, 'OBJECT', Generator.ORDER_NONE) || null;
-        return [`${object}.${propertyToMethod[property]}`, Generator.ORDER_ATOMIC];
+        let method = propertyToMethod[property];
+        if (!method) {
+            method = `variable(${Generator.quote_("property")})`;
+        }
+        return [`${object}.${method}`, Generator.ORDER_ATOMIC];
     };
 
     const currentMenuToMethod = {

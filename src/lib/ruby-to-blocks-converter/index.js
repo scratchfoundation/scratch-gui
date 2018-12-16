@@ -682,6 +682,14 @@ class RubyToBlocksConverter {
         return regexp.test(textBlock.fields.TEXT.value);
     }
 
+    _equalRubyExpression (block, expression) {
+        if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
+            return false;
+        }
+        const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+        return expression.toString() === textBlock.fields.TEXT.value;
+    }
+
     _process (node) {
         if (!node) {
             return null;

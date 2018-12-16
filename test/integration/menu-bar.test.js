@@ -2,6 +2,7 @@ import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
+    clickText,
     clickXpath,
     findByXpath,
     getDriver,
@@ -55,5 +56,22 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await findByXpath('//div[span[div[span[text()="Share"]]] and @data-tip="tooltip"]');
+    });
+
+    test('Logo should be clickable', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickXpath('//img[@alt="Smalruby"]');
+        const currentUrl = await driver.getCurrentUrl();
+        await expect(currentUrl).toEqual('https://smalruby.jp/smalruby3-gui/');
+    });
+
+    test('(GH#4064) Project name should be editable', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        const el = await findByXpath('//input[@value="Smalruby Project"]');
+        await el.sendKeys(' - Personalized');
+        await clickText('Costumes'); // just to blur the input
+        await clickXpath('//input[@value="Smalruby Project - Personalized"]');
     });
 });

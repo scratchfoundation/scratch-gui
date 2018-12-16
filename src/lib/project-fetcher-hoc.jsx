@@ -8,12 +8,18 @@ import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
     defaultProjectId,
+    getIsCreatingNew,
     getIsFetchingWithId,
+    getIsLoading,
     getIsShowingProject,
     onFetchedProjectData,
     projectError,
     setProjectId
 } from '../reducers/project-state';
+import {
+    activateTab,
+    BLOCKS_TAB_INDEX
+} from '../reducers/editor-tab';
 
 import analytics from './analytics';
 import log from './log';
@@ -59,6 +65,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             if (this.props.isShowingProject && !prevProps.isShowingProject) {
                 this.props.onProjectLoaded();
             }
+            if (this.props.isShowingProject && (prevProps.isLoadingProject || prevProps.isCreatingNew)) {
+                this.props.onActivateTab(BLOCKS_TAB_INDEX);
+            }
         }
         fetchProject (projectId, loadingState) {
             return storage
@@ -66,6 +75,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .then(projectAsset => {
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
+                    } else {
+                        // Treat failure to load as an error
+                        // Throw to be caught by catch later on
+                        throw new Error('Could not find project');
                     }
                 })
                 .then(() => {
@@ -89,9 +102,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 assetHost,
                 intl,
+                isLoadingProject: isLoadingProjectProp,
                 loadingState,
+                onActivateTab,
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
+                onProjectLoaded,
                 projectHost,
                 projectId,
                 reduxProjectId,
@@ -113,8 +129,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         canSave: PropTypes.bool,
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
+        isLoadingProject: PropTypes.bool,
         isShowingProject: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onActivateTab: PropTypes.func,
         onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
         onProjectLoaded: PropTypes.func,
@@ -129,12 +147,15 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     };
 
     const mapStateToProps = state => ({
+        isCreatingNew: getIsCreatingNew(state.scratchGui.projectState.loadingState),
         isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectState.loadingState),
+        isLoadingProject: getIsLoading(state.scratchGui.projectState.loadingState),
         isShowingProject: getIsShowingProject(state.scratchGui.projectState.loadingState),
         loadingState: state.scratchGui.projectState.loadingState,
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
+        onActivateTab: tab => dispatch(activateTab(tab)),
         onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),

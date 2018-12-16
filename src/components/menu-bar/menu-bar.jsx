@@ -161,10 +161,17 @@ class MenuBar extends React.Component {
         ]);
     }
     handleClickNew () {
-        // if canSave===true and canCreateNew===true, it's safe to replace current project,
-        // since we will auto-save first. Else, confirm first.
-        const readyToReplaceProject = (this.props.canSave && this.props.canCreateNew) ||
-            confirm(this.props.intl.formatMessage(messages.confirmNav)); // eslint-disable-line no-alert
+        let readyToReplaceProject = true;
+        // if the project is dirty, and user owns the project, we will autosave.
+        // but if they are not logged in and can't save, user should consider
+        // downloading or logging in first.
+        // Note that if user is logged in and editing someone else's project,
+        // they'll lose their work.
+        if (this.props.projectChanged && !this.props.canCreateNew) {
+            readyToReplaceProject = confirm( // eslint-disable-line no-alert
+                this.props.intl.formatMessage(messages.confirmNav)
+            );
+        }
         this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
@@ -313,14 +320,15 @@ class MenuBar extends React.Component {
                 <div className={styles.mainMenu}>
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
-                            <a href="https://smalruby.jp">
-                                <img
-                                    alt="Smalruby"
-                                    className={styles.scratchLogo}
-                                    draggable={false}
-                                    src={smalrubyLogo}
-                                />
-                            </a>
+                            <img
+                                alt="Smalruby"
+                                className={classNames(styles.scratchLogo, {
+                                    [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
+                                })}
+                                draggable={false}
+                                src={smalrubyLogo}
+                                onClick={this.props.onClickLogo}
+                            />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
@@ -362,23 +370,25 @@ class MenuBar extends React.Component {
                                         {newProjectMessage}
                                     </MenuItem>
                                 </MenuSection>
-                                <MenuSection>
-                                    {this.props.canSave ? (
-                                        <MenuItem onClick={this.handleClickSave}>
-                                            {saveNowMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                    {this.props.canCreateCopy ? (
-                                        <MenuItem onClick={this.handleClickSaveAsCopy}>
-                                            {createCopyMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                    {this.props.canRemix ? (
-                                        <MenuItem onClick={this.handleClickRemix}>
-                                            {remixMessage}
-                                        </MenuItem>
-                                    ) : []}
-                                </MenuSection>
+                                {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+                                    <MenuSection>
+                                        {this.props.canSave ? (
+                                            <MenuItem onClick={this.handleClickSave}>
+                                                {saveNowMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                        {this.props.canCreateCopy ? (
+                                            <MenuItem onClick={this.handleClickSaveAsCopy}>
+                                                {createCopyMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                        {this.props.canRemix ? (
+                                            <MenuItem onClick={this.handleClickRemix}>
+                                                {remixMessage}
+                                            </MenuItem>
+                                        ) : []}
+                                    </MenuSection>
+                                )}
                                 <MenuSection>
                                     <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
                                         {(className, renderFileInput, loadProject) => (
@@ -733,6 +743,7 @@ MenuBar.propTypes = {
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
+    onClickLogo: PropTypes.func,
     onClickNew: PropTypes.func,
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
@@ -749,6 +760,7 @@ MenuBar.propTypes = {
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -774,6 +786,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
+        projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null,

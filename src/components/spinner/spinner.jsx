@@ -7,6 +7,7 @@ import styles from './spinner.css';
 const SpinnerComponent = function (props) {
     const {
         className,
+        level,
         small
     } = props;
     return (
@@ -14,6 +15,7 @@ const SpinnerComponent = function (props) {
             className={classNames(
                 className,
                 styles.spinner,
+                styles[level],
                 {[styles.small]: small}
             )}
         />
@@ -21,9 +23,11 @@ const SpinnerComponent = function (props) {
 };
 SpinnerComponent.propTypes = {
     className: PropTypes.string,
+    level: PropTypes.string,
     small: PropTypes.bool
 };
 SpinnerComponent.defaultProps = {
-    className: ''
+    className: '',
+    level: 'info'
 };
 export default SpinnerComponent;

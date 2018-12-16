@@ -7,6 +7,10 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
 
+const onClickLogo = () => {
+    window.location = 'https://smalruby.jp/smalruby3-gui';
+};
+
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash
@@ -39,6 +43,8 @@ export default appTarget => {
             showComingSoon
             showPreviewInfo
             backpackHost={backpackHost}
+            canSave={false}
+            onClickLogo={onClickLogo}
         />,
         appTarget);
 };

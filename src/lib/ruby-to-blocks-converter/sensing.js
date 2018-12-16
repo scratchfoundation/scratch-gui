@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import {KeyOptions} from './constants';
 
+/* eslint-disable no-invalid-this */
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
 
 const DragMode = [
@@ -22,9 +23,10 @@ const getSpriteName = function (block) {
     }
     const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
     return SpriteCallRe.exec(textBlock.fields.TEXT.value)[1];
-}
+};
 
 const Stage = 'stage';
+/* eslint-enable no-invalid-this */
 
 /**
  * Sensing converter

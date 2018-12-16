@@ -387,27 +387,28 @@ RubyGenerator.escapeVariableName = function (s) {
 
 RubyGenerator.escapeMethodName = RubyGenerator.escapeVariableName;
 
+RubyGenerator.makeVariableName = function (isStage, name) {
+    const prefix = isStage ? '$' : '@';
+    return `${prefix}${name.replace(escapeIdentityRegexp, '_')}`;
+};
+
 RubyGenerator.variableName = function (id, type = SCALAR_TYPE) {
     let currVar;
-    let prefix;
+    let isStage;
     const target = this.currentTarget;
     const variables = target.variables;
     if (variables.hasOwnProperty(id)) {
         currVar = variables[id];
-        if (target.isStage) {
-            prefix = '$';
-        } else {
-            prefix = '@';
-        }
+        isStage = target.isStage;
     } else if (target.runtime && !target.isStage) {
         const stage = target.runtime.getTargetForStage();
         if (stage && stage.variables.hasOwnProperty(id)) {
             currVar = stage.variables[id];
-            prefix = '$';
+            isStage = true;
         }
     }
     if (currVar && currVar.type === type) {
-        return `${prefix}${currVar.name.replace(escapeIdentityRegexp, '_')}`;
+        return this.makeVariableName(isStage, currVar.name);
     }
     return null;
 };

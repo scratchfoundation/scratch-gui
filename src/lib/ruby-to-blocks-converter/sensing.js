@@ -2,12 +2,31 @@
 import _ from 'lodash';
 import {KeyOptions} from './constants';
 
+/* eslint-disable no-invalid-this */
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
 
 const DragMode = [
     'draggable',
     'not draggable'
 ];
+
+const TimeNow = 'Time.now';
+const TimeNowWday = 'Time.now.wday';
+
+const spriteCall = function (name) {
+    return `sprite("${name.toString()}")`;
+};
+const SpriteCallRe = /^sprite\("(.*)"\)$/;
+const getSpriteName = function (block) {
+    if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
+        return null;
+    }
+    const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+    return SpriteCallRe.exec(textBlock.fields.TEXT.value)[1];
+};
+
+const Stage = 'stage';
+/* eslint-enable no-invalid-this */
 
 /**
  * Sensing converter
@@ -95,6 +114,16 @@ const SensingConverter = {
                     this._addField(block, 'DRAG_MODE', dragMode);
                 }
                 break;
+            case 'sprite':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createRubyExpressionBlock(spriteCall(args[0]));
+                }
+                break;
+            case 'stage':
+                if (args.length === 0) {
+                    block = this._createRubyExpressionBlock(Stage);
+                }
+                break;
             }
         } else if (this._isConst(receiver)) {
             switch (receiver.toString()) {
@@ -144,6 +173,129 @@ const SensingConverter = {
                     block = this._createBlock(opcode, blockType);
                 }
                 break;
+            case '::Time':
+                if (name === 'now' && args.length === 0) {
+                    block = this._createRubyExpressionBlock(TimeNow);
+                }
+                break;
+            }
+        } else if (args.length === 0 && this._equalRubyExpression(receiver, TimeNow)) {
+            let currentMenu;
+            switch (name) {
+            case 'year':
+                currentMenu = 'YEAR';
+                break;
+            case 'month':
+                currentMenu = 'MONTH';
+                break;
+            case 'day':
+                currentMenu = 'DATE';
+                break;
+            case 'wday': {
+                block = receiver;
+                const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+                textBlock.fields.TEXT.value = TimeNowWday;
+                break;
+            }
+            case 'hour':
+                currentMenu = 'HOUR';
+                break;
+            case 'min':
+                currentMenu = 'MINUTE';
+                break;
+            case 'sec':
+                currentMenu = 'SECOND';
+                break;
+            }
+            if (currentMenu) {
+                block = this._changeBlock(receiver, 'sensing_current', 'value');
+                delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                delete receiver.inputs.EXPRESSION;
+
+                this._addField(block, 'CURRENTMENU', currentMenu);
+            }
+        } else if (name === '+' && args.length === 1 && this._isNumber(args[0]) && args[0].toString() === '1' &&
+                   this._equalRubyExpression(receiver, TimeNowWday)) {
+            block = this._changeBlock(receiver, 'sensing_current', 'value');
+            delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+            delete receiver.inputs.EXPRESSION;
+
+            this._addField(block, 'CURRENTMENU', 'DAYOFWEEK');
+        } else if (this._matchRubyExpression(receiver, SpriteCallRe)) {
+            if (args.length === 0) {
+                let property;
+                switch (name) {
+                case 'x':
+                    property = 'x position';
+                    break;
+                case 'y':
+                    property = 'y position';
+                    break;
+                case 'direction':
+                    property = 'direction';
+                    break;
+                case 'costume_number':
+                    property = 'costume #';
+                    break;
+                case 'costume_name':
+                    property = 'costume name';
+                    break;
+                case 'size':
+                    property = 'size';
+                    break;
+                case 'volume':
+                    property = 'volume';
+                    break;
+                }
+                if (property) {
+                    const spriteName = getSpriteName.call(this, receiver);
+
+                    block = this._changeBlock(receiver, 'sensing_of', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addField(block, 'PROPERTY', property);
+                    this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', spriteName);
+                }
+            } else if (args.length === 1 && name === 'variable' && this._isString(args[0])) {
+                const spriteName = getSpriteName.call(this, receiver);
+
+                block = this._changeBlock(receiver, 'sensing_of', 'value');
+                delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                delete receiver.inputs.EXPRESSION;
+
+                this._addField(block, 'PROPERTY', args[0]);
+                this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', spriteName);
+            }
+        } else if (this._equalRubyExpression(receiver, Stage)) {
+            if (args.length === 0) {
+                let property;
+                switch (name) {
+                case 'backdrop_number':
+                    property = 'backdrop #';
+                    break;
+                case 'backdrop_name':
+                    property = 'backdrop name';
+                    break;
+                case 'volume':
+                    property = 'volume';
+                    break;
+                }
+                if (property) {
+                    block = this._changeBlock(receiver, 'sensing_of', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addField(block, 'PROPERTY', property);
+                    this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', '_stage_');
+                }
+            } else if (args.length === 1 && name === 'variable' && this._isString(args[0])) {
+                block = this._changeBlock(receiver, 'sensing_of', 'value');
+                delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                delete receiver.inputs.EXPRESSION;
+
+                this._addField(block, 'PROPERTY', args[0]);
+                this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', '_stage_');
             }
         }
 

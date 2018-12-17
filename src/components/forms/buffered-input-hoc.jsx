@@ -35,7 +35,10 @@ export default function (Input) {
             this.setState({value: null});
         }
         handleChange (e) {
-            this.setState({value: e.target.value});
+            const isNumeric = typeof this.props.value === 'number';
+            if (!isNumeric || e.target.value.match(/^[\d|-]*$/)) {
+                this.setState({value: e.target.value});
+            }
         }
         render () {
             const bufferedValue = this.state.value === null ? this.props.value : this.state.value;

@@ -56,6 +56,26 @@ describe('RubyToBlocksConverter/Operators', () => {
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '$global + y';
+        expected = [
+            {
+                opcode: 'operator_add',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, '$global')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_subtract', () => {
@@ -88,6 +108,26 @@ describe('RubyToBlocksConverter/Operators', () => {
                     {
                         name: 'NUM1',
                         block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '$global - y';
+        expected = [
+            {
+                opcode: 'operator_subtract',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, '$global')[0],
                         shadow: expectedInfo.makeNumber('')
                     },
                     {
@@ -151,6 +191,26 @@ describe('RubyToBlocksConverter/Operators', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
+        code = '$global * y';
+        expected = [
+            {
+                opcode: 'operator_multiply',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, '$global')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
         [
             '"1" * "2"',
             '1 * "2"',
@@ -202,6 +262,26 @@ describe('RubyToBlocksConverter/Operators', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
+        code = '$global / y';
+        expected = [
+            {
+                opcode: 'operator_divide',
+                inputs: [
+                    {
+                        name: 'NUM1',
+                        block: rubyToExpected(converter, target, '$global')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    },
+                    {
+                        name: 'NUM2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber('')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
         [
             '"2" / "1"',
             '2 / "1"',
@@ -241,6 +321,26 @@ describe('RubyToBlocksConverter/Operators', () => {
                     {
                         name: 'FROM',
                         block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeNumber(1)
+                    },
+                    {
+                        name: 'TO',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeNumber(10)
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = 'rand($global..y)';
+        expected = [
+            {
+                opcode: 'operator_random',
+                inputs: [
+                    {
+                        name: 'FROM',
+                        block: rubyToExpected(converter, target, '$global')[0],
                         shadow: expectedInfo.makeNumber(1)
                     },
                     {
@@ -306,6 +406,26 @@ describe('RubyToBlocksConverter/Operators', () => {
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '$global > y';
+        expected = [
+            {
+                opcode: 'operator_gt',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, '$global')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('50')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_lt', () => {
@@ -338,6 +458,26 @@ describe('RubyToBlocksConverter/Operators', () => {
                     {
                         name: 'OPERAND1',
                         block: rubyToExpected(converter, target, 'x')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, 'y')[0],
+                        shadow: expectedInfo.makeText('50')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '$global < y';
+        expected = [
+            {
+                opcode: 'operator_lt',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, '$global')[0],
                         shadow: expectedInfo.makeText('')
                     },
                     {
@@ -392,6 +532,25 @@ describe('RubyToBlocksConverter/Operators', () => {
             }
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '$global == 21';
+        expected = [
+            {
+                opcode: 'operator_equals',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, '$global')[0],
+                        shadow: expectedInfo.makeText('')
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: expectedInfo.makeText('21')
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
     });
 
     test('operator_and', () => {
@@ -410,6 +569,24 @@ describe('RubyToBlocksConverter/Operators', () => {
                     {
                         name: 'OPERAND2',
                         block: rubyToExpected(converter, target, 'x < 10')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '1 < $global && $global < 10';
+        expected = [
+            {
+                opcode: 'operator_and',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, '1 < $global')[0]
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, '$global < 10')[0]
                     }
                 ]
             }
@@ -447,6 +624,24 @@ describe('RubyToBlocksConverter/Operators', () => {
         ];
         convertAndExpectToEqualBlocks(converter, target, code, expected);
 
+        code = '$global == 2 || $global == 3';
+        expected = [
+            {
+                opcode: 'operator_or',
+                inputs: [
+                    {
+                        name: 'OPERAND1',
+                        block: rubyToExpected(converter, target, '$global == 2')[0]
+                    },
+                    {
+                        name: 'OPERAND2',
+                        block: rubyToExpected(converter, target, '$global == 3')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
         code = 'false || false';
         expected = [
             {
@@ -468,6 +663,20 @@ describe('RubyToBlocksConverter/Operators', () => {
                     {
                         name: 'OPERAND',
                         block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                    }
+                ]
+            }
+        ];
+        convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+        code = '!($global == 1)';
+        expected = [
+            {
+                opcode: 'operator_not',
+                inputs: [
+                    {
+                        name: 'OPERAND',
+                        block: rubyToExpected(converter, target, '$global == 1')[0]
                     }
                 ]
             }

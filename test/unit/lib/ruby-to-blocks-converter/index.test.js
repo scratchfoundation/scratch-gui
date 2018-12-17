@@ -1,7 +1,8 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    rubyToExpected
+    rubyToExpected,
+    expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter', () => {
@@ -194,6 +195,58 @@ describe('RubyToBlocksConverter', () => {
                 expect(converter.errors).toHaveLength(1);
                 expect(converter.errors[0].row).toEqual(2);
                 expect(res).toBeFalsy();
+            });
+
+            test('==, <, > and variable', () => {
+                code = `
+                    if !($global == 21)
+                      bounce_if_on_edge
+                    end
+                `;
+                expected = [
+                    {
+                        opcode: 'control_if',
+                        inputs: [
+                            {
+                                name: 'CONDITION',
+                                block: {
+                                    opcode: 'operator_not',
+                                    inputs: [
+                                        {
+                                            name: 'OPERAND',
+                                            block: {
+                                                opcode: 'operator_equals',
+                                                inputs: [
+                                                    {
+                                                        name: 'OPERAND1',
+                                                        block: {
+                                                            opcode: 'data_variable',
+                                                            fields: [
+                                                                {
+                                                                    name: 'VARIABLE',
+                                                                    variable: '$global'
+                                                                }
+                                                            ]
+                                                        },
+                                                        shadow: expectedInfo.makeText('')
+                                                    },
+                                                    {
+                                                        name: 'OPERAND2',
+                                                        block: expectedInfo.makeText('21')
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        branches: [
+                            rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                        ]
+                    }
+                ];
+                convertAndExpectToEqualBlocks(converter, target, code, expected);
             });
         });
     });

@@ -33,7 +33,9 @@ describe('Working with costumes', () => {
         const el = await findByXpath("//input[@placeholder='Search']");
         await el.sendKeys('abb');
         await clickText('Abby-a'); // Should close the modal, then click the costumes in the selector
+        await new Promise(resolve => setTimeout(resolve, 5000));
         await findByXpath("//input[@value='Abby-a']"); // Should show editor for new costume
+        await new Promise(resolve => setTimeout(resolve, 5000));
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

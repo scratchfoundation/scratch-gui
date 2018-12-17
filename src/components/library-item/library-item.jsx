@@ -1,4 +1,3 @@
-import bindAll from 'lodash.bindall';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,25 +10,6 @@ import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
 class LibraryItemComponent extends React.PureComponent {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleClick',
-            'handleKeyPress'
-        ]);
-    }
-    handleClick (e) {
-        if (!this.props.disabled) {
-            this.props.onSelect(this.props.id);
-        }
-        e.preventDefault();
-    }
-    handleKeyPress (e) {
-        if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            this.props.onSelect(this.props.id);
-        }
-    }
     render () {
         return this.props.featured ? (
             <div
@@ -131,9 +111,9 @@ class LibraryItemComponent extends React.PureComponent {
                 role="button"
                 tabIndex="0"
                 onBlur={this.props.onBlur}
-                onClick={this.handleClick}
+                onClick={this.props.onClick}
                 onFocus={this.props.onFocus}
-                onKeyPress={this.handleKeyPress}
+                onKeyPress={this.props.onKeyPress}
                 onMouseEnter={this.props.onMouseEnter}
                 onMouseLeave={this.props.onMouseLeave}
             >
@@ -164,18 +144,18 @@ LibraryItemComponent.propTypes = {
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
     iconURL: PropTypes.string,
-    id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
     ]),
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
+    onBlur: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
     onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onMouseLeave: PropTypes.func.isRequired
 };
 
 LibraryItemComponent.defaultProps = {

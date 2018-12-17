@@ -68,10 +68,10 @@ class LibraryComponent extends React.Component {
             selectedTag: tag.toLowerCase()
         });
     }
-    handleMouseEnter (id) { // no longer used for sprite costume switching, only for other libraries
+    handleMouseEnter (id) {
         if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
     }
-    handleMouseLeave (id) { // no longer used for sprite costume switching, only for other libraries
+    handleMouseLeave (id) {
         if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
     }
     handleFilterChange (event) {

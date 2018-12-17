@@ -10,7 +10,9 @@ class LibraryItem extends React.PureComponent {
         super(props);
         bindAll(this, [
             'handleBlur',
+            'handleClick',
             'handleFocus',
+            'handleKeyPress',
             'handleMouseEnter',
             'handleMouseLeave',
             'rotateIcon',
@@ -28,8 +30,20 @@ class LibraryItem extends React.PureComponent {
     handleBlur (id) {
         this.handleMouseLeave(id);
     }
+    handleClick (e) {
+        if (!this.props.disabled) {
+            this.props.onSelect(this.props.id);
+        }
+        e.preventDefault();
+    }
     handleFocus (id) {
         this.handleMouseEnter(id);
+    }
+    handleKeyPress (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.props.onSelect(this.props.id);
+        }
     }
     handleMouseEnter () {
         this.props.onMouseEnter(this.props.id);
@@ -92,10 +106,11 @@ class LibraryItem extends React.PureComponent {
                 internetConnectionRequired={this.props.internetConnectionRequired}
                 name={this.props.name}
                 onBlur={this.handleBlur}
+                onClick={this.handleClick}
                 onFocus={this.handleFocus}
+                onKeyPress={this.handleKeyPress}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
-                onSelect={this.props.onSelect}
             />
         );
     }

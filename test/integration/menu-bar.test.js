@@ -63,7 +63,7 @@ describe('Menu bar settings', () => {
         await clickXpath('//button[@title="Try It"]');
         await clickXpath('//img[@alt="Smalruby"]');
         const currentUrl = await driver.getCurrentUrl();
-        await expect(currentUrl).toEqual('https://smalruby.jp/smalruby3-gui/');
+        await expect(currentUrl).toEqual('https://smalruby.jp/');
     });
 
     test('(GH#4064) Project name should be editable', async () => {

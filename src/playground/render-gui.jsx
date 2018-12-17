@@ -8,7 +8,7 @@ import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
 
 const onClickLogo = () => {
-    window.location = 'https://smalruby.jp/smalruby3-gui';
+    window.location = 'https://smalruby.jp';
 };
 
 /*

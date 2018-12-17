@@ -19,4 +19,25 @@ const isScratchDesktop = function () {
  */
 isScratchDesktop.override = null;
 
+/**
+ * Parse an HREF string and extract an `isScratchDesktop` override value if present.
+ * The value is set in `isScratchDesktop.override`.
+ * Activate this by adding "?isScratchDesktop=1" or similar to the URL.
+ * @param {string} href - the `window.location.href` value (or equivalent) to parse
+ */
+const setIsScratchDesktopOverrideFromHref = function (href) {
+    const scratchDesktopMatches = href.match(/[?&]isScratchDesktop=([^&]+)/);
+    if (scratchDesktopMatches) {
+        try {
+            // parse 'true' into `true`, 'false' into `false`, etc.
+            isScratchDesktop.override = JSON.parse(scratchDesktopMatches[1]);
+        } catch {
+            // it's not JSON so just use the string
+            // note that a typo like "falsy" will be treated as true
+            isScratchDesktop.override = scratchDesktopMatches[1];
+        }
+    }
+};
+
 export default isScratchDesktop;
+export {setIsScratchDesktopOverrideFromHref};

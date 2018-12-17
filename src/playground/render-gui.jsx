@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {compose} from 'redux';
 
+import isScratchDesktop from '../lib/isScratchDesktop';
+
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
-import isScratchDesktop from '../lib/isScratchDesktop';
 import TitledHOC from '../lib/titled-hoc.jsx';
 
 const onClickLogo = () => {
@@ -28,20 +29,6 @@ export default appTarget => {
         HashParserHOC,
         TitledHOC
     )(GUI);
-
-    // hack for testing the GUI in Scratch Desktop mode
-    // add "?isScratchDesktop=1" or similar to the URL
-    const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
-    if (scratchDesktopMatches) {
-        try {
-            // parse 'true' into `true`, 'false' into `false`, etc.
-            isScratchDesktop.override = JSON.parse(scratchDesktopMatches[1]);
-        } catch {
-            // it's not JSON so just use the string
-            // note that a typo like "falsy" will be treated as true
-            isScratchDesktop.override = scratchDesktopMatches[1];
-        }
-    }
 
     // TODO a hack for testing the backpack, allow backpack host to be set by url param
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);

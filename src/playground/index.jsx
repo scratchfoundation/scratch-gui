@@ -7,6 +7,10 @@ import 'intl'; // For Safari 9
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// this should be done before our other imports in case any use `isScratchDesktop()` right away
+import {setIsScratchDesktopOverrideFromHref} from '../lib/isScratchDesktop';
+setIsScratchDesktopOverrideFromHref(window.location.href);
+
 import analytics from '../lib/analytics';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';

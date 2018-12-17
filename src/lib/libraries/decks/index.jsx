@@ -1,6 +1,8 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import isScratchDesktop from '../../../lib/isScratchDesktop';
+
 // Intro
 import libraryIntro from './intro/lib-getting-started.jpg';
 import stepMove from './intro/intro1.gif';
@@ -116,8 +118,7 @@ import addEffectsThumb from './videos/add-effects.jpg';
 import moveArrowKeysThumb from './videos/move-arrow-keys.jpg';
 import spinThumb from './videos/spin.jpg';
 
-export default {
-
+const decksRaw = {
     'intro-move-sayhello': {
         name: (
             <FormattedMessage
@@ -1204,3 +1205,15 @@ export default {
         hidden: true
     }
 };
+
+const decks = isScratchDesktop() ?
+    Object.entries(decksRaw)
+        // reject any deck with a required project ID
+        .filter(([, deckInfo]) => !deckInfo.hasOwnProperty('requiredProjectId'))
+        .reduce((newDecks, [key, deckInfo]) => {
+            newDecks[key] = deckInfo;
+            return newDecks;
+        }, {}) :
+    decksRaw;
+
+export default decks;

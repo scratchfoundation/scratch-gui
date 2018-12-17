@@ -278,6 +278,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onUpdateProjectThumbnail(
                         projectId, dataURItoBlob(dataURI));
                 });
+                this.props.vm.renderer.draw();
             } catch (e) {
                 log.error('Project thumbnail save error', e);
                 // This is intentionally fire/forget because a failure

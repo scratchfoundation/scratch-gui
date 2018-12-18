@@ -62,6 +62,7 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await clickXpath('//img[@alt="Smalruby"]');
+        await driver.sleep(15000);
         const currentUrl = await driver.getCurrentUrl();
         await expect(currentUrl).toEqual('https://smalruby.jp/');
     });

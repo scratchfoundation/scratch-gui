@@ -1,6 +1,8 @@
 export default {
+    'gui.menuBar.seeProjectPage': 'プロジェクトページをみる',
+    'gui.loader.creating': 'プロジェクトをさくせいちゅう...',
     'gui.smalruby3.crashMessage.description': 'もうしわけありません。スモウルビーがクラッシュしたようです。このバグはじどうてきにスモウルビーチームにほうこくされました。ページをさいよみこみしてください。',
-    'gui.smalruby3.gui.defaultProjectTitle': 'スモウルビープロジェクト',
+    'gui.smalruby3.gui.defaultProjectTitle': 'スモウルビーのプロジェクト',
     'gui.smalruby3.gui.rubyTab': 'ルビー',
     'gui.smalruby3.previewInfo.betawelcome': 'スモウルビー3.0 ベータばんにようこそ!',
     'gui.smalruby3.previewInfo.label': 'スモウルビー3.0をためしてみる',

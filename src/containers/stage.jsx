@@ -236,7 +236,7 @@ class Stage extends React.Component {
         this.updateRect();
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
-        if (e.button === 0 || e instanceof TouchEvent) {
+        if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
             this.setState({
                 mouseDown: true,
                 mouseDownPosition: mousePosition,

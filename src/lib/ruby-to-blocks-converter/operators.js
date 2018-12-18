@@ -48,14 +48,23 @@ const OperatorsConverter = {
             }
         }
 
+        let rh;
+        if (args.length === 1) {
+            if (_.isArray(args[0]) && args[0].length === 1) {
+                rh = args[0][0];
+            } else {
+                rh = args[0];
+            }
+        }
+
         switch (name) {
         case '+':
         case '-':
         case '*':
         case '/':
         case '%':
-            if (args.length === 1) {
-                if (this._isNumberOrBlock(receiver) && this._isNumberOrBlock(args[0])) {
+            if (rh) {
+                if (this._isNumberOrBlock(receiver) && this._isNumberOrBlock(rh)) {
                     let opcode;
                     if (name === '+') {
                         opcode = 'operator_add';
@@ -70,23 +79,16 @@ const OperatorsConverter = {
                     }
                     block = this._createBlock(opcode, 'value');
                     this._addNumberInput(block, 'NUM1', 'math_number', receiver, '');
-                    this._addNumberInput(block, 'NUM2', 'math_number', args[0], '');
+                    this._addNumberInput(block, 'NUM2', 'math_number', rh, '');
                     return block;
                 } else if (name === '+' &&
-                           (this._isStringOrBlock(receiver) || this._isStringOrBlock(args[0]))) {
+                           (this._isStringOrBlock(receiver) || this._isStringOrBlock(rh))) {
                     block = this._createBlock('operator_join', 'value');
                     this._addTextInput(
-                        block,
-                        'STRING1',
-                        this._isNumber(receiver) ? receiver.toString() : receiver,
-                        'apple'
+                        block, 'STRING1',
+                        this._isNumber(receiver) ? receiver.toString() : receiver, 'apple'
                     );
-                    this._addTextInput(
-                        block,
-                        'STRING2',
-                        this._isNumber(args[0]) ? args[0].toString() : args[0],
-                        'banana'
-                    );
+                    this._addTextInput(block, 'STRING2', this._isNumber(rh) ? rh.toString() : rh, 'banana');
                     return block;
                 }
             }
@@ -94,7 +96,7 @@ const OperatorsConverter = {
         case '>':
         case '<':
         case '==':
-            if (args.length === 1) {
+            if (rh) {
                 let opcode;
                 if (name === '>') {
                     opcode = 'operator_gt';
@@ -104,12 +106,8 @@ const OperatorsConverter = {
                     opcode = 'operator_equals';
                 }
                 block = this._createBlock(opcode, 'value_boolean');
-                this._addTextInput(
-                    block, 'OPERAND1', this._isNumber(receiver) ? receiver.toString() : receiver, ''
-                );
-                this._addTextInput(
-                    block, 'OPERAND2', this._isNumber(args[0]) ? args[0].toString() : args[0], '50'
-                );
+                this._addTextInput(block, 'OPERAND1', this._isNumber(receiver) ? receiver.toString() : receiver, '');
+                this._addTextInput(block, 'OPERAND2', this._isNumber(rh) ? rh.toString() : rh, '50');
                 return block;
             }
             break;
@@ -156,9 +154,9 @@ const OperatorsConverter = {
         case 'atan':
         case 'log':
         case 'log10':
-            if (args.length === 1 &&
+            if (rh &&
                 this._isConst(receiver) && receiver.toString() === '::Math' &&
-                this._isNumberOrBlock(args[0])) {
+                this._isNumberOrBlock(rh)) {
                 let operator;
                 switch (name) {
                 case 'log':
@@ -172,12 +170,12 @@ const OperatorsConverter = {
                 }
                 block = this._createBlock('operator_mathop', 'value');
                 this._addField(block, 'OPERATOR', operator);
-                this._addNumberInput(block, 'NUM', 'math_number', args[0], '');
+                this._addNumberInput(block, 'NUM', 'math_number', rh, '');
                 return block;
             }
             break;
         case '**':
-            if (args.length === 1 && this._isNumberOrBlock(args[0])) {
+            if (rh && this._isNumberOrBlock(rh)) {
                 let operator;
                 if (this._isConst(receiver) && receiver.toString() === '::Math::E') {
                     operator = 'e ^';
@@ -187,7 +185,7 @@ const OperatorsConverter = {
                 if (operator) {
                     block = this._createBlock('operator_mathop', 'value');
                     this._addField(block, 'OPERATOR', operator);
-                    this._addNumberInput(block, 'NUM', 'math_number', args[0], '');
+                    this._addNumberInput(block, 'NUM', 'math_number', rh, '');
                     return block;
                 }
             }

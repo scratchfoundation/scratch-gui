@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
+/* eslint-disable react/prefer-stateless-function */
 class LibraryItemComponent extends React.PureComponent {
     render () {
         return this.props.featured ? (
@@ -22,7 +23,7 @@ class LibraryItemComponent extends React.PureComponent {
                     this.props.extensionId ? styles.libraryItemExtension : null,
                     this.props.hidden ? styles.hidden : null
                 )}
-                onClick={this.handleClick}
+                onClick={this.props.onClick}
             >
                 <div className={styles.featuredImageContainer}>
                     {this.props.disabled ? (
@@ -131,6 +132,8 @@ class LibraryItemComponent extends React.PureComponent {
         );
     }
 }
+/* eslint-enable react/prefer-stateless-function */
+
 
 LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,

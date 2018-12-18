@@ -97,6 +97,7 @@ class SBFileUploader extends React.Component {
     onload () {
         if (this.reader) {
             this.props.onLoadingStarted();
+            const filename = this.fileToUpload && this.fileToUpload.name;
             this.props.vm.loadProject(this.reader.result)
                 .then(() => {
                     analytics.event({
@@ -109,10 +110,11 @@ class SBFileUploader extends React.Component {
                     this.props.onLoadingFinished(this.props.loadingState, true);
                     // Reset the file input after project is loaded
                     // This is necessary in case the user wants to reload a project
+                    if (filename) {
+                        const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
+                        this.props.onUpdateProjectTitle(uploadedProjectTitle);
+                    }
                     this.resetFileInput();
-                    // disable title handling for now; @todo reenable, with correct logic
-                    // const uploadedProjectTitle = this.getProjectTitleFromFilename(thisFileInput.files[0].name);
-                    // this.props.onUpdateProjectTitle(uploadedProjectTitle);
                 })
                 .catch(error => {
                     log.warn(error);
@@ -156,7 +158,7 @@ SBFileUploader.propTypes = {
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    // onUpdateProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     requestProjectUpload: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func

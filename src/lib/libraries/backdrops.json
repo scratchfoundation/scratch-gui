@@ -19,6 +19,17 @@
         ]
     },
     {
+        "name": "Backdrop1",
+        "md5": "b61b1077b0ea1931abee9dbbfa7903ff.png",
+        "type": "backdrop",
+        "tags": [],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Baseball 1",
         "md5": "825d9b54682c406215d9d1f98a819449.svg",
         "type": "backdrop",
@@ -151,6 +162,20 @@
     {
         "name": "Blue Sky",
         "md5": "e7c147730f19d284bcd7b3f00af19bb6.svg",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            "flying"
+        ],
+        "info": [
+            480,
+            360,
+            1
+        ]
+    },
+    {
+        "name": "Blue Sky 2 ",
+        "md5": "5a906c2f272b77f59f0ef207857a8b3a.svg",
         "type": "backdrop",
         "tags": [
             "outdoors",
@@ -299,6 +324,22 @@
         ]
     },
     {
+        "name": "Desert",
+        "md5": "d98a9526a34890cf4bad11b5409eae2a.png",
+        "type": "backdrop",
+        "tags": [
+            "desert",
+            " landscape",
+            " outdoors",
+            " cacti"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Farm",
         "md5": "1e8a70bd07f1dcba3383883f3b948266.png",
         "type": "backdrop",
@@ -351,6 +392,21 @@
             "space",
             "stars",
             "nasa"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Garden-rock",
+        "md5": "4f66053598bea0905e1559ab9d5a6e31.png",
+        "type": "backdrop",
+        "tags": [
+            "outdoors",
+            " garden",
+            " park"
         ],
         "info": [
             960,
@@ -876,7 +932,7 @@
         ]
     },
     {
-        "name": "Stage",
+        "name": "Spotlight",
         "md5": "d26bf4c3980163d9106625cc2ea6c50d.png",
         "type": "backdrop",
         "tags": [
@@ -1100,7 +1156,7 @@
     },
     {
         "name": "Woods",
-        "md5": "a28d7218f148340a5184afd7210d5e62.svg",
+        "md5": "e33401bc9248b3e04930789d61b7a8fa.svg",
         "type": "backdrop",
         "tags": [
             "fantasy",

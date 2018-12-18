@@ -505,6 +505,7 @@ const requestProjectUpload = loadingState => {
         return {
             type: START_UPDATING_BEFORE_FILE_UPLOAD
         };
+    case LoadingState.NOT_LOADED:
     case LoadingState.SHOWING_WITHOUT_ID:
         return {
             type: START_LOADING_VM_FILE_UPLOAD

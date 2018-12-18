@@ -8,10 +8,10 @@ import {
     manualUpdateProject,
     onFetchedProjectData,
     onLoadedProject,
-    onProjectUploadStarted,
     projectError,
     remixProject,
     requestNewProject,
+    requestProjectUpload,
     saveProjectAsCopy,
     setProjectId
 } from '../../../src/reducers/project-state';
@@ -96,7 +96,7 @@ test('onLoadedProject upload, with canSave false, shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
-    const action = onLoadedProject(initialState.loadingState, false);
+    const action = onLoadedProject(initialState.loadingState, false, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
@@ -105,7 +105,7 @@ test('onLoadedProject upload, with canSave true, prepares to save', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
-    const action = onLoadedProject(initialState.loadingState, true);
+    const action = onLoadedProject(initialState.loadingState, true, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.AUTO_UPDATING);
 });
@@ -114,7 +114,7 @@ test('onLoadedProject with id shows with id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_WITH_ID
     };
-    const action = onLoadedProject(initialState.loadingState);
+    const action = onLoadedProject(initialState.loadingState, true, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
@@ -123,7 +123,7 @@ test('onLoadedProject new shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
-    const action = onLoadedProject(initialState.loadingState);
+    const action = onLoadedProject(initialState.loadingState, false, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
@@ -132,9 +132,29 @@ test('onLoadedProject new, to save shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
-    const action = onLoadedProject(initialState.loadingState);
+    const action = onLoadedProject(initialState.loadingState, true, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
+});
+
+test('onLoadedProject with success false, no project id, shows without id', () => {
+    const initialState = {
+        loadingState: LoadingState.LOADING_VM_WITH_ID,
+        projectId: null
+    };
+    const action = onLoadedProject(initialState.loadingState, false, false);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
+});
+
+test('onLoadedProject with success false, valid project id, shows with id', () => {
+    const initialState = {
+        loadingState: LoadingState.LOADING_VM_WITH_ID,
+        projectId: '12345'
+    };
+    const action = onLoadedProject(initialState.loadingState, false, false);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
 
 test('doneUpdatingProject with id shows with id', () => {
@@ -215,29 +235,29 @@ test('requestNewProject, when can create new, should save and prepare to fetch d
     expect(resultState.loadingState).toBe(LoadingState.UPDATING_BEFORE_NEW);
 });
 
-test('onProjectUploadStarted when project not loaded should load', () => {
+test('requestProjectUpload when project not loaded should load', () => {
     const initialState = {
         loadingState: LoadingState.NOT_LOADED
     };
-    const action = onProjectUploadStarted();
+    const action = requestProjectUpload(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
-test('onProjectUploadStarted when showing project with id should load', () => {
+test('requestProjectUpload when showing project with id should load', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITH_ID
     };
-    const action = onProjectUploadStarted();
+    const action = requestProjectUpload(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
+    expect(resultState.loadingState).toBe(LoadingState.UPDATING_BEFORE_FILE_UPLOAD);
 });
 
-test('onProjectUploadStarted when showing project without id should load', () => {
+test('requestProjectUpload when showing project without id should load', () => {
     const initialState = {
         loadingState: LoadingState.SHOWING_WITHOUT_ID
     };
-    const action = onProjectUploadStarted();
+    const action = requestProjectUpload(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });

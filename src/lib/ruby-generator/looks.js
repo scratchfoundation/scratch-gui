@@ -65,13 +65,13 @@ export default function (Generator) {
     };
 
     Generator.looks_changeeffectby = function (block) {
-        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT').toLowerCase() || '');
         const change = Generator.valueToCode(block, 'CHANGE', Generator.ORDER_NONE) || '0';
         return `change_effect_by(${effect}, ${change})\n`;
     };
 
     Generator.looks_seteffectto = function (block) {
-        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT') || null);
+        const effect = Generator.quote_(Generator.getFieldValue(block, 'EFFECT').toLowerCase() || '');
         const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
         return `set_effect(${effect}, ${value})\n`;
     };

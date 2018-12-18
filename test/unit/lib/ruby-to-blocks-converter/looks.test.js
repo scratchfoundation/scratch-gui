@@ -488,6 +488,49 @@ describe('RubyToBlocksConverter/Looks', () => {
 
     describe('looks_changeeffectby', () => {
         test('normal', () => {
+            code = 'change_effect_by("color", 25)';
+            expected = [
+                {
+                    opcode: 'looks_changeeffectby',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'CHANGE',
+                            block: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'change_effect_by("color", x)';
+            expected = [
+                {
+                    opcode: 'looks_changeeffectby',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'CHANGE',
+                            block: rubyToExpected(converter, target, 'x')[0],
+                            shadow: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
+        test('upper case', () => {
             code = 'change_effect_by("COLOR", 25)';
             expected = [
                 {
@@ -507,38 +550,17 @@ describe('RubyToBlocksConverter/Looks', () => {
                 }
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = 'change_effect_by("COLOR", x)';
-            expected = [
-                {
-                    opcode: 'looks_changeeffectby',
-                    fields: [
-                        {
-                            name: 'EFFECT',
-                            value: 'COLOR'
-                        }
-                    ],
-                    inputs: [
-                        {
-                            name: 'CHANGE',
-                            block: rubyToExpected(converter, target, 'x')[0],
-                            shadow: expectedInfo.makeNumber(25)
-                        }
-                    ]
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
         test('invalid', () => {
             [
                 'change_effect_by',
                 'change_effect_by()',
-                'change_effect_by("COLOR")',
+                'change_effect_by("color")',
                 'change_effect_by(25)',
                 'change_effect_by("invalid effect", 25)',
                 'change_effect_by(1, 25)',
-                'change_effect_by("COLOR", 25, 1)'
+                'change_effect_by("color", 25, 1)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
@@ -547,7 +569,7 @@ describe('RubyToBlocksConverter/Looks', () => {
 
     describe('looks_seteffectto', () => {
         test('normal', () => {
-            code = 'set_effect("COLOR", 25)';
+            code = 'set_effect("color", 25)';
             expected = [
                 {
                     opcode: 'looks_seteffectto',
@@ -567,7 +589,7 @@ describe('RubyToBlocksConverter/Looks', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'set_effect("COLOR", x)';
+            code = 'set_effect("color", x)';
             expected = [
                 {
                     opcode: 'looks_seteffectto',
@@ -589,15 +611,37 @@ describe('RubyToBlocksConverter/Looks', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
+        test('upper case', () => {
+            code = 'set_effect("COLOR", 25)';
+            expected = [
+                {
+                    opcode: 'looks_seteffectto',
+                    fields: [
+                        {
+                            name: 'EFFECT',
+                            value: 'COLOR'
+                        }
+                    ],
+                    inputs: [
+                        {
+                            name: 'VALUE',
+                            block: expectedInfo.makeNumber(25)
+                        }
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
         test('invalid', () => {
             [
                 'set_effect',
                 'set_effect()',
-                'set_effect("COLOR")',
+                'set_effect("color")',
                 'set_effect(25)',
                 'set_effect("invalid effect", 25)',
                 'set_effect(1, 25)',
-                'set_effect("COLOR", 25, 1)'
+                'set_effect("color", 25, 1)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });

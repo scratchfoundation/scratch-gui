@@ -86,7 +86,7 @@ const LooksConverter = {
                 break;
             case 'change_effect_by':
             case 'set_effect':
-                if (args.length === 2 && this._isString(args[0]) && Effects.indexOf(args[0].toString()) >= 0 &&
+                if (args.length === 2 && this._isString(args[0]) && Effects.indexOf(args[0].toString().toUpperCase()) >= 0 &&
                     this._isNumberOrBlock(args[1])) {
                     let opcode;
                     let inputName;
@@ -98,7 +98,7 @@ const LooksConverter = {
                         inputName = 'VALUE';
                     }
                     block = this._createBlock(opcode, 'statement');
-                    this._addField(block, 'EFFECT', args[0]);
+                    this._addField(block, 'EFFECT', args[0].toString().toUpperCase());
                     this._addNumberInput(block, inputName, 'math_number', args[1], 25);
                 }
                 break;

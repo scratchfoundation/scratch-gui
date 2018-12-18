@@ -150,8 +150,12 @@ class CostumeTab extends React.Component {
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
     }
-    handleNewCostume (costume) {
-        this.props.vm.addCostume(costume.md5, costume);
+    handleNewCostume (costume, fromCostumeLibrary) {
+        if (fromCostumeLibrary) {
+            this.props.vm.addCostumeFromLibrary(costume.md5, costume);
+        } else {
+            this.props.vm.addCostume(costume.md5, costume);
+        }
     }
     handleNewBlankCostume () {
         const name = this.props.vm.editingTarget.isStage ?
@@ -173,7 +177,7 @@ class CostumeTab extends React.Component {
             bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.handleNewCostume(vmCostume);
+        this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
     }
     handleSurpriseBackdrop () {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];

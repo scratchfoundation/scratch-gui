@@ -86,7 +86,8 @@ const LooksConverter = {
                 break;
             case 'change_effect_by':
             case 'set_effect':
-                if (args.length === 2 && this._isString(args[0]) && Effects.indexOf(args[0].toString().toUpperCase()) >= 0 &&
+                if (args.length === 2 &&
+                    this._isString(args[0]) && Effects.indexOf(args[0].toString().toUpperCase()) >= 0 &&
                     this._isNumberOrBlock(args[1])) {
                     let opcode;
                     let inputName;

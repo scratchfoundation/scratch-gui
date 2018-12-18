@@ -125,18 +125,21 @@ const ControlConverter = {
     },
 
     onUntil: function (cond, statement) {
-        const block = this._createBlock('control_repeat_until', 'statement');
+        const b = this._popWaitBlock(statement);
+        if (!b) {
+            return null;
+        }
+
+        let opcode;
+        if (b.id === statement.id) {
+            statement = null;
+            opcode = 'control_wait_until';
+        } else {
+            opcode = 'control_repeat_until';
+        }
+        const block = this._createBlock(opcode, 'statement');
         if (!this._isFalse(cond)) {
             this._addInput(block, 'CONDITION', cond);
-        }
-        if (this._isBlock(statement) && statement.next === null) {
-            const b = this._popWaitBlock(statement);
-            if (b) {
-                if (b.id === statement.id) {
-                    statement = null;
-                }
-                block.opcode = 'control_wait_until';
-            }
         }
         this._addSubstack(block, statement);
         return block;

@@ -727,6 +727,7 @@ describe('RubyToBlocksConverter/Control', () => {
             code = `
                 until touching?("_edge_")
                   move(10)
+                  wait
                 end
             `;
             expected = [
@@ -748,6 +749,7 @@ describe('RubyToBlocksConverter/Control', () => {
             code = `
                 until (touching?("_edge_"))
                   move(10)
+                  wait
                 end
             `;
             expected = [
@@ -770,6 +772,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 until touching?("_edge_")
                   move(10)
                   bounce_if_on_edge
+                  wait
                 end
             `;
             expected = [
@@ -792,19 +795,8 @@ describe('RubyToBlocksConverter/Control', () => {
         test('condition is false', () => {
             code = `
                 until false
-                end
-            `;
-            expected = [
-                {
-                    opcode: 'control_repeat_until',
-                    branches: []
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
-
-            code = `
-                until false
                   move(10)
+                  wait
                 end
             `;
             expected = [
@@ -821,6 +813,8 @@ describe('RubyToBlocksConverter/Control', () => {
         test('error', () => {
             code = `
                 until move(10)
+                  bounce_if_on_edge
+                  wait
                 end
             `;
             const res = converter.targetCodeToBlocks(target, code);

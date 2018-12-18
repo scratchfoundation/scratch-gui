@@ -96,7 +96,10 @@ class Monitor extends React.Component {
         }));
     }
     handleHide () {
-        console.log('Hide!');
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            visible: false
+        }));
     }
     handleNextMode () {
         const modes = availableModes(this.props.opcode);

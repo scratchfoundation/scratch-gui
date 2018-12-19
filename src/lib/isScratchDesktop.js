@@ -14,11 +14,9 @@ const setIsScratchDesktop = function (value) {
 
 /**
  * @returns {boolean} - true if it seems like the GUI is running under Scratch Desktop; false otherwise.
+ * If `setIsScratchDesktop()` has not yet been called, this can return `undefined`.
  */
 const isScratchDesktop = function () {
-    if (typeof _isScratchDesktop === 'undefined') {
-        throw new Error('isScratchDesktop is not ready yet');
-    }
     return _isScratchDesktop;
 };
 

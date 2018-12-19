@@ -14,6 +14,8 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'elementIsVisible',
+            'elementIsNotVisible',
             'findByText',
             'findByXpath',
             'getDriver',
@@ -22,6 +24,13 @@ class SeleniumHelper {
             'loadUri',
             'rightClickText'
         ]);
+    }
+
+    elementIsVisible (element) {
+        return this.driver.wait(until.elementIsVisible(element));
+    }
+    elementIsNotVisible (element) {
+        return this.driver.wait(until.elementIsNotVisible(element));
     }
 
     get scope () {

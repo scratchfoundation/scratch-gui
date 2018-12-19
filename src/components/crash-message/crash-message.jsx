@@ -29,6 +29,18 @@ const CrashMessage = props => (
                     id="gui.crashMessage.description"
                 />
             </p>
+            {props.eventId && (
+                <p>
+                    <FormattedMessage
+                        defaultMessage="Your error was logged with id {errorId}"
+                        description="Message to inform the user that page has crashed."
+                        id="gui.crashMessage.errorNumber"
+                        values={{
+                            errorId: props.eventId
+                        }}
+                    />
+                </p>
+            )}
             <button
                 className={styles.reloadButton}
                 onClick={props.onReload}
@@ -44,6 +56,7 @@ const CrashMessage = props => (
 );
 
 CrashMessage.propTypes = {
+    eventId: PropTypes.string,
     onReload: PropTypes.func.isRequired
 };
 

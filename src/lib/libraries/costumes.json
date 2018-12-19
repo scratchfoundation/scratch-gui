@@ -687,7 +687,7 @@
     },
     {
         "name": "Bananas",
-        "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
+        "md5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -697,8 +697,8 @@
             "fruit"
         ],
         "info": [
-            36,
-            37,
+            39,
+            38,
             1
         ]
     },
@@ -2449,54 +2449,54 @@
     },
     {
         "name": "Devin-a",
-        "md5": "b59226656f090124fb4dcbfd8946275b.png",
+        "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            156,
-            380,
-            2
+            39,
+            95,
+            1
         ]
     },
     {
         "name": "Devin-b",
-        "md5": "0116dd2fa16bbce2b4701a2c9b15119e.png",
+        "md5": "873fbd641768c8f753a6568da97633e7.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            160,
-            382,
-            2
+            40,
+            96,
+            1
         ]
     },
     {
         "name": "Devin-c",
-        "md5": "075cf6f2967e71cd09574f961958258a.png",
+        "md5": "eac3c03d86cebb42c8f30e373cb7f623.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            128,
-            380,
-            2
+            32,
+            95,
+            1
         ]
     },
     {
         "name": "Devin-d",
-        "md5": "3892cc13b6abd08f166976c15c4da242.png",
+        "md5": "fa6a75afb0e4b822b91d8bb20d40c68f.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            162,
-            378,
-            2
+            41,
+            95,
+            1
         ]
     },
     {
@@ -3167,6 +3167,7 @@
         "md5": "3b9e6830365aeadb63c21b681777b783.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
@@ -3182,6 +3183,7 @@
         "md5": "a80a07906ffbb9671dba3633223859af.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
@@ -3197,6 +3199,7 @@
         "md5": "1e1bdccbab5b566beb7f91b5ec01352f.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
@@ -3212,6 +3215,7 @@
         "md5": "06d70d5de0e25f97c1c606e513ab019c.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
@@ -3337,6 +3341,7 @@
         "md5": "87aaecd2fb73580e6f1f38c5a2e579a9.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "insect",
             "dragonfly",
             "wetland",
@@ -3353,6 +3358,7 @@
         "md5": "4e775a49bd5a7a6d38392731924f72e0.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "insect",
             "dragonfly",
             "wetland",
@@ -4134,7 +4140,7 @@
         "md5": "07160d455202e95f5b4b5c842eff6788.svg",
         "type": "costume",
         "tags": [
-            "animal",
+            "animals",
             "frog",
             "wetland",
             "owen davey"
@@ -4150,7 +4156,7 @@
         "md5": "9663ddb4d100eb4e18702ee13eca835e.svg",
         "type": "costume",
         "tags": [
-            "animal",
+            "animals",
             "frog",
             "wetland",
             "owen davey"
@@ -4166,7 +4172,7 @@
         "md5": "5c2ec9de8d1695cd4b59beea45046560.svg",
         "type": "costume",
         "tags": [
-            "animal",
+            "animals",
             "frog",
             "wetland",
             "owen davey"
@@ -5078,7 +5084,7 @@
     },
     {
         "name": "Hare-c",
-        "md5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
+        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5092,8 +5098,8 @@
             "robert hunter"
         ],
         "info": [
-            40,
-            40,
+            240,
+            180,
             1
         ]
     },
@@ -7537,6 +7543,7 @@
         "md5": "0e78708b8988802d2209a34b50292bd3.svg",
         "type": "costume",
         "tags": [
+            "penguin",
             "animals",
             "bird",
             "cold",
@@ -7559,6 +7566,7 @@
         "type": "costume",
         "tags": [
             "animals",
+            "penguin",
             "bird",
             "cold",
             "north pole",
@@ -7580,6 +7588,7 @@
         "type": "costume",
         "tags": [
             "animals",
+            "penguin",
             "bird",
             "cold",
             "north pole",
@@ -7856,6 +7865,7 @@
         "md5": "b1d892d9f8a897bc6a446e2ff766ba74.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",
@@ -7876,6 +7886,7 @@
         "md5": "54728e795213e67ac7cecca1c32fe293.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",
@@ -7896,6 +7907,7 @@
         "md5": "7d5812e0aa1cde33771f9270ff521cfe.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",

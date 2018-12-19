@@ -818,7 +818,7 @@
     },
     {
         "name": "Bananas",
-        "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
+        "md5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
         "type": "sprite",
         "tags": [
             "food",
@@ -856,10 +856,10 @@
                 {
                     "costumeName": "bananas",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "40bb8a1afe88cec78254f6fcfee98242.svg",
+                    "baseLayerMD5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 36,
-                    "rotationCenterY": 37
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 38
                 }
             ],
             "currentCostumeIndex": 0,
@@ -3667,7 +3667,7 @@
     },
     {
         "name": "Devin",
-        "md5": "b59226656f090124fb4dcbfd8946275b.png",
+        "md5": "b1897e56265470b55fa65fabe2423c55.svg",
         "type": "sprite",
         "tags": [
             "people"
@@ -3693,39 +3693,39 @@
                 {
                     "costumeName": "devin-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b59226656f090124fb4dcbfd8946275b.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 78,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "b1897e56265470b55fa65fabe2423c55.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 39,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0116dd2fa16bbce2b4701a2c9b15119e.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 80,
-                    "rotationCenterY": 191
+                    "baseLayerMD5": "873fbd641768c8f753a6568da97633e7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 96
                 },
                 {
                     "costumeName": "devin-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "075cf6f2967e71cd09574f961958258a.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 64,
-                    "rotationCenterY": 190
+                    "baseLayerMD5": "eac3c03d86cebb42c8f30e373cb7f623.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 95
                 },
                 {
                     "costumeName": "devin-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "3892cc13b6abd08f166976c15c4da242.png",
-                    "bitmapResolution": 2,
-                    "rotationCenterX": 81,
-                    "rotationCenterY": 189
+                    "baseLayerMD5": "fa6a75afb0e4b822b91d8bb20d40c68f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 41,
+                    "rotationCenterY": 95
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 30,
-            "scratchY": 12,
+            "scratchX": 82,
+            "scratchY": -18,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -4502,6 +4502,7 @@
         "tags": [
             "space",
             "dog",
+            "animals",
             "wren mcdonald"
         ],
         "info": [
@@ -4690,6 +4691,7 @@
         "md5": "87aaecd2fb73580e6f1f38c5a2e579a9.svg",
         "type": "sprite",
         "tags": [
+            "animals",
             "insect",
             "dragonfly",
             "wetland",
@@ -4723,7 +4725,7 @@
                 },
                 {
                     "costumeName": "Dragonfly-b",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "4e775a49bd5a7a6d38392731924f72e0.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 108,
@@ -6082,17 +6084,23 @@
         }
     },
     {
-        "name": "Frog 2",
+        "name": "Frog 2 ",
         "md5": "07160d455202e95f5b4b5c842eff6788.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
         "info": [
             0,
             3,
             1
         ],
         "json": {
-            "objName": "Frog 2",
+            "objName": "Frog 2 ",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -7545,10 +7553,10 @@
                 {
                     "costumeName": "hare-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
+                    "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 40,
-                    "rotationCenterY": 40
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
                 }
             ],
             "currentCostumeIndex": 0,
@@ -11072,7 +11080,17 @@
         "name": "Penguin",
         "md5": "0e78708b8988802d2209a34b50292bd3.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "penguin",
+            "cold",
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic",
+            "robert hunter"
+        ],
         "info": [
             0,
             3,
@@ -11460,7 +11478,18 @@
         "name": "Polar Bear",
         "md5": "b1d892d9f8a897bc6a446e2ff766ba74.svg",
         "type": "sprite",
-        "tags": [],
+        "tags": [
+            "animals",
+            "bear",
+            "polar bear",
+            "cold",
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic",
+            "robert hunter"
+        ],
         "info": [
             0,
             3,
@@ -12358,8 +12387,8 @@
                 }
             ],
             "currentCostumeIndex": 0,
-            "scratchX": 116,
-            "scratchY": 82,
+            "scratchX": 123,
+            "scratchY": 50,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -13778,7 +13807,7 @@
             "sounds": [
                 {
                     "soundName": "chomp",
-                    "soundID": 0,
+                    "soundID": -1,
                     "md5": "0b1e3033140d094563248e61de4039e5.wav",
                     "sampleCount": 2912,
                     "rate": 11025,
@@ -15286,6 +15315,61 @@
             "currentCostumeIndex": 0,
             "scratchX": -128,
             "scratchY": -85,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Zebra",
+        "md5": "f58632e6b34fa8f9b35219e52ed2c864.svg",
+        "type": "sprite",
+        "tags": [
+            "animals",
+            "savanna",
+            "robert hunter"
+        ],
+        "info": [
+            0,
+            2,
+            1
+        ],
+        "json": {
+            "objName": "Zebra",
+            "sounds": [
+                {
+                    "soundName": "horse gallop",
+                    "soundID": -1,
+                    "md5": "058a34b5fb8b57178b5322d994b6b8c8.wav",
+                    "sampleCount": 38336,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "zebra-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f58632e6b34fa8f9b35219e52ed2c864.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 97,
+                    "rotationCenterY": 56
+                },
+                {
+                    "costumeName": "zebra-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "ea23797598a55938a2d46f2b0a389fd6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 96,
+                    "rotationCenterY": 56
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 122,
+            "scratchY": 11,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

@@ -52,7 +52,7 @@ class TipsLibrary extends React.PureComponent {
                 eventually we will find a solution that doesn't involve loading a whole project
         */
         if (item.requiredProjectId && (item.requiredProjectId !== this.props.projectId)) {
-            const urlParams = `/projects/${item.requiredProjectId}?tutorial=${item.urlId}`;
+            const urlParams = `/projects/${item.requiredProjectId}/editor?tutorial=${item.urlId}`;
             return window.open(window.location.origin + urlParams, '_blank');
         }
 

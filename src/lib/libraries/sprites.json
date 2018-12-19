@@ -15332,6 +15332,7 @@
         "type": "sprite",
         "tags": [
             "animals",
+            "zebra",
             "savanna",
             "robert hunter"
         ],
@@ -15354,7 +15355,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "zebra-b",
+                    "costumeName": "zebra-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f58632e6b34fa8f9b35219e52ed2c864.svg",
                     "bitmapResolution": 1,
@@ -15362,7 +15363,7 @@
                     "rotationCenterY": 56
                 },
                 {
-                    "costumeName": "zebra-c",
+                    "costumeName": "zebra-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ea23797598a55938a2d46f2b0a389fd6.svg",
                     "bitmapResolution": 1,

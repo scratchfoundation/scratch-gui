@@ -10337,12 +10337,13 @@
         ]
     },
     {
-        "name": "Zebra-b",
+        "name": "Zebra-a",
         "md5": "f58632e6b34fa8f9b35219e52ed2c864.svg",
         "type": "costume",
         "tags": [
             "animals",
             "savanna",
+            "zebra",
             "robert hunter"
         ],
         "info": [
@@ -10352,12 +10353,13 @@
         ]
     },
     {
-        "name": "Zebra-c",
+        "name": "Zebra-b",
         "md5": "ea23797598a55938a2d46f2b0a389fd6.svg",
         "type": "costume",
         "tags": [
             "animals",
             "savanna",
+            "zebra",
             "robert hunter"
         ],
         "info": [

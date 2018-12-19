@@ -61,6 +61,19 @@ var onClickLogo = function onClickLogo() {
 
   var backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
   var backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
+  var scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
+  var simulateScratchDesktop;
+
+  if (scratchDesktopMatches) {
+    try {
+      // parse 'true' into `true`, 'false' into `false`, etc.
+      simulateScratchDesktop = JSON.parse(scratchDesktopMatches[1]);
+    } catch (_unused) {
+      // it's not JSON so just use the string
+      // note that a typo like "falsy" will be treated as true
+      simulateScratchDesktop = scratchDesktopMatches[1];
+    }
+  }
 
   if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
     // Warn before navigating away
@@ -69,7 +82,11 @@ var onClickLogo = function onClickLogo() {
     };
   }
 
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
+  simulateScratchDesktop ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+    isScratchDesktop: true,
+    canSave: false
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     backpackVisible: true,
     showComingSoon: true,
     showPreviewInfo: true,

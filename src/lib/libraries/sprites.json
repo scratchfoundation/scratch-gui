@@ -7553,10 +7553,10 @@
                 {
                     "costumeName": "hare-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "baseLayerMD5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 40,
+                    "rotationCenterY": 40
                 }
             ],
             "currentCostumeIndex": 0,
@@ -14734,6 +14734,7 @@
         "type": "sprite",
         "tags": [
             "fantasy",
+            "animals",
             "horse",
             "horn",
             "rainbow"

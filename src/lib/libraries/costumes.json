@@ -5084,7 +5084,7 @@
     },
     {
         "name": "Hare-c",
-        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+        "md5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5098,8 +5098,8 @@
             "robert hunter"
         ],
         "info": [
-            240,
-            180,
+            40,
+            40,
             1
         ]
     },
@@ -9932,6 +9932,7 @@
         "type": "costume",
         "tags": [
             "fantasy",
+            "animals",
             "horse",
             "horn",
             "rainbow"

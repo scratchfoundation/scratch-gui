@@ -2997,6 +2997,69 @@
         }
     },
     {
+        "name": "City Bus",
+        "md5": "accf64aceae7997b7533fb51624ca297.svg",
+        "type": "sprite",
+        "tags": [
+            "city",
+            "bus",
+            "vehicle"
+        ],
+        "info": [
+            0,
+            2,
+            2
+        ],
+        "json": {
+            "objName": "City Bus",
+            "sounds": [
+                {
+                    "soundName": "clown honk",
+                    "soundID": -1,
+                    "md5": "ec66961f188e9b8a9c75771db744d096.wav",
+                    "sampleCount": 9009,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "car vroom",
+                    "soundID": -1,
+                    "md5": "ead1da4a87ff6cb53441142f7ac37b8f.wav",
+                    "sampleCount": 43358,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "City Bus-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "accf64aceae7997b7533fb51624ca297.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 107,
+                    "rotationCenterY": 67
+                },
+                {
+                    "costumeName": "City Bus-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b9ea0e326ffa98bc58a73bdf17c9542b.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 107,
+                    "rotationCenterY": 67
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 158,
+            "scratchY": -54,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Cloud",
         "md5": "47005a1f20309f577a03a67abbb6b94e.svg",
         "type": "sprite",
@@ -5415,6 +5478,69 @@
         }
     },
     {
+        "name": "Easel",
+        "md5": "edc81e35c94c07dc380c43ea9b311394.svg",
+        "type": "sprite",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "objName": "Easel",
+            "sounds": [
+                {
+                    "soundName": "pop",
+                    "soundID": -1,
+                    "md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+                    "sampleCount": 258,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Easel-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "edc81e35c94c07dc380c43ea9b311394.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 69,
+                    "rotationCenterY": 95
+                },
+                {
+                    "costumeName": "Easel-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cac798e8cf0364fa9a8bc52b85bda6b2.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 69,
+                    "rotationCenterY": 95
+                },
+                {
+                    "costumeName": "Easel-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "afbf42eb496694afb31f9ea69b3a1a7a.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 68,
+                    "rotationCenterY": 94
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 182,
+            "scratchY": -41,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Egg",
         "md5": "6f1a24a63d16c45425aa2eb64934a278.svg",
         "type": "sprite",
@@ -5789,6 +5915,142 @@
             "currentCostumeIndex": 0,
             "scratchX": 38,
             "scratchY": -53,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Fishbowl",
+        "md5": "9d1013e04ca7425f680a4b4e6dd6ede6.svg",
+        "type": "sprite",
+        "tags": [
+            "fishbowl",
+            "fish",
+            "animals",
+            "pet"
+        ],
+        "info": [
+            0,
+            2,
+            1
+        ],
+        "json": {
+            "objName": "Fishbowl",
+            "sounds": [
+                {
+                    "soundName": "water drop",
+                    "soundID": -1,
+                    "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
+                    "sampleCount": 8136,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Fishbowl-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "9d1013e04ca7425f680a4b4e6dd6ede6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 24
+                },
+                {
+                    "costumeName": "Fishbowl-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "0bbfc827e8d2f3da6db82efe95563f93.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 28,
+                    "rotationCenterY": 24
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -34,
+            "scratchY": 74,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Food Truck",
+        "md5": "b30ec8ff043e0f1747591d564d56d7fa.svg",
+        "type": "sprite",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food"
+        ],
+        "info": [
+            0,
+            3,
+            3
+        ],
+        "json": {
+            "objName": "Food Truck",
+            "sounds": [
+                {
+                    "soundName": "car horn",
+                    "soundID": -1,
+                    "md5": "7c887f6a2ecd1cdb85d5527898d7f7a0.wav",
+                    "sampleCount": 42443,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "clown honk",
+                    "soundID": -1,
+                    "md5": "ec66961f188e9b8a9c75771db744d096.wav",
+                    "sampleCount": 9009,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "car vroom",
+                    "soundID": -1,
+                    "md5": "ead1da4a87ff6cb53441142f7ac37b8f.wav",
+                    "sampleCount": 43358,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Food Truck-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "b30ec8ff043e0f1747591d564d56d7fa.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 121,
+                    "rotationCenterY": 125
+                },
+                {
+                    "costumeName": "Food Truck-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "afd51531621d2b33869b47342311b363.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 121,
+                    "rotationCenterY": 101
+                },
+                {
+                    "costumeName": "Food Truck-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "42f88485a25bf9a683d28957db9f969f.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 121,
+                    "rotationCenterY": 92
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -50,
+            "scratchY": -54,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -10190,6 +10452,85 @@
         }
     },
     {
+        "name": "Motorcycle",
+        "md5": "5065a917834923efc3e0c112d5791e80.svg",
+        "type": "sprite",
+        "tags": [
+            "city",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            0,
+            4,
+            2
+        ],
+        "json": {
+            "objName": "Motorcycle",
+            "sounds": [
+                {
+                    "soundName": "clown honk",
+                    "soundID": -1,
+                    "md5": "ec66961f188e9b8a9c75771db744d096.wav",
+                    "sampleCount": 9009,
+                    "rate": 22050,
+                    "format": "adpcm"
+                },
+                {
+                    "soundName": "car vroom",
+                    "soundID": -1,
+                    "md5": "ead1da4a87ff6cb53441142f7ac37b8f.wav",
+                    "sampleCount": 43358,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Motorcycle-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "5065a917834923efc3e0c112d5791e80.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 44
+                },
+                {
+                    "costumeName": "Motorcycle-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "fe0923cb08c0b7c373de1daf8b74de74.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 44
+                },
+                {
+                    "costumeName": "Motorcycle-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "6af27b2b5e1eeae9e60702630e6909a8.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 44
+                },
+                {
+                    "costumeName": "Motorcycle-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "c5d78ac1de3a7f786a4ca6dc0fe087d4.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 44
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 181,
+            "scratchY": -133,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Mouse1",
         "md5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
         "type": "sprite",
@@ -11963,6 +12304,86 @@
         }
     },
     {
+        "name": "Radio",
+        "md5": "d2266f31369a97fdf7ec37090bf0a968.svg",
+        "type": "sprite",
+        "tags": [
+            "radio",
+            "music",
+            "beatbox",
+            "bedrorom"
+        ],
+        "info": [
+            0,
+            2,
+            4
+        ],
+        "json": {
+            "objName": "Radio",
+            "sounds": [
+                {
+                    "soundName": "scratch beatbox",
+                    "soundID": -1,
+                    "md5": "859249563a7b1fc0f6e92e36d1db81c7.wav",
+                    "sampleCount": 11552,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "snare beatbox2",
+                    "soundID": -1,
+                    "md5": "7ede1382b578d8fc32850b48d082d914.wav",
+                    "sampleCount": 4960,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "wah beatbox",
+                    "soundID": -1,
+                    "md5": "9021b7bb06f2399f18e2db4fb87095dc.wav",
+                    "sampleCount": 6624,
+                    "rate": 22050,
+                    "format": ""
+                },
+                {
+                    "soundName": "bass beatbox",
+                    "soundID": -1,
+                    "md5": "28153621d293c86da0b246d314458faf.wav",
+                    "sampleCount": 6720,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Radio-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "d2266f31369a97fdf7ec37090bf0a968.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 38
+                },
+                {
+                    "costumeName": "Radio-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "cd4cff5586d0167fd992772360bddf68.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 51,
+                    "rotationCenterY": 84
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -164,
+            "scratchY": -96,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Rainbow",
         "md5": "680a806bd87a28c8b25b5f9b6347f022.svg",
         "type": "sprite",
@@ -12121,6 +12542,75 @@
             "currentCostumeIndex": 0,
             "scratchX": 13,
             "scratchY": 26,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Retro Robot",
+        "md5": "a17c1ce38c261395ae268f3b8a9037db.svg",
+        "type": "sprite",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            0,
+            3,
+            2
+        ],
+        "json": {
+            "objName": "Retro Robot",
+            "sounds": [
+                {
+                    "soundName": "computer beeps1",
+                    "soundID": -1,
+                    "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
+                    "sampleCount": 19200,
+                    "rate": 11025,
+                    "format": ""
+                },
+                {
+                    "soundName": "computer beeps2",
+                    "soundID": -1,
+                    "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
+                    "sampleCount": 9536,
+                    "rate": 11025,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Retro Robot a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "a17c1ce38c261395ae268f3b8a9037db.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 55,
+                    "rotationCenterY": 86
+                },
+                {
+                    "costumeName": "Retro Robot b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "bfb5afe62358ef542f118299bb53d4b7.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 52,
+                    "rotationCenterY": 88
+                },
+                {
+                    "costumeName": "Retro Robot c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "f925e3bde178001133a11fa97847a9ae.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 72,
+                    "rotationCenterY": 91
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 50,
+            "scratchY": -72,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",
@@ -14564,6 +15054,69 @@
             "currentCostumeIndex": 0,
             "scratchX": 26,
             "scratchY": -5,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
+        "name": "Truck",
+        "md5": "51404247db5cdbc082336dfa4c03d675.svg",
+        "type": "sprite",
+        "tags": [
+            "truck",
+            "city",
+            "vehicle"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "objName": "Truck",
+            "sounds": [
+                {
+                    "soundName": "toy honk",
+                    "soundID": -1,
+                    "md5": "67aadcd28620ecdcdee2ad8eeebefa20.wav",
+                    "sampleCount": 10726,
+                    "rate": 22050,
+                    "format": "adpcm"
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "Truck-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "51404247db5cdbc082336dfa4c03d675.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 174,
+                    "rotationCenterY": 49
+                },
+                {
+                    "costumeName": "Truck-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "1887b8233d1b0728f715a3985f0e01b6.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 174,
+                    "rotationCenterY": 58
+                },
+                {
+                    "costumeName": "Truck-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e45bc3f87d9f603e588abe14b63b8e90.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 174,
+                    "rotationCenterY": 58
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": -74,
+            "scratchY": -46,
             "scale": 1,
             "direction": 90,
             "rotationStyle": "normal",

@@ -83,6 +83,14 @@ const MonitorComponent = props => (
                         />
                     </MenuItem>
                 ) : null}
+                {props.onHide &&
+                    <MenuItem onClick={props.onHide}>
+                        <FormattedMessage
+                            defaultMessage="hide"
+                            description="Menu item to hide the monitor"
+                            id="gui.monitor.contextMenu.hide"
+                        />
+                    </MenuItem>}
             </ContextMenu>
         ), document.body)}
     </ContextMenuTrigger>
@@ -100,6 +108,7 @@ MonitorComponent.propTypes = {
     label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,
+    onHide: PropTypes.func,
     onNextMode: PropTypes.func.isRequired,
     onSetModeToDefault: PropTypes.func.isRequired,
     onSetModeToLarge: PropTypes.func.isRequired,

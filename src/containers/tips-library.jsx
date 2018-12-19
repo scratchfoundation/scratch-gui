@@ -7,6 +7,8 @@ import decksLibraryContent from '../lib/libraries/decks/index.jsx';
 import tutorialTags from '../lib/libraries/tutorial-tags';
 
 import analytics from '../lib/analytics';
+import {notScratchDesktop} from '../lib/isScratchDesktop';
+
 import LibraryComponent from '../components/library/library.jsx';
 
 import {connect} from 'react-redux';
@@ -56,16 +58,21 @@ class TipsLibrary extends React.PureComponent {
         });
     }
     render () {
-        const decksLibraryThumbnailData = Object.keys(decksLibraryContent).map(id => ({
-            rawURL: decksLibraryContent[id].img,
-            id: id,
-            name: decksLibraryContent[id].name,
-            featured: true,
-            tags: decksLibraryContent[id].tags,
-            urlId: decksLibraryContent[id].urlId,
-            requiredProjectId: decksLibraryContent[id].requiredProjectId,
-            hidden: decksLibraryContent[id].hidden || false
-        }));
+        const decksLibraryThumbnailData = Object.entries(decksLibraryContent)
+            .filter(([, item]) =>
+                // Scratch Desktop doesn't want tutorials with `requiredProjectId`
+                notScratchDesktop() || !item.hasOwnProperty('requiredProjectId')
+            )
+            .map(([id, item]) => ({
+                rawURL: item.img,
+                id: id,
+                name: item.name,
+                featured: true,
+                tags: item.tags,
+                urlId: item.urlId,
+                requiredProjectId: item.requiredProjectId,
+                hidden: item.hidden || false
+            }));
 
         if (!this.props.visible) return null;
         return (

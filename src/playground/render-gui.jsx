@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {compose} from 'redux';
 
-import isScratchDesktop from '../lib/isScratchDesktop';
-
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
@@ -34,19 +32,38 @@ export default appTarget => {
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
     const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
 
+    const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
+    let simulateScratchDesktop;
+    if (scratchDesktopMatches) {
+        try {
+            // parse 'true' into `true`, 'false' into `false`, etc.
+            simulateScratchDesktop = JSON.parse(scratchDesktopMatches[1]);
+        } catch {
+            // it's not JSON so just use the string
+            // note that a typo like "falsy" will be treated as true
+            simulateScratchDesktop = scratchDesktopMatches[1];
+        }
+    }
+
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
         window.onbeforeunload = () => true;
     }
 
     ReactDOM.render(
-        <WrappedGui
-            backpackHost={backpackHost}
-            backpackVisible={!isScratchDesktop()}
-            canSave={false}
-            showComingSoon={!isScratchDesktop()}
-            showPreviewInfo={!isScratchDesktop()}
-            onClickLogo={isScratchDesktop() ? null : onClickLogo}
-        />,
+        // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
+        simulateScratchDesktop ?
+            <WrappedGui
+                isScratchDesktop
+                canSave={false}
+            /> :
+            <WrappedGui
+                backpackVisible
+                showComingSoon
+                showPreviewInfo
+                backpackHost={backpackHost}
+                canSave={false}
+                onClickLogo={onClickLogo}
+            />,
         appTarget);
 };

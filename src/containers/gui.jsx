@@ -36,6 +36,7 @@ import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
 import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
+import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
 
 const messages = defineMessages({
     defaultProjectTitle: {
@@ -47,6 +48,7 @@ const messages = defineMessages({
 
 class GUI extends React.Component {
     componentDidMount () {
+        setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
     }
@@ -78,6 +80,7 @@ class GUI extends React.Component {
             cloudHost,
             error,
             isError,
+            isScratchDesktop,
             isShowingProject,
             onStorageInit,
             onUpdateProjectId,
@@ -113,6 +116,7 @@ GUI.propTypes = {
     intl: intlShape,
     isError: PropTypes.bool,
     isLoading: PropTypes.bool,
+    isScratchDesktop: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
@@ -128,6 +132,7 @@ GUI.propTypes = {
 };
 
 GUI.defaultProps = {
+    isScratchDesktop: false,
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onUpdateProjectId: () => {}
 };

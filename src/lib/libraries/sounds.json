@@ -819,7 +819,10 @@
         "sampleCount": 2912,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "human"
+        ]
     },
     {
         "name": "Chord",

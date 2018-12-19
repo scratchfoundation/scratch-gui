@@ -68,7 +68,7 @@ const MonitorComponent = props => (
                             id="gui.monitor.contextMenu.default"
                         />
                     </MenuItem>}
-                {props.onSetModeToDefault &&
+                {props.onSetModeToLarge &&
                     <MenuItem onClick={props.onSetModeToLarge}>
                         <FormattedMessage
                             defaultMessage="large readout"
